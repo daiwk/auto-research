@@ -7,10 +7,13 @@
 - `llm`：网络结构、预训练、后训练。内置 Tiny Shakespeare 字符 n-gram 低成本代理实验。
 - `recommendation`：召回、粗排、精排、混排、loss、采样、训练与 serving。内置 MovieLens 100K 矩阵分解实验。
 
-另外提供两个已落到代码的论文 adapter，而不是只展示论文摘要：
+另外提供五个已落到代码的论文 adapter，而不是只展示论文摘要：
 
 - SIS，arXiv `2607.04728`：实现论文 Algorithm 1 的 top-K envelope rejection sampling，并与 token-level importance sampling 对照。
 - MDCNS，arXiv `2605.19651`：实现 Teacher–Peer–Self 多源打分、divergence re-ranking 和 consensus distillation，并与 Uniform、DNS 对照。
+- CMSL，arXiv `2606.28533`：实现构造式多兴趣序列与线性注意力近似，并与单序列基线对照。
+- G2Rec，arXiv `2606.20554`：实现 co-engagement graph、soft interest tokens 与 item-only 基线。
+- Cluster GOOBS，arXiv `2607.00448`：实现 cluster-conditioned OOB 难负采样，并与随机 OOB 对照。
 
 内置实验的目标是验证研究流水线和快速筛选想法，并不等同于复现某篇论文。严谨实验应通过自定义实验命令接入 PyTorch/JAX 项目。
 
@@ -60,9 +63,12 @@ auto-research run \
 # 分别运行，或使用 --paper all
 auto-research reproduce --paper sis
 auto-research reproduce --paper mdcns
+auto-research reproduce --paper cmsl
+auto-research reproduce --paper g2rec
+auto-research reproduce --paper cluster-goobs
 ```
 
-SIS 使用 Tiny Shakespeare 构造 stale behavior policy 与 current policy，报告 importance-weight 方差、ESS 和接受率。MDCNS 将 MovieLens 100K 中评分不低于 4 的交互视为正反馈，按用户留最后一个交互测试，报告 Hit@10 和 NDCG@10。论文与实测结果索引见 [docs/reproductions/README.md](docs/reproductions/README.md)，新增论文的开发约定见 [docs/architecture.md](docs/architecture.md)。
+SIS 使用 Tiny Shakespeare；四个推荐 adapter 使用 MovieLens 100K，并报告排序质量、随机种子波动及适用时的热门曝光占比。论文与实测结果索引见 [docs/reproductions/README.md](docs/reproductions/README.md)，本轮 Google/Meta 严格筛选清单见 [selection report](docs/reproductions/2026-07-meta-online-ab-selection.md)，新增论文的开发约定见 [docs/architecture.md](docs/architecture.md)。
 
 运行产物不再堆到同一个文件，而是写入 `runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/`，每次运行包含独立的 `report.md` 与 `result.json`。
 

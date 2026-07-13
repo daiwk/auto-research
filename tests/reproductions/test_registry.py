@@ -5,7 +5,13 @@ from auto_research.reproductions.reporting import write_reproduction_result
 
 
 def test_builtin_adapters_are_discoverable():
-    assert {adapter.key for adapter in list_adapters()} == {"mdcns", "sis"}
+    assert {adapter.key for adapter in list_adapters()} == {
+        "cluster-goobs",
+        "cmsl",
+        "g2rec",
+        "mdcns",
+        "sis",
+    }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
 
 
