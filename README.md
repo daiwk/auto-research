@@ -22,6 +22,10 @@
 | 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
 | 完整核心链路 | `g2rec` | G2Rec · Meta | soft graph clustering、交替 interest token decoder、双 loss；NDCG@10 +11.92% |
 | 完整核心链路 | `mixformer` | MixFormer · ByteDance/Douyin | matched-budget stacked/unified Transformer；NDCG@10 +17.41% |
+| 完整核心链路 | `rankmixer` | RankMixer · ByteDance/Douyin | token mixing、per-token FFN、DTSI sparse MoE；dense 最优，sparse 未追平 |
+| 完整核心链路 | `hyformer` | HyFormer · ByteDance/Douyin | query generation/decoding/boosting；NDCG@10 +143.77%，头部偏置同步上升 |
+| 完整核心链路 | `onetrans` | OneTrans · ByteDance | mixed QKV/FFN、causal attention、pyramid；NDCG@10 +123.58%，head share 92% |
+| 完整核心链路 | `rec-distill` | Rec-Distill · ByteDance | black-box logits、双塔去偏、batch+stream；本地 transferability -4.11% |
 | 核心机制 | `sis` | SIS | 论文的 off-policy token importance-sampling 变换 |
 | 核心机制 | `mdcns` | MDCNS | 三源负采样、分歧/共识筛选与双模型更新 |
 | 核心机制 | `memento` | Memento · Meta | query-conditioned MMR 长历史检索 |
@@ -70,7 +74,7 @@ pip install -e '.[dev]'
 # PLUM 的真实 LLM CPT/SFT 另装可选依赖
 pip install -e '.[plum]'
 
-# OneRec / G2Rec / MixFormer 的轻量神经复现
+# 推荐网络与蒸馏论文的轻量神经复现
 pip install -e '.[neural-recs]'
 ```
 

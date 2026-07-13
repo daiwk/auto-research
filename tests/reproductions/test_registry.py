@@ -10,13 +10,17 @@ def test_builtin_adapters_are_discoverable():
         "cluster-goobs",
         "cmsl",
         "g2rec",
+        "hyformer",
         "llatte",
         "longer",
         "mdcns",
         "memento",
         "mixformer",
         "onerec",
+        "onetrans",
         "plum",
+        "rankmixer",
+        "rec-distill",
         "self-evolving-rec",
         "sis",
     }
@@ -25,6 +29,10 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("onerec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("g2rec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("mixformer").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("rankmixer").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("hyformer").paper.arxiv_id == "2601.12681"
+    assert get_adapter("onetrans").paper.arxiv_id == "2510.26104"
+    assert get_adapter("rec-distill").paper.arxiv_id == "2605.29755"
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

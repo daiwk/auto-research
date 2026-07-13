@@ -1,0 +1,13 @@
+{
+  "paper": "OneTrans",
+  "arxiv_id": "2510.26104",
+  "dataset": "MovieLens 100K",
+  "seeds": [42, 43, 44],
+  "configuration": {"dimensions": 64, "layers": 2, "sequence_length": 32, "non_sequence_tokens": 2, "steps": 240},
+  "results": {
+    "encode_then_interact": {"hit_at_10": 0.015379113018597998, "hit_at_10_std": 0.004321547200856427, "ndcg_at_10": 0.0068983730507076015, "ndcg_at_10_std": 0.002246110581776188, "head_share_at_10": 0.3373748211731044},
+    "onetrans": {"hit_at_10": 0.03040057224606581, "hit_at_10_std": 0.003540591894353242, "ndcg_at_10": 0.015423280624941015, "ndcg_at_10_std": 0.003354677830047008, "head_share_at_10": 0.9199928469241775}
+  },
+  "ndcg_gain_percent": 123.57852368333384,
+  "conclusion": "OneTrans improved accuracy across three seeds but collapsed strongly toward popular items, so the local gain is not clean evidence of personalization quality."
+}
