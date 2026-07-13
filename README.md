@@ -6,7 +6,7 @@
 
 项目包含两层互补能力：
 
-1. **Topic research loop**：按 topic 检索 arXiv，运行可配置参数搜索，逐轮保存 checkpoint。
+1. **Topic research loop**：按 topic 检索 arXiv，通过独立迭代控制器运行可配置参数搜索，逐轮保存 checkpoint、事件日志和可复用指标缓存。
 2. **Paper adapters**：每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度；省略核心模型的实现只能作为概念验证。
 
 支持两条研究轨道：
@@ -42,7 +42,8 @@
 ```text
 src/auto_research/
 ├── cli.py                         # run / reproduce / publish 命令入口
-├── runner.py                      # topic research loop 与逐轮 checkpoint
+├── runner.py                      # research stages 编排
+├── research_loop/                 # 迭代控制、指标缓存、事件日志
 ├── datasets.py                    # 公开数据下载和缓存
 ├── papers.py                      # arXiv 检索
 └── reproductions/
@@ -61,6 +62,8 @@ tests/reproductions/
 ```
 
 新增论文不需要修改 CLI：registry 会自动发现带有 `adapter.py` 的论文目录。详细约定见[架构与扩展指南](docs/architecture.md)。
+
+本轮参考了 [automated-w2s-research](https://github.com/safety-research/automated-w2s-research) 的 idea 隔离、统一配置、迭代研究和结果缓存设计，但没有合并其 Claude/Flask/RunPod/VERL 重型运行栈。逐项取舍见[架构采用记录](docs/design/automated-w2s-adoption.md)。
 
 ## 安装
 
@@ -85,6 +88,7 @@ Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core 和 MDCNS 作者 Bea
 列出的 key 会由 adapter registry 动态生成：
 
 ```bash
+auto-research list
 auto-research reproduce --help
 ```
 
@@ -131,7 +135,9 @@ auto-research run \
   --papers 8
 ```
 
-通用运行产物位于 `runs/<timestamp>/report.md` 和 `result.json`。内置低成本实验用于验证研究流水线和快速筛选假设，不等同于某篇论文的专用 adapter。
+通用运行产物位于 `runs/<timestamp>/report.md`、`result.json` 和 `events.jsonl`。内置低成本实验用于验证研究流水线和快速筛选假设，不等同于某篇论文的专用 adapter。
+
+相同实验修订、数据目录、seed 和参数的已完成 trial 会复用 `.auto-research/cache/` 中的标量指标。使用 `--force-rerun` 可强制重跑。外部实验代码必须在配置中设置 `experiment_revision` 才会启用缓存，代码或数据协议变化后应更新该值。
 
 ## 接入外部真实实验
 
@@ -150,6 +156,7 @@ auto-research init research.json --track recommendation
   "max_papers": 10,
   "max_trials": 6,
   "implementation_command": ["codex", "exec", "Read AUTO_RESEARCH_MANIFEST and implement the selected hypothesis"],
+  "proposal_command": ["python", "experiments/propose_next.py"],
   "experiment_command": ["python", "experiments/train.py"],
   "search_space": {
     "learning_rate": [0.0001, 0.0003],
@@ -157,6 +164,7 @@ auto-research init research.json --track recommendation
   },
   "metric_name": "validation_loss",
   "direction": "minimize",
+  "experiment_revision": "retrieval-loss-v1",
   "timeout_seconds": 3600
 }
 ```
@@ -166,6 +174,8 @@ auto-research init research.json --track recommendation
 ```json
 {"validation_loss": 1.234}
 ```
+
+如果配置 `proposal_command`，它会在每轮收到 `AUTO_RESEARCH_MANIFEST` 和 `AUTO_RESEARCH_HISTORY`，最后一行返回 `{"params": {...}}` 或 `{"stop": true}`。因此 agent 能依据前几轮成功、失败和缓存结果自适应选择下一组参数；未配置时继续使用确定性搜索空间。
 
 ## 提交 GitHub PR
 

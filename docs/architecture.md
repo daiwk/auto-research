@@ -4,6 +4,11 @@
 
 ```text
 cli.py
+ ├── runner.py                       # discovery / implementation / evaluation orchestration
+ ├── research_loop/
+ │    ├── loop.py                    # proposal-independent iterative controller
+ │    ├── cache.py                   # content-addressed metric cache
+ │    └── journal.py                 # append-only stage/trial event log
  └── reproductions.registry          # 自动发现 */adapter.py
       ├── base.py                    # PaperMetadata / ReproductionAdapter
       ├── reporting.py               # 隔离的 result.json / report.md
@@ -14,6 +19,8 @@ cli.py
            ├── experiment.py         # baseline、validation 调参、test
            └── report.py             # 论文专用报告
 ```
+
+Topic research 和 paper reproduction 共用“编排与论文代码分离”的原则：`runner.py` 决定阶段顺序，`research_loop` 负责自适应提案、迭代、缓存和审计记录，具体模型训练仍由内置 evaluator、外部实验命令或 paper adapter 执行。`ProposalStrategy` 每轮都能读取已有 trial 历史；`CommandProposer` 通过环境变量把论文 manifest 和历史交给用户明确配置的 agent 命令，因此可以根据真实结果调整下一轮假设。设计取舍及与 automated-w2s-research 的映射见 [architecture adoption](design/automated-w2s-adoption.md)。
 
 通用层只负责 adapter 发现、共享数据协议、运行目录和 JSON/Markdown 持久化。论文特有逻辑不能写回 `cli.py` 或公共 `reporting.py`。只有两个以上推荐 adapter 确实共享且语义一致的逻辑，才放入 `rec_utils.py`。
 
@@ -64,6 +71,10 @@ runs/reproductions/<arxiv-id>-<key>/<timestamp>/result.json
 ```
 
 `result.json` 是机器可读事实来源，`report.md` 由论文自己的 renderer 生成。不要把临时运行结果提交 Git；只将复核后的结论摘录到对应论文文档。
+
+Topic research 额外写出 `events.jsonl`，逐条记录 discovery、implementation、experiment、reporting 和 complete 阶段。每个 trial 完成后同时 checkpoint `result.json`/`report.md`，所以中断前的证据不会丢失。
+
+完成 trial 的标量指标可写入 `.auto-research/cache/`。缓存键包含 topic、track、数据目录、seed、metric、方向、命令和显式 `experiment_revision`；失败 trial、checkpoint、数据和原始日志不进入缓存。外部命令若未提供 `experiment_revision`，默认禁用缓存。
 
 ## Evaluation contract
 
