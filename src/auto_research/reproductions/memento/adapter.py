@@ -1,4 +1,4 @@
-from ..base import PaperMetadata, ReproductionAdapter
+from ..base import PaperMetadata, ReproductionAdapter, ReproductionFidelity
 from ..registry import register
 from .experiment import reproduce_memento
 from .report import render
@@ -14,5 +14,6 @@ ADAPTER = register(
         ),
         run=reproduce_memento,
         render=render,
+        fidelity=ReproductionFidelity.CORE_MECHANISM,
     )
 )

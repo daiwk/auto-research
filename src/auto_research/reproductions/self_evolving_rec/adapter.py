@@ -1,4 +1,4 @@
-from ..base import PaperMetadata, ReproductionAdapter
+from ..base import PaperMetadata, ReproductionAdapter, ReproductionFidelity
 from ..registry import register
 from .experiment import reproduce_self_evolving_rec
 from .report import render
@@ -14,5 +14,7 @@ ADAPTER = register(
         ),
         run=reproduce_self_evolving_rec,
         render=render,
+        fidelity=ReproductionFidelity.CONCEPT_DEMO,
+        omitted_core_components=("LLM agent candidate generation", "production A/B feedback loop"),
     )
 )

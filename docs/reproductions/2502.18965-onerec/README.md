@@ -1,5 +1,7 @@
 # OneRec: Session-wise generative recommendation with preference alignment
 
+> **Fidelity: 概念验证（非论文复现）**。当前代码未实现 RQ Semantic IDs、生成式 MoE 和迭代 DPO；下方旧本地指标仅是 reward-margin heuristic 的诊断结果，不能验证 OneRec。
+
 - 论文：[arXiv 2502.18965](https://arxiv.org/abs/2502.18965)，Kuaishou
 - Adapter：`onerec`；代码：`src/auto_research/reproductions/onerec/`
 - 本地数据：MovieLens-1M；运行：`auto-research reproduce --paper onerec --seed 42`

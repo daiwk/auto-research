@@ -1,5 +1,7 @@
 # SIS: Turning Off-Policy Tokens On-Policy
 
+> **Fidelity: 核心机制复现**。SIS 的 off-policy token 变换按论文公式实际执行；Qwen3 上的完整 RL 后训练不在本地实验中。
+
 - 论文：[arXiv 2607.04728](https://arxiv.org/abs/2607.04728)
 - Adapter：`sis`；代码：`src/auto_research/reproductions/sis/`
 - 本地数据：Tiny Shakespeare；运行：`auto-research reproduce --paper sis --seed 42`

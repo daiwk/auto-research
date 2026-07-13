@@ -40,7 +40,7 @@ def reproduce_g2rec(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
         "results": results,
         "ndcg_gain_percent": 100 * (results["g2rec_item_plus_interest_tokens"]["ndcg_at_10"] - results["item_tokens_only"]["ndcg_at_10"]) / max(results["item_tokens_only"]["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"in_session_lift_lower_bound_percent": 0.03, "engagement_lift_range_percent": [0.06, 0.19]},
-        "scope": "Reproduces item-item co-engagement graph construction, soft interest prototypes, alternating item/interest representation, and validation-selected fusion. A compact graph next-token scorer replaces Meta's private generative backbone.",
+        "scope": "Concept demo only: graph construction and soft interests run, but a heuristic scorer replaces the generative decoder and autoregressive item/interest-token training. These metrics do not reproduce G2Rec.",
     }
 
 

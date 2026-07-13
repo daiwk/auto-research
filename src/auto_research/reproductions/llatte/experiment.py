@@ -44,5 +44,5 @@ def reproduce_llatte(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
         "results": results,
         "ndcg_gain_percent": 100 * (results["llatte_two_stage"]["ndcg_at_10"] - results["short_online_sequence"]["ndcg_at_10"]) / max(results["short_online_sequence"]["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"conversion_lift_percent": 4.3, "normalized_entropy_reduction_percent": 0.25},
-        "scope": "Reproduces the target-aware online sequence stage, pyramidal recent-token reduction, and cached full-history upstream representation. NumPy embeddings replace MLA, DHEN, semantic LLaMA features, and asynchronous H100 serving.",
+        "scope": "Concept demo only: NumPy score aggregation replaces MLA, DHEN, semantic LLM features, and trainable two-stage sequence modeling. These metrics do not reproduce LLaTTE.",
     }

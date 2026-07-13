@@ -32,5 +32,5 @@ def reproduce_cmsl(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
         "results": results,
         "ndcg_gain_percent": 100 * (results["cmsl"]["ndcg_at_10"] - results["single_sequence"]["ndcg_at_10"]) / max(results["single_sequence"]["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"metric_1": 0.116, "metric_2": 0.158, "metric_3": 0.171, "metric_4": 0.092},
-        "scope": "Reproduces multi-sequence construction, isolated strand modeling, and degree-two linear-attention approximation on a compact sequential backbone. It does not reproduce Meta's HSTU kernels, private features, or 128-H100 training stack.",
+        "scope": "Concept demo only: fixed genre assignments replace learned contextual lenses and the trainable HSTU backbone. These metrics do not reproduce CMSL.",
     }

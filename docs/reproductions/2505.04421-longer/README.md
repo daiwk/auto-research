@@ -1,5 +1,7 @@
 # LONGER: Ultra-long sequence modeling at ByteDance
 
+> **Fidelity: 概念验证（非论文复现）**。当前代码未训练论文的 hybrid attention 与 InnerTrans；下方旧本地指标只描述打分代理，不支持 LONGER 效果结论。
+
 - 论文：[arXiv 2505.04421](https://arxiv.org/abs/2505.04421)，ByteDance / Douyin
 - Adapter：`longer`；代码：`src/auto_research/reproductions/longer/`
 - 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper longer --seed 42`

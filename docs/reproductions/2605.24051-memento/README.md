@@ -1,5 +1,7 @@
 # Memento: RAG-style long-retention recommendation
 
+> **Fidelity: 核心机制复现**。query-conditioned MMR 长历史检索实际执行；Meta 私有 Ember、replay 与 INT8 serving 未复刻。
+
 - 论文：[arXiv 2605.24051](https://arxiv.org/abs/2605.24051)，Meta
 - Adapter：`memento`；代码：`src/auto_research/reproductions/memento/`
 - 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper memento --seed 42`

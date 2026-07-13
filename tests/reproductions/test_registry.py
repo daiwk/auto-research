@@ -1,6 +1,7 @@
 import json
 
 from auto_research.reproductions.registry import get_adapter, list_adapters
+from auto_research.reproductions.base import ReproductionFidelity
 from auto_research.reproductions.reporting import write_reproduction_result
 
 
@@ -20,6 +21,9 @@ def test_builtin_adapters_are_discoverable():
         "sis",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
+    assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("onerec").fidelity is ReproductionFidelity.CONCEPT_DEMO
+    assert "iterative DPO" in get_adapter("onerec").omitted_core_components
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):
@@ -46,3 +50,6 @@ def test_each_result_gets_an_isolated_artifact_directory(tmp_path):
     report = write_reproduction_result(adapter, result, tmp_path, "fixed-run")
     assert report == tmp_path / "2607.04728-sis" / "fixed-run" / "report.md"
     assert json.loads((report.parent / "result.json").read_text())["dataset"] == "fixture"
+    payload = json.loads((report.parent / "result.json").read_text())
+    assert payload["reproduction_fidelity"]["level"] == "core_mechanism"
+    assert "核心机制复现" in report.read_text()

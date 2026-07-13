@@ -37,5 +37,5 @@ def reproduce_onerec(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
         "results": results,
         "ndcg_gain_percent": 100 * (proposed["ndcg_at_10"] - base["ndcg_at_10"]) / max(base["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"traffic_percent": 1.0, "total_watch_time_percent": 1.68, "average_view_duration_percent": 6.56},
-        "scope": "Reproduces session-wise generation and reward-margin preference alignment over a shared retrieval backbone. MoE generation, RQ semantic IDs, the production reward model, and iterative DPO sampling are compact proxies.",
+        "scope": "Concept demo only: a retrieval-score heuristic stands in for session generation and reward-margin alignment. It omits MoE generation, RQ Semantic IDs, the reward model, self-sampling, and iterative DPO, so these metrics do not reproduce OneRec.",
     }

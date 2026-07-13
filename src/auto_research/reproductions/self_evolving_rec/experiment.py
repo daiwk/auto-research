@@ -38,5 +38,5 @@ def reproduce_self_evolving_rec(dataset_dir: Path, seed: int = 42) -> dict[str, 
         "results": results,
         "ndcg_gain_percent": 100 * (results["self_evolving_promoted"]["ndcg_at_10"] - results["human_baseline"]["ndcg_at_10"]) / max(results["human_baseline"]["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"rmsprop_youtube_percent": 0.06, "rmsprop_surface_percent": 0.12, "glu_youtube_percent": 0.06, "glu_surface_percent": 0.14, "reward_youtube_percent": 0.03, "reward_surface_percent": 0.13},
-        "scope": "Reproduces the paper's experiment journal, offline candidate funnel, holdout promotion, and discovered RMSProp/GLU/reward mutations. A deterministic candidate generator replaces Gemini, and the untouched public test split is not a real online A/B test.",
+        "scope": "Concept demo only: the journal and holdout funnel run, but fixed candidates replace the LLM agent and no production A/B feedback enters the loop. These metrics do not reproduce the autonomous system.",
     }

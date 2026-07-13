@@ -1,0 +1,61 @@
+{
+  "paper": "PLUM",
+  "arxiv_id": "2510.07784",
+  "dataset": "MovieLens 1M",
+  "seed": 42,
+  "configuration": {
+    "base_model": "HuggingFaceTB/SmolLM2-135M",
+    "sid_cardinalities": [512, 256, 128],
+    "cpt_steps": 240,
+    "sft_steps": 240,
+    "batch_size": 16,
+    "learning_rate": 0.0001,
+    "beam_size": 10,
+    "evaluated_users": 200
+  },
+  "sid": {
+    "uniqueness": 0.9832703723691312,
+    "valid_generation_rate": 1.0
+  },
+  "variants": {
+    "R1": {
+      "pretrained_llm": false,
+      "cpt": false,
+      "cpt_final_loss": null,
+      "sft_final_loss": 3.502263271808624,
+      "recall_at_10": 0.005,
+      "ndcg_at_10": 0.001934264036172708
+    },
+    "R2": {
+      "pretrained_llm": true,
+      "cpt": false,
+      "cpt_final_loss": null,
+      "sft_final_loss": 3.72085839509964,
+      "recall_at_10": 0.0,
+      "ndcg_at_10": 0.0
+    },
+    "CR1": {
+      "pretrained_llm": false,
+      "cpt": true,
+      "cpt_final_loss": 2.636583960056305,
+      "sft_final_loss": 2.593324339389801,
+      "recall_at_10": 0.005,
+      "ndcg_at_10": 0.005
+    },
+    "CR2": {
+      "pretrained_llm": true,
+      "cpt": true,
+      "cpt_final_loss": 2.7960814356803896,
+      "sft_final_loss": 3.168586015701294,
+      "recall_at_10": 0.0,
+      "ndcg_at_10": 0.0
+    }
+  },
+  "conclusion": "CPT improved SFT optimization for random initialization but did not improve Recall@10; pretrained initialization did not improve local ranking metrics at this scale.",
+  "excluded_runs": [
+    {
+      "target_sft_steps": 1000,
+      "reason": "Legacy continuation rebuilt semantic IDs instead of restoring them, so token semantics were not guaranteed to remain identical. The run is excluded from reported metrics."
+    }
+  ]
+}
