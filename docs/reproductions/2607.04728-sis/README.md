@@ -4,6 +4,7 @@
 - Adapter：`sis`
 - 代码：`src/auto_research/reproductions/sis/`
 - 数据：Tiny Shakespeare
+- 运行：`auto-research reproduce --paper sis --seed 42`
 
 ## 实现范围
 
@@ -21,5 +22,7 @@
 | 42 | 4.78% | 68.65% |
 | 43 | 0.53% | 68.81% |
 | Mean | **6.62%** | **68.71%** |
+
+## 结论与边界
 
 三个种子均降低 importance-weight 方差，但收益幅度有明显随机性。这是核心 ratio 转换机制验证，不等价于论文的 Qwen + GRPO/DAPO 完整训练结果。

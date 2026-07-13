@@ -5,6 +5,7 @@
 - Adapter：`mdcns`
 - 代码：`src/auto_research/reproductions/mdcns/`
 - 数据：MovieLens 100K
+- 运行：`auto-research reproduce --paper mdcns --seed 42`
 
 ## 实现范围
 
@@ -26,5 +27,7 @@
 | Mean | 0.036761 | 0.012810 | **0.042174** |
 
 MDCNS 的平均 NDCG@10 比 Uniform 高 14.72%，三个种子均为正向。DNS 在轻量 backbone 上明显退化，因此不把相对 DNS 的巨大百分比当作主要结论。
+
+## 结论与边界
 
 这是论文核心采样与蒸馏路径的缩小版复现，不是六数据集、多个 neural backbone 的 headline number 复刻。
