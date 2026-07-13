@@ -10,8 +10,12 @@ def test_builtin_adapters_are_discoverable():
         "cmsl",
         "g2rec",
         "llatte",
+        "longer",
         "mdcns",
         "memento",
+        "mixformer",
+        "onerec",
+        "plum",
         "self-evolving-rec",
         "sis",
     }

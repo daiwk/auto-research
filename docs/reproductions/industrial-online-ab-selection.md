@@ -1,0 +1,37 @@
+# Industrial recommendation paper selection: online A/B required
+
+检索复核日期：2026-07-13。该规则适用于后续新增的推荐系统论文。
+
+## 硬性门槛
+
+一篇论文必须同时满足：
+
+1. 正文明确说明真实生产流量的 online/live A/B test；
+2. 给出至少一个量化业务指标及相对或绝对提升；
+3. 对照组是当时生产 baseline，不能是模拟器、离线 replay 或 LLM user agent；
+4. 方法能够映射到召回、排序、生成式推荐、训练或 serving 的可实现模块。
+
+“已部署”“服务大量用户”“离线 SOTA”“开源完整”都不能替代量化线上 A/B。已有 SIS、MDCNS 是该规则确定前的专项实现，保留但不作为后续筛选范例。
+
+## 本轮新增并实现
+
+| Paper | Organization | Area | Quantified online A/B |
+|---|---|---|---|
+| [PLUM](https://arxiv.org/abs/2510.07784) | Google DeepMind / YouTube | LLM CPT、Semantic ID、生成式召回 | LFV Panel CTR +0.76%；Shorts +4.96% |
+| [OneRec](https://arxiv.org/abs/2502.18965) | Kuaishou | session generation、MoE、IPA/DPO | 1% 流量；watch time +1.68%，view duration +6.56% |
+| [LONGER](https://arxiv.org/abs/2505.04421) | ByteDance / Douyin | 超长序列、token merge、KV cache | Douyin Ads ADSS +1.063%–+2.097%；电商 Order/U +4.6125%–+7.9222% |
+| [MixFormer](https://arxiv.org/abs/2602.14110) | ByteDance / Douyin | dense/sequence 统一 scaling | Douyin duration +0.2799%；Douyin Lite +0.4105% |
+
+## 合格候选队列
+
+| Paper | Organization | Online evidence | Status |
+|---|---|---|---|
+| [Rec-Distill](https://arxiv.org/abs/2605.29755) | ByteDance / Douyin / TikTok | Ads ADVV +1.00%；Rec Finish/U +1.2725%；Live gift revenue +0.78% | 下一批：大 teacher→轻 student、batch+streaming distillation |
+| [OneRec Technical Report](https://arxiv.org/abs/2506.13695) | Kuaishou | App Stay Time +0.54%/+1.24% | 与 OneRec adapter 机制重叠，先不重复实现 |
+| [OneRec-V2](https://arxiv.org/abs/2508.20900) | Kuaishou | App Stay Time +0.467%/+0.741% | 下一批：lazy decoder 与真实反馈 RL |
+
+## 明确排除
+
+- OpenOneRec Technical Report（arXiv 2512.24762）：开源价值高，但正文没有可核验的量化生产 A/B；不满足硬门槛。
+- MiniOneRec：公开 scaling/离线实验为主，没有量化线上 A/B。
+- 仅在 VirtualTB、LLM agent 或日志 replay 中评估的论文：不属于真实流量 A/B。

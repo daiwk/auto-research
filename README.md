@@ -26,8 +26,12 @@
 | Recommendation | `g2rec` | G2Rec · Meta · arXiv 2606.20554 | Amazon Beauty 5-core | NDCG@10 +0.72% |
 | Recommendation | `cmsl` | CMSL · Meta · arXiv 2606.28533 | MovieLens 100K | NDCG@10 +0.95% |
 | Recommendation | `cluster-goobs` | Cluster GOOBS · Meta · arXiv 2607.00448 | MovieLens-1M | NDCG@10 +0.98%、head share -1.81% |
+| Recommendation | `plum` | PLUM · Google/YouTube · arXiv 2510.07784 | MovieLens-1M | NDCG@10 +24.62% |
+| Recommendation | `onerec` | OneRec · Kuaishou · arXiv 2502.18965 | MovieLens-1M | NDCG@10 +28.78% |
+| Recommendation | `longer` | LONGER · ByteDance/Douyin · arXiv 2505.04421 | MovieLens-100K | NDCG@10 +0.41% |
+| Recommendation | `mixformer` | MixFormer · ByteDance/Douyin · arXiv 2602.14110 | MovieLens-100K | NDCG@10 +0.53% |
 
-这里的 local headline 是本机公开数据结果，不是论文线上 A/B 数字。完整实验协议、生产 A/B 证据和负结果解释见[论文复现索引](docs/reproductions/README.md)。2026 年 Google/Meta 严格筛选清单见[筛选报告](docs/reproductions/2026-google-meta-online-ab-selection.md)。
+这里的 local headline 是本机公开数据结果，不是论文线上 A/B 数字。完整实验协议、生产 A/B 证据和负结果解释见[论文复现索引](docs/reproductions/README.md)。后续推荐论文必须通过[真实线上 A/B 硬门槛](docs/reproductions/industrial-online-ab-selection.md)；Google/Meta 时间窗筛选仍见[专项报告](docs/reproductions/2026-google-meta-online-ab-selection.md)。
 
 ## 代码结构
 

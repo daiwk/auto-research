@@ -2,7 +2,7 @@
 
 这里是论文专用 adapter 的长期实验索引。每篇论文的模型、实验、报告和结论文档独立存放，不与通用 topic research loop 混写。
 
-2026-01-01 至 2026-07-13 的 Google/Meta + 量化线上 A/B 筛选过程见[筛选报告](2026-google-meta-online-ab-selection.md)。
+后续新增论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选见[原报告](2026-google-meta-online-ab-selection.md)。
 
 ## 当前结果
 
@@ -16,6 +16,10 @@
 | Recommendation | `g2rec` | [G2Rec](2606.20554-g2rec/README.md) | Meta engagement +0.06%–+0.19% | Beauty NDCG@10 +0.72% |
 | Recommendation | `cmsl` | [CMSL](2606.28533-cmsl/README.md) | Meta retrieval +0.092%–+0.171% | NDCG@10 +0.95% |
 | Recommendation | `cluster-goobs` | [Cluster GOOBS](2607.00448-cluster-goobs/README.md) | Meta CTR +53% | ML-1M NDCG@10 +0.98% |
+| Recommendation | `plum` | [PLUM](2510.07784-plum/README.md) | YouTube Panel CTR +0.76%/+4.96% | ML-1M NDCG@10 +24.62% |
+| Recommendation | `onerec` | [OneRec](2502.18965-onerec/README.md) | Kuaishou watch time +1.68% | ML-1M NDCG@10 +28.78% |
+| Recommendation | `longer` | [LONGER](2505.04421-longer/README.md) | Douyin Ads/电商多项 A/B | ML-100K NDCG@10 +0.41% |
+| Recommendation | `mixformer` | [MixFormer](2602.14110-mixformer/README.md) | Douyin duration +0.2799% | ML-100K NDCG@10 +0.53% |
 
 本地百分比均相对于各自 README 中定义的 baseline，不应与论文线上 A/B 直接比较。
 
