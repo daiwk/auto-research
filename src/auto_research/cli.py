@@ -27,6 +27,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--papers", type=int, default=8)
     run.add_argument("--offline", action="store_true")
     run.add_argument("--output-dir", type=Path, default=Path("runs"))
+    run.add_argument("--force-rerun", action="store_true")
+
+    commands.add_parser("list", help="list installed paper/idea plugins")
 
     init = commands.add_parser("init", help="write an editable example configuration")
     init.add_argument("path", type=Path, nargs="?", default=Path("research.json"))
@@ -66,6 +69,13 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "publish":
             print(publish_report(args.report, args.title, args.base, args.ready))
+            return 0
+        if args.command == "list":
+            for adapter in list_adapters():
+                print(
+                    f"{adapter.key:20} {adapter.fidelity.value:16} "
+                    f"{adapter.paper.arxiv_id:12} {adapter.paper.title}"
+                )
             return 0
         if args.command == "reproduce":
             adapters = (
@@ -124,6 +134,7 @@ def _run_config(args: argparse.Namespace) -> ResearchConfig:
         max_papers=args.papers,
         output_dir=args.output_dir,
         allow_network=not args.offline,
+        force_rerun=args.force_rerun,
     )
 
 
@@ -139,6 +150,11 @@ def _init_config(path: Path, track: str) -> None:
         "output_dir": "runs",
         "dataset_dir": "data",
         "allow_network": True,
+        "proposal_command": None,
+        "proposal_timeout_seconds": 300,
+        "cache_dir": ".auto-research/cache",
+        "force_rerun": False,
+        "experiment_revision": None,
     }
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 

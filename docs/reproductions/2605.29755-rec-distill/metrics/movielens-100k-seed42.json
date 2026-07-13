@@ -1,0 +1,15 @@
+{
+  "paper": "Rec-Distill",
+  "arxiv_id": "2605.29755",
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "configuration": {"materialized_examples": 12000, "teacher_dimensions": 96, "student_dimensions": 48, "batch_steps": 160, "stream_steps": 80, "selected_distillation_weight": 3.0, "cached_teacher_signal_mb": 0.384},
+  "validation_ndcg_by_alpha": {"0.1": 0.003795163339796475, "0.3": 0.003795163339796475, "1.0": 0.003829823573347283, "3.0": 0.003909575546688153},
+  "results": {
+    "large_teacher": {"hit_at_10": 0.02467811158798283, "ndcg_at_10": 0.012126696748482227, "head_share_at_10": 0.5144849785407726},
+    "raw_student": {"hit_at_10": 0.008583690987124463, "ndcg_at_10": 0.00389197173941706, "head_share_at_10": 0.2715665236051502},
+    "rec_distill_student": {"hit_at_10": 0.0075107296137339056, "ndcg_at_10": 0.003553490111964562, "head_share_at_10": 0.25761802575107295}
+  },
+  "transferability": -0.0411041810236385,
+  "conclusion": "The teacher was stronger, but validation-selected black-box batch/stream distillation did not transfer its gain to the local student."
+}

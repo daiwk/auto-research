@@ -28,7 +28,8 @@ def render_markdown(result: ResearchResult) -> str:
         f"- Track: `{result.track}`",
         f"- Run: `{result.run_id}`",
         f"- Objective: `{result.direction} {result.metric_name}`",
-        f"- Completed trials: {sum(t.status == 'completed' for t in result.trials)} / {len(result.trials)}",
+        f"- Successful trials: {sum(t.metric is not None for t in result.trials)} / {len(result.trials)}",
+        f"- Reused cached trials: {sum(t.status == 'cached' for t in result.trials)}",
     ]
     if best:
         lines.extend(

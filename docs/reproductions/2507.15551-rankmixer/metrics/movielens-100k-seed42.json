@@ -1,0 +1,14 @@
+{
+  "paper": "RankMixer",
+  "arxiv_id": "2507.15551",
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "configuration": {"tokens": 4, "dimensions": 64, "layers": 2, "experts": 4, "steps": 240},
+  "results": {
+    "shared_ffn": {"parameters": 181121, "hit_at_10": 0.00536480686695279, "ndcg_at_10": 0.001958749226026763, "head_share_at_10": 0.08884120171673819},
+    "rankmixer_dense": {"parameters": 379649, "hit_at_10": 0.02467811158798283, "ndcg_at_10": 0.013630108813001187, "head_share_at_10": 0.6261802575107296},
+    "rankmixer_smoe": {"parameters": 647457, "hit_at_10": 0.0075107296137339056, "ndcg_at_10": 0.002812978840180988, "head_share_at_10": 0.41706008583690984}
+  },
+  "sparse_vs_shared_ndcg_gain_percent": 43.61097392170985,
+  "conclusion": "Per-token dense FFNs were strongest. Sparse MoE beat a shared FFN but did not preserve dense quality and increased head concentration."
+}

@@ -1,0 +1,13 @@
+{
+  "paper": "HyFormer",
+  "arxiv_id": "2601.12681",
+  "dataset": "MovieLens 100K",
+  "seeds": [42, 43, 44],
+  "configuration": {"queries": 2, "non_sequence_tokens": 2, "dimensions": 64, "layers": 2, "steps": 240},
+  "results": {
+    "late_fusion": {"hit_at_10": 0.00965665236051502, "hit_at_10_std": 0.0023178614801172607, "ndcg_at_10": 0.004765703517211901, "ndcg_at_10_std": 0.0007908765955340492, "head_share_at_10": 0.1397711015736767},
+    "hyformer": {"hit_at_10": 0.023962804005722465, "hit_at_10_std": 0.003076654244292786, "ndcg_at_10": 0.011617379170860994, "ndcg_at_10_std": 0.0018371520571882419, "head_share_at_10": 0.44881974248927037}
+  },
+  "ndcg_gain_percent": 143.77049744918997,
+  "conclusion": "HyFormer improved ranking metrics across three seeds, but much of the local gain coincided with increased head-item concentration."
+}

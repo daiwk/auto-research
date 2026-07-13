@@ -22,9 +22,14 @@ def test_custom_experiment_end_to_end(tmp_path):
         metric_name="score",
         direction="minimize",
         allow_network=False,
+        experiment_revision="test-v1",
     )
     result, run_dir = ResearchRunner(config, project_dir=tmp_path).run()
     assert result.best_trial.metric == 1
     assert (run_dir / "report.md").exists()
+    assert (run_dir / "events.jsonl").exists()
     raw = json.loads((run_dir / "result.json").read_text())
     assert len(raw["trials"]) == 3
+
+    second, _ = ResearchRunner(config, project_dir=tmp_path).run()
+    assert [trial.status for trial in second.trials] == ["cached"] * 3

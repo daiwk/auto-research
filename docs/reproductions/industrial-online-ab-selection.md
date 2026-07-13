@@ -21,12 +21,15 @@
 | [OneRec](https://arxiv.org/abs/2502.18965) | Kuaishou | session generation、MoE、IPA/DPO | 1% 流量；watch time +1.68%，view duration +6.56% |
 | [LONGER](https://arxiv.org/abs/2505.04421) | ByteDance / Douyin | 超长序列、token merge、KV cache | Douyin Ads ADSS +1.063%–+2.097%；电商 Order/U +4.6125%–+7.9222% |
 | [MixFormer](https://arxiv.org/abs/2602.14110) | ByteDance / Douyin | dense/sequence 统一 scaling | Douyin duration +0.2799%；Douyin Lite +0.4105% |
+| [RankMixer](https://arxiv.org/abs/2507.15551) | ByteDance / Douyin | token mixing、per-token FFN、Sparse MoE | Active Days +0.3%；App duration +1.08% |
+| [HyFormer](https://arxiv.org/abs/2601.12681) | ByteDance / Douyin Search | query decoding、query boosting | Watch time +0.293%；Finish/U +1.111%；Query change -0.236% |
+| [OneTrans](https://arxiv.org/abs/2510.26104) | ByteDance | unified causal Transformer、KV cache | Feeds GMV/U +5.6848%；Mall +3.6696%；p99 latency 下降 |
+| [Rec-Distill](https://arxiv.org/abs/2605.29755) | ByteDance / Douyin / TikTok | teacher/student distillation、batch+stream | Ads ADVV +1.00%；Rec Finish/U +1.2725%；Live gift revenue +0.78% |
 
 ## 合格候选队列
 
 | Paper | Organization | Online evidence | Status |
 |---|---|---|---|
-| [Rec-Distill](https://arxiv.org/abs/2605.29755) | ByteDance / Douyin / TikTok | Ads ADVV +1.00%；Rec Finish/U +1.2725%；Live gift revenue +0.78% | 下一批：大 teacher→轻 student、batch+streaming distillation |
 | [OneRec Technical Report](https://arxiv.org/abs/2506.13695) | Kuaishou | App Stay Time +0.54%/+1.24% | 与 OneRec adapter 机制重叠，先不重复实现 |
 | [OneRec-V2](https://arxiv.org/abs/2508.20900) | Kuaishou | App Stay Time +0.467%/+0.741% | 下一批：lazy decoder 与真实反馈 RL |
 
