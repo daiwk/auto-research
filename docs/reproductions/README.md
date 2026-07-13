@@ -2,10 +2,15 @@
 
 每篇论文拥有独立目录，方法说明、实验设置和已确认结果不会与其他论文混写。
 
+2026-07 的 Google/Meta + 线上 A/B 严格筛选过程见 [selection report](2026-07-meta-online-ab-selection.md)。
+
 | Track | Paper | Adapter | Results |
 |---|---|---|---|
 | LLM | SIS · arXiv 2607.04728 | `sis` | [结论](2607.04728-sis/README.md) |
 | Recommendation | MDCNS · arXiv 2605.19651 | `mdcns` | [结论](2605.19651-mdcns/README.md) |
+| Recommendation | CMSL · arXiv 2606.28533 | `cmsl` | [结论](2606.28533-cmsl/README.md) |
+| Recommendation | G2Rec · arXiv 2606.20554 | `g2rec` | [结论](2606.20554-g2rec/README.md) |
+| Recommendation | Cluster GOOBS · arXiv 2607.00448 | `cluster-goobs` | [结论](2607.00448-cluster-goobs/README.md) |
 
 运行产生的原始结果位于：
 
