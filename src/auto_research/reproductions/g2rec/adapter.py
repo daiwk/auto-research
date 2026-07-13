@@ -14,7 +14,6 @@ ADAPTER = register(
         ),
         run=reproduce_g2rec,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("generative decoder", "autoregressive interest-token training"),
+        fidelity=ReproductionFidelity.FULL_PIPELINE,
     )
 )

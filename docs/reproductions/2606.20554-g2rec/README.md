@@ -1,6 +1,6 @@
 # G2Rec: Graph interest tokens for generative recommendation
 
-> **Fidelity: 概念验证（非论文复现）**。当前 graph next-token scorer 代替了生成式 decoder 和 autoregressive interest-token training；旧指标不能验证 G2Rec。
+> **Fidelity: 完整核心链路复现**。当前代码实际优化稀疏图 soft modularity，并训练交替 item/continuous-interest token 的自回归 Transformer、next-item loss 与 profile loss。
 
 - 论文：[arXiv 2606.20554](https://arxiv.org/abs/2606.20554)，Meta
 - Adapter：`g2rec`；代码：`src/auto_research/reproductions/g2rec/`
@@ -55,11 +55,20 @@ soft clustering 的 modularity 相对 Leiden 从 Beauty 0.419→0.499、Sports 0
 
 ## 本地复现
 
-自动下载论文同款 Amazon Beauty 5-core：198,502 条交互、22,363 用户、12,101 物品。使用 sketch spectral soft profile 避免构造 $12,101^2$ 稠密矩阵；validation 选择 interest-token 权重，测试严格使用 1 正例 + 99 随机负例。轻量 graph next-token scorer 替代 Llama 2 13B。
+自动下载论文同款 Amazon Beauty 5-core：22,363 用户、12,101 物品。三步窗口构造出 265,133 条稀疏 co-engagement edge，直接优化 12 个 soft interest cluster 的 modularity；随后在同一参数级别比较 item-only decoder 与交替 item/interest token decoder。两者均为 96d、2-layer causal Transformer，训练 240 step；G2Rec 额外使用权重 `0.1` 的 profile prediction loss。测试固定抽取 1,000 用户，每人 1 正例 + 99 随机负例。
 
 | Tokenization | Hit@10 | NDCG@10 | Head share@10 |
 |---|---:|---:|---:|
-| Item only | 0.2947 | 0.1795 | 0.1819 |
-| Item + interest tokens | **0.3014** | **0.1808** | 0.2000 |
+| Item-only autoregressive decoder | 0.1100 | 0.0474 | **0.1107** |
+| G2Rec item + interest decoder | **0.1130** | **0.0530** | 0.1177 |
 
-NDCG@10 **+0.72%**，方向与论文一致但幅度更小；head share 增加 1.81 个百分点，说明当前简化 scorer 仍需去偏约束。该结果是同源数据上的机制复现，不是 13B 生成模型复刻。
+soft modularity 达 `0.3286`；G2Rec final training loss `9.8684`，item-only 为 `11.2813`。NDCG@10 相对提升 **11.92%**，Hit@10 提升 0.3 个百分点，但 head share 同时增加 0.7 个百分点。这验证了本地缩放版的核心训练链路，但收益中可能包含更偏头部的影响，且不能外推 Meta 线上幅度；96d decoder 替代了论文 Llama-2-13B。
+
+结构化指标见 [`metrics/beauty-seed42.json`](metrics/beauty-seed42.json)。完整运行：
+
+```bash
+pip install -e '.[neural-recs]'
+auto-research reproduce --paper g2rec --dataset-dir data --seed 42
+```
+
+下载数据和原始运行目录只保存在被 Git 忽略的 `data/`、`runs/`；MR 只提交代码、测试、文档与脱敏指标。

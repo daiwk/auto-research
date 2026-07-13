@@ -14,7 +14,6 @@ ADAPTER = register(
         ),
         run=reproduce_mixformer,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("trainable MixFormer blocks", "decoupled serving path"),
+        fidelity=ReproductionFidelity.FULL_PIPELINE,
     )
 )

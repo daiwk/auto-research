@@ -1,0 +1,39 @@
+{
+  "paper": "OneRec",
+  "arxiv_id": "2502.18965",
+  "dataset": "MovieLens 1M",
+  "seed": 42,
+  "configuration": {
+    "sid_cardinalities": [256, 128, 64],
+    "dimensions": 96,
+    "experts": 4,
+    "session_items": 3,
+    "sft_steps": 240,
+    "reward_steps": 120,
+    "dpo_steps": 80,
+    "dpo_pairs": 96,
+    "evaluation_users": 200
+  },
+  "training": {
+    "sid_uniqueness": 0.9079870480302212,
+    "sft_final_loss": 5.133344602584839,
+    "reward_final_loss": 0.6804039984941482,
+    "dpo_initial_loss": 0.1357584513258189,
+    "dpo_final_loss": 0.0005362891199183651
+  },
+  "results": {
+    "session_generator_sft": {
+      "hit_at_10": 0.02,
+      "ndcg_at_10": 0.01565464876785729,
+      "head_share_at_10": 0.4372163388804841,
+      "valid_session_rate": 1.0
+    },
+    "onerec_iterative_preference_alignment": {
+      "hit_at_10": 0.0,
+      "ndcg_at_10": 0.0,
+      "head_share_at_10": 0.10469314079422383,
+      "valid_session_rate": 1.0
+    }
+  },
+  "conclusion": "The complete scaled pipeline ran successfully, but DPO collapsed held-out ranking accuracy despite reducing head concentration and its own objective. The weak local reward model was over-optimized."
+}

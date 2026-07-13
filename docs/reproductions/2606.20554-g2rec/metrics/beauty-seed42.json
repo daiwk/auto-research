@@ -1,0 +1,35 @@
+{
+  "paper": "G2Rec",
+  "arxiv_id": "2606.20554",
+  "dataset": "Amazon Beauty 5-core",
+  "seed": 42,
+  "configuration": {
+    "users": 22363,
+    "items": 12101,
+    "soft_interest_tokens": 12,
+    "dimensions": 96,
+    "layers": 2,
+    "training_steps": 240,
+    "profile_loss_weight": 0.1,
+    "evaluation_users": 1000
+  },
+  "training": {
+    "coengagement_edges": 265133,
+    "soft_modularity": 0.3285578489303589,
+    "item_only_final_loss": 11.281265258789062,
+    "g2rec_final_loss": 9.868353366851807
+  },
+  "results": {
+    "item_tokens_only": {
+      "hit_at_10": 0.11,
+      "ndcg_at_10": 0.04737715743228493,
+      "head_share_at_10": 0.1107
+    },
+    "g2rec_item_plus_interest_tokens": {
+      "hit_at_10": 0.113,
+      "ndcg_at_10": 0.053025758544584,
+      "head_share_at_10": 0.1177
+    }
+  },
+  "ndcg_gain_percent": 11.922625624748557
+}

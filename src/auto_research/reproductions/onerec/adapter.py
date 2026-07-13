@@ -14,7 +14,6 @@ ADAPTER = register(
         ),
         run=reproduce_onerec,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("RQ Semantic IDs", "generative MoE", "iterative DPO"),
+        fidelity=ReproductionFidelity.FULL_PIPELINE,
     )
 )
