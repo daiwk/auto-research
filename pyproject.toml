@@ -9,7 +9,7 @@ description = "A local-first, reproducible research loop for ML topics"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
-dependencies = []
+dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]

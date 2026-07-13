@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from .config import ResearchConfig
+from .paper_methods import reproduce_mdcns, reproduce_sis, write_reproduction_report
 from .publish import publish_report
 from .runner import ResearchRunner
 
@@ -31,6 +32,18 @@ def build_parser() -> argparse.ArgumentParser:
     publish.add_argument("--title", required=True)
     publish.add_argument("--base")
     publish.add_argument("--ready", action="store_true")
+
+    reproduce = commands.add_parser(
+        "reproduce", help="run paper-specific baseline comparisons"
+    )
+    reproduce.add_argument(
+        "--paper", choices=["sis", "mdcns", "all"], default="all"
+    )
+    reproduce.add_argument("--dataset-dir", type=Path, default=Path("data"))
+    reproduce.add_argument(
+        "--output", type=Path, default=Path("runs/paper-reproduction.md")
+    )
+    reproduce.add_argument("--seed", type=int, default=42)
     return parser
 
 
@@ -43,6 +56,15 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "publish":
             print(publish_report(args.report, args.title, args.base, args.ready))
+            return 0
+        if args.command == "reproduce":
+            results = []
+            if args.paper in {"sis", "all"}:
+                results.append(reproduce_sis(args.dataset_dir, args.seed))
+            if args.paper in {"mdcns", "all"}:
+                results.append(reproduce_mdcns(args.dataset_dir, args.seed))
+            write_reproduction_report(results, args.output)
+            print(f"Report: {args.output.resolve()}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

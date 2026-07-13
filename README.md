@@ -7,6 +7,11 @@
 - `llm`：网络结构、预训练、后训练。内置 Tiny Shakespeare 字符 n-gram 低成本代理实验。
 - `recommendation`：召回、粗排、精排、混排、loss、采样、训练与 serving。内置 MovieLens 100K 矩阵分解实验。
 
+另外提供两个已落到代码的论文 adapter，而不是只展示论文摘要：
+
+- SIS，arXiv `2607.04728`：实现论文 Algorithm 1 的 top-K envelope rejection sampling，并与 token-level importance sampling 对照。
+- MDCNS，arXiv `2605.19651`：实现 Teacher–Peer–Self 多源打分、divergence re-ranking 和 consensus distillation，并与 Uniform、DNS 对照。
+
 内置实验的目标是验证研究流水线和快速筛选想法，并不等同于复现某篇论文。严谨实验应通过自定义实验命令接入 PyTorch/JAX 项目。
 
 ## 流程
@@ -48,6 +53,18 @@ auto-research run \
 ```
 
 结果位于 `runs/<timestamp>/report.md` 和 `result.json`。数据集缓存在 `data/`，二者默认不提交 Git。
+
+## 复现已支持的论文方法
+
+```bash
+# 分别运行，或使用 --paper all
+auto-research reproduce --paper sis
+auto-research reproduce --paper mdcns
+```
+
+SIS 使用 Tiny Shakespeare 构造 stale behavior policy 与 current policy，报告 importance-weight 方差、ESS 和接受率。MDCNS 将 MovieLens 100K 中评分不低于 4 的交互视为正反馈，按用户留最后一个交互测试，报告 Hit@10 和 NDCG@10。当前实测结果见 [docs/reproduction-results.md](docs/reproduction-results.md)。
+
+这是保留论文核心算法的 Mac-scale mechanism reproduction，不声称复现论文中 Qwen 大模型或六数据集的 headline number；报告会明确记录这个范围。
 
 ## 自定义真实实验
 
