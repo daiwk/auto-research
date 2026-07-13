@@ -1,7 +1,7 @@
 import numpy as np
 
 from auto_research.reproductions.cmsl.model import CMSLScorer, semantic_assignments
-from auto_research.reproductions.g2rec.model import G2RecScorer
+from auto_research.reproductions.g2rec.model import coengagement_edges
 from auto_research.reproductions.llatte.model import LLaTTEScorer
 from auto_research.reproductions.memento.model import maximal_marginal_relevance
 from auto_research.reproductions.self_evolving_rec.model import CANDIDATES
@@ -21,11 +21,11 @@ def test_cmsl_constructs_multiple_semantic_strands():
     assert len(set(assignments[[0, 2]])) == 2
 
 
-def test_g2rec_interest_tokens_change_item_only_scores():
-    graph = np.asarray([[0.0, 1.0, 0.0], [1.0, 0.0, 0.2], [0.0, 0.2, 0.0]])
-    membership = np.asarray([[1.0, 0.0], [0.8, 0.2], [0.0, 1.0]])
-    scorer = G2RecScorer(graph, membership, beta=0.5)
-    assert not np.allclose(scorer.item_only_scores((0,)), scorer.interest_token_scores((0,)))
+def test_g2rec_builds_sparse_windowed_coengagement_graph():
+    edges, weights, degree = coengagement_edges(((0, 1, 2), (2, 1)), 3, window=1)
+    assert {tuple(edge) for edge in edges} == {(0, 1), (1, 2)}
+    assert np.all(weights > 0)
+    assert degree[1] > degree[0]
 
 
 def test_memento_mmr_avoids_redundant_memories():

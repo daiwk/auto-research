@@ -1,8 +1,9 @@
 import numpy as np
 
 from auto_research.reproductions.longer.model import LONGERScorer
-from auto_research.reproductions.mixformer.model import MixFormerScorer
-from auto_research.reproductions.onerec.model import OneRecScorer
+from auto_research.reproductions.mixformer.model import training_examples
+from auto_research.reproductions.onerec.model import TokenLayout, _catalog_transitions
+from auto_research.reproductions.plum.model import SemanticIDIndex
 
 
 class _Backbone:
@@ -21,15 +22,16 @@ def test_longer_merges_old_and_recent_tokens():
     )
 
 
-def test_mixformer_unifies_dense_and_sequence_interactions():
-    features = np.asarray([[1.0, 0.0], [0.8, 0.2], [0.0, 1.0]])
-    scorer = MixFormerScorer(_Backbone(), features, cross_weight=0.2)
-    assert not np.allclose(scorer.stacked_scores((0, 1)), scorer.unified_scores((0, 1)))
+def test_mixformer_training_examples_are_fixed_length_next_item_rows():
+    rows = training_examples(((0, 1, 2),), length=3)
+    assert rows == (((0, 0, 0), 1), ((0, 0, 1), 2))
 
 
-def test_onerec_preference_alignment_changes_session_scores():
-    features = np.asarray([[1.0, 0.0], [0.8, 0.2], [0.0, 1.0]])
-    scorer = OneRecScorer(
-        _Backbone(), features, np.asarray([3.0, 2.0, 1.0]), 0.3, 0.1
+def test_onerec_catalog_constraints_only_allow_observed_sid_prefixes():
+    index = SemanticIDIndex(
+        np.asarray([[0, 1, 0], [1, 0, 1]], dtype=np.int64), (2, 2, 2)
     )
-    assert not np.allclose(scorer.session_scores((0, 1)), scorer.aligned_scores((0, 1)))
+    layout = TokenLayout.from_index(index)
+    transitions = _catalog_transitions(index, layout)
+    assert transitions[(0, ())] == [0, 1]
+    assert transitions[(1, (0,))] == [layout.level_offsets[1] + 1]

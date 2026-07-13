@@ -19,17 +19,17 @@
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
 | 完整核心链路 | `plum` | PLUM · Google/YouTube | 135M decoder-only LM；2×2 CPT 消融；CPT 降低 loss，但 Recall@10 未提升 |
+| 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
+| 完整核心链路 | `g2rec` | G2Rec · Meta | soft graph clustering、交替 interest token decoder、双 loss；NDCG@10 +11.92% |
+| 完整核心链路 | `mixformer` | MixFormer · ByteDance/Douyin | matched-budget stacked/unified Transformer；NDCG@10 +17.41% |
 | 核心机制 | `sis` | SIS | 论文的 off-policy token importance-sampling 变换 |
 | 核心机制 | `mdcns` | MDCNS | 三源负采样、分歧/共识筛选与双模型更新 |
 | 核心机制 | `memento` | Memento · Meta | query-conditioned MMR 长历史检索 |
 | 核心机制 | `cluster-goobs` | Cluster GOOBS · Meta | cluster-conditioned online hard-negative sampling |
 | 概念验证 | `llatte` | LLaTTE · Meta | 未实现 MLA、DHEN、semantic LLM features |
 | 概念验证 | `self-evolving-rec` | Self-Evolving RecSys · Google | 未运行 LLM agent 和真实线上反馈闭环 |
-| 概念验证 | `g2rec` | G2Rec · Meta | 未训练生成式 decoder |
 | 概念验证 | `cmsl` | CMSL · Meta | 未训练 contextual lenses / HSTU backbone |
-| 概念验证 | `onerec` | OneRec · Kuaishou | 未实现 RQ-SID、生成式 MoE、迭代 DPO |
 | 概念验证 | `longer` | LONGER · ByteDance/Douyin | 未训练 hybrid attention / InnerTrans |
-| 概念验证 | `mixformer` | MixFormer · ByteDance/Douyin | 未训练论文 MixFormer blocks |
 
 三级定义和逐篇审计见[论文实现索引](docs/reproductions/README.md)。概念验证产生的旧指标只用于调试假设，不支持论文效果结论，也不再出现在默认批量复现中。
 
@@ -69,6 +69,9 @@ pip install -e '.[dev]'
 
 # PLUM 的真实 LLM CPT/SFT 另装可选依赖
 pip install -e '.[plum]'
+
+# OneRec / G2Rec / MixFormer 的轻量神经复现
+pip install -e '.[neural-recs]'
 ```
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。下载器只接入体量适合本地 Mac 的公开原始数据；生产内部数据不会伪造为“原数据复现”。

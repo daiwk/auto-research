@@ -1,6 +1,6 @@
 # OneRec: Session-wise generative recommendation with preference alignment
 
-> **Fidelity: 概念验证（非论文复现）**。当前代码未实现 RQ Semantic IDs、生成式 MoE 和迭代 DPO；下方旧本地指标仅是 reward-margin heuristic 的诊断结果，不能验证 OneRec。
+> **Fidelity: 完整核心链路复现**。当前代码实际训练 RQ Semantic IDs、session-wise encoder-decoder、稀疏 MoE、个性化 reward model 和 self-hard DPO；仅缩小模型、session 长度和公开数据规模。
 
 - 论文：[arXiv 2502.18965](https://arxiv.org/abs/2502.18965)，Kuaishou
 - Adapter：`onerec`；代码：`src/auto_research/reproductions/onerec/`
@@ -49,12 +49,21 @@ Kuaishou 主场景使用 1% 流量严格 A/B：
 
 ## 本地复现
 
-在 MovieLens-1M 上用共享检索 backbone 比较 point-wise、最近 5 个行为的 session-wise scoring，以及带语义偏好与流行度惩罚的 reward-margin alignment。两个权重只由 validation 选择，test 为 full catalog。
+MovieLens-1M 上训练三层 RQ-VAE SID `[256,128,64]`；96d、2-layer encoder-decoder 使用 4 个 top-1 sparse experts，一次生成 3 个 item session。先做 240-step session SFT，再训练 120-step personalized reward model，从生成器 12-beam session 中选 96 组 self-hard winner/loser，执行 80-step DPO。测试时只允许生成 catalog 中存在的 SID prefix。
 
-| Method | Hit@10 | NDCG@10 | Head share@10 |
-|---|---:|---:|---:|
-| Point-wise retrieval | 0.0358 | 0.0181 | 0.9458 |
-| Session-wise generation proxy | 0.0361 | 0.0181 | 0.9657 |
-| OneRec + preference alignment proxy | **0.0439** | **0.0232** | **0.6027** |
+| Stage | Hit@10 | NDCG@10 | Head share@10 | Valid session |
+|---|---:|---:|---:|---:|
+| Session generator SFT | **0.0200** | **0.0157** | 0.4372 | 1.0000 |
+| + iterative preference alignment | 0.0000 | 0.0000 | **0.1047** | 1.0000 |
 
-相对 point-wise 的 NDCG@10 **+28.78%**，同时显著降低头部集中度。这里的 alignment 是可复现 reward-margin proxy，不是生产 reward model、128-beam self-sampling 或完整迭代 DPO。
+SID 唯一率为 **90.80%**；SFT final loss `5.1333`，reward loss 只从 `0.6939` 降到 `0.6804`，DPO loss 却从 `0.1358` 快速降到 `0.00054`。DPO 将 head share 从 43.72% 降到 10.47%，但同时把 SFT 的 NDCG@10 `0.0157` 降到 0。这个组合说明小型 reward model 区分能力不足，策略对它发生了明显的 reward over-optimization；**本地结果否定了当前 DPO 设置，而不是验证 IPA 收益**。旧 heuristic `NDCG +28.78%` 已撤回。
+
+结构化指标见 [`metrics/movielens-1m-seed42.json`](metrics/movielens-1m-seed42.json)。完整运行：
+
+```bash
+pip install -e '.[neural-recs]'
+AUTO_RESEARCH_ONEREC_CHECKPOINTS=runs/onerec-checkpoints/seed-42 \
+auto-research reproduce --paper onerec --dataset-dir data --seed 42
+```
+
+数据、RQ-VAE、generator/reward checkpoint 和原始运行结果只保存在被 Git 忽略的 `data/`、`runs/`；MR 只提交代码、文档和脱敏指标。

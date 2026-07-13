@@ -1,0 +1,30 @@
+{
+  "paper": "MixFormer",
+  "arxiv_id": "2602.14110",
+  "dataset": "MovieLens 100K",
+  "seeds": [42, 43, 44],
+  "configuration": {
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 32,
+    "steps": 240,
+    "stacked_parameters": 223424,
+    "unified_parameters": 216576
+  },
+  "results": {
+    "stacked_dense_plus_sequence": {
+      "hit_at_10": 0.011444921316165951,
+      "hit_at_10_std": 0.0010115976841009264,
+      "ndcg_at_10": 0.005395048298265208,
+      "ndcg_at_10_std": 0.0008890096591646018
+    },
+    "unified_mixformer": {
+      "hit_at_10": 0.011802575107296138,
+      "hit_at_10_std": 0.0030347930523027785,
+      "ndcg_at_10": 0.006334514266324136,
+      "ndcg_at_10_std": 0.0016564357351760816
+    }
+  },
+  "ndcg_gain_percent": 17.413485776596577,
+  "conclusion": "Unified dense-sequence interaction was directionally positive, but absolute accuracy was low and variance was material."
+}

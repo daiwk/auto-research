@@ -1,41 +1,90 @@
+from __future__ import annotations
+
+import copy
+import os
 from pathlib import Path
 from typing import Any
 
-from ..cluster_goobs.model import train_retriever
-from ..rec_utils import load_movielens_1m_sequences, ranking_metrics
-from .model import OneRecScorer
+from ..plum.model import build_semantic_ids, load_movie_metadata
+from ..rec_utils import load_movielens_1m_sequences
+from .model import (
+    OneRecConfig,
+    build_generator,
+    evaluate_generator,
+    preference_pairs,
+    require_backend,
+    save_checkpoint,
+    session_examples,
+    train_dpo,
+    train_generator,
+    train_reward_model,
+)
 
 
 def reproduce_onerec(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
+    torch, _ = require_backend()
     data = load_movielens_1m_sequences(dataset_dir)
-    backbone = train_retriever(data, "random_oob", seed, epochs=3, training_cap=100000)
-    baseline = OneRecScorer(backbone, data.item_features, data.popularity, 0.0, 0.0)
-    session_choices = []
-    for weight in (0.1, 0.25, 0.5, 0.75, 1.0):
-        scorer = OneRecScorer(backbone, data.item_features, data.popularity, weight, 0.0)
-        metric = ranking_metrics(data, scorer.session_scores, target="validation")
-        session_choices.append((metric["ndcg_at_10"], weight))
-    session_weight = max(session_choices)[1]
-    preference_choices = []
-    for weight in (0.01, 0.02, 0.05, 0.1, 0.2):
-        scorer = OneRecScorer(backbone, data.item_features, data.popularity, session_weight, weight)
-        metric = ranking_metrics(data, scorer.aligned_scores, target="validation")
-        preference_choices.append((metric["ndcg_at_10"], weight))
-    preference_weight = max(preference_choices)[1]
-    session = OneRecScorer(backbone, data.item_features, data.popularity, session_weight, 0.0)
-    aligned = OneRecScorer(backbone, data.item_features, data.popularity, session_weight, preference_weight)
+    metadata = load_movie_metadata(dataset_dir)
+    output = Path(os.environ.get("AUTO_RESEARCH_ONEREC_CHECKPOINTS", "runs/onerec-checkpoints"))
+    config = OneRecConfig(
+        sft_steps=int(os.environ.get("AUTO_RESEARCH_ONEREC_SFT_STEPS", "240")),
+        reward_steps=int(os.environ.get("AUTO_RESEARCH_ONEREC_REWARD_STEPS", "120")),
+        dpo_steps=int(os.environ.get("AUTO_RESEARCH_ONEREC_DPO_STEPS", "80")),
+        dpo_pairs=int(os.environ.get("AUTO_RESEARCH_ONEREC_DPO_PAIRS", "96")),
+        evaluation_users=int(os.environ.get("AUTO_RESEARCH_ONEREC_EVAL_USERS", "200")),
+    )
+    index = build_semantic_ids(
+        data, metadata, cardinalities=(256, 128, 64), seed=seed,
+        checkpoint_dir=output / "sid",
+    )
+    rows = session_examples(data.train, index, config)
+    torch.manual_seed(seed)
+    generator, layout = build_generator(index, config)
+    sft_training = train_generator(generator, layout, rows, config, seed)
+    torch.manual_seed(seed + 1)
+    reward, reward_training = train_reward_model(
+        rows, data.item_count, config, seed + 1
+    )
+    sft_model = copy.deepcopy(generator)
+    baseline = evaluate_generator(
+        sft_model, data, index, layout, config, seed + 2
+    )
+    pairs = preference_pairs(
+        generator, reward, rows, index, layout, data.popularity, config, seed + 3
+    )
+    if not pairs:
+        raise RuntimeError("OneRec self-sampling produced no valid preference pairs")
+    dpo_training = train_dpo(generator, pairs, layout, config)
+    aligned = evaluate_generator(
+        generator, data, index, layout, config, seed + 2
+    )
+    save_checkpoint(generator, reward, output / f"seed-{seed}", torch)
     results = {
-        "pointwise_retrieval": ranking_metrics(data, baseline.pointwise_scores),
-        "session_wise_generation": ranking_metrics(data, session.session_scores),
-        "onerec_plus_preference_alignment": ranking_metrics(data, aligned.aligned_scores),
+        "session_generator_sft": baseline,
+        "onerec_iterative_preference_alignment": aligned,
     }
-    base, _, proposed = results.values()
     return {
         "paper": {"arxiv_id": "2502.18965", "title": "OneRec: Unifying Retrieve and Rank with Generative Recommender and Iterative Preference Alignment", "url": "https://arxiv.org/abs/2502.18965", "track": "recommendation"},
-        "dataset": "MovieLens 1M (public proxy; Kuaishou production logs are private)",
-        "setup": {"users": len(data.train), "items": data.item_count, "seed": seed, "training_transition_cap": 100000, "validation_selected_session_weight": session_weight, "validation_selected_preference_weight": preference_weight},
+        "dataset": "MovieLens 1M (public replacement for private Kuaishou logs)",
+        "setup": {
+            "users": len(data.train), "items": data.item_count, "seed": seed,
+            "sid_cardinalities": list(index.cardinalities),
+            "sid_uniqueness": index.uniqueness,
+            "session_items": config.session_items,
+            "experts": config.experts,
+            "sft_steps": config.sft_steps,
+            "reward_steps": config.reward_steps,
+            "dpo_steps": config.dpo_steps,
+            "evaluation_users": min(config.evaluation_users, len(data.train)),
+        },
+        "training": {
+            "sid": index.training_metrics,
+            "session_sft": sft_training,
+            "reward_model": reward_training,
+            "dpo": dpo_training,
+        },
         "results": results,
-        "ndcg_gain_percent": 100 * (proposed["ndcg_at_10"] - base["ndcg_at_10"]) / max(base["ndcg_at_10"], 1e-12),
+        "ndcg_gain_percent": 100 * (aligned["ndcg_at_10"] - baseline["ndcg_at_10"]) / max(baseline["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"traffic_percent": 1.0, "total_watch_time_percent": 1.68, "average_view_duration_percent": 6.56},
-        "scope": "Concept demo only: a retrieval-score heuristic stands in for session generation and reward-margin alignment. It omits MoE generation, RQ Semantic IDs, the reward model, self-sampling, and iterative DPO, so these metrics do not reproduce OneRec.",
+        "scope": "Runs RQ semantic-ID training, a session-wise encoder-decoder with sparse MoE, personalized reward-model training, model self-sampling, self-hard winner/loser selection, DPO, and constrained multi-item generation. A 96d local model and MovieLens replace OneRec-1B and private Kuaishou feedback labels.",
     }
