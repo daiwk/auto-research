@@ -36,4 +36,4 @@
 
 - Meta SilverTorch（arXiv 2511.14881）：首次提交于 2025-11，超出时间窗。
 - Fine-Tuned LLM as a Complementary Predictor（arXiv 2605.27856）：有线上 RoAS 结果，但部署描述指向 Pinterest surfaces，不属于 Google 或 Meta。
-- Rec-Distill（arXiv 2605.29755）：有线上 A/B，但属于 ByteDance/Douyin/TikTok。
+- Rec-Distill（arXiv 2605.29755）不属于本页 Google/Meta 范围；扩大公司范围后已进入[工业论文候选队列](industrial-online-ab-selection.md)。
