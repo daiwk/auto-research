@@ -6,7 +6,7 @@ from typing import Any
 
 import numpy as np
 
-from ...datasets import movielens_100k
+from ...datasets import mdcns_beauty_sequences
 from .model import SequentialModel, softmax
 
 
@@ -18,8 +18,8 @@ def reproduce_mdcns(
     candidate_count: int = 30,
     top_k: int = 5,
 ) -> dict[str, Any]:
-    ratings = movielens_100k(dataset_dir)
-    train, test, seen, item_count = build_movie_sequences(ratings)
+    sequences = mdcns_beauty_sequences(dataset_dir)
+    train, test, seen, item_count = build_beauty_sequences(sequences, seed)
     results = {
         method: train_sequential(
             train,
@@ -43,9 +43,9 @@ def reproduce_mdcns(
             "track": "recommendation",
             "code": "https://github.com/Lyz103/SIGIR26-MDCNS",
         },
-        "dataset": "MovieLens 100K (ratings >= 4 as positive feedback)",
+        "dataset": "Amazon Beauty 5-core (authors' prepared public split)",
         "setup": {
-            "split": "per-user leave-last-one-out; earlier transitions for training",
+            "split": "authors' 70/20/10 temporal sequence files; test target is each row's last item",
             "users": len(test),
             "train_transitions": len(train),
             "items": item_count,
@@ -53,6 +53,7 @@ def reproduce_mdcns(
             "epochs": epochs,
             "candidate_pool": candidate_count,
             "top_k": top_k,
+            "training_example_cap": 50000,
         },
         "results": results,
         "ndcg10_gain_vs_dns_percent": 100
@@ -82,6 +83,20 @@ def build_movie_sequences(ratings):
         test.append((sequence[-2], sequence[-1]))
         seen[len(test) - 1] = set(sequence[:-1])
     return train, test, seen, len(items)
+
+
+def build_beauty_sequences(sequences, seed: int, training_cap: int = 50000):
+    train_rows = [row for row in sequences["train"] if len(row) >= 2]
+    test_rows = [row for row in sequences["test"] if len(row) >= 2]
+    item_count = 1 + max(item for rows in sequences.values() for row in rows for item in row)
+    train = [(row[-2], row[-1]) for row in train_rows]
+    if len(train) > training_cap:
+        rng = np.random.default_rng(seed)
+        selected = np.sort(rng.choice(len(train), training_cap, replace=False))
+        train = [train[int(index)] for index in selected]
+    test = [(row[-2], row[-1]) for row in test_rows]
+    seen = {index: set(row[:-1]) for index, row in enumerate(test_rows)}
+    return train, test, seen, item_count
 
 
 def train_sequential(

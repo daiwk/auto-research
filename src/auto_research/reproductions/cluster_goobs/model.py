@@ -5,13 +5,20 @@ import numpy as np
 from ..mdcns.model import SequentialModel
 
 
-def train_retriever(data, method: str, seed: int, factors: int = 24, epochs: int = 5):
+def train_retriever(
+    data, method: str, seed: int, factors: int = 24, epochs: int = 3,
+    training_cap: int = 100000,
+):
     rng = np.random.default_rng(seed)
     model = SequentialModel.create(data.item_count, factors, seed)
     examples = np.asarray(
         [(a, b) for sequence in data.train for a, b in zip(sequence, sequence[1:])],
         dtype=np.int64,
     )
+    if len(examples) > training_cap:
+        examples = examples[
+            np.sort(rng.choice(len(examples), training_cap, replace=False))
+        ]
     clusters = np.argmax(data.item_features, axis=1)
     members = {cluster: np.flatnonzero(clusters == cluster) for cluster in np.unique(clusters)}
     for _ in range(epochs):

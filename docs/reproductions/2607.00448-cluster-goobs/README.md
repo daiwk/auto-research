@@ -1,30 +1,57 @@
 # Cluster GOOBS: LLM-clustered hard negatives
 
-- 论文：[arXiv 2607.00448](https://arxiv.org/abs/2607.00448)，2026-07-01，Meta
-- Adapter：`cluster-goobs`
-- 代码：`src/auto_research/reproductions/cluster_goobs/`
-- 数据：MovieLens 100K
-- 运行：`auto-research reproduce --paper cluster-goobs --seed 42`
+- 论文：[arXiv 2607.00448](https://arxiv.org/abs/2607.00448)，Meta
+- Adapter：`cluster-goobs`；代码：`src/auto_research/reproductions/cluster_goobs/`
+- 本地数据：MovieLens-1M；运行：`auto-research reproduce --paper cluster-goobs --seed 42`
 
-## 论文线上证据
+## 原始论文总结
 
-论文使用 3% control 与 3% test 用户做线上 A/B，报告 CTR **+53%**、训练 QPS -1.4%、top-100 物品曝光贡献从 50% 降到 32%。这是本轮最明确的“LLM + 召回采样”生产证据。
+### 背景与主要改动
 
-## 实现范围
+大规模双塔召回常从 out-of-batch（OOB）池随机抽负例。绝大多数负例过于容易，梯度弱；同时热门物品更常进入池，形成曝光反馈循环。论文先用 LLM/多模态 embedding 把物品划入语义 cluster，再让 GOOBS 的 update engine 按 cluster 分段写入实时 OOB 池，sample engine 大概率从正例所在 cluster 抽 hard negative。这样不增加在线模型结构，采样仍是 O(1)。
 
-实现论文 Algorithm 2 的同 cluster 实时 OOB 负采样，并按 MovieLens 设置使用 1:15 的随机/cluster 负例比例。由于 Meta 的多模态 LLM item embedding 不公开，公开数据实验使用 MovieLens genre cluster；轻量双塔 sequential embedding 替代生产模型与分布式 GOOBS 哈希池。
+```mermaid
+flowchart LR
+  A["item text/image"] --> B["LLM multimodal embedding"]
+  B --> C["semantic clustering"]
+  C --> D["cluster-segmented GOOBS pool"]
+  E["positive item"] --> F["lookup its cluster"]
+  D --> G["sample same-cluster OOB negative"]
+  F --> G
+  G --> H["two-tower sampled-softmax training"]
+  H --> D
+```
 
-## 实验协议
+### 核心公式
 
-评分 >= 4 作为正反馈；per-user leave-two-out；完整 item catalog 排序；随机 OOB 与 1:15 random/cluster OOB 对照；三个 seed。
+双塔相似度 $s(x_i,y_j)=v_i^Tu_j$，batch/OOB sampled softmax 为
 
-## 本机结果（2026-07-13）
+$$P(y_i\mid x_i;\theta)=\frac{\exp s(x_i,y_i)}{\sum_{j\in\mathcal C_i}\exp s(x_i,y_j)}.$$
+
+Cluster GOOBS 将候选集合改为混合分布
+
+$$q^-(j\mid i)=\rho\,q_{random}(j)+(1-\rho)q_{cluster}(j\mid c(i)),$$
+
+MovieLens-1M 设置 random:cluster 为 1:15，Amazon 为 1:31。核心变化在采样分布和实时分段池，不在双塔 loss 本身。
+
+### 论文离线与在线效果
+
+| Dataset | HR@50 Random | Cluster | 相对提升 | HR@100 Random | Cluster | 相对提升 |
+|---|---:|---:|---:|---:|---:|---:|
+| MovieLens-1M | 0.2253 | 0.2415 | +7.2% | 0.3588 | 0.3682 | +2.7% |
+| Amazon Grocery | 0.0254 | 0.0301 | +18.5% | 0.0406 | 0.0470 | +15.7% |
+| Amazon Electronics | 0.0084 | 0.0131 | +55.6% | 0.0154 | 0.0201 | +30.2% |
+| Amazon Home | 0.0050 | 0.0074 | +47.3% | 0.0082 | 0.0118 | +42.3% |
+
+线上 A/B 为 3% control/3% test、约 1,800 万物品：CTR **+53%**，训练 QPS -1.4%，推理无回归；top-100 物品曝光贡献从 50% 降到 32%，千次以上曝光物品 cohort CTR +50%。
+
+## 本地复现
+
+本轮已从 MovieLens-100K 升级为论文原始公开数据 MovieLens-1M：1,000,209 条评分、6,040 用户、3,706 物品；按论文公开设置将 3–5 分视为正反馈、genre 作为公开 cluster、random:cluster=1:15。为适配 Mac，每 seed 固定抽 100,000 个训练转移、3 epochs，共三个 seed；评估仍为 full-catalog Hit/NDCG@10，不冒充论文 HR@50/100。
 
 | Sampler | Hit@10 | NDCG@10 | Head share@10 |
 |---|---:|---:|---:|
-| Random OOB | 0.0851 ± 0.0048 | **0.0421 ± 0.0022** | 0.9705 ± 0.0038 |
-| Cluster GOOBS (1:15) | 0.0840 ± 0.0044 | 0.0403 ± 0.0007 | **0.9614 ± 0.0017** |
+| Random OOB | 0.0377 ± 0.0015 | 0.0190 ± 0.0006 | 0.9435 ± 0.0027 |
+| Cluster GOOBS | **0.0381 ± 0.0010** | **0.0191 ± 0.0006** | **0.9265 ± 0.0041** |
 
-## 结论与边界
-
-Cluster GOOBS 的 NDCG@10 下降 **4.36%**，head-share@10 下降 **0.94%**。genre 标签能复现降低热门集中度的方向，但没有复现 CTR/排序收益；最可能的差距是 genre cluster 远弱于论文的 300 个多模态 LLM clusters，同时 MovieLens 100K 的 item 规模太小。
+NDCG@10 **+0.98%**，head share **-1.81%**，同时复现了精度小幅上升与热门集中度下降的方向。差距主要来自 genre cluster 远弱于论文约 300 个 LLM 多模态 cluster，以及训练转移上限和轻量双塔。

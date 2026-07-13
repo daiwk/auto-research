@@ -1,33 +1,66 @@
 # MDCNS: Divergence Meets Consensus
 
-- 论文：[arXiv 2605.19651](https://arxiv.org/abs/2605.19651)
-- 作者代码：[SIGIR26-MDCNS](https://github.com/Lyz103/SIGIR26-MDCNS)
-- Adapter：`mdcns`
-- 代码：`src/auto_research/reproductions/mdcns/`
-- 数据：MovieLens 100K
-- 运行：`auto-research reproduce --paper mdcns --seed 42`
+- 论文：[arXiv 2605.19651](https://arxiv.org/abs/2605.19651)；[作者代码](https://github.com/Lyz103/SIGIR26-MDCNS)
+- Adapter：`mdcns`；代码：`src/auto_research/reproductions/mdcns/`
+- 本地数据：作者仓库 Amazon Beauty 5-core；运行：`auto-research reproduce --paper mdcns --seed 42`
 
-## 实现范围
+## 原始论文总结
 
-实现两个 sequential embedding 模型、Self/Peer/Ensemble 三源负例、disagreement 增强重排和 ensemble soft-target KL distillation。Baseline 为 Uniform 与 DNS。
+### 背景与主要改动
 
-## 实验设置
+随机负采样太容易，DNS 只追逐单模型高分负例又容易产生 false negative、低多样性和模型偏置。MDCNS 受“最近发展区”启发，引入 Self、Peer、Teacher 三个视角：Self 与异构 Peer 分别评分，Teacher 聚合两者；再用两模型分歧提升“困难且有信息量”的候选，最后把 Teacher 在完整候选池上的分布蒸馏回 Self，避免候选打分只利用一个负例。
 
-评分 >= 4 作为正反馈；938 用户、53,485 个训练转移、1,682 items；per-user leave-last-one-out；4 epochs；30 个候选负例；top-K=5。
+```mermaid
+flowchart LR
+  A["user sequence + random candidate pool"] --> B["Self model"]
+  A --> C["Peer model"]
+  B --> D["Teacher = Self + Peer"]
+  C --> D
+  B --> E["view divergence"]
+  C --> E
+  D --> F["three divergence-aware Top-M pools"]
+  E --> F
+  F --> G["multi-source ranking loss"]
+  D --> H["teacher soft distribution"]
+  H --> I["KL consensus distillation"]
+  G --> J["update Self"]
+  I --> J
+```
 
-## 已确认结果（2026-07-13）
+### 核心公式
 
-### NDCG@10
+候选由未交互集合均匀抽取，Self/Peer 评分与分歧为
 
-| Seed | Uniform | DNS | MDCNS |
-|---:|---:|---:|---:|
-| 41 | 0.037983 | 0.005209 | **0.041190** |
-| 42 | 0.033805 | 0.017046 | **0.042000** |
-| 43 | 0.038493 | 0.016176 | **0.043333** |
-| Mean | 0.036761 | 0.012810 | **0.042174** |
+$$s_{u,v}^{self}=h_u^{self}\cdot e_v,\quad s_{u,v}^{peer}=h_u^{peer}\cdot e_v,$$
+$$s_{u,v}^{teacher}=s_{u,v}^{self}+s_{u,v}^{peer},\quad d_{u,v}=|s_{u,v}^{self}-s_{u,v}^{peer}|.$$
 
-MDCNS 的平均 NDCG@10 比 Uniform 高 14.72%，三个种子均为正向。DNS 在轻量 backbone 上明显退化，因此不把相对 DNS 的巨大百分比当作主要结论。
+各视角用 $\widetilde s_{u,v}^{*}=s_{u,v}^{*}+d_{u,v}$ 重排，从 Top-M 随机抽一个负例。总目标为
 
-## 结论与边界
+$$\mathcal L_{rec}=\alpha\mathcal L_{self}+\beta\mathcal L_{peer}+\gamma\mathcal L_{teacher},$$
+$$p_{u,v}^{*}=\operatorname{softmax}(s_{u,v}^{*}/\tau),\quad
+\mathcal L=\mathcal L_{rec}+\mu\tau^2 KL(p^{teacher}\Vert p^{self}).$$
 
-这是论文核心采样与蒸馏路径的缩小版复现，不是六数据集、多个 neural backbone 的 headline number 复刻。
+### 论文效果
+
+论文使用 Beauty、Toys、Sports、Health、LastFM、KuaiRand，按 70/20/10 切分，报告 Recall/NDCG@5/10/20。以主表中的公开数据为例：
+
+| Dataset | 最强 baseline NDCG@10 | MDCNS | 相对提升 |
+|---|---:|---:|---:|
+| Beauty | 0.0497 | 0.0685 | +37.83% |
+| Toys | 0.0586 | 0.0765 | +30.55% |
+| Sports | 0.0269 | 0.0340 | +26.39% |
+| Health | 0.0393 | 0.0516 | +31.29% |
+
+论文是公开离线实验，没有报告线上 A/B。
+
+## 本地复现
+
+本轮不再使用 MovieLens proxy，而是自动下载作者仓库的 Beauty 切分：123,086/4,472/2,237 条 train/val/test 序列，12,101 个物品。轻量双 embedding backbone 实现三源采样、分歧重排和 KL distillation；为控制 Mac 时间，固定抽取 50,000 个训练样本、4 epochs、30 候选、Top-M=5。
+
+| Sampler | Hit@10 | NDCG@10 |
+|---|---:|---:|
+| Uniform | 0.003576 | 0.003016 |
+| DNS | 0.003576 | 0.002507 |
+| MDCNS | **0.008046** | **0.006175** |
+
+MDCNS 相对 Uniform 的 NDCG@10 为 **+104.75%**。绝对值低于论文，原因包括轻量一阶 Markov backbone、训练样本上限和未复刻 SASRec/Mamba4Rec；因此结论只支持“核心采样路径在同源公开数据上有效”。
