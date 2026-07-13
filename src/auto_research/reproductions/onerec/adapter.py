@@ -1,4 +1,4 @@
-from ..base import PaperMetadata, ReproductionAdapter
+from ..base import PaperMetadata, ReproductionAdapter, ReproductionFidelity
 from ..registry import register
 from .experiment import reproduce_onerec
 from .report import render
@@ -14,5 +14,7 @@ ADAPTER = register(
         ),
         run=reproduce_onerec,
         render=render,
+        fidelity=ReproductionFidelity.CONCEPT_DEMO,
+        omitted_core_components=("RQ Semantic IDs", "generative MoE", "iterative DPO"),
     )
 )

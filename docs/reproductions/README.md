@@ -4,24 +4,28 @@
 
 后续新增论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选见[原报告](2026-google-meta-online-ab-selection.md)。
 
-## 当前结果
+## 保真度门槛
 
-| Track | Adapter | Paper | Paper evidence | Local public-data result |
-|---|---|---|---|---:|
-| LLM | `sis` | [SIS](2607.04728-sis/README.md) | 非本轮 Google/Meta A/B 集合 | weight variance -6.62% |
-| Recommendation | `mdcns` | [MDCNS](2605.19651-mdcns/README.md) | 论文公开离线结果 | Beauty NDCG@10 +104.75% vs Uniform |
-| Recommendation | `llatte` | [LLaTTE](2601.20083-llatte/README.md) | Meta conversion +4.3% | NDCG@10 -3.57% |
-| Recommendation | `self-evolving-rec` | [Self-Evolving RecSys](2602.10226-self-evolving-rec/README.md) | Google online metrics +0.03%–+0.14% | NDCG@10 +7.13% |
-| Recommendation | `memento` | [Memento](2605.24051-memento/README.md) | Meta CTR +1.0%、CVR +1.2% | NDCG@10 +4.78% |
-| Recommendation | `g2rec` | [G2Rec](2606.20554-g2rec/README.md) | Meta engagement +0.06%–+0.19% | Beauty NDCG@10 +0.72% |
-| Recommendation | `cmsl` | [CMSL](2606.28533-cmsl/README.md) | Meta retrieval +0.092%–+0.171% | NDCG@10 +0.95% |
-| Recommendation | `cluster-goobs` | [Cluster GOOBS](2607.00448-cluster-goobs/README.md) | Meta CTR +53% | ML-1M NDCG@10 +0.98% |
-| Recommendation | `plum` | [PLUM](2510.07784-plum/README.md) | YouTube Panel CTR +0.76%/+4.96% | ML-1M NDCG@10 +24.62% |
-| Recommendation | `onerec` | [OneRec](2502.18965-onerec/README.md) | Kuaishou watch time +1.68% | ML-1M NDCG@10 +28.78% |
-| Recommendation | `longer` | [LONGER](2505.04421-longer/README.md) | Douyin Ads/电商多项 A/B | ML-100K NDCG@10 +0.41% |
-| Recommendation | `mixformer` | [MixFormer](2602.14110-mixformer/README.md) | Douyin duration +0.2799% | ML-100K NDCG@10 +0.53% |
+数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
 
-本地百分比均相对于各自 README 中定义的 baseline，不应与论文线上 A/B 直接比较。
+## 当前审计
+
+| Fidelity | Adapter / paper | Paper online evidence | Local status |
+|---|---|---|---|
+| 完整核心链路 | `plum` · [PLUM](2510.07784-plum/README.md) | YouTube Panel CTR +0.76%/+4.96% | CPT 降低 loss；Recall@10 R1/CR1 1.0%，R2/CR2 0.5%，未验证召回增益 |
+| 核心机制 | `sis` · [SIS](2607.04728-sis/README.md) | 非本轮 A/B 集合 | SIS 公式实际执行；未训练 Qwen3/GRPO |
+| 核心机制 | `mdcns` · [MDCNS](2605.19651-mdcns/README.md) | 论文公开离线结果 | 作者 Beauty 切分；三源采样与双模型更新实际执行 |
+| 核心机制 | `memento` · [Memento](2605.24051-memento/README.md) | Meta CTR +1.0%、CVR +1.2% | query-conditioned MMR 实际执行；生产 replay/serving 省略 |
+| 核心机制 | `cluster-goobs` · [Cluster GOOBS](2607.00448-cluster-goobs/README.md) | Meta CTR +53% | online sampler 实际执行；genre 替换私有 LLM cluster |
+| 概念验证 | `llatte` · [LLaTTE](2601.20083-llatte/README.md) | Meta conversion +4.3% | 缺 MLA、DHEN、semantic LLM features |
+| 概念验证 | `self-evolving-rec` · [Self-Evolving RecSys](2602.10226-self-evolving-rec/README.md) | Google +0.03%–+0.14% | 固定候选代替 LLM agent；无线上反馈闭环 |
+| 概念验证 | `g2rec` · [G2Rec](2606.20554-g2rec/README.md) | Meta +0.06%–+0.19% | graph scorer 代替生成式 decoder |
+| 概念验证 | `cmsl` · [CMSL](2606.28533-cmsl/README.md) | Meta +0.092%–+0.171% | 固定 genre strand 代替 learned lenses/HSTU |
+| 概念验证 | `onerec` · [OneRec](2502.18965-onerec/README.md) | Kuaishou watch time +1.68% | 缺 RQ-SID、generative MoE、iterative DPO |
+| 概念验证 | `longer` · [LONGER](2505.04421-longer/README.md) | Douyin Ads/电商 A/B | 打分代理，未训练 hybrid attention/InnerTrans |
+| 概念验证 | `mixformer` · [MixFormer](2602.14110-mixformer/README.md) | Douyin duration +0.2799% | semantic gate 代理，未训练 MixFormer blocks |
+
+概念验证 README 中的历史本地百分比是旧的 heuristic 诊断结果，不应与论文离线或线上结果比较，也不能作为“论文方法有效”的证据。
 
 ## 统一运行方式
 
@@ -31,6 +35,9 @@ auto-research reproduce --paper <adapter> --seed 42
 
 # 全部
 auto-research reproduce --paper all --seed 42
+
+# 包含明确降级的概念验证
+auto-research reproduce --paper all --include-concept-demos --seed 42
 ```
 
 原始运行产物位于：

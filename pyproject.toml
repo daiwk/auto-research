@@ -13,6 +13,7 @@ dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+plum = ["torch>=2.7,<3", "transformers>=5.0,<6", "safetensors>=0.5"]
 
 [project.scripts]
 auto-research = "auto_research.cli:main"

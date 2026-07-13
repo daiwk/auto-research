@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .config import ResearchConfig
 from .publish import publish_report
+from .reproductions.base import ReproductionFidelity
 from .reproductions.registry import get_adapter, list_adapters
 from .reproductions.reporting import (
     write_legacy_combined_report,
@@ -48,6 +49,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     reproduce.add_argument("--output", type=Path, help=argparse.SUPPRESS)
     reproduce.add_argument("--seed", type=int, default=42)
+    reproduce.add_argument(
+        "--include-concept-demos",
+        action="store_true",
+        help="include adapters whose core paper model/training is still a proxy",
+    )
     return parser
 
 
@@ -63,10 +69,22 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "reproduce":
             adapters = (
-                list(list_adapters())
+                [
+                    adapter
+                    for adapter in list_adapters()
+                    if args.include_concept_demos
+                    or adapter.fidelity is not ReproductionFidelity.CONCEPT_DEMO
+                ]
                 if args.paper == "all"
                 else [get_adapter(args.paper)]
             )
+            for adapter in adapters:
+                if adapter.fidelity is ReproductionFidelity.CONCEPT_DEMO:
+                    print(
+                        f"warning: {adapter.key} is a concept demo, not a paper reproduction; "
+                        "its result must not be compared with the paper's reported lift.",
+                        file=sys.stderr,
+                    )
             entries = [
                 (adapter, adapter.run(args.dataset_dir, args.seed))
                 for adapter in adapters

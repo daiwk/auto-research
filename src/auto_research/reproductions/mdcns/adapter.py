@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ..base import PaperMetadata, ReproductionAdapter
+from ..base import PaperMetadata, ReproductionAdapter, ReproductionFidelity
 from ..registry import register
 from .experiment import reproduce_mdcns
 from .report import render
@@ -17,5 +17,6 @@ ADAPTER = register(
         ),
         run=reproduce_mdcns,
         render=render,
+        fidelity=ReproductionFidelity.CORE_MECHANISM,
     )
 )

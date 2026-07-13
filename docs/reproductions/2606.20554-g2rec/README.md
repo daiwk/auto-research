@@ -1,5 +1,7 @@
 # G2Rec: Graph interest tokens for generative recommendation
 
+> **Fidelity: 概念验证（非论文复现）**。当前 graph next-token scorer 代替了生成式 decoder 和 autoregressive interest-token training；旧指标不能验证 G2Rec。
+
 - 论文：[arXiv 2606.20554](https://arxiv.org/abs/2606.20554)，Meta
 - Adapter：`g2rec`；代码：`src/auto_research/reproductions/g2rec/`
 - 本地数据：Amazon Beauty 5-core；运行：`auto-research reproduce --paper g2rec --seed 42`

@@ -30,5 +30,5 @@ def reproduce_mixformer(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
         "results": results,
         "ndcg_gain_percent": 100 * (proposed["ndcg_at_10"] - baseline["ndcg_at_10"]) / max(baseline["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"douyin_duration_percent": 0.2799, "douyin_lite_duration_percent": 0.4105, "douyin_comment_percent": 0.7035, "douyin_lite_comment_percent": 1.9097},
-        "scope": "Reproduces shared dense/sequence token interaction and validation-selected unified fusion. User-item decoupled serving, trillion-scale interactions, and private features are out of scope.",
+        "scope": "Concept demo only: a fixed semantic gate sketches dense/sequence interaction, but no MixFormer block or decoupled train/serve path is trained. These metrics do not reproduce MixFormer.",
     }

@@ -32,5 +32,5 @@ def reproduce_longer(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
         "results": results,
         "ndcg_gain_percent": 100 * (proposed["ndcg_at_10"] - baseline["ndcg_at_10"]) / max(baseline["ndcg_at_10"], 1e-12),
         "paper_online_ab": {"douyin_ads_adss_range_percent": [1.063, 2.097], "douyin_ecommerce_order_per_user_range_percent": [4.6125, 7.9222]},
-        "scope": "Reproduces global tokens, local token merging, recent-query hybrid attention, and validation-only weight selection. It does not reproduce ByteDance's 5.2B-example CVR model or GPU serving stack.",
+        "scope": "Concept demo only: fixed score aggregation sketches global/local history use, but no trainable hybrid-attention or InnerTrans module is run. These metrics do not reproduce LONGER.",
     }

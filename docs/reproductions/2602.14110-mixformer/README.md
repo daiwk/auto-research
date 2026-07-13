@@ -1,5 +1,7 @@
 # MixFormer: Unified dense and sequence scaling
 
+> **Fidelity: 概念验证（非论文复现）**。当前 semantic gate 未实现可训练 MixFormer blocks 和论文的 user/item decoupled path；旧指标不能验证 MixFormer。
+
 - 论文：[arXiv 2602.14110](https://arxiv.org/abs/2602.14110)，ByteDance / Douyin
 - Adapter：`mixformer`；代码：`src/auto_research/reproductions/mixformer/`
 - 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper mixformer --seed 42`

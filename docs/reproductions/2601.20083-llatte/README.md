@@ -1,5 +1,7 @@
 # LLaTTE: Multi-stage sequence scaling
 
+> **Fidelity: 概念验证（非论文复现）**。当前实现省略 MLA、DHEN、semantic LLM features 和实际两阶段训练；旧指标只用于流水线诊断。
+
 - 论文：[arXiv 2601.20083](https://arxiv.org/abs/2601.20083)，Meta
 - Adapter：`llatte`；代码：`src/auto_research/reproductions/llatte/`
 - 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper llatte --seed 42`
