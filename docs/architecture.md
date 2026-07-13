@@ -7,7 +7,7 @@ cli.py
  └── reproductions.registry          # 自动发现 */adapter.py
       ├── base.py                    # PaperMetadata / ReproductionAdapter
       ├── reporting.py               # 隔离的 result.json / report.md
-      ├── rec_utils.py               # MovieLens split 与共享指标
+      ├── rec_utils.py               # 公共序列数据切分与共享指标
       └── <paper>/
            ├── adapter.py            # 元数据、run/render 注册
            ├── algorithm.py/model.py # 论文特有机制
@@ -29,6 +29,18 @@ cli.py
 6. 在 `docs/reproductions/<arxiv-id>-<key>/README.md` 记录经复核的长期结论。
 
 新论文不需要修改 CLI 分支、公共报告渲染器或其他论文目录。
+
+## Dataset policy
+
+- 论文使用公开且适合本地 Mac 的原始数据时，在 `datasets.py` 增加可缓存下载器，并让 adapter 默认使用该数据。
+- 优先复用论文作者发布的预处理切分；否则按论文声明的 k-core、时间切分和负采样协议处理官方数据。
+- 若完整训练仍过重，可以设置确定性的样本上限，但必须把上限、seed 和与论文协议的差异写进结果。
+- 论文只使用公司内部数据、超大模型或不可公开特征时，才使用公开 proxy，并明确禁止把 proxy 结果写成“完整复现”。
+- `data/` 和 `runs/` 都是本地缓存，不提交 Git。
+
+## Paper README contract
+
+每篇长期文档至少包含：背景、主要改动、Mermaid 重绘架构图、核心公式、论文离线效果、论文线上 A/B（没有则明确写“未报告”）、本地数据与协议、复现结果、代码映射和边界。论文表格与本地表格必须分开，指标口径不一致时不得直接比较。
 
 ## Artifact contract
 

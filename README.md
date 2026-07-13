@@ -12,20 +12,20 @@
 支持两条研究轨道：
 
 - `llm`：网络结构、预训练和后训练；内置 Tiny Shakespeare 低成本实验。
-- `recommendation`：召回、粗排、精排、混排、loss、采样、训练与 serving；内置 MovieLens 100K 实验。
+- `recommendation`：召回、粗排、精排、混排、loss、采样、训练与 serving；按论文优先使用 Amazon Beauty 5-core、MovieLens-1M 等同源公开数据，内部数据论文使用 MovieLens-100K proxy。
 
 ## 已实现的论文
 
 | Track | Adapter | Paper / organization | Public dataset | Local headline |
 |---|---|---|---|---:|
 | LLM | `sis` | SIS · arXiv 2607.04728 | Tiny Shakespeare | importance-weight variance -6.62% |
-| Recommendation | `mdcns` | MDCNS · arXiv 2605.19651 | MovieLens 100K | NDCG@10 +14.72% vs Uniform |
+| Recommendation | `mdcns` | MDCNS · arXiv 2605.19651 | Amazon Beauty 5-core（作者切分） | NDCG@10 +104.75% vs Uniform |
 | Recommendation | `llatte` | LLaTTE · Meta · arXiv 2601.20083 | MovieLens 100K | NDCG@10 -3.57% |
 | Recommendation | `self-evolving-rec` | Self-Evolving RecSys · Google · arXiv 2602.10226 | MovieLens 100K | NDCG@10 +7.13% |
 | Recommendation | `memento` | Memento · Meta · arXiv 2605.24051 | MovieLens 100K | NDCG@10 +4.78% |
-| Recommendation | `g2rec` | G2Rec · Meta · arXiv 2606.20554 | MovieLens 100K | NDCG@10 +15.45% |
+| Recommendation | `g2rec` | G2Rec · Meta · arXiv 2606.20554 | Amazon Beauty 5-core | NDCG@10 +0.72% |
 | Recommendation | `cmsl` | CMSL · Meta · arXiv 2606.28533 | MovieLens 100K | NDCG@10 +0.95% |
-| Recommendation | `cluster-goobs` | Cluster GOOBS · Meta · arXiv 2607.00448 | MovieLens 100K | NDCG@10 -4.36% |
+| Recommendation | `cluster-goobs` | Cluster GOOBS · Meta · arXiv 2607.00448 | MovieLens-1M | NDCG@10 +0.98%、head share -1.81% |
 
 这里的 local headline 是本机公开数据结果，不是论文线上 A/B 数字。完整实验协议、生产 A/B 证据和负结果解释见[论文复现索引](docs/reproductions/README.md)。2026 年 Google/Meta 严格筛选清单见[筛选报告](docs/reproductions/2026-google-meta-online-ab-selection.md)。
 
@@ -64,7 +64,7 @@ source .venv/bin/activate
 pip install -e '.[dev]'
 ```
 
-MovieLens 100K 和 Tiny Shakespeare 会在首次运行时下载到 `data/`，之后复用本地缓存。
+Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。下载器只接入体量适合本地 Mac 的公开原始数据；生产内部数据不会伪造为“原数据复现”。
 
 ## 运行论文复现
 

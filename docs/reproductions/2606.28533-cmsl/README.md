@@ -1,32 +1,65 @@
 # CMSL: Constructive Multi-Sequence Learning
 
-- 论文：[arXiv 2606.28533](https://arxiv.org/abs/2606.28533)，2026-06-26，Meta
-- Adapter：`cmsl`
-- 代码：`src/auto_research/reproductions/cmsl/`
-- 数据：MovieLens 100K
-- 运行：`auto-research reproduce --paper cmsl --seed 42`
+- 论文：[arXiv 2606.28533](https://arxiv.org/abs/2606.28533)，Meta
+- Adapter：`cmsl`；代码：`src/auto_research/reproductions/cmsl/`
+- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper cmsl --seed 42`
 
-## 论文线上证据
+## 原始论文总结
 
-论文公开了 Meta surface 5 的线上 A/B：四个 engagement 指标分别提升 **0.116%、0.158%、0.171%、0.092%**。排名场景还在四个 surface 报告了生产模型 NE 改善，但没有把 NE 当作线上 A/B。
+### 背景与主要改动
 
-## 实现范围
+把点击、观看、互动等所有行为塞进单一长序列会混合多个意图，且 self-attention 成本随长度快速增长。CMSL 不依赖预定义业务 taxonomy，而是利用当前上下文特征学习多个 contextual lens，把原始历史动态构造成 K 条 latent semantic sequence；每条 strand 独立编码，再用当前非序列上下文作为 query 做 PMA 聚合。论文还给出 degree-2 polynomial feature map 的线性 HSTU 近似，以支持工业长序列。
 
-实现多序列构造、各兴趣 strand 独立建模、二阶多项式线性注意力近似和候选感知聚合。公开实验用 MovieLens genre 聚类初始化 6 个兴趣 strand，以轻量 sequential embedding 替代 Meta 的生产 HSTU 与内部特征。
+```mermaid
+flowchart LR
+  A["raw heterogeneous history"] --> B["K contextual lenses"]
+  C["current user/item/context"] --> B
+  B --> D1["latent sequence 1"]
+  B --> D2["latent sequence 2"]
+  B --> D3["latent sequence K"]
+  D1 --> E["shared strand encoder"]
+  D2 --> E
+  D3 --> E
+  E --> F["context-query PMA summary"]
+  C --> F
+  F --> G["retrieval/ranking score"]
+```
 
-## 实验协议
+### 核心公式
 
-评分 >= 4 作为正反馈；per-user leave-two-out；完整 item catalog 排序；三个 seed；每个 seed 的融合权重只由 validation 选择，test 不参与调参。
+每个事件 $x_t$ 对 K 个 lens 得到软分配，可写成
 
-## 本机结果（2026-07-13）
+$$a_{t,k}=\operatorname{softmax}_k(g_k(x_t,c)),\qquad S_k=\{a_{t,k}x_t\}_{t=1}^{T}.$$
+
+线性 HSTU 用二阶 feature map 将注意力核分解：
+
+$$SiLU(QK^T)V\approx\phi(Q)\phi(K)^TV+AV,$$
+
+其中 $\phi(x)$ 包含一阶项 $x_i$ 和二阶项 $x_ix_j$。各 strand 表示 $H_k$ 再由 contextual query $q(c)$ 聚合：
+
+$$z=\sum_k\operatorname{softmax}_k(q(c)^TW_KH_k)\,W_VH_k.$$
+
+### 论文离线与在线效果
+
+论文在 Meta 内部 retrieval/ranking 数据上报告归一化熵改善：
+
+| Surface | Offline metric | CMSL change |
+|---|---|---:|
+| 1 | Eval comment NE | -0.62% |
+| 1 | Eval like NE | -0.33% |
+| 2 | Eval CTR / CVR NE | -0.12% / -0.10% |
+| 3 | Eval CTR / CVR NE | -0.09% / -0.06% |
+| 4 | Eval CTR / CVR NE | -0.10% / -0.13% |
+
+Surface 5 的线上 A/B 四个 engagement 指标分别 **+0.116%、+0.158%、+0.171%、+0.092%**。论文没有公开可下载的原始训练数据。
+
+## 本地复现
+
+MovieLens genre 初始化 6 个 semantic strand，实现 strand 独立建模、二阶线性注意力近似和候选感知聚合。评分 ≥4、leave-two-out、full catalog、三个 seed；融合权重仅由 validation 选择。
 
 | Model | Hit@10 | NDCG@10 |
 |---|---:|---:|
 | Single sequence | 0.0726 ± 0.0013 | 0.0351 ± 0.0014 |
 | CMSL | 0.0726 ± 0.0027 | **0.0355 ± 0.0016** |
 
-## 结论与边界
-
-平均 NDCG@10 提升 **0.95%**，但提升小于跨 seed 波动，结论是“方向正向、证据不足”，不能声称在 MovieLens 上稳定复现生产收益。
-
-MovieLens genre 聚类只是 latent sequence construction 的公开代理，不等价于 Meta 的可学习构造模块、HSTU kernel 和生产特征。
+平均 NDCG@10 **+0.95%**，但小于 seed 波动，只能判断方向正向、证据不足。公开 proxy 不等价于可学习 lens、生产 HSTU kernel 或 Meta 内部特征。
