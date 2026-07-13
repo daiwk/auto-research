@@ -9,7 +9,10 @@ def test_builtin_adapters_are_discoverable():
         "cluster-goobs",
         "cmsl",
         "g2rec",
+        "llatte",
         "mdcns",
+        "memento",
+        "self-evolving-rec",
         "sis",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"

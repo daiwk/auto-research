@@ -2,6 +2,9 @@ import numpy as np
 
 from auto_research.reproductions.cmsl.model import CMSLScorer, semantic_assignments
 from auto_research.reproductions.g2rec.model import G2RecScorer
+from auto_research.reproductions.llatte.model import LLaTTEScorer
+from auto_research.reproductions.memento.model import maximal_marginal_relevance
+from auto_research.reproductions.self_evolving_rec.model import CANDIDATES
 
 
 class _Model:
@@ -23,3 +26,19 @@ def test_g2rec_interest_tokens_change_item_only_scores():
     membership = np.asarray([[1.0, 0.0], [0.8, 0.2], [0.0, 1.0]])
     scorer = G2RecScorer(graph, membership, beta=0.5)
     assert not np.allclose(scorer.item_only_scores((0,)), scorer.interest_token_scores((0,)))
+
+
+def test_memento_mmr_avoids_redundant_memories():
+    documents = np.asarray([[1.0, 0.0], [0.99, 0.01], [0.0, 1.0]])
+    selected = maximal_marginal_relevance(documents, np.asarray([1.0, 0.0]), 0.4, 2)
+    assert selected == [0, 2]
+
+
+def test_llatte_combines_online_and_cached_upstream_stages():
+    scorer = LLaTTEScorer(_Model(), upstream_weight=0.5)
+    assert scorer.two_stage_scores((0, 1, 2)).shape == (3,)
+
+
+def test_self_evolving_search_contains_paper_discoveries():
+    assert {candidate.optimizer for candidate in CANDIDATES} == {"adagrad", "rmsprop"}
+    assert any(candidate.gated and candidate.multi_objective_reward for candidate in CANDIDATES)
