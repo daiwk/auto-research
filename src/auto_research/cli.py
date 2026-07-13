@@ -6,8 +6,12 @@ import sys
 from pathlib import Path
 
 from .config import ResearchConfig
-from .paper_methods import reproduce_mdcns, reproduce_sis, write_reproduction_report
 from .publish import publish_report
+from .reproductions.registry import get_adapter, list_adapters
+from .reproductions.reporting import (
+    write_legacy_combined_report,
+    write_reproduction_result,
+)
 from .runner import ResearchRunner
 
 
@@ -36,13 +40,13 @@ def build_parser() -> argparse.ArgumentParser:
     reproduce = commands.add_parser(
         "reproduce", help="run paper-specific baseline comparisons"
     )
-    reproduce.add_argument(
-        "--paper", choices=["sis", "mdcns", "all"], default="all"
-    )
+    adapter_keys = [adapter.key for adapter in list_adapters()]
+    reproduce.add_argument("--paper", choices=[*adapter_keys, "all"], default="all")
     reproduce.add_argument("--dataset-dir", type=Path, default=Path("data"))
     reproduce.add_argument(
-        "--output", type=Path, default=Path("runs/paper-reproduction.md")
+        "--output-dir", type=Path, default=Path("runs/reproductions")
     )
+    reproduce.add_argument("--output", type=Path, help=argparse.SUPPRESS)
     reproduce.add_argument("--seed", type=int, default=42)
     return parser
 
@@ -58,13 +62,24 @@ def main(argv: list[str] | None = None) -> int:
             print(publish_report(args.report, args.title, args.base, args.ready))
             return 0
         if args.command == "reproduce":
-            results = []
-            if args.paper in {"sis", "all"}:
-                results.append(reproduce_sis(args.dataset_dir, args.seed))
-            if args.paper in {"mdcns", "all"}:
-                results.append(reproduce_mdcns(args.dataset_dir, args.seed))
-            write_reproduction_report(results, args.output)
-            print(f"Report: {args.output.resolve()}")
+            adapters = (
+                list(list_adapters())
+                if args.paper == "all"
+                else [get_adapter(args.paper)]
+            )
+            entries = [
+                (adapter, adapter.run(args.dataset_dir, args.seed))
+                for adapter in adapters
+            ]
+            if args.output:
+                report = write_legacy_combined_report(entries, args.output)
+                print(f"Report: {report.resolve()}")
+            else:
+                for adapter, result in entries:
+                    report = write_reproduction_result(
+                        adapter, result, args.output_dir
+                    )
+                    print(f"{adapter.key}: {report.resolve()}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

@@ -62,7 +62,9 @@ auto-research reproduce --paper sis
 auto-research reproduce --paper mdcns
 ```
 
-SIS 使用 Tiny Shakespeare 构造 stale behavior policy 与 current policy，报告 importance-weight 方差、ESS 和接受率。MDCNS 将 MovieLens 100K 中评分不低于 4 的交互视为正反馈，按用户留最后一个交互测试，报告 Hit@10 和 NDCG@10。当前实测结果见 [docs/reproduction-results.md](docs/reproduction-results.md)。
+SIS 使用 Tiny Shakespeare 构造 stale behavior policy 与 current policy，报告 importance-weight 方差、ESS 和接受率。MDCNS 将 MovieLens 100K 中评分不低于 4 的交互视为正反馈，按用户留最后一个交互测试，报告 Hit@10 和 NDCG@10。论文与实测结果索引见 [docs/reproductions/README.md](docs/reproductions/README.md)，新增论文的开发约定见 [docs/architecture.md](docs/architecture.md)。
+
+运行产物不再堆到同一个文件，而是写入 `runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/`，每次运行包含独立的 `report.md` 与 `result.json`。
 
 这是保留论文核心算法的 Mac-scale mechanism reproduction，不声称复现论文中 Qwen 大模型或六数据集的 headline number；报告会明确记录这个范围。
 
