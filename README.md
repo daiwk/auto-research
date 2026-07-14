@@ -30,6 +30,8 @@
 | 核心机制 | `hstu` | HSTU · Meta | UVQK、非 softmax aggregation、U-gate、all-position training；matched SASRec 对照下 NDCG@10 -17.73% |
 | 核心机制 | `din` | DIN · Alibaba | candidate-conditioned local activation、Dice、CTR BCE；mean-pool 对照下 NDCG@10 -6.97% |
 | 核心机制 | `tiger` | TIGER · Google | RQ-VAE Semantic ID、collision token、自回归检索；matched random ID 对照下 NDCG@10 -39.16% |
+| 核心机制 | `transact-v2` | TransAct V2 · Pinterest | 候选锚定 lifelong retrieval、early fusion、sampled-softmax NAL；NDCG@10 +92.65%，头部占比明显上升 |
+| 核心机制 | `pinfm` | PinFM · Pinterest | NTL/MTL/FTL 预训练、DCAT、下游微调；validation -6.46%，test -3.57%，长尾覆盖显著增加 |
 | 核心机制 | `sis` | SIS | 论文的 off-policy token importance-sampling 变换 |
 | 核心机制 | `mdcns` | MDCNS | 三源负采样、分歧/共识筛选与双模型更新 |
 | 核心机制 | `memento` | Memento · Meta | query-conditioned MMR 长历史检索 |
@@ -103,6 +105,8 @@ auto-research reproduce --help
 auto-research reproduce --paper memento --seed 42
 auto-research reproduce --paper sasrec --seed 42
 auto-research reproduce --paper hstu --seed 42
+auto-research reproduce --paper transact-v2 --seed 42
+auto-research reproduce --paper pinfm --seed 42
 auto-research reproduce --paper self-evolving-rec --seed 42
 auto-research reproduce --paper all --seed 42
 

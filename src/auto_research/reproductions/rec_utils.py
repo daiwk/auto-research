@@ -159,6 +159,49 @@ def ranking_metrics(
     }
 
 
+def batched_ranking_metrics(
+    sequences: MovieLensSequences,
+    scorer,
+    batch_size: int,
+    target: str = "test",
+    top_k: int = 10,
+) -> dict[str, float]:
+    """Exact full-catalog metrics with a scorer that batches user histories."""
+    targets = sequences.test if target == "test" else sequences.validation
+    if len(sequences.train) != len(targets):
+        raise ValueError("sequence and target counts must match")
+    contexts = [
+        history + ((sequences.validation[index],) if target == "test" else ())
+        for index, history in enumerate(sequences.train)
+    ]
+    hits = ndcg = 0.0
+    recommended: list[int] = []
+    for start in range(0, len(contexts), batch_size):
+        batch_contexts = contexts[start : start + batch_size]
+        scores = np.asarray(scorer(batch_contexts), dtype=np.float64).copy()
+        if scores.shape != (len(batch_contexts), sequences.item_count):
+            raise ValueError("batched scorer returned an unexpected score shape")
+        for offset, (context, row) in enumerate(zip(batch_contexts, scores)):
+            row[list(set(context))] = -np.inf
+            cutoff = min(top_k, len(row))
+            top = np.argpartition(row, -cutoff)[-cutoff:]
+            top = top[np.argsort(row[top])[::-1]]
+            recommended.extend(int(item) for item in top)
+            positions = np.flatnonzero(top == targets[start + offset])
+            if positions.size:
+                hits += 1.0
+                ndcg += 1.0 / math.log2(int(positions[0]) + 2)
+    count = len(targets)
+    pop = sequences.popularity / max(sequences.popularity.sum(), 1.0)
+    head = set(np.argsort(pop)[-max(1, sequences.item_count // 10) :])
+    return {
+        "hit_at_10": hits / count,
+        "ndcg_at_10": ndcg / count,
+        "head_share_at_10": sum(item in head for item in recommended) / len(recommended),
+        "mean_popularity_at_10": float(np.mean(pop[recommended])),
+    }
+
+
 def summarize_runs(runs: list[dict[str, float]]) -> dict[str, float]:
     return {
         key: float(np.mean([run[key] for run in runs]))

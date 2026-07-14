@@ -1,0 +1,17 @@
+{
+  "dataset": "MovieLens-100K",
+  "protocol": "chronological leave-two-out, full-catalog ranking",
+  "seeds": [42, 43, 44],
+  "pretrain_steps": 160,
+  "finetune_steps": 160,
+  "validation": {
+    "scratch_dcat": {"ndcg_at_10": 0.0140930098, "ndcg_at_10_std": 0.0031108571},
+    "pinfm": {"ndcg_at_10": 0.0131820702, "ndcg_at_10_std": 0.0059409469},
+    "ndcg_gain_percent": -6.4637691199
+  },
+  "test": {
+    "scratch_dcat": {"parameters": 165426, "hit_at_10": 0.0300429185, "hit_at_10_std": 0.0030347931, "ndcg_at_10": 0.0134342081, "ndcg_at_10_std": 0.0017049289, "head_share_at_10": 0.7556866953},
+    "pinfm": {"parameters": 165426, "hit_at_10": 0.0268240343, "hit_at_10_std": 0.0113889008, "ndcg_at_10": 0.0129549689, "ndcg_at_10_std": 0.0064796116, "head_share_at_10": 0.2016452074}
+  },
+  "test_ndcg_gain_percent": -3.5673052842
+}
