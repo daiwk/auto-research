@@ -48,6 +48,7 @@
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)
 - 2026-01 · [LLaTTE](../2601.20083-llatte/README.md)
 - 2026-05 · [Memento](../2605.24051-memento/README.md)
+- 2026-05 · [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md) · semantic ads retrieval / predictability
 - 2026-06 · [G2Rec](../2606.20554-g2rec/README.md) · [CMSL](../2606.28533-cmsl/README.md)
 - 2026-07 · [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)
 

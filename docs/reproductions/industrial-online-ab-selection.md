@@ -40,6 +40,7 @@
 | [HSTU](https://arxiv.org/abs/2402.17152) | Meta | generative sequential ranking、long history | Engagement +12.4%；Consumption +4.4% |
 | [TransAct V2](https://arxiv.org/abs/2506.02267) | Pinterest | lifelong sequence、candidate NN、next-action loss | Repin +6.35%；Hide -12.80%；Time Spent +1.41% |
 | [PinFM](https://arxiv.org/abs/2507.12704) | Pinterest | sequence foundation model、DCAT、pretrain/fine-tune | HF Sitewide Saves +1.20%；Fresh Saves +5.70%；I2I +0.72% |
+| [LLM Retrieval](https://arxiv.org/abs/2605.21969) | Meta | LLM hierarchical attributes、semantic graph、predictability | top-line +0.45%；final-stage recall +1.2%；A/A' difference -8.62% |
 
 ## 用户指定的经典基线例外
 
@@ -73,7 +74,7 @@
 | 已实现 | Cluster GOOBS (2607.00448) | Meta | CTR +53%，头部曝光集中度下降 |
 | 候选保留 | Zero-shot Cross-domain KD for YouTube Music (2603.28994) | Google | 两周 live experiments；与现有蒸馏 adapter 部分重叠 |
 | 候选保留 | MM-LLM Multimedia Understanding (2605.09338) | Meta | engagement +0.02%；与现有语义特征方向重叠 |
-| 候选保留 | LLM Retrieval for Stable Ad Recommendations (2605.21969) | Meta | top-line +0.45%、final-stage recall +1.2% |
+| 已实现 | LLM Retrieval for Stable Ad Recommendations (2605.21969) | Meta | top-line +0.45%、final-stage recall +1.2%、A/A' difference -8.62% |
 
 排除示例：SilverTorch 首次提交于 2025-11，超出时间窗；Fine-Tuned LLM as a Complementary Predictor 的部署属于 Pinterest；Rec-Distill 不属于 Google/Meta，但已按扩大后的公司范围实现。
 

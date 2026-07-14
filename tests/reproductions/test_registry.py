@@ -19,6 +19,7 @@ def test_builtin_adapters_are_discoverable():
         "kar",
         "learn",
         "llatte",
+        "llm-ad-retrieval",
         "longer",
         "lsvcr",
         "lum",

@@ -21,6 +21,6 @@
 | 2025-10 | [PLUM](../2510.07784-plum/README.md) · [OneTrans](../2510.26104-onetrans/README.md) |
 | 2026-01 | [HyFormer](../2601.12681-hyformer/README.md) · [LLaTTE](../2601.20083-llatte/README.md) |
 | 2026-02 | [MixFormer](../2602.14110-mixformer/README.md) · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md) |
-| 2026-05 | [MDCNS](../2605.19651-mdcns/README.md) · [Memento](../2605.24051-memento/README.md) · [Rec-Distill](../2605.29755-rec-distill/README.md) |
+| 2026-05 | [MDCNS](../2605.19651-mdcns/README.md) · [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md) · [Memento](../2605.24051-memento/README.md) · [Rec-Distill](../2605.29755-rec-distill/README.md) |
 | 2026-06 | [G2Rec](../2606.20554-g2rec/README.md) · [CMSL](../2606.28533-cmsl/README.md) |
 | 2026-07 | [Cluster GOOBS](../2607.00448-cluster-goobs/README.md) · [SIS](../2607.04728-sis/README.md) |

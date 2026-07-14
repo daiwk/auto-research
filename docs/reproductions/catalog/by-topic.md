@@ -16,6 +16,7 @@
 - [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：LLM agent 自动研究闭环（当前概念验证）
 - [PinFM](../2507.12704-pinfm/README.md)：推荐 foundation model、预训练/微调
 - [LLaTTE](../2601.20083-llatte/README.md)：LLM semantic feature（当前概念验证）
+- [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：domain SFT、层级广告属性、语义图召回与扰动稳定性
 
 ## 生成式召回与端到端推荐
 
@@ -28,6 +29,7 @@
 ## 冷启动与语义-行为对齐
 
 - [PRECISE](../2412.06308-precise/README.md)：LLM semantic + collaborative ID、cold-item 建模
+- [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：creative 语义属性与 primary/shadow 稳定召回
 - [SaviorRec](../2508.01375-saviorrec/README.md)：行为监督内容 encoder、RQ Semantic ID、zero-init MBA
 
 ## 采样、蒸馏与强化学习

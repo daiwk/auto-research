@@ -1,0 +1,48 @@
+{
+  "paper": "2605.21969",
+  "adapter": "llm-ad-retrieval",
+  "dataset": "MovieLens-100K titles, genres, and chronological positive feedback",
+  "seeds": [42, 43, 44],
+  "deterministic_across_evaluation_seeds": true,
+  "setup": {
+    "users": 150,
+    "items": 180,
+    "k": 20,
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "domain_sft_steps": 80,
+    "attribute_head_steps": 160,
+    "selected_semantic_weight": 0.5
+  },
+  "training": {
+    "domain_sft_initial_loss": 0.4682000294327736,
+    "domain_sft_final_loss": 0.0003651683044154197,
+    "attribute_head_initial_loss": 0.6646004855632782,
+    "attribute_head_final_loss": 0.014673176780343055,
+    "primary_shadow_exact_agreement": 0.9388888888888889
+  },
+  "results": {
+    "collaborative_graph": {
+      "recall_at_20": 0.28,
+      "ndcg_at_20": 0.11438165872954466
+    },
+    "collaborative_plus_llm_graph": {
+      "recall_at_20": 0.31333333333333335,
+      "ndcg_at_20": 0.11785215936791849
+    },
+    "recall_relative_gain_percent": 11.90476190476191,
+    "ndcg_relative_gain_percent": 3.0341408552046145
+  },
+  "stability": {
+    "lexical_neighbor_jaccard_at_20": 0.5463517935117492,
+    "llm_neighbor_jaccard_at_20": 0.7419095890297386,
+    "lexical_mean_score_difference": 0.04282143095301257,
+    "llm_mean_score_difference": 0.009696347556180424,
+    "score_difference_reduction_percent": 77.35632056102911
+  },
+  "paper_online_ab": {
+    "topline_lift_percent": 0.45,
+    "final_stage_recall_lift_percent": 1.2,
+    "aa_difference_reduction_percent": 8.62,
+    "mad_improvement_percent": 45.0
+  }
+}
