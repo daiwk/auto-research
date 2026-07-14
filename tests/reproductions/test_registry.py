@@ -7,12 +7,15 @@ from auto_research.reproductions.reporting import write_reproduction_result
 
 def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
+        "bahe",
+        "beque",
         "cluster-goobs",
         "cmsl",
         "din",
         "g2rec",
         "hstu",
         "hyformer",
+        "kar",
         "llatte",
         "longer",
         "m6rec",
@@ -49,6 +52,9 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("transact-v2").paper.arxiv_id == "2506.02267"
     assert get_adapter("m6rec").paper.has_online_ab
     assert get_adapter("onerec-v2").paper.has_online_ab
+    assert get_adapter("kar").paper.has_online_ab
+    assert get_adapter("bahe").paper.has_online_ab
+    assert get_adapter("beque").paper.has_online_ab
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

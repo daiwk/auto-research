@@ -1,0 +1,17 @@
+{
+  "dataset": "MovieLens 100K title text",
+  "protocol": {"history_items": 12, "train_examples": 5000, "test_examples": 1000, "steps": 80, "seeds": [42, 43, 44]},
+  "model": "prajjwal1/bert-tiny",
+  "auc": {
+    "full_text_upper_tuning": {"values": [0.60464286, 0.58940952, 0.59865714], "mean": 0.59756984, "std": 0.00767465},
+    "bahe_atomic_hierarchical": {"values": [0.59495714, 0.56965238, 0.57545238], "mean": 0.58002063, "std": 0.01325649},
+    "mean_absolute_gain": -0.01754921,
+    "mean_relative_gain_percent": -2.937
+  },
+  "latency_milliseconds_per_example": {
+    "full_text_upper_tuning": {"mean": 0.56513807, "std": 0.05715729},
+    "bahe_atomic_hierarchical": {"mean": 0.26216481, "std": 0.05653172},
+    "mean_relative_change_percent": -53.610
+  },
+  "checkpoint_committed": false
+}

@@ -4,6 +4,11 @@
 
 - 2017-06 · [DIN](../1706.06978-din/README.md) · CTR ranking
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md) · LLM / parameter-efficient tuning
+- 2023-11 · [BEQUE](../2311.03758-beque/README.md) · LLM query rewriting / PRO
+
+## Ant Group
+
+- 2024-03 · [BAHE](../2403.19347-bahe/README.md) · long-text CTR / efficiency
 
 ## ByteDance / Douyin / TikTok
 
@@ -19,6 +24,10 @@
 - 2023-05 · [TIGER](../2305.05065-tiger/README.md)
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)
+
+## Huawei
+
+- 2023-06 · [KAR](../2306.10933-kar/README.md) · LLM knowledge augmentation
 
 ## Kuaishou
 

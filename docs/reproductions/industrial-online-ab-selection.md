@@ -17,6 +17,9 @@
 
 | Paper | Organization | Area | Quantified online A/B |
 |---|---|---|---|
+| [KAR](https://arxiv.org/abs/2306.10933) | Huawei | LLM 知识生成、hybrid-expert、CTR/召回 | 新闻 Recall +7%；音乐播放量 +1.70%、时长 +1.57% |
+| [BAHE](https://arxiv.org/abs/2403.19347) | Ant Group | 原子行为缓存、长文本 CTR、训练效率 | 两周广告 A/B：CTR +9.65%、CPM +2.41% |
+| [BEQUE](https://arxiv.org/abs/2311.03758) | Alibaba | Query rewrite、离线反馈、PRO | 淘宝搜索 14 天：GMV +0.40%、交易数 +0.34%、UV +0.33% |
 | [M6-Rec](https://arxiv.org/abs/2205.08084) | Alibaba | 预训练语言模型、option-adapter、开放式推荐 | Alipay mini-app retrieval 相对 CTR >+1.0%，后全量部署 |
 | [OneRec-V2](https://arxiv.org/abs/2508.20900) | Kuaishou | lazy decoder、真实反馈 RL、GBPO | 5% 流量一周；Kuaishou stay +0.467%，Lite +0.741% |
 | [PLUM](https://arxiv.org/abs/2510.07784) | Google DeepMind / YouTube | LLM CPT、Semantic ID、生成式召回 | LFV Panel CTR +0.76%；Shorts +4.96% |

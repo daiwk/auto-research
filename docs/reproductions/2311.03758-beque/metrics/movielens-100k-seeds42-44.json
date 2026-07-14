@@ -1,0 +1,14 @@
+{
+  "dataset": "MovieLens 100K catalog text (public query-rewrite proxy)",
+  "protocol": {"train_examples": 600, "test_examples": 100, "sft_steps": 40, "pro_steps": 15, "beams": 4, "seeds": [42, 43, 44]},
+  "model": "google-t5/t5-small",
+  "metrics": {
+    "feedback": {"sft_mean": 0.62102339, "sft_std": 0.08473482, "pro_mean": 0.80750395, "pro_std": 0.20024413, "relative_gain_percent": 30.028},
+    "hit_at_1": {"sft_mean": 0.32333333, "sft_std": 0.04041452, "pro_mean": 0.51333333, "pro_std": 0.11930353, "relative_gain_percent": 58.763},
+    "relevance": {"sft_mean": 0.26115670, "sft_std": 0.04670949, "pro_mean": 0.28175500, "pro_std": 0.07901707, "relative_gain_percent": 7.887},
+    "increment": {"sft_mean": 0.18266679, "sft_std": 0.03608866, "pro_mean": 0.06207804, "pro_std": 0.01546598, "relative_gain_percent": -66.016}
+  },
+  "feedback_seed_deltas": [0.00562186, 0.13102026, 0.42279956],
+  "supervised_target_in_preference_candidates": false,
+  "checkpoint_committed": false
+}

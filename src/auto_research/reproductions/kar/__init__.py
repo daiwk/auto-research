@@ -1,0 +1,1 @@
+"""KAR reproduction."""
