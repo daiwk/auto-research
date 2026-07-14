@@ -1,0 +1,18 @@
+{
+  "paper": "2508.01375 SaviorRec",
+  "dataset": "MovieLens-100K genres and chronological co-interactions",
+  "protocol": {"seeds": [42, 43, 44], "encoder_steps": 160, "ranker_steps": 180, "semantic_codebooks": 3, "codebook_size": 16, "cold_definition": "bottom quartile of training candidate frequency"},
+  "per_seed": {
+    "42": {"content_auc": 0.6063662, "content_cold_auc": 0.4601140, "saviorrec_auc": 0.6003782, "saviorrec_cold_auc": 0.4045584, "mba_l2": 0.8774644},
+    "43": {"content_auc": 0.5706413, "content_cold_auc": 0.3924501, "saviorrec_auc": 0.6041437, "saviorrec_cold_auc": 0.6039886, "mba_l2": 0.8039667},
+    "44": {"content_auc": 0.5833535, "content_cold_auc": 0.5270655, "saviorrec_auc": 0.5832463, "saviorrec_cold_auc": 0.4665242, "mba_l2": 0.8701724}
+  },
+  "aggregate": {
+    "content_auc_mean": 0.586787, "content_auc_std": 0.014785,
+    "saviorrec_auc_mean": 0.595923, "saviorrec_auc_std": 0.009095,
+    "content_cold_auc_mean": 0.459877, "content_cold_auc_std": 0.054957,
+    "saviorrec_cold_auc_mean": 0.491690, "saviorrec_cold_auc_std": 0.083339,
+    "auc_relative_percent": 1.5569, "cold_auc_relative_percent": 6.9181,
+    "positive_auc_seeds": 1, "positive_cold_auc_seeds": 1
+  }
+}

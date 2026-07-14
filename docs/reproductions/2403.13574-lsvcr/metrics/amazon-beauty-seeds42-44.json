@@ -1,0 +1,11 @@
+{
+  "paper": "2403.13574 LSVCR",
+  "dataset": "Amazon Beauty 5-core product interactions and real review text",
+  "protocol": {"seeds": [42, 43, 44], "users": 80, "items": 688, "comments": 748, "train": 508, "test": 80, "llm": "SmolLM2-135M", "lora_trainable": 230400, "lora_steps": 24, "alignment_steps": 80, "finetune_steps": 120},
+  "per_seed": {
+    "42": {"baseline_item_ndcg_at_10": 0.0291667, "lsvcr_item_ndcg_at_10": 0.0, "baseline_comment_ndcg_at_10": 0.0178995, "lsvcr_comment_ndcg_at_10": 0.0252223},
+    "43": {"baseline_item_ndcg_at_10": 0.0039433, "lsvcr_item_ndcg_at_10": 0.0, "baseline_comment_ndcg_at_10": 0.0041667, "lsvcr_comment_ndcg_at_10": 0.0095501},
+    "44": {"baseline_item_ndcg_at_10": 0.0079295, "lsvcr_item_ndcg_at_10": 0.0178835, "baseline_comment_ndcg_at_10": 0.0089968, "lsvcr_comment_ndcg_at_10": 0.0119466}
+  },
+  "aggregate": {"baseline_item_ndcg_mean": 0.0136798, "lsvcr_item_ndcg_mean": 0.0059612, "item_relative_percent": -56.4238, "baseline_comment_ndcg_mean": 0.0103543, "lsvcr_comment_ndcg_mean": 0.0155730, "comment_relative_percent": 50.4013, "positive_item_seeds": 1, "positive_comment_seeds": 3}
+}

@@ -1,0 +1,42 @@
+{
+  "paper": "2502.10157 SessionRec",
+  "dataset": "KuaiRand-Pure standard exposure log",
+  "protocol": {
+    "source_rows": 350000,
+    "maximum_users_scanned": 2000,
+    "retained_users": 1093,
+    "items": 3868,
+    "train_sessions": 4272,
+    "validation_sessions": 1093,
+    "test_sessions": 1093,
+    "session_gap_minutes": 30,
+    "positive": "is_click=1 or long_view=1",
+    "seeds": [42, 43, 44],
+    "steps": 180,
+    "rank_weight": 0.01,
+    "rank_weight_selection": "seed-42 validation search over [0, 0.01, 0.1]; 0 and 0.01 tied at NDCG@20=0.002856, selected 0.01 to retain the paper loss"
+  },
+  "per_seed": {
+    "42": {"item_transformer_ndcg_at_20": 0.0056890255, "sessionrec_ndcg_at_20": 0.0042987171},
+    "43": {"item_transformer_ndcg_at_20": 0.0049905385, "sessionrec_ndcg_at_20": 0.0027975952},
+    "44": {"item_transformer_ndcg_at_20": 0.0034747147, "sessionrec_ndcg_at_20": 0.0039371664}
+  },
+  "aggregate": {
+    "item_transformer": {
+      "recall_at_20_mean": 0.0118938701,
+      "recall_at_20_std": 0.0022719830,
+      "ndcg_at_20_mean": 0.0047180929,
+      "ndcg_at_20_std": 0.0009242882,
+      "seconds_mean": 11.3195
+    },
+    "sessionrec_transformer": {
+      "recall_at_20_mean": 0.0093016163,
+      "recall_at_20_std": 0.0012006721,
+      "ndcg_at_20_mean": 0.0036778263,
+      "ndcg_at_20_std": 0.0006396795,
+      "seconds_mean": 10.5310
+    },
+    "sessionrec_ndcg_relative_percent": -22.0485,
+    "positive_seeds": 1
+  }
+}

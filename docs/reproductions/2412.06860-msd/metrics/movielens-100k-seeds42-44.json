@@ -1,0 +1,11 @@
+{
+  "paper": "2412.06860 MSD",
+  "dataset": "MovieLens-100K title/genre CTR",
+  "protocol": {"seeds": [42, 43, 44], "users": 30, "teacher_items": 160, "teacher": "SmolLM2-135M-Instruct", "student": "T5-small", "distill_steps": 32, "ranker_steps": 100, "lora_trainable": 147456, "relevant_history_top_k": 3},
+  "per_seed": {
+    "42": {"distill_loss_initial": 2.395505, "distill_loss_final": 1.545078, "id_auc": 0.6790754, "msd_auc": 0.7024676, "msd_seconds": 24.8799},
+    "43": {"distill_loss_initial": 2.378364, "distill_loss_final": 1.132878, "id_auc": 0.6819084, "msd_auc": 0.7209219, "msd_seconds": 20.8835},
+    "44": {"distill_loss_initial": 2.357543, "distill_loss_final": 1.170755, "id_auc": 0.6924727, "msd_auc": 0.6619053, "msd_seconds": 20.2609}
+  },
+  "aggregate": {"id_auc_mean": 0.6844855, "id_auc_std": 0.0057650, "msd_auc_mean": 0.6950983, "msd_auc_std": 0.0246505, "relative_percent": 1.5505, "positive_seeds": 2}
+}
