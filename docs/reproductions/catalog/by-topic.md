@@ -2,6 +2,7 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [LUM](../2502.08309-lum/README.md)：next-condition-item、group query、generative-to-discriminative
 - [MSD](../2412.06860-msd/README.md)：teacher knowledge、student 自回归蒸馏、LoRA CTR alignment
 - [LSVCR](../2403.13574-lsvcr/README.md)：LoRA LLM preference、双序列 SSC/VCC alignment
 - [LEARN](../2405.03988-learn/README.md)：冻结 LLM CEG、PCH 协同域适配

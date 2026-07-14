@@ -37,6 +37,7 @@
 | 完整核心链路 | `sasrec` | SASRec | causal self-attention、point-wise FFN、pairwise BCE；全库 NDCG@10 0.02933，与 popularity 基本持平 |
 | 完整核心链路 | `lsvcr` | LSVCR · Kuaishou | q/v-LoRA、双序列 SSC/VCC 对齐；comment NDCG +50.40%，item -56.42% |
 | 完整核心链路 | `msd` | MSD · Meituan | teacher→T5 自回归蒸馏、LoRA、频次缓存融合；AUC +1.55% |
+| 完整核心链路 | `lum` | LUM · Alibaba | next-condition-item、group query、DLRM 知识利用；AUC +14.60% |
 | 核心机制 | `sessionrec` | SessionRec · Meituan | KuaiRand 真实 session、多正例召回与曝光困难负例；NDCG@20 -22.05% |
 | 核心机制 | `saviorrec` | SaviorRec · Alibaba | 行为对齐 encoder、RQ-SID、zero-init MBA、双向注意力；cold AUC +6.92% |
 | 核心机制 | `hstu` | HSTU · Meta | UVQK、非 softmax aggregation、U-gate、all-position training；matched SASRec 对照下 NDCG@10 -17.73% |
@@ -107,7 +108,7 @@ Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 
 
 博客选出的 KAR、BAHE、BEQUE 均使用 MovieLens-100K：KAR 会用本地小型指令模型真实生成知识，BAHE 会落盘复用原子行为表示，BEQUE 会训练 seq2seq 模型并用公开目录实现离线检索反馈。三者都保留生产论文的核心训练链路，但不声称 MovieLens 等价于企业私有日志。
 
-博客两个“工业界+落地”章节已进一步全量解析：94 个主条目、138 个 arXiv 链接。新增 PinRec、GenRank、LEARN、NoteLLM、SessionRec、SaviorRec、LSVCR、MSD，并把 EGA-V1、LUM 等原文 A/B 合格论文放入持续实现队列；详见[专项审计](docs/reproductions/blog-llm-rec-industrial-audit.md)。
+博客两个“工业界+落地”章节已进一步全量解析：94 个主条目、138 个 arXiv 链接。新增 PinRec、GenRank、LEARN、NoteLLM、SessionRec、SaviorRec、LSVCR、MSD、LUM；EGA-V1 等依赖专有广告目标的论文保留在审计队列，不以点击代理冒充复现。详见[专项审计](docs/reproductions/blog-llm-rec-industrial-audit.md)。
 
 ## 运行论文复现
 

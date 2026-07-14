@@ -1,0 +1,11 @@
+{
+  "paper": "2502.08309 LUM",
+  "dataset": "MovieLens-1M ratings, genres, chronological behavior",
+  "protocol": {"seeds": [42, 43, 44], "users": 1000, "items": 3381, "conditions": 3, "pretrain_examples": 121734, "train": 6000, "test": 1500, "pretrain_steps": 200, "ranker_steps": 160, "history_length": 16},
+  "per_seed": {
+    "42": {"pretrain_initial": 4.623697, "pretrain_final": 4.410930, "dlrm_auc": 0.5660772, "lum_auc": 0.6570409},
+    "43": {"pretrain_initial": 4.617361, "pretrain_final": 4.391461, "dlrm_auc": 0.6073366, "lum_auc": 0.6717141},
+    "44": {"pretrain_initial": 4.646470, "pretrain_final": 4.402365, "dlrm_auc": 0.5735757, "lum_auc": 0.6732561}
+  },
+  "aggregate": {"dlrm_auc_mean": 0.5823298, "dlrm_auc_std": 0.0179455, "lum_auc_mean": 0.6673370, "lum_auc_std": 0.0073076, "relative_percent": 14.5978, "positive_seeds": 3}
+}

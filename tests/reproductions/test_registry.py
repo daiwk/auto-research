@@ -21,6 +21,7 @@ def test_builtin_adapters_are_discoverable():
         "llatte",
         "longer",
         "lsvcr",
+        "lum",
         "m6rec",
         "mdcns",
         "memento",
