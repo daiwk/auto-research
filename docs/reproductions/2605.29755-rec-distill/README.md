@@ -37,6 +37,8 @@ $$\hat y=\frac{1}{1+\frac{r_s}{p_X}(e^{-z}+1-r_++b_s)},\qquad T'_2=f_S(T_1).$$
 
 ## 本地复现
 
+> **本地对照口径**：迁移基线是相同日程训练的 Raw Student；实验组是 Rec-Distill Student；NDCG@10 从 0.0039 降至 0.0036，transferability **-4.11%**。Large Teacher 只用于确认 teacher gain，不是 serving baseline，也不能把较低 head share 当作蒸馏提升。
+
 MovieLens-100K 上 96d/3-layer teacher 对比 48d/1-layer student。物化 12,000 行、16 candidates 的 teacher logits（0.384 MB）；student 使用相同 160 batch + 80 stream 日程。`α∈{0.1,0.3,1,3}` 只看 validation，选中 `α=3` 后报告 test。
 
 | Model | Hit@10 | NDCG@10 | Head share@10 |

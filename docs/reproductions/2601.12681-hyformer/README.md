@@ -36,6 +36,8 @@ $$Q^{(l)}=Q+\operatorname{PerTokenFFN}(\operatorname{TokenMix}(Q)).$$
 
 ## 本地复现
 
+> **本地对照口径**：基线是独立 sequence Transformer+dense MLP 的 Late Fusion；实验组是 HyFormer；NDCG@10 从 0.0048 升至 0.0116（**+143.77%**），head share 同时 +30.90pt。这是 query co-evolution 架构消融，不是相对 DIN。
+
 2 queries、2 NS tokens、64d、2 layers、32 行为长度；对比独立 sequence Transformer + dense MLP 的 late fusion。每组 240 step，三个 seed。
 
 | Architecture | Hit@10 | NDCG@10 | Head share@10 |

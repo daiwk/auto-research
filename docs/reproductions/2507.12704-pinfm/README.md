@@ -52,6 +52,8 @@ X_c^l=g\!\left(Attn(Q_c^l,[K_u^l;K_c^l],[V_u^l;V_c^l]),X_c^{l-1}\right).
 
 ## 本地复现与两轮迭代
 
+> **本地对照口径**：基线是 scratch DCAT；实验组是预训练后微调的 PinFM；按 validation 选中的配置在 test NDCG@10 **-3.57%**，head share -55.40pt。第二轮 test 的偶然 +1.54% 未被选用，不能当作主结果。
+
 MovieLens-100K，932 个有效用户、1,682 个物品，时间顺序 leave-two-out、全库排序；两个模型均为 165,426 参数。scratch DCAT 直接做下游训练；PinFM 先做 NTL+MTL+FTL，再以 backbone 1/10 学习率微调。Apple MPS，种子 42/43/44。
 
 | Round | Pretrain / finetune | Validation conclusion | Test NDCG change |

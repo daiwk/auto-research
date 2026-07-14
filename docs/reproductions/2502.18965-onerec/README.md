@@ -49,6 +49,8 @@ Kuaishou 主场景使用 1% 流量严格 A/B：
 
 ## 本地复现
 
+> **本地对照口径**：基线是 Session Generator SFT；实验组是 reward model+self-hard DPO 后的 OneRec；NDCG@10 从 0.01565 降至 0（**-100%**）。这是 preference alignment 阶段消融，不是 OneRec 相对 DIN 的结果。
+
 MovieLens-1M 上训练三层 RQ-VAE SID `[256,128,64]`；96d、2-layer encoder-decoder 使用 4 个 top-1 sparse experts，一次生成 3 个 item session。先做 240-step session SFT，再训练 120-step personalized reward model，从生成器 12-beam session 中选 96 组 self-hard winner/loser，执行 80-step DPO。测试时只允许生成 catalog 中存在的 SID prefix。
 
 | Stage | Hit@10 | NDCG@10 | Head share@10 | Valid session |

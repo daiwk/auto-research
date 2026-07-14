@@ -97,6 +97,10 @@ def build_model(kind: str, item_count: int, item_features: np.ndarray, config: D
 
 
 def train_model(kind: str, data, config: DINConfig, seed: int):
+    torch, _ = require_backend()
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
     model = build_model(kind, data.item_count, data.item_features, config)
     model, device, torch = initialize(model, seed)
     rows = training_examples(data.train, config.sequence_length)

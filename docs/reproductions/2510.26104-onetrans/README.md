@@ -37,6 +37,8 @@ $$X^{(n)}=\operatorname{MixedFFN}(\operatorname{Norm}(Z^{(n)}))+Z^{(n)}.$$
 
 ## 本地复现
 
+> **本地对照口径**：基线是独立 sequence encoder 后与 candidate 交互的 Encode-then-Interact；实验组是 OneTrans；NDCG@10 从 0.0069 升至 0.0154（**+123.58%**），但 head share 达 92%。这是统一架构相对 stacked 架构的消融，不是相对 DIN。
+
 MovieLens-100K，64d、2 layers、32 S-tokens、2 NS-tokens，240 step、三个 seed；对照是独立 sequence encoder 后再与 candidate features 交互。
 
 | Architecture | Hit@10 | NDCG@10 | Head share@10 |

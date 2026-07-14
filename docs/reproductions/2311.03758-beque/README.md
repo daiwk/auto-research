@@ -42,6 +42,8 @@ $$\mathcal L_{PRO}=-\sum_{i=1}^{K-1}\log\frac{\exp(s_i/\tau_i)}{\sum_{j=i}^{K}\e
 
 ## 本地复现
 
+> **本地对照口径**：基线是 T5 SFT；实验组是同一模型继续做 PRO；主组合反馈从 0.62102 升至 0.80750（**+30.03%**），但 increment **-66.02%**。这是对齐阶段消融；DIN 不适用于 query rewriting 任务。
+
 MovieLens 标题/类型构造公开商品目录式 query-rewrite 任务。T5-small 先 SFT，随后每个 query 生成 4 个 beam；倒排目录计算 relevance、increment 和 Hit@1，构造 160 组偏序并运行 PRO。3 seeds、600 train / 100 test、40 SFT + 15 PRO steps：
 
 | Metric | SFT mean ± std | SFT + PRO mean ± std | 相对变化 |

@@ -9,6 +9,9 @@ import numpy as np
 from .rec_utils import load_movielens_sequences
 
 
+FAIR_DIN_STEPS = 100
+
+
 @dataclass(frozen=True)
 class CompactSequences:
     train: tuple[tuple[int, ...], ...]
@@ -20,6 +23,11 @@ class CompactSequences:
     @property
     def item_count(self) -> int:
         return len(self.features)
+
+    @property
+    def item_features(self) -> np.ndarray:
+        """Compatibility alias used by the shared DIN baseline."""
+        return self.features
 
 
 def compact_movielens(
@@ -68,6 +76,28 @@ def evaluate_scores(data: CompactSequences, scorer, k: int = 10) -> dict[str, fl
     }
 
 
+def run_din_baseline(data: CompactSequences, seeds, steps: int):
+    """Train DIN on the exact split and catalog used by a reproduction."""
+    from .din.model import DINConfig, score_all, train_model
+    from .rec_utils import summarize_runs
+
+    config = DINConfig(steps=steps, batch_size=48)
+    runs = []
+    training = []
+    for seed in seeds:
+        model, metrics = train_model("din", data, config, seed)
+        runs.append(
+            evaluate_scores(
+                data,
+                lambda history, model=model: score_all(
+                    model, history, data.item_count, config
+                ),
+            )
+        )
+        training.append(metrics)
+    return summarize_runs(runs), training
+
+
 def require_torch():
     try:
         import torch
@@ -96,4 +126,3 @@ def padded_histories(histories, length: int, device, torch):
         recent = tuple(history[-length:])
         rows.append((recent[0],) * (length - len(recent)) + recent)
     return torch.tensor(rows, dtype=torch.long, device=device)
-

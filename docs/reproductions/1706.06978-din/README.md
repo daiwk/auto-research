@@ -43,6 +43,8 @@ Dice 用批次统计得到 \(p(s)=\sigma(\mathrm{BN}(s))\)，并计算
 
 ## 本地复现
 
+> **本地对照口径**：基线是移除 candidate-aware attention、改用 mean pooling 的同参数模型；实验组是 DIN；主指标 NDCG@10 从 0.01783 降至 0.01659（**-6.97%**）。这是 DIN 核心注意力的内部消融，不是相对其他推荐模型的提升。
+
 MovieLens-100K 自动下载到本地；932 个有效用户、1,682 个物品，按用户时间顺序 leave-two-out，并对完整物品库排名。DIN 与 mean-pool 对照使用相同 embedding、MLP、参数量和训练预算；种子 42/43/44，每个 320 step，Apple MPS。
 
 | Model | Hit@10 | NDCG@10 | Head share@10 |

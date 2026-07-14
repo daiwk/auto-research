@@ -2,7 +2,9 @@
 
 这里是论文专用 adapter 的长期实验索引。每篇论文的模型、实验、报告和结论文档独立存放，不与通用 topic research loop 混写。
 
-后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选已合并到[统一筛选文档](industrial-online-ab-selection.md#google--meta-2026-专项审计)。
+每篇文档的“本地复现”都必须以“**本地对照口径**”开头，明确基线、实验组、主指标、相对变化和比较性质。内部模块消融、跨模型基线、效率对照与统一 DIN 比较不得混写成同一种“提升”。
+
+后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。七篇近期工业论文采用[统一 DIN 公平比较协议](din-fair-benchmark.md)，主结果相对 DIN，论文模块消融单独报告。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选已合并到[统一筛选文档](industrial-online-ab-selection.md#google--meta-2026-专项审计)。
 
 个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。
 
@@ -49,13 +51,13 @@
 | 核心机制 | `mdcns` · [MDCNS](2605.19651-mdcns/README.md) | 论文公开离线结果 | 作者 Beauty 切分；三源采样与双模型更新实际执行 |
 | 核心机制 | `memento` · [Memento](2605.24051-memento/README.md) | Meta CTR +1.0%、CVR +1.2% | query-conditioned MMR 实际执行；生产 replay/serving 省略 |
 | 核心机制 | `llm-ad-retrieval` · [LLM Retrieval](2605.21969-llm-ad-retrieval/README.md) | Meta top-line +0.45%、final recall +1.2% | domain SFT + LLM attribute graph；Recall@20 +11.90%，score drift -77.36% |
-| 完整核心链路 | `seral` · [SERAL](2502.13539-seral/README.md) | Taobao clicks +29.56%、transactions +27.6% | cognition/CDI/IPO/nearline；NDCG +8.59%，novelty 未提升 |
-| 完整核心链路 | `leadre` · [LEADRE](2411.13789-leadre/README.md) | WeChat GMV +1.57%/+1.17% | S-ID + auxiliary + DPO；NDCG +3.10% |
-| 完整核心链路 | `cobra` · [COBRA](2503.02453-cobra/README.md) | Conversion +3.60%、ARPU +4.15% | sparse→dense cascade；NDCG +45.83% |
-| 核心机制 | `argus` · [ARGUS](2507.15994-argus/README.md) | Listening +2.26%、likes +6.37% | feedback decomposition；NDCG +1.09%，Hit 下降 |
-| 核心机制 | `gr4ad` · [GR4AD](2602.22732-gr4ad/README.md) | Kuaishou ad revenue +4.2% | UA-SID/LazyAR/VSL/RSPO；NDCG +41.35%，head share +42.78pt |
-| 核心机制 | `cross-domain-kd` · [Cross-domain KD](2603.28994-cross-domain-kd/README.md) | Music discovery +1.12% | source teacher→target student；NDCG +3.02% |
-| 核心机制 | `mm-llm` · [MM-LLM](2605.09338-mm-llm/README.md) | Meta engagement +0.02% | caption tokens + semantic profile；NDCG +0.03%，Hit 下降 |
+| 完整核心链路 | `seral` · [SERAL](2502.13539-seral/README.md) | Taobao clicks +29.56%、transactions +27.6% | 相对 DIN NDCG +50.60%；novelty 未提升 |
+| 完整核心链路 | `leadre` · [LEADRE](2411.13789-leadre/README.md) | WeChat GMV +1.57%/+1.17% | 相对 DIN +12.94%；DPO 消融 -4.53% |
+| 完整核心链路 | `cobra` · [COBRA](2503.02453-cobra/README.md) | Conversion +3.60%、ARPU +4.15% | 相对 DIN +25.75%；热门集中上升 |
+| 核心机制 | `argus` · [ARGUS](2507.15994-argus/README.md) | Listening +2.26%、likes +6.37% | 相对 DIN -4.12%，未验证收益 |
+| 核心机制 | `gr4ad` · [GR4AD](2602.22732-gr4ad/README.md) | Kuaishou ad revenue +4.2% | 相对 DIN +69.67%，head share 0.505 |
+| 核心机制 | `cross-domain-kd` · [Cross-domain KD](2603.28994-cross-domain-kd/README.md) | Music discovery +1.12% | target split 相对 DIN -68.46% |
+| 核心机制 | `mm-llm` · [MM-LLM](2605.09338-mm-llm/README.md) | Meta engagement +0.02% | 相对 DIN -13.23%，未验证收益 |
 | 核心机制 | `cluster-goobs` · [Cluster GOOBS](2607.00448-cluster-goobs/README.md) | Meta CTR +53% | online sampler 实际执行；genre 替换私有 LLM cluster |
 | 概念验证 | `llatte` · [LLaTTE](2601.20083-llatte/README.md) | Meta conversion +4.3% | 缺 MLA、DHEN、semantic LLM features |
 | 概念验证 | `self-evolving-rec` · [Self-Evolving RecSys](2602.10226-self-evolving-rec/README.md) | Google +0.03%–+0.14% | 固定候选代替 LLM agent；无线上反馈闭环 |

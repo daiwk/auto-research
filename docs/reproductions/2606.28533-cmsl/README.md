@@ -57,6 +57,8 @@ Surface 5 的线上 A/B 四个 engagement 指标分别 **+0.116%、+0.158%、+0.
 
 ## 本地复现
 
+> **本地对照口径**：基线是 Single Sequence scorer；实验组是 CMSL 多 strand 聚合；NDCG@10 从 0.0351 升至 0.0355（**+0.95%**），小于 seed 波动。这是多序列结构的概念代理消融，不是相对 DIN。
+
 MovieLens genre 初始化 6 个 semantic strand，实现 strand 独立建模、二阶线性注意力近似和候选感知聚合。评分 ≥4、leave-two-out、full catalog、三个 seed；融合权重仅由 validation 选择。
 
 | Model | Hit@10 | NDCG@10 |

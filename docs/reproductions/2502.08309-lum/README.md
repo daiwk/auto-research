@@ -47,6 +47,8 @@ packing 将 Step 1 从 151h 降到 26h（-82%），group query 将 Step 2 从 17
 
 ## 本地复现
 
+> **本地对照口径**：基线是 ID-DLRM；实验组是加入 LUM 离线知识的相同下游 DLRM；AUC 从 0.58233 升至 0.66734（**+14.60%**）。这是 LUM 知识特征消融，不是相对 DIN。
+
 使用论文原本就采用的 MovieLens-1M。评分行为离散为低/中/高三个真实 condition，并严格置于对应 item 之前；item token 融合 ID 与官方 genre。1,000 用户产生 121,734 个无 test 泄漏的预训练样本。Step 1 训练 200 steps；Step 2 对每条样本一次查询三个 condition，并用 query block mask 共享历史 prefix；Step 3 缓存知识，训练 160 steps 的 ID-DLRM 或 LUM 增强 DLRM。
 
 | Method | AUC mean ± std |

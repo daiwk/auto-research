@@ -49,6 +49,8 @@ $$\widetilde w_t=\begin{cases}1,&z_t=1\\g(w_t),&z_t=0,\end{cases}$$
 
 ## 本地复现
 
+> **本地对照口径**：基线是标准 token-level Importance Sampling；实验组是 SIS ratio transformation；importance-weight variance 平均 **-6.62%**。这是 off-policy estimator 比较，DIN 与推荐排序指标均不适用。
+
 实现 Algorithm 1 与 ratio 转换机制。字符 bigram 的前 45% 拟合 stale behavior policy、随后 35% 拟合 current policy；每个 seed 采样 50,000 token，top-K=10，baseline 为标准 token IS。
 
 | Seed | weight variance 降幅 | SIS accept rate |

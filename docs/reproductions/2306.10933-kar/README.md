@@ -43,6 +43,8 @@ MovieLens-1M 上 DIN AUC 从 0.7863 提升到 **0.7961**，Amazon-Books 从 0.83
 
 ## 本地复现
 
+> **本地对照口径**：基线是纯 ID ranker；实验组是加入 LLM 知识与四专家 adapter 的 KAR；AUC 从 0.72188 升至 0.72774（**+0.81%**）。这是知识增强模块消融，不是相对 DIN 的比较。
+
 按用户时间切分 MovieLens-100K。SmolLM2-135M-Instruct 为 20 个用户和涉及的物品实际生成 875 个知识 prompt，最终隐藏状态形成知识向量并落到 Git 忽略缓存；比较纯 ID ranker 与加入四专家 adapter 的 KAR ranker。
 
 | Method | AUC mean ± std | 相对 ID ranker |

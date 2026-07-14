@@ -54,6 +54,11 @@ def test_every_paper_readme_has_the_complete_reproduction_contract():
             assert heading in text, f"{adapter.key} missing {heading}"
         assert "```mermaid" in text, f"{adapter.key} missing architecture diagram"
         assert re.search(r"^## 本地复现", text, re.MULTILINE)
+        assert re.search(
+            r"^> \*\*本地对照口径\*\*：.*基线.*(?:实验组|相对).*(?:%|不适用)",
+            text,
+            re.MULTILINE,
+        ), f"{adapter.key} missing an explicit local baseline comparison"
 
         metric_files = sorted((directory / "metrics").glob("*.json"))
         assert metric_files, f"{adapter.key} missing stable metrics JSON"

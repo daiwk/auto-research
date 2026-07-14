@@ -43,6 +43,8 @@ $$u=F_p(\mathrm{LLM}_{k+1:L}([b_1,\ldots,b_n,e_i])),\qquad
 
 ## 本地复现
 
+> **本地对照口径**：基线是逐样本运行完整文本上层微调；实验组是 BAHE 原子缓存与层次聚合；耗时 **-53.61%**，但 AUC **-2.94%**。这是效率—效果对照，不是准确率提升。
+
 使用 BERT-tiny 第一层对 MovieLens 标题原子编码并缓存，复制其上层处理 `[CLS] + 12 条历史 + candidate`；对照组对完整文本逐次运行冻结低层和可训练上层。3 seeds、每组 5,000 train / 1,000 test、80 steps：
 
 | Method | AUC mean ± std | ms/example mean ± std |

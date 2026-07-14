@@ -9,6 +9,8 @@
 1. **Topic research loop**：按 topic 检索 arXiv，通过独立迭代控制器运行可配置参数搜索，逐轮保存 checkpoint、事件日志和可复用指标缓存。
 2. **Paper adapters**：每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度；省略核心模型的实现只能作为概念验证。
 
+所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
+
 支持两条研究轨道：
 
 - `llm`：网络结构、预训练和后训练；内置 Tiny Shakespeare 低成本实验。
@@ -33,13 +35,13 @@
 | 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
 | 完整核心链路 | `g2rec` | G2Rec · Meta | soft graph clustering、交替 interest token decoder、双 loss；NDCG@10 +11.92% |
 | 核心机制 | `llm-ad-retrieval` | LLM Retrieval · Meta | domain SFT、LLM attribute head、层级 Jaccard 语义图；Recall@20 +11.90%，边分数漂移 -77.36% |
-| 完整核心链路 | `seral` | SERAL · Alibaba | cognition profiles、CDI、SFT→IPO、nearline；NDCG@10 +8.59% |
-| 完整核心链路 | `leadre` | LEADRE · Tencent | S-ID、intent/auxiliary tasks、SFT→DPO；NDCG@10 +3.10% |
-| 完整核心链路 | `cobra` | COBRA · Baidu | sparse→dense cascade、BeamFusion；NDCG@10 +45.83% |
-| 核心机制 | `argus` | ARGUS · Yandex | feedback→next-item decomposition；NDCG@10 +1.09%，Hit 下降 |
-| 核心机制 | `gr4ad` | GR4AD · Kuaishou | UA-SID、LazyAR、VSL、RSPO；NDCG@10 +41.35%，头部集中 |
-| 核心机制 | `cross-domain-kd` | Zero-shot KD · Google/YouTube | 跨域 teacher logits + auxiliary distillation；NDCG@10 +3.02% |
-| 核心机制 | `mm-llm` | MM-LLM · Meta | query cross-attention caption tokens + ranking fusion；NDCG 基本持平 |
+| 完整核心链路 | `seral` | SERAL · Alibaba | cognition profiles、CDI、SFT→IPO、nearline；相对 DIN NDCG@10 +50.60% |
+| 完整核心链路 | `leadre` | LEADRE · Tencent | S-ID、intent/auxiliary tasks、SFT→DPO；相对 DIN +12.94%，DPO 消融退化 |
+| 完整核心链路 | `cobra` | COBRA · Baidu | sparse→dense cascade、BeamFusion；相对 DIN +25.75% |
+| 核心机制 | `argus` | ARGUS · Yandex | feedback→next-item decomposition；相对 DIN -4.12% |
+| 核心机制 | `gr4ad` | GR4AD · Kuaishou | UA-SID、LazyAR、VSL、RSPO；相对 DIN +69.67%，头部集中 |
+| 核心机制 | `cross-domain-kd` | Zero-shot KD · Google/YouTube | 跨域 teacher logits + auxiliary distillation；target split 相对 DIN -68.46% |
+| 核心机制 | `mm-llm` | MM-LLM · Meta | query cross-attention caption tokens + ranking fusion；相对 DIN -13.23% |
 | 完整核心链路 | `mixformer` | MixFormer · ByteDance/Douyin | matched-budget stacked/unified Transformer；NDCG@10 +17.41% |
 | 完整核心链路 | `rankmixer` | RankMixer · ByteDance/Douyin | token mixing、per-token FFN、DTSI sparse MoE；dense 最优，sparse 未追平 |
 | 完整核心链路 | `hyformer` | HyFormer · ByteDance/Douyin | query generation/decoding/boosting；NDCG@10 +143.77%，头部偏置同步上升 |

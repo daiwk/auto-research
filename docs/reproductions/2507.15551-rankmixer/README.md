@@ -42,6 +42,8 @@ $$G_{i,j}=\operatorname{ReLU}(h(s_i)_j),\qquad v_i=\sum_jG_{i,j}e_{i,j}(s_i).$$
 
 ## 本地复现
 
+> **本地对照口径**：基线是 Shared FFN；实验组分别是 Dense per-token RankMixer 与 Sparse MoE；Dense NDCG@10 约 **+595.86%**，Sparse **+43.61%**。这是 token-FFN 架构消融；Sparse 没有追平 Dense，不能只报告最佳 Dense 增益。
+
 四个公开 token 分别来自 genre profile、近期行为、最后行为和 candidate；64d、2 blocks、4 experts，训练 240 step。shared FFN、dense per-token FFN、Sparse MoE 使用同一采样与 full-catalog test。
 
 | Architecture | Parameters | Hit@10 | NDCG@10 | Head share@10 |

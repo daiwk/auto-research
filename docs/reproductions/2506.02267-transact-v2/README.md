@@ -52,6 +52,8 @@ L_{NAL}=-\sum_{u,t}\log\frac{e^{\langle u_t,p_{t+1}\rangle}}
 
 ## 本地复现
 
+> **本地对照口径**：基线是参数量匹配的 TransAct；实验组是 TransAct V2；NDCG@10 从 0.01277 升至 0.02460（**+92.65%**），head share 同时 +14.70pt。这里比较 V2 相对 V1，不是相对 DIN。
+
 MovieLens-100K 自动下载到本地；932 个有效用户、1,682 个物品，时间顺序 leave-two-out、完整物品库排序。以 genre 向量代替 PinSage 内容 embedding；TransAct 与 V2 参数量同为 137,073，种子 42/43/44，每个 160 step，Apple MPS。
 
 | Model | Hit@10 | NDCG@10 | Head share@10 |

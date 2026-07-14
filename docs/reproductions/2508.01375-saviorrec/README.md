@@ -49,6 +49,8 @@ $$u_t=\operatorname{BiTargetAttn}(\{\tilde z_{h_j}\},\tilde z_t),\qquad
 
 ## 本地复现
 
+> **本地对照口径**：基线是等预算 Content Ranker；实验组是 SaviorRec；总体 AUC **+1.56%**、cold AUC **+6.92%**，但都只有 1/3 seeds 正向。这是语义—行为对齐模块消融，不是相对 DIN。
+
 MovieLens-100K 的 genre multi-hot 是公开内容模态，时间相邻交互构造行为正对。第一阶段训练内容 encoder 后做 3 层 residual k-means；第二阶段用 chronological CTR 切分训练等预算 content baseline 与 SaviorRec。冷启动 test 定义为训练 candidate 频次最低四分位。
 
 | Method | AUC mean ± std | Cold AUC mean ± std | seconds |
