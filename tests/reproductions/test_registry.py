@@ -20,6 +20,7 @@ def test_builtin_adapters_are_discoverable():
         "mixformer",
         "onerec",
         "onetrans",
+        "pinfm",
         "plum",
         "rankmixer",
         "rec-distill",
@@ -27,6 +28,7 @@ def test_builtin_adapters_are_discoverable():
         "sasrec",
         "sis",
         "tiger",
+        "transact-v2",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -41,6 +43,8 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"
+    assert get_adapter("pinfm").paper.arxiv_id == "2507.12704"
+    assert get_adapter("transact-v2").paper.arxiv_id == "2506.02267"
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

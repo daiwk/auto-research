@@ -27,6 +27,8 @@
 | [Rec-Distill](https://arxiv.org/abs/2605.29755) | ByteDance / Douyin / TikTok | teacher/student distillation、batch+stream | Ads ADVV +1.00%；Rec Finish/U +1.2725%；Live gift revenue +0.78% |
 | [DIN](https://arxiv.org/abs/1706.06978) | Alibaba | candidate-aware interest、CTR ranking | CTR +10.0%；RPM +3.8% |
 | [HSTU](https://arxiv.org/abs/2402.17152) | Meta | generative sequential ranking、long history | Engagement +12.4%；Consumption +4.4% |
+| [TransAct V2](https://arxiv.org/abs/2506.02267) | Pinterest | lifelong sequence、candidate NN、next-action loss | Repin +6.35%；Hide -12.80%；Time Spent +1.41% |
+| [PinFM](https://arxiv.org/abs/2507.12704) | Pinterest | sequence foundation model、DCAT、pretrain/fine-tune | HF Sitewide Saves +1.20%；Fresh Saves +5.70%；I2I +0.72% |
 
 ## 用户指定的经典基线例外
 
