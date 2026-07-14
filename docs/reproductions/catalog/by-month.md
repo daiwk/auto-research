@@ -12,15 +12,18 @@
 | 2024-03 | [LSVCR](../2403.13574-lsvcr/README.md) · [BAHE](../2403.19347-bahe/README.md) · [NoteLLM](../2403.01744-notellm/README.md) |
 | 2024-05 | [LEARN](../2405.03988-learn/README.md) |
 | 2024-12 | [PRECISE](../2412.06308-precise/README.md) · [MSD](../2412.06860-msd/README.md) |
-| 2025-02 | [LUM](../2502.08309-lum/README.md) · [SessionRec](../2502.10157-sessionrec/README.md) · [OneRec](../2502.18965-onerec/README.md) |
+| 2024-11 | [LEADRE](../2411.13789-leadre/README.md) |
+| 2025-02 | [LUM](../2502.08309-lum/README.md) · [SessionRec](../2502.10157-sessionrec/README.md) · [SERAL](../2502.13539-seral/README.md) · [OneRec](../2502.18965-onerec/README.md) |
+| 2025-03 | [COBRA](../2503.02453-cobra/README.md) |
 | 2025-04 | [PinRec](../2504.10507-pinrec/README.md) |
 | 2025-05 | [LONGER](../2505.04421-longer/README.md) · [GenRank](../2505.04180-genrank/README.md) |
 | 2025-06 | [TransAct V2](../2506.02267-transact-v2/README.md) |
-| 2025-07 | [RankMixer](../2507.15551-rankmixer/README.md) · [PinFM](../2507.12704-pinfm/README.md) |
+| 2025-07 | [PinFM](../2507.12704-pinfm/README.md) · [RankMixer](../2507.15551-rankmixer/README.md) · [ARGUS](../2507.15994-argus/README.md) |
 | 2025-08 | [SaviorRec](../2508.01375-saviorrec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) |
 | 2025-10 | [PLUM](../2510.07784-plum/README.md) · [OneTrans](../2510.26104-onetrans/README.md) |
 | 2026-01 | [HyFormer](../2601.12681-hyformer/README.md) · [LLaTTE](../2601.20083-llatte/README.md) |
-| 2026-02 | [MixFormer](../2602.14110-mixformer/README.md) · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md) |
-| 2026-05 | [MDCNS](../2605.19651-mdcns/README.md) · [Memento](../2605.24051-memento/README.md) · [Rec-Distill](../2605.29755-rec-distill/README.md) |
+| 2026-02 | [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md) · [MixFormer](../2602.14110-mixformer/README.md) · [GR4AD](../2602.22732-gr4ad/README.md) |
+| 2026-03 | [Cross-domain KD](../2603.28994-cross-domain-kd/README.md) |
+| 2026-05 | [MM-LLM](../2605.09338-mm-llm/README.md) · [MDCNS](../2605.19651-mdcns/README.md) · [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md) · [Memento](../2605.24051-memento/README.md) · [Rec-Distill](../2605.29755-rec-distill/README.md) |
 | 2026-06 | [G2Rec](../2606.20554-g2rec/README.md) · [CMSL](../2606.28533-cmsl/README.md) |
 | 2026-07 | [Cluster GOOBS](../2607.00448-cluster-goobs/README.md) · [SIS](../2607.04728-sis/README.md) |

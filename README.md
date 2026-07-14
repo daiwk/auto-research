@@ -16,7 +16,7 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **37/37** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **45/45** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
@@ -32,6 +32,14 @@
 | 完整核心链路 | `plum` | PLUM · Google/YouTube | 135M decoder-only LM；2×2 CPT 消融；CPT 降低 loss，但 Recall@10 未提升 |
 | 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
 | 完整核心链路 | `g2rec` | G2Rec · Meta | soft graph clustering、交替 interest token decoder、双 loss；NDCG@10 +11.92% |
+| 核心机制 | `llm-ad-retrieval` | LLM Retrieval · Meta | domain SFT、LLM attribute head、层级 Jaccard 语义图；Recall@20 +11.90%，边分数漂移 -77.36% |
+| 完整核心链路 | `seral` | SERAL · Alibaba | cognition profiles、CDI、SFT→IPO、nearline；NDCG@10 +8.59% |
+| 完整核心链路 | `leadre` | LEADRE · Tencent | S-ID、intent/auxiliary tasks、SFT→DPO；NDCG@10 +3.10% |
+| 完整核心链路 | `cobra` | COBRA · Baidu | sparse→dense cascade、BeamFusion；NDCG@10 +45.83% |
+| 核心机制 | `argus` | ARGUS · Yandex | feedback→next-item decomposition；NDCG@10 +1.09%，Hit 下降 |
+| 核心机制 | `gr4ad` | GR4AD · Kuaishou | UA-SID、LazyAR、VSL、RSPO；NDCG@10 +41.35%，头部集中 |
+| 核心机制 | `cross-domain-kd` | Zero-shot KD · Google/YouTube | 跨域 teacher logits + auxiliary distillation；NDCG@10 +3.02% |
+| 核心机制 | `mm-llm` | MM-LLM · Meta | query cross-attention caption tokens + ranking fusion；NDCG 基本持平 |
 | 完整核心链路 | `mixformer` | MixFormer · ByteDance/Douyin | matched-budget stacked/unified Transformer；NDCG@10 +17.41% |
 | 完整核心链路 | `rankmixer` | RankMixer · ByteDance/Douyin | token mixing、per-token FFN、DTSI sparse MoE；dense 最优，sparse 未追平 |
 | 完整核心链路 | `hyformer` | HyFormer · ByteDance/Douyin | query generation/decoding/boosting；NDCG@10 +143.77%，头部偏置同步上升 |

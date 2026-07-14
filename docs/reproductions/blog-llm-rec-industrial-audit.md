@@ -8,20 +8,16 @@
 
 | Route | Papers |
 |---|---|
-| Text / LLM embedding | PLUM、M6-Rec、KAR、BAHE、BEQUE、LEARN、NoteLLM、LSVCR、MSD、LUM、PRECISE、SaviorRec |
-| ID/SID / generative | HSTU、OneRec、OneRec-V2、LONGER、RankMixer、PinFM、PinRec、GenRank、SessionRec |
+| Text / LLM embedding | PLUM、M6-Rec、KAR、BAHE、BEQUE、LEARN、NoteLLM、LSVCR、MSD、LUM、PRECISE、SaviorRec、SERAL、Cross-domain KD、MM-LLM |
+| ID/SID / generative | HSTU、OneRec、OneRec-V2、LONGER、RankMixer、PinFM、PinRec、GenRank、SessionRec、LEADRE、COBRA、GR4AD、ARGUS |
 
 已实现集合持续按 PR 扩展；KAR/BAHE/BEQUE 只是博客专项的首批，不代表全量筛选。
 
-## 已核验、后续实现队列
+## 已核验但受数据约束
 
 | Paper | Company | 代表性 | 原文量化线上证据 |
 |---|---|---|---|
-| SERAL (2502.13539) | Alibaba | serendipity alignment | S-PVR +5.7pt，另报告 CTR/业务指标 |
 | LCU (2504.01602) | Kuaishou | LLM comment understanding | staytime +1.27%、exposure +0.81% |
-| LEADRE (2411.13789) | Tencent | LLM-enhanced ad retrieval | Channels GMV +1.57%、Moments +1.17% |
-| COBRA (2503.02453) | Baidu | sparse+dense generative retrieval | conversion +3.60%、ARPU +4.15% |
-| ARGUS (2507.15994) | Yandex | long-context music Transformer | ARGUS TLT +2.26%、like likelihood +6.37% |
 
 优先级按“新机制覆盖度、与已有 adapter 重合度、公开数据可复现性”确定，而不是只按线上涨幅排序。
 
