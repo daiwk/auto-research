@@ -1,0 +1,10 @@
+{
+  "dataset": "MovieLens-100K",
+  "protocol": "chronological leave-two-out, full-catalog ranking",
+  "seeds": [42, 43, 44],
+  "steps_per_seed": 320,
+  "matched_setup": {"dimensions": 64, "layers": 2, "heads": 2, "loss": "sampled_softmax"},
+  "sasrec": {"hit_at_10": 0.0915593705, "hit_at_10_std": 0.0018236837, "ndcg_at_10": 0.0438854806, "ndcg_at_10_std": 0.0016037381, "head_share_at_10": 0.9066523605},
+  "hstu": {"hit_at_10": 0.0776108727, "hit_at_10_std": 0.0025289942, "ndcg_at_10": 0.0361060696, "ndcg_at_10_std": 0.0020764282, "head_share_at_10": 0.9387696710},
+  "ndcg_gain_percent": -17.7266167868
+}

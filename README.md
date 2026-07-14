@@ -26,6 +26,10 @@
 | 完整核心链路 | `hyformer` | HyFormer · ByteDance/Douyin | query generation/decoding/boosting；NDCG@10 +143.77%，头部偏置同步上升 |
 | 完整核心链路 | `onetrans` | OneTrans · ByteDance | mixed QKV/FFN、causal attention、pyramid；NDCG@10 +123.58%，head share 92% |
 | 完整核心链路 | `rec-distill` | Rec-Distill · ByteDance | black-box logits、双塔去偏、batch+stream；本地 transferability -4.11% |
+| 完整核心链路 | `sasrec` | SASRec | causal self-attention、point-wise FFN、pairwise BCE；全库 NDCG@10 0.02933，与 popularity 基本持平 |
+| 核心机制 | `hstu` | HSTU · Meta | UVQK、非 softmax aggregation、U-gate、all-position training；matched SASRec 对照下 NDCG@10 -17.73% |
+| 核心机制 | `din` | DIN · Alibaba | candidate-conditioned local activation、Dice、CTR BCE；mean-pool 对照下 NDCG@10 -6.97% |
+| 核心机制 | `tiger` | TIGER · Google | RQ-VAE Semantic ID、collision token、自回归检索；matched random ID 对照下 NDCG@10 -39.16% |
 | 核心机制 | `sis` | SIS | 论文的 off-policy token importance-sampling 变换 |
 | 核心机制 | `mdcns` | MDCNS | 三源负采样、分歧/共识筛选与双模型更新 |
 | 核心机制 | `memento` | Memento · Meta | query-conditioned MMR 长历史检索 |
@@ -51,6 +55,7 @@ src/auto_research/
     ├── registry.py                # 自动发现 */adapter.py
     ├── reporting.py               # 隔离的 JSON/Markdown 产物
     ├── rec_utils.py               # 推荐实验共享数据切分与指标
+    ├── sequence_training.py       # 序列模型共享的 all-position 训练与全库评估
     └── <paper>/
         ├── adapter.py             # 论文元数据与注册
         ├── model.py               # 论文特有模型或算法
@@ -81,7 +86,7 @@ pip install -e '.[plum]'
 pip install -e '.[neural-recs]'
 ```
 
-Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。下载器只接入体量适合本地 Mac 的公开原始数据；生产内部数据不会伪造为“原数据复现”。
+Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。DIN、SASRec、TIGER 和 HSTU 当前均直接使用本地 MovieLens-100K 原始数据；下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
 ## 运行论文复现
 
@@ -96,6 +101,8 @@ auto-research reproduce --help
 
 ```bash
 auto-research reproduce --paper memento --seed 42
+auto-research reproduce --paper sasrec --seed 42
+auto-research reproduce --paper hstu --seed 42
 auto-research reproduce --paper self-evolving-rec --seed 42
 auto-research reproduce --paper all --seed 42
 

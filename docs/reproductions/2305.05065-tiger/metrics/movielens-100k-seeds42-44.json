@@ -1,0 +1,11 @@
+{
+  "dataset": "MovieLens-100K genre content",
+  "protocol": "chronological leave-two-out, constrained full-catalog generative ranking",
+  "seeds": [42, 43, 44],
+  "rqvae_steps": 240,
+  "decoder_steps_per_seed": 240,
+  "rqvae": {"initial_loss": 0.0717181992, "final_loss": 0.0149730538, "unique_prefixes": 199, "collision_token_cardinality": 376},
+  "random_id": {"parameters": 155760, "hit_at_10": 0.0203862661, "hit_at_10_std": 0.0083571684, "ndcg_at_10": 0.0104337761, "ndcg_at_10_std": 0.0018989144, "head_share_at_10": 0.5575464950},
+  "tiger": {"parameters": 155760, "hit_at_10": 0.0139484979, "hit_at_10_std": 0.0048777474, "ndcg_at_10": 0.0063483683, "ndcg_at_10_std": 0.0018229714, "head_share_at_10": 0.3927038627},
+  "ndcg_gain_percent": -39.1556011179
+}

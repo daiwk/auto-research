@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import time
 from collections.abc import Callable, Iterable
-from typing import Any, Protocol
+from typing import Any, Optional, Protocol
 
 from ..models import Trial
 from .cache import TrialCache
 
 Evaluate = Callable[[dict[str, Any]], float]
-OnTrial = Callable[[Trial, Trial | None], None]
+OnTrial = Callable[[Trial, Optional[Trial]], None]
 
 
 class ProposalStrategy(Protocol):
