@@ -49,6 +49,8 @@ $$\tau=\frac{\Delta NE_{downstream}}{\Delta NE_{upstream}}.$$
 
 ## 本地复现
 
+> **本地对照口径**：基线是 Short Online Sequence；实验组是 LLaTTE two-stage proxy；NDCG@10 从 0.0420 降至 0.0405（**-3.57%**）。这是长历史缓存/融合模块消融；概念代理不能作为完整 LLaTTE 相对 DIN 的结果。
+
 实现 target-aware 在线序列、pyramidal recent-token reduction、异步 upstream 全历史表示和 downstream 融合。MovieLens 评分 ≥4，per-user leave-two-out、full catalog、三个 seed；validation 只选融合权重。
 
 | Architecture | Hit@10 | NDCG@10 |

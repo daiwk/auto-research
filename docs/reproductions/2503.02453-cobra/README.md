@@ -18,4 +18,6 @@ $L=L_{sparse}+\lambda L_{dense}$，其中 $L_{sparse}=-\sum_l\log p(c_l|h,c_{<l}
 公开基准优于纯生成与稠密召回；Baidu 线上 conversion **+3.60%**、ARPU **+4.15%**，覆盖 2 亿+日活。
 
 ## 本地复现
+
+> **本地对照口径**：统一跨模型基线是 DIN，COBRA NDCG@10 相对 DIN **+25.75%**；内部 sparse-only 基线加入 dense cascade 后 **+45.83%**。两项提升不能相互替代。
 180 users/280 items、seeds 42–44。统一 DIN（100 steps）Hit/NDCG 为 0.0481/0.02167；COBRA 为 0.0593/0.02724，NDCG 相对 DIN **+25.75%**。内部 sparse-only→cascade 消融为 **+45.83%**；head share 0.0598→0.2313，收益伴随热门集中。指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

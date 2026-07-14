@@ -45,6 +45,8 @@ Meituan 首页替换线上 SASRec，7 天 A/B：Pay PV **+0.603%**，PVCTCVR **+
 
 ## 本地复现
 
+> **本地对照口径**：基线是等预算的扁平 Item Transformer；实验组是 SessionRec Transformer；NDCG@20 从 0.004718 降至 0.003678（**-22.05%**）。这是 session 建模消融；DIN 未在 KuaiRand session 任务中参与比较。
+
 使用已下载的 KuaiRand-Pure 标准流量曝光日志：按 30 分钟间隔切 session，`is_click=1` 或 `long_view=1` 为正反馈，同 session 其余曝光作为困难负例。逐用户最后两个有效 session 分别作 validation/test；与扁平 item Transformer 做相同维度、层数、步数和候选采样预算的对照。这里没有用 MovieLens，因为原论文明确指出它缺少 session 与负曝光。
 
 先在 seed 42 的 validation 上搜索论文建议的小权重 $\alpha\in\{0,0.01,0.1\}$；0 与 0.01 的 NDCG@20 同为 0.002856，选择保留困难负例目标的 **0.01**，不根据 test 反选。

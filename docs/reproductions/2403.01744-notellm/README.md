@@ -33,6 +33,8 @@ $$\mathcal L=\mathcal L_{GCL}+\lambda\mathcal L_{CSFT},\quad
 
 ## 本地复现
 
+> **本地对照口径**：基线是冻结 compression-state embedding；实验组是 NoteLLM 的 GCL+CSFT embedding；NDCG@10 从 0.01142 升至 0.01224（**+7.15%**）。这是表征训练消融，不是端到端排序模型相对 DIN 的提升。
+
 | Model | Hit@10 | NDCG@10 |
 |---|---:|---:|
 | Frozen compression state | 0.01931 | 0.01142 |

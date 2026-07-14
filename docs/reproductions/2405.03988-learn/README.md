@@ -34,6 +34,8 @@ u_{1:H}=PCH(e_{i_1}^c,\ldots,e_{i_H}^c),\quad
 
 ## 本地复现
 
+> **本地对照口径**：基线是 frozen LLM semantic mean；实验组是 LEARN CEG+PCH；NDCG@10 从 0.00487 升至 0.01622（**+233.10%**），同时 head share 升至 69.50%。这是知识适配模块消融，不是相对 DIN。
+
 | Model | Hit@10 | NDCG@10 |
 |---|---:|---:|
 | Frozen LLM semantic mean | 0.01073 | 0.00487 |

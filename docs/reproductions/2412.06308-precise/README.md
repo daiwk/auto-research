@@ -50,6 +50,8 @@ Amazon Books 上 PRECISE-UT 的 R@10/N@10 为 **0.0439/0.0269**，HLLM 为 0.041
 
 ## 本地复现
 
+> **本地对照口径**：基线是只做目标任务训练的 PRECISE-TT；实验组是 UT 全场景预训练后再 TT；Recall@10 **+40.00%**、NDCG@10 **+32.53%**，但 Cold Recall@10 **-50.00%**。这是预训练阶段消融，不是相对 DIN。
+
 使用已下载到本地的 MovieLens-1M。评分 ≥3 的时间序列作为全场景正反馈，评分 ≥4 作为更稀疏的目标任务；每个用户最后一个高评分 item 留作测试，训练看不到该事件，并按原论文剔除训练目录中从未出现的测试 item。最终为 290 用户、2,822 items；电影标题和 genre 输入真实 SmolLM2-135M，缓存 8 个 contextual token hidden states，之后作为可训练变量参与 MoE 与推荐损失。
 
 经过两轮迭代，修复了 in-batch 重复 item 被误当作互斥类别的问题，并将 TT 从 80 增到 240 steps。最终协议为 UT 120 steps（前 60 steps 冻结 token）+ TT 240 steps，3 seeds：

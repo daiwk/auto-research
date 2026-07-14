@@ -40,6 +40,8 @@ X'=X+W_O\left(U\odot\operatorname{Norm}(A(X)V)\right),
 
 ## 本地复现
 
+> **本地对照口径**：基线是维度、层数、heads、loss 和训练步数匹配的 SASRec；实验组是 HSTU；NDCG@10 从 0.04389 降至 0.03611（**-17.73%**）。这是匹配预算的跨模型比较，不是相对 DIN。
+
 MovieLens-100K，932 个有效用户、1,682 个物品，时间顺序 leave-two-out、全库排名。HSTU 与 SASRec 固定 64 维、2 层、2 heads、相同 sampled-softmax 目标和 320 step；种子 42/43/44，Apple MPS。
 
 | Model | Hit@10 | NDCG@10 | Head share@10 |

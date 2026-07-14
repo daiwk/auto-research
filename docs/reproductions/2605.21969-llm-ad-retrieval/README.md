@@ -57,6 +57,8 @@ $$S_R(Ad_1,Ad_2)=\sum_{c\in C_1\cap C_2}s_{1,c}s_{2,c}.$$
 
 ## 本地复现
 
+> **本地对照口径**：基线是 Collaborative Item Graph；实验组是在固定候选预算下加入 LLM Semantic Graph；Recall@20 **+11.90%**、NDCG@20 **+3.03%**，边分数漂移 **-77.36%**。这是召回路由增量消融，不是相对 DIN 的排序比较。
+
 MovieLens-100K 的标题/类型充当公开 creative，评分 ≥4 的时序行为充当 seed 与 held-out relevant item。选择交互最频繁的 180 个物品和 150 个用户；每个用户最后两个物品分别为 validation/test。对标题年份只改变标点和表达，构造不改变语义的 shadow creative。
 
 SmolLM2-135M-Instruct 在前 80% 商品的 primary/shadow 对上做 80-step domain SFT，同一对共享 taxonomy target；随后在 LLM hidden state 上训练 160-step 多标签 attribute head。协同 item graph 是生产 ensemble 的公开代理，LLM graph 权重只在 validation 的 $\{0,0.25,0.5,1,2\}$ 中选择，test 使用固定 K=20 候选预算。

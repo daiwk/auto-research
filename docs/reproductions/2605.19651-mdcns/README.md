@@ -57,6 +57,8 @@ $$p_{u,v}^{*}=\operatorname{softmax}(s_{u,v}^{*}/\tau),\quad
 
 ## 本地复现
 
+> **本地对照口径**：主基线是 Uniform negative sampling，辅助基线是 DNS；实验组是 MDCNS；NDCG@10 相对 Uniform 从 0.003016 升至 0.006175（**+104.75%**）。这是采样策略消融；DIN 不适用于该采样器级比较。
+
 本轮不再使用 MovieLens proxy，而是自动下载作者仓库的 Beauty 切分：123,086/4,472/2,237 条 train/val/test 序列，12,101 个物品。轻量双 embedding backbone 实现三源采样、分歧重排和 KL distillation；为控制 Mac 时间，固定抽取 50,000 个训练样本、4 epochs、30 候选、Top-M=5。
 
 | Sampler | Hit@10 | NDCG@10 |

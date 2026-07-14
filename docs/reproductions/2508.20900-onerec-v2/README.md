@@ -55,6 +55,8 @@ $$D=\begin{cases}\max(\pi_{old},\mathrm{sg}(\pi_\theta))&A>0\\
 
 ## 本地复现
 
+> **本地对照口径**：效率基线是 Encoder-Decoder，实验组 Lazy SFT 的延迟 **-54.78%**、validation loss **-0.34%**；对齐基线是 Lazy SFT，加入 GBPO 后反馈加权概率 **+21.66%**。这是两个阶段的内部消融，不是相对 DIN 或统一 NDCG 的比较。
+
 首次运行自动下载 KuaiRand-Pure（压缩约 45MB、解压约 194MB），不把数据提交到 Git。使用公开 tag、author、duration 与固定 identity projection（代替私有多模态 embedding）训练 `[128,64,32]` 三层 residual-kmeans SID，唯一率 **98.52%**；60,000 条真实标准流日志生成 12,000 个按时间排序的 newest-impression 样本。64d、2-layer 模型使用 80-step SFT + 40-step GBPO。
 
 3 seeds 汇总：

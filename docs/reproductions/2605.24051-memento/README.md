@@ -55,6 +55,8 @@ Data Memento 的主要离线改善从 MP -0.107%、RAND25-RS -0.120%、MMR25-ES 
 
 ## 本地复现
 
+> **本地对照口径**：基线是 LastN 历史截断；实验组是 query-conditioned Memento MMR；NDCG@10 从 0.0443 升至 0.0464（**+4.78%**）。这是历史检索策略消融，不是相对 DIN。
+
 实现 Representation Memento 的 query-conditioned MMR，validation 在 $\lambda\in\{0.3,0.5,0.7,0.9\}$ 中选择，与 LastN 对照；MovieLens 评分 ≥4、leave-two-out、full catalog。
 
 | History method | Hit@10 | NDCG@10 | Head share@10 |

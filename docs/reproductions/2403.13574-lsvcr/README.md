@@ -47,6 +47,8 @@ $$\mathcal L_{align}=\mathcal L_{SSC}+\mu\mathcal L_{VCC},\qquad
 
 ## 本地复现
 
+> **本地对照口径**：基线是相同 SR 网络但不做 LLM preference alignment；实验组是完整 LSVCR；Comment NDCG@10 **+50.40%**，Item NDCG@10 **-56.42%**。这是 alignment 消融，不能概括成整体推荐效果提升。
+
 Amazon Beauty 5-core 同时提供真实商品交互与 review 文本。80 个用户产生 688 个商品、748 条评论、508 个训练样本和 80 个 test 样本。SmolLM2-135M 的 q/v projection 注入 **230,400** 个 LoRA 参数；LoRA 生成式 SFT 后，SR 做 80 steps 对齐与 120 steps 联合微调。对照组使用完全相同 SR 网络但不做 LLM preference alignment。
 
 | Method | Item NDCG@10 | Comment NDCG@10 |

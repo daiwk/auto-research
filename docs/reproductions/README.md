@@ -2,6 +2,8 @@
 
 这里是论文专用 adapter 的长期实验索引。每篇论文的模型、实验、报告和结论文档独立存放，不与通用 topic research loop 混写。
 
+每篇文档的“本地复现”都必须以“**本地对照口径**”开头，明确基线、实验组、主指标、相对变化和比较性质。内部模块消融、跨模型基线、效率对照与统一 DIN 比较不得混写成同一种“提升”。
+
 后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。七篇近期工业论文采用[统一 DIN 公平比较协议](din-fair-benchmark.md)，主结果相对 DIN，论文模块消融单独报告。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选已合并到[统一筛选文档](industrial-online-ab-selection.md#google--meta-2026-专项审计)。
 
 个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。

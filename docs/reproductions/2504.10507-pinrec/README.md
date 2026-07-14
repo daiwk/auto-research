@@ -31,6 +31,8 @@ $$\hat i_{u,t}^{(k)}=\mathrm{norm}(O_k([h_t;e(a_{desired})])),\qquad
 
 ## 本地复现
 
+> **本地对照口径**：基线是 unconditioned next-token 模型；实验组是 outcome-conditioned 三 token window；Unordered Recall@10 **-27.78%**、NDCG@10 **-34.82%**。这是 outcome/multi-token 模块消融，不是相对 DIN。
+
 | Model | Unordered Recall@10 | NDCG@10 |
 |---|---:|---:|
 | UC next-token | **0.00318 ± 0.00184** | **0.00132 ± 0.00085** |

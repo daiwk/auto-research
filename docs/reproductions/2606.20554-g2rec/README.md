@@ -55,6 +55,8 @@ soft clustering 的 modularity 相对 Leiden 从 Beauty 0.419→0.499、Sports 0
 
 ## 本地复现
 
+> **本地对照口径**：基线是参数级别匹配的 Item-only Autoregressive Decoder；实验组是 G2Rec Item+Interest Decoder；NDCG@10 从 0.0474 升至 0.0530（**+11.92%**）。这是 interest-token 组织与辅助目标的联合消融，不是相对 DIN。
+
 自动下载论文同款 Amazon Beauty 5-core：22,363 用户、12,101 物品。三步窗口构造出 265,133 条稀疏 co-engagement edge，直接优化 12 个 soft interest cluster 的 modularity；随后在同一参数级别比较 item-only decoder 与交替 item/interest token decoder。两者均为 96d、2-layer causal Transformer，训练 240 step；G2Rec 额外使用权重 `0.1` 的 profile prediction loss。测试固定抽取 1,000 用户，每人 1 正例 + 99 随机负例。
 
 | Tokenization | Hit@10 | NDCG@10 | Head share@10 |

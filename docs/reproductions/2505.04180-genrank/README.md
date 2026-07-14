@@ -31,6 +31,8 @@ $$h_t=e(i_t)+e(a_t)+e(p_t)+e(\Delta t_t),\qquad
 
 ## 本地复现
 
+> **本地对照口径**：基线是 item/action 交错序列模型；实验组是 GenRank action-oriented 组织；延迟 **-25.66%**，但 AUC **-0.46%**。这是序列组织的效率—效果对照，不是准确率提升，也不是相对 DIN。
+
 | Model | AUC mean ± std | ms/example mean ± std |
 |---|---:|---:|
 | Interleaved item/action | **0.74282 ± 0.00997** | 0.15052 ± 0.08484 |
