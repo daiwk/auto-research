@@ -32,12 +32,14 @@
 
 ## Kuaishou
 
+- 2024-03 · [LSVCR](../2403.13574-lsvcr/README.md) · LLM preference alignment / comments
 - 2024-05 · [LEARN](../2405.03988-learn/README.md)
 - 2025-02 · [OneRec](../2502.18965-onerec/README.md)
 - 2025-08 · [OneRec-V2](../2508.20900-onerec-v2/README.md)
 
 ## Meituan
 
+- 2024-12 · [MSD](../2412.06860-msd/README.md) · LLM distillation / CTR serving
 - 2025-02 · [SessionRec](../2502.10157-sessionrec/README.md) · session retrieval / hard negatives
 
 ## Meta

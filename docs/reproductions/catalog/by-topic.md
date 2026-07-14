@@ -2,6 +2,8 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [MSD](../2412.06860-msd/README.md)：teacher knowledge、student 自回归蒸馏、LoRA CTR alignment
+- [LSVCR](../2403.13574-lsvcr/README.md)：LoRA LLM preference、双序列 SSC/VCC alignment
 - [LEARN](../2405.03988-learn/README.md)：冻结 LLM CEG、PCH 协同域适配
 - [NoteLLM](../2403.01744-notellm/README.md)：compression token、GCL、CSFT
 - [KAR](../2306.10933-kar/README.md)：用户推理/物品事实知识、hybrid-expert adapter
@@ -30,4 +32,4 @@
 
 ## Serving / efficiency
 
-- [BAHE](../2403.19347-bahe/README.md) · [BEQUE](../2311.03758-beque/README.md) · [M6-Rec](../2205.08084-m6rec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [OneTrans](../2510.26104-onetrans/README.md) · [LONGER](../2505.04421-longer/README.md)
+- [MSD](../2412.06860-msd/README.md) · [BAHE](../2403.19347-bahe/README.md) · [BEQUE](../2311.03758-beque/README.md) · [M6-Rec](../2205.08084-m6rec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [OneTrans](../2510.26104-onetrans/README.md) · [LONGER](../2505.04421-longer/README.md)

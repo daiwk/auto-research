@@ -16,6 +16,8 @@
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
+| 完整核心链路 | `lsvcr` · [LSVCR](2403.13574-lsvcr/README.md) | Kuaishou comment watch time +4.1264% | q/v-LoRA + SSC/VCC；comment NDCG +50.40%，item NDCG -56.42% |
+| 完整核心链路 | `msd` · [MSD](2412.06860-msd/README.md) | Meituan CTR +2.12%、CPM +2.59% | teacher→T5 distill + LoRA/cache fusion；AUC +1.55%，2/3 seeds 正向 |
 | 核心机制 | `sessionrec` · [SessionRec](2502.10157-sessionrec/README.md) | Meituan Pay PV +0.603%、PVCTCVR +0.564% | KuaiRand 真实 session、曝光负例；NDCG@20 -22.05%，仅 1/3 seeds 正向 |
 | 核心机制 | `saviorrec` · [SaviorRec](2508.01375-saviorrec/README.md) | Taobao Clicks +13.31%、Orders +13.44%、CTR +12.80% | 行为 encoder + RQ-SID + MBA + BiTargetAttn；cold AUC 均值 +6.92%，仅 1/3 seeds 正向 |
 | 完整核心链路 | `pinrec` · [PinRec](2504.10507-pinrec/README.md) | Grid Clicks +4.01%、Time Spent +0.55% | OC + unordered MT 实际训练；Recall@10 -27.78% |

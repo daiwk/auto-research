@@ -9,8 +9,9 @@
 | 2023-06 | [KAR](../2306.10933-kar/README.md) |
 | 2023-11 | [BEQUE](../2311.03758-beque/README.md) |
 | 2024-02 | [HSTU](../2402.17152-hstu/README.md) |
-| 2024-03 | [BAHE](../2403.19347-bahe/README.md) · [NoteLLM](../2403.01744-notellm/README.md) |
+| 2024-03 | [LSVCR](../2403.13574-lsvcr/README.md) · [BAHE](../2403.19347-bahe/README.md) · [NoteLLM](../2403.01744-notellm/README.md) |
 | 2024-05 | [LEARN](../2405.03988-learn/README.md) |
+| 2024-12 | [MSD](../2412.06860-msd/README.md) |
 | 2025-02 | [SessionRec](../2502.10157-sessionrec/README.md) · [OneRec](../2502.18965-onerec/README.md) |
 | 2025-04 | [PinRec](../2504.10507-pinrec/README.md) |
 | 2025-05 | [LONGER](../2505.04421-longer/README.md) · [GenRank](../2505.04180-genrank/README.md) |
