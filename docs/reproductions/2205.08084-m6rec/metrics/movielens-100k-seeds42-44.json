@@ -1,0 +1,17 @@
+{
+  "paper": "2205.08084",
+  "dataset": "MovieLens-100K title and genre text",
+  "seeds": [42, 43, 44],
+  "steps": 80,
+  "train_examples": 4000,
+  "option_tuning_auc": [0.5617738812, 0.5323481426, 0.5208422978],
+  "option_adapter_auc": [0.5597748135, 0.5327112020, 0.5242218876],
+  "summary": {
+    "option_tuning_auc_mean": 0.5383214405,
+    "option_tuning_auc_std": 0.0172357931,
+    "option_adapter_auc_mean": 0.5389026343,
+    "option_adapter_auc_std": 0.0151603213,
+    "relative_auc_gain_percent_mean": 0.1204068381,
+    "relative_auc_gain_percent_std": 0.4118328014
+  }
+}

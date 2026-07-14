@@ -15,10 +15,12 @@ def test_builtin_adapters_are_discoverable():
         "hyformer",
         "llatte",
         "longer",
+        "m6rec",
         "mdcns",
         "memento",
         "mixformer",
         "onerec",
+        "onerec-v2",
         "onetrans",
         "pinfm",
         "plum",
@@ -45,6 +47,8 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"
     assert get_adapter("pinfm").paper.arxiv_id == "2507.12704"
     assert get_adapter("transact-v2").paper.arxiv_id == "2506.02267"
+    assert get_adapter("m6rec").paper.has_online_ab
+    assert get_adapter("onerec-v2").paper.has_online_ab
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

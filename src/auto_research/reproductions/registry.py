@@ -10,6 +10,7 @@ _ROOT = Path(__file__).parent
 
 
 def register(adapter: ReproductionAdapter) -> ReproductionAdapter:
+    adapter.paper.validate_catalog_entry()
     if adapter.key in _ADAPTERS:
         raise ValueError(f"duplicate reproduction adapter: {adapter.key}")
     _ADAPTERS[adapter.key] = adapter

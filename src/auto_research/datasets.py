@@ -4,6 +4,7 @@ import csv
 import gzip
 import io
 import json
+import tarfile
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -19,6 +20,7 @@ MDCNS_BEAUTY_BASE_URL = (
     "https://raw.githubusercontent.com/Lyz103/SIGIR26-MDCNS/main/"
     "MDCNS_Code/data"
 )
+KUAIRAND_PURE_URL = "https://zenodo.org/records/10439422/files/KuaiRand-Pure.tar.gz"
 
 
 def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
@@ -99,6 +101,34 @@ def mdcns_beauty_sequences(
         with target.open(encoding="utf-8") as stream:
             result[split] = [tuple(map(int, line.split())) for line in stream if line.strip()]
     return result
+
+
+def kuairand_pure_files(root: Path, allow_network: bool = True) -> Path:
+    """Return the official KuaiRand-Pure data directory, downloading it if needed."""
+    directory = root / "kuairand-pure" / "data"
+    target = directory / "log_standard_4_22_to_5_08_pure.csv"
+    if target.exists():
+        return directory
+    if not allow_network:
+        raise FileNotFoundError(f"dataset missing and network disabled: {target}")
+    archive = root / "KuaiRand-Pure.tar.gz"
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    _download(KUAIRAND_PURE_URL, archive)
+    extraction = root / "kuairand-pure"
+    extraction.mkdir(parents=True, exist_ok=True)
+    with tarfile.open(archive, "r:gz") as bundle:
+        members = bundle.getmembers()
+        prefix = members[0].name.split("/", 1)[0] + "/"
+        for member in members:
+            member.name = member.name.removeprefix(prefix)
+            if member.name:
+                if member.issym() or member.islnk():
+                    raise ValueError(f"archive links are not allowed: {member.name}")
+                destination = (extraction / member.name).resolve()
+                if extraction.resolve() not in destination.parents:
+                    raise ValueError(f"unsafe archive member: {member.name}")
+                bundle.extract(member, extraction)
+    return directory
 
 
 def _download_and_extract(

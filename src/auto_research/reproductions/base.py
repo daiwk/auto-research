@@ -7,14 +7,35 @@ from typing import Any, Callable
 
 
 @dataclass(frozen=True)
+class OnlineABEvidence:
+    product: str
+    metric: str
+    lift_percent: float
+    traffic: str
+
+    def to_dict(self) -> dict[str, str | float]:
+        return {
+            "product": self.product,
+            "metric": self.metric,
+            "lift_percent": self.lift_percent,
+            "traffic": self.traffic,
+        }
+
+
+@dataclass(frozen=True)
 class PaperMetadata:
     arxiv_id: str
     title: str
     url: str
     track: str
     code_url: str | None = None
+    organization: str | None = None
+    published: str | None = None
+    topics: tuple[str, ...] = ()
+    online_ab: tuple[OnlineABEvidence, ...] = ()
+    selection_exception: str | None = None
 
-    def to_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, Any]:
         values = {
             "arxiv_id": self.arxiv_id,
             "title": self.title,
@@ -23,7 +44,30 @@ class PaperMetadata:
         }
         if self.code_url:
             values["code"] = self.code_url
+        if self.organization:
+            values["organization"] = self.organization
+        if self.published:
+            values["published"] = self.published
+        if self.topics:
+            values["topics"] = list(self.topics)
+        if self.online_ab:
+            values["online_ab"] = [entry.to_dict() for entry in self.online_ab]
+        if self.selection_exception:
+            values["selection_exception"] = self.selection_exception
         return values
+
+    @property
+    def has_online_ab(self) -> bool:
+        return bool(self.online_ab)
+
+    def validate_catalog_entry(self) -> None:
+        """Enforce online A/B evidence for newly catalogued industrial papers."""
+        catalogued = bool(self.organization or self.published or self.topics)
+        if catalogued and not self.online_ab and not self.selection_exception:
+            raise ValueError(
+                f"catalogued paper {self.arxiv_id} has no quantified online A/B evidence; "
+                "only an explicit user-requested classic exception may bypass this gate"
+            )
 
 
 RunFunction = Callable[[Path, int], dict[str, Any]]

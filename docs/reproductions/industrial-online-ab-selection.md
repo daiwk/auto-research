@@ -17,6 +17,8 @@
 
 | Paper | Organization | Area | Quantified online A/B |
 |---|---|---|---|
+| [M6-Rec](https://arxiv.org/abs/2205.08084) | Alibaba | 预训练语言模型、option-adapter、开放式推荐 | Alipay mini-app retrieval 相对 CTR >+1.0%，后全量部署 |
+| [OneRec-V2](https://arxiv.org/abs/2508.20900) | Kuaishou | lazy decoder、真实反馈 RL、GBPO | 5% 流量一周；Kuaishou stay +0.467%，Lite +0.741% |
 | [PLUM](https://arxiv.org/abs/2510.07784) | Google DeepMind / YouTube | LLM CPT、Semantic ID、生成式召回 | LFV Panel CTR +0.76%；Shorts +4.96% |
 | [OneRec](https://arxiv.org/abs/2502.18965) | Kuaishou | session generation、MoE、IPA/DPO | 1% 流量；watch time +1.68%，view duration +6.56% |
 | [LONGER](https://arxiv.org/abs/2505.04421) | ByteDance / Douyin | 超长序列、token merge、KV cache | Douyin Ads ADSS +1.063%–+2.097%；电商 Order/U +4.6125%–+7.9222% |
@@ -46,7 +48,7 @@
 | Paper | Organization | Online evidence | Status |
 |---|---|---|---|
 | [OneRec Technical Report](https://arxiv.org/abs/2506.13695) | Kuaishou | App Stay Time +0.54%/+1.24% | 与 OneRec adapter 机制重叠，先不重复实现 |
-| [OneRec-V2](https://arxiv.org/abs/2508.20900) | Kuaishou | App Stay Time +0.467%/+0.741% | 下一批：lazy decoder 与真实反馈 RL |
+| [GR4AD](https://arxiv.org/abs/2602.22732) | Kuaishou | Ad revenue 最高 +4.2% | 与 OneRec-V2 的 LazyAR 链路重叠，候选保留 |
 
 ## 明确排除
 

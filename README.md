@@ -18,6 +18,7 @@
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 完整核心链路 | `onerec-v2` | OneRec-V2 · Kuaishou | KuaiRand 真实时长反馈、RQ-SID、Lazy Decoder、DARS、GBPO；latency -54.78%，GBPO 均值 +21.66% |
 | 完整核心链路 | `plum` | PLUM · Google/YouTube | 135M decoder-only LM；2×2 CPT 消融；CPT 降低 loss，但 Recall@10 未提升 |
 | 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
 | 完整核心链路 | `g2rec` | G2Rec · Meta | soft graph clustering、交替 interest token decoder、双 loss；NDCG@10 +11.92% |
@@ -30,6 +31,7 @@
 | 核心机制 | `hstu` | HSTU · Meta | UVQK、非 softmax aggregation、U-gate、all-position training；matched SASRec 对照下 NDCG@10 -17.73% |
 | 核心机制 | `din` | DIN · Alibaba | candidate-conditioned local activation、Dice、CTR BCE；mean-pool 对照下 NDCG@10 -6.97% |
 | 核心机制 | `tiger` | TIGER · Google | RQ-VAE Semantic ID、collision token、自回归检索；matched random ID 对照下 NDCG@10 -39.16% |
+| 核心机制 | `m6rec` | M6-Rec · Alibaba | 冻结真实预训练 LM、option tuning、逐层 adapter；3-seed AUC +0.12% ± 0.41% |
 | 核心机制 | `transact-v2` | TransAct V2 · Pinterest | 候选锚定 lifelong retrieval、early fusion、sampled-softmax NAL；NDCG@10 +92.65%，头部占比明显上升 |
 | 核心机制 | `pinfm` | PinFM · Pinterest | NTL/MTL/FTL 预训练、DCAT、下游微调；validation -6.46%，test -3.57%，长尾覆盖显著增加 |
 | 核心机制 | `sis` | SIS | 论文的 off-policy token importance-sampling 变换 |
@@ -65,6 +67,7 @@ src/auto_research/
         └── report.py              # 论文专用 Markdown 报告
 
 docs/reproductions/<arxiv-id>-<adapter>/README.md
+docs/reproductions/catalog/          # 按公司 / 主题 / 年月的稳定导航
 tests/reproductions/
 ```
 
@@ -88,7 +91,7 @@ pip install -e '.[plum]'
 pip install -e '.[neural-recs]'
 ```
 
-Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。DIN、SASRec、TIGER 和 HSTU 当前均直接使用本地 MovieLens-100K 原始数据；下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
+Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
 ## 运行论文复现
 
@@ -107,6 +110,8 @@ auto-research reproduce --paper sasrec --seed 42
 auto-research reproduce --paper hstu --seed 42
 auto-research reproduce --paper transact-v2 --seed 42
 auto-research reproduce --paper pinfm --seed 42
+auto-research reproduce --paper m6rec --seed 42
+auto-research reproduce --paper onerec-v2 --seed 42
 auto-research reproduce --paper self-evolving-rec --seed 42
 auto-research reproduce --paper all --seed 42
 
