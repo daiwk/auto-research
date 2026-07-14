@@ -13,19 +13,23 @@ def test_builtin_adapters_are_discoverable():
         "cmsl",
         "din",
         "g2rec",
+        "genrank",
         "hstu",
         "hyformer",
         "kar",
+        "learn",
         "llatte",
         "longer",
         "m6rec",
         "mdcns",
         "memento",
         "mixformer",
+        "notellm",
         "onerec",
         "onerec-v2",
         "onetrans",
         "pinfm",
+        "pinrec",
         "plum",
         "rankmixer",
         "rec-distill",
@@ -55,6 +59,10 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("kar").paper.has_online_ab
     assert get_adapter("bahe").paper.has_online_ab
     assert get_adapter("beque").paper.has_online_ab
+    assert get_adapter("genrank").paper.has_online_ab
+    assert get_adapter("pinrec").paper.has_online_ab
+    assert get_adapter("learn").paper.has_online_ab
+    assert get_adapter("notellm").paper.has_online_ab
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

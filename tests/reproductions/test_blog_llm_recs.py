@@ -1,6 +1,7 @@
 import pytest
 
 from auto_research.reproductions.beque.model import RewriteExample, offline_feedback
+from auto_research.reproductions.action_data import load_action_ctr, load_action_sequences
 from auto_research.reproductions.llm_rec_data import binary_auc, load_text_ctr_data
 
 
@@ -80,3 +81,14 @@ def test_beque_preference_sampling_does_not_inject_supervised_target():
 
 def test_shared_auc_perfect_ranking():
     assert binary_auc([0, 0, 1, 1], [0.1, 0.2, 0.8, 0.9]) == 1.0
+
+
+def test_action_data_preserves_rating_outcomes(tmp_path):
+    _write_movielens_fixture(tmp_path)
+    sequences = load_action_sequences(tmp_path)
+    train, test, item_count = load_action_ctr(tmp_path, history_length=3)
+    assert sequences.train_actions
+    assert set(sequences.train_actions[0]) == {0, 1, 2}
+    assert train and test and item_count == 4
+    assert {row.label for row in (*train, *test)} == {0, 1}
+    assert all(len(row.items) <= 3 for row in (*train, *test))

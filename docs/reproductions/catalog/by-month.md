@@ -9,9 +9,11 @@
 | 2023-06 | [KAR](../2306.10933-kar/README.md) |
 | 2023-11 | [BEQUE](../2311.03758-beque/README.md) |
 | 2024-02 | [HSTU](../2402.17152-hstu/README.md) |
-| 2024-03 | [BAHE](../2403.19347-bahe/README.md) |
+| 2024-03 | [BAHE](../2403.19347-bahe/README.md) · [NoteLLM](../2403.01744-notellm/README.md) |
+| 2024-05 | [LEARN](../2405.03988-learn/README.md) |
 | 2025-02 | [OneRec](../2502.18965-onerec/README.md) |
-| 2025-05 | [LONGER](../2505.04421-longer/README.md) |
+| 2025-04 | [PinRec](../2504.10507-pinrec/README.md) |
+| 2025-05 | [LONGER](../2505.04421-longer/README.md) · [GenRank](../2505.04180-genrank/README.md) |
 | 2025-06 | [TransAct V2](../2506.02267-transact-v2/README.md) |
 | 2025-07 | [RankMixer](../2507.15551-rankmixer/README.md) · [PinFM](../2507.12704-pinfm/README.md) |
 | 2025-08 | [OneRec-V2](../2508.20900-onerec-v2/README.md) |

@@ -4,6 +4,8 @@
 
 后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选见[原报告](2026-google-meta-online-ab-selection.md)。
 
+个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。
+
 可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)浏览；物理 adapter 路径保持稳定。
 
 ## 保真度门槛
@@ -14,6 +16,10 @@
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
+| 完整核心链路 | `pinrec` · [PinRec](2504.10507-pinrec/README.md) | Grid Clicks +4.01%、Time Spent +0.55% | OC + unordered MT 实际训练；Recall@10 -27.78% |
+| 完整核心链路 | `genrank` · [GenRank](2505.04180-genrank/README.md) | Engagements +1.2474% | action-oriented 延迟 -25.66%，AUC -0.46% |
+| 完整核心链路 | `learn` · [LEARN](2405.03988-learn/README.md) | cold-item Revenue +8.77% | NDCG +233.10%，但 head share 69.50% |
+| 完整核心链路 | `notellm` · [NoteLLM](2403.01744-notellm/README.md) | I2I CTR +16.20% | GCL+CSFT；NDCG +7.15%，3/3 seeds 正向 |
 | 完整核心链路 | `kar` · [KAR](2306.10933-kar/README.md) | Huawei 新闻 Recall +7%；音乐播放量 +1.70% | 真实 LLM 知识生成与 hybrid experts；AUC 均值 +0.81%，2/3 seeds 正向 |
 | 完整核心链路 | `bahe` · [BAHE](2403.19347-bahe/README.md) | Ads CTR +9.65%、CPM +2.41% | 原子行为缓存 + 上层聚合；耗时 -53.61%，AUC -2.94% |
 | 完整核心链路 | `beque` · [BEQUE](2311.03758-beque/README.md) | Taobao GMV +0.40%、交易数 +0.34% | SFT + 无泄漏自采样 + 离线反馈 + PRO；feedback +30.03%，increment -66.02% |
