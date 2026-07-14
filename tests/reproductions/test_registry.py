@@ -34,6 +34,7 @@ def test_builtin_adapters_are_discoverable():
         "pinfm",
         "pinrec",
         "plum",
+        "precise",
         "rankmixer",
         "rec-distill",
         "self-evolving-rec",

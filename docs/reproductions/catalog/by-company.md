@@ -57,6 +57,10 @@
 - 2025-06 · [TransAct V2](../2506.02267-transact-v2/README.md)
 - 2025-07 · [PinFM](../2507.12704-pinfm/README.md)
 
+## Tencent / WeChat
+
+- 2024-12 · [PRECISE](../2412.06308-precise/README.md) · LLM semantic + collaborative sequential pre-training
+
 ## Academic / classic baseline
 
 - 2018-08 · [SASRec](../1808.09781-sasrec/README.md)

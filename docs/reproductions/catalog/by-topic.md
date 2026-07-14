@@ -2,6 +2,7 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [PRECISE](../2412.06308-precise/README.md)：LLM token、top-k MoE、Universal/Targeted Training
 - [LUM](../2502.08309-lum/README.md)：next-condition-item、group query、generative-to-discriminative
 - [MSD](../2412.06860-msd/README.md)：teacher knowledge、student 自回归蒸馏、LoRA CTR alignment
 - [LSVCR](../2403.13574-lsvcr/README.md)：LoRA LLM preference、双序列 SSC/VCC alignment
@@ -25,6 +26,7 @@
 
 ## 冷启动与语义-行为对齐
 
+- [PRECISE](../2412.06308-precise/README.md)：LLM semantic + collaborative ID、cold-item 建模
 - [SaviorRec](../2508.01375-saviorrec/README.md)：行为监督内容 encoder、RQ Semantic ID、zero-init MBA
 
 ## 采样、蒸馏与强化学习
