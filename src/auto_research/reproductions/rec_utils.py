@@ -132,9 +132,9 @@ def ranking_metrics(
     targets = sequences.test if target == "test" else sequences.validation
     hits = ndcg = 0.0
     recommended: list[int] = []
-    for index, (history, expected) in enumerate(
-        zip(sequences.train, targets, strict=True)
-    ):
+    if len(sequences.train) != len(targets):
+        raise ValueError("sequence and target counts must match")
+    for index, (history, expected) in enumerate(zip(sequences.train, targets)):
         context = history + (
             (sequences.validation[index],) if target == "test" else ()
         )

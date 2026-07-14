@@ -9,7 +9,9 @@ def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
         "cluster-goobs",
         "cmsl",
+        "din",
         "g2rec",
+        "hstu",
         "hyformer",
         "llatte",
         "longer",
@@ -22,7 +24,9 @@ def test_builtin_adapters_are_discoverable():
         "rankmixer",
         "rec-distill",
         "self-evolving-rec",
+        "sasrec",
         "sis",
+        "tiger",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -33,6 +37,10 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("hyformer").paper.arxiv_id == "2601.12681"
     assert get_adapter("onetrans").paper.arxiv_id == "2510.26104"
     assert get_adapter("rec-distill").paper.arxiv_id == "2605.29755"
+    assert get_adapter("din").paper.arxiv_id == "1706.06978"
+    assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
+    assert get_adapter("tiger").paper.arxiv_id == "2305.05065"
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

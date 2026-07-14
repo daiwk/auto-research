@@ -1,6 +1,6 @@
 # Industrial recommendation paper selection: online A/B required
 
-检索复核日期：2026-07-13。该规则适用于后续新增的推荐系统论文。
+检索复核日期：2026-07-14。该规则适用于后续新增的推荐系统论文。
 
 ## 硬性门槛
 
@@ -25,6 +25,19 @@
 | [HyFormer](https://arxiv.org/abs/2601.12681) | ByteDance / Douyin Search | query decoding、query boosting | Watch time +0.293%；Finish/U +1.111%；Query change -0.236% |
 | [OneTrans](https://arxiv.org/abs/2510.26104) | ByteDance | unified causal Transformer、KV cache | Feeds GMV/U +5.6848%；Mall +3.6696%；p99 latency 下降 |
 | [Rec-Distill](https://arxiv.org/abs/2605.29755) | ByteDance / Douyin / TikTok | teacher/student distillation、batch+stream | Ads ADVV +1.00%；Rec Finish/U +1.2725%；Live gift revenue +0.78% |
+| [DIN](https://arxiv.org/abs/1706.06978) | Alibaba | candidate-aware interest、CTR ranking | CTR +10.0%；RPM +3.8% |
+| [HSTU](https://arxiv.org/abs/2402.17152) | Meta | generative sequential ranking、long history | Engagement +12.4%；Consumption +4.4% |
+
+## 用户指定的经典基线例外
+
+以下论文没有量化真实线上 A/B，因此不属于自动选文候选；本次仅因用户明确点名而实现，用作基础能力和公平对照：
+
+| Paper | Role | Online A/B | Local status |
+|---|---|---|---|
+| [SASRec](https://arxiv.org/abs/1808.09781) | 经典序列推荐 baseline | 未报告 | 完整核心链路，MovieLens-100K 全库评估 |
+| [TIGER](https://arxiv.org/abs/2305.05065) | 经典生成式检索 | 未报告 | RQ-VAE Semantic ID + 自回归检索核心机制 |
+
+这两个具名例外不构成放宽硬门槛的先例。
 
 ## 合格候选队列
 

@@ -1,0 +1,9 @@
+{
+  "dataset": "MovieLens-100K",
+  "protocol": "chronological leave-two-out, full-catalog ranking",
+  "seeds": [42, 43, 44],
+  "steps_per_seed": 320,
+  "popularity": {"hit_at_10": 0.0600858369, "ndcg_at_10": 0.0296919777, "head_share_at_10": 1.0},
+  "sasrec": {"hit_at_10": 0.0582975680, "hit_at_10_std": 0.0039504152, "ndcg_at_10": 0.0293251450, "ndcg_at_10_std": 0.0005091668, "head_share_at_10": 0.9777539342},
+  "ndcg_gain_percent": -1.2354603907
+}
