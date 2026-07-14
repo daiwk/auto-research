@@ -7,6 +7,8 @@
 
 ## 原始论文总结
 
+### 背景与主要改动
+
 工业大推荐 teacher 无法直接 serving，且 teacher/student 数据采样与实时分布不同。Rec-Distill 让 teacher 在自身 forward 阶段写出黑盒 logits，一份信号可异步服务多个 student。Student 的 main tower 只收真实标签并用于线上；aux tower 同时收 task 与 distillation loss，两者共享 backbone。Teacher raw logits 先使用 student 的 sampling correction 投影到同一概率空间，再蒸馏。训练先 batch 收敛，再持续消费 streaming teacher signals。
 
 ```mermaid
@@ -21,15 +23,19 @@ flowchart LR
   F -. "training only" .-> D
 ```
 
+### 核心公式
+
 $$\eta=\frac{P_S^{distill}-P_S^{raw}}{P_T-P_S^{raw}},$$
 
 $$\mathcal L_{aux}=\mathcal L_{task}+\alpha\mathcal L_{distill},$$
 
 $$\hat y=\frac{1}{1+\frac{r_s}{p_X}(e^{-z}+1-r_++b_s)},\qquad T'_2=f_S(T_1).$$
 
+### 论文离线与线上效果
+
 论文 24B→1B 仍达到 65% transferability；batch/stream 和 decoupled tower 消融均为正。线上 Ads ADVV `+1.00%`、推荐 Finish/U `+1.2725%`、TikTok Live gift revenue `+0.78%`。
 
-## 本地复现与结果
+## 本地复现
 
 MovieLens-100K 上 96d/3-layer teacher 对比 48d/1-layer student。物化 12,000 行、16 candidates 的 teacher logits（0.384 MB）；student 使用相同 160 batch + 80 stream 日程。`α∈{0.1,0.3,1,3}` 只看 validation，选中 `α=3` 后报告 test。
 

@@ -1,0 +1,12 @@
+{
+  "paper": "2607.00448",
+  "adapter": "cluster-goobs",
+  "fidelity": "core_mechanism",
+  "dataset": "MovieLens-1M",
+  "setup": {"users": 6038, "items": 3706, "seeds": [42, 43, 44], "epochs": 3, "training_transition_cap_per_seed": 100000},
+  "results": {
+    "random_oob": {"hit_at_10": 0.0377056420, "hit_at_10_std": 0.0014956627, "ndcg_at_10": 0.0189511817, "ndcg_at_10_std": 0.0006411607, "head_share_at_10": 0.9434967429},
+    "cluster_goobs": {"hit_at_10": 0.0380920835, "hit_at_10_std": 0.0010209364, "ndcg_at_10": 0.0191376594, "ndcg_at_10_std": 0.0006108175, "head_share_at_10": 0.9264657171}
+  },
+  "relative_ndcg_change_percent": 0.9839797
+}

@@ -5,6 +5,7 @@
 - 2017-06 · [DIN](../1706.06978-din/README.md) · CTR ranking
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md) · LLM / parameter-efficient tuning
 - 2023-11 · [BEQUE](../2311.03758-beque/README.md) · LLM query rewriting / PRO
+- 2025-02 · [LUM](../2502.08309-lum/README.md) · generative user knowledge / DLRM
 - 2025-08 · [SaviorRec](../2508.01375-saviorrec/README.md) · cold start / semantic-behavior alignment
 
 ## Ant Group
@@ -55,6 +56,10 @@
 - 2025-04 · [PinRec](../2504.10507-pinrec/README.md)
 - 2025-06 · [TransAct V2](../2506.02267-transact-v2/README.md)
 - 2025-07 · [PinFM](../2507.12704-pinfm/README.md)
+
+## Tencent / WeChat
+
+- 2024-12 · [PRECISE](../2412.06308-precise/README.md) · LLM semantic + collaborative sequential pre-training
 
 ## Academic / classic baseline
 

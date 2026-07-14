@@ -45,8 +45,9 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 3. 在 `report.py` 中渲染该论文真正需要的指标。
 4. 在 `adapter.py` 构造并 `register(ReproductionAdapter(...))`，声明 `fidelity`、公司、年月、主题和量化 `OnlineABEvidence`；registry 会自动发现它，并拒绝没有 A/B 证据的新增目录项。
 5. 在 `tests/reproductions/` 增加算法单测、registry 发现测试和必要的最小端到端测试。
-6. 在 `docs/reproductions/<arxiv-id>-<key>/README.md` 记录经复核的长期结论。
-7. 更新 `docs/reproductions/catalog/` 的公司、主题、年月入口；无 A/B 的用户点名经典例外必须写明 `selection_exception`。
+6. 在 `docs/reproductions/<arxiv-id>-<key>/README.md` 记录经复核的长期结论，并写入 `metrics/*.json`；概念验证指标必须包含 `diagnostic_only: true`。
+7. 同步更新根 README、论文总索引以及 `docs/reproductions/catalog/` 的公司、主题、年月三个入口；无 A/B 的用户点名经典例外必须写明 `selection_exception`。
+8. 运行 `pytest tests/reproductions/test_documentation_catalog.py`；registry 与任一文档入口不一致、单篇缺章节/metrics 或内部链接断开都会失败。
 
 新论文不需要修改 CLI 分支、公共报告渲染器或其他论文目录。
 
@@ -60,7 +61,9 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 
 ## Paper README contract
 
-每篇长期文档至少包含：背景、主要改动、Mermaid 重绘架构图、核心公式、论文离线效果、论文线上 A/B（没有则明确写“未报告”）、本地数据与协议、复现结果、代码映射和边界。论文表格与本地表格必须分开，指标口径不一致时不得直接比较。
+每篇长期文档固定包含：`原始论文总结`，其下为`背景与主要改动`、Mermaid 重绘架构图、`核心公式`、`论文离线与线上效果`；随后是`本地复现`、数据协议、结果、代码映射和边界。论文没有线上 A/B 时必须明确写“未报告”。论文表格与本地表格必须分开，指标口径不一致时不得直接比较。
+
+每个 adapter 必须同时出现在根 README、论文总索引、公司目录、月份目录和主题目录。单篇目录必须至少包含一个经过复核的 `metrics/*.json`；该 JSON 只保存稳定标量、协议与 seed，不保存 checkpoint、原始日志或数据。
 
 后续新增推荐论文还必须通过[线上 A/B 硬门槛](reproductions/industrial-online-ab-selection.md)：正文须披露真实生产流量、量化指标和生产对照组。离线 SOTA、模拟器效果或“已部署”描述不能替代该证据。
 

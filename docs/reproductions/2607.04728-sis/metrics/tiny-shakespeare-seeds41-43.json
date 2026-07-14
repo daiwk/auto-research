@@ -1,0 +1,13 @@
+{
+  "paper": "2607.04728",
+  "adapter": "sis",
+  "fidelity": "core_mechanism",
+  "dataset": "Tiny Shakespeare",
+  "setup": {"seeds": [41, 42, 43], "samples_per_seed": 50000, "top_k": 10},
+  "per_seed": [
+    {"seed": 41, "baseline_weight_variance": 0.1653567023, "sis_weight_variance": 0.1412785773, "variance_reduction_percent": 14.5613239, "acceptance_rate": 0.68674},
+    {"seed": 42, "baseline_weight_variance": 0.5038797225, "sis_weight_variance": 0.4797823091, "variance_reduction_percent": 4.7823741, "acceptance_rate": 0.68648},
+    {"seed": 43, "baseline_weight_variance": 4.8383941637, "sis_weight_variance": 4.8129060936, "variance_reduction_percent": 0.5267878, "acceptance_rate": 0.68812}
+  ],
+  "aggregate": {"variance_reduction_percent_mean": 6.6234953, "acceptance_rate_mean": 0.6871133}
+}

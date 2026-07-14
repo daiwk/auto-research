@@ -8,6 +8,8 @@
 
 ## 原始论文总结
 
+### 背景与主要改动
+
 传统 ranking feature-cross 模块 MFU 低，扩大参数常同时推高延迟。RankMixer 把异构字段分为等宽 feature tokens，以无参数 head/token 重排代替 self-attention；每个输出 token 使用独立 FFN，防止高频字段支配共享参数。Sparse 版本为每个 token 配独立 experts，以 ReLU router 和稀疏正则允许不同 token 激活不同数量的 experts，并使用 dense-training/sparse-inference 避免 expert 欠训练。
 
 ```mermaid
@@ -19,6 +21,8 @@ flowchart LR
   E --> F["residual + layer norm"]
   F --> G["ranking score"]
 ```
+
+### 核心公式
 
 核心 token mixing 为
 
@@ -32,9 +36,11 @@ ReLU routing 为
 
 $$G_{i,j}=\operatorname{ReLU}(h(s_i)_j),\qquad v_i=\sum_jG_{i,j}e_{i,j}(s_i).$$
 
+### 论文离线与线上效果
+
 论文离线 RankMixer-1B 相对生产 baseline 的 Finish/Skip AUC 最高约 `+0.95%/+1.82%`；MFU 从 4.5% 提升到 45%。全流量线上部署报告 Active Days `+0.3%`、App duration `+1.08%`。
 
-## 本地复现与结果
+## 本地复现
 
 四个公开 token 分别来自 genre profile、近期行为、最后行为和 candidate；64d、2 blocks、4 experts，训练 240 step。shared FFN、dense per-token FFN、Sparse MoE 使用同一采样与 full-catalog test。
 

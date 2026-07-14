@@ -7,6 +7,8 @@
 
 ## 原始论文总结
 
+### 背景与主要改动
+
 OneTrans 把行为 S-tokens 放在异构 NS-tokens 前，使用一个 causal Transformer 同时完成序列建模和字段交互。语义同质的 S-token 共享 QKV/FFN；每个 NS-token 拥有独立参数。因果顺序使 NS-token 能读取完整历史，pyramid stack 逐层只保留近期 S queries。线上用 cross-candidate/cross-request KV cache 复用 S-side 计算。
 
 ```mermaid
@@ -21,15 +23,19 @@ flowchart LR
   G --> H["candidate score"]
 ```
 
+### 核心公式
+
 $$X^{(0)}=[S\text{-tokens};NS\text{-tokens}],$$
 
 $$W_i^{Q,K,V}=\begin{cases}W_S^{Q,K,V}&i\le L_S\\W_{NS,i}^{Q,K,V}&i>L_S,\end{cases}$$
 
 $$X^{(n)}=\operatorname{MixedFFN}(\operatorname{Norm}(Z^{(n)}))+Z^{(n)}.$$
 
+### 论文离线与线上效果
+
 论文 OneTrans-L 相对 DCNv2+DIN 的 CTR AUC/UAUC 为 `+1.53%/+2.79%`，CVR AUC/UAUC 为 `+1.14%/+3.23%`。线上 Feeds order/U `+4.3510%`、GMV/U `+5.6848%`、p99 latency `-3.91%`；Mall GMV/U `+3.6696%`。
 
-## 本地复现与结果
+## 本地复现
 
 MovieLens-100K，64d、2 layers、32 S-tokens、2 NS-tokens，240 step、三个 seed；对照是独立 sequence encoder 后再与 candidate features 交互。
 

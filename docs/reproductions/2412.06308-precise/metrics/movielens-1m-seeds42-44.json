@@ -1,0 +1,25 @@
+{
+  "paper": "2412.06308",
+  "adapter": "precise",
+  "dataset": "MovieLens-1M",
+  "protocol": {
+    "users": 290,
+    "items": 2822,
+    "llm": "HuggingFaceTB/SmolLM2-135M",
+    "text_tokens": 8,
+    "universal_steps": 120,
+    "token_frozen_steps": 60,
+    "targeted_steps": 240,
+    "seeds": [42, 43, 44]
+  },
+  "per_seed": [
+    {"seed": 42, "tt_only": {"recall_at_10": 0.0034482759, "ndcg_at_10": 0.0010878099, "cold_recall_at_10": 0.0086956522}, "ut_plus_tt": {"recall_at_10": 0.0034482759, "ndcg_at_10": 0.0013339752, "cold_recall_at_10": 0.0}},
+    {"seed": 43, "tt_only": {"recall_at_10": 0.0103448276, "ndcg_at_10": 0.0062104483, "cold_recall_at_10": 0.0173913043}, "ut_plus_tt": {"recall_at_10": 0.0137931034, "ndcg_at_10": 0.0054508895, "cold_recall_at_10": 0.0086956522}},
+    {"seed": 44, "tt_only": {"recall_at_10": 0.0034482759, "ndcg_at_10": 0.0017241379, "cold_recall_at_10": 0.0086956522}, "ut_plus_tt": {"recall_at_10": 0.0068965517, "ndcg_at_10": 0.0051724138, "cold_recall_at_10": 0.0086956522}}
+  ],
+  "aggregate": {
+    "tt_only": {"recall_at_10_mean": 0.0057471264, "recall_at_10_std": 0.0032510657, "ndcg_at_10_mean": 0.0030074654, "ndcg_at_10_std": 0.0022797007, "cold_recall_at_10_mean": 0.0115942029, "cold_recall_at_10_std": 0.0040991697},
+    "ut_plus_tt": {"recall_at_10_mean": 0.0080459770, "recall_at_10_std": 0.0043007556, "ndcg_at_10_mean": 0.0039857595, "ndcg_at_10_std": 0.0018785379, "cold_recall_at_10_mean": 0.0057971014, "cold_recall_at_10_std": 0.0040991697},
+    "relative_lift": {"recall_at_10_percent": 40.0, "ndcg_at_10_percent": 32.5288577, "cold_recall_at_10_percent": -50.0}
+  }
+}

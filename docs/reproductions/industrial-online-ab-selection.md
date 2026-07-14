@@ -59,6 +59,24 @@
 | [OneRec Technical Report](https://arxiv.org/abs/2506.13695) | Kuaishou | App Stay Time +0.54%/+1.24% | 与 OneRec adapter 机制重叠，先不重复实现 |
 | [GR4AD](https://arxiv.org/abs/2602.22732) | Kuaishou | Ad revenue 最高 +4.2% | 与 OneRec-V2 的 LazyAR 链路重叠，候选保留 |
 
+## Google / Meta 2026 专项审计
+
+时间窗为 2026-01-01 至 2026-07-13，要求作者单位属于 Google 或 Meta，并披露真实流量的量化线上 A/B。该专项不再维护单独的重复文档。
+
+| Status | Paper | Company | Quantified online A/B |
+|---|---|---|---|
+| 已实现 | LLaTTE (2601.20083) | Meta | conversion +4.3%、NE -0.25% |
+| 已实现 | Self-Evolving RecSys (2602.10226) | Google | 多项 YouTube/surface 指标 +0.03%–+0.14% |
+| 已实现 | Memento (2605.24051) | Meta | CTR +1.0%、CVR +1.2% |
+| 已实现 | G2Rec (2606.20554) | Meta | engagement +0.06%–+0.19% |
+| 已实现 | CMSL (2606.28533) | Meta | retrieval 指标 +0.092%–+0.171% |
+| 已实现 | Cluster GOOBS (2607.00448) | Meta | CTR +53%，头部曝光集中度下降 |
+| 候选保留 | Zero-shot Cross-domain KD for YouTube Music (2603.28994) | Google | 两周 live experiments；与现有蒸馏 adapter 部分重叠 |
+| 候选保留 | MM-LLM Multimedia Understanding (2605.09338) | Meta | engagement +0.02%；与现有语义特征方向重叠 |
+| 候选保留 | LLM Retrieval for Stable Ad Recommendations (2605.21969) | Meta | top-line +0.45%、final-stage recall +1.2% |
+
+排除示例：SilverTorch 首次提交于 2025-11，超出时间窗；Fine-Tuned LLM as a Complementary Predictor 的部署属于 Pinterest；Rec-Distill 不属于 Google/Meta，但已按扩大后的公司范围实现。
+
 ## 明确排除
 
 - OpenOneRec Technical Report（arXiv 2512.24762）：开源价值高，但正文没有可核验的量化生产 A/B；不满足硬门槛。

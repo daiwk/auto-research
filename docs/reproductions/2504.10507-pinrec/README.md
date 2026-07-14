@@ -5,7 +5,9 @@
 - 论文：[arXiv 2504.10507](https://arxiv.org/abs/2504.10507)，Pinterest
 - Adapter：`pinrec`；运行：`auto-research reproduce --paper pinrec --seed 42`
 
-## 原论文
+## 原始论文总结
+
+### 背景与主要改动
 
 普通 next-item 只会延续用户最常见行为，且严格顺序不适合 feed session。PinRec 把期望 outcome 注入输出头，并在同一未来窗口一次生成多个 ANN-compatible item vectors。
 
@@ -18,12 +20,16 @@ flowchart LR
   M --> A["ANN retrieval"]
 ```
 
+### 核心公式
+
 $$\hat i_{u,t}^{(k)}=\mathrm{norm}(O_k([h_t;e(a_{desired})])),\qquad
 \mathcal L_{MT}=-\sum_k\log\frac{\exp(\hat i^{(k)}\cdot i^+_{\pi(k)}/\tau)}{\sum_j\exp(\hat i^{(k)}\cdot i_j/\tau)}.$$
 
+### 论文离线与线上效果
+
 原论文 Homefeed unordered Recall@10：UC 0.608、OC 0.625、MT+OC **0.676**；16 outputs 相对 OC 延迟约降 10 倍、recall +16%、diversity +21.3%。线上 MT+OC：Fulfilled Sessions +0.28%、Time Spent +0.55%、Homefeed Grid Clicks +3.33%；纯 OC Grid Clicks最高 **+4.01%**。
 
-## 本地结果
+## 本地复现
 
 | Model | Unordered Recall@10 | NDCG@10 |
 |---|---:|---:|

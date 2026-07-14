@@ -4,7 +4,9 @@
 
 论文：[arXiv 2402.17152](https://arxiv.org/abs/2402.17152) · [Meta 官方实现](https://github.com/meta-recsys/generative-recommenders)
 
-## 背景与主要改动
+## 原始论文总结
+
+### 背景与主要改动
 
 工业推荐历史包含多种 action，长度与规模远超经典 next-item 数据。HSTU 把推荐统一为生成式序列建模，并用适合稀疏长历史的 transduction layer 替代标准 Transformer 的 softmax attention 和独立 FFN。
 
@@ -19,7 +21,7 @@ flowchart LR
     R --> O["所有位置的下一 item logits"]
 ```
 
-## 核心公式
+### 核心公式
 
 HSTU layer 先得到 \(U,V,Q,K=\operatorname{SiLU}(\operatorname{Norm}(X)W_{UVQK})\)，再计算
 
@@ -31,7 +33,7 @@ X'=X+W_O\left(U\odot\operatorname{Norm}(A(X)V)\right),
 
 并施加 causal mask。与标准 attention 不同，这里没有 softmax 归一化；训练对序列所有有效位置做 sampled-softmax next-item 预测。
 
-## 论文报告效果
+### 论文离线与线上效果
 
 - 离线：论文 MovieLens-1M 表中，SASRec HR@10/NDCG@10 为 0.2828/0.1545，HSTU 为 0.3043/0.1700（+7.6%/+10.1%），HSTU-large 为 0.3306/0.1858。
 - 在线：Meta 排序生产 A/B 中，Generative Recommender 相对 DLRM 的 engagement +12.4%、consumption +4.4%。
