@@ -16,6 +16,8 @@
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
+| 核心机制 | `sessionrec` · [SessionRec](2502.10157-sessionrec/README.md) | Meituan Pay PV +0.603%、PVCTCVR +0.564% | KuaiRand 真实 session、曝光负例；NDCG@20 -22.05%，仅 1/3 seeds 正向 |
+| 核心机制 | `saviorrec` · [SaviorRec](2508.01375-saviorrec/README.md) | Taobao Clicks +13.31%、Orders +13.44%、CTR +12.80% | 行为 encoder + RQ-SID + MBA + BiTargetAttn；cold AUC 均值 +6.92%，仅 1/3 seeds 正向 |
 | 完整核心链路 | `pinrec` · [PinRec](2504.10507-pinrec/README.md) | Grid Clicks +4.01%、Time Spent +0.55% | OC + unordered MT 实际训练；Recall@10 -27.78% |
 | 完整核心链路 | `genrank` · [GenRank](2505.04180-genrank/README.md) | Engagements +1.2474% | action-oriented 延迟 -25.66%，AUC -0.46% |
 | 完整核心链路 | `learn` · [LEARN](2405.03988-learn/README.md) | cold-item Revenue +8.77% | NDCG +233.10%，但 head share 69.50% |
