@@ -54,3 +54,15 @@ def test_profile_and_feedback_models_execute_their_auxiliary_heads():
     assert item_logits.shape == (2, 8)
     assert feedback.shape == (2, 3)
     assert seral_model(data)(histories).shape == (2, 8)
+
+
+def test_shared_din_initialization_is_reproducible():
+    torch = pytest.importorskip("torch")
+    from auto_research.reproductions.din.model import DINConfig, train_model
+
+    config = DINConfig(dimensions=8, sequence_length=3, batch_size=2, steps=1)
+    first, _ = train_model("din", fixture_data(), config, seed=42)
+    torch.rand(100)
+    second, _ = train_model("din", fixture_data(), config, seed=42)
+    for left, right in zip(first.parameters(), second.parameters()):
+        assert torch.equal(left.detach().cpu(), right.detach().cpu())

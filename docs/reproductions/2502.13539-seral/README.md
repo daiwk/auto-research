@@ -17,5 +17,4 @@ $L_{SFT}=-\sum_t\log\pi_\theta(y_t|x,y_{<t})$；$L_{IPO}=E[(\log\frac{\pi_\theta
 线上惊喜 PVR **+5.7%**、点击 **+29.56%**、交易 **+27.6%**；长期实验 UV3 +3.04%、交易额 +0.98%。
 
 ## 本地复现
-180 users/280 items、60 steps、seeds 42–44。IPO 令 Hit@10 0.0667→0.0741、NDCG@10 0.03005→0.03263（**+8.59%**），但本地 category-novelty 0.05542→0.05444，未复现惊喜度提升。指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
-
+180 users/280 items、seeds 42–44。统一 DIN（100 steps）Hit/NDCG 为 0.0481/0.02167；SERAL 为 0.0741/0.03263，NDCG 相对 DIN **+50.60%**。内部消融中 IPO 相对纯 SFT 为 **+8.59%**，但 category-novelty 0.05542→0.05444，仍未复现惊喜度提升。指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

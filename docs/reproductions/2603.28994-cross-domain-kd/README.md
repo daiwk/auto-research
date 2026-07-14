@@ -19,5 +19,4 @@ $L=L_{target}+\lambda T^2KL(softmax(z_T/T)\Vert softmax(z_S/T))+\gamma\|a_T-a_S\
 CTR AUC 79.34→79.55，trail engagement 0.312→0.320；线上 discovery **+1.12%**、new releases engagement **+11.39%**。
 
 ## 本地复现
-180 source users、60 target users，teacher 19,091 参数、student 7,171 参数。KD 权重从 0.35 调到 0.2、100 steps；Hit@10 均为 0.0444，NDCG 0.01690→0.01741（**+3.02%**）。指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
-
+180 source users、60 target users，teacher 19,091 参数、student 7,171 参数。DIN 与 KD 在完全相同 target split 上评估：DIN Hit/NDCG 0.1056/0.05518，KD student 0.0444/0.01741，NDCG 相对 DIN **-68.46%**。KD 相对 target-only student 仍为 **+3.02%**，但远弱于 DIN 且 DIN head share 更高。指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

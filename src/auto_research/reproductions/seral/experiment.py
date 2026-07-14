@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 from pathlib import Path
-from ..industrial_batch import compact_movielens, evaluate_scores
+from ..industrial_batch import FAIR_DIN_STEPS, compact_movielens, evaluate_scores, run_din_baseline
 from ..rec_utils import summarize_runs
 from .model import align_ipo, scorer, serendipity_at_10, train_sft
 
@@ -16,10 +16,12 @@ def reproduce_seral(dataset_dir: Path, seed: int = 42):
         training.append({"sft": st, "ipo": it})
     aggregate = {name: summarize_runs(values) for name, values in results.items()}; novelty_mean = {name: float(sum(values) / len(values)) for name, values in novelty.items()}
     base, method = aggregate["sft"], aggregate["seral_ipo"]
-    return {"paper": {"arxiv_id": "2502.13539", "title": "Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models", "url": "https://arxiv.org/abs/2502.13539", "track": "recommendation"}, "dataset": "MovieLens-100K content and chronological feedback", "setup": {"users": len(data.train), "items": data.item_count, "steps": steps, "seeds": [seed, seed + 1, seed + 2]}, "training": training, "results": aggregate, "serendipity_at_10": novelty_mean, "ndcg_gain_percent": 100 * (method["ndcg_at_10"] / max(base["ndcg_at_10"], 1e-12) - 1), "paper_online_ab": {"serendipity_pvr_percent": 5.7, "serendipity_clicks_percent": 29.56, "transactions_percent": 27.6}, "scope": "Builds static/short/long cognition profiles, SFTs a generative catalog scorer, constructs CDI preference pairs from collaborative relevance and category novelty, applies the paper's IPO+SFT objective, and caches full-catalog nearline scores. MovieLens replaces Taobao and GPT-4 annotations."}
+    seeds = (seed, seed + 1, seed + 2)
+    din_steps = FAIR_DIN_STEPS
+    aggregate["din"], din_training = run_din_baseline(data, seeds, din_steps)
+    return {"paper": {"arxiv_id": "2502.13539", "title": "Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models", "url": "https://arxiv.org/abs/2502.13539", "track": "recommendation"}, "dataset": "MovieLens-100K content and chronological feedback", "setup": {"users": len(data.train), "items": data.item_count, "steps": steps, "din_steps": din_steps, "seeds": list(seeds)}, "training": training, "din_training": din_training, "results": aggregate, "serendipity_at_10": novelty_mean, "ndcg_gain_percent": 100 * (method["ndcg_at_10"] / max(base["ndcg_at_10"], 1e-12) - 1), "ndcg_vs_din_percent": 100 * (method["ndcg_at_10"] / max(aggregate["din"]["ndcg_at_10"], 1e-12) - 1), "paper_online_ab": {"serendipity_pvr_percent": 5.7, "serendipity_clicks_percent": 29.56, "transactions_percent": 27.6}, "scope": "Builds static/short/long cognition profiles, SFTs a generative catalog scorer, constructs CDI preference pairs from collaborative relevance and category novelty, applies the paper's IPO+SFT objective, and caches full-catalog nearline scores. MovieLens replaces Taobao and GPT-4 annotations."}
 
 
 def copy_model(model):
     import copy
     return copy.deepcopy(model)
-
