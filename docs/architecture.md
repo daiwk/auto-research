@@ -26,6 +26,8 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 
 `ReproductionAdapter.run` 保持统一签名 `run(dataset_dir: Path, seed: int) -> dict`；`render` 将该 dict 转成 Markdown。每个 adapter 还必须声明 `fidelity` 和尚未实现的 `omitted_core_components`。
 
+论文代码和物理文档路径以 adapter/arXiv ID 为稳定主键，不因分类变化而移动；阅读入口由 `docs/reproductions/catalog/` 提供按公司、主题和年月三套索引。新目录项在 `PaperMetadata` 中声明 `organization`、`published`、`topics` 和结构化 `online_ab`。
+
 ## Reproduction fidelity gate
 
 | Level | Required evidence | Default `--paper all` |
@@ -41,9 +43,10 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 1. 创建 `src/auto_research/reproductions/<key>/`。
 2. 将论文公式或网络放在 `algorithm.py`/`model.py`，数据切分和对照实验放在 `experiment.py`。
 3. 在 `report.py` 中渲染该论文真正需要的指标。
-4. 在 `adapter.py` 构造并 `register(ReproductionAdapter(...))`，声明 `fidelity`；registry 会自动发现它。
+4. 在 `adapter.py` 构造并 `register(ReproductionAdapter(...))`，声明 `fidelity`、公司、年月、主题和量化 `OnlineABEvidence`；registry 会自动发现它，并拒绝没有 A/B 证据的新增目录项。
 5. 在 `tests/reproductions/` 增加算法单测、registry 发现测试和必要的最小端到端测试。
 6. 在 `docs/reproductions/<arxiv-id>-<key>/README.md` 记录经复核的长期结论。
+7. 更新 `docs/reproductions/catalog/` 的公司、主题、年月入口；无 A/B 的用户点名经典例外必须写明 `selection_exception`。
 
 新论文不需要修改 CLI 分支、公共报告渲染器或其他论文目录。
 
