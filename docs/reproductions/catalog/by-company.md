@@ -7,6 +7,11 @@
 - 2023-11 · [BEQUE](../2311.03758-beque/README.md) · LLM query rewriting / PRO
 - 2025-02 · [LUM](../2502.08309-lum/README.md) · generative user knowledge / DLRM
 - 2025-08 · [SaviorRec](../2508.01375-saviorrec/README.md) · cold start / semantic-behavior alignment
+- 2025-02 · [SERAL](../2502.13539-seral/README.md) · serendipity / IPO alignment
+
+## Baidu
+
+- 2025-03 · [COBRA](../2503.02453-cobra/README.md) · sparse-dense generative retrieval
 
 ## Ant Group
 
@@ -26,6 +31,7 @@
 - 2023-05 · [TIGER](../2305.05065-tiger/README.md)
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)
+- 2026-03 · [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)
 
 ## Huawei
 
@@ -37,6 +43,7 @@
 - 2024-05 · [LEARN](../2405.03988-learn/README.md)
 - 2025-02 · [OneRec](../2502.18965-onerec/README.md)
 - 2025-08 · [OneRec-V2](../2508.20900-onerec-v2/README.md)
+- 2026-02 · [GR4AD](../2602.22732-gr4ad/README.md) · generative advertising
 
 ## Meituan
 
@@ -49,6 +56,7 @@
 - 2026-01 · [LLaTTE](../2601.20083-llatte/README.md)
 - 2026-05 · [Memento](../2605.24051-memento/README.md)
 - 2026-05 · [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md) · semantic ads retrieval / predictability
+- 2026-05 · [MM-LLM](../2605.09338-mm-llm/README.md) · multimedia understanding
 - 2026-06 · [G2Rec](../2606.20554-g2rec/README.md) · [CMSL](../2606.28533-cmsl/README.md)
 - 2026-07 · [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)
 
@@ -61,6 +69,11 @@
 ## Tencent / WeChat
 
 - 2024-12 · [PRECISE](../2412.06308-precise/README.md) · LLM semantic + collaborative sequential pre-training
+- 2024-11 · [LEADRE](../2411.13789-leadre/README.md) · generative display ads
+
+## Yandex
+
+- 2025-07 · [ARGUS](../2507.15994-argus/README.md) · large music Transformer
 
 ## Academic / classic baseline
 

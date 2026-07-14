@@ -12,7 +12,7 @@
 
 数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
 
-## 当前审计（38/38 adapters）
+## 当前审计（45/45 adapters）
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
@@ -49,6 +49,13 @@
 | 核心机制 | `mdcns` · [MDCNS](2605.19651-mdcns/README.md) | 论文公开离线结果 | 作者 Beauty 切分；三源采样与双模型更新实际执行 |
 | 核心机制 | `memento` · [Memento](2605.24051-memento/README.md) | Meta CTR +1.0%、CVR +1.2% | query-conditioned MMR 实际执行；生产 replay/serving 省略 |
 | 核心机制 | `llm-ad-retrieval` · [LLM Retrieval](2605.21969-llm-ad-retrieval/README.md) | Meta top-line +0.45%、final recall +1.2% | domain SFT + LLM attribute graph；Recall@20 +11.90%，score drift -77.36% |
+| 完整核心链路 | `seral` · [SERAL](2502.13539-seral/README.md) | Taobao clicks +29.56%、transactions +27.6% | cognition/CDI/IPO/nearline；NDCG +8.59%，novelty 未提升 |
+| 完整核心链路 | `leadre` · [LEADRE](2411.13789-leadre/README.md) | WeChat GMV +1.57%/+1.17% | S-ID + auxiliary + DPO；NDCG +3.10% |
+| 完整核心链路 | `cobra` · [COBRA](2503.02453-cobra/README.md) | Conversion +3.60%、ARPU +4.15% | sparse→dense cascade；NDCG +45.83% |
+| 核心机制 | `argus` · [ARGUS](2507.15994-argus/README.md) | Listening +2.26%、likes +6.37% | feedback decomposition；NDCG +1.09%，Hit 下降 |
+| 核心机制 | `gr4ad` · [GR4AD](2602.22732-gr4ad/README.md) | Kuaishou ad revenue +4.2% | UA-SID/LazyAR/VSL/RSPO；NDCG +41.35%，head share +42.78pt |
+| 核心机制 | `cross-domain-kd` · [Cross-domain KD](2603.28994-cross-domain-kd/README.md) | Music discovery +1.12% | source teacher→target student；NDCG +3.02% |
+| 核心机制 | `mm-llm` · [MM-LLM](2605.09338-mm-llm/README.md) | Meta engagement +0.02% | caption tokens + semantic profile；NDCG +0.03%，Hit 下降 |
 | 核心机制 | `cluster-goobs` · [Cluster GOOBS](2607.00448-cluster-goobs/README.md) | Meta CTR +53% | online sampler 实际执行；genre 替换私有 LLM cluster |
 | 概念验证 | `llatte` · [LLaTTE](2601.20083-llatte/README.md) | Meta conversion +4.3% | 缺 MLA、DHEN、semantic LLM features |
 | 概念验证 | `self-evolving-rec` · [Self-Evolving RecSys](2602.10226-self-evolving-rec/README.md) | Google +0.03%–+0.14% | 固定候选代替 LLM agent；无线上反馈闭环 |

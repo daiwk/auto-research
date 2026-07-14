@@ -41,6 +41,13 @@
 | [TransAct V2](https://arxiv.org/abs/2506.02267) | Pinterest | lifelong sequence、candidate NN、next-action loss | Repin +6.35%；Hide -12.80%；Time Spent +1.41% |
 | [PinFM](https://arxiv.org/abs/2507.12704) | Pinterest | sequence foundation model、DCAT、pretrain/fine-tune | HF Sitewide Saves +1.20%；Fresh Saves +5.70%；I2I +0.72% |
 | [LLM Retrieval](https://arxiv.org/abs/2605.21969) | Meta | LLM hierarchical attributes、semantic graph、predictability | top-line +0.45%；final-stage recall +1.2%；A/A' difference -8.62% |
+| [SERAL](https://arxiv.org/abs/2502.13539) | Alibaba | cognition profile、IPO、nearline serendipity | clicks +29.56%；transactions +27.6% |
+| [LEADRE](https://arxiv.org/abs/2411.13789) | Tencent | intent-aware S-ID generation、DPO | Channels/Moments GMV +1.57%/+1.17% |
+| [COBRA](https://arxiv.org/abs/2503.02453) | Baidu | cascaded sparse-dense generation | conversion +3.60%；ARPU +4.15% |
+| [ARGUS](https://arxiv.org/abs/2507.15994) | Yandex | feedback/item decomposed Transformer | listening +2.26%；likes +6.37% |
+| [GR4AD](https://arxiv.org/abs/2602.22732) | Kuaishou | UA-SID、LazyAR、VSL、RSPO | ad revenue +4.2% |
+| [Cross-domain KD](https://arxiv.org/abs/2603.28994) | Google | YouTube→Music zero-shot KD | discovery +1.12%；new releases +11.39% |
+| [MM-LLM](https://arxiv.org/abs/2605.09338) | Meta | multimodal caption-token features | engagement +0.02% |
 
 ## 用户指定的经典基线例外
 
@@ -58,7 +65,6 @@
 | Paper | Organization | Online evidence | Status |
 |---|---|---|---|
 | [OneRec Technical Report](https://arxiv.org/abs/2506.13695) | Kuaishou | App Stay Time +0.54%/+1.24% | 与 OneRec adapter 机制重叠，先不重复实现 |
-| [GR4AD](https://arxiv.org/abs/2602.22732) | Kuaishou | Ad revenue 最高 +4.2% | 与 OneRec-V2 的 LazyAR 链路重叠，候选保留 |
 
 ## Google / Meta 2026 专项审计
 
@@ -72,8 +78,8 @@
 | 已实现 | G2Rec (2606.20554) | Meta | engagement +0.06%–+0.19% |
 | 已实现 | CMSL (2606.28533) | Meta | retrieval 指标 +0.092%–+0.171% |
 | 已实现 | Cluster GOOBS (2607.00448) | Meta | CTR +53%，头部曝光集中度下降 |
-| 候选保留 | Zero-shot Cross-domain KD for YouTube Music (2603.28994) | Google | 两周 live experiments；与现有蒸馏 adapter 部分重叠 |
-| 候选保留 | MM-LLM Multimedia Understanding (2605.09338) | Meta | engagement +0.02%；与现有语义特征方向重叠 |
+| 已实现 | Zero-shot Cross-domain KD for YouTube Music (2603.28994) | Google | discovery +1.12%、new releases +11.39% |
+| 已实现 | MM-LLM Multimedia Understanding (2605.09338) | Meta | engagement +0.02% |
 | 已实现 | LLM Retrieval for Stable Ad Recommendations (2605.21969) | Meta | top-line +0.45%、final-stage recall +1.2%、A/A' difference -8.62% |
 
 排除示例：SilverTorch 首次提交于 2025-11，超出时间窗；Fine-Tuned LLM as a Complementary Predictor 的部署属于 Pinterest；Rec-Distill 不属于 Google/Meta，但已按扩大后的公司范围实现。

@@ -1,0 +1,5 @@
+from ..base import OnlineABEvidence, PaperMetadata, ReproductionAdapter, ReproductionFidelity
+from ..registry import register
+from .experiment import reproduce_leadre
+from .report import render
+ADAPTER = register(ReproductionAdapter(key="leadre", paper=PaperMetadata(arxiv_id="2411.13789", title="LEADRE: Multi-Faceted Knowledge Enhanced LLM Empowered Display Advertisement Recommender System", url="https://arxiv.org/abs/2411.13789", track="recommendation", organization="Tencent / WeChat", published="2024-11", topics=("llm-recommendation", "generative-retrieval", "advertising", "preference-alignment"), online_ab=(OnlineABEvidence(product="WeChat Channels", metric="GMV", lift_percent=1.57, traffic="production online A/B"), OnlineABEvidence(product="WeChat Moments", metric="GMV", lift_percent=1.17, traffic="production online A/B"))), run=reproduce_leadre, render=render, fidelity=ReproductionFidelity.FULL_PIPELINE, omitted_core_components=("private WeChat ad corpus and tens-of-billions-request serving stack",)))
