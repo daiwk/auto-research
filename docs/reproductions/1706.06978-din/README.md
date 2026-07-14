@@ -4,7 +4,9 @@
 
 论文：[arXiv 1706.06978](https://arxiv.org/abs/1706.06978) · [作者代码](https://github.com/zhougr1993/DeepInterestNetwork)
 
-## 背景与主要改动
+## 原始论文总结
+
+### 背景与主要改动
 
 传统 CTR 模型把用户全部行为压成固定向量，但用户与候选物品相关的兴趣只占历史的一部分。DIN 不再生成一个与候选无关的用户向量，而是用候选物品逐条激活历史行为，再把局部兴趣送入点击网络；Dice 根据当前特征分布自适应调整激活边界。
 
@@ -20,7 +22,7 @@ flowchart LR
     M --> Y["CTR logit"]
 ```
 
-## 核心公式
+### 核心公式
 
 对候选向量 \(q\) 和第 \(i\) 个行为 \(e_i\)，local activation 学习权重：
 
@@ -32,7 +34,7 @@ v_U(q)=\sum_i \operatorname{softmax}(a)_i e_i.
 Dice 用批次统计得到 \(p(s)=\sigma(\mathrm{BN}(s))\)，并计算
 \(\mathrm{Dice}(s)=p(s)s+(1-p(s))\alpha s\)。本地候选点击使用正负样本 BCE 训练。
 
-## 论文报告效果
+### 论文离线与线上效果
 
 - 离线：论文在 MovieLens-20M 报告 DIN AUC 0.7337、DIN+Dice 0.7348；Amazon 为 0.8818、0.8871。
 - 在线：Alibaba 2017-05 至 2017-06 的生产 A/B 中，CTR +10.0%，RPM +3.8%。

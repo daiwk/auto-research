@@ -1,0 +1,13 @@
+{
+  "paper": "2602.10226",
+  "adapter": "self-evolving-rec",
+  "fidelity": "concept_demo",
+  "diagnostic_only": true,
+  "dataset": "MovieLens-100K",
+  "setup": {"users": 932, "items": 1682, "seeds": [42, 43, 44], "candidate_generator": "deterministic fixed candidates"},
+  "results": {
+    "human_baseline": {"hit_at_10": 0.0833333333, "hit_at_10_std": 0.0043215472, "ndcg_at_10": 0.0399026401, "ndcg_at_10_std": 0.0017557126},
+    "promoted_candidate_proxy": {"hit_at_10": 0.0894134478, "hit_at_10_std": 0.0074508822, "ndcg_at_10": 0.0427481367, "ndcg_at_10_std": 0.0038460761}
+  },
+  "relative_ndcg_change_percent": 7.1310998
+}

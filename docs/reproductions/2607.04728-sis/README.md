@@ -35,7 +35,7 @@ $$\widetilde w_t=\begin{cases}1,&z_t=1\\g(w_t),&z_t=0,\end{cases}$$
 
 其中 $g$ 可对应 GRPO clipping、DAPO asymmetric clipping 或 GSPO sequence correction。论文用累计 log 偏差 $D=\sum_t|\log w_t|$ 证明 SIS 收紧 off-policy 近似误差。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文在 Qwen3-8B/14B dense 与 Qwen3-30B-A3B MoE 上训练，覆盖 DAPO-Math-17K、NQ+HotpotQA，以及 10 个数学/agent benchmark。主要结果：
 
@@ -58,4 +58,4 @@ $$\widetilde w_t=\begin{cases}1,&z_t=1\\g(w_t),&z_t=0,\end{cases}$$
 | 43 | 0.53% | 68.81% |
 | Mean | **6.62%** | **68.71%** |
 
-三个 seed 都降低方差，验证了核心机制。Tiny Shakespeare 仅是低成本 distribution-shift proxy；Qwen3、GRPO/DAPO/GSPO 完整训练所需模型与算力不适合本地 Mac，因此没有把该结果宣称为论文 benchmark 复刻。
+三个 seed 都降低方差，验证了核心机制。Tiny Shakespeare 仅是低成本 distribution-shift proxy；Qwen3、GRPO/DAPO/GSPO 完整训练所需模型与算力不适合本地 Mac，因此没有把该结果宣称为论文 benchmark 复刻。结构化指标见 [`metrics/tiny-shakespeare-seeds41-43.json`](metrics/tiny-shakespeare-seeds41-43.json)。

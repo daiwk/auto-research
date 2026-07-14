@@ -1,0 +1,13 @@
+{
+  "paper": "2605.19651",
+  "adapter": "mdcns",
+  "fidelity": "core_mechanism",
+  "dataset": "Amazon Beauty 5-core authors' split",
+  "setup": {"seed": 42, "users": 2237, "items": 12102, "train_transitions": 50000, "epochs": 4, "candidate_pool": 30, "top_k": 5},
+  "results": {
+    "uniform": {"hit_at_10": 0.0035762181, "ndcg_at_10": 0.0030157092},
+    "dns": {"hit_at_10": 0.0035762181, "ndcg_at_10": 0.0025068741},
+    "mdcns": {"hit_at_10": 0.0080464908, "ndcg_at_10": 0.0061746910}
+  },
+  "ndcg_gain_vs_uniform_percent": 104.7508783
+}

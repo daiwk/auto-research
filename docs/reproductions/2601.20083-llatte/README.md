@@ -41,7 +41,7 @@ $$\tau=\frac{\Delta NE_{downstream}}{\Delta NE_{upstream}}.$$
 
 它用于判断上游序列算力提升能有多少转化为下游线上模型收益。
 
-### 论文离线与在线效果
+### 论文离线与线上效果
 
 内部实验约 300 亿训练样本、128 张 H100、229K steps。论文发现平衡 depth/width 优于极深窄或极浅宽；增加序列计算的上游方案 NE 改善约 -0.14%，传到下游约 -0.07%，$\tau\approx50\%$；偏模型扩展方案约 -0.13%→-0.07%，$\tau\approx53\%$。这些是内部数据结果，无法在公开数据逐点核对。
 
@@ -56,4 +56,4 @@ $$\tau=\frac{\Delta NE_{downstream}}{\Delta NE_{upstream}}.$$
 | Short online sequence | **0.0851 ± 0.0040** | **0.0420 ± 0.0021** |
 | LLaTTE two-stage proxy | 0.0823 ± 0.0036 | 0.0405 ± 0.0014 |
 
-NDCG@10 **-3.57%**。短历史、小数据和弱内容特征下，cached long-history 表示没有带来收益，和论文“先有强语义表征再做 sequence scaling”的前提一致。原论文只使用 Meta 内部数据，因此保留 MovieLens proxy；NumPy scorer 不等价于 MLA/DHEN/H100 serving。
+NDCG@10 **-3.57%**。短历史、小数据和弱内容特征下，cached long-history 表示没有带来收益，和论文“先有强语义表征再做 sequence scaling”的前提一致。原论文只使用 Meta 内部数据，因此保留 MovieLens proxy；NumPy scorer 不等价于 MLA/DHEN/H100 serving。诊断指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

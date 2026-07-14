@@ -13,16 +13,17 @@
 - [BEQUE](../2311.03758-beque/README.md)：生成式 query rewrite、离线反馈、PRO
 - [M6-Rec](../2205.08084-m6rec/README.md)：自然语言统一任务、option-adapter tuning
 - [PLUM](../2510.07784-plum/README.md)：LLM CPT + SFT + Semantic ID
+- [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：LLM agent 自动研究闭环（当前概念验证）
 - [PinFM](../2507.12704-pinfm/README.md)：推荐 foundation model、预训练/微调
 - [LLaTTE](../2601.20083-llatte/README.md)：LLM semantic feature（当前概念验证）
 
 ## 生成式召回与端到端推荐
 
-- [SessionRec](../2502.10157-sessionrec/README.md) · [PinRec](../2504.10507-pinrec/README.md) · [GenRank](../2505.04180-genrank/README.md) · [TIGER](../2305.05065-tiger/README.md) · [OneRec](../2502.18965-onerec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [G2Rec](../2606.20554-g2rec/README.md) · [HSTU](../2402.17152-hstu/README.md)
+- [SessionRec](../2502.10157-sessionrec/README.md) · [PinRec](../2504.10507-pinrec/README.md) · [GenRank](../2505.04180-genrank/README.md) · [TIGER](../2305.05065-tiger/README.md) · [OneRec](../2502.18965-onerec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [G2Rec](../2606.20554-g2rec/README.md) · [HSTU](../2402.17152-hstu/README.md) · [CMSL](../2606.28533-cmsl/README.md)
 
 ## 排序网络与长序列
 
-- [DIN](../1706.06978-din/README.md) · [SASRec](../1808.09781-sasrec/README.md) · [LONGER](../2505.04421-longer/README.md) · [RankMixer](../2507.15551-rankmixer/README.md) · [HyFormer](../2601.12681-hyformer/README.md) · [OneTrans](../2510.26104-onetrans/README.md) · [MixFormer](../2602.14110-mixformer/README.md) · [TransAct V2](../2506.02267-transact-v2/README.md)
+- [DIN](../1706.06978-din/README.md) · [SASRec](../1808.09781-sasrec/README.md) · [LONGER](../2505.04421-longer/README.md) · [RankMixer](../2507.15551-rankmixer/README.md) · [HyFormer](../2601.12681-hyformer/README.md) · [OneTrans](../2510.26104-onetrans/README.md) · [MixFormer](../2602.14110-mixformer/README.md) · [TransAct V2](../2506.02267-transact-v2/README.md) · [Memento](../2605.24051-memento/README.md)
 
 ## 冷启动与语义-行为对齐
 

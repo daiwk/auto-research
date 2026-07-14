@@ -4,7 +4,9 @@
 
 论文：[arXiv 2305.05065](https://arxiv.org/abs/2305.05065)
 
-## 背景与主要改动
+## 原始论文总结
+
+### 背景与主要改动
 
 传统召回为每个物品维护独立 ID embedding，难以共享语义，也无法自然生成新物品。TIGER 先把内容向量量化成分层 Semantic ID，再让 encoder-decoder 像生成 token 一样生成下一个物品；同一语义前缀的冲突由额外 token 消解。
 
@@ -20,7 +22,7 @@ flowchart LR
     D --> R["约束到有效 Semantic IDs 的全库排序"]
 ```
 
-## 核心公式
+### 核心公式
 
 RQ-VAE 逐层量化 residual：
 
@@ -32,7 +34,7 @@ r_l=r_{l-1}-e_{l,c_l}.
 物品 ID 为 \((c_1,c_2,c_3,c_{collision})\)。生成器最大化条件概率
 \(\sum_t\log p(c_t\mid c_{<t},\mathrm{history})\)；本地推理对所有有效物品 ID 求逐 token log-probability 之和，不用打分融合代理。
 
-## 论文报告效果
+### 论文离线与线上效果
 
 - 离线：论文在 Amazon Sports/Beauty/Toys 报告 TIGER Recall@10 0.0400/0.0648/0.0712，NDCG@10 0.0225/0.0384/0.0432；相对当时最佳 baseline 的 NDCG@10 分别 +10.29%/+17.43%/+14.97%。
 - 在线：论文没有报告真实生产线上 A/B。

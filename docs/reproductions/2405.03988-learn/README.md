@@ -5,7 +5,9 @@
 - 论文：[arXiv 2405.03988](https://arxiv.org/abs/2405.03988)，Kuaishou
 - Adapter：`learn`；运行：`auto-research reproduce --paper learn --seed 42`
 
-## 原论文
+## 原始论文总结
+
+### 背景与主要改动
 
 直接把冻结 LLM embedding 用作推荐表示存在开放世界语义域与协同域的差距。LEARN 的 CEG 冻结 LLM 并平均池化 item 文本，PCH 用可训练因果 Transformer 从历史 content embeddings 学用户偏好，再投影到线上推荐空间。
 
@@ -20,13 +22,17 @@ flowchart LR
   I --> D
 ```
 
+### 核心公式
+
 $$e_i^c=\mathrm{meanpool}(LLM(text_i)),\quad
 u_{1:H}=PCH(e_{i_1}^c,\ldots,e_{i_H}^c),\quad
 \mathcal L=-\sum_t\log\frac{e^{u_t^\top v_{t+1}}}{\sum_j e^{u_t^\top v_j}}.$$
 
+### 论文离线与线上效果
+
 论文 LEARN 的 H@100 0.0701，对 frozen conversational LLM baseline 的 0.0101；Amazon Books H@200 0.1874。快手 20% 流量、9 天 A/B：冷启/长尾 item Revenue **+8.77%/+4.63%**，冷启/长尾 user +1.56%/+5.79%。
 
-## 本地结果
+## 本地复现
 
 | Model | Hit@10 | NDCG@10 |
 |---|---:|---:|

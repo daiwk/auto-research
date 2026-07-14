@@ -4,7 +4,9 @@
 
 论文：[arXiv 2506.02267](https://arxiv.org/abs/2506.02267) · 机构：Pinterest
 
-## 背景与主要改动
+## 原始论文总结
+
+### 背景与主要改动
 
 TransAct 主要建模约百条实时行为，容易忽略用户多年的长期兴趣。TransAct V2 从约 \(10^4\) 条 lifelong 序列中按候选相似度取回相关行为，同时保留最近行为，再通过共享 Transformer 做 CTR 排序；额外的 Next Action Loss 迫使序列表征预测下一次正向互动。论文也包含 SKUT、request deduplication 等 serving 优化，本地复现聚焦模型链路。
 
@@ -22,7 +24,7 @@ flowchart LR
     T --> NAL["Next Action sampled loss"]
 ```
 
-## 核心公式
+### 核心公式
 
 候选 \(c\) 对序列 \(S\) 的检索为：
 
@@ -42,7 +44,7 @@ L_{NAL}=-\sum_{u,t}\log\frac{e^{\langle u_t,p_{t+1}\rangle}}
 \qquad L=L_{CTR}+w_{NAL}L_{NAL}.
 \]
 
-## 论文报告效果
+### 论文离线与线上效果
 
 - 离线：相对无序列 baseline，BST/TransAct/TransAct V2 的 Repin HIT@3 分别 +6.04%/+7.74%/+13.31%；TransAct V2 Hide HIT@3 -11.25%。
 - 在线：每组 1.5% Pinterest Homefeed 流量；相对 TransAct，Repin Volume +6.35%、Hide Volume -12.80%、Impression Diversity +0.45%、App Time Spent +1.41%。

@@ -40,7 +40,7 @@ $$v_a=\frac{\sum_i p_{i,a}x_i}{\sum_i p_{i,a}},\qquad y_i=\sum_a p_{i,a}v_a,$$
 $$\mathcal L^t=\underbrace{-\log F(i_{t+1}\mid R_{u,\le2t+1})}_{\mathcal L_{item}^t}
 +\lambda\underbrace{\left[-\sum_a p_{i_t,a}\log F(a\mid R_{u,\le2t})\right]}_{\mathcal L_{profile}^t}.$$
 
-### 论文离线与在线效果
+### 论文离线与线上效果
 
 论文在 Beauty、Sports、Toys、Yelp 上采用 5-core、leave-one-out 和 99 个采样负例，Llama 2 13B + LoRA 训练 3 epochs。G2Rec 在四个数据集的全部 6 个指标上排名第一：
 

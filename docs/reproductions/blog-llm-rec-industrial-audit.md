@@ -8,7 +8,7 @@
 
 | Route | Papers |
 |---|---|
-| Text / LLM embedding | PLUM、M6-Rec、KAR、BAHE、BEQUE、LEARN、NoteLLM、LSVCR、MSD、LUM、SaviorRec |
+| Text / LLM embedding | PLUM、M6-Rec、KAR、BAHE、BEQUE、LEARN、NoteLLM、LSVCR、MSD、LUM、PRECISE、SaviorRec |
 | ID/SID / generative | HSTU、OneRec、OneRec-V2、LONGER、RankMixer、PinFM、PinRec、GenRank、SessionRec |
 
 已实现集合持续按 PR 扩展；KAR/BAHE/BEQUE 只是博客专项的首批，不代表全量筛选。
@@ -18,7 +18,6 @@
 | Paper | Company | 代表性 | 原文量化线上证据 |
 |---|---|---|---|
 | SERAL (2502.13539) | Alibaba | serendipity alignment | S-PVR +5.7pt，另报告 CTR/业务指标 |
-| PRECISE (2412.06308) | WeChat | pretrained content embedding | 最高 shares +2.560%，并报告 clicks/read time |
 | LCU (2504.01602) | Kuaishou | LLM comment understanding | staytime +1.27%、exposure +0.81% |
 | LEADRE (2411.13789) | Tencent | LLM-enhanced ad retrieval | Channels GMV +1.57%、Moments +1.17% |
 | COBRA (2503.02453) | Baidu | sparse+dense generative retrieval | conversion +3.60%、ARPU +4.15% |
@@ -31,7 +30,6 @@
 - 章节中未在原文找到量化线上 A/B 的条目，例如 Meta sid+ID 表征、HeteroRec、MTGRBoost、OpenOneRec、NoteLLM-2 等；部署或离线提升不替代硬门槛。
 - EGA-V1 虽满足 A/B 门槛，但公开数据缺少 bid、RPM、ROI、地理广告 slate 外部性；用户已明确决定跳过，不再排队，也不用普通点击排序代理冒充其端到端广告分配复现。
 - LCU 的 KuaiComt/LCU Zenodo 文件需中国机构签保密协议后才授权，官方仓库也未提供第一阶段 LLM 微调脚本；当前只保留论文与官方代码审计，不用合成评论数据声称复现。
-- PRECISE 已完成公开 MovieLens-1M 缩小复现：真实 LLM token、top-k MoE、UT→TT 与 BPR 均执行，3-seed Recall@10 相对 TT-only +40.0%，但 Cold Recall -50.0%。
 - 与已有 adapter 核心链路高度重合的论文先保留，例如更多 OneRec/HSTU scaling 变体。
 - 需要广告拍卖、地理位置或内容审核专有环境才能验证核心结论的论文，先记录而不做弱代理。
 

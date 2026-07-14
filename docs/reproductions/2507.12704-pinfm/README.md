@@ -4,7 +4,9 @@
 
 论文：[arXiv 2507.12704](https://arxiv.org/abs/2507.12704) · 机构：Pinterest
 
-## 背景与主要改动
+## 原始论文总结
+
+### 背景与主要改动
 
 PinFM 把“先在跨场景用户行为上预训练，再接入各排序模型微调”的 Foundation Model 范式带到工业推荐。decoder-only backbone 学习 next/multi/future token；下游把候选追加到用户序列做 early fusion。DCAT 利用同一请求的候选共享用户历史，把 context self-attention 只算一次，然后让候选对缓存的 context KV 做 cross-attention。
 
@@ -19,7 +21,7 @@ flowchart LR
     X --> R["下游排序 loss + NTL 微调"]
 ```
 
-## 核心公式
+### 核心公式
 
 预训练表征为
 
@@ -42,7 +44,7 @@ X_c^l=g\!\left(Attn(Q_c^l,[K_u^l;K_c^l],[V_u^l;V_c^l]),X_c^{l-1}\right).
 
 本实现保留这一数学分解并在全库评估中真实复用 context KV，不以普通 pooled Transformer 代理。
 
-## 论文报告效果
+### 论文离线与线上效果
 
 - 离线：Homefeed Save HIT@3 中 PinFM-base +2.91%、GraphSAGE-LT +3.76%；加入 CIR、age dropout 与 GraphSAGE-LT 后，28 日内新物品 Save HIT@3 +17.72%。
 - 在线：95% 置信水平显著；Homefeed sitewide/surface/fresh Saves +1.20%/+2.60%/+5.70%，I2I sitewide/surface Saves +0.72%/+2.09%。

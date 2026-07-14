@@ -39,7 +39,7 @@ Ember Quadratic 进一步加入乘性交互：
 
 $$\Psi(X^h)=X^h\odot ReLU(W_a^hX)+X^h.$$
 
-### 论文离线与在线效果
+### 论文离线与线上效果
 
 内部训练约 500 亿样本，在随后 10 亿样本评估；原始事件最长约 190K、embedding 历史最长约 20K。Representation Memento 的归一化熵（越低越好）如下：
 
@@ -62,4 +62,4 @@ Data Memento 的主要离线改善从 MP -0.107%、RAND25-RS -0.120%、MMR25-ES 
 | LastN | 0.0901 | 0.0443 | 0.2979 |
 | Memento MMR | **0.0966** | **0.0464** | 0.3093 |
 
-NDCG@10 **+4.78%**，最佳 $\lambda=0.30$，表明多样性惩罚有用。原论文数据和 serving 系统均为 Meta 内部资源，所以继续使用公开 proxy；未复现 Ember、INT8 检索服务与 Data Memento replay。
+NDCG@10 **+4.78%**，最佳 $\lambda=0.30$，表明多样性惩罚有用。原论文数据和 serving 系统均为 Meta 内部资源，所以继续使用公开 proxy；未复现 Ember、INT8 检索服务与 Data Memento replay。结构化指标见 [`metrics/movielens-100k-seed42.json`](metrics/movielens-100k-seed42.json)。

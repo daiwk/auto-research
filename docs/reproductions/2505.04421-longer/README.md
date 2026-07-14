@@ -55,4 +55,4 @@ MovieLens-100K 上实现 global summary、group size=4 的局部变化保留式 
 | Recent-sequence transformer proxy | 0.0697 ± 0.0038 | 0.0340 ± 0.0017 |
 | LONGER token-merge proxy | 0.0694 ± 0.0013 | **0.0341 ± 0.0012** |
 
-NDCG@10 **+0.41%**，提升小于 seed 波动，只能证明压缩没有明显破坏质量。ByteDance 私有长序列、5.2B 样本和 GPU 同步 serving 不可公开，因此这不是 headline 复刻。
+NDCG@10 **+0.41%**，提升小于 seed 波动，只能证明压缩没有明显破坏质量。ByteDance 私有长序列、5.2B 样本和 GPU 同步 serving 不可公开，因此这不是 headline 复刻。诊断指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)，其中明确标记 `diagnostic_only`。

@@ -7,6 +7,8 @@
 
 ## 原始论文总结
 
+### 背景与主要改动
+
 LONGER→RankMixer 类串行架构先压缩长序列、再做异构字段交互，信息流晚且单向。HyFormer 从非序列字段和 sequence mean 生成 Global Queries，每层用 queries cross-attend 当前 sequence K/V，再把 decoded queries 与非序列 tokens 做 RankMixer-style boosting；boosted queries 进入下一层重新解码，实现双向、逐层共同演化。
 
 ```mermaid
@@ -20,15 +22,19 @@ flowchart LR
   F --> G["ranking head"]
 ```
 
+### 核心公式
+
 $$Q^{(0)}=[\mathrm{FFN}_1(Global),\ldots,\mathrm{FFN}_N(Global)],$$
 
 $$\widehat Q^{(l)}=\operatorname{CrossAttn}(Q^{(l-1)},K^{(l)},V^{(l)}),$$
 
 $$Q^{(l)}=Q+\operatorname{PerTokenFFN}(\operatorname{TokenMix}(Q)).$$
 
+### 论文离线与线上效果
+
 论文在工业数据上相对 baseline AUC 约 `+0.74%`；Douyin Search 线上 watch time/U `+0.293%`、finish play/U `+1.111%`、query change rate `-0.236%`。
 
-## 本地复现与结果
+## 本地复现
 
 2 queries、2 NS tokens、64d、2 layers、32 行为长度；对比独立 sequence Transformer + dense MLP 的 late fusion。每组 240 step，三个 seed。
 

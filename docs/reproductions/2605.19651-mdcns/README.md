@@ -42,7 +42,7 @@ $$\mathcal L_{rec}=\alpha\mathcal L_{self}+\beta\mathcal L_{peer}+\gamma\mathcal
 $$p_{u,v}^{*}=\operatorname{softmax}(s_{u,v}^{*}/\tau),\quad
 \mathcal L=\mathcal L_{rec}+\mu\tau^2 KL(p^{teacher}\Vert p^{self}).$$
 
-### 论文效果
+### 论文离线与线上效果
 
 论文使用 Beauty、Toys、Sports、Health、LastFM、KuaiRand，按 70/20/10 切分，报告 Recall/NDCG@5/10/20。以主表中的公开数据为例：
 
@@ -65,4 +65,4 @@ $$p_{u,v}^{*}=\operatorname{softmax}(s_{u,v}^{*}/\tau),\quad
 | DNS | 0.003576 | 0.002507 |
 | MDCNS | **0.008046** | **0.006175** |
 
-MDCNS 相对 Uniform 的 NDCG@10 为 **+104.75%**。绝对值低于论文，原因包括轻量一阶 Markov backbone、训练样本上限和未复刻 SASRec/Mamba4Rec；因此结论只支持“核心采样路径在同源公开数据上有效”。
+MDCNS 相对 Uniform 的 NDCG@10 为 **+104.75%**。绝对值低于论文，原因包括轻量一阶 Markov backbone、训练样本上限和未复刻 SASRec/Mamba4Rec；因此结论只支持“核心采样路径在同源公开数据上有效”。结构化指标见 [`metrics/amazon-beauty-seed42.json`](metrics/amazon-beauty-seed42.json)。

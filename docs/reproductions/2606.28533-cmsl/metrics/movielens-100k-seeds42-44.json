@@ -1,0 +1,13 @@
+{
+  "paper": "2606.28533",
+  "adapter": "cmsl",
+  "fidelity": "concept_demo",
+  "diagnostic_only": true,
+  "dataset": "MovieLens-100K",
+  "setup": {"users": 932, "items": 1682, "seeds": [42, 43, 44], "latent_sequences": 6},
+  "results": {
+    "single_sequence": {"hit_at_10": 0.0726037196, "hit_at_10_std": 0.0013382179, "ndcg_at_10": 0.0351283842, "ndcg_at_10_std": 0.0013732621},
+    "cmsl_proxy": {"hit_at_10": 0.0726037196, "hit_at_10_std": 0.0026764359, "ndcg_at_10": 0.0354613680, "ndcg_at_10_std": 0.0016042573}
+  },
+  "relative_ndcg_change_percent": 0.9479010
+}

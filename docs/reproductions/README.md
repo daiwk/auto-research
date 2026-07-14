@@ -2,7 +2,7 @@
 
 这里是论文专用 adapter 的长期实验索引。每篇论文的模型、实验、报告和结论文档独立存放，不与通用 topic research loop 混写。
 
-后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选见[原报告](2026-google-meta-online-ab-selection.md)。
+后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选已合并到[统一筛选文档](industrial-online-ab-selection.md#google--meta-2026-专项审计)。
 
 个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。
 
@@ -12,7 +12,7 @@
 
 数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
 
-## 当前审计
+## 当前审计（37/37 adapters）
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|

@@ -5,7 +5,9 @@
 - 论文：[arXiv 2403.01744](https://arxiv.org/abs/2403.01744)，Xiaohongshu
 - Adapter：`notellm`；运行：`auto-research reproduce --paper notellm --seed 42`
 
-## 原论文
+## 原始论文总结
+
+### 背景与主要改动
 
 纯文本 embedding 缺少协同信号，纯对比学习又可能损害 LLM 生成能力。NoteLLM 用统一 compression prompt 将内容压到特殊 token；GCL 拉近用户共读 note，CSFT 从同一压缩状态生成 hashtag/category。
 
@@ -19,13 +21,17 @@ flowchart LR
   Z --> R["I2I vector retrieval"]
 ```
 
+### 核心公式
+
 $$\mathcal L=\mathcal L_{GCL}+\lambda\mathcal L_{CSFT},\quad
 \mathcal L_{GCL}=-\log\frac{e^{z_i^\top z_j/\tau}}{\sum_k e^{z_i^\top z_k/\tau}},\quad
 \mathcal L_{CSFT}=-\sum_t\log p(o_t|o_{<t},prompt).$$
 
+### 论文离线与线上效果
+
 论文 Recall@100：SentenceBERT 70.72%、RepLLaMA 83.63%、NoteLLM **84.02%**。小红书一周 I2I A/B：CTR **+16.20%**、评论数 +1.10%、周发布者 +0.41%，新 note 评论 +3.58%。
 
-## 本地结果
+## 本地复现
 
 | Model | Hit@10 | NDCG@10 |
 |---|---:|---:|

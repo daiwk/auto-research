@@ -1,0 +1,12 @@
+{
+  "paper": "2605.24051",
+  "adapter": "memento",
+  "fidelity": "core_mechanism",
+  "dataset": "MovieLens-100K",
+  "setup": {"users": 932, "items": 1682, "retrieved_memories": 8, "validation_selected_relevance_weight": 0.3},
+  "results": {
+    "last_n": {"hit_at_10": 0.0901287554, "ndcg_at_10": 0.0442879817, "head_share_at_10": 0.2978540773},
+    "memento_mmr": {"hit_at_10": 0.0965665236, "ndcg_at_10": 0.0464066394, "head_share_at_10": 0.3093347639}
+  },
+  "relative_ndcg_change_percent": 4.7838040
+}

@@ -1,0 +1,13 @@
+{
+  "paper": "2601.20083",
+  "adapter": "llatte",
+  "fidelity": "concept_demo",
+  "diagnostic_only": true,
+  "dataset": "MovieLens-100K",
+  "setup": {"users": 932, "items": 1682, "seeds": [42, 43, 44], "online_window": 12},
+  "results": {
+    "short_online_sequence": {"hit_at_10": 0.0851216023, "hit_at_10_std": 0.0039504152, "ndcg_at_10": 0.0419633725, "ndcg_at_10_std": 0.0020761021},
+    "llatte_two_stage_proxy": {"hit_at_10": 0.0822603720, "hit_at_10_std": 0.0036473673, "ndcg_at_10": 0.0404671665, "ndcg_at_10_std": 0.0013647090}
+  },
+  "relative_ndcg_change_percent": -3.5654594
+}
