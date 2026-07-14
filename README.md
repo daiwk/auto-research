@@ -18,6 +18,13 @@
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 完整核心链路 | `pinrec` | PinRec · Pinterest | outcome conditioning、unordered window multi-token、ANN vectors；Recall@10 -27.78% |
+| 完整核心链路 | `genrank` | GenRank · Xiaohongshu | item/action 组织对照、位置/时间偏置；延迟 -25.66%，AUC -0.46% |
+| 完整核心链路 | `learn` | LEARN · Kuaishou | 冻结 LLM CEG、PCH、dense all-position；NDCG +233.10%，头部偏置明显 |
+| 完整核心链路 | `notellm` | NoteLLM · Xiaohongshu | T5 compression token、行为 GCL、类别 CSFT；NDCG +7.15% |
+| 完整核心链路 | `kar` | KAR · Huawei | SmolLM2 真实生成用户/物品知识、缓存、hybrid experts；AUC 均值 +0.81% |
+| 完整核心链路 | `bahe` | BAHE · Ant Group | 浅层原子行为缓存、上层行为聚合；样本耗时 -53.61%，AUC -2.94% |
+| 完整核心链路 | `beque` | BEQUE · Alibaba | T5 SFT、无泄漏 beam 自采样、离线检索反馈、PRO；feedback +30.03%，increment -66.02% |
 | 完整核心链路 | `onerec-v2` | OneRec-V2 · Kuaishou | KuaiRand 真实时长反馈、RQ-SID、Lazy Decoder、DARS、GBPO；latency -54.78%，GBPO 均值 +21.66% |
 | 完整核心链路 | `plum` | PLUM · Google/YouTube | 135M decoder-only LM；2×2 CPT 消融；CPT 降低 loss，但 Recall@10 未提升 |
 | 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
@@ -58,7 +65,8 @@ src/auto_research/
     ├── base.py                    # adapter 稳定接口
     ├── registry.py                # 自动发现 */adapter.py
     ├── reporting.py               # 隔离的 JSON/Markdown 产物
-    ├── rec_utils.py               # 推荐实验共享数据切分与指标
+    ├── rec_utils.py               # 序列推荐共享数据切分与指标
+    ├── llm_rec_data.py            # LLM+推荐共享 CTR 文本数据与 AUC
     ├── sequence_training.py       # 序列模型共享的 all-position 训练与全库评估
     └── <paper>/
         ├── adapter.py             # 论文元数据与注册
@@ -93,6 +101,10 @@ pip install -e '.[neural-recs]'
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
+博客选出的 KAR、BAHE、BEQUE 均使用 MovieLens-100K：KAR 会用本地小型指令模型真实生成知识，BAHE 会落盘复用原子行为表示，BEQUE 会训练 seq2seq 模型并用公开目录实现离线检索反馈。三者都保留生产论文的核心训练链路，但不声称 MovieLens 等价于企业私有日志。
+
+博客两个“工业界+落地”章节已进一步全量解析：94 个主条目、138 个 arXiv 链接。新增 PinRec、GenRank、LEARN、NoteLLM，并把 SessionRec、EGA-V1、LSVCR、MSD、LUM、SaviorRec 等原文 A/B 合格论文放入持续实现队列；详见[专项审计](docs/reproductions/blog-llm-rec-industrial-audit.md)。
+
 ## 运行论文复现
 
 列出的 key 会由 adapter registry 动态生成：
@@ -111,6 +123,13 @@ auto-research reproduce --paper hstu --seed 42
 auto-research reproduce --paper transact-v2 --seed 42
 auto-research reproduce --paper pinfm --seed 42
 auto-research reproduce --paper m6rec --seed 42
+auto-research reproduce --paper kar --seed 42
+auto-research reproduce --paper bahe --seed 42
+auto-research reproduce --paper beque --seed 42
+auto-research reproduce --paper pinrec --seed 42
+auto-research reproduce --paper genrank --seed 42
+auto-research reproduce --paper learn --seed 42
+auto-research reproduce --paper notellm --seed 42
 auto-research reproduce --paper onerec-v2 --seed 42
 auto-research reproduce --paper self-evolving-rec --seed 42
 auto-research reproduce --paper all --seed 42

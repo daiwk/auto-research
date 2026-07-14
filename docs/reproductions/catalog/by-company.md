@@ -4,6 +4,11 @@
 
 - 2017-06 · [DIN](../1706.06978-din/README.md) · CTR ranking
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md) · LLM / parameter-efficient tuning
+- 2023-11 · [BEQUE](../2311.03758-beque/README.md) · LLM query rewriting / PRO
+
+## Ant Group
+
+- 2024-03 · [BAHE](../2403.19347-bahe/README.md) · long-text CTR / efficiency
 
 ## ByteDance / Douyin / TikTok
 
@@ -20,8 +25,13 @@
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)
 
+## Huawei
+
+- 2023-06 · [KAR](../2306.10933-kar/README.md) · LLM knowledge augmentation
+
 ## Kuaishou
 
+- 2024-05 · [LEARN](../2405.03988-learn/README.md)
 - 2025-02 · [OneRec](../2502.18965-onerec/README.md)
 - 2025-08 · [OneRec-V2](../2508.20900-onerec-v2/README.md)
 
@@ -35,6 +45,7 @@
 
 ## Pinterest
 
+- 2025-04 · [PinRec](../2504.10507-pinrec/README.md)
 - 2025-06 · [TransAct V2](../2506.02267-transact-v2/README.md)
 - 2025-07 · [PinFM](../2507.12704-pinfm/README.md)
 
@@ -43,3 +54,8 @@
 - 2018-08 · [SASRec](../1808.09781-sasrec/README.md)
 - 2026-05 · [MDCNS](../2605.19651-mdcns/README.md)
 - 2026-07 · [SIS](../2607.04728-sis/README.md)
+
+## Xiaohongshu
+
+- 2024-03 · [NoteLLM](../2403.01744-notellm/README.md)
+- 2025-05 · [GenRank](../2505.04180-genrank/README.md)

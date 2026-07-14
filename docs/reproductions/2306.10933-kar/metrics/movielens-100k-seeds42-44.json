@@ -1,0 +1,13 @@
+{
+  "dataset": "MovieLens 100K title/genre text",
+  "protocol": {"users": 20, "train_examples": 1829, "test_examples": 468, "steps": 100, "seeds": [42, 43, 44]},
+  "llm": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "generated_prompts": 875,
+  "auc": {
+    "id_ranker": {"values": [0.72982410, 0.70950181, 0.72631054], "mean": 0.72187882, "std": 0.01086181},
+    "kar_hybrid_expert": {"values": [0.72496584, 0.72333919, 0.73492094], "mean": 0.72774199, "std": 0.00627013},
+    "mean_absolute_gain": 0.00586317,
+    "mean_relative_gain_percent": 0.812
+  },
+  "checkpoint_committed": false
+}
