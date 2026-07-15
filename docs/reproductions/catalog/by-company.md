@@ -2,6 +2,8 @@
 
 ## Alibaba
 
+- 2026-02 · [SIGMA](../2602.22913-sigma/README.md) · multi-task generative recommendation / hybrid tokenization
+- 2026-05 · [LWGR](../2605.18771-lwgr/README.md) · personalized world knowledge / Lagrangian fusion
 - 2026-07 · [Prompt Generation](../2607.11326-prompt-generation/README.md) · LLM generative retrieval / feature protocol / autoresearch
 - 2017-06 · [DIN](../1706.06978-din/README.md) · CTR ranking
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md) · LLM / parameter-efficient tuning
@@ -66,6 +68,7 @@
 - 2025-04 · [PinRec](../2504.10507-pinrec/README.md)
 - 2025-06 · [TransAct V2](../2506.02267-transact-v2/README.md)
 - 2025-07 · [PinFM](../2507.12704-pinfm/README.md)
+- 2026-05 · [Complementary LLM Ads Predictor](../2605.27856-pinterest-ads-llm/README.md)
 
 ## Tencent / WeChat
 

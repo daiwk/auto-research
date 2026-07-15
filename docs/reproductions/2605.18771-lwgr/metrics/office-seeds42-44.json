@@ -1,0 +1,14 @@
+{
+  "paper": "2605.18771",
+  "adapter": "lwgr",
+  "dataset": {"name": "MiniOneRec Office", "train_rows": 12000, "validation_users": 48, "test_users": 48, "items": 3459},
+  "setup": {"model": "HuggingFaceTB/SmolLM2-135M", "seeds": [42, 43, 44], "reference_steps": 180, "policy_steps": 100, "selected": "reference"},
+  "test": {
+    "reference": {"recall_at_5": 0.02777778, "ndcg_at_5": 0.011836, "recall_at_10": 0.04861111, "ndcg_at_10": 0.018532},
+    "unconstrained": {"recall_at_5": 0.02083333, "ndcg_at_5": 0.009454, "recall_at_10": 0.04861111, "ndcg_at_10": 0.018806},
+    "lwgr": {"recall_at_5": 0.02083333, "ndcg_at_5": 0.008668, "recall_at_10": 0.04861111, "ndcg_at_10": 0.017738}
+  },
+  "constraint": {"unconstrained_mean_degradation": 0.06587467, "lwgr_mean_degradation": 0.067425, "mean_final_lagrange_multiplier": 0.053366},
+  "selected_relative_to_reference_percent": {"recall_at_10": 0.0, "ndcg_at_10": -4.28448},
+  "conclusion": "Validation selects the reference. The primal-dual path executes but does not reduce degradation or improve held-out ranking."
+}

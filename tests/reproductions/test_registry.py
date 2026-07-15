@@ -28,6 +28,7 @@ def test_builtin_adapters_are_discoverable():
         "longer",
         "lsvcr",
         "lum",
+        "lwgr",
         "m6rec",
         "mdcns",
         "memento",
@@ -40,6 +41,7 @@ def test_builtin_adapters_are_discoverable():
         "onetrans",
         "pinfm",
         "pinrec",
+        "pinterest-ads-llm",
         "plum",
         "precise",
         "prompt-generation",
@@ -50,6 +52,7 @@ def test_builtin_adapters_are_discoverable():
         "sasrec",
         "seral",
         "saviorrec",
+        "sigma",
         "sis",
         "tiger",
         "transact-v2",
@@ -81,6 +84,9 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("notellm").paper.has_online_ab
     assert get_adapter("univa").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("univa").paper.has_online_ab
+    assert get_adapter("pinterest-ads-llm").paper.has_online_ab
+    assert get_adapter("lwgr").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("sigma").fidelity is ReproductionFidelity.FULL_PIPELINE
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):
