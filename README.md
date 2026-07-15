@@ -20,10 +20,12 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **51/51** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **53/53** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `nontp` | NONTP · Meituan | NTP + EMA teacher TCL + 跨域 TDL 联合训练，辅助模块推理期移除；Hit@10 -4.93%、NDCG -8.62% |
+| 核心机制 | `akt-rec` | AKT-Rec · Alibaba | 真实 SmolLM LoRA 双阶段训练、RQ-VAE SID、非对称 head→tail 迁移和活动度门控；AUC +3.44%、GAUC +5.53% |
 | 完整核心链路 | `s-grec` | S-GRec · Tencent/WeChat | 真实 LLM PSJ 方面 SFT+GRPO、pairwise aggregator、SID 生成、5% 稀疏 A2PO；validation 晋级，test HR@10 +0%、NDCG -4.53% |
 | 完整核心链路 | `pinterest-ads-llm` | Complementary LLM Predictor · Pinterest | SmolLM LoRA SFT+GRPO、advertiser constrained decoding、two-tower 补充召回与排序特征；GRPO Recall@20 +0%，排序 AUC +2.59% |
 | 完整核心链路 | `lwgr` | LWGR · Alibaba International | IBQ parallel soft instructions 穿过真实 LLM、BOS cross-attention、reference constraint、primal-dual；Recall@10 +0%，NDCG -4.29% |

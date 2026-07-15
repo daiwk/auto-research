@@ -9,6 +9,7 @@ def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
         "bahe",
         "argus",
+        "akt-rec",
         "beque",
         "cluster-goobs",
         "cobra",
@@ -36,6 +37,7 @@ def test_builtin_adapters_are_discoverable():
         "mm-llm",
         "msd",
         "notellm",
+        "nontp",
         "onerec",
         "onerec-v2",
         "onetrans",
@@ -90,6 +92,8 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("sigma").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("s-grec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("s-grec").paper.has_online_ab
+    assert get_adapter("nontp").paper.has_online_ab
+    assert get_adapter("akt-rec").paper.has_online_ab
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

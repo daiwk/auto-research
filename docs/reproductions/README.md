@@ -17,15 +17,17 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 51 个 adapter；详细线上证据、本地指标和复现边界见下表及单篇 README。
+- 已登记并复核 53 个 adapter；详细线上证据、本地指标和复现边界见下表及单篇 README。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
-- 当前没有新的高保真待实现项；发现合格论文后直接追加到本页。
+- NONTP 与 AKT-Rec 已进入核心机制复现；其余近期候选按线上证据和公开数据可复现性继续排队。
 
-## 全部复现（51/51）
+## 全部复现（53/53）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `nontp` · [NONTP](2607.12277-nontp/README.md) | Meituan DSP CTR +1.8%、GMV +2.1% | EMA teacher TCL、跨域 TDL 与零额外推理路径实际执行；Hit@10 -4.93%、NDCG -8.62% |
+| 核心机制 | `akt-rec` · [AKT-Rec](2605.23310-akt-rec/README.md) | Tmall CTR +2.76%、GMV +3.47% | 真实小型 LLM、RQ-VAE 与非对称迁移实际执行；AUC +3.44%、GAUC +5.53%、tail AUC +2.15% |
 | 完整核心链路 | `s-grec` · [S-GRec](2602.10606-s-grec/README.md) | WeChat GMV +1.19%、CTR +1.16%、dislike -2.02% | 真实 LLM PSJ + SID generator + 5% A2PO；A2PO 经 validation 晋级，test HR@10 +0%、NDCG -4.53%，约束零越界 |
 | 完整核心链路 | `pinterest-ads-llm` · [Complementary LLM Predictor](2605.27856-pinterest-ads-llm/README.md) | US Shopping RoAS +4.94%、opt-in +6.69% | SFT 被选中；GRPO Recall@20 +0%，LLM 排序特征 AUC +2.59%，召回 quota=0 |
 | 完整核心链路 | `lwgr` · [LWGR](2605.18771-lwgr/README.md) | Ads revenue +1.35%、CTR +1.17% | reference 被选中；LWGR Recall@10 +0%、NDCG -4.29%，dual update 执行但约束未改善 |

@@ -4,6 +4,7 @@
 
 ## 2026-07
 
+- [NONTP](../2607.12277-nontp/README.md)：通过 TCL 感知多步未来轨迹，并以 TDL 为跨域目标增加共享预测头的第二条梯度路径。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征组织成配置驱动的生成提示，通过 token 压缩和多种合并策略服务搜索与推荐召回。
 - [SIS](../2607.04728-sis/README.md)：依据样本重要性动态调整训练权重，使有限预算更集中于高价值序列与 token。
 - [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：在线聚类用户或物品表征，并以 cluster-aware sampler 改善训练样本覆盖和头部集中。
@@ -15,6 +16,7 @@
 
 ## 2026-05
 
+- [AKT-Rec](../2605.23310-akt-rec/README.md)：用 LLM Semantic ID 构造语义簇，以非对称对比学习和活动度门控把头部知识迁移到长尾。
 - [UniVA](../2605.05803-univa/README.md)：用 Commercial SID 和 generation-as-ranking 统一广告生成，并通过价值对齐 RL 与 trie beam 优化收益。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
 - [LWGR](../2605.18771-lwgr/README.md)：把个性化 soft instruction 注入 LLM 世界知识，并用交叉注意力和拉格朗日约束与推荐分数融合。
