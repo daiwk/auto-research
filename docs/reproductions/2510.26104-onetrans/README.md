@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。本地执行 unified S/NS tokenization、mixed QKV、mixed FFN、causal attention 和 pyramid tail pruning；持久化跨请求 KV 服务系统未复刻。
 
-- 论文：[arXiv 2510.26104](https://arxiv.org/abs/2510.26104)，ByteDance
-- Adapter：`onetrans`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2510.26104](https://arxiv.org/abs/2510.26104) |
+| 公司/机构 | ByteDance |
+| 首次公开日期 | 2025-10-30（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `onetrans` |
+| 本地复现代码 | [`src/auto_research/reproductions/onetrans/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/onetrans/) |
 
 ## 原始论文总结
 

@@ -2,9 +2,16 @@
 
 > **Fidelity: 概念验证（非论文复现）**。当前固定 genre strand 省略 learned contextual lenses 与 trainable HSTU backbone；旧指标不能验证 CMSL。
 
-- 论文：[arXiv 2606.28533](https://arxiv.org/abs/2606.28533)，Meta
-- Adapter：`cmsl`；代码：`src/auto_research/reproductions/cmsl/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper cmsl --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2606.28533](https://arxiv.org/abs/2606.28533) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-06-26（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `cmsl` |
+| 本地复现代码 | [`src/auto_research/reproductions/cmsl/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cmsl/) |
 
 ## 原始论文总结
 

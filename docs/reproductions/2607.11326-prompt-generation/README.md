@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。本地实际执行论文同款 Qwen2.5-0.5B、MiniOneRec Amazon Office 数据与官方三段式 SID、双 JSON 单一事实源、text/embedding/combo/sequence 四类特征、preprocessor/projector/merger 组件协议、embedding-space mean merger、LoRA SFT、validation 配置选择和 held-out 候选评分。未复刻淘宝全量训练、C++ batched kernels、线上 event replay 和生产 serving。
 
-- 论文：[arXiv 2607.11326](https://arxiv.org/abs/2607.11326)，Alibaba / Taobao Search Team，2026-07-13
-- Adapter：`prompt-generation`；代码：`src/auto_research/reproductions/prompt_generation/`
-- 本地数据：MiniOneRec Amazon Reviews 2018 `Office_Products`；论文使用 36,586 train / 4,828 test，本地已下载同源预处理数据
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2607.11326](https://arxiv.org/abs/2607.11326) |
+| 公司/机构 | Alibaba / Taobao Search |
+| 首次公开日期 | 2026-07-13（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `prompt-generation` |
+| 本地复现代码 | [`src/auto_research/reproductions/prompt_generation/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/prompt_generation/) |
 
 ## 原始论文总结
 

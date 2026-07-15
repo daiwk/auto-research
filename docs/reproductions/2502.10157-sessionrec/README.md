@@ -2,8 +2,16 @@
 
 > **Fidelity: 核心机制复现**。真实执行 session 内聚合、session 间 Transformer、多正例 next-session retrieval，以及 session 内曝光负例排序损失；私有特征与 ANN 服务未复刻。
 
-- 论文：[arXiv 2502.10157](https://arxiv.org/abs/2502.10157)，Meituan
-- Adapter：`sessionrec`；代码：`src/auto_research/reproductions/sessionrec/`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2502.10157](https://arxiv.org/abs/2502.10157) |
+| 公司/机构 | Meituan |
+| 首次公开日期 | 2025-02-14（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `sessionrec` |
+| 本地复现代码 | [`src/auto_research/reproductions/sessionrec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/sessionrec/) |
 
 ## 原始论文总结
 

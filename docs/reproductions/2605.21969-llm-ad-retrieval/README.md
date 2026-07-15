@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。本地实际执行成对 creative 的领域 SFT、LLM hidden-state 属性头、层级离散语义表示、phrase→token 两级 Jaccard 建图、协同图融合、validation 选权重，以及扰动稳定性评估；未复刻 Meta 私有广告语料、Llama-3-8B、分布式推理、线上转换与 shadow-ad 流量系统。
 
-- 论文：[arXiv 2605.21969](https://arxiv.org/abs/2605.21969)，Meta
-- Adapter：`llm-ad-retrieval`；代码：`src/auto_research/reproductions/llm_ad_retrieval/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper llm-ad-retrieval --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.21969](https://arxiv.org/abs/2605.21969) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-05-21（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `llm-ad-retrieval` |
+| 本地复现代码 | [`src/auto_research/reproductions/llm_ad_retrieval/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/llm_ad_retrieval/) |
 
 ## 原始论文总结
 

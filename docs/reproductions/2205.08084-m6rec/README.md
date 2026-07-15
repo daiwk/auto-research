@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。真实执行冻结预训练 Transformer、自然语言用户行为、option tuning 与逐层 bottleneck option-adapter tuning；M6 生产模型、私有数据和 early-exit/pruning serving 未复刻。
 
-- 论文：[arXiv 2205.08084](https://arxiv.org/abs/2205.08084)，Alibaba DAMO Academy
-- Adapter：`m6rec`；代码：`src/auto_research/reproductions/m6rec/`
-- 本地数据：MovieLens-100K 官方标题/类型文本；运行：`auto-research reproduce --paper m6rec --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2205.08084](https://arxiv.org/abs/2205.08084) |
+| 公司/机构 | Alibaba |
+| 首次公开日期 | 2022-05-17（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `m6rec` |
+| 本地复现代码 | [`src/auto_research/reproductions/m6rec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/m6rec/) |
 
 ## 原始论文总结
 

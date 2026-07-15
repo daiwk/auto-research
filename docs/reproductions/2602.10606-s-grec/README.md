@@ -2,10 +2,16 @@
 
 > **Fidelity: 完整核心链路**。本地实际执行 causal LLM LoRA judge、方面打分 SFT+GRPO、用户条件权重 pairwise GRPO、SID 自回归生成器、5% 稀疏 semantic sampling，以及从相同 SFT checkpoint 初始化的 Reward-Sum、Adv-Sum、A2PO。模型规模与数据规模缩小，腾讯私有人工广告标注和 eCPM 模型由公开 Office 行为与 Qwen embedding 构造的监督替代。
 
-- 论文：[arXiv:2602.10606](https://arxiv.org/abs/2602.10606)
-- 公司：Tencent / WeChat Channels
-- 发布：2026-02
-- 线上 A/B：20% 广告流量，GMV +1.19%、GMV-Normal +1.55%、CTR +1.16%、dislike -2.02%
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2602.10606](https://arxiv.org/abs/2602.10606) |
+| 公司/机构 | Tencent / WeChat Channels |
+| 首次公开日期 | 2026-02-11（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `s-grec` |
+| 本地复现代码 | [`src/auto_research/reproductions/s_grec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/s_grec/) |
 
 ## 原始论文总结
 

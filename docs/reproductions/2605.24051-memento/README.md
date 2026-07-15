@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。query-conditioned MMR 长历史检索实际执行；Meta 私有 Ember、replay 与 INT8 serving 未复刻。
 
-- 论文：[arXiv 2605.24051](https://arxiv.org/abs/2605.24051)，Meta
-- Adapter：`memento`；代码：`src/auto_research/reproductions/memento/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper memento --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.24051](https://arxiv.org/abs/2605.24051) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-05-22（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `memento` |
+| 本地复现代码 | [`src/auto_research/reproductions/memento/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/memento/) |
 
 ## 原始论文总结
 

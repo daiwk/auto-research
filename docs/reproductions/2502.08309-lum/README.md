@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 condition/item 异构 token encoder、causal next-condition-item InfoNCE、屏蔽式 group query、离线知识缓存、direct feature、interest matching 与下游 CTR DLRM；不声称复现 7B scaling law。
 
-- 论文：[arXiv 2502.08309](https://arxiv.org/abs/2502.08309)，Alibaba
-- Adapter：`lum`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2502.08309](https://arxiv.org/abs/2502.08309) |
+| 公司/机构 | Alibaba |
+| 首次公开日期 | 2025-02-12（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `lum` |
+| 本地复现代码 | [`src/auto_research/reproductions/lum/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/lum/) |
 
 ## 原始论文总结
 

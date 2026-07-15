@@ -2,6 +2,17 @@
 
 > **Fidelity: 核心机制复现**。matched Transformer 中实际执行 feedback-first、next-item-second 分解；未复刻十亿参数规模与私有音乐反馈。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2507.15994](https://arxiv.org/abs/2507.15994) |
+| 公司/机构 | Yandex |
+| 首次公开日期 | 2025-07-21（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `argus` |
+| 本地复现代码 | [`src/auto_research/reproductions/argus/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/argus/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 直接 next-item 预测把“用户会怎样反馈”和“会消费哪个 item”纠缠。ARGUS 先预测 feedback token，再以其条件化 next-item，使多种反馈共享序列主干并获得更好的 scaling。

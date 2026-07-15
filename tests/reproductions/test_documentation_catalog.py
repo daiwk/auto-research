@@ -69,6 +69,28 @@ def test_every_paper_readme_has_the_complete_reproduction_contract():
     for adapter in list_adapters():
         directory = DOCS / _slug(adapter)
         text = (directory / "README.md").read_text(encoding="utf-8")
+        source_directory = f"src/auto_research/reproductions/{adapter.key.replace('-', '_')}/"
+        required_metadata = (
+            "## 论文信息",
+            f"| 论文链接 | [arXiv {adapter.paper.arxiv_id}]({adapter.paper.url}) |",
+            "| 公司/机构 |",
+            "| 首次公开日期 |",
+            "| 原文开源代码 |",
+            f"| Adapter | `{adapter.key}` |",
+            f"| 本地复现代码 | [`{source_directory}`](https://github.com/daiwk/auto-research/tree/main/{source_directory}) |",
+        )
+        for entry in required_metadata:
+            assert entry in text, f"{adapter.key} missing metadata: {entry}"
+        assert re.search(
+            r"^\| 首次公开日期 \| \d{4}-\d{2}-\d{2}（arXiv v1） \|$",
+            text,
+            re.MULTILINE,
+        ), f"{adapter.key} missing exact arXiv v1 date"
+        assert re.search(
+            r"^\| 原文开源代码 \| (?:是：\[[^]]+\]\(https?://[^)]+\)|否：[^|]+) \|$",
+            text,
+            re.MULTILINE,
+        ), f"{adapter.key} has ambiguous upstream code availability"
         for heading in required_headings:
             assert heading in text, f"{adapter.key} missing {heading}"
         assert "```mermaid" in text, f"{adapter.key} missing architecture diagram"

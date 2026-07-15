@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行冻结浅层 LLM 的原子行为编码与落盘、可训练上层 Transformer 的行为聚合和 CTR 训练；生产 LLM/广告日志替换为 BERT-tiny/MovieLens-100K。
 
-- 论文：[arXiv 2403.19347](https://arxiv.org/abs/2403.19347)，Ant Group
-- 博客线索：[LLM + 推荐系统](https://www.daiwk.net/1.7.llm_recommend)
-- Adapter：`bahe`；代码：`src/auto_research/reproductions/bahe/`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2403.19347](https://arxiv.org/abs/2403.19347) |
+| 公司/机构 | Ant Group |
+| 首次公开日期 | 2024-03-28（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `bahe` |
+| 本地复现代码 | [`src/auto_research/reproductions/bahe/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/bahe/) |
 
 ## 原始论文总结
 

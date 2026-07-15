@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 causal LM q/v-LoRA SFT、LLM 文本编码、随机位置扩展、商品/评论双 Transformer、双向 cross-attention、SSC/VCC 对齐和联合微调；ChatGLM3 与快手私有日志缩小替换。
 
-- 论文：[arXiv 2403.13574](https://arxiv.org/abs/2403.13574)，Kuaishou
-- 官方代码：[RUCAIBox/LSVCR](https://github.com/RUCAIBox/LSVCR)
-- Adapter：`lsvcr`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2403.13574](https://arxiv.org/abs/2403.13574) |
+| 公司/机构 | Kuaishou |
+| 首次公开日期 | 2024-03-20（arXiv v1） |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/RUCAIBox/LSVCR) |
+| Adapter | `lsvcr` |
+| 本地复现代码 | [`src/auto_research/reproductions/lsvcr/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/lsvcr/) |
 
 ## 原始论文总结
 

@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行因果 decoder、outcome embedding、归一化 ANN 输出、无序未来窗口 multi-token 对比学习；MovieLens 评分档位替代 Pinterest 多 surface action。
 
-- 论文：[arXiv 2504.10507](https://arxiv.org/abs/2504.10507)，Pinterest
-- Adapter：`pinrec`；运行：`auto-research reproduce --paper pinrec --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2504.10507](https://arxiv.org/abs/2504.10507) |
+| 公司/机构 | Pinterest |
+| 首次公开日期 | 2025-04-09（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `pinrec` |
+| 本地复现代码 | [`src/auto_research/reproductions/pinrec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/pinrec/) |
 
 ## 原始论文总结
 

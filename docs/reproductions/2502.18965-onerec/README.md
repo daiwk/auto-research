@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。当前代码实际训练 RQ Semantic IDs、session-wise encoder-decoder、稀疏 MoE、个性化 reward model 和 self-hard DPO；仅缩小模型、session 长度和公开数据规模。
 
-- 论文：[arXiv 2502.18965](https://arxiv.org/abs/2502.18965)，Kuaishou
-- Adapter：`onerec`；代码：`src/auto_research/reproductions/onerec/`
-- 本地数据：MovieLens-1M；运行：`auto-research reproduce --paper onerec --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2502.18965](https://arxiv.org/abs/2502.18965) |
+| 公司/机构 | Kuaishou |
+| 首次公开日期 | 2025-02-26（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `onerec` |
+| 本地复现代码 | [`src/auto_research/reproductions/onerec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/onerec/) |
 
 ## 原始论文总结
 

@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 factorization prompts、用户偏好/物品事实知识生成、离线缓存、hybrid-expert adapter 和下游 CTR 训练；PanGu 与华为日志替换为 SmolLM2-135M-Instruct 和 MovieLens-100K。
 
-- 论文：[arXiv 2306.10933](https://arxiv.org/abs/2306.10933)，Huawei 等
-- 博客线索：[LLM + 推荐系统](https://www.daiwk.net/1.7.llm_recommend)
-- Adapter：`kar`；代码：`src/auto_research/reproductions/kar/`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2306.10933](https://arxiv.org/abs/2306.10933) |
+| 公司/机构 | Huawei |
+| 首次公开日期 | 2023-06-19（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `kar` |
+| 本地复现代码 | [`src/auto_research/reproductions/kar/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/kar/) |
 
 ## 原始论文总结
 

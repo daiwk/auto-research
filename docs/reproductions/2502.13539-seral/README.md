@@ -2,6 +2,17 @@
 
 > **Fidelity: 完整核心链路复现**。静态/短期/长期 cognition profile、SFT、CDI 偏好对、IPO+SFT 与 nearline 全库缓存均执行；GPT-4/人工标注由公开内容和协同信号替代。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2502.13539](https://arxiv.org/abs/2502.13539) |
+| 公司/机构 | Alibaba / Taobao |
+| 首次公开日期 | 2025-02-19（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `seral` |
+| 本地复现代码 | [`src/auto_research/reproductions/seral/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/seral/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 惊喜推荐需同时相关且未见。SERAL 压缩超长历史为多层认知画像，以 LLM/人工 CDI 打破日志反馈环，用 IPO 对齐 SerenGPT，最后 nearline 生成并缓存候选。

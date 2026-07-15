@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。当前代码在 matched local budget 下实际训练 stacked baseline 与 unified MixFormer blocks；proposed 将 dense feature-split tokens 和行为 tokens 放进共享 backbone，并复用 user encoding 对所有候选打分。
 
-- 论文：[arXiv 2602.14110](https://arxiv.org/abs/2602.14110)，ByteDance / Douyin
-- Adapter：`mixformer`；代码：`src/auto_research/reproductions/mixformer/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper mixformer --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2602.14110](https://arxiv.org/abs/2602.14110) |
+| 公司/机构 | ByteDance / Douyin |
+| 首次公开日期 | 2026-02-15（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `mixformer` |
+| 本地复现代码 | [`src/auto_research/reproductions/mixformer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mixformer/) |
 
 ## 原始论文总结
 

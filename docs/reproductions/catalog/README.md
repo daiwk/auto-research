@@ -15,7 +15,7 @@
 1. 根 `README.md` 的能力表；
 2. `docs/reproductions/README.md` 的完整审计表；
 3. 本目录的公司、月份、主题三个入口；
-4. 独立论文 README，包含原始论文总结、Mermaid 架构、核心公式、论文离线与线上效果、本地复现和边界；
+4. 独立论文 README，顶部统一列出论文链接、公司/机构、arXiv v1 日期、原作者是否开源、Adapter 和本地代码位置，并包含原始论文总结、Mermaid 架构、核心公式、论文离线与线上效果、本地复现和边界；
 5. `metrics/*.json` 稳定指标。概念验证也必须写入，但要设置 `diagnostic_only: true`。
 
-`tests/reproductions/test_documentation_catalog.py` 会把代码 registry 与上述文档逐项比对；漏任一入口、断链、缺章节或缺 metrics 都会使测试失败。
+新增或核实元数据后运行 `PYTHONPATH=src python scripts/sync_reproduction_metadata.py` 同步所有单篇 README。`tests/reproductions/test_documentation_catalog.py` 会把代码 registry 与上述文档逐项比对；漏任一入口、论文信息字段、断链、缺章节或缺 metrics 都会使测试失败。

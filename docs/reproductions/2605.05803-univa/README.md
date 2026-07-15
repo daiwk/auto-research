@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路**。本地实际执行 Commercial SID、HSTU 用户编码、cross-attention → causal self-attention 解码、MoR、共享专家 + top-k Sparse MoE、generation/value 双头、监督学习与 PPO/value 交替训练，以及 value-guided 个性化 trie beam search。腾讯私有广告属性、eCPM 模拟器、候选库存、MCTS 数据和线上流量由公开数据上的确定性代理替换。
 
-- 论文：[arXiv 2605.05803](https://arxiv.org/abs/2605.05803)，Tencent / WeChat Channels，2026-05
-- Adapter：`univa`；代码：`src/auto_research/reproductions/univa/`
-- 本地数据：MiniOneRec Amazon Reviews 2018 `Office_Products`，使用官方交互切分、Qwen 商品向量和三段式 SID
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.05803](https://arxiv.org/abs/2605.05803) |
+| 公司/机构 | Tencent / WeChat Channels |
+| 首次公开日期 | 2026-05-07（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `univa` |
+| 本地复现代码 | [`src/auto_research/reproductions/univa/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/univa/) |
 
 ## 原始论文总结
 

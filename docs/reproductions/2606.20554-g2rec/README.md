@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。当前代码实际优化稀疏图 soft modularity，并训练交替 item/continuous-interest token 的自回归 Transformer、next-item loss 与 profile loss。
 
-- 论文：[arXiv 2606.20554](https://arxiv.org/abs/2606.20554)，Meta
-- Adapter：`g2rec`；代码：`src/auto_research/reproductions/g2rec/`
-- 本地数据：Amazon Beauty 5-core；运行：`auto-research reproduce --paper g2rec --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2606.20554](https://arxiv.org/abs/2606.20554) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-06-18（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `g2rec` |
+| 本地复现代码 | [`src/auto_research/reproductions/g2rec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/g2rec/) |
 
 ## 原始论文总结
 

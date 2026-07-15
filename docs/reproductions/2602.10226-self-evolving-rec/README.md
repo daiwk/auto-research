@@ -2,9 +2,16 @@
 
 > **Fidelity: 概念验证（非论文复现）**。当前固定候选集合代替 LLM agent 生成，且没有真实线上 A/B 反馈闭环；旧指标不能验证论文的 autonomous optimization。
 
-- 论文：[arXiv 2602.10226](https://arxiv.org/abs/2602.10226)，Google/YouTube
-- Adapter：`self-evolving-rec`；代码：`src/auto_research/reproductions/self_evolving_rec/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper self-evolving-rec --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2602.10226](https://arxiv.org/abs/2602.10226) |
+| 公司/机构 | Google / YouTube |
+| 首次公开日期 | 2026-02-10（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `self-evolving-rec` |
+| 本地复现代码 | [`src/auto_research/reproductions/self_evolving_rec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/self_evolving_rec/) |
 
 ## 原始论文总结
 
