@@ -2,6 +2,9 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：advertiser SFT/GRPO、补充召回与排序特征
+- [LWGR](../2605.18771-lwgr/README.md)：个性化 soft instruction、LLM world knowledge、Lagrangian fusion
+- [SIGMA](../2602.22913-sigma/README.md)：多视角 grounding、七任务 instruction SFT、hybrid token
 - [UniVA](../2605.05803-univa/README.md)：Commercial SID、generation-as-ranking、eCPM-aware RL、value-guided trie beam
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：Qwen generative retrieval、配置驱动异构特征、token compression、autoresearch
 - [PRECISE](../2412.06308-precise/README.md)：LLM token、top-k MoE、Universal/Targeted Training
@@ -23,6 +26,7 @@
 
 ## 生成式召回与端到端推荐
 
+- [LWGR](../2605.18771-lwgr/README.md) · [SIGMA](../2602.22913-sigma/README.md)
 - [UniVA](../2605.05803-univa/README.md)
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)
 - [SessionRec](../2502.10157-sessionrec/README.md) · [PinRec](../2504.10507-pinrec/README.md) · [GenRank](../2505.04180-genrank/README.md) · [TIGER](../2305.05065-tiger/README.md) · [OneRec](../2502.18965-onerec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [G2Rec](../2606.20554-g2rec/README.md) · [HSTU](../2402.17152-hstu/README.md) · [CMSL](../2606.28533-cmsl/README.md)
@@ -41,12 +45,17 @@
 
 ## 采样、蒸馏与强化学习
 
+- [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：SFT→GRPO advertiser list optimization
+- [LWGR](../2605.18771-lwgr/README.md)：reference confidence constraint 与 primal-dual
 - [UniVA](../2605.05803-univa/README.md)：请求内 eCPM reward normalization、SL/RL 交替更新
 - [BEQUE](../2311.03758-beque/README.md) · [MDCNS](../2605.19651-mdcns/README.md) · [Cluster GOOBS](../2607.00448-cluster-goobs/README.md) · [Rec-Distill](../2605.29755-rec-distill/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [SIS](../2607.04728-sis/README.md)
 - [SERAL](../2502.13539-seral/README.md) · [LEADRE](../2411.13789-leadre/README.md) · [GR4AD](../2602.22732-gr4ad/README.md) · [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)
 
 ## Serving / efficiency
 
+- [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：批量 LLM advertiser prior、补充 CG
+- [LWGR](../2605.18771-lwgr/README.md)：nearline world-knowledge cache + online cross-attention
+- [SIGMA](../2602.22913-sigma/README.md)：prefix-local item retrieval、nearline U2I
 - [UniVA](../2605.05803-univa/README.md)：请求级个性化 trie 约束的 value-guided beam search
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：训练/serving 共用配置、event replay、token compression
 - [MSD](../2412.06860-msd/README.md) · [BAHE](../2403.19347-bahe/README.md) · [BEQUE](../2311.03758-beque/README.md) · [M6-Rec](../2205.08084-m6rec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [OneTrans](../2510.26104-onetrans/README.md) · [LONGER](../2505.04421-longer/README.md)

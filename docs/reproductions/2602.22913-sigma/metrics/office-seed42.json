@@ -1,0 +1,15 @@
+{
+  "paper": "2602.22913",
+  "adapter": "sigma",
+  "dataset": {"name": "MiniOneRec Office", "train_rows": 12000, "validation_users": 128, "test_users": 128, "items": 3459},
+  "setup": {"model": "HuggingFaceTB/SmolLM2-135M-Instruct", "seed": 42, "grounding_steps": 40, "sft_steps": 480, "tasks": ["Category", "Discover", "Holiday", "JustForYou", "Longtail", "Query", "Season"], "selected": "top1_prefix"},
+  "training": {"grounding_initial_loss": 4.0153248787, "grounding_final_loss": 3.747172451, "sft_initial_loss": 10.3598239899, "sft_final_loss": 7.3062394142},
+  "test": {
+    "id_only": {"hr_at_1": 0.0, "hr_at_5": 0.0078125, "hr_at_10": 0.0078125, "hr_at_20": 0.0078125, "ndcg_at_10": 0.00390625},
+    "top1_prefix": {"hr_at_1": 0.015625, "hr_at_5": 0.03125, "hr_at_10": 0.0625, "hr_at_20": 0.0703125, "ndcg_at_10": 0.034112},
+    "apf": {"hr_at_1": 0.015625, "hr_at_5": 0.03125, "hr_at_10": 0.0546875, "hr_at_20": 0.0625, "ndcg_at_10": 0.031452}
+  },
+  "selected_relative_to_id_only_percent": {"hr_at_20": 800.0, "ndcg_at_10": 773.2672},
+  "apf_relative_to_top1_prefix_hr_at_20_percent": -11.1111111111,
+  "conclusion": "Hybrid prefix-to-ID generation strongly improves the small absolute hit count; validation rejects APF in favor of one prefix."
+}
