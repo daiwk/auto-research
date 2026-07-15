@@ -5,7 +5,7 @@
 | 优先级 | 论文 / 公司 | 线上 A/B | 本地忠实复现判断 |
 |---|---|---|---|
 | 已实现 | [Prompt Generation](https://arxiv.org/abs/2607.11326) · Alibaba/Taobao | 搜索成交笔数 +0.47%、GMV +0.51%；推荐 IPV +0.66%、PVR +7.93%；店铺搜索成交 +4.01% | **高**：论文给出双 JSON 协议、公开 Amazon Office 基准和完整特征消融；本仓库已实现 `prompt-generation` |
-| 下一批 A | [UniVA](https://arxiv.org/abs/2605.05803) · Tencent/WeChat | GMV +1.5% | **高**：Commercial SID、generation-as-ranking、eCPM RL、value-guided beam search 均可在公开交互/价值代理上执行 |
+| 已实现 | [UniVA](https://arxiv.org/abs/2605.05803) · Tencent/WeChat | GMV +1.5% | **高**：本仓库已执行 Commercial SID、generation-as-ranking、冻结旧策略 PPO 和 value-guided 个性化 trie beam；公开 Office 代理上 HR@100 +4.76%，同时披露 wNDCG -8.43% |
 | 下一批 A | [Fine-Tuned LLM as a Complementary Predictor Improving Ads System](https://arxiv.org/abs/2605.27856) · Pinterest | Shopping RoAS +4.94%；opt-in Shopping RoAS +6.69% | **高**：可执行真实小型 LLM SFT/GRPO、advertiser prediction、召回注入和排序特征；需明确公开数据中的 advertiser 映射 |
 | 下一批 A | [LWGR](https://arxiv.org/abs/2605.18771) · Alibaba International | 广告 revenue +1.35% | **高**：论文含公开数据，soft instruction、世界知识抽取和 Lagrangian primal-dual 融合适合本地缩放复现 |
 | 下一批 B | [SIGMA](https://arxiv.org/abs/2602.22913) · AliExpress | Order +2.80%、CVR +3.84%、GMV +7.84%、购买类目广度 +2.47% | **中高**：多视角对齐、hybrid SID、multi-task SFT 可复现；完整节日/趋势任务需构造公开时间切片 |
@@ -16,5 +16,4 @@
 
 未纳入：LocalSUG 虽披露 CTR +0.35% 和 few/no-result -2.56%，但论文作者单位没有满足“大厂论文”的明确证据；LinkedIn Semantic Search 论文披露大量离线消融，但没有找到可核验的量化线上 A/B，因此均不通过本轮硬门槛。
 
-执行顺序按“保真度优先，而非线上 lift 大小”排序：PG → UniVA → Pinterest Ads Predictor → LWGR → SIGMA/S-GRec。RaG 的线上结果很强，但在本地缺少视频生成与质量反馈链路，当前做简化版反而会重复此前的折损问题。
-
+执行顺序按“保真度优先，而非线上 lift 大小”排序；PG 与 UniVA 已完成，下一篇为 Pinterest Ads Predictor，之后是 LWGR → SIGMA/S-GRec。RaG 的线上结果很强，但在本地缺少视频生成与质量反馈链路，当前做简化版反而会重复此前的折损问题。
