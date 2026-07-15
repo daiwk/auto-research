@@ -60,7 +60,8 @@
 - 2026-05 · [Memento](../2605.24051-memento/README.md)
 - 2026-05 · [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md) · semantic ads retrieval / predictability
 - 2026-05 · [MM-LLM](../2605.09338-mm-llm/README.md) · multimedia understanding
-- 2026-06 · [G2Rec](../2606.20554-g2rec/README.md) · [CMSL](../2606.28533-cmsl/README.md)
+- 2026-06 · [G2Rec](../2606.20554-g2rec/README.md)
+- 2026-06 · [CMSL](../2606.28533-cmsl/README.md)
 - 2026-07 · [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)
 
 ## Pinterest
