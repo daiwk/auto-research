@@ -4,6 +4,7 @@
 
 ## Alibaba
 
+- 2026-05 · [AKT-Rec](../2605.23310-akt-rec/README.md)：用 LLM 对齐内容与协同信号并生成层级 Semantic ID，通过非对称 head-to-tail 迁移改善长尾 CTR 排序。
 - 2017-06 · [DIN](../1706.06978-din/README.md)：用候选物品感知的局部激活单元，从用户历史中动态提取相关兴趣，并以 Dice 激活训练 CTR 排序模型。
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md)：把推荐任务统一改写为自然语言任务，在预训练语言模型上使用轻量 option-adapter 完成多场景适配。
 - 2023-11 · [BEQUE](../2311.03758-beque/README.md)：生成用户相关的搜索改写，并结合离线检索反馈、自采样与偏好排序优化改写质量。
@@ -52,6 +53,7 @@
 
 ## Meituan
 
+- 2026-07 · [NONTP](../2607.12277-nontp/README.md)：在 NTP 上加入未来状态对比学习和跨域 hidden-state pooling，扩大生成式推荐的训练监督覆盖。
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
 - 2025-02 · [SessionRec](../2502.10157-sessionrec/README.md)：按真实 session 生成候选，并利用曝光负例和 hard negative 改善会话级召回。
 

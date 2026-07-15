@@ -1,0 +1,52 @@
+{
+  "paper": "2605.23310",
+  "adapter": "akt-rec",
+  "dataset": "MovieLens 100K sampled CTR",
+  "seeds": [42, 43, 44],
+  "setup": {
+    "users": 320,
+    "items": 1682,
+    "model": "HuggingFaceTB/SmolLM2-135M",
+    "item_contrastive_steps": 30,
+    "user_supervision_steps": 30,
+    "rqvae_steps": 100,
+    "ctr_steps_per_variant_seed": 400
+  },
+  "semantic_training": {
+    "lora_trainable_parameters": 230400,
+    "item_contrastive_initial": 2.0948160171508787,
+    "item_contrastive_final": 2.106735944747925,
+    "user_supervision_initial": 3.3053980350494383,
+    "user_supervision_final": 2.1679868698120117,
+    "item_unique_codes": 470,
+    "user_unique_codes": 75
+  },
+  "validation": {
+    "online_base": {"auc": 0.47915364583333336, "gauc": 0.46458333333333335, "tail_auc": 0.44913928012519566},
+    "akt_rec": {"auc": 0.4847200520833333, "gauc": 0.4708333333333334, "tail_auc": 0.47433489827856024}
+  },
+  "test": {
+    "online_base": {
+      "auc": 0.45600260416666666,
+      "auc_std": 0.02721163481095937,
+      "gauc": 0.45208333333333334,
+      "gauc_std": 0.018807781338820623,
+      "tail_auc": 0.5085387104804581,
+      "tail_auc_std": 0.03503610755610072
+    },
+    "akt_rec": {
+      "auc": 0.4717024739583333,
+      "auc_std": 0.02198637351530593,
+      "gauc": 0.4770833333333333,
+      "gauc_std": 0.010311973892303806,
+      "tail_auc": 0.5194921583271098,
+      "tail_auc_std": 0.020810955345101103
+    }
+  },
+  "relative_akt_rec_vs_online_base_percent": {
+    "auc": 3.4429342394563234,
+    "gauc": 5.529953917050683,
+    "tail_auc": 2.1539064029763115
+  },
+  "reproduction_fidelity": "core_mechanism"
+}
