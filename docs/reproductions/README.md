@@ -14,10 +14,11 @@
 
 数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
 
-## 当前审计（46/46 adapters）
+## 当前审计（47/47 adapters）
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
+| 完整核心链路 | `univa` · [UniVA](2605.05803-univa/README.md) | WeChat Channels GMV +1.50%、GMV(normal) +1.42% | Office 公开代理；HR@100 +4.76%、ValueHR +6.56%，但 wNDCG -8.43%；trie 有效路径 50/50 |
 | 核心机制 | `prompt-generation` · [Prompt Generation](2607.11326-prompt-generation/README.md) | Taobao Search transaction +0.47%、GMV +0.51%；Shop Search +4.01% | 同源 Amazon Office + Qwen2.5-0.5B；选中 Title 的 HR@10 -11.11%，mean merger 较原始 Title 打分 -90.38% |
 | 完整核心链路 | `precise` · [PRECISE](2412.06308-precise/README.md) | WeChat ranking Clicks +1.961%、Shares +1.433% | SmolLM token + MoE + UT/TT；Recall@10 +40.0%，Cold Recall -50.0% |
 | 完整核心链路 | `lum` · [LUM](2502.08309-lum/README.md) | Taobao CTR +2.9%、RPM +1.2% | next-condition-item + group query + DLRM；AUC +14.60%，3/3 seeds 正向 |

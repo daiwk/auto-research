@@ -1,0 +1,61 @@
+{
+  "paper": "2605.05803",
+  "adapter": "univa",
+  "dataset": {
+    "name": "MiniOneRec Amazon Office_Products",
+    "train_rows": 12000,
+    "validation_users": 32,
+    "test_users": 32,
+    "catalog_items": 3459
+  },
+  "setup": {
+    "seeds": [42, 43, 44],
+    "steps_per_variant": 80,
+    "selection": "validation ValueHR@100, then HR@100",
+    "selected": "univa_full"
+  },
+  "test": {
+    "semantic_sid_sl": {
+      "hr_at_10": 0.09375,
+      "hr_at_50": 0.1666666667,
+      "hr_at_100": 0.21875,
+      "hr_at_100_std": 0.0,
+      "value_hr_at_100": 0.397091,
+      "wndcg_at_100": 0.15464
+    },
+    "commercial_sid_sl": {
+      "hr_at_10": 0.1041666667,
+      "hr_at_50": 0.1875,
+      "hr_at_100": 0.2604166667,
+      "hr_at_100_std": 0.0147313913,
+      "value_hr_at_100": 0.46227,
+      "wndcg_at_100": 0.13625
+    },
+    "univa_full": {
+      "hr_at_10": 0.09375,
+      "hr_at_50": 0.1875,
+      "hr_at_100": 0.2291666667,
+      "hr_at_100_std": 0.0147313913,
+      "value_hr_at_100": 0.42314735,
+      "wndcg_at_100": 0.14160511
+    }
+  },
+  "selected_relative_to_semantic_sid_percent": {
+    "hr_at_100": 4.7619047619,
+    "value_hr_at_100": 6.5629353582,
+    "wndcg_at_100": -8.428485163
+  },
+  "commercial_sid_diagnostic": {
+    "semantic_prefix_mean_bid_std": 0.3495580272,
+    "commercial_path_mean_bid_std": 0.0977312929,
+    "relative_percent": -72.0415496141
+  },
+  "serving": {
+    "unconstrained_valid_paths_at_50": 13.4166666667,
+    "personalized_trie_valid_paths_at_50": 50.0,
+    "semantic_beam_mean_value": 0.4255375,
+    "value_guided_beam_mean_value": 0.42510349,
+    "value_relative_percent": -0.1019910114
+  },
+  "conclusion": "Validation selects UniVA full; test HR@100 and ValueHR@100 improve over semantic-SID SL, while wNDCG declines and commercial-SID-only is stronger on test."
+}

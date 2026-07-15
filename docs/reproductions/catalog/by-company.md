@@ -71,6 +71,7 @@
 
 - 2024-12 · [PRECISE](../2412.06308-precise/README.md) · LLM semantic + collaborative sequential pre-training
 - 2024-11 · [LEADRE](../2411.13789-leadre/README.md) · generative display ads
+- 2026-05 · [UniVA](../2605.05803-univa/README.md) · Commercial SID / value-aligned generative advertising
 
 ## Yandex
 
