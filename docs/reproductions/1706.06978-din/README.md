@@ -24,15 +24,15 @@ flowchart LR
 
 ### 核心公式
 
-对候选向量 \(q\) 和第 \(i\) 个行为 \(e_i\)，local activation 学习权重：
+对候选向量 $q$ 和第 $i$ 个行为 $e_i$，local activation 学习权重：
 
-\[
+$$
 a_i=g(q,e_i,q-e_i,q\odot e_i),\qquad
 v_U(q)=\sum_i \operatorname{softmax}(a)_i e_i.
-\]
+$$
 
-Dice 用批次统计得到 \(p(s)=\sigma(\mathrm{BN}(s))\)，并计算
-\(\mathrm{Dice}(s)=p(s)s+(1-p(s))\alpha s\)。本地候选点击使用正负样本 BCE 训练。
+Dice 用批次统计得到 $p(s)=\sigma(\mathrm{BN}(s))$，并计算
+$\mathrm{Dice}(s)=p(s)s+(1-p(s))\alpha s$。本地候选点击使用正负样本 BCE 训练。
 
 ### 论文离线与线上效果
 

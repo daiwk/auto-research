@@ -28,12 +28,18 @@ flowchart LR
 
 局部合并为 $M_i=TransformerBlock([e_i^1,\ldots,e_i^K])$。global/recent query 为 $O=[G;H_S]$，第一层执行
 
-$$Q=OW_Q,\quad K=RW_K,\quad V=RW_V,$$
-$$Attention(Q,K,V)=Softmax(QK^T/\sqrt d+M)V.$$
+$$
+Q=OW_Q,\quad K=RW_K,\quad V=RW_V,
+$$
+$$
+Attention(Q,K,V)=Softmax(QK^T/\sqrt d+M)V.
+$$
 
 合并后的 attention FLOPs 比例为
 
-$$\frac{FLOPs_{merge}}{FLOPs_{vanilla}}=\frac{6dK+L/K}{6d+L}.$$
+$$
+\frac{FLOPs_{merge}}{FLOPs_{vanilla}}=\frac{6dK+L/K}{6d+L}.
+$$
 
 ### 论文离线与线上效果
 

@@ -28,19 +28,29 @@ flowchart LR
 
 LLM 先产生按原文顺序排列的 token 表示，MoE 的每个 expert 用 attention 汇聚 token；gate 只激活 top-k expert：
 
-$$\mathbf x_i=LLM(T_i),\qquad gate(\mathbf x_i)=softmax(topk(\mathbf x_iW^{gate})),$$
+$$
+\mathbf x_i=LLM(T_i),\qquad gate(\mathbf x_i)=softmax(topk(\mathbf x_iW^{gate})),
+$$
 
-$$\mathbf e_i=ID(i)\oplus\sum_{j=1}^{K}gate(\mathbf x_i)_j\,Attn_j(\mathbf x_i).$$
+$$
+\mathbf e_i=ID(i)\oplus\sum_{j=1}^{K}gate(\mathbf x_i)_j\,Attn_j(\mathbf x_i).
+$$
 
 Universal Training 使用 causal Transformer，在每个位置以其他序列采样的 item 为负例，优化 next-item sampled softmax：
 
-$$\mathcal L_{nip}=-\sum_{u,i}\log\frac{\exp(\mathbf h^H_{u,i}\cdot\mathbf e_{i+1})}{\exp(\mathbf h^H_{u,i}\cdot\mathbf e_{i+1})+\sum_{j\in N_u}\exp(\mathbf h^H_{u,i}\cdot\mathbf e_j)}.$$
+$$
+\mathcal L_{nip}=-\sum_{u,i}\log\frac{\exp(\mathbf h^H_{u,i}\cdot\mathbf e_{i+1})}{\exp(\mathbf h^H_{u,i}\cdot\mathbf e_{i+1})+\sum_{j\in N_u}\exp(\mathbf h^H_{u,i}\cdot\mathbf e_j)}.
+$$
 
 Targeted Training 从 UT 参数 warm-start，改为无 causal mask，并拼接所有位置后经 MLP 得到 user embedding：
 
-$$\mathbf h'_u=MLP(CONCAT(\mathbf h'^{H}_{u,1},\ldots,\mathbf h'^{H}_{u,n})),$$
+$$
+\mathbf h'_u=MLP(CONCAT(\mathbf h'^{H}_{u,1},\ldots,\mathbf h'^{H}_{u,n})),
+$$
 
-$$\mathcal L_{bpr}=-\sum_u\sum_{u'\ne u}\log\sigma(\mathbf h'_u\cdot\mathbf e_{u,n+1}-\mathbf h'_{u'}\cdot\mathbf e_{u,n+1}).$$
+$$
+\mathcal L_{bpr}=-\sum_u\sum_{u'\ne u}\log\sigma(\mathbf h'_u\cdot\mathbf e_{u,n+1}-\mathbf h'_{u'}\cdot\mathbf e_{u,n+1}).
+$$
 
 ### 论文离线与线上效果
 

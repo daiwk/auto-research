@@ -33,14 +33,22 @@ flowchart LR
 
 候选由未交互集合均匀抽取，Self/Peer 评分与分歧为
 
-$$s_{u,v}^{self}=h_u^{self}\cdot e_v,\quad s_{u,v}^{peer}=h_u^{peer}\cdot e_v,$$
-$$s_{u,v}^{teacher}=s_{u,v}^{self}+s_{u,v}^{peer},\quad d_{u,v}=|s_{u,v}^{self}-s_{u,v}^{peer}|.$$
+$$
+s_{u,v}^{self}=h_u^{self}\cdot e_v,\quad s_{u,v}^{peer}=h_u^{peer}\cdot e_v,
+$$
+$$
+s_{u,v}^{teacher}=s_{u,v}^{self}+s_{u,v}^{peer},\quad d_{u,v}=|s_{u,v}^{self}-s_{u,v}^{peer}|.
+$$
 
 各视角用 $\widetilde s_{u,v}^{*}=s_{u,v}^{*}+d_{u,v}$ 重排，从 Top-M 随机抽一个负例。总目标为
 
-$$\mathcal L_{rec}=\alpha\mathcal L_{self}+\beta\mathcal L_{peer}+\gamma\mathcal L_{teacher},$$
-$$p_{u,v}^{*}=\operatorname{softmax}(s_{u,v}^{*}/\tau),\quad
-\mathcal L=\mathcal L_{rec}+\mu\tau^2 KL(p^{teacher}\Vert p^{self}).$$
+$$
+\mathcal L_{rec}=\alpha\mathcal L_{self}+\beta\mathcal L_{peer}+\gamma\mathcal L_{teacher},
+$$
+$$
+p_{u,v}^{*}=\operatorname{softmax}(s_{u,v}^{*}/\tau),\quad
+\mathcal L=\mathcal L_{rec}+\mu\tau^2 KL(p^{teacher}\Vert p^{self}).
+$$
 
 ### 论文离线与线上效果
 

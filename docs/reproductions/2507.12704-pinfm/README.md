@@ -25,22 +25,22 @@ flowchart LR
 
 预训练表征为
 
-\[
+$$
 H=\phi_{out}\!\left(M\left(\phi_{in}(E_{item}+E_{action}+E_{surface})\right)\right).
-\]
+$$
 
 单个未来物品使用 InfoNCE：
 
-\[
+$$
 \ell(H_i,z_j)=-\log\frac{e^{H_i^Tz_j/\tau}}
 {e^{H_i^Tz_j/\tau}+\sum_k e^{H_i^Tz_k^-/\tau}}.
-\]
+$$
 
-\(L_{NTL}\) 预测下一 token，\(L_{MTL}\) 预测未来窗口，\(L_{FTL}\) 从下游固定长度位置预测后续窗口。DCAT 对去重 context 计算并缓存 \(K_u^l,V_u^l\)，候选层执行：
+$L_{NTL}$ 预测下一 token，$L_{MTL}$ 预测未来窗口，$L_{FTL}$ 从下游固定长度位置预测后续窗口。DCAT 对去重 context 计算并缓存 $K_u^l,V_u^l$，候选层执行：
 
-\[
+$$
 X_c^l=g\!\left(Attn(Q_c^l,[K_u^l;K_c^l],[V_u^l;V_c^l]),X_c^{l-1}\right).
-\]
+$$
 
 本实现保留这一数学分解并在全库评估中真实复用 context KV，不以普通 pooled Transformer 代理。
 

@@ -30,14 +30,20 @@ flowchart LR
 
 文本与 ID 表示进入两条序列，再做双向交叉融合：
 
-$$H^v=T_v(E^v+P^v),\quad H^c=T_c(E^c+P^c),$$
-$$\tilde H^v=\operatorname{MHA}(H^v,H^c,H^c),\quad
-\tilde H^c=\operatorname{MHA}(H^c,H^v,H^v).$$
+$$
+H^v=T_v(E^v+P^v),\quad H^c=T_c(E^c+P^c),
+$$
+$$
+\tilde H^v=\operatorname{MHA}(H^v,H^c,H^c),\quad
+\tilde H^c=\operatorname{MHA}(H^c,H^v,H^v).
+$$
 
 随机位置编码在短 alignment 序列中抽取完整位置表的有序子集。SSC 将 SR 偏好 $s$ 与 LoRA LLM 偏好 $\tilde s$ 做 InfoNCE；VCC 对齐商品与评论偏好：
 
-$$\mathcal L_{align}=\mathcal L_{SSC}+\mu\mathcal L_{VCC},\qquad
-\mathcal L_{SSC}=-\log\frac{e^{\operatorname{sim}(s_i,\tilde s_i)/\tau}}{\sum_j e^{\operatorname{sim}(s_i,\tilde s_j)/\tau}}.$$
+$$
+\mathcal L_{align}=\mathcal L_{SSC}+\mu\mathcal L_{VCC},\qquad
+\mathcal L_{SSC}=-\log\frac{e^{\operatorname{sim}(s_i,\tilde s_i)/\tau}}{\sum_j e^{\operatorname{sim}(s_i,\tilde s_j)/\tau}}.
+$$
 
 ### 论文离线与线上效果
 

@@ -8,7 +8,7 @@
 
 ### 背景与主要改动
 
-TransAct 主要建模约百条实时行为，容易忽略用户多年的长期兴趣。TransAct V2 从约 \(10^4\) 条 lifelong 序列中按候选相似度取回相关行为，同时保留最近行为，再通过共享 Transformer 做 CTR 排序；额外的 Next Action Loss 迫使序列表征预测下一次正向互动。论文也包含 SKUT、request deduplication 等 serving 优化，本地复现聚焦模型链路。
+TransAct 主要建模约百条实时行为，容易忽略用户多年的长期兴趣。TransAct V2 从约 $10^4$ 条 lifelong 序列中按候选相似度取回相关行为，同时保留最近行为，再通过共享 Transformer 做 CTR 排序；额外的 Next Action Loss 迫使序列表征预测下一次正向互动。论文也包含 SKUT、request deduplication 等 serving 优化，本地复现聚焦模型链路。
 
 ```mermaid
 flowchart LR
@@ -26,23 +26,23 @@ flowchart LR
 
 ### 核心公式
 
-候选 \(c\) 对序列 \(S\) 的检索为：
+候选 $c$ 对序列 $S$ 的检索为：
 
-\[
+$$
 NN(S,c)=\{S_i\mid i\in\operatorname{TopK}(E(S)e_c)\},
-\]
+$$
 
-\[
+$$
 S_{all}=NN(S_{LL},c)\oplus S_{RT}[:r]\oplus NN(S_{RT}[r:],c).
-\]
+$$
 
-Next Action Loss 对时刻 \(t\) 的用户表示、下一正样本 \(p_{t+1}\) 和负样本集合 \(N_u\) 使用 sampled softmax：
+Next Action Loss 对时刻 $t$ 的用户表示、下一正样本 $p_{t+1}$ 和负样本集合 $N_u$ 使用 sampled softmax：
 
-\[
+$$
 L_{NAL}=-\sum_{u,t}\log\frac{e^{\langle u_t,p_{t+1}\rangle}}
 {e^{\langle u_t,p_{t+1}\rangle}+\sum_{n\in N_u}e^{\langle u_t,n\rangle}},
 \qquad L=L_{CTR}+w_{NAL}L_{NAL}.
-\]
+$$
 
 ### 论文离线与线上效果
 

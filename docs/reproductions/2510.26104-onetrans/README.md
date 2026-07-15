@@ -25,11 +25,17 @@ flowchart LR
 
 ### 核心公式
 
-$$X^{(0)}=[S\text{-tokens};NS\text{-tokens}],$$
+$$
+X^{(0)}=[S\text{-tokens};NS\text{-tokens}],
+$$
 
-$$W_i^{Q,K,V}=\begin{cases}W_S^{Q,K,V}&i\le L_S\\W_{NS,i}^{Q,K,V}&i>L_S,\end{cases}$$
+$$
+W_i^{Q,K,V}=\begin{cases}W_S^{Q,K,V}&i\le L_S\\W_{NS,i}^{Q,K,V}&i>L_S,\end{cases}
+$$
 
-$$X^{(n)}=\operatorname{MixedFFN}(\operatorname{Norm}(Z^{(n)}))+Z^{(n)}.$$
+$$
+X^{(n)}=\operatorname{MixedFFN}(\operatorname{Norm}(Z^{(n)}))+Z^{(n)}.
+$$
 
 ### 论文离线与线上效果
 

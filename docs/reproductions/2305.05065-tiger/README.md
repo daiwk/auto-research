@@ -26,13 +26,13 @@ flowchart LR
 
 RQ-VAE 逐层量化 residual：
 
-\[
+$$
 r_0=z_e(x),\quad c_l=\arg\min_j\lVert r_{l-1}-e_{l,j}\rVert^2,\quad
 r_l=r_{l-1}-e_{l,c_l}.
-\]
+$$
 
-物品 ID 为 \((c_1,c_2,c_3,c_{collision})\)。生成器最大化条件概率
-\(\sum_t\log p(c_t\mid c_{<t},\mathrm{history})\)；本地推理对所有有效物品 ID 求逐 token log-probability 之和，不用打分融合代理。
+物品 ID 为 $(c_1,c_2,c_3,c_{collision})$。生成器最大化条件概率
+$\sum_t\log p(c_t\mid c_{<t},\mathrm{history})$；本地推理对所有有效物品 ID 求逐 token log-probability 之和，不用打分融合代理。
 
 ### 论文离线与线上效果
 

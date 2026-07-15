@@ -29,19 +29,27 @@ flowchart LR
 
 对 primary/shadow 广告转换相对差异 $\Delta$，论文定义 90% 置信区间外的显著差异：
 
-$$StatSigDiff(ad^p,ad^s)=\max\left(0,\Delta-1.65\sqrt{\frac{2}{conv(ad^p)+conv(ad^s)}}\right).$$
+$$
+StatSigDiff(ad^p,ad^s)=\max\left(0,\Delta-1.65\sqrt{\frac{2}{conv(ad^p)+conv(ad^s)}}\right).
+$$
 
 系统级指标再按广告收入平方根加权：
 
-$$StatSigDiff=\frac{\sum_i StatSigDiff(ad_i^p,ad_i^s)\sqrt{rev(ad_i^p)+rev(ad_i^s)}}{\sum_i\sqrt{rev(ad_i^p)+rev(ad_i^s)}}.$$
+$$
+StatSigDiff=\frac{\sum_i StatSigDiff(ad_i^p,ad_i^s)\sqrt{rev(ad_i^p)+rev(ad_i^s)}}{\sum_i\sqrt{rev(ad_i^p)+rev(ad_i^s)}}.
+$$
 
 语义图先比较短语集合；低于阈值时回退到 token 集合：
 
-$$S_R(Ad_1,Ad_2)=\begin{cases}J(P_1,P_2),&J(P_1,P_2)\ge\theta\\J(T_1,T_2),&\text{otherwise}\end{cases}.$$
+$$
+S_R(Ad_1,Ad_2)=\begin{cases}J(P_1,P_2),&J(P_1,P_2)\ge\theta\\J(T_1,T_2),&\text{otherwise}\end{cases}.
+$$
 
 带置信度的共同类别还可按点积聚合：
 
-$$S_R(Ad_1,Ad_2)=\sum_{c\in C_1\cap C_2}s_{1,c}s_{2,c}.$$
+$$
+S_R(Ad_1,Ad_2)=\sum_{c\in C_1\cap C_2}s_{1,c}s_{2,c}.
+$$
 
 ### 论文离线与线上效果
 

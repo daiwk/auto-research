@@ -28,12 +28,16 @@ flowchart LR
 
 对知识表示 $z$，hybrid-expert adapter 用门控组合共享与专属专家：
 
-$$a(z)=\sum_{e=1}^{E}g_e(z)f_e(z),\qquad g(z)=\mathrm{softmax}(W_gz).$$
+$$
+a(z)=\sum_{e=1}^{E}g_e(z)f_e(z),\qquad g(z)=\mathrm{softmax}(W_gz).
+$$
 
 增强表示与原 ID 表示共同进入推荐器，二分类以 BCE 优化：
 
-$$\hat y=R([e_u,e_i,a(z_u),a(z_i)]),\qquad
-\mathcal L=-y\log\hat y-(1-y)\log(1-\hat y).$$
+$$
+\hat y=R([e_u,e_i,a(z_u),a(z_i)]),\qquad
+\mathcal L=-y\log\hat y-(1-y)\log(1-\hat y).
+$$
 
 ### 论文离线与线上效果
 

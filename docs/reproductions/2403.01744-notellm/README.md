@@ -23,9 +23,18 @@ flowchart LR
 
 ### 核心公式
 
-$$\mathcal L=\mathcal L_{GCL}+\lambda\mathcal L_{CSFT},\quad
-\mathcal L_{GCL}=-\log\frac{e^{z_i^\top z_j/\tau}}{\sum_k e^{z_i^\top z_k/\tau}},\quad
-\mathcal L_{CSFT}=-\sum_t\log p(o_t|o_{<t},prompt).$$
+$$
+\mathcal{L}=\mathcal{L}_{GCL}+\lambda\mathcal{L}_{CSFT}.
+$$
+
+$$
+\mathcal{L}_{GCL}=-\log
+\frac{\exp(z_i^\top z_j/\tau)}{\sum_k \exp(z_i^\top z_k/\tau)}.
+$$
+
+$$
+\mathcal{L}_{CSFT}=-\sum_t\log p(o_t\mid o_{<t},\mathrm{prompt}).
+$$
 
 ### 论文离线与线上效果
 

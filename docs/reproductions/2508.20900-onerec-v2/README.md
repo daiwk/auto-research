@@ -28,19 +28,27 @@ flowchart LR
 
 Newest-impression SFT 只监督窗口最后一个物品的三层 SID：
 
-$$\mathcal L_{SFT}=-\sum_{l=1}^{3}\log\pi_\theta(s_l\mid C,s_{<l}).$$
+$$
+\mathcal L_{SFT}=-\sum_{l=1}^{3}\log\pi_\theta(s_l\mid C,s_{<l}).
+$$
 
 DARS 先按视频时长分桶，再在同一用户、同一时长桶内计算播放时长分位数：
 
-$$F(d)=\lfloor\log_\beta(d+\epsilon)\rfloor,\qquad
-A_i=\begin{cases}+1&q_i\ge 75\%\\-1&\text{explicit dislike}\\0&\text{otherwise.}\end{cases}$$
+$$
+F(d)=\lfloor\log_\beta(d+\epsilon)\rfloor,\qquad
+A_i=\begin{cases}+1&q_i\ge 75\%\\-1&\text{explicit dislike}\\0&\text{otherwise.}\end{cases}
+$$
 
 GBPO 对正负优势使用不同动态分母：
 
-$$\mathcal L_{GBPO}=-\mathbb E\left[\frac{\pi_\theta(y\mid x)}{D(y,A)}A\right],$$
+$$
+\mathcal L_{GBPO}=-\mathbb E\left[\frac{\pi_\theta(y\mid x)}{D(y,A)}A\right],
+$$
 
-$$D=\begin{cases}\max(\pi_{old},\mathrm{sg}(\pi_\theta))&A>0\\
-\max(\pi_{old},1-\mathrm{sg}(\pi_\theta))&A<0.\end{cases}$$
+$$
+D=\begin{cases}\max(\pi_{old},\mathrm{sg}(\pi_\theta))&A>0\\
+\max(\pi_{old},1-\mathrm{sg}(\pi_\theta))&A<0.\end{cases}
+$$
 
 ### 论文离线与线上效果
 

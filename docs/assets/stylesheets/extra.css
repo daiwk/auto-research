@@ -1,0 +1,32 @@
+.md-grid {
+  max-width: 92rem;
+}
+
+.md-typeset .arithmatex,
+.md-typeset .mermaid,
+.md-typeset__scrollwrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.md-typeset .arithmatex {
+  padding: 0.4rem 0;
+}
+
+.md-typeset .mermaid {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 0.35rem;
+  background: var(--md-default-bg-color);
+}
+
+.md-typeset .mermaid svg {
+  min-width: max-content;
+}
+
+.md-typeset table:not([class]) {
+  display: table;
+  width: max-content;
+  min-width: 100%;
+}

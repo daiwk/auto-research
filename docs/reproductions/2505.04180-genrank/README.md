@@ -22,8 +22,10 @@ flowchart LR
 
 ### 核心公式
 
-$$h_t=e(i_t)+e(a_t)+e(p_t)+e(\Delta t_t),\qquad
-\mathcal L=-y\log\sigma(s)-(1-y)\log(1-\sigma(s)).$$
+$$
+h_t=e(i_t)+e(a_t)+e(p_t)+e(\Delta t_t),\qquad
+\mathcal L=-y\log\sigma(s)-(1-y)\log(1-\sigma(s)).
+$$
 
 ### 论文离线与线上效果
 

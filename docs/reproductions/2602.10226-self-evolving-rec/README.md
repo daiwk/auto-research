@@ -30,9 +30,13 @@ flowchart TD
 
 论文可抽象为受预算约束的双层优化：
 
-$$\theta^*(\Phi)=\arg\min_\theta\mathcal L_{proxy}(D;\theta,\Phi),$$
-$$\Phi^*=\arg\max_\Phi\mathbb E[M_{online}(\theta^*(\Phi))]\quad
-\text{s.t. }G(\Phi)\le C,$$
+$$
+\theta^*(\Phi)=\arg\min_\theta\mathcal L_{proxy}(D;\theta,\Phi),
+$$
+$$
+\Phi^*=\arg\max_\Phi\mathbb E[M_{online}(\theta^*(\Phi))]\quad
+\text{s.t. }G(\Phi)\le C,
+$$
 
 其中 $\Phi$ 是 agent 生成的优化器/结构/reward 方案，$G$ 表示训练、serving 和安全约束。关键贡献不是某一个新网络，而是让离线 proxy、线上反馈和长期记忆形成闭环。
 

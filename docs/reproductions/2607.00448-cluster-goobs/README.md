@@ -28,11 +28,15 @@ flowchart LR
 
 双塔相似度 $s(x_i,y_j)=v_i^Tu_j$，batch/OOB sampled softmax 为
 
-$$P(y_i\mid x_i;\theta)=\frac{\exp s(x_i,y_i)}{\sum_{j\in\mathcal C_i}\exp s(x_i,y_j)}.$$
+$$
+P(y_i\mid x_i;\theta)=\frac{\exp s(x_i,y_i)}{\sum_{j\in\mathcal C_i}\exp s(x_i,y_j)}.
+$$
 
 Cluster GOOBS 将候选集合改为混合分布
 
-$$q^-(j\mid i)=\rho\,q_{random}(j)+(1-\rho)q_{cluster}(j\mid c(i)),$$
+$$
+q^-(j\mid i)=\rho\,q_{random}(j)+(1-\rho)q_{cluster}(j\mid c(i)),
+$$
 
 MovieLens-1M 设置 random:cluster 为 1:15，Amazon 为 1:31。核心变化在采样分布和实时分段池，不在双塔 loss 本身。
 

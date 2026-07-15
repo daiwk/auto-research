@@ -26,15 +26,21 @@ flowchart LR
 
 核心 token mixing 为
 
-$$s^h=\operatorname{Concat}(x_1^h,\ldots,x_T^h),$$
+$$
+s^h=\operatorname{Concat}(x_1^h,\ldots,x_T^h),
+$$
 
 per-token FFN 为
 
-$$v_t=W_{t,2}\operatorname{GELU}(W_{t,1}s_t+b_{t,1})+b_{t,2},$$
+$$
+v_t=W_{t,2}\operatorname{GELU}(W_{t,1}s_t+b_{t,1})+b_{t,2},
+$$
 
 ReLU routing 为
 
-$$G_{i,j}=\operatorname{ReLU}(h(s_i)_j),\qquad v_i=\sum_jG_{i,j}e_{i,j}(s_i).$$
+$$
+G_{i,j}=\operatorname{ReLU}(h(s_i)_j),\qquad v_i=\sum_jG_{i,j}e_{i,j}(s_i).
+$$
 
 ### 论文离线与线上效果
 

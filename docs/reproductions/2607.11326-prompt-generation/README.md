@@ -32,15 +32,21 @@ flowchart LR
 
 把第 $i$ 个原始特征 $x_i$ 依次经过预处理 $P_i$、投影 $R_i$ 和融合/压缩 $M_i$，再按模板 $mathcal{T}$ 组装为模型输入：
 
-$$Z_i=M_i\left(R_i\left(P_i(x_i)\right)\right),\qquad X_{PG}=\mathcal{T}(Z_1,\ldots,Z_n).$$
+$$
+Z_i=M_i\left(R_i\left(P_i(x_i)\right)\right),\qquad X_{PG}=\mathcal{T}(Z_1,\ldots,Z_n).
+$$
 
 参数为零的 mean merger 将一段 $m$ 个 token embedding 压成一个 token：
 
-$$z_{mean}=\frac{1}{m}\sum_{j=1}^{m}e_j.$$
+$$
+z_{mean}=\frac{1}{m}\sum_{j=1}^{m}e_j.
+$$
 
 LLM 对目标 SID token 序列 $s_{1:L}$ 做标准自回归 SFT：
 
-$$\mathcal{L}_{NTP}=-\sum_{t=1}^{L}\log p_\theta(s_t\mid X_{PG},s_{<t}).$$
+$$
+\mathcal{L}_{NTP}=-\sum_{t=1}^{L}\log p_\theta(s_t\mid X_{PG},s_{<t}).
+$$
 
 同一配置解释器同时用于训练和 serving，并用线上原始特征重放检查一致性；工程目标可写作 $PG_{train}(x,c)=PG_{serve}(x,c)$。
 

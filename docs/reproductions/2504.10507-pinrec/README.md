@@ -22,8 +22,10 @@ flowchart LR
 
 ### 核心公式
 
-$$\hat i_{u,t}^{(k)}=\mathrm{norm}(O_k([h_t;e(a_{desired})])),\qquad
-\mathcal L_{MT}=-\sum_k\log\frac{\exp(\hat i^{(k)}\cdot i^+_{\pi(k)}/\tau)}{\sum_j\exp(\hat i^{(k)}\cdot i_j/\tau)}.$$
+$$
+\hat i_{u,t}^{(k)}=\mathrm{norm}(O_k([h_t;e(a_{desired})])),\qquad
+\mathcal L_{MT}=-\sum_k\log\frac{\exp(\hat i^{(k)}\cdot i^+_{\pi(k)}/\tau)}{\sum_j\exp(\hat i^{(k)}\cdot i_j/\tau)}.
+$$
 
 ### 论文离线与线上效果
 

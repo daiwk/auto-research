@@ -28,17 +28,23 @@ flowchart LR
 
 Residual quantization 逐层生成 SID。令 $r_i^1=e_i$，第 $l$ 层 code 与残差为
 
-$$s_i^l=\arg\min_k\|r_i^l-c_k^l\|_2^2,\qquad r_i^{l+1}=r_i^l-c_{s_i^l}^l.$$
+$$
+s_i^l=\arg\min_k\|r_i^l-c_k^l\|_2^2,\qquad r_i^{l+1}=r_i^l-c_{s_i^l}^l.
+$$
 
 SID-v2 联合训练重构、RQ commitment/codebook 和 co-occurrence contrastive loss：
 
-$$\mathcal L_{SID}=\mathcal L_{recon}+\sum_l\left(\beta\|r_l-\mathrm{sg}[e_l]\|_2^2+\|\mathrm{sg}[r_l]-e_l\|_2^2\right)+\lambda\mathcal L_{con}.$$
+$$
+\mathcal L_{SID}=\mathcal L_{recon}+\sum_l\left(\beta\|r_l-\mathrm{sg}[e_l]\|_2^2+\|\mathrm{sg}[r_l]-e_l\|_2^2\right)+\lambda\mathcal L_{con}.
+$$
 
 训练时为每个样本随机选择深度 $r\in[1,L]$，只重构前 $r$ 层 codeword 之和，以 progressive masking 强化层级结构。
 
 CPT 在混合 token 上学习自回归目标；召回 SFT 对目标视频 SID 计算
 
-$$\mathcal L_{retrieval}=-\sum_{l=1}^{L}\log P(s_{click}^l\mid prompt,s_{click}^{<l}).$$
+$$
+\mathcal L_{retrieval}=-\sum_{l=1}^{L}\log P(s_{click}^l\mid prompt,s_{click}^{<l}).
+$$
 
 本质变化是把容量从 $O(|V|d)$ ID 表转移到可 scaling 的 Transformer/MoE 参数，并通过 CPT 对齐语言空间与协同空间。
 

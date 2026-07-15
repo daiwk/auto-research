@@ -28,11 +28,15 @@ flowchart LR
 
 可把统一层抽象为 dense token $D^l$ 与 sequence token $S^l$ 的联合 attention：
 
-$$[D^{l+1};S^{l+1}]=Transformer_l([D^l;S^l]),$$
+$$
+[D^{l+1};S^{l+1}]=Transformer_l([D^l;S^l]),
+$$
 
 而 stacked baseline 是两个独立参数化模块 $f_D(D)$、$f_S(S)$ 到末端才融合。User-item decoupling 将
 
-$$score(u,i)=h([z_u,z_i])$$
+$$
+score(u,i)=h([z_u,z_i])
+$$
 
 拆为可跨候选复用的 $z_u=f_{user}(u,S_u)$ 与轻量 item interaction，降低 request-level 重复 FLOPs。
 
