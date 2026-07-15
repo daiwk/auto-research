@@ -5,6 +5,17 @@ repo_url: https://github.com/daiwk/auto-research
 repo_name: daiwk/auto-research
 edit_uri: edit/main/docs/
 
+nav:
+  - 首页: index.md
+  - 复现总览:
+      - 全部论文: reproductions/README.md
+      - 按公司: reproductions/catalog/by-company.md
+      - 按主题: reproductions/catalog/by-topic.md
+      - 按年月: reproductions/catalog/by-month.md
+  - 架构与扩展: architecture.md
+  - 本地预览与发布: getting-started.md
+  - 设计记录: design/automated-w2s-adoption.md
+
 theme:
   name: material
   language: zh

@@ -1,22 +1,29 @@
-# Paper reproductions
+# 复现总览
 
-这里是论文专用 adapter 的长期实验索引。每篇论文的模型、实验、报告和结论文档独立存放，不与通用 topic research loop 混写。
+这是论文筛选、实现状态和实验结论的**唯一汇总页**。后续新增论文或重跑实验时，只更新本页和对应论文 README，不再新建阶段性审计、候选或对照汇总页。
 
-每篇文档的“本地复现”都必须以“**本地对照口径**”开头，明确基线、实验组、主指标、相对变化和比较性质。内部模块消融、跨模型基线、效率对照与统一 DIN 比较不得混写成同一种“提升”。
+可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)浏览具体论文。
 
-后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。七篇近期工业论文采用[统一 DIN 公平比较协议](din-fair-benchmark.md)，主结果相对 DIN，论文模块消融单独报告。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选已合并到[统一筛选文档](industrial-online-ab-selection.md#google-meta-2026)。
+## 选文与记录规则 {#selection-policy}
 
-个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。2026-07-15 的最新工业 LLM × 搜广推硬筛及后续优先级见[近期候选清单](recent-industrial-llm-rec-2026-07.md)。
+- **工业论文硬门槛**：正文必须披露真实生产流量的量化线上 A/B、业务指标和生产对照组；“已部署”、离线 SOTA 或模拟器结果不算。
+- **具名例外**：SASRec、TIGER 是用户指定的经典基线，没有线上 A/B，不据此放宽后续选文标准。
+- **本地结果口径**：每篇 README 明确基线、实验组、数据、主指标和相对变化；论文线上结果、本地跨模型比较、模块消融和效率对照分开写。
+- **保真度**：公开数据替代私有数据或缩小规模可以接受；核心网络、训练目标或推理路径被 heuristic 替代时，只能标为“概念验证”。默认批量运行不包含概念验证。
 
-可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)浏览；物理 adapter 路径保持稳定。
+统一 DIN 实验使用 MovieLens-100K、时间 leave-two-out、全物品排序和 seeds 42/43/44；SERAL、LEADRE、COBRA、ARGUS、GR4AD、MM-LLM 使用同一 DIN NDCG@10 `0.02167`，Cross-domain KD 在独立 target split 上使用 DIN `0.05518`。这些结果只代表当前公开小数据协议，不等同于论文私有工业数据结论。
 
-## 保真度门槛
+## 当前进度
 
-数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
+- 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
+- 已登记并复核 51 个 adapter；详细线上证据、本地指标和复现边界见下表及单篇 README。
+- 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
+- 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
+- 当前没有新的高保真待实现项；发现合格论文后直接追加到本页。
 
-## 当前审计（51/51 adapters）
+## 全部复现（51/51）
 
-| Fidelity | Adapter / paper | Paper online evidence | Local status |
+| 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
 | 完整核心链路 | `s-grec` · [S-GRec](2602.10606-s-grec/README.md) | WeChat GMV +1.19%、CTR +1.16%、dislike -2.02% | 真实 LLM PSJ + SID generator + 5% A2PO；A2PO 经 validation 晋级，test HR@10 +0%、NDCG -4.53%，约束零越界 |
 | 完整核心链路 | `pinterest-ads-llm` · [Complementary LLM Predictor](2605.27856-pinterest-ads-llm/README.md) | US Shopping RoAS +4.94%、opt-in +6.69% | SFT 被选中；GRPO Recall@20 +0%，LLM 排序特征 AUC +2.59%，召回 quota=0 |

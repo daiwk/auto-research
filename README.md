@@ -129,7 +129,7 @@ Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 
 
 博客选出的 KAR、BAHE、BEQUE 均使用 MovieLens-100K：KAR 会用本地小型指令模型真实生成知识，BAHE 会落盘复用原子行为表示，BEQUE 会训练 seq2seq 模型并用公开目录实现离线检索反馈。三者都保留生产论文的核心训练链路，但不声称 MovieLens 等价于企业私有日志。
 
-博客两个“工业界+落地”章节已进一步全量解析：94 个主条目、138 个 arXiv 链接。新增 PinRec、GenRank、LEARN、NoteLLM、SessionRec、SaviorRec、LSVCR、MSD、LUM、PRECISE；EGA-V1 已按用户决定跳过，LCU 因数据保密协议暂不声称复现。详见[专项审计](docs/reproductions/blog-llm-rec-industrial-audit.md)。
+博客两个“工业界+落地”章节已解析 94 个主条目、138 个 arXiv 链接；选文标准、实现状态、暂缓候选与本地结论统一维护在[复现总览](docs/reproductions/README.md)。
 
 ## 运行论文复现
 
