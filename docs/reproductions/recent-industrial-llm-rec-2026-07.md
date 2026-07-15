@@ -9,11 +9,11 @@
 | 已实现 | [Fine-Tuned LLM as a Complementary Predictor Improving Ads System](https://arxiv.org/abs/2605.27856) · Pinterest | Shopping RoAS +4.94%；opt-in Shopping RoAS +6.69% | 已执行真实 LLM SFT/GRPO、two-tower 补充召回和排序特征；GRPO Recall@20 +0%，排序 AUC +2.59% |
 | 已实现 | [LWGR](https://arxiv.org/abs/2605.18771) · Alibaba International | 广告 revenue +1.35% | 已执行 IBQ soft instructions→真实 LLM、cross-attention 与 primal-dual；reference 胜出，LWGR NDCG@10 -4.29% |
 | 已实现 | [SIGMA](https://arxiv.org/abs/2602.22913) · AliExpress | Order +2.80%、CVR +3.84%、GMV +7.84%、购买类目广度 +2.47% | 已执行 multi-view LLM grounding、hybrid SID+ID、七任务 SFT 与 APF；top1-prefix 胜出，APF 未提升 |
-| 下一批 B | [S-GRec](https://arxiv.org/abs/2602.10606) · Tencent/WeChat | GMV +1.19%、GMV-Normal +1.55%、CTR +1.16%、dislike -2.02% | **中高**：论文使用公开 Amazon Industrial/Office；需实际训练 semantic judge、生成 backbone 和 A2PO，运行成本较高 |
+| 已实现 | [S-GRec](https://arxiv.org/abs/2602.10606) · Tencent/WeChat | GMV +1.19%、GMV-Normal +1.55%、CTR +1.16%、dislike -2.02% | 已执行真实 LLM 两阶段 PSJ、SID generator 和 5% sparse A2PO；validation 晋级，test HR@10 持平、NDCG -4.53% |
 | 通过但暂缓 | [AIGQ](https://arxiv.org/abs/2603.19710) · Alibaba/Taobao | HintQ UCTR +7.42%、归因订单 +10.31%、GMV +10.68%、7 日留存 +3.73% | **中**：IL-SFT/IL-GRPO 可做，但公开数据缺少与 HintQ 等价的用户→自然语言 query 列表及线上 CTR reward |
 | 通过但暂缓 | [RaG](https://arxiv.org/abs/2606.25496) · Kuaishou | 相对生产 GRM，广告收入最高 +1.87% | **低（Mac）**：核心包含个性化视频生成、多 Agent 和跨域视频质量 reward；用图片或打分代理会折损核心，不应现在宣称复现 |
 | 通过但暂缓 | [RoleGen](https://arxiv.org/abs/2602.13134) · Kuaishou | dormant-user 订单量 +7.3% | **中低**：需要真实 conversion trajectory、counterfactual reasoner 与线上反馈反思闭环；公开数据缺少关键轨迹监督 |
 
 未纳入：LocalSUG 虽披露 CTR +0.35% 和 few/no-result -2.56%，但论文作者单位没有满足“大厂论文”的明确证据；LinkedIn Semantic Search 论文披露大量离线消融，但没有找到可核验的量化线上 A/B，因此均不通过本轮硬门槛。
 
-执行顺序按“保真度优先，而非线上 lift 大小”排序；PG、UniVA、Pinterest Ads Predictor、LWGR、SIGMA 已完成，下一篇为 S-GRec。RaG 的线上结果很强，但在本地缺少视频生成与质量反馈链路，当前做简化版反而会重复此前的折损问题。
+执行顺序按“保真度优先，而非线上 lift 大小”排序；PG、UniVA、Pinterest Ads Predictor、LWGR、SIGMA、S-GRec 已完成，当前没有新的高保真待实现项。RaG 的线上结果很强，但在本地缺少视频生成与质量反馈链路，当前做简化版反而会重复此前的折损问题。

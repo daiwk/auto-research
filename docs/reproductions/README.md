@@ -14,10 +14,11 @@
 
 数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
 
-## 当前审计（50/50 adapters）
+## 当前审计（51/51 adapters）
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
+| 完整核心链路 | `s-grec` · [S-GRec](2602.10606-s-grec/README.md) | WeChat GMV +1.19%、CTR +1.16%、dislike -2.02% | 真实 LLM PSJ + SID generator + 5% A2PO；A2PO 经 validation 晋级，test HR@10 +0%、NDCG -4.53%，约束零越界 |
 | 完整核心链路 | `pinterest-ads-llm` · [Complementary LLM Predictor](2605.27856-pinterest-ads-llm/README.md) | US Shopping RoAS +4.94%、opt-in +6.69% | SFT 被选中；GRPO Recall@20 +0%，LLM 排序特征 AUC +2.59%，召回 quota=0 |
 | 完整核心链路 | `lwgr` · [LWGR](2605.18771-lwgr/README.md) | Ads revenue +1.35%、CTR +1.17% | reference 被选中；LWGR Recall@10 +0%、NDCG -4.29%，dual update 执行但约束未改善 |
 | 完整核心链路 | `sigma` · [SIGMA](2602.22913-sigma/README.md) | AliExpress Order +2.80%、GMV +7.84% | top1-prefix HR@20 1/128→9/128；APF 相对 top1 -11.11% |

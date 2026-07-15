@@ -47,6 +47,7 @@ def test_builtin_adapters_are_discoverable():
         "prompt-generation",
         "rankmixer",
         "rec-distill",
+        "s-grec",
         "self-evolving-rec",
         "sessionrec",
         "sasrec",
@@ -87,6 +88,8 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("pinterest-ads-llm").paper.has_online_ab
     assert get_adapter("lwgr").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("sigma").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("s-grec").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("s-grec").paper.has_online_ab
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):
