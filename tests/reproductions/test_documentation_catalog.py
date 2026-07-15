@@ -40,6 +40,25 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
         assert catalog_link in topic
 
 
+def test_catalog_entries_are_one_paper_per_line_with_chinese_summaries():
+    catalog_dir = DOCS / "catalog"
+    for name in ("by-company.md", "by-topic.md", "by-month.md"):
+        path = catalog_dir / name
+        for line_number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            if "(../" not in line:
+                continue
+            assert line.startswith("- "), f"{name}:{line_number} is not a paper bullet"
+            assert line.count("(../") == 1, (
+                f"{name}:{line_number} combines multiple papers on one line"
+            )
+            _, separator, summary = line.partition("：")
+            assert separator and re.search(r"[\u4e00-\u9fff]", summary), (
+                f"{name}:{line_number} is missing a Chinese method summary"
+            )
+
+
 def test_every_paper_readme_has_the_complete_reproduction_contract():
     required_headings = (
         "## 原始论文总结",
