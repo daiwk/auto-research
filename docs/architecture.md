@@ -1,6 +1,6 @@
-# Architecture and extension guide
+# 架构与扩展
 
-## Stable core
+## 稳定核心
 
 ```text
 cli.py
@@ -20,7 +20,7 @@ cli.py
            └── report.py             # 论文专用报告
 ```
 
-Topic research 和 paper reproduction 共用“编排与论文代码分离”的原则：`runner.py` 决定阶段顺序，`research_loop` 负责自适应提案、迭代、缓存和审计记录，具体模型训练仍由内置 evaluator、外部实验命令或 paper adapter 执行。`ProposalStrategy` 每轮都能读取已有 trial 历史；`CommandProposer` 通过环境变量把论文 manifest 和历史交给用户明确配置的 agent 命令，因此可以根据真实结果调整下一轮假设。设计取舍及与 automated-w2s-research 的映射见 [architecture adoption](design/automated-w2s-adoption.md)。
+Topic research 和 paper reproduction 共用“编排与论文代码分离”的原则：`runner.py` 决定阶段顺序，`research_loop` 负责自适应提案、迭代、缓存和审计记录，具体模型训练仍由内置 evaluator、外部实验命令或 paper adapter 执行。`ProposalStrategy` 每轮都能读取已有 trial 历史；`CommandProposer` 通过环境变量把论文 manifest 和历史交给用户明确配置的 agent 命令，因此可以根据真实结果调整下一轮假设。设计取舍及与 automated-w2s-research 的映射见[架构采用记录](design/automated-w2s-adoption.md)。
 
 通用层只负责 adapter 发现、共享数据协议、运行目录和 JSON/Markdown 持久化。论文特有逻辑不能写回 `cli.py` 或公共 `reporting.py`。只有两个以上推荐 adapter 确实共享且语义一致的逻辑，才放入 `rec_utils.py`。
 
@@ -28,17 +28,17 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 
 论文代码和物理文档路径以 adapter/arXiv ID 为稳定主键，不因分类变化而移动；阅读入口由 `docs/reproductions/catalog/` 提供按公司、主题和年月三套索引。新目录项在 `PaperMetadata` 中声明 `organization`、`published`、`topics` 和结构化 `online_ab`。
 
-## Reproduction fidelity gate
+## 复现保真度门槛
 
-| Level | Required evidence | Default `--paper all` |
+| 等级 | 必要条件 | 默认包含在 `--paper all` |
 |---|---|:---:|
-| `full_pipeline` | 核心模型、训练阶段和推理路径均实际运行；只允许缩小模型/数据规模或替换私有数据模态 | included |
-| `core_mechanism` | 论文中心算法按公式实际执行，但生产 backbone、私有特征或 serving 基建可省略 | included |
-| `concept_demo` | 任一决定结论的核心网络、loss、训练阶段或推理过程被 heuristic/proxy 替代 | excluded |
+| `full_pipeline` | 核心模型、训练阶段和推理路径均实际运行；只允许缩小模型/数据规模或替换私有数据模态 | 是 |
+| `core_mechanism` | 论文中心算法按公式实际执行，但生产 backbone、私有特征或 serving 基建可省略 | 是 |
+| `concept_demo` | 任一决定结论的核心网络、loss、训练阶段或推理过程被 heuristic/proxy 替代 | 否 |
 
 “有类似效果的打分函数”“在 backbone 后加权融合一个先验”“用固定候选代替 LLM agent”都属于 `concept_demo`。透明写出边界并不能把它提升为复现。显式运行 concept demo 时 CLI 会警告，报告顶部也会写明缺失核心组件。
 
-## Add a paper
+## 新增论文
 
 1. 创建 `src/auto_research/reproductions/<key>/`。
 2. 将论文公式或网络放在 `algorithm.py`/`model.py`，数据切分和对照实验放在 `experiment.py`。
@@ -51,7 +51,7 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 
 新论文不需要修改 CLI 分支、公共报告渲染器或其他论文目录。
 
-## Dataset policy
+## 数据集规则
 
 - 论文使用公开且适合本地 Mac 的原始数据时，在 `datasets.py` 增加可缓存下载器，并让 adapter 默认使用该数据。
 - 优先复用论文作者发布的预处理切分；否则按论文声明的 k-core、时间切分和负采样协议处理官方数据。
@@ -59,7 +59,7 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 - 论文只使用公司内部数据或超大模型时，可替换为公开数据和同类小模型；核心前向结构、训练目标和推理算法仍必须保留，否则只能登记为 concept demo。
 - `data/` 和 `runs/` 都是本地缓存，不提交 Git。
 
-## Paper README contract
+## 单篇论文文档规范
 
 每篇长期文档固定包含：`原始论文总结`，其下为`背景与主要改动`、Mermaid 重绘架构图、`核心公式`、`论文离线与线上效果`；随后是`本地复现`、数据协议、结果、代码映射和边界。论文没有线上 A/B 时必须明确写“未报告”。论文表格与本地表格必须分开，指标口径不一致时不得直接比较。
 
@@ -67,7 +67,7 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 
 后续新增推荐论文还必须通过[复现总览中的线上 A/B 硬门槛](reproductions/README.md#selection-policy)：正文须披露真实生产流量、量化指标和生产对照组。离线 SOTA、模拟器效果或“已部署”描述不能替代该证据。
 
-## Artifact contract
+## 产物规范
 
 每次运行写入不可变目录：
 
@@ -82,7 +82,7 @@ Topic research 额外写出 `events.jsonl`，逐条记录 discovery、implementa
 
 完成 trial 的标量指标可写入 `.auto-research/cache/`。缓存键包含 topic、track、数据目录、seed、metric、方向、命令和显式 `experiment_revision`；失败 trial、checkpoint、数据和原始日志不进入缓存。外部命令若未提供 `experiment_revision`，默认禁用缓存。
 
-## Evaluation contract
+## 评估规范
 
 - 时间序列推荐默认使用按用户的 train/validation/test 时间切分。
 - 参数和候选晋级只能读取 validation；test 只用于最终报告。
