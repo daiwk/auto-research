@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。cluster-conditioned online hard-negative sampler 实际执行；MovieLens genre 替换私有 LLM 多模态 cluster，分布式 GOOBS serving 未复刻。
 
-- 论文：[arXiv 2607.00448](https://arxiv.org/abs/2607.00448)，Meta
-- Adapter：`cluster-goobs`；代码：`src/auto_research/reproductions/cluster_goobs/`
-- 本地数据：MovieLens-1M；运行：`auto-research reproduce --paper cluster-goobs --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2607.00448](https://arxiv.org/abs/2607.00448) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-07-01（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `cluster-goobs` |
+| 本地复现代码 | [`src/auto_research/reproductions/cluster_goobs/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cluster_goobs/) |
 
 ## 原始论文总结
 

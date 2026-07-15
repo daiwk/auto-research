@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行冻结预训练 LM 的 CEG、缓存 item embedding、因果 PCH、dense all-position loss 和 online projection；BERT-tiny/MovieLens 替代 Baichuan2-7B/快手日志。
 
-- 论文：[arXiv 2405.03988](https://arxiv.org/abs/2405.03988)，Kuaishou
-- Adapter：`learn`；运行：`auto-research reproduce --paper learn --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2405.03988](https://arxiv.org/abs/2405.03988) |
+| 公司/机构 | Kuaishou |
+| 首次公开日期 | 2024-05-07（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `learn` |
+| 本地复现代码 | [`src/auto_research/reproductions/learn/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/learn/) |
 
 ## 原始论文总结
 

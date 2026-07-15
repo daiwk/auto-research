@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。实际执行 LLM token hidden-state 初始化、可训练 token、top-k MoE attention、ID/text 交替训练、全场景 causal NIP、目标场景双向 Transformer、序列拼接 MLP 与 cross-user BPR。Qwen2-1.5B 缩为 SmolLM2-135M，WeChat 私有日志替换为 MovieLens-1M。
 
-- 论文：[arXiv 2412.06308](https://arxiv.org/abs/2412.06308)，Tencent / WeChat
-- Adapter：`precise`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2412.06308](https://arxiv.org/abs/2412.06308) |
+| 公司/机构 | Tencent / WeChat |
+| 首次公开日期 | 2024-12-09（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `precise` |
+| 本地复现代码 | [`src/auto_research/reproductions/precise/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/precise/) |
 
 ## 原始论文总结
 

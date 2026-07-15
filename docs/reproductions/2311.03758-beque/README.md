@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 seq2seq SFT、beam self-sampling、离线检索反馈、partial order 构造和 rank-aware PRO；Qwen-7B/淘宝搜索替换为 T5-small/MovieLens 公开目录。
 
-- 论文：[arXiv 2311.03758](https://arxiv.org/abs/2311.03758)，Alibaba
-- 博客线索：[LLM + 推荐系统](https://www.daiwk.net/1.7.llm_recommend)
-- Adapter：`beque`；代码：`src/auto_research/reproductions/beque/`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2311.03758](https://arxiv.org/abs/2311.03758) |
+| 公司/机构 | Alibaba |
+| 首次公开日期 | 2023-11-07（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `beque` |
+| 本地复现代码 | [`src/auto_research/reproductions/beque/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/beque/) |
 
 ## 原始论文总结
 

@@ -2,6 +2,17 @@
 
 > **Fidelity: 完整核心链路复现**。稀疏 S-ID、以 S-ID 为条件的稠密向量、联合训练和 coarse-to-fine BeamFusion 均执行；生产 ANN 服务未复刻。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2503.02453](https://arxiv.org/abs/2503.02453) |
+| 公司/机构 | Baidu |
+| 首次公开日期 | 2025-03-04（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `cobra` |
+| 本地复现代码 | [`src/auto_research/reproductions/cobra/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cobra/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 纯 Semantic ID 在量化阶段丢失细粒度信息。COBRA 先生成稀疏 code，再以 code 条件生成可端到端更新的 dense vector；推理先 beam 搜索 code，再用 dense 最近邻细排。

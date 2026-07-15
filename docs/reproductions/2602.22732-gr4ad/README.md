@@ -2,6 +2,17 @@
 
 > **Fidelity: 核心机制复现**。UA-SID、并行 LazyAR、VSL、list-wise RSPO 均训练；私有多模态广告、eCPM、在线持续学习和动态 beam 服务未复刻。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2602.22732](https://arxiv.org/abs/2602.22732) |
+| 公司/机构 | Kuaishou |
+| 首次公开日期 | 2026-02-26（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `gr4ad` |
+| 本地复现代码 | [`src/auto_research/reproductions/gr4ad/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/gr4ad/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 广告生成式推荐同时受商业语义、实时更新和延迟约束。GR4AD 用多粒度 UA-SID 编码广告，LazyAR 放松层间自回归依赖，VSL 按商业价值加权监督，RSPO 直接优化列表排序，Dynamic Beam Serving 随负载调整 beam。

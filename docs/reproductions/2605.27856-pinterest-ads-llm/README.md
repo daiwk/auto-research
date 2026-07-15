@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路**。本地实际执行开源 causal LLM 的 LoRA SFT、论文位置/格式 reward 驱动的 clipped GRPO、受约束 advertiser 解码、训练式 two-tower、validation 配额选择的补充召回，以及 LLM advertiser score 作为排序特征。Pinterest 私有广告与跨站转化数据由公开商品品牌和购买序列替换。
 
-- 论文：[arXiv 2605.27856](https://arxiv.org/abs/2605.27856)，Pinterest，2026-05-27
-- Adapter：`pinterest-ads-llm`；代码：`src/auto_research/reproductions/pinterest_ads_llm/`
-- 本地数据：MiniOneRec Amazon Office，品牌作为 advertiser，购买作为 conversion
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.27856](https://arxiv.org/abs/2605.27856) |
+| 公司/机构 | Pinterest |
+| 首次公开日期 | 2026-05-27（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `pinterest-ads-llm` |
+| 本地复现代码 | [`src/auto_research/reproductions/pinterest_ads_llm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/pinterest_ads_llm/) |
 
 ## 原始论文总结
 

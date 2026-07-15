@@ -2,9 +2,16 @@
 
 > **Fidelity: 概念验证（非论文复现）**。当前实现省略 MLA、DHEN、semantic LLM features 和实际两阶段训练；旧指标只用于流水线诊断。
 
-- 论文：[arXiv 2601.20083](https://arxiv.org/abs/2601.20083)，Meta
-- Adapter：`llatte`；代码：`src/auto_research/reproductions/llatte/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper llatte --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2601.20083](https://arxiv.org/abs/2601.20083) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-01-27（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `llatte` |
+| 本地复现代码 | [`src/auto_research/reproductions/llatte/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/llatte/) |
 
 ## 原始论文总结
 

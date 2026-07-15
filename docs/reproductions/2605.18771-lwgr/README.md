@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路**。本地实际执行 parallel codebook、IBQ straight-through、用户 soft instruction 进入真实冻结 causal LLM、BOS cross-attention、冻结生成式 reference，以及逐步 primal-dual 更新。未用静态文本向量替代个性化 LLM 前向。
 
-- 论文：[arXiv 2605.18771](https://arxiv.org/abs/2605.18771)，Alibaba International / CAS，2026-05
-- Adapter：`lwgr`；代码：`src/auto_research/reproductions/lwgr/`
-- 本地数据：MiniOneRec Amazon Office 官方三段 SID 与商品标题
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.18771](https://arxiv.org/abs/2605.18771) |
+| 公司/机构 | Alibaba International / CAS |
+| 首次公开日期 | 2026-04-16（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `lwgr` |
+| 本地复现代码 | [`src/auto_research/reproductions/lwgr/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/lwgr/) |
 
 ## 原始论文总结
 

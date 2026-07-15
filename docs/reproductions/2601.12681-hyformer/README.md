@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。本地逐层执行 Query Generation、Query Decoding 和 Query Boosting；私有多行为序列替换为 MovieLens 单序列。
 
-- 论文：[arXiv 2601.12681](https://arxiv.org/abs/2601.12681)，ByteDance / Douyin Search
-- Adapter：`hyformer`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2601.12681](https://arxiv.org/abs/2601.12681) |
+| 公司/机构 | ByteDance / Douyin Search |
+| 首次公开日期 | 2026-01-19（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `hyformer` |
+| 本地复现代码 | [`src/auto_research/reproductions/hyformer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/hyformer/) |
 
 ## 原始论文总结
 

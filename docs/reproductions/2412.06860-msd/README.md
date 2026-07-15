@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 teacher 知识生成、T5 自回归蒸馏、student q/v-LoRA CTR 对齐、多层特征 adapter、频次自适应缓存/在线计算和相关历史融合；生产广告特征与缓存服务未复刻。
 
-- 论文：[arXiv 2412.06860](https://arxiv.org/abs/2412.06860)，Meituan
-- Adapter：`msd`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2412.06860](https://arxiv.org/abs/2412.06860) |
+| 公司/机构 | Meituan |
+| 首次公开日期 | 2024-12-09（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `msd` |
+| 本地复现代码 | [`src/auto_research/reproductions/msd/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/msd/) |
 
 ## 原始论文总结
 

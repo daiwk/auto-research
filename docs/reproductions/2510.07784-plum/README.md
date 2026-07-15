@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。本地实际执行多层 RQ Semantic ID、预训练 decoder-only LM 的 CPT、next-SID SFT 和 token-level constrained beam search；只缩小模型/数据规模并替换私有模态。
 
-- 论文：[arXiv 2510.07784](https://arxiv.org/abs/2510.07784)，Google DeepMind / YouTube
-- Adapter：`plum`；代码：`src/auto_research/reproductions/plum/`
-- 本地数据：MovieLens-1M；运行：`auto-research reproduce --paper plum --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2510.07784](https://arxiv.org/abs/2510.07784) |
+| 公司/机构 | Google DeepMind / YouTube |
+| 首次公开日期 | 2025-10-09（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `plum` |
+| 本地复现代码 | [`src/auto_research/reproductions/plum/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/plum/) |
 
 ## 原始论文总结
 

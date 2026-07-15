@@ -2,6 +2,17 @@
 
 > **Fidelity: 核心机制复现**。内容 encoder、query cross-attention、离散 caption token、用户语义兴趣和 ID/视觉排序融合均训练；原始私有图片及 BLIP-2/LLaMA2-1.5B 规模未复刻。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.09338](https://arxiv.org/abs/2605.09338) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2026-05-10（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `mm-llm` |
+| 本地复现代码 | [`src/auto_research/reproductions/mm_llm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mm_llm/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 视觉 embedding 难表达细粒度语义。论文用视觉 encoder+Q-Former 对齐 LLaMA2 生成 caption，再规范化为 categorical token IDs；item tokens 和用户历史 token profile 与 ID/视觉特征拼接进入生产排序模型，LLM 推理脱离在线主链路。

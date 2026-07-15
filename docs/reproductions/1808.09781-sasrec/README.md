@@ -2,7 +2,16 @@
 
 > 保真度：**完整核心链路复现**。模型、原论文 pairwise BCE 训练目标与序列推理均实际执行；仅把公开数据从 MovieLens-1M 缩到 MovieLens-100K，并采用更严格的全库评估。
 
-论文：[arXiv 1808.09781](https://arxiv.org/abs/1808.09781) · [作者代码](https://github.com/kang205/SASRec)
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 1808.09781](https://arxiv.org/abs/1808.09781) |
+| 公司/机构 | UC San Diego |
+| 首次公开日期 | 2018-08-20（arXiv v1） |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/kang205/SASRec) |
+| Adapter | `sasrec` |
+| 本地复现代码 | [`src/auto_research/reproductions/sasrec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/sasrec/) |
 
 ## 原始论文总结
 

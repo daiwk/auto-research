@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。本地模型实际训练 parameter-free multi-head token mixing、per-token FFN、ReLU-routed Sparse MoE 和 dense-training/sparse-inference；仅缩小字段、参数与 serving 工程规模。
 
-- 论文：[arXiv 2507.15551](https://arxiv.org/abs/2507.15551)，ByteDance / Douyin
-- Adapter：`rankmixer`
-- 数据：MovieLens-100K
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2507.15551](https://arxiv.org/abs/2507.15551) |
+| 公司/机构 | ByteDance / Douyin |
+| 首次公开日期 | 2025-07-21（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `rankmixer` |
+| 本地复现代码 | [`src/auto_research/reproductions/rankmixer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/rankmixer/) |
 
 ## 原始论文总结
 

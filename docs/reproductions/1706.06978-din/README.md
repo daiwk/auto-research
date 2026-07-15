@@ -2,7 +2,16 @@
 
 > 保真度：**核心机制复现**。本实现实际训练候选物品条件化的 local activation、加权兴趣池化、Dice 与 CTR 网络；未复刻 Alibaba 私有稀疏特征、mini-batch-aware regularization 和生产 serving。
 
-论文：[arXiv 1706.06978](https://arxiv.org/abs/1706.06978) · [作者代码](https://github.com/zhougr1993/DeepInterestNetwork)
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 1706.06978](https://arxiv.org/abs/1706.06978) |
+| 公司/机构 | Alibaba |
+| 首次公开日期 | 2017-06-21（arXiv v1） |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/zhougr1993/DeepInterestNetwork) |
+| Adapter | `din` |
+| 本地复现代码 | [`src/auto_research/reproductions/din/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/din/) |
 
 ## 原始论文总结
 

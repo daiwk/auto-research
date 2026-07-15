@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 item/action 交错基线、action-oriented 组织、位置/时间偏置、因果 Transformer 和 action 生成；缩小为 MovieLens 显式反馈。
 
-- 论文：[arXiv 2505.04180](https://arxiv.org/abs/2505.04180)，Xiaohongshu
-- Adapter：`genrank`；运行：`auto-research reproduce --paper genrank --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2505.04180](https://arxiv.org/abs/2505.04180) |
+| 公司/机构 | Xiaohongshu |
+| 首次公开日期 | 2025-05-07（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `genrank` |
+| 本地复现代码 | [`src/auto_research/reproductions/genrank/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/genrank/) |
 
 ## 原始论文总结
 

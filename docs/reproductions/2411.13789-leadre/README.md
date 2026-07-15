@@ -2,6 +2,17 @@
 
 > **Fidelity: 完整核心链路复现**。Semantic ID、长短期/商业意图、语义与价值辅助任务、SFT→DPO 和可缓存/实时双路径均执行；私有广告与生产服务未复刻。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2411.13789](https://arxiv.org/abs/2411.13789) |
+| 公司/机构 | Tencent / WeChat |
+| 首次公开日期 | 2024-11-21（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `leadre` |
+| 本地复现代码 | [`src/auto_research/reproductions/leadre/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/leadre/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 ID 召回难利用广告内容。LEADRE 以跨域行为、长期总结和实时行为构造 intent-aware prompt，将广告量化为 S-ID，并用广告语义/商业价值辅助任务和 DPO 对齐，线上把长期生成缓存与实时服务组合。
