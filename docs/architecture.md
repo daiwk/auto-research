@@ -65,7 +65,7 @@ Topic research 和 paper reproduction 共用“编排与论文代码分离”的
 
 每个 adapter 必须同时出现在根 README、论文总索引、公司目录、月份目录和主题目录。单篇目录必须至少包含一个经过复核的 `metrics/*.json`；该 JSON 只保存稳定标量、协议与 seed，不保存 checkpoint、原始日志或数据。
 
-后续新增推荐论文还必须通过[线上 A/B 硬门槛](reproductions/industrial-online-ab-selection.md)：正文须披露真实生产流量、量化指标和生产对照组。离线 SOTA、模拟器效果或“已部署”描述不能替代该证据。
+后续新增推荐论文还必须通过[复现总览中的线上 A/B 硬门槛](reproductions/README.md#selection-policy)：正文须披露真实生产流量、量化指标和生产对照组。离线 SOTA、模拟器效果或“已部署”描述不能替代该证据。
 
 ## Artifact contract
 

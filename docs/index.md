@@ -8,7 +8,6 @@
 - [按公司浏览](reproductions/catalog/by-company.md)：Google、Meta、Pinterest、字节、阿里、腾讯、快手等。
 - [按主题浏览](reproductions/catalog/by-topic.md)：LLM+推荐、生成式召回、排序、强化学习和 serving。
 - [按月份浏览](reproductions/catalog/by-month.md)：按论文发布时间查找。
-- [公平对照说明](reproductions/din-fair-benchmark.md)：理解每篇论文实际使用的 baseline 和评估协议。
 - [本地预览与发布](getting-started.md)：启动文档站或检查公式渲染。
 
 ## 阅读约定
