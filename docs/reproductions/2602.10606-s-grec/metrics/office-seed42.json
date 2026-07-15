@@ -1,0 +1,30 @@
+{
+  "run": "20260715-110507-762784",
+  "dataset": "MiniOneRec Amazon Office_Products",
+  "train_rows": 12000,
+  "validation_users": 96,
+  "test_users": 96,
+  "items": 3459,
+  "selected_variant": "a2po",
+  "psj": {
+    "sft_initial_loss": 1.3690356969833375,
+    "sft_final_loss": 1.1725122451782226,
+    "sft_point_accuracy": 0.3489583333333333,
+    "aligned_point_accuracy": 0.3802083333333333,
+    "pairwise_accuracy": 0.59375
+  },
+  "a2po_diagnostics": {
+    "semantic_sampling_ratio": 0.05,
+    "semantic_queries": 9,
+    "directional_consistency": 0.4236111111111111,
+    "mean_semantic_coefficient": 0.1426066177793675,
+    "semantic_bound_violations": 0,
+    "clip_fraction": 0.0
+  },
+  "test": {
+    "business": {"hr_at_10": 0.041666666666666664, "ndcg_at_10": 0.030133221465774712},
+    "reward_sum": {"hr_at_10": 0.041666666666666664, "ndcg_at_10": 0.028769369866072033},
+    "adv_sum": {"hr_at_10": 0.041666666666666664, "ndcg_at_10": 0.028769369866072033},
+    "a2po": {"hr_at_10": 0.041666666666666664, "ndcg_at_10": 0.028769369866072033}
+  }
+}

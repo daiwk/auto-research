@@ -18,10 +18,11 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **50/50** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **51/51** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 完整核心链路 | `s-grec` | S-GRec · Tencent/WeChat | 真实 LLM PSJ 方面 SFT+GRPO、pairwise aggregator、SID 生成、5% 稀疏 A2PO；validation 晋级，test HR@10 +0%、NDCG -4.53% |
 | 完整核心链路 | `pinterest-ads-llm` | Complementary LLM Predictor · Pinterest | SmolLM LoRA SFT+GRPO、advertiser constrained decoding、two-tower 补充召回与排序特征；GRPO Recall@20 +0%，排序 AUC +2.59% |
 | 完整核心链路 | `lwgr` | LWGR · Alibaba International | IBQ parallel soft instructions 穿过真实 LLM、BOS cross-attention、reference constraint、primal-dual；Recall@10 +0%，NDCG -4.29% |
 | 完整核心链路 | `sigma` | SIGMA · Alibaba/AliExpress | LLM 多视角 grounding、hybrid prefix+ID、七任务 SFT、三步生成/APF；选中 top1-prefix 的 HR@20 0.0078→0.0703，APF 未提升 |
@@ -161,6 +162,7 @@ auto-research reproduce --paper univa --seed 42
 auto-research reproduce --paper pinterest-ads-llm --seed 42
 auto-research reproduce --paper lwgr --seed 42
 auto-research reproduce --paper sigma --seed 42
+auto-research reproduce --paper s-grec --seed 42
 auto-research reproduce --paper all --seed 42
 
 # 仅在明确需要查看旧概念验证时加入

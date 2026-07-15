@@ -2,6 +2,7 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [S-GRec](../2602.10606-s-grec/README.md)：离线个性化 semantic judge、pairwise GRPO、A2PO 蒸馏到轻量生成器
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：advertiser SFT/GRPO、补充召回与排序特征
 - [LWGR](../2605.18771-lwgr/README.md)：个性化 soft instruction、LLM world knowledge、Lagrangian fusion
 - [SIGMA](../2602.22913-sigma/README.md)：多视角 grounding、七任务 instruction SFT、hybrid token
@@ -26,6 +27,7 @@
 
 ## 生成式召回与端到端推荐
 
+- [S-GRec](../2602.10606-s-grec/README.md)
 - [LWGR](../2605.18771-lwgr/README.md) · [SIGMA](../2602.22913-sigma/README.md)
 - [UniVA](../2605.05803-univa/README.md)
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)
@@ -45,6 +47,7 @@
 
 ## 采样、蒸馏与强化学习
 
+- [S-GRec](../2602.10606-s-grec/README.md)：5% sparse PSJ、advantage sign gate、magnitude bound
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：SFT→GRPO advertiser list optimization
 - [LWGR](../2605.18771-lwgr/README.md)：reference confidence constraint 与 primal-dual
 - [UniVA](../2605.05803-univa/README.md)：请求内 eCPM reward normalization、SL/RL 交替更新
@@ -53,6 +56,7 @@
 
 ## Serving / efficiency
 
+- [S-GRec](../2602.10606-s-grec/README.md)：LLM judge 仅训练期调用，线上只保留 SID generator
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：批量 LLM advertiser prior、补充 CG
 - [LWGR](../2605.18771-lwgr/README.md)：nearline world-knowledge cache + online cross-attention
 - [SIGMA](../2602.22913-sigma/README.md)：prefix-local item retrieval、nearline U2I
