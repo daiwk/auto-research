@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路**。本地实际执行 causal-LM LoRA 多视角 InfoNCE+KD、RQ-SID prefix 与 unique ID 混合 token、七类 instruction SFT、SID-prefix NTP、同-prefix hard-negative InfoNCE、prefix beam→子目录 item retrieval→APF。不是用最终分数规则模拟 SIGMA。
 
-- 论文：[arXiv 2602.22913](https://arxiv.org/abs/2602.22913)，Alibaba / AliExpress，2026-02
-- Adapter：`sigma`；代码：`src/auto_research/reproductions/sigma/`
-- 本地数据：MiniOneRec Amazon Office，使用官方 RQ-SID、Qwen item embedding、标题和行为序列
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2602.22913](https://arxiv.org/abs/2602.22913) |
+| 公司/机构 | Alibaba / AliExpress |
+| 首次公开日期 | 2026-02-26（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `sigma` |
+| 本地复现代码 | [`src/auto_research/reproductions/sigma/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/sigma/) |
 
 ## 原始论文总结
 

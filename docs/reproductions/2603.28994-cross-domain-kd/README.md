@@ -2,6 +2,17 @@
 
 > **Fidelity: 核心机制复现**。源域大 teacher、目标域小 student、目标样本上的 zero-shot logits 和 non-serving auxiliary-task distillation 均执行；私有跨产品 schema 未复刻。
 
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2603.28994](https://arxiv.org/abs/2603.28994) |
+| 公司/机构 | Google / YouTube |
+| 首次公开日期 | 2026-03-30（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `cross-domain-kd` |
+| 本地复现代码 | [`src/auto_research/reproductions/cross_domain_kd/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cross_domain_kd/) |
+
 ## 原始论文总结
 ### 背景与主要改动
 低流量产品无力训练大型专用 teacher。论文直接把数据丰富的 YouTube 多任务 teacher 应用于 YouTube Music 样本，把 serving task 与辅助 task logits 蒸馏到小模型，不要求源域数据或匹配的界面特征。

@@ -2,9 +2,16 @@
 
 > **Fidelity: 概念验证（非论文复现）**。当前代码未训练论文的 hybrid attention 与 InnerTrans；下方旧本地指标只描述打分代理，不支持 LONGER 效果结论。
 
-- 论文：[arXiv 2505.04421](https://arxiv.org/abs/2505.04421)，ByteDance / Douyin
-- Adapter：`longer`；代码：`src/auto_research/reproductions/longer/`
-- 本地数据：MovieLens-100K；运行：`auto-research reproduce --paper longer --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2505.04421](https://arxiv.org/abs/2505.04421) |
+| 公司/机构 | ByteDance / Douyin |
+| 首次公开日期 | 2025-05-07（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `longer` |
+| 本地复现代码 | [`src/auto_research/reproductions/longer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/longer/) |
 
 ## 原始论文总结
 

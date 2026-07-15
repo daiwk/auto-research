@@ -2,7 +2,16 @@
 
 > 保真度：**核心机制复现**。RQ-VAE、残差语义 ID、collision token 和自回归 Transformer 检索链路均实际训练；MovieLens genre 替代 Sentence-T5 商品文本，省略 hashed user token 与 cold-start epsilon mixing。
 
-论文：[arXiv 2305.05065](https://arxiv.org/abs/2305.05065)
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2305.05065](https://arxiv.org/abs/2305.05065) |
+| 公司/机构 | Google / Google DeepMind |
+| 首次公开日期 | 2023-05-08（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `tiger` |
+| 本地复现代码 | [`src/auto_research/reproductions/tiger/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/tiger/) |
 
 ## 原始论文总结
 

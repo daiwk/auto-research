@@ -2,9 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。实际训练三层 residual-quantized Semantic ID、newest-impression SFT、layer-shared K/V Lazy Decoder、Duration-Aware Reward Shaping 和 GBPO；仅缩小模型/数据，省略私有异构特征与分布式 serving。
 
-- 论文：[arXiv 2508.20900](https://arxiv.org/abs/2508.20900)，Kuaishou
-- Adapter：`onerec-v2`；代码：`src/auto_research/reproductions/onerec_v2/`
-- 本地数据：官方 KuaiRand-Pure；包含真实曝光、播放时长、视频时长和负反馈
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2508.20900](https://arxiv.org/abs/2508.20900) |
+| 公司/机构 | Kuaishou |
+| 首次公开日期 | 2025-08-28（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `onerec-v2` |
+| 本地复现代码 | [`src/auto_research/reproductions/onerec_v2/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/onerec_v2/) |
 
 ## 原始论文总结
 

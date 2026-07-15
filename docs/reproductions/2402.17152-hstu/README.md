@@ -2,7 +2,16 @@
 
 > 保真度：**核心机制复现**。UVQK SiLU projection、非 softmax pointwise aggregation、相对位置偏置、post-pooling normalization、U-gate、残差与 all-position 生成式训练均实际执行；未复刻异构 action/time token、stochastic-length kernel、M-FALCON 和万亿参数 serving。
 
-论文：[arXiv 2402.17152](https://arxiv.org/abs/2402.17152) · [Meta 官方实现](https://github.com/meta-recsys/generative-recommenders)
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2402.17152](https://arxiv.org/abs/2402.17152) |
+| 公司/机构 | Meta |
+| 首次公开日期 | 2024-02-27（arXiv v1） |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/meta-recsys/generative-recommenders) |
+| Adapter | `hstu` |
+| 本地复现代码 | [`src/auto_research/reproductions/hstu/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/hstu/) |
 
 ## 原始论文总结
 

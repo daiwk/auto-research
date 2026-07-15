@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。SIS 的 off-policy token 变换按论文公式实际执行；Qwen3 上的完整 RL 后训练不在本地实验中。
 
-- 论文：[arXiv 2607.04728](https://arxiv.org/abs/2607.04728)
-- Adapter：`sis`；代码：`src/auto_research/reproductions/sis/`
-- 本地数据：Tiny Shakespeare；运行：`auto-research reproduce --paper sis --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2607.04728](https://arxiv.org/abs/2607.04728) |
+| 公司/机构 | 论文作者团队（原文未标注公司） |
+| 首次公开日期 | 2026-07-06（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `sis` |
+| 本地复现代码 | [`src/auto_research/reproductions/sis/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/sis/) |
 
 ## 原始论文总结
 

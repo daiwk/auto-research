@@ -2,7 +2,16 @@
 
 > 保真度：**核心机制复现**。NTL/MTL/FTL 对比预训练、预训练后下游微调、candidate early fusion、Candidate ID Randomization、backbone 低学习率和 DCAT 均实际执行；省略 Pinterest 多 action/surface 语料、fresh-item age dropout、分布式 20B embedding、int4 与 Triton kernel。
 
-论文：[arXiv 2507.12704](https://arxiv.org/abs/2507.12704) · 机构：Pinterest
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2507.12704](https://arxiv.org/abs/2507.12704) |
+| 公司/机构 | Pinterest |
+| 首次公开日期 | 2025-07-17（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `pinfm` |
+| 本地复现代码 | [`src/auto_research/reproductions/pinfm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/pinfm/) |
 
 ## 原始论文总结
 

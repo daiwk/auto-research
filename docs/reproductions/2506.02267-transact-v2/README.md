@@ -2,7 +2,16 @@
 
 > 保真度：**核心机制复现**。候选锚定的长/短序列近邻检索、最近行为保留、early-fusion causal Transformer 和 Next Action Loss 均实际训练；MovieLens genre 替代 PinSage embedding，省略 Pinterest action/surface 字段、曝光日志负例及生产 Triton kernel。
 
-论文：[arXiv 2506.02267](https://arxiv.org/abs/2506.02267) · 机构：Pinterest
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2506.02267](https://arxiv.org/abs/2506.02267) |
+| 公司/机构 | Pinterest |
+| 首次公开日期 | 2025-06-02（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `transact-v2` |
+| 本地复现代码 | [`src/auto_research/reproductions/transact_v2/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/transact_v2/) |
 
 ## 原始论文总结
 

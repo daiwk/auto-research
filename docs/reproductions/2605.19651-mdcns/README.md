@@ -2,9 +2,16 @@
 
 > **Fidelity: 核心机制复现**。三源负采样、双模型分歧/共识选择与更新实际执行；推荐 backbone 缩小为本地可训练模型。
 
-- 论文：[arXiv 2605.19651](https://arxiv.org/abs/2605.19651)；[作者代码](https://github.com/Lyz103/SIGIR26-MDCNS)
-- Adapter：`mdcns`；代码：`src/auto_research/reproductions/mdcns/`
-- 本地数据：作者仓库 Amazon Beauty 5-core；运行：`auto-research reproduce --paper mdcns --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.19651](https://arxiv.org/abs/2605.19651) |
+| 公司/机构 | 论文作者团队（原文未标注公司） |
+| 首次公开日期 | 2026-05-19（arXiv v1） |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/Lyz103/SIGIR26-MDCNS) |
+| Adapter | `mdcns` |
+| 本地复现代码 | [`src/auto_research/reproductions/mdcns/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mdcns/) |
 
 ## 原始论文总结
 

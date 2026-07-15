@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。真实执行 note compression special token、行为共现 GCL、类别生成 CSFT 和压缩状态 I2I 检索；T5-small/MovieLens 替代 7B LLM/小红书 note。
 
-- 论文：[arXiv 2403.01744](https://arxiv.org/abs/2403.01744)，Xiaohongshu
-- Adapter：`notellm`；运行：`auto-research reproduce --paper notellm --seed 42`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2403.01744](https://arxiv.org/abs/2403.01744) |
+| 公司/机构 | Xiaohongshu |
+| 首次公开日期 | 2024-03-04（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `notellm` |
+| 本地复现代码 | [`src/auto_research/reproductions/notellm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/notellm/) |
 
 ## 原始论文总结
 

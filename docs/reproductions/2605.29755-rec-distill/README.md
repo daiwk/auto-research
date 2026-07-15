@@ -2,8 +2,16 @@
 
 > **Fidelity: 完整核心链路复现**。本地实际训练大 teacher 与轻 student，物化 black-box logits，执行 student-side sampling correction、main/aux decoupled towers、batch→streaming 两阶段蒸馏，并在 validation 搜索 loss ratio。
 
-- 论文：[arXiv 2605.29755](https://arxiv.org/abs/2605.29755)，ByteDance / Douyin / TikTok
-- Adapter：`rec-distill`
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2605.29755](https://arxiv.org/abs/2605.29755) |
+| 公司/机构 | ByteDance / Douyin / TikTok |
+| 首次公开日期 | 2026-05-28（arXiv v1） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| Adapter | `rec-distill` |
+| 本地复现代码 | [`src/auto_research/reproductions/rec_distill/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/rec_distill/) |
 
 ## 原始论文总结
 
