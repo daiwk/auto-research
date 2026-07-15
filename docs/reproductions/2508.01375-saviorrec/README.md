@@ -28,18 +28,24 @@ flowchart LR
 
 内容 encoder 用行为正对进行对比学习；RQ 逐层量化残差：
 
-$$z_i=E_{content}(x_i),\quad
+$$
+z_i=E_{content}(x_i),\quad
 c_i^l=\arg\min_k\|r_i^{l-1}-e_k^l\|^2,\quad
-r_i^l=r_i^{l-1}-e_{c_i^l}^l.$$
+r_i^l=r_i^{l-1}-e_{c_i^l}^l.
+$$
 
 MBA 不修改冻结 SID，而从全零码本学习动态行为残差：
 
-$$\tilde z_i=z_i+\sum_{l=1}^L A^l[c_i^l],\qquad A^l_0=0.$$
+$$
+\tilde z_i=z_i+\sum_{l=1}^L A^l[c_i^l],\qquad A^l_0=0.
+$$
 
 随后 target 查询历史、历史也接收 target 条件，输出 CTR：
 
-$$u_t=\operatorname{BiTargetAttn}(\{\tilde z_{h_j}\},\tilde z_t),\qquad
-\hat y=\sigma(\operatorname{MLP}[u_t,\tilde z_t,u_t\odot\tilde z_t]).$$
+$$
+u_t=\operatorname{BiTargetAttn}(\{\tilde z_{h_j}\},\tilde z_t),\qquad
+\hat y=\sigma(\operatorname{MLP}[u_t,\tilde z_t,u_t\odot\tilde z_t]).
+$$
 
 ### 论文离线与线上效果
 

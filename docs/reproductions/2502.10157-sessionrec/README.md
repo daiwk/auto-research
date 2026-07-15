@@ -27,13 +27,17 @@ flowchart LR
 
 均值 ISE 与 SSE 为：
 
-$$s_t=\frac{1}{|S_t|}\sum_{i\in S_t}e_i,\qquad
-q_t=\operatorname{SSE}(s_1,\ldots,s_t)_{t}. $$
+$$
+s_t=\frac{1}{|S_t|}\sum_{i\in S_t}e_i,\qquad
+q_t=\operatorname{SSE}(s_1,\ldots,s_t)_{t}.
+$$
 
 下一 session 的全部物品构成正例集合 $P_{t+1}$，曝光但未发生正反馈的物品构成困难负例 $N_{t+1}$：
 
-$$\mathcal L=\mathcal L_{multi\text{-}positive\ retrieval}
-+\alpha\frac{1}{|P||N|}\sum_{p\in P,n\in N}\log(1+e^{q^\top e_n-q^\top e_p}).$$
+$$
+\mathcal L=\mathcal L_{multi\text{-}positive\ retrieval}
++\alpha\frac{1}{|P||N|}\sum_{p\in P,n\in N}\log(1+e^{q^\top e_n-q^\top e_p}).
+$$
 
 本地训练从多正例中轮采一个 CE target，并保留整个正例集合用于评估；困难负例直接来自同一 session 的真实未点击曝光，不从全库伪造。
 

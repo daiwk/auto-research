@@ -28,9 +28,13 @@ flowchart LR
 
 对同一 query 的候选排序 $y_1\succ y_2\succ\cdots\succ y_K$，以长度归一化序列 log-probability $s_\theta(q,y)$ 建立 rank-aware 对比：
 
-$$s_\theta(q,y)=\frac{1}{|y|}\sum_t\log p_\theta(y_t\mid q,y_{<t}),$$
+$$
+s_\theta(q,y)=\frac{1}{|y|}\sum_t\log p_\theta(y_t\mid q,y_{<t}),
+$$
 
-$$\mathcal L_{PRO}=-\sum_{i=1}^{K-1}\log\frac{\exp(s_i/\tau_i)}{\sum_{j=i}^{K}\exp(s_j/\tau_i)}+\lambda\mathcal L_{SFT}.$$
+$$
+\mathcal L_{PRO}=-\sum_{i=1}^{K-1}\log\frac{\exp(s_i/\tau_i)}{\sum_{j=i}^{K}\exp(s_j/\tau_i)}+\lambda\mathcal L_{SFT}.
+$$
 
 本地离线反馈同样由 relevance、相对新增召回和 Hit@1 组合，反馈只负责排序模型真实生成的候选，不替代生成训练。
 

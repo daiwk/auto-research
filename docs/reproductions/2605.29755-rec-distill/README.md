@@ -25,11 +25,17 @@ flowchart LR
 
 ### 核心公式
 
-$$\eta=\frac{P_S^{distill}-P_S^{raw}}{P_T-P_S^{raw}},$$
+$$
+\eta=\frac{P_S^{distill}-P_S^{raw}}{P_T-P_S^{raw}},
+$$
 
-$$\mathcal L_{aux}=\mathcal L_{task}+\alpha\mathcal L_{distill},$$
+$$
+\mathcal L_{aux}=\mathcal L_{task}+\alpha\mathcal L_{distill},
+$$
 
-$$\hat y=\frac{1}{1+\frac{r_s}{p_X}(e^{-z}+1-r_++b_s)},\qquad T'_2=f_S(T_1).$$
+$$
+\hat y=\frac{1}{1+\frac{r_s}{p_X}(e^{-z}+1-r_++b_s)},\qquad T'_2=f_S(T_1).
+$$
 
 ### 论文离线与线上效果
 

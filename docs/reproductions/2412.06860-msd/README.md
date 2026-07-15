@@ -27,16 +27,22 @@ flowchart LR
 
 student 对 teacher 输出序列做真实语言建模蒸馏：
 
-$$\mathcal L_{KD}=-\sum_t\log p_{S}(y_t^{T}\mid x,y_{<t}^{T}).$$
+$$
+\mathcal L_{KD}=-\sum_t\log p_{S}(y_t^{T}\mid x,y_{<t}^{T}).
+$$
 
 CTR 阶段冻结 student 主干，只学习低秩更新：
 
-$$W'=W+\frac{\alpha}{r}BA.$$
+$$
+W'=W+\frac{\alpha}{r}BA.
+$$
 
 频次门控在缓存表示与 LoRA 在线表示间选择，并融合 top-k 相关历史：
 
-$$e_i=m(f_i)e_i^{cache}+[1-m(f_i)]e_i^{online},\qquad
-\tilde e_i=e_i+\operatorname{Adapter}\left(\operatorname{Mean}(\operatorname{TopK}_{h\in H}\operatorname{sim}(e_i,e_h))\right).$$
+$$
+e_i=m(f_i)e_i^{cache}+[1-m(f_i)]e_i^{online},\qquad
+\tilde e_i=e_i+\operatorname{Adapter}\left(\operatorname{Mean}(\operatorname{TopK}_{h\in H}\operatorname{sim}(e_i,e_h))\right).
+$$
 
 ### 论文离线与线上效果
 

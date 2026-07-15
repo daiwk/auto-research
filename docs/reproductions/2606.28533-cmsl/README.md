@@ -31,15 +31,21 @@ flowchart LR
 
 每个事件 $x_t$ 对 K 个 lens 得到软分配，可写成
 
-$$a_{t,k}=\operatorname{softmax}_k(g_k(x_t,c)),\qquad S_k=\{a_{t,k}x_t\}_{t=1}^{T}.$$
+$$
+a_{t,k}=\operatorname{softmax}_k(g_k(x_t,c)),\qquad S_k=\{a_{t,k}x_t\}_{t=1}^{T}.
+$$
 
 线性 HSTU 用二阶 feature map 将注意力核分解：
 
-$$SiLU(QK^T)V\approx\phi(Q)\phi(K)^TV+AV,$$
+$$
+SiLU(QK^T)V\approx\phi(Q)\phi(K)^TV+AV,
+$$
 
 其中 $\phi(x)$ 包含一阶项 $x_i$ 和二阶项 $x_ix_j$。各 strand 表示 $H_k$ 再由 contextual query $q(c)$ 聚合：
 
-$$z=\sum_k\operatorname{softmax}_k(q(c)^TW_KH_k)\,W_VH_k.$$
+$$
+z=\sum_k\operatorname{softmax}_k(q(c)^TW_KH_k)\,W_VH_k.
+$$
 
 ### 论文离线与线上效果
 

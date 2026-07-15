@@ -26,12 +26,16 @@ flowchart LR
 
 对任务 $t$，主干参数 $\Theta$ 冻结，只优化 option 参数 $O_t$ 和逐层 adapter $A_t^l$：
 
-$$h_{l+1}=F_l(h_l;\Theta_l)+A_t^l(F_l(h_l;\Theta_l)),\qquad
-A_t^l(h)=W_{up}^l\,\mathrm{GELU}(W_{down}^l h).$$
+$$
+h_{l+1}=F_l(h_l;\Theta_l)+A_t^l(F_l(h_l;\Theta_l)),\qquad
+A_t^l(h)=W_{up}^l\,\mathrm{GELU}(W_{down}^l h).
+$$
 
 本地二分类 option 得分采用归一化表示与两个可训练 option prototype 的相似度：
 
-$$p(y\mid x)=\mathrm{softmax}(\tau\,\hat h_{CLS}^{\top}\hat O_y).$$
+$$
+p(y\mid x)=\mathrm{softmax}(\tau\,\hat h_{CLS}^{\top}\hat O_y).
+$$
 
 ### 论文离线与线上效果
 

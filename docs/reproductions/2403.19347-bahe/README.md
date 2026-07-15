@@ -26,12 +26,16 @@ flowchart LR
 
 浅层只计算一次原子行为表示并缓存：
 
-$$b_j=F_p(\mathrm{LLM}_{1:k}(x_j)),\qquad b_j\rightarrow\text{offline DB}.$$
+$$
+b_j=F_p(\mathrm{LLM}_{1:k}(x_j)),\qquad b_j\rightarrow\text{offline DB}.
+$$
 
 训练时从数据库取回序列，由上层模型学习跨行为交互：
 
-$$u=F_p(\mathrm{LLM}_{k+1:L}([b_1,\ldots,b_n,e_i])),\qquad
-\hat y=\sigma(\mathrm{MLP}(u)).$$
+$$
+u=F_p(\mathrm{LLM}_{k+1:L}([b_1,\ldots,b_n,e_i])),\qquad
+\hat y=\sigma(\mathrm{MLP}(u)).
+$$
 
 计算从反复处理全部 token 的 $O(T^2L)$ 转向缓存低层后、上层处理行为数 $n$ 的 $O(n^2(L-k))$；实际收益取决于 token/行为压缩率和缓存命中率。
 

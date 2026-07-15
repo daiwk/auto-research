@@ -23,13 +23,13 @@ flowchart LR
 
 ### 核心公式
 
-HSTU layer 先得到 \(U,V,Q,K=\operatorname{SiLU}(\operatorname{Norm}(X)W_{UVQK})\)，再计算
+HSTU layer 先得到 $U,V,Q,K=\operatorname{SiLU}(\operatorname{Norm}(X)W_{UVQK})$，再计算
 
-\[
+$$
 A(X)V=\frac{1}{N}\operatorname{SiLU}(QK^\top+b_{rel})V,
 \qquad
 X'=X+W_O\left(U\odot\operatorname{Norm}(A(X)V)\right),
-\]
+$$
 
 并施加 causal mask。与标准 attention 不同，这里没有 softmax 归一化；训练对序列所有有效位置做 sampled-softmax next-item 预测。
 

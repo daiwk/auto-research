@@ -30,20 +30,30 @@ flowchart LR
 
 SFT 对下一 advertiser 文本 $a^+$ 优化自回归负对数似然：
 
-$$\mathcal L_{SFT}=-\sum_t\log p_\theta(a_t^+\mid x,a_{<t}^+).$$
+$$
+\mathcal L_{SFT}=-\sum_t\log p_\theta(a_t^+\mid x,a_{<t}^+).
+$$
 
 GRPO 的总 reward 为：
 
-$$R=R_{match}-P_{adv\_len}-P_{interest\_len},$$
+$$
+R=R_{match}-P_{adv\_len}-P_{interest\_len},
+$$
 
-$$R_{match}(i)=0.1(20-i)+2\cdot\mathbf 1[i\le4],$$
+$$
+R_{match}(i)=0.1(20-i)+2\cdot\mathbf 1[i\le4],
+$$
 
-$$P_{len}(n,n^*)=\begin{cases}0,&n=n^*\\
-\min(0.1|n-n^*|,1)+1,&n\ne n^*.\end{cases}$$
+$$
+P_{len}(n,n^*)=\begin{cases}0,&n=n^*\\
+\min(0.1|n-n^*|,1)+1,&n\ne n^*.\end{cases}
+$$
 
 本地按同一公式缩放为 5-advertiser group，并以组内标准化 advantage 执行两轮 clipped ratio 更新。补充召回将预测 advertiser 集合 $A_u$ 作为过滤器：
 
-$$\mathcal C_{LLM}(u)=\operatorname{TopK}_{i:a_i\in A_u}s_{2tower}(u,i),$$
+$$
+\mathcal C_{LLM}(u)=\operatorname{TopK}_{i:a_i\in A_u}s_{2tower}(u,i),
+$$
 
 再用 validation 选择固定 quota 与常规候选混排；排序侧把 advertiser log-prob 作为额外特征。
 

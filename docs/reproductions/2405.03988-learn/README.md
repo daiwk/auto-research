@@ -24,9 +24,11 @@ flowchart LR
 
 ### 核心公式
 
-$$e_i^c=\mathrm{meanpool}(LLM(text_i)),\quad
+$$
+e_i^c=\mathrm{meanpool}(LLM(text_i)),\quad
 u_{1:H}=PCH(e_{i_1}^c,\ldots,e_{i_H}^c),\quad
-\mathcal L=-\sum_t\log\frac{e^{u_t^\top v_{t+1}}}{\sum_j e^{u_t^\top v_j}}.$$
+\mathcal L=-\sum_t\log\frac{e^{u_t^\top v_{t+1}}}{\sum_j e^{u_t^\top v_j}}.
+$$
 
 ### 论文离线与线上效果
 

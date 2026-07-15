@@ -29,15 +29,21 @@ flowchart LR
 
 Representation Memento 用 maximal marginal relevance 兼顾 query 相关性和结果多样性：
 
-$$d^*=\arg\max_{d\in D\setminus S}\left[\lambda\,sim(d,q)-(1-\lambda)\max_{s\in S}sim(d,s)\right].$$
+$$
+d^*=\arg\max_{d\in D\setminus S}\left[\lambda\,sim(d,q)-(1-\lambda)\max_{s\in S}sim(d,s)\right].
+$$
 
 Ember Affine 对检索表示做条件缩放和平移：
 
-$$e'(x;c)=\gamma(c)\odot e(x)+\beta(c).$$
+$$
+e'(x;c)=\gamma(c)\odot e(x)+\beta(c).
+$$
 
 Ember Quadratic 进一步加入乘性交互：
 
-$$\Psi(X^h)=X^h\odot ReLU(W_a^hX)+X^h.$$
+$$
+\Psi(X^h)=X^h\odot ReLU(W_a^hX)+X^h.
+$$
 
 ### 论文离线与线上效果
 

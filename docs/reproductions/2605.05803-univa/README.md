@@ -42,25 +42,35 @@ flowchart LR
 
 Commercial SID 保留物品语义编码的前两级，并用商业分类和类内 bid 分桶得到最后一级：
 
-$$SID_i=(s_i^{(1)},s_i^{(2)},c_i),\qquad
-c_i=\operatorname{offset}(a_i)+\operatorname{EqFreqBin}(b_i\mid a_i),$$
+$$
+SID_i=(s_i^{(1)},s_i^{(2)},c_i),\qquad
+c_i=\operatorname{offset}(a_i)+\operatorname{EqFreqBin}(b_i\mid a_i),
+$$
 
 其中 $a_i$ 表示优化目标、ROI 档位和行业等属性组合，所有分类的分桶数满足 $\sum_a n_a\leq V_c$。
 
 Generation-as-Ranking 将生成相关性与价值 logit 相加后再归一化：
 
-$$p(s_t\mid x,s_{<t})=\operatorname{softmax}\!\left(z^{gen}_t+z^{value}_t\right).$$
+$$
+p(s_t\mid x,s_{<t})=\operatorname{softmax}\!\left(z^{gen}_t+z^{value}_t\right).
+$$
 
 监督阶段优化逐 token 负对数似然。强化阶段在同一请求候选内标准化 eCPM 奖励 $r$，用 clipped PPO 更新策略，并回归价值头：
 
-$$\mathcal L_{PPO}=-\mathbb E\left[\min(\rho_t A_t,\operatorname{clip}(\rho_t,1-\epsilon,1+\epsilon)A_t)\right],$$
+$$
+\mathcal L_{PPO}=-\mathbb E\left[\min(\rho_t A_t,\operatorname{clip}(\rho_t,1-\epsilon,1+\epsilon)A_t)\right],
+$$
 
-$$\mathcal L_V=\mathbb E[(V_\theta-r)^2],\qquad
-\mathcal L_{RL}=\mathcal L_{PPO}+\lambda_V\mathcal L_V.$$
+$$
+\mathcal L_V=\mathbb E[(V_\theta-r)^2],\qquad
+\mathcal L_{RL}=\mathcal L_{PPO}+\lambda_V\mathcal L_V.
+$$
 
 个性化 trie beam 仅扩展当前请求库存集合 $\mathcal I_u$ 中存在的前缀，并累计双头融合分数：
 
-$$S(s_{1:L})=\sum_{t=1}^{L}\log p(s_t\mid x,s_{<t}),\qquad s_{1:L}\in Trie(\mathcal I_u).$$
+$$
+S(s_{1:L})=\sum_{t=1}^{L}\log p(s_t\mid x,s_{<t}),\qquad s_{1:L}\in Trie(\mathcal I_u).
+$$
 
 ### 论文离线与线上效果
 

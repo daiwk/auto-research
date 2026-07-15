@@ -28,16 +28,22 @@ flowchart LR
 
 候选上下文 $c$ 注入 query，形成 target-aware attention：
 
-$$q_t=W_Q[x_t;c],\quad k_i=W_Kx_i,\quad
-h_t=\sum_i\operatorname{softmax}_i(q_t^Tk_i/\sqrt d)W_Vx_i.$$
+$$
+q_t=W_Q[x_t;c],\quad k_i=W_Kx_i,\quad
+h_t=\sum_i\operatorname{softmax}_i(q_t^Tk_i/\sqrt d)W_Vx_i.
+$$
 
 论文的核心 scaling 观察用经验律描述：
 
-$$\Delta NE(C)\propto-\alpha\log_{10}C,$$
+$$
+\Delta NE(C)\propto-\alpha\log_{10}C,
+$$
 
 跨阶段迁移效率定义为
 
-$$\tau=\frac{\Delta NE_{downstream}}{\Delta NE_{upstream}}.$$
+$$
+\tau=\frac{\Delta NE_{downstream}}{\Delta NE_{upstream}}.
+$$
 
 它用于判断上游序列算力提升能有多少转化为下游线上模型收益。
 

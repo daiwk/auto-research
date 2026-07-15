@@ -31,21 +31,33 @@ flowchart LR
 
 多视角 relevance pair 使用 in-batch InfoNCE，并用在线 ID embedding 的相似度分布做 KD：
 
-$$\mathcal L_{CL}=-\frac1{2B}\sum_i\log P_{text}(i'\mid i),$$
+$$
+\mathcal L_{CL}=-\frac1{2B}\sum_i\log P_{text}(i'\mid i),
+$$
 
-$$\mathcal L_{KD}=\sum_{i,j}P_{ID}(j\mid i)\log\frac{P_{ID}(j\mid i)}{P_{text}(j\mid i)}.$$
+$$
+\mathcal L_{KD}=\sum_{i,j}P_{ID}(j\mid i)\log\frac{P_{ID}(j\mid i)}{P_{text}(j\mid i)}.
+$$
 
 混合 token 为 $[c_1,\dots,c_\ell,id_i]$；SFT 联合优化 prefix NTP 与同 prefix hard negatives 的 item InfoNCE：
 
-$$\mathcal L_{NTP}=-\frac1\ell\sum_t\log P(c_t\mid U,H,I,c_{<t}),$$
+$$
+\mathcal L_{NTP}=-\frac1\ell\sum_t\log P(c_t\mid U,H,I,c_{<t}),
+$$
 
-$$\mathcal L_{ID}=-\log\frac{e^{\cos(h,\tilde v_i)/\tau}}{e^{\cos(h,\tilde v_i)/\tau}+\sum_{j\in N_c}e^{\cos(h,\tilde v_j)/\tau}}.$$
+$$
+\mathcal L_{ID}=-\log\frac{e^{\cos(h,\tilde v_i)/\tau}}{e^{\cos(h,\tilde v_i)/\tau}+\sum_{j\in N_c}e^{\cos(h,\tilde v_j)/\tau}}.
+$$
 
 APF 将 prefix beam score $\phi_k$ 与 prefix 内 item probability 相乘，并用 top-K prefix score 标准差调温：
 
-$$P(v_i\mid T)=P(c^k\mid T)P(id_i\mid T,c^k),$$
+$$
+P(v_i\mid T)=P(c^k\mid T)P(id_i\mid T,c^k),
+$$
 
-$$P(id_i\mid T,c^k)\propto\exp(\cos(h_k,\tilde v_i)\,\sigma(\phi_1,\dots,\phi_K)/\tau).$$
+$$
+P(id_i\mid T,c^k)\propto\exp(\cos(h_k,\tilde v_i)\,\sigma(\phi_1,\dots,\phi_K)/\tau).
+$$
 
 ### 论文离线与线上效果
 

@@ -33,23 +33,35 @@ flowchart LR
 
 第 $k$ 个子空间对 codeword 的 soft distribution 和 straight-through index：
 
-$$p_j^k=\frac{\exp(\operatorname{sim}(u^k,C_k[j])/\tau)}{\sum_l\exp(\operatorname{sim}(u^k,C_k[l])/\tau)},$$
+$$
+p_j^k=\frac{\exp(\operatorname{sim}(u^k,C_k[j])/\tau)}{\sum_l\exp(\operatorname{sim}(u^k,C_k[l])/\tau)},
+$$
 
-$$e^k=e_{hard}^k-\operatorname{sg}[p^k]+p^k,\quad t_u^k=W_L^k(e^k)^TC_k.$$
+$$
+e^k=e_{hard}^k-\operatorname{sg}[p^k]+p^k,\quad t_u^k=W_L^k(e^k)^TC_k.
+$$
 
 LLM 输出 $H_u$ 在 decoder BOS 处融合：
 
-$$\tilde q_0=\operatorname{CrossAttn}(q_0,H_u).$$
+$$
+\tilde q_0=\operatorname{CrossAttn}(q_0,H_u).
+$$
 
 相对冻结 reference 的平均 token log-prob 退化为：
 
-$$C=\mathbb E\left[\max(0,s_{ref}(u,i^+)-s_\theta(u,i^+)-\delta)\right].$$
+$$
+C=\mathbb E\left[\max(0,s_{ref}(u,i^+)-s_\theta(u,i^+)-\delta)\right].
+$$
 
 优化目标与 dual update：
 
-$$\min_\theta\max_{\lambda\ge0}\ \mathcal L_{rec}+\lambda(C-\epsilon),$$
+$$
+\min_\theta\max_{\lambda\ge0}\ \mathcal L_{rec}+\lambda(C-\epsilon),
+$$
 
-$$\lambda\leftarrow\max(0,\lambda+\eta_\lambda(C-\epsilon)).$$
+$$
+\lambda\leftarrow\max(0,\lambda+\eta_\lambda(C-\epsilon)).
+$$
 
 ### 论文离线与线上效果
 

@@ -28,12 +28,16 @@ flowchart LR
 
 OneRec 把 $m$ 个目标 item 的 L 层 SID 串成 session，自回归目标为
 
-$$\mathcal L_{NTP}=-\sum_{i=1}^{m}\sum_{j=1}^{L}\log P(s_i^{j+1}\mid s_{BOS},s_1^{1:L},\ldots,s_i^{1:j}).$$
+$$
+\mathcal L_{NTP}=-\sum_{i=1}^{m}\sum_{j=1}^{L}\log P(s_i^{j+1}\mid s_{BOS},s_1^{1:L},\ldots,s_i^{1:j}).
+$$
 
 Reward model 对生成 session 预测 SWT、VTR、WTR、LTR。IPA 的 DPO 更新为
 
-$$\mathcal L_{DPO}=-\log\sigma\left(\beta\log\frac{M_{t+1}(S^w\mid H)}{M_t(S^w\mid H)}-
-\beta\log\frac{M_{t+1}(S^l\mid H)}{M_t(S^l\mid H)}\right).$$
+$$
+\mathcal L_{DPO}=-\log\sigma\left(\beta\log\frac{M_{t+1}(S^w\mid H)}{M_t(S^w\mid H)}-
+\beta\log\frac{M_{t+1}(S^l\mid H)}{M_t(S^l\mid H)}\right).
+$$
 
 ### 论文离线与线上效果
 

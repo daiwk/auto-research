@@ -28,16 +28,24 @@ flowchart LR
 
 异构 token 特征先分别投影：
 
-$$e^t=\operatorname{proj}^t(\operatorname{concat}(f_1^t,f_2^t,\ldots)),\quad t\in\{c,i\}.$$
+$$
+e^t=\operatorname{proj}^t(\operatorname{concat}(f_1^t,f_2^t,\ldots)),\quad t\in\{c,i\}.
+$$
 
 生成目标只落在 condition 输出上，预测紧随其后的 item：
 
-$$p(c_1,i_1,\ldots,c_L,i_L)=\prod_{l=1}^{L}p(i_l\mid c_1,i_1,\ldots,i_{l-1},c_l),$$
-$$\mathcal L=-\sum_l\log\frac{\exp(\operatorname{sim}(o_l^c,e_l^i))}{\exp(\operatorname{sim}(o_l^c,e_l^i))+\sum_k\exp(\operatorname{sim}(o_l^c,e_k^i))}.$$
+$$
+p(c_1,i_1,\ldots,c_L,i_L)=\prod_{l=1}^{L}p(i_l\mid c_1,i_1,\ldots,i_{l-1},c_l),
+$$
+$$
+\mathcal L=-\sum_l\log\frac{\exp(\operatorname{sim}(o_l^c,e_l^i))}{\exp(\operatorname{sim}(o_l^c,e_l^i))+\sum_k\exp(\operatorname{sim}(o_l^c,e_k^i))}.
+$$
 
 Step 2 在公共历史 prefix 后一次追加多个 query condition，并屏蔽 query-query attention。Step 3 同时使用知识向量和目标匹配分数：
 
-$$\hat y=f\left(u,i,\{o_{q_n}^i,\operatorname{sim}(o_{q_n}^i,e_i^i)\}_{n=1}^{N},e_i^i\right).$$
+$$
+\hat y=f\left(u,i,\{o_{q_n}^i,\operatorname{sim}(o_{q_n}^i,e_i^i)\}_{n=1}^{N},e_i^i\right).
+$$
 
 ### 论文离线与线上效果
 

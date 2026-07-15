@@ -2,6 +2,8 @@
 
 一个面向 macOS 本地环境的机器学习研究闭环：输入 topic，检索最新论文，在公开数据集上实现和迭代实验，生成隔离的 JSON/Markdown 产物，并可通过 GitHub CLI 提交 Pull Request（GitLab 语境中的 MR）。
 
+可读版文档站：[daiwk.github.io/auto-research](https://daiwk.github.io/auto-research/)。站点支持全文搜索、MathJax 公式、Mermaid 架构图、深色模式和移动端横向滚动；本地预览方式见[文档说明](docs/getting-started.md)。
+
 ## 当前能力
 
 项目包含两层互补能力：

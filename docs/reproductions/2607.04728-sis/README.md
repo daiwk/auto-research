@@ -27,11 +27,15 @@ flowchart LR
 
 标准 token ratio 与序列 ratio 为
 
-$$w_t(\theta)=\frac{\pi_\theta(y_t\mid x,y_{<t})}{\pi_{\mathrm{old}}(y_t\mid x,y_{<t})},\qquad w(\theta)=\prod_{t=1}^{T}w_t(\theta).$$
+$$
+w_t(\theta)=\frac{\pi_\theta(y_t\mid x,y_{<t})}{\pi_{\mathrm{old}}(y_t\mid x,y_{<t})},\qquad w(\theta)=\prod_{t=1}^{T}w_t(\theta).
+$$
 
 精确 rejection envelope 为 $M_t=\max_v\pi_\theta(v)/\pi_{\mathrm{old}}(v)$；工程实现只在 behavior policy 的 top-K 集合 $V_K$ 上计算 $\hat M_t$。若接受标记为 $z_t$，SIS 使用
 
-$$\widetilde w_t=\begin{cases}1,&z_t=1\\g(w_t),&z_t=0,\end{cases}$$
+$$
+\widetilde w_t=\begin{cases}1,&z_t=1\\g(w_t),&z_t=0,\end{cases}
+$$
 
 其中 $g$ 可对应 GRPO clipping、DAPO asymmetric clipping 或 GSPO sequence correction。论文用累计 log 偏差 $D=\sum_t|\log w_t|$ 证明 SIS 收紧 off-policy 近似误差。
 

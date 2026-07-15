@@ -22,12 +22,12 @@ flowchart LR
 
 ### 核心公式
 
-对序列表示 \(E\)，每层执行
+对序列表示 $E$，每层执行
 
-\[
+$$
 \operatorname{Attn}(E)=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt d}+M_{causal}\right)V,
 \qquad F_i=\operatorname{ReLU}(S_iW_1+b_1)W_2+b_2.
-\]
+$$
 
 物品输入 embedding 与输出分类权重绑定。原论文目标对每个位置的正物品和采样负物品使用 pairwise BCE，本实现保留该目标。
 
