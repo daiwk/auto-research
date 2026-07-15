@@ -1,0 +1,13 @@
+{
+  "features": [
+    {
+      "feature_name": "history",
+      "feature_type": "sequence",
+      "expression": "history_sids",
+      "max_length": 5,
+      "features": [
+        {"feature_name": "sid", "feature_type": "text", "expression": "history_sids"}
+      ]
+    }
+  ]
+}

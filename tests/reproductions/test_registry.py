@@ -42,6 +42,7 @@ def test_builtin_adapters_are_discoverable():
         "pinrec",
         "plum",
         "precise",
+        "prompt-generation",
         "rankmixer",
         "rec-distill",
         "self-evolving-rec",

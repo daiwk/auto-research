@@ -2,6 +2,7 @@
 
 ## Alibaba
 
+- 2026-07 · [Prompt Generation](../2607.11326-prompt-generation/README.md) · LLM generative retrieval / feature protocol / autoresearch
 - 2017-06 · [DIN](../1706.06978-din/README.md) · CTR ranking
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md) · LLM / parameter-efficient tuning
 - 2023-11 · [BEQUE](../2311.03758-beque/README.md) · LLM query rewriting / PRO

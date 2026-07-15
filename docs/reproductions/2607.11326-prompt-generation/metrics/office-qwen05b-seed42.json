@@ -1,0 +1,62 @@
+{
+  "paper": "2607.11326",
+  "adapter": "prompt-generation",
+  "seed": 42,
+  "dataset": {
+    "name": "MiniOneRec Amazon Office_Products",
+    "paper_train_rows": 36586,
+    "local_train_rows": 4000,
+    "catalog_items": 3459
+  },
+  "setup": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "steps_per_variant": 20,
+    "trainable_lora_parameters": 270336,
+    "validation_users": 12,
+    "test_users": 12,
+    "sampled_candidates": 20
+  },
+  "selection": {
+    "rule": "validation HR@10, then HR@5, then shorter prompt",
+    "selected": "sid_plus_title",
+    "selected_test_hr10_relative_to_sid_only_percent": -11.1111111111
+  },
+  "variants": {
+    "sid_only": {
+      "mean_prompt_tokens": 61.075,
+      "initial_loss": 2.6339375019,
+      "final_loss": 1.7992321253,
+      "validation_hr10": 0.8333333333,
+      "test_hr1": 0.4166666667,
+      "test_hr5": 0.4166666667,
+      "test_hr10": 0.75,
+      "test_scoring_seconds": 14.446418458
+    },
+    "sid_plus_title": {
+      "mean_prompt_tokens": 128.65,
+      "initial_loss": 2.9980311871,
+      "final_loss": 2.3921007156,
+      "validation_hr10": 0.8333333333,
+      "test_hr1": 0.3333333333,
+      "test_hr5": 0.4166666667,
+      "test_hr10": 0.6666666667,
+      "test_scoring_seconds": 154.924846917
+    },
+    "sid_plus_merged_title_brand": {
+      "mean_prompt_tokens": 66.975,
+      "initial_loss": 2.6500048161,
+      "final_loss": 1.9926205635,
+      "validation_hr10": 0.75,
+      "test_hr1": 0.4166666667,
+      "test_hr5": 0.4166666667,
+      "test_hr10": 0.5,
+      "test_scoring_seconds": 14.900983458
+    }
+  },
+  "efficiency": {
+    "merged_vs_raw_title_prompt_tokens_percent": -47.9401476875,
+    "merged_vs_raw_title_test_scoring_time_percent": -90.3817983938,
+    "merged_vs_sid_only_test_scoring_time_percent": 3.1465412375
+  },
+  "conclusion": "The local budget validates PG token-compression efficiency but does not reproduce an accuracy lift over SID-only."
+}

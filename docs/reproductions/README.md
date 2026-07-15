@@ -6,7 +6,7 @@
 
 后续新增工业论文执行[真实线上 A/B 硬门槛](industrial-online-ab-selection.md)。DIN 与 HSTU 满足该门槛；用户明确指定的经典基线 SASRec、TIGER 没有线上 A/B，只作为具名例外，不扩大后续选文范围。七篇近期工业论文采用[统一 DIN 公平比较协议](din-fair-benchmark.md)，主结果相对 DIN，论文模块消融单独报告。2026-01-01 至 2026-07-13 的 Google/Meta 专项筛选已合并到[统一筛选文档](industrial-online-ab-selection.md#google--meta-2026-专项审计)。
 
-个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。
+个人博客两个“工业界+落地”章节的 94 个主条目全量审计见[博客专项清单](blog-llm-rec-industrial-audit.md)。2026-07-15 的最新工业 LLM × 搜广推硬筛及后续优先级见[近期候选清单](recent-industrial-llm-rec-2026-07.md)。
 
 可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)浏览；物理 adapter 路径保持稳定。
 
@@ -14,10 +14,11 @@
 
 数据规模缩小、私有数据替换为公开数据不自动构成折损；但论文核心网络、训练目标或推理路径被 heuristic 替代时，必须标为“概念验证（非论文复现）”。默认 `--paper all` 只运行前两级。
 
-## 当前审计（45/45 adapters）
+## 当前审计（46/46 adapters）
 
 | Fidelity | Adapter / paper | Paper online evidence | Local status |
 |---|---|---|---|
+| 核心机制 | `prompt-generation` · [Prompt Generation](2607.11326-prompt-generation/README.md) | Taobao Search transaction +0.47%、GMV +0.51%；Shop Search +4.01% | 同源 Amazon Office + Qwen2.5-0.5B；选中 Title 的 HR@10 -11.11%，mean merger 较原始 Title 打分 -90.38% |
 | 完整核心链路 | `precise` · [PRECISE](2412.06308-precise/README.md) | WeChat ranking Clicks +1.961%、Shares +1.433% | SmolLM token + MoE + UT/TT；Recall@10 +40.0%，Cold Recall -50.0% |
 | 完整核心链路 | `lum` · [LUM](2502.08309-lum/README.md) | Taobao CTR +2.9%、RPM +1.2% | next-condition-item + group query + DLRM；AUC +14.60%，3/3 seeds 正向 |
 | 完整核心链路 | `lsvcr` · [LSVCR](2403.13574-lsvcr/README.md) | Kuaishou comment watch time +4.1264% | q/v-LoRA + SSC/VCC；comment NDCG +50.40%，item NDCG -56.42% |

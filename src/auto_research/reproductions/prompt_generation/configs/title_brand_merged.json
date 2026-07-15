@@ -1,0 +1,26 @@
+{
+  "features": [
+    {
+      "feature_name": "history",
+      "feature_type": "sequence",
+      "expression": "history_sids",
+      "max_length": 5,
+      "features": [
+        {"feature_name": "sid", "feature_type": "text", "expression": "history_sids"},
+        {
+          "feature_name": "title",
+          "feature_type": "text",
+          "expression": "history_titles",
+          "preprocessor": {"type": "lowercase", "params": {"max_characters": 80}},
+          "merger": {"type": "mean", "params": {"out_token_len": 1}}
+        },
+        {
+          "feature_name": "brand",
+          "feature_type": "text",
+          "expression": "history_brands",
+          "merger": {"type": "mean", "params": {"out_token_len": 1}}
+        }
+      ]
+    }
+  ]
+}

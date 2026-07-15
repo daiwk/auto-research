@@ -1,0 +1,4 @@
+{
+  "template": "User purchase history:\n{{history}}\nPredict the next product semantic ID:"
+}
+

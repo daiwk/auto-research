@@ -18,10 +18,11 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **45/45** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **46/46** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `prompt-generation` | Prompt Generation · Alibaba/Taobao | 同源 Amazon Office、Qwen2.5-0.5B、双 JSON/mean merger/LoRA SFT；HR@10 -11.11%，压缩打分 -90.38% |
 | 完整核心链路 | `precise` | PRECISE · Tencent/WeChat | SmolLM contextual token、top-k MoE、交替训练、UT→TT+BPR；Recall@10 +40.0%，Cold Recall -50.0% |
 | 完整核心链路 | `pinrec` | PinRec · Pinterest | outcome conditioning、unordered window multi-token、ANN vectors；Recall@10 -27.78% |
 | 完整核心链路 | `genrank` | GenRank · Xiaohongshu | item/action 组织对照、位置/时间偏置；延迟 -25.66%，AUC -0.46% |
@@ -151,6 +152,7 @@ auto-research reproduce --paper learn --seed 42
 auto-research reproduce --paper notellm --seed 42
 auto-research reproduce --paper onerec-v2 --seed 42
 auto-research reproduce --paper self-evolving-rec --seed 42
+auto-research reproduce --paper prompt-generation --seed 42
 auto-research reproduce --paper all --seed 42
 
 # 仅在明确需要查看旧概念验证时加入
