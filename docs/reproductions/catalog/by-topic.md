@@ -2,6 +2,7 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [Prompt Generation](../2607.11326-prompt-generation/README.md)：Qwen generative retrieval、配置驱动异构特征、token compression、autoresearch
 - [PRECISE](../2412.06308-precise/README.md)：LLM token、top-k MoE、Universal/Targeted Training
 - [LUM](../2502.08309-lum/README.md)：next-condition-item、group query、generative-to-discriminative
 - [MSD](../2412.06860-msd/README.md)：teacher knowledge、student 自回归蒸馏、LoRA CTR alignment
@@ -21,6 +22,7 @@
 
 ## 生成式召回与端到端推荐
 
+- [Prompt Generation](../2607.11326-prompt-generation/README.md)
 - [SessionRec](../2502.10157-sessionrec/README.md) · [PinRec](../2504.10507-pinrec/README.md) · [GenRank](../2505.04180-genrank/README.md) · [TIGER](../2305.05065-tiger/README.md) · [OneRec](../2502.18965-onerec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [G2Rec](../2606.20554-g2rec/README.md) · [HSTU](../2402.17152-hstu/README.md) · [CMSL](../2606.28533-cmsl/README.md)
 - [COBRA](../2503.02453-cobra/README.md) · [GR4AD](../2602.22732-gr4ad/README.md) · [LEADRE](../2411.13789-leadre/README.md)
 
@@ -42,4 +44,5 @@
 
 ## Serving / efficiency
 
+- [Prompt Generation](../2607.11326-prompt-generation/README.md)：训练/serving 共用配置、event replay、token compression
 - [MSD](../2412.06860-msd/README.md) · [BAHE](../2403.19347-bahe/README.md) · [BEQUE](../2311.03758-beque/README.md) · [M6-Rec](../2205.08084-m6rec/README.md) · [OneRec-V2](../2508.20900-onerec-v2/README.md) · [OneTrans](../2510.26104-onetrans/README.md) · [LONGER](../2505.04421-longer/README.md)
