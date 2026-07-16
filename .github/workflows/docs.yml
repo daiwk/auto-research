@@ -3,17 +3,21 @@ name: Documentation
 on:
   pull_request:
     paths:
+      - "README.md"
       - "docs/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
+      - "scripts/sync_project_readme.py"
       - "tests/test_docs_math.py"
       - ".github/workflows/docs.yml"
   push:
     branches: [main]
     paths:
+      - "README.md"
       - "docs/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
+      - "scripts/sync_project_readme.py"
       - "tests/test_docs_math.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
@@ -38,6 +42,7 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
+      - run: python scripts/sync_project_readme.py --check
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
