@@ -21,6 +21,14 @@ MDCNS_BEAUTY_BASE_URL = (
     "MDCNS_Code/data"
 )
 KUAIRAND_PURE_URL = "https://zenodo.org/records/10439422/files/KuaiRand-Pure.tar.gz"
+WIKITEXT_2_BASE_URL = (
+    "https://raw.githubusercontent.com/pytorch/examples/main/"
+    "word_language_model/data/wikitext-2"
+)
+ALPACA_URL = (
+    "https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/"
+    "alpaca_data.json"
+)
 
 
 def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
@@ -31,6 +39,44 @@ def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
         target.parent.mkdir(parents=True, exist_ok=True)
         _download(SHAKESPEARE_URL, target)
     return target.read_text(encoding="utf-8")
+
+
+def wikitext_2(root: Path, allow_network: bool = True) -> dict[str, str]:
+    """Load the standard WikiText-2 train/validation/test files."""
+    directory = root / "wikitext-2"
+    result = {}
+    for split, filename in (
+        ("train", "train.txt"),
+        ("validation", "valid.txt"),
+        ("test", "test.txt"),
+    ):
+        target = directory / filename
+        if not target.exists():
+            if not allow_network:
+                raise FileNotFoundError(f"dataset missing and network disabled: {target}")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            _download(f"{WIKITEXT_2_BASE_URL}/{filename}", target)
+        result[split] = target.read_text(encoding="utf-8")
+    return result
+
+
+def alpaca_instructions(root: Path, allow_network: bool = True) -> list[dict[str, str]]:
+    """Load Stanford Alpaca's public instruction-following examples."""
+    target = root / "alpaca" / "alpaca_data.json"
+    if not target.exists():
+        if not allow_network:
+            raise FileNotFoundError(f"dataset missing and network disabled: {target}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        _download(ALPACA_URL, target)
+    rows = json.loads(target.read_text(encoding="utf-8"))
+    return [
+        {
+            "instruction": str(row["instruction"]),
+            "input": str(row.get("input", "")),
+            "output": str(row["output"]),
+        }
+        for row in rows
+    ]
 
 
 def movielens_100k(root: Path, allow_network: bool = True) -> list[tuple[int, int, float, int]]:

@@ -29,7 +29,7 @@ hide:
 输入 topic，或输入已有模型、公开数据集和自然语言调研方向。系统检索相关论文，形成可审计的结构假设，并行运行公平实验，再依据 validation 结果继续下一轮迭代。
 
 - topic → 论文 → 实验 → 报告
-- RankMixer / HyFormer 定向进化
+- RankMixer / HyFormer / 本地 LLM 定向进化
 - LONGER、UniMixer 等结构组合
 - JSON、Markdown 与 HTML 研究看板
 

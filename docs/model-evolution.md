@@ -1,6 +1,6 @@
 # 模型自动进化
 
-该功能面向“已有一个可训练模型，希望围绕一段自然语言调研方向持续做实验”的场景。输入基础模型、公开数据集和调研方向后，系统自动检索论文、形成结构假设、并行训练、根据 validation 观察决定下一轮方向，最后隔离 test，并生成可读研究档案。
+该功能面向“已有一个可训练模型，希望围绕一段自然语言调研方向持续做实验”的场景，适用于推荐模型和语言模型。输入基础模型、公开数据集和调研方向后，系统自动检索论文、形成结构/数据/训练假设、并行训练、根据 validation 观察决定下一轮方向，最后隔离 test，并生成可读研究档案。
 
 ## 流程
 
@@ -98,6 +98,47 @@ auto-research evolve \
   --generations 3 --population 6 --workers 3 --steps 300
 ```
 
+## LLM 自动进化
+
+`micro-llm` 是面向 Mac 本地研究的 decoder-only Transformer。默认配置约 1200 万至 1600 万参数（具体取决于结构），使用 4K 本地 BPE、384 hidden size、6 layers 和 128 context；这些都可通过 CLI 缩放。它不是为了冒充生产大模型，而是让结构、数据配比和后训练方法能够真实训练、比较和迭代。
+
+```bash
+python -m pip install -e '.[llm-evolution]'
+
+auto-research evolve \
+  --model micro-llm \
+  --dataset wikitext-2 \
+  --direction "调研高效 LLM 结构、训练数据配比和 SFT/NEFTune 后训练方法" \
+  --generations 3 \
+  --population 6 \
+  --workers 1 \
+  --steps 300 \
+  --papers 8 \
+  --seeds 42
+```
+
+三轮默认分工：
+
+1. **结构轮**：GPT baseline、GQA、LLaMA-style RMSNorm/RoPE/SwiGLU、parallel attention/FFN 及组合；数据和训练预算保持不变。
+2. **数据轮**：WikiText-only、WikiText + Tiny Shakespeare narrative mixture、从 narrative 向 WikiText 退火的 curriculum；冻结冠军结构。
+3. **后训练轮**：普通 SFT、低学习率 SFT、不同噪声强度的 NEFTune；使用 Stanford Alpaca train/held-out 子集并冻结预训练配方。
+
+当 `--generations` 大于 3 时，后续轮次会继续搜索 hidden size、层数、学习率、batch size 和 context length；每个候选仍继承上一轮冠军，形成可追溯的多轮进化链。
+
+选择目标为 `WikiText validation loss + 0.15 × instruction validation loss`。WikiText test 和最终冠军只在三轮结束后评估。默认使用完整 WikiText-2 train；`--maximum-train-tokens` 仅用于 smoke test。
+
+### 本地诊断实验
+
+为了验证整条链路，Mac MPS 上用 0.54M 参数、40 pretraining steps、24 post-training steps、seed 42 跑了三轮，每轮 4 个候选：
+
+| 阶段 | 当轮观察 |
+|---|---|
+| 结构 | `parallel_gelu` 胜出；matched-budget validation PPL 447.469，略优于 GPT baseline 449.032 |
+| 数据 | WikiText-only 胜出；混入 10%/20%/35% narrative 会改善少量 instruction loss，但使 WikiText PPL 变差 |
+| 后训练 | 普通 SFT 胜出；优于低学习率 SFT 和本轮 NEFTune alpha 5/10 |
+
+最终隔离 test PPL 从 `416.134` 降到 `405.328`（`-2.60%`），instruction validation loss 从 `6.3804` 降到 `6.2309`。这只是单 seed、极小预算的系统诊断，不能外推到默认 12M+ 模型或标准大模型能力；稳定事实记录见 [`evolution/micro-llm-wikitext2-diagnostic-seed42.json`](evolution/micro-llm-wikitext2-diagnostic-seed42.json)。
+
 每一代的候选会并行执行。macOS 上多 worker 使用独立进程，避免多个实验共享随机数状态或模型；每个实验仍保持相同 split、seed 和训练预算。完整过程写入：
 
 - `result.json`：机器可读的论文、配置、父子关系、指标、失败原因和每轮决策。
@@ -110,7 +151,7 @@ auto-research evolve \
 
 默认不再裁剪训练数据：MovieLens-100K 使用完整的 932 个有效用户和 1,682 个物品；MovieLens-1M 使用完整 leave-two-out 序列。为控制每个候选的全库排序成本，默认用固定且均匀覆盖的 1,000 用户 cohort 做 validation/test；传入 `--evaluation-users 0` 可评估全部用户。只有为了快速验证流程时，才显式传入 `--maximum-users` 和 `--maximum-items`。数据规模与评估 cohort 都会记录到报告中，避免把 smoke test 误写成正式实验。
 
-| 方向 | RankMixer 候选 | HyFormer 候选 | 实际机制 |
+| 推荐方向 | RankMixer 候选 | HyFormer 候选 | 实际机制 |
 |---|---|---|---|
 | LONGER | `rankmixer_longer` | `hyformer_longer` | 分块 token merge、global interest、recent token 保留 |
 | UniMixer | `rankmixer_unimixer` | `hyformer_unimixer` | 可学习 token mixing 与逐 token channel mixing |

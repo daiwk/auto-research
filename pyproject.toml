@@ -15,6 +15,7 @@ dependencies = ["numpy>=2.0"]
 dev = ["pytest>=8"]
 plum = ["torch>=2.7,<3", "transformers>=5.0,<6", "safetensors>=0.5"]
 neural-recs = ["torch>=2.7,<3"]
+llm-evolution = ["torch>=2.7,<3", "tokenizers>=0.21,<1"]
 
 [project.scripts]
 auto-research = "auto_research.cli:main"
