@@ -7,7 +7,7 @@ Auto Research 负责把“我想研究什么”转成一条可追踪、可复现
 | 入口 | 输入 | 自动执行 | 适用场景 |
 |---|---|---|---|
 | Topic research | topic、LLM/推荐轨道、论文数、实验次数 | arXiv 检索、参数提案、逐次实验、缓存与报告 | 探索一个较宽的研究问题 |
-| Model evolution | 基础模型、数据集、自然语言调研方向 | 论文检索、结构消融、并行实验、冠军进化、隔离 test | 升级 RankMixer、HyFormer 等已有模型 |
+| Model evolution | 基础模型、数据集、自然语言调研方向 | 论文检索、结构/数据/训练消融、并行实验、冠军进化、隔离 test | 升级 RankMixer、HyFormer 或本地 LLM |
 
 ## Topic research
 
@@ -41,6 +41,8 @@ auto-research evolve \
 第一轮固定超参数，只比较结构；第二轮开始围绕冠军调整层数、维度、学习率、优化器与 batch size。同一代实验使用独立进程并行，validation 决定晋级，test 只在全部迭代结束后运行。
 
 [查看完整的模型进化协议、数据规模和结构算子 →](model-evolution.md)
+
+LLM 轨道使用 `micro-llm + WikiText-2`：第 1 轮比较 GQA、RoPE/RMSNorm/SwiGLU、parallel block 等结构；第 2 轮比较预训练数据配方；第 3 轮比较 SFT 与 NEFTune。默认模型约 12M–16M 参数，可以在 Apple Silicon 上从头训练。
 
 ## 研究产物
 

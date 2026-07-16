@@ -1,0 +1,45 @@
+{
+  "diagnostic_only": true,
+  "model": "micro-llm",
+  "benchmark": "WikiText-2",
+  "instruction_dataset": "Stanford Alpaca held-out subset",
+  "seed": 42,
+  "protocol": {
+    "pretraining_steps": 40,
+    "post_training_steps": 24,
+    "population": 4,
+    "generations": 3,
+    "dimensions": 128,
+    "layers": 2,
+    "sequence_length": 128,
+    "bpe_vocab_size": 1024,
+    "train_tokens": 4046002,
+    "validation_tokens": 50000,
+    "test_tokens": 50000,
+    "parameters": 544256
+  },
+  "baseline": {
+    "architecture": "gpt_baseline",
+    "data_recipe": "wikitext",
+    "post_training": "none",
+    "validation_perplexity": 449.032,
+    "test_perplexity": 416.134,
+    "instruction_validation_loss": 6.3804
+  },
+  "champion": {
+    "architecture": "parallel_gelu",
+    "data_recipe": "wikitext",
+    "post_training": "sft",
+    "validation_perplexity": 433.336,
+    "test_perplexity": 405.328,
+    "instruction_validation_loss": 6.2309,
+    "test_perplexity_reduction_percent": 2.60
+  },
+  "round_findings": {
+    "structure": "parallel_gelu won the matched-budget structure round",
+    "data": "WikiText-only beat 10/20/35 percent Tiny Shakespeare narrative mixtures on WikiText perplexity",
+    "post_training": "plain SFT beat low-LR SFT and NEFTune alpha 5/10 under this small budget"
+  },
+  "checkpoint_committed": false,
+  "raw_runs_committed": false
+}

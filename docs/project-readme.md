@@ -136,6 +136,9 @@ python -m pip install -U pip
 # 模型自动进化、推荐网络与蒸馏实验
 python -m pip install -e '.[neural-recs]'
 
+# Mac 本地 decoder-only LLM 自动进化
+python -m pip install -e '.[llm-evolution]'
+
 # 验证命令已经安装
 auto-research --help
 auto-research evolve --help
@@ -207,7 +210,7 @@ runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/
 
 ## 运行模型自动进化
 
-内置基础模型为 RankMixer 和 HyFormer；正式实验推荐 MovieLens-1M：
+内置基础模型包括推荐侧 RankMixer/HyFormer，以及 LLM 侧可在 Mac 从头训练的 `micro-llm`。推荐正式实验建议使用 MovieLens-1M：
 
 ```bash
 auto-research evolve \
@@ -225,6 +228,23 @@ auto-research evolve \
 调研方向同时约束论文检索和可执行结构空间；每一代并行比较论文启发结构与训练参数，再根据 validation 形成下一轮决策。目前还包括 LONGER、UniMixer 及组合结构；在线发现但尚未映射为安全算子的论文只进入证据池。
 
 运行产物位于 `runs/evolution/<model>-<timestamp>/`，包含机器可读 JSON、中文 Markdown 报告和可直接打开的 HTML 研究看板。详细协议见[模型自动进化文档](model-evolution.md)。
+
+LLM 结构、预训练数据和后训练方法的三轮自动研究示例：
+
+```bash
+auto-research evolve \
+  --model micro-llm \
+  --dataset wikitext-2 \
+  --direction "调研高效 LLM 结构、训练数据配比和 SFT/NEFTune 后训练方法" \
+  --generations 3 \
+  --population 6 \
+  --workers 1 \
+  --steps 300 \
+  --papers 8 \
+  --seeds 42
+```
+
+默认 `micro-llm` 约 12M–16M 参数；WikiText-2、Tiny Shakespeare、Stanford Alpaca 和 BPE tokenizer 自动下载/构建并缓存到 `data/`。第一轮只比较结构，第二轮只比较数据配方，第三轮只比较后训练方法。
 
 ## 运行 Topic research loop
 

@@ -5,6 +5,7 @@ from dataclasses import replace
 from auto_research.evolution import EvolutionConfig, EvolutionTrial, ModelEvolutionEngine
 from auto_research.evolution.models import Genome
 from auto_research.evolution.papers import discover_papers
+from auto_research.evolution.planner import allowed_architectures, propose
 
 
 class FakeEvaluator:
@@ -80,3 +81,28 @@ def test_direction_drives_parallel_round_hypotheses_and_dashboard(tmp_path):
     assert result.dataset_summary["users"] == 1000
     assert (run_dir / "index.html").exists()
     assert "研究过程" in (run_dir / "index.html").read_text(encoding="utf-8")
+
+
+def test_micro_llm_plan_separates_structure_data_and_post_training():
+    import random
+
+    papers = discover_papers("small llm", 6, allow_network=False, track="llm")
+    architectures = allowed_architectures("micro-llm", "研究结构、训练数据和后训练", papers)
+    baseline = Genome(architecture="gpt_baseline", dimensions=128, batch_size=8)
+    structure, first = propose(baseline, 1, 2, architectures, random.Random(42), "micro-llm")
+    data, second = propose(structure, 2, 2, architectures, random.Random(42), "micro-llm")
+    post, third = propose(data, 3, 3, architectures, random.Random(42), "micro-llm")
+    assert structure.architecture == "llama_modern"
+    assert data.data_recipe == "mixed_narrative" and data.data_mix_ratio == 0.2
+    assert post.post_training == "neftune" and post.neftune_alpha == 5.0
+    assert "结构研究" in first and "数据研究" in second and "后训练研究" in third
+
+
+def test_micro_llm_config_uses_wikitext_benchmark():
+    EvolutionConfig(model="micro-llm", dataset="wikitext-2", direction="test").validate()
+    try:
+        EvolutionConfig(model="micro-llm", dataset="movielens-1m", direction="test").validate()
+    except ValueError as exc:
+        assert "incompatible" in str(exc)
+    else:
+        raise AssertionError("micro-llm must reject recommendation datasets")

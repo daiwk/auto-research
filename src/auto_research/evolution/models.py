@@ -23,16 +23,30 @@ class EvolutionConfig:
     maximum_users: int | None = None
     maximum_items: int | None = None
     evaluation_users: int | None = 1000
+    maximum_train_tokens: int | None = None
+    maximum_eval_tokens: int | None = 100_000
+    vocab_size: int = 4096
+    llm_dimensions: int = 384
+    llm_layers: int = 6
+    llm_batch_size: int = 4
+    llm_sequence_length: int = 128
 
     def validate(self) -> None:
-        if self.model not in {"rankmixer", "hyformer"}:
-            raise ValueError("model must be rankmixer or hyformer")
-        if self.dataset not in {"movielens-100k", "movielens-1m"}:
-            raise ValueError("dataset must be movielens-100k or movielens-1m")
+        if self.model not in {"rankmixer", "hyformer", "micro-llm"}:
+            raise ValueError("model must be rankmixer, hyformer or micro-llm")
+        expected = {"wikitext-2"} if self.model == "micro-llm" else {"movielens-100k", "movielens-1m"}
+        if self.dataset not in expected:
+            raise ValueError(f"dataset {self.dataset!r} is incompatible with model {self.model!r}")
         if min(self.generations, self.population, self.steps, self.workers) < 1:
             raise ValueError("generations, population and steps must be positive")
         if not self.seeds:
             raise ValueError("at least one seed is required")
+        if self.model == "micro-llm":
+            if min(self.vocab_size, self.llm_dimensions, self.llm_layers,
+                   self.llm_batch_size, self.llm_sequence_length) < 1:
+                raise ValueError("micro-llm size parameters must be positive")
+            if self.llm_dimensions % 4:
+                raise ValueError("micro-llm dimensions must be divisible by 4 attention heads")
 
 
 @dataclass(frozen=True)
@@ -60,6 +74,15 @@ class Genome:
     experts: int = 4
     interval_residual: int = 2
     auxiliary_weight: float = 0.15
+    heads: int = 4
+    kv_heads: int = 4
+    sequence_length: int = 128
+    expansion: int = 4
+    data_recipe: str = "wikitext"
+    data_mix_ratio: float = 0.2
+    post_training: str = "none"
+    neftune_alpha: float = 0.0
+    post_steps: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -81,7 +104,7 @@ class EvolutionTrial:
 
     @property
     def fitness(self) -> float:
-        return self.validation["ndcg_at_10"]
+        return self.validation.get("fitness", self.validation.get("ndcg_at_10", -1.0))
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)

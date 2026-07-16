@@ -62,8 +62,8 @@ def build_parser() -> argparse.ArgumentParser:
     evolve = commands.add_parser(
         "evolve", help="evolve an existing model with paper-inspired structures and hyperparameters"
     )
-    evolve.add_argument("--model", choices=["rankmixer", "hyformer"], required=True)
-    evolve.add_argument("--dataset", choices=["movielens-100k", "movielens-1m"], required=True)
+    evolve.add_argument("--model", choices=["rankmixer", "hyformer", "micro-llm"], required=True)
+    evolve.add_argument("--dataset", choices=["movielens-100k", "movielens-1m", "wikitext-2"], required=True)
     evolve.add_argument("--direction", required=True, help="natural-language research direction")
     evolve.add_argument("--dataset-dir", type=Path, default=Path("data"))
     evolve.add_argument("--output-dir", type=Path, default=Path("runs/evolution"))
@@ -78,6 +78,13 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--maximum-users", type=int, help="explicit smoke-test user limit")
     evolve.add_argument("--maximum-items", type=int, help="explicit smoke-test item limit")
     evolve.add_argument("--evaluation-users", type=int, default=1000, help="fixed validation/test cohort; 0 means all users")
+    evolve.add_argument("--maximum-train-tokens", type=int, help="optional LLM smoke-test token limit")
+    evolve.add_argument("--maximum-eval-tokens", type=int, default=100000, help="LLM validation/test token limit")
+    evolve.add_argument("--vocab-size", type=int, default=4096, help="local BPE vocabulary for micro-llm")
+    evolve.add_argument("--llm-dimensions", type=int, default=384, help="initial micro-llm hidden width")
+    evolve.add_argument("--llm-layers", type=int, default=6, help="initial micro-llm layer count")
+    evolve.add_argument("--llm-batch-size", type=int, default=4, help="initial micro-llm batch size")
+    evolve.add_argument("--llm-sequence-length", type=int, default=128, help="micro-llm context length")
     return parser
 
 
@@ -149,11 +156,22 @@ def main(argv: list[str] | None = None) -> int:
                 maximum_users=args.maximum_users,
                 maximum_items=args.maximum_items,
                 evaluation_users=args.evaluation_users or None,
+                maximum_train_tokens=args.maximum_train_tokens,
+                maximum_eval_tokens=args.maximum_eval_tokens,
+                vocab_size=args.vocab_size,
+                llm_dimensions=args.llm_dimensions,
+                llm_layers=args.llm_layers,
+                llm_batch_size=args.llm_batch_size,
+                llm_sequence_length=args.llm_sequence_length,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
             print(f"Champion: {champion.trial_id} ({champion.genome.architecture})")
-            print(f"Validation NDCG@10: {champion.fitness:.6f}")
+            if args.model == "micro-llm":
+                print(f"Validation perplexity: {champion.validation['perplexity']:.4f}")
+                print(f"Instruction loss: {champion.validation['instruction_loss']:.4f}")
+            else:
+                print(f"Validation NDCG@10: {champion.validation['ndcg_at_10']:.6f}")
             print(f"Report: {run_dir / 'report.md'}")
             print(f"Dashboard: {run_dir / 'index.html'}")
             return 0
