@@ -1,23 +1,25 @@
-site_name: Auto Research 论文复现库
-site_description: 工业推荐、生成式推荐与 LLM 论文的可复现实验文档
+site_name: Auto Research
+site_description: 从工业论文复现到方向驱动、多轮迭代的自动化机器学习研究平台
 site_url: https://daiwk.github.io/auto-research/
 repo_url: https://github.com/daiwk/auto-research
 repo_name: daiwk/auto-research
 edit_uri: edit/main/docs/
 
 nav:
-  - 论文复现库: index.md
-  - 项目 README: project-readme.md
-  - 模型自动进化: model-evolution.md
-  - 架构与扩展: architecture.md
-  - 本地预览与发布: getting-started.md
-  - 设计记录:
-      - 自动化研究架构采用记录: design/automated-w2s-adoption.md
-  - 复现总览:
-      - 全部论文: reproductions/README.md
-      - 按公司: reproductions/catalog/by-company.md
-      - 按主题: reproductions/catalog/by-topic.md
-      - 按年月: reproductions/catalog/by-month.md
+  - 首页: index.md
+  - Auto Research:
+      - 自动研究总览: auto-research.md
+      - 模型定向进化: model-evolution.md
+  - 论文复现:
+      - 复现总览: reproductions/README.md
+      - 按公司浏览: reproductions/catalog/by-company.md
+      - 按主题浏览: reproductions/catalog/by-topic.md
+      - 按年月浏览: reproductions/catalog/by-month.md
+  - 项目文档:
+      - 项目 README: project-readme.md
+      - 架构与扩展: architecture.md
+      - 本地预览与发布: getting-started.md
+      - 设计记录: design/automated-w2s-adoption.md
 
 theme:
   name: material

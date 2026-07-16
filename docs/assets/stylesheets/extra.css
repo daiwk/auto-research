@@ -30,3 +30,103 @@
   width: max-content;
   min-width: 100%;
 }
+
+.ar-hero {
+  margin: -0.6rem 0 2.4rem;
+  padding: 3.2rem clamp(1.4rem, 5vw, 4.4rem);
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--md-primary-fg-color) 20%, transparent) 0, transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--md-primary-fg-color) 10%, var(--md-default-bg-color)), var(--md-default-bg-color));
+}
+
+.ar-hero h1 {
+  margin: 0.25rem 0 0.8rem;
+  font-size: clamp(2.3rem, 7vw, 4.6rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+}
+
+.ar-hero > p:not(.ar-actions) {
+  max-width: 43rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.ar-eyebrow {
+  color: var(--md-primary-fg-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.ar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+
+.ar-capability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.ar-capability-card {
+  position: relative;
+  padding: 1.35rem 1.45rem 1.25rem;
+  overflow: hidden;
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 0.8rem;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.35rem 1.2rem color-mix(in srgb, var(--md-default-fg-color) 7%, transparent);
+}
+
+.ar-capability-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.22rem;
+  content: "";
+  background: var(--md-primary-fg-color);
+}
+
+.ar-card-reproduction::before {
+  background: var(--md-accent-fg-color);
+}
+
+.ar-capability-card h3 {
+  margin-top: 0;
+  font-size: 1.35rem;
+}
+
+.ar-capability-card ul {
+  min-height: 6.4rem;
+}
+
+.ar-capability-card > p:last-child {
+  margin-bottom: 0;
+  font-weight: 650;
+}
+
+.ar-start-grid {
+  padding: 0.4rem 1.2rem;
+  border-left: 0.18rem solid var(--md-primary-fg-color);
+  background: color-mix(in srgb, var(--md-primary-fg-color) 5%, transparent);
+}
+
+@media screen and (max-width: 48rem) {
+  .ar-hero {
+    padding: 2rem 1.3rem;
+  }
+
+  .ar-capability-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ar-capability-card ul {
+    min-height: 0;
+  }
+}
