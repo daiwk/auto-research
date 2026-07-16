@@ -5,6 +5,7 @@
 ## 从这里开始
 
 - [论文复现总览](reproductions/README.md)：查看全部 adapter、保真度和本地结论。
+- [项目 README](project-readme.md)：查看仓库根 README 的完整内容，包括安装、命令和代码结构；该页面会自动检查是否与仓库 README 同步。
 - [模型自动进化](model-evolution.md)：给定已有模型与数据集，自动检索论文、变异网络和超参数并进行多代选择。
 - [按公司浏览](reproductions/catalog/by-company.md)：Google、Meta、Pinterest、字节、阿里、腾讯、快手等。
 - [按主题浏览](reproductions/catalog/by-topic.md)：LLM+推荐、生成式召回、排序、强化学习和 serving。
