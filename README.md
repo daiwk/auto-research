@@ -123,19 +123,29 @@ tests/reproductions/
 
 ## 安装
 
-要求 macOS/Linux 和 Python 3.11+。
+要求 macOS/Linux 和 Python 3.11+。`auto-research` 不是需要单独下载的外部程序；它由本仓库 `pyproject.toml` 中的命令入口提供。在仓库根目录安装项目后，虚拟环境里就会出现该命令。
 
 ```bash
+cd /path/to/auto-research
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e '.[dev]'
+python -m pip install -U pip
+
+# 模型自动进化、推荐网络与蒸馏实验
+python -m pip install -e '.[neural-recs]'
+
+# 验证命令已经安装
+auto-research --help
+auto-research evolve --help
+
+# 开发和测试依赖（可选）
+python -m pip install -e '.[dev]'
 
 # PLUM 与 PRECISE 的真实 LLM 阶段另装可选依赖
-pip install -e '.[plum]'
-
-# 推荐网络与蒸馏论文的轻量神经复现
-pip install -e '.[neural-recs]'
+python -m pip install -e '.[plum]'
 ```
+
+这里的 `-e` 表示可编辑安装：更新本仓库的 Python 源码后通常不用重新安装。每次新开终端需要先执行 `source .venv/bin/activate`；不想激活环境时，也可以直接运行 `.venv/bin/auto-research --help`。若刚更新了依赖配置，再执行一次 `python -m pip install -e '.[neural-recs]'`。
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
