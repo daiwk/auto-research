@@ -6,10 +6,11 @@
 
 ## 当前能力
 
-项目包含两层互补能力：
+项目包含三层互补能力：
 
 1. **Topic research loop**：按 topic 检索 arXiv，通过独立迭代控制器运行可配置参数搜索，逐轮保存 checkpoint、事件日志和可复用指标缓存。
 2. **Paper adapters**：每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度；省略核心模型的实现只能作为概念验证。
+3. **Model evolution**：给定已有模型和数据集，在线检索相关论文，把已审计的结构算子与层数、维度、学习率、优化器等组成 genome，按 validation 做多代变异、淘汰和晋级，最终只对冠军运行一次 test。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 
@@ -191,6 +192,25 @@ runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/
 ```
 
 `data/` 与 `runs/` 默认不进入 Git。经过复核的长期结论写入 `docs/reproductions/<arxiv-id>-<adapter>/README.md`。
+
+## 运行模型自动进化
+
+首个内置目标是 RankMixer + MovieLens-100K：
+
+```bash
+auto-research evolve \
+  --model rankmixer \
+  --dataset movielens-100k \
+  --generations 3 \
+  --population 4 \
+  --steps 100 \
+  --papers 8 \
+  --seeds 42,43,44
+```
+
+每一代同时搜索论文启发的结构和普通训练参数。目前内置结构包括 RankMixer Sparse-MoE、TokenMixer-Large、Zenith 和 MOI-Mixer；在线发现但尚未映射为安全算子的论文只进入证据池，不会直接执行任意生成代码。
+
+运行产物位于 `runs/evolution/<model>-<timestamp>/`，包含完整论文清单、父代/子代关系、每轮 validation 指标、最终一次 test 与 Markdown 结论。详细协议及首次端到端结果见[模型自动进化文档](docs/model-evolution.md)。
 
 ## 运行 Topic research loop
 

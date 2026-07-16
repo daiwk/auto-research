@@ -5,6 +5,7 @@
 ```text
 cli.py
  ├── runner.py                       # discovery / implementation / evaluation orchestration
+ ├── evolution/                      # model genome / paper mapping / generations / champion test
  ├── research_loop/
  │    ├── loop.py                    # proposal-independent iterative controller
  │    ├── cache.py                   # content-addressed metric cache
@@ -21,6 +22,8 @@ cli.py
 ```
 
 Topic research 和 paper reproduction 共用“编排与论文代码分离”的原则：`runner.py` 决定阶段顺序，`research_loop` 负责自适应提案、迭代、缓存和审计记录，具体模型训练仍由内置 evaluator、外部实验命令或 paper adapter 执行。`ProposalStrategy` 每轮都能读取已有 trial 历史；`CommandProposer` 通过环境变量把论文 manifest 和历史交给用户明确配置的 agent 命令，因此可以根据真实结果调整下一轮假设。设计取舍及与 automated-w2s-research 的映射见[架构采用记录](design/automated-w2s-adoption.md)。
+
+Model evolution 是第三条独立入口。`EvolutionConfig` 定义目标模型、数据、代数、population、训练预算和 seed；论文检索结果先映射到经过测试的 architecture operator，再与层数、维度、优化器等组成 `Genome`。代内子代共享同一 split 和预算，代际采用 elitism；所有选择只看 validation，结束后才重新训练初始基线与冠军并读取 test。当前 RankMixer evaluator 只是第一个实现，后续模型通过新增 evaluator 和 mutation catalog 扩展，不修改代际控制器。
 
 通用层只负责 adapter 发现、共享数据协议、运行目录和 JSON/Markdown 持久化。论文特有逻辑不能写回 `cli.py` 或公共 `reporting.py`。只有两个以上推荐 adapter 确实共享且语义一致的逻辑，才放入 `rec_utils.py`。
 
