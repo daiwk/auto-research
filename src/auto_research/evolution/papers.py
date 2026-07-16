@@ -10,6 +10,8 @@ INSTALLED_MUTATIONS = {
     "2602.06563": ("tokenmixer_large", "Mixing-Reverting、per-token SwiGLU、interval residual 与辅助头"),
     "2601.21285": ("zenith", "Prime Token Fusion 与 tokenwise SwiGLU Token Boost"),
     "2108.07505": ("moi_mixer", "显式一阶与二阶 Multi-Order Interaction channel mixing"),
+    "2505.04421": ("longer", "LONGER 的分块 token merge、全局兴趣与 recent token 保留"),
+    "2604.00590": ("unimixer", "UniMixer 的可学习参数化 token mixing，解除固定 head-token 对齐"),
 }
 
 FALLBACK_PAPERS = (
@@ -17,6 +19,8 @@ FALLBACK_PAPERS = (
     Paper("TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders", "Mixing and reverting, interval residuals, auxiliary losses and sparse per-token MoE.", [], "2026-02-06", "https://arxiv.org/abs/2602.06563", "2602.06563"),
     Paper("Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation", "Prime Tokens, Token Fusion and Token Boost for scalable ranking.", [], "2026-01-29", "https://arxiv.org/abs/2601.21285", "2601.21285"),
     Paper("MOI-Mixer: Improving MLP-Mixer with Multi Order Interactions in Sequential Recommendation", "Explicit multi-order interactions in mixer channel layers.", [], "2021-08-17", "https://arxiv.org/abs/2108.07505", "2108.07505"),
+    Paper("LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders", "Token merge, global tokens and hybrid attention for ultra-long user sequences.", [], "2025-05-07", "https://arxiv.org/abs/2505.04421", "2505.04421"),
+    Paper("UniMixer: A Unified Architecture for Scaling Laws in Recommendation Systems", "Learnable parameterized token mixing for heterogeneous feature interaction.", [], "2026-04-01", "https://arxiv.org/abs/2604.00590", "2604.00590"),
 )
 
 

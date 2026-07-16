@@ -61,7 +61,13 @@ def train_supervised(
     model, device, torch = initialize(model, seed)
     rows = rows or training_examples(data.train, config.sequence_length)
     rng = random.Random(seed)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
+    optimizers = {
+        "adamw": torch.optim.AdamW,
+        "adam": torch.optim.Adam,
+        "adagrad": torch.optim.Adagrad,
+    }
+    optimizer_name = getattr(config, "optimizer", "adamw")
+    optimizer = optimizers[optimizer_name](model.parameters(), lr=config.learning_rate)
     losses: list[float] = []
     model.train()
     for _ in range(config.steps if steps is None else steps):

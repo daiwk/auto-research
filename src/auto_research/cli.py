@@ -62,8 +62,9 @@ def build_parser() -> argparse.ArgumentParser:
     evolve = commands.add_parser(
         "evolve", help="evolve an existing model with paper-inspired structures and hyperparameters"
     )
-    evolve.add_argument("--model", choices=["rankmixer"], required=True)
-    evolve.add_argument("--dataset", choices=["movielens-100k"], required=True)
+    evolve.add_argument("--model", choices=["rankmixer", "hyformer"], required=True)
+    evolve.add_argument("--dataset", choices=["movielens-100k", "movielens-1m"], required=True)
+    evolve.add_argument("--direction", required=True, help="natural-language research direction")
     evolve.add_argument("--dataset-dir", type=Path, default=Path("data"))
     evolve.add_argument("--output-dir", type=Path, default=Path("runs/evolution"))
     evolve.add_argument("--query")
@@ -73,6 +74,10 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--steps", type=int, default=100)
     evolve.add_argument("--seeds", default="42", help="comma-separated integer seeds")
     evolve.add_argument("--offline", action="store_true")
+    evolve.add_argument("--workers", type=int, default=1, help="parallel experiments per generation")
+    evolve.add_argument("--maximum-users", type=int, help="explicit smoke-test user limit")
+    evolve.add_argument("--maximum-items", type=int, help="explicit smoke-test item limit")
+    evolve.add_argument("--evaluation-users", type=int, default=1000, help="fixed validation/test cohort; 0 means all users")
     return parser
 
 
@@ -130,6 +135,7 @@ def main(argv: list[str] | None = None) -> int:
             config = EvolutionConfig(
                 model=args.model,
                 dataset=args.dataset,
+                direction=args.direction,
                 dataset_dir=args.dataset_dir,
                 output_dir=args.output_dir,
                 query=args.query,
@@ -139,12 +145,17 @@ def main(argv: list[str] | None = None) -> int:
                 steps=args.steps,
                 seeds=seeds,
                 allow_network=not args.offline,
+                workers=args.workers,
+                maximum_users=args.maximum_users,
+                maximum_items=args.maximum_items,
+                evaluation_users=args.evaluation_users or None,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
             print(f"Champion: {champion.trial_id} ({champion.genome.architecture})")
             print(f"Validation NDCG@10: {champion.fitness:.6f}")
             print(f"Report: {run_dir / 'report.md'}")
+            print(f"Dashboard: {run_dir / 'index.html'}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

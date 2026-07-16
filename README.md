@@ -195,12 +195,14 @@ runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/
 
 ## 运行模型自动进化
 
-首个内置目标是 RankMixer + MovieLens-100K：
+内置基础模型为 RankMixer 和 HyFormer；正式实验推荐 MovieLens-1M：
 
 ```bash
 auto-research evolve \
   --model rankmixer \
-  --dataset movielens-100k \
+  --dataset movielens-1m \
+  --direction "加入 LONGER、UniMixer 和相关高效 Transformer 结构" \
+  --workers 3 \
   --generations 3 \
   --population 4 \
   --steps 100 \
@@ -208,9 +210,9 @@ auto-research evolve \
   --seeds 42,43,44
 ```
 
-每一代同时搜索论文启发的结构和普通训练参数。目前内置结构包括 RankMixer Sparse-MoE、TokenMixer-Large、Zenith 和 MOI-Mixer；在线发现但尚未映射为安全算子的论文只进入证据池，不会直接执行任意生成代码。
+调研方向同时约束论文检索和可执行结构空间；每一代并行比较论文启发结构与训练参数，再根据 validation 形成下一轮决策。目前还包括 LONGER、UniMixer 及组合结构；在线发现但尚未映射为安全算子的论文只进入证据池。
 
-运行产物位于 `runs/evolution/<model>-<timestamp>/`，包含完整论文清单、父代/子代关系、每轮 validation 指标、最终一次 test 与 Markdown 结论。详细协议及首次端到端结果见[模型自动进化文档](docs/model-evolution.md)。
+运行产物位于 `runs/evolution/<model>-<timestamp>/`，包含机器可读 JSON、中文 Markdown 报告和可直接打开的 HTML 研究看板。详细协议见[模型自动进化文档](docs/model-evolution.md)。
 
 ## 运行 Topic research loop
 
