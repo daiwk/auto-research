@@ -4,6 +4,10 @@
 
 ## 2026-07
 
+- [Proximity Features](../2607.12246-proximity-features/README.md)：自适应聚合地理群体行为，为匿名用户提供不依赖持久 ID 的冷启动信号。
+- [MESH](../2607.12392-mesh/README.md)：用异构模块塔和 residual gated bias correction 保护 fresh 内容的缩放收益。
+- [DANet](../2607.12578-danet/README.md)：融合兴趣建模、折扣时频分解与个性化折扣偏好预测 CVR。
+- [SAM](../2607.12714-sam/README.md)：学习购买后兴趣退出及恢复节奏，在注意力层抑制重复推荐。
 - [NONTP](../2607.12277-nontp/README.md)：通过 TCL 感知多步未来轨迹，并以 TDL 为跨域目标增加共享预测头的第二条梯度路径。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征组织成配置驱动的生成提示，通过 token 压缩和多种合并策略服务搜索与推荐召回。
 - [SIS](../2607.04728-sis/README.md)：依据样本重要性动态调整训练权重，使有限预算更集中于高价值序列与 token。
@@ -16,6 +20,9 @@
 
 ## 2026-05
 
+- [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 与多价值 MoPO 引导生成式召回发现高潜新品。
+- [HARNESS-LM](../2605.23572-harness-lm/README.md)：以 teacher、L2 对齐和对比精修三阶段训练轻量非对称检索器。
+- [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead evaluator 的列表价值蒸馏成在线 dense 生成监督。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用 LLM Semantic ID 构造语义簇，以非对称对比学习和活动度门控把头部知识迁移到长尾。
 - [UniVA](../2605.05803-univa/README.md)：用 Commercial SID 和 generation-as-ranking 统一广告生成，并通过价值对齐 RL 与 trie beam 优化收益。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
@@ -26,12 +33,17 @@
 - [Pinterest Ads LLM](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 作为传统广告召回与排序的补充预测器。
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
 
+## 2026-04
+
+- [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由统一多个业务域的生成式推荐。
+
 ## 2026-03
 
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 
 ## 2026-02
 
+- [GRC](../2602.23639-grc/README.md)：让生成式推荐器结构化地反思首错位置和语义属性，再纠正 SID 轨迹。
 - [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
 - [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一 Transformer 中平衡 dense 特征交互与序列建模，并按预算选择可训练模块。

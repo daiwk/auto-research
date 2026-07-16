@@ -1,0 +1,1 @@
+{"seed":42,"baseline":{"hit_at_10":0.109091,"ndcg_at_10":0.054005,"fresh_hit_at_10":0.031746},"method":{"hit_at_10":0.109091,"ndcg_at_10":0.053219,"fresh_hit_at_10":0.047619},"relative":{"hit_at_10_percent":0.0,"ndcg_at_10_percent":-1.455802,"fresh_hit_at_10_percent":50.0},"selected_blend":0.1}

@@ -20,10 +20,19 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **53/53** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **62/62** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `degre` | DeGRe · Alibaba | 累计价值 evaluator、lookahead beam mining 与 dense prefix distillation；NDCG@10 +3.31% |
+| 核心机制 | `harness-lm` | HARNESS-LM · Microsoft/Bing Ads | 强 teacher、L2 query alignment、冻结文档索引对比精修；NDCG@10 -28.05% |
+| 核心机制 | `grc` | GRC · Alibaba International | 结构化反思纠错 SFT、trajectory GRPO 与 EGRS；NDCG@10 -11.12% |
+| 核心机制 | `mbgr` | MBGR · Meituan | business-aware SID、共享 experts 与 LDR；NDCG@10 -5.92% |
+| 核心机制 | `growthgr` | GrowthGR · Alibaba | ItemLTV、RQ-SID、MoPO 与 constrained retrieval；NDCG@10 +2.05% |
+| 核心机制 | `mesh` | MESH · Pinterest | 模块化 sub-towers、signal amplifier 与 RGBC；NDCG@10 -3.54% |
+| 核心机制 | `sam` | SAM · Alibaba | 双路径兴趣/节奏、ASGU、TTNP 与 log-mask；NDCG@10 -6.60% |
+| 核心机制 | `danet` | DANet · Alibaba/Tmall | FFT 折扣分解、user/context correction 与辅助回归；fresh Hit@10 +50.00% |
+| 核心机制 | `proximity-features` | Proximity Features · Airbnb | 自适应 ZIP 分桶、稳定 proximity key 与群体冷启动特征；NDCG@10 +22.91% |
 | 核心机制 | `nontp` | NONTP · Meituan | NTP + EMA teacher TCL + 跨域 TDL 联合训练，辅助模块推理期移除；Hit@10 -4.93%、NDCG -8.62% |
 | 核心机制 | `akt-rec` | AKT-Rec · Alibaba | 真实 SmolLM LoRA 双阶段训练、RQ-VAE SID、非对称 head→tail 迁移和活动度门控；AUC +3.44%、GAUC +5.53% |
 | 完整核心链路 | `s-grec` | S-GRec · Tencent/WeChat | 真实 LLM PSJ 方面 SFT+GRPO、pairwise aggregator、SID 生成、5% 稀疏 A2PO；validation 晋级，test HR@10 +0%、NDCG -4.53% |
