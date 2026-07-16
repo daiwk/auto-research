@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from .config import ResearchConfig
+from .evolution import EvolutionConfig, ModelEvolutionEngine
 from .publish import publish_report
 from .reproductions.base import ReproductionFidelity
 from .reproductions.registry import get_adapter, list_adapters
@@ -57,6 +58,21 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="include adapters whose core paper model/training is still a proxy",
     )
+
+    evolve = commands.add_parser(
+        "evolve", help="evolve an existing model with paper-inspired structures and hyperparameters"
+    )
+    evolve.add_argument("--model", choices=["rankmixer"], required=True)
+    evolve.add_argument("--dataset", choices=["movielens-100k"], required=True)
+    evolve.add_argument("--dataset-dir", type=Path, default=Path("data"))
+    evolve.add_argument("--output-dir", type=Path, default=Path("runs/evolution"))
+    evolve.add_argument("--query")
+    evolve.add_argument("--generations", type=int, default=3)
+    evolve.add_argument("--population", type=int, default=4)
+    evolve.add_argument("--papers", type=int, default=8)
+    evolve.add_argument("--steps", type=int, default=100)
+    evolve.add_argument("--seeds", default="42", help="comma-separated integer seeds")
+    evolve.add_argument("--offline", action="store_true")
     return parser
 
 
@@ -108,6 +124,27 @@ def main(argv: list[str] | None = None) -> int:
                         adapter, result, args.output_dir
                     )
                     print(f"{adapter.key}: {report.resolve()}")
+            return 0
+        if args.command == "evolve":
+            seeds = tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip())
+            config = EvolutionConfig(
+                model=args.model,
+                dataset=args.dataset,
+                dataset_dir=args.dataset_dir,
+                output_dir=args.output_dir,
+                query=args.query,
+                generations=args.generations,
+                population=args.population,
+                max_papers=args.papers,
+                steps=args.steps,
+                seeds=seeds,
+                allow_network=not args.offline,
+            )
+            result, run_dir = ModelEvolutionEngine(config).run()
+            champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
+            print(f"Champion: {champion.trial_id} ({champion.genome.architecture})")
+            print(f"Validation NDCG@10: {champion.fitness:.6f}")
+            print(f"Report: {run_dir / 'report.md'}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

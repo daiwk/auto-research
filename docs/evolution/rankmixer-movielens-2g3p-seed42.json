@@ -1,0 +1,9 @@
+{
+  "model": "rankmixer",
+  "dataset": "MovieLens-100K compact",
+  "protocol": {"users": 220, "items": 360, "generations": 2, "population": 3, "steps": 40, "seeds": [42]},
+  "baseline": {"architecture": "rankmixer_dense", "validation_ndcg_at_10": 0.009562, "test_hit_at_10": 0.05, "test_ndcg_at_10": 0.024017, "test_head_share_at_10": 0.088636},
+  "champion": {"architecture": "moi_mixer", "layers": 1, "batch_size": 24, "validation_ndcg_at_10": 0.013354, "test_hit_at_10": 0.077273, "test_ndcg_at_10": 0.038637, "test_head_share_at_10": 0.147273},
+  "relative": {"validation_ndcg_percent": 39.65, "test_ndcg_percent": 60.87},
+  "diagnostic_only": true
+}
