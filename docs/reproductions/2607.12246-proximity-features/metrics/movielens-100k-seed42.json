@@ -1,0 +1,1 @@
+{"seed":42,"users":932,"buckets":99,"median_bucket":10.0,"selected_blend":1.0,"baseline":{"hit_at_10":0.006438,"ndcg_at_10":0.003156},"method":{"hit_at_10":0.007511,"ndcg_at_10":0.003879},"relative":{"hit_at_10_percent":16.666667,"ndcg_at_10_percent":22.912846}}

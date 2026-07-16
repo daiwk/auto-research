@@ -1,0 +1,1 @@
+{"seed":42,"baseline":{"hit_at_10":0.109091,"ndcg_at_10":0.054005},"method":{"hit_at_10":0.095455,"ndcg_at_10":0.050439},"relative":{"hit_at_10_percent":-12.5,"ndcg_at_10_percent":-6.604169},"selected_blend":0.1,"ttnp_auxiliary_mse":0.522025}
