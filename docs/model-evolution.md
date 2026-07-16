@@ -39,6 +39,40 @@ batch_size, experts, interval_residual, auxiliary_weight
 
 在线 arXiv 检索仍会返回其他相关论文。只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为 `evidence-only`，避免从论文文本直接执行不可审计代码。
 
+## 安装命令
+
+`auto-research` 是本项目安装后生成的命令，不是另一个需要单独下载的软件。第一次使用时，在仓库根目录执行：
+
+```bash
+cd /path/to/auto-research
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e '.[neural-recs]'
+```
+
+确认安装成功：
+
+```bash
+auto-research --help
+auto-research evolve --help
+```
+
+`-e` 是可编辑安装，修改或更新项目源码后通常无需重新安装。新开一个终端后，需要重新激活虚拟环境：
+
+```bash
+cd /path/to/auto-research
+source .venv/bin/activate
+```
+
+如果不想激活环境，可直接使用完整路径：
+
+```bash
+.venv/bin/auto-research evolve --help
+```
+
+只有 `pyproject.toml` 中的依赖发生变化时，才需要重新执行安装命令。
+
 ## 方向驱动的使用方式
 
 ```bash
