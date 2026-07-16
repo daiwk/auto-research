@@ -9,6 +9,8 @@ from ..industrial_ranking import NeuralRankingConfig, require_backend
 class HyFormerConfig(NeuralRankingConfig):
     queries: int = 2
     non_sequence_tokens: int = 2
+    optimizer: str = "adamw"
+    long_chunk_size: int = 8
 
 
 def build_model(kind: str, data, config: HyFormerConfig):
@@ -59,6 +61,21 @@ def build_model(kind: str, data, config: HyFormerConfig):
             )
             return values + refined
 
+    class UniMixerBoost(nn.Module):
+        """Learnable token mixing followed by per-token channel mixing."""
+        def __init__(self, token_count):
+            super().__init__()
+            self.token_mix = nn.Linear(token_count, token_count, bias=False)
+            self.channel = nn.Sequential(
+                nn.LayerNorm(config.dimensions),
+                nn.Linear(config.dimensions, 3 * config.dimensions), nn.SiLU(),
+                nn.Linear(3 * config.dimensions, config.dimensions),
+            )
+
+        def forward(self, values):
+            mixed = self.token_mix(values.transpose(1, 2)).transpose(1, 2)
+            return values + mixed + self.channel(values + mixed)
+
     class HyFormerLayer(nn.Module):
         def __init__(self):
             super().__init__()
@@ -70,7 +87,8 @@ def build_model(kind: str, data, config: HyFormerConfig):
             self.decoding = nn.MultiheadAttention(
                 config.dimensions, config.heads, batch_first=True, dropout=0.0
             )
-            self.boost = QueryBoost(config.queries + config.non_sequence_tokens)
+            boost = UniMixerBoost if "unimixer" in kind else QueryBoost
+            self.boost = boost(config.queries + config.non_sequence_tokens)
 
         def forward(self, queries, sequence, non_sequence):
             sequence = sequence + self.sequence(sequence)
@@ -98,6 +116,16 @@ def build_model(kind: str, data, config: HyFormerConfig):
 
         def forward(self, history):
             sequence = self.item(history)
+            if "longer" in kind and sequence.shape[1] > config.long_chunk_size:
+                recent = sequence[:, -config.long_chunk_size:]
+                prefix = sequence[:, :-config.long_chunk_size]
+                chunk = config.long_chunk_size
+                padding = (-prefix.shape[1]) % chunk
+                if padding:
+                    prefix = torch.cat((prefix[:, :1].expand(-1, padding, -1), prefix), dim=1)
+                merged = prefix.reshape(len(history), -1, chunk, config.dimensions).mean(dim=2)
+                global_token = prefix.mean(dim=1, keepdim=True)
+                sequence = torch.cat((global_token, merged, recent), dim=1)
             profile = self.features[history].mean(dim=1)
             non_sequence = self.feature(profile).reshape(
                 len(history), config.non_sequence_tokens, config.dimensions
@@ -112,6 +140,6 @@ def build_model(kind: str, data, config: HyFormerConfig):
 
     if kind == "late_fusion":
         return LateFusion()
-    if kind == "hyformer":
+    if kind in {"hyformer", "hyformer_longer", "hyformer_unimixer", "hyformer_longer_unimixer"}:
         return HyFormer()
     raise ValueError(f"unknown HyFormer kind: {kind}")

@@ -8,6 +8,9 @@ from auto_research.evolution.papers import discover_papers
 
 
 class FakeEvaluator:
+    def summary(self):
+        return {"users": 1000, "items": 2000, "train_events": 50000}
+
     def evaluate(self, trial_id, generation, parent_id, genome, source_papers, rationale):
         architecture_bonus = {
             "rankmixer_dense": 0.0,
@@ -15,6 +18,9 @@ class FakeEvaluator:
             "tokenmixer_large": 0.03,
             "zenith": 0.02,
             "moi_mixer": 0.015,
+            "rankmixer_longer": 0.025,
+            "rankmixer_unimixer": 0.035,
+            "rankmixer_longer_unimixer": 0.04,
         }[genome.architecture]
         metric = 0.10 + architecture_bonus - abs(genome.layers - 3) * 0.002
         return EvolutionTrial(
@@ -57,3 +63,20 @@ def test_genome_exposes_structure_and_training_hyperparameters():
     assert genome.to_dict()["architecture"] == "zenith"
     assert genome.to_dict()["dimensions"] == 96
     assert genome.to_dict()["optimizer"] == "adagrad"
+
+
+def test_direction_drives_parallel_round_hypotheses_and_dashboard(tmp_path):
+    config = EvolutionConfig(
+        model="rankmixer", dataset="movielens-1m",
+        direction="把 LONGER 和 UniMixer 加入 RankMixer，升级高效 Transformer 结构",
+        output_dir=tmp_path / "runs", generations=2, population=4,
+        max_papers=4, steps=1, workers=2, allow_network=False,
+    )
+    result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path, evaluator=FakeEvaluator()).run()
+    architectures = {trial.genome.architecture for trial in result.trials}
+    assert "rankmixer_longer" in architectures
+    assert "rankmixer_unimixer" in architectures
+    assert len(result.rounds) == 2
+    assert result.dataset_summary["users"] == 1000
+    assert (run_dir / "index.html").exists()
+    assert "研究过程" in (run_dir / "index.html").read_text(encoding="utf-8")

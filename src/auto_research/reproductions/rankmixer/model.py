@@ -29,6 +29,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
     supported = {
         "shared_ffn", "rankmixer_dense", "rankmixer_smoe",
         "tokenmixer_large", "zenith", "moi_mixer",
+        "rankmixer_longer", "rankmixer_unimixer", "rankmixer_longer_unimixer",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -184,6 +185,17 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 outputs.append(self.linear[token](x) + self.quadratic[token](x * x))
             return self.norm(values + torch.stack(outputs, dim=1))
 
+    class UniMixerBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.token_mix = nn.Linear(config.tokens, config.tokens, bias=False)
+            self.channel = PerTokenSwiGLU()
+            self.norm = nn.LayerNorm(config.dimensions)
+
+        def forward(self, values):
+            mixed = self.token_mix(values.transpose(1, 2)).transpose(1, 2)
+            return self.norm(values + mixed + self.channel(values + mixed))
+
     class Ranker(nn.Module):
         def __init__(self):
             super().__init__()
@@ -195,6 +207,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 "tokenmixer_large": TokenMixerLargeBlock,
                 "zenith": ZenithBlock,
                 "moi_mixer": MultiOrderBlock,
+                "rankmixer_unimixer": UniMixerBlock,
+                "rankmixer_longer_unimixer": UniMixerBlock,
             }.get(kind, Block)
             self.blocks = nn.ModuleList([block_type() for _ in range(config.layers)])
             self.output = nn.Sequential(
@@ -206,7 +220,13 @@ def build_model(kind: str, data, config: RankMixerConfig):
 
         def pair_scores(self, history, candidates):
             batch, candidate_count = candidates.shape
-            recent = self.item(history[:, -8:]).mean(dim=1)
+            if "longer" in kind and history.shape[1] > 8:
+                embedded = self.item(history)
+                prefix, local = embedded[:, :-8], embedded[:, -8:]
+                global_interest = prefix.mean(dim=1)
+                recent = 0.5 * local.mean(dim=1) + 0.5 * global_interest
+            else:
+                recent = self.item(history[:, -8:]).mean(dim=1)
             last = self.item(history[:, -1])
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)

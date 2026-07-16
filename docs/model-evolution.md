@@ -1,22 +1,22 @@
 # 模型自动进化
 
-该功能面向“已有一个可训练模型，希望持续吸收新论文结构并自动调优”的场景。输入目标模型和公开数据集后，系统自动执行论文检索、结构映射、参数变异、多轮训练、validation 淘汰和最终 test。
+该功能面向“已有一个可训练模型，希望围绕一段自然语言调研方向持续做实验”的场景。输入基础模型、公开数据集和调研方向后，系统自动检索论文、形成结构假设、并行训练、根据 validation 观察决定下一轮方向，最后隔离 test，并生成可读研究档案。
 
 ## 流程
 
 ```mermaid
 flowchart LR
-  A[基础模型 + 数据集] --> B[在线检索相关论文]
+  A[基础模型 + 完整数据集 + 调研方向] --> B[方向转成检索词和结构约束]
   B --> C[论文证据缓存]
   C --> D[映射到已审计结构算子]
   D --> E[结构 + 超参数 Genome]
   E --> F[训练并评估 Validation]
-  F --> G[代内淘汰与 Elitism]
+  F --> G[并行实验与失败留档]
   G --> H{达到设定代数?}
   H -- 否 --> I[围绕冠军继续变异]
   I --> F
   H -- 是 --> J[基线与冠军最终 Test]
-  J --> K[JSON + Markdown 报告]
+  J --> K[JSON + Markdown + HTML 研究看板]
 ```
 
 结构与普通参数在同一个 genome 中共同搜索：
@@ -39,32 +39,50 @@ batch_size, experts, interval_residual, auxiliary_weight
 
 在线 arXiv 检索仍会返回其他相关论文。只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为 `evidence-only`，避免从论文文本直接执行不可审计代码。
 
-## 使用方式
+## 方向驱动的使用方式
 
 ```bash
 auto-research evolve \
   --model rankmixer \
-  --dataset movielens-100k \
+  --dataset movielens-1m \
+  --direction "把 LONGER、UniMixer 及相关高效 Transformer 结构加入 RankMixer，比较长序列压缩、可学习 token mixing 及其组合" \
   --generations 3 \
-  --population 4 \
-  --steps 100 \
+  --population 6 \
+  --workers 3 \
+  --steps 300 \
   --papers 8 \
   --seeds 42,43,44
 ```
 
-无网络环境可以使用已缓存并审核的论文映射：
+基础模型也可以换成 HyFormer：
 
 ```bash
 auto-research evolve \
-  --model rankmixer \
-  --dataset movielens-100k \
-  --generations 2 \
-  --population 3 \
-  --steps 40 \
-  --offline
+  --model hyformer \
+  --dataset movielens-1m \
+  --direction "引入 LONGER 的长序列压缩和 UniMixer 的参数化 mixing，升级高效 Transformer" \
+  --generations 3 --population 6 --workers 3 --steps 300
 ```
 
-## 首次端到端实验
+每一代的候选会并行执行。macOS 上多 worker 使用独立进程，避免多个实验共享随机数状态或模型；每个实验仍保持相同 split、seed 和训练预算。完整过程写入：
+
+- `result.json`：机器可读的论文、配置、父子关系、指标、失败原因和每轮决策。
+- `report.md`：适合代码审查和长期归档的中文研究报告。
+- `index.html`：无需服务即可打开的响应式研究看板，展示效果、假设、观察和下一轮决策。
+
+第一轮是公平结构消融：所有候选继承基础模型的相同超参数，只改变结构。第二轮起才围绕上一轮冠军分别调整层数、维度、学习率、优化器和 batch size，避免把结构收益和调参收益混在一起。
+
+## 数据规模
+
+默认不再裁剪训练数据：MovieLens-100K 使用完整的 932 个有效用户和 1,682 个物品；MovieLens-1M 使用完整 leave-two-out 序列。为控制每个候选的全库排序成本，默认用固定且均匀覆盖的 1,000 用户 cohort 做 validation/test；传入 `--evaluation-users 0` 可评估全部用户。只有为了快速验证流程时，才显式传入 `--maximum-users` 和 `--maximum-items`。数据规模与评估 cohort 都会记录到报告中，避免把 smoke test 误写成正式实验。
+
+| 方向 | RankMixer 候选 | HyFormer 候选 | 实际机制 |
+|---|---|---|---|
+| LONGER | `rankmixer_longer` | `hyformer_longer` | 分块 token merge、global interest、recent token 保留 |
+| UniMixer | `rankmixer_unimixer` | `hyformer_unimixer` | 可学习 token mixing 与逐 token channel mixing |
+| 组合 | `rankmixer_longer_unimixer` | `hyformer_longer_unimixer` | 同时验证长序列压缩与参数化 mixing 是否互补 |
+
+## 早期小规模诊断记录
 
 MovieLens-100K compact 使用 220 个用户、360 个物品，训练 40 steps；运行两代、每代三个子代、seed 42。
 
@@ -87,4 +105,4 @@ MovieLens-100K compact 使用 220 个用户、360 个物品，训练 40 steps；
 
 ## 后续扩展
 
-增加新目标模型时，实现一个 evaluator：把 `Genome` 转成该模型配置，训练后返回统一 validation/test 指标。增加新论文结构时，在目标模型中实现独立 architecture operator，并补充论文 ID、方法摘要、shape 测试和最小训练测试。代际控制、论文清单、报告和 CLI 无需修改。
+增加新目标模型时，实现一个 evaluator：把 `Genome` 转成该模型配置，训练后返回统一 validation/test 指标。增加新论文结构时，在目标模型中实现独立 architecture operator，并补充论文 ID、方法摘要、shape 测试和最小训练测试。自然语言负责约束研究空间，不能直接生成并执行未经审计的任意代码。

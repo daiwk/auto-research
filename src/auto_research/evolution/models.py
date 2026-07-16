@@ -9,6 +9,7 @@ from typing import Any
 class EvolutionConfig:
     model: str
     dataset: str
+    direction: str = ""
     dataset_dir: Path = Path("data")
     output_dir: Path = Path("runs/evolution")
     query: str | None = None
@@ -18,13 +19,17 @@ class EvolutionConfig:
     steps: int = 100
     seeds: tuple[int, ...] = (42,)
     allow_network: bool = True
+    workers: int = 1
+    maximum_users: int | None = None
+    maximum_items: int | None = None
+    evaluation_users: int | None = 1000
 
     def validate(self) -> None:
-        if self.model != "rankmixer":
-            raise ValueError("the first evolution target is rankmixer")
-        if self.dataset != "movielens-100k":
-            raise ValueError("the first evolution dataset is movielens-100k")
-        if min(self.generations, self.population, self.steps) < 1:
+        if self.model not in {"rankmixer", "hyformer"}:
+            raise ValueError("model must be rankmixer or hyformer")
+        if self.dataset not in {"movielens-100k", "movielens-1m"}:
+            raise ValueError("dataset must be movielens-100k or movielens-1m")
+        if min(self.generations, self.population, self.steps, self.workers) < 1:
             raise ValueError("generations, population and steps must be positive")
         if not self.seeds:
             raise ValueError("at least one seed is required")
@@ -71,6 +76,8 @@ class EvolutionTrial:
     source_papers: tuple[str, ...]
     rationale: str
     duration_seconds: float
+    status: str = "completed"
+    error: str | None = None
 
     @property
     def fitness(self) -> float:
@@ -91,6 +98,8 @@ class EvolutionResult:
     champion_id: str | None = None
     baseline_test: dict[str, float] | None = None
     champion_test: dict[str, float] | None = None
+    rounds: list[dict[str, Any]] = field(default_factory=list)
+    dataset_summary: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -101,4 +110,6 @@ class EvolutionResult:
             "champion_id": self.champion_id,
             "baseline_test": self.baseline_test,
             "champion_test": self.champion_test,
+            "rounds": self.rounds,
+            "dataset_summary": self.dataset_summary,
         }
