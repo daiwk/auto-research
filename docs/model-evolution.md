@@ -100,7 +100,7 @@ auto-research evolve \
 
 ## LLM 自动进化
 
-`micro-llm` 是面向 Mac 本地研究的 decoder-only Transformer。默认配置约 1200 万至 1600 万参数（具体取决于结构），使用 4K 本地 BPE、384 hidden size、6 layers 和 128 context；这些都可通过 CLI 缩放。它不是为了冒充生产大模型，而是让结构、数据配比和后训练方法能够真实训练、比较和迭代。
+`micro-llm` 是可在 Mac、Linux GPU 和 Linux CPU 训练的 decoder-only Transformer。默认配置约 1200 万至 1600 万参数（具体取决于结构），使用 4K 本地 BPE、384 hidden size、6 layers 和 128 context；这些都可通过 CLI 缩放。它不是为了冒充生产大模型，而是让结构、数据配比和后训练方法能够真实训练、比较和迭代。
 
 ```bash
 python -m pip install -e '.[llm-evolution]'
@@ -116,6 +116,8 @@ auto-research evolve \
   --papers 8 \
   --seeds 42
 ```
+
+所有 evolve 模型共用 `--device auto|cpu|mps|cuda|cuda:<index>`；Linux CPU 还可传 `--cpu-threads`。安装、CUDA 选择与多卡隔离见[运行环境指南](runtime.md)。
 
 三轮默认分工：
 

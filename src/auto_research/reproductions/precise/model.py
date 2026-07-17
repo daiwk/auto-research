@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import hashlib
 import random
 import time
@@ -46,7 +48,7 @@ def initialize_llm_tokens(data: PreciseData, root: Path, config: PreciseConfig) 
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(config.model_name)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).eval()
     vectors, masks = [], []
     started = time.perf_counter()
@@ -137,7 +139,7 @@ def _batch_sequences(sequences, config, rng, device, torch, include_target: bool
 def universal_train(model, sequences, config: PreciseConfig, seed: int):
     torch, _ = require_backend()
     rng = random.Random(seed); torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     losses = []; frozen_steps = config.universal_steps // 2

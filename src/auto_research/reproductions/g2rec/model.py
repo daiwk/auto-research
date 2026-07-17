@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 from typing import Any
@@ -57,7 +59,7 @@ def train_soft_membership(data, config: G2RecConfig, seed: int):
 
     torch, _ = require_backend()
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     edges, weights, degree = coengagement_edges(data.train, data.item_count)
     edge_tensor = torch.tensor(edges, dtype=torch.long, device=device)
     weight_tensor = torch.tensor(weights, dtype=torch.float32, device=device)
@@ -171,7 +173,7 @@ def train_decoder(kind: str, data, membership, config: G2RecConfig, seed: int):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model = build_model(kind, data.item_count, membership, config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rows = sequence_windows(data.train, config.sequence_length)

@@ -134,7 +134,9 @@ def run_ablation(
     }
     del model
     gc.collect()
-    if device.type == "mps":
+    if device.type == "cuda":
+        torch.cuda.empty_cache()
+    elif device.type == "mps":
         torch.mps.empty_cache()
     return result
 
@@ -162,9 +164,8 @@ def _merge_training_metrics(prior, continuation):
 
 
 def _device(torch):
-    if torch.backends.mps.is_available():
-        return torch.device("mps")
-    return torch.device("cpu")
+    from auto_research.runtime import device_for
+    return device_for(torch)
 
 
 def _seed_everything(seed: int, torch) -> None:

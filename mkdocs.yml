@@ -18,6 +18,7 @@ nav:
   - 项目文档:
       - 项目 README: project-readme.md
       - 架构与扩展: architecture.md
+      - GPU 与 Linux CPU: runtime.md
       - 本地预览与发布: getting-started.md
       - 设计记录: design/automated-w2s-adoption.md
 

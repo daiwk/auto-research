@@ -14,7 +14,8 @@ def require_llm_backend():
 
 
 def device_for(torch):
-    return torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    from auto_research.runtime import device_for as resolve_device
+    return resolve_device(torch)
 
 
 def inject_lora(model, rank: int = 4, alpha: float = 8.0):

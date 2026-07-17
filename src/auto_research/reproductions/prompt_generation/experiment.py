@@ -46,7 +46,9 @@ def reproduce_prompt_generation(dataset_dir: Path, seed: int = 42) -> dict:
         try:
             import torch
 
-            if torch.backends.mps.is_available():
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            elif torch.backends.mps.is_available():
                 torch.mps.empty_cache()
         except ImportError:
             pass

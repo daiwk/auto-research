@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import copy
 import random
 import time
@@ -44,7 +46,7 @@ def atomic_behavior_embeddings(
             return values
     tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     backbone = AutoModel.from_pretrained(config.model_name)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     backbone.to(device).eval()
     outputs = []
     with torch.inference_mode():
@@ -125,7 +127,7 @@ def build_full_text(config: BAHEConfig):
 
 def train_model(model, tokenizer, data, rows, config: BAHEConfig, seed: int, bahe: bool):
     torch, _, _, _ = require_backend()
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     parameters = [value for value in model.parameters() if value.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=config.learning_rate)
@@ -161,7 +163,9 @@ def evaluate(model, tokenizer, data, rows, config: BAHEConfig, bahe: bool):
             batch = rows[start:start + config.batch_size]
             tick = time.perf_counter()
             logits = _forward(model, tokenizer, data, batch, config, device, torch, bahe)
-            if device.type == "mps":
+            if device.type == "cuda":
+                torch.cuda.synchronize(device)
+            elif device.type == "mps":
                 torch.mps.synchronize()
             elapsed += time.perf_counter() - tick
             scores.extend(torch.sigmoid(logits).cpu().tolist())

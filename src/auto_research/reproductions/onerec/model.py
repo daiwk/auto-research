@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import copy
 import math
 import random
@@ -134,7 +136,7 @@ def session_examples(sequences, index: SemanticIDIndex, config: OneRecConfig, ca
 
 def train_generator(model, layout, rows, config: OneRecConfig, seed: int):
     torch, _ = require_backend()
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rng = random.Random(seed)
@@ -186,7 +188,7 @@ def build_reward_model(item_count: int, config: OneRecConfig):
 
 def train_reward_model(rows, item_count: int, config: OneRecConfig, seed: int):
     torch, _ = require_backend()
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model = build_reward_model(item_count, config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rng = random.Random(seed)

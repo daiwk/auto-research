@@ -30,6 +30,8 @@ class EvolutionConfig:
     llm_layers: int = 6
     llm_batch_size: int = 4
     llm_sequence_length: int = 128
+    device: str = "auto"
+    cpu_threads: int | None = None
 
     def validate(self) -> None:
         if self.model not in {"rankmixer", "hyformer", "micro-llm"}:
@@ -41,6 +43,8 @@ class EvolutionConfig:
             raise ValueError("generations, population and steps must be positive")
         if not self.seeds:
             raise ValueError("at least one seed is required")
+        if self.cpu_threads is not None and self.cpu_threads < 1:
+            raise ValueError("cpu threads must be positive")
         if self.model == "micro-llm":
             if min(self.vocab_size, self.llm_dimensions, self.llm_layers,
                    self.llm_batch_size, self.llm_sequence_length) < 1:

@@ -15,6 +15,18 @@ from .reproductions.reporting import (
     write_reproduction_result,
 )
 from .runner import ResearchRunner
+from .runtime import configure_runtime, runtime_summary
+
+
+def _add_runtime_arguments(command: argparse.ArgumentParser) -> None:
+    command.add_argument(
+        "--device",
+        help="execution device: auto, cpu, mps, cuda or cuda:<index> (default: env or auto)",
+    )
+    command.add_argument(
+        "--cpu-threads", type=int,
+        help="PyTorch intra-op threads when running on Linux/CPU",
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -29,6 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--offline", action="store_true")
     run.add_argument("--output-dir", type=Path, default=Path("runs"))
     run.add_argument("--force-rerun", action="store_true")
+    _add_runtime_arguments(run)
 
     commands.add_parser("list", help="list installed paper/idea plugins")
 
@@ -51,6 +64,7 @@ def build_parser() -> argparse.ArgumentParser:
     reproduce.add_argument(
         "--output-dir", type=Path, default=Path("runs/reproductions")
     )
+    _add_runtime_arguments(reproduce)
     reproduce.add_argument("--output", type=Path, help=argparse.SUPPRESS)
     reproduce.add_argument("--seed", type=int, default=42)
     reproduce.add_argument(
@@ -85,12 +99,15 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--llm-layers", type=int, default=6, help="initial micro-llm layer count")
     evolve.add_argument("--llm-batch-size", type=int, default=4, help="initial micro-llm batch size")
     evolve.add_argument("--llm-sequence-length", type=int, default=128, help="micro-llm context length")
+    _add_runtime_arguments(evolve)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if hasattr(args, "device"):
+            configure_runtime(args.device, args.cpu_threads)
         if args.command == "init":
             _init_config(args.path, args.track)
             print(f"Created {args.path}")
@@ -123,10 +140,15 @@ def main(argv: list[str] | None = None) -> int:
                         "its result must not be compared with the paper's reported lift.",
                         file=sys.stderr,
                     )
-            entries = [
-                (adapter, adapter.run(args.dataset_dir, args.seed))
-                for adapter in adapters
-            ]
+            entries = []
+            for adapter in adapters:
+                result = adapter.run(args.dataset_dir, args.seed)
+                try:
+                    import torch
+                    result["runtime"] = runtime_summary(torch)
+                except ImportError:
+                    result["runtime"] = runtime_summary()
+                entries.append((adapter, result))
             if args.output:
                 report = write_legacy_combined_report(entries, args.output)
                 print(f"Report: {report.resolve()}")
@@ -163,6 +185,8 @@ def main(argv: list[str] | None = None) -> int:
                 llm_layers=args.llm_layers,
                 llm_batch_size=args.llm_batch_size,
                 llm_sequence_length=args.llm_sequence_length,
+                device=runtime_summary()["requested_device"],
+                cpu_threads=args.cpu_threads,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)

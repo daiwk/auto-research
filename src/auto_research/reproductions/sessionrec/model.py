@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import csv
 import random
 import time
@@ -157,7 +159,7 @@ def train_and_evaluate(data: SessionData, config: SessionRecConfig, seed: int, h
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model = build_model(data.item_count, config, hierarchical).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rng = random.Random(seed)

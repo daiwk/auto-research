@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 import time
 from dataclasses import dataclass
@@ -28,7 +30,7 @@ def train_behavior_encoder(features, positive_pairs, config: SaviorConfig, seed:
     torch, nn = require_backend()
     torch.manual_seed(seed)
     rng = random.Random(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     values = torch.tensor(features, dtype=torch.float32, device=device)
     encoder = nn.Sequential(
         nn.Linear(features.shape[1], 2 * config.dimensions), nn.GELU(),
@@ -108,7 +110,7 @@ def train_ranker(model, train, test, item_frequency, config: SaviorConfig, seed:
     torch, _ = require_backend()
     torch.manual_seed(seed)
     rng = random.Random(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rows = train[: config.maximum_train]

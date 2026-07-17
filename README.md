@@ -150,6 +150,25 @@ python -m pip install -e '.[plum]'
 
 这里的 `-e` 表示可编辑安装：更新本仓库的 Python 源码后通常不用重新安装。每次新开终端需要先执行 `source .venv/bin/activate`；不想激活环境时，也可以直接运行 `.venv/bin/auto-research --help`。若刚更新了依赖配置，再执行一次 `python -m pip install -e '.[neural-recs]'`。
 
+### Mac、Linux GPU 与 Linux CPU
+
+所有训练入口统一支持 `--device auto|cpu|mps|cuda|cuda:<index>`。`auto` 的探测顺序是 CUDA、Apple MPS、CPU；显式指定但不可用时会直接报错。Linux CPU 可用 `--cpu-threads` 控制每个 worker 的 PyTorch 线程数。
+
+```bash
+# Linux 单卡 GPU
+auto-research reproduce --paper din --device cuda:0 --seed 42
+auto-research evolve --model rankmixer --dataset movielens-1m \
+  --direction "加入 LONGER 与 UniMixer" --device cuda:0 --workers 1
+
+# Linux CPU
+auto-research reproduce --paper din --device cpu --cpu-threads 16 --seed 42
+
+# Mac MPS（不指定时也会自动探测）
+auto-research reproduce --paper din --device mps --seed 42
+```
+
+CUDA/CPU PyTorch 的安装方式、多卡隔离和 worker 配置见 [GPU 与 Linux CPU 运行指南](docs/runtime.md)。
+
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
 博客选出的 KAR、BAHE、BEQUE 均使用 MovieLens-100K：KAR 会用本地小型指令模型真实生成知识，BAHE 会落盘复用原子行为表示，BEQUE 会训练 seq2seq 模型并用公开目录实现离线检索反馈。三者都保留生产论文的核心训练链路，但不声称 MovieLens 等价于企业私有日志。
@@ -208,7 +227,7 @@ runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/
 
 ## 运行模型自动进化
 
-内置基础模型包括推荐侧 RankMixer/HyFormer，以及 LLM 侧可在 Mac 从头训练的 `micro-llm`。推荐正式实验建议使用 MovieLens-1M：
+内置基础模型包括推荐侧 RankMixer/HyFormer，以及可在 Mac、Linux GPU 或 Linux CPU 从头训练的 `micro-llm`。推荐正式实验建议使用 MovieLens-1M：
 
 ```bash
 auto-research evolve \

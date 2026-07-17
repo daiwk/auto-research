@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 
@@ -265,7 +267,7 @@ def train_model(kind: str, data, config: RankMixerConfig, seed: int):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model = build_model(kind, data, config).to(device)
     from ..industrial_ranking import training_examples
 

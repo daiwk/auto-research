@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 import time
 
@@ -16,7 +18,7 @@ def train_llm_semantics(data, model_name: str, item_steps: int, user_steps: int,
         tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(model_name, local_files_only=True)
     trainable = inject_lora(model, rank=4, alpha=8.0)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device)
     item_texts = [
         f"Item: {title}. Categories: {', '.join(genres)}"
@@ -96,7 +98,7 @@ def train_llm_semantics(data, model_name: str, item_steps: int, user_steps: int,
 def train_rqvae(features, levels: int, codebook_size: int, steps: int, seed: int):
     torch, nn, _, _ = require_llm_backend()
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     normalized = np.asarray(features, dtype=np.float32)
     normalized = normalized / np.maximum(
         np.linalg.norm(normalized, axis=1, keepdims=True), 1e-6

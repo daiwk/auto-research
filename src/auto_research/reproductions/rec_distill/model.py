@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 
@@ -126,7 +128,7 @@ def _train_binary(model, rows, candidates, steps, config, seed):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rng = random.Random(seed)
@@ -175,7 +177,7 @@ def train_distilled_student(model, rows, candidates, teacher_logits, config, see
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     split = int(0.8 * len(rows))
@@ -221,7 +223,7 @@ def train_raw_student_phased(model, rows, candidates, config, seed):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     split = int(0.8 * len(rows))

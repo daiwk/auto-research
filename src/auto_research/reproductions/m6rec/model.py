@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 import time
 from dataclasses import dataclass
@@ -131,7 +133,7 @@ def train_and_evaluate(rows, test, config: M6RecConfig, seed: int, use_adapters:
     torch, _, _, _ = require_backend()
     torch.manual_seed(seed)
     model, tokenizer = build_model(config, use_adapters)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
     optimizer = torch.optim.AdamW(trainable, lr=config.learning_rate)

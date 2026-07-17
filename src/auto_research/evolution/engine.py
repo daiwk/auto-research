@@ -12,6 +12,7 @@ from .papers import discover_papers
 from .planner import allowed_architectures, propose, round_record
 from .rankmixer import RankMixerEvaluator
 from .report import write_evolution_artifacts
+from ..runtime import configure_runtime
 
 
 class ModelEvolutionEngine:
@@ -23,6 +24,7 @@ class ModelEvolutionEngine:
 
     def run(self) -> tuple[EvolutionResult, Path]:
         config = self.config
+        configure_runtime(None if config.device == "auto" else config.device, config.cpu_threads)
         run_id = dt.datetime.now().strftime("%Y%m%d-%H%M%S-%f")
         run_dir = (self.project_dir / config.output_dir / f"{config.model}-{run_id}").resolve()
         domain = "language model" if config.model == "micro-llm" else "recommendation"
