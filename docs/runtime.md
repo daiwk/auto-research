@@ -8,6 +8,45 @@
 
 默认 `--device auto`，按 **CUDA → Apple MPS → CPU** 的顺序探测。显式指定的加速器不可用时会直接报错，不会悄悄退回 CPU，避免开发机实验耗时和指标口径失真。设备、PyTorch 版本、平台及 CPU 线程数会写入论文复现的 `result.json`；evolve 的设备设置会写入其 config。
 
+## 一键 Demo
+
+在仓库根目录运行：
+
+```bash
+./demo.sh
+```
+
+总入口会在 macOS 选择 Mac 脚本；Linux 上若 `nvidia-smi -L` 可用则选择 GPU，否则选择 CPU。需要固定平台时直接调用：
+
+```bash
+./demo-mac.sh
+./demo-linux-cpu.sh
+./demo-linux-gpu.sh
+```
+
+默认 `DEMO_PROFILE=quick`，运行一个经过裁剪但真实训练和评估的 RankMixer + MovieLens-100K 实验。以下环境变量可以组合使用：
+
+| 变量 | 默认值 | 作用 |
+|---|---|---|
+| `DEMO_PROFILE` | `quick` | `quick` 快速验证；`full` 使用原 demo 的 MovieLens-1M、3 代、6 candidates、3 seeds |
+| `DEMO_TRACK` | `recommendation` | `recommendation` 或 `llm` |
+| `DEMO_DEVICE` | Mac `auto` / GPU `cuda:0` | 覆盖设备，例如 `cuda:1` 或 Mac 上强制 `cpu` |
+| `DEMO_CPU_THREADS` | 自动探测，最多 16 | Linux CPU 每个 worker 的 PyTorch 线程数 |
+| `DEMO_WORKERS` | Mac/GPU 1，CPU 2 | 每代并行候选数 |
+| `DEMO_VENV` | `.venv-demo-<platform>` | 自定义虚拟环境目录 |
+| `DEMO_REINSTALL` | `0` | 设为 `1` 时重新安装依赖 |
+| `TORCH_INDEX_URL` | CPU 官方源 / GPU 使用 PyPI | 覆盖 PyTorch wheel 源 |
+
+示例：
+
+```bash
+DEMO_PROFILE=full ./demo-linux-gpu.sh
+DEMO_TRACK=llm ./demo-mac.sh
+DEMO_TRACK=llm DEMO_PROFILE=full DEMO_DEVICE=cuda:1 ./demo-linux-gpu.sh
+```
+
+三个平台使用不同的 `.venv-demo-*`，避免 CPU-only PyTorch 和 CUDA PyTorch 相互覆盖。脚本启动训练前会打印最终解析出的设备、PyTorch 版本、CUDA 版本和硬件名称；检查失败时不会开始实验。命令末尾还可以追加 evolve 参数，供临时覆盖默认设置。
+
 ## Linux GPU
 
 先按服务器驱动和 CUDA 版本，从 [PyTorch 官方安装选择器](https://pytorch.org/get-started/locally/)安装匹配的 PyTorch，再安装本项目；不要让项目安装命令覆盖服务器已有的 CUDA PyTorch。

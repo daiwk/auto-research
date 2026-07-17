@@ -1,15 +1,40 @@
-python3 -m venv .venv
-source .venv/bin/activate
+#!/usr/bin/env bash
+set -euo pipefail
 
-pip install -e '.[neural-recs]'
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PLATFORM="${DEMO_PLATFORM:-auto}"
 
-auto-research evolve \
-  --model rankmixer \
-  --dataset movielens-1m \
-  --direction "把 LONGER、UniMixer 及相关高效 Transformer 结构加入 RankMixer，比较长序列压缩、可学习 token mixing 及其组合" \
-  --generations 3 \
-  --population 6 \
-  --workers 3 \
-  --steps 300 \
-  --papers 8 \
-  --seeds 42,43,44
+if [[ "$PLATFORM" == "auto" ]]; then
+  case "$(uname -s)" in
+    Darwin)
+      PLATFORM="mac"
+      ;;
+    Linux)
+      if command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1; then
+        PLATFORM="linux-gpu"
+      else
+        PLATFORM="linux-cpu"
+      fi
+      ;;
+    *)
+      echo "Unsupported operating system: $(uname -s)" >&2
+      exit 2
+      ;;
+  esac
+fi
+
+case "$PLATFORM" in
+  mac)
+    exec bash "$ROOT_DIR/demo-mac.sh" "$@"
+    ;;
+  linux-cpu)
+    exec bash "$ROOT_DIR/demo-linux-cpu.sh" "$@"
+    ;;
+  linux-gpu)
+    exec bash "$ROOT_DIR/demo-linux-gpu.sh" "$@"
+    ;;
+  *)
+    echo "DEMO_PLATFORM must be auto, mac, linux-cpu or linux-gpu" >&2
+    exit 2
+    ;;
+esac
