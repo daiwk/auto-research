@@ -171,6 +171,37 @@ auto-research reproduce --paper din --device mps --seed 42
 
 CUDA/CPU PyTorch 的安装方式、多卡隔离和 worker 配置见 [GPU 与 Linux CPU 运行指南](runtime.md)。
 
+### 一键 Demo
+
+仓库根目录提供自动识别平台的入口：
+
+```bash
+./demo.sh
+```
+
+也可以明确选择运行环境：
+
+```bash
+./demo-mac.sh
+./demo-linux-cpu.sh
+./demo-linux-gpu.sh
+```
+
+默认执行快速但真实的 RankMixer + MovieLens-100K evolve，并把结果写到 `runs/demo-<platform>-recommendation/`。切换完整规模或 LLM 自动进化：
+
+```bash
+# 复用原 demo.sh 的 MovieLens-1M、3 代、6 candidates、3 seeds 设置
+DEMO_PROFILE=full ./demo.sh
+
+# 快速 micro-LLM 三轮结构/数据/后训练研究
+DEMO_TRACK=llm ./demo.sh
+
+# 完整 micro-LLM 研究
+DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
+```
+
+首次运行会创建平台隔离的 `.venv-demo-*` 环境并安装依赖；后续直接复用。Linux GPU 如需指定 PyTorch CUDA wheel，可传 `TORCH_INDEX_URL`；其他参数见[运行环境指南](runtime.md)。
+
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
 博客选出的 KAR、BAHE、BEQUE 均使用 MovieLens-100K：KAR 会用本地小型指令模型真实生成知识，BAHE 会落盘复用原子行为表示，BEQUE 会训练 seq2seq 模型并用公开目录实现离线检索反馈。三者都保留生产论文的核心训练链路，但不声称 MovieLens 等价于企业私有日志。
