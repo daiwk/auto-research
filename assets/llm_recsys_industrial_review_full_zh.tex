@@ -1,0 +1,774 @@
+\documentclass[UTF8,fontset=fandol,11pt]{ctexart}
+
+\usepackage[a4paper,margin=0.9in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{caption}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black
+}
+\setlist[itemize]{leftmargin=1.4em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=1.6em,itemsep=0.25em}
+\renewcommand{\arraystretch}{1.16}
+\setlength{\tabcolsep}{2.5pt}
+\newcommand{\metric}[1]{\textbf{#1}}
+\newcommand{\term}[1]{\textit{#1}}
+
+\title{推荐系统与大模型：\\从神经排序到 LLM 增强、生成式与智能体推荐的全面综述}
+\author{GPT-5.5}
+\date{2026 年 7 月 17 日}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+大语言模型、多模态基础模型、大规模序列 transducer 和生成式召回模型正在重塑推荐系统。早期研究关注语言模型能否做零样本推荐、偏好判断或解释生成；近期研究则进一步追问：如何构建能在生产约束下运行的基础模型级召回、排序、重排、意图推理、会话推荐和用户模拟系统。本文给出一个覆盖约 2016 年至 2026 年 7 月的综述，涵盖经典深度推荐、Transformer 序列推荐、预训练语言模型用于推荐、LLM-as-feature、LLM-as-ranker、语义 ID 与生成式召回、多模态与知识增强推荐、智能体推荐、LLM 评测、公平安全与工业部署。本文区分三类证据：（1）公开披露线上 A/B 实验的工业系统；（2）具有工业或生产导向、但公开 A/B 不完整的系统；（3）定义技术前沿、但尚未在大规模线上流量中验证的学术工作。整体结论是：大模型很少直接替代完整推荐链路；成功路径通常是把大模型能力转化为推荐系统原生对象，例如语义 ID、紧凑用户意图记忆、生成候选、知识图谱边、多模态标签、reward 特征或校准排序信号。本文最后给出部署 playbook、风险分析，以及覆盖 200 多篇相关论文和系统的结构化论文地图。
+\end{abstract}
+
+\tableofcontents
+
+\section{范围、证据分层与综述方法}
+
+“推荐 + 大模型”已经不是一个单一技术概念。它可能指 BERT 风格编码器用于新闻表示，也可能指 P5 这类 T5 文本到文本推荐模型、TALLRec 这类 LLaMA 偏好判断模型、多模态 LLM 抽取商品属性、语义 ID 生成式召回、万亿参数级用户行为序列 transducer，或者能与用户多轮交互的推荐智能体。这些系统的失效模式和部署成本差异极大，不能简单合并讨论。
+
+本文采用三层证据划分：
+
+\begin{enumerate}
+  \item \textbf{第一层：公开线上证据。} 来源明确报告生产 A/B 或 live experiment 结果。这是工业价值最强证据，但不同平台的指标和 baseline 仍不可直接横比。
+  \item \textbf{第二层：生产导向但线上披露不完整。} 来源来自工业场景、真实日志或部署架构，但没有完整公开线上 A/B 数字。它们对架构和系统设计有价值，但不能当作已证实的线上收益。
+  \item \textbf{第三层：学术与预生产研究。} 主要在公开数据集上推进建模、对齐、评测、鲁棒、公平或数据方法。它们定义技术前沿，但离线收益不能等同于线上收益。
+\end{enumerate}
+
+时间范围从 2016 年左右的 Wide\&Deep、YouTube DNN、DIN、DIEN、SASRec、BERT4Rec、DLRM 等神经推荐基础开始，因为这些模型解释了工业推荐系统的链路形态。随后追踪到 P5、M6-Rec、TALLRec、Chat-REC、InstructRec、ReLLa、CoLLM、LLaRA、A-LLMRec、TIGER、HSTU、PLUM、SIGMA、RecGPT 等 LLM4Rec 和 large recommender model。最新纳入的工作覆盖到 2026 年 7 月，包括 LBR 长度偏差、多模态记忆增强智能体协作、LLM 离线评测、CTV agentic recommendation 和 controllability-centric evaluation。
+
+\section{历史背景：为什么推荐没有简单变成 NLP}
+
+\subsection{工业推荐链路}
+
+工业推荐通常是多阶段系统。召回把数百万或数十亿 item 缩小到候选集；粗排和精排在严格延迟预算下打分；重排或 slate optimization 同时平衡多样性、新颖性、公平、收入、库存、创作者或商家健康和政策约束。Feature store、流式日志、在线学习、ANN 索引、实验平台和 guardrail 与神经模型同样重要。
+
+这套链路围绕稀疏 ID、稠密特征和行为日志发展而来。Wide\&Deep 和 DeepFM 让交叉特征与 embedding 结合成为 CTR 预测主流；YouTube DNN 展示了大规模召回如何被建模为巨大语料上的多分类；DIN/DIEN 强调 target attention 与兴趣演化；SASRec/BERT4Rec 将 Transformer 引入序列推荐；DLRM 及其工业后继扩展了稀疏 embedding table 和特征交互网络。这些模型并没有过时。多数 LLM 推荐方法仍然嵌入这套 serving substrate。
+
+\subsection{语言模型带来的增量能力}
+
+语言模型相对传统 ID 推荐增加了四类能力：
+
+\begin{itemize}
+  \item \textbf{语义抽象。} 商品标题、评论、query、图片 caption、视频 transcript 或用户自述可以被映射到更易迁移的语义空间。
+  \item \textbf{指令跟随。} 推荐任务可以写成 prompt：判断用户是否喜欢 item、排序候选列表、解释推荐、追问澄清或生成搜索 query。
+  \item \textbf{世界知识和推理。} LLM 能推断季节性意图、替代/互补关系、事件驱动偏好和行为日志中没有显式记录的高层属性。
+  \item \textbf{文本生成和交互。} LLM 可以生成解释、摘要、会话轮次、合成用户画像和推荐结果 critique。
+\end{itemize}
+
+但推荐系统也有通用 LLM 默认不满足的要求：校准分数、低延迟、巨大 item corpus、频繁 item 更新、反事实评估、业务约束和稳定线上实验。大量研究本质上是在调和这两个世界。
+
+\section{大模型推荐分类}
+
+\subsection{LLM 作为特征工程器}
+
+最容易落地的角色是特征工程。冻结或轻微微调的 LLM 生成 item tag、用户画像、意图摘要、review aspect、query rewrite、图边或合成样本。代表工作包括 TagGPT、LLM4KGC、KAR、HKFR、RLMRec、LLMRec with graph augmentation、CUP、SINGLE、LLMHG、Llama4Rec、ONCE、MINT、RecPrompt、BEQUE 和 Agent4Ranking。这类方法通常不要求 LLM 在线给每个候选打分，而是让 LLM 生成可缓存资产，再由传统召回/排序消费。
+
+这解释了为什么 LLM-as-enhancer 在工业上很有吸引力：风险局部化。如果生成属性有噪声，下游 ranker 可以学习忽略；如果 LLM 昂贵，可以离线跑；如果政策规则变化，特征生成链路也可以单独审计。
+
+\subsection{LLM 或 PLM 作为编码器}
+
+预训练语言模型可以编码文本丰富的 item 和用户历史。这条线早于当前 LLM 浪潮：U-BERT、UNBERT、PLM-NR、Pyramid-ERNIE、ERNIE-RS、CTR-BERT、Tiny-NewsRec、RecFormer、UniSRec、VQ-Rec、MISSRec、PMMRec 以及许多新闻、招聘、软件和旅游推荐。后续工作引入更大的 LLM embedding、instruction-tuned encoder 或 adapter。
+
+编码器方法适合工业链路，因为 embedding 可以预计算、索引、蒸馏并与 ID embedding 组合。局限是内容相似不等于协同偏好。这正是 CoLLM、LLaRA、A-LLMRec、LLM2BERT4Rec、LC-Rec、ControlRec 等对齐方法试图解决的 semantic-collaborative gap。
+
+\subsection{LLM 作为 scorer 或 ranker}
+
+另一条路线把推荐写成语言分类或排序任务。TALLRec 把用户历史和候选 item 写成 instruction，让 LLM 回答 yes/no。InstructRec 和 RecRanker 做 instruction tuning。SetwiseRank 和 listwise LLM ranker 用比较式 prompt 排序候选集。ReLLa 在 prompt 前检索相关行为片段，LlamaRec 使用两阶段 retrieve-then-rank。它们在可控性和冷启动推理上有吸引力，但原生 LLM scoring 对大规模工业排序通常太慢且校准不足。
+
+\subsection{LLM 作为生成器}
+
+生成式推荐把输出 item、item ID、语义 ID、query、解释或 slate 视为生成序列。P5 和 M6-Rec 将多种推荐任务统一为语言处理；GPT4Rec、GenRec、BIGRec、PALR、LightLM、LLaRA、LC-Rec、IDGenRec、TIGER 等进一步扩展。关键问题是输出词表：item title 可读但歧义大；数值 ID 精确但没有语义；语义 ID 则在紧凑性和语义性之间折中。
+
+\subsection{Large recommendation models 与序列 transducer}
+
+并非所有大推荐模型都是 LLM。Meta 的 HSTU-based Generative Recommenders 把工业推荐建模为用户行为序列 transduction，扩展到 1.5T 参数，并报告 12.4\% 线上 A/B 提升及随 compute 的 power-law scaling \cite{hstu}。美团 MTFM 则构建跨多场景的推荐基础模型 \cite{mtfm}。这些模型借鉴语言模型 scaling 思路，但训练对象是 action stream、稀疏 ID 和推荐目标。
+
+\subsection{智能体与会话推荐}
+
+Agentic recommender 使用 LLM 做规划、工具调用、记忆、自反思或多智能体协作。Chat-REC 和会话推荐系统探索交互推荐；MACRec、AgentCF、iAgent、RecMind、RecGPT-V2、MMEACR、LLM-as-a-judge slate recommender 和 connected-TV agentic system 将这一方向继续推进。优势是更丰富的偏好澄清和解释；工业挑战是行为可预测、延迟、安全和评估。
+
+\section{核心学术里程碑}
+
+\subsection{P5：文本到文本统一范式}
+
+P5（Pretrain, Personalized Prompt, and Predict）是一个里程碑，因为它明确提出推荐任务可以统一为 text-to-text learning \cite{p5}。评分预测、序列推荐、解释生成、评论摘要和直接推荐可以共享同一语言模型目标。P5 没有解决工业 serving，但改变了研究者对任务统一的理解。
+
+\subsection{M6-Rec：开放式工业预训练}
+
+M6-Rec 将大规模生成式预训练语言模型扩展到推荐，强调工业推荐需要支持多域、多任务、多模态和开放式适配 \cite{m6rec}。它把推荐任务转成语言理解或生成任务，并强调样本高效下游适配，是学术 LLM4Rec 与工业基础模型之间的重要桥梁。
+
+\subsection{TALLRec：instruction tuning 推荐}
+
+TALLRec 展示了用 LoRA 对 LLaMA 类模型进行推荐 instruction tuning 的可行性 \cite{tallrec}。其 yes/no 偏好判断形式很简单，但影响很大。它也暴露了一个反复出现的问题：语言语义和协同行为偏好不是同一件事。后续方法通过协同 embedding、检索增强、rationale distillation 或语义 ID 来缓解这个问题。
+
+\subsection{TIGER 与语义 ID 生成式召回}
+
+TIGER 把召回重写为生成 item identifier \cite{tiger}。模型不再在 embedding 空间中做近邻检索，而是解码从 item 内容中学习到的 semantic ID。这启发了 P5-ID、LC-Rec、IDGenRec、LETTER、RPG、differentiable semantic ID、variable-length semantic ID、SIDInspector、PLUM、SIGMA、AKT-Rec、Gryphon 等大量工作。核心问题包括 collision、validity、calibration、cold-start generalization 和高效 constrained decoding。
+
+\subsection{协同信号对齐}
+
+CoLLM、LLaRA、A-LLMRec、LC-Rec、ControlRec、CLLM4Rec 等方法试图把协同信号注入语言模型。机制包括将协同 embedding 投影到 token 空间、adapter/LoRA、item token learning、contrastive alignment 或两阶段 grounding。这一族方法存在的原因很明确：纯文本语义不足以刻画行为驱动偏好。
+
+\subsection{RAG 与长历史理解}
+
+ReLLa 和 RALLRec 表明 LLM 需要检索来处理 lifelong behavior。长用户历史里既有信号，也有过时、冲突、偶然和上下文依赖的噪声。ReLLa、RALLRec、AIR、RecGPT-V2、RecGPT-Mobile、HLLM 类层次方法和 MMEACR 类多模态记忆智能体都反映了同一洞察：在大模型或 ranker 看见历史之前，先检索并压缩相关部分。
+
+\subsection{评测、公平和鲁棒}
+
+近期工作研究 LLM 推荐是否稳定、公平、校准和可控。STELLA 指出 LLM 推荐可能不稳定。FaiRLLM、RECLLM、公平综述、provider fairness、招聘推荐偏差和 demographic bias 研究表明，LLM 会继承甚至放大社会和流行度偏差。2026 年 7 月的 LBR 针对 LLM 推荐中的长度偏差。LLM-based offline evaluation 和 controllability-centric agent evaluation 表明评测本身也在变化。
+
+\section{公开线上 A/B 的工业系统}
+
+表~\ref{tab:ab-zh} 汇总公开披露线上 A/B 或 live-experiment 指标的工业案例。不同系统的流量、baseline 成熟度、产品场景、指标定义和时间窗口都不同，不能当成同一 benchmark 横比；但它们说明哪些模式已经跨过生产门槛。
+
+\small
+\begin{longtable}{@{}p{0.12\linewidth}p{0.15\linewidth}p{0.24\linewidth}p{0.32\linewidth}p{0.10\linewidth}@{}}
+\caption{有公开线上证据的大模型推荐工业案例。}
+\label{tab:ab-zh}\\
+\toprule
+系统 & 平台 & 大模型角色 & 公开线上结果 & 来源\\
+\midrule
+\endfirsthead
+\toprule
+系统 & 平台 & 大模型角色 & 公开线上结果 & 来源\\
+\midrule
+\endhead
+HSTU / Generative Recommenders & Meta 大型互联网平台 & 针对用户行为流的序列 transduction 架构。 & 1.5T 参数 GR 报告 \metric{+12.4\%} 线上 A/B topline 提升；HSTU 在 8192 长度序列上比 FlashAttention2 Transformer 快 5.3x--15.2x。 & \cite{hstu}\\
+ReLand & 支付宝 & LLM 洞察通过 controllable reasoning pool 注入。 & 2024 年 1 月部署后：\metric{+3.19\% CTR}、\metric{+1.08\% CVR}。 & \cite{reland}\\
+LLM-KERec & 支付宝 & LLM 辅助构建 inferential knowledge graph。 & 10\% 流量、一个月 A/B：三个场景分别有 \metric{+6.24\%} 转化、\metric{+6.45\% GMV}、\metric{+10.07\%} 转化。 & \cite{llmkerec}\\
+MTFM & 美团 & 多场景推荐基础模型。 & SQS：\metric{+1.89\% CTR}、\metric{+2.46\% UV\_CTCVR}、\metric{+2.98\% 订单}、\metric{-5 ms}；PHF：\metric{+1.53\% CTR}、\metric{+1.03\% UV\_CTCVR}、\metric{+1.45\% 订单}、\metric{-6 ms}。 & \cite{mtfm}\\
+SIGMA & AliExpress & 语义增强、指令驱动的生成式多任务推荐。 & 5\% 流量、两周 A/B：\metric{+2.80\% 订单量}、\metric{+3.84\% 转化}、\metric{+7.84\% GMV}、\metric{+2.47\% 购买类目广度}。 & \cite{sigma}\\
+SORT-Gen & 淘宝 & 生成式列表级多目标重排。 & 百亿补贴两周 A/B：\metric{+4.13\% CLICK}、\metric{+8.10\% GMV}。 & \cite{sortgen}\\
+AIR & 快手 & 离线 LLM atomic intent + 在线 target-aware retrieval。 & 5.08\% 流量：\metric{+1.043\% paid orders}、\metric{+3.446\% GMV}、\metric{+3.662\% GPM}、\metric{+1.254\% OPM}；相对直接调用 LLM 约 400x 吞吐提升。 & \cite{air}\\
+Taiji & 快手广告 & LLM-as-enhancer + preference reasoning + Pareto reward alignment。 & 一周 A/B，10\%/10\%：\metric{+2.83\% ADVV}、\metric{+3.30\% revenue}；长尾用户 \metric{+5.26\% ADVV}、\metric{+5.32\% revenue}。 & \cite{taiji}\\
+PLUM & YouTube & Gemini 系列预训练 LM 适配为语义 ID 生成式召回。 & 在 LEM+ 上加入 PLUM：长视频 \metric{+0.76\% panel CTR}、\metric{+0.80\% views}；Shorts \metric{+4.96\% panel CTR}、\metric{+0.39\% views}；满意度为正。 & \cite{plum}\\
+AKT-Rec & 天猫 & MLLM/LLM 语义 ID + 非对称 head-to-tail 迁移。 & 两周 A/B，10\%/10\%：\metric{+2.73\% clicks}、\metric{+2.76\% CTR}、\metric{+1.7\% CTCVR}、\metric{+3.47\% GMV}。 & \cite{aktrec}\\
+RecGPT & 淘宝 & 百亿级 intent-centric reasoning model。 & 公开摘要报告线上 \metric{+9.47\% IPV}、\metric{+6.33\% CTR}，同时改善多样性和商家侧收益。 & \cite{recgpt}\\
+RecGPT-V2 & 淘宝 & 层次多智能体意图推理与 agentic judge/reward。 & 两周 A/B 对比 RecGPT-V1。Item 场景报告 \metric{+3.64\% IPV}、\metric{+3.01\% CTR}、\metric{+3.39\% GMV}、\metric{+3.47\% ATC}、\metric{+11.46\% NER}。 & \cite{recgptv2}\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{工业导向但公开 A/B 不完整的系统}
+
+很多重要工业系统没有完整公开 A/B 数字，但它们仍然影响领域，因为它们公开了架构、训练流水线、系统瓶颈和部署假设。
+
+\begin{itemize}
+  \item \textbf{M6-Rec 和 M6 类电商基础模型} 强调跨商品、内容和 UGC 域的统一生成式建模。
+  \item \textbf{BEQUE 和淘宝 query rewrite} 展示了 LLM 如何为搜索/推荐生成长尾 query rewrite，通常作为离线或近线扩展。
+  \item \textbf{RecGPT-Mobile} 将轻量意图 agent 放到用户设备上，兼顾隐私和即时上下文，而云端继续负责全局召回和排序。
+  \item \textbf{Large Language Model as Universal Retriever} 探索一个 LLM-based retriever 是否能服务多种工业召回目标。
+  \item \textbf{Gryphon} 在工业音乐服务中把 item-level scoring 加到 semantic-ID generation 上，处理 sequence-score calibration 和 SID collision。
+  \item \textbf{RecBase、OneMall、GPR、RankGR 等 large recommender models} 试图在多个推荐 surface 上预训练或对齐一个模型，但公开线上证据程度不同。
+  \item \textbf{Meta GEM 与广告 foundation model 讨论} 暗示广告推荐 backbone 共享和实验加速趋势；但第三方博客说法若缺少一手技术报告，应作为工程背景而不是主证据。
+  \item \textbf{Google/YouTube 围绕 Gemini 和 creator/advertiser matching 的产品/研究公告} 显示多模态基础模型正在进入类似推荐的匹配任务；PLUM 仍是 YouTube 推荐 A/B 效果最清楚的公开技术证据。
+\end{itemize}
+
+\section{关键技术主题}
+
+\subsection{语义 ID 与离散瓶颈}
+
+语义 ID 解决一个问题，也带来若干新问题。它把丰富 item 语义压缩成短离散码，由自回归模型生成，使召回看起来像语言解码，并在 ID 与内容绑定时提供零样本或冷启动泛化。但 code 可能 collision、不均衡、过拟合某个模态，或生成无效输出。近期工作用 residual quantization、learnable item tokenization、differentiable semantic ID、variable-length ID、unordered long ID、parallel decoding、qualification-aware collision handling、adaptive collision handling 和 SIDInspector 等方法回应这些问题。
+
+\subsection{协同信号对齐}
+
+LLM 懂语言，推荐系统懂行为。对齐方法试图避免二者互相冲掉。一些方法把 collaborative embedding 投影到语言模型 token 空间；一些训练 adapter 或 LoRA；一些用 contrastive objective 对齐 item 文本和 co-click；语义 ID 方法往往同时用内容和协同信号构造 ID。PLUM 和 AKT-Rec 等工业系统说明，这种对齐不是可选项：纯内容语义很难支撑高风险推荐。
+
+\subsection{长历史与记忆}
+
+大 context window 不自动解决 lifelong behavior modeling。用户历史包含过时、冲突、偶然和上下文依赖交互。ReLLa、RALLRec、AIR、RecGPT-V2、RecGPT-Mobile、HLLM 类层次方法和 MMEACR 类多模态记忆 agent 都体现了同一原则：在大模型或 ranker 使用历史之前，先检索并压缩相关部分。
+
+\subsection{重排、slate optimization 与多目标}
+
+大模型不只服务 top-1 relevance。SORT-Gen 建模列表级多目标重排；LLM diversity re-ranking 和 explanation-aware re-ranking 优化整页推荐；RecGPT-V2 纳入 NER；SIGMA 纳入 purchased category breadth；Taiji 平衡 semantic reward 与 collaborative reward。研究前沿正在从 item scoring 转向带业务约束的可控 slate generation。
+
+\subsection{多模态推荐}
+
+现代 item 是多模态的：商品图、标题、评论、视频、音频、transcript、评论、创作者元数据和直播上下文。VIP5、MM-Rec、MISSRec、PMMRec、LLM multimodal recommender survey、AKT-Rec、PLUM 和 MMEACR 展示了不同融合方式。难点不只是使用视觉语言模型，而是判断在何种用户意图下哪种模态应该主导，以及如何保持多模态特征新鲜且安全。
+
+\subsection{Agents、交互和用户模拟}
+
+Agentic recommender 可以提问、修正假设、调用工具、模拟用户、critique slate 并维护记忆。Agent4Rec、RecMind、MACRec、AgentCF、iAgent、MMEACR、LLM group recommender、connected-TV agent 和 LLM-as-a-judge evaluation 系统体现了这一转向。主要风险是 agent 比 ranker 更难评估：ranker 返回分数，而 agent 可能改变用户偏好表述、追问问题或幻觉约束。
+
+\section{问题导向阅读指南}
+
+如果按实践问题而不是模型名字来读文献，脉络会更清楚。同一种模型在一个场景中可能合适，在另一个场景中可能完全浪费。
+
+\subsection{冷启动和长尾}
+
+冷启动和长尾是 LLM 最自然的切入点。传统 ID embedding 在 item 曝光很少或用户历史很短时很弱，而内容丰富的 LLM 表示、语义 ID 和多模态编码器可以从标题、商品图、描述、评论、transcript 和共现实体中迁移信息。相关工作包括 P5、M6-Rec、TIGER、UniSRec、VQ-Rec、MISSRec、PMMRec、AKT-Rec、PLUM、GenCDR 和 semantic-ID diagnostics。工业经验是不要把 content-only feature 当作终点：冷启动内容语义应该和可用的协同证据融合，即使协同证据很弱。AKT-Rec 的价值在于它显式避免“帮长尾但伤头部”，这是生产系统非常常见的顾虑，因为头部流量受损可能抵消长尾收益。
+
+\subsection{跨域迁移}
+
+当不同域有语义重叠但直接交互稀疏时，LLM 对跨域推荐特别有用。典型场景包括内容到电商、搜索到推荐、短视频到商品、query 到 item。AIR、SIGMA、MTFM、S\&R Foundation、Uni-CTR、PCDR 和 GenCDR 展示了不同方案。实践设计的关键是共享什么：共享 embedding 空间、共享 semantic-ID 词表、共享用户 intent memory，还是共享多场景 transformer。共享表示能提升迁移，但当不同域优化目标不一致时也会产生负迁移。因此生产系统常使用 mixture、gating、adapter 或 scenario-specific subgraph，而不是无条件共享一个表示。
+
+\subsection{文本丰富和多模态 item}
+
+新闻、电商、本地服务、招聘、短视频、音乐、图书和 creator/advertiser matching 都是文本丰富或多模态场景。PLM-NR、MM-Rec、VIP5、MISSRec、PMMRec、PLUM、AKT-Rec 和 MMEACR 都有代表性。在这些场景里，LLM/MLLM 的价值不只是更好的 item embedding，还包括暴露可解释属性：主题、品牌、风格、季节性、受众、意图、安全类别和替代关系。工业上这很重要，因为推荐团队需要 debugging handle。黑盒 embedding 可能提升 NDCG，但生成属性可以解释为什么模型突然过度分发某个趋势或低估某类商家。
+
+\subsection{广告和商业推荐}
+
+广告推荐比很多自然推荐有更强的校准、拍卖和多方约束。排序模型不仅要选语义合理的 item，还要估计 action probability 和 value。因此 LLM 在广告系统中往往先作为 feature producer 或 alignment module 出现。Taiji 报告了 ADVV 和 revenue 收益，HSTU 和 GEM 类讨论则指向广告排序共享大 backbone。在广告里，LLM 生成候选或解释并不够，除非它能与校准 advertiser value、预算 pacing、policy constraint 和用户体验 guardrail 绑定。真正的问题不是 LLM 能不能理解广告，而是它的语义信号能否改善校准价值预测且不扰乱 marketplace。
+
+\subsection{短视频和 feed 推荐}
+
+短视频和 feed 系统同时面对快速趋势、多模态内容、创作者生态、长用户历史和高反馈量。HSTU、PLUM、AIR、RecGPT、RecGPT-Mobile 等系统都很重要。它们展示了两条相反但可兼容的方向：一种是直接从行为中学习的超大 action-sequence model；另一种是压缩内容和上下文的 semantic-intent 系统。实践架构可能同时使用二者：高吞吐 action model 作为主排序信号，LLM-derived intent/content feature 用于冷启动、多样性、解释或跨域迁移。
+
+\subsection{会话和智能体推荐}
+
+会话推荐不是“聊天 + 排序”这么简单。系统必须决定何时追问、何时推荐、如何记忆、如何从错误假设中恢复，以及如何把推荐 grounded 到可用库存。Chat-REC、RecMind、MACRec、AgentCF、iAgent、MMEACR、RecGPT-V2 和 CTV agentic recommendation 展示了这一设计空间。生产中最难的是评测：agent 可以生成流畅对话，同时把用户引向不可用或不安全 item。Grounding、tool constraint 和 audit log 与模型质量同样重要。
+
+\subsection{评测和用户模拟}
+
+LLM-as-judge 与用户模拟系统很有吸引力，因为线上 A/B 成本高。但它们应该被视为 pre-A/B filter，而不是真实流量替代品。Simulator 可以测试系统是否遵守约束、解释是否一致、生成 ID 是否有效、slate 是否满足已知偏好画像。但如果不与真实用户行为校准，它无法可靠估计长期留存、marketplace dynamics、创作者激励或疲劳。LLM 评测最好的使用方式是分层 gate：离线标签和反事实估计、LLM 诊断判断、小规模人工 review、shadow traffic，最后才是受控线上实验。
+
+\section{代表范式深挖}
+
+\subsection{Instruction-tuned LLM 推荐}
+
+TALLRec 和 InstructRec 这类 instruction-tuned recommender 思路很简单：把推荐数据转成 instruction-response pair，然后微调 LLM。优点是灵活，同一个模型可以判断用户是否喜欢 item、解释原因，或适配自然语言约束。弱点是推荐标签并不是天然语言标签。Yes/no 输出易训练，却很难校准成 CTR/CVR；离线候选集也可能被人为缩小。在生产中，instruction-tuned LLM ranker 更适合作为 reranker、弱用户 specialist、解释模块或特征生成器，而不是百万候选的主 scorer。
+
+这一范式仍然重要，因为它建立了推荐日志与 LLM 训练之间的数据接口。一旦用户历史和 item metadata 被序列化成 instruction，就可以加入 rationale、retrieved behavior、collaborative embedding、业务约束或安全规则。很多后续工作都可以理解为对朴素 instruction template 的改进：更好的 grounding、更好的协同对齐、更好的检索、更好的输出约束或更好的蒸馏。
+
+\subsection{语义 ID 生成式召回}
+
+语义 ID 召回是 LLM 时代最有辨识度的想法之一。它把召回问题从“给所有 item 打分或做近邻搜索”改成“生成能映射到 item 的离散 code”。这让召回与语言建模产生优雅连接，但也带来一系列设计选择。
+
+第一，ID 应如何构造？Content-only ID 对新 item 泛化好，但可能忽略协同行为；collaborative ID 捕捉行为但冷启动弱；hybrid ID 试图兼顾。第二，ID 应固定还是端到端学习？固定 ID 稳定目标词表，differentiable/learnable ID 可以适配任务目标。第三，collision 应如何处理？如果 collision 聚合同类替代品，它可能有益；如果合并无关 item，它会有害。第四，decoding 如何约束？无约束生成会产生无效 ID；十亿级目录需要 prefix tree、sparse transition matrix 或 post-verification。第五，生成 ID 如何打分？累计 token likelihood 不一定等于 item relevance，因此 Gryphon 等系统加入 item-level scoring。
+
+语义 ID 的工业意义在于，它让语言模型式 generation 能兼容召回基础设施。PLUM 在 YouTube 规模展示了这一点；SIGMA 和 AKT-Rec 在电商中展示了相关思路。剩下的问题是：在计入 freshness、invalid output 和 serving cost 后，语义 ID 生成能否持续超过强 ANN 召回。
+
+\subsection{LLM-as-enhancer 和语义特征库}
+
+LLM-as-enhancer 很可能仍是最常见工业模式。LLM 产生语义资产，传统推荐系统消费这些资产。资产可以是 user profile、item attribute、query rewrite、graph edge、atomic intent、explanation、reward feature 或 semantic ID。它有效，是因为尊重既有生产链路：feature store、ranker、monitor 和 A/B platform 不需要围绕自由生成重写。
+
+但 LLM 生成资产也需要自己的生命周期：schema、freshness policy、validation rule、drift monitor、backfill 和 rollback。如果商品 taxonomy 改变，生成 tag 可能过时；如果 prompt 改变，feature distribution 会漂移；如果 LLM provider 改变，下游校准也会移动。不能把语义资产仅当作普通 feature，它们是带 prompt 和模型 provenance 的 generated feature。
+
+\subsection{Recommendation-native foundation model}
+
+HSTU 和 MTFM 展示了另一条路线：不是适配通用 LLM，而是围绕推荐数据构建大模型。当平台有海量 action log 和足够训练/服务基础设施时，这条路线很有吸引力。因为模型直接在行为上训练，它能避免部分 semantic-collaborative mismatch，并保留推荐 compute scaling law 的可能性。
+
+代价是系统复杂度。Recommendation-native foundation model 必须处理高基数稀疏特征、非平稳 item 词表、流式更新、长历史、多目标标签和低延迟服务。HSTU 引入架构改造和 inference amortization；MTFM 使用异构 token 和场景 subgraph。这更像构建新的推荐平台，而不是加一个 LLM 组件。
+
+\subsection{Agentic recommender}
+
+Agentic recommender 的吸引力在于它可以表示用户任务，而不仅是历史点击。购物用户可能说“我要给同事买预算内礼物”，agent 可以追问、检索候选、推理约束并解释 trade-off。RecGPT-V2 通过层次 expert agent 将这一思路带入淘宝 feed 推荐；MMEACR 和 CTV agent 展示了记忆与多模态上下文如何加入。
+
+主要研究挑战是 agentic recommendation 模糊了推荐、搜索、对话和决策支持的边界。主要工业挑战是安全：与用户交互的 agent 可能操纵偏好、过度个性化、幻觉库存、泄露隐私推断或造成体验不一致。Agentic 系统需要 grounded tool、bounded action space、conversation policy 和超越 ranking metric 的评测。
+
+\section{如何阅读博客、技术报告和厂商声明}
+
+官方技术博客（例如 Google、Meta、YouTube 等）很有价值，但需要和论文区别阅读。本文使用四级证据：
+
+\begin{enumerate}
+  \item \textbf{带线上指标的一手技术论文。} 例如 HSTU、PLUM、MTFM、SIGMA、AIR、Taiji、AKT-Rec。它们可支持线上收益判断，但仍要看 baseline 和指标定义。
+  \item \textbf{线上披露不完整的一手技术报告或产品论文。} 例如部分 RecGPT、RecGPT-Mobile、大 retriever 或 foundation-model 报告。它们可支持架构判断，但不一定能支持量化业务收益。
+  \item \textbf{官方公司博客。} 适合补充产品背景、部署方向和战略脉络。博客通常缺少 baseline、流量分配、显著性检验和 guardrail，不应单独作为精确 A/B 证据。
+  \item \textbf{第三方博客或评论。} 适合发现线索和理解趋势，但量化 claim 必须回溯到一手来源。比如 YouTube semantic ID 或 Meta GEM 的第三方解读可用于识别趋势，但定量结论应落到 PLUM 或 HSTU 这类一手文档。
+\end{enumerate}
+
+这套证据纪律很重要，因为推荐系统对指标非常敏感。巨大 surface 上 0.5\% 的提升可能很有价值；弱离线子集上的 5\% 提升也可能线上消失。没有流量分配、实验周期、baseline 和 guardrail 的 headline number 不够。
+
+\section{为什么很多学术 LLM4Rec 方法不能直接线上落地}
+
+很多学术 LLM 推荐论文有价值，但不能按原样部署。问题不在于想法不够好，而是 benchmark 假设和生产约束不匹配。
+
+\textbf{候选规模。} 很多 LLM ranker 实验只排序几十或几百个候选。工业召回/排序在不同阶段可能面对百万到十亿 item。每个候选调用 LLM 的方法很难过规模关。
+
+\textbf{标签语义。} 离线数据常把观测交互当正样本、采样 item 当负样本。生产里，未观测 item 可能是未曝光、不可用、被 policy block、已消费或仅仅没有机会展示。若 LLM 评测判断的是语义合理性而不是真实用户响应，这个问题会更严重。
+
+\textbf{时间泄漏。} LLM 预训练语料可能包含 benchmark 训练期之后的 item 流行度或描述。推荐 benchmark 需要严格 temporal split 和 leakage check。
+
+\textbf{目录 grounding。} 生成一个标题不等于推荐，除非它能映射到当前可用 item。学术文本生成指标常忽略库存、重复、卖家约束、价格变化和地域可用性。
+
+\textbf{延迟和成本。} 用 7B 模型提升 NDCG 的方法，如果在关键排序链路增加数十毫秒，就可能完全不可用。因此报告 latency/throughput 的工业论文尤其有价值。
+
+\textbf{Guardrail。} CTR 或 NDCG 提升可能伴随多样性、满意度、公平、创作者曝光或 policy safety 下降。真实部署需要多指标 scorecard。
+
+\textbf{运维漂移。} Prompt、LLM 版本、taxonomy、item catalog 和用户行为都会漂移。Generated feature pipeline 必须像模型一样监控，而不是像静态元数据一样处理。
+
+\section{推荐评测协议}
+
+LLM-enhanced recommendation 的稳健评测应分阶段进行。
+
+\begin{enumerate}
+  \item \textbf{资产验证。} 检查生成 tag、semantic ID、query rewrite 和 intent summary 的有效性、覆盖、安全和漂移。
+  \item \textbf{离线排序评测。} 使用 temporal split、多种负采样方案，以及冷启动、长尾、新用户和重度用户分段指标。
+  \item \textbf{反事实和 replay 检查。} 有 logging propensity 时使用 IPS 或 doubly robust estimator，避免把缺失曝光当负偏好。
+  \item \textbf{LLM 诊断评测。} LLM judge 只用于 bounded check，如解释一致性、约束满足和语义覆盖，并用人工与行为数据校准。
+  \item \textbf{Shadow deployment。} 在真实流量上空跑，不影响曝光，用于测延迟、无效输出、特征漂移和候选重叠。
+  \item \textbf{线上 A/B。} 从小流量开始，设置明确 guardrail 和分段分析，同时看业务、用户、生态和系统指标。
+  \item \textbf{长期 holdout。} 更长周期测留存、疲劳、多样性、创作者/商家健康和 policy outcome。
+\end{enumerate}
+
+核心原则是：LLM 特有评测应该增加 gate，而不是替代线上实验。推荐系统会改变用户行为和生态激励，完整反馈环只能通过 live experiment 测量。
+
+\section{评测：离线、线上与 LLM-as-Judge}
+
+推荐离线评测本来就困难，因为缺失标签不是负样本。LLM 又增加了 prompt 顺序敏感、输出格式失败、无效 item 生成、position bias、length bias、popularity bias、幻觉和偏好漂移等问题。近期工作提出了 LLM-based preference induction、A/B agent、用户模拟、controllability-centric evaluation 和 LLM-as-a-judge for slate recommendation。
+
+这些工具有用，但不能替代线上实验。它们更适合作为中间 gate：在真实用户暴露前捕捉无效输出、不安全解释、多样性差或明显偏好不匹配。线上 A/B 仍然是业务影响的标准，长期 holdout 对留存和生态健康也仍然必要。
+
+\section{部署模式}
+
+\subsection{离线大模型资产生成}
+
+最稳妥的部署模式是离线资产生成。LLM 生成 tag、semantic ID、intent summary、user profile、graph edge 或合成样本。这些资产经过验证、缓存，再被传统 ranker 使用。ReLand、LLM-KERec、AIR、AKT-Rec 和大量 feature-engineering 论文都遵循这条路线。
+
+\subsection{近线与增量推理}
+
+近线推理以分钟或小时级更新特征或候选。SIGMA 聚合用户最近行为，在分钟级触发带 KV cache 的增量推理。这种模式在不把完整 LLM 放入每个请求的情况下提升新鲜度。
+
+\subsection{候选池增强}
+
+PLUM 不是替换 YouTube 整个召回栈，而是在现有候选池中加入生成候选。这是常见生产策略：把新 retriever 作为一个 channel 引入，控制 quota，再由下游 ranker 和 guardrail 决定最终曝光。
+
+\subsection{端侧意图 agent}
+
+RecGPT-Mobile 指向隐私保护方向：小型端侧 LLM 总结即时上下文或预测下一 query，云端处理全局召回和排序。它降低服务器成本和隐私风险，但带来模型更新、设备异构和安全挑战。
+
+\subsection{完整 large recommender model}
+
+HSTU 和 MTFM 表明 recommendation-native 大模型可以带来线上收益，但需要深度系统工程：attention 变体、feature tokenization、micro-batching、cache reuse、subgraph serving、分布式训练和监控。这不是简单接一个 LLM API。
+
+\section{风险与失效模式}
+
+\begin{itemize}
+  \item \textbf{语义-协同不匹配。} 语言模型可能推荐语义上合理但用户不会点击或购买的 item。
+  \item \textbf{校准失败。} LLM 概率或 token score 不是校准过的 CTR/CVR/GMV 估计。
+  \item \textbf{无效生成。} 生成的 item ID、semantic ID 或标题可能映射不到当前可用商品。
+  \item \textbf{流行度和曝光偏差。} LLM 可能复现 web 流行度或平台曝光模式。
+  \item \textbf{长度和位置偏差。} 更长描述、更长 prompt 或更靠前 candidate 可能获得不公平优势。
+  \item \textbf{隐私泄漏。} 用户摘要和解释可能暴露敏感行为。
+  \item \textbf{安全与政策漂移。} 即使底层 item 安全，生成解释或 query rewrite 也可能违反政策。
+  \item \textbf{陈旧性。} 离线语义资产在商品、趋势或用户上下文变化后可能过时。
+  \item \textbf{成本不透明。} 若纳入延迟、GPU 成本和索引刷新，离线 AUC 收益可能消失。
+\end{itemize}
+
+\section{实践 Playbook}
+
+构建 LLM-enhanced recommender 的团队可以按如下顺序推进：
+
+\begin{enumerate}
+  \item 明确瓶颈：冷启动、长尾、跨域迁移、内容理解、搜索 query 生成、slate diversity、解释或长历史压缩。
+  \item 选择大模型角色：资产生成器、编码器、scorer、候选生成器、reranker、judge、reward model、simulator 或 agent。
+  \item 将 LLM 输出转成推荐系统原生对象：embedding、semantic ID、item tag、graph edge、generated candidate、intent memory 或 reward feature。
+  \item 保留强生产 baseline，并先把大模型组件作为增强 channel 引入。
+  \item A/B 前验证无效输出率、幻觉、policy safety、校准、多样性和延迟。
+  \item 线上实验同时看目标指标和 guardrail，并分段分析长尾、冷启动、新用户、重度用户、创作者/商家和安全敏感类目。
+  \item 保留长期 holdout 或延迟指标，用于评估留存、满意度和生态健康。
+\end{enumerate}
+
+\section{开放问题}
+
+\textbf{统一报告。} 工业论文应报告流量分配、实验周期、baseline 成熟度、目标指标、guardrail、延迟、成本和分段效果。否则 A/B 结果很难解释。
+
+\textbf{语义缓存新鲜度。} 离线 LLM 资产服务时便宜，但可能过时。系统需要 freshness-aware semantic cache 和更新策略。
+
+\textbf{分数校准。} 生成似然、LLM judgment 和 semantic reward 必须映射到业务校准分数。
+
+\textbf{大规模 constrained decoding。} 生成式召回需要对十亿级目录进行快速前缀约束、有效性检查和 collision 处理。
+
+\textbf{长期价值。} 短期 CTR 可能与留存、信任、商家公平、创作者健康和内容多样性冲突。
+
+\textbf{端侧推荐。} 本地 intent agent 可能改善隐私和即时性，但引入设备资源和分布式安全问题。
+
+\textbf{LLM-based evaluation。} LLM judge 可以扩展标签和模拟用户，但必须用真实行为校准，不能变成 LLM 推荐系统的循环自评。
+
+\section{结论}
+
+这个领域已经不再是“LLM 能不能推荐”。LLM 可以推荐，但原生 LLM 推荐通常不是工业答案。更强的结论是：当大模型的语义、生成、多模态或推理能力被转化为可控的推荐系统对象时，它才真正有用。最有说服力的公开部署要么用 LLM 派生资产增强现有链路，要么构建带细致 serving 设计的 recommendation-native 大模型。学术界仍在扩展设计空间，尤其是语义 ID、协同对齐、智能体交互、公平和评测。下一阶段的突破很可能来自这些方向的结合：基础模型级用户/行为建模、grounded semantic ID、实时 intent memory、校准业务目标，以及衡量长期生态价值而非仅短期点击的评测协议。
+
+\appendix
+\section{论文与系统地图}
+
+本附录是结构化导航而非穷尽 bibliography。它按主要贡献归类 200 多篇相关论文、系统和技术报告。许多工作可归入多个类别，这里按最便于阅读的位置放置。
+
+\subsection{经典与 Pre-LLM 神经推荐基础}
+
+\small
+\begin{longtable}{@{}p{0.20\linewidth}p{0.27\linewidth}p{0.45\linewidth}@{}}
+\toprule
+类别 & 代表工作 & 作用\\
+\midrule
+\endfirsthead
+\toprule
+类别 & 代表工作 & 作用\\
+\midrule
+\endhead
+工业召回与排序 & Wide\&Deep; DeepFM; YouTube DNN; DLRM; Monolith; PinnerSage; PinnerFormer; MIND; ComiRec; TwinBERT; DSSM; TDM/JTM & 定义多阶段召回/排序、稀疏特征交互、大 embedding table 和 serving 约束。\\
+兴趣建模 & DIN; DIEN; DSIN; SIM; ETA; MIMN; M2GRL; BST; MIND; HPMN & 在 LLM 之前建立 target attention、兴趣演化、session dynamics 和长历史压缩。\\
+序列推荐 & GRU4Rec; Caser; SASRec; BERT4Rec; S3-Rec; CL4SRec; DuoRec; FDSA; FEARec; RecFormer & 为后续生成式推荐提供 transformer sequence modeling 基础。\\
+多模态与内容推荐 & VBPR; MMGCN; GRCN; LATTICE; MM-Rec; MISSRec; PMMRec; CLIP4Rec; VIP5 & 说明图像、文本、音频和元数据如何支撑冷启动和跨域迁移。\\
+知识与图推荐 & RippleNet; KGAT; KGIN; KGCN; LightGCN; PinSage; GraphRec; HKFR; KG-enhanced conversational recommenders & 预示 LLM 知识抽取和图增强推荐。\\
+会话推荐 & ReDial; TG-ReDial; KBRD; CR-Walker; UniCRS; MESE; TCP; C2-CRS; Chat-REC & 为 agentic recommendation 提供交互协议和评测问题。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{LLM 特征工程与数据增强}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.34\linewidth}p{0.40\linewidth}@{}}
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endfirsthead
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endhead
+用户/item 特征增强 & LLM4KGC; TagGPT; ICPC; KAR; PIE; LGIR; GIRL; LLM-Rec; HKFR; LLaMA-E; EcomGPT; TF-DCon; RLMRec; LLMRec; LLMRG; CUP; SINGLE; SAGCN; UEM; LLMHG; Llama4Rec; LLM4Vis; LoRec & LLM 抽取标签、aspect、用户兴趣、知识和简洁画像；输出通常被缓存并交给传统模型。\\
+样本与 query 生成 & GReaT; ONCE; AnyPredict; DPLLM; MINT; Agent4Rec; RecPrompt; PO4ISR; BEQUE; Agent4Ranking; PopNudge; RecInter & LLM 生成合成交互、叙事偏好、长尾 query rewrite 或模拟交互。\\
+知识抽取 & KAR; TRAWL; HKFR; LLM-KERec; ReLand; LLMRG; LlamaRec-LKG-RAG; LKPNR; DOKE & LLM 是知识生产者，而不是直接 ranker。\\
+工业资产生成 & ReLand; LLM-KERec; AIR; AKT-Rec; Taiji; RecGPT; RecGPT-Mobile & 最强生产范式：离线/近线生成或压缩语义资产，再用标准召回/排序服务。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{LLM/PLM 编码器}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endfirsthead
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endhead
+文本 item 编码 & U-BERT; UNBERT; PLM-NR; Pyramid-ERNIE; ERNIE-RS; CTR-BERT; SuKD; PREC; Tiny-NewsRec; PLM4Tag; TwHIN-BERT; RecFormer; TBIN; Social-LLM & 当 metadata 和文本关键时，编码器提升 item/user 表示。\\
+跨域与迁移编码 & ZESRec; UniSRec; TransRec; VQ-Rec; IDRec vs MoRec; S\&R Foundation; MISSRec; UFIN; PMMRec; Uni-CTR; PCDR & 用语言或多模态 embedding 支持跨域和冷启动。\\
+LLM embedding 与 adapter & LLM2BERT4Rec; LLM4ARec; UEM; CollabContext; SSNA; KERL; LLMRS; LLMHG; HLLM & 使用冻结 embedding、adapter 或层次 LLM 表示用户历史和 item 内容。\\
+工业编码器 & PLUM item semantic representations; AKT-Rec MLLM semantic clusters; MTFM heterogeneous tokens; Meta HSTU action tokens & 编码器围绕生产行为流重构，而不是只围绕自然语言。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{LLM Scoring、Ranking 与 Instruction Tuning}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endfirsthead
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endhead
+Prompted scoring/ranking & LMRecSys; Zero-shot GPT; BookGPT; PALR; LLMRanker; SetwiseRank; LiT5; LlamaRec; LLM4Rerank; LLM as explainable re-ranker & 用 LLM 对候选打分或排序；适合分析和小候选集，全量工业排序成本高。\\
+Instruction tuning & TALLRec; InstructRec; GenRec; BIGRec; DEALRec; RecRanker; Recommendation as Instruction Following; Aligning LLMs with Recommendation Knowledge; RDRec & 通过 instruction、LoRA 或 distillation 将 LLM 对齐到推荐标签和任务。\\
+协同对齐 & CoLLM; LLaRA; A-LLMRec; CLLM4Rec; LC-Rec; ControlRec; FLIP; ClickPrompt; Llama4Rec; iLoRA; CALRec & 注入 ID/协同行为信号，减少语义-协同 mismatch。\\
+检索增强排序 & ReLLa; RALLRec; LlamaRec-LKG-RAG; CRAG; retrieval-augmented conversational recommendation & LLM scoring 前检索相关用户历史、知识或候选。\\
+高效微调 & POD; LSAT; E4SRec; LightLM; MoLoRec/RecCocktail; instruction distillation; decoding acceleration frameworks & 降低计算、支持增量更新，让 LLM ranker 更可部署。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{生成式推荐与语义 ID}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endfirsthead
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endhead
+任务统一 & P5; M6-Rec; InstructRec; VIP5; UP5; P5-ID; RecSysLLM; UPSR & 将多种推荐任务转成 language modeling 或 instruction following。\\
+语义 ID 召回 & TIGER; P5-ID; How to Index Item IDs; LC-Rec; IDGenRec; LETTER; Semantic IDs for Joint Search and Recommendation; GenCDR; GLASS; DaV-Gen & 生成 item identifier，而不是打分；目标是统一召回和生成。\\
+语义 ID 改进与诊断 & Generative Recommendation with Semantic IDs handbook; Differentiable Semantic ID; Variable-Length Semantic IDs; Generating Long Semantic IDs in Parallel; SIDInspector; Qualification-Aware SID; Adaptive Collision Handling; Expressiveness Limits; LBR & 处理 collision、无效输出、长度偏差、扩展性和校准。\\
+工业语义 ID 系统 & PLUM; SIGMA; AKT-Rec; AIR intent IDs; Taiji semantic features; Gryphon; YouTube SemanticID discussions & 展示语义 ID 如何进入真实召回和排序。\\
+扩散与其他生成范式 & Diffusion recommendation surveys; continuous-token diffusion; session generative recommendation; POI semantic-ID generation; chain-of-recommendation & 将生成式推荐扩展到自回归文本/ID 之外。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{智能体、会话与交互推荐}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endfirsthead
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endhead
+会话推荐 & TG-ReDial; KBRD; UniCRS; MESE; Chat-REC; Large Language Models as Zero-Shot Conversational Recommenders; retrieval-augmented CRS & 自然语言偏好澄清和解释。\\
+推荐智能体 & Agent4Rec; AgentCF; MACRec; RecMind; iAgent; MMEACR; connected-TV agentic recommendation; group recommender LLM agents; controllability-centric collaborative agents & 使用规划、记忆、反思、工具调用和多智能体协作。\\
+用户模拟与 A/B agent & A/B Agent; RecInter; generative agents in recommendation; LLM user preference induction; LLM-as-a-judge slate recommendation & 在线实验前模拟用户、扩展标签或评估 slate。\\
+工业 agentic 系统 & RecGPT; RecGPT-V2; RecGPT-Mobile; Ranking Engineer Agent style ads tooling; creator/advertiser matching with Gemini-like models & 将 agent 用于意图推理、工程效率或匹配流程。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{可信、公平、鲁棒与安全}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endfirsthead
+\toprule
+子方向 & 代表工作 & 摘要\\
+\midrule
+\endhead
+公平与偏差 & FaiRLLM; RECLLM; job recommendation demographic bias; fairness in LLM-based recommender systems survey; provider fairness in news recommendation; popularity bias studies & 研究人口属性、provider、曝光、recency 和 popularity bias。\\
+鲁棒与隐私 & LoRec; STELLA; exact and efficient unlearning for LLM recommendation; incremental learning; memorization behavior in generative recommendation & 处理不稳定、隐私、投毒和记忆化。\\
+解释性 & XRec; RecExplainer; explanation generation surveys; uncertainty-aware explainable recommendation; coherent natural-language explanations & LLM 可以解释，但解释必须 faithful 和 safe。\\
+隐私与端侧 & DPLLM; RecGPT-Mobile; federated content representation; privacy-preserving local LLM recommenders & 减少集中暴露用户历史和敏感画像。\\
+评测与可控 & LLM-as-a-judge; user preference induction; controllability-centric evaluation; A/B Agent; length bias reduction; position-bias-aware reranking & 在静态离线标签之外评估推荐行为。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{扩展逐条文献目录}
+
+上面的地图按主题归类，本节进一步给出逐条 annotated catalog。它有意覆盖更宽：经典推荐、预训练语言模型推荐、LLM 增强推荐、生成式推荐、工业系统、评测、公平鲁棒以及 2026 年近期预印本。目的不是说所有工作成熟度相同，而是展示研究前沿和生产实践如何连接。
+
+\scriptsize
+\begin{longtable}{@{}p{0.13\linewidth}p{0.23\linewidth}p{0.12\linewidth}p{0.44\linewidth}@{}}
+\caption{代表性推荐与大模型工作逐条目录。}
+\label{tab:catalog-zh}\\
+\toprule
+方向 & 工作或系统 & 时间 & 主要贡献或相关性\\
+\midrule
+\endfirsthead
+\toprule
+方向 & 工作或系统 & 时间 & 主要贡献或相关性\\
+\midrule
+\endhead
+经典深度推荐 & Wide \& Deep & 2016 & 结合 memorization 与 generalization，是工业 app 推荐基础架构之一。\\
+经典深度推荐 & YouTube DNN & 2016 & 定义大规模视频推荐的 candidate generation 与 ranking 范式。\\
+经典深度推荐 & DeepFM & 2017 & 无需手工交叉特征即可学习 CTR 特征交互。\\
+经典深度推荐 & NCF & 2017 & 神经协同过滤基线。\\
+经典深度推荐 & DIN & 2018 & 在 CTR 预测中引入 target attention。\\
+经典深度推荐 & DIEN & 2019 & 建模用户兴趣演化。\\
+经典深度推荐 & DSIN & 2019 & Session-level user interest 建模。\\
+经典深度推荐 & MIND & 2019 & 多兴趣表示用于大规模召回。\\
+经典深度推荐 & ComiRec & 2020 & 提取多兴趣并支持可控候选生成。\\
+经典深度推荐 & SIM & 2020 & 面向长历史的 target-aware retrieval。\\
+经典深度推荐 & ETA & 2021 & 工业长历史场景下的高效 target attention。\\
+经典深度推荐 & DLRM & 2019 & Meta 规模 sparse embedding 与 dense interaction 代表架构。\\
+经典深度推荐 & Monolith & 2022 & ByteDance 实时推荐训练系统。\\
+经典深度推荐 & PinnerSage & 2018 & Pinterest 图召回系统。\\
+经典深度推荐 & PinnerFormer & 2022 & Pinterest Transformer 用户表示。\\
+经典深度推荐 & TDM/JTM & 2018--2019 & 树索引与深度召回模型联合优化。\\
+序列推荐 & GRU4Rec & 2015 & RNN session recommendation 早期代表。\\
+序列推荐 & Caser & 2018 & 卷积式序列推荐。\\
+序列推荐 & SASRec & 2018 & 自注意力序列推荐，后续 transformer rec 基础。\\
+序列推荐 & BERT4Rec & 2019 & 双向 masked-item 序列建模。\\
+序列推荐 & S3-Rec & 2020 & 序列推荐自监督预训练任务。\\
+序列推荐 & CL4SRec & 2021 & 对比学习增强序列推荐鲁棒性。\\
+序列推荐 & DuoRec & 2022 & 对比正则化序列推荐。\\
+序列推荐 & FDSA / FEARec & 2019--2023 & 特征级自注意力与频域增强序列推荐。\\
+序列推荐 & RecFormer & 2023 & 文本丰富场景下的 language representation sequential rec。\\
+序列推荐 & HSTU & 2024 & Recommendation-native sequential transducer，可扩展至万亿参数。\\
+PLM 推荐 & U-BERT / UNBERT & 2021 & BERT 风格用户/新闻表示预训练。\\
+PLM 推荐 & PLM-NR & 2021 & 预训练语言模型用于新闻内容表示。\\
+PLM 推荐 & Pyramid-ERNIE / ERNIE-RS & 2021 & 百度搜索排序和召回中的 PLM 工业实践。\\
+PLM 推荐 & CTR-BERT / SuKD & 2021--2022 & 大 PLM teacher 蒸馏与 sponsored search CTR 特征。\\
+PLM 推荐 & PREC / Tiny-NewsRec & 2022 & 新闻推荐的高效 PLM 表示。\\
+PLM 推荐 & TwHIN-BERT & 2022 & 融合社交网络的多语言 tweet 表示。\\
+PLM 推荐 & Text Is All You Need & 2023 & 文本表示支撑序列推荐。\\
+跨域推荐 & ZESRec & 2021 & 通过语义表示做零样本推荐。\\
+跨域推荐 & UniSRec & 2022 & 通用序列表示学习。\\
+跨域推荐 & VQ-Rec & 2023 & 向量量化 item 表示用于迁移推荐。\\
+跨域推荐 & ID vs Modality Revisited & 2023 & 分析 ID 模型与模态模型适用边界。\\
+跨域推荐 & Search and Recommendation Foundation Model & 2023 & 面向冷启动的搜推统一基础模型。\\
+跨域推荐 & MISSRec / PMMRec & 2023--2024 & 多模态兴趣预训练和可迁移推荐。\\
+LLM 综述 & How Can RS Benefit from LLMs & 2024 & 总结 LLM 在推荐链路中的角色。\\
+LLM 综述 & LLMs for Recommendation Survey & 2023 & LLM4Rec 早期系统性综述。\\
+LLM 综述 & Next-generation LLM-based RS & 2024 & 表示理解、策略使用、工业部署三层 taxonomy。\\
+LLM 综述 & LLMs for Generative Recommendation & 2024 & 生成式推荐与 LLM 的综述。\\
+LLM 综述 & Multimodal LLM Recommender Survey & 2025 & 多模态推荐中 LLM 的分类。\\
+LLM 综述 & LLM Agents for RS & 2025 & 推荐和搜索中的 LLM agent。\\
+LLM 综述 & Fairness in LLM4Rec Survey & 2026 & 偏差机制和公平目标综述。\\
+LLM 特征 & TagGPT & 2023 & LLM 作为零样本多模态 tagger。\\
+LLM 特征 & LLM4KGC & 2023 & 电商知识图谱 relation labeling。\\
+LLM 特征 & KAR & 2023 & LLM 知识增强 open-world recommendation。\\
+LLM 特征 & PIE & 2023 & ChatGPT 商品信息抽取。\\
+LLM 特征 & LGIR / GIRL & 2023 & 招聘推荐中的 LLM 生成与对抗框架。\\
+LLM 特征 & LLM-Rec prompting & 2023 & Prompting LLM 做个性化推荐。\\
+LLM 特征 & HKFR & 2023 & LLM 异构知识融合。\\
+LLM 特征 & LLaMA-E / EcomGPT & 2023 & 电商内容生成与 instruction tuning。\\
+LLM 特征 & RLMRec / LLMRec graph & 2023 & LLM 表示学习和图增强推荐。\\
+LLM 特征 & CUP / SINGLE & 2023 & Review 画像和浏览流建模。\\
+LLM 特征 & LLMHG & 2024 & LLM 指导多视角超图推荐。\\
+LLM 数据 & GReaT & 2023 & 语言模型生成表格数据。\\
+LLM 数据 & ONCE & 2023 & 开闭源 LLM 增强内容推荐。\\
+LLM 数据 & AnyPredict / DPLLM & 2023 & 表格预测基础模型与差分隐私 query 生成。\\
+LLM 数据 & MINT & 2023 & Narrative-driven recommendation。\\
+LLM 数据 & Agent4Rec & 2023 & 生成式 agent 模拟推荐交互。\\
+LLM 数据 & RecPrompt / PO4ISR & 2023 & 新闻 prompt tuning 和意图驱动 session 推荐。\\
+LLM 数据 & BEQUE & 2023 & 淘宝长尾 query rewrite。\\
+LLM 排序 & Zero-shot recommendation as LM & 2021 & GPT 风格零样本 next-item framing。\\
+LLM 排序 & UniTRec / Prompt4NR & 2023 & Text-to-text transformer 与 prompt news recommendation。\\
+LLM 排序 & FLAN-T5 rating prediction & 2023 & 评估 LLM 是否理解用户评分。\\
+LLM 排序 & TALLRec & 2023 & LLaMA-LoRA 偏好判断。\\
+LLM 排序 & GLRec & 2023 & 在线招聘推荐中的图数据理解。\\
+LLM 排序 & BERT4CTR & 2023 & PLM 与非文本 CTR 特征结合。\\
+LLM 排序 & ReLLa & 2024 & 检索增强 lifelong behavior comprehension。\\
+LLM 排序 & ClickPrompt & 2024 & CTR 模型作为 PLM prompt generator。\\
+LLM 排序 & SetwiseRank / LLMRanker & 2023 & Setwise/listwise LLM 排序与细粒度相关标签。\\
+LLM 排序 & CoLLM & 2024 & 协同 embedding 注入 LLM。\\
+LLM 排序 & FLIP / CLLM4Rec & 2023--2024 & ID 模型与 PLM 对齐、协同 LLM 推荐。\\
+LLM 排序 & RecExplainer & 2023 & LLM 对齐推荐模型解释。\\
+LLM 排序 & E4SRec / LSAT / DEALRec & 2023--2024 & 高效、增量和数据高效 LLM 推荐。\\
+生成式推荐 & P5 & 2022 & 文本到文本统一推荐任务。\\
+生成式推荐 & M6-Rec & 2022 & 开放式工业生成推荐模型。\\
+生成式推荐 & GPT4Rec / GenRec & 2023 & GPT/LLM 生成式推荐。\\
+生成式推荐 & VIP5 & 2023 & 多模态推荐基础模型。\\
+生成式推荐 & P5-ID / PALR & 2023 & 推荐基础模型的 ID 设计与个性化 LLM。\\
+生成式推荐 & ChatGPT zero-shot ranker / AGR & 2023 & ChatGPT 推荐能力早期评估。\\
+生成式推荐 & GPTRec / UP5 & 2023 & GPT 序列推荐与公平推荐基础模型。\\
+生成式推荐 & BIGRec / KP4SR & 2023 & Bi-step grounding 和知识 prompt tuning。\\
+生成式推荐 & POD / RaRS & 2023 & Prompt distillation 与 RAG 推荐。\\
+生成式推荐 & LANCER / TransRec & 2023 & 内容增强 LM 和 LLM-rec transition。\\
+生成式推荐 & AgentCF / P4LM & 2023--2024 & Agent collaborative learning 与 RL 个性化推荐。\\
+生成式推荐 & LightLM / LlamaRec & 2023 & 轻量 LM 与两阶段 LLM ranking。\\
+生成式推荐 & LC-Rec / ControlRec / LLaRA & 2023--2024 & 协同语义、可控推荐和 LLM 推荐助手。\\
+生成式推荐 & DRDT / STELLA & 2023 & 反思推荐与 LLM 推荐稳定性问题。\\
+语义 ID & TIGER & 2023 & 语义 ID 生成式召回。\\
+语义 ID & How to Index Item IDs & 2023 & 推荐基础模型 item ID 设计。\\
+语义 ID & Better Generalization with Semantic IDs & 2023 & Ranking 中语义 ID 泛化案例。\\
+语义 ID & LMIndexer & 2023 & 语言模型作为 semantic indexer。\\
+语义 ID & LETTER & 2024 & Learnable item tokenization。\\
+语义 ID & Unifying generative and dense retrieval & 2024 & 生成式和稠密召回统一。\\
+语义 ID & Inductive GR via speculation & 2024 & Retrieval-based speculation。\\
+语义 ID & Long Semantic IDs in Parallel & 2025 & 并行生成长语义 ID。\\
+语义 ID & Joint Search and Recommendation SID & 2025 & 搜索和推荐共享 semantic ID。\\
+语义 ID & SID handbook / HiD-VAE & 2025 & 实践指南和层次 disentangled SID。\\
+语义 ID & Differentiable / Variable-Length SID & 2026 & 端到端学习和自适应长度 SID。\\
+语义 ID & GenCDR / GLASS & 2025--2026 & 跨域语义 tokenization 和长序列 SID-tier。\\
+语义 ID & Gryphon / SIDInspector & 2026 & 工业 item-level scoring 与 SID 诊断。\\
+语义 ID & LBR & 2026 & LLM 推荐长度偏差缓解。\\
+大推荐模型 & HSTU & 2024 & 万亿参数序列 transducer，有线上 A/B 证据。\\
+大推荐模型 & Scaling recommender transformers & 2025 & 推荐 transformer scaling 研究。\\
+大推荐模型 & Large User Model & 2025 & 工业推荐 scaling law 三步范式。\\
+大推荐模型 & MTFM & 2026 & 美团多场景推荐基础模型。\\
+大推荐模型 & RecBase / OneMall / GPR & 2025--2026 & 零样本、多场景、广告推荐的基础模型化。\\
+工业 A/B & ReLand & 2024 & 支付宝 LLM reasoning pool，CTR/CVR 提升。\\
+工业 A/B & LLM-KERec & 2024 & 支付宝 inferential KG，转化和 GMV 提升。\\
+工业 A/B & HSTU GRs & 2024 & Meta 序列 transducer，12.4\% online lift。\\
+工业 A/B & SORT-Gen & 2025 & 淘宝生成式重排，click/GMV 提升。\\
+工业 A/B & PLUM & 2025 & YouTube semantic-ID 生成式召回，live experiment 提升。\\
+工业 A/B & RecGPT / RecGPT-V2 & 2025 & 淘宝意图推理和多智能体推荐，IPV/CTR/GMV/NER 提升。\\
+工业 A/B & MTFM / SIGMA & 2026 & 美团与 AliExpress 推荐基础模型/生成式多任务模型。\\
+工业 A/B & AIR / Taiji / AKT-Rec & 2026 & 快手和天猫 LLM/semantic-ID 工业落地。\\
+工业原型 & Universal LLM Retriever & 2025 & 工业多目标召回的统一 LLM retriever。\\
+工业原型 & RecGPT-Mobile & 2026 & 淘宝端侧 intent agent。\\
+工业原型 & AIGQ & 2026 & 淘宝电商 query recommendation。\\
+工业原型 & Meta GEM discussions & 2025 & 广告 foundation model 方向，需区分第三方博客和一手论文。\\
+多模态 & MM-Rec / VIP5 & 2022--2023 & 多模态新闻推荐和推荐基础模型。\\
+多模态 & MISSRec / PMMRec & 2023--2024 & 多模态兴趣迁移和可迁移推荐。\\
+多模态 & MMREC & 2024 & LLM-based multimodal recommender。\\
+多模态 & AKT-Rec / MMEACR & 2026 & MLLM 长尾推荐与多模态记忆 agent。\\
+会话推荐 & ReDial / TG-ReDial & 2018--2020 & 会话电影推荐和 topic-guided 对话。\\
+会话推荐 & KBRD / UniCRS & 2019--2022 & 知识增强和统一 CRS。\\
+会话推荐 & Chat-REC & 2023 & 交互式、可解释 LLM 推荐。\\
+会话推荐 & Zero-shot conversational LLMs & 2023 & LLM 零样本会话推荐评估。\\
+智能体推荐 & Agent4Rec / AgentCF & 2023--2024 & 推荐中的生成式 agent 与协同 agent。\\
+智能体推荐 & MACRec / RecMind & 2024 & 多智能体协作和工具推理。\\
+智能体推荐 & iAgent & 2025 & 用户和推荐系统之间的 LLM shield。\\
+智能体推荐 & CTV agent / Group recommender LLM & 2026 & CTV 内容发现和群体偏好建模。\\
+评测 & LLMRec benchmark & 2023 & LLM 推荐任务 benchmark。\\
+评测 & Tapping LLM Potential & 2024 & LLM 推荐经验分析框架。\\
+评测 & A/B Agent & 2026 & 多模态用户行为模拟用于 A/B。\\
+评测 & LLM-as-a-judge slate & 2025 & LLM 作为 slate world model/judge。\\
+评测 & User Preference Induction & 2026 & LLM 扩展离线 top-N relevance judgment。\\
+评测 & Controllability Evaluation & 2026 & 协作 agent 评估可控性。\\
+公平 & FaiRLLM / UP5 & 2023 & LLM 推荐公平评估和公平基础模型。\\
+公平 & ChatNews provider fairness & 2023 & 新闻推荐 provider fairness 和 fake news。\\
+公平 & Job recommendation demographic bias & 2023 & LLM 招聘推荐中的机会不平等。\\
+公平 & RECLLM & 2024 & provider fairness、稳定性和 recency。\\
+公平 & LLM4Rec fairness survey & 2026 & 偏差机制和缓解策略综述。\\
+鲁棒 & LoRec & 2024 & 抗 poisoning sequential recommendation。\\
+鲁棒 & STELLA & 2023 & LLM 推荐不稳定性。\\
+鲁棒 & Exact unlearning & 2024 & LLM 推荐中的机器遗忘。\\
+鲁棒 & Memorization in GR & 2026 & 生成式推荐中的记忆化行为。\\
+解释 & XRec / RecExplainer & 2023--2024 & 可解释推荐和模型解释对齐。\\
+解释 & Coherence in explanations & 2023 & 推荐自然语言解释一致性。\\
+解释 & LLM explanation survey & 2024 & LLM 推荐解释综述。\\
+隐私 & DPLLM / federated prompt content & 2023--2024 & 差分隐私和联邦内容表示。\\
+隐私 & RecGPT-Mobile & 2026 & 端侧 LLM 意图理解。\\
+广告电商 & SuKD / BERT4CTR / Uni-CTR & 2022--2023 & Sponsored search、CTR、multi-domain CTR 中的 PLM/LLM。\\
+广告电商 & Taiji / RecGPT / AIGQ & 2025--2026 & 广告推荐、淘宝首页和 query recommendation。\\
+新闻推荐 & PLM-NR / Tiny-NewsRec & 2021--2022 & PLM 新闻推荐。\\
+新闻推荐 & Prompt4NR / RecPrompt & 2023 & Prompt news recommendation。\\
+新闻推荐 & LLM-based news survey & 2025 & 新闻推荐中的 LLM 综述。\\
+POI/本地 & Generative next POI with SID & 2025 & 语义 ID POI 推荐。\\
+POI/本地 & BTRec / itinerary LM & 2023 & 轨迹和旅游 itinerary 推荐。\\
+搜推统一 & S\&R foundation model & 2023 & 冷启动搜推统一。\\
+搜推统一 & SID for joint search and rec & 2025 & 搜索和推荐共享 semantic ID。\\
+搜推统一 & AIGQ / BEQUE & 2023--2026 & 电商 query recommendation 和长尾 query rewrite。\\
+近期 2026 & AIR / Taiji & 2026 & 快手 LLM semantic intent 与广告 reward alignment。\\
+近期 2026 & MTFM / SIGMA / AKT-Rec & 2026 & 美团、AliExpress、天猫大模型推荐落地。\\
+近期 2026 & LBR / MMEACR & 2026 & 长度偏差和多模态记忆 agent。\\
+近期 2026 & CTV agent / Preference induction / Controllability eval & 2026 & 智能体推荐、LLM 离线评测和可控性评估。\\
+近期 2026 & Consensus vs Dissent / Intent-driven SID news & 2026 & 群体偏好建模和 grounded conversational news recommendation。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{主要参考文献}
+
+\begin{thebibliography}{99}
+\bibitem{wide} H.-T. Cheng et al. Wide \& Deep Learning for Recommender Systems. DLRS, 2016.
+\bibitem{youtube} P. Covington, J. Adams, and E. Sargin. Deep Neural Networks for YouTube Recommendations. RecSys, 2016.
+\bibitem{din} G. Zhou et al. Deep Interest Network for Click-Through Rate Prediction. KDD, 2018.
+\bibitem{sasrec} W.-C. Kang and J. McAuley. Self-Attentive Sequential Recommendation. ICDM, 2018.
+\bibitem{bert4rec} F. Sun et al. BERT4Rec: Sequential Recommendation with Bidirectional Encoder Representations from Transformer. CIKM, 2019.
+\bibitem{dlrm} M. Naumov et al. Deep Learning Recommendation Model for Personalization and Recommendation Systems. arXiv:1906.00091, 2019.
+\bibitem{p5} S. Geng et al. Recommendation as Language Processing: A Unified Pretrain, Personalized Prompt and Predict Paradigm. RecSys, 2022.
+\bibitem{m6rec} Z. Cui et al. M6-Rec: Generative Pretrained Language Models are Open-Ended Recommender Systems. arXiv:2205.08084, 2022.
+\bibitem{tallrec} K. Bao et al. TALLRec: An Effective and Efficient Tuning Framework to Align Large Language Model with Recommendation. RecSys, 2023.
+\bibitem{chatrec} Y. Gao et al. Chat-REC: Towards Interactive and Explainable LLMs-Augmented Recommender System. arXiv:2303.14524, 2023.
+\bibitem{surveybenefit} Z. Lin et al. How Can Recommender Systems Benefit from Large Language Models: A Survey. ACM TOIS, 2024.
+\bibitem{nextgensurvey} J. Li et al. Towards Next-Generation LLM-based Recommender Systems: A Survey and Beyond. arXiv:2410.19744, 2024.
+\bibitem{gensurvey} L. Lin et al. Large Language Models for Generative Recommendation: A Survey and Visionary Discussions. LREC-COLING, 2024.
+\bibitem{tiger} S. Rajput et al. Recommender Systems with Generative Retrieval. NeurIPS, 2023.
+\bibitem{rella} Y. Lin et al. ReLLa: Retrieval-enhanced Large Language Models for Lifelong Sequential Behavior Comprehension in Recommendation. WWW, 2024.
+\bibitem{collm} Y. Zhang et al. Collaborative Large Language Model for Recommender Systems. WWW, 2024.
+\bibitem{llara} J. Liao et al. LLaRA: Large Language-Recommendation Assistant. SIGIR, 2024.
+\bibitem{hstu} J. Zhai et al. Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations. arXiv:2402.17152, 2024.
+\bibitem{reland} L. Yu et al. ReLand: Integrating Large Language Models' Insights into Industrial Recommenders via a Controllable Reasoning Pool. RecSys, 2024.
+\bibitem{llmkerec} Q. Zhao et al. Breaking the Barrier: Utilizing Large Language Models for Industrial Recommendation Systems through an Inferential Knowledge Graph. CIKM, 2024.
+\bibitem{mtfm} Meituan MTFM Team. MTFM: A Scalable and Alignment-free Foundation Model for Industrial Recommendation in Meituan. arXiv:2602.11235, 2026.
+\bibitem{sigma} D. Sun et al. SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress. arXiv:2602.22913, 2026.
+\bibitem{sortgen} Y. Meng et al. A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao. arXiv:2505.07197, 2025.
+\bibitem{air} Y. Chen et al. Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations. arXiv:2606.10357, 2026.
+\bibitem{taiji} Kuaishou Taiji Team. Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation. arXiv:2606.03866, 2026.
+\bibitem{plum} A. Tsai et al. PLUM: Adapting Pre-trained Language Models for Industrial-scale Generative Recommendations. arXiv:2510.07784, 2025.
+\bibitem{aktrec} C. Yan et al. From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs. arXiv:2605.23310, 2026.
+\bibitem{recgpt} RecGPT Team. RecGPT Technical Report. arXiv:2507.22879, 2025.
+\bibitem{recgptv2} RecGPT Team. RecGPT-V2 Technical Report. arXiv:2512.14503, 2025.
+\bibitem{recgptmobile} B. Zhang et al. RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation. arXiv:2605.04726, 2026.
+\bibitem{lbr} LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation. arXiv:2607.04270, 2026.
+\bibitem{mmeacr} Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation. arXiv:2607.07108, 2026.
+\bibitem{ctvagent} An LLM-powered Agentic Recommendation System for Connected TV Content Discovery. arXiv:2607.09988, 2026.
+\bibitem{eval2607} User Preference Induction with LLMs for Offline Top-N Recommendation Evaluation. arXiv:2607.11354, 2026.
+\bibitem{control2607} J. Zhou et al. Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents. arXiv:2607.13418, 2026.
+\end{thebibliography}
+
+\end{document}

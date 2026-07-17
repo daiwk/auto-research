@@ -1,0 +1,1002 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=0.9in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black
+}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=0.25em}
+\renewcommand{\arraystretch}{1.16}
+\setlength{\tabcolsep}{2.5pt}
+\newcommand{\metric}[1]{\textbf{#1}}
+\newcommand{\term}[1]{\textit{#1}}
+
+\title{Recommendation and Large Models in Research and Industry:\\
+A Comprehensive Survey from Neural Ranking to LLM-Enhanced, Generative, and Agentic Recommenders}
+\author{GPT-5.5}
+\date{July 17, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Large language models, multimodal foundation models, large sequential transducers, and generative retrieval models are reshaping recommender systems. Early work asked whether language models could act as zero-shot recommenders or explanation generators; recent work asks how to build foundation-scale retrieval, ranking, re-ranking, intent reasoning, conversational recommendation, and user simulation systems that survive production constraints. This survey provides a broad view of the field from approximately 2016 to July 2026. It covers classical deep recommenders, transformer sequential recommenders, pre-trained language models for recommendation, LLM-as-feature and LLM-as-ranker methods, semantic-ID and generative retrieval, multimodal and knowledge-enhanced systems, agentic recommenders, LLM-based evaluation, fairness and safety, and industrial deployments. We distinguish three evidence tiers: (1) public industrial systems with online A/B results, (2) industrial or production-oriented systems with deployment claims or offline/internal evaluation but limited public A/B disclosure, and (3) academic systems that define the technical frontier but are not yet proven in large-scale online traffic. Across the literature, the central industrial lesson is that large models rarely replace the whole recommender stack. The most successful systems transform large-model capability into recommender-native artifacts: semantic IDs, compact user-intent memories, generated candidates, knowledge graph edges, multimodal tags, reward features, or calibrated ranking signals. We conclude with a deployment playbook, a risk analysis, and a paper map covering more than two hundred related works and systems.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope, Evidence Tiers, and Survey Method}
+
+The phrase ``recommendation plus large models'' now covers several different technologies. It may refer to a BERT-style encoder used to represent news articles, a T5-style text-to-text model such as P5, a LLaMA-style model tuned for binary preference prediction, a multimodal LLM that extracts product attributes, a semantic-ID generator for retrieval, a trillion-parameter sequential transducer for ranking, or an agent that plans multi-step interaction with a user. These systems have different failure modes and very different deployment costs. Treating them as one category hides the engineering decisions that matter most.
+
+This survey uses three evidence tiers.
+
+\begin{enumerate}
+  \item \textbf{Tier 1: public online evidence.} The source reports production A/B or live experiment results. These cases are the strongest evidence for industrial value, although the metrics and baselines are still not directly comparable.
+  \item \textbf{Tier 2: production-oriented but incomplete online disclosure.} The source is industrial, uses real logs, or describes deployment architecture, but does not disclose full online A/B results. These works are valuable for architecture and systems lessons but should not be counted as proven online wins.
+  \item \textbf{Tier 3: academic and pre-production research.} The work advances modeling, alignment, evaluation, robustness, fairness, or data methods, usually on public datasets. These papers define the technical frontier and frequently precede later deployment, but their offline gains should not be confused with production impact.
+\end{enumerate}
+
+The time span is broad. We start from neural collaborative filtering, Wide\&Deep, YouTube DNN, DIN, DIEN, SASRec, BERT4Rec, and DLRM, because these systems explain why the industrial recommender stack looks the way it does. We then follow the shift to pre-trained language models and LLMs: P5, M6-Rec, TALLRec, Chat-REC, InstructRec, ReLLa, CoLLM, LLaRA, A-LLMRec, TIGER, HSTU, PLUM, SIGMA, RecGPT, and many others. The latest papers included in the paper map are from July 2026, including LBR for length bias, multimodal memory-enhanced agent collaboration, LLM-based offline evaluation, connected-TV agentic recommendation, and controllability-centric evaluation.
+
+\section{Historical Background: Why Recommendation Did Not Simply Become NLP}
+
+\subsection{The industrial recommendation stack}
+
+Industrial recommenders are multi-stage systems. Retrieval or candidate generation narrows a corpus of millions or billions of items. Pre-ranking and ranking score candidates under tight latency budgets. Re-ranking or slate optimization balances diversity, novelty, fairness, revenue, inventory, creator or merchant health, and policy constraints. Feature stores, streaming logs, online learning, ANN indexes, experimentation platforms, and guardrails are as important as the neural model itself.
+
+This stack grew around sparse IDs, dense features, and behavior logs. Wide\&Deep and DeepFM made cross features and dense embeddings practical for CTR prediction. YouTube DNN candidate generation showed how large-scale retrieval could be framed as multiclass classification over a huge corpus. DIN and DIEN emphasized target attention and evolving user interest. SASRec and BERT4Rec brought transformer sequence modeling to sequential recommendation. DLRM and its industrial descendants scaled sparse embedding tables and feature interaction networks. These models are not obsolete. They remain the serving substrate into which many LLM-based methods are inserted.
+
+\subsection{What language models add}
+
+Language models add four capabilities that classical ID recommenders do not naturally have.
+
+\begin{itemize}
+  \item \textbf{Semantic abstraction.} A product title, review, query, image caption, video transcript, or user self-description can be mapped into a space where cold-start and cross-domain transfer become easier.
+  \item \textbf{Instruction following.} Recommendation tasks can be expressed as prompts: predict whether a user will like an item, rank a candidate list, explain a recommendation, ask a clarifying question, or generate a search query.
+  \item \textbf{World knowledge and reasoning.} LLMs can infer seasonal intent, substitute/complement relations, event-driven preferences, and high-level attributes not explicitly present in interaction logs.
+  \item \textbf{Text generation and interaction.} LLMs can produce explanations, summaries, conversational turns, synthetic user profiles, and natural-language critiques of recommendation results.
+\end{itemize}
+
+At the same time, recommenders impose requirements that general LLMs do not satisfy by default: calibrated scores, low latency, huge catalogs, frequent item churn, counterfactual evaluation, business constraints, and stable online experimentation. Much of the literature can be read as attempts to reconcile these two worlds.
+
+\section{A Taxonomy of Large-Model Recommendation}
+
+\subsection{LLM as feature engineer}
+
+The simplest and most deployable role is feature engineering. A frozen or lightly tuned LLM extracts item tags, user profiles, intent summaries, review aspects, query rewrites, graph edges, or synthetic samples. Examples include TagGPT, LLM4KGC, KAR, HKFR, RLMRec, LLMRec with graph augmentation, CUP, SINGLE, LLMHG, Llama4Rec, ONCE, MINT, RecPrompt, BEQUE, and Agent4Ranking. The model is not asked to score every candidate online; it generates artifacts that can be cached and consumed by conventional retrieval or ranking systems.
+
+This is why LLM-as-enhancer is often industrially attractive. It localizes risk. If the generated attribute is noisy, the downstream ranker can learn to ignore it; if the LLM is expensive, generation can run offline; if a policy rule changes, the feature pipeline can be audited separately.
+
+\subsection{LLM as encoder}
+
+Pre-trained language models can encode text-rich items and user histories. This line starts before the current LLM wave: U-BERT, UNBERT, PLM-NR, Pyramid-ERNIE, ERNIE-RS, CTR-BERT, Tiny-NewsRec, RecFormer, UniSRec, VQ-Rec, MISSRec, PMMRec, and many news, job, software, and tourism recommenders. Later work adds larger LLM embeddings, instruction-tuned encoders, or adapters.
+
+Encoder approaches fit industrial stacks because embeddings can be precomputed, indexed, distilled, and combined with ID embeddings. Their limitation is that they often capture content similarity better than collaborative preference. This is the semantic-collaborative gap that motivates CoLLM, LLaRA, A-LLMRec, LLM2BERT4Rec, LC-Rec, ControlRec, and related alignment methods.
+
+\subsection{LLM as scorer or ranker}
+
+Another line turns recommendation into language classification or ranking. TALLRec expresses user history and a candidate item as an instruction and asks the LLM to answer yes/no. InstructRec and RecRanker use instruction tuning. SetwiseRank and listwise LLM rankers use comparative prompting to rank candidate sets. ReLLa retrieves relevant behavior snippets before prompting an LLM, while LlamaRec uses a two-stage retrieval-then-rank design. These systems are attractive for controllability and cold-start reasoning, but raw LLM scoring is usually too slow and poorly calibrated for large industrial ranking.
+
+\subsection{LLM as generator}
+
+Generative recommendation treats the output item, item ID, semantic ID, query, explanation, or slate as a generated sequence. P5 and M6-Rec framed multiple recommendation tasks as language processing. GPT4Rec, GenRec, BIGRec, PALR, LightLM, LLaRA, LC-Rec, IDGenRec, TIGER, and many semantic-ID systems extend this idea. The key design question is the output vocabulary: textual item titles are human-readable but ambiguous and hard to ground; numeric IDs are precise but semantically empty; semantic IDs offer a compact compromise.
+
+\subsection{Large recommendation models and sequential transducers}
+
+Not all large recommendation models are LLMs. Meta's HSTU-based Generative Recommenders reformulate industrial recommendation as sequential transduction over user actions and scale to 1.5 trillion parameters, reporting a 12.4\% online A/B improvement and power-law scaling with compute \cite{hstu}. Meituan's MTFM builds a multi-scenario recommendation foundation model with heterogeneous tokens \cite{mtfm}. These models borrow from the language-model scaling playbook but are trained on action streams, sparse IDs, and recommender objectives.
+
+\subsection{Agentic and conversational recommenders}
+
+Agentic recommenders use LLMs for planning, tool use, memory, self-reflection, or multi-agent collaboration. Chat-REC and conversational systems explore interactive recommendation. MACRec, AgentCF, iAgent, RecMind, RecGPT-V2, MMEACR, LLM-as-a-judge slate recommenders, and connected-TV agentic systems extend this direction. The promise is richer preference elicitation and better explanations. The industrial challenge is predictable behavior, latency, user safety, and evaluation.
+
+\section{Core Academic Milestones}
+
+\subsection{P5 and the text-to-text unification idea}
+
+P5, or Pretrain, Personalized Prompt, and Predict, was a milestone because it made the argument that recommendation tasks can be unified as text-to-text learning \cite{p5}. Rating prediction, sequential recommendation, explanation generation, review summarization, and direct recommendation can share the same language-model objective. P5 did not solve industrial serving, but it changed how researchers thought about task unification.
+
+\subsection{M6-Rec and open-ended industrial pretraining}
+
+M6-Rec extended a large generative pre-trained language model to recommendation and argued that industrial recommenders need open-ended support for multiple domains, tasks, and modalities \cite{m6rec}. It converted recommendation tasks into language understanding or generation tasks and emphasized sample-efficient downstream adaptation. It is an important bridge between academic LLM4Rec and industrial foundation models.
+
+\subsection{TALLRec and instruction tuning for preference prediction}
+
+TALLRec demonstrated that LLaMA-style instruction tuning with LoRA can align an LLM to recommendation data \cite{tallrec}. Its yes/no formulation is simple but influential. It also exposed a recurring limitation: language-model semantics and collaborative preference are not the same thing. Later methods improve this with collaborative embeddings, retrieval augmentation, rationale distillation, or semantic IDs.
+
+\subsection{TIGER and semantic-ID generative retrieval}
+
+TIGER, ``Recommender Systems with Generative Retrieval,'' reframed retrieval as generating item identifiers \cite{tiger}. Instead of nearest-neighbor search over embeddings, the model decodes a semantic ID learned from item content. This idea inspired a large family: P5-ID, LC-Rec, IDGenRec, LETTER, RPG, differentiable semantic IDs, variable-length semantic IDs, SIDInspector, PLUM, SIGMA, AKT-Rec, and Gryphon. The central questions are collision, validity, calibration, cold-start generalization, and efficient constrained decoding.
+
+\subsection{Collaborative alignment methods}
+
+CoLLM, LLaRA, A-LLMRec, LC-Rec, ControlRec, CLLM4Rec, and related methods try to inject collaborative signals into language models. They differ in mechanism: projection of collaborative embeddings into token space, adapters, item token learning, contrastive alignment, or two-stage grounding. This family exists because pure text semantics often fails on behavior-driven preference.
+
+\subsection{RAG and long-history understanding}
+
+ReLLa and RALLRec show that LLMs need retrieval to handle lifelong behavior. Long user histories contain both signal and noise. A retrieval step selects relevant behaviors before prompting or encoding. AIR, RecGPT-V2, and RecGPT-Mobile industrialize a similar insight: compress the user's history into task-relevant intent representations before ranking.
+
+\subsection{Evaluation, fairness, and robustness}
+
+Recent work studies whether LLM recommenders are stable, fair, calibrated, and controllable. STELLA argues that LLM recommenders can be unstable. FaiRLLM, RECLLM, fairness surveys, provider fairness studies, job recommendation bias analyses, and demographic bias studies show that LLMs inherit and sometimes amplify social and popularity biases. LBR, submitted in July 2026, targets length bias in LLM-based recommendation. LLM-based offline evaluation and controllability-centric agent evaluation show that evaluation itself is changing.
+
+\section{Industrial Systems with Public Online Evidence}
+
+Table~\ref{tab:ab} summarizes industrial cases where public sources disclose online A/B or live-experiment metrics. These results should not be compared as if they were from one benchmark. They differ in traffic, baseline maturity, product surface, metric definitions, and time horizon. Still, they show which patterns have crossed the production barrier.
+
+\small
+\begin{longtable}{@{}p{0.12\linewidth}p{0.15\linewidth}p{0.24\linewidth}p{0.32\linewidth}p{0.10\linewidth}@{}}
+\caption{Public industrial online evidence for large-model recommendation.}
+\label{tab:ab}\\
+\toprule
+System & Platform & Large-model role & Public online result & Source\\
+\midrule
+\endfirsthead
+\toprule
+System & Platform & Large-model role & Public online result & Source\\
+\midrule
+\endhead
+HSTU / Generative Recommenders & Meta large internet platform & Sequential transduction architecture for retrieval/ranking over action streams. & 1.5T-parameter GRs report \metric{+12.4\%} online A/B topline improvement; HSTU is 5.3x--15.2x faster than FlashAttention2 Transformers on 8192-length sequences. & \cite{hstu}\\
+ReLand & Alipay & LLM insights injected through a controllable reasoning pool. & Deployed since Jan. 2024; \metric{+3.19\% CTR} and \metric{+1.08\% CVR}. & \cite{reland}\\
+LLM-KERec & Alipay & Inferential knowledge graph built with LLM assistance. & One-month A/B with 10\% traffic: \metric{+6.24\%} conversion, \metric{+6.45\% GMV}, \metric{+10.07\%} conversion across three scenarios. & \cite{llmkerec}\\
+MTFM & Meituan & Multi-scenario recommendation foundation model. & SQS: \metric{+1.89\% CTR}, \metric{+2.46\% UV\_CTCVR}, \metric{+2.98\% orders}, \metric{-5 ms}. PHF: \metric{+1.53\% CTR}, \metric{+1.03\% UV\_CTCVR}, \metric{+1.45\% orders}, \metric{-6 ms}. & \cite{mtfm}\\
+SIGMA & AliExpress & Semantic-grounded instruction-driven generative multi-task recommender. & Two-week A/B with 5\% traffic: \metric{+2.80\% order volume}, \metric{+3.84\% conversion}, \metric{+7.84\% GMV}, \metric{+2.47\% purchased category breadth}. & \cite{sigma}\\
+SORT-Gen & Taobao & Generative list-level multi-objective re-ranking. & Two-week A/B on Baiyibutie: \metric{+4.13\% CLICK} and \metric{+8.10\% GMV}. & \cite{sortgen}\\
+AIR & Kuaishou & Offline LLM atomic intents with online target-aware retrieval. & 5.08\% traffic: \metric{+1.043\% paid orders}, \metric{+3.446\% GMV}, \metric{+3.662\% GPM}, \metric{+1.254\% OPM}; about 400x throughput gain over direct LLM invocation. & \cite{air}\\
+Taiji & Kuaishou Ads & LLM-as-enhancer with preference reasoning and Pareto reward alignment. & One-week A/B, 10\%/10\% split: \metric{+2.83\% ADVV}, \metric{+3.30\% revenue}; long-tail users \metric{+5.26\% ADVV}, \metric{+5.32\% revenue}. & \cite{taiji}\\
+PLUM & YouTube & Gemini-family pre-trained LM adapted to semantic-ID generative retrieval. & Live experiments adding PLUM over LEM+: LFV \metric{+0.76\% panel CTR}, \metric{+0.80\% views}; Shorts \metric{+4.96\% panel CTR}, \metric{+0.39\% views}; satisfaction positive. & \cite{plum}\\
+AKT-Rec & Tmall & MLLM/LLM semantic IDs with asymmetric head-to-tail transfer. & Two-week A/B, 10\%/10\% split: \metric{+2.73\% clicks}, \metric{+2.76\% CTR}, \metric{+1.7\% CTCVR}, \metric{+3.47\% GMV}. & \cite{aktrec}\\
+RecGPT & Taobao & Hundred-billion-scale intent-centric reasoning model. & Public summaries report online \metric{+9.47\% IPV} and \metric{+6.33\% CTR}, with diversity and merchant-side benefits. & \cite{recgpt}\\
+RecGPT-V2 & Taobao & Hierarchical multi-agent intent reasoning and agentic judge/reward. & Two-week A/B against RecGPT-V1. Item scenario reports \metric{+3.64\% IPV}, \metric{+3.01\% CTR}, \metric{+3.39\% GMV}, \metric{+3.47\% ATC}, \metric{+11.46\% NER}. & \cite{recgptv2}\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Industrial and Production-Oriented Systems without Full Public A/B}
+
+Many important industrial systems do not disclose public A/B metrics. They still shape the field because they describe architecture, training pipelines, system bottlenecks, and deployment assumptions.
+
+\begin{itemize}
+  \item \textbf{M6-Rec and M6-like e-commerce foundation models} argue for unified generative modeling across product, content, and user-generated domains.
+  \item \textbf{BEQUE and Taobao query rewriting} show how LLMs can generate long-tail query rewrites for search/recommendation, often as offline or nearline expansions.
+  \item \textbf{RecGPT-Mobile} moves a lightweight intent agent onto the user device, preserving privacy and immediacy while leaving large retrieval/ranking in the cloud.
+  \item \textbf{Large Language Model as Universal Retriever} explores whether one LLM-based retriever can serve multiple industrial retrieval objectives.
+  \item \textbf{Gryphon} adds item-level scoring to semantic-ID generation in an industrial music service, addressing sequence-score calibration and SID collisions.
+  \item \textbf{RecBase, OneMall, GPR, RankGR, and related large recommender models} aim to pretrain or align one model across multiple recommendation surfaces, though public online evidence varies.
+  \item \textbf{Meta GEM and ads foundation-model discussions} suggest a move toward shared ads recommendation backbones and accelerated experimentation, but public third-party blog claims should be treated as contextual unless paired with primary technical reports.
+  \item \textbf{Google/YouTube product and research announcements} around Gemini and creator/advertiser matching show how multimodal foundation models are entering adjacent recommendation-like matching tasks; PLUM remains the clearest public technical evidence for YouTube recommendation A/B impact.
+\end{itemize}
+
+\section{Technical Themes}
+
+\subsection{Semantic IDs and the discrete bottleneck}
+
+Semantic IDs solve one problem while creating several new ones. They compress rich item semantics into a short discrete code that can be generated by an autoregressive model. This makes retrieval look like language decoding and enables zero-shot or cold-start generalization when the ID is tied to content. But codes can collide, become unbalanced, overfit to modality artifacts, or produce invalid outputs. Recent work responds with residual quantization, learnable item tokenization, differentiable semantic IDs, variable-length IDs, unordered long IDs, parallel decoding, qualification-aware collision handling, adaptive collision handling, and diagnostic resources such as SIDInspector.
+
+\subsection{Collaborative signal alignment}
+
+LLMs know language; recommenders know behavior. Alignment methods try to prevent one from washing out the other. Some methods project collaborative embeddings into language-model token space. Others train adapters or LoRA modules. Some use contrastive objectives to align item texts with co-clicks. Semantic-ID methods often build the ID from both content and collaborative signals. Industrial systems such as PLUM and AKT-Rec show that this alignment is not optional: content-only semantics is rarely enough for high-stakes recommendation.
+
+\subsection{Long histories and memory}
+
+Large context windows do not automatically solve lifelong behavior modeling. User histories include stale, contradictory, accidental, and context-dependent interactions. ReLLa, RALLRec, AIR, RecGPT-V2, RecGPT-Mobile, HLLM-style hierarchical methods, and MMEACR-style multimodal memory agents all reflect the same insight: retrieve and compress the relevant parts of history before the large model or ranker sees them.
+
+\subsection{Reranking, slate optimization, and multi-objective learning}
+
+Large models are useful beyond top-1 relevance. SORT-Gen models list-level multi-objective re-ranking. LLM-based diversity re-ranking and explanation-aware re-ranking optimize properties of the whole slate. RecGPT-V2 includes novelty exposure rate. SIGMA includes purchased category breadth. Taiji balances semantic and collaborative reward. The research frontier is moving from item scoring toward controllable slate generation under business constraints.
+
+\subsection{Multimodal recommendation}
+
+Modern items are multimodal: product images, titles, reviews, videos, audio, transcripts, comments, creator metadata, and live-stream context. VIP5, MM-Rec, MISSRec, PMMRec, LLMs in multimodal recommender surveys, AKT-Rec, PLUM, and MMEACR all show different ways to combine modalities. The hard part is not simply using a vision-language model; it is deciding which modality should dominate under which user intent and how to keep multimodal features fresh and policy-safe.
+
+\subsection{Agents, interaction, and user simulators}
+
+Agentic recommenders can ask questions, revise assumptions, call tools, simulate users, critique slates, and maintain memory. Agent4Rec, RecMind, MACRec, AgentCF, iAgent, MMEACR, LLM-based group recommenders, connected-TV agents, and LLM-as-a-judge evaluation systems show this shift. The main risk is that agents are harder to evaluate than rankers. A ranker returns a score; an agent may change the user's preference statement, ask a question, or hallucinate a constraint.
+
+\section{Problem-Oriented Reading Guide}
+
+The literature is easier to navigate when organized by the problem a practitioner or researcher is trying to solve. The same model family can be appropriate in one setting and wasteful in another.
+
+\subsection{Cold start and long tail}
+
+Cold-start and long-tail settings are the most natural entry point for LLMs. Traditional ID embeddings are weak when an item has few exposures or a user has little history. Content-rich LLM representations, semantic IDs, and multimodal encoders can transfer information from item titles, product images, descriptions, reviews, transcripts, and co-occurring entities. In this setting, the most relevant works include P5, M6-Rec, TIGER, UniSRec, VQ-Rec, MISSRec, PMMRec, AKT-Rec, PLUM, GenCDR, and semantic-ID diagnostics. The industrial lesson is to avoid content-only features as a final answer: cold-start content semantics should be fused with whatever collaborative evidence is available, even if it is weak. AKT-Rec is important because it explicitly avoids harming head IDs while helping tail IDs; this is a common production concern because improving the tail at the expense of head traffic can reduce total business value.
+
+\subsection{Cross-domain transfer}
+
+Cross-domain recommendation benefits from LLMs when domains have semantic overlap but sparse direct interactions. Examples include content-to-commerce, search-to-recommendation, short-video-to-product, and query-to-item transfer. AIR, SIGMA, MTFM, S\&R Foundation, Uni-CTR, PCDR, and GenCDR illustrate different solutions. A practical design choice is whether to align domains into a shared embedding space, a shared semantic-ID vocabulary, a shared user-intent memory, or a shared multi-scenario transformer. Shared representations improve transfer, but can also create negative transfer when domains optimize different objectives. Production systems therefore often use mixture, gating, adapters, or scenario-specific subgraphs rather than a single unconditioned representation.
+
+\subsection{Text-rich and multimodal items}
+
+News, e-commerce, local services, jobs, short videos, music, books, and creator/advertiser matching are text-rich or multimodal. PLM-NR, MM-Rec, VIP5, MISSRec, PMMRec, PLUM, AKT-Rec, and MMEACR are representative. For these scenarios, LLMs and MLLMs are valuable not only because they produce better item embeddings, but because they expose interpretable attributes: topic, brand, style, seasonality, audience, intent, safety category, and substitutability. This interpretability matters in industry because recommendation teams need debugging handles. A black-box embedding may improve NDCG; a generated attribute can explain why a model started over-serving a trend or under-serving a merchant class.
+
+\subsection{Ads and commercial recommendation}
+
+Ads recommendation has stronger calibration, auction, and multi-stakeholder constraints than many organic recommendation tasks. A ranking model must estimate action probabilities and values, not merely choose semantically plausible items. This is why LLMs appear first as feature producers or alignment modules in ads systems. Taiji reports ADVV and revenue gains, while HSTU and GEM-like discussions point toward large shared backbones for ads ranking. In ads, an LLM-generated candidate or explanation is insufficient unless it can be tied to calibrated advertiser value, budget pacing, policy constraints, and user experience guardrails. The right question is not whether an LLM can understand an ad, but whether its semantic signal improves calibrated value prediction without destabilizing the marketplace.
+
+\subsection{Short-video and feed recommendation}
+
+Short-video and feed systems combine rapid trends, multimodal content, creator ecosystems, long user histories, and high feedback volume. HSTU, PLUM, AIR, RecGPT, RecGPT-Mobile, and related systems are important here. These systems show two opposite but compatible directions: very large action-sequence models that learn directly from behavior, and semantic-intent systems that compress content and context. The practical architecture may use both: a high-throughput action model for the main ranking signal and LLM-derived intent or content features for cold-start, diversity, explanation, or cross-domain transfer.
+
+\subsection{Conversational and agentic recommendation}
+
+Conversational recommendation is not only ``chat plus ranking.'' A conversational system must decide when to ask, when to recommend, how to remember, how to recover from wrong assumptions, and how to ground recommendations in available inventory. Chat-REC, RecMind, MACRec, AgentCF, iAgent, MMEACR, RecGPT-V2, and CTV agentic recommendation illustrate the design space. For production, the hardest issue is evaluation. An agent can produce a fluent dialogue while steering the user toward unavailable or unsafe items. Grounding, tool constraints, and audit logs are therefore as important as model quality.
+
+\subsection{Evaluation and user simulation}
+
+LLM-as-judge and user-simulation systems are attractive because online A/B tests are expensive. But they should be treated as pre-A/B filters, not replacements for real traffic. A simulator can test whether a system follows constraints, whether an explanation is coherent, whether generated IDs are valid, and whether a slate satisfies a known preference profile. It cannot reliably estimate long-term retention, marketplace dynamics, creator incentives, or fatigue without calibration against real user behavior. The best use of LLM evaluation is layered: offline labels and counterfactual estimators, LLM-based diagnostic judgments, small-scale human review, shadow traffic, then controlled online experiments.
+
+\section{Deep Dives on Representative Paradigms}
+
+\subsection{Instruction-tuned LLM recommenders}
+
+Instruction-tuned recommenders such as TALLRec and InstructRec are conceptually simple: convert recommendation data into instruction-response pairs and fine-tune an LLM. Their strength is flexibility. The same model can answer whether a user likes an item, explain the choice, or adapt to a natural-language constraint. Their weakness is that recommendation labels are not naturally language labels. A yes/no answer may be easy to train but hard to calibrate as CTR or CVR. The candidate set may also be artificially small in offline experiments. In production, instruction-tuned LLM rankers are more plausible as rerankers, weak-user specialists, explanation modules, or feature generators than as the primary scorer for millions of candidates.
+
+This paradigm is still important because it established the data interface between recommender logs and LLM training. Once user histories and item metadata are serialized into instructions, one can add rationales, retrieved behaviors, collaborative embeddings, business constraints, or safety rules. Much of the later literature can be understood as improving the naive instruction template: better grounding, better collaborative alignment, better retrieval, better output constraints, or better distillation.
+
+\subsection{Semantic-ID generative retrieval}
+
+Semantic-ID retrieval is one of the most distinctive LLM-era ideas. It changes the retrieval problem from ``score all items or search nearest neighbors'' to ``generate a discrete code that maps to items.'' This creates an elegant connection to language modeling but raises several design choices.
+
+First, how should IDs be constructed? Content-only IDs generalize to new items but may ignore collaborative behavior. Collaborative IDs capture behavior but struggle with cold start. Hybrid IDs try to use both. Second, should IDs be fixed or learned end-to-end? Fixed IDs stabilize the target vocabulary, while differentiable or learnable IDs can adapt to task objectives. Third, how should collisions be handled? A collision can be useful if it groups substitutes, but harmful if it merges unrelated items. Fourth, how should decoding be constrained? Unconstrained generation can produce invalid IDs; prefix trees, sparse transition matrices, or post-verification are needed at scale. Fifth, how should generated IDs be scored? Accumulated token likelihood may not equal item relevance, motivating systems such as Gryphon that add item-level scoring.
+
+The industrial significance of semantic IDs is that they make language-model-style generation compatible with retrieval infrastructure. PLUM demonstrates this at YouTube scale; SIGMA and AKT-Rec show related ideas in e-commerce. The remaining question is whether semantic-ID generation can consistently beat strong approximate nearest-neighbor retrieval after accounting for freshness, invalid outputs, and serving cost.
+
+\subsection{LLM-as-enhancer and semantic feature stores}
+
+LLM-as-enhancer systems are likely to remain the most common industrial pattern. The LLM produces a semantic artifact; a conventional recommender consumes it. This pattern includes user profiles, item attributes, query rewrites, graph edges, atomic intents, explanations, reward features, and semantic IDs. It works because it respects the existing production stack. Feature stores, rankers, monitors, and A/B platforms do not need to be redesigned around free-form generation.
+
+However, LLM-generated artifacts require their own lifecycle. They need schema definitions, freshness policies, validation rules, drift monitors, backfills, and rollback mechanisms. If a product taxonomy changes, a generated tag can become stale. If a prompt changes, feature distributions can shift. If the LLM provider changes, downstream model calibration can move. Treating semantic artifacts as ordinary features is not enough; they are generated features with prompt and model provenance.
+
+\subsection{Recommendation-native foundation models}
+
+HSTU and MTFM show a different route: instead of adapting a general LLM, build a large model around recommendation data. This route is attractive when the platform has massive action logs and enough infrastructure to train and serve very large models. It avoids some semantic-collaborative mismatch because the model is trained directly on behavior. It also preserves the possibility of scaling laws over recommendation compute.
+
+The cost is engineering complexity. Recommendation-native foundation models must handle high-cardinality sparse features, non-stationary item vocabularies, streaming updates, long histories, multi-objective labels, and low-latency serving. HSTU introduces architectural changes and inference amortization; MTFM uses heterogeneous tokens and scenario-specific subgraphs. These models are closer to building a new recommender platform than adding an LLM component.
+
+\subsection{Agentic recommenders}
+
+Agentic recommenders are appealing because they can represent a user's task, not only the user's historical clicks. A shopping user may say, ``I need a gift for a colleague under a budget,'' and an agent can ask clarifying questions, retrieve candidates, reason about constraints, and explain trade-offs. RecGPT-V2 brings this idea into Taobao-style feed recommendation through hierarchical expert agents. MMEACR and connected-TV agents show how memory and multimodal context can be added.
+
+The main research challenge is that agentic recommendation blurs the boundary between recommendation, search, dialogue, and decision support. The main industrial challenge is safety. An agent that interacts with users can manipulate preferences, over-personalize, hallucinate availability, reveal private inferences, or create inconsistent experiences. Agentic systems need grounded tools, bounded action spaces, conversation policies, and evaluation beyond ranking metrics.
+
+\section{How to Read Blogs, Technical Reports, and Vendor Claims}
+
+The user specifically asked to include official technology blogs such as Google or Meta where useful. These sources are valuable but must be read differently from peer-reviewed or arXiv papers. This survey uses four evidence grades.
+
+\begin{enumerate}
+  \item \textbf{Primary technical paper with online metrics.} Example: HSTU, PLUM, MTFM, SIGMA, AIR, Taiji, AKT-Rec. These can support claims about online gains, while still requiring attention to baseline and metric definitions.
+  \item \textbf{Primary technical report or product paper without complete online disclosure.} Example: some RecGPT, RecGPT-Mobile, large retriever, or foundation-model reports. These can support architecture claims but not necessarily quantified business impact.
+  \item \textbf{Official company blog.} Useful for product context, deployment framing, and strategic direction. Blogs often omit baselines, traffic splits, statistical tests, and guardrails, so they should not be the sole source for precise A/B claims unless they provide enough experimental detail.
+  \item \textbf{Third-party blog or commentary.} Useful for interpretation and discovery, but claims must be traced back to primary sources before being treated as evidence. For example, third-party posts about YouTube semantic IDs or Meta GEM help identify trends, but the survey should ground quantitative claims in PLUM or HSTU-style primary documents.
+\end{enumerate}
+
+This evidence discipline matters because recommendation is unusually sensitive to metrics. A 0.5\% lift on a huge surface can be valuable; a 5\% lift on a weak offline subset may disappear online. Without traffic allocation, duration, baseline, and guardrails, a headline number is not enough.
+
+\section{Why Many Academic LLM4Rec Methods Do Not Directly Land Online}
+
+Many academic LLM recommender papers are useful but not deployable as written. The gap is not a lack of creativity; it is a mismatch between benchmark assumptions and production constraints.
+
+\textbf{Candidate-set size.} Many LLM ranker experiments rank tens or hundreds of candidates. Industrial retrieval and ranking may consider millions or billions of items across stages. Methods that call an LLM per candidate rarely survive this scale.
+
+\textbf{Label semantics.} Offline datasets often treat observed interactions as positives and sampled items as negatives. In production, unobserved items may be unseen, unavailable, policy-blocked, already consumed, or simply not exposed. LLM evaluation can make this worse if it judges semantic plausibility rather than actual user response.
+
+\textbf{Temporal leakage.} LLMs are pretrained on public corpora and may know item popularity or descriptions from after the training period of a benchmark. Recommendation benchmarks need careful temporal splits and leakage checks.
+
+\textbf{Catalog grounding.} A generated title is not a recommendation unless it maps to an available item. Academic text-generation metrics often ignore inventory, duplicates, seller constraints, price changes, and regional availability.
+
+\textbf{Latency and cost.} A method that improves NDCG with a 7B model may be unusable if it adds tens of milliseconds to a critical ranking path. Industrial papers that report latency or throughput are therefore especially valuable.
+
+\textbf{Guardrails.} CTR or NDCG can improve while diversity, satisfaction, fairness, creator exposure, or policy safety deteriorates. Real deployments need multi-metric scorecards.
+
+\textbf{Operational drift.} Prompts, LLM versions, taxonomy definitions, item catalogs, and user behavior all drift. A generated feature pipeline must be monitored like a model, not like static metadata.
+
+\section{Recommended Evaluation Protocol}
+
+A robust evaluation protocol for LLM-enhanced recommendation should be staged.
+
+\begin{enumerate}
+  \item \textbf{Artifact validation.} Check generated tags, semantic IDs, query rewrites, and intent summaries for validity, coverage, safety, and drift.
+  \item \textbf{Offline ranking evaluation.} Use temporal splits, multiple negative sampling schemes, and segment-level metrics for cold-start, long-tail, new users, and heavy users.
+  \item \textbf{Counterfactual and replay checks.} Use inverse propensity or doubly robust estimators where logging propensities are available; avoid treating missing exposure as negative preference.
+  \item \textbf{LLM diagnostic evaluation.} Use LLM judges only for bounded checks such as explanation coherence, constraint satisfaction, and semantic coverage. Calibrate these judgments against human and behavioral data.
+  \item \textbf{Shadow deployment.} Run the model on live traffic without affecting exposure to measure latency, invalid outputs, feature drift, and candidate overlap.
+  \item \textbf{Online A/B.} Start with small traffic, clear guardrails, and segment analysis. Include business metrics, user metrics, ecosystem metrics, and system metrics.
+  \item \textbf{Long-term holdout.} Measure retention, fatigue, diversity, creator/merchant health, and policy outcomes over longer windows.
+\end{enumerate}
+
+The key principle is that LLM-specific evaluation should add gates, not remove the need for online experimentation. A recommender changes user behavior and ecosystem incentives; only live experiments can measure the full feedback loop.
+
+\section{Evaluation: Offline, Online, and LLM-as-Judge}
+
+Offline recommendation evaluation is already difficult because missing labels are not negative labels. LLMs add new complications: prompt order sensitivity, output-format failures, invalid item generation, position bias, length bias, popularity bias, hallucination, and preference drift. Recent work proposes LLM-based preference induction for offline top-N evaluation, A/B agents, user simulators, controllability-centric evaluation with collaborative agents, and LLM-as-a-judge for slate recommendation.
+
+These tools are useful, but they should not replace online experiments. They are best treated as intermediate gates: useful for catching invalid outputs, unsafe explanations, poor diversity, or obvious preference mismatch before exposing users to a system. Online A/B remains the standard for business impact, and long-term holdouts remain necessary for retention and ecosystem health.
+
+\section{Deployment Patterns}
+
+\subsection{Offline large-model artifact generation}
+
+The safest deployment pattern is offline artifact generation. LLMs generate tags, semantic IDs, intent summaries, user profiles, graph edges, or synthetic samples. These artifacts are validated, cached, and used by conventional rankers. ReLand, LLM-KERec, AIR, AKT-Rec, and many feature-engineering papers follow this route.
+
+\subsection{Nearline and incremental inference}
+
+Nearline inference updates features or candidates every few minutes or hours. SIGMA aggregates users' latest behaviors at minute-level intervals and uses incremental inference with cached KV states. This pattern improves freshness without putting full LLM inference into every request.
+
+\subsection{Candidate-pool augmentation}
+
+PLUM adds generated candidates to the existing YouTube retrieval pool rather than replacing the whole retrieval stack. This is a common production strategy: introduce a new retriever as one channel, control its quota, and let downstream rankers and guardrails determine final exposure.
+
+\subsection{On-device intent agents}
+
+RecGPT-Mobile points to a privacy-preserving future: a small on-device LLM summarizes immediate context or predicts the next query, while the cloud handles global retrieval and ranking. This reduces server cost and privacy risk, but creates model update, device heterogeneity, and safety challenges.
+
+\subsection{Full large recommender models}
+
+HSTU and MTFM show that large-scale recommendation-native models can produce online gains. They require deep systems work: attention variants, feature tokenization, micro-batching, cache reuse, subgraph serving, distributed training, and monitoring. These are not simple LLM API integrations.
+
+\section{Risks and Failure Modes}
+
+\begin{itemize}
+  \item \textbf{Semantic-collaborative mismatch.} A language model may recommend semantically plausible items that users do not click or buy.
+  \item \textbf{Calibration failure.} LLM probabilities or token scores are not calibrated CTR/CVR/GMV estimates.
+  \item \textbf{Invalid generation.} Generated item IDs, semantic IDs, or titles may not map to available catalog items.
+  \item \textbf{Popularity and exposure bias.} LLMs may reproduce common web popularity or platform exposure patterns.
+  \item \textbf{Length and position bias.} Longer item descriptions, longer prompts, or earlier candidate positions can receive unfair advantage.
+  \item \textbf{Privacy leakage.} User summaries and explanations may expose sensitive behavior.
+  \item \textbf{Safety and policy drift.} Generated explanations or query rewrites can violate policy even when the underlying item is safe.
+  \item \textbf{Staleness.} Offline semantic artifacts can become stale when products, trends, or user contexts change.
+  \item \textbf{Cost opacity.} Offline AUC gains can disappear when model latency, GPU cost, or index refresh cost is included.
+\end{itemize}
+
+\section{A Practical Playbook}
+
+For a team building an LLM-enhanced recommender, the evidence suggests the following sequence.
+
+\begin{enumerate}
+  \item Identify the bottleneck: cold start, long tail, cross-domain transfer, content understanding, search-query generation, slate diversity, explanation, or long-history compression.
+  \item Choose the large-model role: artifact generator, encoder, scorer, candidate generator, reranker, judge, reward model, simulator, or agent.
+  \item Convert LLM output into recommender-native objects: embeddings, semantic IDs, item tags, graph edges, generated candidates, intent memories, or reward features.
+  \item Keep a strong production baseline and introduce the large-model component as an augmenting channel first.
+  \item Validate invalid-output rate, hallucination, policy safety, calibration, diversity, and latency before A/B.
+  \item Run online A/B with target metrics and guardrails. Segment long-tail, cold-start, new users, heavy users, creators/merchants, and safety-sensitive categories.
+  \item Preserve long-term holdouts or delayed metrics for retention, satisfaction, and ecosystem health.
+\end{enumerate}
+
+\section{Open Problems}
+
+\textbf{Unified reporting.} Public industrial papers should report traffic split, duration, baseline maturity, target metrics, guardrails, latency, cost, and segment effects. Without this, A/B results are hard to interpret.
+
+\textbf{Semantic cache freshness.} Offline LLM artifacts are cheap at serving time but can become stale. Systems need freshness-aware semantic caches and update policies.
+
+\textbf{Score calibration.} Generative likelihoods, LLM judgments, and semantic rewards must be mapped to business-calibrated scores.
+
+\textbf{Constrained decoding at scale.} Generative retrieval needs fast prefix constraints, validity checks, and collision handling for billion-item catalogs.
+
+\textbf{Long-term value.} Short-term CTR can conflict with retention, trust, merchant fairness, creator health, and content diversity.
+
+\textbf{On-device recommendation.} Local intent agents may improve privacy and immediacy, but they introduce device resource limits and distributed safety concerns.
+
+\textbf{LLM-based evaluation.} LLM judges can expand labels and simulate users, but they must be calibrated against real behavior and not become circular evaluators of LLM recommenders.
+
+\section{Conclusion}
+
+The field is no longer about whether LLMs can recommend. They can, but raw LLM recommendation is rarely the industrial answer. The stronger conclusion is that large models become useful when their semantic, generative, multimodal, or reasoning capabilities are converted into controllable recommender-system objects. The most convincing public deployments either augment the existing stack with LLM-derived artifacts or build recommendation-native large models with careful serving design. Academic work continues to expand the design space, especially in semantic IDs, collaborative alignment, agentic interaction, fairness, and evaluation. The next major progress will likely come from systems that combine these ideas: foundation-scale user/action models, grounded semantic IDs, real-time intent memory, calibrated business objectives, and evaluation protocols that measure long-term ecosystem value rather than only short-term clicks.
+
+\appendix
+\section{Paper and System Map}
+
+This appendix is a structured map rather than an exhaustive bibliography. It groups more than two hundred related works, systems, and technical reports by their primary contribution. Many works belong to multiple categories; they are placed where they are most useful for navigation.
+
+\subsection{Classical and Pre-LLM Neural Recommendation Foundations}
+
+\small
+\begin{longtable}{@{}p{0.20\linewidth}p{0.27\linewidth}p{0.45\linewidth}@{}}
+\toprule
+Cluster & Representative works & Why they matter\\
+\midrule
+\endfirsthead
+\toprule
+Cluster & Representative works & Why they matter\\
+\midrule
+\endhead
+Industrial retrieval and ranking & Wide\&Deep; DeepFM; YouTube DNN; DLRM; Monolith; PinnerSage; PinnerFormer; MIND; ComiRec; TwinBERT; DSSM; TDM/JTM & Define multi-stage retrieval/ranking, sparse feature interaction, large embedding tables, and serving constraints that LLM methods must integrate with.\\
+Interest modeling & DIN; DIEN; DSIN; SIM; ETA; MIMN; M2GRL; BST; MIND; HPMN & Establish target attention, evolving interests, session dynamics, and long-history compression before LLMs.\\
+Sequential recommendation & GRU4Rec; Caser; SASRec; BERT4Rec; S3-Rec; CL4SRec; DuoRec; FDSA; FEARec; RecFormer & Provide the transformer sequence modeling foundation that later generative recommenders scale.\\
+Multimodal and content recommendation & VBPR; MMGCN; GRCN; LATTICE; MM-Rec; MISSRec; PMMRec; CLIP4Rec; VIP5 & Show how images, text, audio, and metadata support cold-start and cross-domain transfer.\\
+Knowledge and graph recommendation & RippleNet; KGAT; KGIN; KGCN; LightGCN; PinSage; GraphRec; HKFR; KG-enhanced conversational recommenders & Prefigure LLM knowledge extraction and graph augmentation.\\
+Conversational recommendation & ReDial; TG-ReDial; KBRD; CR-Walker; UniCRS; MESE; TCP; C2-CRS; Chat-REC & Provide interaction protocols and evaluation concerns for agentic recommendation.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{LLM for Feature Engineering and Data Augmentation}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.34\linewidth}p{0.40\linewidth}@{}}
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endfirsthead
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endhead
+User/item feature augmentation & LLM4KGC; TagGPT; ICPC; KAR; PIE; LGIR; GIRL; LLM-Rec; HKFR; LLaMA-E; EcomGPT; TF-DCon; RLMRec; LLMRec; LLMRG; CUP; SINGLE; SAGCN; UEM; LLMHG; Llama4Rec; LLM4Vis; LoRec & LLMs extract tags, aspects, user interests, knowledge, and concise profiles. The output is usually cached and passed to conventional models.\\
+Sample and query generation & GReaT; ONCE; AnyPredict; DPLLM; MINT; Agent4Rec; RecPrompt; PO4ISR; BEQUE; Agent4Ranking; PopNudge; RecInter & LLMs generate synthetic interactions, narrative preferences, long-tail query rewrites, or simulated interactions.\\
+Knowledge extraction & KAR; TRAWL; HKFR; LLM-KERec; ReLand; LLMRG; LlamaRec-LKG-RAG; LKPNR; DOKE & The LLM is used as a knowledge producer rather than a direct ranker.\\
+Industrial artifact generation & ReLand; LLM-KERec; AIR; AKT-Rec; Taiji; RecGPT; RecGPT-Mobile & The strongest production pattern: generate or compress semantic artifacts offline/nearline, then serve with standard retrieval/ranking infrastructure.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{LLM and PLM Encoders for Recommendation}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endfirsthead
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endhead
+Text-rich item encoding & U-BERT; UNBERT; PLM-NR; Pyramid-ERNIE; ERNIE-RS; CTR-BERT; SuKD; PREC; Tiny-NewsRec; PLM4Tag; TwHIN-BERT; RecFormer; TBIN; Social-LLM & Encoders improve item/user representation when metadata and text are central.\\
+Cross-domain and transferable encoders & ZESRec; UniSRec; TransRec; VQ-Rec; IDRec vs MoRec; S\&R Foundation; MISSRec; UFIN; PMMRec; Uni-CTR; PCDR & Use language or multimodal embeddings to transfer across domains and cold-start scenarios.\\
+LLM embeddings and adapters & LLM2BERT4Rec; LLM4ARec; UEM; CollabContext; SSNA; KERL; LLMRS; LLMHG; HLLM; HLLM-style item/user hierarchies & Use frozen embeddings, adapters, or hierarchical LLMs to represent user histories and item content.\\
+Industrial encoders & PLUM item semantic representations; AKT-Rec MLLM semantic clusters; MTFM heterogeneous tokens; Meta HSTU action tokens & The encoder is redesigned around production data streams, not only natural language.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{LLM Scoring, Ranking, and Instruction Tuning}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endfirsthead
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endhead
+Prompted scoring and rankers & LMRecSys; Zero-shot GPT; BookGPT; PALR; LLMRanker; SetwiseRank; LiT5; LlamaRec; LLM4Rerank; LLM as explainable re-ranker & Use LLMs to score or rank candidate sets; strong for analysis and small candidate pools, costly for full ranking.\\
+Instruction tuning & TALLRec; InstructRec; GenRec; BIGRec; DEALRec; RecRanker; Recommendation as Instruction Following; Aligning LLMs with Recommendation Knowledge; RDRec & Align LLMs to recommendation labels and tasks through instructions, LoRA, or distillation.\\
+Collaborative alignment & CoLLM; LLaRA; A-LLMRec; CLLM4Rec; LC-Rec; ControlRec; FLIP; ClickPrompt; Llama4Rec; iLoRA; CALRec & Inject ID/collaborative signals into language models to reduce semantic-collaborative mismatch.\\
+Retrieval-augmented ranking & ReLLa; RALLRec; LlamaRec-LKG-RAG; CRAG; retrieval-augmented conversational recommendation & Retrieve relevant user history, knowledge, or candidates before LLM scoring.\\
+Incremental and efficient tuning & POD; LSAT; E4SRec; LightLM; MoLoRec/RecCocktail; instruction distillation; decoding acceleration frameworks & Reduce compute, improve incremental updates, and make LLM rankers more deployable.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Generative Recommendation and Semantic IDs}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endfirsthead
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endhead
+Task unification & P5; M6-Rec; InstructRec; VIP5; UP5; P5-ID; RecSysLLM; UPSR & Convert multiple recommendation tasks into language modeling or instruction-following tasks.\\
+Semantic-ID retrieval & TIGER; P5-ID; How to Index Item IDs; LC-Rec; IDGenRec; LETTER; Semantic IDs for Joint Search and Recommendation; GenCDR; GLASS; DaV-Gen & Generate item identifiers rather than scores; aims at unified retrieval and generation.\\
+Semantic-ID diagnostics and improvements & Generative Recommendation with Semantic IDs handbook; Differentiable Semantic ID; Variable-Length Semantic IDs; Generating Long Semantic IDs in Parallel; SIDInspector; Qualification-Aware SID; Adaptive Collision Handling; Expressiveness Limits; LBR & Address collision, invalid outputs, length bias, scalability, and calibration.\\
+Industrial semantic-ID systems & PLUM; SIGMA; AKT-Rec; AIR intent IDs; Taiji semantic features; Gryphon; YouTube SemanticID discussions & Show how semantic IDs enter real retrieval and ranking systems.\\
+Diffusion and alternative generation & Diffusion recommendation surveys; continuous-token diffusion; session generative recommendation; POI semantic-ID generation; chain-of-recommendation & Broaden generation beyond autoregressive text/ID decoding.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Agentic, Conversational, and Interactive Recommendation}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endfirsthead
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endhead
+Conversational recommendation & TG-ReDial; KBRD; UniCRS; MESE; Chat-REC; Large Language Models as Zero-Shot Conversational Recommenders; retrieval-augmented CRS & Natural-language preference elicitation and explanation.\\
+Agents for recommendation & Agent4Rec; AgentCF; MACRec; RecMind; iAgent; MMEACR; connected-TV agentic recommendation; group recommender LLM agents; controllability-centric collaborative agents & Use planning, memory, reflection, tool calls, and multi-agent collaboration.\\
+User simulation and A/B agents & A/B Agent; RecInter; generative agents in recommendation; LLM user preference induction; LLM-as-a-judge slate recommendation & Simulate users, expand labels, or evaluate slates before online tests.\\
+Industrial agentic systems & RecGPT; RecGPT-V2; RecGPT-Mobile; Ranking Engineer Agent style ads tooling; creator/advertiser matching with Gemini-like models & Use agents for intent reasoning, engineering productivity, or matching workflows.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Trustworthy, Fair, Robust, and Safe LLM Recommendation}
+
+\small
+\begin{longtable}{@{}p{0.18\linewidth}p{0.36\linewidth}p{0.38\linewidth}@{}}
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endfirsthead
+\toprule
+Subtopic & Representative works & Summary\\
+\midrule
+\endhead
+Fairness and bias & FaiRLLM; RECLLM; job recommendation demographic bias; fairness in LLM-based recommender systems survey; provider fairness in news recommendation; popularity bias studies & Study demographic, provider, exposure, recency, and popularity biases.\\
+Robustness and poisoning & LoRec; STELLA; exact and efficient unlearning for LLM recommendation; incremental learning; memorization behavior in generative recommendation & Address instability, privacy, poisoning, and memorization.\\
+Explainability & XRec; RecExplainer; explanation generation surveys; uncertainty-aware explainable recommendation; coherent natural-language explanations & LLMs can explain, but explanations must be faithful and safe.\\
+Privacy and on-device & DPLLM; RecGPT-Mobile; federated content representation; privacy-preserving local LLM recommenders & Reduce central exposure of user histories and sensitive profiles.\\
+Evaluation and controllability & LLM-as-a-judge; user preference induction; controllability-centric evaluation; A/B Agent; length bias reduction; position-bias-aware reranking & Evaluate behavior beyond static offline labels.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Extended Annotated Literature Catalog}
+
+The previous maps group works by theme. Table~\ref{tab:catalog-en} expands the map into an annotated catalog. It is intentionally broad: it includes classical recommenders, pre-trained language model recommenders, LLM-enhanced recommenders, generative recommenders, industrial systems, evaluation papers, fairness and robustness studies, and recent 2026 preprints. The goal is not to claim that all works are equally mature, but to show how the research frontier and production practice connect.
+
+\scriptsize
+\begin{longtable}{@{}p{0.13\linewidth}p{0.23\linewidth}p{0.12\linewidth}p{0.44\linewidth}@{}}
+\caption{Annotated catalog of representative recommendation and large-model works.}
+\label{tab:catalog-en}\\
+\toprule
+Area & Work or system & Period & Main contribution or relevance\\
+\midrule
+\endfirsthead
+\toprule
+Area & Work or system & Period & Main contribution or relevance\\
+\midrule
+\endhead
+Classical deep rec & Wide \& Deep & 2016 & Combines memorization and generalization for industrial app recommendation.\\
+Classical deep rec & YouTube DNN & 2016 & Defines large-scale candidate generation and ranking for video recommendation.\\
+Classical deep rec & DeepFM & 2017 & Learns feature interactions for CTR prediction without manual cross features.\\
+Classical deep rec & NCF & 2017 & Neural collaborative filtering baseline for user-item interaction modeling.\\
+Classical deep rec & DIN & 2018 & Introduces target attention over user behavior for CTR prediction.\\
+Classical deep rec & DIEN & 2019 & Models interest evolution with sequential behavior dynamics.\\
+Classical deep rec & DSIN & 2019 & Captures session-level user interest for CTR prediction.\\
+Classical deep rec & MIND & 2019 & Represents multiple user interests for large-scale retrieval.\\
+Classical deep rec & ComiRec & 2020 & Extracts multiple interests for controllable candidate generation.\\
+Classical deep rec & SIM & 2020 & Retrieves long user behavior sequences for target-aware modeling.\\
+Classical deep rec & ETA & 2021 & Efficient target attention over long histories for industrial ranking.\\
+Classical deep rec & DLRM & 2019 & Standardizes sparse embedding and dense interaction architecture at Meta scale.\\
+Classical deep rec & Monolith & 2022 & ByteDance online training system for collisionless real-time recommendation.\\
+Classical deep rec & PinnerSage & 2018 & Pinterest graph-based candidate generation at web scale.\\
+Classical deep rec & PinnerFormer & 2022 & Transformer user representation for Pinterest recommendations.\\
+Classical deep rec & TDM & 2018 & Tree-based deep model for efficient large-corpus retrieval.\\
+Classical deep rec & Joint tree-model optimization & 2019 & Jointly learns tree index and deep retrieval model.\\
+Sequential rec & GRU4Rec & 2015 & Early neural session recommendation with recurrent networks.\\
+Sequential rec & Caser & 2018 & Convolutional sequence embedding for next-item recommendation.\\
+Sequential rec & SASRec & 2018 & Self-attentive sequential recommendation, foundation for later transformer rec.\\
+Sequential rec & BERT4Rec & 2019 & Bidirectional masked-item modeling for sequential recommendation.\\
+Sequential rec & S3-Rec & 2020 & Self-supervised pretraining tasks for sequential recommendation.\\
+Sequential rec & CL4SRec & 2021 & Contrastive learning for robust sequential recommendation.\\
+Sequential rec & DuoRec & 2022 & Contrastive regularization for sequential recommendation.\\
+Sequential rec & FDSA & 2019 & Feature-level self-attention for sequential recommendation.\\
+Sequential rec & FEARec & 2023 & Frequency-domain enhanced sequential recommendation.\\
+Sequential rec & RecFormer & 2023 & Text-rich sequential recommendation with language representations.\\
+Sequential rec & HSTU & 2024 & Recommendation-native sequential transducer that scales to trillion parameters.\\
+PLM rec & U-BERT & 2021 & Pretrains user representations with BERT-style objectives.\\
+PLM rec & UNBERT & 2021 & User-news matching with BERT for news recommendation.\\
+PLM rec & PLM-NR & 2021 & Uses pre-trained language models to represent news content.\\
+PLM rec & Pyramid-ERNIE & 2021 & Industrial Baidu search ranking with pre-trained language modeling.\\
+PLM rec & ERNIE-RS & 2021 & Web-scale retrieval with ERNIE pretraining.\\
+PLM rec & CTR-BERT & 2021 & Distills large BERT teacher models for CTR prediction.\\
+PLM rec & SuKD & 2022 & Supplements sponsored search CTR models with NLP features.\\
+PLM rec & PREC & 2022 & Plug-and-play pretraining for news recommendation.\\
+PLM rec & Tiny-NewsRec & 2022 & Efficient PLM-based news recommendation.\\
+PLM rec & TwHIN-BERT & 2022 & Socially enriched multilingual tweet representations.\\
+PLM rec & Text Is All You Need & 2023 & Shows language representations can support sequential recommendation.\\
+Cross-domain rec & ZESRec & 2021 & Zero-shot recommendation via transferable semantic representations.\\
+Cross-domain rec & UniSRec & 2022 & Universal sequence representation learning for recommender systems.\\
+Cross-domain rec & VQ-Rec & 2023 & Vector-quantized item representation for transferable recommendation.\\
+Cross-domain rec & ID vs modality revisited & 2023 & Studies when ID-based and modality-based models win.\\
+Cross-domain rec & Search and recommendation foundation model & 2023 & Unifies search and recommendation for cold-start scenarios.\\
+Cross-domain rec & MISSRec & 2023 & Multi-modal interest-aware sequence pretraining.\\
+Cross-domain rec & PMMRec & 2024 & Multi-modality for transferable recommender systems.\\
+Cross-domain rec & PCDR & 2024 & Federated prompt-enhanced representation for cross-domain recommendation.\\
+LLM survey & How Can RS Benefit from LLMs & 2024 & Surveys LLM roles across recommendation pipeline.\\
+LLM survey & LLMs for Recommendation Survey & 2023 & Early taxonomy of LLM-based recommendation.\\
+LLM survey & Next-generation LLM-based RS & 2024 & Three-tier taxonomy from representation to industrial deployment.\\
+LLM survey & LLMs for Generative Recommendation & 2024 & Survey of generative recommendation with LLMs.\\
+LLM survey & LLM-enhanced RS survey & 2024 & Broad survey of LLM-enhanced recommendation systems.\\
+LLM survey & Multimodal LLM recommender survey & 2025 & Taxonomy for LLMs in multimodal recommendation.\\
+LLM survey & LLM agents for recommender systems & 2025 & Surveys agentic recommendation and search.\\
+LLM survey & LLM fairness in recommender systems & 2026 & Focuses on bias mechanisms and fairness targets.\\
+LLM feature & TagGPT & 2023 & Uses LLMs as zero-shot multimodal taggers.\\
+LLM feature & LLM4KGC & 2023 & Few-shot relation labeling in e-commerce knowledge graphs.\\
+LLM feature & User Interest Journeys & 2023 & Uses LLMs to model user interest journeys.\\
+LLM feature & KAR & 2023 & Knowledge augmentation from LLMs for open-world recommendation.\\
+LLM feature & PIE & 2023 & Product information extraction using ChatGPT.\\
+LLM feature & LGIR & 2023 & LLM-based generative adversarial networks for job recommendation.\\
+LLM feature & GIRL & 2023 & Generative job recommendations with large language models.\\
+LLM feature & LLM-Rec prompting & 2023 & Personalized recommendation through prompting LLMs.\\
+LLM feature & HKFR & 2023 & Heterogeneous knowledge fusion via LLMs.\\
+LLM feature & LLaMA-E & 2023 & E-commerce authoring with multi-aspect instruction following.\\
+LLM feature & EcomGPT & 2023 & E-commerce instruction tuning with chain-of-task tasks.\\
+LLM feature & RLMRec & 2023 & Representation learning with LLM-generated knowledge.\\
+LLM feature & LLMRec graph augmentation & 2023 & Uses LLMs and graph augmentation for recommendation.\\
+LLM feature & LLM reasoning graphs & 2023 & Builds reasoning graphs for recommender systems.\\
+LLM feature & CUP & 2023 & Concise user profiles generated from review text.\\
+LLM feature & SINGLE & 2023 & Models article viewing flow using LLM-derived preferences.\\
+LLM feature & SAGCN & 2023 & Semantic aspect-aware review exploitation.\\
+LLM feature & LLMHG & 2024 & LLM-guided hypergraph learning for explainable recommendation.\\
+LLM data & GReaT & 2023 & Language models as realistic tabular data generators.\\
+LLM data & ONCE & 2023 & Boosts content recommendation with open and closed LLMs.\\
+LLM data & AnyPredict & 2023 & Foundation model for tabular prediction.\\
+LLM data & DPLLM & 2023 & Differentially private synthetic query generation.\\
+LLM data & MINT & 2023 & Narrative-driven recommendations with LLMs.\\
+LLM data & Agent4Rec & 2023 & Generative agents for dynamic recommendation simulation.\\
+LLM data & RecPrompt & 2023 & Prompt tuning framework for news recommendation.\\
+LLM data & PO4ISR & 2023 & Intent-driven session recommendation with LLMs.\\
+LLM data & BEQUE & 2023 & LLM-based long-tail query rewriting in Taobao search.\\
+LLM data & Agent4Ranking & 2023 & Multi-agent personalized query rewriting for ranking.\\
+LLM scoring & Zero-shot recommendation as language modeling & 2021 & Early GPT-style zero-shot next-item framing.\\
+LLM scoring & PTab & 2022 & Pre-trained language model for tabular data.\\
+LLM scoring & UniTRec & 2023 & Text-to-text transformer with contrastive learning.\\
+LLM scoring & Prompt4NR & 2023 & Prompt learning for news recommendation.\\
+LLM scoring & FLAN-T5 rating prediction & 2023 & Evaluates whether LLMs understand user ratings.\\
+LLM scoring & BookGPT & 2023 & LLM framework for book recommendation.\\
+LLM scoring & TALLRec & 2023 & Efficient LLaMA-LoRA tuning for preference prediction.\\
+LLM scoring & PromptRec & 2023 & Personalized cold-start recommendation with prompts.\\
+LLM scoring & GLRec & 2023 & LLM graph understanding for online job recommendation.\\
+LLM scoring & BERT4CTR & 2023 & Combines PLM with non-textual CTR features.\\
+LLM scoring & ReLLa & 2024 & Retrieval-enhanced LLMs for lifelong behavior comprehension.\\
+LLM scoring & TASTE & 2023 & Text matching to reduce popularity bias.\\
+LLM scoring & ClickPrompt & 2024 & Uses CTR models as prompt generators for PLMs.\\
+LLM scoring & SetwiseRank & 2023 & Efficient setwise zero-shot ranking with LLMs.\\
+LLM scoring & LLMRanker & 2023 & Fine-grained relevance labels for zero-shot rankers.\\
+LLM scoring & CoLLM & 2024 & Integrates collaborative embeddings into LLMs.\\
+LLM scoring & FLIP & 2023 & Fine-grained alignment between ID models and PLMs.\\
+LLM scoring & CLLM4Rec & 2024 & Collaborative LLM for recommender systems.\\
+LLM scoring & RecExplainer & 2023 & Aligns LLMs for recommendation interpretability.\\
+LLM scoring & E4SRec & 2023 & Efficient extensible LLM solution for sequential recommendation.\\
+LLM scoring & LSAT & 2023 & Incremental learning for LLM-based recommender systems.\\
+LLM scoring & DEALRec & 2024 & Data-efficient fine-tuning for LLM recommendation.\\
+LLM generation & P5 & 2022 & Unifies recommendation tasks as language processing.\\
+LLM generation & M6-Rec & 2022 & Open-ended industrial generative recommender model.\\
+LLM generation & GPT4Rec & 2023 & Generative framework for recommendation and interest interpretation.\\
+LLM generation & VIP5 & 2023 & Multimodal foundation model for recommendation.\\
+LLM generation & P5-ID & 2023 & Studies item ID indexing for recommendation foundation models.\\
+LLM generation & PALR & 2023 & Personalization-aware LLMs for recommendation.\\
+LLM generation & ChatGPT zero-shot ranker & 2023 & Evaluates ChatGPT for ranking candidates.\\
+LLM generation & AGR & 2023 & Early artificial general recommender experiments.\\
+LLM generation & GPTRec & 2023 & GPT-style generative sequential recommendation.\\
+LLM generation & GenRec & 2023 & LLM for generative recommendation.\\
+LLM generation & UP5 & 2023 & Fairness-aware foundation model for recommendation.\\
+LLM generation & BIGRec & 2023 & Bi-step grounding paradigm for LLM recommendation.\\
+LLM generation & KP4SR & 2023 & Knowledge prompt tuning for sequential recommendation.\\
+LLM generation & POD & 2023 & Prompt distillation for efficient LLM recommendation.\\
+LLM generation & RaRS & 2023 & Retrieval-augmented recommender system with LLMs.\\
+LLM generation & LANCER & 2023 & Content-enriched language modeling for sequential recommendation.\\
+LLM generation & TransRec & 2023 & Bridges LLMs and recommendation through transition modeling.\\
+LLM generation & AgentCF & 2024 & Collaborative learning with autonomous language agents.\\
+LLM generation & P4LM & 2023 & Factual personalized recommendation with RL.\\
+LLM generation & LightLM & 2023 & Lightweight language model for generative recommendation.\\
+LLM generation & LlamaRec & 2023 & Two-stage LLM ranking for recommendation.\\
+LLM generation & LC-Rec & 2023 & Integrates collaborative semantics into LLM recommendation.\\
+LLM generation & ControlRec & 2023 & Bridges semantic gap between LM and personalized recommendation.\\
+LLM generation & LLaRA & 2024 & Large language-recommendation assistant.\\
+LLM generation & DRDT & 2023 & Dynamic reflection with divergent thinking.\\
+LLM generation & STELLA & 2023 & Shows LLMs are not stable recommender systems.\\
+Semantic ID & TIGER & 2023 & Generative retrieval with semantic IDs.\\
+Semantic ID & How to Index Item IDs & 2023 & Studies ID design for recommendation foundation models.\\
+Semantic ID & Better Generalization with Semantic IDs & 2023 & Case study in ranking with semantic IDs.\\
+Semantic ID & LMIndexer & 2023 & Language models as semantic indexers.\\
+Semantic ID & LETTER & 2024 & Learnable item tokenization for generative recommendation.\\
+Semantic ID & Unifying generative and dense retrieval & 2024 & Bridges dense retrieval and generative decoding.\\
+Semantic ID & Inductive generative recommendation & 2024 & Uses retrieval-based speculation for inductive recommendation.\\
+Semantic ID & Generating long semantic IDs in parallel & 2025 & Parallelizes prediction of long semantic IDs.\\
+Semantic ID & Semantic IDs for joint search and recommendation & 2025 & Unifies search and recommendation with semantic IDs.\\
+Semantic ID & Practitioner handbook for semantic IDs & 2025 & Benchmarking and practical guidance for SID systems.\\
+Semantic ID & HiD-VAE & 2025 & Hierarchical disentangled semantic IDs.\\
+Semantic ID & Differentiable Semantic ID & 2026 & Learns SIDs end-to-end for generative recommendation.\\
+Semantic ID & Variable-Length Semantic IDs & 2026 & Adapts SID length to item complexity.\\
+Semantic ID & GenCDR & 2025 & Adaptive semantic tokenization for cross-domain recommendation.\\
+Semantic ID & GLASS & 2026 & SID-tier and semantic search for long sequences.\\
+Semantic ID & Gryphon & 2026 & Joint SID generation and item-level scoring in industry.\\
+Semantic ID & SIDInspector & 2026 & Diagnostics for semantic-ID tokenizers.\\
+Semantic ID & LBR & 2026 & Mitigates length bias in LLM-based recommendation.\\
+Large rec model & HSTU & 2024 & Trillion-parameter sequential transducer with online A/B evidence.\\
+Large rec model & Scaling recommender transformers to one billion parameters & 2025 & Studies transformer scaling for recommendation.\\
+Large rec model & Large User Model & 2025 & Unlocks scaling law in industrial recommendation.\\
+Large rec model & MTFM & 2026 & Meituan multi-scenario foundation model.\\
+Large rec model & RecBase & 2025 & Generative foundation model pretraining for zero-shot recommendation.\\
+Large rec model & OneMall & 2026 & One-model family for Kuaishou e-commerce recommendation.\\
+Large rec model & GPR & 2025 & Generative pretrained one-model paradigm for ads recommendation.\\
+Industrial A/B & ReLand & 2024 & Alipay controllable LLM reasoning pool with CTR and CVR gains.\\
+Industrial A/B & LLM-KERec & 2024 & Alipay inferential knowledge graph with conversion and GMV gains.\\
+Industrial A/B & HSTU GRs & 2024 & Meta sequential transducers with 12.4 percent online lift.\\
+Industrial A/B & SORT-Gen & 2025 & Taobao generative re-ranking with click and GMV gains.\\
+Industrial A/B & PLUM & 2025 & YouTube semantic-ID generative retrieval with live experiment gains.\\
+Industrial A/B & RecGPT & 2025 & Taobao intent-centric reasoning model with IPV and CTR gains.\\
+Industrial A/B & RecGPT-V2 & 2025 & Taobao multi-agent intent reasoning with GMV and novelty gains.\\
+Industrial A/B & MTFM & 2026 & Meituan foundation model with CTR, conversion, orders, and latency gains.\\
+Industrial A/B & SIGMA & 2026 & AliExpress generative multi-task recommender with GMV gains.\\
+Industrial A/B & AIR & 2026 & Kuaishou atomic intent reasoning with GMV and throughput gains.\\
+Industrial A/B & Taiji & 2026 & Kuaishou ads LLM-enhanced recommendation with revenue gains.\\
+Industrial A/B & AKT-Rec & 2026 & Tmall long-tail semantic-ID recommendation with CTR and GMV gains.\\
+Industrial proto & BEQUE & 2023 & Taobao long-tail query rewriting with LLMs.\\
+Industrial proto & Universal LLM retriever & 2025 & Industrial-scale multi-objective retrieval with LLMs.\\
+Industrial proto & RecGPT-Mobile & 2026 & On-device intent agent for Taobao feed recommendation.\\
+Industrial proto & AIGQ & 2026 & Taobao generated query architecture for e-commerce query recommendation.\\
+Industrial proto & RecGPT explanation generation & 2025 & Dynamic explanations and judge/reward framework.\\
+Industrial proto & YouTube creator matching with Gemini & 2026 & Product blog example of multimodal matching for brand-creator discovery.\\
+Industrial proto & Meta GEM discussions & 2025 & Ads foundation-model direction; public non-primary summaries require caution.\\
+Multimodal rec & MM-Rec & 2022 & Visiolinguistic multimodal news recommendation.\\
+Multimodal rec & VIP5 & 2023 & Multimodal foundation model for recommendation.\\
+Multimodal rec & MISSRec & 2023 & Multi-modal interest-aware transfer.\\
+Multimodal rec & PMMRec & 2024 & Transferable recommendation through multimodality.\\
+Multimodal rec & MMREC & 2024 & LLM-based multimodal recommender system.\\
+Multimodal rec & AKT-Rec & 2026 & MLLM semantic clusters for long-tail e-commerce recommendation.\\
+Multimodal rec & MMEACR & 2026 & Multimodal memory-enhanced agent collaboration.\\
+Conversational rec & ReDial & 2018 & Benchmark for conversational movie recommendation.\\
+Conversational rec & TG-ReDial & 2020 & Topic-guided recommendation dialogues.\\
+Conversational rec & KBRD & 2019 & Knowledge graph enhanced conversational recommendation.\\
+Conversational rec & UniCRS & 2022 & Unified conversational recommender system.\\
+Conversational rec & Chat-REC & 2023 & Interactive and explainable LLM-augmented recommendation.\\
+Conversational rec & Large LMs as zero-shot conversational recommenders & 2023 & Tests LLMs in conversational recommendation.\\
+Conversational rec & Retrieval-augmented CRS & 2024 & Prompt-based state tracking with retrieval.\\
+Agentic rec & Agent4Rec & 2023 & Generative agents for recommendation experiments.\\
+Agentic rec & AgentCF & 2024 & Autonomous agents for collaborative filtering.\\
+Agentic rec & MACRec & 2024 & Multi-agent collaboration for recommendation.\\
+Agentic rec & RecMind & 2024 & Multi-step LLM reasoning and tools for recommendation.\\
+Agentic rec & iAgent & 2025 & LLM agent as a shield between user and recommender.\\
+Agentic rec & RecGPT-V2 & 2025 & Hierarchical multi-agent system for intent reasoning.\\
+Agentic rec & CTV agentic recommendation & 2026 & Agentic recommendation for connected TV content discovery.\\
+Agentic rec & Group recommender LLM modeling & 2026 & Models consensus and dissent in group preferences.\\
+Evaluation & LLMRec benchmark & 2023 & Benchmarks LLMs on recommendation tasks.\\
+Evaluation & Tapping LLM potential & 2024 & Framework and empirical analysis of LLM recommenders.\\
+Evaluation & A/B Agent & 2026 & Simulates multimodal user behavior for A/B testing.\\
+Evaluation & LLM-as-a-judge slate recommendation & 2025 & Uses LLMs as world models or judges for slates.\\
+Evaluation & User preference induction & 2026 & LLM expands offline top-N relevance judgments.\\
+Evaluation & Controllability-centric evaluation & 2026 & Collaborative agents evaluate controllability.\\
+Evaluation & Powerful A/B metrics & 2024 & Metric design for recommender online experiments.\\
+Fairness & FaiRLLM & 2023 & Evaluates fairness in LLM recommendation.\\
+Fairness & UP5 & 2023 & Unbiased foundation model for fairness-aware recommendation.\\
+Fairness & ChatNews provider fairness & 2023 & Studies personalization, fake news, and provider fairness.\\
+Fairness & Demographic bias in job recommendation & 2023 & Shows unequal opportunities in LLM job recommendation.\\
+Fairness & RECLLM & 2024 & Studies provider fairness, stability, and recency.\\
+Fairness & Fairness in LLM4Rec survey & 2026 & Systematic review of bias mechanisms and mitigation.\\
+Robustness & LoRec & 2024 & Robust sequential recommendation against poisoning attacks.\\
+Robustness & STELLA & 2023 & Demonstrates instability in LLM recommenders.\\
+Robustness & Exact unlearning for LLM recommendation & 2024 & Machine unlearning for LLM recommenders.\\
+Robustness & Memorization in generative recommendation & 2026 & Studies memorization behavior of LLM generative recommenders.\\
+Robustness & LBR & 2026 & Mitigates input and output length bias.\\
+Explanation & XRec & 2024 & LLMs for explainable recommendation.\\
+Explanation & RecExplainer & 2023 & Aligns LLMs to explain recommendation models.\\
+Explanation & Coherence in explanations & 2023 & Studies natural-language explanation coherence.\\
+Explanation & Review of LLM explanations & 2024 & Surveys recommendation explanation with LLMs.\\
+Privacy & DPLLM & 2023 & Differentially private synthetic query generation.\\
+Privacy & Federated prompt content representation & 2024 & Federated cross-domain content representation.\\
+Privacy & RecGPT-Mobile & 2026 & Device-side LLM intent understanding for privacy and freshness.\\
+Ads and commerce & SuKD & 2022 & NLP features for sponsored search CTR.\\
+Ads and commerce & BERT4CTR & 2023 & PLM and non-text features for CTR prediction.\\
+Ads and commerce & Uni-CTR & 2023 & Multi-domain CTR prediction via LLMs.\\
+Ads and commerce & Taiji & 2026 & LLM-enhanced ads recommendation with ADVV and revenue gains.\\
+Ads and commerce & RecGPT & 2025 & Taobao large reasoning model for homepage recommendation.\\
+Ads and commerce & AIGQ & 2026 & E-commerce generated query recommendation.\\
+News rec & PLM-NR & 2021 & PLM-empowered news recommendation.\\
+News rec & Tiny-NewsRec & 2022 & Efficient news recommendation.\\
+News rec & Prompt4NR & 2023 & Prompt learning for news recommendation.\\
+News rec & RecPrompt & 2023 & Prompt tuning for news recommendation.\\
+News rec & LLM-based news recommender survey & 2025 & Domain-specific survey for news recommendation.\\
+POI and local rec & Generative next POI with semantic ID & 2025 & Semantic-ID generation for next POI recommendation.\\
+POI and local rec & BTRec & 2023 & BERT-based trajectory recommendation for tours.\\
+POI and local rec & Tour itinerary recommendation with LMs & 2023 & Language models for travel itinerary recommendation.\\
+Search and rec & S and R foundation model & 2023 & Unified search and recommendation for cold start.\\
+Search and rec & Semantic IDs for joint search and recommendation & 2025 & Shared SID design for both tasks.\\
+Search and rec & AIGQ & 2026 & Hybrid generated query recommendation in Taobao.\\
+Search and rec & BEQUE & 2023 & Long-tail query rewriting.\\
+Search and rec & MUVERA-like multi-vector retrieval discussions & 2025 & Adjacent retrieval technology relevant to LLM-era recommendation.\\
+Recent 2026 & AIR & 2026 & LLM atomic intent reasoning for cross-domain commerce recommendation.\\
+Recent 2026 & Taiji & 2026 & Pareto optimization of semantic and ID rewards.\\
+Recent 2026 & MTFM & 2026 & Multi-scenario foundation model in Meituan.\\
+Recent 2026 & SIGMA & 2026 & Instruction-driven generative multi-task recommender.\\
+Recent 2026 & AKT-Rec & 2026 & Long-tail semantic-ID transfer at Tmall.\\
+Recent 2026 & LBR & 2026 & Length bias reduction for LLM recommendation.\\
+Recent 2026 & MMEACR & 2026 & Multimodal memory agents for recommendation.\\
+Recent 2026 & Connected TV agent & 2026 & LLM-powered CTV content discovery.\\
+Recent 2026 & User preference induction & 2026 & LLM-based offline evaluation label expansion.\\
+Recent 2026 & Controllability evaluation & 2026 & Collaborative agents evaluate steering and controllability.\\
+Recent 2026 & Consensus versus dissent group rec & 2026 & LLM modeling of subjective group preferences.\\
+Recent 2026 & Intent-driven SID news recommendation & 2026 & Grounded conversational news recommendation with semantic IDs.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Primary References}
+
+\begin{thebibliography}{99}
+
+\bibitem{wide}
+H.-T. Cheng et al.
+\newblock Wide \& Deep Learning for Recommender Systems.
+\newblock DLRS, 2016.
+
+\bibitem{youtube}
+P. Covington, J. Adams, and E. Sargin.
+\newblock Deep Neural Networks for YouTube Recommendations.
+\newblock RecSys, 2016.
+
+\bibitem{din}
+G. Zhou et al.
+\newblock Deep Interest Network for Click-Through Rate Prediction.
+\newblock KDD, 2018.
+
+\bibitem{sasrec}
+W.-C. Kang and J. McAuley.
+\newblock Self-Attentive Sequential Recommendation.
+\newblock ICDM, 2018.
+
+\bibitem{bert4rec}
+F. Sun et al.
+\newblock BERT4Rec: Sequential Recommendation with Bidirectional Encoder Representations from Transformer.
+\newblock CIKM, 2019.
+
+\bibitem{dlrm}
+M. Naumov et al.
+\newblock Deep Learning Recommendation Model for Personalization and Recommendation Systems.
+\newblock arXiv:1906.00091, 2019.
+
+\bibitem{p5}
+S. Geng, S. Liu, Z. Fu, Y. Ge, and Y. Zhang.
+\newblock Recommendation as Language Processing: A Unified Pretrain, Personalized Prompt and Predict Paradigm.
+\newblock RecSys, 2022.
+
+\bibitem{m6rec}
+Z. Cui, J. Ma, C. Zhou, J. Zhou, and H. Yang.
+\newblock M6-Rec: Generative Pretrained Language Models are Open-Ended Recommender Systems.
+\newblock arXiv:2205.08084, 2022.
+
+\bibitem{tallrec}
+K. Bao et al.
+\newblock TALLRec: An Effective and Efficient Tuning Framework to Align Large Language Model with Recommendation.
+\newblock RecSys, 2023.
+
+\bibitem{chatrec}
+Y. Gao et al.
+\newblock Chat-REC: Towards Interactive and Explainable LLMs-Augmented Recommender System.
+\newblock arXiv:2303.14524, 2023.
+
+\bibitem{surveybenefit}
+Z. Lin et al.
+\newblock How Can Recommender Systems Benefit from Large Language Models: A Survey.
+\newblock ACM TOIS, 2024.
+
+\bibitem{nextgensurvey}
+J. Li et al.
+\newblock Towards Next-Generation LLM-based Recommender Systems: A Survey and Beyond.
+\newblock arXiv:2410.19744, 2024.
+
+\bibitem{gensurvey}
+L. Lin et al.
+\newblock Large Language Models for Generative Recommendation: A Survey and Visionary Discussions.
+\newblock LREC-COLING, 2024.
+
+\bibitem{tiger}
+S. Rajput et al.
+\newblock Recommender Systems with Generative Retrieval.
+\newblock NeurIPS, 2023.
+
+\bibitem{rella}
+Y. Lin et al.
+\newblock ReLLa: Retrieval-enhanced Large Language Models for Lifelong Sequential Behavior Comprehension in Recommendation.
+\newblock WWW, 2024.
+
+\bibitem{collm}
+Y. Zhang et al.
+\newblock Collaborative Large Language Model for Recommender Systems.
+\newblock WWW, 2024.
+
+\bibitem{llara}
+J. Liao et al.
+\newblock LLaRA: Large Language-Recommendation Assistant.
+\newblock SIGIR, 2024.
+
+\bibitem{hstu}
+J. Zhai et al.
+\newblock Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations.
+\newblock arXiv:2402.17152, 2024.
+
+\bibitem{reland}
+L. Yu, Z. Liu, Z. Zhang, J. Zhou, and J. Chen.
+\newblock ReLand: Integrating Large Language Models' Insights into Industrial Recommenders via a Controllable Reasoning Pool.
+\newblock RecSys, 2024.
+
+\bibitem{llmkerec}
+Q. Zhao, H. Qian, Z. Liu, G.-D. Zhang, and L. Gu.
+\newblock Breaking the Barrier: Utilizing Large Language Models for Industrial Recommendation Systems through an Inferential Knowledge Graph.
+\newblock CIKM, 2024. arXiv:2402.13750.
+
+\bibitem{mtfm}
+Meituan MTFM Team.
+\newblock MTFM: A Scalable and Alignment-free Foundation Model for Industrial Recommendation in Meituan.
+\newblock arXiv:2602.11235, 2026.
+
+\bibitem{sigma}
+D. Sun, Y. Liu, J. Zhou, X. Liu, C. Yu, Y. Li, H. Yu, and J. Zhang.
+\newblock SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress.
+\newblock arXiv:2602.22913, 2026.
+
+\bibitem{sortgen}
+Y. Meng, C. Guo, Y. Cao, T. Liu, and B. Zheng.
+\newblock A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao.
+\newblock arXiv:2505.07197, 2025.
+
+\bibitem{air}
+Y. Chen et al.
+\newblock Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations.
+\newblock arXiv:2606.10357, 2026.
+
+\bibitem{taiji}
+Kuaishou Taiji Team.
+\newblock Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation.
+\newblock arXiv:2606.03866, 2026.
+
+\bibitem{plum}
+A. Tsai et al.
+\newblock PLUM: Adapting Pre-trained Language Models for Industrial-scale Generative Recommendations.
+\newblock arXiv:2510.07784, 2025.
+
+\bibitem{aktrec}
+C. Yan et al.
+\newblock From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs.
+\newblock arXiv:2605.23310, 2026.
+
+\bibitem{recgpt}
+RecGPT Team.
+\newblock RecGPT Technical Report.
+\newblock arXiv:2507.22879, 2025.
+
+\bibitem{recgptv2}
+RecGPT Team.
+\newblock RecGPT-V2 Technical Report.
+\newblock arXiv:2512.14503, 2025.
+
+\bibitem{recgptmobile}
+B. Zhang et al.
+\newblock RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation.
+\newblock arXiv:2605.04726, 2026.
+
+\bibitem{lbr}
+Anonymous/Authors.
+\newblock LBR: Towards Mitigating Length Bias in Large Language Models for Recommendation.
+\newblock arXiv:2607.04270, 2026.
+
+\bibitem{mmeacr}
+Authors.
+\newblock Seeing and Reflecting: Multimodal Memory-Enhanced Agent Collaboration for Recommendation.
+\newblock arXiv:2607.07108, 2026.
+
+\bibitem{ctvagent}
+Authors.
+\newblock An LLM-powered Agentic Recommendation System for Connected TV Content Discovery.
+\newblock arXiv:2607.09988, 2026.
+
+\bibitem{eval2607}
+Authors.
+\newblock User Preference Induction with LLMs for Offline Top-N Recommendation Evaluation.
+\newblock arXiv:2607.11354, 2026.
+
+\bibitem{control2607}
+J. Zhou et al.
+\newblock Can We Steer the Black-Box? Towards Controllability-Centric Evaluation of Recommender Systems with Collaborative Agents.
+\newblock arXiv:2607.13418, 2026.
+
+\end{thebibliography}
+
+\end{document}
