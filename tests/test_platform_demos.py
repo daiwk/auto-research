@@ -30,6 +30,8 @@ def test_shared_demo_covers_both_tracks_and_all_runtime_controls():
         "TORCH_INDEX_URL", "runtime_summary",
     ):
         assert required in text
+    assert "--generations 1" not in text
+    assert text.count("--generations 3") >= 4
 
 
 def test_auto_demo_dispatches_to_each_explicit_platform_script():

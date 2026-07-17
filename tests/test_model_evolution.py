@@ -80,7 +80,10 @@ def test_direction_drives_parallel_round_hypotheses_and_dashboard(tmp_path):
     assert len(result.rounds) == 2
     assert result.dataset_summary["users"] == 1000
     assert (run_dir / "index.html").exists()
-    assert "研究过程" in (run_dir / "index.html").read_text(encoding="utf-8")
+    dashboard = (run_dir / "index.html").read_text(encoding="utf-8")
+    assert "研究过程" in dashboard
+    assert "已完成进化轮数" in dashboard
+    assert "实验数（含基线）" in dashboard
 
 
 def test_micro_llm_plan_separates_structure_data_and_post_training():

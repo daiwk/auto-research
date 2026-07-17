@@ -110,7 +110,7 @@ if [[ "$TRACK" == "recommendation" ]]; then
   if [[ "$PROFILE" == "quick" ]]; then
     COMMAND+=(
       --dataset movielens-100k
-      --generations 1 --population 2 --steps 10 --papers 4 --seeds 42
+      --generations 3 --population 2 --steps 10 --papers 4 --seeds 42
       --maximum-users 220 --maximum-items 360 --evaluation-users 100
     )
   else
@@ -141,5 +141,10 @@ else
 fi
 
 echo "Starting $TRACK demo ($PROFILE) on $PLATFORM..."
+if [[ "$PROFILE" == "quick" ]]; then
+  echo "Plan: 3 evolution rounds x 2 candidates; the baseline is a separate experiment."
+else
+  echo "Plan: 3 evolution rounds x 6 candidates; the baseline is a separate experiment."
+fi
 echo "Artifacts will be written under runs/demo-$PLATFORM-$TRACK/"
 exec "${COMMAND[@]}" "${COMMON_ARGS[@]}" "$@"

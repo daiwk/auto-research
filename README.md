@@ -185,7 +185,7 @@ CUDA/CPU PyTorch 的安装方式、多卡隔离和 worker 配置见 [GPU 与 Lin
 ./demo-linux-gpu.sh
 ```
 
-默认执行快速但真实的 RankMixer + MovieLens-100K evolve，并把结果写到 `runs/demo-<platform>-recommendation/`。切换完整规模或 LLM 自动进化：
+默认执行快速但真实的 RankMixer + MovieLens-100K evolve：仍然运行 3 个进化轮次，每轮 2 个候选，只缩小数据和单候选训练步数；基线是额外实验，不计作进化轮次。结果写到 `runs/demo-<platform>-recommendation/`。切换完整规模或 LLM 自动进化：
 
 ```bash
 # 复用原 demo.sh 的 MovieLens-1M、3 代、6 candidates、3 seeds 设置
