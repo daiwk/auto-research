@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 from typing import Any, Callable
@@ -45,7 +47,7 @@ def initialize(model, seed: int):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     return model.to(device), device, torch
 
 

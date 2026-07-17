@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 
@@ -27,7 +29,7 @@ def train_semantic_ids(features: np.ndarray, config: TIGERConfig, seed: int):
     torch, nn = require_backend()
     torch.manual_seed(seed)
     np.random.seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     values = torch.tensor(features, dtype=torch.float32, device=device)
 
     class RQVAE(nn.Module):

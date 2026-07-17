@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 import time
 from copy import deepcopy
@@ -134,7 +136,7 @@ def build_model(item_count: int, code_sizes: tuple[int, ...], config: UniVAConfi
 def train_model(codes, ecpm, item_count, rows, config, seed, use_rl):
     torch, _ = require_backend()
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     code_sizes = tuple(int(codes[:, level].max()) + 1 for level in range(codes.shape[1]))
     model = build_model(item_count, code_sizes, config).to(device)
     code_tensor = torch.tensor(codes, dtype=torch.long, device=device)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 import time
 from dataclasses import dataclass
@@ -65,7 +67,7 @@ def build_knowledge(
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
     model = AutoModelForCausalLM.from_pretrained(config.model_name)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).eval()
     generated = _generate(model, tokenizer, [*user_prompts, *item_prompts], device, torch)
     vectors = _encode(model, tokenizer, generated, device, torch)
@@ -159,7 +161,7 @@ def build_ranker(data, user_knowledge, item_knowledge, config: KARConfig, use_kn
 
 def train_and_evaluate(model, train, test, config: KARConfig, seed: int):
     torch, _, _, _ = require_backend()
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     parameters = [value for value in model.parameters() if value.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=config.learning_rate)

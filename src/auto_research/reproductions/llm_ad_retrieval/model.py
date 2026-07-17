@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import hashlib
 import json
 import math
@@ -135,7 +137,7 @@ def generate_representations(
     training_metrics_path = checkpoint / "training.json"
     load_from = checkpoint if (checkpoint / "config.json").exists() else model_name
     model = AutoModelForCausalLM.from_pretrained(load_from)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device)
     creatives = [
         creative(title, genres, shadow=shadow)

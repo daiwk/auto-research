@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 from pathlib import Path
@@ -35,7 +37,7 @@ def content_embeddings(titles, root: Path, config: LEARNConfig):
         if values.shape[0] == len(titles): return values
     tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     model = AutoModel.from_pretrained(config.model_name)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).eval(); rows = []
     with torch.inference_mode():
         for start in range(0, len(titles), 128):

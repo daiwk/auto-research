@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from pathlib import Path
 
@@ -39,7 +41,7 @@ def train_rqvae(
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     title = torch.tensor(title_features, device=device)
     genre = torch.tensor(genre_features, device=device)
     pairs = torch.tensor(cooccurrences, dtype=torch.long, device=device)

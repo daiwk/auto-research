@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 import time
 from dataclasses import dataclass
@@ -59,7 +61,7 @@ def build_model(item_count: int, config: GenRankConfig, packed: bool):
 
 def train_evaluate(model, train, test, config: GenRankConfig, seed: int):
     torch, _ = require_backend()
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     torch.manual_seed(seed)
     model.to(device).train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
@@ -80,7 +82,8 @@ def train_evaluate(model, train, test, config: GenRankConfig, seed: int):
             tensors = _batch(batch, config, device, torch)
             labels.extend(tensors.pop("labels").cpu().tolist())
             tick = time.perf_counter(); logits = model(**tensors)
-            if device.type == "mps": torch.mps.synchronize()
+            if device.type == "cuda": torch.cuda.synchronize(device)
+            elif device.type == "mps": torch.mps.synchronize()
             elapsed += time.perf_counter() - tick
             scores.extend(torch.sigmoid(logits).cpu().tolist())
     return {

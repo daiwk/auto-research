@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import random
 from dataclasses import dataclass
 
@@ -50,7 +52,7 @@ def embed_all(model, tokenizer, texts, batch_size=64):
 
 
 def train(model, tokenizer, texts, genres, pairs, config, seed):
-    torch, _, _ = require_backend(); device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    torch, _, _ = require_backend(); device = device_for(torch)
     model.to(device).train(); torch.manual_seed(seed); rng = random.Random(seed)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate); losses=[]
     for _ in range(config.steps):

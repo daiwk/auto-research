@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import math
 from pathlib import Path
 import random
@@ -81,7 +83,7 @@ class MicroLLMEvaluator:
         random.seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
-        device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        device = device_for(torch)
         config = MicroLMConfig(
             vocab_size=self.data.vocab_size,
             dimensions=genome.dimensions,

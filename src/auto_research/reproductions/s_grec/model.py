@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import copy
 import random
 import time
@@ -81,7 +83,7 @@ def build_generator(item_count: int, codes: np.ndarray, config: GeneratorConfig)
 def train_sft(data, steps: int, config: GeneratorConfig, seed: int):
     torch, _ = require_backend()
     torch.manual_seed(seed)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model = build_generator(len(data.codes), data.codes, config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     code_tensor = torch.tensor(data.codes, dtype=torch.long, device=device)

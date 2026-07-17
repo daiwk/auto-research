@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from auto_research.runtime import device_for
+
 import copy
 import csv
 import math
@@ -219,7 +221,7 @@ def build_encoder_decoder(data: KuaiData, config: OneRecV2Config):
 
 def train_sft(model, rows, config: OneRecV2Config, seed: int):
     torch, _ = require_backend()
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    device = device_for(torch)
     model.to(device).train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
     rng = random.Random(seed)
@@ -284,7 +286,9 @@ def evaluate(model, rows, config: OneRecV2Config):
             histories, codes = _batch(batch, config, device, torch)
             tick = time.perf_counter()
             logits = model(histories, codes)
-            if device.type == "mps":
+            if device.type == "cuda":
+                torch.cuda.synchronize(device)
+            elif device.type == "mps":
                 torch.mps.synchronize()
             elapsed += time.perf_counter() - tick
             loss = sum(torch.nn.functional.cross_entropy(score, codes[:, level]) for level, score in enumerate(logits))

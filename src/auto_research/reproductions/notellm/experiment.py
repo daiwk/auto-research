@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+from auto_research.runtime import device_for
+
 from ..llm_rec_data import load_text_ctr_data
 from ..rec_utils import load_movielens_sequences, transitions
 from .model import NoteLLMConfig, build_model, embed_all, i2i_metrics, prompts, require_backend, train
@@ -13,7 +15,7 @@ def reproduce_notellm(dataset_dir: Path, seed: int = 42):
     text_data = load_text_ctr_data(dataset_dir)
     texts = prompts(text_data.titles, text_data.genres)
     model, tokenizer = build_model(config)
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu"); model.to(device)
+    device = device_for(torch); model.to(device)
     baseline = i2i_metrics(embed_all(model, tokenizer, texts), sequence_data)
     pairs = tuple(map(tuple, transitions(sequence_data.train).tolist()))
     training = train(model, tokenizer, texts, text_data.genres, pairs, config, seed)

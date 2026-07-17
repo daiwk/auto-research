@@ -108,7 +108,8 @@ def require_torch():
 
 
 def device_for(torch):
-    return torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    from auto_research.runtime import device_for as resolve_device
+    return resolve_device(torch)
 
 
 def training_pairs(data: CompactSequences, maximum_history: int = 20):
