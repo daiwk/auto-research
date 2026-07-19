@@ -1,0 +1,13 @@
+{
+  "paper": "2605.20948",
+  "adapter": "memory-grafting",
+  "dataset": {"name": "WikiText-2", "train_tokens": 180000, "validation_tokens": 24000},
+  "setup": {"seed": 42, "recipient_steps": 45, "teacher_steps": 30, "memory_capacity": 192, "ngram_orders": [2, 3, 4]},
+  "variants": {
+    "Transformer": {"loss": 6.1529898445, "perplexity": 470.1208759, "trainable_parameters": 172352},
+    "Engram": {"loss": 6.1161511540, "perplexity": 453.1173551, "trainable_parameters": 205504},
+    "Memory Grafting": {"loss": 6.1164583564, "perplexity": 453.2565752, "trainable_parameters": 205504, "exact_hit_rate": 0.0833333358}
+  },
+  "relative": {"ppl_reduction_vs_transformer_percent": 3.5872265, "ppl_reduction_vs_engram_percent": -0.0307250},
+  "paper_benchmark_average": {"MoE": 51.95, "Engram": 52.43, "Memory Grafting": 53.86}
+}

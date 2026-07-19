@@ -63,7 +63,12 @@ class PaperMetadata:
     def validate_catalog_entry(self) -> None:
         """Enforce online A/B evidence for newly catalogued industrial papers."""
         catalogued = bool(self.organization or self.published or self.topics)
-        if catalogued and not self.online_ab and not self.selection_exception:
+        if (
+            self.track == "recommendation"
+            and catalogued
+            and not self.online_ab
+            and not self.selection_exception
+        ):
             raise ValueError(
                 f"catalogued paper {self.arxiv_id} has no quantified online A/B evidence; "
                 "only an explicit user-requested classic exception may bypass this gate"

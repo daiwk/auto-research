@@ -30,6 +30,7 @@
 
 ## ByteDance / Douyin / TikTok
 
+- 2026-05 · [FLUID](../2605.21832-fluid/README.md)：把直播多模态切片量化成 slice/room 两级 LUCID，以 prefix n-gram late fusion 完全替代短生命周期候选 ID。
 - 2025-05 · [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache，扩展超长用户行为序列建模。
 - 2025-07 · [RankMixer](../2507.15551-rankmixer/README.md)：交替进行 token mixing 与逐 token FFN，并探索稀疏 MoE 以扩展工业排序网络。
 - 2025-10 · [OneTrans](../2510.26104-onetrans/README.md)：用统一因果 Transformer 覆盖多场景排序，并复用 KV cache 降低线上推理成本。
@@ -101,6 +102,14 @@
 ## Microsoft / Bing Ads
 
 - 2026-05 · [HARNESS-LM](../2605.23572-harness-lm/README.md)：先训练强检索 teacher，再以 L2 对齐和冻结文档塔对比精修压缩在线 query encoder。
+
+## Tsinghua University / Microsoft Research Asia
+
+- 2026-05 · [Memory Grafting](../2605.20948-memory-grafting/README.md)：用预训练 grafting model 离线构造冻结 n-gram hidden bank，通过最长匹配与 Engram fallback 扩展 recipient 容量。
+
+## DeepSeek-AI
+
+- 2025-12 · [mHC](../2512.24880-mhc/README.md)：将多流 Hyper-Connections 的残差映射投影到双随机矩阵流形，稳定深层信号传播。
 
 ## Airbnb
 

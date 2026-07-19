@@ -21,10 +21,13 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **62/62** 对齐；完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **65/65** 对齐；推荐论文要求量化生产 A/B，纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `fluid` | FLUID · TikTok/ByteDance | 跨域内容融合、RQ-LUCID、prefix n-gram、ID-free late fusion 与 staged warmup；fresh Hit +100.00%、NDCG -20.63% |
+| 核心机制 | `memory-grafting` | Memory Grafting · Tsinghua/MSRA | 离线 teacher hidden bank、最长 n-gram 匹配、Engram fallback、gate+ShortConv；PPL 较 Transformer -3.59% |
+| 核心机制 | `mhc` | mHC · DeepSeek-AI | 动态两流 HC、Sinkhorn 双随机投影与稳定性测量；谱范数 1.089→1.000，短程 PPL 未提升 |
 | 核心机制 | `degre` | DeGRe · Alibaba | 累计价值 evaluator、lookahead beam mining 与 dense prefix distillation；NDCG@10 +3.31% |
 | 核心机制 | `harness-lm` | HARNESS-LM · Microsoft/Bing Ads | 强 teacher、L2 query alignment、冻结文档索引对比精修；NDCG@10 -28.05% |
 | 核心机制 | `grc` | GRC · Alibaba International | 结构化反思纠错 SFT、trajectory GRPO 与 EGRS；NDCG@10 -11.12% |

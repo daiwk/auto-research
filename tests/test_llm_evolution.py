@@ -9,6 +9,7 @@ def test_all_micro_llm_architectures_preserve_causal_lm_shape():
     architectures = (
         "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
+        "hyper_connections", "mhc",
     )
     for architecture in architectures:
         model = build_micro_lm(architecture, config)
