@@ -21,6 +21,7 @@ LLM_MUTATIONS = {
     "2305.10429": ("data_mixture", "DoReMi 的数据域混合与动态配比思想，本地使用可审计的固定/课程配比"),
     "2310.05914": ("neftune", "NEFTune 在 instruction tuning 时向 embedding 注入缩放均匀噪声"),
     "2401.02385": ("small_llm", "TinyLlama 展示 LLaMA 架构的小模型预训练与 staged data mixture"),
+    "2512.24880": ("mhc", "mHC 的多 residual streams、动态映射与 Sinkhorn 双随机流形约束"),
 }
 
 FALLBACK_PAPERS = (
@@ -39,6 +40,7 @@ LLM_FALLBACK_PAPERS = (
     Paper("DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining", "Optimizes domain weights for language-model pretraining data mixtures.", [], "2023-05-17", "https://arxiv.org/abs/2305.10429", "2305.10429"),
     Paper("NEFTune: Noisy Embeddings Improve Instruction Finetuning", "Adds scaled uniform noise to token embeddings during instruction tuning.", [], "2023-10-09", "https://arxiv.org/abs/2310.05914", "2310.05914"),
     Paper("TinyLlama: An Open-Source Small Language Model", "A compact LLaMA-style model trained with staged data mixtures.", [], "2024-01-04", "https://arxiv.org/abs/2401.02385", "2401.02385"),
+    Paper("mHC: Manifold-Constrained Hyper-Connections", "Doubly stochastic residual mixing stabilizes multi-stream Hyper-Connections.", [], "2025-12-31", "https://arxiv.org/abs/2512.24880", "2512.24880"),
 )
 
 

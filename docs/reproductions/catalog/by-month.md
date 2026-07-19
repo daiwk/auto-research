@@ -20,6 +20,8 @@
 
 ## 2026-05
 
+- [FLUID](../2605.21832-fluid/README.md)：将直播多模态切片离散为 slice/room LUCID，以独立 prefix token 晚融合并逐阶段退掉候选 item ID。
+- [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线构造冻结 n-gram hidden memory，recipient 通过最长后缀匹配、Engram fallback 与门控写入复用知识。
 - [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 与多价值 MoPO 引导生成式召回发现高潜新品。
 - [HARNESS-LM](../2605.23572-harness-lm/README.md)：以 teacher、L2 对齐和对比精修三阶段训练轻量非对称检索器。
 - [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead evaluator 的列表价值蒸馏成在线 dense 生成监督。
@@ -54,6 +56,10 @@
 
 - [HyFormer](../2601.12681-hyformer/README.md)：联合编码用户序列与搜索 query，通过 query decoding 和 boosting 强化搜索推荐信号。
 - [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
+
+## 2025-12
+
+- [mHC](../2512.24880-mhc/README.md)：以双随机流形约束多流 residual mixing，在保留信息交换的同时限制深层信号放大。
 
 ## 2025-10
 

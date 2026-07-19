@@ -7,6 +7,7 @@
 ## 选文与记录规则 {#selection-policy}
 
 - **工业论文硬门槛**：正文必须披露真实生产流量的量化线上 A/B、业务指标和生产对照组；“已部署”、离线 SOTA 或模拟器结果不算。
+- **纯 LLM 论文门槛**：不要求线上 A/B，但必须有公开 benchmark、同预算对照和可在 WikiText 等公开数据上实际训练的核心方法；只写公式或固定打分不进入复现表。
 - **具名例外**：SASRec、TIGER 是用户指定的经典基线，没有线上 A/B，不据此放宽后续选文标准。
 - **本地结果口径**：每篇 README 明确基线、实验组、数据、主指标和相对变化；论文线上结果、本地跨模型比较、模块消融和效率对照分开写。
 - **保真度**：公开数据替代私有数据或缩小规模可以接受；核心网络、训练目标或推理路径被 heuristic 替代时，只能标为“概念验证”。默认批量运行不包含概念验证。
@@ -17,15 +18,18 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 62 个 adapter；详细线上证据、本地指标和复现边界见下表及单篇 README。
+- 已登记并复核 65 个 adapter；其中推荐论文继续执行线上 A/B 硬门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余 9 篇硬门槛论文已进入核心机制复现；SlimPer、PVTG 因缺量化生产 A/B、SCASRec 因业务指标证据有歧义未纳入。
 
-## 全部复现（62/62）
+## 全部复现（65/65）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `fluid` · [FLUID](2605.21832-fluid/README.md) | QWD +0.55%、冷启房间播放 +2.05% | 去候选 ID 后 NDCG -20.63%，fresh Hit +100.00%、head share -58.32% |
+| 核心机制 | `memory-grafting` · [Memory Grafting](2605.20948-memory-grafting/README.md) | 纯 LLM：benchmark average 53.86 | PPL 较 Transformer -3.59%，但较 Engram +0.03%，未超过直接可训练记忆 |
+| 核心机制 | `mhc` · [mHC](2512.24880-mhc/README.md) | 纯 LLM：benchmark +2.1%–2.3% | PPL 未提升；残差行列误差归零、谱范数 1.089→1.000 |
 | 核心机制 | `degre` · [DeGRe](2605.25749-degre/README.md) | Taobao Flash CTR +2.85%、GMV +3.75% | evaluator→beam→dense distillation；NDCG@10 +3.31% |
 | 核心机制 | `harness-lm` · [HARNESS-LM](2605.23572-harness-lm/README.md) | Bing Ads Revenue +1.0%、Clicks +0.4% | 三阶段收敛但 test NDCG -28.05% |
 | 核心机制 | `grc` · [GRC](2602.23639-grc/README.md) | Revenue +1.79%、CTR +2.11%、GMV +2.04% | structured SFT→GRPO→EGRS；NDCG -11.12% |

@@ -13,6 +13,8 @@ class MicroLMConfig:
     kv_heads: int = 4
     sequence_length: int = 128
     expansion: int = 4
+    residual_streams: int = 2
+    sinkhorn_iterations: int = 10
 
 
 def build_micro_lm(architecture: str, config: MicroLMConfig):
@@ -24,10 +26,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
     supported = {
         "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
+        "hyper_connections", "mhc",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
-    modern = architecture.startswith("llama")
+    modern = architecture.startswith("llama") or architecture in {"hyper_connections", "mhc"}
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
     if config.dimensions % config.heads or config.heads % kv_heads:
@@ -99,15 +102,76 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             values = values + self.attention(self.first_norm(values))
             return values + self.ffn(self.second_norm(values))
 
+    class HyperLayer(nn.Module):
+        """Paper-faithful dynamic HC/mHC wrapper around one Transformer sublayer."""
+
+        def __init__(self, function):
+            super().__init__()
+            streams = config.residual_streams
+            self.function = function
+            self.function_norm = norm()
+            self.mapping_norm = nn.RMSNorm(streams * config.dimensions)
+            self.dynamic = nn.Linear(
+                streams * config.dimensions, streams * streams + 2 * streams,
+                bias=False,
+            )
+            self.pre_bias = nn.Parameter(torch.zeros(streams))
+            self.post_bias = nn.Parameter(torch.zeros(streams))
+            self.residual_bias = nn.Parameter(torch.eye(streams))
+            self.dynamic_scale = nn.Parameter(torch.tensor(0.01))
+
+        def mappings(self, values):
+            streams = config.residual_streams
+            flat = self.mapping_norm(values.flatten(-2))
+            raw = self.dynamic_scale * self.dynamic(flat)
+            pre_raw, post_raw, residual_raw = torch.split(
+                raw, (streams, streams, streams * streams), dim=-1
+            )
+            residual_raw = residual_raw.view(*values.shape[:-2], streams, streams)
+            if architecture == "mhc":
+                pre = torch.sigmoid(pre_raw + self.pre_bias)
+                post = 2.0 * torch.sigmoid(post_raw + self.post_bias)
+                residual = _sinkhorn(
+                    residual_raw + self.residual_bias,
+                    config.sinkhorn_iterations,
+                    torch,
+                )
+            else:
+                pre = pre_raw + torch.softmax(self.pre_bias, dim=-1)
+                post = post_raw + torch.ones_like(self.post_bias)
+                residual = residual_raw + self.residual_bias
+            return pre, post, residual
+
+        def forward(self, values):
+            pre, post, residual = self.mappings(values)
+            function_input = torch.einsum("...s,...sd->...d", pre, values)
+            update = self.function(self.function_norm(function_input))
+            carried = torch.einsum("...ij,...jd->...id", residual, values)
+            return carried + post.unsqueeze(-1) * update.unsqueeze(-2)
+
+    class HyperBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.attention = HyperLayer(Attention())
+            self.ffn = HyperLayer(FFN())
+
+        def forward(self, values):
+            return self.ffn(self.attention(values))
+
     class MicroLM(nn.Module):
         def __init__(self):
             super().__init__()
             self.token = nn.Embedding(config.vocab_size, config.dimensions)
             self.position = None if modern else nn.Embedding(config.sequence_length, config.dimensions)
-            self.blocks = nn.ModuleList([Block() for _ in range(config.layers)])
+            hyper = architecture in {"hyper_connections", "mhc"}
+            self.blocks = nn.ModuleList([
+                HyperBlock() if hyper else Block() for _ in range(config.layers)
+            ])
             self.final_norm = norm()
             self.output = nn.Linear(config.dimensions, config.vocab_size, bias=False)
             self.output.weight = self.token.weight
+            self.memory = None
+            self.memory_layer = 0
             self.apply(self._initialize)
 
         @staticmethod
@@ -117,7 +181,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 if getattr(module, "bias", None) is not None:
                     nn.init.zeros_(module.bias)
 
-        def forward(self, tokens, embedding_noise_alpha: float = 0.0):
+        def attach_memory(self, module, layer: int = 0):
+            self.memory = module
+            self.memory_layer = layer
+
+        def hidden(self, tokens, embedding_noise_alpha: float = 0.0):
             values = self.token(tokens)
             if self.position is not None:
                 positions = torch.arange(tokens.shape[1], device=tokens.device)
@@ -125,9 +193,41 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             if embedding_noise_alpha and self.training:
                 scale = embedding_noise_alpha / math.sqrt(values.shape[1] * values.shape[2])
                 values = values + torch.empty_like(values).uniform_(-scale, scale)
-            for block in self.blocks:
+            hyper = architecture in {"hyper_connections", "mhc"}
+            if hyper:
+                values = values.unsqueeze(-2).expand(
+                    *values.shape[:-1], config.residual_streams, values.shape[-1]
+                ).contiguous()
+            for index, block in enumerate(self.blocks):
                 values = block(values)
-            return self.output(self.final_norm(values))
+                if self.memory is not None and index == self.memory_layer:
+                    values = self.memory(tokens, values)
+            if hyper:
+                values = values.mean(dim=-2)
+            return self.final_norm(values)
+
+        def forward(self, tokens, embedding_noise_alpha: float = 0.0):
+            return self.output(self.hidden(tokens, embedding_noise_alpha))
+
+        def connection_stats(self, tokens):
+            if architecture not in {"hyper_connections", "mhc"}:
+                return {}
+            values = self.token(tokens).unsqueeze(-2).expand(
+                *tokens.shape, config.residual_streams, config.dimensions
+            ).contiguous()
+            residuals = []
+            for block in self.blocks:
+                for layer in (block.attention, block.ffn):
+                    _, _, residual = layer.mappings(values)
+                    residuals.append(residual)
+                    values = layer(values)
+            matrices = torch.cat([row.reshape(-1, config.residual_streams, config.residual_streams) for row in residuals])
+            matrices_cpu = matrices.detach().float().cpu()
+            return {
+                "row_sum_error": float((matrices_cpu.sum(-1) - 1).abs().max()),
+                "column_sum_error": float((matrices_cpu.sum(-2) - 1).abs().max()),
+                "spectral_norm_max": float(torch.linalg.matrix_norm(matrices_cpu, ord=2).max()),
+            }
 
     return MicroLM()
 
@@ -144,3 +244,11 @@ def _rotary(q, k, torch):
         return torch.cat((left * cos - right * sin, left * sin + right * cos, values[..., half * 2:]), dim=-1)
 
     return rotate(q), rotate(k)
+
+
+def _sinkhorn(logits, iterations, torch):
+    values = torch.exp(logits - logits.amax(dim=(-2, -1), keepdim=True))
+    for _ in range(iterations):
+        values = values / values.sum(dim=-1, keepdim=True).clamp_min(1e-8)
+        values = values / values.sum(dim=-2, keepdim=True).clamp_min(1e-8)
+    return values

@@ -1,0 +1,10 @@
+{
+  "paper": "2605.21832",
+  "adapter": "fluid",
+  "dataset": {"name": "MovieLens 100K", "users": 220, "items": 360},
+  "setup": {"seed": 42, "rq_levels": 3, "slice_views": 4, "candidate_item_id_in_final_model": false},
+  "baseline": {"name": "ID ranker", "hit_at_10": 0.1090909091, "ndcg_at_10": 0.0540054678, "fresh_hit_at_10": 0.0317460317, "head_share_at_10": 0.2377272727},
+  "method": {"name": "FLUID ID-free late fusion", "hit_at_10": 0.0772727273, "ndcg_at_10": 0.0428635187, "fresh_hit_at_10": 0.0634920635, "head_share_at_10": 0.0990909091},
+  "relative": {"hit_at_10_percent": -29.1666667, "ndcg_at_10_percent": -20.6311500, "fresh_hit_at_10_percent": 100.0, "head_share_at_10_percent": -58.3173996},
+  "paper_online_ab": {"quality_watch_duration_percent": 0.55, "cold_start_room_views_percent": 2.05, "active_hours_percent": 0.05}
+}
