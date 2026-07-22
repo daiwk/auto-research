@@ -1,0 +1,8 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps": 60,
+  "baseline": {"name": "Transformer", "parameters": 458400, "test_loss": 5.722486719489098, "perplexity": 305.6640794846094},
+  "method": {"name": "QKV-Conv", "parameters": 461856, "test_loss": 5.7196134477853775, "perplexity": 304.78708406060076},
+  "perplexity_reduction_percent": 0.2869147809213775
+}

@@ -26,11 +26,13 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
     supported = {
         "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
-        "hyper_connections", "mhc",
+        "hyper_connections", "mhc", "qkv_depthwise_conv",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
-    modern = architecture.startswith("llama") or architecture in {"hyper_connections", "mhc"}
+    modern = architecture.startswith("llama") or architecture in {
+        "hyper_connections", "mhc", "qkv_depthwise_conv",
+    }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
     if config.dimensions % config.heads or config.heads % kv_heads:
@@ -55,12 +57,28 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.k = nn.Linear(config.dimensions, kv_heads * head_dim, bias=not modern)
             self.v = nn.Linear(config.dimensions, kv_heads * head_dim, bias=not modern)
             self.output = nn.Linear(config.dimensions, config.dimensions, bias=not modern)
+            qkv_width = config.heads * head_dim + 2 * kv_heads * head_dim
+            self.qkv_conv = (
+                nn.Conv1d(qkv_width, qkv_width, kernel_size=3, groups=qkv_width, bias=True)
+                if architecture == "qkv_depthwise_conv" else None
+            )
 
         def forward(self, values):
             batch, length, _ = values.shape
-            q = self.q(values).view(batch, length, config.heads, head_dim).transpose(1, 2)
-            k = self.k(values).view(batch, length, kv_heads, head_dim).transpose(1, 2)
-            v = self.v(values).view(batch, length, kv_heads, head_dim).transpose(1, 2)
+            q, k, v = self.q(values), self.k(values), self.v(values)
+            if self.qkv_conv is not None:
+                projected = torch.cat((q, k, v), dim=-1)
+                # Left padding keeps the augmentation autoregressive.  The paper's
+                # best P5 block is a linear residual depthwise Conv1D with k=3.
+                local = self.qkv_conv(torch.nn.functional.pad(projected.transpose(1, 2), (2, 0)))
+                q, k, v = torch.split(
+                    projected + local.transpose(1, 2),
+                    (config.heads * head_dim, kv_heads * head_dim, kv_heads * head_dim),
+                    dim=-1,
+                )
+            q = q.view(batch, length, config.heads, head_dim).transpose(1, 2)
+            k = k.view(batch, length, kv_heads, head_dim).transpose(1, 2)
+            v = v.view(batch, length, kv_heads, head_dim).transpose(1, 2)
             if modern:
                 q, k = _rotary(q, k, torch)
             if kv_heads != config.heads:
@@ -176,7 +194,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
 
         @staticmethod
         def _initialize(module):
-            if isinstance(module, (nn.Linear, nn.Embedding)):
+            if isinstance(module, (nn.Linear, nn.Embedding, nn.Conv1d)):
                 nn.init.normal_(module.weight, mean=0.0, std=0.02)
                 if getattr(module, "bias", None) is not None:
                     nn.init.zeros_(module.bias)

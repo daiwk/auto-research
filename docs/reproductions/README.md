@@ -6,7 +6,7 @@
 
 ## 选文与记录规则 {#selection-policy}
 
-- **工业论文硬门槛**：正文必须披露真实生产流量的量化线上 A/B、业务指标和生产对照组；“已部署”、离线 SOTA 或模拟器结果不算。
+- **工业论文硬门槛**：正文必须披露真实生产流量的量化线上 A/B；或由用户明确认可论文所述的统计显著全流量发布、业务收益与 guardrail 结论。仅“已部署”、离线 SOTA 或模拟器结果不算；未披露具体 lift 的 full-traffic 论文必须明确标注，不能换算成百分比。
 - **纯 LLM 论文门槛**：不要求线上 A/B，但必须有公开 benchmark、同预算对照和可在 WikiText 等公开数据上实际训练的核心方法；只写公式或固定打分不进入复现表。
 - **具名例外**：SASRec、TIGER 是用户指定的经典基线，没有线上 A/B，不据此放宽后续选文标准。
 - **本地结果口径**：每篇 README 明确基线、实验组、数据、主指标和相对变化；论文线上结果、本地跨模型比较、模块消融和效率对照分开写。
@@ -18,15 +18,20 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 65 个 adapter；其中推荐论文继续执行线上 A/B 硬门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 70 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
-- 2026 年剩余 9 篇硬门槛论文已进入核心机制复现；SlimPer、PVTG 因缺量化生产 A/B、SCASRec 因业务指标证据有歧义未纳入。
+- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-22 再加入 SlimPer、RECAP、UAME、Convolution for LLMs 与 PPL-Factory。SlimPer 由用户明确认可其统计显著全流量证据，文档不虚构具体线上 lift；PVTG 因缺量化生产证据、SCASRec 因业务指标证据有歧义未纳入。
 
-## 全部复现（65/65）
+## 全部复现（70/70）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `slimper` · [SlimPer](2607.12281-slimper/README.md) | Instagram Reels/Feed 统计显著全流量提升；具体 lift 未披露 | 参数匹配下 NDCG@10 +1.29%，attention-score elements -94.12% |
+| 核心机制 | `recap` · [RECAP](2607.15730-recap/README.md) | 快手人均应用使用时长 +0.139% | GRPO reward 0.5245→0.7096，但 NDCG@10 -6.77%、head share -20.27% |
+| 核心机制 | `uame` · [UAME](2607.17092-uame/README.md) | LongView 最高 +1.614%、Forward 最高 +1.598% | 三路公开 proxy 下 NDCG@10 -62.28%，未迁移线上收益 |
+| 核心机制 | `conv-llm` · [Convolution for LLMs](2607.18413-conv-llm/README.md) | 纯 LLM：Qwen3-1.7B PPL 13.42→12.79 | 同预算 WikiText-2 test PPL 305.664→304.787（-0.29%） |
+| 核心机制 | `ppl-factory` · [PPL-Factory](2607.18199-ppl-factory/README.md) | 纯 LLM：10% 数据时 GSM8K +0.9、MATH +4.8 points | 20% middle selection PPL 较随机变差 1.79%，easy 最好 |
 | 核心机制 | `fluid` · [FLUID](2605.21832-fluid/README.md) | QWD +0.55%、冷启房间播放 +2.05% | 去候选 ID 后 NDCG -20.63%，fresh Hit +100.00%、head share -58.32% |
 | 核心机制 | `memory-grafting` · [Memory Grafting](2605.20948-memory-grafting/README.md) | 纯 LLM：benchmark average 53.86 | PPL 较 Transformer -3.59%，但较 Engram +0.03%，未超过直接可训练记忆 |
 | 核心机制 | `mhc` · [mHC](2512.24880-mhc/README.md) | 纯 LLM：benchmark +2.1%–2.3% | PPL 未提升；残差行列误差归零、谱范数 1.089→1.000 |

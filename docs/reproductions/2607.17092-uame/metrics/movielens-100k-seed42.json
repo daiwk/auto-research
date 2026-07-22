@@ -1,0 +1,9 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "users": 220,
+  "items": 360,
+  "baseline": {"name": "deterministic multi-objective pairwise ranker", "hit_at_10": 0.12272727272727273, "ndcg_at_10": 0.05798494666523191, "head_share_at_10": 0.6736363636363636},
+  "method": {"name": "UAME", "hit_at_10": 0.04090909090909091, "ndcg_at_10": 0.021872058110686234, "head_share_at_10": 0.07636363636363637},
+  "ndcg_at_10_relative_percent": -62.27976506219528
+}

@@ -4,6 +4,11 @@
 
 ## 2026-07
 
+- [SlimPer](../2607.12281-slimper/README.md)：通过固定知识库的 Select–Match–Refine 循环替代全序列逐层传播，降低长历史排序的计算和中间状态。
+- [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入 `k=3` residual depthwise Conv1D，以低参数成本增强局部 token 交互。
+- [PPL-Factory](../2607.18199-ppl-factory/README.md)：用任务相关 NLL 衡量训练样本难度，再根据数据预算选择 easy、middle 或中段随机子集。
+- [UAME](../2607.17092-uame/README.md)：联合预测满意度均值和不确定性，以概率 pairwise loss 和冲突加权缓解多目标标签偏差。
+- [RECAP](../2607.15730-recap/README.md)：维护固定容量流式语义画像，并把历史推荐反馈训练成 GRPO reward，形成画像优化闭环。
 - [Proximity Features](../2607.12246-proximity-features/README.md)：自适应聚合地理群体行为，为匿名用户提供不依赖持久 ID 的冷启动信号。
 - [MESH](../2607.12392-mesh/README.md)：用异构模块塔和 residual gated bias correction 保护 fresh 内容的缩放收益。
 - [DANet](../2607.12578-danet/README.md)：融合兴趣建模、折扣时频分解与个性化折扣偏好预测 CVR。

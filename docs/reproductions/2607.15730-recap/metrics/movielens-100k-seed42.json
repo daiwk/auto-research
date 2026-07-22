@@ -1,0 +1,10 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "users": 220,
+  "items": 360,
+  "training": {"sft_final_loss": 1.9123499155044557, "grpo_reward_first": 0.5245428323745728, "grpo_reward_last": 0.7096195101737977},
+  "baseline": {"name": "open-loop SFT streaming profile", "hit_at_10": 0.1, "ndcg_at_10": 0.04838497726676933, "head_share_at_10": 0.24},
+  "method": {"name": "RECAP feedback-optimized profile", "hit_at_10": 0.08636363636363636, "ndcg_at_10": 0.045108232880176666, "head_share_at_10": 0.19136363636363637},
+  "ndcg_at_10_relative_percent": -6.772235044208908
+}

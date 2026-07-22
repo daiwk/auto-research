@@ -23,10 +23,15 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **65/65** 对齐；推荐论文要求量化生产 A/B，纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **70/70** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `slimper` | SlimPer · Meta/Instagram | 固定 KB、Select–Match–Refine 与 request-only sharing；参数匹配下 NDCG@10 +1.29%、attention scores -94.12% |
+| 核心机制 | `recap` | RECAP · Kuaishou/USTC | causal profile updater、bounded state、双塔 evaluator 与 GRPO；reward 上升但 NDCG@10 -6.77% |
+| 核心机制 | `uame` | UAME · Kuaishou | Gaussian score、probabilistic pairwise loss、冲突约束与 uncertainty weighting；NDCG@10 -62.28% |
+| 核心机制 | `conv-llm` | Convolution for LLMs · Huawei/PKU/Tsinghua | post-QKV residual depthwise Conv1D；WikiText-2 test PPL -0.29% |
+| 核心机制 | `ppl-factory` | PPL-Factory · McGill | 冻结 scorer、task-aware NLL 与 budget-aware block selection；20% 预算 PPL 较随机 +1.79%（变差） |
 | 核心机制 | `fluid` | FLUID · TikTok/ByteDance | 跨域内容融合、RQ-LUCID、prefix n-gram、ID-free late fusion 与 staged warmup；fresh Hit +100.00%、NDCG -20.63% |
 | 核心机制 | `memory-grafting` | Memory Grafting · Tsinghua/MSRA | 离线 teacher hidden bank、最长 n-gram 匹配、Engram fallback、gate+ShortConv；PPL 较 Transformer -3.59% |
 | 核心机制 | `mhc` | mHC · DeepSeek-AI | 动态两流 HC、Sinkhorn 双随机投影与稳定性测量；谱范数 1.089→1.000，短程 PPL 未提升 |

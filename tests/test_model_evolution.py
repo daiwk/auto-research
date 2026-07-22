@@ -44,6 +44,13 @@ def test_offline_discovery_retains_reviewed_paper_to_operator_mapping():
     assert all(paper.url.startswith("https://arxiv.org/") for paper in papers)
 
 
+def test_latest_qkv_convolution_is_available_to_llm_evolution():
+    papers = discover_papers("local convolution for language models", 20, allow_network=False, track="llm")
+    mapped = {paper.arxiv_id: paper.architecture for paper in papers}
+    assert mapped["2607.18413"] == "qkv_depthwise_conv"
+    assert "qkv_depthwise_conv" in allowed_architectures("micro-llm", "efficient local attention", papers)
+
+
 def test_evolution_is_multigeneration_elitist_and_writes_parentage(tmp_path):
     config = EvolutionConfig(
         model="rankmixer", dataset="movielens-100k", output_dir=tmp_path / "runs",

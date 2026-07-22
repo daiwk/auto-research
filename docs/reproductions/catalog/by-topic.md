@@ -4,6 +4,7 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [RECAP](../2607.15730-recap/README.md)：用 causal Transformer 更新固定容量语义画像，再通过双塔反馈评价器与 GRPO 让画像直接服务未来推荐。
 - [FLUID](../2605.21832-fluid/README.md)：用多模态大模型编码直播切片，经 RQ-KMeans 与 prefix n-gram 形成 LUCID，最终移除候选 item ID。
 - [HARNESS-LM](../2605.23572-harness-lm/README.md)：通过强 teacher、L2 embedding alignment 与冻结文档索引精修构造非对称轻量检索器。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用真实 LLM 对齐物品共现和用户兴趣，再以 Semantic ID 支持面向长尾的非对称知识迁移。
@@ -65,6 +66,7 @@
 
 ## 排序网络与长序列
 
+- [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复访问原始用户 token，把逐层状态从序列长度中解耦并支持 request-only 共享。
 - [MESH](../2607.12392-mesh/README.md)：用异构模块塔、信号放大与 RGBC 缓解 fresh/tail 梯度被头部内容淹没的问题。
 - [DANet](../2607.12578-danet/README.md)：联合兴趣网络、折扣时频表征和用户/促销分布修正预测转化率。
 - [SAM](../2607.12714-sam/README.md)：预测品类补货周期并动态屏蔽购买前已满足意图，降低购买后重复推荐。
@@ -88,6 +90,9 @@
 
 ## 采样、蒸馏与强化学习
 
+- [UAME](../2607.17092-uame/README.md)：利用 Gaussian 排序不确定性识别多 pxtr 冲突样本，并自适应提高高偏差 pair 的训练权重。
+- [PPL-Factory](../2607.18199-ppl-factory/README.md)：按 causal LM 的 block NLL 和可用数据比例选择微调子集，在信息量与原分布覆盖之间折中。
+- [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 post-QKV 位置使用线性 residual depthwise Conv1D，使语言模型同时利用短程局部模式和全局注意力。
 - [S-GRec](../2602.10606-s-grec/README.md)：只采样少量 PSJ 反馈，并用 advantage 符号门控和幅度约束稳定 A2PO。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：先用 SFT 学习广告主列表，再以 GRPO 奖励优化列表质量。
 - [LWGR](../2605.18771-lwgr/README.md)：用 reference confidence 约束融合结果，并通过 primal-dual 更新拉格朗日乘子。
