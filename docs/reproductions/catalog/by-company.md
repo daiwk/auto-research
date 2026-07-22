@@ -51,6 +51,8 @@
 
 ## Kuaishou
 
+- 2026-07 · [RECAP](../2607.15730-recap/README.md)：把流式用户画像维护为固定容量语义状态，并用推荐反馈评价器和 GRPO 闭环优化画像更新策略。
+- 2026-07 · [UAME](../2607.17092-uame/README.md)：把满意度分数建模为均值—方差 Gaussian 变量，用多目标冲突产生的不确定性加权 pairwise 排序训练。
 - 2024-03 · [LSVCR](../2403.13574-lsvcr/README.md)：用 LoRA 学习 LLM 偏好，通过 SSC/VCC 双序列目标对齐评论语义和用户行为。
 - 2024-05 · [LEARN](../2405.03988-learn/README.md)：冻结 LLM 生成内容增强表征，再通过协同域适配改善冷启动和长尾推荐。
 - 2025-02 · [OneRec](../2502.18965-onerec/README.md)：把 session 推荐建模为 Semantic ID 序列生成，并结合 MoE 与偏好优化对齐真实反馈。
@@ -66,6 +68,7 @@
 
 ## Meta
 
+- 2026-07 · [SlimPer](../2607.12281-slimper/README.md)：用固定容量 user-item knowledge base 逐层查询完整历史，并通过 Select–Match–Refine 把计算集中到候选相关证据。
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 - 2026-01 · [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
 - 2026-05 · [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
@@ -117,6 +120,8 @@
 
 ## 学术与经典基线
 
+- 2026-07 · [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入带残差的逐通道短卷积，以极少参数补充注意力的局部归纳偏置。
+- 2026-07 · [PPL-Factory](../2607.18199-ppl-factory/README.md)：用冻结语言模型计算任务相关 NLL，并按数据预算在 easy、middle 和 mid-random 选择规则间切换。
 - 2018-08 · [SASRec](../1808.09781-sasrec/README.md)：用因果自注意力编码用户行为序列，并预测下一物品，作为经典序列推荐基线。
 - 2026-05 · [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型更新降低单一采样偏差。
 - 2026-07 · [SIS](../2607.04728-sis/README.md)：依据样本重要性动态调整训练权重，使有限预算更集中于高价值序列与 token。

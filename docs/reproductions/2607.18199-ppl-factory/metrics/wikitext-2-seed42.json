@@ -1,0 +1,12 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "selection_ratio": 0.2,
+  "selected_blocks": 430,
+  "variants": {
+    "Random": {"mean_selection_nll": 6.2888687821321705, "test_loss": 5.79670874774456, "perplexity": 329.2142477359009},
+    "Easy-NLL": {"mean_selection_nll": 6.139293526494225, "test_loss": 5.783596396446228, "perplexity": 324.92565309294514},
+    "PPL-Factory": {"mean_selection_nll": 6.285616204904955, "test_loss": 5.814420700073242, "perplexity": 335.0972204676031}
+  },
+  "perplexity_reduction_vs_random_percent": -1.7869739150601902
+}
