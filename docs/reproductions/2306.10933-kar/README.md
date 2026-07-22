@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2306.10933](https://arxiv.org/abs/2306.10933) |
 | 公司/机构 | Huawei |
 | 首次公开日期 | 2023-06-19（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `kar` |
 | 本地复现代码 | [`src/auto_research/reproductions/kar/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/kar/) |
 

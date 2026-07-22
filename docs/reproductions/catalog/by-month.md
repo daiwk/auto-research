@@ -4,6 +4,7 @@
 
 ## 2026-07
 
+- [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用可演化 Memory Hub、文本/SID 混合基础模型和可重建 latent reasoning 同时改进长期用户理解、商品 grounding 与推理效率。
 - [SlimPer](../2607.12281-slimper/README.md)：通过固定知识库的 Select–Match–Refine 循环替代全序列逐层传播，降低长历史排序的计算和中间状态。
 - [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入 `k=3` residual depthwise Conv1D，以低参数成本增强局部 token 交互。
 - [PPL-Factory](../2607.18199-ppl-factory/README.md)：用任务相关 NLL 衡量训练样本难度，再根据数据预算选择 easy、middle 或中段随机子集。

@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2512.24880](https://arxiv.org/abs/2512.24880) |
 | 公司/机构 | DeepSeek-AI |
 | 首次公开日期 | 2025-12-31（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `mhc` |
 | 本地复现代码 | [`src/auto_research/reproductions/mhc/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mhc/) |
 

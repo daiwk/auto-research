@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2510.26104](https://arxiv.org/abs/2510.26104) |
 | 公司/机构 | ByteDance |
 | 首次公开日期 | 2025-10-30（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `onetrans` |
 | 本地复现代码 | [`src/auto_research/reproductions/onetrans/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/onetrans/) |
 

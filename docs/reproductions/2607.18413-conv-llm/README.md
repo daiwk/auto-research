@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.18413](https://arxiv.org/abs/2607.18413) |
 | 公司/机构 | Huawei / Peking University / Tsinghua University |
 | 首次公开日期 | 2026-07-20（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-07-22 未找到作者公开代码 |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `conv-llm` |
 | 本地复现代码 | [`src/auto_research/reproductions/conv_llm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/conv_llm/) |
 

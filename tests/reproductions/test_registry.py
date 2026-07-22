@@ -77,6 +77,7 @@ def test_builtin_adapters_are_discoverable():
         "recap",
         "uame",
         "slimper",
+        "recgpt-v3",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -88,6 +89,7 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("onetrans").paper.arxiv_id == "2510.26104"
     assert get_adapter("rec-distill").paper.arxiv_id == "2605.29755"
     assert get_adapter("din").paper.arxiv_id == "1706.06978"
+    assert get_adapter("recgpt-v3").paper.has_online_ab
     assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"

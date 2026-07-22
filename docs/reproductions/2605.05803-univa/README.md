@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2605.05803](https://arxiv.org/abs/2605.05803) |
 | 公司/机构 | Tencent / WeChat Channels |
 | 首次公开日期 | 2026-05-07（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `univa` |
 | 本地复现代码 | [`src/auto_research/reproductions/univa/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/univa/) |
 

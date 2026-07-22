@@ -4,6 +4,7 @@
 
 ## Alibaba
 
+- 2026-07 · [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：以可增量 Memory Hub 压缩长期行为，把文本与商品 Semantic ID 统一进基础模型，再将显式 CoT 蒸馏为可重建 latent intent token。
 - 2026-02 · [GRC](../2602.23639-grc/README.md)：把生成、首错位置/属性反思和纠正串成结构化轨迹，再以 GRPO 与熵调度优化有限纠错预算。
 - 2026-05 · [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 估计新品点击的长期增量，并以多价值 MoPO 对 Semantic ID 生成策略做偏好对齐。
 - 2026-05 · [DeGRe](../2605.25749-degre/README.md)：离线用累计价值评估器做前瞻 beam 搜索，把逐前缀 dense 价值分布蒸馏到在线单次生成器。

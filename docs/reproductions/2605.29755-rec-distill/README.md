@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2605.29755](https://arxiv.org/abs/2605.29755) |
 | 公司/机构 | ByteDance / Douyin / TikTok |
 | 首次公开日期 | 2026-05-28（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `rec-distill` |
 | 本地复现代码 | [`src/auto_research/reproductions/rec_distill/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/rec_distill/) |
 

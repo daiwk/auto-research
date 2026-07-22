@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.12578](https://arxiv.org/abs/2607.12578) |
 | 公司/机构 | Alibaba Group / Tmall |
 | 首次公开日期 | 2026-07-14（arXiv v1） |
-| 原文开源代码 | 是：[tangrc/DANet](https://github.com/tangrc/DANet) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/tangrc/DANet) |
 | Adapter | `danet` |
 | 本地复现代码 | [`src/auto_research/reproductions/danet/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/danet/) |
 
