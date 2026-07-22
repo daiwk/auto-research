@@ -1,0 +1,10 @@
+{
+  "paper": {"arxiv_id": "2505.07197", "title": "A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao"},
+  "dataset": {"name": "MovieLens 1M exposure-slate proxy", "training_slates": 4742, "validation_slates": 210, "test_slates": 210, "candidate_size": 20, "output_size": 8},
+  "setup": {"seed": 42, "steps": 180, "selected_mmr_lambda": 1.0, "selection": "validation click + pay + 0.05*GMV + ILAD"},
+  "baseline": {"name": "item-level greedy formula", "click_per_slate": 7.185714285714286, "pay_per_slate": 5.519047619047619, "gmv_proxy_per_slate": 24.438095238095237, "ilad": 0.4246557706067351, "model_calls_per_slate": 0.0},
+  "method": {"name": "SORT ordered regression + queues + mask-driven MMR", "click_per_slate": 7.552380952380952, "pay_per_slate": 5.985714285714286, "gmv_proxy_per_slate": 26.63809523809524, "ilad": 0.43693261211421225, "model_calls_per_slate": 1.0},
+  "relative": {"click_per_slate_percent": 5.102717031146449, "pay_per_slate_percent": 8.45556514236411, "gmv_proxy_per_slate_percent": 9.002338269680449, "ilad_percent": 2.891010168055972},
+  "training": {"initial_loss": 1.0723704487085342, "final_loss": 0.40220862329006196, "steps": 180, "device": "mps"},
+  "paper_results": {"vs_formula_CLICK_percent": 9.61, "vs_formula_ORDER_percent": 8.35, "vs_formula_GMV_percent": 13.67, "vs_deployed_FFT_fastDPP_CLICK_percent": 4.13, "vs_deployed_FFT_fastDPP_GMV_percent": 8.10, "latency_ms": 19}
+}

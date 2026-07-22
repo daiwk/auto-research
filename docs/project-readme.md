@@ -23,10 +23,12 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **71/71** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **73/73** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `recgpt-mobile` | RecGPT-Mobile · Alibaba/Taobao | 真实 SmolLM2-135M LoRA、adaptive prompt、drift trigger 与 INT8；semantic intent accuracy +100.00%、体积 -53.68% |
+| 核心机制 | `sort-gen` | SORT-Gen · Alibaba/Taobao | causal ordered regression、多目标队列、单次 mask-driven 评分和 MMR；Click +5.10%、GMV proxy +9.00% |
 | 核心机制 | `recgpt-v3` | RecGPT-V3 · Alibaba/Taobao | 两级 SID、Memory Hub、显式教师→latent 重建与 ranking feedback；MovieLens-1M NDCG@10 +36.96%，memory token -65% |
 | 核心机制 | `slimper` | SlimPer · Meta/Instagram | 固定 KB、Select–Match–Refine 与 request-only sharing；参数匹配下 NDCG@10 +1.29%、attention scores -94.12% |
 | 核心机制 | `recap` | RECAP · Kuaishou/USTC | causal profile updater、bounded state、双塔 evaluator 与 GRPO；reward 上升但 NDCG@10 -6.77% |

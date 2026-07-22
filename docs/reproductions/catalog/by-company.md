@@ -4,6 +4,8 @@
 
 ## Alibaba
 
+- 2026-05 · [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：在端侧用量化 LoRA LLM 把异构行为翻译成下一意图 query，并以 adaptive prompt 和漂移触发控制资源消耗。
+- 2025-05 · [SORT-Gen](../2505.07197-sort-gen/README.md)：用 causal Transformer ordered regression 估计列表前缀多目标价值，再以目标队列、mask 和 MMR 单次批量生成 slate。
 - 2026-07 · [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：以可增量 Memory Hub 压缩长期行为，把文本与商品 Semantic ID 统一进基础模型，再将显式 CoT 蒸馏为可重建 latent intent token。
 - 2026-02 · [GRC](../2602.23639-grc/README.md)：把生成、首错位置/属性反思和纠正串成结构化轨迹，再以 GRPO 与熵调度优化有限纠错预算。
 - 2026-05 · [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 估计新品点击的长期增量，并以多价值 MoPO 对 Semantic ID 生成策略做偏好对齐。

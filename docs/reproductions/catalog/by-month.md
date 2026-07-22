@@ -26,6 +26,7 @@
 
 ## 2026-05
 
+- [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：将 LoRA+INT8 小模型部署到端侧，通过预算约束 prompt 和 entropy/Jaccard/JS 漂移分数按需生成用户意图。
 - [FLUID](../2605.21832-fluid/README.md)：将直播多模态切片离散为 slice/room LUCID，以独立 prefix token 晚融合并逐阶段退掉候选 item ID。
 - [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线构造冻结 n-gram hidden memory，recipient 通过最长后缀匹配、Engram fallback 与门控写入复用知识。
 - [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 与多价值 MoPO 引导生成式召回发现高潜新品。
@@ -89,6 +90,7 @@
 
 ## 2025-05
 
+- [SORT-Gen](../2505.07197-sort-gen/README.md)：用 ordered-regression Transformer 预测多目标前缀价值，再以多目标队列、mask-driven selection 和 MMR 生成 slate。
 - [GenRank](../2505.04180-genrank/README.md)：把多种用户动作编码为生成目标，通过 action-oriented generation 完成端到端排序。
 - [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache，扩展超长用户行为序列建模。
 
