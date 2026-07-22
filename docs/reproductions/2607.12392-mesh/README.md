@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.12392](https://arxiv.org/abs/2607.12392) |
 | 公司/机构 | Pinterest |
 | 首次公开日期 | 2026-07-14（arXiv v1） |
-| 原文开源代码 | 否：未找到作者公开代码（核查日期：2026-07-16） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `mesh` |
 | 本地复现代码 | [`src/auto_research/reproductions/mesh/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mesh/) |
 

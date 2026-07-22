@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2605.09338](https://arxiv.org/abs/2605.09338) |
 | 公司/机构 | Meta |
 | 首次公开日期 | 2026-05-10（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `mm-llm` |
 | 本地复现代码 | [`src/auto_research/reproductions/mm_llm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mm_llm/) |
 

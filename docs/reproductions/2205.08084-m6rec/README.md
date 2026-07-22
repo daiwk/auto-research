@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2205.08084](https://arxiv.org/abs/2205.08084) |
 | 公司/机构 | Alibaba |
 | 首次公开日期 | 2022-05-17（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `m6rec` |
 | 本地复现代码 | [`src/auto_research/reproductions/m6rec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/m6rec/) |
 

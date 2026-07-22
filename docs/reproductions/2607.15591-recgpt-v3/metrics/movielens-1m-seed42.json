@@ -1,0 +1,11 @@
+{
+  "paper": {"arxiv_id": "2607.15591", "title": "RecGPT-V3 Technical Report"},
+  "dataset": {"name": "MovieLens 1M", "users": 360, "items": 520},
+  "setup": {"seed": 42, "steps_per_model": 180, "history_length": 40, "memory_slots": 6, "recent_events": 8, "latent_tokens": 4, "semantic_id_levels": 2},
+  "baseline": {"name": "RecGPT-V2-style stateless full-history hybrid Transformer", "hit_at_10": 0.05555555555555555, "ndcg_at_10": 0.027900469011014707, "head_share_at_10": 0.11083333333333334},
+  "method": {"name": "RecGPT-V3 memory + hybrid SID/text + latent reasoning", "hit_at_10": 0.07777777777777778, "ndcg_at_10": 0.0382117919168053, "head_share_at_10": 0.19},
+  "relative": {"hit_at_10_percent": 40.000000000000014, "ndcg_at_10_percent": 36.95752534382068, "head_share_at_10_percent": 71.42857142857142},
+  "rqvae": {"initial_loss": 0.0584467988461256, "final_loss": 0.047492283023893835, "unique_prefixes": 101},
+  "diagnostics": {"latent_reconstruction_cosine": 0.818872332572937, "memory_traceable_fraction": 1.0, "memory_input_tokens": 14, "full_history_tokens": 40, "memory_token_reduction_percent": 65.0, "explicit_reasoning_slots": 40, "latent_reasoning_slots": 4, "reasoning_slot_reduction_percent": 90.0},
+  "paper_results": {"item_IPV_percent": 3.08, "item_CTR_percent": 0.98, "item_GMV_percent": 7.51, "feed_IPV_percent": 1.28, "feed_CTR_percent": 1.0, "feed_GMV_percent": 3.97, "memory_compute_reduction_percent": 55.8, "serving_resource_reduction_percent": 52.4, "reasoning_token_reduction": "200x"}
+}

@@ -1,0 +1,13 @@
+{
+  "paper": {"arxiv_id": "2605.04726", "title": "RecGPT-Mobile"},
+  "dataset": {"name": "MovieLens 1M next-intent proxy", "training_examples": 23472, "validation_users": 290, "test_users": 290, "intent_categories": 18},
+  "setup": {"seed": 42, "model": "HuggingFaceTB/SmolLM2-135M-Instruct", "token_budget": 96, "sft_steps": 80},
+  "baseline": {"name": "base SmolLM2-135M", "examples": 32, "primary_intent_accuracy": 0.0625, "semantic_intent_accuracy": 0.25, "mean_latency_ms": 222.54155603125037},
+  "method": {"name": "LoRA SFT", "examples": 32, "primary_intent_accuracy": 0.40625, "semantic_intent_accuracy": 0.5, "mean_latency_ms": 197.18405218749945},
+  "quantized_method": {"name": "LoRA + weight-only INT8", "examples": 32, "primary_intent_accuracy": 0.375, "semantic_intent_accuracy": 0.46875, "mean_latency_ms": 573.4267108749998},
+  "relative": {"lora_semantic_accuracy_percent": 100.0, "quantized_vs_lora_semantic_percent": -6.25, "serialized_size_reduction_percent": 53.681768179560606},
+  "training": {"trainable_lora_parameters": 230400, "initial_loss": 7.552372407913208, "final_loss": 1.9854756474494935, "steps": 80, "seconds": 21.087561},
+  "trigger": {"threshold": 0.8, "mean_intent_drift": 0.4301729008428102, "trigger_rate": 0.03793103448275862, "inference_saved_percent": 96.20689655172414},
+  "model_size_mb": {"fp32": 513.235673904419, "weight_only_int8": 237.72168922424316},
+  "paper_results": {"qwen3_4b_base_total": 0.677, "qwen3_4b_lora_total": 0.829, "qwen3_4b_lora_quant_total": 0.794, "online_CLICK_percent": 1.8, "online_PAY_percent": 2.7, "online_GMV_percent": 2.5}
+}

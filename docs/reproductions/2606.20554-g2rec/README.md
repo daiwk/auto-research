@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2606.20554](https://arxiv.org/abs/2606.20554) |
 | 公司/机构 | Meta |
 | 首次公开日期 | 2026-06-18（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-15） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-22） |
 | Adapter | `g2rec` |
 | 本地复现代码 | [`src/auto_research/reproductions/g2rec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/g2rec/) |
 
