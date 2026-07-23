@@ -4,8 +4,10 @@ from dataclasses import replace
 
 from auto_research.evolution import EvolutionConfig, EvolutionTrial, ModelEvolutionEngine
 from auto_research.evolution.models import Genome
+from auto_research.evolution.benchmarks import recommendation_benchmark
 from auto_research.evolution.papers import discover_papers
 from auto_research.evolution.planner import allowed_architectures, propose
+from auto_research.reproductions.rec_utils import MovieLensSequences
 
 
 class FakeEvaluator:
@@ -49,6 +51,76 @@ def test_latest_qkv_convolution_is_available_to_llm_evolution():
     mapped = {paper.arxiv_id: paper.architecture for paper in papers}
     assert mapped["2607.18413"] == "qkv_depthwise_conv"
     assert "qkv_depthwise_conv" in allowed_architectures("micro-llm", "efficient local attention", papers)
+
+
+def test_latest_public_benchmark_operators_are_discoverable():
+    rec = discover_papers(
+        "WHALE TMallGS long history RAMP", 20, allow_network=False
+    )
+    mapped = {paper.arxiv_id: paper.architecture for paper in rec}
+    assert mapped["2607.17017"] == "rankmixer_whale"
+    assert mapped["2607.13398"] == "rankmixer_tmallgs"
+    assert mapped["2607.14331"] == "rankmixer_long_history"
+    assert mapped["2607.17473"] == "rankmixer_ramp"
+
+    llm = discover_papers(
+        "dynamic rubric off-context GRPO", 20, allow_network=False, track="llm"
+    )
+    methods = {paper.arxiv_id: paper.architecture for paper in llm}
+    assert methods["2607.20083"] == "dynamic_rubric"
+    assert methods["2607.19313"] == "off_context_grpo"
+
+
+def test_public_composite_requires_public_suite():
+    EvolutionConfig(
+        model="rankmixer", dataset="movielens-100k",
+        benchmark_suite="public", fitness_metric="public_composite",
+    ).validate()
+    try:
+        EvolutionConfig(
+            model="rankmixer", dataset="movielens-100k",
+            benchmark_suite="core", fitness_metric="public_composite",
+        ).validate()
+    except ValueError as exc:
+        assert "requires the public" in str(exc)
+    else:
+        raise AssertionError("public composite must not run without public slices")
+
+
+def test_recommendation_public_suite_reports_selection_safe_slices(monkeypatch):
+    import numpy as np
+    import auto_research.evolution.benchmarks as benchmarks
+
+    data = MovieLensSequences(
+        ((0, 1), (0, 1, 2), (0, 1, 2, 3), (0, 1, 2, 3, 4)),
+        (2, 3, 4, 5),
+        (3, 4, 5, 6),
+        7,
+        np.eye(7, dtype=np.float32),
+        np.asarray([10, 8, 6, 4, 2, 1, 1], dtype=np.float32),
+    )
+
+    def fake_evaluate(model, current, config, *, target):
+        value = len(current.train) / 10.0
+        return {
+            "hit_at_10": value,
+            "ndcg_at_10": value,
+            "head_share_at_10": 0.1,
+            "mean_popularity_at_10": 0.2,
+        }
+
+    monkeypatch.setattr(benchmarks, "evaluate_model", fake_evaluate)
+    metrics = recommendation_benchmark(
+        object(), data, object(), target="validation", suite="public"
+    )
+    assert metrics["primary"] == 0.4
+    assert metrics["long_history_ndcg_at_10"] < metrics["primary"]
+    assert metrics["tail_target_ndcg_at_10"] < metrics["primary"]
+    assert metrics["recent_only_ndcg_at_10"] == metrics["primary"]
+    assert metrics["public_composite"] == np.mean(
+        [metrics["primary"], metrics["long_history_ndcg_at_10"],
+         metrics["tail_target_ndcg_at_10"], metrics["recent_only_ndcg_at_10"]]
+    )
 
 
 def test_evolution_is_multigeneration_elitist_and_writes_parentage(tmp_path):
@@ -102,9 +174,13 @@ def test_micro_llm_plan_separates_structure_data_and_post_training():
     structure, first = propose(baseline, 1, 2, architectures, random.Random(42), "micro-llm")
     data, second = propose(structure, 2, 2, architectures, random.Random(42), "micro-llm")
     post, third = propose(data, 3, 3, architectures, random.Random(42), "micro-llm")
+    dynamic, _ = propose(data, 3, 4, architectures, random.Random(42), "micro-llm")
+    off_context, _ = propose(data, 3, 5, architectures, random.Random(42), "micro-llm")
     assert structure.architecture == "llama_modern"
     assert data.data_recipe == "mixed_narrative" and data.data_mix_ratio == 0.2
     assert post.post_training == "neftune" and post.neftune_alpha == 5.0
+    assert dynamic.post_training == "dynamic_rubric"
+    assert off_context.post_training == "off_context_grpo"
     assert "结构研究" in first and "数据研究" in second and "后训练研究" in third
 
 

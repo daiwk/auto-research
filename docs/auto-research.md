@@ -35,6 +35,8 @@ auto-research evolve \
   --workers 3 \
   --steps 300 \
   --papers 8 \
+  --benchmark-suite public \
+  --fitness-metric public_composite \
   --seeds 42,43,44
 ```
 
@@ -42,7 +44,7 @@ auto-research evolve \
 
 [查看完整的模型进化协议、数据规模和结构算子 →](model-evolution.md)
 
-LLM 轨道使用 `micro-llm + WikiText-2`：第 1 轮比较 GQA、RoPE/RMSNorm/SwiGLU、parallel block 等结构；第 2 轮比较预训练数据配方；第 3 轮比较 SFT 与 NEFTune。默认模型约 12M–16M 参数，可以在 Apple Silicon 上从头训练。
+LLM 轨道使用 `micro-llm + WikiText-2`：第 1 轮比较 GQA、RoPE/RMSNorm/SwiGLU、parallel block 等结构；第 2 轮比较预训练数据配方；第 3 轮比较 SFT、NEFTune、DynamicRubric 与 Off-Context GRPO。public suite 还固定评估 Alpaca response preference 和 GSM8K candidate Pass@1。默认模型约 12M–16M 参数，可以在 Apple Silicon 上从头训练。
 
 ## 研究产物
 

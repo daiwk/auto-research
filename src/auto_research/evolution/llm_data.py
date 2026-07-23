@@ -2,10 +2,26 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import re
 
 import numpy as np
 
-from ..datasets import alpaca_instructions, tiny_shakespeare, wikitext_2
+from ..datasets import alpaca_instructions, gsm8k, tiny_shakespeare, wikitext_2
+
+
+@dataclass(frozen=True)
+class PreferenceExample:
+    candidates: tuple[np.ndarray, ...]
+    response_starts: tuple[int, ...]
+    rubrics: np.ndarray
+    gold: int = 0
+
+
+@dataclass(frozen=True)
+class ReasoningExample:
+    candidates: tuple[np.ndarray, ...]
+    response_starts: tuple[int, ...]
+    gold: int
 
 
 @dataclass(frozen=True)
@@ -16,6 +32,10 @@ class LLMEvolutionData:
     narrative: np.ndarray
     instruction_train: tuple[tuple[np.ndarray, int], ...]
     instruction_validation: tuple[tuple[np.ndarray, int], ...]
+    preference_train: tuple[PreferenceExample, ...]
+    preference_validation: tuple[PreferenceExample, ...]
+    reasoning_train: tuple[ReasoningExample, ...]
+    reasoning_validation: tuple[ReasoningExample, ...]
     vocab_size: int
     tokenizer_path: Path
 
@@ -26,6 +46,7 @@ def load_llm_evolution_data(
     vocab_size: int = 4096,
     maximum_train_tokens: int | None = None,
     maximum_eval_tokens: int | None = 100_000,
+    benchmark_suite: str = "core",
 ) -> LLMEvolutionData:
     try:
         from tokenizers import Tokenizer
@@ -72,6 +93,24 @@ def load_llm_evolution_data(
             dtype=np.int64,
         )
         examples.append((full, 1 + len(prompt_ids)))
+    preferences = tuple(
+        _preference_example(row, tokenizer) for row in instructions[:320]
+    )
+    reasoning_train: tuple[ReasoningExample, ...] = ()
+    reasoning_validation: tuple[ReasoningExample, ...] = ()
+    if benchmark_suite == "public":
+        math_rows = gsm8k(root, allow_network)
+        rng = np.random.default_rng(202607)
+        reasoning_train = tuple(
+            example
+            for row in math_rows["train"][:256]
+            if (example := _reasoning_example(row, tokenizer, rng)) is not None
+        )
+        reasoning_validation = tuple(
+            example
+            for row in math_rows["test"][:64]
+            if (example := _reasoning_example(row, tokenizer, rng)) is not None
+        )
     return LLMEvolutionData(
         train=encode(wiki["train"], maximum_train_tokens),
         validation=encode(wiki["validation"], maximum_eval_tokens),
@@ -79,6 +118,82 @@ def load_llm_evolution_data(
         narrative=encode(narrative, maximum_train_tokens),
         instruction_train=tuple(examples[:320]),
         instruction_validation=tuple(examples[320:384]),
+        preference_train=preferences[:256],
+        preference_validation=preferences[256:320],
+        reasoning_train=reasoning_train,
+        reasoning_validation=reasoning_validation,
         vocab_size=tokenizer.get_vocab_size(),
         tokenizer_path=tokenizer_path,
     )
+
+
+def _preference_example(row, tokenizer) -> PreferenceExample:
+    prompt = f"Instruction: {row['instruction']}\n"
+    if row["input"]:
+        prompt += f"Input: {row['input']}\n"
+    prompt += "Response:"
+    words = row["output"].split()
+    candidates = (
+        row["output"],
+        " ".join(words[: max(1, len(words) // 4)]),
+        " ".join(words[::2] + words[1::2]),
+    )
+    encoded, starts, rubrics = [], [], []
+    prompt_ids = tokenizer.encode(prompt).ids
+    for response in candidates:
+        response_ids = tokenizer.encode(" " + response).ids
+        encoded.append(
+            np.asarray(
+                [
+                    tokenizer.token_to_id("<bos>"),
+                    *prompt_ids,
+                    *response_ids,
+                    tokenizer.token_to_id("<eos>"),
+                ],
+                dtype=np.int64,
+            )
+        )
+        starts.append(1 + len(prompt_ids))
+        response_words = response.split()
+        rubrics.append(
+            [
+                min(len(response_words) / 32.0, 1.0),
+                len(set(response_words)) / max(len(response_words), 1),
+                float(any(mark in response for mark in (".", ":", "\n", "- "))),
+                min(len(response_ids) / 64.0, 1.0),
+            ]
+        )
+    return PreferenceExample(
+        tuple(encoded),
+        tuple(starts),
+        np.asarray(rubrics, dtype=np.float32),
+    )
+
+
+def _reasoning_example(row, tokenizer, rng) -> ReasoningExample | None:
+    match = re.search(r"####\s*(-?[\d,]+(?:\.\d+)?)", row["answer"])
+    if not match:
+        return None
+    gold = float(match.group(1).replace(",", ""))
+    scale = max(1.0, abs(gold) * 0.08)
+    values = [gold, *(gold + offset * scale for offset in (-3, -2, -1, 1, 2, 3, 5))]
+    order = rng.permutation(len(values))
+    prompt = f"Question: {row['question']}\nAnswer:"
+    prompt_ids = tokenizer.encode(prompt).ids
+    encoded, starts = [], []
+    for index in order:
+        text = f" {values[int(index)]:g}"
+        encoded.append(
+            np.asarray(
+                [
+                    tokenizer.token_to_id("<bos>"),
+                    *prompt_ids,
+                    *tokenizer.encode(text).ids,
+                    tokenizer.token_to_id("<eos>"),
+                ],
+                dtype=np.int64,
+            )
+        )
+        starts.append(1 + len(prompt_ids))
+    gold_index = int(np.flatnonzero(order == 0)[0])
+    return ReasoningExample(tuple(encoded), tuple(starts), gold_index)

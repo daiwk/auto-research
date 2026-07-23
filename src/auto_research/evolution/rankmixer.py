@@ -5,23 +5,53 @@ from pathlib import Path
 
 import numpy as np
 
-from ..reproductions.industrial_ranking import evaluate_model
 from ..reproductions.rankmixer.model import RankMixerConfig, train_model
 from ..reproductions.rec_utils import load_movielens_1m_sequences, load_movielens_sequences
 from .models import EvolutionTrial, Genome
+from .benchmarks import recommendation_benchmark
 
 
 class RankMixerEvaluator:
-    def __init__(self, dataset_dir: Path, dataset: str, steps: int, seeds: tuple[int, ...], maximum_users=None, maximum_items=None, evaluation_users=1000):
+    def __init__(
+        self,
+        dataset_dir: Path,
+        dataset: str,
+        steps: int,
+        seeds: tuple[int, ...],
+        maximum_users=None,
+        maximum_items=None,
+        evaluation_users=1000,
+        benchmark_suite="public",
+        fitness_metric="primary",
+    ):
         loader = load_movielens_1m_sequences if dataset == "movielens-1m" else load_movielens_sequences
         self.data = loader(dataset_dir)
         self.data = _limit(self.data, maximum_users, maximum_items)
         self.evaluation_data = _evaluation_cohort(self.data, evaluation_users)
         self.steps = steps
         self.seeds = seeds
+        self.benchmark_suite = benchmark_suite
+        self.fitness_metric = fitness_metric
 
     def summary(self):
-        return {"users": len(self.data.train), "items": self.data.item_count, "train_events": sum(map(len, self.data.train)), "evaluation_users": len(self.evaluation_data.train)}
+        return {
+            "users": len(self.data.train),
+            "items": self.data.item_count,
+            "train_events": sum(map(len, self.data.train)),
+            "evaluation_users": len(self.evaluation_data.train),
+            "benchmark_suite": self.benchmark_suite,
+            "public_slices": (
+                [
+                    "overall",
+                    "long_history",
+                    "tail_target",
+                    "recent_only",
+                    "restricted_features",
+                ]
+                if self.benchmark_suite == "public"
+                else ["overall"]
+            ),
+        }
 
     def evaluate(self, trial_id: str, generation: int, parent_id: str | None, genome: Genome,
                  source_papers: tuple[str, ...], rationale: str) -> EvolutionTrial:
@@ -30,9 +60,21 @@ class RankMixerEvaluator:
         for seed in self.seeds:
             config = self._config(genome)
             model, training = train_model(genome.architecture, self.data, config, seed)
-            validation_runs.append(evaluate_model(model, self.evaluation_data, config, target="validation"))
+            validation_runs.append(
+                recommendation_benchmark(
+                    model,
+                    self.evaluation_data,
+                    config,
+                    target="validation",
+                    suite=self.benchmark_suite,
+                    restricted_path=True,
+                )
+            )
             training_runs.append(training)
         validation = _mean_metrics(validation_runs)
+        validation["fitness"] = validation[
+            "public_composite" if self.fitness_metric == "public_composite" else "primary"
+        ]
         training = {
             "initial_loss": float(np.mean([row["initial_loss"] for row in training_runs])),
             "final_loss": float(np.mean([row["final_loss"] for row in training_runs])),
@@ -46,7 +88,16 @@ class RankMixerEvaluator:
         for seed in self.seeds:
             config = self._config(genome)
             model, _ = train_model(genome.architecture, self.data, config, seed)
-            runs.append(evaluate_model(model, self.evaluation_data, config, target="test"))
+            runs.append(
+                recommendation_benchmark(
+                    model,
+                    self.evaluation_data,
+                    config,
+                    target="test",
+                    suite=self.benchmark_suite,
+                    restricted_path=True,
+                )
+            )
         return _mean_metrics(runs)
 
     def _config(self, genome: Genome) -> RankMixerConfig:

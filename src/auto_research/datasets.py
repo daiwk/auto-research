@@ -29,6 +29,10 @@ ALPACA_URL = (
     "https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/"
     "alpaca_data.json"
 )
+GSM8K_BASE_URL = (
+    "https://raw.githubusercontent.com/openai/grade-school-math/master/"
+    "grade_school_math/data"
+)
 
 
 def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
@@ -77,6 +81,33 @@ def alpaca_instructions(root: Path, allow_network: bool = True) -> list[dict[str
         }
         for row in rows
     ]
+
+
+def gsm8k(root: Path, allow_network: bool = True) -> dict[str, list[dict[str, str]]]:
+    """Load OpenAI's official GSM8K train/test JSONL files."""
+    directory = root / "gsm8k"
+    result = {}
+    for split in ("train", "test"):
+        target = directory / f"{split}.jsonl"
+        if not target.exists():
+            if not allow_network:
+                raise FileNotFoundError(
+                    f"dataset missing and network disabled: {target}"
+                )
+            target.parent.mkdir(parents=True, exist_ok=True)
+            _download(f"{GSM8K_BASE_URL}/{split}.jsonl", target)
+        result[split] = [
+            {
+                "question": str(row["question"]),
+                "answer": str(row["answer"]),
+            }
+            for row in (
+                json.loads(line)
+                for line in target.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            )
+        ]
+    return result
 
 
 def movielens_100k(root: Path, allow_network: bool = True) -> list[tuple[int, int, float, int]]:

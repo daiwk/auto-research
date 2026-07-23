@@ -32,6 +32,20 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
     if "longer" in requested: values.append("rankmixer_longer")
     if "unimixer" in requested: values.append("rankmixer_unimixer")
     if set(requested) >= {"longer", "unimixer"}: values.append("rankmixer_longer_unimixer")
+    direct_terms = {
+        "rankmixer_whale": ("whale", "wukong", "hstu"),
+        "rankmixer_tmallgs": ("tmallgs", "天猫", "field-wise"),
+        "rankmixer_long_history": (
+            "long-history",
+            "long history",
+            "长历史",
+            "缓存",
+        ),
+        "rankmixer_ramp": ("ramp", "隐私", "特征受限", "feature availability"),
+    }
+    for architecture, terms in direct_terms.items():
+        if any(term in text for term in terms):
+            values.append(architecture)
     mapping = {
         p.architecture: p.architecture for p in papers
         if p.architecture not in {"longer", "unimixer"}
@@ -80,8 +94,14 @@ def _propose_llm(parent, generation, index, architectures, rng):
         )
     if generation == 3:
         methods = (
-            ("none", 0.0, 0), ("sft", 0.0, 24), ("sft_low_lr", 0.0, 24),
-            ("neftune", 5.0, 24), ("neftune", 10.0, 24), ("neftune", 15.0, 24),
+            ("none", 0.0, 0),
+            ("sft", 0.0, 24),
+            ("sft_low_lr", 0.0, 24),
+            ("neftune", 5.0, 24),
+            ("dynamic_rubric", 0.0, 24),
+            ("off_context_grpo", 0.0, 24),
+            ("neftune", 10.0, 24),
+            ("neftune", 15.0, 24),
         )
         method, alpha, steps = methods[index % len(methods)]
         return replace(parent, post_training=method, neftune_alpha=alpha, post_steps=steps), (

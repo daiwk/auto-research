@@ -99,6 +99,18 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--llm-layers", type=int, default=6, help="initial micro-llm layer count")
     evolve.add_argument("--llm-batch-size", type=int, default=4, help="initial micro-llm batch size")
     evolve.add_argument("--llm-sequence-length", type=int, default=128, help="micro-llm context length")
+    evolve.add_argument(
+        "--benchmark-suite",
+        choices=["core", "public"],
+        default="public",
+        help="core primary metric only, or public robustness/capability slices",
+    )
+    evolve.add_argument(
+        "--fitness-metric",
+        choices=["primary", "public_composite"],
+        default="primary",
+        help="metric used for validation-only evolution selection",
+    )
     _add_runtime_arguments(evolve)
     return parser
 
@@ -185,6 +197,8 @@ def main(argv: list[str] | None = None) -> int:
                 llm_layers=args.llm_layers,
                 llm_batch_size=args.llm_batch_size,
                 llm_sequence_length=args.llm_sequence_length,
+                benchmark_suite=args.benchmark_suite,
+                fitness_metric=args.fitness_metric,
                 device=runtime_summary()["requested_device"],
                 cpu_threads=args.cpu_threads,
             )
@@ -194,8 +208,18 @@ def main(argv: list[str] | None = None) -> int:
             if args.model == "micro-llm":
                 print(f"Validation perplexity: {champion.validation['perplexity']:.4f}")
                 print(f"Instruction loss: {champion.validation['instruction_loss']:.4f}")
+                if args.benchmark_suite == "public":
+                    print(
+                        "Public capability slices: "
+                        f"preference accuracy={champion.validation['preference_accuracy']:.4f}, "
+                        f"GSM8K candidate Pass@1={champion.validation['reasoning_pass_at_1']:.4f}"
+                    )
             else:
                 print(f"Validation NDCG@10: {champion.validation['ndcg_at_10']:.6f}")
+            print(
+                f"Selection fitness ({args.fitness_metric}): "
+                f"{champion.fitness:.6f}"
+            )
             print(f"Report: {run_dir / 'report.md'}")
             print(f"Dashboard: {run_dir / 'index.html'}")
             return 0

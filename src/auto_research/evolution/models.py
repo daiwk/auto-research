@@ -30,6 +30,8 @@ class EvolutionConfig:
     llm_layers: int = 6
     llm_batch_size: int = 4
     llm_sequence_length: int = 128
+    benchmark_suite: str = "public"
+    fitness_metric: str = "primary"
     device: str = "auto"
     cpu_threads: int | None = None
 
@@ -45,6 +47,15 @@ class EvolutionConfig:
             raise ValueError("at least one seed is required")
         if self.cpu_threads is not None and self.cpu_threads < 1:
             raise ValueError("cpu threads must be positive")
+        if self.benchmark_suite not in {"core", "public"}:
+            raise ValueError("benchmark suite must be core or public")
+        allowed_fitness = {"primary", "public_composite"}
+        if self.fitness_metric not in allowed_fitness:
+            raise ValueError(
+                f"fitness metric must be one of {sorted(allowed_fitness)}"
+            )
+        if self.fitness_metric == "public_composite" and self.benchmark_suite != "public":
+            raise ValueError("public_composite fitness requires the public benchmark suite")
         if self.model == "micro-llm":
             if min(self.vocab_size, self.llm_dimensions, self.llm_layers,
                    self.llm_batch_size, self.llm_sequence_length) < 1:
