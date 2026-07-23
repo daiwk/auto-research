@@ -1,0 +1,19 @@
+{
+  "dataset": "Stanford Alpaca",
+  "seed": 42,
+  "train_preferences": 720,
+  "test_preferences": 180,
+  "steps_per_variant": 1600,
+  "baseline": {
+    "name": "static prompt-only rubric policy",
+    "preference_accuracy": 0.838889
+  },
+  "method": {
+    "name": "DynamicRubric evaluator-policy co-evolution",
+    "preference_accuracy": 0.877778
+  },
+  "relative": {
+    "preference_accuracy_percent": 4.64,
+    "margin_delta": 0.006548
+  }
+}

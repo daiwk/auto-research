@@ -1,0 +1,1 @@
+"""RAMP reproduction adapter."""

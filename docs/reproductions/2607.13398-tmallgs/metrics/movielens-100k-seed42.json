@@ -1,0 +1,19 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "steps_per_model": 60,
+  "baseline": {
+    "name": "DIN/RankMixer-style late fusion Transformer",
+    "hit_at_10": 0.002146,
+    "ndcg_at_10": 0.000677
+  },
+  "method": {
+    "name": "TMallGS field-adaptive gated Transformer",
+    "hit_at_10": 0.006438,
+    "ndcg_at_10": 0.002778
+  },
+  "relative": {
+    "hit_at_10_percent": 200.0,
+    "ndcg_at_10_percent": 310.42
+  }
+}

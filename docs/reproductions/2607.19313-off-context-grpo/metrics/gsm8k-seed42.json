@@ -1,0 +1,21 @@
+{
+  "dataset": "GSM8K official",
+  "seed": 42,
+  "train_examples": 1200,
+  "test_examples": 300,
+  "steps_per_variant": 2400,
+  "group_size": 8,
+  "baseline": {
+    "name": "vanilla GRPO",
+    "pass_at_1": 0.026667,
+    "pass_at_8": 1.0
+  },
+  "method": {
+    "name": "Off-Context GRPO with importance correction",
+    "pass_at_1": 0.033333,
+    "pass_at_8": 1.0
+  },
+  "relative": {
+    "pass_at_1_percent": 25.0
+  }
+}

@@ -80,6 +80,14 @@ def test_builtin_adapters_are_discoverable():
         "recgpt-v3",
         "recgpt-mobile",
         "sort-gen",
+        "tsgr",
+        "whale",
+        "ramp",
+        "tmallgs",
+        "long-history-transformer",
+        "downstream-rewards",
+        "dynamic-rubric",
+        "off-context-grpo",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -94,6 +102,14 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("recgpt-v3").paper.has_online_ab
     assert get_adapter("recgpt-mobile").paper.has_online_ab
     assert get_adapter("sort-gen").paper.has_online_ab
+    assert get_adapter("tsgr").paper.has_online_ab
+    assert get_adapter("whale").paper.has_online_ab
+    assert get_adapter("ramp").paper.code_url == "https://github.com/Ruixinhua/RAMP"
+    assert get_adapter("tmallgs").paper.has_online_ab
+    assert get_adapter("long-history-transformer").paper.has_online_ab
+    assert get_adapter("downstream-rewards").paper.has_online_ab
+    assert get_adapter("dynamic-rubric").paper.selection_exception
+    assert get_adapter("off-context-grpo").paper.code_url == "https://github.com/AgPriyank/OC-GRPO"
     assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"

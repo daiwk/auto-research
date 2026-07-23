@@ -38,11 +38,14 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：按当前回答集合生成动态评估标准，用 discriminability 与 anchor 共同约束 evaluator-policy 共进化。
+- [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：训练时借助特权解题信息采样，并用 importance correction 保持推理期无提示目标不变。
 - [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线提取强模型的高频 n-gram hidden state并冻结，recipient 用最长精确匹配、hash fallback 和门控残差写入复用外部容量。
 - [mHC](../2512.24880-mhc/README.md)：扩展多个 residual streams，并用 Sinkhorn 将动态残差矩阵约束为双随机矩阵，避免深层组合放大信号。
 
 ## 生成式召回与端到端推荐
 
+- [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 和并行价值码同时表达商品语义、全局价值与 query 条件价值，再联合训练 VRM。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用两级 RQ-VAE 建立 SID 模态，联合记忆驱动意图与 latent reasoning 生成可直接检索的商品标识。
 - [GRC](../2602.23639-grc/README.md)：用结构化反思标签、轨迹 GRPO 和熵调度纠正 Semantic ID 自回归错误。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由联合多个业务生成目标。
@@ -69,6 +72,9 @@
 
 ## 排序网络与长序列
 
+- [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶交互和门控 HSTU 序列状态，避免双分支只在末端融合。
+- [TMallGS](../2607.13398-tmallgs/README.md)：对异构字段使用独立 QKV、噪声门控、FiLM 和 progressive loss，统一特征交互与序列建模。
+- [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：把长历史异步压缩成固定缓存，线上只运行近期事件 Transformer，兼顾历史容量与实时延迟。
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：以 causal ordered regression 学习列表前缀的 CLICK/PAY 价值，通过多目标队列和内嵌 MMR 生成最终重排列表。
 - [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复访问原始用户 token，把逐层状态从序列长度中解耦并支持 request-only 共享。
 - [MESH](../2607.12392-mesh/README.md)：用异构模块塔、信号放大与 RGBC 缓解 fresh/tail 梯度被头部内容淹没的问题。
@@ -94,6 +100,8 @@
 
 ## 采样、蒸馏与强化学习
 
+- [RAMP](../2607.17473-ramp/README.md)：以富个性化路径为 teacher，通过 feature mask 和 KL alignment 改善仅有公共字段的流量。
+- [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：先筛选预测长期参与度的候选奖励，再将独立 reward heads 与即时目标联合优化。
 - [UAME](../2607.17092-uame/README.md)：利用 Gaussian 排序不确定性识别多 pxtr 冲突样本，并自适应提高高偏差 pair 的训练权重。
 - [PPL-Factory](../2607.18199-ppl-factory/README.md)：按 causal LM 的 block NLL 和可用数据比例选择微调子集，在信息量与原分布覆盖之间折中。
 - [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 post-QKV 位置使用线性 residual depthwise Conv1D，使语言模型同时利用短程局部模式和全局注意力。

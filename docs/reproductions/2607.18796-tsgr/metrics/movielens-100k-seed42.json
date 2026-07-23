@@ -1,0 +1,23 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "users": 420,
+  "items": 620,
+  "baseline": {
+    "name": "semantic retrieval + conventional pre-ranking proxy",
+    "hit_at_10": 0.059524,
+    "ndcg_at_10": 0.026292,
+    "fresh_hit_at_10": 0.020833
+  },
+  "method": {
+    "name": "QP-SID + jointly optimized value-aware ranking module",
+    "hit_at_10": 0.116667,
+    "ndcg_at_10": 0.056721,
+    "fresh_hit_at_10": 0.041667
+  },
+  "relative": {
+    "hit_at_10_percent": 96.0,
+    "ndcg_at_10_percent": 115.73,
+    "fresh_hit_at_10_percent": 100.0
+  }
+}
