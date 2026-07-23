@@ -20,9 +20,15 @@ def test_rankmixer_evolution_variants_preserve_candidate_score_shape():
     config = RankMixerConfig(dimensions=32, heads=4, tokens=4, layers=2, sequence_length=6)
     history = torch.randint(0, Data.item_count, (3, 6))
     candidates = torch.randint(0, Data.item_count, (3, 5))
-    for architecture in ("rankmixer_dense", "rankmixer_smoe", "tokenmixer_large", "zenith", "moi_mixer", "rankmixer_longer", "rankmixer_unimixer", "rankmixer_longer_unimixer"):
+    for architecture in (
+        "rankmixer_dense", "rankmixer_smoe", "tokenmixer_large", "zenith",
+        "moi_mixer", "rankmixer_longer", "rankmixer_unimixer",
+        "rankmixer_longer_unimixer", "rankmixer_whale", "rankmixer_tmallgs",
+        "rankmixer_long_history", "rankmixer_ramp",
+    ):
         model = build_model(architecture, Data, config)
         assert model.pair_scores(history, candidates).shape == (3, 5)
+        assert model.pair_scores(history, candidates, mode="restricted").shape == (3, 5)
 
 
 def test_hyformer_query_boost_has_divisible_token_subspaces():

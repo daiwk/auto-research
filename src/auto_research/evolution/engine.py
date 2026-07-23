@@ -104,9 +104,11 @@ def _make_evaluator(config, project_dir):
             (project_dir / config.dataset_dir).resolve(), config.dataset, config.steps,
             config.seeds, config.allow_network, config.maximum_train_tokens,
             config.maximum_eval_tokens, config.vocab_size,
+            config.benchmark_suite, config.fitness_metric,
         )
     arguments = ((project_dir / config.dataset_dir).resolve(), config.dataset, config.steps,
-                 config.seeds, config.maximum_users, config.maximum_items, config.evaluation_users)
+                 config.seeds, config.maximum_users, config.maximum_items, config.evaluation_users,
+                 config.benchmark_suite, config.fitness_metric)
     return HyFormerEvaluator(*arguments) if config.model == "hyformer" else RankMixerEvaluator(*arguments)
 
 
@@ -135,6 +137,11 @@ def _paper_ids(genome, papers):
         elif paper.architecture == "data_mixture" and genome.data_recipe != "wikitext":
             matched.append(paper.arxiv_id)
         elif paper.architecture == "neftune" and genome.post_training == "neftune":
+            matched.append(paper.arxiv_id)
+        elif (
+            paper.architecture in {"dynamic_rubric", "off_context_grpo"}
+            and genome.post_training == paper.architecture
+        ):
             matched.append(paper.arxiv_id)
         elif paper.architecture == "parallel_block" and "parallel" in terms:
             matched.append(paper.arxiv_id)

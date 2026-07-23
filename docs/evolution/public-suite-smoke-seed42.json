@@ -1,0 +1,69 @@
+{
+  "purpose": "Public benchmark infrastructure smoke test; not a paper reproduction or full-budget model comparison.",
+  "date": "2026-07-23",
+  "recommendation": {
+    "dataset": "MovieLens-100K",
+    "limits": {
+      "users": 80,
+      "items": 200,
+      "evaluation_users": 40,
+      "steps": 2,
+      "seed": 42
+    },
+    "benchmark_suite": "public",
+    "fitness_metric": "public_composite",
+    "trials": {
+      "rankmixer_dense": {
+        "validation_ndcg_at_10": 0.0434492175,
+        "public_composite": 0.0476224164
+      },
+      "rankmixer_whale": {
+        "validation_ndcg_at_10": 0.0168979408,
+        "public_composite": 0.0161637258
+      },
+      "rankmixer_tmallgs": {
+        "validation_ndcg_at_10": 0.0125,
+        "public_composite": 0.0164453241
+      },
+      "rankmixer_long_history": {
+        "validation_ndcg_at_10": 0.0304390076,
+        "public_composite": 0.0349001483
+      },
+      "rankmixer_ramp": {
+        "validation_ndcg_at_10": 0.0422363656,
+        "public_composite": 0.0467241361
+      }
+    },
+    "result": "All four new operators completed training and all public slices; no claim of improvement is made at this smoke budget."
+  },
+  "llm": {
+    "model": "micro-llm",
+    "dataset": "WikiText-2 + Stanford Alpaca + GSM8K",
+    "limits": {
+      "dimensions": 32,
+      "layers": 1,
+      "sequence_length": 48,
+      "pretraining_steps": 1,
+      "post_training_steps": 2,
+      "seed": 42
+    },
+    "benchmark_suite": "public",
+    "fitness_metric": "public_composite",
+    "trials": {
+      "dynamic_rubric": {
+        "perplexity": 512.1624613,
+        "preference_accuracy": 0.46875,
+        "gsm8k_candidate_pass_at_1": 0.203125,
+        "public_composite": -7.3897831
+      },
+      "off_context_grpo": {
+        "perplexity": 512.2251315,
+        "preference_accuracy": 0.46875,
+        "gsm8k_candidate_pass_at_1": 0.21875,
+        "public_composite": -7.3899166,
+        "reward_bearing_group_rate": 1.0
+      }
+    },
+    "result": "Both post-training paths completed and produced public capability metrics; the tiny budget is only a pipeline diagnostic."
+  }
+}

@@ -304,10 +304,14 @@ auto-research evolve \
   --population 4 \
   --steps 100 \
   --papers 8 \
+  --benchmark-suite public \
+  --fitness-metric public_composite \
   --seeds 42,43,44
 ```
 
-调研方向同时约束论文检索和可执行结构空间；每一代并行比较论文启发结构与训练参数，再根据 validation 形成下一轮决策。目前还包括 LONGER、UniMixer 及组合结构；在线发现但尚未映射为安全算子的论文只进入证据池。
+调研方向同时约束论文检索和可执行结构空间；每一代并行比较论文启发结构与训练参数，再根据 validation 形成下一轮决策。目前包括 LONGER、UniMixer、WHALE、TMallGS、Long-History Transformer、RAMP 及组合结构；在线发现但尚未映射为安全算子的论文只进入证据池。
+
+公共评测套件会在 MovieLens 上固定评估 overall、长历史、长尾目标、recent-only 和个性化特征受限切片；`public_composite` 用这些切片 NDCG 的等权平均晋级。若只想保持原先总体 NDCG 选择口径，使用 `--fitness-metric primary`；若要跳过额外切片，使用 `--benchmark-suite core`。
 
 运行产物位于 `runs/evolution/<model>-<timestamp>/`，包含机器可读 JSON、中文 Markdown 报告和可直接打开的 HTML 研究看板。详细协议见[模型自动进化文档](model-evolution.md)。
 
@@ -323,10 +327,12 @@ auto-research evolve \
   --workers 1 \
   --steps 300 \
   --papers 8 \
+  --benchmark-suite public \
+  --fitness-metric public_composite \
   --seeds 42
 ```
 
-默认 `micro-llm` 约 12M–16M 参数；WikiText-2、Tiny Shakespeare、Stanford Alpaca 和 BPE tokenizer 自动下载/构建并缓存到 `data/`。第一轮只比较结构，第二轮只比较数据配方，第三轮只比较后训练方法。
+默认 `micro-llm` 约 12M–16M 参数；WikiText-2、Tiny Shakespeare、Stanford Alpaca、官方 GSM8K 和 BPE tokenizer 自动下载/构建并缓存到 `data/`。第一轮只比较结构，第二轮只比较数据配方，第三轮比较 SFT、NEFTune、DynamicRubric 与 Off-Context GRPO。public suite 同时记录 Alpaca preference accuracy 和 GSM8K candidate Pass@1；详细定义见[模型自动进化文档](model-evolution.md)。
 
 ## 运行 Topic research loop
 

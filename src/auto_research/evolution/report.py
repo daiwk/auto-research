@@ -26,11 +26,17 @@ def render_evolution_report(result: EvolutionResult) -> str:
         f"- 数据规模：{result.dataset_summary.get('users', '—')} users / {result.dataset_summary.get('items', '—')} items / {result.dataset_summary.get('train_events', '—')} train events；固定评估 cohort {result.dataset_summary.get('evaluation_users', '—')} users",
         f"- 并行度：`{result.config.workers}` workers",
         f"- 代数 / 每代子代：`{result.config.generations}` / `{result.config.population}`",
+        f"- 评测套件 / 晋级指标：`{result.config.benchmark_suite}` / `{result.config.fitness_metric}`",
         f"- 论文证据：{len(result.papers)} 篇，其中 {sum(p.architecture is not None for p in result.papers)} 篇映射到已验证结构算子",
     ]
     if champion and baseline:
         gain = 100 * (champion.fitness - baseline.fitness) / max(abs(baseline.fitness), 1e-12)
-        lines += [f"- validation 冠军：`{champion.trial_id}` / `{champion.genome.architecture}` / NDCG@10 `{champion.fitness:.5f}`（相对初始 RankMixer `{gain:+.2f}%`）"]
+        lines += [
+            f"- validation 冠军：`{champion.trial_id}` / `{champion.genome.architecture}`；"
+            f"晋级分数 `{champion.fitness:.5f}`（相对初始模型 `{gain:+.2f}%`），"
+            f"总体 NDCG@10 `{champion.validation.get('ndcg_at_10', 0.0):.5f}`，"
+            f"public composite `{champion.validation.get('public_composite', champion.fitness):.5f}`"
+        ]
     if result.baseline_test and result.champion_test:
         gain = 100 * (result.champion_test["ndcg_at_10"] - result.baseline_test["ndcg_at_10"]) / max(result.baseline_test["ndcg_at_10"], 1e-12)
         lines += [f"- 最终一次 test：NDCG@10 `{result.baseline_test['ndcg_at_10']:.5f}→{result.champion_test['ndcg_at_10']:.5f}`（`{gain:+.2f}%`）"]
@@ -41,11 +47,16 @@ def render_evolution_report(result: EvolutionResult) -> str:
     for round_ in result.rounds:
         lines += [f"### 第 {round_['generation']} 轮", "", f"- 起点：`{round_['parent']}`", "- 假设："]
         lines += [f"  - `{item['trial_id']}`：{item['rationale']}" for item in round_["hypotheses"]]
-        lines += [f"- 观察：" + "；".join(f"`{item['trial_id']}` NDCG@10={item['validation']['ndcg_at_10']:.5f} ({item['status']})" for item in round_["observations"]), f"- 决策：{round_['decision']}", ""]
-    lines += ["## 完整实验轨迹", "", "| Trial | 状态 | 代 | 父代 | Architecture | Validation NDCG@10 | Hit@10 | 耗时(s) | Params | Genome |", "|---|---|---:|---|---|---:|---:|---:|---:|---|"]
+        lines += [f"- 观察：" + "；".join(
+            f"`{item['trial_id']}` fitness={item['validation'].get('fitness', 0.0):.5f}, "
+            f"NDCG@10={item['validation'].get('ndcg_at_10', 0.0):.5f}, "
+            f"public={item['validation'].get('public_composite', item['validation'].get('ndcg_at_10', 0.0)):.5f} ({item['status']})"
+            for item in round_["observations"]
+        ), f"- 决策：{round_['decision']}", ""]
+    lines += ["## 完整实验轨迹", "", "| Trial | 状态 | 代 | 父代 | Architecture | Fitness | Validation NDCG@10 | Public composite | Hit@10 | 耗时(s) | Params | Genome |", "|---|---|---:|---|---|---:|---:|---:|---:|---:|---:|---|"]
     for trial in result.trials:
         genome = json.dumps(trial.genome.to_dict(), ensure_ascii=False, sort_keys=True).replace("|", "\\|")
-        lines.append(f"| {trial.trial_id} | {trial.status} | {trial.generation} | {trial.parent_id or '—'} | `{trial.genome.architecture}` | {trial.validation['ndcg_at_10']:.5f} | {trial.validation['hit_at_10']:.5f} | {trial.duration_seconds:.1f} | {trial.training.get('parameters', 0)} | `{genome}` |")
+        lines.append(f"| {trial.trial_id} | {trial.status} | {trial.generation} | {trial.parent_id or '—'} | `{trial.genome.architecture}` | {trial.fitness:.5f} | {trial.validation.get('ndcg_at_10', 0.0):.5f} | {trial.validation.get('public_composite', trial.validation.get('ndcg_at_10', 0.0)):.5f} | {trial.validation.get('hit_at_10', 0.0):.5f} | {trial.duration_seconds:.1f} | {trial.training.get('parameters', 0)} | `{genome}` |")
     lines += ["", "## 协议与边界", "", "- 默认使用完整公开数据集；只有显式传入 `--maximum-users/--maximum-items` 才缩小为 smoke test。", "- 每轮选择只读取 validation；test 仅在全部代际结束后对初始基线和冠军各运行一次。", "- 同一代实验可并行；失败实验保留错误信息且不参与晋级。", "- 论文只负责提出结构假设；只有已审核、已测试的算子可执行。", "- checkpoint 与原始 runs 不提交 Git；`result.json`、`report.md` 和 `index.html` 保存完整过程。", ""]
     return "\n".join(lines)
 
@@ -59,13 +70,15 @@ def _render_llm_report(result: EvolutionResult) -> str:
         f"- Benchmark：`{result.config.dataset}`（本地训练 BPE vocab `{summary.get('vocab_size', '—')}`）",
         f"- 调研方向：{result.config.direction}",
         f"- 数据：train `{summary.get('train_tokens', '—')}` tokens；validation `{summary.get('validation_tokens', '—')}`；test `{summary.get('test_tokens', '—')}`；instruction train/validation `{summary.get('instruction_train', '—')}/{summary.get('instruction_validation', '—')}`",
+        f"- 公共能力集：Alpaca preference `{summary.get('preference_validation', 0)}`；GSM8K candidate ranking `{summary.get('reasoning_validation', 0)}`",
         f"- 代数 / population / workers：`{result.config.generations}` / `{result.config.population}` / `{result.config.workers}`",
-        f"- 选择目标：最小化 `WikiText validation loss + 0.15 × instruction validation loss`；test 不参与进化",
+        f"- 评测套件 / 晋级指标：`{result.config.benchmark_suite}` / `{result.config.fitness_metric}`；test 不参与进化",
     ]
     if champion and baseline:
         reduction = 100 * (baseline.validation["perplexity"] - champion.validation["perplexity"]) / max(baseline.validation["perplexity"], 1e-12)
         lines += [
             f"- validation 冠军：`{champion.trial_id}` / `{champion.genome.architecture}`；PPL `{baseline.validation['perplexity']:.3f}→{champion.validation['perplexity']:.3f}`（降低 `{reduction:+.2f}%`），instruction loss `{champion.validation['instruction_loss']:.4f}`",
+            f"- 公共能力指标：preference accuracy `{champion.validation.get('preference_accuracy', 0.0):.3f}`；GSM8K candidate Pass@1 `{champion.validation.get('reasoning_pass_at_1', 0.0):.3f}`；public composite `{champion.validation.get('public_composite', champion.fitness):.4f}`",
         ]
     if result.baseline_test and result.champion_test:
         reduction = 100 * (result.baseline_test["perplexity"] - result.champion_test["perplexity"]) / max(result.baseline_test["perplexity"], 1e-12)
@@ -80,16 +93,21 @@ def _render_llm_report(result: EvolutionResult) -> str:
         observations = []
         for item in round_["observations"]:
             values = item["validation"]
-            observations.append(f"`{item['trial_id']}` PPL={values.get('perplexity', float('inf')):.3f}, instruction loss={values.get('instruction_loss', float('inf')):.4f} ({item['status']})")
+            observations.append(
+                f"`{item['trial_id']}` fitness={values.get('fitness', 0.0):.4f}, "
+                f"PPL={values.get('perplexity', float('inf')):.3f}, "
+                f"preference={values.get('preference_accuracy', 0.0):.3f}, "
+                f"GSM8K Pass@1={values.get('reasoning_pass_at_1', 0.0):.3f} ({item['status']})"
+            )
         lines += ["- 观察：" + "；".join(observations), f"- 决策：{round_['decision']}", ""]
     lines += [
         "## 完整实验轨迹", "",
-        "| Trial | 代 | Architecture | Data recipe | Post-training | Val PPL | Instruction loss | Params | 秒 |",
-        "|---|---:|---|---|---|---:|---:|---:|---:|",
+        "| Trial | 代 | Architecture | Data recipe | Post-training | Fitness | Val PPL | Preference | GSM8K Pass@1 | Params | 秒 |",
+        "|---|---:|---|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for trial in result.trials:
         lines.append(
-            f"| {trial.trial_id} | {trial.generation} | `{trial.genome.architecture}` | `{trial.genome.data_recipe}` ({trial.genome.data_mix_ratio:.2f}) | `{trial.genome.post_training}` | {trial.validation.get('perplexity', float('inf')):.3f} | {trial.validation.get('instruction_loss', float('inf')):.4f} | {trial.training.get('parameters', 0)} | {trial.duration_seconds:.1f} |"
+            f"| {trial.trial_id} | {trial.generation} | `{trial.genome.architecture}` | `{trial.genome.data_recipe}` ({trial.genome.data_mix_ratio:.2f}) | `{trial.genome.post_training}` | {trial.fitness:.4f} | {trial.validation.get('perplexity', float('inf')):.3f} | {trial.validation.get('preference_accuracy', 0.0):.3f} | {trial.validation.get('reasoning_pass_at_1', 0.0):.3f} | {trial.training.get('parameters', 0)} | {trial.duration_seconds:.1f} |"
         )
     lines += [
         "", "## 协议与边界", "",
@@ -97,6 +115,7 @@ def _render_llm_report(result: EvolutionResult) -> str:
         "- WikiText-2 是标准 benchmark 数据，但本地 BPE tokenizer 不同于论文 tokenizer；PPL 只在本次同 tokenizer 实验内部公平比较。",
         "- 第一轮研究结构，第二轮研究训练数据，第三轮研究后训练；同一轮尽量冻结其他变量。",
         "- instruction loss 来自 Stanford Alpaca held-out 子集，不代表完整对话、知识、推理或安全能力。",
+        "- public 套件额外用 Alpaca 构造的确定性 response preference 和 GSM8K 多候选 Pass@1；它们是固定公共能力切片，不等同于开放式生成评测。",
         "- checkpoint、tokenizer cache、数据与 raw runs 不提交 Git；JSON/Markdown/HTML 保存全部配置、负结果和失败信息。", "",
     ]
     return "\n".join(lines)
@@ -108,4 +127,4 @@ def render_dashboard(result: EvolutionResult) -> str:
     title = f"{result.config.model} 自动研究"
     return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title>
 <style>body{{margin:0;background:#f5f7fb;color:#172033;font:15px system-ui,-apple-system,sans-serif}}main{{max-width:1180px;margin:auto;padding:32px}}h1{{margin:0}}.muted{{color:#65708a}}.cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:24px 0}}.card,section{{background:white;border:1px solid #e4e8f0;border-radius:14px;padding:18px;box-shadow:0 3px 12px #1b274510}}.value{{font-size:26px;font-weight:700;margin-top:7px}}section{{margin:16px 0}}table{{width:100%;border-collapse:collapse}}th,td{{padding:10px;border-bottom:1px solid #edf0f5;text-align:left}}.good{{color:#087f5b}}.bad{{color:#c92a2a}}.bar{{height:9px;background:#4263eb;border-radius:6px;min-width:2px}}code{{background:#f1f3f8;padding:2px 5px;border-radius:4px}}details{{margin:10px 0}}@media(max-width:700px){{main{{padding:18px}}.scroll{{overflow:auto}}}}</style></head><body><main><h1>{title}</h1><p class="muted" id="subtitle"></p><div class="cards" id="cards"></div><section><h2>迭代效果</h2><div class="scroll"><table><thead><tr><th>实验</th><th>轮次</th><th>结构</th><th id="metric-head">主指标</th><th>相对宽度</th><th>状态</th></tr></thead><tbody id="trials"></tbody></table></div></section><section><h2>研究过程</h2><div id="rounds"></div></section><section><h2>论文证据</h2><div id="papers"></div></section></main>
-<script>const d={payload};const esc=s=>String(s).replace(/[&<>"']/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));const trials=d.trials,base=trials[0],champ=trials.find(x=>x.trial_id===d.champion_id)||base,isLLM=d.config.model==='micro-llm';const metric=x=>isLLM?x.validation.perplexity:x.validation.ndcg_at_10,metricLabel=isLLM?'Validation PPL':'Validation NDCG@10';document.querySelector('#metric-head').textContent=metricLabel;document.querySelector('#subtitle').textContent=isLLM?d.config.direction+' · '+d.config.dataset+' · '+d.dataset_summary.train_tokens+' train tokens':d.config.direction+' · '+d.config.dataset+' · '+d.dataset_summary.users+' users / '+d.dataset_summary.items+' items';const gain=isLLM?(metric(base)-metric(champ))/Math.max(metric(base),1e-12)*100:(metric(champ)-metric(base))/Math.max(Math.abs(metric(base)),1e-12)*100;document.querySelector('#cards').innerHTML=[['当前冠军',champ.trial_id],['冠军结构',champ.genome.architecture],[metricLabel,metric(champ).toFixed(5)],['相对基线',(gain>=0?'+':'')+gain.toFixed(2)+'%'],['已完成进化轮数',d.rounds.length],['实验数（含基线）',trials.length],['并行 workers',d.config.workers]].map(x=>`<div class="card"><div class="muted">${{esc(x[0])}}</div><div class="value">${{esc(x[1])}}</div></div>`).join('');const completed=trials.filter(x=>x.status==='completed'),best=isLLM?Math.min(...completed.map(metric)):Math.max(...completed.map(metric));document.querySelector('#trials').innerHTML=trials.map(x=>`<tr><td><code>${{esc(x.trial_id)}}</code></td><td>${{x.generation}}</td><td>${{esc(x.genome.architecture)}}</td><td>${{metric(x).toFixed(5)}}</td><td><div class="bar" style="width:${{Math.max(0,isLLM?best/metric(x)*100:metric(x)/best*100)}}%"></div></td><td class="${{x.status==='completed'?'good':'bad'}}">${{esc(x.status)}}</td></tr>`).join('');document.querySelector('#rounds').innerHTML=d.rounds.map(r=>`<details open><summary><b>第 ${{r.generation}} 轮</b> · ${{esc(r.decision)}}</summary><p><b>假设</b></p><ul>${{r.hypotheses.map(h=>`<li><code>${{esc(h.trial_id)}}</code> ${{esc(h.rationale)}}</li>`).join('')}}</ul><p><b>观察</b></p><ul>${{r.observations.map(o=>`<li>${{esc(o.trial_id)}}: ${{isLLM?'PPL='+Number(o.validation.perplexity).toFixed(3):'NDCG@10='+Number(o.validation.ndcg_at_10).toFixed(5)}} (${{esc(o.status)}})</li>`).join('')}}</ul></details>`).join('')||'<p class="muted">尚未完成第一轮。</p>';document.querySelector('#papers').innerHTML='<ul>'+d.papers.map(p=>`<li><a href="${{esc(p.url)}}">${{esc(p.title)}}</a>：${{esc(p.method)}} <code>${{esc(p.architecture||'evidence-only')}}</code></li>`).join('')+'</ul>';</script></body></html>'''
+<script>const d={payload};const esc=s=>String(s).replace(/[&<>"']/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));const trials=d.trials,base=trials[0],champ=trials.find(x=>x.trial_id===d.champion_id)||base,isLLM=d.config.model==='micro-llm',selected=d.config.fitness_metric==='public_composite'?'Public composite':'Primary fitness';const metric=x=>Number(x.validation.fitness??x.fitness),metricLabel=selected;document.querySelector('#metric-head').textContent=metricLabel;document.querySelector('#subtitle').textContent=(isLLM?d.config.direction+' · '+d.config.dataset+' · '+d.dataset_summary.train_tokens+' train tokens':d.config.direction+' · '+d.config.dataset+' · '+d.dataset_summary.users+' users / '+d.dataset_summary.items+' items')+' · '+d.config.benchmark_suite+' suite';const gain=(metric(champ)-metric(base))/Math.max(Math.abs(metric(base)),1e-12)*100;document.querySelector('#cards').innerHTML=[['当前冠军',champ.trial_id],['冠军结构',champ.genome.architecture],[metricLabel,metric(champ).toFixed(5)],['相对基线',(gain>=0?'+':'')+gain.toFixed(2)+'%'],['总体主指标',isLLM?'PPL '+Number(champ.validation.perplexity).toFixed(3):'NDCG '+Number(champ.validation.ndcg_at_10).toFixed(5)],['已完成进化轮数',d.rounds.length],['实验数（含基线）',trials.length],['并行 workers',d.config.workers]].map(x=>`<div class="card"><div class="muted">${{esc(x[0])}}</div><div class="value">${{esc(x[1])}}</div></div>`).join('');const completed=trials.filter(x=>x.status==='completed'),best=Math.max(...completed.map(metric)),worst=Math.min(...completed.map(metric)),span=Math.max(best-worst,1e-12);document.querySelector('#trials').innerHTML=trials.map(x=>`<tr><td><code>${{esc(x.trial_id)}}</code></td><td>${{x.generation}}</td><td>${{esc(x.genome.architecture)}}</td><td>${{metric(x).toFixed(5)}}</td><td><div class="bar" style="width:${{Math.max(3,(metric(x)-worst)/span*100)}}%"></div></td><td class="${{x.status==='completed'?'good':'bad'}}">${{esc(x.status)}}</td></tr>`).join('');document.querySelector('#rounds').innerHTML=d.rounds.map(r=>`<details open><summary><b>第 ${{r.generation}} 轮</b> · ${{esc(r.decision)}}</summary><p><b>假设</b></p><ul>${{r.hypotheses.map(h=>`<li><code>${{esc(h.trial_id)}}</code> ${{esc(h.rationale)}}</li>`).join('')}}</ul><p><b>观察</b></p><ul>${{r.observations.map(o=>`<li>${{esc(o.trial_id)}}: fitness=${{Number(o.validation.fitness).toFixed(5)}}; ${{isLLM?'PPL='+Number(o.validation.perplexity).toFixed(3)+', preference='+Number(o.validation.preference_accuracy||0).toFixed(3)+', GSM8K='+Number(o.validation.reasoning_pass_at_1||0).toFixed(3):'NDCG@10='+Number(o.validation.ndcg_at_10).toFixed(5)+', public='+Number(o.validation.public_composite||o.validation.ndcg_at_10).toFixed(5)}} (${{esc(o.status)}})</li>`).join('')}}</ul></details>`).join('')||'<p class="muted">尚未完成第一轮。</p>';document.querySelector('#papers').innerHTML='<ul>'+d.papers.map(p=>`<li><a href="${{esc(p.url)}}">${{esc(p.title)}}</a>：${{esc(p.method)}} <code>${{esc(p.architecture||'evidence-only')}}</code></li>`).join('')+'</ul>';</script></body></html>'''
