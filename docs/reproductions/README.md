@@ -18,15 +18,23 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 73 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 81 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-22 再加入 RecGPT-V3、SlimPer、RECAP、UAME、Convolution for LLMs 与 PPL-Factory。SlimPer 由用户明确认可其统计显著全流量证据，文档不虚构具体线上 lift；PVTG 因缺量化生产证据、SCASRec 因业务指标证据有歧义未纳入。
 
-## 全部复现（73/73）
+## 全部复现（81/81）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `dynamic-rubric` · [DynamicRubric](2607.20083-dynamic-rubric/README.md) | 微信搜索全 AI 流量统计显著；具体 lift 未披露 | Alpaca preference accuracy 83.89%→87.78%，相对 +4.64% |
+| 核心机制 | `tsgr` · [TSGR](2607.18796-tsgr/README.md) | 淘宝 IPV +0.43%、成交 +1.12%、GMV +1.64% | 并行价值 SID + 联合 VRM；NDCG@10 +115.73% |
+| 核心机制 | `off-context-grpo` · [Off-Context GRPO](2607.19313-off-context-grpo/README.md) | 纯 LLM：Qwen2.5-7B 相对 GRPO +13.8% | 官方 GSM8K Pass@1 2.67%→3.33%，相对 +25.00% |
+| 核心机制 | `ramp` · [RAMP](2607.17473-ramp/README.md) | 工业 CVR Total Advertiser Value >+3% | 受限个性化字段流量 NDCG@10 +417.23% |
+| 核心机制 | `whale` · [WHALE](2607.17017-whale/README.md) | Meta 主指标 +0.113%、Metric 1 +0.824% | Wukong-HSTU 渐进交换；NDCG@10 -83.20%，未迁移收益 |
+| 核心机制 | `tmallgs` · [TMallGS](2607.13398-tmallgs/README.md) | 天猫 UCTCVR +1.38%、GMV +1.52% | Field-adaptive gated Transformer；NDCG@10 +310.42% |
+| 核心机制 | `long-history-transformer` · [Long-History User Transformers](2607.14331-long-history-transformer/README.md) | Yandex Search 主指标 +2.77%、Revenue +2.26% | 缓存全历史 + 在线近期 encoder；NDCG@10 +57.08% |
+| 核心机制 | `downstream-rewards` · [Downstream Rewards](2607.14192-downstream-rewards/README.md) | 多 surface +0.11%–+0.36% | 筛选长期 reward head；NDCG@10 -5.10%，未迁移收益 |
 | 核心机制 | `recgpt-mobile` · [RecGPT-Mobile](2605.04726-recgpt-mobile/README.md) | 淘宝 CLICK +1.8%、PAY +2.7%、GMV +2.5% | 真实 135M LoRA semantic intent accuracy +100.00%；INT8 相对 -6.25%、体积 -53.68%，触发器跳过 96.21% 推理 |
 | 核心机制 | `sort-gen` · [SORT-Gen](2505.07197-sort-gen/README.md) | 相对部署基线 CLICK +4.13%、GMV +8.10% | ordered regression + 单次 mask-driven queue generation；Click +5.10%、Pay +8.46%、GMV proxy +9.00%、ILAD +2.89% |
 | 核心机制 | `recgpt-v3` · [RecGPT-V3](2607.15591-recgpt-v3/README.md) | 淘宝 Feed IPV +1.28%、CTR +1.00%、GMV +3.97%；资源 -52.4% | 两阶段教师蒸馏后 NDCG@10 +36.96%，memory token -65%、latent slots -90%，但 head share +71.43% |

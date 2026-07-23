@@ -1,0 +1,23 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "baseline": {
+    "name": "immediate next-item engagement ranker",
+    "hit_at_10": 0.059524,
+    "ndcg_at_10": 0.026292,
+    "fresh_hit_at_10": 0.020833
+  },
+  "method": {
+    "name": "immediate engagement + screened downstream reward heads",
+    "hit_at_10": 0.057143,
+    "ndcg_at_10": 0.024952,
+    "fresh_hit_at_10": 0.020833
+  },
+  "relative": {
+    "hit_at_10_percent": -4.0,
+    "ndcg_at_10_percent": -5.10,
+    "fresh_hit_at_10_percent": 0.0
+  },
+  "selected_reward": "new use-case exploration",
+  "validation_blend": 0.1
+}

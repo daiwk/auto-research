@@ -21,10 +21,18 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **73/73** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **81/81** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `dynamic-rubric` | DynamicRubric · Tencent/WeChat/Tsinghua | response-set rubric、binary verifiers、discriminability/anchor 与策略—评估器共进化；Alpaca preference accuracy +4.64% |
+| 核心机制 | `tsgr` | TSGR · Alibaba/Taobao | residual semantic prefix、并行全局/query 价值码与联合 VRM；MovieLens NDCG@10 +115.73% |
+| 核心机制 | `off-context-grpo` | Off-Context GRPO · Meta AI/Columbia | privileged behavior rollout、group-relative reward 与 importance correction；GSM8K Pass@1 +25.00% |
+| 核心机制 | `ramp` | RAMP · Huawei/UCD | 个性化/公共双路径、feature mask 与 prediction-alignment KL；受限流量 NDCG@10 +417.23% |
+| 核心机制 | `whale` | WHALE · Meta | Wukong 乘性交互、门控 HSTU 与逐层跨分支注意力；MovieLens NDCG@10 -83.20% |
+| 核心机制 | `tmallgs` | TMallGS · Alibaba/Tmall | field-wise QKV、噪声门控、FiLM、context bias 与 progressive loss；NDCG@10 +310.42% |
+| 核心机制 | `long-history-transformer` | Long-History User Transformers · Yandex | 异步全历史 encoder、固定缓存、在线近期 encoder 与双辅助目标；NDCG@10 +57.08% |
+| 核心机制 | `downstream-rewards` | Downstream Rewards · Pinterest | 长期 reward 候选筛选、独立 reward heads 与 validation 融合；NDCG@10 -5.10% |
 | 核心机制 | `recgpt-mobile` | RecGPT-Mobile · Alibaba/Taobao | 真实 SmolLM2-135M LoRA、adaptive prompt、drift trigger 与 INT8；semantic intent accuracy +100.00%、体积 -53.68% |
 | 核心机制 | `sort-gen` | SORT-Gen · Alibaba/Taobao | causal ordered regression、多目标队列、单次 mask-driven 评分和 MMR；Click +5.10%、GMV proxy +9.00% |
 | 核心机制 | `recgpt-v3` | RecGPT-V3 · Alibaba/Taobao | 两级 SID、Memory Hub、显式教师→latent 重建与 ranking feedback；MovieLens-1M NDCG@10 +36.96%，memory token -65% |
@@ -160,6 +168,19 @@ python -m pip install -e '.[plum]'
 ```
 
 这里的 `-e` 表示可编辑安装：更新本仓库的 Python 源码后通常不用重新安装。每次新开终端需要先执行 `source .venv/bin/activate`；不想激活环境时，也可以直接运行 `.venv/bin/auto-research --help`。若刚更新了依赖配置，再执行一次 `python -m pip install -e '.[neural-recs]'`。
+
+### 公开数据准备
+
+推荐 adapter 会按既有数据入口准备 MovieLens；本批纯 LLM adapter 使用官方 GSM8K 和 Stanford Alpaca，可一键下载到被 Git 忽略的 `data/`：
+
+```bash
+scripts/download_public_data.sh all
+
+auto-research reproduce --paper off-context-grpo --dataset-dir data --seed 42
+auto-research reproduce --paper dynamic-rubric --dataset-dir data --seed 42
+```
+
+脚本也支持单独传入 `gsm8k` 或 `alpaca`。数据、checkpoint 和单次 `runs/` 不提交 Git，只提交复核后的稳定 JSON 指标和复现说明。
 
 ### Mac、Linux GPU 与 Linux CPU
 

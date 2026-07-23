@@ -1,0 +1,1 @@
+"""DynamicRubric reproduction adapter."""

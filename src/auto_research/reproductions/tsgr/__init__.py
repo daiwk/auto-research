@@ -1,0 +1,1 @@
+"""TSGR reproduction adapter."""

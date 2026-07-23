@@ -1,0 +1,19 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "traffic_mode": "personalized features unavailable",
+  "baseline": {
+    "name": "shared CTR tower with missing personalized features",
+    "hit_at_10": 0.003219,
+    "ndcg_at_10": 0.001031
+  },
+  "method": {
+    "name": "RAMP masked dual tower + alignment pathway",
+    "hit_at_10": 0.009657,
+    "ndcg_at_10": 0.005332
+  },
+  "relative": {
+    "hit_at_10_percent": 200.0,
+    "ndcg_at_10_percent": 417.23
+  }
+}

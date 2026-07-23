@@ -1,0 +1,19 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "steps_per_model": 60,
+  "baseline": {
+    "name": "separate Transformer branches with late fusion",
+    "hit_at_10": 0.009657,
+    "ndcg_at_10": 0.004290
+  },
+  "method": {
+    "name": "WHALE progressive Wukong-HSTU exchange",
+    "hit_at_10": 0.002146,
+    "ndcg_at_10": 0.000721
+  },
+  "relative": {
+    "hit_at_10_percent": -77.78,
+    "ndcg_at_10_percent": -83.20
+  }
+}

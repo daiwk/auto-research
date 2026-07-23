@@ -4,6 +4,14 @@
 
 ## 2026-07
 
+- [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric，以区分性和锚定目标让 evaluator 与 policy 多轮协同进化。
+- [TSGR](../2607.18796-tsgr/README.md)：把 residual semantic prefix 与并行全局/query 价值码结合，再由联合 VRM 完成价值感知生成召回。
+- [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：用含特权解题过程的 behavior policy 增加成功 rollout，并以 importance ratio 校正无提示目标。
+- [RAMP](../2607.17473-ramp/README.md)：显式训练个性化和公共字段双路径，用 feature mask 与 prediction alignment 适配隐私受限流量。
+- [WHALE](../2607.17017-whale/README.md)：逐层交换 Wukong 特征交互分支与 HSTU 行为序列分支，构成统一可扩展排序模型。
+- [TMallGS](../2607.13398-tmallgs/README.md)：以 field-wise QKV、噪声门控、FiLM 和逐层误差监督统一电商搜索异构字段。
+- [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：离线编码完整历史并缓存固定状态，在线仅融合近期行为以控制广告排序延迟。
+- [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选与未来参与度相关的 session reward，并通过模型无关 reward heads 接入多个推荐 surface。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用可演化 Memory Hub、文本/SID 混合基础模型和可重建 latent reasoning 同时改进长期用户理解、商品 grounding 与推理效率。
 - [SlimPer](../2607.12281-slimper/README.md)：通过固定知识库的 Select–Match–Refine 循环替代全序列逐层传播，降低长历史排序的计算和中间状态。
 - [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入 `k=3` residual depthwise Conv1D，以低参数成本增强局部 token 交互。

@@ -4,6 +4,8 @@
 
 ## Alibaba
 
+- 2026-07 · [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 加并行全局/query 价值码生成候选，再以联合 VRM 把相关性与商业价值统一排序。
+- 2026-07 · [TMallGS](../2607.13398-tmallgs/README.md)：通过 field-wise QKV、噪声门控、FiLM 与 progressive supervision 统一 query、行为和商品字段。
 - 2026-05 · [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：在端侧用量化 LoRA LLM 把异构行为翻译成下一意图 query，并以 adaptive prompt 和漂移触发控制资源消耗。
 - 2025-05 · [SORT-Gen](../2505.07197-sort-gen/README.md)：用 causal Transformer ordered regression 估计列表前缀多目标价值，再以目标队列、mask 和 MMR 单次批量生成 slate。
 - 2026-07 · [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：以可增量 Memory Hub 压缩长期行为，把文本与商品 Semantic ID 统一进基础模型，再将显式 CoT 蒸馏为可重建 latent intent token。
@@ -50,6 +52,7 @@
 
 ## Huawei
 
+- 2026-07 · [RAMP](../2607.17473-ramp/README.md)：用个性化/公共双路径、可用性 mask 和 prediction-alignment 蒸馏提升缺失用户字段时的广告排序鲁棒性。
 - 2023-06 · [KAR](../2306.10933-kar/README.md)：让 LLM 生成用户偏好与物品事实知识，再由 hybrid-expert adapter 融合进传统推荐模型。
 
 ## Kuaishou
@@ -71,6 +74,8 @@
 
 ## Meta
 
+- 2026-07 · [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶特征交互和门控 HSTU 序列建模，形成共同扩展的统一排序模型。
+- 2026-07 · [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：只在训练采样时提供特权解题信息，并用重要性比率把更新校正回无提示目标策略。
 - 2026-07 · [SlimPer](../2607.12281-slimper/README.md)：用固定容量 user-item knowledge base 逐层查询完整历史，并通过 Select–Match–Refine 把计算集中到候选相关证据。
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 - 2026-01 · [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
@@ -83,6 +88,7 @@
 
 ## Pinterest
 
+- 2026-07 · [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：离线筛选能预测未来参与度的长期 reward，再以模型无关附加头接入多个推荐 surface。
 - 2026-07 · [MESH](../2607.12392-mesh/README.md)：把 user/item/context 特征放入独立放大塔，再用 residual gated bias correction 保护 fresh 内容信号。
 - 2025-04 · [PinRec](../2504.10507-pinrec/README.md)：根据目标 outcome 生成多 token 物品表示，以条件生成方式完成召回。
 - 2025-06 · [TransAct V2](../2506.02267-transact-v2/README.md)：用候选感知的终身行为序列和 next-action 多任务目标增强 Homefeed 排序。
@@ -91,6 +97,7 @@
 
 ## Tencent / WeChat
 
+- 2026-07 · [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric 权重，以区分性和锚定目标驱动评估器与策略协同进化。
 - 2024-11 · [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并通过 DPO 对齐广告展示与转化偏好。
 - 2024-12 · [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，使用 top-k MoE 和通用/目标训练建模序列推荐。
 - 2026-02 · [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。
@@ -103,6 +110,7 @@
 
 ## Yandex
 
+- 2026-07 · [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：用异步全历史 Transformer 生成固定缓存，线上只编码近期事件，在不重算长序列的情况下增强广告排序。
 - 2025-07 · [ARGUS](../2507.15994-argus/README.md)：分解用户反馈与物品表示，在大规模 Transformer 中联合建模音乐序列。
 
 ## Microsoft / Bing Ads
