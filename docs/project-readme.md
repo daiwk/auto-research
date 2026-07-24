@@ -23,10 +23,13 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **81/81** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **84/84** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `barge` | BARGE · Tencent | Householder OSQ、双 residual codebook、ICA、HPR、双 decoder 与 OR-fusion；MovieLens NDCG@10 +85.77% |
+| 核心机制 | `mobius-rope` | Möbius RoPE · Independent | 25% heads anti-periodic frequency ladder；PPL -0.03%，单 seed needle -2.08 points |
+| 核心机制 | `naju` | Naju · Independent | 独立 retain/write 的 native-discrete SSM block；preserve-first gates 正确，本地 PPL +25.67%（变差） |
 | 核心机制 | `dynamic-rubric` | DynamicRubric · Tencent/WeChat/Tsinghua | response-set rubric、binary verifiers、discriminability/anchor 与策略—评估器共进化；Alpaca preference accuracy +4.64% |
 | 核心机制 | `tsgr` | TSGR · Alibaba/Taobao | residual semantic prefix、并行全局/query 价值码与联合 VRM；MovieLens NDCG@10 +115.73% |
 | 核心机制 | `off-context-grpo` | Off-Context GRPO · Meta AI/Columbia | privileged behavior rollout、group-relative reward 与 importance correction；GSM8K Pass@1 +25.00% |
@@ -312,6 +315,11 @@ auto-research evolve \
 调研方向同时约束论文检索和可执行结构空间；每一代并行比较论文启发结构与训练参数，再根据 validation 形成下一轮决策。目前包括 LONGER、UniMixer、WHALE、TMallGS、Long-History Transformer、RAMP 及组合结构；在线发现但尚未映射为安全算子的论文只进入证据池。
 
 公共评测套件会在 MovieLens 上固定评估 overall、长历史、长尾目标、recent-only 和个性化特征受限切片；`public_composite` 用这些切片 NDCG 的等权平均晋级。若只想保持原先总体 NDCG 选择口径，使用 `--fitness-metric primary`；若要跳过额外切片，使用 `--benchmark-suite core`。
+
+统一排序研究还可使用
+`--benchmark-suite unirank --fitness-metric unirank_composite`，增加时间序
+pointwise AUC/logloss；协议、官方五数据集和完整 runner 的边界见
+[UniRank 公共评测接入](unirank.md)。
 
 运行产物位于 `runs/evolution/<model>-<timestamp>/`，包含机器可读 JSON、中文 Markdown 报告和可直接打开的 HTML 研究看板。详细协议见[模型自动进化文档](model-evolution.md)。
 

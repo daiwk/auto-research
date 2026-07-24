@@ -101,13 +101,13 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--llm-sequence-length", type=int, default=128, help="micro-llm context length")
     evolve.add_argument(
         "--benchmark-suite",
-        choices=["core", "public"],
+        choices=["core", "public", "unirank"],
         default="public",
-        help="core primary metric only, or public robustness/capability slices",
+        help="core metric, public robustness slices, or UniRank-compatible chronological pointwise evaluation",
     )
     evolve.add_argument(
         "--fitness-metric",
-        choices=["primary", "public_composite"],
+        choices=["primary", "public_composite", "unirank_composite"],
         default="primary",
         help="metric used for validation-only evolution selection",
     )

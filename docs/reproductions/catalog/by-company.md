@@ -97,6 +97,7 @@
 
 ## Tencent / WeChat
 
+- 2026-07 · [BARGE](../2607.21028-barge/README.md)：用 item-level ICA 恢复多 token Semantic ID 边界，通过逐层 HPR 与正交双路径 DPD 抑制生成漂移。
 - 2026-07 · [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric 权重，以区分性和锚定目标驱动评估器与策略协同进化。
 - 2024-11 · [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并通过 DPO 对齐广告展示与转化偏好。
 - 2024-12 · [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，使用 top-k MoE 和通用/目标训练建模序列推荐。
@@ -128,6 +129,11 @@
 ## Airbnb
 
 - 2026-07 · [Proximity Features](../2607.12246-proximity-features/README.md)：用自适应地理桶聚合群体行为，为无持久 user ID 的匿名用户提供隐私合规冷启动特征。
+
+## Independent researchers
+
+- 2026-07 · [Möbius RoPE](../2607.21405-mobius-rope/README.md)：在部分 attention heads 上使用反周期频率梯度，以固定上下文边界的负 holonomy 改善长距检索稳定性。
+- 2026-07 · [Naju](../2607.21000-naju/README.md)：直接参数化离散状态 pole，并以独立 retain/write gates、选择性 B/C 与短程卷积同时控制长期保留和覆盖写入。
 
 ## 学术与经典基线
 

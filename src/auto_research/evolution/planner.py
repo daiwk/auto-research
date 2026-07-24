@@ -12,6 +12,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
             "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
             "hyper_connections", "mhc", "qkv_depthwise_conv",
+            "mobius_rope", "naju",
         ]
     text = direction.lower()
     requested = []

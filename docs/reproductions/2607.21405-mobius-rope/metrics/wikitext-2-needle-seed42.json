@@ -1,0 +1,20 @@
+{
+  "dataset": "WikiText-2 + synthetic single-needle retrieval",
+  "seed": 42,
+  "steps": 90,
+  "standard_rope": {
+    "perplexity": 291.00028807963713,
+    "needle_accuracy": 0.9739583333333334,
+    "far_needle_accuracy": 0.9791666666666666
+  },
+  "hybrid_mobius_rope": {
+    "perplexity": 290.9219123858226,
+    "needle_accuracy": 0.953125,
+    "far_needle_accuracy": 0.9583333333333334
+  },
+  "relative": {
+    "perplexity_reduction_percent": 0.026933201452040714,
+    "needle_accuracy_points": -2.083333333333337,
+    "far_needle_accuracy_points": -2.083333333333326
+  }
+}

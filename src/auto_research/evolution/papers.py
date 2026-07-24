@@ -29,6 +29,8 @@ LLM_MUTATIONS = {
     "2607.18413": ("qkv_depthwise_conv", "在 Q/K/V 投影后加入 k=3 residual depthwise Conv1D，补充短程局部归纳偏置"),
     "2607.20083": ("dynamic_rubric", "按回答集合动态生成 rubric 权重，并以区分性和 anchor 约束协同更新策略"),
     "2607.19313": ("off_context_grpo", "用特权解题信息提高有效 rollout，再以 importance ratio 校正无提示目标策略"),
+    "2607.21405": ("mobius_rope", "将 25% attention heads 替换为 anti-periodic Möbius RoPE 频率梯度"),
+    "2607.21000": ("naju", "独立 retain/write gates 的 native-discrete selective state-space sequence mixer"),
 }
 
 FALLBACK_PAPERS = (
@@ -55,6 +57,8 @@ LLM_FALLBACK_PAPERS = (
     Paper("Convolution for Large Language Models", "A residual depthwise Conv1D after QKV projections adds local token interaction with negligible parameters.", [], "2026-07-20", "https://arxiv.org/abs/2607.18413", "2607.18413"),
     Paper("Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information", "Samples reward-bearing trajectories with privileged context and corrects back to the original policy.", [], "2026-07-21", "https://arxiv.org/abs/2607.19313", "2607.19313"),
     Paper("Co-Evolving LLM Evaluators and Policies via DynamicRubric", "Response-set conditioned rubrics co-evolve an evaluator and policy under discriminability and anchor objectives.", [], "2026-07-22", "https://arxiv.org/abs/2607.20083", "2607.20083"),
+    Paper("Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory", "Native-discrete selective recurrence with independent retain and write gates.", [], "2026-07-23", "https://arxiv.org/abs/2607.21000", "2607.21000"),
+    Paper("Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable", "Anti-periodic frequencies on a subset of attention heads improve retrieval reliability.", [], "2026-07-23", "https://arxiv.org/abs/2607.21405", "2607.21405"),
 )
 
 

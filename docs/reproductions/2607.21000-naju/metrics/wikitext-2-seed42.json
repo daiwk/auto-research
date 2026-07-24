@@ -1,0 +1,21 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps": 70,
+  "transformer": {
+    "parameters": 375456,
+    "loss": 5.7836084216833115,
+    "perplexity": 324.9295604244513
+  },
+  "naju": {
+    "parameters": 520896,
+    "loss": 6.012105613946915,
+    "perplexity": 408.34222678162814,
+    "forget_mean": 0.9933371345202128,
+    "write_mean": 0.12507460514704385,
+    "gate_correlation": 0.8759937485059103
+  },
+  "relative": {
+    "perplexity_reduction_percent": -25.670999661654644
+  }
+}

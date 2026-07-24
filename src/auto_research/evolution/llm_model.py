@@ -27,11 +27,12 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
         "hyper_connections", "mhc", "qkv_depthwise_conv",
+        "mobius_rope", "naju",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
     modern = architecture.startswith("llama") or architecture in {
-        "hyper_connections", "mhc", "qkv_depthwise_conv",
+        "hyper_connections", "mhc", "qkv_depthwise_conv", "mobius_rope", "naju",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -80,7 +81,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             k = k.view(batch, length, kv_heads, head_dim).transpose(1, 2)
             v = v.view(batch, length, kv_heads, head_dim).transpose(1, 2)
             if modern:
-                q, k = _rotary(q, k, torch)
+                q, k = _rotary(
+                    q, k, torch,
+                    mode="mobius" if architecture == "mobius_rope" else "standard",
+                    context_length=config.sequence_length,
+                )
             if kv_heads != config.heads:
                 repeats = config.heads // kv_heads
                 k = k.repeat_interleave(repeats, dim=1)
@@ -176,6 +181,80 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         def forward(self, values):
             return self.ffn(self.attention(values))
 
+    class NajuBlock(nn.Module):
+        """Native-discrete selective SSM with independent retain/write gates."""
+
+        def __init__(self):
+            super().__init__()
+            dimensions = config.dimensions
+            self.inner = 2 * dimensions
+            self.state_size = max(8, dimensions // config.heads)
+            self.norm = RMSNorm()
+            self.input = nn.Linear(dimensions, 2 * self.inner, bias=False)
+            self.content_conv = nn.Conv1d(
+                self.inner, self.inner, kernel_size=3, groups=self.inner, bias=True
+            )
+            self.forget = nn.Linear(self.inner, self.inner)
+            self.write = nn.Linear(self.inner, self.inner)
+            self.forget_conv = nn.Conv1d(
+                self.inner, self.inner, kernel_size=3, groups=self.inner, bias=False
+            )
+            self.write_conv = nn.Conv1d(
+                self.inner, self.inner, kernel_size=3, groups=self.inner, bias=False
+            )
+            self.bc = nn.Linear(self.inner, 2 * self.state_size, bias=False)
+            self.feedthrough = nn.Parameter(torch.full((self.inner,), 0.01))
+            self.output = nn.Linear(self.inner, dimensions, bias=False)
+            self.readout_scale = self.state_size ** -0.5
+            nn.init.constant_(self.forget.bias, 5.0)
+            nn.init.constant_(self.write.bias, -2.0)
+            self.last_gate_statistics = {}
+
+        @staticmethod
+        def _causal_convolution(module, values):
+            width = module.kernel_size[0] - 1
+            return module(torch.nn.functional.pad(values.transpose(1, 2), (width, 0))).transpose(1, 2)
+
+        def forward(self, values):
+            content, modulation = self.input(self.norm(values)).chunk(2, dim=-1)
+            content = torch.nn.functional.silu(
+                self._causal_convolution(self.content_conv, content)
+            )
+            forget = torch.sigmoid(
+                self.forget(content)
+                + self._causal_convolution(self.forget_conv, content)
+            )
+            write = torch.sigmoid(
+                self.write(content)
+                + self._causal_convolution(self.write_conv, content)
+            )
+            direction_write, direction_read = self.bc(content).chunk(2, dim=-1)
+            state = torch.zeros(
+                values.shape[0], self.inner, self.state_size,
+                dtype=values.dtype, device=values.device,
+            )
+            outputs = []
+            for index in range(values.shape[1]):
+                state = (
+                    forget[:, index, :, None] * state
+                    + write[:, index, :, None]
+                    * content[:, index, :, None]
+                    * direction_write[:, index, None, :]
+                )
+                memory = torch.einsum(
+                    "bis,bs->bi", state, direction_read[:, index]
+                ) * self.readout_scale
+                outputs.append(memory + self.feedthrough * content[:, index])
+            mixed = torch.stack(outputs, dim=1)
+            self.last_gate_statistics = {
+                "forget_mean": float(forget.detach().mean().cpu()),
+                "write_mean": float(write.detach().mean().cpu()),
+                "gate_correlation": float(_correlation(forget, write, torch)),
+            }
+            return values + self.output(
+                mixed * torch.nn.functional.silu(modulation)
+            )
+
     class MicroLM(nn.Module):
         def __init__(self):
             super().__init__()
@@ -183,7 +262,14 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.position = None if modern else nn.Embedding(config.sequence_length, config.dimensions)
             hyper = architecture in {"hyper_connections", "mhc"}
             self.blocks = nn.ModuleList([
-                HyperBlock() if hyper else Block() for _ in range(config.layers)
+                (
+                    HyperBlock()
+                    if hyper
+                    else NajuBlock()
+                    if architecture == "naju"
+                    else Block()
+                )
+                for _ in range(config.layers)
             ])
             self.final_norm = norm()
             self.output = nn.Linear(config.dimensions, config.vocab_size, bias=False)
@@ -191,6 +277,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.memory = None
             self.memory_layer = 0
             self.apply(self._initialize)
+            if architecture == "naju":
+                for block in self.blocks:
+                    nn.init.constant_(block.forget.bias, 5.0)
+                    nn.init.constant_(block.write.bias, -2.0)
+                    nn.init.constant_(block.feedthrough, 0.01)
 
         @staticmethod
         def _initialize(module):
@@ -247,21 +338,59 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 "spectral_norm_max": float(torch.linalg.matrix_norm(matrices_cpu, ord=2).max()),
             }
 
+        def sequence_mixer_stats(self):
+            if architecture != "naju":
+                return {}
+            rows = [block.last_gate_statistics for block in self.blocks]
+            if not rows or not all(rows):
+                return {}
+            return {
+                key: float(sum(row[key] for row in rows) / len(rows))
+                for key in rows[0]
+            }
+
     return MicroLM()
 
 
-def _rotary(q, k, torch):
+def _rotary(q, k, torch, *, mode: str = "standard", context_length: int | None = None):
     length, width = q.shape[-2], q.shape[-1]
     half = width // 2
-    frequencies = 1.0 / (10000 ** (torch.arange(half, device=q.device, dtype=q.dtype) / half))
-    angles = torch.arange(length, device=q.device, dtype=q.dtype)[:, None] * frequencies[None]
-    cos, sin = angles.cos()[None, None], angles.sin()[None, None]
-
+    standard = 1.0 / (
+        10000 ** (torch.arange(half, device=q.device, dtype=q.dtype) / half)
+    )
     def rotate(values):
+        frequencies = standard[None].expand(values.shape[1], -1).clone()
+        if mode == "mobius":
+            if not context_length:
+                raise ValueError("Möbius RoPE requires a fixed training context length")
+            special_heads = max(1, values.shape[1] // 4)
+            anti_periodic = (
+                math.pi
+                * (2 * torch.arange(half, device=q.device, dtype=q.dtype) + 1)
+                / context_length
+            )
+            frequencies[:special_heads] = anti_periodic
+        angles = (
+            torch.arange(length, device=q.device, dtype=q.dtype)[:, None, None]
+            * frequencies[None]
+        )
+        cos = angles.cos().permute(1, 0, 2)[None]
+        sin = angles.sin().permute(1, 0, 2)[None]
         left, right = values[..., :half], values[..., half:half * 2]
         return torch.cat((left * cos - right * sin, left * sin + right * cos, values[..., half * 2:]), dim=-1)
 
     return rotate(q), rotate(k)
+
+
+def _correlation(left, right, torch):
+    left = left.detach().float().flatten()
+    right = right.detach().float().flatten()
+    left = left - left.mean()
+    right = right - right.mean()
+    denominator = left.square().sum().sqrt() * right.square().sum().sqrt()
+    if float(denominator) == 0.0:
+        return torch.tensor(0.0)
+    return (left * right).sum() / denominator
 
 
 def _sinkhorn(logits, iterations, torch):

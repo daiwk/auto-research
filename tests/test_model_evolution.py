@@ -53,6 +53,19 @@ def test_latest_qkv_convolution_is_available_to_llm_evolution():
     assert "qkv_depthwise_conv" in allowed_architectures("micro-llm", "efficient local attention", papers)
 
 
+def test_latest_mobius_and_naju_mutations_are_available_to_llm_evolution():
+    papers = discover_papers(
+        "Möbius RoPE Naju long context", 30, allow_network=False, track="llm"
+    )
+    mapped = {paper.arxiv_id: paper.architecture for paper in papers}
+    assert mapped["2607.21405"] == "mobius_rope"
+    assert mapped["2607.21000"] == "naju"
+    architectures = allowed_architectures(
+        "micro-llm", "long-context retrieval and state space models", papers
+    )
+    assert {"mobius_rope", "naju"} <= set(architectures)
+
+
 def test_latest_public_benchmark_operators_are_discoverable():
     rec = discover_papers(
         "WHALE TMallGS long history RAMP", 20, allow_network=False
@@ -85,6 +98,20 @@ def test_public_composite_requires_public_suite():
         assert "requires the public" in str(exc)
     else:
         raise AssertionError("public composite must not run without public slices")
+
+    EvolutionConfig(
+        model="rankmixer", dataset="movielens-100k",
+        benchmark_suite="unirank", fitness_metric="unirank_composite",
+    ).validate()
+    try:
+        EvolutionConfig(
+            model="micro-llm", dataset="wikitext-2",
+            benchmark_suite="unirank", fitness_metric="unirank_composite",
+        ).validate()
+    except ValueError as exc:
+        assert "only available to recommendation" in str(exc)
+    else:
+        raise AssertionError("UniRank must reject language models")
 
 
 def test_recommendation_public_suite_reports_selection_safe_slices(monkeypatch):
@@ -121,6 +148,53 @@ def test_recommendation_public_suite_reports_selection_safe_slices(monkeypatch):
         [metrics["primary"], metrics["long_history_ndcg_at_10"],
          metrics["tail_target_ndcg_at_10"], metrics["recent_only_ndcg_at_10"]]
     )
+
+
+def test_unirank_suite_adds_chronological_pointwise_metrics(monkeypatch):
+    import numpy as np
+    import torch
+    import auto_research.evolution.benchmarks as benchmarks
+
+    data = MovieLensSequences(
+        ((0, 1), (1, 2), (2, 3), (3, 4)),
+        (2, 3, 4, 5),
+        (3, 4, 5, 6),
+        7,
+        np.eye(7, dtype=np.float32),
+        np.asarray([10, 8, 6, 4, 2, 1, 1], dtype=np.float32),
+    )
+
+    class Toy(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.anchor = torch.nn.Parameter(torch.zeros(()))
+
+        def forward(self, histories):
+            return torch.arange(7, device=histories.device)[None].float().expand(
+                len(histories), -1
+            ) + self.anchor
+
+    class Config:
+        sequence_length = 4
+
+    monkeypatch.setattr(
+        benchmarks,
+        "evaluate_model",
+        lambda *args, **kwargs: {
+            "hit_at_10": 1.0,
+            "ndcg_at_10": 0.5,
+            "head_share_at_10": 0.1,
+            "mean_popularity_at_10": 0.2,
+        },
+    )
+    metrics = recommendation_benchmark(
+        Toy(), data, Config(), target="validation", suite="unirank"
+    )
+    assert 0 <= metrics["pointwise_auc"] <= 1
+    assert metrics["pointwise_logloss"] > 0
+    assert metrics["unirank_composite"] == (
+        metrics["ndcg_at_10"] + metrics["pointwise_auc"]
+    ) / 2
 
 
 def test_evolution_is_multigeneration_elitist_and_writes_parentage(tmp_path):

@@ -42,7 +42,7 @@ class HyFormerEvaluator:
             "benchmark_suite": self.benchmark_suite,
             "public_slices": (
                 ["overall", "long_history", "tail_target", "recent_only"]
-                if self.benchmark_suite == "public"
+                if self.benchmark_suite != "core"
                 else ["overall"]
             ),
         }
@@ -66,7 +66,11 @@ class HyFormerEvaluator:
             trainings.append(training)
         validation = _mean_metrics(validations)
         validation["fitness"] = validation[
-            "public_composite" if self.fitness_metric == "public_composite" else "primary"
+            "public_composite"
+            if self.fitness_metric == "public_composite"
+            else "unirank_composite"
+            if self.fitness_metric == "unirank_composite"
+            else "primary"
         ]
         return EvolutionTrial(
             trial_id, generation, parent_id, genome, validation,

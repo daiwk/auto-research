@@ -1,0 +1,28 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "users": 180,
+  "items": 300,
+  "baseline": {
+    "name": "single-path TIGER-style GR",
+    "hit_at_10": 0.027777777777777776,
+    "ndcg_at_10": 0.011472443817059487,
+    "head_share_at_10": 0.1461111111111111
+  },
+  "method": {
+    "name": "BARGE ICA + HPR + DPD",
+    "hit_at_10": 0.044444444444444446,
+    "ndcg_at_10": 0.02131242364911662,
+    "head_share_at_10": 0.38722222222222225
+  },
+  "relative": {
+    "hit_at_10_percent": 60.000000000000014,
+    "ndcg_at_10_percent": 85.77056457164875,
+    "head_share_at_10_percent": 165.01901140684413
+  },
+  "osq": {
+    "initial_loss": 0.05969402454793453,
+    "final_loss": 0.019470608606934548,
+    "orthogonality_error": 2.980232238769531e-07
+  }
+}
