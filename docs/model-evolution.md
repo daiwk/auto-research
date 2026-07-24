@@ -128,6 +128,21 @@ MovieLens 的 public suite 包含：
 不同论文原始 A/B 数字混成一个分数；其用途是让 evolve 不会只追逐总体
 NDCG 而忽略长尾、长历史或受限输入。
 
+需要对齐统一序列建模与特征交互研究时，可启用 [UniRank 兼容套件](unirank.md)：
+
+```bash
+auto-research evolve \
+  --model rankmixer \
+  --dataset movielens-1m \
+  --direction "统一序列建模与特征交互" \
+  --benchmark-suite unirank \
+  --fitness-metric unirank_composite
+```
+
+它在上述切片之外增加 chronological pointwise AUC/logloss，并用
+`0.5 × NDCG@10 + 0.5 × AUC` 进行 validation 选型。完整大规模结论仍应在
+UniRank 官方五数据集实现上复核。
+
 ### 语言模型
 
 micro-LLM 的 public suite 保留 WikiText-2 PPL 与 Alpaca instruction loss，并增加：

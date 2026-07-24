@@ -4,6 +4,9 @@
 
 ## 2026-07
 
+- [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将 25% attention heads 改为反周期频率，使跨训练窗口的旋转为负单位映射，并保留其余标准 RoPE heads。
+- [BARGE](../2607.21028-barge/README.md)：用 ICA 恢复 item token 结构、HPR 重排累计语义路径，再以 OSQ 正交双通道和 OR-fusion 补充可达候选。
+- [Naju](../2607.21000-naju/README.md)：以原生离散递推和独立 retain/write gates 替代连续时间离散化，并保留 token-dependent write/read 方向。
 - [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric，以区分性和锚定目标让 evaluator 与 policy 多轮协同进化。
 - [TSGR](../2607.18796-tsgr/README.md)：把 residual semantic prefix 与并行全局/query 价值码结合，再由联合 VRM 完成价值感知生成召回。
 - [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：用含特权解题过程的 behavior policy 增加成功 rollout，并以 importance ratio 校正无提示目标。

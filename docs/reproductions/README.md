@@ -18,15 +18,18 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 81 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 84 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
-- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-22 再加入 RecGPT-V3、SlimPer、RECAP、UAME、Convolution for LLMs 与 PPL-Factory。SlimPer 由用户明确认可其统计显著全流量证据，文档不虚构具体线上 lift；PVTG 因缺量化生产证据、SCASRec 因业务指标证据有歧义未纳入。
+- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-24 再加入 BARGE、Möbius RoPE 与 Naju，并把 UniRank 作为 evolve 公共评测基础设施。SlimPer 由用户明确认可其统计显著全流量证据，文档不虚构具体线上 lift；DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
 
-## 全部复现（81/81）
+## 全部复现（84/84）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `barge` · [BARGE](2607.21028-barge/README.md) | 腾讯 CTR +0.60%、点击 UV +1.34%、阅读时长 +1.70% | OSQ+ICA+HPR+DPD；NDCG@10 +85.77%，但 head share +165.02% |
+| 核心机制 | `mobius-rope` · [Möbius RoPE](2607.21405-mobius-rope/README.md) | 纯 LLM：needle 63.3%→90.3%，PPL 持平 | PPL -0.03%，单 seed needle -2.08 points，未迁移论文收益 |
+| 核心机制 | `naju` · [Naju](2607.21000-naju/README.md) | 纯 LLM：WikiText-103 PPL 28.31→26.20 | preserve-first gates 正确；WikiText-2 PPL +25.67%（变差） |
 | 核心机制 | `dynamic-rubric` · [DynamicRubric](2607.20083-dynamic-rubric/README.md) | 微信搜索全 AI 流量统计显著；具体 lift 未披露 | Alpaca preference accuracy 83.89%→87.78%，相对 +4.64% |
 | 核心机制 | `tsgr` · [TSGR](2607.18796-tsgr/README.md) | 淘宝 IPV +0.43%、成交 +1.12%、GMV +1.64% | 并行价值 SID + 联合 VRM；NDCG@10 +115.73% |
 | 核心机制 | `off-context-grpo` · [Off-Context GRPO](2607.19313-off-context-grpo/README.md) | 纯 LLM：Qwen2.5-7B 相对 GRPO +13.8% | 官方 GSM8K Pass@1 2.67%→3.33%，相对 +25.00% |

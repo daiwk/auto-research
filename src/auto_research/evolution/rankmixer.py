@@ -40,6 +40,11 @@ class RankMixerEvaluator:
             "train_events": sum(map(len, self.data.train)),
             "evaluation_users": len(self.evaluation_data.train),
             "benchmark_suite": self.benchmark_suite,
+            "benchmark_source": (
+                "https://github.com/salmon1802/UniRank"
+                if self.benchmark_suite == "unirank"
+                else "built-in public slices"
+            ),
             "public_slices": (
                 [
                     "overall",
@@ -48,7 +53,7 @@ class RankMixerEvaluator:
                     "recent_only",
                     "restricted_features",
                 ]
-                if self.benchmark_suite == "public"
+                if self.benchmark_suite != "core"
                 else ["overall"]
             ),
         }
@@ -73,7 +78,11 @@ class RankMixerEvaluator:
             training_runs.append(training)
         validation = _mean_metrics(validation_runs)
         validation["fitness"] = validation[
-            "public_composite" if self.fitness_metric == "public_composite" else "primary"
+            "public_composite"
+            if self.fitness_metric == "public_composite"
+            else "unirank_composite"
+            if self.fitness_metric == "unirank_composite"
+            else "primary"
         ]
         training = {
             "initial_loss": float(np.mean([row["initial_loss"] for row in training_runs])),

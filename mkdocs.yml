@@ -10,6 +10,7 @@ nav:
   - Auto Research:
       - 自动研究总览: auto-research.md
       - 模型定向进化: model-evolution.md
+      - UniRank 公共评测: unirank.md
   - 论文复现:
       - 复现总览: reproductions/README.md
       - 按公司浏览: reproductions/catalog/by-company.md

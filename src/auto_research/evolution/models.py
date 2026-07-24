@@ -47,15 +47,19 @@ class EvolutionConfig:
             raise ValueError("at least one seed is required")
         if self.cpu_threads is not None and self.cpu_threads < 1:
             raise ValueError("cpu threads must be positive")
-        if self.benchmark_suite not in {"core", "public"}:
-            raise ValueError("benchmark suite must be core or public")
-        allowed_fitness = {"primary", "public_composite"}
+        if self.benchmark_suite not in {"core", "public", "unirank"}:
+            raise ValueError("benchmark suite must be core, public or unirank")
+        if self.model == "micro-llm" and self.benchmark_suite == "unirank":
+            raise ValueError("the UniRank suite is only available to recommendation models")
+        allowed_fitness = {"primary", "public_composite", "unirank_composite"}
         if self.fitness_metric not in allowed_fitness:
             raise ValueError(
                 f"fitness metric must be one of {sorted(allowed_fitness)}"
             )
         if self.fitness_metric == "public_composite" and self.benchmark_suite != "public":
             raise ValueError("public_composite fitness requires the public benchmark suite")
+        if self.fitness_metric == "unirank_composite" and self.benchmark_suite != "unirank":
+            raise ValueError("unirank_composite fitness requires the unirank benchmark suite")
         if self.model == "micro-llm":
             if min(self.vocab_size, self.llm_dimensions, self.llm_layers,
                    self.llm_batch_size, self.llm_sequence_length) < 1:

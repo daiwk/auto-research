@@ -38,6 +38,8 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将部分 RoPE heads 的频率设为反周期 half-integer 梯度，在不增加参数的情况下改变长距位置几何。
+- [Naju](../2607.21000-naju/README.md)：用独立 retain/write gates 的 native-discrete selective SSM 同时建模长期保留、覆盖写入和 token-dependent readout。
 - [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：按当前回答集合生成动态评估标准，用 discriminability 与 anchor 共同约束 evaluator-policy 共进化。
 - [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：训练时借助特权解题信息采样，并用 importance correction 保持推理期无提示目标不变。
 - [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线提取强模型的高频 n-gram hidden state并冻结，recipient 用最长精确匹配、hash fallback 和门控残差写入复用外部容量。
@@ -45,6 +47,7 @@
 
 ## 生成式召回与端到端推荐
 
+- [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
 - [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 和并行价值码同时表达商品语义、全局价值与 query 条件价值，再联合训练 VRM。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用两级 RQ-VAE 建立 SID 模态，联合记忆驱动意图与 latent reasoning 生成可直接检索的商品标识。
 - [GRC](../2602.23639-grc/README.md)：用结构化反思标签、轨迹 GRPO 和熵调度纠正 Semantic ID 自回归错误。
