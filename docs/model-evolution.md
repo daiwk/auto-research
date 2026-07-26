@@ -196,7 +196,7 @@ auto-research evolve \
 
 三轮默认分工：
 
-1. **结构轮**：GPT baseline、GQA、LLaMA-style RMSNorm/RoPE/SwiGLU、parallel attention/FFN 及组合；数据和训练预算保持不变。
+1. **结构轮**：GPT baseline、GQA、LLaMA-style RMSNorm/RoPE/SwiGLU、parallel attention/FFN、Möbius RoPE、Naju，以及 AdaDSF 的 dense calibration → Top-K token routing → feature alignment；数据和训练预算保持不变。Windowed-MTP 属于训练后的 serving 优化，通过独立 reproduction adapter 评测，不用 PPL 伪装成结构收益。
 2. **数据轮**：WikiText-only、WikiText + Tiny Shakespeare narrative mixture、从 narrative 向 WikiText 退火的 curriculum；冻结冠军结构。
 3. **后训练轮**：普通 SFT、低学习率 SFT、NEFTune，以及
    `dynamic_rubric`（动态 rubric evaluator 与策略协同更新）和

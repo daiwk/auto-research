@@ -23,10 +23,12 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **84/84** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **86/86** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `windowed-mtp` | Windowed-MTP · NVIDIA | draft-only sink+recent KV、完整 target verification；16K KV read -99.56%、MPS draft latency -50.25% |
+| 核心机制 | `adadsf` | AdaDSF · Huawei/SUSTech | cosine calibration、逐层 budget、Top-K router 与 feature alignment；80% budget 下 PPL 较 Uniform MoD +0.30%（变差） |
 | 核心机制 | `barge` | BARGE · Tencent | Householder OSQ、双 residual codebook、ICA、HPR、双 decoder 与 OR-fusion；MovieLens NDCG@10 +85.77% |
 | 核心机制 | `mobius-rope` | Möbius RoPE · Independent | 25% heads anti-periodic frequency ladder；PPL -0.03%，单 seed needle -2.08 points |
 | 核心机制 | `naju` | Naju · Independent | 独立 retain/write 的 native-discrete SSM block；preserve-first gates 正确，本地 PPL +25.67%（变差） |

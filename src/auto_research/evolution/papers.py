@@ -31,6 +31,7 @@ LLM_MUTATIONS = {
     "2607.19313": ("off_context_grpo", "用特权解题信息提高有效 rollout，再以 importance ratio 校正无提示目标策略"),
     "2607.21405": ("mobius_rope", "将 25% attention heads 替换为 anti-periodic Möbius RoPE 频率梯度"),
     "2607.21000": ("naju", "独立 retain/write gates 的 native-discrete selective state-space sequence mixer"),
+    "2607.21291": ("adadsf", "按层输入/输出相似度分配 token budget，以轻量 Top-K router 执行动态深度稀疏"),
 }
 
 FALLBACK_PAPERS = (
@@ -59,6 +60,8 @@ LLM_FALLBACK_PAPERS = (
     Paper("Co-Evolving LLM Evaluators and Policies via DynamicRubric", "Response-set conditioned rubrics co-evolve an evaluator and policy under discriminability and anchor objectives.", [], "2026-07-22", "https://arxiv.org/abs/2607.20083", "2607.20083"),
     Paper("Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory", "Native-discrete selective recurrence with independent retain and write gates.", [], "2026-07-23", "https://arxiv.org/abs/2607.21000", "2607.21000"),
     Paper("Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable", "Anti-periodic frequencies on a subset of attention heads improve retrieval reliability.", [], "2026-07-23", "https://arxiv.org/abs/2607.21405", "2607.21405"),
+    Paper("Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs", "Similarity-calibrated layer budgets and lightweight Top-K token routing preserve dense features under sparse execution.", [], "2026-07-23", "https://arxiv.org/abs/2607.21291", "2607.21291"),
+    Paper("Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context", "A sink plus recent window bounds the built-in MTP draft KV read while full-context target verification preserves outputs.", [], "2026-07-23", "https://arxiv.org/abs/2607.21535", "2607.21535"),
 )
 
 

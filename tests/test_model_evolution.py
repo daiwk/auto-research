@@ -66,6 +66,20 @@ def test_latest_mobius_and_naju_mutations_are_available_to_llm_evolution():
     assert {"mobius_rope", "naju"} <= set(architectures)
 
 
+def test_adadsf_is_available_to_llm_evolution():
+    papers = discover_papers(
+        "adaptive depth sparse token routing", 20, False, track="llm"
+    )
+    mapped = {paper.arxiv_id: paper.architecture for paper in papers}
+    assert mapped["2607.21291"] == "adadsf"
+    assert "adadsf" in allowed_architectures(
+        "micro-llm", "adaptive efficient inference", papers
+    )
+    assert allowed_architectures(
+        "micro-llm", "研究 AdaDSF 动态深度稀疏", papers
+    )[0] == "adadsf"
+
+
 def test_latest_public_benchmark_operators_are_discoverable():
     rec = discover_papers(
         "WHALE TMallGS long history RAMP", 20, allow_network=False
