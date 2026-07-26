@@ -146,6 +146,41 @@ class MicroLLMEvaluator:
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
             losses.append(float(loss.detach().cpu()))
+        if genome.architecture == "adadsf":
+            from auto_research.reproductions.adadsf.model import (
+                allocate_retentions,
+                calibration_similarities,
+                sparsify,
+                train_alignment,
+            )
+
+            calibration, _ = _sample_lm_batch(
+                self.data.validation,
+                genome.batch_size,
+                genome.sequence_length,
+                rng,
+                device,
+                torch,
+            )
+            retentions = allocate_retentions(
+                calibration_similarities(model, calibration), target=0.8
+            )
+            dense_teacher = model
+            model = sparsify(dense_teacher, retentions).to(device)
+            train_alignment(
+                model,
+                dense_teacher,
+                self.data.train,
+                steps=max(8, self.steps // 4),
+                batch_size=genome.batch_size,
+                length=genome.sequence_length,
+                learning_rate=genome.learning_rate * 0.5,
+                seed=seed,
+                torch=torch,
+            )
+            optimizer = optimizers[genome.optimizer](
+                model.parameters(), lr=genome.learning_rate
+            )
         post_losses, post_stats = self._post_train(
             model, optimizer, genome, config, rng, device, torch
         )

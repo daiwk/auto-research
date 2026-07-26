@@ -27,12 +27,13 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
         "hyper_connections", "mhc", "qkv_depthwise_conv",
-        "mobius_rope", "naju",
+        "mobius_rope", "naju", "adadsf",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
     modern = architecture.startswith("llama") or architecture in {
         "hyper_connections", "mhc", "qkv_depthwise_conv", "mobius_rope", "naju",
+        "adadsf",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads

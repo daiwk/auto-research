@@ -10,7 +10,7 @@ from auto_research.reproductions.registry import list_adapters
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs" / "reproductions"
-CHECKED_ON = "2026-07-24"
+CHECKED_ON = "2026-07-26"
 GITHUB_TREE = "https://github.com/daiwk/auto-research/tree/main"
 
 # arXiv v1 publication dates, retrieved from the official arXiv API.
@@ -98,6 +98,8 @@ PUBLISHED_DATES = {
     "2607.21000": "2026-07-23",
     "2607.21028": "2026-07-23",
     "2607.21405": "2026-07-23",
+    "2607.21291": "2026-07-23",
+    "2607.21535": "2026-07-23",
     "2605.17994": "2026-05-18",
 }
 

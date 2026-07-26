@@ -8,12 +8,17 @@ from .models import Genome, PaperInspiration
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
     if model == "micro-llm":
-        return [
+        values = [
             "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
             "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
             "hyper_connections", "mhc", "qkv_depthwise_conv",
-            "mobius_rope", "naju",
+            "mobius_rope", "naju", "adadsf",
         ]
+        text = direction.lower().replace("-", "")
+        if any(term in text for term in ("adadsf", "adaptive depth", "动态深度", "深度稀疏")):
+            values.remove("adadsf")
+            values.insert(0, "adadsf")
+        return values
     text = direction.lower()
     requested = []
     if "longer" in text or "长序列" in text or "long sequence" in text:

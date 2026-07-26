@@ -1,0 +1,26 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "dense_steps": 70,
+  "alignment_steps": 35,
+  "target_retention": 0.8,
+  "layer_cosine_similarities": [0.5596479774, 0.7493835092, 0.7928400636, 0.9284095764],
+  "adaptive_retentions": [1.0, 1.0, 1.0, 0.2],
+  "variants": {
+    "dense_teacher": {
+      "perplexity": 318.7171957789,
+      "active_token_fraction": 1.0
+    },
+    "uniform_mod_80": {
+      "perplexity": 320.9689799847,
+      "active_token_fraction": 0.7916666667
+    },
+    "adadsf_80": {
+      "perplexity": 321.9331667865,
+      "active_token_fraction": 0.7994791667
+    }
+  },
+  "adaptive_vs_uniform_ppl_reduction_percent": -0.3003987494,
+  "adaptive_vs_dense_ppl_change_percent": 1.0090359259,
+  "device": "mps"
+}

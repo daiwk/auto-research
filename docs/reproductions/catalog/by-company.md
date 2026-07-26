@@ -52,8 +52,13 @@
 
 ## Huawei
 
+- 2026-07 · [AdaDSF](../2607.21291-adadsf/README.md)：根据 dense 层输入/输出相似度分配逐层 token budget，用轻量 Top-K router 和特征对齐保留稀疏模型能力。
 - 2026-07 · [RAMP](../2607.17473-ramp/README.md)：用个性化/公共双路径、可用性 mask 和 prediction-alignment 蒸馏提升缺失用户字段时的广告排序鲁棒性。
 - 2023-06 · [KAR](../2306.10933-kar/README.md)：让 LLM 生成用户偏好与物品事实知识，再由 hybrid-expert adapter 融合进传统推荐模型。
+
+## NVIDIA
+
+- 2026-07 · [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：只让内置 MTP draft 读取 attention sink 与最近窗口，并由完整上下文 target 验证候选以保持输出分布不变。
 
 ## Kuaishou
 

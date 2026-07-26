@@ -18,15 +18,17 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 84 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 86 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
-- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-24 再加入 BARGE、Möbius RoPE 与 Naju，并把 UniRank 作为 evolve 公共评测基础设施。SlimPer 由用户明确认可其统计显著全流量证据，文档不虚构具体线上 lift；DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
+- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-26 再加入 Windowed-MTP 与 AdaDSF，并把 AdaDSF 接入 LLM evolve。SlimPer 由用户明确认可其统计显著全流量证据，文档不虚构具体线上 lift；DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
 
-## 全部复现（84/84）
+## 全部复现（86/86）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `windowed-mtp` · [Windowed-MTP](2607.21535-windowed-mtp/README.md) | 纯 LLM serving：1M step latency +28.3%–+44.3% | 16K KV read -99.56%、MPS draft latency -50.25%；输出完全一致，acceptance 41.67%→25.00% |
+| 核心机制 | `adadsf` · [AdaDSF](2607.21291-adadsf/README.md) | 纯 LLM：80% retention PPL 21.6→18.9（对 MoD） | 同 teacher/budget 下 PPL 较 Uniform MoD +0.30%（变差） |
 | 核心机制 | `barge` · [BARGE](2607.21028-barge/README.md) | 腾讯 CTR +0.60%、点击 UV +1.34%、阅读时长 +1.70% | OSQ+ICA+HPR+DPD；NDCG@10 +85.77%，但 head share +165.02% |
 | 核心机制 | `mobius-rope` · [Möbius RoPE](2607.21405-mobius-rope/README.md) | 纯 LLM：needle 63.3%→90.3%，PPL 持平 | PPL -0.03%，单 seed needle -2.08 points，未迁移论文收益 |
 | 核心机制 | `naju` · [Naju](2607.21000-naju/README.md) | 纯 LLM：WikiText-103 PPL 28.31→26.20 | preserve-first gates 正确；WikiText-2 PPL +25.67%（变差） |

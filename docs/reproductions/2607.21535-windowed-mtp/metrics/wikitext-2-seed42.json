@@ -1,0 +1,25 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "target_steps": 240,
+  "draft_steps": 180,
+  "gamma": 4,
+  "window": 64,
+  "sink": 8,
+  "target_perplexity": 125.1481470009,
+  "generation": {
+    "native_acceptance_rate": 0.4166666667,
+    "windowed_acceptance_rate": 0.25,
+    "native_exact_match_dense": true,
+    "windowed_exact_match_dense": true
+  },
+  "context_16384": {
+    "native_keys": 16384,
+    "windowed_keys": 72,
+    "kv_read_reduction_percent": 99.560546875,
+    "native_milliseconds": 1.0412625037,
+    "windowed_milliseconds": 0.5180416978,
+    "latency_reduction_percent": 50.248693682
+  },
+  "device": "mps"
+}

@@ -38,6 +38,8 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：仅窗口化 speculative draft 的 KV read，保留完整 target verification，从而降低长上下文 draft tax 而不改变输出分布。
+- [AdaDSF](../2607.21291-adadsf/README.md)：按层表示变化强度分配 token budget，以轻量 Top-K router 让低价值 token 绕过部分 Transformer 层。
 - [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将部分 RoPE heads 的频率设为反周期 half-integer 梯度，在不增加参数的情况下改变长距位置几何。
 - [Naju](../2607.21000-naju/README.md)：用独立 retain/write gates 的 native-discrete selective SSM 同时建模长期保留、覆盖写入和 token-dependent readout。
 - [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：按当前回答集合生成动态评估标准，用 discriminability 与 anchor 共同约束 evaluator-policy 共进化。

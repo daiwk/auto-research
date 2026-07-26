@@ -4,7 +4,9 @@
 
 ## 2026-07
 
+- [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：将内置 MTP draft 的 KV 读取限制为 attention sink 与最近窗口，完整 target verifier 仍决定每个输出 token。
 - [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将 25% attention heads 改为反周期频率，使跨训练窗口的旋转为负单位映射，并保留其余标准 RoPE heads。
+- [AdaDSF](../2607.21291-adadsf/README.md)：用 dense layer cosine calibration 分配逐层 token retention，再以 Top-K router 和 feature alignment 实现动态深度稀疏。
 - [BARGE](../2607.21028-barge/README.md)：用 ICA 恢复 item token 结构、HPR 重排累计语义路径，再以 OSQ 正交双通道和 OR-fusion 补充可达候选。
 - [Naju](../2607.21000-naju/README.md)：以原生离散递推和独立 retain/write gates 替代连续时间离散化，并保留 token-dependent write/read 方向。
 - [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric，以区分性和锚定目标让 evaluator 与 policy 多轮协同进化。
