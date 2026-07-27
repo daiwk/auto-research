@@ -1,0 +1,30 @@
+{
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 6038,
+    "items": 3706,
+    "fresh_items": 804,
+    "underexplored_items": 413,
+    "exploration_corpus_items": 206
+  },
+  "setup": {
+    "seeds": [42, 43, 44],
+    "steps_per_model": 100,
+    "selected_ucb_alpha": [0.0, 0.0, 0.0]
+  },
+  "baseline": {
+    "ndcg_at_10": 0.001612762019323125,
+    "fresh_ndcg_at_10": 0.0013599607708681533,
+    "underexplored_exposure_at_10": 0.03884288395716021
+  },
+  "pinequalizer": {
+    "ndcg_at_10": 0.00134759249830743,
+    "fresh_ndcg_at_10": 0.0074610380317409394,
+    "underexplored_exposure_at_10": 0.2218008170475875
+  },
+  "relative_percent": {
+    "ndcg_at_10": -16.44194976311424,
+    "fresh_ndcg_at_10": 448.6215625894902,
+    "underexplored_exposure_at_10": 471.02046617396246
+  }
+}

@@ -43,6 +43,11 @@ batch_size, experts, interval_residual, auxiliary_weight
 
 在线 arXiv 检索仍会返回其他相关论文。只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为 `evidence-only`，避免从论文文本直接执行不可审计代码。
 
+Gzip-guided Sparse Attention 已有独立的 byte-level 可执行 adapter，但当前
+`micro-llm` evolve 使用 BPE token。为避免把 token ID 截断成 bytes 后伪称论文实现，
+它目前以 `evidence-only` 进入调研记录；后续增加 byte-level evolve backend 后再映射为
+可变异结构。
+
 ## 安装命令
 
 `auto-research` 是本项目安装后生成的命令，不是另一个需要单独下载的软件。第一次使用时，在仓库根目录执行：

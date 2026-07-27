@@ -38,6 +38,7 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：用 gzip 压缩率识别 literal blocks，并将 attention heads 分为 local、literal long-range 与 hybrid 三组，无需学习额外路由参数。
 - [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：仅窗口化 speculative draft 的 KV read，保留完整 target verification，从而降低长上下文 draft tax 而不改变输出分布。
 - [AdaDSF](../2607.21291-adadsf/README.md)：按层表示变化强度分配 token budget，以轻量 Top-K router 让低价值 token 绕过部分 Transformer 层。
 - [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将部分 RoPE heads 的频率设为反周期 half-integer 梯度，在不增加参数的情况下改变长距位置几何。
@@ -98,6 +99,7 @@
 
 ## 冷启动与语义-行为对齐
 
+- [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 corpus、召回、排序和 utility 全漏斗识别 fresh 内容瓶颈，以内容特征、engagement dropout、cohort calibration 和 UCB 打破曝光反馈回路。
 - [Proximity Features](../2607.12246-proximity-features/README.md)：以自适应群体地理 key 聚合行为，为匿名和首次访问用户提供冷启动特征。
 - [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动物品进行序列预训练。
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：生成 creative 层级语义属性，并用 primary/shadow 机制稳定广告召回。
@@ -127,6 +129,7 @@
 
 ## Serving / efficiency
 
+- [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：逐样本用 gzip 构造零参数 block mask，减少无关长程 attention edges；本地实现验证 mask，但未提供稀疏 kernel 加速。
 - [S-GRec](../2602.10606-s-grec/README.md)：LLM judge 只在训练期调用，线上仅部署轻量 SID generator。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：离线批量生成 advertiser prior，线上作为传统候选生成的补充信号。
 - [LWGR](../2605.18771-lwgr/README.md)：在 nearline 阶段缓存世界知识，线上只执行轻量 cross-attention 融合。

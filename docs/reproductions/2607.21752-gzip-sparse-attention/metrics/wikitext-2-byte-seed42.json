@@ -1,0 +1,24 @@
+{
+  "dataset": {
+    "name": "WikiText-2 raw UTF-8 bytes",
+    "train_bytes": 10797148,
+    "test_bytes": 1256449
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_model": 120,
+    "sequence_length": 256,
+    "block_size": 32,
+    "parameters": 132032
+  },
+  "bits_per_byte": {
+    "dense": 5.081886199285811,
+    "bigbird": 5.0613776694632735,
+    "gzip": 5.112921070573283
+  },
+  "relative_percent": {
+    "gzip_vs_bigbird_bpb_reduction": -1.0183670232906294,
+    "gzip_vs_dense_bpb_reduction": -0.610695912313698
+  },
+  "sample_edge_reduction_percent": 70.8171206225681
+}

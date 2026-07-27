@@ -21,10 +21,12 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **86/86** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **88/88** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `pinequalizer` | PinEqualizer · Pinterest | engagement dropout、内容交叉、分 cohort calibration 与探索 corpus；fresh NDCG +448.62%，整体 NDCG -16.44% |
+| 核心机制 | `gzip-sparse-attention` | Gzip-guided Sparse Attention · Penn State | 逐 block gzip 与 local/literal/hybrid heads；attention edges -70.82%，BPB 较 BigBird +1.02%（变差） |
 | 核心机制 | `windowed-mtp` | Windowed-MTP · NVIDIA | draft-only sink+recent KV、完整 target verification；16K KV read -99.56%、MPS draft latency -50.25% |
 | 核心机制 | `adadsf` | AdaDSF · Huawei/SUSTech | cosine calibration、逐层 budget、Top-K router 与 feature alignment；80% budget 下 PPL 较 Uniform MoD +0.30%（变差） |
 | 核心机制 | `barge` | BARGE · Tencent | Householder OSQ、双 residual codebook、ICA、HPR、双 decoder 与 OR-fusion；MovieLens NDCG@10 +85.77% |
