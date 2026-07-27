@@ -21,10 +21,20 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **88/88** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **98/98** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `nova` | NOVA · Tencent | 四级验证、失败方向与 architecture gradient；直接增强 evolve |
+| 核心机制 | `evorec` | EvoRec · Alibaba International | 三代双轨进化和持久 skill memory；直接增强 evolve |
+| 完整核心链路 | `tokenmixer-large` | TokenMixer-Large · ByteDance | mixing/reverting、双 SwiGLU、interval residual 与辅助损失 |
+| 核心机制 | `msn` | MSN · ByteDance/Douyin Search | Product-Key Memory、top-k sparse read 与 gate |
+| 核心机制 | `idproxy` | IDProxy · Xiaohongshu/SJTU/Fudan | 对比对齐、多层 proxy 与 gate；NDCG@10 +5.32% |
+| 核心机制 | `glide` | GLIDE · Spotify | residual Semantic ID 生成与长短期双 prompt |
+| 核心机制 | `genrec` | GenRec · JD.com | page-wise NTP、Token Merger 与 GRPO-SR/NLL |
+| 核心机制 | `rankgraph2` | RankGraph-2 · Meta | popularity-corrected graph、PPR 与两级 residual index；NDCG@10 +109.65% |
+| 核心机制 | `solaris` | SOLARIS · Meta | future-pair predictor、异步 latent cache 与 fallback |
+| 核心机制 | `minimax-sparse-attention` | MiniMax Sparse Attention · MiniMax | attention pairs -79.95%，PPL +0.41%；未融合 MPS 不宣称加速 |
 | 核心机制 | `pinequalizer` | PinEqualizer · Pinterest | engagement dropout、内容交叉、分 cohort calibration 与探索 corpus；fresh NDCG +448.62%，整体 NDCG -16.44% |
 | 核心机制 | `gzip-sparse-attention` | Gzip-guided Sparse Attention · Penn State | 逐 block gzip 与 local/literal/hybrid heads；attention edges -70.82%，BPB 较 BigBird +1.02%（变差） |
 | 核心机制 | `windowed-mtp` | Windowed-MTP · NVIDIA | draft-only sink+recent KV、完整 target verification；16K KV read -99.56%、MPS draft latency -50.25% |

@@ -1,0 +1,11 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "train_tokens": 120000,
+  "validation_tokens": 12000,
+  "steps_per_model": 36,
+  "baseline": {"name": "dense GQA", "validation_loss": 3.233967, "perplexity": 25.3801, "attention_pair_ratio": 1.0, "seconds": 0.7994},
+  "method": {"name": "blockwise MSA", "validation_loss": 3.238023, "perplexity": 25.4833, "attention_pair_ratio": 0.200467, "seconds": 1.3397},
+  "relative": {"perplexity_percent": 0.41, "attention_pairs_percent": -79.95, "measured_training_seconds_percent": 67.58},
+  "note": "Unfused PyTorch masking and the trainable index auxiliary loss are slower on MPS; this is not a kernel-speed claim."
+}

@@ -36,6 +36,10 @@
 
 ## 2026-06
 
+- [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 汇总验证和指标反馈，并通过四级级联阻断静默错误架构。
+- [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。
+- [RankGraph-2](../2606.18379-rankgraph2/README.md)：对图边去热门偏置，离线预计算多跳 PPR，再以 cluster index 服务召回。
+- [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：每个 GQA 组通过 index branch 选择 top-k 历史块，并在命中 token 上执行精确注意力。
 - [G2Rec](../2606.20554-g2rec/README.md)：构建可微 soft graph，并联合图结构与生成式双目标学习用户—物品关系。
 - [CMSL](../2606.28533-cmsl/README.md)：用可学习兴趣 lenses 拆分多兴趣序列，并结合 HSTU 建模不同语义 strand。
 
@@ -59,14 +63,20 @@
 
 ## 2026-04
 
+- [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item pair，异步预计算并缓存 foundation-model latent，在线命中直接消费。
+- [GenRec](../2604.14878-genrec/README.md)：用 page-wise NTP、非对称 Token Merger 和带 NLL 正则的 GRPO-SR 优化整页结果。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由统一多个业务域的生成式推荐。
 
 ## 2026-03
 
+- [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容表征先对齐到 item-ID 协同空间，再经多层 proxy 与 gate 接入排序。
+- [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归生成候选，并同时注入近期历史和长期用户 prompt。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 
 ## 2026-02
 
+- [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：以 token mixing/reverting、head/token SwiGLU、间隔残差和辅助监督扩展排序模型。
+- [MSN](../2602.07526-msn/README.md)：用 Product-Key Memory 增加容量，只读取 top-k 槽位并门控融合 dense 主干。
 - [GRC](../2602.23639-grc/README.md)：让生成式推荐器结构化地反思首错位置和语义属性，再纠正 SID 轨迹。
 - [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
 - [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。

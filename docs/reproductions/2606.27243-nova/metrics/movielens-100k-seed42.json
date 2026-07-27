@@ -1,0 +1,8 @@
+{
+  "dataset": "MovieLens 100K (260 users / 420 items)",
+  "seed": 42,
+  "baseline": {"hit_at_10": 0.088462, "ndcg_at_10": 0.035398, "fresh_hit_at_10": 0.027778, "head_share_at_10": 0.293846},
+  "method": {"hit_at_10": 0.126923, "ndcg_at_10": 0.071195, "fresh_hit_at_10": 0.097222, "head_share_at_10": 0.267308},
+  "relative": {"hit_at_10_percent": 43.48, "ndcg_at_10_percent": 101.13},
+  "verification": {"candidates": 4, "accepted": 3, "rejected": 1, "selected": "transition-specialist"}
+}

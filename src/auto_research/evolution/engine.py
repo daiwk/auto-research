@@ -12,6 +12,7 @@ from .papers import discover_papers
 from .planner import allowed_architectures, propose, round_record
 from .rankmixer import RankMixerEvaluator
 from .report import write_evolution_artifacts
+from .research_memory import methodology_order, update_research_memory, verify_trial
 from ..runtime import configure_runtime
 
 
@@ -44,6 +45,7 @@ class ModelEvolutionEngine:
             baseline_genome = Genome(architecture="hyformer" if config.model == "hyformer" else "rankmixer_dense")
         baseline = evaluator.evaluate("g0-t0", 0, None, baseline_genome, (), f"冻结的 {config.model} 初始基线")
         result.trials.append(baseline)
+        result.verification_records.append(verify_trial(baseline))
         result.champion_id = baseline.trial_id
         write_evolution_artifacts(result, run_dir)
 
@@ -53,6 +55,7 @@ class ModelEvolutionEngine:
         architectures = allowed_architectures(config.model, config.direction, papers)
         for generation in range(1, config.generations + 1):
             parent = champion
+            architectures = methodology_order(architectures, result.research_memory)
             specs = []
             for index in range(config.population):
                 genome, rationale = propose(parent.genome, generation, index, architectures, rng, config.model)
@@ -69,10 +72,18 @@ class ModelEvolutionEngine:
             for trial in self._run_generation(evaluator, specs):
                 children.append(trial)
                 result.trials.append(trial)
+                result.verification_records.append(verify_trial(trial, parent))
                 write_evolution_artifacts(result, run_dir)
             completed = [trial for trial in children if trial.status == "completed"]
             champion = max([parent, *completed], key=lambda trial: trial.fitness)
             result.champion_id = champion.trial_id
+            result.research_memory = update_research_memory(
+                result.research_memory,
+                parent,
+                children,
+                champion,
+                result.verification_records,
+            )
             result.rounds.append(round_record(generation, parent, children, champion))
             write_evolution_artifacts(result, run_dir)
 

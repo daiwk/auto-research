@@ -1,0 +1,8 @@
+{
+  "dataset": "MovieLens 100K (260 users / 420 items)",
+  "seed": 42,
+  "baseline": {"hit_at_10": 0.088462, "ndcg_at_10": 0.035398, "head_share_at_10": 0.293846},
+  "method": {"hit_at_10": 0.142308, "ndcg_at_10": 0.074211, "head_share_at_10": 0.146154},
+  "relative": {"hit_at_10_percent": 60.87, "ndcg_at_10_percent": 109.65},
+  "graph": {"ppr_hops": 5, "residual_index_levels": 2, "width_per_level": 8, "precomputed_rows": 420}
+}

@@ -4,6 +4,8 @@
 
 ## Alibaba
 
+- 2026-06 · [EvoRec](../2606.28368-evorec/README.md)：让模型候选和优化方法双轨进化，并从持久实验记忆中提炼下一代可复用技能。
+
 - 2026-07 · [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 加并行全局/query 价值码生成候选，再以联合 VRM 把相关性与商业价值统一排序。
 - 2026-07 · [TMallGS](../2607.13398-tmallgs/README.md)：通过 field-wise QKV、噪声门控、FiLM 与 progressive supervision 统一 query、行为和商品字段。
 - 2026-05 · [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：在端侧用量化 LoRA LLM 把异构行为翻译成下一意图 query，并以 adaptive prompt 和漂移触发控制资源消耗。
@@ -34,6 +36,9 @@
 - 2025-03 · [COBRA](../2503.02453-cobra/README.md)：先用稀疏生成缩小候选空间，再用稠密生成细排，形成级联式生成召回。
 
 ## ByteDance / Douyin / TikTok
+
+- 2026-02 · [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：交替执行无参数 token mixing、head-wise/token-wise SwiGLU，并以间隔残差和辅助头稳定深层扩容。
+- 2026-02 · [MSN](../2602.07526-msn/README.md)：用两轴 Product-Key Memory 扩大参数容量，每次只激活 top-k 槽位并与 dense 主干门控融合。
 
 - 2026-05 · [FLUID](../2605.21832-fluid/README.md)：把直播多模态切片量化成 slice/room 两级 LUCID，以 prefix n-gram late fusion 完全替代短生命周期候选 ID。
 - 2025-05 · [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache，扩展超长用户行为序列建模。
@@ -79,6 +84,9 @@
 
 ## Meta
 
+- 2026-06 · [RankGraph-2](../2606.18379-rankgraph2/README.md)：用流行度校正边、离线多跳 PPR 和 residual cluster index 降低工业图召回的在线成本。
+- 2026-04 · [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item 请求，异步预计算 foundation-model latent，并通过 cache/fallback 服务线上排序。
+
 - 2026-07 · [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶特征交互和门控 HSTU 序列建模，形成共同扩展的统一排序模型。
 - 2026-07 · [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：只在训练采样时提供特权解题信息，并用重要性比率把更新校正回无提示目标策略。
 - 2026-07 · [SlimPer](../2607.12281-slimper/README.md)：用固定容量 user-item knowledge base 逐层查询完整历史，并通过 Select–Match–Refine 把计算集中到候选相关证据。
@@ -103,6 +111,8 @@
 
 ## Tencent / WeChat
 
+- 2026-06 · [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 驱动候选修改，并用四级验证级联阻断可运行但语义错误的架构。
+
 - 2026-07 · [BARGE](../2607.21028-barge/README.md)：用 item-level ICA 恢复多 token Semantic ID 边界，通过逐层 HPR 与正交双路径 DPD 抑制生成漂移。
 - 2026-07 · [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric 权重，以区分性和锚定目标驱动评估器与策略协同进化。
 - 2024-11 · [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并通过 DPO 对齐广告展示与转化偏好。
@@ -111,6 +121,8 @@
 - 2026-05 · [UniVA](../2605.05803-univa/README.md)：用 Commercial SID 和 generation-as-ranking 统一广告生成，并通过价值对齐 RL 与 trie beam 优化收益。
 
 ## Xiaohongshu
+
+- 2026-03 · [IDProxy](../2603.01590-idproxy/README.md)：先把多模态 LLM 表征对齐到协同 ID 空间，再通过多层 proxy adapter 和残差门控注入排序器。
 
 - 2024-03 · [NoteLLM](../2403.01744-notellm/README.md)：把内容压缩到特殊 token，以 GCL 注入协同信号，并用 CSFT 保持生成能力。
 - 2025-05 · [GenRank](../2505.04180-genrank/README.md)：把多种用户动作编码为生成目标，通过 action-oriented generation 完成端到端排序。
@@ -140,6 +152,18 @@
 
 - 2026-07 · [Möbius RoPE](../2607.21405-mobius-rope/README.md)：在部分 attention heads 上使用反周期频率梯度，以固定上下文边界的负 holonomy 改善长距检索稳定性。
 - 2026-07 · [Naju](../2607.21000-naju/README.md)：直接参数化离散状态 pole，并以独立 retain/write gates、选择性 B/C 与短程卷积同时控制长期保留和覆盖写入。
+
+## Spotify
+
+- 2026-03 · [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归检索，并联合近期历史与长期用户 soft prompt 扩大探索。
+
+## JD.com
+
+- 2026-04 · [GenRec](../2604.14878-genrec/README.md)：把下一页作为联合生成目标，通过非对称 Token Merger 和带 NLL 约束的 GRPO-SR 优化整页。
+
+## MiniMax
+
+- 2026-06 · [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：轻量 index branch 为每个 GQA 组选择 top-k 历史块，主分支只对命中 token 做精确注意力。
 
 ## 学术与经典基线
 

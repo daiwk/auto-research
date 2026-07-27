@@ -4,6 +4,8 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [IDProxy](../2603.01590-idproxy/README.md)：把多模态 LLM 内容表征对齐到协同 item-ID 空间，再通过多层 proxy 和 gate 注入工业排序。
+- [SOLARIS](../2604.12110-solaris/README.md)：预测未来请求并异步缓存 foundation-model latent，把大模型计算移出线上请求路径。
 - [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：用端侧 LoRA+INT8 LLM 将近期行为生成为下一意图 query，并依据意图漂移按需触发推理。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：让 LLM 读取可演化用户记忆并联合生成文本/SID，再以 latent token 重建蒸馏与排序反馈降低显式推理成本。
 - [RECAP](../2607.15730-recap/README.md)：用 causal Transformer 更新固定容量语义画像，再通过双塔反馈评价器与 GRPO 让画像直接服务未来推荐。
@@ -38,6 +40,7 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：按 GQA 组用轻量 index branch 选择 top-k block，再执行训练推理一致的精确块稀疏注意力。
 - [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：用 gzip 压缩率识别 literal blocks，并将 attention heads 分为 local、literal long-range 与 hybrid 三组，无需学习额外路由参数。
 - [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：仅窗口化 speculative draft 的 KV read，保留完整 target verification，从而降低长上下文 draft tax 而不改变输出分布。
 - [AdaDSF](../2607.21291-adadsf/README.md)：按层表示变化强度分配 token budget，以轻量 Top-K router 让低价值 token 绕过部分 Transformer 层。
@@ -50,6 +53,8 @@
 
 ## 生成式召回与端到端推荐
 
+- [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 与长短期双 prompt 直接生成召回候选，强化非习惯内容探索。
+- [GenRec](../2604.14878-genrec/README.md)：把整页作为 NTP 目标，并以 GRPO-SR 和 NLL 约束联合优化 page policy。
 - [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
 - [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 和并行价值码同时表达商品语义、全局价值与 query 条件价值，再联合训练 VRM。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用两级 RQ-VAE 建立 SID 模态，联合记忆驱动意图与 latent reasoning 生成可直接检索的商品标识。
@@ -78,6 +83,8 @@
 
 ## 排序网络与长序列
 
+- [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：用 mixing/reverting、双粒度 SwiGLU、interval residual 和辅助监督扩展工业精排。
+- [MSN](../2602.07526-msn/README.md)：把大容量参数放入稀疏 Product-Key Memory，只激活 top-k 槽位控制计算。
 - [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶交互和门控 HSTU 序列状态，避免双分支只在末端融合。
 - [TMallGS](../2607.13398-tmallgs/README.md)：对异构字段使用独立 QKV、噪声门控、FiLM 和 progressive loss，统一特征交互与序列建模。
 - [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：把长历史异步压缩成固定缓存，线上只运行近期事件 Transformer，兼顾历史容量与实时延迟。
@@ -128,6 +135,10 @@
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把源域 teacher 知识蒸馏到目标域，减少跨域冷启动监督需求。
 
 ## Serving / efficiency
+
+- [RankGraph-2](../2606.18379-rankgraph2/README.md)：离线预计算 popularity-corrected PPR 并用 cluster index 压缩线上图召回。
+- [NOVA](../2606.27243-nova/README.md)：用四级验证、失败方向和 architecture gradient 提高自动架构进化的有效通过率。
+- [EvoRec](../2606.28368-evorec/README.md)：把历史实验蒸馏为可复用 skill memory，使自动研究方法本身跨代进化。
 
 - [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：逐样本用 gzip 构造零参数 block mask，减少无关长程 attention edges；本地实现验证 mask，但未提供稀疏 kernel 加速。
 - [S-GRec](../2602.10606-s-grec/README.md)：LLM judge 只在训练期调用，线上仅部署轻量 SID generator。
