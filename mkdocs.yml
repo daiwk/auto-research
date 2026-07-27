@@ -10,8 +10,22 @@ nav:
   - Auto Research:
       - 自动研究总览: auto-research.md
       - 模型定向进化: model-evolution.md
-      - LLM 后训练研究: post-training.md
-      - Agent 论文研究: agent-research.md
+      - LLM 后训练研究:
+          - 研究总览: post-training/README.md
+          - 方法索引: post-training/catalog.md
+          - 统一评测协议: post-training/benchmark.md
+          - 论文实现:
+              - Lightning OPD: post-training/2604.13010-lightning-opd/README.md
+              - GPRL: post-training/2605.18721-gprl/README.md
+              - TCR: post-training/2607.19824-tcr/README.md
+      - Agent 论文研究:
+          - 研究总览: agent-research/README.md
+          - 方法索引: agent-research/catalog.md
+          - 统一评测协议: agent-research/benchmark.md
+          - 论文实现:
+              - U-Mem: agent-research/2602.22406-u-mem/README.md
+              - LEGOMem: agent-research/2510.04851-legomem/README.md
+              - MemTool: agent-research/2507.21428-memtool/README.md
       - UniRank 公共评测: unirank.md
   - 论文复现:
       - 复现总览: reproductions/README.md

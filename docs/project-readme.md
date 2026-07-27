@@ -274,7 +274,7 @@ DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
 后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 GPRL、TCR、DPO 或
 GRPO。Agent demo 可通过 `METHOD=legomem BENCHMARK=planbench-mini
 ./demo-agent.sh` 切换方法和环境。完整说明见
-[LLM 后训练](post-training.md)和[Agent 论文研究](agent-research.md)。
+[LLM 后训练](post-training/README.md)和[Agent 论文研究](agent-research/README.md)。
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 
