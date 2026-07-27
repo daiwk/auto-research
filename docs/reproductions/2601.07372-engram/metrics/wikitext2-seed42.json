@@ -1,0 +1,9 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps_per_variant": 30,
+  "baseline": {"lm_loss": 5.7470527, "perplexity": 313.2660, "parameters": 139584},
+  "method": {"lm_loss": 6.1533160, "perplexity": 470.2742, "parameters": 410048},
+  "relative": {"lm_loss_percent": 7.0691, "perplexity_percent": 50.1198},
+  "evolve_architecture": "engram"
+}

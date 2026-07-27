@@ -113,6 +113,17 @@ PUBLISHED_DATES = {
     "2607.21752": "2026-07-23",
     "2607.22518": "2026-07-23",
     "2605.17994": "2026-05-18",
+    "2601.21770": "2026-01-29",
+    "2602.04460": "2026-02-04",
+    "2602.07520": "2026-02-07",
+    "2602.21009": "2026-02-24",
+    "2603.03544": "2026-03-03",
+    "sigir2026-pin-scale": "2026-07-19",
+    "2607.14161": "2026-07-14",
+    "2601.02306": "2026-01-05",
+    "2601.07372": "2026-01-12",
+    "2607.15456": "2026-07-16",
+    "2607.20757": "2026-07-22",
 }
 
 # Older adapters predate the catalog metadata contract. Keep verified affiliations here
@@ -169,9 +180,17 @@ def _information_block(adapter) -> str:
             "",
             "| 项目 | 内容 |",
             "| --- | --- |",
-            f"| 论文链接 | [arXiv {paper.arxiv_id}]({paper.url}) |",
+            (
+                f"| 论文链接 | [SIGIR 2026 paper P074]({paper.url}) |"
+                if adapter.key == "pin-scale"
+                else f"| 论文链接 | [arXiv {paper.arxiv_id}]({paper.url}) |"
+            ),
             f"| 公司/机构 | {organization} |",
-            f"| 首次公开日期 | {published}（arXiv v1） |",
+            (
+                f"| 首次公开日期 | {published}（Pinterest Labs / SIGIR 2026） |"
+                if adapter.key == "pin-scale"
+                else f"| 首次公开日期 | {published}（arXiv v1） |"
+            ),
             f"| 原文开源代码 | {upstream_code} |",
             f"| Adapter | `{adapter.key}` |",
             f"| 本地复现代码 | [`{source_directory}`]({GITHUB_TREE}/{source_directory}) |",

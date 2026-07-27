@@ -142,6 +142,8 @@ class MicroLLMEvaluator:
             optimizer.zero_grad(set_to_none=True)
             logits = model(inputs)
             loss = torch.nn.functional.cross_entropy(logits.reshape(-1, config.vocab_size), labels.reshape(-1))
+            if genome.architecture == "gaugequant":
+                loss = loss + model.auxiliary_loss()
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()

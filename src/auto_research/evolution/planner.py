@@ -13,8 +13,21 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
             "hyper_connections", "mhc", "qkv_depthwise_conv",
             "mobius_rope", "naju", "adadsf",
+            "engram", "looped_latent_attention", "gaugequant",
         ]
         text = direction.lower().replace("-", "")
+        priority_terms = {
+            "engram": ("engram", "conditional memory", "条件记忆", "查表记忆"),
+            "looped_latent_attention": (
+                "looped latent attention", "lla", "kv compression",
+                "kv 压缩", "循环注意力",
+            ),
+            "gaugequant": ("gaugequant", "quantization", "量化", "w4a4"),
+        }
+        for architecture, terms in priority_terms.items():
+            if any(term in text for term in terms):
+                values.remove(architecture)
+                values.insert(0, architecture)
         if any(term in text for term in ("adadsf", "adaptive depth", "动态深度", "深度稀疏")):
             values.remove("adadsf")
             values.insert(0, "adadsf")

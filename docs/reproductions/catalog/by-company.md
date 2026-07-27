@@ -2,6 +2,20 @@
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
+## 2026 P1 与 LLM evolve
+
+- 2026-01 · [OneMall](../2601.21770-onemall/README.md)：快手以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
+- 2026-02 · [DOS](../2602.04460-dos/README.md)：美团用协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
+- 2026-02 · [MDL](../2602.07520-mdl/README.md)：字节抖音把 feature、scenario、task 全部 token 化，并以 domain-feature attention 深层共享。
+- 2026-02 · [HiSAC](../2602.21009-hisac/README.md)：阿里淘宝用层级投票生成少量兴趣 agent，再对超长历史做 query-conditioned soft routing。
+- 2026-03 · [PinCLIP](../2603.03544-pinclip/README.md)：Pinterest 以 VLM 图文对齐加 Pin-Board 邻居目标改善 fresh 内容表征。
+- 2026-07 · [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：Pinterest 用 engagement-aware SID、级联 pooling 和多视角对比对齐接入 dense retrieval。
+- 2026-07 · [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：Pinterest 用 doubly-robust uplift 决定是否触发 shopping candidate generator。
+- 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：Spotify 共享广告与推广任务表征，将高资源任务知识迁移给冷启动 podcast。
+- 2026-01 · [Engram](../2601.07372-engram/README.md)：DeepSeek 用确定性 hashed n-gram 查表给 LLM 增加 O(1) 条件记忆。
+- 2026-07 · [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：UMD/Meta AI 在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
+- 2026-07 · [GaugeQuant](../2607.20757-gaugequant/README.md)：Cambridge 在线学习量化友好正交基，以 LogSumExp 抑制 W4A4 outlier。
+
 ## Alibaba
 
 - 2026-06 · [EvoRec](../2606.28368-evorec/README.md)：让模型候选和优化方法双轨进化，并从持久实验记忆中提炼下一代可复用技能。

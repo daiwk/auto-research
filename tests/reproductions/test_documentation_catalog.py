@@ -21,7 +21,8 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
     expected = {_slug(adapter) for adapter in adapters}
     actual = {
         path.parent.name
-        for path in DOCS.glob("[0-9]*/README.md")
+        for path in DOCS.glob("*/README.md")
+        if path.parent.name != "catalog"
     }
     assert actual == expected
 
@@ -70,9 +71,14 @@ def test_every_paper_readme_has_the_complete_reproduction_contract():
         directory = DOCS / _slug(adapter)
         text = (directory / "README.md").read_text(encoding="utf-8")
         source_directory = f"src/auto_research/reproductions/{adapter.key.replace('-', '_')}/"
+        paper_label = (
+            "SIGIR 2026 paper P074"
+            if adapter.key == "pin-scale"
+            else f"arXiv {adapter.paper.arxiv_id}"
+        )
         required_metadata = (
             "## 论文信息",
-            f"| 论文链接 | [arXiv {adapter.paper.arxiv_id}]({adapter.paper.url}) |",
+            f"| 论文链接 | [{paper_label}]({adapter.paper.url}) |",
             "| 公司/机构 |",
             "| 首次公开日期 |",
             "| 原文开源代码 |",
@@ -81,11 +87,11 @@ def test_every_paper_readme_has_the_complete_reproduction_contract():
         )
         for entry in required_metadata:
             assert entry in text, f"{adapter.key} missing metadata: {entry}"
+        date_source = "Pinterest Labs / SIGIR 2026" if adapter.key == "pin-scale" else "arXiv v1"
         assert re.search(
-            r"^\| 首次公开日期 \| \d{4}-\d{2}-\d{2}（arXiv v1） \|$",
-            text,
-            re.MULTILINE,
-        ), f"{adapter.key} missing exact arXiv v1 date"
+            rf"^\| 首次公开日期 \| \d{{4}}-\d{{2}}-\d{{2}}（{date_source}） \|$",
+            text, re.MULTILINE,
+        ), f"{adapter.key} missing exact first-publication date"
         assert re.search(
             r"^\| 原文开源代码 \| (?:是：\[[^]]+\]\(https?://[^)]+\)|否：[^|]+) \|$",
             text,

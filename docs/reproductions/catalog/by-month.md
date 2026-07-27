@@ -2,6 +2,20 @@
 
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
+## 2026 P1 与 LLM evolve
+
+- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：2026-07 Pinterest 因果召回，用 DR uplift 控制 shopping trigger。
+- [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：SIGIR 2026 Pinterest SID 工业接入，结合级联 pooling 与参与度对齐。
+- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：2026-07 LLM 架构，以跨 loop latent 压缩 KV cache。
+- [GaugeQuant](../2607.20757-gaugequant/README.md)：2026-07 LLM 量化方法，在训练中学习 W4A4 最优正交基。
+- [PinCLIP](../2603.03544-pinclip/README.md)：2026-03 Pinterest 多模态表征，将 VLM 图文学习与 Pin-Board 邻居对齐结合。
+- [DOS](../2602.04460-dos/README.md)：2026-02 美团生成推荐，用双流正交量化训练 Semantic ID。
+- [MDL](../2602.07520-mdl/README.md)：2026-02 字节多分布推荐，把 feature、scenario 和 task 统一成 token。
+- [HiSAC](../2602.21009-hisac/README.md)：2026-02 阿里长序列模型，以层级投票压缩为可路由兴趣 agent。
+- [Podcast MTL](../2601.02306-podcast-mtl/README.md)：2026-01 Spotify 以多任务共享解决 podcast 广告和推广冷启动。
+- [Engram](../2601.07372-engram/README.md)：2026-01 DeepSeek 为 LLM 加入 O(1) hashed n-gram 条件记忆。
+- [OneMall](../2601.21770-onemall/README.md)：2026-01 快手把多电商场景统一到 Semantic ID 生成推荐家族。
+
 ## 2026-07
 
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 Pinterest 全漏斗维护 fresh exploration corpus，并以 engagement dropout、内容交叉、分 cohort calibration 和 UCB 减少旧内容偏置。

@@ -27,13 +27,14 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
         "hyper_connections", "mhc", "qkv_depthwise_conv",
-        "mobius_rope", "naju", "adadsf",
+        "mobius_rope", "naju", "adadsf", "engram",
+        "looped_latent_attention", "gaugequant",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
     modern = architecture.startswith("llama") or architecture in {
         "hyper_connections", "mhc", "qkv_depthwise_conv", "mobius_rope", "naju",
-        "adadsf",
+        "adadsf", "engram", "looped_latent_attention", "gaugequant",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -94,6 +95,116 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             mixed = torch.nn.functional.scaled_dot_product_attention(q, k, v, is_causal=True)
             return self.output(mixed.transpose(1, 2).reshape(batch, length, config.dimensions))
 
+    class LoopedLatentAttention(nn.Module):
+        """Weight-tied attention whose K/V cache is stored in a shared latent basis."""
+
+        def __init__(self):
+            super().__init__()
+            latent = max(4, head_dim // 2)
+            self.latent = latent
+            self.q = nn.Linear(config.dimensions, config.heads * head_dim, bias=False)
+            self.k_down = nn.Linear(config.dimensions, config.kv_heads * latent, bias=False)
+            self.v_down = nn.Linear(config.dimensions, config.kv_heads * latent, bias=False)
+            self.k_up = nn.Parameter(torch.empty(config.kv_heads, latent, head_dim))
+            self.v_up = nn.Parameter(torch.empty(config.kv_heads, latent, head_dim))
+            self.output = nn.Linear(config.dimensions, config.dimensions, bias=False)
+            nn.init.normal_(self.k_up, std=0.02)
+            nn.init.normal_(self.v_up, std=0.02)
+            self.last_cache_compression = head_dim / latent
+
+        def forward(self, values):
+            batch, length, _ = values.shape
+            q = self.q(values).view(
+                batch, length, config.heads, head_dim
+            ).transpose(1, 2)
+            k_latent = self.k_down(values).view(
+                batch, length, config.kv_heads, self.latent
+            ).transpose(1, 2)
+            v_latent = self.v_down(values).view(
+                batch, length, config.kv_heads, self.latent
+            ).transpose(1, 2)
+            k = torch.einsum("bhsl,hld->bhsd", k_latent, self.k_up)
+            v = torch.einsum("bhsl,hld->bhsd", v_latent, self.v_up)
+            if config.kv_heads != config.heads:
+                repeats = config.heads // config.kv_heads
+                k = k.repeat_interleave(repeats, dim=1)
+                v = v.repeat_interleave(repeats, dim=1)
+            q, k = _rotary(
+                q, k, torch, mode="standard",
+                context_length=config.sequence_length,
+            )
+            mixed = torch.nn.functional.scaled_dot_product_attention(
+                q, k, v, is_causal=True
+            )
+            return self.output(
+                mixed.transpose(1, 2).reshape(batch, length, config.dimensions)
+            )
+
+    class GaugeQuantizer(nn.Module):
+        """Learn an equivalent channel basis and execute an STE W4/A4 path."""
+
+        def __init__(self):
+            super().__init__()
+            self.generator = nn.Parameter(
+                torch.randn(config.dimensions) * 0.02
+            )
+            self.last_outlier = 0.0
+            self.outlier_loss = None
+
+        def _basis(self):
+            vector = self.generator
+            unit = vector / vector.norm().clamp_min(1e-6)
+            eye = torch.eye(
+                config.dimensions, dtype=vector.dtype, device=vector.device
+            )
+            return eye - 2.0 * unit[:, None] * unit[None, :]
+
+        @staticmethod
+        def _fake_quantize(values, bits=4):
+            bound = 2 ** (bits - 1) - 1
+            scale = values.detach().abs().amax(dim=-1, keepdim=True).clamp_min(1e-6)
+            quantized = torch.round(values / scale * bound).clamp(-bound, bound)
+            restored = quantized * scale / bound
+            return values + (restored - values).detach()
+
+        def forward(self, values):
+            basis = self._basis()
+            rotated = values @ basis
+            self.outlier_loss = torch.logsumexp(
+                rotated.abs(), dim=-1
+            ).mean()
+            self.last_outlier = float(self.outlier_loss.detach().cpu())
+            return self._fake_quantize(rotated) @ basis.T
+
+        def regularizer(self):
+            if self.outlier_loss is None:
+                return self.generator.sum() * 0.0
+            # The online objective directly penalizes activation outliers.
+            return 1e-3 * self.outlier_loss
+
+    class ConditionalMemory(nn.Module):
+        """Engram-style deterministic hashed n-gram lookup with gated fusion."""
+
+        def __init__(self, buckets=4096):
+            super().__init__()
+            self.buckets = buckets
+            self.table = nn.Embedding(buckets, config.dimensions)
+            self.norm = RMSNorm()
+            self.gate = nn.Linear(2 * config.dimensions, config.dimensions)
+            nn.init.normal_(self.table.weight, std=0.02)
+
+        def forward(self, tokens, values):
+            previous = torch.nn.functional.pad(tokens[:, :-1], (1, 0))
+            previous2 = torch.nn.functional.pad(tokens[:, :-2], (2, 0))
+            address = (
+                tokens.long() * 1_000_003
+                + previous.long() * 9_176
+                + previous2.long() * 131
+            ) % self.buckets
+            memory = self.table(address)
+            gate = torch.sigmoid(self.gate(torch.cat((values, memory), dim=-1)))
+            return values + gate * self.norm(memory)
+
     class FFN(nn.Module):
         def __init__(self):
             super().__init__()
@@ -117,7 +228,12 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         def __init__(self):
             super().__init__()
             self.first_norm, self.second_norm = norm(), norm()
-            self.attention, self.ffn = Attention(), FFN()
+            self.attention = (
+                LoopedLatentAttention()
+                if architecture == "looped_latent_attention"
+                else Attention()
+            )
+            self.ffn = FFN()
 
         def forward(self, values):
             if parallel:
@@ -262,21 +378,33 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.token = nn.Embedding(config.vocab_size, config.dimensions)
             self.position = None if modern else nn.Embedding(config.sequence_length, config.dimensions)
             hyper = architecture in {"hyper_connections", "mhc"}
-            self.blocks = nn.ModuleList([
-                (
-                    HyperBlock()
-                    if hyper
-                    else NajuBlock()
-                    if architecture == "naju"
-                    else Block()
+            if architecture == "looped_latent_attention":
+                shared_loop = Block()
+                self.blocks = nn.ModuleList(
+                    [shared_loop for _ in range(config.layers)]
                 )
-                for _ in range(config.layers)
-            ])
+            else:
+                self.blocks = nn.ModuleList([
+                    (
+                        HyperBlock()
+                        if hyper
+                        else NajuBlock()
+                        if architecture == "naju"
+                        else Block()
+                    )
+                    for _ in range(config.layers)
+                ])
             self.final_norm = norm()
             self.output = nn.Linear(config.dimensions, config.vocab_size, bias=False)
             self.output.weight = self.token.weight
             self.memory = None
             self.memory_layer = 0
+            self.conditional_memory = (
+                ConditionalMemory() if architecture == "engram" else None
+            )
+            self.gauge_quantizer = (
+                GaugeQuantizer() if architecture == "gaugequant" else None
+            )
             self.apply(self._initialize)
             if architecture == "naju":
                 for block in self.blocks:
@@ -309,7 +437,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                     *values.shape[:-1], config.residual_streams, values.shape[-1]
                 ).contiguous()
             for index, block in enumerate(self.blocks):
+                if self.gauge_quantizer is not None:
+                    values = self.gauge_quantizer(values)
                 values = block(values)
+                if self.conditional_memory is not None and index == 0:
+                    values = self.conditional_memory(tokens, values)
                 if self.memory is not None and index == self.memory_layer:
                     values = self.memory(tokens, values)
             if hyper:
@@ -349,6 +481,30 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 key: float(sum(row[key] for row in rows) / len(rows))
                 for key in rows[0]
             }
+
+        def architecture_stats(self):
+            if architecture == "engram":
+                return {
+                    "lookup_complexity": "O(1)",
+                    "memory_buckets": self.conditional_memory.buckets,
+                }
+            if architecture == "looped_latent_attention":
+                return {
+                    "weight_tied": True,
+                    "kv_cache_compression_x": self.blocks[0].attention.last_cache_compression,
+                }
+            if architecture == "gaugequant":
+                return {
+                    "weight_bits": 4,
+                    "activation_bits": 4,
+                    "logsumexp_outlier": self.gauge_quantizer.last_outlier,
+                }
+            return {}
+
+        def auxiliary_loss(self):
+            if self.gauge_quantizer is None:
+                return self.token.weight.sum() * 0.0
+            return self.gauge_quantizer.regularizer()
 
     return MicroLM()
 

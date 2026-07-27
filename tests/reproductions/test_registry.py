@@ -105,6 +105,17 @@ def test_builtin_adapters_are_discoverable():
         "rankgraph2",
         "solaris",
         "minimax-sparse-attention",
+        "onemall",
+        "dos",
+        "mdl",
+        "hisac",
+        "pinclip",
+        "pin-scale",
+        "causal-retrieval",
+        "podcast-mtl",
+        "engram",
+        "looped-latent-attention",
+        "gaugequant",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -131,6 +142,11 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("evorec").paper.has_online_ab
     assert get_adapter("tokenmixer-large").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("minimax-sparse-attention").paper.code_url == "https://github.com/MiniMax-AI/MSA"
+    assert get_adapter("onemall").paper.has_online_ab
+    assert get_adapter("pin-scale").paper.has_online_ab
+    assert get_adapter("podcast-mtl").paper.has_online_ab
+    assert get_adapter("engram").paper.code_url == "https://github.com/deepseek-ai/Engram"
+    assert get_adapter("gaugequant").paper.code_url == "https://github.com/MPedraBento/gauge-quant"
     assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"

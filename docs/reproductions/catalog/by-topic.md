@@ -2,6 +2,20 @@
 
 同一篇论文可以出现在多个主题下；每次出现都独占一行，并说明它与该主题相关的主要方法。
 
+## 2026 P1 与 LLM evolve
+
+- [OneMall](../2601.21770-onemall/README.md)：统一多场景生成推荐，以场景 prompt、Semantic ID 和跨行为融合生成商品。
+- [DOS](../2602.04460-dos/README.md)：生成推荐的双流正交 Semantic ID，减少内容 codebook 与协同生成空间偏差。
+- [MDL](../2602.07520-mdl/README.md)：多场景多任务 tokenization，让领域和任务信息参与每层 feature interaction。
+- [HiSAC](../2602.21009-hisac/README.md)：长序列稀疏压缩，通过层级兴趣 agent 保留粗粒度与长尾行为。
+- [PinCLIP](../2603.03544-pinclip/README.md)：多模态推荐基础表征，把图文 contrastive learning 与推荐图邻居对齐结合。
+- [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以参与度加权 residual codebook 把 Semantic ID 系统接入判别式召回。
+- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：候选生成因果优化，用 DR uplift 在用户收益和召回成本之间选 trigger。
+- [Podcast MTL](../2601.02306-podcast-mtl/README.md)：冷启动多任务迁移，共享 organic stream 与 ads/promotion 表征。
+- [Engram](../2601.07372-engram/README.md)：LLM 条件记忆，用固定复杂度 n-gram lookup 补充条件计算稀疏。
+- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：LLM KV cache 压缩，在 looped Transformer 间共享低秩 latent。
+- [GaugeQuant](../2607.20757-gaugequant/README.md)：LLM 训练与量化联合优化，学习函数等价但更适合 W4A4 的 gauge basis。
+
 ## LLM / Foundation model + Recommendation
 
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态 LLM 内容表征对齐到协同 item-ID 空间，再通过多层 proxy 和 gate 注入工业排序。

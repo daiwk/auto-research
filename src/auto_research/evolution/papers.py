@@ -32,6 +32,9 @@ LLM_MUTATIONS = {
     "2607.21405": ("mobius_rope", "将 25% attention heads 替换为 anti-periodic Möbius RoPE 频率梯度"),
     "2607.21000": ("naju", "独立 retain/write gates 的 native-discrete selective state-space sequence mixer"),
     "2607.21291": ("adadsf", "按层输入/输出相似度分配 token budget，以轻量 Top-K router 执行动态深度稀疏"),
+    "2601.07372": ("engram", "确定性 hashed n-gram O(1) 条件记忆查表，并以门控注入早期层"),
+    "2607.15456": ("looped_latent_attention", "跨循环共享低维 K/V latent，并按 loop 重建注意力缓存"),
+    "2607.20757": ("gaugequant", "训练中学习等价正交基，以 LogSumExp outlier 目标执行 W4A4 fake quantization"),
 }
 
 FALLBACK_PAPERS = (
@@ -63,6 +66,9 @@ LLM_FALLBACK_PAPERS = (
     Paper("Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs", "Similarity-calibrated layer budgets and lightweight Top-K token routing preserve dense features under sparse execution.", [], "2026-07-23", "https://arxiv.org/abs/2607.21291", "2607.21291"),
     Paper("Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context", "A sink plus recent window bounds the built-in MTP draft KV read while full-context target verification preserves outputs.", [], "2026-07-23", "https://arxiv.org/abs/2607.21535", "2607.21535"),
     Paper("Parameter-free Adaptive Sparse Attention via Compression-Based Content Selection", "Per-block gzip ratios select content-adaptive literal-to-literal long-range attention without learned routing parameters.", [], "2026-07-23", "https://arxiv.org/abs/2607.21752", "2607.21752"),
+    Paper("Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models", "O(1) hashed n-gram conditional memory complements compute sparsity.", [], "2026-01-12", "https://arxiv.org/abs/2601.07372", "2601.07372"),
+    Paper("Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers", "Shared latent K/V codes compress recurrent Transformer caches.", [], "2026-07-16", "https://arxiv.org/abs/2607.15456", "2607.15456"),
+    Paper("GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries", "Online orthogonal-basis learning suppresses W4A4 outliers.", [], "2026-07-22", "https://arxiv.org/abs/2607.20757", "2607.20757"),
 )
 
 
