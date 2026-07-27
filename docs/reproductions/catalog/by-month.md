@@ -4,6 +4,8 @@
 
 ## 2026-07
 
+- [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 Pinterest 全漏斗维护 fresh exploration corpus，并以 engagement dropout、内容交叉、分 cohort calibration 和 UCB 减少旧内容偏置。
+- [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：根据逐 block gzip 压缩率动态连接信息密集内容，组合 local、literal long-range 与 hybrid attention heads。
 - [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：将内置 MTP draft 的 KV 读取限制为 attention sink 与最近窗口，完整 target verifier 仍决定每个输出 token。
 - [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将 25% attention heads 改为反周期频率，使跨训练窗口的旋转为负单位映射，并保留其余标准 RoPE heads。
 - [AdaDSF](../2607.21291-adadsf/README.md)：用 dense layer cosine calibration 分配逐层 token retention，再以 Top-K router 和 feature alignment 实现动态深度稀疏。

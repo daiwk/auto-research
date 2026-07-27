@@ -80,6 +80,15 @@ def test_adadsf_is_available_to_llm_evolution():
     )[0] == "adadsf"
 
 
+def test_gzip_sparse_attention_is_retained_as_evidence_only():
+    papers = discover_papers(
+        "compression guided sparse attention", 30, False, track="llm"
+    )
+    paper = {entry.arxiv_id: entry for entry in papers}["2607.21752"]
+    assert paper.architecture is None
+    assert "尚无经过测试" in paper.method
+
+
 def test_latest_public_benchmark_operators_are_discoverable():
     rec = discover_papers(
         "WHALE TMallGS long history RAMP", 20, allow_network=False

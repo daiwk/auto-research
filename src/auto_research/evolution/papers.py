@@ -62,6 +62,7 @@ LLM_FALLBACK_PAPERS = (
     Paper("Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable", "Anti-periodic frequencies on a subset of attention heads improve retrieval reliability.", [], "2026-07-23", "https://arxiv.org/abs/2607.21405", "2607.21405"),
     Paper("Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs", "Similarity-calibrated layer budgets and lightweight Top-K token routing preserve dense features under sparse execution.", [], "2026-07-23", "https://arxiv.org/abs/2607.21291", "2607.21291"),
     Paper("Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context", "A sink plus recent window bounds the built-in MTP draft KV read while full-context target verification preserves outputs.", [], "2026-07-23", "https://arxiv.org/abs/2607.21535", "2607.21535"),
+    Paper("Parameter-free Adaptive Sparse Attention via Compression-Based Content Selection", "Per-block gzip ratios select content-adaptive literal-to-literal long-range attention without learned routing parameters.", [], "2026-07-23", "https://arxiv.org/abs/2607.21752", "2607.21752"),
 )
 
 
