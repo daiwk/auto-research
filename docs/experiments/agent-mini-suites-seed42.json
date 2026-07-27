@@ -1,0 +1,31 @@
+{
+  "protocol": {
+    "episodes": 120,
+    "seed": 42,
+    "fidelity": "mechanism reproduction on deterministic mini-suites"
+  },
+  "results": {
+    "long-context/evomem-mini": {
+      "memory_size": 12,
+      "joint_success": 1.0,
+      "average_cost": 64.5
+    },
+    "u-mem/evomem-mini": {
+      "memory_size": 12,
+      "joint_success": 1.0,
+      "average_cost": 3.05
+    },
+    "legomem/planbench-mini": {
+      "memory_size": 12,
+      "joint_success": 1.0,
+      "average_cost": 1.12,
+      "reused_plans": 108
+    },
+    "memtool/scalemcp-mini": {
+      "memory_size": 8,
+      "joint_success": 1.0,
+      "average_cost": 1.98125,
+      "tool_evictions": 200
+    }
+  }
+}

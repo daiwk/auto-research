@@ -1,0 +1,47 @@
+{
+  "protocol": {
+    "dataset": "OpenAI GSM8K official train/test JSONL",
+    "task": "six-candidate answer policy; exact-answer outcome reward",
+    "train_examples": 512,
+    "validation_examples": 128,
+    "steps": 300,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "seed": 42,
+    "fidelity": "mechanism reproduction; not full-sequence LLM post-training"
+  },
+  "untrained_policy": {
+    "accuracy": 0.1640625,
+    "mean_reward": 0.31261065795890286
+  },
+  "results": {
+    "dpo": {
+      "accuracy": 0.8046875,
+      "mean_reward": 0.8346500627127349,
+      "kl_from_reference": 0.06833317338028673
+    },
+    "grpo": {
+      "accuracy": 0.8046875,
+      "mean_reward": 0.8348038893169034,
+      "kl_from_reference": 1.1397290183143396
+    },
+    "lightning-opd": {
+      "accuracy": 0.8359375,
+      "mean_reward": 0.8560566488710981,
+      "kl_from_reference": 0.826884638864772,
+      "teacher_prefill_calls": 512,
+      "online_teacher_calls": 0
+    },
+    "gprl": {
+      "accuracy": 0.3671875,
+      "mean_reward": 0.5002428742813487,
+      "kl_from_reference": 1.102159422210548,
+      "drift_events": 257
+    },
+    "tcr": {
+      "accuracy": 0.8359375,
+      "mean_reward": 0.855992353047812,
+      "kl_from_reference": 0.5628950911504872
+    }
+  }
+}

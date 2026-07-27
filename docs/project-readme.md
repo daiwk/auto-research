@@ -2,17 +2,19 @@
 
 # auto-research
 
-一个面向 macOS 本地环境的机器学习研究闭环：输入 topic，检索最新论文，在公开数据集上实现和迭代实验，生成隔离的 JSON/Markdown 产物，并可通过 GitHub CLI 提交 Pull Request（GitLab 语境中的 MR）。
+一个面向 macOS/Linux 的机器学习研究闭环：输入 topic，检索最新论文，在公开数据集上实现和迭代实验，生成隔离的 JSON/Markdown 产物，并可通过 GitHub CLI 提交 Pull Request（GitLab 语境中的 MR）。除工业论文复现和模型自动进化外，现在也包含 LLM 后训练算法与 Agent 论文研究两个独立子模块。
 
 可读版文档站：[daiwk.github.io/auto-research](https://daiwk.github.io/auto-research/)。站点支持全文搜索、MathJax 公式、Mermaid 架构图、深色模式和移动端横向滚动；本地预览方式见[文档说明](getting-started.md)。
 
 ## 当前能力
 
-项目包含三层互补能力：
+项目包含五层互补能力：
 
 1. **Topic research loop**：按 topic 检索 arXiv，通过独立迭代控制器运行可配置参数搜索，逐轮保存 checkpoint、事件日志和可复用指标缓存。
 2. **Paper adapters**：每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度；省略核心模型的实现只能作为概念验证。
 3. **Model evolution**：给定已有模型和数据集，在线检索相关论文，把已审计的结构算子与层数、维度、学习率、优化器等组成 genome，按 validation 做多代变异、淘汰和晋级，最终只对冠军运行一次 test。
+4. **LLM post-training**：统一实现 DPO/GRPO 基线与 Lightning OPD、GPRL、TCR 等新方法，保存 reward、KL、教师调用和训练轨迹。
+5. **Agent research**：实现 Agent 记忆、规划与动态工具管理论文，用确定性 benchmark mini-suite 比较成功率、成本、跨 episode 复用和工具淘汰。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 
@@ -146,6 +148,9 @@ src/auto_research/
 ├── cli.py                         # run / reproduce / publish 命令入口
 ├── runner.py                      # research stages 编排
 ├── research_loop/                 # 迭代控制、指标缓存、事件日志
+├── evolution/                     # 推荐与 micro-LLM 多代模型进化
+├── post_training/                 # OPD、RL、偏好与过程奖励
+├── agent_research/                # Agent 记忆、规划与工具评测
 ├── datasets.py                    # 公开数据下载和缓存
 ├── papers.py                      # arXiv 检索
 └── reproductions/
@@ -245,6 +250,10 @@ CUDA/CPU PyTorch 的安装方式、多卡隔离和 worker 配置见 [GPU 与 Lin
 ./demo-mac.sh
 ./demo-linux-cpu.sh
 ./demo-linux-gpu.sh
+
+# 两个新增子模块的零下载 smoke
+./demo-post-training.sh
+./demo-agent.sh
 ```
 
 默认执行快速但真实的 RankMixer + MovieLens-100K evolve：仍然运行 3 个进化轮次，每轮 2 个候选，只缩小数据和单候选训练步数；基线是额外实验，不计作进化轮次。结果写到 `runs/demo-<platform>-recommendation/`。切换完整规模或 LLM 自动进化：
@@ -261,6 +270,11 @@ DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
 ```
 
 首次运行会创建平台隔离的 `.venv-demo-*` 环境并安装依赖；后续直接复用。Linux GPU 如需指定 PyTorch CUDA wheel，可传 `TORCH_INDEX_URL`；其他参数见[运行环境指南](runtime.md)。
+
+后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 GPRL、TCR、DPO 或
+GRPO。Agent demo 可通过 `METHOD=legomem BENCHMARK=planbench-mini
+./demo-agent.sh` 切换方法和环境。完整说明见
+[LLM 后训练](post-training.md)和[Agent 论文研究](agent-research.md)。
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 

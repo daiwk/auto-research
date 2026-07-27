@@ -2,12 +2,17 @@
 
 Auto Research 负责把“我想研究什么”转成一条可追踪、可复现的实验链路。它与论文复现互补：论文复现回答“这篇工业论文的方法在公开数据上如何表现”，Auto Research 回答“围绕一个 topic 或现有模型，下一步应该尝试什么，并怎样持续迭代”。
 
-## 两种入口
+## 四种入口
 
 | 入口 | 输入 | 自动执行 | 适用场景 |
 |---|---|---|---|
 | Topic research | topic、LLM/推荐轨道、论文数、实验次数 | arXiv 检索、参数提案、逐次实验、缓存与报告 | 探索一个较宽的研究问题 |
 | Model evolution | 基础模型、数据集、自然语言调研方向 | 论文检索、结构/数据/训练消融、并行实验、冠军进化、隔离 test | 升级 RankMixer、HyFormer 或本地 LLM |
+| LLM post-training | 后训练算法、公开数据和预算 | rollout、偏好/过程 reward、策略更新、KL 和成本报告 | 比较 OPD、RL、偏好优化 |
+| Agent research | Agent 方法、benchmark 和 memory budget | 多 episode 执行、记忆更新、计划/工具复用、轨迹报告 | 研究记忆、规划与工具使用 |
+
+[LLM 后训练完整说明 →](post-training.md) ·
+[Agent 论文研究完整说明 →](agent-research.md)
 
 ## Topic research
 

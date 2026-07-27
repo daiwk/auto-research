@@ -6,7 +6,9 @@ import sys
 from pathlib import Path
 
 from .config import ResearchConfig
+from .agent_research import AgentResearchConfig, AgentResearchRunner
 from .evolution import EvolutionConfig, ModelEvolutionEngine
+from .post_training import PostTrainingConfig, PostTrainingRunner
 from .publish import publish_report
 from .reproductions.base import ReproductionFidelity
 from .reproductions.registry import get_adapter, list_adapters
@@ -112,6 +114,50 @@ def build_parser() -> argparse.ArgumentParser:
         help="metric used for validation-only evolution selection",
     )
     _add_runtime_arguments(evolve)
+
+    post_train = commands.add_parser(
+        "post-train",
+        help="run modern LLM preference/RL/on-policy-distillation algorithms",
+    )
+    post_train.add_argument(
+        "--algorithm",
+        choices=["dpo", "grpo", "lightning-opd", "gprl", "tcr"],
+        required=True,
+    )
+    post_train.add_argument(
+        "--dataset",
+        choices=["arithmetic-smoke", "gsm8k-candidate"],
+        default="arithmetic-smoke",
+    )
+    post_train.add_argument("--dataset-dir", type=Path, default=Path("data"))
+    post_train.add_argument("--output-dir", type=Path, default=Path("runs/post-training"))
+    post_train.add_argument("--steps", type=int, default=100)
+    post_train.add_argument("--learning-rate", type=float, default=0.08)
+    post_train.add_argument("--group-size", type=int, default=4)
+    post_train.add_argument("--maximum-examples", type=int, default=512)
+    post_train.add_argument("--seed", type=int, default=42)
+    post_train.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(post_train)
+
+    agent_eval = commands.add_parser(
+        "agent-eval",
+        help="evaluate paper-inspired agent memory, planning and tool-use methods",
+    )
+    agent_eval.add_argument(
+        "--method",
+        choices=["long-context", "u-mem", "legomem", "memtool"],
+        required=True,
+    )
+    agent_eval.add_argument(
+        "--benchmark",
+        choices=["evomem-mini", "planbench-mini", "scalemcp-mini"],
+        default="evomem-mini",
+    )
+    agent_eval.add_argument("--episodes", type=int, default=120)
+    agent_eval.add_argument("--memory-size", type=int, default=24)
+    agent_eval.add_argument("--seed", type=int, default=42)
+    agent_eval.add_argument("--output-dir", type=Path, default=Path("runs/agent-research"))
+    _add_runtime_arguments(agent_eval)
     return parser
 
 
@@ -222,6 +268,40 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(f"Report: {run_dir / 'report.md'}")
             print(f"Dashboard: {run_dir / 'index.html'}")
+            return 0
+        if args.command == "post-train":
+            result, run_dir = PostTrainingRunner(
+                PostTrainingConfig(
+                    algorithm=args.algorithm,
+                    dataset=args.dataset,
+                    dataset_dir=args.dataset_dir,
+                    output_dir=args.output_dir,
+                    steps=args.steps,
+                    learning_rate=args.learning_rate,
+                    group_size=args.group_size,
+                    seed=args.seed,
+                    allow_network=not args.offline,
+                    maximum_examples=args.maximum_examples,
+                )
+            ).run()
+            print(f"Validation accuracy: {result.final['accuracy']:.4f}")
+            print(f"Relative to untrained policy: {result.relative_accuracy:+.2%}")
+            print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "agent-eval":
+            result, run_dir = AgentResearchRunner(
+                AgentResearchConfig(
+                    method=args.method,
+                    benchmark=args.benchmark,
+                    episodes=args.episodes,
+                    memory_size=args.memory_size,
+                    seed=args.seed,
+                    output_dir=args.output_dir,
+                )
+            ).run()
+            print(f"Joint success: {result.metrics['joint_success']:.4f}")
+            print(f"Average cost: {result.metrics['average_cost']:.4f}")
+            print(f"Report: {run_dir / 'report.md'}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

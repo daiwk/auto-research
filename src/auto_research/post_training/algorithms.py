@@ -1,0 +1,135 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+import numpy as np
+
+from .data import CandidateGroup
+
+
+@dataclass
+class PolicyState:
+    weights: np.ndarray
+    reference: np.ndarray
+    reward_axis_weights: np.ndarray
+    outcome_ema: float = 0.0
+    teacher_cache: tuple[np.ndarray, ...] = ()
+    teacher_calls: int = 0
+    drift_events: int = 0
+
+
+def initialize(feature_count: int, groups: tuple[CandidateGroup, ...]) -> PolicyState:
+    weights = np.zeros(feature_count, dtype=np.float64)
+    # Lightning OPD's teacher is fixed and cached before optimization. The
+    # teacher combines outcome and process quality; no live teacher is called.
+    cache = tuple(_softmax(group.rewards @ np.asarray((4.0, 0.2, 0.8, 0.1))) for group in groups)
+    return PolicyState(
+        weights=weights,
+        reference=weights.copy(),
+        reward_axis_weights=np.ones(4, dtype=np.float64) / 4,
+        teacher_cache=cache,
+        teacher_calls=len(groups),
+    )
+
+
+def update(
+    algorithm: str,
+    state: PolicyState,
+    group: CandidateGroup,
+    learning_rate: float,
+    rng: np.random.Generator,
+    group_size: int,
+    cache_index: int,
+) -> tuple[float, dict[str, float]]:
+    probabilities = _softmax(group.features @ state.weights)
+    reference = _softmax(group.features @ state.reference)
+    sampled = rng.choice(
+        len(probabilities), size=min(group_size, len(probabilities)),
+        replace=False, p=probabilities,
+    )
+    diagnostics: dict[str, float] = {}
+
+    if algorithm == "dpo":
+        chosen = group.gold
+        rejected = int(np.argmax(probabilities + (np.arange(len(probabilities)) == chosen) * -2))
+        margin = (
+            np.log(probabilities[chosen] + 1e-12)
+            - np.log(probabilities[rejected] + 1e-12)
+            - np.log(reference[chosen] + 1e-12)
+            + np.log(reference[rejected] + 1e-12)
+        )
+        beta = 0.2
+        coefficient = beta / (1.0 + np.exp(beta * margin))
+        gradient = coefficient * (group.features[chosen] - group.features[rejected])
+        loss = float(np.logaddexp(0.0, -beta * margin))
+    elif algorithm == "lightning-opd":
+        teacher = state.teacher_cache[cache_index]
+        gradient = group.features.T @ (teacher - probabilities)
+        loss = float(-np.sum(teacher * np.log(probabilities + 1e-12)))
+        diagnostics["cached_teacher_tokens"] = float(len(teacher))
+        diagnostics["online_teacher_calls"] = 0.0
+    else:
+        rewards = group.rewards[sampled]
+        if algorithm == "gprl":
+            normalized = (rewards - rewards.mean(0)) / (rewards.std(0) + 1e-6)
+            advantages = normalized @ state.reward_axis_weights
+            # A normalized axis always has zero mean, so drift must be measured
+            # before normalization. Compare each axis' operating point with the
+            # group-wide reward level to detect an exploitable dominant axis.
+            axis_drift = np.abs(rewards.mean(0) - rewards.mean())
+            if float(axis_drift.max()) > 0.25:
+                state.reward_axis_weights = 1.0 / (axis_drift + 0.25)
+                state.reward_axis_weights /= state.reward_axis_weights.sum()
+                state.drift_events += 1
+            diagnostics["preference_axes"] = 4.0
+            diagnostics["drift_events"] = float(state.drift_events)
+        elif algorithm == "tcr":
+            outcome = rewards[:, 0]
+            process = rewards[:, 2]
+            state.outcome_ema = 0.9 * state.outcome_ema + 0.1 * float(outcome.mean())
+            thinking_surplus = process - state.outcome_ema
+            advantages = outcome + 0.5 * thinking_surplus
+            advantages -= advantages.mean()
+            diagnostics["outcome_ema"] = state.outcome_ema
+            diagnostics["thinking_surplus"] = float(thinking_surplus.mean())
+        else:  # GRPO baseline
+            scalar = rewards @ np.asarray((0.7, 0.05, 0.2, 0.05))
+            advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        gradient = np.zeros_like(state.weights)
+        expected_features = probabilities @ group.features
+        for index, advantage in zip(sampled, advantages):
+            gradient += float(advantage) * (group.features[index] - expected_features)
+        gradient /= len(sampled)
+        kl_gradient = group.features.T @ (probabilities - reference)
+        gradient -= 0.02 * kl_gradient
+        loss = float(-np.mean(advantages * np.log(probabilities[sampled] + 1e-12)))
+
+    state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)
+    diagnostics["loss"] = loss
+    diagnostics["policy_entropy"] = float(-np.sum(probabilities * np.log(probabilities + 1e-12)))
+    return loss, diagnostics
+
+
+def metrics(state: PolicyState, groups: tuple[CandidateGroup, ...]) -> dict[str, float]:
+    correct, reward, entropy, kl = 0, 0.0, 0.0, 0.0
+    for group in groups:
+        policy = _softmax(group.features @ state.weights)
+        reference = _softmax(group.features @ state.reference)
+        selected = int(np.argmax(policy))
+        correct += int(selected == group.gold)
+        reward += float(group.rewards[selected] @ np.asarray((0.7, 0.05, 0.2, 0.05)))
+        entropy += float(-np.sum(policy * np.log(policy + 1e-12)))
+        kl += float(np.sum(policy * np.log((policy + 1e-12) / (reference + 1e-12))))
+    size = max(1, len(groups))
+    return {
+        "accuracy": correct / size,
+        "mean_reward": reward / size,
+        "entropy": entropy / size,
+        "kl_from_reference": kl / size,
+    }
+
+
+def _softmax(values: np.ndarray) -> np.ndarray:
+    shifted = values - values.max()
+    exponent = np.exp(shifted)
+    return exponent / exponent.sum()
