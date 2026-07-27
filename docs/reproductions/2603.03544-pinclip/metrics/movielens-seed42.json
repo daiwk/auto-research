@@ -1,0 +1,7 @@
+{
+  "dataset": "MovieLens 100K",
+  "seed": 42,
+  "baseline": {"hit_at_10": 0.0884615, "ndcg_at_10": 0.0353981},
+  "method": {"hit_at_10": 0.0807692, "ndcg_at_10": 0.0348986},
+  "relative": {"hit_at_10_percent": -8.6957, "ndcg_at_10_percent": -1.4110}
+}

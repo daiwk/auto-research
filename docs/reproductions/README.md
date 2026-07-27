@@ -11,22 +11,33 @@
 - **具名例外**：SASRec、TIGER 是用户指定的经典基线，没有线上 A/B，不据此放宽后续选文标准。
 - **本地结果口径**：每篇 README 明确基线、实验组、数据、主指标和相对变化；论文线上结果、本地跨模型比较、模块消融和效率对照分开写。
 - **保真度**：公开数据替代私有数据或缩小规模可以接受；核心网络、训练目标或推理路径被 heuristic 替代时，只能标为“概念验证”。默认批量运行不包含概念验证。
-- **论文信息**：每篇 README 顶部固定列出论文链接、公司/机构、arXiv v1 日期、原作者是否开源代码、Adapter 和本地复现代码位置；未找到原作者代码时必须明确写“否”，不能留空。
+- **论文信息**：每篇 README 顶部固定列出论文链接、公司/机构、精确首次公开日期及来源、原作者是否开源代码、Adapter 和本地复现代码位置；未找到原作者代码时必须明确写“否”，不能留空。没有独立 arXiv 页的正式会议论文使用官方论文集/机构发布页，不伪造 arXiv ID。
 
 统一 DIN 实验使用 MovieLens-100K、时间 leave-two-out、全物品排序和 seeds 42/43/44；SERAL、LEADRE、COBRA、ARGUS、GR4AD、MM-LLM 使用同一 DIN NDCG@10 `0.02167`，Cross-domain KD 在独立 target split 上使用 DIN `0.05518`。这些结果只代表当前公开小数据协议，不等同于论文私有工业数据结论。
 
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 98 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 109 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
-- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 新批次加入 PinEqualizer 与 Gzip-guided Sparse Attention。GRACE 仅有离线结果，未纳入推荐复现；DLMRec、LO-FAR、PRL 同样因缺量化线上证据未纳入。
+- 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
 
-## 全部复现（98/98）
+## 全部复现（109/109）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `onemall` · [OneMall](2601.21770-onemall/README.md) | 商品卡 GMV +13.01%、短视频订单 +15.32%、直播订单 +2.78% | 场景 prompt + SID + 跨行为融合；NDCG@10 +4.33% |
+| 核心机制 | `dos` · [DOS](2602.04460-dos/README.md) | 美团收入 +1.15% | 双流 ORQ；NDCG@10 +11.26% |
+| 核心机制 | `mdl` · [MDL](2602.07520-mdl/README.md) | 抖音 LT30 +0.0626%、rewrite -0.3267% | 三类 token 与 domain attention；NDCG@10 +13.34%，head share +73.43% |
+| 核心机制 | `hisac` · [HiSAC](2602.21009-hisac/README.md) | 淘宝 CTR +1.65% | 层级 interest agents；NDCG@10 +1.31% |
+| 核心机制 | `pinclip` · [PinCLIP](2603.03544-pinclip/README.md) | fresh Repin +15%、new Ads click +8.7% | 邻居对齐 NDCG@10 -1.41%，未迁移收益 |
+| 核心机制 | `pin-scale` · [Pin-SCALE](sigir2026-pin-scale-pin-scale/README.md) | Repin +3.67%、DAU +0.05% | engagement-aware SID；NDCG@10 +13.61%、fresh Hit +50.00% |
+| 核心机制 | `causal-retrieval` · [Causal Retrieval](2607.14161-causal-retrieval/README.md) | trigger -85%、session +0.26%、Save +1.10% | DR uplift trigger；合成 treatment NDCG@10 +80.77% |
+| 核心机制 | `podcast-mtl` · [Podcast MTL](2601.02306-podcast-mtl/README.md) | eCPS -22%、stream +18%–24% | shared MTL NDCG@10 -20.63%，出现 negative transfer |
+| 核心机制 | `engram` · [Engram](2601.07372-engram/README.md) | 纯 LLM：MMLU +3.4、BBH +5.0、HumanEval +3.0 | O(1) memory 已接 evolve；30-step PPL +50.12%（变差） |
+| 核心机制 | `looped-latent-attention` · [Looped Latent Attention](2607.15456-looped-latent-attention/README.md) | 纯 LLM：KV 最多 32× 压缩 | 已接 evolve；参数 -42.28%，PPL +5.56% |
+| 核心机制 | `gaugequant` · [GaugeQuant](2607.20757-gaugequant/README.md) | 纯 LLM：LLaMA-2 7B W4A4 PPL 8.22→6.73 | 已接 evolve；本地 W4A4 STE PPL -1.56% |
 | 核心机制 | `nova` · [NOVA](2606.27243-nova/README.md) | 腾讯三个 pCVR 目标 GMV +1.25%/+1.70%/+2.02% | 四级 verification cascade、失败方向和 architecture gradient 实际接入 evolve |
 | 核心机制 | `evorec` · [EvoRec](2606.28368-evorec/README.md) | Revenue +1.85%、CTR +1.02% | 三代模型/方法双轨进化与持久 skill memory |
 | 完整核心链路 | `tokenmixer-large` · [TokenMixer-Large](2602.06563-tokenmixer-large/README.md) | Orders +1.66%、payment GMV +2.98% | mixing/reverting、双 SwiGLU、interval residual 和辅助损失实际训练 |

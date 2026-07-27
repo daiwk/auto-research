@@ -1,0 +1,10 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps_per_variant": 30,
+  "baseline": {"lm_loss": 5.7470526, "perplexity": 313.2660, "parameters": 139584},
+  "method": {"lm_loss": 5.8011940, "perplexity": 330.6942, "parameters": 80576},
+  "relative": {"lm_loss_percent": 0.9421, "perplexity_percent": 5.5634},
+  "kv_cache_compression_x": 2.0,
+  "evolve_architecture": "looped_latent_attention"
+}

@@ -1,0 +1,129 @@
+from __future__ import annotations
+
+import os
+from pathlib import Path
+
+from auto_research.evolution.llm import MicroLLMEvaluator
+from auto_research.evolution.models import Genome
+
+
+PAPERS = {
+    "engram": {
+        "arxiv_id": "2601.07372",
+        "title": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
+        "url": "https://arxiv.org/abs/2601.07372",
+        "organization": "DeepSeek",
+    },
+    "looped-latent-attention": {
+        "arxiv_id": "2607.15456",
+        "title": "Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers",
+        "url": "https://arxiv.org/abs/2607.15456",
+        "organization": "University of Maryland / Meta AI",
+    },
+    "gaugequant": {
+        "arxiv_id": "2607.20757",
+        "title": "GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries",
+        "url": "https://arxiv.org/abs/2607.20757",
+        "organization": "University of Cambridge",
+    },
+}
+
+
+def run_llm_evolve_reproduction(
+    dataset_dir: Path,
+    seed: int,
+    *,
+    key: str,
+    architecture: str,
+    paper_results: dict,
+    scope: str,
+):
+    steps = int(os.environ.get("AUTO_RESEARCH_LLM_P1_STEPS", "30"))
+    evaluator = MicroLLMEvaluator(
+        dataset_dir=dataset_dir,
+        dataset="wikitext-2",
+        steps=steps,
+        seeds=(seed,),
+        allow_network=True,
+        maximum_train_tokens=120_000,
+        maximum_eval_tokens=8_000,
+        vocab_size=512,
+        benchmark_suite="core",
+    )
+    base = Genome(
+        architecture="llama_modern", dimensions=64, layers=2,
+        heads=4, kv_heads=2, sequence_length=64, expansion=3,
+        batch_size=4, learning_rate=6e-4,
+    )
+    method = Genome(**{**base.to_dict(), "architecture": architecture})
+    baseline_trial = evaluator.evaluate(
+        "baseline", 0, None, base, (), "same-budget LLaMA baseline"
+    )
+    method_trial = evaluator.evaluate(
+        "method", 1, "baseline", method, (PAPERS[key]["arxiv_id"],),
+        f"paper mechanism: {architecture}",
+    )
+    baseline = baseline_trial.validation
+    proposed = method_trial.validation
+    return {
+        "paper": PAPERS[key],
+        "dataset": {"name": "WikiText-2", **evaluator.summary()},
+        "setup": {
+            "seed": seed,
+            "steps_per_variant": steps,
+            "dimensions": 64,
+            "layers": 2,
+            "sequence_length": 64,
+            "same_tokens_optimizer_and_budget": True,
+            "evolve_architecture": architecture,
+        },
+        "baseline": {
+            "name": "llama_modern",
+            **baseline,
+            **baseline_trial.training,
+        },
+        "method": {
+            "name": architecture,
+            **proposed,
+            **method_trial.training,
+        },
+        "relative": {
+            "lm_loss_percent": 100.0 * (
+                proposed["lm_loss"] - baseline["lm_loss"]
+            ) / baseline["lm_loss"],
+            "perplexity_percent": 100.0 * (
+                proposed["perplexity"] - baseline["perplexity"]
+            ) / baseline["perplexity"],
+        },
+        "paper_results": paper_results,
+        "scope": scope,
+    }
+
+
+def render(result):
+    base, method = result["baseline"], result["method"]
+    return "\n".join([
+        f"# {result['paper']['title']}",
+        "",
+        f"公开数据：WikiText-2；每组 {result['setup']['steps_per_variant']} steps。",
+        "",
+        "| Variant | LM loss | Perplexity | Parameters |",
+        "|---|---:|---:|---:|",
+        f"| {base['name']} | {base['lm_loss']:.4f} | {base['perplexity']:.2f} | {base['parameters']} |",
+        f"| {method['name']} | {method['lm_loss']:.4f} | {method['perplexity']:.2f} | {method['parameters']} |",
+        "",
+        (
+            "相对同预算 LLaMA baseline："
+            f"LM loss {result['relative']['lm_loss_percent']:+.2f}%，"
+            f"perplexity {result['relative']['perplexity_percent']:+.2f}%。"
+        ),
+        "",
+        "## evolve 接入",
+        "",
+        f"`--model micro-llm` 已可搜索 `{result['setup']['evolve_architecture']}`。",
+        "",
+        "## 复现边界",
+        "",
+        result["scope"],
+        "",
+    ])

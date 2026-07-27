@@ -1,0 +1,10 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps_per_variant": 30,
+  "baseline": {"lm_loss": 5.7470527, "perplexity": 313.2660, "parameters": 139584},
+  "method": {"lm_loss": 5.7313211, "perplexity": 308.3764, "parameters": 139648},
+  "relative": {"lm_loss_percent": -0.2737, "perplexity_percent": -1.5608},
+  "quantization": "W4A4 STE",
+  "evolve_architecture": "gaugequant"
+}

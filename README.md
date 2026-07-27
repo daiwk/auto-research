@@ -21,10 +21,21 @@
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **98/98** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **109/109** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `onemall` | OneMall · Kuaishou | 多场景 prompt、三层 Semantic ID 与跨行为融合；NDCG@10 +4.33% |
+| 核心机制 | `dos` | DOS · Meituan | 协同/语义双流、正交旋转与 residual quantization；NDCG@10 +11.26% |
+| 核心机制 | `mdl` | MDL · ByteDance/Douyin | feature/scenario/task tokenization 与 domain-feature attention；NDCG@10 +13.34%，头部偏置上升 |
+| 核心机制 | `hisac` | HiSAC · Alibaba/Taobao | 层级投票、interest agents 与 soft routing；NDCG@10 +1.31% |
+| 核心机制 | `pinclip` | PinCLIP · Pinterest | 内容—共现图邻居对齐；NDCG@10 -1.41%，未迁移论文收益 |
+| 核心机制 | `pin-scale` | Pin-SCALE · Pinterest | engagement-aware SID codebook；NDCG@10 +13.61%、fresh Hit +50.00% |
+| 核心机制 | `causal-retrieval` | Causal Retrieval · Pinterest | propensity、双 outcome、DR uplift 与 trigger policy；合成 treatment NDCG@10 +80.77% |
+| 核心机制 | `podcast-mtl` | Podcast MTL · Spotify | shared low-rank ads/promotion 多任务模型；NDCG@10 -20.63%，出现 negative transfer |
+| 核心机制 | `engram` | Engram · DeepSeek | O(1) hashed n-gram memory；已接入 LLM evolve，30-step PPL +50.12%（变差） |
+| 核心机制 | `looped-latent-attention` | LLA · UMD/Meta AI | 权重共享 loop 与 K/V latent；已接入 LLM evolve，参数 -42.28%、PPL +5.56% |
+| 核心机制 | `gaugequant` | GaugeQuant · Cambridge | MPS/CPU/CUDA 兼容正交 gauge 与 W4A4 STE；已接入 LLM evolve，PPL -1.56% |
 | 核心机制 | `nova` | NOVA · Tencent | 四级验证、失败方向与 architecture gradient；直接增强 evolve |
 | 核心机制 | `evorec` | EvoRec · Alibaba International | 三代双轨进化和持久 skill memory；直接增强 evolve |
 | 完整核心链路 | `tokenmixer-large` | TokenMixer-Large · ByteDance | mixing/reverting、双 SwiGLU、interval residual 与辅助损失 |
