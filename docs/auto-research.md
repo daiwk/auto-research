@@ -11,8 +11,8 @@ Auto Research 负责把“我想研究什么”转成一条可追踪、可复现
 | LLM post-training | 后训练算法、公开数据和预算 | rollout、偏好/过程 reward、策略更新、KL 和成本报告 | 比较 OPD、RL、偏好优化 |
 | Agent research | Agent 方法、benchmark 和 memory budget | 多 episode 执行、记忆更新、计划/工具复用、轨迹报告 | 研究记忆、规划与工具使用 |
 
-[LLM 后训练完整说明 →](post-training.md) ·
-[Agent 论文研究完整说明 →](agent-research.md)
+[LLM 后训练完整说明 →](post-training/README.md) ·
+[Agent 论文研究完整说明 →](agent-research/README.md)
 
 ## Topic research
 

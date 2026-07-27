@@ -1,0 +1,29 @@
+# Agent 研究方法索引
+
+本页按能力方向维护 Agent 论文实现。每个方法都有独立详情页，避免记忆、规划与工具
+管理的指标和复现边界混在同一段文字中。
+
+## 已实现论文
+
+| 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
+|---|---|---|---|---|
+| 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | National University of Singapore，2026-02-25 | [匿名仓库](https://anonymous.4open.science/r/code-release-456D/) | `u-mem` |
+| 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | Microsoft Research，2025-10-06 | 未发现 | `legomem` |
+| 工具记忆 | [MemTool](2507.21428-memtool/README.md) | PwC CTIO，2025-07-29 | 未发现 | `memtool` |
+
+## 公平基线
+
+`long-context` 保留全部历史和工具描述，不做记忆压缩。它在 mini-suite 上可以保持较高
+成功率，但上下文成本随 episode 数量线性增长，因此同时报告成功率和成本，不能只比较
+单一 success 指标。
+
+## 后续方向
+
+后续论文按“长期记忆、规划与反思、工具学习、多 Agent 协作、环境模型、自我进化”
+归档。一个方法只有在以下内容齐全时才标记为“已实现”：
+
+1. 核心状态更新和决策过程已落到代码；
+2. 至少一个确定性 mini-suite 或公开 benchmark 可运行；
+3. 与公平基线同时报告成功率、成本和方法特有诊断；
+4. 保存逐 episode trace，能够解释复用、升级或淘汰；
+5. 有独立论文页、固定命令和明确的保真边界。

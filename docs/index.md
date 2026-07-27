@@ -64,7 +64,7 @@ hide:
 - TCR thinking checklist 与 EMA residual
 - reward、KL、教师调用和训练轨迹
 
-[进入后训练研究 →](post-training.md)
+[进入后训练研究 →](post-training/README.md)
 
 </div>
 
@@ -80,7 +80,7 @@ hide:
 - MemTool 动态工具上下文
 - EvoMem / PlanBench / ScaleMCP 风格评测
 
-[进入 Agent 论文研究 →](agent-research.md)
+[进入 Agent 论文研究 →](agent-research/README.md)
 
 </div>
 
@@ -107,7 +107,7 @@ flowchart LR
 
 1. **安装项目**：从[项目 README](project-readme.md)创建 Python 环境并安装 `auto-research` 命令。
 
-2. **选择研究方式**：查看[自动研究总览](auto-research.md)，选择 topic loop、模型进化、[LLM 后训练](post-training.md)或[Agent 研究](agent-research.md)。
+2. **选择研究方式**：查看[自动研究总览](auto-research.md)，选择 topic loop、模型进化、[LLM 后训练](post-training/README.md)或[Agent 研究](agent-research/README.md)。
 
 3. **阅读已有结论**：从[复现总览](reproductions/README.md)进入，或按[公司](reproductions/catalog/by-company.md)、[主题](reproductions/catalog/by-topic.md)、[年月](reproductions/catalog/by-month.md)浏览。
 
