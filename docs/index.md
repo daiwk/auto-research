@@ -18,7 +18,7 @@ hide:
 
 </div>
 
-## 两大核心能力
+## 四大核心能力
 
 <div class="ar-capability-grid" markdown>
 
@@ -52,6 +52,38 @@ hide:
 
 </div>
 
+<div class="ar-capability-card ar-card-research" markdown>
+
+### LLM 后训练
+
+统一比较 DPO/GRPO 与最新 OPD、结构化偏好 RL、过程奖励方法。默认可在本地
+快速验证目标函数，也可切换到公开 GSM8K candidate benchmark。
+
+- Lightning OPD 离线教师缓存
+- GPRL 多维偏好与 drift monitor
+- TCR thinking checklist 与 EMA residual
+- reward、KL、教师调用和训练轨迹
+
+[进入后训练研究 →](post-training.md)
+
+</div>
+
+<div class="ar-capability-card ar-card-reproduction" markdown>
+
+### Agent 论文研究
+
+实现 Agent 的记忆、规划、工具使用和自我进化方法，并在确定性 mini-suite
+上比较跨 episode 复用、执行成功率和上下文成本。
+
+- U-Mem 主动知识获取
+- LEGOMem 过程记忆
+- MemTool 动态工具上下文
+- EvoMem / PlanBench / ScaleMCP 风格评测
+
+[进入 Agent 论文研究 →](agent-research.md)
+
+</div>
+
 </div>
 
 ## 自动研究闭环
@@ -75,7 +107,7 @@ flowchart LR
 
 1. **安装项目**：从[项目 README](project-readme.md)创建 Python 环境并安装 `auto-research` 命令。
 
-2. **选择研究方式**：查看[自动研究总览](auto-research.md)，选择通用 topic loop 或模型定向进化。
+2. **选择研究方式**：查看[自动研究总览](auto-research.md)，选择 topic loop、模型进化、[LLM 后训练](post-training.md)或[Agent 研究](agent-research.md)。
 
 3. **阅读已有结论**：从[复现总览](reproductions/README.md)进入，或按[公司](reproductions/catalog/by-company.md)、[主题](reproductions/catalog/by-topic.md)、[年月](reproductions/catalog/by-month.md)浏览。
 
