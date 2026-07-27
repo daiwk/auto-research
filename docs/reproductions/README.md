@@ -18,15 +18,25 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 88 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 98 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 新批次加入 PinEqualizer 与 Gzip-guided Sparse Attention。GRACE 仅有离线结果，未纳入推荐复现；DLMRec、LO-FAR、PRL 同样因缺量化线上证据未纳入。
 
-## 全部复现（88/88）
+## 全部复现（98/98）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `nova` · [NOVA](2606.27243-nova/README.md) | 腾讯三个 pCVR 目标 GMV +1.25%/+1.70%/+2.02% | 四级 verification cascade、失败方向和 architecture gradient 实际接入 evolve |
+| 核心机制 | `evorec` · [EvoRec](2606.28368-evorec/README.md) | Revenue +1.85%、CTR +1.02% | 三代模型/方法双轨进化与持久 skill memory |
+| 完整核心链路 | `tokenmixer-large` · [TokenMixer-Large](2602.06563-tokenmixer-large/README.md) | Orders +1.66%、payment GMV +2.98% | mixing/reverting、双 SwiGLU、interval residual 和辅助损失实际训练 |
+| 核心机制 | `msn` · [MSN](2602.07526-msn/README.md) | Watch time +0.2958%、finish +0.2071% | Product-Key Memory、top-k sparse read 与 gate |
+| 核心机制 | `idproxy` · [IDProxy](2603.01590-idproxy/README.md) | 内容互动 +0.50%、广告 ADVV +1.93% | 对比损失 6.073→5.358；NDCG@10 +5.32% |
+| 核心机制 | `glide` · [GLIDE](2603.17540-glide/README.md) | Non-habitual streaming +5.4%、new-show discovery +14.3% | residual Semantic ID 生成与长短期双 prompt |
+| 核心机制 | `genrec` · [GenRec](2604.14878-genrec/README.md) | Clicks +9.5%、transactions +8.7% | page-wise NTP、Token Merger 与 GRPO-SR/NLL |
+| 核心机制 | `rankgraph2` · [RankGraph-2](2606.18379-rankgraph2/README.md) | CTR +0.96%、CVR +2.75% | 去偏边、多跳 PPR 与两级 residual index；NDCG@10 +109.65% |
+| 核心机制 | `solaris` · [SOLARIS](2604.12110-solaris/README.md) | 全流量 top-line revenue +0.67% | future-pair predictor、异步 latent cache 与 fallback |
+| 核心机制 | `minimax-sparse-attention` · [MiniMax Sparse Attention](2606.13392-minimax-sparse-attention/README.md) | 纯 LLM：1M context attention compute -28.4× | attention pairs -79.95%，PPL +0.41%（变差），未融合 MPS 耗时 +67.58% |
 | 核心机制 | `pinequalizer` · [PinEqualizer](2607.22518-pinequalizer/README.md) | Related Pins ranking architecture：all-fresh +8.63%、underexplored +6.57% | MovieLens-1M fresh NDCG +448.62%、underexplored exposure +471.02%，但整体 NDCG -16.44% |
 | 核心机制 | `gzip-sparse-attention` · [Gzip-guided Sparse Attention](2607.21752-gzip-sparse-attention/README.md) | 纯 LLM：PG-19 BPB 2.34→1.71（对 BigBird） | 同参数 256-context BPB 较 BigBird +1.02%（变差），attention edges -70.82% |
 | 核心机制 | `windowed-mtp` · [Windowed-MTP](2607.21535-windowed-mtp/README.md) | 纯 LLM serving：1M step latency +28.3%–+44.3% | 16K KV read -99.56%、MPS draft latency -50.25%；输出完全一致，acceptance 41.67%→25.00% |

@@ -142,6 +142,8 @@ class EvolutionResult:
     champion_test: dict[str, float] | None = None
     rounds: list[dict[str, Any]] = field(default_factory=list)
     dataset_summary: dict[str, Any] = field(default_factory=dict)
+    verification_records: list[dict[str, Any]] = field(default_factory=list)
+    research_memory: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -154,4 +156,6 @@ class EvolutionResult:
             "champion_test": self.champion_test,
             "rounds": self.rounds,
             "dataset_summary": self.dataset_summary,
+            "verification_records": self.verification_records,
+            "research_memory": self.research_memory,
         }

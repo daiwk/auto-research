@@ -1,0 +1,8 @@
+{
+  "dataset": "MovieLens 100K (260 users / 420 items)",
+  "seed": 42,
+  "baseline": {"hit_at_10": 0.088462, "ndcg_at_10": 0.035398, "head_share_at_10": 0.293846},
+  "method": {"hit_at_10": 0.080769, "ndcg_at_10": 0.034374, "head_share_at_10": 0.249231},
+  "relative": {"hit_at_10_percent": -8.70, "ndcg_at_10_percent": -2.89, "head_share_at_10_percent": -15.18},
+  "semantic_id": {"levels": 3, "codes_per_level": 8}
+}

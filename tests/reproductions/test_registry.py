@@ -95,6 +95,16 @@ def test_builtin_adapters_are_discoverable():
         "downstream-rewards",
         "dynamic-rubric",
         "off-context-grpo",
+        "nova",
+        "evorec",
+        "tokenmixer-large",
+        "msn",
+        "idproxy",
+        "glide",
+        "genrec",
+        "rankgraph2",
+        "solaris",
+        "minimax-sparse-attention",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -117,6 +127,10 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("downstream-rewards").paper.has_online_ab
     assert get_adapter("dynamic-rubric").paper.selection_exception
     assert get_adapter("off-context-grpo").paper.code_url == "https://github.com/AgPriyank/OC-GRPO"
+    assert get_adapter("nova").paper.has_online_ab
+    assert get_adapter("evorec").paper.has_online_ab
+    assert get_adapter("tokenmixer-large").fidelity is ReproductionFidelity.FULL_PIPELINE
+    assert get_adapter("minimax-sparse-attention").paper.code_url == "https://github.com/MiniMax-AI/MSA"
     assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"
