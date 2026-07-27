@@ -2,22 +2,9 @@
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
-## 2026 P1 与 LLM evolve
-
-- 2026-01 · [OneMall](../2601.21770-onemall/README.md)：快手以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
-- 2026-02 · [DOS](../2602.04460-dos/README.md)：美团用协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
-- 2026-02 · [MDL](../2602.07520-mdl/README.md)：字节抖音把 feature、scenario、task 全部 token 化，并以 domain-feature attention 深层共享。
-- 2026-02 · [HiSAC](../2602.21009-hisac/README.md)：阿里淘宝用层级投票生成少量兴趣 agent，再对超长历史做 query-conditioned soft routing。
-- 2026-03 · [PinCLIP](../2603.03544-pinclip/README.md)：Pinterest 以 VLM 图文对齐加 Pin-Board 邻居目标改善 fresh 内容表征。
-- 2026-07 · [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：Pinterest 用 engagement-aware SID、级联 pooling 和多视角对比对齐接入 dense retrieval。
-- 2026-07 · [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：Pinterest 用 doubly-robust uplift 决定是否触发 shopping candidate generator。
-- 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：Spotify 共享广告与推广任务表征，将高资源任务知识迁移给冷启动 podcast。
-- 2026-01 · [Engram](../2601.07372-engram/README.md)：DeepSeek 用确定性 hashed n-gram 查表给 LLM 增加 O(1) 条件记忆。
-- 2026-07 · [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：UMD/Meta AI 在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
-- 2026-07 · [GaugeQuant](../2607.20757-gaugequant/README.md)：Cambridge 在线学习量化友好正交基，以 LogSumExp 抑制 W4A4 outlier。
-
 ## Alibaba
 
+- 2026-02 · [HiSAC](../2602.21009-hisac/README.md)：用层级投票生成少量兴趣 agent，再对超长历史做 query-conditioned soft routing。
 - 2026-06 · [EvoRec](../2606.28368-evorec/README.md)：让模型候选和优化方法双轨进化，并从持久实验记忆中提炼下一代可复用技能。
 
 - 2026-07 · [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 加并行全局/query 价值码生成候选，再以联合 VRM 把相关性与商业价值统一排序。
@@ -51,6 +38,7 @@
 
 ## ByteDance / Douyin / TikTok
 
+- 2026-02 · [MDL](../2602.07520-mdl/README.md)：把 feature、scenario、task 全部 token 化，并以 domain-feature attention 深层共享。
 - 2026-02 · [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：交替执行无参数 token mixing、head-wise/token-wise SwiGLU，并以间隔残差和辅助头稳定深层扩容。
 - 2026-02 · [MSN](../2602.07526-msn/README.md)：用两轴 Product-Key Memory 扩大参数容量，每次只激活 top-k 槽位并与 dense 主干门控融合。
 
@@ -81,6 +69,7 @@
 
 ## Kuaishou
 
+- 2026-01 · [OneMall](../2601.21770-onemall/README.md)：以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
 - 2026-07 · [RECAP](../2607.15730-recap/README.md)：把流式用户画像维护为固定容量语义状态，并用推荐反馈评价器和 GRPO 闭环优化画像更新策略。
 - 2026-07 · [UAME](../2607.17092-uame/README.md)：把满意度分数建模为均值—方差 Gaussian 变量，用多目标冲突产生的不确定性加权 pairwise 排序训练。
 - 2024-03 · [LSVCR](../2403.13574-lsvcr/README.md)：用 LoRA 学习 LLM 偏好，通过 SSC/VCC 双序列目标对齐评论语义和用户行为。
@@ -91,6 +80,7 @@
 
 ## Meituan
 
+- 2026-02 · [DOS](../2602.04460-dos/README.md)：用协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
 - 2026-04 · [MBGR](../2604.02684-mbgr/README.md)：通过 business-aware SID、共享 MoE 和最近未来标签路由，同时学习多个业务域的生成目标。
 - 2026-07 · [NONTP](../2607.12277-nontp/README.md)：在 NTP 上加入未来状态对比学习和跨域 hidden-state pooling，扩大生成式推荐的训练监督覆盖。
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
@@ -98,6 +88,7 @@
 
 ## Meta
 
+- 2026-07 · [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：UMD/Meta AI 在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
 - 2026-06 · [RankGraph-2](../2606.18379-rankgraph2/README.md)：用流行度校正边、离线多跳 PPR 和 residual cluster index 降低工业图召回的在线成本。
 - 2026-04 · [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item 请求，异步预计算 foundation-model latent，并通过 cache/fallback 服务线上排序。
 
@@ -115,6 +106,9 @@
 
 ## Pinterest
 
+- 2026-07 · [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 决定是否触发 shopping candidate generator。
+- 2026-07 · [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：用 engagement-aware SID、级联 pooling 和多视角对比对齐接入 dense retrieval。
+- 2026-03 · [PinCLIP](../2603.03544-pinclip/README.md)：以 VLM 图文对齐加 Pin-Board 邻居目标改善 fresh 内容表征。
 - 2026-07 · [PinEqualizer](../2607.22518-pinequalizer/README.md)：贯通探索 corpus、召回、排序与 utility，通过 engagement dropout、内容交叉、分 cohort calibration 和 UCB 缓解 fresh 内容反馈回路。
 - 2026-07 · [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：离线筛选能预测未来参与度的长期 reward，再以模型无关附加头接入多个推荐 surface。
 - 2026-07 · [MESH](../2607.12392-mesh/README.md)：把 user/item/context 特征放入独立放大塔，再用 residual gated bias correction 保护 fresh 内容信号。
@@ -156,6 +150,7 @@
 
 ## DeepSeek-AI
 
+- 2026-01 · [Engram](../2601.07372-engram/README.md)：用确定性 hashed n-gram 查表给 LLM 增加 O(1) 条件记忆。
 - 2025-12 · [mHC](../2512.24880-mhc/README.md)：将多流 Hyper-Connections 的残差映射投影到双随机矩阵流形，稳定深层信号传播。
 
 ## Airbnb
@@ -169,6 +164,7 @@
 
 ## Spotify
 
+- 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，将高资源任务知识迁移给冷启动 podcast。
 - 2026-03 · [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归检索，并联合近期历史与长期用户 soft prompt 扩大探索。
 
 ## JD.com
@@ -181,6 +177,7 @@
 
 ## 学术与经典基线
 
+- 2026-07 · [GaugeQuant](../2607.20757-gaugequant/README.md)：Cambridge 在线学习量化友好正交基，以 LogSumExp 抑制 W4A4 outlier。
 - 2026-07 · [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：以逐 block gzip 压缩率选择信息密集区，组合 local、literal long-range 和 hybrid heads 构造零参数自适应 mask。
 - 2026-07 · [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入带残差的逐通道短卷积，以极少参数补充注意力的局部归纳偏置。
 - 2026-07 · [PPL-Factory](../2607.18199-ppl-factory/README.md)：用冻结语言模型计算任务相关 NLL，并按数据预算在 easy、middle 和 mid-random 选择规则间切换。

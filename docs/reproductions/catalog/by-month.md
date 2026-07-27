@@ -2,22 +2,12 @@
 
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
-## 2026 P1 与 LLM evolve
-
-- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：2026-07 Pinterest 因果召回，用 DR uplift 控制 shopping trigger。
-- [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：SIGIR 2026 Pinterest SID 工业接入，结合级联 pooling 与参与度对齐。
-- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：2026-07 LLM 架构，以跨 loop latent 压缩 KV cache。
-- [GaugeQuant](../2607.20757-gaugequant/README.md)：2026-07 LLM 量化方法，在训练中学习 W4A4 最优正交基。
-- [PinCLIP](../2603.03544-pinclip/README.md)：2026-03 Pinterest 多模态表征，将 VLM 图文学习与 Pin-Board 邻居对齐结合。
-- [DOS](../2602.04460-dos/README.md)：2026-02 美团生成推荐，用双流正交量化训练 Semantic ID。
-- [MDL](../2602.07520-mdl/README.md)：2026-02 字节多分布推荐，把 feature、scenario 和 task 统一成 token。
-- [HiSAC](../2602.21009-hisac/README.md)：2026-02 阿里长序列模型，以层级投票压缩为可路由兴趣 agent。
-- [Podcast MTL](../2601.02306-podcast-mtl/README.md)：2026-01 Spotify 以多任务共享解决 podcast 广告和推广冷启动。
-- [Engram](../2601.07372-engram/README.md)：2026-01 DeepSeek 为 LLM 加入 O(1) hashed n-gram 条件记忆。
-- [OneMall](../2601.21770-onemall/README.md)：2026-01 快手把多电商场景统一到 Semantic ID 生成推荐家族。
-
 ## 2026-07
 
+- [GaugeQuant](../2607.20757-gaugequant/README.md)：在线学习函数等价、量化友好的正交基，以 LogSumExp 压制 W4A4 激活 outlier。
+- [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：Pinterest 用 engagement-aware Semantic ID、级联 pooling 与多视角对比学习接入 dense retrieval。
+- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
+- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：Pinterest 用 doubly-robust uplift 判断是否触发 shopping candidate generator。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 Pinterest 全漏斗维护 fresh exploration corpus，并以 engagement dropout、内容交叉、分 cohort calibration 和 UCB 减少旧内容偏置。
 - [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：根据逐 block gzip 压缩率动态连接信息密集内容，组合 local、literal long-range 与 hybrid attention heads。
 - [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：将内置 MTP draft 的 KV 读取限制为 attention sink 与最近窗口，完整 target verifier 仍决定每个输出 token。
@@ -83,12 +73,16 @@
 
 ## 2026-03
 
+- [PinCLIP](../2603.03544-pinclip/README.md)：把 VLM 图文对齐与 Pin-Board 共现邻居目标结合，改善 fresh 内容表征。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容表征先对齐到 item-ID 协同空间，再经多层 proxy 与 gate 接入排序。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归生成候选，并同时注入近期历史和长期用户 prompt。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 
 ## 2026-02
 
+- [HiSAC](../2602.21009-hisac/README.md)：用层级投票把超长历史压缩为少量兴趣 agent，再做 query-conditioned soft routing。
+- [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task 统一 token 化，以 domain-feature attention 支持多分布推荐。
+- [DOS](../2602.04460-dos/README.md)：用协同/语义双流和正交 residual quantization 训练生成推荐 Semantic ID。
 - [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：以 token mixing/reverting、head/token SwiGLU、间隔残差和辅助监督扩展排序模型。
 - [MSN](../2602.07526-msn/README.md)：用 Product-Key Memory 增加容量，只读取 top-k 槽位并门控融合 dense 主干。
 - [GRC](../2602.23639-grc/README.md)：让生成式推荐器结构化地反思首错位置和语义属性，再纠正 SID 轨迹。
@@ -100,6 +94,9 @@
 
 ## 2026-01
 
+- [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、层级 Semantic ID 和跨行为融合统一多个电商推荐场景。
+- [Engram](../2601.07372-engram/README.md)：用确定性 hashed n-gram 查表为 LLM 增加 O(1) 条件记忆。
+- [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，改善 podcast 冷启动。
 - [HyFormer](../2601.12681-hyformer/README.md)：联合编码用户序列与搜索 query，通过 query decoding 和 boosting 强化搜索推荐信号。
 - [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
 

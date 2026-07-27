@@ -60,6 +60,63 @@ def test_catalog_entries_are_one_paper_per_line_with_chinese_summaries():
             )
 
 
+def test_catalogs_use_semantic_sections_instead_of_release_batch_names():
+    catalog_dir = DOCS / "catalog"
+    expected_sections = {
+        "by-month.md": {
+            "causal-retrieval": "2026-07",
+            "pin-scale": "2026-07",
+            "looped-latent-attention": "2026-07",
+            "gaugequant": "2026-07",
+            "pinclip": "2026-03",
+            "dos": "2026-02",
+            "mdl": "2026-02",
+            "hisac": "2026-02",
+            "podcast-mtl": "2026-01",
+            "engram": "2026-01",
+            "onemall": "2026-01",
+        },
+        "by-company.md": {
+            "causal-retrieval": "Pinterest",
+            "pin-scale": "Pinterest",
+            "looped-latent-attention": "Meta",
+            "gaugequant": "学术与经典基线",
+            "pinclip": "Pinterest",
+            "dos": "Meituan",
+            "mdl": "ByteDance / Douyin / TikTok",
+            "hisac": "Alibaba",
+            "podcast-mtl": "Spotify",
+            "engram": "DeepSeek-AI",
+            "onemall": "Kuaishou",
+        },
+        "by-topic.md": {
+            "causal-retrieval": "因果推断与长期价值",
+            "pin-scale": "冷启动与语义-行为对齐",
+            "looped-latent-attention": "纯 LLM：架构、预训练与条件记忆",
+            "gaugequant": "纯 LLM：架构、预训练与条件记忆",
+            "pinclip": "冷启动与语义-行为对齐",
+            "dos": "生成式召回与端到端推荐",
+            "mdl": "排序网络与长序列",
+            "hisac": "排序网络与长序列",
+            "podcast-mtl": "冷启动与语义-行为对齐",
+            "engram": "纯 LLM：架构、预训练与条件记忆",
+            "onemall": "生成式召回与端到端推荐",
+        },
+    }
+    for name, assignments in expected_sections.items():
+        text = (catalog_dir / name).read_text(encoding="utf-8")
+        assert "2026 P1 与 LLM evolve" not in text
+        current_section = None
+        located = {}
+        for line in text.splitlines():
+            if line.startswith("## "):
+                current_section = line.removeprefix("## ")
+            for adapter_key in assignments:
+                if f"-{adapter_key}/README.md)" in line:
+                    located[adapter_key] = current_section
+        assert located == assignments
+
+
 def test_every_paper_readme_has_the_complete_reproduction_contract():
     required_headings = (
         "## 原始论文总结",

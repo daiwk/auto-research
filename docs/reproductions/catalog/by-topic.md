@@ -2,20 +2,6 @@
 
 同一篇论文可以出现在多个主题下；每次出现都独占一行，并说明它与该主题相关的主要方法。
 
-## 2026 P1 与 LLM evolve
-
-- [OneMall](../2601.21770-onemall/README.md)：统一多场景生成推荐，以场景 prompt、Semantic ID 和跨行为融合生成商品。
-- [DOS](../2602.04460-dos/README.md)：生成推荐的双流正交 Semantic ID，减少内容 codebook 与协同生成空间偏差。
-- [MDL](../2602.07520-mdl/README.md)：多场景多任务 tokenization，让领域和任务信息参与每层 feature interaction。
-- [HiSAC](../2602.21009-hisac/README.md)：长序列稀疏压缩，通过层级兴趣 agent 保留粗粒度与长尾行为。
-- [PinCLIP](../2603.03544-pinclip/README.md)：多模态推荐基础表征，把图文 contrastive learning 与推荐图邻居对齐结合。
-- [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以参与度加权 residual codebook 把 Semantic ID 系统接入判别式召回。
-- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：候选生成因果优化，用 DR uplift 在用户收益和召回成本之间选 trigger。
-- [Podcast MTL](../2601.02306-podcast-mtl/README.md)：冷启动多任务迁移，共享 organic stream 与 ads/promotion 表征。
-- [Engram](../2601.07372-engram/README.md)：LLM 条件记忆，用固定复杂度 n-gram lookup 补充条件计算稀疏。
-- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：LLM KV cache 压缩，在 looped Transformer 间共享低秩 latent。
-- [GaugeQuant](../2607.20757-gaugequant/README.md)：LLM 训练与量化联合优化，学习函数等价但更适合 W4A4 的 gauge basis。
-
 ## LLM / Foundation model + Recommendation
 
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态 LLM 内容表征对齐到协同 item-ID 空间，再通过多层 proxy 和 gate 注入工业排序。
@@ -54,6 +40,9 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [GaugeQuant](../2607.20757-gaugequant/README.md)：在线学习函数等价、量化友好的正交基，以 LogSumExp 抑制 W4A4 outlier。
+- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：在 looped Transformer 间共享低秩 K/V latent，压缩跨 loop cache。
+- [Engram](../2601.07372-engram/README.md)：用固定复杂度 hashed n-gram lookup 为 LLM 增加条件记忆。
 - [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：按 GQA 组用轻量 index branch 选择 top-k block，再执行训练推理一致的精确块稀疏注意力。
 - [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：用 gzip 压缩率识别 literal blocks，并将 attention heads 分为 local、literal long-range 与 hybrid 三组，无需学习额外路由参数。
 - [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：仅窗口化 speculative draft 的 KV read，保留完整 target verification，从而降低长上下文 draft tax 而不改变输出分布。
@@ -67,6 +56,8 @@
 
 ## 生成式召回与端到端推荐
 
+- [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、Semantic ID 和跨行为融合统一多个电商生成推荐场景。
+- [DOS](../2602.04460-dos/README.md)：以协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 与长短期双 prompt 直接生成召回候选，强化非习惯内容探索。
 - [GenRec](../2604.14878-genrec/README.md)：把整页作为 NTP 目标，并以 GRPO-SR 和 NLL 约束联合优化 page policy。
 - [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
@@ -97,6 +88,8 @@
 
 ## 排序网络与长序列
 
+- [HiSAC](../2602.21009-hisac/README.md)：用层级投票压缩超长历史，再以 query-conditioned soft routing 选择兴趣 agent。
+- [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task token 化，让领域与任务参与每层特征交互。
 - [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：用 mixing/reverting、双粒度 SwiGLU、interval residual 和辅助监督扩展工业精排。
 - [MSN](../2602.07526-msn/README.md)：把大容量参数放入稀疏 Product-Key Memory，只激活 top-k 槽位控制计算。
 - [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶交互和门控 HSTU 序列状态，避免双分支只在末端融合。
@@ -120,6 +113,9 @@
 
 ## 冷启动与语义-行为对齐
 
+- [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享 organic stream 与 ads/promotion 表征，把高资源任务知识迁移到冷启动 podcast。
+- [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以 engagement-aware residual codebook 和多视角对齐把 Semantic ID 接入判别式召回。
+- [PinCLIP](../2603.03544-pinclip/README.md)：把图文 contrastive learning 与 Pin-Board 共现邻居对齐，改善 fresh 内容表示。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 corpus、召回、排序和 utility 全漏斗识别 fresh 内容瓶颈，以内容特征、engagement dropout、cohort calibration 和 UCB 打破曝光反馈回路。
 - [Proximity Features](../2607.12246-proximity-features/README.md)：以自适应群体地理 key 聚合行为，为匿名和首次访问用户提供冷启动特征。
 - [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动物品进行序列预训练。
@@ -147,6 +143,12 @@
 - [LEADRE](../2411.13789-leadre/README.md)：使用 DPO 对齐 Semantic ID 生成与广告转化偏好。
 - [GR4AD](../2602.22732-gr4ad/README.md)：通过 RSPO 优化可变长度广告生成，并结合 LazyAR 降低推理成本。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把源域 teacher 知识蒸馏到目标域，减少跨域冷启动监督需求。
+
+## 因果推断与长期价值
+
+- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 估计触发 shopping candidate generator 的增量收益，并同时考虑召回成本。
+- [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选能预测未来参与度的长期 reward，再以独立 reward heads 注入多个推荐 surface。
+- [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。
 
 ## Serving / efficiency
 
