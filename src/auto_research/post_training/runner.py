@@ -49,6 +49,8 @@ class PostTrainingRunner:
             "teacher_prefill_calls": state.teacher_calls,
             "online_teacher_calls": 0,
             "drift_events": state.drift_events,
+            "critic_updates": state.critic_updates,
+            "rollout_policy_refreshes": state.ppo_updates // 16,
             "last_diagnostics": last_diagnostics,
             "fidelity": "mechanism reproduction on a candidate-policy model",
         }

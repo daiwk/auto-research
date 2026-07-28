@@ -5,7 +5,15 @@ from pathlib import Path
 from typing import Any
 
 
-METHODS = ("long-context", "u-mem", "legomem", "memtool")
+METHODS = (
+    "long-context",
+    "react",
+    "reflexion",
+    "voyager",
+    "u-mem",
+    "legomem",
+    "memtool",
+)
 BENCHMARKS = ("evomem-mini", "planbench-mini", "scalemcp-mini")
 
 

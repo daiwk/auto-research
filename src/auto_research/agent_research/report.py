@@ -8,6 +8,9 @@ PAPERS = {
     "legomem": ("LEGOMem", "https://arxiv.org/abs/2510.04851"),
     "memtool": ("MemTool", "https://arxiv.org/abs/2507.21428"),
     "long-context": ("Long-context baseline", "https://arxiv.org/abs/2605.18421"),
+    "react": ("ReAct", "https://arxiv.org/abs/2210.03629"),
+    "reflexion": ("Reflexion", "https://arxiv.org/abs/2303.11366"),
+    "voyager": ("Voyager", "https://arxiv.org/abs/2305.16291"),
 }
 
 
@@ -44,5 +47,9 @@ def render_report(result: AgentResearchResult) -> str:
 
 - tool evictions：{result.diagnostics['tool_evictions']}
 - reused plans：{result.diagnostics['reused_plans']}
+- reasoning steps：{result.diagnostics['reasoning_steps']}
+- reflections：{result.diagnostics['reflections']}
+- skills created / reused：{result.diagnostics['skills_created']} / {result.diagnostics['skills_reused']}
+- verification retries：{result.diagnostics['verification_retries']}
 - fidelity：{result.diagnostics['fidelity']}
 """

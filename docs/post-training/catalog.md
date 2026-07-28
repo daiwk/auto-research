@@ -7,6 +7,9 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 经典 RLHF | [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md) | OpenAI，2022-03-04 | [部分开源](https://github.com/openai/following-instructions-human-feedback) | `ppo-rlhf` |
+| 经典 RLHF | [RLOO](2402.14740-rloo/README.md) | Cohere For AI / Cohere，2024-02-22 | 未发布独立仓库 | `rloo` |
+| 经典 RLHF | [ReMax](2310.10505-remax/README.md) | CUHK-Shenzhen / SRIBD / Nanjing University，2023-10-16 | [已开源](https://github.com/liziniu/ReMax) | `remax` |
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab / Jet AI，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |
 | 多目标 RL | [GPRL](2605.18721-gprl/README.md) | Stanford / Oklahoma，2026-05-18 | 未发现 | `gprl` |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | 作者团队，2026-07-22 | 未发现 | `tcr` |

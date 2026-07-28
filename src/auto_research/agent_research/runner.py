@@ -52,6 +52,12 @@ class AgentResearchRunner:
             "memory_size": config.memory_size,
             "tool_evictions": agent.tool_evictions,
             "reused_plans": agent.reused_plans,
+            "reasoning_steps": agent.reasoning_steps,
+            "actions": agent.actions,
+            "reflections": agent.reflections,
+            "skills_created": agent.skills_created,
+            "skills_reused": agent.skills_reused,
+            "verification_retries": agent.verification_retries,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

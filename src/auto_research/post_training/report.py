@@ -9,6 +9,9 @@ PAPERS = {
     "tcr": ("TCR", "https://arxiv.org/abs/2607.19824"),
     "dpo": ("DPO baseline", "https://arxiv.org/abs/2305.18290"),
     "grpo": ("GRPO baseline", "https://arxiv.org/abs/2402.03300"),
+    "ppo-rlhf": ("InstructGPT / PPO-RLHF", "https://arxiv.org/abs/2203.02155"),
+    "rloo": ("RLOO", "https://arxiv.org/abs/2402.14740"),
+    "remax": ("ReMax", "https://arxiv.org/abs/2310.10505"),
 }
 
 

@@ -29,6 +29,9 @@
 | 未训练策略 | 0.1641 | 0.3126 | 0.0000 |
 | DPO | 0.8047 | 0.8347 | 0.0683 |
 | GRPO | 0.8047 | 0.8348 | 1.1397 |
+| PPO-RLHF | 0.8125 | 0.8335 | 0.8731 |
+| RLOO | 0.8281 | 0.8509 | 0.5707 |
+| ReMax | 0.7031 | 0.7554 | 0.7939 |
 | Lightning OPD | **0.8359** | **0.8561** | 0.8269 |
 | GPRL | 0.3672 | 0.5002 | 1.1022 |
 | TCR | **0.8359** | 0.8560 | 0.5629 |
@@ -38,11 +41,13 @@ GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后�
 
 稳定数据：
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
+经典 RL 结果：
+[`classic-post-training-gsm8k-seed42.json`](../experiments/classic-post-training-gsm8k-seed42.json)。
 
 ## 运行与产物
 
 ```bash
-auto-research post-train --algorithm lightning-opd \
+auto-research post-train --algorithm rloo \
   --dataset gsm8k-candidate --maximum-examples 512 \
   --steps 300 --seed 42
 ```

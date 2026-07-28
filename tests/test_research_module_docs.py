@@ -7,11 +7,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 MODULES = {
     "post-training": {
+        "ppo-rlhf": "2203.02155-ppo-rlhf",
+        "rloo": "2402.14740-rloo",
+        "remax": "2310.10505-remax",
         "lightning-opd": "2604.13010-lightning-opd",
         "gprl": "2605.18721-gprl",
         "tcr": "2607.19824-tcr",
     },
     "agent-research": {
+        "react": "2210.03629-react",
+        "reflexion": "2303.11366-reflexion",
+        "voyager": "2305.16291-voyager",
         "u-mem": "2602.22406-u-mem",
         "legomem": "2510.04851-legomem",
         "memtool": "2507.21428-memtool",

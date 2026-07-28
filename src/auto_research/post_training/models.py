@@ -5,7 +5,16 @@ from pathlib import Path
 from typing import Any
 
 
-ALGORITHMS = ("dpo", "grpo", "lightning-opd", "gprl", "tcr")
+ALGORITHMS = (
+    "dpo",
+    "grpo",
+    "ppo-rlhf",
+    "rloo",
+    "remax",
+    "lightning-opd",
+    "gprl",
+    "tcr",
+)
 
 
 @dataclass(frozen=True)

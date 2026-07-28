@@ -29,15 +29,20 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | U-Mem · EvoMem mini | 1.0000 | 3.0500 | memory size 12 |
 | LEGOMem · PlanBench mini | 1.0000 | 1.1200 | reused plans 108 |
 | MemTool · ScaleMCP mini | 1.0000 | 1.9812 | tool evictions 200 |
+| ReAct · ScaleMCP mini | 1.0000 | 3.0000 | reasoning/actions 360/360 |
+| Reflexion · PlanBench mini | 0.9000 | 1.1000 | reflections 12 |
+| Voyager · PlanBench mini | 1.0000 | 1.1200 | skills created/reused 12/108 |
 
 稳定数据：
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
+经典方法结果：
+[`classic-agent-mini-suites-seed42.json`](../experiments/classic-agent-mini-suites-seed42.json)。
 
 ## 运行与产物
 
 ```bash
-auto-research agent-eval --method u-mem \
-  --benchmark evomem-mini --episodes 120 --seed 42
+auto-research agent-eval --method voyager \
+  --benchmark planbench-mini --episodes 120 --seed 42
 ```
 
 产物写入 `runs/agent-research/<method>-<benchmark>-seed<seed>/`，包括逐 episode
