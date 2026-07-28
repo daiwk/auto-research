@@ -26,6 +26,9 @@ MODULES = {
         "constitutional-ai": "2212.08073-constitutional-ai",
         "rrhf": "2304.05302-rrhf",
         "raft": "2304.06767-raft",
+        "slic-hf": "2305.10425-slic-hf",
+        "steerlm": "2310.05344-steerlm",
+        "spin": "2401.01335-spin",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -50,6 +53,10 @@ MODULES = {
         "hugginggpt": "2303.17580-hugginggpt",
         "generative-agents": "2304.03442-generative-agents",
         "memgpt": "2310.08560-memgpt",
+        "webgpt": "2112.09332-webgpt",
+        "saycan": "2204.01691-saycan",
+        "pal": "2211.10435-pal",
+        "art": "2303.09014-art",
     },
 }
 

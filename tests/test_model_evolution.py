@@ -115,14 +115,21 @@ def test_post_training_and_agent_discovery_maps_only_audited_operators():
     assert post_map["2212.08073"] == "constitutional-ai"
     assert post_map["2304.05302"] == "rrhf"
     assert post_map["2304.06767"] == "raft"
+    assert post_map["2305.10425"] == "slic-hf"
+    assert post_map["2310.05344"] == "steerlm"
+    assert post_map["2401.01335"] == "spin"
     assert "grpo" in allowed_architectures("post-training", "重点比较 GRPO", post)
 
-    agent = discover_papers("memory planning tools reflection", 4, False, track="agent")
+    agent = discover_papers("memory planning tools reflection", 8, False, track="agent")
     agent_map = {paper.arxiv_id: paper.architecture for paper in agent}
     assert agent_map["2210.03629"] == "planner:react"
     assert agent_map["2602.22406"] == "memory:u-mem"
     assert agent_map["2205.00445"] == "tool:mrkl"
     assert agent_map["2303.17580"] == "planner:hugginggpt"
+    assert agent_map["2112.09332"] == "tool:webgpt"
+    assert agent_map["2204.01691"] == "planner:saycan"
+    assert agent_map["2211.10435"] == "tool:pal"
+    assert agent_map["2303.09014"] == "planner:art"
     assert agent_map["2304.03442"] == "memory:generative-agents"
     assert agent_map["2310.08560"] == "memory:memgpt"
     operators = allowed_architectures("agent", "组合记忆、规划、工具与反思", agent)

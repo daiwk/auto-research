@@ -37,6 +37,10 @@
 - [HuggingGPT](2303.17580-hugginggpt/README.md)：规划、专家模型匹配、依赖执行和汇总。
 - [Generative Agents](2304.03442-generative-agents/README.md)：记忆流打分、反思与计划。
 - [MemGPT](2310.08560-memgpt/README.md)：core/working/archival 虚拟上下文与 interrupt。
+- [WebGPT](2112.09332-webgpt/README.md)：浏览轨迹、引用约束和 reward-model 拒绝采样。
+- [SayCan](2204.01691-saycan/README.md)：语言相关性乘以技能 affordance。
+- [PAL](2211.10435-pal/README.md)：生成程序并交由确定性解释器执行。
+- [ART](2303.09014-art/README.md)：检索任务示例，在工具调用处暂停与恢复。
 
 ## 研究闭环
 
@@ -81,6 +85,10 @@ flowchart LR
 | 专家模型编排 | [HuggingGPT](2303.17580-hugginggpt/README.md) | planning、model selection、DAG execution | PlanBench mini | 机制复现 |
 | 记忆与反思 | [Generative Agents](2304.03442-generative-agents/README.md) | recency/importance/relevance、reflection、plan | EvoMem mini | 机制复现 |
 | 虚拟上下文 | [MemGPT](2310.08560-memgpt/README.md) | tiered memory、page-in/out、interrupt | EvoMem mini | 机制复现 |
+| 浏览问答 | [WebGPT](2112.09332-webgpt/README.md) | browser trajectory、citation、rejection sampling | ScaleMCP mini | 机制复现 |
+| 具身规划 | [SayCan](2204.01691-saycan/README.md) | language relevance × affordance | PlanBench mini | 机制复现 |
+| 程序推理 | [PAL](2211.10435-pal/README.md) | program generation + symbolic runtime | ScaleMCP mini | 机制复现 |
+| 自动工具推理 | [ART](2303.09014-art/README.md) | demo retrieval、pause/tool/resume、library update | PlanBench mini | 机制复现 |
 
 ## 本地实验快照
 
@@ -112,6 +120,10 @@ flowchart LR
 | HuggingGPT · PlanBench mini | 1.0000 | 2.3500 | 360 model matches；240 dependency edges |
 | Generative Agents · EvoMem mini | 1.0000 | 1.7900 | 354 memories；30 reflections |
 | MemGPT · EvoMem mini | 1.0000 | **0.9200** | 108 writes；96 page-ins；108 interrupts |
+| WebGPT · ScaleMCP mini | 1.0000 | 3.0000 | 600 references；240 candidates |
+| SayCan · PlanBench mini | 1.0000 | 3.3750 | 1350 affordance checks |
+| PAL · ScaleMCP mini | 1.0000 | 1.4000 | 120 programs / interpreter calls |
+| ART · PlanBench mini | 1.0000 | 1.5500 | 108 retrievals；360 pauses |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -121,6 +133,8 @@ flowchart LR
 [`agent-code-sandbox-seed42.json`](../experiments/agent-code-sandbox-seed42.json)。
 本批经典缺口指标见
 [`p0-missing-agent-mini-suites-seed42.json`](../experiments/p0-missing-agent-mini-suites-seed42.json)。
+P1 候选指标见
+[`p1-agent-candidates-mini-suites-seed42.json`](../experiments/p1-agent-candidates-mini-suites-seed42.json)。
 
 ## 一键运行
 

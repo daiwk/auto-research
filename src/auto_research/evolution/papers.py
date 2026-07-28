@@ -63,6 +63,9 @@ POST_TRAINING_MUTATIONS = {
     "2212.08073": ("constitutional-ai", "Constitutional AI 先自我批评/修订，再以 AI 偏好执行 RLAIF"),
     "2304.05302": ("rrhf", "RRHF 让响应 log-probability 排序对齐 reward 排序，并保留 best-response SFT"),
     "2304.06767": ("raft", "RAFT 从当前策略采样多个响应、按 reward 选优，再迭代监督微调"),
+    "2305.10425": ("slic-hf", "SLiC-HF 用带 margin 的序列概率校准偏好顺序，并以 SFT target 交叉熵防止漂移"),
+    "2310.05344": ("steerlm", "SteerLM 将多维质量属性显式标注并作为条件执行可控 SFT"),
+    "2401.01335": ("spin", "SPIN 让当前策略区分人类示范与上一轮策略自生成响应，逐轮刷新对手"),
 }
 
 AGENT_MUTATIONS = {
@@ -85,6 +88,10 @@ AGENT_MUTATIONS = {
     "2303.17580": ("planner:hugginggpt", "HuggingGPT 规划子任务、按能力描述选模型、依赖执行并汇总"),
     "2304.03442": ("memory:generative-agents", "Generative Agents 以相关性、近期性、重要性检索记忆并形成反思"),
     "2310.08560": ("memory:memgpt", "MemGPT 以 core/working/archival 分层和 interrupt 管理虚拟上下文"),
+    "2112.09332": ("tool:webgpt", "WebGPT 在文本浏览器中搜索、导航、收集引用，并用 reward model 做轨迹拒绝采样"),
+    "2204.01691": ("planner:saycan", "SayCan 将语言模型给出的技能相关性与 value-function affordance 相乘"),
+    "2211.10435": ("tool:pal", "PAL 让语言模型生成可执行程序，并把精确求解交给符号解释器"),
+    "2303.09014": ("planner:art", "ART 从任务库检索多步示例，在工具调用处暂停生成并注入执行结果"),
 }
 
 FALLBACK_PAPERS = (
@@ -147,6 +154,9 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("Constitutional AI: Harmlessness from AI Feedback", "Self-critique and revision followed by reinforcement learning from AI preferences.", [], "2022-12-15", "https://arxiv.org/abs/2212.08073", "2212.08073"),
     Paper("RRHF: Rank Responses to Align Language Models with Human Feedback without tears", "Aligns response likelihood ordering with reward ordering and fine-tunes the best response.", [], "2023-04-11", "https://arxiv.org/abs/2304.05302", "2304.05302"),
     Paper("RAFT: Reward rAnked FineTuning for Generative Foundation Model Alignment", "Samples responses, keeps reward-ranked winners, and iteratively fine-tunes on them.", [], "2023-04-13", "https://arxiv.org/abs/2304.06767", "2304.06767"),
+    Paper("SLiC-HF: Sequence Likelihood Calibration with Human Feedback", "Calibrates preferred and rejected sequence likelihoods with a margin plus SFT regularization.", [], "2023-05-17", "https://arxiv.org/abs/2305.10425", "2305.10425"),
+    Paper("SteerLM: Attribute Conditioned SFT as an (User-Steerable) Alternative to RLHF", "Annotates responses along multiple quality axes and conditions SFT and inference on requested attributes.", [], "2023-10-09", "https://arxiv.org/abs/2310.05344", "2310.05344"),
+    Paper("Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models", "Uses previous-policy generations as self-play negatives against human demonstrations.", [], "2024-01-02", "https://arxiv.org/abs/2401.01335", "2401.01335"),
 )
 
 AGENT_FALLBACK_PAPERS = (
@@ -169,6 +179,10 @@ AGENT_FALLBACK_PAPERS = (
     Paper("HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face", "Uses an LLM controller to plan, select expert models, execute dependencies, and summarize.", [], "2023-03-30", "https://arxiv.org/abs/2303.17580", "2303.17580"),
     Paper("Generative Agents: Interactive Simulacra of Human Behavior", "Combines a scored memory stream, reflection, and planning for persistent agents.", [], "2023-04-07", "https://arxiv.org/abs/2304.03442", "2304.03442"),
     Paper("MemGPT: Towards LLMs as Operating Systems", "Manages virtual context through working and archival memory tiers plus interrupts.", [], "2023-10-12", "https://arxiv.org/abs/2310.08560", "2310.08560"),
+    Paper("WebGPT: Browser-assisted question-answering with human feedback", "Browses, collects references, and uses a learned reward model for rejection sampling.", [], "2021-12-17", "https://arxiv.org/abs/2112.09332", "2112.09332"),
+    Paper("Do As I Can, Not As I Say: Grounding Language in Robotic Affordances", "Multiplies language-model skill relevance by value-function affordance.", [], "2022-04-04", "https://arxiv.org/abs/2204.01691", "2204.01691"),
+    Paper("PAL: Program-aided Language Models", "Generates executable reasoning programs and delegates exact computation to an interpreter.", [], "2022-11-18", "https://arxiv.org/abs/2211.10435", "2211.10435"),
+    Paper("ART: Automatic multi-step reasoning and tool-use for large language models", "Retrieves task-library demonstrations and pauses generation around external tool calls.", [], "2023-03-16", "https://arxiv.org/abs/2303.09014", "2303.09014"),
 )
 
 

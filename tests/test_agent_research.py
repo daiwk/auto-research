@@ -13,6 +13,7 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "self-refine", "rewoo", "autogen", "pearl",
         "u-mem", "legomem", "memtool",
         "mrkl", "hugginggpt", "generative-agents", "memgpt",
+        "webgpt", "saycan", "pal", "art",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -204,6 +205,47 @@ def test_missing_classic_agent_mechanisms_are_observable(
             benchmark=benchmark,
             episodes=36,
             memory_size=8,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        (
+            "webgpt",
+            "scalemcp-mini",
+            ("references_collected", "rejection_candidates"),
+        ),
+        (
+            "saycan",
+            "planbench-mini",
+            ("affordance_checks", "infeasible_skills_filtered"),
+        ),
+        ("pal", "scalemcp-mini", ("programs_generated", "interpreter_calls")),
+        (
+            "art",
+            "planbench-mini",
+            ("task_examples_retrieved", "generation_pauses", "task_library_updates"),
+        ),
+    ],
+)
+def test_p1_agent_candidate_mechanisms_are_observable(
+    tmp_path: Path,
+    method: str,
+    benchmark: str,
+    diagnostics: tuple[str, ...],
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark=benchmark,
+            episodes=36,
+            memory_size=12,
             output_dir=tmp_path,
         )
     ).run()

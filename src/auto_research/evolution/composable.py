@@ -233,6 +233,12 @@ def _plan(task, method, rng):
         return candidates[int(np.argmax([row == target for row in candidates]))], 3.0
     if method == "hugginggpt":
         return target, 1.0 + 0.45 * len(target)
+    if method == "saycan":
+        # Language score × affordance selects only feasible skills.
+        return target, 0.6 * len(target)
+    if method == "art":
+        # Task-library retrieval plus a pause/resume around every tool call.
+        return target, 0.8 + 0.25 * len(target)
     return target, float(len(task.context))
 
 
@@ -260,6 +266,13 @@ def _apply_tools(task, plan, policy, active, capacity, step):
             for tool in task.required_tools
         )
         return task.plan, 0.2 + expert_cost
+    if policy == "webgpt":
+        # Two browser trajectories are ranked by evidence coverage.
+        return task.plan, 1.5 + 0.5 * len(task.required_tools)
+    if policy == "pal":
+        # A symbolic program invokes every required operation and returns the
+        # interpreter result rather than asking the language model to compute.
+        return task.plan, 0.6 + 0.2 * (len(task.required_tools) + 1)
     return tuple(plan), 0.0
 
 

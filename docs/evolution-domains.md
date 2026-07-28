@@ -33,8 +33,8 @@ flowchart LR
 |---|---|---|---|
 | 搜广推与 LLM 应用 | RankMixer、HyFormer；MovieLens 与公共推荐评测 | LONGER、UniMixer、RankMixer 等结构及工业论文 adapter | **可运行** |
 | 纯 LLM | micro‑LLM；架构 → 数据配方 → SFT/后训练的分轮搜索 | 纯 LLM 架构、Lightning OPD、GPRL、TCR 等 | **可运行** |
-| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | PPO/DPO/GRPO、Constitutional AI、RRHF、RAFT、LUSPO/CoBA-RL、OPD/GPRL/TCR | **可运行** |
-| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct/LATS、MRKL/HuggingGPT、Generative Agents/MemGPT、MetaGPT/CRITIC、软件 Agent | **可运行** |
+| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | PPO/DPO/GRPO、SLiC-HF/SteerLM/SPIN、Constitutional AI、RRHF、RAFT、LUSPO/CoBA-RL、OPD/GPRL/TCR | **可运行** |
+| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct/LATS/ART/SayCan、WebGPT/PAL/MRKL、HuggingGPT、Generative Agents/MemGPT、MetaGPT/CRITIC、软件 Agent | **可运行** |
 
 !!! note "Agent 状态"
     Agent evolve 可使用确定性 episode evaluator，也可在 `swebench-local` 创建临时

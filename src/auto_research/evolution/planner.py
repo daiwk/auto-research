@@ -13,6 +13,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "dapo", "gspo", "lightning-opd", "gprl", "tcr",
             "ipo", "simpo", "luspo", "coba-rl",
             "constitutional-ai", "rrhf", "raft",
+            "slic-hf", "steerlm", "spin",
         ]
         mapped = [paper.architecture for paper in papers if paper.architecture in installed]
         requested = [
@@ -55,6 +56,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "critic:critic", "critic:agent-lightning",
             "tool:mrkl", "planner:hugginggpt",
             "memory:generative-agents", "memory:memgpt",
+            "tool:webgpt", "planner:saycan", "tool:pal", "planner:art",
         ]
     if model == "micro-llm":
         values = [

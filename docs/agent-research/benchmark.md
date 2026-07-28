@@ -46,6 +46,10 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | HuggingGPT · PlanBench mini | 1.0000 | 2.3500 | model matches/edges 360/240 |
 | Generative Agents · EvoMem mini | 1.0000 | 1.7900 | retrieved/reflections 354/30 |
 | MemGPT · EvoMem mini | 1.0000 | 0.9200 | writes/page-ins/interrupts 108/96/108 |
+| WebGPT · ScaleMCP mini | 1.0000 | 3.0000 | references/candidates 600/240 |
+| SayCan · PlanBench mini | 1.0000 | 3.3750 | checks/filtered 1350/790 |
+| PAL · ScaleMCP mini | 1.0000 | 1.4000 | programs/interpreter calls 120/120 |
+| ART · PlanBench mini | 1.0000 | 1.5500 | retrievals/pauses/updates 108/360/12 |
 
 稳定数据：
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -55,6 +59,8 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 [`agent-code-sandbox-seed42.json`](../experiments/agent-code-sandbox-seed42.json)。
 本批经典缺口：
 [`p0-missing-agent-mini-suites-seed42.json`](../experiments/p0-missing-agent-mini-suites-seed42.json)。
+P1 候选：
+[`p1-agent-candidates-mini-suites-seed42.json`](../experiments/p1-agent-candidates-mini-suites-seed42.json)。
 
 ## 运行与产物
 

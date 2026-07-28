@@ -29,6 +29,10 @@
 | 专家模型编排 | [HuggingGPT](2303.17580-hugginggpt/README.md) | Zhejiang / Microsoft Research Asia，2023-03-30 | [已开源](https://github.com/microsoft/JARVIS) | `hugginggpt` |
 | 记忆与反思 | [Generative Agents](2304.03442-generative-agents/README.md) | Stanford / Google Research，2023-04-07 | [已开源](https://github.com/joonspk-research/generative_agents) | `generative-agents` |
 | 虚拟上下文 | [MemGPT](2310.08560-memgpt/README.md) | UC Berkeley，2023-10-12 | [已开源](https://github.com/letta-ai/letta) | `memgpt` |
+| 浏览问答 | [WebGPT](2112.09332-webgpt/README.md) | OpenAI，2021-12-17 | 未发布完整训练代码；公开 comparisons 数据 | `webgpt` |
+| 具身规划 | [SayCan](2204.01691-saycan/README.md) | Google Robotics / Everyday Robots，2022-04-04 | [模拟实现](https://github.com/google-research/google-research/tree/master/saycan) | `saycan` |
+| 程序推理 | [PAL](2211.10435-pal/README.md) | CMU / Inspired Cognition，2022-11-18 | [已开源](https://github.com/reasoning-machines/pal) | `pal` |
+| 自动工具推理 | [ART](2303.09014-art/README.md) | UW / UCI / Meta AI，2023-03-16 | [已开源](https://github.com/bhargaviparanjape/language-programmes) | `art` |
 
 ## 公平基线
 

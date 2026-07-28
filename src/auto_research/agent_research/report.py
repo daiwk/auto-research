@@ -27,6 +27,10 @@ PAPERS = {
     "hugginggpt": ("HuggingGPT", "https://arxiv.org/abs/2303.17580"),
     "generative-agents": ("Generative Agents", "https://arxiv.org/abs/2304.03442"),
     "memgpt": ("MemGPT", "https://arxiv.org/abs/2310.08560"),
+    "webgpt": ("WebGPT", "https://arxiv.org/abs/2112.09332"),
+    "saycan": ("SayCan", "https://arxiv.org/abs/2204.01691"),
+    "pal": ("PAL", "https://arxiv.org/abs/2211.10435"),
+    "art": ("ART", "https://arxiv.org/abs/2303.09014"),
 }
 
 
@@ -108,5 +112,9 @@ def render_report(result: AgentResearchResult) -> str:
 - model matches / dependency edges：{result.diagnostics['model_matches']} / {result.diagnostics['dependency_edges']}
 - memories retrieved / reflections：{result.diagnostics['memories_retrieved']} / {result.diagnostics['reflection_syntheses']}
 - archival writes / page-ins / interrupts：{result.diagnostics['archival_writes']} / {result.diagnostics['page_ins']} / {result.diagnostics['interrupts']}
+- browser queries / references / rejection candidates：{result.diagnostics['browser_queries']} / {result.diagnostics['references_collected']} / {result.diagnostics['rejection_candidates']}
+- affordance checks / infeasible skills filtered：{result.diagnostics['affordance_checks']} / {result.diagnostics['infeasible_skills_filtered']}
+- generated programs / interpreter calls：{result.diagnostics['programs_generated']} / {result.diagnostics['interpreter_calls']}
+- retrieved task examples / generation pauses / library updates：{result.diagnostics['task_examples_retrieved']} / {result.diagnostics['generation_pauses']} / {result.diagnostics['task_library_updates']}
 - fidelity：{result.diagnostics['fidelity']}
 """

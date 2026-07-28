@@ -23,6 +23,9 @@ PAPERS = {
     "constitutional-ai": ("Constitutional AI", "https://arxiv.org/abs/2212.08073"),
     "rrhf": ("RRHF", "https://arxiv.org/abs/2304.05302"),
     "raft": ("RAFT", "https://arxiv.org/abs/2304.06767"),
+    "slic-hf": ("SLiC-HF", "https://arxiv.org/abs/2305.10425"),
+    "steerlm": ("SteerLM", "https://arxiv.org/abs/2310.05344"),
+    "spin": ("SPIN", "https://arxiv.org/abs/2401.01335"),
 }
 
 

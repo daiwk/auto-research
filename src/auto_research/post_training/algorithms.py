@@ -26,6 +26,7 @@ class PolicyState:
     critic_updates: int = 0
     constitutional_critiques: int = 0
     constitutional_revisions: int = 0
+    spin_updates: int = 0
 
 
 def initialize(feature_count: int, groups: tuple[CandidateGroup, ...]) -> PolicyState:
@@ -57,7 +58,7 @@ def update(
     reference = _softmax(group.features @ state.reference)
     sampling_probabilities = (
         _softmax(group.features @ state.rollout_weights)
-        if algorithm in {"ppo-rlhf", "grpo", "dapo", "gspo"} else probabilities
+        if algorithm in {"ppo-rlhf", "grpo", "dapo", "gspo", "spin"} else probabilities
     )
     sampled = rng.choice(
         len(probabilities), size=min(group_size, len(probabilities)),
@@ -427,6 +428,97 @@ def update(
                 "reward_model_used_for_selection": 1.0,
             }
         )
+    elif algorithm == "slic-hf":
+        # SLiC-HF calibrates response sequence likelihoods to preference
+        # ordering with a margin loss, while supervised cross-entropy on the
+        # reference target preserves the pretrained/SFT behavior.
+        chosen = group.gold
+        rejected = int(
+            np.argmax(probabilities + (np.arange(len(probabilities)) == chosen) * -2)
+        )
+        log_gap = float(
+            np.log(probabilities[chosen] + 1e-12)
+            - np.log(probabilities[rejected] + 1e-12)
+        )
+        margin = 0.5
+        violation = max(0.0, margin - log_gap)
+        calibration_gradient = (
+            group.features[chosen] - group.features[rejected]
+            if violation > 0 else np.zeros_like(state.weights)
+        )
+        expected = probabilities @ group.features
+        regularization_gradient = group.features[chosen] - expected
+        regularization_weight = 0.1
+        gradient = calibration_gradient + regularization_weight * regularization_gradient
+        sft_regularization_nll = float(-np.log(probabilities[chosen] + 1e-12))
+        loss = float(violation + regularization_weight * sft_regularization_nll)
+        diagnostics.update(
+            {
+                "calibration_margin": margin,
+                "sequence_log_likelihood_gap": log_gap,
+                "margin_violation": violation,
+                "sft_regularization_nll": sft_regularization_nll,
+                "reference_model_parameters": 0.0,
+                "off_policy_preferences": 1.0,
+            }
+        )
+    elif algorithm == "steerlm":
+        # The four reward axes are explicit local annotations analogous to
+        # SteerLM's helpfulness/correctness/coherence/complexity attributes.
+        # The target attribute vector is supplied to candidate selection, then
+        # ordinary SFT conditions the policy on the selected attribute profile.
+        target_attributes = np.asarray((1.0, 0.4, 0.8, 0.2))
+        target_attributes /= np.linalg.norm(target_attributes)
+        normalized = group.rewards / (
+            np.linalg.norm(group.rewards, axis=1, keepdims=True) + 1e-12
+        )
+        attribute_match = normalized @ target_attributes
+        conditioned = int(np.argmax(attribute_match))
+        expected = probabilities @ group.features
+        gradient = group.features[conditioned] - expected
+        loss = float(-np.log(probabilities[conditioned] + 1e-12))
+        diagnostics.update(
+            {
+                "attribute_dimensions": float(group.rewards.shape[1]),
+                "annotated_responses": float(len(group.rewards)),
+                "target_attribute_match": float(attribute_match[conditioned]),
+                "attribute_conditioned_sft": 1.0,
+                "reward_model_parameters": 0.0,
+            }
+        )
+    elif algorithm == "spin":
+        # SPIN treats the previous-iteration policy as an opponent: a human
+        # demonstration is preferred over a response sampled from that frozen
+        # opponent, and the opponent is refreshed only at iteration boundaries.
+        opponent = _softmax(group.features @ state.rollout_weights)
+        chosen = group.gold
+        rejected = int(rng.choice(len(opponent), p=opponent))
+        if rejected == chosen:
+            rejected = int(
+                np.argmax(opponent + (np.arange(len(opponent)) == chosen) * -2)
+            )
+        logit = float(
+            np.log(probabilities[chosen] + 1e-12)
+            - np.log(opponent[chosen] + 1e-12)
+            - np.log(probabilities[rejected] + 1e-12)
+            + np.log(opponent[rejected] + 1e-12)
+        )
+        beta = 0.2
+        coefficient = beta / (1.0 + np.exp(beta * logit))
+        gradient = coefficient * (
+            group.features[chosen] - group.features[rejected]
+        )
+        loss = float(np.logaddexp(0.0, -beta * logit))
+        state.spin_updates += 1
+        diagnostics.update(
+            {
+                "self_play_logit": logit,
+                "opponent_response_probability": float(opponent[rejected]),
+                "human_demonstration_probability": float(probabilities[chosen]),
+                "opponent_iteration": float(state.spin_updates // 16),
+                "external_preference_labels": 0.0,
+            }
+        )
     else:
         rewards = group.rewards[sampled]
         if algorithm == "gprl":
@@ -471,6 +563,8 @@ def update(
     if algorithm == "dapo" and state.dapo_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
     if algorithm == "gspo" and state.gspo_updates % 16 == 0:
+        state.rollout_weights = state.weights.copy()
+    if algorithm == "spin" and state.spin_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
     diagnostics["loss"] = loss
     diagnostics["policy_entropy"] = float(-np.sum(probabilities * np.log(probabilities + 1e-12)))

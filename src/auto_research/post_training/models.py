@@ -25,6 +25,9 @@ ALGORITHMS = (
     "constitutional-ai",
     "rrhf",
     "raft",
+    "slic-hf",
+    "steerlm",
+    "spin",
 )
 
 

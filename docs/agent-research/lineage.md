@@ -19,6 +19,9 @@
 | 软件工程 Agent | SWE-agent、OpenHands | 已实现（local） | 真实临时仓库、编辑、命令和回归测试 |
 | 模块化专家系统 | MRKL、HuggingGPT | 已实现 | 神经符号 router；模型能力匹配与依赖图执行 |
 | 经典长期状态 | Generative Agents、MemGPT | 已实现 | 记忆打分/反思；虚拟上下文换入换出 |
+| 浏览与引用 | WebGPT | 已实现（deterministic） | 浏览动作、证据引用与轨迹拒绝采样 |
+| 具身技能 grounding | SayCan | 已实现（simulation） | 语言相关性乘以技能 affordance |
+| 程序与自动工具推理 | PAL、ART | 已实现 | 符号解释器；task-library 检索与工具暂停 |
 
 ## 下一阶段缺口
 
@@ -26,7 +29,7 @@
 |---|---|---|
 | `swebench-local` | 真实文件与 subprocess；仓库自带受控 fixture | 接官方 SWE-bench Lite 数据、repository snapshot 与容器 |
 | ToolHop | 尚未接入 | 增加公开数据下载、真实工具 runtime 与多跳 verifier |
-| Browser | 仅保留 OpenHands 事件接口语义 | 增加隔离浏览器、网页快照与网络策略 |
+| Browser | WebGPT 控制流已实现；仍是确定性工具环境 | 增加隔离浏览器、网页快照与网络策略 |
 | Agent Lightning LLM RL | transition/credit 机制已实现 | 连接可训练 LLM policy 与统一多轮 controller |
 
 ## 当前结论

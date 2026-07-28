@@ -81,6 +81,16 @@ class AgentResearchRunner:
             "archival_writes": agent.archival_writes,
             "page_ins": agent.page_ins,
             "interrupts": agent.interrupts,
+            "browser_queries": agent.browser_queries,
+            "references_collected": agent.references_collected,
+            "rejection_candidates": agent.rejection_candidates,
+            "affordance_checks": agent.affordance_checks,
+            "infeasible_skills_filtered": agent.infeasible_skills_filtered,
+            "programs_generated": agent.programs_generated,
+            "interpreter_calls": agent.interpreter_calls,
+            "task_examples_retrieved": agent.task_examples_retrieved,
+            "generation_pauses": agent.generation_pauses,
+            "task_library_updates": agent.task_library_updates,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

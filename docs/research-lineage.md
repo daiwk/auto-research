@@ -56,7 +56,8 @@ flowchart LR
 经典链路已覆盖 PPO-RLHF、Constitutional AI、RRHF、RAFT、DPO、KTO、ORPO、IPO、
 SimPO、GRPO、RLOO、ReMax，以及 DAPO、GSPO、LUSPO、CoBA-RL、Lightning OPD、
 GPRL、TCR。四个 sequence objective 进入
-真实 tokenizer 自由生成与多 seed 路径。方法差异见[后训练谱系](post-training/lineage.md)。
+真实 tokenizer 自由生成与多 seed 路径；P1 又补齐 SLiC-HF、SteerLM 和 SPIN 的
+序列校准、多属性条件 SFT 与自博弈。方法差异见[后训练谱系](post-training/lineage.md)。
 
 后训练论文检索、可审计 objective 映射和组合式 genome 已进入统一多轮控制器。下一步是扩大
 公开 rollout 规模，并继续统一 reward、KL、长度偏差和 group normalization 的报告口径。
@@ -64,7 +65,7 @@ GPRL、TCR。四个 sequence objective 进入
 ## Agent
 
 经典链路已覆盖 ReAct、MRKL、HuggingGPT、Toolformer、Tree of Thoughts、Reflexion、
-Self-Refine、LATS、ReWOO、AutoGen、Generative Agents、MemGPT、MetaGPT、CRITIC、
+Self-Refine、LATS、ReWOO、AutoGen、WebGPT、SayCan、PAL、ART、Generative Agents、MemGPT、MetaGPT、CRITIC、
 SWE-agent、OpenHands、Agent Lightning、Voyager，以及近期记忆与规划方法；软件 Agent
 已有真实文件编辑和回归测试路径。完整谱系见
 [Agent 谱系](agent-research/lineage.md)。

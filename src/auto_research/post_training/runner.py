@@ -58,6 +58,7 @@ class PostTrainingRunner:
                     "grpo": state.grpo_updates,
                     "dapo": state.dapo_updates,
                     "gspo": state.gspo_updates,
+                    "spin": state.spin_updates,
                 }.get(config.algorithm, 0)
             ) // 16,
             "last_diagnostics": last_diagnostics,

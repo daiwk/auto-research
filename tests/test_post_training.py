@@ -11,6 +11,7 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
         "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
         "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr",
         "constitutional-ai", "rrhf", "raft",
+        "slic-hf", "steerlm", "spin",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -176,3 +177,37 @@ def test_missing_classic_alignment_mechanisms_are_observable(
         assert result.training["last_diagnostics"]["human_preference_labels"] == 0
     if algorithm == "raft":
         assert result.training["last_diagnostics"]["kept_responses"] == 1
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        (
+            "slic-hf",
+            ("calibration_margin", "margin_violation", "sft_regularization_nll"),
+        ),
+        (
+            "steerlm",
+            ("attribute_dimensions", "target_attribute_match", "attribute_conditioned_sft"),
+        ),
+        (
+            "spin",
+            ("self_play_logit", "opponent_response_probability", "opponent_iteration"),
+        ),
+    ],
+)
+def test_p1_alignment_candidate_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=20,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+    if algorithm == "spin":
+        assert result.training["rollout_policy_refreshes"] == 1

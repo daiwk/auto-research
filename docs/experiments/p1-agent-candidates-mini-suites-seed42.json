@@ -1,0 +1,47 @@
+{
+  "protocol": {
+    "episodes": 120,
+    "memory_size": 24,
+    "seed": 42,
+    "baseline": "long-context on the same mini-suite",
+    "fidelity": "mechanism reproduction on deterministic benchmark mini-suites"
+  },
+  "baseline": {
+    "method": "long-context",
+    "joint_success": 1.0,
+    "average_cost": 64.5
+  },
+  "methods": {
+    "webgpt": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "average_cost": 3.0,
+      "browser_queries": 80,
+      "references_collected": 600,
+      "rejection_candidates": 240
+    },
+    "saycan": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 3.375,
+      "affordance_checks": 1350,
+      "infeasible_skills_filtered": 790
+    },
+    "pal": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.4,
+      "programs_generated": 120,
+      "interpreter_calls": 120
+    },
+    "art": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.55,
+      "task_examples_retrieved": 108,
+      "generation_pauses": 360,
+      "task_library_updates": 12
+    }
+  },
+  "interpretation": "The deterministic suites validate control-flow mechanisms and cost under one protocol. They are not live-web, physical-robot, original BIG-Bench, or original GSM8K scores."
+}
