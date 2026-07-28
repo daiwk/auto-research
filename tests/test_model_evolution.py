@@ -107,6 +107,23 @@ def test_latest_public_benchmark_operators_are_discoverable():
     assert methods["2607.19313"] == "off_context_grpo"
 
 
+def test_post_training_and_agent_discovery_maps_only_audited_operators():
+    post = discover_papers("GRPO DPO process reward", 4, False, track="post-training")
+    post_map = {paper.arxiv_id: paper.architecture for paper in post}
+    assert post_map["2402.03300"] == "grpo"
+    assert post_map["2305.18290"] == "dpo"
+    assert "grpo" in allowed_architectures("post-training", "重点比较 GRPO", post)
+
+    agent = discover_papers("memory planning tools reflection", 4, False, track="agent")
+    agent_map = {paper.arxiv_id: paper.architecture for paper in agent}
+    assert agent_map["2210.03629"] == "planner:react"
+    assert agent_map["2602.22406"] == "memory:u-mem"
+    operators = allowed_architectures("agent", "组合记忆、规划、工具与反思", agent)
+    assert [value.split(":", 1)[0] for value in operators[:4]] == [
+        "memory", "planner", "tool", "critic",
+    ]
+
+
 def test_public_composite_requires_public_suite():
     EvolutionConfig(
         model="rankmixer", dataset="movielens-100k",
@@ -306,6 +323,7 @@ def test_post_training_uses_unified_multiround_controller(tmp_path):
     )
     result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path).run()
     assert len(result.rounds) == 2
+    assert result.papers
     assert any(trial.genome.post_training != "none" for trial in result.trials)
     assert any(trial.generation == 2 for trial in result.trials)
     assert all("fitness" in trial.validation for trial in result.trials)
@@ -328,6 +346,7 @@ def test_agent_components_form_composable_multiround_genomes(tmp_path):
     )
     result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path).run()
     assert len(result.rounds) == 2
+    assert result.papers
     first_round = [trial for trial in result.trials if trial.generation == 1]
     assert any(trial.genome.agent_memory != "none" for trial in first_round)
     assert any(trial.genome.agent_planner != "long-context" for trial in first_round)

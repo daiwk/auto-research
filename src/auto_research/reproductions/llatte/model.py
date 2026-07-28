@@ -2,51 +2,90 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..mdcns.model import SequentialModel
+from ..industrial_ranking import require_backend
 
 
-class LLaTTEScorer:
-    def __init__(
-        self, model: SequentialModel, upstream_weight: float, target_aware_weight: float = 0.5
-    ):
-        self.model = model
-        self.upstream_weight = upstream_weight
-        self.target_aware_weight = target_aware_weight
+def build_llatte_model(content: np.ndarray, dimensions: int = 32, method: str = "llatte"):
+    torch, nn = require_backend()
+    items = len(content)
 
-    def short_sequence_scores(self, history: tuple[int, ...]) -> np.ndarray:
-        vectors = self.model.context[list(history[-5:])]
-        weights = np.geomspace(0.4, 1.0, len(vectors))
-        profile = np.average(vectors, axis=0, weights=weights)
-        return self.model.item @ profile
+    class LLaTTE(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.method = method
+            self.id_embedding = nn.Embedding(items + 1, dimensions, padding_idx=items)
+            padded_content = np.concatenate(
+                (content.astype(np.float32), np.zeros((1, content.shape[1]), dtype=np.float32)), 0
+            )
+            self.register_buffer("semantic_content", torch.tensor(padded_content))
+            self.semantic_adapter = nn.Sequential(
+                nn.Linear(content.shape[1], dimensions), nn.GELU(),
+                nn.Linear(dimensions, dimensions),
+            )
+            self.latent_queries = nn.Parameter(torch.randn(4, dimensions) * 0.02)
+            self.mla = nn.MultiheadAttention(dimensions, 4, batch_first=True)
+            self.online_attention = nn.MultiheadAttention(dimensions, 4, batch_first=True)
+            self.dhen_gate = nn.Sequential(
+                nn.Linear(4 * dimensions, dimensions), nn.GELU(), nn.Linear(dimensions, 3),
+            )
+            self.norm = nn.LayerNorm(dimensions)
 
-    def two_stage_scores(self, history: tuple[int, ...]) -> np.ndarray:
-        # Online stage: target-aware attention over a pyramidal recent-token window.
-        online_vectors = self.model.context[list(history[-12:])]
-        scores = self.model.item @ online_vectors.T
-        logits = scores - scores.max(axis=1, keepdims=True)
-        attention = np.exp(logits)
-        attention /= np.maximum(attention.sum(axis=1, keepdims=True), 1e-12)
-        target_aware = np.sum(attention * scores, axis=1)
+        def sequence_features(self, history, mask):
+            ids = self.id_embedding(history)
+            semantics = self.semantic_adapter(self.semantic_content[history])
+            tokens = self.norm(ids + semantics)
+            weights = mask.float().unsqueeze(-1)
+            semantic_profile = (semantics * weights).sum(1) / weights.sum(1).clamp_min(1)
+            id_profile = (ids[:, -8:] * weights[:, -8:]).sum(1) / weights[:, -8:].sum(1).clamp_min(1)
+            queries = self.latent_queries.unsqueeze(0).expand(history.shape[0], -1, -1)
+            latent, _ = self.mla(queries, tokens, tokens, key_padding_mask=~mask)
+            upstream = latent.mean(1)
+            return tokens, id_profile, semantic_profile, upstream
 
-        # Upstream stage: asynchronously cached user-only summary of the full history.
-        upstream = self.model.context[list(history)].mean(axis=0)
-        upstream_scores = self.model.item @ upstream
-        return (
-            self.short_sequence_scores(history)
-            + self.target_aware_weight * target_aware
-            + self.upstream_weight * upstream_scores
-        )
+        def _pair(self, history, mask, candidate):
+            tokens, id_profile, semantic_profile, upstream = self.sequence_features(history, mask)
+            vector = self.id_embedding(candidate) + self.semantic_adapter(self.semantic_content[candidate])
+            if self.method == "short":
+                return (id_profile * vector).sum(-1)
+            recent, recent_mask = tokens[:, -12:], mask[:, -12:]
+            online, _ = self.online_attention(
+                vector.unsqueeze(1), recent, recent, key_padding_mask=~recent_mask
+            )
+            online = online[:, 0]
+            gate_input = torch.cat((id_profile, semantic_profile, upstream, vector), -1)
+            gates = torch.softmax(self.dhen_gate(gate_input), -1)
+            experts = torch.stack((id_profile, semantic_profile, upstream + online), 1)
+            user = (gates.unsqueeze(-1) * experts).sum(1)
+            return (user * vector).sum(-1)
 
+        def forward(self, history, mask, candidate):
+            return self._pair(history, mask, candidate)
 
-def train_sequence_backbone(data, seed: int, factors: int = 24, epochs: int = 5):
-    rng = np.random.default_rng(seed)
-    model = SequentialModel.create(data.item_count, factors, seed)
-    pairs = np.asarray([(a, b) for sequence in data.train for a, b in zip(sequence, sequence[1:])], dtype=np.int64)
-    for _ in range(epochs):
-        rng.shuffle(pairs)
-        for previous, positive in pairs:
-            negative = int(rng.integers(data.item_count))
-            if negative == positive:
-                negative = (negative + 1) % data.item_count
-            model.bpr_update(int(previous), int(positive), negative, 0.035, 0.002)
-    return model
+        def score_catalog(self, history, mask, candidates):
+            tokens, id_profile, semantic_profile, upstream = self.sequence_features(history, mask)
+            vectors = self.id_embedding(candidates) + self.semantic_adapter(self.semantic_content[candidates])
+            if self.method == "short":
+                return id_profile @ vectors.T
+            batch, count = history.shape[0], len(candidates)
+            recent, recent_mask = tokens[:, -12:], mask[:, -12:]
+            queries = vectors[None].expand(batch, -1, -1).reshape(batch * count, 1, -1)
+            keys = recent[:, None].expand(-1, count, -1, -1).reshape(batch * count, recent.shape[1], -1)
+            key_mask = recent_mask[:, None].expand(-1, count, -1).reshape(batch * count, recent.shape[1])
+            online, _ = self.online_attention(queries, keys, keys, key_padding_mask=~key_mask)
+            online = online[:, 0].reshape(batch, count, -1)
+            gate_input = torch.cat((
+                id_profile[:, None].expand(-1, count, -1),
+                semantic_profile[:, None].expand(-1, count, -1),
+                upstream[:, None].expand(-1, count, -1),
+                vectors[None].expand(batch, -1, -1),
+            ), -1)
+            gates = torch.softmax(self.dhen_gate(gate_input), -1)
+            experts = torch.stack((
+                id_profile[:, None].expand(-1, count, -1),
+                semantic_profile[:, None].expand(-1, count, -1),
+                upstream[:, None] + online,
+            ), 2)
+            users = (gates.unsqueeze(-1) * experts).sum(2)
+            return (users * vectors[None]).sum(-1)
+
+    return LLaTTE()

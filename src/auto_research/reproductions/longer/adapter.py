@@ -14,7 +14,7 @@ ADAPTER = register(
         ),
         run=reproduce_longer,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("trainable hybrid attention", "InnerTrans module"),
+        fidelity=ReproductionFidelity.CORE_MECHANISM,
+        omitted_core_components=("private Douyin features", "distributed training and production serving"),
     )
 )

@@ -162,12 +162,12 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 | 核心机制 | `mdcns` | MDCNS | 三源负采样、分歧/共识筛选与双模型更新 |
 | 核心机制 | `memento` | Memento · Meta | query-conditioned MMR 长历史检索 |
 | 核心机制 | `cluster-goobs` | Cluster GOOBS · Meta | cluster-conditioned online hard-negative sampling |
-| 概念验证 | `llatte` | LLaTTE · Meta | 未实现 MLA、DHEN、semantic LLM features |
-| 概念验证 | `self-evolving-rec` | Self-Evolving RecSys · Google | 未运行 LLM agent 和真实线上反馈闭环 |
-| 概念验证 | `cmsl` | CMSL · Meta | 未训练 contextual lenses / HSTU backbone |
-| 概念验证 | `longer` | LONGER · ByteDance/Douyin | 未训练 hybrid attention / InnerTrans |
+| 核心机制 | `llatte` | LLaTTE · Meta | BERT semantic features、MLA、target-aware attention、DHEN |
+| 核心机制 | `self-evolving-rec` | Self-Evolving RecSys · Google | 本地指令 LLM 驱动 journal→提案→反馈→晋级闭环 |
+| 核心机制 | `cmsl` | CMSL · Meta | learned contextual lenses 与 HSTU-style backbone |
+| 核心机制 | `longer` | LONGER · ByteDance/Douyin | InnerTrans、global token 与 hybrid attention |
 
-三级定义和逐篇审计见[论文实现索引](reproductions/README.md)。概念验证产生的旧指标只用于调试假设，不支持论文效果结论，也不再出现在默认批量复现中。
+三级定义和逐篇审计见[论文实现索引](reproductions/README.md)。公开数据缩放实验只支持本地口径结论，不能与论文生产 A/B 混为一谈。
 
 ## 代码结构
 

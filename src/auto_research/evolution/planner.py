@@ -8,13 +8,32 @@ from .models import Genome, PaperInspiration
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
     if model == "post-training":
-        return [
+        installed = [
             "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "rloo", "remax",
             "dapo", "gspo", "lightning-opd", "gprl", "tcr",
         ]
+        mapped = [paper.architecture for paper in papers if paper.architecture in installed]
+        requested = [
+            value for value in installed
+            if value.replace("-", " ") in direction.lower().replace("-", " ")
+        ]
+        return list(dict.fromkeys([*requested, *mapped, *installed]))
     if model == "agent":
+        operators = [paper.architecture for paper in papers if paper.architecture and ":" in paper.architecture]
+        operators = list(dict.fromkeys(operators))
+        if operators:
+            # Put one operator from each axis first so a small first generation is
+            # still a fair component ablation rather than four planner variants.
+            interleaved = []
+            for component in ("memory:", "planner:", "tool:", "critic:"):
+                match = next((value for value in operators if value.startswith(component)), None)
+                if match:
+                    interleaved.append(match)
+            return list(dict.fromkeys([*interleaved, *operators]))
         return [
-            "composable-agent",
+            "memory:u-mem", "memory:legomem", "planner:react", "planner:rewoo",
+            "planner:tree-of-thoughts", "planner:lats", "tool:toolformer",
+            "tool:memtool", "critic:self-refine", "critic:reflexion",
         ]
     if model == "micro-llm":
         values = [
@@ -91,7 +110,7 @@ def propose(parent: Genome, generation: int, index: int, architectures: list[str
     if model == "post-training":
         return _propose_post_training(parent, generation, index, architectures, rng)
     if model == "agent":
-        return _propose_agent(parent, generation, index, rng)
+        return _propose_agent(parent, generation, index, architectures, rng)
     if model == "micro-llm":
         return _propose_llm(parent, generation, index, architectures, rng)
     architecture = architectures[(index + generation - 1) % len(architectures)] if generation == 1 else rng.choice(architectures)
@@ -178,32 +197,38 @@ def _propose_post_training(parent, generation, index, algorithms, rng):
     ), f"组合优化：objective={method}, {name}={value}"
 
 
-def _propose_agent(parent, generation, index, rng):
-    memories = ("none", "u-mem", "legomem")
-    planners = ("fast", "react", "rewoo", "tree-of-thoughts", "lats")
-    tools = ("direct", "toolformer", "memtool")
-    critics = ("none", "self-refine", "reflexion")
+def _propose_agent(parent, generation, index, operators, rng):
+    values = {
+        "memory": ["none"],
+        "planner": ["fast"],
+        "tool": ["direct"],
+        "critic": ["none"],
+    }
+    for operator in operators:
+        if ":" not in operator:
+            continue
+        component, value = operator.split(":", 1)
+        if component in values and value not in values[component]:
+            values[component].append(value)
     if generation == 1:
-        component = index % 4
-        values = {
-            "agent_memory": memories[1 + index % (len(memories) - 1)],
-            "agent_planner": planners[1 + index % (len(planners) - 1)],
-            "agent_tool_policy": tools[1 + index % (len(tools) - 1)],
-            "agent_critic": critics[1 + index % (len(critics) - 1)],
-        }
-        name = tuple(values)[component]
-        return replace(parent, architecture="composable-agent", **{name: values[name]}), (
-            f"Agent 单组件消融：{name}={values[name]}；其余组件保持基线"
+        operator = operators[index % len(operators)]
+        component, value = operator.split(":", 1)
+        field = {
+            "memory": "agent_memory", "planner": "agent_planner",
+            "tool": "agent_tool_policy", "critic": "agent_critic",
+        }[component]
+        return replace(parent, architecture="composable-agent", **{field: value}), (
+            f"论文算子单组件消融：{operator}；其余组件保持基线"
         )
     return replace(
         parent,
         architecture="composable-agent",
-        agent_memory=rng.choice(memories),
-        agent_planner=rng.choice(planners),
-        agent_tool_policy=rng.choice(tools),
-        agent_critic=rng.choice(critics),
+        agent_memory=rng.choice(values["memory"]),
+        agent_planner=rng.choice(values["planner"]),
+        agent_tool_policy=rng.choice(values["tool"]),
+        agent_critic=rng.choice(values["critic"]),
         memory_size=rng.choice((8, 16, 24, 48)),
-    ), "Agent 组合 genome：独立搜索 memory / planner / tool policy / critic / capacity"
+    ), "论文检索约束下的 Agent 组合 genome：搜索 memory / planner / tool / critic / capacity"
 
 
 def round_record(generation, parent, trials, champion):

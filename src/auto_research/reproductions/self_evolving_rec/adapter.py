@@ -14,7 +14,7 @@ ADAPTER = register(
         ),
         run=reproduce_self_evolving_rec,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("LLM agent candidate generation", "production A/B feedback loop"),
+        fidelity=ReproductionFidelity.CORE_MECHANISM,
+        omitted_core_components=("Google production A/B infrastructure",),
     )
 )

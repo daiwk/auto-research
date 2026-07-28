@@ -1,6 +1,6 @@
 # LONGER: Ultra-long sequence modeling at ByteDance
 
-> **Fidelity: 概念验证（非论文复现）**。当前代码未训练论文的 hybrid attention 与 InnerTrans；下方旧本地指标只描述打分代理，不支持 LONGER 效果结论。
+> **Fidelity: 核心机制复现**。当前代码端到端训练 InnerTrans 分组压缩、global interest token 与 hybrid attention；未复刻 ByteDance 私有特征、分布式训练和生产 serving。
 
 ## 论文信息
 
@@ -61,13 +61,13 @@ Douyin Ads 5.2B 样本 CVR 数据上，LONGER AUC 0.85290、LogLoss 0.47103，�
 
 ## 本地复现
 
-> **本地对照口径**：基线是 recent-sequence Transformer proxy；实验组是 LONGER token-merge proxy；NDCG@10 从 0.0340 升至 0.0341（**+0.41%**）。这是压缩模块消融，提升小于 seed 波动，不是相对 DIN。
+> **本地对照口径**：基线与实验组使用相同 embedding、维度、优化器、训练步数和全库评测；实验组加入 InnerTrans、global token 与 hybrid attention，NDCG@10 **-21.37%**。它不是相对 DIN。
 
-MovieLens-100K 上实现 global summary、group size=4 的局部变化保留式 token merge，以及 recent-query hybrid attention；三个 seed，merge weight 仅由 validation 选择。
+MovieLens-100K 全量公开交互上，group size=4；每组行为先进入可训练 InnerTrans 和 attention pooling，再与 global/recent tokens 一起进入 hybrid Transformer。三个 seed 独立从头训练，test 不参与选型。
 
 | Architecture | Hit@10 | NDCG@10 |
 |---|---:|---:|
-| Recent-sequence transformer proxy | 0.0697 ± 0.0038 | 0.0340 ± 0.0017 |
-| LONGER token-merge proxy | 0.0694 ± 0.0013 | **0.0341 ± 0.0012** |
+| Recent-sequence Transformer | **0.0057 ± 0.0013** | **0.0026 ± 0.0008** |
+| LONGER hybrid attention | 0.0046 ± 0.0040 | 0.0020 ± 0.0017 |
 
-NDCG@10 **+0.41%**，提升小于 seed 波动，只能证明压缩没有明显破坏质量。ByteDance 私有长序列、5.2B 样本和 GPU 同步 serving 不可公开，因此这不是 headline 复刻。诊断指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)，其中明确标记 `diagnostic_only`。
+NDCG@10 **-21.37%**，且方差很大；在 90-step 小预算下，新增长历史结构没有收敛到优于 recent baseline。该结果不支持把论文线上收益外推到 MovieLens。ByteDance 私有长序列、5.2B 样本和 GPU serving 不可公开。稳定指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

@@ -33,11 +33,12 @@ flowchart LR
 |---|---|---|---|
 | 搜广推与 LLM 应用 | RankMixer、HyFormer；MovieLens 与公共推荐评测 | LONGER、UniMixer、RankMixer 等结构及工业论文 adapter | **可运行** |
 | 纯 LLM | micro‑LLM；架构 → 数据配方 → SFT/后训练的分轮搜索 | 纯 LLM 架构、Lightning OPD、GPRL、TCR 等 | **可运行** |
-| Agent | 通用 topic loop 可调研；专用多代 mutation engine 尚未实现 | U-Mem、LEGOMem、MemTool 与三类 mini-suite | **评测底座已实现** |
+| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | PPO/DPO/GRPO/RLOO/DAPO/GSPO、OPD、GPRL、TCR | **可运行** |
+| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct、ReWOO、LATS、U-Mem、LEGOMem、MemTool、Reflexion | **可运行** |
 
 !!! note "Agent 状态"
-    Agent 论文实现和评测不是 Agent 自动进化本身。下一步需要新增 Agent genome、
-    memory/planning/tool mutations、episode evaluator 和晋级策略，才能标记为可运行。
+    Agent evolve 已使用确定性 episode evaluator 和 validation 晋级。论文检索结果只会
+    映射到已审计的组件算子，在线发现但没有安全映射的论文仍保持 evidence-only。
 
 ## 组合式研究
 
@@ -45,7 +46,7 @@ flowchart LR
 
 - 在推荐 evolve 中把 LLM 语义特征、生成式召回或后训练目标作为 mutation；
 - 在纯 LLM evolve 中同时搜索网络结构、预训练数据配方和后训练算法；
-- 在未来 Agent evolve 中组合记忆策略、规划器、工具上下文和底层 LLM recipe；
+- 在 Agent evolve 中组合记忆策略、规划器、工具上下文和 critic；
 - 为新领域实现相同 adapter 合同，而不修改研究循环的选择和报告逻辑。
 
 [查看完整进化协议和运行命令 →](model-evolution.md)

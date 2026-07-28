@@ -14,7 +14,7 @@ ADAPTER = register(
         ),
         run=reproduce_llatte,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("MLA", "DHEN", "semantic LLM features"),
+        fidelity=ReproductionFidelity.CORE_MECHANISM,
+        omitted_core_components=("private Meta ads features", "asynchronous production serving"),
     )
 )

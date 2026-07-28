@@ -1,6 +1,6 @@
 # LLaTTE: Multi-stage sequence scaling
 
-> **Fidelity: 概念验证（非论文复现）**。当前实现省略 MLA、DHEN、semantic LLM features 和实际两阶段训练；旧指标只用于流水线诊断。
+> **Fidelity: 核心机制复现**。当前实现实际运行 BERT-tiny semantic features、MLA 上游 latent、target-aware 在线 attention 与 DHEN 门控；未复刻 Meta 私有广告特征和异步生产 serving。
 
 ## 论文信息
 
@@ -62,13 +62,13 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线是 Short Online Sequence；实验组是 LLaTTE two-stage proxy；NDCG@10 从 0.0420 降至 0.0405（**-3.57%**）。这是长历史缓存/融合模块消融；概念代理不能作为完整 LLaTTE 相对 DIN 的结果。
+> **本地对照口径**：基线是相同 ID/语义 embedding 的 short online sequence；实验组增加 MLA upstream、候选感知 online attention 与 DHEN，NDCG@10 **+49.81%**。训练预算一致，不是相对 DIN。
 
-实现 target-aware 在线序列、pyramidal recent-token reduction、异步 upstream 全历史表示和 downstream 融合。MovieLens 评分 ≥4，per-user leave-two-out、full catalog、三个 seed；validation 只选融合权重。
+MovieLens 标题先经公开 `prajjwal1/bert-tiny` 编码并缓存；ID 与语义 token 共同进入序列模型。4 个 latent query 压缩完整历史，候选 query 读取 recent 12，再由 DHEN 学习三个 expert 的门控。评分 ≥4、per-user leave-two-out、full catalog、三个 seed。
 
 | Architecture | Hit@10 | NDCG@10 |
 |---|---:|---:|
-| Short online sequence | **0.0851 ± 0.0040** | **0.0420 ± 0.0021** |
-| LLaTTE two-stage proxy | 0.0823 ± 0.0036 | 0.0405 ± 0.0014 |
+| Short online sequence | 0.0079 ± 0.0013 | 0.0039 ± 0.0005 |
+| LLaTTE MLA + DHEN | **0.0118 ± 0.0009** | **0.0058 ± 0.0003** |
 
-NDCG@10 **-3.57%**。短历史、小数据和弱内容特征下，cached long-history 表示没有带来收益，和论文“先有强语义表征再做 sequence scaling”的前提一致。原论文只使用 Meta 内部数据，因此保留 MovieLens proxy；NumPy scorer 不等价于 MLA/DHEN/H100 serving。诊断指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
+NDCG@10 **+49.81%**，但 head share 也从 8.55% 升至 15.85%，部分收益伴随更热门的推荐。该公开小模型结果验证多阶段模块在本地口径下优于 matched short baseline，不等同于 Meta 线上 conversion。稳定指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

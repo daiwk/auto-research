@@ -1,6 +1,6 @@
 # CMSL: Constructive Multi-Sequence Learning
 
-> **Fidelity: 概念验证（非论文复现）**。当前固定 genre strand 省略 learned contextual lenses 与 trainable HSTU backbone；旧指标不能验证 CMSL。
+> **Fidelity: 核心机制复现**。当前实现让 contextual lenses、软序列构造和 HSTU-style gated attention 一起反向传播；未复刻 Meta 私有特征、规模和分布式 serving。
 
 ## 论文信息
 
@@ -70,13 +70,13 @@ Surface 5 的线上 A/B 四个 engagement 指标分别 **+0.116%、+0.158%、+0.
 
 ## 本地复现
 
-> **本地对照口径**：基线是 Single Sequence scorer；实验组是 CMSL 多 strand 聚合；NDCG@10 从 0.0351 升至 0.0355（**+0.95%**），小于 seed 波动。这是多序列结构的概念代理消融，不是相对 DIN。
+> **本地对照口径**：基线与实验组共享 embedding、HSTU block、优化器和训练预算；实验组仅增加 6 个 learned contextual lenses 和多 strand 聚合，NDCG@10 **+29.42%**，不是相对 DIN。
 
-MovieLens genre 初始化 6 个 semantic strand，实现 strand 独立建模、二阶线性注意力近似和候选感知聚合。评分 ≥4、leave-two-out、full catalog、三个 seed；融合权重仅由 validation 选择。
+MovieLens 全量正反馈序列上，事件表征对 6 个 lens 做可微软分配，形成多条 latent sequence profile；HSTU-style SiLU attention 与 U-gate 实际训练。评分 ≥4、leave-two-out、full catalog、三个 seed，test 不参与选型。
 
 | Model | Hit@10 | NDCG@10 |
 |---|---:|---:|
-| Single sequence | 0.0726 ± 0.0013 | 0.0351 ± 0.0014 |
-| CMSL | 0.0726 ± 0.0027 | **0.0355 ± 0.0016** |
+| Single-sequence HSTU | 0.0046 ± 0.0005 | 0.0021 ± 0.0004 |
+| CMSL learned lenses | **0.0061 ± 0.0010** | **0.0028 ± 0.0003** |
 
-平均 NDCG@10 **+0.95%**，但小于 seed 波动，只能判断方向正向、证据不足。公开 proxy 不等价于可学习 lens、生产 HSTU kernel 或 Meta 内部特征。诊断指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
+平均 NDCG@10 **+29.42%**，但绝对指标仍低，说明在相同的小训练预算下 learned lenses 优于单序列结构，不能等同于 Meta 线上增益。公开实现没有生产 HSTU kernel 或 Meta 内部特征。稳定指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。

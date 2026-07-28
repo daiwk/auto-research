@@ -12,14 +12,18 @@ class Candidate:
     optimizer: str
     gated: bool
     multi_objective_reward: bool
+    learning_rate: float = 0.015
 
 
-CANDIDATES = (
-    Candidate("human_adagrad", "adagrad", False, False),
-    Candidate("agent_rmsprop", "rmsprop", False, False),
-    Candidate("agent_rmsprop_glu", "rmsprop", True, False),
-    Candidate("agent_rmsprop_glu_multi_reward", "rmsprop", True, True),
-)
+def candidate_space() -> tuple[Candidate, ...]:
+    values = [Candidate("human_adagrad", "adagrad", False, False)]
+    for optimizer in ("adagrad", "rmsprop"):
+        for gated in (False, True):
+            for reward in (False, True):
+                for learning_rate in (0.008, 0.015, 0.03):
+                    name = f"{optimizer}-gate{int(gated)}-reward{int(reward)}-lr{learning_rate:g}"
+                    values.append(Candidate(name, optimizer, gated, reward, learning_rate))
+    return tuple(values)
 
 
 class EvolvingModel:
@@ -64,14 +68,14 @@ class EvolvingModel:
             accumulator[index] = 0.95 * accumulator[index] + 0.05 * gradient**2
         else:
             accumulator[index] += gradient**2
-        parameter[index] += 0.015 * gradient / np.sqrt(accumulator[index] + 1e-6)
+        parameter[index] += self.candidate.learning_rate * gradient / np.sqrt(accumulator[index] + 1e-6)
 
     def _apply_dense(self, parameter, accumulator, gradient: np.ndarray) -> None:
         if self.candidate.optimizer == "rmsprop":
             accumulator[:] = 0.95 * accumulator + 0.05 * gradient**2
         else:
             accumulator[:] += gradient**2
-        parameter += 0.015 * gradient / np.sqrt(accumulator + 1e-6)
+        parameter += self.candidate.learning_rate * gradient / np.sqrt(accumulator + 1e-6)
 
 
 def train_candidate(data, candidate: Candidate, seed: int, factors: int = 20, epochs: int = 3):
@@ -92,3 +96,79 @@ def train_candidate(data, candidate: Candidate, seed: int, factors: int = 20, ep
                 negative = (negative + 1) % data.item_count
             model.update(int(previous), int(positive), negative, float(reward))
     return model
+
+
+class LLMResearchAgent:
+    """A constrained LLM agent: the LM reads the journal and ranks executable edits."""
+
+    def __init__(self, model_name: str = "HuggingFaceTB/SmolLM2-135M-Instruct"):
+        try:
+            import torch
+            from transformers import AutoModelForCausalLM, AutoTokenizer
+        except ImportError as exc:
+            raise RuntimeError("Self-Evolving RecSys requires `pip install -e '.[plum]'`.") from exc
+        from auto_research.runtime import device_for
+        self.torch = torch
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        if self.tokenizer.pad_token_id is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.model = AutoModelForCausalLM.from_pretrained(model_name)
+        self.device = device_for(torch)
+        self.model.to(self.device).eval()
+        self.model_name = model_name
+
+    @staticmethod
+    def prompt(journal: list[dict]) -> str:
+        observations = "\n".join(
+            f"- {row['candidate']}: validation NDCG@10={row['validation_ndcg_at_10']:.6f}"
+            for row in journal
+        ) or "- no experiment has run yet"
+        return (
+            "You are a recommendation-model research agent. Read the experiment journal, "
+            "then choose the most promising next executable configuration. Prefer a controlled "
+            "change and do not repeat a tested configuration.\nJournal:\n"
+            f"{observations}\nNext configuration: "
+        )
+
+    def propose(self, candidates: tuple[Candidate, ...], journal: list[dict]) -> tuple[Candidate, dict]:
+        tried = {row["candidate"] for row in journal}
+        available = [candidate for candidate in candidates if candidate.name not in tried]
+        prompt = self.prompt(journal)
+        continuations = [
+            (
+                f"{candidate.name}; optimizer={candidate.optimizer}; "
+                f"gated={candidate.gated}; multi_objective_reward={candidate.multi_objective_reward}; "
+                f"learning_rate={candidate.learning_rate}"
+            )
+            for candidate in available
+        ]
+        prompt_tokens = len(self.tokenizer(prompt, add_special_tokens=True)["input_ids"])
+        score_rows = []
+        for start in range(0, len(continuations), 4):
+            texts = [prompt + value for value in continuations[start:start + 4]]
+            encoded = self.tokenizer(
+                texts, padding=True, truncation=True, max_length=512, return_tensors="pt"
+            ).to(self.device)
+            labels = encoded["input_ids"].clone()
+            labels[:, :prompt_tokens] = -100
+            labels[encoded["attention_mask"] == 0] = -100
+            with self.torch.inference_mode():
+                logits = self.model(**encoded).logits[:, :-1]
+                targets = labels[:, 1:]
+                loss = self.torch.nn.functional.cross_entropy(
+                    logits.reshape(-1, logits.shape[-1]), targets.reshape(-1),
+                    ignore_index=-100, reduction="none",
+                ).reshape(targets.shape)
+                valid = targets.ne(-100)
+                score_rows.append(
+                    ((loss * valid).sum(1) / valid.sum(1).clamp_min(1)).cpu()
+                )
+        scores = self.torch.cat(score_rows)
+        index = int(scores.argmin().item())
+        return available[index], {
+            "prompt": prompt,
+            "candidate_log_losses": {
+                candidate.name: float(value)
+                for candidate, value in zip(available, scores)
+            },
+        }

@@ -14,7 +14,7 @@ ADAPTER = register(
         ),
         run=reproduce_cmsl,
         render=render,
-        fidelity=ReproductionFidelity.CONCEPT_DEMO,
-        omitted_core_components=("learned contextual lenses", "trainable HSTU backbone"),
+        fidelity=ReproductionFidelity.CORE_MECHANISM,
+        omitted_core_components=("private Meta features", "production distributed serving"),
     )
 )
