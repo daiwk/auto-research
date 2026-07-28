@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from itertools import pairwise
 from pathlib import Path
 
 import numpy as np
@@ -160,7 +161,7 @@ def _base_state(data):
     incidence = np.zeros((n, len(data.train)), dtype=np.float64)
     for user, sequence in enumerate(data.train):
         incidence[list(set(sequence)), user] = 1.0
-        for left, right in zip(sequence[:-1], sequence[1:]):
+        for left, right in pairwise(sequence):
             transition[left, right] += 1
     transition /= transition.sum(1, keepdims=True)
     features = _normalize(data.features.astype(np.float64) + 1e-3)
@@ -240,12 +241,18 @@ def build_mechanism(key: str, data, seed: int):
         )
 
         def method(_user, history):
-            interest = _normalize(content[list(history[-12:])].mean(0, keepdims=True))[0]
-            return 0.50 * transition[history[-1]] + 0.40 * (content @ interest) + 0.10 * popularity
+            interest = _normalize(content[list(history[-12:])].mean(0, keepdims=True))[
+                0
+            ]
+            return (
+                0.50 * transition[history[-1]]
+                + 0.40 * (content @ interest)
+                + 0.10 * popularity
+            )
 
     elif key == "filterllm":
         rank = min(24, min(incidence.shape) - 1)
-        u, s, vt = np.linalg.svd(incidence, full_matrices=False)
+        u, s, _ = np.linalg.svd(incidence, full_matrices=False)
         user_distribution = u[:, :rank] * s[:rank]
         ridge = np.linalg.solve(
             features.T @ features + 0.1 * np.eye(features.shape[1]),
@@ -257,8 +264,14 @@ def build_mechanism(key: str, data, seed: int):
         diagnostics["behavior_alignment"] = float((generated * behavior).sum(-1).mean())
 
         def method(_user, history):
-            vocabulary = _normalize(generated[list(history[-10:])].mean(0, keepdims=True))[0]
-            return 0.72 * (generated @ vocabulary) + 0.18 * transition[history[-1]] + 0.10 * popularity
+            vocabulary = _normalize(
+                generated[list(history[-10:])].mean(0, keepdims=True)
+            )[0]
+            return (
+                0.72 * (generated @ vocabulary)
+                + 0.18 * transition[history[-1]]
+                + 0.10 * popularity
+            )
 
     elif key == "fuxi_alpha":
         diagnostics["channels"] = ["temporal", "semantic", "popularity"]
@@ -271,11 +284,18 @@ def build_mechanism(key: str, data, seed: int):
             semantic = features @ query
             interaction = np.tanh(3 * temporal * semantic)
             gate = 1 / (1 + np.exp(-(semantic - popularity)))
-            return gate * (0.42 * temporal + 0.38 * semantic + 0.20 * interaction) + (1 - gate) * popularity
+            return (
+                gate * (0.42 * temporal + 0.38 * semantic + 0.20 * interaction)
+                + (1 - gate) * popularity
+            )
 
     elif key == "recgpt_v2":
         candidates = np.asarray(
-            [[0.55, 0.20, 0.15, 0.10], [0.30, 0.40, 0.20, 0.10], [0.25, 0.25, 0.40, 0.10]]
+            [
+                [0.55, 0.20, 0.15, 0.10],
+                [0.30, 0.40, 0.20, 0.10],
+                [0.25, 0.25, 0.40, 0.10],
+            ]
         )
 
         def agent_scores(history):
@@ -295,10 +315,14 @@ def build_mechanism(key: str, data, seed: int):
         policy /= policy.sum()
         weights = policy @ candidates
         diagnostics["meta_router_weights"] = weights.round(4).tolist()
-        diagnostics["constrained_policy_kl"] = float(np.sum(policy * np.log(policy / prior)))
+        diagnostics["constrained_policy_kl"] = float(
+            np.sum(policy * np.log(policy / prior))
+        )
 
         def method(_user, history):
-            return sum(weight * value for weight, value in zip(weights, agent_scores(history)))
+            return sum(
+                weight * value for weight, value in zip(weights, agent_scores(history))
+            )
 
     elif key == "higr":
         u, s, _ = np.linalg.svd(incidence, full_matrices=False)
@@ -322,7 +346,12 @@ def build_mechanism(key: str, data, seed: int):
 
     elif key == "drl_put":
         actions = np.asarray(
-            [[0.75, 0.15, 0.10], [0.55, 0.30, 0.15], [0.40, 0.35, 0.25], [0.60, 0.10, 0.30]]
+            [
+                [0.75, 0.15, 0.10],
+                [0.55, 0.30, 0.15],
+                [0.40, 0.35, 0.25],
+                [0.60, 0.10, 0.30],
+            ]
         )
         logits = np.zeros(len(actions))
         rewards = []
@@ -362,7 +391,9 @@ def build_mechanism(key: str, data, seed: int):
                 similarities.append(view @ query)
             comprehensive = np.mean(similarities, axis=0)
             adapter = cold_user * cold_item * similarities[-1]
-            return 0.50 * transition[history[-1]] + 0.35 * comprehensive + 0.15 * adapter
+            return (
+                0.50 * transition[history[-1]] + 0.35 * comprehensive + 0.15 * adapter
+            )
 
     elif key == "mgoe":
         task_item = np.stack(
@@ -383,18 +414,24 @@ def build_mechanism(key: str, data, seed: int):
             gate = np.exp(query - query.max())
             gate /= gate.sum()
             graph_score = experts @ gate
-            return 0.55 * transition[history[-1]] + 0.30 * graph_score + 0.15 * (features @ features[history[-1]])
+            return (
+                0.55 * transition[history[-1]]
+                + 0.30 * graph_score
+                + 0.15 * (features @ features[history[-1]])
+            )
 
     elif key == "click_a_buy_b":
         taxonomy = features @ features.T
         cross = np.full_like(transition, 1e-3)
         same = np.zeros(data.item_count)
         for sequence in data.train:
-            for clicked, bought in zip(sequence[:-1], sequence[1:]):
+            for clicked, bought in pairwise(sequence):
                 cross[clicked, bought] += 1 + taxonomy[clicked, bought]
                 same[clicked] += clicked == bought
         cross /= cross.sum(1, keepdims=True)
-        diagnostics["cross_item_pairs"] = int(sum(max(len(row) - 1, 0) for row in data.train))
+        diagnostics["cross_item_pairs"] = int(
+            sum(max(len(row) - 1, 0) for row in data.train)
+        )
 
         def method(_user, history):
             clicked = history[-1]
@@ -410,8 +447,7 @@ def build_mechanism(key: str, data, seed: int):
     validation = []
     for alpha in candidates:
         blended = lambda user, history, alpha=alpha: (
-            (1 - alpha) * baseline(user, history)
-            + alpha * raw_method(user, history)
+            (1 - alpha) * baseline(user, history) + alpha * raw_method(user, history)
         )
         validation.append(_score_metrics_validation(data, blended)["ndcg_at_10"])
     selected = candidates[int(np.argmax(validation))]
@@ -431,7 +467,9 @@ def build_mechanism(key: str, data, seed: int):
 def _utility_scorer(transition, features, popularity, weights):
     def scorer(_user, history):
         relevance = transition[history[-1]]
-        interest = features @ _normalize(features[list(history)].mean(0, keepdims=True))[0]
+        interest = (
+            features @ _normalize(features[list(history)].mean(0, keepdims=True))[0]
+        )
         novelty = 1 - popularity
         return weights[0] * relevance + weights[1] * interest + weights[2] * novelty
 
@@ -439,7 +477,6 @@ def _utility_scorer(transition, features, popularity, weights):
 
 
 def _score_metrics_validation(data, scorer):
-    original = data.test
     proxy = type(
         "ValidationData",
         (),
@@ -493,15 +530,23 @@ def render_industrial_p0(result: dict) -> str:
         [
             f"# {result['paper']['title']}",
             "",
-            f"公开数据：MovieLens-1M（{result['dataset']['users']} users / "
-            f"{result['dataset']['items']} items，全目录评估）。",
+            (
+                f"公开数据：MovieLens-1M（{result['dataset']['users']} users / "
+                f"{result['dataset']['items']} items，全目录评估）。"
+            ),
             "",
             "| Variant | Hit@10 | NDCG@10 | MRR@10 | Head share@10 |",
             "|---|---:|---:|---:|---:|",
-            f"| {baseline['name']} | {baseline['hit_at_10']:.4f} | {baseline['ndcg_at_10']:.4f} | "
-            f"{baseline['mrr_at_10']:.4f} | {baseline['head_share_at_10']:.4f} |",
-            f"| {method['name']} | {method['hit_at_10']:.4f} | {method['ndcg_at_10']:.4f} | "
-            f"{method['mrr_at_10']:.4f} | {method['head_share_at_10']:.4f} |",
+            (
+                f"| {baseline['name']} | {baseline['hit_at_10']:.4f} | "
+                f"{baseline['ndcg_at_10']:.4f} | {baseline['mrr_at_10']:.4f} | "
+                f"{baseline['head_share_at_10']:.4f} |"
+            ),
+            (
+                f"| {method['name']} | {method['hit_at_10']:.4f} | "
+                f"{method['ndcg_at_10']:.4f} | {method['mrr_at_10']:.4f} | "
+                f"{method['head_share_at_10']:.4f} |"
+            ),
             "",
             f"相对本文本地基线：NDCG@10 {result['relative']['ndcg_at_10_percent']:+.2f}%。",
             "",
