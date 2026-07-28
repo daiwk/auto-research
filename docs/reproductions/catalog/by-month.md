@@ -109,7 +109,16 @@
 
 ## 2025-12
 
+- [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：把用户意图推理组织成层级 multi-agent 协作，并以 meta-prompt、压缩表示和约束偏好 RL 优化标签与解释。
+- [HiGR](../2512.24787-higr/README.md)：联合 residual Semantic ID、粗到细 slate decoder 与 ORPO 列表偏好对齐。
+
+- [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级意图 agents、混合压缩表示、meta-prompt 和约束偏好 RL 升级淘宝意图推理。
+- [HiGR](../2512.24787-higr/README.md)：先生成层级 Semantic ID 簇再解码物品 slate，并以 ORPO 做列表偏好对齐。
 - [mHC](../2512.24880-mhc/README.md)：以双随机流形约束多流 residual mixing，在保留信息交换的同时限制深层信号放大。
+
+## 2025-09
+
+- [DRL-PUT](../2509.05292-drl-put/README.md)：从 logged ads behavior 学习相关性、新颖性和收益等排序 utility 的动态权重策略。
 
 ## 2025-10
 
@@ -123,12 +132,18 @@
 
 ## 2025-07
 
+- [Click A, Buy B](../2507.15113-click-a-buy-b/README.md)：显式区分点击 A 后购买 A/B 的归因路径，并用 taxonomy-aware weighting 共享跨物品信号。
+
+- [Click A, Buy B](../2507.15113-click-a-buy-b/README.md)：拆分同物品 CABA 与跨物品 CABB 转化归因，并用商品 taxonomy 建立协同权重。
 - [PinFM](../2507.12704-pinfm/README.md)：以 DCAT 等序列模块构建推荐 foundation model，并通过预训练—微调适配多个流量场景。
 - [RankMixer](../2507.15551-rankmixer/README.md)：交替进行 token mixing 与逐 token FFN，并探索稀疏 MoE 以扩展工业排序网络。
 - [ARGUS](../2507.15994-argus/README.md)：分解用户反馈与物品表示，在大规模 Transformer 中联合建模音乐序列。
 
 ## 2025-06
 
+- [MGOE](../2506.10520-mgoe/README.md)：从任务统计构建 Macro Task Merging Graph，在 graph experts 中传播关系后分别预测各目标。
+
+- [MGOE](../2506.10520-mgoe/README.md)：构建宏观任务合并图，让 graph experts 显式传播多任务关系后进入独立预测塔。
 - [TransAct V2](../2506.02267-transact-v2/README.md)：用候选感知的终身行为序列和 next-action 多任务目标增强 Homefeed 排序。
 
 ## 2025-05
@@ -147,10 +162,25 @@
 
 ## 2025-02
 
+- [MIM](../2502.00321-mim/README.md)：以多模态遮盖预训练、内容兴趣 SFT 与 CiUBM 把内容语义注入用户行为建模。
+- [FuXi-α](../2502.03036-fuxi-alpha/README.md)：以自适应多通道注意力和分阶段 FFN 扩展推荐特征交互容量。
+- [FilterLLM](../2502.16924-filterllm/README.md)：将新品文本直接生成为用户分布，并用行为信号校准十亿级冷启动召回。
+
+- [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣 SFT 对齐内容/协同空间，再由 CiUBM 融合排序。
+- [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用多通道注意力和 multi-stage FFN 扩展特征交互模型容量。
+- [FilterLLM](../2502.16924-filterllm/README.md)：把新品文本映射到用户词表分布，并用历史行为约束冷启动召回。
 - [LUM](../2502.08309-lum/README.md)：通过 next-condition-item 预训练和 group query 压缩用户知识，再把生成表征注入判别式排序器。
 - [SessionRec](../2502.10157-sessionrec/README.md)：按真实 session 生成候选，并利用曝光负例和 hard negative 改善会话级召回。
 - [SERAL](../2502.13539-seral/README.md)：构建用户认知画像，用 IPO 对齐惊喜度偏好，并通过 nearline 链路注入推荐排序。
 - [OneRec](../2502.18965-onerec/README.md)：把 session 推荐建模为 Semantic ID 序列生成，并结合 MoE 与偏好优化对齐真实反馈。
+
+## 2025-01
+
+- [AdaF²M²](../2501.15816-adaf2m2/README.md)：通过 feature-mask 多次前向学习完整表征，再按用户/物品状态动态调节 adapter。
+
+## 2025-01
+
+- [AdaF²M²](../2501.15816-adaf2m2/README.md)：用 feature-mask multi-forward 学习全面特征，再由 state-aware adapter 响应不同用户/物品状态。
 
 ## 2024-12
 

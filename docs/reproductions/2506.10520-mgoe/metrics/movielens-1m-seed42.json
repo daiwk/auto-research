@@ -1,0 +1,71 @@
+{
+  "paper": {
+    "arxiv_id": "2506.10520",
+    "title": "Macro Graph of Experts for Billion-Scale Multi-Task Recommendation",
+    "url": "https://arxiv.org/abs/2506.10520"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "macro_graph_experts"
+  },
+  "baseline": {
+    "name": "MMoE independent task gates",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "MGOE macro task graph + graph experts + prediction towers",
+    "hit_at_10": 0.1595238095238095,
+    "ndcg_at_10": 0.08041701819654316,
+    "mrr_at_10": 0.05625661375661373,
+    "head_share_at_10": 0.40166666666666667
+  },
+  "relative": {
+    "hit_at_10_percent": 13.559322033898296,
+    "ndcg_at_10_percent": 7.0291418122239815,
+    "mrr_at_10_percent": 1.5260797653758653,
+    "head_share_at_10_percent": 84.57330415754923
+  },
+  "diagnostics": {
+    "macro_task_graph": [
+      [
+        1.0,
+        0.987,
+        0.172
+      ],
+      [
+        0.987,
+        1.0,
+        0.169
+      ],
+      [
+        0.172,
+        0.169,
+        1.0
+      ]
+    ],
+    "validation_blend_weight": 0.25,
+    "validation_ndcg_candidates": [
+      0.064248,
+      0.064244,
+      0.061558,
+      0.05335
+    ]
+  },
+  "paper_results": {
+    "pctr_percent": 2.16,
+    "uctr_percent": 1.63,
+    "cvr_percent": 5.88,
+    "gmv_percent": 16.46,
+    "stay_time_percent": 4.12
+  },
+  "scope": "从 MovieLens rating/序列代理多个任务，实际估计任务相关图、图传播专家及任务塔；未复刻阿里十亿级稀疏特征、生产任务定义和分布式训练。"
+}

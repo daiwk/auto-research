@@ -1,0 +1,60 @@
+{
+  "paper": {
+    "arxiv_id": "2512.14503",
+    "title": "RecGPT-V2 Technical Report",
+    "url": "https://arxiv.org/abs/2512.14503"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "hierarchical_agents"
+  },
+  "baseline": {
+    "name": "RecGPT-V1 single-route interest representation",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "RecGPT-V2 hierarchical agents + meta-prompt + constrained preference RL",
+    "hit_at_10": 0.14761904761904762,
+    "ndcg_at_10": 0.08905066108112314,
+    "mrr_at_10": 0.07097978080120934,
+    "head_share_at_10": 0.18166666666666667
+  },
+  "relative": {
+    "hit_at_10_percent": 5.084745762711866,
+    "ndcg_at_10_percent": 18.519886052347154,
+    "mrr_at_10_percent": 28.096918853479266,
+    "head_share_at_10_percent": -16.52078774617068
+  },
+  "diagnostics": {
+    "meta_router_weights": [
+      0.4211,
+      0.2455,
+      0.2334,
+      0.1
+    ],
+    "constrained_policy_kl": 0.11966808908178542,
+    "validation_blend_weight": 0.75,
+    "validation_ndcg_candidates": [
+      0.060004,
+      0.058384,
+      0.06366,
+      0.061186
+    ]
+  },
+  "paper_results": {
+    "ctr_percent": 2.98,
+    "ipv_percent": 3.71,
+    "tv_percent": 2.19,
+    "ner_percent": 11.46
+  },
+  "scope": "用可训练的短期、长期、类目 agent 构造层级意图，执行 meta-router、压缩混合表示和带 KL 约束的验证集偏好更新；未调用淘宝私有 LLM、Agent-as-Judge 标注与线上系统。"
+}

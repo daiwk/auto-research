@@ -1,0 +1,52 @@
+{
+  "paper": {
+    "arxiv_id": "2502.00321",
+    "title": "MIM: Multi-modal Content Interest Modeling Paradigm for User Behavior Modeling",
+    "url": "https://arxiv.org/abs/2502.00321"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "masked_multimodal_interest"
+  },
+  "baseline": {
+    "name": "ID co-occurrence interest model",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "MIM masked multimodal pretraining + C-SFT + CiUBM",
+    "hit_at_10": 0.12142857142857143,
+    "ndcg_at_10": 0.07584470393503259,
+    "mrr_at_10": 0.06228080120937263,
+    "head_share_at_10": 0.3904761904761905
+  },
+  "relative": {
+    "hit_at_10_percent": -13.559322033898306,
+    "ndcg_at_10_percent": 0.9437275245514073,
+    "mrr_at_10_percent": 12.39790611625489,
+    "head_share_at_10_percent": 79.43107221006564
+  },
+  "diagnostics": {
+    "masked_reconstruction_mse": 0.018867625416619935,
+    "validation_blend_weight": 1.0,
+    "validation_ndcg_candidates": [
+      0.059486,
+      0.068701,
+      0.076633,
+      0.077251
+    ]
+  },
+  "paper_results": {
+    "ctr_percent": 14.14,
+    "rpm_percent": 4.12
+  },
+  "scope": "以 MovieLens genre 特征代理图文模态，实际执行遮盖重建、内容/协同对比对齐和内容兴趣融合；未复刻淘宝私有多模态编码器、曝光日志和线上 CiUBM serving。"
+}

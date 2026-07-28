@@ -18,16 +18,26 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 127 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 136 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
 - 2026-07-28 最近论文增量加入 Meta Mosaic、快手 UniR²、美团 CORE 与纯 LLM DataOrchestra；前三篇均通过量化线上 A/B 门槛，DataOrchestra 有官方代码与公开预训练 benchmark。
+- 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 
-## 全部复现（127/127）
+## 全部复现（136/136）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `mim` · [MIM](2502.00321-mim/README.md) | 淘宝 CTR +14.14%、RPM +4.12% | 遮盖多模态对齐 + CiUBM；NDCG@10 +0.94%，Hit@10 下降 |
+| 核心机制 | `filterllm` · [FilterLLM](2502.16924-filterllm/README.md) | Cold-PV +5.13%、GMV +10.86% | text-to-user-distribution；NDCG@10 -9.82%，保留负结果 |
+| 核心机制 | `fuxi-alpha` · [FuXi-α](2502.03036-fuxi-alpha/README.md) | 播放歌曲 +4.67%、时长 +5.10% | 三通道交互；Hit@10 略升、NDCG@10 -4.25% |
+| 核心机制 | `recgpt-v2` · [RecGPT-V2](2512.14503-recgpt-v2/README.md) | 淘宝 CTR +2.98%、IPV +3.71%、NER +11.46% | 层级 agents + 约束路由；NDCG@10 +18.52% |
+| 核心机制 | `higr` · [HiGR](2512.24787-higr/README.md) | 腾讯播放量 +1.73%、观看时长 +1.22% | 层级 SID slate + ORPO；NDCG@10 -12.32% |
+| 核心机制 | `drl-put` · [DRL-PUT](2509.05292-drl-put/README.md) | Pinterest 收入 +0.27%、CTR +1.62% | logged bandit 策略调权；NDCG@10 +19.13% |
+| 核心机制 | `adaf2m2` · [AdaF²M²](2501.15816-adaf2m2/README.md) | 抖音活跃天数 +1.37%、时长 +1.89% | feature-mask multi-forward + adapter；NDCG@10 +2.42% |
+| 核心机制 | `mgoe` · [MGOE](2506.10520-mgoe/README.md) | 阿里 GMV +16.46%、CVR +5.88% | macro task graph experts；NDCG@10 +7.03% |
+| 核心机制 | `click-a-buy-b` · [Click A Buy B](2507.15113-click-a-buy-b/README.md) | Pinterest 主业务指标 +0.25% | CABA/CABB + taxonomy；NDCG@10 +33.70% |
 | 核心机制 | `mosaic` · [Mosaic](2607.24015-mosaic/README.md) | Meta 三个 surface +0.10%/+0.15%/+0.28% | 四 specialist + MRM + CRL；NDCG@10 +3.49%，Hit@10 -7.69% |
 | 核心机制 | `unir2` · [UniR²](2607.24439-unir2/README.md) | 快手播放量 +1.177%、点赞率 +2.560%；极速版送礼金额 +2.569% | DQ-PCA + ranking LoRA；SID code accuracy +34.04%，NDCG@10 -13.19% |
 | 核心机制 | `core-relevance` · [CORE](2607.24417-core-relevance/README.md) | 美团 NDCG@5 +0.20%、Badcase@5 -15.9% | 级联头 + step-GRPO + PostCoT；NDCG@5 +0.98%、Badcase@5 -50.00%，accuracy -0.52 points |

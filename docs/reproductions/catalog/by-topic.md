@@ -4,6 +4,10 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [MIM](../2502.00321-mim/README.md)：多模态内容预训练和内容兴趣感知 SFT 把协同偏好对齐到内容空间。
+- [FilterLLM](../2502.16924-filterllm/README.md)：让 LLM 从新品文本直接预测用户词表分布，避免逐候选判断。
+- [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级 multi-agent、meta-prompt 和约束偏好 RL 生成淘宝用户意图标签与解释。
+
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态 LLM 内容表征对齐到协同 item-ID 空间，再通过多层 proxy 和 gate 注入工业排序。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来请求并异步缓存 foundation-model latent，把大模型计算移出线上请求路径。
 - [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：用端侧 LoRA+INT8 LLM 将近期行为生成为下一意图 query，并依据意图漂移按需触发推理。
@@ -61,6 +65,8 @@
 
 ## 生成式召回与端到端推荐
 
+- [HiGR](../2512.24787-higr/README.md)：通过层级 Semantic ID、粗到细 slate decoder 和 ORPO 生成整组推荐结果。
+
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：以类目约束残差 Semantic ID 缩小生成空间，再由专家奖励引导 group-relative 策略更新。
 
@@ -95,6 +101,11 @@
 - [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并用 DPO 对齐广告序列的业务偏好。
 
 ## 排序网络与长序列
+
+- [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用多通道注意力和 multi-stage FFN 扩展特征交互模型容量。
+- [AdaF²M²](../2501.15816-adaf2m2/README.md)：用 feature-mask 多次前向和 state-aware adapter 改善特征学习与状态适配。
+- [MGOE](../2506.10520-mgoe/README.md)：把多任务相关性编码成宏观图，再由 graph experts 和任务塔联合预测。
+- [Click A, Buy B](../2507.15113-click-a-buy-b/README.md)：联合 CABA/CABB 分支和商品 taxonomy 重构电商转化归因。
 
 - [Mosaic](../2607.24015-mosaic/README.md)：把不同归纳偏置的 user embedding 作为可独立演进的 specialist fleet，用 MRM 复合监督和去冗余损失增加下游有效信息。
 - [CORE](../2607.24417-core-relevance/README.md)：将有序相关性拆成 High/Non-High 与条件 Mid/Low 两道边界，并把 step-GRPO reasoning 经 PostCoT 蒸馏给在线双头排序器。
@@ -143,6 +154,8 @@
 - [SaviorRec](../2508.01375-saviorrec/README.md)：用行为监督训练内容 encoder，生成 RQ Semantic ID，再通过多行为模块对齐冷启动物品。
 
 ## 采样、蒸馏与强化学习
+
+- [DRL-PUT](../2509.05292-drl-put/README.md)：使用 logged propensity 和策略梯度自动调节广告排序 utility 权重。
 
 - [RAMP](../2607.17473-ramp/README.md)：以富个性化路径为 teacher，通过 feature mask 和 KL alignment 改善仅有公共字段的流量。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：先筛选预测长期参与度的候选奖励，再将独立 reward heads 与即时目标联合优化。

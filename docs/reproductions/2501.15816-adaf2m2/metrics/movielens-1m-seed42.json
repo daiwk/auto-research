@@ -1,0 +1,52 @@
+{
+  "paper": {
+    "arxiv_id": "2501.15816",
+    "title": "AdaF²M²: Comprehensive Learning and Responsive Leveraging Features in Recommendation System",
+    "url": "https://arxiv.org/abs/2501.15816"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "feature_mask_adapter"
+  },
+  "baseline": {
+    "name": "single-forward full-feature ranker",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "AdaF²M² feature-mask multi-forward + state-aware adapter",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07695602850444075,
+    "mrr_at_10": 0.057859032501889646,
+    "head_share_at_10": 0.15976190476190477
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 2.422818861261866,
+    "mrr_at_10_percent": 4.417958292836832,
+    "head_share_at_10_percent": -26.58643326039387
+  },
+  "diagnostics": {
+    "masked_forwards": 3,
+    "validation_blend_weight": 0.5,
+    "validation_ndcg_candidates": [
+      0.064505,
+      0.068814,
+      0.059669,
+      0.045814
+    ]
+  },
+  "paper_results": {
+    "active_days_percent": 1.37,
+    "app_duration_percent": 1.89
+  },
+  "scope": "实际进行多组特征 mask 前向、共享表示集成，并按用户历史长度和物品热度动态调节 adapter；未复刻抖音私有特征、召回/精排全链路和线上状态。"
+}

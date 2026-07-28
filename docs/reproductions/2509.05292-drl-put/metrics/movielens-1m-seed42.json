@@ -1,0 +1,58 @@
+{
+  "paper": {
+    "arxiv_id": "2509.05292",
+    "title": "Deep Reinforcement Learning for Ranking Utility Tuning in the Ad Recommender System at Pinterest",
+    "url": "https://arxiv.org/abs/2509.05292"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "policy_utility_tuning"
+  },
+  "baseline": {
+    "name": "fixed ranking utility weights",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "DRL-PUT contextual policy over ranking utility weights",
+    "hit_at_10": 0.15714285714285714,
+    "ndcg_at_10": 0.0895118697352302,
+    "mrr_at_10": 0.06898526077097504,
+    "head_share_at_10": 0.11047619047619048
+  },
+  "relative": {
+    "hit_at_10_percent": 11.864406779661014,
+    "ndcg_at_10_percent": 19.133720879259098,
+    "mrr_at_10_percent": 24.497416747659727,
+    "head_share_at_10_percent": -49.23413566739606
+  },
+  "diagnostics": {
+    "learned_action": [
+      0.75,
+      0.15,
+      0.1
+    ],
+    "logged_policy_updates": 18,
+    "validation_blend_weight": 0.5,
+    "validation_ndcg_candidates": [
+      0.067197,
+      0.07709,
+      0.069012,
+      0.06934
+    ]
+  },
+  "paper_results": {
+    "platform_revenue_percent": 0.27,
+    "ctr_percent": 1.62,
+    "cvr_percent": 0.67
+  },
+  "scope": "从公开交互构造带 propensity 的 logged contextual bandit，使用 REINFORCE 学习相关性/新颖性/收益权重策略；未复刻 Pinterest 广告拍卖、真实收入和反事实校准。"
+}
