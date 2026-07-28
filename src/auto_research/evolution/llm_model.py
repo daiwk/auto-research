@@ -29,12 +29,14 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "hyper_connections", "mhc", "qkv_depthwise_conv",
         "mobius_rope", "naju", "adadsf", "engram",
         "looped_latent_attention", "gaugequant",
+        "switch_transformer", "mamba", "switch_attention",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
     modern = architecture.startswith("llama") or architecture in {
         "hyper_connections", "mhc", "qkv_depthwise_conv", "mobius_rope", "naju",
         "adadsf", "engram", "looped_latent_attention", "gaugequant",
+        "switch_transformer", "mamba", "switch_attention",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -60,6 +62,10 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.k = nn.Linear(config.dimensions, kv_heads * head_dim, bias=not modern)
             self.v = nn.Linear(config.dimensions, kv_heads * head_dim, bias=not modern)
             self.output = nn.Linear(config.dimensions, config.dimensions, bias=not modern)
+            self.switch_router = (
+                nn.Linear(config.dimensions, 1)
+                if architecture == "switch_attention" else None
+            )
             qkv_width = config.heads * head_dim + 2 * kv_heads * head_dim
             self.qkv_conv = (
                 nn.Conv1d(qkv_width, qkv_width, kernel_size=3, groups=qkv_width, bias=True)
@@ -92,7 +98,22 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 repeats = config.heads // kv_heads
                 k = k.repeat_interleave(repeats, dim=1)
                 v = v.repeat_interleave(repeats, dim=1)
-            mixed = torch.nn.functional.scaled_dot_product_attention(q, k, v, is_causal=True)
+            mixed = torch.nn.functional.scaled_dot_product_attention(
+                q, k, v, is_causal=True
+            )
+            if self.switch_router is not None:
+                positions = torch.arange(length, device=values.device)
+                local_mask = (
+                    (positions[None, :] <= positions[:, None])
+                    & (positions[None, :] >= positions[:, None] - 15)
+                )
+                local = torch.nn.functional.scaled_dot_product_attention(
+                    q, k, v, attn_mask=local_mask, is_causal=False
+                )
+                route = torch.sigmoid(self.switch_router(values))
+                route = route.transpose(1, 2).unsqueeze(-1)
+                mixed = route * mixed + (1.0 - route) * local
+                self.last_full_attention_rate = float(route.detach().mean().cpu())
             return self.output(mixed.transpose(1, 2).reshape(batch, length, config.dimensions))
 
     class LoopedLatentAttention(nn.Module):
@@ -209,7 +230,20 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         def __init__(self):
             super().__init__()
             width = config.expansion * config.dimensions
-            if modern or architecture == "parallel_swiglu":
+            if architecture == "switch_transformer":
+                self.router = nn.Linear(config.dimensions, 4, bias=False)
+                self.experts = nn.ModuleList(
+                    [
+                        nn.Sequential(
+                            nn.Linear(config.dimensions, width, bias=False),
+                            nn.ReLU(),
+                            nn.Linear(width, config.dimensions, bias=False),
+                        )
+                        for _ in range(4)
+                    ]
+                )
+                self.last_balance_loss = None
+            elif modern or architecture == "parallel_swiglu":
                 self.up = nn.Linear(config.dimensions, width, bias=False)
                 self.gate = nn.Linear(config.dimensions, width, bias=False)
                 self.down = nn.Linear(width, config.dimensions, bias=False)
@@ -220,6 +254,21 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 )
 
         def forward(self, values):
+            if hasattr(self, "experts"):
+                probability = torch.softmax(self.router(values), dim=-1)
+                selected = probability.argmax(-1)
+                outputs = torch.stack(
+                    [expert(values) for expert in self.experts], dim=-2
+                )
+                dispatch = torch.nn.functional.one_hot(
+                    selected, len(self.experts)
+                ).to(values.dtype)
+                gate = (dispatch * probability).sum(-1, keepdim=True)
+                mixed = (dispatch.unsqueeze(-1) * outputs).sum(-2)
+                load = dispatch.float().mean(dim=(0, 1))
+                importance = probability.float().mean(dim=(0, 1))
+                self.last_balance_loss = len(self.experts) * (load * importance).sum()
+                return gate * mixed
             if hasattr(self, "network"):
                 return self.network(values)
             return self.down(torch.nn.functional.silu(self.gate(values)) * self.up(values))
@@ -372,6 +421,44 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 mixed * torch.nn.functional.silu(modulation)
             )
 
+    class MambaBlock(nn.Module):
+        """Input-dependent selective state-space recurrence (Mamba core)."""
+
+        def __init__(self):
+            super().__init__()
+            d = config.dimensions
+            self.norm = RMSNorm()
+            self.input = nn.Linear(d, 2 * d, bias=False)
+            self.conv = nn.Conv1d(d, d, 4, groups=d)
+            self.delta = nn.Linear(d, d)
+            self.b = nn.Linear(d, d)
+            self.c = nn.Linear(d, d)
+            self.a_log = nn.Parameter(torch.zeros(d))
+            self.skip = nn.Parameter(torch.ones(d))
+            self.output = nn.Linear(d, d, bias=False)
+            self.last_selectivity = 0.0
+
+        def forward(self, values):
+            content, gate = self.input(self.norm(values)).chunk(2, dim=-1)
+            content = self.conv(
+                torch.nn.functional.pad(content.transpose(1, 2), (3, 0))
+            ).transpose(1, 2)
+            content = torch.nn.functional.silu(content)
+            delta = torch.nn.functional.softplus(self.delta(content))
+            decay = torch.exp(-delta * torch.exp(self.a_log))
+            write = delta * self.b(content) * content
+            read = self.c(content)
+            state = torch.zeros_like(content[:, 0])
+            outputs = []
+            for index in range(content.shape[1]):
+                state = decay[:, index] * state + write[:, index]
+                outputs.append(read[:, index] * state + self.skip * content[:, index])
+            self.last_selectivity = float(delta.detach().std().cpu())
+            mixed = torch.stack(outputs, dim=1)
+            return values + self.output(
+                mixed * torch.nn.functional.silu(gate)
+            )
+
     class MicroLM(nn.Module):
         def __init__(self):
             super().__init__()
@@ -390,6 +477,8 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                         if hyper
                         else NajuBlock()
                         if architecture == "naju"
+                        else MambaBlock()
+                        if architecture == "mamba"
                         else Block()
                     )
                     for _ in range(config.layers)
@@ -499,12 +588,54 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                     "activation_bits": 4,
                     "logsumexp_outlier": self.gauge_quantizer.last_outlier,
                 }
+            if architecture == "switch_transformer":
+                losses = [
+                    block.ffn.last_balance_loss
+                    for block in self.blocks
+                    if block.ffn.last_balance_loss is not None
+                ]
+                return {
+                    "experts": 4,
+                    "active_experts_per_token": 1,
+                    "load_balance_loss": (
+                        float(torch.stack(losses).mean().detach().cpu())
+                        if losses else 0.0
+                    ),
+                }
+            if architecture == "mamba":
+                return {
+                    "selective_scan": True,
+                    "attention_layers": 0,
+                    "delta_std": sum(
+                        block.last_selectivity for block in self.blocks
+                    ) / len(self.blocks),
+                }
+            if architecture == "switch_attention":
+                return {
+                    "routing_granularity": "token-layer",
+                    "full_attention_rate": sum(
+                        block.attention.last_full_attention_rate
+                        for block in self.blocks
+                    ) / len(self.blocks),
+                    "local_window": 16,
+                }
             return {}
 
         def auxiliary_loss(self):
-            if self.gauge_quantizer is None:
-                return self.token.weight.sum() * 0.0
-            return self.gauge_quantizer.regularizer()
+            losses = []
+            if self.gauge_quantizer is not None:
+                losses.append(self.gauge_quantizer.regularizer())
+            if architecture == "switch_transformer":
+                losses.extend(
+                    1e-2 * block.ffn.last_balance_loss
+                    for block in self.blocks
+                    if block.ffn.last_balance_loss is not None
+                )
+            return (
+                sum(losses)
+                if losses
+                else self.token.weight.sum() * 0.0
+            )
 
     return MicroLM()
 

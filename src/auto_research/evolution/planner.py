@@ -14,6 +14,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "hyper_connections", "mhc", "qkv_depthwise_conv",
             "mobius_rope", "naju", "adadsf",
             "engram", "looped_latent_attention", "gaugequant",
+            "switch_transformer", "mamba", "switch_attention",
         ]
         text = direction.lower().replace("-", "")
         priority_terms = {
@@ -23,6 +24,9 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
                 "kv 压缩", "循环注意力",
             ),
             "gaugequant": ("gaugequant", "quantization", "量化", "w4a4"),
+            "switch_transformer": ("switch transformer", "sparse moe", "稀疏 moe"),
+            "mamba": ("mamba", "selective ssm", "选择性状态空间"),
+            "switch_attention": ("switch attention", "swiattn", "动态注意力路由"),
         }
         for architecture, terms in priority_terms.items():
             if any(term in text for term in terms):

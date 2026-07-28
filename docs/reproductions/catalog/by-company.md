@@ -4,6 +4,9 @@
 
 ## Alibaba
 
+- 2018-09 · [DIEN](../1809.03672-dien/README.md)：用 GRU 抽取逐步兴趣，以下一行为辅助监督并由候选相关门控控制兴趣演化。
+- 2019-05 · [BST](../1905.06874-bst/README.md)：把候选商品作为 token 与用户行为共同送入 Transformer，显式建模序列内依赖。
+- 2026-05 · [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 表示商品，再以多专家奖励和 EG-GRPO 优化生成检索。
 - 2026-02 · [HiSAC](../2602.21009-hisac/README.md)：用层级投票生成少量兴趣 agent，再对超长历史做 query-conditioned soft routing。
 - 2026-06 · [EvoRec](../2606.28368-evorec/README.md)：让模型候选和优化方法双轨进化，并从持久实验记忆中提炼下一代可复用技能。
 
@@ -52,6 +55,9 @@
 
 ## Google / YouTube
 
+- 2016-06 · [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 特征交叉与 deep tower，兼顾共现记忆和未见组合泛化。
+- 2020-08 · [DCN-V2](../2008.13535-dcn-v2/README.md)：用低秩 cross experts 与输入相关 gate 高效学习有界阶数特征交互。
+- 2021-01 · [Switch Transformer](../2101.03961-switch-transformer/README.md)：让每个 token 只路由到一个 FFN expert，以近似固定计算扩展模型容量。
 - 2023-05 · [TIGER](../2305.05065-tiger/README.md)：用 RQ-VAE 把物品量化为层级 Semantic ID，再通过自回归模型直接生成召回结果。
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
@@ -59,6 +65,7 @@
 
 ## Huawei
 
+- 2026-03 · [Switch Attention](../2603.26380-switch-attention/README.md)：与北大合作学习逐 token full/local attention 路由，把全局计算集中到必要位置。
 - 2026-07 · [AdaDSF](../2607.21291-adadsf/README.md)：根据 dense 层输入/输出相似度分配逐层 token budget，用轻量 Top-K router 和特征对齐保留稀疏模型能力。
 - 2026-07 · [RAMP](../2607.17473-ramp/README.md)：用个性化/公共双路径、可用性 mask 和 prediction-alignment 蒸馏提升缺失用户字段时的广告排序鲁棒性。
 - 2023-06 · [KAR](../2306.10933-kar/README.md)：让 LLM 生成用户偏好与物品事实知识，再由 hybrid-expert adapter 融合进传统推荐模型。
@@ -69,6 +76,7 @@
 
 ## Kuaishou
 
+- 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
 - 2026-01 · [OneMall](../2601.21770-onemall/README.md)：以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
 - 2026-07 · [RECAP](../2607.15730-recap/README.md)：把流式用户画像维护为固定容量语义状态，并用推荐反馈评价器和 GRPO 闭环优化画像更新策略。
 - 2026-07 · [UAME](../2607.17092-uame/README.md)：把满意度分数建模为均值—方差 Gaussian 变量，用多目标冲突产生的不确定性加权 pairwise 排序训练。
@@ -177,6 +185,7 @@
 
 ## 学术与经典基线
 
+- 2023-12 · [Mamba](../2312.00752-mamba/README.md)：使用输入相关的步长、写入和读取向量实现选择性状态空间递推与线性序列复杂度。
 - 2026-07 · [GaugeQuant](../2607.20757-gaugequant/README.md)：Cambridge 在线学习量化友好正交基，以 LogSumExp 抑制 W4A4 outlier。
 - 2026-07 · [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：以逐 block gzip 压缩率选择信息密集区，组合 local、literal long-range 和 hybrid heads 构造零参数自适应 mask。
 - 2026-07 · [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入带残差的逐通道短卷积，以极少参数补充注意力的局部归纳偏置。

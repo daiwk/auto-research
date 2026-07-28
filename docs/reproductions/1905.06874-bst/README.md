@@ -1,0 +1,53 @@
+# BST
+
+> **Fidelity: 核心机制复现**。实现候选 token、位置编码和行为序列 Transformer。
+
+## 论文信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 1905.06874](https://arxiv.org/abs/1905.06874) |
+| 公司/机构 | Alibaba |
+| 首次公开日期 | 2019-05-15（arXiv v1） |
+| 原文开源代码 | 否：未发现原作者发布的官方代码（核查日期：2026-07-28） |
+| Adapter | `bst` |
+| 本地复现代码 | [`src/auto_research/reproductions/bst/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/bst/) |
+
+## 原始论文总结
+
+### 背景与主要改动
+
+BST 用自注意力统一建模行为之间及行为与候选之间的关系，替代固定 pooling 或单一目标注意力。
+
+```mermaid
+flowchart LR
+  H["行为 + 位置"] --> T["Transformer Encoder"]
+  C["候选 token"] --> T
+  T --> M["序列/候选融合"]
+  M --> P["CTR"]
+```
+
+### 核心公式
+
+$$
+H'=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt d}\right)V,\qquad
+\hat y=\sigma(\operatorname{MLP}([h_{\rm cand},\operatorname{pool}(H')])).
+$$
+
+### 论文离线与线上效果
+
+淘宝推荐线上 A/B 中，BST 相对 WDL 的 CTR 提升 **7.57%**。
+
+## 本地复现
+
+> **本地对照口径**：基线是 DIN；实验组是候选参与编码的 Transformer；三 seed NDCG@10 相对 **+20.29%**。
+
+```bash
+auto-research reproduce --paper bst
+```
+
+结构化结果见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
+
+## 复现边界
+
+公开数据替代淘宝日志；没有复刻用户画像、上下文特征和生产推理系统。

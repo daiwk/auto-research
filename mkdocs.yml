@@ -14,6 +14,7 @@ nav:
       - UniRank 公共评测: unirank.md
   - 论文实现与评测:
       - 研究库总览: research-library.md
+      - 全域论文谱系与缺口: research-lineage.md
       - 搜广推与 LLM 应用:
           - 工业论文总览: reproductions/README.md
           - 按公司浏览: reproductions/catalog/by-company.md

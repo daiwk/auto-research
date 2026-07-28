@@ -26,6 +26,24 @@ PAPERS = {
         "url": "https://arxiv.org/abs/2607.20757",
         "organization": "University of Cambridge",
     },
+    "switch-transformer": {
+        "arxiv_id": "2101.03961",
+        "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+        "url": "https://arxiv.org/abs/2101.03961",
+        "organization": "Google Brain",
+    },
+    "mamba": {
+        "arxiv_id": "2312.00752",
+        "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+        "url": "https://arxiv.org/abs/2312.00752",
+        "organization": "Carnegie Mellon University / Princeton University",
+    },
+    "switch-attention": {
+        "arxiv_id": "2603.26380",
+        "title": "Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers",
+        "url": "https://arxiv.org/abs/2603.26380",
+        "organization": "Peking University / Huawei Technologies",
+    },
 }
 
 

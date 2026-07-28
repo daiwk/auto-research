@@ -49,6 +49,7 @@
 
 ## 2026-05
 
+- [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 与 expert-guided GRPO 优化天猫搜索生成式检索。
 - [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：将 LoRA+INT8 小模型部署到端侧，通过预算约束 prompt 和 entropy/Jaccard/JS 漂移分数按需生成用户意图。
 - [FLUID](../2605.21832-fluid/README.md)：将直播多模态切片离散为 slice/room LUCID，以独立 prefix token 晚融合并逐阶段退掉候选 item ID。
 - [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线构造冻结 n-gram hidden memory，recipient 通过最长后缀匹配、Engram fallback 与门控写入复用知识。
@@ -67,12 +68,14 @@
 
 ## 2026-04
 
+- [CS3](../2604.19269-cs3/README.md)：以循环自修正、跨塔同步和级联教师增强可在线部署的双塔召回。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item pair，异步预计算并缓存 foundation-model latent，在线命中直接消费。
 - [GenRec](../2604.14878-genrec/README.md)：用 page-wise NTP、非对称 Token Merger 和带 NLL 正则的 GRPO-SR 优化整页结果。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由统一多个业务域的生成式推荐。
 
 ## 2026-03
 
+- [Switch Attention](../2603.26380-switch-attention/README.md)：学习逐 token full/local attention 路由以兼顾长上下文质量和解码效率。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把 VLM 图文对齐与 Pin-Board 共现邻居目标结合，改善 fresh 内容表征。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容表征先对齐到 item-ID 协同空间，再经多层 proxy 与 gate 接入排序。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归生成候选，并同时注入近期历史和长期用户 prompt。
@@ -168,6 +171,10 @@
 
 - [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 
+## 2023-12
+
+- [Mamba](../2312.00752-mamba/README.md)：用输入相关 selective state space 递推替代注意力，实现线性序列扩展。
+
 ## 2023-11
 
 - [BEQUE](../2311.03758-beque/README.md)：生成用户相关的搜索改写，并结合离线检索反馈、自采样与偏好排序优化改写质量。
@@ -184,6 +191,22 @@
 
 - [M6-Rec](../2205.08084-m6rec/README.md)：把推荐任务统一改写为自然语言任务，在预训练语言模型上使用轻量 option-adapter 完成多场景适配。
 
+## 2021-01
+
+- [Switch Transformer](../2101.03961-switch-transformer/README.md)：让每个 token 只激活一个 FFN expert，以稀疏路由扩展参数容量。
+
+## 2020-08
+
+- [DCN-V2](../2008.13535-dcn-v2/README.md)：用低秩 cross experts 和 gate 显式学习高阶特征交互。
+
+## 2019-05
+
+- [BST](../1905.06874-bst/README.md)：用候选参与的 Transformer 建模电商用户行为序列。
+
+## 2018-09
+
+- [DIEN](../1809.03672-dien/README.md)：以辅助监督 GRU 抽取兴趣，再让候选相关门控控制兴趣演化。
+
 ## 2018-08
 
 - [SASRec](../1808.09781-sasrec/README.md)：用因果自注意力编码用户行为序列，并预测下一物品，作为经典序列推荐基线。
@@ -191,3 +214,7 @@
 ## 2017-06
 
 - [DIN](../1706.06978-din/README.md)：用候选物品感知的局部激活单元，从用户历史中动态提取相关兴趣，并以 Dice 激活训练 CTR 排序模型。
+
+## 2016-06
+
+- [Wide & Deep](../1606.07792-wide-deep/README.md)：联合记忆型 wide 交叉和泛化型 deep tower，是工业深度推荐的经典起点。

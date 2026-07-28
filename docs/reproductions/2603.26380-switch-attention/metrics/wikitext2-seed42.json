@@ -1,0 +1,1 @@
+{"dataset":"WikiText-2","seed":42,"steps":30,"baseline":{"model":"full-attention-transformer","perplexity":313.2659952},"method":{"model":"switch-attention","perplexity":313.8712474},"relative_percent":0.1932071063}

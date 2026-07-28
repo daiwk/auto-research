@@ -37,10 +37,19 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **109/109** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **118/118** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `wide-deep` | Wide & Deep · Google | wide 交叉 + deep tower；NDCG@10 +5.45% |
+| 核心机制 | `dcn-v2` | DCN-V2 · Google | low-rank cross experts；NDCG@10 +22.87% |
+| 核心机制 | `dien` | DIEN · Alibaba | GRU、auxiliary loss 与兴趣演化；NDCG@10 -1.98% |
+| 核心机制 | `bst` | BST · Alibaba | 候选 token 行为 Transformer；NDCG@10 +20.29% |
+| 核心机制 | `cs3` | CS3 · Kuaishou | cycle/sync/cascade 双塔；NDCG@10 -16.06% |
+| 核心机制 | `cq-sid` | CQ-SID · Alibaba/Tmall | category SID 与 EG-GRPO；NDCG@10 +1.66% |
+| 核心机制 | `switch-transformer` | Switch Transformer · Google Brain | top-1 sparse MoE；WikiText-2 PPL -3.29% |
+| 核心机制 | `mamba` | Mamba · CMU/Princeton | selective SSM scan；WikiText-2 PPL +48.82%（变差） |
+| 核心机制 | `switch-attention` | Switch Attention · PKU/Huawei | 动态 full/local attention；WikiText-2 PPL +0.19%（略差） |
 | 核心机制 | `onemall` | OneMall · Kuaishou | 多场景 prompt、三层 Semantic ID 与跨行为融合；NDCG@10 +4.33% |
 | 核心机制 | `dos` | DOS · Meituan | 协同/语义双流、正交旋转与 residual quantization；NDCG@10 +11.26% |
 | 核心机制 | `mdl` | MDL · ByteDance/Douyin | feature/scenario/task tokenization 与 domain-feature attention；NDCG@10 +13.34%，头部偏置上升 |
