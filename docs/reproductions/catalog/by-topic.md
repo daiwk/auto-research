@@ -40,6 +40,7 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [DataOrchestra](../2607.24717-data-orchestra/README.md)：训练 per-example orchestrator 为每个预训练 chunk 选择跳过、保留或多阶段清洗，避免固定数据处理策略的过度计算和过度改写。
 - [Switch Transformer](../2101.03961-switch-transformer/README.md)：以 top-1 token routing 激活单个 FFN expert，并用负载均衡损失扩展稀疏容量。
 - [Mamba](../2312.00752-mamba/README.md)：通过输入相关 selective scan 在状态空间模型中选择性保留和写入信息。
 - [Switch Attention](../2603.26380-switch-attention/README.md)：动态选择 full 或 local attention，减少长上下文中不必要的全局计算。
@@ -60,6 +61,7 @@
 
 ## 生成式召回与端到端推荐
 
+- [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：以类目约束残差 Semantic ID 缩小生成空间，再由专家奖励引导 group-relative 策略更新。
 
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、Semantic ID 和跨行为融合统一多个电商生成推荐场景。
@@ -94,6 +96,8 @@
 
 ## 排序网络与长序列
 
+- [Mosaic](../2607.24015-mosaic/README.md)：把不同归纳偏置的 user embedding 作为可独立演进的 specialist fleet，用 MRM 复合监督和去冗余损失增加下游有效信息。
+- [CORE](../2607.24417-core-relevance/README.md)：将有序相关性拆成 High/Non-High 与条件 Mid/Low 两道边界，并把 step-GRPO reasoning 经 PostCoT 蒸馏给在线双头排序器。
 - [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 交叉与 deep 表征，是工业精排从线性模型向深度模型过渡的经典骨架。
 - [DeepFM](../1703.04247-deepfm/README.md)：让 FM 二阶交互与 deep 分支共享 embedding，端到端覆盖低阶和高阶特征组合。
 - [YouTube DNN](../recsys2016-youtube-dnn-youtube-dnn/README.md)：把观看历史聚合为用户向量并经非线性塔变换，以 item embedding 点积完成候选召回。

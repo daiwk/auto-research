@@ -1,0 +1,102 @@
+{
+  "paper": {
+    "arxiv_id": "2607.24417",
+    "title": "CORE: A Unified Cascaded Ordinal Relevance Estimation Framework for E-commerce Search",
+    "url": "https://arxiv.org/abs/2607.24417",
+    "organization": "Meituan / Beijing Institute of Technology"
+  },
+  "dataset": {
+    "name": "MovieLens-1M ordinal relevance",
+    "train_pairs": 768,
+    "test_pairs": 192,
+    "labels": [
+      "Low",
+      "Mid",
+      "High"
+    ]
+  },
+  "setup": {
+    "seed": 42,
+    "sft_steps": 100,
+    "step_grpo_steps": 35,
+    "group_size": 6
+  },
+  "variants": {
+    "Flat classifier": {
+      "accuracy": 0.5833333333333334,
+      "macro_f1": 0.5639610156141007,
+      "ndcg_at_5": 0.9103981554355313,
+      "badcase_at_5": 0.0625
+    },
+    "Cascaded classifier": {
+      "accuracy": 0.578125,
+      "macro_f1": 0.5657245614764731,
+      "ndcg_at_5": 0.8986151003767521,
+      "badcase_at_5": 0.0625
+    },
+    "Cascaded + step-GRPO": {
+      "accuracy": 0.578125,
+      "macro_f1": 0.5649108365998329,
+      "ndcg_at_5": 0.9012281136943481,
+      "badcase_at_5": 0.0625
+    },
+    "PostCoT distilled cascade": {
+      "accuracy": 0.578125,
+      "macro_f1": 0.5671932444351296,
+      "ndcg_at_5": 0.919364056847174,
+      "badcase_at_5": 0.03125
+    }
+  },
+  "training": {
+    "flat": {
+      "initial_loss": 1.1454786300659179,
+      "final_loss": 0.7905727684497833
+    },
+    "cascade_sft": {
+      "initial_loss": 1.2883560061454773,
+      "final_loss": 0.9362242817878723
+    },
+    "step_grpo": {
+      "final_policy_loss": -0.008780361618846655,
+      "mean_step_reward": 0.38109869658946993,
+      "group_size": 6
+    },
+    "postcot_distillation": {
+      "initial_loss": 5.031872367858886,
+      "final_loss": 4.1681029319763185
+    }
+  },
+  "relative": {
+    "accuracy_points": -0.520833333333337,
+    "ndcg_at_5_percent": 0.9848329940160652,
+    "badcase_reduction_percent": 50.0
+  },
+  "paper_results": {
+    "direct_bert_accuracy": 0.7441,
+    "cascaded_bert_accuracy": 0.7558,
+    "distilled_accuracy": 0.7622,
+    "step_grpo_accuracy": 0.7648,
+    "postcot_core_accuracy": 0.7706,
+    "online_ndcg_at_5_percent": 0.2,
+    "online_badcase_reduction_percent": 15.9
+  },
+  "scope": "实际训练 flat 三分类、High→(Mid/Low) 条件双头、SFT 后的逐 step group-normalized clipped GRPO，以及按 logsumexp 聚合三类 teacher logits 的 PostCoT 双头蒸馏。MovieLens 用户画像/genre 构造可审计的三级序数相关性，替代美团 9 万私有 query-item 标注；未使用 Qwen3-14B 或生产 BERT。",
+  "runtime": {
+    "requested_device": "mps",
+    "cpu_threads": null,
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "resolved_device": "mps",
+    "torch_version": "2.13.0",
+    "accelerator": "Apple Metal Performance Shaders"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "Meituan private 90K query-item relevance labels",
+      "Qwen3-14B reasoning traces",
+      "production BERT encoder and online thresholds"
+    ]
+  }
+}
