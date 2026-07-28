@@ -14,6 +14,9 @@ mini-suite 验证状态更新、跨 episode 复用和受限上下文管理；这
 - [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态和待接入接口。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
+- [Toolformer](2302.04761-toolformer/README.md)：按 token loss improvement 自监督过滤工具调用。
+- [Tree of Thoughts](2305.10601-tree-of-thoughts/README.md)：thought tree、value 与 BFS 回溯。
+- [LATS](2310.04406-lats/README.md)：MCTS、环境反馈与自反思搜索。
 - [ReAct](2210.03629-react/README.md)：Thought、Action、Observation 的交替执行轨迹。
 - [Reflexion](2303.11366-reflexion/README.md)：失败反馈转语言反思并跨 trial 复用。
 - [Voyager](2305.16291-voyager/README.md)：自动课程、执行验证和可增长技能库。
@@ -42,6 +45,9 @@ flowchart LR
 | 方向 | 方法 | 核心机制 | 本地评测 | 状态 |
 |---|---|---|---|---|
 | 公平基线 | Long-context | 保留全部历史，不压缩记忆 | EvoMem mini | 已实现 |
+| 工具学习 | [Toolformer](2302.04761-toolformer/README.md) | 候选 API call 与自监督 loss 过滤 | ScaleMCP mini | 机制复现 |
+| 推理搜索 | [Tree of Thoughts](2305.10601-tree-of-thoughts/README.md) | thought expansion、value、BFS/backtrack | PlanBench mini | 机制复现 |
+| Agent 搜索 | [LATS](2310.04406-lats/README.md) | UCT、trajectory rollout、环境反馈与反思 | PlanBench mini | 机制复现 |
 | 推理与行动 | [ReAct](2210.03629-react/README.md) | Thought → Action → Observation | ScaleMCP mini | 机制复现 |
 | 自我改进 | [Reflexion](2303.11366-reflexion/README.md) | verbal feedback 与 episodic reflection | PlanBench mini | 机制复现 |
 | 终身学习 | [Voyager](2305.16291-voyager/README.md) | curriculum、skill library、self-verification | PlanBench mini | 机制复现 |
@@ -63,6 +69,9 @@ flowchart LR
 | ReAct · ScaleMCP mini | 1.0000 | 3.0000 | 360 reasoning/action steps |
 | Reflexion · PlanBench mini | 0.9000 | 1.1000 | 12 条反思、108 次复用 |
 | Voyager · PlanBench mini | 1.0000 | 1.1200 | 12 个技能、108 次复用 |
+| Tree of Thoughts · PlanBench mini | 1.0000 | 2.5000 | 1200 节点、480 次回溯 |
+| LATS · PlanBench mini | 1.0000 | 4.0000 | 480 rollouts、360 次反思 |
+| Toolformer · ScaleMCP mini | 1.0000 | 3.0000 | 540 候选、360 接受调用 |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。

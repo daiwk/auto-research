@@ -15,6 +15,8 @@
 - [自动进化中的纯 LLM](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
+- [DPO](2305.18290-dpo/README.md)：reference-relative 偏好分类，无 reward model。
+- [DeepSeekMath / GRPO](2402.03300-grpo/README.md)：组相对、critic-free 的 reasoning RL。
 - [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md)：旧策略、critic、clip 与 KL 的经典 RLHF。
 - [RLOO](2402.14740-rloo/README.md)：完整响应级 leave-one-out REINFORCE。
 - [ReMax](2310.10505-remax/README.md)：以 greedy rollout 作 baseline 的 value-free RLHF。
@@ -40,7 +42,8 @@ flowchart LR
 
 | 类别 | 方法 | 核心机制 | 公开评测 | 状态 |
 |---|---|---|---|---|
-| 通用基线 | DPO / GRPO | 成对偏好优化 / group-relative advantage | Arithmetic smoke、GSM8K candidate | 已实现 |
+| 直接偏好优化 | [DPO](2305.18290-dpo/README.md) | reference-relative pairwise classification | GSM8K candidate | 机制复现 |
+| 在线推理 RL | [GRPO](2402.03300-grpo/README.md) | group advantage、old-policy clip、KL，无 critic | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [PPO-RLHF](2203.02155-ppo-rlhf/README.md) | old policy、clipped surrogate、critic、KL | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [RLOO](2402.14740-rloo/README.md) | response-level REINFORCE、leave-one-out baseline | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [ReMax](2310.10505-remax/README.md) | sampled reward 减 greedy reward，无 critic | GSM8K candidate | 机制复现 |
@@ -56,7 +59,7 @@ flowchart LR
 | 方法 | 训练前 accuracy | 训练后 accuracy | KL(reference) |
 |---|---:|---:|---:|
 | DPO | 0.1641 | 0.8047 | 0.0683 |
-| GRPO | 0.1641 | 0.8047 | 1.1397 |
+| GRPO | 0.1641 | 0.7812 | 1.0401 |
 | PPO-RLHF | 0.1641 | 0.8125 | 0.8731 |
 | RLOO | 0.1641 | 0.8281 | 0.5707 |
 | ReMax | 0.1641 | 0.7031 | 0.7939 |

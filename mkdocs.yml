@@ -24,6 +24,8 @@ nav:
           - 方法索引: post-training/catalog.md
           - 统一评测协议: post-training/benchmark.md
           - 论文实现:
+              - DPO: post-training/2305.18290-dpo/README.md
+              - DeepSeekMath / GRPO: post-training/2402.03300-grpo/README.md
               - InstructGPT / PPO-RLHF: post-training/2203.02155-ppo-rlhf/README.md
               - RLOO: post-training/2402.14740-rloo/README.md
               - ReMax: post-training/2310.10505-remax/README.md
@@ -35,6 +37,9 @@ nav:
           - 方法索引: agent-research/catalog.md
           - 统一评测协议: agent-research/benchmark.md
           - 论文实现:
+              - Toolformer: agent-research/2302.04761-toolformer/README.md
+              - Tree of Thoughts: agent-research/2305.10601-tree-of-thoughts/README.md
+              - LATS: agent-research/2310.04406-lats/README.md
               - ReAct: agent-research/2210.03629-react/README.md
               - Reflexion: agent-research/2303.11366-reflexion/README.md
               - Voyager: agent-research/2305.16291-voyager/README.md

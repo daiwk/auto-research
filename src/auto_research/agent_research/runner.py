@@ -58,6 +58,11 @@ class AgentResearchRunner:
             "skills_created": agent.skills_created,
             "skills_reused": agent.skills_reused,
             "verification_retries": agent.verification_retries,
+            "tree_nodes_expanded": agent.tree_nodes_expanded,
+            "search_rollouts": agent.search_rollouts,
+            "backtracks": agent.backtracks,
+            "tool_call_candidates": agent.tool_call_candidates,
+            "tool_calls_accepted": agent.tool_calls_accepted,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

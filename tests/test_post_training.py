@@ -63,3 +63,28 @@ def test_classic_rlhf_mechanisms_are_exposed(
         assert result.training["rollout_policy_refreshes"] == 1
     else:
         assert result.training["last_diagnostics"]["value_model_parameters"] == 0
+
+
+def test_dpo_exposes_pairwise_reference_margin(tmp_path: Path):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm="dpo", steps=20, maximum_examples=48, output_dir=tmp_path
+        )
+    ).run()
+    diagnostics = result.training["last_diagnostics"]
+    assert "preference_margin" in diagnostics
+    assert diagnostics["reward_model_parameters"] == 0
+
+
+def test_grpo_uses_old_policy_clipping_without_critic(tmp_path: Path):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm="grpo", steps=20, maximum_examples=48, output_dir=tmp_path
+        )
+    ).run()
+    diagnostics = result.training["last_diagnostics"]
+    assert "importance_ratio" in diagnostics
+    assert "clip_fraction" in diagnostics
+    assert diagnostics["value_model_parameters"] == 0
+    assert result.training["critic_updates"] == 0
+    assert result.training["rollout_policy_refreshes"] == 1

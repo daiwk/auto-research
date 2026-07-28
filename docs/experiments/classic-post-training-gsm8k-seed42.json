@@ -14,6 +14,19 @@
     "mean_reward": 0.31261065795890286
   },
   "results": {
+    "dpo": {
+      "accuracy": 0.8046875,
+      "mean_reward": 0.8346500627127349,
+      "kl_from_reference": 0.06833317338028673,
+      "reward_model_parameters": 0
+    },
+    "grpo": {
+      "accuracy": 0.78125,
+      "mean_reward": 0.8168955128271573,
+      "kl_from_reference": 1.0400522058527373,
+      "value_model_parameters": 0,
+      "rollout_policy_refreshes": 18
+    },
     "ppo-rlhf": {
       "accuracy": 0.8125,
       "mean_reward": 0.8335089378910975,

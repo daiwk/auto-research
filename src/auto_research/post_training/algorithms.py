@@ -19,6 +19,7 @@ class PolicyState:
     teacher_calls: int = 0
     drift_events: int = 0
     ppo_updates: int = 0
+    grpo_updates: int = 0
     critic_updates: int = 0
 
 
@@ -51,7 +52,7 @@ def update(
     reference = _softmax(group.features @ state.reference)
     sampling_probabilities = (
         _softmax(group.features @ state.rollout_weights)
-        if algorithm == "ppo-rlhf" else probabilities
+        if algorithm in {"ppo-rlhf", "grpo"} else probabilities
     )
     sampled = rng.choice(
         len(probabilities), size=min(group_size, len(probabilities)),
@@ -72,6 +73,14 @@ def update(
         coefficient = beta / (1.0 + np.exp(beta * margin))
         gradient = coefficient * (group.features[chosen] - group.features[rejected])
         loss = float(np.logaddexp(0.0, -beta * margin))
+        diagnostics.update(
+            {
+                "preference_margin": float(margin),
+                "chosen_probability": float(probabilities[chosen]),
+                "rejected_probability": float(probabilities[rejected]),
+                "reward_model_parameters": 0.0,
+            }
+        )
     elif algorithm == "lightning-opd":
         teacher = state.teacher_cache[cache_index]
         gradient = group.features.T @ (teacher - probabilities)
@@ -109,6 +118,33 @@ def update(
                 "importance_ratio": float(ratios.mean()),
                 "value_loss": float(np.mean(value_error ** 2)),
                 "critic_updates": float(state.critic_updates),
+            }
+        )
+    elif algorithm == "grpo":
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        ratios = probabilities[sampled] / (sampling_probabilities[sampled] + 1e-12)
+        clipped_ratios = np.clip(ratios, 0.8, 1.2)
+        surrogate = np.minimum(ratios * advantages, clipped_ratios * advantages)
+        active = np.isclose(surrogate, ratios * advantages)
+        expected_features = probabilities @ group.features
+        gradient = np.zeros_like(state.weights)
+        for index, advantage, ratio, is_active in zip(sampled, advantages, ratios, active):
+            if is_active:
+                gradient += float(advantage * ratio) * (
+                    group.features[index] - expected_features
+                )
+        gradient /= len(sampled)
+        gradient -= 0.02 * (group.features.T @ (probabilities - reference))
+        state.grpo_updates += 1
+        loss = float(-surrogate.mean())
+        diagnostics.update(
+            {
+                "group_reward_mean": float(scalar.mean()),
+                "group_reward_std": float(scalar.std()),
+                "clip_fraction": float(np.mean(~active)),
+                "importance_ratio": float(ratios.mean()),
+                "value_model_parameters": 0.0,
             }
         )
     elif algorithm == "rloo":
@@ -168,7 +204,7 @@ def update(
             advantages -= advantages.mean()
             diagnostics["outcome_ema"] = state.outcome_ema
             diagnostics["thinking_surplus"] = float(thinking_surplus.mean())
-        else:  # GRPO baseline
+        else:  # Defensive fallback; config rejects unknown algorithms.
             scalar = rewards @ np.asarray((0.7, 0.05, 0.2, 0.05))
             advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
         gradient = np.zeros_like(state.weights)
@@ -182,6 +218,8 @@ def update(
 
     state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)
     if algorithm == "ppo-rlhf" and state.ppo_updates % 16 == 0:
+        state.rollout_weights = state.weights.copy()
+    if algorithm == "grpo" and state.grpo_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
     diagnostics["loss"] = loss
     diagnostics["policy_entropy"] = float(-np.sum(probabilities * np.log(probabilities + 1e-12)))

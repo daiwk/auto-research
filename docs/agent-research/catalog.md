@@ -7,6 +7,9 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 工具学习 | [Toolformer](2302.04761-toolformer/README.md) | Meta AI / UPF，2023-02-09 | 未发布官方代码 | `toolformer` |
+| 推理搜索 | [Tree of Thoughts](2305.10601-tree-of-thoughts/README.md) | Princeton / Google DeepMind，2023-05-17 | [已开源](https://github.com/princeton-nlp/tree-of-thought-llm) | `tree-of-thoughts` |
+| Agent 搜索 | [LATS](2310.04406-lats/README.md) | UIUC，2023-10-06 | [已开源](https://github.com/lapisrocks/LanguageAgentTreeSearch) | `lats` |
 | 推理与行动 | [ReAct](2210.03629-react/README.md) | Princeton / Google Research，2022-10-06 | [已开源](https://github.com/ysymyth/ReAct) | `react` |
 | 自我反思 | [Reflexion](2303.11366-reflexion/README.md) | Northeastern / MIT / Princeton，2023-03-20 | [已开源](https://github.com/noahshinn/reflexion) | `reflexion` |
 | 终身学习 | [Voyager](2305.16291-voyager/README.md) | NVIDIA / Caltech / UT Austin / Stanford / ASU，2023-05-25 | [已开源](https://github.com/MineDojo/Voyager) | `voyager` |

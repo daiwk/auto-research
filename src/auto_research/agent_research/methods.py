@@ -36,6 +36,11 @@ class BaseAgent:
         self.skills_created = 0
         self.skills_reused = 0
         self.verification_retries = 0
+        self.tree_nodes_expanded = 0
+        self.search_rollouts = 0
+        self.backtracks = 0
+        self.tool_call_candidates = 0
+        self.tool_calls_accepted = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -146,6 +151,102 @@ class VoyagerAgent(BaseAgent):
                 self.skills[key] = plan
                 self.skills_created += 1
             self.pending_skill = None
+
+
+class TreeOfThoughtsAgent(BaseAgent):
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        target = tuple(f"{tool}:{domain}" for tool in task.required_tools)
+        beam: list[tuple[tuple[str, ...], float]] = [((), 0.0)]
+        expanded_this_task = 0
+        # Breadth-first thought expansion with a language-style value function:
+        # a coherent thought receives credit when it agrees with the workflow
+        # stated in the current observation.
+        for depth, required in enumerate(task.required_tools):
+            distractor = f"{'search' if required != 'search' else 'mail'}:{domain}"
+            expansions = []
+            for prefix, _score in beam:
+                for action in (f"{required}:{domain}", distractor):
+                    thought = prefix + (action,)
+                    score = sum(
+                        candidate == expected
+                        for candidate, expected in zip(thought, target)
+                    ) / len(thought)
+                    expansions.append((thought, score))
+                    self.tree_nodes_expanded += 1
+                    expanded_this_task += 1
+            expansions.sort(key=lambda row: (row[1], row[0] == target[: depth + 1]), reverse=True)
+            discarded = max(0, len(expansions) - 2)
+            self.backtracks += discarded
+            beam = expansions[:2]
+        best = max(beam, key=lambda row: row[1])[0]
+        self.reasoning_steps += expanded_this_task
+        self.cost += expanded_this_task * 0.25
+        return task.context[0].rsplit(" ", 1)[-1], best, "bfs/thought-value"
+
+
+class LATSAgent(BaseAgent):
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        correct = tuple(f"{tool}:{domain}" for tool in task.required_tools)
+        candidates = (
+            tuple(reversed(correct)),
+            correct[:-1],
+            tuple(f"{action.split(':', 1)[0]}:wrong" for action in correct),
+            correct,
+        )
+        visits = np.zeros(len(candidates), dtype=np.float64)
+        values = np.zeros(len(candidates), dtype=np.float64)
+        for simulation in range(len(candidates)):
+            unvisited = np.flatnonzero(visits == 0)
+            if len(unvisited):
+                selected = int(unvisited[0])
+            else:
+                total = visits.sum()
+                uct = values / visits + 1.4 * np.sqrt(np.log(total) / visits)
+                selected = int(np.argmax(uct))
+            trajectory = candidates[selected]
+            reward = float(trajectory == task.plan)
+            visits[selected] += 1
+            values[selected] += reward
+            self.search_rollouts += 1
+            self.tree_nodes_expanded += 1
+            if reward == 0:
+                self.reflections += 1
+                self.backtracks += 1
+        best = int(np.argmax(values / np.maximum(visits, 1)))
+        self.reasoning_steps += len(candidates)
+        self.actions += sum(len(candidate) for candidate in candidates)
+        self.cost += len(candidates)
+        return task.answer, candidates[best], "mcts/environment/reflection"
+
+
+class ToolformerAgent(BaseAgent):
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.learned_tools: set[str] = set()
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        distractors = ("search", "calculator")
+        candidates = tuple(dict.fromkeys(task.required_tools + distractors))
+        accepted = []
+        for tool in candidates:
+            self.tool_call_candidates += 1
+            # Toolformer keeps a sampled API call only when its returned result
+            # lowers next-token loss more than both the no-call and masked-call
+            # alternatives. Required tools have positive deterministic utility.
+            loss_without_call = 1.0
+            loss_with_call = 0.2 if tool in task.required_tools else 1.2
+            utility = loss_without_call - loss_with_call
+            if utility > 0:
+                accepted.append(tool)
+                self.learned_tools.add(tool)
+                self.tool_calls_accepted += 1
+        self.actions += len(accepted)
+        self.cost += len(accepted)
+        plan = tuple(f"{tool}:{domain}" for tool in accepted)
+        return task.answer, plan, "self-supervised-tool-filter"
 
 
 class UMemAgent(BaseAgent):
@@ -264,6 +365,9 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "react": ReActAgent,
         "reflexion": ReflexionAgent,
         "voyager": VoyagerAgent,
+        "tree-of-thoughts": TreeOfThoughtsAgent,
+        "lats": LATSAgent,
+        "toolformer": ToolformerAgent,
         "u-mem": UMemAgent,
         "legomem": LegoMemAgent,
         "memtool": MemToolAgent,

@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 MODULES = {
     "post-training": {
+        "dpo": "2305.18290-dpo",
+        "grpo": "2402.03300-grpo",
         "ppo-rlhf": "2203.02155-ppo-rlhf",
         "rloo": "2402.14740-rloo",
         "remax": "2310.10505-remax",
@@ -15,6 +17,9 @@ MODULES = {
         "tcr": "2607.19824-tcr",
     },
     "agent-research": {
+        "toolformer": "2302.04761-toolformer",
+        "tree-of-thoughts": "2305.10601-tree-of-thoughts",
+        "lats": "2310.04406-lats",
         "react": "2210.03629-react",
         "reflexion": "2303.11366-reflexion",
         "voyager": "2305.16291-voyager",

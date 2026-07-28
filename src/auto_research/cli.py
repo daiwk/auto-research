@@ -150,6 +150,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--method",
         choices=[
             "long-context", "react", "reflexion", "voyager",
+            "tree-of-thoughts", "lats", "toolformer",
             "u-mem", "legomem", "memtool",
         ],
         required=True,
