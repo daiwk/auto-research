@@ -20,8 +20,15 @@ METHODS = (
     "u-mem",
     "legomem",
     "memtool",
+    "metagpt",
+    "critic",
+    "agent-lightning",
+    "swe-agent",
+    "openhands",
 )
-BENCHMARKS = ("evomem-mini", "planbench-mini", "scalemcp-mini")
+BENCHMARKS = (
+    "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",
+)
 
 
 @dataclass(frozen=True)

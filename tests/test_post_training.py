@@ -116,3 +116,32 @@ def test_additional_preference_and_reasoning_rl_mechanisms(
     assert diagnostic in result.training["last_diagnostics"]
     if algorithm in {"dapo", "gspo"}:
         assert result.training["rollout_policy_refreshes"] == 1
+
+
+@pytest.mark.parametrize("algorithm", ["ipo", "simpo", "luspo", "coba-rl"])
+def test_free_generation_algorithms_use_token_rollouts_and_verifier(
+    tmp_path: Path, algorithm: str
+):
+    result, run_dir = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            dataset="arithmetic-generate",
+            steps=2,
+            maximum_examples=12,
+            seeds=(7,),
+            output_dir=tmp_path,
+        )
+    ).run()
+    run = result.training["runs"][0]
+    assert run["free_generation"] is True
+    assert run["tokenizer"] == "auditable character tokenizer"
+    assert run["model"] == "GRU causal LM"
+    assert "exact final numeric answer" in run["verifier"]
+    assert 0 <= result.final["accuracy"] <= 1
+    assert "format_rate" in result.final
+    assert (run_dir / "metrics.json").exists()
+
+
+def test_candidate_algorithms_reject_free_generation_only_objectives():
+    with pytest.raises(ValueError, match="requires a free-generation dataset"):
+        PostTrainingConfig(algorithm="simpo", dataset="arithmetic-smoke")

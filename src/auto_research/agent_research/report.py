@@ -18,6 +18,11 @@ PAPERS = {
     "rewoo": ("ReWOO", "https://arxiv.org/abs/2305.18323"),
     "autogen": ("AutoGen", "https://arxiv.org/abs/2308.08155"),
     "pearl": ("PEARL", "https://arxiv.org/abs/2601.20439"),
+    "metagpt": ("MetaGPT", "https://arxiv.org/abs/2308.00352"),
+    "critic": ("CRITIC", "https://arxiv.org/abs/2305.11738"),
+    "agent-lightning": ("Agent Lightning", "https://arxiv.org/abs/2508.03680"),
+    "swe-agent": ("SWE-agent", "https://arxiv.org/abs/2405.15793"),
+    "openhands": ("OpenHands", "https://arxiv.org/abs/2407.16741"),
 }
 
 
@@ -26,6 +31,36 @@ def render_report(result: AgentResearchResult) -> str:
     axes = "\n".join(
         f"| {axis} | {value:.4f} |" for axis, value in sorted(result.axis_metrics.items())
     )
+    if result.benchmark == "swebench-local":
+        return f"""# {title} 本地代码 Agent 实验
+
+> 每个 episode 都创建隔离临时代码仓库，实际读取文件、修改 `solution.py`，
+> 并以固定的 `python -m unittest -q` 子进程执行回归测试。
+
+- 论文/基线：[{title}]({url})
+- benchmark：`{result.benchmark}`
+- episodes：{result.diagnostics['episodes']}
+- sandbox：{result.diagnostics['sandbox']}
+
+## 汇总
+
+| 指标 | 值 |
+|---|---:|
+| baseline failing tasks | {result.diagnostics['baseline_failures']} |
+| resolved tasks | {result.metrics['joint_success']:.4f} |
+| actual subprocess commands | {result.diagnostics['actual_subprocess_commands']} |
+| actual file edits | {result.diagnostics['actual_file_edits']} |
+| average cost | {result.metrics['average_cost']:.4f} |
+| cross-task reuse | {result.metrics['reuse_rate']:.4f} |
+
+## 机制诊断
+
+- role messages：{result.diagnostics['role_messages']}
+- critic rounds：{result.diagnostics['critic_rounds']}
+- credit updates：{result.diagnostics['credit_updates']}
+- learned bug families：{result.diagnostics['learned_bug_families']}
+- fidelity：{result.diagnostics['fidelity']}
+"""
     return f"""# {title} Agent 实验
 
 > 这是确定性 mini-suite 上的**机制复现**，不等同于论文原始模型、API 或完整 benchmark 分数。

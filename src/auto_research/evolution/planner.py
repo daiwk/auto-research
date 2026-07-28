@@ -11,6 +11,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         installed = [
             "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "rloo", "remax",
             "dapo", "gspo", "lightning-opd", "gprl", "tcr",
+            "ipo", "simpo", "luspo", "coba-rl",
         ]
         mapped = [paper.architecture for paper in papers if paper.architecture in installed]
         requested = [
@@ -22,18 +23,35 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         operators = [paper.architecture for paper in papers if paper.architecture and ":" in paper.architecture]
         operators = list(dict.fromkeys(operators))
         if operators:
+            text = direction.lower().replace("_", "-")
+            compact_text = text.replace("-", "").replace(" ", "")
+            requested = [
+                operator for operator in operators
+                if operator.split(":", 1)[1]
+                .replace("_", "")
+                .replace("-", "")
+                .replace(" ", "") in compact_text
+            ]
             # Put one operator from each axis first so a small first generation is
             # still a fair component ablation rather than four planner variants.
             interleaved = []
             for component in ("memory:", "planner:", "tool:", "critic:"):
-                match = next((value for value in operators if value.startswith(component)), None)
+                match = next(
+                    (
+                        value for value in operators
+                        if value.startswith(component) and value not in requested
+                    ),
+                    None,
+                )
                 if match:
                     interleaved.append(match)
-            return list(dict.fromkeys([*interleaved, *operators]))
+            return list(dict.fromkeys([*requested, *interleaved, *operators]))
         return [
             "memory:u-mem", "memory:legomem", "planner:react", "planner:rewoo",
             "planner:tree-of-thoughts", "planner:lats", "tool:toolformer",
             "tool:memtool", "critic:self-refine", "critic:reflexion",
+            "planner:metagpt", "planner:swe-agent", "planner:openhands",
+            "critic:critic", "critic:agent-lightning",
         ]
     if model == "micro-llm":
         values = [

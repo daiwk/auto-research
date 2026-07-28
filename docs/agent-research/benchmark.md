@@ -10,8 +10,10 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | `evomem-mini` | episode 内/跨 episode 的知识与执行记忆 | EvoMem 四象限任务 | joint success、获取成本、memory size |
 | `planbench-mini` | 可验证规划与过程复用 | 结构化动作序列 | plan success、平均成本、reused plans |
 | `scalemcp-mini` | 有限上下文中的动态工具集合 | 多轮工具路由 | task success、上下文成本、tool evictions |
+| `swebench-local` | 代码定位、编辑、测试与修订 | 临时 Python 仓库 + 真实 unittest | resolved rate、命令/编辑、反馈轮次、复用 |
 
-这些是仓库自带的确定性 mini-suite，不是完整 EvoMemBench、PlanBench 或 ScaleMCP。
+前三项是仓库自带的确定性 mini-suite；`swebench-local` 会真实执行代码，但任务仍是
+仓库自带 micro fixtures，不是官方 SWE-bench Lite。
 
 ## 公平口径
 
@@ -20,6 +22,7 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 - 成功率相同时，比较平均成本和方法特有诊断；不能只用成本推断真实 LLM 效果。
 - 新方法必须保存逐步 trace，标明记忆写入、检索、升级、复用和淘汰事件。
 - 调用外部模型时必须记录模型、采样参数、token 成本、失败重试和缓存命中。
+- 代码 benchmark 的初始仓库必须真实失败；成功只由回归测试退出码判定，并保存命令输出。
 
 ## 稳定结果
 
@@ -44,12 +47,17 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
 经典方法结果：
 [`classic-agent-mini-suites-seed42.json`](../experiments/classic-agent-mini-suites-seed42.json)。
+代码 sandbox 结果：
+[`agent-code-sandbox-seed42.json`](../experiments/agent-code-sandbox-seed42.json)。
 
 ## 运行与产物
 
 ```bash
 auto-research agent-eval --method voyager \
   --benchmark planbench-mini --episodes 120 --seed 42
+
+auto-research agent-eval --method swe-agent \
+  --benchmark swebench-local --episodes 12 --seed 42
 ```
 
 产物写入 `runs/agent-research/<method>-<benchmark>-seed<seed>/`，包括逐 episode
@@ -57,6 +65,6 @@ trace、`metrics.json` 和中文 `report.md`。
 
 ## 新方法验收
 
-新增方法必须通过单元测试、对应 mini-suite、稳定指标检查和 MkDocs 严格构建。
+新增方法必须通过单元测试、对应 mini-suite/真实 sandbox、稳定指标检查和 MkDocs 严格构建。
 若论文依赖私有环境、付费 API 或人工 judge，页面必须说明未覆盖部分，并优先增加
 公开 benchmark 适配器，不能用确定性任务分数冒充论文结果。

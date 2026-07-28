@@ -19,6 +19,10 @@
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab / Jet AI，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |
 | 多目标 RL | [GPRL](2605.18721-gprl/README.md) | Stanford / Oklahoma，2026-05-18 | 未发现 | `gprl` |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | 作者团队，2026-07-22 | 未发现 | `tcr` |
+| 偏好正则 | [IPO](2310.12036-ipo/README.md) | Google DeepMind，2023-10-18 | 未发布独立仓库 | `ipo` |
+| Reference-free 偏好 | [SimPO](2405.14734-simpo/README.md) | Princeton，2024-05-23 | [已开源](https://github.com/princeton-nlp/SimPO) | `simpo` |
+| 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | 作者团队，2026-02-05 | 未发现 | `luspo` |
+| 能力边界课程 | [CoBA-RL](2606.22317-coba-rl/README.md) | Zhejiang / NUS，2026-06-21 | 未发现 | `coba-rl` |
 
 ## 公平基线
 

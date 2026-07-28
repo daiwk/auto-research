@@ -365,3 +365,23 @@ def test_agent_components_form_composable_multiround_genomes(tmp_path):
     report = (run_dir / "report.md").read_text(encoding="utf-8")
     assert "memory=`" in report and "tool policy=`" in report
     assert "success=" in (run_dir / "index.html").read_text(encoding="utf-8")
+
+
+def test_free_generation_post_training_and_code_agent_configs_are_supported():
+    EvolutionConfig(
+        model="post-training", dataset="arithmetic-generate",
+        direction="比较 SimPO、LUSPO 与边界课程",
+    ).validate()
+    EvolutionConfig(
+        model="agent", dataset="swebench-local",
+        direction="组合 SWE-agent、CRITIC 与 Agent Lightning",
+    ).validate()
+    agent_papers = discover_papers(
+        "software agents", 1, allow_network=False, track="agent",
+    )
+    agent_operators = allowed_architectures(
+        "agent", "组合 SWE-agent、CRITIC 与 Agent Lightning", agent_papers,
+    )
+    assert agent_operators[:3] == [
+        "critic:critic", "planner:swe-agent", "critic:agent-lightning",
+    ]

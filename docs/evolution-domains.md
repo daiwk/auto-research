@@ -33,12 +33,12 @@ flowchart LR
 |---|---|---|---|
 | 搜广推与 LLM 应用 | RankMixer、HyFormer；MovieLens 与公共推荐评测 | LONGER、UniMixer、RankMixer 等结构及工业论文 adapter | **可运行** |
 | 纯 LLM | micro‑LLM；架构 → 数据配方 → SFT/后训练的分轮搜索 | 纯 LLM 架构、Lightning OPD、GPRL、TCR 等 | **可运行** |
-| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | PPO/DPO/GRPO/RLOO/DAPO/GSPO、OPD、GPRL、TCR | **可运行** |
-| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct、ReWOO、LATS、U-Mem、LEGOMem、MemTool、Reflexion | **可运行** |
+| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | PPO/DPO/IPO/SimPO/GRPO/LUSPO/CoBA-RL、OPD、GPRL、TCR | **可运行** |
+| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct、LATS、U-Mem、MetaGPT、CRITIC、Agent Lightning、SWE-agent、OpenHands | **可运行** |
 
 !!! note "Agent 状态"
-    Agent evolve 已使用确定性 episode evaluator 和 validation 晋级。论文检索结果只会
-    映射到已审计的组件算子，在线发现但没有安全映射的论文仍保持 evidence-only。
+    Agent evolve 可使用确定性 episode evaluator，也可在 `swebench-local` 创建临时
+    仓库并真实编辑/测试。论文检索只映射到已审计算子；无安全映射的论文保持 evidence-only。
 
 ## 组合式研究
 

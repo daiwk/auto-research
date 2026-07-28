@@ -88,7 +88,9 @@ def build_parser() -> argparse.ArgumentParser:
         choices=[
             "movielens-100k", "movielens-1m", "wikitext-2",
             "arithmetic-smoke", "gsm8k-candidate",
+            "arithmetic-generate", "gsm8k-generate",
             "evomem-mini", "planbench-mini", "scalemcp-mini",
+            "swebench-local",
         ],
         required=True,
     )
@@ -139,12 +141,16 @@ def build_parser() -> argparse.ArgumentParser:
             "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
             "ppo-rlhf", "rloo", "remax",
             "lightning-opd", "gprl", "tcr",
+            "ipo", "simpo", "luspo", "coba-rl",
         ],
         required=True,
     )
     post_train.add_argument(
         "--dataset",
-        choices=["arithmetic-smoke", "gsm8k-candidate"],
+        choices=[
+            "arithmetic-smoke", "gsm8k-candidate",
+            "arithmetic-generate", "gsm8k-generate",
+        ],
         default="arithmetic-smoke",
     )
     post_train.add_argument("--dataset-dir", type=Path, default=Path("data"))
@@ -154,6 +160,10 @@ def build_parser() -> argparse.ArgumentParser:
     post_train.add_argument("--group-size", type=int, default=4)
     post_train.add_argument("--maximum-examples", type=int, default=512)
     post_train.add_argument("--seed", type=int, default=42)
+    post_train.add_argument(
+        "--seeds", default="",
+        help="comma-separated seeds; generation suites default to seed,seed+1,seed+2",
+    )
     post_train.add_argument("--offline", action="store_true")
     _add_runtime_arguments(post_train)
 
@@ -168,12 +178,16 @@ def build_parser() -> argparse.ArgumentParser:
             "tree-of-thoughts", "lats", "toolformer",
             "self-refine", "rewoo", "autogen", "pearl",
             "u-mem", "legomem", "memtool",
+            "metagpt", "critic", "agent-lightning", "swe-agent", "openhands",
         ],
         required=True,
     )
     agent_eval.add_argument(
         "--benchmark",
-        choices=["evomem-mini", "planbench-mini", "scalemcp-mini"],
+        choices=[
+            "evomem-mini", "planbench-mini", "scalemcp-mini",
+            "swebench-local",
+        ],
         default="evomem-mini",
     )
     agent_eval.add_argument("--episodes", type=int, default=120)
@@ -317,6 +331,10 @@ def main(argv: list[str] | None = None) -> int:
                     learning_rate=args.learning_rate,
                     group_size=args.group_size,
                     seed=args.seed,
+                    seeds=tuple(
+                        int(value.strip()) for value in args.seeds.split(",")
+                        if value.strip()
+                    ),
                     allow_network=not args.offline,
                     maximum_examples=args.maximum_examples,
                 )

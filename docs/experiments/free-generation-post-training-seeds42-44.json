@@ -1,0 +1,46 @@
+{
+  "protocol": {
+    "dataset": "arithmetic-generate",
+    "maximum_examples": 48,
+    "seeds": [42, 43, 44],
+    "warmup_steps": 20,
+    "rl_steps": 6,
+    "group_size": 4,
+    "model": "30378-parameter GRU causal LM",
+    "tokenizer": "auditable character tokenizer",
+    "verifier": "exact final numeric answer + format/length diagnostics"
+  },
+  "results": {
+    "ipo": {
+      "baseline_accuracy_mean": 0.0,
+      "final_accuracy_mean": 0.0,
+      "baseline_mean_reward": 0.1,
+      "final_mean_reward": 0.1,
+      "final_format_rate_mean": 0.0
+    },
+    "simpo": {
+      "baseline_accuracy_mean": 0.0,
+      "final_accuracy_mean": 0.0,
+      "baseline_mean_reward": 0.1,
+      "final_mean_reward": 0.1333333333,
+      "final_mean_reward_std": 0.0471404521,
+      "final_format_rate_mean": 0.3333333333,
+      "final_format_rate_std": 0.4714045208
+    },
+    "luspo": {
+      "baseline_accuracy_mean": 0.0,
+      "final_accuracy_mean": 0.0,
+      "baseline_mean_reward": 0.1,
+      "final_mean_reward": 0.1,
+      "final_format_rate_mean": 0.0
+    },
+    "coba-rl": {
+      "baseline_accuracy_mean": 0.0,
+      "final_accuracy_mean": 0.0,
+      "baseline_mean_reward": 0.1,
+      "final_mean_reward": 0.1,
+      "final_format_rate_mean": 0.0
+    }
+  },
+  "conclusion": "All four methods executed token-level free rollouts and multi-seed updates. At this deliberately small budget no method improved exact generation; SimPO improved format/reward only. This negative result is retained rather than being described as a paper-level reproduction gain."
+}

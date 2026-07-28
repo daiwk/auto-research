@@ -9,10 +9,11 @@
 |---|---|---|---|
 | L0 | `arithmetic-smoke` | 秒级验证采样、reward、更新和报告链路 | 实现可运行 |
 | L1 | `gsm8k-candidate` | 公开数据上的候选策略训练 | 核心机制在固定候选空间有效 |
-| L2 | 完整生成 benchmark | 真实 tokenizer、生成和 judge | 可比较自由生成能力 |
+| L2 | `arithmetic-generate` / `gsm8k-generate` | 真实 tokenizer、自由生成和 verifier | 可比较本地自由生成机制 |
 | L3 | 论文规模模型与数据 | 对齐论文设置 | 高保真论文复现 |
 
-当前稳定结果达到 L1，不能写成 L2 的 Pass@1，也不能等同于 L3。
+候选方法稳定结果达到 L1；IPO、SimPO、LUSPO、CoBA-RL 达到本地 L2。L2 exact
+generation accuracy 不能与 L1 candidate accuracy 混比，也不能等同于 L3。
 
 ## 数据与公平口径
 
@@ -21,6 +22,8 @@
 - 所有方法使用同一未训练策略、300 steps 和 seed 42。
 - 调参不得使用验证答案；新方法需同时报告 accuracy、mean reward、KL(reference)。
 - 多目标方法还需报告各 reward 轴及漂移事件；蒸馏方法还需报告教师调用次数。
+- L2 固定字符 tokenizer、GRU causal LM、SFT warmup 和 seeds 42/43/44；报告
+  exact generation、format rate、response length 的均值与标准差。
 
 ## 稳定结果
 
@@ -47,6 +50,8 @@ GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后�
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
 经典 RL 结果：
 [`classic-post-training-gsm8k-seed42.json`](../experiments/classic-post-training-gsm8k-seed42.json)。
+自由生成结果：
+[`free-generation-post-training-seeds42-44.json`](../experiments/free-generation-post-training-seeds42-44.json)。
 
 ## 运行与产物
 
@@ -54,6 +59,10 @@ GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后�
 auto-research post-train --algorithm rloo \
   --dataset gsm8k-candidate --maximum-examples 512 \
   --steps 300 --seed 42
+
+auto-research post-train --algorithm luspo \
+  --dataset arithmetic-generate --maximum-examples 48 \
+  --steps 6 --seeds 42,43,44 --offline
 ```
 
 每次运行写入 `runs/post-training/<algorithm>-<dataset>-seed<seed>/`：
@@ -64,5 +73,5 @@ auto-research post-train --algorithm rloo \
 
 ## 新方法验收
 
-新增方法必须通过单元测试、L0 smoke、L1 固定协议和 MkDocs 严格构建；若论文核心依赖
-真实生成、外部 judge 或大规模教师，应在页面中显式标为未覆盖，不能用简化信号冒充。
+新增 candidate 方法必须通过 L0/L1；依赖序列长度、在线 rollout 或能力边界的方法必须
+进入 L2，并通过多 seed 与 MkDocs 严格构建。大模型 judge/教师未接入时必须显式标注。

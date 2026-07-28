@@ -19,6 +19,10 @@ MODULES = {
         "lightning-opd": "2604.13010-lightning-opd",
         "gprl": "2605.18721-gprl",
         "tcr": "2607.19824-tcr",
+        "ipo": "2310.12036-ipo",
+        "simpo": "2405.14734-simpo",
+        "luspo": "2602.05261-luspo",
+        "coba-rl": "2606.22317-coba-rl",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -34,6 +38,11 @@ MODULES = {
         "u-mem": "2602.22406-u-mem",
         "legomem": "2510.04851-legomem",
         "memtool": "2507.21428-memtool",
+        "metagpt": "2308.00352-metagpt",
+        "critic": "2305.11738-critic",
+        "agent-lightning": "2508.03680-agent-lightning",
+        "swe-agent": "2405.15793-swe-agent",
+        "openhands": "2407.16741-openhands",
     },
 }
 

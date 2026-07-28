@@ -20,6 +20,11 @@
 | 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | National University of Singapore，2026-02-25 | [匿名仓库](https://anonymous.4open.science/r/code-release-456D/) | `u-mem` |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | Microsoft Research，2025-10-06 | 未发现 | `legomem` |
 | 工具记忆 | [MemTool](2507.21428-memtool/README.md) | PwC CTIO，2025-07-29 | 未发现 | `memtool` |
+| 多 Agent 软件工程 | [MetaGPT](2308.00352-metagpt/README.md) | DeepWisdom / Xiamen / KAUST，2023-08-01 | [已开源](https://github.com/FoundationAgents/MetaGPT) | `metagpt` |
+| 工具反馈 | [CRITIC](2305.11738-critic/README.md) | Microsoft / Tsinghua，2023-05-19 | [已开源](https://github.com/microsoft/ProphetNet/tree/master/CRITIC) | `critic` |
+| Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
+| 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | Princeton，2024-05-06 | [已开源](https://github.com/SWE-agent/SWE-agent) | `swe-agent` |
+| 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | All-Hands-AI / CMU 等，2024-07-23 | [已开源](https://github.com/All-Hands-AI/OpenHands) | `openhands` |
 
 ## 公平基线
 

@@ -16,6 +16,8 @@ class AgentResearchRunner:
 
     def run(self) -> tuple[AgentResearchResult, Path]:
         config = self.config
+        if config.benchmark == "swebench-local":
+            return self._run_code_benchmark()
         tasks = build_benchmark(config.benchmark, config.episodes, config.seed)
         agent = build_agent(config.method, config.memory_size, np.random.default_rng(config.seed))
         axis_totals, axis_correct = {}, {}
@@ -84,6 +86,42 @@ class AgentResearchRunner:
         }
         (run_dir / "metrics.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        from .report import render_report
+        (run_dir / "report.md").write_text(render_report(result), encoding="utf-8")
+        return result, run_dir
+
+    def _run_code_benchmark(self):
+        from .code_benchmark import run_code_method
+
+        config = self.config
+        if config.method not in {
+            "metagpt", "critic", "agent-lightning", "swe-agent", "openhands",
+        }:
+            raise ValueError(
+                "swebench-local requires metagpt, critic, agent-lightning, "
+                "swe-agent or openhands"
+            )
+        metrics, diagnostics, trace = run_code_method(
+            config.method, config.episodes, config.memory_size
+        )
+        result = AgentResearchResult(
+            config.method, config.benchmark, metrics,
+            {"code_execution": metrics["joint_success"]}, diagnostics, trace,
+        )
+        run_dir = (
+            config.output_dir
+            / f"{config.method}-{config.benchmark}-seed{config.seed}"
+        )
+        run_dir.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "method": result.method, "benchmark": result.benchmark,
+            "metrics": result.metrics, "axis_metrics": result.axis_metrics,
+            "diagnostics": result.diagnostics, "trace": result.trace,
+        }
+        (run_dir / "metrics.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
         )
         from .report import render_report
         (run_dir / "report.md").write_text(render_report(result), encoding="utf-8")

@@ -14,18 +14,20 @@
 | Group-relative reasoning RL | GRPO、DAPO、GSPO | 已实现 | group advantage、非对称 token clip、sequence clip |
 | On-policy distillation | Lightning OPD | 已实现 | 离线教师缓存 |
 | 多目标与过程奖励 | GPRL、TCR | 已实现 | 分维 reward 与 checklist residual |
+| 自由生成偏好 | IPO、SimPO | 已实现 | token-level sequence probability、reference-relative / reference-free |
+| 长度与能力边界 | LUSPO、CoBA-RL | 已实现 | 长度无偏 sequence RL、动态课程边界与教师触发 |
 
-## 仍缺失但值得补的 P1
+## 下一阶段缺口
 
-| 方法 | 为什么仍有价值 | 未在本批实现的原因 |
-|---|---|---|
-| IPO | 修正 DPO 在确定性偏好下的过拟合，是偏好目标理论谱系的重要节点 | 与当前 DPO/KTO/ORPO 的本地候选目标重叠较高，下一批需增加噪声偏好协议 |
-| SimPO | reference-free、length-normalized preference objective，工程使用广 | 需要先把 response length 从伪长度升级为真实 tokenizer trajectory |
-| LUPO（2026） | 处理 RLVR 中长度偏置，适合长推理 evolve | 最新方法，需增加自由生成与真实长度 judge 后再实现 |
-| CoBA-RL（2026） | 课程/边界自适应类 reasoning RL | 需要公开生成 benchmark，L1 候选空间不足以支撑结论 |
+当前 L2 已具备 tokenizer、自由生成、verifier 与多 seed，但仍是小型 GRU。下一阶段是：
+
+- 在 `gsm8k-generate` 上扩大训练并接入可下载的小型 pretrained causal LM；
+- 为 CoBA-RL 增加 pass@k 边界缓存和真实教师模型；
+- 为偏好方法接入 UltraFeedback 等公开 chosen/rejected 数据；
+- GPU 路径增加 batch rollout、mixed precision 与 checkpoint resume。
 
 ## 当前结论
 
 当前已覆盖“RLHF → 直接偏好 → 单样本/单阶段偏好 → group-relative reasoning RL →
-蒸馏/多目标/过程奖励”的主干。下一步不应继续堆相似 loss 名称，而应先把 L1 六候选
-评测升级到真实 tokenizer、自由生成、verifier 和多 seed，再接 IPO/SimPO/LUPO。
+蒸馏/多目标/过程奖励 → 自由生成偏好与能力边界”的主干。L1 candidate 与 L2
+free-generation 路径独立保留，报告不能把两类 accuracy 混成同一公平表。
