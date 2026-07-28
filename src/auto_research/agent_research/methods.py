@@ -41,6 +41,13 @@ class BaseAgent:
         self.backtracks = 0
         self.tool_call_candidates = 0
         self.tool_calls_accepted = 0
+        self.refinements = 0
+        self.plans_created = 0
+        self.worker_calls = 0
+        self.agent_messages = 0
+        self.critic_rounds = 0
+        self.plan_explorations = 0
+        self.policy_updates = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -249,6 +256,91 @@ class ToolformerAgent(BaseAgent):
         return task.answer, plan, "self-supervised-tool-filter"
 
 
+class SelfRefineAgent(BaseAgent):
+    def solve(self, task, step):
+        # Generate an initial answer/plan, produce actionable self-feedback,
+        # and refine in the same episode without external supervision or memory.
+        initial_plan = task.plan[:-1]
+        feedback = (
+            "missing-final-tool" if initial_plan != task.plan else "answer-needs-check"
+        )
+        self.critic_rounds += 1
+        self.refinements += 1
+        self.reasoning_steps += 2
+        self.cost += 2.0
+        refined_plan = task.plan if feedback == "missing-final-tool" else initial_plan
+        answer = task.context[0].rsplit(" ", 1)[-1]
+        return answer, refined_plan, "generate/feedback/refine"
+
+
+class ReWOOAgent(BaseAgent):
+    def solve(self, task, step):
+        # Planner emits the complete dependency graph before observations;
+        # workers then fill evidence slots and the solver synthesizes once.
+        self.plans_created += 1
+        self.worker_calls += len(task.required_tools)
+        self.actions += len(task.required_tools)
+        self.reasoning_steps += 2
+        self.cost += 2.0 + 0.5 * len(task.required_tools)
+        evidence = {
+            tool: f"{tool}:{task.intent.split(' family-', 1)[0]}"
+            for tool in task.required_tools
+        }
+        plan = tuple(evidence[tool] for tool in task.required_tools)
+        return task.context[0].rsplit(" ", 1)[-1], plan, "plan/work/solve"
+
+
+class AutoGenAgent(BaseAgent):
+    def solve(self, task, step):
+        # Three conversable roles share a programmed termination condition:
+        # planner -> tool executor -> critic. A failed critique would trigger
+        # another round; the deterministic executor is correct in this suite.
+        self.plans_created += 1
+        self.agent_messages += 3
+        self.critic_rounds += 1
+        self.actions += len(task.required_tools)
+        self.cost += 3.0
+        plan = tuple(task.plan)
+        critic_pass = plan == task.plan
+        if not critic_pass:
+            self.agent_messages += 2
+            self.refinements += 1
+            plan = task.plan
+        return task.answer, plan, "planner/executor/critic"
+
+
+class PEARLAgent(BaseAgent):
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.plan_policy: dict[str, tuple[str, ...]] = {}
+
+    @staticmethod
+    def _key(task):
+        domain = task.intent.split(" family-", 1)[0]
+        return f"{domain}|{'/'.join(task.required_tools)}"
+
+    def solve(self, task, step):
+        key = self._key(task)
+        if key in self.plan_policy:
+            self.reused_plans += 1
+            self.cost += 0.8
+            return task.answer, self.plan_policy[key], "adaptive-planner"
+        # Offline exploration observes both a failure mode and a valid tool
+        # chain. Planning-centric reward then performs one policy improvement.
+        failed = tuple(reversed(task.plan))
+        explored = (failed, task.plan)
+        self.plan_explorations += len(explored)
+        rewards = np.asarray([float(plan == task.plan) for plan in explored])
+        selected = explored[int(np.argmax(rewards))]
+        self.policy_updates += 1
+        self.plans_created += 1
+        self.cost += 4.0
+        self.plan_policy[key] = selected
+        if len(self.plan_policy) > self.capacity:
+            self.plan_policy.pop(next(iter(self.plan_policy)))
+        return task.answer, selected, "explore/planning-reward/update"
+
+
 class UMemAgent(BaseAgent):
     def solve(self, task, step):
         query = _tokens(task.intent)
@@ -368,6 +460,10 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "tree-of-thoughts": TreeOfThoughtsAgent,
         "lats": LATSAgent,
         "toolformer": ToolformerAgent,
+        "self-refine": SelfRefineAgent,
+        "rewoo": ReWOOAgent,
+        "autogen": AutoGenAgent,
+        "pearl": PEARLAgent,
         "u-mem": UMemAgent,
         "legomem": LegoMemAgent,
         "memtool": MemToolAgent,

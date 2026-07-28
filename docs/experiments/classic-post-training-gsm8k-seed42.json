@@ -20,12 +20,47 @@
       "kl_from_reference": 0.06833317338028673,
       "reward_model_parameters": 0
     },
+    "kto": {
+      "accuracy": 0.8359375,
+      "mean_reward": 0.855992353047812,
+      "kl_from_reference": 0.014338344537671776,
+      "desirable_utility": 0.5029538721680035,
+      "undesirable_utility": 0.49721555455573463,
+      "reference_kl_ema": 0.0074314044704069495
+    },
+    "orpo": {
+      "accuracy": 0.84375,
+      "mean_reward": 0.8617960843780659,
+      "kl_from_reference": 0.8973084851689165,
+      "sft_nll": 0.07153727844510231,
+      "log_odds_margin": 6.350187804446428,
+      "reference_model_parameters": 0
+    },
     "grpo": {
       "accuracy": 0.78125,
       "mean_reward": 0.8168955128271573,
       "kl_from_reference": 1.0400522058527373,
       "value_model_parameters": 0,
       "rollout_policy_refreshes": 18
+    },
+    "dapo": {
+      "accuracy": 0.7578125,
+      "mean_reward": 0.7996058785056733,
+      "kl_from_reference": 1.0870483587827842,
+      "rollout_policy_refreshes": 18,
+      "clip_low": 0.2,
+      "clip_high": 0.28,
+      "clip_fraction": 0.25,
+      "mean_pseudo_tokens": 2.25,
+      "overlong_penalty": 0.0125
+    },
+    "gspo": {
+      "accuracy": 0.828125,
+      "mean_reward": 0.8508578717725304,
+      "kl_from_reference": 0.7016685190362502,
+      "rollout_policy_refreshes": 18,
+      "sequence_ratio_mean": 1.0130756461379398,
+      "sequence_ratio_std": 0.01168781319879202
     },
     "ppo-rlhf": {
       "accuracy": 0.8125,

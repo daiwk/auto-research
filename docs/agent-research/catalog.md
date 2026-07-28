@@ -8,6 +8,10 @@
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 工具学习 | [Toolformer](2302.04761-toolformer/README.md) | Meta AI / UPF，2023-02-09 | 未发布官方代码 | `toolformer` |
+| 自我迭代 | [Self-Refine](2303.17651-self-refine/README.md) | CMU / AI2 / UW / NVIDIA / UCSD / Google，2023-03-30 | [已开源](https://github.com/madaan/self-refine) | `self-refine` |
+| 解耦规划 | [ReWOO](2305.18323-rewoo/README.md) | Microsoft / NCSU / Texas A&M，2023-05-29 | [已开源](https://github.com/billxbf/ReWOO) | `rewoo` |
+| 多 Agent | [AutoGen](2308.08155-autogen/README.md) | Microsoft Research，2023-08-16 | [已开源](https://github.com/microsoft/autogen) | `autogen` |
+| 规划强化学习 | [PEARL](2601.20439-pearl/README.md) | 中科院信工所 / 中国科学院大学，2026-01-28 | 未发现 | `pearl` |
 | 推理搜索 | [Tree of Thoughts](2305.10601-tree-of-thoughts/README.md) | Princeton / Google DeepMind，2023-05-17 | [已开源](https://github.com/princeton-nlp/tree-of-thought-llm) | `tree-of-thoughts` |
 | Agent 搜索 | [LATS](2310.04406-lats/README.md) | UIUC，2023-10-06 | [已开源](https://github.com/lapisrocks/LanguageAgentTreeSearch) | `lats` |
 | 推理与行动 | [ReAct](2210.03629-react/README.md) | Princeton / Google Research，2022-10-06 | [已开源](https://github.com/ysymyth/ReAct) | `react` |
@@ -25,7 +29,8 @@
 
 ## 后续方向
 
-后续论文按“长期记忆、规划与反思、工具学习、多 Agent 协作、环境模型、自我进化”
+系统谱系、明确的 P1 与暂缓原因见[论文谱系与缺口](lineage.md)。后续论文按
+“长期记忆、规划与反思、工具学习、多 Agent 协作、环境模型、自我进化”
 归档。一个方法只有在以下内容齐全时才标记为“已实现”：
 
 1. 核心状态更新和决策过程已落到代码；

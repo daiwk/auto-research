@@ -122,7 +122,8 @@ def build_parser() -> argparse.ArgumentParser:
     post_train.add_argument(
         "--algorithm",
         choices=[
-            "dpo", "grpo", "ppo-rlhf", "rloo", "remax",
+            "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
+            "ppo-rlhf", "rloo", "remax",
             "lightning-opd", "gprl", "tcr",
         ],
         required=True,
@@ -151,6 +152,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=[
             "long-context", "react", "reflexion", "voyager",
             "tree-of-thoughts", "lats", "toolformer",
+            "self-refine", "rewoo", "autogen", "pearl",
             "u-mem", "legomem", "memtool",
         ],
         required=True,

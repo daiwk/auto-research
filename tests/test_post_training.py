@@ -7,7 +7,10 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
 
 @pytest.mark.parametrize(
     "algorithm",
-    ["dpo", "grpo", "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr"],
+    [
+        "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
+        "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr",
+    ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
     result, run_dir = PostTrainingRunner(
@@ -88,3 +91,28 @@ def test_grpo_uses_old_policy_clipping_without_critic(tmp_path: Path):
     assert diagnostics["value_model_parameters"] == 0
     assert result.training["critic_updates"] == 0
     assert result.training["rollout_policy_refreshes"] == 1
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostic"),
+    [
+        ("kto", "desirable_utility"),
+        ("orpo", "log_odds_margin"),
+        ("dapo", "clip_high"),
+        ("gspo", "sequence_ratio_mean"),
+    ],
+)
+def test_additional_preference_and_reasoning_rl_mechanisms(
+    tmp_path: Path, algorithm: str, diagnostic: str
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=20,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert diagnostic in result.training["last_diagnostics"]
+    if algorithm in {"dapo", "gspo"}:
+        assert result.training["rollout_policy_refreshes"] == 1

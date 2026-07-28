@@ -8,16 +8,24 @@ ROOT = Path(__file__).resolve().parents[1]
 MODULES = {
     "post-training": {
         "dpo": "2305.18290-dpo",
+        "kto": "2402.01306-kto",
+        "orpo": "2403.07691-orpo",
         "grpo": "2402.03300-grpo",
         "ppo-rlhf": "2203.02155-ppo-rlhf",
         "rloo": "2402.14740-rloo",
         "remax": "2310.10505-remax",
+        "dapo": "2503.14476-dapo",
+        "gspo": "2507.18071-gspo",
         "lightning-opd": "2604.13010-lightning-opd",
         "gprl": "2605.18721-gprl",
         "tcr": "2607.19824-tcr",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
+        "self-refine": "2303.17651-self-refine",
+        "rewoo": "2305.18323-rewoo",
+        "autogen": "2308.08155-autogen",
+        "pearl": "2601.20439-pearl",
         "tree-of-thoughts": "2305.10601-tree-of-thoughts",
         "lats": "2310.04406-lats",
         "react": "2210.03629-react",
@@ -33,7 +41,7 @@ MODULES = {
 def test_research_modules_have_scalable_hub_structure():
     for module, methods in MODULES.items():
         directory = ROOT / "docs" / module
-        for name in ("README.md", "catalog.md", "benchmark.md"):
+        for name in ("README.md", "catalog.md", "lineage.md", "benchmark.md"):
             assert (directory / name).is_file(), f"{module} missing {name}"
 
         overview = (directory / "README.md").read_text(encoding="utf-8")
@@ -43,6 +51,7 @@ def test_research_modules_have_scalable_hub_structure():
         assert "## 后续扩展约定" in overview
         assert "(catalog.md)" in overview
         assert "(benchmark.md)" in overview
+        assert "(lineage.md)" in overview
         for method, slug in methods.items():
             assert f"({slug}/README.md)" in overview
             assert f"({slug}/README.md)" in catalog

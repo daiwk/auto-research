@@ -14,12 +14,17 @@
 
 - [自动进化中的纯 LLM](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
+- [论文谱系与缺口](lineage.md)：系统审计已覆盖主干、P1 缺口和下一步评测前置条件。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
 - [DPO](2305.18290-dpo/README.md)：reference-relative 偏好分类，无 reward model。
+- [KTO](2402.01306-kto/README.md)：只需单条 desirable/undesirable 标签的前景理论目标。
+- [ORPO](2403.07691-orpo/README.md)：SFT 与 odds-ratio 偏好合一，无 reference model。
 - [DeepSeekMath / GRPO](2402.03300-grpo/README.md)：组相对、critic-free 的 reasoning RL。
 - [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md)：旧策略、critic、clip 与 KL 的经典 RLHF。
 - [RLOO](2402.14740-rloo/README.md)：完整响应级 leave-one-out REINFORCE。
 - [ReMax](2310.10505-remax/README.md)：以 greedy rollout 作 baseline 的 value-free RLHF。
+- [DAPO](2503.14476-dapo/README.md)：Clip-Higher、动态采样、token loss 与过长惩罚。
+- [GSPO](2507.18071-gspo/README.md)：长度归一化的 sequence-level importance ratio。
 - [Lightning OPD](2604.13010-lightning-opd/README.md)：离线缓存教师分布的 on-policy distillation。
 - [GPRL](2605.18721-gprl/README.md)：多维偏好的 group-relative 强化学习。
 - [TCR](2607.19824-tcr/README.md)：thinking checklist 与残差过程奖励。
@@ -43,10 +48,14 @@ flowchart LR
 | 类别 | 方法 | 核心机制 | 公开评测 | 状态 |
 |---|---|---|---|---|
 | 直接偏好优化 | [DPO](2305.18290-dpo/README.md) | reference-relative pairwise classification | GSM8K candidate | 机制复现 |
+| 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | prospect utility、desirable/undesirable、KL 参照点 | GSM8K candidate | 机制复现 |
+| 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | SFT NLL + odds-ratio penalty，无 reference | GSM8K candidate | 机制复现 |
 | 在线推理 RL | [GRPO](2402.03300-grpo/README.md) | group advantage、old-policy clip、KL，无 critic | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [PPO-RLHF](2203.02155-ppo-rlhf/README.md) | old policy、clipped surrogate、critic、KL | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [RLOO](2402.14740-rloo/README.md) | response-level REINFORCE、leave-one-out baseline | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [ReMax](2310.10505-remax/README.md) | sampled reward 减 greedy reward，无 critic | GSM8K candidate | 机制复现 |
+| 长推理 RL | [DAPO](2503.14476-dapo/README.md) | 非对称 clip、动态采样、token loss、overlong shaping | GSM8K candidate | 机制复现 |
+| 稳定序列 RL | [GSPO](2507.18071-gspo/README.md) | sequence ratio、group advantage、序列级 clip | GSM8K candidate | 机制复现 |
 | 蒸馏 | [Lightning OPD](2604.13010-lightning-opd/README.md) | SFT rollout 上预计算教师分布，训练期零在线教师调用 | 同上 | 机制复现 |
 | 多目标 RL | [GPRL](2605.18721-gprl/README.md) | 分维度 group normalization 与漂移控制 | 同上 | 机制复现 |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | thinking checklist、EMA 残差奖励 | 同上 | 机制复现 |
@@ -59,7 +68,11 @@ flowchart LR
 | 方法 | 训练前 accuracy | 训练后 accuracy | KL(reference) |
 |---|---:|---:|---:|
 | DPO | 0.1641 | 0.8047 | 0.0683 |
+| KTO | 0.1641 | 0.8359 | 0.0143 |
+| ORPO | 0.1641 | **0.8438** | 0.8973 |
 | GRPO | 0.1641 | 0.7812 | 1.0401 |
+| DAPO | 0.1641 | 0.7578 | 1.0870 |
+| GSPO | 0.1641 | 0.8281 | 0.7017 |
 | PPO-RLHF | 0.1641 | 0.8125 | 0.8731 |
 | RLOO | 0.1641 | 0.8281 | 0.5707 |
 | ReMax | 0.1641 | 0.7031 | 0.7939 |
@@ -82,6 +95,9 @@ auto-research post-train --algorithm gprl \
   --dataset gsm8k-candidate --maximum-examples 512 --steps 300
 
 auto-research post-train --algorithm rloo \
+  --dataset gsm8k-candidate --maximum-examples 512 --steps 300 --offline
+
+auto-research post-train --algorithm dapo \
   --dataset gsm8k-candidate --maximum-examples 512 --steps 300 --offline
 ```
 

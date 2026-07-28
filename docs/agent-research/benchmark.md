@@ -35,6 +35,10 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | Tree of Thoughts · PlanBench mini | 1.0000 | 2.5000 | expanded/backtracked 1200/480 |
 | LATS · PlanBench mini | 1.0000 | 4.0000 | rollouts/reflections 480/360 |
 | Toolformer · ScaleMCP mini | 1.0000 | 3.0000 | accepted/candidate calls 360/540 |
+| Self-Refine · PlanBench mini | 1.0000 | 2.0000 | feedback/refinement 120/120 |
+| ReWOO · PlanBench mini | 1.0000 | 3.5000 | plans/worker calls 120/360 |
+| AutoGen · PlanBench mini | 1.0000 | 3.0000 | agent messages/critic rounds 360/120 |
+| PEARL · PlanBench mini | 1.0000 | 1.1200 | explorations/updates/reuse 24/12/108 |
 
 稳定数据：
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
