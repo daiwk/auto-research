@@ -1,0 +1,28 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "device": "mps",
+  "generations": 4,
+  "population": 4,
+  "steps_per_trial": 20,
+  "direction": "组合 Native Sparse Attention、Gated Attention 和 Muon，继续搜索数据配方、后训练与训练超参数",
+  "generation_1": {
+    "baseline": {"architecture": "gpt_baseline", "fitness": -6.9470, "perplexity": 418.202},
+    "native_sparse_attention": {"fitness": -6.9554, "perplexity": 420.529},
+    "muon": {"fitness": -6.9966, "perplexity": 437.028},
+    "nsa_gated_attention": {"fitness": -7.0230, "perplexity": 445.960},
+    "gated_attention": {"fitness": -7.0277, "perplexity": 448.473}
+  },
+  "champion": {
+    "trial": "g4-t2",
+    "architecture": "gpt_baseline",
+    "post_training": "sft",
+    "dimensions": 256,
+    "validation_perplexity": 256.5813,
+    "test_perplexity": 251.041,
+    "validation_fitness": -6.384150
+  },
+  "baseline_test_perplexity": 411.372,
+  "test_perplexity_change_percent": -38.97,
+  "scope": "single-seed small-model diagnostic; test was isolated from evolution selection"
+}

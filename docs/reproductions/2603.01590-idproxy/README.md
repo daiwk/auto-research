@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2603.01590](https://arxiv.org/abs/2603.01590) |
 | 公司/机构 | Xiaohongshu / Shanghai Jiao Tong University / Fudan University |
 | 首次公开日期 | 2026-03-02（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-27） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
 | Adapter | `idproxy` |
 | 本地复现代码 | [`src/auto_research/reproductions/idproxy/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/idproxy/) |
 

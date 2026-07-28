@@ -38,6 +38,9 @@ LLM_MUTATIONS = {
     "2101.03961": ("switch_transformer", "top-1 sparse expert routing 与 auxiliary load balancing"),
     "2312.00752": ("mamba", "输入依赖 selective state-space scan 与线性序列复杂度"),
     "2603.26380": ("switch_attention", "逐 token、逐层在 full attention 与 sliding-window attention 间动态路由"),
+    "2502.11089": ("native_sparse_attention", "NSA 的压缩、选择与滑窗三分支可训练稀疏注意力"),
+    "2505.06708": ("gated_attention", "在每个 attention head 的 SDPA 输出后加入 query-dependent sigmoid gate"),
+    "2502.16982": ("optimizer:muon", "Muon 对隐藏矩阵梯度做 Newton-Schulz 正交化，其余参数使用 AdamW"),
 }
 
 POST_TRAINING_MUTATIONS = {
@@ -112,6 +115,9 @@ LLM_FALLBACK_PAPERS = (
     Paper("Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity", "Top-1 sparse expert routing with a load-balancing auxiliary objective.", [], "2021-01-11", "https://arxiv.org/abs/2101.03961", "2101.03961"),
     Paper("Mamba: Linear-Time Sequence Modeling with Selective State Spaces", "Input-dependent state-space parameters selectively retain and propagate sequence information.", [], "2023-12-01", "https://arxiv.org/abs/2312.00752", "2312.00752"),
     Paper("Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers", "Per-token per-layer routing between full and sliding-window attention.", [], "2026-03-27", "https://arxiv.org/abs/2603.26380", "2603.26380"),
+    Paper("Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention", "Trainable compressed, selected and sliding-window attention branches for long-context language models.", [], "2025-02-16", "https://arxiv.org/abs/2502.11089", "2502.11089"),
+    Paper("Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free", "A head-specific sigmoid gate after SDPA improves stability and long-context behavior.", [], "2025-05-10", "https://arxiv.org/abs/2505.06708", "2505.06708"),
+    Paper("Muon is Scalable for LLM Training", "Orthogonalized matrix updates plus AdamW for the remaining parameters improve training efficiency.", [], "2025-02-24", "https://arxiv.org/abs/2502.16982", "2502.16982"),
 )
 
 POST_TRAINING_FALLBACK_PAPERS = (

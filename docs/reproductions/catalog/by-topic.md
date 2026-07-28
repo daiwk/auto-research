@@ -44,6 +44,9 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：并行学习压缩、query-selected fine block 与滑窗三路因果注意力，再用逐 query/head 门控融合。
+- [Gated Attention](../2505.06708-gated-attention/README.md)：在每个 head 的 SDPA 输出后加入 sigmoid gate，以轻量非线性缓解 attention sink 并改善训练稳定性。
+- [Muon](../2502.16982-muon/README.md)：将隐藏层二维矩阵交给正交化更新，其余参数保留 AdamW，使优化器可以独立于网络结构参与 evolve。
 - [DataOrchestra](../2607.24717-data-orchestra/README.md)：训练 per-example orchestrator 为每个预训练 chunk 选择跳过、保留或多阶段清洗，避免固定数据处理策略的过度计算和过度改写。
 - [Switch Transformer](../2101.03961-switch-transformer/README.md)：以 top-1 token routing 激活单个 FFN expert，并用负载均衡损失扩展稀疏容量。
 - [Mamba](../2312.00752-mamba/README.md)：通过输入相关 selective scan 在状态空间模型中选择性保留和写入信息。

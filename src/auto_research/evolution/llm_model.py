@@ -30,6 +30,8 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "mobius_rope", "naju", "adadsf", "engram",
         "looped_latent_attention", "gaugequant",
         "switch_transformer", "mamba", "switch_attention",
+        "native_sparse_attention", "gated_attention",
+        "nsa_gated_attention",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
@@ -37,6 +39,8 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "hyper_connections", "mhc", "qkv_depthwise_conv", "mobius_rope", "naju",
         "adadsf", "engram", "looped_latent_attention", "gaugequant",
         "switch_transformer", "mamba", "switch_attention",
+        "native_sparse_attention", "gated_attention",
+        "nsa_gated_attention",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -65,6 +69,10 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.switch_router = (
                 nn.Linear(config.dimensions, 1)
                 if architecture == "switch_attention" else None
+            )
+            self.output_gate = (
+                nn.Linear(config.dimensions, config.heads)
+                if architecture == "gated_attention" else None
             )
             qkv_width = config.heads * head_dim + 2 * kv_heads * head_dim
             self.qkv_conv = (
@@ -101,6 +109,15 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             mixed = torch.nn.functional.scaled_dot_product_attention(
                 q, k, v, is_causal=True
             )
+            if self.output_gate is not None:
+                gate = torch.sigmoid(
+                    self.output_gate(values).transpose(1, 2).unsqueeze(-1)
+                )
+                mixed = mixed * gate
+                self.last_gate_mean = float(gate.detach().mean().cpu())
+                self.last_gate_below_half = float(
+                    (gate.detach() < 0.5).float().mean().cpu()
+                )
             if self.switch_router is not None:
                 positions = torch.arange(length, device=values.device)
                 local_mask = (
@@ -277,11 +294,23 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         def __init__(self):
             super().__init__()
             self.first_norm, self.second_norm = norm(), norm()
-            self.attention = (
-                LoopedLatentAttention()
-                if architecture == "looped_latent_attention"
-                else Attention()
-            )
+            if architecture == "looped_latent_attention":
+                self.attention = LoopedLatentAttention()
+            elif architecture in {
+                "native_sparse_attention", "nsa_gated_attention"
+            }:
+                from .llm_attention_2025 import build_native_sparse_attention
+
+                self.attention = build_native_sparse_attention(
+                    torch=torch,
+                    nn=nn,
+                    config=config,
+                    head_dim=head_dim,
+                    rotary=_rotary,
+                    gated=architecture == "nsa_gated_attention",
+                )
+            else:
+                self.attention = Attention()
             self.ffn = FFN()
 
         def forward(self, values):
@@ -618,6 +647,34 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                         for block in self.blocks
                     ) / len(self.blocks),
                     "local_window": 16,
+                }
+            if architecture in {
+                "native_sparse_attention", "nsa_gated_attention"
+            }:
+                rows = [
+                    block.attention.last_statistics
+                    for block in self.blocks
+                    if block.attention.last_statistics
+                ]
+                if not rows:
+                    return {}
+                numeric = {
+                    key: sum(float(row[key]) for row in rows) / len(rows)
+                    for key in rows[0]
+                }
+                numeric["reference_kernel"] = "pytorch"
+                return numeric
+            if architecture == "gated_attention":
+                return {
+                    "gate_position": "after_sdpa_per_head",
+                    "output_gate_mean": sum(
+                        block.attention.last_gate_mean
+                        for block in self.blocks
+                    ) / len(self.blocks),
+                    "output_gate_below_0_5": sum(
+                        block.attention.last_gate_below_half
+                        for block in self.blocks
+                    ) / len(self.blocks),
                 }
             return {}
 

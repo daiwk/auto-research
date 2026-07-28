@@ -12,6 +12,7 @@ import numpy as np
 from .llm_data import load_llm_evolution_data
 from .llm_model import MicroLMConfig, build_micro_lm
 from .models import EvolutionTrial, Genome
+from .muon import Muon
 
 
 class MicroLLMEvaluator:
@@ -89,6 +90,15 @@ class MicroLLMEvaluator:
             ),
             "parameters": int(np.mean([row["parameters"] for row in trainings])),
             "device": trainings[0]["device"],
+            "optimizer": trainings[0]["optimizer"],
+            "architecture_stats": _mean_dicts(
+                [row["architecture_stats"] for row in trainings]
+            ),
+            "muon_orthogonality_error": float(
+                np.mean(
+                    [row["muon_orthogonality_error"] for row in trainings]
+                )
+            ),
             "seeds": list(self.seeds),
         }
         return EvolutionTrial(
@@ -131,8 +141,7 @@ class MicroLLMEvaluator:
             expansion=genome.expansion,
         )
         model = build_micro_lm(genome.architecture, config).to(device)
-        optimizers = {"adamw": torch.optim.AdamW, "adam": torch.optim.Adam, "adagrad": torch.optim.Adagrad}
-        optimizer = optimizers[genome.optimizer](model.parameters(), lr=genome.learning_rate)
+        optimizer = _build_optimizer(model, genome, torch)
         rng = np.random.default_rng(seed)
         losses = []
         model.train()
@@ -180,9 +189,7 @@ class MicroLLMEvaluator:
                 seed=seed,
                 torch=torch,
             )
-            optimizer = optimizers[genome.optimizer](
-                model.parameters(), lr=genome.learning_rate
-            )
+            optimizer = _build_optimizer(model, genome, torch)
         post_losses, post_stats = self._post_train(
             model, optimizer, genome, config, rng, device, torch
         )
@@ -192,6 +199,11 @@ class MicroLLMEvaluator:
             "post_training_loss": float(np.mean(post_losses)) if post_losses else 0.0,
             "parameters": sum(parameter.numel() for parameter in model.parameters()),
             "device": device.type,
+            "optimizer": genome.optimizer,
+            "architecture_stats": model.architecture_stats(),
+            "muon_orthogonality_error": float(
+                getattr(optimizer, "last_orthogonality_error", 0.0)
+            ),
             **post_stats,
         }, config
 
@@ -360,6 +372,38 @@ def _sample_lm_batch(tokens, batch_size, length, rng, device, torch):
     rows = np.stack([tokens[start:start + length + 1] for start in starts])
     values = torch.tensor(rows, dtype=torch.long, device=device)
     return values[:, :-1], values[:, 1:]
+
+
+def _build_optimizer(model, genome, torch):
+    if genome.optimizer == "muon":
+        return Muon(
+            model.named_parameters(),
+            learning_rate=genome.learning_rate,
+            torch=torch,
+        )
+    optimizers = {
+        "adamw": torch.optim.AdamW,
+        "adam": torch.optim.Adam,
+        "adagrad": torch.optim.Adagrad,
+    }
+    if genome.optimizer not in optimizers:
+        raise ValueError(f"unknown LLM optimizer: {genome.optimizer}")
+    return optimizers[genome.optimizer](
+        model.parameters(), lr=genome.learning_rate
+    )
+
+
+def _mean_dicts(rows):
+    if not rows:
+        return {}
+    result = {}
+    for key in rows[0]:
+        values = [row[key] for row in rows if key in row]
+        if values and all(isinstance(value, (int, float)) for value in values):
+            result[key] = float(np.mean(values))
+        elif values:
+            result[key] = values[0]
+    return result
 
 
 def _sample_instruction_batch(examples, batch_size, length, rng, device, torch):

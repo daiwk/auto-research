@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2312.00752](https://arxiv.org/abs/2312.00752) |
 | 公司/机构 | Carnegie Mellon University / Princeton University |
 | 首次公开日期 | 2023-12-01（arXiv v1） |
-| 原文开源代码 | 是：[state-spaces/mamba](https://github.com/state-spaces/mamba) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/state-spaces/mamba) |
 | Adapter | `mamba` |
 | 本地复现代码 | [`src/auto_research/reproductions/mamba/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mamba/) |
 

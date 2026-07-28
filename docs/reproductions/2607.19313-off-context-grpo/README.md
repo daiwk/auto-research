@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.19313](https://arxiv.org/abs/2607.19313) |
-| 公司/机构 | Meta AI、Columbia University |
+| 公司/机构 | Meta AI / Columbia University |
 | 首次公开日期 | 2026-07-21（arXiv v1） |
-| 原文开源代码 | 是：[AgPriyank/OC-GRPO](https://github.com/AgPriyank/OC-GRPO) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/AgPriyank/OC-GRPO) |
 | Adapter | `off-context-grpo` |
 | 本地复现代码 | [`src/auto_research/reproductions/off_context_grpo/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/off_context_grpo/) |
 

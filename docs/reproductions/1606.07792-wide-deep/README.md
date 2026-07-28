@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 1606.07792](https://arxiv.org/abs/1606.07792) |
 | 公司/机构 | Google |
 | 首次公开日期 | 2016-06-24（arXiv v1） |
-| 原文开源代码 | 是：[TensorFlow Wide & Deep](https://github.com/tensorflow/models/tree/master/official/r1/wide_deep) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/tensorflow/models/tree/master/official/r1/wide_deep) |
 | Adapter | `wide-deep` |
 | 本地复现代码 | [`src/auto_research/reproductions/wide_deep/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/wide_deep/) |
 

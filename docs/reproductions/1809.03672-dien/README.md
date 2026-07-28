@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 1809.03672](https://arxiv.org/abs/1809.03672) |
 | 公司/机构 | Alibaba |
 | 首次公开日期 | 2018-09-11（arXiv v1） |
-| 原文开源代码 | 是：[mouna99/dien](https://github.com/mouna99/dien) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/mouna99/dien) |
 | Adapter | `dien` |
 | 本地复现代码 | [`src/auto_research/reproductions/dien/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/dien/) |
 

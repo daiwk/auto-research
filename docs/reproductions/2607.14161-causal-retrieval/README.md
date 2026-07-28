@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.14161](https://arxiv.org/abs/2607.14161) |
 | 公司/机构 | Pinterest |
 | 首次公开日期 | 2026-07-14（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-27） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
 | Adapter | `causal-retrieval` |
 | 本地复现代码 | [`src/auto_research/reproductions/causal_retrieval/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/causal_retrieval/) |
 

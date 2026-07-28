@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.14192](https://arxiv.org/abs/2607.14192) |
 | 公司/机构 | Pinterest |
 | 首次公开日期 | 2026-07-15（arXiv v1） |
-| 原文开源代码 | 否：未发现原作者公开代码 |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
 | Adapter | `downstream-rewards` |
 | 本地复现代码 | [`src/auto_research/reproductions/downstream_rewards/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/downstream_rewards/) |
 

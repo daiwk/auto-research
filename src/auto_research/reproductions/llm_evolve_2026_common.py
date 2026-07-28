@@ -8,6 +8,24 @@ from auto_research.evolution.models import Genome
 
 
 PAPERS = {
+    "native-sparse-attention": {
+        "arxiv_id": "2502.11089",
+        "title": "Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention",
+        "url": "https://arxiv.org/abs/2502.11089",
+        "organization": "DeepSeek",
+    },
+    "gated-attention": {
+        "arxiv_id": "2505.06708",
+        "title": "Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free",
+        "url": "https://arxiv.org/abs/2505.06708",
+        "organization": "Qwen / Alibaba",
+    },
+    "muon": {
+        "arxiv_id": "2502.16982",
+        "title": "Muon is Scalable for LLM Training",
+        "url": "https://arxiv.org/abs/2502.16982",
+        "organization": "Moonshot AI / UCLA",
+    },
     "engram": {
         "arxiv_id": "2601.07372",
         "title": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
@@ -55,8 +73,14 @@ def run_llm_evolve_reproduction(
     architecture: str,
     paper_results: dict,
     scope: str,
+    optimizer: str = "adamw",
 ):
-    steps = int(os.environ.get("AUTO_RESEARCH_LLM_P1_STEPS", "30"))
+    steps = int(
+        os.environ.get(
+            "AUTO_RESEARCH_LLM_P0_STEPS",
+            os.environ.get("AUTO_RESEARCH_LLM_P1_STEPS", "30"),
+        )
+    )
     evaluator = MicroLLMEvaluator(
         dataset_dir=dataset_dir,
         dataset="wikitext-2",
@@ -74,6 +98,12 @@ def run_llm_evolve_reproduction(
         batch_size=4, learning_rate=6e-4,
     )
     method = Genome(**{**base.to_dict(), "architecture": architecture})
+    method = Genome(
+        **{
+            **method.to_dict(),
+            "optimizer": optimizer,
+        }
+    )
     baseline_trial = evaluator.evaluate(
         "baseline", 0, None, base, (), "same-budget LLaMA baseline"
     )
@@ -94,6 +124,7 @@ def run_llm_evolve_reproduction(
             "sequence_length": 64,
             "same_tokens_optimizer_and_budget": True,
             "evolve_architecture": architecture,
+            "evolve_optimizer": optimizer,
         },
         "baseline": {
             "name": "llama_modern",
@@ -138,7 +169,11 @@ def render(result):
         "",
         "## evolve 接入",
         "",
-        f"`--model micro-llm` 已可搜索 `{result['setup']['evolve_architecture']}`。",
+        (
+            f"`--model micro-llm` 已可搜索结构 "
+            f"`{result['setup']['evolve_architecture']}` 与优化器 "
+            f"`{result['setup']['evolve_optimizer']}`。"
+        ),
         "",
         "## 复现边界",
         "",

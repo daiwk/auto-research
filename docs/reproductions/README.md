@@ -18,14 +18,15 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 136 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 139 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
 - 2026-07-28 最近论文增量加入 Meta Mosaic、快手 UniR²、美团 CORE 与纯 LLM DataOrchestra；前三篇均通过量化线上 A/B 门槛，DataOrchestra 有官方代码与公开预训练 benchmark。
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
+- 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
-## 全部复现（136/136）
+## 全部复现（139/139）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
@@ -42,6 +43,9 @@
 | 核心机制 | `unir2` · [UniR²](2607.24439-unir2/README.md) | 快手播放量 +1.177%、点赞率 +2.560%；极速版送礼金额 +2.569% | DQ-PCA + ranking LoRA；SID code accuracy +34.04%，NDCG@10 -13.19% |
 | 核心机制 | `core-relevance` · [CORE](2607.24417-core-relevance/README.md) | 美团 NDCG@5 +0.20%、Badcase@5 -15.9% | 级联头 + step-GRPO + PostCoT；NDCG@5 +0.98%、Badcase@5 -50.00%，accuracy -0.52 points |
 | 核心机制 | `data-orchestra` · [DataOrchestra](2607.24717-data-orchestra/README.md) | 纯 LLM：0.5B/1.5B/7B benchmark average 稳定提升 | 逐样本路由；PPL 较固定清洗 -1.03%，较 raw +8.60%（变差） |
+| 核心机制 | `native-sparse-attention` · [NSA](2502.11089-native-sparse-attention/README.md) | 纯 LLM：质量不低于 full attention，64K 三阶段显著加速 | 三路稀疏注意力；attention edge -43.65%，PPL -3.17% |
+| 核心机制 | `gated-attention` · [Gated Attention](2505.06708-gated-attention/README.md) | 纯 LLM：改善 scaling、稳定性与长上下文外推 | post-SDPA 逐头 gate；PPL -0.72% |
+| 核心机制 | `muon` · [Muon](2502.16982-muon/README.md) | 纯 LLM：约 2× compute efficiency | 正交矩阵更新已执行；PPL +5.61%（变差） |
 | 核心机制 | `wide-deep` · [Wide & Deep](1606.07792-wide-deep/README.md) | Google Play acquisition +3.9% | wide crosses + deep tower；NDCG@10 +5.45% |
 | 核心机制 | `deepfm` · [DeepFM](1703.04247-deepfm/README.md) | 用户批准的经典例外 | FM + deep 共享 embedding；NDCG@10 +23.58% |
 | 核心机制 | `youtube-dnn` · [YouTube DNN](recsys2016-youtube-dnn-youtube-dnn/README.md) | 用户批准的经典例外；未披露量化 lift | 非线性用户塔；NDCG@10 -6.61%，保留负结果 |
