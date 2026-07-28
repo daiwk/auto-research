@@ -78,8 +78,8 @@ def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
     ):
         assert f"({target})" in library
 
-    assert "专用多代 mutation engine 尚未实现" in evolution
-    assert "评测底座已实现" in evolution
+    assert "论文检索约束的组合式 genome" in evolution
+    assert evolution.count("**可运行**") >= 4
     assert "  - 自动研究与进化:" in navigation
     assert "  - 论文实现与评测:" in navigation
     assert "      - 纯 LLM 后训练:" in navigation

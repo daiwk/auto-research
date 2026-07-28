@@ -25,12 +25,13 @@ flowchart LR
 
 当前主干已经覆盖经典特征交互、序列兴趣、长序列排序、双塔召回、Semantic ID 生成、LLM 内容/知识增强、采样蒸馏、RL、长期价值和 serving。
 
-| 仍值得补的经典候选 | 价值 | 暂未实现原因 |
+| 已补齐的经典例外 | 价值 | 当前状态 |
 | --- | --- | --- |
-| DeepFM | FM 与 deep 共享 embedding 的常用 CTR 基线 | 原文没有量化线上 A/B；需作为具名经典例外 |
-| YouTube DNN | 两阶段工业召回代表 | 线上口径与公开数据替代仍需单独审计 |
-| ESMM / MMoE / PLE | 多任务 CVR 与 shared-bottom 演进主线 | 需先建立含缺失转化标签的统一公开协议 |
-| RecoChain / DIG（2026） | 新的生成式/LLM 推荐方向 | 当前未核验到满足硬门槛的量化线上 A/B |
+| DeepFM | FM 与 deep 共享 embedding 的常用 CTR 基线 | 已按用户批准的经典例外实现 |
+| YouTube DNN | 两阶段工业召回代表 | 已按用户批准的经典例外实现召回与 sampled-softmax 路径 |
+| ESMM / MMoE / PLE | 多任务 CVR 与 shared-bottom 演进主线 | 已建立公开多任务协议并分别实现 |
+
+RecoChain / DIG（2026）仍未核验到满足工业论文硬门槛的量化线上 A/B，因此不创建占位 adapter。
 
 ## 通用 LLM：容量、序列与效率
 
@@ -54,17 +55,20 @@ flowchart LR
 
 经典链路已覆盖 PPO-RLHF、DPO、KTO、ORPO、GRPO、RLOO、ReMax，以及 DAPO、GSPO、SIS、Off-Context GRPO、Lightning OPD、GPRL、TCR。方法差异与缺口见[后训练谱系](post-training/lineage.md)。
 
-下一步重点是统一 rollout 的 on/off-policy 口径，公平比较 reward、KL、长度偏差和 group normalization，并把可组合 objective 暴露给 LLM evolve。
+后训练论文检索、可审计 objective 映射和组合式 genome 已进入统一多轮控制器。下一步是扩大
+公开 rollout 规模，并继续统一 reward、KL、长度偏差和 group normalization 的报告口径。
 
 ## Agent
 
 经典链路已覆盖 ReAct、Toolformer、Tree of Thoughts、Reflexion、Self-Refine、LATS、ReWOO、AutoGen、Voyager，以及近期记忆与规划方法。完整谱系见[Agent 谱系](agent-research/lineage.md)。
 
-下一步应把 memory、planner、tool policy 和 critic 变成可组合 genome，在同一任务套件比较成功率、token/tool 成本、跨 episode 复用与错误恢复，并区分算法收益和更强 foundation model 的收益。
+memory、planner、tool policy 和 critic 已成为可组合 genome，并在同一任务套件比较成功率、
+token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实浏览器/代码环境 benchmark，
+并区分算法收益和更强 foundation model 的收益。
 
 ## 执行优先级
 
 1. **P0 已完成**：Wide & Deep、DCN-V2、DIEN、BST、CS3、CQ-SID、Switch Transformer、Mamba、Switch Attention。
-2. **P1 基础设施**：新 LLM 架构进入 evolve；后训练和 Agent 的组合式 genome 接入统一多轮控制器。
-3. **P1 论文**：工业新论文继续执行线上证据门槛；DeepFM、YouTube DNN、ESMM/MMoE/PLE 需单独批准为经典例外。
+2. **P1 基础设施已完成**：新 LLM 架构、后训练和 Agent 的论文约束 genome 已接入统一多轮控制器。
+3. **P1 经典论文已完成**：DeepFM、YouTube DNN、ESMM、MMoE、PLE 已按用户批准的经典例外实现。
 4. **P2 系统复刻**：FlashAttention 等 kernel-first 工作进入 GPU 专项，不用 Mac 近似实现宣称论文复现。

@@ -29,9 +29,9 @@
 - [BEQUE](../2311.03758-beque/README.md)：生成 query rewrite，并用离线反馈、自采样和 PRO 优化改写质量。
 - [M6-Rec](../2205.08084-m6rec/README.md)：把多种推荐任务统一成自然语言形式，并以 option-adapter 轻量适配预训练模型。
 - [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，再以 Semantic ID 生成物品序列。
-- [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出并评估推荐策略，形成自动研究闭环；当前属于概念验证。
+- [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：本地指令 LLM 读取实验 journal，逐轮选择未尝试的优化器、门控与 reward 配置，再以 validation 反馈晋级。
 - [PinFM](../2507.12704-pinfm/README.md)：构建推荐 foundation model，并通过预训练—微调适配多个流量场景。
-- [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合；当前本地实现仍属于概念验证。
+- [LLaTTE](../2601.20083-llatte/README.md)：用 BERT 语义特征、MLA 上游压缩、候选感知在线 attention 和 DHEN 门控连接多阶段序列。
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：用 domain SFT 生成层级广告属性，构建语义图并约束召回稳定性。
 - [SERAL](../2502.13539-seral/README.md)：用 LLM 认知画像表示用户兴趣，再通过 IPO 与 nearline 链路优化惊喜度推荐。
 - [LEADRE](../2411.13789-leadre/README.md)：以意图感知 Semantic ID 表示广告，并用 DPO 对齐展示与转化偏好。

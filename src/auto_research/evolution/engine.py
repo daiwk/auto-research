@@ -35,13 +35,13 @@ class ModelEvolutionEngine:
             "agent": "agent memory planning tools critic",
         }.get(config.model, "recommendation")
         query = config.query or f"{config.model} {config.direction} {domain} efficient architecture"
-        papers = (
-            []
-            if config.model in {"post-training", "agent"}
-            else discover_papers(
-                query, config.max_papers, config.allow_network,
-                track="llm" if config.model == "micro-llm" else "recommendation",
-            )
+        track = {
+            "micro-llm": "llm",
+            "post-training": "post-training",
+            "agent": "agent",
+        }.get(config.model, "recommendation")
+        papers = discover_papers(
+            query, config.max_papers, config.allow_network, track=track
         )
         result = EvolutionResult(run_id, config, papers=papers)
         evaluator = self.evaluator or _make_evaluator(config, self.project_dir)
@@ -202,6 +202,18 @@ def _paper_ids(genome, papers):
             matched.append(paper.arxiv_id)
         elif paper.architecture == "small_llm" and genome.architecture != "gpt_baseline":
             matched.append(paper.arxiv_id)
+        elif paper.architecture == genome.post_training:
+            matched.append(paper.arxiv_id)
+        elif paper.architecture and ":" in paper.architecture:
+            component, value = paper.architecture.split(":", 1)
+            selected = {
+                "memory": genome.agent_memory,
+                "planner": genome.agent_planner,
+                "tool": genome.agent_tool_policy,
+                "critic": genome.agent_critic,
+            }.get(component)
+            if selected == value:
+                matched.append(paper.arxiv_id)
     return tuple(dict.fromkeys(matched))
 
 

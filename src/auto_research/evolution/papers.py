@@ -40,6 +40,34 @@ LLM_MUTATIONS = {
     "2603.26380": ("switch_attention", "逐 token、逐层在 full attention 与 sliding-window attention 间动态路由"),
 }
 
+POST_TRAINING_MUTATIONS = {
+    "2203.02155": ("ppo-rlhf", "PPO-RLHF 的 clipped policy objective、value baseline 与 KL 约束"),
+    "2305.18290": ("dpo", "DPO 直接从偏好对优化隐式奖励，无需单独训练 reward model"),
+    "2310.10505": ("remax", "ReMax 使用 greedy response baseline 降低 policy-gradient 方差"),
+    "2402.01306": ("kto", "KTO 使用前景理论式效用优化单条 desirable/undesirable 反馈"),
+    "2402.03300": ("grpo", "GRPO 用组内相对奖励替代 learned critic"),
+    "2402.14740": ("rloo", "RLOO 以 leave-one-out 组均值作为无偏 baseline"),
+    "2403.07691": ("orpo", "ORPO 将 SFT 与 odds-ratio preference penalty 合并为单阶段目标"),
+    "2503.14476": ("dapo", "DAPO 加入动态采样、token-level loss 与非对称 clipping"),
+    "2507.18071": ("gspo", "GSPO 用 sequence-level importance ratio 稳定大模型 RL"),
+    "2604.13010": ("lightning-opd", "Lightning OPD 缓存离线教师分布以减少在线 rollout 成本"),
+    "2605.18721": ("gprl", "GPRL 联合多维偏好并监控 reward drift"),
+    "2607.19824": ("tcr", "TCR 用 thinking checklist reward 与 EMA residual 做过程信用分配"),
+}
+
+AGENT_MUTATIONS = {
+    "2210.03629": ("planner:react", "ReAct 交替生成推理轨迹与工具动作"),
+    "2302.04761": ("tool:toolformer", "Toolformer 通过自监督 API 调用标注学习何时调用工具"),
+    "2303.11366": ("critic:reflexion", "Reflexion 将执行反馈写成语言反思并用于下一 episode"),
+    "2303.17651": ("critic:self-refine", "Self-Refine 以生成、反馈、修订循环改进输出"),
+    "2305.10601": ("planner:tree-of-thoughts", "Tree of Thoughts 显式搜索并评估多条推理分支"),
+    "2305.18323": ("planner:rewoo", "ReWOO 先规划工具依赖，再批量执行与汇总证据"),
+    "2310.04406": ("planner:lats", "LATS 将语言模型推理与蒙特卡洛树搜索、反思结合"),
+    "2507.21428": ("tool:memtool", "MemTool 动态选择记忆工具和上下文写入策略"),
+    "2510.04851": ("memory:legomem", "LEGOMem 将过程记忆拆成可组合、可复用的模块"),
+    "2602.22406": ("memory:u-mem", "U-Mem 主动判断知识缺口并获取、压缩长期记忆"),
+}
+
 FALLBACK_PAPERS = (
     Paper("RankMixer: Scaling Up Ranking Models in Industrial Recommenders", "Parameter-free token mixing and per-token feed-forward networks for industrial ranking.", [], "2025-07-21", "https://arxiv.org/abs/2507.15551", "2507.15551"),
     Paper("TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders", "Mixing and reverting, interval residuals, auxiliary losses and sparse per-token MoE.", [], "2026-02-06", "https://arxiv.org/abs/2602.06563", "2602.06563"),
@@ -77,11 +105,44 @@ LLM_FALLBACK_PAPERS = (
     Paper("Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers", "Per-token per-layer routing between full and sliding-window attention.", [], "2026-03-27", "https://arxiv.org/abs/2603.26380", "2603.26380"),
 )
 
+POST_TRAINING_FALLBACK_PAPERS = (
+    Paper("Training language models to follow instructions with human feedback", "PPO-based RLHF with a learned reward model.", [], "2022-03-04", "https://arxiv.org/abs/2203.02155", "2203.02155"),
+    Paper("Direct Preference Optimization: Your Language Model is Secretly a Reward Model", "A closed-form preference objective without an explicit reward model.", [], "2023-05-29", "https://arxiv.org/abs/2305.18290", "2305.18290"),
+    Paper("ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models", "A greedy-response baseline for low-variance policy gradients.", [], "2023-10-16", "https://arxiv.org/abs/2310.10505", "2310.10505"),
+    Paper("KTO: Model Alignment as Prospect Theoretic Optimization", "Alignment from unpaired desirable and undesirable feedback.", [], "2024-02-02", "https://arxiv.org/abs/2402.01306", "2402.01306"),
+    Paper("DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models", "Introduces Group Relative Policy Optimization.", [], "2024-02-05", "https://arxiv.org/abs/2402.03300", "2402.03300"),
+    Paper("Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs", "RLOO uses leave-one-out baselines for efficient online RLHF.", [], "2024-02-22", "https://arxiv.org/abs/2402.14740", "2402.14740"),
+    Paper("ORPO: Monolithic Preference Optimization without Reference Model", "Combines supervised learning and odds-ratio preference optimization.", [], "2024-03-12", "https://arxiv.org/abs/2403.07691", "2403.07691"),
+    Paper("DAPO: An Open-Source LLM Reinforcement Learning System at Scale", "Dynamic sampling and token-level policy optimization for reasoning.", [], "2025-03-18", "https://arxiv.org/abs/2503.14476", "2503.14476"),
+    Paper("Group Sequence Policy Optimization", "Sequence-level importance ratios stabilize group policy optimization.", [], "2025-07-24", "https://arxiv.org/abs/2507.18071", "2507.18071"),
+    Paper("Lightning OPD", "Offline teacher-distribution caching for efficient policy distillation.", [], "2026-04-17", "https://arxiv.org/abs/2604.13010", "2604.13010"),
+    Paper("GPRL", "Multi-dimensional preference optimization with reward-drift monitoring.", [], "2026-05-25", "https://arxiv.org/abs/2605.18721", "2605.18721"),
+    Paper("TCR", "Checklist rewards and EMA residuals for process-level credit assignment.", [], "2026-07-23", "https://arxiv.org/abs/2607.19824", "2607.19824"),
+)
+
+AGENT_FALLBACK_PAPERS = (
+    Paper("ReAct: Synergizing Reasoning and Acting in Language Models", "Interleaves reasoning traces and environment actions.", [], "2022-10-06", "https://arxiv.org/abs/2210.03629", "2210.03629"),
+    Paper("Toolformer: Language Models Can Teach Themselves to Use Tools", "Self-supervised learning of API calls.", [], "2023-02-09", "https://arxiv.org/abs/2302.04761", "2302.04761"),
+    Paper("Reflexion: Language Agents with Verbal Reinforcement Learning", "Stores verbal reflections from execution feedback.", [], "2023-03-20", "https://arxiv.org/abs/2303.11366", "2303.11366"),
+    Paper("Self-Refine: Iterative Refinement with Self-Feedback", "Iterative generation, critique, and refinement.", [], "2023-03-30", "https://arxiv.org/abs/2303.17651", "2303.17651"),
+    Paper("Tree of Thoughts: Deliberate Problem Solving with Large Language Models", "Searches over evaluated reasoning branches.", [], "2023-05-17", "https://arxiv.org/abs/2305.10601", "2305.10601"),
+    Paper("ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models", "Plans tool dependencies before execution.", [], "2023-05-29", "https://arxiv.org/abs/2305.18323", "2305.18323"),
+    Paper("Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models", "Combines tree search, environment feedback, and reflection.", [], "2023-10-06", "https://arxiv.org/abs/2310.04406", "2310.04406"),
+    Paper("MemTool", "Dynamically selects memory tools and context writes.", [], "2025-07-29", "https://arxiv.org/abs/2507.21428", "2507.21428"),
+    Paper("LEGOMem", "Composable process-memory modules for agents.", [], "2025-10-06", "https://arxiv.org/abs/2510.04851", "2510.04851"),
+    Paper("U-Mem", "Active knowledge acquisition and compressed long-term agent memory.", [], "2026-02-26", "https://arxiv.org/abs/2602.22406", "2602.22406"),
+)
+
 
 def discover_papers(query: str, limit: int, allow_network: bool, track: str = "recommendation") -> list[PaperInspiration]:
-    mutations = LLM_MUTATIONS if track == "llm" else INSTALLED_MUTATIONS
-    fallback = LLM_FALLBACK_PAPERS if track == "llm" else FALLBACK_PAPERS
-    categories = ("cs.CL", "cs.LG") if track == "llm" else ("cs.IR", "cs.LG")
+    tracks = {
+        "llm": (LLM_MUTATIONS, LLM_FALLBACK_PAPERS, ("cs.CL", "cs.LG")),
+        "post-training": (POST_TRAINING_MUTATIONS, POST_TRAINING_FALLBACK_PAPERS, ("cs.CL", "cs.LG")),
+        "agent": (AGENT_MUTATIONS, AGENT_FALLBACK_PAPERS, ("cs.AI", "cs.CL")),
+    }
+    mutations, fallback, categories = tracks.get(
+        track, (INSTALLED_MUTATIONS, FALLBACK_PAPERS, ("cs.IR", "cs.LG"))
+    )
     papers: list[Paper] = []
     source = "installed evidence"
     if allow_network:

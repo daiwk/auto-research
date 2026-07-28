@@ -1,62 +1,64 @@
 from __future__ import annotations
 
-import numpy as np
-
-from ..mdcns.model import SequentialModel
+from ..industrial_ranking import require_backend
 
 
-class CMSLScorer:
-    def __init__(self, model: SequentialModel, assignments: np.ndarray, alpha: float):
-        self.model = model
-        self.assignments = assignments
-        self.alpha = alpha
+def build_cmsl_model(items: int, dimensions: int = 32, lenses: int = 6, method: str = "cmsl"):
+    torch, nn = require_backend()
 
-    def single_sequence_scores(self, history: tuple[int, ...]) -> np.ndarray:
-        weights = np.geomspace(0.25, 1.0, len(history))
-        profile = np.average(self.model.context[list(history)], axis=0, weights=weights)
-        return self.model.item @ profile
+    class HSTUBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.qkv = nn.Linear(dimensions, 3 * dimensions)
+            self.gate = nn.Linear(dimensions, dimensions)
+            self.out = nn.Linear(dimensions, dimensions)
+            self.norm = nn.LayerNorm(dimensions)
 
-    def multi_sequence_scores(self, history: tuple[int, ...]) -> np.ndarray:
-        vectors = self.model.context[list(history)]
-        weights = np.geomspace(0.25, 1.0, len(history))
-        profiles = []
-        for cluster in np.unique(self.assignments[list(history)]):
-            mask = self.assignments[list(history)] == cluster
-            strand = vectors[mask]
-            strand_weights = weights[mask]
-            query = strand[-1]
-            # Degree-two polynomial feature approximation mirrors CMSL linear attention.
-            attention = np.maximum(0.05, 1.0 + strand @ query + 0.5 * (strand @ query) ** 2)
-            profiles.append(np.average(strand, axis=0, weights=strand_weights * attention))
-        strand_scores = np.stack([self.model.item @ profile for profile in profiles])
-        constructed = np.max(strand_scores, axis=0)
-        return (1.0 - self.alpha) * self.single_sequence_scores(history) + self.alpha * constructed
+        def forward(self, values, mask):
+            q, k, v = self.qkv(values).chunk(3, -1)
+            logits = torch.einsum("bld,bmd->blm", q, k) / dimensions**0.5
+            logits = logits.masked_fill(~mask[:, None, :], -1e4)
+            attention = torch.softmax(torch.nn.functional.silu(logits), -1)
+            update = torch.einsum("blm,bmd->bld", attention, v)
+            return self.norm(values + torch.sigmoid(self.gate(values)) * self.out(update))
 
+    class CMSL(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.method = method
+            self.embedding = nn.Embedding(items + 1, dimensions, padding_idx=items)
+            self.lens_queries = nn.Parameter(torch.randn(lenses, dimensions) * 0.02)
+            self.contextual_lens = nn.Sequential(
+                nn.Linear(dimensions, dimensions), nn.GELU(), nn.Linear(dimensions, dimensions),
+            )
+            self.hstu = HSTUBlock()
+            self.fusion = nn.Linear(dimensions, 1)
 
-def semantic_assignments(features: np.ndarray, clusters: int, seed: int) -> np.ndarray:
-    rng = np.random.default_rng(seed)
-    centers = features[rng.choice(len(features), clusters, replace=False)].copy()
-    assignments = np.zeros(len(features), dtype=np.int64)
-    for _ in range(15):
-        similarity = features @ centers.T
-        assignments = np.argmax(similarity, axis=1)
-        for index in range(clusters):
-            members = features[assignments == index]
-            if len(members):
-                center = members.mean(axis=0)
-                centers[index] = center / max(np.linalg.norm(center), 1e-12)
-    return assignments
+        def profiles(self, history, mask):
+            hidden = self.embedding(history)
+            encoded = self.hstu(hidden, mask)
+            if self.method == "single":
+                weights = mask.float()
+                return ((encoded * weights.unsqueeze(-1)).sum(1) / weights.sum(1, keepdim=True).clamp_min(1)).unsqueeze(1)
+            contextual = self.contextual_lens(encoded)
+            assignment = torch.einsum("bld,kd->blk", contextual, self.lens_queries)
+            assignment = assignment.masked_fill(~mask.unsqueeze(-1), -1e4)
+            assignment = torch.softmax(assignment, 1)
+            profiles = torch.einsum("blk,bld->bkd", assignment, encoded)
+            return profiles
 
+        def pair_scores(self, history, mask, candidates):
+            profiles = self.profiles(history, mask)
+            vectors = self.embedding(candidates)
+            logits = (profiles * vectors.unsqueeze(1)).sum(-1)
+            return torch.logsumexp(logits, 1)
 
-def train_backbone(data, seed: int, factors: int = 24, epochs: int = 5) -> SequentialModel:
-    rng = np.random.default_rng(seed)
-    model = SequentialModel.create(data.item_count, factors, seed)
-    pairs = np.asarray([(a, b) for sequence in data.train for a, b in zip(sequence, sequence[1:])], dtype=np.int64)
-    for _ in range(epochs):
-        rng.shuffle(pairs)
-        for previous, positive in pairs:
-            negative = int(rng.integers(data.item_count))
-            if negative == positive:
-                negative = (negative + 1) % data.item_count
-            model.bpr_update(int(previous), int(positive), negative, 0.035, 0.002)
-    return model
+        def forward(self, history, mask, candidate):
+            return self.pair_scores(history, mask, candidate)
+
+        def score_catalog(self, history, mask, candidates):
+            profiles = self.profiles(history, mask)
+            logits = torch.einsum("bkd,nd->bkn", profiles, self.embedding(candidates))
+            return torch.logsumexp(logits, 1)
+
+    return CMSL()

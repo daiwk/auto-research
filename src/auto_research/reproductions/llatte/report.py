@@ -6,5 +6,5 @@ def render(result: dict[str, Any]) -> str:
     for name, row in result["results"].items():
         lines.append(f"| {name} | {row['hit_at_10']:.4f} ± {row['hit_at_10_std']:.4f} | {row['ndcg_at_10']:.4f} ± {row['ndcg_at_10_std']:.4f} |")
     ab = result["paper_online_ab"]
-    lines += ["", f"LLaTTE local NDCG@10 change: **{result['ndcg_gain_percent']:+.2f}%**. Validation-selected target-aware/upstream weights: `{result['setup']['validation_selected_weights']}`.", "", "## Paper's production A/B evidence", "", f"Meta reports **+{ab['conversion_lift_percent']:.1f}% conversion** and **-{ab['normalized_entropy_reduction_percent']:.2f}% normalized entropy** across multiple large-scale A/B tests.", "", "## Reproduction boundary", "", result["scope"], ""]
+    lines += ["", f"LLaTTE local NDCG@10 change: **{result['ndcg_gain_percent']:+.2f}%**. Semantic encoder: `{result['setup']['semantic_encoder']}`; MLA latents: `{result['setup']['mla_latents']}`.", "", "## Paper's production A/B evidence", "", f"Meta reports **+{ab['conversion_lift_percent']:.1f}% conversion** and **-{ab['normalized_entropy_reduction_percent']:.2f}% normalized entropy** across multiple large-scale A/B tests.", "", "## Reproduction boundary", "", result["scope"], ""]
     return "\n".join(lines)

@@ -146,12 +146,10 @@
 | 核心机制 | `cross-domain-kd` · [Cross-domain KD](2603.28994-cross-domain-kd/README.md) | Music discovery +1.12% | target split 相对 DIN -68.46% |
 | 核心机制 | `mm-llm` · [MM-LLM](2605.09338-mm-llm/README.md) | Meta engagement +0.02% | 相对 DIN -13.23%，未验证收益 |
 | 核心机制 | `cluster-goobs` · [Cluster GOOBS](2607.00448-cluster-goobs/README.md) | Meta CTR +53% | online sampler 实际执行；genre 替换私有 LLM cluster |
-| 概念验证 | `llatte` · [LLaTTE](2601.20083-llatte/README.md) | Meta conversion +4.3% | 缺 MLA、DHEN、semantic LLM features |
-| 概念验证 | `self-evolving-rec` · [Self-Evolving RecSys](2602.10226-self-evolving-rec/README.md) | Google +0.03%–+0.14% | 固定候选代替 LLM agent；无线上反馈闭环 |
-| 概念验证 | `cmsl` · [CMSL](2606.28533-cmsl/README.md) | Meta +0.092%–+0.171% | 固定 genre strand 代替 learned lenses/HSTU |
-| 概念验证 | `longer` · [LONGER](2505.04421-longer/README.md) | Douyin Ads/电商 A/B | 打分代理，未训练 hybrid attention/InnerTrans |
-
-概念验证 README 中的历史本地百分比是旧的 heuristic 诊断结果，不应与论文离线或线上结果比较，也不能作为“论文方法有效”的证据。
+| 核心机制 | `llatte` · [LLaTTE](2601.20083-llatte/README.md) | Meta conversion +4.3% | BERT semantic features、MLA、target-aware online attention 与 DHEN 均实际训练 |
+| 核心机制 | `self-evolving-rec` · [Self-Evolving RecSys](2602.10226-self-evolving-rec/README.md) | Google +0.03%–+0.14% | 本地指令 LLM 读取 journal、逐轮提案、validation 反馈与隔离 test |
+| 核心机制 | `cmsl` · [CMSL](2606.28533-cmsl/README.md) | Meta +0.092%–+0.171% | learned contextual lenses 与 HSTU-style backbone 实际训练 |
+| 核心机制 | `longer` · [LONGER](2505.04421-longer/README.md) | Douyin Ads/电商 A/B | InnerTrans、global token 与 hybrid attention 端到端训练 |
 
 ## 统一运行方式
 

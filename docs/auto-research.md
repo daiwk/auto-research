@@ -27,7 +27,7 @@ auto-research run \
 
 LLM 方向使用 `--track llm`，推荐、搜索和广告方向使用 `--track recommendation`。
 自定义领域可通过实验命令和 search space 接入；无网络环境可加 `--offline`，已有缓存
-会继续复用。Agent 当前可复用 topic loop 和评测组件，专用 evolve adapter 尚未完成。
+会继续复用。后训练与 Agent 均已提供专用 evolve adapter。
 
 ## 模型定向进化
 
@@ -52,9 +52,9 @@ auto-research evolve \
 
 LLM 轨道使用 `micro-llm + WikiText-2`：第 1 轮比较 GQA、RoPE/RMSNorm/SwiGLU、parallel block 等结构；第 2 轮比较预训练数据配方；第 3 轮比较 SFT、NEFTune、DynamicRubric 与 Off-Context GRPO。public suite 还固定评估 Alpaca response preference 和 GSM8K candidate Pass@1。默认模型约 12M–16M 参数，可以在 Apple Silicon 上从头训练。
 
-后训练与 Agent 论文先在[论文实现与评测库](research-library.md)中建立可信实现。
-其中后训练组件已经进入 micro‑LLM 的进化阶段；Agent 的 memory/planning/tool 组件已有
-统一 benchmark，但需要完成专用 genome 与 mutation adapter 后才进入多代进化。
+后训练和 Agent 轨道会先检索论文，再把论文映射到仓库中经过测试的安全算子。后训练
+搜索 objective、学习率、group size 与预算；Agent 搜索 memory、planner、tool policy、
+critic 和容量。两者均记录论文来源、父子 genome、validation 晋级和隔离 test。
 
 ## 研究产物
 

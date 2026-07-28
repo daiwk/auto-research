@@ -1,13 +1,12 @@
 {
   "paper": "2606.28533",
   "adapter": "cmsl",
-  "fidelity": "concept_demo",
-  "diagnostic_only": true,
+  "fidelity": "core_mechanism",
   "dataset": "MovieLens-100K",
-  "setup": {"users": 932, "items": 1682, "seeds": [42, 43, 44], "latent_sequences": 6},
+  "setup": {"users": 932, "items": 1682, "seeds": [42, 43, 44], "learned_contextual_lenses": 6, "steps": 90},
   "results": {
-    "single_sequence": {"hit_at_10": 0.0726037196, "hit_at_10_std": 0.0013382179, "ndcg_at_10": 0.0351283842, "ndcg_at_10_std": 0.0013732621},
-    "cmsl_proxy": {"hit_at_10": 0.0726037196, "hit_at_10_std": 0.0026764359, "ndcg_at_10": 0.0354613680, "ndcg_at_10_std": 0.0016042573}
+    "single_sequence_hstu": {"hit_at_10": 0.0046494993, "hit_at_10_std": 0.0005057988, "ndcg_at_10": 0.0021368536, "ndcg_at_10_std": 0.0003967847},
+    "cmsl": {"hit_at_10": 0.0060801144, "hit_at_10_std": 0.0010115977, "ndcg_at_10": 0.0027654206, "ndcg_at_10_std": 0.0003268989}
   },
-  "relative_ndcg_change_percent": 0.9479010
+  "relative_ndcg_change_percent": 29.4155400
 }

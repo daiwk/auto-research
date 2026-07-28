@@ -1,6 +1,7 @@
 import numpy as np
+import torch
 
-from auto_research.reproductions.longer.model import LONGERScorer
+from auto_research.reproductions.longer.model import build_longer_model
 from auto_research.reproductions.mixformer.model import training_examples
 from auto_research.reproductions.onerec.model import TokenLayout, _catalog_transitions
 from auto_research.reproductions.plum.model import SemanticIDIndex
@@ -15,11 +16,14 @@ class _Backbone:
 
 
 def test_longer_merges_old_and_recent_tokens():
-    scorer = LONGERScorer(_Backbone(), merge_weight=0.5, group_size=2)
-    assert scorer.longer_scores((0, 1, 2)).shape == (3,)
-    assert not np.allclose(
-        scorer.longer_scores((0, 1, 2)), scorer.recent_transformer_scores((0, 1, 2))
-    )
+    model = build_longer_model(8, dimensions=8, group_size=2)
+    history = torch.tensor([[8, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6]])
+    mask = history.ne(8)
+    score = model(history, mask, torch.tensor([7]))
+    score.sum().backward()
+    assert score.shape == (1,)
+    assert model.inner_pool.weight.grad is not None
+    assert model.global_token.grad is not None
 
 
 def test_mixformer_training_examples_are_fixed_length_next_item_rows():

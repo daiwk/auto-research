@@ -1,6 +1,6 @@
 # Self-Evolving Recommendation System
 
-> **Fidelity: 概念验证（非论文复现）**。当前固定候选集合代替 LLM agent 生成，且没有真实线上 A/B 反馈闭环；旧指标不能验证论文的 autonomous optimization。
+> **Fidelity: 核心机制复现**。本地 `SmolLM2-135M-Instruct` 实际读取 journal、给可执行配置打分、逐轮提出未尝试方案并接收 validation 反馈；未复刻 Google 生产 A/B 基础设施。
 
 ## 论文信息
 
@@ -64,13 +64,13 @@ LLM ablation 中每种配置执行 6 个独立 run、探索约 70 个 ideas；�
 
 ## 本地复现
 
-> **本地对照口径**：基线是 Human/Adagrad 配置；实验组是 validation funnel 选出的 promoted candidate；NDCG@10 从 0.0399 升至 0.0427（**+7.13%**）。这是自动选型工作流相对固定人工配置的比较，不是单一模型相对 DIN。
+> **本地对照口径**：基线是 Human/Adagrad 配置；实验组是本地 LLM agent 经过四代 journal→提案→训练→validation 反馈后晋级的配置，NDCG@10 **+2.57%**。test 只在晋级完成后运行，不是单一模型相对 DIN。
 
-实现 experiment journal、离线候选 funnel、validation promotion、test-only outer-loop proxy，以及论文披露的 Adagrad→RMSProp、GLU、recency-aware multi-objective reward。三个 seed；候选生成器固定，保证离线可重复，不调用 Gemini。
+实现 experiment journal、约束式可执行搜索空间、validation promotion 与隔离 test。每代由本地指令 LLM 根据此前指标为未尝试配置计算条件 log-loss 并提案；搜索维度包含 Adagrad/RMSProp、GLU gate、multi-objective reward 和学习率。三个 seed，不调用闭源 Gemini。
 
 | Workflow | Hit@10 | NDCG@10 |
 |---|---:|---:|
 | Human baseline | 0.0833 ± 0.0043 | 0.0399 ± 0.0018 |
-| Promoted candidate | **0.0894 ± 0.0075** | **0.0427 ± 0.0038** |
+| LLM-agent promoted | **0.0844 ± 0.0054** | **0.0409 ± 0.0028** |
 
-平均 NDCG@10 **+7.13%**。三个 seed 分别晋级完整组合、RMSProp 和原始 baseline，说明 funnel 也能拒绝退化方案。MovieLens test holdout 不是线上 A/B，固定候选空间也不等价于 agent 自动研究能力。诊断指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
+平均 NDCG@10 **+2.57%**。seed 42 晋级 multi-objective reward，seed 43/44 均保留人工 baseline，说明闭环能够拒绝 validation 退化方案；提升小于 seed 波动，不能声称稳定收益。MovieLens test holdout 不是线上 A/B，约束式搜索也不等于 Google 的生产代码编辑环境。稳定指标见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
