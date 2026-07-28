@@ -42,6 +42,9 @@ generation accuracy 不能与 L1 candidate accuracy 混比，也不能等同于 
 | Lightning OPD | **0.8359** | **0.8561** | 0.8269 |
 | GPRL | 0.3672 | 0.5002 | 1.1022 |
 | TCR | **0.8359** | 0.8560 | 0.5629 |
+| Constitutional AI | **0.8438** | **0.8617** | 1.0214 |
+| RRHF | 0.8125 | 0.8401 | 0.8344 |
+| RAFT | **0.8438** | **0.8617** | 0.8789 |
 
 GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后并不能推翻论文结论；
 这项结果说明它需要进一步接入 AlpacaEval 类多维 judge，而不是隐藏不利结果。
@@ -52,6 +55,8 @@ GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后�
 [`classic-post-training-gsm8k-seed42.json`](../experiments/classic-post-training-gsm8k-seed42.json)。
 自由生成结果：
 [`free-generation-post-training-seeds42-44.json`](../experiments/free-generation-post-training-seeds42-44.json)。
+本批经典缺口：
+[`p0-missing-post-training-gsm8k-seed42.json`](../experiments/p0-missing-post-training-gsm8k-seed42.json)。
 
 ## 运行与产物
 

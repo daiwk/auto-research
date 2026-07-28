@@ -72,6 +72,15 @@ class AgentResearchRunner:
             "critic_rounds": agent.critic_rounds,
             "plan_explorations": agent.plan_explorations,
             "policy_updates": agent.policy_updates,
+            "router_calls": agent.router_calls,
+            "symbolic_expert_calls": agent.symbolic_expert_calls,
+            "model_matches": agent.model_matches,
+            "dependency_edges": agent.dependency_edges,
+            "memories_retrieved": agent.memories_retrieved,
+            "reflection_syntheses": agent.reflection_syntheses,
+            "archival_writes": agent.archival_writes,
+            "page_ins": agent.page_ins,
+            "interrupts": agent.interrupts,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

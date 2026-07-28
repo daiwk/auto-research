@@ -12,6 +12,7 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "tree-of-thoughts", "lats", "toolformer",
         "self-refine", "rewoo", "autogen", "pearl",
         "u-mem", "legomem", "memtool",
+        "mrkl", "hugginggpt", "generative-agents", "memgpt",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -176,3 +177,36 @@ def test_code_agents_edit_real_files_and_execute_regression_tests(
         for row in result.trace for event in row["events"]
     )
     assert (run_dir / "metrics.json").exists()
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        ("mrkl", "scalemcp-mini", ("router_calls", "symbolic_expert_calls")),
+        ("hugginggpt", "planbench-mini", ("model_matches", "dependency_edges")),
+        (
+            "generative-agents",
+            "evomem-mini",
+            ("memories_retrieved", "reflection_syntheses"),
+        ),
+        ("memgpt", "evomem-mini", ("archival_writes", "page_ins", "interrupts")),
+    ],
+)
+def test_missing_classic_agent_mechanisms_are_observable(
+    tmp_path: Path,
+    method: str,
+    benchmark: str,
+    diagnostics: tuple[str, ...],
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark=benchmark,
+            episodes=36,
+            memory_size=8,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0

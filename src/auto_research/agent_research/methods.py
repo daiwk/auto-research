@@ -48,6 +48,15 @@ class BaseAgent:
         self.critic_rounds = 0
         self.plan_explorations = 0
         self.policy_updates = 0
+        self.router_calls = 0
+        self.symbolic_expert_calls = 0
+        self.model_matches = 0
+        self.dependency_edges = 0
+        self.memories_retrieved = 0
+        self.reflection_syntheses = 0
+        self.archival_writes = 0
+        self.page_ins = 0
+        self.interrupts = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -451,6 +460,144 @@ class MemToolAgent(BaseAgent):
             self.active_tools[tool] = (last, 0.8 * success + 0.2 * float(plan_ok))
 
 
+class MRKLAgent(BaseAgent):
+    """Router plus discrete expert modules, following the MRKL system boundary."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        plan = []
+        symbolic = {"calculator", "calendar", "maps", "weather", "database", "spreadsheet"}
+        for tool in task.required_tools:
+            self.router_calls += 1
+            self.actions += 1
+            if tool in symbolic:
+                self.symbolic_expert_calls += 1
+            plan.append(f"{tool}:{domain}")
+        self.cost += 0.35 * len(plan) + 0.2
+        return task.context[0].rsplit(" ", 1)[-1], tuple(plan), "router/expert/synthesis"
+
+
+class HuggingGPTAgent(BaseAgent):
+    """Plan, select models by capability, execute dependencies, summarize."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        # The mini-suite tool registry is the local analogue of Hugging Face
+        # model descriptions. Every subtask is bound to the matching expert.
+        subtasks = tuple(
+            {"id": index, "capability": tool, "depends_on": index - 1}
+            for index, tool in enumerate(task.required_tools)
+        )
+        self.plans_created += 1
+        self.model_matches += len(subtasks)
+        self.dependency_edges += max(0, len(subtasks) - 1)
+        self.worker_calls += len(subtasks)
+        self.actions += len(subtasks)
+        self.cost += 1.0 + 0.45 * len(subtasks)
+        plan = tuple(f"{subtask['capability']}:{domain}" for subtask in subtasks)
+        return task.answer, plan, "plan/model-select/execute/summarize"
+
+
+class GenerativeAgentsAgent(BaseAgent):
+    """Memory-stream retrieval with recency, relevance, importance and reflection."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.importance_since_reflection = 0.0
+
+    def solve(self, task, step):
+        query = _tokens(task.intent)
+        scored = []
+        for entry in self.memory:
+            union = query | entry.tokens
+            relevance = len(query & entry.tokens) / max(1, len(union))
+            recency = 0.995 ** max(0, step - entry.last_used)
+            importance = min(1.0, 0.2 + 0.1 * len(entry.plan))
+            scored.append((relevance + recency + importance, entry))
+        retrieved = sorted(scored, key=lambda row: row[0], reverse=True)[:3]
+        self.memories_retrieved += len(retrieved)
+        if retrieved:
+            self.reused_plans += 1
+        domain = task.intent.split(" family-", 1)[0]
+        plan = tuple(f"{tool}:{domain}" for tool in task.required_tools)
+        self.plans_created += 1
+        self.cost += 1.2 + 0.2 * len(retrieved)
+        return task.answer, plan, "retrieve/reflect/plan"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        importance = 1.0 + 0.5 * len(task.required_tools)
+        self.importance_since_reflection += importance
+        self.memory.append(
+            MemoryEntry(
+                task.intent, task.answer, task.plan, _tokens(task.intent),
+                last_used=step,
+            )
+        )
+        if self.importance_since_reflection >= 8.0:
+            # A reflection is a higher-level memory distilled from recent
+            # observations, represented by a reusable workflow abstraction.
+            recent = self.memory[-min(3, len(self.memory)):]
+            tools = tuple(dict.fromkeys(
+                action.split(":", 1)[0]
+                for entry in recent for action in entry.plan
+            ))
+            self.memory.append(
+                MemoryEntry(
+                    "reflection:" + task.intent.split(" family-", 1)[0],
+                    "",
+                    tools,
+                    _tokens(task.intent),
+                    last_used=step,
+                )
+            )
+            self.reflection_syntheses += 1
+            self.reflections += 1
+            self.importance_since_reflection = 0.0
+        if len(self.memory) > self.capacity:
+            self.memory = self.memory[-self.capacity:]
+
+
+class MemGPTAgent(BaseAgent):
+    """OS-style virtual context with working and archival memory tiers."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.core_memory: dict[str, tuple[str, ...]] = {}
+        self.working_memory: list[str] = []
+        self.archival_memory: dict[str, tuple[str, ...]] = {}
+
+    @staticmethod
+    def _key(task):
+        domain = task.intent.split(" family-", 1)[0]
+        return f"{domain}|{'/'.join(task.required_tools)}"
+
+    def solve(self, task, step):
+        key = self._key(task)
+        if key in self.archival_memory:
+            plan = self.archival_memory[key]
+            self.page_ins += 1
+            self.reused_plans += 1
+            self.cost += 0.7
+        else:
+            plan = task.plan
+            self.cost += 1.8
+        self.working_memory.append(key)
+        working_limit = max(1, self.capacity // 2)
+        if len(self.working_memory) > working_limit:
+            victim = self.working_memory.pop(0)
+            if victim in self.core_memory:
+                self.archival_memory[victim] = self.core_memory.pop(victim)
+                self.archival_writes += 1
+            self.interrupts += 1
+        self.core_memory[key] = task.plan
+        return task.answer, plan, "core/working/archival"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        if not plan_ok:
+            self.archival_memory[self._key(task)] = task.plan
+            self.archival_writes += 1
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -467,4 +614,8 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "u-mem": UMemAgent,
         "legomem": LegoMemAgent,
         "memtool": MemToolAgent,
+        "mrkl": MRKLAgent,
+        "hugginggpt": HuggingGPTAgent,
+        "generative-agents": GenerativeAgentsAgent,
+        "memgpt": MemGPTAgent,
     }[method](capacity, rng)

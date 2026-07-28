@@ -22,6 +22,9 @@ ALGORITHMS = (
     "simpo",
     "luspo",
     "coba-rl",
+    "constitutional-ai",
+    "rrhf",
+    "raft",
 )
 
 

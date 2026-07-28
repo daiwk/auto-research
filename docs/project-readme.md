@@ -317,8 +317,10 @@ DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
 首次运行会创建平台隔离的 `.venv-demo-*` 环境并安装依赖；后续直接复用。Linux GPU 如需指定 PyTorch CUDA wheel，可传 `TORCH_INDEX_URL`；其他参数见[运行环境指南](runtime.md)。
 
 后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 DPO、KTO、ORPO、GRPO、
-DAPO、GSPO、PPO-RLHF、RLOO、ReMax、GPRL、TCR、IPO、SimPO、LUSPO 或
-CoBA-RL。后四项使用真实 tokenizer 自由生成、verifier 和多 seed。Agent demo 可通过
+DAPO、GSPO、PPO-RLHF、RLOO、ReMax、Constitutional AI、RRHF、RAFT、GPRL、TCR、
+IPO、SimPO、LUSPO 或 CoBA-RL。IPO、SimPO、LUSPO、CoBA-RL 使用真实 tokenizer
+自由生成、verifier 和多 seed。Agent demo 还支持 MRKL、HuggingGPT、Generative
+Agents、MemGPT，可通过
 `METHOD=react|reflexion|metagpt|critic|agent-lightning|swe-agent|openhands
 BENCHMARK=swebench-local EPISODES=12
 ./demo-agent.sh` 切换方法和环境。完整说明见

@@ -23,6 +23,9 @@ MODULES = {
         "simpo": "2405.14734-simpo",
         "luspo": "2602.05261-luspo",
         "coba-rl": "2606.22317-coba-rl",
+        "constitutional-ai": "2212.08073-constitutional-ai",
+        "rrhf": "2304.05302-rrhf",
+        "raft": "2304.06767-raft",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -43,6 +46,10 @@ MODULES = {
         "agent-lightning": "2508.03680-agent-lightning",
         "swe-agent": "2405.15793-swe-agent",
         "openhands": "2407.16741-openhands",
+        "mrkl": "2205.00445-mrkl",
+        "hugginggpt": "2303.17580-hugginggpt",
+        "generative-agents": "2304.03442-generative-agents",
+        "memgpt": "2310.08560-memgpt",
     },
 }
 

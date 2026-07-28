@@ -60,6 +60,9 @@ POST_TRAINING_MUTATIONS = {
     "2405.14734": ("simpo", "SimPO 使用 reference-free、长度归一化的 sequence preference margin"),
     "2602.05261": ("luspo", "LUSPO 校正 sequence policy objective 的响应长度偏差"),
     "2606.22317": ("coba-rl", "边界感知 Curriculum RL 定位 pass@k 能力边界并在边界附近训练"),
+    "2212.08073": ("constitutional-ai", "Constitutional AI 先自我批评/修订，再以 AI 偏好执行 RLAIF"),
+    "2304.05302": ("rrhf", "RRHF 让响应 log-probability 排序对齐 reward 排序，并保留 best-response SFT"),
+    "2304.06767": ("raft", "RAFT 从当前策略采样多个响应、按 reward 选优，再迭代监督微调"),
 }
 
 AGENT_MUTATIONS = {
@@ -78,6 +81,10 @@ AGENT_MUTATIONS = {
     "2508.03680": ("critic:agent-lightning", "Agent Lightning 将运行轨迹与 RL 训练解耦并做分层信用分配"),
     "2405.15793": ("planner:swe-agent", "SWE-agent 使用面向代码仓库的 Agent-Computer Interface 定位、编辑和测试"),
     "2407.16741": ("planner:openhands", "OpenHands 以事件流统一编辑器、终端和浏览器动作"),
+    "2205.00445": ("tool:mrkl", "MRKL 用 router 将请求分发给神经或离散符号专家"),
+    "2303.17580": ("planner:hugginggpt", "HuggingGPT 规划子任务、按能力描述选模型、依赖执行并汇总"),
+    "2304.03442": ("memory:generative-agents", "Generative Agents 以相关性、近期性、重要性检索记忆并形成反思"),
+    "2310.08560": ("memory:memgpt", "MemGPT 以 core/working/archival 分层和 interrupt 管理虚拟上下文"),
 }
 
 FALLBACK_PAPERS = (
@@ -137,6 +144,9 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("SimPO: Simple Preference Optimization with a Reference-Free Reward", "Length-normalized reference-free preference optimization.", [], "2024-05-23", "https://arxiv.org/abs/2405.14734", "2405.14734"),
     Paper("Length-Unbiased Sequence Policy Optimization", "Corrects response-length bias in sequence policy optimization.", [], "2026-02-05", "https://arxiv.org/abs/2602.05261", "2602.05261"),
     Paper("Curriculum Reinforcement Learning Can Incentivize Reasoning Capacity in LLMs Beyond the Base Model", "Locates the pass@k capability boundary and trains near it with targeted guidance.", [], "2026-06-21", "https://arxiv.org/abs/2606.22317", "2606.22317"),
+    Paper("Constitutional AI: Harmlessness from AI Feedback", "Self-critique and revision followed by reinforcement learning from AI preferences.", [], "2022-12-15", "https://arxiv.org/abs/2212.08073", "2212.08073"),
+    Paper("RRHF: Rank Responses to Align Language Models with Human Feedback without tears", "Aligns response likelihood ordering with reward ordering and fine-tunes the best response.", [], "2023-04-11", "https://arxiv.org/abs/2304.05302", "2304.05302"),
+    Paper("RAFT: Reward rAnked FineTuning for Generative Foundation Model Alignment", "Samples responses, keeps reward-ranked winners, and iteratively fine-tunes on them.", [], "2023-04-13", "https://arxiv.org/abs/2304.06767", "2304.06767"),
 )
 
 AGENT_FALLBACK_PAPERS = (
@@ -155,6 +165,10 @@ AGENT_FALLBACK_PAPERS = (
     Paper("Agent Lightning: Train ANY AI Agents with Reinforcement Learning", "Disaggregates agent execution and training with hierarchical credit assignment.", [], "2025-08-05", "https://arxiv.org/abs/2508.03680", "2508.03680"),
     Paper("SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering", "A repository-oriented interface for localization, editing, and executable testing.", [], "2024-05-06", "https://arxiv.org/abs/2405.15793", "2405.15793"),
     Paper("OpenHands: An Open Platform for AI Software Developers as Generalist Agents", "An event-stream platform combining editor, terminal, and browser actions.", [], "2024-07-23", "https://arxiv.org/abs/2407.16741", "2407.16741"),
+    Paper("MRKL Systems: A modular, neuro-symbolic architecture that combines large language models, external knowledge sources and discrete reasoning", "Routes requests to neural and symbolic expert modules.", [], "2022-05-01", "https://arxiv.org/abs/2205.00445", "2205.00445"),
+    Paper("HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face", "Uses an LLM controller to plan, select expert models, execute dependencies, and summarize.", [], "2023-03-30", "https://arxiv.org/abs/2303.17580", "2303.17580"),
+    Paper("Generative Agents: Interactive Simulacra of Human Behavior", "Combines a scored memory stream, reflection, and planning for persistent agents.", [], "2023-04-07", "https://arxiv.org/abs/2304.03442", "2304.03442"),
+    Paper("MemGPT: Towards LLMs as Operating Systems", "Manages virtual context through working and archival memory tiers plus interrupts.", [], "2023-10-12", "https://arxiv.org/abs/2310.08560", "2310.08560"),
 )
 
 

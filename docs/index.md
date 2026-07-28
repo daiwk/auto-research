@@ -67,7 +67,7 @@ adapter 接入，不限定为推荐模型。
 |---|---|---|
 | **搜广推与 LLM 应用** | <span class="ar-status ar-status-ready">论文库可用</span><br>[工业论文库](reproductions/README.md)：推荐、搜索、广告、生成式推荐和 LLM 应用；线上 A/B 是硬门槛 | <span class="ar-status ar-status-ready">进化可运行</span><br>RankMixer / HyFormer 已支持结构、参数和训练配置的多轮进化 |
 | **纯 LLM** | <span class="ar-status ar-status-ready">论文库可用</span><br>[LLM 后训练库](post-training/README.md)及纯 LLM 架构、预训练论文；以公共 benchmark 为准 | <span class="ar-status ar-status-ready">进化可运行</span><br>micro‑LLM 已支持架构、数据配方与后训练方案进化 |
-| **Agent** | <span class="ar-status ar-status-ready">论文库可用</span><br>[Agent 论文库](agent-research/README.md)：记忆、规划、工具使用和自我进化方法 | <span class="ar-status ar-status-building">正在接入</span><br>统一 benchmark 与 trace 已就绪；专用多代 mutation adapter 待接入 |
+| **Agent** | <span class="ar-status ar-status-ready">论文库可用</span><br>[Agent 论文库](agent-research/README.md)：记忆、规划、工具使用和自我进化方法 | <span class="ar-status ar-status-ready">进化可运行</span><br>memory、planner、tool、critic 与容量已支持论文约束的多代组合搜索 |
 | **其他主题** | <span class="ar-status ar-status-open">可扩展</span><br>按统一论文页合同增加领域目录 | <span class="ar-status ar-status-open">可扩展</span><br>按统一 research adapter 接入模型、数据、mutation 与 evaluator |
 
 </div>

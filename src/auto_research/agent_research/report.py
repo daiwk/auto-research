@@ -23,6 +23,10 @@ PAPERS = {
     "agent-lightning": ("Agent Lightning", "https://arxiv.org/abs/2508.03680"),
     "swe-agent": ("SWE-agent", "https://arxiv.org/abs/2405.15793"),
     "openhands": ("OpenHands", "https://arxiv.org/abs/2407.16741"),
+    "mrkl": ("MRKL Systems", "https://arxiv.org/abs/2205.00445"),
+    "hugginggpt": ("HuggingGPT", "https://arxiv.org/abs/2303.17580"),
+    "generative-agents": ("Generative Agents", "https://arxiv.org/abs/2304.03442"),
+    "memgpt": ("MemGPT", "https://arxiv.org/abs/2310.08560"),
 }
 
 
@@ -100,5 +104,9 @@ def render_report(result: AgentResearchResult) -> str:
 - plans / worker calls：{result.diagnostics['plans_created']} / {result.diagnostics['worker_calls']}
 - agent messages：{result.diagnostics['agent_messages']}
 - plan explorations / policy updates：{result.diagnostics['plan_explorations']} / {result.diagnostics['policy_updates']}
+- router / symbolic expert calls：{result.diagnostics['router_calls']} / {result.diagnostics['symbolic_expert_calls']}
+- model matches / dependency edges：{result.diagnostics['model_matches']} / {result.diagnostics['dependency_edges']}
+- memories retrieved / reflections：{result.diagnostics['memories_retrieved']} / {result.diagnostics['reflection_syntheses']}
+- archival writes / page-ins / interrupts：{result.diagnostics['archival_writes']} / {result.diagnostics['page_ins']} / {result.diagnostics['interrupts']}
 - fidelity：{result.diagnostics['fidelity']}
 """

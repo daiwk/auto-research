@@ -16,6 +16,8 @@
 | 多目标与过程奖励 | GPRL、TCR | 已实现 | 分维 reward 与 checklist residual |
 | 自由生成偏好 | IPO、SimPO | 已实现 | token-level sequence probability、reference-relative / reference-free |
 | 长度与能力边界 | LUSPO、CoBA-RL | 已实现 | 长度无偏 sequence RL、动态课程边界与教师触发 |
+| AI 反馈安全对齐 | Constitutional AI | 已实现 | 显式原则、自我批评/修订、AI preference |
+| Reward-ranked SFT | RRHF、RAFT | 已实现 | 全排序约束；在线采样 top-response filtering |
 
 ## 下一阶段缺口
 
@@ -28,6 +30,7 @@
 
 ## 当前结论
 
-当前已覆盖“RLHF → 直接偏好 → 单样本/单阶段偏好 → group-relative reasoning RL →
-蒸馏/多目标/过程奖励 → 自由生成偏好与能力边界”的主干。L1 candidate 与 L2
+当前已覆盖“RLHF → AI 反馈安全对齐 → 直接/全排序偏好与 reward 选优 → 单样本/
+单阶段偏好 → group-relative reasoning RL → 蒸馏/多目标/过程奖励 → 自由生成偏好与
+能力边界”的主干。L1 candidate 与 L2
 free-generation 路径独立保留，报告不能把两类 accuracy 混成同一公平表。

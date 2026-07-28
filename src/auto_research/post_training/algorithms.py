@@ -24,6 +24,8 @@ class PolicyState:
     dapo_updates: int = 0
     gspo_updates: int = 0
     critic_updates: int = 0
+    constitutional_critiques: int = 0
+    constitutional_revisions: int = 0
 
 
 def initialize(feature_count: int, groups: tuple[CandidateGroup, ...]) -> PolicyState:
@@ -322,6 +324,107 @@ def update(
                 "greedy_baseline_reward": float(scalar[greedy]),
                 "sample_reward": float(scalar[sampled].mean()),
                 "value_model_parameters": 0.0,
+            }
+        )
+    elif algorithm == "constitutional-ai":
+        # Candidate-level analogue of Constitutional AI's two phases:
+        # critique/revision SFT first moves probability toward the response
+        # that best satisfies an explicit constitution, then an AI-generated
+        # preference adds a reference-relative ranking update.
+        constitution = np.asarray((0.55, 0.10, 0.25, 0.10))
+        constitutional_scores = group.rewards @ constitution
+        initial = int(np.argmax(probabilities))
+        revised = int(np.argmax(constitutional_scores))
+        rejected = int(np.argmin(constitutional_scores))
+        expected = probabilities @ group.features
+        revision_gradient = group.features[revised] - expected
+        margin = (
+            np.log(probabilities[revised] + 1e-12)
+            - np.log(probabilities[rejected] + 1e-12)
+            - np.log(reference[revised] + 1e-12)
+            + np.log(reference[rejected] + 1e-12)
+        )
+        beta = 0.2
+        preference_strength = beta / (1.0 + np.exp(beta * margin))
+        preference_gradient = preference_strength * (
+            group.features[revised] - group.features[rejected]
+        )
+        gradient = revision_gradient + preference_gradient
+        loss = float(
+            -np.log(probabilities[revised] + 1e-12)
+            + np.logaddexp(0.0, -beta * margin)
+        )
+        diagnostics.update(
+            {
+                "constitutional_principles": float(len(constitution)),
+                "critique_violation": float(
+                    constitutional_scores[revised] - constitutional_scores[initial]
+                ),
+                "revision_changed": float(initial != revised),
+                "ai_preference_margin": float(margin),
+                "human_preference_labels": 0.0,
+            }
+        )
+        state.constitutional_critiques += 1
+        state.constitutional_revisions += int(initial != revised)
+        diagnostics["cumulative_critiques"] = float(state.constitutional_critiques)
+        diagnostics["cumulative_revisions"] = float(state.constitutional_revisions)
+    elif algorithm == "rrhf":
+        # RRHF ranks every sampled response by reward and enforces the same
+        # ordering on sequence log-probabilities, while retaining SFT on the
+        # best response. Candidate probabilities stand in for normalized
+        # response log-likelihoods in this auditable L1 model.
+        scalar = _scalar_rewards(group)
+        response_scores = np.log(probabilities + 1e-12)
+        expected = probabilities @ group.features
+        best = int(np.argmax(scalar))
+        ranking_gradient = np.zeros_like(state.weights)
+        violations = 0
+        pairs = 0
+        ranking_loss = 0.0
+        for preferred in range(len(scalar)):
+            for dispreferred in range(len(scalar)):
+                if scalar[preferred] <= scalar[dispreferred]:
+                    continue
+                pairs += 1
+                violation = response_scores[dispreferred] - response_scores[preferred]
+                if violation > 0:
+                    violations += 1
+                    ranking_loss += float(violation)
+                    ranking_gradient += (
+                        group.features[preferred] - group.features[dispreferred]
+                    )
+        gradient = (group.features[best] - expected) + ranking_gradient / max(1, pairs)
+        loss = float(-response_scores[best] + ranking_loss / max(1, pairs))
+        diagnostics.update(
+            {
+                "ranked_responses": float(len(scalar)),
+                "ranking_pairs": float(pairs),
+                "ranking_violations": float(violations),
+                "best_of_n_reward": float(scalar[best]),
+                "sft_best_nll": float(-response_scores[best]),
+            }
+        )
+    elif algorithm == "raft":
+        # RAFT repeatedly samples from the current policy, reward-ranks that
+        # batch, keeps its best response, and performs ordinary fine-tuning on
+        # the filtered response. Unlike RRHF, discarded samples contribute no
+        # pairwise loss.
+        scalar = _scalar_rewards(group)
+        selected = int(sampled[np.argmax(scalar[sampled])])
+        expected = probabilities @ group.features
+        gradient = group.features[selected] - expected
+        loss = float(-np.log(probabilities[selected] + 1e-12))
+        diagnostics.update(
+            {
+                "sampled_responses": float(len(sampled)),
+                "kept_responses": 1.0,
+                "kept_fraction": float(1.0 / len(sampled)),
+                "selected_reward": float(scalar[selected]),
+                "selected_reward_quantile": float(
+                    np.mean(scalar <= scalar[selected])
+                ),
+                "reward_model_used_for_selection": 1.0,
             }
         )
     else:
