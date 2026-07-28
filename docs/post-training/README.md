@@ -6,9 +6,9 @@
 预训练数据及超参数一起搜索。
 
 !!! info "复现保真度"
-    当前公开实验使用候选策略完整执行采样、策略概率、优势估计、KL 约束、教师缓存
-    和指标记录，属于**机制复现**。它不是论文中的 8B/30B 全参数训练，页面会分别列出
-    论文结果和本地结果，二者不混作同一基线。
+    候选策略 suite 用于低成本回归；IPO、SimPO、LUSPO、CoBA-RL 已升级为字符
+    tokenizer + causal LM 的**真实自由生成路径**，包含完整 sequence log-probability、
+    verifier、rollout 和多 seed。两种保真层级分别报告，均不冒充论文中的大模型训练。
 
 ## 快速入口
 
@@ -28,6 +28,10 @@
 - [Lightning OPD](2604.13010-lightning-opd/README.md)：离线缓存教师分布的 on-policy distillation。
 - [GPRL](2605.18721-gprl/README.md)：多维偏好的 group-relative 强化学习。
 - [TCR](2607.19824-tcr/README.md)：thinking checklist 与残差过程奖励。
+- [IPO](2310.12036-ipo/README.md)：有限 preference log-ratio gap 的平方回归。
+- [SimPO](2405.14734-simpo/README.md)：reference-free、长度归一化偏好目标。
+- [LUSPO](2602.05261-luspo/README.md)：校正 sequence policy objective 的长度偏差。
+- [CoBA-RL](2606.22317-coba-rl/README.md)：能力边界探测、教师引导与课程 RL。
 
 ## 研究闭环
 
@@ -59,6 +63,10 @@ flowchart LR
 | 蒸馏 | [Lightning OPD](2604.13010-lightning-opd/README.md) | SFT rollout 上预计算教师分布，训练期零在线教师调用 | 同上 | 机制复现 |
 | 多目标 RL | [GPRL](2605.18721-gprl/README.md) | 分维度 group normalization 与漂移控制 | 同上 | 机制复现 |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | thinking checklist、EMA 残差奖励 | 同上 | 机制复现 |
+| 离线偏好 | [IPO](2310.12036-ipo/README.md) | reference-relative gap 平方回归 | arithmetic / GSM8K free generation | token 级复现 |
+| 离线偏好 | [SimPO](2405.14734-simpo/README.md) | 长度归一化、reference-free margin | arithmetic / GSM8K free generation | token 级复现 |
+| 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | length-unbiased sequence ratio | arithmetic / GSM8K free generation | token 级复现 |
+| 课程 RL | [CoBA-RL](2606.22317-coba-rl/README.md) | 动态能力边界与 teacher guidance | arithmetic / GSM8K free generation | token 级复现 |
 
 ## 公开实验快照
 
@@ -84,6 +92,13 @@ flowchart LR
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
 经典 RL 稳定指标见
 [`classic-post-training-gsm8k-seed42.json`](../experiments/classic-post-training-gsm8k-seed42.json)。
+自由生成方法的三 seed 指标见
+[`free-generation-post-training-seeds42-44.json`](../experiments/free-generation-post-training-seeds42-44.json)。
+
+L2 小预算实验固定 arithmetic free generation、48 train examples、20-step SFT warmup、
+6 次后训练更新和 seeds 42/43/44。四种方法的 exact accuracy 均为 0；SimPO 的
+format rate 从 0 提升到 0.3333、mean verifier reward 从 0.1000 到 0.1333，其余
+没有最终指标提升。这说明真实序列路径已跑通，但当前预算不足以支持“效果复现”结论。
 
 ## 一键运行
 
@@ -99,6 +114,10 @@ auto-research post-train --algorithm rloo \
 
 auto-research post-train --algorithm dapo \
   --dataset gsm8k-candidate --maximum-examples 512 --steps 300 --offline
+
+auto-research post-train --algorithm simpo \
+  --dataset arithmetic-generate --maximum-examples 48 \
+  --steps 6 --seeds 42,43,44 --offline
 ```
 
 每次运行独立写入 `runs/post-training/<algorithm>-<dataset>-seed<seed>/`，

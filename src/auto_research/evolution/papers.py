@@ -53,6 +53,10 @@ POST_TRAINING_MUTATIONS = {
     "2604.13010": ("lightning-opd", "Lightning OPD 缓存离线教师分布以减少在线 rollout 成本"),
     "2605.18721": ("gprl", "GPRL 联合多维偏好并监控 reward drift"),
     "2607.19824": ("tcr", "TCR 用 thinking checklist reward 与 EMA residual 做过程信用分配"),
+    "2310.12036": ("ipo", "IPO 将偏好 log-ratio gap 回归到有限目标，抑制确定性偏好过拟合"),
+    "2405.14734": ("simpo", "SimPO 使用 reference-free、长度归一化的 sequence preference margin"),
+    "2602.05261": ("luspo", "LUSPO 校正 sequence policy objective 的响应长度偏差"),
+    "2606.22317": ("coba-rl", "边界感知 Curriculum RL 定位 pass@k 能力边界并在边界附近训练"),
 }
 
 AGENT_MUTATIONS = {
@@ -66,6 +70,11 @@ AGENT_MUTATIONS = {
     "2507.21428": ("tool:memtool", "MemTool 动态选择记忆工具和上下文写入策略"),
     "2510.04851": ("memory:legomem", "LEGOMem 将过程记忆拆成可组合、可复用的模块"),
     "2602.22406": ("memory:u-mem", "U-Mem 主动判断知识缺口并获取、压缩长期记忆"),
+    "2308.00352": ("planner:metagpt", "MetaGPT 以标准作业流程组织产品、架构、工程与 QA 角色产物"),
+    "2305.11738": ("critic:critic", "CRITIC 用外部工具执行结果验证并据反馈修订输出"),
+    "2508.03680": ("critic:agent-lightning", "Agent Lightning 将运行轨迹与 RL 训练解耦并做分层信用分配"),
+    "2405.15793": ("planner:swe-agent", "SWE-agent 使用面向代码仓库的 Agent-Computer Interface 定位、编辑和测试"),
+    "2407.16741": ("planner:openhands", "OpenHands 以事件流统一编辑器、终端和浏览器动作"),
 }
 
 FALLBACK_PAPERS = (
@@ -118,6 +127,10 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("Lightning OPD", "Offline teacher-distribution caching for efficient policy distillation.", [], "2026-04-17", "https://arxiv.org/abs/2604.13010", "2604.13010"),
     Paper("GPRL", "Multi-dimensional preference optimization with reward-drift monitoring.", [], "2026-05-25", "https://arxiv.org/abs/2605.18721", "2605.18721"),
     Paper("TCR", "Checklist rewards and EMA residuals for process-level credit assignment.", [], "2026-07-23", "https://arxiv.org/abs/2607.19824", "2607.19824"),
+    Paper("A General Theoretical Paradigm to Understand Learning from Human Preferences", "Introduces Identity Preference Optimization with a finite log-ratio target.", [], "2023-10-18", "https://arxiv.org/abs/2310.12036", "2310.12036"),
+    Paper("SimPO: Simple Preference Optimization with a Reference-Free Reward", "Length-normalized reference-free preference optimization.", [], "2024-05-23", "https://arxiv.org/abs/2405.14734", "2405.14734"),
+    Paper("Length-Unbiased Sequence Policy Optimization", "Corrects response-length bias in sequence policy optimization.", [], "2026-02-05", "https://arxiv.org/abs/2602.05261", "2602.05261"),
+    Paper("Curriculum Reinforcement Learning Can Incentivize Reasoning Capacity in LLMs Beyond the Base Model", "Locates the pass@k capability boundary and trains near it with targeted guidance.", [], "2026-06-21", "https://arxiv.org/abs/2606.22317", "2606.22317"),
 )
 
 AGENT_FALLBACK_PAPERS = (
@@ -131,6 +144,11 @@ AGENT_FALLBACK_PAPERS = (
     Paper("MemTool", "Dynamically selects memory tools and context writes.", [], "2025-07-29", "https://arxiv.org/abs/2507.21428", "2507.21428"),
     Paper("LEGOMem", "Composable process-memory modules for agents.", [], "2025-10-06", "https://arxiv.org/abs/2510.04851", "2510.04851"),
     Paper("U-Mem", "Active knowledge acquisition and compressed long-term agent memory.", [], "2026-02-26", "https://arxiv.org/abs/2602.22406", "2602.22406"),
+    Paper("MetaGPT: Meta Programming for Multi-Agent Collaborative Framework", "SOP-driven product, architecture, engineering, and QA agent collaboration.", [], "2023-08-01", "https://arxiv.org/abs/2308.00352", "2308.00352"),
+    Paper("CRITIC: Large Language Models Can Self-Correct with Tool-Interactive Critiquing", "Uses external tools to verify and iteratively repair model outputs.", [], "2023-05-19", "https://arxiv.org/abs/2305.11738", "2305.11738"),
+    Paper("Agent Lightning: Train ANY AI Agents with Reinforcement Learning", "Disaggregates agent execution and training with hierarchical credit assignment.", [], "2025-08-05", "https://arxiv.org/abs/2508.03680", "2508.03680"),
+    Paper("SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering", "A repository-oriented interface for localization, editing, and executable testing.", [], "2024-05-06", "https://arxiv.org/abs/2405.15793", "2405.15793"),
+    Paper("OpenHands: An Open Platform for AI Software Developers as Generalist Agents", "An event-stream platform combining editor, terminal, and browser actions.", [], "2024-07-23", "https://arxiv.org/abs/2407.16741", "2407.16741"),
 )
 
 

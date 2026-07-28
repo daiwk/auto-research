@@ -1,13 +1,13 @@
 # Agent 论文研究
 
 这里是[论文实现与评测库](../research-library.md)中的 Agent 分支，覆盖记忆、规划、
-工具使用、多 Agent 协作和自我进化。首批实现不依赖付费模型 API，用确定性
-mini-suite 验证状态更新、跨 episode 复用和受限上下文管理；这些方法与评测器也是
-未来 [Agent 自动进化 adapter](../evolution-domains.md)的组件底座。
+工具使用、多 Agent 协作和自我进化。确定性 mini-suite 验证状态与跨 episode 复用；
+`swebench-local` 则创建真实临时仓库、修改代码并执行回归测试。这些方法与评测器也是
+[Agent 自动进化 adapter](../evolution-domains.md)的组件底座。
 
 !!! info "复现保真度"
-    当前结果属于**Agent 机制复现**，不是论文在 HotpotQA、OfficeBench 或 ScaleMCP
-    上的原始分数。每篇详情页会分开列出论文结果、本地映射与尚未覆盖的能力。
+    mini-suite 属于**Agent 机制复现**；代码 sandbox 属于真实执行的 micro benchmark，
+    但不是官方 SWE-bench Lite。每篇详情页分开列出论文结果、本地映射与边界。
 
 ## 快速入口
 
@@ -28,6 +28,11 @@ mini-suite 验证状态更新、跨 episode 复用和受限上下文管理；这
 - [U-Mem](2602.22406-u-mem/README.md)：成本感知的主动知识获取与记忆验证。
 - [LEGOMem](2510.04851-legomem/README.md)：可组合的编排器与执行过程记忆。
 - [MemTool](2507.21428-memtool/README.md)：有限上下文中的动态工具记忆。
+- [MetaGPT](2308.00352-metagpt/README.md)：产品、架构、工程、测试的 SOP。
+- [CRITIC](2305.11738-critic/README.md)：用真实工具反馈迭代修订。
+- [Agent Lightning](2508.03680-agent-lightning/README.md)：执行/训练解耦与 credit assignment。
+- [SWE-agent](2405.15793-swe-agent/README.md)：软件工程 Agent-Computer Interface。
+- [OpenHands](2407.16741-openhands/README.md)：编辑器、终端与 sandbox event stream。
 
 ## 研究闭环
 
@@ -63,6 +68,11 @@ flowchart LR
 | 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | 分级获取、语义检索、Thompson sampling | EvoMem mini | 机制复现 |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | 编排与执行过程单元跨 episode 复用 | PlanBench mini | 机制复现 |
 | 工具记忆 | [MemTool](2507.21428-memtool/README.md) | 工作流保护与近期性/成功率淘汰 | ScaleMCP mini | 机制复现 |
+| 多 Agent 软件工程 | [MetaGPT](2308.00352-metagpt/README.md) | 四角色 SOP 与结构化交付物 | SWE-style local code | 真实执行 |
+| 工具反馈 | [CRITIC](2305.11738-critic/README.md) | 失败 patch、测试反馈、修订 | SWE-style local code | 真实执行 |
+| Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | transition、credit update、策略复用 | SWE-style local code | 真实执行 |
+| 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | 定位、编辑、回归测试 | SWE-style local code | 真实执行 |
+| 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | 编辑器/终端 event stream | SWE-style local code | 真实执行 |
 
 ## 本地实验快照
 
@@ -85,11 +95,18 @@ flowchart LR
 | ReWOO · PlanBench mini | 1.0000 | 3.5000 | 120 份计划、360 次 worker 调用 |
 | AutoGen · PlanBench mini | 1.0000 | 3.0000 | 360 条跨角色消息 |
 | PEARL · PlanBench mini | 1.0000 | 1.1200 | 24 次探索、12 次 policy update |
+| MetaGPT · SWE local | 1.0000 | 3.5000 | 48 条角色 artifact |
+| CRITIC · SWE local | 1.0000 | 4.0000 | 24 轮工具反馈与修订 |
+| Agent Lightning · SWE local | 1.0000 | 3.6250 | patch reuse 0.7500 |
+| SWE-agent · SWE local | 1.0000 | 2.5000 | 12 次真实文件编辑 |
+| OpenHands · SWE local | 1.0000 | 2.5000 | 编辑器/终端事件流 |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
 经典 Agent 稳定指标见
 [`classic-agent-mini-suites-seed42.json`](../experiments/classic-agent-mini-suites-seed42.json)。
+真实代码 sandbox 指标见
+[`agent-code-sandbox-seed42.json`](../experiments/agent-code-sandbox-seed42.json)。
 
 ## 一键运行
 
@@ -102,6 +119,9 @@ auto-research agent-eval --method reflexion --benchmark planbench-mini \
   --episodes 120 --memory-size 24
 auto-research agent-eval --method pearl --benchmark planbench-mini \
   --episodes 120 --memory-size 24
+
+auto-research agent-eval --method critic --benchmark swebench-local \
+  --episodes 12 --seed 42
 ```
 
 产物写入 `runs/agent-research/<method>-<benchmark>-seed<seed>/`，包含逐步 trace、

@@ -46,9 +46,15 @@ class EvolutionConfig:
         expected = (
             {"wikitext-2"}
             if self.model == "micro-llm"
-            else {"arithmetic-smoke", "gsm8k-candidate"}
+            else {
+                "arithmetic-smoke", "gsm8k-candidate",
+                "arithmetic-generate", "gsm8k-generate",
+            }
             if self.model == "post-training"
-            else {"evomem-mini", "planbench-mini", "scalemcp-mini"}
+            else {
+                "evomem-mini", "planbench-mini", "scalemcp-mini",
+                "swebench-local",
+            }
             if self.model == "agent"
             else {"movielens-100k", "movielens-1m"}
         )

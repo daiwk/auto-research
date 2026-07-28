@@ -1,0 +1,51 @@
+{
+  "protocol": {
+    "benchmark": "swebench-local",
+    "episodes": 12,
+    "seed": 42,
+    "sandbox": "temporary local Python repository + fixed python -m unittest -q",
+    "scope": "repository-owned executable micro fixtures; not official SWE-bench Lite"
+  },
+  "results": {
+    "metagpt": {
+      "joint_success": 1.0,
+      "average_cost": 3.5,
+      "baseline_failures": 12,
+      "subprocess_commands": 24,
+      "file_edits": 12,
+      "role_messages": 48
+    },
+    "critic": {
+      "joint_success": 1.0,
+      "average_cost": 4.0,
+      "baseline_failures": 12,
+      "subprocess_commands": 36,
+      "file_edits": 24,
+      "critic_rounds": 24
+    },
+    "agent-lightning": {
+      "joint_success": 1.0,
+      "average_cost": 3.625,
+      "reuse_rate": 0.75,
+      "baseline_failures": 12,
+      "subprocess_commands": 36,
+      "file_edits": 15,
+      "credit_updates": 15,
+      "learned_bug_families": 3
+    },
+    "swe-agent": {
+      "joint_success": 1.0,
+      "average_cost": 2.5,
+      "baseline_failures": 12,
+      "subprocess_commands": 24,
+      "file_edits": 12
+    },
+    "openhands": {
+      "joint_success": 1.0,
+      "average_cost": 2.5,
+      "baseline_failures": 12,
+      "subprocess_commands": 24,
+      "file_edits": 12
+    }
+  }
+}

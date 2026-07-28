@@ -143,3 +143,36 @@ def test_refinement_multi_agent_and_adaptive_planning_mechanisms(
     if method == "pearl":
         assert result.diagnostics["plan_explorations"] > 0
         assert result.diagnostics["reused_plans"] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "diagnostic"),
+    [
+        ("metagpt", "role_messages"),
+        ("critic", "critic_rounds"),
+        ("agent-lightning", "credit_updates"),
+        ("swe-agent", "actual_file_edits"),
+        ("openhands", "actual_subprocess_commands"),
+    ],
+)
+def test_code_agents_edit_real_files_and_execute_regression_tests(
+    tmp_path: Path, method: str, diagnostic: str
+):
+    result, run_dir = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark="swebench-local",
+            episodes=12,
+            memory_size=6,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.diagnostics["baseline_failures"] == 12
+    assert result.metrics["joint_success"] == 1
+    assert result.diagnostics["actual_subprocess_commands"] >= 24
+    assert result.diagnostics[diagnostic] > 0
+    assert any(
+        event["event"] == "command"
+        for row in result.trace for event in row["events"]
+    )
+    assert (run_dir / "metrics.json").exists()

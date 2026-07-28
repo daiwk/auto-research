@@ -23,9 +23,13 @@ class PostTrainingEvolutionEvaluator:
     def summary(self):
         return {
             "dataset": self.dataset,
-            "algorithms": 12,
+            "algorithms": 16,
             "seeds": list(self.seeds),
-            "selection": "accuracy - 0.05 * KL(reference)",
+            "selection": (
+                "free-generation exact accuracy + verifier reward"
+                if self.dataset.endswith("-generate")
+                else "accuracy - 0.05 * KL(reference)"
+            ),
         }
 
     def evaluate(self, trial_id, generation, parent_id, genome,
@@ -38,7 +42,9 @@ class PostTrainingEvolutionEvaluator:
             training.append(diagnostics)
         validation = _mean(rows)
         validation["primary"] = (
-            validation["accuracy"] - 0.05 * validation["kl_from_reference"]
+            validation["accuracy"] + 0.1 * validation["mean_reward"]
+            if self.dataset.endswith("-generate")
+            else validation["accuracy"] - 0.05 * validation["kl_from_reference"]
         )
         validation["fitness"] = validation["primary"]
         return EvolutionTrial(
@@ -59,11 +65,38 @@ class PostTrainingEvolutionEvaluator:
         ]
         result = _mean(rows)
         result["primary"] = (
-            result["accuracy"] - 0.05 * result["kl_from_reference"]
+            result["accuracy"] + 0.1 * result["mean_reward"]
+            if self.dataset.endswith("-generate")
+            else result["accuracy"] - 0.05 * result["kl_from_reference"]
         )
         return result
 
     def _run(self, genome, seed, test):
+        if self.dataset.endswith("-generate"):
+            from ..post_training.generation import (
+                load_generation_suite, train_free_generation,
+            )
+            suite = load_generation_suite(
+                self.dataset, self.dataset_dir, self.allow_network,
+                self.maximum_examples, seed,
+            )
+            algorithm = genome.post_training
+            steps = 0 if algorithm == "none" else (genome.post_steps or self.steps)
+            _, values, diagnostics = train_free_generation(
+                algorithm, suite, steps, genome.learning_rate,
+                genome.group_size, seed,
+                target="test" if test else "validation",
+            )
+            return values, {
+                "steps": steps,
+                "last_diagnostics": (
+                    diagnostics["history"][-1]
+                    if diagnostics["history"] else {}
+                ),
+                "tokenizer": diagnostics["tokenizer"],
+                "free_generation": True,
+                "test_seed": test,
+            }
         data = load_post_training_data(
             self.dataset, self.dataset_dir, self.allow_network,
             self.maximum_examples, seed,
@@ -139,6 +172,9 @@ class AgentEvolutionEvaluator:
         return result
 
     def _run(self, genome, seed):
+        if self.benchmark == "swebench-local":
+            from ..agent_research.code_benchmark import run_code_genome
+            return run_code_genome(genome, self.episodes)
         tasks = build_benchmark(self.benchmark, self.episodes, seed)
         rng = np.random.default_rng(seed)
         memory: dict[str, tuple[str, ...]] = {}

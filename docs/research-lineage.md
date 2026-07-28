@@ -53,14 +53,19 @@ flowchart LR
 
 ## LLM 后训练
 
-经典链路已覆盖 PPO-RLHF、DPO、KTO、ORPO、GRPO、RLOO、ReMax，以及 DAPO、GSPO、SIS、Off-Context GRPO、Lightning OPD、GPRL、TCR。方法差异与缺口见[后训练谱系](post-training/lineage.md)。
+经典链路已覆盖 PPO-RLHF、DPO、KTO、ORPO、IPO、SimPO、GRPO、RLOO、ReMax，
+以及 DAPO、GSPO、LUSPO、CoBA-RL、Lightning OPD、GPRL、TCR。新增四个目标进入
+真实 tokenizer 自由生成与多 seed 路径。方法差异见[后训练谱系](post-training/lineage.md)。
 
 后训练论文检索、可审计 objective 映射和组合式 genome 已进入统一多轮控制器。下一步是扩大
 公开 rollout 规模，并继续统一 reward、KL、长度偏差和 group normalization 的报告口径。
 
 ## Agent
 
-经典链路已覆盖 ReAct、Toolformer、Tree of Thoughts、Reflexion、Self-Refine、LATS、ReWOO、AutoGen、Voyager，以及近期记忆与规划方法。完整谱系见[Agent 谱系](agent-research/lineage.md)。
+经典链路已覆盖 ReAct、Toolformer、Tree of Thoughts、Reflexion、Self-Refine、LATS、
+ReWOO、AutoGen、MetaGPT、CRITIC、SWE-agent、OpenHands、Agent Lightning、Voyager，
+以及近期记忆与规划方法；软件 Agent 已有真实文件编辑和回归测试路径。完整谱系见
+[Agent 谱系](agent-research/lineage.md)。
 
 memory、planner、tool policy 和 critic 已成为可组合 genome，并在同一任务套件比较成功率、
 token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实浏览器/代码环境 benchmark，

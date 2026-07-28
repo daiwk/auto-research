@@ -18,6 +18,10 @@ ALGORITHMS = (
     "lightning-opd",
     "gprl",
     "tcr",
+    "ipo",
+    "simpo",
+    "luspo",
+    "coba-rl",
 )
 
 
@@ -33,16 +37,27 @@ class PostTrainingConfig:
     seed: int = 42
     allow_network: bool = True
     maximum_examples: int = 512
+    seeds: tuple[int, ...] = ()
 
     def __post_init__(self) -> None:
         if self.algorithm not in ALGORITHMS:
             raise ValueError(f"algorithm must be one of {', '.join(ALGORITHMS)}")
-        if self.dataset not in {"arithmetic-smoke", "gsm8k-candidate"}:
-            raise ValueError("dataset must be arithmetic-smoke or gsm8k-candidate")
+        if self.dataset not in {
+            "arithmetic-smoke", "gsm8k-candidate",
+            "arithmetic-generate", "gsm8k-generate",
+        }:
+            raise ValueError(
+                "dataset must be arithmetic-smoke, gsm8k-candidate, "
+                "arithmetic-generate or gsm8k-generate"
+            )
+        if self.algorithm in {"ipo", "simpo", "luspo", "coba-rl"} and not self.dataset.endswith("-generate"):
+            raise ValueError(f"{self.algorithm} requires a free-generation dataset")
         if self.steps < 1 or self.maximum_examples < 8:
             raise ValueError("steps must be positive and maximum-examples must be >= 8")
         if self.learning_rate <= 0 or self.group_size < 2:
             raise ValueError("learning-rate must be positive and group-size must be >= 2")
+        if self.seeds and len(set(self.seeds)) != len(self.seeds):
+            raise ValueError("seeds must be unique")
 
 
 @dataclass

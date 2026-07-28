@@ -19,7 +19,8 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
   线上 A/B 或用户明确认可的全流量证据；
 - **纯 LLM**：网络结构、预训练、数据配方和后训练，以公共 benchmark 和真实训练
   对照为筛选依据；
-- **Agent**：记忆、规划、工具使用和自我进化方法，使用可重复的 benchmark 与 trace。
+- **Agent**：记忆、规划、工具使用和自我进化方法；既有可重复 mini-suite，也有真实
+  临时仓库、文件编辑与回归测试的代码 Agent sandbox。
 
 ### 自动研究与进化
 
@@ -28,7 +29,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 - **Directed evolution**：给定当前系统、数据和自然语言方向，把已审计组件与超参数
   组成 genome，按 validation 多代变异、淘汰和晋级，最终只对冠军运行 test；
 - **内置 adapter**：搜广推支持 RankMixer/HyFormer，纯 LLM 支持 micro‑LLM 的结构、
-  数据配方和后训练进化；Agent 已有论文组件和评测底座，专用多代 adapter 待接入。
+  数据配方和后训练进化；Agent 的论文约束 genome 与多代 adapter 已接入统一控制器。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 
@@ -300,9 +301,10 @@ DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
 首次运行会创建平台隔离的 `.venv-demo-*` 环境并安装依赖；后续直接复用。Linux GPU 如需指定 PyTorch CUDA wheel，可传 `TORCH_INDEX_URL`；其他参数见[运行环境指南](runtime.md)。
 
 后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 DPO、KTO、ORPO、GRPO、
-DAPO、GSPO、PPO-RLHF、RLOO、ReMax、GPRL 或 TCR。Agent demo 可通过
-`METHOD=react|self-refine|reflexion|rewoo|autogen|pearl|voyager|tree-of-thoughts|lats|toolformer
-BENCHMARK=planbench-mini
+DAPO、GSPO、PPO-RLHF、RLOO、ReMax、GPRL、TCR、IPO、SimPO、LUSPO 或
+CoBA-RL。后四项使用真实 tokenizer 自由生成、verifier 和多 seed。Agent demo 可通过
+`METHOD=react|reflexion|metagpt|critic|agent-lightning|swe-agent|openhands
+BENCHMARK=swebench-local EPISODES=12
 ./demo-agent.sh` 切换方法和环境。完整说明见
 [LLM 后训练](post-training/README.md)和[Agent 论文研究](agent-research/README.md)。
 
@@ -313,9 +315,17 @@ auto-research evolve --model post-training --dataset arithmetic-smoke \
   --direction "组合比较 GRPO、DPO、OPD 与学习率、group size" \
   --generations 3 --population 6 --maximum-examples 512 --seeds 42,43,44
 
+auto-research evolve --model post-training --dataset arithmetic-generate \
+  --direction "比较 IPO、SimPO、LUSPO 与边界课程" \
+  --generations 3 --population 4 --workers 2 --seeds 42,43,44
+
 auto-research evolve --model agent --dataset evomem-mini \
   --direction "联合进化 memory、planner、tool policy 和 critic" \
   --generations 3 --population 8 --agent-episodes 240 --seeds 42,43,44
+
+auto-research evolve --model agent --dataset swebench-local \
+  --direction "组合 MetaGPT SOP、CRITIC、Agent Lightning 与代码 ACI" \
+  --generations 3 --population 5 --workers 2 --agent-episodes 12
 ```
 
 它们与推荐/LLM evolve 共用 validation 晋级、隔离 test、父子 genome、并行实验、失败留档和 HTML 研究看板。完整参数见[模型自动进化](model-evolution.md)。

@@ -12,20 +12,23 @@
 | 自我改进 | Self-Refine、Reflexion | 已实现 | episode 内迭代；跨 trial 语言反思 |
 | 显式搜索 | Tree of Thoughts、LATS | 已实现 | BFS thought tree；MCTS + environment feedback |
 | 工具学习 | Toolformer、PEARL | 已实现 | 自监督工具标注；工具探索 + Planner RL |
-| 多 Agent 编排 | AutoGen | 已实现 | 角色消息、交接与终止 |
+| 多 Agent 编排 | AutoGen、MetaGPT | 已实现 | 角色消息、交接、终止；软件 SOP 与角色 artifact |
 | 终身学习与记忆 | Voyager、U-Mem、LEGOMem、MemTool | 已实现 | 技能、知识、过程与工具记忆 |
+| 外部反馈 | CRITIC | 已实现 | 真实失败 patch、测试反馈和修订 |
+| Agent RL | Agent Lightning | 已实现 | 执行事件、reward、credit update 与策略复用 |
+| 软件工程 Agent | SWE-agent、OpenHands | 已实现（local） | 真实临时仓库、编辑、命令和回归测试 |
 
-## 仍缺失但值得补的 P1
+## 下一阶段缺口
 
-| 方法 | 为什么仍有价值 | 未在本批实现的原因 |
+| 环境 | 当前状态 | 下一步 |
 |---|---|---|
-| MetaGPT | 经典 SOP 驱动软件多 Agent，补齐结构化协作 | 需要代码仓库级任务和 artifact evaluator，PlanBench mini 不足 |
-| CRITIC | 用外部工具验证并修正生成，连接 tool use 与 self-correction | 需要真实搜索/代码执行沙箱与可追踪错误注入 |
-| Agent Lightning | 把任意 Agent 轨迹与 RL 训练解耦，适合接 evolve | 需要统一真实 LLM executor 和训练 backend 后才能公平实现 |
-| SWE-agent / OpenHands 系谱 | 代码 Agent 的重要工程分支 | 应接 SWE-bench Lite 与隔离容器，不能用确定性规划题代替 |
+| `swebench-local` | 真实文件与 subprocess；仓库自带受控 fixture | 接官方 SWE-bench Lite 数据、repository snapshot 与容器 |
+| ToolHop | 尚未接入 | 增加公开数据下载、真实工具 runtime 与多跳 verifier |
+| Browser | 仅保留 OpenHands 事件接口语义 | 增加隔离浏览器、网页快照与网络策略 |
+| Agent Lightning LLM RL | transition/credit 机制已实现 | 连接可训练 LLM policy 与统一多轮 controller |
 
 ## 当前结论
 
-经典主干已从“单 Agent 思考/行动”覆盖到“搜索、反思、工具、多 Agent、记忆和 Planner
-RL”。下一优先级不是继续增加演示型状态机，而是接入 ToolHop、SWE-bench Lite 等真实
-环境，让成本、错误恢复、消息轨迹和跨 episode 复用可被统一比较。
+经典主干已覆盖思考/行动、搜索、反思、工具、多 Agent、记忆、Planner RL 和真实代码
+执行。`swebench-local` 不冒充官方数据；下一优先级是外部公开环境 adapter 与可训练
+LLM executor。

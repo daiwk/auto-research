@@ -82,6 +82,14 @@ class ModelEvolutionEngine:
         seen = {_fingerprint(baseline_genome)}
         champion = baseline
         architectures = allowed_architectures(config.model, config.direction, papers)
+        if config.model == "post-training" and config.dataset.endswith("-generate"):
+            generation_algorithms = {"ipo", "simpo", "luspo", "coba-rl"}
+            architectures = [
+                architecture for architecture in architectures
+                if architecture in generation_algorithms
+            ]
+            if not architectures:
+                architectures = sorted(generation_algorithms)
         for generation in range(1, config.generations + 1):
             parent = champion
             architectures = methodology_order(architectures, result.research_memory)

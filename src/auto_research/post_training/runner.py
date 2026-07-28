@@ -16,6 +16,8 @@ class PostTrainingRunner:
 
     def run(self) -> tuple[PostTrainingResult, Path]:
         config = self.config
+        if config.dataset.endswith("-generate"):
+            return self._run_generation()
         data = load_post_training_data(
             config.dataset, config.dataset_dir, config.allow_network,
             config.maximum_examples, config.seed,
@@ -81,3 +83,68 @@ class PostTrainingRunner:
         from .report import render_report
         (run_dir / "report.md").write_text(render_report(result), encoding="utf-8")
         return result, run_dir
+
+    def _run_generation(self):
+        from .generation import load_generation_suite, train_free_generation
+
+        config = self.config
+        seeds = config.seeds or (config.seed, config.seed + 1, config.seed + 2)
+        baselines, finals, training = [], [], []
+        for seed in seeds:
+            suite = load_generation_suite(
+                config.dataset, config.dataset_dir, config.allow_network,
+                config.maximum_examples, seed,
+            )
+            baseline, final, diagnostics = train_free_generation(
+                config.algorithm, suite, config.steps, config.learning_rate,
+                config.group_size, seed,
+            )
+            baselines.append(baseline)
+            finals.append(final)
+            training.append(diagnostics)
+        baseline = _mean_metrics(baselines)
+        final = _mean_metrics(finals)
+        result = PostTrainingResult(
+            config.algorithm, config.dataset, baseline, final,
+            {
+                "seeds": list(seeds),
+                "runs": training,
+                "data_source": suite.source,
+                "fidelity": "token-level causal-LM free generation with executable verifier",
+            },
+            [
+                {"seed": float(row["seed"]), **entry}
+                for row in training for entry in row["history"]
+            ],
+        )
+        run_dir = (
+            config.output_dir
+            / f"{config.algorithm}-{config.dataset}-seeds{'-'.join(map(str, seeds))}"
+        )
+        run_dir.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "algorithm": result.algorithm,
+            "dataset": result.dataset,
+            "baseline": result.baseline,
+            "final": result.final,
+            "relative_accuracy": result.relative_accuracy,
+            "training": result.training,
+            "history": result.history,
+        }
+        (run_dir / "metrics.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        from .report import render_report
+        (run_dir / "report.md").write_text(render_report(result), encoding="utf-8")
+        return result, run_dir
+
+
+def _mean_metrics(rows):
+    return {
+        key: float(np.mean([row[key] for row in rows]))
+        for key in rows[0]
+    } | {
+        f"{key}_std": float(np.std([row[key] for row in rows]))
+        for key in rows[0]
+    }
