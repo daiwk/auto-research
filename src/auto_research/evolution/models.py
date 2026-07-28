@@ -25,6 +25,8 @@ class EvolutionConfig:
     evaluation_users: int | None = 1000
     maximum_train_tokens: int | None = None
     maximum_eval_tokens: int | None = 100_000
+    maximum_examples: int = 512
+    agent_episodes: int = 120
     vocab_size: int = 4096
     llm_dimensions: int = 384
     llm_layers: int = 6
@@ -36,9 +38,20 @@ class EvolutionConfig:
     cpu_threads: int | None = None
 
     def validate(self) -> None:
-        if self.model not in {"rankmixer", "hyformer", "micro-llm"}:
-            raise ValueError("model must be rankmixer, hyformer or micro-llm")
-        expected = {"wikitext-2"} if self.model == "micro-llm" else {"movielens-100k", "movielens-1m"}
+        supported = {
+            "rankmixer", "hyformer", "micro-llm", "post-training", "agent"
+        }
+        if self.model not in supported:
+            raise ValueError(f"model must be one of {sorted(supported)}")
+        expected = (
+            {"wikitext-2"}
+            if self.model == "micro-llm"
+            else {"arithmetic-smoke", "gsm8k-candidate"}
+            if self.model == "post-training"
+            else {"evomem-mini", "planbench-mini", "scalemcp-mini"}
+            if self.model == "agent"
+            else {"movielens-100k", "movielens-1m"}
+        )
         if self.dataset not in expected:
             raise ValueError(f"dataset {self.dataset!r} is incompatible with model {self.model!r}")
         if min(self.generations, self.population, self.steps, self.workers) < 1:
@@ -47,6 +60,8 @@ class EvolutionConfig:
             raise ValueError("at least one seed is required")
         if self.cpu_threads is not None and self.cpu_threads < 1:
             raise ValueError("cpu threads must be positive")
+        if min(self.maximum_examples, self.agent_episodes) < 1:
+            raise ValueError("maximum examples and agent episodes must be positive")
         if self.benchmark_suite not in {"core", "public", "unirank"}:
             raise ValueError("benchmark suite must be core, public or unirank")
         if self.model == "micro-llm" and self.benchmark_suite == "unirank":
@@ -102,6 +117,12 @@ class Genome:
     post_training: str = "none"
     neftune_alpha: float = 0.0
     post_steps: int = 0
+    group_size: int = 4
+    agent_memory: str = "none"
+    agent_planner: str = "long-context"
+    agent_tool_policy: str = "direct"
+    agent_critic: str = "none"
+    memory_size: int = 24
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

@@ -11,6 +11,8 @@ ADAPTER = register(ReproductionAdapter(
         title="Pin-SCALE: Semantic Cascading and Alignment Learning for Engagement-Aware IDs in Cold-Start Recommendations",
         url="https://sigir2026.org/SIGIR2026_program.pdf", track="recommendation",
         organization="Pinterest", published="2026-07-19",
+        publication_label="SIGIR 2026 paper P074",
+        publication_source="Pinterest Labs / SIGIR 2026",
         topics=("semantic-id", "engagement-aware", "generative-retrieval"),
         online_ab=(
             OnlineABEvidence("Pinterest", "Repin", 3.67, "online A/B"),

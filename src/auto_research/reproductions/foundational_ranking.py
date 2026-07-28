@@ -40,6 +40,9 @@ def build_foundational_model(kind: str, item_count: int, item_features, config):
             self.deep = nn.Sequential(
                 nn.Linear(4 * d, 2 * d), nn.ReLU(), nn.Linear(2 * d, 1)
             )
+            self.youtube_user = nn.Sequential(
+                nn.Linear(d, 2 * d), nn.ReLU(), nn.Linear(2 * d, d)
+            )
             self.wide_bias = nn.Embedding(item_count, 1)
             self.wide_genre = nn.Parameter(torch.zeros(features.shape[1]))
             self.din_attention = nn.Sequential(
@@ -90,7 +93,10 @@ def build_foundational_model(kind: str, item_count: int, item_features, config):
             history = self.embed(histories)
             candidate = self.embed(candidates)
             pooled = history.mean(1)
-            if kind in {"deep", "wide-deep", "dcn-v2", "two-tower", "cs3"}:
+            if kind in {
+                "deep", "wide-deep", "deepfm", "dcn-v2",
+                "two-tower", "youtube-dnn", "cs3",
+            }:
                 interest = pooled
             elif kind == "din":
                 interest = self._din(history, candidate)
@@ -129,6 +135,9 @@ def build_foundational_model(kind: str, item_count: int, item_features, config):
                 logits = self.cross_out(joined + joined * crossed).squeeze(-1)
             elif kind == "two-tower":
                 logits = (interest * candidate).sum(-1) / config.dimensions**0.5
+            elif kind == "youtube-dnn":
+                user = self.youtube_user(interest)
+                logits = (user * candidate).sum(-1) / config.dimensions**0.5
             elif kind == "cs3":
                 cycle = torch.sigmoid(
                     self.cycle_gate(torch.cat((interest, candidate), dim=-1))
@@ -146,6 +155,20 @@ def build_foundational_model(kind: str, item_count: int, item_features, config):
                 logits = self.sync(synced).squeeze(-1)
             else:
                 logits = self.deep(joined).squeeze(-1)
+            if kind == "deepfm":
+                # Four genuine fields share the same latent width between the
+                # FM and deep paths: historical ID interest, candidate ID,
+                # historical content and candidate content.
+                history_content = self.feature(self.features[histories]).mean(1)
+                candidate_content = self.feature(self.features[candidates])
+                fields = torch.stack(
+                    (interest, self.item(candidates), history_content, candidate_content),
+                    dim=1,
+                )
+                fm = 0.5 * (
+                    fields.sum(1).square() - fields.square().sum(1)
+                ).sum(-1)
+                logits = logits + fm / config.dimensions**0.5
             if kind == "wide-deep":
                 genre_cross = (
                     self.features[histories].mean(1)

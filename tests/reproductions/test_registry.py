@@ -125,6 +125,11 @@ def test_builtin_adapters_are_discoverable():
         "switch-transformer",
         "mamba",
         "switch-attention",
+        "deepfm",
+        "youtube-dnn",
+        "esmm",
+        "mmoe",
+        "ple",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -158,6 +163,11 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("gaugequant").paper.code_url == "https://github.com/MPedraBento/gauge-quant"
     assert get_adapter("sasrec").fidelity is ReproductionFidelity.FULL_PIPELINE
     assert get_adapter("hstu").paper.arxiv_id == "2402.17152"
+    assert get_adapter("deepfm").paper.selection_exception
+    assert get_adapter("youtube-dnn").paper.selection_exception
+    assert get_adapter("esmm").paper.selection_exception
+    assert get_adapter("mmoe").paper.selection_exception
+    assert get_adapter("ple").paper.selection_exception
     assert get_adapter("tiger").paper.arxiv_id == "2305.05065"
     assert get_adapter("pinfm").paper.arxiv_id == "2507.12704"
     assert get_adapter("transact-v2").paper.arxiv_id == "2506.02267"

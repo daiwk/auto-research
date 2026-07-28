@@ -23,6 +23,8 @@ def write_evolution_artifacts(result: EvolutionResult, run_dir: Path) -> None:
 def render_evolution_report(result: EvolutionResult) -> str:
     if result.config.model == "micro-llm":
         return _render_llm_report(result)
+    if result.config.model in {"post-training", "agent"}:
+        return _render_composable_report(result)
     champion = next((trial for trial in result.trials if trial.trial_id == result.champion_id), None)
     baseline = result.trials[0] if result.trials else None
     lines = [
@@ -71,6 +73,85 @@ def render_evolution_report(result: EvolutionResult) -> str:
         genome = json.dumps(trial.genome.to_dict(), ensure_ascii=False, sort_keys=True).replace("|", "\\|")
         lines.append(f"| {trial.trial_id} | {trial.status} | {trial.generation} | {trial.parent_id or '—'} | `{trial.genome.architecture}` | {trial.fitness:.5f} | {trial.validation.get('ndcg_at_10', 0.0):.5f} | {_recommendation_suite_score(trial.validation):.5f} | {trial.validation.get('hit_at_10', 0.0):.5f} | {trial.duration_seconds:.1f} | {trial.training.get('parameters', 0)} | `{genome}` |")
     lines += ["", "## 协议与边界", "", "- 默认使用完整公开数据集；只有显式传入 `--maximum-users/--maximum-items` 才缩小为 smoke test。", "- 每轮选择只读取 validation；test 仅在全部代际结束后对初始基线和冠军各运行一次。", "- 同一代实验可并行；失败实验保留错误信息且不参与晋级。", "- 论文只负责提出结构假设；只有已审核、已测试的算子可执行。", "- checkpoint 与原始 runs 不提交 Git；`result.json`、`report.md` 和 `index.html` 保存完整过程。", ""]
+    return "\n".join(lines)
+
+
+def _render_composable_report(result: EvolutionResult) -> str:
+    champion = next(
+        trial for trial in result.trials if trial.trial_id == result.champion_id
+    )
+    baseline = result.trials[0]
+    is_agent = result.config.model == "agent"
+    lines = [
+        f"# {result.config.model} 组合式自动进化报告",
+        "",
+        "## 结论",
+        "",
+        f"- 数据 / benchmark：`{result.config.dataset}`",
+        f"- 调研方向：{result.config.direction}",
+        f"- 代数 / population / workers：`{result.config.generations}` / "
+        f"`{result.config.population}` / `{result.config.workers}`",
+        f"- validation 冠军：`{champion.trial_id}`；fitness "
+        f"`{baseline.fitness:.5f}→{champion.fitness:.5f}`",
+    ]
+    if is_agent:
+        lines += [
+            f"- 组合：memory=`{champion.genome.agent_memory}`，"
+            f"planner=`{champion.genome.agent_planner}`，"
+            f"tool policy=`{champion.genome.agent_tool_policy}`，"
+            f"critic=`{champion.genome.agent_critic}`，"
+            f"capacity=`{champion.genome.memory_size}`",
+            f"- validation：joint success "
+            f"`{champion.validation['joint_success']:.4f}`，average cost "
+            f"`{champion.validation['average_cost']:.4f}`，reuse "
+            f"`{champion.validation['reuse_rate']:.4f}`",
+        ]
+    else:
+        lines += [
+            f"- 组合：objective=`{champion.genome.post_training}`，"
+            f"learning rate=`{champion.genome.learning_rate}`，"
+            f"group size=`{champion.genome.group_size}`，"
+            f"steps=`{champion.genome.post_steps}`",
+            f"- validation：accuracy `{champion.validation['accuracy']:.4f}`，"
+            f"KL `{champion.validation['kl_from_reference']:.4f}`",
+        ]
+    lines += ["", "## 每轮研究记录", ""]
+    for round_ in result.rounds:
+        lines += [
+            f"### 第 {round_['generation']} 轮",
+            "",
+            f"- 父代：`{round_['parent']}`",
+            *[
+                f"- `{item['trial_id']}`：{item['rationale']}"
+                for item in round_["hypotheses"]
+            ],
+            f"- 决策：{round_['decision']}",
+            "",
+        ]
+    lines += [
+        "## 完整实验轨迹",
+        "",
+        "| Trial | 代 | Fitness | Genome | 状态 |",
+        "|---|---:|---:|---|---|",
+    ]
+    for trial in result.trials:
+        genome = json.dumps(
+            trial.genome.to_dict(), ensure_ascii=False, sort_keys=True
+        ).replace("|", "\\|")
+        lines.append(
+            f"| `{trial.trial_id}` | {trial.generation} | "
+            f"{trial.fitness:.5f} | `{genome}` | {trial.status} |"
+        )
+    lines += [
+        "",
+        "## 协议边界",
+        "",
+        "- 只用 validation 选择父代，test 仅在全部代际结束后运行。",
+        "- 每个 trial 保存完整组合 genome、父代、失败状态和研究记忆。",
+        "- 后训练使用候选策略机制评测；Agent 使用确定性 mini-suite，"
+        "均不等同于前沿大模型开放式能力评测。",
+        "",
+    ]
     return "\n".join(lines)
 
 
@@ -146,4 +227,4 @@ def render_dashboard(result: EvolutionResult) -> str:
     title = f"{result.config.model} 自动研究"
     return f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title>
 <style>body{{margin:0;background:#f5f7fb;color:#172033;font:15px system-ui,-apple-system,sans-serif}}main{{max-width:1180px;margin:auto;padding:32px}}h1{{margin:0}}.muted{{color:#65708a}}.cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:24px 0}}.card,section{{background:white;border:1px solid #e4e8f0;border-radius:14px;padding:18px;box-shadow:0 3px 12px #1b274510}}.value{{font-size:26px;font-weight:700;margin-top:7px}}section{{margin:16px 0}}table{{width:100%;border-collapse:collapse}}th,td{{padding:10px;border-bottom:1px solid #edf0f5;text-align:left}}.good{{color:#087f5b}}.bad{{color:#c92a2a}}.bar{{height:9px;background:#4263eb;border-radius:6px;min-width:2px}}code{{background:#f1f3f8;padding:2px 5px;border-radius:4px}}details{{margin:10px 0}}@media(max-width:700px){{main{{padding:18px}}.scroll{{overflow:auto}}}}</style></head><body><main><h1>{title}</h1><p class="muted" id="subtitle"></p><div class="cards" id="cards"></div><section><h2>迭代效果</h2><div class="scroll"><table><thead><tr><th>实验</th><th>轮次</th><th>结构</th><th id="metric-head">主指标</th><th>相对宽度</th><th>状态</th></tr></thead><tbody id="trials"></tbody></table></div></section><section><h2>研究过程</h2><div id="rounds"></div></section><section><h2>验证级联与研究记忆</h2><div id="memory"></div></section><section><h2>论文证据</h2><div id="papers"></div></section></main>
-<script>const d={payload};const esc=s=>String(s).replace(/[&<>"']/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));const trials=d.trials,base=trials[0],champ=trials.find(x=>x.trial_id===d.champion_id)||base,isLLM=d.config.model==='micro-llm',selected=d.config.fitness_metric==='public_composite'?'Public composite':d.config.fitness_metric==='unirank_composite'?'UniRank composite':'Primary fitness';const metric=x=>Number(x.validation.fitness??x.fitness),metricLabel=selected;document.querySelector('#metric-head').textContent=metricLabel;document.querySelector('#subtitle').textContent=(isLLM?d.config.direction+' · '+d.config.dataset+' · '+d.dataset_summary.train_tokens+' train tokens':d.config.direction+' · '+d.config.dataset+' · '+d.dataset_summary.users+' users / '+d.dataset_summary.items+' items')+' · '+d.config.benchmark_suite+' suite';const gain=(metric(champ)-metric(base))/Math.max(Math.abs(metric(base)),1e-12)*100;document.querySelector('#cards').innerHTML=[['当前冠军',champ.trial_id],['冠军结构',champ.genome.architecture],[metricLabel,metric(champ).toFixed(5)],['相对基线',(gain>=0?'+':'')+gain.toFixed(2)+'%'],['总体主指标',isLLM?'PPL '+Number(champ.validation.perplexity).toFixed(3):'NDCG '+Number(champ.validation.ndcg_at_10).toFixed(5)],['已完成进化轮数',d.rounds.length],['实验数（含基线）',trials.length],['并行 workers',d.config.workers]].map(x=>`<div class="card"><div class="muted">${{esc(x[0])}}</div><div class="value">${{esc(x[1])}}</div></div>`).join('');const completed=trials.filter(x=>x.status==='completed'),best=Math.max(...completed.map(metric)),worst=Math.min(...completed.map(metric)),span=Math.max(best-worst,1e-12);document.querySelector('#trials').innerHTML=trials.map(x=>`<tr><td><code>${{esc(x.trial_id)}}</code></td><td>${{x.generation}}</td><td>${{esc(x.genome.architecture)}}</td><td>${{metric(x).toFixed(5)}}</td><td><div class="bar" style="width:${{Math.max(3,(metric(x)-worst)/span*100)}}%"></div></td><td class="${{x.status==='completed'?'good':'bad'}}">${{esc(x.status)}}</td></tr>`).join('');document.querySelector('#rounds').innerHTML=d.rounds.map(r=>`<details open><summary><b>第 ${{r.generation}} 轮</b> · ${{esc(r.decision)}}</summary><p><b>假设</b></p><ul>${{r.hypotheses.map(h=>`<li><code>${{esc(h.trial_id)}}</code> ${{esc(h.rationale)}}</li>`).join('')}}</ul><p><b>观察</b></p><ul>${{r.observations.map(o=>`<li>${{esc(o.trial_id)}}: fitness=${{Number(o.validation.fitness).toFixed(5)}}; ${{isLLM?'PPL='+Number(o.validation.perplexity).toFixed(3)+', preference='+Number(o.validation.preference_accuracy||0).toFixed(3)+', GSM8K='+Number(o.validation.reasoning_pass_at_1||0).toFixed(3):'NDCG@10='+Number(o.validation.ndcg_at_10).toFixed(5)+', suite='+Number(o.validation.unirank_composite||o.validation.public_composite||o.validation.ndcg_at_10).toFixed(5)}} (${{esc(o.status)}})</li>`).join('')}}</ul></details>`).join('')||'<p class="muted">尚未完成第一轮。</p>';const vr=d.verification_records||[],rm=d.research_memory||{{}};document.querySelector('#memory').innerHTML=`<p>验证通过 <b>${{vr.filter(x=>x.passed).length}} / ${{vr.length}}</b>；成功技能 <b>${{(rm.successful_skills||[]).length}}</b>；禁止方向 <b>${{(rm.forbidden_directions||[]).length}}</b>。</p><details><summary>Architecture gradients</summary><ul>${{(rm.architecture_gradients||[]).map(x=>`<li><code>${{esc(x.trial_id)}}</code> ${{esc(x.architecture)}}：${{Number(x.fitness_delta).toFixed(5)}}</li>`).join('')}}</ul></details>`;document.querySelector('#papers').innerHTML='<ul>'+d.papers.map(p=>`<li><a href="${{esc(p.url)}}">${{esc(p.title)}}</a>：${{esc(p.method)}} <code>${{esc(p.architecture||'evidence-only')}}</code></li>`).join('')+'</ul>';</script></body></html>'''
+<script>const d={payload};const esc=s=>String(s).replace(/[&<>"']/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));const trials=d.trials,base=trials[0],champ=trials.find(x=>x.trial_id===d.champion_id)||base,domain=d.config.model,isLLM=domain==='micro-llm',isPost=domain==='post-training',isAgent=domain==='agent',selected=d.config.fitness_metric==='public_composite'?'Public composite':d.config.fitness_metric==='unirank_composite'?'UniRank composite':'Primary fitness';const metric=x=>Number(x.validation.fitness??x.fitness),metricLabel=selected,detail=v=>isLLM?'PPL='+Number(v.perplexity).toFixed(3)+', preference='+Number(v.preference_accuracy||0).toFixed(3)+', GSM8K='+Number(v.reasoning_pass_at_1||0).toFixed(3):isPost?'accuracy='+Number(v.accuracy).toFixed(3)+', KL='+Number(v.kl_from_reference).toFixed(3):isAgent?'success='+Number(v.joint_success).toFixed(3)+', cost='+Number(v.average_cost).toFixed(3)+', reuse='+Number(v.reuse_rate).toFixed(3):'NDCG@10='+Number(v.ndcg_at_10).toFixed(5)+', suite='+Number(v.unirank_composite||v.public_composite||v.ndcg_at_10).toFixed(5);document.querySelector('#metric-head').textContent=metricLabel;const summary=isLLM?d.dataset_summary.train_tokens+' train tokens':isPost?d.dataset_summary.algorithms+' algorithms · '+d.dataset_summary.seeds.length+' seeds':isAgent?d.dataset_summary.episodes+' episodes · '+d.dataset_summary.genome_axes.join(' / '):d.dataset_summary.users+' users / '+d.dataset_summary.items+' items';document.querySelector('#subtitle').textContent=d.config.direction+' · '+d.config.dataset+' · '+summary;const gain=(metric(champ)-metric(base))/Math.max(Math.abs(metric(base)),1e-12)*100;const headline=isLLM?'PPL '+Number(champ.validation.perplexity).toFixed(3):isPost?'Accuracy '+Number(champ.validation.accuracy).toFixed(3):isAgent?'Success '+Number(champ.validation.joint_success).toFixed(3):'NDCG '+Number(champ.validation.ndcg_at_10).toFixed(5);document.querySelector('#cards').innerHTML=[['当前冠军',champ.trial_id],['冠军结构',champ.genome.architecture],[metricLabel,metric(champ).toFixed(5)],['相对基线',(gain>=0?'+':'')+gain.toFixed(2)+'%'],['总体主指标',headline],['已完成进化轮数',d.rounds.length],['实验数（含基线）',trials.length],['并行 workers',d.config.workers]].map(x=>`<div class="card"><div class="muted">${{esc(x[0])}}</div><div class="value">${{esc(x[1])}}</div></div>`).join('');const completed=trials.filter(x=>x.status==='completed'),best=Math.max(...completed.map(metric)),worst=Math.min(...completed.map(metric)),span=Math.max(best-worst,1e-12);document.querySelector('#trials').innerHTML=trials.map(x=>`<tr><td><code>${{esc(x.trial_id)}}</code></td><td>${{x.generation}}</td><td>${{esc(x.genome.architecture)}}</td><td>${{metric(x).toFixed(5)}}</td><td><div class="bar" style="width:${{Math.max(3,(metric(x)-worst)/span*100)}}%"></div></td><td class="${{x.status==='completed'?'good':'bad'}}">${{esc(x.status)}}</td></tr>`).join('');document.querySelector('#rounds').innerHTML=d.rounds.map(r=>`<details open><summary><b>第 ${{r.generation}} 轮</b> · ${{esc(r.decision)}}</summary><p><b>假设</b></p><ul>${{r.hypotheses.map(h=>`<li><code>${{esc(h.trial_id)}}</code> ${{esc(h.rationale)}}</li>`).join('')}}</ul><p><b>观察</b></p><ul>${{r.observations.map(o=>`<li>${{esc(o.trial_id)}}: fitness=${{Number(o.validation.fitness).toFixed(5)}}; ${{detail(o.validation)}} (${{esc(o.status)}})</li>`).join('')}}</ul></details>`).join('')||'<p class="muted">尚未完成第一轮。</p>';const vr=d.verification_records||[],rm=d.research_memory||{{}};document.querySelector('#memory').innerHTML=`<p>验证通过 <b>${{vr.filter(x=>x.passed).length}} / ${{vr.length}}</b>；成功技能 <b>${{(rm.successful_skills||[]).length}}</b>；禁止方向 <b>${{(rm.forbidden_directions||[]).length}}</b>。</p><details><summary>Architecture gradients</summary><ul>${{(rm.architecture_gradients||[]).map(x=>`<li><code>${{esc(x.trial_id)}}</code> ${{esc(x.architecture)}}：${{Number(x.fitness_delta).toFixed(5)}}</li>`).join('')}}</ul></details>`;document.querySelector('#papers').innerHTML=d.papers.length?'<ul>'+d.papers.map(p=>`<li><a href="${{esc(p.url)}}">${{esc(p.title)}}</a>：${{esc(p.method)}} <code>${{esc(p.architecture||'evidence-only')}}</code></li>`).join('')+'</ul>':'<p class="muted">本轮使用仓库内已实现的组合算子，不新增外部论文候选。</p>';</script></body></html>'''

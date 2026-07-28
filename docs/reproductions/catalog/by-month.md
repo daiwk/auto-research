@@ -195,6 +195,10 @@
 
 - [Switch Transformer](../2101.03961-switch-transformer/README.md)：让每个 token 只激活一个 FFN expert，以稀疏路由扩展参数容量。
 
+## 2020-09
+
+- [PLE](../recsys2020-ple-ple/README.md)：把专家拆成共享组与任务专属组，并由 CGC gate 渐进抽取共性和个性信息。
+
 ## 2020-08
 
 - [DCN-V2](../2008.13535-dcn-v2/README.md)：用低秩 cross experts 和 gate 显式学习高阶特征交互。
@@ -210,10 +214,23 @@
 ## 2018-08
 
 - [SASRec](../1808.09781-sasrec/README.md)：用因果自注意力编码用户行为序列，并预测下一物品，作为经典序列推荐基线。
+- [MMoE](../kdd2018-mmoe-mmoe/README.md)：让每个任务用独立 gate 组合共享 experts，缓解任务相关性变化造成的负迁移。
+
+## 2018-04
+
+- [ESMM](../1804.07931-esmm/README.md)：在全曝光空间联合学习 CTR 与 CTCVR，并用概率乘积分解缓解 CVR 样本选择偏差。
 
 ## 2017-06
 
 - [DIN](../1706.06978-din/README.md)：用候选物品感知的局部激活单元，从用户历史中动态提取相关兴趣，并以 Dice 激活训练 CTR 排序模型。
+
+## 2017-03
+
+- [DeepFM](../1703.04247-deepfm/README.md)：让 FM 二阶交互与深层网络共享 field embedding，端到端学习低阶和高阶组合。
+
+## 2016-09
+
+- [YouTube DNN](../recsys2016-youtube-dnn-youtube-dnn/README.md)：聚合观看历史并用非线性用户塔生成向量，再通过 item embedding 近邻召回候选。
 
 ## 2016-06
 

@@ -31,6 +31,8 @@ class PaperMetadata:
     code_url: str | None = None
     organization: str | None = None
     published: str | None = None
+    publication_label: str | None = None
+    publication_source: str | None = None
     topics: tuple[str, ...] = ()
     online_ab: tuple[OnlineABEvidence, ...] = ()
     selection_exception: str | None = None
@@ -48,6 +50,10 @@ class PaperMetadata:
             values["organization"] = self.organization
         if self.published:
             values["published"] = self.published
+        if self.publication_label:
+            values["publication_label"] = self.publication_label
+        if self.publication_source:
+            values["publication_source"] = self.publication_source
         if self.topics:
             values["topics"] = list(self.topics)
         if self.online_ab:

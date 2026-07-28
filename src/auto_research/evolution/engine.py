@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .hyformer import HyFormerEvaluator
 from .llm import MicroLLMEvaluator
+from .composable import AgentEvolutionEvaluator, PostTrainingEvolutionEvaluator
 from .models import EvolutionConfig, EvolutionResult, Genome
 from .papers import discover_papers
 from .planner import allowed_architectures, propose, round_record
@@ -28,9 +29,20 @@ class ModelEvolutionEngine:
         configure_runtime(None if config.device == "auto" else config.device, config.cpu_threads)
         run_id = dt.datetime.now().strftime("%Y%m%d-%H%M%S-%f")
         run_dir = (self.project_dir / config.output_dir / f"{config.model}-{run_id}").resolve()
-        domain = "language model" if config.model == "micro-llm" else "recommendation"
+        domain = {
+            "micro-llm": "language model",
+            "post-training": "LLM post-training",
+            "agent": "agent memory planning tools critic",
+        }.get(config.model, "recommendation")
         query = config.query or f"{config.model} {config.direction} {domain} efficient architecture"
-        papers = discover_papers(query, config.max_papers, config.allow_network, track="llm" if config.model == "micro-llm" else "recommendation")
+        papers = (
+            []
+            if config.model in {"post-training", "agent"}
+            else discover_papers(
+                query, config.max_papers, config.allow_network,
+                track="llm" if config.model == "micro-llm" else "recommendation",
+            )
+        )
         result = EvolutionResult(run_id, config, papers=papers)
         evaluator = self.evaluator or _make_evaluator(config, self.project_dir)
         result.dataset_summary = evaluator.summary() if hasattr(evaluator, "summary") else {}
@@ -40,6 +52,23 @@ class ModelEvolutionEngine:
                 layers=config.llm_layers, learning_rate=3e-4,
                 batch_size=config.llm_batch_size,
                 sequence_length=config.llm_sequence_length,
+            )
+        elif config.model == "post-training":
+            baseline_genome = Genome(
+                architecture="candidate-policy",
+                learning_rate=0.08,
+                post_training="none",
+                post_steps=config.steps,
+                group_size=4,
+            )
+        elif config.model == "agent":
+            baseline_genome = Genome(
+                architecture="composable-agent",
+                agent_memory="none",
+                agent_planner="long-context",
+                agent_tool_policy="direct",
+                agent_critic="none",
+                memory_size=24,
             )
         else:
             baseline_genome = Genome(architecture="hyformer" if config.model == "hyformer" else "rankmixer_dense")
@@ -116,6 +145,21 @@ def _make_evaluator(config, project_dir):
             config.seeds, config.allow_network, config.maximum_train_tokens,
             config.maximum_eval_tokens, config.vocab_size,
             config.benchmark_suite, config.fitness_metric,
+        )
+    if config.model == "post-training":
+        return PostTrainingEvolutionEvaluator(
+            (project_dir / config.dataset_dir).resolve(),
+            config.dataset,
+            config.steps,
+            config.seeds,
+            config.allow_network,
+            config.maximum_examples,
+        )
+    if config.model == "agent":
+        return AgentEvolutionEvaluator(
+            config.dataset,
+            config.seeds,
+            config.agent_episodes,
         )
     arguments = ((project_dir / config.dataset_dir).resolve(), config.dataset, config.steps,
                  config.seeds, config.maximum_users, config.maximum_items, config.evaluation_users,

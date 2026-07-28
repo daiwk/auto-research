@@ -7,6 +7,15 @@ from .models import Genome, PaperInspiration
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
+    if model == "post-training":
+        return [
+            "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "rloo", "remax",
+            "dapo", "gspo", "lightning-opd", "gprl", "tcr",
+        ]
+    if model == "agent":
+        return [
+            "composable-agent",
+        ]
     if model == "micro-llm":
         values = [
             "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
@@ -79,6 +88,10 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
 
 
 def propose(parent: Genome, generation: int, index: int, architectures: list[str], rng: random.Random, model: str = "rankmixer"):
+    if model == "post-training":
+        return _propose_post_training(parent, generation, index, architectures, rng)
+    if model == "agent":
+        return _propose_agent(parent, generation, index, rng)
     if model == "micro-llm":
         return _propose_llm(parent, generation, index, architectures, rng)
     architecture = architectures[(index + generation - 1) % len(architectures)] if generation == 1 else rng.choice(architectures)
@@ -138,6 +151,59 @@ def _propose_llm(parent, generation, index, architectures, rng):
     name, values = knobs[(generation + index) % len(knobs)]
     value = rng.choice(values)
     return replace(parent, **{name: value}), f"联合优化：{name}={value}"
+
+
+def _propose_post_training(parent, generation, index, algorithms, rng):
+    if generation == 1:
+        method = algorithms[index % len(algorithms)]
+        return replace(
+            parent,
+            architecture="candidate-policy",
+            post_training=method,
+            post_steps=max(parent.post_steps, 40),
+        ), f"后训练 objective 消融：{method}；冻结数据、特征和训练预算"
+    knobs = (
+        ("learning_rate", [0.02, 0.04, 0.08, 0.12]),
+        ("group_size", [2, 4, 6]),
+        ("post_steps", [40, 80, 120]),
+    )
+    name, values = knobs[(generation + index) % len(knobs)]
+    value = rng.choice(values)
+    method = rng.choice(algorithms)
+    return replace(
+        parent,
+        architecture="candidate-policy",
+        post_training=method,
+        **{name: value},
+    ), f"组合优化：objective={method}, {name}={value}"
+
+
+def _propose_agent(parent, generation, index, rng):
+    memories = ("none", "u-mem", "legomem")
+    planners = ("fast", "react", "rewoo", "tree-of-thoughts", "lats")
+    tools = ("direct", "toolformer", "memtool")
+    critics = ("none", "self-refine", "reflexion")
+    if generation == 1:
+        component = index % 4
+        values = {
+            "agent_memory": memories[1 + index % (len(memories) - 1)],
+            "agent_planner": planners[1 + index % (len(planners) - 1)],
+            "agent_tool_policy": tools[1 + index % (len(tools) - 1)],
+            "agent_critic": critics[1 + index % (len(critics) - 1)],
+        }
+        name = tuple(values)[component]
+        return replace(parent, architecture="composable-agent", **{name: values[name]}), (
+            f"Agent 单组件消融：{name}={values[name]}；其余组件保持基线"
+        )
+    return replace(
+        parent,
+        architecture="composable-agent",
+        agent_memory=rng.choice(memories),
+        agent_planner=rng.choice(planners),
+        agent_tool_policy=rng.choice(tools),
+        agent_critic=rng.choice(critics),
+        memory_size=rng.choice((8, 16, 24, 48)),
+    ), "Agent 组合 genome：独立搜索 memory / planner / tool policy / critic / capacity"
 
 
 def round_record(generation, parent, trials, champion):
