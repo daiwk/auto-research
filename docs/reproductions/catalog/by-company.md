@@ -80,6 +80,7 @@
 
 ## Kuaishou
 
+- 2026-07 · [UniR²](../2607.24439-unir2/README.md)：用统一 decoder 和 Dual-Query Prefix-Causal Attention 同时学习层级 SID 生成与多目标排序，并以 ranking-only LoRA 避免梯度冲突。
 - 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
 - 2026-01 · [OneMall](../2601.21770-onemall/README.md)：以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
 - 2026-07 · [RECAP](../2607.15730-recap/README.md)：把流式用户画像维护为固定容量语义状态，并用推荐反馈评价器和 GRPO 闭环优化画像更新策略。
@@ -92,6 +93,7 @@
 
 ## Meituan
 
+- 2026-07 · [CORE](../2607.24417-core-relevance/README.md)：把三级电商相关性拆成两道条件边界，以 step-GRPO 提供细粒度 credit，再将 PostCoT LLM 蒸馏到在线双头模型。
 - 2026-02 · [DOS](../2602.04460-dos/README.md)：用协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
 - 2026-04 · [MBGR](../2604.02684-mbgr/README.md)：通过 business-aware SID、共享 MoE 和最近未来标签路由，同时学习多个业务域的生成目标。
 - 2026-07 · [NONTP](../2607.12277-nontp/README.md)：在 NTP 上加入未来状态对比学习和跨域 hidden-state pooling，扩大生成式推荐的训练监督覆盖。
@@ -100,6 +102,7 @@
 
 ## Meta
 
+- 2026-07 · [Mosaic](../2607.24015-mosaic/README.md)：将多类用户 embedding 组织为 specialist fleet，并通过 MRM 联合标签与 cosine redundancy loss 保持新增表征的独特信息。
 - 2026-07 · [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：UMD/Meta AI 在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
 - 2026-06 · [RankGraph-2](../2606.18379-rankgraph2/README.md)：用流行度校正边、离线多跳 PPR 和 residual cluster index 降低工业图召回的在线成本。
 - 2026-04 · [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item 请求，异步预计算 foundation-model latent，并通过 cache/fallback 服务线上排序。
@@ -190,6 +193,7 @@
 
 ## 学术与经典基线
 
+- 2026-07 · [DataOrchestra](../2607.24717-data-orchestra/README.md)：复旦、上海交大与 SII-GAIR 训练逐样本 orchestrator，按需选择 Drop、Untouch 或多阶段 Clean 预训练数据处理计划。
 - 2023-12 · [Mamba](../2312.00752-mamba/README.md)：使用输入相关的步长、写入和读取向量实现选择性状态空间递推与线性序列复杂度。
 - 2026-07 · [GaugeQuant](../2607.20757-gaugequant/README.md)：Cambridge 在线学习量化友好正交基，以 LogSumExp 抑制 W4A4 outlier。
 - 2026-07 · [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：以逐 block gzip 压缩率选择信息密集区，组合 local、literal long-range 和 hybrid heads 构造零参数自适应 mask。

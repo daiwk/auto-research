@@ -1,0 +1,77 @@
+{
+  "paper": {
+    "arxiv_id": "2607.24439",
+    "title": "Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence",
+    "url": "https://arxiv.org/abs/2607.24439",
+    "organization": "Kuaishou / IIE, CAS / UCAS"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 320,
+    "items": 480
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_model": 130,
+    "sid_levels": 2,
+    "codebook_size": 16,
+    "ranking_objectives": [
+      "next-item",
+      "genre-affinity"
+    ]
+  },
+  "variants": {
+    "separate cascade": {
+      "initial_loss": 6.19913501739502,
+      "final_loss": 5.417207288742065,
+      "parameters": 51116,
+      "device": "mps",
+      "hit_at_10": 0.034375,
+      "ndcg_at_10": 0.014269003302980424,
+      "head_share_at_10": 0.0403125,
+      "sid_code_accuracy": 0.2203125
+    },
+    "UniR2": {
+      "initial_loss": 6.236644124984741,
+      "final_loss": 5.050851678848266,
+      "parameters": 41274,
+      "device": "mps",
+      "hit_at_10": 0.03125,
+      "ndcg_at_10": 0.012386374417872801,
+      "head_share_at_10": 0.0634375,
+      "sid_code_accuracy": 0.2953125
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": -9.090909090909099,
+    "ndcg_at_10_percent": -13.19383593326656,
+    "sid_code_accuracy_percent": 34.042553191489354
+  },
+  "paper_results": {
+    "kuaishou_play_volume_percent": 1.177,
+    "kuaishou_follow_rate_percent": 0.655,
+    "kuaishou_like_rate_percent": 2.56,
+    "lite_gifting_users_percent": 0.717,
+    "lite_gifting_intention_percent": 1.567,
+    "lite_gifting_amount_percent": 2.569
+  },
+  "scope": "实际训练 Res-KMeans 两级 SID、统一异构序列、generation prefix-causal query、ranking mutual-visible query、共享 Q/K/V、ranking-only LoRA 与 stop-gradient，并和独立 recall/ranker cascade 做同数据全目录对照。MovieLens genre-affinity 代理快手 long-view/gift 等私有多目标，未复刻 8129 codebook、beam service、3×640 线上模型和 5% 流量实验。",
+  "runtime": {
+    "requested_device": "mps",
+    "cpu_threads": null,
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "resolved_device": "mps",
+    "torch_version": "2.13.0",
+    "accelerator": "Apple Metal Performance Shaders"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "Kuaishou private full-stream multi-objective samples",
+      "three-level 8129-way SID and production beam search",
+      "3-layer 640-d online service and pipeline parallelism"
+    ]
+  }
+}

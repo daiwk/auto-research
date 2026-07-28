@@ -1,0 +1,111 @@
+{
+  "paper": {
+    "arxiv_id": "2607.24717",
+    "title": "DataOrchestra: Learning to Orchestrate Per-Example Curation of Pretraining Data",
+    "url": "https://arxiv.org/abs/2607.24717",
+    "organization": "Fudan University / Shanghai Jiao Tong University / SII-GAIR"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "source_blocks": 1800,
+    "train_tokens_per_variant": 150000,
+    "test_tokens": 24000
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_model": 55,
+    "same_tokens_steps_optimizer_architecture": true,
+    "actions": [
+      "drop",
+      "untouched",
+      "clean"
+    ],
+    "cleaning_operations": [
+      "normalize",
+      "deduplicate",
+      "wiki",
+      "repair"
+    ]
+  },
+  "orchestrator_training": {
+    "initial_loss": 2.5175024032592774,
+    "final_loss": 1.2900703310966493,
+    "held_out_action_accuracy": 0.7611111111111111,
+    "held_out_operation_accuracy": 0.8478260869565217
+  },
+  "decisions": {
+    "actions": {
+      "drop": 946,
+      "clean": 854
+    },
+    "operations": {
+      "normalize": 664,
+      "repair": 170,
+      "deduplicate": 9,
+      "wiki": 11
+    },
+    "mean_confidence": 0.6486681433022022
+  },
+  "variants": {
+    "Raw": {
+      "initial_loss": 6.897987937927246,
+      "final_loss": 6.063773345947266,
+      "parameters": 208872,
+      "device": "mps",
+      "loss": 5.886063143610954,
+      "perplexity": 359.98528067881017,
+      "batches": 32,
+      "train_tokens": 150000
+    },
+    "Static cleaner": {
+      "initial_loss": 6.919168090820312,
+      "final_loss": 6.024808597564697,
+      "parameters": 208872,
+      "device": "mps",
+      "loss": 5.978976592421532,
+      "perplexity": 395.0358784999148,
+      "batches": 32,
+      "train_tokens": 150000
+    },
+    "DataOrchestra": {
+      "initial_loss": 6.9236681938171385,
+      "final_loss": 6.058972454071045,
+      "parameters": 208872,
+      "device": "mps",
+      "loss": 5.968589261174202,
+      "perplexity": 390.9537479006731,
+      "batches": 32,
+      "train_tokens": 150000
+    }
+  },
+  "relative": {
+    "perplexity_reduction_vs_raw_percent": -8.60270374484948
+  },
+  "paper_results": {
+    "0.5B_raw_average": 37.63,
+    "0.5B_dataorchestra_average": 39.99,
+    "1.5B_raw_average": 39.87,
+    "1.5B_dataorchestra_average": 42.44,
+    "7B_raw_average": 44.79,
+    "7B_dataorchestra_average": 47.66
+  },
+  "scope": "实际训练逐文档 orchestrator，在 drop/untouched/clean 之间路由，并为 clean 选择 normalize/deduplicate/wiki/repair 操作；随后以相同 token、step、优化器和 Llama-style 小模型预算比较 raw、固定清洗与 orchestration 预训练。程序化质量教师替代论文 LLM 合成决策，WikiText-2 替代 20B/30B token 多语料。",
+  "runtime": {
+    "requested_device": "mps",
+    "cpu_threads": null,
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "resolved_device": "mps",
+    "torch_version": "2.13.0",
+    "accelerator": "Apple Metal Performance Shaders"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "LLM-generated orchestration supervision",
+      "20B/30B-token multi-corpus pretraining",
+      "0.5B/1.5B/7B model scaling"
+    ]
+  }
+}

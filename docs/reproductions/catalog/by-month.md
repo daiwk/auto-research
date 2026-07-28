@@ -4,6 +4,10 @@
 
 ## 2026-07
 
+- [Mosaic](../2607.24015-mosaic/README.md)：Meta 将 memorization、dense、sequential 与 CoTrain 用户表征组织成 specialist fleet，并以 MRM 和 cosine redundancy loss 挖掘增量信息。
+- [UniR²](../2607.24439-unir2/README.md)：快手用 Dual-Query Prefix-Causal Attention 在同一 decoder 序列内统一层级 SID 生成和多目标排序，并以 ranking-only LoRA 隔离梯度。
+- [CORE](../2607.24417-core-relevance/README.md)：美团把 High/Mid/Low 相关性拆成条件二分类，用逐 step GRPO 优化 reasoning，再通过 PostCoT 蒸馏到低延迟双头模型。
+- [DataOrchestra](../2607.24717-data-orchestra/README.md)：为每个预训练 chunk 学习 Drop、Untouch 或 Clean 计划，并按需组合噪声删除、表面修复和教学性增强。
 - [GaugeQuant](../2607.20757-gaugequant/README.md)：在线学习函数等价、量化友好的正交基，以 LogSumExp 压制 W4A4 激活 outlier。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：Pinterest 用 engagement-aware Semantic ID、级联 pooling 与多视角对比学习接入 dense retrieval。
 - [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。

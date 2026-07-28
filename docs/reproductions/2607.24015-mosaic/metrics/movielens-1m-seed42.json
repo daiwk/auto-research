@@ -1,0 +1,85 @@
+{
+  "paper": {
+    "arxiv_id": "2607.24015",
+    "title": "Mosaic: A Fleet of User Embedding Specialists for Recommendation at Meta",
+    "url": "https://arxiv.org/abs/2607.24015",
+    "organization": "Meta"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 320,
+    "items": 480
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_model": 120,
+    "specialists": [
+      "memorization",
+      "dense-heavy",
+      "sequential",
+      "CoTrain-MoE"
+    ],
+    "same_split_and_full_catalog": true
+  },
+  "baseline": {
+    "name": "single sequential user embedding",
+    "hit_at_10": 0.040625,
+    "ndcg_at_10": 0.016438474697594883,
+    "head_share_at_10": 0.1346875
+  },
+  "method": {
+    "name": "Mosaic fleet + MRM + CRL",
+    "hit_at_10": 0.0375,
+    "ndcg_at_10": 0.017012855123840185,
+    "head_share_at_10": 0.1553125
+  },
+  "relative": {
+    "hit_at_10_percent": -7.692307692307699,
+    "ndcg_at_10_percent": 3.494122397678052,
+    "head_share_at_10_percent": 15.313225058004646
+  },
+  "training": {
+    "baseline": {
+      "initial_loss": 6.909626388549805,
+      "final_loss": 6.273937082290649,
+      "final_cosine_redundancy": null,
+      "final_mrm_loss": null,
+      "parameters": 45800,
+      "device": "mps"
+    },
+    "mosaic": {
+      "initial_loss": 6.958033609390259,
+      "final_loss": 6.358517169952393,
+      "final_cosine_redundancy": -0.1508315160870552,
+      "final_mrm_loss": 1.2512000918388366,
+      "parameters": 49256,
+      "device": "mps"
+    }
+  },
+  "paper_results": {
+    "surface_1_percent": 0.1,
+    "surface_2_percent": 0.15,
+    "surface_3_percent": 0.28,
+    "gpu_serving_reduction_percent": 79,
+    "coevaluation_speedup": "3-5x"
+  },
+  "scope": "实际训练 memorization、dense-heavy、GRU sequential 与 routed CoTrain-MoE 四种 specialist，执行二任务笛卡尔积 MRM 辅助分类、warm-up cosine redundancy loss 和下游全目录排序。MovieLens genre/popularity 代理 Meta 私有多表面行为标签；未复刻 HSTU 2048、跨产品特征、CoEval 与线上混合 serving。",
+  "runtime": {
+    "requested_device": "mps",
+    "cpu_threads": null,
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "resolved_device": "mps",
+    "torch_version": "2.13.0",
+    "accelerator": "Apple Metal Performance Shaders"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "Meta private multi-surface features and labels",
+      "HSTU-2048 specialists and production-scale CoTrain",
+      "CoEval, zero-out evaluation, AOTI and hybrid serving"
+    ]
+  }
+}
