@@ -2,19 +2,33 @@
 
 # auto-research
 
-一个面向 macOS/Linux 的机器学习研究闭环：输入 topic，检索最新论文，在公开数据集上实现和迭代实验，生成隔离的 JSON/Markdown 产物，并可通过 GitHub CLI 提交 Pull Request（GitLab 语境中的 MR）。除工业论文复现和模型自动进化外，现在也包含 LLM 后训练算法与 Agent 论文研究两个独立子模块。
+一个面向 macOS/Linux 的机器学习研究平台，由两条正交工作流组成：**论文实现与评测**
+负责把论文变成可信组件、公开数据实验和中文结论；**自动研究与进化**负责围绕给定
+topic 或当前系统检索证据、并行实验和多轮迭代。两条工作流都可服务搜广推与 LLM
+应用、纯 LLM、Agent，也可通过统一 adapter 扩展到其他主题。
 
 可读版文档站：[daiwk.github.io/auto-research](https://daiwk.github.io/auto-research/)。站点支持全文搜索、MathJax 公式、Mermaid 架构图、深色模式和移动端横向滚动；本地预览方式见[文档说明](getting-started.md)。
 
 ## 当前能力
 
-项目包含五层互补能力：
+### 论文实现与评测
 
-1. **Topic research loop**：按 topic 检索 arXiv，通过独立迭代控制器运行可配置参数搜索，逐轮保存 checkpoint、事件日志和可复用指标缓存。
-2. **Paper adapters**：每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度；省略核心模型的实现只能作为概念验证。
-3. **Model evolution**：给定已有模型和数据集，在线检索相关论文，把已审计的结构算子与层数、维度、学习率、优化器等组成 genome，按 validation 做多代变异、淘汰和晋级，最终只对冠军运行一次 test。
-4. **LLM post-training**：统一实现 DPO/GRPO 基线与 Lightning OPD、GPRL、TCR 等新方法，保存 reward、KL、教师调用和训练轨迹。
-5. **Agent research**：实现 Agent 记忆、规划与动态工具管理论文，用确定性 benchmark mini-suite 比较成功率、成本、跨 episode 复用和工具淘汰。
+每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度。当前包含三个领域：
+
+- **搜广推与 LLM 应用**：推荐、搜索、广告、生成式推荐及 LLM 工业应用，要求真实
+  线上 A/B 或用户明确认可的全流量证据；
+- **纯 LLM**：网络结构、预训练、数据配方和后训练，以公共 benchmark 和真实训练
+  对照为筛选依据；
+- **Agent**：记忆、规划、工具使用和自我进化方法，使用可重复的 benchmark 与 trace。
+
+### 自动研究与进化
+
+- **Topic research loop**：按任意 topic 检索论文，通过可配置实验命令和 search
+  space 运行迭代，保存事件日志与指标缓存；
+- **Directed evolution**：给定当前系统、数据和自然语言方向，把已审计组件与超参数
+  组成 genome，按 validation 多代变异、淘汰和晋级，最终只对冠军运行 test；
+- **内置 adapter**：搜广推支持 RankMixer/HyFormer，纯 LLM 支持 micro‑LLM 的结构、
+  数据配方和后训练进化；Agent 已有论文组件和评测底座，专用多代 adapter 待接入。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 

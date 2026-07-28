@@ -38,6 +38,34 @@ def test_research_modules_have_scalable_hub_structure():
             assert f"`{method}`" in catalog
 
 
+def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
+    homepage = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
+    library = (ROOT / "docs" / "research-library.md").read_text(encoding="utf-8")
+    evolution = (ROOT / "docs" / "evolution-domains.md").read_text(encoding="utf-8")
+    navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
+
+    assert "## 两大核心工作流" in homepage
+    assert "## 工作流 × 研究领域" in homepage
+    assert "## 四大核心能力" not in homepage
+    assert homepage.count('<div class="ar-capability-card ') == 2
+    for domain in ("搜广推与 LLM 应用", "纯 LLM", "Agent", "其他主题"):
+        assert domain in homepage
+
+    for target in (
+        "reproductions/README.md",
+        "post-training/README.md",
+        "agent-research/README.md",
+    ):
+        assert f"({target})" in library
+
+    assert "专用多代 mutation engine 尚未实现" in evolution
+    assert "评测底座已实现" in evolution
+    assert "  - 自动研究与进化:" in navigation
+    assert "  - 论文实现与评测:" in navigation
+    assert "      - 纯 LLM 后训练:" in navigation
+    assert "      - Agent:" in navigation
+
+
 def test_each_research_paper_page_has_complete_contract():
     required = (
         "## 论文信息",

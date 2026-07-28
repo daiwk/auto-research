@@ -111,6 +111,64 @@
   font-weight: 650;
 }
 
+.ar-domain-matrix {
+  margin: 1rem 0 1.2rem;
+  overflow-x: auto;
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 0.8rem;
+  box-shadow: 0 0.35rem 1.2rem color-mix(in srgb, var(--md-default-fg-color) 5%, transparent);
+}
+
+.md-typeset .ar-domain-matrix table:not([class]) {
+  margin: 0;
+  border: 0;
+}
+
+.md-typeset .ar-domain-matrix th {
+  padding: 0.9rem 1rem;
+  background: color-mix(in srgb, var(--md-primary-fg-color) 9%, var(--md-default-bg-color));
+  font-size: 0.72rem;
+  letter-spacing: 0.025em;
+}
+
+.md-typeset .ar-domain-matrix td {
+  min-width: 18rem;
+  padding: 1rem;
+  vertical-align: top;
+  line-height: 1.65;
+}
+
+.md-typeset .ar-domain-matrix td:first-child {
+  min-width: 9rem;
+  color: var(--md-primary-fg-color);
+  font-size: 0.83rem;
+}
+
+.ar-status {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.ar-status-ready {
+  color: #087f5b;
+  background: color-mix(in srgb, #20c997 16%, transparent);
+}
+
+.ar-status-building {
+  color: #a15c00;
+  background: color-mix(in srgb, #f59f00 17%, transparent);
+}
+
+.ar-status-open {
+  color: var(--md-primary-fg-color);
+  background: color-mix(in srgb, var(--md-primary-fg-color) 12%, transparent);
+}
+
 .ar-start-grid {
   padding: 0.4rem 1.2rem;
   border-left: 0.18rem solid var(--md-primary-fg-color);
@@ -128,5 +186,9 @@
 
   .ar-capability-card ul {
     min-height: 0;
+  }
+
+  .md-typeset .ar-domain-matrix td {
+    min-width: 15rem;
   }
 }

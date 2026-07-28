@@ -1,18 +1,17 @@
 # Auto Research 自动研究
 
-Auto Research 负责把“我想研究什么”转成一条可追踪、可复现的实验链路。它与论文复现互补：论文复现回答“这篇工业论文的方法在公开数据上如何表现”，Auto Research 回答“围绕一个 topic 或现有模型，下一步应该尝试什么，并怎样持续迭代”。
+Auto Research 负责把“我想研究什么”转成一条可追踪、可复现的实验链路。它不绑定
+推荐、LLM 或 Agent：领域 adapter 提供研究对象、mutation、训练/执行入口和 evaluator，
+通用研究循环负责论文证据、并行实验、选择、多轮迭代和报告。
 
-## 四种入口
+## 两种入口
 
 | 入口 | 输入 | 自动执行 | 适用场景 |
 |---|---|---|---|
-| Topic research | topic、LLM/推荐轨道、论文数、实验次数 | arXiv 检索、参数提案、逐次实验、缓存与报告 | 探索一个较宽的研究问题 |
-| Model evolution | 基础模型、数据集、自然语言调研方向 | 论文检索、结构/数据/训练消融、并行实验、冠军进化、隔离 test | 升级 RankMixer、HyFormer 或本地 LLM |
-| LLM post-training | 后训练算法、公开数据和预算 | rollout、偏好/过程 reward、策略更新、KL 和成本报告 | 比较 OPD、RL、偏好优化 |
-| Agent research | Agent 方法、benchmark 和 memory budget | 多 episode 执行、记忆更新、计划/工具复用、轨迹报告 | 研究记忆、规划与工具使用 |
+| Topic research | topic、领域、论文数、实验次数 | 论文检索、参数提案、逐次实验、缓存与报告 | 探索较宽的研究问题或接入自定义实验 |
+| Directed evolution | 当前系统、数据/环境、自然语言方向 | 论文检索、mutation、并行实验、冠军进化、隔离 test | 持续升级模型、训练 recipe 或 Agent policy |
 
-[LLM 后训练完整说明 →](post-training/README.md) ·
-[Agent 论文研究完整说明 →](agent-research/README.md)
+[查看领域 adapter 与当前支持状态 →](evolution-domains.md)
 
 ## Topic research
 
@@ -26,7 +25,9 @@ auto-research run \
 
 系统会记录论文发现、每个 trial 的配置和指标、当前最优结果以及失败原因。内置低成本实验用于验证研究管线；正式研究可以通过配置文件接入自己的实现命令、实验命令、指标方向和参数空间。
 
-LLM 方向使用 `--track llm`，推荐、搜索和广告方向使用 `--track recommendation`。无网络环境可加 `--offline`，已有实验缓存会继续复用。
+LLM 方向使用 `--track llm`，推荐、搜索和广告方向使用 `--track recommendation`。
+自定义领域可通过实验命令和 search space 接入；无网络环境可加 `--offline`，已有缓存
+会继续复用。Agent 当前可复用 topic loop 和评测组件，专用 evolve adapter 尚未完成。
 
 ## 模型定向进化
 
@@ -50,6 +51,10 @@ auto-research evolve \
 [查看完整的模型进化协议、数据规模和结构算子 →](model-evolution.md)
 
 LLM 轨道使用 `micro-llm + WikiText-2`：第 1 轮比较 GQA、RoPE/RMSNorm/SwiGLU、parallel block 等结构；第 2 轮比较预训练数据配方；第 3 轮比较 SFT、NEFTune、DynamicRubric 与 Off-Context GRPO。public suite 还固定评估 Alpaca response preference 和 GSM8K candidate Pass@1。默认模型约 12M–16M 参数，可以在 Apple Silicon 上从头训练。
+
+后训练与 Agent 论文先在[论文实现与评测库](research-library.md)中建立可信实现。
+其中后训练组件已经进入 micro‑LLM 的进化阶段；Agent 的 memory/planning/tool 组件已有
+统一 benchmark，但需要完成专用 genome 与 mutation adapter 后才进入多代进化。
 
 ## 研究产物
 
