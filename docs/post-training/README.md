@@ -1,8 +1,9 @@
 # LLM 后训练研究
 
-这里是后训练论文的长期研究入口，覆盖偏好优化、在线强化学习、on-policy
-distillation、过程奖励和数据闭环。它与[模型定向进化](../model-evolution.md)并列：
-模型进化搜索结构与超参数，本模块研究如何构造训练信号并更新策略。
+这里是[论文实现与评测库](../research-library.md)中的纯 LLM 后训练分支，覆盖偏好优化、
+在线强化学习、on-policy distillation、过程奖励和数据闭环。这里先建立可信算法组件
+与公共评测；成熟组件可以继续接入[自动进化](../evolution-domains.md)，和网络结构、
+预训练数据及超参数一起搜索。
 
 !!! info "复现保真度"
     当前公开实验使用候选策略完整执行采样、策略概率、优势估计、KL 约束、教师缓存
@@ -11,6 +12,7 @@ distillation、过程奖励和数据闭环。它与[模型定向进化](../model
 
 ## 快速入口
 
+- [自动进化中的纯 LLM](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
 - [Lightning OPD](2604.13010-lightning-opd/README.md)：离线缓存教师分布的 on-policy distillation。

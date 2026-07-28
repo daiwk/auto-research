@@ -1,5 +1,5 @@
 site_name: Auto Research
-site_description: 从工业论文复现到方向驱动、多轮迭代的自动化机器学习研究平台
+site_description: 面向搜广推、纯 LLM、Agent 和可扩展主题的论文实现与多轮自动进化平台
 site_url: https://daiwk.github.io/auto-research/
 repo_url: https://github.com/daiwk/auto-research
 repo_name: daiwk/auto-research
@@ -7,10 +7,19 @@ edit_uri: edit/main/docs/
 
 nav:
   - 首页: index.md
-  - Auto Research:
-      - 自动研究总览: auto-research.md
-      - 模型定向进化: model-evolution.md
-      - LLM 后训练研究:
+  - 自动研究与进化:
+      - 能力总览: auto-research.md
+      - 领域适配: evolution-domains.md
+      - 多轮进化协议: model-evolution.md
+      - UniRank 公共评测: unirank.md
+  - 论文实现与评测:
+      - 研究库总览: research-library.md
+      - 搜广推与 LLM 应用:
+          - 工业论文总览: reproductions/README.md
+          - 按公司浏览: reproductions/catalog/by-company.md
+          - 按主题浏览: reproductions/catalog/by-topic.md
+          - 按年月浏览: reproductions/catalog/by-month.md
+      - 纯 LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md
           - 统一评测协议: post-training/benchmark.md
@@ -18,7 +27,7 @@ nav:
               - Lightning OPD: post-training/2604.13010-lightning-opd/README.md
               - GPRL: post-training/2605.18721-gprl/README.md
               - TCR: post-training/2607.19824-tcr/README.md
-      - Agent 论文研究:
+      - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md
           - 统一评测协议: agent-research/benchmark.md
@@ -26,12 +35,6 @@ nav:
               - U-Mem: agent-research/2602.22406-u-mem/README.md
               - LEGOMem: agent-research/2510.04851-legomem/README.md
               - MemTool: agent-research/2507.21428-memtool/README.md
-      - UniRank 公共评测: unirank.md
-  - 论文复现:
-      - 复现总览: reproductions/README.md
-      - 按公司浏览: reproductions/catalog/by-company.md
-      - 按主题浏览: reproductions/catalog/by-topic.md
-      - 按年月浏览: reproductions/catalog/by-month.md
   - 项目文档:
       - 项目 README: project-readme.md
       - 架构与扩展: architecture.md

@@ -1,8 +1,9 @@
 # Agent 论文研究
 
-这里是 Agent 论文的长期研究入口，覆盖记忆、规划、工具使用、多 Agent 协作和
-自我进化。首批实现不依赖付费模型 API，用确定性 mini-suite 验证状态更新、跨
-episode 复用和受限上下文管理；同一接口可以继续接真实 LLM executor 和完整 benchmark。
+这里是[论文实现与评测库](../research-library.md)中的 Agent 分支，覆盖记忆、规划、
+工具使用、多 Agent 协作和自我进化。首批实现不依赖付费模型 API，用确定性
+mini-suite 验证状态更新、跨 episode 复用和受限上下文管理；这些方法与评测器也是
+未来 [Agent 自动进化 adapter](../evolution-domains.md)的组件底座。
 
 !!! info "复现保真度"
     当前结果属于**Agent 机制复现**，不是论文在 HotpotQA、OfficeBench 或 ScaleMCP
@@ -10,6 +11,7 @@ episode 复用和受限上下文管理；同一接口可以继续接真实 LLM e
 
 ## 快速入口
 
+- [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态和待接入接口。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
 - [U-Mem](2602.22406-u-mem/README.md)：成本感知的主动知识获取与记忆验证。
