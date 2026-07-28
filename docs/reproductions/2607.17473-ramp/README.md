@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.17473](https://arxiv.org/abs/2607.17473) |
-| 公司/机构 | Huawei Ireland Research Center、University College Dublin |
+| 公司/机构 | Huawei Ireland Research Center / University College Dublin |
 | 首次公开日期 | 2026-07-20（arXiv v1） |
-| 原文开源代码 | 是：[Ruixinhua/RAMP](https://github.com/Ruixinhua/RAMP) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/Ruixinhua/RAMP) |
 | Adapter | `ramp` |
 | 本地复现代码 | [`src/auto_research/reproductions/ramp/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/ramp/) |
 

@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2101.03961](https://arxiv.org/abs/2101.03961) |
 | 公司/机构 | Google Brain |
 | 首次公开日期 | 2021-01-11（arXiv v1） |
-| 原文开源代码 | 是：[TensorFlow Mesh](https://github.com/tensorflow/mesh) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/tensorflow/mesh) |
 | Adapter | `switch-transformer` |
 | 本地复现代码 | [`src/auto_research/reproductions/switch_transformer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/switch_transformer/) |
 

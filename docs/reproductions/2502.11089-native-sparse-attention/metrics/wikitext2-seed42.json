@@ -1,0 +1,25 @@
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps_per_variant": 30,
+  "baseline": {
+    "architecture": "llama_modern",
+    "lm_loss": 5.7470527,
+    "perplexity": 313.2660,
+    "parameters": 139584
+  },
+  "method": {
+    "architecture": "native_sparse_attention",
+    "lm_loss": 5.7148753,
+    "perplexity": 303.3464,
+    "parameters": 141144,
+    "attention_edge_fraction": 0.563462,
+    "compression_block": 8,
+    "selected_blocks": 1,
+    "local_window": 8
+  },
+  "relative": {
+    "lm_loss_percent": -0.5599,
+    "perplexity_percent": -3.1665
+  }
+}

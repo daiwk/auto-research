@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2604.19269](https://arxiv.org/abs/2604.19269) |
 | 公司/机构 | Kuaishou Technology |
 | 首次公开日期 | 2026-04-21（arXiv v1） |
-| 原文开源代码 | 是：[CS3Rec](https://github.com/lixiangwang/CS3Rec) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/lixiangwang/CS3Rec) |
 | Adapter | `cs3` |
 | 本地复现代码 | [`src/auto_research/reproductions/cs3/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cs3/) |
 

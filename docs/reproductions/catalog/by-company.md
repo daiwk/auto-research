@@ -4,6 +4,7 @@
 
 ## Alibaba
 
+- 2025-05 · [Gated Attention](../2505.06708-gated-attention/README.md)：在每个 softmax attention head 的 SDPA 输出后施加 query-dependent sigmoid gate，增强非线性并抑制无用输出。
 - 2025-02 · [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣感知 SFT 对齐内容/协同空间，再由 CiUBM 融合排序。
 - 2025-02 · [FilterLLM](../2502.16924-filterllm/README.md)：把新品文本一次性映射到用户词表分布，并用历史行为约束冷启动召回。
 - 2025-06 · [MGOE](../2506.10520-mgoe/README.md)：构建宏观任务合并图，让 graph experts 显式传播多任务关系后进入独立预测塔。
@@ -180,6 +181,7 @@
 
 ## DeepSeek-AI
 
+- 2025-02 · [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：联合可训练的压缩历史、query 选择 fine blocks 与局部滑窗，在保留全局/局部信息的同时减少长上下文注意力边。
 - 2026-01 · [Engram](../2601.07372-engram/README.md)：用确定性 hashed n-gram 查表给 LLM 增加 O(1) 条件记忆。
 - 2025-12 · [mHC](../2512.24880-mhc/README.md)：将多流 Hyper-Connections 的残差映射投影到双随机矩阵流形，稳定深层信号传播。
 
@@ -207,6 +209,7 @@
 
 ## 学术与经典基线
 
+- 2025-02 · [Muon](../2502.16982-muon/README.md)：Moonshot AI 与 UCLA 对隐藏矩阵梯度做 Newton–Schulz 正交化，并为大规模 LLM 加入 weight decay 和 shape-aware scaling。
 - 2026-07 · [DataOrchestra](../2607.24717-data-orchestra/README.md)：复旦、上海交大与 SII-GAIR 训练逐样本 orchestrator，按需选择 Drop、Untouch 或多阶段 Clean 预训练数据处理计划。
 - 2023-12 · [Mamba](../2312.00752-mamba/README.md)：使用输入相关的步长、写入和读取向量实现选择性状态空间递推与线性序列复杂度。
 - 2026-07 · [GaugeQuant](../2607.20757-gaugequant/README.md)：Cambridge 在线学习量化友好正交基，以 LogSumExp 抑制 W4A4 outlier。

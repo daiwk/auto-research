@@ -38,7 +38,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **136/136** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **139/139** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
@@ -55,6 +55,9 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 | 核心机制 | `unir2` | UniR² · Kuaishou | DQ-PCA、层级 SID、ranking-only LoRA；SID code accuracy +34.04%，NDCG@10 -13.19% |
 | 核心机制 | `core-relevance` | CORE · Meituan | 级联序数头、step-GRPO 与 PostCoT 蒸馏；NDCG@5 +0.98%，Badcase@5 -50.00% |
 | 核心机制 | `data-orchestra` | DataOrchestra · Fudan/SJTU/SII-GAIR | 逐样本 Drop/Untouch/Clean 与多清洗 operation；较固定清洗 PPL -1.03%，较 raw +8.60%（变差） |
+| 核心机制 | `native-sparse-attention` | NSA · DeepSeek | 压缩/选择/滑窗三路可训练稀疏注意力；attention-edge proxy -43.65%，PPL -3.17% |
+| 核心机制 | `gated-attention` | Gated Attention · Qwen/Alibaba | post-SDPA 逐头 sigmoid gate；PPL -0.72% |
+| 核心机制 | `muon` | Muon · Moonshot AI/UCLA | 隐藏矩阵 Newton–Schulz 正交更新；30-step PPL +5.61%（变差），作为独立 optimizer genome |
 | 核心机制 | `wide-deep` | Wide & Deep · Google | wide 交叉 + deep tower；NDCG@10 +5.45% |
 | 核心机制 | `deepfm` | DeepFM · Huawei | FM + deep 共享 embedding；NDCG@10 +23.58% |
 | 核心机制 | `youtube-dnn` | YouTube DNN · Google/YouTube | 非线性用户塔；NDCG@10 -6.61%，保留负结果 |

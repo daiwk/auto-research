@@ -148,6 +148,7 @@
 
 ## 2025-05
 
+- [Gated Attention](../2505.06708-gated-attention/README.md)：对 SDPA 的逐头输出施加 query-dependent sigmoid gate，增加非线性并产生可学习稀疏调制。
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：用 ordered-regression Transformer 预测多目标前缀价值，再以多目标队列、mask-driven selection 和 MMR 生成 slate。
 - [GenRank](../2505.04180-genrank/README.md)：把多种用户动作编码为生成目标，通过 action-oriented generation 完成端到端排序。
 - [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache，扩展超长用户行为序列建模。
@@ -162,6 +163,8 @@
 
 ## 2025-02
 
+- [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：用压缩全局历史、query-selected fine blocks 和滑窗局部路径构成训练推理一致的稀疏注意力。
+- [Muon](../2502.16982-muon/README.md)：对隐藏矩阵 momentum 做 Newton–Schulz 正交化，并用 weight decay 与 shape-aware scaling 支持大规模训练。
 - [MIM](../2502.00321-mim/README.md)：以多模态遮盖预训练、内容兴趣 SFT 与 CiUBM 把内容语义注入用户行为建模。
 - [FuXi-α](../2502.03036-fuxi-alpha/README.md)：以自适应多通道注意力和分阶段 FFN 扩展推荐特征交互容量。
 - [FilterLLM](../2502.16924-filterllm/README.md)：将新品文本直接生成为用户分布，并用行为信号校准十亿级冷启动召回。

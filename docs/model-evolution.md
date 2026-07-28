@@ -201,14 +201,16 @@ auto-research evolve \
 
 三轮默认分工：
 
-1. **结构轮**：GPT baseline、GQA、LLaMA-style RMSNorm/RoPE/SwiGLU、parallel attention/FFN、Möbius RoPE、Naju，以及 AdaDSF 的 dense calibration → Top-K token routing → feature alignment；数据和训练预算保持不变。Windowed-MTP 属于训练后的 serving 优化，通过独立 reproduction adapter 评测，不用 PPL 伪装成结构收益。
+1. **结构轮**：GPT baseline、GQA、LLaMA-style RMSNorm/RoPE/SwiGLU、parallel attention/FFN、Möbius RoPE、Naju、Native Sparse Attention、Gated Attention，以及 AdaDSF 的 dense calibration → Top-K token routing → feature alignment；数据和训练预算保持不变。NSA 与 Gated Attention 还可组合为 `nsa_gated_attention`。Windowed-MTP 属于训练后的 serving 优化，通过独立 reproduction adapter 评测，不用 PPL 伪装成结构收益。
 2. **数据轮**：WikiText-only、WikiText + Tiny Shakespeare narrative mixture、从 narrative 向 WikiText 退火的 curriculum；冻结冠军结构。
 3. **后训练轮**：普通 SFT、低学习率 SFT、NEFTune，以及
    `dynamic_rubric`（动态 rubric evaluator 与策略协同更新）和
    `off_context_grpo`（特权信息采样、group-relative advantage、importance-ratio
    校正）；使用 Stanford Alpaca/GSM8K 公共训练切片并冻结预训练配方。
 
-当 `--generations` 大于 3 时，后续轮次会继续搜索 hidden size、层数、学习率、batch size 和 context length；每个候选仍继承上一轮冠军，形成可追溯的多轮进化链。
+当 `--generations` 大于 3 时，后续轮次会继续搜索 hidden size、层数、学习率、优化器（含 Muon）、batch size 和 context length；结构与优化器是独立 genome 轴，因此 NSA/Gated Attention 可继续与 Muon 组合；每个候选仍继承上一轮冠军，形成可追溯的多轮进化链。
+
+2025 P0 的 WikiText-2 同预算对照中，NSA / Gated Attention 的 PPL 分别相对 LLaMA baseline 变化 `-3.17% / -0.72%`；Muon 在未调参的 30-step 默认学习率下为 `+5.61%`（更差）。四轮组合 evolve 的结构轮中 NSA 是三个结构候选里最好，但没有击败当前 GPT baseline；后续 SFT 与 hidden-size 搜索获得最终冠军。完整稳定摘要见 [`evolution/llm-p0-2025-wikitext2-seed42.json`](evolution/llm-p0-2025-wikitext2-seed42.json)，负结果被保留。
 
 选择目标为 `WikiText validation loss + 0.15 × instruction validation loss`。WikiText test 和最终冠军只在三轮结束后评估。默认使用完整 WikiText-2 train；`--maximum-train-tokens` 仅用于 smoke test。
 

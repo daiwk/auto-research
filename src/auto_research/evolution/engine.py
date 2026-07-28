@@ -212,6 +212,21 @@ def _paper_ids(genome, papers):
             matched.append(paper.arxiv_id)
         elif paper.architecture == genome.post_training:
             matched.append(paper.arxiv_id)
+        elif (
+            paper.architecture == "native_sparse_attention"
+            and genome.architecture == "nsa_gated_attention"
+        ):
+            matched.append(paper.arxiv_id)
+        elif (
+            paper.architecture == "gated_attention"
+            and genome.architecture == "nsa_gated_attention"
+        ):
+            matched.append(paper.arxiv_id)
+        elif (
+            paper.architecture == "optimizer:muon"
+            and genome.optimizer == "muon"
+        ):
+            matched.append(paper.arxiv_id)
         elif paper.architecture and ":" in paper.architecture:
             component, value = paper.architecture.split(":", 1)
             selected = {

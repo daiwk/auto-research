@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.21535](https://arxiv.org/abs/2607.21535) |
 | 公司/机构 | NVIDIA |
 | 首次公开日期 | 2026-07-23（arXiv v1） |
-| 原文开源代码 | 是：[avalliappan-nvidia/windowed-mtp-b200](https://github.com/avalliappan-nvidia/windowed-mtp-b200) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/avalliappan-nvidia/windowed-mtp-b200) |
 | Adapter | `windowed-mtp` |
 | 本地复现代码 | [`src/auto_research/reproductions/windowed_mtp/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/windowed_mtp/) |
 

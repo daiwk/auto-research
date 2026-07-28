@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2008.13535](https://arxiv.org/abs/2008.13535) |
 | 公司/机构 | Google |
 | 首次公开日期 | 2020-08-19（arXiv v1） |
-| 原文开源代码 | 否：未发现原作者针对本文发布的独立代码仓库（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
 | Adapter | `dcn-v2` |
 | 本地复现代码 | [`src/auto_research/reproductions/dcn_v2/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/dcn_v2/) |
 

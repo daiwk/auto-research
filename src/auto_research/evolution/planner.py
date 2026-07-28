@@ -61,6 +61,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "mobius_rope", "naju", "adadsf",
             "engram", "looped_latent_attention", "gaugequant",
             "switch_transformer", "mamba", "switch_attention",
+            "native_sparse_attention", "gated_attention",
+            "nsa_gated_attention", "optimizer:muon",
         ]
         text = direction.lower().replace("-", "")
         priority_terms = {
@@ -73,11 +75,24 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "switch_transformer": ("switch transformer", "sparse moe", "稀疏 moe"),
             "mamba": ("mamba", "selective ssm", "选择性状态空间"),
             "switch_attention": ("switch attention", "swiattn", "动态注意力路由"),
+            "native_sparse_attention": (
+                "native sparse attention", "nsa", "原生稀疏注意力",
+            ),
+            "gated_attention": (
+                "gated attention", "attention gate", "门控注意力",
+            ),
+            "optimizer:muon": ("muon", "正交优化器"),
         }
         for architecture, terms in priority_terms.items():
             if any(term in text for term in terms):
                 values.remove(architecture)
                 values.insert(0, architecture)
+        if (
+            any(term in text for term in ("native sparse attention", "nsa", "原生稀疏注意力"))
+            and any(term in text for term in ("gated attention", "attention gate", "门控注意力"))
+        ):
+            values.remove("nsa_gated_attention")
+            values.insert(0, "nsa_gated_attention")
         if any(term in text for term in ("adadsf", "adaptive depth", "动态深度", "深度稀疏")):
             values.remove("adadsf")
             values.insert(0, "adadsf")
@@ -152,6 +167,11 @@ def propose(parent: Genome, generation: int, index: int, architectures: list[str
 def _propose_llm(parent, generation, index, architectures, rng):
     if generation == 1:
         architecture = architectures[index % len(architectures)]
+        if architecture.startswith("optimizer:"):
+            optimizer = architecture.split(":", 1)[1]
+            return replace(parent, optimizer=optimizer), (
+                f"优化器研究：{optimizer}；保持结构、数据配方和训练预算不变"
+            )
         return replace(parent, architecture=architecture), (
             f"结构研究：{architecture}；保持数据配方、训练预算和后训练方法不变"
         )
@@ -183,6 +203,7 @@ def _propose_llm(parent, generation, index, architectures, rng):
     knobs = (
         ("dimensions", [256, 384, 512]), ("layers", [4, 6, 8]),
         ("learning_rate", [1e-4, 3e-4, 6e-4]),
+        ("optimizer", ["adamw", "muon", "adam", "adagrad"]),
         ("batch_size", [2, 4, 8]), ("sequence_length", [64, 128, 256]),
     )
     name, values = knobs[(generation + index) % len(knobs)]

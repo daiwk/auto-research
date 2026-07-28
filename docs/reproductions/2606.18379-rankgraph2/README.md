@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2606.18379](https://arxiv.org/abs/2606.18379) |
 | 公司/机构 | Meta |
 | 首次公开日期 | 2026-06-16（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-27） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
 | Adapter | `rankgraph2` |
 | 本地复现代码 | [`src/auto_research/reproductions/rankgraph2/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/rankgraph2/) |
 

@@ -143,6 +143,9 @@ def test_builtin_adapters_are_discoverable():
         "adaf2m2",
         "mgoe",
         "click-a-buy-b",
+        "native-sparse-attention",
+        "gated-attention",
+        "muon",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
