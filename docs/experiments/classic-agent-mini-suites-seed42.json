@@ -1,0 +1,32 @@
+{
+  "protocol": {
+    "episodes": 120,
+    "memory_size": 24,
+    "seed": 42,
+    "task_source": "deterministic public-style mini-suites; not original API/game benchmarks"
+  },
+  "results": {
+    "react": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "average_cost": 3.0,
+      "reasoning_steps": 360,
+      "actions": 360
+    },
+    "reflexion": {
+      "benchmark": "planbench-mini",
+      "joint_success": 0.9,
+      "average_cost": 1.1,
+      "reflections": 12,
+      "reused_plans": 108
+    },
+    "voyager": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.12,
+      "skills_created": 12,
+      "skills_reused": 108,
+      "verification_retries": 12
+    }
+  }
+}

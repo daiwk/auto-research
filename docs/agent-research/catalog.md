@@ -7,6 +7,9 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与行动 | [ReAct](2210.03629-react/README.md) | Princeton / Google Research，2022-10-06 | [已开源](https://github.com/ysymyth/ReAct) | `react` |
+| 自我反思 | [Reflexion](2303.11366-reflexion/README.md) | Northeastern / MIT / Princeton，2023-03-20 | [已开源](https://github.com/noahshinn/reflexion) | `reflexion` |
+| 终身学习 | [Voyager](2305.16291-voyager/README.md) | NVIDIA / Caltech / UT Austin / Stanford / ASU，2023-05-25 | [已开源](https://github.com/MineDojo/Voyager) | `voyager` |
 | 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | National University of Singapore，2026-02-25 | [匿名仓库](https://anonymous.4open.science/r/code-release-456D/) | `u-mem` |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | Microsoft Research，2025-10-06 | 未发现 | `legomem` |
 | 工具记忆 | [MemTool](2507.21428-memtool/README.md) | PwC CTIO，2025-07-29 | 未发现 | `memtool` |

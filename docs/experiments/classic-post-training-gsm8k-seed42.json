@@ -1,0 +1,38 @@
+{
+  "protocol": {
+    "dataset": "OpenAI GSM8K official train/test JSONL",
+    "task": "six-candidate policy selection; not free-form generation",
+    "train_examples": 512,
+    "validation_examples": 128,
+    "steps": 300,
+    "group_size": 4,
+    "learning_rate": 0.08,
+    "seed": 42
+  },
+  "baseline": {
+    "accuracy": 0.1640625,
+    "mean_reward": 0.31261065795890286
+  },
+  "results": {
+    "ppo-rlhf": {
+      "accuracy": 0.8125,
+      "mean_reward": 0.8335089378910975,
+      "kl_from_reference": 0.8731202191948979,
+      "critic_updates": 300,
+      "rollout_policy_refreshes": 18
+    },
+    "rloo": {
+      "accuracy": 0.828125,
+      "mean_reward": 0.8508578717725304,
+      "kl_from_reference": 0.5707328389167291,
+      "leave_one_out_samples": 4,
+      "value_model_parameters": 0
+    },
+    "remax": {
+      "accuracy": 0.703125,
+      "mean_reward": 0.7553879371297694,
+      "kl_from_reference": 0.79386672912852,
+      "value_model_parameters": 0
+    }
+  }
+}

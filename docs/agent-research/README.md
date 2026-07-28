@@ -14,6 +14,9 @@ mini-suite 验证状态更新、跨 episode 复用和受限上下文管理；这
 - [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态和待接入接口。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
+- [ReAct](2210.03629-react/README.md)：Thought、Action、Observation 的交替执行轨迹。
+- [Reflexion](2303.11366-reflexion/README.md)：失败反馈转语言反思并跨 trial 复用。
+- [Voyager](2305.16291-voyager/README.md)：自动课程、执行验证和可增长技能库。
 - [U-Mem](2602.22406-u-mem/README.md)：成本感知的主动知识获取与记忆验证。
 - [LEGOMem](2510.04851-legomem/README.md)：可组合的编排器与执行过程记忆。
 - [MemTool](2507.21428-memtool/README.md)：有限上下文中的动态工具记忆。
@@ -39,14 +42,17 @@ flowchart LR
 | 方向 | 方法 | 核心机制 | 本地评测 | 状态 |
 |---|---|---|---|---|
 | 公平基线 | Long-context | 保留全部历史，不压缩记忆 | EvoMem mini | 已实现 |
+| 推理与行动 | [ReAct](2210.03629-react/README.md) | Thought → Action → Observation | ScaleMCP mini | 机制复现 |
+| 自我改进 | [Reflexion](2303.11366-reflexion/README.md) | verbal feedback 与 episodic reflection | PlanBench mini | 机制复现 |
+| 终身学习 | [Voyager](2305.16291-voyager/README.md) | curriculum、skill library、self-verification | PlanBench mini | 机制复现 |
 | 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | 分级获取、语义检索、Thompson sampling | EvoMem mini | 机制复现 |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | 编排与执行过程单元跨 episode 复用 | PlanBench mini | 机制复现 |
 | 工具记忆 | [MemTool](2507.21428-memtool/README.md) | 工作流保护与近期性/成功率淘汰 | ScaleMCP mini | 机制复现 |
 
 ## 本地实验快照
 
-固定 120 episodes、seed 42。任务成功率均为 1.0，因此当前对比重点是上下文成本和
-可解释复用状态，不应把数字与论文 benchmark 横向比较。
+固定 120 episodes、seed 42。经典方法用于验证状态演化：Reflexion 明确让每个新任务
+族首次失败再学习，因此不能只按最终成功率排序，也不应与论文 benchmark 横向比较。
 
 | 方法与 benchmark | joint success | 平均成本 | 额外诊断 |
 |---|---:|---:|---|
@@ -54,9 +60,14 @@ flowchart LR
 | U-Mem · EvoMem mini | 1.0000 | 3.0500 | 检索失败后升级 tool research |
 | LEGOMem · PlanBench mini | 1.0000 | 1.1200 | 108 次过程单元复用 |
 | MemTool · ScaleMCP mini | 1.0000 | 1.9812 | 200 次受控工具淘汰 |
+| ReAct · ScaleMCP mini | 1.0000 | 3.0000 | 360 reasoning/action steps |
+| Reflexion · PlanBench mini | 0.9000 | 1.1000 | 12 条反思、108 次复用 |
+| Voyager · PlanBench mini | 1.0000 | 1.1200 | 12 个技能、108 次复用 |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
+经典 Agent 稳定指标见
+[`classic-agent-mini-suites-seed42.json`](../experiments/classic-agent-mini-suites-seed42.json)。
 
 ## 一键运行
 
@@ -65,6 +76,8 @@ auto-research agent-eval --method u-mem --benchmark evomem-mini
 auto-research agent-eval --method legomem --benchmark planbench-mini
 auto-research agent-eval --method memtool --benchmark scalemcp-mini \
   --episodes 200 --memory-size 8
+auto-research agent-eval --method reflexion --benchmark planbench-mini \
+  --episodes 120 --memory-size 24
 ```
 
 产物写入 `runs/agent-research/<method>-<benchmark>-seed<seed>/`，包含逐步 trace、

@@ -121,7 +121,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     post_train.add_argument(
         "--algorithm",
-        choices=["dpo", "grpo", "lightning-opd", "gprl", "tcr"],
+        choices=[
+            "dpo", "grpo", "ppo-rlhf", "rloo", "remax",
+            "lightning-opd", "gprl", "tcr",
+        ],
         required=True,
     )
     post_train.add_argument(
@@ -145,7 +148,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     agent_eval.add_argument(
         "--method",
-        choices=["long-context", "u-mem", "legomem", "memtool"],
+        choices=[
+            "long-context", "react", "reflexion", "voyager",
+            "u-mem", "legomem", "memtool",
+        ],
         required=True,
     )
     agent_eval.add_argument(

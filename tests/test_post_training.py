@@ -6,7 +6,8 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
 
 
 @pytest.mark.parametrize(
-    "algorithm", ["dpo", "grpo", "lightning-opd", "gprl", "tcr"]
+    "algorithm",
+    ["dpo", "grpo", "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr"],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
     result, run_dir = PostTrainingRunner(
@@ -35,3 +36,30 @@ def test_lightning_opd_has_no_online_teacher_calls(tmp_path: Path):
     assert result.training["teacher_cache_entries"] == 32
     assert result.training["teacher_prefill_calls"] == 32
     assert result.training["online_teacher_calls"] == 0
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostic"),
+    [
+        ("ppo-rlhf", "value_loss"),
+        ("rloo", "leave_one_out_variance"),
+        ("remax", "greedy_baseline_reward"),
+    ],
+)
+def test_classic_rlhf_mechanisms_are_exposed(
+    tmp_path: Path, algorithm: str, diagnostic: str
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=20,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert diagnostic in result.training["last_diagnostics"]
+    if algorithm == "ppo-rlhf":
+        assert result.training["critic_updates"] == 20
+        assert result.training["rollout_policy_refreshes"] == 1
+    else:
+        assert result.training["last_diagnostics"]["value_model_parameters"] == 0

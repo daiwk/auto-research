@@ -24,6 +24,9 @@ nav:
           - 方法索引: post-training/catalog.md
           - 统一评测协议: post-training/benchmark.md
           - 论文实现:
+              - InstructGPT / PPO-RLHF: post-training/2203.02155-ppo-rlhf/README.md
+              - RLOO: post-training/2402.14740-rloo/README.md
+              - ReMax: post-training/2310.10505-remax/README.md
               - Lightning OPD: post-training/2604.13010-lightning-opd/README.md
               - GPRL: post-training/2605.18721-gprl/README.md
               - TCR: post-training/2607.19824-tcr/README.md
@@ -32,6 +35,9 @@ nav:
           - 方法索引: agent-research/catalog.md
           - 统一评测协议: agent-research/benchmark.md
           - 论文实现:
+              - ReAct: agent-research/2210.03629-react/README.md
+              - Reflexion: agent-research/2303.11366-reflexion/README.md
+              - Voyager: agent-research/2305.16291-voyager/README.md
               - U-Mem: agent-research/2602.22406-u-mem/README.md
               - LEGOMem: agent-research/2510.04851-legomem/README.md
               - MemTool: agent-research/2507.21428-memtool/README.md
