@@ -7,7 +7,11 @@ from typing import Any
 
 ALGORITHMS = (
     "dpo",
+    "kto",
+    "orpo",
     "grpo",
+    "dapo",
+    "gspo",
     "ppo-rlhf",
     "rloo",
     "remax",

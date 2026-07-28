@@ -7,7 +7,12 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
 
 @pytest.mark.parametrize(
     "method",
-    ["long-context", "react", "reflexion", "voyager", "u-mem", "legomem", "memtool"],
+    [
+        "long-context", "react", "reflexion", "voyager",
+        "tree-of-thoughts", "lats", "toolformer",
+        "self-refine", "rewoo", "autogen", "pearl",
+        "u-mem", "legomem", "memtool",
+    ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
     result, run_dir = AgentResearchRunner(
@@ -78,3 +83,63 @@ def test_voyager_builds_and_reuses_skill_library(tmp_path: Path):
     assert result.diagnostics["skills_created"] > 0
     assert result.diagnostics["skills_reused"] > 0
     assert result.diagnostics["verification_retries"] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark"),
+    [
+        ("tree-of-thoughts", "planbench-mini"),
+        ("lats", "planbench-mini"),
+        ("toolformer", "scalemcp-mini"),
+    ],
+)
+def test_classic_search_and_tool_agents_expose_their_mechanisms(
+    tmp_path: Path, method: str, benchmark: str
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark=benchmark,
+            episodes=24,
+            memory_size=12,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    if method == "toolformer":
+        assert result.diagnostics["tool_calls_accepted"] > 0
+        assert (
+            result.diagnostics["tool_call_candidates"]
+            > result.diagnostics["tool_calls_accepted"]
+        )
+    else:
+        assert result.diagnostics["tree_nodes_expanded"] > 0
+        assert result.diagnostics["backtracks"] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "diagnostic"),
+    [
+        ("self-refine", "refinements"),
+        ("rewoo", "worker_calls"),
+        ("autogen", "agent_messages"),
+        ("pearl", "policy_updates"),
+    ],
+)
+def test_refinement_multi_agent_and_adaptive_planning_mechanisms(
+    tmp_path: Path, method: str, diagnostic: str
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark="planbench-mini",
+            episodes=36,
+            memory_size=16,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    assert result.diagnostics[diagnostic] > 0
+    if method == "pearl":
+        assert result.diagnostics["plan_explorations"] > 0
+        assert result.diagnostics["reused_plans"] > 0

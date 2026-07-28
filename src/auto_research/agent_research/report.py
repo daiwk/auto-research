@@ -11,6 +11,13 @@ PAPERS = {
     "react": ("ReAct", "https://arxiv.org/abs/2210.03629"),
     "reflexion": ("Reflexion", "https://arxiv.org/abs/2303.11366"),
     "voyager": ("Voyager", "https://arxiv.org/abs/2305.16291"),
+    "tree-of-thoughts": ("Tree of Thoughts", "https://arxiv.org/abs/2305.10601"),
+    "lats": ("Language Agent Tree Search", "https://arxiv.org/abs/2310.04406"),
+    "toolformer": ("Toolformer", "https://arxiv.org/abs/2302.04761"),
+    "self-refine": ("Self-Refine", "https://arxiv.org/abs/2303.17651"),
+    "rewoo": ("ReWOO", "https://arxiv.org/abs/2305.18323"),
+    "autogen": ("AutoGen", "https://arxiv.org/abs/2308.08155"),
+    "pearl": ("PEARL", "https://arxiv.org/abs/2601.20439"),
 }
 
 
@@ -51,5 +58,12 @@ def render_report(result: AgentResearchResult) -> str:
 - reflections：{result.diagnostics['reflections']}
 - skills created / reused：{result.diagnostics['skills_created']} / {result.diagnostics['skills_reused']}
 - verification retries：{result.diagnostics['verification_retries']}
+- tree nodes / search rollouts：{result.diagnostics['tree_nodes_expanded']} / {result.diagnostics['search_rollouts']}
+- backtracks：{result.diagnostics['backtracks']}
+- accepted tool calls：{result.diagnostics['tool_calls_accepted']} / {result.diagnostics['tool_call_candidates']}
+- refinements / critic rounds：{result.diagnostics['refinements']} / {result.diagnostics['critic_rounds']}
+- plans / worker calls：{result.diagnostics['plans_created']} / {result.diagnostics['worker_calls']}
+- agent messages：{result.diagnostics['agent_messages']}
+- plan explorations / policy updates：{result.diagnostics['plan_explorations']} / {result.diagnostics['policy_updates']}
 - fidelity：{result.diagnostics['fidelity']}
 """

@@ -21,9 +21,11 @@
       "kl_from_reference": 0.06833317338028673
     },
     "grpo": {
-      "accuracy": 0.8046875,
-      "mean_reward": 0.8348038893169034,
-      "kl_from_reference": 1.1397290183143396
+      "accuracy": 0.78125,
+      "mean_reward": 0.8168955128271573,
+      "kl_from_reference": 1.0400522058527373,
+      "rollout_policy_refreshes": 18,
+      "value_model_parameters": 0
     },
     "lightning-opd": {
       "accuracy": 0.8359375,

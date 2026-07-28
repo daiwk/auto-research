@@ -285,9 +285,10 @@ DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
 
 首次运行会创建平台隔离的 `.venv-demo-*` 环境并安装依赖；后续直接复用。Linux GPU 如需指定 PyTorch CUDA wheel，可传 `TORCH_INDEX_URL`；其他参数见[运行环境指南](runtime.md)。
 
-后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 PPO-RLHF、RLOO、ReMax、
-GPRL、TCR、DPO 或 GRPO。Agent demo 可通过
-`METHOD=react|reflexion|voyager|legomem BENCHMARK=planbench-mini
+后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 DPO、KTO、ORPO、GRPO、
+DAPO、GSPO、PPO-RLHF、RLOO、ReMax、GPRL 或 TCR。Agent demo 可通过
+`METHOD=react|self-refine|reflexion|rewoo|autogen|pearl|voyager|tree-of-thoughts|lats|toolformer
+BENCHMARK=planbench-mini
 ./demo-agent.sh` 切换方法和环境。完整说明见
 [LLM 后训练](post-training/README.md)和[Agent 论文研究](agent-research/README.md)。
 

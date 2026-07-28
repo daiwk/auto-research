@@ -6,6 +6,61 @@
     "task_source": "deterministic public-style mini-suites; not original API/game benchmarks"
   },
   "results": {
+    "self-refine": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 2.0,
+      "refinements": 120,
+      "critic_rounds": 120,
+      "reasoning_steps": 240
+    },
+    "rewoo": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 3.5,
+      "plans_created": 120,
+      "worker_calls": 360,
+      "actions": 360
+    },
+    "autogen": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 3.0,
+      "plans_created": 120,
+      "agent_messages": 360,
+      "critic_rounds": 120
+    },
+    "pearl": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.12,
+      "plans_created": 12,
+      "plan_explorations": 24,
+      "policy_updates": 12,
+      "reused_plans": 108
+    },
+    "tree-of-thoughts": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 2.5,
+      "tree_nodes_expanded": 1200,
+      "backtracks": 480
+    },
+    "lats": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 4.0,
+      "search_rollouts": 480,
+      "reflections": 360,
+      "backtracks": 360
+    },
+    "toolformer": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "average_cost": 3.0,
+      "tool_call_candidates": 540,
+      "tool_calls_accepted": 360
+    },
     "react": {
       "benchmark": "scalemcp-mini",
       "joint_success": 1.0,

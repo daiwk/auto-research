@@ -32,6 +32,13 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | ReAct · ScaleMCP mini | 1.0000 | 3.0000 | reasoning/actions 360/360 |
 | Reflexion · PlanBench mini | 0.9000 | 1.1000 | reflections 12 |
 | Voyager · PlanBench mini | 1.0000 | 1.1200 | skills created/reused 12/108 |
+| Tree of Thoughts · PlanBench mini | 1.0000 | 2.5000 | expanded/backtracked 1200/480 |
+| LATS · PlanBench mini | 1.0000 | 4.0000 | rollouts/reflections 480/360 |
+| Toolformer · ScaleMCP mini | 1.0000 | 3.0000 | accepted/candidate calls 360/540 |
+| Self-Refine · PlanBench mini | 1.0000 | 2.0000 | feedback/refinement 120/120 |
+| ReWOO · PlanBench mini | 1.0000 | 3.5000 | plans/worker calls 120/360 |
+| AutoGen · PlanBench mini | 1.0000 | 3.0000 | agent messages/critic rounds 360/120 |
+| PEARL · PlanBench mini | 1.0000 | 1.1200 | explorations/updates/reuse 24/12/108 |
 
 稳定数据：
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。

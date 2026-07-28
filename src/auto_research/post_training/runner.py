@@ -50,7 +50,14 @@ class PostTrainingRunner:
             "online_teacher_calls": 0,
             "drift_events": state.drift_events,
             "critic_updates": state.critic_updates,
-            "rollout_policy_refreshes": state.ppo_updates // 16,
+            "rollout_policy_refreshes": (
+                {
+                    "ppo-rlhf": state.ppo_updates,
+                    "grpo": state.grpo_updates,
+                    "dapo": state.dapo_updates,
+                    "gspo": state.gspo_updates,
+                }.get(config.algorithm, 0)
+            ) // 16,
             "last_diagnostics": last_diagnostics,
             "fidelity": "mechanism reproduction on a candidate-policy model",
         }
