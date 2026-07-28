@@ -23,7 +23,7 @@ class PostTrainingEvolutionEvaluator:
     def summary(self):
         return {
             "dataset": self.dataset,
-            "algorithms": 16,
+            "algorithms": 19,
             "seeds": list(self.seeds),
             "selection": (
                 "free-generation exact accuracy + verifier reward"
@@ -185,7 +185,12 @@ class AgentEvolutionEvaluator:
             plan = None
             if genome.agent_memory != "none" and key in memory:
                 plan, reused = memory[key], reused + 1
-                cost += 0.5 if genome.agent_memory == "legomem" else 0.8
+                memory_cost = {
+                    "legomem": 0.5,
+                    "generative-agents": 0.7,
+                    "memgpt": 0.6,
+                }.get(genome.agent_memory, 0.8)
+                cost += memory_cost
             if plan is None:
                 plan, planning_cost = _plan(task, genome.agent_planner, rng)
                 cost += planning_cost
@@ -226,6 +231,8 @@ def _plan(task, method, rng):
     if method == "lats":
         candidates = (target[:-1], tuple(reversed(target)), target)
         return candidates[int(np.argmax([row == target for row in candidates]))], 3.0
+    if method == "hugginggpt":
+        return target, 1.0 + 0.45 * len(target)
     return target, float(len(task.context))
 
 
@@ -243,6 +250,16 @@ def _apply_tools(task, plan, policy, active, capacity, step):
             active[tool] = step
         available = all(tool in active for tool in task.required_tools)
         return task.plan if available else (), 0.25 * len(active)
+    if policy == "mrkl":
+        symbolic = {
+            "calculator", "calendar", "maps", "weather",
+            "database", "spreadsheet",
+        }
+        expert_cost = sum(
+            0.25 if tool in symbolic else 0.45
+            for tool in task.required_tools
+        )
+        return task.plan, 0.2 + expert_cost
     return tuple(plan), 0.0
 
 

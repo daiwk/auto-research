@@ -10,6 +10,7 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
     [
         "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
         "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr",
+        "constitutional-ai", "rrhf", "raft",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -145,3 +146,33 @@ def test_free_generation_algorithms_use_token_rollouts_and_verifier(
 def test_candidate_algorithms_reject_free_generation_only_objectives():
     with pytest.raises(ValueError, match="requires a free-generation dataset"):
         PostTrainingConfig(algorithm="simpo", dataset="arithmetic-smoke")
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        (
+            "constitutional-ai",
+            ("critique_violation", "revision_changed", "ai_preference_margin"),
+        ),
+        ("rrhf", ("ranking_pairs", "ranking_violations", "sft_best_nll")),
+        ("raft", ("sampled_responses", "kept_fraction", "selected_reward_quantile")),
+    ],
+)
+def test_missing_classic_alignment_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=20,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+    if algorithm == "constitutional-ai":
+        assert result.training["last_diagnostics"]["human_preference_labels"] == 0
+    if algorithm == "raft":
+        assert result.training["last_diagnostics"]["kept_responses"] == 1

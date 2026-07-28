@@ -1,0 +1,46 @@
+{
+  "protocol": {
+    "episodes": 120,
+    "memory_size": 24,
+    "seed": 42,
+    "baseline": "long-context on the same mini-suite",
+    "fidelity": "mechanism reproduction on deterministic benchmark mini-suites"
+  },
+  "baseline": {
+    "method": "long-context",
+    "joint_success": 1.0,
+    "average_cost": 64.5
+  },
+  "methods": {
+    "mrkl": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.25,
+      "router_calls": 360,
+      "symbolic_expert_calls": 170
+    },
+    "hugginggpt": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 2.350000000000002,
+      "model_matches": 360,
+      "dependency_edges": 240
+    },
+    "generative-agents": {
+      "benchmark": "evomem-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.7900000000000034,
+      "memories_retrieved": 354,
+      "reflection_syntheses": 30
+    },
+    "memgpt": {
+      "benchmark": "evomem-mini",
+      "joint_success": 1.0,
+      "average_cost": 0.9200000000000021,
+      "archival_writes": 108,
+      "page_ins": 96,
+      "interrupts": 108
+    }
+  },
+  "interpretation": "The deterministic suites test state transitions and cost under a shared protocol. Success=1.0 is not an original-paper benchmark score."
+}

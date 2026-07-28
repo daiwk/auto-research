@@ -32,6 +32,9 @@
 - [SimPO](2405.14734-simpo/README.md)：reference-free、长度归一化偏好目标。
 - [LUSPO](2602.05261-luspo/README.md)：校正 sequence policy objective 的长度偏差。
 - [CoBA-RL](2606.22317-coba-rl/README.md)：能力边界探测、教师引导与课程 RL。
+- [Constitutional AI](2212.08073-constitutional-ai/README.md)：自我批评/修订与 AI preference RLAIF。
+- [RRHF](2304.05302-rrhf/README.md)：全响应 reward ranking 与 best-response SFT。
+- [RAFT](2304.06767-raft/README.md)：当前策略采样、reward 选优与迭代 SFT。
 
 ## 研究闭环
 
@@ -67,6 +70,9 @@ flowchart LR
 | 离线偏好 | [SimPO](2405.14734-simpo/README.md) | 长度归一化、reference-free margin | arithmetic / GSM8K free generation | token 级复现 |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | length-unbiased sequence ratio | arithmetic / GSM8K free generation | token 级复现 |
 | 课程 RL | [CoBA-RL](2606.22317-coba-rl/README.md) | 动态能力边界与 teacher guidance | arithmetic / GSM8K free generation | token 级复现 |
+| AI 反馈安全对齐 | [Constitutional AI](2212.08073-constitutional-ai/README.md) | constitution critique/revision + AI preference | GSM8K candidate | 机制复现 |
+| 全排序偏好 | [RRHF](2304.05302-rrhf/README.md) | reward ordering、ranking hinge、best SFT | GSM8K candidate | 机制复现 |
+| 选优微调 | [RAFT](2304.06767-raft/README.md) | policy sampling、reward top-1 filtering、SFT | GSM8K candidate | 机制复现 |
 
 ## 公开实验快照
 
@@ -87,6 +93,9 @@ flowchart LR
 | Lightning OPD | 0.1641 | **0.8359** | 0.8269 |
 | GPRL | 0.1641 | 0.3672 | 1.1022 |
 | TCR | 0.1641 | **0.8359** | 0.5629 |
+| Constitutional AI | 0.1641 | **0.8438** | 1.0214 |
+| RRHF | 0.1641 | 0.8125 | 0.8344 |
+| RAFT | 0.1641 | **0.8438** | 0.8789 |
 
 完整定义、smoke 结果和差异解释见[统一评测协议](benchmark.md)，稳定指标见
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
@@ -94,6 +103,8 @@ flowchart LR
 [`classic-post-training-gsm8k-seed42.json`](../experiments/classic-post-training-gsm8k-seed42.json)。
 自由生成方法的三 seed 指标见
 [`free-generation-post-training-seeds42-44.json`](../experiments/free-generation-post-training-seeds42-44.json)。
+本批经典缺口指标见
+[`p0-missing-post-training-gsm8k-seed42.json`](../experiments/p0-missing-post-training-gsm8k-seed42.json)。
 
 L2 小预算实验固定 arithmetic free generation、48 train examples、20-step SFT warmup、
 6 次后训练更新和 seeds 42/43/44。四种方法的 exact accuracy 均为 0；SimPO 的

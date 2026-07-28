@@ -42,6 +42,9 @@ nav:
               - SimPO: post-training/2405.14734-simpo/README.md
               - LUSPO: post-training/2602.05261-luspo/README.md
               - CoBA-RL: post-training/2606.22317-coba-rl/README.md
+              - Constitutional AI: post-training/2212.08073-constitutional-ai/README.md
+              - RRHF: post-training/2304.05302-rrhf/README.md
+              - RAFT: post-training/2304.06767-raft/README.md
       - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md
@@ -66,6 +69,10 @@ nav:
               - Agent Lightning: agent-research/2508.03680-agent-lightning/README.md
               - SWE-agent: agent-research/2405.15793-swe-agent/README.md
               - OpenHands: agent-research/2407.16741-openhands/README.md
+              - MRKL: agent-research/2205.00445-mrkl/README.md
+              - HuggingGPT: agent-research/2303.17580-hugginggpt/README.md
+              - Generative Agents: agent-research/2304.03442-generative-agents/README.md
+              - MemGPT: agent-research/2310.08560-memgpt/README.md
   - 项目文档:
       - 项目 README: project-readme.md
       - 架构与扩展: architecture.md

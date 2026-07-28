@@ -17,6 +17,8 @@
 | 外部反馈 | CRITIC | 已实现 | 真实失败 patch、测试反馈和修订 |
 | Agent RL | Agent Lightning | 已实现 | 执行事件、reward、credit update 与策略复用 |
 | 软件工程 Agent | SWE-agent、OpenHands | 已实现（local） | 真实临时仓库、编辑、命令和回归测试 |
+| 模块化专家系统 | MRKL、HuggingGPT | 已实现 | 神经符号 router；模型能力匹配与依赖图执行 |
+| 经典长期状态 | Generative Agents、MemGPT | 已实现 | 记忆打分/反思；虚拟上下文换入换出 |
 
 ## 下一阶段缺口
 
@@ -29,6 +31,6 @@
 
 ## 当前结论
 
-经典主干已覆盖思考/行动、搜索、反思、工具、多 Agent、记忆、Planner RL 和真实代码
-执行。`swebench-local` 不冒充官方数据；下一优先级是外部公开环境 adapter 与可训练
-LLM executor。
+经典主干已覆盖思考/行动、搜索、反思、神经符号与专家模型编排、多 Agent、长期记忆、
+虚拟上下文、Planner RL 和真实代码执行。`swebench-local` 不冒充官方数据；下一优先级
+仍是用户已暂缓的外部公开环境 adapter 与可训练 LLM executor。

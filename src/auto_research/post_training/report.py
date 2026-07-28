@@ -20,6 +20,9 @@ PAPERS = {
     "simpo": ("SimPO", "https://arxiv.org/abs/2405.14734"),
     "luspo": ("Length-Unbiased Sequence Policy Optimization", "https://arxiv.org/abs/2602.05261"),
     "coba-rl": ("Boundary-aware Curriculum RL", "https://arxiv.org/abs/2606.22317"),
+    "constitutional-ai": ("Constitutional AI", "https://arxiv.org/abs/2212.08073"),
+    "rrhf": ("RRHF", "https://arxiv.org/abs/2304.05302"),
+    "raft": ("RAFT", "https://arxiv.org/abs/2304.06767"),
 }
 
 

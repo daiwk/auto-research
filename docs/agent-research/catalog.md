@@ -25,6 +25,10 @@
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | Princeton，2024-05-06 | [已开源](https://github.com/SWE-agent/SWE-agent) | `swe-agent` |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | All-Hands-AI / CMU 等，2024-07-23 | [已开源](https://github.com/All-Hands-AI/OpenHands) | `openhands` |
+| 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | AI21 Labs 等，2022-05-01 | 未发布完整实现 | `mrkl` |
+| 专家模型编排 | [HuggingGPT](2303.17580-hugginggpt/README.md) | Zhejiang / Microsoft Research Asia，2023-03-30 | [已开源](https://github.com/microsoft/JARVIS) | `hugginggpt` |
+| 记忆与反思 | [Generative Agents](2304.03442-generative-agents/README.md) | Stanford / Google Research，2023-04-07 | [已开源](https://github.com/joonspk-research/generative_agents) | `generative-agents` |
+| 虚拟上下文 | [MemGPT](2310.08560-memgpt/README.md) | UC Berkeley，2023-10-12 | [已开源](https://github.com/letta-ai/letta) | `memgpt` |
 
 ## 公平基线
 

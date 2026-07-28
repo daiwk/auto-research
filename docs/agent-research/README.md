@@ -33,6 +33,10 @@
 - [Agent Lightning](2508.03680-agent-lightning/README.md)：执行/训练解耦与 credit assignment。
 - [SWE-agent](2405.15793-swe-agent/README.md)：软件工程 Agent-Computer Interface。
 - [OpenHands](2407.16741-openhands/README.md)：编辑器、终端与 sandbox event stream。
+- [MRKL](2205.00445-mrkl/README.md)：router 分发神经与离散符号专家。
+- [HuggingGPT](2303.17580-hugginggpt/README.md)：规划、专家模型匹配、依赖执行和汇总。
+- [Generative Agents](2304.03442-generative-agents/README.md)：记忆流打分、反思与计划。
+- [MemGPT](2310.08560-memgpt/README.md)：core/working/archival 虚拟上下文与 interrupt。
 
 ## 研究闭环
 
@@ -73,6 +77,10 @@ flowchart LR
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | transition、credit update、策略复用 | SWE-style local code | 真实执行 |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | 定位、编辑、回归测试 | SWE-style local code | 真实执行 |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | 编辑器/终端 event stream | SWE-style local code | 真实执行 |
+| 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | router、神经/符号专家、结果汇总 | ScaleMCP mini | 机制复现 |
+| 专家模型编排 | [HuggingGPT](2303.17580-hugginggpt/README.md) | planning、model selection、DAG execution | PlanBench mini | 机制复现 |
+| 记忆与反思 | [Generative Agents](2304.03442-generative-agents/README.md) | recency/importance/relevance、reflection、plan | EvoMem mini | 机制复现 |
+| 虚拟上下文 | [MemGPT](2310.08560-memgpt/README.md) | tiered memory、page-in/out、interrupt | EvoMem mini | 机制复现 |
 
 ## 本地实验快照
 
@@ -100,6 +108,10 @@ flowchart LR
 | Agent Lightning · SWE local | 1.0000 | 3.6250 | patch reuse 0.7500 |
 | SWE-agent · SWE local | 1.0000 | 2.5000 | 12 次真实文件编辑 |
 | OpenHands · SWE local | 1.0000 | 2.5000 | 编辑器/终端事件流 |
+| MRKL · ScaleMCP mini | 1.0000 | 1.2500 | 360 router calls；170 symbolic calls |
+| HuggingGPT · PlanBench mini | 1.0000 | 2.3500 | 360 model matches；240 dependency edges |
+| Generative Agents · EvoMem mini | 1.0000 | 1.7900 | 354 memories；30 reflections |
+| MemGPT · EvoMem mini | 1.0000 | **0.9200** | 108 writes；96 page-ins；108 interrupts |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -107,6 +119,8 @@ flowchart LR
 [`classic-agent-mini-suites-seed42.json`](../experiments/classic-agent-mini-suites-seed42.json)。
 真实代码 sandbox 指标见
 [`agent-code-sandbox-seed42.json`](../experiments/agent-code-sandbox-seed42.json)。
+本批经典缺口指标见
+[`p0-missing-agent-mini-suites-seed42.json`](../experiments/p0-missing-agent-mini-suites-seed42.json)。
 
 ## 一键运行
 

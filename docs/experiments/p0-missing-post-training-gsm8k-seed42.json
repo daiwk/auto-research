@@ -1,0 +1,46 @@
+{
+  "protocol": {
+    "dataset": "OpenAI GSM8K official train/test JSONL",
+    "adapter": "gsm8k-candidate",
+    "train_examples": 512,
+    "validation_examples": 128,
+    "steps": 300,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "seed": 42,
+    "baseline": "untrained candidate policy",
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "baseline": {
+    "accuracy": 0.1640625,
+    "mean_reward": 0.31261065795890286,
+    "kl_from_reference": 0.0
+  },
+  "methods": {
+    "constitutional-ai": {
+      "accuracy": 0.84375,
+      "mean_reward": 0.8616564155478119,
+      "kl_from_reference": 1.0213545205106576,
+      "cumulative_critiques": 300,
+      "cumulative_revisions": 69,
+      "human_preference_labels": 0
+    },
+    "rrhf": {
+      "accuracy": 0.8125,
+      "mean_reward": 0.8400585043733009,
+      "kl_from_reference": 0.8344118615935469,
+      "ranked_responses_per_group": 6,
+      "last_ranking_pairs": 15,
+      "last_ranking_violations": 6
+    },
+    "raft": {
+      "accuracy": 0.84375,
+      "mean_reward": 0.8616564155478119,
+      "kl_from_reference": 0.8788547637092913,
+      "sampled_responses_per_update": 4,
+      "kept_responses_per_update": 1,
+      "kept_fraction": 0.25
+    }
+  },
+  "interpretation": "All gains are relative to the same untrained candidate policy. They validate objective mechanics and are not free-generation or original-paper model results."
+}

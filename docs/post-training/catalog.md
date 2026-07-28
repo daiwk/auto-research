@@ -23,6 +23,9 @@
 | Reference-free 偏好 | [SimPO](2405.14734-simpo/README.md) | Princeton，2024-05-23 | [已开源](https://github.com/princeton-nlp/SimPO) | `simpo` |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | 作者团队，2026-02-05 | 未发现 | `luspo` |
 | 能力边界课程 | [CoBA-RL](2606.22317-coba-rl/README.md) | Zhejiang / NUS，2026-06-21 | 未发现 | `coba-rl` |
+| AI 反馈安全对齐 | [Constitutional AI](2212.08073-constitutional-ai/README.md) | Anthropic，2022-12-15 | [补充材料](https://github.com/anthropics/ConstitutionalHarmlessnessPaper) | `constitutional-ai` |
+| 全排序偏好 | [RRHF](2304.05302-rrhf/README.md) | Alibaba DAMO / Tsinghua，2023-04-11 | [已开源](https://github.com/GanjinZero/RRHF) | `rrhf` |
+| Reward 选优微调 | [RAFT](2304.06767-raft/README.md) | HKUST / UIUC，2023-04-13 | [LMFlow](https://github.com/OptimalScale/LMFlow) | `raft` |
 
 ## 公平基线
 
