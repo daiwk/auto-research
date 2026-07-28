@@ -31,4 +31,7 @@ def candidate_params(
     combinations = list(itertools.product(*values))
     random.Random(seed).shuffle(combinations)
     for combination in combinations[:max_trials]:
-        yield dict(zip(keys, combination, strict=True))
+        # ``combination`` is produced from exactly one value list per key, so
+        # lengths are guaranteed equal. Avoid ``strict=True`` to keep the CLI
+        # usable on the project's still-supported Python 3.9 environments.
+        yield dict(zip(keys, combination))

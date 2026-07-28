@@ -4,6 +4,7 @@
 
 ## Alibaba
 
+- 2018-04 · [ESMM](../1804.07931-esmm/README.md)：在全曝光空间联合训练 CTR 与 CTCVR，并用 pCTR×pCVR 缓解点击后转化的选择偏差。
 - 2018-09 · [DIEN](../1809.03672-dien/README.md)：用 GRU 抽取逐步兴趣，以下一行为辅助监督并由候选相关门控控制兴趣演化。
 - 2019-05 · [BST](../1905.06874-bst/README.md)：把候选商品作为 token 与用户行为共同送入 Transformer，显式建模序列内依赖。
 - 2026-05 · [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 表示商品，再以多专家奖励和 EG-GRPO 优化生成检索。
@@ -55,7 +56,9 @@
 
 ## Google / YouTube
 
+- 2016-09 · [YouTube DNN](../recsys2016-youtube-dnn-youtube-dnn/README.md)：用观看历史聚合与深层用户塔学习候选召回向量，再做大规模 item 近邻检索。
 - 2016-06 · [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 特征交叉与 deep tower，兼顾共现记忆和未见组合泛化。
+- 2018-08 · [MMoE](../kdd2018-mmoe-mmoe/README.md)：为 CTR、转化等任务学习独立 gates，以不同权重组合同一组共享 experts。
 - 2020-08 · [DCN-V2](../2008.13535-dcn-v2/README.md)：用低秩 cross experts 与输入相关 gate 高效学习有界阶数特征交互。
 - 2021-01 · [Switch Transformer](../2101.03961-switch-transformer/README.md)：让每个 token 只路由到一个 FFN expert，以近似固定计算扩展模型容量。
 - 2023-05 · [TIGER](../2305.05065-tiger/README.md)：用 RQ-VAE 把物品量化为层级 Semantic ID，再通过自回归模型直接生成召回结果。
@@ -65,6 +68,7 @@
 
 ## Huawei
 
+- 2017-03 · [DeepFM](../1703.04247-deepfm/README.md)：用共享 embedding 联合 FM 二阶交互和 deep 高阶交互，减少手工特征交叉。
 - 2026-03 · [Switch Attention](../2603.26380-switch-attention/README.md)：与北大合作学习逐 token full/local attention 路由，把全局计算集中到必要位置。
 - 2026-07 · [AdaDSF](../2607.21291-adadsf/README.md)：根据 dense 层输入/输出相似度分配逐层 token budget，用轻量 Top-K router 和特征对齐保留稀疏模型能力。
 - 2026-07 · [RAMP](../2607.17473-ramp/README.md)：用个性化/公共双路径、可用性 mask 和 prediction-alignment 蒸馏提升缺失用户字段时的广告排序鲁棒性。
@@ -127,6 +131,7 @@
 
 ## Tencent / WeChat
 
+- 2020-09 · [PLE](../recsys2020-ple-ple/README.md)：把共享 experts 与任务专属 experts 分组，通过 CGC gates 逐层分离共性和任务特性。
 - 2026-06 · [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 驱动候选修改，并用四级验证级联阻断可运行但语义错误的架构。
 
 - 2026-07 · [BARGE](../2607.21028-barge/README.md)：用 item-level ICA 恢复多 token Semantic ID 边界，通过逐层 HPR 与正交双路径 DPD 抑制生成漂移。

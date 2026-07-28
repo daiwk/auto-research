@@ -78,8 +78,20 @@ def build_parser() -> argparse.ArgumentParser:
     evolve = commands.add_parser(
         "evolve", help="evolve an existing model with paper-inspired structures and hyperparameters"
     )
-    evolve.add_argument("--model", choices=["rankmixer", "hyformer", "micro-llm"], required=True)
-    evolve.add_argument("--dataset", choices=["movielens-100k", "movielens-1m", "wikitext-2"], required=True)
+    evolve.add_argument(
+        "--model",
+        choices=["rankmixer", "hyformer", "micro-llm", "post-training", "agent"],
+        required=True,
+    )
+    evolve.add_argument(
+        "--dataset",
+        choices=[
+            "movielens-100k", "movielens-1m", "wikitext-2",
+            "arithmetic-smoke", "gsm8k-candidate",
+            "evomem-mini", "planbench-mini", "scalemcp-mini",
+        ],
+        required=True,
+    )
     evolve.add_argument("--direction", required=True, help="natural-language research direction")
     evolve.add_argument("--dataset-dir", type=Path, default=Path("data"))
     evolve.add_argument("--output-dir", type=Path, default=Path("runs/evolution"))
@@ -96,6 +108,8 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--evaluation-users", type=int, default=1000, help="fixed validation/test cohort; 0 means all users")
     evolve.add_argument("--maximum-train-tokens", type=int, help="optional LLM smoke-test token limit")
     evolve.add_argument("--maximum-eval-tokens", type=int, default=100000, help="LLM validation/test token limit")
+    evolve.add_argument("--maximum-examples", type=int, default=512, help="post-training example limit")
+    evolve.add_argument("--agent-episodes", type=int, default=120, help="agent benchmark episodes")
     evolve.add_argument("--vocab-size", type=int, default=4096, help="local BPE vocabulary for micro-llm")
     evolve.add_argument("--llm-dimensions", type=int, default=384, help="initial micro-llm hidden width")
     evolve.add_argument("--llm-layers", type=int, default=6, help="initial micro-llm layer count")
@@ -247,6 +261,8 @@ def main(argv: list[str] | None = None) -> int:
                 evaluation_users=args.evaluation_users or None,
                 maximum_train_tokens=args.maximum_train_tokens,
                 maximum_eval_tokens=args.maximum_eval_tokens,
+                maximum_examples=args.maximum_examples,
+                agent_episodes=args.agent_episodes,
                 vocab_size=args.vocab_size,
                 llm_dimensions=args.llm_dimensions,
                 llm_layers=args.llm_layers,
@@ -269,6 +285,18 @@ def main(argv: list[str] | None = None) -> int:
                         f"preference accuracy={champion.validation['preference_accuracy']:.4f}, "
                         f"GSM8K candidate Pass@1={champion.validation['reasoning_pass_at_1']:.4f}"
                     )
+            elif args.model == "post-training":
+                print(
+                    f"Validation accuracy: {champion.validation['accuracy']:.4f}; "
+                    f"KL: {champion.validation['kl_from_reference']:.4f}; "
+                    f"objective: {champion.genome.post_training}"
+                )
+            elif args.model == "agent":
+                print(
+                    f"Joint success: {champion.validation['joint_success']:.4f}; "
+                    f"average cost: {champion.validation['average_cost']:.4f}; "
+                    f"reuse: {champion.validation['reuse_rate']:.4f}"
+                )
             else:
                 print(f"Validation NDCG@10: {champion.validation['ndcg_at_10']:.6f}")
             print(

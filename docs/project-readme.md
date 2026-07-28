@@ -39,11 +39,16 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **118/118** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **123/123** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
 | 核心机制 | `wide-deep` | Wide & Deep · Google | wide 交叉 + deep tower；NDCG@10 +5.45% |
+| 核心机制 | `deepfm` | DeepFM · Huawei | FM + deep 共享 embedding；NDCG@10 +23.58% |
+| 核心机制 | `youtube-dnn` | YouTube DNN · Google/YouTube | 非线性用户塔；NDCG@10 -6.61%，保留负结果 |
+| 核心机制 | `esmm` | ESMM · Alibaba | entire-space CTR×CVR；平均 AUC +1.69% |
+| 核心机制 | `mmoe` | MMoE · Google | 共享 experts + 任务 gates；平均 AUC +1.30% |
+| 核心机制 | `ple` | PLE · Tencent | 共享/专属 experts；平均 AUC +1.34% |
 | 核心机制 | `dcn-v2` | DCN-V2 · Google | low-rank cross experts；NDCG@10 +22.87% |
 | 核心机制 | `dien` | DIEN · Alibaba | GRU、auxiliary loss 与兴趣演化；NDCG@10 -1.98% |
 | 核心机制 | `bst` | BST · Alibaba | 候选 token 行为 Transformer；NDCG@10 +20.29% |
@@ -300,6 +305,20 @@ DAPO、GSPO、PPO-RLHF、RLOO、ReMax、GPRL 或 TCR。Agent demo 可通过
 BENCHMARK=planbench-mini
 ./demo-agent.sh` 切换方法和环境。完整说明见
 [LLM 后训练](post-training/README.md)和[Agent 论文研究](agent-research/README.md)。
+
+后训练与 Agent 也已接入统一的多轮控制器，不再只能单算法运行：
+
+```bash
+auto-research evolve --model post-training --dataset arithmetic-smoke \
+  --direction "组合比较 GRPO、DPO、OPD 与学习率、group size" \
+  --generations 3 --population 6 --maximum-examples 512 --seeds 42,43,44
+
+auto-research evolve --model agent --dataset evomem-mini \
+  --direction "联合进化 memory、planner、tool policy 和 critic" \
+  --generations 3 --population 8 --agent-episodes 240 --seeds 42,43,44
+```
+
+它们与推荐/LLM evolve 共用 validation 晋级、隔离 test、父子 genome、并行实验、失败留档和 HTML 研究看板。完整参数见[模型自动进化](model-evolution.md)。
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。
 

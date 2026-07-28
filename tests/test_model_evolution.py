@@ -289,3 +289,60 @@ def test_micro_llm_config_uses_wikitext_benchmark():
         assert "incompatible" in str(exc)
     else:
         raise AssertionError("micro-llm must reject recommendation datasets")
+
+
+def test_post_training_uses_unified_multiround_controller(tmp_path):
+    config = EvolutionConfig(
+        model="post-training",
+        dataset="arithmetic-smoke",
+        direction="组合比较 GRPO、DPO 与学习率和 group size",
+        output_dir=tmp_path / "runs",
+        generations=2,
+        population=2,
+        steps=3,
+        seeds=(42,),
+        maximum_examples=32,
+        allow_network=False,
+    )
+    result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path).run()
+    assert len(result.rounds) == 2
+    assert any(trial.genome.post_training != "none" for trial in result.trials)
+    assert any(trial.generation == 2 for trial in result.trials)
+    assert all("fitness" in trial.validation for trial in result.trials)
+    assert "objective=" in (run_dir / "report.md").read_text(encoding="utf-8")
+    assert "accuracy=" in (run_dir / "index.html").read_text(encoding="utf-8")
+
+
+def test_agent_components_form_composable_multiround_genomes(tmp_path):
+    config = EvolutionConfig(
+        model="agent",
+        dataset="evomem-mini",
+        direction="联合进化 memory、planner、tool policy 与 critic",
+        output_dir=tmp_path / "runs",
+        generations=2,
+        population=4,
+        steps=1,
+        seeds=(42,),
+        agent_episodes=24,
+        allow_network=False,
+    )
+    result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path).run()
+    assert len(result.rounds) == 2
+    first_round = [trial for trial in result.trials if trial.generation == 1]
+    assert any(trial.genome.agent_memory != "none" for trial in first_round)
+    assert any(trial.genome.agent_planner != "long-context" for trial in first_round)
+    combined = [trial for trial in result.trials if trial.generation == 2]
+    assert combined and any(
+        sum(
+            (
+                trial.genome.agent_memory != "none",
+                trial.genome.agent_planner != "long-context",
+                trial.genome.agent_tool_policy != "direct",
+                trial.genome.agent_critic != "none",
+            )
+        ) >= 2
+        for trial in combined
+    )
+    report = (run_dir / "report.md").read_text(encoding="utf-8")
+    assert "memory=`" in report and "tool policy=`" in report
+    assert "success=" in (run_dir / "index.html").read_text(encoding="utf-8")

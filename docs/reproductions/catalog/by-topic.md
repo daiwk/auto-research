@@ -95,6 +95,11 @@
 ## 排序网络与长序列
 
 - [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 交叉与 deep 表征，是工业精排从线性模型向深度模型过渡的经典骨架。
+- [DeepFM](../1703.04247-deepfm/README.md)：让 FM 二阶交互与 deep 分支共享 embedding，端到端覆盖低阶和高阶特征组合。
+- [YouTube DNN](../recsys2016-youtube-dnn-youtube-dnn/README.md)：把观看历史聚合为用户向量并经非线性塔变换，以 item embedding 点积完成候选召回。
+- [ESMM](../1804.07931-esmm/README.md)：用 CTR 与 CTCVR 的 entire-space 联合目标学习 CVR，避免只看点击样本造成选择偏差。
+- [MMoE](../kdd2018-mmoe-mmoe/README.md)：共享一组 experts，但由每个任务的独立 gate 学习不同专家组合。
+- [PLE](../recsys2020-ple-ple/README.md)：把共享与任务专属 experts 分开，并以 CGC gate 渐进抽取多任务表示。
 - [DCN-V2](../2008.13535-dcn-v2/README.md)：使用低秩专家混合显式构造特征交互，并与 deep tower 联合排序。
 - [DIEN](../1809.03672-dien/README.md)：用辅助监督抽取兴趣状态，再让候选相关门控驱动兴趣演化。
 - [BST](../1905.06874-bst/README.md)：让 Transformer 联合编码候选商品与带位置的行为序列。

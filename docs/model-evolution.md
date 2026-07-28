@@ -232,6 +232,34 @@ auto-research evolve \
 
 第一轮是公平结构消融：所有候选继承基础模型的相同超参数，只改变结构。第二轮起才围绕上一轮冠军分别调整层数、维度、学习率、优化器和 batch size，避免把结构收益和调参收益混在一起。
 
+## 后训练与 Agent 的组合式 genome
+
+独立的 `post-train` / `agent-eval` 命令适合复现单个算法；需要多轮自动比较与组合时，直接使用统一的 `evolve` 控制器。两类任务都与推荐、micro-LLM 共用父子关系、validation 晋级、隔离 test、并行 workers、研究记忆以及 JSON/Markdown/HTML 看板。
+
+后训练 genome 同时搜索 objective、learning rate、group size 与训练步数，内置 DPO、KTO、ORPO、PPO-RLHF、GRPO、RLOO、ReMax、DAPO、GSPO、Lightning OPD、GPRL 和 TCR：
+
+```bash
+auto-research evolve \
+  --model post-training \
+  --dataset arithmetic-smoke \
+  --direction "比较 GRPO、DPO、OPD，并联合搜索学习率、group size 和训练步数" \
+  --generations 3 --population 6 --workers 3 \
+  --steps 100 --maximum-examples 512 --seeds 42,43,44
+```
+
+Agent genome 把 memory、planner、tool policy、critic 和 memory capacity 作为独立可组合轴；第一轮做单组件公平消融，后续轮次围绕冠军组合：
+
+```bash
+auto-research evolve \
+  --model agent \
+  --dataset evomem-mini \
+  --direction "联合进化 U-Mem/LEGOMem、ReAct/ReWOO/LATS、Toolformer/MemTool 和 Reflexion critic" \
+  --generations 3 --population 8 --workers 4 \
+  --agent-episodes 240 --seeds 42,43,44
+```
+
+这两个 mini-suite 用于验证自动研究机制和组合归因，不代表生产级开放式 LLM/Agent 能力。完整 genome、负结果、每轮假设与选择原因都会写入结果；checkpoint 仍不提交。
+
 ## 数据规模
 
 默认不再裁剪训练数据：MovieLens-100K 使用完整的 932 个有效用户和 1,682 个物品；MovieLens-1M 使用完整 leave-two-out 序列。为控制每个候选的全库排序成本，默认用固定且均匀覆盖的 1,000 用户 cohort 做 validation/test；传入 `--evaluation-users 0` 可评估全部用户。只有为了快速验证流程时，才显式传入 `--maximum-users` 和 `--maximum-items`。数据规模与评估 cohort 都会记录到报告中，避免把 smoke test 误写成正式实验。

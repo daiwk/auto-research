@@ -16,6 +16,11 @@ GITHUB_TREE = "https://github.com/daiwk/auto-research/tree/main"
 # arXiv v1 publication dates, retrieved from the official arXiv API.
 PUBLISHED_DATES = {
     "1606.07792": "2016-06-24",
+    "1703.04247": "2017-03-13",
+    "1804.07931": "2018-04-21",
+    "recsys2016-youtube-dnn": "2016-09-15",
+    "kdd2018-mmoe": "2018-08-19",
+    "recsys2020-ple": "2020-09-22",
     "1809.03672": "2018-09-11",
     "1905.06874": "2019-05-15",
     "2008.13535": "2020-08-19",
@@ -189,17 +194,9 @@ def _information_block(adapter) -> str:
             "",
             "| 项目 | 内容 |",
             "| --- | --- |",
-            (
-                f"| 论文链接 | [SIGIR 2026 paper P074]({paper.url}) |"
-                if adapter.key == "pin-scale"
-                else f"| 论文链接 | [arXiv {paper.arxiv_id}]({paper.url}) |"
-            ),
+            f"| 论文链接 | [{paper.publication_label or f'arXiv {paper.arxiv_id}'}]({paper.url}) |",
             f"| 公司/机构 | {organization} |",
-            (
-                f"| 首次公开日期 | {published}（Pinterest Labs / SIGIR 2026） |"
-                if adapter.key == "pin-scale"
-                else f"| 首次公开日期 | {published}（arXiv v1） |"
-            ),
+            f"| 首次公开日期 | {published}（{paper.publication_source or 'arXiv v1'}） |",
             f"| 原文开源代码 | {upstream_code} |",
             f"| Adapter | `{adapter.key}` |",
             f"| 本地复现代码 | [`{source_directory}`]({GITHUB_TREE}/{source_directory}) |",

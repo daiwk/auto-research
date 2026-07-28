@@ -128,11 +128,7 @@ def test_every_paper_readme_has_the_complete_reproduction_contract():
         directory = DOCS / _slug(adapter)
         text = (directory / "README.md").read_text(encoding="utf-8")
         source_directory = f"src/auto_research/reproductions/{adapter.key.replace('-', '_')}/"
-        paper_label = (
-            "SIGIR 2026 paper P074"
-            if adapter.key == "pin-scale"
-            else f"arXiv {adapter.paper.arxiv_id}"
-        )
+        paper_label = adapter.paper.publication_label or f"arXiv {adapter.paper.arxiv_id}"
         required_metadata = (
             "## 论文信息",
             f"| 论文链接 | [{paper_label}]({adapter.paper.url}) |",
@@ -144,7 +140,7 @@ def test_every_paper_readme_has_the_complete_reproduction_contract():
         )
         for entry in required_metadata:
             assert entry in text, f"{adapter.key} missing metadata: {entry}"
-        date_source = "Pinterest Labs / SIGIR 2026" if adapter.key == "pin-scale" else "arXiv v1"
+        date_source = adapter.paper.publication_source or "arXiv v1"
         assert re.search(
             rf"^\| 首次公开日期 \| \d{{4}}-\d{{2}}-\d{{2}}（{date_source}） \|$",
             text, re.MULTILINE,
