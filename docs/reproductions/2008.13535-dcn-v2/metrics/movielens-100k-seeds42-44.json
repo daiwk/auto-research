@@ -1,0 +1,1 @@
+{"dataset":"MovieLens-100K compact","seeds":[42,43,44],"baseline":{"model":"deep","ndcg_at_10":0.0234468342},"method":{"model":"dcn-v2","ndcg_at_10":0.0288081109},"relative_percent":22.8656740098}

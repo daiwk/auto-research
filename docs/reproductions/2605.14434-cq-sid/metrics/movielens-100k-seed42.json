@@ -1,0 +1,1 @@
+{"dataset":"MovieLens-100K compact","seed":42,"baseline":{"model":"collaborative-item-id","ndcg_at_10":0.0353980652},"method":{"model":"cq-sid-eg-grpo","ndcg_at_10":0.0359864177},"relative_percent":1.6621035686,"eg_grpo_updates":240,"validation_selected_blend":0.7}

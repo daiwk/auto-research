@@ -40,6 +40,10 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [Switch Transformer](../2101.03961-switch-transformer/README.md)：以 top-1 token routing 激活单个 FFN expert，并用负载均衡损失扩展稀疏容量。
+- [Mamba](../2312.00752-mamba/README.md)：通过输入相关 selective scan 在状态空间模型中选择性保留和写入信息。
+- [Switch Attention](../2603.26380-switch-attention/README.md)：动态选择 full 或 local attention，减少长上下文中不必要的全局计算。
+
 - [GaugeQuant](../2607.20757-gaugequant/README.md)：在线学习函数等价、量化友好的正交基，以 LogSumExp 抑制 W4A4 outlier。
 - [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：在 looped Transformer 间共享低秩 K/V latent，压缩跨 loop cache。
 - [Engram](../2601.07372-engram/README.md)：用固定复杂度 hashed n-gram lookup 为 LLM 增加条件记忆。
@@ -55,6 +59,8 @@
 - [mHC](../2512.24880-mhc/README.md)：扩展多个 residual streams，并用 Sinkhorn 将动态残差矩阵约束为双随机矩阵，避免深层组合放大信号。
 
 ## 生成式召回与端到端推荐
+
+- [CQ-SID](../2605.14434-cq-sid/README.md)：以类目约束残差 Semantic ID 缩小生成空间，再由专家奖励引导 group-relative 策略更新。
 
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、Semantic ID 和跨行为融合统一多个电商生成推荐场景。
 - [DOS](../2602.04460-dos/README.md)：以协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
@@ -87,6 +93,11 @@
 - [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并用 DPO 对齐广告序列的业务偏好。
 
 ## 排序网络与长序列
+
+- [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 交叉与 deep 表征，是工业精排从线性模型向深度模型过渡的经典骨架。
+- [DCN-V2](../2008.13535-dcn-v2/README.md)：使用低秩专家混合显式构造特征交互，并与 deep tower 联合排序。
+- [DIEN](../1809.03672-dien/README.md)：用辅助监督抽取兴趣状态，再让候选相关门控驱动兴趣演化。
+- [BST](../1905.06874-bst/README.md)：让 Transformer 联合编码候选商品与带位置的行为序列。
 
 - [HiSAC](../2602.21009-hisac/README.md)：用层级投票压缩超长历史，再以 query-conditioned soft routing 选择兴趣 agent。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task token 化，让领域与任务参与每层特征交互。
@@ -151,6 +162,8 @@
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。
 
 ## Serving / efficiency
+
+- [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 兼容的前提下，以循环修正、跨塔同步和教师协同补充交互能力。
 
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：离线预计算 popularity-corrected PPR 并用 cluster index 压缩线上图召回。
 - [NOVA](../2606.27243-nova/README.md)：用四级验证、失败方向和 architecture gradient 提高自动架构进化的有效通过率。

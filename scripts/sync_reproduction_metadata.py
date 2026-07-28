@@ -10,11 +10,17 @@ from auto_research.reproductions.registry import list_adapters
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs" / "reproductions"
-CHECKED_ON = "2026-07-27"
+CHECKED_ON = "2026-07-28"
 GITHUB_TREE = "https://github.com/daiwk/auto-research/tree/main"
 
 # arXiv v1 publication dates, retrieved from the official arXiv API.
 PUBLISHED_DATES = {
+    "1606.07792": "2016-06-24",
+    "1809.03672": "2018-09-11",
+    "1905.06874": "2019-05-15",
+    "2008.13535": "2020-08-19",
+    "2101.03961": "2021-01-11",
+    "2312.00752": "2023-12-01",
     "1706.06978": "2017-06-21",
     "1808.09781": "2018-08-20",
     "2205.08084": "2022-05-17",
@@ -124,6 +130,9 @@ PUBLISHED_DATES = {
     "2601.07372": "2026-01-12",
     "2607.15456": "2026-07-16",
     "2607.20757": "2026-07-22",
+    "2603.26380": "2026-03-27",
+    "2604.19269": "2026-04-21",
+    "2605.14434": "2026-05-14",
 }
 
 # Older adapters predate the catalog metadata contract. Keep verified affiliations here

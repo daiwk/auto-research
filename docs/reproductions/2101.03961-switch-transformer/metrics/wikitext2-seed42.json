@@ -1,0 +1,1 @@
+{"dataset":"WikiText-2","seed":42,"steps":30,"baseline":{"model":"dense-transformer","perplexity":313.2659952},"method":{"model":"switch-transformer","perplexity":302.9633500},"relative_percent":-3.2887850404}

@@ -35,6 +35,9 @@ LLM_MUTATIONS = {
     "2601.07372": ("engram", "确定性 hashed n-gram O(1) 条件记忆查表，并以门控注入早期层"),
     "2607.15456": ("looped_latent_attention", "跨循环共享低维 K/V latent，并按 loop 重建注意力缓存"),
     "2607.20757": ("gaugequant", "训练中学习等价正交基，以 LogSumExp outlier 目标执行 W4A4 fake quantization"),
+    "2101.03961": ("switch_transformer", "top-1 sparse expert routing 与 auxiliary load balancing"),
+    "2312.00752": ("mamba", "输入依赖 selective state-space scan 与线性序列复杂度"),
+    "2603.26380": ("switch_attention", "逐 token、逐层在 full attention 与 sliding-window attention 间动态路由"),
 }
 
 FALLBACK_PAPERS = (
@@ -69,6 +72,9 @@ LLM_FALLBACK_PAPERS = (
     Paper("Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models", "O(1) hashed n-gram conditional memory complements compute sparsity.", [], "2026-01-12", "https://arxiv.org/abs/2601.07372", "2601.07372"),
     Paper("Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers", "Shared latent K/V codes compress recurrent Transformer caches.", [], "2026-07-16", "https://arxiv.org/abs/2607.15456", "2607.15456"),
     Paper("GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries", "Online orthogonal-basis learning suppresses W4A4 outliers.", [], "2026-07-22", "https://arxiv.org/abs/2607.20757", "2607.20757"),
+    Paper("Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity", "Top-1 sparse expert routing with a load-balancing auxiliary objective.", [], "2021-01-11", "https://arxiv.org/abs/2101.03961", "2101.03961"),
+    Paper("Mamba: Linear-Time Sequence Modeling with Selective State Spaces", "Input-dependent state-space parameters selectively retain and propagate sequence information.", [], "2023-12-01", "https://arxiv.org/abs/2312.00752", "2312.00752"),
+    Paper("Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers", "Per-token per-layer routing between full and sliding-window attention.", [], "2026-03-27", "https://arxiv.org/abs/2603.26380", "2603.26380"),
 )
 
 

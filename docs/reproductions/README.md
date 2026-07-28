@@ -8,7 +8,7 @@
 
 - **工业论文硬门槛**：正文必须披露真实生产流量的量化线上 A/B；或由用户明确认可论文所述的统计显著全流量发布、业务收益与 guardrail 结论。仅“已部署”、离线 SOTA 或模拟器结果不算；未披露具体 lift 的 full-traffic 论文必须明确标注，不能换算成百分比。
 - **纯 LLM 论文门槛**：不要求线上 A/B，但必须有公开 benchmark、同预算对照和可在 WikiText 等公开数据上实际训练的核心方法；只写公式或固定打分不进入复现表。
-- **具名例外**：SASRec、TIGER 是用户指定的经典基线，没有线上 A/B，不据此放宽后续选文标准。
+- **具名例外**：SASRec、TIGER、Wide & Deep、DCN-V2、DIEN、BST 是用户明确要求补齐的经典骨架；其中缺量化线上 A/B 的条目会逐篇明示，不据此放宽后续新工业论文的门槛。
 - **本地结果口径**：每篇 README 明确基线、实验组、数据、主指标和相对变化；论文线上结果、本地跨模型比较、模块消融和效率对照分开写。
 - **保真度**：公开数据替代私有数据或缩小规模可以接受；核心网络、训练目标或推理路径被 heuristic 替代时，只能标为“概念验证”。默认批量运行不包含概念验证。
 - **论文信息**：每篇 README 顶部固定列出论文链接、公司/机构、精确首次公开日期及来源、原作者是否开源代码、Adapter 和本地复现代码位置；未找到原作者代码时必须明确写“否”，不能留空。没有独立 arXiv 页的正式会议论文使用官方论文集/机构发布页，不伪造 arXiv ID。
@@ -18,15 +18,24 @@
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 109 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 118 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
 
-## 全部复现（109/109）
+## 全部复现（118/118）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `wide-deep` · [Wide & Deep](1606.07792-wide-deep/README.md) | Google Play acquisition +3.9% | wide crosses + deep tower；NDCG@10 +5.45% |
+| 核心机制 | `dcn-v2` · [DCN-V2](2008.13535-dcn-v2/README.md) | 经典例外：线上显著但未披露 lift | low-rank cross experts；NDCG@10 +22.87% |
+| 核心机制 | `dien` · [DIEN](1809.03672-dien/README.md) | CTR +20.7%、eCPM +17.1% | GRU + auxiliary + interest evolution；NDCG@10 -1.98% |
+| 核心机制 | `bst` · [BST](1905.06874-bst/README.md) | CTR +7.57% | target-token Transformer；NDCG@10 +20.29% |
+| 核心机制 | `cs3` · [CS3](2604.19269-cs3/README.md) | Revenue +8.356%/+1.366%/+2.177% | cycle/sync/cascade；NDCG@10 -16.06% |
+| 核心机制 | `cq-sid` · [CQ-SID](2605.14434-cq-sid/README.md) | GMV +1.15%、UCTCVR +0.40% | category SID + EG-GRPO；NDCG@10 +1.66% |
+| 核心机制 | `switch-transformer` · [Switch Transformer](2101.03961-switch-transformer/README.md) | 纯 LLM：预训练约 7× 加速 | top-1 MoE；30-step PPL -3.29% |
+| 核心机制 | `mamba` · [Mamba](2312.00752-mamba/README.md) | 纯 LLM：推理最高约 5× | selective scan；30-step PPL +48.82%（变差） |
+| 核心机制 | `switch-attention` · [Switch Attention](2603.26380-switch-attention/README.md) | 纯 LLM：32K decode >4× | dynamic full/local router；30-step PPL +0.19%（略差） |
 | 核心机制 | `onemall` · [OneMall](2601.21770-onemall/README.md) | 商品卡 GMV +13.01%、短视频订单 +15.32%、直播订单 +2.78% | 场景 prompt + SID + 跨行为融合；NDCG@10 +4.33% |
 | 核心机制 | `dos` · [DOS](2602.04460-dos/README.md) | 美团收入 +1.15% | 双流 ORQ；NDCG@10 +11.26% |
 | 核心机制 | `mdl` · [MDL](2602.07520-mdl/README.md) | 抖音 LT30 +0.0626%、rewrite -0.3267% | 三类 token 与 domain attention；NDCG@10 +13.34%，head share +73.43% |
