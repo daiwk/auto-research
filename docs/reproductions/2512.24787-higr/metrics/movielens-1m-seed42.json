@@ -1,0 +1,55 @@
+{
+  "paper": {
+    "arxiv_id": "2512.24787",
+    "title": "HiGR: Industrial-Scale Hierarchical Generative Slate Recommendation Framework in Tencent",
+    "url": "https://arxiv.org/abs/2512.24787"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "hierarchical_slate"
+  },
+  "baseline": {
+    "name": "flat item-level slate ranking",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "HiGR residual semantic IDs + hierarchical slate decoder + ORPO",
+    "hit_at_10": 0.1357142857142857,
+    "ndcg_at_10": 0.06587800283078647,
+    "mrr_at_10": 0.04515306122448979,
+    "head_share_at_10": 0.15714285714285714
+  },
+  "relative": {
+    "hit_at_10_percent": -3.389830508474584,
+    "ndcg_at_10_percent": -12.321219246780908,
+    "mrr_at_10_percent": -18.51245588009616,
+    "head_share_at_10_percent": -27.789934354485784
+  },
+  "diagnostics": {
+    "coarse_codes": 16,
+    "fine_codes": 8,
+    "validation_blend_weight": 0.25,
+    "validation_ndcg_candidates": [
+      0.066741,
+      0.063685,
+      0.056832,
+      0.051735
+    ]
+  },
+  "paper_results": {
+    "stay_time_percent": 1.03,
+    "watch_time_percent": 1.22,
+    "video_views_percent": 1.73,
+    "request_count_percent": 1.57
+  },
+  "scope": "实际学习两级 residual semantic ID、先生成簇再生成物品，并用偏好/拒绝 slate 的ORPO 风格优势重排；未复刻腾讯私有 PCRQ-VAE、超大码本及线上 beam serving。"
+}

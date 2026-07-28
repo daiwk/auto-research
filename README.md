@@ -38,10 +38,19 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **127/127** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **136/136** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `mim` | MIM · Alibaba/Taobao | 遮盖多模态预训练、协同对齐与 CiUBM；NDCG@10 +0.94% |
+| 核心机制 | `filterllm` | FilterLLM · Alibaba | text-to-user-distribution 与行为引导；NDCG@10 -9.82% |
+| 核心机制 | `fuxi-alpha` | FuXi-α · Huawei/USTC | 多通道注意力与分阶段交互；NDCG@10 -4.25% |
+| 核心机制 | `recgpt-v2` | RecGPT-V2 · Alibaba/Taobao | 层级 agents、meta-router 与约束偏好更新；NDCG@10 +18.52% |
+| 核心机制 | `higr` | HiGR · Tencent | residual SID、层级 slate 与 ORPO；NDCG@10 -12.32% |
+| 核心机制 | `drl-put` | DRL-PUT · Pinterest | logged bandit、propensity 与策略调权；NDCG@10 +19.13% |
+| 核心机制 | `adaf2m2` | AdaF²M² · ByteDance/Douyin | feature-mask multi-forward 与 state adapter；NDCG@10 +2.42% |
+| 核心机制 | `mgoe` | MGOE · Alibaba | macro task graph 与 graph experts；NDCG@10 +7.03% |
+| 核心机制 | `click-a-buy-b` | Click A Buy B · Pinterest | CABA/CABB 双分支与 taxonomy weighting；NDCG@10 +33.70% |
 | 核心机制 | `mosaic` | Mosaic · Meta | 四 specialist、MRM 与 cosine redundancy loss；MovieLens-1M NDCG@10 +3.49%，Hit@10 -7.69% |
 | 核心机制 | `unir2` | UniR² · Kuaishou | DQ-PCA、层级 SID、ranking-only LoRA；SID code accuracy +34.04%，NDCG@10 -13.19% |
 | 核心机制 | `core-relevance` | CORE · Meituan | 级联序数头、step-GRPO 与 PostCoT 蒸馏；NDCG@5 +0.98%，Badcase@5 -50.00% |

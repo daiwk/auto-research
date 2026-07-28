@@ -4,6 +4,11 @@
 
 ## Alibaba
 
+- 2025-02 · [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣感知 SFT 对齐内容/协同空间，再由 CiUBM 融合排序。
+- 2025-02 · [FilterLLM](../2502.16924-filterllm/README.md)：把新品文本一次性映射到用户词表分布，并用历史行为约束冷启动召回。
+- 2025-06 · [MGOE](../2506.10520-mgoe/README.md)：构建宏观任务合并图，让 graph experts 显式传播多任务关系后进入独立预测塔。
+- 2025-12 · [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级意图 agents、混合压缩表示、meta-prompt 和约束偏好 RL 升级淘宝意图推理。
+
 - 2018-04 · [ESMM](../1804.07931-esmm/README.md)：在全曝光空间联合训练 CTR 与 CTCVR，并用 pCTR×pCVR 缓解点击后转化的选择偏差。
 - 2018-09 · [DIEN](../1809.03672-dien/README.md)：用 GRU 抽取逐步兴趣，以下一行为辅助监督并由候选相关门控控制兴趣演化。
 - 2019-05 · [BST](../1905.06874-bst/README.md)：把候选商品作为 token 与用户行为共同送入 Transformer，显式建模序列内依赖。
@@ -42,6 +47,8 @@
 
 ## ByteDance / Douyin / TikTok
 
+- 2025-01 · [AdaF²M²](../2501.15816-adaf2m2/README.md)：通过 feature-mask 多次前向学习完整表征，再按用户/物品状态动态调节 adapter。
+
 - 2026-02 · [MDL](../2602.07520-mdl/README.md)：把 feature、scenario、task 全部 token 化，并以 domain-feature attention 深层共享。
 - 2026-02 · [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：交替执行无参数 token mixing、head-wise/token-wise SwiGLU，并以间隔残差和辅助头稳定深层扩容。
 - 2026-02 · [MSN](../2602.07526-msn/README.md)：用两轴 Product-Key Memory 扩大参数容量，每次只激活 top-k 槽位并与 dense 主干门控融合。
@@ -67,6 +74,8 @@
 - 2026-03 · [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 
 ## Huawei
+
+- 2025-02 · [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用时间、语义等自适应多通道注意力和 multi-stage FFN 扩展推荐特征交互模型。
 
 - 2017-03 · [DeepFM](../1703.04247-deepfm/README.md)：用共享 embedding 联合 FM 二阶交互和 deep 高阶交互，减少手工特征交叉。
 - 2026-03 · [Switch Attention](../2603.26380-switch-attention/README.md)：与北大合作学习逐 token full/local attention 路由，把全局计算集中到必要位置。
@@ -121,6 +130,9 @@
 
 ## Pinterest
 
+- 2025-07 · [Click A, Buy B](../2507.15113-click-a-buy-b/README.md)：拆分同物品 CABA 与跨物品 CABB 转化归因，并用商品 taxonomy 建立协同权重。
+- 2025-09 · [DRL-PUT](../2509.05292-drl-put/README.md)：从 logged ads behavior 学习相关性、新颖性和收益等排序 utility 的动态权重策略。
+
 - 2026-07 · [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 决定是否触发 shopping candidate generator。
 - 2026-07 · [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：用 engagement-aware SID、级联 pooling 和多视角对比对齐接入 dense retrieval。
 - 2026-03 · [PinCLIP](../2603.03544-pinclip/README.md)：以 VLM 图文对齐加 Pin-Board 邻居目标改善 fresh 内容表征。
@@ -133,6 +145,8 @@
 - 2026-05 · [Complementary LLM Ads Predictor](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 作为传统广告召回与排序的补充预测器。
 
 ## Tencent / WeChat
+
+- 2025-12 · [HiGR](../2512.24787-higr/README.md)：先生成层级 Semantic ID 簇再解码物品 slate，并以 ORPO 做列表偏好对齐。
 
 - 2020-09 · [PLE](../recsys2020-ple-ple/README.md)：把共享 experts 与任务专属 experts 分组，通过 CGC gates 逐层分离共性和任务特性。
 - 2026-06 · [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 驱动候选修改，并用四级验证级联阻断可运行但语义错误的架构。

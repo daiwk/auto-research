@@ -1,0 +1,56 @@
+{
+  "paper": {
+    "arxiv_id": "2502.03036",
+    "title": "FuXi-α: Scaling Recommendation Model with Feature Interaction Enhanced Transformer",
+    "url": "https://arxiv.org/abs/2502.03036"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "multichannel_attention"
+  },
+  "baseline": {
+    "name": "single-channel sequential attention",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "FuXi-α multi-channel attention + staged FFN",
+    "hit_at_10": 0.14285714285714285,
+    "ndcg_at_10": 0.07194173607324948,
+    "mrr_at_10": 0.05069633408919124,
+    "head_share_at_10": 0.3969047619047619
+  },
+  "relative": {
+    "hit_at_10_percent": 1.694915254237282,
+    "ndcg_at_10_percent": -4.250835891694408,
+    "mrr_at_10_percent": -8.508534110866673,
+    "head_share_at_10_percent": 82.38512035010942
+  },
+  "diagnostics": {
+    "channels": [
+      "temporal",
+      "semantic",
+      "popularity"
+    ],
+    "validation_blend_weight": 0.25,
+    "validation_ndcg_candidates": [
+      0.059212,
+      0.054674,
+      0.035001,
+      0.029848
+    ]
+  },
+  "paper_results": {
+    "songs_played_percent": 4.67,
+    "listening_duration_percent": 5.1
+  },
+  "scope": "实际计算时间、语义、流行度三个注意力通道及分阶段交互门控，并在完整候选集排序；未复刻华为音乐十亿级参数、私有连续特征和线上部署。"
+}

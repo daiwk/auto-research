@@ -1,0 +1,55 @@
+{
+  "paper": {
+    "arxiv_id": "2502.16924",
+    "title": "FilterLLM: Text-To-Distribution LLM for Billion-Scale Cold-Start Recommendation",
+    "url": "https://arxiv.org/abs/2502.16924"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 420,
+    "items": 640,
+    "full_catalog_evaluation": true
+  },
+  "setup": {
+    "seed": 42,
+    "mechanism": "text_to_distribution"
+  },
+  "baseline": {
+    "name": "content-to-item judgment",
+    "hit_at_10": 0.14047619047619048,
+    "ndcg_at_10": 0.07513562832974019,
+    "mrr_at_10": 0.05541099773242629,
+    "head_share_at_10": 0.21761904761904763
+  },
+  "method": {
+    "name": "FilterLLM text-to-user-distribution + behavior guidance",
+    "hit_at_10": 0.1261904761904762,
+    "ndcg_at_10": 0.06775546607120683,
+    "mrr_at_10": 0.049801587301587284,
+    "head_share_at_10": 0.2714285714285714
+  },
+  "relative": {
+    "hit_at_10_percent": -10.169491525423732,
+    "ndcg_at_10_percent": -9.82245363829897,
+    "mrr_at_10_percent": -10.12327996316948,
+    "head_share_at_10_percent": 24.726477024070007
+  },
+  "diagnostics": {
+    "distribution_rank": 24,
+    "behavior_alignment": 0.7907814133209244,
+    "validation_blend_weight": 0.75,
+    "validation_ndcg_candidates": [
+      0.059631,
+      0.059816,
+      0.06153,
+      0.059298
+    ]
+  },
+  "paper_results": {
+    "cold_pv_percent": 5.13,
+    "pctr_percent": 3.93,
+    "gmv_percent": 10.86,
+    "latency_reduction_percent": 97.12
+  },
+  "scope": "以 genre/title 特征映射用户分布，实际训练 ridge text-to-distribution、用户词表压缩及行为引导；没有复刻淘宝十亿用户词表、LLM 参数量和生产冷启动流量。"
+}
