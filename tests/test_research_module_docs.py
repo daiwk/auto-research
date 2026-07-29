@@ -117,6 +117,18 @@ def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
     assert "      - Agent:" in navigation
 
 
+def test_sidebar_hides_global_and_per_paper_indexes_but_keeps_paper_pages():
+    navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
+
+    assert "全域论文谱系与缺口:" not in navigation
+    assert "          - 论文实现:" not in navigation
+    assert "post-training/2403.07691-orpo/README.md" not in navigation
+    assert (ROOT / "docs" / "research-lineage.md").is_file()
+    assert (
+        ROOT / "docs" / "post-training" / "2403.07691-orpo" / "README.md"
+    ).is_file()
+
+
 def test_global_recommendation_lineage_has_no_dead_end_dcn_branch():
     lineage = (ROOT / "docs" / "research-lineage.md").read_text(encoding="utf-8")
     assert 'F["特征交互<br/>DeepFM / DCN-V2"]' in lineage

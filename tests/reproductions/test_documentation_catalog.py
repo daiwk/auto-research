@@ -41,7 +41,7 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
         assert catalog_link in topic
 
 
-def test_reproduction_hub_has_lineage_benchmark_and_expandable_paper_navigation():
+def test_reproduction_hub_has_lineage_benchmark_without_paper_navigation_index():
     lineage = (DOCS / "lineage.md").read_text(encoding="utf-8")
     benchmark = (DOCS / "benchmark.md").read_text(encoding="utf-8")
     navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
@@ -54,7 +54,7 @@ def test_reproduction_hub_has_lineage_benchmark_and_expandable_paper_navigation(
     assert "      - 搜广推与 LLM 应用:" in navigation
     assert "          - 论文谱系与缺口: reproductions/lineage.md" in navigation
     assert "          - 统一评测协议: reproductions/benchmark.md" in navigation
-    assert "          - 论文实现:" in navigation
+    assert "          - 论文实现:" not in navigation
 
 
 def test_catalog_entries_are_one_paper_per_line_with_chinese_summaries():
