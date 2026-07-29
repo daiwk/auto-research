@@ -102,6 +102,15 @@ class AgentResearchRunner:
             "episodic_routes": agent.episodic_routes,
             "parametric_routes": agent.parametric_routes,
             "memory_consolidations": agent.memory_consolidations,
+            "search_queries": agent.search_queries,
+            "retrieved_tokens_masked": agent.retrieved_tokens_masked,
+            "outcome_rewards": agent.outcome_rewards,
+            "trajectory_rollouts": agent.trajectory_rollouts,
+            "trajectory_filters": agent.trajectory_filters,
+            "critic_baseline_updates": agent.critic_baseline_updates,
+            "gradient_clips": agent.gradient_clips,
+            "echo_trap_events": agent.echo_trap_events,
+            "reasoning_rewards": agent.reasoning_rewards,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

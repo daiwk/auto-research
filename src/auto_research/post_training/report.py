@@ -16,6 +16,8 @@ PAPERS = {
     "ppo-rlhf": ("InstructGPT / PPO-RLHF", "https://arxiv.org/abs/2203.02155"),
     "rloo": ("RLOO", "https://arxiv.org/abs/2402.14740"),
     "remax": ("ReMax", "https://arxiv.org/abs/2310.10505"),
+    "gkd": ("Generalized Knowledge Distillation", "https://arxiv.org/abs/2306.13649"),
+    "minillm": ("MiniLLM", "https://arxiv.org/abs/2306.08543"),
     "ipo": ("Identity Preference Optimization", "https://arxiv.org/abs/2310.12036"),
     "simpo": ("SimPO", "https://arxiv.org/abs/2405.14734"),
     "luspo": ("Length-Unbiased Sequence Policy Optimization", "https://arxiv.org/abs/2602.05261"),

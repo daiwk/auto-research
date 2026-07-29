@@ -27,6 +27,7 @@ class PolicyState:
     constitutional_critiques: int = 0
     constitutional_revisions: int = 0
     spin_updates: int = 0
+    online_teacher_calls: int = 0
 
 
 def initialize(feature_count: int, groups: tuple[CandidateGroup, ...]) -> PolicyState:
@@ -146,6 +147,73 @@ def update(
                 "log_odds_margin": log_odds_margin,
                 "reference_model_parameters": 0.0,
                 "sft_nll": float(-np.log(probabilities[chosen] + 1e-12)),
+            }
+        )
+    elif algorithm == "gkd":
+        # GKD queries the teacher at states visited by the evolving student.
+        # The candidate-policy analogue restricts the dense teacher target to
+        # the student-generated support instead of replaying a fixed response.
+        teacher = state.teacher_cache[cache_index]
+        support = np.zeros_like(teacher)
+        support[sampled] = 1.0
+        on_policy_target = teacher * support
+        on_policy_target /= max(on_policy_target.sum(), 1e-12)
+        off_policy_target = np.zeros_like(teacher)
+        off_policy_target[group.gold] = 1.0
+        on_policy_fraction = 0.75
+        target = (
+            on_policy_fraction * on_policy_target
+            + (1.0 - on_policy_fraction) * off_policy_target
+        )
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.online_teacher_calls += len(sampled)
+        diagnostics.update(
+            {
+                "student_generated_rollouts": float(len(sampled)),
+                "on_policy_fraction": on_policy_fraction,
+                "teacher_forward_passes": float(len(sampled)),
+                "student_support_fraction": float(support.mean()),
+                "divergence_jsd_beta": 0.0,
+            }
+        )
+    elif algorithm == "minillm":
+        # MiniLLM minimizes reverse KL on student rollouts.  Teacher-mixed
+        # sampling retains exploration while the reward baseline reduces the
+        # variance of the policy-gradient estimator.
+        teacher = state.teacher_cache[cache_index]
+        teacher_mix = 0.2
+        mixed_sampling = (
+            (1.0 - teacher_mix) * probabilities + teacher_mix * teacher
+        )
+        rollout = rng.choice(
+            len(probabilities),
+            size=min(group_size, len(probabilities)),
+            replace=False,
+            p=mixed_sampling,
+        )
+        log_ratio = np.log(probabilities[rollout] + 1e-12) - np.log(
+            teacher[rollout] + 1e-12
+        )
+        baseline = float(log_ratio.mean())
+        reverse_kl_advantage = -(log_ratio - baseline)
+        gradient = _reinforce_gradient(
+            group.features, probabilities, rollout, reverse_kl_advantage
+        )
+        loss = float(np.mean(log_ratio))
+        state.online_teacher_calls += len(rollout)
+        diagnostics.update(
+            {
+                "reverse_kl": float(
+                    np.sum(
+                        probabilities
+                        * np.log((probabilities + 1e-12) / (teacher + 1e-12))
+                    )
+                ),
+                "teacher_mixed_sampling": teacher_mix,
+                "student_generated_rollouts": float(len(rollout)),
+                "variance_reduction_baseline": baseline,
+                "length_normalized_objective": 1.0,
             }
         )
     elif algorithm == "lightning-opd":

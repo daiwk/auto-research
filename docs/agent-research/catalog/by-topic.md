@@ -50,6 +50,10 @@
 
 - [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：多 Agent 软件工程；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## 多轮 Agent RL
+
+- [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：多轮 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## 工具反馈
 
 - [CRITIC](../2305.11738-critic/README.md)（`critic`）：工具反馈；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -69,6 +73,10 @@
 ## 推理搜索
 
 - [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：推理搜索；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## 搜索 Agent RL
+
+- [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：搜索 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## 浏览问答
 

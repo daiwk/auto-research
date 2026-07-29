@@ -46,6 +46,8 @@
 - [SEED](2607.14777-seed/README.md)：从完成轨迹提炼 hindsight skill 并形成稠密 credit。
 - [CAST](2607.25308-cast/README.md)：用 solver value 差分提供 turn 级监督。
 - [TurnOPD](2607.05804-turn-opd/README.md)：自适应 rollout 深度与 turn-normalized OPD。
+- [Search-R1](2503.09516-search-r1/README.md)：推理/搜索交错、检索 token mask 与结果奖励。
+- [RAGEN](2504.20073-ragen/README.md)：StarPO-S 轨迹 RL、Echo Trap 检测与稳定化。
 - [HiSkill](2607.25853-hiskill/README.md)：高层 skill、AtomicOp 与 typed edge 的层次图。
 - [UniMem](2607.26017-unimem/README.md)：episodic/parametric memory 自路由与巩固。
 
@@ -99,6 +101,8 @@ flowchart LR
 | Agentic RL | [SEED](2607.14777-seed/README.md) | hindsight skill 与稠密 on-policy credit | PlanBench mini | 机制复现 |
 | Agentic RL | [CAST](2607.25308-cast/README.md) | solver value 差分与 turn credit | PlanBench mini | 机制复现 |
 | Agentic OPD | [TurnOPD](2607.05804-turn-opd/README.md) | 深度 probe、动态 rollout 与 turn normalization | ScaleMCP mini | 机制复现 |
+| 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | 多轮 search/reason、retrieval loss mask、outcome reward | ScaleMCP mini | 机制复现 |
+| 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | trajectory filtering、critic baseline、decoupled clipping | PlanBench mini | 机制复现 |
 | 层次技能 | [HiSkill](2607.25853-hiskill/README.md) | skill/AtomicOp 节点与 typed edge 子图 | PlanBench mini | 机制复现 |
 | 持续记忆 | [UniMem](2607.26017-unimem/README.md) | episodic/parametric route 与 consolidation | EvoMem mini | 机制复现 |
 
@@ -139,6 +143,8 @@ flowchart LR
 | SEED · PlanBench mini | 1.0000 | 0.9800 | 12 hindsight skills；360 dense credit updates |
 | CAST · PlanBench mini | 1.0000 | 1.5000 | 2040 solver queries；360 turn credits |
 | TurnOPD · ScaleMCP mini | 1.0000 | 1.3333 | 节省 40 rollout turns |
+| Search-R1 · ScaleMCP mini | 1.0000 | 2.7500 | 240 queries；1800 masked tokens |
+| RAGEN · PlanBench mini | 1.0000 | 1.6000 | 480 rollouts；120 filtered；19 Echo Trap probes |
 | HiSkill · PlanBench mini | 1.0000 | 0.6900 | 48 nodes；60 edges；324 AtomicOp reuses |
 | UniMem · EvoMem mini | 1.0000 | **0.5200** | 24 episodic；96 parametric；12 consolidations |
 
@@ -154,6 +160,8 @@ P1 候选指标见
 [`p1-agent-candidates-mini-suites-seed42.json`](../experiments/p1-agent-candidates-mini-suites-seed42.json)。
 本批 Agentic RL 与记忆指标见
 [`agent-20260729-seed42.json`](../experiments/agent-20260729-seed42.json)。
+经典 Agentic RL / OPD 补充指标见
+[`classic-agentic-rl-opd-seed42.json`](../experiments/classic-agentic-rl-opd-seed42.json)。
 
 ## 一键运行
 

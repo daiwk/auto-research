@@ -68,6 +68,10 @@
 
 - [Reflexion](../2303.11366-reflexion/README.md)（`reflexion`）：自我反思；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Northwestern / Stanford / Microsoft / UW / NYU / UBC / SMU
+
+- [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：多轮 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## OpenAI
 
 - [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：浏览问答；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -103,6 +107,10 @@
 ## UIUC
 
 - [LATS](../2310.04406-lats/README.md)（`lats`）：Agent 搜索；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## UIUC / UMass Amherst / Google Cloud AI Research
+
+- [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：搜索 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## USTC / Nanjing University / Wuhan University
 

@@ -15,6 +15,8 @@ ALGORITHMS = (
     "ppo-rlhf",
     "rloo",
     "remax",
+    "gkd",
+    "minillm",
     "lightning-opd",
     "gprl",
     "tcr",

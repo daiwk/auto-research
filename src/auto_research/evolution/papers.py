@@ -48,6 +48,8 @@ POST_TRAINING_MUTATIONS = {
     "2203.02155": ("ppo-rlhf", "PPO-RLHF 的 clipped policy objective、value baseline 与 KL 约束"),
     "2305.18290": ("dpo", "DPO 直接从偏好对优化隐式奖励，无需单独训练 reward model"),
     "2310.10505": ("remax", "ReMax 使用 greedy response baseline 降低 policy-gradient 方差"),
+    "2306.13649": ("gkd", "GKD 在学生自身生成轨迹上查询教师，并支持 on/off-policy 混合与可选散度"),
+    "2306.08543": ("minillm", "MiniLLM 以 reverse KL、teacher-mixed sampling 和方差缩减蒸馏生成模型"),
     "2402.01306": ("kto", "KTO 使用前景理论式效用优化单条 desirable/undesirable 反馈"),
     "2402.03300": ("grpo", "GRPO 用组内相对奖励替代 learned critic"),
     "2402.14740": ("rloo", "RLOO 以 leave-one-out 组均值作为无偏 baseline"),
@@ -103,6 +105,8 @@ AGENT_MUTATIONS = {
     "2204.01691": ("planner:saycan", "SayCan 将语言模型给出的技能相关性与 value-function affordance 相乘"),
     "2211.10435": ("tool:pal", "PAL 让语言模型生成可执行程序，并把精确求解交给符号解释器"),
     "2303.09014": ("planner:art", "ART 从任务库检索多步示例，在工具调用处暂停生成并注入执行结果"),
+    "2503.09516": ("tool:search-r1", "Search-R1 交错执行推理与检索，屏蔽环境返回 token，并用结果奖励更新策略"),
+    "2504.20073": ("critic:ragen", "RAGEN 的 StarPO-S 过滤退化轨迹、引入 critic baseline 和解耦 clipping"),
 }
 
 FALLBACK_PAPERS = (
@@ -149,6 +153,8 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("Training language models to follow instructions with human feedback", "PPO-based RLHF with a learned reward model.", [], "2022-03-04", "https://arxiv.org/abs/2203.02155", "2203.02155"),
     Paper("Direct Preference Optimization: Your Language Model is Secretly a Reward Model", "A closed-form preference objective without an explicit reward model.", [], "2023-05-29", "https://arxiv.org/abs/2305.18290", "2305.18290"),
     Paper("ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models", "A greedy-response baseline for low-variance policy gradients.", [], "2023-10-16", "https://arxiv.org/abs/2310.10505", "2310.10505"),
+    Paper("On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes", "Generalized Knowledge Distillation trains on student-generated sequences with teacher token feedback.", [], "2023-06-23", "https://arxiv.org/abs/2306.13649", "2306.13649"),
+    Paper("MiniLLM: Knowledge Distillation of Large Language Models", "Reverse-KL distillation with teacher-mixed sampling and variance reduction.", [], "2023-06-14", "https://arxiv.org/abs/2306.08543", "2306.08543"),
     Paper("KTO: Model Alignment as Prospect Theoretic Optimization", "Alignment from unpaired desirable and undesirable feedback.", [], "2024-02-02", "https://arxiv.org/abs/2402.01306", "2402.01306"),
     Paper("DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models", "Introduces Group Relative Policy Optimization.", [], "2024-02-05", "https://arxiv.org/abs/2402.03300", "2402.03300"),
     Paper("Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs", "RLOO uses leave-one-out baselines for efficient online RLHF.", [], "2024-02-22", "https://arxiv.org/abs/2402.14740", "2402.14740"),
@@ -194,6 +200,8 @@ AGENT_FALLBACK_PAPERS = (
     Paper("Do As I Can, Not As I Say: Grounding Language in Robotic Affordances", "Multiplies language-model skill relevance by value-function affordance.", [], "2022-04-04", "https://arxiv.org/abs/2204.01691", "2204.01691"),
     Paper("PAL: Program-aided Language Models", "Generates executable reasoning programs and delegates exact computation to an interpreter.", [], "2022-11-18", "https://arxiv.org/abs/2211.10435", "2211.10435"),
     Paper("ART: Automatic multi-step reasoning and tool-use for large language models", "Retrieves task-library demonstrations and pauses generation around external tool calls.", [], "2023-03-16", "https://arxiv.org/abs/2303.09014", "2303.09014"),
+    Paper("Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning", "Interleaves reasoning with search, masks retrieved tokens and optimizes outcome rewards.", [], "2025-03-12", "https://arxiv.org/abs/2503.09516", "2503.09516"),
+    Paper("RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning", "StarPO-S stabilizes trajectory-level agent RL against the Echo Trap.", [], "2025-04-24", "https://arxiv.org/abs/2504.20073", "2504.20073"),
 )
 
 

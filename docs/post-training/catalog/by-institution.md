@@ -46,6 +46,10 @@
 
 - [SLiC-HF](../2305.10425-slic-hf/README.md)（`slic-hf`）：序列概率校准；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Google DeepMind / Mila / University of Toronto
+
+- [GKD](../2306.13649-gkd/README.md)（`gkd`）：经典 On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## HKUST / UIUC
 
 - [RAFT](../2304.06767-raft/README.md)（`raft`）：Reward 选优微调；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -77,6 +81,10 @@
 ## Stanford / Oklahoma
 
 - [GPRL](../2605.18721-gprl/README.md)（`gprl`）：多目标 RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## Tsinghua University / Microsoft Research
+
+- [MiniLLM](../2306.08543-minillm/README.md)（`minillm`）：Reverse-KL distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## UCLA
 

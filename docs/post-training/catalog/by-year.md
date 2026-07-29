@@ -29,7 +29,9 @@
 ## 2023
 
 - [DPO](../2305.18290-dpo/README.md)（`dpo`）：直接偏好优化；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [GKD](../2306.13649-gkd/README.md)（`gkd`）：经典 On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [IPO](../2310.12036-ipo/README.md)（`ipo`）：偏好正则；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [MiniLLM](../2306.08543-minillm/README.md)（`minillm`）：Reverse-KL distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [RAFT](../2304.06767-raft/README.md)（`raft`）：Reward 选优微调；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [ReMax](../2310.10505-remax/README.md)（`remax`）：经典 RLHF；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [RRHF](../2304.05302-rrhf/README.md)（`rrhf`）：全排序偏好；详情页包含核心机制、公式、原文结果和本地复现边界。

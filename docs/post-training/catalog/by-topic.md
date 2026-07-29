@@ -15,6 +15,10 @@
 
 - [SimPO](../2405.14734-simpo/README.md)（`simpo`）：Reference-free 偏好；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Reverse-KL distillation
+
+- [MiniLLM](../2306.08543-minillm/README.md)（`minillm`）：Reverse-KL distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## Reward 选优微调
 
 - [RAFT](../2304.06767-raft/README.md)（`raft`）：Reward 选优微调；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -62,6 +66,10 @@
 ## 稳定序列 RL
 
 - [GSPO](../2507.18071-gspo/README.md)（`gspo`）：稳定序列 RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## 经典 On-policy distillation
+
+- [GKD](../2306.13649-gkd/README.md)（`gkd`）：经典 On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## 经典 RLHF
 

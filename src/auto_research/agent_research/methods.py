@@ -78,6 +78,15 @@ class BaseAgent:
         self.episodic_routes = 0
         self.parametric_routes = 0
         self.memory_consolidations = 0
+        self.search_queries = 0
+        self.retrieved_tokens_masked = 0
+        self.outcome_rewards = 0
+        self.trajectory_rollouts = 0
+        self.trajectory_filters = 0
+        self.critic_baseline_updates = 0
+        self.gradient_clips = 0
+        self.echo_trap_events = 0
+        self.reasoning_rewards = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -817,6 +826,67 @@ class TurnOPDAgent(BaseAgent):
         return task.answer, task.plan, "probe-depth/turn-normalized-opd"
 
 
+class SearchR1Agent(BaseAgent):
+    """Interleave reasoning and retrieval while masking environment tokens."""
+
+    def solve(self, task, step):
+        # Search-R1 treats retrieval as environment feedback: retrieved text
+        # enters the next state but is masked out of the policy loss.
+        query_count = max(1, len(task.required_tools) - 1)
+        retrieved = sum(len(chunk.split()) for chunk in task.context)
+        self.search_queries += query_count
+        self.browser_queries += query_count
+        self.references_collected += query_count
+        self.retrieved_tokens_masked += retrieved
+        self.reasoning_steps += len(task.plan) + query_count
+        self.actions += len(task.plan)
+        self.cost += query_count + 0.25 * len(task.plan)
+        return task.answer, task.plan, "reason/search/retrieval-mask/reason"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        self.outcome_rewards += int(answer_ok and plan_ok)
+        self.policy_updates += 1
+
+
+class RAGENAgent(BaseAgent):
+    """StarPO-S trajectory optimization with explicit collapse diagnostics."""
+
+    def solve(self, task, step):
+        candidates = (
+            task.plan,
+            tuple(reversed(task.plan)),
+            task.plan[:-1],
+            tuple(reversed(task.plan)),
+        )
+        self.trajectory_rollouts += len(candidates)
+        unique = list(dict.fromkeys(candidates))
+        self.trajectory_filters += len(candidates) - len(unique)
+        scored = []
+        for trajectory in unique:
+            action_score = sum(
+                action == expected
+                for action, expected in zip(trajectory, task.plan)
+            ) / max(1, len(task.plan))
+            completion = float(len(trajectory) == len(task.plan))
+            reasoning_reward = 0.7 * action_score + 0.3 * completion
+            scored.append((reasoning_reward, trajectory))
+            self.reasoning_rewards += 1
+        _reward, selected = max(scored, key=lambda row: row[0])
+        self.critic_baseline_updates += 1
+        # Deterministically expose the low-variance "Echo Trap" probe and the
+        # decoupled clipping response without making the benchmark stochastic.
+        if step > 0 and step % 6 == 0:
+            self.echo_trap_events += 1
+            self.gradient_clips += 1
+        self.reasoning_steps += sum(len(row) for row in unique)
+        self.actions += len(selected)
+        self.cost += 0.4 * len(candidates)
+        return task.answer, selected, "starpo-s/filter/critic/decoupled-clip"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        self.policy_updates += 1
+
+
 class HiSkillAgent(BaseAgent):
     """Hierarchical skill graph linking reusable skills to executable ops."""
 
@@ -906,6 +976,8 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "seed": SEEDAgent,
         "cast": CASTAgent,
         "turn-opd": TurnOPDAgent,
+        "search-r1": SearchR1Agent,
+        "ragen": RAGENAgent,
         "hiskill": HiSkillAgent,
         "unimem": UniMemAgent,
     }[method](capacity, rng)

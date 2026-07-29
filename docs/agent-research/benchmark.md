@@ -86,3 +86,7 @@ trace、`metrics.json` 和中文 `report.md`。
 CAST 的 solver query 和 turn credit、TurnOPD 的 rollout 节省、HiSkill 的图节点/边与
 AtomicOp 复用、UniMem 的 episodic/parametric route 和 consolidation。相同 benchmark
 内固定 episode、memory budget 与 seed，禁止只比较最终成功率。
+
+Search-R1 还必须报告搜索次数、被 loss mask 的检索 token 和 outcome update；RAGEN
+必须报告 trajectory rollout/filter、critic baseline、Echo Trap 探针与 gradient clip。
+确定性 mini-suite 的 100% 成功率只证明控制流可执行，不等于论文真实搜索或游戏效果。

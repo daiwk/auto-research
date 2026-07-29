@@ -12,7 +12,7 @@
 | 成对偏好 | DPO | 已实现 | reference-relative pairwise objective |
 | 非成对/单阶段偏好 | KTO、ORPO | 已实现 | 单条二元反馈；SFT + odds ratio |
 | Group-relative reasoning RL | GRPO、DAPO、GSPO | 已实现 | group advantage、非对称 token clip、sequence clip |
-| On-policy distillation | Lightning OPD、Relay-OPD | 已实现 | 离线教师缓存；失效前缀检测与有限教师接力 |
+| On-policy distillation | GKD、MiniLLM、Lightning OPD、Relay-OPD | 已实现 | 学生轨迹、reverse KL、离线教师缓存、有限教师接力 |
 | 多目标与过程奖励 | GPRL、TCR、CoRT | 已实现 | 分维 reward、checklist residual、反事实 token credit |
 | 自由生成偏好 | IPO、SimPO | 已实现 | token-level sequence probability、reference-relative / reference-free |
 | 长度与能力边界 | LUSPO、CoBA-RL | 已实现 | 长度无偏 sequence RL、动态课程边界与教师触发 |
