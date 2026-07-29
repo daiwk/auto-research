@@ -111,6 +111,16 @@ class AgentResearchRunner:
             "gradient_clips": agent.gradient_clips,
             "echo_trap_events": agent.echo_trap_events,
             "reasoning_rewards": agent.reasoning_rewards,
+            "off_policy_reuses": agent.off_policy_reuses,
+            "leave_one_out_updates": agent.leave_one_out_updates,
+            "per_token_clips": agent.per_token_clips,
+            "context_compressions": agent.context_compressions,
+            "parallel_trajectory_groups": agent.parallel_trajectory_groups,
+            "multi_turn_group_updates": agent.multi_turn_group_updates,
+            "simulated_user_turns": agent.simulated_user_turns,
+            "intent_refinements": agent.intent_refinements,
+            "real_tool_responses": agent.real_tool_responses,
+            "task_completion_rewards": agent.task_completion_rewards,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

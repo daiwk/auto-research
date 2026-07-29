@@ -50,6 +50,8 @@ POST_TRAINING_MUTATIONS = {
     "2310.10505": ("remax", "ReMax 使用 greedy response baseline 降低 policy-gradient 方差"),
     "2306.13649": ("gkd", "GKD 在学生自身生成轨迹上查询教师，并支持 on/off-policy 混合与可选散度"),
     "2306.08543": ("minillm", "MiniLLM 以 reverse KL、teacher-mixed sampling 和方差缩减蒸馏生成模型"),
+    "2601.18734": ("opsd", "OPSD 让同一模型以普通/特权上下文分别作为学生和教师，并裁剪逐 token 散度"),
+    "2602.12275": ("opcd", "OPCD 在学生轨迹上以 reverse KL 内化教师上下文中的经验与系统行为"),
     "2402.01306": ("kto", "KTO 使用前景理论式效用优化单条 desirable/undesirable 反馈"),
     "2402.03300": ("grpo", "GRPO 用组内相对奖励替代 learned critic"),
     "2402.14740": ("rloo", "RLOO 以 leave-one-out 组均值作为无偏 baseline"),
@@ -107,6 +109,12 @@ AGENT_MUTATIONS = {
     "2303.09014": ("planner:art", "ART 从任务库检索多步示例，在工具调用处暂停生成并注入执行结果"),
     "2503.09516": ("tool:search-r1", "Search-R1 交错执行推理与检索，屏蔽环境返回 token，并用结果奖励更新策略"),
     "2504.20073": ("critic:ragen", "RAGEN 的 StarPO-S 过滤退化轨迹、引入 critic baseline 和解耦 clipping"),
+    "2502.01600": ("critic:loop", "LOOP 以 leave-one-out baseline、离策略轨迹复用与逐 token clipping 训练长程交互 Agent"),
+    "2505.16421": ("planner:webagent-r1", "WebAgent-R1 用动态上下文压缩、并行 trajectory rollout 和多轮 M-GRPO"),
+    "2508.18669": ("tool:mua-rl", "MUA-RL 将模拟用户反馈和真实工具响应纳入只使用最终任务奖励的多轮 RL"),
+    "2305.16291": ("memory:voyager", "Voyager 将成功程序沉淀为可检索、可组合的终身技能库"),
+    "2308.08155": ("planner:autogen", "AutoGen 以可配置角色对话和代码执行组织多 Agent 协作"),
+    "2601.20439": ("planner:pearl", "PEARL 探索多条工具计划，并用执行反馈自适应更新计划策略"),
 }
 
 FALLBACK_PAPERS = (
@@ -155,6 +163,8 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models", "A greedy-response baseline for low-variance policy gradients.", [], "2023-10-16", "https://arxiv.org/abs/2310.10505", "2310.10505"),
     Paper("On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes", "Generalized Knowledge Distillation trains on student-generated sequences with teacher token feedback.", [], "2023-06-23", "https://arxiv.org/abs/2306.13649", "2306.13649"),
     Paper("MiniLLM: Knowledge Distillation of Large Language Models", "Reverse-KL distillation with teacher-mixed sampling and variance reduction.", [], "2023-06-14", "https://arxiv.org/abs/2306.08543", "2306.08543"),
+    Paper("Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models", "A shared model teaches its context-free view from a privileged-solution view on student trajectories.", [], "2026-01-26", "https://arxiv.org/abs/2601.18734", "2601.18734"),
+    Paper("On-Policy Context Distillation for Language Models", "Reverse-KL context distillation internalizes transient experience and system prompts on student trajectories.", [], "2026-02-12", "https://arxiv.org/abs/2602.12275", "2602.12275"),
     Paper("KTO: Model Alignment as Prospect Theoretic Optimization", "Alignment from unpaired desirable and undesirable feedback.", [], "2024-02-02", "https://arxiv.org/abs/2402.01306", "2402.01306"),
     Paper("DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models", "Introduces Group Relative Policy Optimization.", [], "2024-02-05", "https://arxiv.org/abs/2402.03300", "2402.03300"),
     Paper("Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs", "RLOO uses leave-one-out baselines for efficient online RLHF.", [], "2024-02-22", "https://arxiv.org/abs/2402.14740", "2402.14740"),
@@ -202,6 +212,12 @@ AGENT_FALLBACK_PAPERS = (
     Paper("ART: Automatic multi-step reasoning and tool-use for large language models", "Retrieves task-library demonstrations and pauses generation around external tool calls.", [], "2023-03-16", "https://arxiv.org/abs/2303.09014", "2303.09014"),
     Paper("Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning", "Interleaves reasoning with search, masks retrieved tokens and optimizes outcome rewards.", [], "2025-03-12", "https://arxiv.org/abs/2503.09516", "2503.09516"),
     Paper("RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning", "StarPO-S stabilizes trajectory-level agent RL against the Echo Trap.", [], "2025-04-24", "https://arxiv.org/abs/2504.20073", "2504.20073"),
+    Paper("Reinforcement Learning for Long-Horizon Interactive LLM Agents", "LOOP reuses trajectories with leave-one-out advantages and token-level PPO clipping without a value network.", [], "2025-02-03", "https://arxiv.org/abs/2502.01600", "2502.01600"),
+    Paper("WebAgent-R1: Training Web Agents via End-to-End Multi-Turn Reinforcement Learning", "Dynamic context compression and parallel M-GRPO trajectories train web agents from binary outcomes.", [], "2025-05-22", "https://arxiv.org/abs/2505.16421", "2505.16421"),
+    Paper("MUA-RL: Multi-turn User-interacting Agent Reinforcement Learning for agentic tool use", "Simulated users dynamically refine intent while real tool responses close the end-to-end RL loop.", [], "2025-08-26", "https://arxiv.org/abs/2508.18669", "2508.18669"),
+    Paper("Voyager: An Open-Ended Embodied Agent with Large Language Models", "Stores successful executable programs in a lifelong skill library for retrieval and composition.", [], "2023-05-25", "https://arxiv.org/abs/2305.16291", "2305.16291"),
+    Paper("AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation", "Configurable conversational roles coordinate reasoning, tool use and code execution.", [], "2023-08-16", "https://arxiv.org/abs/2308.08155", "2308.08155"),
+    Paper("PEARL: Plan Exploration and Adaptive Reinforcement Learning for Multihop Tool Use", "Explores alternative tool plans and adapts the policy from execution outcomes.", [], "2026-01-28", "https://arxiv.org/abs/2601.20439", "2601.20439"),
 )
 
 

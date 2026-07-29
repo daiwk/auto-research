@@ -10,7 +10,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
     if model == "post-training":
         installed = [
             "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "rloo", "remax",
-            "gkd", "minillm",
+            "gkd", "minillm", "opsd", "opcd",
             "dapo", "gspo", "lightning-opd", "gprl", "tcr",
             "ipo", "simpo", "luspo", "coba-rl",
             "constitutional-ai", "rrhf", "raft",
@@ -61,6 +61,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "tool:webgpt", "planner:saycan", "tool:pal", "planner:art",
             "critic:seed", "critic:cast", "planner:turn-opd",
             "tool:search-r1", "critic:ragen",
+            "critic:loop", "planner:webagent-r1", "tool:mua-rl",
+            "memory:voyager", "planner:autogen", "planner:pearl",
             "memory:hiskill", "memory:unimem",
         ]
     if model == "micro-llm":

@@ -118,7 +118,45 @@ def test_post_training_and_agent_discovery_maps_only_audited_operators():
     assert post_map["2305.10425"] == "slic-hf"
     assert post_map["2310.05344"] == "steerlm"
     assert post_map["2401.01335"] == "spin"
-    assert "grpo" in allowed_architectures("post-training", "重点比较 GRPO", post)
+    assert "grpo" in allowed_architectures(
+        "post-training", "重点比较 GRPO", post
+    )
+
+
+def test_all_executable_post_training_methods_are_in_evolve():
+    from auto_research.post_training.models import ALGORITHMS
+
+    papers = discover_papers("post training", 100, False, track="post-training")
+    assert set(ALGORITHMS) <= set(
+        allowed_architectures("post-training", "all methods", papers)
+    )
+
+
+def test_implemented_agent_papers_have_composable_evolve_operators():
+    from auto_research.agent_research.models import METHODS
+    from auto_research.evolution.papers import AGENT_MUTATIONS
+
+    papers = discover_papers("agent methods", 100, False, track="agent")
+    operators = {
+        paper.architecture for paper in papers if paper.architecture is not None
+    }
+    assert {
+        "memory:voyager",
+        "planner:autogen",
+        "planner:pearl",
+        "tool:search-r1",
+        "critic:ragen",
+        "critic:loop",
+        "planner:webagent-r1",
+        "tool:mua-rl",
+    } <= operators
+    architectures = allowed_architectures("agent", "all agent methods", papers)
+    assert operators <= set(architectures)
+    mapped_methods = {
+        operator.split(":", 1)[1]
+        for operator, _ in AGENT_MUTATIONS.values()
+    }
+    assert set(METHODS) - {"long-context"} <= mapped_methods
 
     agent = discover_papers("memory planning tools reflection", 8, False, track="agent")
     agent_map = {paper.arxiv_id: paper.architecture for paper in agent}

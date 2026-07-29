@@ -16,9 +16,12 @@
 
 - [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [LEGOMem](../2510.04851-legomem/README.md)（`legomem`）：过程记忆；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [LOOP](../2502.01600-loop/README.md)（`loop`）：长时程 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [MemTool](../2507.21428-memtool/README.md)（`memtool`）：工具记忆；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：多轮用户 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：多轮 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：搜索 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## 2024
 

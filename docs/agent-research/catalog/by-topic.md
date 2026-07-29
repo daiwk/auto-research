@@ -54,6 +54,10 @@
 
 - [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：多轮 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## 多轮用户 Agent RL
+
+- [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：多轮用户 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## 工具反馈
 
 - [CRITIC](../2305.11738-critic/README.md)（`critic`）：工具反馈；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -94,6 +98,10 @@
 
 - [Voyager](../2305.16291-voyager/README.md)（`voyager`）：终身学习；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## 网页 Agent RL
+
+- [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## 自动工具推理
 
 - [ART](../2303.09014-art/README.md)（`art`）：自动工具推理；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -133,3 +141,7 @@
 ## 通用软件 Agent
 
 - [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：通用软件 Agent；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## 长时程 Agent RL
+
+- [LOOP](../2502.01600-loop/README.md)（`loop`）：长时程 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。

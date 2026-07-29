@@ -34,6 +34,8 @@ MODULES = {
         "cort": "2607.25659-cort",
         "gkd": "2306.13649-gkd",
         "minillm": "2306.08543-minillm",
+        "opsd": "2601.18734-opsd",
+        "opcd": "2602.12275-opcd",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -69,6 +71,9 @@ MODULES = {
         "unimem": "2607.26017-unimem",
         "search-r1": "2503.09516-search-r1",
         "ragen": "2504.20073-ragen",
+        "loop": "2502.01600-loop",
+        "webagent-r1": "2505.16421-webagent-r1",
+        "mua-rl": "2508.18669-mua-rl",
     },
 }
 

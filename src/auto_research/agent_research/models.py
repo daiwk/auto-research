@@ -38,6 +38,9 @@ METHODS = (
     "turn-opd",
     "search-r1",
     "ragen",
+    "loop",
+    "webagent-r1",
+    "mua-rl",
     "hiskill",
     "unimem",
 )

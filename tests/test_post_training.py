@@ -10,7 +10,7 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
     [
         "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
         "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr",
-        "gkd", "minillm",
+        "gkd", "minillm", "opsd", "opcd",
         "constitutional-ai", "rrhf", "raft",
         "slic-hf", "steerlm", "spin",
     ],
@@ -82,6 +82,48 @@ def test_classic_on_policy_distillation_mechanisms_are_observable(
         assert diagnostic in result.training["last_diagnostics"]
     assert result.training["online_teacher_calls"] > 0
     assert result.training["teacher_cache_entries"] == 48
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        (
+            "opsd",
+            (
+                "shared_teacher_student_parameters",
+                "privileged_solution_conditioning",
+                "dense_token_teacher_calls",
+                "pointwise_divergence_clip",
+                "jsd_beta",
+            ),
+        ),
+        (
+            "opcd",
+            (
+                "context_conditioned_teacher_calls",
+                "context_free_student_view",
+                "experience_context_fraction",
+                "reverse_kl",
+                "experience_internalization_updates",
+            ),
+        ),
+    ],
+)
+def test_privileged_and_context_on_policy_distillation_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=24,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+    assert result.training["online_teacher_calls"] > 0
+    assert result.final["accuracy"] >= result.baseline["accuracy"]
 
 
 @pytest.mark.parametrize(

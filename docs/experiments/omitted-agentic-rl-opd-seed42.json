@@ -1,0 +1,54 @@
+{
+  "seed": 42,
+  "scope": "candidate-policy and deterministic agent mini-suite mechanism validation",
+  "post_training": {
+    "opsd": {
+      "dataset": "gsm8k-candidate",
+      "examples": 128,
+      "steps": 120,
+      "baseline_accuracy": 0.25,
+      "final_accuracy": 0.90625,
+      "mean_reward": 0.9009100667879821,
+      "online_teacher_calls": 480
+    },
+    "opcd": {
+      "dataset": "gsm8k-candidate",
+      "examples": 128,
+      "steps": 120,
+      "baseline_accuracy": 0.25,
+      "final_accuracy": 0.96875,
+      "mean_reward": 0.9509380677139144,
+      "online_teacher_calls": 480
+    }
+  },
+  "agentic_rl": {
+    "loop": {
+      "benchmark": "planbench-mini",
+      "episodes": 120,
+      "joint_success": 1.0,
+      "average_cost": 2.2,
+      "off_policy_reuses": 476,
+      "leave_one_out_updates": 480,
+      "per_token_clips": 120
+    },
+    "webagent-r1": {
+      "benchmark": "scalemcp-mini",
+      "episodes": 120,
+      "joint_success": 1.0,
+      "average_cost": 2.6,
+      "context_tokens_compressed": 360,
+      "parallel_trajectory_groups": 120,
+      "multi_turn_group_updates": 120
+    },
+    "mua-rl": {
+      "benchmark": "scalemcp-mini",
+      "episodes": 120,
+      "joint_success": 1.0,
+      "average_cost": 2.25,
+      "simulated_user_turns": 360,
+      "intent_refinements": 240,
+      "real_tool_responses": 360,
+      "task_completion_rewards": 120
+    }
+  }
+}

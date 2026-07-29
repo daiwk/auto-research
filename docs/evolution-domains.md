@@ -32,13 +32,24 @@ flowchart LR
 | 领域 | 已实现的自动进化 | 可复用论文组件 | 当前状态 |
 |---|---|---|---|
 | 搜广推与 LLM 应用 | RankMixer、HyFormer；MovieLens 与公共推荐评测 | LONGER、UniMixer、RankMixer 等结构及工业论文 adapter | **可运行** |
-| 纯 LLM | micro‑LLM；架构 → 数据配方 → SFT/后训练的分轮搜索 | 纯 LLM 架构、Lightning OPD、GPRL、TCR 等 | **可运行** |
-| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | PPO/DPO/GRPO、SLiC-HF/SteerLM/SPIN、Constitutional AI、RRHF、RAFT、LUSPO/CoBA-RL、OPD/GPRL/TCR | **可运行** |
-| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct/LATS/ART/SayCan、WebGPT/PAL/MRKL、HuggingGPT、Generative Agents/MemGPT、MetaGPT/CRITIC、软件 Agent | **可运行** |
+| 纯 LLM | micro‑LLM；架构 → 数据配方 → SFT/后训练的分轮搜索 | 纯 LLM 架构、Lightning OPD、OPSD、OPCD、GPRL、TCR 等 | **可运行** |
+| LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | 当前全部后训练 adapter：PPO/DPO/GRPO、偏好优化、OPSD/OPCD/Lightning OPD、过程奖励与课程 RL | **可运行** |
+| Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct/LATS/ART、Voyager/AutoGen/PEARL、LOOP/WebAgent-R1/MUA-RL、Agentic RL/OPD 与软件 Agent | **可运行** |
 
 !!! note "Agent 状态"
     Agent evolve 可使用确定性 episode evaluator，也可在 `swebench-local` 创建临时
     仓库并真实编辑/测试。论文检索只映射到已审计算子；无安全映射的论文保持 evidence-only。
+
+## 已实现论文到 evolve 的系统审计
+
+- **后训练**：`post_training.models.ALGORITHMS` 中的全部算法均有论文 mutation，
+  新增 OPSD 与 OPCD 后由测试强制检查集合覆盖，避免独立复现完成但 genome 漏接。
+- **Agent**：除公平对照 `long-context` 外，当前所有论文方法均映射为 memory、
+  planner、tool 或 critic 算子。本轮补齐此前遗漏的 Voyager、AutoGen、PEARL，并加入
+  LOOP、WebAgent-R1、MUA-RL；Search-R1 也从通用 tool fallback 升级为显式算子。
+- **推荐与通用 LLM**：只接入能由当前 evaluator 公平计分的结构。需要专有数据协议、
+  serving 延迟目标或 byte-level backend 的方法继续保留为 evidence-only，避免“能列出
+  名字”被误报为“已搜索其核心机制”。
 
 ## 组合式研究
 

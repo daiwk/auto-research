@@ -25,6 +25,9 @@
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
 | 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | UIUC / UMass Amherst / Google Cloud AI Research，2025-03-12 | [已开源](https://github.com/PeterGriffinJin/Search-R1) | `search-r1` |
 | 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | Northwestern / Stanford / Microsoft / UW / NYU / UBC / SMU，2025-04-24 | [已开源](https://github.com/RAGEN-AI/RAGEN) | `ragen` |
+| 长时程 Agent RL | [LOOP](2502.01600-loop/README.md) | Apple，2025-02-03 | [已开源](https://github.com/apple/ml-loop) | `loop` |
+| 网页 Agent RL | [WebAgent-R1](2505.16421-webagent-r1/README.md) | University of Virginia / Amazon / Georgia Tech，2025-05-22 | [已开源](https://github.com/weizhepei/WebAgent-R1) | `webagent-r1` |
+| 多轮用户 Agent RL | [MUA-RL](2508.18669-mua-rl/README.md) | Meituan / CAS / Peking University，2025-08-26 | [已开源](https://github.com/zzwkk/MUA-RL) | `mua-rl` |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | Princeton，2024-05-06 | [已开源](https://github.com/SWE-agent/SWE-agent) | `swe-agent` |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | All-Hands-AI / CMU 等，2024-07-23 | [已开源](https://github.com/All-Hands-AI/OpenHands) | `openhands` |
 | 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | AI21 Labs 等，2022-05-01 | 未发布完整实现 | `mrkl` |

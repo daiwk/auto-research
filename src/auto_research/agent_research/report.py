@@ -36,6 +36,9 @@ PAPERS = {
     "turn-opd": ("Turn-Level OPD", "https://arxiv.org/abs/2607.05804"),
     "search-r1": ("Search-R1", "https://arxiv.org/abs/2503.09516"),
     "ragen": ("RAGEN / StarPO-S", "https://arxiv.org/abs/2504.20073"),
+    "loop": ("LOOP", "https://arxiv.org/abs/2502.01600"),
+    "webagent-r1": ("WebAgent-R1", "https://arxiv.org/abs/2505.16421"),
+    "mua-rl": ("MUA-RL", "https://arxiv.org/abs/2508.18669"),
     "hiskill": ("HiSkill", "https://arxiv.org/abs/2607.25853"),
     "unimem": ("UniMem", "https://arxiv.org/abs/2607.26017"),
 }
@@ -129,6 +132,9 @@ def render_report(result: AgentResearchResult) -> str:
 - search queries / retrieved tokens masked / outcome rewards：{result.diagnostics['search_queries']} / {result.diagnostics['retrieved_tokens_masked']} / {result.diagnostics['outcome_rewards']}
 - trajectory rollouts / filtered：{result.diagnostics['trajectory_rollouts']} / {result.diagnostics['trajectory_filters']}
 - critic baselines / gradient clips / Echo Trap probes：{result.diagnostics['critic_baseline_updates']} / {result.diagnostics['gradient_clips']} / {result.diagnostics['echo_trap_events']}
+- off-policy reuse / leave-one-out updates / per-token clips：{result.diagnostics['off_policy_reuses']} / {result.diagnostics['leave_one_out_updates']} / {result.diagnostics['per_token_clips']}
+- context compression / parallel trajectory groups / M-GRPO updates：{result.diagnostics['context_compressions']} / {result.diagnostics['parallel_trajectory_groups']} / {result.diagnostics['multi_turn_group_updates']}
+- simulated-user turns / intent refinements / tool responses / completion rewards：{result.diagnostics['simulated_user_turns']} / {result.diagnostics['intent_refinements']} / {result.diagnostics['real_tool_responses']} / {result.diagnostics['task_completion_rewards']}
 - skill graph nodes / edges / reused atomic operations：{result.diagnostics['skill_graph_nodes']} / {result.diagnostics['skill_graph_edges']} / {result.diagnostics['atomic_ops_reused']}
 - episodic / parametric routes / memory consolidations：{result.diagnostics['episodic_routes']} / {result.diagnostics['parametric_routes']} / {result.diagnostics['memory_consolidations']}
 - fidelity：{result.diagnostics['fidelity']}

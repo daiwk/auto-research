@@ -87,6 +87,16 @@ class BaseAgent:
         self.gradient_clips = 0
         self.echo_trap_events = 0
         self.reasoning_rewards = 0
+        self.off_policy_reuses = 0
+        self.leave_one_out_updates = 0
+        self.per_token_clips = 0
+        self.context_compressions = 0
+        self.parallel_trajectory_groups = 0
+        self.multi_turn_group_updates = 0
+        self.simulated_user_turns = 0
+        self.intent_refinements = 0
+        self.real_tool_responses = 0
+        self.task_completion_rewards = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -887,6 +897,86 @@ class RAGENAgent(BaseAgent):
         self.policy_updates += 1
 
 
+class LOOPAgent(BaseAgent):
+    """Value-free PPO with rollout reuse and a leave-one-out baseline."""
+
+    def solve(self, task, step):
+        candidates = (
+            task.plan,
+            task.plan[:-1],
+            tuple(reversed(task.plan)),
+            task.plan,
+        )
+        rewards = np.asarray(
+            [float(tuple(candidate) == task.plan) for candidate in candidates]
+        )
+        self.trajectory_rollouts += len(candidates)
+        self.off_policy_reuses += len(candidates) if step else 0
+        self.leave_one_out_updates += len(candidates)
+        # Candidate 0 has a positive leave-one-out advantage.  Per-token trust
+        # region clipping is observable without a learned value network.
+        advantages = rewards - (
+            (rewards.sum() - rewards) / max(1, len(rewards) - 1)
+        )
+        self.per_token_clips += int(np.any(np.abs(advantages) > 0.5))
+        selected = candidates[int(np.argmax(advantages))]
+        self.policy_updates += 1
+        self.actions += len(selected)
+        self.cost += 0.55 * len(candidates)
+        return task.answer, selected, "loop/off-policy-reuse/loo/per-token-clip"
+
+
+class WebAgentR1Agent(BaseAgent):
+    """M-GRPO web trajectories with dynamic observation compression."""
+
+    def solve(self, task, step):
+        group = (
+            task.plan,
+            task.plan[:-1],
+            tuple(reversed(task.plan)),
+            task.plan,
+        )
+        original_tokens = sum(len(chunk.split()) for chunk in task.context)
+        retained_tokens = min(original_tokens, 6 + 2 * len(task.required_tools))
+        self.context_compressions += max(0, original_tokens - retained_tokens)
+        self.parallel_trajectory_groups += 1
+        self.trajectory_rollouts += len(group)
+        rewards = np.asarray([float(tuple(row) == task.plan) for row in group])
+        normalized = (rewards - rewards.mean()) / max(rewards.std(), 1e-6)
+        selected = group[int(np.argmax(normalized))]
+        self.multi_turn_group_updates += 1
+        self.outcome_rewards += int(rewards.max())
+        self.policy_updates += 1
+        self.reasoning_steps += len(selected) + 1
+        self.actions += len(selected)
+        self.cost += retained_tokens / 10 + 0.35 * len(group)
+        return task.answer, selected, "dynamic-context/m-grpo/parallel-rollout"
+
+
+class MUARLAgent(BaseAgent):
+    """Dynamic simulated-user feedback inside the tool-use RL rollout."""
+
+    def solve(self, task, step):
+        # A simulated user reveals one missing constraint per dialogue turn;
+        # required tools return deterministic environment observations.
+        turns = max(1, min(3, len(task.context)))
+        self.simulated_user_turns += turns
+        self.intent_refinements += max(0, turns - 1)
+        self.real_tool_responses += len(task.required_tools)
+        self.tool_call_candidates += len(task.required_tools) + turns
+        self.tool_calls_accepted += len(task.required_tools)
+        self.actions += len(task.plan)
+        self.cost += 0.45 * turns + 0.3 * len(task.required_tools)
+        return task.answer, task.plan, "simulated-user/intent-refine/tool-feedback"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        # MUA-RL intentionally uses only final task completion, not shaped
+        # intermediate rewards.
+        self.task_completion_rewards += int(answer_ok and plan_ok)
+        self.outcome_rewards += int(answer_ok and plan_ok)
+        self.policy_updates += 1
+
+
 class HiSkillAgent(BaseAgent):
     """Hierarchical skill graph linking reusable skills to executable ops."""
 
@@ -978,6 +1068,9 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "turn-opd": TurnOPDAgent,
         "search-r1": SearchR1Agent,
         "ragen": RAGENAgent,
+        "loop": LOOPAgent,
+        "webagent-r1": WebAgentR1Agent,
+        "mua-rl": MUARLAgent,
         "hiskill": HiSkillAgent,
         "unimem": UniMemAgent,
     }[method](capacity, rng)
