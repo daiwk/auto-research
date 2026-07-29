@@ -20,6 +20,14 @@ nav:
           - 按公司浏览: reproductions/catalog/by-company.md
           - 按主题浏览: reproductions/catalog/by-topic.md
           - 按年月浏览: reproductions/catalog/by-month.md
+          - 论文谱系与缺口: reproductions/lineage.md
+          - 统一评测协议: reproductions/benchmark.md
+          - 论文实现:
+              - 全部论文与实验结论: reproductions/README.md
+              - 目录与扩展约定: reproductions/catalog/README.md
+              - 按公司查找论文: reproductions/catalog/by-company.md
+              - 按主题查找论文: reproductions/catalog/by-topic.md
+              - 按年月查找论文: reproductions/catalog/by-month.md
       - 纯 LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md

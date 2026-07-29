@@ -117,6 +117,14 @@ def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
     assert "      - Agent:" in navigation
 
 
+def test_global_recommendation_lineage_has_no_dead_end_dcn_branch():
+    lineage = (ROOT / "docs" / "research-lineage.md").read_text(encoding="utf-8")
+    assert 'F["特征交互<br/>DeepFM / DCN-V2"]' in lineage
+    assert 'F --> M["多任务与现代排序<br/>ESMM / MMoE / PLE"]' in lineage
+    assert 'M --> H["长序列与大规模排序<br/>HSTU / RankMixer / HyFormer"]' in lineage
+    assert 'W --> C["DCN-V2"]' not in lineage
+
+
 def test_each_research_paper_page_has_complete_contract():
     required = (
         "## 论文信息",

@@ -15,10 +15,12 @@
 
 ```mermaid
 flowchart LR
-  W["Wide & Deep"] --> D["DIN / DIEN"]
-  W --> C["DCN-V2"]
-  D --> B["BST / SASRec"]
-  B --> H["HSTU / RankMixer / HyFormer"]
+  W["Wide & Deep"] --> F["特征交互<br/>DeepFM / DCN-V2"]
+  W --> I["兴趣建模<br/>DIN / DIEN"]
+  F --> M["多任务与现代排序<br/>ESMM / MMoE / PLE"]
+  I --> S["序列建模<br/>BST / SASRec"]
+  M --> H["长序列与大规模排序<br/>HSTU / RankMixer / HyFormer"]
+  S --> H
   H --> G["TIGER / OneRec / CQ-SID"]
   G --> R["RL / value-aware generation"]
 ```
