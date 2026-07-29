@@ -28,6 +28,14 @@ flowchart LR
   E --> F["CTR ranker"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![IDProxy：将多模态 LLM 表征对齐到物品 ID 空间 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2603.01590v1/x3.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2603.01590)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

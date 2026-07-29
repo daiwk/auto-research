@@ -24,6 +24,14 @@ flowchart LR
  G["ID + visual features"] --> H["ranking model"]
  F --> H
 ```
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MM-LLM：工业推荐中的多媒体理解特征 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2605.09338v1/mllm_framework.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2605.09338)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 caption 学习 $L_{cap}=BCE(\hat a,a)$；排序融合 $e_i=e_{id}+e_{visual}+g(e_{id},e_{cap})\odot e_{cap}$，再以全库 CE 训练 next-item。
 ### 论文离线与线上效果

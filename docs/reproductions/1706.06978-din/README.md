@@ -31,6 +31,14 @@ flowchart LR
     M --> Y["CTR logit"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![DIN：Deep Interest Network 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/1706.06978/assets/images/omni/DIN_new.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/1706.06978)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 对候选向量 $q$ 和第 $i$ 个行为 $e_i$，local activation 学习权重：

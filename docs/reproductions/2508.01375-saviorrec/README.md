@@ -32,6 +32,14 @@ flowchart LR
   A --> C["CTR head"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SaviorRec：让语义冷启动表示跟上动态行为空间 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2508.01375/assets/x1.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2508.01375)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 内容 encoder 用行为正对进行对比学习；RQ 逐层量化残差：

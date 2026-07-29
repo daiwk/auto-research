@@ -32,6 +32,14 @@ flowchart LR
     P --> A["答案 / 成功程序写回"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![ART：自动多步推理与工具使用 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2303.09014#page=1)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2303.09014)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

@@ -24,6 +24,14 @@ flowchart LR
  C --> E["small Music student"]
  D --> E
 ```
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Zero-shot Cross-domain KD：YouTube 到 YouTube Music 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2603.28994#page=2)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2603.28994)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 $L=L_{target}+\lambda T^2KL(softmax(z_T/T)\Vert softmax(z_S/T))+\gamma\|a_T-a_S\|^2$。
 ### 论文离线与线上效果

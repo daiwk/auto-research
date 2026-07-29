@@ -32,6 +32,14 @@ flowchart LR
   I --> J["Recall + A/A' predictability"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LLM Retrieval：稳定、可预测的广告语义召回 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2605.21969v1/images/ad_to_ad_pipeline_2.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2605.21969)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 对 primary/shadow 广告转换相对差异 $\Delta$，论文定义 90% 置信区间外的显著差异：

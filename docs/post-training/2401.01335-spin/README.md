@@ -31,6 +31,14 @@ flowchart LR
     N --> O
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SPIN：自博弈迭代微调 原论文 Figure 4](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2401.01335/assets/x4.png)
+
+> **原论文 Figure 4（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2401.01335)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

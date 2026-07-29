@@ -32,6 +32,14 @@ flowchart LR
   S --> D
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LUM：生成式用户知识构建、条件查询，再回到判别式推荐 原论文 Figure 3](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2502.08309/assets/x3.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2502.08309)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 异构 token 特征先分别投影：

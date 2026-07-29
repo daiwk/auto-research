@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import struct
 from pathlib import Path
 
 
@@ -138,3 +139,36 @@ def test_each_research_paper_page_has_complete_contract():
             )
             assert "http" in upstream_line or "未" in upstream_line
             assert "../../experiments/" in text
+
+
+def test_every_paper_page_has_a_valid_original_paper_figure():
+    """Keep figures mandatory for all current and future paper pages."""
+
+    paper_pages = []
+    for module in ("reproductions", "post-training", "agent-research"):
+        for path in (ROOT / "docs" / module).glob("*/README.md"):
+            text = path.read_text(encoding="utf-8")
+            if "## 论文信息" in text:
+                paper_pages.append((path, text))
+
+    assert len(paper_pages) >= 187
+    for path, text in paper_pages:
+        for entry in (
+            "<!-- paper-figure:start -->",
+            "### 原论文关键图",
+            "assets/paper-figure-01.png",
+            "图片来自[原论文]",
+            "版权归原作者所有",
+            "<!-- paper-figure:end -->",
+        ):
+            assert entry in text, f"{path.relative_to(ROOT)} missing {entry}"
+
+        asset = path.parent / "assets" / "paper-figure-01.png"
+        assert asset.is_file(), f"{asset.relative_to(ROOT)} missing"
+        data = asset.read_bytes()
+        assert data[:8] == b"\x89PNG\r\n\x1a\n"
+        assert len(data) >= 5_000, f"{asset.relative_to(ROOT)} is unexpectedly small"
+        width, height = struct.unpack(">II", data[16:24])
+        assert width >= 400 and height >= 140, (
+            f"{asset.relative_to(ROOT)} is unreadable at {width}x{height}"
+        )

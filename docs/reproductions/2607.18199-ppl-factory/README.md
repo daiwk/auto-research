@@ -33,6 +33,14 @@ flowchart LR
   S --> FT[fine-tune same base checkpoint]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![PPL-Factory：随任务与预算变化的数据选择 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.18199v1/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2607.18199)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 语言模型 block 的分数为：

@@ -33,6 +33,14 @@ flowchart LR
     B --> U
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LATS：Language Agent Tree Search 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2310.04406#page=1)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2310.04406)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

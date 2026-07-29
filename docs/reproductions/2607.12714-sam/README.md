@@ -29,6 +29,14 @@ flowchart LR
   F --> G[CTR score]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SAM：购买后兴趣退出与个性化恢复周期 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.12714v1/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2607.12714)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

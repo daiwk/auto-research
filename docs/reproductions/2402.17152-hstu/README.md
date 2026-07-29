@@ -30,6 +30,14 @@ flowchart LR
     R --> O["所有位置的下一 item logits"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![HSTU：Hierarchical Sequential Transduction Units 原论文 Figure 3](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2402.17152/assets/x3.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2402.17152)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 HSTU layer 先得到 $U,V,Q,K=\operatorname{SiLU}(\operatorname{Norm}(X)W_{UVQK})$，再计算

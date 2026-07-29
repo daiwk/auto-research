@@ -30,6 +30,14 @@ flowchart LR
   T --> Y["CTR/CVR/GMV 等目标"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MGOE：宏观任务图专家网络 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2506.10520v5/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2506.10520)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

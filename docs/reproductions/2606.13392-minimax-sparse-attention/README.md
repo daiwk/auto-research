@@ -28,6 +28,14 @@ flowchart LR
   D --> E["Sparse GQA output"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MiniMax Sparse Attention：面向超长上下文的块稀疏 GQA 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2606.13392v2/figures/msa_arch.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2606.13392)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

@@ -4,6 +4,32 @@
 
 可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)浏览具体论文。
 
+## 原论文关键图规范
+
+每篇论文页在“背景与主要改动”和“核心公式”之间固定展示一张原论文关键图，
+优先选择架构图、模型结构图或训练/推理流程图。图片本地保存到论文目录的
+`assets/paper-figure-01.png`，页面同时链接原始来源并保留版权说明。论文没有
+结构图时，选择最能解释方法的原始流程、算法或实验截图；无法自动取得全文的
+页面必须明确写出公开来源边界，不能用本地 Mermaid 图冒充原论文截图。
+
+新增或刷新论文图时执行：
+
+```bash
+python -m pip install -e '.[paper-figures]'
+python scripts/sync_paper_figures.py --only <arXiv ID 或论文目录关键词>
+```
+
+全库检查可执行：
+
+```bash
+python scripts/sync_paper_figures.py --workers 3
+pytest tests/test_research_module_docs.py
+```
+
+抽取器优先使用 arXiv HTML 的图注关系，老论文自动回退到 PDF 图注定位裁剪。
+少数非 arXiv 论文使用脚本中经过人工核验的公开 PDF 映射；稳定注释标记允许
+后续重复刷新而不产生重复小节。
+
 ## 选文与记录规则 {#selection-policy}
 
 - **工业论文硬门槛**：正文必须披露真实生产流量的量化线上 A/B；或由用户明确认可论文所述的统计显著全流量发布、业务收益与 guardrail 结论。仅“已部署”、离线 SOTA 或模拟器结果不算；未披露具体 lift 的 full-traffic 论文必须明确标注，不能换算成百分比。

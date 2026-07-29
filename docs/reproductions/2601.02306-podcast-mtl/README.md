@@ -29,6 +29,14 @@ flowchart LR
   B --> C["Cold-start scoring"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Spotify Podcast：冷启动广告与推广多任务学习 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2601.02306v1/Figures/pso-ex-3.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2601.02306)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

@@ -29,6 +29,14 @@ flowchart LR
   R --> C["Top-K 候选"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![YouTube DNN：候选生成中的深层用户塔 原论文 Figure 3](assets/paper-figure-01.png)](https://research.google.com/pubs/archive/45530.pdf#page=4)
+
+> **原论文 Figure 3（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

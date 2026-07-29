@@ -22,6 +22,14 @@ flowchart LR
  D["LLM + human CDI"] --> E["preference pairs"] --> F["IPO + SFT"]
  C --> F --> G["nearline cache"] --> H["online ranker"]
 ```
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SERAL：用对齐 LLM 打破推荐过滤气泡 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2502.13539/assets/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2502.13539)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 $L_{SFT}=-\sum_t\log\pi_\theta(y_t|x,y_{<t})$；$L_{IPO}=E[(\log\frac{\pi_\theta(y_w)\pi_{ref}(y_l)}{\pi_{ref}(y_w)\pi_\theta(y_l)}-\frac{1}{2\tau})^2]$，最终 $L=L_{IPO}+\alpha L_{SFT}$。
 ### 论文离线与线上效果

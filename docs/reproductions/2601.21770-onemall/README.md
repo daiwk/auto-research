@@ -29,6 +29,14 @@ flowchart LR
   M --> R["RL 对齐"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![OneMall：统一多场景端到端生成推荐 原论文 Figure 5](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2601.21770/assets/x3.png)
+
+> **原论文 Figure 5（关键图）**：展示原论文的整体流程、关键阶段及其数据流向。图片来自[原论文](https://arxiv.org/abs/2601.21770)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 场景 $s$ 下生成商品 code 序列 $c_{1:L}$：

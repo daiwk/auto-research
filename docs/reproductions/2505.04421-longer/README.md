@@ -31,6 +31,14 @@ flowchart LR
   C --> I["user-side KV cache"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LONGER: Ultra-long sequence modeling at ByteDance 原论文 Figure 1](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2505.04421/assets/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2505.04421)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 局部合并为 $M_i=TransformerBlock([e_i^1,\ldots,e_i^K])$。global/recent query 为 $O=[G;H_S]$，第一层执行

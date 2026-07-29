@@ -28,6 +28,14 @@ flowchart LR
     D --> E
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![WHALE：Wukong-HSTU 统一推荐模型 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2607.17017v1/x5.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2607.17017)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 第 $l$ 层先分别更新两条分支，再交换信息：

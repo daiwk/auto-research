@@ -32,6 +32,14 @@ flowchart LR
   T2 --> G2
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![PLE：共享与任务专属信息的渐进抽取 原论文 Figure 1](assets/paper-figure-01.png)](https://raw.githubusercontent.com/tangxyw/RecSysPapers/main/Multi-Task/%5B2020%5D%5BTencent%5D%5BPLE%5D%20Progressive%20Layered%20Extraction%20%28PLE%29%20-%20A%20Novel%20Multi-Task%20Learning%20%28MTL%29%20Model%20for%20Personalized%20Recommendations.pdf#page=3)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://doi.org/10.1145/3383313.3412236)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

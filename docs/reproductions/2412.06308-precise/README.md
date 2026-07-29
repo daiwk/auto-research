@@ -32,6 +32,14 @@ flowchart LR
   M --> R["cross-user BPR / recall and ranking embeddings"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![PRECISE：LLM 语义与协同 ID 融合的渐进式序列预训练 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2412.06308/assets/figs/frameworknew.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2412.06308)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 LLM 先产生按原文顺序排列的 token 表示，MoE 的每个 expert 用 attention 汇聚 token；gate 只激活 top-k expert：

@@ -32,6 +32,14 @@ flowchart LR
   G -- "否" --> C
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![PinEqualizer：Pinterest 全漏斗冷启动探索与去偏 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2607.22518v1/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2607.22518)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 用模型先验 $\alpha$、先验强度 $N$、历史正反馈 $e$ 和曝光 $n$ 估计探索内容价值：

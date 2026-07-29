@@ -28,6 +28,14 @@ flowchart LR
   D --> E
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![HARNESS-LM：强文档塔与轻量查询塔的三阶段检索训练 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2605.23572v1/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2605.23572)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

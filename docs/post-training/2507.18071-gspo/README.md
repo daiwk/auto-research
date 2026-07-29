@@ -33,6 +33,14 @@ flowchart LR
     C --> U["稳定 policy update"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![GSPO：序列级重要性采样的稳定 RL 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2507.18071v2/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2507.18071)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

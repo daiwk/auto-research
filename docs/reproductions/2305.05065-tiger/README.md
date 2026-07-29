@@ -31,6 +31,14 @@ flowchart LR
     D --> R["约束到有效 Semantic IDs 的全库排序"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![TIGER：Recommender Systems with Generative Retrieval 原论文 Figure 3](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2305.05065/assets/x4.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2305.05065)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 RQ-VAE 逐层量化 residual：

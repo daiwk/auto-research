@@ -36,6 +36,14 @@ flowchart LR
   K --> L["primal-dual update"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LWGR：带 Lagrangian 约束的个性化世界知识生成推荐 原论文 Figure 3](assets/paper-figure-01.png)](https://arxiv.org/html/2605.18771v1/x3.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2605.18771)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 第 $k$ 个子空间对 codeword 的 soft distribution 和 straight-through index：

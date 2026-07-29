@@ -29,6 +29,14 @@ flowchart LR
   C --> G["解释、内容生成、对话"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![M6-Rec: 把预训练语言模型变成开放式推荐系统 原论文 Figure 3](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2205.08084/assets/x3.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2205.08084)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 对任务 $t$，主干参数 $\Theta$ 冻结，只优化 option 参数 $O_t$ 和逐层 adapter $A_t^l$：

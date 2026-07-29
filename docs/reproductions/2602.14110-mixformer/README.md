@@ -31,6 +31,14 @@ flowchart LR
   H --> I["Finish / Skip / engagement heads"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MixFormer: Unified dense and sequence scaling 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2602.14110v2/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2602.14110)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 可把统一层抽象为 dense token $D^l$ 与 sequence token $S^l$ 的联合 attention：

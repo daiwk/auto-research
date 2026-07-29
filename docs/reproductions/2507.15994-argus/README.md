@@ -21,6 +21,14 @@ flowchart LR
  A["long music history"] --> B["Transformer"] --> C["feedback distribution"]
  C --> D["feedback-conditioned state"] --> E["next-item prediction"]
 ```
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![ARGUS：十亿参数推荐 Transformer 的反馈—物品分解 原论文 Figure 1](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2507.15994/assets/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2507.15994)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 $p(i_{t+1},f_{t+1}|h_t)=p(f_{t+1}|h_t)p(i_{t+1}|h_t,f_{t+1})$，训练 $L=L_{item}+\lambda L_{feedback}$。
 ### 论文离线与线上效果

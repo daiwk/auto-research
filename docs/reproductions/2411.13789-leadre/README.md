@@ -23,6 +23,14 @@ flowchart LR
  B --> E["S-ID generation + auxiliary tasks"]
  D --> E --> F["DPO alignment"] --> G["cached + real-time serving"]
 ```
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LEADRE：多面知识增强的 LLM 广告生成式召回 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2411.13789/assets/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2411.13789)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 SFT 联合目标为 $L=L_{SID}+\lambda_sL_{semantic}+\lambda_vL_{value}$；DPO 使用 $-\log\sigma(\beta[(\log\pi_\theta(y_w)-\log\pi_\theta(y_l))-(\log\pi_{ref}(y_w)-\log\pi_{ref}(y_l))])$。
 ### 论文离线与线上效果

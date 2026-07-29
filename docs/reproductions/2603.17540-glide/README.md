@@ -27,6 +27,14 @@ flowchart LR
   C --> E["Constrained generative retrieval"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![GLIDE：融合长短期兴趣的生成式检索 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2603.17540v1/figures/final_steps_upscaled.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2603.17540)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

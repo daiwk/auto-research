@@ -32,6 +32,14 @@ flowchart LR
   DB --> F
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![BARGE：修复生成式推荐的 item 结构与语义漂移 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2607.21028v2/picture/overview_v2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2607.21028)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 ICA 先得到 item context，再门控回写：

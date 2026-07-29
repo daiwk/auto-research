@@ -34,6 +34,14 @@ flowchart LR
     W --> O
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LEGOMem：可组合的过程记忆 原论文 Figure 3](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2510.04851/assets/x5.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2510.04851)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式与算法
 
 成功轨迹 $\tau$ 被拆成编排单元和执行单元，并按任务匹配后组合：
