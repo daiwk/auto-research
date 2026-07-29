@@ -41,6 +41,22 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
         assert catalog_link in topic
 
 
+def test_reproduction_hub_has_lineage_benchmark_and_expandable_paper_navigation():
+    lineage = (DOCS / "lineage.md").read_text(encoding="utf-8")
+    benchmark = (DOCS / "benchmark.md").read_text(encoding="utf-8")
+    navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
+
+    assert "## 谱系覆盖" in lineage
+    assert "## 当前缺口" in lineage
+    assert "## 评测分层" in benchmark
+    assert "## 本地基线规则" in benchmark
+    assert "DIN 不是所有论文的强制基线" in benchmark
+    assert "      - 搜广推与 LLM 应用:" in navigation
+    assert "          - 论文谱系与缺口: reproductions/lineage.md" in navigation
+    assert "          - 统一评测协议: reproductions/benchmark.md" in navigation
+    assert "          - 论文实现:" in navigation
+
+
 def test_catalog_entries_are_one_paper_per_line_with_chinese_summaries():
     catalog_dir = DOCS / "catalog"
     for name in ("by-company.md", "by-topic.md", "by-month.md"):

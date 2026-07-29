@@ -2,7 +2,9 @@
 
 这是论文筛选、实现状态和实验结论的**唯一汇总页**。后续新增论文或重跑实验时，只更新本页和对应论文 README，不再新建阶段性审计、候选或对照汇总页。
 
-可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)浏览具体论文。
+可按[公司](catalog/by-company.md)、[主题](catalog/by-topic.md)或[年月](catalog/by-month.md)
+浏览具体论文；技术主干与待补方向见[论文谱系与缺口](lineage.md)，数据、基线和指标
+语义见[统一评测协议](benchmark.md)。
 
 ## 原论文关键图规范
 
