@@ -91,6 +91,17 @@ class AgentResearchRunner:
             "task_examples_retrieved": agent.task_examples_retrieved,
             "generation_pauses": agent.generation_pauses,
             "task_library_updates": agent.task_library_updates,
+            "hindsight_skills": agent.hindsight_skills,
+            "dense_credit_updates": agent.dense_credit_updates,
+            "solver_value_queries": agent.solver_value_queries,
+            "turn_credit_updates": agent.turn_credit_updates,
+            "rollout_turns_saved": agent.rollout_turns_saved,
+            "skill_graph_nodes": agent.skill_graph_nodes,
+            "skill_graph_edges": agent.skill_graph_edges,
+            "atomic_ops_reused": agent.atomic_ops_reused,
+            "episodic_routes": agent.episodic_routes,
+            "parametric_routes": agent.parametric_routes,
+            "memory_consolidations": agent.memory_consolidations,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

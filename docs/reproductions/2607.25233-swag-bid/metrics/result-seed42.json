@@ -1,0 +1,58 @@
+{
+  "paper": {
+    "arxiv_id": "2607.25233",
+    "title": "Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness",
+    "url": "https://arxiv.org/abs/2607.25233",
+    "organization": "Alibaba International Digital Commerce / Dalian University of Technology"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 360,
+    "items": 560
+  },
+  "setup": {
+    "adapter": "swag-bid",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "single-episode decision-transformer proxy",
+    "hit_at_10": 0.07777777777777778,
+    "ndcg_at_10": 0.033552701749960494,
+    "fresh_hit_at_10": 0.03614457831325301,
+    "head_share_at_10": 0.4361111111111111
+  },
+  "method": {
+    "name": "masked trajectory planner + MWMS + per-step gated guidance",
+    "hit_at_10": 0.07777777777777778,
+    "ndcg_at_10": 0.033552701749960494,
+    "fresh_hit_at_10": 0.03614457831325301,
+    "head_share_at_10": 0.4361111111111111
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 0.0,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": 0.0
+  },
+  "stages": {
+    "masked_trajectory_candidates": 5,
+    "sliding_window_days": 7,
+    "multi_window_mpc_sampling": true,
+    "confidence_decay": 0.25,
+    "per_step_guidance_gate": true,
+    "selected_validation_blend": 0.1,
+    "validation_only_model_selection": {
+      "hit_at_10": 0.1111111111111111,
+      "ndcg_at_10": 0.06045988652653263,
+      "fresh_hit_at_10": 0.07462686567164178,
+      "head_share_at_10": 0.4336111111111111
+    }
+  },
+  "paper_results": {
+    "cost_percent": 1.96,
+    "gmv_percent": 3.42,
+    "roas_percent": 5.65,
+    "achievement_rate_pp": 2.02
+  },
+  "scope": "实际生成多组未来出价强度，按七日重叠窗口、预测置信衰减和 ROAS 约束选择计划，再通过状态门控执行；未接入 AliExpress 私有竞价流量。"
+}

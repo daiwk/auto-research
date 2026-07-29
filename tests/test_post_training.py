@@ -211,3 +211,43 @@ def test_p1_alignment_candidate_mechanisms_are_observable(
         assert diagnostic in result.training["last_diagnostics"]
     if algorithm == "spin":
         assert result.training["rollout_policy_refreshes"] == 1
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        (
+            "relay-opd",
+            (
+                "prefix_failure_detected",
+                "teacher_handoff_triggered",
+                "relay_budget",
+                "student_resumes_after_teacher_leg",
+            ),
+        ),
+        (
+            "cort",
+            (
+                "counterfactual_replays",
+                "rubric_conditioned_contrast",
+                "token_weight_min",
+                "token_weight_max",
+            ),
+        ),
+    ],
+)
+def test_20260729_post_training_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=20,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+    if algorithm == "cort":
+        assert result.training["last_diagnostics"]["auxiliary_token_scorer_parameters"] == 0

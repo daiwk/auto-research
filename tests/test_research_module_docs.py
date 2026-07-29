@@ -30,6 +30,8 @@ MODULES = {
         "slic-hf": "2305.10425-slic-hf",
         "steerlm": "2310.05344-steerlm",
         "spin": "2401.01335-spin",
+        "relay-opd": "2607.26057-relay-opd",
+        "cort": "2607.25659-cort",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -58,6 +60,11 @@ MODULES = {
         "saycan": "2204.01691-saycan",
         "pal": "2211.10435-pal",
         "art": "2303.09014-art",
+        "seed": "2607.14777-seed",
+        "cast": "2607.25308-cast",
+        "turn-opd": "2607.05804-turn-opd",
+        "hiskill": "2607.25853-hiskill",
+        "unimem": "2607.26017-unimem",
     },
 }
 
@@ -139,6 +146,19 @@ def test_each_research_paper_page_has_complete_contract():
             )
             assert "http" in upstream_line or "未" in upstream_line
             assert "../../experiments/" in text
+
+
+def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
+    for module, methods in MODULES.items():
+        overview = (ROOT / "docs" / module / "README.md").read_text(encoding="utf-8")
+        for dimension in ("institution", "topic", "year"):
+            relative = f"catalog/by-{dimension}.md"
+            assert f"({relative})" in overview
+            catalog = (ROOT / "docs" / module / relative).read_text(encoding="utf-8")
+            for method, slug in methods.items():
+                assert f"(../{slug}/README.md)" in catalog, (
+                    f"{module}/{method} missing from by-{dimension}"
+                )
 
 
 def test_every_paper_page_has_a_valid_original_paper_figure():

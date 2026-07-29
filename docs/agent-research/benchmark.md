@@ -80,3 +80,9 @@ trace、`metrics.json` 和中文 `report.md`。
 新增方法必须通过单元测试、对应 mini-suite/真实 sandbox、稳定指标检查和 MkDocs 严格构建。
 若论文依赖私有环境、付费 API 或人工 judge，页面必须说明未覆盖部分，并优先增加
 公开 benchmark 适配器，不能用确定性任务分数冒充论文结果。
+## Agentic RL 与持续记忆诊断
+
+新增方法除 success/cost 外必须保留机制计数：SEED 的 hindsight skill 和 dense credit、
+CAST 的 solver query 和 turn credit、TurnOPD 的 rollout 节省、HiSkill 的图节点/边与
+AtomicOp 复用、UniMem 的 episodic/parametric route 和 consolidation。相同 benchmark
+内固定 episode、memory budget 与 seed，禁止只比较最终成功率。

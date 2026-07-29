@@ -144,6 +144,7 @@ def build_parser() -> argparse.ArgumentParser:
             "ipo", "simpo", "luspo", "coba-rl",
             "constitutional-ai", "rrhf", "raft",
             "slic-hf", "steerlm", "spin",
+            "seed", "relay-opd", "cast", "turn-opd", "cort",
         ],
         required=True,
     )
@@ -183,6 +184,7 @@ def build_parser() -> argparse.ArgumentParser:
             "mrkl", "hugginggpt", "generative-agents", "memgpt",
             "webgpt", "saycan", "pal", "art",
             "metagpt", "critic", "agent-lightning", "swe-agent", "openhands",
+            "seed", "cast", "turn-opd", "hiskill", "unimem",
         ],
         required=True,
     )

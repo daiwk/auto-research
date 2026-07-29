@@ -44,7 +44,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 139 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 145 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -52,10 +52,16 @@ pytest tests/test_research_module_docs.py
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 - 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
-## 全部复现（139/139）
+## 全部复现（145/145）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `reco-reward` · [RecoReward](2607.25901-reco-reward/README.md) | 快手有效用户渗透 +0.265%、外流曝光 +0.791% | RAS target/non-target reward；Hit@10 -16.00%，保留负结果 |
+| 核心机制 | `twice` · [TWICE](2607.25404-twice/README.md) | expected revenue +2.486%、conversion +2.061%，已全流量 | 双时钟与 delay CDF；NDCG@10 +14.31% |
+| 核心机制 | `swag-bid` · [SWAG](2607.25233-swag-bid/README.md) | GMV +3.42%、ROAS +5.65% | 滑窗 masked planner；NDCG@10 +0.00% |
+| 核心机制 | `youtube-freshness` · [YouTube Freshness](2607.23749-youtube-freshness/README.md) | 1-day new-release engagement +4.33% | IPS + bias tower + uncertainty；head share -28.72% |
+| 核心机制 | `melo` · [Melo](2607.23718-melo/README.md) | 系统级 A/B retention >2pp | grounding + retry；fresh Hit@10 +50.00%，系统归因单列 |
+| 核心机制 | `penelope` · [Penelope](2607.25915-penelope/README.md) | 纯 LLM：结构化推理 accuracy/compute 改善 | 两步 localized recurrence；composite loss -0.63% |
 | 核心机制 | `mim` · [MIM](2502.00321-mim/README.md) | 淘宝 CTR +14.14%、RPM +4.12% | 遮盖多模态对齐 + CiUBM；NDCG@10 +0.94%，Hit@10 下降 |
 | 核心机制 | `filterllm` · [FilterLLM](2502.16924-filterllm/README.md) | Cold-PV +5.13%、GMV +10.86% | text-to-user-distribution；NDCG@10 -9.82%，保留负结果 |
 | 核心机制 | `fuxi-alpha` · [FuXi-α](2502.03036-fuxi-alpha/README.md) | 播放歌曲 +4.67%、时长 +5.10% | 三通道交互；Hit@10 略升、NDCG@10 -4.25% |

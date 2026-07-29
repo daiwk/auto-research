@@ -1,6 +1,6 @@
 # 全域论文谱系与缺口
 
-本页是跨领域的长期审计入口，覆盖**搜广推、通用 LLM、LLM 后训练和 Agent**。最近一次系统核查截止 **2026-07-28**。单篇实现与指标仍以各论文 README 为准；这里回答“主干是否齐全、下一步缺什么”。
+本页是跨领域的长期审计入口，覆盖**搜广推、通用 LLM、LLM 后训练和 Agent**。最近一次系统核查截止 **2026-07-29**。单篇实现与指标仍以各论文 README 为准；这里回答“主干是否齐全、下一步缺什么”。
 
 ## 统一收录原则
 
@@ -55,7 +55,7 @@ flowchart LR
 
 经典链路已覆盖 PPO-RLHF、Constitutional AI、RRHF、RAFT、DPO、KTO、ORPO、IPO、
 SimPO、GRPO、RLOO、ReMax，以及 DAPO、GSPO、LUSPO、CoBA-RL、Lightning OPD、
-GPRL、TCR。四个 sequence objective 进入
+Relay-OPD、GPRL、TCR、CoRT。四个 sequence objective 进入
 真实 tokenizer 自由生成与多 seed 路径；P1 又补齐 SLiC-HF、SteerLM 和 SPIN 的
 序列校准、多属性条件 SFT 与自博弈。方法差异见[后训练谱系](post-training/lineage.md)。
 
@@ -66,7 +66,8 @@ GPRL、TCR。四个 sequence objective 进入
 
 经典链路已覆盖 ReAct、MRKL、HuggingGPT、Toolformer、Tree of Thoughts、Reflexion、
 Self-Refine、LATS、ReWOO、AutoGen、WebGPT、SayCan、PAL、ART、Generative Agents、MemGPT、MetaGPT、CRITIC、
-SWE-agent、OpenHands、Agent Lightning、Voyager，以及近期记忆与规划方法；软件 Agent
+SWE-agent、OpenHands、Agent Lightning、SEED、CAST、TurnOPD、Voyager、HiSkill、
+UniMem，以及近期记忆与规划方法；软件 Agent
 已有真实文件编辑和回归测试路径。完整谱系见
 [Agent 谱系](agent-research/lineage.md)。
 

@@ -1,0 +1,58 @@
+{
+  "paper": {
+    "arxiv_id": "2607.23749",
+    "title": "Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music",
+    "url": "https://arxiv.org/abs/2607.23749",
+    "organization": "YouTube Music / Google"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 480,
+    "items": 700
+  },
+  "setup": {
+    "adapter": "youtube-freshness",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "continuously-trained popularity-biased ranker",
+    "hit_at_10": 0.05625,
+    "ndcg_at_10": 0.02675943261645708,
+    "fresh_hit_at_10": 0.019417475728155338,
+    "head_share_at_10": 0.4997916666666667
+  },
+  "method": {
+    "name": "recency + IPS + bias tower removal + SNGP exploration",
+    "hit_at_10": 0.05625,
+    "ndcg_at_10": 0.025060175546051604,
+    "fresh_hit_at_10": 0.019417475728155338,
+    "head_share_at_10": 0.35625
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": -6.350123691936693,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -28.720300125052105
+  },
+  "stages": {
+    "serving_recency_boost": true,
+    "inverse_propensity_training": true,
+    "architecture_bias_tower_removed_at_serving": true,
+    "sngp_uncertainty_head": true,
+    "same_candidate_generation": true,
+    "selected_validation_blend": 0.1,
+    "validation_only_model_selection": {
+      "hit_at_10": 0.09375,
+      "ndcg_at_10": 0.04948933094523425,
+      "fresh_hit_at_10": 0.041666666666666664,
+      "head_share_at_10": 0.36875
+    }
+  },
+  "paper_results": {
+    "uncertainty_weighted_new_release_engagement_percent": 4.33,
+    "experiment_arms": 7,
+    "daily_users": "millions per arm",
+    "primary_window_days": 14
+  },
+  "scope": "在同一 MovieLens split 上分别执行 serving 调权、IPS、可移除 popularity bias tower 和不确定性探索，并报告新颖度/头部占比；没有 YouTube 连续训练日志。"
+}

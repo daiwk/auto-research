@@ -23,6 +23,9 @@ nav:
       - 纯 LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md
+          - 按公司 / 机构 / 学校: post-training/catalog/by-institution.md
+          - 按主题: post-training/catalog/by-topic.md
+          - 按年份: post-training/catalog/by-year.md
           - 论文谱系与缺口: post-training/lineage.md
           - 统一评测协议: post-training/benchmark.md
           - 论文实现:
@@ -48,9 +51,14 @@ nav:
               - SLiC-HF: post-training/2305.10425-slic-hf/README.md
               - SteerLM: post-training/2310.05344-steerlm/README.md
               - SPIN: post-training/2401.01335-spin/README.md
+              - Relay-OPD: post-training/2607.26057-relay-opd/README.md
+              - CoRT: post-training/2607.25659-cort/README.md
       - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md
+          - 按公司 / 机构 / 学校: agent-research/catalog/by-institution.md
+          - 按主题: agent-research/catalog/by-topic.md
+          - 按年份: agent-research/catalog/by-year.md
           - 论文谱系与缺口: agent-research/lineage.md
           - 统一评测协议: agent-research/benchmark.md
           - 论文实现:
@@ -80,6 +88,11 @@ nav:
               - SayCan: agent-research/2204.01691-saycan/README.md
               - PAL: agent-research/2211.10435-pal/README.md
               - ART: agent-research/2303.09014-art/README.md
+              - SEED: agent-research/2607.14777-seed/README.md
+              - CAST: agent-research/2607.25308-cast/README.md
+              - TurnOPD: agent-research/2607.05804-turn-opd/README.md
+              - HiSkill: agent-research/2607.25853-hiskill/README.md
+              - UniMem: agent-research/2607.26017-unimem/README.md
   - 项目文档:
       - 项目 README: project-readme.md
       - 架构与扩展: architecture.md

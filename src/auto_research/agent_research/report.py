@@ -31,6 +31,11 @@ PAPERS = {
     "saycan": ("SayCan", "https://arxiv.org/abs/2204.01691"),
     "pal": ("PAL", "https://arxiv.org/abs/2211.10435"),
     "art": ("ART", "https://arxiv.org/abs/2303.09014"),
+    "seed": ("SEED", "https://arxiv.org/abs/2607.14777"),
+    "cast": ("CAST", "https://arxiv.org/abs/2607.25308"),
+    "turn-opd": ("Turn-Level OPD", "https://arxiv.org/abs/2607.05804"),
+    "hiskill": ("HiSkill", "https://arxiv.org/abs/2607.25853"),
+    "unimem": ("UniMem", "https://arxiv.org/abs/2607.26017"),
 }
 
 
@@ -116,5 +121,10 @@ def render_report(result: AgentResearchResult) -> str:
 - affordance checks / infeasible skills filtered：{result.diagnostics['affordance_checks']} / {result.diagnostics['infeasible_skills_filtered']}
 - generated programs / interpreter calls：{result.diagnostics['programs_generated']} / {result.diagnostics['interpreter_calls']}
 - retrieved task examples / generation pauses / library updates：{result.diagnostics['task_examples_retrieved']} / {result.diagnostics['generation_pauses']} / {result.diagnostics['task_library_updates']}
+- hindsight skills / dense credit updates：{result.diagnostics['hindsight_skills']} / {result.diagnostics['dense_credit_updates']}
+- solver value queries / turn credit updates：{result.diagnostics['solver_value_queries']} / {result.diagnostics['turn_credit_updates']}
+- rollout turns saved：{result.diagnostics['rollout_turns_saved']}
+- skill graph nodes / edges / reused atomic operations：{result.diagnostics['skill_graph_nodes']} / {result.diagnostics['skill_graph_edges']} / {result.diagnostics['atomic_ops_reused']}
+- episodic / parametric routes / memory consolidations：{result.diagnostics['episodic_routes']} / {result.diagnostics['parametric_routes']} / {result.diagnostics['memory_consolidations']}
 - fidelity：{result.diagnostics['fidelity']}
 """

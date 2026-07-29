@@ -28,6 +28,11 @@ ALGORITHMS = (
     "slic-hf",
     "steerlm",
     "spin",
+    "seed",
+    "relay-opd",
+    "cast",
+    "turn-opd",
+    "cort",
 )
 
 

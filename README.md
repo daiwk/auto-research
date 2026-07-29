@@ -38,10 +38,16 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **139/139** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **145/145** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `reco-reward` | RecoReward · Kuaishou | 冻结双塔 RAS、非目标扣减与 content-only serving；Hit@10 -16.00% |
+| 核心机制 | `twice` | TWICE · Kuaishou | 双时钟 current-status 与单调 delay CDF；NDCG@10 +14.31% |
+| 核心机制 | `swag-bid` | SWAG · Alibaba | masked future plan、滑动窗口目标与 state gate；NDCG@10 +0.00% |
+| 核心机制 | `youtube-freshness` | YouTube Freshness · Google | recency、IPS、bias tower 与 uncertainty exploration；head share -28.72% |
+| 核心机制 | `melo` | Melo · NetEase | entity grounding 与 reflective retry；fresh Hit@10 +50.00% |
+| 核心机制 | `penelope` | Penelope · academic | localized latent recurrence；WikiText-2 composite loss -0.63% |
 | 核心机制 | `mim` | MIM · Alibaba/Taobao | 遮盖多模态预训练、协同对齐与 CiUBM；NDCG@10 +0.94% |
 | 核心机制 | `filterllm` | FilterLLM · Alibaba | text-to-user-distribution 与行为引导；NDCG@10 -9.82% |
 | 核心机制 | `fuxi-alpha` | FuXi-α · Huawei/USTC | 多通道注意力与分阶段交互；NDCG@10 -4.25% |

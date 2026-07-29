@@ -44,6 +44,12 @@ PAPERS = {
         "url": "https://arxiv.org/abs/2607.20757",
         "organization": "University of Cambridge",
     },
+    "penelope": {
+        "arxiv_id": "2607.25915",
+        "title": "Penelope: Localized Latent Recurrence for Efficient Structured Reasoning",
+        "url": "https://arxiv.org/abs/2607.25915",
+        "organization": "Academic author team",
+    },
     "switch-transformer": {
         "arxiv_id": "2101.03961",
         "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",

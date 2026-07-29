@@ -2,7 +2,7 @@
 
 本页是系统审计账本：区分已实现的关键谱系、仍值得补的 P1，以及暂不应被“名字占位”
 冒充复现的方法。筛选优先级综合经典影响力、机制差异、公开代码/数据和本地可验证性；
-最新边界检查至 **2026-07-28**。
+最新边界检查至 **2026-07-29**。
 
 ## 谱系覆盖
 
@@ -12,8 +12,8 @@
 | 成对偏好 | DPO | 已实现 | reference-relative pairwise objective |
 | 非成对/单阶段偏好 | KTO、ORPO | 已实现 | 单条二元反馈；SFT + odds ratio |
 | Group-relative reasoning RL | GRPO、DAPO、GSPO | 已实现 | group advantage、非对称 token clip、sequence clip |
-| On-policy distillation | Lightning OPD | 已实现 | 离线教师缓存 |
-| 多目标与过程奖励 | GPRL、TCR | 已实现 | 分维 reward 与 checklist residual |
+| On-policy distillation | Lightning OPD、Relay-OPD | 已实现 | 离线教师缓存；失效前缀检测与有限教师接力 |
+| 多目标与过程奖励 | GPRL、TCR、CoRT | 已实现 | 分维 reward、checklist residual、反事实 token credit |
 | 自由生成偏好 | IPO、SimPO | 已实现 | token-level sequence probability、reference-relative / reference-free |
 | 长度与能力边界 | LUSPO、CoBA-RL | 已实现 | 长度无偏 sequence RL、动态课程边界与教师触发 |
 | AI 反馈安全对齐 | Constitutional AI | 已实现 | 显式原则、自我批评/修订、AI preference |

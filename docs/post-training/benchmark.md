@@ -85,3 +85,8 @@ auto-research post-train --algorithm luspo \
 
 新增 candidate 方法必须通过 L0/L1；依赖序列长度、在线 rollout 或能力边界的方法必须
 进入 L2，并通过多 seed 与 MkDocs 严格构建。大模型 judge/教师未接入时必须显式标注。
+## 新增 OPD 与 token credit 诊断
+
+Relay-OPD 除最终 accuracy 外必须报告失败前缀、教师 handoff、relay budget 和学生恢复；
+CoRT 必须报告反事实重放次数、rubric contrast、token 权重范围，并确认没有辅助 token
+scorer。两者仍使用相同 candidate policy、train/validation split、步数与 seed。

@@ -14,6 +14,8 @@
 
 - [自动进化中的纯 LLM](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
+- 分类浏览：[按公司 / 机构 / 学校](catalog/by-institution.md) ·
+  [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
 - [论文谱系与缺口](lineage.md)：系统审计已覆盖主干、P1 缺口和下一步评测前置条件。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
 - [DPO](2305.18290-dpo/README.md)：reference-relative 偏好分类，无 reward model。
@@ -38,6 +40,8 @@
 - [SLiC-HF](2305.10425-slic-hf/README.md)：序列 likelihood margin 与监督正则。
 - [SteerLM](2310.05344-steerlm/README.md)：多属性标注、条件 SFT 与推理时可控目标。
 - [SPIN](2401.01335-spin/README.md)：上一轮策略自生成负例与迭代自博弈。
+- [Relay-OPD](2607.26057-relay-opd/README.md)：检测失败前缀并让教师有限接力。
+- [CoRT](2607.25659-cort/README.md)：用反事实重放分配 token 级 rubric credit。
 
 ## 研究闭环
 
@@ -79,6 +83,8 @@ flowchart LR
 | 序列校准 | [SLiC-HF](2305.10425-slic-hf/README.md) | preference margin、SFT/reference regularization | GSM8K candidate | 机制复现 |
 | 可控 SFT | [SteerLM](2310.05344-steerlm/README.md) | 多属性 annotation 与条件生成目标 | GSM8K candidate | 机制复现 |
 | 自博弈 | [SPIN](2401.01335-spin/README.md) | previous-policy negative、偏好更新、对手刷新 | GSM8K candidate | 机制复现 |
+| On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | 失败前缀触发、教师有限接力、学生恢复 | GSM8K candidate | 机制复现 |
+| Token credit | [CoRT](2607.25659-cort/README.md) | rubric/criteria-free 反事实重放与 token 权重 | GSM8K candidate | 机制复现 |
 
 ## 公开实验快照
 
@@ -105,6 +111,8 @@ flowchart LR
 | SLiC-HF | 0.1641 | 0.7812 | 0.2512 |
 | SteerLM | 0.1641 | 0.8516 | 0.9112 |
 | SPIN | 0.1641 | **0.8594** | 0.1294 |
+| Relay-OPD | 0.1719 | **0.8906** | 0.5014 |
+| CoRT | 0.1719 | **0.8906** | 0.0201 |
 
 完整定义、smoke 结果和差异解释见[统一评测协议](benchmark.md)，稳定指标见
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
@@ -116,6 +124,8 @@ flowchart LR
 [`p0-missing-post-training-gsm8k-seed42.json`](../experiments/p0-missing-post-training-gsm8k-seed42.json)。
 P1 候选指标见
 [`p1-alignment-candidates-gsm8k-seed42.json`](../experiments/p1-alignment-candidates-gsm8k-seed42.json)。
+本批 OPD / token credit 指标见
+[`post-training-20260729-seed42.json`](../experiments/post-training-20260729-seed42.json)。
 
 L2 小预算实验固定 arithmetic free generation、48 train examples、20-step SFT warmup、
 6 次后训练更新和 seeds 42/43/44。四种方法的 exact accuracy 均为 0；SimPO 的
