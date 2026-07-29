@@ -35,6 +35,14 @@ flowchart LR
   G --> O
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Naju：独立控制保留与写入的原生离散 SSM 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.21000v1/retention_overwrite.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2607.21000)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

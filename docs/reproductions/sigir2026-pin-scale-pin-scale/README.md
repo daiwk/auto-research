@@ -29,6 +29,14 @@ flowchart LR
   A --> R["Dense retrieval"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Pin-SCALE：参与度 Semantic ID 的级联、对齐与工业接入 原论文 官方摘要 P074](assets/paper-figure-01.png)](https://sigir2026.org/SIGIR2026_program.pdf#page=96)
+
+> **原论文 官方摘要 P074（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://sigir2026.org/SIGIR2026_program.pdf)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

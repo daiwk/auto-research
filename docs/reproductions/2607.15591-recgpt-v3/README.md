@@ -38,6 +38,14 @@ flowchart LR
   G --> K[检索与生产排序器反馈]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![RecGPT-V3：有状态、混合模态的生成式推荐 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2607.15591v2/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2607.15591)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 Memory Hub 的初始压缩与增量更新为：

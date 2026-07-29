@@ -29,6 +29,14 @@ flowchart LR
   S --> O["推荐得分"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![HiSAC：层级稀疏激活压缩超长序列 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2602.21009v2/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2602.21009)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

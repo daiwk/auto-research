@@ -28,6 +28,14 @@ flowchart LR
   O["Embedding / norm / bias / head"] --> A["AdamW update"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Muon：面向 LLM 隐藏矩阵的正交化优化器 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2502.16982v1/x3.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2502.16982)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

@@ -33,6 +33,14 @@ flowchart LR
     U --> O["KTO loss"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![KTO：无需偏好对的前景理论对齐 原论文 Figure 1](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2402.01306/assets/figures/teaser.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的整体流程、关键阶段及其数据流向。图片来自[原论文](https://arxiv.org/abs/2402.01306)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

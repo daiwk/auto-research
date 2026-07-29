@@ -35,6 +35,14 @@ flowchart TD
     V --> F["保留 beam / 回溯"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Tree of Thoughts 原论文 Figure 1](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2305.10601/assets/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2305.10601)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

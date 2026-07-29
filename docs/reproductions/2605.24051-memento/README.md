@@ -32,6 +32,14 @@ flowchart LR
   I --> F
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Memento: RAG-style long-retention recommendation 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2605.24051v1/assets/memento_0503.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2605.24051)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 Representation Memento 用 maximal marginal relevance 兼顾 query 相关性和结果多样性：

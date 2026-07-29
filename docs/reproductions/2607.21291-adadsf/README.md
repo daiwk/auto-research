@@ -34,6 +34,14 @@ flowchart LR
   M --> A
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![AdaDSF：按层相似度分配动态深度计算 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.21291v1/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2607.21291)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 层变换相似度及温度归一化权重：

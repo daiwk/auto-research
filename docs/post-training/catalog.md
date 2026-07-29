@@ -26,6 +26,9 @@
 | AI 反馈安全对齐 | [Constitutional AI](2212.08073-constitutional-ai/README.md) | Anthropic，2022-12-15 | [补充材料](https://github.com/anthropics/ConstitutionalHarmlessnessPaper) | `constitutional-ai` |
 | 全排序偏好 | [RRHF](2304.05302-rrhf/README.md) | Alibaba DAMO / Tsinghua，2023-04-11 | [已开源](https://github.com/GanjinZero/RRHF) | `rrhf` |
 | Reward 选优微调 | [RAFT](2304.06767-raft/README.md) | HKUST / UIUC，2023-04-13 | [LMFlow](https://github.com/OptimalScale/LMFlow) | `raft` |
+| 序列概率校准 | [SLiC-HF](2305.10425-slic-hf/README.md) | Google DeepMind / Google Research，2023-05-17 | 未发布独立实现 | `slic-hf` |
+| 多属性可控 SFT | [SteerLM](2310.05344-steerlm/README.md) | NVIDIA，2023-10-09 | [NeMo-Aligner](https://github.com/NVIDIA/NeMo-Aligner) | `steerlm` |
+| 自博弈微调 | [SPIN](2401.01335-spin/README.md) | UCLA，2024-01-02 | [已开源](https://github.com/uclaml/SPIN) | `spin` |
 
 ## 公平基线
 

@@ -31,6 +31,14 @@ flowchart LR
     O --> M["Student model"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Lightning OPD：离线教师缓存的 On-Policy Distillation 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2604.13010v2/x3.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2604.13010)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

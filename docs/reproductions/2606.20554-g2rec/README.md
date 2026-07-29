@@ -32,6 +32,14 @@ flowchart LR
   I --> J["next-item loss + profile loss"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![G2Rec: Graph interest tokens for generative recommendation 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2606.20554v1/x5.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2606.20554)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 令 $P\in\mathbb R^{|I|\times C}$ 为软归属、$k$ 为图度数、$|E|$ 为重复表示的边数，soft modularity 为

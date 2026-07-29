@@ -31,6 +31,14 @@ flowchart LR
   G --> H[ID-free late-fusion ranker]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![FLUID：用多模态语义码替代直播间瞬时 ID 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2605.21832v2/figs/FLUID_Figure1_8x_real1.jpg)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2605.21832)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 第 $l$ 层的完整前缀索引而非孤立 codeword 为：

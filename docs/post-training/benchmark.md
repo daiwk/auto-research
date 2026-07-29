@@ -45,6 +45,9 @@ generation accuracy 不能与 L1 candidate accuracy 混比，也不能等同于 
 | Constitutional AI | **0.8438** | **0.8617** | 1.0214 |
 | RRHF | 0.8125 | 0.8401 | 0.8344 |
 | RAFT | **0.8438** | **0.8617** | 0.8789 |
+| SLiC-HF | 0.7812 | 0.8074 | 0.2512 |
+| SteerLM | 0.8516 | 0.8654 | 0.9112 |
+| SPIN | **0.8594** | **0.8691** | 0.1294 |
 
 GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后并不能推翻论文结论；
 这项结果说明它需要进一步接入 AlpacaEval 类多维 judge，而不是隐藏不利结果。
@@ -57,6 +60,8 @@ GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后�
 [`free-generation-post-training-seeds42-44.json`](../experiments/free-generation-post-training-seeds42-44.json)。
 本批经典缺口：
 [`p0-missing-post-training-gsm8k-seed42.json`](../experiments/p0-missing-post-training-gsm8k-seed42.json)。
+P1 候选结果：
+[`p1-alignment-candidates-gsm8k-seed42.json`](../experiments/p1-alignment-candidates-gsm8k-seed42.json)。
 
 ## 运行与产物
 

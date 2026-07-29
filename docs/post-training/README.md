@@ -35,6 +35,9 @@
 - [Constitutional AI](2212.08073-constitutional-ai/README.md)：自我批评/修订与 AI preference RLAIF。
 - [RRHF](2304.05302-rrhf/README.md)：全响应 reward ranking 与 best-response SFT。
 - [RAFT](2304.06767-raft/README.md)：当前策略采样、reward 选优与迭代 SFT。
+- [SLiC-HF](2305.10425-slic-hf/README.md)：序列 likelihood margin 与监督正则。
+- [SteerLM](2310.05344-steerlm/README.md)：多属性标注、条件 SFT 与推理时可控目标。
+- [SPIN](2401.01335-spin/README.md)：上一轮策略自生成负例与迭代自博弈。
 
 ## 研究闭环
 
@@ -73,6 +76,9 @@ flowchart LR
 | AI 反馈安全对齐 | [Constitutional AI](2212.08073-constitutional-ai/README.md) | constitution critique/revision + AI preference | GSM8K candidate | 机制复现 |
 | 全排序偏好 | [RRHF](2304.05302-rrhf/README.md) | reward ordering、ranking hinge、best SFT | GSM8K candidate | 机制复现 |
 | 选优微调 | [RAFT](2304.06767-raft/README.md) | policy sampling、reward top-1 filtering、SFT | GSM8K candidate | 机制复现 |
+| 序列校准 | [SLiC-HF](2305.10425-slic-hf/README.md) | preference margin、SFT/reference regularization | GSM8K candidate | 机制复现 |
+| 可控 SFT | [SteerLM](2310.05344-steerlm/README.md) | 多属性 annotation 与条件生成目标 | GSM8K candidate | 机制复现 |
+| 自博弈 | [SPIN](2401.01335-spin/README.md) | previous-policy negative、偏好更新、对手刷新 | GSM8K candidate | 机制复现 |
 
 ## 公开实验快照
 
@@ -96,6 +102,9 @@ flowchart LR
 | Constitutional AI | 0.1641 | **0.8438** | 1.0214 |
 | RRHF | 0.1641 | 0.8125 | 0.8344 |
 | RAFT | 0.1641 | **0.8438** | 0.8789 |
+| SLiC-HF | 0.1641 | 0.7812 | 0.2512 |
+| SteerLM | 0.1641 | 0.8516 | 0.9112 |
+| SPIN | 0.1641 | **0.8594** | 0.1294 |
 
 完整定义、smoke 结果和差异解释见[统一评测协议](benchmark.md)，稳定指标见
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
@@ -105,6 +114,8 @@ flowchart LR
 [`free-generation-post-training-seeds42-44.json`](../experiments/free-generation-post-training-seeds42-44.json)。
 本批经典缺口指标见
 [`p0-missing-post-training-gsm8k-seed42.json`](../experiments/p0-missing-post-training-gsm8k-seed42.json)。
+P1 候选指标见
+[`p1-alignment-candidates-gsm8k-seed42.json`](../experiments/p1-alignment-candidates-gsm8k-seed42.json)。
 
 L2 小预算实验固定 arithmetic free generation、48 train examples、20-step SFT warmup、
 6 次后训练更新和 seeds 42/43/44。四种方法的 exact accuracy 均为 0；SimPO 的

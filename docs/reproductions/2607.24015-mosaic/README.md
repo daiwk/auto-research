@@ -40,6 +40,14 @@ flowchart LR
   F --> CRL["cosine redundancy loss"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Mosaic：用 specialist fleet 扩展用户表征 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2607.24015v1/sections/figures/model_arch.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2607.24015)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 对任务标签做 Spearman 相关性挖掘：

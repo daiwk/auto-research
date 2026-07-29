@@ -34,6 +34,14 @@ flowchart LR
     M --> A["Answer / action"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![U-Mem：自主知识获取与记忆管理 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2602.22406v1/figures/overview.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2602.22406)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式与算法
 
 记忆项的选择同时考虑语义相关性与不确定性探索，可概括为：

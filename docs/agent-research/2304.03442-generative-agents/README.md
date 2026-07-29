@@ -34,6 +34,14 @@ flowchart LR
     A --> O
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Generative Agents：记忆、反思与计划 原论文 Figure 5](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2304.03442/assets/figures/figure_architecture2.png)
+
+> **原论文 Figure 5（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2304.03442)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

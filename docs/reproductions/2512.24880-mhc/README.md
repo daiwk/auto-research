@@ -31,6 +31,14 @@ flowchart LR
   G --> H
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![mHC：流形约束超连接 原论文 Figure 1](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2512.24880/assets/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2512.24880)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

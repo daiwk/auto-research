@@ -36,6 +36,14 @@ flowchart LR
   I --> J
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MDCNS: Divergence Meets Consensus 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2605.19651/assets/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2605.19651)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 候选由未交互集合均匀抽取，Self/Peer 评分与分歧为

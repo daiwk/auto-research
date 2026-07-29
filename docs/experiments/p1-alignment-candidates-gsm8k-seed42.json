@@ -1,0 +1,43 @@
+{
+  "protocol": {
+    "dataset": "OpenAI GSM8K official train/test JSONL",
+    "adapter": "gsm8k-candidate",
+    "train_examples": 512,
+    "validation_examples": 128,
+    "steps": 300,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "seed": 42,
+    "baseline": "untrained candidate policy",
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "baseline": {
+    "accuracy": 0.1640625,
+    "mean_reward": 0.31261065795890286,
+    "kl_from_reference": 0.0
+  },
+  "methods": {
+    "slic-hf": {
+      "accuracy": 0.78125,
+      "mean_reward": 0.8073573303541953,
+      "kl_from_reference": 0.2511690037013696,
+      "calibration_margin": 0.5,
+      "off_policy_preferences": true
+    },
+    "steerlm": {
+      "accuracy": 0.8515625,
+      "mean_reward": 0.8654098929838473,
+      "kl_from_reference": 0.9111972686932943,
+      "attribute_dimensions": 4,
+      "attribute_conditioned_sft": true
+    },
+    "spin": {
+      "accuracy": 0.859375,
+      "mean_reward": 0.8691367545869129,
+      "kl_from_reference": 0.12941252077316928,
+      "opponent_refreshes": 18,
+      "external_preference_labels": 0
+    }
+  },
+  "interpretation": "All gains are relative to the same untrained candidate policy. They validate objective mechanics and are not free-generation or original-paper model results."
+}

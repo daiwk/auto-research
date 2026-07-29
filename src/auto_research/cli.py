@@ -143,6 +143,7 @@ def build_parser() -> argparse.ArgumentParser:
             "lightning-opd", "gprl", "tcr",
             "ipo", "simpo", "luspo", "coba-rl",
             "constitutional-ai", "rrhf", "raft",
+            "slic-hf", "steerlm", "spin",
         ],
         required=True,
     )
@@ -180,6 +181,7 @@ def build_parser() -> argparse.ArgumentParser:
             "self-refine", "rewoo", "autogen", "pearl",
             "u-mem", "legomem", "memtool",
             "mrkl", "hugginggpt", "generative-agents", "memgpt",
+            "webgpt", "saycan", "pal", "art",
             "metagpt", "critic", "agent-lightning", "swe-agent", "openhands",
         ],
         required=True,

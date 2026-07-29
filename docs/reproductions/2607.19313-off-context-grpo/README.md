@@ -30,6 +30,14 @@ flowchart LR
     F --> G["更新无提示 Target policy"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Off-Context GRPO：用特权信息学习困难推理 原论文 Figure 3](assets/paper-figure-01.png)](https://arxiv.org/html/2607.19313v1/x2.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2607.19313)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

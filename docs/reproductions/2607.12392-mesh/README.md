@@ -31,6 +31,14 @@ flowchart LR
   H --> I[Global crossing]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MESH：异构内容解耦的可扩展召回 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.12392v1/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的整体流程、关键阶段及其数据流向。图片来自[原论文](https://arxiv.org/abs/2607.12392)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

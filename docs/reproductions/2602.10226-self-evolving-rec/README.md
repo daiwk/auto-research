@@ -33,6 +33,14 @@ flowchart TD
   H --> A
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Self-Evolving Recommendation System 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2602.10226v2/new_architecture.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2602.10226)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 论文可抽象为受预算约束的双层优化：

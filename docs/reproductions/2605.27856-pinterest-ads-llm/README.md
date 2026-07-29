@@ -33,6 +33,14 @@ flowchart LR
   G --> I["late-stage ranking"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Fine-Tuned LLM as a Complementary Predictor Improving Ads System 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2605.27856v1/overall_components_modified.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的整体流程、关键阶段及其数据流向。图片来自[原论文](https://arxiv.org/abs/2605.27856)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 SFT 对下一 advertiser 文本 $a^+$ 优化自回归负对数似然：

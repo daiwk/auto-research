@@ -31,6 +31,14 @@ flowchart LR
   H --> I["YouTube candidate pool"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![PLUM: Pre-trained LLM for industrial generative retrieval 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2510.07784v1/gen_retrieval.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2510.07784)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 Residual quantization 逐层生成 SID。令 $r_i^1=e_i$，第 $l$ 层 code 与残差为

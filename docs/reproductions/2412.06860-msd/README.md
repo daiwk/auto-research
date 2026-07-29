@@ -31,6 +31,14 @@ flowchart LR
   K --> R
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MSD：把 LLM 知识蒸馏到可缓存、可对齐的 CTR 模型 原论文 Figure 2](assets/paper-figure-01.png)](https://ar5iv.labs.arxiv.org/html/2412.06860/assets/x2.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2412.06860)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 student 对 teacher 输出序列做真实语言建模蒸馏：

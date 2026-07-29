@@ -34,6 +34,14 @@ flowchart LR
     S --> U
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![TCR：Thinking Checklist Residual Reward 原论文 Figure 3](assets/paper-figure-01.png)](https://arxiv.org/html/2607.19824v1/x3.png)
+
+> **原论文 Figure 3（关键图）**：展示原论文的整体流程、关键阶段及其数据流向。图片来自[原论文](https://arxiv.org/abs/2607.19824)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

@@ -34,6 +34,14 @@ flowchart LR
   F --> G["retrieval/ranking score"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![CMSL: Constructive Multi-Sequence Learning 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2606.28533v2/cmsl_paper_figures_2.jpeg)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2606.28533)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 每个事件 $x_t$ 对 K 个 lens 得到软分配，可写成

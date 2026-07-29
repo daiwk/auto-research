@@ -28,6 +28,14 @@ flowchart LR
   T --> I["Inverse gauge"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![GaugeQuant：训练中学习量化最优基 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.20757v2/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2607.20757)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

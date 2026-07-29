@@ -45,6 +45,9 @@ nav:
               - Constitutional AI: post-training/2212.08073-constitutional-ai/README.md
               - RRHF: post-training/2304.05302-rrhf/README.md
               - RAFT: post-training/2304.06767-raft/README.md
+              - SLiC-HF: post-training/2305.10425-slic-hf/README.md
+              - SteerLM: post-training/2310.05344-steerlm/README.md
+              - SPIN: post-training/2401.01335-spin/README.md
       - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md
@@ -73,6 +76,10 @@ nav:
               - HuggingGPT: agent-research/2303.17580-hugginggpt/README.md
               - Generative Agents: agent-research/2304.03442-generative-agents/README.md
               - MemGPT: agent-research/2310.08560-memgpt/README.md
+              - WebGPT: agent-research/2112.09332-webgpt/README.md
+              - SayCan: agent-research/2204.01691-saycan/README.md
+              - PAL: agent-research/2211.10435-pal/README.md
+              - ART: agent-research/2303.09014-art/README.md
   - 项目文档:
       - 项目 README: project-readme.md
       - 架构与扩展: architecture.md

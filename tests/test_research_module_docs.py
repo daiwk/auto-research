@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import struct
 from pathlib import Path
 
 
@@ -26,6 +27,9 @@ MODULES = {
         "constitutional-ai": "2212.08073-constitutional-ai",
         "rrhf": "2304.05302-rrhf",
         "raft": "2304.06767-raft",
+        "slic-hf": "2305.10425-slic-hf",
+        "steerlm": "2310.05344-steerlm",
+        "spin": "2401.01335-spin",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -50,6 +54,10 @@ MODULES = {
         "hugginggpt": "2303.17580-hugginggpt",
         "generative-agents": "2304.03442-generative-agents",
         "memgpt": "2310.08560-memgpt",
+        "webgpt": "2112.09332-webgpt",
+        "saycan": "2204.01691-saycan",
+        "pal": "2211.10435-pal",
+        "art": "2303.09014-art",
     },
 }
 
@@ -131,3 +139,36 @@ def test_each_research_paper_page_has_complete_contract():
             )
             assert "http" in upstream_line or "未" in upstream_line
             assert "../../experiments/" in text
+
+
+def test_every_paper_page_has_a_valid_original_paper_figure():
+    """Keep figures mandatory for all current and future paper pages."""
+
+    paper_pages = []
+    for module in ("reproductions", "post-training", "agent-research"):
+        for path in (ROOT / "docs" / module).glob("*/README.md"):
+            text = path.read_text(encoding="utf-8")
+            if "## 论文信息" in text:
+                paper_pages.append((path, text))
+
+    assert len(paper_pages) >= 187
+    for path, text in paper_pages:
+        for entry in (
+            "<!-- paper-figure:start -->",
+            "### 原论文关键图",
+            "assets/paper-figure-01.png",
+            "图片来自[原论文]",
+            "版权归原作者所有",
+            "<!-- paper-figure:end -->",
+        ):
+            assert entry in text, f"{path.relative_to(ROOT)} missing {entry}"
+
+        asset = path.parent / "assets" / "paper-figure-01.png"
+        assert asset.is_file(), f"{asset.relative_to(ROOT)} missing"
+        data = asset.read_bytes()
+        assert data[:8] == b"\x89PNG\r\n\x1a\n"
+        assert len(data) >= 5_000, f"{asset.relative_to(ROOT)} is unexpectedly small"
+        width, height = struct.unpack(">II", data[16:24])
+        assert width >= 400 and height >= 140, (
+            f"{asset.relative_to(ROOT)} is unreadable at {width}x{height}"
+        )

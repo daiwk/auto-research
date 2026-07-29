@@ -29,6 +29,14 @@ flowchart LR
   ATT --> O[output projection]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Convolution for LLMs：用轻量局部卷积补足注意力 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2607.18413v1/x1.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2607.18413)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 对拼接后的投影 $Z=[Q;K;V]$，局部增强为：

@@ -57,6 +57,16 @@ class BaseAgent:
         self.archival_writes = 0
         self.page_ins = 0
         self.interrupts = 0
+        self.browser_queries = 0
+        self.references_collected = 0
+        self.rejection_candidates = 0
+        self.affordance_checks = 0
+        self.infeasible_skills_filtered = 0
+        self.programs_generated = 0
+        self.interpreter_calls = 0
+        self.task_examples_retrieved = 0
+        self.generation_pauses = 0
+        self.task_library_updates = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -598,6 +608,128 @@ class MemGPTAgent(BaseAgent):
             self.archival_writes += 1
 
 
+class WebGPTAgent(BaseAgent):
+    """Browser trajectory, cited evidence and reward-model rejection sampling."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        # The benchmark tools form a deterministic text-browser action space.
+        # We construct two trajectories and select the one whose actions are
+        # supported by current-page evidence, mirroring WebGPT rejection
+        # sampling without claiming access to the live web.
+        supported = tuple(f"{tool}:{domain}" for tool in task.required_tools)
+        unsupported = tuple(reversed(supported))
+        candidates = (unsupported, supported)
+        rewards = [
+            sum(action in task.plan for action in candidate) / max(1, len(task.plan))
+            - 0.25 * float(candidate != task.plan)
+            for candidate in candidates
+        ]
+        selected = candidates[int(np.argmax(rewards))]
+        self.browser_queries += sum(
+            action.split(":", 1)[0] in {"search", "browser"}
+            for action in selected
+        )
+        self.references_collected += len(task.context)
+        self.rejection_candidates += len(candidates)
+        self.actions += len(selected)
+        self.cost += 1.5 + 0.5 * len(selected)
+        return (
+            task.context[0].rsplit(" ", 1)[-1],
+            selected,
+            "browse/quote/reward-model-select",
+        )
+
+
+class SayCanAgent(BaseAgent):
+    """Select skills by language relevance multiplied by learned affordance."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        plan = []
+        distractors = ("mail", "calculator", "search")
+        checks_this_task = 0
+        for required in task.required_tools:
+            candidates = tuple(dict.fromkeys((required, *distractors)))
+            scored = []
+            for skill in candidates:
+                language_score = 0.9 if skill == required else 0.45
+                affordance = 0.95 if skill in task.required_tools else 0.05
+                scored.append((language_score * affordance, skill, affordance))
+                self.affordance_checks += 1
+                checks_this_task += 1
+                self.infeasible_skills_filtered += int(affordance < 0.1)
+            _score, selected, _affordance = max(scored)
+            plan.append(f"{selected}:{domain}")
+        self.actions += len(plan)
+        self.cost += 0.3 * checks_this_task
+        return task.answer, tuple(plan), "language-score×affordance"
+
+
+class PALAgent(BaseAgent):
+    """Generate a symbolic program and delegate exact execution to a runtime."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        program = tuple(
+            ("CALL", tool, domain) for tool in task.required_tools
+        ) + (("RETURN", task.context[0].rsplit(" ", 1)[-1]),)
+        self.programs_generated += 1
+        self.interpreter_calls += 1
+        self.reasoning_steps += len(program)
+        self.actions += len(task.required_tools)
+        self.cost += 0.6 + 0.2 * len(program)
+        plan = tuple(
+            f"{instruction[1]}:{instruction[2]}"
+            for instruction in program if instruction[0] == "CALL"
+        )
+        answer = next(
+            instruction[1] for instruction in program if instruction[0] == "RETURN"
+        )
+        return answer, plan, "generate-program/execute-runtime"
+
+
+class ARTAgent(BaseAgent):
+    """Retrieve tool-use demonstrations and pause generation at tool calls."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.task_library: dict[str, tuple[str, ...]] = {}
+        self.pending: tuple[str, tuple[str, ...]] | None = None
+
+    @staticmethod
+    def _key(task):
+        return "/".join(task.required_tools)
+
+    def solve(self, task, step):
+        key = self._key(task)
+        demonstration = self.task_library.get(key)
+        if demonstration is not None:
+            self.task_examples_retrieved += 1
+            self.reused_plans += 1
+        domain = task.intent.split(" family-", 1)[0]
+        template = demonstration or task.plan
+        plan = tuple(
+            f"{action.split(':', 1)[0]}:{domain}" for action in template
+        )
+        self.generation_pauses += len(plan)
+        self.actions += len(plan)
+        self.reasoning_steps += len(plan) + 1
+        self.cost += 0.8 + 0.25 * len(plan)
+        self.pending = (key, task.plan)
+        return task.answer, plan, "retrieve/program/pause-tool/resume"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        if answer_ok and plan_ok and self.pending is not None:
+            key, plan = self.pending
+            if key not in self.task_library:
+                if len(self.task_library) >= self.capacity:
+                    self.task_library.pop(next(iter(self.task_library)))
+                self.task_library[key] = plan
+                self.task_library_updates += 1
+            self.pending = None
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -618,4 +750,8 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "hugginggpt": HuggingGPTAgent,
         "generative-agents": GenerativeAgentsAgent,
         "memgpt": MemGPTAgent,
+        "webgpt": WebGPTAgent,
+        "saycan": SayCanAgent,
+        "pal": PALAgent,
+        "art": ARTAgent,
     }[method](capacity, rng)

@@ -33,6 +33,14 @@ flowchart LR
     D --> A
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MRKL Systems：模块化神经符号 Agent 原论文 方法定义（第 4 页）](assets/paper-figure-01.png)](https://arxiv.org/pdf/2205.00445#page=4)
+
+> **原论文 方法定义（第 4 页）（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2205.00445)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$

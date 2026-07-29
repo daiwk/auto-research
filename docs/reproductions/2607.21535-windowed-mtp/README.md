@@ -32,6 +32,14 @@ flowchart LR
   V --> O["accepted prefix or target correction"]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Windowed-MTP：只给 draft 保留 sink 与最近窗口 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2607.21535v1/figs/perpos_alpha_row_mqe_d7.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2607.21535)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 一次 speculative step 的成本：

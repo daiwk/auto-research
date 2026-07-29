@@ -31,6 +31,14 @@ flowchart LR
     F --> P
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![RAFT：Reward Ranked Fine-Tuning 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2304.06767#page=8)
+
+> **原论文 Figure 1（关键图）**：展示原论文的训练流程与关键优化环节。图片来自[原论文](https://arxiv.org/abs/2304.06767)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $$
