@@ -4,6 +4,7 @@
 
 ## Alibaba
 
+- 2026-07 · [SWAG](../2607.25233-swag-bid/README.md)：以 masked future plan 和滑动窗口目标进行长周期生成式自动出价。
 - 2025-05 · [Gated Attention](../2505.06708-gated-attention/README.md)：在每个 softmax attention head 的 SDPA 输出后施加 query-dependent sigmoid gate，增强非线性并抑制无用输出。
 - 2025-02 · [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣感知 SFT 对齐内容/协同空间，再由 CiUBM 融合排序。
 - 2025-02 · [FilterLLM](../2502.16924-filterllm/README.md)：把新品文本一次性映射到用户词表分布，并用历史行为约束冷启动召回。
@@ -64,6 +65,7 @@
 
 ## Google / YouTube
 
+- 2026-07 · [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：比较 recency、IPS、bias tower 与不确定性探索对新内容反馈环的影响。
 - 2016-09 · [YouTube DNN](../recsys2016-youtube-dnn-youtube-dnn/README.md)：用观看历史聚合与深层用户塔学习候选召回向量，再做大规模 item 近邻检索。
 - 2016-06 · [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 特征交叉与 deep tower，兼顾共现记忆和未见组合泛化。
 - 2018-08 · [MMoE](../kdd2018-mmoe-mmoe/README.md)：为 CTR、转化等任务学习独立 gates，以不同权重组合同一组共享 experts。
@@ -90,6 +92,8 @@
 
 ## Kuaishou
 
+- 2026-07 · [RecoReward](../2607.25901-reco-reward/README.md)：以目标/非目标推荐亲和力差作为多模态描述的训练奖励。
+- 2026-07 · [TWICE](../2607.25404-twice/README.md)：用双时钟和双窗口校正在线广告长期延迟转化。
 - 2026-07 · [UniR²](../2607.24439-unir2/README.md)：用统一 decoder 和 Dual-Query Prefix-Causal Attention 同时学习层级 SID 生成与多目标排序，并以 ranking-only LoRA 避免梯度冲突。
 - 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
 - 2026-01 · [OneMall](../2601.21770-onemall/README.md)：以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
@@ -199,6 +203,10 @@
 - 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，将高资源任务知识迁移给冷启动 podcast。
 - 2026-03 · [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归检索，并联合近期历史与长期用户 soft prompt 扩大探索。
 
+## NetEase
+
+- 2026-07 · [Melo](../2607.23718-melo/README.md)：用多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
+
 ## JD.com
 
 - 2026-04 · [GenRec](../2604.14878-genrec/README.md)：把下一页作为联合生成目标，通过非对称 Token Merger 和带 NLL 约束的 GRPO-SR 优化整页。
@@ -209,6 +217,7 @@
 
 ## 学术与经典基线
 
+- 2026-07 · [Penelope](../2607.25915-penelope/README.md)：在局部 decoder 边界执行共享权重潜在递归，提高结构化推理计算效率。
 - 2025-02 · [Muon](../2502.16982-muon/README.md)：Moonshot AI 与 UCLA 对隐藏矩阵梯度做 Newton–Schulz 正交化，并为大规模 LLM 加入 weight decay 和 shape-aware scaling。
 - 2026-07 · [DataOrchestra](../2607.24717-data-orchestra/README.md)：复旦、上海交大与 SII-GAIR 训练逐样本 orchestrator，按需选择 Drop、Untouch 或多阶段 Clean 预训练数据处理计划。
 - 2023-12 · [Mamba](../2312.00752-mamba/README.md)：使用输入相关的步长、写入和读取向量实现选择性状态空间递推与线性序列复杂度。

@@ -1,0 +1,66 @@
+{
+  "paper": {
+    "arxiv_id": "2607.25404",
+    "title": "TWICE: Two-Clock, Two-Window Learning for Long-Horizon Conversion Prediction in Online Advertising",
+    "url": "https://arxiv.org/abs/2607.25404",
+    "organization": "Kuaishou"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 420,
+    "items": 620
+  },
+  "setup": {
+    "adapter": "twice",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "mature-label next-item conversion proxy",
+    "hit_at_10": 0.05952380952380952,
+    "ndcg_at_10": 0.026292301768631662,
+    "fresh_hit_at_10": 0.020833333333333332,
+    "head_share_at_10": 0.48333333333333334
+  },
+  "method": {
+    "name": "two-clock current-status CVR + monotone delay CDF",
+    "hit_at_10": 0.06428571428571428,
+    "ndcg_at_10": 0.030053745508071446,
+    "fresh_hit_at_10": 0.010416666666666666,
+    "head_share_at_10": 0.7964285714285714
+  },
+  "relative": {
+    "hit_at_10_percent": 7.999999999999996,
+    "ndcg_at_10_percent": 14.3062550115997,
+    "fresh_hit_at_10_percent": -49.99999999999999,
+    "head_share_at_10_percent": 64.7783251231527
+  },
+  "stages": {
+    "click_clock_current_status": true,
+    "conversion_clock_delay_bins": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "shared_monotone_cdf": true,
+    "cohort_exposure_weighting": "fixed click-time pCVR mass proxy",
+    "minimum_cdf_increment": 0.04064125827789211,
+    "selected_validation_blend": 0.2,
+    "validation_only_model_selection": {
+      "hit_at_10": 0.11904761904761904,
+      "ndcg_at_10": 0.06154754526894145,
+      "fresh_hit_at_10": 0.013333333333333334,
+      "head_share_at_10": 0.795
+    }
+  },
+  "paper_results": {
+    "expected_revenue_percent": 2.486,
+    "revenue_percent": 1.858,
+    "conversions_percent": 2.061,
+    "full_traffic": true
+  },
+  "scope": "实际分离 click/conversion clocks，学习目标窗 CVR 与单调 elapsed-delay CDF，并按 cohort exposure 聚合；MovieLens 行为时间代理广告点击和延迟转化。"
+}

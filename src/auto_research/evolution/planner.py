@@ -14,6 +14,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "ipo", "simpo", "luspo", "coba-rl",
             "constitutional-ai", "rrhf", "raft",
             "slic-hf", "steerlm", "spin",
+            "seed", "relay-opd", "cast", "turn-opd", "cort",
         ]
         mapped = [paper.architecture for paper in papers if paper.architecture in installed]
         requested = [
@@ -57,6 +58,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "tool:mrkl", "planner:hugginggpt",
             "memory:generative-agents", "memory:memgpt",
             "tool:webgpt", "planner:saycan", "tool:pal", "planner:art",
+            "critic:seed", "critic:cast", "planner:turn-opd",
+            "memory:hiskill", "memory:unimem",
         ]
     if model == "micro-llm":
         values = [
@@ -64,7 +67,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
             "hyper_connections", "mhc", "qkv_depthwise_conv",
             "mobius_rope", "naju", "adadsf",
-            "engram", "looped_latent_attention", "gaugequant",
+            "engram", "looped_latent_attention", "gaugequant", "penelope",
             "switch_transformer", "mamba", "switch_attention",
             "native_sparse_attention", "gated_attention",
             "nsa_gated_attention", "optimizer:muon",
@@ -77,6 +80,10 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
                 "kv 压缩", "循环注意力",
             ),
             "gaugequant": ("gaugequant", "quantization", "量化", "w4a4"),
+            "penelope": (
+                "penelope", "latent recurrence", "latent reasoning",
+                "局部循环", "隐式推理",
+            ),
             "switch_transformer": ("switch transformer", "sparse moe", "稀疏 moe"),
             "mamba": ("mamba", "selective ssm", "选择性状态空间"),
             "switch_attention": ("switch attention", "swiattn", "动态注意力路由"),

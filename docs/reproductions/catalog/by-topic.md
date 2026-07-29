@@ -4,6 +4,8 @@
 
 ## LLM / Foundation model + Recommendation
 
+- [RecoReward](../2607.25901-reco-reward/README.md)：用行为推荐器产生 RAS reward 来优化多模态内容描述，但 serving 不读取用户行为。
+- [Melo](../2607.23718-melo/README.md)：将 LLM 音乐 Agent 与实体 grounding、检索校验和反思重试组合为生产 playlist 流程。
 - [MIM](../2502.00321-mim/README.md)：多模态内容预训练和内容兴趣感知 SFT 把协同偏好对齐到内容空间。
 - [FilterLLM](../2502.16924-filterllm/README.md)：让 LLM 从新品文本直接预测用户词表分布，避免逐候选判断。
 - [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级 multi-agent、meta-prompt 和约束偏好 RL 生成淘宝用户意图标签与解释。
@@ -44,6 +46,7 @@
 
 ## 纯 LLM：架构、预训练与条件记忆
 
+- [Penelope](../2607.25915-penelope/README.md)：只重入局部 latent block，并以共享权重和时间门控逐步精炼隐藏状态。
 - [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：并行学习压缩、query-selected fine block 与滑窗三路因果注意力，再用逐 query/head 门控融合。
 - [Gated Attention](../2505.06708-gated-attention/README.md)：在每个 head 的 SDPA 输出后加入 sigmoid gate，以轻量非线性缓解 attention sink 并改善训练稳定性。
 - [Muon](../2502.16982-muon/README.md)：将隐藏层二维矩阵交给正交化更新，其余参数保留 AdamW，使优化器可以独立于网络结构参与 evolve。
@@ -105,6 +108,8 @@
 
 ## 排序网络与长序列
 
+- [TWICE](../2607.25404-twice/README.md)：以点击/转化双时钟和单调 delay CDF 处理长期转化反馈未成熟问题。
+- [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：联合训练去偏与 serving 探索，专门改善新发行内容的曝光反馈闭环。
 - [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用多通道注意力和 multi-stage FFN 扩展特征交互模型容量。
 - [AdaF²M²](../2501.15816-adaf2m2/README.md)：用 feature-mask 多次前向和 state-aware adapter 改善特征学习与状态适配。
 - [MGOE](../2506.10520-mgoe/README.md)：把多任务相关性编码成宏观图，再由 graph experts 和任务塔联合预测。
@@ -182,6 +187,7 @@
 
 ## 因果推断与长期价值
 
+- [SWAG](../2607.25233-swag-bid/README.md)：把七日滑窗长期目标编码为 future plan，并门控影响当前广告 bid。
 - [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 估计触发 shopping candidate generator 的增量收益，并同时考虑召回成本。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选能预测未来参与度的长期 reward，再以独立 reward heads 注入多个推荐 surface。
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。

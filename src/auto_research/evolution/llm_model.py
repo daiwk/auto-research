@@ -28,7 +28,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "parallel_gelu", "parallel_swiglu", "llama_gqa_parallel",
         "hyper_connections", "mhc", "qkv_depthwise_conv",
         "mobius_rope", "naju", "adadsf", "engram",
-        "looped_latent_attention", "gaugequant",
+        "looped_latent_attention", "gaugequant", "penelope",
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
         "nsa_gated_attention",
@@ -37,7 +37,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
     modern = architecture.startswith("llama") or architecture in {
         "hyper_connections", "mhc", "qkv_depthwise_conv", "mobius_rope", "naju",
-        "adadsf", "engram", "looped_latent_attention", "gaugequant",
+        "adadsf", "engram", "looped_latent_attention", "gaugequant", "penelope",
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
         "nsa_gated_attention",
@@ -376,6 +376,31 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         def forward(self, values):
             return self.ffn(self.attention(values))
 
+    class LocalizedLatentRecurrence(nn.Module):
+        """Penelope-style refinement localized to one decoder boundary."""
+
+        def __init__(self, steps: int = 2):
+            super().__init__()
+            self.steps = steps
+            self.refiner = Block()
+            self.recurrent = nn.GRUCell(config.dimensions, config.dimensions)
+            self.time_gate = nn.Parameter(torch.linspace(-0.5, 0.5, steps))
+            self.readout = nn.Linear(config.dimensions, config.dimensions, bias=False)
+            self.last_latent_steps = 0
+
+        def forward(self, boundary):
+            state = boundary
+            flat_boundary = boundary.reshape(-1, config.dimensions)
+            for step in range(self.steps):
+                refined = self.refiner(state).reshape(-1, config.dimensions)
+                recurrent = self.recurrent(refined, state.reshape(-1, config.dimensions))
+                gate = torch.sigmoid(self.time_gate[step])
+                state = (
+                    flat_boundary + gate * self.readout(recurrent - flat_boundary)
+                ).reshape_as(boundary)
+            self.last_latent_steps = self.steps
+            return state
+
     class NajuBlock(nn.Module):
         """Native-discrete selective SSM with independent retain/write gates."""
 
@@ -523,6 +548,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             self.gauge_quantizer = (
                 GaugeQuantizer() if architecture == "gaugequant" else None
             )
+            self.localized_recurrence = (
+                LocalizedLatentRecurrence(steps=2)
+                if architecture == "penelope" else None
+            )
+            self.recurrence_layer = max(0, config.layers // 2 - 1)
             self.apply(self._initialize)
             if architecture == "naju":
                 for block in self.blocks:
@@ -558,6 +588,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 if self.gauge_quantizer is not None:
                     values = self.gauge_quantizer(values)
                 values = block(values)
+                if (
+                    self.localized_recurrence is not None
+                    and index == self.recurrence_layer
+                ):
+                    values = self.localized_recurrence(values)
                 if self.conditional_memory is not None and index == 0:
                     values = self.conditional_memory(tokens, values)
                 if self.memory is not None and index == self.memory_layer:
@@ -616,6 +651,17 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                     "weight_bits": 4,
                     "activation_bits": 4,
                     "logsumexp_outlier": self.gauge_quantizer.last_outlier,
+                }
+            if architecture == "penelope":
+                return {
+                    "localized_decoder_interval": [
+                        self.recurrence_layer,
+                        self.recurrence_layer + 1,
+                    ],
+                    "latent_recurrence_steps": (
+                        self.localized_recurrence.last_latent_steps
+                    ),
+                    "full_decoder_reexecution": False,
                 }
             if architecture == "switch_transformer":
                 losses = [

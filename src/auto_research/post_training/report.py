@@ -26,6 +26,11 @@ PAPERS = {
     "slic-hf": ("SLiC-HF", "https://arxiv.org/abs/2305.10425"),
     "steerlm": ("SteerLM", "https://arxiv.org/abs/2310.05344"),
     "spin": ("SPIN", "https://arxiv.org/abs/2401.01335"),
+    "seed": ("SEED", "https://arxiv.org/abs/2607.14777"),
+    "relay-opd": ("Relay-OPD", "https://arxiv.org/abs/2607.26057"),
+    "cast": ("CAST", "https://arxiv.org/abs/2607.25308"),
+    "turn-opd": ("TurnOPD", "https://arxiv.org/abs/2607.05804"),
+    "cort": ("CoRT", "https://arxiv.org/abs/2607.25659"),
 }
 
 

@@ -33,6 +33,11 @@ METHODS = (
     "agent-lightning",
     "swe-agent",
     "openhands",
+    "seed",
+    "cast",
+    "turn-opd",
+    "hiskill",
+    "unimem",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

@@ -4,6 +4,12 @@
 
 ## 2026-07
 
+- [RecoReward](../2607.25901-reco-reward/README.md)：用冻结推荐双塔的目标/非目标亲和力差训练内容描述，并保持线上 content-only serving。
+- [TWICE](../2607.25404-twice/README.md)：分离点击和转化时钟，以 current-status likelihood 和单调 delay CDF 学习长期 CVR。
+- [SWAG](../2607.25233-swag-bid/README.md)：用 masked future plan、七日滑窗目标和逐步 gate 优化跨 episode 自动出价。
+- [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：组合 recency、IPS、可移除 bias tower 与不确定性探索打破新内容反馈环。
+- [Melo](../2607.23718-melo/README.md)：以多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
+- [Penelope](../2607.25915-penelope/README.md)：只在单个 decoder 边界执行共享 latent recurrence，避免整网反复计算。
 - [Mosaic](../2607.24015-mosaic/README.md)：Meta 将 memorization、dense、sequential 与 CoTrain 用户表征组织成 specialist fleet，并以 MRM 和 cosine redundancy loss 挖掘增量信息。
 - [UniR²](../2607.24439-unir2/README.md)：快手用 Dual-Query Prefix-Causal Attention 在同一 decoder 序列内统一层级 SID 生成和多目标排序，并以 ranking-only LoRA 隔离梯度。
 - [CORE](../2607.24417-core-relevance/README.md)：美团把 High/Mid/Low 相关性拆成条件二分类，用逐 step GRPO 优化 reasoning，再通过 PostCoT 蒸馏到低延迟双头模型。

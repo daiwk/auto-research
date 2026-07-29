@@ -1,0 +1,92 @@
+{
+  "paper": {
+    "arxiv_id": "2607.25915",
+    "title": "Penelope: Localized Latent Recurrence for Efficient Structured Reasoning",
+    "url": "https://arxiv.org/abs/2607.25915",
+    "organization": "Academic author team"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "penelope",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.043058067560196,
+    "perplexity": 421.17906153137636,
+    "instruction_loss": 6.0724897384643555,
+    "primary": -6.953931528329849,
+    "public_composite": -6.953931528329849,
+    "composite_loss": 6.953931528329849,
+    "fitness": -6.953931528329849,
+    "initial_loss": 6.17989764213562,
+    "final_loss": 6.145263242721557,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "penelope",
+    "lm_loss": 6.004443973302841,
+    "perplexity": 405.2256098254262,
+    "instruction_loss": 6.037044286727905,
+    "primary": -6.910000616312027,
+    "public_composite": -6.910000616312027,
+    "composite_loss": 6.910000616312027,
+    "fitness": -6.910000616312027,
+    "initial_loss": 6.1616936206817625,
+    "final_loss": 6.120111656188965,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 222018,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "localized_decoder_interval": [
+        0,
+        1
+      ],
+      "latent_recurrence_steps": 2.0,
+      "full_decoder_reexecution": 0.0
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": -0.6389826777379397,
+    "perplexity_percent": -3.7878074109250757
+  },
+  "paper_results": {
+    "claim": "competitive structured-reasoning accuracy with lower measured latency",
+    "latent_recurrence_localized": true
+  },
+  "scope": "真实在 micro decoder 中只对一个中间边界执行两步 GRU latent refinement，下层前缀不重复计算；WikiText-2 同预算训练不等同于论文结构推理 benchmark 和完整 CoT-to-latent curriculum。"
+}

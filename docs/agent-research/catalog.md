@@ -33,6 +33,11 @@
 | 具身规划 | [SayCan](2204.01691-saycan/README.md) | Google Robotics / Everyday Robots，2022-04-04 | [模拟实现](https://github.com/google-research/google-research/tree/master/saycan) | `saycan` |
 | 程序推理 | [PAL](2211.10435-pal/README.md) | CMU / Inspired Cognition，2022-11-18 | [已开源](https://github.com/reasoning-machines/pal) | `pal` |
 | 自动工具推理 | [ART](2303.09014-art/README.md) | UW / UCI / Meta AI，2023-03-16 | [已开源](https://github.com/bhargaviparanjape/language-programmes) | `art` |
+| Agentic RL / hindsight skill | [SEED](2607.14777-seed/README.md) | Tsinghua / Zhejiang / CUHK / NTU / Tongji，2026-07-16 | [已开源](https://github.com/jinyangwu/SEED) | `seed` |
+| Agentic RL / turn-level credit | [CAST](2607.25308-cast/README.md) | USTC / Nanjing University / Wuhan University，2026-07-28 | [已开源](https://github.com/Wloner0809/CAST) | `cast` |
+| Agentic OPD / rollout budgeting | [TurnOPD](2607.05804-turn-opd/README.md) | Academic author team，2026-07-07 | 未发现 | `turn-opd` |
+| Hierarchical skill memory | [HiSkill](2607.25853-hiskill/README.md) | BUPT，2026-07-28 | [已开源](https://github.com/BUPT-GAMMA/HiSkill) | `hiskill` |
+| Continual agent memory | [UniMem](2607.26017-unimem/README.md) | CASIA / UCAS / Peking University / UCL，2026-07-28 | 未发现 | `unimem` |
 
 ## 公平基线
 

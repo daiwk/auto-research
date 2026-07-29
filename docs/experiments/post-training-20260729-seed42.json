@@ -1,0 +1,80 @@
+{
+  "relay-opd": {
+    "baseline": {
+      "accuracy": 0.171875,
+      "mean_reward": 0.31242003408632096,
+      "entropy": 1.7917594692220566,
+      "kl_from_reference": 0.0
+    },
+    "final": {
+      "accuracy": 0.890625,
+      "mean_reward": 0.8867383809173551,
+      "entropy": 1.2903922276456172,
+      "kl_from_reference": 0.501367241576438
+    },
+    "relative_accuracy": 4.181818181818182,
+    "training": {
+      "steps": 120,
+      "learning_rate": 0.08,
+      "group_size": 4,
+      "train_examples": 256,
+      "validation_examples": 64,
+      "data_source": "OpenAI GSM8K official train/test JSONL",
+      "teacher_cache_entries": 256,
+      "teacher_prefill_calls": 256,
+      "online_teacher_calls": 0,
+      "drift_events": 0,
+      "critic_updates": 0,
+      "rollout_policy_refreshes": 0,
+      "last_diagnostics": {
+        "prefix_failure_detected": 0.0,
+        "teacher_handoff_triggered": 0.0,
+        "relay_budget": 0.25,
+        "student_resumes_after_teacher_leg": 1.0,
+        "estimated_trajectory_reduction": 0.0,
+        "loss": 0.3980543464137949,
+        "policy_entropy": 0.9138031807106658
+      },
+      "fidelity": "mechanism reproduction on a candidate-policy model"
+    }
+  },
+  "cort": {
+    "baseline": {
+      "accuracy": 0.171875,
+      "mean_reward": 0.31242003408632096,
+      "entropy": 1.7917594692220566,
+      "kl_from_reference": 0.0
+    },
+    "final": {
+      "accuracy": 0.890625,
+      "mean_reward": 0.8907658968443455,
+      "entropy": 1.7716829650176418,
+      "kl_from_reference": 0.02007650420441317
+    },
+    "relative_accuracy": 4.181818181818182,
+    "training": {
+      "steps": 120,
+      "learning_rate": 0.08,
+      "group_size": 4,
+      "train_examples": 256,
+      "validation_examples": 64,
+      "data_source": "OpenAI GSM8K official train/test JSONL",
+      "teacher_cache_entries": 0,
+      "teacher_prefill_calls": 0,
+      "online_teacher_calls": 0,
+      "drift_events": 0,
+      "critic_updates": 0,
+      "rollout_policy_refreshes": 0,
+      "last_diagnostics": {
+        "counterfactual_replays": 8.0,
+        "rubric_conditioned_contrast": 0.3071592186438187,
+        "token_weight_min": 0.8969930871364946,
+        "token_weight_max": 1.145535997130842,
+        "auxiliary_token_scorer_parameters": 0.0,
+        "loss": -0.06456758400972576,
+        "policy_entropy": 1.7834416597759666
+      },
+      "fidelity": "mechanism reproduction on a candidate-policy model"
+    }
+  }
+}

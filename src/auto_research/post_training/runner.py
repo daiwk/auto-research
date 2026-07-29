@@ -23,7 +23,8 @@ class PostTrainingRunner:
             config.maximum_examples, config.seed,
         )
         state = initialize(len(data.feature_names), data.train)
-        state.teacher_calls = len(data.train) if config.algorithm == "lightning-opd" else 0
+        teacher_cached = {"lightning-opd", "relay-opd", "turn-opd"}
+        state.teacher_calls = len(data.train) if config.algorithm in teacher_cached else 0
         baseline = metrics(state, data.validation)
         rng = np.random.default_rng(config.seed)
         history = []
@@ -47,7 +48,7 @@ class PostTrainingRunner:
             "validation_examples": len(data.validation),
             "data_source": data.source,
             "teacher_cache_entries": len(state.teacher_cache)
-            if config.algorithm == "lightning-opd" else 0,
+            if config.algorithm in teacher_cached else 0,
             "teacher_prefill_calls": state.teacher_calls,
             "online_teacher_calls": 0,
             "drift_events": state.drift_events,

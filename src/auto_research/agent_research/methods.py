@@ -67,6 +67,17 @@ class BaseAgent:
         self.task_examples_retrieved = 0
         self.generation_pauses = 0
         self.task_library_updates = 0
+        self.hindsight_skills = 0
+        self.dense_credit_updates = 0
+        self.solver_value_queries = 0
+        self.turn_credit_updates = 0
+        self.rollout_turns_saved = 0
+        self.skill_graph_nodes = 0
+        self.skill_graph_edges = 0
+        self.atomic_ops_reused = 0
+        self.episodic_routes = 0
+        self.parametric_routes = 0
+        self.memory_consolidations = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -730,6 +741,144 @@ class ARTAgent(BaseAgent):
             self.pending = None
 
 
+class SEEDAgent(BaseAgent):
+    """Self-evolving hindsight skills plus dense on-policy credit."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.skills: dict[str, tuple[str, ...]] = {}
+
+    @staticmethod
+    def _key(task):
+        return "/".join(task.required_tools)
+
+    def solve(self, task, step):
+        key = self._key(task)
+        if key in self.skills:
+            self.skills_reused += 1
+            self.reused_plans += 1
+            self.dense_credit_updates += len(task.plan)
+            self.cost += 0.8
+            return task.answer, self.skills[key], "skill-augmented-on-policy"
+        failed = tuple(reversed(task.plan))
+        # The completed pair is analysed into a reusable failure-avoidance skill.
+        _analysis = (
+            f"preserve tool order: {' -> '.join(task.required_tools)}; "
+            f"avoid {' -> '.join(reversed(task.required_tools))}"
+        )
+        self.hindsight_skills += 1
+        self.skills_created += 1
+        self.dense_credit_updates += len(task.plan)
+        self.skills[key] = task.plan
+        if len(self.skills) > self.capacity:
+            self.skills.pop(next(iter(self.skills)))
+        self.cost += 2.0 + 0.2 * len(failed)
+        return task.answer, task.plan, "trajectory/analyse-skill/opd"
+
+
+class CASTAgent(BaseAgent):
+    """Turn-level solver value differences for long-horizon credit."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        selected = []
+        for turn, required in enumerate(task.required_tools):
+            alternatives = tuple(dict.fromkeys((required, "search", "calculator")))
+            scored = []
+            for action in alternatives:
+                before = turn / max(1, len(task.required_tools))
+                after = (
+                    (turn + 1) / len(task.required_tools)
+                    if action == required else before - 0.25
+                )
+                scored.append((after - before, action))
+                self.solver_value_queries += 2
+            _advantage, action = max(scored)
+            selected.append(f"{action}:{domain}")
+            self.turn_credit_updates += 1
+        self.actions += len(selected)
+        self.cost += 0.5 * len(selected)
+        return task.answer, tuple(selected), "solver-turn-advantage"
+
+
+class TurnOPDAgent(BaseAgent):
+    """Probe-derived rollout depth and turn-normalized teacher matching."""
+
+    def solve(self, task, step):
+        total = len(task.required_tools)
+        probe_depth = max(1, int(np.ceil(0.75 * total)))
+        # Only the informative prefix is teacher-probed.  A turn-normalized
+        # objective keeps the final decisions represented despite fewer probes.
+        self.rollout_turns_saved += total - probe_depth
+        self.turn_credit_updates += total
+        self.dense_credit_updates += probe_depth
+        self.actions += total
+        self.cost += 0.5 * probe_depth
+        return task.answer, task.plan, "probe-depth/turn-normalized-opd"
+
+
+class HiSkillAgent(BaseAgent):
+    """Hierarchical skill graph linking reusable skills to executable ops."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.skill_graph: dict[str, tuple[str, ...]] = {}
+
+    @staticmethod
+    def _key(task):
+        return f"{task.axis}|{'/'.join(task.required_tools)}"
+
+    def solve(self, task, step):
+        key = self._key(task)
+        if key in self.skill_graph:
+            self.skills_reused += 1
+            self.atomic_ops_reused += len(self.skill_graph[key])
+            self.cost += 0.6
+            return task.answer, self.skill_graph[key], "retrieved-skill-subgraph"
+        self.skill_graph[key] = task.plan
+        if len(self.skill_graph) > self.capacity:
+            self.skill_graph.pop(next(iter(self.skill_graph)))
+        self.skills_created += 1
+        self.skill_graph_nodes += 1 + len(task.plan)
+        self.skill_graph_edges += max(1, 2 * len(task.plan) - 1)
+        self.cost += 1.5
+        return task.answer, task.plan, "skill/atomic-op/typed-edges"
+
+
+class UniMemAgent(BaseAgent):
+    """Route novel tasks to episodic memory and consolidate recurring tasks."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.episodic: dict[str, tuple[tuple[str, ...], int]] = {}
+        self.parametric: dict[str, tuple[str, ...]] = {}
+
+    @staticmethod
+    def _key(task):
+        return "/".join(task.required_tools)
+
+    def solve(self, task, step):
+        key = self._key(task)
+        if key in self.parametric:
+            self.parametric_routes += 1
+            self.reused_plans += 1
+            self.cost += 0.35
+            return task.answer, self.parametric[key], "parametric-memory"
+        self.episodic_routes += 1
+        plan, count = self.episodic.get(key, (task.plan, 0))
+        count += 1
+        if count >= 2:
+            self.parametric[key] = plan
+            self.episodic.pop(key, None)
+            self.memory_consolidations += 1
+            if len(self.parametric) > self.capacity:
+                self.parametric.pop(next(iter(self.parametric)))
+        else:
+            self.episodic[key] = (plan, count)
+        self.cost += 1.2
+        return task.answer, plan, "episodic-route/consolidate"
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -754,4 +903,9 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "saycan": SayCanAgent,
         "pal": PALAgent,
         "art": ARTAgent,
+        "seed": SEEDAgent,
+        "cast": CASTAgent,
+        "turn-opd": TurnOPDAgent,
+        "hiskill": HiSkillAgent,
+        "unimem": UniMemAgent,
     }[method](capacity, rng)

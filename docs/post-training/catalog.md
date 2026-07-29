@@ -29,6 +29,8 @@
 | 序列概率校准 | [SLiC-HF](2305.10425-slic-hf/README.md) | Google DeepMind / Google Research，2023-05-17 | 未发布独立实现 | `slic-hf` |
 | 多属性可控 SFT | [SteerLM](2310.05344-steerlm/README.md) | NVIDIA，2023-10-09 | [NeMo-Aligner](https://github.com/NVIDIA/NeMo-Aligner) | `steerlm` |
 | 自博弈微调 | [SPIN](2401.01335-spin/README.md) | UCLA，2024-01-02 | [已开源](https://github.com/uclaml/SPIN) | `spin` |
+| On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | Zhejiang University / Alibaba Group Yuvion Team，2026-07-28 | [已开源](https://github.com/ZJU-REAL/Relay-OPD) | `relay-opd` |
+| Token-level credit assignment | [CoRT](2607.25659-cort/README.md) | ByteDance internship / academic author team，2026-07-28 | 未发现 | `cort` |
 
 ## 公平基线
 

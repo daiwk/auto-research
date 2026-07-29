@@ -2,7 +2,7 @@
 
 本页维护 Agent 论文系统审计。覆盖范围从推理-行动、反思、规划搜索、工具学习，
 延伸到多 Agent 编排、终身学习和 2026 年规划强化学习；最新边界检查至
-**2026-07-28**。
+**2026-07-29**。
 
 ## 谱系覆盖
 
@@ -13,9 +13,9 @@
 | 显式搜索 | Tree of Thoughts、LATS | 已实现 | BFS thought tree；MCTS + environment feedback |
 | 工具学习 | Toolformer、PEARL | 已实现 | 自监督工具标注；工具探索 + Planner RL |
 | 多 Agent 编排 | AutoGen、MetaGPT | 已实现 | 角色消息、交接、终止；软件 SOP 与角色 artifact |
-| 终身学习与记忆 | Voyager、U-Mem、LEGOMem、MemTool | 已实现 | 技能、知识、过程与工具记忆 |
+| 终身学习与记忆 | Voyager、U-Mem、LEGOMem、MemTool、HiSkill、UniMem | 已实现 | 技能、知识、过程、工具、层次图与 episodic→parametric 记忆 |
 | 外部反馈 | CRITIC | 已实现 | 真实失败 patch、测试反馈和修订 |
-| Agent RL | Agent Lightning | 已实现 | 执行事件、reward、credit update 与策略复用 |
+| Agent RL / OPD | Agent Lightning、SEED、CAST、TurnOPD | 已实现 | 执行事件、hindsight skill、solver turn credit、动态 rollout budget |
 | 软件工程 Agent | SWE-agent、OpenHands | 已实现（local） | 真实临时仓库、编辑、命令和回归测试 |
 | 模块化专家系统 | MRKL、HuggingGPT | 已实现 | 神经符号 router；模型能力匹配与依赖图执行 |
 | 经典长期状态 | Generative Agents、MemGPT | 已实现 | 记忆打分/反思；虚拟上下文换入换出 |

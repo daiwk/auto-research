@@ -1,0 +1,65 @@
+{
+  "paper": {
+    "arxiv_id": "2607.23718",
+    "title": "Melo: A Production LLM-Powered Music Recommendation Agent",
+    "url": "https://arxiv.org/abs/2607.23718",
+    "organization": "NetEase Cloud Music / Zhejiang University of Technology"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 420,
+    "items": 620
+  },
+  "setup": {
+    "adapter": "melo",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "catalog recommender without runtime repair",
+    "hit_at_10": 0.05952380952380952,
+    "ndcg_at_10": 0.026292301768631662,
+    "fresh_hit_at_10": 0.020833333333333332,
+    "head_share_at_10": 0.48333333333333334
+  },
+  "method": {
+    "name": "five-node agent + entity grounding + reflective retry",
+    "hit_at_10": 0.047619047619047616,
+    "ndcg_at_10": 0.024147060037386987,
+    "fresh_hit_at_10": 0.03125,
+    "head_share_at_10": 0.15523809523809523
+  },
+  "relative": {
+    "hit_at_10_percent": -20.0,
+    "ndcg_at_10_percent": -8.159200933119065,
+    "fresh_hit_at_10_percent": 50.00000000000001,
+    "head_share_at_10_percent": -67.88177339901478
+  },
+  "stages": {
+    "state_graph_nodes": [
+      "intent",
+      "entity grounding",
+      "tool plan",
+      "execution",
+      "response"
+    ],
+    "search_index_verification": true,
+    "reflective_retry": true,
+    "selected_validation_blend": 0.30000000000000004,
+    "validation_only_model_selection": {
+      "hit_at_10": 0.08095238095238096,
+      "ndcg_at_10": 0.04300575662567052,
+      "fresh_hit_at_10": 0.06666666666666667,
+      "head_share_at_10": 0.16666666666666666
+    },
+    "grounding_rejections": 0,
+    "reflective_retries": 0
+  },
+  "paper_results": {
+    "playlist_retention_pp_lower_bound": 2.0,
+    "playlist_engagement_minutes_lower_bound": 1.0,
+    "entity_misidentification_reduction_pp": 7.8,
+    "retry_trigger_percent": 5.8,
+    "retry_recovery_percent": 59.0
+  },
+  "scope": "实际执行 catalog entity gate、失败原因驱动的约束放宽和重试，不把简单热门回退冒充恢复；MovieLens item catalog 替代网易云音乐搜索索引和线上工具服务。"
+}

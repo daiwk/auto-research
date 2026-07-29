@@ -13,6 +13,8 @@
 
 - [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态和待接入接口。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
+- 分类浏览：[按公司 / 机构 / 学校](catalog/by-institution.md) ·
+  [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
 - [论文谱系与缺口](lineage.md)：系统审计经典主干、最新覆盖和真实环境前置条件。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
 - [Toolformer](2302.04761-toolformer/README.md)：按 token loss improvement 自监督过滤工具调用。
@@ -41,6 +43,11 @@
 - [SayCan](2204.01691-saycan/README.md)：语言相关性乘以技能 affordance。
 - [PAL](2211.10435-pal/README.md)：生成程序并交由确定性解释器执行。
 - [ART](2303.09014-art/README.md)：检索任务示例，在工具调用处暂停与恢复。
+- [SEED](2607.14777-seed/README.md)：从完成轨迹提炼 hindsight skill 并形成稠密 credit。
+- [CAST](2607.25308-cast/README.md)：用 solver value 差分提供 turn 级监督。
+- [TurnOPD](2607.05804-turn-opd/README.md)：自适应 rollout 深度与 turn-normalized OPD。
+- [HiSkill](2607.25853-hiskill/README.md)：高层 skill、AtomicOp 与 typed edge 的层次图。
+- [UniMem](2607.26017-unimem/README.md)：episodic/parametric memory 自路由与巩固。
 
 ## 研究闭环
 
@@ -89,6 +96,11 @@ flowchart LR
 | 具身规划 | [SayCan](2204.01691-saycan/README.md) | language relevance × affordance | PlanBench mini | 机制复现 |
 | 程序推理 | [PAL](2211.10435-pal/README.md) | program generation + symbolic runtime | ScaleMCP mini | 机制复现 |
 | 自动工具推理 | [ART](2303.09014-art/README.md) | demo retrieval、pause/tool/resume、library update | PlanBench mini | 机制复现 |
+| Agentic RL | [SEED](2607.14777-seed/README.md) | hindsight skill 与稠密 on-policy credit | PlanBench mini | 机制复现 |
+| Agentic RL | [CAST](2607.25308-cast/README.md) | solver value 差分与 turn credit | PlanBench mini | 机制复现 |
+| Agentic OPD | [TurnOPD](2607.05804-turn-opd/README.md) | 深度 probe、动态 rollout 与 turn normalization | ScaleMCP mini | 机制复现 |
+| 层次技能 | [HiSkill](2607.25853-hiskill/README.md) | skill/AtomicOp 节点与 typed edge 子图 | PlanBench mini | 机制复现 |
+| 持续记忆 | [UniMem](2607.26017-unimem/README.md) | episodic/parametric route 与 consolidation | EvoMem mini | 机制复现 |
 
 ## 本地实验快照
 
@@ -124,6 +136,11 @@ flowchart LR
 | SayCan · PlanBench mini | 1.0000 | 3.3750 | 1350 affordance checks |
 | PAL · ScaleMCP mini | 1.0000 | 1.4000 | 120 programs / interpreter calls |
 | ART · PlanBench mini | 1.0000 | 1.5500 | 108 retrievals；360 pauses |
+| SEED · PlanBench mini | 1.0000 | 0.9800 | 12 hindsight skills；360 dense credit updates |
+| CAST · PlanBench mini | 1.0000 | 1.5000 | 2040 solver queries；360 turn credits |
+| TurnOPD · ScaleMCP mini | 1.0000 | 1.3333 | 节省 40 rollout turns |
+| HiSkill · PlanBench mini | 1.0000 | 0.6900 | 48 nodes；60 edges；324 AtomicOp reuses |
+| UniMem · EvoMem mini | 1.0000 | **0.5200** | 24 episodic；96 parametric；12 consolidations |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -135,6 +152,8 @@ flowchart LR
 [`p0-missing-agent-mini-suites-seed42.json`](../experiments/p0-missing-agent-mini-suites-seed42.json)。
 P1 候选指标见
 [`p1-agent-candidates-mini-suites-seed42.json`](../experiments/p1-agent-candidates-mini-suites-seed42.json)。
+本批 Agentic RL 与记忆指标见
+[`agent-20260729-seed42.json`](../experiments/agent-20260729-seed42.json)。
 
 ## 一键运行
 

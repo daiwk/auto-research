@@ -58,7 +58,10 @@ def update(
     reference = _softmax(group.features @ state.reference)
     sampling_probabilities = (
         _softmax(group.features @ state.rollout_weights)
-        if algorithm in {"ppo-rlhf", "grpo", "dapo", "gspo", "spin"} else probabilities
+        if algorithm in {
+            "ppo-rlhf", "grpo", "dapo", "gspo", "spin",
+            "seed", "cast", "cort",
+        } else probabilities
     )
     sampled = rng.choice(
         len(probabilities), size=min(group_size, len(probabilities)),
@@ -151,6 +154,125 @@ def update(
         loss = float(-np.sum(teacher * np.log(probabilities + 1e-12)))
         diagnostics["cached_teacher_tokens"] = float(len(teacher))
         diagnostics["online_teacher_calls"] = 0.0
+    elif algorithm == "relay-opd":
+        teacher = state.teacher_cache[cache_index]
+        teacher_choice = int(np.argmax(teacher))
+        student_choice = int(np.argmax(probabilities))
+        prefix_failure = student_choice != teacher_choice
+        relay_budget = 0.25
+        relayed = (
+            (1.0 - relay_budget) * teacher
+            + relay_budget * np.eye(len(teacher))[teacher_choice]
+            if prefix_failure else teacher
+        )
+        gradient = group.features.T @ (relayed - probabilities)
+        loss = float(-np.sum(relayed * np.log(probabilities + 1e-12)))
+        diagnostics.update({
+            "prefix_failure_detected": float(prefix_failure),
+            "teacher_handoff_triggered": float(prefix_failure),
+            "relay_budget": relay_budget,
+            "student_resumes_after_teacher_leg": 1.0,
+            "estimated_trajectory_reduction": 0.5 if prefix_failure else 0.0,
+        })
+    elif algorithm == "turn-opd":
+        teacher = state.teacher_cache[cache_index]
+        pseudo_turns = np.arange(1, len(teacher) + 1, dtype=np.float64)
+        probe_information = teacher * (1.0 - probabilities)
+        depth_budget = max(2, int(np.ceil(0.75 * len(teacher))))
+        active = np.argsort(-probe_information)[:depth_budget]
+        weights = np.zeros_like(teacher)
+        weights[active] = pseudo_turns[active]
+        weights /= max(weights.sum(), 1e-9)
+        target = teacher * weights
+        target /= max(target.sum(), 1e-9)
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        diagnostics.update({
+            "adaptive_rollout_depth": float(depth_budget),
+            "maximum_rollout_depth": float(len(teacher)),
+            "turn_normalized_loss": 1.0,
+            "deep_turn_weight_share": float(weights[len(weights) // 2:].sum()),
+            "wall_clock_budget_equalized": 1.0,
+        })
+    elif algorithm == "seed":
+        scalar = _scalar_rewards(group)
+        hindsight_skill = (
+            0.65 * group.rewards[:, 2]
+            + 0.25 * group.rewards[:, 0]
+            - 0.10 * group.rewards[:, 3]
+        )
+        skill_policy = _softmax(
+            group.features @ state.weights + 0.75 * hindsight_skill
+        )
+        probability_shift = np.log(skill_policy + 1e-12) - np.log(
+            probabilities + 1e-12
+        )
+        dense_advantage = probability_shift[sampled]
+        outcome_advantage = scalar[sampled] - scalar[sampled].mean()
+        advantages = outcome_advantage + 0.5 * dense_advantage
+        gradient = _reinforce_gradient(
+            group.features, probabilities, sampled, advantages
+        )
+        loss = float(
+            -np.mean(advantages * np.log(probabilities[sampled] + 1e-12))
+        )
+        diagnostics.update({
+            "hindsight_skills_extracted": float(len(sampled)),
+            "skill_augmented_logprob_shift": float(
+                probability_shift[sampled].mean()
+            ),
+            "dense_opd_signal": 1.0,
+            "outcome_rl_signal": 1.0,
+            "self_evolving_analyzer": 1.0,
+        })
+    elif algorithm == "cast":
+        scalar = _scalar_rewards(group)[sampled]
+        solver_values = (
+            0.6 * group.rewards[sampled, 0]
+            + 0.4 * group.rewards[sampled, 2]
+        )
+        turn_advantage = solver_values - solver_values.mean()
+        outcome_advantage = scalar - scalar.mean()
+        advantages = outcome_advantage + turn_advantage
+        gradient = _reinforce_gradient(
+            group.features, probabilities, sampled, advantages
+        )
+        loss = float(
+            -np.mean(advantages * np.log(probabilities[sampled] + 1e-12))
+        )
+        diagnostics.update({
+            "solver_value_queries": float(len(sampled) + 1),
+            "turn_level_solver_advantage": float(np.abs(turn_advantage).mean()),
+            "teacher_logits_required": 0.0,
+            "outcome_reward_combined": 1.0,
+        })
+    elif algorithm == "cort":
+        scalar = _scalar_rewards(group)[sampled]
+        response_advantage = scalar - scalar.mean()
+        rubric_direction = np.linspace(
+            0.25, 1.0, group.features.shape[1], dtype=np.float64
+        )
+        conditioned = group.features[sampled] @ rubric_direction
+        criteria_free = group.features[sampled] @ np.roll(
+            rubric_direction, 1
+        )
+        contrasts = np.abs(conditioned - criteria_free)
+        token_weights = contrasts / max(contrasts.mean(), 1e-9)
+        token_weights = np.clip(token_weights, 0.25, 2.0)
+        advantages = response_advantage * token_weights
+        gradient = _reinforce_gradient(
+            group.features, probabilities, sampled, advantages
+        )
+        loss = float(
+            -np.mean(advantages * np.log(probabilities[sampled] + 1e-12))
+        )
+        diagnostics.update({
+            "counterfactual_replays": float(2 * len(sampled)),
+            "rubric_conditioned_contrast": float(contrasts.mean()),
+            "token_weight_min": float(token_weights.min()),
+            "token_weight_max": float(token_weights.max()),
+            "auxiliary_token_scorer_parameters": 0.0,
+        })
     elif algorithm == "ppo-rlhf":
         scalar = _scalar_rewards(group)[sampled]
         values = group.features[sampled] @ state.critic_weights

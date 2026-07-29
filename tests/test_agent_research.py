@@ -252,3 +252,40 @@ def test_p1_agent_candidate_mechanisms_are_observable(
     assert result.metrics["joint_success"] == 1
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        ("seed", "planbench-mini", ("hindsight_skills", "dense_credit_updates")),
+        ("cast", "planbench-mini", ("solver_value_queries", "turn_credit_updates")),
+        ("turn-opd", "scalemcp-mini", ("rollout_turns_saved",)),
+        (
+            "hiskill",
+            "planbench-mini",
+            ("skill_graph_nodes", "skill_graph_edges", "atomic_ops_reused"),
+        ),
+        (
+            "unimem",
+            "evomem-mini",
+            ("episodic_routes", "parametric_routes", "memory_consolidations"),
+        ),
+    ],
+)
+def test_20260729_agentic_rl_and_memory_mechanisms_are_observable(
+    tmp_path: Path,
+    method: str,
+    benchmark: str,
+    diagnostics: tuple[str, ...],
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark=benchmark,
+            episodes=36,
+            memory_size=12,
+            output_dir=tmp_path,
+        )
+    ).run()
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
