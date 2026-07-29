@@ -32,6 +32,8 @@ MODULES = {
         "spin": "2401.01335-spin",
         "relay-opd": "2607.26057-relay-opd",
         "cort": "2607.25659-cort",
+        "gkd": "2306.13649-gkd",
+        "minillm": "2306.08543-minillm",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -65,6 +67,8 @@ MODULES = {
         "turn-opd": "2607.05804-turn-opd",
         "hiskill": "2607.25853-hiskill",
         "unimem": "2607.26017-unimem",
+        "search-r1": "2503.09516-search-r1",
+        "ragen": "2504.20073-ragen",
     },
 }
 

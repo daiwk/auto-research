@@ -1,0 +1,46 @@
+{
+  "protocol": {
+    "post_training_dataset": "OpenAI GSM8K official train/test JSONL",
+    "post_training_train_validation": [128, 32],
+    "post_training_steps": 120,
+    "agent_episodes": 120,
+    "seed": 42,
+    "fidelity": "mechanism reproduction; not original full-size LLM training"
+  },
+  "results": {
+    "gkd": {
+      "baseline_accuracy": 0.25,
+      "accuracy": 0.9375,
+      "mean_reward": 0.9288500410880138,
+      "kl_from_reference": 0.5122175188556003,
+      "student_rollouts": 480,
+      "online_teacher_calls": 480
+    },
+    "minillm": {
+      "baseline_accuracy": 0.25,
+      "accuracy": 0.875,
+      "mean_reward": 0.8817471475152978,
+      "kl_from_reference": 0.5476656946243136,
+      "teacher_mix": 0.2,
+      "online_teacher_calls": 480
+    },
+    "search-r1": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "average_cost": 2.75,
+      "search_queries": 240,
+      "retrieved_tokens_masked": 1800,
+      "outcome_rewards": 120
+    },
+    "ragen": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 1.6,
+      "trajectory_rollouts": 480,
+      "trajectory_filters": 120,
+      "critic_baseline_updates": 120,
+      "echo_trap_events": 19,
+      "gradient_clips": 19
+    }
+  }
+}

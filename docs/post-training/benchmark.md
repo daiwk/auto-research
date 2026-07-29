@@ -90,3 +90,7 @@ auto-research post-train --algorithm luspo \
 Relay-OPD 除最终 accuracy 外必须报告失败前缀、教师 handoff、relay budget 和学生恢复；
 CoRT 必须报告反事实重放次数、rubric contrast、token 权重范围，并确认没有辅助 token
 scorer。两者仍使用相同 candidate policy、train/validation split、步数与 seed。
+
+GKD 必须报告学生生成 rollout、on-policy fraction 和在线教师打分；MiniLLM 必须报告
+reverse KL、teacher-mixed sampling、方差缩减 baseline 和长度归一化。两者的教师
+调用成本不能与 Lightning OPD 的训练期零在线教师调用混写。

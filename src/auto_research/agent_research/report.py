@@ -34,6 +34,8 @@ PAPERS = {
     "seed": ("SEED", "https://arxiv.org/abs/2607.14777"),
     "cast": ("CAST", "https://arxiv.org/abs/2607.25308"),
     "turn-opd": ("Turn-Level OPD", "https://arxiv.org/abs/2607.05804"),
+    "search-r1": ("Search-R1", "https://arxiv.org/abs/2503.09516"),
+    "ragen": ("RAGEN / StarPO-S", "https://arxiv.org/abs/2504.20073"),
     "hiskill": ("HiSkill", "https://arxiv.org/abs/2607.25853"),
     "unimem": ("UniMem", "https://arxiv.org/abs/2607.26017"),
 }
@@ -124,6 +126,9 @@ def render_report(result: AgentResearchResult) -> str:
 - hindsight skills / dense credit updates：{result.diagnostics['hindsight_skills']} / {result.diagnostics['dense_credit_updates']}
 - solver value queries / turn credit updates：{result.diagnostics['solver_value_queries']} / {result.diagnostics['turn_credit_updates']}
 - rollout turns saved：{result.diagnostics['rollout_turns_saved']}
+- search queries / retrieved tokens masked / outcome rewards：{result.diagnostics['search_queries']} / {result.diagnostics['retrieved_tokens_masked']} / {result.diagnostics['outcome_rewards']}
+- trajectory rollouts / filtered：{result.diagnostics['trajectory_rollouts']} / {result.diagnostics['trajectory_filters']}
+- critic baselines / gradient clips / Echo Trap probes：{result.diagnostics['critic_baseline_updates']} / {result.diagnostics['gradient_clips']} / {result.diagnostics['echo_trap_events']}
 - skill graph nodes / edges / reused atomic operations：{result.diagnostics['skill_graph_nodes']} / {result.diagnostics['skill_graph_edges']} / {result.diagnostics['atomic_ops_reused']}
 - episodic / parametric routes / memory consolidations：{result.diagnostics['episodic_routes']} / {result.diagnostics['parametric_routes']} / {result.diagnostics['memory_consolidations']}
 - fidelity：{result.diagnostics['fidelity']}

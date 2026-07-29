@@ -10,6 +10,7 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
     [
         "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
         "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr",
+        "gkd", "minillm",
         "constitutional-ai", "rrhf", "raft",
         "slic-hf", "steerlm", "spin",
     ],
@@ -41,6 +42,46 @@ def test_lightning_opd_has_no_online_teacher_calls(tmp_path: Path):
     assert result.training["teacher_cache_entries"] == 32
     assert result.training["teacher_prefill_calls"] == 32
     assert result.training["online_teacher_calls"] == 0
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        (
+            "gkd",
+            (
+                "student_generated_rollouts",
+                "on_policy_fraction",
+                "teacher_forward_passes",
+                "student_support_fraction",
+            ),
+        ),
+        (
+            "minillm",
+            (
+                "reverse_kl",
+                "teacher_mixed_sampling",
+                "variance_reduction_baseline",
+                "length_normalized_objective",
+            ),
+        ),
+    ],
+)
+def test_classic_on_policy_distillation_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=20,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+    assert result.training["online_teacher_calls"] > 0
+    assert result.training["teacher_cache_entries"] == 48
 
 
 @pytest.mark.parametrize(

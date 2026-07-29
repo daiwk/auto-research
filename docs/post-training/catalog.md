@@ -14,6 +14,8 @@
 | 经典 RLHF | [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md) | OpenAI，2022-03-04 | [部分开源](https://github.com/openai/following-instructions-human-feedback) | `ppo-rlhf` |
 | 经典 RLHF | [RLOO](2402.14740-rloo/README.md) | Cohere For AI / Cohere，2024-02-22 | 未发布独立仓库 | `rloo` |
 | 经典 RLHF | [ReMax](2310.10505-remax/README.md) | CUHK-Shenzhen / SRIBD / Nanjing University，2023-10-16 | [已开源](https://github.com/liziniu/ReMax) | `remax` |
+| 经典 On-policy distillation | [GKD](2306.13649-gkd/README.md) | Google DeepMind / Mila / University of Toronto，2023-06-23 | 原作者未发布独立仓库；[TRL 后续实现](https://github.com/huggingface/trl/blob/main/docs/source/distillation_trainer.md) | `gkd` |
+| Reverse-KL distillation | [MiniLLM](2306.08543-minillm/README.md) | Tsinghua University / Microsoft Research，2023-06-14 | [已开源](https://github.com/microsoft/LMOps/tree/main/minillm) | `minillm` |
 | 长推理 RL | [DAPO](2503.14476-dapo/README.md) | ByteDance Seed / Tsinghua AIR，2025-03-18 | [已开源](https://github.com/BytedTsinghua-SIA/DAPO) | `dapo` |
 | 稳定序列 RL | [GSPO](2507.18071-gspo/README.md) | Alibaba Qwen Team，2025-07-24 | 原论文无独立仓库；[ROLL 后续实现](https://alibaba.github.io/ROLL/docs/User%20Guides/Algorithms/GSPO/) | `gspo` |
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab / Jet AI，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |

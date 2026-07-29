@@ -289,3 +289,45 @@ def test_20260729_agentic_rl_and_memory_mechanisms_are_observable(
     ).run()
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        (
+            "search-r1",
+            "scalemcp-mini",
+            ("search_queries", "retrieved_tokens_masked", "outcome_rewards"),
+        ),
+        (
+            "ragen",
+            "planbench-mini",
+            (
+                "trajectory_rollouts",
+                "trajectory_filters",
+                "critic_baseline_updates",
+                "gradient_clips",
+                "echo_trap_events",
+                "reasoning_rewards",
+            ),
+        ),
+    ],
+)
+def test_classic_agentic_rl_mechanisms_are_observable(
+    tmp_path: Path,
+    method: str,
+    benchmark: str,
+    diagnostics: tuple[str, ...],
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark=benchmark,
+            episodes=36,
+            memory_size=12,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0

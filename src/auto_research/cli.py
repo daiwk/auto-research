@@ -140,6 +140,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=[
             "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
             "ppo-rlhf", "rloo", "remax",
+            "gkd", "minillm",
             "lightning-opd", "gprl", "tcr",
             "ipo", "simpo", "luspo", "coba-rl",
             "constitutional-ai", "rrhf", "raft",
@@ -184,7 +185,8 @@ def build_parser() -> argparse.ArgumentParser:
             "mrkl", "hugginggpt", "generative-agents", "memgpt",
             "webgpt", "saycan", "pal", "art",
             "metagpt", "critic", "agent-lightning", "swe-agent", "openhands",
-            "seed", "cast", "turn-opd", "hiskill", "unimem",
+            "seed", "cast", "turn-opd", "search-r1", "ragen",
+            "hiskill", "unimem",
         ],
         required=True,
     )

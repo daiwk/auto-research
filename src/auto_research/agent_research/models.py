@@ -36,6 +36,8 @@ METHODS = (
     "seed",
     "cast",
     "turn-opd",
+    "search-r1",
+    "ragen",
     "hiskill",
     "unimem",
 )
