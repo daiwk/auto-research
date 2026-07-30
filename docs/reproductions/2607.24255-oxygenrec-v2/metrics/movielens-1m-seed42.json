@@ -1,0 +1,77 @@
+{
+  "paper": {
+    "arxiv_id": "2607.24255",
+    "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+    "url": "https://arxiv.org/abs/2607.24255",
+    "organization": "JD.COM"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 240,
+    "items": 400
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_model": 60,
+    "behavior_proxy": "popularity tertile -> click/cart/order"
+  },
+  "variants": {
+    "PT-only generator": {
+      "initial_loss": 16.37232608795166,
+      "final_loss": 12.997626113891602,
+      "entropy_routed_positions": 0,
+      "parameters": 19936,
+      "device": "mps",
+      "hit_at_10": 0.0625,
+      "ndcg_at_10": 0.02860641346173537,
+      "head_share_at_10": 0.13583333333333333
+    },
+    "OxygenREC-v2 core": {
+      "initial_loss": 22.370523834228514,
+      "final_loss": 17.290115928649904,
+      "entropy_routed_positions": 480,
+      "parameters": 19936,
+      "device": "mps",
+      "hit_at_10": 0.029166666666666667,
+      "ndcg_at_10": 0.010545253258026988,
+      "head_share_at_10": 0.0175
+    }
+  },
+  "relative": {
+    "initial_loss_percent": 36.6361976548397,
+    "final_loss_percent": 33.025183038390175,
+    "entropy_routed_positions_percent": 4.8e+16,
+    "parameters_percent": 0.0,
+    "hit_at_10_percent": -53.333333333333336,
+    "ndcg_at_10_percent": -63.13675158148514,
+    "head_share_at_10_percent": -87.11656441717791
+  },
+  "paper_results": {
+    "offline_hr_at_512": 0.4414,
+    "offline_recall_at_512": 0.3639,
+    "online_uctcvr_lift_range_percent": [
+      1.61,
+      4.44
+    ],
+    "online_gmv_best_lift_percent": 21.21
+  },
+  "scope": "实际训练行为 instruction、行为加权生成损失、训练期未来交互特权视图和熵路由蒸馏；公开数据只提供交互序列，因此以流行度分位代理 click/cart/order。没有复刻京东私有多行为日志、三层 SID、3B-A1B MoE 和生产流量实验。",
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "resolved_device": "mps",
+    "torch_version": "2.13.0",
+    "accelerator": "Apple Metal Performance Shaders"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "JD private multi-behavior logs",
+      "three-level production semantic IDs",
+      "3B-A1B MoE serving stack"
+    ]
+  }
+}

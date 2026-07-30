@@ -54,6 +54,7 @@ POST_TRAINING_MUTATIONS = {
     "2602.12275": ("opcd", "OPCD 在学生轨迹上以 reverse KL 内化教师上下文中的经验与系统行为"),
     "2402.01306": ("kto", "KTO 使用前景理论式效用优化单条 desirable/undesirable 反馈"),
     "2402.03300": ("grpo", "GRPO 用组内相对奖励替代 learned critic"),
+    "2607.26862": ("reco-grpo", "ReCo 以响应期望出现次数与 token Bernoulli 方差重加权 GRPO，抑制分布集中"),
     "2402.14740": ("rloo", "RLOO 以 leave-one-out 组均值作为无偏 baseline"),
     "2403.07691": ("orpo", "ORPO 将 SFT 与 odds-ratio preference penalty 合并为单阶段目标"),
     "2503.14476": ("dapo", "DAPO 加入动态采样、token-level loss 与非对称 clipping"),
@@ -115,6 +116,8 @@ AGENT_MUTATIONS = {
     "2305.16291": ("memory:voyager", "Voyager 将成功程序沉淀为可检索、可组合的终身技能库"),
     "2308.08155": ("planner:autogen", "AutoGen 以可配置角色对话和代码执行组织多 Agent 协作"),
     "2601.20439": ("planner:pearl", "PEARL 探索多条工具计划，并用执行反馈自适应更新计划策略"),
+    "2607.27083": ("tool:cam-df", "CAM-DF 将工具排序转成异构成本下的边际收益停止决策"),
+    "2607.26784": ("memory:skillrise", "SkillRise 在相关任务序列中交替求解与维护技能文档，并用下游结果分配整理阶段信用"),
 }
 
 FALLBACK_PAPERS = (
@@ -167,6 +170,7 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("On-Policy Context Distillation for Language Models", "Reverse-KL context distillation internalizes transient experience and system prompts on student trajectories.", [], "2026-02-12", "https://arxiv.org/abs/2602.12275", "2602.12275"),
     Paper("KTO: Model Alignment as Prospect Theoretic Optimization", "Alignment from unpaired desirable and undesirable feedback.", [], "2024-02-02", "https://arxiv.org/abs/2402.01306", "2402.01306"),
     Paper("DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models", "Introduces Group Relative Policy Optimization.", [], "2024-02-05", "https://arxiv.org/abs/2402.03300", "2402.03300"),
+    Paper("ReCo: Reweighting GRPO Against Distributional Concentration", "Expected-occurrence response weights and token variance ratios preserve rollout diversity.", [], "2026-07-29", "https://arxiv.org/abs/2607.26862", "2607.26862"),
     Paper("Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs", "RLOO uses leave-one-out baselines for efficient online RLHF.", [], "2024-02-22", "https://arxiv.org/abs/2402.14740", "2402.14740"),
     Paper("ORPO: Monolithic Preference Optimization without Reference Model", "Combines supervised learning and odds-ratio preference optimization.", [], "2024-03-12", "https://arxiv.org/abs/2403.07691", "2403.07691"),
     Paper("DAPO: An Open-Source LLM Reinforcement Learning System at Scale", "Dynamic sampling and token-level policy optimization for reasoning.", [], "2025-03-18", "https://arxiv.org/abs/2503.14476", "2503.14476"),
@@ -218,6 +222,8 @@ AGENT_FALLBACK_PAPERS = (
     Paper("Voyager: An Open-Ended Embodied Agent with Large Language Models", "Stores successful executable programs in a lifelong skill library for retrieval and composition.", [], "2023-05-25", "https://arxiv.org/abs/2305.16291", "2305.16291"),
     Paper("AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation", "Configurable conversational roles coordinate reasoning, tool use and code execution.", [], "2023-08-16", "https://arxiv.org/abs/2308.08155", "2308.08155"),
     Paper("PEARL: Plan Exploration and Adaptive Reinforcement Learning for Multihop Tool Use", "Explores alternative tool plans and adapts the policy from execution outcomes.", [], "2026-01-28", "https://arxiv.org/abs/2601.20439", "2601.20439"),
+    Paper("Scores Are Not Decisions: Cost-Aware Stopping for Tool Acquisition in LLM Agents", "Regret-weighted marginal stopping chooses a cost-aware prefix from a frozen tool ranking.", [], "2026-07-29", "https://arxiv.org/abs/2607.27083", "2607.27083"),
+    Paper("SkillRise: Agentic Reinforcement Learning for Cross-Task Skill Evolution", "Alternates task solving and skill-document curation with discounted downstream credit.", [], "2026-07-29", "https://arxiv.org/abs/2607.26784", "2607.26784"),
 )
 
 

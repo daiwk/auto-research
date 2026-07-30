@@ -7,8 +7,10 @@ from pathlib import Path
 
 from .config import ResearchConfig
 from .agent_research import AgentResearchConfig, AgentResearchRunner
+from .agent_research.models import METHODS as AGENT_METHODS
 from .evolution import EvolutionConfig, ModelEvolutionEngine
 from .post_training import PostTrainingConfig, PostTrainingRunner
+from .post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
 from .publish import publish_report
 from .reproductions.base import ReproductionFidelity
 from .reproductions.registry import get_adapter, list_adapters
@@ -137,16 +139,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     post_train.add_argument(
         "--algorithm",
-        choices=[
-            "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
-            "ppo-rlhf", "rloo", "remax",
-            "gkd", "minillm", "opsd", "opcd",
-            "lightning-opd", "gprl", "tcr",
-            "ipo", "simpo", "luspo", "coba-rl",
-            "constitutional-ai", "rrhf", "raft",
-            "slic-hf", "steerlm", "spin",
-            "seed", "relay-opd", "cast", "turn-opd", "cort",
-        ],
+        choices=POST_TRAINING_ALGORITHMS,
         required=True,
     )
     post_train.add_argument(
@@ -177,18 +170,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     agent_eval.add_argument(
         "--method",
-        choices=[
-            "long-context", "react", "reflexion", "voyager",
-            "tree-of-thoughts", "lats", "toolformer",
-            "self-refine", "rewoo", "autogen", "pearl",
-            "u-mem", "legomem", "memtool",
-            "mrkl", "hugginggpt", "generative-agents", "memgpt",
-            "webgpt", "saycan", "pal", "art",
-            "metagpt", "critic", "agent-lightning", "swe-agent", "openhands",
-            "seed", "cast", "turn-opd", "search-r1", "ragen",
-            "loop", "webagent-r1", "mua-rl",
-            "hiskill", "unimem",
-        ],
+        choices=AGENT_METHODS,
         required=True,
     )
     agent_eval.add_argument(

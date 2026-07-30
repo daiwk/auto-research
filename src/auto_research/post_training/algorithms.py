@@ -21,6 +21,7 @@ class PolicyState:
     drift_events: int = 0
     ppo_updates: int = 0
     grpo_updates: int = 0
+    reco_updates: int = 0
     dapo_updates: int = 0
     gspo_updates: int = 0
     critic_updates: int = 0
@@ -60,7 +61,7 @@ def update(
     sampling_probabilities = (
         _softmax(group.features @ state.rollout_weights)
         if algorithm in {
-            "ppo-rlhf", "grpo", "dapo", "gspo", "spin",
+            "ppo-rlhf", "grpo", "reco-grpo", "dapo", "gspo", "spin",
             "seed", "cast", "cort",
         } else probabilities
     )
@@ -474,6 +475,60 @@ def update(
                 "value_model_parameters": 0.0,
             }
         )
+    elif algorithm == "reco-grpo":
+        # ReCo applies two independent corrections to the GRPO update.  The
+        # response term divides by the expected occurrence under the rollout
+        # policy; the token analogue uses Bernoulli variance p(1-p), so already
+        # saturated candidate decisions do not receive another large update.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        old = np.clip(sampling_probabilities[sampled], 1e-5, 1.0 - 1e-5)
+        current = np.clip(probabilities[sampled], 1e-5, 1.0 - 1e-5)
+        response_weights = 1.0 / (len(sampled) * old)
+        # The paper clips response weights in implementation.  Normalizing
+        # keeps the local candidate-policy learning-rate comparable to GRPO.
+        response_weights = np.minimum(response_weights, 5.0)
+        response_weights /= max(response_weights.mean(), 1e-12)
+        variance_ratios = (
+            current * (1.0 - current)
+            / (old * (1.0 - old) + 1e-12)
+        )
+        clipped_ratios = np.clip(variance_ratios, 0.8, 1.2)
+        surrogate = response_weights * np.minimum(
+            variance_ratios * advantages,
+            clipped_ratios * advantages,
+        )
+        active = np.isclose(
+            surrogate,
+            response_weights * variance_ratios * advantages,
+        )
+        expected_features = probabilities @ group.features
+        gradient = np.zeros_like(state.weights)
+        for index, advantage, ratio, weight, is_active in zip(
+            sampled, advantages, variance_ratios, response_weights, active
+        ):
+            if is_active:
+                gradient += float(advantage * ratio * weight) * (
+                    group.features[index] - expected_features
+                )
+        gradient /= len(sampled)
+        gradient -= 0.02 * (group.features.T @ (probabilities - reference))
+        state.reco_updates += 1
+        loss = float(-surrogate.mean())
+        diagnostics.update(
+            {
+                "group_reward_mean": float(scalar.mean()),
+                "group_reward_std": float(scalar.std()),
+                "response_weight_mean": float(response_weights.mean()),
+                "response_weight_max": float(response_weights.max()),
+                "variance_ratio_mean": float(variance_ratios.mean()),
+                "non_saturated_fraction": float(
+                    np.mean(current * (1.0 - current) >= 0.05)
+                ),
+                "clip_fraction": float(np.mean(~active)),
+                "value_model_parameters": 0.0,
+            }
+        )
     elif algorithm == "dapo":
         scalar = _scalar_rewards(group)[sampled]
         pseudo_lengths = np.maximum(
@@ -822,6 +877,8 @@ def update(
     if algorithm == "ppo-rlhf" and state.ppo_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
     if algorithm == "grpo" and state.grpo_updates % 16 == 0:
+        state.rollout_weights = state.weights.copy()
+    if algorithm == "reco-grpo" and state.reco_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
     if algorithm == "dapo" and state.dapo_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()

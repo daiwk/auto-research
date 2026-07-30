@@ -1,0 +1,134 @@
+{
+  "algorithm": "reco-grpo",
+  "dataset": "arithmetic-smoke",
+  "baseline": {
+    "accuracy": 0.1953125,
+    "mean_reward": 0.359689058826365,
+    "entropy": 1.791759469222057,
+    "kl_from_reference": 0.0
+  },
+  "final": {
+    "accuracy": 0.484375,
+    "mean_reward": 0.6103800596063674,
+    "entropy": 1.7159228585913673,
+    "kl_from_reference": 0.0758366106306878
+  },
+  "relative_accuracy": 1.48,
+  "training": {
+    "steps": 120,
+    "learning_rate": 0.05,
+    "group_size": 4,
+    "train_examples": 512,
+    "validation_examples": 128,
+    "data_source": "deterministic arithmetic smoke suite",
+    "teacher_cache_entries": 0,
+    "teacher_prefill_calls": 0,
+    "online_teacher_calls": 0,
+    "drift_events": 0,
+    "critic_updates": 0,
+    "rollout_policy_refreshes": 7,
+    "last_diagnostics": {
+      "group_reward_mean": 0.4054545840386693,
+      "group_reward_std": 0.32243791288006185,
+      "response_weight_mean": 1.0,
+      "response_weight_max": 1.5863526660700835,
+      "variance_ratio_mean": 0.9991396927712306,
+      "non_saturated_fraction": 1.0,
+      "clip_fraction": 0.0,
+      "value_model_parameters": 0.0,
+      "loss": 0.11197389964536514,
+      "policy_entropy": 1.7362332966079213
+    },
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "history": [
+    {
+      "step": 1.0,
+      "loss": -6.938893903907228e-17,
+      "accuracy": 0.5390625,
+      "mean_reward": 0.6292284645371297,
+      "entropy": 1.7917447564032882,
+      "kl_from_reference": 1.4712818767121892e-05
+    },
+    {
+      "step": 12.0,
+      "loss": -0.025560897252232803,
+      "accuracy": 0.6640625,
+      "mean_reward": 0.7331630184926088,
+      "entropy": 1.7908208681969442,
+      "kl_from_reference": 0.0009386010251113426
+    },
+    {
+      "step": 24.0,
+      "loss": 0.019286573239942817,
+      "accuracy": 0.6796875,
+      "mean_reward": 0.740585561157608,
+      "entropy": 1.788297159175672,
+      "kl_from_reference": 0.003462310046382883
+    },
+    {
+      "step": 36.0,
+      "loss": 0.10839030283170287,
+      "accuracy": 0.65625,
+      "mean_reward": 0.7264737403360436,
+      "entropy": 1.7841178522265293,
+      "kl_from_reference": 0.007641616995524774
+    },
+    {
+      "step": 48.0,
+      "loss": 0.08553242374041359,
+      "accuracy": 0.640625,
+      "mean_reward": 0.7206928683446362,
+      "entropy": 1.7780252420078444,
+      "kl_from_reference": 0.013734227214209948
+    },
+    {
+      "step": 60.0,
+      "loss": 0.07020751586999802,
+      "accuracy": 0.5234375,
+      "mean_reward": 0.6389981814631177,
+      "entropy": 1.7704284016786838,
+      "kl_from_reference": 0.02133106754337126
+    },
+    {
+      "step": 72.0,
+      "loss": 0.08849695829911333,
+      "accuracy": 0.46875,
+      "mean_reward": 0.5987634089045113,
+      "entropy": 1.7581848619872364,
+      "kl_from_reference": 0.03357460723481899
+    },
+    {
+      "step": 84.0,
+      "loss": 0.3090593539932623,
+      "accuracy": 0.4765625,
+      "mean_reward": 0.6050517424475436,
+      "entropy": 1.7506746727392217,
+      "kl_from_reference": 0.04108479648283249
+    },
+    {
+      "step": 96.0,
+      "loss": 0.08310574118157898,
+      "accuracy": 0.4765625,
+      "mean_reward": 0.6050517424475436,
+      "entropy": 1.7422969498508525,
+      "kl_from_reference": 0.049462519371201774
+    },
+    {
+      "step": 108.0,
+      "loss": 0.18685720161334116,
+      "accuracy": 0.46875,
+      "mean_reward": 0.5987634089045113,
+      "entropy": 1.7277918449979135,
+      "kl_from_reference": 0.06396762422414211
+    },
+    {
+      "step": 120.0,
+      "loss": 0.11197389964536514,
+      "accuracy": 0.484375,
+      "mean_reward": 0.6103800596063674,
+      "entropy": 1.7159228585913673,
+      "kl_from_reference": 0.0758366106306878
+    }
+  ]
+}

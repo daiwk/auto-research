@@ -9,6 +9,7 @@ PAPERS = {
     "tcr": ("TCR", "https://arxiv.org/abs/2607.19824"),
     "dpo": ("Direct Preference Optimization", "https://arxiv.org/abs/2305.18290"),
     "grpo": ("DeepSeekMath / GRPO", "https://arxiv.org/abs/2402.03300"),
+    "reco-grpo": ("ReCo", "https://arxiv.org/abs/2607.26862"),
     "kto": ("KTO", "https://arxiv.org/abs/2402.01306"),
     "orpo": ("ORPO", "https://arxiv.org/abs/2403.07691"),
     "dapo": ("DAPO", "https://arxiv.org/abs/2503.14476"),

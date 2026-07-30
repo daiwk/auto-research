@@ -70,6 +70,10 @@
 
 - [MemTool](../2507.21428-memtool/README.md)（`memtool`）：工具记忆；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## 成本感知工具停止
+
+- [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：成本感知工具停止；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## 推理与行动
 
 - [ReAct](../2210.03629-react/README.md)（`react`）：推理与行动；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -129,6 +133,10 @@
 ## 记忆与反思
 
 - [Generative Agents](../2304.03442-generative-agents/README.md)（`generative-agents`）：记忆与反思；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## 跨任务技能进化
+
+- [SkillRise](../2607.26784-skillrise/README.md)（`skillrise`）：跨任务技能进化；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## 软件工程 ACI
 

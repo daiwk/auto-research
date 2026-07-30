@@ -41,6 +41,8 @@ PAPERS = {
     "mua-rl": ("MUA-RL", "https://arxiv.org/abs/2508.18669"),
     "hiskill": ("HiSkill", "https://arxiv.org/abs/2607.25853"),
     "unimem": ("UniMem", "https://arxiv.org/abs/2607.26017"),
+    "cam-df": ("CAM-DF", "https://arxiv.org/abs/2607.27083"),
+    "skillrise": ("SkillRise", "https://arxiv.org/abs/2607.26784"),
 }
 
 

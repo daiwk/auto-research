@@ -4,6 +4,8 @@
 
 ## 2026-07
 
+- [ASARL](../2607.26593-asarl/README.md)：以 ReasonAgent、CriticAgent、GenAgent 闭环整理 QQ 社交搜索数据，再经 SCT、PGO 和 Social Distillation 服务在线模型。
+- [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把目标行为写入生成 decoder prefix，并用未来交互 privileged teacher 和熵路由蒸馏内化判别能力。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用冻结推荐双塔的目标/非目标亲和力差训练内容描述，并保持线上 content-only serving。
 - [TWICE](../2607.25404-twice/README.md)：分离点击和转化时钟，以 current-status likelihood 和单调 delay CDF 学习长期 CVR。
 - [SWAG](../2607.25233-swag-bid/README.md)：用 masked future plan、七日滑窗目标和逐步 gate 优化跨 episode 自动出价。

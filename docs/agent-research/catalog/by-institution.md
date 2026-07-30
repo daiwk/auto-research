@@ -84,6 +84,10 @@
 
 - [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：浏览问答；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Peking / McGill / SUFE / Tsinghua
+
+- [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：成本感知工具停止；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## Princeton
 
 - [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：软件工程 ACI；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -135,6 +139,10 @@
 ## Zhejiang / Microsoft Research Asia
 
 - [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：专家模型编排；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## Zhejiang / NUS / SJTU / Meituan
+
+- [SkillRise](../2607.26784-skillrise/README.md)（`skillrise`）：跨任务技能进化；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## 中科院信工所 / 中国科学院大学
 

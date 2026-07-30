@@ -11,6 +11,7 @@
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | Contextual AI / Stanford，2024-02-02 | [已开源](https://github.com/ContextualAI/HALOs) | `kto` |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | KAIST，2024-03-12 | [已开源](https://github.com/xfactlab/orpo) | `orpo` |
 | 在线推理 RL | [DeepSeekMath / GRPO](2402.03300-grpo/README.md) | DeepSeek-AI，2024-02-05 | [已开源](https://github.com/deepseek-ai/DeepSeek-Math) | `grpo` |
+| 分布保持 RL | [ReCo](2607.26862-reco/README.md) | Seoul National University，2026-07-29 | 未发布独立仓库 | `reco-grpo` |
 | 经典 RLHF | [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md) | OpenAI，2022-03-04 | [部分开源](https://github.com/openai/following-instructions-human-feedback) | `ppo-rlhf` |
 | 经典 RLHF | [RLOO](2402.14740-rloo/README.md) | Cohere For AI / Cohere，2024-02-22 | 未发布独立仓库 | `rloo` |
 | 经典 RLHF | [ReMax](2310.10505-remax/README.md) | CUHK-Shenzhen / SRIBD / Nanjing University，2023-10-16 | [已开源](https://github.com/liziniu/ReMax) | `remax` |

@@ -62,6 +62,8 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 | 核心机制 | `mosaic` | Mosaic · Meta | 四 specialist、MRM 与 cosine redundancy loss；MovieLens-1M NDCG@10 +3.49%，Hit@10 -7.69% |
 | 核心机制 | `unir2` | UniR² · Kuaishou | DQ-PCA、层级 SID、ranking-only LoRA；SID code accuracy +34.04%，NDCG@10 -13.19% |
 | 核心机制 | `core-relevance` | CORE · Meituan | 级联序数头、step-GRPO 与 PostCoT 蒸馏；NDCG@5 +0.98%，Badcase@5 -50.00% |
+| 核心机制 | `oxygenrec-v2` | OxygenREC-v2 · JD.COM | 行为 instruction、未来交互特权教师与熵路由蒸馏；MovieLens 行为代理 NDCG@10 -54.09% |
+| 核心机制 | `asarl` | ASARL · Tencent PCG | Reason/Critic/Gen、SCT/PGO/SD；MovieLens relevance proxy NDCG@10 -72.72% |
 | 核心机制 | `data-orchestra` | DataOrchestra · Fudan/SJTU/SII-GAIR | 逐样本 Drop/Untouch/Clean 与多清洗 operation；较固定清洗 PPL -1.03%，较 raw +8.60%（变差） |
 | 核心机制 | `native-sparse-attention` | NSA · DeepSeek | 压缩/选择/滑窗三路可训练稀疏注意力；attention-edge proxy -43.65%，PPL -3.17% |
 | 核心机制 | `gated-attention` | Gated Attention · Qwen/Alibaba | post-SDPA 逐头 sigmoid gate；PPL -0.72% |

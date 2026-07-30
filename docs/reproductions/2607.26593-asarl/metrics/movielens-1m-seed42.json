@@ -1,0 +1,79 @@
+{
+  "paper": {
+    "arxiv_id": "2607.26593",
+    "title": "ASARL: Autonomous Social-Aware Relevance Learning for QQ Search",
+    "url": "https://arxiv.org/abs/2607.26593",
+    "organization": "Tencent PCG"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 240,
+    "items": 400
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_stage": 60
+  },
+  "variants": {
+    "online student": {
+      "initial_loss": 1.0978736400604248,
+      "final_loss": 1.0924216508865356,
+      "curated_examples": 43361,
+      "reason_critic_rounds": 0,
+      "social_distillation": false,
+      "parameters": 1827,
+      "device": "mps",
+      "hit_at_10": 0.08333333333333333,
+      "ndcg_at_10": 0.03598496908508009,
+      "head_share_at_10": 0.15416666666666667
+    },
+    "ASARL distilled": {
+      "initial_loss": 1.1718929886817933,
+      "final_loss": 0.3294887483119965,
+      "curated_examples": 43361,
+      "reason_critic_rounds": 2,
+      "social_distillation": true,
+      "parameters": 1827,
+      "device": "mps",
+      "hit_at_10": 0.016666666666666666,
+      "ndcg_at_10": 0.009817529946283427,
+      "head_share_at_10": 0.043333333333333335
+    }
+  },
+  "relative": {
+    "initial_loss_percent": 6.742064470852458,
+    "final_loss_percent": -69.83868380449933,
+    "curated_examples_percent": 0.0,
+    "reason_critic_rounds_percent": 200000000000000.0,
+    "social_distillation_percent": 100000000000000.0,
+    "parameters_percent": 0.0,
+    "hit_at_10_percent": -80.00000000000001,
+    "ndcg_at_10_percent": -72.71769242576917,
+    "head_share_at_10_percent": -71.89189189189189
+  },
+  "paper_results": {
+    "channel_ctr_lift_percent": 2.69,
+    "channel_join_rate_lift_percent": 2.59,
+    "group_ctr_lift_percent": 1.36,
+    "deployment_dau": 12000000
+  },
+  "scope": "实际执行 Reason/Critic/Gen 三角色数据整理、SCT 分类、偏好 margin 和teacher-to-student social distillation。MovieLens genre 交集代理 QQ 社交属性与 query-title relevance；未使用腾讯私有搜索日志、LLM reasoning trace或线上 RoBERTa 服务。",
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "resolved_device": "mps",
+    "torch_version": "2.13.0",
+    "accelerator": "Apple Metal Performance Shaders"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "QQ private social-search logs",
+      "production LLM annotation agents",
+      "online RoBERTa deployment"
+    ]
+  }
+}

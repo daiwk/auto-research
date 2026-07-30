@@ -13,7 +13,7 @@
 | 显式搜索 | Tree of Thoughts、LATS | 已实现 | BFS thought tree；MCTS + environment feedback |
 | 工具学习 | Toolformer、PEARL | 已实现 | 自监督工具标注；工具探索 + Planner RL |
 | 多 Agent 编排 | AutoGen、MetaGPT | 已实现 | 角色消息、交接、终止；软件 SOP 与角色 artifact |
-| 终身学习与记忆 | Voyager、U-Mem、LEGOMem、MemTool、HiSkill、UniMem | 已实现 | 技能、知识、过程、工具、层次图与 episodic→parametric 记忆 |
+| 终身学习与记忆 | Voyager、U-Mem、LEGOMem、MemTool、HiSkill、UniMem、SkillRise | 已实现 | 技能、知识、过程、工具、层次图、跨任务 skill document 与 episodic→parametric 记忆 |
 | 外部反馈 | CRITIC | 已实现 | 真实失败 patch、测试反馈和修订 |
 | Agent RL / OPD | Agent Lightning、Search-R1、RAGEN、LOOP、WebAgent-R1、MUA-RL、SEED、CAST、TurnOPD | 已实现 | 搜索/网页/长时程/多轮用户 RL、轨迹稳定化、hindsight skill、turn credit、动态 rollout budget |
 | 软件工程 Agent | SWE-agent、OpenHands | 已实现（local） | 真实临时仓库、编辑、命令和回归测试 |

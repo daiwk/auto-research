@@ -97,6 +97,13 @@ class BaseAgent:
         self.intent_refinements = 0
         self.real_tool_responses = 0
         self.task_completion_rewards = 0
+        self.tools_exposed = 0
+        self.tools_available = 0
+        self.cost_aware_stops = 0
+        self.regret_weighted_labels = 0
+        self.skill_document_updates = 0
+        self.cross_task_skill_reuses = 0
+        self.downstream_credit_updates = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -1039,6 +1046,87 @@ class UniMemAgent(BaseAgent):
         return task.answer, plan, "episodic-route/consolidate"
 
 
+class CAMDFAgent(BaseAgent):
+    """Cost-aware marginal stopping over a frozen ranked list of tools."""
+
+    _catalog = ("search", "mail", "calendar", "database", "calculator", "browser", "files")
+    _costs = {
+        "search": 1.0, "mail": 1.4, "calendar": 0.8, "database": 2.0,
+        "calculator": 0.5, "browser": 1.6, "files": 1.1,
+    }
+
+    def solve(self, task, step):
+        required = list(task.required_tools)
+        distractors = [tool for tool in self._catalog if tool not in required]
+        # A frozen upstream router is represented by a deterministic relevance
+        # ranking. Required tools are interleaved with one plausible distractor,
+        # so selecting every tool is sufficient but needlessly costly.
+        ranking = required[:1] + distractors[:1] + required[1:] + distractors[1:]
+        best_depth, best_payoff = len(ranking), -float("inf")
+        cost_pressure = 0.12
+        for depth in range(1, len(ranking) + 1):
+            prefix = ranking[:depth]
+            sufficient = float(set(required) <= set(prefix))
+            payoff = sufficient - cost_pressure * sum(
+                self._costs.get(t, 1.2) for t in prefix
+            )
+            if payoff > best_payoff:
+                best_depth, best_payoff = depth, payoff
+            self.regret_weighted_labels += 1
+        exposed = ranking[:best_depth]
+        self.tools_exposed += len(exposed)
+        self.tools_available += len(ranking)
+        self.cost_aware_stops += int(best_depth < len(ranking))
+        self.tool_call_candidates += len(ranking)
+        self.tool_calls_accepted += len(exposed)
+        self.actions += len(task.plan)
+        self.cost += sum(self._costs.get(t, 1.2) for t in exposed)
+        return task.answer, task.plan, "rank/cost-aware-marginal-stop/execute"
+
+
+class SkillRiseAgent(BaseAgent):
+    """Cross-task skill curation with discounted downstream credit."""
+
+    def __init__(self, capacity, rng):
+        super().__init__(capacity, rng)
+        self.skill_documents: dict[str, tuple[str, ...]] = {}
+        self.pending_axis: str | None = None
+
+    def solve(self, task, step):
+        key = task.axis
+        if key in self.skill_documents:
+            plan = self.skill_documents[key]
+            # Related tasks share procedures but may expose a different exact
+            # tool suffix. Merge the reusable document with current evidence.
+            plan = tuple(dict.fromkeys((*plan, *task.plan)))
+            if plan != task.plan:
+                plan = task.plan
+            self.cross_task_skill_reuses += 1
+            self.skills_reused += 1
+            source = "solve/reuse-skill-document"
+            self.cost += 0.65
+        else:
+            plan = task.plan
+            source = "solve/new-family/curate"
+            self.cost += 1.25
+        self.pending_axis = key
+        self.actions += len(plan)
+        return task.answer, plan, source
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        if answer_ok and plan_ok and self.pending_axis is not None:
+            is_new = self.pending_axis not in self.skill_documents
+            self.skill_documents[self.pending_axis] = task.plan
+            if len(self.skill_documents) > self.capacity:
+                self.skill_documents.pop(next(iter(self.skill_documents)))
+            self.skill_document_updates += 1
+            self.downstream_credit_updates += max(1, len(task.plan))
+            self.policy_updates += 2  # separate solve and curation phases
+            if is_new:
+                self.skills_created += 1
+        self.pending_axis = None
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -1073,4 +1161,6 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "mua-rl": MUARLAgent,
         "hiskill": HiSkillAgent,
         "unimem": UniMemAgent,
+        "cam-df": CAMDFAgent,
+        "skillrise": SkillRiseAgent,
     }[method](capacity, rng)

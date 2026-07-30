@@ -12,6 +12,8 @@
 | 解耦规划 | [ReWOO](2305.18323-rewoo/README.md) | Microsoft / NCSU / Texas A&M，2023-05-29 | [已开源](https://github.com/billxbf/ReWOO) | `rewoo` |
 | 多 Agent | [AutoGen](2308.08155-autogen/README.md) | Microsoft Research，2023-08-16 | [已开源](https://github.com/microsoft/autogen) | `autogen` |
 | 规划强化学习 | [PEARL](2601.20439-pearl/README.md) | 中科院信工所 / 中国科学院大学，2026-01-28 | 未发现 | `pearl` |
+| 成本感知工具停止 | [CAM-DF](2607.27083-cam-df/README.md) | Peking / McGill / SUFE / Tsinghua，2026-07-29 | 论文称发布 artifacts，但未找到仓库链接 | `cam-df` |
+| 跨任务技能进化 | [SkillRise](2607.26784-skillrise/README.md) | Zhejiang / NUS / SJTU / Meituan，2026-07-29 | [已开源](https://github.com/Within-yao/SkillRise) | `skillrise` |
 | 推理搜索 | [Tree of Thoughts](2305.10601-tree-of-thoughts/README.md) | Princeton / Google DeepMind，2023-05-17 | [已开源](https://github.com/princeton-nlp/tree-of-thought-llm) | `tree-of-thoughts` |
 | Agent 搜索 | [LATS](2310.04406-lats/README.md) | UIUC，2023-10-06 | [已开源](https://github.com/lapisrocks/LanguageAgentTreeSearch) | `lats` |
 | 推理与行动 | [ReAct](2210.03629-react/README.md) | Princeton / Google Research，2022-10-06 | [已开源](https://github.com/ysymyth/ReAct) | `react` |
