@@ -12,6 +12,7 @@ MODULES = {
         "kto": "2402.01306-kto",
         "orpo": "2403.07691-orpo",
         "grpo": "2402.03300-grpo",
+        "reco-grpo": "2607.26862-reco",
         "ppo-rlhf": "2203.02155-ppo-rlhf",
         "rloo": "2402.14740-rloo",
         "remax": "2310.10505-remax",
@@ -74,6 +75,8 @@ MODULES = {
         "loop": "2502.01600-loop",
         "webagent-r1": "2505.16421-webagent-r1",
         "mua-rl": "2508.18669-mua-rl",
+        "cam-df": "2607.27083-cam-df",
+        "skillrise": "2607.26784-skillrise",
     },
 }
 

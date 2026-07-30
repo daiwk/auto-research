@@ -10,6 +10,7 @@ ALGORITHMS = (
     "kto",
     "orpo",
     "grpo",
+    "reco-grpo",
     "dapo",
     "gspo",
     "ppo-rlhf",

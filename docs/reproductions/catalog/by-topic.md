@@ -71,6 +71,7 @@
 
 ## 生成式召回与端到端推荐
 
+- [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [HiGR](../2512.24787-higr/README.md)：通过层级 Semantic ID、粗到细 slate decoder 和 ORPO 生成整组推荐结果。
 
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
@@ -163,6 +164,7 @@
 
 ## 采样、蒸馏与强化学习
 
+- [ASARL](../2607.26593-asarl/README.md)：用多 Agent 校验与补齐长尾 relevance 数据，执行 SCT、交互偏好优化和在线 student 蒸馏。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：使用 logged propensity 和策略梯度自动调节广告排序 utility 权重。
 
 - [RAMP](../2607.17473-ramp/README.md)：以富个性化路径为 teacher，通过 feature mask 和 KL alignment 改善仅有公共字段的流量。

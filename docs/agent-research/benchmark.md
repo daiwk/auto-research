@@ -87,6 +87,10 @@ CAST 的 solver query 和 turn credit、TurnOPD 的 rollout 节省、HiSkill 的
 AtomicOp 复用、UniMem 的 episodic/parametric route 和 consolidation。相同 benchmark
 内固定 episode、memory budget 与 seed，禁止只比较最终成功率。
 
+CAM-DF 必须报告总候选/实际开放工具、exposure reduction、成本感知停止与
+regret-weighted label 数；SkillRise 必须分别报告 skill document 更新、跨任务复用和
+下游 credit update，不能把普通 key-value memory 改名为跨任务技能进化。
+
 Search-R1 还必须报告搜索次数、被 loss mask 的检索 token 和 outcome update；RAGEN
 必须报告 trajectory rollout/filter、critic baseline、Echo Trap 探针与 gradient clip。
 确定性 mini-suite 的 100% 成功率只证明控制流可执行，不等于论文真实搜索或游戏效果。

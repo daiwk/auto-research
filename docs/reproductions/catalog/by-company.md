@@ -151,6 +151,7 @@
 
 ## Tencent / WeChat
 
+- 2026-07 · [ASARL](../2607.26593-asarl/README.md)：用 Reason/Critic/Gen 多 Agent 闭环整理社交搜索数据，再经 SCT、偏好优化和蒸馏得到在线相关性模型。
 - 2025-12 · [HiGR](../2512.24787-higr/README.md)：先生成层级 Semantic ID 簇再解码物品 slate，并以 ORPO 做列表偏好对齐。
 
 - 2020-09 · [PLE](../recsys2020-ple-ple/README.md)：把共享 experts 与任务专属 experts 分组，通过 CGC gates 逐层分离共性和任务特性。
@@ -209,6 +210,7 @@
 
 ## JD.com
 
+- 2026-07 · [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把 click/cart/order instruction 内化到 SID 生成，并用未来交互特权教师与熵路由蒸馏联合后训练。
 - 2026-04 · [GenRec](../2604.14878-genrec/README.md)：把下一页作为联合生成目标，通过非对称 Token Merger 和带 NLL 约束的 GRPO-SR 优化整页。
 
 ## MiniMax

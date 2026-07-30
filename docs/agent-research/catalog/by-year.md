@@ -4,10 +4,12 @@
 
 ## 2026
 
+- [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：成本感知工具停止；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [CAST](../2607.25308-cast/README.md)（`cast`）：Agentic RL / turn-level credit；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [HiSkill](../2607.25853-hiskill/README.md)（`hiskill`）：Hierarchical skill memory；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [PEARL](../2601.20439-pearl/README.md)（`pearl`）：规划强化学习；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [SEED](../2607.14777-seed/README.md)（`seed`）：Agentic RL / hindsight skill；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [SkillRise](../2607.26784-skillrise/README.md)（`skillrise`）：跨任务技能进化；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：Agentic OPD / rollout budgeting；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：主动记忆；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [UniMem](../2607.26017-unimem/README.md)（`unimem`）：Continual agent memory；详情页包含核心机制、公式、原文结果和本地复现边界。

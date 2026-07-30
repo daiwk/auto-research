@@ -121,6 +121,17 @@ class AgentResearchRunner:
             "intent_refinements": agent.intent_refinements,
             "real_tool_responses": agent.real_tool_responses,
             "task_completion_rewards": agent.task_completion_rewards,
+            "tools_exposed": agent.tools_exposed,
+            "tools_available": agent.tools_available,
+            "tool_exposure_reduction": (
+                1.0 - agent.tools_exposed / agent.tools_available
+                if agent.tools_available else 0.0
+            ),
+            "cost_aware_stops": agent.cost_aware_stops,
+            "regret_weighted_labels": agent.regret_weighted_labels,
+            "skill_document_updates": agent.skill_document_updates,
+            "cross_task_skill_reuses": agent.cross_task_skill_reuses,
+            "downstream_credit_updates": agent.downstream_credit_updates,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

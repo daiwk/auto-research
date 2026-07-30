@@ -43,6 +43,8 @@ METHODS = (
     "mua-rl",
     "hiskill",
     "unimem",
+    "cam-df",
+    "skillrise",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

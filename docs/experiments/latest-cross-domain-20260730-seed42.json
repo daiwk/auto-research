@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-30",
+  "seed": 42,
+  "reproductions": {
+    "oxygenrec-v2": {
+      "dataset": "MovieLens-1M (240 users / 400 items)",
+      "baseline": {"hit_at_10": 0.0625, "ndcg_at_10": 0.028606},
+      "method": {"hit_at_10": 0.025, "ndcg_at_10": 0.013132},
+      "note": "negative transfer under public behavior proxy"
+    },
+    "asarl": {
+      "dataset": "MovieLens-1M (240 users / 400 items)",
+      "baseline": {"hit_at_10": 0.083333, "ndcg_at_10": 0.035985},
+      "method": {"hit_at_10": 0.016667, "ndcg_at_10": 0.009818},
+      "note": "classification loss improves but next-item ranking transfers negatively"
+    }
+  },
+  "post_training": {
+    "reco-grpo": {
+      "dataset": "gsm8k-candidate (OpenAI official JSONL, 256 train / 64 validation)",
+      "baseline_accuracy": 0.171875,
+      "final_accuracy": 0.875,
+      "baseline_mean_reward": 0.31242,
+      "final_mean_reward": 0.879814,
+      "rollout_policy_refreshes": 7
+    }
+  },
+  "agent": {
+    "cam-df": {
+      "benchmark": "scalemcp-mini",
+      "joint_success": 1.0,
+      "tool_exposure_reduction": 0.510204,
+      "cost_aware_stops": 120
+    },
+    "skillrise": {
+      "benchmark": "planbench-mini",
+      "joint_success": 1.0,
+      "average_cost": 0.655,
+      "cross_task_skill_reuses": 119,
+      "downstream_credit_updates": 360
+    }
+  }
+}

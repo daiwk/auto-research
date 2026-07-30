@@ -9,7 +9,7 @@ from .models import Genome, PaperInspiration
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
     if model == "post-training":
         installed = [
-            "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "rloo", "remax",
+            "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "reco-grpo", "rloo", "remax",
             "gkd", "minillm", "opsd", "opcd",
             "dapo", "gspo", "lightning-opd", "gprl", "tcr",
             "ipo", "simpo", "luspo", "coba-rl",
@@ -22,6 +22,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             value for value in installed
             if value.replace("-", " ") in direction.lower().replace("-", " ")
         ]
+        if "reco" in direction.lower() and "reco-grpo" not in requested:
+            requested.insert(0, "reco-grpo")
         return list(dict.fromkeys([*requested, *mapped, *installed]))
     if model == "agent":
         operators = [paper.architecture for paper in papers if paper.architecture and ":" in paper.architecture]
@@ -64,6 +66,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "critic:loop", "planner:webagent-r1", "tool:mua-rl",
             "memory:voyager", "planner:autogen", "planner:pearl",
             "memory:hiskill", "memory:unimem",
+            "tool:cam-df", "memory:skillrise",
         ]
     if model == "micro-llm":
         values = [

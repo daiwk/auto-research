@@ -60,6 +60,7 @@ class PostTrainingRunner:
                 {
                     "ppo-rlhf": state.ppo_updates,
                     "grpo": state.grpo_updates,
+                    "reco-grpo": state.reco_updates,
                     "dapo": state.dapo_updates,
                     "gspo": state.gspo_updates,
                     "spin": state.spin_updates,

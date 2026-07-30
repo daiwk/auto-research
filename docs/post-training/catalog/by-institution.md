@@ -78,6 +78,10 @@
 
 - [SimPO](../2405.14734-simpo/README.md)（`simpo`）：Reference-free 偏好；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Seoul National University
+
+- [ReCo](../2607.26862-reco/README.md)（`reco-grpo`）：分布保持 RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## Stanford
 
 - [DPO](../2305.18290-dpo/README.md)（`dpo`）：直接偏好优化；详情页包含核心机制、公式、原文结果和本地复现边界。

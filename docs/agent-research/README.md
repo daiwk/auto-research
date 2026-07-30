@@ -56,6 +56,8 @@
   调用真实工具并只依赖最终任务奖励。
 - [HiSkill](2607.25853-hiskill/README.md)：高层 skill、AtomicOp 与 typed edge 的层次图。
 - [UniMem](2607.26017-unimem/README.md)：episodic/parametric memory 自路由与巩固。
+- [CAM-DF](2607.27083-cam-df/README.md)：把冻结工具排序转成成本感知的前缀停止决策。
+- [SkillRise](2607.26784-skillrise/README.md)：跨相关任务交替求解与维护技能文档。
 
 ## 研究闭环
 
@@ -114,6 +116,8 @@ flowchart LR
 | 多轮用户 Agent RL | [MUA-RL](2508.18669-mua-rl/README.md) | simulated user、intent refinement、real tool response、final reward | ScaleMCP mini | 机制复现 |
 | 层次技能 | [HiSkill](2607.25853-hiskill/README.md) | skill/AtomicOp 节点与 typed edge 子图 | PlanBench mini | 机制复现 |
 | 持续记忆 | [UniMem](2607.26017-unimem/README.md) | episodic/parametric route 与 consolidation | EvoMem mini | 机制复现 |
+| 工具获取控制 | [CAM-DF](2607.27083-cam-df/README.md) | payoff gap、regret weight 与异构成本停止 | ScaleMCP mini | 机制复现 |
+| 跨任务技能 | [SkillRise](2607.26784-skillrise/README.md) | solve/curate 双 phase 与下游折扣 credit | PlanBench mini | 机制复现 |
 
 ## 本地实验快照
 
@@ -159,6 +163,8 @@ flowchart LR
 | MUA-RL · ScaleMCP mini | 1.0000 | 2.2500 | 360 个用户 turn；240 次意图修正；120 个最终任务奖励 |
 | HiSkill · PlanBench mini | 1.0000 | 0.6900 | 48 nodes；60 edges；324 AtomicOp reuses |
 | UniMem · EvoMem mini | 1.0000 | **0.5200** | 24 episodic；96 parametric；12 consolidations |
+| CAM-DF · ScaleMCP mini | 1.0000 | 4.7333 | 工具 exposure -51.02%；120 次提前停止 |
+| SkillRise · PlanBench mini | 1.0000 | **0.6550** | 119 次跨任务 skill 复用；360 次下游 credit |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。

@@ -48,6 +48,7 @@
 - [SPIN](2401.01335-spin/README.md)：上一轮策略自生成负例与迭代自博弈。
 - [Relay-OPD](2607.26057-relay-opd/README.md)：检测失败前缀并让教师有限接力。
 - [CoRT](2607.25659-cort/README.md)：用反事实重放分配 token 级 rubric credit。
+- [ReCo](2607.26862-reco/README.md)：按响应期望出现次数与 token 方差比重加权 GRPO。
 
 ## 研究闭环
 
@@ -95,6 +96,7 @@ flowchart LR
 | 自博弈 | [SPIN](2401.01335-spin/README.md) | previous-policy negative、偏好更新、对手刷新 | GSM8K candidate | 机制复现 |
 | On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | 失败前缀触发、教师有限接力、学生恢复 | GSM8K candidate | 机制复现 |
 | Token credit | [CoRT](2607.25659-cort/README.md) | rubric/criteria-free 反事实重放与 token 权重 | GSM8K candidate | 机制复现 |
+| 分布保持 RL | [ReCo](2607.26862-reco/README.md) | 响应次数权重、token 方差比与 clipped group update | Arithmetic / GSM8K candidate | 机制复现 |
 
 ## 公开实验快照
 
@@ -107,6 +109,7 @@ flowchart LR
 | KTO | 0.1641 | 0.8359 | 0.0143 |
 | ORPO | 0.1641 | **0.8438** | 0.8973 |
 | GRPO | 0.1641 | 0.7812 | 1.0401 |
+| ReCo | 0.1719 | **0.8750** | 0.2857 |
 | DAPO | 0.1641 | 0.7578 | 1.0870 |
 | GSPO | 0.1641 | 0.8281 | 0.7017 |
 | PPO-RLHF | 0.1641 | 0.8125 | 0.8731 |

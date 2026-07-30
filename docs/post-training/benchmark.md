@@ -95,6 +95,9 @@ GKD 必须报告学生生成 rollout、on-policy fraction 和在线教师打分�
 reverse KL、teacher-mixed sampling、方差缩减 baseline 和长度归一化。两者的教师
 调用成本不能与 Lightning OPD 的训练期零在线教师调用混写。
 
+ReCo 必须同时报告 response expected-count weight、token variance ratio、非饱和位置
+比例和 rollout-policy refresh；只复用 GRPO 更新或只增加 entropy 正则不算 ReCo。
+
 OPSD 必须另外报告特权上下文教师调用、on-policy 学生 rollout、逐 token divergence
 和 pointwise clip；OPCD 必须区分“带经验上下文的教师”和“无上下文学生”，报告
 experience cache、reverse-KL update 以及训练后不再携带上下文的推理路径。两者在
