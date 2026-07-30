@@ -415,6 +415,17 @@ runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/
 
 内置基础模型包括推荐侧 RankMixer/HyFormer，以及可在 Mac、Linux GPU 或 Linux CPU 从头训练的 `micro-llm`。推荐正式实验建议使用 MovieLens-1M：
 
+候选来源需要先区分清楚：
+
+- 运行时会按 `--direction` 搜索最新论文，但尚未在仓库实现的论文只标记为
+  `evidence-only`，不会直接执行；
+- 真正进入训练的论文结构或算法都已经在本仓库实现、测试并登记映射；
+- 系统会在这些白名单算子之间做组合和超参数变异。这可以产生新的工程实验假设，
+  但不会根据论文 PDF 或模型输出现场生成任意代码。
+
+具体例子、离线模式和报告中的来源标记见
+[候选到底从哪里来](model-evolution.md#candidate-sources)。
+
 ```bash
 auto-research evolve \
   --model rankmixer \

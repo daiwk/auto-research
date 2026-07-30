@@ -1,15 +1,98 @@
 # 模型自动进化
 
-该功能面向“已有一个可训练模型，希望围绕一段自然语言调研方向持续做实验”的场景，适用于推荐模型和语言模型。输入基础模型、公开数据集和调研方向后，系统自动检索论文、形成结构/数据/训练假设、并行训练、根据 validation 观察决定下一轮方向，最后隔离 test，并生成可读研究档案。
+该功能面向“已有一个可训练系统，希望围绕一段自然语言方向持续做实验”的场景。
+当前可进化推荐模型、micro‑LLM、后训练 recipe 和 Agent policy。
 
-## 流程
+!!! summary "先说清楚：evolve 不会现场照着论文生成并执行任意代码"
+    **真正参加训练的结构和算法，都已经在本仓库实现并通过测试。**运行时可以联网
+    搜索最新论文，但新搜到且尚未实现的论文只作为 `evidence-only` 证据保存，不会
+    自动变成可执行代码。系统所谓“进化”，主要是在白名单算子之间做公平消融、
+    组合和超参数变异，并根据 validation 结果继续下一轮。
+
+## 候选到底从哪里来 {#candidate-sources}
+
+一次 evolve 会同时出现三类内容，它们的含义不同：
+
+| 页面或报告中的内容 | 来源 | 会不会训练 | 是否属于系统自己创新 |
+|---|---|---:|---|
+| `rankmixer_longer`、`opsd`、`planner:react` 等论文算子 | 论文已经被本项目实现，并登记了论文 ID → 本地算子的映射 | 会 | 否，是论文机制的本地实现 |
+| 运行时搜索到、显示为 `evidence-only` 的论文 | 按 `--direction` 实时检索 arXiv；`--offline` 时使用内置论文清单和本地缓存 | 不会 | 否，只是研究证据和后续实现候选 |
+| `LONGER + UniMixer`、`memory + planner + critic`、层数/维度/学习率组合 | 控制器在**已实现白名单**内组合或调参 | 会 | 属于新的工程实验假设，但不是自动发明了一个未经实现的新算法 |
+
+所以，自然语言 `--direction` 有两个作用：
+
+1. 生成论文检索词，记录与方向相关的新证据；
+2. 从已实现算子中提高相关候选的优先级、约束组合空间。
+
+它不会把论文 PDF 翻译成 Python，也不会让模型自由生成代码后直接训练。若实时发现的
+论文值得采用，需要先完成“本地实现 → 单元/最小训练测试 → 论文 ID 映射”，下次
+evolve 才能执行它。
+
+## 一个具体例子
+
+假设输入：
+
+```text
+基础模型：RankMixer
+方向：把 LONGER、UniMixer 及相关高效 Transformer 结构加入 RankMixer
+```
+
+系统实际做的是：
+
+1. 在线搜索与 LONGER、UniMixer、efficient Transformer 相关的论文；离线模式则读取
+   内置清单。
+2. 识别到 LONGER 和 UniMixer 已有本地实现，因此开放
+   `rankmixer_longer`、`rankmixer_unimixer` 和经过编码测试的组合
+   `rankmixer_longer_unimixer`。
+3. 对仅在网上找到、但没有本地算子映射的论文标记 `evidence-only`。
+4. 第一轮保持训练预算和超参数一致，只比较结构；后续轮围绕 validation 冠军搜索
+   层数、维度、学习率、优化器和 batch size。
+5. 全部轮次结束后，才在隔离 test 上比较初始基线与最终冠军。
+
+这意味着组合结构是仓库中明确实现的工程假设，不是把两个论文名字拼在配置里。
+
+## 最短操作路径
+
+```bash
+# 1. 在仓库根目录安装命令
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[neural-recs]'
+
+# 2. 先跑帮助，确认可用参数
+auto-research evolve --help
+
+# 3. 跑一个可在本地完成的推荐实验
+auto-research evolve \
+  --model rankmixer \
+  --dataset movielens-100k \
+  --direction "比较 LONGER、UniMixer 及其组合" \
+  --generations 3 --population 4 --workers 2 \
+  --steps 100 --papers 8 --seeds 42
+```
+
+运行完成后先打开：
+
+```text
+runs/evolution/rankmixer-<timestamp>/index.html
+```
+
+其中“论文证据”会明确显示本地算子或 `evidence-only`；实验表中的“来源”会区分
+论文算子、白名单组合/调参和初始基线。`report.md` 适合代码审查，`result.json`
+保存完整配置与父子关系。
+
+若希望确认没有运行时联网检索，可加 `--offline`。这不会禁用已实现算子，只会停止
+在线论文搜索和数据下载；所需数据必须已经在本地缓存。
+
+## 完整流程
 
 ```mermaid
 flowchart LR
   A[基础模型 + 完整数据集 + 调研方向] --> B[方向转成检索词和结构约束]
-  B --> C[论文证据缓存]
-  C --> D[映射到已审计结构算子]
-  D --> E[结构 + 超参数 Genome]
+  B --> C[实时论文 / 内置论文证据]
+  C --> D{已有本地算子映射?}
+  D -- 否 --> X[evidence-only 留档]
+  D -- 是 --> E[已审计算子 + 超参数 Genome]
   E --> F[训练并评估 Validation]
   F --> G[并行实验与失败留档]
   G --> H{达到设定代数?}
@@ -28,7 +111,7 @@ batch_size, experts, interval_residual, auxiliary_weight
 
 每个 trial 保存 `generation`、`parent_id`、论文来源、变异理由、validation 指标、训练 loss、参数量和耗时，因此可以完整回溯模型如何演化。
 
-## RankMixer 首批论文算子
+## 可执行论文算子示例：RankMixer
 
 | 论文 | 内置结构 | 实际加入当前网络的机制 |
 |---|---|---|
@@ -41,7 +124,9 @@ batch_size, experts, interval_residual, auxiliary_weight
 | [Long-History User Transformers](https://arxiv.org/abs/2607.14331) | `rankmixer_long_history` | 异步全历史 encoder 的缓存状态与轻量近期序列融合 |
 | [RAMP](https://arxiv.org/abs/2607.17473) | `rankmixer_ramp` | 个性化/公共双路径、feature availability mask、受限路径监督与 prediction alignment |
 
-在线 arXiv 检索仍会返回其他相关论文。只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为 `evidence-only`，避免从论文文本直接执行不可审计代码。
+这张表中的结构都已经存在于仓库源码中。在线 arXiv 检索仍会返回其他相关论文，但
+只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为
+`evidence-only`。
 
 Gzip-guided Sparse Attention 已有独立的 byte-level 可执行 adapter，但当前
 `micro-llm` evolve 使用 BPE token。为避免把 token ID 截断成 bytes 后伪称论文实现，
