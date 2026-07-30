@@ -18,6 +18,8 @@ PAPERS = {
     "remax": ("ReMax", "https://arxiv.org/abs/2310.10505"),
     "gkd": ("Generalized Knowledge Distillation", "https://arxiv.org/abs/2306.13649"),
     "minillm": ("MiniLLM", "https://arxiv.org/abs/2306.08543"),
+    "opsd": ("Self-Distilled Reasoner / OPSD", "https://arxiv.org/abs/2601.18734"),
+    "opcd": ("On-Policy Context Distillation", "https://arxiv.org/abs/2602.12275"),
     "ipo": ("Identity Preference Optimization", "https://arxiv.org/abs/2310.12036"),
     "simpo": ("SimPO", "https://arxiv.org/abs/2405.14734"),
     "luspo": ("Length-Unbiased Sequence Policy Optimization", "https://arxiv.org/abs/2602.05261"),

@@ -62,6 +62,10 @@
 
 - [Lightning OPD](../2604.13010-lightning-opd/README.md)（`lightning-opd`）：On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Microsoft Research
+
+- [OPCD](../2602.12275-opcd/README.md)（`opcd`）：Context distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## NVIDIA
 
 - [SteerLM](../2310.05344-steerlm/README.md)（`steerlm`）：多属性可控 SFT；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -89,6 +93,10 @@
 ## UCLA
 
 - [SPIN](../2401.01335-spin/README.md)（`spin`）：自博弈微调；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## UCLA / HKU / Meta Superintelligence Labs
+
+- [OPSD](../2601.18734-opsd/README.md)（`opsd`）：On-policy self-distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## Zhejiang / NUS
 

@@ -8,6 +8,7 @@ import numpy as np
 from ..agent_research.benchmarks import build_benchmark
 from ..post_training.algorithms import initialize, metrics, update
 from ..post_training.data import load_post_training_data
+from ..post_training.models import ALGORITHMS
 from .models import EvolutionTrial, Genome
 
 
@@ -23,7 +24,7 @@ class PostTrainingEvolutionEvaluator:
     def summary(self):
         return {
             "dataset": self.dataset,
-            "algorithms": 19,
+            "algorithms": len(ALGORITHMS),
             "seeds": list(self.seeds),
             "selection": (
                 "free-generation exact accuracy + verifier reward"
@@ -189,6 +190,7 @@ class AgentEvolutionEvaluator:
                     "legomem": 0.5,
                     "generative-agents": 0.7,
                     "memgpt": 0.6,
+                    "voyager": 0.55,
                 }.get(genome.agent_memory, 0.8)
                 cost += memory_cost
             if plan is None:
@@ -201,7 +203,15 @@ class AgentEvolutionEvaluator:
             cost += tool_cost
             if tuple(plan) != task.plan and genome.agent_critic != "none":
                 plan = task.plan
-                cost += 1.0 if genome.agent_critic == "self-refine" else 1.5
+                critic_cost = {
+                    "self-refine": 1.0,
+                    "loop": 0.7,
+                    "ragen": 0.9,
+                    "agent-lightning": 1.1,
+                    "seed": 0.8,
+                    "cast": 0.85,
+                }.get(genome.agent_critic, 1.5)
+                cost += critic_cost
             success = tuple(plan) == task.plan
             correct += float(success)
             if success and genome.agent_memory != "none":
@@ -239,6 +249,18 @@ def _plan(task, method, rng):
     if method == "art":
         # Task-library retrieval plus a pause/resume around every tool call.
         return target, 0.8 + 0.25 * len(target)
+    if method == "autogen":
+        # Planner and executor exchange one role message per dependency.
+        return target, 0.7 + 0.35 * len(target)
+    if method == "pearl":
+        # Explore incomplete and reversed plans before promoting the successful
+        # trajectory using execution feedback.
+        candidates = (target[:-1], tuple(reversed(target)), target)
+        return candidates[-1], 0.9 + 0.3 * len(candidates)
+    if method == "webagent-r1":
+        # Dynamic observation compression bounds long web histories while
+        # M-GRPO compares parallel complete trajectories.
+        return target, 0.45 + 0.2 * len(target)
     return target, float(len(task.context))
 
 
@@ -273,6 +295,14 @@ def _apply_tools(task, plan, policy, active, capacity, step):
         # A symbolic program invokes every required operation and returns the
         # interpreter result rather than asking the language model to compute.
         return task.plan, 0.6 + 0.2 * (len(task.required_tools) + 1)
+    if policy == "search-r1":
+        # Retrieved environment text is consumed by the next reasoning turn,
+        # but excluded from the policy-loss token set.
+        return task.plan, 0.45 * len(task.required_tools)
+    if policy == "mua-rl":
+        # Simulated user clarification and real tool observations participate
+        # in the trajectory; only final task completion is rewarded.
+        return task.plan, 0.35 + 0.3 * len(task.required_tools)
     return tuple(plan), 0.0
 
 

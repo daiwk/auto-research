@@ -94,3 +94,10 @@ scorer。两者仍使用相同 candidate policy、train/validation split、步�
 GKD 必须报告学生生成 rollout、on-policy fraction 和在线教师打分；MiniLLM 必须报告
 reverse KL、teacher-mixed sampling、方差缩减 baseline 和长度归一化。两者的教师
 调用成本不能与 Lightning OPD 的训练期零在线教师调用混写。
+
+OPSD 必须另外报告特权上下文教师调用、on-policy 学生 rollout、逐 token divergence
+和 pointwise clip；OPCD 必须区分“带经验上下文的教师”和“无上下文学生”，报告
+experience cache、reverse-KL update 以及训练后不再携带上下文的推理路径。两者在
+candidate suite 的固定 seed 快照见
+[`omitted-agentic-rl-opd-seed42.json`](../experiments/omitted-agentic-rl-opd-seed42.json)，
+不能把候选分类准确率写成论文的大模型 benchmark 复现。

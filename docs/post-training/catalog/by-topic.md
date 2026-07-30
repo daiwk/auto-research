@@ -6,10 +6,18 @@
 
 - [Constitutional AI](../2212.08073-constitutional-ai/README.md)（`constitutional-ai`）：AI 反馈安全对齐；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Context distillation
+
+- [OPCD](../2602.12275-opcd/README.md)（`opcd`）：Context distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## On-policy distillation
 
 - [Lightning OPD](../2604.13010-lightning-opd/README.md)（`lightning-opd`）：On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [Relay-OPD](../2607.26057-relay-opd/README.md)（`relay-opd`）：On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## On-policy self-distillation
+
+- [OPSD](../2601.18734-opsd/README.md)（`opsd`）：On-policy self-distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## Reference-free 偏好
 

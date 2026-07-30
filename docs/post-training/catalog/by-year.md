@@ -9,6 +9,8 @@
 - [GPRL](../2605.18721-gprl/README.md)（`gprl`）：多目标 RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [Lightning OPD](../2604.13010-lightning-opd/README.md)（`lightning-opd`）：On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [LUSPO](../2602.05261-luspo/README.md)（`luspo`）：长度无偏 RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [OPCD](../2602.12275-opcd/README.md)（`opcd`）：Context distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
+- [OPSD](../2601.18734-opsd/README.md)（`opsd`）：On-policy self-distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [Relay-OPD](../2607.26057-relay-opd/README.md)（`relay-opd`）：On-policy distillation；详情页包含核心机制、公式、原文结果和本地复现边界。
 - [TCR](../2607.19824-tcr/README.md)（`tcr`）：过程奖励；详情页包含核心机制、公式、原文结果和本地复现边界。
 

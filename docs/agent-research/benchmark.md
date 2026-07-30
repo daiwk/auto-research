@@ -90,3 +90,9 @@ AtomicOp 复用、UniMem 的 episodic/parametric route 和 consolidation。相�
 Search-R1 还必须报告搜索次数、被 loss mask 的检索 token 和 outcome update；RAGEN
 必须报告 trajectory rollout/filter、critic baseline、Echo Trap 探针与 gradient clip。
 确定性 mini-suite 的 100% 成功率只证明控制流可执行，不等于论文真实搜索或游戏效果。
+
+LOOP 必须报告 leave-one-out update、旧轨迹复用和逐 token clipping；WebAgent-R1
+必须报告被压缩的上下文 token、并行完整轨迹组和 M-GRPO update；MUA-RL 必须保留
+模拟用户 turn、意图修正、真实工具响应和最终任务奖励计数。固定 seed 快照见
+[`omitted-agentic-rl-opd-seed42.json`](../experiments/omitted-agentic-rl-opd-seed42.json)；
+mini-suite 不冒充 AppWorld、WebArena-Lite、TAU2 或 BFCL。

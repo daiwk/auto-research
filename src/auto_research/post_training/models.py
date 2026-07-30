@@ -17,6 +17,8 @@ ALGORITHMS = (
     "remax",
     "gkd",
     "minillm",
+    "opsd",
+    "opcd",
     "lightning-opd",
     "gprl",
     "tcr",

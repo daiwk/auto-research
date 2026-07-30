@@ -331,3 +331,52 @@ def test_classic_agentic_rl_mechanisms_are_observable(
     assert result.metrics["joint_success"] == 1
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        (
+            "loop",
+            "planbench-mini",
+            ("off_policy_reuses", "leave_one_out_updates", "per_token_clips"),
+        ),
+        (
+            "webagent-r1",
+            "scalemcp-mini",
+            (
+                "context_compressions",
+                "parallel_trajectory_groups",
+                "multi_turn_group_updates",
+            ),
+        ),
+        (
+            "mua-rl",
+            "scalemcp-mini",
+            (
+                "simulated_user_turns",
+                "intent_refinements",
+                "real_tool_responses",
+                "task_completion_rewards",
+            ),
+        ),
+    ],
+)
+def test_omitted_agentic_rl_mechanisms_are_observable(
+    tmp_path: Path,
+    method: str,
+    benchmark: str,
+    diagnostics: tuple[str, ...],
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark=benchmark,
+            episodes=36,
+            memory_size=12,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0

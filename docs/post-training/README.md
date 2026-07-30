@@ -27,6 +27,10 @@
 - [ReMax](2310.10505-remax/README.md)：以 greedy rollout 作 baseline 的 value-free RLHF。
 - [GKD](2306.13649-gkd/README.md)：学生自生成轨迹、教师密集反馈与 on/off-policy 混合。
 - [MiniLLM](2306.08543-minillm/README.md)：reverse KL、teacher-mixed sampling 与方差缩减。
+- [OPSD](2601.18734-opsd/README.md)：用同一模型的特权解题上下文作教师，对学生
+  on-policy 轨迹做逐 token 自蒸馏与 pointwise clipping。
+- [OPCD](2602.12275-opcd/README.md)：让无上下文学生拟合带经验/系统提示的上下文教师，
+  把测试时上下文能力蒸馏进参数。
 - [DAPO](2503.14476-dapo/README.md)：Clip-Higher、动态采样、token loss 与过长惩罚。
 - [GSPO](2507.18071-gspo/README.md)：长度归一化的 sequence-level importance ratio。
 - [Lightning OPD](2604.13010-lightning-opd/README.md)：离线缓存教师分布的 on-policy distillation。
@@ -72,6 +76,8 @@ flowchart LR
 | 经典在线 RL | [ReMax](2310.10505-remax/README.md) | sampled reward 减 greedy reward，无 critic | GSM8K candidate | 机制复现 |
 | 经典 On-policy KD | [GKD](2306.13649-gkd/README.md) | 学生 rollout、教师反馈、on/off-policy 混合 | GSM8K candidate | 机制复现 |
 | 生成模型蒸馏 | [MiniLLM](2306.08543-minillm/README.md) | reverse KL、teacher mix、variance baseline | GSM8K candidate | 机制复现 |
+| On-policy 自蒸馏 | [OPSD](2601.18734-opsd/README.md) | 特权解题上下文、学生 rollout、逐 token divergence 与 clip | GSM8K candidate | 机制复现 |
+| 上下文蒸馏 | [OPCD](2602.12275-opcd/README.md) | context-conditioned teacher、context-free student、reverse KL | GSM8K candidate | 机制复现 |
 | 长推理 RL | [DAPO](2503.14476-dapo/README.md) | 非对称 clip、动态采样、token loss、overlong shaping | GSM8K candidate | 机制复现 |
 | 稳定序列 RL | [GSPO](2507.18071-gspo/README.md) | sequence ratio、group advantage、序列级 clip | GSM8K candidate | 机制复现 |
 | 蒸馏 | [Lightning OPD](2604.13010-lightning-opd/README.md) | SFT rollout 上预计算教师分布，训练期零在线教师调用 | 同上 | 机制复现 |
@@ -106,6 +112,8 @@ flowchart LR
 | PPO-RLHF | 0.1641 | 0.8125 | 0.8731 |
 | RLOO | 0.1641 | 0.8281 | 0.5707 |
 | ReMax | 0.1641 | 0.7031 | 0.7939 |
+| OPSD | 0.2500 | 0.9062 | 0.3336 |
+| OPCD | 0.2500 | **0.9688** | 0.5479 |
 | Lightning OPD | 0.1641 | **0.8359** | 0.8269 |
 | GPRL | 0.1641 | 0.3672 | 1.1022 |
 | TCR | 0.1641 | **0.8359** | 0.5629 |
@@ -132,6 +140,8 @@ P1 候选指标见
 [`post-training-20260729-seed42.json`](../experiments/post-training-20260729-seed42.json)。
 经典 Agentic RL / OPD 补充指标见
 [`classic-agentic-rl-opd-seed42.json`](../experiments/classic-agentic-rl-opd-seed42.json)。
+本批遗漏方法的固定 seed 指标见
+[`omitted-agentic-rl-opd-seed42.json`](../experiments/omitted-agentic-rl-opd-seed42.json)。
 
 L2 小预算实验固定 arithmetic free generation、48 train examples、20-step SFT warmup、
 6 次后训练更新和 seeds 42/43/44。四种方法的 exact accuracy 均为 0；SimPO 的

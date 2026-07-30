@@ -14,6 +14,10 @@
 
 - [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：通用软件 Agent；详情页包含核心机制、公式、原文结果和本地复现边界。
 
+## Apple
+
+- [LOOP](../2502.01600-loop/README.md)（`loop`）：长时程 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
+
 ## BUPT
 
 - [HiSkill](../2607.25853-hiskill/README.md)（`hiskill`）：Hierarchical skill memory；详情页包含核心机制、公式、原文结果和本地复现边界。
@@ -37,6 +41,10 @@
 ## Google Robotics / Everyday Robots
 
 - [SayCan](../2204.01691-saycan/README.md)（`saycan`）：具身规划；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## Meituan / CAS / Peking University
+
+- [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：多轮用户 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## Meta AI / UPF
 
@@ -119,6 +127,10 @@
 ## UW / UCI / Meta AI
 
 - [ART](../2303.09014-art/README.md)（`art`）：自动工具推理；详情页包含核心机制、公式、原文结果和本地复现边界。
+
+## University of Virginia / Amazon / Georgia Tech
+
+- [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页 Agent RL；详情页包含核心机制、公式、原文结果和本地复现边界。
 
 ## Zhejiang / Microsoft Research Asia
 

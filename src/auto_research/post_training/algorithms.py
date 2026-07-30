@@ -216,6 +216,79 @@ def update(
                 "length_normalized_objective": 1.0,
             }
         )
+    elif algorithm == "opsd":
+        # OPSD uses the same policy under two views: the student sees only the
+        # problem, while the stop-gradient teacher is conditioned on the
+        # verified solution.  The candidate analogue creates that privileged
+        # view by combining the current policy with the verified gold action.
+        privileged = 0.35 * probabilities.copy()
+        privileged[group.gold] += 0.65
+        mixture = 0.5 * (privileged + probabilities)
+        teacher_pointwise = privileged * np.log(
+            (privileged + 1e-12) / (mixture + 1e-12)
+        )
+        student_pointwise = probabilities * np.log(
+            (probabilities + 1e-12) / (mixture + 1e-12)
+        )
+        clip_threshold = 0.12
+        clipped = np.minimum(
+            0.5 * teacher_pointwise + 0.5 * student_pointwise,
+            clip_threshold,
+        )
+        clipping_rate = float(np.mean(
+            (0.5 * teacher_pointwise + 0.5 * student_pointwise)
+            > clip_threshold
+        ))
+        gradient = group.features.T @ (privileged - probabilities)
+        loss = float(np.sum(clipped))
+        state.online_teacher_calls += len(sampled)
+        diagnostics.update(
+            {
+                "student_generated_rollouts": float(len(sampled)),
+                "shared_teacher_student_parameters": 1.0,
+                "privileged_solution_conditioning": 1.0,
+                "dense_token_teacher_calls": float(len(sampled)),
+                "pointwise_divergence_clip": clip_threshold,
+                "pointwise_clip_rate": clipping_rate,
+                "jsd_beta": 0.5,
+            }
+        )
+    elif algorithm == "opcd":
+        # OPCD distils a context-conditioned distribution along trajectories
+        # sampled by the context-free student, using reverse KL to favour the
+        # teacher's high-probability modes.
+        cached_teacher = state.teacher_cache[cache_index]
+        experience = np.zeros_like(probabilities)
+        experience[group.gold] = 1.0
+        context_teacher = 0.7 * cached_teacher + 0.3 * experience
+        rollout = rng.choice(
+            len(probabilities),
+            size=min(group_size, len(probabilities)),
+            replace=False,
+            p=probabilities,
+        )
+        log_ratio = np.log(probabilities[rollout] + 1e-12) - np.log(
+            context_teacher[rollout] + 1e-12
+        )
+        baseline = float(log_ratio.mean())
+        gradient = _reinforce_gradient(
+            group.features, probabilities, rollout, -(log_ratio - baseline)
+        )
+        loss = float(np.sum(
+            probabilities
+            * np.log((probabilities + 1e-12) / (context_teacher + 1e-12))
+        ))
+        state.online_teacher_calls += len(rollout)
+        diagnostics.update(
+            {
+                "student_generated_rollouts": float(len(rollout)),
+                "context_conditioned_teacher_calls": float(len(rollout)),
+                "context_free_student_view": 1.0,
+                "experience_context_fraction": 0.3,
+                "reverse_kl": loss,
+                "experience_internalization_updates": 1.0,
+            }
+        )
     elif algorithm == "lightning-opd":
         teacher = state.teacher_cache[cache_index]
         gradient = group.features.T @ (teacher - probabilities)

@@ -48,6 +48,12 @@
 - [TurnOPD](2607.05804-turn-opd/README.md)：自适应 rollout 深度与 turn-normalized OPD。
 - [Search-R1](2503.09516-search-r1/README.md)：推理/搜索交错、检索 token mask 与结果奖励。
 - [RAGEN](2504.20073-ragen/README.md)：StarPO-S 轨迹 RL、Echo Trap 检测与稳定化。
+- [LOOP](2502.01600-loop/README.md)：无 value model 的 leave-one-out PPO，
+  复用旧 rollout 并做逐 token clip，面向长时程交互。
+- [WebAgent-R1](2505.16421-webagent-r1/README.md)：动态压缩网页上下文，以并行完整轨迹和
+  M-GRPO 结果奖励训练网页 Agent。
+- [MUA-RL](2508.18669-mua-rl/README.md)：把模拟用户纳入 rollout，学习多轮澄清意图、
+  调用真实工具并只依赖最终任务奖励。
 - [HiSkill](2607.25853-hiskill/README.md)：高层 skill、AtomicOp 与 typed edge 的层次图。
 - [UniMem](2607.26017-unimem/README.md)：episodic/parametric memory 自路由与巩固。
 
@@ -103,6 +109,9 @@ flowchart LR
 | Agentic OPD | [TurnOPD](2607.05804-turn-opd/README.md) | 深度 probe、动态 rollout 与 turn normalization | ScaleMCP mini | 机制复现 |
 | 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | 多轮 search/reason、retrieval loss mask、outcome reward | ScaleMCP mini | 机制复现 |
 | 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | trajectory filtering、critic baseline、decoupled clipping | PlanBench mini | 机制复现 |
+| 长时程 Agent RL | [LOOP](2502.01600-loop/README.md) | leave-one-out advantage、off-policy reuse、per-token clip | PlanBench mini | 机制复现 |
+| 网页 Agent RL | [WebAgent-R1](2505.16421-webagent-r1/README.md) | context compression、parallel trajectory、M-GRPO | ScaleMCP mini | 机制复现 |
+| 多轮用户 Agent RL | [MUA-RL](2508.18669-mua-rl/README.md) | simulated user、intent refinement、real tool response、final reward | ScaleMCP mini | 机制复现 |
 | 层次技能 | [HiSkill](2607.25853-hiskill/README.md) | skill/AtomicOp 节点与 typed edge 子图 | PlanBench mini | 机制复现 |
 | 持续记忆 | [UniMem](2607.26017-unimem/README.md) | episodic/parametric route 与 consolidation | EvoMem mini | 机制复现 |
 
@@ -145,6 +154,9 @@ flowchart LR
 | TurnOPD · ScaleMCP mini | 1.0000 | 1.3333 | 节省 40 rollout turns |
 | Search-R1 · ScaleMCP mini | 1.0000 | 2.7500 | 240 queries；1800 masked tokens |
 | RAGEN · PlanBench mini | 1.0000 | 1.6000 | 480 rollouts；120 filtered；19 Echo Trap probes |
+| LOOP · PlanBench mini | 1.0000 | 2.2000 | 476 次旧轨迹复用；480 次 LOO update；120 次 clip |
+| WebAgent-R1 · ScaleMCP mini | 1.0000 | 2.6000 | 360 个压缩 token；120 个并行组与 M-GRPO update |
+| MUA-RL · ScaleMCP mini | 1.0000 | 2.2500 | 360 个用户 turn；240 次意图修正；120 个最终任务奖励 |
 | HiSkill · PlanBench mini | 1.0000 | 0.6900 | 48 nodes；60 edges；324 AtomicOp reuses |
 | UniMem · EvoMem mini | 1.0000 | **0.5200** | 24 episodic；96 parametric；12 consolidations |
 
@@ -162,6 +174,8 @@ P1 候选指标见
 [`agent-20260729-seed42.json`](../experiments/agent-20260729-seed42.json)。
 经典 Agentic RL / OPD 补充指标见
 [`classic-agentic-rl-opd-seed42.json`](../experiments/classic-agentic-rl-opd-seed42.json)。
+本批遗漏方法的固定 seed 指标见
+[`omitted-agentic-rl-opd-seed42.json`](../experiments/omitted-agentic-rl-opd-seed42.json)。
 
 ## 一键运行
 
