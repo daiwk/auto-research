@@ -120,6 +120,17 @@ def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
 
     assert "论文检索约束的组合式 genome" in evolution
     assert evolution.count("**可运行**") >= 4
+    protocol = (ROOT / "docs" / "model-evolution.md").read_text(encoding="utf-8")
+    overview = (ROOT / "docs" / "auto-research.md").read_text(encoding="utf-8")
+    for required in (
+        "## 候选到底从哪里来 {#candidate-sources}",
+        "evidence-only",
+        "不会把论文 PDF 翻译成 Python",
+        "## 最短操作路径",
+    ):
+        assert required in protocol
+    assert "## 先理解候选来源" in overview
+    assert "新的工程假设" in overview
     assert "  - 自动研究与进化:" in navigation
     assert "  - 论文实现与评测:" in navigation
     assert "      - 纯 LLM 后训练:" in navigation

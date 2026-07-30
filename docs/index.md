@@ -35,7 +35,8 @@ adapter 接入，不限定为推荐模型。
 - topic → 论文 → 假设 → 实验 → 下一轮
 - 已支持 RankMixer、HyFormer 与本地 micro‑LLM
 - 可搜索结构、数据配方、后训练方法和超参数
-- Agent 已有评测底座，专用进化 adapter 待接入
+- Agent 已支持 memory、planner、tool、critic 的组合进化
+- 新搜到但尚未实现的论文只留作 evidence-only，不会现场生成并执行代码
 
 [了解自动研究流程 →](auto-research.md)
 

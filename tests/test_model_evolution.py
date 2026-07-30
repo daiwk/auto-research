@@ -329,6 +329,12 @@ def test_direction_drives_parallel_round_hypotheses_and_dashboard(tmp_path):
     assert "研究过程" in dashboard
     assert "已完成进化轮数" in dashboard
     assert "实验数（含基线）" in dashboard
+    assert "候选从哪里来" in dashboard
+    assert "白名单组合 / 调参" in dashboard
+    assert "evidence-only" in dashboard
+    report = (run_dir / "report.md").read_text(encoding="utf-8")
+    assert "## 候选来源说明" in report
+    assert "论文算子" in report
 
 
 def test_micro_llm_plan_separates_structure_data_and_post_training():
