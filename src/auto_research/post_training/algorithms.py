@@ -5,6 +5,11 @@ from dataclasses import dataclass
 import numpy as np
 
 from .data import CandidateGroup
+from .rollout_correction import (
+    icepop_weights,
+    rollout_engine_probabilities,
+    truncated_importance_weights,
+)
 
 
 @dataclass
@@ -30,6 +35,7 @@ class PolicyState:
     spin_updates: int = 0
     online_teacher_calls: int = 0
     variant_updates: int = 0
+    online_rollout_refreshes: int = 0
     global_advantage_second_moment: float = 1.0
 
 
@@ -60,14 +66,22 @@ def update(
 ) -> tuple[float, dict[str, float]]:
     probabilities = _softmax(group.features @ state.weights)
     reference = _softmax(group.features @ state.reference)
+    rollout_training_probabilities = _softmax(
+        group.features @ state.rollout_weights
+    )
     sampling_probabilities = (
-        _softmax(group.features @ state.rollout_weights)
+        rollout_training_probabilities
         if algorithm in {
             "ppo-rlhf", "grpo", "reco-grpo", "dapo", "gspo", "spin",
-            "seed", "cast", "cort", "ripo", "kpop", "gppo", "dr-grpo",
-            "armor", "reinforce-plus", "taco", "chord", "vapo",
+            "seed", "cast", "cort", "ripo", "tis", "icepop", "kpop",
+            "gppo", "dr-grpo", "armor", "reinforce-plus", "taco",
+            "chord", "vapo",
         } else probabilities
     )
+    if algorithm in {"tis", "icepop", "online-icepop"}:
+        sampling_probabilities = rollout_engine_probabilities(
+            group.features, state.rollout_weights
+        )
     sampled = rng.choice(
         len(probabilities), size=min(group_size, len(probabilities)),
         replace=False, p=sampling_probabilities,
@@ -637,6 +651,85 @@ def update(
             "clip_fraction": float(np.mean(~active)),
             "value_model_parameters": 0.0,
         })
+    elif algorithm in {"tis", "icepop", "online-icepop"}:
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        rollout_training = rollout_training_probabilities
+        rollout_engine = sampling_probabilities
+        if algorithm == "tis":
+            correction = truncated_importance_weights(
+                rollout_training, rollout_engine
+            )
+        else:
+            correction = icepop_weights(rollout_training, rollout_engine)
+        correction_weights = correction.weights[sampled]
+        if algorithm == "online-icepop":
+            policy_ratios = np.ones_like(advantages)
+            active = np.ones_like(advantages, dtype=bool)
+        else:
+            policy_ratios = probabilities[sampled] / (
+                rollout_training[sampled] + 1e-12
+            )
+            clipped = np.clip(policy_ratios, 0.8, 1.2)
+            surrogate = np.minimum(
+                policy_ratios * advantages, clipped * advantages
+            )
+            active = np.isclose(
+                surrogate, policy_ratios * advantages
+            )
+        weights = (
+            advantages * policy_ratios * active * correction_weights
+        )
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, weights
+        )
+        loss = float(
+            -np.mean(
+                advantages
+                * policy_ratios
+                * active
+                * correction_weights
+                * np.log(probabilities[sampled] + 1e-12)
+            )
+        )
+        diagnostics.update({
+            "training_inference_ratio_mean": float(
+                correction.ratios[sampled].mean()
+            ),
+            "training_inference_ratio_max": float(
+                correction.ratios[sampled].max()
+            ),
+            "correction_weight_mean": float(correction_weights.mean()),
+            "correction_adjusted_fraction": float(
+                correction.adjusted[sampled].mean()
+            ),
+            "policy_staleness_ratio_mean": float(policy_ratios.mean()),
+            "ppo_clip_active": float(algorithm != "online-icepop"),
+        })
+        if algorithm == "tis":
+            diagnostics.update({
+                "tis_upper_bound": 2.0,
+                "tis_clipped_fraction": float(
+                    correction.adjusted[sampled].mean()
+                ),
+                "mismatch_tokens_dropped": 0.0,
+            })
+        else:
+            diagnostics.update({
+                "icepop_lower_bound": 0.5,
+                "icepop_upper_bound": 5.0,
+                "icepop_kept_fraction": float(
+                    correction.kept[sampled].mean()
+                ),
+                "mismatch_tokens_dropped": float(
+                    correction.adjusted[sampled].sum()
+                ),
+            })
+        if algorithm == "online-icepop":
+            diagnostics.update({
+                "updates_per_rollout_batch": 1.0,
+                "forced_on_policy_ratio": 1.0,
+            })
     elif algorithm == "kpop":
         # KPop filters train/inference mismatch using binary KL over the
         # sampled token versus the rest of the vocabulary, rather than a fixed
@@ -1083,12 +1176,15 @@ def update(
     if algorithm == "spin" and state.spin_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
     if algorithm in {
-        "ripo", "kpop", "gppo", "dr-grpo", "armor", "reinforce-plus",
-        "taco", "chord", "vapo",
+        "ripo", "tis", "icepop", "kpop", "gppo", "dr-grpo", "armor",
+        "reinforce-plus", "taco", "chord", "vapo",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:
             state.rollout_weights = state.weights.copy()
+    if algorithm == "online-icepop":
+        state.rollout_weights = state.weights.copy()
+        state.online_rollout_refreshes += 1
     diagnostics["loss"] = loss
     diagnostics["policy_entropy"] = float(-np.sum(probabilities * np.log(probabilities + 1e-12)))
     return loss, diagnostics

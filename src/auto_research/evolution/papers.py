@@ -67,6 +67,9 @@ POST_TRAINING_MUTATIONS = {
     "2607.25308": ("critic:cast", "用 game solver 相邻状态价值差形成 turn-level advantage，并与稀疏 outcome reward 联合"),
     "2607.05804": ("planner:turn-opd", "按 probe 统计分配 rollout 深度，并逐步转向 turn-normalized KL"),
     "2607.25659": ("cort", "比较 rubric 与 criteria-free 重放的 token likelihood，重分配 GRPO response advantage"),
+    "web-tis-2025": ("tis", "TIS 用训练侧与 rollout 引擎概率之比校正梯度，并对过大的失配权重做单侧上截断"),
+    "2510.18855": ("icepop", "IcePop 对训练侧与 rollout 引擎概率比做双侧 mask，区间外 token 不参与更新"),
+    "web-online-icepop-2025": ("online-icepop", "Online IcePop 每个 rollout batch 只更新一次，移除 stale-policy ratio 并保留训推失配 mask"),
     "2310.12036": ("ipo", "IPO 将偏好 log-ratio gap 回归到有限目标，抑制确定性偏好过拟合"),
     "2405.14734": ("simpo", "SimPO 使用 reference-free、长度归一化的 sequence preference margin"),
     "2602.05261": ("luspo", "LUSPO 校正 sequence policy objective 的响应长度偏差"),
@@ -188,6 +191,9 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("SLiC-HF: Sequence Likelihood Calibration with Human Feedback", "Calibrates preferred and rejected sequence likelihoods with a margin plus SFT regularization.", [], "2023-05-17", "https://arxiv.org/abs/2305.10425", "2305.10425"),
     Paper("SteerLM: Attribute Conditioned SFT as an (User-Steerable) Alternative to RLHF", "Annotates responses along multiple quality axes and conditions SFT and inference on requested attributes.", [], "2023-10-09", "https://arxiv.org/abs/2310.05344", "2310.05344"),
     Paper("Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models", "Uses previous-policy generations as self-play negatives against human demonstrations.", [], "2024-01-02", "https://arxiv.org/abs/2401.01335", "2401.01335"),
+    Paper("Your Efficient RL Framework Secretly Brings You Off-Policy RL Training", "Truncated importance sampling corrects training-inference mismatch with a one-sided capped ratio.", [], "2025-08-05", "https://fengyao.notion.site/off-policy-rl", "web-tis-2025"),
+    Paper("Every Step Evolves: Scaling Reinforcement Learning for Trillion-Scale Thinking Model", "IcePop masks both tails of the token-level training-inference ratio for stable MoE RL.", [], "2025-10-21", "https://arxiv.org/abs/2510.18855", "2510.18855"),
+    Paper("Stabilizing MoE RL Without Router Replay: The Online IcePop Solution", "Pure-online IcePop removes policy staleness by applying one update per rollout batch.", [], "2025-12-16", "https://zhuanlan.zhihu.com/p/1984379979035850499", "web-online-icepop-2025"),
 )
 
 AGENT_FALLBACK_PAPERS = (

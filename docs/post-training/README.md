@@ -22,6 +22,10 @@
 - [KTO](2402.01306-kto/README.md)：只需单条 desirable/undesirable 标签的前景理论目标。
 - [ORPO](2403.07691-orpo/README.md)：SFT 与 odds-ratio 偏好合一，无 reference model。
 - [DeepSeekMath / GRPO](2402.03300-grpo/README.md)：组相对、critic-free 的 reasoning RL。
+- [TIS](web-2025-tis/README.md)：单侧截断训练/rollout 引擎概率比，校正训推失配。
+- [IcePop](2510.18855-icepop/README.md)：以固定双侧 ratio mask 丢弃严重失配 token。
+- [Online IcePop](web-2025-online-icepop/README.md)：每批 rollout 只更新一次，移除
+  stale-policy ratio 与 PPO clip。
 - [RIPO](2607.10169-ripo/README.md)：按旧策略概率自适应的 Fisher–Rao 几何 clip。
 - [KPop](2606.15079-kpop/README.md)：以双向 binary-KL 掩码处理异步训推失配。
 - [GPPO](2508.07629-gppo/README.md)：PPO 前向保持 clip、反向保留越界样本梯度。
@@ -81,6 +85,9 @@ flowchart LR
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | prospect utility、desirable/undesirable、KL 参照点 | GSM8K candidate | 机制复现 |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | SFT NLL + odds-ratio penalty，无 reference | GSM8K candidate | 机制复现 |
 | 在线推理 RL | [GRPO](2402.03300-grpo/README.md) | group advantage、old-policy clip、KL，无 critic | GSM8K candidate | 机制复现 |
+| 训推失配校正 | [TIS](web-2025-tis/README.md) | training/rollout ratio、单侧上截断、保留低 ratio | GSM8K candidate | 机制复现 |
+| MoE 训推失配 | [IcePop](2510.18855-icepop/README.md) | fixed two-sided ratio mask、区间内原始 IS 权重 | GSM8K candidate | 机制复现 |
+| 纯在线训推校正 | [Online IcePop](web-2025-online-icepop/README.md) | 单次 rollout update、policy ratio=1、IcePop mask | GSM8K candidate | 机制复现 |
 | 几何信任域 | [RIPO](2607.10169-ripo/README.md) | probability-dependent Fisher–Rao clip | GSM8K candidate | 机制复现 |
 | 异步训推失配 | [KPop](2606.15079-kpop/README.md) | 双向 binary-KL keep/mask | GSM8K candidate | 机制复现 |
 | 梯度保留 clip | [GPPO](2508.07629-gppo/README.md) | clipped forward、boundary-weighted backward | GSM8K candidate | 机制复现 |
@@ -153,6 +160,9 @@ flowchart LR
 | 方法 | 训练前 accuracy | 训练后 accuracy | KL(reference) |
 |---|---:|---:|---:|
 | RIPO | 0.1719 | 0.8125 | 0.3228 |
+| TIS | 0.1719 | **0.8906** | 0.5348 |
+| IcePop | 0.1719 | **0.8906** | 0.5833 |
+| Online IcePop | 0.1719 | 0.7969 | 0.7429 |
 | KPop | 0.1719 | **0.8906** | 0.3490 |
 | GPPO | 0.1719 | 0.8594 | 0.3507 |
 | Dr. GRPO | 0.1719 | **0.8906** | **0.0325** |

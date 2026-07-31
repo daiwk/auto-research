@@ -98,6 +98,12 @@ reverse KL、teacher-mixed sampling、方差缩减 baseline 和长度归一化�
 ReCo 必须同时报告 response expected-count weight、token variance ratio、非饱和位置
 比例和 rollout-policy refresh；只复用 GRPO 更新或只增加 entropy 正则不算 ReCo。
 
+TIS、IcePop 与 Online IcePop 必须把 policy staleness ratio 和 training/inference engine
+ratio 分开报告。TIS 只允许对后者做单侧上截断，不得丢弃低 ratio 样本；IcePop 必须
+在固定双侧区间外将梯度归零，并保留区间内原始校正权重；Online IcePop 必须做到每个
+rollout batch 只更新一次、policy ratio 恒为 1 且关闭 PPO clip。三者的固定 seed 快照
+见 [`rl-papers-summary-seed42.json`](../experiments/rl-papers-summary-seed42.json)。
+
 OPSD 必须另外报告特权上下文教师调用、on-policy 学生 rollout、逐 token divergence
 和 pointwise clip；OPCD 必须区分“带经验上下文的教师”和“无上下文学生”，报告
 experience cache、reverse-KL update 以及训练后不再携带上下文的推理路径。两者在
