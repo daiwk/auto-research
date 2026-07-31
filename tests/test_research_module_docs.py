@@ -202,6 +202,18 @@ def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
                 assert f"(../{slug}/README.md)" in catalog, (
                     f"{module}/{method} missing from by-{dimension}"
                 )
+            assert "详情页包含核心机制、公式、原文结果和本地复现边界" not in catalog
+            entries = [
+                line
+                for line in catalog.splitlines()
+                if line.startswith("- ") and "](../" in line
+            ]
+            assert len(entries) == len(methods)
+            for entry in entries:
+                summary = entry.split("）：", 1)[-1]
+                assert len(summary) >= 35, (
+                    f"{module}/{dimension} has a thin method summary: {entry}"
+                )
 
 
 def test_every_paper_page_has_a_valid_original_paper_figure():
