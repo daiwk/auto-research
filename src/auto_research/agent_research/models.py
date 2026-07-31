@@ -45,6 +45,8 @@ METHODS = (
     "unimem",
     "cam-df",
     "skillrise",
+    "gigpo",
+    "steppo",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

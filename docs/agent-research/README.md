@@ -33,6 +33,8 @@
 - [MetaGPT](2308.00352-metagpt/README.md)：产品、架构、工程、测试的 SOP。
 - [CRITIC](2305.11738-critic/README.md)：用真实工具反馈迭代修订。
 - [Agent Lightning](2508.03680-agent-lightning/README.md)：执行/训练解耦与 credit assignment。
+- [GiGPO](2505.10978-gigpo/README.md)：在 trajectory group 与共享 step group 中分别归因。
+- [StepPO](2604.18401-steppo/README.md)：以环境 step 为 MDP 单位做 GAE 与 ratio clip。
 - [SWE-agent](2405.15793-swe-agent/README.md)：软件工程 Agent-Computer Interface。
 - [OpenHands](2407.16741-openhands/README.md)：编辑器、终端与 sandbox event stream。
 - [MRKL](2205.00445-mrkl/README.md)：router 分发神经与离散符号专家。
@@ -96,6 +98,8 @@ flowchart LR
 | 多 Agent 软件工程 | [MetaGPT](2308.00352-metagpt/README.md) | 四角色 SOP 与结构化交付物 | SWE-style local code | 真实执行 |
 | 工具反馈 | [CRITIC](2305.11738-critic/README.md) | 失败 patch、测试反馈、修订 | SWE-style local code | 真实执行 |
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | transition、credit update、策略复用 | SWE-style local code | 真实执行 |
+| Agent group credit | [GiGPO](2505.10978-gigpo/README.md) | macro trajectory advantage + micro step advantage | PlanBench mini | 机制复现 |
+| Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | step critic、GAE 与 within-step ratio aggregation | PlanBench mini | 机制复现 |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | 定位、编辑、回归测试 | SWE-style local code | 真实执行 |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | 编辑器/终端 event stream | SWE-style local code | 真实执行 |
 | 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | router、神经/符号专家、结果汇总 | ScaleMCP mini | 机制复现 |
@@ -165,6 +169,8 @@ flowchart LR
 | UniMem · EvoMem mini | 1.0000 | **0.5200** | 24 episodic；96 parametric；12 consolidations |
 | CAM-DF · ScaleMCP mini | 1.0000 | 4.7333 | 工具 exposure -51.02%；120 次提前停止 |
 | SkillRise · PlanBench mini | 1.0000 | **0.6550** | 119 次跨任务 skill 复用；360 次下游 credit |
+| GiGPO · PlanBench mini | 1.0000 | 1.6500 | 36 个组内与 36 个组间 advantage |
+| StepPO · PlanBench mini | 1.0000 | 0.9000 | 36 次 step GAE 与 sequence-ratio 聚合 |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -182,6 +188,8 @@ P1 候选指标见
 [`classic-agentic-rl-opd-seed42.json`](../experiments/classic-agentic-rl-opd-seed42.json)。
 本批遗漏方法的固定 seed 指标见
 [`omitted-agentic-rl-opd-seed42.json`](../experiments/omitted-agentic-rl-opd-seed42.json)。
+本页新增 step-credit 算法的固定 seed 指标见
+[`rl-papers-summary-seed42.json`](../experiments/rl-papers-summary-seed42.json)。
 
 ## 一键运行
 

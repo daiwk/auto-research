@@ -11,6 +11,15 @@
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | Contextual AI / Stanford，2024-02-02 | [已开源](https://github.com/ContextualAI/HALOs) | `kto` |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | KAIST，2024-03-12 | [已开源](https://github.com/xfactlab/orpo) | `orpo` |
 | 在线推理 RL | [DeepSeekMath / GRPO](2402.03300-grpo/README.md) | DeepSeek-AI，2024-02-05 | [已开源](https://github.com/deepseek-ai/DeepSeek-Math) | `grpo` |
+| 几何信任域 | [RIPO](2607.10169-ripo/README.md) | 论文作者团队，2026-07-11 | 未发现官方代码 | `ripo` |
+| 异步训推失配 | [KPop](2606.15079-kpop/README.md) | Ling / Ring 技术报告作者团队，2026-06-13 | 未发现独立算法开源仓库 | `kpop` |
+| 梯度保留 clip | [GPPO](2508.07629-gppo/README.md) | Klear-Reasoner 作者团队，2025-08-11 | 未发现独立算法开源仓库 | `gppo` |
+| GRPO 聚合偏置 | [Dr. GRPO](2503.20783-dr-grpo/README.md) | SAIL 研究团队，2025-03-26 | [已开源](https://github.com/sail-sg/understand-r1-zero) | `dr-grpo` |
+| Reference anchor | [ARMOR](2607.10481-armor/README.md) | 论文作者团队，2026-07-11 | 未发现官方代码 | `armor` |
+| 全局优势估计 | [REINFORCE++](2501.03262-reinforce-plus/README.md) | 论文作者团队，2025-01-04 | 未发现官方代码 | `reinforce-plus` |
+| Token 信用校准 | [TACO](2607.07976-taco/README.md) | 论文作者团队，2026-07-08 | [已开源](https://github.com/xiuyilou/TACO) | `taco` |
+| SFT-RL 动态混合 | [CHORD](2508.11408-chord/README.md) | Alibaba Group / ModelScope，2025-08-15 | [已开源](https://github.com/modelscope/Trinity-RFT/tree/main/examples/mix_chord) | `chord` |
+| Critic PPO | [VAPO](2504.05118-vapo/README.md) | 论文作者团队，2025-04-07 | 未发现官方代码 | `vapo` |
 | 分布保持 RL | [ReCo](2607.26862-reco/README.md) | Seoul National University，2026-07-29 | 未发布独立仓库 | `reco-grpo` |
 | 经典 RLHF | [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md) | OpenAI，2022-03-04 | [部分开源](https://github.com/openai/following-instructions-human-feedback) | `ppo-rlhf` |
 | 经典 RLHF | [RLOO](2402.14740-rloo/README.md) | Cohere For AI / Cohere，2024-02-22 | 未发布独立仓库 | `rloo` |

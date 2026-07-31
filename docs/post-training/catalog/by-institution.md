@@ -6,6 +6,10 @@
 
 - 2023-04 · [RRHF](../2304.05302-rrhf/README.md)（`rrhf`）：PPO-RLHF 需要 policy、old policy、reward 和 value 等多模型协同，训练和调参复杂。RRHF 从多个模型或人工答案中采样响应，以 reward 给出完整排序，让模型自身的平均 log-likelihood 顺序与 reward 顺序一致，并对最高质量响应继续做 SFT。
 
+## Alibaba Group / ModelScope
+
+- 2025-08 · [CHORD](../2508.11408-chord/README.md)（`chord`）：将 SFT 与 RL 串成两个独立阶段会造成 expert data 的过拟合或过早遗忘。CHORD 把专家 SFT 作为 on-policy RL 中动态退火的辅助目标，并以 token 级不确定性权重平滑从模仿过渡到探索。
+
 ## Alibaba Qwen Team
 
 - 2025-07 · [GSPO](../2507.18071-gspo/README.md)（`gspo`）：GRPO/PPO 常逐 token 裁剪 ratio，但 reward 在完整序列级给出；长序列中单个异常 token 会造成大量裁剪，MoE routing 变化还会放大不稳定。GSPO 对每条 response 取平均 log-ratio，再指数化为单一 sequence ratio，整条序列共享 clip 权重。
@@ -58,6 +62,14 @@
 
 - 2024-03 · [ORPO](../2403.07691-orpo/README.md)（`orpo`）：常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。
 
+## Klear-Reasoner 作者团队
+
+- 2025-08 · [GPPO](../2508.07629-gppo/README.md)（`gppo`）：普通 PPO 在正优势高 ratio、负优势低 ratio 的越界象限直接令梯度为零，可能同时压制探索和从负样本学习。GPPO 保持 PPO 的前向 clipped objective，但通过 stop-gradient 边界权重恢复这些越界位置的反向信号。
+
+## Ling / Ring 技术报告作者团队
+
+- 2026-06 · [KPop](../2606.15079-kpop/README.md)（`kpop`）：异步 rollout 中的 serving 概率与训练侧概率失配，固定 ratio mask 会误删正常探索或保留错误梯度。KPop 将当前 token 与“其余词表”压缩为二元分布，只有正反两个方向的 binary KL 都低于阈值时才保留该 token 的更新。
+
 ## MIT HAN Lab / Jet AI
 
 - 2026-04 · [Lightning OPD](../2604.13010-lightning-opd/README.md)（`lightning-opd`）：传统在线蒸馏在每一步训练都调用教师，吞吐和成本受教师推理限制。Lightning OPD 先让学生在 SFT 数据上产生 on-policy rollout，再由同一个教师一次性计算 token 分布并缓存。
@@ -77,6 +89,10 @@
 ## Princeton
 
 - 2024-05 · [SimPO](../2405.14734-simpo/README.md)（`simpo`）：DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。
+
+## SAIL 研究团队
+
+- 2025-03 · [Dr. GRPO](../2503.20783-dr-grpo/README.md)（`dr-grpo`）：原始 GRPO 的 response 内长度平均和组内标准差会引入长度与题目难度偏置。Dr. GRPO 移除这两个归一化项，保留中心化的组相对奖励，让每条轨迹以原始尺度参与更新。
 
 ## Seoul National University
 
@@ -114,3 +130,11 @@
 
 - 2026-07 · [TCR](../2607.19824-tcr/README.md)（`tcr`）：只奖励最终答案会遗漏推理质量，直接叠加过程奖励又可能重复计算 outcome。TCR 为每个样本构造 thinking checklist，并从过程得分中减去 outcome 的指数滑动基线，把更新集中到“结果奖励尚未解释的思考增益”。
 - 2026-02 · [LUSPO](../2602.05261-luspo/README.md)（`luspo`）：论文从目标函数分解解释不同 RLVR 算法为何产生不同的响应长度轨迹，并指出 GSPO 的 sequence ratio 仍含长度偏置。LUSPO 对 sequence log-probability 作长度无偏归一化，避免训练中的长度坍塌。
+
+## 论文作者团队
+
+- 2026-07 · [RIPO](../2607.10169-ripo/README.md)（`ripo`）：固定 PPO ratio 区间在低概率区域过于保守、在高概率区域又可能过大。RIPO 以 Fisher–Rao 几何定义策略距离，并按旧策略概率设置等距 clip 半径，使不同概率区域获得更均衡的局部 KL 预算。
+- 2026-07 · [ARMOR](../2607.10481-armor/README.md)（`armor`）：单纯 reverse-KL 只能被动惩罚偏离，无法保证 reference 中已有有效解法仍被覆盖。ARMOR 从冻结 reference 主动采样 anchor trajectories，与当前策略 rollout 混合优化，用数据而不是辅助 KL 项稳定长程 RL。
+- 2026-07 · [TACO](../2607.07976-taco/README.md)（`taco`）：整条回答正确时，统一的正 advantage 会把内部不合理的低概率 token 一起强化，形成 positive-credit contamination。TACO 依据局部上下文计算 tail risk，并仅平滑降低高 risk token 的正信用，负信用仍完整保留。
+- 2025-04 · [VAPO](../2504.05118-vapo/README.md)（`vapo`）：长 CoT 的 value-based PPO 易受 critic bias、异质 response 长度和稀疏奖励影响。VAPO 预训练 value model，并依 response 长度调节 actor 的 GAE/更新策略，以更稳定地进行 value-based 推理 RL。
+- 2025-01 · [REINFORCE++](../2501.03262-reinforce-plus/README.md)（`reinforce-plus`）：GRPO/RLOO 的 prompt-local 标准差会让不同难度组被随机方差重新加权。REINFORCE++ 保留组内中心化，但使用跨 batch 的全局优势尺度归一化，从而在不引入 critic 的前提下降低方差与局部偏置。

@@ -13,6 +13,8 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
         "gkd", "minillm", "opsd", "opcd",
         "constitutional-ai", "rrhf", "raft",
         "slic-hf", "steerlm", "spin",
+        "ripo", "kpop", "gppo", "dr-grpo", "armor", "reinforce-plus",
+        "taco", "chord", "vapo",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -175,6 +177,33 @@ def test_grpo_uses_old_policy_clipping_without_critic(tmp_path: Path):
     assert "clip_fraction" in diagnostics
     assert diagnostics["value_model_parameters"] == 0
     assert result.training["critic_updates"] == 0
+    assert result.training["rollout_policy_refreshes"] == 1
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        ("ripo", ("fisher_rao_radius_mean", "probability_dependent_clip")),
+        ("kpop", ("binary_kl_forward_mean", "adaptive_mask_kept_fraction")),
+        ("gppo", ("ppo_forward_surrogate", "preserved_boundary_gradients")),
+        ("dr-grpo", ("group_std_normalization", "response_length_normalization")),
+        ("armor", ("reference_anchor_trajectories", "anchor_loss_weight")),
+        ("reinforce-plus", ("global_advantage_std", "prompt_local_std")),
+        ("taco", ("mean_token_surprisal", "negative_credit_preserved")),
+        ("chord", ("expert_sft_weight", "dynamic_weighting")),
+        ("vapo", ("pretrained_value_model", "length_adaptive_gae_lambda")),
+    ],
+)
+def test_rl_summary_algorithm_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm, steps=20, maximum_examples=48, output_dir=tmp_path
+        )
+    ).run()
+    for name in diagnostics:
+        assert name in result.training["last_diagnostics"]
     assert result.training["rollout_policy_refreshes"] == 1
 
 

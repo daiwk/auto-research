@@ -132,6 +132,11 @@ class AgentResearchRunner:
             "skill_document_updates": agent.skill_document_updates,
             "cross_task_skill_reuses": agent.cross_task_skill_reuses,
             "downstream_credit_updates": agent.downstream_credit_updates,
+            "step_value_queries": agent.step_value_queries,
+            "step_gae_updates": agent.step_gae_updates,
+            "step_sequence_ratios": agent.step_sequence_ratios,
+            "intra_group_advantages": agent.intra_group_advantages,
+            "inter_group_advantages": agent.inter_group_advantages,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

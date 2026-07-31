@@ -11,6 +11,7 @@
 - 2026-07 · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
 - 2026-07 · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
 - 2026-07 · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
+- 2026-04 · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
 - 2026-02 · [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。
 - 2026-01 · [PEARL](../2601.20439-pearl/README.md)（`pearl`）：多跳工具调用同时受工具幻觉、参数错误和长程规划薄弱影响。PEARL 的离线阶段用 trial-and-error 建立工具用法与失败条件；在线阶段把 Planner 与 Executor 解耦，用计划正确性、工具链与最终结果组成的密集 reward 进行 GRPO，而不是只依赖稀疏成功信号。
 
@@ -21,6 +22,7 @@
 - 2025-08 · [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
 - 2025-07 · [MemTool](../2507.21428-memtool/README.md)（`memtool`）：大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。
 - 2025-05 · [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页交互会不断累积 HTML 和历史动作，单轮 GRPO 无法处理状态变化。WebAgent-R1 动态保留近期和任务相关上下文，并行采集完整多轮轨迹，再用 M-GRPO 根据最终成功奖励执行组内相对更新；论文同时强调行为克隆 warm-up 和长 CoT 初始化。
+- 2025-05 · [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
 - 2025-04 · [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：单轮数学 RL 的优化单位是一次回答，而 Agent 要在随机环境中跨多轮决策。RAGEN 提出 StarPO，把 state、thinking、action 和 reward 组织成完整轨迹。
 - 2025-03 · [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
 - 2025-02 · [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。

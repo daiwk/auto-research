@@ -380,3 +380,27 @@ def test_omitted_agentic_rl_mechanisms_are_observable(
     assert result.metrics["joint_success"] == 1
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "diagnostics"),
+    [
+        ("gigpo", ("intra_group_advantages", "inter_group_advantages")),
+        ("steppo", ("step_value_queries", "step_gae_updates", "step_sequence_ratios")),
+    ],
+)
+def test_step_and_group_agentic_rl_are_observable(
+    tmp_path: Path, method: str, diagnostics: tuple[str, ...]
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark="planbench-mini",
+            episodes=24,
+            memory_size=12,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0

@@ -43,6 +43,8 @@ PAPERS = {
     "unimem": ("UniMem", "https://arxiv.org/abs/2607.26017"),
     "cam-df": ("CAM-DF", "https://arxiv.org/abs/2607.27083"),
     "skillrise": ("SkillRise", "https://arxiv.org/abs/2607.26784"),
+    "gigpo": ("Group-in-Group Policy Optimization", "https://arxiv.org/abs/2505.10978"),
+    "steppo": ("StepPO", "https://arxiv.org/abs/2604.18401"),
 }
 
 

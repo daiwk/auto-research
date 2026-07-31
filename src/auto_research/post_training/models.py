@@ -38,6 +38,15 @@ ALGORITHMS = (
     "cast",
     "turn-opd",
     "cort",
+    "ripo",
+    "kpop",
+    "gppo",
+    "dr-grpo",
+    "armor",
+    "reinforce-plus",
+    "taco",
+    "chord",
+    "vapo",
 )
 
 
