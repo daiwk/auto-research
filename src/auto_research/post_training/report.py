@@ -36,6 +36,15 @@ PAPERS = {
     "cast": ("CAST", "https://arxiv.org/abs/2607.25308"),
     "turn-opd": ("TurnOPD", "https://arxiv.org/abs/2607.05804"),
     "cort": ("CoRT", "https://arxiv.org/abs/2607.25659"),
+    "ripo": ("Riemannian Isometric Policy Optimization", "https://arxiv.org/abs/2607.10169"),
+    "kpop": ("KPop", "https://arxiv.org/abs/2606.15079"),
+    "gppo": ("Gradient-Preserving PPO", "https://arxiv.org/abs/2508.07629"),
+    "dr-grpo": ("Dr. GRPO", "https://arxiv.org/abs/2503.20783"),
+    "armor": ("ARMOR", "https://arxiv.org/abs/2607.10481"),
+    "reinforce-plus": ("REINFORCE++", "https://arxiv.org/abs/2501.03262"),
+    "taco": ("TACO", "https://arxiv.org/abs/2607.07976"),
+    "chord": ("CHORD", "https://arxiv.org/abs/2508.11408"),
+    "vapo": ("VAPO", "https://arxiv.org/abs/2504.05118"),
 }
 
 

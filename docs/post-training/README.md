@@ -22,6 +22,15 @@
 - [KTO](2402.01306-kto/README.md)：只需单条 desirable/undesirable 标签的前景理论目标。
 - [ORPO](2403.07691-orpo/README.md)：SFT 与 odds-ratio 偏好合一，无 reference model。
 - [DeepSeekMath / GRPO](2402.03300-grpo/README.md)：组相对、critic-free 的 reasoning RL。
+- [RIPO](2607.10169-ripo/README.md)：按旧策略概率自适应的 Fisher–Rao 几何 clip。
+- [KPop](2606.15079-kpop/README.md)：以双向 binary-KL 掩码处理异步训推失配。
+- [GPPO](2508.07629-gppo/README.md)：PPO 前向保持 clip、反向保留越界样本梯度。
+- [Dr. GRPO](2503.20783-dr-grpo/README.md)：移除长度与组方差归一化的 group update。
+- [ARMOR](2607.10481-armor/README.md)：混入 reference anchor rollout 防止长程退化。
+- [REINFORCE++](2501.03262-reinforce-plus/README.md)：用全局优势尺度取代 prompt-local 方差。
+- [TACO](2607.07976-taco/README.md)：只衰减高尾部风险 token 的正向信用。
+- [CHORD](2508.11408-chord/README.md)：退火式协调 expert SFT 与 on-policy RL。
+- [VAPO](2504.05118-vapo/README.md)：length-adaptive GAE 的 critic PPO。
 - [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md)：旧策略、critic、clip 与 KL 的经典 RLHF。
 - [RLOO](2402.14740-rloo/README.md)：完整响应级 leave-one-out REINFORCE。
 - [ReMax](2310.10505-remax/README.md)：以 greedy rollout 作 baseline 的 value-free RLHF。
@@ -72,6 +81,15 @@ flowchart LR
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | prospect utility、desirable/undesirable、KL 参照点 | GSM8K candidate | 机制复现 |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | SFT NLL + odds-ratio penalty，无 reference | GSM8K candidate | 机制复现 |
 | 在线推理 RL | [GRPO](2402.03300-grpo/README.md) | group advantage、old-policy clip、KL，无 critic | GSM8K candidate | 机制复现 |
+| 几何信任域 | [RIPO](2607.10169-ripo/README.md) | probability-dependent Fisher–Rao clip | GSM8K candidate | 机制复现 |
+| 异步训推失配 | [KPop](2606.15079-kpop/README.md) | 双向 binary-KL keep/mask | GSM8K candidate | 机制复现 |
+| 梯度保留 clip | [GPPO](2508.07629-gppo/README.md) | clipped forward、boundary-weighted backward | GSM8K candidate | 机制复现 |
+| GRPO 聚合偏置 | [Dr. GRPO](2503.20783-dr-grpo/README.md) | group mean、无长度和组 std 归一化 | GSM8K candidate | 机制复现 |
+| Reference anchor | [ARMOR](2607.10481-armor/README.md) | frozen-reference 与 on-policy mixed rollout | GSM8K candidate | 机制复现 |
+| 全局优势估计 | [REINFORCE++](2501.03262-reinforce-plus/README.md) | EMA global advantage scale | GSM8K candidate | 机制复现 |
+| Token 信用 | [TACO](2607.07976-taco/README.md) | tail-risk 降低正 advantage | GSM8K candidate | 机制复现 |
+| SFT-RL 混合 | [CHORD](2508.11408-chord/README.md) | decayed expert SFT + group RL | GSM8K candidate | 机制复现 |
+| Critic PPO | [VAPO](2504.05118-vapo/README.md) | length-adaptive GAE 与 actor-critic | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [PPO-RLHF](2203.02155-ppo-rlhf/README.md) | old policy、clipped surrogate、critic、KL | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [RLOO](2402.14740-rloo/README.md) | response-level REINFORCE、leave-one-out baseline | GSM8K candidate | 机制复现 |
 | 经典在线 RL | [ReMax](2310.10505-remax/README.md) | sampled reward 减 greedy reward，无 critic | GSM8K candidate | 机制复现 |
@@ -129,6 +147,21 @@ flowchart LR
 | Relay-OPD | 0.1719 | **0.8906** | 0.5014 |
 | CoRT | 0.1719 | **0.8906** | 0.0201 |
 
+本轮新增算法使用同一候选策略，但为便于快速回归采用 256/64 train/validation examples、
+120 steps、seed 42；因此只与本轮彼此比较，不与上表的 300-step 数值横比。
+
+| 方法 | 训练前 accuracy | 训练后 accuracy | KL(reference) |
+|---|---:|---:|---:|
+| RIPO | 0.1719 | 0.8125 | 0.3228 |
+| KPop | 0.1719 | **0.8906** | 0.3490 |
+| GPPO | 0.1719 | 0.8594 | 0.3507 |
+| Dr. GRPO | 0.1719 | **0.8906** | **0.0325** |
+| ARMOR | 0.1719 | 0.8750 | 0.0192 |
+| REINFORCE++ | 0.1719 | 0.8594 | 0.2152 |
+| TACO | 0.1719 | **0.8906** | 0.3490 |
+| CHORD | 0.1719 | 0.7969 | 0.5713 |
+| VAPO | 0.1719 | 0.8594 | **0.0122** |
+
 完整定义、smoke 结果和差异解释见[统一评测协议](benchmark.md)，稳定指标见
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
 经典 RL 稳定指标见
@@ -145,6 +178,8 @@ P1 候选指标见
 [`classic-agentic-rl-opd-seed42.json`](../experiments/classic-agentic-rl-opd-seed42.json)。
 本批遗漏方法的固定 seed 指标见
 [`omitted-agentic-rl-opd-seed42.json`](../experiments/omitted-agentic-rl-opd-seed42.json)。
+本页新增 RL 算法的固定 seed 指标见
+[`rl-papers-summary-seed42.json`](../experiments/rl-papers-summary-seed42.json)。
 
 L2 小预算实验固定 arithmetic free generation、48 train examples、20-step SFT warmup、
 6 次后训练更新和 seeds 42/43/44。四种方法的 exact accuracy 均为 0；SimPO 的

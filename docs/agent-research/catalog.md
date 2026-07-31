@@ -25,6 +25,8 @@
 | 多 Agent 软件工程 | [MetaGPT](2308.00352-metagpt/README.md) | DeepWisdom / Xiamen / KAUST，2023-08-01 | [已开源](https://github.com/FoundationAgents/MetaGPT) | `metagpt` |
 | 工具反馈 | [CRITIC](2305.11738-critic/README.md) | Microsoft / Tsinghua，2023-05-19 | [已开源](https://github.com/microsoft/ProphetNet/tree/master/CRITIC) | `critic` |
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
+| Agent group credit | [GiGPO](2505.10978-gigpo/README.md) | 论文作者团队，2025-05-16 | 未发现官方代码 | `gigpo` |
+| Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | 中国科学技术大学作者团队，2026-04-20 | 未发现官方代码 | `steppo` |
 | 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | UIUC / UMass Amherst / Google Cloud AI Research，2025-03-12 | [已开源](https://github.com/PeterGriffinJin/Search-R1) | `search-r1` |
 | 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | Northwestern / Stanford / Microsoft / UW / NYU / UBC / SMU，2025-04-24 | [已开源](https://github.com/RAGEN-AI/RAGEN) | `ragen` |
 | 长时程 Agent RL | [LOOP](2502.01600-loop/README.md) | Apple，2025-02-03 | [已开源](https://github.com/apple/ml-loop) | `loop` |

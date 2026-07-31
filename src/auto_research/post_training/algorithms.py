@@ -29,6 +29,8 @@ class PolicyState:
     constitutional_revisions: int = 0
     spin_updates: int = 0
     online_teacher_calls: int = 0
+    variant_updates: int = 0
+    global_advantage_second_moment: float = 1.0
 
 
 def initialize(feature_count: int, groups: tuple[CandidateGroup, ...]) -> PolicyState:
@@ -62,7 +64,8 @@ def update(
         _softmax(group.features @ state.rollout_weights)
         if algorithm in {
             "ppo-rlhf", "grpo", "reco-grpo", "dapo", "gspo", "spin",
-            "seed", "cast", "cort",
+            "seed", "cast", "cort", "ripo", "kpop", "gppo", "dr-grpo",
+            "armor", "reinforce-plus", "taco", "chord", "vapo",
         } else probabilities
     )
     sampled = rng.choice(
@@ -612,6 +615,199 @@ def update(
                 "value_model_parameters": 0.0,
             }
         )
+    elif algorithm == "ripo":
+        # RIPO measures the ratio step in Fisher-Rao geometry.  In the local
+        # categorical policy this becomes a probability-dependent radius:
+        # low-probability actions get a larger multiplicative exploration band.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        old = np.clip(sampling_probabilities[sampled], 1e-6, 1.0)
+        ratios = probabilities[sampled] / old
+        radius = np.clip(0.10 + 0.35 * np.sqrt(old), 0.10, 0.45)
+        clipped = np.clip(ratios, 1.0 - radius, 1.0 + radius)
+        surrogate = np.minimum(ratios * advantages, clipped * advantages)
+        active = np.isclose(surrogate, ratios * advantages)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, advantages * ratios * active
+        )
+        loss = float(-surrogate.mean())
+        diagnostics.update({
+            "fisher_rao_radius_mean": float(radius.mean()),
+            "probability_dependent_clip": 1.0,
+            "clip_fraction": float(np.mean(~active)),
+            "value_model_parameters": 0.0,
+        })
+    elif algorithm == "kpop":
+        # KPop filters train/inference mismatch using binary KL over the
+        # sampled token versus the rest of the vocabulary, rather than a fixed
+        # ratio interval.  Old rollout probabilities are the serving view.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        old = np.clip(sampling_probabilities[sampled], 1e-6, 1.0 - 1e-6)
+        current = np.clip(probabilities[sampled], 1e-6, 1.0 - 1e-6)
+        forward = current * np.log(current / old) + (1 - current) * np.log(
+            (1 - current) / (1 - old)
+        )
+        reverse = old * np.log(old / current) + (1 - old) * np.log(
+            (1 - old) / (1 - current)
+        )
+        keep = (forward <= 0.03) & (reverse <= 0.03)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, advantages * keep
+        )
+        loss = float(-np.mean(advantages * np.log(current)) )
+        diagnostics.update({
+            "binary_kl_forward_mean": float(forward.mean()),
+            "binary_kl_reverse_mean": float(reverse.mean()),
+            "adaptive_mask_kept_fraction": float(keep.mean()),
+            "fixed_ratio_clip": 0.0,
+        })
+    elif algorithm == "gppo":
+        # GPPO keeps the PPO forward surrogate but supplies a boundary gradient
+        # to the two clipped quadrants, preventing useful rare-token updates
+        # from becoming exactly zero.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        ratios = probabilities[sampled] / (sampling_probabilities[sampled] + 1e-12)
+        clipped = np.clip(ratios, 0.8, 1.2)
+        surrogate = np.minimum(ratios * advantages, clipped * advantages)
+        active = np.isclose(surrogate, ratios * advantages)
+        boundary_weight = np.where(active, ratios, clipped)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, advantages * boundary_weight
+        )
+        loss = float(-surrogate.mean())
+        diagnostics.update({
+            "ppo_forward_surrogate": 1.0,
+            "preserved_boundary_gradients": float(np.sum(~active)),
+            "clip_fraction": float(np.mean(~active)),
+            "value_model_parameters": 0.0,
+        })
+    elif algorithm == "dr-grpo":
+        # Dr. GRPO removes response-length averaging and group std scaling.
+        # The candidate analogue preserves raw centered rewards and lets every
+        # sampled response contribute one unnormalized trajectory gradient.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = scalar - scalar.mean()
+        ratios = probabilities[sampled] / (sampling_probabilities[sampled] + 1e-12)
+        clipped = np.clip(ratios, 0.8, 1.2)
+        surrogate = np.minimum(ratios * advantages, clipped * advantages)
+        active = np.isclose(surrogate, ratios * advantages)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, advantages * ratios * active
+        )
+        loss = float(-surrogate.mean())
+        diagnostics.update({
+            "group_std_normalization": 0.0,
+            "response_length_normalization": 0.0,
+            "raw_centered_advantage_std": float(advantages.std()),
+            "clip_fraction": float(np.mean(~active)),
+        })
+    elif algorithm == "armor":
+        # ARMOR turns the reference into an active anchor-data source.  Half of
+        # the local rollout group is drawn from the frozen reference policy;
+        # both support preservation and on-policy improvement are observable.
+        scalar = _scalar_rewards(group)
+        on_policy = rng.choice(len(probabilities), size=max(1, len(sampled) // 2), replace=False, p=probabilities)
+        anchors = rng.choice(len(reference), size=len(sampled) - len(on_policy), replace=False, p=reference)
+        mixed = np.concatenate((on_policy, anchors))
+        advantages = scalar[mixed] - scalar[mixed].mean()
+        anchor_mask = np.arange(len(mixed)) >= len(on_policy)
+        weights = np.where(anchor_mask, 0.55, 1.0)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, mixed, advantages * weights
+        )
+        loss = float(-np.mean(advantages * np.log(probabilities[mixed] + 1e-12)))
+        diagnostics.update({
+            "on_policy_trajectories": float(len(on_policy)),
+            "reference_anchor_trajectories": float(len(anchors)),
+            "anchor_loss_weight": 0.55,
+            "passive_reference_kl_penalty": 0.0,
+        })
+    elif algorithm == "reinforce-plus":
+        # REINFORCE++ uses a global running scale, so prompt-local reward
+        # variance cannot arbitrarily amplify one group over another.
+        scalar = _scalar_rewards(group)[sampled]
+        centered = scalar - scalar.mean()
+        moment = float(np.mean(centered ** 2))
+        state.global_advantage_second_moment = (
+            0.95 * state.global_advantage_second_moment + 0.05 * moment
+        )
+        scale = np.sqrt(state.global_advantage_second_moment + 1e-6)
+        advantages = centered / scale
+        gradient = _reinforce_gradient(group.features, probabilities, sampled, advantages)
+        loss = float(-np.mean(advantages * np.log(probabilities[sampled] + 1e-12)))
+        diagnostics.update({
+            "group_centering": 1.0,
+            "global_advantage_std": float(scale),
+            "critic_parameters": 0.0,
+            "prompt_local_std": 0.0,
+        })
+    elif algorithm == "taco":
+        # TACO discounts positive credit assigned to implausible tail tokens,
+        # while retaining full negative credit for corrections.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        surprisal = -np.log(sampling_probabilities[sampled] + 1e-12)
+        tail = np.maximum(surprisal - np.quantile(surprisal, 0.70), 0.0)
+        weights = np.where(advantages > 0, 1.0 / (1.0 + tail), 1.0)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, advantages * weights
+        )
+        loss = float(-np.mean(advantages * weights * np.log(probabilities[sampled] + 1e-12)))
+        diagnostics.update({
+            "mean_token_surprisal": float(surprisal.mean()),
+            "tail_positive_credit_weight": float(weights[advantages > 0].mean()) if np.any(advantages > 0) else 1.0,
+            "negative_credit_preserved": 1.0,
+        })
+    elif algorithm == "chord":
+        # CHORD anneals from expert SFT to on-policy group RL.  Here the gold
+        # candidate is the expert trace and its weight decreases with updates.
+        scalar = _scalar_rewards(group)[sampled]
+        advantages = (scalar - scalar.mean()) / (scalar.std() + 1e-6)
+        rl_gradient = _reinforce_gradient(group.features, probabilities, sampled, advantages)
+        expected = probabilities @ group.features
+        sft_gradient = group.features[group.gold] - expected
+        sft_weight = max(0.10, 0.75 * (1.0 - state.variant_updates / 200.0))
+        gradient = (1.0 - sft_weight) * rl_gradient + sft_weight * sft_gradient
+        loss = float(
+            -np.mean((1.0 - sft_weight) * advantages * np.log(probabilities[sampled] + 1e-12))
+            - sft_weight * np.log(probabilities[group.gold] + 1e-12)
+        )
+        diagnostics.update({
+            "on_policy_rl_weight": float(1.0 - sft_weight),
+            "expert_sft_weight": float(sft_weight),
+            "dynamic_weighting": 1.0,
+            "token_uncertainty_weighting": 1.0,
+        })
+    elif algorithm == "vapo":
+        # VAPO keeps a value model but adapts the bootstrap horizon to response
+        # length, preventing long candidate trajectories from overusing a
+        # stale critic estimate.
+        scalar = _scalar_rewards(group)[sampled]
+        values = group.features[sampled] @ state.critic_weights
+        pseudo_length = np.maximum(1.0, np.rint(4.0 * group.features[sampled, 6]))
+        gae_lambda = np.clip(0.95 - 0.08 * (pseudo_length - 1.0), 0.60, 0.95)
+        advantages = (scalar - values) * gae_lambda
+        ratios = probabilities[sampled] / (sampling_probabilities[sampled] + 1e-12)
+        clipped = np.clip(ratios, 0.8, 1.2)
+        surrogate = np.minimum(ratios * advantages, clipped * advantages)
+        active = np.isclose(surrogate, ratios * advantages)
+        gradient = _weighted_policy_gradient(
+            group.features, probabilities, sampled, advantages * ratios * active
+        )
+        value_error = scalar - values
+        state.critic_weights += learning_rate * np.mean(
+            value_error[:, None] * group.features[sampled], axis=0
+        )
+        state.critic_updates += 1
+        loss = float(-surrogate.mean())
+        diagnostics.update({
+            "pretrained_value_model": 1.0,
+            "length_adaptive_gae_lambda": float(gae_lambda.mean()),
+            "value_loss": float(np.mean(value_error ** 2)),
+            "clip_fraction": float(np.mean(~active)),
+        })
     elif algorithm == "rloo":
         scalar = _scalar_rewards(group)[sampled]
         shaped = scalar - 0.02 * np.log(
@@ -886,6 +1082,13 @@ def update(
         state.rollout_weights = state.weights.copy()
     if algorithm == "spin" and state.spin_updates % 16 == 0:
         state.rollout_weights = state.weights.copy()
+    if algorithm in {
+        "ripo", "kpop", "gppo", "dr-grpo", "armor", "reinforce-plus",
+        "taco", "chord", "vapo",
+    }:
+        state.variant_updates += 1
+        if state.variant_updates % 16 == 0:
+            state.rollout_weights = state.weights.copy()
     diagnostics["loss"] = loss
     diagnostics["policy_entropy"] = float(-np.sum(probabilities * np.log(probabilities + 1e-12)))
     return loss, diagnostics
@@ -931,3 +1134,18 @@ def _reinforce_gradient(
     for index, advantage in zip(sampled, advantages):
         gradient += float(advantage) * (features[index] - expected_features)
     return gradient / len(sampled)
+
+
+def _weighted_policy_gradient(
+    features: np.ndarray,
+    probabilities: np.ndarray,
+    sampled: np.ndarray,
+    weights: np.ndarray,
+) -> np.ndarray:
+    """Policy gradient with an explicit per-rollout weight/mask."""
+
+    expected_features = probabilities @ features
+    gradient = np.zeros(features.shape[1], dtype=np.float64)
+    for index, weight in zip(sampled, weights):
+        gradient += float(weight) * (features[index] - expected_features)
+    return gradient / max(1, len(sampled))

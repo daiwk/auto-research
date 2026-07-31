@@ -1,0 +1,545 @@
+{
+  "post_training": {
+    "ripo": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.8125,
+        "mean_reward": 0.8273410217184081,
+        "entropy": 1.4689311874014865,
+        "kl_from_reference": 0.32282828182056883
+      },
+      "relative_accuracy": 3.727272727272727,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "fisher_rao_radius_mean": 0.2402016943085934,
+          "probability_dependent_clip": 1.0,
+          "clip_fraction": 0.0,
+          "value_model_parameters": 0.0,
+          "loss": -0.06179378266560556,
+          "policy_entropy": 1.114922510114255
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "kpop": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.890625,
+        "mean_reward": 0.8897876952544428,
+        "entropy": 1.442789826757302,
+        "kl_from_reference": 0.3489696424647531
+      },
+      "relative_accuracy": 4.181818181818182,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "binary_kl_forward_mean": 4.76635692678775e-05,
+          "binary_kl_reverse_mean": 4.781561307720591e-05,
+          "adaptive_mask_kept_fraction": 1.0,
+          "fixed_ratio_clip": 0.0,
+          "loss": -0.172130642430285,
+          "policy_entropy": 1.6564512950101726
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "gppo": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.859375,
+        "mean_reward": 0.8690080121014697,
+        "entropy": 1.4410853611539096,
+        "kl_from_reference": 0.3506741080681452
+      },
+      "relative_accuracy": 4.0,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "ppo_forward_surrogate": 1.0,
+          "preserved_boundary_gradients": 0.0,
+          "clip_fraction": 0.0,
+          "value_model_parameters": 0.0,
+          "loss": -0.06428352255891079,
+          "policy_entropy": 1.2276213930264221
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "dr-grpo": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.890625,
+        "mean_reward": 0.8910452345048534,
+        "entropy": 1.759219288463352,
+        "kl_from_reference": 0.0325401807587033
+      },
+      "relative_accuracy": 4.181818181818182,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "group_std_normalization": 0.0,
+          "response_length_normalization": 0.0,
+          "raw_centered_advantage_std": 0.3259526179627682,
+          "clip_fraction": 0.0,
+          "loss": 0.002471538758025492,
+          "policy_entropy": 1.779848846195439
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "armor": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.875,
+        "mean_reward": 0.8749909574915394,
+        "entropy": 1.7725245467094266,
+        "kl_from_reference": 0.019234922512628733
+      },
+      "relative_accuracy": 4.090909090909091,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "on_policy_trajectories": 2.0,
+          "reference_anchor_trajectories": 2.0,
+          "anchor_loss_weight": 0.55,
+          "passive_reference_kl_penalty": 0.0,
+          "loss": -0.03730133016720005,
+          "policy_entropy": 1.780472408455966
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "reinforce-plus": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.859375,
+        "mean_reward": 0.8690080121014697,
+        "entropy": 1.576576090995713,
+        "kl_from_reference": 0.21518337822634204
+      },
+      "relative_accuracy": 4.0,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "group_centering": 1.0,
+          "global_advantage_std": 0.3367339344265098,
+          "critic_parameters": 0.0,
+          "prompt_local_std": 0.0,
+          "loss": -0.9721305877641948,
+          "policy_entropy": 1.3911723410719867
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "taco": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.890625,
+        "mean_reward": 0.8897876952544428,
+        "entropy": 1.4427845927252365,
+        "kl_from_reference": 0.3489748764968183
+      },
+      "relative_accuracy": 4.181818181818182,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "mean_token_surprisal": 1.9042988567196957,
+          "tail_positive_credit_weight": 1.0,
+          "negative_credit_preserved": 1.0,
+          "loss": -0.17230254665692407,
+          "policy_entropy": 1.6563567635081347
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "chord": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.796875,
+        "mean_reward": 0.8153364653766422,
+        "entropy": 1.2205003253483646,
+        "kl_from_reference": 0.5712591438736908
+      },
+      "relative_accuracy": 3.6363636363636362,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "on_policy_rl_weight": 0.69625,
+          "expert_sft_weight": 0.30375,
+          "dynamic_weighting": 1.0,
+          "token_uncertainty_weighting": 1.0,
+          "loss": -1.0206377279390835,
+          "policy_entropy": 0.7355311173042451
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "vapo": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.859375,
+        "mean_reward": 0.8690080121014697,
+        "entropy": 1.7795960888563767,
+        "kl_from_reference": 0.012163380365678019
+      },
+      "relative_accuracy": 4.0,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 120,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "pretrained_value_model": 1.0,
+          "length_adaptive_gae_lambda": 0.87,
+          "value_loss": 0.07923570415241085,
+          "clip_fraction": 0.0,
+          "loss": 0.016701941230593667,
+          "policy_entropy": 1.7878486896252859
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    }
+  },
+  "agent_research": {
+    "gigpo": {
+      "benchmark": "planbench-mini",
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.650000000000002
+      },
+      "axis_metrics": {
+        "cross_episode_execution": 1.0
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "tool_evictions": 0,
+        "reused_plans": 0,
+        "reasoning_steps": 0,
+        "actions": 360,
+        "reflections": 0,
+        "skills_created": 0,
+        "skills_reused": 0,
+        "verification_retries": 0,
+        "tree_nodes_expanded": 0,
+        "search_rollouts": 0,
+        "backtracks": 0,
+        "tool_call_candidates": 0,
+        "tool_calls_accepted": 0,
+        "refinements": 0,
+        "plans_created": 0,
+        "worker_calls": 0,
+        "agent_messages": 0,
+        "critic_rounds": 0,
+        "plan_explorations": 0,
+        "policy_updates": 120,
+        "router_calls": 0,
+        "symbolic_expert_calls": 0,
+        "model_matches": 0,
+        "dependency_edges": 0,
+        "memories_retrieved": 0,
+        "reflection_syntheses": 0,
+        "archival_writes": 0,
+        "page_ins": 0,
+        "interrupts": 0,
+        "browser_queries": 0,
+        "references_collected": 0,
+        "rejection_candidates": 0,
+        "affordance_checks": 0,
+        "infeasible_skills_filtered": 0,
+        "programs_generated": 0,
+        "interpreter_calls": 0,
+        "task_examples_retrieved": 0,
+        "generation_pauses": 0,
+        "task_library_updates": 0,
+        "hindsight_skills": 0,
+        "dense_credit_updates": 0,
+        "solver_value_queries": 0,
+        "turn_credit_updates": 360,
+        "rollout_turns_saved": 0,
+        "skill_graph_nodes": 0,
+        "skill_graph_edges": 0,
+        "atomic_ops_reused": 0,
+        "episodic_routes": 0,
+        "parametric_routes": 0,
+        "memory_consolidations": 0,
+        "search_queries": 0,
+        "retrieved_tokens_masked": 0,
+        "outcome_rewards": 0,
+        "trajectory_rollouts": 360,
+        "trajectory_filters": 0,
+        "critic_baseline_updates": 0,
+        "gradient_clips": 0,
+        "echo_trap_events": 0,
+        "reasoning_rewards": 0,
+        "off_policy_reuses": 0,
+        "leave_one_out_updates": 0,
+        "per_token_clips": 0,
+        "context_compressions": 0,
+        "parallel_trajectory_groups": 0,
+        "multi_turn_group_updates": 0,
+        "simulated_user_turns": 0,
+        "intent_refinements": 0,
+        "real_tool_responses": 0,
+        "task_completion_rewards": 0,
+        "tools_exposed": 0,
+        "tools_available": 0,
+        "tool_exposure_reduction": 0.0,
+        "cost_aware_stops": 0,
+        "regret_weighted_labels": 0,
+        "skill_document_updates": 0,
+        "cross_task_skill_reuses": 0,
+        "downstream_credit_updates": 0,
+        "step_value_queries": 0,
+        "step_gae_updates": 0,
+        "step_sequence_ratios": 0,
+        "intra_group_advantages": 360,
+        "inter_group_advantages": 360,
+        "fidelity": "mechanism reproduction on deterministic benchmark mini-suites"
+      }
+    },
+    "steppo": {
+      "benchmark": "planbench-mini",
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.9000000000000006
+      },
+      "axis_metrics": {
+        "cross_episode_execution": 1.0
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "tool_evictions": 0,
+        "reused_plans": 0,
+        "reasoning_steps": 0,
+        "actions": 360,
+        "reflections": 0,
+        "skills_created": 0,
+        "skills_reused": 0,
+        "verification_retries": 0,
+        "tree_nodes_expanded": 0,
+        "search_rollouts": 0,
+        "backtracks": 0,
+        "tool_call_candidates": 0,
+        "tool_calls_accepted": 0,
+        "refinements": 0,
+        "plans_created": 0,
+        "worker_calls": 0,
+        "agent_messages": 0,
+        "critic_rounds": 0,
+        "plan_explorations": 0,
+        "policy_updates": 120,
+        "router_calls": 0,
+        "symbolic_expert_calls": 0,
+        "model_matches": 0,
+        "dependency_edges": 0,
+        "memories_retrieved": 0,
+        "reflection_syntheses": 0,
+        "archival_writes": 0,
+        "page_ins": 0,
+        "interrupts": 0,
+        "browser_queries": 0,
+        "references_collected": 0,
+        "rejection_candidates": 0,
+        "affordance_checks": 0,
+        "infeasible_skills_filtered": 0,
+        "programs_generated": 0,
+        "interpreter_calls": 0,
+        "task_examples_retrieved": 0,
+        "generation_pauses": 0,
+        "task_library_updates": 0,
+        "hindsight_skills": 0,
+        "dense_credit_updates": 0,
+        "solver_value_queries": 0,
+        "turn_credit_updates": 0,
+        "rollout_turns_saved": 0,
+        "skill_graph_nodes": 0,
+        "skill_graph_edges": 0,
+        "atomic_ops_reused": 0,
+        "episodic_routes": 0,
+        "parametric_routes": 0,
+        "memory_consolidations": 0,
+        "search_queries": 0,
+        "retrieved_tokens_masked": 0,
+        "outcome_rewards": 0,
+        "trajectory_rollouts": 0,
+        "trajectory_filters": 0,
+        "critic_baseline_updates": 0,
+        "gradient_clips": 0,
+        "echo_trap_events": 0,
+        "reasoning_rewards": 0,
+        "off_policy_reuses": 0,
+        "leave_one_out_updates": 0,
+        "per_token_clips": 0,
+        "context_compressions": 0,
+        "parallel_trajectory_groups": 0,
+        "multi_turn_group_updates": 0,
+        "simulated_user_turns": 0,
+        "intent_refinements": 0,
+        "real_tool_responses": 0,
+        "task_completion_rewards": 0,
+        "tools_exposed": 0,
+        "tools_available": 0,
+        "tool_exposure_reduction": 0.0,
+        "cost_aware_stops": 0,
+        "regret_weighted_labels": 0,
+        "skill_document_updates": 0,
+        "cross_task_skill_reuses": 0,
+        "downstream_credit_updates": 0,
+        "step_value_queries": 360,
+        "step_gae_updates": 360,
+        "step_sequence_ratios": 360,
+        "intra_group_advantages": 0,
+        "inter_group_advantages": 0,
+        "fidelity": "mechanism reproduction on deterministic benchmark mini-suites"
+      }
+    }
+  }
+}

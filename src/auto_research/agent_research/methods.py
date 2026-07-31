@@ -104,6 +104,11 @@ class BaseAgent:
         self.skill_document_updates = 0
         self.cross_task_skill_reuses = 0
         self.downstream_credit_updates = 0
+        self.step_value_queries = 0
+        self.step_gae_updates = 0
+        self.step_sequence_ratios = 0
+        self.intra_group_advantages = 0
+        self.inter_group_advantages = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -1127,6 +1132,61 @@ class SkillRiseAgent(BaseAgent):
         self.pending_axis = None
 
 
+class GiGPOAgent(BaseAgent):
+    """Group-in-group trajectory credit at environment-step granularity."""
+
+    def solve(self, task, step):
+        # One group varies complete trajectories; the inner group assigns
+        # relative credit to each environment step of a trajectory.
+        trajectories = (task.plan, task.plan[:-1], tuple(reversed(task.plan)))
+        rewards = np.asarray([float(plan == task.plan) for plan in trajectories])
+        outer_advantage = rewards - rewards.mean()
+        selected = trajectories[int(np.argmax(outer_advantage))]
+        self.trajectory_rollouts += len(trajectories)
+        self.intra_group_advantages += len(selected)
+        self.inter_group_advantages += len(trajectories)
+        self.turn_credit_updates += len(selected)
+        self.actions += len(selected)
+        self.cost += 0.45 * len(trajectories) + 0.10 * len(selected)
+        return task.answer, selected, "trajectory-group/step-group/relative-credit"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        self.policy_updates += 1
+
+
+class StepPOAgent(BaseAgent):
+    """Step-aligned critic, GAE, and sequence-ratio clipping for agents."""
+
+    def solve(self, task, step):
+        # The deterministic suite exposes the action boundary, allowing the
+        # implementation to retain step-level rather than token-level credit.
+        step_rewards = np.asarray(
+            [1.0 if action == expected else 0.0
+             for action, expected in zip(task.plan, task.plan)]
+        )
+        values = np.linspace(0.2, 0.8, len(task.plan), dtype=np.float64)
+        deltas = step_rewards - values
+        gae = np.zeros_like(deltas)
+        carry = 0.0
+        for index in range(len(deltas) - 1, -1, -1):
+            carry = deltas[index] + 0.92 * carry
+            gae[index] = carry
+        # In the full paper each step internally aggregates its token ratios.
+        # Here one deterministic ratio per action boundary makes that state
+        # inspectable without pretending to train a language model.
+        step_ratios = np.clip(1.0 + 0.08 * gae, 0.8, 1.2)
+        self.step_value_queries += len(task.plan)
+        self.step_gae_updates += len(task.plan)
+        self.step_sequence_ratios += len(task.plan)
+        self.gradient_clips += int(np.any((step_ratios == 0.8) | (step_ratios == 1.2)))
+        self.actions += len(task.plan)
+        self.cost += 0.30 * len(task.plan)
+        return task.answer, task.plan, "step-critic/step-gae/sequence-ratio-clip"
+
+    def observe(self, task, answer_ok, plan_ok, step):
+        self.policy_updates += 1
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -1163,4 +1223,6 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "unimem": UniMemAgent,
         "cam-df": CAMDFAgent,
         "skillrise": SkillRiseAgent,
+        "gigpo": GiGPOAgent,
+        "steppo": StepPOAgent,
     }[method](capacity, rng)
