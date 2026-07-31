@@ -8,9 +8,64 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
+FIGURE_START = "<!-- paper-figure:start -->"
+FIGURE_END = "<!-- paper-figure:end -->"
 
 
 PAPERS = (
+    {
+        "module": "post-training", "slug": "web-2025-tis",
+        "title": "TIS：截断重要性采样训推校正", "key": "tis",
+        "url": "https://fengyao.notion.site/off-policy-rl",
+        "publication_label": "Your Efficient RL Framework Secretly Brings You Off-Policy RL Training",
+        "information_heading": "资料信息",
+        "summary_heading": "原始资料总结",
+        "result_heading": "资料离线与线上效果",
+        "scope_note": "本页在公开候选策略上复现网页资料中的可隔离 RL 更新机制；不把轻量实验写成来源材料中的大模型效果。",
+        "institution": "UC San Diego / Microsoft Research", "date": "2025-08-05",
+        "code": "未发布独立算法仓库；资料页列出 OAT、SkyRL、OpenRLHF 后续实现",
+        "topic": "训推失配 / 截断重要性采样",
+        "summary": "混合训练框架由 rollout 引擎采样、训练引擎重算 log-prob；即使权重相同，数值精度和 kernel 差异也会让行为分布与训练分布偏离。TIS 将训练侧与 rollout 引擎概率比乘入策略梯度，并只对过大的校正权重做单侧上截断，保留小权重样本而控制重尾方差。",
+        "mermaid": 'R["rollout-engine probability"] --> W["training / rollout ratio"]\n    T["training-engine probability"] --> W\n    W --> C["one-sided upper truncation"]\n    A["group advantage"] --> U["weighted policy update"]\n    C --> U',
+        "formula": r"\rho_t^{\rm TI}=\frac{\pi_{\rm train}(a_t\mid s_t)}{\pi_{\rm rollout}(a_t\mid s_t)},\qquad w_t=\min(\rho_t^{\rm TI},c),\qquad \mathcal L=-\mathbb E[w_t r_t^{\rm policy}A_t].",
+        "result": "原始网页在多个 LLM RL 设置中比较 Vanilla IS、PPO-IS 与 TIS，报告截断校正能避免训推概率差异引发的训练崩溃；该资料不是独立论文，也未报告生产线上 A/B。",
+        "local": "本地显式维护旧训练策略和带确定性数值/router 扰动的 rollout 引擎分布，以 `c=2` 单侧截断训推 ratio；TIS 不丢弃区间外样本，并继续保留 PPO stale-policy ratio。",
+        "boundary": "候选动作分布替代逐 token LLM 概率，确定性引擎扰动替代真实 vLLM/FSDP 数值差异；这里只验证 TIS 权重与梯度路径，不复刻网页中的大模型训练。",
+    },
+    {
+        "module": "post-training", "slug": "2510.18855-icepop", "id": "2510.18855",
+        "title": "IcePop：双侧训推失配掩码", "key": "icepop",
+        "institution": "Ant Group / Inclusion AI", "date": "2025-10-21",
+        "code": "未发现/未发布 IcePop 独立算法源代码",
+        "topic": "MoE 训推失配 / 双侧 mask",
+        "summary": "MoE router 会放大训练引擎与 rollout 引擎的微小数值差异，单侧 TIS 仍可能保留严重偏小的失配 ratio。IcePop 对训练侧与 rollout 引擎的 token 概率比设置固定双侧区间；区间内保留原始校正权重，区间外 token 的本次策略梯度直接归零。",
+        "mermaid": 'R["rollout-engine probability"] --> W["training / rollout ratio"]\n    T["training-engine probability"] --> W\n    W --> M["fixed two-sided mask"]\n    M --> U["in-band weighted policy update"]',
+        "formula": r"\rho_t^{\rm TI}=\frac{\pi_{\rm train}(a_t\mid s_t)}{\pi_{\rm rollout}(a_t\mid s_t)},\qquad m_t=\mathbf1[c_{\rm low}\le\rho_t^{\rm TI}\le c_{\rm high}],\qquad \mathcal L=-\mathbb E[m_t\rho_t^{\rm TI}r_t^{\rm policy}A_t].",
+        "result": "Ring-1T 技术报告将 IcePop 与 C3PO++、ASystem 共同用于万亿参数 MoE RL，并报告 Ring-1T 在 AIME 2025 等推理基准上的结果；没有隔离 IcePop 的生产线上 A/B。",
+        "local": "在与 TIS 相同的候选策略和引擎失配模拟中采用公开实现常用的 `[0.5, 5.0]` 区间，区间外动作真正不产生梯度，同时保留旧 rollout policy 的 PPO ratio/clip。",
+        "boundary": "没有真实 MoE expert routing、万亿参数模型或异步集群；本地只隔离复现固定双侧 mask 与原始区间内校正权重。",
+    },
+    {
+        "module": "post-training", "slug": "web-2025-online-icepop",
+        "title": "Online IcePop：单次 rollout 更新的纯在线失配掩码",
+        "key": "online-icepop",
+        "url": "https://zhuanlan.zhihu.com/p/1984379979035850499",
+        "publication_label": "Online IcePop 技术说明",
+        "information_heading": "资料信息",
+        "summary_heading": "原始资料总结",
+        "result_heading": "资料离线与线上效果",
+        "scope_note": "本页在公开候选策略上复现网页资料中的可隔离 RL 更新机制；不把轻量实验写成来源材料中的大模型效果。",
+        "institution": "Jian Hu（技术说明；方法源自 Ant Group Bailing Team）",
+        "date": "2025-12-16（作者公开说明页首发）",
+        "code": "未发布独立源代码；属于 IcePop 的训练调度变体",
+        "topic": "纯在线策略梯度 / 训推失配",
+        "summary": "普通 IcePop 同时面对训练/rollout 引擎差异和一次 rollout 被多次更新造成的策略陈旧。Online IcePop 强制每个 rollout batch 只更新一次，使 stale-policy ratio 恒为 1，从目标中移除 PPO ratio 与 clip；训练侧仍用 IcePop 双侧 mask 和区间内原始 ratio 校正引擎失配。",
+        "mermaid": 'B["fresh rollout batch"] --> O["exactly one update"]\n    O --> P["policy ratio = 1; no PPO clip"]\n    R["training / rollout-engine ratio"] --> M["IcePop two-sided mask"]\n    P --> U["pure-online update"]\n    M --> U',
+        "formula": r"r_t^{\rm policy}=1,\qquad \mathcal L_{\rm online}=-\mathbb E\!\left[\mathbf1[c_{\rm low}\le\rho_t^{\rm TI}\le c_{\rm high}]\,\rho_t^{\rm TI}A_t\right].",
+        "result": "原始说明聚焦稳定性设计，主张以 pure-online 单次更新消除 router shift 累积；该资料不是独立论文，没有独立 benchmark 表或生产线上 A/B。",
+        "local": "每个训练 step 后立即把当前权重刷新为下一批 rollout 权重，诊断中强制 `policy_staleness_ratio_mean=1`、关闭 PPO clip，同时沿用 IcePop `[0.5, 5.0]` 双侧 mask。",
+        "boundary": "本地一个 candidate group 对应一个 rollout batch，不包含真实并行采样和通信；验证的是单次更新调度、stale ratio 消除和训推 mask 的组合语义。",
+    },
     {
         "module": "post-training", "slug": "2607.10169-ripo", "id": "2607.10169",
         "title": "RIPO：黎曼等距策略优化", "key": "ripo",
@@ -148,6 +203,19 @@ PAPERS = (
 
 def render(paper: dict[str, str]) -> str:
     source = f"src/auto_research/{paper['module'].replace('-', '_')}/"
+    url = paper["url"] if "url" in paper else f"https://arxiv.org/abs/{paper['id']}"
+    publication_label = (
+        paper["publication_label"]
+        if "publication_label" in paper
+        else f"{paper['title']}（arXiv {paper['id']}）"
+    )
+    information_heading = paper.get("information_heading", "论文信息")
+    summary_heading = paper.get("summary_heading", "原始论文总结")
+    result_heading = paper.get("result_heading", "论文离线与线上效果")
+    scope_note = paper.get(
+        "scope_note",
+        "本页在公开候选策略或确定性 Agent mini-suite 上复现可隔离的 RL 更新机制；不把轻量实验写成原论文规模模型或 benchmark 结论。",
+    )
     command = (
         f"auto-research post-train --algorithm {paper['key']} --dataset gsm8k-candidate "
         "--maximum-examples 256 --steps 120 --seed 42"
@@ -156,20 +224,20 @@ def render(paper: dict[str, str]) -> str:
     )
     return f'''# {paper["title"]}
 
-> 本页在公开候选策略或确定性 Agent mini-suite 上复现可隔离的 RL 更新机制；不把轻量实验写成原论文规模模型或 benchmark 结论。
+> {scope_note}
 
-## 论文信息
+## {information_heading}
 
 | 字段 | 内容 |
 |---|---|
-| 论文链接 | [{paper["title"]}（arXiv {paper["id"]}）](https://arxiv.org/abs/{paper["id"]}) |
+| {"资料链接" if information_heading == "资料信息" else "论文链接"} | [{publication_label}]({url}) |
 | 公司 / 机构 | {paper["institution"]} |
 | 首次公开日期 | {paper["date"]} |
 | 原作者代码 | {paper["code"]} |
 | 本地 adapter / 算法键 | `{paper["key"]}` |
 | 本地复现代码 | [`{source}`](https://github.com/daiwk/auto-research/tree/main/{source}) |
 
-## 原始论文总结
+## {summary_heading}
 
 ### 背景与主要改动
 
@@ -186,7 +254,7 @@ $$
 {paper["formula"]}
 $$
 
-### 论文离线与线上效果
+### {result_heading}
 
 {paper["result"]}
 
@@ -206,11 +274,27 @@ $$
 '''
 
 
+def preserve_figure(rendered: str, existing: str) -> str:
+    if FIGURE_START not in existing or FIGURE_END not in existing:
+        return rendered
+    figure = (
+        existing.split(FIGURE_START, 1)[1].split(FIGURE_END, 1)[0]
+    )
+    block = f"{FIGURE_START}{figure}{FIGURE_END}\n"
+    diagram_end = rendered.index("```\n", rendered.index("```mermaid")) + 4
+    return rendered[:diagram_end] + "\n" + block + rendered[diagram_end:]
+
+
 def main() -> None:
     for paper in PAPERS:
         path = DOCS / paper["module"] / paper["slug"] / "README.md"
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render(paper), encoding="utf-8")
+        rendered = render(paper)
+        if path.exists():
+            rendered = preserve_figure(
+                rendered, path.read_text(encoding="utf-8")
+            )
+        path.write_text(rendered, encoding="utf-8")
 
 
 if __name__ == "__main__":

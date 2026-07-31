@@ -12,6 +12,9 @@ MODULES = {
         "kto": "2402.01306-kto",
         "orpo": "2403.07691-orpo",
         "grpo": "2402.03300-grpo",
+        "tis": "web-2025-tis",
+        "icepop": "2510.18855-icepop",
+        "online-icepop": "web-2025-online-icepop",
         "ripo": "2607.10169-ripo",
         "kpop": "2606.15079-kpop",
         "gppo": "2508.07629-gppo",
@@ -190,6 +193,8 @@ def test_each_research_paper_page_has_complete_contract():
     )
     for module, methods in MODULES.items():
         for method, slug in methods.items():
+            if slug.startswith("web-"):
+                continue
             path = ROOT / "docs" / module / slug / "README.md"
             text = path.read_text(encoding="utf-8")
             for entry in required:
@@ -200,6 +205,62 @@ def test_each_research_paper_page_has_complete_contract():
             )
             assert "http" in upstream_line or "未" in upstream_line
             assert "../../experiments/" in text
+
+
+def test_web_method_pages_have_complete_source_contract():
+    methods = {
+        "tis": (
+            "web-2025-tis",
+            "https://fengyao.notion.site/off-policy-rl",
+            "2025-08-05",
+        ),
+        "online-icepop": (
+            "web-2025-online-icepop",
+            "https://zhuanlan.zhihu.com/p/1984379979035850499",
+            "2025-12-16（作者公开说明页首发）",
+        ),
+    }
+    required = (
+        "## 资料信息",
+        "| 资料链接 |",
+        "| 公司 / 机构 |",
+        "| 首次公开日期 |",
+        "| 原作者代码 |",
+        "| 本地 adapter /",
+        "| 本地复现代码 |",
+        "## 原始资料总结",
+        "### 背景与主要改动",
+        "### 核心公式",
+        "### 资料离线与线上效果",
+        "## 本地复现",
+        "## 复现边界",
+        "```mermaid",
+    )
+    for method, (slug, source_url, published) in methods.items():
+        text = (
+            ROOT / "docs" / "post-training" / slug / "README.md"
+        ).read_text(encoding="utf-8")
+        for entry in required:
+            assert entry in text, f"post-training/{method} missing {entry}"
+        assert f"`{method}`" in text
+        assert source_url in text
+        assert f"| 首次公开日期 | {published} |" in text
+        assert "../../experiments/" in text
+
+
+def test_icepop_paper_metadata_uses_the_ring_1t_report():
+    text = (
+        ROOT
+        / "docs"
+        / "post-training"
+        / "2510.18855-icepop"
+        / "README.md"
+    ).read_text(encoding="utf-8")
+
+    assert "https://arxiv.org/abs/2510.18855" in text
+    assert "| 公司 / 机构 | Ant Group / Inclusion AI |" in text
+    assert "| 首次公开日期 | 2025-10-21 |" in text
+    assert "| 原作者代码 | 未发现/未发布 IcePop 独立算法源代码 |" in text
 
 
 def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():

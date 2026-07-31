@@ -38,6 +38,139 @@
         "fidelity": "mechanism reproduction on a candidate-policy model"
       }
     },
+    "tis": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.890625,
+        "mean_reward": 0.8910452345048534,
+        "entropy": 1.2570003616481733,
+        "kl_from_reference": 0.5347591075738819
+      },
+      "relative_accuracy": 4.181818181818182,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "training_inference_ratio_mean": 3.9998011597957577,
+          "training_inference_ratio_max": 5.601240947344041,
+          "correction_weight_mean": 1.6061330511756282,
+          "correction_adjusted_fraction": 0.75,
+          "policy_staleness_ratio_mean": 0.9964496564426252,
+          "ppo_clip_active": 1.0,
+          "tis_upper_bound": 2.0,
+          "tis_clipped_fraction": 0.75,
+          "mismatch_tokens_dropped": 0.0,
+          "loss": -0.37175081059980963,
+          "policy_entropy": 1.558929717013515
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "icepop": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.890625,
+        "mean_reward": 0.8876797065002482,
+        "entropy": 1.2085061636612555,
+        "kl_from_reference": 0.5832533055607997
+      },
+      "relative_accuracy": 4.181818181818182,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 7,
+        "last_diagnostics": {
+          "training_inference_ratio_mean": 2.1051241089768755,
+          "training_inference_ratio_max": 2.9714609021986114,
+          "correction_weight_mean": 2.0513048624703467,
+          "correction_adjusted_fraction": 0.25,
+          "policy_staleness_ratio_mean": 0.868301286439781,
+          "ppo_clip_active": 1.0,
+          "icepop_lower_bound": 0.5,
+          "icepop_upper_bound": 5.0,
+          "icepop_kept_fraction": 0.75,
+          "mismatch_tokens_dropped": 1.0,
+          "loss": 0.3520248121574257,
+          "policy_entropy": 0.9469186327771613
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
+    "online-icepop": {
+      "baseline": {
+        "accuracy": 0.171875,
+        "mean_reward": 0.31242003408632096,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.796875,
+        "mean_reward": 0.8153364653766422,
+        "entropy": 1.048881360986101,
+        "kl_from_reference": 0.7428781082359538
+      },
+      "relative_accuracy": 3.6363636363636362,
+      "training": {
+        "steps": 120,
+        "learning_rate": 0.08,
+        "group_size": 4,
+        "train_examples": 256,
+        "validation_examples": 64,
+        "data_source": "OpenAI GSM8K official train/test JSONL",
+        "teacher_cache_entries": 0,
+        "teacher_prefill_calls": 0,
+        "online_teacher_calls": 0,
+        "drift_events": 0,
+        "critic_updates": 0,
+        "rollout_policy_refreshes": 120,
+        "last_diagnostics": {
+          "training_inference_ratio_mean": 1.4107471691105329,
+          "training_inference_ratio_max": 2.0507372933946937,
+          "correction_weight_mean": 1.374201076696564,
+          "correction_adjusted_fraction": 0.25,
+          "policy_staleness_ratio_mean": 1.0,
+          "ppo_clip_active": 0.0,
+          "icepop_lower_bound": 0.5,
+          "icepop_upper_bound": 5.0,
+          "icepop_kept_fraction": 0.75,
+          "mismatch_tokens_dropped": 1.0,
+          "updates_per_rollout_batch": 1.0,
+          "forced_on_policy_ratio": 1.0,
+          "loss": -1.8982901559985619,
+          "policy_entropy": 0.7002355514733795
+        },
+        "fidelity": "mechanism reproduction on a candidate-policy model"
+      }
+    },
     "kpop": {
       "baseline": {
         "accuracy": 0.171875,

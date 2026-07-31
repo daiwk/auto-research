@@ -1,9 +1,9 @@
-# LLM 后训练方法索引
+# LLM 后训练论文与资料索引
 
-本页维护后训练方法的统一索引。入口页只展示整体进度；每篇论文的背景、架构、公式、
-原文效果和本地实验放在独立详情页。
+本页维护后训练方法的统一索引。入口页只展示整体进度；正式论文与关键网页资料的背景、
+架构、公式、原文效果和本地实验放在独立详情页。
 
-## 已实现论文
+## 已实现论文与资料
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
@@ -11,6 +11,9 @@
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | Contextual AI / Stanford，2024-02-02 | [已开源](https://github.com/ContextualAI/HALOs) | `kto` |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | KAIST，2024-03-12 | [已开源](https://github.com/xfactlab/orpo) | `orpo` |
 | 在线推理 RL | [DeepSeekMath / GRPO](2402.03300-grpo/README.md) | DeepSeek-AI，2024-02-05 | [已开源](https://github.com/deepseek-ai/DeepSeek-Math) | `grpo` |
+| 训推失配校正 | [TIS](web-2025-tis/README.md) | UC San Diego / Microsoft Research，2025-08-05 | 未发布独立算法仓库 | `tis` |
+| MoE 训推失配 | [IcePop](2510.18855-icepop/README.md) | Ant Group / Inclusion AI，2025-10-21 | 未发现 IcePop 独立算法源代码 | `icepop` |
+| 纯在线训推校正 | [Online IcePop](web-2025-online-icepop/README.md) | Jian Hu / Ant Group Bailing Team，2025-12-16 | 未发布独立源代码 | `online-icepop` |
 | 几何信任域 | [RIPO](2607.10169-ripo/README.md) | 论文作者团队，2026-07-11 | 未发现官方代码 | `ripo` |
 | 异步训推失配 | [KPop](2606.15079-kpop/README.md) | Ling / Ring 技术报告作者团队，2026-06-13 | 未发现独立算法开源仓库 | `kpop` |
 | 梯度保留 clip | [GPPO](2508.07629-gppo/README.md) | Klear-Reasoner 作者团队，2025-08-11 | 未发现独立算法开源仓库 | `gppo` |

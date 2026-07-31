@@ -123,6 +123,19 @@ def test_post_training_and_agent_discovery_maps_only_audited_operators():
     )
 
 
+def test_training_inference_corrections_are_available_to_evolve():
+    post = discover_papers(
+        "TIS IcePop online", 100, False, track="post-training"
+    )
+    mapped = {
+        paper.arxiv_id: paper.architecture for paper in post
+    }
+
+    assert mapped["web-tis-2025"] == "tis"
+    assert mapped["2510.18855"] == "icepop"
+    assert mapped["web-online-icepop-2025"] == "online-icepop"
+
+
 def test_all_executable_post_training_methods_are_in_evolve():
     from auto_research.post_training.models import ALGORITHMS
 

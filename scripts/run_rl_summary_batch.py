@@ -16,8 +16,8 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
 
 ROOT = Path(__file__).resolve().parents[1]
 POST_TRAINING = (
-    "ripo", "kpop", "gppo", "dr-grpo", "armor", "reinforce-plus", "taco",
-    "chord", "vapo",
+    "ripo", "tis", "icepop", "online-icepop", "kpop", "gppo", "dr-grpo",
+    "armor", "reinforce-plus", "taco", "chord", "vapo",
 )
 AGENTS = ("gigpo", "steppo")
 

@@ -2798,5 +2798,19 @@
     "height": 301,
     "score": 56,
     "error": ""
+  },
+  {
+    "page": "docs/post-training/2510.18855-icepop/README.md",
+    "paper_url": "https://arxiv.org/abs/2510.18855",
+    "arxiv_id": "2510.18855",
+    "figure": "Figure 9",
+    "original_caption": "Figure 9 : An overview of ASystem RL training framework.",
+    "source_url": "https://ar5iv.labs.arxiv.org/html/2510.18855/assets/x14.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/post-training/2510.18855-icepop/assets/paper-figure-01.png",
+    "width": 917,
+    "height": 653,
+    "score": 58,
+    "error": ""
   }
 ]

@@ -1,8 +1,13 @@
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
+from auto_research.post_training.rollout_correction import (
+    icepop_weights,
+    truncated_importance_weights,
+)
 
 
 @pytest.mark.parametrize(
@@ -13,8 +18,8 @@ from auto_research.post_training import PostTrainingConfig, PostTrainingRunner
         "gkd", "minillm", "opsd", "opcd",
         "constitutional-ai", "rrhf", "raft",
         "slic-hf", "steerlm", "spin",
-        "ripo", "kpop", "gppo", "dr-grpo", "armor", "reinforce-plus",
-        "taco", "chord", "vapo",
+        "ripo", "tis", "icepop", "online-icepop", "kpop", "gppo",
+        "dr-grpo", "armor", "reinforce-plus", "taco", "chord", "vapo",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -178,6 +183,95 @@ def test_grpo_uses_old_policy_clipping_without_critic(tmp_path: Path):
     assert diagnostics["value_model_parameters"] == 0
     assert result.training["critic_updates"] == 0
     assert result.training["rollout_policy_refreshes"] == 1
+
+
+def test_tis_clamps_only_the_upper_training_inference_ratio():
+    correction = truncated_importance_weights(
+        np.asarray((0.05, 0.45, 0.50)),
+        np.asarray((0.50, 0.45, 0.05)),
+        maximum=2.0,
+    )
+
+    np.testing.assert_allclose(correction.ratios, (0.1, 1.0, 10.0))
+    np.testing.assert_allclose(correction.weights, (0.1, 1.0, 2.0))
+    assert correction.kept.all()
+    assert correction.adjusted.tolist() == [False, False, True]
+
+
+def test_icepop_masks_both_ratio_tails_without_clamping_in_band():
+    correction = icepop_weights(
+        np.asarray((0.05, 0.45, 0.50)),
+        np.asarray((0.50, 0.45, 0.05)),
+        lower=0.5,
+        upper=5.0,
+    )
+
+    np.testing.assert_allclose(correction.ratios, (0.1, 1.0, 10.0))
+    np.testing.assert_allclose(correction.weights, (0.0, 1.0, 0.0))
+    assert correction.kept.tolist() == [False, True, False]
+    assert correction.adjusted.tolist() == [True, False, True]
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        (
+            "tis",
+            (
+                "tis_upper_bound",
+                "tis_clipped_fraction",
+                "training_inference_ratio_mean",
+            ),
+        ),
+        (
+            "icepop",
+            (
+                "icepop_lower_bound",
+                "icepop_upper_bound",
+                "icepop_kept_fraction",
+            ),
+        ),
+        (
+            "online-icepop",
+            (
+                "updates_per_rollout_batch",
+                "forced_on_policy_ratio",
+                "icepop_kept_fraction",
+            ),
+        ),
+    ],
+)
+def test_training_inference_corrections_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    steps = 20
+    result, _ = PostTrainingRunner(
+        PostTrainingConfig(
+            algorithm=algorithm,
+            steps=steps,
+            maximum_examples=48,
+            output_dir=tmp_path,
+        )
+    ).run()
+
+    for name in diagnostics:
+        assert name in result.training["last_diagnostics"]
+    last = result.training["last_diagnostics"]
+    if algorithm == "tis":
+        assert last["tis_clipped_fraction"] > 0
+        assert last["mismatch_tokens_dropped"] == 0
+        assert result.training["rollout_policy_refreshes"] == 1
+    elif algorithm == "icepop":
+        assert last["ppo_clip_active"] == 1
+        assert 0 < last["icepop_kept_fraction"] < 1
+        assert last["mismatch_tokens_dropped"] > 0
+        assert result.training["rollout_policy_refreshes"] == 1
+    else:
+        assert last["ppo_clip_active"] == 0
+        assert 0 < last["icepop_kept_fraction"] < 1
+        assert last["mismatch_tokens_dropped"] > 0
+        assert last["policy_staleness_ratio_mean"] == 1
+        assert result.training["rollout_policy_refreshes"] == steps
 
 
 @pytest.mark.parametrize(

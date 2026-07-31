@@ -3,20 +3,13 @@ from __future__ import annotations
 from dataclasses import replace
 import random
 
+from ..post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
 from .models import Genome, PaperInspiration
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
     if model == "post-training":
-        installed = [
-            "dpo", "kto", "orpo", "ppo-rlhf", "grpo", "reco-grpo", "rloo", "remax",
-            "gkd", "minillm", "opsd", "opcd",
-            "dapo", "gspo", "lightning-opd", "gprl", "tcr",
-            "ipo", "simpo", "luspo", "coba-rl",
-            "constitutional-ai", "rrhf", "raft",
-            "slic-hf", "steerlm", "spin",
-            "seed", "relay-opd", "cast", "turn-opd", "cort",
-        ]
+        installed = list(POST_TRAINING_ALGORITHMS)
         mapped = [paper.architecture for paper in papers if paper.architecture in installed]
         requested = [
             value for value in installed

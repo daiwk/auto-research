@@ -43,6 +43,30 @@ class PostTrainingRunner:
                 row.update(metrics(state, data.validation))
                 history.append(row)
         final = metrics(state, data.validation)
+        refresh_updates = {
+            "ppo-rlhf": state.ppo_updates,
+            "grpo": state.grpo_updates,
+            "reco-grpo": state.reco_updates,
+            "dapo": state.dapo_updates,
+            "gspo": state.gspo_updates,
+            "spin": state.spin_updates,
+            "ripo": state.variant_updates,
+            "tis": state.variant_updates,
+            "icepop": state.variant_updates,
+            "kpop": state.variant_updates,
+            "gppo": state.variant_updates,
+            "dr-grpo": state.variant_updates,
+            "armor": state.variant_updates,
+            "reinforce-plus": state.variant_updates,
+            "taco": state.variant_updates,
+            "chord": state.variant_updates,
+            "vapo": state.variant_updates,
+        }.get(config.algorithm, 0)
+        rollout_policy_refreshes = (
+            state.online_rollout_refreshes
+            if config.algorithm == "online-icepop"
+            else refresh_updates // 16
+        )
         training = {
             "steps": config.steps,
             "learning_rate": config.learning_rate,
@@ -56,25 +80,7 @@ class PostTrainingRunner:
             "online_teacher_calls": state.online_teacher_calls,
             "drift_events": state.drift_events,
             "critic_updates": state.critic_updates,
-            "rollout_policy_refreshes": (
-                {
-                    "ppo-rlhf": state.ppo_updates,
-                    "grpo": state.grpo_updates,
-                    "reco-grpo": state.reco_updates,
-                    "dapo": state.dapo_updates,
-                    "gspo": state.gspo_updates,
-                    "spin": state.spin_updates,
-                    "ripo": state.variant_updates,
-                    "kpop": state.variant_updates,
-                    "gppo": state.variant_updates,
-                    "dr-grpo": state.variant_updates,
-                    "armor": state.variant_updates,
-                    "reinforce-plus": state.variant_updates,
-                    "taco": state.variant_updates,
-                    "chord": state.variant_updates,
-                    "vapo": state.variant_updates,
-                }.get(config.algorithm, 0)
-            ) // 16,
+            "rollout_policy_refreshes": rollout_policy_refreshes,
             "last_diagnostics": last_diagnostics,
             "fidelity": "mechanism reproduction on a candidate-policy model",
         }
