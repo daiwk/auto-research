@@ -3,8 +3,6 @@
 
 from __future__ import annotations
 
-import re
-from collections import defaultdict
 from pathlib import Path
 
 
@@ -330,50 +328,6 @@ auto-research reproduce --paper {paper['key']} --data-root data --seed 42
 
 {paper['boundary']}
 """
-
-
-def parse_catalog(module: str) -> list[dict[str, str]]:
-    rows = []
-    text = (DOCS / module / "catalog.md").read_text(encoding="utf-8")
-    pattern = re.compile(
-        r"^\| (?P<topic>[^|]+) \| \[(?P<title>[^\]]+)\]\((?P<link>[^)]+)\) "
-        r"\| (?P<info>[^|]+) \| (?P<code>[^|]+) \| `(?P<key>[^`]+)` \|$"
-    )
-    for line in text.splitlines():
-        match = pattern.match(line)
-        if not match:
-            continue
-        row = {key: value.strip() for key, value in match.groupdict().items()}
-        date = re.search(r"(\d{4})-\d{2}-\d{2}", row["info"])
-        row["year"] = date.group(1) if date else "未标注"
-        row["institution"] = row["info"][: date.start()].rstrip("，, ") if date else row["info"]
-        rows.append(row)
-    return rows
-
-
-def catalog_page(module: str, dimension: str, title: str) -> str:
-    rows = parse_catalog(module)
-    groups: dict[str, list[dict[str, str]]] = defaultdict(list)
-    for row in rows:
-        groups[row[dimension]].append(row)
-    order = sorted(groups, reverse=dimension == "year")
-    lines = [
-        f"# {title}",
-        "",
-        "本页由统一方法索引生成；新增论文先登记到"
-        f"[方法索引](../catalog.md)，再运行 `python scripts/generate_20260729_docs.py` 更新三套分类。",
-        "",
-    ]
-    for group in order:
-        lines.extend([f"## {group}", ""])
-        for row in sorted(groups[group], key=lambda item: item["title"].lower()):
-            link = "../" + row["link"]
-            lines.append(
-                f"- [{row['title']}]({link})（`{row['key']}`）："
-                f"{row['topic']}；详情页包含核心机制、公式、原文结果和本地复现边界。"
-            )
-        lines.append("")
-    return "\n".join(lines)
 
 
 def main() -> None:
