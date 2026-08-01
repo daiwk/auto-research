@@ -288,6 +288,34 @@ def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
                 )
 
 
+def test_topic_catalogs_use_a_compact_two_level_taxonomy():
+    """Keep topic pages navigable as the number of papers keeps growing."""
+
+    expected = {
+        "post-training": {
+            "## 偏好建模与监督",
+            "## 在线强化学习与稳定性",
+            "## 蒸馏与训练闭环",
+            "### 成对、单样本与排序偏好",
+            "### PPO、REINFORCE 与 group RL",
+        },
+        "agent-research": {
+            "## Agentic RL 与后训练",
+            "## 规划、搜索与反思",
+            "## 记忆、技能与持续学习",
+            "### 通用轨迹与 credit assignment",
+            "### 主动 / 长期记忆",
+        },
+    }
+    for module, headings in expected.items():
+        text = (ROOT / "docs" / module / "catalog" / "by-topic.md").read_text(
+            encoding="utf-8"
+        )
+        assert "研究方向 → 方法簇 → 论文" in text
+        for heading in headings:
+            assert heading in text
+
+
 def test_every_paper_page_has_a_valid_original_paper_figure():
     """Keep figures mandatory for all current and future paper pages."""
 
