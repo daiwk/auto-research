@@ -74,6 +74,12 @@ PAPERS = {
         "url": "https://arxiv.org/abs/2607.28418",
         "organization": "EIT-NLP / LMU Munich",
     },
+    "retoken": {
+        "arxiv_id": "2607.28627",
+        "title": "ReToken: One Token to Improve Vision–Language Models for Visual Retrieval",
+        "url": "https://arxiv.org/abs/2607.28627",
+        "organization": "UIUC / Microsoft Research / Google DeepMind",
+    },
 }
 
 

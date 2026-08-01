@@ -37,6 +37,9 @@ class PolicyState:
     variant_updates: int = 0
     online_rollout_refreshes: int = 0
     global_advantage_second_moment: float = 1.0
+    vad_projection_updates: int = 0
+    vad_projection_active: int = 0
+    vad_alignment_sum: float = 0.0
 
 
 def initialize(feature_count: int, groups: tuple[CandidateGroup, ...]) -> PolicyState:
@@ -1178,6 +1181,105 @@ def update(
                 "external_preference_labels": 0.0,
             }
         )
+    elif algorithm == "vad":
+        # VAD queries one frozen teacher twice: with privileged evidence and
+        # after removing it.  Centered log-probability differences define the
+        # signed evidence direction u.  Only the part of the original teacher
+        # correction aligned with u is transferred to the student target.
+        state.online_teacher_calls += 2
+        teacher_with = _softmax(
+            group.rewards @ np.asarray((4.0, 0.2, 0.8, 0.1))
+        )
+        teacher_without = _softmax(
+            group.rewards @ np.asarray((4.0, 0.2, 0.0, 0.1))
+        )
+        student_log = np.log(probabilities + 1e-12)
+        correction = np.log(teacher_with + 1e-12) - student_log
+        correction -= correction.mean()
+        evidence = (
+            np.log(teacher_with + 1e-12)
+            - np.log(teacher_without + 1e-12)
+        )
+        evidence -= evidence.mean()
+        projection = max(
+            0.0,
+            float(np.dot(correction, evidence))
+            / float(np.dot(evidence, evidence) + 1e-3),
+        )
+        visual_projection = projection * evidence
+        visual_budget = float(np.linalg.norm(visual_projection))
+        support_branch = np.maximum(evidence, 0.0)
+        refutation_branch = np.minimum(evidence, 0.0)
+        support_agreement = max(float(np.dot(correction, support_branch)), 0.0)
+        refutation_agreement = max(float(np.dot(correction, refutation_branch)), 0.0)
+        agreement_total = support_agreement + refutation_agreement + 1e-12
+        support_share = min(support_agreement / agreement_total, 0.8)
+        refutation_share = refutation_agreement / agreement_total
+        branch_correction = visual_budget * (
+            support_share
+            * support_branch / (np.linalg.norm(support_branch) + 1e-12)
+            + refutation_share
+            * refutation_branch / (np.linalg.norm(refutation_branch) + 1e-12)
+        )
+        target = _softmax(student_log + np.clip(branch_correction, -20.0, 20.0))
+
+        def jsd_and_logit_gradient(fixed_target):
+            midpoint = 0.5 * (fixed_target + probabilities)
+            divergence = 0.5 * (
+                np.sum(fixed_target * np.log((fixed_target + 1e-12) / midpoint))
+                + np.sum(probabilities * np.log((probabilities + 1e-12) / midpoint))
+            )
+            probability_gradient = 0.5 * np.log(
+                (probabilities + 1e-12) / midpoint
+            )
+            logit_gradient = probabilities * (
+                probability_gradient
+                - float(np.dot(probabilities, probability_gradient))
+            )
+            return float(divergence), logit_gradient
+
+        primary_jsd, primary_gradient = jsd_and_logit_gradient(target)
+        attributed_fraction = visual_budget / (
+            float(np.linalg.norm(correction)) + 1e-12
+        )
+        anchor_weight = float(np.clip(1.0 - attributed_fraction, 0.0, 1.0))
+        regularizer_jsd, regularizer_gradient = jsd_and_logit_gradient(teacher_with)
+        weak_teacher = 0.1
+        logit_gradient = primary_gradient + (
+            weak_teacher * anchor_weight * regularizer_gradient
+        )
+        gradient = -(group.features.T @ logit_gradient)
+        loss = primary_jsd + weak_teacher * anchor_weight * regularizer_jsd
+        alignment = float(
+            np.dot(correction, evidence)
+            / (
+                np.linalg.norm(correction) * np.linalg.norm(evidence)
+                + 1e-12
+            )
+        )
+        state.vad_projection_updates += 1
+        state.vad_projection_active += int(projection > 0)
+        state.vad_alignment_sum += alignment
+        diagnostics.update(
+            {
+                "teacher_views": 2.0,
+                "visual_evidence_norm": float(np.linalg.norm(evidence)),
+                "teacher_correction_alignment": alignment,
+                "one_sided_projection": projection,
+                "weak_privileged_teacher_weight": weak_teacher,
+                "support_budget_share": support_share,
+                "refutation_budget_share": refutation_share,
+                "attribution_anchor_weight": anchor_weight,
+                "primary_jsd": primary_jsd,
+                "regularizer_jsd": regularizer_jsd,
+                "projection_active_rate": (
+                    state.vad_projection_active / state.vad_projection_updates
+                ),
+                "mean_teacher_correction_alignment": (
+                    state.vad_alignment_sum / state.vad_projection_updates
+                ),
+            }
+        )
     else:
         rewards = group.rewards[sampled]
         if algorithm == "gprl":
@@ -1230,6 +1332,7 @@ def update(
     if algorithm in {
         "ripo", "tis", "icepop", "kpop", "gppo", "dr-grpo", "armor",
         "reinforce-plus", "taco", "chord", "vapo",
+        "vad",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

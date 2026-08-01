@@ -1,0 +1,30 @@
+{
+  "date": "2026-08-02",
+  "seed": 42,
+  "post_training": {
+    "paper": "2607.28590",
+    "algorithm": "vad",
+    "dataset": "gsm8k-candidate",
+    "steps": 120,
+    "baseline_accuracy": 0.171875,
+    "final_accuracy": 0.796875,
+    "final_mean_reward": 0.8153364653766422,
+    "kl_from_reference": 0.009165395625760278,
+    "online_teacher_calls": 240,
+    "projection_active_rate": 1.0,
+    "mean_teacher_correction_alignment": 0.5145374600623333,
+    "fidelity": "branch-aware counterfactual target reconstruction with symmetric JSD on candidate-policy evidence axes"
+  },
+  "agent_evaluation": {
+    "paper": "2607.28609",
+    "method": "os-shepherd",
+    "benchmark": "osreward-mini",
+    "episodes": 120,
+    "accuracy": 1.0,
+    "success_recall": 1.0,
+    "fail_recall": 1.0,
+    "balanced_accuracy": 1.0,
+    "leniency_rate": 0.0,
+    "official_dataset_used": false
+  }
+}

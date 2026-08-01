@@ -17,6 +17,7 @@
 | 外部反馈 | CRITIC | 已实现 | 真实失败 patch、测试反馈和修订 |
 | Agent RL / OPD | Agent Lightning、Search-R1、RAGEN、LOOP、WebAgent-R1、MUA-RL、SEED、CAST、TurnOPD | 已实现 | 搜索/网页/长时程/多轮用户 RL、轨迹稳定化、hindsight skill、turn credit、动态 rollout budget |
 | 软件工程 Agent | SWE-agent、OpenHands | 已实现（local） | 真实临时仓库、编辑、命令和回归测试 |
+| CUA reward 评测 | OSReward / OS-Shepherd | 已实现（protocol mini-suite） | success/fail recall、balanced accuracy 与 leniency 审计 |
 | 模块化专家系统 | MRKL、HuggingGPT | 已实现 | 神经符号 router；模型能力匹配与依赖图执行 |
 | 经典长期状态 | Generative Agents、MemGPT | 已实现 | 记忆打分/反思；虚拟上下文换入换出 |
 | 浏览与引用 | WebGPT | 已实现（deterministic） | 浏览动作、证据引用与轨迹拒绝采样 |

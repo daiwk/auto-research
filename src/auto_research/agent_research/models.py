@@ -49,9 +49,11 @@ METHODS = (
     "steppo",
     "tapo",
     "grsd",
+    "os-shepherd",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",
+    "osreward-mini",
 )
 
 

@@ -2812,5 +2812,47 @@
     "height": 653,
     "score": 58,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2607.28627-retoken/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.28627",
+    "arxiv_id": "2607.28627",
+    "figure": "Figure 4",
+    "original_caption": "Figure 4 : Inference Pipeline . Our method first caches features for all input frames. Given a text query, ReToken retrieves the relevant frames, and the answer is generated from their cached features.",
+    "source_url": "https://arxiv.org/html/2607.28627v1/x5.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2607.28627-retoken/assets/paper-figure-01.png",
+    "width": 793,
+    "height": 216,
+    "score": 73,
+    "error": ""
+  },
+  {
+    "page": "docs/post-training/2607.28590-vad/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.28590",
+    "arxiv_id": "2607.28590",
+    "figure": "Figure 5",
+    "original_caption": "Figure 5: Effect of λ \\lambda and τ + \\tau_{+} on Qwen3.5-4B training. Each bar reports Avg 6 \\operatorname{Avg}_{6} (%) under the official evaluation pipeline.",
+    "source_url": "https://arxiv.org/html/2607.28590v1/x3.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/post-training/2607.28590-vad/assets/paper-figure-01.png",
+    "width": 996,
+    "height": 822,
+    "score": 24,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2607.28609-osreward/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.28609",
+    "arxiv_id": "2607.28609",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1 : Cost against binary accuracy on OSReward-Hard: reliable judges are expensive, and the OS-Shepherd models come nearest their accuracy at a fraction of the cost.",
+    "source_url": "https://arxiv.org/html/2607.28609v1/x3.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/agent-research/2607.28609-osreward/assets/paper-figure-01.png",
+    "width": 996,
+    "height": 419,
+    "score": 57,
+    "error": ""
   }
 ]

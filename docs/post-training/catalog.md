@@ -32,6 +32,7 @@
 | On-policy self-distillation | [OPSD](2601.18734-opsd/README.md) | UCLA / HKU / Meta Superintelligence Labs，2026-01-26 | [已开源](https://github.com/siyan-zhao/OPSD) | `opsd` |
 | Context distillation | [OPCD](2602.12275-opcd/README.md) | Microsoft Research，2026-02-12 | [已开源](https://github.com/microsoft/LMOps/tree/main/opcd) | `opcd` |
 | On-policy self-distillation | [β-OPSD](2607.28582-beta-opsd/README.md) | University of Maryland，2026-07-30 | 未发现官方代码 | `beta-opsd` |
+| 多模态证据归因蒸馏 | [VAD](2607.28590-vad/README.md) | SJTU / Xiaohongshu / CUHK / Zhejiang / Southeast，2026-07-30 | [已开源](https://github.com/DeepExperience/VAD_Multimodal_OPD) | `vad` |
 | Context distillation | [Flux-OPD](2607.28022-flux-opd/README.md) | Peking University / Kling Team / Tsinghua / SJTU，2026-07-30 | 未发现官方代码 | `flux-opd` |
 | 长推理 RL | [DAPO](2503.14476-dapo/README.md) | ByteDance Seed / Tsinghua AIR，2025-03-18 | [已开源](https://github.com/BytedTsinghua-SIA/DAPO) | `dapo` |
 | 稳定序列 RL | [GSPO](2507.18071-gspo/README.md) | Alibaba Qwen Team，2025-07-24 | 原论文无独立仓库；[ROLL 后续实现](https://alibaba.github.io/ROLL/docs/User%20Guides/Algorithms/GSPO/) | `gspo` |

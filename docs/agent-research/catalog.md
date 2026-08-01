@@ -29,6 +29,7 @@
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | 中国科学技术大学作者团队，2026-04-20 | 未发现官方代码 | `steppo` |
 | Agent RL | [TAPO](2607.27973-tapo/README.md) | Peking University / Pengcheng Laboratory，2026-07-30 | 未发现官方代码 | `tapo` |
 | Agent group credit | [Group-Reflective Self-Distillation](2607.28076-grsd/README.md) | Baidu Inc. / collaborating universities，2026-07-30 | [已开源](https://github.com/BinbZheng1/GRSD) | `grsd` |
+| CUA Reward 评测 | [OSReward / OS-Shepherd](2607.28609-osreward/README.md) | HKU / Nanjing / NUS / USTC / Xi’an Jiaotong / Oxford / Fudan，2026-07-30 | [项目主页](https://os-copilot.github.io/OSReward-Home/) | `os-shepherd` |
 | 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | UIUC / UMass Amherst / Google Cloud AI Research，2025-03-12 | [已开源](https://github.com/PeterGriffinJin/Search-R1) | `search-r1` |
 | 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | Northwestern / Stanford / Microsoft / UW / NYU / UBC / SMU，2025-04-24 | [已开源](https://github.com/RAGEN-AI/RAGEN) | `ragen` |
 | 长时程 Agent RL | [LOOP](2502.01600-loop/README.md) | Apple，2025-02-03 | [已开源](https://github.com/apple/ml-loop) | `loop` |

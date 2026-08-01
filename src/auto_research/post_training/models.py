@@ -52,6 +52,7 @@ ALGORITHMS = (
     "taco",
     "chord",
     "vapo",
+    "vad",
 )
 
 

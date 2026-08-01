@@ -16,6 +16,8 @@ class AgentResearchRunner:
 
     def run(self) -> tuple[AgentResearchResult, Path]:
         config = self.config
+        if config.benchmark == "osreward-mini":
+            return self._run_osreward()
         if config.benchmark == "swebench-local":
             return self._run_code_benchmark()
         tasks = build_benchmark(config.benchmark, config.episodes, config.seed)
@@ -159,6 +161,47 @@ class AgentResearchRunner:
         }
         (run_dir / "metrics.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        from .report import render_report
+        (run_dir / "report.md").write_text(render_report(result), encoding="utf-8")
+        return result, run_dir
+
+    def _run_osreward(self):
+        from .osreward import evaluate_osreward
+
+        config = self.config
+        if config.method != "os-shepherd":
+            raise ValueError("osreward-mini requires method os-shepherd")
+        metrics, diagnostics, trace = evaluate_osreward(
+            config.episodes, config.seed
+        )
+        result = AgentResearchResult(
+            config.method,
+            config.benchmark,
+            metrics,
+            {
+                "success": metrics["success_recall"],
+                "failure": metrics["fail_recall"],
+            },
+            diagnostics,
+            trace,
+        )
+        run_dir = (
+            config.output_dir
+            / f"{config.method}-{config.benchmark}-seed{config.seed}"
+        )
+        run_dir.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "method": result.method,
+            "benchmark": result.benchmark,
+            "metrics": result.metrics,
+            "axis_metrics": result.axis_metrics,
+            "diagnostics": result.diagnostics,
+            "trace": result.trace,
+        }
+        (run_dir / "metrics.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
         )
         from .report import render_report
         (run_dir / "report.md").write_text(render_report(result), encoding="utf-8")

@@ -31,7 +31,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "looped_latent_attention", "gaugequant", "penelope",
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
-        "nsa_gated_attention", "wide_dynamic_width",
+        "nsa_gated_attention", "wide_dynamic_width", "retoken",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
@@ -40,7 +40,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "adadsf", "engram", "looped_latent_attention", "gaugequant", "penelope",
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
-        "nsa_gated_attention", "wide_dynamic_width",
+        "nsa_gated_attention", "wide_dynamic_width", "retoken",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -78,6 +78,15 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 nn.Linear(config.dimensions, config.heads, bias=False)
                 if architecture == "wide_dynamic_width" else None
             )
+            self.retoken = (
+                nn.Parameter(torch.zeros(config.heads, head_dim))
+                if architecture == "retoken" else None
+            )
+            self.retoken_projection = (
+                nn.Linear(head_dim, head_dim, bias=False)
+                if architecture == "retoken" else None
+            )
+            self.last_retoken_keep_rate = 1.0
             self.last_active_head_fraction = 1.0
             qkv_width = config.heads * head_dim + 2 * kv_heads * head_dim
             self.qkv_conv = (
@@ -111,9 +120,46 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 repeats = config.heads // kv_heads
                 k = k.repeat_interleave(repeats, dim=1)
                 v = v.repeat_interleave(repeats, dim=1)
-            mixed = torch.nn.functional.scaled_dot_product_attention(
-                q, k, v, is_causal=True
-            )
+            if self.retoken is not None:
+                # RETOKEN scores the cached value vectors rather than the keys.
+                # Here every causal query receives the same learned retrieval
+                # target offset, and keeps up to half the maximum context (all
+                # visible values for shorter prefixes). The straight-through mask lets
+                # the one-token target and its projection learn from LM loss.
+                retrieval_query = self.retoken_projection(
+                    q + self.retoken[None, :, None, :]
+                )
+                relevance = torch.einsum(
+                    "bhid,bhjd->bhij",
+                    torch.nn.functional.normalize(retrieval_query, dim=-1),
+                    torch.nn.functional.normalize(v, dim=-1),
+                )
+                causal = torch.ones(
+                    length, length, device=values.device, dtype=torch.bool
+                ).tril()
+                relevance = relevance.masked_fill(~causal[None, None], -1e4)
+                keep = max(1, length // 2)
+                threshold = relevance.topk(keep, dim=-1).values[..., -1:]
+                hard = (relevance >= threshold) & causal[None, None]
+                soft = torch.sigmoid(relevance - threshold)
+                retrieval_mask = hard.to(soft.dtype) + soft - soft.detach()
+                attention_bias = torch.log(retrieval_mask.clamp_min(1e-6))
+                attention_bias = attention_bias.masked_fill(
+                    ~causal[None, None], float("-inf")
+                )
+                mixed = torch.nn.functional.scaled_dot_product_attention(
+                    q, k, v, attn_mask=attention_bias, is_causal=False
+                )
+                self.last_retoken_keep_rate = float(
+                    hard.float().sum().detach().cpu()
+                    / causal.sum().clamp_min(1).detach().cpu()
+                    / config.heads
+                    / batch
+                )
+            else:
+                mixed = torch.nn.functional.scaled_dot_product_attention(
+                    q, k, v, is_causal=True
+                )
             if self.width_router is not None:
                 scores = self.width_router(values)
                 keep = max(1, config.heads // 2)
@@ -763,6 +809,15 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                         block.ffn.last_active_channel_fraction for block in self.blocks
                     ) / len(self.blocks),
                     "target_sparsity": 0.5,
+                }
+            if architecture == "retoken":
+                return {
+                    "retrieval_target_tokens": 1,
+                    "score_space": "final-value-projection",
+                    "causal_cache_keep_rate": sum(
+                        block.attention.last_retoken_keep_rate
+                        for block in self.blocks
+                    ) / len(self.blocks),
                 }
             return {}
 

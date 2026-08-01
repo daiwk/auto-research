@@ -11,9 +11,11 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | `planbench-mini` | 可验证规划与过程复用 | 结构化动作序列 | plan success、平均成本、reused plans |
 | `scalemcp-mini` | 有限上下文中的动态工具集合 | 多轮工具路由 | task success、上下文成本、tool evictions |
 | `swebench-local` | 代码定位、编辑、测试与修订 | 临时 Python 仓库 + 真实 unittest | resolved rate、命令/编辑、反馈轮次、复用 |
+| `osreward-mini` | CUA reward 判分与宽松偏差 | 四平台完成/未完成证据轨迹 | success/fail recall、balanced accuracy、leniency |
 
-前三项是仓库自带的确定性 mini-suite；`swebench-local` 会真实执行代码，但任务仍是
-仓库自带 micro fixtures，不是官方 SWE-bench Lite。
+前三项与 `osreward-mini` 是仓库自带的确定性 mini-suite；`swebench-local` 会真实执行
+代码，但任务仍是仓库自带 micro fixtures，不是官方 SWE-bench Lite；`osreward-mini`
+复现官方指标与证据核验协议，不是官方 1,019 条截图轨迹。
 
 ## 公平口径
 
@@ -50,6 +52,7 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | SayCan · PlanBench mini | 1.0000 | 3.3750 | checks/filtered 1350/790 |
 | PAL · ScaleMCP mini | 1.0000 | 1.4000 | programs/interpreter calls 120/120 |
 | ART · PlanBench mini | 1.0000 | 1.5500 | retrievals/pauses/updates 108/360/12 |
+| OS-Shepherd protocol · OSReward mini | 1.0000 BalAcc | 2 evidence checks | sRec/fRec 1.0000/1.0000；leniency 0 |
 
 稳定数据：
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -70,6 +73,9 @@ auto-research agent-eval --method voyager \
 
 auto-research agent-eval --method swe-agent \
   --benchmark swebench-local --episodes 12 --seed 42
+
+auto-research agent-eval --method os-shepherd \
+  --benchmark osreward-mini --episodes 120 --seed 42
 ```
 
 产物写入 `runs/agent-research/<method>-<benchmark>-seed<seed>/`，包括逐 episode

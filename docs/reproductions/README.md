@@ -46,7 +46,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 151 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 152 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，纯 LLM 论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -55,10 +55,11 @@ pytest tests/test_research_module_docs.py
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 - 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
-## 全部复现（151/151）
+## 全部复现（152/152）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `retoken` · [ReToken](2607.28627-retoken/README.md) | Visual Haystacks：Qwen3-VL-8B +13.4 points；无线上 A/B | 单 retrieval target + value-cache Top-K；WikiText-2 PPL +3.70%（变差） |
 | 核心机制 | `ccformer` · [CCFormer](2607.28070-ccformer/README.md) | 腾讯视频 CTR +3.57%、广告收入 +1.71%，实验后全流量 | 分字段 ID/content gate + 分层历史压缩；MovieLens-1M NDCG@10 +22.44%，token 24→12 |
 | 核心机制 | `open-web-ufm` · [Open Web UFM](2607.28019-open-web-ufm/README.md) | Teads 50/50 A/B：CTR +2.13%、eCPC -1.13%、visit rate +2.37% | 双裁剪对比预训练 + next-item 代理任务；MovieLens-1M NDCG@10 +0.00%，如实保留零收益 |
 | 核心机制 | `rocs` · [ROCS](2607.27744-rocs/README.md) | Meta 检索最高 3× QPS；短视频排序 LogLoss -0.5%、QPS +50% | request-once / candidate-late interaction；MovieLens-1M NDCG@10 +8.19%，进程内候选打分 129.58× |

@@ -47,11 +47,34 @@ PAPERS = {
     "skillrise": ("SkillRise", "https://arxiv.org/abs/2607.26784"),
     "gigpo": ("Group-in-Group Policy Optimization", "https://arxiv.org/abs/2505.10978"),
     "steppo": ("StepPO", "https://arxiv.org/abs/2604.18401"),
+    "os-shepherd": ("OSReward / OS-Shepherd", "https://arxiv.org/abs/2607.28609"),
 }
 
 
 def render_report(result: AgentResearchResult) -> str:
     title, url = PAPERS[result.method]
+    if result.benchmark == "osreward-mini":
+        return f"""# {title} 本地 CUA reward 评测
+
+> 实现 OSReward 的双类召回、balanced accuracy 与 leniency 审计协议；
+> 本地 mini-suite 不冒充官方 1,019 条人工验证轨迹。
+
+- 论文：[{title}]({url})
+- benchmark：`{result.benchmark}`
+- episodes：{result.diagnostics['episodes']}
+
+| 指标 | 值 |
+|---|---:|
+| accuracy | {result.metrics['accuracy']:.4f} |
+| success recall | {result.metrics['success_recall']:.4f} |
+| fail recall | {result.metrics['fail_recall']:.4f} |
+| balanced accuracy | {result.metrics['balanced_accuracy']:.4f} |
+| leniency / false-positive rate | {result.metrics['leniency_rate']:.4f} |
+
+- platforms：{', '.join(result.diagnostics['platforms'])}
+- evidence checks：{result.diagnostics['evidence_checks']}
+- fidelity：{result.diagnostics['fidelity']}
+"""
     axes = "\n".join(
         f"| {axis} | {value:.4f} |" for axis, value in sorted(result.axis_metrics.items())
     )

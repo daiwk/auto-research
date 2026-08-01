@@ -43,6 +43,7 @@ LLM_MUTATIONS = {
     "2505.06708": ("gated_attention", "在每个 attention head 的 SDPA 输出后加入 query-dependent sigmoid gate"),
     "2502.16982": ("optimizer:muon", "Muon 对隐藏矩阵梯度做 Newton-Schulz 正交化，其余参数使用 AdamW"),
     "2607.28418": ("wide_dynamic_width", "WIDE 逐 token 选择 attention-head group 与 FFN-channel group，执行可学习动态宽度剪枝"),
+    "2607.28627": ("retoken", "单个可学习 retrieval target 在 value-projection 空间打分，并稀疏选择已缓存 token"),
 }
 
 POST_TRAINING_MUTATIONS = {
@@ -53,6 +54,7 @@ POST_TRAINING_MUTATIONS = {
     "2306.08543": ("minillm", "MiniLLM 以 reverse KL、teacher-mixed sampling 和方差缩减蒸馏生成模型"),
     "2601.18734": ("opsd", "OPSD 让同一模型以普通/特权上下文分别作为学生和教师，并裁剪逐 token 散度"),
     "2607.28582": ("beta-opsd", "β-OPSD 把 reference 与 privileged teacher 的几何插值闭式解转成低方差蒸馏目标，并加入 return-to-go credit"),
+    "2607.28590": ("vad", "比较同一教师有/无视觉证据的分布，以单侧投影重建 student-anchored 多模态 OPD 目标"),
     "2602.12275": ("opcd", "OPCD 在学生轨迹上以 reverse KL 内化教师上下文中的经验与系统行为"),
     "2607.28022": ("flux-opd", "Flux-OPD 以 context-free teacher 为锚，注入演化上下文的差分信号并按教师冲突自适应降权"),
     "2402.01306": ("kto", "KTO 使用前景理论式效用优化单条 desirable/undesirable 反馈"),
@@ -100,6 +102,7 @@ AGENT_MUTATIONS = {
     "2607.25308": ("critic:cast", "CAST 用 solver 状态价值差为每个交互 turn 分配信用"),
     "2607.27973": ("critic:tapo", "TAPO 交替执行策略优化与 action-conditioned next-observation transition supervision"),
     "2607.28076": ("critic:grsd", "GRSD 对照同组成功/失败轨迹反思，由 stop-gradient self-teacher 形成能力匹配的 turn-level guidance"),
+    "2607.28609": ("critic:os-shepherd", "按 success/fail 双类召回、balanced accuracy 与 leniency 检查评估电脑操作轨迹"),
     "2505.10978": ("critic:gigpo", "GiGPO 联合完整轨迹组的 macro advantage 与共享状态 step group 的 micro advantage"),
     "2604.18401": ("critic:steppo", "StepPO 以环境 step 为 MDP 单位执行 GAE，并聚合 step 内 token ratio 后裁剪"),
     "2607.05804": ("planner:turn-opd", "TurnOPD 联合控制 rollout 深度与 turn-normalized 蒸馏权重"),

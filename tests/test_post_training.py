@@ -20,6 +20,7 @@ from auto_research.post_training.rollout_correction import (
         "slic-hf", "steerlm", "spin",
         "ripo", "tis", "icepop", "online-icepop", "kpop", "gppo",
         "dr-grpo", "armor", "reinforce-plus", "taco", "chord", "vapo",
+        "vad",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -130,6 +131,20 @@ def test_classic_on_policy_distillation_mechanisms_are_observable(
                 "evolving_context_teachers",
                 "context_conflict_jsd",
                 "conflict_weighted_correction",
+            ),
+        ),
+        (
+            "vad",
+            (
+                "teacher_views",
+                "visual_evidence_norm",
+                "teacher_correction_alignment",
+                "one_sided_projection",
+                "support_budget_share",
+                "refutation_budget_share",
+                "attribution_anchor_weight",
+                "primary_jsd",
+                "regularizer_jsd",
             ),
         ),
     ],
