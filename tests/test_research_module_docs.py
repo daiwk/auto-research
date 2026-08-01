@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import struct
 from pathlib import Path
 
@@ -270,7 +271,7 @@ def test_icepop_paper_metadata_uses_the_ring_1t_report():
 def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
     for module, methods in MODULES.items():
         overview = (ROOT / "docs" / module / "README.md").read_text(encoding="utf-8")
-        for dimension in ("institution", "topic", "year"):
+        for dimension in ("first-author", "topic", "year"):
             relative = f"catalog/by-{dimension}.md"
             assert f"({relative})" in overview
             catalog = (ROOT / "docs" / module / relative).read_text(encoding="utf-8")
@@ -290,6 +291,21 @@ def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
                 assert len(summary) >= 35, (
                     f"{module}/{dimension} has a thin method summary: {entry}"
                 )
+
+
+def test_first_author_catalogs_are_flat_and_newest_first():
+    for module, methods in MODULES.items():
+        text = (
+            ROOT / "docs" / module / "catalog" / "by-first-author.md"
+        ).read_text(encoding="utf-8")
+        assert "按一作" in text
+        assert "不再按机构拆成大量零散小节" in text
+        assert "## " not in text
+        entries = [line for line in text.splitlines() if line.startswith("- ")]
+        assert len(entries) == len(methods)
+        dates = [re.search(r"^- (\d{4}-\d{2}-\d{2})", line).group(1) for line in entries]
+        assert dates == sorted(dates, reverse=True)
+        assert all(re.search(r"· \*\*[^*]+\*\* · \[", line) for line in entries)
 
 
 def test_topic_catalogs_use_a_compact_two_level_taxonomy():

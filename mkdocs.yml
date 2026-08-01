@@ -24,7 +24,7 @@ nav:
       - 纯 LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md
-          - 按公司 / 机构 / 学校: post-training/catalog/by-institution.md
+          - 按一作: post-training/catalog/by-first-author.md
           - 按主题: post-training/catalog/by-topic.md
           - 按年份: post-training/catalog/by-year.md
           - 论文谱系与缺口: post-training/lineage.md
@@ -32,7 +32,7 @@ nav:
       - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md
-          - 按公司 / 机构 / 学校: agent-research/catalog/by-institution.md
+          - 按一作: agent-research/catalog/by-first-author.md
           - 按主题: agent-research/catalog/by-topic.md
           - 按年份: agent-research/catalog/by-year.md
           - 论文谱系与缺口: agent-research/lineage.md

@@ -16,9 +16,9 @@ ROW = re.compile(
 )
 BACKGROUND_HEADING = "### 背景与主要改动"
 BROWSE_INTROS = {
-    "institution": (
-        "每篇论文独占一行；按主要公司、机构或学校分组，并保留首次公开年月和"
-        "一至两句中文方法简介。"
+    "first-author": (
+        "按首次公开日期倒序排列，每篇论文显示一作，并附一至两句中文方法简介；"
+        "不再按机构拆成大量零散小节。"
     ),
     "topic": (
         "采用“研究方向 → 方法簇 → 论文”的两级结构。一级用于快速定位研究范式，"
@@ -27,6 +27,50 @@ BROWSE_INTROS = {
     "year": (
         "按首次公开年份浏览；同年论文按日期倒序排列，每篇独占一行并附主要方法简介。"
     ),
+}
+
+
+# arXiv/API 或原始资料页核对后固化的一作。站点构建不依赖网络；新增论文必须先
+# 补这里，避免把公司/机构误当作者，也避免 GitHub Actions 生成结果漂移。
+FIRST_AUTHORS = {
+    "post-training": {
+        "ppo-rlhf": "Long Ouyang", "constitutional-ai": "Yuntao Bai",
+        "rrhf": "Zheng Yuan", "raft": "Hanze Dong", "slic-hf": "Yao Zhao",
+        "dpo": "Rafael Rafailov", "minillm": "Yuxian Gu",
+        "gkd": "Rishabh Agarwal", "steerlm": "Yi Dong", "remax": "Ziniu Li",
+        "ipo": "Mohammad Gheshlaghi Azar", "spin": "Zixiang Chen",
+        "kto": "Kawin Ethayarajh", "grpo": "Zhihong Shao",
+        "rloo": "Arash Ahmadian", "orpo": "Jiwoo Hong", "simpo": "Yu Meng",
+        "reinforce-plus": "Jian Hu", "dapo": "Qiying Yu",
+        "dr-grpo": "Zichen Liu", "vapo": "Yu Yue", "gspo": "Chujie Zheng",
+        "gppo": "Zhenpeng Su", "chord": "Wenhao Zhang", "icepop": "Ling Team",
+        "opsd": "Siyan Zhao", "luspo": "Fanfan Liu", "opcd": "Tianzhu Ye",
+        "lightning-opd": "Yecheng Wu", "gprl": "Muhammad Umer",
+        "kpop": "Ang Li", "coba-rl": "Pengxiang Cai", "taco": "Xiuyi Lou",
+        "ripo": "Zhicheng Cai", "armor": "Kexin Huang", "tcr": "Xubo Liu",
+        "cort": "Bo-Wen Zhang", "relay-opd": "Haolei Xu", "reco-grpo": "Junoh Park",
+        "flux-opd": "Yuran Wang", "beta-opsd": "Jiawei Xu",
+        "online-icepop": "Jian Hu", "tis": "Feng Yao",
+    },
+    "agent-research": {
+        "webgpt": "Reiichiro Nakano", "saycan": "Michael Ahn",
+        "mrkl": "Ehud Karpas", "react": "Shunyu Yao", "pal": "Luyu Gao",
+        "toolformer": "Timo Schick", "art": "Bhargavi Paranjape",
+        "reflexion": "Noah Shinn", "hugginggpt": "Yongliang Shen",
+        "self-refine": "Aman Madaan", "generative-agents": "Joon Sung Park",
+        "tree-of-thoughts": "Shunyu Yao", "critic": "Zhibin Gou",
+        "voyager": "Guanzhi Wang", "rewoo": "Binfeng Xu", "metagpt": "Sirui Hong",
+        "autogen": "Qingyun Wu", "lats": "Andy Zhou", "memgpt": "Charles Packer",
+        "swe-agent": "John Yang", "openhands": "Xingyao Wang", "loop": "Kevin Chen",
+        "search-r1": "Bowen Jin", "ragen": "Zihan Wang", "gigpo": "Lang Feng",
+        "webagent-r1": "Zhepei Wei", "memtool": "Elias Lumer",
+        "agent-lightning": "Xufang Luo", "mua-rl": "Weikang Zhao",
+        "legomem": "Dongge Han", "pearl": "Qihao Wang", "u-mem": "Xinle Wu",
+        "steppo": "Daoyu Wang", "turn-opd": "Yuhang Zhou", "seed": "Jinyang Wu",
+        "cast": "Yu Wang", "hiskill": "Yu Hao", "unimem": "Siyu Xia",
+        "skillrise": "Zhiyuan Yao", "cam-df": "Yicheng Feng", "tapo": "Cong Li",
+        "grsd": "Binbin Zheng",
+    },
 }
 
 
@@ -174,6 +218,12 @@ def read_rows(module: str) -> list[dict[str, str]]:
         row["institution"] = (
             row["info"][: date.start()].rstrip("，, ") if date else row["info"]
         )
+        try:
+            row["first-author"] = FIRST_AUTHORS[module][row["key"]]
+        except KeyError as error:
+            raise ValueError(
+                f"{module}/{row['key']} missing verified first-author metadata"
+            ) from error
         row["summary"] = read_method_summary(module, row["link"])
         rows.append(row)
     return rows
@@ -182,6 +232,17 @@ def read_rows(module: str) -> list[dict[str, str]]:
 def render(module: str, dimension: str, title: str) -> str:
     if dimension == "topic":
         return render_topic_hierarchy(module, title)
+    if dimension == "first-author":
+        rows = _date_descending(read_rows(module))
+        lines = [f"# {title}", "", BROWSE_INTROS[dimension], ""]
+        for row in rows:
+            lines.append(
+                f"- {row['date']} · **{row['first-author']}** · "
+                f"[{row['title']}](../{row['link']})（`{row['key']}`）："
+                f"{row['summary']}"
+            )
+        lines.append("")
+        return "\n".join(lines)
 
     groups: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in read_rows(module):
@@ -194,20 +255,11 @@ def render(module: str, dimension: str, title: str) -> str:
     ]
     for group in sorted(groups, reverse=dimension == "year"):
         lines.extend([f"## {group}", ""])
-        if dimension in {"institution", "year"}:
-            ordered = sorted(
-                groups[group],
-                key=lambda item: (item["date"], item["title"].lower()),
-                reverse=True,
-            )
-        else:
-            ordered = sorted(
-                groups[group], key=lambda item: item["title"].lower()
-            )
+        ordered = _date_descending(groups[group])
         for row in ordered:
             date_prefix = (
                 f"{row['date'][:7]} · "
-                if dimension in {"institution", "year"}
+                if dimension == "year"
                 else ""
             )
             lines.append(
@@ -235,13 +287,67 @@ def render_topic_hierarchy(module: str, title: str) -> str:
         lines.extend([f"## {domain}", ""])
         for cluster, rows in clusters.items():
             lines.extend([f"### {cluster}", ""])
-            for row in sorted(rows, key=lambda item: item["title"].lower()):
+            for row in _date_descending(rows):
                 lines.append(
                     f"- [{row['title']}](../{row['link']})"
                     f"（`{row['key']}`）：{row['summary']}"
                 )
             lines.append("")
     return "\n".join(lines)
+
+
+def _date_descending(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Newest first, with title ascending as a deterministic same-day tie-break."""
+
+    ordered = sorted(rows, key=lambda item: item["title"].lower())
+    return sorted(ordered, key=lambda item: item["date"], reverse=True)
+
+
+def _paper_date(link: str) -> str:
+    page = DOCS / "reproductions" / link.removeprefix("../")
+    text = page.read_text(encoding="utf-8")
+    match = re.search(r"^\| 首次公开日期 \| (\d{4}-\d{2}-\d{2})", text, re.MULTILINE)
+    if not match:
+        raise ValueError(f"{page} missing exact first-publication date")
+    return match.group(1)
+
+
+def sort_reproduction_catalog(path: Path) -> None:
+    """Sort paper bullets newest-first inside every company/topic/month section."""
+
+    lines = path.read_text(encoding="utf-8").splitlines()
+    output: list[str] = []
+    section: list[str] = []
+
+    def flush() -> None:
+        if not section:
+            return
+        papers = [line for line in section if line.startswith("- ") and "](../" in line]
+        if not papers:
+            output.extend(section)
+            section.clear()
+            return
+        other = [line for line in section if line not in papers and line.strip()]
+        output.extend(other)
+        if other:
+            output.append("")
+        papers.sort(key=lambda line: re.sub(r"^.*\[([^]]+)\].*$", r"\1", line).lower())
+        papers.sort(
+            key=lambda line: _paper_date(re.search(r"\]\((\.\./[^)]+)\)", line).group(1)),
+            reverse=True,
+        )
+        output.extend(papers)
+        output.append("")
+        section.clear()
+
+    for line in lines:
+        if line.startswith("##"):
+            flush()
+            output.append(line)
+        else:
+            section.append(line)
+    flush()
+    path.write_text("\n".join(output).rstrip() + "\n", encoding="utf-8")
 
 
 def main() -> None:
@@ -252,13 +358,15 @@ def main() -> None:
         target = DOCS / module / "catalog"
         target.mkdir(exist_ok=True)
         for dimension, title in (
-            ("institution", f"{label}：按公司 / 机构 / 学校"),
+            ("first-author", f"{label}：按一作"),
             ("topic", f"{label}：按主题"),
             ("year", f"{label}：按年份"),
         ):
             (target / f"by-{dimension}.md").write_text(
                 render(module, dimension, title), encoding="utf-8"
             )
+    for name in ("by-company.md", "by-topic.md", "by-month.md"):
+        sort_reproduction_catalog(DOCS / "reproductions" / "catalog" / name)
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@
 
 - [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态和待接入接口。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
-- 分类浏览：[按公司 / 机构 / 学校](catalog/by-institution.md) ·
+- 分类浏览：[按一作](catalog/by-first-author.md) ·
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
 - [论文谱系与缺口](lineage.md)：系统审计经典主干、最新覆盖和真实环境前置条件。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
