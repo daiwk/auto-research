@@ -76,6 +76,38 @@ def test_catalog_entries_are_one_paper_per_line_with_chinese_summaries():
             )
 
 
+def test_catalog_sections_are_sorted_by_first_publication_date_descending():
+    dates = {}
+    for readme in DOCS.glob("*/README.md"):
+        if readme.parent.name == "catalog":
+            continue
+        match = re.search(
+            r"^\| 首次公开日期 \| (\d{4}-\d{2}-\d{2})",
+            readme.read_text(encoding="utf-8"),
+            re.MULTILINE,
+        )
+        assert match, f"{readme.relative_to(ROOT)} missing exact date"
+        dates[readme.parent.name] = match.group(1)
+
+    for name in ("by-company.md", "by-topic.md", "by-month.md"):
+        sections: list[list[str]] = []
+        current: list[str] = []
+        for line in (DOCS / "catalog" / name).read_text(encoding="utf-8").splitlines():
+            is_boundary = line.startswith("## ") if name != "by-topic.md" else line.startswith("##")
+            if is_boundary:
+                if current:
+                    sections.append(current)
+                current = []
+            match = re.search(r"\]\(\.\./([^/]+)/README\.md\)", line)
+            if match:
+                current.append(dates[match.group(1)])
+        if current:
+            sections.append(current)
+        assert sections
+        for section in sections:
+            assert section == sorted(section, reverse=True), f"{name} is not newest-first"
+
+
 def test_catalogs_use_semantic_sections_instead_of_release_batch_names():
     catalog_dir = DOCS / "catalog"
     expected_sections = {
