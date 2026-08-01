@@ -47,6 +47,7 @@
 - [M6-Rec](../2205.08084-m6rec/README.md)：把多种推荐任务统一成自然语言形式，并以 option-adapter 轻量适配预训练模型。
 
 ### 纯 LLM：架构、预训练与条件记忆
+- [ReToken](../2607.28627-retoken/README.md)：训练单个 retrieval target 和 projection，直接在 value cache 上执行 query-dependent Top-K 检索；本地以因果文本 cache 验证该可训练稀疏机制。
 - [WIDE](../2607.28418-wide/README.md)：对每个 token 分别路由 attention head group 和 FFN channel group，以可学习 Top-K 动态宽度实现固定稀疏预算。
 - [Penelope](../2607.25915-penelope/README.md)：只重入局部 latent block，并以共享权重和时间门控逐步精炼隐藏状态。
 - [DataOrchestra](../2607.24717-data-orchestra/README.md)：训练 per-example orchestrator 为每个预训练 chunk 选择跳过、保留或多阶段清洗，避免固定数据处理策略的过度计算和过度改写。
@@ -194,6 +195,7 @@
 ## Serving 与研究基础设施
 
 ### Serving / efficiency
+- [ReToken](../2607.28627-retoken/README.md)：复用一次预填充的 value cache 并按查询稀疏选取 token，避免“外部检索后再编码”的重复视觉计算。
 - [ROCS](../2607.27744-rocs/README.md)：请求表征只计算一次，候选相关交互延后并批量执行；本地同时报告排序质量和进程内候选评分吞吐。
 - [WIDE](../2607.28418-wide/README.md)：将 token 级动态宽度算子接入 micro-LLM evolve；本地 dense PyTorch 只验证选择机制，不冒充论文融合稀疏 kernel 的加速。
 - [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：逐样本用 gzip 构造零参数 block mask，减少无关长程 attention edges；本地实现验证 mask，但未提供稀疏 kernel 加速。

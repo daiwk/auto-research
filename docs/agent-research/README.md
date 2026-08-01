@@ -62,6 +62,7 @@
 - [SkillRise](2607.26784-skillrise/README.md)：跨相关任务交替求解与维护技能文档。
 - [TAPO](2607.27973-tapo/README.md)：同一 rollout 交替优化 policy 与 action-conditioned transition prediction。
 - [GRSD](2607.28076-grsd/README.md)：对照同组成功/失败反思生成 turn-level privileged guidance。
+- [OSReward / OS-Shepherd](2607.28609-osreward/README.md)：跨平台 CUA reward 的双类召回、balanced accuracy 与 leniency 审计。
 
 ## 研究闭环
 
@@ -104,6 +105,7 @@ flowchart LR
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | step critic、GAE 与 within-step ratio aggregation | PlanBench mini | 机制复现 |
 | Agent transition RL | [TAPO](2607.27973-tapo/README.md) | policy objective + next-observation supervision | PlanBench mini | 机制复现 |
 | Group-reflective RL | [GRSD](2607.28076-grsd/README.md) | 成败组反思、stop-gradient guidance 与 turn credit | PlanBench mini | 机制复现 |
+| CUA Reward 评测 | [OSReward / OS-Shepherd](2607.28609-osreward/README.md) | success/fail recall、balanced accuracy、leniency | OSReward mini | 评测协议复现 |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | 定位、编辑、回归测试 | SWE-style local code | 真实执行 |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | 编辑器/终端 event stream | SWE-style local code | 真实执行 |
 | 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | router、神经/符号专家、结果汇总 | ScaleMCP mini | 机制复现 |

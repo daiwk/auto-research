@@ -190,6 +190,7 @@
 - 2026-06 · [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：轻量 index branch 为每个 GQA 组选择 top-k 历史块，主分支只对命中 token 做精确注意力。
 
 ## 学术与经典基线
+- 2026-07 · [ReToken](../2607.28627-retoken/README.md)：UIUC、Microsoft Research 与 Google DeepMind 用单个 retrieval target 直接检索预填充 value cache，避免外部检索后重新编码视觉输入。
 - 2026-07 · [WIDE](../2607.28418-wide/README.md)：EIT-NLP 与 LMU Munich 用 token 级 Top-K router 动态激活 attention head 和 FFN channel group，在固定稀疏度下缩减推理计算。
 - 2026-07 · [Penelope](../2607.25915-penelope/README.md)：在局部 decoder 边界执行共享权重潜在递归，提高结构化推理计算效率。
 - 2026-07 · [DataOrchestra](../2607.24717-data-orchestra/README.md)：复旦、上海交大与 SII-GAIR 训练逐样本 orchestrator，按需选择 Drop、Untouch 或多阶段 Clean 预训练数据处理计划。

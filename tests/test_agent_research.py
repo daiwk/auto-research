@@ -59,6 +59,21 @@ def test_latest_agentic_rl_mechanisms_are_observable(
         assert result.diagnostics[diagnostic] > 0
 
 
+def test_osreward_reports_both_class_recalls_and_leniency(tmp_path: Path):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method="os-shepherd",
+            benchmark="osreward-mini",
+            episodes=24,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["balanced_accuracy"] == 1.0
+    assert result.metrics["success_recall"] == 1.0
+    assert result.metrics["fail_recall"] == 1.0
+    assert result.metrics["leniency_rate"] == 0.0
+
+
 def test_legomem_reuses_procedures(tmp_path: Path):
     result, _ = AgentResearchRunner(
         AgentResearchConfig(

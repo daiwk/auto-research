@@ -61,6 +61,7 @@ class PostTrainingRunner:
             "taco": state.variant_updates,
             "chord": state.variant_updates,
             "vapo": state.variant_updates,
+            "vad": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

@@ -51,6 +51,7 @@ MODULES = {
         "opsd": "2601.18734-opsd",
         "opcd": "2602.12275-opcd",
         "beta-opsd": "2607.28582-beta-opsd",
+        "vad": "2607.28590-vad",
         "flux-opd": "2607.28022-flux-opd",
     },
     "agent-research": {
@@ -96,6 +97,7 @@ MODULES = {
         "skillrise": "2607.26784-skillrise",
         "tapo": "2607.27973-tapo",
         "grsd": "2607.28076-grsd",
+        "os-shepherd": "2607.28609-osreward",
     },
 }
 

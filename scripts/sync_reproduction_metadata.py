@@ -156,6 +156,7 @@ PUBLISHED_DATES = {
     "2603.26380": "2026-03-27",
     "2604.19269": "2026-04-21",
     "2605.14434": "2026-05-14",
+    "2607.28627": "2026-07-30",
 }
 
 # Older adapters predate the catalog metadata contract. Keep verified affiliations here

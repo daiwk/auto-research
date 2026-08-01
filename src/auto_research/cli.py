@@ -177,7 +177,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--benchmark",
         choices=[
             "evomem-mini", "planbench-mini", "scalemcp-mini",
-            "swebench-local",
+            "swebench-local", "osreward-mini",
         ],
         default="evomem-mini",
     )

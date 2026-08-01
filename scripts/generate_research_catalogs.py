@@ -51,6 +51,7 @@ FIRST_AUTHORS = {
         "cort": "Bo-Wen Zhang", "relay-opd": "Haolei Xu", "reco-grpo": "Junoh Park",
         "flux-opd": "Yuran Wang", "beta-opsd": "Jiawei Xu",
         "online-icepop": "Jian Hu", "tis": "Feng Yao",
+        "vad": "Kangning Zhang",
     },
     "agent-research": {
         "webgpt": "Reiichiro Nakano", "saycan": "Michael Ahn",
@@ -70,6 +71,7 @@ FIRST_AUTHORS = {
         "cast": "Yu Wang", "hiskill": "Yu Hao", "unimem": "Siyu Xia",
         "skillrise": "Zhiyuan Yao", "cam-df": "Yicheng Feng", "tapo": "Cong Li",
         "grsd": "Binbin Zheng",
+        "os-shepherd": "Qiushi Sun",
     },
 }
 
@@ -110,6 +112,7 @@ TOPIC_HIERARCHY = {
         "On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "经典 On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "On-policy self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "多模态证据归因蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "Context distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "Reverse-KL distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "Reference anchor": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
@@ -160,6 +163,7 @@ TOPIC_HIERARCHY = {
         "软件工程 ACI": ("多 Agent 与软件工程", "角色协作与软件开发"),
         "通用软件 Agent": ("多 Agent 与软件工程", "角色协作与软件开发"),
         "成本感知工具停止": ("多 Agent 与软件工程", "运行成本与工具暴露控制"),
+        "CUA Reward 评测": ("工具调用与环境执行", "电脑操作与 reward 评测"),
     },
 }
 

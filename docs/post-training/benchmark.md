@@ -48,9 +48,13 @@ generation accuracy 不能与 L1 candidate accuracy 混比，也不能等同于 
 | SLiC-HF | 0.7812 | 0.8074 | 0.2512 |
 | SteerLM | 0.8516 | 0.8654 | 0.9112 |
 | SPIN | **0.8594** | **0.8691** | 0.1294 |
+| VAD（120-step / 256 examples） | 0.7969 | 0.8153 | 0.0092 |
 
 GPRL 的目标是开放式多维偏好，在单一 exact-answer 指标上落后并不能推翻论文结论；
 这项结果说明它需要进一步接入 AlpacaEval 类多维 judge，而不是隐藏不利结果。
+VAD 使用本批快速回归口径（256/64 train/validation examples、120 steps），不与本表
+其余 300-step 结果作排名比较；结果验证 evidence intervention、支持/反驳预算、单侧投影与 target reconstruction；
+过程质量轴并非真实视觉输入，因此不能与论文六个视觉 benchmark 横比。
 
 稳定数据：
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。

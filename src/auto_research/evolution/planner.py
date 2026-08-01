@@ -71,7 +71,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "engram", "looped_latent_attention", "gaugequant", "penelope",
             "switch_transformer", "mamba", "switch_attention",
             "native_sparse_attention", "gated_attention",
-            "nsa_gated_attention", "wide_dynamic_width", "optimizer:muon",
+            "nsa_gated_attention", "wide_dynamic_width", "retoken", "optimizer:muon",
         ]
         text = direction.lower().replace("-", "")
         priority_terms = {
@@ -97,6 +97,10 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "optimizer:muon": ("muon", "正交优化器"),
             "wide_dynamic_width": (
                 "wide", "dynamic width", "token-level width", "动态宽度", "宽度剪枝",
+            ),
+            "retoken": (
+                "retoken", "retrieval token", "value cache retrieval",
+                "检索 token", "视觉缓存检索",
             ),
         }
         for architecture, terms in priority_terms.items():

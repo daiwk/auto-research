@@ -50,6 +50,7 @@ PAPERS = {
     "taco": ("TACO", "https://arxiv.org/abs/2607.07976"),
     "chord": ("CHORD", "https://arxiv.org/abs/2508.11408"),
     "vapo": ("VAPO", "https://arxiv.org/abs/2504.05118"),
+    "vad": ("VAD", "https://arxiv.org/abs/2607.28590"),
 }
 
 
