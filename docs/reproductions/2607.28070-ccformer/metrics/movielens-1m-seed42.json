@@ -1,0 +1,8 @@
+{
+  "seed": 42,
+  "dataset": "MovieLens-1M (240 users / 400 items)",
+  "baseline": {"hit_at_10": 0.0208333333, "ndcg_at_10": 0.0109175712, "encoded_sequence_tokens": 24},
+  "method": {"hit_at_10": 0.0291666667, "ndcg_at_10": 0.0133673397, "encoded_sequence_tokens": 12},
+  "relative_ndcg_percent": 22.4387682,
+  "fidelity": "core mechanism"
+}

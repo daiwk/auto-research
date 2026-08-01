@@ -31,7 +31,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "looped_latent_attention", "gaugequant", "penelope",
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
-        "nsa_gated_attention",
+        "nsa_gated_attention", "wide_dynamic_width",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
@@ -40,7 +40,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "adadsf", "engram", "looped_latent_attention", "gaugequant", "penelope",
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
-        "nsa_gated_attention",
+        "nsa_gated_attention", "wide_dynamic_width",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -74,6 +74,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 nn.Linear(config.dimensions, config.heads)
                 if architecture == "gated_attention" else None
             )
+            self.width_router = (
+                nn.Linear(config.dimensions, config.heads, bias=False)
+                if architecture == "wide_dynamic_width" else None
+            )
+            self.last_active_head_fraction = 1.0
             qkv_width = config.heads * head_dim + 2 * kv_heads * head_dim
             self.qkv_conv = (
                 nn.Conv1d(qkv_width, qkv_width, kernel_size=3, groups=qkv_width, bias=True)
@@ -109,6 +114,15 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             mixed = torch.nn.functional.scaled_dot_product_attention(
                 q, k, v, is_causal=True
             )
+            if self.width_router is not None:
+                scores = self.width_router(values)
+                keep = max(1, config.heads // 2)
+                threshold = scores.topk(keep, dim=-1).values[..., -1:]
+                hard = (scores >= threshold).to(scores.dtype)
+                soft = torch.sigmoid(scores)
+                mask = hard + soft - soft.detach()
+                mixed = mixed * mask.transpose(1, 2).unsqueeze(-1)
+                self.last_active_head_fraction = float(hard.mean().detach().cpu())
             if self.output_gate is not None:
                 gate = torch.sigmoid(
                     self.output_gate(values).transpose(1, 2).unsqueeze(-1)
@@ -264,6 +278,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 self.up = nn.Linear(config.dimensions, width, bias=False)
                 self.gate = nn.Linear(config.dimensions, width, bias=False)
                 self.down = nn.Linear(width, config.dimensions, bias=False)
+                self.width_router = (
+                    nn.Linear(config.dimensions, 8, bias=False)
+                    if architecture == "wide_dynamic_width" else None
+                )
+                self.last_active_channel_fraction = 1.0
             else:
                 self.network = nn.Sequential(
                     nn.Linear(config.dimensions, width), nn.GELU(),
@@ -288,7 +307,19 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 return gate * mixed
             if hasattr(self, "network"):
                 return self.network(values)
-            return self.down(torch.nn.functional.silu(self.gate(values)) * self.up(values))
+            hidden = torch.nn.functional.silu(self.gate(values)) * self.up(values)
+            if self.width_router is not None:
+                scores = self.width_router(values)
+                threshold = scores.topk(4, dim=-1).values[..., -1:]
+                hard = (scores >= threshold).to(scores.dtype)
+                soft = torch.sigmoid(scores)
+                group_mask = hard + soft - soft.detach()
+                channel_mask = group_mask.repeat_interleave(
+                    hidden.shape[-1] // group_mask.shape[-1], dim=-1
+                )
+                hidden = hidden * channel_mask
+                self.last_active_channel_fraction = float(hard.mean().detach().cpu())
+            return self.down(hidden)
 
     class Block(nn.Module):
         def __init__(self):
@@ -721,6 +752,17 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                         block.attention.last_gate_below_half
                         for block in self.blocks
                     ) / len(self.blocks),
+                }
+            if architecture == "wide_dynamic_width":
+                return {
+                    "routing_granularity": "token-head-and-ffn-group",
+                    "active_attention_head_fraction": sum(
+                        block.attention.last_active_head_fraction for block in self.blocks
+                    ) / len(self.blocks),
+                    "active_ffn_channel_fraction": sum(
+                        block.ffn.last_active_channel_fraction for block in self.blocks
+                    ) / len(self.blocks),
+                    "target_sparsity": 0.5,
                 }
             return {}
 

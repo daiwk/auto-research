@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "dataset": "WikiText-2",
+  "steps": 30,
+  "baseline": {"lm_loss": 5.7470526695, "perplexity": 313.265999887, "parameters": 139584},
+  "method": {"lm_loss": 5.7551166266, "perplexity": 315.80237634, "parameters": 141120, "active_attention_head_fraction": 0.5, "active_ffn_channel_fraction": 0.5},
+  "relative_perplexity_percent": 0.809655837,
+  "fidelity": "core mechanism; dense PyTorch kernel"
+}

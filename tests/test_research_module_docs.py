@@ -49,6 +49,8 @@ MODULES = {
         "minillm": "2306.08543-minillm",
         "opsd": "2601.18734-opsd",
         "opcd": "2602.12275-opcd",
+        "beta-opsd": "2607.28582-beta-opsd",
+        "flux-opd": "2607.28022-flux-opd",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -91,6 +93,8 @@ MODULES = {
         "mua-rl": "2508.18669-mua-rl",
         "cam-df": "2607.27083-cam-df",
         "skillrise": "2607.26784-skillrise",
+        "tapo": "2607.27973-tapo",
+        "grsd": "2607.28076-grsd",
     },
 }
 

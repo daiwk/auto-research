@@ -7,6 +7,7 @@
 
 ### LLM / Foundation model + Recommendation
 
+- [Open Web UFM](../2607.28019-open-web-ufm/README.md)：在开放网页行为上联合双裁剪对比学习与 next-item 目标预训练共享 user encoder，再迁移到广告 CTR 和访问率任务。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用行为推荐器产生 RAS reward 来优化多模态内容描述，但 serving 不读取用户行为。
 - [Melo](../2607.23718-melo/README.md)：将 LLM 音乐 Agent 与实体 grounding、检索校验和反思重试组合为生产 playlist 流程。
 - [MIM](../2502.00321-mim/README.md)：多模态内容预训练和内容兴趣感知 SFT 把协同偏好对齐到内容空间。
@@ -49,6 +50,7 @@
 
 ### 纯 LLM：架构、预训练与条件记忆
 
+- [WIDE](../2607.28418-wide/README.md)：对每个 token 分别路由 attention head group 和 FFN channel group，以可学习 Top-K 动态宽度实现固定稀疏预算。
 - [Penelope](../2607.25915-penelope/README.md)：只重入局部 latent block，并以共享权重和时间门控逐步精炼隐藏状态。
 - [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：并行学习压缩、query-selected fine block 与滑窗三路因果注意力，再用逐 query/head 门控融合。
 - [Gated Attention](../2505.06708-gated-attention/README.md)：在每个 head 的 SDPA 输出后加入 sigmoid gate，以轻量非线性缓解 attention sink 并改善训练稳定性。
@@ -114,6 +116,8 @@
 
 ### 排序网络与长序列
 
+- [CCFormer](../2607.28070-ccformer/README.md)：以字段分离的 ID/content 编码和门控融合增强冷内容泛化，再分层压缩远期 token、保留近期行为细节。
+- [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
 - [TWICE](../2607.25404-twice/README.md)：以点击/转化双时钟和单调 delay CDF 处理长期转化反馈未成熟问题。
 - [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：联合训练去偏与 serving 探索，专门改善新发行内容的曝光反馈闭环。
 - [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用多通道注意力和 multi-stage FFN 扩展特征交互模型容量。
@@ -205,6 +209,8 @@
 
 ### Serving / efficiency
 
+- [ROCS](../2607.27744-rocs/README.md)：请求表征只计算一次，候选相关交互延后并批量执行；本地同时报告排序质量和进程内候选评分吞吐。
+- [WIDE](../2607.28418-wide/README.md)：将 token 级动态宽度算子接入 micro-LLM evolve；本地 dense PyTorch 只验证选择机制，不冒充论文融合稀疏 kernel 的加速。
 - [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 兼容的前提下，以循环修正、跨塔同步和教师协同补充交互能力。
 
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：离线预计算 popularity-corrected PPR 并用 cluster index 压缩线上图召回。

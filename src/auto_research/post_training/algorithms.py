@@ -271,6 +271,30 @@ def update(
                 "jsd_beta": 0.5,
             }
         )
+    elif algorithm == "beta-opsd":
+        # beta-OPSD turns the implicit beta=1 anchor into a controllable
+        # policy-optimization path, then distils its closed-form solution.
+        privileged = 0.25 * probabilities.copy()
+        privileged[group.gold] += 0.75
+        beta = 0.35
+        target_logits = (
+            beta * np.log(reference + 1e-12)
+            + np.log(privileged + 1e-12)
+        ) / (1.0 + beta)
+        target = _softmax(target_logits)
+        returns = np.linspace(0.35, 1.0, len(target), dtype=np.float64)
+        target = target * returns
+        target /= target.sum()
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.online_teacher_calls += len(sampled)
+        diagnostics.update({
+            "beta_reference_anchor": beta,
+            "closed_form_geometric_target": 1.0,
+            "return_to_go_min": float(returns.min()),
+            "return_to_go_max": float(returns.max()),
+            "privileged_teacher_calls": float(len(sampled)),
+        })
     elif algorithm == "opcd":
         # OPCD distils a context-conditioned distribution along trajectories
         # sampled by the context-free student, using reverse KL to favour the
@@ -307,6 +331,34 @@ def update(
                 "experience_internalization_updates": 1.0,
             }
         )
+    elif algorithm == "flux-opd":
+        # Context-free cached teacher is the stable anchor. Two evolving
+        # contextual teachers contribute only their log-probability differences;
+        # disagreement attenuates the correction instead of moving the anchor.
+        anchor = state.teacher_cache[cache_index]
+        quality = _softmax(np.log(anchor + 1e-12) + group.rewards[:, 0])
+        process = _softmax(np.log(anchor + 1e-12) + group.rewards[:, 2])
+        corrections = 0.5 * (
+            np.log(quality + 1e-12) - np.log(anchor + 1e-12)
+            + np.log(process + 1e-12) - np.log(anchor + 1e-12)
+        )
+        midpoint = 0.5 * (quality + process)
+        conflict = 0.5 * np.sum(
+            quality * np.log((quality + 1e-12) / (midpoint + 1e-12))
+            + process * np.log((process + 1e-12) / (midpoint + 1e-12))
+        )
+        correction_weight = float(np.exp(-4.0 * conflict))
+        target = _softmax(np.log(anchor + 1e-12) + correction_weight * corrections)
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.online_teacher_calls += 2 * len(sampled)
+        diagnostics.update({
+            "context_free_anchor": 1.0,
+            "evolving_context_teachers": 2.0,
+            "context_conflict_jsd": float(conflict),
+            "conflict_weighted_correction": correction_weight,
+            "contextual_difference_signal_norm": float(np.linalg.norm(corrections)),
+        })
     elif algorithm == "lightning-opd":
         teacher = state.teacher_cache[cache_index]
         gradient = group.features.T @ (teacher - probabilities)

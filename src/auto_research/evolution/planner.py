@@ -60,6 +60,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "memory:voyager", "planner:autogen", "planner:pearl",
             "memory:hiskill", "memory:unimem",
             "tool:cam-df", "memory:skillrise",
+            "critic:tapo", "critic:grsd",
         ]
     if model == "micro-llm":
         values = [
@@ -70,7 +71,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "engram", "looped_latent_attention", "gaugequant", "penelope",
             "switch_transformer", "mamba", "switch_attention",
             "native_sparse_attention", "gated_attention",
-            "nsa_gated_attention", "optimizer:muon",
+            "nsa_gated_attention", "wide_dynamic_width", "optimizer:muon",
         ]
         text = direction.lower().replace("-", "")
         priority_terms = {
@@ -94,6 +95,9 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
                 "gated attention", "attention gate", "门控注意力",
             ),
             "optimizer:muon": ("muon", "正交优化器"),
+            "wide_dynamic_width": (
+                "wide", "dynamic width", "token-level width", "动态宽度", "宽度剪枝",
+            ),
         }
         for architecture, terms in priority_terms.items():
             if any(term in text for term in terms):

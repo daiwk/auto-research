@@ -33,6 +33,8 @@ PAPERS = {
     "art": ("ART", "https://arxiv.org/abs/2303.09014"),
     "seed": ("SEED", "https://arxiv.org/abs/2607.14777"),
     "cast": ("CAST", "https://arxiv.org/abs/2607.25308"),
+    "tapo": ("TAPO", "https://arxiv.org/abs/2607.27973"),
+    "grsd": ("Group-Reflective Self-Distillation", "https://arxiv.org/abs/2607.28076"),
     "turn-opd": ("Turn-Level OPD", "https://arxiv.org/abs/2607.05804"),
     "search-r1": ("Search-R1", "https://arxiv.org/abs/2503.09516"),
     "ragen": ("RAGEN / StarPO-S", "https://arxiv.org/abs/2504.20073"),

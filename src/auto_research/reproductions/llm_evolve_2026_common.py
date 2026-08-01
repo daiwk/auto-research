@@ -68,6 +68,12 @@ PAPERS = {
         "url": "https://arxiv.org/abs/2603.26380",
         "organization": "Peking University / Huawei Technologies",
     },
+    "wide": {
+        "arxiv_id": "2607.28418",
+        "title": "WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning",
+        "url": "https://arxiv.org/abs/2607.28418",
+        "organization": "EIT-NLP / LMU Munich",
+    },
 }
 
 

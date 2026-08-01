@@ -42,6 +42,7 @@ LLM_MUTATIONS = {
     "2502.11089": ("native_sparse_attention", "NSA 的压缩、选择与滑窗三分支可训练稀疏注意力"),
     "2505.06708": ("gated_attention", "在每个 attention head 的 SDPA 输出后加入 query-dependent sigmoid gate"),
     "2502.16982": ("optimizer:muon", "Muon 对隐藏矩阵梯度做 Newton-Schulz 正交化，其余参数使用 AdamW"),
+    "2607.28418": ("wide_dynamic_width", "WIDE 逐 token 选择 attention-head group 与 FFN-channel group，执行可学习动态宽度剪枝"),
 }
 
 POST_TRAINING_MUTATIONS = {
@@ -51,7 +52,9 @@ POST_TRAINING_MUTATIONS = {
     "2306.13649": ("gkd", "GKD 在学生自身生成轨迹上查询教师，并支持 on/off-policy 混合与可选散度"),
     "2306.08543": ("minillm", "MiniLLM 以 reverse KL、teacher-mixed sampling 和方差缩减蒸馏生成模型"),
     "2601.18734": ("opsd", "OPSD 让同一模型以普通/特权上下文分别作为学生和教师，并裁剪逐 token 散度"),
+    "2607.28582": ("beta-opsd", "β-OPSD 把 reference 与 privileged teacher 的几何插值闭式解转成低方差蒸馏目标，并加入 return-to-go credit"),
     "2602.12275": ("opcd", "OPCD 在学生轨迹上以 reverse KL 内化教师上下文中的经验与系统行为"),
+    "2607.28022": ("flux-opd", "Flux-OPD 以 context-free teacher 为锚，注入演化上下文的差分信号并按教师冲突自适应降权"),
     "2402.01306": ("kto", "KTO 使用前景理论式效用优化单条 desirable/undesirable 反馈"),
     "2402.03300": ("grpo", "GRPO 用组内相对奖励替代 learned critic"),
     "2607.26862": ("reco-grpo", "ReCo 以响应期望出现次数与 token Bernoulli 方差重加权 GRPO，抑制分布集中"),
@@ -95,6 +98,10 @@ AGENT_MUTATIONS = {
     "2602.22406": ("memory:u-mem", "U-Mem 主动判断知识缺口并获取、压缩长期记忆"),
     "2607.14777": ("critic:seed", "SEED 从轨迹抽取 hindsight skill，并把概率变化作为稠密 on-policy credit"),
     "2607.25308": ("critic:cast", "CAST 用 solver 状态价值差为每个交互 turn 分配信用"),
+    "2607.27973": ("critic:tapo", "TAPO 交替执行策略优化与 action-conditioned next-observation transition supervision"),
+    "2607.28076": ("critic:grsd", "GRSD 对照同组成功/失败轨迹反思，由 stop-gradient self-teacher 形成能力匹配的 turn-level guidance"),
+    "2505.10978": ("critic:gigpo", "GiGPO 联合完整轨迹组的 macro advantage 与共享状态 step group 的 micro advantage"),
+    "2604.18401": ("critic:steppo", "StepPO 以环境 step 为 MDP 单位执行 GAE，并聚合 step 内 token ratio 后裁剪"),
     "2607.05804": ("planner:turn-opd", "TurnOPD 联合控制 rollout 深度与 turn-normalized 蒸馏权重"),
     "2607.25853": ("memory:hiskill", "HiSkill 用分层 skill graph 连接高层经验与可执行 AtomicOp"),
     "2607.26017": ("memory:unimem", "UniMem 在 episodic retrieval 与可扩展 parametric memory 之间自路由和巩固"),

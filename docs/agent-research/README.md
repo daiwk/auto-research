@@ -60,6 +60,8 @@
 - [UniMem](2607.26017-unimem/README.md)：episodic/parametric memory 自路由与巩固。
 - [CAM-DF](2607.27083-cam-df/README.md)：把冻结工具排序转成成本感知的前缀停止决策。
 - [SkillRise](2607.26784-skillrise/README.md)：跨相关任务交替求解与维护技能文档。
+- [TAPO](2607.27973-tapo/README.md)：同一 rollout 交替优化 policy 与 action-conditioned transition prediction。
+- [GRSD](2607.28076-grsd/README.md)：对照同组成功/失败反思生成 turn-level privileged guidance。
 
 ## 研究闭环
 
@@ -100,6 +102,8 @@ flowchart LR
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | transition、credit update、策略复用 | SWE-style local code | 真实执行 |
 | Agent group credit | [GiGPO](2505.10978-gigpo/README.md) | macro trajectory advantage + micro step advantage | PlanBench mini | 机制复现 |
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | step critic、GAE 与 within-step ratio aggregation | PlanBench mini | 机制复现 |
+| Agent transition RL | [TAPO](2607.27973-tapo/README.md) | policy objective + next-observation supervision | PlanBench mini | 机制复现 |
+| Group-reflective RL | [GRSD](2607.28076-grsd/README.md) | 成败组反思、stop-gradient guidance 与 turn credit | PlanBench mini | 机制复现 |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | 定位、编辑、回归测试 | SWE-style local code | 真实执行 |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | 编辑器/终端 event stream | SWE-style local code | 真实执行 |
 | 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | router、神经/符号专家、结果汇总 | ScaleMCP mini | 机制复现 |
@@ -171,6 +175,8 @@ flowchart LR
 | SkillRise · PlanBench mini | 1.0000 | **0.6550** | 119 次跨任务 skill 复用；360 次下游 credit |
 | GiGPO · PlanBench mini | 1.0000 | 1.6500 | 36 个组内与 36 个组间 advantage |
 | StepPO · PlanBench mini | 1.0000 | 0.9000 | 36 次 step GAE 与 sequence-ratio 聚合 |
+| TAPO · PlanBench mini | 1.0000 | 1.0500 | 360 个 transition targets，accuracy 1.0000 |
+| GRSD · PlanBench mini | 1.0000 | 1.3500 | 120 反思组、360 次 guidance update |
 
 完整指标定义见[统一评测协议](benchmark.md)，稳定指标见
 [`agent-mini-suites-seed42.json`](../experiments/agent-mini-suites-seed42.json)。
@@ -178,6 +184,8 @@ flowchart LR
 [`classic-agent-mini-suites-seed42.json`](../experiments/classic-agent-mini-suites-seed42.json)。
 真实代码 sandbox 指标见
 [`agent-code-sandbox-seed42.json`](../experiments/agent-code-sandbox-seed42.json)。
+本轮 TAPO / GRSD 指标见
+[`tapo-grsd-planbench-seed42.json`](../experiments/tapo-grsd-planbench-seed42.json)。
 本批经典缺口指标见
 [`p0-missing-agent-mini-suites-seed42.json`](../experiments/p0-missing-agent-mini-suites-seed42.json)。
 P1 候选指标见

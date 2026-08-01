@@ -116,6 +116,7 @@
 
 ## Meta
 
+- 2026-07 · [ROCS](../2607.27744-rocs/README.md)：复用单次 request encoding，并在候选端执行轻量 late interaction，统一覆盖广告/自然流量的检索和排序 serving。
 - 2026-07 · [Mosaic](../2607.24015-mosaic/README.md)：将多类用户 embedding 组织为 specialist fleet，并通过 MRM 联合标签与 cosine redundancy loss 保持新增表征的独特信息。
 - 2026-07 · [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：UMD/Meta AI 在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
 - 2026-06 · [RankGraph-2](../2606.18379-rankgraph2/README.md)：用流行度校正边、离线多跳 PPR 和 residual cluster index 降低工业图召回的在线成本。
@@ -151,6 +152,7 @@
 
 ## Tencent / WeChat
 
+- 2026-07 · [CCFormer](../2607.28070-ccformer/README.md)：分离 ID 与内容字段后门控融合，并以分层压缩保留近期细节和远期兴趣，服务腾讯视频推荐。
 - 2026-07 · [ASARL](../2607.26593-asarl/README.md)：用 Reason/Critic/Gen 多 Agent 闭环整理社交搜索数据，再经 SCT、偏好优化和蒸馏得到在线相关性模型。
 - 2025-12 · [HiGR](../2512.24787-higr/README.md)：先生成层级 Semantic ID 簇再解码物品 slate，并以 ORPO 做列表偏好对齐。
 
@@ -194,6 +196,10 @@
 
 - 2026-07 · [Proximity Features](../2607.12246-proximity-features/README.md)：用自适应地理桶聚合群体行为，为无持久 user ID 的匿名用户提供隐私合规冷启动特征。
 
+## Teads
+
+- 2026-07 · [Open Web UFM](../2607.28019-open-web-ufm/README.md)：以开放网页用户行为做双裁剪对比预训练和 next-item 监督，再把共享 user encoder 迁移到广告 CTR 与访问预测。
+
 ## Independent researchers
 
 - 2026-07 · [Möbius RoPE](../2607.21405-mobius-rope/README.md)：在部分 attention heads 上使用反周期频率梯度，以固定上下文边界的负 holonomy 改善长距检索稳定性。
@@ -219,6 +225,7 @@
 
 ## 学术与经典基线
 
+- 2026-07 · [WIDE](../2607.28418-wide/README.md)：EIT-NLP 与 LMU Munich 用 token 级 Top-K router 动态激活 attention head 和 FFN channel group，在固定稀疏度下缩减推理计算。
 - 2026-07 · [Penelope](../2607.25915-penelope/README.md)：在局部 decoder 边界执行共享权重潜在递归，提高结构化推理计算效率。
 - 2025-02 · [Muon](../2502.16982-muon/README.md)：Moonshot AI 与 UCLA 对隐藏矩阵梯度做 Newton–Schulz 正交化，并为大规模 LLM 加入 weight decay 和 shape-aware scaling。
 - 2026-07 · [DataOrchestra](../2607.24717-data-orchestra/README.md)：复旦、上海交大与 SII-GAIR 训练逐样本 orchestrator，按需选择 Drop、Untouch 或多阶段 Clean 预训练数据处理计划。

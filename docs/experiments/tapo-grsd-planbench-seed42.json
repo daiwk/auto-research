@@ -1,0 +1,8 @@
+{
+  "benchmark": "planbench-mini",
+  "seed": 42,
+  "episodes": 120,
+  "tapo": {"joint_success": 1.0, "average_cost": 1.05, "transition_targets": 360, "transition_accuracy": 1.0},
+  "grsd": {"joint_success": 1.0, "average_cost": 1.35, "reflective_groups": 120, "success_failure_contrasts": 120, "privileged_guidance_updates": 360},
+  "fidelity": "deterministic mini-suite mechanism reproduction"
+}

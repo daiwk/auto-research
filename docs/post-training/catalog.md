@@ -31,6 +31,8 @@
 | Reverse-KL distillation | [MiniLLM](2306.08543-minillm/README.md) | Tsinghua University / Microsoft Research，2023-06-14 | [已开源](https://github.com/microsoft/LMOps/tree/main/minillm) | `minillm` |
 | On-policy self-distillation | [OPSD](2601.18734-opsd/README.md) | UCLA / HKU / Meta Superintelligence Labs，2026-01-26 | [已开源](https://github.com/siyan-zhao/OPSD) | `opsd` |
 | Context distillation | [OPCD](2602.12275-opcd/README.md) | Microsoft Research，2026-02-12 | [已开源](https://github.com/microsoft/LMOps/tree/main/opcd) | `opcd` |
+| On-policy self-distillation | [β-OPSD](2607.28582-beta-opsd/README.md) | University of Maryland，2026-07-30 | 未发现官方代码 | `beta-opsd` |
+| Context distillation | [Flux-OPD](2607.28022-flux-opd/README.md) | Peking University / Kling Team / Tsinghua / SJTU，2026-07-30 | 未发现官方代码 | `flux-opd` |
 | 长推理 RL | [DAPO](2503.14476-dapo/README.md) | ByteDance Seed / Tsinghua AIR，2025-03-18 | [已开源](https://github.com/BytedTsinghua-SIA/DAPO) | `dapo` |
 | 稳定序列 RL | [GSPO](2507.18071-gspo/README.md) | Alibaba Qwen Team，2025-07-24 | 原论文无独立仓库；[ROLL 后续实现](https://alibaba.github.io/ROLL/docs/User%20Guides/Algorithms/GSPO/) | `gspo` |
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab / Jet AI，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |

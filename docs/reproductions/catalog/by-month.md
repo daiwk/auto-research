@@ -4,6 +4,10 @@
 
 ## 2026-07
 
+- [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。
+- [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。
+- [ROCS](../2607.27744-rocs/README.md)：Meta 将请求侧特征只编码一次，把候选相关交互延后到批量评分阶段，以统一服务检索和排序并提升 QPS。
+- [WIDE](../2607.28418-wide/README.md)：按 token 动态选择 attention head group 与 FFN channel group，在固定 50% 激活预算下学习宽度稀疏路由。
 - [ASARL](../2607.26593-asarl/README.md)：以 ReasonAgent、CriticAgent、GenAgent 闭环整理 QQ 社交搜索数据，再经 SCT、PGO 和 Social Distillation 服务在线模型。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把目标行为写入生成 decoder prefix，并用未来交互 privileged teacher 和熵路由蒸馏内化判别能力。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用冻结推荐双塔的目标/非目标亲和力差训练内容描述，并保持线上 content-only serving。

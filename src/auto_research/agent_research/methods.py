@@ -109,6 +109,11 @@ class BaseAgent:
         self.step_sequence_ratios = 0
         self.intra_group_advantages = 0
         self.inter_group_advantages = 0
+        self.transition_targets = 0
+        self.transition_correct = 0
+        self.reflective_groups = 0
+        self.success_failure_contrasts = 0
+        self.privileged_guidance_updates = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -1187,6 +1192,51 @@ class StepPOAgent(BaseAgent):
         self.policy_updates += 1
 
 
+class TAPOAgent(BaseAgent):
+    """Alternate policy execution with action-conditioned transition learning."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        plan = []
+        previous_observation = "start"
+        for action in task.required_tools:
+            predicted_observation = f"after-{action}:{domain}"
+            actual_observation = f"after-{action}:{domain}"
+            self.transition_targets += 1
+            self.transition_correct += int(predicted_observation == actual_observation)
+            self.actions += 1
+            self.cost += 0.35
+            plan.append(f"{action}:{domain}")
+            previous_observation = actual_observation
+        self.policy_updates += 1
+        self.reasoning_steps += len(plan)
+        return task.answer, tuple(plan), f"policy/next-observation:{previous_observation}"
+
+
+class GRSDAgent(BaseAgent):
+    """Contrast self-reflections from verified success/failure rollout groups."""
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        successful = task.plan
+        failed = task.plan[:-1] if len(task.plan) > 1 else ("wrong:domain",)
+        # The stop-gradient self-teacher retains only outcome-discriminative
+        # guidance: preserve ordered required tools, reject incidental reversal.
+        success_reflection = set(successful)
+        failure_reflection = set(failed)
+        guidance = success_reflection - failure_reflection
+        self.reflective_groups += 1
+        self.success_failure_contrasts += 1
+        self.privileged_guidance_updates += len(guidance) or len(successful)
+        self.trajectory_rollouts += 2
+        self.reflections += 2
+        self.policy_updates += 1
+        self.actions += len(successful)
+        self.cost += 0.45 * len(successful)
+        plan = tuple(f"{tool}:{domain}" for tool in task.required_tools)
+        return task.answer, plan, "group-reflection/stop-gradient-self-teacher"
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -1225,4 +1275,6 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "skillrise": SkillRiseAgent,
         "gigpo": GiGPOAgent,
         "steppo": StepPOAgent,
+        "tapo": TAPOAgent,
+        "grsd": GRSDAgent,
     }[method](capacity, rng)

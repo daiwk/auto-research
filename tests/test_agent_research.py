@@ -14,6 +14,7 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "u-mem", "legomem", "memtool",
         "mrkl", "hugginggpt", "generative-agents", "memgpt",
         "webgpt", "saycan", "pal", "art",
+        "tapo", "grsd",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -30,6 +31,32 @@ def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
     assert result.trace
     assert (run_dir / "metrics.json").exists()
     assert (run_dir / "report.md").exists()
+
+
+@pytest.mark.parametrize(
+    ("method", "diagnostics"),
+    [
+        ("tapo", ("transition_targets", "transition_accuracy")),
+        (
+            "grsd",
+            ("reflective_groups", "success_failure_contrasts", "privileged_guidance_updates"),
+        ),
+    ],
+)
+def test_latest_agentic_rl_mechanisms_are_observable(
+    tmp_path: Path, method: str, diagnostics: tuple[str, ...]
+):
+    result, _ = AgentResearchRunner(
+        AgentResearchConfig(
+            method=method,
+            benchmark="planbench-mini",
+            episodes=24,
+            output_dir=tmp_path,
+        )
+    ).run()
+    assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
 
 
 def test_legomem_reuses_procedures(tmp_path: Path):

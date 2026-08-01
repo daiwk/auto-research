@@ -27,6 +27,8 @@
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
 | Agent group credit | [GiGPO](2505.10978-gigpo/README.md) | 论文作者团队，2025-05-16 | 未发现官方代码 | `gigpo` |
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | 中国科学技术大学作者团队，2026-04-20 | 未发现官方代码 | `steppo` |
+| Agent RL | [TAPO](2607.27973-tapo/README.md) | Peking University / Pengcheng Laboratory，2026-07-30 | 未发现官方代码 | `tapo` |
+| Agent group credit | [Group-Reflective Self-Distillation](2607.28076-grsd/README.md) | Baidu Inc. / collaborating universities，2026-07-30 | [已开源](https://github.com/BinbZheng1/GRSD) | `grsd` |
 | 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | UIUC / UMass Amherst / Google Cloud AI Research，2025-03-12 | [已开源](https://github.com/PeterGriffinJin/Search-R1) | `search-r1` |
 | 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | Northwestern / Stanford / Microsoft / UW / NYU / UBC / SMU，2025-04-24 | [已开源](https://github.com/RAGEN-AI/RAGEN) | `ragen` |
 | 长时程 Agent RL | [LOOP](2502.01600-loop/README.md) | Apple，2025-02-03 | [已开源](https://github.com/apple/ml-loop) | `loop` |

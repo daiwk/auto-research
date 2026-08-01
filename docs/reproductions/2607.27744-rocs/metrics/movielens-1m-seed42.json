@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "dataset": "MovieLens-1M (240 users / 400 items)",
+  "baseline": {"hit_at_10": 0.0208333333, "ndcg_at_10": 0.0109175712},
+  "method": {"hit_at_10": 0.025, "ndcg_at_10": 0.0118117189},
+  "relative_ndcg_percent": 8.1899877,
+  "request_sharing_microbenchmark": {"candidates": 128, "speedup_x": 129.5822},
+  "fidelity": "core mechanism; process-local timing is not production QPS"
+}

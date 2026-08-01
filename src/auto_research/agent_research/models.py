@@ -47,6 +47,8 @@ METHODS = (
     "skillrise",
     "gigpo",
     "steppo",
+    "tapo",
+    "grsd",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

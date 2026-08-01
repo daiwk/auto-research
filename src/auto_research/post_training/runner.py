@@ -24,7 +24,7 @@ class PostTrainingRunner:
         )
         state = initialize(len(data.feature_names), data.train)
         teacher_cached = {
-            "gkd", "minillm", "opsd", "opcd",
+            "gkd", "minillm", "opsd", "beta-opsd", "opcd", "flux-opd",
             "lightning-opd", "relay-opd", "turn-opd",
         }
         state.teacher_calls = len(data.train) if config.algorithm in teacher_cached else 0
