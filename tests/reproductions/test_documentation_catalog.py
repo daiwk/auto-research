@@ -125,12 +125,32 @@ def test_catalogs_use_semantic_sections_instead_of_release_batch_names():
         current_section = None
         located = {}
         for line in text.splitlines():
-            if line.startswith("## "):
+            if name == "by-topic.md" and line.startswith("## "):
+                current_section = None
+            elif name == "by-topic.md" and line.startswith("### "):
+                current_section = line.removeprefix("### ")
+            elif name != "by-topic.md" and line.startswith("## "):
                 current_section = line.removeprefix("## ")
             for adapter_key in assignments:
                 if f"-{adapter_key}/README.md)" in line:
                     located[adapter_key] = current_section
         assert located == assignments
+
+
+def test_topic_catalog_uses_research_direction_and_method_cluster_hierarchy():
+    text = (DOCS / "catalog" / "by-topic.md").read_text(encoding="utf-8")
+    assert "研究方向 → 方法簇 → 论文" in text
+    for heading in (
+        "## 大模型能力与推荐融合",
+        "### LLM / Foundation model + Recommendation",
+        "## 生成、排序与冷启动",
+        "### 排序网络与长序列",
+        "## 训练目标与决策优化",
+        "### 采样、蒸馏与强化学习",
+        "## Serving 与研究基础设施",
+        "### Serving / efficiency",
+    ):
+        assert heading in text
 
 
 def test_every_paper_readme_has_the_complete_reproduction_contract():

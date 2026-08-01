@@ -1,8 +1,11 @@
 # 按主题
 
-同一篇论文可以出现在多个主题下；每次出现都独占一行，并说明它与该主题相关的主要方法。
+采用“研究方向 → 方法簇 → 论文”的两级结构。同一篇论文可以出现在多个方法簇下；
+每次出现都独占一行，并说明它与该方法簇相关的主要机制。
 
-## LLM / Foundation model + Recommendation
+## 大模型能力与推荐融合
+
+### LLM / Foundation model + Recommendation
 
 - [RecoReward](../2607.25901-reco-reward/README.md)：用行为推荐器产生 RAS reward 来优化多模态内容描述，但 serving 不读取用户行为。
 - [Melo](../2607.23718-melo/README.md)：将 LLM 音乐 Agent 与实体 grounding、检索校验和反思重试组合为生产 playlist 流程。
@@ -44,7 +47,7 @@
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转为 LLM caption/token 特征，再注入推荐排序模型。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把源域大模型知识蒸馏到目标推荐域，实现零样本跨域迁移。
 
-## 纯 LLM：架构、预训练与条件记忆
+### 纯 LLM：架构、预训练与条件记忆
 
 - [Penelope](../2607.25915-penelope/README.md)：只重入局部 latent block，并以共享权重和时间门控逐步精炼隐藏状态。
 - [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：并行学习压缩、query-selected fine block 与滑窗三路因果注意力，再用逐 query/head 门控融合。
@@ -69,7 +72,9 @@
 - [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线提取强模型的高频 n-gram hidden state并冻结，recipient 用最长精确匹配、hash fallback 和门控残差写入复用外部容量。
 - [mHC](../2512.24880-mhc/README.md)：扩展多个 residual streams，并用 Sinkhorn 将动态残差矩阵约束为双随机矩阵，避免深层组合放大信号。
 
-## 生成式召回与端到端推荐
+## 生成、排序与冷启动
+
+### 生成式召回与端到端推荐
 
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [HiGR](../2512.24787-higr/README.md)：通过层级 Semantic ID、粗到细 slate decoder 和 ORPO 生成整组推荐结果。
@@ -107,7 +112,7 @@
 - [GR4AD](../2602.22732-gr4ad/README.md)：结合用户感知 Semantic ID、LazyAR 和可变长度生成完成广告召回。
 - [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并用 DPO 对齐广告序列的业务偏好。
 
-## 排序网络与长序列
+### 排序网络与长序列
 
 - [TWICE](../2607.25404-twice/README.md)：以点击/转化双时钟和单调 delay CDF 处理长期转化反馈未成熟问题。
 - [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：联合训练去偏与 serving 探索，专门改善新发行内容的曝光反馈闭环。
@@ -151,7 +156,7 @@
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 动态平衡相关性与多样性。
 - [ARGUS](../2507.15994-argus/README.md)：分解用户反馈与物品表示，在 Transformer 中建模超长音乐序列。
 
-## 冷启动与语义-行为对齐
+### 冷启动与语义-行为对齐
 
 - [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享 organic stream 与 ads/promotion 表征，把高资源任务知识迁移到冷启动 podcast。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以 engagement-aware residual codebook 和多视角对齐把 Semantic ID 接入判别式召回。
@@ -162,7 +167,9 @@
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：生成 creative 层级语义属性，并用 primary/shadow 机制稳定广告召回。
 - [SaviorRec](../2508.01375-saviorrec/README.md)：用行为监督训练内容 encoder，生成 RQ Semantic ID，再通过多行为模块对齐冷启动物品。
 
-## 采样、蒸馏与强化学习
+## 训练目标与决策优化
+
+### 采样、蒸馏与强化学习
 
 - [ASARL](../2607.26593-asarl/README.md)：用多 Agent 校验与补齐长尾 relevance 数据，执行 SCT、交互偏好优化和在线 student 蒸馏。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：使用 logged propensity 和策略梯度自动调节广告排序 utility 权重。
@@ -187,14 +194,16 @@
 - [GR4AD](../2602.22732-gr4ad/README.md)：通过 RSPO 优化可变长度广告生成，并结合 LazyAR 降低推理成本。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把源域 teacher 知识蒸馏到目标域，减少跨域冷启动监督需求。
 
-## 因果推断与长期价值
+### 因果推断与长期价值
 
 - [SWAG](../2607.25233-swag-bid/README.md)：把七日滑窗长期目标编码为 future plan，并门控影响当前广告 bid。
 - [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 估计触发 shopping candidate generator 的增量收益，并同时考虑召回成本。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选能预测未来参与度的长期 reward，再以独立 reward heads 注入多个推荐 surface。
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。
 
-## Serving / efficiency
+## Serving 与研究基础设施
+
+### Serving / efficiency
 
 - [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 兼容的前提下，以循环修正、跨塔同步和教师协同补充交互能力。
 
