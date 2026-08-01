@@ -21,12 +21,102 @@ BROWSE_INTROS = {
         "一至两句中文方法简介。"
     ),
     "topic": (
-        "按论文解决的核心问题分组；每篇论文独占一行，简介直接概括主要机制，"
-        "实验结果与复现边界请进入详情页查看。"
+        "采用“研究方向 → 方法簇 → 论文”的两级结构。一级用于快速定位研究范式，"
+        "二级保留可比较的方法族；每篇论文独占一行，实验结果与复现边界请进入详情页查看。"
     ),
     "year": (
         "按首次公开年份浏览；同年论文按日期倒序排列，每篇独占一行并附主要方法简介。"
     ),
+}
+
+
+# The canonical catalog needs a precise single-label topic for auditing, but a
+# browse page is easier to read when adjacent mechanisms are collected into a
+# small, stable hierarchy. Keep this mapping here instead of duplicating it in
+# every generated page. Unknown future labels remain visible under “其他”.
+TOPIC_HIERARCHY = {
+    "post-training": {
+        "AI 反馈安全对齐": ("偏好建模与监督", "安全对齐与可控监督"),
+        "直接偏好优化": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "二元反馈对齐": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "单阶段偏好": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "偏好正则": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "Reference-free 偏好": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "全排序偏好": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "序列概率校准": ("偏好建模与监督", "成对、单样本与排序偏好"),
+        "多属性可控 SFT": ("偏好建模与监督", "安全对齐与可控监督"),
+        "Reward 选优微调": ("偏好建模与监督", "选优微调与自博弈"),
+        "自博弈微调": ("偏好建模与监督", "选优微调与自博弈"),
+        "经典 RLHF": ("在线强化学习与稳定性", "PPO、REINFORCE 与 group RL"),
+        "在线推理 RL": ("在线强化学习与稳定性", "PPO、REINFORCE 与 group RL"),
+        "长推理 RL": ("在线强化学习与稳定性", "PPO、REINFORCE 与 group RL"),
+        "稳定序列 RL": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
+        "GRPO 聚合偏置": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
+        "长度无偏 RL": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
+        "分布保持 RL": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
+        "几何信任域": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "梯度保留 clip": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "Critic PPO": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "全局优势估计": ("在线强化学习与稳定性", "优势估计与多目标优化"),
+        "多目标 RL": ("在线强化学习与稳定性", "优势估计与多目标优化"),
+        "训推失配校正": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
+        "MoE 训推失配": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
+        "异步训推失配": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
+        "纯在线训推校正": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
+        "On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "经典 On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "On-policy self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "Context distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "Reverse-KL distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "Reference anchor": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
+        "SFT-RL 动态混合": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
+        "过程奖励": ("奖励、信用与课程", "过程 / token 信用分配"),
+        "Token-level credit assignment": ("奖励、信用与课程", "过程 / token 信用分配"),
+        "Token 信用校准": ("奖励、信用与课程", "过程 / token 信用分配"),
+        "能力边界课程": ("奖励、信用与课程", "课程与能力边界"),
+    },
+    "agent-research": {
+        "Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "Agent group credit": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "Step-aligned Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "Agentic RL / hindsight skill": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
+        "Agentic RL / turn-level credit": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
+        "Agentic OPD / rollout budgeting": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
+        "搜索 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "多轮 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "长时程 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "网页 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "多轮用户 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "规划强化学习": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "推理与行动": ("规划、搜索与反思", "交替推理与任务分解"),
+        "解耦规划": ("规划、搜索与反思", "交替推理与任务分解"),
+        "推理搜索": ("规划、搜索与反思", "树搜索与自我改进"),
+        "Agent 搜索": ("规划、搜索与反思", "树搜索与自我改进"),
+        "自我反思": ("规划、搜索与反思", "树搜索与自我改进"),
+        "自我迭代": ("规划、搜索与反思", "树搜索与自我改进"),
+        "工具学习": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "工具反馈": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "自动工具推理": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "程序推理": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "神经符号路由": ("工具调用与环境执行", "专家路由与具身 / 浏览环境"),
+        "专家模型编排": ("工具调用与环境执行", "专家路由与具身 / 浏览环境"),
+        "浏览问答": ("工具调用与环境执行", "专家路由与具身 / 浏览环境"),
+        "具身规划": ("工具调用与环境执行", "专家路由与具身 / 浏览环境"),
+        "主动记忆": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "过程记忆": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "工具记忆": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "记忆与反思": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "虚拟上下文": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "Hierarchical skill memory": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "Continual agent memory": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "跨任务技能进化": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "终身学习": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "多 Agent": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "多 Agent 软件工程": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "软件工程 ACI": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "通用软件 Agent": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "成本感知工具停止": ("多 Agent 与软件工程", "运行成本与工具暴露控制"),
+    },
 }
 
 
@@ -90,6 +180,9 @@ def read_rows(module: str) -> list[dict[str, str]]:
 
 
 def render(module: str, dimension: str, title: str) -> str:
+    if dimension == "topic":
+        return render_topic_hierarchy(module, title)
+
     groups: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in read_rows(module):
         groups[row[dimension]].append(row)
@@ -123,6 +216,31 @@ def render(module: str, dimension: str, title: str) -> str:
                 f"{row['summary']}"
             )
         lines.append("")
+    return "\n".join(lines)
+
+
+def render_topic_hierarchy(module: str, title: str) -> str:
+    """Render a compact two-level topic hierarchy for the browse page."""
+
+    hierarchy: dict[str, dict[str, list[dict[str, str]]]] = defaultdict(
+        lambda: defaultdict(list)
+    )
+    mapping = TOPIC_HIERARCHY[module]
+    for row in read_rows(module):
+        domain, cluster = mapping.get(row["topic"], ("其他", row["topic"]))
+        hierarchy[domain][cluster].append(row)
+
+    lines = [f"# {title}", "", BROWSE_INTROS["topic"], ""]
+    for domain, clusters in hierarchy.items():
+        lines.extend([f"## {domain}", ""])
+        for cluster, rows in clusters.items():
+            lines.extend([f"### {cluster}", ""])
+            for row in sorted(rows, key=lambda item: item["title"].lower()):
+                lines.append(
+                    f"- [{row['title']}](../{row['link']})"
+                    f"（`{row['key']}`）：{row['summary']}"
+                )
+            lines.append("")
     return "\n".join(lines)
 
 
