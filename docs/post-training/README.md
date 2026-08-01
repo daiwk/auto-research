@@ -60,6 +60,8 @@
 - [SteerLM](2310.05344-steerlm/README.md)：多属性标注、条件 SFT 与推理时可控目标。
 - [SPIN](2401.01335-spin/README.md)：上一轮策略自生成负例与迭代自博弈。
 - [Relay-OPD](2607.26057-relay-opd/README.md)：检测失败前缀并让教师有限接力。
+- [β-OPSD](2607.28582-beta-opsd/README.md)：把 KL 正则策略最优解转成可调几何插值蒸馏目标。
+- [Flux-OPD](2607.28022-flux-opd/README.md)：以稳定 teacher 为锚，按上下文冲突衰减演化修正。
 - [CoRT](2607.25659-cort/README.md)：用反事实重放分配 token 级 rubric credit。
 - [ReCo](2607.26862-reco/README.md)：按响应期望出现次数与 token 方差比重加权 GRPO。
 
@@ -120,6 +122,8 @@ flowchart LR
 | 可控 SFT | [SteerLM](2310.05344-steerlm/README.md) | 多属性 annotation 与条件生成目标 | GSM8K candidate | 机制复现 |
 | 自博弈 | [SPIN](2401.01335-spin/README.md) | previous-policy negative、偏好更新、对手刷新 | GSM8K candidate | 机制复现 |
 | On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | 失败前缀触发、教师有限接力、学生恢复 | GSM8K candidate | 机制复现 |
+| On-policy self-distillation | [β-OPSD](2607.28582-beta-opsd/README.md) | reference/teacher 几何插值与 return-to-go | GSM8K candidate | 机制复现 |
+| Context distillation | [Flux-OPD](2607.28022-flux-opd/README.md) | context-free anchor、差分修正与冲突权重 | GSM8K candidate | 机制复现 |
 | Token credit | [CoRT](2607.25659-cort/README.md) | rubric/criteria-free 反事实重放与 token 权重 | GSM8K candidate | 机制复现 |
 | 分布保持 RL | [ReCo](2607.26862-reco/README.md) | 响应次数权重、token 方差比与 clipped group update | Arithmetic / GSM8K candidate | 机制复现 |
 
@@ -171,9 +175,13 @@ flowchart LR
 | TACO | 0.1719 | **0.8906** | 0.3490 |
 | CHORD | 0.1719 | 0.7969 | 0.5713 |
 | VAPO | 0.1719 | 0.8594 | **0.0122** |
+| β-OPSD | 0.1719 | 0.7656 | 0.2789 |
+| Flux-OPD | 0.1719 | **0.8438** | 0.5283 |
 
 完整定义、smoke 结果和差异解释见[统一评测协议](benchmark.md)，稳定指标见
 [`post-training-gsm8k-candidate-seed42.json`](../experiments/post-training-gsm8k-candidate-seed42.json)。
+本轮 β-OPSD / Flux-OPD 指标见
+[`beta-flux-opd-gsm8k-seed42.json`](../experiments/beta-flux-opd-gsm8k-seed42.json)。
 经典 RL 稳定指标见
 [`classic-post-training-gsm8k-seed42.json`](../experiments/classic-post-training-gsm8k-seed42.json)。
 自由生成方法的三 seed 指标见

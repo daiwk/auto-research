@@ -1,0 +1,9 @@
+{
+  "dataset": "gsm8k-candidate",
+  "seed": 42,
+  "steps": 120,
+  "baseline": {"accuracy": 0.171875, "mean_reward": 0.3124200341},
+  "beta-opsd": {"accuracy": 0.765625, "mean_reward": 0.7918914809, "beta": 0.35, "closed_form_geometric_target": true},
+  "flux-opd": {"accuracy": 0.84375, "mean_reward": 0.8504804126, "last_conflict_jsd": 0.0016398668, "last_correction_weight": 0.9934619992},
+  "fidelity": "candidate-policy mechanism reproduction"
+}

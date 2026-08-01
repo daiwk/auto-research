@@ -137,6 +137,14 @@ class AgentResearchRunner:
             "step_sequence_ratios": agent.step_sequence_ratios,
             "intra_group_advantages": agent.intra_group_advantages,
             "inter_group_advantages": agent.inter_group_advantages,
+            "transition_targets": agent.transition_targets,
+            "transition_accuracy": (
+                agent.transition_correct / agent.transition_targets
+                if agent.transition_targets else 0.0
+            ),
+            "reflective_groups": agent.reflective_groups,
+            "success_failure_contrasts": agent.success_failure_contrasts,
+            "privileged_guidance_updates": agent.privileged_guidance_updates,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

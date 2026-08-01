@@ -153,7 +153,11 @@ def test_builtin_adapters_are_discoverable():
             "melo",
             "penelope",
             "oxygenrec-v2",
-            "asarl",
+        "asarl",
+        "ccformer",
+        "open-web-ufm",
+        "rocs",
+        "wide",
         }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -213,6 +217,10 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("s-grec").paper.has_online_ab
     assert get_adapter("nontp").paper.has_online_ab
     assert get_adapter("akt-rec").paper.has_online_ab
+    assert get_adapter("ccformer").paper.has_online_ab
+    assert get_adapter("open-web-ufm").paper.has_online_ab
+    assert get_adapter("rocs").paper.has_online_ab
+    assert get_adapter("wide").paper.code_url
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

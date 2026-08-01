@@ -181,6 +181,7 @@ class AgentEvolutionEvaluator:
         memory: dict[str, tuple[str, ...]] = {}
         active_tools: dict[str, int] = {}
         correct = cost = reused = 0.0
+        transition_targets = reflective_groups = guidance_updates = 0.0
         for step, task in enumerate(tasks):
             key = (
                 task.axis
@@ -207,6 +208,15 @@ class AgentEvolutionEvaluator:
             )
             cost += tool_cost
             if tuple(plan) != task.plan and genome.agent_critic != "none":
+                if genome.agent_critic == "tapo":
+                    # TAPO's auxiliary transition objective supervises the
+                    # action-conditioned next observation at every plan step.
+                    transition_targets += len(task.plan)
+                elif genome.agent_critic == "grsd":
+                    # One local success/failure contrast produces detached
+                    # turn-level guidance for the current failed trajectory.
+                    reflective_groups += 1
+                    guidance_updates += len(task.plan)
                 plan = task.plan
                 critic_cost = {
                     "self-refine": 1.0,
@@ -215,6 +225,10 @@ class AgentEvolutionEvaluator:
                     "agent-lightning": 1.1,
                     "seed": 0.8,
                     "cast": 0.85,
+                    "tapo": 0.78,
+                    "grsd": 0.75,
+                    "gigpo": 0.82,
+                    "steppo": 0.8,
                 }.get(genome.agent_critic, 1.5)
                 cost += critic_cost
             success = tuple(plan) == task.plan
@@ -229,6 +243,9 @@ class AgentEvolutionEvaluator:
             "reuse_rate": reused / len(tasks),
             "memory_entries": float(len(memory)),
             "active_tools": float(len(active_tools)),
+            "transition_targets": transition_targets,
+            "reflective_groups": reflective_groups,
+            "privileged_guidance_updates": guidance_updates,
         }
 
 
