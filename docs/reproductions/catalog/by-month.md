@@ -5,41 +5,26 @@
 ## 2026-07
 - [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。
-- [ReToken](../2607.28627-retoken/README.md)：增加单个可学习 retrieval target，在最后层 value-projection 空间对预填充 cache 打分，只保留与当前查询相关的稀疏视觉 token。
 - [ROCS](../2607.27744-rocs/README.md)：Meta 将请求侧特征只编码一次，把候选相关交互延后到批量评分阶段，以统一服务检索和排序并提升 QPS。
-- [WIDE](../2607.28418-wide/README.md)：按 token 动态选择 attention head group 与 FFN channel group，在固定 50% 激活预算下学习宽度稀疏路由。
 - [ASARL](../2607.26593-asarl/README.md)：以 ReasonAgent、CriticAgent、GenAgent 闭环整理 QQ 社交搜索数据，再经 SCT、PGO 和 Social Distillation 服务在线模型。
-- [Penelope](../2607.25915-penelope/README.md)：只在单个 decoder 边界执行共享 latent recurrence，避免整网反复计算。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用冻结推荐双塔的目标/非目标亲和力差训练内容描述，并保持线上 content-only serving。
 - [SWAG](../2607.25233-swag-bid/README.md)：用 masked future plan、七日滑窗目标和逐步 gate 优化跨 episode 自动出价。
 - [TWICE](../2607.25404-twice/README.md)：分离点击和转化时钟，以 current-status likelihood 和单调 delay CDF 学习长期 CVR。
 - [CORE](../2607.24417-core-relevance/README.md)：美团把 High/Mid/Low 相关性拆成条件二分类，用逐 step GRPO 优化 reasoning，再通过 PostCoT 蒸馏到低延迟双头模型。
-- [DataOrchestra](../2607.24717-data-orchestra/README.md)：为每个预训练 chunk 学习 Drop、Untouch 或 Clean 计划，并按需组合噪声删除、表面修复和教学性增强。
 - [Mosaic](../2607.24015-mosaic/README.md)：Meta 将 memorization、dense、sequential 与 CoTrain 用户表征组织成 specialist fleet，并以 MRM 和 cosine redundancy loss 挖掘增量信息。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把目标行为写入生成 decoder prefix，并用未来交互 privileged teacher 和熵路由蒸馏内化判别能力。
 - [UniR²](../2607.24439-unir2/README.md)：快手用 Dual-Query Prefix-Causal Attention 在同一 decoder 序列内统一层级 SID 生成和多目标排序，并以 ranking-only LoRA 隔离梯度。
 - [Melo](../2607.23718-melo/README.md)：以多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
 - [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：组合 recency、IPS、可移除 bias tower 与不确定性探索打破新内容反馈环。
-- [AdaDSF](../2607.21291-adadsf/README.md)：用 dense layer cosine calibration 分配逐层 token retention，再以 Top-K router 和 feature alignment 实现动态深度稀疏。
 - [BARGE](../2607.21028-barge/README.md)：用 ICA 恢复 item token 结构、HPR 重排累计语义路径，再以 OSQ 正交双通道和 OR-fusion 补充可达候选。
-- [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：根据逐 block gzip 压缩率动态连接信息密集内容，组合 local、literal long-range 与 hybrid attention heads。
-- [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将 25% attention heads 改为反周期频率，使跨训练窗口的旋转为负单位映射，并保留其余标准 RoPE heads。
-- [Naju](../2607.21000-naju/README.md)：以原生离散递推和独立 retain/write gates 替代连续时间离散化，并保留 token-dependent write/read 方向。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 Pinterest 全漏斗维护 fresh exploration corpus，并以 engagement dropout、内容交叉、分 cohort calibration 和 UCB 减少旧内容偏置。
-- [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：将内置 MTP draft 的 KV 读取限制为 attention sink 与最近窗口，完整 target verifier 仍决定每个输出 token。
-- [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：根据当前回答集合动态生成 rubric，以区分性和锚定目标让 evaluator 与 policy 多轮协同进化。
-- [GaugeQuant](../2607.20757-gaugequant/README.md)：在线学习函数等价、量化友好的正交基，以 LogSumExp 压制 W4A4 激活 outlier。
-- [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：用含特权解题过程的 behavior policy 增加成功 rollout，并以 importance ratio 校正无提示目标。
 - [TSGR](../2607.18796-tsgr/README.md)：把 residual semantic prefix 与并行全局/query 价值码结合，再由联合 VRM 完成价值感知生成召回。
-- [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 Q/K/V 投影后加入 `k=3` residual depthwise Conv1D，以低参数成本增强局部 token 交互。
-- [PPL-Factory](../2607.18199-ppl-factory/README.md)：用任务相关 NLL 衡量训练样本难度，再根据数据预算选择 easy、middle 或中段随机子集。
 - [RAMP](../2607.17473-ramp/README.md)：显式训练个性化和公共字段双路径，用 feature mask 与 prediction alignment 适配隐私受限流量。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：Pinterest 用 engagement-aware Semantic ID、级联 pooling 与多视角对比学习接入 dense retrieval。
 - [UAME](../2607.17092-uame/README.md)：联合预测满意度均值和不确定性，以概率 pairwise loss 和冲突加权缓解多目标标签偏差。
 - [WHALE](../2607.17017-whale/README.md)：逐层交换 Wukong 特征交互分支与 HSTU 行为序列分支，构成统一可扩展排序模型。
 - [RECAP](../2607.15730-recap/README.md)：维护固定容量流式语义画像，并把历史推荐反馈训练成 GRPO reward，形成画像优化闭环。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用可演化 Memory Hub、文本/SID 混合基础模型和可重建 latent reasoning 同时改进长期用户理解、商品 grounding 与推理效率。
-- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：在权重共享循环中复用低维 K/V latent，压缩跨 loop cache。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选与未来参与度相关的 session reward，并通过模型无关 reward heads 接入多个推荐 surface。
 - [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：离线编码完整历史并缓存固定状态，在线仅融合近期行为以控制广告排序延迟。
 - [TMallGS](../2607.13398-tmallgs/README.md)：以 field-wise QKV、噪声门控、FiLM 和逐层误差监督统一电商搜索异构字段。
@@ -51,7 +36,6 @@
 - [SAM](../2607.12714-sam/README.md)：学习购买后兴趣退出及恢复节奏，在注意力层抑制重复推荐。
 - [SlimPer](../2607.12281-slimper/README.md)：通过固定知识库的 Select–Match–Refine 循环替代全序列逐层传播，降低长历史排序的计算和中间状态。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征组织成配置驱动的生成提示，通过 token 压缩和多种合并策略服务搜索与推荐召回。
-- [SIS](../2607.04728-sis/README.md)：依据样本重要性动态调整训练权重，使有限预算更集中于高价值序列与 token。
 - [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：在线聚类用户或物品表征，并以 cluster-aware sampler 改善训练样本覆盖和头部集中。
 
 ## 2026-06
@@ -60,7 +44,6 @@
 - [G2Rec](../2606.20554-g2rec/README.md)：构建可微 soft graph，并联合图结构与生成式双目标学习用户—物品关系。
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：对图边去热门偏置，离线预计算多跳 PPR，再以 cluster index 服务召回。
 - [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。
-- [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：每个 GQA 组通过 index branch 选择 top-k 历史块，并在命中 token 上执行精确注意力。
 
 ## 2026-05
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
@@ -71,7 +54,6 @@
 - [Memento](../2605.24051-memento/README.md)：采用 query-conditioned MMR 在相关性与多样性之间动态权衡，进行候选重排。
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：通过 domain SFT 生成层级广告属性，构建语义图并约束召回结果对属性扰动的稳定性。
 - [FLUID](../2605.21832-fluid/README.md)：将直播多模态切片离散为 slice/room LUCID，以独立 prefix token 晚融合并逐阶段退掉候选 item ID。
-- [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线构造冻结 n-gram hidden memory，recipient 通过最长后缀匹配、Engram fallback 与门控写入复用知识。
 - [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型更新降低单一采样偏差。
 - [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 与多价值 MoPO 引导生成式召回发现高潜新品。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 与 expert-guided GRPO 优化天猫搜索生成式检索。
@@ -88,7 +70,6 @@
 
 ## 2026-03
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
-- [Switch Attention](../2603.26380-switch-attention/README.md)：学习逐 token full/local attention 路由以兼顾长上下文质量和解码效率。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归生成候选，并同时注入近期历史和长期用户 prompt。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把 VLM 图文对齐与 Pin-Board 共现邻居目标结合，改善 fresh 内容表征。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容表征先对齐到 item-ID 协同空间，再经多层 proxy 与 gate 接入排序。
@@ -110,13 +91,11 @@
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、层级 Semantic ID 和跨行为融合统一多个电商推荐场景。
 - [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
 - [HyFormer](../2601.12681-hyformer/README.md)：联合编码用户序列与搜索 query，通过 query decoding 和 boosting 强化搜索推荐信号。
-- [Engram](../2601.07372-engram/README.md)：用确定性 hashed n-gram 查表为 LLM 增加 O(1) 条件记忆。
 - [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，改善 podcast 冷启动。
 
 ## 2025-12
 - [HiGR](../2512.24787-higr/README.md)：联合 residual Semantic ID、粗到细 slate decoder 与 ORPO 列表偏好对齐。
 - [HiGR](../2512.24787-higr/README.md)：先生成层级 Semantic ID 簇再解码物品 slate，并以 ORPO 做列表偏好对齐。
-- [mHC](../2512.24880-mhc/README.md)：以双随机流形约束多流 residual mixing，在保留信息交换的同时限制深层信号放大。
 - [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：把用户意图推理组织成层级 multi-agent 协作，并以 meta-prompt、压缩表示和约束偏好 RL 优化标签与解释。
 - [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级意图 agents、混合压缩表示、meta-prompt 和约束偏好 RL 升级淘宝意图推理。
 
@@ -145,7 +124,6 @@
 
 ## 2025-05
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：用 ordered-regression Transformer 预测多目标前缀价值，再以多目标队列、mask-driven selection 和 MMR 生成 slate。
-- [Gated Attention](../2505.06708-gated-attention/README.md)：对 SDPA 的逐头输出施加 query-dependent sigmoid gate，增加非线性并产生可学习稀疏调制。
 - [GenRank](../2505.04180-genrank/README.md)：把多种用户动作编码为生成目标，通过 action-oriented generation 完成端到端排序。
 - [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache，扩展超长用户行为序列建模。
 
@@ -159,9 +137,7 @@
 - [OneRec](../2502.18965-onerec/README.md)：把 session 推荐建模为 Semantic ID 序列生成，并结合 MoE 与偏好优化对齐真实反馈。
 - [FilterLLM](../2502.16924-filterllm/README.md)：将新品文本直接生成为用户分布，并用行为信号校准十亿级冷启动召回。
 - [FilterLLM](../2502.16924-filterllm/README.md)：把新品文本映射到用户词表分布，并用历史行为约束冷启动召回。
-- [Muon](../2502.16982-muon/README.md)：对隐藏矩阵 momentum 做 Newton–Schulz 正交化，并用 weight decay 与 shape-aware scaling 支持大规模训练。
 - [SERAL](../2502.13539-seral/README.md)：构建用户认知画像，用 IPO 对齐惊喜度偏好，并通过 nearline 链路注入推荐排序。
-- [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：用压缩全局历史、query-selected fine blocks 和滑窗局部路径构成训练推理一致的稀疏注意力。
 - [SessionRec](../2502.10157-sessionrec/README.md)：按真实 session 生成候选，并利用曝光负例和 hard negative 改善会话级召回。
 - [LUM](../2502.08309-lum/README.md)：通过 next-condition-item 预训练和 group query 压缩用户知识，再把生成表征注入判别式排序器。
 - [FuXi-α](../2502.03036-fuxi-alpha/README.md)：以自适应多通道注意力和分阶段 FFN 扩展推荐特征交互容量。
@@ -193,9 +169,6 @@
 ## 2024-02
 - [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 
-## 2023-12
-- [Mamba](../2312.00752-mamba/README.md)：用输入相关 selective state space 递推替代注意力，实现线性序列扩展。
-
 ## 2023-11
 - [BEQUE](../2311.03758-beque/README.md)：生成用户相关的搜索改写，并结合离线检索反馈、自采样与偏好排序优化改写质量。
 
@@ -207,9 +180,6 @@
 
 ## 2022-05
 - [M6-Rec](../2205.08084-m6rec/README.md)：把推荐任务统一改写为自然语言任务，在预训练语言模型上使用轻量 option-adapter 完成多场景适配。
-
-## 2021-01
-- [Switch Transformer](../2101.03961-switch-transformer/README.md)：让每个 token 只激活一个 FFN expert，以稀疏路由扩展参数容量。
 
 ## 2020-09
 - [PLE](../recsys2020-ple-ple/README.md)：把专家拆成共享组与任务专属组，并由 CGC gate 渐进抽取共性和个性信息。

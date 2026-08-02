@@ -122,7 +122,7 @@ def test_research_modules_have_scalable_hub_structure():
             assert f"`{method}`" in catalog
 
 
-def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
+def test_site_uses_workflows_and_four_research_domains():
     homepage = (ROOT / "docs" / "index.md").read_text(encoding="utf-8")
     library = (ROOT / "docs" / "research-library.md").read_text(encoding="utf-8")
     evolution = (ROOT / "docs" / "evolution-domains.md").read_text(encoding="utf-8")
@@ -132,11 +132,18 @@ def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
     assert "## 工作流 × 研究领域" in homepage
     assert "## 四大核心能力" not in homepage
     assert homepage.count('<div class="ar-capability-card ') == 2
-    for domain in ("搜广推与 LLM 应用", "纯 LLM", "Agent", "其他主题"):
+    for domain in (
+        "搜广推与 LLM 应用",
+        "基础模型",
+        "LLM 后训练",
+        "Agent",
+        "其他主题",
+    ):
         assert domain in homepage
 
     for target in (
-        "reproductions/README.md",
+        "reproductions/industrial.md",
+        "foundation-models/README.md",
         "post-training/README.md",
         "agent-research/README.md",
     ):
@@ -157,8 +164,31 @@ def test_site_uses_workflows_by_domains_instead_of_four_peer_products():
     assert "新的工程假设" in overview
     assert "  - 自动研究与进化:" in navigation
     assert "  - 论文实现与评测:" in navigation
-    assert "      - 纯 LLM 后训练:" in navigation
+    assert "      - 基础模型:" in navigation
+    assert "      - LLM 后训练:" in navigation
     assert "      - Agent:" in navigation
+
+
+def test_foundation_models_have_a_separate_scalable_catalog():
+    directory = ROOT / "docs" / "foundation-models"
+    overview = (directory / "README.md").read_text(encoding="utf-8")
+    for name in ("lineage.md", "benchmark.md"):
+        assert (directory / name).is_file()
+        assert f"({name})" in overview
+    for dimension in ("organization", "topic", "year"):
+        relative = f"catalog/by-{dimension}.md"
+        assert (directory / relative).is_file()
+        assert f"({relative})" in overview
+
+    topic = (directory / "catalog" / "by-topic.md").read_text(encoding="utf-8")
+    for heading in (
+        "## 网络架构",
+        "## 注意力与长上下文",
+        "## 预训练与数据",
+        "## 多模态基础模型",
+        "## 推理与系统效率",
+    ):
+        assert heading in topic
 
 
 def test_sidebar_hides_global_and_per_paper_indexes_but_keeps_paper_pages():

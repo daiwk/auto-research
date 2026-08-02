@@ -4,12 +4,16 @@
 from __future__ import annotations
 
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
+sys.path.insert(0, str(ROOT / "src"))
+
+from auto_research.reproductions.registry import list_adapters
 ROW = re.compile(
     r"^\| (?P<topic>[^|]+) \| \[(?P<title>[^\]]+)\]\((?P<link>[^)]+)\) "
     r"\| (?P<info>[^|]+) \| (?P<code>[^|]+) \| `(?P<key>[^`]+)` \|$"
@@ -168,6 +172,48 @@ TOPIC_HIERARCHY = {
 }
 
 
+# 纯 LLM adapter 仍保留原有详情 URL，但从工业搜广推浏览页移出。训练后算法进入
+# post-training 研究域；其余方法由基础模型目录承载。显式映射使每篇论文只落在一个
+# 主要方法簇中，避免仅凭 topics 关键词产生不稳定分类。
+POST_TRAINING_REPRODUCTION_KEYS = {
+    "dynamic-rubric",
+    "off-context-grpo",
+    "sis",
+}
+FOUNDATION_TOPIC_HIERARCHY = {
+    "switch-transformer": ("网络架构", "MoE、状态空间与残差路径"),
+    "mamba": ("网络架构", "MoE、状态空间与残差路径"),
+    "mhc": ("网络架构", "MoE、状态空间与残差路径"),
+    "naju": ("网络架构", "MoE、状态空间与残差路径"),
+    "penelope": ("网络架构", "递归与 latent computation"),
+    "conv-llm": ("网络架构", "递归与 latent computation"),
+    "engram": ("网络架构", "条件记忆与知识注入"),
+    "memory-grafting": ("网络架构", "条件记忆与知识注入"),
+    "native-sparse-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "minimax-sparse-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "gzip-sparse-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "gated-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "switch-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "mobius-rope": ("注意力与长上下文", "位置编码与 KV 压缩"),
+    "looped-latent-attention": ("注意力与长上下文", "位置编码与 KV 压缩"),
+    "data-orchestra": ("预训练与数据", "数据清洗、编排与选择"),
+    "ppl-factory": ("预训练与数据", "数据清洗、编排与选择"),
+    "muon": ("预训练与数据", "优化器与训练效率"),
+    "retoken": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "adadsf": ("推理与系统效率", "动态计算与模型压缩"),
+    "wide": ("推理与系统效率", "动态计算与模型压缩"),
+    "gaugequant": ("推理与系统效率", "量化"),
+    "windowed-mtp": ("推理与系统效率", "推测解码与 KV cache"),
+}
+FOUNDATION_DOMAIN_ORDER = (
+    "网络架构",
+    "注意力与长上下文",
+    "预训练与数据",
+    "多模态基础模型",
+    "推理与系统效率",
+)
+
+
 def read_method_summary(module: str, link: str) -> str:
     """Read the canonical Chinese method summary from a paper detail page."""
 
@@ -316,6 +362,166 @@ def _paper_date(link: str) -> str:
     return match.group(1)
 
 
+def reproduction_doc_links() -> dict[str, str]:
+    """Map adapter keys to their stable reproduction README paths."""
+
+    text = (DOCS / "reproductions" / "README.md").read_text(encoding="utf-8")
+    links = dict(
+        re.findall(
+            r"`([^`]+)` · \[[^\]]+\]\(([^)]+/README\.md)\)",
+            text,
+        )
+    )
+    adapters = {adapter.key for adapter in list_adapters()}
+    missing = adapters - links.keys()
+    if missing:
+        raise ValueError(f"reproduction overview missing adapter links: {sorted(missing)}")
+    return links
+
+
+def reproduction_summary(link: str) -> str:
+    """Read the concise Chinese mechanism summary from a reproduction page."""
+
+    page = DOCS / "reproductions" / link
+    text = page.read_text(encoding="utf-8")
+    if BACKGROUND_HEADING not in text:
+        raise ValueError(f"{page} missing {BACKGROUND_HEADING}")
+    paragraph: list[str] = []
+    for line in text.split(BACKGROUND_HEADING, 1)[1].splitlines():
+        stripped = line.strip()
+        if not stripped:
+            if paragraph:
+                break
+            continue
+        if stripped.startswith(("#", "```", "<!--")):
+            if paragraph:
+                break
+            continue
+        paragraph.append(stripped)
+    summary = re.sub(r"\s+", " ", " ".join(paragraph)).strip()
+    summary = re.sub(
+        r"(?<=[\u3400-\u4dbf\u4e00-\u9fff]) (?=[\u3400-\u4dbf\u4e00-\u9fff])",
+        "",
+        summary,
+    )
+    sentences = re.findall(r"[^。]+(?:。|$)", summary)
+    return "".join(sentences[:2]).strip()
+
+
+def foundation_rows() -> list[dict[str, str]]:
+    links = reproduction_doc_links()
+    rows = []
+    for adapter in list_adapters():
+        paper = adapter.paper
+        if paper.track != "llm" or adapter.key in POST_TRAINING_REPRODUCTION_KEYS:
+            continue
+        try:
+            domain, cluster = FOUNDATION_TOPIC_HIERARCHY[adapter.key]
+        except KeyError as error:
+            raise ValueError(
+                f"foundation adapter {adapter.key} missing topic hierarchy"
+            ) from error
+        link = links[adapter.key]
+        rows.append(
+            {
+                "key": adapter.key,
+                "title": paper.title,
+                "link": link,
+                "organization": paper.organization or "作者团队",
+                "date": _paper_date(link),
+                "summary": reproduction_summary(link),
+                "domain": domain,
+                "cluster": cluster,
+            }
+        )
+    return _date_descending(rows)
+
+
+def render_foundation_catalog(dimension: str) -> str:
+    rows = foundation_rows()
+    titles = {
+        "organization": "基础模型：按机构",
+        "topic": "基础模型：按主题",
+        "year": "基础模型：按年份",
+    }
+    intros = {
+        "organization": "按首次公开日期倒序排列；机构沿用论文信息块中的主要作者单位。",
+        "topic": (
+            "采用“研究方向 → 方法簇 → 论文”的两级结构，覆盖架构、预训练、多模态"
+            "和推理效率；训练后算法进入独立的 LLM 后训练研究域。"
+        ),
+        "year": "按首次公开年份浏览；同年论文按日期倒序排列。",
+    }
+    lines = [f"# {titles[dimension]}", "", intros[dimension], ""]
+    if dimension == "topic":
+        hierarchy: dict[str, dict[str, list[dict[str, str]]]] = defaultdict(
+            lambda: defaultdict(list)
+        )
+        for row in rows:
+            hierarchy[row["domain"]][row["cluster"]].append(row)
+        for domain in FOUNDATION_DOMAIN_ORDER:
+            clusters = hierarchy[domain]
+            lines.extend([f"## {domain}", ""])
+            for cluster, papers in clusters.items():
+                lines.extend([f"### {cluster}", ""])
+                for row in _date_descending(papers):
+                    lines.append(
+                        f"- [{row['title']}](../../reproductions/{row['link']})"
+                        f"（`{row['key']}`）：{row['summary']}"
+                    )
+                lines.append("")
+        return "\n".join(lines)
+
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        group = row["date"][:4] if dimension == "year" else row["organization"]
+        grouped[group].append(row)
+    for group in sorted(grouped, reverse=dimension == "year"):
+        lines.extend([f"## {group}", ""])
+        for row in _date_descending(grouped[group]):
+            prefix = f"{row['date'][:7]} · " if dimension == "year" else f"{row['date']} · "
+            lines.append(
+                f"- {prefix}[{row['title']}](../../reproductions/{row['link']})"
+                f"（`{row['key']}`）：{row['summary']}"
+            )
+        lines.append("")
+    return "\n".join(lines)
+
+
+def remove_non_industrial_entries(path: Path, excluded_links: set[str]) -> None:
+    """Keep recommendation browse pages focused on industrial applications."""
+
+    lines = path.read_text(encoding="utf-8").splitlines()
+    filtered = [
+        line
+        for line in lines
+        if not any(f"../{link}" in line for link in excluded_links)
+    ]
+
+    def prune_empty(head_level: int, source: list[str]) -> list[str]:
+        marker = "#" * head_level + " "
+        parent = "#" * (head_level - 1) + " "
+        output: list[str] = []
+        index = 0
+        while index < len(source):
+            if not source[index].startswith(marker):
+                output.append(source[index])
+                index += 1
+                continue
+            end = index + 1
+            while end < len(source) and not source[end].startswith((marker, parent)):
+                end += 1
+            block = source[index:end]
+            if any(line.startswith("- [") or "](../" in line for line in block):
+                output.extend(block)
+            index = end
+        return output
+
+    filtered = prune_empty(3, filtered)
+    filtered = prune_empty(2, filtered)
+    path.write_text("\n".join(filtered).rstrip() + "\n", encoding="utf-8")
+
+
 def sort_reproduction_catalog(path: Path) -> None:
     """Sort paper bullets newest-first inside every company/topic/month section."""
 
@@ -369,8 +575,24 @@ def main() -> None:
             (target / f"by-{dimension}.md").write_text(
                 render(module, dimension, title), encoding="utf-8"
             )
+
+    foundation_target = DOCS / "foundation-models" / "catalog"
+    foundation_target.mkdir(parents=True, exist_ok=True)
+    for dimension in ("organization", "topic", "year"):
+        (foundation_target / f"by-{dimension}.md").write_text(
+            render_foundation_catalog(dimension), encoding="utf-8"
+        )
+
+    links = reproduction_doc_links()
+    llm_links = {
+        links[adapter.key]
+        for adapter in list_adapters()
+        if adapter.paper.track == "llm"
+    }
     for name in ("by-company.md", "by-topic.md", "by-month.md"):
-        sort_reproduction_catalog(DOCS / "reproductions" / "catalog" / name)
+        path = DOCS / "reproductions" / "catalog" / name
+        remove_non_industrial_entries(path, llm_links)
+        sort_reproduction_catalog(path)
 
 
 if __name__ == "__main__":

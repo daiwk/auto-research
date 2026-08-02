@@ -1,6 +1,6 @@
 # 搜广推与 LLM 应用统一评测协议
 
-本页统一数据切分、基线、指标和报告语义。它不要求 145 篇论文都与 DIN 横向排名：
+本页统一工业搜广推的数据切分、基线、指标和报告语义。它不要求所有论文都与 DIN 横向排名：
 不同任务只在**相同数据、候选集、预算和目标**下公平比较，论文线上 A/B 永远单列。
 
 ## 评测分层
@@ -11,8 +11,8 @@
 | CTR/CVR 与多任务 | DeepFM、ESMM、MMoE、PLE、TWICE | 公开交互构造的曝光/转化任务 | AUC、logloss、任务平均值 |
 | 新鲜度与探索 | PinCLIP、Pinequalizer、YouTube Freshness | 带时间戳的 MovieLens split | fresh Hit/NDCG、head share、总体质量 |
 | 长期价值与广告决策 | SWAG、GrowthGR、Causal Retrieval | 可审计的时间窗或 logged-policy proxy | value/uplift proxy、约束满足、排序质量 |
-| 纯 LLM 组件 | Penelope、Engram、Mamba、稀疏注意力 | WikiText-2 / Tiny Shakespeare | validation loss、PPL、参数与计算代理 |
-| 系统/Agent 机制 | Melo、NOVA、EvoRec | 确定性公开 mini-suite | 成功率、成本、重试/验证/进化诊断 |
+| 混排与页面决策 | SORT-Gen、Memento、DeGRe、DRL-PUT | 公开交互列表或 logged-policy proxy | 列表价值、多样性、约束满足、排序质量 |
+| 内容理解与审核风控 | MM-LLM、CORE、ASARL、RAMP | 公开多模态/相关性/缺失字段 proxy | relevance、precision/recall、误杀率、质量与隐私 guardrail |
 
 ## 推荐任务公共口径
 
@@ -45,17 +45,18 @@ $$
 - `head share` 是曝光集中度 guardrail，下降不自动等于总体效果提升；
 - AUC/logloss 只用于点式 CTR/CVR 任务，不与全物品 NDCG 混排。
 
-## 纯 LLM 公平口径
+## 内容理解、审核与风控口径
 
-结构实验必须共享 tokenizer、context length、训练 token、optimizer 预算、seed 和
-validation 数据。除主 loss/PPL 外同时报告：
+内容理解模型必须区分“内容表征改善”和“下游排序收益”，共享同一内容 corpus、行为
+split、候选集和 seed。审核风控方法除主任务指标外还必须报告：
 
-- 参数量和实际 device；
-- architecture-specific 诊断，如稀疏边数、递归次数、cache compression；
-- 相同 step 数下的初始/最终 loss；
-- 负结果和短预算不稳定性。
+- 正类/负类 precision、recall 以及阈值；
+- 误杀率、漏放率和不同内容 cohort 的分布；
+- 对 CTR、收入、覆盖率等主业务指标的 guardrail；
+- 数据审核、人审或隐私代理相对真实生产链路的边界。
 
-不能用参数更大、训练 token 更多或不同 tokenizer 的结果宣称结构本身提升。
+基础模型的 PPL、长上下文和系统性能统一口径已迁到
+[基础模型评测协议](../foundation-models/benchmark.md)。
 
 ## 本地基线规则
 
@@ -69,7 +70,7 @@ validation 数据。除主 loss/PPL 外同时报告：
 2. 相同任务最接近的已实现骨架；
 3. 机制隔离 baseline。
 
-DIN 不是所有论文的强制基线。广告出价、延迟 CVR、纯 LLM 架构或 Agent 系统若硬套
+DIN 不是所有论文的强制基线。广告出价、延迟 CVR、混排或审核风控任务若硬套
 DIN，会制造不可解释的百分比；这些任务采用各自同目标基线，并在页面明确说明。
 
 ## 线上证据与本地实验
@@ -104,4 +105,3 @@ python -m mkdocs build --strict
 
 新增或更新实验后，正向、负向和跨 seed 不稳定结果都必须保留；checkpoint 只保存在
 本地，不提交 GitHub。
-

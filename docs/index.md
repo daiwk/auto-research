@@ -10,7 +10,7 @@ hide:
 # Auto Research
 
 平台用两种工作流服务不同研究领域：先复现论文、建立可信组件与评测，再把组件接入
-自动研究引擎做并行实验和多轮进化。领域不被写死，可以是搜广推、纯 LLM、Agent，
+自动研究引擎做并行实验和多轮进化。领域不被写死，可以是搜广推、基础模型、后训练、Agent，
 也可以通过统一接口继续扩展。
 
 <div class="ar-actions">
@@ -46,11 +46,12 @@ adapter 接入，不限定为推荐模型。
 
 ### 论文实现与评测
 
-论文库不再等同于“搜广推目录”，而是统一承载三个领域。每篇实现独立保存代码、
+论文库不再等同于“搜广推目录”，而是统一承载四个研究域。每篇实现独立保存代码、
 实验、指标和中文解读，并明确区分原论文效果、本地结果与机制复现。
 
-- 搜广推及 LLM 应用：互联网大厂、线上 A/B 硬门槛
-- 纯 LLM：架构、预训练与后训练，使用公共 benchmark
+- 搜广推及 LLM 应用：召回、粗排/精排、混排、内容理解与审核风控
+- 基础模型：架构、预训练、多模态、长上下文和推理效率
+- LLM 后训练：偏好优化、RL、OPD、reward 与训练稳定性
 - Agent：记忆、规划、工具使用与自我进化
 - 统一论文信息、架构图、公式、代码和复现边界
 
@@ -66,8 +67,9 @@ adapter 接入，不限定为推荐模型。
 
 | 研究领域 | 论文实现与评测 | 自动研究与进化 |
 |---|---|---|
-| **搜广推与 LLM 应用** | <span class="ar-status ar-status-ready">论文库可用</span><br>[工业论文库](reproductions/README.md)：推荐、搜索、广告、生成式推荐和 LLM 应用；线上 A/B 是硬门槛 | <span class="ar-status ar-status-ready">进化可运行</span><br>RankMixer / HyFormer 已支持结构、参数和训练配置的多轮进化 |
-| **纯 LLM** | <span class="ar-status ar-status-ready">论文库可用</span><br>[LLM 后训练库](post-training/README.md)及纯 LLM 架构、预训练论文；以公共 benchmark 为准 | <span class="ar-status ar-status-ready">进化可运行</span><br>micro‑LLM 已支持架构、数据配方与后训练方案进化 |
+| **搜广推与 LLM 应用** | <span class="ar-status ar-status-ready">论文库可用</span><br>[工业论文库](reproductions/industrial.md)：召回、粗排/精排、混排、内容理解、审核风控、广告和生成式推荐；线上 A/B 是硬门槛 | <span class="ar-status ar-status-ready">进化可运行</span><br>RankMixer / HyFormer 已支持结构、参数和训练配置的多轮进化 |
+| **基础模型** | <span class="ar-status ar-status-ready">论文库可用</span><br>[基础模型研究](foundation-models/README.md)：架构、预训练、多模态、长上下文与推理效率 | <span class="ar-status ar-status-ready">进化可运行</span><br>micro‑LLM 已支持架构、数据配方和效率算子进化 |
+| **LLM 后训练** | <span class="ar-status ar-status-ready">论文库可用</span><br>[LLM 后训练库](post-training/README.md)：偏好优化、RL、OPD 与过程奖励 | <span class="ar-status ar-status-ready">进化可运行</span><br>objective、学习率、group size 和预算可组合搜索 |
 | **Agent** | <span class="ar-status ar-status-ready">论文库可用</span><br>[Agent 论文库](agent-research/README.md)：记忆、规划、工具使用和自我进化方法 | <span class="ar-status ar-status-ready">进化可运行</span><br>memory、planner、tool、critic 与容量已支持论文约束的多代组合搜索 |
 | **其他主题** | <span class="ar-status ar-status-open">可扩展</span><br>按统一论文页合同增加领域目录 | <span class="ar-status ar-status-open">可扩展</span><br>按统一 research adapter 接入模型、数据、mutation 与 evaluator |
 
@@ -98,7 +100,7 @@ flowchart LR
 
 2. **选择工作流**：先从[论文实现与评测库](research-library.md)建立可信组件，或直接进入[自动研究总览](auto-research.md)进行 topic research 和模型进化。
 
-3. **选择领域**：搜广推与 LLM 应用进入[工业论文库](reproductions/README.md)，纯 LLM 后训练进入[后训练库](post-training/README.md)，Agent 进入[Agent 论文库](agent-research/README.md)。
+3. **选择领域**：搜广推进入[工业论文库](reproductions/industrial.md)，架构与预训练进入[基础模型研究](foundation-models/README.md)，训练后算法进入[后训练库](post-training/README.md)，Agent 进入[Agent 论文库](agent-research/README.md)。
 
 </div>
 

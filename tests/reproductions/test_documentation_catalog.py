@@ -31,14 +31,34 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
     company = (DOCS / "catalog" / "by-company.md").read_text(encoding="utf-8")
     month = (DOCS / "catalog" / "by-month.md").read_text(encoding="utf-8")
     topic = (DOCS / "catalog" / "by-topic.md").read_text(encoding="utf-8")
+    foundation_catalogs = [
+        (ROOT / "docs" / "foundation-models" / "catalog" / f"by-{dimension}.md")
+        .read_text(encoding="utf-8")
+        for dimension in ("organization", "topic", "year")
+    ]
+    post_training_cross_links = (
+        ROOT / "docs" / "post-training" / "README.md"
+    ).read_text(encoding="utf-8")
+    post_training_reproductions = {"sis", "off-context-grpo", "dynamic-rubric"}
     for adapter in adapters:
         slug = _slug(adapter)
         assert f"`{adapter.key}`" in root_readme
         assert f"({slug}/README.md)" in main_index
         catalog_link = f"(../{slug}/README.md)"
-        assert catalog_link in company
-        assert catalog_link in month
-        assert catalog_link in topic
+        if adapter.paper.track == "recommendation":
+            assert catalog_link in company
+            assert catalog_link in month
+            assert catalog_link in topic
+        else:
+            assert catalog_link not in company
+            assert catalog_link not in month
+            assert catalog_link not in topic
+            foundation_link = f"(../../reproductions/{slug}/README.md)"
+            if adapter.key in post_training_reproductions:
+                assert f"../reproductions/{slug}/README.md" in post_training_cross_links
+                assert all(foundation_link not in text for text in foundation_catalogs)
+            else:
+                assert all(foundation_link in text for text in foundation_catalogs)
 
 
 def test_reproduction_hub_has_lineage_benchmark_without_paper_navigation_index():
@@ -114,41 +134,36 @@ def test_catalogs_use_semantic_sections_instead_of_release_batch_names():
         "by-month.md": {
             "causal-retrieval": "2026-07",
             "pin-scale": "2026-07",
-            "looped-latent-attention": "2026-07",
-            "gaugequant": "2026-07",
             "pinclip": "2026-03",
             "dos": "2026-02",
             "mdl": "2026-02",
             "hisac": "2026-02",
             "podcast-mtl": "2026-01",
-            "engram": "2026-01",
             "onemall": "2026-01",
         },
         "by-company.md": {
             "causal-retrieval": "Pinterest",
             "pin-scale": "Pinterest",
-            "looped-latent-attention": "Meta",
-            "gaugequant": "学术与经典基线",
             "pinclip": "Pinterest",
             "dos": "Meituan",
             "mdl": "ByteDance / Douyin / TikTok",
             "hisac": "Alibaba",
             "podcast-mtl": "Spotify",
-            "engram": "DeepSeek-AI",
             "onemall": "Kuaishou",
         },
         "by-topic.md": {
-            "causal-retrieval": "因果推断与长期价值",
+            "causal-retrieval": "隐私、策略约束与风险控制",
             "pin-scale": "冷启动与语义-行为对齐",
-            "looped-latent-attention": "纯 LLM：架构、预训练与条件记忆",
-            "gaugequant": "纯 LLM：架构、预训练与条件记忆",
-            "pinclip": "冷启动与语义-行为对齐",
+            "pinclip": "内容理解与语义表征",
             "dos": "生成式召回与端到端推荐",
             "mdl": "排序网络与长序列",
             "hisac": "排序网络与长序列",
             "podcast-mtl": "冷启动与语义-行为对齐",
-            "engram": "纯 LLM：架构、预训练与条件记忆",
             "onemall": "生成式召回与端到端推荐",
+            "sort-gen": "重排、混排与多目标页面决策",
+            "mm-llm": "内容理解与语义表征",
+            "core-relevance": "相关性审核与数据质量",
+            "ramp": "隐私、策略约束与风险控制",
         },
     }
     for name, assignments in expected_sections.items():
@@ -179,6 +194,10 @@ def test_topic_catalog_uses_research_direction_and_method_cluster_hierarchy():
         "### 排序网络与长序列",
         "## 训练目标与决策优化",
         "### 采样、蒸馏与强化学习",
+        "## 多阶段排序与混排",
+        "### 重排、混排与多目标页面决策",
+        "## 内容理解、审核与风险控制",
+        "### 相关性审核与数据质量",
         "## Serving 与研究基础设施",
         "### Serving / efficiency",
     ):

@@ -13,6 +13,9 @@
 | 双塔与图召回 | YouTube DNN、CS3、RankGraph-2、HARNESS-LM | sampled retrieval、双塔循环修正、多跳 PPR、非对称轻量检索 | 已实现 |
 | 生成式推荐 | TIGER、OneRec、OneMall、CQ-SID、RecGPT-V3 | Semantic ID、序列生成、多场景 prompt、生成纠错与 latent intent | 已实现 |
 | LLM 内容与知识增强 | KAR、NoteLLM、SERAL、RecoReward、Melo | 知识生成、内容压缩、认知画像、推荐器奖励、Agent grounding | 已实现 |
+| 重排与混排 | SORT-Gen、Memento、DeGRe、DRL-PUT | 列表价值、MMR、前瞻蒸馏、utility 策略调权 | 已实现 |
+| 内容理解与相关性审核 | MM-LLM、MIM、PinCLIP、CORE、ASARL | 多模态表征、内容/协同对齐、相关性级联与数据审核 | 已实现 |
+| 隐私与策略风险 | RAMP、Proximity Features、Causal Retrieval、UAME | 缺失字段、隐私合规、增量触发和不确定性约束 | 部分覆盖 |
 | 广告生成与长期价值 | GR4AD、UniVA、GrowthGR、SWAG、Causal Retrieval | 生成式广告、价值对齐、长期目标、滑窗出价、因果增量 | 已实现 |
 | 新鲜度、冷启动与探索 | PinCLIP、Pin-SCALE、YouTube Freshness、Pinequalizer | 内容/协同对齐、engagement SID、IPS、uncertainty、曝光纠偏 | 已实现 |
 | 训练与 serving 效率 | OneTrans、SOLARIS、Rec-Distill、TokenMixer-Large | KV cache、异步 latent、蒸馏、稀疏容量扩展 | 已实现 |
@@ -51,7 +54,7 @@ flowchart LR
 
 | 缺口 | 原因 | 进入实现的前置条件 |
 |---|---|---|
-| FlashAttention 类 kernel-first serving | 普通 PyTorch 包装无法验证 IO-aware kernel 收益 | CUDA/Triton kernel、同硬件吞吐与显存对照 |
+| 内容安全、作弊/欺诈和广告合规 | 当前实现主要覆盖相关性与隐私约束，不能替代安全审核 | 有真实标签的公开数据、precision/recall/误杀率及生产 guardrail |
 | 私有大规模广告竞价和 conversion logs | 公开数据缺 bid、budget、GMV 与成熟标签 | 可公开日志或能保留决策约束的等价 benchmark |
 | 全链路 LLM 推荐产品复刻 | 检索索引、模型 checkpoint、流量编排通常私有 | 官方代码/模型或可审计的公开端到端环境 |
 | AIGQ、RaG、RoleGen、LCU | 分别缺 reward、视频反馈、conversion trajectory 或公开数据授权 | 补齐对应公开数据与可执行反馈闭环 |

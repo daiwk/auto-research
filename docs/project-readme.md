@@ -5,7 +5,7 @@
 一个面向 macOS/Linux 的机器学习研究平台，由两条正交工作流组成：**论文实现与评测**
 负责把论文变成可信组件、公开数据实验和中文结论；**自动研究与进化**负责围绕给定
 topic 或当前系统检索证据、并行实验和多轮迭代。两条工作流都可服务搜广推与 LLM
-应用、纯 LLM、Agent，也可通过统一 adapter 扩展到其他主题。
+应用、基础模型、LLM 后训练、Agent，也可通过统一 adapter 扩展到其他主题。
 
 可读版文档站：[daiwk.github.io/auto-research](https://daiwk.github.io/auto-research/)。站点支持全文搜索、MathJax 公式、Mermaid 架构图、深色模式和移动端横向滚动；本地预览方式见[文档说明](getting-started.md)。
 
@@ -13,12 +13,13 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ### 论文实现与评测
 
-每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度。当前包含三个领域：
+每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度。当前包含四个研究域：
 
-- **搜广推与 LLM 应用**：推荐、搜索、广告、生成式推荐及 LLM 工业应用，要求真实
+- **搜广推与 LLM 应用**：召回、粗排/精排、混排、内容理解、审核风控、广告、生成式推荐及 LLM 工业应用，要求真实
   线上 A/B 或用户明确认可的全流量证据；
-- **纯 LLM**：网络结构、预训练、数据配方和后训练，以公共 benchmark 和真实训练
-  对照为筛选依据；
+- **基础模型**：网络结构、预训练、数据配方、多模态和推理效率，以公共 benchmark
+  和真实训练对照为筛选依据；
+- **LLM 后训练**：偏好优化、RL、OPD、reward 与训练稳定性；
 - **Agent**：记忆、规划、工具使用和自我进化方法；既有可重复 mini-suite，也有真实
   临时仓库、文件编辑与回归测试的代码 Agent sandbox。
 
@@ -28,8 +29,8 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
   space 运行迭代，保存事件日志与指标缓存；
 - **Directed evolution**：给定当前系统、数据和自然语言方向，把已审计组件与超参数
   组成 genome，按 validation 多代变异、淘汰和晋级，最终只对冠军运行 test；
-- **内置 adapter**：搜广推支持 RankMixer/HyFormer，纯 LLM 支持 micro‑LLM 的结构、
-  数据配方和后训练进化；Agent 的论文约束 genome 与多代 adapter 已接入统一控制器。
+- **内置 adapter**：搜广推支持 RankMixer/HyFormer，基础模型支持 micro‑LLM 的结构
+  与数据配方进化，后训练支持 objective genome；Agent 的论文约束 genome 与多代 adapter 已接入统一控制器。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 
@@ -40,7 +41,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **152/152** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。纯 LLM 论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **152/152** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
@@ -264,7 +265,7 @@ python -m pip install -e '.[plum]'
 
 ### 公开数据准备
 
-推荐 adapter 会按既有数据入口准备 MovieLens；本批纯 LLM adapter 使用官方 GSM8K 和 Stanford Alpaca，可一键下载到被 Git 忽略的 `data/`：
+推荐 adapter 会按既有数据入口准备 MovieLens；本批基础模型 adapter 使用官方 GSM8K 和 Stanford Alpaca，可一键下载到被 Git 忽略的 `data/`：
 
 ```bash
 scripts/download_public_data.sh all

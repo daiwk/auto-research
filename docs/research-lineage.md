@@ -1,13 +1,13 @@
 # 全域论文谱系与缺口
 
-本页是跨领域的长期审计入口，覆盖**搜广推、通用 LLM、LLM 后训练和 Agent**。最近一次系统核查截止 **2026-07-29**。单篇实现与指标仍以各论文 README 为准；这里回答“主干是否齐全、下一步缺什么”。
+本页是跨领域的长期审计入口，覆盖**搜广推、基础模型、LLM 后训练和 Agent**。单篇实现与指标仍以各论文 README 为准；这里回答“主干是否齐全、下一步缺什么”。
 
 ## 统一收录原则
 
 | 领域 | 进入实现队列的证据门槛 | 默认公共评测 |
 | --- | --- | --- |
 | 工业搜广推 | 量化线上 A/B 或用户明确认可的全流量证据；经典基线仅作具名例外 | MovieLens / Amazon / KuaiRand，全库排序 |
-| 通用 LLM | 公开 benchmark、同预算对照，核心算子可真实训练 | WikiText-2、Tiny Shakespeare、任务 mini-suite |
+| 基础模型 | 公开 benchmark、同预算对照，核心算子可真实训练 | WikiText-2、Tiny Shakespeare、多模态/效率任务 suite |
 | LLM 后训练 | 明确可执行的 preference/RL objective 与公开评测 | GSM8K candidate、偏好对、过程 trace |
 | Agent | 可审计的规划、工具、记忆或反思轨迹 | 确定性工具与跨 episode mini-suite |
 
@@ -25,7 +25,9 @@ flowchart LR
   G --> R["RL / value-aware generation"]
 ```
 
-当前主干已经覆盖经典特征交互、序列兴趣、长序列排序、双塔召回、Semantic ID 生成、LLM 内容/知识增强、采样蒸馏、RL、长期价值和 serving。
+当前主干已经覆盖经典特征交互、序列兴趣、长序列排序、双塔召回、Semantic ID 生成、
+LLM 内容/知识增强、采样蒸馏、RL、长期价值和 serving；主题索引进一步拆成召回、
+粗排/精排、重排与混排、内容理解、审核风控及广告商业决策。
 
 | 已补齐的经典例外 | 价值 | 当前状态 |
 | --- | --- | --- |
@@ -35,7 +37,7 @@ flowchart LR
 
 RecoChain / DIG（2026）仍未核验到满足工业论文硬门槛的量化线上 A/B，因此不创建占位 adapter。
 
-## 通用 LLM：容量、序列与效率
+## 基础模型：架构、预训练、多模态与效率
 
 ```mermaid
 flowchart LR
@@ -47,6 +49,8 @@ flowchart LR
 ```
 
 当前覆盖 dense 基线、稀疏 MoE、Mamba、动态/稀疏注意力、条件记忆、长上下文位置编码、MTP 和量化；新算子可进入 LLM evolve 的搜索空间。
+
+独立浏览入口、分类和评测口径见[基础模型研究](foundation-models/README.md)。
 
 - FlashAttention：核心是 GPU kernel 与 IO-aware tiling，应进入 CUDA/Triton 专项，不能用普通 attention 包装冒充。
 - RoPE / ALiBi：多个模型内部已使用，仍缺独立同预算长上下文 adapter。
