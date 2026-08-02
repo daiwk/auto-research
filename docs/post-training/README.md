@@ -1,6 +1,6 @@
 # LLM 后训练研究
 
-这里是[论文实现与评测库](../research-library.md)中的纯 LLM 后训练分支，覆盖偏好优化、
+这里是[论文实现与评测库](../research-library.md)中的 LLM 后训练分支，覆盖偏好优化、
 在线强化学习、on-policy distillation、过程奖励和数据闭环。这里先建立可信算法组件
 与公共评测；成熟组件可以继续接入[自动进化](../evolution-domains.md)，和网络结构、
 预训练数据及超参数一起搜索。
@@ -12,7 +12,7 @@
 
 ## 快速入口
 
-- [自动进化中的纯 LLM](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
+- [自动进化中的基础模型](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
 - 分类浏览：[按一作](catalog/by-first-author.md) ·
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
@@ -65,6 +65,15 @@
 - [Flux-OPD](2607.28022-flux-opd/README.md)：以稳定 teacher 为锚，按上下文冲突衰减演化修正。
 - [CoRT](2607.25659-cort/README.md)：用反事实重放分配 token 级 rubric credit。
 - [ReCo](2607.26862-reco/README.md)：按响应期望出现次数与 token 方差比重加权 GRPO。
+
+### 跨目录的后训练 adapter
+
+以下实现保留原有详情 URL，但在新信息架构中归入 LLM 后训练，而不再出现在基础模型
+或工业搜广推目录：
+
+- [SIS](../reproductions/2607.04728-sis/README.md)：用 rejection sampling 将部分 stale-policy token 变换为 on-policy token；
+- [Off-Context GRPO](../reproductions/2607.19313-off-context-grpo/README.md)：以特权过程生成 rollout，再用 importance ratio 校正到无上下文策略；
+- [DynamicRubric](../reproductions/2607.20083-dynamic-rubric/README.md)：让 rubric evaluator 与 policy 在训练过程中协同演化。
 
 ## 研究闭环
 

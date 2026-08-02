@@ -46,31 +46,6 @@
 - [KAR](../2306.10933-kar/README.md)：让 LLM 生成用户偏好和物品事实知识，再由 hybrid-expert adapter 融合进推荐器。
 - [M6-Rec](../2205.08084-m6rec/README.md)：把多种推荐任务统一成自然语言形式，并以 option-adapter 轻量适配预训练模型。
 
-### 纯 LLM：架构、预训练与条件记忆
-- [ReToken](../2607.28627-retoken/README.md)：训练单个 retrieval target 和 projection，直接在 value cache 上执行 query-dependent Top-K 检索；本地以因果文本 cache 验证该可训练稀疏机制。
-- [WIDE](../2607.28418-wide/README.md)：对每个 token 分别路由 attention head group 和 FFN channel group，以可学习 Top-K 动态宽度实现固定稀疏预算。
-- [Penelope](../2607.25915-penelope/README.md)：只重入局部 latent block，并以共享权重和时间门控逐步精炼隐藏状态。
-- [DataOrchestra](../2607.24717-data-orchestra/README.md)：训练 per-example orchestrator 为每个预训练 chunk 选择跳过、保留或多阶段清洗，避免固定数据处理策略的过度计算和过度改写。
-- [AdaDSF](../2607.21291-adadsf/README.md)：按层表示变化强度分配 token budget，以轻量 Top-K router 让低价值 token 绕过部分 Transformer 层。
-- [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：用 gzip 压缩率识别 literal blocks，并将 attention heads 分为 local、literal long-range 与 hybrid 三组，无需学习额外路由参数。
-- [Möbius RoPE](../2607.21405-mobius-rope/README.md)：将部分 RoPE heads 的频率设为反周期 half-integer 梯度，在不增加参数的情况下改变长距位置几何。
-- [Naju](../2607.21000-naju/README.md)：用独立 retain/write gates 的 native-discrete selective SSM 同时建模长期保留、覆盖写入和 token-dependent readout。
-- [Windowed-MTP](../2607.21535-windowed-mtp/README.md)：仅窗口化 speculative draft 的 KV read，保留完整 target verification，从而降低长上下文 draft tax 而不改变输出分布。
-- [DynamicRubric](../2607.20083-dynamic-rubric/README.md)：按当前回答集合生成动态评估标准，用 discriminability 与 anchor 共同约束 evaluator-policy 共进化。
-- [GaugeQuant](../2607.20757-gaugequant/README.md)：在线学习函数等价、量化友好的正交基，以 LogSumExp 抑制 W4A4 outlier。
-- [Off-Context GRPO](../2607.19313-off-context-grpo/README.md)：训练时借助特权解题信息采样，并用 importance correction 保持推理期无提示目标不变。
-- [Looped Latent Attention](../2607.15456-looped-latent-attention/README.md)：在 looped Transformer 间共享低秩 K/V latent，压缩跨 loop cache。
-- [MiniMax Sparse Attention](../2606.13392-minimax-sparse-attention/README.md)：按 GQA 组用轻量 index branch 选择 top-k block，再执行训练推理一致的精确块稀疏注意力。
-- [Memory Grafting](../2605.20948-memory-grafting/README.md)：离线提取强模型的高频 n-gram hidden state并冻结，recipient 用最长精确匹配、hash fallback 和门控残差写入复用外部容量。
-- [Switch Attention](../2603.26380-switch-attention/README.md)：动态选择 full 或 local attention，减少长上下文中不必要的全局计算。
-- [Engram](../2601.07372-engram/README.md)：用固定复杂度 hashed n-gram lookup 为 LLM 增加条件记忆。
-- [mHC](../2512.24880-mhc/README.md)：扩展多个 residual streams，并用 Sinkhorn 将动态残差矩阵约束为双随机矩阵，避免深层组合放大信号。
-- [Gated Attention](../2505.06708-gated-attention/README.md)：在每个 head 的 SDPA 输出后加入 sigmoid gate，以轻量非线性缓解 attention sink 并改善训练稳定性。
-- [Muon](../2502.16982-muon/README.md)：将隐藏层二维矩阵交给正交化更新，其余参数保留 AdamW，使优化器可以独立于网络结构参与 evolve。
-- [Native Sparse Attention](../2502.11089-native-sparse-attention/README.md)：并行学习压缩、query-selected fine block 与滑窗三路因果注意力，再用逐 query/head 门控融合。
-- [Mamba](../2312.00752-mamba/README.md)：通过输入相关 selective scan 在状态空间模型中选择性保留和写入信息。
-- [Switch Transformer](../2101.03961-switch-transformer/README.md)：以 top-1 token routing 激活单个 FFN expert，并用负载均衡损失扩展稀疏容量。
-
 ## 生成、排序与冷启动
 
 ### 生成式召回与端到端推荐
@@ -165,12 +140,9 @@
 
 ### 采样、蒸馏与强化学习
 - [ASARL](../2607.26593-asarl/README.md)：用多 Agent 校验与补齐长尾 relevance 数据，执行 SCT、交互偏好优化和在线 student 蒸馏。
-- [Convolution for LLMs](../2607.18413-conv-llm/README.md)：在 post-QKV 位置使用线性 residual depthwise Conv1D，使语言模型同时利用短程局部模式和全局注意力。
-- [PPL-Factory](../2607.18199-ppl-factory/README.md)：按 causal LM 的 block NLL 和可用数据比例选择微调子集，在信息量与原分布覆盖之间折中。
 - [RAMP](../2607.17473-ramp/README.md)：以富个性化路径为 teacher，通过 feature mask 和 KL alignment 改善仅有公共字段的流量。
 - [UAME](../2607.17092-uame/README.md)：利用 Gaussian 排序不确定性识别多 pxtr 冲突样本，并自适应提高高偏差 pair 的训练权重。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：先筛选预测长期参与度的候选奖励，再将独立 reward heads 与即时目标联合优化。
-- [SIS](../2607.04728-sis/README.md)：依据样本重要性动态分配训练权重，把预算集中到高价值 token。
 - [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：用在线聚类感知的 sampler 扩大样本覆盖并缓解头部集中。
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch/stream teacher，把大模型知识蒸馏到轻量 student。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：先用 SFT 学习广告主列表，再以 GRPO 奖励优化列表质量。
@@ -192,13 +164,52 @@
 - [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 估计触发 shopping candidate generator 的增量收益，并同时考虑召回成本。
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。
 
+## 多阶段排序与混排
+
+### 召回、粗排与精排协同
+- [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
+- [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复读取用户历史，让 request-only 表征可跨候选复用，再进行候选相关精排。
+- [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 召回兼容的前提下，通过循环修正、跨塔同步和级联教师增强交互能力。
+- [COBRA](../2503.02453-cobra/README.md)：先执行稀疏生成缩小候选空间，再用稠密生成细排，形成级联召回—排序路径。
+
+### 重排、混排与多目标页面决策
+- [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：把 LLM advertiser prior 与常规候选按 validation 选择的 quota 混合，再作为排序特征使用。
+- [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead 的列表价值蒸馏为在线 dense prefix labels，降低生成式重排延迟。
+- [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 在相关性和多样性之间动态调整混排权重。
+- [GenRec](../2604.14878-genrec/README.md)：把整页结果作为生成目标，并联合 page reward 与 NLL 约束优化页面级决策。
+- [DRL-PUT](../2509.05292-drl-put/README.md)：利用 logged propensity 和策略梯度自动调节广告混排 utility 权重。
+- [SORT-Gen](../2505.07197-sort-gen/README.md)：以 ordered regression 估计列表前缀价值，再按 CLICK/PAY 队列、mask 和 MMR 生成混排结果。
+
+## 内容理解、审核与风险控制
+
+### 内容理解与语义表征
+- [FLUID](../2605.21832-fluid/README.md)：把直播内容切片量化为两级 LUCID，以内容表示替代生命周期很短的候选 ID。
+- [MM-LLM](../2605.09338-mm-llm/README.md)：把图像、视频等内容转换为 caption/token 特征，再注入推荐模型增强内容理解。
+- [PinCLIP](../2603.03544-pinclip/README.md)：把图文对比学习与 Pin-Board 共现邻居目标结合，改善 fresh 内容表示。
+- [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容先对齐到 item-ID 协同空间，再通过多层 proxy 与 gate 接入排序。
+- [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣感知 SFT 对齐内容与协同空间。
+- [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动内容进行序列预训练。
+
+### 相关性审核与数据质量
+- [ASARL](../2607.26593-asarl/README.md)：以 Reason、Critic 和 Gen Agent 审核、修复长尾 relevance 数据，再蒸馏到线上 student。
+- [CORE](../2607.24417-core-relevance/README.md)：把 High/Mid/Low 相关性拆成级联边界，用 step-GRPO 训练 reasoning 后蒸馏给在线审核/排序头。
+- [MESH](../2607.12392-mesh/README.md)：通过异构塔与 residual gated bias correction 防止 fresh/tail 内容信号被头部样本淹没。
+- [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：用在线聚类感知采样扩大训练覆盖，降低头部内容对数据分布的支配。
+
+### 隐私、策略约束与风险控制
+!!! note "审核风控覆盖边界"
+    当前实现主要覆盖相关性审核、训练数据质量、隐私受限特征与策略约束；内容安全、
+    作弊/欺诈和广告合规仍是明确缺口，不能用相关性模型冒充已实现。
+
+- [RAMP](../2607.17473-ramp/README.md)：训练个性化/公共双路径，并用 feature mask 与预测对齐适配隐私受限和字段缺失流量。
+- [UAME](../2607.17092-uame/README.md)：显式建模多目标不确定性和标签冲突，降低高分歧样本对排序策略的风险。
+- [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 同时评估触发候选源的增量收益与调用成本，控制无效干预。
+- [Proximity Features](../2607.12246-proximity-features/README.md)：以隐私合规的群体地理特征服务匿名用户，避免依赖持久用户 ID。
+
 ## Serving 与研究基础设施
 
 ### Serving / efficiency
-- [ReToken](../2607.28627-retoken/README.md)：复用一次预填充的 value cache 并按查询稀疏选取 token，避免“外部检索后再编码”的重复视觉计算。
 - [ROCS](../2607.27744-rocs/README.md)：请求表征只计算一次，候选相关交互延后并批量执行；本地同时报告排序质量和进程内候选评分吞吐。
-- [WIDE](../2607.28418-wide/README.md)：将 token 级动态宽度算子接入 micro-LLM evolve；本地 dense PyTorch 只验证选择机制，不冒充论文融合稀疏 kernel 的加速。
-- [Gzip-guided Sparse Attention](../2607.21752-gzip-sparse-attention/README.md)：逐样本用 gzip 构造零参数 block mask，减少无关长程 attention edges；本地实现验证 mask，但未提供稀疏 kernel 加速。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：训练和 serving 共享特征配置，并通过 event replay 与 token compression 控制延迟。
 - [NOVA](../2606.27243-nova/README.md)：用四级验证、失败方向和 architecture gradient 提高自动架构进化的有效通过率。
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：离线预计算 popularity-corrected PPR 并用 cluster index 压缩线上图召回。

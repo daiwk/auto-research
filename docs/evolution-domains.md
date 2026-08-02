@@ -37,7 +37,7 @@ flowchart LR
 | 领域 | 已实现的自动进化 | 可复用论文组件 | 当前状态 |
 |---|---|---|---|
 | 搜广推与 LLM 应用 | RankMixer、HyFormer；MovieLens 与公共推荐评测 | LONGER、UniMixer、RankMixer 等结构及工业论文 adapter | **可运行** |
-| 纯 LLM | micro‑LLM；架构 → 数据配方 → SFT/后训练的分轮搜索 | 纯 LLM 架构、Lightning OPD、OPSD、OPCD、GPRL、TCR 等 | **可运行** |
+| 基础模型 | micro‑LLM；架构 → 数据配方 → 效率算子的分轮搜索 | Mamba、Switch Transformer、稀疏注意力、条件记忆、量化与动态计算等 | **可运行** |
 | LLM 后训练 | 论文检索约束的 objective genome；多轮搜索算法、学习率、组大小与训练步数 | 当前全部后训练 adapter：PPO/DPO/GRPO、偏好优化、OPSD/OPCD/Lightning OPD、过程奖励与课程 RL | **可运行** |
 | Agent | 论文检索约束的组合式 genome；逐轮搜索 memory、planner、tool、critic 与容量 | ReAct/LATS/ART、Voyager/AutoGen/PEARL、LOOP/WebAgent-R1/MUA-RL、Agentic RL/OPD 与软件 Agent | **可运行** |
 
@@ -52,7 +52,7 @@ flowchart LR
 - **Agent**：除公平对照 `long-context` 外，当前所有论文方法均映射为 memory、
   planner、tool 或 critic 算子。本轮补齐此前遗漏的 Voyager、AutoGen、PEARL，并加入
   LOOP、WebAgent-R1、MUA-RL；Search-R1 也从通用 tool fallback 升级为显式算子。
-- **推荐与通用 LLM**：只接入能由当前 evaluator 公平计分的结构。需要专有数据协议、
+- **推荐与基础模型**：只接入能由当前 evaluator 公平计分的结构。需要专有数据协议、
   serving 延迟目标或 byte-level backend 的方法继续保留为 evidence-only，避免“能列出
   名字”被误报为“已搜索其核心机制”。
 
@@ -61,7 +61,7 @@ flowchart LR
 领域与方法不必一一绑定。例如：
 
 - 在推荐 evolve 中把 LLM 语义特征、生成式召回或后训练目标作为 mutation；
-- 在纯 LLM evolve 中同时搜索网络结构、预训练数据配方和后训练算法；
+- 在基础模型 evolve 中搜索网络结构、预训练数据配方和效率算子，并可跨域组合后训练算法；
 - 在 Agent evolve 中组合记忆策略、规划器、工具上下文和 critic；
 - 为新领域实现相同 adapter 合同，而不修改研究循环的选择和报告逻辑。
 
