@@ -32,7 +32,7 @@
 
 本轮复查新增的 8 个算法 P0 已全部实现：DeepResearcher、ReTool、ToolRL、SAGE、
 MemSkill、Memento-Skills、SEARL 和 Agent0；它们补齐 deep research、工具 RL、技能固化、
-自进化 RL 与多 Agent curriculum，并已接入组合式 evolve genome。完整证据与 P1/P2 边界见
+自进化 RL 与多 Agent curriculum，并已接入组合式 evolve genome。完整证据与实现边界见
 [全主题系统缺口审计](../full-domain-gap-review-20260808.md)。
 
 本轮 4 个 P1 也已实现：Agent-R1、CAMEL、ToolBench/ToolLLM 与 GAIA；GAIA 使用
@@ -40,16 +40,13 @@ MemSkill、Memento-Skills、SEARL 和 Agent0；它们补齐 deep research、工�
 
 | 环境 | 当前状态 | 下一步 |
 |---|---|---|
-| `swebench-local` | 真实文件与 subprocess；仓库自带受控 fixture | 接官方 SWE-bench Lite 数据、repository snapshot 与容器 |
-| ToolHop | 尚未接入 | 增加公开数据下载、真实工具 runtime 与多跳 verifier |
-| Browser | WebGPT 控制流已实现；仍是确定性工具环境 | 增加隔离浏览器、网页快照与网络策略 |
 | Agent Lightning LLM RL | transition/credit 机制已实现 | 连接可训练 LLM policy 与统一多轮 controller |
 
 ## 当前结论
 
 经典主干已覆盖思考/行动、搜索、反思、神经符号与专家模型编排、多 Agent、长期记忆、
-虚拟上下文、Planner RL 和真实代码执行。`swebench-local` 不冒充官方数据；下一优先级
-仍是用户已暂缓的外部公开环境 adapter 与可训练 LLM executor。
+虚拟上下文、Planner RL 和真实代码执行。`swebench-local` 的受控 fixture 边界保持显式；
+下一优先级只保留可训练 LLM executor。
 
 本轮系统复查补齐了三个互补分支：LOOP 的长时程 leave-one-out PPO 与旧轨迹复用、
 WebAgent-R1 的上下文压缩和并行完整轨迹 M-GRPO、MUA-RL 的模拟用户澄清与真实工具

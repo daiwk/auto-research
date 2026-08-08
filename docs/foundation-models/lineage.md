@@ -27,8 +27,5 @@ flowchart LR
 | P0 | 多模态理解与统一理解/生成 | 可下载图文数据、真实视觉 encoder/tokenizer 和公共 benchmark |
 | P1 | test-time compute、verifier 与动态 reasoning budget | 同时报告正确率、token、延迟和调用成本 |
 | P1 | 独立 RoPE/ALiBi 长上下文公平对照 | 相同参数、训练长度和外推长度 |
-| P2 | FlashAttention、连续批处理和分布式 serving | CUDA/Triton kernel、GPU profiler 与端到端吞吐基准 |
-
-FlashAttention 一类方法的贡献来自 IO-aware kernel，不能用普通 PyTorch attention
-包装后宣称论文复现；Chinchilla 一类 scaling law 需要多个 compute/data 预算点，也
+Chinchilla 一类 scaling law 需要多个 compute/data 预算点，也
 不能用单次小模型训练替代完整曲线。

@@ -58,7 +58,6 @@ flowchart LR
 
 独立浏览入口、分类和评测口径见[基础模型研究](foundation-models/README.md)。
 
-- FlashAttention：核心是 GPU kernel 与 IO-aware tiling，应进入 CUDA/Triton 专项，不能用普通 attention 包装冒充。
 - RoPE / ALiBi：多个模型内部已使用，仍缺独立同预算长上下文 adapter。
 - Chinchilla scaling：需多 compute/data 预算曲线，不适合用单次小模型实验代替。
 - 新 MoE routing 与线性序列模型：只有真实算子、梯度和公开 benchmark 都可验证时进入。
@@ -92,5 +91,4 @@ token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实
 1. **既有 P0 批次已完成**：Wide & Deep、DCN-V2、DIEN、BST、CS3、CQ-SID、Switch Transformer、Mamba、Switch Attention；这不代表新审计发现的 P0 已实现。
 2. **P1 基础设施已完成**：新 LLM 架构、后训练和 Agent 的论文约束 genome 已接入统一多轮控制器。
 3. **P1 经典论文已完成**：DeepFM、YouTube DNN、ESMM、MMoE、PLE 已按用户批准的经典例外实现。
-4. **P2 系统复刻**：FlashAttention 等 kernel-first 工作进入 GPU 专项，不用 Mac 近似实现宣称论文复现。
-5. **新 P0 队列**：以[全主题系统缺口审计](full-domain-gap-review-20260808.md)为唯一清单，逐项实现后才把 ledger 状态改成 `implemented`。
+4. **新 P0 队列**：以[全主题系统缺口审计](full-domain-gap-review-20260808.md)为唯一清单，逐项实现后才把 ledger 状态改成 `implemented`。
