@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "CWM: Counterfactual Watch Time for Duration-Debiased Recommendation"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "cwm",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "CWM",
+    "hit_at_10": 0.07307692307692308,
+    "ndcg_at_10": 0.02906479839396522,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.18153846153846154
+  },
+  "relative": {
+    "hit_at_10_percent": -17.391304347826086,
+    "ndcg_at_10_percent": -17.89156210352754,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -38.219895287958124
+  },
+  "stages": {
+    "right_censored_likelihood": true,
+    "latent_counterfactual_benefit": true,
+    "cost_transform_to_interest": true,
+    "duration_proxy_declared": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.1076923076923077,
+      "ndcg_at_10": 0.05670067222235471,
+      "fresh_hit_at_10": 0.08,
+      "head_share_at_10": 0.18769230769230769
+    }
+  },
+  "paper_results": {
+    "mean_watch_time_percent": 2.9,
+    "video_views_percent": 2.5,
+    "ctr_percent": 0.3
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

@@ -1,0 +1,87 @@
+{
+  "paper": {
+    "arxiv_id": "2104.09864",
+    "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+    "url": "https://arxiv.org/abs/2104.09864",
+    "organization": "Zhuiyi Technology"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "rope",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.043058142066002,
+    "perplexity": 421.17909291166296,
+    "instruction_loss": 6.072489857673645,
+    "primary": -6.953931620717048,
+    "public_composite": -6.953931620717048,
+    "composite_loss": 6.953931620717048,
+    "fitness": -6.953931620717048,
+    "initial_loss": 6.179897594451904,
+    "final_loss": 6.145263195037842,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "rope",
+    "lm_loss": 6.043058142066002,
+    "perplexity": 421.17909291166296,
+    "instruction_loss": 6.072489857673645,
+    "primary": -6.953931620717048,
+    "public_composite": -6.953931620717048,
+    "composite_loss": 6.953931620717048,
+    "fitness": -6.953931620717048,
+    "initial_loss": 6.179897594451904,
+    "final_loss": 6.145263195037842,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "position_encoding": "rotary",
+      "relative_phase": 1.0
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": 0.0,
+    "perplexity_percent": 0.0
+  },
+  "paper_results": {
+    "long_text_classification_improvement": "reported across six tasks"
+  },
+  "scope": "实际对每个注意力 head 的 Q/K 执行复数平面旋转并由相对相位进入 dot product；WikiText-2 64d 小模型替代论文中文 RoFormer 预训练。"
+}

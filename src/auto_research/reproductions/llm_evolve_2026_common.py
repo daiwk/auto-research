@@ -8,6 +8,30 @@ from auto_research.evolution.models import Genome
 
 
 PAPERS = {
+    "rope": {
+        "arxiv_id": "2104.09864", "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+        "url": "https://arxiv.org/abs/2104.09864", "organization": "Zhuiyi Technology",
+    },
+    "alibi": {
+        "arxiv_id": "2108.12409", "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
+        "url": "https://arxiv.org/abs/2108.12409", "organization": "University of Washington / Facebook AI Research",
+    },
+    "gqa": {
+        "arxiv_id": "2305.13245", "title": "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints",
+        "url": "https://arxiv.org/abs/2305.13245", "organization": "Google Research",
+    },
+    "hymba": {
+        "arxiv_id": "2411.13676", "title": "Hymba: A Hybrid-head Architecture for Small Language Models",
+        "url": "https://arxiv.org/abs/2411.13676", "organization": "NVIDIA",
+    },
+    "moba": {
+        "arxiv_id": "2502.13189", "title": "MoBA: Mixture of Block Attention for Long-Context LLMs",
+        "url": "https://arxiv.org/abs/2502.13189", "organization": "Moonshot AI",
+    },
+    "blt": {
+        "arxiv_id": "2412.09871", "title": "Byte Latent Transformer: Patches Scale Better Than Tokens",
+        "url": "https://arxiv.org/abs/2412.09871", "organization": "Meta FAIR",
+    },
     "native-sparse-attention": {
         "arxiv_id": "2502.11089",
         "title": "Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention",

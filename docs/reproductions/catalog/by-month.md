@@ -70,14 +70,18 @@
 - [LWGR](../2605.18771-lwgr/README.md)：把个性化 soft instruction 注入 LLM 世界知识，并用交叉注意力和拉格朗日约束与推荐分数融合。
 
 ## 2026-04
+- [GloRank](../2604.25291-glorank/README.md)：在全局 SID 空间用 listwise SFT 与 RL 优化全库生成重排。
 - [CS3](../2604.19269-cs3/README.md)：以循环自修正、跨塔同步和级联教师增强可在线部署的双塔召回。
 - [GenRec](../2604.14878-genrec/README.md)：用 page-wise NTP、非对称 Token Merger 和带 NLL 正则的 GRPO-SR 优化整页结果。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item pair，异步预计算并缓存 foundation-model latent，在线命中直接消费。
+- [Dual-Rerank](../2604.07420-dual-rerank/README.md)：蒸馏 AR 顺序知识到 NAR 并行重排器并显式优化效用/延迟。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由统一多个业务域的生成式推荐。
 
 ## 2026-03
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归生成候选，并同时注入近期历史和长期用户 prompt。
+- [HAP](../2603.03770-hap/README.md)：按候选异质性动态路由不同计算量的预排模型。
+- [OneRanker](../2603.02999-oneranker/README.md)：用统一 token 空间联合生成和 value-aware 广告排序。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把 VLM 图文对齐与 Pin-Board 共现邻居目标结合，改善 fresh 内容表征。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容表征先对齐到 item-ID 协同空间，再经多层 proxy 与 gate 接入排序。
 
@@ -106,7 +110,12 @@
 - [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：把用户意图推理组织成层级 multi-agent 协作，并以 meta-prompt、压缩表示和约束偏好 RL 优化标签与解释。
 - [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级意图 agents、混合压缩表示、meta-prompt 和约束偏好 RL 升级淘宝意图推理。
 
+## 2025-11
+- [DualGR](../2511.12518-dualgr/README.md)：长短兴趣双路由、约束 SID 和曝光感知生成召回。
+
 ## 2025-09
+- [IntSR](../2509.21179-intsr/README.md)：显式/隐式意图和时间词表统一搜索与推荐生成。
+- [OnePiece](../2509.18091-onepiece/README.md)：上下文工程、块级 latent reasoning 和级联多任务排序。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：从 logged ads behavior 学习相关性、新颖性和收益等排序 utility 的动态权重策略。
 
 ## 2025-10
@@ -114,6 +123,7 @@
 - [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。
 
 ## 2025-08
+- [MPFormer](../2508.20400-mpformer/README.md)：任务条件化序列检索和资源自适应共享。
 - [OneRec-V2](../2508.20900-onerec-v2/README.md)：使用 lazy decoder 降低生成延迟，并用真实反馈强化学习和 GBPO 优化推荐序列。
 - [SaviorRec](../2508.01375-saviorrec/README.md)：用行为监督训练内容编码器，生成 RQ Semantic ID，并通过多行为适配模块改善冷启动。
 
@@ -127,6 +137,7 @@
 ## 2025-06
 - [MGOE](../2506.10520-mgoe/README.md)：从任务统计构建 Macro Task Merging Graph，在 graph experts 中传播关系后分别预测各目标。
 - [MGOE](../2506.10520-mgoe/README.md)：构建宏观任务合并图，让 graph experts 显式传播多任务关系后进入独立预测塔。
+- [RADAR](../2506.07261-radar/README.md)：延迟异步全库排序结果回流下一请求召回。
 - [TransAct V2](../2506.02267-transact-v2/README.md)：用候选感知的终身行为序列和 next-action 多任务目标增强 Homefeed 排序。
 
 ## 2025-05
@@ -164,6 +175,10 @@
 
 ## 2024-11
 - [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并通过 DPO 对齐广告展示与转化偏好。
+
+## 2024-06
+- [CDM](../2406.09021-cdm/README.md)：将上下文多样性教师蒸馏到低延迟混排学生。
+- [CWM](../2406.07932-cwm/README.md)：以反事实 watch time 消除视频时长偏置。
 
 ## 2024-05
 - [LEARN](../2405.03988-learn/README.md)：冻结 LLM 生成内容增强表征，再通过协同域适配改善冷启动和长尾推荐。

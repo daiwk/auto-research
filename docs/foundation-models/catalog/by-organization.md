@@ -31,6 +31,10 @@
 
 - 2021-01-11 · [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](../../reproductions/2101.03961-switch-transformer/README.md)（`switch-transformer`）：Switch 把 dense FFN 替换为每个 token 只激活一个专家的稀疏 MoE，在近似固定 FLOPs 下扩大参数容量。
 
+## Google Research
+
+- 2023-05-22 · [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](../../reproductions/2305.13245-gqa/README.md)（`gqa`）：多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。
+
 ## Huawei / Peking University / Tsinghua University
 
 - 2026-07-20 · [Convolution for Large Language Models](../../reproductions/2607.18413-conv-llm/README.md)（`conv-llm`）：自注意力擅长全局依赖，却没有显式的短程归纳偏置。论文固定 Qwen3 主干，系统比较 17 个卷积插入位置，最终选择在 Q/K/V 线性投影后、attention 聚合前加入 `kernel=3` 的逐通道一维卷积；残差旁路保留原投影，不加归一化或激活，额外参数低于 `0.01%`。
@@ -59,9 +63,17 @@
 
 - 2026-07-20 · [PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning](../../reproductions/2607.18199-ppl-factory/README.md)（`ppl-factory`）：固定的“选最难/最容易”规则会随任务和数据预算失效。PPL-Factory 先用冻结基础模型计算任务相关 NLL：语言建模按 packed block，推理 SFT 只看 reasoning/answer response；再按预算切换策略，高预算偏 easy，较低预算选 middle，极低预算从 middle pool 随机抽样以保覆盖。
 
+## Meta FAIR
+
+- 2024-12-13 · [Byte Latent Transformer: Patches Scale Better Than Tokens](../../reproductions/2412.09871-blt/README.md)（`blt`）：直接处理 byte，并依据 next-byte entropy 动态形成 patch；全局 Transformer 在 patch 级计算，局部编码器/解码器恢复 byte。
+
 ## MiniMax
 
 - 2026-06-11 · [MiniMax Sparse Attention](../../reproductions/2606.13392-minimax-sparse-attention/README.md)（`minimax-sparse-attention`）：长上下文 dense attention 的二次复杂度成为主要瓶颈。MSA 为每个 GQA 组增加轻量 index branch，先选择少数历史 block，主分支再对命中 token 做精确 attention；训练和推理使用同一路径。
+
+## Moonshot AI
+
+- 2025-02-18 · [MoBA: Mixture of Block Attention for Long-Context LLMs](../../reproductions/2502.13189-moba/README.md)（`moba`）：把序列切成 block，以可微 router 为每个 query 选择少量相关块，同时保留当前因果块。
 
 ## Moonshot AI / UCLA
 
@@ -70,6 +82,7 @@
 ## NVIDIA
 
 - 2026-07-23 · [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../reproductions/2607.21535-windowed-mtp/README.md)（`windowed-mtp`）：内置 MTP/NEXTN draft 通常每提出一个 token 都读取完整 KV cache；在百万 token 上，即使 target 已使用 GDN/Mamba 等便宜 verifier，draft 的全量 KV read 仍会成为瓶颈。Windowed-MTP 只改变 draft：保留最前面的 attention sink 与最近 $W$ 个 token，同时 target 继续读取完整上下文并验证所有候选。
+- 2024-11-20 · [Hymba: A Hybrid-head Architecture for Small Language Models](../../reproductions/2411.13676-hymba/README.md)（`hymba`）：同一层并行执行 attention 与状态空间分支，再用输入相关 gate 融合局部精确检索和线性长程状态。
 
 ## Peking University / Huawei Technologies
 
@@ -83,6 +96,10 @@
 
 - 2025-05-10 · [Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free](../../reproductions/2505.06708-gated-attention/README.md)（`gated-attention`）：softmax attention 的 value aggregation 到 output projection 之间基本是线性映射。论文系统比较 30 种门控变体，发现最简单稳定的方案是在每个 attention head 的 SDPA 输出后施加 query-dependent sigmoid gate：既增加非线性，也能稀疏抑制无用 head 输出。
 
+## Stanford University / Google Research
+
+- 2023-05-17 · [DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining](../../reproductions/2305.10429-doremi/README.md)（`doremi`）：用小型 proxy model 的 excess loss 做 group DRO，动态提升欠拟合域权重，再按所得配比训练目标模型。
+
 ## Tsinghua University / Microsoft Research Asia
 
 - 2026-05-20 · [Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory](../../reproductions/2605.20948-memory-grafting/README.md)（`memory-grafting`）：Engram 的大容量条件记忆需要随主模型从零训练。Memory Grafting 先统计高频 2/3/4-gram，用已经预训练的 grafting model 离线编码每个短语最后 token 的中间 hidden state并冻结；recipient 在线只做期望 $O(1)$ 的最长后缀精确查询。
@@ -95,6 +112,18 @@
 
 - 2026-07-22 · [GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries](../../reproductions/2607.20757-gaugequant/README.md)（`gaugequant`）：LLM 内部通道存在保持函数不变的 gauge 对称性，但不同等价基的量化误差差异很大。GaugeQuant 在训练中在线学习量化友好正交基，以 LogSumExp 压制 activation outliers，不需要额外 calibration corpus。
 
+## University of Cambridge / Shanghai AI Laboratory
+
+- 2024-03-25 · [Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance](../../reproductions/2403.16952-data-mixing-laws/README.md)（`data-mixing-laws`）：先训练多组小预算 domain mixture，拟合各评测域的混合缩放律，再搜索未训练过的最优配比。
+
 ## University of Maryland / Meta AI
 
 - 2026-07-16 · [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../../reproductions/2607.15456-looped-latent-attention/README.md)（`looped-latent-attention`）：Looped Transformer 重复使用同一组权重，但不同 loop 的 KV cache 仍重复占内存。LLA 学习跨 loop 共享的低秩 K/V latent，服务时按 loop 重建专用 K/V，从 recurrence 冗余中换取近无损压缩。
+
+## University of Washington / Meta AI
+
+- 2021-08-27 · [Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation](../../reproductions/2108.12409-alibi/README.md)（`alibi`）：不学习位置向量，而是在每个 head 的注意力 logits 上加入线性距离惩罚，实现 train-short/test-long 外推。
+
+## Zhuiyi Technology
+
+- 2021-04-20 · [RoFormer: Enhanced Transformer with Rotary Position Embedding](../../reproductions/2104.09864-rope/README.md)（`rope`）：对每个 attention head 的 Q/K 二维子空间施加随位置旋转，使点积天然只依赖相对位移。

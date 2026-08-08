@@ -4,6 +4,17 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "rlaif": ("RLAIF", "https://arxiv.org/abs/2309.00267"),
+    "process-supervision": ("Let's Verify Step by Step", "https://arxiv.org/abs/2305.20050"),
+    "math-shepherd": ("Math-Shepherd", "https://arxiv.org/abs/2312.08935"),
+    "self-rewarding": ("Self-Rewarding Language Models", "https://arxiv.org/abs/2401.10020"),
+    "luffy": ("LUFFY", "https://arxiv.org/abs/2504.14945"),
+    "ttrl": ("TTRL", "https://arxiv.org/abs/2504.16084"),
+    "absolute-zero": ("Absolute Zero", "https://arxiv.org/abs/2505.03335"),
+    "intuitor": ("INTUITOR", "https://arxiv.org/abs/2505.19590"),
+    "cispo": ("CISPO / MiniMax-M1", "https://arxiv.org/abs/2506.13585"),
+    "spiral": ("SPIRAL", "https://arxiv.org/abs/2506.24119"),
+    "conspo": ("ConSPO", "https://arxiv.org/abs/2605.12969"),
     "lightning-opd": ("Lightning OPD", "https://arxiv.org/abs/2604.13010"),
     "gprl": ("GPRL", "https://arxiv.org/abs/2605.18721"),
     "tcr": ("TCR", "https://arxiv.org/abs/2607.19824"),

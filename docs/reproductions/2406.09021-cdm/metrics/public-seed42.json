@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "CDM: Contextual Distillation for Diversified Recommendation"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "cdm",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "CDM",
+    "hit_at_10": 0.08076923076923077,
+    "ndcg_at_10": 0.035841679901379445,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.4642307692307692
+  },
+  "relative": {
+    "hit_at_10_percent": -8.695652173913043,
+    "ndcg_at_10_percent": 1.253217324868837,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": 57.984293193717264
+  },
+  "stages": {
+    "mmr_teacher": true,
+    "gumbel_topk_context_pairs": true,
+    "contrastive_context_student": true,
+    "quadratic_teacher_serving": false,
+    "validation_selected_alpha": 0.4,
+    "validation": {
+      "hit_at_10": 0.13846153846153847,
+      "ndcg_at_10": 0.06601985551181101,
+      "fresh_hit_at_10": 0.04,
+      "head_share_at_10": 0.4803846153846154
+    }
+  },
+  "paper_results": {
+    "watch_time_percent": 0.406,
+    "vertical_category_percent": 0.188,
+    "clustering_coefficient_percent": -0.957
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

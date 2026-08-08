@@ -1475,6 +1475,17 @@ def update(
                 ),
             }
         )
+    elif algorithm in {
+        "rlaif", "process-supervision", "math-shepherd", "self-rewarding",
+        "luffy", "ttrl", "absolute-zero", "intuitor", "cispo", "spiral",
+        "conspo",
+    }:
+        from .p0_20260808 import update_p0
+
+        gradient, loss, diagnostics = update_p0(
+            algorithm, state, group, probabilities, reference, sampled, rng,
+            cache_index=cache_index,
+        )
     else:
         rewards = group.rewards[sampled]
         if algorithm == "gprl":
@@ -1527,7 +1538,9 @@ def update(
     if algorithm in {
         "ripo", "tis", "icepop", "kpop", "gppo", "dr-grpo", "armor",
         "reinforce-plus", "taco", "chord", "vapo",
-        "vad",
+        "vad", "rlaif", "process-supervision", "math-shepherd",
+        "self-rewarding", "luffy", "ttrl", "absolute-zero", "intuitor",
+        "cispo", "spiral", "conspo",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

@@ -1,0 +1,30 @@
+{
+  "paper": {
+    "title": "Data Mixing Laws: Optimizing Data Mixtures by Predicting LM Performance"
+  },
+  "dataset": {
+    "name": "WikiText-2 + public narrative domain",
+    "tokens": 240000
+  },
+  "baseline": {
+    "name": "uniform mixture",
+    "validation_loss": 5.672924328383141
+  },
+  "method": {
+    "name": "predicted optimal mixture",
+    "validation_loss": 5.475767325192497
+  },
+  "relative": {
+    "validation_loss_percent": -3.4754033683159733
+  },
+  "stages": {
+    "pilot_mixtures": 10,
+    "law": "L_i(p)=c_i+exp(a_i p+b_i)",
+    "selected_domain_0_weight": 0.99,
+    "unseen_grid_points": 99
+  },
+  "paper_results": {
+    "equivalent_extra_training_percent": 48.0
+  },
+  "scope": "实际用公开文本域的十组 pilot mixture 拟合逐域指数 mixing law，并在未训练配比网格上选择最优配比；小型 unigram proxy 不等同于 RedPajama 多模型 scaling curve。"
+}

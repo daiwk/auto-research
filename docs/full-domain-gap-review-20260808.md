@@ -19,7 +19,11 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 闭环，并未声明二级主题覆盖，因此不能据此得出“全领域无遗漏”。现在全域批次会被测试强制
 检查 24 个二级主题是否都有审计记录。
 
-## 结论摘要
+## 结论摘要与完成状态
+
+> 2026-08-08：本页识别的 **38 个 P0 已全部实现**，包括 19 个 reproduction
+> adapter、11 个后训练 objective 和 8 个 Agent 方法；固定 seed 指标见
+> [`experiments/global-p0-20260808-seed42.json`](experiments/global-p0-20260808-seed42.json)。
 
 | 领域 | 真正的主要缺口 | P0 建议 | P1 / P2 与边界 |
 |---|---|---:|---|
@@ -33,7 +37,7 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 
 ## 搜广推与 LLM 应用
 
-### 已确认的 P0
+### 已实现的 P0
 
 | 二级主题 | 论文 | 为什么属于缺口 | 原文线上证据 |
 |---|---|---|---|
@@ -63,7 +67,7 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 
 ## 基础模型
 
-### P0：可在本地或单卡公平复现
+### P0：已在本地公平复现并接入 evolve
 
 | 二级主题 | 论文 | 需要补的真实变量 |
 |---|---|---|
@@ -89,7 +93,7 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 
 当前 DPO/GRPO/OPD 等 objective 数量很多，但“objective 名字多”掩盖了三条真正缺失的主干。
 
-### P0
+### P0（已实现）
 
 | 主干 | 论文 | 缺失机制 |
 |---|---|---|
@@ -111,7 +115,7 @@ PPO、GAE、DeepSeek-R1/GRPO 等原论文没有被再次列为“缺失 adapter�
 
 ## Agent
 
-### P0
+### P0（已实现）
 
 | 二级主题 | 论文 | 缺失机制 |
 |---|---|---|
@@ -128,13 +132,14 @@ P1 还包括 Agent-R1、CAMEL 和 ToolBench/ToolLLM。公共评测基础设施�
 WebArena、官方 SWE-bench、OSWorld/真实浏览器需要容器、站点快照或外部 runtime。用户此前已经
 决定后续再做，因此它们被明确标为 P2 延后，现有 deterministic mini-suite 不得改名冒充接入。
 
-## 下一步执行顺序
+## 本轮实际执行结果
 
-1. 先实现工业 P0，并把论文原始线上表格、公开代码状态和本地公平基线写入每篇详情页。
-2. 同时补基础模型 P0，使 evolve 真正能够搜索位置编码、attention head、混合结构和数据配比。
-3. 后训练先补过程奖励/RLAIF，再补 test-time RL、自博弈和 off-policy 稳定性；所有方法进入统一
-   reward、KL、长度、seed 报告协议。
-4. Agent 先做 ReTool/ToolRL/DeepResearcher 和 skill consolidation，再接 GAIA；真实浏览器和
-   官方 SWE-bench 保持延后，不伪装完成。
-5. 后续每轮“有没有遗漏”必须追加一个带 `scope_kind: global` 或明确局部范围的 ledger batch；
-   全域审计若少任一二级主题，CI 直接失败。
+1. 工业 P0 已完成并逐篇记录量化线上证据、原作者代码状态、本地公平基线和负结果。
+2. RoPE、ALiBi、GQA、Hymba、MoBA、BLT、DoReMi 与 Data Mixing Laws 已成为可执行 adapter；
+   结构和数据配比算子已进入 evolve。
+3. 11 个后训练方法进入统一 reward、KL、长度、seed 协议；TTRL/INTUITOR 在当前无分布漂移
+   mini-suite 上未提升，作为保真边界而非“失败隐藏”。
+4. 8 个 Agent 方法已运行 120 episodes 并记录方法特有 telemetry；真实浏览器和官方
+   SWE-bench 仍保持延后，不伪装完成。
+5. 后续每轮“有没有遗漏”继续追加 `scope_kind: global` 或明确局部范围的 ledger batch；
+   全域审计缺任一二级主题时 CI 直接失败。

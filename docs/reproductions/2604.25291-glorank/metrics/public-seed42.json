@@ -1,0 +1,54 @@
+{
+  "paper": {
+    "title": "GloRank: Global-action-space Generative Reranking"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "glorank",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "GloRank",
+    "hit_at_10": 0.05,
+    "ndcg_at_10": 0.01973161763324753,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.18692307692307691
+  },
+  "relative": {
+    "hit_at_10_percent": -43.47826086956522,
+    "ndcg_at_10_percent": -44.257920558195345,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -36.38743455497383
+  },
+  "stages": {
+    "residual_semantic_id_levels": 3,
+    "global_sid_action_space": true,
+    "listwise_sft_demonstrations": true,
+    "group_relative_reward_update": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.038461538461538464,
+      "ndcg_at_10": 0.023570069309679944,
+      "fresh_hit_at_10": 0.0,
+      "head_share_at_10": 0.19346153846153846
+    }
+  },
+  "paper_results": {
+    "watch_time_percent": 0.095,
+    "effective_view_percent": 0.111,
+    "like_percent": 0.286,
+    "traffic_percent": 7.8
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

@@ -1,0 +1,52 @@
+{
+  "paper": {
+    "title": "OnePiece: Context Engineering and Latent Reasoning for Cascade Ranking"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "onepiece",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "OnePiece",
+    "hit_at_10": 0.09615384615384616,
+    "ndcg_at_10": 0.04349395240865066,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.23923076923076922
+  },
+  "relative": {
+    "hit_at_10_percent": 8.695652173913043,
+    "ndcg_at_10_percent": 22.870987846222956,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -18.586387434554986
+  },
+  "stages": {
+    "structured_context_tokens": 2,
+    "blockwise_latent_reasoning_steps": 3,
+    "progressive_retrieval_click_value_targets": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.11538461538461539,
+      "ndcg_at_10": 0.06198172527930935,
+      "fresh_hit_at_10": 0.04,
+      "head_share_at_10": 0.2530769230769231
+    }
+  },
+  "paper_results": {
+    "retrieval_gmv_uu_percent": 1.08,
+    "ranking_gmv_uu_percent": 1.12,
+    "ad_revenue_percent": 2.9
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

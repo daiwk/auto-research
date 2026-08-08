@@ -63,6 +63,7 @@
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 uplift 纳入生成式召回 reward，以 MoPO 平衡即时和长期价值。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：以类目约束残差 Semantic ID 缩小生成空间，再由专家奖励引导 group-relative 策略更新。
 - [UniVA](../2605.05803-univa/README.md)：使用 Commercial SID、generation-as-ranking 和价值引导 trie beam 生成广告候选。
+- [GloRank](../2604.25291-glorank/README.md)：全局 SID action space、listwise SFT 与组相对奖励共同优化全库生成重排。
 - [GenRec](../2604.14878-genrec/README.md)：把整页作为 NTP 目标，并以 GRPO-SR 和 NLL 约束联合优化 page policy。
 - [LWGR](../2605.18771-lwgr/README.md)：把 LLM 世界知识与推荐分数做约束融合，生成兼顾相关性与知识性的候选。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由联合多个业务生成目标。
@@ -74,6 +75,9 @@
 - [DOS](../2602.04460-dos/README.md)：以协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、Semantic ID 和跨行为融合统一多个电商生成推荐场景。
 - [HiGR](../2512.24787-higr/README.md)：通过层级 Semantic ID、粗到细 slate decoder 和 ORPO 生成整组推荐结果。
+- [DualGR](../2511.12518-dualgr/README.md)：以长短兴趣路由、约束 SID 前缀和曝光惩罚改善生成召回。
+- [IntSR](../2509.21179-intsr/README.md)：用显式 query、隐式会话意图与时间上下文统一搜索和推荐生成。
+- [OnePiece](../2509.18091-onepiece/README.md)：在级联推荐中加入 context token、块级 latent reasoning 与渐进多任务训练。
 - [OneRec-V2](../2508.20900-onerec-v2/README.md)：用 lazy decoder 提升生成效率，并通过真实反馈 RL 与 GBPO 优化序列。
 - [GenRank](../2505.04180-genrank/README.md)：把点击、互动等动作编码成生成目标，以 action-oriented generation 完成排序。
 - [PinRec](../2504.10507-pinrec/README.md)：根据目标 outcome 条件生成多 token 物品表示，直接完成召回。
@@ -99,6 +103,8 @@
 - [SAM](../2607.12714-sam/README.md)：预测品类补货周期并动态屏蔽购买前已满足意图，降低购买后重复推荐。
 - [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复访问原始用户 token，把逐层状态从序列长度中解耦并支持 request-only 共享。
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 动态平衡相关性与多样性。
+- [HAP](../2603.03770-hap/README.md)：按候选难度分配轻量或强分支并对齐异构预排输出。
+- [OneRanker](../2603.02999-oneranker/README.md)：用 fake item token 和一致性损失统一 generation/value/ranking。
 - [HiSAC](../2602.21009-hisac/README.md)：用层级投票压缩超长历史，再以 query-conditioned soft routing 选择兴趣 agent。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一网络中融合 dense 特征交互和序列建模，并按预算选择训练模块。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task token 化，让领域与任务参与每层特征交互。
@@ -115,6 +121,7 @@
 - [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache 扩展超长序列。
 - [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用多通道注意力和 multi-stage FFN 扩展特征交互模型容量。
 - [AdaF²M²](../2501.15816-adaf2m2/README.md)：用 feature-mask 多次前向和 state-aware adapter 改善特征学习与状态适配。
+- [CWM](../2406.07932-cwm/README.md)：估计统一时长干预下的反事实观看收益以抵消 duration bias。
 - [PLE](../recsys2020-ple-ple/README.md)：把共享与任务专属 experts 分开，并以 CGC gate 渐进抽取多任务表示。
 - [DCN-V2](../2008.13535-dcn-v2/README.md)：使用低秩专家混合显式构造特征交互，并与 deep tower 联合排序。
 - [BST](../1905.06874-bst/README.md)：让 Transformer 联合编码候选商品与带位置的行为序列。
@@ -154,6 +161,7 @@
 - [GR4AD](../2602.22732-gr4ad/README.md)：通过 RSPO 优化可变长度广告生成，并结合 LazyAR 降低推理成本。
 - [S-GRec](../2602.10606-s-grec/README.md)：只采样少量 PSJ 反馈，并用 advantage 符号门控和幅度约束稳定 A2PO。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：使用 logged propensity 和策略梯度自动调节广告排序 utility 权重。
+- [MPFormer](../2508.20400-mpformer/README.md)：目标 token 与动态 quota 让多任务检索共享训练/serving 资源。
 - [OneRec-V2](../2508.20900-onerec-v2/README.md)：利用真实时长反馈和 GBPO 对生成序列进行强化学习。
 - [SERAL](../2502.13539-seral/README.md)：通过 IPO 对齐惊喜度偏好，并在 nearline 链路应用认知画像。
 - [LEADRE](../2411.13789-leadre/README.md)：使用 DPO 对齐 Semantic ID 生成与广告转化偏好。
@@ -181,8 +189,10 @@
 - [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead 的列表价值蒸馏为在线 dense prefix labels，降低生成式重排延迟。
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 在相关性和多样性之间动态调整混排权重。
 - [GenRec](../2604.14878-genrec/README.md)：把整页结果作为生成目标，并联合 page reward 与 NLL 约束优化页面级决策。
+- [Dual-Rerank](../2604.07420-dual-rerank/README.md)：AR 教师刻画顺序依赖，NAR 学生并行推理并联合列表效用蒸馏。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：利用 logged propensity 和策略梯度自动调节广告混排 utility 权重。
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：以 ordered regression 估计列表前缀价值，再按 CLICK/PAY 队列、mask 和 MMR 生成混排结果。
+- [CDM](../2406.09021-cdm/README.md)：用 MMR 教师生成可控多样性列表并蒸馏上下文边际收益。
 
 ## 内容理解、审核与风险控制
 
@@ -227,6 +237,7 @@
 - [S-GRec](../2602.10606-s-grec/README.md)：LLM judge 只在训练期调用，线上仅部署轻量 SID generator。
 - [OneTrans](../2510.26104-onetrans/README.md)：在多场景间共享因果 Transformer，并复用 KV cache 加速线上推理。
 - [OneRec-V2](../2508.20900-onerec-v2/README.md)：用 lazy decoder 和并行策略降低生成式推荐延迟。
+- [RADAR](../2506.07261-radar/README.md)：将高成本全排序移到请求后异步执行，并缓存为下一请求召回候选。
 - [LONGER](../2505.04421-longer/README.md)：通过 token merge、混合注意力和缓存降低超长序列 serving 成本。
 - [MSD](../2412.06860-msd/README.md)：把 teacher 知识蒸馏到小模型，并以 LoRA 与缓存表征控制 CTR serving 成本。
 - [BAHE](../2403.19347-bahe/README.md)：缓存原子行为的浅层编码，只在线执行高层序列聚合。

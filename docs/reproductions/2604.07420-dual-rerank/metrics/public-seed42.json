@@ -1,0 +1,54 @@
+{
+  "paper": {
+    "title": "Dual-Rerank: Causality and Utility for Generative Reranking"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "dual-rerank",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "Dual-Rerank",
+    "hit_at_10": 0.07692307692307693,
+    "ndcg_at_10": 0.039171245481966877,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.4103846153846154
+  },
+  "relative": {
+    "hit_at_10_percent": -13.043478260869566,
+    "ndcg_at_10_percent": 10.659283900326624,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": 39.659685863874344
+  },
+  "stages": {
+    "autoregressive_teacher": true,
+    "non_autoregressive_student": true,
+    "sequential_knowledge_distillation": true,
+    "ldro_detached_list_reward": true,
+    "validation_selected_alpha": 0.9,
+    "validation": {
+      "hit_at_10": 0.16153846153846155,
+      "ndcg_at_10": 0.08752395324703316,
+      "fresh_hit_at_10": 0.04,
+      "head_share_at_10": 0.42923076923076925
+    }
+  },
+  "paper_results": {
+    "long_view_percent": 1.107,
+    "whole_page_ctr_percent": 0.714,
+    "query_reformulation_percent": -1.309,
+    "latency_ms": 12.1
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

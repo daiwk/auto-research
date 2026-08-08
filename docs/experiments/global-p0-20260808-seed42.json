@@ -1,0 +1,399 @@
+{
+  "batch": "2026-08-08-global-theme-gap-review-p0",
+  "seed": 42,
+  "post_training": {
+    "rlaif": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.640625,
+        "mean_reward": 0.7236528129820922,
+        "entropy": 1.626267651052243,
+        "kl_from_reference": 0.16549181816981243
+      },
+      "relative_accuracy": 1.7333333333333334,
+      "diagnostics": {
+        "ai_preference_pairs": 2.0,
+        "position_swap_debiased": 1.0,
+        "preference_margin": 2.0295712838824707,
+        "loss": 0.1234485906027844,
+        "policy_entropy": 1.6057524392078948
+      }
+    },
+    "process-supervision": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.578125,
+        "mean_reward": 0.6657008447056338,
+        "entropy": 1.7657541489046507,
+        "kl_from_reference": 0.026005320317404178
+      },
+      "relative_accuracy": 1.4666666666666666,
+      "diagnostics": {
+        "step_labels": 4.0,
+        "active_learning_priority": 0.39717266955864006,
+        "outcome_only_gap": 0.4544123045027701,
+        "loss": -0.07576985575807513,
+        "policy_entropy": 1.7672157502111097
+      }
+    },
+    "math-shepherd": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.625,
+        "mean_reward": 0.7119604803714905,
+        "entropy": 1.780354995536342,
+        "kl_from_reference": 0.011404473685712766
+      },
+      "relative_accuracy": 1.6666666666666667,
+      "diagnostics": {
+        "mc_continuations": 36.0,
+        "automatic_process_labels": 6.0,
+        "step_label_mean": 0.16666666666666666,
+        "loss": -0.0,
+        "policy_entropy": 1.785262811495159
+      }
+    },
+    "self-rewarding": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.625,
+        "mean_reward": 0.7112418100993936,
+        "entropy": 1.6288551878620738,
+        "kl_from_reference": 0.16290428135998133
+      },
+      "relative_accuracy": 1.6666666666666667,
+      "diagnostics": {
+        "self_judged_pairs": 1.0,
+        "judge_policy_shared": 1.0,
+        "iterative_preference_round": 15.0,
+        "loss": 0.12837263576487323,
+        "policy_entropy": 1.6086931745469233
+      }
+    },
+    "luffy": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.53125,
+        "mean_reward": 0.625786691434544,
+        "entropy": 1.7623159054021138,
+        "kl_from_reference": 0.029443563819941357
+      },
+      "relative_accuracy": 1.2666666666666666,
+      "diagnostics": {
+        "on_policy_rollouts": 4.0,
+        "off_policy_guidance": 2.0,
+        "regularized_is_mean": 1.7,
+        "loss": -0.0817804293506927,
+        "policy_entropy": 1.7690105650326344
+      }
+    },
+    "ttrl": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "relative_accuracy": 0.0,
+      "diagnostics": {
+        "ground_truth_labels": 0.0,
+        "majority_vote_size": 4.0,
+        "consensus_rate": 1.0,
+        "loss": -0.0,
+        "policy_entropy": 1.791759469222055
+      }
+    },
+    "absolute-zero": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.59375,
+        "mean_reward": 0.6900456082956962,
+        "entropy": 1.7882660824248766,
+        "kl_from_reference": 0.0034933867971783206
+      },
+      "relative_accuracy": 1.5333333333333334,
+      "diagnostics": {
+        "human_curated_examples": 0.0,
+        "self_generated_tasks": 4.0,
+        "verifier_calls": 4.0,
+        "curriculum_score": 0.5,
+        "loss": -0.00893609247142449,
+        "policy_entropy": 1.7881448703061056
+      }
+    },
+    "intuitor": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "relative_accuracy": 0.0,
+      "diagnostics": {
+        "external_reward_calls": 0.0,
+        "self_certainty_mean": 5.999867269679271e-12,
+        "intrinsic_kl_to_uniform": 5.999867269679271e-12,
+        "loss": -0.0,
+        "policy_entropy": 1.791759469222055
+      }
+    },
+    "cispo": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.5,
+        "mean_reward": 0.6009954910247568,
+        "entropy": 1.7083417737738014,
+        "kl_from_reference": 0.08341769544825355
+      },
+      "relative_accuracy": 1.1333333333333333,
+      "diagnostics": {
+        "importance_ratio_mean": 1.0045495000243834,
+        "clipped_ratio_fraction": 0.0,
+        "token_level_is_clip": 1.0,
+        "loss": -0.2392642762851383,
+        "policy_entropy": 1.6949709587143067
+      }
+    },
+    "spiral": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.34375,
+        "mean_reward": 0.5013214140334054,
+        "entropy": 1.7895487133381456,
+        "kl_from_reference": 0.002210755883909164
+      },
+      "relative_accuracy": 0.4666666666666667,
+      "diagnostics": {
+        "self_play_roles": 2.0,
+        "role_conditioned_advantages": 4.0,
+        "human_reward_calls": 0.0,
+        "loss": -0.0026650785339779604,
+        "policy_entropy": 1.7899825315327824
+      }
+    },
+    "conspo": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.640625,
+        "mean_reward": 0.7241567802319283,
+        "entropy": 1.7828058034807128,
+        "kl_from_reference": 0.008953665741342378
+      },
+      "relative_accuracy": 1.7333333333333334,
+      "diagnostics": {
+        "length_normalized_sequence_scores": 4.0,
+        "infonce_group_size": 4.0,
+        "curriculum_margin": 1.0,
+        "reward_gap_std": 0.0,
+        "loss": 2.751537321506218,
+        "policy_entropy": 1.7838997827573817
+      }
+    }
+  },
+  "agent": {
+    "deepresearcher": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.5
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "reflections": 120,
+        "policy_updates": 120,
+        "browser_queries": 360,
+        "references_collected": 360,
+        "search_queries": 360,
+        "outcome_rewards": 120,
+        "trajectory_rollouts": 240
+      }
+    },
+    "retool": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.050000000000001
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "reasoning_steps": 480,
+        "actions": 360,
+        "verification_retries": 120,
+        "policy_updates": 120,
+        "outcome_rewards": 120,
+        "real_tool_responses": 360
+      }
+    },
+    "toolrl": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.125
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "tool_call_candidates": 540,
+        "tool_calls_accepted": 360,
+        "policy_updates": 120,
+        "dense_credit_updates": 540
+      }
+    },
+    "sage": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.3000000000000001
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "skills_created": 12,
+        "skills_reused": 108,
+        "policy_updates": 120,
+        "outcome_rewards": 120,
+        "trajectory_rollouts": 240,
+        "skill_document_updates": 12,
+        "cross_task_skill_reuses": 108
+      }
+    },
+    "memskill": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.32000000000000023
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "skills_created": 48,
+        "skills_reused": 108,
+        "policy_updates": 120,
+        "skill_document_updates": 48,
+        "memory_operations": 120
+      }
+    },
+    "memento-skills": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 0.05,
+        "joint_success": 0.05,
+        "average_cost": 0.28000000000000047
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "reflections": 114,
+        "skills_reused": 114,
+        "skill_document_updates": 120,
+        "memory_operations": 240
+      }
+    },
+    "searl": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.34000000000000064
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "policy_updates": 120,
+        "skill_graph_nodes": 12,
+        "skill_graph_edges": 12,
+        "downstream_credit_updates": 360,
+        "step_value_queries": 360,
+        "router_updates": 120,
+        "memory_bank_updates": 120
+      }
+    },
+    "agent0": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.3199999999999995
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "policy_updates": 120,
+        "outcome_rewards": 120,
+        "trajectory_rollouts": 360,
+        "simulated_user_turns": 420
+      }
+    }
+  }
+}

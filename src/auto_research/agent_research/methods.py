@@ -1394,7 +1394,9 @@ class CoEvoMemAgent(BaseAgent):
 
 
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
-    return {
+    from .p0_20260808 import P0_AGENTS
+
+    classes = {
         "long-context": LongContextAgent,
         "react": ReActAgent,
         "reflexion": ReflexionAgent,
@@ -1438,4 +1440,6 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "ocsd": OCSDAgent,
         "vermem": VerMemAgent,
         "coevo-mem": CoEvoMemAgent,
-    }[method](capacity, rng)
+        **P0_AGENTS,
+    }
+    return classes[method](capacity, rng)

@@ -1,0 +1,52 @@
+{
+  "paper": {
+    "title": "RADAR: Deferred Asynchronous Retrieval"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "radar",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "RADAR",
+    "hit_at_10": 0.07307692307692308,
+    "ndcg_at_10": 0.034412950454501275,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.23423076923076924
+  },
+  "relative": {
+    "hit_at_10_percent": -17.391304347826086,
+    "ndcg_at_10_percent": -2.782962161730152,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -20.287958115183248
+  },
+  "stages": {
+    "offline_full_ranker_pool_multiplier": 50,
+    "cohort_cache_entries": 1920,
+    "online_pre_rank_bypass": true,
+    "live_deferred_merge": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.09615384615384616,
+      "ndcg_at_10": 0.050193617666147904,
+      "fresh_hit_at_10": 0.06,
+      "head_share_at_10": 0.23653846153846153
+    }
+  },
+  "paper_results": {
+    "recall_at_200_multiplier": 2.0,
+    "engagement_percent": 0.8
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

@@ -16,6 +16,8 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "webgpt", "saycan", "pal", "art",
         "tapo", "grsd", "envace",
         "agent-opsd", "ocsd", "vermem", "coevo-mem",
+        "deepresearcher", "retool", "toolrl", "sage", "memskill",
+        "memento-skills", "searl", "agent0",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -80,6 +82,29 @@ def test_closed_audit_agent_mechanisms_are_observable(
         method=method, benchmark="planbench-mini", episodes=36, output_dir=tmp_path,
     )).run()
     assert result.metrics["joint_success"] == 1.0
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "diagnostics"),
+    [
+        ("deepresearcher", ("search_queries", "references_collected")),
+        ("retool", ("real_tool_responses", "verification_retries")),
+        ("toolrl", ("tool_call_candidates", "dense_credit_updates")),
+        ("sage", ("skills_created", "cross_task_skill_reuses")),
+        ("memskill", ("memory_operations", "skill_document_updates")),
+        ("memento-skills", ("memory_operations", "skills_reused")),
+        ("searl", ("skill_graph_nodes", "memory_bank_updates")),
+        ("agent0", ("trajectory_rollouts", "simulated_user_turns")),
+    ],
+)
+def test_global_p0_agent_mechanisms_are_observable(
+    tmp_path: Path, method: str, diagnostics: tuple[str, ...]
+):
+    result, _ = AgentResearchRunner(AgentResearchConfig(
+        method=method, benchmark="planbench-mini", episodes=36, output_dir=tmp_path,
+    )).run()
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
 

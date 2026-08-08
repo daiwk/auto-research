@@ -55,6 +55,14 @@ METHODS = (
     "ocsd",
     "vermem",
     "coevo-mem",
+    "deepresearcher",
+    "retool",
+    "toolrl",
+    "sage",
+    "memskill",
+    "memento-skills",
+    "searl",
+    "agent0",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

@@ -1,0 +1,87 @@
+{
+  "paper": {
+    "arxiv_id": "2502.13189",
+    "title": "MoBA: Mixture of Block Attention for Long-Context LLMs",
+    "url": "https://arxiv.org/abs/2502.13189",
+    "organization": "Moonshot AI"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "moba",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.043058142066002,
+    "perplexity": 421.17909291166296,
+    "instruction_loss": 6.0724897384643555,
+    "primary": -6.953931602835655,
+    "public_composite": -6.953931602835655,
+    "composite_loss": 6.953931602835655,
+    "fitness": -6.953931602835655,
+    "initial_loss": 6.17989764213562,
+    "final_loss": 6.145263242721557,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "moba",
+    "lm_loss": 6.047954469919205,
+    "perplexity": 423.2463807649218,
+    "instruction_loss": 6.080044746398926,
+    "primary": -6.959961181879043,
+    "public_composite": -6.959961181879043,
+    "composite_loss": 6.959961181879043,
+    "fitness": -6.959961181879043,
+    "initial_loss": 6.184388542175293,
+    "final_loss": 6.150835561752319,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "block_size": 8.0,
+      "selected_block_fraction": 0.25
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": 0.08102400701921532,
+    "perplexity_percent": 0.4908334454512999
+  },
+  "paper_results": {
+    "context_tokens": 1000000
+  },
+  "scope": "实际将历史划分为 8-token blocks，以 query 对 block key centroid 的相似度选择 top-2 causal blocks，再在命中块内执行精确 attention；PyTorch reference 未复刻百万上下文 fused kernel。"
+}

@@ -27,6 +27,7 @@
 - 2026-02 · [SIGMA](../2602.22913-sigma/README.md)：用 LLM 对物品做多视角语义 grounding，以混合 SID/ID token 和多任务 SFT 训练生成式推荐器。
 - 2026-02 · [HiSAC](../2602.21009-hisac/README.md)：用层级投票生成少量兴趣 agent，再对超长历史做 query-conditioned soft routing。
 - 2025-12 · [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级意图 agents、混合压缩表示、meta-prompt 和约束偏好 RL 升级淘宝意图推理。
+- 2025-09 · [IntSR](../2509.21179-intsr/README.md)：把显式 query、隐式会话意图、时间信息和 POI 词表统一为搜索推荐生成框架。
 - 2025-08 · [SaviorRec](../2508.01375-saviorrec/README.md)：用行为监督训练内容编码器，生成 RQ Semantic ID，并通过多行为适配模块改善冷启动。
 - 2025-06 · [MGOE](../2506.10520-mgoe/README.md)：构建宏观任务合并图，让 graph experts 显式传播多任务关系后进入独立预测塔。
 - 2025-05 · [SORT-Gen](../2505.07197-sort-gen/README.md)：用 causal Transformer ordered regression 估计列表前缀多目标价值，再以目标队列、mask 和 MMR 单次批量生成 slate。
@@ -52,6 +53,7 @@
 - 2026-08 · [STEPS](../2608.01949-steps/README.md)：用 ordinal planning、trajectory execution 与 filtering agent 闭合“是否推送—何时再唤醒”，并已在抖音全量部署。
 - 2026-05 · [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
 - 2026-05 · [FLUID](../2605.21832-fluid/README.md)：把直播多模态切片量化成 slice/room 两级 LUCID，以 prefix n-gram late fusion 完全替代短生命周期候选 ID。
+- 2026-03 · [HAP](../2603.03770-hap/README.md)：按候选异质难度路由轻量/强预排分支，并以 harmonization 对齐不同计算预算。
 - 2026-02 · [MixFormer](../2602.14110-mixformer/README.md)：在统一 Transformer 中平衡 dense 特征交互与序列建模，并按预算选择可训练模块。
 - 2026-02 · [MDL](../2602.07520-mdl/README.md)：把 feature、scenario、task 全部 token 化，并以 domain-feature attention 深层共享。
 - 2026-02 · [MSN](../2602.07526-msn/README.md)：用两轴 Product-Key Memory 扩大参数容量，每次只激活 top-k 槽位并与 dense 主干门控融合。
@@ -88,11 +90,17 @@
 - 2026-07 · [UniR²](../2607.24439-unir2/README.md)：用统一 decoder 和 Dual-Query Prefix-Causal Attention 同时学习层级 SID 生成与多目标排序，并以 ranking-only LoRA 避免梯度冲突。
 - 2026-07 · [UAME](../2607.17092-uame/README.md)：把满意度分数建模为均值—方差 Gaussian 变量，用多目标冲突产生的不确定性加权 pairwise 排序训练。
 - 2026-07 · [RECAP](../2607.15730-recap/README.md)：把流式用户画像维护为固定容量语义状态，并用推荐反馈评价器和 GRPO 闭环优化画像更新策略。
+- 2026-04 · [GloRank](../2604.25291-glorank/README.md)：在全局 Semantic ID action space 上做 listwise SFT 与组相对奖励优化，避免局部候选池限制。
 - 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
+- 2026-04 · [Dual-Rerank](../2604.07420-dual-rerank/README.md)：以 AR 顺序教师蒸馏 NAR 并行名次学生，并把列表效用与延迟共同纳入目标。
 - 2026-02 · [GR4AD](../2602.22732-gr4ad/README.md)：构造用户感知 Semantic ID，结合 LazyAR、可变长度生成和 RSPO 完成生成式广告召回。
 - 2026-01 · [OneMall](../2601.21770-onemall/README.md)：以统一 Semantic ID、场景 prompt 和跨行为融合覆盖商品卡、短视频与直播生成推荐。
+- 2025-11 · [DualGR](../2511.12518-dualgr/README.md)：融合长短期兴趣路由、受约束 SID 前缀和曝光感知损失完成生成召回。
+- 2025-08 · [MPFormer](../2508.20400-mpformer/README.md)：以任务 token 驱动共享序列检索器，并按难度动态分配容量与 serving 配额。
 - 2025-08 · [OneRec-V2](../2508.20900-onerec-v2/README.md)：使用 lazy decoder 降低生成延迟，并用真实反馈强化学习和 GBPO 优化推荐序列。
 - 2025-02 · [OneRec](../2502.18965-onerec/README.md)：把 session 推荐建模为 Semantic ID 序列生成，并结合 MoE 与偏好优化对齐真实反馈。
+- 2024-06 · [CDM](../2406.09021-cdm/README.md)：将可控 MMR 教师的上下文多样性边际收益蒸馏到低延迟学生。
+- 2024-06 · [CWM](../2406.07932-cwm/README.md)：以统一视频时长干预下的反事实观看收益抵消 duration bias。
 - 2024-05 · [LEARN](../2405.03988-learn/README.md)：冻结 LLM 生成内容增强表征，再通过协同域适配改善冷启动和长尾推荐。
 - 2024-03 · [LSVCR](../2403.13574-lsvcr/README.md)：用 LoRA 学习 LLM 偏好，通过 SSC/VCC 双序列目标对齐评论语义和用户行为。
 
@@ -118,6 +126,7 @@
 - 2026-05 · [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
 - 2026-04 · [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item 请求，异步预计算 foundation-model latent，并通过 cache/fallback 服务线上排序。
 - 2026-01 · [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
+- 2025-06 · [RADAR](../2506.07261-radar/README.md)：在请求后异步运行完整排序器，把高价值结果缓存为下一请求的召回补充。
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 
 ## Pinterest
@@ -140,6 +149,7 @@
 - 2026-07 · [BARGE](../2607.21028-barge/README.md)：用 item-level ICA 恢复多 token Semantic ID 边界，通过逐层 HPR 与正交双路径 DPD 抑制生成漂移。
 - 2026-06 · [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 驱动候选修改，并用四级验证级联阻断可运行但语义错误的架构。
 - 2026-05 · [UniVA](../2605.05803-univa/README.md)：用 Commercial SID 和 generation-as-ranking 统一广告生成，并通过价值对齐 RL 与 trie beam 优化收益。
+- 2026-03 · [OneRanker](../2603.02999-oneranker/README.md)：用 fake item token 统一生成、价值预测和工业广告排序，并约束两种分布一致。
 - 2026-02 · [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。
 - 2025-12 · [HiGR](../2512.24787-higr/README.md)：先生成层级 Semantic ID 簇再解码物品 slate，并以 ORPO 做列表偏好对齐。
 - 2024-12 · [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，使用 top-k MoE 和通用/目标训练建模序列推荐。
@@ -170,6 +180,9 @@
 
 ## NetEase
 - 2026-07 · [Melo](../2607.23718-melo/README.md)：用多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
+
+## Shopee
+- 2025-09 · [OnePiece](../2509.18091-onepiece/README.md)：用上下文 token、块级 latent reasoning 和递进多任务训练统一级联排序。
 
 ## JD.com
 - 2026-07 · [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把 click/cart/order instruction 内化到 SID 生成，并用未来交互特权教师与熵路由蒸馏联合后训练。

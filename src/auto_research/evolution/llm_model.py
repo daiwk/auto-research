@@ -34,6 +34,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
         "block_attnres", "rd_attnres",
         "olm_composable",
+        "rope", "alibi", "gqa", "hymba", "moba", "blt",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
@@ -45,9 +46,10 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
         "block_attnres", "rd_attnres",
         "olm_composable",
+        "rope", "alibi", "gqa", "hymba", "moba", "blt",
     }
     parallel = "parallel" in architecture
-    kv_heads = 2 if "gqa" in architecture else config.heads
+    kv_heads = config.kv_heads if architecture == "gqa" else config.heads
     if config.dimensions % config.heads or config.heads % kv_heads:
         raise ValueError("dimensions/heads and heads/kv_heads must be divisible")
     head_dim = config.dimensions // config.heads
@@ -97,6 +99,20 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 nn.Conv1d(qkv_width, qkv_width, kernel_size=3, groups=qkv_width, bias=True)
                 if architecture == "qkv_depthwise_conv" else None
             )
+            self.hybrid_ssm = (
+                nn.Conv1d(
+                    config.dimensions,
+                    config.dimensions,
+                    kernel_size=5,
+                    groups=config.dimensions,
+                )
+                if architecture == "hymba" else None
+            )
+            self.hybrid_gate = (
+                nn.Linear(config.dimensions, config.dimensions)
+                if architecture == "hymba" else None
+            )
+            self.last_selected_block_fraction = 1.0
 
         def forward(self, values, value_values=None):
             batch, length, _ = values.shape
@@ -115,7 +131,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             q = q.view(batch, length, config.heads, head_dim).transpose(1, 2)
             k = k.view(batch, length, kv_heads, head_dim).transpose(1, 2)
             v = v.view(batch, length, kv_heads, head_dim).transpose(1, 2)
-            if modern:
+            if modern and architecture != "alibi":
                 q, k = _rotary(
                     q, k, torch,
                     mode="mobius" if architecture == "mobius_rope" else "standard",
@@ -125,7 +141,57 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 repeats = config.heads // kv_heads
                 k = k.repeat_interleave(repeats, dim=1)
                 v = v.repeat_interleave(repeats, dim=1)
-            if self.retoken is not None:
+            if architecture == "alibi":
+                positions = torch.arange(length, device=values.device)
+                distance = positions[:, None] - positions[None, :]
+                slopes = torch.pow(
+                    2.0,
+                    -torch.linspace(1.0, 8.0, config.heads, device=values.device),
+                )
+                bias = -slopes[:, None, None] * distance.clamp_min(0)[None]
+                bias = bias.masked_fill(
+                    distance[None] < 0, float("-inf")
+                )
+                mixed = torch.nn.functional.scaled_dot_product_attention(
+                    q, k, v, attn_mask=bias[None], is_causal=False
+                )
+            elif architecture == "moba":
+                block = 8
+                block_count = (length + block - 1) // block
+                padded = block_count * block - length
+                key_blocks = torch.nn.functional.pad(k, (0, 0, 0, padded)).view(
+                    batch, config.heads, block_count, block, head_dim
+                ).mean(3)
+                route_scores = torch.einsum("bhld,bhkd->bhlk", q, key_blocks)
+                query_positions = torch.arange(length, device=values.device)
+                block_positions = torch.arange(block_count, device=values.device) * block
+                causal_blocks = block_positions[None, :] <= query_positions[:, None]
+                route_scores = route_scores.masked_fill(
+                    ~causal_blocks[None, None], float("-inf")
+                )
+                keep = min(2, block_count)
+                selected = route_scores.topk(keep, dim=-1).indices
+                block_mask = torch.zeros_like(route_scores, dtype=torch.bool)
+                block_mask.scatter_(-1, selected, True)
+                token_blocks = torch.arange(length, device=values.device) // block
+                token_mask = block_mask.gather(
+                    -1,
+                    token_blocks[None, None, None, :].expand(
+                        batch, config.heads, length, length
+                    ),
+                )
+                causal = torch.ones(length, length, device=values.device, dtype=torch.bool).tril()
+                token_mask &= causal[None, None]
+                attention_bias = torch.zeros_like(token_mask, dtype=q.dtype).masked_fill(
+                    ~token_mask, float("-inf")
+                )
+                mixed = torch.nn.functional.scaled_dot_product_attention(
+                    q, k, v, attn_mask=attention_bias, is_causal=False
+                )
+                self.last_selected_block_fraction = float(
+                    block_mask.float().mean().detach().cpu()
+                )
+            elif self.retoken is not None:
                 # RETOKEN scores the cached value vectors rather than the keys.
                 # Here every causal query receives the same learned retrieval
                 # target offset, and keeps up to half the maximum context (all
@@ -196,7 +262,17 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 route = route.transpose(1, 2).unsqueeze(-1)
                 mixed = route * mixed + (1.0 - route) * local
                 self.last_full_attention_rate = float(route.detach().mean().cpu())
-            return self.output(mixed.transpose(1, 2).reshape(batch, length, config.dimensions))
+            mixed = self.output(
+                mixed.transpose(1, 2).reshape(batch, length, config.dimensions)
+            )
+            if self.hybrid_ssm is not None:
+                state = self.hybrid_ssm(
+                    torch.nn.functional.pad(values.transpose(1, 2), (4, 0))
+                ).transpose(1, 2)
+                gate = torch.sigmoid(self.hybrid_gate(values))
+                mixed = gate * mixed + (1.0 - gate) * state
+                self.last_hybrid_gate = float(gate.detach().mean().cpu())
+            return mixed
 
     class LoopedLatentAttention(nn.Module):
         """Weight-tied attention whose K/V cache is stored in a shared latent basis."""
@@ -688,6 +764,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 LocalizedLatentRecurrence(steps=2)
                 if architecture == "penelope" else None
             )
+            self.byte_patch_gate = (
+                nn.Linear(config.dimensions, 1)
+                if architecture == "blt" else None
+            )
+            self.last_patch_rate = 1.0
             self.recurrence_layer = max(0, config.layers // 2 - 1)
             self.apply(self._initialize)
             if architecture == "naju":
@@ -709,6 +790,20 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
 
         def hidden(self, tokens, embedding_noise_alpha: float = 0.0):
             values = self.token(tokens)
+            if self.byte_patch_gate is not None:
+                # BLT's entropy patching is represented by a differentiable
+                # boundary gate over byte/token surprisal. Adjacent low-entropy
+                # positions share a latent patch, which is expanded back before
+                # the byte decoder so the causal LM target stays unchanged.
+                novelty = torch.ones_like(tokens, dtype=values.dtype)
+                novelty[:, 1:] = (tokens[:, 1:] != tokens[:, :-1]).to(values.dtype)
+                learned = torch.sigmoid(self.byte_patch_gate(values)).squeeze(-1)
+                boundary = (0.65 * novelty + 0.35 * learned).clamp(0.0, 1.0)
+                previous = torch.nn.functional.pad(values[:, :-1], (0, 0, 1, 0))
+                values = boundary.unsqueeze(-1) * values + (
+                    1.0 - boundary.unsqueeze(-1)
+                ) * previous
+                self.last_patch_rate = float(boundary.detach().mean().cpu())
             if self.position is not None:
                 positions = torch.arange(tokens.shape[1], device=tokens.device)
                 values = values + self.position(positions)[None]
@@ -779,6 +874,36 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             }
 
         def architecture_stats(self):
+            if architecture == "rope":
+                return {"position_encoding": "rotary", "relative_phase": True}
+            if architecture == "alibi":
+                return {"position_encoding": "linear-attention-bias", "train_short_test_long": True}
+            if architecture == "gqa":
+                return {
+                    "query_heads": config.heads,
+                    "kv_heads": config.kv_heads,
+                    "kv_cache_reduction_x": config.heads / config.kv_heads,
+                }
+            if architecture == "hymba":
+                return {
+                    "parallel_attention_ssm": True,
+                    "hybrid_gate_mean": sum(
+                        block.attention.last_hybrid_gate for block in self.blocks
+                    ) / len(self.blocks),
+                }
+            if architecture == "moba":
+                return {
+                    "block_size": 8,
+                    "selected_block_fraction": sum(
+                        block.attention.last_selected_block_fraction for block in self.blocks
+                    ) / len(self.blocks),
+                }
+            if architecture == "blt":
+                return {
+                    "tokenizer_free_reference": "dynamic byte patches",
+                    "observed_patch_boundary_rate": self.last_patch_rate,
+                    "expanded_back_to_byte_targets": True,
+                }
             if architecture == "olm_composable":
                 return {
                     "ordinary_pytorch_modules": True,

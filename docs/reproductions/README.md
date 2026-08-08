@@ -60,7 +60,31 @@ pytest tests/test_research_module_docs.py
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 - 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
-## 全部复现（159/159）
+## 本轮全域 P0 补齐（19 个 adapter）
+
+- `glorank` · [GloRank](2604.25291-glorank/README.md)
+- `dual-rerank` · [Dual-Rerank](2604.07420-dual-rerank/README.md)
+- `oneranker` · [OneRanker](2603.02999-oneranker/README.md)
+- `radar` · [RADAR](2506.07261-radar/README.md)
+- `dualgr` · [DualGR](2511.12518-dualgr/README.md)
+- `mpformer` · [MPFormer](2508.20400-mpformer/README.md)
+- `hap` · [HAP](2603.03770-hap/README.md)
+- `onepiece` · [OnePiece](2509.18091-onepiece/README.md)
+- `intsr` · [IntSR](2509.21179-intsr/README.md)
+- `cdm` · [CDM](2406.09021-cdm/README.md)
+- `cwm` · [CWM](2406.07932-cwm/README.md)
+- `rope` · [RoPE / RoFormer](2104.09864-rope/README.md)
+- `alibi` · [ALiBi](2108.12409-alibi/README.md)
+- `gqa` · [GQA](2305.13245-gqa/README.md)
+- `hymba` · [Hymba](2411.13676-hymba/README.md)
+- `moba` · [MoBA](2502.13189-moba/README.md)
+- `blt` · [Byte Latent Transformer](2412.09871-blt/README.md)
+- `doremi` · [DoReMi](2305.10429-doremi/README.md)
+- `data-mixing-laws` · [Data Mixing Laws](2403.16952-data-mixing-laws/README.md)
+
+每篇详情页都给出原文代码状态、核心公式、原论文关键图、原文效果、本地公平基线、固定指标与可执行命令；本地负结果同样保留。
+
+## 全部复现（178/178）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|

@@ -1,0 +1,89 @@
+{
+  "paper": {
+    "arxiv_id": "2411.13676",
+    "title": "Hymba: A Hybrid-head Architecture for Small Language Models",
+    "url": "https://arxiv.org/abs/2411.13676",
+    "organization": "NVIDIA"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "hymba",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.043058097362518,
+    "perplexity": 421.1790740834907,
+    "instruction_loss": 6.072489857673645,
+    "primary": -6.953931576013565,
+    "public_composite": -6.953931576013565,
+    "composite_loss": 6.953931576013565,
+    "fitness": -6.953931576013565,
+    "initial_loss": 6.17989764213562,
+    "final_loss": 6.145263242721557,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "hymba",
+    "lm_loss": 6.124896928668022,
+    "perplexity": 457.09759718260625,
+    "instruction_loss": 6.143997669219971,
+    "primary": -7.046496579051018,
+    "public_composite": -7.046496579051018,
+    "composite_loss": 7.046496579051018,
+    "fitness": -7.046496579051018,
+    "initial_loss": 6.219394063949585,
+    "final_loss": 6.198422622680664,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 148672,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "parallel_attention_ssm": 1.0,
+      "hybrid_gate_mean": 0.5003671199083328
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": 1.3542618652172524,
+    "perplexity_percent": 8.528088243053444
+  },
+  "paper_results": {
+    "accuracy_vs_llama32_3b_percent": 1.32,
+    "cache_reduction_x": 11.67,
+    "throughput_x": 3.49
+  },
+  "scope": "实际在每层并行执行 causal attention 与深度卷积状态分支，并以输入相关 gate 融合；未复刻 1.5B 参数、meta tokens 和 fused kernel。"
+}

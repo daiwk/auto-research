@@ -77,6 +77,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "nsa_gated_attention", "wide_dynamic_width", "retoken", "optimizer:muon",
             "block_attnres", "rd_attnres",
             "olm_composable",
+            "rope", "alibi", "gqa", "hymba", "moba", "blt",
         ]
         text = direction.lower().replace("-", "")
         priority_terms = {
@@ -114,6 +115,12 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
                 "openlanguagemodel", "open language model", "olm",
                 "composable", "可组合", "预训练基础设施",
             ),
+            "rope": ("rope", "rotary", "旋转位置"),
+            "alibi": ("alibi", "linear bias", "长度外推"),
+            "gqa": ("gqa", "grouped query", "分组查询"),
+            "hymba": ("hymba", "hybrid head", "混合头"),
+            "moba": ("moba", "mixture of block", "块路由"),
+            "blt": ("byte latent", "blt", "字节 patch"),
         }
         for architecture, terms in priority_terms.items():
             if any(term in text for term in terms):
