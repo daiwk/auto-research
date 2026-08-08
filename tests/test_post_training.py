@@ -21,6 +21,7 @@ from auto_research.post_training.rollout_correction import (
         "ripo", "tis", "icepop", "online-icepop", "kpop", "gppo",
         "dr-grpo", "armor", "reinforce-plus", "taco", "chord", "vapo",
         "vad",
+        "distilled-rl", "u-opsd", "rp-opsd", "pcsd", "adrs", "mopd", "opd-lm",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -50,6 +51,29 @@ def test_lightning_opd_has_no_online_teacher_calls(tmp_path: Path):
     assert result.training["teacher_cache_entries"] == 32
     assert result.training["teacher_prefill_calls"] == 32
     assert result.training["online_teacher_calls"] == 0
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        ("distilled-rl", ("reverse_ratio_clip_rate", "negative_sample_resets", "sequence_geometric_normalizer")),
+        ("u-opsd", ("self_consistency_votes", "pseudo_solution_confidence", "external_supervision")),
+        ("rp-opsd", ("reasoning_pivot_mass", "privileged_positions", "reference_anchor")),
+        ("pcsd", ("persistent_gate_mean", "adaptive_window", "trend_attenuated_positions")),
+        ("adrs", ("teacher_value_advantage_gate", "return_teacher_association", "inference_time_skill")),
+        ("mopd", ("domain_teachers", "student_rollout_support", "teacher_merge_parameters")),
+        ("opd-lm", ("bidirectional_teacher", "autoregressive_anchor", "diffusion_denoising_views")),
+    ],
+)
+def test_closed_audit_post_training_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(PostTrainingConfig(
+        algorithm=algorithm, steps=24, maximum_examples=48, output_dir=tmp_path,
+    )).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+    assert result.training["teacher_cache_entries"] == 48
 
 
 @pytest.mark.parametrize(

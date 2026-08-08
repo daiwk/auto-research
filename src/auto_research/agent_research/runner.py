@@ -150,6 +150,16 @@ class AgentResearchRunner:
             "world_rehearsals": agent.world_rehearsals,
             "rolewise_advantage_updates": agent.rolewise_advantage_updates,
             "private_rehearsals": agent.private_rehearsals,
+            "recursive_belief_updates": agent.recursive_belief_updates,
+            "pivotal_turns": agent.pivotal_turns,
+            "observation_calibrations": agent.observation_calibrations,
+            "scaffold_ablations": agent.scaffold_ablations,
+            "local_verifier_calls": agent.local_verifier_calls,
+            "global_verifier_calls": agent.global_verifier_calls,
+            "memory_operations": agent.memory_operations,
+            "coevolution_alternations": agent.coevolution_alternations,
+            "router_updates": agent.router_updates,
+            "memory_bank_updates": agent.memory_bank_updates,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

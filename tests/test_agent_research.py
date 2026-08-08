@@ -15,6 +15,7 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "mrkl", "hugginggpt", "generative-agents", "memgpt",
         "webgpt", "saycan", "pal", "art",
         "tapo", "grsd", "envace",
+        "agent-opsd", "ocsd", "vermem", "coevo-mem",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -59,6 +60,26 @@ def test_latest_agentic_rl_mechanisms_are_observable(
         )
     ).run()
     assert result.metrics["joint_success"] == 1
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "diagnostics"),
+    [
+        ("agent-opsd", ("recursive_belief_updates", "pivotal_turns")),
+        ("ocsd", ("observation_calibrations", "scaffold_ablations")),
+        ("vermem", ("local_verifier_calls", "global_verifier_calls", "memory_operations")),
+        ("coevo-mem", ("coevolution_alternations", "router_updates", "memory_bank_updates")),
+    ],
+)
+def test_closed_audit_agent_mechanisms_are_observable(
+    tmp_path: Path, method: str, diagnostics: tuple[str, ...]
+):
+    result, _ = AgentResearchRunner(AgentResearchConfig(
+        method=method, benchmark="planbench-mini", episodes=36, output_dir=tmp_path,
+    )).run()
+    assert result.metrics["joint_success"] == 1.0
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
 

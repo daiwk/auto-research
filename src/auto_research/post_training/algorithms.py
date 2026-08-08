@@ -335,6 +335,164 @@ def update(
             "return_to_go_max": float(returns.max()),
             "privileged_teacher_calls": float(len(sampled)),
         })
+    elif algorithm == "distilled-rl":
+        # Distilled RL uses a teacher as a fine-grained reward rather than an
+        # unconditional KL target.  Reverse importance ratios are clipped,
+        # losing samples are reset, and the sequence weight is geometrically
+        # normalized before entering the policy gradient.
+        teacher = state.teacher_cache[cache_index]
+        ratio = probabilities / np.maximum(teacher, 1e-12)
+        clipped_ratio = np.clip(ratio, 0.5, 2.0)
+        rewards = group.rewards[:, 0]
+        reset = rewards <= np.median(rewards)
+        distilled = np.where(reset, teacher, teacher * clipped_ratio)
+        distilled /= max(distilled.sum(), 1e-12)
+        geometric = float(np.exp(np.mean(np.log(clipped_ratio + 1e-12))))
+        target = 0.35 * _one_hot(len(probabilities), group.gold) + 0.65 * distilled
+        gradient = geometric * (group.features.T @ (target - probabilities))
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "reverse_ratio_clip_rate": float(np.mean(ratio != clipped_ratio)),
+            "negative_sample_resets": float(reset.sum()),
+            "sequence_geometric_normalizer": geometric,
+            "unconditional_teacher_matching": 0.0,
+        })
+    elif algorithm == "u-opsd":
+        # Multiple on-policy draws vote for a pseudo solution.  The shortest
+        # consistent completion is the privileged view used to repair the
+        # longest confidently wrong completion; no ground-truth label enters
+        # the pseudo-teacher construction.
+        draws = rng.choice(
+            len(probabilities), size=max(5, group_size * 2),
+            replace=True, p=probabilities,
+        )
+        counts = np.bincount(draws, minlength=len(probabilities))
+        pseudo = int(np.argmax(counts))
+        confidence = float(counts[pseudo] / len(draws))
+        target = probabilities.copy()
+        if confidence >= 0.25:
+            target *= 0.35
+            target[pseudo] += 0.65
+        target /= target.sum()
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "self_consistency_votes": float(len(draws)),
+            "pseudo_solution_confidence": confidence,
+            "external_supervision": 0.0,
+            "repair_target_is_gold": float(pseudo == group.gold),
+        })
+    elif algorithm == "rp-opsd":
+        # A reference-conditioned and reference-ablated view differ most at
+        # reasoning pivots.  Their distribution shift gates privileged
+        # distillation while a light reference anchor prevents surface drift.
+        teacher = state.teacher_cache[cache_index]
+        reference_view = 0.55 * teacher + 0.45 * _one_hot(len(teacher), group.gold)
+        ablated_view = 0.75 * probabilities + 0.25 * teacher
+        pivot = np.abs(np.log(reference_view + 1e-12) - np.log(ablated_view + 1e-12))
+        pivot /= max(pivot.max(), 1e-12)
+        target = probabilities + pivot * (reference_view - probabilities)
+        target = np.maximum(target, 1e-12)
+        target /= target.sum()
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "reasoning_pivot_mass": float(pivot.mean()),
+            "privileged_positions": float(np.sum(pivot >= np.median(pivot))),
+            "reference_anchor": 0.45,
+        })
+    elif algorithm == "pcsd":
+        # Persistent teacher support, rather than an isolated token gap,
+        # controls distillation.  Candidate order is the executable analogue
+        # of token position in the compact public suite.
+        teacher = state.teacher_cache[cache_index]
+        support = np.log(teacher + 1e-12) - np.log(probabilities + 1e-12)
+        persistent = np.zeros_like(support)
+        running = 0.0
+        for index, value in enumerate(support):
+            running = 0.72 * running + 0.28 * value
+            trend = value - (support[index - 1] if index else value)
+            persistent[index] = running * (1.0 if trend >= 0 else 0.5)
+        gate = 1.0 / (1.0 + np.exp(-persistent))
+        target = probabilities + gate * (teacher - probabilities)
+        target = np.maximum(target, 1e-12)
+        target /= target.sum()
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "persistent_gate_mean": float(gate.mean()),
+            "adaptive_window": float(min(4, len(gate))),
+            "trend_attenuated_positions": float(np.sum(np.diff(support) < 0)),
+        })
+    elif algorithm == "adrs":
+        # Privileged scores are centered within the current interaction step.
+        # A teacher-value-advantage gate admits them only when their ordering
+        # agrees with realized returns, then writes the signal into native RL
+        # advantage construction.
+        teacher = state.teacher_cache[cache_index]
+        privileged = (teacher - teacher.mean()) / max(teacher.std(), 1e-6)
+        returns = group.rewards[:, 0]
+        normalized_returns = (returns - returns.mean()) / max(returns.std(), 1e-6)
+        association = float(np.tanh(np.mean(privileged * normalized_returns)))
+        gate = max(0.0, association)
+        advantages = normalized_returns + gate * privileged
+        gradient = _reinforce_gradient(group.features, probabilities, sampled, advantages[sampled])
+        loss = float(-np.mean(advantages[sampled] * np.log(probabilities[sampled] + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "teacher_value_advantage_gate": gate,
+            "within_step_score_mean": float(privileged.mean()),
+            "return_teacher_association": association,
+            "inference_time_skill": 0.0,
+        })
+    elif algorithm == "mopd":
+        # Each reward axis defines a domain-specialist teacher.  The student is
+        # trained on its own support and combines teachers using per-example
+        # domain evidence instead of model merging.
+        domain_teachers = np.stack([
+            _softmax(group.rewards[:, axis] * 3.0)
+            for axis in range(group.rewards.shape[1])
+        ])
+        domain_strength = np.maximum(group.rewards.max(axis=0), 0.0) + 1e-3
+        mixture_weights = domain_strength / domain_strength.sum()
+        target = mixture_weights @ domain_teachers
+        support = np.zeros_like(target)
+        support[sampled] = 1.0
+        target = target * (0.2 + 0.8 * support)
+        target /= max(target.sum(), 1e-12)
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(-np.sum(target * np.log(probabilities + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "domain_teachers": float(len(domain_teachers)),
+            "student_rollout_support": float(support.mean()),
+            "teacher_merge_parameters": 0.0,
+            "largest_domain_weight": float(mixture_weights.max()),
+        })
+    elif algorithm == "opd-lm":
+        # OPDLM replaces the causal teacher view with bidirectional context.
+        # Here adjacent candidate states are the compact analogue of future
+        # token visibility; the frozen autoregressive distribution remains the
+        # anchor while the student learns the denoised bidirectional target.
+        teacher = state.teacher_cache[cache_index]
+        bidirectional = (
+            teacher + np.roll(teacher, 1) + np.roll(teacher, -1)
+        ) / 3.0
+        denoised = 0.7 * bidirectional + 0.3 * _one_hot(len(teacher), group.gold)
+        denoised /= denoised.sum()
+        gradient = group.features.T @ (denoised - probabilities)
+        loss = float(-np.sum(denoised * np.log(probabilities + 1e-12)))
+        state.variant_updates += 1
+        diagnostics.update({
+            "bidirectional_teacher": 1.0,
+            "autoregressive_anchor": 0.7,
+            "diffusion_denoising_views": 2.0,
+            "teacher_trainable": 0.0,
+        })
     elif algorithm == "opcd":
         # OPCD distils a context-conditioned distribution along trajectories
         # sampled by the context-free student, using reverse KL to favour the
@@ -1405,6 +1563,12 @@ def _softmax(values: np.ndarray) -> np.ndarray:
     shifted = values - values.max()
     exponent = np.exp(shifted)
     return exponent / exponent.sum()
+
+
+def _one_hot(size: int, index: int) -> np.ndarray:
+    values = np.zeros(size, dtype=np.float64)
+    values[index] = 1.0
+    return values
 
 
 def _scalar_rewards(group: CandidateGroup) -> np.ndarray:

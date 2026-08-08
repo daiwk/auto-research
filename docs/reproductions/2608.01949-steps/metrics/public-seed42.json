@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "STEPS: Self-Triggered Agentic Push Recommendation"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "steps",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "STEPS",
+    "hit_at_10": 0.11153846153846154,
+    "ndcg_at_10": 0.05877712172922141,
+    "fresh_hit_at_10": 0.05555555555555555,
+    "head_share_at_10": 0.23615384615384616
+  },
+  "relative": {
+    "hit_at_10_percent": 26.086956521739133,
+    "ndcg_at_10_percent": 66.04614227220064,
+    "fresh_hit_at_10_percent": 100.0,
+    "head_share_at_10_percent": -19.633507853403145
+  },
+  "stages": {
+    "planning_agent_gated_ordinal_regression": true,
+    "execution_agent_trajectory_reward": true,
+    "filtering_agent_safeguard": true,
+    "closed_loop_self_trigger": true,
+    "validation_selected_alpha": 0.8,
+    "validation": {
+      "hit_at_10": 0.17692307692307693,
+      "ndcg_at_10": 0.10358853033994385,
+      "fresh_hit_at_10": 0.12,
+      "head_share_at_10": 0.24615384615384617
+    }
+  },
+  "paper_results": {
+    "active_days_percent": 0.2843,
+    "permission_disablement_percent": -1.9089,
+    "compute_percent": -79.42
+  },
+  "scope": "MovieLens-100K 的公开内容特征与行为序列用于执行论文核心机制；没有使用生产私有流量、线上触发器或十亿级向量索引，线上指标只引用原文。"
+}

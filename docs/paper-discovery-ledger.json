@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "batches": [
+    {
+      "batch": "2026-08-08-p0-p1-closed-audit",
+      "checked_at": "2026-08-08T23:59:59+08:00",
+      "window": "2026-01-01 through 2026-08-08",
+      "sources": ["arXiv", "institution reverse search", "citation snowball", "official repositories"],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "candidates": [
+        {"id": "2608.02148", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "dme", "doc": "reproductions/2608.02148-dme/README.md"},
+        {"id": "2608.01949", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "steps", "doc": "reproductions/2608.01949-steps/README.md"},
+        {"id": "2608.01738", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "spear", "doc": "reproductions/2608.01738-spear/README.md"},
+        {"id": "2607.17247", "priority": "P0", "track": "post-training", "status": "implemented", "key": "distilled-rl", "doc": "post-training/2607.17247-distilled-rl/README.md"},
+        {"id": "2608.06296", "priority": "P0", "track": "post-training", "status": "implemented", "key": "u-opsd", "doc": "post-training/2608.06296-u-opsd/README.md"},
+        {"id": "2608.05987", "priority": "P0", "track": "agent", "status": "implemented", "key": "agent-opsd", "doc": "agent-research/2608.05987-agent-opsd/README.md"},
+        {"id": "2608.04788", "priority": "P0", "track": "agent", "status": "implemented", "key": "ocsd", "doc": "agent-research/2608.04788-ocsd/README.md"},
+        {"id": "2608.03137", "priority": "P0", "track": "agent", "status": "implemented", "key": "vermem", "doc": "agent-research/2608.03137-vermem/README.md"},
+        {"id": "2608.06347", "priority": "P1", "track": "post-training", "status": "implemented", "key": "rp-opsd", "doc": "post-training/2608.06347-rp-opsd/README.md"},
+        {"id": "2608.01837", "priority": "P1", "track": "post-training", "status": "implemented", "key": "pcsd", "doc": "post-training/2608.01837-pcsd/README.md"},
+        {"id": "2608.03223", "priority": "P1", "track": "post-training", "status": "implemented", "key": "adrs", "doc": "post-training/2608.03223-adrs/README.md"},
+        {"id": "2608.01739", "priority": "P1", "track": "agent", "status": "implemented", "key": "coevo-mem", "doc": "agent-research/2608.01739-coevo-mem/README.md"},
+        {"id": "2606.30406", "priority": "P1", "track": "post-training", "status": "implemented", "key": "mopd", "doc": "post-training/2606.30406-mopd/README.md"},
+        {"id": "2606.06712", "priority": "P1", "track": "post-training", "status": "implemented", "key": "opd-lm", "doc": "post-training/2606.06712-opd-lm/README.md"},
+        {"id": "2607.16669", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "open-language-model", "doc": "reproductions/2607.16669-open-language-model/README.md"}
+      ]
+    }
+  ]
+}

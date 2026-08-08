@@ -168,6 +168,8 @@
 ## 多阶段排序与混排
 
 ### 召回、粗排与精排协同
+- [SPEAR](../2608.01738-spear/README.md)：以双 embedding 和乘法选择门把 query rewrite 与 item relevance 端到端对齐，同时保留原 query residual。
+- [STEPS](../2608.01949-steps/README.md)：以 planning、execution、filter 三 Agent 联合决定推送动作和下一次系统唤醒时刻。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
 - [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复读取用户历史，让 request-only 表征可跨候选复用，再进行候选相关精排。
 - [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 召回兼容的前提下，通过循环修正、跨塔同步和级联教师增强交互能力。
@@ -185,6 +187,7 @@
 ## 内容理解、审核与风险控制
 
 ### 内容理解与语义表征
+- [DME](../2608.02148-dme/README.md)：以对比预训练建立统一向量空间，再用 typed latent reasoning 和双向重建保留检索相关的细粒度多模态证据。
 - [FLUID](../2605.21832-fluid/README.md)：把直播内容切片量化为两级 LUCID，以内容表示替代生命周期很短的候选 ID。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把图像、视频等内容转换为 caption/token 特征，再注入推荐模型增强内容理解。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把图文对比学习与 Pin-Board 共现邻居目标结合，改善 fresh 内容表示。

@@ -45,6 +45,7 @@ LLM_MUTATIONS = {
     "2607.28418": ("wide_dynamic_width", "WIDE 逐 token 选择 attention-head group 与 FFN-channel group，执行可学习动态宽度剪枝"),
     "2607.28627": ("retoken", "单个可学习 retrieval target 在 value-projection 空间打分，并稀疏选择已缓存 token"),
     "2608.01075": ("rd_attnres", "对同一组历史 residual sources 分别学习 QK 与 V 的内容依赖深度路由"),
+    "2607.16669": ("olm_composable", "OpenLanguageModel 的可组合 decoder、普通层模块与可移植运行时配置"),
 }
 
 POST_TRAINING_MUTATIONS = {
@@ -87,6 +88,13 @@ POST_TRAINING_MUTATIONS = {
     "2305.10425": ("slic-hf", "SLiC-HF 用带 margin 的序列概率校准偏好顺序，并以 SFT target 交叉熵防止漂移"),
     "2310.05344": ("steerlm", "SteerLM 将多维质量属性显式标注并作为条件执行可控 SFT"),
     "2401.01335": ("spin", "SPIN 让当前策略区分人类示范与上一轮策略自生成响应，逐轮刷新对手"),
+    "2607.17247": ("distilled-rl", "用教师 token 概率构造细粒度奖励，结合反向比率裁剪、负样本重置与几何归一化"),
+    "2608.06296": ("u-opsd", "以多次 on-policy 采样的自一致伪解构造无外部标注的特权教师视图"),
+    "2608.06347": ("rp-opsd", "比较参考条件视图与参考消融视图，在推理枢纽位置门控 on-policy 蒸馏"),
+    "2608.01837": ("pcsd", "以跨位置持续累积的教师优势和趋势衰减生成自适应蒸馏窗口"),
+    "2608.03223": ("adrs", "用教师价值优势门控把特权评分注入原生 RL advantage，同时保持推理零额外开销"),
+    "2606.30406": ("mopd", "按奖励域组合多个专长教师，并只在学生 rollout 支持上执行多教师 on-policy 蒸馏"),
+    "2606.06712": ("opd-lm", "用双向去噪教师视图蒸馏自回归学生，同时保留冻结 AR 分布锚点"),
 }
 
 AGENT_MUTATIONS = {
@@ -134,6 +142,10 @@ AGENT_MUTATIONS = {
     "2601.20439": ("planner:pearl", "PEARL 探索多条工具计划，并用执行反馈自适应更新计划策略"),
     "2607.27083": ("tool:cam-df", "CAM-DF 将工具排序转成异构成本下的边际收益停止决策"),
     "2607.26784": ("memory:skillrise", "SkillRise 在相关任务序列中交替求解与维护技能文档，并用下游结果分配整理阶段信用"),
+    "2608.05987": ("critic:agent-opsd", "把特权重放的 token gap 递归汇聚为 turn evidence，并以贝叶斯 log-odds 标记关键决策"),
+    "2608.04788": ("critic:ocsd", "对齐完整观测与观测消融重放，用残差信号校准每个交互 turn 的自蒸馏信用"),
+    "2608.03137": ("memory:vermem", "统一管理长期、活动与 episodic 记忆，并以局部和全局 verifier 审核记忆操作"),
+    "2608.01739": ("memory:coevo-mem", "交替固定记忆库更新检索路由器、再固定路由器更新记忆值与关系"),
 }
 
 FALLBACK_PAPERS = (
@@ -175,6 +187,7 @@ LLM_FALLBACK_PAPERS = (
     Paper("Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free", "A head-specific sigmoid gate after SDPA improves stability and long-context behavior.", [], "2025-05-10", "https://arxiv.org/abs/2505.06708", "2505.06708"),
     Paper("Muon is Scalable for LLM Training", "Orthogonalized matrix updates plus AdamW for the remaining parameters improve training efficiency.", [], "2025-02-24", "https://arxiv.org/abs/2502.16982", "2502.16982"),
     Paper("Role-Decoupled Attention Residuals", "Learns separate content-dependent depth routes for query/key and value roles over the same residual sources.", [], "2026-08-03", "https://arxiv.org/abs/2608.01075", "2608.01075"),
+    Paper("OpenLanguageModel: A Composable Open-Source Language Modeling System", "Composable decoder modules, reproducible presets and portable runtimes for controlled language-model research.", [], "2026-07-18", "https://arxiv.org/abs/2607.16669", "2607.16669"),
 )
 
 POST_TRAINING_FALLBACK_PAPERS = (
@@ -206,6 +219,13 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("SLiC-HF: Sequence Likelihood Calibration with Human Feedback", "Calibrates preferred and rejected sequence likelihoods with a margin plus SFT regularization.", [], "2023-05-17", "https://arxiv.org/abs/2305.10425", "2305.10425"),
     Paper("SteerLM: Attribute Conditioned SFT as an (User-Steerable) Alternative to RLHF", "Annotates responses along multiple quality axes and conditions SFT and inference on requested attributes.", [], "2023-10-09", "https://arxiv.org/abs/2310.05344", "2310.05344"),
     Paper("Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models", "Uses previous-policy generations as self-play negatives against human demonstrations.", [], "2024-01-02", "https://arxiv.org/abs/2401.01335", "2401.01335"),
+    Paper("Distilled Reinforcement Learning for LLM Post-training", "Turns teacher token probabilities into dense rewards with clipped reverse ratios and negative-sample reset.", [], "2026-07-19", "https://arxiv.org/abs/2607.17247", "2607.17247"),
+    Paper("On-Policy Self-Distillation without Any Supervision", "Builds privileged pseudo-solutions from self-consistent on-policy samples without external labels.", [], "2026-08-06", "https://arxiv.org/abs/2608.06296", "2608.06296"),
+    Paper("RP-OPSD: Reasoning-Pivot-Guided On-Policy Self-Distillation for Multilingual Reasoning Transfer", "Uses reference ablation to locate reasoning pivots and gate privileged on-policy distillation.", [], "2026-08-06", "https://arxiv.org/abs/2608.06347", "2608.06347"),
+    Paper("Persistent Context Self-Distillation", "Accumulates persistent teacher support into trend-aware adaptive distillation windows.", [], "2026-08-03", "https://arxiv.org/abs/2608.01837", "2608.01837"),
+    Paper("Agentic Reinforcement Learning with Self-Distilled Reward Shaping", "Gates privileged teacher scores by return association before injecting them into native policy advantages.", [], "2026-08-04", "https://arxiv.org/abs/2608.03223", "2608.03223"),
+    Paper("MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training", "Combines domain-specialist teachers on the support of student-generated trajectories.", [], "2026-06-29", "https://arxiv.org/abs/2606.30406", "2606.30406"),
+    Paper("Data-Efficient Autoregressive-to-Diffusion Language Models via On-Policy Distillation", "Distils a bidirectional denoising teacher into an autoregressive student on its own support.", [], "2026-06-04", "https://arxiv.org/abs/2606.06712", "2606.06712"),
     Paper("Your Efficient RL Framework Secretly Brings You Off-Policy RL Training", "Truncated importance sampling corrects training-inference mismatch with a one-sided capped ratio.", [], "2025-08-05", "https://fengyao.notion.site/off-policy-rl", "web-tis-2025"),
     Paper("Every Step Evolves: Scaling Reinforcement Learning for Trillion-Scale Thinking Model", "IcePop masks both tails of the token-level training-inference ratio for stable MoE RL.", [], "2025-10-21", "https://arxiv.org/abs/2510.18855", "2510.18855"),
     Paper("Stabilizing MoE RL Without Router Replay: The Online IcePop Solution", "Pure-online IcePop removes policy staleness by applying one update per rollout batch.", [], "2025-12-16", "https://zhuanlan.zhihu.com/p/1984379979035850499", "web-online-icepop-2025"),
@@ -246,6 +266,10 @@ AGENT_FALLBACK_PAPERS = (
     Paper("PEARL: Plan Exploration and Adaptive Reinforcement Learning for Multihop Tool Use", "Explores alternative tool plans and adapts the policy from execution outcomes.", [], "2026-01-28", "https://arxiv.org/abs/2601.20439", "2601.20439"),
     Paper("Scores Are Not Decisions: Cost-Aware Stopping for Tool Acquisition in LLM Agents", "Regret-weighted marginal stopping chooses a cost-aware prefix from a frozen tool ranking.", [], "2026-07-29", "https://arxiv.org/abs/2607.27083", "2607.27083"),
     Paper("SkillRise: Agentic Reinforcement Learning for Cross-Task Skill Evolution", "Alternates task solving and skill-document curation with discounted downstream credit.", [], "2026-07-29", "https://arxiv.org/abs/2607.26784", "2607.26784"),
+    Paper("AgentOPSD: On-Policy Self-Distillation for Agentic Reinforcement Learning", "Recursively aggregates privileged replay gaps into pivotal-turn credit.", [], "2026-08-06", "https://arxiv.org/abs/2608.05987", "2608.05987"),
+    Paper("Observation-Calibrated Self-Distillation for Agentic Reinforcement Learning", "Contrasts matched full-observation and observation-ablated replays for calibrated turn credit.", [], "2026-08-05", "https://arxiv.org/abs/2608.04788", "2608.04788"),
+    Paper("VerMem: Verifiable Memory for Long-Horizon Agents", "Audits long-term, active and episodic memory operations with local and global verifiers.", [], "2026-08-04", "https://arxiv.org/abs/2608.03137", "2608.03137"),
+    Paper("CoEvo-Mem: Co-Evolving Memory and Retrieval for Language Agents", "Alternates retrieval-router and memory-bank optimization instead of freezing either side.", [], "2026-08-03", "https://arxiv.org/abs/2608.01739", "2608.01739"),
 )
 
 

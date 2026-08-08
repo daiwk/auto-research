@@ -51,6 +51,10 @@ METHODS = (
     "grsd",
     "os-shepherd",
     "envace",
+    "agent-opsd",
+    "ocsd",
+    "vermem",
+    "coevo-mem",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

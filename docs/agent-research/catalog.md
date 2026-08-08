@@ -7,6 +7,10 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 递归 turn 信用 | [AgentOPSD](2608.05987-agent-opsd/README.md) | Zi-Han Wang 等，2026-08-06 | [仓库公开、完整代码待发布](https://github.com/ZethWang/AgentOPSD) | `agent-opsd` |
+| 观测校准蒸馏 | [OCSD](2608.04788-ocsd/README.md) | Yi Yang 等，2026-08-05 | [已开源](https://github.com/yiy1x/OCSD) | `ocsd` |
+| 可验证统一记忆 | [VerMem](2608.03137-vermem/README.md) | Sun Yat-sen University，2026-08-04 | [已开源](https://github.com/Sun-SYSU-24/VerMem) | `vermem` |
+| 检索—记忆共进化 | [CoEvo-Mem](2608.01739-coevo-mem/README.md) | Bowen Ye 等，2026-08-03 | 未发现官方代码 | `coevo-mem` |
 | 环境 rehearsal / Agent RL | [EnvACE](2608.06197-envace/README.md) | SJTU 等 / Tencent，2026-08-06 | [已开源](https://github.com/Within-yao/EnvACE) | `envace` |
 | 工具学习 | [Toolformer](2302.04761-toolformer/README.md) | Meta AI / UPF，2023-02-09 | 未发布官方代码 | `toolformer` |
 | 自我迭代 | [Self-Refine](2303.17651-self-refine/README.md) | CMU / AI2 / UW / NVIDIA / UCSD / Google，2023-03-30 | [已开源](https://github.com/madaan/self-refine) | `self-refine` |

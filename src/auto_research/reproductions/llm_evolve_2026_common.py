@@ -86,6 +86,12 @@ PAPERS = {
         "url": "https://arxiv.org/abs/2608.01075",
         "organization": "Kehan Wang（论文未列机构）",
     },
+    "open-language-model": {
+        "arxiv_id": "2607.16669",
+        "title": "OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research",
+        "url": "https://arxiv.org/abs/2607.16669",
+        "organization": "Indian Institute of Technology Madras",
+    },
 }
 
 

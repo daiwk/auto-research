@@ -25,7 +25,8 @@ class PostTrainingRunner:
         state = initialize(len(data.feature_names), data.train)
         teacher_cached = {
             "gkd", "minillm", "opsd", "dash", "beta-opsd", "opcd", "flux-opd",
-            "lightning-opd", "relay-opd", "turn-opd",
+            "lightning-opd", "relay-opd", "turn-opd", "distilled-rl",
+            "u-opsd", "rp-opsd", "pcsd", "adrs", "mopd", "opd-lm",
         }
         state.teacher_calls = len(data.train) if config.algorithm in teacher_cached else 0
         baseline = metrics(state, data.validation)

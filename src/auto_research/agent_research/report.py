@@ -49,6 +49,10 @@ PAPERS = {
     "steppo": ("StepPO", "https://arxiv.org/abs/2604.18401"),
     "os-shepherd": ("OSReward / OS-Shepherd", "https://arxiv.org/abs/2607.28609"),
     "envace": ("EnvACE", "https://arxiv.org/abs/2608.06197"),
+    "agent-opsd": ("AgentOPSD", "https://arxiv.org/abs/2608.05987"),
+    "ocsd": ("OCSD", "https://arxiv.org/abs/2608.04788"),
+    "vermem": ("VerMem", "https://arxiv.org/abs/2608.03137"),
+    "coevo-mem": ("CoEvo-Mem", "https://arxiv.org/abs/2608.01739"),
 }
 
 

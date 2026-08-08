@@ -33,6 +33,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "native_sparse_attention", "gated_attention",
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
         "block_attnres", "rd_attnres",
+        "olm_composable",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
@@ -43,6 +44,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "native_sparse_attention", "gated_attention",
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
         "block_attnres", "rd_attnres",
+        "olm_composable",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -777,6 +779,13 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             }
 
         def architecture_stats(self):
+            if architecture == "olm_composable":
+                return {
+                    "ordinary_pytorch_modules": True,
+                    "composable_operators": ["Block", "Residual", "Repeat", "Parallel"],
+                    "runtime_portability": ["cpu", "mps", "cuda"],
+                    "preset_family": "decoder-only transformer",
+                }
             if architecture in {"block_attnres", "rd_attnres"}:
                 return {
                     "residual_sources_last_layer": len(self.blocks),

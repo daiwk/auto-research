@@ -7,6 +7,13 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 无监督自蒸馏 | [U-OPSD](2608.06296-u-opsd/README.md) | Yijiang Li 等，2026-08-06 | 未发现官方代码 | `u-opsd` |
+| 推理枢纽蒸馏 | [RP-OPSD](2608.06347-rp-opsd/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/NJUNLP/RP-OPSD) | `rp-opsd` |
+| 回报相关奖励塑形 | [ADRS](2608.03223-adrs/README.md) | Ranxu Zhang 等，2026-08-04 | [已开源](https://github.com/gitrxh/ADRS-arxiv) | `adrs` |
+| 持续一致性蒸馏 | [PCSD](2608.01837-pcsd/README.md) | Chunji Lv 等，2026-08-03 | 未发现官方代码 | `pcsd` |
+| 教师奖励重权重 | [Distilled RL](2607.17247-distilled-rl/README.md) | Chen Wang 等，2026-07-19 | [已开源](https://github.com/597358816/Distilled-RL) | `distilled-rl` |
+| 多教师能力整合 | [MOPD](2606.30406-mopd/README.md) | Xiaomi / Wenhan Ma，2026-06-29 | 未发现官方代码 | `mopd` |
+| AR-to-Diffusion 蒸馏 | [OPDLM](2606.06712-opd-lm/README.md) | Texas A&M University，2026-06-04 | 未发现官方代码 | `opd-lm` |
 | 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/DBtxy/DASH-OPSD) | `dash` |
 | 直接偏好优化 | [DPO](2305.18290-dpo/README.md) | Stanford，2023-05-29 | [已开源](https://github.com/eric-mitchell/direct-preference-optimization) | `dpo` |
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | Contextual AI / Stanford，2024-02-02 | [已开源](https://github.com/ContextualAI/HALOs) | `kto` |

@@ -1,0 +1,239 @@
+{
+  "batch": "2026-08-08-p0-p1-closed-audit",
+  "seed": 42,
+  "post_training": {
+    "distilled-rl": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.609375,
+        "mean_reward": 0.6957341455073699,
+        "entropy": 1.5622097613615191,
+        "kl_from_reference": 0.22954970786053555
+      },
+      "relative_accuracy": 1.6,
+      "diagnostics": {
+        "reverse_ratio_clip_rate": 1.0,
+        "negative_sample_resets": 5.0,
+        "sequence_geometric_normalizer": 1.5874010519693902,
+        "unconditional_teacher_matching": 0.0,
+        "loss": 1.5223757919820429,
+        "policy_entropy": 1.5749032225450217
+      }
+    },
+    "u-opsd": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.09375,
+        "mean_reward": 0.2513358801149202,
+        "entropy": 1.3135866965242053,
+        "kl_from_reference": 0.4781727726978496
+      },
+      "relative_accuracy": -0.6,
+      "diagnostics": {
+        "self_consistency_votes": 8.0,
+        "pseudo_solution_confidence": 0.375,
+        "external_supervision": 0.0,
+        "repair_target_is_gold": 0.0,
+        "loss": 1.0697468577895208,
+        "policy_entropy": 1.2763636098947497
+      }
+    },
+    "rp-opsd": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.59375,
+        "mean_reward": 0.6766101787372542,
+        "entropy": 1.668932321536027,
+        "kl_from_reference": 0.12282714768602855
+      },
+      "relative_accuracy": 1.5333333333333334,
+      "diagnostics": {
+        "reasoning_pivot_mass": 0.7492843102945891,
+        "privileged_positions": 3.0,
+        "reference_anchor": 0.45,
+        "loss": 1.439587945410726,
+        "policy_entropy": 1.6551894534897618
+      }
+    },
+    "pcsd": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.5625,
+        "mean_reward": 0.6682015450116028,
+        "entropy": 1.7492900489776715,
+        "kl_from_reference": 0.04246942024438405
+      },
+      "relative_accuracy": 1.4,
+      "diagnostics": {
+        "persistent_gate_mean": 0.2586930518527548,
+        "adaptive_window": 4.0,
+        "trend_attenuated_positions": 2.0,
+        "loss": 1.7163194025488961,
+        "policy_entropy": 1.747686238904023
+      }
+    },
+    "adrs": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.625,
+        "mean_reward": 0.7120526941289935,
+        "entropy": 1.6014089735062695,
+        "kl_from_reference": 0.19035049571578586
+      },
+      "relative_accuracy": 1.6666666666666667,
+      "diagnostics": {
+        "teacher_value_advantage_gate": 0.7615812657124454,
+        "within_step_score_mean": 4.625929269271486e-17,
+        "return_teacher_association": 0.7615812657124454,
+        "inference_time_skill": 0.0,
+        "loss": 0.4205092193520913,
+        "policy_entropy": 1.6319840744521554
+      }
+    },
+    "mopd": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.34375,
+        "mean_reward": 0.5027255717244984,
+        "entropy": 1.747822304024646,
+        "kl_from_reference": 0.04393716519740872
+      },
+      "relative_accuracy": 0.4666666666666667,
+      "diagnostics": {
+        "domain_teachers": 4.0,
+        "student_rollout_support": 0.6666666666666666,
+        "teacher_merge_parameters": 0.0,
+        "largest_domain_weight": 0.25,
+        "loss": 1.7270830842942804,
+        "policy_entropy": 1.7632612481603198
+      }
+    },
+    "opd-lm": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.65625,
+        "mean_reward": 0.7323539145223933,
+        "entropy": 1.7528317478975353,
+        "kl_from_reference": 0.038927721324519896
+      },
+      "relative_accuracy": 1.8,
+      "diagnostics": {
+        "bidirectional_teacher": 1.0,
+        "autoregressive_anchor": 0.7,
+        "diffusion_denoising_views": 2.0,
+        "teacher_trainable": 0.0,
+        "loss": 1.7187243454533376,
+        "policy_entropy": 1.770725022339059
+      }
+    }
+  },
+  "agent": {
+    "agent-opsd": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.9000000000000006
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "policy_updates": 120,
+        "dense_credit_updates": 360,
+        "turn_credit_updates": 360,
+        "recursive_belief_updates": 360,
+        "pivotal_turns": 200
+      }
+    },
+    "ocsd": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.0200000000000005
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "policy_updates": 120,
+        "dense_credit_updates": 360,
+        "turn_credit_updates": 360,
+        "observation_calibrations": 360,
+        "scaffold_ablations": 360
+      }
+    },
+    "vermem": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.6099999999999995
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "reused_plans": 108,
+        "actions": 360,
+        "memories_retrieved": 108,
+        "local_verifier_calls": 240,
+        "global_verifier_calls": 120,
+        "memory_operations": 240
+      }
+    },
+    "coevo-mem": {
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.5
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "reused_plans": 54,
+        "actions": 360,
+        "policy_updates": 120,
+        "coevolution_alternations": 120,
+        "router_updates": 60,
+        "memory_bank_updates": 60
+      }
+    }
+  }
+}
