@@ -44,6 +44,7 @@ LLM_MUTATIONS = {
     "2502.16982": ("optimizer:muon", "Muon 对隐藏矩阵梯度做 Newton-Schulz 正交化，其余参数使用 AdamW"),
     "2607.28418": ("wide_dynamic_width", "WIDE 逐 token 选择 attention-head group 与 FFN-channel group，执行可学习动态宽度剪枝"),
     "2607.28627": ("retoken", "单个可学习 retrieval target 在 value-projection 空间打分，并稀疏选择已缓存 token"),
+    "2608.01075": ("rd_attnres", "对同一组历史 residual sources 分别学习 QK 与 V 的内容依赖深度路由"),
 }
 
 POST_TRAINING_MUTATIONS = {
@@ -53,6 +54,7 @@ POST_TRAINING_MUTATIONS = {
     "2306.13649": ("gkd", "GKD 在学生自身生成轨迹上查询教师，并支持 on/off-policy 混合与可选散度"),
     "2306.08543": ("minillm", "MiniLLM 以 reverse KL、teacher-mixed sampling 和方差缩减蒸馏生成模型"),
     "2601.18734": ("opsd", "OPSD 让同一模型以普通/特权上下文分别作为学生和教师，并裁剪逐 token 散度"),
+    "2608.06243": ("dash", "DASH 用局部散度门控和反向聚合把后续可靠 token 的信用传播到此前决策"),
     "2607.28582": ("beta-opsd", "β-OPSD 把 reference 与 privileged teacher 的几何插值闭式解转成低方差蒸馏目标，并加入 return-to-go credit"),
     "2607.28590": ("vad", "比较同一教师有/无视觉证据的分布，以单侧投影重建 student-anchored 多模态 OPD 目标"),
     "2602.12275": ("opcd", "OPCD 在学生轨迹上以 reverse KL 内化教师上下文中的经验与系统行为"),
@@ -88,6 +90,7 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2608.06197": ("critic:envace", "同一策略交替承担 act 与环境 rehearsal 角色，并以 role-wise GRPO 分别归一化优势"),
     "2210.03629": ("planner:react", "ReAct 交替生成推理轨迹与工具动作"),
     "2302.04761": ("tool:toolformer", "Toolformer 通过自监督 API 调用标注学习何时调用工具"),
     "2303.11366": ("critic:reflexion", "Reflexion 将执行反馈写成语言反思并用于下一 episode"),
@@ -171,6 +174,7 @@ LLM_FALLBACK_PAPERS = (
     Paper("Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention", "Trainable compressed, selected and sliding-window attention branches for long-context language models.", [], "2025-02-16", "https://arxiv.org/abs/2502.11089", "2502.11089"),
     Paper("Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free", "A head-specific sigmoid gate after SDPA improves stability and long-context behavior.", [], "2025-05-10", "https://arxiv.org/abs/2505.06708", "2505.06708"),
     Paper("Muon is Scalable for LLM Training", "Orthogonalized matrix updates plus AdamW for the remaining parameters improve training efficiency.", [], "2025-02-24", "https://arxiv.org/abs/2502.16982", "2502.16982"),
+    Paper("Role-Decoupled Attention Residuals", "Learns separate content-dependent depth routes for query/key and value roles over the same residual sources.", [], "2026-08-03", "https://arxiv.org/abs/2608.01075", "2608.01075"),
 )
 
 POST_TRAINING_FALLBACK_PAPERS = (
@@ -180,6 +184,7 @@ POST_TRAINING_FALLBACK_PAPERS = (
     Paper("On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes", "Generalized Knowledge Distillation trains on student-generated sequences with teacher token feedback.", [], "2023-06-23", "https://arxiv.org/abs/2306.13649", "2306.13649"),
     Paper("MiniLLM: Knowledge Distillation of Large Language Models", "Reverse-KL distillation with teacher-mixed sampling and variance reduction.", [], "2023-06-14", "https://arxiv.org/abs/2306.08543", "2306.08543"),
     Paper("Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models", "A shared model teaches its context-free view from a privileged-solution view on student trajectories.", [], "2026-01-26", "https://arxiv.org/abs/2601.18734", "2601.18734"),
+    Paper("DASH: Dynamic Adaptive Self-Distillation Horizons", "Local divergence gates propagate reliable suffix credit backwards without extra teacher forward passes.", [], "2026-08-06", "https://arxiv.org/abs/2608.06243", "2608.06243"),
     Paper("On-Policy Context Distillation for Language Models", "Reverse-KL context distillation internalizes transient experience and system prompts on student trajectories.", [], "2026-02-12", "https://arxiv.org/abs/2602.12275", "2602.12275"),
     Paper("KTO: Model Alignment as Prospect Theoretic Optimization", "Alignment from unpaired desirable and undesirable feedback.", [], "2024-02-02", "https://arxiv.org/abs/2402.01306", "2402.01306"),
     Paper("DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models", "Introduces Group Relative Policy Optimization.", [], "2024-02-05", "https://arxiv.org/abs/2402.03300", "2402.03300"),
@@ -207,6 +212,7 @@ POST_TRAINING_FALLBACK_PAPERS = (
 )
 
 AGENT_FALLBACK_PAPERS = (
+    Paper("EnvACE: Environment-Aware Agentic Reinforcement Learning", "One policy alternates acting and world rehearsal roles with role-wise group-relative advantages.", [], "2026-08-06", "https://arxiv.org/abs/2608.06197", "2608.06197"),
     Paper("ReAct: Synergizing Reasoning and Acting in Language Models", "Interleaves reasoning traces and environment actions.", [], "2022-10-06", "https://arxiv.org/abs/2210.03629", "2210.03629"),
     Paper("Toolformer: Language Models Can Teach Themselves to Use Tools", "Self-supervised learning of API calls.", [], "2023-02-09", "https://arxiv.org/abs/2302.04761", "2302.04761"),
     Paper("Reflexion: Language Agents with Verbal Reinforcement Learning", "Stores verbal reflections from execution feedback.", [], "2023-03-20", "https://arxiv.org/abs/2303.11366", "2303.11366"),

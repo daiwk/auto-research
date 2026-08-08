@@ -15,7 +15,7 @@ from auto_research.post_training.rollout_correction import (
     [
         "dpo", "kto", "orpo", "grpo", "dapo", "gspo",
         "ppo-rlhf", "rloo", "remax", "lightning-opd", "gprl", "tcr",
-        "gkd", "minillm", "opsd", "beta-opsd", "opcd", "flux-opd",
+        "gkd", "minillm", "opsd", "dash", "beta-opsd", "opcd", "flux-opd",
         "constitutional-ai", "rrhf", "raft",
         "slic-hf", "steerlm", "spin",
         "ripo", "tis", "icepop", "online-icepop", "kpop", "gppo",
@@ -103,6 +103,15 @@ def test_classic_on_policy_distillation_mechanisms_are_observable(
                 "dense_token_teacher_calls",
                 "pointwise_divergence_clip",
                 "jsd_beta",
+            ),
+        ),
+        (
+            "dash",
+            (
+                "adaptive_gate_mean",
+                "backward_horizon_mean",
+                "local_divergence_clip",
+                "extra_teacher_forward_passes",
             ),
         ),
         (

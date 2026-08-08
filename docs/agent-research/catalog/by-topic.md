@@ -2,6 +2,35 @@
 
 采用“研究方向 → 方法簇 → 论文”的两级结构。一级用于快速定位研究范式，二级保留可比较的方法族；每篇论文独占一行，实验结果与复现边界请进入详情页查看。
 
+## Agentic RL 与后训练
+
+### 环境模型与 world rehearsal
+
+- [EnvACE](../2608.06197-envace/README.md)（`envace`）：EnvACE 不另训 world model，而让同一个 agent policy 在真实 act 之间切换到 rehearsal role，自行预测下一 observation；训练时分别为 acting 与 rehearsal 轨迹计算 group-relative advantage，避免两种奖励尺度互相污染，测试时可用少量私有 rehearsal 扩展规划。
+
+### 搜索、网页与多轮交互 RL
+
+- [PEARL](../2601.20439-pearl/README.md)（`pearl`）：多跳工具调用同时受工具幻觉、参数错误和长程规划薄弱影响。PEARL 的离线阶段用 trial-and-error 建立工具用法与失败条件；在线阶段把 Planner 与 Executor 解耦，用计划正确性、工具链与最终结果组成的密集 reward 进行 GRPO，而不是只依赖稀疏成功信号。
+- [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：既有 tool-use RL 通常把用户请求视为固定输入，但真实用户会根据 Agent 回答不断修改需求。MUA-RL 将 LLM 模拟用户直接放入 rollout，Agent 在对话中澄清意图并调用真实 MCP/数据库工具；用户消息和工具结果不计入策略 loss，只用最终任务完成奖励鼓励探索。
+- [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页交互会不断累积 HTML 和历史动作，单轮 GRPO 无法处理状态变化。WebAgent-R1 动态保留近期和任务相关上下文，并行采集完整多轮轨迹，再用 M-GRPO 根据最终成功奖励执行组内相对更新；论文同时强调行为克隆 warm-up 和长 CoT 初始化。
+- [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：单轮数学 RL 的优化单位是一次回答，而 Agent 要在随机环境中跨多轮决策。RAGEN 提出 StarPO，把 state、thinking、action 和 reward 组织成完整轨迹。
+- [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
+- [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
+
+### 通用轨迹与 credit assignment
+
+- [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
+- [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
+- [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
+- [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
+- [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
+
+### 技能、turn 与 rollout credit
+
+- [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
+- [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
+- [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
+
 ## 工具调用与环境执行
 
 ### 工具选择、反馈与程序执行
@@ -48,31 +77,6 @@
 ### 运行成本与工具暴露控制
 
 - [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
-
-## Agentic RL 与后训练
-
-### 搜索、网页与多轮交互 RL
-
-- [PEARL](../2601.20439-pearl/README.md)（`pearl`）：多跳工具调用同时受工具幻觉、参数错误和长程规划薄弱影响。PEARL 的离线阶段用 trial-and-error 建立工具用法与失败条件；在线阶段把 Planner 与 Executor 解耦，用计划正确性、工具链与最终结果组成的密集 reward 进行 GRPO，而不是只依赖稀疏成功信号。
-- [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：既有 tool-use RL 通常把用户请求视为固定输入，但真实用户会根据 Agent 回答不断修改需求。MUA-RL 将 LLM 模拟用户直接放入 rollout，Agent 在对话中澄清意图并调用真实 MCP/数据库工具；用户消息和工具结果不计入策略 loss，只用最终任务完成奖励鼓励探索。
-- [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页交互会不断累积 HTML 和历史动作，单轮 GRPO 无法处理状态变化。WebAgent-R1 动态保留近期和任务相关上下文，并行采集完整多轮轨迹，再用 M-GRPO 根据最终成功奖励执行组内相对更新；论文同时强调行为克隆 warm-up 和长 CoT 初始化。
-- [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：单轮数学 RL 的优化单位是一次回答，而 Agent 要在随机环境中跨多轮决策。RAGEN 提出 StarPO，把 state、thinking、action 和 reward 组织成完整轨迹。
-- [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
-- [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
-
-### 通用轨迹与 credit assignment
-
-- [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
-- [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
-- [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
-- [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
-- [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
-
-### 技能、turn 与 rollout credit
-
-- [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
-- [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
-- [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
 
 ## 记忆、技能与持续学习
 

@@ -147,6 +147,9 @@ class AgentResearchRunner:
             "reflective_groups": agent.reflective_groups,
             "success_failure_contrasts": agent.success_failure_contrasts,
             "privileged_guidance_updates": agent.privileged_guidance_updates,
+            "world_rehearsals": agent.world_rehearsals,
+            "rolewise_advantage_updates": agent.rolewise_advantage_updates,
+            "private_rehearsals": agent.private_rehearsals,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
         result = AgentResearchResult(

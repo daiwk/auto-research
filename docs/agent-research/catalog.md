@@ -7,6 +7,7 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 环境 rehearsal / Agent RL | [EnvACE](2608.06197-envace/README.md) | SJTU 等 / Tencent，2026-08-06 | [已开源](https://github.com/Within-yao/EnvACE) | `envace` |
 | 工具学习 | [Toolformer](2302.04761-toolformer/README.md) | Meta AI / UPF，2023-02-09 | 未发布官方代码 | `toolformer` |
 | 自我迭代 | [Self-Refine](2303.17651-self-refine/README.md) | CMU / AI2 / UW / NVIDIA / UCSD / Google，2023-03-30 | [已开源](https://github.com/madaan/self-refine) | `self-refine` |
 | 解耦规划 | [ReWOO](2305.18323-rewoo/README.md) | Microsoft / NCSU / Texas A&M，2023-05-29 | [已开源](https://github.com/billxbf/ReWOO) | `rewoo` |

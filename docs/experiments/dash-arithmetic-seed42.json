@@ -1,0 +1,1 @@
+{"algorithm":"dash","dataset":"arithmetic-smoke","seed":42,"steps":120,"baseline":{"accuracy":0.234375,"mean_reward":0.3840961966},"final":{"accuracy":0.578125,"mean_reward":0.6791679298},"relative_accuracy":1.4666666667,"diagnostics":{"adaptive_gate_mean":0.4821666139,"backward_horizon_mean":1.561664359,"local_clip_rate":0.1666666667,"extra_teacher_forward_passes":0.0}}

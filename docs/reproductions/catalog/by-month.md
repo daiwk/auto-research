@@ -2,6 +2,10 @@
 
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
+## 2026-08
+- [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：Yandex 用共享 encoder 串联 SID 生成与 item-level ranking，并从当前 rollout 和真实曝光双路蒸馏高容量 teacher。
+- [DEGR](../2608.04809-degr/README.md)：京东把 cohort 多样性约束与 reward-adaptive ORPO 加入生成式重排，再以多样性 greedy selection 输出列表。
+
 ## 2026-07
 - [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。

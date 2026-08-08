@@ -1,0 +1,1 @@
+{"method":"envace","benchmark":"planbench-mini","seed":42,"episodes":120,"metrics":{"answer_accuracy":1.0,"plan_success":1.0,"joint_success":1.0,"average_cost":1.2},"diagnostics":{"world_rehearsals":360,"rolewise_advantage_updates":720,"private_rehearsals":360,"real_tool_responses":0,"trajectory_rollouts":360}}

@@ -19,6 +19,7 @@ ALGORITHMS = (
     "gkd",
     "minillm",
     "opsd",
+    "dash",
     "beta-opsd",
     "opcd",
     "flux-opd",

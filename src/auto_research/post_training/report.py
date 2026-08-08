@@ -20,6 +20,7 @@ PAPERS = {
     "gkd": ("Generalized Knowledge Distillation", "https://arxiv.org/abs/2306.13649"),
     "minillm": ("MiniLLM", "https://arxiv.org/abs/2306.08543"),
     "opsd": ("Self-Distilled Reasoner / OPSD", "https://arxiv.org/abs/2601.18734"),
+    "dash": ("DASH", "https://arxiv.org/abs/2608.06243"),
     "beta-opsd": ("β-OPSD", "https://arxiv.org/abs/2607.28582"),
     "opcd": ("On-Policy Context Distillation", "https://arxiv.org/abs/2602.12275"),
     "flux-opd": ("Flux-OPD", "https://arxiv.org/abs/2607.28022"),

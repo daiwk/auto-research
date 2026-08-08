@@ -48,6 +48,7 @@ PAPERS = {
     "gigpo": ("Group-in-Group Policy Optimization", "https://arxiv.org/abs/2505.10978"),
     "steppo": ("StepPO", "https://arxiv.org/abs/2604.18401"),
     "os-shepherd": ("OSReward / OS-Shepherd", "https://arxiv.org/abs/2607.28609"),
+    "envace": ("EnvACE", "https://arxiv.org/abs/2608.06197"),
 }
 
 

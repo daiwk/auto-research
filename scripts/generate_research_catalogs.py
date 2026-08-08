@@ -56,6 +56,7 @@ FIRST_AUTHORS = {
         "flux-opd": "Yuran Wang", "beta-opsd": "Jiawei Xu",
         "online-icepop": "Jian Hu", "tis": "Feng Yao",
         "vad": "Kangning Zhang",
+        "dash": "Zhiyan Hou",
     },
     "agent-research": {
         "webgpt": "Reiichiro Nakano", "saycan": "Michael Ahn",
@@ -76,6 +77,7 @@ FIRST_AUTHORS = {
         "skillrise": "Zhiyuan Yao", "cam-df": "Yicheng Feng", "tapo": "Cong Li",
         "grsd": "Binbin Zheng",
         "os-shepherd": "Qiushi Sun",
+        "envace": "Zishan Xu",
     },
 }
 
@@ -116,6 +118,7 @@ TOPIC_HIERARCHY = {
         "On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "经典 On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "On-policy self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "自适应自蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "多模态证据归因蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "Context distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "Reverse-KL distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
@@ -128,6 +131,7 @@ TOPIC_HIERARCHY = {
     },
     "agent-research": {
         "Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "环境 rehearsal / Agent RL": ("Agentic RL 与后训练", "环境模型与 world rehearsal"),
         "Agent group credit": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
         "Step-aligned Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
         "Agentic RL / hindsight skill": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
@@ -200,6 +204,7 @@ FOUNDATION_TOPIC_HIERARCHY = {
     "ppl-factory": ("预训练与数据", "数据清洗、编排与选择"),
     "muon": ("预训练与数据", "优化器与训练效率"),
     "retoken": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "rd-attnres": ("网络架构", "MoE、状态空间与残差路径"),
     "adadsf": ("推理与系统效率", "动态计算与模型压缩"),
     "wide": ("推理与系统效率", "动态计算与模型压缩"),
     "gaugequant": ("推理与系统效率", "量化"),

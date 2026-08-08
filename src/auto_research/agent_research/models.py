@@ -50,6 +50,7 @@ METHODS = (
     "tapo",
     "grsd",
     "os-shepherd",
+    "envace",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

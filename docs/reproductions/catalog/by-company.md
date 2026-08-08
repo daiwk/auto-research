@@ -2,6 +2,12 @@
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
+## Yandex
+- 2026-08 · [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：以共享历史编码器统一 SID 生成和 item-level 排序，用 rollout 与 logged impression 双来源蒸馏训练期 teacher。
+
+## JD.com
+- 2026-08 · [DEGR](../2608.04809-degr/README.md)：联合 next-item CE、cohort 多样性与 reward-adaptive ORPO，并在推理时执行多样性感知重排。
+
 ## Alibaba
 - 2026-07 · [SWAG](../2607.25233-swag-bid/README.md)：以 masked future plan 和滑动窗口目标进行长周期生成式自动出价。
 - 2026-07 · [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 加并行全局/query 价值码生成候选，再以联合 VRM 把相关性与商业价值统一排序。

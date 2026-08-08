@@ -7,6 +7,7 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/DBtxy/DASH-OPSD) | `dash` |
 | 直接偏好优化 | [DPO](2305.18290-dpo/README.md) | Stanford，2023-05-29 | [已开源](https://github.com/eric-mitchell/direct-preference-optimization) | `dpo` |
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | Contextual AI / Stanford，2024-02-02 | [已开源](https://github.com/ContextualAI/HALOs) | `kto` |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | KAIST，2024-03-12 | [已开源](https://github.com/xfactlab/orpo) | `orpo` |

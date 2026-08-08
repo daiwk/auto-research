@@ -41,10 +41,13 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **152/152** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **155/155** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `gryphon-v2` | Gryphon-v2 · Yandex | 双来源 rollout distillation；MovieLens-1M NDCG@10 -26.84%，保留负结果 |
+| 核心机制 | `degr` | DEGR · JD.com | diversity + adaptive reward ORPO；NDCG 持平、head share -1.21% |
+| 核心机制 | `rd-attnres` | Role-Decoupled Attention Residuals | 相对 Block AttnRes PPL +0.61%（变差），已接入 micro-LLM evolve |
 | 核心机制 | `retoken` | ReToken · UIUC/Microsoft Research/Google DeepMind | 单 retrieval target 与 value-cache Top-K；WikiText-2 PPL +3.70%（变差） |
 | 核心机制 | `ccformer` | CCFormer · Tencent | ID/content field gate 与分层历史压缩；MovieLens-1M NDCG@10 +22.44% |
 | 核心机制 | `open-web-ufm` | Open Web UFM · Teads | 双裁剪对比预训练 + next-item 代理目标；NDCG@10 +0.00% |
