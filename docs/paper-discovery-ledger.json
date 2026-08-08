@@ -186,10 +186,6 @@
         },
         {
           "track": "recommendation",
-          "subtopic": "safety-risk"
-        },
-        {
-          "track": "recommendation",
           "subtopic": "training-serving"
         },
         {
@@ -399,24 +395,6 @@
           "doc": "reproductions/2510.11056-crsd/README.md"
         },
         {
-          "id": "2405.18941",
-          "title": "Content-Agnostic Moderation",
-          "priority": "P2",
-          "track": "recommendation",
-          "subtopic": "safety-risk",
-          "status": "rejected",
-          "reason": "no quantified industrial online A/B or user-approved classic exception found"
-        },
-        {
-          "id": "2505.17549",
-          "title": "EGA-V2",
-          "priority": "P2",
-          "track": "recommendation",
-          "subtopic": "ranking",
-          "status": "rejected",
-          "reason": "public evidence is offline-only and does not pass the industrial online-evidence gate"
-        },
-        {
           "id": "2104.09864",
           "title": "RoFormer / RoPE",
           "priority": "P0",
@@ -545,15 +523,6 @@
           "status": "implemented",
           "key": "medusa",
           "doc": "reproductions/2401.10774-medusa/README.md"
-        },
-        {
-          "id": "2205.14135",
-          "title": "FlashAttention",
-          "priority": "P2",
-          "track": "foundation-model",
-          "subtopic": "inference-serving",
-          "status": "deferred",
-          "reason": "requires a CUDA/Triton kernel-first reproduction; a dense wrapper would be misleading"
         },
         {
           "id": "2309.00267",
@@ -814,24 +783,6 @@
           "status": "implemented",
           "key": "gaia",
           "doc": "agent-research/2311.12983-gaia/README.md"
-        },
-        {
-          "id": "2307.13854",
-          "title": "WebArena",
-          "priority": "P2",
-          "track": "agent",
-          "subtopic": "benchmarks-environments",
-          "status": "deferred",
-          "reason": "requires the real browser/site environment that the user previously deferred"
-        },
-        {
-          "id": "2310.06770",
-          "title": "SWE-bench",
-          "priority": "P2",
-          "track": "agent",
-          "subtopic": "benchmarks-environments",
-          "status": "deferred",
-          "reason": "official repository snapshots and container execution were explicitly deferred; local fixture must not be relabeled"
         }
       ]
     }

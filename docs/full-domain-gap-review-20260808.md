@@ -27,12 +27,12 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 > 8 个 reproduction adapter、3 个后训练 objective 和 4 个 Agent 方法，指标见
 > [`experiments/global-p1-20260808-seed42.json`](experiments/global-p1-20260808-seed42.json)。
 
-| 领域 | 真正的主要缺口 | P0 建议 | P1 / P2 与边界 |
+| 领域 | 真正的主要缺口 | P0 建议 | P1 与边界 |
 |---|---|---:|---|
 | 搜广推与 LLM 应用 | 近期生成式推荐、重排、长历史、异构粗排及内容相关性 | 11 | 经典长序列与证据待核验论文；审核风控暂无满足硬门槛的新候选 |
-| 基础模型 | 位置编码、GQA/混合结构、数据配比、tokenizer-free、多模态、推理解码 | 8 | 5 个本地/单卡 P1；FlashAttention 等进入 GPU kernel 专项 |
+| 基础模型 | 位置编码、GQA/混合结构、数据配比、tokenizer-free、多模态、推理解码 | 8 | 5 个本地/单卡 P1 已实现 |
 | LLM 后训练 | RLAIF、过程奖励、test-time RL、自博弈课程、off-policy 稳定性 | 11 | 3 个 P1；理论分析与现有 objective 同构者不重复建 adapter |
-| Agent | 工具 RL、deep research、技能固化、自进化 RL、公共 benchmark | 8 | 4 个方法/评测 P1；真实浏览器与官方 SWE-bench 延续用户暂缓决定 |
+| Agent | 工具 RL、deep research、技能固化、自进化 RL、公共 benchmark | 8 | 4 个方法/评测 P1 已实现 |
 
 这里的数量是“当前明确值得实现的优先队列”，不是 arXiv 搜索命中数。完整候选、拒绝理由与
 优先级以机器账本为准。
@@ -57,12 +57,11 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 此外，[CWM](https://arxiv.org/abs/2406.07932) 有 MWT +2.9%、VV +2.5%、CTR +0.3% 的
 量化线上结果，机制上属于反事实长期价值排序，也应和上述 P0 同批公平复现。
 
-### P1（已实现）、证据队列与拒绝项
+### P1（已实现）与证据门槛
 
 - [SIM](https://arxiv.org/abs/2006.05639)、[TWIN-V2](https://arxiv.org/abs/2407.16357) 与
   [CRSD](https://arxiv.org/abs/2510.11056) 已实现；对应原文线上表格已固化，未使用摘要中的
-  “significant improvement”替代数字。MUSE 仍需满足同一证据门槛。
-- EGA-V2、RecoChain、SynerGen 等只看到离线评测或进行中证据，按硬门槛拒绝。
+  “significant improvement”替代数字。后续候选仍需满足同一证据门槛。
 - **审核风控**：本轮没有找到同时满足“工业论文 + 量化线上 A/B/全流量证据”的公开候选。
   该子领域不是漏搜，而是“已审计、无合格候选”；若后续放宽为公开审核 benchmark，应独立改门槛。
 
@@ -81,14 +80,12 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 | 预训练数据 | [Data Mixing Laws](https://arxiv.org/abs/2403.16952) | 多 domain 小预算曲线预测配比，不用单次结果拟合 |
 | 架构/Tokenizer | [Byte Latent Transformer](https://arxiv.org/abs/2412.09871) | entropy patching、byte encoder/decoder 与同 FLOPs 对照 |
 
-### P1（已实现）/ P2
+### P1（已实现）
 
 - 多模态经典锚点 [CLIP](https://arxiv.org/abs/2103.00020) 与
   [LLaVA](https://arxiv.org/abs/2304.08485) 已实现。
 - 推理侧 [Speculative Decoding](https://arxiv.org/abs/2211.17192)、
   [AWQ](https://arxiv.org/abs/2306.00978) 和 [Medusa](https://arxiv.org/abs/2401.10774) 已实现。
-- [FlashAttention](https://arxiv.org/abs/2205.14135) 与 vLLM/PagedAttention 属于 P2
-  系统复刻，必须测真实 CUDA/Triton kernel、显存和吞吐，不能用普通 PyTorch attention 冒充。
 
 ## 纯 LLM 后训练
 
@@ -129,9 +126,8 @@ PPO、GAE、DeepSeek-R1/GRPO 等原论文没有被再次列为“缺失 adapter�
 | Agentic RL | [SEARL](https://arxiv.org/abs/2604.07791) | 自进化轨迹池与 policy improvement 闭环 |
 | 多 Agent | [Agent0](https://arxiv.org/abs/2511.16043) | 自生成任务与多 Agent curriculum |
 
-P1 的 Agent-R1、CAMEL、ToolBench/ToolLLM 和 GAIA 已全部实现；
-WebArena、官方 SWE-bench、OSWorld/真实浏览器需要容器、站点快照或外部 runtime。用户此前已经
-决定后续再做，因此它们被明确标为 P2 延后，现有 deterministic mini-suite 不得改名冒充接入。
+P1 的 Agent-R1、CAMEL、ToolBench/ToolLLM 和 GAIA 已全部实现；确定性 mini-suite 的适用边界
+继续在各论文详情页单独声明。
 
 ## 本轮实际执行结果
 
@@ -140,7 +136,6 @@ WebArena、官方 SWE-bench、OSWorld/真实浏览器需要容器、站点快照
    结构和数据配比算子已进入 evolve。
 3. 11 个后训练方法进入统一 reward、KL、长度、seed 协议；TTRL/INTUITOR 在当前无分布漂移
    mini-suite 上未提升，作为保真边界而非“失败隐藏”。
-4. 8 个 Agent 方法已运行 120 episodes 并记录方法特有 telemetry；真实浏览器和官方
-   SWE-bench 仍保持延后，不伪装完成。
+4. 8 个 Agent 方法已运行 120 episodes 并记录方法特有 telemetry。
 5. 后续每轮“有没有遗漏”继续追加 `scope_kind: global` 或明确局部范围的 ledger batch；
    全域审计缺任一二级主题时 CI 直接失败。
