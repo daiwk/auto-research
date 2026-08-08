@@ -2,6 +2,10 @@
 
 本页是跨领域的长期审计入口，覆盖**搜广推、基础模型、LLM 后训练和 Agent**。单篇实现与指标仍以各论文 README 为准；这里回答“主干是否齐全、下一步缺什么”。
 
+> 2026-08-08 的二级主题复查确认仍有一批真实缺口；此前“P0/P1 已完成”只指一个局部
+> 15 篇批次，不能解释为全库无遗漏。完整证据、优先级和拒绝项见
+> [全主题系统缺口审计](full-domain-gap-review-20260808.md)。
+
 ## 统一收录原则
 
 | 领域 | 进入实现队列的证据门槛 | 默认公共评测 |
@@ -36,6 +40,8 @@ LLM 内容/知识增强、采样蒸馏、RL、长期价值和 serving；主题�
 | ESMM / MMoE / PLE | 多任务 CVR 与 shared-bottom 演进主线 | 已建立公开多任务协议并分别实现 |
 
 RecoChain / DIG（2026）仍未核验到满足工业论文硬门槛的量化线上 A/B，因此不创建占位 adapter。
+但 GloRank、Dual-Rerank、OneRanker、RADAR、DualGR、MPFormer、HAP、OnePiece、IntSR、
+CDM 和 CWM 已确认符合门槛，是下一批真实 P0，而不是“已覆盖”的别名。
 
 ## 基础模型：架构、预训练、多模态与效率
 
@@ -48,7 +54,7 @@ flowchart LR
   T --> P["RoPE / long context / MTP"]
 ```
 
-当前覆盖 dense 基线、稀疏 MoE、Mamba、动态/稀疏注意力、条件记忆、长上下文位置编码、MTP 和量化；新算子可进入 LLM evolve 的搜索空间。
+当前覆盖 dense 基线、稀疏 MoE、Mamba、动态/稀疏注意力、条件记忆、长上下文位置编码、MTP 和量化；新算子可进入 LLM evolve 的搜索空间。独立的 RoPE/ALiBi、GQA、Hymba、MoBA、DoReMi、数据配比定律、BLT 和多模态经典锚点仍待补。
 
 独立浏览入口、分类和评测口径见[基础模型研究](foundation-models/README.md)。
 
@@ -81,9 +87,10 @@ memory、planner、tool policy 和 critic 已成为可组合 genome，并在同�
 token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实浏览器/代码环境 benchmark，
 并区分算法收益和更强 foundation model 的收益。
 
-## 执行优先级
+## 已完成批次与新优先级
 
-1. **P0 已完成**：Wide & Deep、DCN-V2、DIEN、BST、CS3、CQ-SID、Switch Transformer、Mamba、Switch Attention。
+1. **既有 P0 批次已完成**：Wide & Deep、DCN-V2、DIEN、BST、CS3、CQ-SID、Switch Transformer、Mamba、Switch Attention；这不代表新审计发现的 P0 已实现。
 2. **P1 基础设施已完成**：新 LLM 架构、后训练和 Agent 的论文约束 genome 已接入统一多轮控制器。
 3. **P1 经典论文已完成**：DeepFM、YouTube DNN、ESMM、MMoE、PLE 已按用户批准的经典例外实现。
 4. **P2 系统复刻**：FlashAttention 等 kernel-first 工作进入 GPU 专项，不用 Mac 近似实现宣称论文复现。
+5. **新 P0 队列**：以[全主题系统缺口审计](full-domain-gap-review-20260808.md)为唯一清单，逐项实现后才把 ledger 状态改成 `implemented`。
