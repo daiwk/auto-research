@@ -8,6 +8,9 @@
 [基础模型目录](../foundation-models/README.md)，训练后算法进入
 [LLM 后训练](../post-training/README.md)。论文详情和物理路径保持不变。
 
+每轮新增论文不再依赖零散搜索记录，而是先建立候选全集、再逐项进入明确终态；规则、
+机器账本和强制校验见[论文发现闭环与防遗漏审计](../paper-discovery-audit.md)。
+
 ## 原论文关键图规范
 
 每篇论文页在“背景与主要改动”和“核心公式”之间固定展示一张原论文关键图，
@@ -48,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 155 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 159 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -57,10 +60,14 @@ pytest tests/test_research_module_docs.py
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 - 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
-## 全部复现（155/155）
+## 全部复现（159/159）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `dme` · [DME](2608.02148-dme/README.md) | 抖音搜索 Lifetime +0.1%，内部离线 +2.92% | typed latent + cross reconstruction；MovieLens-100K NDCG@10 -8.84%，保留负结果 |
+| 核心机制 | `steps` · [STEPS](2608.01949-steps/README.md) | active days +0.2843%、permission disablement -1.9089%，已全量 | planning/execution/filter 闭环；MovieLens-100K NDCG@10 +66.05% |
+| 核心机制 | `spear` · [SPEAR](2608.01738-spear/README.md) | query-view CTR +0.259、reading depth +0.733，已全量 | 双 embedding + 乘法门；MovieLens-100K NDCG@10 +26.95% |
+| 核心机制 | `open-language-model` · [OpenLanguageModel](2607.16669-open-language-model/README.md) | 纯 LLM：四卡 weak scaling 90.6%；无线上 A/B | `olm_composable` genome；WikiText-2 同预算 PPL 基本等价，验证可组合结构语义 |
 | 核心机制 | `gryphon-v2` · [Gryphon-v2](2608.06213-gryphon-v2/README.md) | Yandex Music active users +1.41% | rollout/impression 双路 teacher distillation；NDCG@10 -26.84%，保留负迁移 |
 | 核心机制 | `degr` · [DEGR](2608.04809-degr/README.md) | 京东 UCTR +1.22%、PV +0.20% | diversity + adaptive reward ORPO；NDCG 持平、head share -1.21% |
 | 核心机制 | `rd-attnres` · [RD-AttnRes](2608.01075-rd-attnres/README.md) | 纯 LLM：120M/343M PPL -2.97%/-2.43% | 相对 Block AttnRes PPL +0.61%（变差），QK/V route JS=0.00489 |

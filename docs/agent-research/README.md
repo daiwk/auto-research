@@ -63,6 +63,10 @@
 - [TAPO](2607.27973-tapo/README.md)：同一 rollout 交替优化 policy 与 action-conditioned transition prediction。
 - [GRSD](2607.28076-grsd/README.md)：对照同组成功/失败反思生成 turn-level privileged guidance。
 - [EnvACE](2608.06197-envace/README.md)：同一策略交替 act/rehearse，并按角色分别计算 group advantage。
+- [AgentOPSD](2608.05987-agent-opsd/README.md)：递归汇聚 privileged token gap，形成关键 turn 的贝叶斯信用。
+- [OCSD](2608.04788-ocsd/README.md)：对照 full 与 observation-ablated replay，消除 scaffold 混杂。
+- [VerMem](2608.03137-vermem/README.md)：统一管理 LTM、活动上下文和 episodic history，并用双层 verifier 审核。
+- [CoEvo-Mem](2608.01739-coevo-mem/README.md)：交替更新检索路由器和记忆库，闭合使用—更新反馈环。
 - [OSReward / OS-Shepherd](2607.28609-osreward/README.md)：跨平台 CUA reward 的双类召回、balanced accuracy 与 leniency 审计。
 
 ## 研究闭环

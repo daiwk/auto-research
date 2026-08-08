@@ -52,6 +52,13 @@ PAPERS = {
     "chord": ("CHORD", "https://arxiv.org/abs/2508.11408"),
     "vapo": ("VAPO", "https://arxiv.org/abs/2504.05118"),
     "vad": ("VAD", "https://arxiv.org/abs/2607.28590"),
+    "distilled-rl": ("Distilled RL", "https://arxiv.org/abs/2607.17247"),
+    "u-opsd": ("U-OPSD", "https://arxiv.org/abs/2608.06296"),
+    "rp-opsd": ("RP-OPSD", "https://arxiv.org/abs/2608.06347"),
+    "pcsd": ("PCSD", "https://arxiv.org/abs/2608.01837"),
+    "adrs": ("ADRS", "https://arxiv.org/abs/2608.03223"),
+    "mopd": ("MOPD", "https://arxiv.org/abs/2606.30406"),
+    "opd-lm": ("OPDLM", "https://arxiv.org/abs/2606.06712"),
 }
 
 

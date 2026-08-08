@@ -1,0 +1,100 @@
+{
+  "paper": {
+    "arxiv_id": "2607.16669",
+    "title": "OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research",
+    "url": "https://arxiv.org/abs/2607.16669",
+    "organization": "Indian Institute of Technology Madras"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 30,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "olm_composable",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 5.747052639722824,
+    "perplexity": 313.2659905509099,
+    "instruction_loss": 5.833168625831604,
+    "primary": -6.622027933597565,
+    "public_composite": -6.622027933597565,
+    "composite_loss": 6.622027933597565,
+    "fitness": -6.622027933597565,
+    "initial_loss": 6.179897594451904,
+    "final_loss": 5.804153966903686,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "olm_composable",
+    "lm_loss": 5.747052654623985,
+    "perplexity": 313.26599521893695,
+    "instruction_loss": 5.833168625831604,
+    "primary": -6.622027948498726,
+    "public_composite": -6.622027948498726,
+    "composite_loss": 6.622027948498726,
+    "fitness": -6.622027948498726,
+    "initial_loss": 6.1798975467681885,
+    "final_loss": 5.804153966903686,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "ordinary_pytorch_modules": 1.0,
+      "composable_operators": [
+        "Block",
+        "Residual",
+        "Repeat",
+        "Parallel"
+      ],
+      "runtime_portability": [
+        "cpu",
+        "mps",
+        "cuda"
+      ],
+      "preset_family": "decoder-only transformer"
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": 2.5928353415197405e-07,
+    "perplexity_percent": 1.4901161225243267e-06
+  },
+  "paper_results": {
+    "preset_count": 27,
+    "model_families": 9,
+    "four_gpu_weak_scaling_efficiency_percent": 90.6
+  },
+  "scope": "本地以普通 PyTorch module 组合 Block/Residual/Repeat/Parallel 风格 decoder，同一模型可在 CPU、MPS、CUDA runtime 运行，并进入统一 micro-LLM evolve。未复制上游完整 27 presets 或四卡 348M 训练。"
+}

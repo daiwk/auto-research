@@ -43,6 +43,13 @@
 - [OPSD](2601.18734-opsd/README.md)：用同一模型的特权解题上下文作教师，对学生
   on-policy 轨迹做逐 token 自蒸馏与 pointwise clipping。
 - [DASH](2608.06243-dash/README.md)：以局部散度门控反向聚合自蒸馏 horizon，不增加 teacher forward。
+- [U-OPSD](2608.06296-u-opsd/README.md)：仅依赖模型多次采样的一致性构造伪教师，不使用外部监督。
+- [RP-OPSD](2608.06347-rp-opsd/README.md)：以参考解消融产生的分布位移定位多语推理 pivot。
+- [PCSD](2608.01837-pcsd/README.md)：累计持续 teacher support，并用趋势衰减过滤局部噪声。
+- [ADRS](2608.03223-adrs/README.md)：用回报相关 TVA gate 把教师 token 分数写入原生 advantage。
+- [Distilled RL](2607.17247-distilled-rl/README.md)：反向教师比率、负样本 reset 和几何归一化的细粒度 RL。
+- [MOPD](2606.30406-mopd/README.md)：在学生 rollout 上整合多个独立领域 RL teacher。
+- [OPDLM](2606.06712-opd-lm/README.md)：冻结 AR 教师向双向 diffusion 学生做 on-policy 知识迁移。
 - [OPCD](2602.12275-opcd/README.md)：让无上下文学生拟合带经验/系统提示的上下文教师，
   把测试时上下文能力蒸馏进参数。
 - [DAPO](2503.14476-dapo/README.md)：Clip-Higher、动态采样、token loss 与过长惩罚。

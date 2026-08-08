@@ -1,0 +1,54 @@
+{
+  "paper": {
+    "title": "SPEAR: Selection-aware Personalized Rewriting and Retrieval"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "spear",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "SPEAR",
+    "hit_at_10": 0.09230769230769231,
+    "ndcg_at_10": 0.04493834320844529,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.22192307692307692
+  },
+  "relative": {
+    "hit_at_10_percent": 4.3478260869565215,
+    "ndcg_at_10_percent": 26.951410860882437,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -24.476439790575924
+  },
+  "stages": {
+    "dual_embedding_gradient_isolation": true,
+    "multiplicative_rewrite_gate": true,
+    "dynamic_rewrite_selector": true,
+    "original_query_residual": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.11538461538461539,
+      "ndcg_at_10": 0.06099429915709443,
+      "fresh_hit_at_10": 0.08,
+      "head_share_at_10": 0.23846153846153847
+    }
+  },
+  "paper_results": {
+    "semantic_similarity_at_10_percent": 18.2,
+    "click_recall_at_10_percent": 99.5,
+    "query_view_ctr_percent": 0.259,
+    "reading_depth_percent": 0.733
+  },
+  "scope": "MovieLens-100K 的公开内容特征与行为序列用于执行论文核心机制；没有使用生产私有流量、线上触发器或十亿级向量索引，线上指标只引用原文。"
+}

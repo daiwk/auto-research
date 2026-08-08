@@ -62,6 +62,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "tool:cam-df", "memory:skillrise",
             "critic:tapo", "critic:grsd",
             "critic:envace",
+            "critic:agent-opsd", "critic:ocsd",
+            "memory:vermem", "memory:coevo-mem",
         ]
     if model == "micro-llm":
         values = [
@@ -74,6 +76,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "native_sparse_attention", "gated_attention",
             "nsa_gated_attention", "wide_dynamic_width", "retoken", "optimizer:muon",
             "block_attnres", "rd_attnres",
+            "olm_composable",
         ]
         text = direction.lower().replace("-", "")
         priority_terms = {
@@ -106,6 +109,10 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             ),
             "rd_attnres": (
                 "rd-attnres", "role decoupled", "qk v route", "残差路由", "角色解耦",
+            ),
+            "olm_composable": (
+                "openlanguagemodel", "open language model", "olm",
+                "composable", "可组合", "预训练基础设施",
             ),
         }
         for architecture, terms in priority_terms.items():

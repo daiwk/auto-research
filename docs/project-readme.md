@@ -41,10 +41,14 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **155/155** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
+下表与代码 registry 保持 **159/159** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](reproductions/README.md)进入。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `dme` | DME · ByteDance/Douyin | typed latent evidence + cross-conditional reconstruction；MovieLens-100K NDCG@10 -8.84% |
+| 核心机制 | `steps` | STEPS · ByteDance/Douyin | gated ordinal planning + execution + filter；MovieLens-100K NDCG@10 +66.05% |
+| 核心机制 | `spear` | SPEAR · Dewu | dual embedding + multiplicative rewrite gate；MovieLens-100K NDCG@10 +26.95% |
+| 核心机制 | `open-language-model` | OpenLanguageModel · IIT Madras | `olm_composable` genome 与 Block/Residual/Repeat/Parallel；WikiText-2 同预算语义等价验证 |
 | 核心机制 | `gryphon-v2` | Gryphon-v2 · Yandex | 双来源 rollout distillation；MovieLens-1M NDCG@10 -26.84%，保留负结果 |
 | 核心机制 | `degr` | DEGR · JD.com | diversity + adaptive reward ORPO；NDCG 持平、head share -1.21% |
 | 核心机制 | `rd-attnres` | Role-Decoupled Attention Residuals | 相对 Block AttnRes PPL +0.61%（变差），已接入 micro-LLM evolve |

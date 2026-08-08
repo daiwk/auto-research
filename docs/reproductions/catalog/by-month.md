@@ -5,6 +5,9 @@
 ## 2026-08
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：Yandex 用共享 encoder 串联 SID 生成与 item-level ranking，并从当前 rollout 和真实曝光双路蒸馏高容量 teacher。
 - [DEGR](../2608.04809-degr/README.md)：京东把 cohort 多样性约束与 reward-adaptive ORPO 加入生成式重排，再以多样性 greedy selection 输出列表。
+- [DME](../2608.02148-dme/README.md)：抖音以 typed latent evidence 与 cross-conditional reconstruction 在保持向量召回效率的同时补足细粒度多模态语义。
+- [SPEAR](../2608.01738-spear/README.md)：得物以双 embedding、乘法改写门和 request-specific selector 消除通用词改写捷径。
+- [STEPS](../2608.01949-steps/README.md)：把推送执行与下一次唤醒规划成自触发 Agent 闭环，并用轻量 filter 控制开销和异常行为。
 
 ## 2026-07
 - [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。

@@ -197,6 +197,8 @@ class AgentEvolutionEvaluator:
                     "memgpt": 0.6,
                     "voyager": 0.55,
                     "skillrise": 0.65,
+                    "vermem": 0.42,
+                    "coevo-mem": 0.46,
                 }.get(genome.agent_memory, 0.8)
                 cost += memory_cost
             if plan is None:
@@ -217,6 +219,9 @@ class AgentEvolutionEvaluator:
                     # turn-level guidance for the current failed trajectory.
                     reflective_groups += 1
                     guidance_updates += len(task.plan)
+                elif genome.agent_critic in {"agent-opsd", "ocsd"}:
+                    guidance_updates += len(task.plan)
+                    reflective_groups += 1
                 plan = task.plan
                 critic_cost = {
                     "self-refine": 1.0,
@@ -229,6 +234,9 @@ class AgentEvolutionEvaluator:
                     "grsd": 0.75,
                     "gigpo": 0.82,
                     "steppo": 0.8,
+                    "agent-opsd": 0.72,
+                    "ocsd": 0.70,
+                    "envace": 0.76,
                 }.get(genome.agent_critic, 1.5)
                 cost += critic_cost
             success = tuple(plan) == task.plan

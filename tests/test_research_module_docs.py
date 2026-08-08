@@ -54,6 +54,13 @@ MODULES = {
         "vad": "2607.28590-vad",
         "flux-opd": "2607.28022-flux-opd",
         "dash": "2608.06243-dash",
+        "distilled-rl": "2607.17247-distilled-rl",
+        "u-opsd": "2608.06296-u-opsd",
+        "rp-opsd": "2608.06347-rp-opsd",
+        "pcsd": "2608.01837-pcsd",
+        "adrs": "2608.03223-adrs",
+        "mopd": "2606.30406-mopd",
+        "opd-lm": "2606.06712-opd-lm",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -100,6 +107,10 @@ MODULES = {
         "grsd": "2607.28076-grsd",
         "os-shepherd": "2607.28609-osreward",
         "envace": "2608.06197-envace",
+        "agent-opsd": "2608.05987-agent-opsd",
+        "ocsd": "2608.04788-ocsd",
+        "vermem": "2608.03137-vermem",
+        "coevo-mem": "2608.01739-coevo-mem",
     },
 }
 
