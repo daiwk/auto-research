@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Agent-R1（arXiv 2511.14460）](https://arxiv.org/abs/2511.14460) |
-| 公司 / 机构 | Mingyue Cheng（按一作归档） |
+| 公司 / 机构 | University of Science and Technology of China |
 | 首次公开日期 | 2025-11-18（arXiv v1） |
 | 原作者代码 | 是：[原作者仓库](https://github.com/AgentR1/Agent-R1) |
 | 本地 adapter / 方法键 | `agent-r1` |

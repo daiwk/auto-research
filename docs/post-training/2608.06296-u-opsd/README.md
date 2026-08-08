@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [On-Policy Self-Distillation without Any Supervision（arXiv 2608.06296）](https://arxiv.org/abs/2608.06296) |
-| 公司 / 机构 | Yijiang Li 等（按一作归档） |
+| 公司 / 机构 | University of California, San Diego / Georgia Institute of Technology / University of Maryland / ByteDance |
 | 首次公开日期 | 2026-08-06（arXiv v1） |
 | 原作者代码 | 未发现/未发布官方代码（核查日期：2026-08-08） |
 | 本地 adapter / 方法键 | `u-opsd` |

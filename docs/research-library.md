@@ -25,7 +25,7 @@ evaluator 接入[自动研究与进化](auto-research.md)。
 必须说明模型规模与系统环境折损。
 
 - [基础模型研究总览](foundation-models/README.md)
-- [按机构](foundation-models/catalog/by-organization.md) ·
+- [按机构/公司/学校](foundation-models/catalog/by-organization.md) ·
   [按主题](foundation-models/catalog/by-topic.md) ·
   [按年份](foundation-models/catalog/by-year.md)
 - [基础模型统一评测协议](foundation-models/benchmark.md)

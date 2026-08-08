@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [SAGE：RL 驱动的自改进技能库（arXiv 2512.17102）](https://arxiv.org/abs/2512.17102) |
-| 公司 / 机构 | Jiongxiao Wang 等（按一作归档） |
+| 公司 / 机构 | University of Wisconsin–Madison / Amazon Web Services |
 | 首次公开日期 | 2025-12-18（arXiv v1） |
 | 原作者代码 | 未发现/未发布原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `sage` |

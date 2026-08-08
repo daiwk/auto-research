@@ -1,0 +1,198 @@
+# Agent 研究：按机构/公司/学校
+
+按论文一作的第一署名单位聚合；单位内按首次公开日期倒序排列。每篇论文同时显示一作姓名，并附一至两句中文方法简介。联合工作不会重复归入所有合作单位。
+
+## AI21 Labs
+
+- 2022-05-01 · 一作：Ehud Karpas · [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
+
+## Academic author team
+
+- 2026-07-07 · 一作：Yuhang Zhou · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
+
+## All-Hands-AI
+
+- 2024-07-23 · 一作：Xingyao Wang · [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
+
+## Apple
+
+- 2025-02-03 · 一作：Kevin Chen · [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
+
+## Baidu Inc.
+
+- 2026-07-30 · 一作：Binbin Zheng · [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
+
+## Beijing University of Posts and Telecommunications
+
+- 2026-07-28 · 一作：Yu Hao · [HiSkill](../2607.25853-hiskill/README.md)（`hiskill`）：用高层 skill、可执行 AtomicOp 和多类有向边组织经验，推理时只检索任务相关子图来落地动作。
+
+## ByteDance Seed
+
+- 2025-04-15 · 一作：Jiazhan Feng · [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
+
+## CASIA
+
+- 2026-07-28 · 一作：Siyu Xia · [UniMem](../2607.26017-unimem/README.md)（`unimem`）：新颖任务先进入 episodic buffer；反复出现且可靠的执行模式再被自路由控制器固化到可扩展 parametric memory。
+
+## Carnegie Mellon University
+
+- 2023-03-30 · 一作：Aman Madaan · [Self-Refine](../2303.17651-self-refine/README.md)（`self-refine`）：一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。
+- 2022-11-18 · 一作：Luyu Gao · [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
+
+## DeepWisdom
+
+- 2023-08-01 · 一作：Sirui Hong · [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
+
+## HKU
+
+- 2025-04-04 · 一作：Yuxiang Zheng · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
+
+## King Abdullah University of Science and Technology
+
+- 2023-03-31 · 一作：Guohao Li · [CAMEL](../2303.17760-camel/README.md)（`camel`）：用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。
+
+## Meituan
+
+- 2025-08-26 · 一作：Weikang Zhao · [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：既有 tool-use RL 通常把用户请求视为固定输入，但真实用户会根据 Agent 回答不断修改需求。MUA-RL 将 LLM 模拟用户直接放入 rollout，Agent 在对话中澄清意图并调用真实 MCP/数据库工具；用户消息和工具结果不计入策略 loss，只用最终任务完成奖励鼓励探索。
+
+## Memento Team
+
+- 2026-03-19 · 一作：Huichi Zhou · [Memento-Skills](../2603.18743-memento-skills/README.md)（`memento-skills`）：从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。
+
+## Meta AI
+
+- 2023-11-21 · 一作：Grégoire Mialon · [GAIA](../2311.12983-gaia/README.md)（`gaia`）：以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。
+
+## Meta AI Research
+
+- 2023-02-09 · 一作：Timo Schick · [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
+
+## Microsoft
+
+- 2023-05-19 · 一作：Zhibin Gou · [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
+
+## Microsoft Research
+
+- 2025-10-06 · 一作：Dongge Han · [LEGOMem](../2510.04851-legomem/README.md)（`legomem`）：整段成功轨迹难以迁移到新任务，单一全局记忆又混合了任务分解和工具执行。LEGOMem 把经验拆成像积木一样的 procedural units：orchestrator memory 保存任务分解与委派，agent memory 保存具体动作模板，运行时按新任务重新组合。
+- 2025-08-05 · 一作：Xufang Luo · [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
+- 2023-08-16 · 一作：Qingyun Wu · [AutoGen](../2308.08155-autogen/README.md)（`autogen`）：复杂应用常需要多个模型、工具和人类协作，手写控制流难复用。AutoGen 提供 ConversableAgent 与 conversation programming：每个角色声明能力、回复策略和终止条件，通过群聊或嵌套会话组合成工作流。
+- 2023-05-29 · 一作：Binfeng Xu · [ReWOO](../2305.18323-rewoo/README.md)（`rewoo`）：ReAct 在每次工具返回后重新调用 LLM，token 和推理成本随轨迹增长。ReWOO 的 Planner 用变量引用写出完整多步计划，Worker 只负责填入工具证据，Solver 最后读取计划与证据生成答案，因此 Planner 不被中间观察反复打断。
+
+## NVIDIA
+
+- 2023-05-25 · 一作：Guanzhi Wang · [Voyager](../2305.16291-voyager/README.md)（`voyager`）：开放世界 Agent 需要持续选择有新颖性的任务、把成功行为积累为技能，并根据环境报错修复程序。Voyager 用 GPT-4 自动生成 curriculum，以代码作为动作空间；成功程序按描述索引进 skill library，新任务检索并组合已有技能。
+
+## Nanjing University
+
+- 2026-08-05 · 一作：Yi Yang · [OCSD](../2608.04788-ocsd/README.md)（`ocsd`）：直接重放未来 observation 时，token 分数变化同时来自观测信息和重放脚手架。OCSD 构造结构完全匹配的 Full 与 Observation-Ablated 两个 replay，仅以二者残差调制高不确定 step 的 GRPO 更新。
+
+## Nanyang Technological University
+
+- 2026-02-02 · 一作：Haozhen Zhang · [MemSkill](../2602.02474-memskill/README.md)（`memskill`）：controller 从历史 episode 选择记忆，designer 将重复成功模式编译为技能，并随新反馈升级技能版本。
+- 2025-05-16 · 一作：Lang Feng · [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
+
+## National University of Singapore
+
+- 2026-02-25 · 一作：Xinle Wu · [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。
+
+## Northeastern University
+
+- 2023-03-20 · 一作：Noah Shinn · [Reflexion](../2303.11366-reflexion/README.md)（`reflexion`）：传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。
+
+## Northwestern
+
+- 2025-04-24 · 一作：Zihan Wang · [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：单轮数学 RL 的优化单位是一次回答，而 Agent 要在随机环境中跨多轮决策。RAGEN 提出 StarPO，把 state、thinking、action 和 reward 组织成完整轨迹。
+
+## OpenAI
+
+- 2021-12-17 · 一作：Reiichiro Nakano · [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
+
+## Peking University
+
+- 2026-07-30 · 一作：Cong Li · [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
+- 2026-07-29 · 一作：Yicheng Feng · [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
+
+## PricewaterhouseCoopers Commercial Technology and Innovation Office
+
+- 2025-07-29 · 一作：Elias Lumer · [MemTool](../2507.21428-memtool/README.md)（`memtool`）：大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。
+
+## Princeton University
+
+- 2024-05-06 · 一作：John Yang · [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
+- 2023-05-17 · 一作：Shunyu Yao · [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。
+- 2022-10-06 · 一作：Shunyu Yao · [ReAct](../2210.03629-react/README.md)（`react`）：纯 CoT 容易在封闭知识上幻觉，纯 action agent 又缺少计划与状态跟踪。ReAct 让模型交替生成自然语言推理和环境 action，再把 observation 放回下一步上下文，使推理可以纠错、行动可以获取外部事实。
+
+## Robotics at Google
+
+- 2022-04-04 · 一作：Michael Ahn · [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
+
+## Shanghai AI Laboratory
+
+- 2026-04-09 · 一作：Xinshun Feng · [SEARL](../2604.07791-searl/README.md)（`searl`）：把工具和成功转移维护为图记忆；新 rollout 同时更新 policy 与图边权，形成经验池—检索—改进闭环。
+
+## Shanghai Jiao Tong
+
+- 2026-08-06 · 一作：Zishan Xu · [EnvACE](../2608.06197-envace/README.md)（`envace`）：EnvACE 不另训 world model，而让同一个 agent policy 在真实 act 之间切换到 rehearsal role，自行预测下一 observation；训练时分别为 acting 与 rehearsal 轨迹计算 group-relative advantage，避免两种奖励尺度互相污染，测试时可用少量私有 rehearsal 扩展规划。
+
+## Stanford University
+
+- 2023-04-07 · 一作：Joon Sung Park · [Generative Agents](../2304.03442-generative-agents/README.md)（`generative-agents`）：只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。
+
+## Sun Yat-sen University
+
+- 2026-08-04 · 一作：Xiaolong Sun · [VerMem](../2608.03137-vermem/README.md)（`vermem`）：长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。
+
+## The University of Hong Kong
+
+- 2026-07-30 · 一作：Qiushi Sun · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
+
+## Tsinghua University
+
+- 2026-08-06 · 一作：Zi-Han Wang · [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
+- 2026-07-16 · 一作：Jinyang Wu · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
+- 2023-05-25 · 一作：Qiantong Xu · [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
+
+## University of California, Berkeley
+
+- 2023-10-12 · 一作：Charles Packer · [MemGPT](../2310.08560-memgpt/README.md)（`memgpt`）：有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。
+
+## University of Illinois Urbana-Champaign
+
+- 2025-04-16 · 一作：Cheng Qian · [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
+- 2025-03-12 · 一作：Bowen Jin · [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
+- 2023-10-06 · 一作：Andy Zhou · [LATS](../2310.04406-lats/README.md)（`lats`）：ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。
+
+## University of North Carolina at Chapel Hill
+
+- 2025-11-20 · 一作：Peng Xia · [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
+
+## University of Science and Technology of China
+
+- 2026-07-28 · 一作：Yu Wang · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
+- 2026-04-20 · 一作：Daoyu Wang · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
+- 2025-11-18 · 一作：Mingyue Cheng · [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
+
+## University of Virginia
+
+- 2025-05-22 · 一作：Zhepei Wei · [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页交互会不断累积 HTML 和历史动作，单轮 GRPO 无法处理状态变化。WebAgent-R1 动态保留近期和任务相关上下文，并行采集完整多轮轨迹，再用 M-GRPO 根据最终成功奖励执行组内相对更新；论文同时强调行为克隆 warm-up 和长 CoT 初始化。
+
+## University of Washington
+
+- 2023-03-16 · 一作：Bhargavi Paranjape · [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
+
+## University of Wisconsin–Madison
+
+- 2025-12-18 · 一作：Jiongxiao Wang · [SAGE](../2512.17102-sage/README.md)（`sage`）：从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。
+
+## Zhejiang University
+
+- 2026-07-29 · 一作：Zhiyuan Yao · [SkillRise](../2607.26784-skillrise/README.md)（`skillrise`）：标准 Agent RL 把任务视为独立 episode，外部 skill bank 又把抽取、检索和执行缠在一起。SkillRise 把相关但不同的任务排成由易到难的序列，让同一 policy 交替求解当前任务与整理一个直接传给下一任务的 skill document；求解阶段由当前结果监督，整理阶段由折扣后的下游任务结果监督。
+- 2023-03-30 · 一作：Yongliang Shen · [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
+
+## 中国科学院信息工程研究所
+
+- 2026-01-28 · 一作：Qihao Wang · [PEARL](../2601.20439-pearl/README.md)（`pearl`）：多跳工具调用同时受工具幻觉、参数错误和长程规划薄弱影响。PEARL 的离线阶段用 trial-and-error 建立工具用法与失败条件；在线阶段把 Planner 与 Executor 解耦，用计划正确性、工具链与最终结果组成的密集 reward 进行 GRPO，而不是只依赖稀疏成功信号。
+
+## 论文未列机构
+
+- 2026-08-03 · 一作：Bowen Ye · [CoEvo-Mem](../2608.01739-coevo-mem/README.md)（`coevo-mem`）：只优化 query routing 或只更新 memory bank 会忽略二者反馈环。CoEvo-Mem 让冻结 LLM 生成 route-specific rewrite 和 prior，轻量 residual router 在线修正；任务结果更新路由，轨迹反馈更新 memory value 与 graph relation，并交替冻结一侧控制非平稳性。

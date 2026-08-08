@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [CHORD：动态协调 SFT 与 on-policy RL（arXiv 2508.11408）](https://arxiv.org/abs/2508.11408) |
-| 公司 / 机构 | Alibaba Group / ModelScope 作者团队 |
+| 公司 / 机构 | Alibaba Group / ModelScope |
 | 首次公开日期 | 2025-08-15 |
 | 原作者代码 | [已开源](https://github.com/modelscope/Trinity-RFT/tree/main/examples/mix_chord) |
 | 本地 adapter / 算法键 | `chord` |

@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Agent0：零人工数据的自进化多 Agent 课程（arXiv 2511.16043）](https://arxiv.org/abs/2511.16043) |
-| 公司 / 机构 | Peng Xia 等（按一作归档） |
+| 公司 / 机构 | University of North Carolina at Chapel Hill / Salesforce Research / Stanford University |
 | 首次公开日期 | 2025-11-20（arXiv v1） |
 | 原作者代码 | 未发现/未发布原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `agent0` |

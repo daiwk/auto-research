@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [AgentOPSD: Recursive Self-Distillation for Agentic Reinforcement Learning（arXiv 2608.05987）](https://arxiv.org/abs/2608.05987) |
-| 公司 / 机构 | Zi-Han Wang 等（按一作归档） |
+| 公司 / 机构 | Tsinghua University / Zhejiang University / Meituan |
 | 首次公开日期 | 2026-08-06（arXiv v1） |
 | 原作者代码 | [仓库已公开：ZethWang/AgentOPSD；README 标注完整代码待发布](https://github.com/ZethWang/AgentOPSD) |
 | 本地 adapter / 方法键 | `agent-opsd` |

@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [GAIA（arXiv 2311.12983）](https://arxiv.org/abs/2311.12983) |
-| 公司 / 机构 | Grégoire Mialon（按一作归档） |
+| 公司 / 机构 | Meta AI |
 | 首次公开日期 | 2023-11-21（arXiv v1） |
 | 原作者代码 | 是：[官方 benchmark](https://huggingface.co/gaia-benchmark) |
 | 本地 adapter / 方法键 | `gaia` |

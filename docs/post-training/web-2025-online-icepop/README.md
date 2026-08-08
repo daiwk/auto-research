@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 资料链接 | [Online IcePop 技术说明](https://zhuanlan.zhihu.com/p/1984379979035850499) |
-| 公司 / 机构 | Jian Hu（技术说明；方法源自 Ant Group Bailing Team） |
+| 公司 / 机构 | Ant Group Bailing Team |
 | 首次公开日期 | 2025-12-16（作者公开说明页首发） |
 | 原作者代码 | 未发布独立源代码；属于 IcePop 的训练调度变体 |
 | 本地 adapter / 算法键 | `online-icepop` |

@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [SEARL：策略与工具图记忆联合自进化（arXiv 2604.07791）](https://arxiv.org/abs/2604.07791) |
-| 公司 / 机构 | Xinshun Feng 等（按一作归档） |
+| 公司 / 机构 | Shanghai AI Laboratory / Shanghai Jiao Tong University |
 | 首次公开日期 | 2026-04-09（arXiv v1） |
 | 原作者代码 | 未发现/未发布原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `searl` |

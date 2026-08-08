@@ -25,7 +25,7 @@ nav:
           - 统一评测协议: reproductions/benchmark.md
       - 基础模型:
           - 研究总览: foundation-models/README.md
-          - 按机构: foundation-models/catalog/by-organization.md
+          - 按机构/公司/学校: foundation-models/catalog/by-organization.md
           - 按主题: foundation-models/catalog/by-topic.md
           - 按年份: foundation-models/catalog/by-year.md
           - 论文谱系与缺口: foundation-models/lineage.md
@@ -33,7 +33,7 @@ nav:
       - LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md
-          - 按一作: post-training/catalog/by-first-author.md
+          - 按机构/公司/学校: post-training/catalog/by-organization.md
           - 按主题: post-training/catalog/by-topic.md
           - 按年份: post-training/catalog/by-year.md
           - 论文谱系与缺口: post-training/lineage.md
@@ -41,7 +41,7 @@ nav:
       - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md
-          - 按一作: agent-research/catalog/by-first-author.md
+          - 按机构/公司/学校: agent-research/catalog/by-organization.md
           - 按主题: agent-research/catalog/by-topic.md
           - 按年份: agent-research/catalog/by-year.md
           - 论文谱系与缺口: agent-research/lineage.md

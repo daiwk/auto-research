@@ -16,7 +16,7 @@
 
 ## 浏览入口
 
-- [按机构](catalog/by-organization.md)：查看公司、实验室和高校的基础模型工作；
+- [按机构/公司/学校](catalog/by-organization.md)：按一作的第一署名单位聚合；
 - [按主题](catalog/by-topic.md)：按“研究方向 → 方法簇 → 论文”浏览；
 - [按年份](catalog/by-year.md)：同年论文按首次公开日期倒序排列；
 - [论文谱系与缺口](lineage.md)：查看已覆盖的技术主干与下一步缺口；

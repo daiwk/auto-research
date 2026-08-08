@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [GiGPO：Agent 的组中组相对优势（arXiv 2505.10978）](https://arxiv.org/abs/2505.10978) |
-| 公司 / 机构 | 论文作者团队（机构详见原论文） |
+| 公司 / 机构 | Nanyang Technological University / Skywork AI |
 | 首次公开日期 | 2025-05-16 |
 | 原作者代码 | 未发现官方代码 |
 | 本地 adapter / 算法键 | `gigpo` |

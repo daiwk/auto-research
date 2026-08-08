@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Missing Old Logits in Asynchronous Agentic RL（arXiv 2605.12070）](https://arxiv.org/abs/2605.12070) |
-| 公司 / 机构 | Zhong Guan（按一作归档） |
+| 公司 / 机构 | Tianjin University / Tsinghua University / Peking University / JD AI Infra |
 | 首次公开日期 | 2026-05-12（arXiv v1） |
 | 原作者代码 | 否：未发现/未发布原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `missing-old-logits` |

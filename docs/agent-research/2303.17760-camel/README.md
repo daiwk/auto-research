@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [CAMEL（arXiv 2303.17760）](https://arxiv.org/abs/2303.17760) |
-| 公司 / 机构 | Guohao Li（按一作归档） |
+| 公司 / 机构 | King Abdullah University of Science and Technology |
 | 首次公开日期 | 2023-03-31（arXiv v1） |
 | 原作者代码 | 是：[原作者仓库](https://github.com/camel-ai/camel) |
 | 本地 adapter / 方法键 | `camel` |
