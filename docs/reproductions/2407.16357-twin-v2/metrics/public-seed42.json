@@ -1,0 +1,55 @@
+{
+  "paper": {
+    "title": "TWIN-V2: Life-cycle User Behavior Compression"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "twin-v2",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "TWIN-V2",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.0433442697717417,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.24961538461538463
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 22.448132427436672,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -15.052356020942412
+  },
+  "stages": {
+    "offline_hierarchical_clusters": 9,
+    "cluster_size_reweighting": true,
+    "candidate_aware_gsu": true,
+    "exact_search_unit": true,
+    "maximum_paper_history": 1000000,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.11538461538461539,
+      "ndcg_at_10": 0.05862611831797369,
+      "fresh_hit_at_10": 0.06,
+      "head_share_at_10": 0.25461538461538463
+    }
+  },
+  "paper_results": {
+    "featured_watch_time_percent": 0.672,
+    "discovery_watch_time_percent": 0.8,
+    "slide_watch_time_percent": 0.728,
+    "main_traffic_dau_million": 400
+  },
+  "scope": "在 MovieLens-100K 全库排序上执行论文的候选相关检索、层级压缩或蒸馏目标；未使用公司私有日志与线上 serving，线上 A/B 只引用原文。"
+}

@@ -1486,6 +1486,12 @@ def update(
             algorithm, state, group, probabilities, reference, sampled, rng,
             cache_index=cache_index,
         )
+    elif algorithm in {"minirl", "missing-old-logits", "stare"}:
+        from .p1_20260808 import update_p1
+
+        gradient, loss, diagnostics = update_p1(
+            algorithm, state, group, probabilities, reference, sampled, rng,
+        )
     else:
         rewards = group.rewards[sampled]
         if algorithm == "gprl":
@@ -1541,6 +1547,7 @@ def update(
         "vad", "rlaif", "process-supervision", "math-shepherd",
         "self-rewarding", "luffy", "ttrl", "absolute-zero", "intuitor",
         "cispo", "spiral", "conspo",
+        "minirl", "missing-old-logits", "stare",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

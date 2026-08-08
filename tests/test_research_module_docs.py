@@ -72,6 +72,9 @@ MODULES = {
         "cispo": "2506.13585-cispo",
         "spiral": "2506.24119-spiral",
         "conspo": "2605.12969-conspo",
+        "minirl": "2512.01374-minirl",
+        "missing-old-logits": "2605.12070-missing-old-logits",
+        "stare": "2606.19236-stare",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -130,6 +133,10 @@ MODULES = {
         "memento-skills": "2603.18743-memento-skills",
         "searl": "2604.07791-searl",
         "agent0": "2511.16043-agent0",
+        "agent-r1": "2511.14460-agent-r1",
+        "camel": "2303.17760-camel",
+        "toolbench": "2305.16504-toolbench",
+        "gaia": "2311.12983-gaia",
     },
 }
 

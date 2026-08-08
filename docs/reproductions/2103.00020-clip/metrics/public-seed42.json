@@ -1,0 +1,31 @@
+{
+  "paper": {
+    "title": "CLIP"
+  },
+  "dataset": {
+    "name": "MovieLens-100K paired item views",
+    "pairs": 360
+  },
+  "baseline": {
+    "name": "random cross-modal retrieval",
+    "recall_at_1": 0.0125
+  },
+  "method": {
+    "name": "symmetric contrastive image-text encoder",
+    "recall_at_1": 0.4125
+  },
+  "relative": {
+    "recall_at_1_points": 40.0
+  },
+  "stages": {
+    "symmetric_infonce_updates": 100,
+    "temperature": 0.1,
+    "initial_loss": 6.534466706695706,
+    "final_loss": 2.161039546490704
+  },
+  "paper_results": {
+    "imagenet_zero_shot_top1": 76.2,
+    "pretraining_pairs_million": 400
+  },
+  "scope": "用 MovieLens 公开 item 的两种观测视图执行双塔、归一化和双向 InfoNCE；没有复刻 4 亿图文对。"
+}

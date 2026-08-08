@@ -120,6 +120,7 @@
 
 ## 2025-10
 - [OneTrans](../2510.26104-onetrans/README.md)：用统一因果 Transformer 覆盖多场景排序，并复用 KV cache 降低线上推理成本。
+- [CRSD](../2510.11056-crsd/README.md)：用领域 reasoning teacher 和普通/推理双视图对比自蒸馏训练轻量在线学生。
 - [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。
 
 ## 2025-08
@@ -176,6 +177,9 @@
 ## 2024-11
 - [LEADRE](../2411.13789-leadre/README.md)：生成意图感知 Semantic ID，并通过 DPO 对齐广告展示与转化偏好。
 
+## 2024-07
+- [TWIN-V2](../2407.16357-twin-v2/README.md)：离线压缩生命周期行为，在线以 GSU/ESU 完成候选相关粗搜与精确建模。
+
 ## 2024-06
 - [CDM](../2406.09021-cdm/README.md)：将上下文多样性教师蒸馏到低延迟混排学生。
 - [CWM](../2406.07932-cwm/README.md)：以反事实 watch time 消除视频时长偏置。
@@ -208,6 +212,9 @@
 
 ## 2020-08
 - [DCN-V2](../2008.13535-dcn-v2/README.md)：用低秩 cross experts 和 gate 显式学习高阶特征交互。
+
+## 2020-06
+- [SIM](../2006.05639-sim/README.md)：先按候选搜索超长历史中的相关行为，再以精确搜索单元汇聚兴趣。
 
 ## 2019-05
 - [BST](../1905.06874-bst/README.md)：用候选参与的 Transformer 建模电商用户行为序列。

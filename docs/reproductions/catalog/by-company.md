@@ -37,6 +37,7 @@
 - 2025-02 · [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣感知 SFT 对齐内容/协同空间，再由 CiUBM 融合排序。
 - 2023-11 · [BEQUE](../2311.03758-beque/README.md)：生成用户相关的搜索改写，并结合离线检索反馈、自采样与偏好排序优化改写质量。
 - 2022-05 · [M6-Rec](../2205.08084-m6rec/README.md)：把推荐任务统一改写为自然语言任务，在预训练语言模型上使用轻量 option-adapter 完成多场景适配。
+- 2020-06 · [SIM](../2006.05639-sim/README.md)：以候选 item 为 query，先从超长历史检索相关行为，再由精确搜索单元做候选相关注意力聚合。
 - 2019-05 · [BST](../1905.06874-bst/README.md)：把候选商品作为 token 与用户行为共同送入 Transformer，显式建模序列内依赖。
 - 2018-09 · [DIEN](../1809.03672-dien/README.md)：用 GRU 抽取逐步兴趣，以下一行为辅助监督并由候选相关门控控制兴趣演化。
 - 2018-04 · [ESMM](../1804.07931-esmm/README.md)：在全曝光空间联合训练 CTR 与 CTCVR，并用 pCTR×pCVR 缓解点击后转化的选择偏差。
@@ -99,6 +100,7 @@
 - 2025-08 · [MPFormer](../2508.20400-mpformer/README.md)：以任务 token 驱动共享序列检索器，并按难度动态分配容量与 serving 配额。
 - 2025-08 · [OneRec-V2](../2508.20900-onerec-v2/README.md)：使用 lazy decoder 降低生成延迟，并用真实反馈强化学习和 GBPO 优化推荐序列。
 - 2025-02 · [OneRec](../2502.18965-onerec/README.md)：把 session 推荐建模为 Semantic ID 序列生成，并结合 MoE 与偏好优化对齐真实反馈。
+- 2024-07 · [TWIN-V2](../2407.16357-twin-v2/README.md)：离线层次压缩生命周期行为，在线通过候选相关 GSU 检索兴趣簇，再以 ESU 精确建模原始行为。
 - 2024-06 · [CDM](../2406.09021-cdm/README.md)：将可控 MMR 教师的上下文多样性边际收益蒸馏到低延迟学生。
 - 2024-06 · [CWM](../2406.07932-cwm/README.md)：以统一视频时长干预下的反事实观看收益抵消 duration bias。
 - 2024-05 · [LEARN](../2405.03988-learn/README.md)：冻结 LLM 生成内容增强表征，再通过协同域适配改善冷启动和长尾推荐。
@@ -109,6 +111,7 @@
 - 2026-07 · [NONTP](../2607.12277-nontp/README.md)：在 NTP 上加入未来状态对比学习和跨域 hidden-state pooling，扩大生成式推荐的训练监督覆盖。
 - 2026-04 · [MBGR](../2604.02684-mbgr/README.md)：通过 business-aware SID、共享 MoE 和最近未来标签路由，同时学习多个业务域的生成目标。
 - 2026-02 · [DOS](../2602.04460-dos/README.md)：用协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
+- 2025-10 · [CRSD](../2510.11056-crsd/README.md)：用领域 reasoning teacher 构造增强视图，再让同一轻量学生执行普通/推理双视图对比自蒸馏，线上无需生成推理链。
 - 2025-02 · [SessionRec](../2502.10157-sessionrec/README.md)：按真实 session 生成候选，并利用曝光负例和 hard negative 改善会话级召回。
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
 

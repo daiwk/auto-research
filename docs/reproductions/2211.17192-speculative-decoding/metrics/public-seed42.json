@@ -1,0 +1,30 @@
+{
+  "paper": {
+    "title": "Fast Inference via Speculative Decoding"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "generated_tokens": 160
+  },
+  "baseline": {
+    "name": "target-only greedy decoding",
+    "target_calls": 160
+  },
+  "method": {
+    "name": "four-token draft and exact target verification",
+    "target_calls": 40
+  },
+  "relative": {
+    "target_call_reduction_percent": 75.0
+  },
+  "stages": {
+    "draft_width": 4,
+    "accepted_draft_tokens": 160,
+    "exact_output_match": true
+  },
+  "paper_results": {
+    "reported_speedup_x": "2-3",
+    "distribution_preserving": true
+  },
+  "scope": "在 WikiText-2 拟合 target/draft token 模型，真实执行提议、验证和拒绝回退；target 是小型 Markov LM，不等同于 T5-XXL kernel 延迟。"
+}

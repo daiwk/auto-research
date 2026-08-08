@@ -185,6 +185,14 @@ def test_builtin_adapters_are_discoverable():
             "blt",
             "doremi",
             "data-mixing-laws",
+            "twin-v2",
+            "sim",
+            "crsd",
+            "clip",
+            "llava",
+            "speculative-decoding",
+            "awq",
+            "medusa",
             }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
@@ -248,6 +256,11 @@ def test_builtin_adapters_are_discoverable():
     assert get_adapter("open-web-ufm").paper.has_online_ab
     assert get_adapter("rocs").paper.has_online_ab
     assert get_adapter("wide").paper.code_url
+    assert get_adapter("twin-v2").paper.has_online_ab
+    assert get_adapter("sim").paper.has_online_ab
+    assert get_adapter("crsd").paper.has_online_ab
+    assert get_adapter("clip").paper.code_url == "https://github.com/openai/CLIP"
+    assert get_adapter("awq").paper.code_url == "https://github.com/mit-han-lab/llm-awq"
 
 
 def test_each_result_gets_an_isolated_artifact_directory(tmp_path):

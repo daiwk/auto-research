@@ -65,6 +65,8 @@ FIRST_AUTHORS = {
         "luffy": "Jianhao Yan", "ttrl": "Yuxin Zuo",
         "absolute-zero": "Andrew Zhao", "intuitor": "Xuandong Zhao",
         "cispo": "MiniMax", "spiral": "Bo Liu", "conspo": "Feng Zhang",
+        "minirl": "Chujie Zheng", "missing-old-logits": "Zhong Guan",
+        "stare": "Haipeng Luo",
     },
     "agent-research": {
         "webgpt": "Reiichiro Nakano", "saycan": "Michael Ahn",
@@ -92,6 +94,8 @@ FIRST_AUTHORS = {
         "toolrl": "Cheng Qian", "sage": "Jiongxiao Wang",
         "memskill": "Haozhen Zhang", "memento-skills": "Huichi Zhou",
         "searl": "Xinshun Feng", "agent0": "Peng Xia",
+        "agent-r1": "Mingyue Cheng", "camel": "Guohao Li",
+        "toolbench": "Qiantong Xu", "gaia": "Grégoire Mialon",
     },
 }
 
@@ -160,6 +164,9 @@ TOPIC_HIERARCHY = {
         "长上下文 RL": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "自博弈课程": ("奖励、信用与课程", "课程与能力边界"),
         "对比序列 RL": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
+        "Entropy 稳定": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "异步 off-policy": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
+        "稳定 MoE RL": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
     },
     "agent-research": {
         "Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
@@ -216,6 +223,10 @@ TOPIC_HIERARCHY = {
         "技能设计": ("记忆、技能与持续学习", "技能图与跨任务积累"),
         "策略—工具图共进化": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "零数据多 Agent": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "Agentic RL 基础设施": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "通用 Agent 评测": ("工具调用与环境执行", "电脑操作与 reward 评测"),
+        "工具指令与评测": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "多 Agent 协作": ("多 Agent 与软件工程", "角色协作与软件开发"),
     },
 }
 
@@ -262,6 +273,11 @@ FOUNDATION_TOPIC_HIERARCHY = {
     "blt": ("网络架构", "递归与 latent computation"),
     "doremi": ("预训练与数据", "数据清洗、编排与选择"),
     "data-mixing-laws": ("预训练与数据", "数据清洗、编排与选择"),
+    "clip": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "llava": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "speculative-decoding": ("推理与系统效率", "推测解码与 KV cache"),
+    "awq": ("推理与系统效率", "量化"),
+    "medusa": ("推理与系统效率", "推测解码与 KV cache"),
 }
 FOUNDATION_DOMAIN_ORDER = (
     "网络架构",

@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 159 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 186 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -84,10 +84,24 @@ pytest tests/test_research_module_docs.py
 
 每篇详情页都给出原文代码状态、核心公式、原论文关键图、原文效果、本地公平基线、固定指标与可执行命令；本地负结果同样保留。
 
-## 全部复现（178/178）
+## 本轮全域 P1 补齐（8 个 adapter）
+
+- 工业推荐：[TWIN-V2](2407.16357-twin-v2/README.md)、[SIM](2006.05639-sim/README.md)、[CRSD](2510.11056-crsd/README.md)。
+- 多模态：[CLIP](2103.00020-clip/README.md)、[LLaVA](2304.08485-llava/README.md)。
+- 推理与部署：[Speculative Decoding](2211.17192-speculative-decoding/README.md)、[AWQ](2306.00978-awq/README.md)、[Medusa](2401.10774-medusa/README.md)。
+
+## 全部复现（186/186）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `crsd` · [CRSD](2510.11056-crsd/README.md) | 美团 AdCTR +0.91%、AdCVR +1.06%、GTV +0.40% | 两阶段 reasoning distillation；MovieLens-100K NDCG@10 -2.14%，保留负迁移 |
+| 核心机制 | `twin-v2` · [TWIN-V2](2407.16357-twin-v2/README.md) | 快手三场景 Watch Time +0.672%/+0.800%/+0.728%，主流量 | 层级压缩 + GSU/ESU；NDCG@10 +22.45% |
+| 核心机制 | `medusa` · [Medusa](2401.10774-medusa/README.md) | 纯 LLM：Medusa-1 2.2×，Medusa-2 2.3–3.6× | WikiText-2 三 future heads；backbone calls -50%，输出完全一致 |
+| 核心机制 | `awq` · [AWQ](2306.00978-awq/README.md) | 纯 LLM：TinyChat 相对 FP16 超过 3× | activation-aware W4；输出 MSE -4.22% |
+| 核心机制 | `llava` · [LLaVA](2304.08485-llava/README.md) | 纯多模态：ScienceQA 92.53% | 冻结 encoder + projector instruction tuning；accuracy +68.57 points |
+| 核心机制 | `speculative-decoding` · [Speculative Decoding](2211.17192-speculative-decoding/README.md) | 纯 LLM：T5-XXL 2–3× 且分布不变 | 低秩 draft + exact verification；target calls -75%，输出一致 |
+| 核心机制 | `clip` · [CLIP](2103.00020-clip/README.md) | 纯多模态：ImageNet zero-shot 匹配监督 ResNet-50 | 双向 InfoNCE；公开配对视图 Recall@1 +40 points |
+| 核心机制 | `sim` · [SIM](2006.05639-sim/README.md) | 阿里 CTR +7.1%、RPM +4.4%，主流量 | GSU/ESU 长历史检索；NDCG@10 +32.97% |
 | 核心机制 | `dme` · [DME](2608.02148-dme/README.md) | 抖音搜索 Lifetime +0.1%，内部离线 +2.92% | typed latent + cross reconstruction；MovieLens-100K NDCG@10 -8.84%，保留负结果 |
 | 核心机制 | `steps` · [STEPS](2608.01949-steps/README.md) | active days +0.2843%、permission disablement -1.9089%，已全量 | planning/execution/filter 闭环；MovieLens-100K NDCG@10 +66.05% |
 | 核心机制 | `spear` · [SPEAR](2608.01738-spear/README.md) | query-view CTR +0.259、reading depth +0.733，已全量 | 双 embedding + 乘法门；MovieLens-100K NDCG@10 +26.95% |

@@ -21,9 +21,11 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 
 ## 结论摘要与完成状态
 
-> 2026-08-08：本页识别的 **38 个 P0 已全部实现**，包括 19 个 reproduction
+> 2026-08-08：本页识别的 **38 个 P0 与 15 个 P1 已全部实现**。P0 包括 19 个 reproduction
 > adapter、11 个后训练 objective 和 8 个 Agent 方法；固定 seed 指标见
-> [`experiments/global-p0-20260808-seed42.json`](experiments/global-p0-20260808-seed42.json)。
+> [`experiments/global-p0-20260808-seed42.json`](experiments/global-p0-20260808-seed42.json)。P1 包括
+> 8 个 reproduction adapter、3 个后训练 objective 和 4 个 Agent 方法，指标见
+> [`experiments/global-p1-20260808-seed42.json`](experiments/global-p1-20260808-seed42.json)。
 
 | 领域 | 真正的主要缺口 | P0 建议 | P1 / P2 与边界 |
 |---|---|---:|---|
@@ -55,12 +57,11 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 此外，[CWM](https://arxiv.org/abs/2406.07932) 有 MWT +2.9%、VV +2.5%、CTR +0.3% 的
 量化线上结果，机制上属于反事实长期价值排序，也应和上述 P0 同批公平复现。
 
-### P1、证据队列与拒绝项
+### P1（已实现）、证据队列与拒绝项
 
-- [SIM](https://arxiv.org/abs/2006.05639) 是长历史兴趣检索的经典工业缺口，论文报告 CTR
-  +7.1%、RPM +4.4%；列为 P1，避免近期论文全部做完后仍缺经典对照。
-- TWIN-V2、CRSD 与 MUSE 有工业部署价值，但先提取并固化原文精确线上表格，不能用摘要中的
-  “significant improvement”代替数字。
+- [SIM](https://arxiv.org/abs/2006.05639)、[TWIN-V2](https://arxiv.org/abs/2407.16357) 与
+  [CRSD](https://arxiv.org/abs/2510.11056) 已实现；对应原文线上表格已固化，未使用摘要中的
+  “significant improvement”替代数字。MUSE 仍需满足同一证据门槛。
 - EGA-V2、RecoChain、SynerGen 等只看到离线评测或进行中证据，按硬门槛拒绝。
 - **审核风控**：本轮没有找到同时满足“工业论文 + 量化线上 A/B/全流量证据”的公开候选。
   该子领域不是漏搜，而是“已审计、无合格候选”；若后续放宽为公开审核 benchmark，应独立改门槛。
@@ -80,12 +81,12 @@ LLM 应用、基础模型、纯 LLM 后训练、Agent；纵轴覆盖每个领域
 | 预训练数据 | [Data Mixing Laws](https://arxiv.org/abs/2403.16952) | 多 domain 小预算曲线预测配比，不用单次结果拟合 |
 | 架构/Tokenizer | [Byte Latent Transformer](https://arxiv.org/abs/2412.09871) | entropy patching、byte encoder/decoder 与同 FLOPs 对照 |
 
-### P1 / P2
+### P1（已实现）/ P2
 
-- 多模态主干目前只有零散增强，缺 [CLIP](https://arxiv.org/abs/2103.00020) 和
-  [LLaVA](https://arxiv.org/abs/2304.08485) 这两个可解释的经典锚点。
-- 推理侧缺 [Speculative Decoding](https://arxiv.org/abs/2211.17192)、
-  [AWQ](https://arxiv.org/abs/2306.00978) 和 [Medusa](https://arxiv.org/abs/2401.10774)。
+- 多模态经典锚点 [CLIP](https://arxiv.org/abs/2103.00020) 与
+  [LLaVA](https://arxiv.org/abs/2304.08485) 已实现。
+- 推理侧 [Speculative Decoding](https://arxiv.org/abs/2211.17192)、
+  [AWQ](https://arxiv.org/abs/2306.00978) 和 [Medusa](https://arxiv.org/abs/2401.10774) 已实现。
 - [FlashAttention](https://arxiv.org/abs/2205.14135) 与 vLLM/PagedAttention 属于 P2
   系统复刻，必须测真实 CUDA/Triton kernel、显存和吞吐，不能用普通 PyTorch attention 冒充。
 
@@ -128,7 +129,7 @@ PPO、GAE、DeepSeek-R1/GRPO 等原论文没有被再次列为“缺失 adapter�
 | Agentic RL | [SEARL](https://arxiv.org/abs/2604.07791) | 自进化轨迹池与 policy improvement 闭环 |
 | 多 Agent | [Agent0](https://arxiv.org/abs/2511.16043) | 自生成任务与多 Agent curriculum |
 
-P1 还包括 Agent-R1、CAMEL 和 ToolBench/ToolLLM。公共评测基础设施方面，GAIA 可以先做；
+P1 的 Agent-R1、CAMEL、ToolBench/ToolLLM 和 GAIA 已全部实现；
 WebArena、官方 SWE-bench、OSWorld/真实浏览器需要容器、站点快照或外部 runtime。用户此前已经
 决定后续再做，因此它们被明确标为 P2 延后，现有 deterministic mini-suite 不得改名冒充接入。
 

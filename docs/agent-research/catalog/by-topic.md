@@ -4,6 +4,15 @@
 
 ## Agentic RL 与后训练
 
+### 通用轨迹与 credit assignment
+
+- [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
+- [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
+- [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
+- [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
+- [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
+- [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
+
 ### 技能、turn 与 rollout credit
 
 - [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
@@ -27,13 +36,44 @@
 
 - [EnvACE](../2608.06197-envace/README.md)（`envace`）：EnvACE 不另训 world model，而让同一个 agent policy 在真实 act 之间切换到 rehearsal role，自行预测下一 observation；训练时分别为 acting 与 rehearsal 轨迹计算 group-relative advantage，避免两种奖励尺度互相污染，测试时可用少量私有 rehearsal 扩展规划。
 
-### 通用轨迹与 credit assignment
+## 工具调用与环境执行
 
-- [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
-- [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
-- [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
-- [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
-- [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
+### 电脑操作与 reward 评测
+
+- [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
+- [GAIA](../2311.12983-gaia/README.md)（`gaia`）：以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。
+
+### 工具选择、反馈与程序执行
+
+- [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
+- [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
+- [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
+- [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
+- [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
+- [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
+- [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
+
+### 专家路由与具身 / 浏览环境
+
+- [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
+- [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
+- [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
+- [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
+
+## 多 Agent 与软件工程
+
+### 角色协作与软件开发
+
+- [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
+- [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
+- [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
+- [AutoGen](../2308.08155-autogen/README.md)（`autogen`）：复杂应用常需要多个模型、工具和人类协作，手写控制流难复用。AutoGen 提供 ConversableAgent 与 conversation programming：每个角色声明能力、回复策略和终止条件，通过群聊或嵌套会话组合成工作流。
+- [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
+- [CAMEL](../2303.17760-camel/README.md)（`camel`）：用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。
+
+### 运行成本与工具暴露控制
+
+- [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
 
 ## 记忆、技能与持续学习
 
@@ -56,42 +96,6 @@
 - [MemTool](../2507.21428-memtool/README.md)（`memtool`）：大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。
 - [MemGPT](../2310.08560-memgpt/README.md)（`memgpt`）：有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。
 - [Generative Agents](../2304.03442-generative-agents/README.md)（`generative-agents`）：只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。
-
-## 多 Agent 与软件工程
-
-### 角色协作与软件开发
-
-- [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
-- [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
-- [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
-- [AutoGen](../2308.08155-autogen/README.md)（`autogen`）：复杂应用常需要多个模型、工具和人类协作，手写控制流难复用。AutoGen 提供 ConversableAgent 与 conversation programming：每个角色声明能力、回复策略和终止条件，通过群聊或嵌套会话组合成工作流。
-- [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
-
-### 运行成本与工具暴露控制
-
-- [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
-
-## 工具调用与环境执行
-
-### 工具选择、反馈与程序执行
-
-- [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
-- [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
-- [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
-- [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
-- [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
-- [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
-
-### 电脑操作与 reward 评测
-
-- [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
-
-### 专家路由与具身 / 浏览环境
-
-- [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
-- [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
-- [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
-- [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
 
 ## 规划、搜索与反思
 

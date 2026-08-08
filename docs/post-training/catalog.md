@@ -7,6 +7,9 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Entropy 稳定 | [STARE](2606.19236-stare/README.md) | Haipeng Luo，2026-06-17 | [已开源](https://github.com/hp-luo/STARE) | `stare` |
+| 异步 off-policy | [Missing Old Logits](2605.12070-missing-old-logits/README.md) | Zhong Guan，2026-05-12 | 未发现官方代码 | `missing-old-logits` |
+| 稳定 MoE RL | [Stabilizing RL with LLMs](2512.01374-minirl/README.md) | Chujie Zheng，2025-12-01 | 未发现官方代码 | `minirl` |
 | 对比序列 RL | [ConSPO](2605.12969-conspo/README.md) | Feng Zhang，2026-05-13 | 未发现官方代码 | `conspo` |
 | 自博弈课程 | [SPIRAL](2506.24119-spiral/README.md) | Bo Liu，2025-06-30 | [已开源](https://github.com/spiral-rl/spiral) | `spiral` |
 | 长上下文 RL | [CISPO / MiniMax-M1](2506.13585-cispo/README.md) | MiniMax，2025-06-16 | [已开源](https://github.com/MiniMax-AI/MiniMax-M1) | `cispo` |

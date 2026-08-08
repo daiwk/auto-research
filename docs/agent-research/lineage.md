@@ -26,6 +26,7 @@
 | 深度研究与工具 RL | DeepResearcher、ReTool、ToolRL | 已实现 | 引用奖励、交错工具推理、工具选择/参数/执行反馈 |
 | 技能固化与自进化 | SAGE、MemSkill、Memento-Skills、SEARL | 已实现 | 技能生成/修订、memory-to-skill、版本化技能、策略—工具图共进化 |
 | 零数据多 Agent 课程 | Agent0 | 已实现 | 自生成任务、多 executor 投票与能力边界课程 |
+| Step-level Agent RL 与公共评测 | Agent-R1、CAMEL、ToolBench、GAIA | 已实现 | transition-level context/credit、多 Agent role-play、工具指令检索、三级通用助理 mini-suite |
 
 ## 下一阶段缺口
 
@@ -33,6 +34,9 @@
 MemSkill、Memento-Skills、SEARL 和 Agent0；它们补齐 deep research、工具 RL、技能固化、
 自进化 RL 与多 Agent curriculum，并已接入组合式 evolve genome。完整证据与 P1/P2 边界见
 [全主题系统缺口审计](../full-domain-gap-review-20260808.md)。
+
+本轮 4 个 P1 也已实现：Agent-R1、CAMEL、ToolBench/ToolLLM 与 GAIA；GAIA 使用
+`gaia-mini` 验证公开协议与工具证据链，不冒充官方 466 题 leaderboard。
 
 | 环境 | 当前状态 | 下一步 |
 |---|---|---|

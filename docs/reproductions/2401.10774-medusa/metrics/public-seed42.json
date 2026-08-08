@@ -1,0 +1,30 @@
+{
+  "paper": {
+    "title": "Medusa"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "generated_tokens": 160
+  },
+  "baseline": {
+    "name": "single-head greedy",
+    "backbone_calls": 160
+  },
+  "method": {
+    "name": "three future heads + tree verification",
+    "backbone_calls": 80
+  },
+  "relative": {
+    "backbone_call_reduction_percent": 50.0
+  },
+  "stages": {
+    "medusa_heads": 3,
+    "mean_accepted_tokens": 2.0,
+    "exact_output_match": true
+  },
+  "paper_results": {
+    "medusa1_speedup_x": 2.2,
+    "medusa2_speedup_x": "2.3-3.6"
+  },
+  "scope": "在 WikiText-2 token 转移模型上执行多 future head、候选树和 backbone 验证；未复刻 GPU tree-attention kernel。"
+}

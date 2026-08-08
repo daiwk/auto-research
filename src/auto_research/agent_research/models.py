@@ -63,10 +63,15 @@ METHODS = (
     "memento-skills",
     "searl",
     "agent0",
+    "agent-r1",
+    "camel",
+    "toolbench",
+    "gaia",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",
     "osreward-mini",
+    "gaia-mini",
 )
 
 

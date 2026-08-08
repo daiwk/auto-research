@@ -37,15 +37,23 @@
 - 2024-12 · [Byte Latent Transformer: Patches Scale Better Than Tokens](../../reproductions/2412.09871-blt/README.md)（`blt`）：直接处理 byte，并依据 next-byte entropy 动态形成 patch；全局 Transformer 在 patch 级计算，局部编码器/解码器恢复 byte。
 - 2024-11 · [Hymba: A Hybrid-head Architecture for Small Language Models](../../reproductions/2411.13676-hymba/README.md)（`hymba`）：同一层并行执行 attention 与状态空间分支，再用输入相关 gate 融合局部精确检索和线性长程状态。
 - 2024-03 · [Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance](../../reproductions/2403.16952-data-mixing-laws/README.md)（`data-mixing-laws`）：先训练多组小预算 domain mixture，拟合各评测域的混合缩放律，再搜索未训练过的最优配比。
+- 2024-01 · [Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads](../../reproductions/2401.10774-medusa/README.md)（`medusa`）：在冻结或联合微调的 backbone 上增加多个 future-token heads，以 tree attention 同时验证候选分支，减少串行解码步数。
 
 ## 2023
 
 - 2023-12 · [Mamba: Linear-Time Sequence Modeling with Selective State Spaces](../../reproductions/2312.00752-mamba/README.md)（`mamba`）：Mamba 让 SSM 的步长、读写向量依赖当前 token，从而选择性保留信息，同时保持序列长度线性复杂度。
+- 2023-06 · [AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration](../../reproductions/2306.00978-awq/README.md)（`awq`）：利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。
 - 2023-05 · [GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](../../reproductions/2305.13245-gqa/README.md)（`gqa`）：多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。
 - 2023-05 · [DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining](../../reproductions/2305.10429-doremi/README.md)（`doremi`）：用小型 proxy model 的 excess loss 做 group DRO，动态提升欠拟合域权重，再按所得配比训练目标模型。
+- 2023-04 · [Visual Instruction Tuning](../../reproductions/2304.08485-llava/README.md)（`llava`）：冻结视觉 encoder，用可训练 projector 把视觉特征映射到 LLM token 空间，再在 GPT-4 生成的多模态指令数据上做端到端 instruction tuning。
+
+## 2022
+
+- 2022-11 · [Fast Inference from Transformers via Speculative Decoding](../../reproductions/2211.17192-speculative-decoding/README.md)（`speculative-decoding`）：小 draft model 并行提出多个 token，target model 一次验证整个块；拒绝时从校正后的残差分布采样，从而严格保持 target 分布。
 
 ## 2021
 
 - 2021-08 · [Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation](../../reproductions/2108.12409-alibi/README.md)（`alibi`）：不学习位置向量，而是在每个 head 的注意力 logits 上加入线性距离惩罚，实现 train-short/test-long 外推。
 - 2021-04 · [RoFormer: Enhanced Transformer with Rotary Position Embedding](../../reproductions/2104.09864-rope/README.md)（`rope`）：对每个 attention head 的 Q/K 二维子空间施加随位置旋转，使点积天然只依赖相对位移。
+- 2021-02 · [Learning Transferable Visual Models From Natural Language Supervision](../../reproductions/2103.00020-clip/README.md)（`clip`）：用独立图像/文本 encoder 将配对样本映射到同一单位球面，通过双向 batch contrastive objective 学习可迁移零样本表示。
 - 2021-01 · [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](../../reproductions/2101.03961-switch-transformer/README.md)（`switch-transformer`）：Switch 把 dense FFN 替换为每个 token 只激活一个专家的稀疏 MoE，在近似固定 FLOPs 下扩大参数容量。

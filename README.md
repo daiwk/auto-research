@@ -39,12 +39,20 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **178/178** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **186/186** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
 
-2026-08-08 的全域 P0 补齐新增 `glorank`、`dual-rerank`、`oneranker`、`radar`、`dualgr`、`mpformer`、`hap`、`onepiece`、`intsr`、`cdm`、`cwm`、`rope`、`alibi`、`gqa`、`hymba`、`moba`、`blt`、`doremi`、`data-mixing-laws`；后训练与 Agent 方法分别进入独立方法索引和统一 evolve genome。
+2026-08-08 的全域 P0/P1 已全部补齐。P0 包含 `glorank`、`dual-rerank`、`oneranker`、`radar`、`dualgr`、`mpformer`、`hap`、`onepiece`、`intsr`、`cdm`、`cwm`、`rope`、`alibi`、`gqa`、`hymba`、`moba`、`blt`、`doremi`、`data-mixing-laws`；P1 新增 `twin-v2`、`sim`、`crsd`、`clip`、`llava`、`speculative-decoding`、`awq`、`medusa`，另有 3 个后训练目标和 4 个 Agent 方法进入独立索引与统一 evolve genome。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|
+| 核心机制 | `crsd` | CRSD · Meituan | reasoning teacher → BERT 自蒸馏；NDCG@10 -2.14%，线上 AdCTR +0.91% |
+| 核心机制 | `twin-v2` | TWIN-V2 · Kuaishou | 生命周期行为压缩 + GSU/ESU；NDCG@10 +22.45% |
+| 核心机制 | `medusa` | Medusa | 三 future heads + tree verification；backbone calls -50% |
+| 核心机制 | `awq` | AWQ | activation-aware W4 calibration；输出 MSE -4.22% |
+| 核心机制 | `llava` | LLaVA | frozen encoder + projector instruction tuning；accuracy +68.57 points |
+| 核心机制 | `speculative-decoding` | Speculative Decoding | rank-32 draft + exact verification；target calls -75% |
+| 核心机制 | `clip` | CLIP | 双塔归一化 + 双向 InfoNCE；Recall@1 +40 points |
+| 核心机制 | `sim` | SIM · Alibaba | candidate-aware GSU/ESU；NDCG@10 +32.97% |
 | 核心机制 | `dme` | DME · ByteDance/Douyin | typed latent evidence + cross-conditional reconstruction；MovieLens-100K NDCG@10 -8.84% |
 | 核心机制 | `steps` | STEPS · ByteDance/Douyin | gated ordinal planning + execution + filter；MovieLens-100K NDCG@10 +66.05% |
 | 核心机制 | `spear` | SPEAR · Dewu | dual embedding + multiplicative rewrite gate；MovieLens-100K NDCG@10 +26.95% |

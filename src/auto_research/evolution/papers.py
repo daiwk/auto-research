@@ -95,6 +95,9 @@ POST_TRAINING_MUTATIONS = {
     "2608.03223": ("adrs", "用教师价值优势门控把特权评分注入原生 RL advantage，同时保持推理零额外开销"),
     "2606.30406": ("mopd", "按奖励域组合多个专长教师，并只在学生 rollout 支持上执行多教师 on-policy 蒸馏"),
     "2606.06712": ("opd-lm", "用双向去噪教师视图蒸馏自回归学生，同时保留冻结 AR 分布锚点"),
+    "2512.01374": ("minirl", "以重要性采样与 Routing Replay 稳定稀疏 MoE 的强化学习训练"),
+    "2605.12070": ("missing-old-logits", "分离策略陈旧与训推引擎偏差，并用 EWMA 重建缺失的旧策略 logits"),
+    "2606.19236": ("stare", "按 token surprisal 识别关键决策，并用目标熵闭环调整优势权重"),
 }
 
 AGENT_MUTATIONS = {
@@ -154,6 +157,10 @@ AGENT_MUTATIONS = {
     "2603.18743": ("memory:memento-skills", "Memento-Skills 以 read-write reflective loop 进化外部 Markdown 技能"),
     "2604.07791": ("critic:searl", "SEARL 联合优化 policy 与 tool-graph memory，并做 step-level credit"),
     "2511.16043": ("planner:agent0", "Agent0 让 curriculum 与 executor 通过不确定性和多数投票伪标签共同进化"),
+    "2511.14460": ("critic:agent-r1", "Agent-R1 以环境 step 为轨迹基本单元并解耦上下文管理与信用分配"),
+    "2303.17760": ("planner:camel", "CAMEL 用 inception prompting 固定角色并通过交替消息协作"),
+    "2305.16504": ("tool:toolbench", "ToolBench 用程序化工具指令、示例检索和格式约束训练工具调用"),
+    "2311.12983": ("tool:gaia", "GAIA 以真实问题统一评估推理、多模态、浏览与工具使用"),
 }
 
 FALLBACK_PAPERS = (

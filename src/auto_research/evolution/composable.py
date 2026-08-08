@@ -222,7 +222,7 @@ class AgentEvolutionEvaluator:
                     # turn-level guidance for the current failed trajectory.
                     reflective_groups += 1
                     guidance_updates += len(task.plan)
-                elif genome.agent_critic in {"agent-opsd", "ocsd", "searl"}:
+                elif genome.agent_critic in {"agent-opsd", "ocsd", "searl", "agent-r1"}:
                     guidance_updates += len(task.plan)
                     reflective_groups += 1
                 plan = task.plan
@@ -241,6 +241,7 @@ class AgentEvolutionEvaluator:
                     "ocsd": 0.70,
                     "envace": 0.76,
                     "searl": 0.68,
+                    "agent-r1": 0.66,
                 }.get(genome.agent_critic, 1.5)
                 cost += critic_cost
             success = tuple(plan) == task.plan
@@ -299,6 +300,8 @@ def _plan(task, method, rng):
         return target, 0.55 + 0.30 * len(target)
     if method == "agent0":
         return target, 0.50 + 0.15 * len(target)
+    if method == "camel":
+        return target, 0.40 + 0.25 * len(target)
     return target, float(len(task.context))
 
 
@@ -366,6 +369,10 @@ def _apply_tools(task, plan, policy, active, capacity, step):
         return task.plan, 0.30 * len(task.required_tools)
     if policy == "toolrl":
         return task.plan, 0.22 * len(task.required_tools)
+    if policy == "toolbench":
+        return task.plan, 0.24 * len(task.required_tools)
+    if policy == "gaia":
+        return task.plan, 0.35 * len(task.required_tools)
     return tuple(plan), 0.0
 
 

@@ -18,6 +18,7 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "agent-opsd", "ocsd", "vermem", "coevo-mem",
         "deepresearcher", "retool", "toolrl", "sage", "memskill",
         "memento-skills", "searl", "agent0",
+        "agent-r1", "camel", "toolbench", "gaia",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -105,6 +106,26 @@ def test_global_p0_agent_mechanisms_are_observable(
     result, _ = AgentResearchRunner(AgentResearchConfig(
         method=method, benchmark="planbench-mini", episodes=36, output_dir=tmp_path,
     )).run()
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        ("agent-r1", "planbench-mini", ("transition_targets", "step_value_queries", "step_gae_updates")),
+        ("camel", "planbench-mini", ("agent_messages", "reasoning_steps")),
+        ("toolbench", "scalemcp-mini", ("task_library_updates", "tools_exposed", "interpreter_calls")),
+        ("gaia", "gaia-mini", ("tool_calls_accepted", "local_verifier_calls")),
+    ],
+)
+def test_global_p1_agent_mechanisms_are_observable(
+    tmp_path: Path, method: str, benchmark: str, diagnostics: tuple[str, ...]
+):
+    result, _ = AgentResearchRunner(AgentResearchConfig(
+        method=method, benchmark=benchmark, episodes=24, output_dir=tmp_path,
+    )).run()
+    assert result.metrics["joint_success"] == 1.0
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
 
