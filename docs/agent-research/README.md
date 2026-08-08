@@ -71,6 +71,7 @@
 - [DeepResearcher](2504.03160-deepresearcher/README.md)、[ReTool](2504.11536-retool/README.md) 与 [ToolRL](2504.13958-toolrl/README.md)：补齐深度研究轨迹奖励和工具选择/执行强化学习。
 - [SAGE](2512.17102-sage/README.md)、[MemSkill](2602.02474-memskill/README.md) 与 [Memento-Skills](2603.18743-memento-skills/README.md)：从轨迹记忆抽象、修订并检索可复用技能。
 - [SEARL](2604.07791-searl/README.md) 与 [Agent0](2511.16043-agent0/README.md)：联合优化策略/工具图，并以零数据多 Agent curriculum 自进化。
+- [Agent-R1](2511.14460-agent-r1/README.md)、[CAMEL](2303.17760-camel/README.md)、[ToolBench](2305.16504-toolbench/README.md) 与 [GAIA](2311.12983-gaia/README.md)：补齐 step-level Agent RL、多 Agent role-playing、工具指令学习与通用公共评测。
 
 ## 研究闭环
 

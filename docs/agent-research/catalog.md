@@ -7,6 +7,10 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agentic RL 基础设施 | [Agent-R1](2511.14460-agent-r1/README.md) | Mingyue Cheng，2025-11-18 | [已开源](https://github.com/AgentR1/Agent-R1) | `agent-r1` |
+| 通用 Agent 评测 | [GAIA](2311.12983-gaia/README.md) | Grégoire Mialon，2023-11-21 | [官方 benchmark](https://huggingface.co/gaia-benchmark) | `gaia` |
+| 工具指令与评测 | [ToolBench](2305.16504-toolbench/README.md) | Qiantong Xu，2023-05-25 | 未发现该论文官方代码 | `toolbench` |
+| 多 Agent 协作 | [CAMEL](2303.17760-camel/README.md) | Guohao Li，2023-03-31 | [已开源](https://github.com/camel-ai/camel) | `camel` |
 | 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Xinshun Feng，2026-04-09 | 未发现官方代码 | `searl` |
 | 技能设计 | [Memento-Skills](2603.18743-memento-skills/README.md) | Huichi Zhou，2026-03-19 | [已开源](https://github.com/Memento-Teams/Memento-Skills) | `memento-skills` |
 | 记忆技能 | [MemSkill](2602.02474-memskill/README.md) | Haozhen Zhang，2026-02-02 | [已开源](https://github.com/ViktorAxelsen/MemSkill) | `memskill` |

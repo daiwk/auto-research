@@ -4,6 +4,10 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "agent-r1": ("Agent-R1", "https://arxiv.org/abs/2511.14460"),
+    "camel": ("CAMEL", "https://arxiv.org/abs/2303.17760"),
+    "toolbench": ("ToolBench", "https://arxiv.org/abs/2305.16504"),
+    "gaia": ("GAIA", "https://arxiv.org/abs/2311.12983"),
     "deepresearcher": ("DeepResearcher", "https://arxiv.org/abs/2504.03160"),
     "retool": ("ReTool", "https://arxiv.org/abs/2504.11536"),
     "toolrl": ("ToolRL", "https://arxiv.org/abs/2504.13958"),

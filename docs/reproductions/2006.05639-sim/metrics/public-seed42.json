@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "SIM: Search-based Interest Model"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "sim",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "SIM",
+    "hit_at_10": 0.09615384615384616,
+    "ndcg_at_10": 0.047068472530034856,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.22423076923076923
+  },
+  "relative": {
+    "hit_at_10_percent": 8.695652173913043,
+    "ndcg_at_10_percent": 32.96905422253422,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -23.691099476439796
+  },
+  "stages": {
+    "candidate_conditioned_gsu": true,
+    "retrieved_behaviours": 24,
+    "exact_search_attention": true,
+    "paper_maximum_history": 54000,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.12692307692307692,
+      "ndcg_at_10": 0.06375817235110247,
+      "fresh_hit_at_10": 0.06,
+      "head_share_at_10": 0.24384615384615385
+    }
+  },
+  "paper_results": {
+    "ctr_percent": 7.1,
+    "rpm_percent": 4.4,
+    "deployment": "main traffic"
+  },
+  "scope": "在 MovieLens-100K 全库排序上执行论文的候选相关检索、层级压缩或蒸馏目标；未使用公司私有日志与线上 serving，线上 A/B 只引用原文。"
+}

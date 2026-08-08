@@ -4,6 +4,9 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "minirl": ("Stabilizing Reinforcement Learning with LLMs", "https://arxiv.org/abs/2512.01374"),
+    "missing-old-logits": ("Missing Old Logits", "https://arxiv.org/abs/2605.12070"),
+    "stare": ("STARE", "https://arxiv.org/abs/2606.19236"),
     "rlaif": ("RLAIF", "https://arxiv.org/abs/2309.00267"),
     "process-supervision": ("Let's Verify Step by Step", "https://arxiv.org/abs/2305.20050"),
     "math-shepherd": ("Math-Shepherd", "https://arxiv.org/abs/2312.08935"),

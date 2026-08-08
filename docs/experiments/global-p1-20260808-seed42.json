@@ -1,0 +1,156 @@
+{
+  "batch": "2026-08-08-global-theme-gap-review-p1",
+  "seed": 42,
+  "post_training": {
+    "minirl": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.5,
+        "mean_reward": 0.6009954910247568,
+        "entropy": 1.7123607826235443,
+        "kl_from_reference": 0.07939868659851035
+      },
+      "relative_accuracy": 1.1333333333333333,
+      "diagnostics": {
+        "importance_sampling": 1.0,
+        "ratio_clip_fraction": 0.0,
+        "routing_replay_unique_experts": 1.0,
+        "policy_staleness_l1": 0.004929395593189831,
+        "loss": -0.26652388641464364,
+        "policy_entropy": 1.700001874078903
+      }
+    },
+    "missing-old-logits": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.5,
+        "mean_reward": 0.6009954910247568,
+        "entropy": 1.7078264791391293,
+        "kl_from_reference": 0.0839329900829258
+      },
+      "relative_accuracy": 1.1333333333333333,
+      "diagnostics": {
+        "old_logits_available": 0.0,
+        "ewma_reconstruction": 1.0,
+        "mean_discrepancy_ratio": 1.0035681045446416,
+        "mean_staleness_ratio": 1.0070021608718696,
+        "loss": -0.3403654639144065,
+        "policy_entropy": 1.6944808903903144
+      }
+    },
+    "stare": {
+      "baseline": {
+        "accuracy": 0.234375,
+        "mean_reward": 0.38409619661640243,
+        "entropy": 1.7917594692220566,
+        "kl_from_reference": 0.0
+      },
+      "final": {
+        "accuracy": 0.53125,
+        "mean_reward": 0.6268592549565025,
+        "entropy": 1.7220227280819853,
+        "kl_from_reference": 0.06973674114006992
+      },
+      "relative_accuracy": 1.2666666666666666,
+      "diagnostics": {
+        "critical_token_fraction": 0.5,
+        "surprisal_q25": 1.7253665562139642,
+        "surprisal_q75": 2.045844371976182,
+        "target_entropy": 1.2900668178441996,
+        "closed_loop_gate": -0.33425035371530826,
+        "loss": -0.0,
+        "policy_entropy": 1.7212721080250055
+      }
+    }
+  },
+  "agent": {
+    "agent-r1": {
+      "benchmark": "planbench-mini",
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.9599999999999996
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "policy_updates": 120,
+        "context_compressions": 360,
+        "step_value_queries": 360,
+        "step_gae_updates": 360,
+        "transition_targets": 360,
+        "transition_accuracy": 1.0
+      }
+    },
+    "camel": {
+      "benchmark": "planbench-mini",
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.3500000000000003
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "reasoning_steps": 360,
+        "actions": 360,
+        "agent_messages": 720
+      }
+    },
+    "toolbench": {
+      "benchmark": "planbench-mini",
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 0.8400000000000015
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 360,
+        "affordance_checks": 360,
+        "programs_generated": 360,
+        "interpreter_calls": 360,
+        "task_examples_retrieved": 108,
+        "task_library_updates": 12,
+        "tools_exposed": 360,
+        "tools_available": 1440,
+        "tool_exposure_reduction": 0.75
+      }
+    },
+    "gaia": {
+      "benchmark": "gaia-mini",
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "plan_success": 1.0,
+        "joint_success": 1.0,
+        "average_cost": 1.3999999999999992
+      },
+      "diagnostics": {
+        "episodes": 120,
+        "memory_size": 24,
+        "actions": 420,
+        "tool_call_candidates": 420,
+        "tool_calls_accepted": 420,
+        "browser_queries": 120,
+        "references_collected": 120,
+        "interpreter_calls": 90,
+        "local_verifier_calls": 120
+      }
+    }
+  }
+}

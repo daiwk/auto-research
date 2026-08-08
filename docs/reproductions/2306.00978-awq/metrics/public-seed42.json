@@ -1,0 +1,31 @@
+{
+  "paper": {
+    "title": "AWQ"
+  },
+  "dataset": {
+    "name": "WikiText-2 activation calibration",
+    "tokens": 4096
+  },
+  "baseline": {
+    "name": "round-to-nearest W4",
+    "output_mse": 0.005416868363598895
+  },
+  "method": {
+    "name": "activation-aware equivalent scaling W4",
+    "output_mse": 0.0051884966475348356
+  },
+  "relative": {
+    "output_mse_percent": -4.2159362335386765
+  },
+  "stages": {
+    "calibration_tokens": 4096,
+    "bits": 4,
+    "selected_alpha": 0.4,
+    "backpropagation": false
+  },
+  "paper_results": {
+    "tinychat_speedup_over_fp16_x": 3.0,
+    "protected_salient_weight_percent": 1.0
+  },
+  "scope": "用 WikiText-2 激活统计搜索 AWQ 等价缩放并真实执行 W4 量化；未使用 TinyChat CUDA kernel，MSE 不代表端到端吞吐。"
+}

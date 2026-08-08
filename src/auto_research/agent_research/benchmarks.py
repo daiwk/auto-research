@@ -17,7 +17,9 @@ def build_benchmark(name: str, episodes: int, seed: int) -> tuple[AgentTask, ...
     tasks = []
     for index in range(episodes):
         domain = DOMAINS[index % len(DOMAINS)]
-        if name == "planbench-mini":
+        if name == "gaia-mini":
+            axis = ("level-1", "level-2", "level-3")[index % 3]
+        elif name == "planbench-mini":
             axis = "cross_episode_execution"
         elif name == "scalemcp-mini":
             axis = "in_episode_execution" if index % 2 else "cross_episode_execution"
@@ -26,7 +28,7 @@ def build_benchmark(name: str, episodes: int, seed: int) -> tuple[AgentTask, ...
                 "in_episode_knowledge", "cross_episode_knowledge",
                 "in_episode_execution", "cross_episode_execution",
             )[index % 4]
-        depth = 2 + index % 3
+        depth = (2 + index % 3) if name != "gaia-mini" else (2 + index % 4)
         required = tuple(
             TOOLS[(index * 3 + offset * 5) % len(TOOLS)] for offset in range(depth)
         )

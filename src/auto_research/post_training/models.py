@@ -72,6 +72,9 @@ ALGORITHMS = (
     "cispo",
     "spiral",
     "conspo",
+    "minirl",
+    "missing-old-logits",
+    "stare",
 )
 
 

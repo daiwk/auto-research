@@ -354,8 +354,9 @@
           "priority": "P1",
           "track": "recommendation",
           "subtopic": "training-serving",
-          "status": "deferred",
-          "reason": "production long-history retrieval is relevant, but exact online table still needs extraction before implementation"
+          "status": "implemented",
+          "key": "twin-v2",
+          "doc": "reproductions/2407.16357-twin-v2/README.md"
         },
         {
           "id": "2406.09021",
@@ -383,8 +384,9 @@
           "priority": "P1",
           "track": "recommendation",
           "subtopic": "ranking",
-          "status": "deferred",
-          "reason": "classic lifelong-sequence model has quantified production CTR/RPM evidence; implementation pending"
+          "status": "implemented",
+          "key": "sim",
+          "doc": "reproductions/2006.05639-sim/README.md"
         },
         {
           "id": "2510.11056",
@@ -392,8 +394,9 @@
           "priority": "P1",
           "track": "recommendation",
           "subtopic": "content-understanding",
-          "status": "deferred",
-          "reason": "industrial relevance distillation reports online A/B, but exact numeric table must be verified first"
+          "status": "implemented",
+          "key": "crsd",
+          "doc": "reproductions/2510.11056-crsd/README.md"
         },
         {
           "id": "2405.18941",
@@ -499,8 +502,9 @@
           "priority": "P1",
           "track": "foundation-model",
           "subtopic": "multimodal",
-          "status": "deferred",
-          "reason": "multimodal foundation lineage currently lacks the canonical contrastive baseline"
+          "status": "implemented",
+          "key": "clip",
+          "doc": "reproductions/2103.00020-clip/README.md"
         },
         {
           "id": "2304.08485",
@@ -508,8 +512,9 @@
           "priority": "P1",
           "track": "foundation-model",
           "subtopic": "multimodal",
-          "status": "deferred",
-          "reason": "visual instruction tuning is absent from the current multimodal branch"
+          "status": "implemented",
+          "key": "llava",
+          "doc": "reproductions/2304.08485-llava/README.md"
         },
         {
           "id": "2211.17192",
@@ -517,8 +522,9 @@
           "priority": "P1",
           "track": "foundation-model",
           "subtopic": "inference-serving",
-          "status": "deferred",
-          "reason": "exact distribution-preserving decoding speedup is missing"
+          "status": "implemented",
+          "key": "speculative-decoding",
+          "doc": "reproductions/2211.17192-speculative-decoding/README.md"
         },
         {
           "id": "2306.00978",
@@ -526,8 +532,9 @@
           "priority": "P1",
           "track": "foundation-model",
           "subtopic": "inference-serving",
-          "status": "deferred",
-          "reason": "activation-aware weight quantization is not represented by the current quantization adapter"
+          "status": "implemented",
+          "key": "awq",
+          "doc": "reproductions/2306.00978-awq/README.md"
         },
         {
           "id": "2401.10774",
@@ -535,8 +542,9 @@
           "priority": "P1",
           "track": "foundation-model",
           "subtopic": "inference-serving",
-          "status": "deferred",
-          "reason": "multi-head speculative decoding is missing"
+          "status": "implemented",
+          "key": "medusa",
+          "doc": "reproductions/2401.10774-medusa/README.md"
         },
         {
           "id": "2205.14135",
@@ -663,8 +671,9 @@
           "priority": "P1",
           "track": "post-training",
           "subtopic": "reasoning-rl",
-          "status": "deferred",
-          "reason": "small-budget reasoning RL recipe is relevant to the local benchmark path"
+          "status": "implemented",
+          "key": "minirl",
+          "doc": "post-training/2512.01374-minirl/README.md"
         },
         {
           "id": "2605.12070",
@@ -672,8 +681,9 @@
           "priority": "P1",
           "track": "post-training",
           "subtopic": "off-policy-stability",
-          "status": "deferred",
-          "reason": "old-policy logit reconstruction addresses a distinct asynchronous RL failure mode"
+          "status": "implemented",
+          "key": "missing-old-logits",
+          "doc": "post-training/2605.12070-missing-old-logits/README.md"
         },
         {
           "id": "2606.19236",
@@ -681,8 +691,9 @@
           "priority": "P1",
           "track": "post-training",
           "subtopic": "reward-process-supervision",
-          "status": "deferred",
-          "reason": "step-aware reward estimation is not covered by current scalar reward adapters"
+          "status": "implemented",
+          "key": "stare",
+          "doc": "post-training/2606.19236-stare/README.md"
         },
         {
           "id": "2504.03160",
@@ -770,8 +781,9 @@
           "priority": "P1",
           "track": "agent",
           "subtopic": "agentic-rl",
-          "status": "deferred",
-          "reason": "end-to-end agent reinforcement learning is not implemented"
+          "status": "implemented",
+          "key": "agent-r1",
+          "doc": "agent-research/2511.14460-agent-r1/README.md"
         },
         {
           "id": "2303.17760",
@@ -779,8 +791,9 @@
           "priority": "P1",
           "track": "agent",
           "subtopic": "multi-agent",
-          "status": "deferred",
-          "reason": "canonical role-playing multi-agent cooperation is absent"
+          "status": "implemented",
+          "key": "camel",
+          "doc": "agent-research/2303.17760-camel/README.md"
         },
         {
           "id": "2305.16504",
@@ -788,8 +801,9 @@
           "priority": "P1",
           "track": "agent",
           "subtopic": "tool-use",
-          "status": "deferred",
-          "reason": "large-scale tool instruction and evaluation infrastructure are missing"
+          "status": "implemented",
+          "key": "toolbench",
+          "doc": "agent-research/2305.16504-toolbench/README.md"
         },
         {
           "id": "2311.12983",
@@ -797,8 +811,9 @@
           "priority": "P1",
           "track": "agent",
           "subtopic": "benchmarks-environments",
-          "status": "deferred",
-          "reason": "public general-assistant benchmark adapter is missing"
+          "status": "implemented",
+          "key": "gaia",
+          "doc": "agent-research/2311.12983-gaia/README.md"
         },
         {
           "id": "2307.13854",

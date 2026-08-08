@@ -1,0 +1,33 @@
+{
+  "paper": {
+    "title": "LLaVA: Visual Instruction Tuning"
+  },
+  "dataset": {
+    "name": "MovieLens-100K item-content instruction proxy",
+    "examples": 360
+  },
+  "baseline": {
+    "name": "majority response",
+    "instruction_accuracy": 0.2892857142857143
+  },
+  "method": {
+    "name": "frozen encoder + trained projector + response decoder",
+    "instruction_accuracy": 0.975
+  },
+  "relative": {
+    "instruction_accuracy_points": 68.57142857142857
+  },
+  "stages": {
+    "frozen_vision_encoder": true,
+    "projector_shape": [
+      19,
+      19
+    ],
+    "visual_instruction_sft": true
+  },
+  "paper_results": {
+    "synthetic_gpt4_relative_score_percent": 85.1,
+    "scienceqa_accuracy": 92.53
+  },
+  "scope": "公开 item 内容向量替代图像 encoder，训练真实跨模态 projector 和 instruction 分类头；未调用 GPT-4 或复刻 LLaVA-13B。"
+}

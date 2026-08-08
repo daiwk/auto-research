@@ -25,6 +25,7 @@
 | 自奖励与零数据课程 | Self-Rewarding、Absolute Zero、SPIRAL | 已实现 | 自判偏好、任务 proposer/verifier、自博弈语言游戏 |
 | Test-time / intrinsic RL | TTRL、INTUITOR | 已实现 | 多数一致伪标签；self-certainty intrinsic reward |
 | Off-policy 与序列稳定 | LUFFY、CISPO、ConSPO | 已实现 | 混合 support、token IS clip、长度归一化对比序列目标 |
+| 异步/MoE 与 entropy 稳定 | Stabilizing RL、Missing Old Logits、STARE | 已实现 | Routing Replay、old-logit 语义分解与 EWMA 修复、surprisal 分位数和目标 entropy 闭环 |
 
 ## 下一阶段缺口
 
@@ -32,6 +33,8 @@
 Math-Shepherd、Self-Rewarding LM、LUFFY、TTRL、Absolute Zero、INTUITOR、CISPO、
 SPIRAL 和 ConSPO。每种目标都进入统一 candidate-policy 训练器和 evolve genome；证据、
 固定 seed 指标与去重说明见[全主题系统缺口审计](../full-domain-gap-review-20260808.md)。
+
+同页识别的 3 个 P1 也已闭环：Stabilizing RL with LLMs、Missing Old Logits 与 STARE。
 
 当前 L2 已具备 tokenizer、自由生成、verifier 与多 seed，但仍是小型 GRU。下一阶段是：
 

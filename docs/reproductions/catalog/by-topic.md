@@ -29,6 +29,7 @@
 - [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：本地指令 LLM 读取实验 journal，逐轮选择未尝试的优化器、门控与 reward 配置，再以 validation 反馈晋级。
 - [LLaTTE](../2601.20083-llatte/README.md)：用 BERT 语义特征、MLA 上游压缩、候选感知在线 attention 和 DHEN 门控连接多阶段序列。
 - [RecGPT-V2](../2512.14503-recgpt-v2/README.md)：以层级 multi-agent、meta-prompt 和约束偏好 RL 生成淘宝用户意图标签与解释。
+- [CRSD](../2510.11056-crsd/README.md)：用领域 LLM 产生标签与 reasoning 视图，通过同一学生的双视图对比自蒸馏把推理能力压入低延迟排序模型。
 - [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，再以 Semantic ID 生成物品序列。
 - [PinFM](../2507.12704-pinfm/README.md)：构建推荐 foundation model，并通过预训练—微调适配多个流量场景。
 - [FilterLLM](../2502.16924-filterllm/README.md)：让 LLM 从新品文本直接预测用户词表分布，避免逐候选判断。
@@ -121,9 +122,11 @@
 - [LONGER](../2505.04421-longer/README.md)：结合混合注意力、InnerTrans、token merge 与 KV cache 扩展超长序列。
 - [FuXi-α](../2502.03036-fuxi-alpha/README.md)：用多通道注意力和 multi-stage FFN 扩展特征交互模型容量。
 - [AdaF²M²](../2501.15816-adaf2m2/README.md)：用 feature-mask 多次前向和 state-aware adapter 改善特征学习与状态适配。
+- [TWIN-V2](../2407.16357-twin-v2/README.md)：把百万级生命周期行为离线压缩为层次兴趣簇，再以候选相关粗搜和精确注意力恢复原始行为信号。
 - [CWM](../2406.07932-cwm/README.md)：估计统一时长干预下的反事实观看收益以抵消 duration bias。
 - [PLE](../recsys2020-ple-ple/README.md)：把共享与任务专属 experts 分开，并以 CGC gate 渐进抽取多任务表示。
 - [DCN-V2](../2008.13535-dcn-v2/README.md)：使用低秩专家混合显式构造特征交互，并与 deep tower 联合排序。
+- [SIM](../2006.05639-sim/README.md)：用候选条件 GSU 从超长历史中搜索相关子序列，再由 ESU 计算精确候选—行为交互。
 - [BST](../1905.06874-bst/README.md)：让 Transformer 联合编码候选商品与带位置的行为序列。
 - [DIEN](../1809.03672-dien/README.md)：用辅助监督抽取兴趣状态，再让候选相关门控驱动兴趣演化。
 - [SASRec](../1808.09781-sasrec/README.md)：以因果自注意力编码行为序列，并预测下一物品。
