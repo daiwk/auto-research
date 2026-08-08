@@ -1,0 +1,1 @@
+{"seed":42,"dataset":"WikiText-2","steps":30,"baseline":{"name":"block_attnres","lm_loss":5.7570388168,"perplexity":316.40999236,"parameters":139904},"method":{"name":"rd_attnres","lm_loss":5.7630852014,"perplexity":318.32892431,"parameters":140096,"qk_v_route_js_divergence":0.0048934901},"relative":{"lm_loss_percent":0.105026,"perplexity_percent":0.60647}}

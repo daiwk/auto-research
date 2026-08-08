@@ -80,6 +80,12 @@ PAPERS = {
         "url": "https://arxiv.org/abs/2607.28627",
         "organization": "UIUC / Microsoft Research / Google DeepMind",
     },
+    "rd-attnres": {
+        "arxiv_id": "2608.01075",
+        "title": "Role-Decoupled Attention Residuals",
+        "url": "https://arxiv.org/abs/2608.01075",
+        "organization": "Kehan Wang（论文未列机构）",
+    },
 }
 
 
@@ -92,6 +98,7 @@ def run_llm_evolve_reproduction(
     paper_results: dict,
     scope: str,
     optimizer: str = "adamw",
+    baseline_architecture: str = "llama_modern",
 ):
     steps = int(
         os.environ.get(
@@ -111,7 +118,7 @@ def run_llm_evolve_reproduction(
         benchmark_suite="core",
     )
     base = Genome(
-        architecture="llama_modern", dimensions=64, layers=2,
+        architecture=baseline_architecture, dimensions=64, layers=2,
         heads=4, kv_heads=2, sequence_length=64, expansion=3,
         batch_size=4, learning_rate=6e-4,
     )
@@ -145,7 +152,7 @@ def run_llm_evolve_reproduction(
             "evolve_optimizer": optimizer,
         },
         "baseline": {
-            "name": "llama_modern",
+            "name": baseline_architecture,
             **baseline,
             **baseline_trial.training,
         },

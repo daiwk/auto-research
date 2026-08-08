@@ -14,7 +14,7 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "u-mem", "legomem", "memtool",
         "mrkl", "hugginggpt", "generative-agents", "memgpt",
         "webgpt", "saycan", "pal", "art",
-        "tapo", "grsd",
+        "tapo", "grsd", "envace",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -40,6 +40,10 @@ def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
         (
             "grsd",
             ("reflective_groups", "success_failure_contrasts", "privileged_guidance_updates"),
+        ),
+        (
+            "envace",
+            ("world_rehearsals", "rolewise_advantage_updates", "private_rehearsals"),
         ),
     ],
 )

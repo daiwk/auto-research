@@ -1,0 +1,1 @@
+"""DEGR reproduction adapter."""

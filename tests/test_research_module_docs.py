@@ -53,6 +53,7 @@ MODULES = {
         "beta-opsd": "2607.28582-beta-opsd",
         "vad": "2607.28590-vad",
         "flux-opd": "2607.28022-flux-opd",
+        "dash": "2608.06243-dash",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -98,6 +99,7 @@ MODULES = {
         "tapo": "2607.27973-tapo",
         "grsd": "2607.28076-grsd",
         "os-shepherd": "2607.28609-osreward",
+        "envace": "2608.06197-envace",
     },
 }
 

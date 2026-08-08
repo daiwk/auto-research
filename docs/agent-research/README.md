@@ -62,6 +62,7 @@
 - [SkillRise](2607.26784-skillrise/README.md)：跨相关任务交替求解与维护技能文档。
 - [TAPO](2607.27973-tapo/README.md)：同一 rollout 交替优化 policy 与 action-conditioned transition prediction。
 - [GRSD](2607.28076-grsd/README.md)：对照同组成功/失败反思生成 turn-level privileged guidance。
+- [EnvACE](2608.06197-envace/README.md)：同一策略交替 act/rehearse，并按角色分别计算 group advantage。
 - [OSReward / OS-Shepherd](2607.28609-osreward/README.md)：跨平台 CUA reward 的双类召回、balanced accuracy 与 leniency 审计。
 
 ## 研究闭环
@@ -84,6 +85,7 @@ flowchart LR
 
 | 方向 | 方法 | 核心机制 | 本地评测 | 状态 |
 |---|---|---|---|---|
+| 环境 rehearsal / Agent RL | [EnvACE](2608.06197-envace/README.md) | act/rehearse 双角色、private observation、role-wise GRPO | PlanBench mini | 机制复现 |
 | 公平基线 | Long-context | 保留全部历史，不压缩记忆 | EvoMem mini | 已实现 |
 | 工具学习 | [Toolformer](2302.04761-toolformer/README.md) | 候选 API call 与自监督 loss 过滤 | ScaleMCP mini | 机制复现 |
 | 自我迭代 | [Self-Refine](2303.17651-self-refine/README.md) | generate、feedback、refine 循环 | PlanBench mini | 机制复现 |

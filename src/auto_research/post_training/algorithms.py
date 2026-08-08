@@ -274,6 +274,43 @@ def update(
                 "jsd_beta": 0.5,
             }
         )
+    elif algorithm == "dash":
+        # DASH keeps OPSD's privileged same-policy teacher but avoids treating
+        # every token/candidate independently.  Clipped local divergences are
+        # turned into stop-gradient gates and accumulated backwards, so a
+        # reliable suffix can reinforce its preceding decision without an
+        # additional teacher forward pass.
+        privileged = 0.25 * probabilities.copy()
+        privileged[group.gold] += 0.75
+        local_divergence = privileged * np.log(
+            (privileged + 1e-12) / (probabilities + 1e-12)
+        )
+        clip_threshold = 0.08
+        clipped = np.minimum(local_divergence, clip_threshold)
+        centered = clipped - clipped.mean()
+        kappa = 18.0
+        gates = 1.0 / (1.0 + np.exp(kappa * centered[:-1]))
+        coefficients = np.ones_like(clipped)
+        for index in range(len(coefficients) - 2, -1, -1):
+            coefficients[index] += gates[index] * coefficients[index + 1]
+        target = privileged * coefficients
+        target /= max(target.sum(), 1e-12)
+        gradient = group.features.T @ (target - probabilities)
+        loss = float(np.sum(coefficients * clipped) / len(clipped))
+        state.online_teacher_calls += len(sampled)
+        diagnostics.update(
+            {
+                "student_generated_rollouts": float(len(sampled)),
+                "shared_teacher_student_parameters": 1.0,
+                "privileged_solution_conditioning": 1.0,
+                "dense_token_teacher_calls": float(len(sampled)),
+                "local_divergence_clip": clip_threshold,
+                "local_clip_rate": float(np.mean(local_divergence > clip_threshold)),
+                "adaptive_gate_mean": float(gates.mean()) if len(gates) else 0.0,
+                "backward_horizon_mean": float(coefficients.mean()),
+                "extra_teacher_forward_passes": 0.0,
+            }
+        )
     elif algorithm == "beta-opsd":
         # beta-OPSD turns the implicit beta=1 anchor into a controllable
         # policy-optimization path, then distils its closed-form solution.

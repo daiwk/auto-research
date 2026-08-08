@@ -22,6 +22,10 @@
 - [论文谱系与缺口](lineage.md)：查看已覆盖的技术主干与下一步缺口；
 - [统一评测协议](benchmark.md)：明确质量、计算和复现保真度的共同口径。
 
+## 最新实现
+
+- [RD-AttnRes](../reproductions/2608.01075-rd-attnres/README.md)：在 Block AttnRes 的同一组 residual sources 上分别学习 QK 与 V 深度路由；已接入 micro-LLM evolve，并保留 30-step 本地负结果。
+
 ## 与后训练和应用的边界
 
 - DPO、GRPO、OPD、reward model 等训练后目标进入[LLM 后训练](../post-training/README.md)；

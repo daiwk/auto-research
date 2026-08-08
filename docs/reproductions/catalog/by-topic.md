@@ -49,6 +49,7 @@
 ## 生成、排序与冷启动
 
 ### 生成式召回与端到端推荐
+- [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：共享生成和排序 encoder，以当前 rollout 与真实曝光双路 teacher distillation 统一召回、预排和精排。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
 - [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
@@ -173,6 +174,7 @@
 - [COBRA](../2503.02453-cobra/README.md)：先执行稀疏生成缩小候选空间，再用稠密生成细排，形成级联召回—排序路径。
 
 ### 重排、混排与多目标页面决策
+- [DEGR](../2608.04809-degr/README.md)：用 cohort 内 embedding 多样性、adaptive reward ORPO 和 greedy selection 控制跨曝光重复。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：把 LLM advertiser prior 与常规候选按 validation 选择的 quota 混合，再作为排序特征使用。
 - [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead 的列表价值蒸馏为在线 dense prefix labels，降低生成式重排延迟。
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 在相关性和多样性之间动态调整混排权重。

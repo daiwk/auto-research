@@ -42,6 +42,7 @@
 - [MiniLLM](2306.08543-minillm/README.md)：reverse KL、teacher-mixed sampling 与方差缩减。
 - [OPSD](2601.18734-opsd/README.md)：用同一模型的特权解题上下文作教师，对学生
   on-policy 轨迹做逐 token 自蒸馏与 pointwise clipping。
+- [DASH](2608.06243-dash/README.md)：以局部散度门控反向聚合自蒸馏 horizon，不增加 teacher forward。
 - [OPCD](2602.12275-opcd/README.md)：让无上下文学生拟合带经验/系统提示的上下文教师，
   把测试时上下文能力蒸馏进参数。
 - [DAPO](2503.14476-dapo/README.md)：Clip-Higher、动态采样、token loss 与过长惩罚。
@@ -93,6 +94,7 @@ flowchart LR
 
 | 类别 | 方法 | 核心机制 | 公开评测 | 状态 |
 |---|---|---|---|---|
+| 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | clipped local divergence、stop-gradient gate、backward horizon | Arithmetic candidate | 机制复现 |
 | 直接偏好优化 | [DPO](2305.18290-dpo/README.md) | reference-relative pairwise classification | GSM8K candidate | 机制复现 |
 | 二元反馈对齐 | [KTO](2402.01306-kto/README.md) | prospect utility、desirable/undesirable、KL 参照点 | GSM8K candidate | 机制复现 |
 | 单阶段偏好 | [ORPO](2403.07691-orpo/README.md) | SFT NLL + odds-ratio penalty，无 reference | GSM8K candidate | 机制复现 |

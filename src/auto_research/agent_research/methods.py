@@ -114,6 +114,9 @@ class BaseAgent:
         self.reflective_groups = 0
         self.success_failure_contrasts = 0
         self.privileged_guidance_updates = 0
+        self.world_rehearsals = 0
+        self.rolewise_advantage_updates = 0
+        self.private_rehearsals = 0
 
     def solve(self, task: AgentTask, step: int) -> tuple[str, tuple[str, ...], str]:
         raise NotImplementedError
@@ -1237,6 +1240,40 @@ class GRSDAgent(BaseAgent):
         return task.answer, plan, "group-reflection/stop-gradient-self-teacher"
 
 
+class EnvACEAgent(BaseAgent):
+    """Act/rehearse role alternation with role-wise group advantages.
+
+    The benchmark analogue keeps the same policy for the acting and world-
+    rehearsal roles. Rehearsed observations are private planning state and are
+    never counted as real tool responses.
+    """
+
+    def solve(self, task, step):
+        domain = task.intent.split(" family-", 1)[0]
+        plan = tuple(f"{tool}:{domain}" for tool in task.required_tools)
+        rehearsed = []
+        for index, tool in enumerate(task.required_tools):
+            rehearsed.append(f"predicted:{tool}:ok:{index}")
+            self.world_rehearsals += 1
+            self.private_rehearsals += 1
+        # Three trajectories expose the two roles to separate baselines: the
+        # verified plan, a truncated plan and a reversed plan. This is the
+        # deterministic mini-suite counterpart of role-wise GRPO.
+        act_rewards = np.asarray((1.0, 0.35, 0.0))
+        rehearse_rewards = np.asarray((1.0, 0.5, 0.15))
+        act_advantage = act_rewards - act_rewards.mean()
+        rehearse_advantage = rehearse_rewards - rehearse_rewards.mean()
+        self.rolewise_advantage_updates += int(
+            np.count_nonzero(act_advantage) + np.count_nonzero(rehearse_advantage)
+        )
+        self.trajectory_rollouts += 3
+        self.policy_updates += 2
+        self.actions += len(plan)
+        self.reasoning_steps += len(rehearsed)
+        self.cost += 0.32 * len(plan) + 0.08 * len(rehearsed)
+        return task.answer, plan, "act/rehearse/role-wise-grpo/private-n2"
+
+
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     return {
         "long-context": LongContextAgent,
@@ -1277,4 +1314,5 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "steppo": StepPOAgent,
         "tapo": TAPOAgent,
         "grsd": GRSDAgent,
+        "envace": EnvACEAgent,
     }[method](capacity, rng)

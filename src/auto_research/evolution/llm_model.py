@@ -32,6 +32,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
+        "block_attnres", "rd_attnres",
     }
     if architecture not in supported:
         raise ValueError(f"unknown micro LLM architecture: {architecture}")
@@ -41,6 +42,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "switch_transformer", "mamba", "switch_attention",
         "native_sparse_attention", "gated_attention",
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
+        "block_attnres", "rd_attnres",
     }
     parallel = "parallel" in architecture
     kv_heads = 2 if "gqa" in architecture else config.heads
@@ -94,9 +96,10 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 if architecture == "qkv_depthwise_conv" else None
             )
 
-        def forward(self, values):
+        def forward(self, values, value_values=None):
             batch, length, _ = values.shape
-            q, k, v = self.q(values), self.k(values), self.v(values)
+            value_values = values if value_values is None else value_values
+            q, k, v = self.q(values), self.k(values), self.v(value_values)
             if self.qkv_conv is not None:
                 projected = torch.cat((q, k, v), dim=-1)
                 # Left padding keeps the augmentation autoregressive.  The paper's
@@ -397,6 +400,55 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             values = values + self.attention(self.first_norm(values))
             return values + self.ffn(self.second_norm(values))
 
+    class AttentionResidualBlock(nn.Module):
+        """Block AttnRes parent and role-decoupled QK/V depth routing.
+
+        Every layer reads from all preceding residual sources. `block_attnres`
+        shares one content-dependent route, while `rd_attnres` learns separate
+        routes for query/key and value roles and therefore changes no residual
+        source topology.
+        """
+
+        def __init__(self, source_count: int):
+            super().__init__()
+            self.source_count = source_count
+            self.route_norm = norm()
+            self.qk_route = nn.Linear(config.dimensions, source_count, bias=False)
+            self.v_route = (
+                nn.Linear(config.dimensions, source_count, bias=False)
+                if architecture == "rd_attnres" else self.qk_route
+            )
+            self.attention_norm = norm()
+            self.attention = Attention()
+            self.ffn_norm = norm()
+            self.ffn = FFN()
+            self.last_route_js = 0.0
+
+        def _route(self, stacked, router):
+            current = stacked[:, :, -1]
+            weights = torch.softmax(router(self.route_norm(current)), dim=-1)
+            mixed = torch.einsum("btk,btkd->btd", weights, stacked)
+            return mixed, weights
+
+        def forward(self, sources):
+            stacked = torch.stack(sources, dim=2)
+            qk_values, qk_weights = self._route(stacked, self.qk_route)
+            value_values, value_weights = self._route(stacked, self.v_route)
+            midpoint = 0.5 * (qk_weights + value_weights)
+            js = 0.5 * (
+                qk_weights
+                * torch.log((qk_weights + 1e-8) / (midpoint + 1e-8))
+                + value_weights
+                * torch.log((value_weights + 1e-8) / (midpoint + 1e-8))
+            ).sum(-1).mean()
+            self.last_route_js = float(js.detach().cpu())
+            current = sources[-1]
+            attended = self.attention(
+                self.attention_norm(qk_values), self.attention_norm(value_values)
+            )
+            values = current + attended
+            return values + self.ffn(self.ffn_norm(values))
+
     class HyperLayer(nn.Module):
         """Paper-faithful dynamic HC/mHC wrapper around one Transformer sublayer."""
 
@@ -601,6 +653,11 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 self.blocks = nn.ModuleList(
                     [shared_loop for _ in range(config.layers)]
                 )
+            elif architecture in {"block_attnres", "rd_attnres"}:
+                self.blocks = nn.ModuleList([
+                    AttentionResidualBlock(index + 1)
+                    for index in range(config.layers)
+                ])
             else:
                 self.blocks = nn.ModuleList([
                     (
@@ -661,10 +718,17 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
                 values = values.unsqueeze(-2).expand(
                     *values.shape[:-1], config.residual_streams, values.shape[-1]
                 ).contiguous()
+            sources = [values]
             for index, block in enumerate(self.blocks):
                 if self.gauge_quantizer is not None:
                     values = self.gauge_quantizer(values)
-                values = block(values)
+                values = (
+                    block(sources)
+                    if architecture in {"block_attnres", "rd_attnres"}
+                    else block(values)
+                )
+                if architecture in {"block_attnres", "rd_attnres"}:
+                    sources.append(values)
                 if (
                     self.localized_recurrence is not None
                     and index == self.recurrence_layer
@@ -713,6 +777,17 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
             }
 
         def architecture_stats(self):
+            if architecture in {"block_attnres", "rd_attnres"}:
+                return {
+                    "residual_sources_last_layer": len(self.blocks),
+                    "qk_v_role_decoupled": architecture == "rd_attnres",
+                    "qk_v_route_js_divergence": sum(
+                        block.last_route_js for block in self.blocks
+                    ) / len(self.blocks),
+                    "extra_route_vectors_per_layer": (
+                        2 if architecture == "rd_attnres" else 1
+                    ),
+                }
             if architecture == "engram":
                 return {
                     "lookup_complexity": "O(1)",
