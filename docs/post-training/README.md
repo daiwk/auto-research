@@ -73,6 +73,9 @@
 - [Flux-OPD](2607.28022-flux-opd/README.md)：以稳定 teacher 为锚，按上下文冲突衰减演化修正。
 - [CoRT](2607.25659-cort/README.md)：用反事实重放分配 token 级 rubric credit。
 - [ReCo](2607.26862-reco/README.md)：按响应期望出现次数与 token 方差比重加权 GRPO。
+- [RLAIF](2309.00267-rlaif/README.md)、[过程监督](2305.20050-process-supervision/README.md) 与 [Math-Shepherd](2312.08935-math-shepherd/README.md)：补齐 AI feedback 和逐步奖励主干。
+- [Self-Rewarding](2401.10020-self-rewarding/README.md)、[Absolute Zero](2505.03335-absolute-zero/README.md) 与 [SPIRAL](2506.24119-spiral/README.md)：覆盖自判偏好、零数据任务生成和语言游戏自博弈。
+- [LUFFY](2504.14945-luffy/README.md)、[TTRL](2504.16084-ttrl/README.md)、[INTUITOR](2505.19590-intuitor/README.md)、[CISPO](2506.13585-cispo/README.md) 与 [ConSPO](2605.12969-conspo/README.md)：覆盖离策略 guidance、test-time RL、intrinsic reward 和稳定序列目标。
 
 ### 跨目录的后训练 adapter
 

@@ -22,6 +22,8 @@ from auto_research.post_training.rollout_correction import (
         "dr-grpo", "armor", "reinforce-plus", "taco", "chord", "vapo",
         "vad",
         "distilled-rl", "u-opsd", "rp-opsd", "pcsd", "adrs", "mopd", "opd-lm",
+        "rlaif", "process-supervision", "math-shepherd", "self-rewarding",
+        "luffy", "ttrl", "absolute-zero", "intuitor", "cispo", "spiral", "conspo",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -74,6 +76,32 @@ def test_closed_audit_post_training_mechanisms_are_observable(
     for diagnostic in diagnostics:
         assert diagnostic in result.training["last_diagnostics"]
     assert result.training["teacher_cache_entries"] == 48
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        ("rlaif", ("ai_preference_pairs", "position_swap_debiased")),
+        ("process-supervision", ("step_labels", "active_learning_priority")),
+        ("math-shepherd", ("mc_continuations", "automatic_process_labels")),
+        ("self-rewarding", ("self_judged_pairs", "judge_policy_shared")),
+        ("luffy", ("on_policy_rollouts", "off_policy_guidance")),
+        ("ttrl", ("majority_vote_size", "consensus_rate")),
+        ("absolute-zero", ("self_generated_tasks", "verifier_calls")),
+        ("intuitor", ("self_certainty_mean", "intrinsic_kl_to_uniform")),
+        ("cispo", ("importance_ratio_mean", "token_level_is_clip")),
+        ("spiral", ("self_play_roles", "role_conditioned_advantages")),
+        ("conspo", ("length_normalized_sequence_scores", "infonce_group_size")),
+    ],
+)
+def test_global_p0_post_training_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(PostTrainingConfig(
+        algorithm=algorithm, steps=16, maximum_examples=48, output_dir=tmp_path,
+    )).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
 
 
 @pytest.mark.parametrize(

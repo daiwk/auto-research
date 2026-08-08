@@ -2,7 +2,7 @@
 
 本页维护 Agent 论文系统审计。覆盖范围从推理-行动、反思、规划搜索、工具学习，
 延伸到多 Agent 编排、终身学习和 2026 年规划强化学习；最新边界检查至
-**2026-07-30**。
+**2026-08-08**。
 
 ## 谱系覆盖
 
@@ -23,8 +23,16 @@
 | 浏览与引用 | WebGPT | 已实现（deterministic） | 浏览动作、证据引用与轨迹拒绝采样 |
 | 具身技能 grounding | SayCan | 已实现（simulation） | 语言相关性乘以技能 affordance |
 | 程序与自动工具推理 | PAL、ART | 已实现 | 符号解释器；task-library 检索与工具暂停 |
+| 深度研究与工具 RL | DeepResearcher、ReTool、ToolRL | 已实现 | 引用奖励、交错工具推理、工具选择/参数/执行反馈 |
+| 技能固化与自进化 | SAGE、MemSkill、Memento-Skills、SEARL | 已实现 | 技能生成/修订、memory-to-skill、版本化技能、策略—工具图共进化 |
+| 零数据多 Agent 课程 | Agent0 | 已实现 | 自生成任务、多 executor 投票与能力边界课程 |
 
 ## 下一阶段缺口
+
+本轮复查新增的 8 个算法 P0 已全部实现：DeepResearcher、ReTool、ToolRL、SAGE、
+MemSkill、Memento-Skills、SEARL 和 Agent0；它们补齐 deep research、工具 RL、技能固化、
+自进化 RL 与多 Agent curriculum，并已接入组合式 evolve genome。完整证据与 P1/P2 边界见
+[全主题系统缺口审计](../full-domain-gap-review-20260808.md)。
 
 | 环境 | 当前状态 | 下一步 |
 |---|---|---|

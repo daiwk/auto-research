@@ -1,0 +1,52 @@
+{
+  "paper": {
+    "title": "OneRanker: Unified Generation and Ranking"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "oneranker",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "OneRanker",
+    "hit_at_10": 0.08461538461538462,
+    "ndcg_at_10": 0.0326913674962236,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.235
+  },
+  "relative": {
+    "hit_at_10_percent": -4.3478260869565215,
+    "ndcg_at_10_percent": -7.646456671388188,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -20.026178010471217
+  },
+  "stages": {
+    "target_agnostic_generation": true,
+    "fake_item_tokens": 19,
+    "fine_grained_value_decoder": true,
+    "distribution_consistency_loss": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.1,
+      "ndcg_at_10": 0.05438719737060085,
+      "fresh_hit_at_10": 0.06,
+      "head_share_at_10": 0.24
+    }
+  },
+  "paper_results": {
+    "gmv_percent": 1.34,
+    "deployment": "full production"
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

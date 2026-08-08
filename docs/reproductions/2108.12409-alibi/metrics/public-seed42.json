@@ -1,0 +1,88 @@
+{
+  "paper": {
+    "arxiv_id": "2108.12409",
+    "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
+    "url": "https://arxiv.org/abs/2108.12409",
+    "organization": "University of Washington / Facebook AI Research"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "alibi",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.043058156967163,
+    "perplexity": 421.17909918772057,
+    "instruction_loss": 6.0724897384643555,
+    "primary": -6.953931617736816,
+    "public_composite": -6.953931617736816,
+    "composite_loss": 6.953931617736816,
+    "fitness": -6.953931617736816,
+    "initial_loss": 6.179897594451904,
+    "final_loss": 6.145263195037842,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "alibi",
+    "lm_loss": 6.043707296252251,
+    "perplexity": 421.45259184487134,
+    "instruction_loss": 6.077039003372192,
+    "primary": -6.95526314675808,
+    "public_composite": -6.95526314675808,
+    "composite_loss": 6.95526314675808,
+    "fitness": -6.95526314675808,
+    "initial_loss": 6.182495069503784,
+    "final_loss": 6.14742374420166,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "position_encoding": "linear-attention-bias",
+      "train_short_test_long": 1.0
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": 0.010741900346253986,
+    "perplexity_percent": 0.0649350021589918
+  },
+  "paper_results": {
+    "training_time_percent": -11.0,
+    "memory_percent": -11.0
+  },
+  "scope": "实际移除位置 embedding，并对各 attention head 加不同斜率的因果距离线性 bias；WikiText-2 小模型未复跑论文 WikiText-103 1.3B 参数实验。"
+}

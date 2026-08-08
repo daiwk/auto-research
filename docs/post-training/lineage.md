@@ -2,7 +2,7 @@
 
 本页是系统审计账本：区分已实现的关键谱系、仍值得补的 P1，以及暂不应被“名字占位”
 冒充复现的方法。筛选优先级综合经典影响力、机制差异、公开代码/数据和本地可验证性；
-最新边界检查至 **2026-07-30**。
+最新边界检查至 **2026-08-08**。
 
 ## 谱系覆盖
 
@@ -21,8 +21,17 @@
 | Reward-ranked SFT | RRHF、RAFT | 已实现 | 全排序约束；在线采样 top-response filtering |
 | 序列校准与可控 SFT | SLiC-HF、SteerLM | 已实现 | preference margin；多属性条件 SFT |
 | 自博弈对齐 | SPIN | 已实现 | 上一轮策略负例与迭代对手刷新 |
+| AI feedback 与过程监督 | RLAIF、Let's Verify、Math-Shepherd | 已实现 | 顺序去偏 AI 标签、主动步骤标注、MC continuation 自动标签 |
+| 自奖励与零数据课程 | Self-Rewarding、Absolute Zero、SPIRAL | 已实现 | 自判偏好、任务 proposer/verifier、自博弈语言游戏 |
+| Test-time / intrinsic RL | TTRL、INTUITOR | 已实现 | 多数一致伪标签；self-certainty intrinsic reward |
+| Off-policy 与序列稳定 | LUFFY、CISPO、ConSPO | 已实现 | 混合 support、token IS clip、长度归一化对比序列目标 |
 
 ## 下一阶段缺口
+
+二级主题复查识别出的 11 个 P0 已全部实现：RLAIF、Let's Verify Step by Step、
+Math-Shepherd、Self-Rewarding LM、LUFFY、TTRL、Absolute Zero、INTUITOR、CISPO、
+SPIRAL 和 ConSPO。每种目标都进入统一 candidate-policy 训练器和 evolve genome；证据、
+固定 seed 指标与去重说明见[全主题系统缺口审计](../full-domain-gap-review-20260808.md)。
 
 当前 L2 已具备 tokenizer、自由生成、verifier 与多 seed，但仍是小型 GRU。下一阶段是：
 

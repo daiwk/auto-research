@@ -4,6 +4,14 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "deepresearcher": ("DeepResearcher", "https://arxiv.org/abs/2504.03160"),
+    "retool": ("ReTool", "https://arxiv.org/abs/2504.11536"),
+    "toolrl": ("ToolRL", "https://arxiv.org/abs/2504.13958"),
+    "sage": ("SAGE", "https://arxiv.org/abs/2512.17102"),
+    "memskill": ("MemSkill", "https://arxiv.org/abs/2602.02474"),
+    "memento-skills": ("Memento-Skills", "https://arxiv.org/abs/2603.18743"),
+    "searl": ("SEARL", "https://arxiv.org/abs/2604.07791"),
+    "agent0": ("Agent0", "https://arxiv.org/abs/2511.16043"),
     "u-mem": ("Towards Autonomous Memory Agents / U-Mem", "https://arxiv.org/abs/2602.22406"),
     "legomem": ("LEGOMem", "https://arxiv.org/abs/2510.04851"),
     "memtool": ("MemTool", "https://arxiv.org/abs/2507.21428"),

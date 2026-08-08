@@ -7,6 +7,17 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 对比序列 RL | [ConSPO](2605.12969-conspo/README.md) | Feng Zhang，2026-05-13 | 未发现官方代码 | `conspo` |
+| 自博弈课程 | [SPIRAL](2506.24119-spiral/README.md) | Bo Liu，2025-06-30 | [已开源](https://github.com/spiral-rl/spiral) | `spiral` |
+| 长上下文 RL | [CISPO / MiniMax-M1](2506.13585-cispo/README.md) | MiniMax，2025-06-16 | [已开源](https://github.com/MiniMax-AI/MiniMax-M1) | `cispo` |
+| 自置信奖励 | [INTUITOR](2505.19590-intuitor/README.md) | Xuandong Zhao，2025-05-26 | [已开源](https://github.com/sunblaze-ucb/Intuitor) | `intuitor` |
+| 零数据自博弈 | [Absolute Zero](2505.03335-absolute-zero/README.md) | Andrew Zhao，2025-05-06 | [已开源](https://github.com/LeapLabTHU/Absolute-Zero-Reasoner) | `absolute-zero` |
+| 测试时强化学习 | [TTRL](2504.16084-ttrl/README.md) | Yuxin Zuo，2025-04-22 | [已开源](https://github.com/PRIME-RL/TTRL) | `ttrl` |
+| 离策略推理 RL | [LUFFY](2504.14945-luffy/README.md) | Jianhao Yan，2025-04-21 | [已开源](https://github.com/Simplified-Reasoning/LUFFY) | `luffy` |
+| 自奖励 | [Self-Rewarding LM](2401.10020-self-rewarding/README.md) | Weizhe Yuan，2024-01-18 | 未发现官方代码 | `self-rewarding` |
+| 自动过程奖励 | [Math-Shepherd](2312.08935-math-shepherd/README.md) | Peiyi Wang，2023-12-14 | 未发现官方代码 | `math-shepherd` |
+| AI 反馈 | [RLAIF](2309.00267-rlaif/README.md) | Harrison Lee，2023-09-01 | 未发现官方代码 | `rlaif` |
+| 过程监督 | [Let's Verify Step by Step](2305.20050-process-supervision/README.md) | Hunter Lightman，2023-05-31 | [PRM800K](https://github.com/openai/prm800k) | `process-supervision` |
 | 无监督自蒸馏 | [U-OPSD](2608.06296-u-opsd/README.md) | Yijiang Li 等，2026-08-06 | 未发现官方代码 | `u-opsd` |
 | 推理枢纽蒸馏 | [RP-OPSD](2608.06347-rp-opsd/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/NJUNLP/RP-OPSD) | `rp-opsd` |
 | 回报相关奖励塑形 | [ADRS](2608.03223-adrs/README.md) | Ranxu Zhang 等，2026-08-04 | [已开源](https://github.com/gitrxh/ADRS-arxiv) | `adrs` |

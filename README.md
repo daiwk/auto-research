@@ -39,7 +39,9 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **159/159** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+下表与代码 registry 保持 **178/178** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+
+2026-08-08 的全域 P0 补齐新增 `glorank`、`dual-rerank`、`oneranker`、`radar`、`dualgr`、`mpformer`、`hap`、`onepiece`、`intsr`、`cdm`、`cwm`、`rope`、`alibi`、`gqa`、`hymba`、`moba`、`blt`、`doremi`、`data-mixing-laws`；后训练与 Agent 方法分别进入独立方法索引和统一 evolve genome。
 
 | Level | Adapter | Paper / organization | What actually runs |
 |---|---|---|---|

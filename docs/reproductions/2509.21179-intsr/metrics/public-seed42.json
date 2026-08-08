@@ -1,0 +1,52 @@
+{
+  "paper": {
+    "title": "IntSR: Integrated Generative Search and Recommendation"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "intsr",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "IntSR",
+    "hit_at_10": 0.1,
+    "ndcg_at_10": 0.04727804374292399,
+    "fresh_hit_at_10": 0.041666666666666664,
+    "head_share_at_10": 0.20884615384615385
+  },
+  "relative": {
+    "hit_at_10_percent": 13.043478260869566,
+    "ndcg_at_10_percent": 33.561095656476134,
+    "fresh_hit_at_10_percent": 50.0,
+    "head_share_at_10_percent": -28.92670157068063
+  },
+  "stages": {
+    "explicit_implicit_query_decoder": true,
+    "query_placeholder_kv_cache": true,
+    "time_varying_vocabulary_alignment": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.12307692307692308,
+      "ndcg_at_10": 0.06452838861149707,
+      "fresh_hit_at_10": 0.08,
+      "head_share_at_10": 0.23115384615384615
+    }
+  },
+  "paper_results": {
+    "gmv_percent": 9.34,
+    "poi_ctr_percent": 2.76,
+    "travel_acc_percent": 7.04
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

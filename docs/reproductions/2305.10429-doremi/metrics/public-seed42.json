@@ -1,0 +1,34 @@
+{
+  "paper": {
+    "title": "DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining"
+  },
+  "dataset": {
+    "name": "WikiText-2 + public narrative domain",
+    "tokens": 240000
+  },
+  "baseline": {
+    "name": "uniform mixture",
+    "validation_loss": 5.672924328383141
+  },
+  "method": {
+    "name": "DoReMi group-DRO mixture",
+    "validation_loss": 5.664472991106605
+  },
+  "relative": {
+    "validation_loss_percent": -0.14897673205778875
+  },
+  "stages": {
+    "proxy_steps": 80,
+    "final_domain_weights": [
+      0.5140855253837019,
+      0.4859144746162981
+    ],
+    "worst_excess_loss_updates": 80,
+    "reference_models": 2
+  },
+  "paper_results": {
+    "few_shot_accuracy_points": 6.5,
+    "training_speedup_x": 2.6
+  },
+  "scope": "实际在两个公开文本域上训练 reference unigram proxy，执行 group-DRO excess-loss 指数权重更新，再以所学配比评估；未复刻 The Pile、280M proxy 与 8B target。"
+}

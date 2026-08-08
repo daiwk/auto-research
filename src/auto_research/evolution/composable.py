@@ -199,6 +199,9 @@ class AgentEvolutionEvaluator:
                     "skillrise": 0.65,
                     "vermem": 0.42,
                     "coevo-mem": 0.46,
+                    "sage": 0.38,
+                    "memskill": 0.40,
+                    "memento-skills": 0.36,
                 }.get(genome.agent_memory, 0.8)
                 cost += memory_cost
             if plan is None:
@@ -219,7 +222,7 @@ class AgentEvolutionEvaluator:
                     # turn-level guidance for the current failed trajectory.
                     reflective_groups += 1
                     guidance_updates += len(task.plan)
-                elif genome.agent_critic in {"agent-opsd", "ocsd"}:
+                elif genome.agent_critic in {"agent-opsd", "ocsd", "searl"}:
                     guidance_updates += len(task.plan)
                     reflective_groups += 1
                 plan = task.plan
@@ -237,6 +240,7 @@ class AgentEvolutionEvaluator:
                     "agent-opsd": 0.72,
                     "ocsd": 0.70,
                     "envace": 0.76,
+                    "searl": 0.68,
                 }.get(genome.agent_critic, 1.5)
                 cost += critic_cost
             success = tuple(plan) == task.plan
@@ -291,6 +295,10 @@ def _plan(task, method, rng):
         # Dynamic observation compression bounds long web histories while
         # M-GRPO compares parallel complete trajectories.
         return target, 0.45 + 0.2 * len(target)
+    if method == "deepresearcher":
+        return target, 0.55 + 0.30 * len(target)
+    if method == "agent0":
+        return target, 0.50 + 0.15 * len(target)
     return target, float(len(task.context))
 
 
@@ -354,6 +362,10 @@ def _apply_tools(task, plan, policy, active, capacity, step):
         return task.plan, 0.12 * sum(
             costs.get(tool, 1.0) for tool in catalog[:best]
         )
+    if policy == "retool":
+        return task.plan, 0.30 * len(task.required_tools)
+    if policy == "toolrl":
+        return task.plan, 0.22 * len(task.required_tools)
     return tuple(plan), 0.0
 
 

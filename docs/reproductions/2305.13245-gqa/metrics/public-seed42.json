@@ -1,0 +1,88 @@
+{
+  "paper": {
+    "arxiv_id": "2305.13245",
+    "title": "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints",
+    "url": "https://arxiv.org/abs/2305.13245",
+    "organization": "Google Research"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "gqa",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.043058127164841,
+    "perplexity": 421.1790866356055,
+    "instruction_loss": 6.0724897384643555,
+    "primary": -6.953931587934494,
+    "public_composite": -6.953931587934494,
+    "composite_loss": 6.953931587934494,
+    "fitness": -6.953931587934494,
+    "initial_loss": 6.179897594451904,
+    "final_loss": 6.145263195037842,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "gqa",
+    "lm_loss": 6.064296752214432,
+    "perplexity": 430.2200199866363,
+    "instruction_loss": 6.118069291114807,
+    "primary": -6.982007145881653,
+    "public_composite": -6.982007145881653,
+    "composite_loss": 6.982007145881653,
+    "fitness": -6.982007145881653,
+    "initial_loss": 6.193478918075561,
+    "final_loss": 6.162544775009155,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 131392,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "query_heads": 4.0,
+      "kv_heads": 2.0,
+      "kv_cache_reduction_x": 2.0
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": 0.3514549190602502,
+    "perplexity_percent": 2.1465769877726273
+  },
+  "paper_results": {
+    "uptraining_compute_percent": 5.0
+  },
+  "scope": "实际让 4 个 query heads 分组共享 2 个 K/V heads，并报告 KV cache 缩减；从头小模型训练替代论文从 MHA checkpoint 的 5% compute uptraining。"
+}

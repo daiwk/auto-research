@@ -61,6 +61,17 @@ ALGORITHMS = (
     "chord",
     "vapo",
     "vad",
+    "rlaif",
+    "process-supervision",
+    "math-shepherd",
+    "self-rewarding",
+    "luffy",
+    "ttrl",
+    "absolute-zero",
+    "intuitor",
+    "cispo",
+    "spiral",
+    "conspo",
 )
 
 

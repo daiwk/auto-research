@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "MPFormer: Multi-Task Personalized Sequential Retriever"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 260,
+    "items": 420
+  },
+  "setup": {
+    "adapter": "mpformer",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.08846153846153847,
+    "ndcg_at_10": 0.03539806521543129,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.29384615384615387
+  },
+  "method": {
+    "name": "MPFormer",
+    "hit_at_10": 0.08461538461538462,
+    "ndcg_at_10": 0.032868070863266416,
+    "fresh_hit_at_10": 0.027777777777777776,
+    "head_share_at_10": 0.23961538461538462
+  },
+  "relative": {
+    "hit_at_10_percent": -4.3478260869565215,
+    "ndcg_at_10_percent": -7.1472673344360045,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -18.45549738219896
+  },
+  "stages": {
+    "objective_conditioned_attention_heads": 3,
+    "dynamic_quota_allocation": true,
+    "personalized_objective_tokens": true,
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.11538461538461539,
+      "ndcg_at_10": 0.05936373196621867,
+      "fresh_hit_at_10": 0.08,
+      "head_share_at_10": 0.24461538461538462
+    }
+  },
+  "paper_results": {
+    "watch_time_percent": 0.426,
+    "app_usage_percent": 0.195,
+    "training_resource_percent": -60.0,
+    "serving_resource_percent": -66.7
+  },
+  "scope": "在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。"
+}

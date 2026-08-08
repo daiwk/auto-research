@@ -1,0 +1,89 @@
+{
+  "paper": {
+    "arxiv_id": "2412.09871",
+    "title": "Byte Latent Transformer: Patches Scale Better Than Tokens",
+    "url": "https://arxiv.org/abs/2412.09871",
+    "organization": "Meta FAIR"
+  },
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 120000,
+    "validation_tokens": 8000,
+    "test_tokens": 8000,
+    "narrative_tokens": 120000,
+    "instruction_train": 320,
+    "instruction_validation": 64,
+    "preference_validation": 64,
+    "reasoning_validation": 0,
+    "benchmark_suite": "core",
+    "vocab_size": 512,
+    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_variant": 12,
+    "dimensions": 64,
+    "layers": 2,
+    "sequence_length": 64,
+    "same_tokens_optimizer_and_budget": true,
+    "evolve_architecture": "blt",
+    "evolve_optimizer": "adamw"
+  },
+  "baseline": {
+    "name": "llama_modern",
+    "lm_loss": 6.0430581122636795,
+    "perplexity": 421.17908035954804,
+    "instruction_loss": 6.0724897384643555,
+    "primary": -6.953931573033333,
+    "public_composite": -6.953931573033333,
+    "composite_loss": 6.953931573033333,
+    "fitness": -6.953931573033333,
+    "initial_loss": 6.179897594451904,
+    "final_loss": 6.145263195037842,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139584,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {},
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "method": {
+    "name": "blt",
+    "lm_loss": 6.021533235907555,
+    "perplexity": 412.21012682777763,
+    "instruction_loss": 6.0578306913375854,
+    "primary": -6.930207839608192,
+    "public_composite": -6.930207839608192,
+    "composite_loss": 6.930207839608192,
+    "fitness": -6.930207839608192,
+    "initial_loss": 6.172091627120972,
+    "final_loss": 6.139454650878906,
+    "post_training_loss": 0.0,
+    "reward_bearing_group_rate": 0.0,
+    "parameters": 139649,
+    "device": "mps",
+    "optimizer": "adamw",
+    "architecture_stats": {
+      "tokenizer_free_reference": "dynamic byte patches",
+      "observed_patch_boundary_rate": 0.8169800639152527,
+      "expanded_back_to_byte_targets": 1.0
+    },
+    "muon_orthogonality_error": 0.0,
+    "seeds": [
+      42
+    ]
+  },
+  "relative": {
+    "lm_loss_percent": -0.3561917816484779,
+    "perplexity_percent": -2.1294869451051275
+  },
+  "paper_results": {
+    "tokenizer_free": true,
+    "dynamic_entropy_patching": true
+  },
+  "scope": "实际执行可学习 surprisal boundary、相邻低熵位置 latent patch 共享并展开回原目标；当前 evaluator 的 512-symbol tokenizer 只近似 byte alphabet，未复刻 8B BLT 与完整 local encoder/decoder。"
+}

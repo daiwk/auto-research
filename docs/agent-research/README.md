@@ -68,6 +68,9 @@
 - [VerMem](2608.03137-vermem/README.md)：统一管理 LTM、活动上下文和 episodic history，并用双层 verifier 审核。
 - [CoEvo-Mem](2608.01739-coevo-mem/README.md)：交替更新检索路由器和记忆库，闭合使用—更新反馈环。
 - [OSReward / OS-Shepherd](2607.28609-osreward/README.md)：跨平台 CUA reward 的双类召回、balanced accuracy 与 leniency 审计。
+- [DeepResearcher](2504.03160-deepresearcher/README.md)、[ReTool](2504.11536-retool/README.md) 与 [ToolRL](2504.13958-toolrl/README.md)：补齐深度研究轨迹奖励和工具选择/执行强化学习。
+- [SAGE](2512.17102-sage/README.md)、[MemSkill](2602.02474-memskill/README.md) 与 [Memento-Skills](2603.18743-memento-skills/README.md)：从轨迹记忆抽象、修订并检索可复用技能。
+- [SEARL](2604.07791-searl/README.md) 与 [Agent0](2511.16043-agent0/README.md)：联合优化策略/工具图，并以零数据多 Agent curriculum 自进化。
 
 ## 研究闭环
 

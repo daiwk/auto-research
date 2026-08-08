@@ -7,6 +7,14 @@
 
 | 方向 | 方法 | 论文信息 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Xinshun Feng，2026-04-09 | 未发现官方代码 | `searl` |
+| 技能设计 | [Memento-Skills](2603.18743-memento-skills/README.md) | Huichi Zhou，2026-03-19 | [已开源](https://github.com/Memento-Teams/Memento-Skills) | `memento-skills` |
+| 记忆技能 | [MemSkill](2602.02474-memskill/README.md) | Haozhen Zhang，2026-02-02 | [已开源](https://github.com/ViktorAxelsen/MemSkill) | `memskill` |
+| 技能库强化学习 | [SAGE](2512.17102-sage/README.md) | Jiongxiao Wang，2025-12-18 | 未发现官方代码 | `sage` |
+| 零数据多 Agent | [Agent0](2511.16043-agent0/README.md) | Peng Xia，2025-11-20 | 未发现官方代码 | `agent0` |
+| 工具强化学习 | [ToolRL](2504.13958-toolrl/README.md) | Cheng Qian，2025-04-16 | 未发现官方代码 | `toolrl` |
+| 推理中工具调用 | [ReTool](2504.11536-retool/README.md) | Jiazhan Feng，2025-04-15 | 未发现官方代码 | `retool` |
+| 深度研究 RL | [DeepResearcher](2504.03160-deepresearcher/README.md) | Yuxiang Zheng，2025-04-04 | [已开源](https://github.com/GAIR-NLP/DeepResearcher) | `deepresearcher` |
 | 递归 turn 信用 | [AgentOPSD](2608.05987-agent-opsd/README.md) | Zi-Han Wang 等，2026-08-06 | [仓库公开、完整代码待发布](https://github.com/ZethWang/AgentOPSD) | `agent-opsd` |
 | 观测校准蒸馏 | [OCSD](2608.04788-ocsd/README.md) | Yi Yang 等，2026-08-05 | [已开源](https://github.com/yiy1x/OCSD) | `ocsd` |
 | 可验证统一记忆 | [VerMem](2608.03137-vermem/README.md) | Sun Yat-sen University，2026-08-04 | [已开源](https://github.com/Sun-SYSU-24/VerMem) | `vermem` |

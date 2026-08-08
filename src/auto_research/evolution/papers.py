@@ -146,6 +146,14 @@ AGENT_MUTATIONS = {
     "2608.04788": ("critic:ocsd", "对齐完整观测与观测消融重放，用残差信号校准每个交互 turn 的自蒸馏信用"),
     "2608.03137": ("memory:vermem", "统一管理长期、活动与 episodic 记忆，并以局部和全局 verifier 审核记忆操作"),
     "2608.01739": ("memory:coevo-mem", "交替固定记忆库更新检索路由器、再固定路由器更新记忆值与关系"),
+    "2504.03160": ("planner:deepresearcher", "DeepResearcher 用真实搜索轨迹、交叉验证和引用奖励训练深度研究策略"),
+    "2504.11536": ("tool:retool", "ReTool 在推理链中交错执行代码工具，并由结果奖励学习自纠错策略"),
+    "2504.13958": ("tool:toolrl", "ToolRL 用细粒度动态缩放 reward 学习工具选择、参数与停止"),
+    "2512.17102": ("memory:sage", "SAGE 以 sequential rollout 和 skill-integrated reward 维护技能库"),
+    "2602.02474": ("memory:memskill", "MemSkill 让 controller 选择记忆操作、designer 依据难例进化技能库"),
+    "2603.18743": ("memory:memento-skills", "Memento-Skills 以 read-write reflective loop 进化外部 Markdown 技能"),
+    "2604.07791": ("critic:searl", "SEARL 联合优化 policy 与 tool-graph memory，并做 step-level credit"),
+    "2511.16043": ("planner:agent0", "Agent0 让 curriculum 与 executor 通过不确定性和多数投票伪标签共同进化"),
 }
 
 FALLBACK_PAPERS = (
