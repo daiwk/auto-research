@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [ARMOR：reference anchor rollout（arXiv 2607.10481）](https://arxiv.org/abs/2607.10481) |
-| 公司 / 机构 | 论文作者团队（机构详见原论文） |
+| 公司 / 机构 | University of Science and Technology of China / Peking University |
 | 首次公开日期 | 2026-07-11 |
 | 原作者代码 | 未发现官方代码 |
 | 本地 adapter / 算法键 | `armor` |

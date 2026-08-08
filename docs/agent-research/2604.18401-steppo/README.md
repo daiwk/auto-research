@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [StepPO：step-aligned Agent 策略优化（arXiv 2604.18401）](https://arxiv.org/abs/2604.18401) |
-| 公司 / 机构 | University of Science and Technology of China 作者团队 |
+| 公司 / 机构 | University of Science and Technology of China |
 | 首次公开日期 | 2026-04-20 |
 | 原作者代码 | 未发现官方代码 |
 | 本地 adapter / 算法键 | `steppo` |

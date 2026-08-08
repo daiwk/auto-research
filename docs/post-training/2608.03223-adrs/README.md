@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Agentic Reinforcement Learning with Self-Distilled Reward Shaping（arXiv 2608.03223）](https://arxiv.org/abs/2608.03223) |
-| 公司 / 机构 | Ranxu Zhang 等（按一作归档） |
+| 公司 / 机构 | University of Science and Technology of China / Alibaba Group |
 | 首次公开日期 | 2026-08-04（arXiv v1） |
 | 原作者代码 | [已开源：gitrxh/ADRS-arxiv](https://github.com/gitrxh/ADRS-arxiv) |
 | 本地 adapter / 方法键 | `adrs` |

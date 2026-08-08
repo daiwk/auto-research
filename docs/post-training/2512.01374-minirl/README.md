@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Stabilizing Reinforcement Learning with LLMs（arXiv 2512.01374）](https://arxiv.org/abs/2512.01374) |
-| 公司 / 机构 | Chujie Zheng（按一作归档） |
+| 公司 / 机构 | Qwen Team, Alibaba Inc. |
 | 首次公开日期 | 2025-12-01（arXiv v1） |
 | 原作者代码 | 否：未发现/未发布原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `minirl` |

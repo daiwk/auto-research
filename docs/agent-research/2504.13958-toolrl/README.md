@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [ToolRL：以执行奖励统一多工具学习（arXiv 2504.13958）](https://arxiv.org/abs/2504.13958) |
-| 公司 / 机构 | Cheng Qian 等（按一作归档） |
+| 公司 / 机构 | University of Illinois Urbana-Champaign |
 | 首次公开日期 | 2025-04-16（arXiv v1） |
 | 原作者代码 | 未发现/未发布原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `toolrl` |

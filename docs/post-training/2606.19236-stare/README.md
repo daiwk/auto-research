@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [STARE: Surprisal-Guided Token-Level Advantage Reweighting（arXiv 2606.19236）](https://arxiv.org/abs/2606.19236) |
-| 公司 / 机构 | Haipeng Luo（按一作归档） |
+| 公司 / 机构 | Shenzhen International Graduate School, Tsinghua University / Tencent Hunyuan |
 | 首次公开日期 | 2026-06-17（arXiv v1） |
 | 原作者代码 | 是：[原作者仓库](https://github.com/hp-luo/STARE) |
 | 本地 adapter / 方法键 | `stare` |

@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [ToolBench / ToolLLM（arXiv 2305.16504）](https://arxiv.org/abs/2305.16504) |
-| 公司 / 机构 | Qiantong Xu（按一作归档） |
+| 公司 / 机构 | Tsinghua University |
 | 首次公开日期 | 2023-05-25（arXiv v1） |
 | 原作者代码 | 否：未发现/未发布该论文原作者官方代码仓库 |
 | 本地 adapter / 方法键 | `toolbench` |

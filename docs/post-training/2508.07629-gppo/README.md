@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [GPPO：保留越界梯度的 PPO clip（arXiv 2508.07629）](https://arxiv.org/abs/2508.07629) |
-| 公司 / 机构 | Klear-Reasoner 作者团队（含 Alibaba Group） |
+| 公司 / 机构 | Alibaba Group / Klear-Reasoner Team |
 | 首次公开日期 | 2025-08-11 |
 | 原作者代码 | 未发现独立算法开源仓库 |
 | 本地 adapter / 算法键 | `gppo` |

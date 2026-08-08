@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [CoEvo-Mem: Co-Evolving Retrieval Policy and Memory Bank for LLM Agents（arXiv 2608.01739）](https://arxiv.org/abs/2608.01739) |
-| 公司 / 机构 | Bowen Ye 等（按一作归档） |
+| 公司 / 机构 | 论文未列机构 |
 | 首次公开日期 | 2026-08-03（arXiv v1） |
 | 原作者代码 | 未发现/未发布官方代码（核查日期：2026-08-08） |
 | 本地 adapter / 方法键 | `coevo-mem` |

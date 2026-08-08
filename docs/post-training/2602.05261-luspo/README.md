@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Length-Unbiased Sequence Policy Optimization](https://arxiv.org/abs/2602.05261) |
-| 公司 / 机构 | 作者团队 |
+| 公司 / 机构 | Meituan |
 | 首次公开日期 | 2026-02-05 |
 | 原作者代码 | 未发布 / 未发现独立官方仓库 |
 | 本地 adapter / CLI key | `luspo` |

@@ -20,9 +20,9 @@ ROW = re.compile(
 )
 BACKGROUND_HEADING = "### 背景与主要改动"
 BROWSE_INTROS = {
-    "first-author": (
-        "按首次公开日期倒序排列，每篇论文显示一作，并附一至两句中文方法简介；"
-        "不再按机构拆成大量零散小节。"
+    "organization": (
+        "按论文一作的第一署名单位聚合；单位内按首次公开日期倒序排列。每篇论文同时"
+        "显示一作姓名，并附一至两句中文方法简介。联合工作不会重复归入所有合作单位。"
     ),
     "topic": (
         "采用“研究方向 → 方法簇 → 论文”的两级结构。一级用于快速定位研究范式，"
@@ -98,6 +98,74 @@ FIRST_AUTHORS = {
         "toolbench": "Qiantong Xu", "gaia": "Grégoire Mialon",
     },
 }
+
+
+# 论文信息块通常按作者署名顺序列出单位，因此默认取“公司 / 机构”字段的第一个单位。
+# 对原字段只写作者、团队或未给出单位的论文，在这里固化经论文首页/项目页核对的
+# 第一署名单位。这个映射只负责消歧，不在 GitHub Actions 构建时访问网络。
+FIRST_AUTHOR_AFFILIATION_OVERRIDES = {
+    "post-training": {
+        "stare": "Tsinghua University",
+        "conspo": "Beijing Institute of Technology",
+        "luspo": "Meituan",
+        "armor": "University of Science and Technology of China",
+        "vapo": "ByteDance Seed",
+        "online-icepop": "Ant Group",
+        "kpop": "Ling / Ring Team",
+        "gppo": "Alibaba Group",
+        "chord": "Alibaba Group",
+        "tcr": "论文未列机构",
+        "u-opsd": "University of California, San Diego",
+        "taco": "Johns Hopkins University",
+        "minirl": "Alibaba Qwen Team",
+        "pcsd": "论文未列机构",
+        "adrs": "University of Science and Technology of China",
+        "ripo": "Tsinghua University",
+        "missing-old-logits": "Tianjin University",
+        "distilled-rl": "Nankai University",
+        "reinforce-plus": "Independent researchers",
+    },
+    "agent-research": {
+        "camel": "King Abdullah University of Science and Technology",
+        "ocsd": "Nanjing University",
+        "agent-r1": "University of Science and Technology of China",
+        "steppo": "University of Science and Technology of China",
+        "agent0": "University of North Carolina at Chapel Hill",
+        "gigpo": "Nanyang Technological University",
+        "agent-opsd": "Tsinghua University",
+        "memskill": "Nanyang Technological University",
+        "toolbench": "Tsinghua University",
+        "retool": "ByteDance Seed",
+        "coevo-mem": "论文未列机构",
+        "searl": "Shanghai AI Laboratory",
+        "gaia": "Meta AI",
+        "toolrl": "University of Illinois Urbana-Champaign",
+        "sage": "University of Wisconsin–Madison",
+    },
+}
+
+
+AFFILIATION_ALIASES = {
+    "UCLA": "University of California, Los Angeles",
+    "UC San Diego": "University of California, San Diego",
+    "Stanford": "Stanford University",
+    "Princeton": "Princeton University",
+    "UIUC": "University of Illinois Urbana-Champaign",
+    "USTC": "University of Science and Technology of China",
+    "Zhejiang": "Zhejiang University",
+    "Peking": "Peking University",
+    "Tsinghua": "Tsinghua University",
+    "NUS": "National University of Singapore",
+    "Independent researcher": "Independent researchers",
+}
+
+
+INVALID_AFFILIATION_MARKERS = (
+    "按一作归档",
+    "作者团队",
+    "机构详见",
+    "等（",
+)
 
 
 # The canonical catalog needs a precise single-label topic for auditing, but a
@@ -348,25 +416,43 @@ def read_rows(module: str) -> list[dict[str, str]]:
             raise ValueError(
                 f"{module}/{row['key']} missing verified first-author metadata"
             ) from error
+        row["organization"] = first_author_affiliation(module, row)
         row["summary"] = read_method_summary(module, row["link"])
         rows.append(row)
     return rows
 
 
+def _paper_affiliation_field(module: str, link: str) -> str:
+    page = DOCS / module / link
+    text = page.read_text(encoding="utf-8")
+    match = re.search(r"^\| 公司 / 机构 \| ([^|]+) \|$", text, re.MULTILINE)
+    if not match:
+        raise ValueError(f"{page} missing company/institution metadata")
+    return match.group(1).strip()
+
+
+def _normalize_affiliation(value: str) -> str:
+    value = value.strip()
+    return AFFILIATION_ALIASES.get(value, value)
+
+
+def first_author_affiliation(module: str, row: dict[str, str]) -> str:
+    """Return the first listed affiliation of the paper's first author."""
+
+    override = FIRST_AUTHOR_AFFILIATION_OVERRIDES[module].get(row["key"])
+    if override:
+        return _normalize_affiliation(override)
+    field = _paper_affiliation_field(module, row["link"])
+    if any(marker in field for marker in INVALID_AFFILIATION_MARKERS):
+        raise ValueError(
+            f"{module}/{row['key']} needs a verified first-author affiliation override"
+        )
+    return _normalize_affiliation(field.split(" / ", 1)[0])
+
+
 def render(module: str, dimension: str, title: str) -> str:
     if dimension == "topic":
         return render_topic_hierarchy(module, title)
-    if dimension == "first-author":
-        rows = _date_descending(read_rows(module))
-        lines = [f"# {title}", "", BROWSE_INTROS[dimension], ""]
-        for row in rows:
-            lines.append(
-                f"- {row['date']} · **{row['first-author']}** · "
-                f"[{row['title']}](../{row['link']})（`{row['key']}`）："
-                f"{row['summary']}"
-            )
-        lines.append("")
-        return "\n".join(lines)
 
     groups: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in read_rows(module):
@@ -384,7 +470,7 @@ def render(module: str, dimension: str, title: str) -> str:
             date_prefix = (
                 f"{row['date'][:7]} · "
                 if dimension == "year"
-                else ""
+                else f"{row['date']} · 一作：{row['first-author']} · "
             )
             lines.append(
                 f"- {date_prefix}[{row['title']}](../{row['link']})"
@@ -501,7 +587,9 @@ def foundation_rows() -> list[dict[str, str]]:
                 "key": adapter.key,
                 "title": paper.title,
                 "link": link,
-                "organization": paper.organization or "作者团队",
+                "organization": foundation_first_author_affiliation(
+                    adapter.key, paper.organization or "作者团队"
+                ),
                 "date": _paper_date(link),
                 "summary": reproduction_summary(link),
                 "domain": domain,
@@ -511,15 +599,34 @@ def foundation_rows() -> list[dict[str, str]]:
     return _date_descending(rows)
 
 
+def foundation_first_author_affiliation(key: str, organization: str) -> str:
+    """Use the first affiliation listed in the foundation paper metadata."""
+
+    overrides = {
+        "penelope": "论文未列机构",
+        "rd-attnres": "论文未列机构",
+        "mobius-rope": "Independent researchers",
+        "naju": "Independent researchers",
+    }
+    if key in overrides:
+        return overrides[key]
+    if any(marker in organization for marker in INVALID_AFFILIATION_MARKERS):
+        raise ValueError(f"foundation/{key} needs a verified first-author affiliation")
+    return _normalize_affiliation(organization.split(" / ", 1)[0])
+
+
 def render_foundation_catalog(dimension: str) -> str:
     rows = foundation_rows()
     titles = {
-        "organization": "基础模型：按机构",
+        "organization": "基础模型：按机构/公司/学校",
         "topic": "基础模型：按主题",
         "year": "基础模型：按年份",
     }
     intros = {
-        "organization": "按首次公开日期倒序排列；机构沿用论文信息块中的主要作者单位。",
+        "organization": (
+            "按论文一作的第一署名单位聚合；单位内按首次公开日期倒序排列。"
+            "联合工作只归入一作的第一署名单位，不会重复归入全部合作单位。"
+        ),
         "topic": (
             "采用“研究方向 → 方法簇 → 论文”的两级结构，覆盖架构、预训练、多模态"
             "和推理效率；训练后算法进入独立的 LLM 后训练研究域。"
@@ -642,7 +749,7 @@ def main() -> None:
         target = DOCS / module / "catalog"
         target.mkdir(exist_ok=True)
         for dimension, title in (
-            ("first-author", f"{label}：按一作"),
+            ("organization", f"{label}：按机构/公司/学校"),
             ("topic", f"{label}：按主题"),
             ("year", f"{label}：按年份"),
         ):

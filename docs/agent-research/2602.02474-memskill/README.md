@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [MemSkill：把 episodic memory 固化成可执行技能（arXiv 2602.02474）](https://arxiv.org/abs/2602.02474) |
-| 公司 / 机构 | Haozhen Zhang 等（按一作归档） |
+| 公司 / 机构 | Nanyang Technological University / University of Illinois Urbana-Champaign / University of Illinois Chicago / Tsinghua University |
 | 首次公开日期 | 2026-02-02（arXiv v1） |
 | 原作者代码 | [已开源](https://github.com/ViktorAxelsen/MemSkill) |
 | 本地 adapter / 方法键 | `memskill` |

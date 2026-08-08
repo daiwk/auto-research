@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Distilled Reinforcement Learning for LLM Post-training（arXiv 2607.17247）](https://arxiv.org/abs/2607.17247) |
-| 公司 / 机构 | Chen Wang 等（按一作归档） |
+| 公司 / 机构 | Nankai University / Zhongguancun Academy |
 | 首次公开日期 | 2026-07-19（arXiv v1） |
 | 原作者代码 | [已开源：597358816/Distilled-RL](https://github.com/597358816/Distilled-RL) |
 | 本地 adapter / 方法键 | `distilled-rl` |

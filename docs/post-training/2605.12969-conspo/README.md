@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [ConSPO：对比式序列策略优化（arXiv 2605.12969）](https://arxiv.org/abs/2605.12969) |
-| 公司 / 机构 | Feng Zhang 等（按一作归档） |
+| 公司 / 机构 | Beijing Institute of Technology / Alibaba Qwen Business Unit / CUHK-Shenzhen / Zhongguancun Academy |
 | 首次公开日期 | 2026-05-13（arXiv v1） |
 | 原作者代码 | 未发现/未发布原作者官方代码 |
 | 本地 adapter / 方法键 | `conspo` |

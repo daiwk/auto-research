@@ -342,7 +342,7 @@ def test_icepop_paper_metadata_uses_the_ring_1t_report():
 def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
     for module, methods in MODULES.items():
         overview = (ROOT / "docs" / module / "README.md").read_text(encoding="utf-8")
-        for dimension in ("first-author", "topic", "year"):
+        for dimension in ("organization", "topic", "year"):
             relative = f"catalog/by-{dimension}.md"
             assert f"({relative})" in overview
             catalog = (ROOT / "docs" / module / relative).read_text(encoding="utf-8")
@@ -364,19 +364,21 @@ def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
                 )
 
 
-def test_first_author_catalogs_are_flat_and_newest_first():
+def test_organization_catalogs_group_by_first_author_affiliation():
     for module, methods in MODULES.items():
         text = (
-            ROOT / "docs" / module / "catalog" / "by-first-author.md"
+            ROOT / "docs" / module / "catalog" / "by-organization.md"
         ).read_text(encoding="utf-8")
-        assert "按一作" in text
-        assert "不再按机构拆成大量零散小节" in text
-        assert "## " not in text
-        entries = [line for line in text.splitlines() if line.startswith("- ")]
+        assert "按机构/公司/学校" in text
+        assert "按论文一作的第一署名单位聚合" in text
+        assert "## " in text
+        entries = [
+            line for line in text.splitlines()
+            if line.startswith("- ") and "](../" in line
+        ]
         assert len(entries) == len(methods)
-        dates = [re.search(r"^- (\d{4}-\d{2}-\d{2})", line).group(1) for line in entries]
-        assert dates == sorted(dates, reverse=True)
-        assert all(re.search(r"· \*\*[^*]+\*\* · \[", line) for line in entries)
+        assert all(re.search(r"^- \d{4}-\d{2}-\d{2} · 一作：.+ · \[", line) for line in entries)
+        assert "（按一作归档）" not in text
 
 
 def test_topic_catalogs_use_a_compact_two_level_taxonomy():

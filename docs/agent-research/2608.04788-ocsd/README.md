@@ -7,7 +7,7 @@
 | 字段 | 内容 |
 |---|---|
 | 论文链接 | [Agentic Reinforcement Learning with Observation-Calibrated Self-Distillation（arXiv 2608.04788）](https://arxiv.org/abs/2608.04788) |
-| 公司 / 机构 | Yi Yang 等（按一作归档） |
+| 公司 / 机构 | Nanjing University / Meituan |
 | 首次公开日期 | 2026-08-05（arXiv v1） |
 | 原作者代码 | [已开源：yiy1x/OCSD](https://github.com/yiy1x/OCSD) |
 | 本地 adapter / 方法键 | `ocsd` |
