@@ -16,7 +16,7 @@
 
 ## 浏览与评测
 
-- [方法索引](catalog.md)
+- [方法索引](catalog/README.md)
 - [按公司浏览](catalog/by-company.md)
 - [按主题浏览](catalog/by-topic.md)
 - [按年月浏览](catalog/by-month.md)

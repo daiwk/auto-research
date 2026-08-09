@@ -18,7 +18,7 @@ nav:
       - 全主题缺口审计（2026-08-08）: full-domain-gap-review-20260808.md
       - 搜广推与 LLM 应用:
           - 研究总览: reproductions/industrial.md
-          - 方法索引: reproductions/catalog.md
+          - 方法索引: reproductions/catalog/README.md
           - 按公司浏览: reproductions/catalog/by-company.md
           - 按主题浏览: reproductions/catalog/by-topic.md
           - 按年月浏览: reproductions/catalog/by-month.md
