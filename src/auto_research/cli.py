@@ -1,18 +1,25 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import sys
+import datetime as dt
 from pathlib import Path
 
 from .config import ResearchConfig
 from .agent_research import AgentResearchConfig, AgentResearchRunner
 from .agent_research.models import METHODS as AGENT_METHODS
 from .evolution import EvolutionConfig, ModelEvolutionEngine
+from .evolution.providers import list_providers
+from .evolution.promotion import CandidatePluginSpec, CandidatePromotionPipeline
 from .post_training import PostTrainingConfig, PostTrainingRunner
 from .post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
 from .publish import publish_report
 from .reproductions.base import ReproductionFidelity
+from .reproductions.manifest import PaperManifest, write_manifest
+from .reproductions.schema import enrich_result
+from .reproductions.schema import aggregate_seed_metrics
 from .reproductions.registry import get_adapter, list_adapters
 from .reproductions.reporting import (
     write_legacy_combined_report,
@@ -72,6 +79,30 @@ def build_parser() -> argparse.ArgumentParser:
     reproduce.add_argument("--output", type=Path, help=argparse.SUPPRESS)
     reproduce.add_argument("--seed", type=int, default=42)
     reproduce.add_argument(
+        "--seeds", default="",
+        help="comma-separated seeds; standard/formal runs should use at least three",
+    )
+    reproduce.add_argument("--workers", type=int, default=1)
+    reproduce.add_argument("--track", help="filter adapters by track")
+    reproduce.add_argument("--topic", help="filter adapters by topic substring")
+    reproduce.add_argument("--organization", help="filter first-author organization substring")
+    reproduce.add_argument(
+        "--fidelity", choices=[level.value for level in ReproductionFidelity],
+        help="filter by reproduction fidelity",
+    )
+    reproduce.add_argument(
+        "--budget", choices=["smoke", "standard", "paper-specific"],
+        default="paper-specific",
+    )
+    reproduce.add_argument(
+        "--state-file", type=Path,
+        help="persistent batch state; completed adapter/seed pairs are resumed",
+    )
+    reproduce.add_argument(
+        "--write-manifest", type=Path,
+        help="write the canonical normalized paper manifest and exit",
+    )
+    reproduce.add_argument(
         "--include-concept-demos",
         action="store_true",
         help="include adapters whose core paper model/training is still a proxy",
@@ -80,20 +111,11 @@ def build_parser() -> argparse.ArgumentParser:
     evolve = commands.add_parser(
         "evolve", help="evolve an existing model with paper-inspired structures and hyperparameters"
     )
-    evolve.add_argument(
-        "--model",
-        choices=["rankmixer", "hyformer", "micro-llm", "post-training", "agent"],
-        required=True,
-    )
+    providers = list_providers()
+    evolve.add_argument("--model", choices=[item.name for item in providers], required=True)
     evolve.add_argument(
         "--dataset",
-        choices=[
-            "movielens-100k", "movielens-1m", "wikitext-2",
-            "arithmetic-smoke", "gsm8k-candidate",
-            "arithmetic-generate", "gsm8k-generate",
-            "evomem-mini", "planbench-mini", "scalemcp-mini",
-            "swebench-local",
-        ],
+        choices=sorted({dataset for item in providers for dataset in item.datasets}),
         required=True,
     )
     evolve.add_argument("--direction", required=True, help="natural-language research direction")
@@ -107,6 +129,11 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--seeds", default="42", help="comma-separated integer seeds")
     evolve.add_argument("--offline", action="store_true")
     evolve.add_argument("--workers", type=int, default=1, help="parallel experiments per generation")
+    evolve.add_argument("--resume", type=Path, help="resume an existing evolution run directory")
+    evolve.add_argument("--retries", type=int, default=1, help="retries per failed trial")
+    evolve.add_argument("--gpu-slots", type=int, default=1, help="independent GPU worker slots")
+    evolve.add_argument("--promotion-min-seeds", type=int, default=1)
+    evolve.add_argument("--confidence-z", type=float, default=1.0, help="uncertainty penalty for champion selection")
     evolve.add_argument("--maximum-users", type=int, help="explicit smoke-test user limit")
     evolve.add_argument("--maximum-items", type=int, help="explicit smoke-test item limit")
     evolve.add_argument("--evaluation-users", type=int, default=1000, help="fixed validation/test cohort; 0 means all users")
@@ -186,6 +213,16 @@ def build_parser() -> argparse.ArgumentParser:
     agent_eval.add_argument("--seed", type=int, default=42)
     agent_eval.add_argument("--output-dir", type=Path, default=Path("runs/agent-research"))
     _add_runtime_arguments(agent_eval)
+
+    candidate = commands.add_parser(
+        "candidate", help="stage, verify or explicitly promote a generated evolve plugin"
+    )
+    candidate.add_argument("action", choices=["stage", "verify", "promote"])
+    candidate.add_argument("--spec", type=Path)
+    candidate.add_argument("--id")
+    candidate.add_argument("--destination", type=Path)
+    candidate.add_argument("--timeout", type=int, default=300)
+    candidate.add_argument("--approve", action="store_true")
     return parser
 
 
@@ -208,17 +245,45 @@ def main(argv: list[str] | None = None) -> int:
                     f"{adapter.paper.arxiv_id:12} {adapter.paper.title}"
                 )
             return 0
+        if args.command == "candidate":
+            pipeline = CandidatePromotionPipeline(Path.cwd())
+            if args.action == "stage":
+                if not args.spec:
+                    raise ValueError("candidate stage requires --spec")
+                print(pipeline.stage(CandidatePluginSpec.from_file(args.spec)))
+            elif args.action == "verify":
+                if not args.id:
+                    raise ValueError("candidate verify requires --id")
+                print(json.dumps(pipeline.verify(args.id, args.timeout), ensure_ascii=False))
+            else:
+                if not args.id or not args.destination:
+                    raise ValueError("candidate promote requires --id and --destination")
+                print(pipeline.promote(args.id, args.destination, approved=args.approve))
+            return 0
         if args.command == "reproduce":
+            all_adapters = list(list_adapters())
+            if args.write_manifest:
+                print(write_manifest(args.write_manifest, all_adapters).resolve())
+                return 0
             adapters = (
                 [
                     adapter
-                    for adapter in list_adapters()
+                    for adapter in all_adapters
                     if args.include_concept_demos
                     or adapter.fidelity is not ReproductionFidelity.CONCEPT_DEMO
                 ]
                 if args.paper == "all"
                 else [get_adapter(args.paper)]
             )
+            adapters = [
+                adapter for adapter in adapters
+                if (not args.track or adapter.paper.track == args.track)
+                and (not args.topic or any(args.topic.lower() in topic.lower() for topic in adapter.paper.topics))
+                and (not args.organization or args.organization.lower() in (adapter.paper.organization or "").lower())
+                and (not args.fidelity or adapter.fidelity.value == args.fidelity)
+            ]
+            if not adapters:
+                raise ValueError("no reproduction adapters match the requested filters")
             for adapter in adapters:
                 if adapter.fidelity is ReproductionFidelity.CONCEPT_DEMO:
                     print(
@@ -226,24 +291,50 @@ def main(argv: list[str] | None = None) -> int:
                         "its result must not be compared with the paper's reported lift.",
                         file=sys.stderr,
                     )
+            seeds = tuple(
+                int(value.strip()) for value in args.seeds.split(",") if value.strip()
+            ) or (args.seed,)
+            state = _load_batch_state(args.state_file)
+            pending = [
+                (adapter, seed) for adapter in adapters for seed in seeds
+                if f"{adapter.key}:{seed}" not in state["completed"]
+            ]
+            if not pending:
+                print("All requested adapter/seed pairs are already completed in the state file.")
+                return 0
             entries = []
-            for adapter in adapters:
-                result = adapter.run(args.dataset_dir, args.seed)
-                try:
-                    import torch
-                    result["runtime"] = runtime_summary(torch)
-                except ImportError:
-                    result["runtime"] = runtime_summary()
-                entries.append((adapter, result))
+            workers = max(1, min(args.workers, len(pending) or 1))
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                futures = {
+                    pool.submit(_run_reproduction, adapter, args.dataset_dir, seed,
+                                seeds, args.budget): (adapter, seed)
+                    for adapter, seed in pending
+                }
+                for future in as_completed(futures):
+                    adapter, seed = futures[future]
+                    result = future.result()
+                    entries.append((adapter, result))
+            entries.sort(key=lambda item: (item[0].key, item[1].get("seed", 0)))
             if args.output:
                 report = write_legacy_combined_report(entries, args.output)
                 print(f"Report: {report.resolve()}")
             else:
                 for adapter, result in entries:
                     report = write_reproduction_result(
-                        adapter, result, args.output_dir
+                        adapter, result, args.output_dir, seeds=seeds,
+                        dataset_dir=args.dataset_dir, budget=args.budget,
                     )
                     print(f"{adapter.key}: {report.resolve()}")
+                if len(seeds) > 1:
+                    summary = _write_reproduction_batch_summary(
+                        entries, args.output_dir, seeds, args.budget
+                    )
+                    print(f"Batch summary: {summary.resolve()}")
+            for adapter, result in entries:
+                state["completed"][f"{adapter.key}:{result['seed']}"] = {
+                    "completed_at": dt.datetime.now().isoformat(),
+                }
+            _write_batch_state(args.state_file, state)
             return 0
         if args.command == "evolve":
             seeds = tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip())
@@ -277,6 +368,11 @@ def main(argv: list[str] | None = None) -> int:
                 fitness_metric=args.fitness_metric,
                 device=runtime_summary()["requested_device"],
                 cpu_threads=args.cpu_threads,
+                resume_dir=args.resume,
+                promotion_min_seeds=args.promotion_min_seeds,
+                confidence_z=args.confidence_z,
+                retries=args.retries,
+                gpu_slots=args.gpu_slots,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
@@ -360,6 +456,60 @@ def main(argv: list[str] | None = None) -> int:
     except (ValueError, RuntimeError, OSError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
+
+
+def _run_reproduction(adapter, dataset_dir, seed, seeds, budget):
+    result = adapter.run(dataset_dir, seed)
+    try:
+        import torch
+        result["runtime"] = runtime_summary(torch)
+    except ImportError:
+        result["runtime"] = runtime_summary()
+    result["seed"] = seed
+    return enrich_result(
+        adapter, result, seeds=seeds, dataset_dir=dataset_dir, budget=budget,
+    )
+
+
+def _load_batch_state(path: Path | None) -> dict:
+    if path and path.exists():
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("schema_version") != 1:
+            raise ValueError(f"unsupported reproduction state schema in {path}")
+        return payload
+    return {"schema_version": 1, "completed": {}}
+
+
+def _write_batch_state(path: Path | None, state: dict) -> None:
+    if not path:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    temporary.replace(path)
+
+
+def _write_reproduction_batch_summary(entries, output_dir, seeds, budget):
+    grouped = {}
+    for adapter, result in entries:
+        grouped.setdefault(adapter.key, {"adapter": adapter, "results": []})[
+            "results"
+        ].append(result)
+    payload = {"schema_version": 2, "seeds": list(seeds), "budget": budget, "papers": {}}
+    for key, group in grouped.items():
+        raw = group["results"]
+        payload["papers"][key] = {
+            "manifest": PaperManifest.from_adapter(group["adapter"]).to_dict(),
+            "seed_results": raw,
+            "aggregate_metrics": aggregate_seed_metrics(raw),
+            "formal_comparison": len(raw) >= 3,
+        }
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / f"batch-summary-{dt.datetime.now().strftime('%Y%m%d-%H%M%S-%f')}.json"
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return path
 
 
 def _run_config(args: argparse.Namespace) -> ResearchConfig:

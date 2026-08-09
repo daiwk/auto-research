@@ -6,12 +6,15 @@
 cli.py
  ├── runner.py                       # discovery / implementation / evaluation orchestration
  ├── evolution/                      # model genome / paper mapping / generations / champion test
+ │    ├── providers.py               # 可注册模型/数据/evaluator/baseline 协议
  ├── research_loop/
  │    ├── loop.py                    # proposal-independent iterative controller
  │    ├── cache.py                   # content-addressed metric cache
  │    └── journal.py                 # append-only stage/trial event log
  └── reproductions.registry          # 自动发现 */adapter.py
-      ├── base.py                    # PaperMetadata / ReproductionAdapter
+      ├── base.py                    # PaperMetadata / Adapter / L0-L3
+      ├── manifest.py                # 规范化论文事实
+      ├── schema.py                  # result schema v2 与 seed 聚合
       ├── reporting.py               # 隔离的 result.json / report.md
       ├── rec_utils.py               # 公共序列数据切分与共享指标
       └── <paper>/
@@ -23,11 +26,29 @@ cli.py
 
 Topic research 和 paper reproduction 共用“编排与论文代码分离”的原则：`runner.py` 决定阶段顺序，`research_loop` 负责自适应提案、迭代、缓存和审计记录，具体模型训练仍由内置 evaluator、外部实验命令或 paper adapter 执行。`ProposalStrategy` 每轮都能读取已有 trial 历史；`CommandProposer` 通过环境变量把论文 manifest 和历史交给用户明确配置的 agent 命令，因此可以根据真实结果调整下一轮假设。设计取舍及与 automated-w2s-research 的映射见[架构采用记录](design/automated-w2s-adoption.md)。
 
-Model evolution 是第三条独立入口。`EvolutionConfig` 定义目标模型、数据、代数、population、训练预算和 seed；论文检索结果先映射到经过测试的 architecture operator，再与层数、维度、优化器等组成 `Genome`。代内子代共享同一 split 和预算，代际采用 elitism；所有选择只看 validation，结束后才重新训练初始基线与冠军并读取 test。当前 RankMixer evaluator 只是第一个实现，后续模型通过新增 evaluator 和 mutation catalog 扩展，不修改代际控制器。
+Model evolution 是第三条独立入口。`EvolutionConfig` 定义目标模型、数据、代数、population、训练预算和 seed；论文检索结果先映射到经过测试的 architecture operator，再与层数、维度、优化器等组成 `Genome`。代内子代共享同一 split 和预算，代际采用带方差惩罚的 elitism；所有选择只看 validation，结束后才读取隔离 test。新领域通过 `EvolutionProvider` 注册数据集、检索 track、baseline genome 和 evaluator，不修改代际控制器；每个 trial 后原子保存，可用 `--resume` 继续。
 
 通用层只负责 adapter 发现、共享数据协议、运行目录和 JSON/Markdown 持久化。论文特有逻辑不能写回 `cli.py` 或公共 `reporting.py`。只有两个以上推荐 adapter 确实共享且语义一致的逻辑，才放入 `rec_utils.py`。
 
-`ReproductionAdapter.run` 保持统一签名 `run(dataset_dir: Path, seed: int) -> dict`；`render` 将该 dict 转成 Markdown。每个 adapter 还必须声明 `fidelity` 和尚未实现的 `omitted_core_components`。
+`ReproductionAdapter.run` 保持兼容签名 `run(dataset_dir: Path, seed: int) -> dict`；`render` 将该 dict 转成 Markdown。adapter 还可声明 `evaluation_tier`、数据集、基线、指标、默认 seeds、预算和设备能力。`PaperManifest` 是供 CLI、目录生成器和 Evolve 消费的规范化视图；其他模块不再维护重复论文表。
+
+## 评测层级与结果协议
+
+| 层级 | 含义 |
+|---|---|
+| L0 | 接口、shape 与公式单元测试 |
+| L1 | 核心机制 mini-suite |
+| L2 | 公开数据集上的真实训练与对照 |
+| L3 | 接近论文核心训练链路，仅缩小规模或替换私有数据 |
+
+新运行结果使用 schema v2，保存 manifest、代码 commit、Python/平台、数据目录、预算、
+逐 seed 结果和聚合统计。少于三个独立 seed 的结果只能作为 smoke，不得写成稳定提升。
+
+```bash
+auto-research reproduce --paper all --track recommendation --topic ranking \
+  --fidelity full_pipeline --seeds 42,43,44 --workers 3 \
+  --state-file runs/reproductions/ranking-state.json
+```
 
 论文代码和物理文档路径以 adapter/arXiv ID 为稳定主键，不因分类变化而移动；阅读入口由 `docs/reproductions/catalog/` 提供按公司、主题和年月三套索引。新目录项在 `PaperMetadata` 中声明 `organization`、`published`、`topics` 和结构化 `online_ab`。
 

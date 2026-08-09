@@ -8,6 +8,7 @@ on:
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_project_readme.py"
+      - "scripts/generate_research_catalogs.py"
       - "tests/test_docs_math.py"
       - ".github/workflows/docs.yml"
   push:
@@ -18,6 +19,7 @@ on:
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_project_readme.py"
+      - "scripts/generate_research_catalogs.py"
       - "tests/test_docs_math.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:

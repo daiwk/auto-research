@@ -1,0 +1,45 @@
+name: Python quality
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "scripts/**"
+      - "pyproject.toml"
+      - ".github/workflows/quality.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "scripts/**"
+      - "pyproject.toml"
+      - ".github/workflows/quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e '.[dev,neural-recs,llm-evolution]'
+      - run: python -m compileall -q src tests scripts
+      - run: ruff check src tests scripts
+      - run: pytest
+      - run: python scripts/generate_research_catalogs.py
+      - run: git diff --exit-code -- docs/post-training docs/agent-research
+      - run: auto-research reproduce --write-manifest /tmp/papers.json
+      - run: python -c "import json; p=json.load(open('/tmp/papers.json')); assert p['schema_version'] == 1 and len(p['papers']) >= 180"

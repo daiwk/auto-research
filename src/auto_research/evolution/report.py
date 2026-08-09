@@ -23,7 +23,10 @@ def _trial_source_label(trial) -> str:
 
 def write_evolution_artifacts(result: EvolutionResult, run_dir: Path) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
-    (run_dir / "result.json").write_text(json.dumps(result.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    result_path = run_dir / "result.json"
+    temporary = run_dir / "result.json.tmp"
+    temporary.write_text(json.dumps(result.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(result_path)
     (run_dir / "report.md").write_text(render_evolution_report(result), encoding="utf-8")
     (run_dir / "index.html").write_text(render_dashboard(result), encoding="utf-8")
 
@@ -61,14 +64,17 @@ def render_evolution_report(result: EvolutionResult) -> str:
         "",
         "## 候选来源说明",
         "",
-        "- `论文算子`：论文机制已在本仓库实现、测试，并映射到可执行结构。",
+        "- `installed-paper`：论文机制已在本仓库实现、测试，并映射到可执行结构。",
+        "- `retrieved-paper`：实时检索得到、尚未晋级为可执行插件。",
+        "- `generated-combination`：控制器组合已有算子或修改超参数。",
+        "- `novel-proposal`：仅表示待验证的新假设，不会未经审核执行任意代码。",
         "- `evidence-only`：本轮检索到但尚无本地可执行映射，只留作研究证据。",
         "- `已实现白名单组合 / 调参`：控制器组合兼容算子或修改参数，不会现场生成任意代码。",
         "",
         "## 论文与结构映射", "", "| 论文 | 日期 | 结构算子 | 方法摘要 |", "|---|---|---|---|"
     ]
     for paper in result.papers:
-        lines.append(f"| [{paper.title}]({paper.url}) | {paper.published} | `{paper.architecture or 'evidence-only'}` | {paper.method} |")
+        lines.append(f"| [{paper.title}]({paper.url}) | {paper.published} | `{paper.architecture or paper.candidate_origin}` | {paper.method} |")
     lines += ["", "## 每轮研究记录", ""]
     for round_ in result.rounds:
         lines += [f"### 第 {round_['generation']} 轮", "", f"- 起点：`{round_['parent']}`", "- 假设："]

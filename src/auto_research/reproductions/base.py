@@ -12,14 +12,27 @@ class OnlineABEvidence:
     metric: str
     lift_percent: float
     traffic: str
+    source_url: str | None = None
+    source_location: str | None = None
+    experiment_duration: str | None = None
+    significance: str | None = None
+    retrieved_at: str | None = None
 
     def to_dict(self) -> dict[str, str | float]:
-        return {
+        values = {
             "product": self.product,
             "metric": self.metric,
             "lift_percent": self.lift_percent,
             "traffic": self.traffic,
         }
+        for key in (
+            "source_url", "source_location", "experiment_duration",
+            "significance", "retrieved_at",
+        ):
+            value = getattr(self, key)
+            if value:
+                values[key] = value
+        return values
 
 
 @dataclass(frozen=True)
@@ -107,6 +120,23 @@ class ReproductionFidelity(str, Enum):
         }[self]
 
 
+class EvaluationTier(str, Enum):
+    """How much empirical evidence a local reproduction actually executes."""
+
+    CONTRACT = "l0_contract"
+    MECHANISM = "l1_mechanism"
+    PUBLIC_DATASET = "l2_public_dataset"
+    PAPER_PIPELINE = "l3_paper_pipeline"
+
+    @property
+    def label(self) -> str:
+        return {
+            self.CONTRACT: "L0 接口/张量验证",
+            self.MECHANISM: "L1 核心机制 mini-suite",
+            self.PUBLIC_DATASET: "L2 公开数据集训练",
+            self.PAPER_PIPELINE: "L3 接近论文训练链路",
+        }[self]
+
 @dataclass(frozen=True)
 class ReproductionAdapter:
     """Everything unique to one paper, behind a stable runner interface."""
@@ -117,3 +147,10 @@ class ReproductionAdapter:
     render: RenderFunction
     fidelity: ReproductionFidelity = ReproductionFidelity.CONCEPT_DEMO
     omitted_core_components: tuple[str, ...] = ()
+    evaluation_tier: EvaluationTier = EvaluationTier.PUBLIC_DATASET
+    datasets: tuple[str, ...] = ()
+    baseline: str | None = None
+    metrics: tuple[str, ...] = ()
+    default_seeds: tuple[int, ...] = (42,)
+    budget: str = "paper-specific"
+    device_capabilities: tuple[str, ...] = ("cpu",)

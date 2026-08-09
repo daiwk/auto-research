@@ -12,7 +12,7 @@ license = {text = "MIT"}
 dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "ruff>=0.12,<1"]
 plum = ["torch>=2.7,<3", "transformers>=5.0,<6", "safetensors>=0.5"]
 neural-recs = ["torch>=2.7,<3"]
 llm-evolution = ["torch>=2.7,<3", "tokenizers>=0.21,<1"]
@@ -24,7 +24,17 @@ paper-figures = [
 
 [project.scripts]
 auto-research = "auto_research.cli:main"
+auto-research-maintain = "auto_research.maintenance:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+# Start with correctness rules across the historical research corpus. Style
+# families can be enabled per package as the large legacy modules are split.
+select = ["E9", "F63", "F7", "F82"]

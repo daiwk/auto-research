@@ -36,29 +36,17 @@ class EvolutionConfig:
     fitness_metric: str = "primary"
     device: str = "auto"
     cpu_threads: int | None = None
+    resume_dir: Path | None = None
+    evaluation_tier: str = "l2_public_dataset"
+    promotion_min_seeds: int = 1
+    confidence_z: float = 1.0
+    retries: int = 1
+    gpu_slots: int = 1
 
     def validate(self) -> None:
-        supported = {
-            "rankmixer", "hyformer", "micro-llm", "post-training", "agent"
-        }
-        if self.model not in supported:
-            raise ValueError(f"model must be one of {sorted(supported)}")
-        expected = (
-            {"wikitext-2"}
-            if self.model == "micro-llm"
-            else {
-                "arithmetic-smoke", "gsm8k-candidate",
-                "arithmetic-generate", "gsm8k-generate",
-            }
-            if self.model == "post-training"
-            else {
-                "evomem-mini", "planbench-mini", "scalemcp-mini",
-                "swebench-local",
-            }
-            if self.model == "agent"
-            else {"movielens-100k", "movielens-1m"}
-        )
-        if self.dataset not in expected:
+        from .providers import get_provider
+        provider = get_provider(self.model)
+        if self.dataset not in provider.datasets:
             raise ValueError(f"dataset {self.dataset!r} is incompatible with model {self.model!r}")
         if min(self.generations, self.population, self.steps, self.workers) < 1:
             raise ValueError("generations, population and steps must be positive")
@@ -66,6 +54,8 @@ class EvolutionConfig:
             raise ValueError("at least one seed is required")
         if self.cpu_threads is not None and self.cpu_threads < 1:
             raise ValueError("cpu threads must be positive")
+        if min(self.promotion_min_seeds, self.gpu_slots) < 1 or self.retries < 0:
+            raise ValueError("promotion_min_seeds/gpu_slots must be positive and retries non-negative")
         if min(self.maximum_examples, self.agent_episodes) < 1:
             raise ValueError("maximum examples and agent episodes must be positive")
         if self.benchmark_suite not in {"core", "public", "unirank"}:
@@ -98,6 +88,8 @@ class PaperInspiration:
     architecture: str | None
     method: str
     source: str
+    candidate_origin: str = "retrieved-paper"
+    executable: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -175,7 +167,8 @@ class EvolutionResult:
     def to_dict(self) -> dict[str, Any]:
         return {
             "run_id": self.run_id,
-            "config": {**asdict(self.config), "dataset_dir": str(self.config.dataset_dir), "output_dir": str(self.config.output_dir), "seeds": list(self.config.seeds)},
+            "schema_version": 2,
+            "config": {**asdict(self.config), "dataset_dir": str(self.config.dataset_dir), "output_dir": str(self.config.output_dir), "resume_dir": str(self.config.resume_dir) if self.config.resume_dir else None, "seeds": list(self.config.seeds)},
             "papers": [paper.to_dict() for paper in self.papers],
             "trials": [trial.to_dict() for trial in self.trials],
             "champion_id": self.champion_id,
@@ -186,3 +179,30 @@ class EvolutionResult:
             "verification_records": self.verification_records,
             "research_memory": self.research_memory,
         }
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any], config: EvolutionConfig | None = None) -> "EvolutionResult":
+        raw_config = dict(payload["config"])
+        raw_config["dataset_dir"] = Path(raw_config["dataset_dir"])
+        raw_config["output_dir"] = Path(raw_config["output_dir"])
+        raw_config["resume_dir"] = Path(raw_config["resume_dir"]) if raw_config.get("resume_dir") else None
+        raw_config["seeds"] = tuple(raw_config["seeds"])
+        loaded_config = config or EvolutionConfig(**raw_config)
+        result = cls(
+            payload["run_id"], loaded_config,
+            papers=[PaperInspiration(**item) for item in payload.get("papers", [])],
+            trials=[EvolutionTrial(
+                item["trial_id"], item["generation"], item.get("parent_id"),
+                Genome(**item["genome"]), item["validation"], item["training"],
+                tuple(item.get("source_papers", ())), item["rationale"],
+                item["duration_seconds"], item.get("status", "completed"), item.get("error"),
+            ) for item in payload.get("trials", [])],
+            champion_id=payload.get("champion_id"),
+            baseline_test=payload.get("baseline_test"),
+            champion_test=payload.get("champion_test"),
+            rounds=payload.get("rounds", []),
+            dataset_summary=payload.get("dataset_summary", {}),
+            verification_records=payload.get("verification_records", []),
+            research_memory=payload.get("research_memory", {}),
+        )
+        return result
