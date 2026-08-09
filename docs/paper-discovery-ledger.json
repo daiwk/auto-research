@@ -812,7 +812,10 @@
           ],
           "candidate_ids": [
             "2606.25147"
-          ]
+          ],
+          "candidate_discovery_gate": "affiliation-and-topic",
+          "abstract_online_evidence_required": false,
+          "full_text_review_required": true
         },
         {
           "organization": "Meta",
@@ -822,7 +825,10 @@
           ],
           "candidate_ids": [
             "2607.12281"
-          ]
+          ],
+          "candidate_discovery_gate": "affiliation-and-topic",
+          "abstract_online_evidence_required": false,
+          "full_text_review_required": true
         }
       ],
       "candidates": [
@@ -833,6 +839,20 @@
           "evidence_gate": "quantified-online-ab-and-full-traffic",
           "priority": "P0",
           "priority_reason": "Google/YouTube industrial recommendation with seven-day A/B and full-user-traffic deployment",
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.3",
+              "Table 4",
+              "Table 6"
+            ],
+            "matched_terms": [
+              "A/B test",
+              "seven-day experiments",
+              "full user traffic"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "tokenminds",
@@ -845,6 +865,19 @@
           "evidence_gate": "statistically-significant-full-traffic",
           "priority": "P0",
           "priority_reason": "Meta industrial recommendation deployed at full traffic on Instagram Reels and Feed",
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.3 A/B Test Performance",
+              "Section 6 Conclusion"
+            ],
+            "matched_terms": [
+              "launched to full traffic",
+              "statistically significant gains",
+              "controlled A/B experiments"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "slimper",

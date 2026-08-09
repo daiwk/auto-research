@@ -40,6 +40,14 @@ Google（含 Google DeepMind、YouTube）和 Meta（含 Instagram）是工业搜
 `live launch`、`full traffic`、`fully deployed` 等证据措辞。2026-08-09 的纠错批次由
 TokenMinds（Google/YouTube）和 SlimPer（Meta/Instagram）触发。
 
+候选召回与线上证据判定必须分成两步：先仅按**作者机构 + 搜广推/LLM 应用主题**形成
+候选全集，再逐篇检查 PDF/HTML 全文。摘要中是否出现 `A/B` 不得影响候选召回；摘要、
+标题和 arXiv API 元数据也不能单独作为“不满足线上门槛”的拒绝依据。机构优先批次若未
+声明 `candidate_discovery_gate: affiliation-and-topic`、
+`abstract_online_evidence_required: false`、`full_text_review_required: true`，或候选未记录
+正文证据章节和命中措辞，严格审计直接失败。SlimPer 就是该规则的回归样例：摘要只写
+部署收益，正文 §4.3 才明确写 A/B、全流量与统计显著性。
+
 当前闭环批次的机器可读账本是
 [`paper-discovery-ledger.json`](paper-discovery-ledger.json)。它不替代搜索，而是强制把
 搜索结果变成可审计终态；下一批必须追加新 batch，不能覆盖旧记录。

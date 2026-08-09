@@ -66,6 +66,21 @@ def audit(strict: bool = False) -> list[str]:
                         f"{batch['batch']}: swept candidates lack terminal records: "
                         f"{sorted(missing)}"
                     )
+                if sweep.get("candidate_discovery_gate") != "affiliation-and-topic":
+                    errors.append(
+                        f"{batch['batch']}: {sweep.get('organization')} candidates "
+                        "must be discovered by affiliation and topic before evidence review"
+                    )
+                if sweep.get("abstract_online_evidence_required") is not False:
+                    errors.append(
+                        f"{batch['batch']}: {sweep.get('organization')} sweep must not "
+                        "require online evidence in the abstract"
+                    )
+                if sweep.get("full_text_review_required") is not True:
+                    errors.append(
+                        f"{batch['batch']}: {sweep.get('organization')} sweep must "
+                        "require full-text evidence review"
+                    )
         for entry in batch.get("candidates", []):
             identity = (batch["batch"], entry.get("id", ""))
             if identity in seen:
@@ -87,6 +102,15 @@ def audit(strict: bool = False) -> list[str]:
                     errors.append(f"{identity}: priority candidate lacks priority reason")
                 if entry.get("priority") != "P0":
                     errors.append(f"{identity}: Google/Meta eligible candidate is not P0")
+                evidence_review = entry.get("evidence_review", {})
+                if evidence_review.get("scope") != "full-text":
+                    errors.append(f"{identity}: evidence was not reviewed in full text")
+                if evidence_review.get("abstract_used_as_gate") is not False:
+                    errors.append(f"{identity}: abstract must not be used as evidence gate")
+                if not evidence_review.get("locations"):
+                    errors.append(f"{identity}: full-text evidence locations are missing")
+                if not evidence_review.get("matched_terms"):
+                    errors.append(f"{identity}: full-text matched evidence terms are missing")
             if status in {"deferred", "rejected"} and not entry.get("reason"):
                 errors.append(f"{identity}: {status} entry lacks reason")
             if status == "implemented":
