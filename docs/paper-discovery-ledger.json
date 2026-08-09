@@ -785,6 +785,72 @@
           "doc": "agent-research/2311.12983-gaia/README.md"
         }
       ]
+    },
+    {
+      "batch": "2026-08-09-google-meta-priority-correction",
+      "scope_kind": "institution-priority",
+      "checked_at": "2026-08-09T23:59:59+08:00",
+      "window": "2026-01-01 through 2026-08-09",
+      "sources": [
+        "official arXiv API",
+        "paper PDF affiliation and evidence review",
+        "GitHub public repository search"
+      ],
+      "required_tracks": [
+        "recommendation"
+      ],
+      "priority_institutions": [
+        "Google",
+        "Meta"
+      ],
+      "institution_sweeps": [
+        {
+          "organization": "Google",
+          "queries": [
+            "Google DeepMind / YouTube author affiliations",
+            "YouTube recommendation live launch / full traffic / online A/B"
+          ],
+          "candidate_ids": [
+            "2606.25147"
+          ]
+        },
+        {
+          "organization": "Meta",
+          "queries": [
+            "Meta Platforms author affiliations",
+            "Instagram recommendation deployed / full traffic / online A/B"
+          ],
+          "candidate_ids": [
+            "2607.12281"
+          ]
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2606.25147",
+          "title": "TokenMinds",
+          "organization": "Google DeepMind / YouTube",
+          "evidence_gate": "quantified-online-ab-and-full-traffic",
+          "priority": "P0",
+          "priority_reason": "Google/YouTube industrial recommendation with seven-day A/B and full-user-traffic deployment",
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "tokenminds",
+          "doc": "reproductions/2606.25147-tokenminds/README.md"
+        },
+        {
+          "id": "2607.12281",
+          "title": "SlimPer",
+          "organization": "Meta Platforms, Inc.",
+          "evidence_gate": "statistically-significant-full-traffic",
+          "priority": "P0",
+          "priority_reason": "Meta industrial recommendation deployed at full traffic on Instagram Reels and Feed",
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "slimper",
+          "doc": "reproductions/2607.12281-slimper/README.md"
+        }
+      ]
     }
   ]
 }

@@ -182,6 +182,7 @@ batch_size, experts, interval_residual, auxiliary_weight
 | [TMallGS](https://arxiv.org/abs/2607.13398) | `rankmixer_tmallgs` | field-wise QKV、噪声门控、token-specific SwiGLU 与 progressive auxiliary loss |
 | [Long-History User Transformers](https://arxiv.org/abs/2607.14331) | `rankmixer_long_history` | 异步全历史 encoder 的缓存状态与轻量近期序列融合 |
 | [RAMP](https://arxiv.org/abs/2607.17473) | `rankmixer_ramp` | 个性化/公共双路径、feature availability mask、受限路径监督与 prediction alignment |
+| [TokenMinds](https://arxiv.org/abs/2606.25147) | `rankmixer_tokenminds` | 从历史物品分层 SID 聚合用户 token，并通过可学习安全门控注入 RankMixer 用户表示 |
 
 这张表中的结构都已经存在于仓库源码中。在线 arXiv 检索仍会返回其他相关论文，但
 只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为

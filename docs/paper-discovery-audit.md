@@ -23,6 +23,23 @@
 7. **结束审计**：运行 `python scripts/audit_paper_coverage.py --strict` 和全量测试；
    PR 描述列出候选总数、实现数、延期数、排除数及原因。
 
+## Google / Meta 最高优先级规则
+
+Google（含 Google DeepMind、YouTube）和 Meta（含 Instagram）是工业搜广推与 LLM
+应用论文的最高优机构。只要论文属于当前研究范围，并满足“量化线上 A/B”或用户认可的
+“统计显著且明确全流量部署”证据，必须标为 `P0`，不能因为同一子主题已有其他论文而跳过。
+
+机构优先批次必须使用 `scope_kind: institution-priority`，在 ledger 中同时保存：
+
+- Google、Meta 两家各自的机构/产品检索语句；
+- 检索命中的全部 candidate ID；
+- 每项的机构、线上证据门槛、P0 原因和最终状态。
+
+`audit_paper_coverage.py --strict` 会检查上述字段和候选闭环。arXiv API 不提供作者单位，
+因此机构反查不能只搜 API 元数据：必须读取论文首页 affiliation，并同时覆盖 `A/B`、
+`live launch`、`full traffic`、`fully deployed` 等证据措辞。2026-08-09 的纠错批次由
+TokenMinds（Google/YouTube）和 SlimPer（Meta/Instagram）触发。
+
 当前闭环批次的机器可读账本是
 [`paper-discovery-ledger.json`](paper-discovery-ledger.json)。它不替代搜索，而是强制把
 搜索结果变成可审计终态；下一批必须追加新 batch，不能覆盖旧记录。

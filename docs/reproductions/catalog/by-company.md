@@ -70,6 +70,7 @@
 
 ## Google / YouTube
 - 2026-07 · [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：比较 recency、IPS、bias tower 与不确定性探索对新内容反馈环的影响。
+- 2026-06 · [TokenMinds](../2606.25147-tokenminds/README.md)：让共享 encoder 同时产生稠密用户向量，并由 decoder 生成可落到内容语义空间的 SID 用户 token，再共同服务下游排序。
 - 2026-03 · [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。

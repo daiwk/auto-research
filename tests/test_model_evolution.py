@@ -99,6 +99,15 @@ def test_latest_public_benchmark_operators_are_discoverable():
     assert mapped["2607.14331"] == "rankmixer_long_history"
     assert mapped["2607.17473"] == "rankmixer_ramp"
 
+    tokenminds = discover_papers(
+        "TokenMinds user token", 20, allow_network=False
+    )
+    tokenminds_map = {paper.arxiv_id: paper.architecture for paper in tokenminds}
+    assert tokenminds_map["2606.25147"] == "rankmixer_tokenminds"
+    assert allowed_architectures(
+        "rankmixer", "加入 TokenMinds SID 用户 token", tokenminds
+    )[0] == "rankmixer_tokenminds"
+
     llm = discover_papers(
         "dynamic rubric off-context GRPO", 20, allow_network=False, track="llm"
     )

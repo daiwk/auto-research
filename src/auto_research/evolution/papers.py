@@ -17,6 +17,7 @@ INSTALLED_MUTATIONS = {
     "2607.14331": ("rankmixer_long_history", "异步长历史编码、固定缓存状态与轻量在线近期序列融合"),
     "2607.17473": ("rankmixer_ramp", "RAMP 的个性化/公共双路径、特征可用性 masking 与 prediction alignment"),
     "2608.02738": ("rankmixer_kgd", "KGD 的可刷新行为知识、只读 transfer 与 Anchored Calibration Residual"),
+    "2606.25147": ("rankmixer_tokenminds", "TokenMinds 的分层 SID 用户 token、稠密用户向量与安全门控融合"),
 }
 
 LLM_MUTATIONS = {
@@ -179,6 +180,7 @@ AGENT_MUTATIONS = {
 }
 
 FALLBACK_PAPERS = (
+    Paper("TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems", "Dense user embeddings and hierarchical SID user tokens jointly serve downstream ranking.", [], "2026-06-23", "https://arxiv.org/abs/2606.25147", "2606.25147"),
     Paper("Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting", "Fresh/delayed target separation, lifecycle targeting and MMoE.", [], "2026-08-05", "https://arxiv.org/abs/2608.04455", "2608.04455"),
     Paper("LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation", "LLM semantic pseudo-count priors warm-start segmented Thompson sampling.", [], "2026-08-04", "https://arxiv.org/abs/2608.03382", "2608.03382"),
     Paper("Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation", "BMTP and decoupled read-only knowledge transfer under streaming drift.", [], "2026-08-03", "https://arxiv.org/abs/2608.02738", "2608.02738"),

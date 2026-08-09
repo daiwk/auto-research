@@ -12,6 +12,7 @@
 - [RECAP](../2607.15730-recap/README.md)：用 causal Transformer 更新固定容量语义画像，再通过双塔反馈评价器与 GRPO 让画像直接服务未来推荐。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：让 LLM 读取可演化用户记忆并联合生成文本/SID，再以 latent token 重建蒸馏与排序反馈降低显式推理成本。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构推荐特征转成 Qwen 生成提示，并通过 token 压缩与配置化合并完成召回。
+- [TokenMinds](../2606.25147-tokenminds/README.md)：把观看、搜索与场景信号编码为稠密用户向量和 SID 用户 token，以双输出和 multi-context decoding 支持下游排序与跨场景复用。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 补充传统召回和排序特征。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用真实 LLM 对齐物品共现和用户兴趣，再以 Semantic ID 支持面向长尾的非对称知识迁移。
 - [HARNESS-LM](../2605.23572-harness-lm/README.md)：通过强 teacher、L2 embedding alignment 与冻结文档索引精修构造非对称轻量检索器。

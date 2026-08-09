@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs/paper-discovery-ledger.json"
 TERMINAL = {"implemented", "deferred", "rejected"}
 PRIORITIES = {"P0", "P1", "P2"}
+TOP_PRIORITY_INSTITUTIONS = {"Google", "Meta"}
 
 
 def audit(strict: bool = False) -> list[str]:
@@ -39,6 +40,32 @@ def audit(strict: bool = False) -> list[str]:
                     f"{batch['batch']}: subtopics without a reviewed candidate: "
                     f"{sorted(required_subtopics - present_subtopics)}"
                 )
+        if batch.get("scope_kind") == "institution-priority":
+            required_institutions = set(batch.get("priority_institutions", []))
+            if required_institutions != TOP_PRIORITY_INSTITUTIONS:
+                errors.append(
+                    f"{batch['batch']}: institution-priority audit must cover "
+                    f"{sorted(TOP_PRIORITY_INSTITUTIONS)}"
+                )
+            sweeps = batch.get("institution_sweeps", [])
+            swept = {entry.get("organization") for entry in sweeps}
+            if required_institutions - swept:
+                errors.append(
+                    f"{batch['batch']}: missing institution sweeps: "
+                    f"{sorted(required_institutions - swept)}"
+                )
+            candidate_ids = {entry.get("id") for entry in batch.get("candidates", [])}
+            for sweep in sweeps:
+                if not sweep.get("queries"):
+                    errors.append(
+                        f"{batch['batch']}: {sweep.get('organization')} sweep lacks queries"
+                    )
+                missing = set(sweep.get("candidate_ids", [])) - candidate_ids
+                if missing:
+                    errors.append(
+                        f"{batch['batch']}: swept candidates lack terminal records: "
+                        f"{sorted(missing)}"
+                    )
         for entry in batch.get("candidates", []):
             identity = (batch["batch"], entry.get("id", ""))
             if identity in seen:
@@ -51,6 +78,15 @@ def audit(strict: bool = False) -> list[str]:
                 errors.append(f"{identity}: invalid priority {entry.get('priority')!r}")
             if status not in TERMINAL:
                 errors.append(f"{identity}: non-terminal status {status!r}")
+            if batch.get("scope_kind") == "institution-priority":
+                if not entry.get("organization"):
+                    errors.append(f"{identity}: priority candidate lacks organization")
+                if not entry.get("evidence_gate"):
+                    errors.append(f"{identity}: priority candidate lacks evidence gate")
+                if not entry.get("priority_reason"):
+                    errors.append(f"{identity}: priority candidate lacks priority reason")
+                if entry.get("priority") != "P0":
+                    errors.append(f"{identity}: Google/Meta eligible candidate is not P0")
             if status in {"deferred", "rejected"} and not entry.get("reason"):
                 errors.append(f"{identity}: {status} entry lacks reason")
             if status == "implemented":
