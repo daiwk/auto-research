@@ -38,7 +38,7 @@ jobs:
       - run: pip install -e '.[dev,neural-recs,llm-evolution]'
       - run: python -m compileall -q src tests scripts
       - run: ruff check src tests scripts
-      - run: pytest
+      - run: python -m pytest
       - run: python scripts/generate_research_catalogs.py
       - run: git diff --exit-code -- docs/post-training docs/agent-research
       - run: auto-research reproduce --write-manifest /tmp/papers.json
