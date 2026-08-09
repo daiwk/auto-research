@@ -1,9 +1,34 @@
 {
   "seed": 42,
   "dataset": "MovieLens-1M (240 users / 400 items)",
-  "baseline": {"hit_at_10": 0.0208333333, "ndcg_at_10": 0.0109175712},
-  "method": {"hit_at_10": 0.025, "ndcg_at_10": 0.0118117189},
+  "baseline": {
+    "hit_at_10": 0.0208333333,
+    "ndcg_at_10": 0.0109175712
+  },
+  "method": {
+    "hit_at_10": 0.025,
+    "ndcg_at_10": 0.0118117189
+  },
   "relative_ndcg_percent": 8.1899877,
-  "request_sharing_microbenchmark": {"candidates": 128, "speedup_x": 129.5822},
-  "fidelity": "core mechanism; process-local timing is not production QPS"
+  "request_sharing_microbenchmark": {
+    "candidates": 128,
+    "speedup_x": 129.5822
+  },
+  "fidelity": "core mechanism; process-local timing is not production QPS",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:rocs",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.27744-rocs/metrics/movielens-1m-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

@@ -54,5 +54,21 @@
     "roas_percent": 5.65,
     "achievement_rate_pp": 2.02
   },
-  "scope": "实际生成多组未来出价强度，按七日重叠窗口、预测置信衰减和 ROAS 约束选择计划，再通过状态门控执行；未接入 AliExpress 私有竞价流量。"
+  "scope": "实际生成多组未来出价强度，按七日重叠窗口、预测置信衰减和 ROAS 约束选择计划，再通过状态门控执行；未接入 AliExpress 私有竞价流量。",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:swag-bid",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.25233-swag-bid/metrics/result-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

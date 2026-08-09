@@ -4,8 +4,18 @@
   "dense_steps": 70,
   "alignment_steps": 35,
   "target_retention": 0.8,
-  "layer_cosine_similarities": [0.5596479774, 0.7493835092, 0.7928400636, 0.9284095764],
-  "adaptive_retentions": [1.0, 1.0, 1.0, 0.2],
+  "layer_cosine_similarities": [
+    0.5596479774,
+    0.7493835092,
+    0.7928400636,
+    0.9284095764
+  ],
+  "adaptive_retentions": [
+    1.0,
+    1.0,
+    1.0,
+    0.2
+  ],
   "variants": {
     "dense_teacher": {
       "perplexity": 318.7171957789,
@@ -22,5 +32,21 @@
   },
   "adaptive_vs_uniform_ppl_reduction_percent": -0.3003987494,
   "adaptive_vs_dense_ppl_change_percent": 1.0090359259,
-  "device": "mps"
+  "device": "mps",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:adadsf",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.21291-adadsf/metrics/wikitext-2-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

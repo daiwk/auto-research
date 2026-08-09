@@ -1,10 +1,49 @@
 {
   "dataset": "MovieLens-100K",
   "protocol": "chronological leave-two-out, full-catalog ranking",
-  "seeds": [42, 43, 44],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
   "steps_per_seed": 320,
-  "matched_setup": {"dimensions": 64, "layers": 2, "heads": 2, "loss": "sampled_softmax"},
-  "sasrec": {"hit_at_10": 0.0915593705, "hit_at_10_std": 0.0018236837, "ndcg_at_10": 0.0438854806, "ndcg_at_10_std": 0.0016037381, "head_share_at_10": 0.9066523605},
-  "hstu": {"hit_at_10": 0.0776108727, "hit_at_10_std": 0.0025289942, "ndcg_at_10": 0.0361060696, "ndcg_at_10_std": 0.0020764282, "head_share_at_10": 0.9387696710},
-  "ndcg_gain_percent": -17.7266167868
+  "matched_setup": {
+    "dimensions": 64,
+    "layers": 2,
+    "heads": 2,
+    "loss": "sampled_softmax"
+  },
+  "sasrec": {
+    "hit_at_10": 0.0915593705,
+    "hit_at_10_std": 0.0018236837,
+    "ndcg_at_10": 0.0438854806,
+    "ndcg_at_10_std": 0.0016037381,
+    "head_share_at_10": 0.9066523605
+  },
+  "hstu": {
+    "hit_at_10": 0.0776108727,
+    "hit_at_10_std": 0.0025289942,
+    "ndcg_at_10": 0.0361060696,
+    "ndcg_at_10_std": 0.0020764282,
+    "head_share_at_10": 0.938769671
+  },
+  "ndcg_gain_percent": -17.7266167868,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:hstu",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2402.17152-hstu/metrics/movielens-100k-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

@@ -4,9 +4,37 @@
   "selection_ratio": 0.2,
   "selected_blocks": 430,
   "variants": {
-    "Random": {"mean_selection_nll": 6.2888687821321705, "test_loss": 5.79670874774456, "perplexity": 329.2142477359009},
-    "Easy-NLL": {"mean_selection_nll": 6.139293526494225, "test_loss": 5.783596396446228, "perplexity": 324.92565309294514},
-    "PPL-Factory": {"mean_selection_nll": 6.285616204904955, "test_loss": 5.814420700073242, "perplexity": 335.0972204676031}
+    "Random": {
+      "mean_selection_nll": 6.2888687821321705,
+      "test_loss": 5.79670874774456,
+      "perplexity": 329.2142477359009
+    },
+    "Easy-NLL": {
+      "mean_selection_nll": 6.139293526494225,
+      "test_loss": 5.783596396446228,
+      "perplexity": 324.92565309294514
+    },
+    "PPL-Factory": {
+      "mean_selection_nll": 6.285616204904955,
+      "test_loss": 5.814420700073242,
+      "perplexity": 335.0972204676031
+    }
   },
-  "perplexity_reduction_vs_random_percent": -1.7869739150601902
+  "perplexity_reduction_vs_random_percent": -1.7869739150601902,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:ppl-factory",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.18199-ppl-factory/metrics/wikitext-2-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

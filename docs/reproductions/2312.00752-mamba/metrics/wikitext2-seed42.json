@@ -1,1 +1,30 @@
-{"dataset":"WikiText-2","seed":42,"steps":30,"baseline":{"model":"tiny-transformer","perplexity":313.2659999},"method":{"model":"mamba","perplexity":466.2177913},"relative_percent":48.8248936798}
+{
+  "dataset": "WikiText-2",
+  "seed": 42,
+  "steps": 30,
+  "baseline": {
+    "model": "tiny-transformer",
+    "perplexity": 313.2659999
+  },
+  "method": {
+    "model": "mamba",
+    "perplexity": 466.2177913
+  },
+  "relative_percent": 48.8248936798,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:mamba",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2312.00752-mamba/metrics/wikitext2-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

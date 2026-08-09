@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import time
 
 from auto_research.cli import build_parser
 from auto_research.evolution.models import (
@@ -12,7 +13,10 @@ from auto_research.evolution.providers import (
     EvolutionProvider, get_provider, register_provider,
 )
 from auto_research.evolution.promotion import CandidatePluginSpec, CandidatePromotionPipeline
+from auto_research.evolution.candidate_design import candidate_specs
 from auto_research.reproductions.base import EvaluationTier
+from auto_research.reproductions.base import PaperMetadata, ReproductionAdapter
+from auto_research.reproductions.execution import run_with_budget
 from auto_research.reproductions.manifest import PaperManifest
 from auto_research.reproductions.registry import get_adapter
 from auto_research.reproductions.schema import aggregate_seed_metrics, enrich_result
@@ -92,6 +96,12 @@ def test_reproduce_cli_exposes_batch_filters_and_resume_state(tmp_path):
     assert args.state_file == tmp_path / "state.json"
 
 
+def test_reproduce_cli_defaults_to_each_adapters_audited_seed_protocol():
+    args = build_parser().parse_args(["reproduce", "--paper", "din"])
+    assert args.seed is None
+    assert get_adapter("din").default_seeds == (42, 43, 44)
+
+
 class _ResumeEvaluator:
     def summary(self):
         return {"users": 4, "items": 8}
@@ -148,3 +158,44 @@ def test_generated_candidate_requires_verification_and_explicit_approval(tmp_pat
         spec.candidate_id, Path("plugins/paper_op"), approved=True
     )
     assert (promoted / "operator.py").read_text() == "VALUE = 1\n"
+
+
+def test_retrieved_papers_are_design_only_until_an_operator_is_installed():
+    installed = PaperInspiration(
+        "1", "installed", "https://example.com/1", "2026-01-01", "gqa",
+        "grouped query attention", "installed evidence", "installed-paper", True,
+    )
+    retrieved = PaperInspiration(
+        "2", "retrieved", "https://example.com/2", "2026-01-02", None,
+        "unreviewed method", "live arXiv search", "retrieved-paper", False,
+    )
+    specs = candidate_specs([installed, retrieved], "micro-llm")
+    assert specs[0].implementation_status == "installed-and-executable"
+    assert specs[1].implementation_status == "retrieved-design-only"
+    assert "explicit promotion approval" in specs[1].forbidden_claim
+
+
+def _slow_adapter_run(dataset_dir, seed):
+    time.sleep(10)
+    return {"seed": seed}
+
+
+def _render_noop(result):
+    return ""
+
+
+def test_reproduction_budget_terminates_the_worker_process(tmp_path):
+    adapter = ReproductionAdapter(
+        key="slow-fixture",
+        paper=PaperMetadata("fixture", "fixture", "https://example.com", "llm"),
+        run=_slow_adapter_run,
+        render=_render_noop,
+    )
+    started = time.monotonic()
+    try:
+        run_with_budget(adapter, tmp_path, 42, "smoke", timeout_override=1)
+    except TimeoutError as exc:
+        assert "exceeded" in str(exc)
+    else:
+        raise AssertionError("the hard execution budget did not terminate the worker")
+    assert time.monotonic() - started < 5

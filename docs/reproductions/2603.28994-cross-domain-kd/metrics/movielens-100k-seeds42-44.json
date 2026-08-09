@@ -1,1 +1,59 @@
-{"paper":"2603.28994","adapter":"cross-domain-kd","dataset":"MovieLens-100K source/target domains","fair_protocol":{"source_users":180,"target_users":60,"items":260,"din_steps":100,"seeds":[42,43,44]},"setup":{"steps":100,"kd_weight":0.2},"results":{"din":{"hit_at_10":0.1055555556,"ndcg_at_10":0.0551821761,"head_share_at_10":0.5383333333},"target_only":{"hit_at_10":0.0444444444,"ndcg_at_10":0.0168965322},"zero_shot_kd":{"hit_at_10":0.0444444444,"ndcg_at_10":0.0174070027},"ndcg_vs_din_percent":-68.4553892,"ndcg_ablation_percent":3.0211556},"paper_online_ab":{"discovery_percent":1.12,"new_releases_percent":11.39}}
+{
+  "paper": "2603.28994",
+  "adapter": "cross-domain-kd",
+  "dataset": "MovieLens-100K source/target domains",
+  "fair_protocol": {
+    "source_users": 180,
+    "target_users": 60,
+    "items": 260,
+    "din_steps": 100,
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "setup": {
+    "steps": 100,
+    "kd_weight": 0.2
+  },
+  "results": {
+    "din": {
+      "hit_at_10": 0.1055555556,
+      "ndcg_at_10": 0.0551821761,
+      "head_share_at_10": 0.5383333333
+    },
+    "target_only": {
+      "hit_at_10": 0.0444444444,
+      "ndcg_at_10": 0.0168965322
+    },
+    "zero_shot_kd": {
+      "hit_at_10": 0.0444444444,
+      "ndcg_at_10": 0.0174070027
+    },
+    "ndcg_vs_din_percent": -68.4553892,
+    "ndcg_ablation_percent": 3.0211556
+  },
+  "paper_online_ab": {
+    "discovery_percent": 1.12,
+    "new_releases_percent": 11.39
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:cross-domain-kd",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2603.28994-cross-domain-kd/metrics/movielens-100k-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

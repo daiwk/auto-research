@@ -50,7 +50,8 @@ class PaperManifest:
             normalized.setdefault("source_url", paper.url)
             normalized.setdefault(
                 "source_location",
-                paper.publication_source or "paper online-experiment section",
+                "original paper online-result disclosure: "
+                f"product={item.product}; metric={item.metric}",
             )
             evidence.append(normalized)
         return cls(

@@ -1,12 +1,58 @@
 {
   "paper": "2605.27856",
   "adapter": "pinterest-ads-llm",
-  "dataset": {"name": "MiniOneRec Office", "train_rows": 12000, "advertisers": 48, "validation_users": 32, "test_users": 32},
-  "setup": {"model": "HuggingFaceTB/SmolLM2-135M-Instruct", "seed": 42, "sft_steps": 48, "grpo_steps": 16, "tower_steps": 160, "selected": "sft"},
-  "test": {
-    "sft": {"recall_at_1": 0.0625, "recall_at_5": 0.0625, "recall_at_20": 0.125, "mean_rank": 36.5625},
-    "sft_grpo": {"recall_at_1": 0.0625, "recall_at_5": 0.0625, "recall_at_20": 0.125, "mean_rank": 34.625}
+  "dataset": {
+    "name": "MiniOneRec Office",
+    "train_rows": 12000,
+    "advertisers": 48,
+    "validation_users": 32,
+    "test_users": 32
   },
-  "downstream": {"retrieval_recall_at_50_baseline": 0.125, "retrieval_recall_at_50_complementary": 0.125, "selected_llm_quota": 0, "ranking_auc_baseline": 0.6261307566, "ranking_auc_with_llm_feature": 0.6423211349, "ranking_auc_relative_percent": 2.5857823018},
-  "conclusion": "Validation rejects GRPO and any positive complementary-retrieval quota; the LLM advertiser score gives a small sampled-ranking AUC gain."
+  "setup": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "seed": 42,
+    "sft_steps": 48,
+    "grpo_steps": 16,
+    "tower_steps": 160,
+    "selected": "sft"
+  },
+  "test": {
+    "sft": {
+      "recall_at_1": 0.0625,
+      "recall_at_5": 0.0625,
+      "recall_at_20": 0.125,
+      "mean_rank": 36.5625
+    },
+    "sft_grpo": {
+      "recall_at_1": 0.0625,
+      "recall_at_5": 0.0625,
+      "recall_at_20": 0.125,
+      "mean_rank": 34.625
+    }
+  },
+  "downstream": {
+    "retrieval_recall_at_50_baseline": 0.125,
+    "retrieval_recall_at_50_complementary": 0.125,
+    "selected_llm_quota": 0,
+    "ranking_auc_baseline": 0.6261307566,
+    "ranking_auc_with_llm_feature": 0.6423211349,
+    "ranking_auc_relative_percent": 2.5857823018
+  },
+  "conclusion": "Validation rejects GRPO and any positive complementary-retrieval quota; the LLM advertiser score gives a small sampled-ranking AUC gain.",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:pinterest-ads-llm",
+  "evaluation_protocol": {
+    "tier": "l3_paper_pipeline",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2605.27856-pinterest-ads-llm/metrics/office-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

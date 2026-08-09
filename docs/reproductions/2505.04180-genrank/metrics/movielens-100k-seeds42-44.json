@@ -1,1 +1,54 @@
-{"dataset":"MovieLens 100K explicit action sequence","seeds":[42,43,44],"protocol":{"steps":120,"train_examples":8000,"test_examples":2000},"auc":{"interleaved":{"mean":0.74282060,"std":0.00997290},"genrank":{"mean":0.73939483,"std":0.00228130},"relative_change_percent":-0.4612},"latency_ms_per_example":{"interleaved":{"mean":0.15051960,"std":0.08483704},"genrank":{"mean":0.11190030,"std":0.00767411},"relative_change_percent":-25.6573},"checkpoint_committed":false}
+{
+  "dataset": "MovieLens 100K explicit action sequence",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "protocol": {
+    "steps": 120,
+    "train_examples": 8000,
+    "test_examples": 2000
+  },
+  "auc": {
+    "interleaved": {
+      "mean": 0.7428206,
+      "std": 0.0099729
+    },
+    "genrank": {
+      "mean": 0.73939483,
+      "std": 0.0022813
+    },
+    "relative_change_percent": -0.4612
+  },
+  "latency_ms_per_example": {
+    "interleaved": {
+      "mean": 0.1505196,
+      "std": 0.08483704
+    },
+    "genrank": {
+      "mean": 0.1119003,
+      "std": 0.00767411
+    },
+    "relative_change_percent": -25.6573
+  },
+  "checkpoint_committed": false,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:genrank",
+  "evaluation_protocol": {
+    "tier": "l3_paper_pipeline",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2505.04180-genrank/metrics/movielens-100k-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

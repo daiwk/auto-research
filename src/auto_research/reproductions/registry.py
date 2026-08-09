@@ -4,6 +4,7 @@ import importlib
 from pathlib import Path
 
 from .base import ReproductionAdapter
+from .protocols import normalize_adapter_protocol
 
 _ADAPTERS: dict[str, ReproductionAdapter] = {}
 _ROOT = Path(__file__).parent
@@ -11,6 +12,7 @@ _ROOT = Path(__file__).parent
 
 def register(adapter: ReproductionAdapter) -> ReproductionAdapter:
     adapter.paper.validate_catalog_entry()
+    adapter = normalize_adapter_protocol(adapter)
     if adapter.key in _ADAPTERS:
         raise ValueError(f"duplicate reproduction adapter: {adapter.key}")
     _ADAPTERS[adapter.key] = adapter

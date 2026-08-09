@@ -1,1 +1,55 @@
-{"baseline":{"head_share_at_10":0.1851851852,"head_share_at_10_std":0.0515307518,"hit_at_10":0.0629629630,"hit_at_10_std":0.0069289952,"name":"mean-pooled two-tower","ndcg_at_10":0.0285416978,"ndcg_at_10_std":0.0045277835},"checkpoint_committed":false,"dataset":{"items":320,"name":"MovieLens-100K compact","users":180},"method":{"head_share_at_10":0.2040740741,"head_share_at_10_std":0.0628413859,"hit_at_10":0.0555555556,"hit_at_10_std":0.0120013717,"name":"YouTube DNN nonlinear user tower","ndcg_at_10":0.0266553258,"ndcg_at_10_std":0.0068279675},"relative":{"head_share_at_10_percent":10.2,"hit_at_10_percent":-11.7647058824,"ndcg_at_10_percent":-6.6091795982},"seeds":[42,43,44],"steps_per_variant":80}
+{
+  "baseline": {
+    "head_share_at_10": 0.1851851852,
+    "head_share_at_10_std": 0.0515307518,
+    "hit_at_10": 0.062962963,
+    "hit_at_10_std": 0.0069289952,
+    "name": "mean-pooled two-tower",
+    "ndcg_at_10": 0.0285416978,
+    "ndcg_at_10_std": 0.0045277835
+  },
+  "checkpoint_committed": false,
+  "dataset": {
+    "items": 320,
+    "name": "MovieLens-100K compact",
+    "users": 180
+  },
+  "method": {
+    "head_share_at_10": 0.2040740741,
+    "head_share_at_10_std": 0.0628413859,
+    "hit_at_10": 0.0555555556,
+    "hit_at_10_std": 0.0120013717,
+    "name": "YouTube DNN nonlinear user tower",
+    "ndcg_at_10": 0.0266553258,
+    "ndcg_at_10_std": 0.0068279675
+  },
+  "relative": {
+    "head_share_at_10_percent": 10.2,
+    "hit_at_10_percent": -11.7647058824,
+    "ndcg_at_10_percent": -6.6091795982
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "steps_per_variant": 80,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:youtube-dnn",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/recsys2016-youtube-dnn-youtube-dnn/metrics/movielens-100k-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

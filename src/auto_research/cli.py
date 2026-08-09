@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import shlex
 import sys
 import datetime as dt
 from pathlib import Path
@@ -77,7 +78,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     _add_runtime_arguments(reproduce)
     reproduce.add_argument("--output", type=Path, help=argparse.SUPPRESS)
-    reproduce.add_argument("--seed", type=int, default=42)
+    reproduce.add_argument(
+        "--seed", type=int,
+        help="single-seed override; otherwise each adapter's audited default seeds are used",
+    )
     reproduce.add_argument(
         "--seeds", default="",
         help="comma-separated seeds; standard/formal runs should use at least three",
@@ -93,6 +97,10 @@ def build_parser() -> argparse.ArgumentParser:
     reproduce.add_argument(
         "--budget", choices=["smoke", "standard", "paper-specific"],
         default="paper-specific",
+    )
+    reproduce.add_argument(
+        "--budget-seconds", type=int,
+        help="override the hard wall-clock limit for smoke/standard runs",
     )
     reproduce.add_argument(
         "--state-file", type=Path,
@@ -132,6 +140,19 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--resume", type=Path, help="resume an existing evolution run directory")
     evolve.add_argument("--retries", type=int, default=1, help="retries per failed trial")
     evolve.add_argument("--gpu-slots", type=int, default=1, help="independent GPU worker slots")
+    evolve.add_argument(
+        "--trial-timeout-seconds", type=int, default=3600,
+        help="hard scheduling deadline per evolution trial",
+    )
+    evolve.add_argument(
+        "--gpu-memory-per-trial-mb", type=int,
+        help="reserve this much free CUDA memory per concurrent trial",
+    )
+    evolve.add_argument(
+        "--candidate-generator-command",
+        help="external generator command; receives paper-candidates.json and may only stage verified code",
+    )
+    evolve.add_argument("--candidate-timeout-seconds", type=int, default=300)
     evolve.add_argument("--promotion-min-seeds", type=int, default=1)
     evolve.add_argument("--confidence-z", type=float, default=1.0, help="uncertainty penalty for champion selection")
     evolve.add_argument("--maximum-users", type=int, help="explicit smoke-test user limit")
@@ -291,12 +312,26 @@ def main(argv: list[str] | None = None) -> int:
                         "its result must not be compared with the paper's reported lift.",
                         file=sys.stderr,
                     )
-            seeds = tuple(
+            explicit_seeds = tuple(
                 int(value.strip()) for value in args.seeds.split(",") if value.strip()
-            ) or (args.seed,)
+            )
+            seeds_by_adapter = {
+                adapter.key: (
+                    explicit_seeds or ((args.seed,) if args.seed is not None else adapter.default_seeds)
+                )
+                for adapter in adapters
+            }
             state = _load_batch_state(args.state_file)
+            adapters_by_key = {adapter.key: adapter for adapter in adapters}
+            prior_entries = [
+                (adapters_by_key[key.split(":", 1)[0]], completed["result"])
+                for key, completed in state["completed"].items()
+                if key.split(":", 1)[0] in adapters_by_key
+                and isinstance(completed.get("result"), dict)
+            ]
             pending = [
-                (adapter, seed) for adapter in adapters for seed in seeds
+                (adapter, seed) for adapter in adapters
+                for seed in seeds_by_adapter[adapter.key]
                 if f"{adapter.key}:{seed}" not in state["completed"]
             ]
             if not pending:
@@ -307,7 +342,7 @@ def main(argv: list[str] | None = None) -> int:
             with ThreadPoolExecutor(max_workers=workers) as pool:
                 futures = {
                     pool.submit(_run_reproduction, adapter, args.dataset_dir, seed,
-                                seeds, args.budget): (adapter, seed)
+                                (seed,), args.budget, args.budget_seconds): (adapter, seed)
                     for adapter, seed in pending
                 }
                 for future in as_completed(futures):
@@ -321,18 +356,21 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 for adapter, result in entries:
                     report = write_reproduction_result(
-                        adapter, result, args.output_dir, seeds=seeds,
+                        adapter, result, args.output_dir,
+                        seeds=(result["seed"],),
                         dataset_dir=args.dataset_dir, budget=args.budget,
                     )
                     print(f"{adapter.key}: {report.resolve()}")
-                if len(seeds) > 1:
+                if any(len(values) > 1 for values in seeds_by_adapter.values()):
                     summary = _write_reproduction_batch_summary(
-                        entries, args.output_dir, seeds, args.budget
+                        [*prior_entries, *entries], args.output_dir,
+                        seeds_by_adapter, args.budget,
                     )
                     print(f"Batch summary: {summary.resolve()}")
             for adapter, result in entries:
                 state["completed"][f"{adapter.key}:{result['seed']}"] = {
                     "completed_at": dt.datetime.now().isoformat(),
+                    "result": result,
                 }
             _write_batch_state(args.state_file, state)
             return 0
@@ -373,6 +411,12 @@ def main(argv: list[str] | None = None) -> int:
                 confidence_z=args.confidence_z,
                 retries=args.retries,
                 gpu_slots=args.gpu_slots,
+                trial_timeout_seconds=args.trial_timeout_seconds,
+                gpu_memory_per_trial_mb=args.gpu_memory_per_trial_mb,
+                candidate_generator_command=tuple(
+                    shlex.split(args.candidate_generator_command)
+                ) if args.candidate_generator_command else (),
+                candidate_timeout_seconds=args.candidate_timeout_seconds,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
@@ -458,8 +502,14 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
 
-def _run_reproduction(adapter, dataset_dir, seed, seeds, budget):
-    result = adapter.run(dataset_dir, seed)
+def _run_reproduction(
+    adapter, dataset_dir, seed, seeds, budget, budget_seconds=None,
+):
+    from .reproductions.execution import run_with_budget
+
+    result = run_with_budget(
+        adapter, dataset_dir, seed, budget, timeout_override=budget_seconds,
+    )
     try:
         import torch
         result["runtime"] = runtime_summary(torch)
@@ -491,13 +541,20 @@ def _write_batch_state(path: Path | None, state: dict) -> None:
     temporary.replace(path)
 
 
-def _write_reproduction_batch_summary(entries, output_dir, seeds, budget):
+def _write_reproduction_batch_summary(entries, output_dir, seeds_by_adapter, budget):
     grouped = {}
     for adapter, result in entries:
         grouped.setdefault(adapter.key, {"adapter": adapter, "results": []})[
             "results"
         ].append(result)
-    payload = {"schema_version": 2, "seeds": list(seeds), "budget": budget, "papers": {}}
+    payload = {
+        "schema_version": 2,
+        "seeds_by_adapter": {
+            key: list(values) for key, values in seeds_by_adapter.items()
+        },
+        "budget": budget,
+        "papers": {},
+    }
     for key, group in grouped.items():
         raw = group["results"]
         payload["papers"][key] = {

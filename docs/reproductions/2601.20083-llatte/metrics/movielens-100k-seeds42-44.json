@@ -3,10 +3,50 @@
   "adapter": "llatte",
   "fidelity": "core_mechanism",
   "dataset": "MovieLens-100K",
-  "setup": {"users": 932, "items": 1682, "seeds": [42, 43, 44], "online_window": 12, "semantic_encoder": "prajjwal1/bert-tiny", "mla_latents": 4, "steps": 75},
-  "results": {
-    "short_online_sequence": {"hit_at_10": 0.0078683834, "hit_at_10_std": 0.0013382179, "ndcg_at_10": 0.0038770593, "ndcg_at_10_std": 0.0004855597},
-    "llatte_mla_dhen": {"hit_at_10": 0.0118025751, "hit_at_10_std": 0.0008760693, "ndcg_at_10": 0.0058081029, "ndcg_at_10_std": 0.0002611204}
+  "setup": {
+    "users": 932,
+    "items": 1682,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "online_window": 12,
+    "semantic_encoder": "prajjwal1/bert-tiny",
+    "mla_latents": 4,
+    "steps": 75
   },
-  "relative_ndcg_change_percent": 49.8069138
+  "results": {
+    "short_online_sequence": {
+      "hit_at_10": 0.0078683834,
+      "hit_at_10_std": 0.0013382179,
+      "ndcg_at_10": 0.0038770593,
+      "ndcg_at_10_std": 0.0004855597
+    },
+    "llatte_mla_dhen": {
+      "hit_at_10": 0.0118025751,
+      "hit_at_10_std": 0.0008760693,
+      "ndcg_at_10": 0.0058081029,
+      "ndcg_at_10_std": 0.0002611204
+    }
+  },
+  "relative_ndcg_change_percent": 49.8069138,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:llatte",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2601.20083-llatte/metrics/movielens-100k-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

@@ -42,6 +42,10 @@ class EvolutionConfig:
     confidence_z: float = 1.0
     retries: int = 1
     gpu_slots: int = 1
+    trial_timeout_seconds: int = 3600
+    gpu_memory_per_trial_mb: int | None = None
+    candidate_generator_command: tuple[str, ...] = ()
+    candidate_timeout_seconds: int = 300
 
     def validate(self) -> None:
         from .providers import get_provider
@@ -54,8 +58,13 @@ class EvolutionConfig:
             raise ValueError("at least one seed is required")
         if self.cpu_threads is not None and self.cpu_threads < 1:
             raise ValueError("cpu threads must be positive")
-        if min(self.promotion_min_seeds, self.gpu_slots) < 1 or self.retries < 0:
+        if min(
+            self.promotion_min_seeds, self.gpu_slots, self.trial_timeout_seconds,
+            self.candidate_timeout_seconds,
+        ) < 1 or self.retries < 0:
             raise ValueError("promotion_min_seeds/gpu_slots must be positive and retries non-negative")
+        if self.gpu_memory_per_trial_mb is not None and self.gpu_memory_per_trial_mb < 1:
+            raise ValueError("gpu_memory_per_trial_mb must be positive")
         if min(self.maximum_examples, self.agent_episodes) < 1:
             raise ValueError("maximum examples and agent episodes must be positive")
         if self.benchmark_suite not in {"core", "public", "unirank"}:
@@ -187,6 +196,9 @@ class EvolutionResult:
         raw_config["output_dir"] = Path(raw_config["output_dir"])
         raw_config["resume_dir"] = Path(raw_config["resume_dir"]) if raw_config.get("resume_dir") else None
         raw_config["seeds"] = tuple(raw_config["seeds"])
+        raw_config["candidate_generator_command"] = tuple(
+            raw_config.get("candidate_generator_command", ())
+        )
         loaded_config = config or EvolutionConfig(**raw_config)
         result = cls(
             payload["run_id"], loaded_config,

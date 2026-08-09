@@ -26,7 +26,13 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
     }
     assert actual == expected
 
-    root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    research_manifest = json.loads(
+        (ROOT / "docs" / "research-manifest.json").read_text(encoding="utf-8")
+    )
+    manifest_adapter_keys = {
+        paper["key"] for paper in research_manifest["papers"]
+        if isinstance(paper.get("adapter"), dict)
+    }
     main_index = (DOCS / "README.md").read_text(encoding="utf-8")
     company = (DOCS / "catalog" / "by-company.md").read_text(encoding="utf-8")
     month = (DOCS / "catalog" / "by-month.md").read_text(encoding="utf-8")
@@ -42,7 +48,7 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
     post_training_reproductions = {"sis", "off-context-grpo", "dynamic-rubric"}
     for adapter in adapters:
         slug = _slug(adapter)
-        assert f"`{adapter.key}`" in root_readme
+        assert adapter.key in manifest_adapter_keys
         assert f"({slug}/README.md)" in main_index
         catalog_link = f"(../{slug}/README.md)"
         if adapter.paper.track == "recommendation":

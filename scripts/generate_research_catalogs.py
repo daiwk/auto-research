@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from collections import defaultdict
@@ -14,10 +15,6 @@ DOCS = ROOT / "docs"
 sys.path.insert(0, str(ROOT / "src"))
 
 from auto_research.reproductions.registry import list_adapters
-ROW = re.compile(
-    r"^\| (?P<topic>[^|]+) \| \[(?P<title>[^\]]+)\]\((?P<link>[^)]+)\) "
-    r"\| (?P<info>[^|]+) \| (?P<code>[^|]+) \| `(?P<key>[^`]+)` \|$"
-)
 BACKGROUND_HEADING = "### 背景与主要改动"
 BROWSE_INTROS = {
     "organization": (
@@ -31,117 +28,6 @@ BROWSE_INTROS = {
     "year": (
         "按首次公开年份浏览；同年论文按日期倒序排列，每篇独占一行并附主要方法简介。"
     ),
-}
-
-
-# arXiv/API 或原始资料页核对后固化的一作。站点构建不依赖网络；新增论文必须先
-# 补这里，避免把公司/机构误当作者，也避免 GitHub Actions 生成结果漂移。
-FIRST_AUTHORS = {
-    "post-training": {
-        "ppo-rlhf": "Long Ouyang", "constitutional-ai": "Yuntao Bai",
-        "rrhf": "Zheng Yuan", "raft": "Hanze Dong", "slic-hf": "Yao Zhao",
-        "dpo": "Rafael Rafailov", "minillm": "Yuxian Gu",
-        "gkd": "Rishabh Agarwal", "steerlm": "Yi Dong", "remax": "Ziniu Li",
-        "ipo": "Mohammad Gheshlaghi Azar", "spin": "Zixiang Chen",
-        "kto": "Kawin Ethayarajh", "grpo": "Zhihong Shao",
-        "rloo": "Arash Ahmadian", "orpo": "Jiwoo Hong", "simpo": "Yu Meng",
-        "reinforce-plus": "Jian Hu", "dapo": "Qiying Yu",
-        "dr-grpo": "Zichen Liu", "vapo": "Yu Yue", "gspo": "Chujie Zheng",
-        "gppo": "Zhenpeng Su", "chord": "Wenhao Zhang", "icepop": "Ling Team",
-        "opsd": "Siyan Zhao", "luspo": "Fanfan Liu", "opcd": "Tianzhu Ye",
-        "lightning-opd": "Yecheng Wu", "gprl": "Muhammad Umer",
-        "kpop": "Ang Li", "coba-rl": "Pengxiang Cai", "taco": "Xiuyi Lou",
-        "ripo": "Zhicheng Cai", "armor": "Kexin Huang", "tcr": "Xubo Liu",
-        "cort": "Bo-Wen Zhang", "relay-opd": "Haolei Xu", "reco-grpo": "Junoh Park",
-        "flux-opd": "Yuran Wang", "beta-opsd": "Jiawei Xu",
-        "online-icepop": "Jian Hu", "tis": "Feng Yao",
-        "vad": "Kangning Zhang",
-        "dash": "Zhiyan Hou",
-        "distilled-rl": "Chen Wang", "u-opsd": "Yijiang Li",
-        "rp-opsd": "Xinye Wang", "pcsd": "Chunji Lv",
-        "adrs": "Ranxu Zhang", "mopd": "Wenhan Ma", "opd-lm": "Xingyu Su",
-        "rlaif": "Harrison Lee", "process-supervision": "Hunter Lightman",
-        "math-shepherd": "Peiyi Wang", "self-rewarding": "Weizhe Yuan",
-        "luffy": "Jianhao Yan", "ttrl": "Yuxin Zuo",
-        "absolute-zero": "Andrew Zhao", "intuitor": "Xuandong Zhao",
-        "cispo": "MiniMax", "spiral": "Bo Liu", "conspo": "Feng Zhang",
-        "minirl": "Chujie Zheng", "missing-old-logits": "Zhong Guan",
-        "stare": "Haipeng Luo",
-    },
-    "agent-research": {
-        "webgpt": "Reiichiro Nakano", "saycan": "Michael Ahn",
-        "mrkl": "Ehud Karpas", "react": "Shunyu Yao", "pal": "Luyu Gao",
-        "toolformer": "Timo Schick", "art": "Bhargavi Paranjape",
-        "reflexion": "Noah Shinn", "hugginggpt": "Yongliang Shen",
-        "self-refine": "Aman Madaan", "generative-agents": "Joon Sung Park",
-        "tree-of-thoughts": "Shunyu Yao", "critic": "Zhibin Gou",
-        "voyager": "Guanzhi Wang", "rewoo": "Binfeng Xu", "metagpt": "Sirui Hong",
-        "autogen": "Qingyun Wu", "lats": "Andy Zhou", "memgpt": "Charles Packer",
-        "swe-agent": "John Yang", "openhands": "Xingyao Wang", "loop": "Kevin Chen",
-        "search-r1": "Bowen Jin", "ragen": "Zihan Wang", "gigpo": "Lang Feng",
-        "webagent-r1": "Zhepei Wei", "memtool": "Elias Lumer",
-        "agent-lightning": "Xufang Luo", "mua-rl": "Weikang Zhao",
-        "legomem": "Dongge Han", "pearl": "Qihao Wang", "u-mem": "Xinle Wu",
-        "steppo": "Daoyu Wang", "turn-opd": "Yuhang Zhou", "seed": "Jinyang Wu",
-        "cast": "Yu Wang", "hiskill": "Yu Hao", "unimem": "Siyu Xia",
-        "skillrise": "Zhiyuan Yao", "cam-df": "Yicheng Feng", "tapo": "Cong Li",
-        "grsd": "Binbin Zheng",
-        "os-shepherd": "Qiushi Sun",
-        "envace": "Zishan Xu",
-        "agent-opsd": "Zi-Han Wang", "ocsd": "Yi Yang",
-        "vermem": "Xiaolong Sun", "coevo-mem": "Bowen Ye",
-        "deepresearcher": "Yuxiang Zheng", "retool": "Jiazhan Feng",
-        "toolrl": "Cheng Qian", "sage": "Jiongxiao Wang",
-        "memskill": "Haozhen Zhang", "memento-skills": "Huichi Zhou",
-        "searl": "Xinshun Feng", "agent0": "Peng Xia",
-        "agent-r1": "Mingyue Cheng", "camel": "Guohao Li",
-        "toolbench": "Qiantong Xu", "gaia": "Grégoire Mialon",
-    },
-}
-
-
-# 论文信息块通常按作者署名顺序列出单位，因此默认取“公司 / 机构”字段的第一个单位。
-# 对原字段只写作者、团队或未给出单位的论文，在这里固化经论文首页/项目页核对的
-# 第一署名单位。这个映射只负责消歧，不在 GitHub Actions 构建时访问网络。
-FIRST_AUTHOR_AFFILIATION_OVERRIDES = {
-    "post-training": {
-        "stare": "Tsinghua University",
-        "conspo": "Beijing Institute of Technology",
-        "luspo": "Meituan",
-        "armor": "University of Science and Technology of China",
-        "vapo": "ByteDance Seed",
-        "online-icepop": "Ant Group",
-        "kpop": "Ling / Ring Team",
-        "gppo": "Alibaba Group",
-        "chord": "Alibaba Group",
-        "tcr": "论文未列机构",
-        "u-opsd": "University of California, San Diego",
-        "taco": "Johns Hopkins University",
-        "minirl": "Alibaba Qwen Team",
-        "pcsd": "论文未列机构",
-        "adrs": "University of Science and Technology of China",
-        "ripo": "Tsinghua University",
-        "missing-old-logits": "Tianjin University",
-        "distilled-rl": "Nankai University",
-        "reinforce-plus": "Independent researchers",
-    },
-    "agent-research": {
-        "camel": "King Abdullah University of Science and Technology",
-        "ocsd": "Nanjing University",
-        "agent-r1": "University of Science and Technology of China",
-        "steppo": "University of Science and Technology of China",
-        "agent0": "University of North Carolina at Chapel Hill",
-        "gigpo": "Nanyang Technological University",
-        "agent-opsd": "Tsinghua University",
-        "memskill": "Nanyang Technological University",
-        "toolbench": "Tsinghua University",
-        "retool": "ByteDance Seed",
-        "coevo-mem": "论文未列机构",
-        "searl": "Shanghai AI Laboratory",
-        "gaia": "Meta AI",
-        "toolrl": "University of Illinois Urbana-Champaign",
-        "sage": "University of Wisconsin–Madison",
-    },
 }
 
 
@@ -398,56 +284,79 @@ def read_method_summary(module: str, link: str) -> str:
 
 
 def read_rows(module: str) -> list[dict[str, str]]:
+    manifest = json.loads(
+        (DOCS / "research-manifest.json").read_text(encoding="utf-8")
+    )
     rows = []
-    for line in (DOCS / module / "catalog.md").read_text(encoding="utf-8").splitlines():
-        match = ROW.match(line)
-        if not match:
+    for paper in manifest["papers"]:
+        if paper["domain"] != module:
             continue
-        row = {key: value.strip() for key, value in match.groupdict().items()}
-        date = re.search(r"(\d{4})-\d{2}-\d{2}", row["info"])
-        row["year"] = date.group(1) if date else "未标注"
-        row["date"] = date.group(0) if date else "未标注"
-        row["institution"] = (
-            row["info"][: date.start()].rstrip("，, ") if date else row["info"]
+        detail_path = paper["detail_path"]
+        link = (
+            detail_path.removeprefix(f"{module}/")
+            if detail_path.startswith(f"{module}/")
+            else f"../{detail_path}"
         )
-        try:
-            row["first-author"] = FIRST_AUTHORS[module][row["key"]]
-        except KeyError as error:
-            raise ValueError(
-                f"{module}/{row['key']} missing verified first-author metadata"
-            ) from error
-        row["organization"] = first_author_affiliation(module, row)
-        row["summary"] = read_method_summary(module, row["link"])
-        rows.append(row)
+        date = paper.get("published") or "未标注"
+        author = paper.get("first_author")
+        organization = paper.get("first_author_affiliation")
+        if not author or not organization:
+            raise ValueError(f"{module}/{paper['key']} has incomplete author metadata")
+        rows.append({
+            "topic": (paper.get("topic") or ["其他"])[0],
+            "title": paper["title"],
+            "paper_url": paper["paper_url"],
+            "link": link,
+            "info": f"{organization}，{date}",
+            "code": paper.get("code") or "未发现官方代码",
+            "key": paper["key"],
+            "year": date[:4] if date != "未标注" else date,
+            "date": date,
+            "institution": organization,
+            "first-author": author,
+            "organization": organization,
+            "summary": read_method_summary(module, link),
+        })
     return rows
 
 
-def _paper_affiliation_field(module: str, link: str) -> str:
-    page = DOCS / module / link
-    text = page.read_text(encoding="utf-8")
-    match = re.search(r"^\| 公司 / 机构 \| ([^|]+) \|$", text, re.MULTILINE)
-    if not match:
-        raise ValueError(f"{page} missing company/institution metadata")
-    return match.group(1).strip()
+def render_method_index(module: str, label: str) -> str:
+    """Generate the compact method table from the unified manifest."""
+
+    lines = [
+        f"# {label}论文与资料索引",
+        "",
+        "本页由 `docs/research-manifest.json` 自动生成；论文元数据只在统一 manifest",
+        "维护。背景、架构、公式、原文效果和本地实验请进入独立详情页。",
+        "",
+        "## 已实现论文与资料",
+        "",
+        "| 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |",
+        "|---|---|---|---|---|",
+    ]
+    for row in _date_descending(read_rows(module)):
+        code = row["code"]
+        if code.startswith("http"):
+            code = f"[已开源]({code})"
+        lines.append(
+            f"| {row['topic']} | [{row['title']}]({row['link']}) | "
+            f"{row['institution']}，{row['date']} | {code} | `{row['key']}` |"
+        )
+    lines.extend([
+        "",
+        "分类浏览：",
+        "",
+        "- [按机构/公司/学校](catalog/by-organization.md)",
+        "- [按主题](catalog/by-topic.md)",
+        "- [按年份](catalog/by-year.md)",
+        "",
+    ])
+    return "\n".join(lines)
 
 
 def _normalize_affiliation(value: str) -> str:
     value = value.strip()
     return AFFILIATION_ALIASES.get(value, value)
-
-
-def first_author_affiliation(module: str, row: dict[str, str]) -> str:
-    """Return the first listed affiliation of the paper's first author."""
-
-    override = FIRST_AUTHOR_AFFILIATION_OVERRIDES[module].get(row["key"])
-    if override:
-        return _normalize_affiliation(override)
-    field = _paper_affiliation_field(module, row["link"])
-    if any(marker in field for marker in INVALID_AFFILIATION_MARKERS):
-        raise ValueError(
-            f"{module}/{row['key']} needs a verified first-author affiliation override"
-        )
-    return _normalize_affiliation(field.split(" / ", 1)[0])
 
 
 def render(module: str, dimension: str, title: str) -> str:
@@ -746,6 +655,9 @@ def main() -> None:
         ("post-training", "LLM 后训练"),
         ("agent-research", "Agent 研究"),
     ):
+        (DOCS / module / "catalog.md").write_text(
+            render_method_index(module, label), encoding="utf-8"
+        )
         target = DOCS / module / "catalog"
         target.mkdir(exist_ok=True)
         for dimension, title in (

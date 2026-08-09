@@ -1,9 +1,41 @@
 {
   "dataset": "MovieLens-100K",
   "protocol": "chronological leave-two-out, full-catalog ranking",
-  "seeds": [42, 43, 44],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
   "steps_per_seed": 320,
-  "popularity": {"hit_at_10": 0.0600858369, "ndcg_at_10": 0.0296919777, "head_share_at_10": 1.0},
-  "sasrec": {"hit_at_10": 0.0582975680, "hit_at_10_std": 0.0039504152, "ndcg_at_10": 0.0293251450, "ndcg_at_10_std": 0.0005091668, "head_share_at_10": 0.9777539342},
-  "ndcg_gain_percent": -1.2354603907
+  "popularity": {
+    "hit_at_10": 0.0600858369,
+    "ndcg_at_10": 0.0296919777,
+    "head_share_at_10": 1.0
+  },
+  "sasrec": {
+    "hit_at_10": 0.058297568,
+    "hit_at_10_std": 0.0039504152,
+    "ndcg_at_10": 0.029325145,
+    "ndcg_at_10_std": 0.0005091668,
+    "head_share_at_10": 0.9777539342
+  },
+  "ndcg_gain_percent": -1.2354603907,
+  "schema_version": 2,
+  "manifest_ref": "reproduction:sasrec",
+  "evaluation_protocol": {
+    "tier": "l3_paper_pipeline",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/1808.09781-sasrec/metrics/movielens-100k-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

@@ -103,7 +103,9 @@ auto-research evolve \
 ```
 
 `--retries` 控制失败 trial 的重试次数；CUDA 下 `--gpu-slots` 表示真正可并发的独立
-GPU 槽位数，控制器会限制 workers，避免多个进程无约束争抢同一张卡。冠军按照
+GPU 槽位数；`--gpu-memory-per-trial-mb` 还会根据启动时的可用显存收紧并发数。
+生产 evaluator 的每个 trial 都在独立进程运行，`--trial-timeout-seconds` 到期会真正
+终止进程，而不只是把仍在后台运行的任务标记失败。冠军按照
 `fitness - z × standard_error` 排序；当 evaluator 提供 `fitness_std` 时，
 `--confidence-z` 会惩罚高方差候选。正式结论建议使用：
 
@@ -129,6 +131,19 @@ auto-research candidate promote --id paper-op \
 单独留档。最后一步必须显式传入 `--approve`，且只能写入仓库内尚不存在的目录。
 这提供了“论文 → 结构化候选 → 隔离验证 → 人工批准 → 正式注册”的基础链路，
 但不会把未审代码自动放进训练主进程。
+
+也可以让一次 evolve 自动调用外部候选生成器：
+
+```bash
+auto-research evolve ... \
+  --candidate-generator-command "python tools/design_candidate.py" \
+  --candidate-timeout-seconds 300
+```
+
+控制器会先写出 `paper-candidates.json`（包含论文来源、实现状态、接口约束和禁止声明），
+再把该路径作为生成器最后一个参数。生成器输出 `CandidatePluginSpec` JSON；自动路径
+拒绝生成器自带的执行命令，只做语法检查，且产物不会自动 promote 或参加当前轮训练。这个边界保证“网上新论文”
+和“已经可执行的论文算子”在报告中不会混淆。
 
 ```mermaid
 flowchart LR
