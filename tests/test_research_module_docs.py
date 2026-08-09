@@ -261,6 +261,23 @@ def test_recommendation_and_foundation_method_indexes_are_in_navigation():
         assert "| 未标注" not in index
 
 
+def test_all_research_domains_show_explicit_overview_and_method_index_entries():
+    navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
+
+    # Material treats README.md as a clickable section index and hides its nav
+    # entry when navigation.indexes is enabled. Keep every research domain
+    # structurally identical and make both entries visible in the sidebar.
+    assert "navigation.indexes" not in navigation
+    for overview, catalog in (
+        ("reproductions/industrial.md", "reproductions/catalog.md"),
+        ("foundation-models/README.md", "foundation-models/catalog.md"),
+        ("post-training/README.md", "post-training/catalog.md"),
+        ("agent-research/README.md", "agent-research/catalog.md"),
+    ):
+        assert f"- 研究总览: {overview}" in navigation
+        assert f"- 方法索引: {catalog}" in navigation
+
+
 def test_sidebar_hides_global_and_per_paper_indexes_but_keeps_paper_pages():
     navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
 

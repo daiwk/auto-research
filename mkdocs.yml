@@ -61,7 +61,6 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
-    - navigation.indexes
     - navigation.top
     - toc.follow
     - search.suggest
