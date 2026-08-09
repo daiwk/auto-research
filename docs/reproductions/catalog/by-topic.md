@@ -55,6 +55,7 @@
 - [HRPO](../2608.00750-hrpo/README.md)：将序列总奖励拆成层级 Semantic ID 前缀的 residual credit-to-go，以细粒度组相对更新改善生成推荐轨迹。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
+- [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：以分层协同 SID 统一检索 token 与可重建的内容 embedding，减少推荐模型 I/O。
 - [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
 - [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 和并行价值码同时表达商品语义、全局价值与 query 条件价值，再联合训练 VRM。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用两级 RQ-VAE 建立 SID 模态，联合记忆驱动意图与 latent reasoning 生成可直接检索的商品标识。
@@ -74,6 +75,7 @@
 - [GRC](../2602.23639-grc/README.md)：用结构化反思标签、轨迹 GRPO 和熵调度纠正 Semantic ID 自回归错误。
 - [GR4AD](../2602.22732-gr4ad/README.md)：结合用户感知 Semantic ID、LazyAR 和可变长度生成完成广告召回。
 - [SIGMA](../2602.22913-sigma/README.md)：以多视角 grounding 和混合 SID/ID token 进行多任务生成式推荐。
+- [MFLI](../2602.16124-mfli/README.md)：把语义、新鲜度等多个索引 facet 联合学习，并以请求相关 allocation 完成快速召回。
 - [S-GRec](../2602.10606-s-grec/README.md)：用 LLM judge 生成个性化偏好监督，再通过 A2PO 蒸馏到 SID 生成器。
 - [DOS](../2602.04460-dos/README.md)：以协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、Semantic ID 和跨行为融合统一多个电商生成推荐场景。
@@ -93,6 +95,7 @@
 
 ### 排序网络与长序列
 - [CCFormer](../2607.28070-ccformer/README.md)：以字段分离的 ID/content 编码和门控融合增强冷内容泛化，再分层压缩远期 token、保留近期行为细节。
+- [HA-MoE](../2607.27577-ha-moe/README.md)：用内容异构性控制多门控 MoE，在同一排序器内平衡通用与领域专长信号。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
 - [TWICE](../2607.25404-twice/README.md)：以点击/转化双时钟和单调 delay CDF 处理长期转化反馈未成熟问题。
 - [CORE](../2607.24417-core-relevance/README.md)：将有序相关性拆成 High/Non-High 与条件 Mid/Low 两道边界，并把 step-GRPO reasoning 经 PostCoT 蒸馏给在线双头排序器。
@@ -109,7 +112,9 @@
 - [HAP](../2603.03770-hap/README.md)：按候选难度分配轻量或强分支并对齐异构预排输出。
 - [OneRanker](../2603.02999-oneranker/README.md)：用 fake item token 和一致性损失统一 generation/value/ranking。
 - [HiSAC](../2602.21009-hisac/README.md)：用层级投票压缩超长历史，再以 query-conditioned soft routing 选择兴趣 agent。
+- [ULTRA-HSTU](../2602.16986-ultra-hstu/README.md)：以半局部 attention、LBSL 逐层扩窗和 Mixture of Transducers 扩展 16k 用户历史。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一网络中融合 dense 特征交互和序列建模，并按预算选择训练模块。
+- [Kunlun](../2602.10016-kunlun/README.md)：在每层组合 GDPA Transformer 与分层 seed/global interaction block，并以 CompSkip 稳定深层训练。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task token 化，让领域与任务参与每层特征交互。
 - [MSN](../2602.07526-msn/README.md)：把大容量参数放入稀疏 Product-Key Memory，只激活 top-k 槽位控制计算。
 - [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：用 mixing/reverting、双粒度 SwiGLU、interval residual 和辅助监督扩展工业精排。
@@ -165,6 +170,7 @@
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：先用 SFT 学习广告主列表，再以 GRPO 奖励优化列表质量。
 - [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型交替更新减少偏差。
 - [UniVA](../2605.05803-univa/README.md)：在请求内归一化 eCPM reward，并交替执行监督学习与强化学习。
+- [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：用 Actor–Critic 生成和审查配置，以 Online agent 回收实验反馈并由 SkillHub 跨轮复用。
 - [LWGR](../2605.18771-lwgr/README.md)：用 reference confidence 约束融合结果，并通过 primal-dual 更新拉格朗日乘子。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把源域 teacher 知识蒸馏到目标域，减少跨域冷启动监督需求。
 - [GR4AD](../2602.22732-gr4ad/README.md)：通过 RSPO 优化可变长度广告生成，并结合 LazyAR 降低推理成本。

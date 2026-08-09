@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.18796](https://arxiv.org/abs/2607.18796) |
 | 公司/机构 | Taobao & Tmall Group of Alibaba / Zhejiang University |
 | 首次公开日期 | 2026-07-21（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `tsgr` |
 | 本地复现代码 | [`src/auto_research/reproductions/tsgr/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/tsgr/) |
 

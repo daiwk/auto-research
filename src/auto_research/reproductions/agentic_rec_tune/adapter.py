@@ -1,0 +1,6 @@
+from ..base import OnlineABEvidence, PaperMetadata, ReproductionAdapter, ReproductionFidelity
+from ..registry import register
+from .experiment import reproduce_agentic_rec_tune
+from .report import render
+
+ADAPTER = register(ReproductionAdapter(key="agentic-rec-tune", paper=PaperMetadata(arxiv_id="2604.26969", title="AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization", url="https://arxiv.org/abs/2604.26969", track="recommendation", organization="Google / Discover", published="2026-04-21", topics=("agent", "auto-research", "retrieval", "ranking", "reranking"), online_ab=(OnlineABEvidence("Google Discover value retrieval", "Engagement 2", 0.90, "live-traffic A/B", source_url="https://arxiv.org/html/2604.26969v2#S5", source_location="Section 5 Table 1", significance="p<0.05", retrieved_at="2026-08-09"), OnlineABEvidence("Google Discover diversity reranking", "Diversity", 3.43, "live-traffic A/B", source_url="https://arxiv.org/html/2604.26969v2#S5", source_location="Section 5 Table 1", significance="p<0.05", retrieved_at="2026-08-09"))), run=reproduce_agentic_rec_tune, render=render, fidelity=ReproductionFidelity.CORE_MECHANISM, omitted_core_components=("Google experiment scheduling APIs", "production Actor/Critic/Insight/Online agents")))

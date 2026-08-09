@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2603.26380](https://arxiv.org/abs/2603.26380) |
 | 公司/机构 | Peking University / Huawei Technologies |
 | 首次公开日期 | 2026-03-27（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `switch-attention` |
 | 本地复现代码 | [`src/auto_research/reproductions/switch_attention/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/switch_attention/) |
 

@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2606.25147](https://arxiv.org/abs/2606.25147) |
 | 公司/机构 | Google DeepMind / YouTube |
 | 首次公开日期 | 2026-06-23（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码；GitHub 同名仓库与该论文无关（核查日期：2026-08-09） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `tokenminds` |
 | 本地复现代码 | [`src/auto_research/reproductions/tokenminds/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/tokenminds/) |
 

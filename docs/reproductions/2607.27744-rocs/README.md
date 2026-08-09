@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.27744](https://arxiv.org/abs/2607.27744) |
 | 公司/机构 | Meta AI |
 | 首次公开日期 | 2026-07-30（arXiv v1） |
-| 原文开源代码 | 是：[IKBO / FBGEMM](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) |
 | Adapter | `rocs` |
 | 本地复现代码 | [`src/auto_research/reproductions/rocs/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/rocs/) |
 

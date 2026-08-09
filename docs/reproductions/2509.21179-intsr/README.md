@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2509.21179](https://arxiv.org/abs/2509.21179) |
 | 公司/机构 | Alibaba / Amap |
 | 首次公开日期 | 2025-09-25（arXiv v1） |
-| 原文开源代码 | 否：未发现/未发布原作者官方代码仓库（核查日期：2026-08-08） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `intsr` |
 | 本地复现代码 | [`src/auto_research/reproductions/intsr/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/intsr/) |
 

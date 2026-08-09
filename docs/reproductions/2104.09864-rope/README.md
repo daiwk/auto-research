@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2104.09864](https://arxiv.org/abs/2104.09864) |
 | 公司/机构 | Zhuiyi Technology |
 | 首次公开日期 | 2021-04-20（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/ZhuiyiTechnology/roformer) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/ZhuiyiTechnology/roformer) |
 | Adapter | `rope` |
 | 本地复现代码 | [`src/auto_research/reproductions/rope/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/rope/) |
 

@@ -1,13 +1,15 @@
 # YouTube Music：打破新颖性与新鲜度反馈环
 
+> **Fidelity: 核心机制复现**。本地执行新鲜度感知的候选打分与公平对照；不复刻 YouTube 私有流量系统。
+
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.23749](https://arxiv.org/abs/2607.23749) |
 | 公司/机构 | YouTube Music / Google |
 | 首次公开日期 | 2026-07-26（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-07-29 未发现官方公开仓库 |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `youtube-freshness` |
 | 本地复现代码 | [`src/auto_research/reproductions/youtube_freshness/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/youtube_freshness/) |
 

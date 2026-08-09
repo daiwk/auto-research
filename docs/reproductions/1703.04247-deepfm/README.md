@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 1703.04247](https://arxiv.org/abs/1703.04247) |
 | 公司/机构 | Huawei Noah's Ark Lab |
 | 首次公开日期 | 2017-03-13（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `deepfm` |
 | 本地复现代码 | [`src/auto_research/reproductions/deepfm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/deepfm/) |
 

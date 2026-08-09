@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2608.02148](https://arxiv.org/abs/2608.02148) |
 | 公司/机构 | ByteDance / Douyin |
 | 首次公开日期 | 2026-08-03（arXiv v1） |
-| 原文开源代码 | 否：未发现/未发布官方代码（核查日期：2026-08-08） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `dme` |
 | 本地复现代码 | [`src/auto_research/reproductions/dme/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/dme/) |
 

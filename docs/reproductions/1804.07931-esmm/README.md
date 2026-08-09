@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 1804.07931](https://arxiv.org/abs/1804.07931) |
 | 公司/机构 | Alibaba |
 | 首次公开日期 | 2018-04-21（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `esmm` |
 | 本地复现代码 | [`src/auto_research/reproductions/esmm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/esmm/) |
 

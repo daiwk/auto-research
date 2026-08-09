@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2403.16952](https://arxiv.org/abs/2403.16952) |
 | 公司/机构 | University of Cambridge / Shanghai AI Laboratory |
 | 首次公开日期 | 2024-03-25（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/yegcjs/mixinglaws) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/yegcjs/mixinglaws) |
 | Adapter | `data-mixing-laws` |
 | 本地复现代码 | [`src/auto_research/reproductions/data_mixing_laws/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/data_mixing_laws/) |
 

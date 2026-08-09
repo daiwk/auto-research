@@ -9,7 +9,7 @@
 | 论文链接 | [RecSys 2016 paper](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/) |
 | 公司/机构 | Google / YouTube |
 | 首次公开日期 | 2016-09-15（ACM RecSys 2016） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `youtube-dnn` |
 | 本地复现代码 | [`src/auto_research/reproductions/youtube_dnn/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/youtube_dnn/) |
 

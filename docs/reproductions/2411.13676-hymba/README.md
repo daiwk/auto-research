@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2411.13676](https://arxiv.org/abs/2411.13676) |
 | 公司/机构 | NVIDIA |
 | 首次公开日期 | 2024-11-20（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/NVlabs/hymba) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/NVlabs/hymba) |
 | Adapter | `hymba` |
 | 本地复现代码 | [`src/auto_research/reproductions/hymba/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/hymba/) |
 

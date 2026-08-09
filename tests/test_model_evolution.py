@@ -108,6 +108,16 @@ def test_latest_public_benchmark_operators_are_discoverable():
         "rankmixer", "加入 TokenMinds SID 用户 token", tokenminds
     )[0] == "rankmixer_tokenminds"
 
+    priority = discover_papers(
+        "HA-MoE dual SID MFLI Kunlun ULTRA-HSTU", 100, allow_network=False
+    )
+    priority_map = {paper.arxiv_id: paper.architecture for paper in priority}
+    assert priority_map["2607.27577"] == "rankmixer_ha_moe"
+    assert priority_map["2607.24865"] == "rankmixer_dual_sid"
+    assert priority_map["2602.16124"] == "rankmixer_mfli"
+    assert priority_map["2602.10016"] == "rankmixer_kunlun"
+    assert priority_map["2602.16986"] == "rankmixer_ultra_hstu"
+
     llm = discover_papers(
         "dynamic rubric off-context GRPO", 20, allow_network=False, track="llm"
     )

@@ -60,6 +60,17 @@ pytest tests/test_research_module_docs.py
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 - 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
+## Google / Meta 正文证据补漏（6 个 P0 adapter）
+
+- `ha-moe` · [Google Discover HA-MoE](2607.27577-ha-moe/README.md)：异构性门控多专家；7 天 1% 流量 A/B。
+- `dual-sid` · [YouTube Dual-purpose Semantic IDs](2607.24865-dual-sid/README.md)：SID 同时表达协同身份并重建内容 embedding。
+- `agentic-rec-tune` · [Google Discover AgenticRecTune](2604.26969-agentic-rec-tune/README.md)：Actor–Critic–SkillHub 多轮推荐优化闭环。
+- `mfli` · [Meta MFLI](2602.16124-mfli/README.md)：多切面可学习实时检索索引。
+- `kunlun` · [Meta Kunlun](2602.10016-kunlun/README.md)：GDPA、分层 seed pooling 与 CompSkip 的统一深层架构。
+- `ultra-hstu` · [Meta ULTRA-HSTU](2602.16986-ultra-hstu/README.md)：semi-local attention、LBSL 与 Mixture of Transducers。
+
+这批候选均由机构/主题先召回，再逐篇检查正文和表格；不再要求摘要先出现 `A/B` 关键词。六篇均完成公开数据实验、固定指标、论文原图与 evolve 可执行映射（AgenticRecTune 对应控制器回归样例，而非伪造网络结构）。
+
 ## 本轮全域 P0 补齐（19 个 adapter）
 
 - `glorank` · [GloRank](2604.25291-glorank/README.md)

@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [NeurIPS 2023 Oral](https://arxiv.org/abs/2304.08485) |
 | 公司/机构 | University of Wisconsin-Madison / Microsoft Research / Columbia University |
 | 首次公开日期 | 2023-04-17（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/haotian-liu/LLaVA) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/haotian-liu/LLaVA) |
 | Adapter | `llava` |
 | 本地复现代码 | [`src/auto_research/reproductions/llava/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/llava/) |
 

@@ -1,13 +1,15 @@
 # TWICE：双时钟双窗口长延迟转化学习
 
+> **Fidelity: 核心机制复现**。本地执行双时钟、双窗口校正路径和统一评测，私有工业特征与服务未复刻。
+
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.25404](https://arxiv.org/abs/2607.25404) |
 | 公司/机构 | Kuaishou |
 | 首次公开日期 | 2026-07-28（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-07-29 未发现官方公开仓库 |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `twice` |
 | 本地复现代码 | [`src/auto_research/reproductions/twice/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/twice/) |
 

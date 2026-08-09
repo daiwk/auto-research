@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.28627](https://arxiv.org/abs/2607.28627) |
 | 公司/机构 | UIUC / Microsoft Research / Google DeepMind |
 | 首次公开日期 | 2026-07-30（arXiv v1） |
-| 原文开源代码 | 是：[avaxiao/ReToken](https://github.com/avaxiao/ReToken) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/avaxiao/ReToken) |
 | Adapter | `retoken` |
 | 本地复现代码 | [`src/auto_research/reproductions/retoken/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/retoken/) |
 

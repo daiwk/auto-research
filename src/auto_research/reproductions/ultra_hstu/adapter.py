@@ -1,0 +1,6 @@
+from ..base import OnlineABEvidence, PaperMetadata, ReproductionAdapter, ReproductionFidelity
+from ..registry import register
+from .experiment import reproduce_ultra_hstu
+from .report import render
+
+ADAPTER = register(ReproductionAdapter(key="ultra-hstu", paper=PaperMetadata(arxiv_id="2602.16986", title="Bending the Scaling Law Curve in Large-Scale Recommendation Systems", url="https://arxiv.org/abs/2602.16986", track="recommendation", organization="Meta", published="2026-02-19", topics=("ranking", "long-sequence", "scaling-law", "attention", "serving"), online_ab=(OnlineABEvidence("Meta recommendation", "consumption", 4.11, "multiple rigorous 30-day A/B tests; fully deployed", source_url="https://arxiv.org/html/2602.16986v2#S5.SS4", source_location="Section 5.4", experiment_duration="30 days", retrieved_at="2026-08-09"), OnlineABEvidence("Meta recommendation", "engagement", 8.0, "reported range +2% to +8%; fully deployed", source_url="https://arxiv.org/html/2602.16986v2#S5.SS4", source_location="Section 5.4", experiment_duration="30 days", retrieved_at="2026-08-09"))), run=reproduce_ultra_hstu, render=render, fidelity=ReproductionFidelity.CORE_MECHANISM, omitted_core_components=("16k histories and 18-layer production scale", "dynamic topology, mixed-precision kernels and Meta private logs")))

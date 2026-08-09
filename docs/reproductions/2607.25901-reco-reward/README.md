@@ -1,13 +1,15 @@
 # RecoReward：用推荐器奖励训练多模态描述
 
+> **Fidelity: 核心机制复现**。本地执行推荐奖励目标与公开数据对照，不声称复刻生产 reward pipeline。
+
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.25901](https://arxiv.org/abs/2607.25901) |
 | 公司/机构 | Kuaishou / Nankai University / Chinese Academy of Sciences |
 | 首次公开日期 | 2026-07-28（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-07-29 未发现官方公开仓库 |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `reco-reward` |
 | 本地复现代码 | [`src/auto_research/reproductions/reco_reward/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/reco_reward/) |
 
