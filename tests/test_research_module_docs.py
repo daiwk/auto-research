@@ -301,6 +301,32 @@ def test_markdown_sources_do_not_generate_the_same_directory_route():
     assert collisions == []
 
 
+def test_method_indexes_use_the_responsive_wrapping_table_style():
+    pages = (
+        "reproductions/catalog/README.md",
+        "foundation-models/catalog.md",
+        "post-training/catalog.md",
+        "agent-research/catalog.md",
+    )
+    for relative in pages:
+        text = (ROOT / "docs" / relative).read_text(encoding="utf-8")
+        assert '<div class="ar-method-index" markdown>' in text
+        assert "\n</div>\n" in text
+
+    stylesheet = (
+        ROOT / "docs" / "assets" / "stylesheets" / "extra.css"
+    ).read_text(encoding="utf-8")
+    assert ".ar-method-index table:not([class])" in stylesheet
+    assert "table-layout: fixed" in stylesheet
+    assert "overflow-wrap: anywhere" in stylesheet
+
+    built_page = ROOT / "site" / "foundation-models" / "catalog" / "index.html"
+    if built_page.exists():
+        html = built_page.read_text(encoding="utf-8")
+        assert '<div class="ar-method-index">' in html
+        assert '<div class="ar-method-index">\n<table>' in html
+
+
 def test_sidebar_hides_global_and_per_paper_indexes_but_keeps_paper_pages():
     navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
 

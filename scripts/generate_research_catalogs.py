@@ -392,6 +392,8 @@ def render_method_index(
         "",
         "## 已实现论文与资料",
         "",
+        '<div class="ar-method-index" markdown>',
+        "",
         f"| 方向 | 方法 | {organization_heading} | 原作者代码 | 本地入口 |",
         "|---|---|---|---|---|",
     ]
@@ -404,6 +406,7 @@ def render_method_index(
             f"| {row['topic']} | [{row['title']}]({link}) | "
             f"{row['institution']}，{row['date']} | {code} | `{row['key']}` |"
         )
+    lines.extend(["", "</div>"])
     browse_links = (
         (
             "- [按公司](by-company.md)",

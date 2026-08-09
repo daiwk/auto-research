@@ -5,6 +5,8 @@
 
 ## 已实现论文与资料
 
+<div class="ar-method-index" markdown>
+
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 网络架构 | [Role-Decoupled Attention Residuals](../reproductions/2608.01075-rd-attnres/README.md) | Kehan Wang（论文未列机构），2026-08-03 | 未发现官方代码 | `rd-attnres` |
@@ -45,6 +47,8 @@
 | 注意力与长上下文 | [RoFormer: Enhanced Transformer with Rotary Position Embedding](../reproductions/2104.09864-rope/README.md) | Zhuiyi Technology，2021-04-20 | [已开源](https://github.com/ZhuiyiTechnology/roformer) | `rope` |
 | 多模态基础模型 | [Learning Transferable Visual Models From Natural Language Supervision](../reproductions/2103.00020-clip/README.md) | OpenAI，2021-02-26 | [已开源](https://github.com/openai/CLIP) | `clip` |
 | 网络架构 | [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](../reproductions/2101.03961-switch-transformer/README.md) | Google Brain，2021-01-11 | [已开源](https://github.com/tensorflow/mesh) | `switch-transformer` |
+
+</div>
 
 分类浏览：
 

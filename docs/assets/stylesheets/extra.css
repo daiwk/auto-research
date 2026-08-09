@@ -31,6 +31,56 @@
   min-width: 100%;
 }
 
+/* Compact paper catalogs must keep every metadata column visible without a
+   horizontal scroll. Long English titles and affiliations may wrap freely. */
+.md-typeset .ar-method-index table:not([class]) {
+  display: table;
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.md-typeset .ar-method-index th,
+.md-typeset .ar-method-index td {
+  min-width: 0;
+  padding: 0.7rem 0.6rem;
+  vertical-align: top;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.md-typeset .ar-method-index th:nth-child(1) {
+  width: 12%;
+}
+
+.md-typeset .ar-method-index th:nth-child(2) {
+  width: 36%;
+}
+
+.md-typeset .ar-method-index th:nth-child(3) {
+  width: 25%;
+}
+
+.md-typeset .ar-method-index th:nth-child(4) {
+  width: 17%;
+}
+
+.md-typeset .ar-method-index th:nth-child(5) {
+  width: 10%;
+}
+
+@media screen and (max-width: 60rem) {
+  .md-typeset .ar-method-index table:not([class]) {
+    font-size: 0.68rem;
+  }
+
+  .md-typeset .ar-method-index th,
+  .md-typeset .ar-method-index td {
+    padding: 0.5rem 0.35rem;
+  }
+}
+
 .ar-hero {
   margin: -0.6rem 0 2.4rem;
   padding: 3.2rem clamp(1.4rem, 5vw, 4.4rem);

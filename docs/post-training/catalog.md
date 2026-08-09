@@ -5,6 +5,8 @@
 
 ## 已实现论文与资料
 
+<div class="ar-method-index" markdown>
+
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/DBtxy/DASH-OPSD) | `dash` |
@@ -76,6 +78,8 @@
 | 全排序偏好 | [RRHF](2304.05302-rrhf/README.md) | Alibaba DAMO Academy，2023-04-11 | [已开源](https://github.com/GanjinZero/RRHF) | `rrhf` |
 | AI 反馈安全对齐 | [Constitutional AI](2212.08073-constitutional-ai/README.md) | Anthropic，2022-12-15 | [已开源](https://github.com/anthropics/ConstitutionalHarmlessnessPaper) | `constitutional-ai` |
 | 经典 RLHF | [InstructGPT / PPO-RLHF](2203.02155-ppo-rlhf/README.md) | OpenAI，2022-03-04 | [已开源](https://github.com/openai/following-instructions-human-feedback) | `ppo-rlhf` |
+
+</div>
 
 分类浏览：
 
