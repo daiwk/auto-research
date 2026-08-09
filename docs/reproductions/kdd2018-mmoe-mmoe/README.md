@@ -9,7 +9,7 @@
 | 论文链接 | [KDD 2018 paper](https://research.google/pubs/modeling-task-relationships-in-multi-task-learning-with-multi-gate-mixture-of-experts/) |
 | 公司/机构 | Google |
 | 首次公开日期 | 2018-08-19（ACM KDD 2018） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `mmoe` |
 | 本地复现代码 | [`src/auto_research/reproductions/mmoe/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/mmoe/) |
 

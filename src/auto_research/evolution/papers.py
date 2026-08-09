@@ -18,6 +18,11 @@ INSTALLED_MUTATIONS = {
     "2607.17473": ("rankmixer_ramp", "RAMP 的个性化/公共双路径、特征可用性 masking 与 prediction alignment"),
     "2608.02738": ("rankmixer_kgd", "KGD 的可刷新行为知识、只读 transfer 与 Anchored Calibration Residual"),
     "2606.25147": ("rankmixer_tokenminds", "TokenMinds 的分层 SID 用户 token、稠密用户向量与安全门控融合"),
+    "2607.27577": ("rankmixer_ha_moe", "HA-MoE 依据样本异构性动态路由领域专长 experts"),
+    "2607.24865": ("rankmixer_dual_sid", "Dual-purpose SID 同时承载协同身份与可重建内容语义"),
+    "2602.16124": ("rankmixer_mfli", "MFLI 多切面可学习索引及请求相关 facet 分配"),
+    "2602.10016": ("rankmixer_kunlun", "Kunlun 的 GDPA、分层信息交互与 CompSkip"),
+    "2602.16986": ("rankmixer_ultra_hstu", "ULTRA-HSTU 的半局部注意力、LBSL 与 Mixture of Transducers"),
 }
 
 LLM_MUTATIONS = {
@@ -180,6 +185,12 @@ AGENT_MUTATIONS = {
 }
 
 FALLBACK_PAPERS = (
+    Paper("Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study", "HA-MoE uses heterogeneity-aware gates over specialized experts.", [], "2026-07-30", "https://arxiv.org/abs/2607.27577", "2607.27577"),
+    Paper("Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems", "Hierarchical collaborative IDs reconstruct semantic content representations.", [], "2026-07-26", "https://arxiv.org/abs/2607.24865", "2607.24865"),
+    Paper("AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization", "Actor, Critic, Insight, Skill and Online agents close the experiment feedback loop.", [], "2026-04-21", "https://arxiv.org/abs/2604.26969", "2604.26969"),
+    Paper("Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System", "Multiple jointly learned facets replace a static single-space ANN index.", [], "2026-02-18", "https://arxiv.org/abs/2602.16124", "2602.16124"),
+    Paper("Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design", "GDPA, hierarchical seed pooling and CompSkip unify deep sequence and feature interaction.", [], "2026-02-10", "https://arxiv.org/abs/2602.10016", "2602.10016"),
+    Paper("Bending the Scaling Law Curve in Large-Scale Recommendation Systems", "ULTRA-HSTU combines semi-local attention, LBSL and a mixture of transducers.", [], "2026-02-19", "https://arxiv.org/abs/2602.16986", "2602.16986"),
     Paper("TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems", "Dense user embeddings and hierarchical SID user tokens jointly serve downstream ranking.", [], "2026-06-23", "https://arxiv.org/abs/2606.25147", "2606.25147"),
     Paper("Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting", "Fresh/delayed target separation, lifecycle targeting and MMoE.", [], "2026-08-05", "https://arxiv.org/abs/2608.04455", "2608.04455"),
     Paper("LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation", "LLM semantic pseudo-count priors warm-start segmented Thompson sampling.", [], "2026-08-04", "https://arxiv.org/abs/2608.03382", "2608.03382"),

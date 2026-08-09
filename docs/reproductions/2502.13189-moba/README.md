@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2502.13189](https://arxiv.org/abs/2502.13189) |
 | 公司/机构 | Moonshot AI |
 | 首次公开日期 | 2025-02-18（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/MoonshotAI/MoBA) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/MoonshotAI/MoBA) |
 | Adapter | `moba` |
 | 本地复现代码 | [`src/auto_research/reproductions/moba/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/moba/) |
 

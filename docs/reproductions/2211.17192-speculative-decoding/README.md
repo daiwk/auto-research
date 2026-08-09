@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [ICML 2023 Oral](https://arxiv.org/abs/2211.17192) |
 | 公司/机构 | Google Research |
 | 首次公开日期 | 2022-11-30（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/google-research/google-research/tree/master/speculative_decoding) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/google-research/google-research/tree/master/speculative_decoding) |
 | Adapter | `speculative-decoding` |
 | 本地复现代码 | [`src/auto_research/reproductions/speculative_decoding/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/speculative_decoding/) |
 

@@ -811,7 +811,10 @@
             "YouTube recommendation live launch / full traffic / online A/B"
           ],
           "candidate_ids": [
-            "2606.25147"
+            "2606.25147",
+            "2607.27577",
+            "2607.24865",
+            "2604.26969"
           ],
           "candidate_discovery_gate": "affiliation-and-topic",
           "abstract_online_evidence_required": false,
@@ -824,7 +827,10 @@
             "Instagram recommendation deployed / full traffic / online A/B"
           ],
           "candidate_ids": [
-            "2607.12281"
+            "2607.12281",
+            "2602.16124",
+            "2602.10016",
+            "2602.16986"
           ],
           "candidate_discovery_gate": "affiliation-and-topic",
           "abstract_online_evidence_required": false,
@@ -882,6 +888,84 @@
           "status": "implemented",
           "key": "slimper",
           "doc": "reproductions/2607.12281-slimper/README.md"
+        },
+        {
+          "id": "2607.27577",
+          "title": "Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study",
+          "organization": "Google / Discover",
+          "evidence_gate": "quantified-online-ab",
+          "priority": "P0",
+          "priority_reason": "Google Discover heterogeneous ranking with 7-day 1% live-traffic A/B",
+          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 4.4", "Table 4"], "matched_terms": ["live experiments", "1% traffic", "7 days"]},
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "ha-moe",
+          "doc": "reproductions/2607.27577-ha-moe/README.md"
+        },
+        {
+          "id": "2607.24865",
+          "title": "Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems",
+          "organization": "Google DeepMind / YouTube",
+          "evidence_gate": "quantified-production-online",
+          "priority": "P0",
+          "priority_reason": "YouTube ranking and retrieval production deployment with quantified online gains",
+          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 4.2", "Table 1"], "matched_terms": ["online experiments", "production", "ranking", "retrieval"]},
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "dual-sid",
+          "doc": "reproductions/2607.24865-dual-sid/README.md"
+        },
+        {
+          "id": "2604.26969",
+          "title": "AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization",
+          "organization": "Google / Discover",
+          "evidence_gate": "quantified-online-ab",
+          "priority": "P0",
+          "priority_reason": "Google Discover agentic optimization with statistically significant live-traffic A/B",
+          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 5", "Table 1", "Table 3"], "matched_terms": ["online A/B testing", "live traffic", "p < 0.05"]},
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "agentic-rec-tune",
+          "doc": "reproductions/2604.26969-agentic-rec-tune/README.md"
+        },
+        {
+          "id": "2602.16124",
+          "title": "Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System",
+          "organization": "Meta",
+          "evidence_gate": "quantified-online-ab",
+          "priority": "P0",
+          "priority_reason": "Meta retrieval model with 7-day production A/B and QPS gain",
+          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 4.6"], "matched_terms": ["online A/B test", "7 days", "QPS"]},
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "mfli",
+          "doc": "reproductions/2602.16124-mfli/README.md"
+        },
+        {
+          "id": "2602.10016",
+          "title": "Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design",
+          "organization": "Meta",
+          "evidence_gate": "quantified-full-deployment",
+          "priority": "P0",
+          "priority_reason": "Deployed across major Meta Ads models with quantified topline gain",
+          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 5.5"], "matched_terms": ["deployed", "major Ads models", "topline"]},
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "kunlun",
+          "doc": "reproductions/2602.10016-kunlun/README.md"
+        },
+        {
+          "id": "2602.16986",
+          "title": "Bending the Scaling Law Curve in Large-Scale Recommendation Systems",
+          "organization": "Meta",
+          "evidence_gate": "quantified-online-ab-and-full-deployment",
+          "priority": "P0",
+          "priority_reason": "Meta recommendation with 30-day A/B and full deployment to billions of daily users",
+          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 5.4"], "matched_terms": ["30-day A/B", "fully deployed", "billions of daily active users"]},
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "ultra-hstu",
+          "doc": "reproductions/2602.16986-ultra-hstu/README.md"
         }
       ]
     }

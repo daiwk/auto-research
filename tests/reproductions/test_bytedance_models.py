@@ -26,6 +26,8 @@ def test_rankmixer_evolution_variants_preserve_candidate_score_shape():
         "rankmixer_longer_unimixer", "rankmixer_whale", "rankmixer_tmallgs",
         "rankmixer_long_history", "rankmixer_ramp",
         "rankmixer_tokenminds",
+        "rankmixer_ha_moe", "rankmixer_dual_sid", "rankmixer_mfli",
+        "rankmixer_kunlun", "rankmixer_ultra_hstu",
     ):
         model = build_model(architecture, Data, config)
         assert model.pair_scores(history, candidates).shape == (3, 5)

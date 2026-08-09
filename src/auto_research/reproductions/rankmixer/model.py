@@ -36,6 +36,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
         "rankmixer_ramp",
         "rankmixer_kgd",
         "rankmixer_tokenminds",
+        "rankmixer_ha_moe", "rankmixer_dual_sid", "rankmixer_mfli",
+        "rankmixer_kunlun", "rankmixer_ultra_hstu",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -115,6 +117,38 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 penalties.append(gates.mean())
             self.routing_penalty = torch.stack(penalties).mean()
             return torch.stack(outputs, dim=1)
+
+    class HeterogeneousMoEBlock(nn.Module):
+        """HA-MoE: sample-dependent gates over specialized token experts."""
+        def __init__(self):
+            super().__init__()
+            self.gate = nn.Linear(2 * config.dimensions, config.experts)
+            self.experts = nn.ModuleList([
+                nn.Sequential(nn.Linear(config.dimensions, 2 * config.dimensions), nn.GELU(), nn.Linear(2 * config.dimensions, config.dimensions))
+                for _ in range(config.experts)
+            ])
+            self.norm = nn.LayerNorm(config.dimensions)
+
+        def forward(self, values):
+            heterogeneity = torch.cat((values.mean(1), values.std(1)), dim=-1)
+            gates = torch.softmax(self.gate(heterogeneity), dim=-1)
+            outputs = torch.stack([expert(values) for expert in self.experts], dim=2)
+            return self.norm(values + (outputs * gates[:, None, :, None]).sum(2))
+
+    class KunlunBlock(nn.Module):
+        """GDPA-gated attention plus personalized interaction and CompSkip."""
+        def __init__(self):
+            super().__init__()
+            self.attention = nn.MultiheadAttention(config.dimensions, config.tokens, batch_first=True, dropout=0.0)
+            self.gate = nn.Linear(config.dimensions, config.tokens)
+            self.interaction = PerTokenSwiGLU()
+            self.norm = nn.LayerNorm(config.dimensions)
+
+        def forward(self, values):
+            attended, _ = self.attention(values, values, values)
+            gdpa = torch.sigmoid(self.gate(values.mean(1))).unsqueeze(-1)
+            update = gdpa * attended
+            return self.norm(values + 0.5 * update + 0.5 * self.interaction(values + update))
 
     class Block(nn.Module):
         def __init__(self):
@@ -287,6 +321,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 "rankmixer_longer_unimixer": UniMixerBlock,
                 "rankmixer_whale": WhaleBlock,
                 "rankmixer_tmallgs": TMallGSBlock,
+                "rankmixer_ha_moe": HeterogeneousMoEBlock,
+                "rankmixer_kunlun": KunlunBlock,
             }.get(kind, Block)
             self.blocks = nn.ModuleList([block_type() for _ in range(config.layers)])
             self.output = nn.Sequential(
@@ -320,6 +356,18 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 # representation intact at initialization, then learns how much
                 # discrete user-token signal the downstream ranker should use.
                 self.tokenminds_gate = nn.Parameter(torch.tensor(-3.0))
+            if kind in {"rankmixer_dual_sid", "rankmixer_mfli"}:
+                from ..industrial_2026 import hierarchical_codes
+                codes = hierarchical_codes(np.asarray(data.item_features), levels=3, width=min(8, item_count))
+                self.register_buffer("evolve_item_codes", torch.tensor(codes, dtype=torch.long))
+                self.evolve_code_embeddings = nn.ModuleList(
+                    nn.Embedding(min(8, item_count), config.dimensions) for _ in range(3)
+                )
+                self.evolve_code_gate = nn.Parameter(torch.tensor(-3.0))
+            if kind == "rankmixer_ultra_hstu":
+                self.ultra_attention = nn.MultiheadAttention(config.dimensions, config.tokens, batch_first=True, dropout=0.0)
+                self.ultra_transducers = nn.ModuleList([nn.Linear(config.dimensions, config.dimensions) for _ in range(3)])
+                self.ultra_router = nn.Linear(config.dimensions, 3)
             self.auxiliary_logits = None
             self.alignment_logits = None
             self.restricted_logits = None
@@ -359,6 +407,20 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 recent = 0.5 * local.mean(dim=1) + 0.5 * global_interest
             else:
                 recent = self.item(history[:, -8:]).mean(dim=1)
+            if kind == "rankmixer_ultra_hstu":
+                sequence = self.item(history)
+                local = sequence[:, -8:]
+                width = max(1, sequence.shape[1] // 4)
+                landmarks = torch.stack([
+                    sequence[:, start:start + width].mean(1)
+                    for start in range(0, sequence.shape[1], width)
+                ], dim=1)
+                sparse = torch.cat((local, landmarks), dim=1)
+                attended, _ = self.ultra_attention(sparse, sparse, sparse)
+                summary = attended[:, -1]
+                routes = torch.softmax(self.ultra_router(summary), dim=-1)
+                transduced = torch.stack([layer(summary) for layer in self.ultra_transducers], dim=1)
+                recent = recent + (routes.unsqueeze(-1) * transduced).sum(1)
             last = self.item(history[:, -1])
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)
@@ -371,6 +433,13 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 user_feature = user_feature + torch.sigmoid(
                     self.tokenminds_gate
                 ) * user_token
+            if kind in {"rankmixer_dual_sid", "rankmixer_mfli"}:
+                codes = self.evolve_item_codes[history]
+                sid_user = sum(
+                    embedding(codes[:, :, level]).mean(1)
+                    for level, embedding in enumerate(self.evolve_code_embeddings)
+                ) / len(self.evolve_code_embeddings)
+                user_feature = user_feature + torch.sigmoid(self.evolve_code_gate) * sid_user
             if kind == "rankmixer_kgd":
                 # Read-only cross-attention surrogate: behavioral knowledge is
                 # detached from downstream gradients; ACR owns the writable

@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2108.12409](https://arxiv.org/abs/2108.12409) |
 | 公司/机构 | University of Washington / Meta AI |
 | 首次公开日期 | 2021-08-27（arXiv v1） |
-| 原文开源代码 | 是：[原作者仓库](https://github.com/ofirpress/attention_with_linear_biases) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/ofirpress/attention_with_linear_biases) |
 | Adapter | `alibi` |
 | 本地复现代码 | [`src/auto_research/reproductions/alibi/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/alibi/) |
 

@@ -5026,6 +5026,95 @@
     },
     {
       "domain": "recommendation",
+      "key": "agentic-rec-tune",
+      "title": "AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization",
+      "paper_url": "https://arxiv.org/abs/2604.26969",
+      "detail_path": "reproductions/2604.26969-agentic-rec-tune/README.md",
+      "topic": [
+        "agent",
+        "auto-research",
+        "retrieval",
+        "ranking",
+        "reranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google / Discover",
+      "published": "2026-04-21",
+      "code": null,
+      "adapter": {
+        "adapter_key": "agentic-rec-tune",
+        "arxiv_id": "2604.26969",
+        "title": "AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization",
+        "paper_url": "https://arxiv.org/abs/2604.26969",
+        "track": "recommendation",
+        "organization": "Google / Discover",
+        "published": "2026-04-21",
+        "code_url": null,
+        "topics": [
+          "agent",
+          "auto-research",
+          "retrieval",
+          "ranking",
+          "reranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (220 users / 360 items)"
+        ],
+        "baseline": "matched control without the agentic-rec-tune mechanism",
+        "metrics": [
+          "baseline.fresh_hit_at_10",
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.fresh_hit_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.fresh_hit_at_10_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Google Discover value retrieval",
+            "metric": "Engagement 2",
+            "lift_percent": 0.9,
+            "traffic": "live-traffic A/B",
+            "source_url": "https://arxiv.org/html/2604.26969v2#S5",
+            "source_location": "Section 5 Table 1",
+            "significance": "p<0.05",
+            "retrieved_at": "2026-08-09"
+          },
+          {
+            "product": "Google Discover diversity reranking",
+            "metric": "Diversity",
+            "lift_percent": 3.43,
+            "traffic": "live-traffic A/B",
+            "source_url": "https://arxiv.org/html/2604.26969v2#S5",
+            "source_location": "Section 5 Table 1",
+            "significance": "p<0.05",
+            "retrieved_at": "2026-08-09"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "akt-rec",
       "title": "From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs",
       "paper_url": "https://arxiv.org/abs/2605.23310",
@@ -7427,6 +7516,93 @@
     },
     {
       "domain": "recommendation",
+      "key": "dual-sid",
+      "title": "Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems",
+      "paper_url": "https://arxiv.org/abs/2607.24865",
+      "detail_path": "reproductions/2607.24865-dual-sid/README.md",
+      "topic": [
+        "semantic-id",
+        "retrieval",
+        "ranking",
+        "content-understanding",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google DeepMind / YouTube",
+      "published": "2026-07-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "dual-sid",
+        "arxiv_id": "2607.24865",
+        "title": "Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems",
+        "paper_url": "https://arxiv.org/abs/2607.24865",
+        "track": "recommendation",
+        "organization": "Google DeepMind / YouTube",
+        "published": "2026-07-26",
+        "code_url": null,
+        "topics": [
+          "semantic-id",
+          "retrieval",
+          "ranking",
+          "content-understanding",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (220 users / 360 items)"
+        ],
+        "baseline": "matched control without the dual-sid mechanism",
+        "metrics": [
+          "baseline.fresh_hit_at_10",
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.fresh_hit_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.fresh_hit_at_10_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "YouTube Watchpage ranking",
+            "metric": "sitewide objective",
+            "lift_percent": 0.09,
+            "traffic": "production online experiment",
+            "source_url": "https://arxiv.org/html/2607.24865v1#S4.SS2",
+            "source_location": "Section 4.2 Table 1",
+            "retrieved_at": "2026-08-09"
+          },
+          {
+            "product": "YouTube retrieval",
+            "metric": "homepage objective",
+            "lift_percent": 0.13,
+            "traffic": "production online experiment",
+            "source_url": "https://arxiv.org/html/2607.24865v1#S4.SS2",
+            "source_location": "Section 4.2 Table 1",
+            "retrieved_at": "2026-08-09"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "dualgr",
       "title": "DualGR: Generative Retrieval with Long and Short-Term Interests Modeling",
       "paper_url": "https://arxiv.org/abs/2511.12518",
@@ -8570,6 +8746,95 @@
     },
     {
       "domain": "recommendation",
+      "key": "ha-moe",
+      "title": "Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study",
+      "paper_url": "https://arxiv.org/abs/2607.27577",
+      "detail_path": "reproductions/2607.27577-ha-moe/README.md",
+      "topic": [
+        "ranking",
+        "mixture-of-experts",
+        "heterogeneity",
+        "diversity"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google / Discover",
+      "published": "2026-07-30",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ha-moe",
+        "arxiv_id": "2607.27577",
+        "title": "Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study",
+        "paper_url": "https://arxiv.org/abs/2607.27577",
+        "track": "recommendation",
+        "organization": "Google / Discover",
+        "published": "2026-07-30",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "mixture-of-experts",
+          "heterogeneity",
+          "diversity"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (220 users / 360 items)"
+        ],
+        "baseline": "matched control without the ha-moe mechanism",
+        "metrics": [
+          "baseline.fresh_hit_at_10",
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.fresh_hit_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.fresh_hit_at_10_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Google Discover",
+            "metric": "DAU",
+            "lift_percent": 0.22,
+            "traffic": "7-day 1% live-traffic A/B",
+            "source_url": "https://arxiv.org/html/2607.27577v1#S4.SS4",
+            "source_location": "Section 4.4 Table 4",
+            "experiment_duration": "7 days",
+            "significance": "±0.11%",
+            "retrieved_at": "2026-08-09"
+          },
+          {
+            "product": "Google Discover",
+            "metric": "Diverse Engagement Rate",
+            "lift_percent": 0.54,
+            "traffic": "7-day 1% live-traffic A/B",
+            "source_url": "https://arxiv.org/html/2607.27577v1#S4.SS4",
+            "source_location": "Section 4.4 Table 4",
+            "experiment_duration": "7 days",
+            "significance": "±0.07%",
+            "retrieved_at": "2026-08-09"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "hap",
       "title": "Not All Candidates are Created Equal: Heterogeneity-Aware Pre-ranking",
       "paper_url": "https://arxiv.org/abs/2603.03770",
@@ -9371,6 +9636,84 @@
             "traffic": "live A/B; fully deployed",
             "source_url": "https://arxiv.org/abs/2608.02738",
             "source_location": "original paper online-result disclosure: product=Shopee Homepage Search; metric=advertising revenue"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "kunlun",
+      "title": "Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design",
+      "paper_url": "https://arxiv.org/abs/2602.10016",
+      "detail_path": "reproductions/2602.10016-kunlun/README.md",
+      "topic": [
+        "ranking",
+        "scaling-law",
+        "long-sequence",
+        "mixture-of-experts",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta",
+      "published": "2026-02-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "kunlun",
+        "arxiv_id": "2602.10016",
+        "title": "Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design",
+        "paper_url": "https://arxiv.org/abs/2602.10016",
+        "track": "recommendation",
+        "organization": "Meta",
+        "published": "2026-02-10",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "scaling-law",
+          "long-sequence",
+          "mixture-of-experts",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (220 users / 360 items)"
+        ],
+        "baseline": "matched control without the kunlun mechanism",
+        "metrics": [
+          "baseline.fresh_hit_at_10",
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.fresh_hit_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.fresh_hit_at_10_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Meta Ads",
+            "metric": "topline",
+            "lift_percent": 1.2,
+            "traffic": "deployed across major Ads models",
+            "source_url": "https://arxiv.org/html/2602.10016v3#S5.SS5",
+            "source_location": "Section 5.5",
+            "retrieved_at": "2026-08-09"
           }
         ],
         "selection_exception": null,
@@ -10613,6 +10956,95 @@
             "traffic": "online A/B test",
             "source_url": "https://arxiv.org/abs/2607.12392",
             "source_location": "original paper online-result disclosure: product=Pinterest; metric=retention"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "mfli",
+      "title": "Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System",
+      "paper_url": "https://arxiv.org/abs/2602.16124",
+      "detail_path": "reproductions/2602.16124-mfli/README.md",
+      "topic": [
+        "retrieval",
+        "learnable-index",
+        "fresh-content",
+        "diversity",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta",
+      "published": "2026-02-18",
+      "code": null,
+      "adapter": {
+        "adapter_key": "mfli",
+        "arxiv_id": "2602.16124",
+        "title": "Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System",
+        "paper_url": "https://arxiv.org/abs/2602.16124",
+        "track": "recommendation",
+        "organization": "Meta",
+        "published": "2026-02-18",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "learnable-index",
+          "fresh-content",
+          "diversity",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (220 users / 360 items)"
+        ],
+        "baseline": "matched control without the mfli mechanism",
+        "metrics": [
+          "baseline.fresh_hit_at_10",
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.fresh_hit_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.fresh_hit_at_10_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Meta recommendation",
+            "metric": "low-view exposure",
+            "lift_percent": 279.0,
+            "traffic": "7-day online A/B",
+            "source_url": "https://arxiv.org/html/2602.16124v1#S4.SS6",
+            "source_location": "Section 4.6",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-08-09"
+          },
+          {
+            "product": "Meta recommendation",
+            "metric": "diversity",
+            "lift_percent": 0.3,
+            "traffic": "7-day online A/B",
+            "source_url": "https://arxiv.org/html/2602.16124v1#S4.SS6",
+            "source_location": "Section 4.6",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-08-09"
           }
         ],
         "selection_exception": null,
@@ -15905,6 +16337,95 @@
             "traffic": "7 days; 5% traffic; p<0.005",
             "source_url": "https://arxiv.org/abs/2607.17092",
             "source_location": "original paper online-result disclosure: product=Kuaishou short-video feed vs EASQ; metric=Forward"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "ultra-hstu",
+      "title": "Bending the Scaling Law Curve in Large-Scale Recommendation Systems",
+      "paper_url": "https://arxiv.org/abs/2602.16986",
+      "detail_path": "reproductions/2602.16986-ultra-hstu/README.md",
+      "topic": [
+        "ranking",
+        "long-sequence",
+        "scaling-law",
+        "attention",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta",
+      "published": "2026-02-19",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ultra-hstu",
+        "arxiv_id": "2602.16986",
+        "title": "Bending the Scaling Law Curve in Large-Scale Recommendation Systems",
+        "paper_url": "https://arxiv.org/abs/2602.16986",
+        "track": "recommendation",
+        "organization": "Meta",
+        "published": "2026-02-19",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "long-sequence",
+          "scaling-law",
+          "attention",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (220 users / 360 items)"
+        ],
+        "baseline": "matched control without the ultra-hstu mechanism",
+        "metrics": [
+          "baseline.fresh_hit_at_10",
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.fresh_hit_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.fresh_hit_at_10_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Meta recommendation",
+            "metric": "consumption",
+            "lift_percent": 4.11,
+            "traffic": "multiple rigorous 30-day A/B tests; fully deployed",
+            "source_url": "https://arxiv.org/html/2602.16986v2#S5.SS4",
+            "source_location": "Section 5.4",
+            "experiment_duration": "30 days",
+            "retrieved_at": "2026-08-09"
+          },
+          {
+            "product": "Meta recommendation",
+            "metric": "engagement",
+            "lift_percent": 8.0,
+            "traffic": "reported range +2% to +8%; fully deployed",
+            "source_url": "https://arxiv.org/html/2602.16986v2#S5.SS4",
+            "source_location": "Section 5.4",
+            "experiment_duration": "30 days",
+            "retrieved_at": "2026-08-09"
           }
         ],
         "selection_exception": null,

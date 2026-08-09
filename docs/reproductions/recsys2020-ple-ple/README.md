@@ -9,7 +9,7 @@
 | 论文链接 | [RecSys 2020 paper](https://doi.org/10.1145/3383313.3412236) |
 | 公司/机构 | Tencent |
 | 首次公开日期 | 2020-09-22（ACM RecSys 2020） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `ple` |
 | 本地复现代码 | [`src/auto_research/reproductions/ple/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/ple/) |
 

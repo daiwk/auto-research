@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.28418](https://arxiv.org/abs/2607.28418) |
 | 公司/机构 | EIT-NLP / LMU Munich |
 | 首次公开日期 | 2026-07-30（arXiv v1） |
-| 原文开源代码 | 是：[EIT-NLP/LLM-Pruning WIDE](https://github.com/EIT-NLP/LLM-Pruning/tree/main/WIDE) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/EIT-NLP/LLM-Pruning/tree/main/WIDE) |
 | Adapter | `wide` |
 | 本地复现代码 | [`src/auto_research/reproductions/wide/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/wide/) |
 

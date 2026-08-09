@@ -15,6 +15,7 @@
 
 ## 2026-07
 - [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。
+- [HA-MoE](../2607.27577-ha-moe/README.md)：Google Discover 依据 session 内容异构性动态路由多个专长 expert，统一排序开放网页内容。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。
 - [ROCS](../2607.27744-rocs/README.md)：Meta 将请求侧特征只编码一次，把候选相关交互延后到批量评分阶段，以统一服务检索和排序并提升 QPS。
 - [ASARL](../2607.26593-asarl/README.md)：以 ReasonAgent、CriticAgent、GenAgent 闭环整理 QQ 社交搜索数据，再经 SCT、PGO 和 Social Distillation 服务在线模型。
@@ -25,6 +26,7 @@
 - [Mosaic](../2607.24015-mosaic/README.md)：Meta 将 memorization、dense、sequential 与 CoTrain 用户表征组织成 specialist fleet，并以 MRM 和 cosine redundancy loss 挖掘增量信息。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把目标行为写入生成 decoder prefix，并用未来交互 privileged teacher 和熵路由蒸馏内化判别能力。
 - [UniR²](../2607.24439-unir2/README.md)：快手用 Dual-Query Prefix-Causal Attention 在同一 decoder 序列内统一层级 SID 生成和多目标排序，并以 ranking-only LoRA 隔离梯度。
+- [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：YouTube 用同一分层 SID 表达协同身份，并以 Semantic Decoder 恢复内容语义表示。
 - [Melo](../2607.23718-melo/README.md)：以多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
 - [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：组合 recency、IPS、可移除 bias tower 与不确定性探索打破新内容反馈环。
 - [BARGE](../2607.21028-barge/README.md)：用 ICA 恢复 item token 结构、HPR 重排累计语义路径，再以 OSQ 正交双通道和 OR-fusion 补充可达候选。
@@ -76,6 +78,7 @@
 
 ## 2026-04
 - [GloRank](../2604.25291-glorank/README.md)：在全局 SID 空间用 listwise SFT 与 RL 优化全库生成重排。
+- [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：Google Discover 以多 Agent 和自进化 SkillHub 自动提出、审查、执行并沉淀推荐配置实验。
 - [CS3](../2604.19269-cs3/README.md)：以循环自修正、跨塔同步和级联教师增强可在线部署的双塔召回。
 - [GenRec](../2604.14878-genrec/README.md)：用 page-wise NTP、非对称 Token Merger 和带 NLL 正则的 GRPO-SR 优化整页结果。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item pair，异步预计算并缓存 foundation-model latent，在线命中直接消费。
@@ -95,8 +98,11 @@
 - [GR4AD](../2602.22732-gr4ad/README.md)：构造用户感知 Semantic ID，结合 LazyAR、可变长度生成和 RSPO 完成生成式广告召回。
 - [SIGMA](../2602.22913-sigma/README.md)：用 LLM 对物品做多视角语义 grounding，以混合 SID/ID token 和多任务 SFT 训练生成式推荐器。
 - [HiSAC](../2602.21009-hisac/README.md)：用层级投票把超长历史压缩为少量兴趣 agent，再做 query-conditioned soft routing。
+- [ULTRA-HSTU](../2602.16986-ultra-hstu/README.md)：Meta 用 semi-local attention、LBSL 和 Mixture of Transducers 提升超长历史的训练与推理 scaling efficiency。
+- [MFLI](../2602.16124-mfli/README.md)：Meta 将多切面 index 与 item 表示联合学习，并按请求动态分配 facet 召回预算。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一 Transformer 中平衡 dense 特征交互与序列建模，并按预算选择可训练模块。
 - [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。
+- [Kunlun](../2602.10016-kunlun/README.md)：Meta 在逐层 Transformer/Interaction 双 block 中组合 GDPA、HSP、全局交互与 CompSkip。
 - [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task 统一 token 化，以 domain-feature attention 支持多分布推荐。
 - [MSN](../2602.07526-msn/README.md)：用 Product-Key Memory 增加容量，只读取 top-k 槽位并门控融合 dense 主干。

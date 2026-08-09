@@ -170,6 +170,11 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         "rankmixer_ramp": ("ramp", "隐私", "特征受限", "feature availability"),
         "rankmixer_kgd": ("kgd", "knowledge geometry", "知识几何", "可刷新预训练", "bmtp"),
         "rankmixer_tokenminds": ("tokenminds", "user token", "用户 token", "sid 用户"),
+        "rankmixer_ha_moe": ("ha-moe", "heterogeneous moe", "异构 moe", "异构门控"),
+        "rankmixer_dual_sid": ("dual sid", "dual-purpose", "双用途 sid"),
+        "rankmixer_mfli": ("mfli", "learnable index", "可学习索引", "多切面"),
+        "rankmixer_kunlun": ("kunlun", "gdpa", "昆仑"),
+        "rankmixer_ultra_hstu": ("ultra-hstu", "ultra hstu", "semi-local", "半局部"),
     }
     for architecture, terms in direct_terms.items():
         if any(term in text for term in terms):

@@ -1,13 +1,15 @@
 # Penelope：局部潜在递归的高效结构化推理
 
+> **Fidelity: 核心机制复现**。本地执行局部潜在递归与门控状态更新；不复刻原论文的大模型训练规模。
+
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.25915](https://arxiv.org/abs/2607.25915) |
 | 公司/机构 | Academic author team |
 | 首次公开日期 | 2026-07-28（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-07-29 未发现官方公开仓库 |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `penelope` |
 | 本地复现代码 | [`src/auto_research/reproductions/penelope/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/penelope/) |
 

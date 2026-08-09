@@ -20,6 +20,7 @@
 | 生成、排序与冷启动 | [Hierarchical Residual Policy Optimization for Generative Recommendations](../2608.00750-hrpo/README.md) | City University of Hong Kong / Kuaishou，2026-08-01 | [已开源](https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO) | `hrpo` |
 | 大模型能力与推荐融合 | [Building a User Foundation Model for the Open Web](../2607.28019-open-web-ufm/README.md) | Teads，2026-07-30 | 未发现官方代码 | `open-web-ufm` |
 | 生成、排序与冷启动 | [CCFormer: Efficient Cross-Field Interaction and Hierarchical Sequence Compression for Industrial Recommendation at Tencent](../2607.28070-ccformer/README.md) | Tencent Platform and Content Group，2026-07-30 | 未发现官方代码 | `ccformer` |
+| 生成、排序与冷启动 | [Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study](../2607.27577-ha-moe/README.md) | Google / Discover，2026-07-30 | 未发现官方代码 | `ha-moe` |
 | 生成、排序与冷启动 | [ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation](../2607.27744-rocs/README.md) | Meta AI，2026-07-30 | [已开源](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) | `rocs` |
 | 训练目标与决策优化 | [ASARL: Autonomous Social-Aware Relevance Learning for QQ Search](../2607.26593-asarl/README.md) | Tencent PCG，2026-07-29 | 未发现官方代码 | `asarl` |
 | 训练目标与决策优化 | [Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness](../2607.25233-swag-bid/README.md) | Alibaba International Digital Commerce / Dalian University of Technology，2026-07-28 | 未发现官方代码 | `swag-bid` |
@@ -31,6 +32,7 @@
 | 生成、排序与冷启动 | [Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence](../2607.24439-unir2/README.md) | Kuaishou / IIE, CAS / UCAS，2026-07-27 | 未发现官方代码 | `unir2` |
 | 生成、排序与冷启动 | [Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music](../2607.23749-youtube-freshness/README.md) | YouTube Music / Google，2026-07-26 | 未发现官方代码 | `youtube-freshness` |
 | 大模型能力与推荐融合 | [Melo: A Production LLM-Powered Music Recommendation Agent](../2607.23718-melo/README.md) | NetEase Cloud Music / Zhejiang University of Technology，2026-07-26 | 未发现官方代码 | `melo` |
+| 生成、排序与冷启动 | [Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems](../2607.24865-dual-sid/README.md) | Google DeepMind / YouTube，2026-07-26 | 未发现官方代码 | `dual-sid` |
 | 生成、排序与冷启动 | [Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation](../2607.21028-barge/README.md) | Tencent，2026-07-23 | 未发现官方代码 | `barge` |
 | 生成、排序与冷启动 | [PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest](../2607.22518-pinequalizer/README.md) | Pinterest，2026-07-23 | 未发现官方代码 | `pinequalizer` |
 | 生成、排序与冷启动 | [TSGR: Taobao Search Generative Retrieval](../2607.18796-tsgr/README.md) | Taobao & Tmall Group of Alibaba / Zhejiang University，2026-07-21 | 未发现官方代码 | `tsgr` |
@@ -74,6 +76,7 @@
 | 大模型能力与推荐融合 | [LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation](../2605.18771-lwgr/README.md) | Alibaba International / CAS，2026-05 | 未发现官方代码 | `lwgr` |
 | 大模型能力与推荐融合 | [Unified Value Alignment for Generative Recommendation in Industrial Advertising](../2605.05803-univa/README.md) | Tencent / WeChat Channels，2026-05 | 未发现官方代码 | `univa` |
 | 生成、排序与冷启动 | [From Local Indices to Global Identifiers: Generative Reranking via Global Action Space](../2604.25291-glorank/README.md) | City University of Hong Kong / Kuaishou / UC San Diego，2026-04-28 | 未发现官方代码 | `glorank` |
+| 训练目标与决策优化 | [AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization](../2604.26969-agentic-rec-tune/README.md) | Google / Discover，2026-04-21 | 未发现官方代码 | `agentic-rec-tune` |
 | 多阶段排序与混排 | [CS3: Efficient Online Capability Synergy for Two-Tower Recommendation](../2604.19269-cs3/README.md) | Kuaishou Technology，2026-04-21 | [已开源](https://github.com/lixiangwang/CS3Rec) | `cs3` |
 | 生成、排序与冷启动 | [GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation](../2604.14878-genrec/README.md) | JD.com，2026-04-16 | 未发现官方代码 | `genrec` |
 | 大模型能力与推荐融合 | [SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling](../2604.12110-solaris/README.md) | Meta，2026-04-13 | 未发现官方代码 | `solaris` |
@@ -87,7 +90,10 @@
 | 大模型能力与推荐融合 | [Zero-shot Cross-domain Knowledge Distillation: A Case study on YouTube Music](../2603.28994-cross-domain-kd/README.md) | Google / YouTube，2026-03 | 未发现官方代码 | `cross-domain-kd` |
 | 生成、排序与冷启动 | [Learning to Reflect and Correct: Towards Better Decoding Trajectories for Large-Scale Generative Recommendation](../2602.23639-grc/README.md) | Alibaba International / Wuhan University，2026-02-27 | 未发现官方代码 | `grc` |
 | 生成、排序与冷启动 | [HiSAC: Hierarchical Sparse Activation Compression for Ultra-long Sequence Modeling in Recommenders](../2602.21009-hisac/README.md) | Alibaba / Taobao，2026-02-24 | 未发现官方代码 | `hisac` |
+| 生成、排序与冷启动 | [Bending the Scaling Law Curve in Large-Scale Recommendation Systems](../2602.16986-ultra-hstu/README.md) | Meta，2026-02-19 | 未发现官方代码 | `ultra-hstu` |
+| 生成、排序与冷启动 | [Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System](../2602.16124-mfli/README.md) | Meta，2026-02-18 | 未发现官方代码 | `mfli` |
 | 生成、排序与冷启动 | [MixFormer: Co-Scaling Up Dense and Sequence in Industrial Recommenders](../2602.14110-mixformer/README.md) | ByteDance / Douyin，2026-02-15 | 未发现官方代码 | `mixformer` |
+| 生成、排序与冷启动 | [Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design](../2602.10016-kunlun/README.md) | Meta，2026-02-10 | 未发现官方代码 | `kunlun` |
 | 大模型能力与推荐融合 | [Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents](../2602.10226-self-evolving-rec/README.md) | Google / YouTube，2026-02-10 | 未发现官方代码 | `self-evolving-rec` |
 | 生成、排序与冷启动 | [MDL: A Unified Multi-Distribution Learner in Large-scale Industrial Recommendation through Tokenization](../2602.07520-mdl/README.md) | ByteDance / Douyin，2026-02-07 | 未发现官方代码 | `mdl` |
 | 生成、排序与冷启动 | [MSN: A Memory-based Sparse Activation Scaling Framework for Large-scale Industrial Recommendation](../2602.07526-msn/README.md) | ByteDance / Douyin Search，2026-02-07 | 未发现官方代码 | `msn` |

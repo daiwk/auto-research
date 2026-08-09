@@ -69,8 +69,11 @@
 - 2026-08 · [SPEAR](../2608.01738-spear/README.md)：用双 embedding、confidence×relevance 乘法门和动态 selector 联合优化个性化改写与检索。
 
 ## Google / YouTube
+- 2026-07 · [HA-MoE](../2607.27577-ha-moe/README.md)：依据内容异构性动态路由领域、转移、内容与新鲜度专家，在单一模型中统一开放网页排序。
+- 2026-07 · [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：让分层 SID 同时承载协同身份并通过 Semantic Decoder 重建内容 embedding。
 - 2026-07 · [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：比较 recency、IPS、bias tower 与不确定性探索对新内容反馈环的影响。
 - 2026-06 · [TokenMinds](../2606.25147-tokenminds/README.md)：让共享 encoder 同时产生稠密用户向量，并由 decoder 生成可落到内容语义空间的 SID 用户 token，再共同服务下游排序。
+- 2026-04 · [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：以 Actor、Critic、Insight、Skill 和 Online agent 闭合推荐配置的多轮实验反馈。
 - 2026-03 · [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。
@@ -130,6 +133,9 @@
 - 2026-05 · [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：通过 domain SFT 生成层级广告属性，构建语义图并约束召回结果对属性扰动的稳定性。
 - 2026-05 · [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
 - 2026-04 · [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item 请求，异步预计算 foundation-model latent，并通过 cache/fallback 服务线上排序。
+- 2026-02 · [ULTRA-HSTU](../2602.16986-ultra-hstu/README.md)：组合半局部注意力、逐层扩窗 LBSL 与 Mixture of Transducers 扩展超长历史。
+- 2026-02 · [MFLI](../2602.16124-mfli/README.md)：联合学习语义、流行度与新鲜度等多个 facet 索引，替代静态单空间 ANN。
+- 2026-02 · [Kunlun](../2602.10016-kunlun/README.md)：用 GDPA、分层 seed pooling、全局交互与 CompSkip 统一深层广告排序架构。
 - 2026-01 · [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
 - 2025-06 · [RADAR](../2506.07261-radar/README.md)：在请求后异步运行完整排序器，把高价值结果缓存为下一请求的召回补充。
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。

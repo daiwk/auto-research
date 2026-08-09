@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.16669](https://arxiv.org/abs/2607.16669) |
 | 公司/机构 | Indian Institute of Technology Madras |
 | 首次公开日期 | 2026-07-18（arXiv v1） |
-| 原文开源代码 | 是：[openlanguagemodel/openlanguagemodel](https://github.com/openlanguagemodel/openlanguagemodel) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/openlanguagemodel/openlanguagemodel) |
 | Adapter | `open-language-model` |
 | 本地复现代码 | [`src/auto_research/reproductions/open_language_model/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/open_language_model/) |
 

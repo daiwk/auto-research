@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.24417](https://arxiv.org/abs/2607.24417) |
 | 公司/机构 | Meituan / Beijing Institute of Technology |
 | 首次公开日期 | 2026-07-27（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-07-28） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-09） |
 | Adapter | `core-relevance` |
 | 本地复现代码 | [`src/auto_research/reproductions/core_relevance/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/core_relevance/) |
 

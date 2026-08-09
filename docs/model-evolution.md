@@ -183,6 +183,13 @@ batch_size, experts, interval_residual, auxiliary_weight
 | [Long-History User Transformers](https://arxiv.org/abs/2607.14331) | `rankmixer_long_history` | 异步全历史 encoder 的缓存状态与轻量近期序列融合 |
 | [RAMP](https://arxiv.org/abs/2607.17473) | `rankmixer_ramp` | 个性化/公共双路径、feature availability mask、受限路径监督与 prediction alignment |
 | [TokenMinds](https://arxiv.org/abs/2606.25147) | `rankmixer_tokenminds` | 从历史物品分层 SID 聚合用户 token，并通过可学习安全门控注入 RankMixer 用户表示 |
+| [HA-MoE](https://arxiv.org/abs/2607.27577) | `rankmixer_ha_moe` | 依据样本异构性动态路由专长 expert |
+| [Dual-purpose SID](https://arxiv.org/abs/2607.24865) | `rankmixer_dual_sid` | 分层 SID 同时提供协同身份与内容语义 token |
+| [MFLI](https://arxiv.org/abs/2602.16124) | `rankmixer_mfli` | 以多切面可学习 code 表示检索空间 |
+| [Kunlun](https://arxiv.org/abs/2602.10016) | `rankmixer_kunlun` | GDPA 门控、交互 block 与 CompSkip |
+| [ULTRA-HSTU](https://arxiv.org/abs/2602.16986) | `rankmixer_ultra_hstu` | semi-local attention、landmark summary 与 Mixture of Transducers |
+
+AgenticRecTune 不伪装成单一网络结构；其 Actor–Critic–SkillHub 闭环对应本项目统一多轮控制器，独立 adapter `agentic-rec-tune` 会输出完整 generation trace，可作为 evolve 控制策略的回归样例。
 
 这张表中的结构都已经存在于仓库源码中。在线 arXiv 检索仍会返回其他相关论文，但
 只有已映射并经过 shape/训练测试的结构才能进入 population；其余论文保留为
