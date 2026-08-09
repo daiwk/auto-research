@@ -5,6 +5,8 @@
 
 ## 已实现论文与资料
 
+<div class="ar-method-index" markdown>
+
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 生成、排序与冷启动 | [Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation](../2608.06213-gryphon-v2/README.md) | Yandex，2026-08-06 | 未发现官方代码 | `gryphon-v2` |
@@ -152,6 +154,8 @@
 | 生成、排序与冷启动 | [DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](../1703.04247-deepfm/README.md) | Huawei Noah's Ark Lab，2017-03-13 | 未发现官方代码 | `deepfm` |
 | 生成、排序与冷启动 | [Deep Neural Networks for YouTube Recommendations](../recsys2016-youtube-dnn-youtube-dnn/README.md) | Google / YouTube，2016-09-15 | 未发现官方代码 | `youtube-dnn` |
 | 生成、排序与冷启动 | [Wide & Deep Learning for Recommender Systems](../1606.07792-wide-deep/README.md) | Google，2016-06-24 | [已开源](https://github.com/tensorflow/models/tree/master/official/r1/wide_deep) | `wide-deep` |
+
+</div>
 
 分类浏览：
 
