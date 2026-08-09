@@ -7,6 +7,7 @@ import json
 import re
 import sys
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 
@@ -283,13 +284,13 @@ def read_method_summary(module: str, link: str) -> str:
     return summary
 
 
-def read_rows(module: str) -> list[dict[str, str]]:
+def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
     manifest = json.loads(
         (DOCS / "research-manifest.json").read_text(encoding="utf-8")
     )
     rows = []
     for paper in manifest["papers"]:
-        if paper["domain"] != module:
+        if paper["domain"] != (domain or module):
             continue
         detail_path = paper["detail_path"]
         link = (
@@ -297,13 +298,33 @@ def read_rows(module: str) -> list[dict[str, str]]:
             if detail_path.startswith(f"{module}/")
             else f"../{detail_path}"
         )
+        page_metadata = _paper_page_metadata(module, link)
         date = paper.get("published") or "未标注"
         author = paper.get("first_author")
         organization = paper.get("first_author_affiliation")
-        if not author or not organization:
+        if module in {"post-training", "agent-research"} and (
+            not author or not organization
+        ):
             raise ValueError(f"{module}/{paper['key']} has incomplete author metadata")
+        adapter = paper.get("adapter")
+        if not organization and isinstance(adapter, dict):
+            organization = adapter.get("organization")
+        if date == "未标注":
+            date = page_metadata.get("首次公开日期", date)[:10]
+        organization = organization or page_metadata.get("公司/机构")
+        author = author or "未单独登记"
+        organization = organization or "未标注机构"
+        topic = (paper.get("topic") or ["其他"])[0]
+        if module == "reproductions":
+            topic = _recommendation_primary_topics().get(
+                Path(paper["detail_path"]).parent.name, topic
+            )
+        elif module == "foundation-models":
+            topic = FOUNDATION_TOPIC_HIERARCHY.get(
+                paper["key"], (topic, topic)
+            )[0]
         rows.append({
-            "topic": (paper.get("topic") or ["其他"])[0],
+            "topic": topic,
             "title": paper["title"],
             "paper_url": paper["paper_url"],
             "link": link,
@@ -320,9 +341,49 @@ def read_rows(module: str) -> list[dict[str, str]]:
     return rows
 
 
-def render_method_index(module: str, label: str) -> str:
+def _paper_page_metadata(module: str, link: str) -> dict[str, str]:
+    page = DOCS / module / link
+    text = page.read_text(encoding="utf-8")
+    values = {}
+    for field in ("公司/机构", "首次公开日期"):
+        match = re.search(
+            rf"^\|\s*{re.escape(field)}\s*\|\s*([^|]+?)\s*\|$",
+            text,
+            re.MULTILINE,
+        )
+        if match:
+            values[field] = match.group(1).strip()
+    return values
+
+
+@lru_cache(maxsize=1)
+def _recommendation_primary_topics() -> dict[str, str]:
+    """Use the first high-level Chinese browse topic as the compact index label."""
+
+    topics = {}
+    heading = "其他"
+    for line in (
+        DOCS / "reproductions" / "catalog" / "by-topic.md"
+    ).read_text(encoding="utf-8").splitlines():
+        if line.startswith("## "):
+            heading = line.removeprefix("## ").strip()
+            continue
+        match = re.search(r"\]\(\.\./([^/]+)/README\.md\)", line)
+        if match:
+            topics.setdefault(match.group(1), heading)
+    return topics
+
+
+def render_method_index(
+    module: str, label: str, domain: str | None = None
+) -> str:
     """Generate the compact method table from the unified manifest."""
 
+    organization_heading = (
+        "一作机构与日期"
+        if module in {"post-training", "agent-research"}
+        else "机构与日期"
+    )
     lines = [
         f"# {label}论文与资料索引",
         "",
@@ -331,10 +392,10 @@ def render_method_index(module: str, label: str) -> str:
         "",
         "## 已实现论文与资料",
         "",
-        "| 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |",
+        f"| 方向 | 方法 | {organization_heading} | 原作者代码 | 本地入口 |",
         "|---|---|---|---|---|",
     ]
-    for row in _date_descending(read_rows(module)):
+    for row in _date_descending(read_rows(module, domain)):
         code = row["code"]
         if code.startswith("http"):
             code = f"[已开源]({code})"
@@ -342,15 +403,20 @@ def render_method_index(module: str, label: str) -> str:
             f"| {row['topic']} | [{row['title']}]({row['link']}) | "
             f"{row['institution']}，{row['date']} | {code} | `{row['key']}` |"
         )
-    lines.extend([
-        "",
-        "分类浏览：",
-        "",
-        "- [按机构/公司/学校](catalog/by-organization.md)",
-        "- [按主题](catalog/by-topic.md)",
-        "- [按年份](catalog/by-year.md)",
-        "",
-    ])
+    browse_links = (
+        (
+            "- [按公司](catalog/by-company.md)",
+            "- [按主题](catalog/by-topic.md)",
+            "- [按年月](catalog/by-month.md)",
+        )
+        if module == "reproductions"
+        else (
+            "- [按机构/公司/学校](catalog/by-organization.md)",
+            "- [按主题](catalog/by-topic.md)",
+            "- [按年份](catalog/by-year.md)",
+        )
+    )
+    lines.extend(["", "分类浏览：", "", *browse_links, ""])
     return "\n".join(lines)
 
 
@@ -651,13 +717,17 @@ def sort_reproduction_catalog(path: Path) -> None:
 
 
 def main() -> None:
-    for module, label in (
-        ("post-training", "LLM 后训练"),
-        ("agent-research", "Agent 研究"),
+    for module, label, domain in (
+        ("reproductions", "搜广推与 LLM 应用", "recommendation"),
+        ("foundation-models", "基础模型", "foundation-models"),
+        ("post-training", "LLM 后训练", "post-training"),
+        ("agent-research", "Agent 研究", "agent-research"),
     ):
         (DOCS / module / "catalog.md").write_text(
-            render_method_index(module, label), encoding="utf-8"
+            render_method_index(module, label, domain), encoding="utf-8"
         )
+        if module in {"reproductions", "foundation-models"}:
+            continue
         target = DOCS / module / "catalog"
         target.mkdir(exist_ok=True)
         for dimension, title in (

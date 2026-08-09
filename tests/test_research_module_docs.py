@@ -219,7 +219,7 @@ def test_site_uses_workflows_and_four_research_domains():
 def test_foundation_models_have_a_separate_scalable_catalog():
     directory = ROOT / "docs" / "foundation-models"
     overview = (directory / "README.md").read_text(encoding="utf-8")
-    for name in ("lineage.md", "benchmark.md"):
+    for name in ("catalog.md", "lineage.md", "benchmark.md"):
         assert (directory / name).is_file()
         assert f"({name})" in overview
     for dimension in ("organization", "topic", "year"):
@@ -236,6 +236,29 @@ def test_foundation_models_have_a_separate_scalable_catalog():
         "## 推理与系统效率",
     ):
         assert heading in topic
+
+
+def test_recommendation_and_foundation_method_indexes_are_in_navigation():
+    navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
+    expected = (
+        ("recommendation", "reproductions", "reproductions/catalog.md"),
+        ("foundation-models", "foundation-models", "foundation-models/catalog.md"),
+    )
+    manifest = json.loads(
+        (ROOT / "docs" / "research-manifest.json").read_text(encoding="utf-8")
+    )
+
+    for domain, directory, nav_target in expected:
+        assert f"- 方法索引: {nav_target}" in navigation
+        index = (ROOT / "docs" / directory / "catalog.md").read_text(
+            encoding="utf-8"
+        )
+        papers = [paper for paper in manifest["papers"] if paper["domain"] == domain]
+        assert papers
+        for paper in papers:
+            assert f"`{paper['key']}`" in index
+        assert "未标注机构" not in index
+        assert "| 未标注" not in index
 
 
 def test_sidebar_hides_global_and_per_paper_indexes_but_keeps_paper_pages():
