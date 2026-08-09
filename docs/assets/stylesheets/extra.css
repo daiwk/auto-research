@@ -33,9 +33,25 @@
 
 /* Compact paper catalogs must keep every metadata column visible without a
    horizontal scroll. Long English titles and affiliations may wrap freely. */
+.md-typeset .ar-method-index .md-typeset__scrollwrap {
+  width: 100%;
+  max-width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  overflow-x: visible;
+}
+
+.md-typeset .ar-method-index .md-typeset__table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
 .md-typeset .ar-method-index table:not([class]) {
   display: table;
   width: 100%;
+  max-width: 100%;
   min-width: 0;
   table-layout: fixed;
 }
@@ -45,6 +61,13 @@
   min-width: 0;
   padding: 0.7rem 0.6rem;
   vertical-align: top;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.md-typeset .ar-method-index a,
+.md-typeset .ar-method-index code {
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -78,6 +101,70 @@
   .md-typeset .ar-method-index th,
   .md-typeset .ar-method-index td {
     padding: 0.5rem 0.35rem;
+  }
+}
+
+@media screen and (max-width: 44.984rem) {
+  .md-typeset .ar-method-index table:not([class]),
+  .md-typeset .ar-method-index tbody,
+  .md-typeset .ar-method-index tr,
+  .md-typeset .ar-method-index td {
+    display: block;
+    width: 100%;
+  }
+
+  .md-typeset .ar-method-index thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .md-typeset .ar-method-index tr {
+    margin: 0 0 0.8rem;
+    padding: 0.25rem 0;
+    border: 0.05rem solid var(--md-default-fg-color--lightest);
+    border-radius: 0.35rem;
+  }
+
+  .md-typeset .ar-method-index td {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 0.6rem;
+    border-bottom: 0.05rem solid var(--md-default-fg-color--lightest);
+  }
+
+  .md-typeset .ar-method-index td:last-child {
+    border-bottom: 0;
+  }
+
+  .md-typeset .ar-method-index td::before {
+    color: var(--md-default-fg-color--light);
+    font-weight: 700;
+  }
+
+  .md-typeset .ar-method-index td:nth-child(1)::before {
+    content: "方向";
+  }
+
+  .md-typeset .ar-method-index td:nth-child(2)::before {
+    content: "方法";
+  }
+
+  .md-typeset .ar-method-index td:nth-child(3)::before {
+    content: "机构与日期";
+  }
+
+  .md-typeset .ar-method-index td:nth-child(4)::before {
+    content: "原作者代码";
+  }
+
+  .md-typeset .ar-method-index td:nth-child(5)::before {
+    content: "本地入口";
   }
 }
 

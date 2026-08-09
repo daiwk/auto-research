@@ -317,8 +317,11 @@ def test_method_indexes_use_the_responsive_wrapping_table_style():
         ROOT / "docs" / "assets" / "stylesheets" / "extra.css"
     ).read_text(encoding="utf-8")
     assert ".ar-method-index table:not([class])" in stylesheet
+    assert ".ar-method-index .md-typeset__table" in stylesheet
+    assert ".ar-method-index .md-typeset__scrollwrap" in stylesheet
     assert "table-layout: fixed" in stylesheet
     assert "overflow-wrap: anywhere" in stylesheet
+    assert 'content: "机构与日期"' in stylesheet
 
     built_page = ROOT / "site" / "foundation-models" / "catalog" / "index.html"
     if built_page.exists():
