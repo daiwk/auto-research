@@ -10,6 +10,7 @@ from ..post_training.algorithms import initialize, metrics, update
 from ..post_training.data import load_post_training_data
 from ..post_training.models import ALGORITHMS
 from .models import EvolutionTrial, Genome
+from .statistics import mean_with_std
 
 
 class PostTrainingEvolutionEvaluator:
@@ -39,6 +40,11 @@ class PostTrainingEvolutionEvaluator:
         rows, training = [], []
         for seed in self.seeds:
             values, diagnostics = self._run(genome, seed, test=False)
+            values["primary"] = (
+                values["accuracy"] + 0.1 * values["mean_reward"]
+                if self.dataset.endswith("-generate")
+                else values["accuracy"] - 0.05 * values["kl_from_reference"]
+            )
             rows.append(values)
             training.append(diagnostics)
         validation = _mean(rows)
@@ -48,6 +54,7 @@ class PostTrainingEvolutionEvaluator:
             else validation["accuracy"] - 0.05 * validation["kl_from_reference"]
         )
         validation["fitness"] = validation["primary"]
+        validation["fitness_std"] = validation["primary_std"]
         return EvolutionTrial(
             trial_id, generation, parent_id, genome, validation,
             {
@@ -139,6 +146,12 @@ class AgentEvolutionEvaluator:
                  source_papers, rationale):
         started = time.monotonic()
         rows = [self._run(genome, seed) for seed in self.seeds]
+        for values in rows:
+            values["primary"] = (
+                values["joint_success"]
+                - 0.02 * values["average_cost"]
+                + 0.01 * values["reuse_rate"]
+            )
         validation = _mean(rows)
         validation["primary"] = (
             validation["joint_success"]
@@ -146,6 +159,7 @@ class AgentEvolutionEvaluator:
             + 0.01 * validation["reuse_rate"]
         )
         validation["fitness"] = validation["primary"]
+        validation["fitness_std"] = validation["primary_std"]
         return EvolutionTrial(
             trial_id, generation, parent_id, genome, validation,
             {
@@ -377,7 +391,4 @@ def _apply_tools(task, plan, policy, active, capacity, step):
 
 
 def _mean(rows):
-    return {
-        key: float(np.mean([row[key] for row in rows]))
-        for key in rows[0]
-    }
+    return mean_with_std(rows)

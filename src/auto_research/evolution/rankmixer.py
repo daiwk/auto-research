@@ -9,6 +9,7 @@ from ..reproductions.rankmixer.model import RankMixerConfig, train_model
 from ..reproductions.rec_utils import load_movielens_1m_sequences, load_movielens_sequences
 from .models import EvolutionTrial, Genome
 from .benchmarks import recommendation_benchmark
+from .statistics import mean_with_std
 
 
 class RankMixerEvaluator:
@@ -77,13 +78,15 @@ class RankMixerEvaluator:
             )
             training_runs.append(training)
         validation = _mean_metrics(validation_runs)
-        validation["fitness"] = validation[
+        selected = (
             "public_composite"
             if self.fitness_metric == "public_composite"
             else "unirank_composite"
             if self.fitness_metric == "unirank_composite"
             else "primary"
-        ]
+        )
+        validation["fitness"] = validation[selected]
+        validation["fitness_std"] = validation[f"{selected}_std"]
         training = {
             "initial_loss": float(np.mean([row["initial_loss"] for row in training_runs])),
             "final_loss": float(np.mean([row["final_loss"] for row in training_runs])),
@@ -127,7 +130,7 @@ class RankMixerEvaluator:
 
 
 def _mean_metrics(rows):
-    return {key: float(np.mean([row[key] for row in rows])) for key in rows[0]}
+    return mean_with_std(rows)
 
 
 def _limit(data, maximum_users, maximum_items):

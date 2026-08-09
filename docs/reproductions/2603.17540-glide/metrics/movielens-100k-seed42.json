@@ -1,8 +1,39 @@
 {
   "dataset": "MovieLens 100K (260 users / 420 items)",
   "seed": 42,
-  "baseline": {"hit_at_10": 0.088462, "ndcg_at_10": 0.035398, "head_share_at_10": 0.293846},
-  "method": {"hit_at_10": 0.080769, "ndcg_at_10": 0.034374, "head_share_at_10": 0.249231},
-  "relative": {"hit_at_10_percent": -8.70, "ndcg_at_10_percent": -2.89, "head_share_at_10_percent": -15.18},
-  "semantic_id": {"levels": 3, "codes_per_level": 8}
+  "baseline": {
+    "hit_at_10": 0.088462,
+    "ndcg_at_10": 0.035398,
+    "head_share_at_10": 0.293846
+  },
+  "method": {
+    "hit_at_10": 0.080769,
+    "ndcg_at_10": 0.034374,
+    "head_share_at_10": 0.249231
+  },
+  "relative": {
+    "hit_at_10_percent": -8.7,
+    "ndcg_at_10_percent": -2.89,
+    "head_share_at_10_percent": -15.18
+  },
+  "semantic_id": {
+    "levels": 3,
+    "codes_per_level": 8
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:glide",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2603.17540-glide/metrics/movielens-100k-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

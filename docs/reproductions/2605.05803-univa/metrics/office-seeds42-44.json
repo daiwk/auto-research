@@ -9,7 +9,11 @@
     "catalog_items": 3459
   },
   "setup": {
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "steps_per_variant": 80,
     "selection": "validation ValueHR@100, then HR@100",
     "selected": "univa_full"
@@ -57,5 +61,23 @@
     "value_guided_beam_mean_value": 0.42510349,
     "value_relative_percent": -0.1019910114
   },
-  "conclusion": "Validation selects UniVA full; test HR@100 and ValueHR@100 improve over semantic-SID SL, while wNDCG declines and commercial-SID-only is stronger on test."
+  "conclusion": "Validation selects UniVA full; test HR@100 and ValueHR@100 improve over semantic-SID SL, while wNDCG declines and commercial-SID-only is stronger on test.",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:univa",
+  "evaluation_protocol": {
+    "tier": "l3_paper_pipeline",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2605.05803-univa/metrics/office-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

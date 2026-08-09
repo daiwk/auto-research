@@ -56,5 +56,21 @@
     "tv_percent": 2.19,
     "ner_percent": 11.46
   },
-  "scope": "用可训练的短期、长期、类目 agent 构造层级意图，执行 meta-router、压缩混合表示和带 KL 约束的验证集偏好更新；未调用淘宝私有 LLM、Agent-as-Judge 标注与线上系统。"
+  "scope": "用可训练的短期、长期、类目 agent 构造层级意图，执行 meta-router、压缩混合表示和带 KL 约束的验证集偏好更新；未调用淘宝私有 LLM、Agent-as-Judge 标注与线上系统。",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:recgpt-v2",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2512.14503-recgpt-v2/metrics/movielens-1m-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

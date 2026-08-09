@@ -13,6 +13,7 @@ from .llm_data import load_llm_evolution_data
 from .llm_model import MicroLMConfig, build_micro_lm
 from .models import EvolutionTrial, Genome
 from .muon import Muon
+from .statistics import mean_with_std
 
 
 class MicroLLMEvaluator:
@@ -63,7 +64,14 @@ class MicroLLMEvaluator:
         validations, trainings = [], []
         for seed in self.seeds:
             model, training, config = self._train(genome, seed)
-            validations.append(self._metrics(model, config, self.data.validation))
+            row = self._metrics(model, config, self.data.validation)
+            row["primary"] = -(row["lm_loss"] + 0.15 * row["instruction_loss"])
+            row["public_composite"] = -(
+                row["lm_loss"] + 0.15 * row["instruction_loss"]
+                + 0.10 * row.get("preference_loss", 0.0)
+                + 0.05 * row.get("reasoning_nll", 0.0)
+            )
+            validations.append(row)
             trainings.append(training)
         validation = _mean(validations)
         validation["primary"] = -(
@@ -80,6 +88,11 @@ class MicroLLMEvaluator:
             "public_composite"
             if self.fitness_metric == "public_composite"
             else "primary"
+        ]
+        validation["fitness_std"] = validation[
+            "public_composite_std"
+            if self.fitness_metric == "public_composite"
+            else "primary_std"
         ]
         training = {
             "initial_loss": float(np.mean([row["initial_loss"] for row in trainings])),
@@ -551,4 +564,4 @@ def _candidate_metrics(model, examples, config, device, torch):
 
 
 def _mean(rows):
-    return {key: float(np.mean([row[key] for row in rows])) for key in rows[0]}
+    return mean_with_std(rows)

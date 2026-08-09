@@ -4,8 +4,40 @@
   "train_tokens": 120000,
   "validation_tokens": 12000,
   "steps_per_model": 36,
-  "baseline": {"name": "dense GQA", "validation_loss": 3.233967, "perplexity": 25.3801, "attention_pair_ratio": 1.0, "seconds": 0.7994},
-  "method": {"name": "blockwise MSA", "validation_loss": 3.238023, "perplexity": 25.4833, "attention_pair_ratio": 0.200467, "seconds": 1.3397},
-  "relative": {"perplexity_percent": 0.41, "attention_pairs_percent": -79.95, "measured_training_seconds_percent": 67.58},
-  "note": "Unfused PyTorch masking and the trainable index auxiliary loss are slower on MPS; this is not a kernel-speed claim."
+  "baseline": {
+    "name": "dense GQA",
+    "validation_loss": 3.233967,
+    "perplexity": 25.3801,
+    "attention_pair_ratio": 1.0,
+    "seconds": 0.7994
+  },
+  "method": {
+    "name": "blockwise MSA",
+    "validation_loss": 3.238023,
+    "perplexity": 25.4833,
+    "attention_pair_ratio": 0.200467,
+    "seconds": 1.3397
+  },
+  "relative": {
+    "perplexity_percent": 0.41,
+    "attention_pairs_percent": -79.95,
+    "measured_training_seconds_percent": 67.58
+  },
+  "note": "Unfused PyTorch masking and the trainable index auxiliary loss are slower on MPS; this is not a kernel-speed claim.",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:minimax-sparse-attention",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2606.13392-minimax-sparse-attention/metrics/wikitext-2-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

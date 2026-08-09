@@ -1,27 +1,77 @@
 {
   "paper": "2508.20900",
   "dataset": "KuaiRand-Pure official standard feed logs",
-  "seeds": [42, 43, 44],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
   "events": 60000,
   "examples": 12000,
   "sft_steps": 80,
   "gbpo_steps": 40,
-  "sid_cardinalities": [128, 64, 32],
-  "sid_uniqueness": 0.9852301200,
+  "sid_cardinalities": [
+    128,
+    64,
+    32
+  ],
+  "sid_uniqueness": 0.98523012,
   "per_seed": [
-    {"seed": 42, "encoder_loss": 12.0627979194, "lazy_loss": 12.0091019948, "encoder_ms": 0.2041823144, "lazy_ms": 0.1193168050, "sft_feedback_probability": 0.0000114962, "gbpo_feedback_probability": 0.0000148560},
-    {"seed": 43, "encoder_loss": 12.1032672331, "lazy_loss": 12.0176879035, "encoder_ms": 0.2370406483, "lazy_ms": 0.0952171539, "sft_feedback_probability": 0.0000127341, "gbpo_feedback_probability": 0.0000126755},
-    {"seed": 44, "encoder_loss": 11.9939107895, "lazy_loss": 12.0096495226, "encoder_ms": 0.3482726628, "lazy_ms": 0.1424790739, "sft_feedback_probability": 0.0000141906, "gbpo_feedback_probability": 0.0000192115}
+    {
+      "seed": 42,
+      "encoder_loss": 12.0627979194,
+      "lazy_loss": 12.0091019948,
+      "encoder_ms": 0.2041823144,
+      "lazy_ms": 0.119316805,
+      "sft_feedback_probability": 1.14962e-05,
+      "gbpo_feedback_probability": 1.4856e-05
+    },
+    {
+      "seed": 43,
+      "encoder_loss": 12.1032672331,
+      "lazy_loss": 12.0176879035,
+      "encoder_ms": 0.2370406483,
+      "lazy_ms": 0.0952171539,
+      "sft_feedback_probability": 1.27341e-05,
+      "gbpo_feedback_probability": 1.26755e-05
+    },
+    {
+      "seed": 44,
+      "encoder_loss": 11.9939107895,
+      "lazy_loss": 12.0096495226,
+      "encoder_ms": 0.3482726628,
+      "lazy_ms": 0.1424790739,
+      "sft_feedback_probability": 1.41906e-05,
+      "gbpo_feedback_probability": 1.92115e-05
+    }
   ],
   "summary": {
-    "encoder_loss_mean": 12.0533253140,
+    "encoder_loss_mean": 12.053325314,
     "lazy_loss_mean": 12.0121464736,
     "encoder_ms_mean": 0.2631652085,
     "lazy_ms_mean": 0.1190043443,
-    "lazy_latency_reduction_percent": 54.7796060,
-    "sft_feedback_probability_mean": 0.0000128070,
-    "gbpo_feedback_probability_mean": 0.0000155810,
+    "lazy_latency_reduction_percent": 54.779606,
+    "sft_feedback_probability_mean": 1.2807e-05,
+    "gbpo_feedback_probability_mean": 1.5581e-05,
     "gbpo_relative_gain_percent": 21.6601957,
     "direction_consistent_across_seeds": false
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:onerec-v2",
+  "evaluation_protocol": {
+    "tier": "l3_paper_pipeline",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2508.20900-onerec-v2/metrics/kuairand-pure-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
   }
 }

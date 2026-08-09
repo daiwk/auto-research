@@ -1,11 +1,19 @@
 from __future__ import annotations
 
+import json
 import re
 import struct
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _manifest_count(module: str) -> int:
+    payload = json.loads(
+        (ROOT / "docs" / "research-manifest.json").read_text(encoding="utf-8")
+    )
+    return sum(paper["domain"] == module for paper in payload["papers"])
 
 MODULES = {
     "post-training": {
@@ -356,7 +364,7 @@ def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
                 for line in catalog.splitlines()
                 if line.startswith("- ") and "](../" in line
             ]
-            assert len(entries) == len(methods)
+            assert len(entries) == _manifest_count(module)
             for entry in entries:
                 summary = entry.split("）：", 1)[-1]
                 assert len(summary) >= 35, (
@@ -376,7 +384,7 @@ def test_organization_catalogs_group_by_first_author_affiliation():
             line for line in text.splitlines()
             if line.startswith("- ") and "](../" in line
         ]
-        assert len(entries) == len(methods)
+        assert len(entries) == _manifest_count(module)
         assert all(re.search(r"^- \d{4}-\d{2}-\d{2} · 一作：.+ · \[", line) for line in entries)
         assert "（按一作归档）" not in text
 

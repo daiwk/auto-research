@@ -2,7 +2,36 @@
   "dataset": "MovieLens 100K (932 users / 1682 items)",
   "seed": 42,
   "steps_per_model": 80,
-  "baseline": {"name": "RankMixer dense", "hit_at_10": 0.009657, "ndcg_at_10": 0.003845, "parameters": 156801},
-  "method": {"name": "TokenMixer-Large", "hit_at_10": 0.009657, "ndcg_at_10": 0.004135, "parameters": 282945},
-  "relative": {"hit_at_10_percent": 0.0, "ndcg_at_10_percent": 7.54}
+  "baseline": {
+    "name": "RankMixer dense",
+    "hit_at_10": 0.009657,
+    "ndcg_at_10": 0.003845,
+    "parameters": 156801
+  },
+  "method": {
+    "name": "TokenMixer-Large",
+    "hit_at_10": 0.009657,
+    "ndcg_at_10": 0.004135,
+    "parameters": 282945
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 7.54
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:tokenmixer-large",
+  "evaluation_protocol": {
+    "tier": "l3_paper_pipeline",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2602.06563-tokenmixer-large/metrics/movielens-100k-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

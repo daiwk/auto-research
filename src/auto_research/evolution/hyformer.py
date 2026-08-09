@@ -65,13 +65,15 @@ class HyFormerEvaluator:
             )
             trainings.append(training)
         validation = _mean_metrics(validations)
-        validation["fitness"] = validation[
+        selected = (
             "public_composite"
             if self.fitness_metric == "public_composite"
             else "unirank_composite"
             if self.fitness_metric == "unirank_composite"
             else "primary"
-        ]
+        )
+        validation["fitness"] = validation[selected]
+        validation["fitness_std"] = validation[f"{selected}_std"]
         return EvolutionTrial(
             trial_id, generation, parent_id, genome, validation,
             {"initial_loss": float(np.mean([x["initial_loss"] for x in trainings])),

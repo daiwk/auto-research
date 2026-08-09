@@ -2,8 +2,34 @@
   "seed": 42,
   "dataset": "WikiText-2",
   "steps": 30,
-  "baseline": {"lm_loss": 5.7470526695, "perplexity": 313.265999887, "parameters": 139584},
-  "method": {"lm_loss": 5.7551166266, "perplexity": 315.80237634, "parameters": 141120, "active_attention_head_fraction": 0.5, "active_ffn_channel_fraction": 0.5},
+  "baseline": {
+    "lm_loss": 5.7470526695,
+    "perplexity": 313.265999887,
+    "parameters": 139584
+  },
+  "method": {
+    "lm_loss": 5.7551166266,
+    "perplexity": 315.80237634,
+    "parameters": 141120,
+    "active_attention_head_fraction": 0.5,
+    "active_ffn_channel_fraction": 0.5
+  },
   "relative_perplexity_percent": 0.809655837,
-  "fidelity": "core mechanism; dense PyTorch kernel"
+  "fidelity": "core mechanism; dense PyTorch kernel",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:wide",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.28418-wide/metrics/wikitext2-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

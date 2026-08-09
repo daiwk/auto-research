@@ -39,181 +39,18 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-下表与代码 registry 保持 **186/186** 对齐；推荐论文要求量化生产 A/B，或用户明确认可论文披露的统计显著全流量发布证据；DeepFM、YouTube DNN、ESMM、MMoE、PLE 等具名经典例外逐篇明示，不放宽新工业论文门槛。基础模型论文要求公开 benchmark 与真实训练对照。完整论文总结、公式、架构、线上/离线效果和本地指标从[论文实现索引](docs/reproductions/README.md)进入。
+仓库目前注册 **186 个**论文 adapter，统一事实源是
+[`docs/research-manifest.json`](docs/research-manifest.json)。站点提供按研究域、机构、
+主题和年份浏览的[论文实现索引](docs/reproductions/README.md)，每篇详情页包含论文链接、
+一作机构、发布日期、原作者代码状态、本地 adapter/代码路径、架构与公式、原文线上/离线
+结果以及本地公开数据结论。
 
-2026-08-08 的全域 P0/P1 已全部补齐。P0 包含 `glorank`、`dual-rerank`、`oneranker`、`radar`、`dualgr`、`mpformer`、`hap`、`onepiece`、`intsr`、`cdm`、`cwm`、`rope`、`alibi`、`gqa`、`hymba`、`moba`、`blt`、`doremi`、`data-mixing-laws`；P1 新增 `twin-v2`、`sim`、`crsd`、`clip`、`llava`、`speculative-decoding`、`awq`、`medusa`，另有 3 个后训练目标和 4 个 Agent 方法进入独立索引与统一 evolve genome。
+工业搜广推论文必须给出量化线上 A/B 或用户认可的全流量证据；具名经典基线是逐篇记录的
+例外。基础模型使用公开 benchmark 和同预算训练对照。历史指标已经统一迁移到 schema v2，
+保留原始 seed 数量：少于 3 个 seed 的记录明确标成 smoke，不会被包装成稳定提升。
 
-| Level | Adapter | Paper / organization | What actually runs |
-|---|---|---|---|
-| 核心机制 | `crsd` | CRSD · Meituan | reasoning teacher → BERT 自蒸馏；NDCG@10 -2.14%，线上 AdCTR +0.91% |
-| 核心机制 | `twin-v2` | TWIN-V2 · Kuaishou | 生命周期行为压缩 + GSU/ESU；NDCG@10 +22.45% |
-| 核心机制 | `medusa` | Medusa | 三 future heads + tree verification；backbone calls -50% |
-| 核心机制 | `awq` | AWQ | activation-aware W4 calibration；输出 MSE -4.22% |
-| 核心机制 | `llava` | LLaVA | frozen encoder + projector instruction tuning；accuracy +68.57 points |
-| 核心机制 | `speculative-decoding` | Speculative Decoding | rank-32 draft + exact verification；target calls -75% |
-| 核心机制 | `clip` | CLIP | 双塔归一化 + 双向 InfoNCE；Recall@1 +40 points |
-| 核心机制 | `sim` | SIM · Alibaba | candidate-aware GSU/ESU；NDCG@10 +32.97% |
-| 核心机制 | `dme` | DME · ByteDance/Douyin | typed latent evidence + cross-conditional reconstruction；MovieLens-100K NDCG@10 -8.84% |
-| 核心机制 | `steps` | STEPS · ByteDance/Douyin | gated ordinal planning + execution + filter；MovieLens-100K NDCG@10 +66.05% |
-| 核心机制 | `spear` | SPEAR · Dewu | dual embedding + multiplicative rewrite gate；MovieLens-100K NDCG@10 +26.95% |
-| 核心机制 | `open-language-model` | OpenLanguageModel · IIT Madras | `olm_composable` genome 与 Block/Residual/Repeat/Parallel；WikiText-2 同预算语义等价验证 |
-| 核心机制 | `gryphon-v2` | Gryphon-v2 · Yandex | 双来源 rollout distillation；MovieLens-1M NDCG@10 -26.84%，保留负结果 |
-| 核心机制 | `degr` | DEGR · JD.com | diversity + adaptive reward ORPO；NDCG 持平、head share -1.21% |
-| 核心机制 | `rd-attnres` | Role-Decoupled Attention Residuals | 相对 Block AttnRes PPL +0.61%（变差），已接入 micro-LLM evolve |
-| 核心机制 | `retoken` | ReToken · UIUC/Microsoft Research/Google DeepMind | 单 retrieval target 与 value-cache Top-K；WikiText-2 PPL +3.70%（变差） |
-| 核心机制 | `ccformer` | CCFormer · Tencent | ID/content field gate 与分层历史压缩；MovieLens-1M NDCG@10 +22.44% |
-| 核心机制 | `open-web-ufm` | Open Web UFM · Teads | 双裁剪对比预训练 + next-item 代理目标；NDCG@10 +0.00% |
-| 核心机制 | `rocs` | ROCS · Meta | request-once、candidate-late interaction；NDCG@10 +8.19% |
-| 核心机制 | `wide` | WIDE · EIT-NLP/LMU | token 级 head/FFN Top-K 动态宽度；WikiText-2 PPL +0.81%（变差） |
-| 核心机制 | `reco-reward` | RecoReward · Kuaishou | 冻结双塔 RAS、非目标扣减与 content-only serving；Hit@10 -16.00% |
-| 核心机制 | `twice` | TWICE · Kuaishou | 双时钟 current-status 与单调 delay CDF；NDCG@10 +14.31% |
-| 核心机制 | `swag-bid` | SWAG · Alibaba | masked future plan、滑动窗口目标与 state gate；NDCG@10 +0.00% |
-| 核心机制 | `youtube-freshness` | YouTube Freshness · Google | recency、IPS、bias tower 与 uncertainty exploration；head share -28.72% |
-| 核心机制 | `melo` | Melo · NetEase | entity grounding 与 reflective retry；fresh Hit@10 +50.00% |
-| 核心机制 | `penelope` | Penelope · academic | localized latent recurrence；WikiText-2 composite loss -0.63% |
-| 核心机制 | `mim` | MIM · Alibaba/Taobao | 遮盖多模态预训练、协同对齐与 CiUBM；NDCG@10 +0.94% |
-| 核心机制 | `filterllm` | FilterLLM · Alibaba | text-to-user-distribution 与行为引导；NDCG@10 -9.82% |
-| 核心机制 | `fuxi-alpha` | FuXi-α · Huawei/USTC | 多通道注意力与分阶段交互；NDCG@10 -4.25% |
-| 核心机制 | `recgpt-v2` | RecGPT-V2 · Alibaba/Taobao | 层级 agents、meta-router 与约束偏好更新；NDCG@10 +18.52% |
-| 核心机制 | `higr` | HiGR · Tencent | residual SID、层级 slate 与 ORPO；NDCG@10 -12.32% |
-| 核心机制 | `drl-put` | DRL-PUT · Pinterest | logged bandit、propensity 与策略调权；NDCG@10 +19.13% |
-| 核心机制 | `adaf2m2` | AdaF²M² · ByteDance/Douyin | feature-mask multi-forward 与 state adapter；NDCG@10 +2.42% |
-| 核心机制 | `mgoe` | MGOE · Alibaba | macro task graph 与 graph experts；NDCG@10 +7.03% |
-| 核心机制 | `click-a-buy-b` | Click A Buy B · Pinterest | CABA/CABB 双分支与 taxonomy weighting；NDCG@10 +33.70% |
-| 核心机制 | `mosaic` | Mosaic · Meta | 四 specialist、MRM 与 cosine redundancy loss；MovieLens-1M NDCG@10 +3.49%，Hit@10 -7.69% |
-| 核心机制 | `unir2` | UniR² · Kuaishou | DQ-PCA、层级 SID、ranking-only LoRA；SID code accuracy +34.04%，NDCG@10 -13.19% |
-| 核心机制 | `core-relevance` | CORE · Meituan | 级联序数头、step-GRPO 与 PostCoT 蒸馏；NDCG@5 +0.98%，Badcase@5 -50.00% |
-| 核心机制 | `oxygenrec-v2` | OxygenREC-v2 · JD.COM | 行为 instruction、未来交互特权教师与熵路由蒸馏；MovieLens 行为代理 NDCG@10 -54.09% |
-| 核心机制 | `asarl` | ASARL · Tencent PCG | Reason/Critic/Gen、SCT/PGO/SD；MovieLens relevance proxy NDCG@10 -72.72% |
-| 核心机制 | `data-orchestra` | DataOrchestra · Fudan/SJTU/SII-GAIR | 逐样本 Drop/Untouch/Clean 与多清洗 operation；较固定清洗 PPL -1.03%，较 raw +8.60%（变差） |
-| 核心机制 | `native-sparse-attention` | NSA · DeepSeek | 压缩/选择/滑窗三路可训练稀疏注意力；attention-edge proxy -43.65%，PPL -3.17% |
-| 核心机制 | `gated-attention` | Gated Attention · Qwen/Alibaba | post-SDPA 逐头 sigmoid gate；PPL -0.72% |
-| 核心机制 | `muon` | Muon · Moonshot AI/UCLA | 隐藏矩阵 Newton–Schulz 正交更新；30-step PPL +5.61%（变差），作为独立 optimizer genome |
-| 核心机制 | `wide-deep` | Wide & Deep · Google | wide 交叉 + deep tower；NDCG@10 +5.45% |
-| 核心机制 | `deepfm` | DeepFM · Huawei | FM + deep 共享 embedding；NDCG@10 +23.58% |
-| 核心机制 | `youtube-dnn` | YouTube DNN · Google/YouTube | 非线性用户塔；NDCG@10 -6.61%，保留负结果 |
-| 核心机制 | `esmm` | ESMM · Alibaba | entire-space CTR×CVR；平均 AUC +1.69% |
-| 核心机制 | `mmoe` | MMoE · Google | 共享 experts + 任务 gates；平均 AUC +1.30% |
-| 核心机制 | `ple` | PLE · Tencent | 共享/专属 experts；平均 AUC +1.34% |
-| 核心机制 | `dcn-v2` | DCN-V2 · Google | low-rank cross experts；NDCG@10 +22.87% |
-| 核心机制 | `dien` | DIEN · Alibaba | GRU、auxiliary loss 与兴趣演化；NDCG@10 -1.98% |
-| 核心机制 | `bst` | BST · Alibaba | 候选 token 行为 Transformer；NDCG@10 +20.29% |
-| 核心机制 | `cs3` | CS3 · Kuaishou | cycle/sync/cascade 双塔；NDCG@10 -16.06% |
-| 核心机制 | `cq-sid` | CQ-SID · Alibaba/Tmall | category SID 与 EG-GRPO；NDCG@10 +1.66% |
-| 核心机制 | `switch-transformer` | Switch Transformer · Google Brain | top-1 sparse MoE；WikiText-2 PPL -3.29% |
-| 核心机制 | `mamba` | Mamba · CMU/Princeton | selective SSM scan；WikiText-2 PPL +48.82%（变差） |
-| 核心机制 | `switch-attention` | Switch Attention · PKU/Huawei | 动态 full/local attention；WikiText-2 PPL +0.19%（略差） |
-| 核心机制 | `onemall` | OneMall · Kuaishou | 多场景 prompt、三层 Semantic ID 与跨行为融合；NDCG@10 +4.33% |
-| 核心机制 | `dos` | DOS · Meituan | 协同/语义双流、正交旋转与 residual quantization；NDCG@10 +11.26% |
-| 核心机制 | `mdl` | MDL · ByteDance/Douyin | feature/scenario/task tokenization 与 domain-feature attention；NDCG@10 +13.34%，头部偏置上升 |
-| 核心机制 | `hisac` | HiSAC · Alibaba/Taobao | 层级投票、interest agents 与 soft routing；NDCG@10 +1.31% |
-| 核心机制 | `pinclip` | PinCLIP · Pinterest | 内容—共现图邻居对齐；NDCG@10 -1.41%，未迁移论文收益 |
-| 核心机制 | `pin-scale` | Pin-SCALE · Pinterest | engagement-aware SID codebook；NDCG@10 +13.61%、fresh Hit +50.00% |
-| 核心机制 | `causal-retrieval` | Causal Retrieval · Pinterest | propensity、双 outcome、DR uplift 与 trigger policy；合成 treatment NDCG@10 +80.77% |
-| 核心机制 | `podcast-mtl` | Podcast MTL · Spotify | shared low-rank ads/promotion 多任务模型；NDCG@10 -20.63%，出现 negative transfer |
-| 核心机制 | `engram` | Engram · DeepSeek | O(1) hashed n-gram memory；已接入 LLM evolve，30-step PPL +50.12%（变差） |
-| 核心机制 | `looped-latent-attention` | LLA · UMD/Meta AI | 权重共享 loop 与 K/V latent；已接入 LLM evolve，参数 -42.28%、PPL +5.56% |
-| 核心机制 | `gaugequant` | GaugeQuant · Cambridge | MPS/CPU/CUDA 兼容正交 gauge 与 W4A4 STE；已接入 LLM evolve，PPL -1.56% |
-| 核心机制 | `nova` | NOVA · Tencent | 四级验证、失败方向与 architecture gradient；直接增强 evolve |
-| 核心机制 | `evorec` | EvoRec · Alibaba International | 三代双轨进化和持久 skill memory；直接增强 evolve |
-| 完整核心链路 | `tokenmixer-large` | TokenMixer-Large · ByteDance | mixing/reverting、双 SwiGLU、interval residual 与辅助损失 |
-| 核心机制 | `msn` | MSN · ByteDance/Douyin Search | Product-Key Memory、top-k sparse read 与 gate |
-| 核心机制 | `idproxy` | IDProxy · Xiaohongshu/SJTU/Fudan | 对比对齐、多层 proxy 与 gate；NDCG@10 +5.32% |
-| 核心机制 | `glide` | GLIDE · Spotify | residual Semantic ID 生成与长短期双 prompt |
-| 核心机制 | `genrec` | GenRec · JD.com | page-wise NTP、Token Merger 与 GRPO-SR/NLL |
-| 核心机制 | `rankgraph2` | RankGraph-2 · Meta | popularity-corrected graph、PPR 与两级 residual index；NDCG@10 +109.65% |
-| 核心机制 | `solaris` | SOLARIS · Meta | future-pair predictor、异步 latent cache 与 fallback |
-| 核心机制 | `minimax-sparse-attention` | MiniMax Sparse Attention · MiniMax | attention pairs -79.95%，PPL +0.41%；未融合 MPS 不宣称加速 |
-| 核心机制 | `pinequalizer` | PinEqualizer · Pinterest | engagement dropout、内容交叉、分 cohort calibration 与探索 corpus；fresh NDCG +448.62%，整体 NDCG -16.44% |
-| 核心机制 | `gzip-sparse-attention` | Gzip-guided Sparse Attention · Penn State | 逐 block gzip 与 local/literal/hybrid heads；attention edges -70.82%，BPB 较 BigBird +1.02%（变差） |
-| 核心机制 | `windowed-mtp` | Windowed-MTP · NVIDIA | draft-only sink+recent KV、完整 target verification；16K KV read -99.56%、MPS draft latency -50.25% |
-| 核心机制 | `adadsf` | AdaDSF · Huawei/SUSTech | cosine calibration、逐层 budget、Top-K router 与 feature alignment；80% budget 下 PPL 较 Uniform MoD +0.30%（变差） |
-| 核心机制 | `barge` | BARGE · Tencent | Householder OSQ、双 residual codebook、ICA、HPR、双 decoder 与 OR-fusion；MovieLens NDCG@10 +85.77% |
-| 核心机制 | `mobius-rope` | Möbius RoPE · Independent | 25% heads anti-periodic frequency ladder；PPL -0.03%，单 seed needle -2.08 points |
-| 核心机制 | `naju` | Naju · Independent | 独立 retain/write 的 native-discrete SSM block；preserve-first gates 正确，本地 PPL +25.67%（变差） |
-| 核心机制 | `dynamic-rubric` | DynamicRubric · Tencent/WeChat/Tsinghua | response-set rubric、binary verifiers、discriminability/anchor 与策略—评估器共进化；Alpaca preference accuracy +4.64% |
-| 核心机制 | `tsgr` | TSGR · Alibaba/Taobao | residual semantic prefix、并行全局/query 价值码与联合 VRM；MovieLens NDCG@10 +115.73% |
-| 核心机制 | `off-context-grpo` | Off-Context GRPO · Meta AI/Columbia | privileged behavior rollout、group-relative reward 与 importance correction；GSM8K Pass@1 +25.00% |
-| 核心机制 | `ramp` | RAMP · Huawei/UCD | 个性化/公共双路径、feature mask 与 prediction-alignment KL；受限流量 NDCG@10 +417.23% |
-| 核心机制 | `whale` | WHALE · Meta | Wukong 乘性交互、门控 HSTU 与逐层跨分支注意力；MovieLens NDCG@10 -83.20% |
-| 核心机制 | `tmallgs` | TMallGS · Alibaba/Tmall | field-wise QKV、噪声门控、FiLM、context bias 与 progressive loss；NDCG@10 +310.42% |
-| 核心机制 | `long-history-transformer` | Long-History User Transformers · Yandex | 异步全历史 encoder、固定缓存、在线近期 encoder 与双辅助目标；NDCG@10 +57.08% |
-| 核心机制 | `downstream-rewards` | Downstream Rewards · Pinterest | 长期 reward 候选筛选、独立 reward heads 与 validation 融合；NDCG@10 -5.10% |
-| 核心机制 | `recgpt-mobile` | RecGPT-Mobile · Alibaba/Taobao | 真实 SmolLM2-135M LoRA、adaptive prompt、drift trigger 与 INT8；semantic intent accuracy +100.00%、体积 -53.68% |
-| 核心机制 | `sort-gen` | SORT-Gen · Alibaba/Taobao | causal ordered regression、多目标队列、单次 mask-driven 评分和 MMR；Click +5.10%、GMV proxy +9.00% |
-| 核心机制 | `recgpt-v3` | RecGPT-V3 · Alibaba/Taobao | 两级 SID、Memory Hub、显式教师→latent 重建与 ranking feedback；MovieLens-1M NDCG@10 +36.96%，memory token -65% |
-| 核心机制 | `slimper` | SlimPer · Meta/Instagram | 固定 KB、Select–Match–Refine 与 request-only sharing；参数匹配下 NDCG@10 +1.29%、attention scores -94.12% |
-| 核心机制 | `recap` | RECAP · Kuaishou/USTC | causal profile updater、bounded state、双塔 evaluator 与 GRPO；reward 上升但 NDCG@10 -6.77% |
-| 核心机制 | `uame` | UAME · Kuaishou | Gaussian score、probabilistic pairwise loss、冲突约束与 uncertainty weighting；NDCG@10 -62.28% |
-| 核心机制 | `conv-llm` | Convolution for LLMs · Huawei/PKU/Tsinghua | post-QKV residual depthwise Conv1D；WikiText-2 test PPL -0.29% |
-| 核心机制 | `ppl-factory` | PPL-Factory · McGill | 冻结 scorer、task-aware NLL 与 budget-aware block selection；20% 预算 PPL 较随机 +1.79%（变差） |
-| 核心机制 | `fluid` | FLUID · TikTok/ByteDance | 跨域内容融合、RQ-LUCID、prefix n-gram、ID-free late fusion 与 staged warmup；fresh Hit +100.00%、NDCG -20.63% |
-| 核心机制 | `memory-grafting` | Memory Grafting · Tsinghua/MSRA | 离线 teacher hidden bank、最长 n-gram 匹配、Engram fallback、gate+ShortConv；PPL 较 Transformer -3.59% |
-| 核心机制 | `mhc` | mHC · DeepSeek-AI | 动态两流 HC、Sinkhorn 双随机投影与稳定性测量；谱范数 1.089→1.000，短程 PPL 未提升 |
-| 核心机制 | `degre` | DeGRe · Alibaba | 累计价值 evaluator、lookahead beam mining 与 dense prefix distillation；NDCG@10 +3.31% |
-| 核心机制 | `harness-lm` | HARNESS-LM · Microsoft/Bing Ads | 强 teacher、L2 query alignment、冻结文档索引对比精修；NDCG@10 -28.05% |
-| 核心机制 | `grc` | GRC · Alibaba International | 结构化反思纠错 SFT、trajectory GRPO 与 EGRS；NDCG@10 -11.12% |
-| 核心机制 | `mbgr` | MBGR · Meituan | business-aware SID、共享 experts 与 LDR；NDCG@10 -5.92% |
-| 核心机制 | `growthgr` | GrowthGR · Alibaba | ItemLTV、RQ-SID、MoPO 与 constrained retrieval；NDCG@10 +2.05% |
-| 核心机制 | `mesh` | MESH · Pinterest | 模块化 sub-towers、signal amplifier 与 RGBC；NDCG@10 -3.54% |
-| 核心机制 | `sam` | SAM · Alibaba | 双路径兴趣/节奏、ASGU、TTNP 与 log-mask；NDCG@10 -6.60% |
-| 核心机制 | `danet` | DANet · Alibaba/Tmall | FFT 折扣分解、user/context correction 与辅助回归；fresh Hit@10 +50.00% |
-| 核心机制 | `proximity-features` | Proximity Features · Airbnb | 自适应 ZIP 分桶、稳定 proximity key 与群体冷启动特征；NDCG@10 +22.91% |
-| 核心机制 | `nontp` | NONTP · Meituan | NTP + EMA teacher TCL + 跨域 TDL 联合训练，辅助模块推理期移除；Hit@10 -4.93%、NDCG -8.62% |
-| 核心机制 | `akt-rec` | AKT-Rec · Alibaba | 真实 SmolLM LoRA 双阶段训练、RQ-VAE SID、非对称 head→tail 迁移和活动度门控；AUC +3.44%、GAUC +5.53% |
-| 完整核心链路 | `s-grec` | S-GRec · Tencent/WeChat | 真实 LLM PSJ 方面 SFT+GRPO、pairwise aggregator、SID 生成、5% 稀疏 A2PO；validation 晋级，test HR@10 +0%、NDCG -4.53% |
-| 完整核心链路 | `pinterest-ads-llm` | Complementary LLM Predictor · Pinterest | SmolLM LoRA SFT+GRPO、advertiser constrained decoding、two-tower 补充召回与排序特征；GRPO Recall@20 +0%，排序 AUC +2.59% |
-| 完整核心链路 | `lwgr` | LWGR · Alibaba International | IBQ parallel soft instructions 穿过真实 LLM、BOS cross-attention、reference constraint、primal-dual；Recall@10 +0%，NDCG -4.29% |
-| 完整核心链路 | `sigma` | SIGMA · Alibaba/AliExpress | LLM 多视角 grounding、hybrid prefix+ID、七任务 SFT、三步生成/APF；选中 top1-prefix 的 HR@20 0.0078→0.0703，APF 未提升 |
-| 完整核心链路 | `univa` | UniVA · Tencent/WeChat | Commercial SID、HSTU、MoR+Sparse-MoE、generation/value 双头、SL↔PPO/value、个性化 trie beam；HR@100 +4.76%，ValueHR +6.56%，wNDCG -8.43% |
-| 核心机制 | `prompt-generation` | Prompt Generation · Alibaba/Taobao | 同源 Amazon Office、Qwen2.5-0.5B、双 JSON/mean merger/LoRA SFT；HR@10 -11.11%，压缩打分 -90.38% |
-| 完整核心链路 | `precise` | PRECISE · Tencent/WeChat | SmolLM contextual token、top-k MoE、交替训练、UT→TT+BPR；Recall@10 +40.0%，Cold Recall -50.0% |
-| 完整核心链路 | `pinrec` | PinRec · Pinterest | outcome conditioning、unordered window multi-token、ANN vectors；Recall@10 -27.78% |
-| 完整核心链路 | `genrank` | GenRank · Xiaohongshu | item/action 组织对照、位置/时间偏置；延迟 -25.66%，AUC -0.46% |
-| 完整核心链路 | `learn` | LEARN · Kuaishou | 冻结 LLM CEG、PCH、dense all-position；NDCG +233.10%，头部偏置明显 |
-| 完整核心链路 | `notellm` | NoteLLM · Xiaohongshu | T5 compression token、行为 GCL、类别 CSFT；NDCG +7.15% |
-| 完整核心链路 | `kar` | KAR · Huawei | SmolLM2 真实生成用户/物品知识、缓存、hybrid experts；AUC 均值 +0.81% |
-| 完整核心链路 | `bahe` | BAHE · Ant Group | 浅层原子行为缓存、上层行为聚合；样本耗时 -53.61%，AUC -2.94% |
-| 完整核心链路 | `beque` | BEQUE · Alibaba | T5 SFT、无泄漏 beam 自采样、离线检索反馈、PRO；feedback +30.03%，increment -66.02% |
-| 完整核心链路 | `onerec-v2` | OneRec-V2 · Kuaishou | KuaiRand 真实时长反馈、RQ-SID、Lazy Decoder、DARS、GBPO；latency -54.78%，GBPO 均值 +21.66% |
-| 完整核心链路 | `plum` | PLUM · Google/YouTube | 135M decoder-only LM；2×2 CPT 消融；CPT 降低 loss，但 Recall@10 未提升 |
-| 完整核心链路 | `onerec` | OneRec · Kuaishou | RQ-SID、session MoE、reward model、self-hard DPO；DPO 后 NDCG 降至 0 |
-| 完整核心链路 | `g2rec` | G2Rec · Meta | soft graph clustering、交替 interest token decoder、双 loss；NDCG@10 +11.92% |
-| 核心机制 | `llm-ad-retrieval` | LLM Retrieval · Meta | domain SFT、LLM attribute head、层级 Jaccard 语义图；Recall@20 +11.90%，边分数漂移 -77.36% |
-| 完整核心链路 | `seral` | SERAL · Alibaba | cognition profiles、CDI、SFT→IPO、nearline；相对 DIN NDCG@10 +50.60% |
-| 完整核心链路 | `leadre` | LEADRE · Tencent | S-ID、intent/auxiliary tasks、SFT→DPO；相对 DIN +12.94%，DPO 消融退化 |
-| 完整核心链路 | `cobra` | COBRA · Baidu | sparse→dense cascade、BeamFusion；相对 DIN +25.75% |
-| 核心机制 | `argus` | ARGUS · Yandex | feedback→next-item decomposition；相对 DIN -4.12% |
-| 核心机制 | `gr4ad` | GR4AD · Kuaishou | UA-SID、LazyAR、VSL、RSPO；相对 DIN +69.67%，头部集中 |
-| 核心机制 | `cross-domain-kd` | Zero-shot KD · Google/YouTube | 跨域 teacher logits + auxiliary distillation；target split 相对 DIN -68.46% |
-| 核心机制 | `mm-llm` | MM-LLM · Meta | query cross-attention caption tokens + ranking fusion；相对 DIN -13.23% |
-| 完整核心链路 | `mixformer` | MixFormer · ByteDance/Douyin | matched-budget stacked/unified Transformer；NDCG@10 +17.41% |
-| 完整核心链路 | `rankmixer` | RankMixer · ByteDance/Douyin | token mixing、per-token FFN、DTSI sparse MoE；dense 最优，sparse 未追平 |
-| 完整核心链路 | `hyformer` | HyFormer · ByteDance/Douyin | query generation/decoding/boosting；NDCG@10 +143.77%，头部偏置同步上升 |
-| 完整核心链路 | `onetrans` | OneTrans · ByteDance | mixed QKV/FFN、causal attention、pyramid；NDCG@10 +123.58%，head share 92% |
-| 完整核心链路 | `rec-distill` | Rec-Distill · ByteDance | black-box logits、双塔去偏、batch+stream；本地 transferability -4.11% |
-| 完整核心链路 | `sasrec` | SASRec | causal self-attention、point-wise FFN、pairwise BCE；全库 NDCG@10 0.02933，与 popularity 基本持平 |
-| 完整核心链路 | `lsvcr` | LSVCR · Kuaishou | q/v-LoRA、双序列 SSC/VCC 对齐；comment NDCG +50.40%，item -56.42% |
-| 完整核心链路 | `msd` | MSD · Meituan | teacher→T5 自回归蒸馏、LoRA、频次缓存融合；AUC +1.55% |
-| 完整核心链路 | `lum` | LUM · Alibaba | next-condition-item、group query、DLRM 知识利用；AUC +14.60% |
-| 核心机制 | `sessionrec` | SessionRec · Meituan | KuaiRand 真实 session、多正例召回与曝光困难负例；NDCG@20 -22.05% |
-| 核心机制 | `saviorrec` | SaviorRec · Alibaba | 行为对齐 encoder、RQ-SID、zero-init MBA、双向注意力；cold AUC +6.92% |
-| 核心机制 | `hstu` | HSTU · Meta | UVQK、非 softmax aggregation、U-gate、all-position training；matched SASRec 对照下 NDCG@10 -17.73% |
-| 核心机制 | `din` | DIN · Alibaba | candidate-conditioned local activation、Dice、CTR BCE；mean-pool 对照下 NDCG@10 -6.97% |
-| 核心机制 | `tiger` | TIGER · Google | RQ-VAE Semantic ID、collision token、自回归检索；matched random ID 对照下 NDCG@10 -39.16% |
-| 核心机制 | `m6rec` | M6-Rec · Alibaba | 冻结真实预训练 LM、option tuning、逐层 adapter；3-seed AUC +0.12% ± 0.41% |
-| 核心机制 | `transact-v2` | TransAct V2 · Pinterest | 候选锚定 lifelong retrieval、early fusion、sampled-softmax NAL；NDCG@10 +92.65%，头部占比明显上升 |
-| 核心机制 | `pinfm` | PinFM · Pinterest | NTL/MTL/FTL 预训练、DCAT、下游微调；validation -6.46%，test -3.57%，长尾覆盖显著增加 |
-| 核心机制 | `sis` | SIS | 论文的 off-policy token importance-sampling 变换 |
-| 核心机制 | `mdcns` | MDCNS | 三源负采样、分歧/共识筛选与双模型更新 |
-| 核心机制 | `memento` | Memento · Meta | query-conditioned MMR 长历史检索 |
-| 核心机制 | `cluster-goobs` | Cluster GOOBS · Meta | cluster-conditioned online hard-negative sampling |
-| 核心机制 | `llatte` | LLaTTE · Meta | BERT semantic features、MLA、target-aware attention、DHEN |
-| 核心机制 | `self-evolving-rec` | Self-Evolving RecSys · Google | 本地指令 LLM 驱动 journal→提案→反馈→晋级闭环 |
-| 核心机制 | `cmsl` | CMSL · Meta | learned contextual lenses 与 HSTU-style backbone |
-| 核心机制 | `longer` | LONGER · ByteDance/Douyin | InnerTrans、global token 与 hybrid attention |
-
-三级定义和逐篇审计见[论文实现索引](docs/reproductions/README.md)。公开数据缩放实验只支持本地口径结论，不能与论文生产 A/B 混为一谈。
+新增或更新 adapter 时，CI 会检查 registry、统一 manifest、论文信息块、证据定位、实验协议
+和历史指标 schema 是否同步，不再手工维护 README 中容易过期的 186 行清单。
 
 ## 代码结构
 
@@ -436,6 +273,10 @@ auto-research reproduce --paper all --track recommendation --topic ranking \
 和 seed；多 seed 批次额外生成均值、标准差和 95% 置信区间。单 seed 只属于 smoke，
 不能表述为稳定提升。
 
+`--budget smoke|standard` 不是标签：每个 adapter 会在独立进程执行，分别施加 5 分钟
+和 60 分钟硬截止，超时后终止进程并返回失败；可用 `--budget-seconds` 做显式覆盖。
+`paper-specific` 保留论文 adapter 自己声明的训练日程，不增加统一截止。
+
 每篇论文、每次运行写入独立且不可变的目录：
 
 ```text
@@ -456,7 +297,9 @@ runs/reproductions/<arxiv-id>-<adapter>/<timestamp>/
   `evidence-only`，不会直接执行；
 - 真正进入训练的论文结构或算法都已经在本仓库实现、测试并登记映射；
 - 系统会在这些白名单算子之间做组合和超参数变异。这可以产生新的工程实验假设，
-  但不会根据论文 PDF 或模型输出现场生成任意代码。
+  默认不会根据论文 PDF 现场执行任意代码。可选的 `--candidate-generator-command`
+  只把外部生成结果写入隔离候选区并执行验证；仍需显式 `candidate promote --approve`
+  后，候选才可能在后续运行注册为可执行算子。
 
 具体例子、离线模式和报告中的来源标记见
 [候选到底从哪里来](docs/model-evolution.md#candidate-sources)。

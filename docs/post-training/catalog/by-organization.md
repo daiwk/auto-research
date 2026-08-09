@@ -94,6 +94,7 @@
 
 ## Meta AI
 
+- 2026-07-21 · 一作：Priyank Agrawal · [Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information](../../reproductions/2607.19313-off-context-grpo/README.md)（`off-context-grpo`）：困难题上 vanilla GRPO 常因整组 rollout 都失败而没有有效优势信号。Off-Context GRPO 只在采样时向 behavior policy 提供解题草稿或提示等 privileged information，提高成功轨迹出现率；优化目标仍是原始无提示 policy，并用 importance ratio 校正两种采样分布的偏差，因此推理时不需要特权上下文。
 - 2024-01-18 · 一作：Weizhe Yuan · [Self-Rewarding LM](../2401.10020-self-rewarding/README.md)（`self-rewarding`）：每轮由当前模型生成候选并以 LLM-as-a-Judge 打分，形成新的偏好对继续 DPO，构成自举闭环。
 
 ## Microsoft Research
@@ -134,6 +135,10 @@
 ## Princeton University
 
 - 2024-05-23 · 一作：Yu Meng · [SimPO](../2405.14734-simpo/README.md)（`simpo`）：DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。
+
+## Renmin University of China
+
+- 2026-07-06 · 一作：Yu Li · [Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment](../../reproductions/2607.04728-sis/README.md)（`sis`）：异步 rollout、样本复用和 stale policy 会让 LLM 强化学习变成 off-policy 更新。标准 importance sampling（IS）在长序列上连乘后方差很大，直接 clipping 又会丢失有效梯度。
 
 ## SAIL 研究团队
 
@@ -193,6 +198,10 @@
 ## University of Washington
 
 - 2025-04-21 · 一作：Jianhao Yan · [LUFFY](../2504.14945-luffy/README.md)（`luffy`）：把离线高质量推理与在线 rollout 放进同一 support，通过正则化 importance ratio 保留 on-policy 行为。
+
+## WeChat / Tencent
+
+- 2026-07-22 · 一作：Beining Wang · [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../../reproductions/2607.20083-dynamic-rubric/README.md)（`dynamic-rubric`）：固定 judge 或固定 rubric 会在策略模型进步后失去区分力。DynamicRubric 根据当前 prompt 和一组候选回答动态生成评估维度与权重，用 discriminability 目标寻找能区分当代 hard negatives 的标准，用 anchor 目标限制评估器漂移，再让 evaluator 和 policy 多轮协同进化。
 
 ## Xiaomi
 

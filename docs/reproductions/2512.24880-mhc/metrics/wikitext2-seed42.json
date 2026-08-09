@@ -1,13 +1,64 @@
 {
   "paper": "2512.24880",
   "adapter": "mhc",
-  "dataset": {"name": "WikiText-2", "train_tokens": 180000, "validation_tokens": 24000},
-  "setup": {"seed": 42, "steps": 45, "layers": 3, "dimensions": 64, "residual_streams": 2, "sinkhorn_iterations": 20},
-  "variants": {
-    "Transformer": {"loss": 6.1503954728, "perplexity": 468.9027884, "trainable_parameters": 225728},
-    "HC": {"loss": 6.1565457384, "perplexity": 471.7955516, "trainable_parameters": 232694, "row_sum_error": 0.1090691090, "column_sum_error": 0.1107015014, "spectral_norm_max": 1.0892173052},
-    "mHC": {"loss": 6.1570440928, "perplexity": 472.0307316, "trainable_parameters": 232694, "row_sum_error": 0.0, "column_sum_error": 0.0, "spectral_norm_max": 1.0000001192}
+  "dataset": {
+    "name": "WikiText-2",
+    "train_tokens": 180000,
+    "validation_tokens": 24000
   },
-  "relative": {"ppl_reduction_vs_transformer_percent": -0.6670771, "ppl_reduction_vs_hc_percent": -0.0498479},
-  "paper_results": {"benchmark_gain_percent": "2.1-2.3", "training_overhead_percent": 6.7}
+  "setup": {
+    "seed": 42,
+    "steps": 45,
+    "layers": 3,
+    "dimensions": 64,
+    "residual_streams": 2,
+    "sinkhorn_iterations": 20
+  },
+  "variants": {
+    "Transformer": {
+      "loss": 6.1503954728,
+      "perplexity": 468.9027884,
+      "trainable_parameters": 225728
+    },
+    "HC": {
+      "loss": 6.1565457384,
+      "perplexity": 471.7955516,
+      "trainable_parameters": 232694,
+      "row_sum_error": 0.109069109,
+      "column_sum_error": 0.1107015014,
+      "spectral_norm_max": 1.0892173052
+    },
+    "mHC": {
+      "loss": 6.1570440928,
+      "perplexity": 472.0307316,
+      "trainable_parameters": 232694,
+      "row_sum_error": 0.0,
+      "column_sum_error": 0.0,
+      "spectral_norm_max": 1.0000001192
+    }
+  },
+  "relative": {
+    "ppl_reduction_vs_transformer_percent": -0.6670771,
+    "ppl_reduction_vs_hc_percent": -0.0498479
+  },
+  "paper_results": {
+    "benchmark_gain_percent": "2.1-2.3",
+    "training_overhead_percent": 6.7
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:mhc",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2512.24880-mhc/metrics/wikitext2-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

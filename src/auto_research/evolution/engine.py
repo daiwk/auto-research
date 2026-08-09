@@ -2,11 +2,19 @@ from __future__ import annotations
 
 import datetime as dt
 import json
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import (
+    FIRST_COMPLETED, ThreadPoolExecutor, wait,
+)
+import multiprocessing as mp
+import queue
 import random
+import time
 from pathlib import Path
 
 from .models import EvolutionConfig, EvolutionResult, Genome
+from .candidate_design import (
+    generate_and_verify_candidates, write_candidate_specs,
+)
 from .papers import discover_papers
 from .planner import allowed_architectures, propose, round_record
 from .providers import get_provider
@@ -47,6 +55,16 @@ class ModelEvolutionEngine:
                 query, config.max_papers, config.allow_network, track=track
             )
             result = EvolutionResult(run_id, config, papers=papers)
+            specs_path = write_candidate_specs(
+                run_dir / "paper-candidates.json", papers, config.model
+            )
+            if config.candidate_generator_command:
+                result.verification_records.extend(
+                    generate_and_verify_candidates(
+                        config.candidate_generator_command, specs_path,
+                        self.project_dir, config.candidate_timeout_seconds,
+                    )
+                )
         evaluator = self.evaluator or _make_evaluator(config, self.project_dir)
         result.dataset_summary = evaluator.summary() if hasattr(evaluator, "summary") else {}
         baseline_genome = provider.baseline_factory(config)
@@ -129,15 +147,21 @@ class ModelEvolutionEngine:
                 yield _safe_evaluate(evaluator, spec, self.config.retries)
             return
         if self.evaluator is not None:
-            with ThreadPoolExecutor(max_workers=workers) as pool:
-                futures = [pool.submit(_safe_evaluate, evaluator, spec, self.config.retries) for spec in specs]
-                for future in as_completed(futures):
-                    yield future.result()
+            pool = ThreadPoolExecutor(max_workers=workers)
+            yield from _collect_with_deadlines(
+                [
+                    (spec, pool.submit(
+                        _safe_evaluate, evaluator, spec, self.config.retries
+                    ))
+                    for spec in specs
+                ], self.config.trial_timeout_seconds,
+            )
+            pool.shutdown(wait=False, cancel_futures=True)
             return
-        with ProcessPoolExecutor(max_workers=workers) as pool:
-            futures = [pool.submit(_evaluate_worker, self.config, self.project_dir, spec) for spec in specs]
-            for future in as_completed(futures):
-                yield future.result()
+        yield from _run_isolated_trials(
+            self.config, self.project_dir, specs, workers,
+            self.config.trial_timeout_seconds,
+        )
 
 
 def _make_evaluator(config, project_dir):
@@ -146,6 +170,68 @@ def _make_evaluator(config, project_dir):
 
 def _evaluate_worker(config, project_dir, spec):
     return _safe_evaluate(_make_evaluator(config, project_dir), spec, config.retries)
+
+
+def _isolated_evaluate_entry(config, project_dir, spec, output):
+    try:
+        output.put(("ok", _evaluate_worker(config, project_dir, spec)))
+    except BaseException as exc:  # serialize failures across the process boundary
+        output.put(("error", f"{type(exc).__name__}: {exc}"))
+
+
+def _run_isolated_trials(config, project_dir, specs, workers, timeout_seconds):
+    """Bounded process scheduler whose timeouts terminate actual trial workers."""
+
+    context = mp.get_context("spawn")
+    queued = list(specs)
+    active = {}
+    while queued or active:
+        while queued and len(active) < workers:
+            spec = queued.pop(0)
+            output = context.Queue(maxsize=1)
+            process = context.Process(
+                target=_isolated_evaluate_entry,
+                args=(config, project_dir, spec, output),
+                name=f"evolve-{spec[0]}",
+            )
+            process.start()
+            active[process.pid] = (process, output, spec, time.monotonic())
+
+        completed = []
+        now = time.monotonic()
+        for pid, (process, output, spec, started) in tuple(active.items()):
+            if process.is_alive() and now - started < timeout_seconds:
+                continue
+            if process.is_alive():
+                process.terminate()
+                process.join(5)
+                if process.is_alive():
+                    process.kill()
+                    process.join()
+                yield _failed_trial(
+                    spec,
+                    f"TimeoutError: trial exceeded hard limit of {timeout_seconds}s",
+                    now - started,
+                )
+            else:
+                process.join()
+                try:
+                    kind, payload = output.get(timeout=1)
+                except queue.Empty:
+                    yield _failed_trial(
+                        spec, f"WorkerExitError: process exited with {process.exitcode}",
+                        now - started,
+                    )
+                else:
+                    yield payload if kind == "ok" else _failed_trial(
+                        spec, payload, now - started,
+                    )
+            output.close()
+            completed.append(pid)
+        for pid in completed:
+            active.pop(pid)
+        if active and not completed:
+            time.sleep(0.05)
 
 
 def _safe_evaluate(evaluator, spec, retries=0):
@@ -157,18 +243,58 @@ def _safe_evaluate(evaluator, spec, retries=0):
             last_error = exc
     exc = last_error
     if exc is not None:
-        from .models import EvolutionTrial
-        trial_id, generation, parent_id, genome, papers, rationale = spec
-        return EvolutionTrial(trial_id, generation, parent_id, genome,
-            {"fitness": -1e9, "ndcg_at_10": -1.0, "hit_at_10": 0.0,
-             "perplexity": 1e9, "instruction_loss": 1e9, "lm_loss": 1e9},
-            {"parameters": 0, "seeds": []}, papers, rationale, 0.0, "failed", f"{type(exc).__name__}: {exc}")
+        return _failed_trial(spec, f"{type(exc).__name__}: {exc}")
+
+
+def _failed_trial(spec, error, duration_seconds=0.0):
+    from .models import EvolutionTrial
+    trial_id, generation, parent_id, genome, papers, rationale = spec
+    return EvolutionTrial(
+        trial_id, generation, parent_id, genome,
+        {"fitness": -1e9, "ndcg_at_10": -1.0, "hit_at_10": 0.0,
+         "perplexity": 1e9, "instruction_loss": 1e9, "lm_loss": 1e9},
+        {"parameters": 0, "seeds": []}, papers, rationale,
+        duration_seconds, "failed", error,
+    )
 
 
 def _effective_workers(config: EvolutionConfig) -> int:
     if config.device.startswith("cuda"):
-        return max(1, min(config.workers, config.gpu_slots))
+        slots = config.gpu_slots
+        if config.gpu_memory_per_trial_mb:
+            try:
+                import torch
+                free_bytes, _ = torch.cuda.mem_get_info()
+                memory_slots = free_bytes // (config.gpu_memory_per_trial_mb * 1024**2)
+                slots = min(slots, max(1, int(memory_slots)))
+            except (ImportError, RuntimeError):
+                slots = 1
+        return max(1, min(config.workers, slots))
     return config.workers
+
+
+def _collect_with_deadlines(submitted, timeout_seconds):
+    """Collect futures with per-trial deadlines and explicit timeout records."""
+
+    pending = {future: (spec, time.monotonic()) for spec, future in submitted}
+    while pending:
+        done, _ = wait(pending, timeout=0.1, return_when=FIRST_COMPLETED)
+        for future in done:
+            pending.pop(future)
+            yield future.result()
+        now = time.monotonic()
+        expired = [
+            future for future, (_, started) in pending.items()
+            if now - started >= timeout_seconds
+        ]
+        for future in expired:
+            spec, started = pending.pop(future)
+            future.cancel()
+            yield _failed_trial(
+                spec,
+                f"TimeoutError: trial exceeded {timeout_seconds}s scheduling deadline",
+                now - started,
+            )
 
 
 def _selection_score(trial, config: EvolutionConfig) -> float:

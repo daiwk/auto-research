@@ -1,8 +1,42 @@
 {
   "dataset": "MovieLens 100K (260 users / 420 items)",
   "seed": 42,
-  "baseline": {"hit_at_10": 0.088462, "ndcg_at_10": 0.035398, "fresh_hit_at_10": 0.027778, "head_share_at_10": 0.293846},
-  "method": {"hit_at_10": 0.126923, "ndcg_at_10": 0.071195, "fresh_hit_at_10": 0.097222, "head_share_at_10": 0.267308},
-  "relative": {"hit_at_10_percent": 43.48, "ndcg_at_10_percent": 101.13},
-  "verification": {"candidates": 4, "accepted": 3, "rejected": 1, "selected": "transition-specialist"}
+  "baseline": {
+    "hit_at_10": 0.088462,
+    "ndcg_at_10": 0.035398,
+    "fresh_hit_at_10": 0.027778,
+    "head_share_at_10": 0.293846
+  },
+  "method": {
+    "hit_at_10": 0.126923,
+    "ndcg_at_10": 0.071195,
+    "fresh_hit_at_10": 0.097222,
+    "head_share_at_10": 0.267308
+  },
+  "relative": {
+    "hit_at_10_percent": 43.48,
+    "ndcg_at_10_percent": 101.13
+  },
+  "verification": {
+    "candidates": 4,
+    "accepted": 3,
+    "rejected": 1,
+    "selected": "transition-specialist"
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:nova",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2606.27243-nova/metrics/movielens-100k-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }
