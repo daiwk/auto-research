@@ -1,0 +1,43 @@
+{
+  "paper": {
+    "arxiv_id": "2608.02738",
+    "title": "KGD",
+    "url": "https://arxiv.org/abs/2608.02738",
+    "organization": "Xiamen University / Shopee"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 280,
+    "items": 440
+  },
+  "setup": {
+    "seed": 42
+  },
+  "variants": {
+    "adjacent ntp transfer": {
+      "hit_at_10": 0.25,
+      "ndcg_at_10": 0.14838729507481513,
+      "head_share_at_10": 0.17035714285714285
+    },
+    "kgd bmtp + read-only transfer + acr": {
+      "hit_at_10": 0.26785714285714285,
+      "ndcg_at_10": 0.13113418430962984,
+      "head_share_at_10": 0.09464285714285714
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": 7.14285714285714,
+    "ndcg_at_10_percent": -11.627080847107885,
+    "head_share_at_10_percent": -44.44444444444444
+  },
+  "mechanism": {
+    "bmtp_horizon": 4,
+    "knowledge_rank": 16,
+    "acr_anchor_dot": 3.0296058433430173e-18
+  },
+  "paper_results": {
+    "gmv_per_user_percent": 1.75,
+    "advertising_revenue_percent": 1.53
+  },
+  "scope": "BMTP、冻结知识编码、只读 transfer 与正交 ACR 均实际执行；未复刻 Shopee 流式日志和生产刷新服务。"
+}

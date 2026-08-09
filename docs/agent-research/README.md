@@ -73,6 +73,14 @@
 - [SEARL](2604.07791-searl/README.md) 与 [Agent0](2511.16043-agent0/README.md)：联合优化策略/工具图，并以零数据多 Agent curriculum 自进化。
 - [Agent-R1](2511.14460-agent-r1/README.md)、[CAMEL](2303.17760-camel/README.md)、[ToolBench](2305.16504-toolbench/README.md) 与 [GAIA](2311.12983-gaia/README.md)：补齐 step-level Agent RL、多 Agent role-playing、工具指令学习与通用公共评测。
 
+## 2026-08-09 P0/P1 增量
+
+- [EvoHarness-RL](2608.05446-evoharness-rl/README.md)、[VaG](2608.05810-vag/README.md) 与 [GSE](2608.06153-gse/README.md)：覆盖 harness policy、技能写入前验证和全局技能图进化。
+- [CIPO](2608.06128-cipo/README.md)、[State2State](2608.04934-state2state/README.md) 与 [HindSearch](2608.01597-hindsearch/README.md)：覆盖证据信用、环境派生任务和失败轨迹 hindsight。
+- [HarnessOpt-Bench](2608.06301-harnessopt-bench/README.md)、[CodeGrep](2608.05886-codegrep/README.md) 与 [MemoryCPT](2608.04843-memorycpt/README.md)：覆盖 harness 优化评测、代码检索策略和成本感知记忆。
+
+九个方法均接入统一 runner 和 Agent evolve 组合 genome，并在 PlanBench mini-suite 上留下固定 seed 结果。
+
 ## 研究闭环
 
 ```mermaid

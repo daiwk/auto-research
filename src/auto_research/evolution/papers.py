@@ -16,6 +16,7 @@ INSTALLED_MUTATIONS = {
     "2607.13398": ("rankmixer_tmallgs", "TMallGS 的 field-wise QKV、噪声门控与 progressive supervision"),
     "2607.14331": ("rankmixer_long_history", "异步长历史编码、固定缓存状态与轻量在线近期序列融合"),
     "2607.17473": ("rankmixer_ramp", "RAMP 的个性化/公共双路径、特征可用性 masking 与 prediction alignment"),
+    "2608.02738": ("rankmixer_kgd", "KGD 的可刷新行为知识、只读 transfer 与 Anchored Calibration Residual"),
 }
 
 LLM_MUTATIONS = {
@@ -46,6 +47,8 @@ LLM_MUTATIONS = {
     "2607.28627": ("retoken", "单个可学习 retrieval target 在 value-projection 空间打分，并稀疏选择已缓存 token"),
     "2608.01075": ("rd_attnres", "对同一组历史 residual sources 分别学习 QK 与 V 的内容依赖深度路由"),
     "2607.16669": ("olm_composable", "OpenLanguageModel 的可组合 decoder、普通层模块与可移植运行时配置"),
+    "2608.05872": ("macro", "MACRO 用 Markov policy 搜索 Transformer 层的 skip、repeat 与 residual 路由"),
+    "2608.05806": ("hilp", "HiLP 用局部与高层抽象 latent 的分层预测缓解长跨度 rollout 误差"),
 }
 
 POST_TRAINING_MUTATIONS = {
@@ -98,6 +101,9 @@ POST_TRAINING_MUTATIONS = {
     "2512.01374": ("minirl", "以重要性采样与 Routing Replay 稳定稀疏 MoE 的强化学习训练"),
     "2605.12070": ("missing-old-logits", "分离策略陈旧与训推引擎偏差，并用 EWMA 重建缺失的旧策略 logits"),
     "2606.19236": ("stare", "按 token surprisal 识别关键决策，并用目标熵闭环调整优势权重"),
+    "2608.06310": ("rrc", "把生成式 reward model 的相对排序转为 self-competitive 或 anchor-guided RL reward"),
+    "2608.05080": ("rail", "以在线 contextual bandit 学习 recoverability-aware rollout 介入位置和预算"),
+    "2608.04962": ("specroll", "用 fast hidden-state correction 与 slow drafter refresh 加速 on-policy rollout"),
 }
 
 AGENT_MUTATIONS = {
@@ -161,9 +167,22 @@ AGENT_MUTATIONS = {
     "2303.17760": ("planner:camel", "CAMEL 用 inception prompting 固定角色并通过交替消息协作"),
     "2305.16504": ("tool:toolbench", "ToolBench 用程序化工具指令、示例检索和格式约束训练工具调用"),
     "2311.12983": ("tool:gaia", "GAIA 以真实问题统一评估推理、多模态、浏览与工具使用"),
+    "2608.05446": ("memory:evoharness-rl", "SFT 与 cost-aware GRPO 学习 BPE harness 的选择性读写和巩固"),
+    "2608.05810": ("memory:vag", "VaG 在技能提交前以结构、无害性和语义一致性三层 verifier 阻断污染"),
+    "2608.06153": ("memory:gse", "GSE 以技能关系图、聚类巩固和 replay verification 学习全局可复用技能"),
+    "2608.06128": ("critic:cipo", "CIPO 为检索证据实际影响的后续 action 分配 turn-level credit"),
+    "2608.04934": ("planner:state2state", "State2State 从探索到的环境状态自动构造目标状态和规则 verifier"),
+    "2608.06301": ("critic:harnessopt-bench", "HarnessOpt-Bench 在固定评测预算和隔离测试集下审计 harness 自动优化"),
+    "2608.05886": ("tool:codegrep", "CodeGrep 以 GRPO 学习并行 grep、glob、read 检索并降低 coding-agent rollout 成本"),
+    "2608.04843": ("memory:memorycpt", "MemoryCPT 蒸馏离线记忆构建，并用 cost-aware GRPO 训练查询摘要器"),
+    "2608.01597": ("critic:hindsearch", "HindSearch 用 gold-aware 失败轨迹 hindsight critique 蒸馏搜索动作"),
 }
 
 FALLBACK_PAPERS = (
+    Paper("Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting", "Fresh/delayed target separation, lifecycle targeting and MMoE.", [], "2026-08-05", "https://arxiv.org/abs/2608.04455", "2608.04455"),
+    Paper("LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation", "LLM semantic pseudo-count priors warm-start segmented Thompson sampling.", [], "2026-08-04", "https://arxiv.org/abs/2608.03382", "2608.03382"),
+    Paper("Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation", "BMTP and decoupled read-only knowledge transfer under streaming drift.", [], "2026-08-03", "https://arxiv.org/abs/2608.02738", "2608.02738"),
+    Paper("Hierarchical Residual Policy Optimization for Generative Recommendations", "Prefix smoothing and residual token credit for SID policy optimization.", [], "2026-08-01", "https://arxiv.org/abs/2608.00750", "2608.00750"),
     Paper("RankMixer: Scaling Up Ranking Models in Industrial Recommenders", "Parameter-free token mixing and per-token feed-forward networks for industrial ranking.", [], "2025-07-21", "https://arxiv.org/abs/2507.15551", "2507.15551"),
     Paper("TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders", "Mixing and reverting, interval residuals, auxiliary losses and sparse per-token MoE.", [], "2026-02-06", "https://arxiv.org/abs/2602.06563", "2602.06563"),
     Paper("Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation", "Prime Tokens, Token Fusion and Token Boost for scalable ranking.", [], "2026-01-29", "https://arxiv.org/abs/2601.21285", "2601.21285"),
@@ -177,6 +196,11 @@ FALLBACK_PAPERS = (
 )
 
 LLM_FALLBACK_PAPERS = (
+    Paper("BaKron: Efficient Quantization with Kronecker-Factored Hessians", "Two-sided Kronecker-Hessian adaptive rounding with reduced work.", [], "2026-08-06", "https://arxiv.org/abs/2608.06291", "2608.06291"),
+    Paper("MACRO: Markov Chain Routing of Transformer Layers", "Learns skip, repeat and residual routes over frozen Transformer layers.", [], "2026-08-06", "https://arxiv.org/abs/2608.05872", "2608.05872"),
+    Paper("Hierarchical Latent Prediction for Language Models", "Adds an abstract latent level to stabilize longer-horizon latent prediction.", [], "2026-08-06", "https://arxiv.org/abs/2608.05806", "2608.05806"),
+    Paper("DBLast: Dependent Block Drafting for Stochastic Speculative Decoding", "Low-rank latent mixture models dependencies within stochastic draft blocks.", [], "2026-08-05", "https://arxiv.org/abs/2608.05448", "2608.05448"),
+    Paper("QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding", "Three-tier full, recoverable-quantized and deleted KV management.", [], "2026-08-05", "https://arxiv.org/abs/2608.05326", "2608.05326"),
     Paper("PaLM: Scaling Language Modeling with Pathways", "Parallel Transformer layers and SwiGLU in a decoder-only language model.", [], "2022-04-05", "https://arxiv.org/abs/2204.02311", "2204.02311"),
     Paper("LLaMA: Open and Efficient Foundation Language Models", "Pre-normalization with RMSNorm, SwiGLU and rotary positional embeddings.", [], "2023-02-27", "https://arxiv.org/abs/2302.13971", "2302.13971"),
     Paper("GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints", "Grouped-query attention shares key/value heads for efficient decoding.", [], "2023-05-22", "https://arxiv.org/abs/2305.13245", "2305.13245"),
@@ -206,6 +230,9 @@ LLM_FALLBACK_PAPERS = (
 )
 
 POST_TRAINING_FALLBACK_PAPERS = (
+    Paper("RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction", "Relative ranking rewards from self-competition and anchors.", [], "2026-08-06", "https://arxiv.org/abs/2608.06310", "2608.06310"),
+    Paper("Optimizing What Policies Learn From: Recoverability-aware Rollout Intervention Learning", "Online contextual-bandit control of rollout intervention location and budget.", [], "2026-08-05", "https://arxiv.org/abs/2608.05080", "2608.05080"),
+    Paper("SpecRoll: Fast-Slow Verifier-Feedback Adaptation for Speculative Reinforcement Learning Rollouts", "Distribution-preserving speculative rollout with fast and slow adaptation.", [], "2026-08-05", "https://arxiv.org/abs/2608.04962", "2608.04962"),
     Paper("Training language models to follow instructions with human feedback", "PPO-based RLHF with a learned reward model.", [], "2022-03-04", "https://arxiv.org/abs/2203.02155", "2203.02155"),
     Paper("Direct Preference Optimization: Your Language Model is Secretly a Reward Model", "A closed-form preference objective without an explicit reward model.", [], "2023-05-29", "https://arxiv.org/abs/2305.18290", "2305.18290"),
     Paper("ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models", "A greedy-response baseline for low-variance policy gradients.", [], "2023-10-16", "https://arxiv.org/abs/2310.10505", "2310.10505"),
@@ -247,6 +274,15 @@ POST_TRAINING_FALLBACK_PAPERS = (
 )
 
 AGENT_FALLBACK_PAPERS = (
+    Paper("HarnessOpt-Bench: Evaluating LLMs at Harness Optimization", "Budgeted and auditable end-to-end harness optimization benchmark.", [], "2026-08-06", "https://arxiv.org/abs/2608.06301", "2608.06301"),
+    Paper("Learning Globally Reusable Skills for Coding Agents", "Skill relation graphs, cluster consolidation and replay verification.", [], "2026-08-06", "https://arxiv.org/abs/2608.06153", "2608.06153"),
+    Paper("Contextual Information Policy Optimization for Search Agents", "Dense evidence-use credit for search-agent actions.", [], "2026-08-06", "https://arxiv.org/abs/2608.06128", "2608.06128"),
+    Paper("CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents", "GRPO-trained parallel repository retrieval for lower rollout cost.", [], "2026-08-06", "https://arxiv.org/abs/2608.05886", "2608.05886"),
+    Paper("When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents", "Three-critic pre-commit gate for skill-pool contamination.", [], "2026-08-06", "https://arxiv.org/abs/2608.05810", "2608.05810"),
+    Paper("EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents", "Cost-aware GRPO learns selective BPE harness access.", [], "2026-08-05", "https://arxiv.org/abs/2608.05446", "2608.05446"),
+    Paper("State2State: Environment-Derived Mid-Training for LLM Agents", "Automatically derives verifiable target-state tasks from environments.", [], "2026-08-05", "https://arxiv.org/abs/2608.04934", "2608.04934"),
+    Paper("MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off", "Distilled memory construction plus cost-aware query summarization.", [], "2026-08-05", "https://arxiv.org/abs/2608.04843", "2608.04843"),
+    Paper("HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning", "Gold-aware critique distills failed search trajectories.", [], "2026-08-03", "https://arxiv.org/abs/2608.01597", "2608.01597"),
     Paper("EnvACE: Environment-Aware Agentic Reinforcement Learning", "One policy alternates acting and world rehearsal roles with role-wise group-relative advantages.", [], "2026-08-06", "https://arxiv.org/abs/2608.06197", "2608.06197"),
     Paper("ReAct: Synergizing Reasoning and Acting in Language Models", "Interleaves reasoning traces and environment actions.", [], "2022-10-06", "https://arxiv.org/abs/2210.03629", "2210.03629"),
     Paper("Toolformer: Language Models Can Teach Themselves to Use Tools", "Self-supervised learning of API calls.", [], "2023-02-09", "https://arxiv.org/abs/2302.04761", "2302.04761"),

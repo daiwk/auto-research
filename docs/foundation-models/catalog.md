@@ -9,6 +9,11 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与系统效率 | [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../reproductions/2608.06291-bakron/README.md) | University of California, San Diego，2026-08-06 | 未发现官方代码 | `bakron` |
+| 预训练与数据 | [Hierarchical Latent Prediction for Language Models](../reproductions/2608.05806-hilp/README.md) | University of Texas at Austin，2026-08-06 | 未发现官方代码 | `hilp` |
+| 网络架构 | [MACRO: Markov Chain Routing of Transformer Layers](../reproductions/2608.05872-macro/README.md) | Heinrich Heine University Düsseldorf，2026-08-06 | [已开源](https://github.com/Batorskq/MACRO) | `macro` |
+| 推理与系统效率 | [DBLast: Dependent Block Drafting for Stochastic Speculative Decoding](../reproductions/2608.05448-dblast/README.md) | Huawei Technologies Canada，2026-08-05 | 未发现官方代码 | `dblast` |
+| 推理与系统效率 | [QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding](../reproductions/2608.05326-qevict/README.md) | Indian Institute of Technology Roorkee，2026-08-05 | 未发现官方代码 | `qevict` |
 | 网络架构 | [Role-Decoupled Attention Residuals](../reproductions/2608.01075-rd-attnres/README.md) | Kehan Wang（论文未列机构），2026-08-03 | 未发现官方代码 | `rd-attnres` |
 | 多模态基础模型 | [ReToken: One Token to Improve Vision–Language Models for Visual Retrieval](../reproductions/2607.28627-retoken/README.md) | UIUC / Microsoft Research / Google DeepMind，2026-07-30 | [已开源](https://github.com/avaxiao/ReToken) | `retoken` |
 | 推理与系统效率 | [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../reproductions/2607.28418-wide/README.md) | EIT-NLP / LMU Munich，2026-07-30 | [已开源](https://github.com/EIT-NLP/LLM-Pruning/tree/main/WIDE) | `wide` |

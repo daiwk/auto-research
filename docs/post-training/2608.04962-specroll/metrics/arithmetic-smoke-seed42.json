@@ -1,0 +1,55 @@
+{
+  "algorithm": "specroll",
+  "seed": 42,
+  "dataset": "arithmetic-smoke",
+  "baseline": {
+    "accuracy": 0.234375,
+    "mean_reward": 0.38409619661640243,
+    "entropy": 1.7917594692220566,
+    "kl_from_reference": 0.0
+  },
+  "final": {
+    "accuracy": 0.609375,
+    "mean_reward": 0.7018673685999212,
+    "entropy": 1.6531614116437447,
+    "kl_from_reference": 0.13859805757831026
+  },
+  "relative_accuracy": 1.6,
+  "training": {
+    "steps": 120,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "train_examples": 256,
+    "validation_examples": 64,
+    "data_source": "deterministic arithmetic smoke suite",
+    "teacher_cache_entries": 0,
+    "teacher_prefill_calls": 0,
+    "online_teacher_calls": 0,
+    "drift_events": 0,
+    "critic_updates": 0,
+    "rollout_policy_refreshes": 0,
+    "last_diagnostics": {
+      "verified_proposals": 4.0,
+      "accepted_draft_length": 5.0,
+      "estimated_generation_speedup": 1.8333333333333335,
+      "loss": -0.4137122533913185,
+      "policy_entropy": 1.6795922187194312
+    },
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "schema_version": 2,
+  "manifest_ref": "post-training:specroll",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2608.04962-specroll/metrics/arithmetic-smoke-seed42.json",
+    "original_code_commit": "working tree",
+    "dataset_fingerprint": "deterministic built-in mini-suite"
+  }
+}

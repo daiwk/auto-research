@@ -1,0 +1,23 @@
+{
+  "paper": {
+    "arxiv_id": "2608.05326",
+    "title": "QEvict",
+    "url": "https://arxiv.org/abs/2608.05326"
+  },
+  "dataset": {
+    "name": "deterministic public-style mini-suite"
+  },
+  "setup": {
+    "seed": 42
+  },
+  "metrics": {
+    "binary_evict_recall": 0.9666666666666667,
+    "qevict_recall": 0.9944444444444445,
+    "recoverable_promotions": 8,
+    "full_precision_slots": 48,
+    "quantized_slots": 64,
+    "deleted_slots": 160
+  },
+  "paper_results": {},
+  "scope": "实际执行全精度/量化可恢复/删除三层 KV 管理和重新晋升；向量模拟不等同真实 transformer KV cache。"
+}

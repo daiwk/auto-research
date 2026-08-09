@@ -1,0 +1,21 @@
+{
+  "paper": {
+    "arxiv_id": "2608.05448",
+    "title": "DBLast",
+    "url": "https://arxiv.org/abs/2608.05448"
+  },
+  "dataset": {
+    "name": "deterministic public-style mini-suite"
+  },
+  "setup": {
+    "seed": 42
+  },
+  "metrics": {
+    "independent_accepted_length": 0.7788,
+    "dependent_accepted_length": 0.8092,
+    "accepted_length_change_percent": 3.9034411915767846,
+    "latent_rank": 4
+  },
+  "paper_results": {},
+  "scope": "执行共享低秩 latent 的相关 block sampling；小型 Markov target 用于验证依赖结构，不复刻 Qwen 推测解码吞吐。"
+}

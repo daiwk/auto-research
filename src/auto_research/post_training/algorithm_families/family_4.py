@@ -7,7 +7,15 @@ from ..data import CandidateGroup
 from ..rollout_correction import (icepop_weights, rollout_engine_probabilities, truncated_importance_weights)
 
 def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, probabilities, reference, rollout_training_probabilities, sampling_probabilities, sampled, diagnostics):
-    if algorithm in {'minirl', 'missing-old-logits', 'stare'}:
+    if algorithm in {'rrc', 'rail', 'specroll'}:
+        from ..latest_20260809 import update_latest
+
+        gradient, loss, latest = update_latest(
+            algorithm, state, group, probabilities, reference,
+            rollout_training_probabilities, sampled, rng,
+        )
+        diagnostics.update(latest)
+    elif algorithm in {'minirl', 'missing-old-logits', 'stare'}:
         from ..p1_20260808 import update_p1
 
         gradient, loss, diagnostics = update_p1(

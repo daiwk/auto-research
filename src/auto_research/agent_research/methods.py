@@ -11,6 +11,7 @@ from .method_families.rl import SEEDAgent, CASTAgent, TurnOPDAgent, SearchR1Agen
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
     from .p0_20260808 import P0_AGENTS
     from .p1_20260808 import P1_AGENTS
+    from .latest_20260809 import LATEST_AGENTS
 
     classes = {
         "long-context": LongContextAgent,
@@ -58,5 +59,6 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         "coevo-mem": CoEvoMemAgent,
         **P0_AGENTS,
         **P1_AGENTS,
+        **LATEST_AGENTS,
     }
     return classes[method](capacity, rng)

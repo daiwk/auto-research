@@ -62,6 +62,25 @@ evaluator 接入[自动研究与进化](auto-research.md)。
 不同领域可以有不同筛选门槛，但不能混用结果口径：工业 A/B、公共 benchmark 和
 本地机制验证会分别标注。
 
+## 统一指标存储
+
+每篇论文的可追溯指标以详情页旁的文件为唯一事实源：
+
+```text
+docs/<研究域>/<论文目录>/metrics/<数据集>-seed<seed>.json
+```
+
+- 搜广推与基础模型位于 `docs/reproductions/<论文目录>/metrics/`；
+- LLM 后训练位于 `docs/post-training/<论文目录>/metrics/`；
+- Agent 位于 `docs/agent-research/<论文目录>/metrics/`；
+- 文件必须记录 seed、评测层级、claim policy、manifest 引用和数据来源信息；
+- checkpoint、完整 trace 和临时 run 只保存在本地 `runs/`，不提交 GitHub。
+
+`docs/experiments/` 只保留“多个方法在同一协议下的横向评测快照”，用于生成统一对比表；
+它不能代替单篇论文的指标文件，也不能把不同数据集、不同预算或不同研究域拼成一个
+不可比较的日期批次。新增论文必须先写入自己的 `metrics/`，需要横向对比时再由这些
+单篇结果生成聚合视图。
+
 ## 与自动进化的关系
 
 ```mermaid

@@ -34,6 +34,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
         "rankmixer_longer", "rankmixer_unimixer", "rankmixer_longer_unimixer",
         "rankmixer_whale", "rankmixer_tmallgs", "rankmixer_long_history",
         "rankmixer_ramp",
+        "rankmixer_kgd",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -292,6 +293,9 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 nn.Linear(config.dimensions, 1),
             )
             self.register_buffer("features", features)
+            if kind == "rankmixer_kgd":
+                self.knowledge_projection = nn.Linear(feature_count, config.dimensions)
+                self.anchored_calibration = nn.Linear(feature_count, config.dimensions, bias=False)
             self.auxiliary_logits = None
             self.alignment_logits = None
             self.restricted_logits = None
@@ -334,6 +338,16 @@ def build_model(kind: str, data, config: RankMixerConfig):
             last = self.item(history[:, -1])
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)
+            if kind == "rankmixer_kgd":
+                # Read-only cross-attention surrogate: behavioral knowledge is
+                # detached from downstream gradients; ACR owns the writable
+                # task geometry in a separate parameter set.
+                knowledge = self.knowledge_projection(profile).detach()
+                calibration = self.anchored_calibration(
+                    profile - self.features.mean(dim=0, keepdim=True)
+                )
+                recent = recent + knowledge
+                user_feature = user_feature + calibration
             public_profile = self.features.mean(dim=0, keepdim=True).expand(
                 batch, -1
             )

@@ -4,6 +4,15 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "evoharness-rl": ("EvoHarness-RL", "https://arxiv.org/abs/2608.05446"),
+    "vag": ("When Self-Evolution Backfires / VaG", "https://arxiv.org/abs/2608.05810"),
+    "gse": ("Learning Globally Reusable Skills", "https://arxiv.org/abs/2608.06153"),
+    "cipo": ("Contextual Information Policy Optimization", "https://arxiv.org/abs/2608.06128"),
+    "state2state": ("State2State", "https://arxiv.org/abs/2608.04934"),
+    "harnessopt-bench": ("HarnessOpt-Bench", "https://arxiv.org/abs/2608.06301"),
+    "codegrep": ("CodeGrep", "https://arxiv.org/abs/2608.05886"),
+    "memorycpt": ("MemoryCPT", "https://arxiv.org/abs/2608.04843"),
+    "hindsearch": ("HindSearch", "https://arxiv.org/abs/2608.01597"),
     "agent-r1": ("Agent-R1", "https://arxiv.org/abs/2511.14460"),
     "camel": ("CAMEL", "https://arxiv.org/abs/2303.17760"),
     "toolbench": ("ToolBench", "https://arxiv.org/abs/2305.16504"),

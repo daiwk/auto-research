@@ -139,6 +139,36 @@
     },
     {
       "domain": "agent-research",
+      "key": "cipo",
+      "title": "Contextual Information Policy Optimization for Search Agents",
+      "paper_url": "https://arxiv.org/abs/2608.06128",
+      "detail_path": "agent-research/2608.06128-cipo/README.md",
+      "topic": [
+        "搜索 Agent RL"
+      ],
+      "first_author": "Xingyu Guo",
+      "first_author_affiliation": "Beihang University",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": "cipo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "codegrep",
+      "title": "CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2608.05886",
+      "detail_path": "agent-research/2608.05886-codegrep/README.md",
+      "topic": [
+        "代码检索 Agent"
+      ],
+      "first_author": "Wuya Chen",
+      "first_author_affiliation": "NetEase Guangzhou AI Lab",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": "codegrep"
+    },
+    {
+      "domain": "agent-research",
       "key": "coevo-mem",
       "title": "CoEvo-Mem",
       "paper_url": "https://arxiv.org/abs/2608.01739",
@@ -199,6 +229,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "evoharness-rl",
+      "title": "EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2608.05446",
+      "detail_path": "agent-research/2608.05446-evoharness-rl/README.md",
+      "topic": [
+        "Harness policy RL"
+      ],
+      "first_author": "Xuying Ning",
+      "first_author_affiliation": "University of Illinois Urbana–Champaign / Meta AI",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": "evoharness-rl"
+    },
+    {
+      "domain": "agent-research",
       "key": "gaia",
       "title": "GAIA",
       "paper_url": "https://arxiv.org/abs/2311.12983",
@@ -256,6 +301,51 @@
       "published": "2026-07-30",
       "code": "https://github.com/BinbZheng1/GRSD",
       "adapter": "grsd"
+    },
+    {
+      "domain": "agent-research",
+      "key": "gse",
+      "title": "Learning Globally Reusable Skills for Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2608.06153",
+      "detail_path": "agent-research/2608.06153-gse/README.md",
+      "topic": [
+        "全局技能进化"
+      ],
+      "first_author": "Chen Yang",
+      "first_author_affiliation": "Tianjin University",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": "gse"
+    },
+    {
+      "domain": "agent-research",
+      "key": "harnessopt-bench",
+      "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization",
+      "paper_url": "https://arxiv.org/abs/2608.06301",
+      "detail_path": "agent-research/2608.06301-harnessopt-bench/README.md",
+      "topic": [
+        "Harness 优化评测"
+      ],
+      "first_author": "Varun Ursekar",
+      "first_author_affiliation": "Scale AI",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": "harnessopt-bench"
+    },
+    {
+      "domain": "agent-research",
+      "key": "hindsearch",
+      "title": "HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2608.01597",
+      "detail_path": "agent-research/2608.01597-hindsearch/README.md",
+      "topic": [
+        "搜索轨迹 hindsight"
+      ],
+      "first_author": "Haowei Liu",
+      "first_author_affiliation": "Santa Clara University",
+      "published": "2026-08-03",
+      "code": "https://anonymous.4open.science/r/hindsearch-anon-EBDC",
+      "adapter": "hindsearch"
     },
     {
       "domain": "agent-research",
@@ -361,6 +451,21 @@
       "published": "2023-10-12",
       "code": "https://github.com/letta-ai/letta",
       "adapter": "memgpt"
+    },
+    {
+      "domain": "agent-research",
+      "key": "memorycpt",
+      "title": "MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off",
+      "paper_url": "https://arxiv.org/abs/2608.04843",
+      "detail_path": "agent-research/2608.04843-memorycpt/README.md",
+      "topic": [
+        "端到端 Agent 记忆"
+      ],
+      "first_author": "Songxin Lei",
+      "first_author_affiliation": "Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": "memorycpt"
     },
     {
       "domain": "agent-research",
@@ -694,6 +799,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "state2state",
+      "title": "State2State: Environment-Derived Mid-Training for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2608.04934",
+      "detail_path": "agent-research/2608.04934-state2state/README.md",
+      "topic": [
+        "环境派生中训练"
+      ],
+      "first_author": "Xuanyu Lei",
+      "first_author_affiliation": "Tsinghua University AIR / Alibaba Group",
+      "published": "2026-08-05",
+      "code": "https://github.com/THUNLP-MT/State2State",
+      "adapter": "state2state"
+    },
+    {
+      "domain": "agent-research",
       "key": "steppo",
       "title": "StepPO",
       "paper_url": "https://arxiv.org/abs/2604.18401",
@@ -841,6 +961,21 @@
       "published": "2026-07-28",
       "code": "未发现官方代码",
       "adapter": "unimem"
+    },
+    {
+      "domain": "agent-research",
+      "key": "vag",
+      "title": "When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2608.05810",
+      "detail_path": "agent-research/2608.05810-vag/README.md",
+      "topic": [
+        "技能进化安全"
+      ],
+      "first_author": "Linfang Shang",
+      "first_author_affiliation": "论文未列机构",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": "vag"
     },
     {
       "domain": "agent-research",
@@ -1082,6 +1217,59 @@
           42
         ],
         "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "bakron",
+      "title": "BaKron: Efficient Quantization with Kronecker-Factored Hessians",
+      "paper_url": "https://arxiv.org/abs/2608.06291",
+      "detail_path": "reproductions/2608.06291-bakron/README.md",
+      "topic": [
+        "quantization",
+        "hessian",
+        "inference-efficiency"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "University of California, San Diego",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": {
+        "adapter_key": "bakron",
+        "arxiv_id": "2608.06291",
+        "title": "BaKron: Efficient Quantization with Kronecker-Factored Hessians",
+        "paper_url": "https://arxiv.org/abs/2608.06291",
+        "track": "llm",
+        "organization": "University of California, San Diego",
+        "published": "2026-08-06",
+        "code_url": null,
+        "topics": [
+          "quantization",
+          "hessian",
+          "inference-efficiency"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic public-style mini-suite"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "bakron.reported_objective"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=160",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -1407,6 +1595,59 @@
           42
         ],
         "budget": "steps=55",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "dblast",
+      "title": "DBLast: Dependent Block Drafting for Stochastic Speculative Decoding",
+      "paper_url": "https://arxiv.org/abs/2608.05448",
+      "detail_path": "reproductions/2608.05448-dblast/README.md",
+      "topic": [
+        "speculative-decoding",
+        "inference-efficiency",
+        "stochastic-decoding"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Huawei Technologies Canada",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": {
+        "adapter_key": "dblast",
+        "arxiv_id": "2608.05448",
+        "title": "DBLast: Dependent Block Drafting for Stochastic Speculative Decoding",
+        "paper_url": "https://arxiv.org/abs/2608.05448",
+        "track": "llm",
+        "organization": "Huawei Technologies Canada",
+        "published": "2026-08-05",
+        "code_url": null,
+        "topics": [
+          "speculative-decoding",
+          "inference-efficiency",
+          "stochastic-decoding"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic public-style mini-suite"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "dblast.reported_objective"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -1798,6 +2039,61 @@
     },
     {
       "domain": "foundation-models",
+      "key": "hilp",
+      "title": "Hierarchical Latent Prediction for Language Models",
+      "paper_url": "https://arxiv.org/abs/2608.05806",
+      "detail_path": "reproductions/2608.05806-hilp/README.md",
+      "topic": [
+        "pretraining",
+        "latent-prediction",
+        "multi-token-prediction",
+        "speculative-decoding"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "University of Texas at Austin",
+      "published": "2026-08-06",
+      "code": null,
+      "adapter": {
+        "adapter_key": "hilp",
+        "arxiv_id": "2608.05806",
+        "title": "Hierarchical Latent Prediction for Language Models",
+        "paper_url": "https://arxiv.org/abs/2608.05806",
+        "track": "llm",
+        "organization": "University of Texas at Austin",
+        "published": "2026-08-06",
+        "code_url": null,
+        "topics": [
+          "pretraining",
+          "latent-prediction",
+          "multi-token-prediction",
+          "speculative-decoding"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic public-style mini-suite"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "hilp.reported_objective"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "hymba",
       "title": "Hymba: A Hybrid-head Architecture for Small Language Models",
       "paper_url": "https://arxiv.org/abs/2411.13676",
@@ -1983,6 +2279,61 @@
           42
         ],
         "budget": "steps=30",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "macro",
+      "title": "MACRO: Markov Chain Routing of Transformer Layers",
+      "paper_url": "https://arxiv.org/abs/2608.05872",
+      "detail_path": "reproductions/2608.05872-macro/README.md",
+      "topic": [
+        "network-architecture",
+        "dynamic-routing",
+        "inference-efficiency"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Heinrich Heine University Düsseldorf",
+      "published": "2026-08-06",
+      "code": "https://github.com/Batorskq/MACRO",
+      "adapter": {
+        "adapter_key": "macro",
+        "arxiv_id": "2608.05872",
+        "title": "MACRO: Markov Chain Routing of Transformer Layers",
+        "paper_url": "https://arxiv.org/abs/2608.05872",
+        "track": "llm",
+        "organization": "Heinrich Heine University Düsseldorf",
+        "published": "2026-08-06",
+        "code_url": "https://github.com/Batorskq/MACRO",
+        "topics": [
+          "network-architecture",
+          "dynamic-routing",
+          "inference-efficiency"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic public-style mini-suite"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "macro_accuracy",
+          "paper_results.average_accuracy_percent",
+          "sequential_accuracy"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -2827,6 +3178,63 @@
           "variants.PPL-Factory.test_loss",
           "variants.Random.perplexity",
           "variants.Random.test_loss"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "qevict",
+      "title": "QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding",
+      "paper_url": "https://arxiv.org/abs/2608.05326",
+      "detail_path": "reproductions/2608.05326-qevict/README.md",
+      "topic": [
+        "long-context",
+        "kv-cache",
+        "quantization",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Indian Institute of Technology Roorkee",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": {
+        "adapter_key": "qevict",
+        "arxiv_id": "2608.05326",
+        "title": "QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding",
+        "paper_url": "https://arxiv.org/abs/2608.05326",
+        "track": "llm",
+        "organization": "Indian Institute of Technology Roorkee",
+        "published": "2026-08-05",
+        "code_url": null,
+        "topics": [
+          "long-context",
+          "kv-cache",
+          "quantization",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic public-style mini-suite"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "binary_evict_recall",
+          "full_precision_slots",
+          "qevict_recall"
         ],
         "default_seeds": [
           42
@@ -4090,6 +4498,21 @@
     },
     {
       "domain": "post-training",
+      "key": "rail",
+      "title": "Optimizing What Policies Learn From: Recoverability-Aware Rollout Intervention Learning",
+      "paper_url": "https://arxiv.org/abs/2608.05080",
+      "detail_path": "post-training/2608.05080-rail/README.md",
+      "topic": [
+        "rollout 预算分配"
+      ],
+      "first_author": "Zheyuan Zhang",
+      "first_author_affiliation": "University of Notre Dame / Amazon",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": "rail"
+    },
+    {
+      "domain": "post-training",
       "key": "reco-grpo",
       "title": "ReCo",
       "paper_url": "https://arxiv.org/abs/2607.26862",
@@ -4210,6 +4633,21 @@
     },
     {
       "domain": "post-training",
+      "key": "rrc",
+      "title": "RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction",
+      "paper_url": "https://arxiv.org/abs/2608.06310",
+      "detail_path": "post-training/2608.06310-rrc/README.md",
+      "topic": [
+        "生成式奖励模型"
+      ],
+      "first_author": "Chenglong Wang",
+      "first_author_affiliation": "Northeastern University",
+      "published": "2026-08-06",
+      "code": "https://github.com/wangclnlp/RRC",
+      "adapter": "rrc"
+    },
+    {
+      "domain": "post-training",
       "key": "rrhf",
       "title": "RRHF",
       "paper_url": "https://arxiv.org/abs/2304.05302",
@@ -4322,6 +4760,21 @@
       "published": "2023-05-17",
       "code": "未发现官方代码",
       "adapter": "slic-hf"
+    },
+    {
+      "domain": "post-training",
+      "key": "specroll",
+      "title": "SpecRoll: Fast-Slow Verifier-Feedback Adaptation for Speculative Reinforcement Learning Rollouts",
+      "paper_url": "https://arxiv.org/abs/2608.04962",
+      "detail_path": "post-training/2608.04962-specroll/README.md",
+      "topic": [
+        "RL rollout 加速"
+      ],
+      "first_author": "Nhat Minh Pham",
+      "first_author_affiliation": "VNU University of Engineering and Technology / Viettel AI",
+      "published": "2026-08-05",
+      "code": "https://anonymous.4open.science/r/SpecRoll-26062006",
+      "adapter": "specroll"
     },
     {
       "domain": "post-training",
@@ -8418,6 +8871,87 @@
     },
     {
       "domain": "recommendation",
+      "key": "hrpo",
+      "title": "Hierarchical Residual Policy Optimization for Generative Recommendations",
+      "paper_url": "https://arxiv.org/abs/2608.00750",
+      "detail_path": "reproductions/2608.00750-hrpo/README.md",
+      "topic": [
+        "generative-recommendation",
+        "reinforcement-learning",
+        "semantic-id",
+        "credit-assignment"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "City University of Hong Kong / Kuaishou",
+      "published": "2026-08-01",
+      "code": "https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO",
+      "adapter": {
+        "adapter_key": "hrpo",
+        "arxiv_id": "2608.00750",
+        "title": "Hierarchical Residual Policy Optimization for Generative Recommendations",
+        "paper_url": "https://arxiv.org/abs/2608.00750",
+        "track": "recommendation",
+        "organization": "City University of Hong Kong / Kuaishou",
+        "published": "2026-08-01",
+        "code_url": "https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO",
+        "topics": [
+          "generative-recommendation",
+          "reinforcement-learning",
+          "semantic-id",
+          "credit-assignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "paper_results.fiction_target_cost_percent",
+          "paper_results.mini_game_target_cost_percent",
+          "paper_results.short_drama_target_cost_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent",
+          "variants.hrpo residual-return policy.hit_at_10",
+          "variants.hrpo residual-return policy.ndcg_at_10",
+          "variants.sid sft.hit_at_10",
+          "variants.sid sft.ndcg_at_10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Kuaishou Fiction IAA",
+            "metric": "Target Cost",
+            "lift_percent": 3.49,
+            "traffic": "online A/B",
+            "source_url": "https://arxiv.org/abs/2608.00750",
+            "source_location": "original paper online-result disclosure: product=Kuaishou Fiction IAA; metric=Target Cost"
+          },
+          {
+            "product": "Kuaishou Mini-Game IAA",
+            "metric": "Target Cost",
+            "lift_percent": 0.186,
+            "traffic": "online A/B",
+            "source_url": "https://arxiv.org/abs/2608.00750",
+            "source_location": "original paper online-result disclosure: product=Kuaishou Mini-Game IAA; metric=Target Cost"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "hstu",
       "title": "Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations",
       "paper_url": "https://arxiv.org/abs/2402.17152",
@@ -8765,6 +9299,86 @@
     },
     {
       "domain": "recommendation",
+      "key": "kgd",
+      "title": "Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation",
+      "paper_url": "https://arxiv.org/abs/2608.02738",
+      "detail_path": "reproductions/2608.02738-kgd/README.md",
+      "topic": [
+        "sequential-recommendation",
+        "pretraining",
+        "streaming",
+        "transfer"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Xiamen University / Shopee",
+      "published": "2026-08-03",
+      "code": "https://github.com/FuCongResearchSquad/KGD4REC",
+      "adapter": {
+        "adapter_key": "kgd",
+        "arxiv_id": "2608.02738",
+        "title": "Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation",
+        "paper_url": "https://arxiv.org/abs/2608.02738",
+        "track": "recommendation",
+        "organization": "Xiamen University / Shopee",
+        "published": "2026-08-03",
+        "code_url": "https://github.com/FuCongResearchSquad/KGD4REC",
+        "topics": [
+          "sequential-recommendation",
+          "pretraining",
+          "streaming",
+          "transfer"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "paper_results.advertising_revenue_percent",
+          "paper_results.gmv_per_user_percent",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent",
+          "variants.adjacent ntp transfer.hit_at_10",
+          "variants.adjacent ntp transfer.ndcg_at_10",
+          "variants.kgd bmtp + read-only transfer + acr.hit_at_10",
+          "variants.kgd bmtp + read-only transfer + acr.ndcg_at_10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Shopee Homepage Search",
+            "metric": "GMV per user",
+            "lift_percent": 1.75,
+            "traffic": "live A/B; fully deployed",
+            "source_url": "https://arxiv.org/abs/2608.02738",
+            "source_location": "original paper online-result disclosure: product=Shopee Homepage Search; metric=GMV per user"
+          },
+          {
+            "product": "Shopee Homepage Search",
+            "metric": "advertising revenue",
+            "lift_percent": 1.53,
+            "traffic": "live A/B; fully deployed",
+            "source_url": "https://arxiv.org/abs/2608.02738",
+            "source_location": "original paper online-result disclosure: product=Shopee Homepage Search; metric=advertising revenue"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "leadre",
       "title": "LEADRE: Multi-Faceted Knowledge Enhanced LLM Empowered Display Advertisement Recommender System",
       "paper_url": "https://arxiv.org/abs/2411.13789",
@@ -9042,6 +9656,97 @@
             "traffic": "large-scale industrial online A/B",
             "source_url": "https://arxiv.org/abs/2605.21969",
             "source_location": "original paper online-result disclosure: product=Meta Ads; metric=top-line performance"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "llm-ts-prior",
+      "title": "LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation",
+      "paper_url": "https://arxiv.org/abs/2608.03382",
+      "detail_path": "reproductions/2608.03382-llm-ts-prior/README.md",
+      "topic": [
+        "llm-recommendation",
+        "bandit",
+        "cold-start",
+        "comment-ranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "NAVER WEBTOON",
+      "published": "2026-08-04",
+      "code": null,
+      "adapter": {
+        "adapter_key": "llm-ts-prior",
+        "arxiv_id": "2608.03382",
+        "title": "LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation",
+        "paper_url": "https://arxiv.org/abs/2608.03382",
+        "track": "recommendation",
+        "organization": "NAVER WEBTOON",
+        "published": "2026-08-04",
+        "code_url": null,
+        "topics": [
+          "llm-recommendation",
+          "bandit",
+          "cold-start",
+          "comment-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "paper_results.content_prior_overall_ctr_percent",
+          "paper_results.gender_prior_cold_10_49_ctr_percent",
+          "paper_results.gender_prior_overall_ctr_percent",
+          "relative.cold_start_ctr_percent",
+          "relative.ctr_percent",
+          "variants.llm semantic prior.cold_start_ctr",
+          "variants.llm semantic prior.ctr",
+          "variants.uniform thompson prior.cold_start_ctr",
+          "variants.uniform thompson prior.ctr"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "WEBTOON comment recommendation",
+            "metric": "Gender-prior overall CTR",
+            "lift_percent": 1.48,
+            "traffic": "four-week A/B/C; about 595K users per arm",
+            "significance": "p=0.144, not significant",
+            "source_url": "https://arxiv.org/abs/2608.03382",
+            "source_location": "original paper online-result disclosure: product=WEBTOON comment recommendation; metric=Gender-prior overall CTR"
+          },
+          {
+            "product": "WEBTOON 10-49 exposure bucket",
+            "metric": "Gender-prior CTR",
+            "lift_percent": 9.51,
+            "traffic": "A/B/C cold-start subgroup",
+            "significance": "p<0.001",
+            "source_url": "https://arxiv.org/abs/2608.03382",
+            "source_location": "original paper online-result disclosure: product=WEBTOON 10-49 exposure bucket; metric=Gender-prior CTR"
+          },
+          {
+            "product": "WEBTOON overall",
+            "metric": "Content-prior CTR",
+            "lift_percent": -5.68,
+            "traffic": "four-week A/B/C",
+            "significance": "p<0.001",
+            "source_url": "https://arxiv.org/abs/2608.03382",
+            "source_location": "original paper online-result disclosure: product=WEBTOON overall; metric=Content-prior CTR"
           }
         ],
         "selection_exception": null,
@@ -14939,6 +15644,96 @@
             "traffic": "main traffic",
             "source_url": "https://arxiv.org/abs/2407.16357",
             "source_location": "original paper online-result disclosure: product=Kuaishou Discovery; metric=watch time"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "twitch-mor",
+      "title": "Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting",
+      "paper_url": "https://arxiv.org/abs/2608.04455",
+      "detail_path": "reproductions/2608.04455-twitch-mor/README.md",
+      "topic": [
+        "ranking",
+        "multi-task-learning",
+        "mmoe",
+        "live-streaming"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Twitch",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": {
+        "adapter_key": "twitch-mor",
+        "arxiv_id": "2608.04455",
+        "title": "Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting",
+        "paper_url": "https://arxiv.org/abs/2608.04455",
+        "track": "recommendation",
+        "organization": "Twitch",
+        "published": "2026-08-05",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "multi-task-learning",
+          "mmoe",
+          "live-streaming"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+        "metrics": [
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent",
+          "relative.objective_mse_percent",
+          "variants.fresh-delayed lifecycle mmoe.hit_at_10",
+          "variants.fresh-delayed lifecycle mmoe.ndcg_at_10",
+          "variants.single-objective dnn.hit_at_10",
+          "variants.single-objective dnn.ndcg_at_10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Twitch live recommendation",
+            "metric": "daily active viewers",
+            "lift_percent": 0.09,
+            "traffic": "14-day A/B",
+            "significance": "p<0.01",
+            "source_url": "https://arxiv.org/abs/2608.04455",
+            "source_location": "original paper online-result disclosure: product=Twitch live recommendation; metric=daily active viewers"
+          },
+          {
+            "product": "Twitch engaged viewers",
+            "metric": "capped ARPU",
+            "lift_percent": 0.56,
+            "traffic": "14-day A/B",
+            "significance": "p<0.05",
+            "source_url": "https://arxiv.org/abs/2608.04455",
+            "source_location": "original paper online-result disclosure: product=Twitch engaged viewers; metric=capped ARPU"
+          },
+          {
+            "product": "Twitch mobile livefeed",
+            "metric": "positive interactions",
+            "lift_percent": 1.12,
+            "traffic": "14-day A/B",
+            "significance": "p<0.001",
+            "source_url": "https://arxiv.org/abs/2608.04455",
+            "source_location": "original paper online-result disclosure: product=Twitch mobile livefeed; metric=positive interactions"
           }
         ],
         "selection_exception": null,

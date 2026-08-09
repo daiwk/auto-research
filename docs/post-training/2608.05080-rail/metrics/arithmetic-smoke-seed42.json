@@ -1,0 +1,55 @@
+{
+  "algorithm": "rail",
+  "seed": 42,
+  "dataset": "arithmetic-smoke",
+  "baseline": {
+    "accuracy": 0.234375,
+    "mean_reward": 0.38409619661640243,
+    "entropy": 1.7917594692220566,
+    "kl_from_reference": 0.0
+  },
+  "final": {
+    "accuracy": 0.34375,
+    "mean_reward": 0.5027255717244984,
+    "entropy": 1.740123819456468,
+    "kl_from_reference": 0.05163564976558751
+  },
+  "relative_accuracy": 0.4666666666666667,
+  "training": {
+    "steps": 120,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "train_examples": 256,
+    "validation_examples": 64,
+    "data_source": "deterministic arithmetic smoke suite",
+    "teacher_cache_entries": 0,
+    "teacher_prefill_calls": 0,
+    "online_teacher_calls": 0,
+    "drift_events": 0,
+    "critic_updates": 0,
+    "rollout_policy_refreshes": 0,
+    "last_diagnostics": {
+      "interventions": 4.0,
+      "mean_recoverability": 0.5240736806011622,
+      "rollout_budget_saved": 2.0,
+      "loss": -0.12447285440903749,
+      "policy_entropy": 1.7579750606179063
+    },
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "schema_version": 2,
+  "manifest_ref": "post-training:rail",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2608.05080-rail/metrics/arithmetic-smoke-seed42.json",
+    "original_code_commit": "working tree",
+    "dataset_fingerprint": "deterministic built-in mini-suite"
+  }
+}

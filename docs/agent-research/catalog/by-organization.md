@@ -22,6 +22,10 @@
 
 - 2026-07-30 · 一作：Binbin Zheng · [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
 
+## Beihang University
+
+- 2026-08-06 · 一作：Xingyu Guo · [Contextual Information Policy Optimization for Search Agents](../2608.06128-cipo/README.md)（`cipo`）：**主题：搜索 Agent RL。** 只奖励最终答案会让检索退化成确认偏见。
+
 ## Beijing University of Posts and Telecommunications
 
 - 2026-07-28 · 一作：Yu Hao · [HiSkill](../2607.25853-hiskill/README.md)（`hiskill`）：用高层 skill、可执行 AtomicOp 和多类有向边组织经验，推理时只检索任务相关子图来落地动作。
@@ -46,6 +50,10 @@
 ## HKU
 
 - 2025-04-04 · 一作：Yuxiang Zheng · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
+
+## Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS
+
+- 2026-08-05 · 一作：Songxin Lei · [MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off](../2608.04843-memorycpt/README.md)（`memorycpt`）：**主题：端到端 Agent 记忆。** QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。
 
 ## King Abdullah University of Science and Technology
 
@@ -95,6 +103,10 @@
 
 - 2026-02-25 · 一作：Xinle Wu · [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。
 
+## NetEase Guangzhou AI Lab
+
+- 2026-08-06 · 一作：Wuya Chen · [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](../2608.05886-codegrep/README.md)（`codegrep`）：**主题：代码检索 Agent。** 以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。
+
 ## Northeastern University
 
 - 2023-03-20 · 一作：Noah Shinn · [Reflexion](../2303.11366-reflexion/README.md)（`reflexion`）：传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。
@@ -126,6 +138,14 @@
 
 - 2022-04-04 · 一作：Michael Ahn · [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
 
+## Santa Clara University
+
+- 2026-08-03 · 一作：Haowei Liu · [HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning](../2608.01597-hindsearch/README.md)（`hindsearch`）：**主题：搜索轨迹 hindsight。** 冻结 judge 利用 gold answer 为失败搜索轨迹生成逐轨迹 critique，把只有成败的稀疏信号转成辅助 on-policy distillation 信号，并与 GRPO 联合。
+
+## Scale AI
+
+- 2026-08-06 · 一作：Varun Ursekar · [HarnessOpt-Bench: Evaluating LLMs at Harness Optimization](../2608.06301-harnessopt-bench/README.md)（`harnessopt-bench`）：**主题：Harness 优化评测。** 在固定 target-evaluation 预算下，让优化器修改 prompt、工具、控制流和记忆；隐藏测试集与可信执行环境隔离搜索反馈，保留候选版本以供审计。
+
 ## Shanghai AI Laboratory
 
 - 2026-04-09 · 一作：Xinshun Feng · [SEARL](../2604.07791-searl/README.md)（`searl`）：把工具和成功转移维护为图记忆；新 rollout 同时更新 policy 与图边权，形成经验池—检索—改进闭环。
@@ -146,11 +166,19 @@
 
 - 2026-07-30 · 一作：Qiushi Sun · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
 
+## Tianjin University
+
+- 2026-08-06 · 一作：Chen Yang · [Learning Globally Reusable Skills for Coding Agents](../2608.06153-gse/README.md)（`gse`）：**主题：全局技能进化。** GSE 用 Skill Relation Graph 显式维护技能关系，以聚类合并局部经验，并通过 replay verification 防止过拟合与行为回退。
+
 ## Tsinghua University
 
 - 2026-08-06 · 一作：Zi-Han Wang · [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
 - 2026-07-16 · 一作：Jinyang Wu · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
 - 2023-05-25 · 一作：Qiantong Xu · [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
+
+## Tsinghua University AIR / Alibaba Group
+
+- 2026-08-05 · 一作：Xuanyu Lei · [State2State: Environment-Derived Mid-Training for LLM Agents](../2608.04934-state2state/README.md)（`state2state`）：**主题：环境派生中训练。** 从环境探索自动采样起点与目标状态，用规则化状态匹配做 verifier，形成无需人工任务与专家轨迹的可扩展 mid-training。
 
 ## University of California, Berkeley
 
@@ -161,6 +189,10 @@
 - 2025-04-16 · 一作：Cheng Qian · [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
 - 2025-03-12 · 一作：Bowen Jin · [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
 - 2023-10-06 · 一作：Andy Zhou · [LATS](../2310.04406-lats/README.md)（`lats`）：ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。
+
+## University of Illinois Urbana–Champaign / Meta AI
+
+- 2026-08-05 · 一作：Xuying Ning · [EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents](../2608.05446-evoharness-rl/README.md)（`evoharness-rl`）：**主题：Harness policy RL。** 把 Belief、Progress、Experience 暴露为策略可操作的外部状态；先 SFT 学会 harness action，再以成本感知 GRPO 学习何时读写和合并。
 
 ## University of North Carolina at Chapel Hill
 
@@ -195,4 +227,5 @@
 
 ## 论文未列机构
 
+- 2026-08-06 · 一作：Linfang Shang · [When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents](../2608.05810-vag/README.md)（`vag`）：**主题：技能进化安全。** 技能一旦进入上下文会污染后代，事后删除无法彻底回滚。
 - 2026-08-03 · 一作：Bowen Ye · [CoEvo-Mem](../2608.01739-coevo-mem/README.md)（`coevo-mem`）：只优化 query routing 或只更新 memory bank 会忽略二者反馈环。CoEvo-Mem 让冻结 LLM 生成 route-specific rewrite 和 prior，轻量 residual router 在线修正；任务结果更新路由，轨迹反馈更新 memory value 与 graph relation，并交替冻结一侧控制非平稳性。

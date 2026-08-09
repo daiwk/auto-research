@@ -268,6 +268,40 @@ def test_recommendation_and_foundation_method_indexes_are_in_navigation():
         assert "| 未标注" not in index
 
 
+def test_latest_cross_domain_papers_store_metrics_beside_each_detail_page():
+    expected = {
+        "post-training": {
+            "2608.06310-rrc": "arithmetic-smoke-seed42.json",
+            "2608.05080-rail": "arithmetic-smoke-seed42.json",
+            "2608.04962-specroll": "arithmetic-smoke-seed42.json",
+        },
+        "agent-research": {
+            "2608.05446-evoharness-rl": "planbench-mini-seed42.json",
+            "2608.05810-vag": "planbench-mini-seed42.json",
+            "2608.06153-gse": "planbench-mini-seed42.json",
+            "2608.06128-cipo": "planbench-mini-seed42.json",
+            "2608.04934-state2state": "planbench-mini-seed42.json",
+            "2608.06301-harnessopt-bench": "planbench-mini-seed42.json",
+            "2608.05886-codegrep": "planbench-mini-seed42.json",
+            "2608.04843-memorycpt": "planbench-mini-seed42.json",
+            "2608.01597-hindsearch": "planbench-mini-seed42.json",
+        },
+    }
+    for domain, papers in expected.items():
+        for slug, filename in papers.items():
+            metric = ROOT / "docs" / domain / slug / "metrics" / filename
+            payload = json.loads(metric.read_text(encoding="utf-8"))
+            assert payload["schema_version"] == 2
+            assert payload["manifest_ref"].startswith(f"{domain}:")
+            assert payload["provenance"]["artifact_path"] == str(
+                metric.relative_to(ROOT)
+            )
+
+    assert not (
+        ROOT / "docs" / "experiments" / "latest-p0-p1-20260809-seed42.json"
+    ).exists()
+
+
 def test_all_research_domains_show_explicit_overview_and_method_index_entries():
     navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
 

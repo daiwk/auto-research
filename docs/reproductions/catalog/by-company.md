@@ -86,6 +86,7 @@
 - 2017-03 · [DeepFM](../1703.04247-deepfm/README.md)：用共享 embedding 联合 FM 二阶交互和 deep 高阶交互，减少手工特征交叉。
 
 ## Kuaishou
+- 2026-08 · [HRPO](../2608.00750-hrpo/README.md)：按层级 Semantic ID 前缀构造 residual credit-to-go，让生成式推荐的策略更新同时优化局部 token 与整条推荐轨迹。
 - 2026-07 · [RecoReward](../2607.25901-reco-reward/README.md)：以目标/非目标推荐亲和力差作为多模态描述的训练奖励。
 - 2026-07 · [TWICE](../2607.25404-twice/README.md)：用双时钟和双窗口校正在线广告长期延迟转化。
 - 2026-07 · [UniR²](../2607.24439-unir2/README.md)：用统一 decoder 和 Dual-Query Prefix-Causal Attention 同时学习层级 SID 生成与多目标排序，并以 ranking-only LoRA 避免梯度冲突。
@@ -185,7 +186,14 @@
 - 2026-07 · [Melo](../2607.23718-melo/README.md)：用多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
 
 ## Shopee
+- 2026-08 · [KGD](../2608.02738-kgd/README.md)：以 BMTP、冻结知识迁移和正交 ACR 解耦预训练知识与推荐几何，使流式模型可以低成本刷新外部知识。
 - 2025-09 · [OnePiece](../2509.18091-onepiece/README.md)：用上下文 token、块级 latent reasoning 和递进多任务训练统一级联排序。
+
+## Twitch
+- 2026-08 · [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：联合即时与延迟直播反馈，并以生命周期分群 gate 调节共享专家，避免单一短期目标主导排序。
+
+## NAVER WEBTOON
+- 2026-08 · [LLM Thompson Priors](../2608.03382-llm-ts-prior/README.md)：用 LLM 语义判断初始化评论冷启动先验，再通过分群 Thompson Sampling 在探索与点击收益之间自适应取舍。
 
 ## JD.com
 - 2026-07 · [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把 click/cart/order instruction 内化到 SID 生成，并用未来交互特权教师与熵路由蒸馏联合后训练。

@@ -92,6 +92,16 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2608.06291-bakron": {
+        "pdf_url": "https://arxiv.org/pdf/2608.06291",
+        "page": 6,
+        "rect": (78, 64, 536, 666),
+        "label": "Algorithm 5–6",
+        "caption": (
+            "BaKron recursive divide-and-conquer algorithm and the final algorithm "
+            "that combines recursion with parallel anti-diagonal processing."
+        ),
+    },
     "2205.00445-mrkl": {
         "pdf_url": "https://arxiv.org/pdf/2205.00445",
         "page": 3,
