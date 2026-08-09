@@ -426,6 +426,18 @@ auto-research reproduce --paper all --seed 42
 auto-research reproduce --paper all --include-concept-demos --seed 42
 ```
 
+正式批量比较建议使用统一筛选、三个 seed 和可恢复状态文件：
+
+```bash
+auto-research reproduce --paper all --track recommendation --topic ranking \
+  --fidelity full_pipeline --seeds 42,43,44 --workers 3 \
+  --state-file runs/reproductions/ranking-state.json
+```
+
+新结果使用 schema v2，写入论文 manifest、L0–L3 评测层级、代码 commit、环境、预算
+和 seed；多 seed 批次额外生成均值、标准差和 95% 置信区间。单 seed 只属于 smoke，
+不能表述为稳定提升。
+
 每篇论文、每次运行写入独立且不可变的目录：
 
 ```text

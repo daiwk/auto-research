@@ -314,5 +314,12 @@ def discover_papers(query: str, limit: int, allow_network: bool, track: str = "r
     for paper in ranked[: max(limit, len(fallback))]:
         paper_id = paper.arxiv_id.split("v")[0]
         architecture, method = mutations.get(paper_id, (None, "检索到相关论文，但尚无经过测试的安全结构算子映射"))
-        result.append(PaperInspiration(paper_id, paper.title, paper.url, paper.published[:10], architecture, method, source if paper_id in {p.arxiv_id.split('v')[0] for p in papers} else "installed evidence"))
+        live = paper_id in {p.arxiv_id.split('v')[0] for p in papers}
+        result.append(PaperInspiration(
+            paper_id, paper.title, paper.url, paper.published[:10],
+            architecture, method,
+            source if live else "installed evidence",
+            "installed-paper" if architecture else "retrieved-paper",
+            architecture is not None,
+        ))
     return result

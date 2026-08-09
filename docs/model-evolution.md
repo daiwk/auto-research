@@ -3,21 +3,26 @@
 该功能面向“已有一个可训练系统，希望围绕一段自然语言方向持续做实验”的场景。
 当前可进化推荐模型、micro‑LLM、后训练 recipe 和 Agent policy。
 
-!!! summary "先说清楚：evolve 不会现场照着论文生成并执行任意代码"
+!!! summary "候选有明确来源，未经审核的代码不会直接执行"
     **真正参加训练的结构和算法，都已经在本仓库实现并通过测试。**运行时可以联网
     搜索最新论文，但新搜到且尚未实现的论文只作为 `evidence-only` 证据保存，不会
-    自动变成可执行代码。系统所谓“进化”，主要是在白名单算子之间做公平消融、
-    组合和超参数变异，并根据 validation 结果继续下一轮。
+    自动变成可执行代码。系统所谓“进化”，主要是在已注册 provider 和已审核算子之间
+    做公平消融、组合和超参数变异，并根据 validation 结果继续下一轮。生成的新插件
+    必须经过隔离测试和人工批准，才能晋级为可执行算子。
 
 ## 候选到底从哪里来 {#candidate-sources}
 
-一次 evolve 会同时出现三类内容，它们的含义不同：
+一次 evolve 会同时出现四类内容，它们的含义不同：
 
 | 页面或报告中的内容 | 来源 | 会不会训练 | 是否属于系统自己创新 |
 |---|---|---:|---|
-| `rankmixer_longer`、`opsd`、`planner:react` 等论文算子 | 论文已经被本项目实现，并登记了论文 ID → 本地算子的映射 | 会 | 否，是论文机制的本地实现 |
-| 运行时搜索到、显示为 `evidence-only` 的论文 | 按 `--direction` 实时检索 arXiv；`--offline` 时使用内置论文清单和本地缓存 | 不会 | 否，只是研究证据和后续实现候选 |
-| `LONGER + UniMixer`、`memory + planner + critic`、层数/维度/学习率组合 | 控制器在**已实现白名单**内组合或调参 | 会 | 属于新的工程实验假设，但不是自动发明了一个未经实现的新算法 |
+| `installed-paper` | 论文已经被本项目实现，并登记论文 ID → 本地算子映射 | 会 | 否，是论文机制的本地实现 |
+| `retrieved-paper` | 按 `--direction` 实时检索；离线时使用内置证据 | 不会 | 否，只是研究证据和后续实现候选 |
+| `generated-combination` | 控制器组合已实现结构、数据 recipe、后训练/Agent 组件或参数 | 会 | 是新的工程实验假设 |
+| `novel-proposal` | 从论文规格或失败轨迹形成、尚未通过插件晋级流程的假设 | 不会 | 可能是新假设，但不能在审核前执行 |
+
+可执行能力通过 `EvolutionProvider` 注册。一个 provider 声明可用数据集、论文检索领域、
+初始 genome 和 evaluator，因此新增模型不再修改统一代际控制器或 CLI 大分支。
 
 所以，自然语言 `--direction` 有两个作用：
 
@@ -85,6 +90,45 @@ runs/evolution/rankmixer-<timestamp>/index.html
 在线论文搜索和数据下载；所需数据必须已经在本地缓存。
 
 ## 完整流程
+
+### 中断恢复、GPU 资源与稳健晋级
+
+每个 trial 完成后都会原子更新 `result.json`。中断后可从原运行目录继续：
+
+```bash
+auto-research evolve \
+  --model rankmixer --dataset movielens-1m \
+  --direction "继续上一轮高效结构研究" \
+  --generations 5 --resume runs/evolution/rankmixer-20260809-120000
+```
+
+`--retries` 控制失败 trial 的重试次数；CUDA 下 `--gpu-slots` 表示真正可并发的独立
+GPU 槽位数，控制器会限制 workers，避免多个进程无约束争抢同一张卡。冠军按照
+`fitness - z × standard_error` 排序；当 evaluator 提供 `fitness_std` 时，
+`--confidence-z` 会惩罚高方差候选。正式结论建议使用：
+
+```text
+--seeds 42,43,44 --promotion-min-seeds 3 --confidence-z 1.0
+```
+
+单 seed 仍可用于 smoke，但不满足稳定提升声明条件。
+
+### 新论文算子的安全晋级
+
+实时检索论文首先只是 `retrieved-paper`。若外部研究代理生成候选实现，需要提供一个
+包含来源论文、provider、文件白名单和验证命令的 JSON spec，然后经过三步：
+
+```bash
+auto-research candidate stage --spec candidate.json
+auto-research candidate verify --id paper-op --timeout 300
+auto-research candidate promote --id paper-op \
+  --destination src/auto_research/evolution/plugins/paper_op --approve
+```
+
+候选先写入 `.auto-research/candidates/`，路径、文件类型和单文件大小均受限制；验证结果
+单独留档。最后一步必须显式传入 `--approve`，且只能写入仓库内尚不存在的目录。
+这提供了“论文 → 结构化候选 → 隔离验证 → 人工批准 → 正式注册”的基础链路，
+但不会把未审代码自动放进训练主进程。
 
 ```mermaid
 flowchart LR
