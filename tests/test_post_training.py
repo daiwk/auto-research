@@ -25,6 +25,7 @@ from auto_research.post_training.rollout_correction import (
         "rlaif", "process-supervision", "math-shepherd", "self-rewarding",
         "luffy", "ttrl", "absolute-zero", "intuitor", "cispo", "spiral", "conspo",
         "minirl", "missing-old-logits", "stare",
+        "rrc", "rail", "specroll",
     ],
 )
 def test_post_training_algorithms_run_and_report(tmp_path: Path, algorithm: str):
@@ -114,6 +115,24 @@ def test_global_p0_post_training_mechanisms_are_observable(
     ],
 )
 def test_global_p1_post_training_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(PostTrainingConfig(
+        algorithm=algorithm, steps=16, maximum_examples=48, output_dir=tmp_path,
+    )).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
+        ("rrc", ("ranked_responses", "anchor_reward")),
+        ("rail", ("interventions", "mean_recoverability", "rollout_budget_saved")),
+        ("specroll", ("verified_proposals", "accepted_draft_length", "estimated_generation_speedup")),
+    ],
+)
+def test_20260809_post_training_mechanisms_are_observable(
     tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
 ):
     result, _ = PostTrainingRunner(PostTrainingConfig(

@@ -67,6 +67,15 @@ METHODS = (
     "camel",
     "toolbench",
     "gaia",
+    "evoharness-rl",
+    "vag",
+    "gse",
+    "cipo",
+    "state2state",
+    "harnessopt-bench",
+    "codegrep",
+    "memorycpt",
+    "hindsearch",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

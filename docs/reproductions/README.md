@@ -90,6 +90,20 @@ pytest tests/test_research_module_docs.py
 - 多模态：[CLIP](2103.00020-clip/README.md)、[LLaVA](2304.08485-llava/README.md)。
 - 推理与部署：[Speculative Decoding](2211.17192-speculative-decoding/README.md)、[AWQ](2306.00978-awq/README.md)、[Medusa](2401.10774-medusa/README.md)。
 
+## 2026-08-09 P0/P1 增量（9 个 adapter）
+
+- `twitch-mor` · [Twitch Multi-Objective Ranking](2608.04455-twitch-mor/README.md)
+- `llm-ts-prior` · [LLM-Derived Thompson Priors](2608.03382-llm-ts-prior/README.md)
+- `kgd` · [KGD](2608.02738-kgd/README.md)
+- `hrpo` · [HRPO](2608.00750-hrpo/README.md)
+- `bakron` · [BaKron](2608.06291-bakron/README.md)
+- `macro` · [MACRO](2608.05872-macro/README.md)
+- `hilp` · [HiLP](2608.05806-hilp/README.md)
+- `dblast` · [DBLast](2608.05448-dblast/README.md)
+- `qevict` · [QEvict](2608.05326-qevict/README.md)
+
+前四篇工业论文满足量化线上 A/B / 全量部署门槛；后五篇归入基础模型目录。所有条目均已执行核心机制并保存 seed 42 指标，负结果与不显著线上结果不做美化。
+
 ## 全部复现（186/186）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |

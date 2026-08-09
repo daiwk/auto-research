@@ -1,0 +1,20 @@
+{
+  "paper": {
+    "arxiv_id": "2608.05806",
+    "title": "Hierarchical Latent Prediction",
+    "url": "https://arxiv.org/abs/2608.05806"
+  },
+  "dataset": {
+    "name": "deterministic public-style mini-suite"
+  },
+  "setup": {
+    "seed": 42
+  },
+  "metrics": {
+    "next_latent_mse": 0.18697748296591682,
+    "hilp_mse": 0.12198301244584497,
+    "mse_reduction_percent": 34.760586937582936
+  },
+  "paper_results": {},
+  "scope": "实际训练局部 next-latent 与分层抽象 latent 线性预测器；未复刻大模型预训练和 speculative decoder。"
+}

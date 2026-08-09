@@ -70,6 +70,7 @@ def update(
         "self-rewarding", "luffy", "ttrl", "absolute-zero", "intuitor",
         "cispo", "spiral", "conspo",
         "minirl", "missing-old-logits", "stare",
+        "rrc", "rail", "specroll",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

@@ -1,0 +1,48 @@
+{
+  "paper": {
+    "arxiv_id": "2608.04455",
+    "title": "Multi-Objective Ranking for Live Streaming",
+    "url": "https://arxiv.org/abs/2608.04455",
+    "organization": "Twitch"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 280,
+    "items": 440
+  },
+  "setup": {
+    "seed": 42
+  },
+  "variants": {
+    "single-objective dnn": {
+      "hit_at_10": 0.125,
+      "ndcg_at_10": 0.06457068803903039,
+      "head_share_at_10": 0.12964285714285714,
+      "objective_mse": 0.1374373883008957
+    },
+    "fresh-delayed lifecycle mmoe": {
+      "hit_at_10": 0.125,
+      "ndcg_at_10": 0.06457068803903039,
+      "head_share_at_10": 0.12964285714285714,
+      "objective_mse": 0.03130999710029549
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 0.0,
+    "head_share_at_10_percent": 0.0,
+    "objective_mse_percent": 77.21871938387856
+  },
+  "mechanism": {
+    "objectives": 5,
+    "experts": 3,
+    "parameter_reduction_percent": 41.9
+  },
+  "paper_results": {
+    "dav_percent": 0.09,
+    "engaged_arpu_percent": 0.56,
+    "follow_percent": 0.27,
+    "livefeed_positive_interactions_percent": 1.12
+  },
+  "scope": "分离即时/延迟目标、生命周期权重和 MMoE gate 均实际计算；本地标签由 MovieLens 行为构造，不等同 Twitch 商业目标。"
+}

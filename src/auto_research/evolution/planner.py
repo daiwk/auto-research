@@ -77,6 +77,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "nsa_gated_attention", "wide_dynamic_width", "retoken", "optimizer:muon",
             "block_attnres", "rd_attnres",
             "olm_composable",
+            "macro", "hilp",
             "rope", "alibi", "gqa", "hymba", "moba", "blt",
         ]
         text = direction.lower().replace("-", "")
@@ -121,6 +122,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "hymba": ("hymba", "hybrid head", "混合头"),
             "moba": ("moba", "mixture of block", "块路由"),
             "blt": ("byte latent", "blt", "字节 patch"),
+            "macro": ("macro", "markov route", "层路由", "跳层", "重复层"),
+            "hilp": ("hilp", "hierarchical latent", "分层 latent", "层级隐变量"),
         }
         for architecture, terms in priority_terms.items():
             if any(term in text for term in terms):
@@ -165,13 +168,15 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "缓存",
         ),
         "rankmixer_ramp": ("ramp", "隐私", "特征受限", "feature availability"),
+        "rankmixer_kgd": ("kgd", "knowledge geometry", "知识几何", "可刷新预训练", "bmtp"),
     }
     for architecture, terms in direct_terms.items():
         if any(term in text for term in terms):
             values.append(architecture)
     mapping = {
         p.architecture: p.architecture for p in papers
-        if p.architecture not in {"longer", "unimixer"}
+        if p.architecture
+        and p.architecture not in {"longer", "unimixer"}
         and (not text or p.architecture.replace("_", "") in text.replace("-", "").replace("_", "") or p.title.lower().split(":", 1)[0] in text)
     }
     values.extend(mapping.values())

@@ -75,6 +75,9 @@ ALGORITHMS = (
     "minirl",
     "missing-old-logits",
     "stare",
+    "rrc",
+    "rail",
+    "specroll",
 )
 
 

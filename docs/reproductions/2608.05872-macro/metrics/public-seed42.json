@@ -1,0 +1,24 @@
+{
+  "paper": {
+    "arxiv_id": "2608.05872",
+    "title": "MACRO",
+    "url": "https://arxiv.org/abs/2608.05872"
+  },
+  "dataset": {
+    "name": "deterministic public-style mini-suite"
+  },
+  "setup": {
+    "seed": 42
+  },
+  "metrics": {
+    "sequential_accuracy": 0.665,
+    "macro_accuracy": 0.7958333333333333,
+    "searched_routes": 81,
+    "selected_route_length": 2
+  },
+  "paper_results": {
+    "average_accuracy_percent": 5.0,
+    "search_speedup": 9.4
+  },
+  "scope": "实际搜索 skip/repeat/residual 层路由并按验证准确率选择；mini-suite 不是原论文开源 LLM benchmark。"
+}

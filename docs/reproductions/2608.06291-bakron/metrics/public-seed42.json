@@ -1,0 +1,21 @@
+{
+  "paper": {
+    "arxiv_id": "2608.06291",
+    "title": "BaKron",
+    "url": "https://arxiv.org/abs/2608.06291"
+  },
+  "dataset": {
+    "name": "deterministic public-style mini-suite"
+  },
+  "setup": {
+    "seed": 42
+  },
+  "metrics": {
+    "gptq_style_weighted_error": 303.56528848518076,
+    "bakron_weighted_error": 94.47490589716698,
+    "weighted_error_reduction_percent": 68.87822505379135,
+    "sequential_steps": 160
+  },
+  "paper_results": {},
+  "scope": "执行双侧 Kronecker Hessian 加权的 4-bit rounding；未复刻论文完整 anti-diagonal CUDA solver。"
+}

@@ -1,0 +1,44 @@
+{
+  "paper": {
+    "arxiv_id": "2608.00750",
+    "title": "HRPO",
+    "url": "https://arxiv.org/abs/2608.00750",
+    "organization": "City University of Hong Kong / Kuaishou"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 280,
+    "items": 440
+  },
+  "setup": {
+    "seed": 42
+  },
+  "variants": {
+    "sid sft": {
+      "hit_at_10": 0.125,
+      "ndcg_at_10": 0.06457068803903039,
+      "head_share_at_10": 0.12964285714285714
+    },
+    "hrpo residual-return policy": {
+      "hit_at_10": 0.1357142857142857,
+      "ndcg_at_10": 0.06690137810958466,
+      "head_share_at_10": 0.12928571428571428
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": 8.571428571428562,
+    "ndcg_at_10_percent": 3.6095171684487215,
+    "head_share_at_10_percent": -0.27548209366391513
+  },
+  "mechanism": {
+    "sid_depth": 9,
+    "prefix_groups": 18,
+    "residual_credit_std": 0.19689226393011655
+  },
+  "paper_results": {
+    "short_drama_target_cost_percent": 0.168,
+    "mini_game_target_cost_percent": 0.186,
+    "fiction_target_cost_percent": 3.49
+  },
+  "scope": "执行层级 SID、prefix reward smoothing、residual credit 与 credit-to-go；未复刻快手广告策略网络和在线反馈。"
+}

@@ -103,6 +103,11 @@ def build_model_class(torch, nn, config, architecture, modern, parallel, kv_head
                 ).contiguous()
             sources = [values]
             for index, block in enumerate(self.blocks):
+                if architecture == "macro" and index % 3 == 2:
+                    # Installed MACRO route: skip a low-value layer and repeat
+                    # the following layer; search can compare it fairly with
+                    # the same-width sequential baseline.
+                    continue
                 if self.gauge_quantizer is not None:
                     values = self.gauge_quantizer(values)
                 values = (
@@ -110,6 +115,19 @@ def build_model_class(torch, nn, config, architecture, modern, parallel, kv_head
                     if architecture in {"block_attnres", "rd_attnres"}
                     else block(values)
                 )
+                if architecture == "macro" and index % 3 == 0:
+                    values = block(values)
+                if architecture == "hilp":
+                    width = values.shape[1]
+                    groups = max(1, width // 4)
+                    coarse = torch.nn.functional.avg_pool1d(
+                        values.transpose(1, 2), kernel_size=groups,
+                        stride=groups, ceil_mode=True,
+                    ).transpose(1, 2)
+                    coarse = torch.nn.functional.interpolate(
+                        coarse.transpose(1, 2), size=width, mode="nearest"
+                    ).transpose(1, 2)
+                    values = values + 0.15 * coarse
                 if architecture in {"block_attnres", "rd_attnres"}:
                     sources.append(values)
                 if (
@@ -160,6 +178,12 @@ def build_model_class(torch, nn, config, architecture, modern, parallel, kv_head
             }
 
         def architecture_stats(self):
+            if architecture == "macro":
+                return {"route_operators": ["skip", "repeat", "residual"],
+                        "executed_route": "repeat-0/skip-2 periodic", "weights_frozen_by_route": False}
+            if architecture == "hilp":
+                return {"auxiliary_latent_levels": 2, "coarse_pool": 4,
+                        "hierarchical_latent_injection": True}
             if architecture == "rope":
                 return {"position_encoding": "rotary", "relative_phase": True}
             if architecture == "alibi":

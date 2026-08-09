@@ -51,6 +51,7 @@
 
 ### 生成式召回与端到端推荐
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：共享生成和排序 encoder，以当前 rollout 与真实曝光双路 teacher distillation 统一召回、预排和精排。
+- [HRPO](../2608.00750-hrpo/README.md)：将序列总奖励拆成层级 Semantic ID 前缀的 residual credit-to-go，以细粒度组相对更新改善生成推荐轨迹。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
 - [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
@@ -138,6 +139,7 @@
 - [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 交叉与 deep 表征，是工业精排从线性模型向深度模型过渡的经典骨架。
 
 ### 冷启动与语义-行为对齐
+- [LLM Thompson Priors](../2608.03382-llm-ts-prior/README.md)：把 LLM 对新评论质量的语义判断编码为分群 Beta 先验，再让真实曝光反馈逐步覆盖先验。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 corpus、召回、排序和 utility 全漏斗识别 fresh 内容瓶颈，以内容特征、engagement dropout、cohort calibration 和 UCB 打破曝光反馈回路。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以 engagement-aware residual codebook 和多视角对齐把 Semantic ID 接入判别式召回。
 - [Proximity Features](../2607.12246-proximity-features/README.md)：以自适应群体地理 key 聚合行为，为匿名和首次访问用户提供冷启动特征。
@@ -150,6 +152,9 @@
 ## 训练目标与决策优化
 
 ### 采样、蒸馏与强化学习
+- [LLM Thompson Priors](../2608.03382-llm-ts-prior/README.md)：用 LLM 初始化分群 bandit 先验，并由 Thompson Sampling 在持续反馈下完成可校正的冷启动决策。
+- [KGD](../2608.02738-kgd/README.md)：以 BMTP 和冻结知识分支保留可刷新的预训练信息，并用正交 ACR 控制它与协同几何的干扰。
+- [HRPO](../2608.00750-hrpo/README.md)：依据层级生成前缀的后续收益分配 residual credit，使组相对策略优化不再只依赖整序列标量奖励。
 - [ASARL](../2607.26593-asarl/README.md)：用多 Agent 校验与补齐长尾 relevance 数据，执行 SCT、交互偏好优化和在线 student 蒸馏。
 - [RAMP](../2607.17473-ramp/README.md)：以富个性化路径为 teacher，通过 feature mask 和 KL alignment 改善仅有公共字段的流量。
 - [UAME](../2607.17092-uame/README.md)：利用 Gaussian 排序不确定性识别多 pxtr 冲突样本，并自适应提高高偏差 pair 的训练权重。
@@ -188,6 +193,7 @@
 
 ### 重排、混排与多目标页面决策
 - [DEGR](../2608.04809-degr/README.md)：用 cohort 内 embedding 多样性、adaptive reward ORPO 和 greedy selection 控制跨曝光重复。
+- [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：以 fresh/delayed 标签、生命周期 gate 和共享专家统一直播场景的多目标排序，显式平衡即时互动与滞后价值。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：把 LLM advertiser prior 与常规候选按 validation 选择的 quota 混合，再作为排序特征使用。
 - [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead 的列表价值蒸馏为在线 dense prefix labels，降低生成式重排延迟。
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 在相关性和多样性之间动态调整混排权重。

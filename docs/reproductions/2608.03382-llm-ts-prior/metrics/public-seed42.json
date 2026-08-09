@@ -1,0 +1,41 @@
+{
+  "paper": {
+    "arxiv_id": "2608.03382",
+    "title": "LLM-Derived Priors for Thompson Sampling",
+    "url": "https://arxiv.org/abs/2608.03382",
+    "organization": "NAVER WEBTOON"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 220,
+    "items": 120
+  },
+  "setup": {
+    "seed": 42
+  },
+  "variants": {
+    "uniform thompson prior": {
+      "ctr": 0.08479545454545455,
+      "cold_start_ctr": 0.0819090909090909
+    },
+    "llm semantic prior": {
+      "ctr": 0.09348863636363636,
+      "cold_start_ctr": 0.0910909090909091
+    }
+  },
+  "relative": {
+    "ctr_percent": 10.251943178772434,
+    "cold_start_ctr_percent": 11.209766925638194
+  },
+  "mechanism": {
+    "prior_strength": 40,
+    "online_rounds": 40,
+    "top_k": 10
+  },
+  "paper_results": {
+    "gender_prior_overall_ctr_percent": 1.48,
+    "gender_prior_cold_10_49_ctr_percent": 9.51,
+    "content_prior_overall_ctr_percent": -5.68
+  },
+  "scope": "实际运行分群 Beta prior 与在线 Thompson 更新；语义 prior 由 MovieLens genre 特征代理，且论文整体 Gender CTR 提升不显著。"
+}

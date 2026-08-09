@@ -11,9 +11,13 @@
 |---|---|---|---|---|
 | 生成、排序与冷启动 | [Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation](../2608.06213-gryphon-v2/README.md) | Yandex，2026-08-06 | 未发现官方代码 | `gryphon-v2` |
 | 多阶段排序与混排 | [DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging](../2608.04809-degr/README.md) | JD.com，2026-08-05 | 未发现官方代码 | `degr` |
+| 多阶段排序与混排 | [Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting](../2608.04455-twitch-mor/README.md) | Twitch，2026-08-05 | 未发现官方代码 | `twitch-mor` |
+| 生成、排序与冷启动 | [LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation](../2608.03382-llm-ts-prior/README.md) | NAVER WEBTOON，2026-08-04 | 未发现官方代码 | `llm-ts-prior` |
 | 多阶段排序与混排 | [A Self-Triggered Agentic Push Recommendation System](../2608.01949-steps/README.md) | ByteDance / Douyin，2026-08-03 | 未发现官方代码 | `steps` |
 | 内容理解、审核与风险控制 | [Douyin Multimodal Embedding Model Technical Report](../2608.02148-dme/README.md) | ByteDance / Douyin，2026-08-03 | 未发现官方代码 | `dme` |
+| 训练目标与决策优化 | [Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation](../2608.02738-kgd/README.md) | Xiamen University / Shopee，2026-08-03 | [已开源](https://github.com/FuCongResearchSquad/KGD4REC) | `kgd` |
 | 多阶段排序与混排 | [SPEAR: Selection-aware Personalized End-to-end Adaptive Rewriting and Retrieval for Community Search](../2608.01738-spear/README.md) | Dewu，2026-08-03 | [已开源](https://github.com/mallocagi1-cell/spear) | `spear` |
+| 生成、排序与冷启动 | [Hierarchical Residual Policy Optimization for Generative Recommendations](../2608.00750-hrpo/README.md) | City University of Hong Kong / Kuaishou，2026-08-01 | [已开源](https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO) | `hrpo` |
 | 大模型能力与推荐融合 | [Building a User Foundation Model for the Open Web](../2607.28019-open-web-ufm/README.md) | Teads，2026-07-30 | 未发现官方代码 | `open-web-ufm` |
 | 生成、排序与冷启动 | [CCFormer: Efficient Cross-Field Interaction and Hierarchical Sequence Compression for Industrial Recommendation at Tencent](../2607.28070-ccformer/README.md) | Tencent Platform and Content Group，2026-07-30 | 未发现官方代码 | `ccformer` |
 | 生成、排序与冷启动 | [ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation](../2607.27744-rocs/README.md) | Meta AI，2026-07-30 | [已开源](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) | `rocs` |

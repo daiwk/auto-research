@@ -11,7 +11,10 @@
 |---|---|---|---|---|
 | 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/DBtxy/DASH-OPSD) | `dash` |
 | 推理枢纽蒸馏 | [RP-OPSD](2608.06347-rp-opsd/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/NJUNLP/RP-OPSD) | `rp-opsd` |
+| 生成式奖励模型 | [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](2608.06310-rrc/README.md) | Northeastern University，2026-08-06 | [已开源](https://github.com/wangclnlp/RRC) | `rrc` |
 | 无监督自蒸馏 | [U-OPSD](2608.06296-u-opsd/README.md) | University of California, San Diego，2026-08-06 | 未发现官方代码 | `u-opsd` |
+| rollout 预算分配 | [Optimizing What Policies Learn From: Recoverability-Aware Rollout Intervention Learning](2608.05080-rail/README.md) | University of Notre Dame / Amazon，2026-08-05 | 未发现官方代码 | `rail` |
+| RL rollout 加速 | [SpecRoll: Fast-Slow Verifier-Feedback Adaptation for Speculative Reinforcement Learning Rollouts](2608.04962-specroll/README.md) | VNU University of Engineering and Technology / Viettel AI，2026-08-05 | [已开源](https://anonymous.4open.science/r/SpecRoll-26062006) | `specroll` |
 | 回报相关奖励塑形 | [ADRS](2608.03223-adrs/README.md) | University of Science and Technology of China，2026-08-04 | [已开源](https://github.com/gitrxh/ADRS-arxiv) | `adrs` |
 | 持续一致性蒸馏 | [PCSD](2608.01837-pcsd/README.md) | 论文未列机构，2026-08-03 | 未发现官方代码 | `pcsd` |
 | Context distillation | [Flux-OPD](2607.28022-flux-opd/README.md) | Peking University，2026-07-30 | 未发现官方代码 | `flux-opd` |

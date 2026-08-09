@@ -122,6 +122,9 @@ TOPIC_HIERARCHY = {
         "Entropy 稳定": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "异步 off-policy": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
         "稳定 MoE RL": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
+        "生成式奖励模型": ("奖励、信用与课程", "奖励构造与排序信号"),
+        "rollout 预算分配": ("训推一致性与高效 rollout", "预算分配与 speculative rollout"),
+        "RL rollout 加速": ("训推一致性与高效 rollout", "预算分配与 speculative rollout"),
     },
     "agent-research": {
         "Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
@@ -133,7 +136,6 @@ TOPIC_HIERARCHY = {
         "递归 turn 信用": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "观测校准蒸馏": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "Agentic OPD / rollout budgeting": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
-        "搜索 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
         "多轮 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
         "长时程 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
         "网页 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
@@ -182,6 +184,15 @@ TOPIC_HIERARCHY = {
         "通用 Agent 评测": ("工具调用与环境执行", "电脑操作与 reward 评测"),
         "工具指令与评测": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
         "多 Agent 协作": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "Harness policy RL": ("Agentic RL 与后训练", "Harness 与运行时策略"),
+        "技能进化安全": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "全局技能进化": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "搜索 Agent RL": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "环境派生中训练": ("Agentic RL 与后训练", "环境模型与 world rehearsal"),
+        "Harness 优化评测": ("工具调用与环境执行", "电脑操作与 reward 评测"),
+        "代码检索 Agent": ("多 Agent 与软件工程", "角色协作与软件开发"),
+        "端到端 Agent 记忆": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "搜索轨迹 hindsight": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
     },
 }
 
@@ -195,6 +206,11 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "macro": ("网络架构", "动态层路由与残差路径"),
+    "hilp": ("预训练与数据", "latent 与多步预测"),
+    "qevict": ("推理与系统效率", "推测解码与 KV cache"),
+    "bakron": ("推理与系统效率", "量化"),
+    "dblast": ("推理与系统效率", "推测解码与 KV cache"),
     "switch-transformer": ("网络架构", "MoE、状态空间与残差路径"),
     "mamba": ("网络架构", "MoE、状态空间与残差路径"),
     "mhc": ("网络架构", "MoE、状态空间与残差路径"),

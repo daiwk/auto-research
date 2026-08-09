@@ -4,6 +4,9 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "rrc": ("RRC", "https://arxiv.org/abs/2608.06310"),
+    "rail": ("Recoverability-Aware Intervention Learning", "https://arxiv.org/abs/2608.05080"),
+    "specroll": ("SpecRoll", "https://arxiv.org/abs/2608.04962"),
     "minirl": ("Stabilizing Reinforcement Learning with LLMs", "https://arxiv.org/abs/2512.01374"),
     "missing-old-logits": ("Missing Old Logits", "https://arxiv.org/abs/2605.12070"),
     "stare": ("STARE", "https://arxiv.org/abs/2606.19236"),

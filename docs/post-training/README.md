@@ -87,6 +87,14 @@
 - [Off-Context GRPO](../reproductions/2607.19313-off-context-grpo/README.md)：以特权过程生成 rollout，再用 importance ratio 校正到无上下文策略；
 - [DynamicRubric](../reproductions/2607.20083-dynamic-rubric/README.md)：让 rubric evaluator 与 policy 在训练过程中协同演化。
 
+## 2026-08-09 P0/P1 增量
+
+- [RRC](2608.06310-rrc/README.md)：把生成式奖励模型的相对排序转成 self-competitive 与 anchor-guided reward。
+- [RAIL](2608.05080-rail/README.md)：按可恢复性收益学习 rollout 干预位置与预算。
+- [SpecRoll](2608.04962-specroll/README.md)：用快慢双路径适配 evolving policy，并以 exact verifier 保持 rollout 分布。
+
+三者均接入统一 post-training runner 与组合式 evolve genome；稳定指标分别保存在各论文目录的 `metrics/arithmetic-smoke-seed42.json`，不再以日期批次文件作为事实源。
+
 ## 研究闭环
 
 ```mermaid

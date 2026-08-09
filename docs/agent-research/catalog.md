@@ -10,10 +10,19 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 递归 turn 信用 | [AgentOPSD](2608.05987-agent-opsd/README.md) | Tsinghua University，2026-08-06 | [已开源](https://github.com/ZethWang/AgentOPSD) | `agent-opsd` |
+| 代码检索 Agent | [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](2608.05886-codegrep/README.md) | NetEase Guangzhou AI Lab，2026-08-06 | 未发现官方代码 | `codegrep` |
+| 搜索 Agent RL | [Contextual Information Policy Optimization for Search Agents](2608.06128-cipo/README.md) | Beihang University，2026-08-06 | 未发现官方代码 | `cipo` |
 | 环境 rehearsal / Agent RL | [EnvACE](2608.06197-envace/README.md) | Shanghai Jiao Tong，2026-08-06 | [已开源](https://github.com/Within-yao/EnvACE) | `envace` |
+| Harness 优化评测 | [HarnessOpt-Bench: Evaluating LLMs at Harness Optimization](2608.06301-harnessopt-bench/README.md) | Scale AI，2026-08-06 | 未发现官方代码 | `harnessopt-bench` |
+| 全局技能进化 | [Learning Globally Reusable Skills for Coding Agents](2608.06153-gse/README.md) | Tianjin University，2026-08-06 | 未发现官方代码 | `gse` |
+| 技能进化安全 | [When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents](2608.05810-vag/README.md) | 论文未列机构，2026-08-06 | 未发现官方代码 | `vag` |
+| Harness policy RL | [EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents](2608.05446-evoharness-rl/README.md) | University of Illinois Urbana–Champaign / Meta AI，2026-08-05 | 未发现官方代码 | `evoharness-rl` |
+| 端到端 Agent 记忆 | [MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off](2608.04843-memorycpt/README.md) | Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS，2026-08-05 | 未发现官方代码 | `memorycpt` |
 | 观测校准蒸馏 | [OCSD](2608.04788-ocsd/README.md) | Nanjing University，2026-08-05 | [已开源](https://github.com/yiy1x/OCSD) | `ocsd` |
+| 环境派生中训练 | [State2State: Environment-Derived Mid-Training for LLM Agents](2608.04934-state2state/README.md) | Tsinghua University AIR / Alibaba Group，2026-08-05 | [已开源](https://github.com/THUNLP-MT/State2State) | `state2state` |
 | 可验证统一记忆 | [VerMem](2608.03137-vermem/README.md) | Sun Yat-sen University，2026-08-04 | [已开源](https://github.com/Sun-SYSU-24/VerMem) | `vermem` |
 | 检索—记忆共进化 | [CoEvo-Mem](2608.01739-coevo-mem/README.md) | 论文未列机构，2026-08-03 | 未发现官方代码 | `coevo-mem` |
+| 搜索轨迹 hindsight | [HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning](2608.01597-hindsearch/README.md) | Santa Clara University，2026-08-03 | [已开源](https://anonymous.4open.science/r/hindsearch-anon-EBDC) | `hindsearch` |
 | Agent group credit | [Group-Reflective Self-Distillation](2607.28076-grsd/README.md) | Baidu Inc.，2026-07-30 | [已开源](https://github.com/BinbZheng1/GRSD) | `grsd` |
 | CUA Reward 评测 | [OSReward / OS-Shepherd](2607.28609-osreward/README.md) | The University of Hong Kong，2026-07-30 | [已开源](https://os-copilot.github.io/OSReward-Home/) | `os-shepherd` |
 | Agent RL | [TAPO](2607.27973-tapo/README.md) | Peking University，2026-07-30 | 未发现官方代码 | `tapo` |

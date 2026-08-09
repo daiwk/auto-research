@@ -26,6 +26,8 @@
 ## 最新实现
 
 - [RD-AttnRes](../reproductions/2608.01075-rd-attnres/README.md)：在 Block AttnRes 的同一组 residual sources 上分别学习 QK 与 V 深度路由；已接入 micro-LLM evolve，并保留 30-step 本地负结果。
+- [MACRO](../reproductions/2608.05872-macro/README.md) 与 [HiLP](../reproductions/2608.05806-hilp/README.md)：分别提供动态层路由和分层 latent 预测，并已进入 micro-LLM evolve。
+- [QEvict](../reproductions/2608.05326-qevict/README.md)、[BaKron](../reproductions/2608.06291-bakron/README.md) 与 [DBLast](../reproductions/2608.05448-dblast/README.md)：覆盖可恢复 KV eviction、Kronecker 二阶量化和相关 block speculative drafting；均有独立可执行 adapter 与固定指标。
 
 ## 与后训练和应用的边界
 

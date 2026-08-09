@@ -32,6 +32,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
         "block_attnres", "rd_attnres",
         "olm_composable",
+        "macro", "hilp",
         "rope", "alibi", "gqa", "hymba", "moba", "blt",
     }
     if architecture not in supported:
@@ -44,6 +45,7 @@ def build_micro_lm(architecture: str, config: MicroLMConfig):
         "nsa_gated_attention", "wide_dynamic_width", "retoken",
         "block_attnres", "rd_attnres",
         "olm_composable",
+        "macro", "hilp",
         "rope", "alibi", "gqa", "hymba", "moba", "blt",
     }
     parallel = "parallel" in architecture

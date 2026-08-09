@@ -19,6 +19,8 @@ from auto_research.agent_research import AgentResearchConfig, AgentResearchRunne
         "deepresearcher", "retool", "toolrl", "sage", "memskill",
         "memento-skills", "searl", "agent0",
         "agent-r1", "camel", "toolbench", "gaia",
+        "evoharness-rl", "vag", "gse", "cipo", "state2state",
+        "harnessopt-bench", "codegrep", "memorycpt", "hindsearch",
     ],
 )
 def test_agent_methods_run_and_write_trace(tmp_path: Path, method: str):
@@ -126,6 +128,30 @@ def test_global_p1_agent_mechanisms_are_observable(
         method=method, benchmark=benchmark, episodes=24, output_dir=tmp_path,
     )).run()
     assert result.metrics["joint_success"] == 1.0
+    for diagnostic in diagnostics:
+        assert result.diagnostics[diagnostic] > 0
+
+
+@pytest.mark.parametrize(
+    ("method", "benchmark", "diagnostics"),
+    [
+        ("evoharness-rl", "planbench-mini", ("policy_updates", "skill_document_updates")),
+        ("vag", "planbench-mini", ("affordance_checks", "local_verifier_calls", "skills_created")),
+        ("gse", "planbench-mini", ("skill_graph_nodes", "skill_graph_edges", "skills_reused")),
+        ("cipo", "scalemcp-mini", ("search_queries", "dense_credit_updates", "outcome_rewards")),
+        ("state2state", "planbench-mini", ("trajectory_rollouts", "local_verifier_calls", "outcome_rewards")),
+        ("harnessopt-bench", "planbench-mini", ("trajectory_rollouts", "local_verifier_calls", "policy_updates")),
+        ("codegrep", "scalemcp-mini", ("tool_call_candidates", "tool_calls_accepted", "dense_credit_updates")),
+        ("memorycpt", "planbench-mini", ("memory_operations", "memories_retrieved", "context_compressions")),
+        ("hindsearch", "planbench-mini", ("reflections", "hindsight_skills", "dense_credit_updates")),
+    ],
+)
+def test_20260809_agent_mechanisms_are_observable(
+    tmp_path: Path, method: str, benchmark: str, diagnostics: tuple[str, ...]
+):
+    result, _ = AgentResearchRunner(AgentResearchConfig(
+        method=method, benchmark=benchmark, episodes=36, memory_size=12, output_dir=tmp_path,
+    )).run()
     for diagnostic in diagnostics:
         assert result.diagnostics[diagnostic] > 0
 
