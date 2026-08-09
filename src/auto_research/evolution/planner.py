@@ -169,10 +169,13 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         ),
         "rankmixer_ramp": ("ramp", "隐私", "特征受限", "feature availability"),
         "rankmixer_kgd": ("kgd", "knowledge geometry", "知识几何", "可刷新预训练", "bmtp"),
+        "rankmixer_tokenminds": ("tokenminds", "user token", "用户 token", "sid 用户"),
     }
     for architecture, terms in direct_terms.items():
         if any(term in text for term in terms):
-            values.append(architecture)
+            if architecture in values:
+                values.remove(architecture)
+            values.insert(0, architecture)
     mapping = {
         p.architecture: p.architecture for p in papers
         if p.architecture

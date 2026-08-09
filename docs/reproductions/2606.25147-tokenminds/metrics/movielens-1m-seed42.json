@@ -1,0 +1,85 @@
+{
+  "paper": {
+    "arxiv_id": "2606.25147",
+    "title": "TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems",
+    "url": "https://arxiv.org/abs/2606.25147",
+    "organization": "Google DeepMind / YouTube"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 320,
+    "items": 480
+  },
+  "setup": {
+    "seed": 42,
+    "steps_per_model": 120,
+    "maximum_history": 32,
+    "sid_levels": 2,
+    "sid_cardinality": 16,
+    "same_split_optimizer_and_full_catalog": true
+  },
+  "baseline": {
+    "name": "dense-only sequential user encoder",
+    "hit_at_10": 0.034375,
+    "ndcg_at_10": 0.020270109562740432,
+    "head_share_at_10": 0.105
+  },
+  "method": {
+    "name": "TokenMinds dense embedding + generated SID user tokens",
+    "hit_at_10": 0.034375,
+    "ndcg_at_10": 0.02019862876969453,
+    "head_share_at_10": 0.1034375
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": -0.35264137485124736,
+    "head_share_at_10_percent": -1.4880952380952328
+  },
+  "training": {
+    "baseline": {
+      "initial_ranking_loss": 7.678776359558105,
+      "final_ranking_loss": 6.986705493927002,
+      "final_sid_loss": null,
+      "parameters": 22272,
+      "device": "cpu"
+    },
+    "tokenminds": {
+      "initial_ranking_loss": 7.683404588699341,
+      "final_ranking_loss": 6.9884271144866945,
+      "final_sid_loss": 2.6777411699295044,
+      "parameters": 24353,
+      "device": "cpu"
+    }
+  },
+  "paper_results": {
+    "sfv_engaged_users_percent": 0.11,
+    "sfv_satisfied_engagement_percent": 0.62,
+    "training_compute_reduction_percent": 50,
+    "serving_compute_reduction_percent": 31,
+    "full_user_traffic": true
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "Gemini 370M MoE encoder and 370M decoder with PLUM CPT",
+      "YouTube LFV/SFV/search private training corpus",
+      "multi-context beam decoding and asynchronous billion-user serving"
+    ]
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:tokenminds",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [42],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2606.25147-tokenminds/metrics/movielens-1m-seed42.json",
+    "code_commit": "working tree before commit",
+    "dataset": "local public MovieLens-1M",
+    "created_at": "2026-08-09T00:00:00+08:00"
+  }
+}

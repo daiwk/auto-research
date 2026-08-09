@@ -52,6 +52,7 @@
 ## 2026-06
 - [CMSL](../2606.28533-cmsl/README.md)：用可学习兴趣 lenses 拆分多兴趣序列，并结合 HSTU 建模不同语义 strand。
 - [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 汇总验证和指标反馈，并通过四级级联阻断静默错误架构。
+- [TokenMinds](../2606.25147-tokenminds/README.md)：共享序列 encoder，同时输出稠密用户向量和分层 SID 用户 token，再以可学习 token embedding 注入生产排序模型。
 - [G2Rec](../2606.20554-g2rec/README.md)：构建可微 soft graph，并联合图结构与生成式双目标学习用户—物品关系。
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：对图边去热门偏置，离线预计算多跳 PPR，再以 cluster index 服务召回。
 - [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。

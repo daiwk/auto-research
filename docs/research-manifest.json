@@ -15252,6 +15252,101 @@
     },
     {
       "domain": "recommendation",
+      "key": "tokenminds",
+      "title": "TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2606.25147",
+      "detail_path": "reproductions/2606.25147-tokenminds/README.md",
+      "topic": [
+        "llm-recommendation",
+        "user-modeling",
+        "semantic-id",
+        "cross-scenario",
+        "ranking",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google DeepMind / YouTube",
+      "published": "2026-06-23",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tokenminds",
+        "arxiv_id": "2606.25147",
+        "title": "TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2606.25147",
+        "track": "recommendation",
+        "organization": "Google DeepMind / YouTube",
+        "published": "2026-06-23",
+        "code_url": null,
+        "topics": [
+          "llm-recommendation",
+          "user-modeling",
+          "semantic-id",
+          "cross-scenario",
+          "ranking",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/tokenminds",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "同数据、同 seed、同 120 steps 的 dense-only GRU 用户编码器",
+        "metrics": [
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.head_share_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent",
+          "training.baseline.final_ranking_loss",
+          "training.baseline.initial_ranking_loss",
+          "training.tokenminds.final_ranking_loss",
+          "training.tokenminds.final_sid_loss",
+          "training.tokenminds.initial_ranking_loss"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=120",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "YouTube SFV",
+            "metric": "Engaged Users",
+            "lift_percent": 0.11,
+            "traffic": "seven-day production A/B; subsequently full user traffic",
+            "source_url": "https://arxiv.org/pdf/2606.25147",
+            "source_location": "Table 4 and Section 4.3",
+            "experiment_duration": "7 days",
+            "significance": "95% confidence",
+            "retrieved_at": "2026-08-09"
+          },
+          {
+            "product": "YouTube SFV",
+            "metric": "Satisfied Engagement",
+            "lift_percent": 0.62,
+            "traffic": "seven-day production A/B; subsequently full user traffic",
+            "source_url": "https://arxiv.org/pdf/2606.25147",
+            "source_location": "Table 4 and Section 4.3",
+            "experiment_duration": "7 days",
+            "significance": "95% confidence",
+            "retrieved_at": "2026-08-09"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "tokenmixer-large",
       "title": "TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders",
       "paper_url": "https://arxiv.org/abs/2602.06563",

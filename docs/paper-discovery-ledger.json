@@ -785,6 +785,105 @@
           "doc": "agent-research/2311.12983-gaia/README.md"
         }
       ]
+    },
+    {
+      "batch": "2026-08-09-google-meta-priority-correction",
+      "scope_kind": "institution-priority",
+      "checked_at": "2026-08-09T23:59:59+08:00",
+      "window": "2026-01-01 through 2026-08-09",
+      "sources": [
+        "official arXiv API",
+        "paper PDF affiliation and evidence review",
+        "GitHub public repository search"
+      ],
+      "required_tracks": [
+        "recommendation"
+      ],
+      "priority_institutions": [
+        "Google",
+        "Meta"
+      ],
+      "institution_sweeps": [
+        {
+          "organization": "Google",
+          "queries": [
+            "Google DeepMind / YouTube author affiliations",
+            "YouTube recommendation live launch / full traffic / online A/B"
+          ],
+          "candidate_ids": [
+            "2606.25147"
+          ],
+          "candidate_discovery_gate": "affiliation-and-topic",
+          "abstract_online_evidence_required": false,
+          "full_text_review_required": true
+        },
+        {
+          "organization": "Meta",
+          "queries": [
+            "Meta Platforms author affiliations",
+            "Instagram recommendation deployed / full traffic / online A/B"
+          ],
+          "candidate_ids": [
+            "2607.12281"
+          ],
+          "candidate_discovery_gate": "affiliation-and-topic",
+          "abstract_online_evidence_required": false,
+          "full_text_review_required": true
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2606.25147",
+          "title": "TokenMinds",
+          "organization": "Google DeepMind / YouTube",
+          "evidence_gate": "quantified-online-ab-and-full-traffic",
+          "priority": "P0",
+          "priority_reason": "Google/YouTube industrial recommendation with seven-day A/B and full-user-traffic deployment",
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.3",
+              "Table 4",
+              "Table 6"
+            ],
+            "matched_terms": [
+              "A/B test",
+              "seven-day experiments",
+              "full user traffic"
+            ]
+          },
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "tokenminds",
+          "doc": "reproductions/2606.25147-tokenminds/README.md"
+        },
+        {
+          "id": "2607.12281",
+          "title": "SlimPer",
+          "organization": "Meta Platforms, Inc.",
+          "evidence_gate": "statistically-significant-full-traffic",
+          "priority": "P0",
+          "priority_reason": "Meta industrial recommendation deployed at full traffic on Instagram Reels and Feed",
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.3 A/B Test Performance",
+              "Section 6 Conclusion"
+            ],
+            "matched_terms": [
+              "launched to full traffic",
+              "statistically significant gains",
+              "controlled A/B experiments"
+            ]
+          },
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "slimper",
+          "doc": "reproductions/2607.12281-slimper/README.md"
+        }
+      ]
     }
   ]
 }

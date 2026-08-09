@@ -54,6 +54,7 @@
 | 大模型能力与推荐融合 | [Prompt Generation Technical Report](../2607.11326-prompt-generation/README.md) | Alibaba / Taobao Search，2026-07 | 未发现官方代码 | `prompt-generation` |
 | 生成、排序与冷启动 | [CMSL: Constructive Multi-Sequence Learning for Recommendation Systems](../2606.28533-cmsl/README.md) | Meta，2026-06-26 | 未发现官方代码 | `cmsl` |
 | Serving 与研究基础设施 | [NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems](../2606.27243-nova/README.md) | Tencent，2026-06-25 | 未发现官方代码 | `nova` |
+| 大模型能力与推荐融合 | [TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems](../2606.25147-tokenminds/README.md) | Google DeepMind / YouTube，2026-06-23 | 未发现官方代码 | `tokenminds` |
 | 生成、排序与冷启动 | [Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation](../2606.20554-g2rec/README.md) | Meta，2026-06-18 | 未发现官方代码 | `g2rec` |
 | Serving 与研究基础设施 | [RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation](../2606.18379-rankgraph2/README.md) | Meta，2026-06-16 | 未发现官方代码 | `rankgraph2` |
 | Serving 与研究基础设施 | [EvoRec: Self-Evolving Agentic Recommender Systems](../2606.28368-evorec/README.md) | Alibaba International Digital Commerce Group，2026-06-15 | 未发现官方代码 | `evorec` |

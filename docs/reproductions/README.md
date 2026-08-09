@@ -206,6 +206,7 @@ pytest tests/test_research_module_docs.py
 | 核心机制 | `sort-gen` · [SORT-Gen](2505.07197-sort-gen/README.md) | 相对部署基线 CLICK +4.13%、GMV +8.10% | ordered regression + 单次 mask-driven queue generation；Click +5.10%、Pay +8.46%、GMV proxy +9.00%、ILAD +2.89% |
 | 核心机制 | `recgpt-v3` · [RecGPT-V3](2607.15591-recgpt-v3/README.md) | 淘宝 Feed IPV +1.28%、CTR +1.00%、GMV +3.97%；资源 -52.4% | 两阶段教师蒸馏后 NDCG@10 +36.96%，memory token -65%、latent slots -90%，但 head share +71.43% |
 | 核心机制 | `slimper` · [SlimPer](2607.12281-slimper/README.md) | Instagram Reels/Feed 统计显著全流量提升；具体 lift 未披露 | 参数匹配下 NDCG@10 +1.29%，attention-score elements -94.12% |
+| 核心机制 | `tokenminds` · [TokenMinds](2606.25147-tokenminds/README.md) | YouTube SFV Engaged Users +0.11%、Satisfied Engagement +0.62%，多 surface 全流量 | dense + SID user token 双输出实际训练；单 seed NDCG@10 -0.35%，不宣称稳定提升 |
 | 核心机制 | `recap` · [RECAP](2607.15730-recap/README.md) | 快手人均应用使用时长 +0.139% | GRPO reward 0.5245→0.7096，但 NDCG@10 -6.77%、head share -20.27% |
 | 核心机制 | `uame` · [UAME](2607.17092-uame/README.md) | LongView 最高 +1.614%、Forward 最高 +1.598% | 三路公开 proxy 下 NDCG@10 -62.28%，未迁移线上收益 |
 | 核心机制 | `conv-llm` · [Convolution for LLMs](2607.18413-conv-llm/README.md) | 纯 LLM：Qwen3-1.7B PPL 13.42→12.79 | 同预算 WikiText-2 test PPL 305.664→304.787（-0.29%） |

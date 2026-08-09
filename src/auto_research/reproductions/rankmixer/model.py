@@ -35,6 +35,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
         "rankmixer_whale", "rankmixer_tmallgs", "rankmixer_long_history",
         "rankmixer_ramp",
         "rankmixer_kgd",
+        "rankmixer_tokenminds",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -296,6 +297,29 @@ def build_model(kind: str, data, config: RankMixerConfig):
             if kind == "rankmixer_kgd":
                 self.knowledge_projection = nn.Linear(feature_count, config.dimensions)
                 self.anchored_calibration = nn.Linear(feature_count, config.dimensions, bias=False)
+            if kind == "rankmixer_tokenminds":
+                from ..tokenminds.model import TokenMindsConfig, build_semantic_codes
+
+                sid_cardinality = min(16, item_count)
+                sid_config = TokenMindsConfig(
+                    dimensions=config.dimensions,
+                    sid_cardinality=sid_cardinality,
+                )
+                item_codes = build_semantic_codes(
+                    np.asarray(data.item_features), sid_config
+                )
+                self.register_buffer(
+                    "tokenminds_item_codes",
+                    torch.tensor(item_codes, dtype=torch.long),
+                )
+                self.tokenminds_embeddings = nn.ModuleList(
+                    nn.Embedding(sid_cardinality, config.dimensions)
+                    for _ in range(sid_config.sid_levels)
+                )
+                # A conservative residual gate keeps the original RankMixer
+                # representation intact at initialization, then learns how much
+                # discrete user-token signal the downstream ranker should use.
+                self.tokenminds_gate = nn.Parameter(torch.tensor(-3.0))
             self.auxiliary_logits = None
             self.alignment_logits = None
             self.restricted_logits = None
@@ -338,6 +362,15 @@ def build_model(kind: str, data, config: RankMixerConfig):
             last = self.item(history[:, -1])
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)
+            if kind == "rankmixer_tokenminds":
+                history_codes = self.tokenminds_item_codes[history]
+                user_token = sum(
+                    embedding(history_codes[:, :, level]).mean(dim=1)
+                    for level, embedding in enumerate(self.tokenminds_embeddings)
+                ) / len(self.tokenminds_embeddings)
+                user_feature = user_feature + torch.sigmoid(
+                    self.tokenminds_gate
+                ) * user_token
             if kind == "rankmixer_kgd":
                 # Read-only cross-attention surrogate: behavioral knowledge is
                 # detached from downstream gradients; ACR owns the writable

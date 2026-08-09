@@ -4632,5 +4632,19 @@
     "height": 1385,
     "score": 100,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2606.25147-tokenminds/README.md",
+    "paper_url": "https://arxiv.org/abs/2606.25147",
+    "arxiv_id": "2606.25147",
+    "figure": "existing",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2606.25147v1/figures/framework.png",
+    "extraction": "existing",
+    "asset": "docs/reproductions/2606.25147-tokenminds/assets/paper-figure-01.png",
+    "width": 2136,
+    "height": 882,
+    "score": 0,
+    "error": ""
   }
 ]
