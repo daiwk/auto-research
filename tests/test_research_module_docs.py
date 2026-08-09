@@ -241,18 +241,25 @@ def test_foundation_models_have_a_separate_scalable_catalog():
 def test_recommendation_and_foundation_method_indexes_are_in_navigation():
     navigation = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
     expected = (
-        ("recommendation", "reproductions", "reproductions/catalog.md"),
-        ("foundation-models", "foundation-models", "foundation-models/catalog.md"),
+        (
+            "recommendation",
+            "reproductions/catalog/README.md",
+            "reproductions/catalog/README.md",
+        ),
+        (
+            "foundation-models",
+            "foundation-models/catalog.md",
+            "foundation-models/catalog.md",
+        ),
     )
     manifest = json.loads(
         (ROOT / "docs" / "research-manifest.json").read_text(encoding="utf-8")
     )
 
-    for domain, directory, nav_target in expected:
+    for domain, index_path, nav_target in expected:
         assert f"- 方法索引: {nav_target}" in navigation
-        index = (ROOT / "docs" / directory / "catalog.md").read_text(
-            encoding="utf-8"
-        )
+        path = ROOT / "docs" / index_path
+        index = path.read_text(encoding="utf-8")
         papers = [paper for paper in manifest["papers"] if paper["domain"] == domain]
         assert papers
         for paper in papers:
@@ -269,13 +276,29 @@ def test_all_research_domains_show_explicit_overview_and_method_index_entries():
     # structurally identical and make both entries visible in the sidebar.
     assert "navigation.indexes" not in navigation
     for overview, catalog in (
-        ("reproductions/industrial.md", "reproductions/catalog.md"),
+        ("reproductions/industrial.md", "reproductions/catalog/README.md"),
         ("foundation-models/README.md", "foundation-models/catalog.md"),
         ("post-training/README.md", "post-training/catalog.md"),
         ("agent-research/README.md", "agent-research/catalog.md"),
     ):
         assert f"- 研究总览: {overview}" in navigation
         assert f"- 方法索引: {catalog}" in navigation
+
+
+def test_markdown_sources_do_not_generate_the_same_directory_route():
+    collisions = []
+    for path in (ROOT / "docs").rglob("*.md"):
+        if path.name == "README.md":
+            continue
+        directory_index = path.with_suffix("") / "README.md"
+        if directory_index.exists():
+            collisions.append(
+                (
+                    str(path.relative_to(ROOT)),
+                    str(directory_index.relative_to(ROOT)),
+                )
+            )
+    assert collisions == []
 
 
 def test_sidebar_hides_global_and_per_paper_indexes_but_keeps_paper_pages():

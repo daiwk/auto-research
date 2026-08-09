@@ -399,15 +399,16 @@ def render_method_index(
         code = row["code"]
         if code.startswith("http"):
             code = f"[已开源]({code})"
+        link = f"../{row['link']}" if module == "reproductions" else row["link"]
         lines.append(
-            f"| {row['topic']} | [{row['title']}]({row['link']}) | "
+            f"| {row['topic']} | [{row['title']}]({link}) | "
             f"{row['institution']}，{row['date']} | {code} | `{row['key']}` |"
         )
     browse_links = (
         (
-            "- [按公司](catalog/by-company.md)",
-            "- [按主题](catalog/by-topic.md)",
-            "- [按年月](catalog/by-month.md)",
+            "- [按公司](by-company.md)",
+            "- [按主题](by-topic.md)",
+            "- [按年月](by-month.md)",
         )
         if module == "reproductions"
         else (
@@ -723,7 +724,12 @@ def main() -> None:
         ("post-training", "LLM 后训练", "post-training"),
         ("agent-research", "Agent 研究", "agent-research"),
     ):
-        (DOCS / module / "catalog.md").write_text(
+        method_index = (
+            DOCS / module / "catalog" / "README.md"
+            if module == "reproductions"
+            else DOCS / module / "catalog.md"
+        )
+        method_index.write_text(
             render_method_index(module, label, domain), encoding="utf-8"
         )
         if module in {"reproductions", "foundation-models"}:
