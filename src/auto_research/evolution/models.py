@@ -69,7 +69,7 @@ class EvolutionConfig:
             raise ValueError("maximum examples and agent episodes must be positive")
         if self.benchmark_suite not in {"core", "public", "unirank"}:
             raise ValueError("benchmark suite must be core, public or unirank")
-        if self.model == "micro-llm" and self.benchmark_suite == "unirank":
+        if self.model in {"micro-llm", "micro-vlm"} and self.benchmark_suite == "unirank":
             raise ValueError("the UniRank suite is only available to recommendation models")
         allowed_fitness = {"primary", "public_composite", "unirank_composite"}
         if self.fitness_metric not in allowed_fitness:
@@ -80,12 +80,12 @@ class EvolutionConfig:
             raise ValueError("public_composite fitness requires the public benchmark suite")
         if self.fitness_metric == "unirank_composite" and self.benchmark_suite != "unirank":
             raise ValueError("unirank_composite fitness requires the unirank benchmark suite")
-        if self.model == "micro-llm":
+        if self.model in {"micro-llm", "micro-vlm"}:
             if min(self.vocab_size, self.llm_dimensions, self.llm_layers,
                    self.llm_batch_size, self.llm_sequence_length) < 1:
-                raise ValueError("micro-llm size parameters must be positive")
+                raise ValueError("micro model size parameters must be positive")
             if self.llm_dimensions % 4:
-                raise ValueError("micro-llm dimensions must be divisible by 4 attention heads")
+                raise ValueError("micro model dimensions must be divisible by 4 attention heads")
 
 
 @dataclass(frozen=True)

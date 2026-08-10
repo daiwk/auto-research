@@ -32,6 +32,14 @@ nav:
           - 按年份: foundation-models/catalog/by-year.md
           - 论文谱系与缺口: foundation-models/lineage.md
           - 统一评测协议: foundation-models/benchmark.md
+      - 多模态大模型:
+          - 研究总览: multimodal-models/README.md
+          - 方法索引: multimodal-models/catalog.md
+          - 按机构/公司/学校: multimodal-models/catalog/by-organization.md
+          - 按主题: multimodal-models/catalog/by-topic.md
+          - 按年份: multimodal-models/catalog/by-year.md
+          - 论文谱系与缺口: multimodal-models/lineage.md
+          - 统一评测协议: multimodal-models/benchmark.md
       - LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md

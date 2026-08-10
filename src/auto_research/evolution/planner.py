@@ -8,6 +8,18 @@ from .models import Genome, PaperInspiration
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
+    if model == "micro-vlm":
+        values = ["micro_vlm_linear", "micro_vlm_mlp", "micro_vlm_query"]
+        text = direction.lower()
+        priorities = {
+            "micro_vlm_query": ("query", "q-former", "查询", "视觉查询"),
+            "micro_vlm_mlp": ("mlp", "projector", "投影"),
+        }
+        for architecture, terms in priorities.items():
+            if any(term in text for term in terms):
+                values.remove(architecture)
+                values.insert(0, architecture)
+        return values
     if model == "post-training":
         installed = list(POST_TRAINING_ALGORITHMS)
         mapped = [paper.architecture for paper in papers if paper.architecture in installed]
@@ -198,6 +210,8 @@ def propose(parent: Genome, generation: int, index: int, architectures: list[str
         return _propose_agent(parent, generation, index, architectures, rng)
     if model == "micro-llm":
         return _propose_llm(parent, generation, index, architectures, rng)
+    if model == "micro-vlm":
+        return _propose_multimodal(parent, generation, index, architectures, rng)
     architecture = architectures[(index + generation - 1) % len(architectures)] if generation == 1 else rng.choice(architectures)
     genome = replace(parent, architecture=architecture)
     changes = [f"结构假设：{architecture}"]
@@ -261,6 +275,24 @@ def _propose_llm(parent, generation, index, architectures, rng):
     name, values = knobs[(generation + index) % len(knobs)]
     value = rng.choice(values)
     return replace(parent, **{name: value}), f"联合优化：{name}={value}"
+
+
+def _propose_multimodal(parent, generation, index, architectures, rng):
+    if generation == 1:
+        architecture = architectures[index % len(architectures)]
+        return replace(parent, architecture=architecture), (
+            f"多模态 connector 消融：{architecture}；保持图像、问题、预算与模型宽度不变"
+        )
+    knobs = (
+        ("dimensions", [64, 96, 128, 192]),
+        ("learning_rate", [1e-3, 3e-3, 6e-3]),
+        ("batch_size", [8, 16, 32]),
+    )
+    name, values = knobs[(generation + index) % len(knobs)]
+    value = rng.choice(values)
+    return replace(parent, **{name: value}), (
+        f"围绕冠军 connector 调整 {name}={value}；继续保留打乱图和空白图对照"
+    )
 
 
 def _propose_post_training(parent, generation, index, algorithms, rng):

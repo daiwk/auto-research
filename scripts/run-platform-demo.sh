@@ -36,8 +36,8 @@ if [[ "$PROFILE" != "quick" && "$PROFILE" != "full" ]]; then
   echo "DEMO_PROFILE must be quick or full" >&2
   exit 2
 fi
-if [[ "$TRACK" != "recommendation" && "$TRACK" != "llm" ]]; then
-  echo "DEMO_TRACK must be recommendation or llm" >&2
+if [[ "$TRACK" != "recommendation" && "$TRACK" != "llm" && "$TRACK" != "multimodal" ]]; then
+  echo "DEMO_TRACK must be recommendation, llm or multimodal" >&2
   exit 2
 fi
 
@@ -58,7 +58,7 @@ if [[ ! -x "$VENV_DIR/bin/auto-research" || "${DEMO_REINSTALL:-0}" == "1" ]]; th
       "$PYTHON" -m pip install 'torch>=2.7,<3'
     fi
   fi
-  "$PYTHON" -m pip install -e "$ROOT_DIR[neural-recs,llm-evolution]"
+  "$PYTHON" -m pip install -e "$ROOT_DIR[neural-recs,llm-evolution,multimodal]"
 fi
 
 CPU_THREADS=""
@@ -119,7 +119,7 @@ if [[ "$TRACK" == "recommendation" ]]; then
       --generations 3 --population 6 --steps 300 --papers 8 --seeds 42,43,44
     )
   fi
-else
+elif [[ "$TRACK" == "llm" ]]; then
   COMMAND=(
     "$VENV_DIR/bin/auto-research" evolve
     --model micro-llm
@@ -138,10 +138,31 @@ else
       --generations 3 --population 6 --steps 300 --papers 8 --seeds 42,43,44
     )
   fi
+else
+  COMMAND=(
+    "$VENV_DIR/bin/auto-research" evolve
+    --model micro-vlm
+    --dataset visual-shapes
+    --direction "比较线性、MLP 和 query connector，要求模型真实使用视觉输入"
+    --offline
+  )
+  if [[ "$PROFILE" == "quick" ]]; then
+    COMMAND+=(
+      --generations 2 --population 3 --steps 60 --papers 3 --seeds 42
+      --llm-dimensions 96 --llm-layers 2 --llm-batch-size 16
+    )
+  else
+    COMMAND+=(
+      --generations 3 --population 3 --steps 300 --papers 6 --seeds 42,43,44
+      --llm-dimensions 192 --llm-layers 4 --llm-batch-size 32
+    )
+  fi
 fi
 
 echo "Starting $TRACK demo ($PROFILE) on $PLATFORM..."
-if [[ "$PROFILE" == "quick" ]]; then
+if [[ "$TRACK" == "multimodal" ]]; then
+  echo "Plan: local image-question baseline plus connector evolution with shuffled/blank-image controls."
+elif [[ "$PROFILE" == "quick" ]]; then
   echo "Plan: 3 evolution rounds x 2 candidates; the baseline is a separate experiment."
 else
   echo "Plan: 3 evolution rounds x 6 candidates; the baseline is a separate experiment."
