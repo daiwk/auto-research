@@ -95,6 +95,10 @@ def _load_builtins() -> None:
             config.dataset, config.seeds, config.agent_episodes,
         )
 
+    def multimodal(config: EvolutionConfig, project_dir: Path):
+        from ..multimodal import MicroVLMEvaluator
+        return MicroVLMEvaluator(config.dataset, config.steps, config.seeds)
+
     recommendation_data = ("movielens-100k", "movielens-1m")
     for name in ("rankmixer", "hyformer"):
         register_provider(EvolutionProvider(
@@ -111,6 +115,18 @@ def _load_builtins() -> None:
             layers=config.llm_layers, learning_rate=3e-4,
             batch_size=config.llm_batch_size,
             sequence_length=config.llm_sequence_length,
+        ),
+    ))
+    register_provider(EvolutionProvider(
+        "micro-vlm", ("visual-shapes",), "llm",
+        "multimodal vision language model", multimodal,
+        lambda config: Genome(
+            architecture="micro_vlm_linear",
+            dimensions=config.llm_dimensions,
+            layers=config.llm_layers,
+            learning_rate=3e-3,
+            batch_size=config.llm_batch_size,
+            heads=4,
         ),
     ))
     for entry_point in importlib.metadata.entry_points(

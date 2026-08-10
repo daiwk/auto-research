@@ -430,6 +430,12 @@ def main(argv: list[str] | None = None) -> int:
                         f"preference accuracy={champion.validation['preference_accuracy']:.4f}, "
                         f"GSM8K candidate Pass@1={champion.validation['reasoning_pass_at_1']:.4f}"
                     )
+            elif args.model == "micro-vlm":
+                print(
+                    f"Validation accuracy: {champion.validation['accuracy']:.4f}; "
+                    f"visual-dependency delta: "
+                    f"{champion.validation['visual_dependency_delta']:.4f}"
+                )
             elif args.model == "post-training":
                 print(
                     f"Validation accuracy: {champion.validation['accuracy']:.4f}; "

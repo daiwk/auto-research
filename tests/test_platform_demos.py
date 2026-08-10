@@ -25,9 +25,10 @@ def test_platform_demo_scripts_are_executable_and_valid_bash():
 def test_shared_demo_covers_both_tracks_and_all_runtime_controls():
     text = (ROOT / "scripts" / "run-platform-demo.sh").read_text(encoding="utf-8")
     for required in (
-        "linux-cpu", "linux-gpu", "micro-llm", "rankmixer",
+        "linux-cpu", "linux-gpu", "micro-llm", "micro-vlm", "rankmixer",
         "--device", "--cpu-threads", "DEMO_PROFILE", "DEMO_TRACK",
         "TORCH_INDEX_URL", "runtime_summary",
+        "multimodal", "visual-shapes",
     ):
         assert required in text
     assert "--generations 1" not in text
