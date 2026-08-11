@@ -1282,6 +1282,61 @@
     },
     {
       "domain": "foundation-models",
+      "key": "blip2",
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "paper_url": "https://arxiv.org/abs/2301.12597",
+      "detail_path": "reproductions/2301.12597-blip2/README.md",
+      "topic": [
+        "multimodal",
+        "q-former",
+        "frozen-encoders"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Salesforce Research",
+      "published": "2023-01-30",
+      "code": "https://github.com/salesforce/LAVIS",
+      "adapter": {
+        "adapter_key": "blip2",
+        "arxiv_id": "2301.12597",
+        "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+        "paper_url": "https://arxiv.org/abs/2301.12597",
+        "track": "llm",
+        "organization": "Salesforce Research",
+        "published": "2023-01-30",
+        "code_url": "https://github.com/salesforce/LAVIS",
+        "topics": [
+          "multimodal",
+          "q-former",
+          "frozen-encoders"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/blip2",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "Fashion-MNIST object QA"
+        ],
+        "baseline": "linear mean-pooled connector",
+        "metrics": [
+          "test_accuracy",
+          "visual_dependency_delta",
+          "visual_tokens"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=120",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "blt",
       "title": "Byte Latent Transformer: Patches Scale Better Than Tokens",
       "paper_url": "https://arxiv.org/abs/2412.09871",
@@ -1391,24 +1446,21 @@
           "multimodal",
           "contrastive-pretraining"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_p1",
+        "local_code_dir": "src/auto_research/reproductions/clip",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
-          "MovieLens-100K paired item views"
+          "Fashion-MNIST image-text pairs"
         ],
-        "baseline": "random cross-modal retrieval，实验组为 symmetric contrastive image-text encoder，只改变论文核心机制",
+        "baseline": "uniform label retrieval",
         "metrics": [
-          "baseline.recall_at_1",
-          "method.recall_at_1",
-          "relative.recall_at_1_points",
-          "stages.final_loss",
-          "stages.initial_loss"
+          "test_accuracy",
+          "visual_dependency_delta"
         ],
         "default_seeds": [
           42
         ],
-        "budget": "adapter-defined fixed budget",
+        "budget": "steps=150",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -2202,23 +2254,21 @@
           "multimodal",
           "instruction-tuning"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_p1",
+        "local_code_dir": "src/auto_research/reproductions/llava",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
-          "MovieLens-100K item-content instruction proxy"
+          "Fashion-MNIST object QA"
         ],
-        "baseline": "majority response，实验组为 frozen encoder + trained projector + response decoder，只改变论文核心机制",
+        "baseline": "linear mean-pooled connector",
         "metrics": [
-          "baseline.instruction_accuracy",
-          "method.instruction_accuracy",
-          "paper_results.scienceqa_accuracy",
-          "relative.instruction_accuracy_points"
+          "test_accuracy",
+          "visual_dependency_delta"
         ],
         "default_seeds": [
           42
         ],
-        "budget": "adapter-defined fixed budget",
+        "budget": "steps=120",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -3446,6 +3496,115 @@
           42
         ],
         "budget": "steps=12",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "siglip2",
+      "title": "SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features",
+      "paper_url": "https://arxiv.org/abs/2502.14786",
+      "detail_path": "reproductions/2502.14786-siglip2/README.md",
+      "topic": [
+        "multimodal",
+        "sigmoid-contrastive",
+        "self-distillation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google DeepMind",
+      "published": "2025-02-20",
+      "code": "https://github.com/google-research/big_vision",
+      "adapter": {
+        "adapter_key": "siglip2",
+        "arxiv_id": "2502.14786",
+        "title": "SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features",
+        "paper_url": "https://arxiv.org/abs/2502.14786",
+        "track": "llm",
+        "organization": "Google DeepMind",
+        "published": "2025-02-20",
+        "code_url": "https://github.com/google-research/big_vision",
+        "topics": [
+          "multimodal",
+          "sigmoid-contrastive",
+          "self-distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/siglip2",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "Fashion-MNIST image-text pairs"
+        ],
+        "baseline": "uniform label retrieval",
+        "metrics": [
+          "test_accuracy",
+          "visual_dependency_delta"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=150",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "smolvlm",
+      "title": "SmolVLM: Redefining small and efficient multimodal models",
+      "paper_url": "https://arxiv.org/abs/2504.05299",
+      "detail_path": "reproductions/2504.05299-smolvlm/README.md",
+      "topic": [
+        "multimodal",
+        "efficient-vlm",
+        "visual-token-compression"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Hugging Face",
+      "published": "2025-04-07",
+      "code": "https://github.com/huggingface/smollm",
+      "adapter": {
+        "adapter_key": "smolvlm",
+        "arxiv_id": "2504.05299",
+        "title": "SmolVLM: Redefining small and efficient multimodal models",
+        "paper_url": "https://arxiv.org/abs/2504.05299",
+        "track": "llm",
+        "organization": "Hugging Face",
+        "published": "2025-04-07",
+        "code_url": "https://github.com/huggingface/smollm",
+        "topics": [
+          "multimodal",
+          "efficient-vlm",
+          "visual-token-compression"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/smolvlm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "Fashion-MNIST object QA"
+        ],
+        "baseline": "linear mean-pooled connector",
+        "metrics": [
+          "test_accuracy",
+          "visual_dependency_delta",
+          "visual_tokens"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=120",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -5063,7 +5222,7 @@
         "datasets": [
           "MovieLens 100K (220 users / 360 items)"
         ],
-        "baseline": "matched control without the agentic-rec-tune mechanism",
+        "baseline": "固定手调排序配方，实验组运行三轮 Actor–Critic–SkillHub",
         "metrics": [
           "baseline.fresh_hit_at_10",
           "baseline.head_share_at_10",
@@ -7553,7 +7712,7 @@
         "datasets": [
           "MovieLens 100K (220 users / 360 items)"
         ],
-        "baseline": "matched control without the dual-sid mechanism",
+        "baseline": "同切分的 dense transition-content retrieval，实验组加入 Dual-purpose SID 与 SiDec",
         "metrics": [
           "baseline.fresh_hit_at_10",
           "baseline.head_share_at_10",
@@ -8781,7 +8940,7 @@
         "datasets": [
           "MovieLens 100K (220 users / 360 items)"
         ],
-        "baseline": "matched control without the ha-moe mechanism",
+        "baseline": "同切分的 homogeneous transition-content ranker，实验组加入 HA-MoE",
         "metrics": [
           "baseline.fresh_hit_at_10",
           "baseline.head_share_at_10",
@@ -9681,7 +9840,7 @@
         "datasets": [
           "MovieLens 100K (220 users / 360 items)"
         ],
-        "baseline": "matched control without the kunlun mechanism",
+        "baseline": "shallow transition-content ranker，实验组执行 Kunlun compact core",
         "metrics": [
           "baseline.fresh_hit_at_10",
           "baseline.head_share_at_10",
@@ -11001,7 +11160,7 @@
         "datasets": [
           "MovieLens 100K (220 users / 360 items)"
         ],
-        "baseline": "matched control without the mfli mechanism",
+        "baseline": "同切分的 single-space ANN proxy，实验组加入四 facet MFLI",
         "metrics": [
           "baseline.fresh_hit_at_10",
           "baseline.head_share_at_10",
@@ -16382,7 +16541,7 @@
         "datasets": [
           "MovieLens 100K (220 users / 360 items)"
         ],
-        "baseline": "matched control without the ultra-hstu mechanism",
+        "baseline": "short-history transition-content ranker，实验组执行 ULTRA-HSTU compact core",
         "metrics": [
           "baseline.fresh_hit_at_10",
           "baseline.head_share_at_10",

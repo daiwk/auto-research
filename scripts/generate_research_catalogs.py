@@ -245,7 +245,10 @@ FOUNDATION_TOPIC_HIERARCHY = {
     "doremi": ("预训练与数据", "数据清洗、编排与选择"),
     "data-mixing-laws": ("预训练与数据", "数据清洗、编排与选择"),
     "clip": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "blip2": ("多模态基础模型", "跨模态连接器与冻结骨干"),
     "llava": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "siglip2": ("多模态基础模型", "对比预训练与自蒸馏"),
+    "smolvlm": ("多模态基础模型", "高效视觉 token 压缩"),
     "speculative-decoding": ("推理与系统效率", "推测解码与 KV cache"),
     "awq": ("推理与系统效率", "量化"),
     "medusa": ("推理与系统效率", "推测解码与 KV cache"),
@@ -257,6 +260,7 @@ FOUNDATION_DOMAIN_ORDER = (
     "多模态基础模型",
     "推理与系统效率",
 )
+MULTIMODAL_ADAPTER_KEYS = {"clip", "blip2", "llava", "siglip2", "smolvlm"}
 
 
 def read_method_summary(module: str, link: str) -> str:
@@ -664,6 +668,86 @@ def render_foundation_catalog(dimension: str) -> str:
     return "\n".join(lines)
 
 
+def multimodal_rows() -> list[dict[str, str]]:
+    """Return paper rows that belong to the dedicated multimodal research view."""
+
+    return [row for row in foundation_rows() if row["key"] in MULTIMODAL_ADAPTER_KEYS]
+
+
+def render_multimodal_method_index() -> str:
+    lines = [
+        "# 多模态大模型方法索引",
+        "",
+        "本页汇总已经具有独立 adapter、真实公开图像实验和固定指标的论文实现。",
+        "底座 connector 与论文 genome 的对应关系也在同一处维护。",
+        "",
+        "## 已实现论文",
+        "",
+        '<div class="ar-method-index" markdown>',
+        "",
+        "| 方法族 | 论文 | 机构与日期 | Adapter |",
+        "|---|---|---|---|",
+    ]
+    for row in multimodal_rows():
+        lines.append(
+            f"| {row['cluster']} | [{row['title']}](../reproductions/{row['link']}) | "
+            f"{row['organization']}，{row['date']} | `{row['key']}` |"
+        )
+    lines.extend([
+        "",
+        "</div>",
+        "",
+        "## 可进入 evolve 的论文算子",
+        "",
+        "| Genome | 来源 | 主要变化 |",
+        "|---|---|---|",
+        "| `micro_vlm_linear` | CLIP / LLaVA 基础投影 | 保留全部 patch token 的线性连接器 |",
+        "| `micro_vlm_mlp` | LLaVA | 两层非线性 projector |",
+        "| `micro_vlm_qformer` | BLIP-2 | 可学习 query cross-attention，16→4 token |",
+        "| `micro_vlm_pixelshuffle` | SmolVLM | 2×2 space-to-depth，16→4 token |",
+        "| `objective:siglip2` | SigLIP 2 | sigmoid 图文目标与 masked-view consistency |",
+        "",
+        "分类浏览：[按机构/公司/学校](catalog/by-organization.md) · "
+        "[按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)",
+        "",
+    ])
+    return "\n".join(lines)
+
+
+def render_multimodal_catalog(dimension: str) -> str:
+    rows = multimodal_rows()
+    titles = {
+        "organization": "多模态大模型：按机构/公司/学校",
+        "topic": "多模态大模型：按主题",
+        "year": "多模态大模型：按年份",
+    }
+    intros = {
+        "organization": "按论文一作第一署名单位聚合；单位内按首次公开日期倒序排列。",
+        "topic": "按跨模态训练目标、连接器与视觉 token 压缩分组；每篇论文独占一行。",
+        "year": "按 arXiv v1 首次公开年份浏览；同年论文按日期倒序排列。",
+    }
+    lines = [f"# {titles[dimension]}", "", intros[dimension], ""]
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        if dimension == "organization":
+            group = row["organization"]
+        elif dimension == "year":
+            group = row["date"][:4]
+        else:
+            group = row["cluster"]
+        grouped[group].append(row)
+    for group in sorted(grouped, reverse=dimension == "year"):
+        lines.extend([f"## {group}", ""])
+        for row in _date_descending(grouped[group]):
+            prefix = f"{row['date']} · " if dimension != "year" else f"{row['date'][:7]} · "
+            lines.append(
+                f"- {prefix}[{row['title']}](../../reproductions/{row['link']})"
+                f"（`{row['key']}`）：{row['summary']}"
+            )
+        lines.append("")
+    return "\n".join(lines)
+
+
 def remove_non_industrial_entries(path: Path, excluded_links: set[str]) -> None:
     """Keep recommendation browse pages focused on industrial applications."""
 
@@ -769,6 +853,16 @@ def main() -> None:
     for dimension in ("organization", "topic", "year"):
         (foundation_target / f"by-{dimension}.md").write_text(
             render_foundation_catalog(dimension), encoding="utf-8"
+        )
+
+    multimodal_target = DOCS / "multimodal-models" / "catalog"
+    multimodal_target.mkdir(parents=True, exist_ok=True)
+    (DOCS / "multimodal-models" / "catalog.md").write_text(
+        render_multimodal_method_index(), encoding="utf-8"
+    )
+    for dimension in ("organization", "topic", "year"):
+        (multimodal_target / f"by-{dimension}.md").write_text(
+            render_multimodal_catalog(dimension), encoding="utf-8"
         )
 
     links = reproduction_doc_links()

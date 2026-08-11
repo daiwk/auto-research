@@ -98,7 +98,7 @@ pytest tests/test_research_module_docs.py
 ## 本轮全域 P1 补齐（8 个 adapter）
 
 - 工业推荐：[TWIN-V2](2407.16357-twin-v2/README.md)、[SIM](2006.05639-sim/README.md)、[CRSD](2510.11056-crsd/README.md)。
-- 多模态：[CLIP](2103.00020-clip/README.md)、[LLaVA](2304.08485-llava/README.md)。
+- 多模态：[CLIP](2103.00020-clip/README.md)、[BLIP-2](2301.12597-blip2/README.md)、[LLaVA](2304.08485-llava/README.md)、[SigLIP 2](2502.14786-siglip2/README.md)、[SmolVLM](2504.05299-smolvlm/README.md)。
 - 推理与部署：[Speculative Decoding](2211.17192-speculative-decoding/README.md)、[AWQ](2306.00978-awq/README.md)、[Medusa](2401.10774-medusa/README.md)。
 
 ## 2026-08-09 P0/P1 增量（9 个 adapter）
@@ -115,7 +115,7 @@ pytest tests/test_research_module_docs.py
 
 前四篇工业论文满足量化线上 A/B / 全量部署门槛；后五篇归入基础模型目录。所有条目均已执行核心机制并保存 seed 42 指标，负结果与不显著线上结果不做美化。
 
-## 全部复现（186/186）
+## 全部复现（189/189）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
@@ -123,9 +123,12 @@ pytest tests/test_research_module_docs.py
 | 核心机制 | `twin-v2` · [TWIN-V2](2407.16357-twin-v2/README.md) | 快手三场景 Watch Time +0.672%/+0.800%/+0.728%，主流量 | 层级压缩 + GSU/ESU；NDCG@10 +22.45% |
 | 核心机制 | `medusa` · [Medusa](2401.10774-medusa/README.md) | 纯 LLM：Medusa-1 2.2×，Medusa-2 2.3–3.6× | WikiText-2 三 future heads；backbone calls -50%，输出完全一致 |
 | 核心机制 | `awq` · [AWQ](2306.00978-awq/README.md) | 纯 LLM：TinyChat 相对 FP16 超过 3× | activation-aware W4；输出 MSE -4.22% |
-| 核心机制 | `llava` · [LLaVA](2304.08485-llava/README.md) | 纯多模态：ScienceQA 92.53% | 冻结 encoder + projector instruction tuning；accuracy +68.57 points |
+| 核心机制 | `smolvlm` · [SmolVLM](2504.05299-smolvlm/README.md) | 纯多模态：原文报告更低视觉 token 成本下保持竞争力 | pixel-shuffle 视觉 token 16→4；Fashion-MNIST QA +19.0 points |
+| 核心机制 | `siglip2` · [SigLIP 2](2502.14786-siglip2/README.md) | 纯多模态：原文在多类图文 benchmark 改善语义与定位能力 | sigmoid 对比 + masked-view 自蒸馏；Fashion-MNIST QA +56.9 points |
+| 核心机制 | `llava` · [LLaVA](2304.08485-llava/README.md) | 纯多模态：ScienceQA 92.53% | MLP projector 对线性 connector -3.4 points，保留小数据负结果 |
+| 核心机制 | `blip2` · [BLIP-2](2301.12597-blip2/README.md) | 纯多模态：zero-shot VQAv2 相对 Flamingo-80B +8.7 points | 四 query Q-Former 将 token 16→4；accuracy -5.3 points，保留负结果 |
 | 核心机制 | `speculative-decoding` · [Speculative Decoding](2211.17192-speculative-decoding/README.md) | 纯 LLM：T5-XXL 2–3× 且分布不变 | 低秩 draft + exact verification；target calls -75%，输出一致 |
-| 核心机制 | `clip` · [CLIP](2103.00020-clip/README.md) | 纯多模态：ImageNet zero-shot 匹配监督 ResNet-50 | 双向 InfoNCE；公开配对视图 Recall@1 +40 points |
+| 核心机制 | `clip` · [CLIP](2103.00020-clip/README.md) | 纯多模态：ImageNet zero-shot 匹配监督 ResNet-50 | 双向对比学习；Fashion-MNIST 图文任务 72.0%，打乱图像 10.3% |
 | 核心机制 | `sim` · [SIM](2006.05639-sim/README.md) | 阿里 CTR +7.1%、RPM +4.4%，主流量 | GSU/ESU 长历史检索；NDCG@10 +32.97% |
 | 核心机制 | `dme` · [DME](2608.02148-dme/README.md) | 抖音搜索 Lifetime +0.1%，内部离线 +2.92% | typed latent + cross reconstruction；MovieLens-100K NDCG@10 -8.84%，保留负结果 |
 | 核心机制 | `steps` · [STEPS](2608.01949-steps/README.md) | active days +0.2843%、permission disablement -1.9089%，已全量 | planning/execution/filter 闭环；MovieLens-100K NDCG@10 +66.05% |

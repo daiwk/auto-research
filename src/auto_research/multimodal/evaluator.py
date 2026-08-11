@@ -7,15 +7,18 @@ import numpy as np
 from auto_research.runtime import device_for
 from ..evolution.models import EvolutionTrial, Genome
 from ..evolution.statistics import mean_with_std
-from .data import VisualShapesSplit, load_visual_shapes
+from .data import MultimodalSplit, load_multimodal_data
 from .model import build_micro_vlm
 
 
 class MicroVLMEvaluator:
-    def __init__(self, dataset: str, steps: int, seeds: tuple[int, ...]):
-        if dataset != "visual-shapes":
-            raise ValueError("micro-vlm 1A currently supports visual-shapes")
-        self.data = load_visual_shapes()
+    def __init__(
+        self, dataset_dir, dataset: str, steps: int, seeds: tuple[int, ...],
+        allow_network: bool = True, maximum_examples: int | None = None,
+    ):
+        self.data = load_multimodal_data(
+            dataset, dataset_dir, allow_network, maximum_examples
+        )
         self.dataset, self.steps, self.seeds = dataset, steps, seeds
 
     def summary(self):
@@ -26,7 +29,10 @@ class MicroVLMEvaluator:
             "test_examples": len(self.data.test.answers),
             "modalities": ["image", "question", "answer"],
             "controls": ["original", "shuffled-image", "blank-image"],
-            "offline": True,
+            "source": self.data.source,
+            "license": self.data.license,
+            "evaluation_tier": self.data.evaluation_tier,
+            "offline": self.dataset == "visual-shapes",
         }
 
     def evaluate(self, trial_id, generation, parent_id, genome,
@@ -74,7 +80,9 @@ class MicroVLMEvaluator:
         np.random.seed(seed)
         device = device_for(torch)
         model = build_micro_vlm(
-            genome.architecture, genome.dimensions, min(genome.heads, 4)
+            genome.architecture, genome.dimensions, min(genome.heads, 4),
+            num_questions=len(self.data.question_names),
+            num_answers=len(self.data.answer_names),
         ).to(device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=genome.learning_rate)
         rng = np.random.default_rng(seed)
@@ -87,9 +95,22 @@ class MicroVLMEvaluator:
             questions = torch.from_numpy(split.questions[indices]).to(device)
             answers = torch.from_numpy(split.answers[indices]).to(device)
             optimizer.zero_grad(set_to_none=True)
-            loss = torch.nn.functional.cross_entropy(
-                model(images, questions), answers
-            )
+            logits = model(images, questions)
+            if genome.multimodal_objective == "siglip2":
+                targets = torch.nn.functional.one_hot(
+                    answers, num_classes=logits.shape[-1]
+                ).float()
+                loss = torch.nn.functional.binary_cross_entropy_with_logits(
+                    logits, targets
+                )
+                masked = images.clone()
+                masked[:, :, 8:24, 8:24] = 0
+                masked_logits = model(masked, questions)
+                loss = loss + 0.15 * torch.nn.functional.mse_loss(
+                    torch.sigmoid(masked_logits), torch.sigmoid(logits.detach())
+                )
+            else:
+                loss = torch.nn.functional.cross_entropy(logits, answers)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
@@ -102,7 +123,7 @@ class MicroVLMEvaluator:
             "architecture_stats": model.architecture_stats(),
         }
 
-    def _metrics(self, model, split: VisualShapesSplit):
+    def _metrics(self, model, split: MultimodalSplit):
         import torch
 
         device = next(model.parameters()).device

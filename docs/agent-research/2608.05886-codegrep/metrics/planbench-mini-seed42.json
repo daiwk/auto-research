@@ -118,18 +118,19 @@
     "fidelity": "mechanism reproduction on deterministic benchmark mini-suites"
   },
   "schema_version": 2,
-  "manifest_ref": "agent-research:codegrep",
+  "manifest_ref": "agent-research:planbench-mini-seed42",
   "evaluation_protocol": {
     "tier": "l1_mechanism",
     "seeds": [
       42
     ],
     "formal_comparison": false,
-    "claim_policy": "single-seed smoke result; do not claim a stable improvement"
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
     "artifact_path": "docs/agent-research/2608.05886-codegrep/metrics/planbench-mini-seed42.json",
     "original_code_commit": "working tree",
-    "dataset_fingerprint": "deterministic built-in mini-suite"
+    "dataset_fingerprint": "deterministic built-in mini-suite",
+    "historical_migration": "historical-metrics-v2-2026-08-09"
   }
 }

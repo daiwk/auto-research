@@ -130,6 +130,7 @@ class Genome:
     agent_tool_policy: str = "direct"
     agent_critic: str = "none"
     memory_size: int = 24
+    multimodal_objective: str = "cross_entropy"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

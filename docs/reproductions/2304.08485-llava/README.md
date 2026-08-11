@@ -46,14 +46,14 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线为 `majority response`，实验组为 `frozen encoder + trained projector + response decoder`，只改变论文核心机制；`instruction_accuracy` 0.2893 → **0.9750，相对基线 +237.04%**。
+> **本地对照口径**：在真实 Fashion-MNIST 图像问答上，基线为线性 projector，实验组为 LLaVA 风格两层 MLP projector，并固定视觉 patch encoder、分类头与训练预算。测试准确率由 **46.8% 降至 43.4%（-3.4 个百分点）**；打乱图像后为 10.6%。该负结果表明，小数据、浅层 decoder 下增加 projector 容量并不会自动带来收益。
 
 ```bash
 auto-research reproduce --paper llava --dataset-dir data --seed 42
 ```
 
-固定指标见 [`metrics/public-seed42.json`](metrics/public-seed42.json)。
+固定指标见 [`metrics/fashion-mnist-qa-seed42.json`](metrics/fashion-mnist-qa-seed42.json)。
 
 ## 复现边界
 
-公开 item 内容向量替代图像 encoder，训练真实跨模态 projector 和 instruction 分类头；未调用 GPT-4 或复刻 LLaVA-13B。 本地相对变化不得与原文指标混写。
+使用 Fashion-MNIST 真实像素、冻结的轻量 patch encoder、可训练 projector 与问答分类头；未调用 GPT-4，未执行多模态 instruction data generation，也未复刻 LLaVA-13B。单 seed 结果仅用于检验 projector 结构，不能外推到大模型指令微调。

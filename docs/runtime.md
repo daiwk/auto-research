@@ -30,6 +30,7 @@
 |---|---|---|
 | `DEMO_PROFILE` | `quick` | `quick` 快速验证；`full` 使用原 demo 的 MovieLens-1M、3 代、6 candidates、3 seeds |
 | `DEMO_TRACK` | `recommendation` | `recommendation`、`llm` 或 `multimodal` |
+| `DEMO_MULTIMODAL_DATASET` | `visual-shapes` | `visual-shapes`（离线）、`fashion-mnist-qa`（轻量公开图像）或 `cifar10-qa`（彩色自然图像） |
 | `DEMO_DEVICE` | Mac `auto` / GPU `cuda:0` | 覆盖设备，例如 `cuda:1` 或 Mac 上强制 `cpu` |
 | `DEMO_CPU_THREADS` | 自动探测，最多 16 | Linux CPU 每个 worker 的 PyTorch 线程数 |
 | `DEMO_WORKERS` | Mac/GPU 1，CPU 2 | 每代并行候选数 |
@@ -43,6 +44,8 @@
 DEMO_PROFILE=full ./demo-linux-gpu.sh
 DEMO_TRACK=llm ./demo-mac.sh
 DEMO_TRACK=multimodal ./demo-mac.sh
+DEMO_TRACK=multimodal DEMO_MULTIMODAL_DATASET=fashion-mnist-qa ./demo-mac.sh
+DEMO_TRACK=multimodal DEMO_MULTIMODAL_DATASET=cifar10-qa ./demo-linux-gpu.sh
 DEMO_TRACK=llm DEMO_PROFILE=full DEMO_DEVICE=cuda:1 ./demo-linux-gpu.sh
 ```
 

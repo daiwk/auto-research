@@ -26,6 +26,11 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2103.00020": ("multimodal:clip", "CLIP 双塔归一化与对称图文对比预训练"),
+    "2301.12597": ("micro_vlm_qformer", "BLIP-2 以可学习 query cross-attention 连接视觉 token 与语言空间"),
+    "2304.08485": ("micro_vlm_mlp", "LLaVA 以可训练 projector 把冻结视觉特征映射到语言 token 空间"),
+    "2502.14786": ("objective:siglip2", "SigLIP 2 的 sigmoid 图文目标、masked-view 自蒸馏与语义保持"),
+    "2504.05299": ("micro_vlm_pixelshuffle", "SmolVLM 用 pixel shuffle 压缩视觉 token 以降低上下文成本"),
     "2204.02311": ("parallel_block", "PaLM 的 parallel attention/FFN block 与 SwiGLU 路径"),
     "2302.13971": ("llama_modern", "LLaMA 风格 RMSNorm、RoPE、SwiGLU 与 pre-normalization"),
     "2305.13245": ("gqa", "Grouped-Query Attention：多 query heads 共享更少的 key/value heads"),
@@ -209,6 +214,11 @@ FALLBACK_PAPERS = (
 )
 
 LLM_FALLBACK_PAPERS = (
+    Paper("Learning Transferable Visual Models From Natural Language Supervision", "CLIP learns aligned image and text encoders with a symmetric contrastive objective.", [], "2021-02-26", "https://arxiv.org/abs/2103.00020", "2103.00020"),
+    Paper("BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models", "A query transformer bridges frozen image encoders and frozen language models.", [], "2023-01-30", "https://arxiv.org/abs/2301.12597", "2301.12597"),
+    Paper("Visual Instruction Tuning", "LLaVA projects frozen visual features into a language model and performs multimodal instruction tuning.", [], "2023-04-17", "https://arxiv.org/abs/2304.08485", "2304.08485"),
+    Paper("SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features", "Sigmoid image-text learning is combined with captioning, masked prediction and self-distillation.", [], "2025-02-20", "https://arxiv.org/abs/2502.14786", "2502.14786"),
+    Paper("SmolVLM: Redefining small and efficient multimodal models", "Pixel shuffle compresses visual tokens before a compact language decoder.", [], "2025-04-07", "https://arxiv.org/abs/2504.05299", "2504.05299"),
     Paper("BaKron: Efficient Quantization with Kronecker-Factored Hessians", "Two-sided Kronecker-Hessian adaptive rounding with reduced work.", [], "2026-08-06", "https://arxiv.org/abs/2608.06291", "2608.06291"),
     Paper("MACRO: Markov Chain Routing of Transformer Layers", "Learns skip, repeat and residual routes over frozen Transformer layers.", [], "2026-08-06", "https://arxiv.org/abs/2608.05872", "2608.05872"),
     Paper("Hierarchical Latent Prediction for Language Models", "Adds an abstract latent level to stabilize longer-horizon latent prediction.", [], "2026-08-06", "https://arxiv.org/abs/2608.05806", "2608.05806"),
