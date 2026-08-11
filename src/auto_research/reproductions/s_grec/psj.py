@@ -55,7 +55,11 @@ def train_psj(
                 **encoded, output_hidden_states=True, use_cache=False, return_dict=True
             )
             positions = encoded["attention_mask"].sum(1) - 1
-            return output.hidden_states[-1][torch.arange(len(prompts), device=device), positions]
+            # SmolLM2 checkpoints are BF16 on CUDA while the small task heads
+            # intentionally stay FP32. Keep that boundary explicit.
+            return output.hidden_states[-1][
+                torch.arange(len(prompts), device=device), positions
+            ].float()
 
         def aspects(self, prompts):
             hidden_state = self.encode(prompts)

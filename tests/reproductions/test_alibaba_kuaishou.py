@@ -4,8 +4,10 @@ from auto_research.reproductions.base import PaperMetadata
 from auto_research.reproductions.m6rec.model import (
     M6RecConfig,
     binary_auc,
+    build_model,
     movielens_text_examples,
 )
+from auto_research.reproductions.bahe.model import _layer_hidden
 from auto_research.reproductions.onerec_v2.model import (
     OneRecV2Config,
     load_kuairand_examples,
@@ -34,6 +36,45 @@ def test_m6rec_builds_plain_text_chronological_examples(tmp_path):
 
 def test_auc_is_one_for_perfect_ranking():
     assert binary_auc([0, 0, 1, 1], [0.1, 0.2, 0.8, 0.9]) == 1.0
+
+
+def test_m6rec_uses_the_bert_vocab_without_tokenizer_conversion(monkeypatch):
+    class FakeTokenizer:
+        @classmethod
+        def from_pretrained(cls, name):
+            assert name == "fixture/bert"
+            return "bert-tokenizer"
+
+    class FakeParameter:
+        requires_grad = True
+
+    class FakeBackbone:
+        config = type("Config", (), {"hidden_size": 4})()
+        encoder = type("Encoder", (), {"layer": []})()
+
+        def parameters(self):
+            return [FakeParameter()]
+
+    class FakeAutoModel:
+        @classmethod
+        def from_pretrained(cls, name):
+            assert name == "fixture/bert"
+            return FakeBackbone()
+
+    import torch
+
+    monkeypatch.setattr(
+        "auto_research.reproductions.m6rec.model.require_backend",
+        lambda: (torch, torch.nn, FakeAutoModel, FakeTokenizer),
+    )
+    _, tokenizer = build_model(M6RecConfig(model_name="fixture/bert"), use_adapters=True)
+    assert tokenizer == "bert-tokenizer"
+
+
+def test_bahe_accepts_transformers_four_and_five_layer_outputs():
+    marker = object()
+    assert _layer_hidden(marker) is marker
+    assert _layer_hidden((marker, "attention")) is marker
 
 
 def test_catalogued_industrial_paper_requires_online_ab_evidence():

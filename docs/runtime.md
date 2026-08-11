@@ -29,7 +29,7 @@
 | 变量 | 默认值 | 作用 |
 |---|---|---|
 | `DEMO_PROFILE` | `quick` | `quick` 快速验证；`full` 使用原 demo 的 MovieLens-1M、3 代、6 candidates、3 seeds |
-| `DEMO_TRACK` | `recommendation` | `recommendation`、`llm` 或 `multimodal` |
+| `DEMO_TRACK` | `recommendation` | `recommendation`、`llm`、`multimodal` 或 `checkpoint-vlm` |
 | `DEMO_MULTIMODAL_DATASET` | `visual-shapes` | `visual-shapes`（离线）、`fashion-mnist-qa`（轻量公开图像）或 `cifar10-qa`（彩色自然图像） |
 | `DEMO_DEVICE` | Mac `auto` / GPU `cuda:0` | 覆盖设备，例如 `cuda:1` 或 Mac 上强制 `cpu` |
 | `DEMO_CPU_THREADS` | 自动探测，最多 16 | Linux CPU 每个 worker 的 PyTorch 线程数 |
@@ -47,6 +47,12 @@ DEMO_TRACK=multimodal ./demo-mac.sh
 DEMO_TRACK=multimodal DEMO_MULTIMODAL_DATASET=fashion-mnist-qa ./demo-mac.sh
 DEMO_TRACK=multimodal DEMO_MULTIMODAL_DATASET=cifar10-qa ./demo-linux-gpu.sh
 DEMO_TRACK=llm DEMO_PROFILE=full DEMO_DEVICE=cuda:1 ./demo-linux-gpu.sh
+DEMO_TRACK=checkpoint-vlm \
+DEMO_CHECKPOINT_ANNOTATIONS=data/scienceqa \
+DEMO_CHECKPOINT_IMAGE_ROOT=data/scienceqa/images \
+DEMO_CHECKPOINT_PATH=checkpoints/smolvlm2-256m \
+DEMO_CHECKPOINT_REVISION=067788b187b95ebe7b2e040b3e4299e342e5b8fd \
+./demo-linux-gpu.sh
 ```
 
 三个平台使用不同的 `.venv-demo-*`，避免 CPU-only PyTorch 和 CUDA PyTorch 相互覆盖。脚本启动训练前会打印最终解析出的设备、PyTorch 版本、CUDA 版本和硬件名称；检查失败时不会开始实验。命令末尾还可以追加 evolve 参数，供临时覆盖默认设置。
@@ -99,6 +105,28 @@ auto-research evolve \
 ```bash
 CUDA_VISIBLE_DEVICES=2 auto-research evolve ... --device cuda:0 --workers 1
 ```
+
+## 回溯 GPU 路径审计
+
+`scripts/audit_gpu_paths.py` 会逐个在隔离进程中执行论文 adapter，并通过
+`AUTO_RESEARCH_DEVICE_AUDIT_LOG` 记录每一次真实 `device_for` 调用的 caller 和最终 CUDA
+device。完成但没有 PyTorch device 调用的 adapter 会标成
+`completed_without_device_call`，不会冒充 GPU 验证通过；异常与超时逐项保存，不会中断整个
+审计：
+
+```bash
+PYTHONPATH=src python scripts/audit_gpu_paths.py \
+  --dataset-dir data \
+  --output runs/gpu-audit/a30.json \
+  --timeout-seconds 60 \
+  --only-explicit-device-packages \
+  --include-concept-demos
+```
+
+该命令用于发现设备、依赖和张量路径问题，不是论文 benchmark。审计 JSON、device evidence、
+checkpoint 和运行产物默认留在开发机；仓库只提交复核后的汇总结论与复现命令。
+2026-08-11 的 A30 全量回溯、修复清单和 62/62 动态 CUDA 结果见
+[A30 GPU 回溯验证](gpu-validation.md)。
 
 这里的 `cuda:0` 表示该进程内第一张“可见 GPU”，上例实际对应物理 GPU 2。
 

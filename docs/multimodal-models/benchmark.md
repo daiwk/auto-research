@@ -80,6 +80,42 @@ auto-research multimodal-eval \
 `predictions.jsonl.metadata.json` 记录 revision、prompt/解码参数、设备和续跑计数；模型权重
 与预测全集不提交 Git。
 
+### 用真实 checkpoint 做多轮 evolve
+
+`vlm-checkpoint` 不训练或复制模型权重，而是在同一个已加载 checkpoint 上使用官方
+ScienceQA **validation** 选择推理配方，搜索提示模板、hint、图像预缩放和确定性解码预算。
+所有轮次结束后，控制器才在 **test** 上各运行一次初始基线与冠军，避免 test 泄漏：
+
+```bash
+auto-research evolve \
+  --model vlm-checkpoint --dataset scienceqa \
+  --direction "比较提示模板、hint、图像分辨率和解码预算" \
+  --checkpoint-model-id HuggingFaceTB/SmolVLM2-256M-Video-Instruct \
+  --checkpoint-revision 067788b187b95ebe7b2e040b3e4299e342e5b8fd \
+  --checkpoint-path checkpoints/smolvlm2-256m \
+  --checkpoint-annotations data/scienceqa \
+  --checkpoint-image-root data/scienceqa/images \
+  --maximum-examples 500 --generations 3 --population 4 \
+  --workers 1 --seeds 42 --device cuda --offline
+```
+
+本地数据必须同时包含 `pid_splits.json`、`problems.json`、`images/val/` 和
+`images/test/`。只下载 test 图片足够运行 `multimodal-predict --split test`，但不足以执行
+无泄漏 evolve。单卡默认 `--workers 1`，因此 checkpoint 只加载一次；提高 workers 会让每个
+隔离 worker 独立加载模型，应同时设置 `--gpu-slots` 和 `--gpu-memory-per-trial-mb`。
+
+报告逐 trial 保存模型不可变 revision、实际 CUDA device、accuracy、image/text accuracy、
+parse rate、单样本延迟和峰值显存。checkpoint、逐题预测和 `runs/` 仍不进入 Git。
+
+2026-08-11 在 NVIDIA A30 上使用 SmolVLM2-256M revision
+`067788b187b95ebe7b2e040b3e4299e342e5b8fd` 做过真实 checkpoint 工程 smoke：2 代、每代
+2 个候选，加独立基线共 5 个 trial，全部在 CUDA 完成；峰值显存约 852.6–853.5 MiB，
+parse rate 为 1.0。两题临时 split 的 accuracy 为 0.5，冠军仍为初始配方。这里的两题来自真实
+ScienceQA 图文样本，但只是验证 checkpoint 加载、validation→test 控制流和报告链路，**不是**
+官方 benchmark，也不能据此比较配方效果；正式结论必须使用完整官方 val/test 图像。
+逐 trial 精确指标保存在
+[`a30-vlm-checkpoint-smoke-20260811.json`](../experiments/a30-vlm-checkpoint-smoke-20260811.json)。
+
 ScienceQA/POPE 的每行预测为：
 
 ```json

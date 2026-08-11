@@ -37,8 +37,8 @@ if [[ "$PROFILE" != "quick" && "$PROFILE" != "full" ]]; then
   echo "DEMO_PROFILE must be quick or full" >&2
   exit 2
 fi
-if [[ "$TRACK" != "recommendation" && "$TRACK" != "llm" && "$TRACK" != "multimodal" ]]; then
-  echo "DEMO_TRACK must be recommendation, llm or multimodal" >&2
+if [[ "$TRACK" != "recommendation" && "$TRACK" != "llm" && "$TRACK" != "multimodal" && "$TRACK" != "checkpoint-vlm" ]]; then
+  echo "DEMO_TRACK must be recommendation, llm, multimodal or checkpoint-vlm" >&2
   exit 2
 fi
 
@@ -139,7 +139,7 @@ elif [[ "$TRACK" == "llm" ]]; then
       --generations 3 --population 6 --steps 300 --papers 8 --seeds 42,43,44
     )
   fi
-else
+elif [[ "$TRACK" == "multimodal" ]]; then
   COMMAND=(
     "$VENV_DIR/bin/auto-research" evolve
     --model micro-vlm
@@ -164,11 +164,33 @@ else
       --llm-dimensions 192 --llm-layers 4 --llm-batch-size 32
     )
   fi
+else
+  : "${DEMO_CHECKPOINT_ANNOTATIONS:?set DEMO_CHECKPOINT_ANNOTATIONS to the ScienceQA directory}"
+  : "${DEMO_CHECKPOINT_IMAGE_ROOT:?set DEMO_CHECKPOINT_IMAGE_ROOT to the ScienceQA image root}"
+  COMMAND=(
+    "$VENV_DIR/bin/auto-research" evolve
+    --model vlm-checkpoint --dataset scienceqa
+    --direction "比较提示模板、hint、图像分辨率和解码预算"
+    --checkpoint-model-id "${DEMO_CHECKPOINT_MODEL_ID:-HuggingFaceTB/SmolVLM2-256M-Video-Instruct}"
+    --checkpoint-revision "${DEMO_CHECKPOINT_REVISION:-main}"
+    --checkpoint-annotations "$DEMO_CHECKPOINT_ANNOTATIONS"
+    --checkpoint-image-root "$DEMO_CHECKPOINT_IMAGE_ROOT"
+  )
+  if [[ -n "${DEMO_CHECKPOINT_PATH:-}" ]]; then
+    COMMAND+=(--checkpoint-path "$DEMO_CHECKPOINT_PATH" --offline)
+  fi
+  if [[ "$PROFILE" == "quick" ]]; then
+    COMMAND+=(--generations 2 --population 2 --steps 1 --papers 3 --seeds 42 --maximum-examples 32)
+  else
+    COMMAND+=(--generations 3 --population 4 --steps 1 --papers 6 --seeds 42 --maximum-examples 500)
+  fi
 fi
 
 echo "Starting $TRACK demo ($PROFILE) on $PLATFORM..."
 if [[ "$TRACK" == "multimodal" ]]; then
   echo "Plan: $MULTIMODAL_DATASET image-question baseline plus connector evolution with shuffled/blank-image controls."
+elif [[ "$TRACK" == "checkpoint-vlm" ]]; then
+  echo "Plan: frozen public VLM checkpoint, validation-only inference-recipe evolution, then isolated test."
 elif [[ "$PROFILE" == "quick" ]]; then
   echo "Plan: 3 evolution rounds x 2 candidates; the baseline is a separate experiment."
 else

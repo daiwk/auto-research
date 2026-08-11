@@ -88,3 +88,14 @@ def test_cli_default_preserves_an_explicit_environment_device(monkeypatch):
     monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
     configure_runtime(None, 3)
     assert device_for(_FakeTorch()) == "cpu"
+
+
+def test_device_audit_records_the_actual_caller(tmp_path, monkeypatch):
+    import json
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
+    log = tmp_path / "device.jsonl"
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE_AUDIT_LOG", str(log))
+    assert device_for(_FakeTorch()) == "cpu"
+    row = json.loads(log.read_text())
+    assert row["resolved"] == "cpu"
+    assert row["caller_function"] == "test_device_audit_records_the_actual_caller"

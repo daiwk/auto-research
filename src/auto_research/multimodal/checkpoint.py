@@ -30,6 +30,9 @@ class CheckpointPredictionConfig:
     max_new_tokens: int = 16
     seed: int = 42
     offline: bool = False
+    prompt_style: str = "direct"
+    use_hint: bool = True
+    image_size: int = 0
 
 
 @dataclass(frozen=True)
@@ -90,7 +93,7 @@ def generate_checkpoint_predictions(
         for example in examples:
             if example.identifier in completed:
                 continue
-            image = _open_image(example.image)
+            image = _open_image(example.image, config.image_size)
             raw = _generate_one(
                 processor, model, torch, device, image, example.prompt,
                 max_new_tokens=config.max_new_tokens,
@@ -149,7 +152,9 @@ def iter_prediction_examples(
             choices = tuple(str(choice) for choice in row["choices"])
             yield PredictionExample(
                 identifier=identifier,
-                prompt=scienceqa_prompt(row),
+                prompt=scienceqa_prompt(
+                    row, style=config.prompt_style, use_hint=config.use_hint
+                ),
                 image=resolve_scienceqa_image(
                     config.image_root, config.split, identifier, row.get("image")
                 ),
@@ -171,16 +176,29 @@ def iter_prediction_examples(
         )
 
 
-def scienceqa_prompt(row: dict[str, Any]) -> str:
+def scienceqa_prompt(
+    row: dict[str, Any], *, style: str = "direct", use_hint: bool = True
+) -> str:
+    if style not in {"direct", "context-first", "elimination"}:
+        raise ValueError(f"unknown ScienceQA prompt style: {style}")
     choices = "\n".join(
         f"{chr(65 + index)}. {choice}"
         for index, choice in enumerate(row["choices"])
     )
-    context = str(row.get("hint") or "").strip()
+    context = str(row.get("hint") or "").strip() if use_hint else ""
     prefix = f"Context: {context}\n" if context else ""
+    instruction = {
+        "direct": "Answer with only the option letter.",
+        "context-first": (
+            "Use the image and context first, then return only the option letter."
+        ),
+        "elimination": (
+            "Silently eliminate incompatible choices and return only the option letter."
+        ),
+    }[style]
     return (
         f"{prefix}Question: {str(row['question']).strip()}\n"
-        f"Choices:\n{choices}\nAnswer with only the option letter."
+        f"Choices:\n{choices}\n{instruction}"
     )
 
 
@@ -291,12 +309,15 @@ def _generate_one(
     ).strip()
 
 
-def _open_image(path: Path | None):
+def _open_image(path: Path | None, image_size: int = 0):
     if path is None:
         return None
     from PIL import Image
     with Image.open(path) as source:
-        return source.convert("RGB")
+        image = source.convert("RGB")
+        if image_size > 0:
+            image.thumbnail((image_size, image_size))
+        return image
 
 
 def _first_existing(candidates: Iterable[Path], label: str) -> Path:

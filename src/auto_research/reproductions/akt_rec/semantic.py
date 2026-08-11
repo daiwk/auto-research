@@ -49,7 +49,10 @@ def train_llm_semantics(data, model_name: str, item_steps: int, user_steps: int,
     item_vectors = _encode_batches(model, tokenizer, item_texts, device, torch)
     category_count = max(2, len({genres[0] if genres else "unknown" for genres in data.genres}))
     category_names = {name: index for index, name in enumerate(sorted({genres[0] if genres else "unknown" for genres in data.genres}))}
-    category_head = nn.Linear(item_vectors.shape[1], category_count).to(device)
+    model_dtype = next(model.parameters()).dtype
+    category_head = nn.Linear(item_vectors.shape[1], category_count).to(
+        device=device, dtype=model_dtype
+    )
     optimizer = torch.optim.AdamW(
         [p for p in model.parameters() if p.requires_grad] + list(category_head.parameters()), lr=3e-4
     )

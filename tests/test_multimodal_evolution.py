@@ -6,7 +6,7 @@ import pickle
 from auto_research.evolution import EvolutionConfig, ModelEvolutionEngine
 from auto_research.evolution.engine import _paper_ids
 from auto_research.evolution.models import Genome, PaperInspiration
-from auto_research.evolution.planner import allowed_architectures
+from auto_research.evolution.planner import allowed_architectures, propose
 from auto_research.evolution.providers import get_provider
 from auto_research.multimodal.data import load_cifar10_qa, load_visual_shapes
 from auto_research.multimodal.model import build_micro_vlm
@@ -36,6 +36,23 @@ def test_all_micro_vlm_connectors_execute():
             "micro_vlm_qformer", "micro_vlm_pixelshuffle"
         } else 16
         assert model.architecture_stats()["visual_tokens"] == expected_tokens
+
+
+def test_checkpoint_vlm_search_space_changes_only_inference_recipe():
+    import random
+    architectures = allowed_architectures("vlm-checkpoint", "prompt and hint", [])
+    assert architectures == [
+        "checkpoint_vlm:direct", "checkpoint_vlm:context-first",
+        "checkpoint_vlm:elimination", "checkpoint_vlm:no-hint",
+    ]
+    baseline = Genome(architecture="checkpoint_vlm")
+    candidate, rationale = propose(
+        baseline, 1, 1, architectures, random.Random(42), "vlm-checkpoint"
+    )
+    assert candidate.architecture == "checkpoint_vlm"
+    assert candidate.checkpoint_prompt_style == "context-first"
+    assert candidate.dimensions == baseline.dimensions
+    assert "不变" in rationale
 
 
 def test_multimodal_paper_source_attribution_uses_the_selected_operator():

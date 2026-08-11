@@ -13,6 +13,7 @@
 - CLIP、BLIP-2、LLaVA、SigLIP 2 与 SmolVLM 独立 adapter，以及可组合的 `objective:siglip2` 训练目标；
 - 强制报告原图、打乱图和空白图准确率，检查模型是否真的使用视觉信息；
 - `multimodal-predict` 真实加载公开 VLM checkpoint，支持 ScienceQA/POPE、不可变 revision、离线镜像与逐条续跑；
+- `vlm-checkpoint` 在冻结的真实 checkpoint 上，以 ScienceQA validation 多轮搜索 prompt、hint、图像预处理和解码预算，最终隔离 test；
 - ScienceQA、POPE、COCO/Flickr retrieval 的框架无关 L2 scorer，支持固定子集、三 seed、95% CI 和可审计预测文件；
 - 与推荐、micro-LLM、后训练和 Agent 共用多轮控制器、隔离 test 和研究看板。
 

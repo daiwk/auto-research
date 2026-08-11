@@ -103,6 +103,20 @@ def _load_builtins() -> None:
             config.maximum_examples,
         )
 
+    def checkpoint_multimodal(config: EvolutionConfig, project_dir: Path):
+        from ..multimodal.checkpoint_evolution import CheckpointVLMEvaluator
+        return CheckpointVLMEvaluator(
+            benchmark=config.dataset,
+            annotations=config.checkpoint_annotations,
+            image_root=config.checkpoint_image_root,
+            model_id=config.checkpoint_model_id,
+            checkpoint_path=config.checkpoint_path,
+            revision=config.checkpoint_revision,
+            seeds=config.seeds,
+            maximum_examples=config.maximum_examples,
+            offline=not config.allow_network,
+        )
+
     recommendation_data = ("movielens-100k", "movielens-1m")
     for name in ("rankmixer", "hyformer"):
         register_provider(EvolutionProvider(
@@ -131,6 +145,18 @@ def _load_builtins() -> None:
             learning_rate=3e-3,
             batch_size=config.llm_batch_size,
             heads=4,
+        ),
+    ))
+    register_provider(EvolutionProvider(
+        "vlm-checkpoint", ("scienceqa",), "llm",
+        "multimodal checkpoint inference prompting visual preprocessing decoding",
+        checkpoint_multimodal,
+        lambda config: Genome(
+            architecture="checkpoint_vlm",
+            checkpoint_prompt_style="direct",
+            checkpoint_use_hint=True,
+            checkpoint_image_size=0,
+            checkpoint_max_new_tokens=16,
         ),
     ))
     for entry_point in importlib.metadata.entry_points(

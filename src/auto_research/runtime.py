@@ -2,6 +2,10 @@ from __future__ import annotations
 
 import os
 import platform
+import json
+import inspect
+from pathlib import Path
+import time
 from typing import Any
 
 
@@ -57,7 +61,24 @@ def device_for(torch: Any, requested: str | None = None):
         threads = os.environ.get(CPU_THREADS_ENV)
         if threads:
             torch.set_num_threads(int(threads))
-    return torch.device(choice)
+    resolved = torch.device(choice)
+    audit_log = os.environ.get("AUTO_RESEARCH_DEVICE_AUDIT_LOG")
+    if audit_log:
+        caller = inspect.stack()[1]
+        record = {
+            "timestamp": time.time(),
+            "pid": os.getpid(),
+            "requested": choice,
+            "resolved": str(resolved),
+            "caller_file": str(Path(caller.filename).resolve()),
+            "caller_line": caller.lineno,
+            "caller_function": caller.function,
+        }
+        path = Path(audit_log)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+    return resolved
 
 
 def runtime_summary(torch: Any | None = None) -> dict[str, Any]:

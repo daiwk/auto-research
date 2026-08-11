@@ -46,6 +46,11 @@ class EvolutionConfig:
     gpu_memory_per_trial_mb: int | None = None
     candidate_generator_command: tuple[str, ...] = ()
     candidate_timeout_seconds: int = 300
+    checkpoint_model_id: str = "HuggingFaceTB/SmolVLM2-256M-Video-Instruct"
+    checkpoint_path: Path | None = None
+    checkpoint_revision: str = "main"
+    checkpoint_annotations: Path | None = None
+    checkpoint_image_root: Path | None = None
 
     def validate(self) -> None:
         from .providers import get_provider
@@ -69,7 +74,7 @@ class EvolutionConfig:
             raise ValueError("maximum examples and agent episodes must be positive")
         if self.benchmark_suite not in {"core", "public", "unirank"}:
             raise ValueError("benchmark suite must be core, public or unirank")
-        if self.model in {"micro-llm", "micro-vlm"} and self.benchmark_suite == "unirank":
+        if self.model in {"micro-llm", "micro-vlm", "vlm-checkpoint"} and self.benchmark_suite == "unirank":
             raise ValueError("the UniRank suite is only available to recommendation models")
         allowed_fitness = {"primary", "public_composite", "unirank_composite"}
         if self.fitness_metric not in allowed_fitness:
@@ -86,6 +91,12 @@ class EvolutionConfig:
                 raise ValueError("micro model size parameters must be positive")
             if self.llm_dimensions % 4:
                 raise ValueError("micro model dimensions must be divisible by 4 attention heads")
+        if self.model == "vlm-checkpoint":
+            if self.checkpoint_annotations is None or self.checkpoint_image_root is None:
+                raise ValueError(
+                    "vlm-checkpoint requires --checkpoint-annotations and "
+                    "--checkpoint-image-root"
+                )
 
 
 @dataclass(frozen=True)
@@ -131,6 +142,10 @@ class Genome:
     agent_critic: str = "none"
     memory_size: int = 24
     multimodal_objective: str = "cross_entropy"
+    checkpoint_prompt_style: str = "direct"
+    checkpoint_use_hint: bool = True
+    checkpoint_image_size: int = 0
+    checkpoint_max_new_tokens: int = 16
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -178,7 +193,16 @@ class EvolutionResult:
         return {
             "run_id": self.run_id,
             "schema_version": 2,
-            "config": {**asdict(self.config), "dataset_dir": str(self.config.dataset_dir), "output_dir": str(self.config.output_dir), "resume_dir": str(self.config.resume_dir) if self.config.resume_dir else None, "seeds": list(self.config.seeds)},
+            "config": {
+                **asdict(self.config),
+                "dataset_dir": str(self.config.dataset_dir),
+                "output_dir": str(self.config.output_dir),
+                "resume_dir": str(self.config.resume_dir) if self.config.resume_dir else None,
+                "checkpoint_path": str(self.config.checkpoint_path) if self.config.checkpoint_path else None,
+                "checkpoint_annotations": str(self.config.checkpoint_annotations) if self.config.checkpoint_annotations else None,
+                "checkpoint_image_root": str(self.config.checkpoint_image_root) if self.config.checkpoint_image_root else None,
+                "seeds": list(self.config.seeds),
+            },
             "papers": [paper.to_dict() for paper in self.papers],
             "trials": [trial.to_dict() for trial in self.trials],
             "champion_id": self.champion_id,
@@ -196,6 +220,8 @@ class EvolutionResult:
         raw_config["dataset_dir"] = Path(raw_config["dataset_dir"])
         raw_config["output_dir"] = Path(raw_config["output_dir"])
         raw_config["resume_dir"] = Path(raw_config["resume_dir"]) if raw_config.get("resume_dir") else None
+        for key in ("checkpoint_path", "checkpoint_annotations", "checkpoint_image_root"):
+            raw_config[key] = Path(raw_config[key]) if raw_config.get(key) else None
         raw_config["seeds"] = tuple(raw_config["seeds"])
         raw_config["candidate_generator_command"] = tuple(
             raw_config.get("candidate_generator_command", ())

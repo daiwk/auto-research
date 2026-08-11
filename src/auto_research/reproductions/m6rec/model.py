@@ -28,10 +28,10 @@ def require_backend():
     try:
         import torch
         from torch import nn
-        from transformers import AutoModel, AutoTokenizer
+        from transformers import BertModel, BertTokenizer
     except ImportError as exc:
         raise RuntimeError("M6-Rec requires `pip install -e '.[plum]'`.") from exc
-    return torch, nn, AutoModel, AutoTokenizer
+    return torch, nn, BertModel, BertTokenizer
 
 
 def movielens_text_examples(root: Path, config: M6RecConfig):
@@ -75,9 +75,12 @@ def movielens_text_examples(root: Path, config: M6RecConfig):
 
 
 def build_model(config: M6RecConfig, use_adapters: bool):
-    torch, nn, AutoModel, AutoTokenizer = require_backend()
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
-    backbone = AutoModel.from_pretrained(config.model_name)
+    torch, nn, BertModel, BertTokenizer = require_backend()
+    # M6-Rec is BERT-specific (it hooks ``backbone.encoder.layer``).  Loading
+    # the vocabulary through the concrete tokenizer also avoids Transformers
+    # 5 trying to convert the legacy BERT vocab with sentencepiece/tiktoken.
+    tokenizer = BertTokenizer.from_pretrained(config.model_name)
+    backbone = BertModel.from_pretrained(config.model_name)
     for parameter in backbone.parameters():
         parameter.requires_grad = False
     hidden = backbone.config.hidden_size

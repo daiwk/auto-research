@@ -33,8 +33,16 @@ def reproduce_plum(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
             training_metrics=prior_payload["setup"]["sid_training"],
         )
     else:
+        smoke = os.environ.get("AUTO_RESEARCH_BUDGET") == "smoke"
         index = build_semantic_ids(
-            data, metadata, seed=seed, checkpoint_dir=output_dir / "sid"
+            data,
+            metadata,
+            cardinalities=(64, 32, 16) if smoke else (512, 256, 128),
+            seed=seed,
+            checkpoint_dir=output_dir / "sid",
+            pretrain_steps=1 if smoke else 100,
+            quantization_steps=1 if smoke else 300,
+            batch_size=64 if smoke else 256,
         )
     cpt = build_cpt_corpus(data, metadata, index, seed)
     sft = build_sft_examples(data, index, seed)
@@ -120,12 +128,13 @@ def reproduce_plum(dataset_dir: Path, seed: int = 42) -> dict[str, Any]:
 def _training_config() -> TrainingConfig:
     """Environment overrides make smoke runs cheap without weakening defaults."""
 
+    smoke = os.environ.get("AUTO_RESEARCH_BUDGET") == "smoke"
     return TrainingConfig(
-        cpt_steps=int(os.environ.get("AUTO_RESEARCH_PLUM_CPT_STEPS", "240")),
-        sft_steps=int(os.environ.get("AUTO_RESEARCH_PLUM_SFT_STEPS", "240")),
-        batch_size=int(os.environ.get("AUTO_RESEARCH_PLUM_BATCH_SIZE", "16")),
-        evaluation_users=int(os.environ.get("AUTO_RESEARCH_PLUM_EVAL_USERS", "200")),
-        beam_size=int(os.environ.get("AUTO_RESEARCH_PLUM_BEAM_SIZE", "10")),
+        cpt_steps=int(os.environ.get("AUTO_RESEARCH_PLUM_CPT_STEPS", "1" if smoke else "240")),
+        sft_steps=int(os.environ.get("AUTO_RESEARCH_PLUM_SFT_STEPS", "1" if smoke else "240")),
+        batch_size=int(os.environ.get("AUTO_RESEARCH_PLUM_BATCH_SIZE", "1" if smoke else "16")),
+        evaluation_users=int(os.environ.get("AUTO_RESEARCH_PLUM_EVAL_USERS", "4" if smoke else "200")),
+        beam_size=int(os.environ.get("AUTO_RESEARCH_PLUM_BEAM_SIZE", "2" if smoke else "10")),
         resume_dir=(
             Path(os.environ["AUTO_RESEARCH_PLUM_RESUME_DIR"])
             if "AUTO_RESEARCH_PLUM_RESUME_DIR" in os.environ
