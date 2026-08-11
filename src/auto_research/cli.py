@@ -30,7 +30,8 @@ from .runner import ResearchRunner
 from .runtime import configure_runtime, runtime_summary
 from .multimodal import (
     BENCHMARKS, run_cifar10_benchmark, run_public_benchmark,
-    write_benchmark_report,
+    write_benchmark_report, CheckpointPredictionConfig,
+    GENERATIVE_BENCHMARKS, generate_checkpoint_predictions,
 )
 
 
@@ -265,6 +266,31 @@ def build_parser() -> argparse.ArgumentParser:
     multimodal_eval.add_argument("--batch-size", type=int, default=32)
     multimodal_eval.add_argument("--learning-rate", type=float, default=3e-4)
     _add_runtime_arguments(multimodal_eval)
+
+    multimodal_predict = commands.add_parser(
+        "multimodal-predict",
+        help="generate resumable ScienceQA/POPE predictions with a public checkpoint",
+    )
+    multimodal_predict.add_argument(
+        "--benchmark", choices=GENERATIVE_BENCHMARKS, required=True
+    )
+    multimodal_predict.add_argument("--annotations", type=Path, required=True)
+    multimodal_predict.add_argument("--image-root", type=Path, required=True)
+    multimodal_predict.add_argument("--output", type=Path, required=True)
+    multimodal_predict.add_argument(
+        "--model-id", default="HuggingFaceTB/SmolVLM2-256M-Video-Instruct"
+    )
+    multimodal_predict.add_argument(
+        "--checkpoint-path", type=Path,
+        help="local snapshot path; provenance still uses --model-id and --model-revision",
+    )
+    multimodal_predict.add_argument("--model-revision", default="main")
+    multimodal_predict.add_argument("--split", default="test")
+    multimodal_predict.add_argument("--seed", type=int, default=42)
+    multimodal_predict.add_argument("--maximum-examples", type=int)
+    multimodal_predict.add_argument("--max-new-tokens", type=int, default=16)
+    multimodal_predict.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(multimodal_predict)
 
     candidate = commands.add_parser(
         "candidate", help="stage, verify or explicitly promote a generated evolve plugin"
@@ -554,13 +580,34 @@ def main(argv: list[str] | None = None) -> int:
                 result = run_public_benchmark(
                     args.benchmark, args.annotations, seeds,
                     predictions=args.predictions, baseline=args.baseline,
-                    split=args.split,
+                    split=args.split, maximum_examples=args.maximum_examples,
                 )
             run_dir = write_benchmark_report(result, args.output_dir)
             primary = next(iter(result.aggregate_metrics.items()))
             print(f"{primary[0]}: {primary[1]['mean']:.6f} ± {primary[1]['std']:.6f}")
             print(f"Metrics: {run_dir / 'metrics.json'}")
             print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "multimodal-predict":
+            metadata = generate_checkpoint_predictions(
+                CheckpointPredictionConfig(
+                    benchmark=args.benchmark,
+                    annotations=args.annotations,
+                    image_root=args.image_root,
+                    output=args.output,
+                    model_id=args.model_id,
+                    checkpoint_path=args.checkpoint_path,
+                    revision=args.model_revision,
+                    split=args.split,
+                    maximum_examples=args.maximum_examples,
+                    max_new_tokens=args.max_new_tokens,
+                    seed=args.seed,
+                    offline=args.offline,
+                )
+            )
+            print(f"Predictions: {args.output}")
+            print(f"Resolved revision: {metadata['resolved_revision']}")
+            print(f"Selected examples: {metadata['selected_examples']}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()
