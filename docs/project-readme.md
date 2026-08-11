@@ -31,7 +31,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
   组成 genome，按 validation 多代变异、淘汰和晋级，最终只对冠军运行 test；
 - **内置 adapter**：搜广推支持 RankMixer/HyFormer，基础模型支持 micro‑LLM 的结构
   与数据配方进化，后训练支持 objective genome；Agent 的论文约束 genome 与多代 adapter 已接入统一控制器。
-- **多模态大模型**：可从头训练 `micro-vlm`，覆盖离线 L0、Fashion-MNIST/CIFAR-10 公开图像 L1、视觉依赖对照和 connector 多轮进化；正式论文算子由同一 provider 承载。
+- **多模态大模型**：可从头训练 `micro-vlm`，覆盖离线 L0、Fashion-MNIST/CIFAR-10 公开图像 L1、视觉依赖对照和 connector 多轮进化；ScienceQA、POPE、COCO/Flickr L2 scorer 支持独立预测文件与多 seed 置信区间。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 
@@ -181,6 +181,10 @@ DEMO_TRACK=llm ./demo.sh
 
 # 完全离线的多模态训练与进化
 DEMO_TRACK=multimodal ./demo.sh
+
+# CIFAR-10 固定配方三 seed 正式评测（首次下载约 163MB）
+auto-research multimodal-eval --benchmark cifar10-qa \
+  --architecture micro_vlm_query --steps 300 --seeds 42,43,44
 
 # 完整 micro-LLM 研究
 DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh

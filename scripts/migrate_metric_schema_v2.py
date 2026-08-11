@@ -71,30 +71,35 @@ def _manifest_ref(path: Path, adapter) -> str:
 def migrate_payload(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     adapter = _adapter_for(path)
     seeds = _integer_seeds(payload, path)
-    tier = adapter.evaluation_tier.value if adapter else "l1_mechanism"
+    already_v2 = payload.get("schema_version") == 2
     protocol = dict(payload.get("evaluation_protocol") or {})
+    tier = (
+        adapter.evaluation_tier.value if adapter else
+        protocol.get("tier", payload.get("evaluation_tier", "l1_mechanism"))
+    )
     protocol.update({
         "tier": tier,
         "seeds": seeds,
         "formal_comparison": len(seeds) >= 3,
-        "claim_policy": (
-            "formal multi-seed comparison"
-            if len(seeds) >= 3
-            else "single/few-seed smoke result; do not claim a stable improvement"
-        ),
     })
+    protocol.setdefault(
+        "claim_policy",
+        "formal multi-seed comparison" if len(seeds) >= 3 else
+        "single/few-seed smoke result; do not claim a stable improvement",
+    )
     provenance = dict(payload.get("provenance") or {})
-    provenance.update({
-        "artifact_path": str(path.relative_to(ROOT)),
-        "historical_migration": MIGRATION_ID,
-        "original_code_commit": provenance.get("original_code_commit", "not recorded"),
-        "dataset_fingerprint": provenance.get(
-            "dataset_fingerprint", "not recorded in historical artifact"
-        ),
-    })
+    provenance["artifact_path"] = str(path.relative_to(ROOT))
+    if not already_v2:
+        provenance.update({
+            "historical_migration": MIGRATION_ID,
+            "original_code_commit": provenance.get("original_code_commit", "not recorded"),
+            "dataset_fingerprint": provenance.get(
+                "dataset_fingerprint", "not recorded in historical artifact"
+            ),
+        })
     migrated = dict(payload)
     migrated["schema_version"] = 2
-    migrated["manifest_ref"] = _manifest_ref(path, adapter)
+    migrated["manifest_ref"] = payload.get("manifest_ref") or _manifest_ref(path, adapter)
     migrated["evaluation_protocol"] = protocol
     migrated["provenance"] = provenance
     return migrated

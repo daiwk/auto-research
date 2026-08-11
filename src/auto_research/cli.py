@@ -28,6 +28,10 @@ from .reproductions.reporting import (
 )
 from .runner import ResearchRunner
 from .runtime import configure_runtime, runtime_summary
+from .multimodal import (
+    BENCHMARKS, run_cifar10_benchmark, run_public_benchmark,
+    write_benchmark_report,
+)
 
 
 def _add_runtime_arguments(command: argparse.ArgumentParser) -> None:
@@ -234,6 +238,33 @@ def build_parser() -> argparse.ArgumentParser:
     agent_eval.add_argument("--seed", type=int, default=42)
     agent_eval.add_argument("--output-dir", type=Path, default=Path("runs/agent-research"))
     _add_runtime_arguments(agent_eval)
+
+    multimodal_eval = commands.add_parser(
+        "multimodal-eval",
+        help="run CIFAR-10, ScienceQA, POPE or COCO/Flickr retrieval evaluation",
+    )
+    multimodal_eval.add_argument("--benchmark", choices=BENCHMARKS, required=True)
+    multimodal_eval.add_argument("--annotations", type=Path)
+    multimodal_eval.add_argument(
+        "--predictions",
+        help="JSON/JSONL prediction path; may contain {seed}",
+    )
+    multimodal_eval.add_argument("--baseline", choices=["random"])
+    multimodal_eval.add_argument("--split", default="test")
+    multimodal_eval.add_argument("--seeds", default="42,43,44")
+    multimodal_eval.add_argument("--dataset-dir", type=Path, default=Path("data"))
+    multimodal_eval.add_argument(
+        "--output-dir", type=Path, default=Path("runs/multimodal-benchmarks")
+    )
+    multimodal_eval.add_argument("--offline", action="store_true")
+    multimodal_eval.add_argument("--architecture", default="micro_vlm_query")
+    multimodal_eval.add_argument("--objective", default="cross_entropy")
+    multimodal_eval.add_argument("--steps", type=int, default=300)
+    multimodal_eval.add_argument("--maximum-examples", type=int, default=5000)
+    multimodal_eval.add_argument("--dimensions", type=int, default=192)
+    multimodal_eval.add_argument("--batch-size", type=int, default=32)
+    multimodal_eval.add_argument("--learning-rate", type=float, default=3e-4)
+    _add_runtime_arguments(multimodal_eval)
 
     candidate = commands.add_parser(
         "candidate", help="stage, verify or explicitly promote a generated evolve plugin"
@@ -493,6 +524,42 @@ def main(argv: list[str] | None = None) -> int:
             ).run()
             print(f"Joint success: {result.metrics['joint_success']:.4f}")
             print(f"Average cost: {result.metrics['average_cost']:.4f}")
+            print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "multimodal-eval":
+            seeds = tuple(
+                int(value.strip()) for value in args.seeds.split(",") if value.strip()
+            )
+            if args.benchmark == "cifar10-qa":
+                if args.annotations or args.predictions or args.baseline:
+                    raise ValueError(
+                        "cifar10-qa trains locally; do not pass annotations/predictions/baseline"
+                    )
+                result = run_cifar10_benchmark(
+                    args.dataset_dir, seeds,
+                    architecture=args.architecture,
+                    objective=args.objective,
+                    steps=args.steps,
+                    maximum_examples=args.maximum_examples,
+                    dimensions=args.dimensions,
+                    batch_size=args.batch_size,
+                    learning_rate=args.learning_rate,
+                    allow_network=not args.offline,
+                )
+            else:
+                if not args.annotations:
+                    raise ValueError(
+                        f"{args.benchmark} requires --annotations"
+                    )
+                result = run_public_benchmark(
+                    args.benchmark, args.annotations, seeds,
+                    predictions=args.predictions, baseline=args.baseline,
+                    split=args.split,
+                )
+            run_dir = write_benchmark_report(result, args.output_dir)
+            primary = next(iter(result.aggregate_metrics.items()))
+            print(f"{primary[0]}: {primary[1]['mean']:.6f} ± {primary[1]['std']:.6f}")
+            print(f"Metrics: {run_dir / 'metrics.json'}")
             print(f"Report: {run_dir / 'report.md'}")
             return 0
         config = _run_config(args)
