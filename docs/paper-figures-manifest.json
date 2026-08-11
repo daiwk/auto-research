@@ -4730,5 +4730,47 @@
     "height": 1274,
     "score": 0,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2301.12597-blip2/README.md",
+    "paper_url": "https://arxiv.org/abs/2301.12597",
+    "arxiv_id": "2301.12597",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2 : ( Left ) Model architecture of Q-Former and BLIP-2’s first-stage vision-language representation learning objectives. We jointly optimize three objectives which enforce the queries (a set of learnable embeddings) to extract visual representation most relevant to the text. ( Right ) The self-attention masking strategy for each objective to control query-text interaction.",
+    "source_url": "https://arxiv.org/html/2301.12597v3/x2.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2301.12597-blip2/assets/paper-figure-01.png",
+    "width": 793,
+    "height": 164,
+    "score": 85,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2502.14786-siglip2/README.md",
+    "paper_url": "https://arxiv.org/abs/2502.14786",
+    "arxiv_id": "2502.14786",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3: Comparing the NaFlex (a single checkpoint per model size supporting native aspect ratio and variable sequence length/resolution) and the standard square-input SigLIP 2 variants which use a separate checkpoint for each sequence length/resolution. The sequence lengths annotated on the x-axis correspond to training sequence lengths for NaFlex. NaFlex interpolates fairly well between training resolutions, but does not extrapolate well (not shown).",
+    "source_url": "https://ar5iv.labs.arxiv.org/html/2502.14786/assets/x3.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2502.14786-siglip2/assets/paper-figure-01.png",
+    "width": 831,
+    "height": 502,
+    "score": 42,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2504.05299-smolvlm/README.md",
+    "paper_url": "https://arxiv.org/abs/2504.05299",
+    "arxiv_id": "2504.05299",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2 : SmolVLM Architecture . Images are split into subimages, frames are sampled from videos, and then encoded into visual features. These features are first rearranged via a pixel-shuffle operation, then mapped into the LLM input space as visual tokens using an MLP projection. Visual tokens are then concatenated/interleaved with text embeddings (orange/red). This combined sequence is passed to the LLM for text output.",
+    "source_url": "https://ar5iv.labs.arxiv.org/html/2504.05299/assets/x20.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2504.05299-smolvlm/assets/paper-figure-01.png",
+    "width": 1404,
+    "height": 579,
+    "score": 75,
+    "error": ""
   }
 ]

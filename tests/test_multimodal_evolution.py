@@ -4,6 +4,8 @@ import numpy as np
 import pickle
 
 from auto_research.evolution import EvolutionConfig, ModelEvolutionEngine
+from auto_research.evolution.engine import _paper_ids
+from auto_research.evolution.models import Genome, PaperInspiration
 from auto_research.evolution.planner import allowed_architectures
 from auto_research.evolution.providers import get_provider
 from auto_research.multimodal.data import load_cifar10_qa, load_visual_shapes
@@ -23,10 +25,43 @@ def test_all_micro_vlm_connectors_execute():
 
     images = torch.zeros(2, 3, 32, 32)
     questions = torch.tensor([0, 2])
-    for architecture in allowed_architectures("micro-vlm", "query projector", []):
+    architectures = allowed_architectures("micro-vlm", "query projector", [])
+    assert "objective:siglip2" in architectures
+    for architecture in architectures:
+        if architecture.startswith("objective:"):
+            continue
         model = build_micro_vlm(architecture, 32)
         assert model(images, questions).shape == (2, 9)
-        assert model.architecture_stats()["visual_tokens"] == 16
+        expected_tokens = 4 if architecture in {
+            "micro_vlm_qformer", "micro_vlm_pixelshuffle"
+        } else 16
+        assert model.architecture_stats()["visual_tokens"] == expected_tokens
+
+
+def test_multimodal_paper_source_attribution_uses_the_selected_operator():
+    papers = [
+        PaperInspiration(
+            "2301.12597", "BLIP-2", "https://arxiv.org/abs/2301.12597",
+            "2023-01-30", "micro_vlm_qformer", "query connector", "fallback",
+            executable=True,
+        ),
+        PaperInspiration(
+            "2502.14786", "SigLIP 2", "https://arxiv.org/abs/2502.14786",
+            "2025-02-20", "objective:siglip2", "sigmoid objective", "fallback",
+            executable=True,
+        ),
+        PaperInspiration(
+            "2401.02385", "TinyLlama", "https://arxiv.org/abs/2401.02385",
+            "2024-01-04", "small_llm", "small language model", "fallback",
+            executable=True,
+        ),
+    ]
+    qformer = Genome(architecture="micro_vlm_qformer")
+    siglip = Genome(
+        architecture="micro_vlm_linear", multimodal_objective="siglip2"
+    )
+    assert _paper_ids(qformer, papers) == ("2301.12597",)
+    assert _paper_ids(siglip, papers) == ("2502.14786",)
 
 
 def test_cifar10_qa_uses_cached_official_batches_offline(tmp_path):

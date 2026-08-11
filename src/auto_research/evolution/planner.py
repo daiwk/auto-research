@@ -9,11 +9,18 @@ from .models import Genome, PaperInspiration
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
     if model == "micro-vlm":
-        values = ["micro_vlm_linear", "micro_vlm_mlp", "micro_vlm_query"]
+        values = [
+            "micro_vlm_linear", "micro_vlm_mlp", "micro_vlm_query",
+            "micro_vlm_qformer", "micro_vlm_gated", "micro_vlm_pixelshuffle",
+            "objective:siglip2",
+        ]
         text = direction.lower()
         priorities = {
             "micro_vlm_query": ("query", "q-former", "查询", "视觉查询"),
-            "micro_vlm_mlp": ("mlp", "projector", "投影"),
+            "micro_vlm_mlp": ("mlp", "projector", "投影", "llava"),
+            "micro_vlm_qformer": ("blip-2", "blip2", "q-former", "qformer"),
+            "micro_vlm_gated": ("gated projector", "门控投影"),
+            "micro_vlm_pixelshuffle": ("smolvlm", "pixel shuffle", "像素重排", "token 压缩"),
         }
         for architecture, terms in priorities.items():
             if any(term in text for term in terms):
@@ -280,6 +287,11 @@ def _propose_llm(parent, generation, index, architectures, rng):
 def _propose_multimodal(parent, generation, index, architectures, rng):
     if generation == 1:
         architecture = architectures[index % len(architectures)]
+        if architecture.startswith("objective:"):
+            objective = architecture.split(":", 1)[1]
+            return replace(parent, multimodal_objective=objective), (
+                f"多模态训练目标消融：{objective}；保持 connector、图像、问题与预算不变"
+            )
         return replace(parent, architecture=architecture), (
             f"多模态 connector 消融：{architecture}；保持图像、问题、预算与模型宽度不变"
         )

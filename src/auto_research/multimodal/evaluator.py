@@ -95,9 +95,22 @@ class MicroVLMEvaluator:
             questions = torch.from_numpy(split.questions[indices]).to(device)
             answers = torch.from_numpy(split.answers[indices]).to(device)
             optimizer.zero_grad(set_to_none=True)
-            loss = torch.nn.functional.cross_entropy(
-                model(images, questions), answers
-            )
+            logits = model(images, questions)
+            if genome.multimodal_objective == "siglip2":
+                targets = torch.nn.functional.one_hot(
+                    answers, num_classes=logits.shape[-1]
+                ).float()
+                loss = torch.nn.functional.binary_cross_entropy_with_logits(
+                    logits, targets
+                )
+                masked = images.clone()
+                masked[:, :, 8:24, 8:24] = 0
+                masked_logits = model(masked, questions)
+                loss = loss + 0.15 * torch.nn.functional.mse_loss(
+                    torch.sigmoid(masked_logits), torch.sigmoid(logits.detach())
+                )
+            else:
+                loss = torch.nn.functional.cross_entropy(logits, answers)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()

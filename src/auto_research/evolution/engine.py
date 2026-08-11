@@ -324,9 +324,18 @@ def _paper_ids(genome, papers):
             matched.append(paper.arxiv_id)
         elif paper.architecture == "parallel_block" and "parallel" in terms:
             matched.append(paper.arxiv_id)
-        elif paper.architecture == "small_llm" and genome.architecture != "gpt_baseline":
+        elif (
+            paper.architecture == "small_llm"
+            and genome.architecture != "gpt_baseline"
+            and not genome.architecture.startswith("micro_vlm_")
+        ):
             matched.append(paper.arxiv_id)
         elif paper.architecture == genome.post_training:
+            matched.append(paper.arxiv_id)
+        elif (
+            paper.architecture == "objective:siglip2"
+            and genome.multimodal_objective == "siglip2"
+        ):
             matched.append(paper.arxiv_id)
         elif (
             paper.architecture == "native_sparse_attention"

@@ -117,6 +117,7 @@ def _render_multimodal_report(result: EvolutionResult) -> str:
         f"validation `{result.dataset_summary.get('validation_examples')}` / "
         f"test `{result.dataset_summary.get('test_examples')}`。",
         f"- 冠军：`{champion.trial_id}` / `{champion.genome.architecture}`；"
+        f"训练目标 `{champion.genome.multimodal_objective}`；"
         f"validation accuracy `{baseline.validation['accuracy']:.4f}→"
         f"{champion.validation['accuracy']:.4f}`；视觉依赖差值 "
         f"`{champion.validation['visual_dependency_delta']:.4f}`。",
@@ -141,14 +142,16 @@ def _render_multimodal_report(result: EvolutionResult) -> str:
         ]
     lines += [
         "## 完整实验轨迹", "",
-        "| Trial | 来源 | 结构 | Accuracy | 打乱图 | 空白图 | 视觉依赖差值 | Fitness | Params |",
-        "|---|---|---|---:|---:|---:|---:|---:|---:|",
+        "| Trial | 来源 | 结构 | 训练目标 | Accuracy | 打乱图 | 空白图 | 视觉依赖差值 | Fitness | Params |",
+        "|---|---|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for trial in result.trials:
         values = trial.validation
         lines.append(
             f"| `{trial.trial_id}` | {_trial_source_label(trial)} | "
-            f"`{trial.genome.architecture}` | {values.get('accuracy', 0):.4f} | "
+            f"`{trial.genome.architecture}` | "
+            f"`{trial.genome.multimodal_objective}` | "
+            f"{values.get('accuracy', 0):.4f} | "
             f"{values.get('shuffled_image_accuracy', 0):.4f} | "
             f"{values.get('blank_image_accuracy', 0):.4f} | "
             f"{values.get('visual_dependency_delta', 0):.4f} | "

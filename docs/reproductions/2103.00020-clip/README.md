@@ -46,14 +46,14 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线为 `random cross-modal retrieval`，实验组为 `symmetric contrastive image-text encoder`，只改变论文核心机制；`recall_at_1` 0.0125 → **0.4125，相对基线 +3200.00%**。
+> **本地对照口径**：在真实 Fashion-MNIST 图像与类别文本构成的 10 类图文任务上，基线为均匀随机检索（10.0%），实验组为对称式图文对比学习双塔；测试准确率达到 **72.0%（+62.0 个百分点）**，打乱图像后降至 10.3%，说明结果依赖视觉输入。
 
 ```bash
 auto-research reproduce --paper clip --dataset-dir data --seed 42
 ```
 
-固定指标见 [`metrics/public-seed42.json`](metrics/public-seed42.json)。
+固定指标见 [`metrics/fashion-mnist-qa-seed42.json`](metrics/fashion-mnist-qa-seed42.json)。
 
 ## 复现边界
 
-用 MovieLens 公开 item 的两种观测视图执行双塔、归一化和双向 InfoNCE；没有复刻 4 亿图文对。 本地相对变化不得与原文指标混写。
+使用 Fashion-MNIST 的真实像素与类别文本复现双塔、归一化和对称式对比目标；没有复刻 4 亿图文对、自然语言长尾语义或大规模视觉 encoder。单 seed 小预算结果只验证机制可执行，不等价于原论文 zero-shot 指标。

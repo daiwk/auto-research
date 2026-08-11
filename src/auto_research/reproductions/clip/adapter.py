@@ -1,5 +1,28 @@
-from ..base import PaperMetadata, ReproductionAdapter, ReproductionFidelity
+from ..base import EvaluationTier, PaperMetadata, ReproductionAdapter, ReproductionFidelity
 from ..registry import register
 from .experiment import reproduce
 from .report import render
-ADAPTER = register(ReproductionAdapter(key="clip", paper=PaperMetadata(arxiv_id="2103.00020", title="Learning Transferable Visual Models From Natural Language Supervision", url="https://arxiv.org/abs/2103.00020", code_url="https://github.com/openai/CLIP", track="llm", organization="OpenAI", published="2021-02-26", topics=("multimodal", "contrastive-pretraining")), run=reproduce, render=render, fidelity=ReproductionFidelity.CORE_MECHANISM, omitted_core_components=("400M image-text pairs", "large vision encoder")))
+
+
+ADAPTER = register(ReproductionAdapter(
+    key="clip",
+    paper=PaperMetadata(
+        arxiv_id="2103.00020",
+        title="Learning Transferable Visual Models From Natural Language Supervision",
+        url="https://arxiv.org/abs/2103.00020",
+        code_url="https://github.com/openai/CLIP",
+        track="llm",
+        organization="OpenAI",
+        published="2021-02-26",
+        topics=("multimodal", "contrastive-pretraining"),
+    ),
+    run=reproduce,
+    render=render,
+    fidelity=ReproductionFidelity.CORE_MECHANISM,
+    omitted_core_components=("400M image-text pairs", "large vision encoder"),
+    evaluation_tier=EvaluationTier.PUBLIC_DATASET,
+    datasets=("Fashion-MNIST image-text pairs",),
+    baseline="uniform label retrieval",
+    metrics=("test_accuracy", "visual_dependency_delta"),
+    device_capabilities=("cpu", "mps", "cuda"),
+))

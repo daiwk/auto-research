@@ -1,0 +1,44 @@
+{
+  "dataset": {
+    "name": "fashion-mnist-qa",
+    "train_examples": 2000,
+    "test_examples": 1000
+  },
+  "seed": 42,
+  "baseline": {
+    "name": "linear mean-pooled connector",
+    "test_accuracy": 0.468,
+    "visual_tokens": 16
+  },
+  "method": {
+    "name": "SmolVLM pixel-shuffle connector",
+    "test_accuracy": 0.658,
+    "shuffled_image_accuracy": 0.092,
+    "visual_dependency_delta": 0.566,
+    "visual_tokens": 4
+  },
+  "relative": {
+    "test_accuracy_points": 19.0,
+    "visual_token_reduction_percent": 75.0
+  },
+  "stages": {
+    "matched_steps": 120,
+    "real_pixels": true
+  },
+  "schema_version": 2,
+  "manifest_ref": "reproduction:smolvlm",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2504.05299-smolvlm/metrics/fashion-mnist-qa-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

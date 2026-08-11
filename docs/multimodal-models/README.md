@@ -9,7 +9,8 @@
 - `visual-shapes`：完全离线生成颜色、形状和方位问答图像；
 - `fashion-mnist-qa`：约 30MB 的公开服饰图像，适合 Mac/CPU 快速复跑；
 - `cifar10-qa`：官方 CIFAR-10 自然图像，MD5 校验后缓存，固定分层 validation/test；
-- `micro_vlm_linear`、`micro_vlm_mlp`、`micro_vlm_query` 三种 connector；
+- `micro_vlm_linear`、`micro_vlm_mlp`、`micro_vlm_query`、`micro_vlm_qformer`、`micro_vlm_gated`、`micro_vlm_pixelshuffle` 六种 connector；
+- CLIP、BLIP-2、LLaVA、SigLIP 2 与 SmolVLM 独立 adapter，以及可组合的 `objective:siglip2` 训练目标；
 - 强制报告原图、打乱图和空白图准确率，检查模型是否真的使用视觉信息；
 - 与推荐、micro-LLM、后训练和 Agent 共用多轮控制器、隔离 test 和研究看板。
 
@@ -19,7 +20,7 @@ python -m pip install -e '.[multimodal]'
 auto-research evolve \
   --model micro-vlm \
   --dataset visual-shapes \
-  --direction "比较线性、MLP 和 query connector，要求模型真实使用视觉输入" \
+  --direction "比较 LLaVA、BLIP-2、SigLIP 2 和 SmolVLM 算子，要求模型真实使用视觉输入" \
   --offline --generations 2 --population 3 --steps 60 \
   --llm-dimensions 96 --llm-batch-size 16 --seeds 42
 ```
@@ -61,8 +62,23 @@ Fashion-MNIST 固定 2,000 train / 1,000 validation / 1,000 test，seed 42、每
 0.1070/0.1000。结构化结果见
 [`metrics/fashion-mnist-qa-seed42.json`](metrics/fashion-mnist-qa-seed42.json)。
 
+## 论文级公开图像结果
+
+所有结果均使用 Fashion-MNIST 真实像素、2,000 条训练样本和 seed 42；论文原始结论与本地
+缩小实验分开记录。
+
+| 论文机制 | 公平基线 | 本地 test | 视觉依赖 / 效率诊断 |
+|---|---:|---:|---|
+| CLIP 对称式图文对比 | 均匀检索 10.0% | **72.0%** | 打乱图 10.3% |
+| LLaVA 两层 MLP projector | 线性 connector 46.8% | **43.4%** | -3.4 points；保留负结果 |
+| BLIP-2 四 query Q-Former | 线性 connector 46.8% | **41.5%** | -5.3 points；token 16→4 |
+| SigLIP 2 sigmoid + masked view | 均匀检索 10.0% | **66.9%** | 打乱图 10.8% |
+| SmolVLM pixel shuffle | 线性 connector 46.8% | **65.8%** | +19.0 points；token 16→4 |
+
+详细公式、原文结果、论文关键图、命令和边界见[方法索引](catalog.md)。
+
 ## 边界
 
 `visual-shapes` 是 L0 系统 benchmark；Fashion-MNIST/CIFAR-10 是 L1 公开图像缩小实验。它们都
 不是开放式 VQA 能力证明。ScienceQA、POPE、公开图文检索和 lmms-eval 属于 L2/L3；
-已有 CLIP/LLaVA 的 MovieLens 代理结果也不会被当作正式多模态结果。
+论文 adapter 当前仍是 L1 缩小实验，不会被当作开放式 VQA 或通用 VLM 能力证明。
