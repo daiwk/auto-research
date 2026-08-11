@@ -90,6 +90,7 @@
   },
   "provenance": {
     "created_at": "2026-08-11T06:40:17.816253+00:00",
-    "artifact_path": "docs/multimodal-models/metrics/scienceqa-smolvlm2-256m-500.json"
+    "artifact_path": "docs/multimodal-models/metrics/scienceqa-smolvlm2-256m-500.json",
+    "dataset_fingerprint": "sha256:992b2e3c5296a59d36135471c66875069ca3747e0245af79eeb5752f976d3f36"
   }
 }
