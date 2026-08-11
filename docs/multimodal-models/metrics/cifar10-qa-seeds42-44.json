@@ -3,7 +3,11 @@
   "manifest_ref": "multimodal-models:cifar10-qa",
   "benchmark": "cifar10-qa",
   "evaluation_tier": "l1_public_images",
-  "seeds": [42, 43, 44],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
   "evaluated_examples": 2000,
   "prediction_source": "micro_vlm_query; objective=cross_entropy; steps=300; train_examples=5000",
   "metadata": {
@@ -74,29 +78,89 @@
     }
   ],
   "aggregate_metrics": {
-    "validation_accuracy": {"mean": 0.1999999980131785, "std": 0.012767140278714359, "ci95": 0.014447379278326998, "n": 3},
-    "validation_shuffled_image_accuracy": {"mean": 0.10333333412806193, "std": 0.0011547028784467755, "ci95": 0.001306669314702352, "n": 3},
-    "validation_blank_image_accuracy": {"mean": 0.10000000149011612, "std": 0.0, "ci95": 0.0, "n": 3},
-    "validation_visual_dependency_delta": {"mean": 0.09666666388511658, "std": 0.011676179413035684, "ci95": 0.013212840841356138, "n": 3},
-    "validation_blank_image_delta": {"mean": 0.09999999652306239, "std": 0.012767140278714359, "ci95": 0.014447379278326998, "n": 3},
-    "test_accuracy": {"mean": 0.19433333476384482, "std": 0.0025166086836567706, "ci95": 0.0028478108138702053, "n": 3},
-    "test_shuffled_image_accuracy": {"mean": 0.10433333367109299, "std": 0.007371114235185654, "ci95": 0.008341200984307363, "n": 3},
-    "test_blank_image_accuracy": {"mean": 0.10000000149011612, "std": 0.0, "ci95": 0.0, "n": 3},
-    "test_visual_dependency_delta": {"mean": 0.09000000109275182, "std": 0.0059999972581878825, "ci95": 0.0067896360630175095, "n": 3},
-    "test_blank_image_delta": {"mean": 0.09433333327372868, "std": 0.0025166086836567706, "ci95": 0.0028478108138702053, "n": 3},
-    "parameters": {"mean": 151114.0, "std": 0.0, "ci95": 0.0, "n": 3}
+    "validation_accuracy": {
+      "mean": 0.1999999980131785,
+      "std": 0.012767140278714359,
+      "ci95": 0.014447379278326998,
+      "n": 3
+    },
+    "validation_shuffled_image_accuracy": {
+      "mean": 0.10333333412806193,
+      "std": 0.0011547028784467755,
+      "ci95": 0.001306669314702352,
+      "n": 3
+    },
+    "validation_blank_image_accuracy": {
+      "mean": 0.10000000149011612,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "validation_visual_dependency_delta": {
+      "mean": 0.09666666388511658,
+      "std": 0.011676179413035684,
+      "ci95": 0.013212840841356138,
+      "n": 3
+    },
+    "validation_blank_image_delta": {
+      "mean": 0.09999999652306239,
+      "std": 0.012767140278714359,
+      "ci95": 0.014447379278326998,
+      "n": 3
+    },
+    "test_accuracy": {
+      "mean": 0.19433333476384482,
+      "std": 0.0025166086836567706,
+      "ci95": 0.0028478108138702053,
+      "n": 3
+    },
+    "test_shuffled_image_accuracy": {
+      "mean": 0.10433333367109299,
+      "std": 0.007371114235185654,
+      "ci95": 0.008341200984307363,
+      "n": 3
+    },
+    "test_blank_image_accuracy": {
+      "mean": 0.10000000149011612,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "test_visual_dependency_delta": {
+      "mean": 0.09000000109275182,
+      "std": 0.0059999972581878825,
+      "ci95": 0.0067896360630175095,
+      "n": 3
+    },
+    "test_blank_image_delta": {
+      "mean": 0.09433333327372868,
+      "std": 0.0025166086836567706,
+      "ci95": 0.0028478108138702053,
+      "n": 3
+    },
+    "parameters": {
+      "mean": 151114.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
   },
   "formal_comparison": true,
   "claim_policy": "multi-seed benchmark result; L1 object-QA only, not open-ended VQA",
   "evaluation_protocol": {
     "tier": "l1_public_images",
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "formal_comparison": true,
     "claim_policy": "multi-seed benchmark result; L1 object-QA only, not open-ended VQA"
   },
   "provenance": {
     "artifact_path": "docs/multimodal-models/metrics/cifar10-qa-seeds42-44.json",
     "created_at": "2026-08-11T05:07:51.755553+00:00",
-    "dataset_fingerprint": "official archive MD5 c58f30108f718f92721af3b95e74349a"
+    "dataset_fingerprint": "official archive MD5 c58f30108f718f92721af3b95e74349a",
+    "original_code_commit": "586ffe5"
   }
 }
