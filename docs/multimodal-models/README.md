@@ -96,7 +96,7 @@ seeds 42/43/44。validation accuracy 为 **20.00% ± 1.28 points**；隔离 test
 在官方 ScienceQA test split 固定前 500 条上，`SmolVLM2-256M-Video-Instruct`
 （commit `067788b187b95ebe7b2e040b3e4299e342e5b8fd`）确定性 zero-shot accuracy 为
 **56.80%**；image/text 分项为 **62.87% / 51.33%**，输出解析率 **99.80%**。
-模型先在 M3 Pro Mac CPU 完成真实加载/单图冒烟，再在单卡 NVIDIA A30 上评测。
+模型先在 Apple Silicon Mac CPU 完成真实加载/单图冒烟，再在单卡 NVIDIA GPU 上评测。
 这是固定子集的单次 checkpoint 结果，不是完整 test leaderboard，也不是多 seed 提升。
 结构化证据见
 [`metrics/scienceqa-smolvlm2-256m-500.json`](metrics/scienceqa-smolvlm2-256m-500.json)。
