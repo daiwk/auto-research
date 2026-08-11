@@ -3,7 +3,6 @@
   "purpose": "engineering smoke; not an official ScienceQA benchmark",
   "date": "2026-08-11",
   "hardware": "NVIDIA A30 24GB",
-  "torch": "2.7.0a0+gitf56b353.aml",
   "cuda": "12.8",
   "model": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
   "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
