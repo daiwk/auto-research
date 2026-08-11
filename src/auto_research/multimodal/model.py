@@ -1,7 +1,13 @@
 from __future__ import annotations
 
 
-def build_micro_vlm(architecture: str, dimensions: int, heads: int = 4):
+def build_micro_vlm(
+    architecture: str,
+    dimensions: int,
+    heads: int = 4,
+    num_questions: int = 3,
+    num_answers: int = 9,
+):
     import torch
 
     if architecture not in {
@@ -16,7 +22,7 @@ def build_micro_vlm(architecture: str, dimensions: int, heads: int = 4):
             super().__init__()
             self.architecture = architecture
             self.patch = torch.nn.Conv2d(3, dimensions, kernel_size=8, stride=8)
-            self.question = torch.nn.Embedding(3, dimensions)
+            self.question = torch.nn.Embedding(num_questions, dimensions)
             if architecture == "micro_vlm_mlp":
                 self.connector = torch.nn.Sequential(
                     torch.nn.Linear(dimensions, dimensions * 2),
@@ -31,7 +37,7 @@ def build_micro_vlm(architecture: str, dimensions: int, heads: int = 4):
                 torch.nn.LayerNorm(dimensions * 2),
                 torch.nn.Linear(dimensions * 2, dimensions),
                 torch.nn.GELU(),
-                torch.nn.Linear(dimensions, 9),
+                torch.nn.Linear(dimensions, num_answers),
             )
 
         def forward(self, images, questions):

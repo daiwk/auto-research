@@ -6,6 +6,7 @@ shift
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PROFILE="${DEMO_PROFILE:-quick}"
 TRACK="${DEMO_TRACK:-recommendation}"
+MULTIMODAL_DATASET="${DEMO_MULTIMODAL_DATASET:-visual-shapes}"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 VENV_DIR="${DEMO_VENV:-$ROOT_DIR/.venv-demo-$PLATFORM}"
 
@@ -142,14 +143,20 @@ else
   COMMAND=(
     "$VENV_DIR/bin/auto-research" evolve
     --model micro-vlm
-    --dataset visual-shapes
+    --dataset "$MULTIMODAL_DATASET"
     --direction "比较线性、MLP 和 query connector，要求模型真实使用视觉输入"
-    --offline
   )
+  if [[ "$MULTIMODAL_DATASET" == "visual-shapes" ]]; then
+    COMMAND+=(--offline)
+  elif [[ "$MULTIMODAL_DATASET" != "cifar10-qa" && "$MULTIMODAL_DATASET" != "fashion-mnist-qa" ]]; then
+    echo "DEMO_MULTIMODAL_DATASET must be visual-shapes, fashion-mnist-qa or cifar10-qa" >&2
+    exit 2
+  fi
   if [[ "$PROFILE" == "quick" ]]; then
     COMMAND+=(
       --generations 2 --population 3 --steps 60 --papers 3 --seeds 42
       --llm-dimensions 96 --llm-layers 2 --llm-batch-size 16
+      --maximum-examples 512
     )
   else
     COMMAND+=(
@@ -161,7 +168,7 @@ fi
 
 echo "Starting $TRACK demo ($PROFILE) on $PLATFORM..."
 if [[ "$TRACK" == "multimodal" ]]; then
-  echo "Plan: local image-question baseline plus connector evolution with shuffled/blank-image controls."
+  echo "Plan: $MULTIMODAL_DATASET image-question baseline plus connector evolution with shuffled/blank-image controls."
 elif [[ "$PROFILE" == "quick" ]]; then
   echo "Plan: 3 evolution rounds x 2 candidates; the baseline is a separate experiment."
 else

@@ -108,7 +108,10 @@ def _render_multimodal_report(result: EvolutionResult) -> str:
     baseline = result.trials[0]
     lines = [
         "# micro-VLM 多模态自动进化报告", "", "## 结论", "",
-        f"- Benchmark：`{result.config.dataset}`；真实渲染图像，完全离线。",
+        f"- Benchmark：`{result.config.dataset}`；评测层级 "
+        f"`{result.dataset_summary.get('evaluation_tier', 'unknown')}`。",
+        f"- 数据来源：{result.dataset_summary.get('source', 'unknown')}；"
+        f"许可说明：{result.dataset_summary.get('license', 'unknown')}。",
         f"- 调研方向：{result.config.direction}",
         f"- 数据：train `{result.dataset_summary.get('train_examples')}` / "
         f"validation `{result.dataset_summary.get('validation_examples')}` / "
@@ -151,13 +154,17 @@ def _render_multimodal_report(result: EvolutionResult) -> str:
             f"{values.get('visual_dependency_delta', 0):.4f} | "
             f"{trial.fitness:.4f} | {trial.training.get('parameters', 0)} |"
         )
+    is_synthetic = result.dataset_summary.get("evaluation_tier") == "l0_synthetic"
     lines += [
         "", "## 协议与边界", "",
-        "- L0 benchmark 使用程序生成但真实渲染的像素图像，不是公开自然图像数据集。",
-        "- 问题分别询问颜色、形状和方位；答案必须读取图像。",
+        (
+            "- L0 使用程序生成但真实渲染的像素图像，不是公开自然图像数据集。"
+            if is_synthetic else
+            f"- L1 使用 `{result.config.dataset}` 官方公开图像；任务是缩小的 object QA，不等同于开放式 VQA。"
+        ),
         "- 打乱图和空白图是强制对照，用来识别只依赖问题文本的捷径。",
         "- validation 选择冠军，test 仅在全部代际结束后运行；负结果完整保留。",
-        "- 本阶段验证多模态训练与 evolve 主链，不宣称通用视觉语言能力。", "",
+        "- L0/L1 结果都不宣称通用视觉语言能力；L2/L3 仍需标准 VLM checkpoint 与 benchmark。", "",
     ]
     return "\n".join(lines)
 

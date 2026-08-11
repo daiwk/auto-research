@@ -28,7 +28,7 @@ def test_shared_demo_covers_both_tracks_and_all_runtime_controls():
         "linux-cpu", "linux-gpu", "micro-llm", "micro-vlm", "rankmixer",
         "--device", "--cpu-threads", "DEMO_PROFILE", "DEMO_TRACK",
         "TORCH_INDEX_URL", "runtime_summary",
-        "multimodal", "visual-shapes",
+        "multimodal", "visual-shapes", "fashion-mnist-qa", "cifar10-qa",
     ):
         assert required in text
     assert "--generations 1" not in text

@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import numpy as np
+import pickle
 
 from auto_research.evolution import EvolutionConfig, ModelEvolutionEngine
 from auto_research.evolution.planner import allowed_architectures
 from auto_research.evolution.providers import get_provider
-from auto_research.multimodal.data import load_visual_shapes
+from auto_research.multimodal.data import load_cifar10_qa, load_visual_shapes
 from auto_research.multimodal.model import build_micro_vlm
 
 
@@ -26,6 +27,37 @@ def test_all_micro_vlm_connectors_execute():
         model = build_micro_vlm(architecture, 32)
         assert model(images, questions).shape == (2, 9)
         assert model.architecture_stats()["visual_tokens"] == 16
+
+
+def test_cifar10_qa_uses_cached_official_batches_offline(tmp_path):
+    extracted = tmp_path / "cifar10" / "cifar-10-batches-py"
+    extracted.mkdir(parents=True)
+    rng = np.random.default_rng(7)
+
+    def write_batch(name, count):
+        labels = np.arange(count) % 10
+        pixels = rng.integers(0, 256, size=(count, 3072), dtype=np.uint8)
+        with (extracted / name).open("wb") as handle:
+            pickle.dump({b"data": pixels, b"labels": labels.tolist()}, handle)
+
+    for index in range(1, 6):
+        write_batch(f"data_batch_{index}", 20)
+    write_batch("test_batch", 20)
+    data = load_cifar10_qa(tmp_path, allow_network=False, maximum_examples=40)
+    assert data.train.images.shape == (40, 3, 32, 32)
+    assert len(data.validation.answers) == 20
+    assert len(data.test.answers) == 20
+    assert set(data.train.answers) == set(range(10))
+    assert data.evaluation_tier == "l1_public_images"
+
+
+def test_cifar10_offline_mode_requires_an_existing_cache(tmp_path):
+    try:
+        load_cifar10_qa(tmp_path, allow_network=False)
+    except FileNotFoundError as error:
+        assert "rerun once without --offline" in str(error)
+    else:
+        raise AssertionError("an absent offline CIFAR-10 cache must fail")
 
 
 def test_micro_vlm_provider_runs_complete_evolution(tmp_path):
