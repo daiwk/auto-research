@@ -28,15 +28,15 @@ class LEARNConfig:
 def content_embeddings(titles, root: Path, config: LEARNConfig):
     try:
         import torch
-        from transformers import AutoModel, AutoTokenizer
+        from transformers import BertModel, BertTokenizer
     except ImportError as exc:
         raise RuntimeError("LEARN requires `pip install -e '.[plum]'`.") from exc
     cache = root / "learn" / "bert-tiny-content.npy"
     if cache.exists():
         values = np.load(cache)
         if values.shape[0] == len(titles): return values
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
-    model = AutoModel.from_pretrained(config.model_name)
+    tokenizer = BertTokenizer.from_pretrained(config.model_name)
+    model = BertModel.from_pretrained(config.model_name)
     device = device_for(torch)
     model.to(device).eval(); rows = []
     with torch.inference_mode():

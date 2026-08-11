@@ -165,7 +165,16 @@ def build_parser() -> argparse.ArgumentParser:
     evolve.add_argument("--evaluation-users", type=int, default=1000, help="fixed validation/test cohort; 0 means all users")
     evolve.add_argument("--maximum-train-tokens", type=int, help="optional LLM smoke-test token limit")
     evolve.add_argument("--maximum-eval-tokens", type=int, default=100000, help="LLM validation/test token limit")
-    evolve.add_argument("--maximum-examples", type=int, default=512, help="post-training example limit")
+    evolve.add_argument("--maximum-examples", type=int, default=512, help="example limit for post-training or checkpoint evaluation")
+    evolve.add_argument(
+        "--checkpoint-model-id",
+        default="HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+        help="Hugging Face model id for vlm-checkpoint evolution",
+    )
+    evolve.add_argument("--checkpoint-path", type=Path, help="local checkpoint snapshot")
+    evolve.add_argument("--checkpoint-revision", default="main")
+    evolve.add_argument("--checkpoint-annotations", type=Path)
+    evolve.add_argument("--checkpoint-image-root", type=Path)
     evolve.add_argument("--agent-episodes", type=int, default=120, help="agent benchmark episodes")
     evolve.add_argument("--vocab-size", type=int, default=4096, help="local BPE vocabulary for micro-llm")
     evolve.add_argument("--llm-dimensions", type=int, default=384, help="initial micro-llm hidden width")
@@ -474,6 +483,11 @@ def main(argv: list[str] | None = None) -> int:
                     shlex.split(args.candidate_generator_command)
                 ) if args.candidate_generator_command else (),
                 candidate_timeout_seconds=args.candidate_timeout_seconds,
+                checkpoint_model_id=args.checkpoint_model_id,
+                checkpoint_path=args.checkpoint_path,
+                checkpoint_revision=args.checkpoint_revision,
+                checkpoint_annotations=args.checkpoint_annotations,
+                checkpoint_image_root=args.checkpoint_image_root,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
@@ -492,6 +506,13 @@ def main(argv: list[str] | None = None) -> int:
                     f"Validation accuracy: {champion.validation['accuracy']:.4f}; "
                     f"visual-dependency delta: "
                     f"{champion.validation['visual_dependency_delta']:.4f}"
+                )
+            elif args.model == "vlm-checkpoint":
+                print(
+                    f"Validation accuracy: {champion.validation['accuracy']:.4f}; "
+                    f"parse rate: {champion.validation['parse_rate']:.4f}; "
+                    f"latency/example: "
+                    f"{champion.validation['latency_seconds_per_example']:.4f}s"
                 )
             elif args.model == "post-training":
                 print(

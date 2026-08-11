@@ -111,7 +111,18 @@ def quantize_weight_only(intent_lm: IntentLM):
                 self.register_buffer("bias", linear.bias.detach().float())
 
         def forward(self, values):
-            return torch.nn.functional.linear(values, self.qweight.float() * self.scale, self.bias)
+            # CUDA-loaded checkpoints may remain bf16 after moving to CPU for
+            # weight-only inference. Match reconstructed weights to activation
+            # dtype/device instead of relying on an implicit fp32 promotion.
+            weight = (self.qweight.float() * self.scale).to(
+                device=values.device, dtype=values.dtype
+            )
+            bias = (
+                None if self.bias is None else self.bias.to(
+                    device=values.device, dtype=values.dtype
+                )
+            )
+            return torch.nn.functional.linear(values, weight, bias)
 
     def replace(module):
         for name, child in list(module.named_children()):

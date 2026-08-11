@@ -105,6 +105,9 @@ def build_semantic_ids(
     cardinalities: tuple[int, ...] = (512, 256, 128),
     seed: int = 42,
     checkpoint_dir: Path | None = None,
+    pretrain_steps: int = 100,
+    quantization_steps: int = 300,
+    batch_size: int = 256,
 ) -> SemanticIDIndex:
     """Train SID-v2-style RQ-VAE IDs with content and behavioral alignment.
 
@@ -127,6 +130,9 @@ def build_semantic_ids(
         cooccurrences,
         cardinalities,
         seed,
+        pretrain_steps=pretrain_steps,
+        quantization_steps=quantization_steps,
+        batch_size=batch_size,
         checkpoint_dir=checkpoint_dir,
     )
     return SemanticIDIndex(

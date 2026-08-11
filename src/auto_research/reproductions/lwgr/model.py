@@ -92,7 +92,11 @@ def build_gr(item_count: int, code_sizes: tuple[int, ...], config: LWGRConfig):
                 previous.append(
                     self.code_embeddings[level - 1](codes[:, level - 1]).unsqueeze(1)
                 )
-            hidden, _ = self.decoder(torch.cat(previous, 1), context.unsqueeze(0))
+            # Multi-head attention can return a non-contiguous context. CUDA
+            # cuDNN GRU requires the hidden state to be contiguous.
+            hidden, _ = self.decoder(
+                torch.cat(previous, 1), context.unsqueeze(0).contiguous()
+            )
             return [head(hidden[:, level]) for level, head in enumerate(self.heads)]
 
         def forward(self, histories, codes, world=None):
@@ -154,12 +158,14 @@ def build_lwgr(gr, llm, title_embeddings, config: LWGRConfig):
             text = self.title_embeddings[histories[:, -6:]]
             self.llm.eval()
             output = self.llm(
-                inputs_embeds=torch.cat((instructions, text), 1),
+                inputs_embeds=torch.cat((instructions, text), 1).to(text.dtype),
                 output_hidden_states=True,
                 use_cache=False,
                 return_dict=True,
             )
-            return output.hidden_states[-1], probability
+            # The frozen checkpoint may run in BF16, while the recommender and
+            # its world-projection remain FP32.
+            return output.hidden_states[-1].float(), probability
 
         def forward(self, histories, codes):
             world, probability = self.world_knowledge(histories)

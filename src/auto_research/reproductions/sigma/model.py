@@ -144,7 +144,10 @@ def build_sigma(grounder, data: SigmaData, semantic_vectors):
                 **encoded, output_hidden_states=True, use_cache=False, return_dict=True
             )
             weights = encoded["attention_mask"].unsqueeze(-1)
-            return (output.hidden_states[-1] * weights).sum(1) / weights.sum(1).clamp_min(1)
+            return (
+                (output.hidden_states[-1] * weights).sum(1)
+                / weights.sum(1).clamp_min(1)
+            ).float()
 
         def query_vector(self, hidden_state, prefixes):
             return torch.nn.functional.normalize(
@@ -257,7 +260,10 @@ def encode_items(grounder, titles, items, torch, inference):
         **encoded, output_hidden_states=True, use_cache=False, return_dict=True
     )
     weights = encoded["attention_mask"].unsqueeze(-1)
-    pooled = (output.hidden_states[-1] * weights).sum(1) / weights.sum(1).clamp_min(1)
+    pooled = (
+        (output.hidden_states[-1] * weights).sum(1)
+        / weights.sum(1).clamp_min(1)
+    ).float()
     return grounder.projection(pooled)
 
 

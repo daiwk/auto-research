@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import os
 from pathlib import Path
 
 import numpy as np
@@ -12,10 +13,25 @@ from .model import bounded_profile, train_evaluator, train_grpo, train_sft
 
 def reproduce_recap(dataset_dir: Path, seed: int = 42) -> dict:
     torch = require_torch(); data = load_industrial_data(dataset_dir)
-    sft, (rows, targets), sft_stats = train_sft(data, seed, torch)
+    smoke = os.environ.get("AUTO_RESEARCH_BUDGET") == "smoke"
+    sft, (rows, targets), sft_stats = train_sft(
+        data, seed, torch, steps=1 if smoke else 80
+    )
     reference = copy.deepcopy(sft).eval(); categories = int(data.domains.max()) + 1
-    evaluator = train_evaluator(rows, targets, categories, seed, torch)
-    grpo_stats = train_grpo(sft, reference, evaluator, rows, targets, categories, seed, torch)
+    evaluator = train_evaluator(
+        rows, targets, categories, seed, torch, steps=1 if smoke else 60
+    )
+    grpo_stats = train_grpo(
+        sft,
+        reference,
+        evaluator,
+        rows,
+        targets,
+        categories,
+        seed,
+        torch,
+        steps=1 if smoke else 45,
+    )
 
     def profile_score(policy, history):
         profile = bounded_profile(policy, data, history, torch)

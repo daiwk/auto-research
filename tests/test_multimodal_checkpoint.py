@@ -14,6 +14,8 @@ from auto_research.multimodal.checkpoint import (
     resolve_scienceqa_image,
     scienceqa_prompt,
 )
+from auto_research.evolution.models import EvolutionConfig, Genome
+from auto_research.multimodal.checkpoint_evolution import CheckpointVLMEvaluator
 
 
 class _FakeProcessor:
@@ -29,6 +31,9 @@ class _FakeProcessor:
 
 
 class _FakeModel:
+    def parameters(self):
+        return iter((torch.nn.Parameter(torch.zeros(3)),))
+
     def generate(self, input_ids, **kwargs):
         return torch.cat((input_ids, torch.tensor([[3, 4]])), dim=1)
 
@@ -110,6 +115,47 @@ def test_multimodal_predict_cli_contract():
     assert args.max_new_tokens == 16
     assert args.checkpoint_path == Path("checkpoint")
     assert args.device == "cpu"
+
+
+def test_checkpoint_evolve_cli_and_required_paths():
+    args = build_parser().parse_args([
+        "evolve", "--model", "vlm-checkpoint", "--dataset", "scienceqa",
+        "--direction", "compare prompts", "--checkpoint-annotations", "scienceqa",
+        "--checkpoint-image-root", "images", "--checkpoint-path", "checkpoint",
+    ])
+    assert args.checkpoint_model_id == "HuggingFaceTB/SmolVLM2-256M-Video-Instruct"
+    assert args.checkpoint_annotations == Path("scienceqa")
+    import pytest
+    with pytest.raises(ValueError, match="checkpoint-annotations"):
+        EvolutionConfig(
+            model="vlm-checkpoint", dataset="scienceqa", direction="test"
+        ).validate()
+
+
+def test_checkpoint_evaluator_uses_validation_then_test(tmp_path, monkeypatch):
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
+    annotations = tmp_path / "scienceqa"
+    annotations.mkdir()
+    (annotations / "problems.json").write_text(json.dumps({
+        "v": {"question": "pick blue", "choices": ["red", "blue"], "answer": 1},
+        "t": {"question": "pick blue", "choices": ["red", "blue"], "answer": 1},
+    }))
+    (annotations / "pid_splits.json").write_text(json.dumps({
+        "val": ["v"], "test": ["t"],
+    }))
+    evaluator = CheckpointVLMEvaluator(
+        "scienceqa", annotations, tmp_path, "example/model", None,
+        "immutable-sha", (42,), 1, True,
+        processor=_FakeProcessor(), model=_FakeModel(), torch_module=torch,
+    )
+    trial = evaluator.evaluate(
+        "g0-t0", 0, None, Genome(architecture="checkpoint_vlm"), (), "baseline"
+    )
+    final = evaluator.test(Genome(architecture="checkpoint_vlm"))
+    assert trial.validation["accuracy"] == 1.0
+    assert final["accuracy"] == 1.0
+    assert trial.training["weights_updated"] is False
+    assert evaluator.summary()["selection_split"] == "val"
 
 
 def test_resume_rejects_a_different_checkpoint(tmp_path, monkeypatch):

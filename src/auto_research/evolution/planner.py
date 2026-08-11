@@ -8,6 +8,13 @@ from .models import Genome, PaperInspiration
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
+    if model == "vlm-checkpoint":
+        return [
+            "checkpoint_vlm:direct",
+            "checkpoint_vlm:context-first",
+            "checkpoint_vlm:elimination",
+            "checkpoint_vlm:no-hint",
+        ]
     if model == "micro-vlm":
         values = [
             "micro_vlm_linear", "micro_vlm_mlp", "micro_vlm_query",
@@ -219,6 +226,8 @@ def propose(parent: Genome, generation: int, index: int, architectures: list[str
         return _propose_llm(parent, generation, index, architectures, rng)
     if model == "micro-vlm":
         return _propose_multimodal(parent, generation, index, architectures, rng)
+    if model == "vlm-checkpoint":
+        return _propose_checkpoint_vlm(parent, generation, index, architectures, rng)
     architecture = architectures[(index + generation - 1) % len(architectures)] if generation == 1 else rng.choice(architectures)
     genome = replace(parent, architecture=architecture)
     changes = [f"结构假设：{architecture}"]
@@ -304,6 +313,29 @@ def _propose_multimodal(parent, generation, index, architectures, rng):
     value = rng.choice(values)
     return replace(parent, **{name: value}), (
         f"围绕冠军 connector 调整 {name}={value}；继续保留打乱图和空白图对照"
+    )
+
+
+def _propose_checkpoint_vlm(parent, generation, index, architectures, rng):
+    if generation == 1:
+        candidate = architectures[index % len(architectures)].split(":", 1)[1]
+        if candidate == "no-hint":
+            return replace(parent, checkpoint_use_hint=False), (
+                "真实 checkpoint 输入消融：移除 ScienceQA hint；其余推理参数保持基线"
+            )
+        return replace(parent, checkpoint_prompt_style=candidate), (
+            f"真实 checkpoint 提示模板消融：{candidate}；保持图像和解码预算不变"
+        )
+    knobs = (
+        ("checkpoint_max_new_tokens", [4, 8, 16]),
+        ("checkpoint_image_size", [0, 384, 512]),
+        ("checkpoint_use_hint", [True, False]),
+        ("checkpoint_prompt_style", ["direct", "context-first", "elimination"]),
+    )
+    name, values = knobs[(generation + index) % len(knobs)]
+    value = rng.choice(values)
+    return replace(parent, **{name: value}), (
+        f"围绕冠军 checkpoint 推理配方调整 {name}={value}；不修改模型权重"
     )
 
 

@@ -58,6 +58,7 @@ def run_ablation(
     torch, AutoConfig, AutoModelForCausalLM, AutoTokenizer = require_backend()
     _seed_everything(seed, torch)
     resume_checkpoint = _resume_checkpoint(config.resume_dir, name)
+    embedding_initialization = "checkpoint-resume"
     if resume_checkpoint is not None:
         tokenizer = AutoTokenizer.from_pretrained(resume_checkpoint)
         model = AutoModelForCausalLM.from_pretrained(resume_checkpoint)
@@ -73,7 +74,9 @@ def run_ablation(
         else:
             model_config = AutoConfig.from_pretrained(BASE_MODEL)
             model = AutoModelForCausalLM.from_config(model_config)
-        model.resize_token_embeddings(len(tokenizer), mean_resizing=llm_initialized)
+        embedding_initialization = _resize_token_embeddings(
+            model, len(tokenizer), mean_resizing=llm_initialized
+        )
     device = _device(torch)
     model.to(device)
     variant_dir = output_dir / name.lower()
@@ -123,6 +126,7 @@ def run_ablation(
     result = {
         "pretrained_llm": llm_initialized,
         "cpt": use_cpt,
+        "embedding_initialization": embedding_initialization,
         "cpt_loss": cpt_metrics,
         "sft_loss": sft_metrics,
         "training_seconds": (
@@ -139,6 +143,24 @@ def run_ablation(
     elif device.type == "mps":
         torch.mps.empty_cache()
     return result
+
+
+def _resize_token_embeddings(model, size: int, *, mean_resizing: bool) -> str:
+    """Use covariance initialization when supported, with a narrow fallback.
+
+    Some CUDA server PyTorch builds intentionally omit CPU LAPACK. Recent
+    Transformers uses a CPU Cholesky decomposition for mean/covariance token
+    initialization, so only that explicit platform error falls back to the
+    standard initializer. Other runtime and numerical failures still surface.
+    """
+    try:
+        model.resize_token_embeddings(size, mean_resizing=mean_resizing)
+        return "mean-covariance" if mean_resizing else "standard"
+    except RuntimeError as exc:
+        if not mean_resizing or "LAPACK" not in str(exc):
+            raise
+        model.resize_token_embeddings(size, mean_resizing=False)
+        return "standard-fallback-no-lapack"
 
 
 def _resume_checkpoint(resume_dir: Path | None, name: str) -> Path | None:

@@ -16,6 +16,7 @@ from ..llm_rec_data import TextCTRData, binary_auc
 @dataclass(frozen=True)
 class BAHEConfig:
     model_name: str = "prajjwal1/bert-tiny"
+    atomic_dimensions: int = 128
     history_items: int = 12
     maximum_length: int = 128
     batch_size: int = 32
@@ -29,23 +30,23 @@ def require_backend():
     try:
         import torch
         from torch import nn
-        from transformers import AutoModel, AutoTokenizer
+        from transformers import BertModel, BertTokenizer
     except ImportError as exc:
         raise RuntimeError("BAHE requires `pip install -e '.[plum]'`.") from exc
-    return torch, nn, AutoModel, AutoTokenizer
+    return torch, nn, BertModel, BertTokenizer
 
 
 def atomic_behavior_embeddings(
     data: TextCTRData, root: Path, config: BAHEConfig
 ) -> np.ndarray:
-    torch, _, AutoModel, AutoTokenizer = require_backend()
+    torch, _, BertModel, BertTokenizer = require_backend()
     cache = root / "bahe" / "bert-tiny-atomic-behaviors.npy"
     if cache.exists():
         values = np.load(cache)
-        if values.shape[0] == len(data.titles):
+        if values.shape == (len(data.titles), config.atomic_dimensions):
             return values
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
-    backbone = AutoModel.from_pretrained(config.model_name)
+    tokenizer = BertTokenizer.from_pretrained(config.model_name)
+    backbone = BertModel.from_pretrained(config.model_name)
     device = device_for(torch)
     backbone.to(device).eval()
     outputs = []
@@ -57,7 +58,9 @@ def atomic_behavior_embeddings(
             ).to(device)
             hidden = backbone.embeddings(input_ids=encoded["input_ids"])
             mask = (1.0 - encoded["attention_mask"][:, None, None, :].to(hidden.dtype)) * -10000.0
-            hidden = backbone.encoder.layer[0](hidden, attention_mask=mask)[0]
+            hidden = _layer_hidden(
+                backbone.encoder.layer[0](hidden, attention_mask=mask)
+            )
             weights = encoded["attention_mask"].unsqueeze(-1)
             pooled = (hidden * weights).sum(1) / weights.sum(1).clamp_min(1)
             outputs.append(pooled.cpu().numpy())
@@ -68,8 +71,8 @@ def atomic_behavior_embeddings(
 
 
 def build_bahe(atomic: np.ndarray, config: BAHEConfig):
-    torch, nn, AutoModel, _ = require_backend()
-    backbone = AutoModel.from_pretrained(config.model_name)
+    torch, nn, BertModel, _ = require_backend()
+    backbone = BertModel.from_pretrained(config.model_name)
     upper = copy.deepcopy(backbone.encoder.layer[-1])
 
     class BAHEModel(nn.Module):
@@ -97,16 +100,21 @@ def build_bahe(atomic: np.ndarray, config: BAHEConfig):
                 dim=1,
             )
             attention = (1.0 - valid[:, None, None, :].to(hidden.dtype)) * -10000.0
-            hidden = self.upper(hidden, attention_mask=attention)[0]
+            hidden = _layer_hidden(self.upper(hidden, attention_mask=attention))
             return self.head(hidden[:, 0]).squeeze(-1)
 
     return BAHEModel()
 
 
+def _layer_hidden(output):
+    """Normalize BertLayer outputs across Transformers 4/5."""
+    return output[0] if isinstance(output, tuple) else output
+
+
 def build_full_text(config: BAHEConfig):
-    torch, nn, AutoModel, AutoTokenizer = require_backend()
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
-    backbone = AutoModel.from_pretrained(config.model_name)
+    torch, nn, BertModel, BertTokenizer = require_backend()
+    tokenizer = BertTokenizer.from_pretrained(config.model_name)
+    backbone = BertModel.from_pretrained(config.model_name)
     for parameter in backbone.parameters():
         parameter.requires_grad = False
     for parameter in backbone.encoder.layer[-1].parameters():

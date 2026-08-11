@@ -1,0 +1,100 @@
+{
+  "schema_version": 2,
+  "purpose": "engineering smoke; not an official ScienceQA benchmark",
+  "date": "2026-08-11",
+  "hardware": "NVIDIA A30 24GB",
+  "torch": "2.7.0a0+gitf56b353.aml",
+  "cuda": "12.8",
+  "model": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+  "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+  "parameters": 256484928,
+  "weights_updated": false,
+  "seed": 42,
+  "examples_per_split": 2,
+  "data_note": "Two genuine ScienceQA image-text examples arranged as a temporary validation/test engineering fixture; not the official benchmark split.",
+  "champion_id": "g0-t0",
+  "trials": [
+    {
+      "trial_id": "g0-t0",
+      "generation": 0,
+      "prompt_style": "direct",
+      "use_hint": true,
+      "image_size": "native",
+      "max_new_tokens": 16,
+      "accuracy": 0.5,
+      "parse_rate": 1.0,
+      "latency_seconds_per_example": 0.5385349411517382,
+      "peak_gpu_memory_mb": 852.56982421875
+    },
+    {
+      "trial_id": "g1-t1",
+      "generation": 1,
+      "prompt_style": "context-first",
+      "use_hint": true,
+      "image_size": "native",
+      "max_new_tokens": 16,
+      "accuracy": 0.5,
+      "parse_rate": 1.0,
+      "latency_seconds_per_example": 0.2657866347581148,
+      "peak_gpu_memory_mb": 853.50830078125
+    },
+    {
+      "trial_id": "g1-t2",
+      "generation": 1,
+      "prompt_style": "elimination",
+      "use_hint": true,
+      "image_size": "native",
+      "max_new_tokens": 16,
+      "accuracy": 0.5,
+      "parse_rate": 1.0,
+      "latency_seconds_per_example": 0.3302196003496647,
+      "peak_gpu_memory_mb": 853.50830078125
+    },
+    {
+      "trial_id": "g2-t1",
+      "generation": 2,
+      "prompt_style": "direct",
+      "use_hint": true,
+      "image_size": 384,
+      "max_new_tokens": 16,
+      "accuracy": 0.5,
+      "parse_rate": 1.0,
+      "latency_seconds_per_example": 0.265604592859745,
+      "peak_gpu_memory_mb": 853.06982421875
+    },
+    {
+      "trial_id": "g2-t2",
+      "generation": 2,
+      "prompt_style": "direct",
+      "use_hint": true,
+      "image_size": "native",
+      "max_new_tokens": 4,
+      "accuracy": 0.5,
+      "parse_rate": 1.0,
+      "latency_seconds_per_example": 0.2658186387270689,
+      "peak_gpu_memory_mb": 853.06982421875
+    }
+  ],
+  "isolated_test": {
+    "baseline_accuracy": 0.5,
+    "champion_accuracy": 0.5,
+    "parse_rate": 1.0,
+    "latency_seconds_per_example": 0.3255016915500164,
+    "peak_gpu_memory_mb": 853.06982421875
+  },
+  "manifest_ref": "experiments:a30-vlm-checkpoint-smoke-20260811",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/a30-vlm-checkpoint-smoke-20260811.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

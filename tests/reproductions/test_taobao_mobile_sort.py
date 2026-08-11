@@ -8,6 +8,21 @@ def test_recgpt_mobile_intent_drift_is_zero_without_change():
     assert intent_drift((0, 0), (1, 1), 2, item_genres) > 0.4
 
 
+def test_recgpt_mobile_weight_only_matches_bfloat16_activations():
+    import torch
+    from auto_research.reproductions.recgpt_mobile.model import (
+        IntentLM, quantize_weight_only,
+    )
+
+    model = torch.nn.Sequential(torch.nn.Linear(4, 3)).to(torch.bfloat16)
+    quantized = quantize_weight_only(
+        IntentLM(model, object(), torch.device("cpu"))
+    )
+    output = quantized.model(torch.ones(2, 4, dtype=torch.bfloat16))
+    assert output.shape == (2, 3)
+    assert output.dtype == torch.bfloat16
+
+
 def test_sort_ordered_targets_are_monotone():
     import torch
     from auto_research.reproductions.sort_gen.model import ordered_targets

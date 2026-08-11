@@ -10,6 +10,8 @@ from auto_research.reproductions.plum.model import (
     ranking_from_beams,
     residual_kmeans,
 )
+from auto_research.reproductions.plum.llm import _resize_token_embeddings
+from auto_research.reproductions.plum.experiment import _training_config
 
 
 def test_residual_kmeans_builds_multiresolution_codes():
@@ -68,3 +70,29 @@ def test_cpt_is_exactly_half_behavior_half_metadata_and_sft_masks_by_contract():
     assert sft
     assert all(row.prompt.endswith("next movie SID = ") for row in sft)
     assert all(row.completion.endswith(SID_END) for row in sft)
+
+
+def test_embedding_resize_only_falls_back_for_missing_lapack():
+    class Model:
+        calls = []
+
+        def resize_token_embeddings(self, size, *, mean_resizing):
+            self.calls.append((size, mean_resizing))
+            if mean_resizing:
+                raise RuntimeError("CPU tensor requires compiling PyTorch with LAPACK")
+
+    model = Model()
+    assert _resize_token_embeddings(model, 123, mean_resizing=True) == (
+        "standard-fallback-no-lapack"
+    )
+    assert model.calls == [(123, True), (123, False)]
+
+
+def test_plum_smoke_budget_is_small_but_explicit_overrides_win(monkeypatch):
+    monkeypatch.setenv("AUTO_RESEARCH_BUDGET", "smoke")
+    config = _training_config()
+    assert (config.cpt_steps, config.sft_steps, config.batch_size) == (1, 1, 1)
+    assert (config.evaluation_users, config.beam_size) == (4, 2)
+
+    monkeypatch.setenv("AUTO_RESEARCH_PLUM_CPT_STEPS", "7")
+    assert _training_config().cpt_steps == 7
