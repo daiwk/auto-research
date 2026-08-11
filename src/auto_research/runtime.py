@@ -4,6 +4,8 @@ import os
 import platform
 import json
 import inspect
+from contextlib import contextmanager
+from functools import wraps
 from pathlib import Path
 import time
 from typing import Any
@@ -11,6 +13,34 @@ from typing import Any
 
 DEVICE_ENV = "AUTO_RESEARCH_DEVICE"
 CPU_THREADS_ENV = "AUTO_RESEARCH_CPU_THREADS"
+
+
+@contextmanager
+def exclusive_file_lock(target: Path):
+    """Reject concurrent writers to one resumable/atomic output artifact."""
+    import fcntl
+
+    target = Path(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = target.with_suffix(target.suffix + ".lock")
+    with lock_path.open("a+", encoding="utf-8") as handle:
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise RuntimeError(f"output is already being written: {target}") from error
+        try:
+            yield
+        finally:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
+def lock_config_output(function):
+    """Decorate a function whose first config argument has an ``output`` path."""
+    @wraps(function)
+    def wrapped(config, *args, **kwargs):
+        with exclusive_file_lock(config.output):
+            return function(config, *args, **kwargs)
+    return wrapped
 
 
 def configure_runtime(device: str | None = None, cpu_threads: int | None = None) -> None:
@@ -82,14 +112,16 @@ def device_for(torch: Any, requested: str | None = None):
 
 
 def runtime_summary(torch: Any | None = None) -> dict[str, Any]:
+    """Return reproducibility metadata without host- or image-specific details."""
     result: dict[str, Any] = {
         "requested_device": os.environ.get(DEVICE_ENV, "auto"),
         "cpu_threads": int(os.environ[CPU_THREADS_ENV]) if os.environ.get(CPU_THREADS_ENV) else None,
-        "platform": platform.platform(),
+        "platform": f"{platform.system()} {platform.machine()}".strip(),
     }
     if torch is not None:
         device = device_for(torch)
-        result.update({"resolved_device": str(device), "torch_version": torch.__version__})
+        torch_version = str(torch.__version__).split("+", 1)[0]
+        result.update({"resolved_device": str(device), "torch_version": torch_version})
         if device.type == "cuda":
             result["accelerator"] = torch.cuda.get_device_name(device)
             result["cuda_version"] = torch.version.cuda

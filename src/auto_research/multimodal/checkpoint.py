@@ -7,9 +7,10 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
+import time
 from typing import Any, Iterable
 
-from ..runtime import device_for, runtime_summary
+from ..runtime import device_for, lock_config_output, runtime_summary
 from .benchmarks import _read_payload, _records, _scienceqa_problems
 
 
@@ -33,6 +34,7 @@ class CheckpointPredictionConfig:
     prompt_style: str = "direct"
     use_hint: bool = True
     image_size: int = 0
+    batch_size: int = 1
 
 
 @dataclass(frozen=True)
@@ -43,6 +45,7 @@ class PredictionExample:
     choices: tuple[str, ...] = ()
 
 
+@lock_config_output
 def generate_checkpoint_predictions(
     config: CheckpointPredictionConfig,
     *,
@@ -63,6 +66,8 @@ def generate_checkpoint_predictions(
         raise ValueError("max_new_tokens must be positive")
     if config.maximum_examples is not None and config.maximum_examples < 1:
         raise ValueError("maximum_examples must be positive")
+    if config.batch_size < 1:
+        raise ValueError("batch_size must be positive")
 
     examples = list(iter_prediction_examples(config))
     if config.maximum_examples is not None:
@@ -88,31 +93,46 @@ def generate_checkpoint_predictions(
     completed = _completed_ids(
         config.output, model_id=config.model_id, model_revision=resolved_revision
     )
+    if device.type == "cuda":
+        torch.cuda.reset_peak_memory_stats(device)
+    inference_started = time.perf_counter()
+    pending = [example for example in examples if example.identifier not in completed]
     written = 0
     with config.output.open("a", encoding="utf-8") as handle:
-        for example in examples:
-            if example.identifier in completed:
-                continue
-            image = _open_image(example.image, config.image_size)
-            raw = _generate_one(
-                processor, model, torch, device, image, example.prompt,
-                max_new_tokens=config.max_new_tokens,
-            )
-            prediction = normalize_prediction(
-                config.benchmark, raw, example.choices
-            )
-            row = {
-                "id": example.identifier,
-                "prediction": prediction,
-                "raw_prediction": raw,
-                "model_id": config.model_id,
-                "model_revision": resolved_revision,
-                "seed": config.seed,
-                "prediction_valid": prediction != "__invalid__",
-            }
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+        for start in range(0, len(pending), config.batch_size):
+            batch = pending[start:start + config.batch_size]
+            images = [_open_image(example.image, config.image_size) for example in batch]
+            if len(batch) > 1 and all(image is not None for image in images):
+                raw_predictions = _generate_many(
+                    processor, model, torch, device, images,
+                    [example.prompt for example in batch],
+                    max_new_tokens=config.max_new_tokens,
+                )
+            else:
+                raw_predictions = [
+                    _generate_one(
+                        processor, model, torch, device, image, example.prompt,
+                        max_new_tokens=config.max_new_tokens,
+                    )
+                    for example, image in zip(batch, images)
+                ]
+            for example, raw in zip(batch, raw_predictions):
+                prediction = normalize_prediction(
+                    config.benchmark, raw, example.choices
+                )
+                row = {
+                    "id": example.identifier,
+                    "prediction": prediction,
+                    "raw_prediction": raw,
+                    "model_id": config.model_id,
+                    "model_revision": resolved_revision,
+                    "seed": config.seed,
+                    "prediction_valid": prediction != "__invalid__",
+                }
+                handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+                written += 1
             handle.flush()
-            written += 1
+    inference_seconds = time.perf_counter() - inference_started
 
     metadata = {
         "schema_version": 1,
@@ -120,18 +140,25 @@ def generate_checkpoint_predictions(
         "split": config.split,
         "model_id": config.model_id,
         "checkpoint_path": (
-            str(config.checkpoint_path.resolve()) if config.checkpoint_path else None
+            "local snapshot (not committed)" if config.checkpoint_path else None
         ),
         "requested_revision": config.revision,
         "resolved_revision": resolved_revision,
         "deterministic_decoding": True,
         "seed": config.seed,
         "max_new_tokens": config.max_new_tokens,
+        "batch_size": config.batch_size,
         "selected_examples": len(examples),
         "new_predictions": written,
-        "prediction_file": str(config.output.resolve()),
-        "annotations": str(config.annotations.resolve()),
-        "image_root": str(config.image_root.resolve()),
+        "inference_seconds": inference_seconds,
+        "seconds_per_new_prediction": inference_seconds / written if written else None,
+        "peak_gpu_memory_mb": (
+            torch.cuda.max_memory_allocated(device) / (1024 * 1024)
+            if device.type == "cuda" else None
+        ),
+        "prediction_file": config.output.name,
+        "annotations": config.annotations.name,
+        "image_root": config.image_root.name,
         "runtime": runtime_summary(torch),
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -307,6 +334,47 @@ def _generate_one(
     return processor.decode(
         generated[0, prompt_tokens:], skip_special_tokens=True
     ).strip()
+
+
+def _generate_many(
+    processor: Any, model: Any, torch: Any, device: Any,
+    images: list[Any], prompts: list[str], *, max_new_tokens: int,
+) -> list[str]:
+    rendered = [
+        processor.apply_chat_template(
+            [{"role": "user", "content": [
+                {"type": "image"}, {"type": "text", "text": prompt},
+            ]}],
+            add_generation_prompt=True,
+            tokenize=False,
+        )
+        for prompt in prompts
+    ]
+    tokenizer = getattr(processor, "tokenizer", None)
+    original_padding_side = getattr(tokenizer, "padding_side", None)
+    if tokenizer is not None:
+        # Decoder-only checkpoints continue after the padded batch width.  With
+        # right padding, shorter prompts generate from PAD instead of their last
+        # real token and can return unrelated fragments despite valid tensors.
+        tokenizer.padding_side = "left"
+    try:
+        inputs = processor(
+            text=rendered, images=[[image] for image in images],
+            padding=True, return_tensors="pt"
+        )
+    finally:
+        if tokenizer is not None and original_padding_side is not None:
+            tokenizer.padding_side = original_padding_side
+    inputs = {key: value.to(device) for key, value in inputs.items()}
+    prompt_width = inputs["input_ids"].shape[-1]
+    with torch.inference_mode():
+        generated = model.generate(
+            **inputs, max_new_tokens=max_new_tokens, do_sample=False
+        )
+    return [
+        processor.decode(row[prompt_width:], skip_special_tokens=True).strip()
+        for row in generated
+    ]
 
 
 def _open_image(path: Path | None, image_size: int = 0):

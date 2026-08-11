@@ -16,15 +16,29 @@ from auto_research.multimodal.checkpoint import (
 )
 from auto_research.evolution.models import EvolutionConfig, Genome
 from auto_research.multimodal.checkpoint_evolution import CheckpointVLMEvaluator
+from auto_research.multimodal.retrieval import (
+    RetrievalPredictionConfig, generate_retrieval_predictions,
+)
+
+
+class _FakeTokenizer:
+    padding_side = "right"
 
 
 class _FakeProcessor:
+    def __init__(self):
+        self.tokenizer = _FakeTokenizer()
+        self.padding_side_during_call = None
+
     def apply_chat_template(self, messages, **kwargs):
         assert messages[0]["role"] == "user"
         return "rendered prompt"
 
     def __call__(self, **kwargs):
-        return {"input_ids": torch.tensor([[1, 2]])}
+        self.padding_side_during_call = self.tokenizer.padding_side
+        text = kwargs.get("text")
+        count = len(text) if isinstance(text, list) else 1
+        return {"input_ids": torch.tensor([[1, 2]]).repeat(count, 1)}
 
     def decode(self, tokens, **kwargs):
         return "Answer: B"
@@ -35,7 +49,32 @@ class _FakeModel:
         return iter((torch.nn.Parameter(torch.zeros(3)),))
 
     def generate(self, input_ids, **kwargs):
-        return torch.cat((input_ids, torch.tensor([[3, 4]])), dim=1)
+        suffix = torch.tensor([[3, 4]]).repeat(input_ids.shape[0], 1)
+        return torch.cat((input_ids, suffix), dim=1)
+
+
+class _FakeRetrievalProcessor:
+    def __call__(self, *, images=None, text=None, **kwargs):
+        if images is not None:
+            features = []
+            for image in images:
+                red, green, _ = image.resize((1, 1)).getpixel((0, 0))
+                features.append([float(red), float(green)])
+            return {"pixel_values": torch.tensor(features)}
+        return {
+            "input_ids": torch.tensor([
+                [1, 0] if "red" in value else [0, 1] for value in text
+            ]),
+            "attention_mask": torch.ones((len(text), 2)),
+        }
+
+
+class _FakeRetrievalModel:
+    def get_image_features(self, pixel_values):
+        return pixel_values
+
+    def get_text_features(self, input_ids, attention_mask=None):
+        return input_ids.float()
 
 
 def test_scienceqa_prompt_and_official_image_layout(tmp_path):
@@ -102,6 +141,33 @@ def test_checkpoint_predictions_are_resumable_and_record_provenance(tmp_path, mo
     metadata = json.loads(prediction_metadata_path(output).read_text())
     assert metadata["resolved_revision"] == "immutable-sha"
     assert metadata["deterministic_decoding"] is True
+
+
+def test_pope_checkpoint_predictions_support_real_batches(tmp_path, monkeypatch):
+    from PIL import Image
+
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
+    Image.new("RGB", (2, 2)).save(tmp_path / "one.png")
+    Image.new("RGB", (2, 2)).save(tmp_path / "two.png")
+    annotations = tmp_path / "pope.jsonl"
+    annotations.write_text(
+        '{"question_id": 1, "image": "one.png", "text": "Is it blue?", "label": "no"}\n'
+        '{"question_id": 2, "image": "two.png", "text": "Is it square?", "label": "yes"}\n'
+    )
+    output = tmp_path / "predictions.jsonl"
+    processor = _FakeProcessor()
+    metadata = generate_checkpoint_predictions(
+        CheckpointPredictionConfig(
+            benchmark="pope", annotations=annotations, image_root=tmp_path,
+            output=output, model_id="example/model", revision="immutable-sha",
+            batch_size=2,
+        ),
+        processor=processor, model=_FakeModel(), torch_module=torch,
+    )
+    assert len(output.read_text().splitlines()) == 2
+    assert metadata["batch_size"] == 2
+    assert processor.padding_side_during_call == "left"
+    assert processor.tokenizer.padding_side == "right"
 
 
 def test_multimodal_predict_cli_contract():
@@ -182,6 +248,32 @@ def test_resume_rejects_a_different_checkpoint(tmp_path, monkeypatch):
         )
 
 
+def test_concurrent_prediction_writer_is_rejected_before_model_execution(tmp_path, monkeypatch):
+    import fcntl
+    import pytest
+
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
+    annotations = tmp_path / "scienceqa"
+    annotations.mkdir()
+    (annotations / "problems.json").write_text(json.dumps({
+        "1": {"question": "pick", "choices": ["x", "y"], "answer": 1},
+    }))
+    (annotations / "pid_splits.json").write_text(json.dumps({"test": ["1"]}))
+    output = tmp_path / "predictions.jsonl"
+    lock_path = output.with_suffix(".jsonl.lock")
+    with lock_path.open("a+") as handle:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        with pytest.raises(RuntimeError, match="already being written"):
+            generate_checkpoint_predictions(
+                CheckpointPredictionConfig(
+                    benchmark="scienceqa", annotations=annotations,
+                    image_root=tmp_path, output=output, model_id="example/model",
+                    revision="immutable-sha",
+                ),
+                processor=_FakeProcessor(), model=_FakeModel(), torch_module=torch,
+            )
+
+
 def test_committed_scienceqa_checkpoint_result_is_auditable():
     path = Path(__file__).parents[1] / (
         "docs/multimodal-models/metrics/scienceqa-smolvlm2-256m-500.json"
@@ -195,3 +287,77 @@ def test_committed_scienceqa_checkpoint_result_is_auditable():
     )
     assert payload["aggregate_metrics"]["accuracy"]["mean"] == 0.568
     assert payload["aggregate_metrics"]["parse_rate"]["mean"] == 0.998
+
+
+def test_committed_full_scienceqa_result_is_complete_and_checkpoint_free():
+    path = Path(__file__).parents[1] / (
+        "docs/multimodal-models/metrics/scienceqa-smolvlm2-256m-full.json"
+    )
+    payload = json.loads(path.read_text())
+    assert payload["evaluated_examples"] == 4241
+    assert payload["metadata"]["checkpoint_committed"] is False
+    assert payload["metadata"]["predictions_committed"] is False
+    assert payload["aggregate_metrics"]["accuracy"]["mean"] == (
+        0.5491629332704551
+    )
+    assert payload["aggregate_metrics"]["coverage"]["mean"] == 1.0
+
+
+def test_committed_full_pope_result_is_complete_and_checkpoint_free():
+    path = Path(__file__).parents[1] / (
+        "docs/multimodal-models/metrics/pope-adversarial-smolvlm2-256m-full.json"
+    )
+    payload = json.loads(path.read_text())
+    assert payload["evaluated_examples"] == 3000
+    assert payload["metadata"]["checkpoint_committed"] is False
+    assert payload["metadata"]["predictions_committed"] is False
+    assert payload["aggregate_metrics"]["accuracy"]["mean"] == (
+        0.7516666666666667
+    )
+    assert payload["aggregate_metrics"]["parse_rate"]["mean"] == 1.0
+
+
+def test_retrieval_checkpoint_generates_compact_auditable_rankings(tmp_path, monkeypatch):
+    from PIL import Image
+    from auto_research.multimodal.benchmarks import score_benchmark
+
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
+    Image.new("RGB", (2, 2), (255, 0, 0)).save(tmp_path / "red.png")
+    Image.new("RGB", (2, 2), (0, 255, 0)).save(tmp_path / "green.png")
+    annotations = tmp_path / "karpathy.json"
+    payload = {"images": [
+        {"split": "test", "imgid": 1, "filename": "red.png",
+         "sentences": [{"sentid": 11, "raw": "red object"}]},
+        {"split": "test", "imgid": 2, "filename": "green.png",
+         "sentences": [{"sentid": 22, "raw": "green object"}]},
+    ]}
+    annotations.write_text(json.dumps(payload))
+    output = tmp_path / "retrieval.jsonl"
+    metadata = generate_retrieval_predictions(
+        RetrievalPredictionConfig(
+            benchmark="coco-retrieval", annotations=annotations,
+            image_root=tmp_path, output=output, model_id="example/clip",
+            revision="immutable-sha", batch_size=2,
+        ),
+        processor=_FakeRetrievalProcessor(), model=_FakeRetrievalModel(),
+        torch_module=torch,
+    )
+    rows = [json.loads(line) for line in output.read_text().splitlines()]
+    metrics, count = score_benchmark("coco-retrieval", payload, rows)
+    assert count == 4
+    assert metrics["mean_recall"] == 1.0
+    assert all("relevant_text_rank" in row for row in rows[:2])
+    assert all(len(row.get("ranked_text_ids", row.get("ranked_image_ids"))) <= 10 for row in rows)
+    assert metadata["resolved_revision"] == "immutable-sha"
+    assert metadata["prediction_file"] == "retrieval.jsonl"
+
+
+def test_retrieval_predict_cli_contract():
+    args = build_parser().parse_args([
+        "multimodal-retrieval-predict", "--benchmark", "flickr30k-retrieval",
+        "--annotations", "dataset.json", "--image-root", "images",
+        "--output", "predictions.jsonl", "--device", "cuda",
+    ])
+    assert args.model_id == "openai/clip-vit-base-patch32"
+    assert args.batch_size == 32
+    assert args.device == "cuda"

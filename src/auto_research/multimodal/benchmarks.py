@@ -125,7 +125,7 @@ def run_public_benchmark(
         evaluated_examples=evaluated_examples,
         prediction_source=(predictions or "random baseline"),
         metadata={
-            "annotations": str(annotations.resolve()),
+            "annotations": annotations.name,
             "annotations_sha256": _path_sha256(annotations),
             "split": split,
             "maximum_examples": maximum_examples,
@@ -333,7 +333,10 @@ def _score_pope(annotations: Any, predictions: Any) -> tuple[dict[str, float], i
         identifier = str(row.get("question_id", row.get("id")))
         if identifier not in predicted:
             raise ValueError(f"missing POPE prediction for {identifier}")
-        truth = _yes_no(row["answer"])
+        truth_value = row.get("answer", row.get("label"))
+        if truth_value is None:
+            raise ValueError(f"POPE annotation {identifier} has no answer/label")
+        truth = _yes_no(truth_value)
         try:
             guess = _yes_no(predicted[identifier])
         except ValueError:
@@ -394,18 +397,32 @@ def _score_retrieval(
         str(row["text_id"]): [str(value) for value in row["ranked_image_ids"]]
         for row in prediction_rows if "ranked_image_ids" in row
     }
+    i2t_ranks = {
+        str(row["image_id"]): int(row["relevant_text_rank"])
+        for row in prediction_rows if "relevant_text_rank" in row
+    }
+    t2i_ranks = {
+        str(row["text_id"]): int(row["relevant_image_rank"])
+        for row in prediction_rows if "relevant_image_rank" in row
+    }
     if set(i2t) != set(image_to_text):
         missing = sorted(set(image_to_text) - set(i2t))[:3]
         raise ValueError(f"retrieval predictions miss image queries: {missing}")
     if set(t2i) != set(text_to_image):
         missing = sorted(set(text_to_image) - set(t2i))[:3]
         raise ValueError(f"retrieval predictions miss text queries: {missing}")
+    if i2t_ranks and set(i2t_ranks) != set(image_to_text):
+        raise ValueError("compact retrieval predictions have incomplete image ranks")
+    if t2i_ranks and set(t2i_ranks) != set(text_to_image):
+        raise ValueError("compact retrieval predictions have incomplete text ranks")
+    if any(rank < 1 for rank in (*i2t_ranks.values(), *t2i_ranks.values())):
+        raise ValueError("retrieval ranks must be positive")
     image_ranks = [
-        _first_relevant_rank(i2t[query], relevant)
+        i2t_ranks[query] if query in i2t_ranks else _first_relevant_rank(i2t[query], relevant)
         for query, relevant in image_to_text.items()
     ]
     text_ranks = [
-        _first_relevant_rank(t2i[query], {relevant})
+        t2i_ranks[query] if query in t2i_ranks else _first_relevant_rank(t2i[query], {relevant})
         for query, relevant in text_to_image.items()
     ]
     metrics = {}
@@ -521,9 +538,16 @@ def _read_payload(path: Path) -> Any:
         raise ValueError(
             f"unsupported benchmark directory {path}; expected problems.json and pid_splits.json"
         )
+    text = path.read_text(encoding="utf-8")
     if path.suffix == ".jsonl":
-        return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-    return json.loads(path.read_text(encoding="utf-8"))
+        return [json.loads(line) for line in text.splitlines() if line.strip()]
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as error:
+        # Official POPE files use a .json suffix while containing JSONL.
+        if error.msg != "Extra data":
+            raise
+        return [json.loads(line) for line in text.splitlines() if line.strip()]
 
 
 def _records(payload: Any) -> list[dict[str, Any]]:

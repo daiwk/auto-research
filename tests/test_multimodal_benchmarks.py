@@ -106,6 +106,33 @@ def test_pope_reports_official_binary_metrics():
     }
 
 
+def test_pope_accepts_official_label_field():
+    metrics, count = score_benchmark(
+        "pope",
+        [{"question_id": 1, "label": "yes"}, {"question_id": 2, "label": "no"}],
+        [{"id": 1, "prediction": "yes"}, {"id": 2, "prediction": "no"}],
+    )
+    assert count == 2
+    assert metrics["accuracy"] == 1.0
+
+
+def test_official_pope_json_suffix_with_jsonl_content(tmp_path):
+    annotations = tmp_path / "coco_pope_adversarial.json"
+    annotations.write_text(
+        '{"question_id": 1, "label": "yes"}\n'
+        '{"question_id": 2, "label": "no"}\n'
+    )
+    predictions = tmp_path / "predictions.jsonl"
+    predictions.write_text(
+        '{"id": 1, "prediction": "yes"}\n'
+        '{"id": 2, "prediction": "no"}\n'
+    )
+    result = run_public_benchmark(
+        "pope", annotations, (42,), predictions=str(predictions)
+    )
+    assert result.aggregate_metrics["accuracy"]["mean"] == 1.0
+
+
 def test_invalid_generated_answer_counts_as_wrong_instead_of_aborting():
     metrics, count = score_benchmark(
         "pope",
@@ -137,6 +164,23 @@ def test_karpathy_retrieval_scores_both_directions(benchmark):
     assert metrics["i2t_recall_at_5"] == 1.0
     assert metrics["t2i_recall_at_1"] == 0.5
     assert metrics["mean_recall"] == pytest.approx(5 / 6)
+
+
+def test_compact_retrieval_predictions_use_exact_positive_ranks():
+    annotations = {"images": [
+        {"split": "test", "imgid": 10, "sentences": [{"sentid": 100}]},
+        {"split": "test", "imgid": 20, "sentences": [{"sentid": 200}]},
+    ]}
+    predictions = [
+        {"image_id": 10, "ranked_text_ids": [200], "relevant_text_rank": 12},
+        {"image_id": 20, "ranked_text_ids": [200], "relevant_text_rank": 1},
+        {"text_id": 100, "ranked_image_ids": [20], "relevant_image_rank": 12},
+        {"text_id": 200, "ranked_image_ids": [20], "relevant_image_rank": 1},
+    ]
+    metrics, _ = score_benchmark("coco-retrieval", annotations, predictions)
+    assert metrics["i2t_recall_at_10"] == 0.5
+    assert metrics["t2i_recall_at_10"] == 0.5
+    assert metrics["i2t_median_rank"] == 6.5
 
 
 def test_multimodal_eval_cli_writes_machine_and_human_reports(tmp_path):

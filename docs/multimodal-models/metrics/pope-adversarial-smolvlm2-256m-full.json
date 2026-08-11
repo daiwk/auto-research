@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "multimodal-models:pope",
+  "benchmark": "pope",
+  "evaluation_tier": "l2_public_benchmark",
+  "seeds": [
+    42
+  ],
+  "evaluated_examples": 3000,
+  "prediction_source": "public_checkpoint_predictions_not_committed",
+  "metadata": {
+    "dataset_source": "https://github.com/RUCAIBox/POPE",
+    "annotations_sha256": "420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8",
+    "split": "coco_adversarial",
+    "maximum_examples": 3000,
+    "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+    "model_revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+    "checkpoint_committed": false,
+    "predictions_committed": false,
+    "deterministic_decoding": true,
+    "max_new_tokens": 8,
+    "batch_size": 48,
+    "resolved_device": "cuda",
+    "peak_gpu_memory_mb": 19948.490234375,
+    "resume_note": "The first 224 valid predictions used batch sizes 32 and 48; the remaining 2776 resumed with batch size 48. All 3000 IDs were unique and all predictions parsed before scoring."
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "accuracy": 0.7516666666666667,
+      "precision": 0.9575757575757575,
+      "recall": 0.5266666666666666,
+      "f1": 0.6795698924731183,
+      "yes_ratio": 0.275,
+      "parse_rate": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy": {
+      "mean": 0.7516666666666667,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "precision": {
+      "mean": 0.9575757575757575,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "recall": {
+      "mean": 0.5266666666666666,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "f1": {
+      "mean": 0.6795698924731183,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "yes_ratio": {
+      "mean": 0.275,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "parse_rate": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    }
+  },
+  "formal_comparison": false,
+  "claim_policy": "single deterministic public-checkpoint run on the complete official POPE COCO adversarial split; not a multi-seed comparison",
+  "evaluation_protocol": {
+    "tier": "l2_public_benchmark",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single deterministic public-checkpoint run on the complete official POPE COCO adversarial split; not a multi-seed comparison"
+  },
+  "provenance": {
+    "created_at": "2026-08-11T11:24:36.543055+00:00",
+    "artifact_path": "docs/multimodal-models/metrics/pope-adversarial-smolvlm2-256m-full.json"
+  }
+}

@@ -13,6 +13,10 @@ from .checkpoint import (
     CheckpointPredictionConfig, GENERATIVE_BENCHMARKS,
     generate_checkpoint_predictions,
 )
+from .retrieval import (
+    RETRIEVAL_BENCHMARKS, RetrievalPredictionConfig,
+    generate_retrieval_predictions,
+)
 
 __all__ = [
     "MicroVLMEvaluator", "load_cifar10_qa", "load_fashion_mnist_qa",
@@ -21,4 +25,6 @@ __all__ = [
     "write_benchmark_report",
     "CheckpointPredictionConfig", "GENERATIVE_BENCHMARKS",
     "generate_checkpoint_predictions",
+    "RETRIEVAL_BENCHMARKS", "RetrievalPredictionConfig",
+    "generate_retrieval_predictions",
 ]

@@ -40,3 +40,15 @@ def test_auto_demo_dispatches_to_each_explicit_platform_script():
     assert "demo-mac.sh" in text
     assert "demo-linux-cpu.sh" in text
     assert "demo-linux-gpu.sh" in text
+
+
+def test_multimodal_checkpoint_matrix_script_is_executable_and_covers_all_l2_tasks():
+    script = ROOT / "scripts" / "run-multimodal-checkpoint-matrix.sh"
+    assert script.exists()
+    assert os.access(script, os.X_OK)
+    subprocess.run(["bash", "-n", str(script)], check=True)
+    text = script.read_text(encoding="utf-8")
+    for benchmark in (
+        "scienceqa", "pope", "coco-retrieval", "flickr30k-retrieval"
+    ):
+        assert benchmark in text
