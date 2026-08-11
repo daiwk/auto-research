@@ -3,7 +3,9 @@
   "manifest_ref": "multimodal-models:scienceqa",
   "benchmark": "scienceqa",
   "evaluation_tier": "l2_public_benchmark",
-  "seeds": [42],
+  "seeds": [
+    42
+  ],
   "evaluated_examples": 500,
   "prediction_source": "public_checkpoint",
   "metadata": {
@@ -45,17 +47,44 @@
     }
   ],
   "aggregate_metrics": {
-    "accuracy": {"mean": 0.568, "std": 0.0, "ci95": null, "n": 1},
-    "image_accuracy": {"mean": 0.6286919831223629, "std": 0.0, "ci95": null, "n": 1},
-    "text_accuracy": {"mean": 0.5133079847908745, "std": 0.0, "ci95": null, "n": 1},
-    "coverage": {"mean": 1.0, "std": 0.0, "ci95": null, "n": 1},
-    "parse_rate": {"mean": 0.998, "std": 0.0, "ci95": null, "n": 1}
+    "accuracy": {
+      "mean": 0.568,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "image_accuracy": {
+      "mean": 0.6286919831223629,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "text_accuracy": {
+      "mean": 0.5133079847908745,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "coverage": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "parse_rate": {
+      "mean": 0.998,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    }
   },
   "formal_comparison": false,
   "claim_policy": "single deterministic zero-shot checkpoint run on a fixed 500-example subset; not a full-test leaderboard or multi-seed improvement claim",
   "evaluation_protocol": {
     "tier": "l2_public_benchmark",
-    "seeds": [42],
+    "seeds": [
+      42
+    ],
     "formal_comparison": false,
     "claim_policy": "single deterministic zero-shot checkpoint run on a fixed 500-example subset; not a full-test leaderboard or multi-seed improvement claim"
   },
