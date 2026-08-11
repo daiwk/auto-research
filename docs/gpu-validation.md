@@ -9,7 +9,6 @@
 |---|---|
 | 主机 | 用户提供的单卡 Linux 开发环境 |
 | GPU | NVIDIA A30 24GB，单卡 |
-| PyTorch | `2.7.0a0+gitf56b353.aml` |
 | CUDA | 12.8 |
 | 数据 | MovieLens、Amazon Beauty、MiniOneRec 等本地公开数据 |
 | 通过条件 | adapter 成功结束，且证据日志至少记录一次实际解析到 CUDA 的 `device_for` 调用 |

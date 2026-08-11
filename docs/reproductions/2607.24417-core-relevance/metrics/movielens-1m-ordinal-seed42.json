@@ -84,7 +84,7 @@
   "runtime": {
     "requested_device": "mps",
     "cpu_threads": null,
-    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "platform": "macOS arm64",
     "resolved_device": "mps",
     "torch_version": "2.13.0",
     "accelerator": "Apple Metal Performance Shaders"
