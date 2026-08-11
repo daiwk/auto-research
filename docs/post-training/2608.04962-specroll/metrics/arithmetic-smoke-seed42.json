@@ -38,18 +38,19 @@
     "fidelity": "mechanism reproduction on a candidate-policy model"
   },
   "schema_version": 2,
-  "manifest_ref": "post-training:specroll",
+  "manifest_ref": "post-training:arithmetic-smoke-seed42",
   "evaluation_protocol": {
     "tier": "l1_mechanism",
     "seeds": [
       42
     ],
     "formal_comparison": false,
-    "claim_policy": "single-seed smoke result; do not claim a stable improvement"
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
     "artifact_path": "docs/post-training/2608.04962-specroll/metrics/arithmetic-smoke-seed42.json",
     "original_code_commit": "working tree",
-    "dataset_fingerprint": "deterministic built-in mini-suite"
+    "dataset_fingerprint": "deterministic built-in mini-suite",
+    "historical_migration": "historical-metrics-v2-2026-08-09"
   }
 }

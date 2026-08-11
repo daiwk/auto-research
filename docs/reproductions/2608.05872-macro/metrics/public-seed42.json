@@ -20,5 +20,21 @@
     "average_accuracy_percent": 5.0,
     "search_speedup": 9.4
   },
-  "scope": "实际搜索 skip/repeat/residual 层路由并按验证准确率选择；mini-suite 不是原论文开源 LLM benchmark。"
+  "scope": "实际搜索 skip/repeat/residual 层路由并按验证准确率选择；mini-suite 不是原论文开源 LLM benchmark。",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:macro",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.05872-macro/metrics/public-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }
