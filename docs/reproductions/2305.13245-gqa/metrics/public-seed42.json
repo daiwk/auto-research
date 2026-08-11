@@ -17,7 +17,7 @@
     "reasoning_validation": 0,
     "benchmark_suite": "core",
     "vocab_size": 512,
-    "tokenizer": "/Users/bytedance/Documents/git_daiwk/auto-research/data/llm-evolution/wikitext-narrative-bpe-512.json"
+    "tokenizer": "data/llm-evolution/wikitext-narrative-bpe-512.json"
   },
   "setup": {
     "seed": 42,

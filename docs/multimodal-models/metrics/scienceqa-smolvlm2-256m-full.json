@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "multimodal-models:scienceqa",
+  "benchmark": "scienceqa",
+  "evaluation_tier": "l2_public_benchmark",
+  "seeds": [
+    42
+  ],
+  "evaluated_examples": 4241,
+  "prediction_source": "public_checkpoint_predictions_not_committed",
+  "metadata": {
+    "dataset_source": "https://github.com/lupantech/ScienceQA",
+    "annotations_sha256": "992b2e3c5296a59d36135471c66875069ca3747e0245af79eeb5752f976d3f36",
+    "split": "test",
+    "maximum_examples": 4241,
+    "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+    "model_revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+    "checkpoint_committed": false,
+    "predictions_committed": false,
+    "deterministic_decoding": true,
+    "max_new_tokens": 16,
+    "resolved_device": "cuda",
+    "peak_gpu_memory_mb": 957.94970703125,
+    "resume_note": "The final 1741 unique examples resumed after an interrupted run; all 4241 IDs were unique before scoring."
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "accuracy": 0.5491629332704551,
+      "image_accuracy": 0.6281606346058503,
+      "text_accuracy": 0.47751798561151076,
+      "coverage": 1.0,
+      "parse_rate": 0.9995284131101155
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy": {
+      "mean": 0.5491629332704551,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "image_accuracy": {
+      "mean": 0.6281606346058503,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "text_accuracy": {
+      "mean": 0.47751798561151076,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "coverage": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    },
+    "parse_rate": {
+      "mean": 0.9995284131101155,
+      "std": 0.0,
+      "ci95": null,
+      "n": 1
+    }
+  },
+  "formal_comparison": false,
+  "claim_policy": "single deterministic public-checkpoint run on the complete official test split; not a multi-seed comparison",
+  "evaluation_protocol": {
+    "tier": "l2_public_benchmark",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single deterministic public-checkpoint run on the complete official test split; not a multi-seed comparison"
+  },
+  "provenance": {
+    "created_at": "2026-08-11T10:47:50.995207+00:00",
+    "artifact_path": "docs/multimodal-models/metrics/scienceqa-smolvlm2-256m-full.json",
+    "dataset_fingerprint": "sha256:992b2e3c5296a59d36135471c66875069ca3747e0245af79eeb5752f976d3f36"
+  }
+}

@@ -28,10 +28,15 @@ MR3 新增独立的 `multimodal-eval`，不把开放式问答和图文检索伪�
 评测器只消费公开标注和模型预测，因而可以接入本项目 micro-VLM、任意 Hugging Face
 checkpoint 或远程推理服务，同时保持指标实现不变。
 
+MR6 再加入 `multimodal-retrieval-predict`：真实加载 CLIP/SigLIP 类公开 checkpoint，批量
+编码图片和 caption，并在 GPU 上计算两个方向的精确正样本 rank。完整 COCO 5K 若保存所有
+排序会产生约 1.25 亿个 ID，因此预测文件只保留 top-10 与精确首个正样本 rank；Recall@1/5/10
+和 median rank 均无损，文件也可以提交独立 scorer 审计。
+
 | benchmark | 标注格式 | 必报指标 |
 |---|---|---|
 | ScienceQA | 官方目录，含 `problems.json`、`pid_splits.json` | accuracy、image/text slice、parse rate |
-| POPE | 官方 JSONL，逐行包含 `question_id`、`answer` | accuracy、precision、recall、F1、yes ratio、parse rate |
+| POPE | 官方 JSONL，逐行包含 `question_id`、`label`（兼容转换后的 `answer`） | accuracy、precision、recall、F1、yes ratio、parse rate |
 | COCO/Flickr30K retrieval | Karpathy JSON，含 `images[].sentences[]` | I2T/T2I Recall@1/5/10、median rank、mean recall |
 
 ScienceQA 随机基线管线检查：
@@ -68,7 +73,7 @@ auto-research multimodal-predict \
   --model-id HuggingFaceTB/SmolVLM2-256M-Video-Instruct \
   --model-revision 067788b187b95ebe7b2e040b3e4299e342e5b8fd \
   --checkpoint-path checkpoints/smolvlm2-256m \
-  --maximum-examples 500 --device cuda --offline
+  --maximum-examples 500 --batch-size 8 --device cuda --offline
 
 auto-research multimodal-eval \
   --benchmark scienceqa --annotations data/scienceqa \
@@ -79,6 +84,50 @@ auto-research multimodal-eval \
 不传 `--checkpoint-path --offline` 时会直接从 `--model-id` 下载。生成器旁路文件
 `predictions.jsonl.metadata.json` 记录 revision、prompt/解码参数、设备和续跑计数；模型权重
 与预测全集不提交 Git。
+
+`--batch-size` 默认为 1，保证未知 checkpoint 的兼容性；正式 GPU 评测可从 8 开始逐步增加。
+生成器会为 decoder-only VLM 临时启用左 padding，避免短提示从 PAD token 后错误续写；批次
+过大导致 OOM 时，缩小 batch 后使用同一输出文件即可从已落盘 ID 继续，不必重算。
+
+图文检索使用独立预测入口：
+
+```bash
+auto-research multimodal-retrieval-predict \
+  --benchmark coco-retrieval \
+  --annotations data/coco/dataset_coco.json \
+  --image-root data/coco/images \
+  --output runs/coco/clip-predictions.jsonl \
+  --model-id openai/clip-vit-base-patch32 \
+  --checkpoint-path checkpoints/clip-vit-base-patch32 \
+  --batch-size 64 --score-batch-size 256 --device cuda --offline
+
+auto-research multimodal-eval \
+  --benchmark coco-retrieval \
+  --annotations data/coco/dataset_coco.json \
+  --predictions runs/coco/clip-predictions.jsonl \
+  --seeds 42 --device cuda
+```
+
+同一个命令可将 benchmark 换为 `flickr30k-retrieval`。预测 metadata 只记录公开模型 ID、
+不可变 revision、通用平台/设备、耗时和峰值显存，不记录主机名、系统发行版本、内部
+PyTorch 构建串或本地绝对路径。
+
+四类任务也可以用同一脚本按已经配置的数据集批量执行；未配置的任务会跳过，至少需要配置
+一项：
+
+```bash
+SCIENCEQA_ROOT=data/scienceqa \
+POPE_ANNOTATIONS=data/pope/coco_pope_adversarial.json \
+POPE_IMAGE_ROOT=data/coco/val2014 \
+COCO_ANNOTATIONS=data/coco/dataset_coco.json \
+COCO_IMAGE_ROOT=data/coco \
+VLM_CHECKPOINT_PATH=checkpoints/smolvlm2-256m \
+RETRIEVAL_CHECKPOINT_PATH=checkpoints/clip-vit-base-patch32 \
+DEVICE=cuda ./scripts/run-multimodal-checkpoint-matrix.sh
+```
+
+脚本默认不截断官方 split。生成式预测可续跑；图片、checkpoint、逐题预测和完整 ranking
+均留在 `runs/`，Git 只保存最终聚合指标和复现配方。
 
 ### 用真实 checkpoint 做多轮 evolve
 
@@ -122,11 +171,11 @@ ScienceQA/POPE 的每行预测为：
 {"id": "question-id", "prediction": "yes / no / A / choice text"}
 ```
 
-检索预测必须同时提供两个方向：
+检索预测必须同时提供两个方向。手写完整 ranking 仍受支持；checkpoint 生成器使用紧凑格式：
 
 ```json
-{"image_id": "10", "ranked_text_ids": ["100", "101", "200"]}
-{"text_id": "100", "ranked_image_ids": ["10", "20"]}
+{"image_id": "10", "ranked_text_ids": ["100", "101"], "relevant_text_rank": 1}
+{"text_id": "100", "ranked_image_ids": ["10", "20"], "relevant_image_rank": 1}
 ```
 
 随机基线只验证标注解析、指标和多 seed 聚合，不代表 VLM 能力。真实结果必须保留生成
@@ -154,7 +203,20 @@ auto-research multimodal-eval \
 **19.43% ± 0.25 points**，打乱图/空白图为 10.43%/10.00%。结构化结果见
 [`metrics/cifar10-qa-seeds42-44.json`](metrics/cifar10-qa-seeds42-44.json)。
 
-## 已执行的 ScienceQA checkpoint 子集
+## 已执行的 ScienceQA checkpoint 结果
+
+MR6 已在官方完整 test split 4,241 条上执行同一 SmolVLM2-256M revision：accuracy
+**54.92%**，image/text accuracy **62.82% / 47.75%**，coverage **100%**，parse rate
+**99.95%**。这是单次确定性 checkpoint 运行，不标记为多 seed 正式比较。结构化结果见
+[`metrics/scienceqa-smolvlm2-256m-full.json`](metrics/scienceqa-smolvlm2-256m-full.json)。
+
+同一 checkpoint 在官方 POPE COCO adversarial 完整 3,000 条上的 accuracy **75.17%**，
+precision **95.76%**、recall **52.67%**、F1 **67.96%**、yes ratio **27.50%**，解析率
+**100%**。accuracy 受回答 no 的偏置影响，必须与 recall、F1 和 yes ratio 一起解读。
+结构化结果见
+[`metrics/pope-adversarial-smolvlm2-256m-full.json`](metrics/pope-adversarial-smolvlm2-256m-full.json)。
+
+### 历史固定子集
 
 单卡 A30、SmolVLM2-256M commit `067788b…`、官方 test 固定前 500 条，确定性 zero-shot
 accuracy **56.80%**，image/text accuracy **62.87% / 51.33%**，parse rate **99.80%**。

@@ -13,6 +13,7 @@
 - CLIP、BLIP-2、LLaVA、SigLIP 2 与 SmolVLM 独立 adapter，以及可组合的 `objective:siglip2` 训练目标；
 - 强制报告原图、打乱图和空白图准确率，检查模型是否真的使用视觉信息；
 - `multimodal-predict` 真实加载公开 VLM checkpoint，支持 ScienceQA/POPE、不可变 revision、离线镜像与逐条续跑；
+- `multimodal-retrieval-predict` 真实加载 CLIP/SigLIP 类 checkpoint，为 COCO/Flickr 生成紧凑、可审计的双向 retrieval rank；
 - `vlm-checkpoint` 在冻结的真实 checkpoint 上，以 ScienceQA validation 多轮搜索 prompt、hint、图像预处理和解码预算，最终隔离 test；
 - ScienceQA、POPE、COCO/Flickr retrieval 的框架无关 L2 scorer，支持固定子集、三 seed、95% CI 和可审计预测文件；
 - 与推荐、micro-LLM、后训练和 Agent 共用多轮控制器、隔离 test 和研究看板。
@@ -93,11 +94,23 @@ seeds 42/43/44。validation accuracy 为 **20.00% ± 1.28 points**；隔离 test
 
 ## 真实公开 checkpoint 结果
 
-在官方 ScienceQA test split 固定前 500 条上，`SmolVLM2-256M-Video-Instruct`
+MR6 在官方 ScienceQA **完整 test split 4,241 条**上运行 `SmolVLM2-256M-Video-Instruct`
+（同一不可变 revision），确定性 zero-shot accuracy 为 **54.92%**；image/text 分项为
+**62.82% / 47.75%**，覆盖率 **100%**，解析率 **99.95%**。这是完整 split 的单次
+checkpoint 结果，不是多 seed 模型比较；聚合指标见
+[`metrics/scienceqa-smolvlm2-256m-full.json`](metrics/scienceqa-smolvlm2-256m-full.json)。
+
+同一 checkpoint 在官方 POPE COCO adversarial 完整 3,000 条上的 accuracy 为 **75.17%**，
+precision/recall/F1 为 **95.76% / 52.67% / 67.96%**，解析率 **100%**。yes ratio
+为 **27.50%**，说明该小模型偏向回答 no，因此结果用于可审计能力画像，不应只看 accuracy。
+结构化结果见
+[`metrics/pope-adversarial-smolvlm2-256m-full.json`](metrics/pope-adversarial-smolvlm2-256m-full.json)。
+
+此前在官方 ScienceQA test split 固定前 500 条上，`SmolVLM2-256M-Video-Instruct`
 （commit `067788b187b95ebe7b2e040b3e4299e342e5b8fd`）确定性 zero-shot accuracy 为
 **56.80%**；image/text 分项为 **62.87% / 51.33%**，输出解析率 **99.80%**。
-模型先在 M3 Pro Mac CPU 完成真实加载/单图冒烟，再在单卡 NVIDIA A30 上评测。
-这是固定子集的单次 checkpoint 结果，不是完整 test leaderboard，也不是多 seed 提升。
+模型先在 Apple Silicon Mac CPU 完成真实加载/单图冒烟，再在单卡 NVIDIA GPU 上评测。
+这是固定子集的单次 checkpoint 结果，保留用于核对 MR4 与 MR6 的协议连续性。
 结构化证据见
 [`metrics/scienceqa-smolvlm2-256m-500.json`](metrics/scienceqa-smolvlm2-256m-500.json)。
 
@@ -105,5 +118,5 @@ seeds 42/43/44。validation accuracy 为 **20.00% ± 1.28 points**；隔离 test
 
 `visual-shapes` 是 L0 系统 benchmark；Fashion-MNIST/CIFAR-10 是 L1 公开图像缩小实验。它们都
 不是开放式 VQA 能力证明。ScienceQA/POPE 的真实 checkpoint 生成与公开 benchmark scorer
-已接入 L2；COCO/Flickr 目前只接入 scorer。仓库不提交 checkpoint 或公开数据，lmms-eval
+已接入 L2；COCO/Flickr 已接入真实 checkpoint 预测器和 scorer。仓库不提交 checkpoint 或公开数据，lmms-eval
 完整任务套件仍属于 L3。论文 adapter 的 L1 缩小实验不会被写成通用 VLM 能力证明。
