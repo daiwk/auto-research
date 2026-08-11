@@ -144,11 +144,13 @@ def test_checkpoint_predictions_are_resumable_and_record_provenance(tmp_path, mo
 
 
 def test_pope_checkpoint_predictions_support_real_batches(tmp_path, monkeypatch):
-    from PIL import Image
-
     monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
-    Image.new("RGB", (2, 2)).save(tmp_path / "one.png")
-    Image.new("RGB", (2, 2)).save(tmp_path / "two.png")
+    monkeypatch.setattr(
+        "auto_research.multimodal.checkpoint._open_image",
+        lambda path, image_size=0: object(),
+    )
+    (tmp_path / "one.png").write_bytes(b"fixture")
+    (tmp_path / "two.png").write_bytes(b"fixture")
     annotations = tmp_path / "pope.jsonl"
     annotations.write_text(
         '{"question_id": 1, "image": "one.png", "text": "Is it blue?", "label": "no"}\n'
@@ -318,12 +320,15 @@ def test_committed_full_pope_result_is_complete_and_checkpoint_free():
 
 
 def test_retrieval_checkpoint_generates_compact_auditable_rankings(tmp_path, monkeypatch):
-    from PIL import Image
     from auto_research.multimodal.benchmarks import score_benchmark
 
     monkeypatch.setenv("AUTO_RESEARCH_DEVICE", "cpu")
-    Image.new("RGB", (2, 2), (255, 0, 0)).save(tmp_path / "red.png")
-    Image.new("RGB", (2, 2), (0, 255, 0)).save(tmp_path / "green.png")
+    (tmp_path / "red.png").write_bytes(b"fixture")
+    (tmp_path / "green.png").write_bytes(b"fixture")
+    monkeypatch.setattr(
+        "auto_research.multimodal.retrieval._encode_images",
+        lambda *args, **kwargs: torch.tensor([[1.0, 0.0], [0.0, 1.0]]),
+    )
     annotations = tmp_path / "karpathy.json"
     payload = {"images": [
         {"split": "test", "imgid": 1, "filename": "red.png",
