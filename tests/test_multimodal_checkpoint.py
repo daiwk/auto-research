@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from PIL import Image
 import torch
 
 from auto_research.cli import build_parser
@@ -37,7 +36,7 @@ class _FakeModel:
 def test_scienceqa_prompt_and_official_image_layout(tmp_path):
     image = tmp_path / "test" / "17" / "image.png"
     image.parent.mkdir(parents=True)
-    Image.new("RGB", (2, 2)).save(image)
+    image.write_bytes(b"test fixture; image decoding is covered by the optional dependency run")
     row = {
         "question": "What color?",
         "hint": "Look at the square.",
