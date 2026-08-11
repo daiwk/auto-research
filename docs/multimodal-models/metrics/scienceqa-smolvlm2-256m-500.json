@@ -23,14 +23,13 @@
       "prompt": "context + question + lettered choices; answer only the option letter"
     },
     "runtime": {
-      "platform": "Linux-5.4.250.bsk.9-amd64-x86_64-with-glibc2.36",
+      "platform": "Linux x86_64",
       "resolved_device": "cuda",
-      "torch_version": "2.7.0a0+gitf56b353.aml",
       "accelerator": "NVIDIA A30",
       "cuda_version": "12.8"
     },
     "mac_smoke": {
-      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "platform": "macOS arm64",
       "device": "cpu",
       "examples": 1,
       "checkpoint_loaded": true
