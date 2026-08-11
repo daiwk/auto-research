@@ -30,8 +30,8 @@ checkpoint 或远程推理服务，同时保持指标实现不变。
 
 | benchmark | 标注格式 | 必报指标 |
 |---|---|---|
-| ScienceQA | 官方目录，含 `problems.json`、`pid_splits.json` | accuracy、image/text slice |
-| POPE | 官方 JSONL，逐行包含 `question_id`、`answer` | accuracy、precision、recall、F1、yes ratio |
+| ScienceQA | 官方目录，含 `problems.json`、`pid_splits.json` | accuracy、image/text slice、parse rate |
+| POPE | 官方 JSONL，逐行包含 `question_id`、`answer` | accuracy、precision、recall、F1、yes ratio、parse rate |
 | COCO/Flickr30K retrieval | Karpathy JSON，含 `images[].sentences[]` | I2T/T2I Recall@1/5/10、median rank、mean recall |
 
 ScienceQA 随机基线管线检查：
@@ -52,6 +52,33 @@ auto-research multimodal-eval \
   --predictions 'runs/pope/predictions-seed{seed}.jsonl' \
   --seeds 42,43,44
 ```
+
+### 直接从公开 checkpoint 生成预测
+
+`multimodal-predict` 固定 `do_sample=false`，每完成一条就追加到 JSONL；同一路径重跑会
+跳过已有 ID。在线机器会把 `main` 解析成不可变 Hugging Face commit；隔离开发机可把
+事先同步的 snapshot 放在任意目录，同时显式保留官方模型 ID 与 commit：
+
+```bash
+auto-research multimodal-predict \
+  --benchmark scienceqa \
+  --annotations data/scienceqa \
+  --image-root data/scienceqa/images \
+  --output runs/scienceqa/predictions.jsonl \
+  --model-id HuggingFaceTB/SmolVLM2-256M-Video-Instruct \
+  --model-revision 067788b187b95ebe7b2e040b3e4299e342e5b8fd \
+  --checkpoint-path checkpoints/smolvlm2-256m \
+  --maximum-examples 500 --device cuda --offline
+
+auto-research multimodal-eval \
+  --benchmark scienceqa --annotations data/scienceqa \
+  --predictions runs/scienceqa/predictions.jsonl \
+  --maximum-examples 500 --seeds 42
+```
+
+不传 `--checkpoint-path --offline` 时会直接从 `--model-id` 下载。生成器旁路文件
+`predictions.jsonl.metadata.json` 记录 revision、prompt/解码参数、设备和续跑计数；模型权重
+与预测全集不提交 Git。
 
 ScienceQA/POPE 的每行预测为：
 
@@ -91,12 +118,20 @@ auto-research multimodal-eval \
 **19.43% ± 0.25 points**，打乱图/空白图为 10.43%/10.00%。结构化结果见
 [`metrics/cifar10-qa-seeds42-44.json`](metrics/cifar10-qa-seeds42-44.json)。
 
+## 已执行的 ScienceQA checkpoint 子集
+
+单卡 A30、SmolVLM2-256M commit `067788b…`、官方 test 固定前 500 条，确定性 zero-shot
+accuracy **56.80%**，image/text accuracy **62.87% / 51.33%**，parse rate **99.80%**。
+该结果用于证明“真实 checkpoint → 可续跑预测 → 独立 scorer”闭环，不是完整 test 榜单或
+多 seed 稳定性结论。完整配置与数据指纹见
+[`metrics/scienceqa-smolvlm2-256m-500.json`](metrics/scienceqa-smolvlm2-256m-500.json)。
+
 ## 评测层级
 
 | 层级 | 数据 | 可声明结论 |
 |---|---|---|
 | L1 | Fashion-MNIST / CIFAR-10 object QA | 真实公开图像上的缩小实验 |
-| L2 | ScienceQA、POPE、COCO/Flickr retrieval，多 seed | 可比较的公开 benchmark 结果；必须来自真实模型预测 |
-| L3 | lmms-eval 标准任务、公开模型 checkpoint、GPU | 标准 VLM 能力与效率对照 |
+| L2 | ScienceQA、POPE、COCO/Flickr retrieval | 可审计的真实 checkpoint 公开 benchmark 结果；固定子集必须显式标注 |
+| L3 | lmms-eval 完整任务套件、跨 checkpoint 同预算矩阵 | 标准 VLM 能力与效率对照 |
 
 任何仅在 L0 获得的提升都不能表述为通用视觉语言能力提升。

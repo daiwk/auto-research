@@ -31,7 +31,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
   组成 genome，按 validation 多代变异、淘汰和晋级，最终只对冠军运行 test；
 - **内置 adapter**：搜广推支持 RankMixer/HyFormer，基础模型支持 micro‑LLM 的结构
   与数据配方进化，后训练支持 objective genome；Agent 的论文约束 genome 与多代 adapter 已接入统一控制器。
-- **多模态大模型**：可从头训练 `micro-vlm`，覆盖离线 L0、Fashion-MNIST/CIFAR-10 公开图像 L1、视觉依赖对照和 connector 多轮进化；ScienceQA、POPE、COCO/Flickr L2 scorer 支持独立预测文件与多 seed 置信区间。
+- **多模态大模型**：可从头训练 `micro-vlm`，覆盖离线 L0、Fashion-MNIST/CIFAR-10 公开图像 L1、视觉依赖对照和 connector 多轮进化；真实公开 VLM checkpoint 可生成可续跑的 ScienceQA/POPE 预测，再由独立 L2 scorer 评分。
 
 所有论文文档都显式标注本地基线、实验组、主指标及相对变化；“内部消融提升”不会再被表述成相对统一基线或论文官方结果的提升。
 

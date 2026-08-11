@@ -74,6 +74,7 @@ def run_public_benchmark(
     predictions: str | None = None,
     baseline: str | None = None,
     split: str = "test",
+    maximum_examples: int | None = None,
 ) -> BenchmarkResult:
     """Score public benchmark predictions without coupling to a model framework.
 
@@ -89,13 +90,17 @@ def run_public_benchmark(
         raise ValueError("only the explicit random baseline is supported")
     if not seeds:
         raise ValueError("at least one seed is required")
+    if maximum_examples is not None and maximum_examples < 1:
+        raise ValueError("maximum_examples must be positive")
     if predictions and len(seeds) > 1 and "{seed}" not in predictions:
         raise ValueError(
             "multi-seed model evaluation requires {seed} in --predictions; "
             "reusing one prediction file is not an independent comparison"
         )
 
-    annotations_payload = _read_payload(annotations)
+    annotations_payload = _limit_annotations(
+        benchmark, _read_payload(annotations), split, maximum_examples
+    )
     rows = []
     evaluated_examples = 0
     for seed in seeds:
@@ -123,8 +128,26 @@ def run_public_benchmark(
             "annotations": str(annotations.resolve()),
             "annotations_sha256": _path_sha256(annotations),
             "split": split,
+            "maximum_examples": maximum_examples,
         },
     )
+
+
+def _limit_annotations(
+    benchmark: str, payload: Any, split: str, maximum_examples: int | None
+) -> Any:
+    if maximum_examples is None:
+        return payload
+    if benchmark == "scienceqa":
+        selected = list(_scienceqa_problems(payload, split).items())[:maximum_examples]
+        return {identifier: row for identifier, row in selected}
+    if benchmark == "pope":
+        return _records(payload)[:maximum_examples]
+    images = payload.get("images", payload) if isinstance(payload, dict) else payload
+    selected = [row for row in images if row.get("split", split) == split][
+        :maximum_examples
+    ]
+    return {"images": selected} if isinstance(payload, dict) else selected
 
 
 def run_cifar10_benchmark(
@@ -273,7 +296,7 @@ def _score_scienceqa(
 ) -> tuple[dict[str, float], int]:
     problems = _scienceqa_problems(annotations, split)
     predicted = _prediction_map(predictions)
-    correct = 0
+    correct = valid = 0
     image_correct = image_count = text_correct = text_count = 0
     for identifier, problem in problems.items():
         if identifier not in predicted:
@@ -281,6 +304,7 @@ def _score_scienceqa(
         choices = problem.get("choices", [])
         answer = int(problem["answer"])
         guess = _choice_index(predicted[identifier], choices)
+        valid += int(guess >= 0)
         hit = int(guess == answer)
         correct += hit
         if problem.get("image"):
@@ -297,20 +321,31 @@ def _score_scienceqa(
         "image_accuracy": image_correct / image_count if image_count else 0.0,
         "text_accuracy": text_correct / text_count if text_count else 0.0,
         "coverage": len(set(problems) & set(predicted)) / count,
+        "parse_rate": valid / count,
     }, count
 
 
 def _score_pope(annotations: Any, predictions: Any) -> tuple[dict[str, float], int]:
     records = _records(annotations)
     predicted = _prediction_map(predictions)
-    tp = fp = tn = fn = 0
+    tp = fp = tn = fn = invalid = yes_count = 0
     for row in records:
         identifier = str(row.get("question_id", row.get("id")))
         if identifier not in predicted:
             raise ValueError(f"missing POPE prediction for {identifier}")
         truth = _yes_no(row["answer"])
-        guess = _yes_no(predicted[identifier])
-        if truth and guess:
+        try:
+            guess = _yes_no(predicted[identifier])
+        except ValueError:
+            guess = None
+            invalid += 1
+        yes_count += int(guess is True)
+        if guess is None:
+            if truth:
+                fn += 1
+            else:
+                fp += 1
+        elif truth and guess:
             tp += 1
         elif not truth and guess:
             fp += 1
@@ -328,7 +363,8 @@ def _score_pope(annotations: Any, predictions: Any) -> tuple[dict[str, float], i
         "precision": precision,
         "recall": recall,
         "f1": 2 * precision * recall / (precision + recall) if precision + recall else 0.0,
-        "yes_ratio": (tp + fp) / count,
+        "yes_ratio": yes_count / count,
+        "parse_rate": (count - invalid) / count,
     }, count
 
 

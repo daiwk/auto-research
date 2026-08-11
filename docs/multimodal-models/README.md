@@ -12,7 +12,8 @@
 - `micro_vlm_linear`、`micro_vlm_mlp`、`micro_vlm_query`、`micro_vlm_qformer`、`micro_vlm_gated`、`micro_vlm_pixelshuffle` 六种 connector；
 - CLIP、BLIP-2、LLaVA、SigLIP 2 与 SmolVLM 独立 adapter，以及可组合的 `objective:siglip2` 训练目标；
 - 强制报告原图、打乱图和空白图准确率，检查模型是否真的使用视觉信息；
-- ScienceQA、POPE、COCO/Flickr retrieval 的框架无关 L2 scorer，支持三 seed、95% CI 和可审计预测文件；
+- `multimodal-predict` 真实加载公开 VLM checkpoint，支持 ScienceQA/POPE、不可变 revision、离线镜像与逐条续跑；
+- ScienceQA、POPE、COCO/Flickr retrieval 的框架无关 L2 scorer，支持固定子集、三 seed、95% CI 和可审计预测文件；
 - 与推荐、micro-LLM、后训练和 Agent 共用多轮控制器、隔离 test 和研究看板。
 
 ```bash
@@ -27,8 +28,8 @@ auto-research evolve \
 ```
 
 固定配方的 CIFAR-10 三 seed 正式入口，以及 ScienceQA/POPE/检索预测格式见
-[统一评测协议](benchmark.md)。L2 runner 不内置或冒充 VLM checkpoint：随机基线仅检查
-评测管线，只有传入真实模型预测才能声明公开 benchmark 结果。
+[统一评测协议](benchmark.md)。预测器与 scorer 分离：前者加载真实 checkpoint 并落盘，
+后者只读取标注和预测；随机基线仍只用于检查评测管线。
 
 轻量公开图像入口（首次约下载 30MB，之后可加 `--offline`）：
 
@@ -89,9 +90,19 @@ seeds 42/43/44。validation accuracy 为 **20.00% ± 1.28 points**；隔离 test
 
 详细公式、原文结果、论文关键图、命令和边界见[方法索引](catalog.md)。
 
+## 真实公开 checkpoint 结果
+
+在官方 ScienceQA test split 固定前 500 条上，`SmolVLM2-256M-Video-Instruct`
+（commit `067788b187b95ebe7b2e040b3e4299e342e5b8fd`）确定性 zero-shot accuracy 为
+**56.80%**；image/text 分项为 **62.87% / 51.33%**，输出解析率 **99.80%**。
+模型先在 M3 Pro Mac CPU 完成真实加载/单图冒烟，再在单卡 NVIDIA A30 上评测。
+这是固定子集的单次 checkpoint 结果，不是完整 test leaderboard，也不是多 seed 提升。
+结构化证据见
+[`metrics/scienceqa-smolvlm2-256m-500.json`](metrics/scienceqa-smolvlm2-256m-500.json)。
+
 ## 边界
 
 `visual-shapes` 是 L0 系统 benchmark；Fashion-MNIST/CIFAR-10 是 L1 公开图像缩小实验。它们都
-不是开放式 VQA 能力证明。ScienceQA、POPE 与公开图文检索 scorer 已接入 L2，但当前
-尚未随仓库提交公开 VLM checkpoint 的预测；lmms-eval 仍属于 L3。论文 adapter 当前仍是
-L1 缩小实验，不会被当作开放式 VQA 或通用 VLM 能力证明。
+不是开放式 VQA 能力证明。ScienceQA/POPE 的真实 checkpoint 生成与公开 benchmark scorer
+已接入 L2；COCO/Flickr 目前只接入 scorer。仓库不提交 checkpoint 或公开数据，lmms-eval
+完整任务套件仍属于 L3。论文 adapter 的 L1 缩小实验不会被写成通用 VLM 能力证明。

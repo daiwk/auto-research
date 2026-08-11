@@ -44,6 +44,29 @@ def test_multi_seed_predictions_must_be_independent_files(tmp_path):
         )
 
 
+def test_public_benchmark_can_score_the_same_fixed_subset_as_prediction(tmp_path):
+    annotations = tmp_path / "scienceqa.json"
+    predictions = tmp_path / "predictions.jsonl"
+    annotations.write_text(json.dumps({
+        str(index): {
+            "split": "test", "question": "pick", "choices": ["x", "y"],
+            "answer": index % 2,
+        }
+        for index in range(5)
+    }))
+    predictions.write_text("\n".join(
+        json.dumps({"id": str(index), "prediction": index % 2})
+        for index in range(3)
+    ))
+    result = run_public_benchmark(
+        "scienceqa", annotations, (42,), predictions=str(predictions),
+        maximum_examples=3,
+    )
+    assert result.evaluated_examples == 3
+    assert result.aggregate_metrics["accuracy"]["mean"] == 1.0
+    assert result.metadata["maximum_examples"] == 3
+
+
 def test_scienceqa_accepts_choice_letters_and_reports_visual_slice():
     metrics, count = score_benchmark(
         "scienceqa",
@@ -53,6 +76,7 @@ def test_scienceqa_accepts_choice_letters_and_reports_visual_slice():
     assert count == 1
     assert metrics["accuracy"] == 1.0
     assert metrics["image_accuracy"] == 1.0
+    assert metrics["parse_rate"] == 1.0
 
 
 def test_pope_reports_official_binary_metrics():
@@ -78,7 +102,19 @@ def test_pope_reports_official_binary_metrics():
         "recall": 0.5,
         "f1": 0.5,
         "yes_ratio": 0.5,
+        "parse_rate": 1.0,
     }
+
+
+def test_invalid_generated_answer_counts_as_wrong_instead_of_aborting():
+    metrics, count = score_benchmark(
+        "pope",
+        [{"question_id": 1, "answer": "no"}],
+        [{"id": 1, "prediction": "__invalid__"}],
+    )
+    assert count == 1
+    assert metrics["accuracy"] == 0.0
+    assert metrics["parse_rate"] == 0.0
 
 
 @pytest.mark.parametrize("benchmark", ["coco-retrieval", "flickr30k-retrieval"])
