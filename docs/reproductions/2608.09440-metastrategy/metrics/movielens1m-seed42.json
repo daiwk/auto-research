@@ -5,9 +5,38 @@
   "dataset": "MovieLens-1M",
   "users": 260,
   "items": 420,
-  "baseline": {"hit_at_10": 0.0423076923, "ndcg_at_10": 0.0208324246, "head_share_at_10": 0.0653846154},
-  "metastrategy": {"hit_at_10": 0.0384615385, "ndcg_at_10": 0.0190598191, "head_share_at_10": 0.0373076923, "compiled_strategy_bundles": 2400, "mean_objective_weights": [0.284655, 0.375855, 0.339490]},
-  "relative": {"hit_at_10_percent": -9.0909, "ndcg_at_10_percent": -8.5089, "head_share_at_10_percent": -42.9412},
-  "evaluation_protocol": {"tier": "l2_public_dataset", "seeds": [42], "formal_comparison": false, "claim_policy": "single-seed smoke result; do not claim a stable improvement"},
-  "provenance": {"artifact_path": "docs/reproductions/2608.09440-metastrategy/metrics/movielens1m-seed42.json", "original_code_commit": "working tree", "dataset_fingerprint": "recorded in raw run; checkpoint not committed"}
+  "baseline": {
+    "hit_at_10": 0.0423076923,
+    "ndcg_at_10": 0.0208324246,
+    "head_share_at_10": 0.0653846154
+  },
+  "metastrategy": {
+    "hit_at_10": 0.0384615385,
+    "ndcg_at_10": 0.0190598191,
+    "head_share_at_10": 0.0373076923,
+    "compiled_strategy_bundles": 2400,
+    "mean_objective_weights": [
+      0.284655,
+      0.375855,
+      0.33949
+    ]
+  },
+  "relative": {
+    "hit_at_10_percent": -9.0909,
+    "ndcg_at_10_percent": -8.5089,
+    "head_share_at_10_percent": -42.9412
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.09440-metastrategy/metrics/movielens1m-seed42.json",
+    "original_code_commit": "working tree",
+    "dataset_fingerprint": "recorded in raw run; checkpoint not committed"
+  }
 }
