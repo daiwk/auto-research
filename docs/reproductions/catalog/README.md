@@ -10,6 +10,7 @@
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 生成、排序与冷启动 | [Sona Technical Report](../2608.11015-sona/README.md) | Yandex，2026-08-11 | 未发现官方代码 | `sona` |
+| 大模型能力与推荐融合 | [GenRec: An LLM-Backed Recommendation Ranker at Netflix](../2608.10257-genrec-netflix/README.md) | Netflix，2026-08-10 | 未发现官方代码 | `genrec-netflix` |
 | 生成、排序与冷启动 | [MetaStrategy: Generative Ranking with Executable LLM Strategies](../2608.09440-metastrategy/README.md) | Alibaba / Taobao，2026-08-10 | 未发现官方代码 | `metastrategy` |
 | 生成、排序与冷启动 | [Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation](../2608.06213-gryphon-v2/README.md) | Yandex，2026-08-06 | 未发现官方代码 | `gryphon-v2` |
 | 多阶段排序与混排 | [DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging](../2608.04809-degr/README.md) | JD.com，2026-08-05 | 未发现官方代码 | `degr` |

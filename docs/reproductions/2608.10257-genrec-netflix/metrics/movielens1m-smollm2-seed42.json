@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:genrec-netflix",
+  "seed": 42,
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 240,
+    "items": 500,
+    "feedback": "chronological ratings >= 3"
+  },
+  "setup": {
+    "model": "HuggingFaceTB/SmolLM2-135M",
+    "steps_per_variant": 120,
+    "examples_per_step": 2,
+    "maximum_history_events": 12,
+    "average_available_history_events": 73.0375,
+    "average_prefill_history_events": 11.8375,
+    "device": "cuda"
+  },
+  "baseline": {
+    "name": "ID-only discriminative GRU ranker",
+    "hit_at_10": 0.025,
+    "ndcg_at_10": 0.0129494891,
+    "mrr": 0.0187285239,
+    "head_share_at_10": 0.0816666667
+  },
+  "genrec": {
+    "name": "SmolLM2 LoRA + catalog head + reward weighting",
+    "hit_at_10": 0.0416666667,
+    "ndcg_at_10": 0.0174908654,
+    "mrr": 0.0197295752,
+    "head_share_at_10": 0.0625,
+    "trainable_lora_parameters": 230400,
+    "trainable_total_parameters": 334292,
+    "final_ranking_loss": 6.6164346536,
+    "final_language_loss": 1.4427327712
+  },
+  "relative": {
+    "hit_at_10_percent": 66.6667,
+    "ndcg_at_10_percent": 35.0699,
+    "mrr_percent": 5.3451,
+    "head_share_at_10_percent": -23.4694
+  },
+  "paper_results": {
+    "offline_mrr_percent": 1.6,
+    "phase2_data_reduction_factor": 40.0,
+    "short_term_homepage_engagement_percent": 0.115,
+    "short_term_p_value": 3.1e-10,
+    "long_term_core_metric_percent": 0.006,
+    "long_term_p_value": 0.025,
+    "traffic_percent": 10.0,
+    "duration_weeks": 4
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed public-data mechanism result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "created_at": "2026-08-13T19:32:29+08:00",
+    "artifact_path": "docs/reproductions/2608.10257-genrec-netflix/metrics/movielens1m-smollm2-seed42.json",
+    "original_code_commit": "working tree",
+    "dataset_fingerprint": "3fc81778d8eb92b5871b821675d499899739c725a7f21848fc3d5b0ea5522530",
+    "checkpoint_policy": "public model ID recorded; weights not committed"
+  }
+}

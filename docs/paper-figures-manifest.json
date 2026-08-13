@@ -4856,5 +4856,19 @@
     "height": 364,
     "score": 62,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2608.10257-genrec-netflix/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.10257",
+    "arxiv_id": "2608.10257",
+    "figure": "existing",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2608.10257v1#S4.F1",
+    "extraction": "existing",
+    "asset": "docs/reproductions/2608.10257-genrec-netflix/assets/paper-figure-01.png",
+    "width": 753,
+    "height": 289,
+    "score": 0,
+    "error": ""
   }
 ]

@@ -40,8 +40,9 @@ LLM 内容/知识增强、采样蒸馏、RL、长期价值和 serving；主题�
 | ESMM / MMoE / PLE | 多任务 CVR 与 shared-bottom 演进主线 | 已建立公开多任务协议并分别实现 |
 
 RecoChain / DIG（2026）仍未核验到满足工业论文硬门槛的量化线上 A/B，因此不创建占位 adapter。
-但 GloRank、Dual-Rerank、OneRanker、RADAR、DualGR、MPFormer、HAP、OnePiece、IntSR、
-CDM 和 CWM 已确认符合门槛，是下一批真实 P0，而不是“已覆盖”的别名。
+2026-08-08 复查发现的 GloRank、Dual-Rerank、OneRanker、RADAR、DualGR、MPFormer、
+HAP、OnePiece、IntSR、CDM 和 CWM 均已实现；2026-08-13 又补齐 Netflix GenRec，
+并保留了原有京东同名 GenRec。
 
 ## 基础模型：架构、预训练、多模态与效率
 
@@ -54,11 +55,13 @@ flowchart LR
   T --> P["RoPE / long context / MTP"]
 ```
 
-当前覆盖 dense 基线、稀疏 MoE、Mamba、动态/稀疏注意力、条件记忆、长上下文位置编码、MTP 和量化；新算子可进入 LLM evolve 的搜索空间。独立的 RoPE/ALiBi、GQA、Hymba、MoBA、DoReMi、数据配比定律、BLT 和多模态经典锚点仍待补。
+当前覆盖 dense 基线、稀疏 MoE、Mamba、动态/稀疏注意力、条件记忆、长上下文位置编码、MTP、
+量化、RoPE/ALiBi、GQA、Hymba、MoBA、DoReMi/数据配比、BLT 和多模态经典锚点；
+可训练算子已进入 LLM/VLM evolve 搜索空间。
 
 独立浏览入口、分类和评测口径见[基础模型研究](foundation-models/README.md)。
 
-- RoPE / ALiBi：多个模型内部已使用，仍缺独立同预算长上下文 adapter。
+- RoPE / ALiBi：已有独立同预算长上下文 adapter 和 evolve 算子。
 - Chinchilla scaling：需多 compute/data 预算曲线，不适合用单次小模型实验代替。
 - 新 MoE routing 与线性序列模型：只有真实算子、梯度和公开 benchmark 都可验证时进入。
 
@@ -91,4 +94,15 @@ token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实
 1. **既有 P0 批次已完成**：Wide & Deep、DCN-V2、DIEN、BST、CS3、CQ-SID、Switch Transformer、Mamba、Switch Attention；这不代表新审计发现的 P0 已实现。
 2. **P1 基础设施已完成**：新 LLM 架构、后训练和 Agent 的论文约束 genome 已接入统一多轮控制器。
 3. **P1 经典论文已完成**：DeepFM、YouTube DNN、ESMM、MMoE、PLE 已按用户批准的经典例外实现。
-4. **新 P0 队列**：以[全主题系统缺口审计](full-domain-gap-review-20260808.md)为唯一清单，逐项实现后才把 ledger 状态改成 `implemented`。
+4. **2026-08-08 P0/P1 队列已闭环**：结果和边界见[全主题系统缺口审计](full-domain-gap-review-20260808.md)；新候选不能继续沿用该日的旧队列。
+
+## 当前真实遗留项（2026-08-13）
+
+| 优先级 | 遗留项 | 当前边界 |
+| --- | --- | --- |
+| 持续门禁 | 新论文召回的稳定性 | 已改为每日多查询分页候选 artifact + 全文复核；仍需人工确认 affiliation 和线上证据，不是未实现 P0 |
+| P1 | 基础模型 test-time compute / verifier / 动态 reasoning budget | 需同时报告正确率、token、延迟与调用成本 |
+| P1 | 后训练扩大到可下载 pretrained causal LM | 还需真实 teacher、UltraFeedback、batch rollout、混合精度与断点续训 |
+| P1 | Agent Lightning 连接可训练 LLM policy | 现有 transition/credit 机制已实现，但 executor 仍不是统一多轮 LLM policy |
+| 等待公开证据 | 安全/风控、私有广告日志、RecoChain / DIG 等 | 不用占位 adapter 伪装实现 |
+| 用户已延后 | 官方 SWE-bench Lite、ToolHop 和真实浏览器环境 | 依赖外部 sandbox/凭据/长时运行，暂不冒充已接入 |

@@ -23,9 +23,10 @@ flowchart LR
 
 | 优先级 | 缺口 | 接入前提 |
 |---|---|---|
-| P0 | 预训练数据 mixture 与 curriculum 的多轮 evolve | 固定 token 预算、隔离 validation/test、数据污染检查 |
-| P0 | 多模态理解与统一理解/生成 | 可下载图文数据、真实视觉 encoder/tokenizer 和公共 benchmark |
 | P1 | test-time compute、verifier 与动态 reasoning budget | 同时报告正确率、token、延迟和调用成本 |
-| P1 | 独立 RoPE/ALiBi 长上下文公平对照 | 相同参数、训练长度和外推长度 |
+| P1 | 多模态视频、音频、具身与大规模后训练 | 可下载数据、真实 encoder/tokenizer 和公共 benchmark |
+
+预训练 data mixture/curriculum、多模态图文理解、RoPE/ALiBi 已完成独立实现并进入
+evolve，不再列为待办。
 Chinchilla 一类 scaling law 需要多个 compute/data 预算点，也
 不能用单次小模型训练替代完整曲线。

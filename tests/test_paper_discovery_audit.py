@@ -58,3 +58,24 @@ def test_google_and_meta_eligible_papers_are_audited_as_p0():
         assert entry["status"] == "implemented"
         assert entry["priority_reason"]
         assert entry["evidence_gate"]
+
+
+def test_latest_recommendation_scan_is_high_recall_and_catches_genrec():
+    root = Path(__file__).resolve().parents[1]
+    data = json.loads((root / "docs/paper-discovery-ledger.json").read_text(encoding="utf-8"))
+    batches = [
+        batch for batch in data["batches"]
+        if batch.get("scope_kind") == "high-recall-correction"
+    ]
+    assert batches
+    latest = batches[-1]
+    assert latest["pagination"]["page_size"] >= 25
+    assert latest["pagination"]["maximum_results_per_query"] >= 100
+    assert {"Google", "Meta", "Netflix"} <= set(latest["priority_organization_terms"])
+    assert {
+        "priority-org-google", "priority-org-meta", "priority-org-netflix"
+    } <= set(latest["organization_query_matrix"])
+    genrec = next(entry for entry in latest["candidates"] if entry["id"] == "2608.10257")
+    assert {"llm-recommendation", "production-evidence"} <= set(genrec["matched_queries"])
+    assert genrec["status"] == "implemented"
+    assert genrec["evidence_review"]["scope"] == "full-text"

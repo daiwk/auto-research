@@ -54,3 +54,29 @@ TokenMinds（Google/YouTube）和 SlimPer（Meta/Instagram）触发。
 
 最新一次跨领域复查见[全主题系统缺口审计（2026-08-08）](full-domain-gap-review-20260808.md)。
 它明确纠正了“局部候选批次闭环等于全库无遗漏”的错误，并给出下一轮 P0/P1 队列。
+
+## 2026-08-13 GenRec 纠错
+
+Netflix GenRec（arXiv 2608.10257）于 2026-08-10 发布，但旧流程将长查询拆成
+严格 AND，每个查询只取前 8 条，并只校验“已被发现的候选”是否闭环。因此它
+虽然在时间窗内，仍可以在候选阶段被截断。
+
+现在使用九组主题查询、优先机构反查、每组最多 200 条分页结果取并集，
+按 canonical arXiv ID 去重，并保留 `matched_queries`。召回后才进行 PDF/HTML 全文
+证据判定；摘要没有 A/B 不再是拒绝理由。定时 GitHub Actions 每日生成过去
+14 天的 `paper-candidates.json` artifact，但 artifact 只是待审候选，不会伪装成已通过
+线上证据门槛。基础模型、LLM 后训练和 Agent 也使用各自的多查询矩阵，不再只扫描搜广推。
+
+本地可复现同一扫描：
+
+```bash
+PYTHONPATH=src python scripts/discover_papers.py \
+  --track recommendation \
+  --lookback-days 14 \
+  --page-size 50 \
+  --maximum-results-per-query 200 \
+  --output paper-candidates.json
+```
+
+arXiv API 不提供结构化 affiliation，所以机构词查询只是补充召回；Google/Meta
+等优先机构仍必须使用作者首页 affiliation/官方页反查，再逐篇审查正文。

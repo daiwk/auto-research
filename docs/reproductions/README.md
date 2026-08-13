@@ -209,6 +209,7 @@ pytest tests/test_research_module_docs.py
 | 核心机制 | `idproxy` · [IDProxy](2603.01590-idproxy/README.md) | 内容互动 +0.50%、广告 ADVV +1.93% | 对比损失 6.073→5.358；NDCG@10 +5.32% |
 | 核心机制 | `glide` · [GLIDE](2603.17540-glide/README.md) | Non-habitual streaming +5.4%、new-show discovery +14.3% | residual Semantic ID 生成与长短期双 prompt |
 | 核心机制 | `genrec` · [GenRec](2604.14878-genrec/README.md) | Clicks +9.5%、transactions +8.7% | page-wise NTP、Token Merger 与 GRPO-SR/NLL |
+| 核心机制 | `genrec-netflix` · [Netflix GenRec](2608.10257-genrec-netflix/README.md) | 10% 流量 4 周；短期首页参与 +0.115%、长期核心指标 +0.006% | SmolLM2 LoRA + catalog head + reward weighting；NDCG@10 +35.07%（单 seed） |
 | 核心机制 | `rankgraph2` · [RankGraph-2](2606.18379-rankgraph2/README.md) | CTR +0.96%、CVR +2.75% | 去偏边、多跳 PPR 与两级 residual index；NDCG@10 +109.65% |
 | 核心机制 | `solaris` · [SOLARIS](2604.12110-solaris/README.md) | 全流量 top-line revenue +0.67% | future-pair predictor、异步 latent cache 与 fallback |
 | 核心机制 | `minimax-sparse-attention` · [MiniMax Sparse Attention](2606.13392-minimax-sparse-attention/README.md) | 纯 LLM：1M context attention compute -28.4× | attention pairs -79.95%，PPL +0.41%（变差），未融合 MPS 耗时 +67.58% |

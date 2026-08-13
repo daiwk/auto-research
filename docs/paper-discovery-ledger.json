@@ -1067,6 +1067,105 @@
           "reason": "analysis paper does not introduce an independently executable architecture or training algorithm for the reproduction/evolve queue"
         }
       ]
+    },
+    {
+      "batch": "2026-08-13-genrec-high-recall-correction",
+      "scope_kind": "high-recall-correction",
+      "checked_at": "2026-08-13T19:40:00+08:00",
+      "window": "2026-08-10 through 2026-08-13",
+      "sources": [
+        "official arXiv API multi-query pagination",
+        "paper PDF full-text review",
+        "priority organization reverse search",
+        "GitHub public repository search"
+      ],
+      "query_matrix": [
+        "recsys-general",
+        "recommendation-ranking",
+        "generative-recommendation",
+        "llm-recommendation",
+        "industrial-ranking",
+        "production-evidence",
+        "deployment-evidence",
+        "search-ranking",
+        "advertising-ranking"
+      ],
+      "pagination": {
+        "page_size": 50,
+        "maximum_results_per_query": 200,
+        "deduplicate_by": "canonical arXiv ID"
+      },
+      "priority_organization_terms": [
+        "Google",
+        "Google DeepMind",
+        "Meta",
+        "Netflix",
+        "ByteDance",
+        "TikTok",
+        "Alibaba",
+        "Taobao",
+        "Kuaishou",
+        "Pinterest",
+        "Amazon",
+        "Microsoft",
+        "Tencent"
+      ],
+      "organization_query_matrix": [
+        "priority-org-google",
+        "priority-org-google-deepmind",
+        "priority-org-meta",
+        "priority-org-netflix",
+        "priority-org-bytedance",
+        "priority-org-tiktok",
+        "priority-org-alibaba",
+        "priority-org-taobao",
+        "priority-org-kuaishou",
+        "priority-org-pinterest",
+        "priority-org-amazon",
+        "priority-org-microsoft",
+        "priority-org-tencent"
+      ],
+      "failure_corrected": "The previous global audit treated one candidate per declared subtopic as coverage and used a narrow top-result query. It therefore missed GenRec even though it was inside the audited date window.",
+      "candidates": [
+        {
+          "id": "2608.10257",
+          "title": "GenRec: An LLM-Backed Recommendation Ranker at Netflix",
+          "priority": "P0",
+          "track": "recommendation",
+          "subtopic": "llm-ranking-post-training",
+          "organization": "Netflix",
+          "matched_queries": [
+            "llm-recommendation",
+            "priority-org-netflix",
+            "recsys-general",
+            "recommendation-ranking",
+            "production-evidence"
+          ],
+          "status": "implemented",
+          "key": "genrec-netflix",
+          "doc": "reproductions/2608.10257-genrec-netflix/README.md",
+          "evidence_gate": "quantified large-scale online A/B",
+          "priority_reason": "Netflix production LLM ranker with four-week, approximately 10% traffic A/B and statistically significant short- and long-term metrics",
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 5.1",
+              "Figure 3",
+              "Section 4.5",
+              "Section 4.6"
+            ],
+            "matched_terms": [
+              "approximately 10% of Netflix traffic",
+              "4 weeks",
+              "+0.115%",
+              "+0.006%",
+              "P = 3.1e-10",
+              "P = 0.025"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

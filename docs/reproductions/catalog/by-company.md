@@ -6,6 +6,9 @@
 - 2026-08 · [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - 2026-08 · [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：以共享历史编码器统一 SID 生成和 item-level 排序，用 rollout 与 logged impression 双来源蒸馏训练期 teacher。
 
+## Netflix
+- 2026-08 · [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：用文本化上下文和 causal LLM 产生用户表示，catalog-aware head 一次打分全目录，并以联合语言/排序与长期 reward 目标后训练。
+
 ## JD.com
 - 2026-08 · [DEGR](../2608.04809-degr/README.md)：联合 next-item CE、cohort 多样性与 reward-adaptive ORPO，并在推理时执行多样性感知重排。
 

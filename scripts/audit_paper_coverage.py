@@ -13,6 +13,17 @@ LEDGER = ROOT / "docs/paper-discovery-ledger.json"
 TERMINAL = {"implemented", "deferred", "rejected"}
 PRIORITIES = {"P0", "P1", "P2"}
 TOP_PRIORITY_INSTITUTIONS = {"Google", "Meta"}
+REQUIRED_RECOMMENDATION_QUERY_FAMILIES = {
+    "recsys-general",
+    "recommendation-ranking",
+    "generative-recommendation",
+    "llm-recommendation",
+    "industrial-ranking",
+    "production-evidence",
+    "deployment-evidence",
+    "search-ranking",
+    "advertising-ranking",
+}
 
 
 def audit(strict: bool = False) -> list[str]:
@@ -111,6 +122,9 @@ def audit(strict: bool = False) -> list[str]:
                     errors.append(f"{identity}: full-text evidence locations are missing")
                 if not evidence_review.get("matched_terms"):
                     errors.append(f"{identity}: full-text matched evidence terms are missing")
+            if batch.get("scope_kind") == "high-recall-correction":
+                if entry.get("track") == "recommendation" and not entry.get("matched_queries"):
+                    errors.append(f"{identity}: recommendation candidate lacks query provenance")
             if status in {"deferred", "rejected"} and not entry.get("reason"):
                 errors.append(f"{identity}: {status} entry lacks reason")
             if status == "implemented":
@@ -122,6 +136,35 @@ def audit(strict: bool = False) -> list[str]:
                 for marker in (entry["id"], f"`{entry['key']}`", "## 论文信息", "## 本地复现", "<!-- paper-figure:start -->"):
                     if marker not in text:
                         errors.append(f"{identity}: doc missing {marker}")
+        if batch.get("scope_kind") == "high-recall-correction":
+            matrix = set(batch.get("query_matrix", []))
+            if REQUIRED_RECOMMENDATION_QUERY_FAMILIES - matrix:
+                errors.append(
+                    f"{batch['batch']}: incomplete recommendation query matrix: "
+                    f"{sorted(REQUIRED_RECOMMENDATION_QUERY_FAMILIES - matrix)}"
+                )
+            pagination = batch.get("pagination", {})
+            if pagination.get("page_size", 0) < 25:
+                errors.append(f"{batch['batch']}: page_size is too small for high recall")
+            if pagination.get("maximum_results_per_query", 0) < 100:
+                errors.append(
+                    f"{batch['batch']}: maximum_results_per_query is too small for high recall"
+                )
+            organizations = set(batch.get("priority_organization_terms", []))
+            if not {"Google", "Meta", "Netflix"} <= organizations:
+                errors.append(
+                    f"{batch['batch']}: Google, Meta and Netflix must be reverse-searched"
+                )
+            organization_queries = set(batch.get("organization_query_matrix", []))
+            expected_organization_queries = {
+                f"priority-org-{organization.lower().replace(' ', '-')}"
+                for organization in organizations
+            }
+            if expected_organization_queries - organization_queries:
+                errors.append(
+                    f"{batch['batch']}: priority organizations lack explicit query coverage: "
+                    f"{sorted(expected_organization_queries - organization_queries)}"
+                )
     return errors
 
 

@@ -1,4 +1,4 @@
-from auto_research.papers import ArxivClient, parse_arxiv_feed
+from auto_research.papers import ArxivClient, canonical_arxiv_id, parse_arxiv_feed
 
 
 def test_parse_arxiv_feed():
@@ -35,3 +35,8 @@ def test_search_builds_quoted_category_query(monkeypatch):
     ArxivClient().search("post-training LLM", 2, ("cs.CL", "cs.LG"))
     assert "all%3A%22post-training%22" in captured["url"]
     assert "cat%3Acs.CL" in captured["url"]
+
+
+def test_canonical_arxiv_id_removes_only_version_suffix():
+    assert canonical_arxiv_id("2608.10257v1") == "2608.10257"
+    assert canonical_arxiv_id("2608.10257") == "2608.10257"
