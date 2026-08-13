@@ -323,13 +323,21 @@ SigLIP2 mean recall 比 CLIP 高 13.95 points，但峰值显存约 2.31 倍。�
 
 ## 官方 lmms-eval 接口
 
-仓库以可选依赖接入上游 `lmms-eval 0.7`，通过 argv 列表启动而非 shell 字符串，并保存完整 request。先 dry-run 审计命令：
+仓库以可选依赖接入上游 `lmms-eval 0.7.2`，通过 argv 列表启动而非 shell 字符串，并保存
+完整 request。MR9 不再把子进程退出视为完成：必须找到并解析上游 `*_results.json`，才会生成
+`summary.json`。该摘要只保留公开模型 ID、不可变模型/upstream revision、任务版本、有效样本
+数、标量指标和固定预算，不写主机名或本地绝对路径。
+
+先 dry-run 审计命令：
 
 ```bash
 pip install -e '.[lmms-eval]'
 auto-research multimodal-lmms-eval \
   --model qwen2_5_vl \
   --model-args pretrained=Qwen/Qwen2.5-VL-3B-Instruct,device_map=auto \
+  --public-model-id Qwen/Qwen2.5-VL-3B-Instruct \
+  --model-revision <40-character-hugging-face-commit> \
+  --upstream-revision cb45ac4d4a667ea5ef89c7a148bff69b3489b981 \
   --tasks mme,mmmu_val \
   --limit 8 \
   --output-dir runs/lmms-eval/qwen25vl \
@@ -337,5 +345,39 @@ auto-research multimodal-lmms-eval \
 ```
 
 去掉 `--dry-run` 才会下载任务并推理。上游任务模板和 scorer 属于 `lmms-eval`；本仓库只负责可审计调用、运行目录与后续统一矩阵汇总。
+
+### MR9：真实 L3 标准任务
+
+MR9 锁定 `lmms-eval 0.7.2` 的源代码 commit
+`cb45ac4d4a667ea5ef89c7a148bff69b3489b981`。该版本的 PyPI wheel 会漏掉 extensionless task
+template，正式复跑应使用完整源代码 checkout；此外其通用 Hugging Face adapter 会把
+SmolVLM 错误加载为不含 `generate()` 的 base model。本仓库保存了最小兼容补丁，不改 task
+prompt、generation budget 或 scorer：
+
+```bash
+git clone --branch v0.7.2 https://github.com/EvolvingLMMs-Lab/lmms-eval.git third_party/lmms-eval
+python scripts/patch_lmms_eval_smolvlm.py third_party/lmms-eval
+python -m pip install -e third_party/lmms-eval
+
+auto-research multimodal-lmms-eval \
+  --model huggingface \
+  --model-args pretrained=checkpoints/smolvlm2-2.2b,device_map=auto \
+  --public-model-id HuggingFaceTB/SmolVLM2-2.2B-Instruct \
+  --model-revision 482adb537c021c86670beed01cd58990d01e72e4 \
+  --upstream-revision cb45ac4d4a667ea5ef89c7a148bff69b3489b981 \
+  --tasks scienceqa_img --batch-size 1 --seed 42 \
+  --output-dir runs/lmms-eval/smolvlm2-2.2b-scienceqa-img --device cuda
+```
+
+上游 `scienceqa_img` 只包含 2,017 个带图问题，和本仓库 L2 `scienceqa` 的完整 4,241 条
+图文混合 test 不是同一个评测集合，二者 accuracy 不得直接比较。受限网络可把官方
+`lmms-lab/ScienceQA` snapshot 预下载后让 task 指向内容相同的本地 Parquet；这只改变数据
+读取位置，不改变问题、prompt 或 scorer。
+
+2026-08-13 已在单卡 NVIDIA A30 上完成上述完整 2,017 条任务：上游 exact match 为
+**87.21% ± 0.74 points**（1,759 条正确），生成 4,422 tokens，用时 462.90 秒，平均
+9.55 tokens/s。该结果是单 checkpoint 确定性推理，不是训练多 seed 正式比较；结构化证据见
+[`metrics/lmms-eval-mr9-scienceqa-img.json`](metrics/lmms-eval-mr9-scienceqa-img.json)。
+任务的逐题 JSONL、公开 Parquet 与 checkpoint 均未提交 Git。
 
 任何仅在 L0 获得的提升都不能表述为通用视觉语言能力提升。

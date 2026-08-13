@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "multimodal-models:lmms-eval-mr9-scienceqa-img",
+  "benchmark": "scienceqa_img",
+  "evaluation_tier": "l3_lmms_eval_full_task",
+  "seeds": [
+    42
+  ],
+  "evaluated_examples": 2017,
+  "prediction_source": "public_checkpoint_predictions_not_committed",
+  "metadata": {
+    "run_date": "2026-08-13",
+    "accelerator_class": "NVIDIA A30",
+    "checkpoint_committed": false,
+    "predictions_committed": false,
+    "deterministic_decoding": true,
+    "batch_size": 1,
+    "limit": null
+  },
+  "model": {
+    "adapter": "huggingface",
+    "public_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+    "revision": "482adb537c021c86670beed01cd58990d01e72e4"
+  },
+  "upstream": {
+    "name": "lmms-eval",
+    "version": "0.7.2",
+    "revision": "cb45ac4d4a667ea5ef89c7a148bff69b3489b981",
+    "task_version": "Yaml",
+    "compatibility_patch": "scripts/patch_lmms_eval_smolvlm.py"
+  },
+  "metrics": {
+    "exact_match": 0.8720872583044125,
+    "standard_error": 0.007438606934016694,
+    "correct": 1759
+  },
+  "efficiency": {
+    "total_elapsed_seconds": 462.8975,
+    "total_output_tokens": 4422,
+    "average_output_tokens_per_sample": 2.192364898363907,
+    "tokens_per_correct_answer": 2.5139283683911313,
+    "average_generation_tokens_per_second": 9.5529
+  },
+  "formal_comparison": false,
+  "claim_policy": "完整公开任务的单 checkpoint 确定性结果；不与 4,241 条图文混合 ScienceQA L2 指标直接比较。",
+  "provenance": {
+    "created_at": "2026-08-13T09:08:36+00:00",
+    "dataset_fingerprint": "scienceqa-img-test-parquet:sha256:1f9729818b577d70325a0e59f488f6eeda74c827caddd56b75ccf3e36ed45064",
+    "config": "configs/lmms-eval-mr9.json",
+    "raw_predictions_committed": false,
+    "artifact_path": "docs/multimodal-models/metrics/lmms-eval-mr9-scienceqa-img.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l3_lmms_eval_full_task",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  }
+}

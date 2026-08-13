@@ -19,5 +19,6 @@ adapter 和统一 genome。MR3 补齐 ScienceQA/POPE/COCO/Flickr 的框架无关
 snapshot 与逐条续跑；MR5 加入冻结 checkpoint 的 validation-only evolve 并回溯 GPU 路径；
 MR6 补齐 CLIP/SigLIP 类 checkpoint 的 COCO/Flickr 双向检索预测及紧凑 rank 证据。
 MR6 同时完成 ScienceQA 与 POPE 的完整 split 单 checkpoint 评测。MR7 已补齐跨 checkpoint
-同预算矩阵和可选 `lmms-eval` 调用桥。视频、音频、具身模型和大规模
+同预算矩阵和可选 `lmms-eval` 调用桥，MR8 完成自研 scorer 下的完整公平矩阵，MR9
+进一步把上游结果解析为本仓库 schema-v2 证据，并真实执行标准任务。视频、音频、具身模型和大规模
 多模态后训练暂缓。

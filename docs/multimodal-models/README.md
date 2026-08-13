@@ -16,6 +16,7 @@
 - `multimodal-retrieval-predict` 真实加载 CLIP/SigLIP 类 checkpoint，为 COCO/Flickr 生成紧凑、可审计的双向 retrieval rank；
 - `vlm-checkpoint` 在冻结的真实 checkpoint 上，以 ScienceQA validation 多轮搜索 prompt、hint、图像预处理和解码预算，最终隔离 test；
 - ScienceQA、POPE、COCO/Flickr retrieval 的框架无关 L2 scorer，支持固定子集、三 seed、95% CI 和可审计预测文件；
+- `multimodal-lmms-eval` 可调用锁定 revision 的上游 L3 任务，并把结果、任务版本、样本数和效率指标规范化为 path-free schema-v2 证据；
 - 与推荐、micro-LLM、后训练和 Agent 共用多轮控制器、隔离 test 和研究看板。
 
 ```bash
@@ -113,6 +114,11 @@ ScienceQA accuracy 为 **54.92% / 65.03% / 79.60%**；POPE F1 为
 **67.90% / 81.54% / 82.85%**；SigLIP2 与 CLIP 的 COCO mean recall 为
 **74.29% / 60.33%**。完整公平协议、效率指标、异常诊断和边界见
 [多模态统一评测](benchmark.md)。
+
+MR9 进一步用上游 `lmms-eval 0.7.2` 的完整 `scienceqa_img` 2,017 条标准任务验证
+SmolVLM2-2.2B，exact match 为 **87.21% ± 0.74 points**。这与本仓库 4,241 条图文混合
+ScienceQA scorer 的样本集合不同，不能直接比较；锁定的上游 revision、兼容补丁、效率指标
+和复现命令见[多模态统一评测](benchmark.md)。
 
 此前在官方 ScienceQA test split 固定前 500 条上，`SmolVLM2-256M-Video-Instruct`
 （commit `067788b187b95ebe7b2e040b3e4299e342e5b8fd`）确定性 zero-shot accuracy 为

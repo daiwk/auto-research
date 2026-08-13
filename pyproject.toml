@@ -25,7 +25,7 @@ multimodal = [
   "num2words>=0.5,<1",
 ]
 lmms-eval = [
-  "lmms-eval>=0.7,<0.8",
+  "lmms-eval==0.7.2",
 ]
 paper-figures = [
     "beautifulsoup4>=4.13,<5",
