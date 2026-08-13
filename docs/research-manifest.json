@@ -11258,7 +11258,7 @@
         "datasets": [
           "MovieLens-1M"
         ],
-        "baseline": "matched control without the metastrategy mechanism",
+        "baseline": "同预算单目标排序器，实验组为 typed strategy generator + deterministic compiler",
         "metrics": [
           "baseline.head_share_at_10",
           "baseline.hit_at_10",
@@ -15574,7 +15574,7 @@
         "datasets": [
           "MovieLens-1M"
         ],
-        "baseline": "matched control without the sona mechanism",
+        "baseline": "同预算共享 encoder 排序器，实验组为 history compression + SID decoder + item ranker",
         "metrics": [
           "baseline.head_share_at_10",
           "baseline.hit_at_10",
