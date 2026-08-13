@@ -5,7 +5,10 @@ import subprocess
 import pytest
 
 from auto_research.multimodal.lmms_eval import (
-    LMMSEvalConfig, build_lmms_eval_command, run_lmms_eval,
+    LMMSEvalConfig,
+    build_lmms_eval_command,
+    normalize_lmms_eval_results,
+    run_lmms_eval,
 )
 from auto_research.multimodal.matrix import load_matrix, run_checkpoint_matrix
 
@@ -115,6 +118,9 @@ def test_lmms_eval_bridge_is_shell_free_and_dry_runnable(tmp_path):
     config = LMMSEvalConfig(
         model="qwen2_5_vl", model_args="pretrained=Qwen/Qwen2.5-VL-3B-Instruct",
         tasks=("mme", "mmmu_val"), output_dir=tmp_path, limit=8,
+        public_model_id="Qwen/Qwen2.5-VL-3B-Instruct",
+        model_revision="1" * 40,
+        upstream_revision="3" * 40,
     )
     command = build_lmms_eval_command(config)
     assert command[:3] == [command[0], "-m", "lmms_eval"]
@@ -124,6 +130,56 @@ def test_lmms_eval_bridge_is_shell_free_and_dry_runnable(tmp_path):
     seen = []
     def fake_runner(argv, **kwargs):
         seen.append((argv, kwargs))
+        (tmp_path / "20260813_results.json").write_text(json.dumps({
+            "results": {"mme": {"mme_perception_score,none": 120.0}},
+            "n-samples": {"mme": {"effective": 8, "original": 2374}},
+            "higher_is_better": {"mme": {"mme_perception_score": True}},
+            "versions": {"mme": 0.0},
+            "efficiency": {"overall": {"total_output_tokens": 20}},
+        }), encoding="utf-8")
         return subprocess.CompletedProcess(argv, 0, stdout="ok", stderr="")
-    assert run_lmms_eval(config, runner=fake_runner)["status"] == "completed"
+    result = run_lmms_eval(config, runner=fake_runner)
+    assert result["status"] == "completed"
+    assert result["tasks"][0]["metrics"]["mme_perception_score"] == 120.0
+    assert result["tasks"][0]["samples"] == {"effective": 8, "original": 2374}
+    assert result["model"]["revision"] == "1" * 40
+    assert result["upstream"]["revision"] == "3" * 40
+    assert result["efficiency"]["overall"]["total_output_tokens"] == 20
+    assert (tmp_path / "summary.json").exists()
     assert seen[0][1]["check"] is True
+
+
+def test_lmms_eval_normalization_does_not_leak_runtime_paths(tmp_path):
+    checkpoint = tmp_path / "private" / "checkpoint"
+    config = LMMSEvalConfig(
+        model="qwen2_5_vl",
+        model_args=f"pretrained={checkpoint},device_map=auto",
+        tasks=("mmmu_val",),
+        output_dir=tmp_path,
+        public_model_id="Qwen/Qwen2.5-VL-3B-Instruct",
+        model_revision="2" * 40,
+    )
+    summary = normalize_lmms_eval_results(
+        {
+            "results": {"mmmu_val": {"mmmu_acc,none": 0.4, "alias": "x"}},
+            "n-samples": {"mmmu_val": {"effective": 900, "original": 900}},
+        },
+        config,
+        source_file=tmp_path / "model" / "results.json",
+    )
+    encoded = json.dumps(summary)
+    assert str(checkpoint) not in encoded
+    assert summary["upstream"]["source_file"] == "results.json"
+    assert summary["tasks"][0]["metrics"] == {"mmmu_acc": 0.4, "alias": "x"}
+
+
+def test_lmms_eval_requires_immutable_public_revisions(tmp_path):
+    with pytest.raises(ValueError, match="40-character revision"):
+        build_lmms_eval_command(LMMSEvalConfig(
+            model="huggingface",
+            model_args="pretrained=example/model",
+            tasks=("scienceqa_img",),
+            output_dir=tmp_path,
+            public_model_id="example/model",
+            model_revision="main",
+        ))

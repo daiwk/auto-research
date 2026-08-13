@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "backend": "lmms-eval",
+  "upstream_version": "0.7.2",
+  "upstream_revision": "cb45ac4d4a667ea5ef89c7a148bff69b3489b981",
+  "model": {
+    "adapter": "huggingface",
+    "public_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+    "revision": "482adb537c021c86670beed01cd58990d01e72e4"
+  },
+  "tasks": ["scienceqa_img"],
+  "batch_size": "1",
+  "seed": 42,
+  "limit": null
+}

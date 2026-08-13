@@ -343,10 +343,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     lmms.add_argument("--model", required=True)
     lmms.add_argument("--model-args", required=True)
+    lmms.add_argument("--public-model-id")
+    lmms.add_argument("--model-revision")
+    lmms.add_argument("--upstream-revision")
     lmms.add_argument("--tasks", required=True, help="comma-separated lmms-eval tasks")
     lmms.add_argument("--output-dir", type=Path, required=True)
     lmms.add_argument("--batch-size", default="1")
     lmms.add_argument("--limit", type=int)
+    lmms.add_argument("--seed", type=int, default=42)
+    lmms.add_argument("--gen-kwargs")
     lmms.add_argument("--dry-run", action="store_true")
     _add_runtime_arguments(lmms)
 
@@ -716,6 +721,10 @@ def main(argv: list[str] | None = None) -> int:
                     tasks=tuple(value.strip() for value in args.tasks.split(",") if value.strip()),
                     output_dir=args.output_dir, batch_size=args.batch_size,
                     limit=args.limit,
+                    public_model_id=args.public_model_id,
+                    model_revision=args.model_revision,
+                    upstream_revision=args.upstream_revision,
+                    seed=args.seed, gen_kwargs=args.gen_kwargs,
                     device=(None if runtime_summary()["requested_device"] == "auto"
                             else runtime_summary()["requested_device"]),
                 ),
