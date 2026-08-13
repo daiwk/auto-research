@@ -216,7 +216,12 @@ def _encode_texts(texts, processor, model, torch, device, batch_size):
     vectors = []
     for batch in _batches(texts, batch_size):
         inputs = processor(
-            text=[item.text for item in batch], padding=True, truncation=True,
+            # SigLIP/SigLIP2 pool the final text position. Dynamic padding makes
+            # that position depend on the longest caption in each batch and
+            # silently destroys cross-batch retrieval comparability. The
+            # checkpoint tokenizer's fixed context length keeps pooling stable;
+            # it is also the official CLIP/SigLIP inference convention.
+            text=[item.text for item in batch], padding="max_length", truncation=True,
             return_tensors="pt",
         )
         kwargs = {"input_ids": inputs["input_ids"].to(device)}

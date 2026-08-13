@@ -1,0 +1,225 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "multimodal-models:checkpoint-matrix-mr8-full",
+  "benchmark": "scienceqa-pope-coco-retrieval",
+  "evaluation_tier": "l3_checkpoint_matrix",
+  "seeds": [
+    42
+  ],
+  "evaluated_examples": {
+    "scienceqa_per_checkpoint": 4241,
+    "pope_per_checkpoint": 3000,
+    "coco_images_per_checkpoint": 5000,
+    "coco_captions_per_checkpoint": 25010
+  },
+  "prediction_source": "public_checkpoint_predictions_not_committed",
+  "metadata": {
+    "run_date": "2026-08-13",
+    "accelerator_class": "NVIDIA A30",
+    "checkpoint_committed": false,
+    "predictions_committed": false,
+    "deterministic_decoding": true,
+    "max_new_tokens": 16,
+    "prompt_style": "direct",
+    "use_hint": true,
+    "retrieval_text_padding": "checkpoint max_length",
+    "comparison_rule": "rank only within the same family and benchmark"
+  },
+  "comparison_groups": [
+    {
+      "family": "generative",
+      "benchmark": "scienceqa",
+      "split": "test",
+      "examples": 4241,
+      "results": [
+        {
+          "name": "smolvlm2-256m",
+          "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+          "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+          "batch_size": 16,
+          "metrics": {
+            "accuracy": 0.5491629332704551,
+            "image_accuracy": 0.6281606346058503,
+            "text_accuracy": 0.47751798561151076,
+            "coverage": 1.0,
+            "parse_rate": 0.9995284131101155
+          },
+          "efficiency": {
+            "inference_seconds": 795.4575615003705,
+            "seconds_per_example": 0.18756367873151863,
+            "peak_gpu_memory_mb": 959.94970703125
+          }
+        },
+        {
+          "name": "smolvlm2-500m",
+          "model_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "batch_size": 12,
+          "metrics": {
+            "accuracy": 0.650318321150672,
+            "image_accuracy": 0.7506197322756569,
+            "text_accuracy": 0.5593525179856115,
+            "coverage": 1.0,
+            "parse_rate": 0.9971704786606932
+          },
+          "efficiency": {
+            "inference_seconds": 874.6873448491096,
+            "seconds_per_example": 0.2062455422893444,
+            "peak_gpu_memory_mb": 1443.21044921875
+          }
+        },
+        {
+          "name": "smolvlm2-2.2b",
+          "model_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+          "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+          "batch_size": 4,
+          "metrics": {
+            "accuracy": 0.7960386701249705,
+            "image_accuracy": 0.8824987605354487,
+            "text_accuracy": 0.7176258992805755,
+            "coverage": 1.0,
+            "parse_rate": 1.0
+          },
+          "efficiency": {
+            "inference_seconds": 783.8058257624507,
+            "seconds_per_example": 0.18481627582231802,
+            "peak_gpu_memory_mb": 6269.20556640625
+          }
+        }
+      ]
+    },
+    {
+      "family": "generative",
+      "benchmark": "pope-adversarial",
+      "split": "coco_adversarial",
+      "examples": 3000,
+      "results": [
+        {
+          "name": "smolvlm2-256m",
+          "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+          "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+          "batch_size": 16,
+          "metrics": {
+            "accuracy": 0.7513333333333333,
+            "precision": 0.9575242718446602,
+            "recall": 0.526,
+            "f1": 0.6790017211703959,
+            "yes_ratio": 0.27466666666666667,
+            "parse_rate": 1.0
+          },
+          "efficiency": {
+            "inference_seconds": 947.0066499114037,
+            "seconds_per_example": 0.3156688833038012,
+            "peak_gpu_memory_mb": 7560.76904296875
+          }
+        },
+        {
+          "name": "smolvlm2-500m",
+          "model_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "batch_size": 12,
+          "metrics": {
+            "accuracy": 0.8093333333333333,
+            "precision": 0.7903629536921152,
+            "recall": 0.842,
+            "f1": 0.8153647514525499,
+            "yes_ratio": 0.5326666666666666,
+            "parse_rate": 1.0
+          },
+          "efficiency": {
+            "inference_seconds": 974.0937040485442,
+            "seconds_per_example": 0.3246979013495147,
+            "peak_gpu_memory_mb": 6427.9609375
+          }
+        },
+        {
+          "name": "smolvlm2-2.2b",
+          "model_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+          "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+          "batch_size": 4,
+          "metrics": {
+            "accuracy": 0.8333333333333334,
+            "precision": 0.8531073446327684,
+            "recall": 0.8053333333333333,
+            "f1": 0.8285322359396434,
+            "yes_ratio": 0.472,
+            "parse_rate": 1.0
+          },
+          "efficiency": {
+            "inference_seconds": 1084.5279196947813,
+            "seconds_per_example": 0.3615093065649271,
+            "peak_gpu_memory_mb": 5967.78271484375
+          }
+        }
+      ]
+    },
+    {
+      "family": "retrieval",
+      "benchmark": "coco-karpathy-test-5k",
+      "split": "test",
+      "images": 5000,
+      "captions": 25010,
+      "results": [
+        {
+          "name": "clip-vit-b32",
+          "model_id": "openai/clip-vit-base-patch32",
+          "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+          "batch_size": 128,
+          "metrics": {
+            "i2t_recall_at_1": 0.503,
+            "i2t_recall_at_5": 0.7494,
+            "i2t_recall_at_10": 0.8346,
+            "i2t_median_rank": 1.0,
+            "t2i_recall_at_1": 0.3045981607357057,
+            "t2i_recall_at_5": 0.5592562974810076,
+            "t2i_recall_at_10": 0.6691323470611755,
+            "t2i_median_rank": 4.0,
+            "mean_recall": 0.6033311342129815
+          },
+          "efficiency": {
+            "inference_seconds": 33.368201553821564,
+            "seconds_per_image": 0.006673640310764313,
+            "peak_gpu_memory_mb": 544.29052734375
+          }
+        },
+        {
+          "name": "siglip2-base-p16-224",
+          "model_id": "google/siglip2-base-patch16-224",
+          "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+          "batch_size": 128,
+          "metrics": {
+            "i2t_recall_at_1": 0.6526,
+            "i2t_recall_at_5": 0.8592,
+            "i2t_recall_at_10": 0.9166,
+            "i2t_median_rank": 1.0,
+            "t2i_recall_at_1": 0.48844462215113954,
+            "t2i_recall_at_5": 0.7296281487405037,
+            "t2i_recall_at_10": 0.8106357457017193,
+            "t2i_median_rank": 2.0,
+            "mean_recall": 0.7428514194322271
+          },
+          "efficiency": {
+            "inference_seconds": 31.536614704877138,
+            "seconds_per_image": 0.006307322940975428,
+            "peak_gpu_memory_mb": 1255.93017578125
+          }
+        }
+      ]
+    }
+  ],
+  "formal_comparison": false,
+  "claim_policy": "single deterministic run per immutable public checkpoint on complete public splits; compare only within each family/benchmark group",
+  "evaluation_protocol": {
+    "tier": "l3_checkpoint_matrix",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single deterministic run per immutable public checkpoint on complete public splits; compare only within each family/benchmark group"
+  },
+  "provenance": {
+    "created_at": "2026-08-13T08:03:06+00:00",
+    "artifact_path": "docs/multimodal-models/metrics/checkpoint-matrix-mr8-full.json",
+    "dataset_fingerprint": "scienceqa:sha256:992b2e3c5296a59d36135471c66875069ca3747e0245af79eeb5752f976d3f36;pope:sha256:420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8;coco-karpathy:sha256:2fd999220673258012acfb411a4e7e66af7d488050b2519b0badcc49b7600b8d"
+  }
+}
