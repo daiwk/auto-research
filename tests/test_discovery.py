@@ -2,10 +2,15 @@ import datetime as dt
 
 from auto_research.discovery import (
     PRIORITY_ORGANIZATION_TERMS,
+    DiscoveredPaper,
     DiscoveryQuery,
+    build_discovery_payload,
     discover_candidates,
     queries_for_track,
     recommendation_queries,
+    render_discovery_summary,
+    repository_paper_statuses,
+    triage_candidates,
 )
 from auto_research.models import Paper
 
@@ -68,3 +73,48 @@ def test_all_research_tracks_have_multi_query_discovery_matrices():
         queries = queries_for_track(track)
         assert len(queries) >= 8
         assert len({query.name for query in queries}) == len(queries)
+
+
+def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        '{"papers": [{"paper_url": "https://arxiv.org/abs/2608.00001"}]}',
+        encoding="utf-8",
+    )
+    ledger = tmp_path / "ledger.json"
+    ledger.write_text(
+        '{"batches": [{"candidates": [{"id": "2608.00002", "status": "rejected"}]}]}',
+        encoding="utf-8",
+    )
+    statuses = repository_paper_statuses(manifest, ledger)
+    papers = [
+        DiscoveredPaper(_paper("2608.00001", "Known", "2026-08-10"), ("priority-org-meta",)),
+        DiscoveredPaper(_paper("2608.00002", "Reviewed", "2026-08-10"), ("recsys-general",)),
+        DiscoveredPaper(_paper("2608.00003", "Google", "2026-08-10"), ("priority-org-google",)),
+        DiscoveredPaper(_paper("2608.00004", "Netflix", "2026-08-10"), ("priority-org-netflix",)),
+    ]
+    candidates = triage_candidates(papers, statuses)
+    assert [item["repository_status"] for item in candidates] == [
+        "implemented",
+        "reviewed",
+        "new",
+        "new",
+    ]
+    assert [item["priority_review_required"] for item in candidates] == [False, False, True, False]
+
+    payload = build_discovery_payload(
+        track="recommendation",
+        start_date=dt.date(2026, 8, 1),
+        end_date=dt.date(2026, 8, 13),
+        query_names=("recsys-general",),
+        candidates=candidates,
+    )
+    summary = render_discovery_summary(payload)
+    assert payload["triage_counts"] == {
+        "new": 2,
+        "implemented": 1,
+        "reviewed": 1,
+        "google_meta_priority_review": 1,
+    }
+    assert summary.index("Google / Meta 重点复核") < summary.index("其他新候选")
+    assert "Netflix 及其他机构进入普通候选队列" in summary

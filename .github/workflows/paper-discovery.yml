@@ -40,8 +40,14 @@ jobs:
           --page-size 50
           --maximum-results-per-query 200
           --output "paper-candidates-${{ matrix.track }}.json"
+          --summary-output "paper-candidates-${{ matrix.track }}.md"
+          --github-actions
+      - name: Publish candidate diff
+        run: cat "paper-candidates-${{ matrix.track }}.md" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.track }}-paper-candidates
-          path: paper-candidates-${{ matrix.track }}.json
+          path: |
+            paper-candidates-${{ matrix.track }}.json
+            paper-candidates-${{ matrix.track }}.md
           retention-days: 30

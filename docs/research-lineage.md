@@ -98,11 +98,5 @@ token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实
 
 ## 当前真实遗留项（2026-08-13）
 
-| 优先级 | 遗留项 | 当前边界 |
-| --- | --- | --- |
-| 持续门禁 | 新论文召回的稳定性 | 已改为每日多查询分页候选 artifact + 全文复核；仍需人工确认 affiliation 和线上证据，不是未实现 P0 |
-| P1 | 基础模型 test-time compute / verifier / 动态 reasoning budget | 需同时报告正确率、token、延迟与调用成本 |
-| P1 | 后训练扩大到可下载 pretrained causal LM | 还需真实 teacher、UltraFeedback、batch rollout、混合精度与断点续训 |
-| P1 | Agent Lightning 连接可训练 LLM policy | 现有 transition/credit 机制已实现，但 executor 仍不是统一多轮 LLM policy |
-| 等待公开证据 | 安全/风控、私有广告日志、RecoChain / DIG 等 | 不用占位 adapter 伪装实现 |
-| 用户已延后 | 官方 SWE-bench Lite、ToolHop 和真实浏览器环境 | 依赖外部 sandbox/凭据/长时运行，暂不冒充已接入 |
+完整优先级、编号、验收条件和状态统一维护在
+[统一后续路线图与 TODO](research-roadmap.md)。本页不再复制待办表，避免多个清单漂移。

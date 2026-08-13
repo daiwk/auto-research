@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import datetime as dt
+import json
+from pathlib import Path
 from typing import Iterable
 
 from .models import Paper
@@ -103,6 +105,136 @@ PRIORITY_ORGANIZATION_TERMS: tuple[str, ...] = (
     "Microsoft",
     "Tencent",
 )
+
+# These are the only organizations that receive an automatic high-priority
+# review warning. Other organization queries improve recall but remain in the
+# normal queue; in particular, Netflix is deliberately not promoted.
+PRIORITY_REVIEW_QUERY_NAMES: frozenset[str] = frozenset(
+    {"priority-org-google", "priority-org-google-deepmind", "priority-org-meta"}
+)
+
+
+def repository_paper_statuses(
+    manifest_path: Path,
+    ledger_path: Path,
+) -> dict[str, str]:
+    """Load canonical arXiv IDs already implemented or explicitly reviewed."""
+    statuses: dict[str, str] = {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for paper in manifest.get("papers", []):
+        paper_url = str(paper.get("paper_url", ""))
+        arxiv_id = paper_url.rstrip("/").split("/")[-1]
+        if arxiv_id:
+            statuses[canonical_arxiv_id(arxiv_id)] = "implemented"
+
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    for batch in ledger.get("batches", []):
+        for candidate in batch.get("candidates", []):
+            arxiv_id = candidate.get("id")
+            if not arxiv_id:
+                continue
+            identity = canonical_arxiv_id(str(arxiv_id))
+            statuses.setdefault(identity, "reviewed")
+    return statuses
+
+
+def triage_candidates(
+    papers: Iterable[DiscoveredPaper],
+    repository_statuses: dict[str, str],
+) -> list[dict]:
+    """Diff recalled papers against the repository and add review signals."""
+    candidates: list[dict] = []
+    for discovered in papers:
+        item = discovered.to_dict()
+        identity = item["arxiv_id"]
+        status = repository_statuses.get(identity, "new")
+        priority_matches = sorted(PRIORITY_REVIEW_QUERY_NAMES.intersection(discovered.query_names))
+        item.update(
+            {
+                "repository_status": status,
+                "priority_review_required": status == "new" and bool(priority_matches),
+                "priority_query_matches": priority_matches,
+            }
+        )
+        candidates.append(item)
+    return candidates
+
+
+def build_discovery_payload(
+    *,
+    track: str,
+    start_date: dt.date,
+    end_date: dt.date,
+    query_names: Iterable[str],
+    candidates: list[dict],
+) -> dict:
+    counts = {
+        status: sum(candidate["repository_status"] == status for candidate in candidates)
+        for status in ("new", "implemented", "reviewed")
+    }
+    counts["google_meta_priority_review"] = sum(
+        bool(candidate["priority_review_required"]) for candidate in candidates
+    )
+    return {
+        "schema_version": 2,
+        "track": track,
+        "window": {"start": str(start_date), "end": str(end_date)},
+        "query_matrix": list(query_names),
+        "candidate_count": len(candidates),
+        "triage_counts": counts,
+        "candidates": candidates,
+    }
+
+
+def render_discovery_summary(payload: dict) -> str:
+    """Render a compact GitHub Actions review queue."""
+    counts = payload["triage_counts"]
+    lines = [
+        f"# {payload['track']} 论文候选差分",
+        "",
+        f"扫描窗口：{payload['window']['start']} 至 {payload['window']['end']}",
+        "",
+        "| 新候选 | 已实现 | 已审计 | Google / Meta 重点复核 |",
+        "| ---: | ---: | ---: | ---: |",
+        f"| {counts['new']} | {counts['implemented']} | {counts['reviewed']} | "
+        f"{counts['google_meta_priority_review']} |",
+        "",
+        "## Google / Meta 重点复核",
+        "",
+        "机构查询命中只是召回信号，必须打开 PDF 核对一作 affiliation 和正文线上证据。",
+        "Netflix 及其他机构进入普通候选队列，不享受自动置顶。",
+        "",
+    ]
+    priority = [item for item in payload["candidates"] if item["priority_review_required"]]
+    lines.extend(_candidate_lines(priority, empty="本次没有新的 Google / Meta 重点候选。"))
+    lines.extend(["", "## 其他新候选", ""])
+    other_new = [
+        item
+        for item in payload["candidates"]
+        if item["repository_status"] == "new" and not item["priority_review_required"]
+    ]
+    lines.extend(_candidate_lines(other_new, empty="本次没有其他新候选。"))
+    lines.extend(
+        [
+            "",
+            "## 已处理候选",
+            "",
+            f"已实现 {counts['implemented']} 篇，已审计但未实现 {counts['reviewed']} 篇；"
+            "详情保留在 JSON artifact。",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def _candidate_lines(candidates: Iterable[dict], *, empty: str) -> list[str]:
+    items = list(candidates)
+    if not items:
+        return [empty]
+    return [
+        f"- [{item['arxiv_id']} · {item['title']}]({item['url']})（{item['published'][:10]}）"
+        for item in items
+    ]
 
 
 def recommendation_queries() -> tuple[DiscoveryQuery, ...]:

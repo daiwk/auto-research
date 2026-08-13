@@ -80,3 +80,7 @@ PYTHONPATH=src python scripts/discover_papers.py \
 
 arXiv API 不提供结构化 affiliation，所以机构词查询只是补充召回；Google/Meta
 等优先机构仍必须使用作者首页 affiliation/官方页反查，再逐篇审查正文。
+
+每日任务还会把候选与统一 manifest、历史 ledger 自动差分，在 Actions Summary 中分成
+“Google / Meta 重点复核”“其他新候选”和“已处理候选”。Netflix 等其他机构继续参与
+召回，但不触发置顶预警。实施队列统一维护在[后续路线图与 TODO](research-roadmap.md)。
