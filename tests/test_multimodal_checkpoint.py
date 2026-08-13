@@ -54,6 +54,9 @@ class _FakeModel:
 
 
 class _FakeRetrievalProcessor:
+    def __init__(self):
+        self.text_padding = None
+
     def __call__(self, *, images=None, text=None, **kwargs):
         if images is not None:
             features = []
@@ -61,6 +64,7 @@ class _FakeRetrievalProcessor:
                 red, green, _ = image.resize((1, 1)).getpixel((0, 0))
                 features.append([float(red), float(green)])
             return {"pixel_values": torch.tensor(features)}
+        self.text_padding = kwargs.get("padding")
         return {
             "input_ids": torch.tensor([
                 [1, 0] if "red" in value else [0, 1] for value in text
@@ -338,13 +342,14 @@ def test_retrieval_checkpoint_generates_compact_auditable_rankings(tmp_path, mon
     ]}
     annotations.write_text(json.dumps(payload))
     output = tmp_path / "retrieval.jsonl"
+    processor = _FakeRetrievalProcessor()
     metadata = generate_retrieval_predictions(
         RetrievalPredictionConfig(
             benchmark="coco-retrieval", annotations=annotations,
             image_root=tmp_path, output=output, model_id="example/clip",
             revision="immutable-sha", batch_size=2,
         ),
-        processor=_FakeRetrievalProcessor(), model=_FakeRetrievalModel(),
+        processor=processor, model=_FakeRetrievalModel(),
         torch_module=torch,
     )
     rows = [json.loads(line) for line in output.read_text().splitlines()]
@@ -355,6 +360,7 @@ def test_retrieval_checkpoint_generates_compact_auditable_rankings(tmp_path, mon
     assert all(len(row.get("ranked_text_ids", row.get("ranked_image_ids"))) <= 10 for row in rows)
     assert metadata["resolved_revision"] == "immutable-sha"
     assert metadata["prediction_file"] == "retrieval.jsonl"
+    assert processor.text_padding == "max_length"
 
 
 def test_retrieval_predict_cli_contract():

@@ -119,5 +119,7 @@ precision/recall/F1 为 **95.76% / 52.67% / 67.96%**，解析率 **100%**。yes 
 
 `visual-shapes` 是 L0 系统 benchmark；Fashion-MNIST/CIFAR-10 是 L1 公开图像缩小实验。它们都
 不是开放式 VQA 能力证明。ScienceQA/POPE 的真实 checkpoint 生成与公开 benchmark scorer
-已接入 L2；COCO/Flickr 已接入真实 checkpoint 预测器和 scorer。MR7 新增可恢复的跨 checkpoint 同预算矩阵与可选 `lmms-eval` 后端。仓库不提交 checkpoint 或公开数据，
-完整任务套件仍属于 L3。论文 adapter 的 L1 缩小实验不会被写成通用 VLM 能力证明。
+已接入 L2；COCO/Flickr 已接入真实 checkpoint 预测器和 scorer。MR7 新增可恢复的跨 checkpoint 同预算矩阵与可选 `lmms-eval` 后端；MR8 进一步提供锁定 revision 的完整
+ScienceQA、POPE 与 COCO Karpathy test 5K 公平矩阵配置，并在执行前强制校验比较预算。
+仓库不提交 checkpoint 或公开数据，完整任务套件仍属于 L3。论文 adapter 的 L1 缩小实验
+不会被写成通用 VLM 能力证明。

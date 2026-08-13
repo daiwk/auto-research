@@ -47,6 +47,8 @@ def test_matrix_retries_oom_and_writes_comparable_report(tmp_path):
     assert calls == [4, 1]
     assert payload["cells"]["tiny"]["status"] == "completed"
     assert payload["cells"]["tiny"]["metrics"]["accuracy"] == 1.0
+    assert payload["cells"]["tiny"]["requested_revision"] == "main"
+    assert payload["cells"]["tiny"]["protocol"]["maximum_examples"] is None
     report = (output / "report.md").read_text()
     assert "只在相同 family" in report
     assert "0.2000" in report
@@ -91,6 +93,22 @@ def test_matrix_resume_rejects_config_or_seed_drift(tmp_path):
     run_checkpoint_matrix(config, output, generative_runner=runner)
     with pytest.raises(ValueError, match="config/seed changed"):
         run_checkpoint_matrix(config, output, seed=43, generative_runner=runner)
+
+
+def test_mr8_public_matrix_is_full_split_and_budget_matched():
+    config = Path(__file__).parents[2] / "configs/multimodal-checkpoint-matrix.mr8.json"
+    cells = load_matrix(config)
+
+    assert len(cells) == 8
+    assert {
+        (cell.family, cell.benchmark, cell.maximum_examples)
+        for cell in cells
+    } == {
+        ("generative", "scienceqa", 4241),
+        ("generative", "pope", 3000),
+        ("retrieval", "coco-retrieval", 5000),
+    }
+    assert all(len(cell.revision) == 40 for cell in cells)
 
 
 def test_lmms_eval_bridge_is_shell_free_and_dry_runnable(tmp_path):

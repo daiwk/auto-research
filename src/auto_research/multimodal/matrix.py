@@ -185,8 +185,10 @@ def _run_cell(cell, output_dir, *, seed, offline, generative_runner, retrieval_r
             return {
                 "status": "completed", "family": cell.family,
                 "benchmark": cell.benchmark, "model_id": cell.model_id,
+                "requested_revision": cell.revision,
                 "resolved_revision": metadata.get("resolved_revision"),
                 "batch_size": batch_size,
+                "protocol": cell.comparison_budget(),
                 "selected_examples": metadata.get(
                     "selected_examples", metadata.get("images")
                 ),
@@ -204,7 +206,9 @@ def _run_cell(cell, output_dir, *, seed, offline, generative_runner, retrieval_r
                 break
     return {
         "status": "failed", "family": cell.family,
-        "benchmark": cell.benchmark, "model_id": cell.model_id, "errors": errors,
+        "benchmark": cell.benchmark, "model_id": cell.model_id,
+        "requested_revision": cell.revision,
+        "protocol": cell.comparison_budget(), "errors": errors,
     }
 
 

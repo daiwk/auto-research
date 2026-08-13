@@ -247,6 +247,39 @@ auto-research multimodal-matrix \
 
 输出 `matrix.json` 保存 revision、性能、延迟和峰值显存，`report.md` 给出同类可比较表。配置中的数据和 checkpoint 路径均为本地路径，仓库不提交数据或权重。
 
+## MR8：完整 split 公平矩阵
+
+MR8 把 MR7 的执行链路用于真实 L3 对照。生成式组固定相同 prompt、hint、确定性解码、
+样本顺序与生成长度，比较 SmolVLM2 256M、500M 和 2.2B；检索组固定相同 COCO
+Karpathy test 5K、图像预处理入口和全库双向排序，比较 CLIP ViT-B/32 与 SigLIP2
+Base P16-224。每个模型均锁定 40 位不可变 revision。两组任务的目标函数和输出空间不同，
+因此只在各自 `family / benchmark` 内比较，不计算跨组总排名。
+
+公开 COCO 标注与图像可用校验和脚本准备：
+
+```bash
+./scripts/prepare-coco-retrieval.sh data/coco
+```
+
+脚本验证 Stanford Karpathy 标注的 SHA-256 与 COCO val2014 ZIP 的 MD5，只提取 test split
+需要的 5,000 张图片并删除临时 ZIP，避免为一次 5K 评测长期占用完整 val2014 的磁盘空间。
+
+完整矩阵配置位于
+[`configs/multimodal-checkpoint-matrix.mr8.json`](https://github.com/daiwk/auto-research/blob/main/configs/multimodal-checkpoint-matrix.mr8.json)。
+直接联网运行时无需填写 `checkpoint_path`；开发机离线运行时，在本地副本中为每个 cell
+补充对应 snapshot 路径，然后执行：
+
+```bash
+auto-research multimodal-matrix \
+  --config configs/multimodal-checkpoint-matrix.mr8.json \
+  --output-dir runs/multimodal-matrix-mr8 \
+  --seed 42 --device cuda --offline
+```
+
+执行器会拒绝同组中 split、样本数、prompt、hint、图像尺寸或解码预算不一致的配置；状态
+文件同时绑定完整配置与 seed 的 SHA-256，修改协议后不能误续跑旧结果。checkpoint、COCO
+图像和逐样本预测仍不提交 Git，只保存可审计的聚合指标、不可变 revision 与复现命令。
+
 ## 官方 lmms-eval 接口
 
 仓库以可选依赖接入上游 `lmms-eval 0.7`，通过 argv 列表启动而非 shell 字符串，并保存完整 request。先 dry-run 审计命令：
