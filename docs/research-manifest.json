@@ -784,6 +784,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "sinkflex-rl",
+      "title": "Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks",
+      "paper_url": "https://arxiv.org/abs/2608.10357",
+      "detail_path": "agent-research/2608.10357-sinkflex-rl/README.md",
+      "topic": [
+        "Agentic RL / efficient long context"
+      ],
+      "first_author": "Zelei Cheng",
+      "first_author_affiliation": "Capital One AI Foundations",
+      "published": "2026-08-11",
+      "code": null,
+      "adapter": "sinkflex-rl"
+    },
+    {
+      "domain": "agent-research",
       "key": "skillrise",
       "title": "SkillRise",
       "paper_url": "https://arxiv.org/abs/2607.26784",
@@ -1817,6 +1832,61 @@
           42
         ],
         "budget": "steps=30",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "gas",
+      "title": "Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction",
+      "paper_url": "https://arxiv.org/abs/2608.12209",
+      "detail_path": "reproductions/2608.12209-gas/README.md",
+      "topic": [
+        "multimodal",
+        "generation-guided-training",
+        "next-embedding-prediction"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-08-12",
+      "code": null,
+      "adapter": {
+        "adapter_key": "gas",
+        "arxiv_id": "2608.12209",
+        "title": "Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction",
+        "paper_url": "https://arxiv.org/abs/2608.12209",
+        "track": "llm",
+        "organization": "ByteDance",
+        "published": "2026-08-12",
+        "code_url": null,
+        "topics": [
+          "multimodal",
+          "generation-guided-training",
+          "next-embedding-prediction"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gas",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "Fashion-MNIST object QA"
+        ],
+        "baseline": "understanding-only matched trunk",
+        "metrics": [
+          "test_accuracy",
+          "visual_dependency_delta",
+          "deployed_parameter_overhead_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=120",
         "device_capabilities": [
           "cpu",
           "mps",
@@ -3955,6 +4025,21 @@
     },
     {
       "domain": "post-training",
+      "key": "c2-dpo",
+      "title": "Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization",
+      "paper_url": "https://arxiv.org/abs/2608.12158",
+      "detail_path": "post-training/2608.12158-c2-dpo/README.md",
+      "topic": [
+        "多模态上下文偏好校准"
+      ],
+      "first_author": "Byungoh Ko",
+      "first_author_affiliation": "Korea University",
+      "published": "2026-08-12",
+      "code": "https://github.com/mlvlab/C2-DPO",
+      "adapter": "c2-dpo"
+    },
+    {
+      "domain": "post-training",
       "key": "chord",
       "title": "CHORD",
       "paper_url": "https://arxiv.org/abs/2508.11408",
@@ -4639,6 +4724,21 @@
       "published": "2023-05-31",
       "code": "https://github.com/openai/prm800k",
       "adapter": "process-supervision"
+    },
+    {
+      "domain": "post-training",
+      "key": "pto",
+      "title": "Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations",
+      "paper_url": "https://arxiv.org/abs/2608.12062",
+      "detail_path": "post-training/2608.12062-pto/README.md",
+      "topic": [
+        "前瞻偏好树"
+      ],
+      "first_author": "Lior Baruch",
+      "first_author_affiliation": "Reichman University",
+      "published": "2026-08-12",
+      "code": null,
+      "adapter": "pto"
     },
     {
       "domain": "post-training",
@@ -11123,6 +11223,89 @@
     },
     {
       "domain": "recommendation",
+      "key": "metastrategy",
+      "title": "MetaStrategy: Generative Ranking with Executable LLM Strategies",
+      "paper_url": "https://arxiv.org/abs/2608.09440",
+      "detail_path": "reproductions/2608.09440-metastrategy/README.md",
+      "topic": [
+        "ranking",
+        "llm-recommendation",
+        "executable-strategy",
+        "online-policy"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba / Taobao",
+      "published": "2026-08-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "metastrategy",
+        "arxiv_id": "2608.09440",
+        "title": "MetaStrategy: Generative Ranking with Executable LLM Strategies",
+        "paper_url": "https://arxiv.org/abs/2608.09440",
+        "track": "recommendation",
+        "organization": "Alibaba / Taobao",
+        "published": "2026-08-10",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "llm-recommendation",
+          "executable-strategy",
+          "online-policy"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260813_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "同预算单目标排序器，实验组为 typed strategy generator + deterministic compiler",
+        "metrics": [
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "metastrategy.hit_at_10",
+          "metastrategy.ndcg_at_10",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Taobao Homepage Guess You Like",
+            "metric": "click PV",
+            "lift_percent": 2.11,
+            "traffic": "seven-day user-randomized online A/B",
+            "source_url": "https://arxiv.org/pdf/2608.09440",
+            "source_location": "Section 5.4 / online A/B table",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-08-13"
+          },
+          {
+            "product": "Taobao Homepage Guess You Like",
+            "metric": "transaction amount",
+            "lift_percent": 2.83,
+            "traffic": "seven-day user-randomized online A/B",
+            "source_url": "https://arxiv.org/pdf/2608.09440",
+            "source_location": "Section 5.4 / online A/B table",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-08-13"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "mfli",
       "title": "Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System",
       "paper_url": "https://arxiv.org/abs/2602.16124",
@@ -15348,6 +15531,89 @@
             "traffic": "fully deployed",
             "source_url": "https://arxiv.org/abs/2604.12110",
             "source_location": "original paper online-result disclosure: product=Meta recommendation; metric=Top-line revenue"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "sona",
+      "title": "Sona Technical Report",
+      "paper_url": "https://arxiv.org/abs/2608.11015",
+      "detail_path": "reproductions/2608.11015-sona/README.md",
+      "topic": [
+        "generative-recommendation",
+        "semantic-id",
+        "ranking",
+        "history-compression"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Yandex",
+      "published": "2026-08-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "sona",
+        "arxiv_id": "2608.11015",
+        "title": "Sona Technical Report",
+        "paper_url": "https://arxiv.org/abs/2608.11015",
+        "track": "recommendation",
+        "organization": "Yandex",
+        "published": "2026-08-11",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "semantic-id",
+          "ranking",
+          "history-compression"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/latest_20260813_common",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "同预算共享 encoder 排序器，实验组为 history compression + SID decoder + item ranker",
+        "metrics": [
+          "baseline.head_share_at_10",
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "relative.head_share_at_10_percent",
+          "relative.hit_at_10_percent",
+          "relative.ndcg_at_10_percent",
+          "sona.hit_at_10",
+          "sona.ndcg_at_10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Yandex Music My Vibe smart speakers",
+            "metric": "active users",
+            "lift_percent": 4.53,
+            "traffic": "live-traffic online A/B; cascade replaced by one model",
+            "source_url": "https://arxiv.org/pdf/2608.11015",
+            "source_location": "Online evaluation section",
+            "significance": "reported statistically significant",
+            "retrieved_at": "2026-08-13"
+          },
+          {
+            "product": "Yandex Music My Vibe smart speakers",
+            "metric": "total listening time",
+            "lift_percent": 6.3,
+            "traffic": "live-traffic online A/B; cascade replaced by one model",
+            "source_url": "https://arxiv.org/pdf/2608.11015",
+            "source_location": "Online evaluation section",
+            "significance": "reported statistically significant",
+            "retrieved_at": "2026-08-13"
           }
         ],
         "selection_exception": null,

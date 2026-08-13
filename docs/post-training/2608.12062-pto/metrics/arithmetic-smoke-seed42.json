@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:pto",
+  "algorithm": "pto",
+  "seed": 42,
+  "dataset": "arithmetic-smoke",
+  "baseline": {
+    "accuracy": 0.1953125,
+    "mean_reward": 0.3596891,
+    "entropy": 1.7917595,
+    "kl_from_reference": 0.0
+  },
+  "final": {
+    "accuracy": 0.4453125,
+    "mean_reward": 0.5820224,
+    "entropy": 1.767852,
+    "kl_from_reference": 0.0239075
+  },
+  "training": {
+    "steps": 120,
+    "last_diagnostics": {
+      "preference_tree_nodes": 12.0,
+      "lookahead_depth": 1.0,
+      "oracle_comparisons": 6.0
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed mini-suite"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2608.12062-pto/metrics/arithmetic-smoke-seed42.json",
+    "original_code_commit": "working tree",
+    "dataset_fingerprint": "deterministic built-in mini-suite"
+  }
+}

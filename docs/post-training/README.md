@@ -90,6 +90,11 @@
 ## 2026-08-09 P0/P1 增量
 
 - [RRC](2608.06310-rrc/README.md)：把生成式奖励模型的相对排序转成 self-competitive 与 anchor-guided reward。
+
+## 2026-08-13 MR7 增量
+
+- [Preference Tree Optimization](2608.12062-pto/README.md)：以对话树前瞻模拟构造长期偏好，并用 look-ahead reward 执行 DPO。
+- [C²-DPO](2608.12158-c2-dpo/README.md)：比较完整与退化上下文的偏好 margin，以 Contextual Preference Gain 抑制多模态幻觉。
 - [RAIL](2608.05080-rail/README.md)：按可恢复性收益学习 rollout 干预位置与预算。
 - [SpecRoll](2608.04962-specroll/README.md)：用快慢双路径适配 evolving policy，并以 exact verifier 保持 rollout 分布。
 

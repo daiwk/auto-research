@@ -51,6 +51,8 @@
 ## 生成、排序与冷启动
 
 ### 生成式召回与端到端推荐
+- [Sona](../2608.11015-sona/README.md)：以历史压缩、层级 Semantic ID 生成和 item ranking 统一原有音乐推荐级联。
+- [MetaStrategy](../2608.09440-metastrategy/README.md)：让 LLM 产生 typed ranking strategy，再由确定性 compiler 执行请求级多目标排序。
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：共享生成和排序 encoder，以当前 rollout 与真实曝光双路 teacher distillation 统一召回、预排和精排。
 - [HRPO](../2608.00750-hrpo/README.md)：将序列总奖励拆成层级 Semantic ID 前缀的 residual credit-to-go，以细粒度组相对更新改善生成推荐轨迹。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。

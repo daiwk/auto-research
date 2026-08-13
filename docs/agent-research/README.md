@@ -76,6 +76,10 @@
 ## 2026-08-09 P0/P1 增量
 
 - [EvoHarness-RL](2608.05446-evoharness-rl/README.md)、[VaG](2608.05810-vag/README.md) 与 [GSE](2608.06153-gse/README.md)：覆盖 harness policy、技能写入前验证和全局技能图进化。
+
+## 2026-08-13 MR7 增量
+
+- [SinkFlex-RL](2608.10357-sinkflex-rl/README.md)：把 attention sink、sliding window 与无 critic group-relative RL 组合，用于长程工具 Agent。
 - [CIPO](2608.06128-cipo/README.md)、[State2State](2608.04934-state2state/README.md) 与 [HindSearch](2608.01597-hindsearch/README.md)：覆盖证据信用、环境派生任务和失败轨迹 hindsight。
 - [HarnessOpt-Bench](2608.06301-harnessopt-bench/README.md)、[CodeGrep](2608.05886-codegrep/README.md) 与 [MemoryCPT](2608.04843-memorycpt/README.md)：覆盖 harness 优化评测、代码检索策略和成本感知记忆。
 

@@ -4,6 +4,7 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "sinkflex-rl": ("SinkFlex-RL", "https://arxiv.org/abs/2608.10357"),
     "evoharness-rl": ("EvoHarness-RL", "https://arxiv.org/abs/2608.05446"),
     "vag": ("When Self-Evolution Backfires / VaG", "https://arxiv.org/abs/2608.05810"),
     "gse": ("Learning Globally Reusable Skills", "https://arxiv.org/abs/2608.06153"),

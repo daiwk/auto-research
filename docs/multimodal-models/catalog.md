@@ -9,6 +9,7 @@
 
 | 方法族 | 论文 | 机构与日期 | Adapter |
 |---|---|---|---|
+| 生成辅助监督与理解增强 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | `gas` |
 | 高效视觉 token 压缩 | [SmolVLM: Redefining small and efficient multimodal models](../reproductions/2504.05299-smolvlm/README.md) | Hugging Face，2025-04-07 | `smolvlm` |
 | 对比预训练与自蒸馏 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../reproductions/2502.14786-siglip2/README.md) | Google DeepMind，2025-02-20 | `siglip2` |
 | 视觉 token 与跨模态检索 | [Visual Instruction Tuning](../reproductions/2304.08485-llava/README.md) | University of Wisconsin-Madison，2023-04-17 | `llava` |

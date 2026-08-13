@@ -968,6 +968,105 @@
           "doc": "reproductions/2602.16986-ultra-hstu/README.md"
         }
       ]
+    },
+    {
+      "batch": "2026-08-13-latest-cross-domain-review",
+      "scope_kind": "global",
+      "checked_at": "2026-08-13T12:30:00+08:00",
+      "window": "2026-08-10 through 2026-08-13",
+      "sources": [
+        "official arXiv API",
+        "paper PDF full-text review",
+        "Google and Meta affiliation reverse search",
+        "official repository search"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "required_subtopics": [
+        {"track": "recommendation", "subtopic": "generative-ranking"},
+        {"track": "foundation-model", "subtopic": "multimodal"},
+        {"track": "post-training", "subtopic": "preference-optimization"},
+        {"track": "agent", "subtopic": "agentic-rl"}
+      ],
+      "candidates": [
+        {
+          "id": "2608.09440",
+          "title": "MetaStrategy",
+          "priority": "P0",
+          "track": "recommendation",
+          "subtopic": "generative-ranking",
+          "status": "implemented",
+          "key": "metastrategy",
+          "doc": "reproductions/2608.09440-metastrategy/README.md"
+        },
+        {
+          "id": "2608.11015",
+          "title": "Sona Technical Report",
+          "priority": "P0",
+          "track": "recommendation",
+          "subtopic": "generative-ranking",
+          "status": "implemented",
+          "key": "sona",
+          "doc": "reproductions/2608.11015-sona/README.md"
+        },
+        {
+          "id": "2608.12209",
+          "title": "Generation as Auxiliary Supervision",
+          "priority": "P0",
+          "track": "foundation-model",
+          "subtopic": "multimodal",
+          "status": "implemented",
+          "key": "gas",
+          "doc": "reproductions/2608.12209-gas/README.md"
+        },
+        {
+          "id": "2608.12062",
+          "title": "Preference Tree Optimization",
+          "priority": "P0",
+          "track": "post-training",
+          "subtopic": "preference-optimization",
+          "status": "implemented",
+          "key": "pto",
+          "doc": "post-training/2608.12062-pto/README.md"
+        },
+        {
+          "id": "2608.12158",
+          "title": "C2-DPO",
+          "priority": "P0",
+          "track": "post-training",
+          "subtopic": "preference-optimization",
+          "status": "implemented",
+          "key": "c2-dpo",
+          "doc": "post-training/2608.12158-c2-dpo/README.md"
+        },
+        {
+          "id": "2608.10357",
+          "title": "Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks",
+          "priority": "P0",
+          "track": "agent",
+          "subtopic": "agentic-rl",
+          "status": "implemented",
+          "key": "sinkflex-rl",
+          "doc": "agent-research/2608.10357-sinkflex-rl/README.md"
+        },
+        {
+          "id": "2608.12184",
+          "title": "GALLM",
+          "priority": "P1",
+          "track": "recommendation",
+          "subtopic": "generative-ranking",
+          "status": "rejected",
+          "reason": "industrial recommendation paper reports offline evaluation but no quantified online A/B or confirmed full-traffic deployment"
+        },
+        {
+          "id": "2608.12149",
+          "title": "Massive Activations in Large Language Models",
+          "priority": "P1",
+          "track": "foundation-model",
+          "subtopic": "multimodal",
+          "status": "rejected",
+          "reason": "analysis paper does not introduce an independently executable architecture or training algorithm for the reproduction/evolve queue"
+        }
+      ]
     }
   ]
 }

@@ -51,6 +51,160 @@ def reproduce_smolvlm(dataset_dir: Path, seed: int = 42):
     )
 
 
+def reproduce_gas(dataset_dir: Path, seed: int = 42):
+    """Reproduce GAS's removable generation branch on public image QA.
+
+    The deployed understanding network is identical for the baseline and GAS
+    run.  GAS alone receives a training-only MoT upper branch and predicts an
+    EMA-stabilised sequence of continuous target-image patch embeddings.
+    """
+    import copy
+    import torch
+
+    data = load_fashion_mnist_qa(dataset_dir, True, maximum_examples=2000)
+    device = device_for(torch)
+    dimensions = 96
+
+    class UnderstandingModel(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.patch = torch.nn.Conv2d(3, dimensions, 8, 8)
+            self.shared_trunk = torch.nn.Sequential(
+                torch.nn.LayerNorm(dimensions),
+                torch.nn.Linear(dimensions, dimensions),
+                torch.nn.GELU(),
+            )
+            layer = torch.nn.TransformerEncoderLayer(
+                dimensions, 4, dimensions * 2, batch_first=True, dropout=0.0
+            )
+            self.understanding_upper = torch.nn.TransformerEncoder(layer, 1)
+            self.question = torch.nn.Embedding(len(data.question_names), dimensions)
+            self.head = torch.nn.Sequential(
+                torch.nn.LayerNorm(dimensions * 2),
+                torch.nn.Linear(dimensions * 2, len(data.answer_names)),
+            )
+
+        def visual_tokens(self, images):
+            return self.shared_trunk(self.patch(images).flatten(2).transpose(1, 2))
+
+        def forward(self, images, questions, return_shared=False):
+            shared = self.visual_tokens(images)
+            understood = self.understanding_upper(shared).mean(1)
+            logits = self.head(torch.cat((understood, self.question(questions)), -1))
+            return (logits, shared) if return_shared else logits
+
+    class GenerationBranch(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            layer = torch.nn.TransformerEncoderLayer(
+                dimensions, 4, dimensions * 2, batch_first=True, dropout=0.0
+            )
+            self.upper = torch.nn.TransformerEncoder(layer, 1)
+            self.vision_head = torch.nn.Linear(dimensions, dimensions)
+
+        def forward(self, shared):
+            # Position i predicts target embedding i+1, matching NEP's shift.
+            return self.vision_head(self.upper(shared)[:, :-1])
+
+    def train(auxiliary: bool):
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+        model = UnderstandingModel().to(device)
+        generation = GenerationBranch().to(device) if auxiliary else None
+        target = copy.deepcopy(model.patch).to(device).eval()
+        for parameter in target.parameters():
+            parameter.requires_grad_(False)
+        parameters = list(model.parameters())
+        if generation is not None:
+            parameters += list(generation.parameters())
+        optimizer = torch.optim.AdamW(parameters, lr=2e-3)
+        rng = np.random.default_rng(seed)
+        losses, auxiliary_losses = [], []
+        started = time.monotonic()
+        model.train()
+        for step in range(120):
+            indices = rng.integers(0, len(data.train.answers), size=32)
+            images = torch.from_numpy(data.train.images[indices]).to(device)
+            questions = torch.from_numpy(data.train.questions[indices]).to(device)
+            answers = torch.from_numpy(data.train.answers[indices]).to(device)
+            optimizer.zero_grad(set_to_none=True)
+            logits, shared = model(images, questions, return_shared=True)
+            understanding_loss = torch.nn.functional.cross_entropy(logits, answers)
+            loss = understanding_loss
+            if generation is not None:
+                # A correlated generation task: predict the horizontally mirrored
+                # image in the same continuous patch space consumed by the model.
+                with torch.no_grad():
+                    target_tokens = target(images.flip(-1)).flatten(2).transpose(1, 2)
+                predicted = generation(shared)
+                generation_loss = 1 - torch.nn.functional.cosine_similarity(
+                    predicted, target_tokens[:, 1:], dim=-1
+                ).mean()
+                weight = 0.015 + (1.0 - 0.015) * min(1.0, step / 80)
+                loss = loss + weight * generation_loss
+                auxiliary_losses.append(float(generation_loss.detach().cpu()))
+                with torch.no_grad():
+                    for ema, online in zip(target.parameters(), model.patch.parameters()):
+                        ema.mul_(0.999).add_(online, alpha=0.001)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(parameters, 1.0)
+            optimizer.step()
+            losses.append(float(understanding_loss.detach().cpu()))
+        metrics = _vqa_metrics(model, data.test)
+        metrics.update({
+            "deployed_parameters": sum(p.numel() for p in model.parameters()),
+            "training_only_parameters": (
+                sum(p.numel() for p in generation.parameters()) if generation else 0
+            ),
+            "initial_understanding_loss": float(np.mean(losses[:10])),
+            "final_understanding_loss": float(np.mean(losses[-10:])),
+            "final_generation_loss": (
+                float(np.mean(auxiliary_losses[-10:])) if auxiliary_losses else None
+            ),
+            "duration_seconds": time.monotonic() - started,
+            "device": device.type,
+        })
+        return metrics
+
+    baseline = train(False)
+    method = train(True)
+    return {
+        "paper": {"title": "GAS: Generation as Auxiliary Supervision"},
+        "dataset": {
+            "name": data.name,
+            "train_examples": len(data.train.answers),
+            "test_examples": len(data.test.answers),
+        },
+        "baseline": {"name": "understanding-only matched trunk", **baseline},
+        "method": {"name": "GAS MoT + NEP", **method},
+        "relative": {
+            "test_accuracy_points": 100 * (
+                method["test_accuracy"] - baseline["test_accuracy"]
+            ),
+            "deployed_parameter_overhead_percent": 100 * (
+                method["deployed_parameters"] / baseline["deployed_parameters"] - 1
+            ),
+        },
+        "stages": {
+            "matched_steps": 120,
+            "matched_seed": seed,
+            "ema_decay": 0.999,
+            "generation_branch_discarded_at_inference": True,
+            "real_pixels": True,
+        },
+        "paper_results": {
+            "from_scratch_overall_baseline": 47.25,
+            "from_scratch_overall_gas": 48.25,
+            "inference_overhead_percent": 0.0,
+            "training_gpu_hours_overhead_percent": 11.6,
+        },
+        "scope": (
+            "执行共享视觉 trunk、独立 MoT 上层、连续 next-embedding cosine loss、"
+            "EMA target 和推理时删除生成分支；未复刻 Qwen3-VL 2B/4B、10M 生成数据与两阶段多机训练。"
+        ),
+    }
+
+
 def _connector_reproduction(
     dataset_dir: Path,
     seed: int,

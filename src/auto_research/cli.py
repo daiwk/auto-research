@@ -34,6 +34,7 @@ from .multimodal import (
     GENERATIVE_BENCHMARKS, generate_checkpoint_predictions,
     RETRIEVAL_BENCHMARKS, RetrievalPredictionConfig,
     generate_retrieval_predictions,
+    run_checkpoint_matrix, LMMSEvalConfig, run_lmms_eval,
 )
 
 
@@ -326,6 +327,28 @@ def build_parser() -> argparse.ArgumentParser:
     retrieval_predict.add_argument("--score-batch-size", type=int, default=256)
     retrieval_predict.add_argument("--offline", action="store_true")
     _add_runtime_arguments(retrieval_predict)
+
+    matrix = commands.add_parser(
+        "multimodal-matrix",
+        help="run a resumable, budget-matched matrix across public checkpoints",
+    )
+    matrix.add_argument("--config", type=Path, required=True)
+    matrix.add_argument("--output-dir", type=Path, required=True)
+    matrix.add_argument("--seed", type=int, default=42)
+    matrix.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(matrix)
+
+    lmms = commands.add_parser(
+        "multimodal-lmms-eval", help="run the optional upstream lmms-eval backend"
+    )
+    lmms.add_argument("--model", required=True)
+    lmms.add_argument("--model-args", required=True)
+    lmms.add_argument("--tasks", required=True, help="comma-separated lmms-eval tasks")
+    lmms.add_argument("--output-dir", type=Path, required=True)
+    lmms.add_argument("--batch-size", default="1")
+    lmms.add_argument("--limit", type=int)
+    lmms.add_argument("--dry-run", action="store_true")
+    _add_runtime_arguments(lmms)
 
     candidate = commands.add_parser(
         "candidate", help="stage, verify or explicitly promote a generated evolve plugin"
@@ -678,6 +701,27 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Predictions: {args.output}")
             print(f"Resolved revision: {metadata['resolved_revision']}")
             print(f"Images / captions: {metadata['images']} / {metadata['captions']}")
+            return 0
+        if args.command == "multimodal-matrix":
+            run_dir = run_checkpoint_matrix(
+                args.config, args.output_dir, seed=args.seed, offline=args.offline
+            )
+            print(f"Matrix: {run_dir / 'matrix.json'}")
+            print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "multimodal-lmms-eval":
+            result = run_lmms_eval(
+                LMMSEvalConfig(
+                    model=args.model, model_args=args.model_args,
+                    tasks=tuple(value.strip() for value in args.tasks.split(",") if value.strip()),
+                    output_dir=args.output_dir, batch_size=args.batch_size,
+                    limit=args.limit,
+                    device=(None if runtime_summary()["requested_device"] == "auto"
+                            else runtime_summary()["requested_device"]),
+                ),
+                dry_run=args.dry_run,
+            )
+            print(json.dumps(result, ensure_ascii=False))
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

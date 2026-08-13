@@ -27,6 +27,10 @@ INSTALLED_MUTATIONS = {
 
 LLM_MUTATIONS = {
     "2103.00020": ("multimodal:clip", "CLIP 双塔归一化与对称图文对比预训练"),
+    "2608.12209": (
+        "objective:gas-nep",
+        "GAS 以可删除 MoT 生成分支和连续 next-embedding prediction 增强视觉表征",
+    ),
     "2301.12597": ("micro_vlm_qformer", "BLIP-2 以可学习 query cross-attention 连接视觉 token 与语言空间"),
     "2304.08485": ("micro_vlm_mlp", "LLaVA 以可训练 projector 把冻结视觉特征映射到语言 token 空间"),
     "2502.14786": ("objective:siglip2", "SigLIP 2 的 sigmoid 图文目标、masked-view 自蒸馏与语义保持"),
@@ -115,6 +119,8 @@ POST_TRAINING_MUTATIONS = {
     "2608.06310": ("rrc", "把生成式 reward model 的相对排序转为 self-competitive 或 anchor-guided RL reward"),
     "2608.05080": ("rail", "以在线 contextual bandit 学习 recoverability-aware rollout 介入位置和预算"),
     "2608.04962": ("specroll", "用 fast hidden-state correction 与 slow drafter refresh 加速 on-policy rollout"),
+    "2608.12062": ("pto", "以 oracle look-ahead preference tree 构造长期对话偏好，再迭代执行 DPO"),
+    "2608.12158": ("c2-dpo", "显式最大化有无上下文时的 preference gain，同时保留原偏好顺序"),
 }
 
 AGENT_MUTATIONS = {
@@ -187,6 +193,7 @@ AGENT_MUTATIONS = {
     "2608.05886": ("tool:codegrep", "CodeGrep 以 GRPO 学习并行 grep、glob、read 检索并降低 coding-agent rollout 成本"),
     "2608.04843": ("memory:memorycpt", "MemoryCPT 蒸馏离线记忆构建，并用 cost-aware GRPO 训练查询摘要器"),
     "2608.01597": ("critic:hindsearch", "HindSearch 用 gold-aware 失败轨迹 hindsight critique 蒸馏搜索动作"),
+    "2608.10357": ("memory:sinkflex-rl", "以 sink-aware sliding-window FlexAttention 降低长轨迹 GRPO 的显存开销"),
 }
 
 FALLBACK_PAPERS = (
@@ -219,6 +226,7 @@ LLM_FALLBACK_PAPERS = (
     Paper("Visual Instruction Tuning", "LLaVA projects frozen visual features into a language model and performs multimodal instruction tuning.", [], "2023-04-17", "https://arxiv.org/abs/2304.08485", "2304.08485"),
     Paper("SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features", "Sigmoid image-text learning is combined with captioning, masked prediction and self-distillation.", [], "2025-02-20", "https://arxiv.org/abs/2502.14786", "2502.14786"),
     Paper("SmolVLM: Redefining small and efficient multimodal models", "Pixel shuffle compresses visual tokens before a compact language decoder.", [], "2025-04-07", "https://arxiv.org/abs/2504.05299", "2504.05299"),
+    Paper("Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction", "A removable MoT generation branch predicts continuous target-image embeddings while preserving the deployed understanding path.", [], "2026-08-13", "https://arxiv.org/abs/2608.12209", "2608.12209"),
     Paper("BaKron: Efficient Quantization with Kronecker-Factored Hessians", "Two-sided Kronecker-Hessian adaptive rounding with reduced work.", [], "2026-08-06", "https://arxiv.org/abs/2608.06291", "2608.06291"),
     Paper("MACRO: Markov Chain Routing of Transformer Layers", "Learns skip, repeat and residual routes over frozen Transformer layers.", [], "2026-08-06", "https://arxiv.org/abs/2608.05872", "2608.05872"),
     Paper("Hierarchical Latent Prediction for Language Models", "Adds an abstract latent level to stabilize longer-horizon latent prediction.", [], "2026-08-06", "https://arxiv.org/abs/2608.05806", "2608.05806"),

@@ -76,6 +76,7 @@ METHODS = (
     "codegrep",
     "memorycpt",
     "hindsearch",
+    "sinkflex-rl",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import time
 
 import numpy as np
@@ -84,12 +85,26 @@ class MicroVLMEvaluator:
             num_questions=len(self.data.question_names),
             num_answers=len(self.data.answer_names),
         ).to(device)
-        optimizer = torch.optim.AdamW(model.parameters(), lr=genome.learning_rate)
+        generation_branch = None
+        target_patch = None
+        parameters = list(model.parameters())
+        if genome.multimodal_objective == "gas-nep":
+            generation_branch = torch.nn.Sequential(
+                torch.nn.Linear(genome.dimensions, genome.dimensions),
+                torch.nn.GELU(),
+                torch.nn.Linear(genome.dimensions, genome.dimensions),
+            ).to(device)
+            target_patch = copy.deepcopy(model.patch).to(device).eval()
+            for parameter in target_patch.parameters():
+                parameter.requires_grad_(False)
+            parameters += list(generation_branch.parameters())
+        optimizer = torch.optim.AdamW(parameters, lr=genome.learning_rate)
         rng = np.random.default_rng(seed)
         split = self.data.train
         losses = []
         model.train()
-        for _ in range(self.steps):
+        generation_losses = []
+        for step in range(self.steps):
             indices = rng.integers(0, len(split.answers), size=genome.batch_size)
             images = torch.from_numpy(split.images[indices]).to(device)
             questions = torch.from_numpy(split.questions[indices]).to(device)
@@ -111,16 +126,41 @@ class MicroVLMEvaluator:
                 )
             else:
                 loss = torch.nn.functional.cross_entropy(logits, answers)
+                if generation_branch is not None:
+                    shared = model.patch(images).flatten(2).transpose(1, 2)
+                    predicted = generation_branch(shared[:, :-1])
+                    with torch.no_grad():
+                        target = target_patch(images.flip(-1)).flatten(2).transpose(1, 2)
+                    generation_loss = 1 - torch.nn.functional.cosine_similarity(
+                        predicted, target[:, 1:], dim=-1
+                    ).mean()
+                    weight = 0.015 + 0.985 * min(1.0, step / max(1, self.steps * 2 / 3))
+                    loss = loss + weight * generation_loss
+                    generation_losses.append(float(generation_loss.detach().cpu()))
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            torch.nn.utils.clip_grad_norm_(parameters, 1.0)
             optimizer.step()
+            if target_patch is not None:
+                with torch.no_grad():
+                    for ema, online in zip(target_patch.parameters(), model.patch.parameters()):
+                        ema.mul_(0.999).add_(online, alpha=0.001)
             losses.append(float(loss.detach().cpu()))
         return model, {
             "initial_loss": float(np.mean(losses[: min(10, len(losses))])),
             "final_loss": float(np.mean(losses[-min(10, len(losses)) :])),
             "parameters": sum(p.numel() for p in model.parameters()),
             "device": device.type,
-            "architecture_stats": model.architecture_stats(),
+            "architecture_stats": {
+                **model.architecture_stats(),
+                "training_only_generation_parameters": (
+                    sum(p.numel() for p in generation_branch.parameters())
+                    if generation_branch is not None else 0
+                ),
+                "generation_branch_discarded_at_inference": generation_branch is not None,
+                "final_generation_loss": (
+                    float(np.mean(generation_losses[-10:])) if generation_losses else None
+                ),
+            },
         }
 
     def _metrics(self, model, split: MultimodalSplit):

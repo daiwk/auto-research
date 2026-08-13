@@ -7,8 +7,11 @@ from ..data import CandidateGroup
 from ..rollout_correction import (icepop_weights, rollout_engine_probabilities, truncated_importance_weights)
 
 def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, probabilities, reference, rollout_training_probabilities, sampling_probabilities, sampled, diagnostics):
-    if algorithm in {'rrc', 'rail', 'specroll'}:
-        from ..latest_20260809 import update_latest
+    if algorithm in {'rrc', 'rail', 'specroll', 'pto', 'c2-dpo'}:
+        if algorithm in {'pto', 'c2-dpo'}:
+            from ..latest_20260813 import update_latest
+        else:
+            from ..latest_20260809 import update_latest
 
         gradient, loss, latest = update_latest(
             algorithm, state, group, probabilities, reference,

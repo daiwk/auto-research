@@ -17,6 +17,8 @@ from .retrieval import (
     RETRIEVAL_BENCHMARKS, RetrievalPredictionConfig,
     generate_retrieval_predictions,
 )
+from .matrix import MatrixCell, load_matrix, run_checkpoint_matrix
+from .lmms_eval import LMMSEvalConfig, build_lmms_eval_command, run_lmms_eval
 
 __all__ = [
     "MicroVLMEvaluator", "load_cifar10_qa", "load_fashion_mnist_qa",
@@ -27,4 +29,6 @@ __all__ = [
     "generate_checkpoint_predictions",
     "RETRIEVAL_BENCHMARKS", "RetrievalPredictionConfig",
     "generate_retrieval_predictions",
+    "MatrixCell", "load_matrix", "run_checkpoint_matrix",
+    "LMMSEvalConfig", "build_lmms_eval_command", "run_lmms_eval",
 ]

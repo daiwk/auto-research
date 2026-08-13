@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agentic RL / efficient long context | [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](2608.10357-sinkflex-rl/README.md) | Capital One AI Foundations，2026-08-11 | 未发现官方代码 | `sinkflex-rl` |
 | 递归 turn 信用 | [AgentOPSD](2608.05987-agent-opsd/README.md) | Tsinghua University，2026-08-06 | [已开源](https://github.com/ZethWang/AgentOPSD) | `agent-opsd` |
 | 代码检索 Agent | [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](2608.05886-codegrep/README.md) | NetEase Guangzhou AI Lab，2026-08-06 | 未发现官方代码 | `codegrep` |
 | 搜索 Agent RL | [Contextual Information Policy Optimization for Search Agents](2608.06128-cipo/README.md) | Beihang University，2026-08-06 | 未发现官方代码 | `cipo` |
