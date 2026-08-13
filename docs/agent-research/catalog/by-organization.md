@@ -38,6 +38,10 @@
 
 - 2026-07-28 · 一作：Siyu Xia · [UniMem](../2607.26017-unimem/README.md)（`unimem`）：新颖任务先进入 episodic buffer；反复出现且可靠的执行模式再被自路由控制器固化到可扩展 parametric memory。
 
+## Capital One AI Foundations
+
+- 2026-08-11 · 一作：Zelei Cheng · [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](../2608.10357-sinkflex-rl/README.md)（`sinkflex-rl`）：长程工具 Agent 的 on-policy rollout 同时受环境状态、长上下文和训练显存限制。SinkFlex-RL 把 Gymnasium 双控制环境、VERL 风格数据流、无 value model 的 GRPO 与 sink-aware FlexAttention 组合，causal / sliding-window mask 下仍保留模型特有 sink scaling。
+
 ## Carnegie Mellon University
 
 - 2023-03-30 · 一作：Aman Madaan · [Self-Refine](../2303.17651-self-refine/README.md)（`self-refine`）：一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。

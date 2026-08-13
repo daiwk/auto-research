@@ -27,6 +27,7 @@ def test_all_micro_vlm_connectors_execute():
     questions = torch.tensor([0, 2])
     architectures = allowed_architectures("micro-vlm", "query projector", [])
     assert "objective:siglip2" in architectures
+    assert "objective:gas-nep" in architectures
     for architecture in architectures:
         if architecture.startswith("objective:"):
             continue

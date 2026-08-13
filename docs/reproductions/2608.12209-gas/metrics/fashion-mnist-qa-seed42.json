@@ -1,0 +1,29 @@
+{
+  "paper": {"title": "GAS: Generation as Auxiliary Supervision"},
+  "dataset": {"name": "fashion-mnist-qa", "train_examples": 2000, "test_examples": 1000},
+  "baseline": {
+    "name": "understanding-only matched trunk",
+    "test_accuracy": 0.6110000014305115,
+    "shuffled_image_accuracy": 0.10199999809265137,
+    "blank_image_accuracy": 0.10000000149011612,
+    "visual_dependency_delta": 0.5090000033378601,
+    "deployed_parameters": 105226,
+    "training_only_parameters": 0
+  },
+  "method": {
+    "name": "GAS MoT + NEP",
+    "test_accuracy": 0.6349999904632568,
+    "shuffled_image_accuracy": 0.10599999874830246,
+    "blank_image_accuracy": 0.10000000149011612,
+    "visual_dependency_delta": 0.5289999917149544,
+    "deployed_parameters": 105226,
+    "training_only_parameters": 84096,
+    "final_generation_loss": 0.23592169284820558
+  },
+  "relative": {"test_accuracy_points": 2.399998903274536, "deployed_parameter_overhead_percent": 0.0},
+  "stages": {"matched_steps": 120, "matched_seed": 42, "ema_decay": 0.999, "generation_branch_discarded_at_inference": true, "real_pixels": true},
+  "paper_results": {"from_scratch_overall_baseline": 47.25, "from_scratch_overall_gas": 48.25, "inference_overhead_percent": 0.0, "training_gpu_hours_overhead_percent": 11.6},
+  "schema_version": 2,
+  "manifest": {"adapter_key": "gas", "arxiv_id": "2608.12209", "organization": "ByteDance", "published": "2026-08-12", "fidelity": "core_mechanism", "evaluation_tier": "l2_public_dataset"},
+  "evaluation_protocol": {"tier": "l2_public_dataset", "seeds": [42], "formal_comparison": false, "claim_policy": "single-seed smoke result; do not claim a stable improvement"}
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "kind": "artifact-index",
+  "description": "MR7 cross-domain run index; canonical metrics remain beside each paper page",
+  "seed": 42,
+  "artifacts": [
+    "docs/reproductions/2608.09440-metastrategy/metrics/movielens1m-seed42.json",
+    "docs/reproductions/2608.11015-sona/metrics/movielens1m-seed42.json",
+    "docs/reproductions/2608.12209-gas/metrics/fashion-mnist-qa-seed42.json",
+    "docs/post-training/2608.12062-pto/metrics/arithmetic-smoke-seed42.json",
+    "docs/post-training/2608.12158-c2-dpo/metrics/arithmetic-smoke-seed42.json",
+    "docs/agent-research/2608.10357-sinkflex-rl/metrics/scalemcp-mini-seed42.json"
+  ]
+}

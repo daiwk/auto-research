@@ -4,6 +4,8 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "pto": ("Preference Tree Optimization", "https://arxiv.org/abs/2608.12062"),
+    "c2-dpo": ("Context-Calibrated DPO", "https://arxiv.org/abs/2608.12158"),
     "rrc": ("RRC", "https://arxiv.org/abs/2608.06310"),
     "rail": ("Recoverability-Aware Intervention Learning", "https://arxiv.org/abs/2608.05080"),
     "specroll": ("SpecRoll", "https://arxiv.org/abs/2608.04962"),

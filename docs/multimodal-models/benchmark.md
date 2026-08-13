@@ -230,6 +230,38 @@ accuracy **56.80%**，image/text accuracy **62.87% / 51.33%**，parse rate **99.
 |---|---|---|
 | L1 | Fashion-MNIST / CIFAR-10 object QA | 真实公开图像上的缩小实验 |
 | L2 | ScienceQA、POPE、COCO/Flickr retrieval | 可审计的真实 checkpoint 公开 benchmark 结果；固定子集必须显式标注 |
-| L3 | lmms-eval 完整任务套件、跨 checkpoint 同预算矩阵 | 标准 VLM 能力与效率对照 |
+| L3 | `lmms-eval` 完整任务套件、跨 checkpoint 同预算矩阵 | 标准 VLM 能力与效率对照 |
+
+## MR7：跨 checkpoint 矩阵
+
+MR7 把单 checkpoint 运行升级为可恢复矩阵。每个 cell 固定 benchmark、样本上限、seed 与 batch fallback；OOM 只回退配置中显式列出的 batch，已写入预测继续复用。生成式 VLM 和检索编码器按 `family / benchmark` 分组，绝不放进同一排行榜。
+
+本地还用缓存的官方 `SmolVLM2-256M-Video-Instruct` 不可变 revision 对一个真实像素 POPE smoke cell 跑通完整加载、生成、归一化、scorer、状态文件和 Markdown 报告链路；该样例仅验证执行路径，不作为模型质量结论。多 checkpoint 的比较结果必须在相同公开 split 和预算上另行运行，不能用 smoke 样本冒充。
+
+```bash
+auto-research multimodal-matrix \
+  --config configs/multimodal-checkpoint-matrix.example.json \
+  --output-dir runs/multimodal-matrix \
+  --device cuda
+```
+
+输出 `matrix.json` 保存 revision、性能、延迟和峰值显存，`report.md` 给出同类可比较表。配置中的数据和 checkpoint 路径均为本地路径，仓库不提交数据或权重。
+
+## 官方 lmms-eval 接口
+
+仓库以可选依赖接入上游 `lmms-eval 0.7`，通过 argv 列表启动而非 shell 字符串，并保存完整 request。先 dry-run 审计命令：
+
+```bash
+pip install -e '.[lmms-eval]'
+auto-research multimodal-lmms-eval \
+  --model qwen2_5_vl \
+  --model-args pretrained=Qwen/Qwen2.5-VL-3B-Instruct,device_map=auto \
+  --tasks mme,mmmu_val \
+  --limit 8 \
+  --output-dir runs/lmms-eval/qwen25vl \
+  --dry-run
+```
+
+去掉 `--dry-run` 才会下载任务并推理。上游任务模板和 scorer 属于 `lmms-eval`；本仓库只负责可审计调用、运行目录与后续统一矩阵汇总。
 
 任何仅在 L0 获得的提升都不能表述为通用视觉语言能力提升。

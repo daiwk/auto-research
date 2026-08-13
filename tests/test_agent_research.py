@@ -156,6 +156,20 @@ def test_20260809_agent_mechanisms_are_observable(
         assert result.diagnostics[diagnostic] > 0
 
 
+def test_sinkflex_rl_preserves_sink_and_compresses_long_context(tmp_path: Path):
+    from auto_research.agent_research.latest_20260813 import sink_window_indices
+
+    assert sink_window_indices(8, 3, 1) == (0, 5, 6, 7)
+    result, _ = AgentResearchRunner(AgentResearchConfig(
+        method="sinkflex-rl", benchmark="scalemcp-mini", episodes=24,
+        memory_size=12, output_dir=tmp_path,
+    )).run()
+    assert result.metrics["joint_success"] == 1.0
+    assert result.diagnostics["policy_updates"] > 0
+    assert result.diagnostics["context_compressions"] > 0
+    assert result.diagnostics["outcome_rewards"] > 0
+
+
 def test_osreward_reports_both_class_recalls_and_leniency(tmp_path: Path):
     result, _ = AgentResearchRunner(
         AgentResearchConfig(

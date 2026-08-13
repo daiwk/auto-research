@@ -145,6 +145,23 @@ def test_20260809_post_training_mechanisms_are_observable(
 @pytest.mark.parametrize(
     ("algorithm", "diagnostics"),
     [
+        ("pto", ("preference_tree_nodes", "lookahead_depth", "oracle_comparisons")),
+        ("c2-dpo", ("contextual_preference_gain", "preference_pairs", "ordering_preservation")),
+    ],
+)
+def test_20260813_post_training_mechanisms_are_observable(
+    tmp_path: Path, algorithm: str, diagnostics: tuple[str, ...]
+):
+    result, _ = PostTrainingRunner(PostTrainingConfig(
+        algorithm=algorithm, steps=16, maximum_examples=48, output_dir=tmp_path,
+    )).run()
+    for diagnostic in diagnostics:
+        assert diagnostic in result.training["last_diagnostics"]
+
+
+@pytest.mark.parametrize(
+    ("algorithm", "diagnostics"),
+    [
         (
             "gkd",
             (

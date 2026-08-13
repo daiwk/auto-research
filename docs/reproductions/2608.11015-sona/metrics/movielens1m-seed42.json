@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:sona",
+  "seed": 42,
+  "dataset": "MovieLens-1M",
+  "users": 260,
+  "items": 420,
+  "baseline": {"hit_at_10": 0.0423076923, "ndcg_at_10": 0.0208324246, "head_share_at_10": 0.0653846154},
+  "sona": {"hit_at_10": 0.0038461538, "ndcg_at_10": 0.0016564483, "head_share_at_10": 0.1003846154, "semantic_id_token_targets": 7200, "history_compression_ratio": 4.0},
+  "relative": {"hit_at_10_percent": -90.9091, "ndcg_at_10_percent": -92.0487, "head_share_at_10_percent": 53.5294},
+  "evaluation_protocol": {"tier": "l2_public_dataset", "seeds": [42], "formal_comparison": false, "claim_policy": "single-seed smoke result; do not claim a stable improvement"},
+  "provenance": {"artifact_path": "docs/reproductions/2608.11015-sona/metrics/movielens1m-seed42.json", "original_code_commit": "working tree", "dataset_fingerprint": "recorded in raw run; checkpoint not committed"}
+}

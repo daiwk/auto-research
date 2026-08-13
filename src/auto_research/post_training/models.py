@@ -78,6 +78,8 @@ ALGORITHMS = (
     "rrc",
     "rail",
     "specroll",
+    "pto",
+    "c2-dpo",
 )
 
 

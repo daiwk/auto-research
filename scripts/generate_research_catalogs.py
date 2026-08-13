@@ -249,6 +249,7 @@ FOUNDATION_TOPIC_HIERARCHY = {
     "llava": ("多模态基础模型", "视觉 token 与跨模态检索"),
     "siglip2": ("多模态基础模型", "对比预训练与自蒸馏"),
     "smolvlm": ("多模态基础模型", "高效视觉 token 压缩"),
+    "gas": ("多模态基础模型", "生成辅助监督与理解增强"),
     "speculative-decoding": ("推理与系统效率", "推测解码与 KV cache"),
     "awq": ("推理与系统效率", "量化"),
     "medusa": ("推理与系统效率", "推测解码与 KV cache"),
@@ -260,7 +261,7 @@ FOUNDATION_DOMAIN_ORDER = (
     "多模态基础模型",
     "推理与系统效率",
 )
-MULTIMODAL_ADAPTER_KEYS = {"clip", "blip2", "llava", "siglip2", "smolvlm"}
+MULTIMODAL_ADAPTER_KEYS = {"clip", "blip2", "llava", "siglip2", "smolvlm", "gas"}
 
 
 def read_method_summary(module: str, link: str) -> str:

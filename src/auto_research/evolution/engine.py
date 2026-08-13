@@ -333,8 +333,9 @@ def _paper_ids(genome, papers):
         elif paper.architecture == genome.post_training:
             matched.append(paper.arxiv_id)
         elif (
-            paper.architecture == "objective:siglip2"
-            and genome.multimodal_objective == "siglip2"
+            paper.architecture
+            and paper.architecture.startswith("objective:")
+            and genome.multimodal_objective == paper.architecture.split(":", 1)[1]
         ):
             matched.append(paper.arxiv_id)
         elif (

@@ -19,7 +19,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         values = [
             "micro_vlm_linear", "micro_vlm_mlp", "micro_vlm_query",
             "micro_vlm_qformer", "micro_vlm_gated", "micro_vlm_pixelshuffle",
-            "objective:siglip2",
+            "objective:siglip2", "objective:gas-nep",
         ]
         text = direction.lower()
         priorities = {

@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:sinkflex-rl",
+  "method": "sinkflex-rl",
+  "seed": 42,
+  "benchmark": "scalemcp-mini",
+  "episodes": 120,
+  "metrics": {"answer_accuracy": 1.0, "plan_success": 1.0, "joint_success": 1.0, "average_cost": 0.67},
+  "diagnostics": {"policy_updates": 120, "outcome_rewards": 120, "memories_retrieved": 360, "context_compressions": 240},
+  "evaluation_protocol": {"tier": "l1_mechanism", "seeds": [42], "formal_comparison": false, "claim_policy": "deterministic mini-suite"},
+  "provenance": {"artifact_path": "docs/agent-research/2608.10357-sinkflex-rl/metrics/scalemcp-mini-seed42.json", "original_code_commit": "working tree", "dataset_fingerprint": "deterministic built-in mini-suite"}
+}

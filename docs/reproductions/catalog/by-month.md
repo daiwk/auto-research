@@ -3,6 +3,8 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-08
+- [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
+- [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：Yandex 用共享 encoder 串联 SID 生成与 item-level ranking，并从当前 rollout 和真实曝光双路蒸馏高容量 teacher。
 - [DEGR](../2608.04809-degr/README.md)：京东把 cohort 多样性约束与 reward-adaptive ORPO 加入生成式重排，再以多样性 greedy selection 输出列表。
 - [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：以 fresh/delayed 双目标、生命周期 gate 与共享专家联合优化直播推荐，兼顾即时互动和延迟价值。

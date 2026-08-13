@@ -83,6 +83,8 @@ MODULES = {
         "minirl": "2512.01374-minirl",
         "missing-old-logits": "2605.12070-missing-old-logits",
         "stare": "2606.19236-stare",
+        "pto": "2608.12062-pto",
+        "c2-dpo": "2608.12158-c2-dpo",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -145,6 +147,7 @@ MODULES = {
         "camel": "2303.17760-camel",
         "toolbench": "2305.16504-toolbench",
         "gaia": "2311.12983-gaia",
+        "sinkflex-rl": "2608.10357-sinkflex-rl",
     },
 }
 
@@ -271,11 +274,14 @@ def test_recommendation_and_foundation_method_indexes_are_in_navigation():
 def test_latest_cross_domain_papers_store_metrics_beside_each_detail_page():
     expected = {
         "post-training": {
+            "2608.12062-pto": "arithmetic-smoke-seed42.json",
+            "2608.12158-c2-dpo": "arithmetic-smoke-seed42.json",
             "2608.06310-rrc": "arithmetic-smoke-seed42.json",
             "2608.05080-rail": "arithmetic-smoke-seed42.json",
             "2608.04962-specroll": "arithmetic-smoke-seed42.json",
         },
         "agent-research": {
+            "2608.10357-sinkflex-rl": "scalemcp-mini-seed42.json",
             "2608.05446-evoharness-rl": "planbench-mini-seed42.json",
             "2608.05810-vag": "planbench-mini-seed42.json",
             "2608.06153-gse": "planbench-mini-seed42.json",

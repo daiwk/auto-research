@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-08 · [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](../2608.10357-sinkflex-rl/README.md)（`sinkflex-rl`）：长程工具 Agent 的 on-policy rollout 同时受环境状态、长上下文和训练显存限制。SinkFlex-RL 把 Gymnasium 双控制环境、VERL 风格数据流、无 value model 的 GRPO 与 sink-aware FlexAttention 组合，causal / sliding-window mask 下仍保留模型特有 sink scaling。
 - 2026-08 · [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
 - 2026-08 · [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](../2608.05886-codegrep/README.md)（`codegrep`）：**主题：代码检索 Agent。** 以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。
 - 2026-08 · [Contextual Information Policy Optimization for Search Agents](../2608.06128-cipo/README.md)（`cipo`）：**主题：搜索 Agent RL。** 只奖励最终答案会让检索退化成确认偏见。

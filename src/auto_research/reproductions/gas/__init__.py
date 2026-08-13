@@ -1,0 +1,1 @@
+"""GAS paper adapter."""
