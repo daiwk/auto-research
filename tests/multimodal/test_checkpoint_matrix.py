@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 import subprocess
 
+import pytest
+
 from auto_research.multimodal.lmms_eval import (
     LMMSEvalConfig, build_lmms_eval_command, run_lmms_eval,
 )
@@ -33,7 +35,11 @@ def test_matrix_retries_oom_and_writes_comparable_report(tmp_path):
         if cfg.batch_size == 4:
             raise RuntimeError("CUDA out of memory")
         cfg.output.write_text(json.dumps({"id": "1", "prediction": "yes"}) + "\n")
-        return {"resolved_revision": "abc", "inference_seconds": 0.2}
+        return {
+            "resolved_revision": "abc", "inference_seconds": 0.2,
+            "seconds_per_new_prediction": 0.2, "selected_examples": 1,
+            "peak_gpu_memory_mb": 123.0,
+        }
 
     output = tmp_path / "out"
     run_checkpoint_matrix(config, output, generative_runner=runner)
@@ -41,7 +47,10 @@ def test_matrix_retries_oom_and_writes_comparable_report(tmp_path):
     assert calls == [4, 1]
     assert payload["cells"]["tiny"]["status"] == "completed"
     assert payload["cells"]["tiny"]["metrics"]["accuracy"] == 1.0
-    assert "只在相同 family" in (output / "report.md").read_text()
+    report = (output / "report.md").read_text()
+    assert "只在相同 family" in report
+    assert "0.2000" in report
+    assert "123.0" in report
 
     run_checkpoint_matrix(config, output, generative_runner=runner)
     assert calls == [4, 1]
@@ -58,6 +67,30 @@ def test_matrix_rejects_duplicate_names(tmp_path):
         assert "unique" in str(exc)
     else:
         raise AssertionError("duplicate matrix cell was accepted")
+
+
+def test_matrix_rejects_unfair_comparison_group(tmp_path):
+    config = _inputs(tmp_path)
+    payload = json.loads(config.read_text())
+    other = dict(payload["cells"][0])
+    other.update({"name": "unfair", "maximum_examples": 50})
+    payload["cells"].append(other)
+    config.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="not budget-matched.*maximum_examples"):
+        load_matrix(config)
+
+
+def test_matrix_resume_rejects_config_or_seed_drift(tmp_path):
+    config = _inputs(tmp_path)
+
+    def runner(cfg):
+        cfg.output.write_text(json.dumps({"id": "1", "prediction": "yes"}) + "\n")
+        return {"resolved_revision": "abc", "selected_examples": 1}
+
+    output = tmp_path / "out"
+    run_checkpoint_matrix(config, output, generative_runner=runner)
+    with pytest.raises(ValueError, match="config/seed changed"):
+        run_checkpoint_matrix(config, output, seed=43, generative_runner=runner)
 
 
 def test_lmms_eval_bridge_is_shell_free_and_dry_runnable(tmp_path):
