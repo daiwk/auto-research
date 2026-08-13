@@ -323,6 +323,26 @@ def test_committed_full_pope_result_is_complete_and_checkpoint_free():
     assert payload["aggregate_metrics"]["parse_rate"]["mean"] == 1.0
 
 
+def test_committed_mr8_matrix_has_eight_full_split_checkpoint_cells():
+    path = Path(__file__).parents[1] / (
+        "docs/multimodal-models/metrics/checkpoint-matrix-mr8-full.json"
+    )
+    payload = json.loads(path.read_text())
+    groups = payload["comparison_groups"]
+    assert sum(len(group["results"]) for group in groups) == 8
+    assert [group.get("examples", group.get("images")) for group in groups] == [
+        4241, 3000, 5000,
+    ]
+    assert groups[0]["results"][-1]["metrics"]["accuracy"] == (
+        0.7960386701249705
+    )
+    assert groups[2]["results"][-1]["metrics"]["mean_recall"] == (
+        0.7428514194322271
+    )
+    assert payload["metadata"]["checkpoint_committed"] is False
+    assert payload["metadata"]["predictions_committed"] is False
+
+
 def test_retrieval_checkpoint_generates_compact_auditable_rankings(tmp_path, monkeypatch):
     from auto_research.multimodal.benchmarks import score_benchmark
 

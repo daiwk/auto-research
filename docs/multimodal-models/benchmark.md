@@ -280,6 +280,47 @@ auto-research multimodal-matrix \
 文件同时绑定完整配置与 seed 的 SHA-256，修改协议后不能误续跑旧结果。checkpoint、COCO
 图像和逐样本预测仍不提交 Git，只保存可审计的聚合指标、不可变 revision 与复现命令。
 
+### 已执行结果
+
+2026-08-13 已在单卡 NVIDIA A30 上完成 8 个 cell。结果均为固定 seed 的确定性推理，适合
+比较不可变 checkpoint，不冒充训练多 seed 置信区间。完整机器可读结果见
+[`metrics/checkpoint-matrix-mr8-full.json`](metrics/checkpoint-matrix-mr8-full.json)。
+
+ScienceQA 完整 test 4,241 条：
+
+| checkpoint | accuracy | image / text accuracy | sec/example | 峰值显存 |
+|---|---:|---:|---:|---:|
+| SmolVLM2-256M | 54.92% | 62.82% / 47.75% | 0.188 | 0.96 GiB |
+| SmolVLM2-500M | 65.03% | 75.06% / 55.94% | 0.206 | 1.41 GiB |
+| SmolVLM2-2.2B | **79.60%** | **88.25% / 71.76%** | 0.185 | 6.12 GiB |
+
+500M 相对 256M 提升 10.12 points；2.2B 相对 256M 提升 24.69 points。生成提前停止会影响
+实测延迟，因此 2.2B 的较低 `sec/example` 不能表述为其模型本体比小模型更快。
+
+POPE COCO adversarial 完整 3,000 条：
+
+| checkpoint | accuracy | precision / recall / F1 | yes ratio | sec/example |
+|---|---:|---:|---:|---:|
+| SmolVLM2-256M | 75.13% | 95.75% / 52.60% / 67.90% | 27.47% | 0.316 |
+| SmolVLM2-500M | 80.93% | 79.04% / **84.20%** / 81.54% | 53.27% | 0.325 |
+| SmolVLM2-2.2B | **83.33%** | 85.31% / 80.53% / **82.85%** | 47.20% | 0.362 |
+
+500M 已显著缓解 256M 的 `no` 偏置；2.2B accuracy/F1 继续提高，但 recall 低于 500M，说明
+规模增大并不保证每个行为子指标单调改善。
+
+COCO Karpathy test 5K（5,000 图、25,010 captions）：
+
+| checkpoint | I→T R@1/5/10 | T→I R@1/5/10 | mean recall | 峰值显存 |
+|---|---:|---:|---:|---:|
+| CLIP ViT-B/32 | 50.30 / 74.94 / 83.46 | 30.46 / 55.93 / 66.91 | 60.33% | 0.53 GiB |
+| SigLIP2 Base P16-224 | **65.26 / 85.92 / 91.66** | **48.84 / 72.96 / 81.06** | **74.29%** | 1.23 GiB |
+
+SigLIP2 mean recall 比 CLIP 高 13.95 points，但峰值显存约 2.31 倍。本次真实运行还发现并
+修复了一个容易静默污染结果的兼容问题：SigLIP/SigLIP2 在最终文本位置 pooling，若使用
+动态 padding，同一 caption 的表示会随 batch 最长文本变化，错误运行的 mean recall 只有
+14.16%。预测器现在统一使用 checkpoint `max_length`，并有回归测试锁定该协议；错误结果
+未写入最终指标。
+
 ## 官方 lmms-eval 接口
 
 仓库以可选依赖接入上游 `lmms-eval 0.7`，通过 argv 列表启动而非 shell 字符串，并保存完整 request。先 dry-run 审计命令：

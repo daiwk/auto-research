@@ -107,6 +107,13 @@ precision/recall/F1 为 **95.76% / 52.67% / 67.96%**，解析率 **100%**。yes 
 结构化结果见
 [`metrics/pope-adversarial-smolvlm2-256m-full.json`](metrics/pope-adversarial-smolvlm2-256m-full.json)。
 
+MR8 又在统一 16-token 生成预算下完成 SmolVLM2 256M/500M/2.2B 的完整 ScienceQA 与
+POPE 对照，并在 COCO Karpathy test 5K 比较 CLIP ViT-B/32 与 SigLIP2 Base P16-224。
+ScienceQA accuracy 为 **54.92% / 65.03% / 79.60%**；POPE F1 为
+**67.90% / 81.54% / 82.85%**；SigLIP2 与 CLIP 的 COCO mean recall 为
+**74.29% / 60.33%**。完整公平协议、效率指标、异常诊断和边界见
+[多模态统一评测](benchmark.md)。
+
 此前在官方 ScienceQA test split 固定前 500 条上，`SmolVLM2-256M-Video-Instruct`
 （commit `067788b187b95ebe7b2e040b3e4299e342e5b8fd`）确定性 zero-shot accuracy 为
 **56.80%**；image/text 分项为 **62.87% / 51.33%**，输出解析率 **99.80%**。
