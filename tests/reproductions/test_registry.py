@@ -102,6 +102,7 @@ def test_builtin_adapters_are_discoverable():
         "idproxy",
         "glide",
         "genrec",
+        "genrec-netflix",
         "rankgraph2",
         "solaris",
         "minimax-sparse-attention",

@@ -6,6 +6,7 @@
 ## 大模型能力与推荐融合
 
 ### LLM / Foundation model + Recommendation
+- [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：把用户历史、内容和请求上下文文本化，以 LoRA 后训练 causal LLM，再由 catalog-aware head 输出全目录分数。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：在开放网页行为上联合双裁剪对比学习与 next-item 目标预训练共享 user encoder，再迁移到广告 CTR 和访问率任务。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用行为推荐器产生 RAS reward 来优化多模态内容描述，但 serving 不读取用户行为。
 - [Melo](../2607.23718-melo/README.md)：将 LLM 音乐 Agent 与实体 grounding、检索校验和反思重试组合为生产 playlist 流程。
@@ -96,6 +97,7 @@
 - [TIGER](../2305.05065-tiger/README.md)：先用 RQ-VAE 构造层级 Semantic ID，再自回归生成目标物品。
 
 ### 排序网络与长序列
+- [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：用 prefill-only LLM 取代逐 token 解码，联合 catalog head、language loss 和 reward-weighted ranking loss 执行大目录精排。
 - [CCFormer](../2607.28070-ccformer/README.md)：以字段分离的 ID/content 编码和门控融合增强冷内容泛化，再分层压缩远期 token、保留近期行为细节。
 - [HA-MoE](../2607.27577-ha-moe/README.md)：用内容异构性控制多门控 MoE，在同一排序器内平衡通用与领域专长信号。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。

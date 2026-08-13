@@ -1,0 +1,47 @@
+name: Paper discovery candidates
+
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: Number of days to scan
+        required: false
+        default: "14"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: paper-discovery
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        track: [recommendation, foundation-model, post-training, agent]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e .
+      - name: Build high-recall candidate queue
+        env:
+          LOOKBACK_DAYS: ${{ inputs.lookback_days || '14' }}
+        run: >-
+          python scripts/discover_papers.py
+          --track "${{ matrix.track }}"
+          --lookback-days "$LOOKBACK_DAYS"
+          --page-size 50
+          --maximum-results-per-query 200
+          --output "paper-candidates-${{ matrix.track }}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.track }}-paper-candidates
+          path: paper-candidates-${{ matrix.track }}.json
+          retention-days: 30

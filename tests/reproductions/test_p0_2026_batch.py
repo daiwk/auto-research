@@ -35,7 +35,7 @@ def test_nova_verification_and_evorec_memory_change_next_generation():
 def test_p0_recommendation_adapters_keep_online_evidence():
     for key in (
         "nova", "evorec", "tokenmixer-large", "msn", "idproxy",
-        "glide", "genrec", "rankgraph2", "solaris",
+        "glide", "genrec", "genrec-netflix", "rankgraph2", "solaris",
     ):
         assert get_adapter(key).paper.has_online_ab
 

@@ -8,6 +8,7 @@ on:
       - "scripts/**"
       - "pyproject.toml"
       - ".github/workflows/quality.yml"
+      - ".github/workflows/paper-discovery.yml"
   push:
     branches: [main]
     paths:
@@ -16,6 +17,7 @@ on:
       - "scripts/**"
       - "pyproject.toml"
       - ".github/workflows/quality.yml"
+      - ".github/workflows/paper-discovery.yml"
   workflow_dispatch:
 
 permissions:

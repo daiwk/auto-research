@@ -8552,6 +8552,91 @@
     },
     {
       "domain": "recommendation",
+      "key": "genrec-netflix",
+      "title": "GenRec: An LLM-Backed Recommendation Ranker at Netflix",
+      "paper_url": "https://arxiv.org/abs/2608.10257",
+      "detail_path": "reproductions/2608.10257-genrec-netflix/README.md",
+      "topic": [
+        "ranking",
+        "llm-recommendation",
+        "post-training",
+        "reward-weighting",
+        "context-engineering",
+        "training-serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Netflix",
+      "published": "2026-08-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "genrec-netflix",
+        "arxiv_id": "2608.10257",
+        "title": "GenRec: An LLM-Backed Recommendation Ranker at Netflix",
+        "paper_url": "https://arxiv.org/abs/2608.10257",
+        "track": "recommendation",
+        "organization": "Netflix",
+        "published": "2026-08-10",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "llm-recommendation",
+          "post-training",
+          "reward-weighting",
+          "context-engineering",
+          "training-serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/genrec_netflix",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "ID-only discriminative GRU ranker with matched Phase-2 examples",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "MRR",
+          "head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "steps=120",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "online_evidence": [
+          {
+            "product": "Netflix batch-compute recommendation surfaces",
+            "metric": "short-term homepage engagement",
+            "lift_percent": 0.115,
+            "traffic": "approximately 10% traffic",
+            "source_url": "https://arxiv.org/html/2608.10257v1#S5.SS1",
+            "source_location": "Section 5.1 / Figure 3",
+            "experiment_duration": "4 weeks",
+            "significance": "P = 3.1e-10",
+            "retrieved_at": "2026-08-13"
+          },
+          {
+            "product": "Netflix batch-compute recommendation surfaces",
+            "metric": "long-term core metric",
+            "lift_percent": 0.006,
+            "traffic": "approximately 10% traffic",
+            "source_url": "https://arxiv.org/html/2608.10257v1#S5.SS1",
+            "source_location": "Section 5.1 / Figure 3",
+            "experiment_duration": "4 weeks",
+            "significance": "P = 0.025",
+            "retrieved_at": "2026-08-13"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "glide",
       "title": "Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify",
       "paper_url": "https://arxiv.org/abs/2603.17540",
