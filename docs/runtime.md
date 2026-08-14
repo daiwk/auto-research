@@ -145,7 +145,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
 python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -e '.[neural-recs,llm-evolution,plum]'
+python -m pip install -e .
+auto-research-install-runtime --extras neural-recs,llm-evolution,plum
 
 auto-research reproduce \
   --paper din \
