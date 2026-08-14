@@ -98,12 +98,13 @@ cd /path/to/auto-research
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
+python -m pip install -e .
 
 # 模型自动进化、推荐网络与蒸馏实验
-python -m pip install -e '.[neural-recs]'
+auto-research-install-runtime --extras neural-recs
 
 # Mac 本地 decoder-only LLM 自动进化
-python -m pip install -e '.[llm-evolution]'
+auto-research-install-runtime --extras llm-evolution
 
 # 验证命令已经安装
 auto-research --help
@@ -113,10 +114,13 @@ auto-research evolve --help
 python -m pip install -e '.[dev]'
 
 # PLUM 与 PRECISE 的真实 LLM 阶段另装可选依赖
-python -m pip install -e '.[plum]'
+auto-research-install-runtime --extras plum
 ```
 
-这里的 `-e` 表示可编辑安装：更新本仓库的 Python 源码后通常不用重新安装。每次新开终端需要先执行 `source .venv/bin/activate`；不想激活环境时，也可以直接运行 `.venv/bin/auto-research --help`。若刚更新了依赖配置，再执行一次 `python -m pip install -e '.[neural-recs]'`。
+这里的 `-e` 表示可编辑安装：更新本仓库的 Python 源码后通常不用重新安装。
+`auto-research-install-runtime` 会先 dry-run；如果可选依赖准备替换现有 PyTorch，会在真正
+安装前退出。每次新开终端需要先执行 `source .venv/bin/activate`；不想激活环境时，也可以
+直接运行 `.venv/bin/auto-research --help`。
 
 ### 公开数据准备
 

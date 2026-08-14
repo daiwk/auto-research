@@ -68,11 +68,17 @@ python -m pip install -U pip
 
 # 先安装开发机 CUDA 对应的 torch，再安装项目
 python -m pip install torch --index-url <PyTorch 官方给出的 CUDA wheel index>
-python -m pip install -e '.[neural-recs,llm-evolution,plum]'
+python -m pip install -e .
+auto-research-install-runtime --extras neural-recs,llm-evolution,plum
 
 nvidia-smi
 python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
 ```
+
+`auto-research-install-runtime` 会先执行 pip dry-run 并读取解析报告；如果安装计划会把
+现有 PyTorch 换成另一个版本，它会在真正安装前退出。这样能够保留开发机已有的 CUDA
+或供应商定制构建。确实希望更换时必须显式传 `--allow-torch-change`。项目接受兼容的
+PyTorch 2.7 预发布/定制构建，但不会在文档或指标中记录机器专属构建字符串。
 
 指定第一张可见 GPU：
 
@@ -139,7 +145,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
 python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -e '.[neural-recs,llm-evolution,plum]'
+python -m pip install -e .
+auto-research-install-runtime --extras neural-recs,llm-evolution,plum
 
 auto-research reproduce \
   --paper din \

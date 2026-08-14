@@ -72,7 +72,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | EV-002 | P1 | 将 PT-001～PT-004 接入后训练 genome | 数据、objective、teacher、rollout 和系统参数可组合且遵守公平预算 |
 | EV-003 | P1 | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy 可组合，跨 episode 复用与失败恢复可测 |
 | EV-004 | P1 | GenRec 类生成式推荐 evolve | 真实 catalog head、context/reward/distillation 旋钮和统一推荐基线；Netflix 不因此获得论文优先级 |
-| INFRA-001 | P1 | GPU 依赖防护 | 安装可选依赖不静默替换不兼容 PyTorch；CI 覆盖 Linux CPU，A30 做关键路径回归 |
+| INFRA-001 | DONE · [PR #111](https://github.com/daiwk/auto-research/pull/111) | GPU 依赖防护 | pip dry-run 阻止静默替换现有 PyTorch；Linux CPU 合同测试覆盖，既有 A30 关键路径回归继续保留 |
 | INFRA-002 | P1 | 重点 adapter 多 seed 晋级 | 从单 seed 机制验证挑选 P0/代表 P1，统一 3 seeds、置信区间和失败结果 |
 
 ## 等待公开证据，不创建占位实现
@@ -100,4 +100,3 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 3. evolve 接入必须说明算子来自已实现论文、实时检索还是新组合假设，不能混写。
 4. 完成后把状态改成 `DONE`，补充 PR 链接和关键证据；未完成部分拆出新编号。
 5. 不在其他页面复制待办表；谱系页只链接本页，避免多个“剩余任务”互相矛盾。
-
