@@ -13,11 +13,11 @@ dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.12,<1"]
-plum = ["torch>=2.7,<3", "transformers>=5.0,<6", "safetensors>=0.5"]
-neural-recs = ["torch>=2.7,<3"]
-llm-evolution = ["torch>=2.7,<3", "tokenizers>=0.21,<1"]
+plum = ["torch>=2.7.0a0,<3", "transformers>=5.0,<6", "safetensors>=0.5"]
+neural-recs = ["torch>=2.7.0a0,<3"]
+llm-evolution = ["torch>=2.7.0a0,<3", "tokenizers>=0.21,<1"]
 multimodal = [
-  "torch>=2.7,<3",
+  "torch>=2.7.0a0,<3",
   "torchvision>=0.22,<1",
   "transformers>=5.0,<6",
   "huggingface-hub>=1.0,<2",
@@ -36,6 +36,7 @@ paper-figures = [
 [project.scripts]
 auto-research = "auto_research.cli:main"
 auto-research-maintain = "auto_research.maintenance:main"
+auto-research-install-runtime = "auto_research.dependency_guard:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
