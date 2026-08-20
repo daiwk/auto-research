@@ -33,6 +33,7 @@ nav:
           - 按年份: foundation-models/catalog/by-year.md
           - 论文谱系与缺口: foundation-models/lineage.md
           - 统一评测协议: foundation-models/benchmark.md
+          - Scaling-law 多预算实验: foundation-models/scaling-law.md
       - 多模态大模型:
           - 研究总览: multimodal-models/README.md
           - 方法索引: multimodal-models/catalog.md
