@@ -28,8 +28,8 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | DISC-001 | DONE | 每日四领域多查询、分页、canonical arXiv ID 去重 | GitHub Actions 生成四个候选 artifact |
 | DISC-002 | DONE | 候选与 manifest、历史 ledger 自动差分 | JSON 和 Actions 摘要区分新候选、已实现、已审计 |
 | DISC-003 | DONE | Google / Meta 新候选自动置顶预警 | 仅两家触发 warning；Netflix 等保持普通候选 |
-| DISC-004 | P1 | 跨来源召回 | 增加官方研究页、会议列表、作者主页/GitHub 和 citation snowball，并保留来源 provenance |
-| DISC-005 | P1 | 批次终态自动回写 | 人工全文审查后追加 ledger batch；未终态 P0/P1 时 strict audit 失败 |
+| DISC-004 | DONE · 本 MR | 跨来源召回 | 官方研究页、会议列表、作者主页/GitHub 和 citation snowball 均保留 provenance 与单源失败 |
+| DISC-005 | DONE · 本 MR | 批次终态自动回写 | 回写器要求全部新候选终态；strict audit 可核对待审 artifact 与 ledger |
 
 每个新工业候选先按“机构/主题”召回，再读 PDF/HTML 全文。只有量化线上 A/B，或用户
 明确认可的统计显著全流量部署，才进入实现队列；摘要未写 A/B 不能作为拒绝依据。
@@ -42,7 +42,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| FM-001 | P1 | test-time compute、verifier、动态 reasoning budget | 公共任务、多预算曲线；同时报告正确率、token、延迟和调用成本；接入 evolve |
+| FM-001 | DONE · 本 MR | test-time compute、verifier、动态 reasoning budget | 固定 SmolLM2 revision；GSM8K/算术多预算曲线同时报告正确率、token、延迟和调用成本 |
 | FM-002 | P1 | scaling-law 多预算基础设施 | 至少 3 个 compute/data 预算点和拟合误差；不能用单次小模型训练冒充 Chinchilla 曲线 |
 | MM-001 | P1 | 视频多模态 | 真实公开 checkpoint、公开视频 benchmark、可续跑预测和多 seed/置信区间 |
 | MM-002 | P1 | 音频多模态 | 真实音频 encoder/tokenizer、公开 benchmark、固定 revision 与缓存校验 |
@@ -52,10 +52,10 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| PT-001 | P1 | L2 切换到可下载 pretrained causal LM | `gsm8k-generate` 真实生成、固定 checkpoint revision、3 seeds 和同预算基线 |
+| PT-001 | DONE · 本 MR | L2 切换到可下载 pretrained causal LM | SmolLM2 固定 revision，GSM8K unrestricted generation 与 3 seeds |
 | PT-002 | P1 | CoBA-RL 完整教师路径 | pass@k 边界缓存、真实 teacher、教师调用率/成本与能力边界曲线 |
-| PT-003 | P1 | 公开偏好数据 | UltraFeedback 等 chosen/rejected 数据下载、license/source 元数据和 DPO/ORPO 公平对照 |
-| PT-004 | P1 | GPU 训练完整性 | batch rollout、mixed precision、checkpoint resume；Linux CPU/Mac 保留 smoke 路径 |
+| PT-003 | DONE · 本 MR | 公开偏好数据 | 固定 UltraFeedback revision/MIT 元数据，DPO/ORPO 同预算真实模型对照 |
+| PT-004 | DONE · 本 MR | GPU 训练完整性 | batch、gradient accumulation、mixed precision、safe checkpoint 与 optimizer resume；CPU/Mac 保留路径 |
 
 ### Agent
 
@@ -68,7 +68,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| EV-001 | P1 | 将 FM-001 的推理预算算子接入统一 genome | 可搜索预算、verifier、停止策略并生成逐代报告 |
+| EV-001 | DONE · 本 MR | 将 FM-001 的推理预算算子接入统一 genome | `reasoning-checkpoint` 搜索采样预算、self-consistency verifier、停止阈值并生成逐代报告 |
 | EV-002 | P1 | 将 PT-001～PT-004 接入后训练 genome | 数据、objective、teacher、rollout 和系统参数可组合且遵守公平预算 |
 | EV-003 | P1 | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy 可组合，跨 episode 复用与失败恢复可测 |
 | EV-004 | P1 | GenRec 类生成式推荐 evolve | 真实 catalog head、context/reward/distillation 旋钮和统一推荐基线；Netflix 不因此获得论文优先级 |

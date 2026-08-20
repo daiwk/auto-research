@@ -49,6 +49,7 @@ nav:
           - 按年份: post-training/catalog/by-year.md
           - 论文谱系与缺口: post-training/lineage.md
           - 统一评测协议: post-training/benchmark.md
+          - 真实 checkpoint 训练: post-training/checkpoint-training.md
       - Agent:
           - 研究总览: agent-research/README.md
           - 方法索引: agent-research/catalog.md

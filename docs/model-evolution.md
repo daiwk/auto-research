@@ -2,6 +2,7 @@
 
 该功能面向“已有一个可训练系统，希望围绕一段自然语言方向持续做实验”的场景。
 当前可进化推荐模型、micro‑LLM、后训练 recipe 和 Agent policy。
+当前还支持固定真实 checkpoint 的 test-time compute 进化。
 
 !!! summary "候选有明确来源，未经审核的代码不会直接执行"
     **真正参加训练的结构和算法，都已经在本仓库实现并通过测试。**运行时可以联网
@@ -114,6 +115,27 @@ GPU 槽位数；`--gpu-memory-per-trial-mb` 还会根据启动时的可用显存
 ```
 
 单 seed 仍可用于 smoke，但不满足稳定提升声明条件。
+
+### 真实 checkpoint 的推理预算进化
+
+`reasoning-checkpoint` 固定使用公开 causal LM revision，只搜索推理侧 genome：采样数、最大
+生成 token 与共识早停阈值。它不会读取 gold answer 选择候选；答案由 self-consistency
+多数表决决定，gold 只在决定后计算准确率。每个 trial 同时记录 accuracy、生成 token、
+延迟、模型调用数和估算调用成本，selection 对 token 消耗施加小惩罚。
+
+```bash
+auto-research evolve \
+  --model reasoning-checkpoint \
+  --dataset gsm8k-generate \
+  --direction "搜索 1/2/4/8 次采样、verifier 和动态停止预算" \
+  --generations 2 --population 4 \
+  --maximum-examples 64 --seeds 42,43,44 \
+  --device cuda
+```
+
+默认 checkpoint 是 `HuggingFaceTB/SmolLM2-135M-Instruct`，revision 固定为 40 位 commit。
+离线开发机可用 `--reasoning-checkpoint-path` 指向已经下载的 snapshot。预算变化发生在
+validation；冠军选定后才进入隔离 test。
 
 ### 新论文算子的安全晋级
 

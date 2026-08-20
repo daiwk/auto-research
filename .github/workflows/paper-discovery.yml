@@ -41,6 +41,7 @@ jobs:
           --maximum-results-per-query 200
           --output "paper-candidates-${{ matrix.track }}.json"
           --summary-output "paper-candidates-${{ matrix.track }}.md"
+          --cross-source-config configs/paper-discovery-sources.json
           --github-actions
       - name: Publish candidate diff
         run: cat "paper-candidates-${{ matrix.track }}.md" >> "$GITHUB_STEP_SUMMARY"

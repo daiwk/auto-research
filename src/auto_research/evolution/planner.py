@@ -8,6 +8,8 @@ from .models import Genome, PaperInspiration
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
+    if model == "reasoning-checkpoint":
+        return ["reasoning:1", "reasoning:2", "reasoning:4", "reasoning:8"]
     if model == "vlm-checkpoint":
         return [
             "checkpoint_vlm:direct",
@@ -218,6 +220,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
 
 
 def propose(parent: Genome, generation: int, index: int, architectures: list[str], rng: random.Random, model: str = "rankmixer"):
+    if model == "reasoning-checkpoint":
+        return _propose_reasoning(parent, generation, index, architectures, rng)
     if model == "post-training":
         return _propose_post_training(parent, generation, index, architectures, rng)
     if model == "agent":
@@ -336,6 +340,24 @@ def _propose_checkpoint_vlm(parent, generation, index, architectures, rng):
     value = rng.choice(values)
     return replace(parent, **{name: value}), (
         f"围绕冠军 checkpoint 推理配方调整 {name}={value}；不修改模型权重"
+    )
+
+
+def _propose_reasoning(parent, generation, index, architectures, rng):
+    if generation == 1:
+        samples = int(architectures[index % len(architectures)].split(":", 1)[1])
+        return replace(
+            parent, reasoning_samples=samples, reasoning_stop_consensus=1.0,
+        ), f"同 checkpoint 推理预算消融：samples={samples}；不使用 gold answer 选样"
+    knobs = (
+        ("reasoning_samples", [2, 4, 8]),
+        ("reasoning_max_new_tokens", [48, 96, 160]),
+        ("reasoning_stop_consensus", [0.5, 0.67, 0.75, 1.0]),
+    )
+    name, values = knobs[(generation + index) % len(knobs)]
+    value = rng.choice(values)
+    return replace(parent, **{name: value}), (
+        f"围绕冠军调整 {name}={value}；准确率、token、延迟和调用数共同记录"
     )
 
 

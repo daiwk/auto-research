@@ -108,6 +108,24 @@ class ArxivClient:
                 break
         return papers
 
+    def lookup(self, arxiv_ids: Iterable[str]) -> list[Paper]:
+        """Resolve canonical IDs found by non-arXiv discovery sources."""
+        identities = list(dict.fromkeys(canonical_arxiv_id(value) for value in arxiv_ids))
+        if not identities:
+            return []
+        params = urllib.parse.urlencode({"id_list": ",".join(identities), "max_results": len(identities)})
+        request = urllib.request.Request(
+            f"{ARXIV_API}?{params}", headers={"User-Agent": self.user_agent}
+        )
+        if self._last_request_at is not None and self.minimum_interval_seconds > 0:
+            elapsed = time.monotonic() - self._last_request_at
+            if elapsed < self.minimum_interval_seconds:
+                time.sleep(self.minimum_interval_seconds - elapsed)
+        with urllib.request.urlopen(request, timeout=self.timeout) as response:
+            payload = response.read()
+        self._last_request_at = time.monotonic()
+        return parse_arxiv_feed(payload)
+
 
 def canonical_arxiv_id(arxiv_id: str) -> str:
     """Strip an arXiv version suffix without changing the numerical ID."""
