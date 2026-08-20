@@ -1,0 +1,120 @@
+{
+  "schema_version": 2,
+  "kind": "empirical_micro_lm_scaling_curve",
+  "date": "2026-08-20",
+  "seed": 42,
+  "scope": "four-point engineering smoke on local Mac CPU with an A30 CUDA replay",
+  "fixed_axes": {
+    "dataset": "WikiText-2",
+    "architecture": "gpt_baseline",
+    "vocab_size": 1024,
+    "batch_size": 2,
+    "sequence_length": 64,
+    "optimizer": "adamw",
+    "learning_rate": 0.0003
+  },
+  "points": [
+    {
+      "id": "scale-0",
+      "dimensions": 64,
+      "layers": 2,
+      "available_train_tokens": 12000,
+      "steps": 6,
+      "parameters": 169728,
+      "tokens_seen": 768,
+      "estimated_training_flops": 782106624,
+      "validation_lm_loss": 6.867805019021034,
+      "predicted_validation_lm_loss": 6.879698965177925,
+      "relative_fit_residual": -0.0017318557467200827
+    },
+    {
+      "id": "scale-1",
+      "dimensions": 64,
+      "layers": 2,
+      "available_train_tokens": 24000,
+      "steps": 12,
+      "parameters": 169728,
+      "tokens_seen": 1536,
+      "estimated_training_flops": 1564213248,
+      "validation_lm_loss": 6.798588290810585,
+      "predicted_validation_lm_loss": 6.797736379500577,
+      "relative_fit_residual": 0.00012530610346126844
+    },
+    {
+      "id": "scale-2",
+      "dimensions": 96,
+      "layers": 2,
+      "available_train_tokens": 24000,
+      "steps": 12,
+      "parameters": 328320,
+      "tokens_seen": 1536,
+      "estimated_training_flops": 3025797120,
+      "validation_lm_loss": 6.743992105126381,
+      "predicted_validation_lm_loss": 6.720624606391065,
+      "relative_fit_residual": 0.0034648815425466807
+    },
+    {
+      "id": "scale-3",
+      "dimensions": 128,
+      "layers": 3,
+      "available_train_tokens": 48000,
+      "steps": 18,
+      "parameters": 734336,
+      "tokens_seen": 2304,
+      "estimated_training_flops": 10151460864,
+      "validation_lm_loss": 6.569156587123871,
+      "predicted_validation_lm_loss": 6.581424610277404,
+      "relative_fit_residual": -0.0018675403744240937
+    }
+  ],
+  "fit": {
+    "compute_power_law": {
+      "log_compute_slope": -0.017291103277517088,
+      "descriptive_alpha": 0.017291103277517088,
+      "log_rmse": 0.0021528097797185236,
+      "loss_rmse": 0.014480446405229906,
+      "r_squared": 0.9829283084779702,
+      "max_absolute_relative_error": 0.0034648815425466807
+    },
+    "parameter_data_surface": {
+      "status": "descriptive_only",
+      "log_parameter_slope": -0.015559764148433915,
+      "log_data_slope": -0.015629893675293778,
+      "log_rmse": 0.0011925184971653651,
+      "loss_rmse": 0.00802999249256376,
+      "r_squared": 0.9947616382382629,
+      "max_absolute_relative_error": 0.002002566182144204
+    }
+  },
+  "a30_cuda_replay": {
+    "validation_lm_losses": [
+      6.867805063724518,
+      6.798588261008263,
+      6.743992269039154,
+      6.569156527519226
+    ],
+    "log_compute_slope": -0.017291107035388338,
+    "log_rmse": 0.0021528201704139804,
+    "r_squared": 0.9829281537891447,
+    "all_points_resolved_device": "cuda"
+  },
+  "claim_boundary": "Local descriptive reduced-step fit only; not a Chinchilla compute-optimal frontier or a large-model extrapolation.",
+  "manifest_ref": "experiments:fm002-scaling-law-mac-seed42",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed multi-budget engineering smoke; do not claim a stable scaling exponent"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/fm002-scaling-law-mac-seed42.json",
+    "dataset_fingerprint": {
+      "wikitext2_train_sha256": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+      "wikitext2_validation_sha256": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+      "wikitext2_test_sha256": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0",
+      "tokenizer_sha256": "348bfd9afd61d14a6966069f1d37d8ee238ba53d9adb0d62c5745c4a87763e25"
+    }
+  }
+}

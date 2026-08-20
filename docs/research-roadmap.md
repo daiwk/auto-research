@@ -43,7 +43,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
 | FM-001 | DONE · 本 MR | test-time compute、verifier、动态 reasoning budget | 固定 SmolLM2 revision；GSM8K/算术多预算曲线同时报告正确率、token、延迟和调用成本 |
-| FM-002 | P1 | scaling-law 多预算基础设施 | 至少 3 个 compute/data 预算点和拟合误差；不能用单次小模型训练冒充 Chinchilla 曲线 |
+| FM-002 | DONE · [PR #114](https://github.com/daiwk/auto-research/pull/114) | scaling-law 多预算基础设施 | 默认 4 个模型规模/数据/step 预算点；记录实际参数量、tokens seen、FLOPs proxy、逐点残差、RMSE/R² 和不可外推边界 |
 | MM-001 | P1 | 视频多模态 | 真实公开 checkpoint、公开视频 benchmark、可续跑预测和多 seed/置信区间 |
 | MM-002 | P1 | 音频多模态 | 真实音频 encoder/tokenizer、公开 benchmark、固定 revision 与缓存校验 |
 | MM-003 | P1 | 具身与大规模多模态后训练 | 可下载数据和可执行环境；区分机制验证、离线 benchmark 与真实系统能力 |
