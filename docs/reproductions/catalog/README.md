@@ -10,6 +10,8 @@
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 生成、排序与冷启动 | [Sona Technical Report](../2608.11015-sona/README.md) | Yandex，2026-08-11 | 未发现官方代码 | `sona` |
+| 大模型能力与推荐融合 | [ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning](../2608.10187-connectionmind/README.md) | Michigan State University，2026-08-10 | 未发现官方代码 | `connectionmind` |
+| 大模型能力与推荐融合 | [DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models](../2608.09408-dream/README.md) | Taobao & Tmall Group / Alibaba，2026-08-10 | 未发现官方代码 | `dream` |
 | 大模型能力与推荐融合 | [GenRec: An LLM-Backed Recommendation Ranker at Netflix](../2608.10257-genrec-netflix/README.md) | Netflix，2026-08-10 | 未发现官方代码 | `genrec-netflix` |
 | 生成、排序与冷启动 | [MetaStrategy: Generative Ranking with Executable LLM Strategies](../2608.09440-metastrategy/README.md) | Alibaba / Taobao，2026-08-10 | 未发现官方代码 | `metastrategy` |
 | 生成、排序与冷启动 | [Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation](../2608.06213-gryphon-v2/README.md) | Yandex，2026-08-06 | 未发现官方代码 | `gryphon-v2` |

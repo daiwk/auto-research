@@ -154,3 +154,4 @@ class ReproductionAdapter:
     default_seeds: tuple[int, ...] = (42,)
     budget: str = "paper-specific"
     device_capabilities: tuple[str, ...] = ("cpu",)
+    infer_device_capabilities: bool = True

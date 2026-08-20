@@ -4,6 +4,8 @@
 
 ## 2026-08
 - [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
+- [ConnectionMind](../2608.10187-connectionmind/README.md)：在 user-item-tag-social 异构图上以最短正路径 SFT、规则奖励 GRPO 和路径蒸馏执行多步可解释推荐。
+- [DREAM](../2608.09408-dream/README.md)：把分层用户意图翻译为可校验的推荐策略参数，并以离线模拟和线上反馈双环更新策略记忆。
 - [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：把用户历史和内容元数据文本化，以 causal LLM、全目录 ranking head、联合语言/排序目标和 reward weighting 做 prefill-only 精排。
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：Yandex 用共享 encoder 串联 SID 生成与 item-level ranking，并从当前 rollout 和真实曝光双路蒸馏高容量 teacher。

@@ -33,6 +33,10 @@ GSM8K_BASE_URL = (
     "https://raw.githubusercontent.com/openai/grade-school-math/master/"
     "grade_school_math/data"
 )
+DELICIOUS_2K_URL = (
+    "https://files.grouplens.org/datasets/hetrec2011/"
+    "hetrec2011-delicious-2k.zip"
+)
 
 
 def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
@@ -137,6 +141,33 @@ def movielens_1m(root: Path, allow_network: bool = True) -> list[tuple[int, int,
             user, item, rating, timestamp = line.rstrip().split("::")
             rows.append((int(user), int(item), float(rating), int(timestamp)))
     return rows
+
+
+def delicious_2k_files(root: Path, allow_network: bool = True) -> Path:
+    """Return the official HetRec 2011 Delicious-2K directory.
+
+    ConnectionMind evaluates on Delicious and Foursquare.  Delicious-2K is the
+    smaller fully public graph and contains the three relations needed by the
+    local reproduction: user-bookmark-tag events, bookmark-tag edges and social
+    contacts.  The archive is data-only and is intentionally never committed.
+    """
+    directory = root / "hetrec2011-delicious-2k"
+    target = directory / "user_taggedbookmarks-timestamps.dat"
+    if target.exists():
+        return directory
+    if not allow_network:
+        raise FileNotFoundError(f"dataset missing and network disabled: {target}")
+    archive = root / "hetrec2011-delicious-2k.zip"
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    _download(DELICIOUS_2K_URL, archive)
+    directory.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(archive) as bundle:
+        for member in bundle.infolist():
+            destination = (directory / member.filename).resolve()
+            if directory.resolve() not in destination.parents:
+                raise ValueError(f"unsafe archive member: {member.filename}")
+            bundle.extract(member, directory)
+    return directory
 
 
 def amazon_beauty_5core(

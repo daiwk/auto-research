@@ -6428,6 +6428,97 @@
     },
     {
       "domain": "recommendation",
+      "key": "connectionmind",
+      "title": "ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning",
+      "paper_url": "https://arxiv.org/abs/2608.10187",
+      "detail_path": "reproductions/2608.10187-connectionmind/README.md",
+      "topic": [
+        "social-recommendation",
+        "llm-recommendation",
+        "graph-reasoning",
+        "reinforcement-learning",
+        "distillation"
+      ],
+      "first_author": "Haoyu Han",
+      "first_author_affiliation": "Michigan State University",
+      "published": "2026-08-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "connectionmind",
+        "arxiv_id": "2608.10187",
+        "title": "ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning",
+        "paper_url": "https://arxiv.org/abs/2608.10187",
+        "track": "recommendation",
+        "organization": "Michigan State University / Meta Platforms, Inc.",
+        "published": "2026-08-10",
+        "code_url": null,
+        "topics": [
+          "social-recommendation",
+          "llm-recommendation",
+          "graph-reasoning",
+          "reinforcement-learning",
+          "distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/connectionmind",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "HetRec 2011 Delicious-2K"
+        ],
+        "baseline": "fixed heterogeneous graph aggregation",
+        "metrics": [
+          "Recall@10",
+          "Precision@10",
+          "NDCG@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "3 SFT epochs + 180 GRPO groups",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Meta short-video recommendation",
+            "metric": "exposure",
+            "lift_percent": 0.33,
+            "traffic": "multi-week test over tens of millions of users",
+            "source_url": "https://arxiv.org/pdf/2608.10187",
+            "source_location": "Section 5.4 Table 2",
+            "experiment_duration": "multiple weeks",
+            "significance": "±0.08%",
+            "retrieved_at": "2026-08-20"
+          },
+          {
+            "product": "Meta short-video recommendation",
+            "metric": "watch time",
+            "lift_percent": 0.43,
+            "traffic": "multi-week test over tens of millions of users",
+            "source_url": "https://arxiv.org/pdf/2608.10187",
+            "source_location": "Section 5.4 Table 2",
+            "experiment_duration": "multiple weeks",
+            "significance": "±0.14%",
+            "retrieved_at": "2026-08-20"
+          },
+          {
+            "product": "Meta short-video recommendation",
+            "metric": "video sessions",
+            "lift_percent": 0.22,
+            "traffic": "multi-week test over tens of millions of users",
+            "source_url": "https://arxiv.org/pdf/2608.10187",
+            "source_location": "Section 5.4 Table 2",
+            "experiment_duration": "multiple weeks",
+            "significance": "±0.13%",
+            "retrieved_at": "2026-08-20"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "core-relevance",
       "title": "CORE: A Unified Cascaded Ordinal Relevance Estimation Framework for E-commerce Search",
       "paper_url": "https://arxiv.org/abs/2607.24417",
@@ -7600,6 +7691,94 @@
             "traffic": "online A/B",
             "source_url": "https://arxiv.org/abs/2607.14192",
             "source_location": "original paper online-result disclosure: product=Pinterest Related Pins; metric=Successful Sessions"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "dream",
+      "title": "DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models",
+      "paper_url": "https://arxiv.org/abs/2608.09408",
+      "detail_path": "reproductions/2608.09408-dream/README.md",
+      "topic": [
+        "llm-recommendation",
+        "ranking",
+        "reranking",
+        "intent-understanding",
+        "online-policy",
+        "serving"
+      ],
+      "first_author": "DREAM author team (alphabetical order)",
+      "first_author_affiliation": "Taobao & Tmall Group / Alibaba",
+      "published": "2026-08-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "dream",
+        "arxiv_id": "2608.09408",
+        "title": "DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models",
+        "paper_url": "https://arxiv.org/abs/2608.09408",
+        "track": "recommendation",
+        "organization": "Taobao & Tmall Group / Alibaba",
+        "published": "2026-08-10",
+        "code_url": null,
+        "topics": [
+          "llm-recommendation",
+          "ranking",
+          "reranking",
+          "intent-understanding",
+          "online-policy",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/dream",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "retrieval/ranking backbone without DREAM overlay",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "3 offline replay generations",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Taobao homepage recommendation",
+            "metric": "IPV",
+            "lift_percent": 2.71,
+            "traffic": "platform-scale online deployment of fine-rank + rerank",
+            "source_url": "https://arxiv.org/pdf/2608.09408",
+            "source_location": "Section 5.3.1 Table 7",
+            "retrieved_at": "2026-08-20"
+          },
+          {
+            "product": "Taobao homepage recommendation",
+            "metric": "Core IPV",
+            "lift_percent": 3.06,
+            "traffic": "platform-scale online deployment of fine-rank + rerank",
+            "source_url": "https://arxiv.org/pdf/2608.09408",
+            "source_location": "Section 5.3.1 Table 7",
+            "retrieved_at": "2026-08-20"
+          },
+          {
+            "product": "Taobao homepage recommendation",
+            "metric": "GMV",
+            "lift_percent": 1.31,
+            "traffic": "platform-scale online deployment of fine-rank + rerank",
+            "source_url": "https://arxiv.org/pdf/2608.09408",
+            "source_location": "Section 5.3.1 Table 7",
+            "retrieved_at": "2026-08-20"
           }
         ],
         "selection_exception": null,

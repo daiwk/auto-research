@@ -13,6 +13,7 @@
 - 2026-08 · [DEGR](../2608.04809-degr/README.md)：联合 next-item CE、cohort 多样性与 reward-adaptive ORPO，并在推理时执行多样性感知重排。
 
 ## Alibaba
+- 2026-08 · [DREAM](../2608.09408-dream/README.md)：以 L0/L1/L2 意图、策略记忆和有界 typed compiler 控制现有推荐链路，再用离线探索与线上结论回流持续更新策略。
 - 2026-08 · [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - 2026-07 · [SWAG](../2607.25233-swag-bid/README.md)：以 masked future plan 和滑动窗口目标进行长周期生成式自动出价。
 - 2026-07 · [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 加并行全局/query 价值码生成候选，再以联合 VRM 把相关性与商业价值统一排序。
@@ -214,3 +215,6 @@
 ## 学术与经典基线
 - 2026-05 · [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型更新降低单一采样偏差。
 - 2018-08 · [SASRec](../1808.09781-sasrec/README.md)：用因果自注意力编码用户行为序列，并预测下一物品，作为经典序列推荐基线。
+
+## Michigan State University
+- 2026-08 · [ConnectionMind](../2608.10187-connectionmind/README.md)：在时序异构社交图上用最短正路径 SFT 和规则奖励 GRPO 学习多步探索，再把路径教师蒸馏给 GNN student。
