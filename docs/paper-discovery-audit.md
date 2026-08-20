@@ -75,6 +75,7 @@ PYTHONPATH=src python scripts/discover_papers.py \
   --lookback-days 14 \
   --page-size 50 \
   --maximum-results-per-query 200 \
+  --cross-source-config configs/paper-discovery-sources.json \
   --output paper-candidates.json
 ```
 
@@ -84,3 +85,43 @@ arXiv API 不提供结构化 affiliation，所以机构词查询只是补充召�
 每日任务还会把候选与统一 manifest、历史 ledger 自动差分，在 Actions Summary 中分成
 “Google / Meta 重点复核”“其他新候选”和“已处理候选”。Netflix 等其他机构继续参与
 召回，但不触发置顶预警。实施队列统一维护在[后续路线图与 TODO](research-roadmap.md)。
+
+## 跨来源召回与终态回写
+
+单一 arXiv 查询之外，定时任务现在还会读取
+[`configs/paper-discovery-sources.json`](https://github.com/daiwk/auto-research/blob/main/configs/paper-discovery-sources.json)，覆盖 Google
+Research、Google DeepMind、Meta AI 官方论文页，RecSys/SIGIR 会议页以及 Google/Meta
+研究 GitHub 组织页。配置也支持作者主页；已知相关论文可通过 `--snowball-seeds` 调用
+Semantic Scholar references/citations 扩展。每个命中保留：
+
+- 来源名称、类型与 URL；
+- 机构（来源能够确定时）；
+- direct、reference 或 citation 关系；
+- citation snowball 的 seed arXiv ID；
+- 单个来源失败信息，避免某个页面失败后整批静默少召回。
+
+artifact 仍然只是待审队列。人工全文审查完成后，把决定写成 JSON：
+
+```json
+{
+  "source_artifact": "paper-candidates-recommendation.json",
+  "decisions": [
+    {"id": "2608.12345", "priority": "P0", "status": "rejected", "reason": "正文无量化线上证据"}
+  ]
+}
+```
+
+再执行：
+
+```bash
+PYTHONPATH=src python scripts/record_discovery_review.py \
+  --artifact paper-candidates-recommendation.json \
+  --decisions review-decisions.json \
+  --batch review-20260820-recommendation
+
+python scripts/audit_paper_coverage.py --strict \
+  --pending-artifact paper-candidates-recommendation.json
+```
+
+回写器要求每个 `new` 候选都有 `implemented/rejected/deferred` 终态；严格审计同时检查
+待审 artifact 与 ledger，未闭环候选会直接失败，而不是留到下一轮后被遗忘。

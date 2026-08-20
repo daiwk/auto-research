@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {"name": "Google Research publications", "kind": "official-research", "url": "https://research.google/pubs/", "organization": "Google"},
+    {"name": "Google DeepMind publications", "kind": "official-research", "url": "https://deepmind.google/research/publications/", "organization": "Google DeepMind"},
+    {"name": "Meta AI publications", "kind": "official-research", "url": "https://ai.meta.com/research/publications/", "organization": "Meta"},
+    {"name": "RecSys accepted contributions", "kind": "conference-list", "url": "https://recsys.acm.org/recsys25/accepted-contributions/", "track": "recommendation"},
+    {"name": "SIGIR accepted papers", "kind": "conference-list", "url": "https://sigir2026.org/SIGIR2026_program.pdf", "track": "recommendation"},
+    {"name": "Google Research GitHub", "kind": "github-organization", "url": "https://api.github.com/orgs/google-research/repos?sort=updated&per_page=100", "organization": "Google"},
+    {"name": "Meta Research GitHub", "kind": "github-organization", "url": "https://api.github.com/orgs/facebookresearch/repos?sort=updated&per_page=100", "organization": "Meta"}
+  ]
+}

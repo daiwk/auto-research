@@ -26,10 +26,25 @@ REQUIRED_RECOMMENDATION_QUERY_FAMILIES = {
 }
 
 
-def audit(strict: bool = False) -> list[str]:
+def audit(strict: bool = False, pending_artifacts: tuple[Path, ...] = ()) -> list[str]:
     data = json.loads(LEDGER.read_text(encoding="utf-8"))
     errors: list[str] = []
     seen: set[tuple[str, str]] = set()
+    reviewed_ids = {
+        str(entry.get("id"))
+        for batch in data.get("batches", [])
+        for entry in batch.get("candidates", [])
+    }
+    if strict:
+        for artifact_path in pending_artifacts:
+            artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
+            pending = [
+                item["arxiv_id"] for item in artifact.get("candidates", [])
+                if item.get("repository_status") == "new"
+                and item.get("arxiv_id") not in reviewed_ids
+            ]
+            if pending:
+                errors.append(f"{artifact_path}: unreviewed P0/P1 candidates: {pending}")
     for batch in data.get("batches", []):
         required = set(batch.get("required_tracks", []))
         present = {entry.get("track") for entry in batch.get("candidates", [])}
@@ -104,6 +119,9 @@ def audit(strict: bool = False) -> list[str]:
                 errors.append(f"{identity}: invalid priority {entry.get('priority')!r}")
             if status not in TERMINAL:
                 errors.append(f"{identity}: non-terminal status {status!r}")
+            if batch.get("scope_kind") == "automated-review-closure":
+                if not entry.get("matched_queries") and not entry.get("source_provenance"):
+                    errors.append(f"{identity}: closure record lacks discovery provenance")
             if batch.get("scope_kind") == "institution-priority":
                 if not entry.get("organization"):
                     errors.append(f"{identity}: priority candidate lacks organization")
@@ -171,8 +189,9 @@ def audit(strict: bool = False) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--strict", action="store_true")
+    parser.add_argument("--pending-artifact", type=Path, action="append", default=[])
     args = parser.parse_args()
-    errors = audit(args.strict)
+    errors = audit(args.strict, tuple(args.pending_artifact))
     if errors:
         raise SystemExit("\n".join(errors))
     print("paper coverage audit: closed")

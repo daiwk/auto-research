@@ -117,6 +117,15 @@ def _load_builtins() -> None:
             offline=not config.allow_network,
         )
 
+    def reasoning_checkpoint(config: EvolutionConfig, project_dir: Path):
+        from ..reasoning_budget import ReasoningBudgetEvolutionEvaluator
+        return ReasoningBudgetEvolutionEvaluator(
+            (project_dir / config.dataset_dir).resolve(), config.dataset,
+            config.seeds, config.allow_network, config.maximum_examples,
+            config.reasoning_model_id, config.reasoning_model_revision,
+            config.reasoning_checkpoint_path,
+        )
+
     recommendation_data = ("movielens-100k", "movielens-1m")
     for name in ("rankmixer", "hyformer"):
         register_provider(EvolutionProvider(
@@ -157,6 +166,14 @@ def _load_builtins() -> None:
             checkpoint_use_hint=True,
             checkpoint_image_size=0,
             checkpoint_max_new_tokens=16,
+        ),
+    ))
+    register_provider(EvolutionProvider(
+        "reasoning-checkpoint", ("arithmetic-generate", "gsm8k-generate"),
+        "llm", "test-time compute verifier reasoning budget", reasoning_checkpoint,
+        lambda config: Genome(
+            architecture="reasoning-checkpoint", reasoning_samples=1,
+            reasoning_max_new_tokens=96, reasoning_stop_consensus=1.0,
         ),
     ))
     for entry_point in importlib.metadata.entry_points(

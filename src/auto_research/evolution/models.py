@@ -51,6 +51,9 @@ class EvolutionConfig:
     checkpoint_revision: str = "main"
     checkpoint_annotations: Path | None = None
     checkpoint_image_root: Path | None = None
+    reasoning_model_id: str = "HuggingFaceTB/SmolLM2-135M-Instruct"
+    reasoning_model_revision: str = "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+    reasoning_checkpoint_path: Path | None = None
 
     def validate(self) -> None:
         from .providers import get_provider
@@ -97,6 +100,8 @@ class EvolutionConfig:
                     "vlm-checkpoint requires --checkpoint-annotations and "
                     "--checkpoint-image-root"
                 )
+        if self.model == "reasoning-checkpoint" and self.maximum_examples < 1:
+            raise ValueError("reasoning checkpoint requires at least one example")
 
 
 @dataclass(frozen=True)
@@ -146,6 +151,10 @@ class Genome:
     checkpoint_use_hint: bool = True
     checkpoint_image_size: int = 0
     checkpoint_max_new_tokens: int = 16
+    reasoning_samples: int = 1
+    reasoning_max_new_tokens: int = 96
+    reasoning_stop_consensus: float = 1.0
+    reasoning_verifier: str = "self-consistency"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -201,6 +210,7 @@ class EvolutionResult:
                 "checkpoint_path": str(self.config.checkpoint_path) if self.config.checkpoint_path else None,
                 "checkpoint_annotations": str(self.config.checkpoint_annotations) if self.config.checkpoint_annotations else None,
                 "checkpoint_image_root": str(self.config.checkpoint_image_root) if self.config.checkpoint_image_root else None,
+                "reasoning_checkpoint_path": str(self.config.reasoning_checkpoint_path) if self.config.reasoning_checkpoint_path else None,
                 "seeds": list(self.config.seeds),
             },
             "papers": [paper.to_dict() for paper in self.papers],
@@ -220,7 +230,10 @@ class EvolutionResult:
         raw_config["dataset_dir"] = Path(raw_config["dataset_dir"])
         raw_config["output_dir"] = Path(raw_config["output_dir"])
         raw_config["resume_dir"] = Path(raw_config["resume_dir"]) if raw_config.get("resume_dir") else None
-        for key in ("checkpoint_path", "checkpoint_annotations", "checkpoint_image_root"):
+        for key in (
+            "checkpoint_path", "checkpoint_annotations", "checkpoint_image_root",
+            "reasoning_checkpoint_path",
+        ):
             raw_config[key] = Path(raw_config[key]) if raw_config.get(key) else None
         raw_config["seeds"] = tuple(raw_config["seeds"])
         raw_config["candidate_generator_command"] = tuple(

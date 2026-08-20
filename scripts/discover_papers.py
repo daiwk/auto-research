@@ -15,7 +15,9 @@ from auto_research.discovery import (
     render_discovery_summary,
     repository_paper_statuses,
     triage_candidates,
+    merge_external_candidates,
 )
+from auto_research.discovery_sources import DiscoverySource, discover_external, load_sources
 from auto_research.papers import ArxivClient
 
 
@@ -37,17 +39,57 @@ def main() -> int:
     parser.add_argument("--github-actions", action="store_true")
     parser.add_argument("--manifest", default="docs/research-manifest.json")
     parser.add_argument("--ledger", default="docs/paper-discovery-ledger.json")
+    parser.add_argument("--cross-source-config", type=Path)
+    parser.add_argument(
+        "--snowball-seeds", default="",
+        help="comma-separated relevant arXiv IDs used for citation snowball",
+    )
+    parser.add_argument(
+        "--author-page", action="append", default=[],
+        help="author homepage URL; repeat for multiple first-author/maintainer sweeps",
+    )
+    parser.add_argument(
+        "--github-page", action="append", default=[],
+        help="author or project GitHub/API URL; repeat for multiple sources",
+    )
     args = parser.parse_args()
     start_date = args.start_date or args.end_date - dt.timedelta(days=args.lookback_days)
     queries = queries_for_track(args.track)
+    client = ArxivClient(minimum_interval_seconds=3.0)
     papers = discover_candidates(
-        ArxivClient(minimum_interval_seconds=3.0),
+        client,
         queries,
         start_date=start_date,
         end_date=args.end_date,
         page_size=args.page_size,
         maximum_results_per_query=args.maximum_results_per_query,
     )
+    source_failures = []
+    if args.cross_source_config or args.author_page or args.github_page or args.snowball_seeds:
+        sources = (
+            list(load_sources(args.cross_source_config, args.track))
+            if args.cross_source_config else []
+        )
+        sources.extend(
+            DiscoverySource(f"author-page-{index}", "author-page", url)
+            for index, url in enumerate(args.author_page, start=1)
+        )
+        sources.extend(
+            DiscoverySource(f"github-page-{index}", "github-page", url)
+            for index, url in enumerate(args.github_page, start=1)
+        )
+        external, provenance, source_failures = discover_external(
+            sources,
+            client=client,
+            snowball_seeds=(
+                value.strip() for value in args.snowball_seeds.split(",") if value.strip()
+            ),
+        )
+        external = [
+            paper for paper in external
+            if start_date <= dt.date.fromisoformat(paper.published[:10]) <= args.end_date
+        ]
+        papers = merge_external_candidates(papers, external, provenance)
     statuses = repository_paper_statuses(Path(args.manifest), Path(args.ledger))
     candidates = triage_candidates(papers, statuses)
     payload = build_discovery_payload(
@@ -57,6 +99,14 @@ def main() -> int:
         query_names=(query.name for query in queries),
         candidates=candidates,
     )
+    payload["cross_source"] = {
+        "enabled": bool(
+            args.cross_source_config or args.author_page
+            or args.github_page or args.snowball_seeds
+        ),
+        "config": str(args.cross_source_config) if args.cross_source_config else None,
+        "source_failures": source_failures,
+    }
     rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         Path(args.output).write_text(rendered, encoding="utf-8")

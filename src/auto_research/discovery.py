@@ -29,6 +29,7 @@ class DiscoveryQuery:
 class DiscoveredPaper:
     paper: Paper
     query_names: tuple[str, ...]
+    source_provenance: tuple[dict, ...] = ()
 
     def to_dict(self) -> dict:
         return {
@@ -38,6 +39,7 @@ class DiscoveredPaper:
             "url": self.paper.url,
             "authors": self.paper.authors,
             "matched_queries": list(self.query_names),
+            "source_provenance": list(self.source_provenance),
             "evidence_status": "full-text-review-required",
         }
 
@@ -300,3 +302,27 @@ def discover_candidates(
         DiscoveredPaper(found[identity], tuple(sorted(origins[identity])))
         for identity in sorted(found, key=lambda key: found[key].published, reverse=True)
     ]
+
+
+def merge_external_candidates(
+    arxiv_results: Iterable[DiscoveredPaper],
+    external_papers: Iterable[Paper],
+    provenance: dict[str, list[dict]],
+) -> list[DiscoveredPaper]:
+    """Merge external recall without erasing query or source provenance."""
+    merged = {
+        canonical_arxiv_id(item.paper.arxiv_id): item for item in arxiv_results
+    }
+    for paper in external_papers:
+        identity = canonical_arxiv_id(paper.arxiv_id)
+        sources = tuple(provenance.get(identity, ()))
+        current = merged.get(identity)
+        if current is None:
+            merged[identity] = DiscoveredPaper(paper, (), sources)
+        else:
+            merged[identity] = DiscoveredPaper(
+                paper if paper.published > current.paper.published else current.paper,
+                current.query_names,
+                tuple((*current.source_provenance, *sources)),
+            )
+    return sorted(merged.values(), key=lambda item: item.paper.published, reverse=True)
