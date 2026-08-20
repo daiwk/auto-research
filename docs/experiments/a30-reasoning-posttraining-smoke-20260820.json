@@ -2,6 +2,9 @@
   "schema_version": 2,
   "date": "2026-08-20",
   "scope": "engineering_smoke_only",
+  "seeds": [
+    42
+  ],
   "hardware": {
     "device": "cuda",
     "gpu": "NVIDIA A30 24GB",
@@ -59,5 +62,17 @@
     "The reduced examples and steps validate engineering integrity only.",
     "Zero accuracy is reported as observed and is not an algorithm conclusion.",
     "Checkpoints and dataset samples remain outside Git."
-  ]
+  ],
+  "manifest_ref": "experiments:a30-reasoning-posttraining-smoke-20260820",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed reduced-step engineering smoke; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/a30-reasoning-posttraining-smoke-20260820.json"
+  }
 }
