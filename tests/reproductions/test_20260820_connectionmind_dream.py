@@ -75,7 +75,9 @@ def test_new_adapters_run_on_cached_public_data():
 
     root = Path("data")
     for key in ("connectionmind", "dream"):
-        result = get_adapter(key).run(root, 42)
+        adapter = get_adapter(key)
+        assert adapter.device_capabilities == ("cpu",)
+        result = adapter.run(root, 42)
         assert result["method"]
         assert result["baseline"]
         assert all(result["stages"][stage] for stage in (

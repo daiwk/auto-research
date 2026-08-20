@@ -42,7 +42,8 @@ def normalize_adapter_protocol(adapter: ReproductionAdapter) -> ReproductionAdap
         ),
         device_capabilities=(
             adapter.device_capabilities
-            if adapter.device_capabilities != ("cpu",)
+            if not adapter.infer_device_capabilities
+            or adapter.device_capabilities != ("cpu",)
             else inferred["device_capabilities"]
         ),
     )

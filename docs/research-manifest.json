@@ -6476,9 +6476,7 @@
         ],
         "budget": "3 SFT epochs + 180 GRPO groups",
         "device_capabilities": [
-          "cpu",
-          "mps",
-          "cuda"
+          "cpu"
         ],
         "online_evidence": [
           {
@@ -7752,9 +7750,7 @@
         ],
         "budget": "3 offline replay generations",
         "device_capabilities": [
-          "cpu",
-          "mps",
-          "cuda"
+          "cpu"
         ],
         "online_evidence": [
           {

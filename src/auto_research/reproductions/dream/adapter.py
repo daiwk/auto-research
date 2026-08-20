@@ -23,4 +23,5 @@ ADAPTER = register(ReproductionAdapter(
     datasets=("MovieLens-1M",), baseline="retrieval/ranking backbone without DREAM overlay",
     metrics=("Hit@10", "NDCG@10", "Fresh Hit@10", "Head share@10"),
     budget="3 offline replay generations", device_capabilities=("cpu",),
+    infer_device_capabilities=False,
 ))

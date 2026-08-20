@@ -22,5 +22,5 @@ ADAPTER = register(ReproductionAdapter(
     evaluation_tier=EvaluationTier.PUBLIC_DATASET,
     datasets=("HetRec 2011 Delicious-2K",), baseline="fixed heterogeneous graph aggregation",
     metrics=("Recall@10", "Precision@10", "NDCG@10"), budget="3 SFT epochs + 180 GRPO groups",
-    device_capabilities=("cpu",),
+    device_capabilities=("cpu",), infer_device_capabilities=False,
 ))
