@@ -85,6 +85,23 @@ def render_report(result: PostTrainingResult) -> str:
     title, url = PAPERS[result.algorithm]
     delta = 100 * result.relative_accuracy
     if "runs" in result.training:
+        teacher = result.training.get("teacher_summary", {})
+        teacher_block = ""
+        if teacher.get("enabled"):
+            curves = result.training["runs"][0]["capability_boundary_curve"]
+            teacher_block = f"""
+## 真实教师与能力边界
+
+- teacher：`{teacher['provenance']['model_id']}` @ `{teacher['provenance']['resolved_revision']}`
+- actual calls / cache hits：`{teacher['actual_calls']}` / `{teacher['cache_hits']}`
+- teacher request rate：`{teacher['teacher_request_rate']:.4f}`
+- input / output tokens：`{teacher['input_tokens']}` / `{teacher['output_tokens']}`
+- estimated cost：`{teacher['estimated_cost']:.6f}`
+- baseline pass@k：`{curves['baseline_pass_at_k']}`
+- final pass@k：`{curves['final_pass_at_k']}`
+
+成本只按命令提供的每百万 token 单价估算；本地 snapshot 推理默认单价为零。
+"""
         return f"""# {title} 自由生成后训练实验
 
 > 这是 tokenizer 级自回归策略上的核心机制复现。模型自由生成响应，精确
@@ -111,6 +128,7 @@ def render_report(result: PostTrainingResult) -> str:
 - verifier：{result.training['runs'][0]['verifier']}
 - parameters：{result.training['runs'][0]['parameters']}
 - warmup / RL steps：{result.training['runs'][0]['warmup_steps']} / {result.training['runs'][0]['rl_steps']}
+{teacher_block}
 """
     return f"""# {title} 本地后训练实验
 

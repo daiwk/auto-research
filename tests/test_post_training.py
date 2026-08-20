@@ -504,6 +504,48 @@ def test_candidate_algorithms_reject_free_generation_only_objectives():
         PostTrainingConfig(algorithm="simpo", dataset="arithmetic-smoke")
 
 
+def test_coba_real_teacher_uses_boundary_and_completion_caches(tmp_path):
+    from auto_research.post_training.coba_teacher import TeacherCompletion
+
+    class FakeTeacher:
+        model_id = "test/teacher"
+        requested_revision = "immutable"
+
+        def __init__(self):
+            self.calls = 0
+
+        def complete(self, prompt):
+            self.calls += 1
+            return TeacherCompletion("Reasoning. Answer: 0", 11, 7)
+
+        def provenance(self):
+            return {"model_id": self.model_id, "resolved_revision": "immutable"}
+
+    from auto_research.post_training.generation import (
+        load_generation_suite, train_free_generation,
+    )
+
+    suite = load_generation_suite("arithmetic-generate", tmp_path, False, 8, 7)
+    teacher = FakeTeacher()
+    _, _, training = train_free_generation(
+        "coba-rl", suite, 1, 0.08, 2, 7, teacher=teacher,
+        teacher_cache_path=tmp_path / "teacher.json",
+        boundary_cache_path=tmp_path / "boundary.json", boundary_samples=2,
+        teacher_input_cost_per_million=1.0,
+        teacher_output_cost_per_million=2.0,
+    )
+    assert training["boundary_cache"]["entries"] == 8
+    assert training["teacher"]["actual_calls"] == teacher.calls
+    assert training["teacher"]["estimated_cost"] >= 0
+    assert "baseline_pass_at_k" in training["capability_boundary_curve"]
+    assert (tmp_path / "boundary.json").exists()
+
+
+def test_real_teacher_is_restricted_to_coba_generation():
+    with pytest.raises(ValueError, match="only supported by coba"):
+        PostTrainingConfig(algorithm="grpo", teacher_model_id="test/teacher")
+
+
 @pytest.mark.parametrize(
     ("algorithm", "diagnostics"),
     [

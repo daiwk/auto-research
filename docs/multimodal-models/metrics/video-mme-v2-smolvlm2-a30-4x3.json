@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "multimodal-models:video-checkpoint-benchmark",
+  "benchmark": "Video-MME-v2",
+  "benchmark_revision": "6e4bebb03202e1ddbf3d37703e560e51c5aa2d64",
+  "evaluation_tier": "l2_public_benchmark_subset",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluated_examples": 4,
+  "prediction_source": "public_checkpoint",
+  "metadata": {
+    "dataset_source": "https://huggingface.co/datasets/MME-Benchmarks/Video-MME-v2",
+    "annotations_sha256": "cde9651e53833a77b5d8830ac4cdbd251caf72c92c0ac7ad133ae9c85074ef0a",
+    "subset_protocol": "all four linked questions for official video 001",
+    "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+    "model_revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+    "checkpoint_committed": false,
+    "num_frames": 32,
+    "frame_sampling": "uniform with source fps and original timestamps",
+    "decoding": "deterministic, option letter only",
+    "resume_replay_verified": true,
+    "runtime": {
+      "platform": "Linux x86_64",
+      "resolved_device": "cuda",
+      "accelerator": "NVIDIA A30"
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "accuracy": 0.0,
+      "parse_rate": 1.0
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.0,
+      "parse_rate": 1.0
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.0,
+      "parse_rate": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.0,
+    "accuracy_std": 0.0,
+    "accuracy_ci95_radius": 0.0,
+    "parse_rate_mean": 1.0
+  },
+  "formal_comparison": true,
+  "claim_policy": "four-question deterministic checkpoint smoke on one official video; not the full Video-MME-v2 accuracy or grouped nonlinear leaderboard score",
+  "evaluation_protocol": {
+    "tier": "l2_public_benchmark_subset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "four-question deterministic checkpoint smoke on one official video; not the full Video-MME-v2 accuracy or grouped nonlinear leaderboard score"
+  },
+  "provenance": {
+    "created_at": "2026-08-20",
+    "artifact_path": "docs/multimodal-models/metrics/video-mme-v2-smolvlm2-a30-4x3.json",
+    "dataset_fingerprint": "sha256:cde9651e53833a77b5d8830ac4cdbd251caf72c92c0ac7ad133ae9c85074ef0a",
+    "config_digest": "a06969d28fdc670ee7bfd52a8d43f9e79cf6d143a92fdcd456ada5a481cd5b13",
+    "checkpoint_path": "local snapshot (not committed)"
+  }
+}

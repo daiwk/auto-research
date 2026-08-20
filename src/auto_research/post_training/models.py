@@ -96,6 +96,15 @@ class PostTrainingConfig:
     allow_network: bool = True
     maximum_examples: int = 512
     seeds: tuple[int, ...] = ()
+    teacher_model_id: str | None = None
+    teacher_revision: str = "7ae557604adf67be50417f59c2c2f167def9a775"
+    teacher_checkpoint_path: Path | None = None
+    teacher_cache: Path | None = None
+    boundary_cache: Path | None = None
+    boundary_samples: int = 8
+    teacher_max_new_tokens: int = 96
+    teacher_input_cost_per_million: float = 0.0
+    teacher_output_cost_per_million: float = 0.0
 
     def __post_init__(self) -> None:
         if self.algorithm not in ALGORITHMS:
@@ -116,6 +125,17 @@ class PostTrainingConfig:
             raise ValueError("learning-rate must be positive and group-size must be >= 2")
         if self.seeds and len(set(self.seeds)) != len(self.seeds):
             raise ValueError("seeds must be unique")
+        if self.teacher_model_id and self.algorithm != "coba-rl":
+            raise ValueError("a real teacher is only supported by coba-rl")
+        if self.teacher_model_id and not self.dataset.endswith("-generate"):
+            raise ValueError("CoBA-RL teacher requires a free-generation dataset")
+        if min(self.boundary_samples, self.teacher_max_new_tokens) < 1:
+            raise ValueError("teacher and boundary sampling limits must be positive")
+        if min(
+            self.teacher_input_cost_per_million,
+            self.teacher_output_cost_per_million,
+        ) < 0:
+            raise ValueError("teacher token costs cannot be negative")
 
 
 @dataclass

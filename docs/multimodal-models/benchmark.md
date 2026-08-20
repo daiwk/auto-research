@@ -38,6 +38,11 @@ MR6 再加入 `multimodal-retrieval-predict`：真实加载 CLIP/SigLIP 类公�
 | ScienceQA | 官方目录，含 `problems.json`、`pid_splits.json` | accuracy、image/text slice、parse rate |
 | POPE | 官方 JSONL，逐行包含 `question_id`、`label`（兼容转换后的 `answer`） | accuracy、precision、recall、F1、yes ratio、parse rate |
 | COCO/Flickr30K retrieval | Karpathy JSON，含 `images[].sentences[]` | I2T/T2I Recall@1/5/10、median rank、mean recall |
+| Video-MME-v2 | 官方 Parquet/JSONL + MP4 | 三 seed accuracy、sample std、95% CI、parse rate |
+| ESC-50 / ESC-10 | 官方 metadata CSV + WAV | CLAP zero-shot top-1/top-5、cache fingerprint |
+
+视频和音频的真实 checkpoint 命令、数据准备脚本和子集声明边界见
+[视频与音频公开 checkpoint 评测](video-audio.md)。
 
 ScienceQA 随机基线管线检查：
 

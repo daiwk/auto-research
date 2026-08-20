@@ -57,17 +57,32 @@ pass@256 相对 base model 提升 9.8 个百分点、相对 Vanilla RLVR 提升 
 ## 本地复现
 
 本地算术 suite 带可复现难度；训练器维护动态 curriculum boundary、采样边界样本，
-无正确 rollout 时记录 teacher-guidance 事件，并以 numeric verifier 进行 sequence RL。
+无正确 rollout 时调用固定 revision 的真实 causal-LM teacher，并把教师 completion 以小权重
+SFT 项注入 sequence RL。边界 pass@k 与教师 completion 分别缓存，缓存 fingerprint 不匹配会
+直接拒绝；报告同时保存教师实际调用、缓存命中、输入/输出 tokens、估算成本及训练前后
+pass@1/2/4/8 曲线。
 
 ```bash
 auto-research post-train --algorithm coba-rl --dataset arithmetic-generate \
-  --maximum-examples 48 --steps 6 --seeds 42,43,44 --offline
+  --maximum-examples 48 --steps 6 --seeds 42,43,44 \
+  --teacher-model-id Qwen/Qwen2.5-0.5B-Instruct \
+  --teacher-revision 7ae557604adf67be50417f59c2c2f167def9a775 \
+  --teacher-checkpoint-path checkpoints/qwen2.5-0.5b-instruct \
+  --teacher-cache runs/coba/cache/teacher.json \
+  --boundary-cache runs/coba/cache/boundary.json \
+  --boundary-samples 8 --device cuda --offline
 ```
 
 稳定指标：
 [`free-generation-post-training-seeds42-44.json`](../../experiments/free-generation-post-training-seeds42-44.json)。
 
+真实 A30 三 seed 工程验证共触发 3 次固定 Qwen2.5 教师调用，记录 169 个输入 token、94 个
+输出 token，并生成训练前后 `pass@1/2/4` 能力边界曲线。一步 smoke 的平均 accuracy 仍为
+0，因此这里只证明真实教师、双缓存与曲线链路可执行，不宣称效果提升。完整结果见
+[真实教师三 seed 指标](metrics/a30-real-teacher-seeds42-44.json)。
+
 ## 复现边界
 
-实现了边界状态、难度课程、教师触发和自由生成 RL 闭环；本地未计算论文规模的
-pass@256，也未蒸馏外部大教师，因此不能宣称复现论文中的能力边界增量。
+实现了边界状态、难度课程、真实教师触发、自由生成 RL、pass@k/教师缓存与成本曲线；
+本地 teacher 只有 0.5B，且最高只统计 pass@8，没有运行论文规模 pass@256 或同规模学生，
+因此不能宣称复现论文中的能力边界增量。

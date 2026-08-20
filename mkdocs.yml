@@ -42,6 +42,7 @@ nav:
           - 按年份: multimodal-models/catalog/by-year.md
           - 论文谱系与缺口: multimodal-models/lineage.md
           - 统一评测协议: multimodal-models/benchmark.md
+          - 视频与音频 checkpoint 评测: multimodal-models/video-audio.md
       - LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md
