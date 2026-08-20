@@ -73,6 +73,12 @@
     "claim_policy": "single/few-seed reduced-step engineering smoke; do not claim a stable improvement"
   },
   "provenance": {
-    "artifact_path": "docs/experiments/a30-reasoning-posttraining-smoke-20260820.json"
+    "artifact_path": "docs/experiments/a30-reasoning-posttraining-smoke-20260820.json",
+    "dataset_fingerprint": {
+      "gsm8k_train_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "gsm8k_test_sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+      "ultrafeedback_train_subset_sha256": "d273be5a5f0ee33bc6b362db59d8973398e590d2d2e82c85fe65827372e538ed",
+      "ultrafeedback_test_subset_sha256": "8cce8a46b00e29a2376310c9be433bd5508a347aa48a06fa9717b655f0c6f385"
+    }
   }
 }
