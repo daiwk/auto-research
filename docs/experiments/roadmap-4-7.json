@@ -1,7 +1,12 @@
 {
   "schema_version": 2,
   "date": "2026-08-20",
-  "scope": ["MM-003", "AG-001", "AG-002", "EV-002"],
+  "scope": [
+    "MM-003",
+    "AG-001",
+    "AG-002",
+    "EV-002"
+  ],
   "embodied_post_training": {
     "policy_id": "lerobot/smolvla_base",
     "policy_revision": "c83c3163b8ca9b7e67c509fffd9121e66cb96205",
@@ -31,21 +36,49 @@
     "episodes": 3,
     "credit_updates": 6,
     "transition_spans": 9,
-    "losses": [0.5013298988, 0.4723831713, 0.6141988635],
+    "losses": [
+      0.5013298988,
+      0.4723831713,
+      0.6141988635
+    ],
     "baseline_joint_success": 1.0,
     "final_joint_success": 1.0,
     "conclusion": "真实 checkpoint 反传与 executor 闭环通过，但该饱和 micro-suite 没有能力提升。"
   },
   "executor_matrix": {
     "episodes_per_run": 12,
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "maximum_subprocess_commands_per_episode": 4,
     "methods": {
-      "direct": {"joint_success": 0.0, "average_cost": 2.0, "reuse_rate": 0.0},
-      "critic": {"joint_success": 1.0, "average_cost": 4.0, "reuse_rate": 0.0},
-      "agent-lightning": {"joint_success": 1.0, "average_cost": 3.625, "reuse_rate": 0.75},
-      "swe-agent": {"joint_success": 1.0, "average_cost": 2.5, "reuse_rate": 0.0},
-      "openhands": {"joint_success": 1.0, "average_cost": 2.5, "reuse_rate": 0.0}
+      "direct": {
+        "joint_success": 0.0,
+        "average_cost": 2.0,
+        "reuse_rate": 0.0
+      },
+      "critic": {
+        "joint_success": 1.0,
+        "average_cost": 4.0,
+        "reuse_rate": 0.0
+      },
+      "agent-lightning": {
+        "joint_success": 1.0,
+        "average_cost": 3.625,
+        "reuse_rate": 0.75
+      },
+      "swe-agent": {
+        "joint_success": 1.0,
+        "average_cost": 2.5,
+        "reuse_rate": 0.0
+      },
+      "openhands": {
+        "joint_success": 1.0,
+        "average_cost": 2.5,
+        "reuse_rate": 0.0
+      }
     }
   },
   "post_training_evolve": {
@@ -58,5 +91,22 @@
     "validation_accuracy": 0.734375,
     "selection_fitness": 0.734374,
     "claim_boundary": "小型 candidate-policy 验证组合控制器；不等同于 checkpoint 能力收益。"
+  },
+  "manifest_ref": "experiments:roadmap-4-7",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/roadmap-4-7.json",
+    "dataset_fingerprint": {
+      "svla_manifest_sha256": "d5d507229bdb25e39df93ec46e7f7f856f65d425d7ceac49981ef508860fc4b9",
+      "agent_executor_suite": "local-code-benchmark-v1:3-deterministic-tasks",
+      "post_training_suite": "arithmetic-smoke:seed42:maximum-examples32"
+    }
   }
 }
