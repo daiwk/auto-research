@@ -9,7 +9,10 @@ import datetime as dt
 from pathlib import Path
 
 from .config import ResearchConfig
-from .agent_research import AgentResearchConfig, AgentResearchRunner
+from .agent_research import (
+    AgentResearchConfig, AgentResearchRunner, run_executor_matrix,
+    LightningPolicyConfig, run_lightning_policy_training,
+)
 from .agent_research.models import METHODS as AGENT_METHODS
 from .evolution import EvolutionConfig, ModelEvolutionEngine
 from .evolution.providers import list_providers
@@ -43,6 +46,7 @@ from .multimodal import (
     run_checkpoint_matrix, LMMSEvalConfig, run_lmms_eval,
     VideoBenchmarkConfig, run_video_benchmark,
     AudioBenchmarkConfig, run_audio_benchmark,
+    EmbodiedPostTrainingConfig, run_embodied_post_training,
 )
 
 
@@ -339,6 +343,42 @@ def build_parser() -> argparse.ArgumentParser:
     agent_eval.add_argument("--output-dir", type=Path, default=Path("runs/agent-research"))
     _add_runtime_arguments(agent_eval)
 
+    agent_matrix = commands.add_parser(
+        "agent-matrix",
+        help="compare agent policies on the same real local executor tasks and budget",
+    )
+    agent_matrix.add_argument(
+        "--methods", default="direct,critic,agent-lightning,swe-agent,openhands"
+    )
+    agent_matrix.add_argument("--seeds", default="42,43,44")
+    agent_matrix.add_argument("--episodes", type=int, default=12)
+    agent_matrix.add_argument("--memory-size", type=int, default=8)
+    agent_matrix.add_argument(
+        "--output-dir", type=Path, default=Path("runs/agent-executor-matrix")
+    )
+
+    lightning_policy = commands.add_parser(
+        "agent-policy-train",
+        help="train a pinned causal-LM agent policy from Agent Lightning transition credit",
+    )
+    lightning_policy.add_argument(
+        "--model-id", default="HuggingFaceTB/SmolLM2-135M-Instruct"
+    )
+    lightning_policy.add_argument(
+        "--model-revision", default="12fd25f77366fa6b3b4b768ec3050bf629380bac"
+    )
+    lightning_policy.add_argument("--checkpoint-path", type=Path)
+    lightning_policy.add_argument("--steps", type=int, default=6)
+    lightning_policy.add_argument("--episodes", type=int, default=6)
+    lightning_policy.add_argument("--learning-rate", type=float, default=1e-5)
+    lightning_policy.add_argument("--seed", type=int, default=42)
+    lightning_policy.add_argument("--maximum-length", type=int, default=512)
+    lightning_policy.add_argument("--offline", action="store_true")
+    lightning_policy.add_argument(
+        "--output-dir", type=Path, default=Path("runs/agent-lightning-policy")
+    )
+    _add_runtime_arguments(lightning_policy)
+
     multimodal_eval = commands.add_parser(
         "multimodal-eval",
         help="run CIFAR-10, ScienceQA, POPE or COCO/Flickr retrieval evaluation",
@@ -482,6 +522,37 @@ def build_parser() -> argparse.ArgumentParser:
     audio.add_argument("--prompt-template", default="This is a sound of {label}.")
     audio.add_argument("--offline", action="store_true")
     _add_runtime_arguments(audio)
+
+    embodied = commands.add_parser(
+        "embodied-post-train",
+        help="audit and run pinned SmolVLA post-training through LeRobot",
+    )
+    embodied.add_argument("--output-dir", type=Path, default=Path("runs/smolvla"))
+    embodied.add_argument("--model-id", default="lerobot/smolvla_base")
+    embodied.add_argument(
+        "--model-revision", default="c83c3163b8ca9b7e67c509fffd9121e66cb96205"
+    )
+    embodied.add_argument("--dataset-id", default="lerobot/svla_so100_pickplace")
+    embodied.add_argument(
+        "--dataset-revision", default="728583b5eaf9e739a7f119e2def466fa1d552402"
+    )
+    embodied.add_argument("--dataset-root", type=Path)
+    embodied.add_argument("--checkpoint-path", type=Path)
+    embodied.add_argument("--vlm-checkpoint-path", type=Path)
+    embodied.add_argument("--steps", type=int, default=1)
+    embodied.add_argument("--batch-size", type=int, default=1)
+    embodied.add_argument(
+        "--rename-map",
+        default=(
+            '{"observation.images.top":"observation.images.camera1",'
+            '"observation.images.wrist":"observation.images.camera2"}'
+        ),
+    )
+    embodied.add_argument("--empty-cameras", type=int, default=1)
+    embodied.add_argument("--offline", action="store_true")
+    embodied.add_argument("--dry-run", action="store_true")
+    embodied.add_argument("--executable", default="lerobot-train")
+    _add_runtime_arguments(embodied)
 
     candidate = commands.add_parser(
         "candidate", help="stage, verify or explicitly promote a generated evolve plugin"
@@ -670,7 +741,6 @@ def main(argv: list[str] | None = None) -> int:
                 maximum_train_tokens=args.maximum_train_tokens,
                 maximum_eval_tokens=args.maximum_eval_tokens,
                 maximum_examples=args.maximum_examples,
-                num_frames=args.num_frames,
                 agent_episodes=args.agent_episodes,
                 vocab_size=args.vocab_size,
                 llm_dimensions=args.llm_dimensions,
@@ -970,6 +1040,53 @@ def main(argv: list[str] | None = None) -> int:
             ))
             print(json.dumps(payload["metrics"], ensure_ascii=False))
             print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "embodied-post-train":
+            payload, path = run_embodied_post_training(EmbodiedPostTrainingConfig(
+                output_dir=args.output_dir,
+                model_id=args.model_id,
+                model_revision=args.model_revision,
+                dataset_id=args.dataset_id,
+                dataset_revision=args.dataset_revision,
+                checkpoint_path=args.checkpoint_path,
+                vlm_checkpoint_path=args.vlm_checkpoint_path,
+                dataset_root=args.dataset_root,
+                steps=args.steps,
+                batch_size=args.batch_size,
+                rename_map=args.rename_map,
+                empty_cameras=args.empty_cameras,
+                device=args.device or "cuda",
+                offline=args.offline,
+                dry_run=args.dry_run,
+                executable=args.executable,
+            ))
+            print(json.dumps({"status": payload["status"], "metrics": str(path)}))
+            return 0
+        if args.command == "agent-matrix":
+            payload, path = run_executor_matrix(
+                output_dir=args.output_dir,
+                methods=tuple(value.strip() for value in args.methods.split(",") if value.strip()),
+                seeds=tuple(int(value) for value in args.seeds.split(",") if value.strip()),
+                episodes=args.episodes,
+                memory_size=args.memory_size,
+            )
+            print(json.dumps({"summary": payload["summary"], "metrics": str(path)}))
+            return 0
+        if args.command == "agent-policy-train":
+            payload, path = run_lightning_policy_training(LightningPolicyConfig(
+                output_dir=args.output_dir,
+                model_id=args.model_id,
+                model_revision=args.model_revision,
+                checkpoint_path=args.checkpoint_path,
+                steps=args.steps,
+                episodes=args.episodes,
+                learning_rate=args.learning_rate,
+                seed=args.seed,
+                device=args.device or "cuda",
+                offline=args.offline,
+                maximum_length=args.maximum_length,
+            ))
+            print(json.dumps({"baseline": payload["baseline"], "final": payload["final"], "metrics": str(path)}))
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

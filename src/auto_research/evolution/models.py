@@ -141,6 +141,11 @@ class Genome:
     neftune_alpha: float = 0.0
     post_steps: int = 0
     group_size: int = 4
+    post_data_recipe: str = "base"
+    post_teacher: str = "auto"
+    post_rollout: str = "on-policy"
+    gradient_accumulation: int = 1
+    mixed_precision: str = "no"
     agent_memory: str = "none"
     agent_planner: str = "long-context"
     agent_tool_policy: str = "direct"

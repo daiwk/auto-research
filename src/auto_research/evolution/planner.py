@@ -371,19 +371,28 @@ def _propose_post_training(parent, generation, index, algorithms, rng):
             post_steps=max(parent.post_steps, 40),
         ), f"后训练 objective 消融：{method}；冻结数据、特征和训练预算"
     knobs = (
+        ("post_data_recipe", ["base", "hard-half", "curriculum"]),
+        ("post_teacher", ["auto", "cached", "online"]),
+        ("post_rollout", ["on-policy", "replay", "mixed"]),
+        ("gradient_accumulation", [1, 2, 4]),
+        ("mixed_precision", ["no", "bf16", "fp16"]),
         ("learning_rate", [0.02, 0.04, 0.08, 0.12]),
         ("group_size", [2, 4, 6]),
         ("post_steps", [40, 80, 120]),
     )
-    name, values = knobs[(generation + index) % len(knobs)]
-    value = rng.choice(values)
+    name, values = knobs[index % len(knobs)]
+    # A five-candidate round exposes data, teacher, rollout and system axes.
+    value = values[1 + ((generation + index) % (len(values) - 1))]
     method = rng.choice(algorithms)
     return replace(
         parent,
         architecture="candidate-policy",
         post_training=method,
         **{name: value},
-    ), f"组合优化：objective={method}, {name}={value}"
+    ), (
+        f"组合优化：objective={method}, {name}={value}；保留 data/teacher/rollout/"
+        "gradient-accumulation/precision 的父代组合"
+    )
 
 
 def _propose_agent(parent, generation, index, operators, rng):

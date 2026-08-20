@@ -43,6 +43,7 @@ nav:
           - 论文谱系与缺口: multimodal-models/lineage.md
           - 统一评测协议: multimodal-models/benchmark.md
           - 视频与音频 checkpoint 评测: multimodal-models/video-audio.md
+          - 具身多模态后训练: multimodal-models/embodied.md
       - LLM 后训练:
           - 研究总览: post-training/README.md
           - 方法索引: post-training/catalog.md
@@ -60,6 +61,7 @@ nav:
           - 按年份: agent-research/catalog/by-year.md
           - 论文谱系与缺口: agent-research/lineage.md
           - 统一评测协议: agent-research/benchmark.md
+          - 可训练 policy 与真实 executor: agent-research/training-executor.md
   - 项目文档:
       - 项目 README: project-readme.md
       - 架构与扩展: architecture.md

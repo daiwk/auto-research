@@ -4,6 +4,12 @@
 当前可进化推荐模型、micro‑LLM、后训练 recipe 和 Agent policy。
 当前还支持固定真实 checkpoint 的 test-time compute 进化。
 
+后训练 genome 中，算法、数据 recipe、teacher、rollout、学习率、group size 和 steps
+会真实改变当前 numpy candidate-policy evaluator；`gradient_accumulation` 与
+`mixed_precision` 是面向真实 checkpoint runner 的 promotion contract，在该轻量 evaluator
+里只被组合、记录和导出，不会被伪装成已产生数值作用。候选晋级到 checkpoint runner 后，
+这两个系统轴才参与实际训练与显存/吞吐比较。
+
 !!! summary "候选有明确来源，未经审核的代码不会直接执行"
     **真正参加训练的结构和算法，都已经在本仓库实现并通过测试。**运行时可以联网
     搜索最新论文，但新搜到且尚未实现的论文只作为 `evidence-only` 证据保存，不会
@@ -412,13 +418,16 @@ auto-research evolve \
 
 独立的 `post-train` / `agent-eval` 命令适合复现单个算法；需要多轮自动比较与组合时，直接使用统一的 `evolve` 控制器。两类任务都与推荐、micro-LLM 共用父子关系、validation 晋级、隔离 test、并行 workers、研究记忆以及 JSON/Markdown/HTML 看板。
 
-后训练 genome 同时搜索 objective、learning rate、group size 与训练步数，内置 DPO、KTO、ORPO、PPO-RLHF、GRPO、RLOO、ReMax、DAPO、GSPO、Lightning OPD、GPRL 和 TCR：
+后训练 genome 同时搜索数据配方、objective、teacher 模式、rollout 来源、learning rate、
+group size、训练步数、gradient accumulation 与 precision。每个子代继承父代的其余轴，
+因此可以逐轮形成 `公开数据 × objective × teacher × rollout × 系统参数` 的组合，而不是
+只在一张算法名称列表中切换：
 
 ```bash
 auto-research evolve \
   --model post-training \
   --dataset arithmetic-smoke \
-  --direction "比较 GRPO、DPO、OPD，并联合搜索学习率、group size 和训练步数" \
+  --direction "比较 GRPO、DPO、OPD，并联合搜索数据、teacher、rollout 与系统参数" \
   --generations 3 --population 6 --workers 3 \
   --steps 100 --maximum-examples 512 --seeds 42,43,44
 ```

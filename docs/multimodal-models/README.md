@@ -19,6 +19,7 @@
 - `multimodal-lmms-eval` 可调用锁定 revision 的上游 L3 任务，并把结果、任务版本、样本数和效率指标规范化为 path-free schema-v2 证据；
 - `multimodal-video-eval` 用固定 SmolVLM2 revision 在 Video-MME-v2 运行三 seed、逐题续跑与置信区间；
 - `multimodal-audio-eval` 用固定 CLAP revision 在 ESC-50/ESC-10 运行真实 WAV 零样本评测，并校验文本 embedding 缓存；
+- `embodied-post-train` 审计公开 LeRobot episode，并通过官方 `lerobot-train` 执行 SmolVLA flow-matching 后训练；
 - 与推荐、micro-LLM、后训练和 Agent 共用多轮控制器、隔离 test 和研究看板。
 
 ```bash
@@ -65,6 +66,7 @@ auto-research evolve \
 - [论文谱系与缺口](lineage.md)
 - [统一评测协议](benchmark.md)
 - [视频与音频 checkpoint 评测](video-audio.md)
+- [具身多模态后训练](embodied.md)
 
 ## 已验证的 L1 结果
 

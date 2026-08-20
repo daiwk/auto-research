@@ -32,6 +32,15 @@ class PostTrainingEvolutionEvaluator:
                 if self.dataset.endswith("-generate")
                 else "accuracy - 0.05 * KL(reference)"
             ),
+            "execution_axis_semantics": {
+                "effective_in_numpy_evaluator": [
+                    "algorithm", "data_recipe", "teacher", "rollout",
+                    "learning_rate", "group_size", "steps",
+                ],
+                "promotion_contract_only": [
+                    "gradient_accumulation", "mixed_precision",
+                ],
+            },
         }
 
     def evaluate(self, trial_id, generation, parent_id, genome,
@@ -62,6 +71,11 @@ class PostTrainingEvolutionEvaluator:
                 "steps": int(np.mean([row["steps"] for row in training])),
                 "algorithm": genome.post_training,
                 "group_size": genome.group_size,
+                "data_recipe": genome.post_data_recipe,
+                "teacher": genome.post_teacher,
+                "rollout": genome.post_rollout,
+                "gradient_accumulation": genome.gradient_accumulation,
+                "mixed_precision": genome.mixed_precision,
             },
             source_papers, rationale, time.monotonic() - started,
         )
@@ -109,23 +123,61 @@ class PostTrainingEvolutionEvaluator:
             self.dataset, self.dataset_dir, self.allow_network,
             self.maximum_examples, seed,
         )
-        state = initialize(len(data.feature_names), data.train)
+        train = _post_training_recipe(data.train, genome.post_data_recipe)
+        state = initialize(len(data.feature_names), train)
         if genome.post_training == "none":
             return metrics(state, data.validation), {"steps": 0}
         rng = np.random.default_rng(seed)
         steps = genome.post_steps or self.steps
         last = {}
-        for _ in range(steps):
-            index = int(rng.integers(len(data.train)))
+        for step in range(steps):
+            index = _rollout_index(genome.post_rollout, step, len(train), rng)
             _, last = update(
-                genome.post_training, state, data.train[index],
+                genome.post_training, state, train[index],
                 genome.learning_rate, rng, genome.group_size, index,
             )
+            if genome.post_teacher == "online":
+                state.online_teacher_calls += 1
         return metrics(state, data.validation), {
             "steps": steps,
             "last_diagnostics": last,
             "test_seed": test,
+            "train_examples": len(train),
+            "teacher_calls": (
+                state.online_teacher_calls
+                if genome.post_teacher == "online" else state.teacher_calls
+            ),
         }
+
+
+def _post_training_recipe(groups, recipe):
+    if recipe == "base":
+        return groups
+    if recipe == "hard-half":
+        scored = sorted(
+            groups,
+            key=lambda group: float(
+                group.rewards[group.gold, 2]
+                - max(np.delete(group.rewards[:, 2], group.gold))
+            ),
+        )
+        return tuple(scored[: max(8, len(scored) // 2)])
+    if recipe == "curriculum":
+        return tuple(sorted(
+            groups,
+            key=lambda group: -float(group.rewards[group.gold, 2]),
+        ))
+    raise ValueError(f"unknown post-training data recipe: {recipe}")
+
+
+def _rollout_index(strategy, step, size, rng):
+    if strategy == "replay":
+        return step % size
+    if strategy == "mixed" and step % 2 == 0:
+        return step % size
+    if strategy in {"on-policy", "mixed"}:
+        return int(rng.integers(size))
+    raise ValueError(f"unknown rollout strategy: {strategy}")
 
 
 class AgentEvolutionEvaluator:
