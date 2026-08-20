@@ -233,6 +233,21 @@ auto-research evolve --model agent --dataset swebench-local \
   --generations 3 --population 5 --workers 2 --agent-episodes 12
 ```
 
+真实 checkpoint / executor 与具身训练入口：
+
+```bash
+auto-research agent-policy-train --steps 6 --episodes 6 --device cuda
+auto-research agent-matrix --episodes 12 --seeds 42,43,44
+auto-research embodied-post-train --dataset-root data/svla_so100_pickplace \
+  --checkpoint-path checkpoints/smolvla_base \
+  --vlm-checkpoint-path checkpoints/SmolVLM2-500M-Video-Instruct \
+  --offline --steps 1 --device cuda
+```
+
+前两条分别把 Agent Lightning transition credit 回传到 SmolLM2 和比较同预算真实
+代码 executor；第三条调用官方 LeRobot 对 SmolVLA 做 flow-matching 后训练。数据、模型、
+checkpoint 不提交，只保留 revision、命令、指标和边界。
+
 它们与推荐/LLM evolve 共用 validation 晋级、隔离 test、父子 genome、并行实验、失败留档和 HTML 研究看板。完整参数见[模型自动进化](model-evolution.md)。
 
 Tiny Shakespeare、MovieLens-100K/1M、Amazon Beauty 5-core、KuaiRand-Pure 和 MDCNS 作者 Beauty 切分会按 adapter 首次运行时下载到 `data/`，之后复用本地缓存。M6-Rec 使用 MovieLens 官方文本元数据；OneRec-V2 使用 KuaiRand 的真实播放/时长/负反馈。下载器只接入体量适合本地 Mac 的公开原始数据，生产内部数据不会伪造为“原数据复现”。

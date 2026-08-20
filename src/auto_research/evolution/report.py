@@ -319,9 +319,14 @@ def _render_composable_report(result: EvolutionResult) -> str:
     else:
         lines += [
             f"- 组合：objective=`{champion.genome.post_training}`，"
+            f"data=`{champion.genome.post_data_recipe}`，"
+            f"teacher=`{champion.genome.post_teacher}`，"
+            f"rollout=`{champion.genome.post_rollout}`，"
             f"learning rate=`{champion.genome.learning_rate}`，"
             f"group size=`{champion.genome.group_size}`，"
-            f"steps=`{champion.genome.post_steps}`",
+            f"steps=`{champion.genome.post_steps}`，"
+            f"accumulation=`{champion.genome.gradient_accumulation}`，"
+            f"precision=`{champion.genome.mixed_precision}`",
             f"- validation：accuracy `{champion.validation['accuracy']:.4f}`，"
             f"KL `{champion.validation['kl_from_reference']:.4f}`",
         ]

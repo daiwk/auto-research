@@ -46,7 +46,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | FM-002 | DONE · [PR #114](https://github.com/daiwk/auto-research/pull/114) | scaling-law 多预算基础设施 | 默认 4 个模型规模/数据/step 预算点；记录实际参数量、tokens seen、FLOPs proxy、逐点残差、RMSE/R² 和不可外推边界 |
 | MM-001 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 视频多模态 | 固定 SmolVLM2 commit；Video-MME-v2 Parquet/JSONL + MP4；逐题续跑、三 seed、置信区间和子集边界 |
 | MM-002 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 音频多模态 | 固定 CLAP commit；ESC-50/ESC-10 真实 WAV；zero-shot top-1/top-5 和 text embedding cache fingerprint |
-| MM-003 | P1 | 具身与大规模多模态后训练 | 可下载数据和可执行环境；区分机制验证、离线 benchmark 与真实系统能力 |
+| MM-003 | DONE · 本 MR | 具身与大规模多模态后训练 | SmolVLA/LeRobot 真实训练入口、数据 manifest 与明确的 simulator/硬件成功率边界 |
 
 ### LLM 后训练
 
@@ -61,15 +61,15 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| AG-001 | P1 | Agent Lightning 连接可训练 LLM policy | 统一多轮 controller、transition/credit 回传、成功率和 token/tool 成本 |
-| AG-002 | P1 | Agent 真实 executor 的公平矩阵 | 同一 foundation model、同一环境预算比较 memory/planner/tool/critic genome |
+| AG-001 | DONE · 本 MR | Agent Lightning 连接可训练 LLM policy | SmolLM2 pairwise policy update、显式 transition credit、真实测试 executor 与 token/tool 成本 |
+| AG-002 | DONE · 本 MR | Agent 真实 executor 的公平矩阵 | 相同仓库 fixture、相同 subprocess 上限、三 seed 比较 controller policy |
 
 ### Auto Research / Evolve
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
 | EV-001 | DONE · 本 MR | 将 FM-001 的推理预算算子接入统一 genome | `reasoning-checkpoint` 搜索采样预算、self-consistency verifier、停止阈值并生成逐代报告 |
-| EV-002 | P1 | 将 PT-001～PT-004 接入后训练 genome | 数据、objective、teacher、rollout 和系统参数可组合且遵守公平预算 |
+| EV-002 | DONE · 本 MR | 将 PT-001～PT-004 接入后训练 genome | data/objective/teacher/rollout/accumulation/precision 成为可继承组合轴并进入逐代报告 |
 | EV-003 | P1 | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy 可组合，跨 episode 复用与失败恢复可测 |
 | EV-004 | P1 | GenRec 类生成式推荐 evolve | 真实 catalog head、context/reward/distillation 旋钮和统一推荐基线；Netflix 不因此获得论文优先级 |
 | INFRA-001 | DONE · [PR #111](https://github.com/daiwk/auto-research/pull/111) | GPU 依赖防护 | pip dry-run 阻止静默替换现有 PyTorch；Linux CPU 合同测试覆盖，既有 A30 关键路径回归继续保留 |

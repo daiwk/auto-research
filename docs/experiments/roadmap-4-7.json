@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-20",
+  "scope": ["MM-003", "AG-001", "AG-002", "EV-002"],
+  "embodied_post_training": {
+    "policy_id": "lerobot/smolvla_base",
+    "policy_revision": "c83c3163b8ca9b7e67c509fffd9121e66cb96205",
+    "vlm_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "vlm_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "dataset_id": "lerobot/svla_so100_pickplace",
+    "dataset_revision": "728583b5eaf9e739a7f119e2def466fa1d552402",
+    "device_class": "single NVIDIA A30",
+    "lerobot_package": "0.4.4",
+    "steps": 1,
+    "batch_size": 1,
+    "loss": 0.297,
+    "gradient_norm": 6.4,
+    "learnable_parameters": 99880992,
+    "total_parameters": 450046176,
+    "dataset_frames": 19631,
+    "dataset_episodes": 50,
+    "dataset_manifest_sha256": "d5d507229bdb25e39df93ec46e7f7f856f65d425d7ceac49981ef508860fc4b9",
+    "status": "completed",
+    "claim_boundary": "真实视频 batch 的前向、反向与 checkpoint 保存链路通过；未运行机器人或 simulator episode，不报告 success rate。"
+  },
+  "agent_lightning_checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "device_class": "single NVIDIA A30",
+    "steps": 3,
+    "episodes": 3,
+    "credit_updates": 6,
+    "transition_spans": 9,
+    "losses": [0.5013298988, 0.4723831713, 0.6141988635],
+    "baseline_joint_success": 1.0,
+    "final_joint_success": 1.0,
+    "conclusion": "真实 checkpoint 反传与 executor 闭环通过，但该饱和 micro-suite 没有能力提升。"
+  },
+  "executor_matrix": {
+    "episodes_per_run": 12,
+    "seeds": [42, 43, 44],
+    "maximum_subprocess_commands_per_episode": 4,
+    "methods": {
+      "direct": {"joint_success": 0.0, "average_cost": 2.0, "reuse_rate": 0.0},
+      "critic": {"joint_success": 1.0, "average_cost": 4.0, "reuse_rate": 0.0},
+      "agent-lightning": {"joint_success": 1.0, "average_cost": 3.625, "reuse_rate": 0.75},
+      "swe-agent": {"joint_success": 1.0, "average_cost": 2.5, "reuse_rate": 0.0},
+      "openhands": {"joint_success": 1.0, "average_cost": 2.5, "reuse_rate": 0.0}
+    }
+  },
+  "post_training_evolve": {
+    "dataset": "arithmetic-smoke",
+    "generations": 2,
+    "population": 5,
+    "seed": 42,
+    "champion": "g2-t1",
+    "champion_objective": "kto",
+    "validation_accuracy": 0.734375,
+    "selection_fitness": 0.734374,
+    "claim_boundary": "小型 candidate-policy 验证组合控制器；不等同于 checkpoint 能力收益。"
+  }
+}

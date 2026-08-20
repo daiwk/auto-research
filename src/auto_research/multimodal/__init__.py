@@ -26,6 +26,7 @@ from .lmms_eval import (
 )
 from .video import VideoBenchmarkConfig, run_video_benchmark
 from .audio import AudioBenchmarkConfig, run_audio_benchmark
+from .embodied import EmbodiedPostTrainingConfig, run_embodied_post_training
 
 __all__ = [
     "MicroVLMEvaluator", "load_cifar10_qa", "load_fashion_mnist_qa",
@@ -41,4 +42,5 @@ __all__ = [
     "run_lmms_eval",
     "VideoBenchmarkConfig", "run_video_benchmark",
     "AudioBenchmarkConfig", "run_audio_benchmark",
+    "EmbodiedPostTrainingConfig", "run_embodied_post_training",
 ]
