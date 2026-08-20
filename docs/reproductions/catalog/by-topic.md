@@ -6,6 +6,8 @@
 ## 大模型能力与推荐融合
 
 ### LLM / Foundation model + Recommendation
+- [ConnectionMind](../2608.10187-connectionmind/README.md)：让 LLM policy 在 typed 社交图上逐步扩展证据路径，并以 SFT、GRPO 和 GNN 蒸馏兼顾推理质量与流量成本。
+- [DREAM](../2608.09408-dream/README.md)：以 LLM Meta Engine 将三层用户意图编译为安全的推荐策略覆盖，并通过 Reward Dual Loop 持续沉淀有效结论。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：把用户历史、内容和请求上下文文本化，以 LoRA 后训练 causal LLM，再由 catalog-aware head 输出全目录分数。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：在开放网页行为上联合双裁剪对比学习与 next-item 目标预训练共享 user encoder，再迁移到广告 CTR 和访问率任务。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用行为推荐器产生 RAS reward 来优化多模态内容描述，但 serving 不读取用户行为。

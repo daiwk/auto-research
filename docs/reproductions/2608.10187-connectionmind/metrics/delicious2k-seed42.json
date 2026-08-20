@@ -1,0 +1,11 @@
+{
+  "paper": {"arxiv_id": "2608.10187", "title": "ConnectionMind", "url": "https://arxiv.org/abs/2608.10187", "organization": "Michigan State University / Meta"},
+  "dataset": {"name": "HetRec 2011 Delicious-2K", "users": 180, "items": 534, "social_edges": 182, "tag_dimensions": 64},
+  "setup": {"seed": 42, "split": "chronological leave-two-out", "heavy_user_share": 0.1, "validation_selected_path_blend": 0.1},
+  "baseline": {"name": "fixed heterogeneous graph aggregation", "recall_at_10": 0.13333333333333333, "precision_at_10": 0.013333333333333338, "ndcg_at_10": 0.08281332433497088, "surfaced_relation_distribution": [0.3388888888888889, 0.15888888888888889, 0.48, 0.022222222222222223]},
+  "method": {"name": "ConnectionMind SFT+GRPO hybrid", "recall_at_10": 0.12222222222222222, "precision_at_10": 0.012222222222222226, "ndcg_at_10": 0.0766537278782047, "surfaced_relation_distribution": [0.015555555555555555, 0.0, 0.005, 0.9794444444444445]},
+  "relative": {"recall_at_10_percent": -8.333333333333336, "precision_at_10_percent": -8.333333333333332, "ndcg_at_10_percent": -7.437929229662712},
+  "stages": {"typed_heterogeneous_graph": true, "shortest_path_sft": true, "rule_reward_grpo": true, "teacher_path_distillation": true, "hybrid_heavy_user_inference": true, "sft_demonstrations": 977, "sft_initial_loss": 3.9596190459053755, "sft_final_loss": 3.8090533665675914, "grpo_rollouts": 1440, "mean_rule_reward": 0.4602083333333334, "structured_action_valid_rate": 1.0, "relation_probabilities": {"co_watch": 0.4373659472749529, "friend_watch": 0.027117549297043974, "semantic_tag": 0.08422697506241733, "popular_item": 0.4512895283655857}},
+  "paper_results": {"delicious_8b_recall_at_5": 0.0631, "delicious_8b_recall_at_20": 0.1374, "meta_offline_recall_at_10_percent": 88.0, "online_exposure_percent": 0.33, "online_watch_time_percent": 0.43, "online_video_sessions_percent": 0.22},
+  "scope": "使用论文同款公开 Delicious 数据真实构造 user-item-tag-social 异构图，实际执行最短正路径 SFT、格式/推荐/步数规则奖励的组相对策略更新、路径教师蒸馏与重用户混合推理；未复刻 Meta 私有视频日志、Llama-3 3B/8B 与生产服务。"
+}

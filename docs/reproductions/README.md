@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 208 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 210 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -123,10 +123,19 @@ pytest tests/test_research_module_docs.py
 
 两篇工业论文均在正文披露真实流量量化 A/B；本地 MovieLens-1M 训练均保留负结果，不把原文线上收益移植为复现指标。GAS 属于基础模型/多模态论文，不要求线上 A/B，本地公开像素实验与论文数字分栏呈现。
 
-## 全部复现（208/208）
+## 2026-08-20 工业增量（2 个 adapter）
+
+- `connectionmind` · [ConnectionMind](2608.10187-connectionmind/README.md)：Meta 与密歇根州立大学将时序异构图、最短路径 SFT、规则奖励 GRPO 和路径蒸馏组合为社交推荐系统；数千万用户多周 A/B 的曝光、观看时长和 session 均有量化提升。
+- `dream` · [DREAM](2608.09408-dream/README.md)：淘宝在原召回/排序链路上增加三层意图、策略记忆、typed 参数编译与离线/在线 Reward Dual Loop；精排+重排线上 IPV +2.71%、Core IPV +3.06%、GMV +1.31%。
+
+两篇均执行了各自核心训练/控制链路；ConnectionMind 使用论文同款 Delicious 数据并保留 NDCG@10 -7.44% 的负结果，DREAM 的本地正向相关性伴随明显头部偏置，文档同时披露。
+
+## 全部复现（210/210）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `connectionmind` · [ConnectionMind](2608.10187-connectionmind/README.md) | Meta 数千万用户多周 A/B：曝光 +0.33%、观看时长 +0.43%、视频 session +0.22% | Delicious-2K 路径 SFT→GRPO→蒸馏混合推理；NDCG@10 -7.44%，保留负结果 |
+| 核心机制 | `dream` · [DREAM](2608.09408-dream/README.md) | 淘宝精排+重排 IPV +2.71%、Core IPV +3.06%、GMV +1.31% | 意图→策略记忆→安全编译→双环门控；NDCG@10 +39.36%，但 head share +94.37% |
 | 核心机制 | `gas` · [GAS](2608.12209-gas/README.md) | 纯多模态：from-scratch Overall 47.25→48.25；推理开销 0% | MoT + NEP + EMA；Fashion-MNIST QA 61.1%→63.5%，部署参数开销 0% |
 | 核心机制 | `sona` · [Sona](2608.11015-sona/README.md) | Yandex Music Active Users +4.53%、时长 +6.30%、Likes +11.42% | history compression + SID decoder + ranker；NDCG@10 -92.05%，保留负迁移 |
 | 核心机制 | `metastrategy` · [MetaStrategy](2608.09440-metastrategy/README.md) | 淘宝 click PV +2.11%、IPV +3.12%、交易金额 +2.83% | typed bundle + deterministic compiler；NDCG@10 -8.51%，head share -42.94% |
