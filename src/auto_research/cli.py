@@ -255,6 +255,10 @@ def build_parser() -> argparse.ArgumentParser:
     checkpoint_post.add_argument(
         "--dataset-revision", default="292c16329d921287c4166934cac1a6ad1e13a6c5"
     )
+    checkpoint_post.add_argument(
+        "--preference-data-path", type=Path,
+        help="optional UltraFeedback-compatible JSONL file or train/test JSONL directory",
+    )
     checkpoint_post.add_argument("--steps", type=int, default=20)
     checkpoint_post.add_argument("--batch-size", type=int, default=2)
     checkpoint_post.add_argument("--gradient-accumulation", type=int, default=1)
@@ -675,6 +679,7 @@ def main(argv: list[str] | None = None) -> int:
                 model_revision=args.model_revision,
                 checkpoint_path=args.checkpoint_path,
                 dataset_revision=args.dataset_revision,
+                preference_data_path=args.preference_data_path,
                 steps=args.steps,
                 batch_size=args.batch_size,
                 gradient_accumulation=args.gradient_accumulation,

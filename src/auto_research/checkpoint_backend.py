@@ -60,14 +60,15 @@ class HFCausalLMBackend:
         torch = self.torch
         inputs = self.tokenizer(prompt, return_tensors="pt")
         inputs = {key: value.to(self.device) for key, value in inputs.items()}
-        generator = torch.Generator(device=self.device).manual_seed(seed)
+        torch.manual_seed(seed)
+        if self.device.type == "cuda":
+            torch.cuda.manual_seed_all(seed)
         started = time.perf_counter()
         generation_kwargs = {
             "do_sample": samples > 1,
             "num_return_sequences": samples,
             "max_new_tokens": max_new_tokens,
             "pad_token_id": self.tokenizer.pad_token_id,
-            "generator": generator,
         }
         if samples > 1:
             generation_kwargs["temperature"] = temperature

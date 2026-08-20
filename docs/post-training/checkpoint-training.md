@@ -34,6 +34,9 @@ auto-research checkpoint-post-train \
 
 DPO 使用冻结 reference model；ORPO 是 reference-free 的 chosen NLL 加 odds preference 项。
 二者都在同一 tokenizer、长度、batch 和 step 预算下报告 held-out preference accuracy。
+默认分别读取固定 revision 的 `train_prefs` 与 `test_prefs`，不会用训练尾部样本冒充
+held-out。开发机离线复现可传 `--preference-data-path DIR`；目录内放置从该固定版本导出的
+`train.jsonl` 与 `test.jsonl`，每行保留 `prompt`、`chosen`、`rejected` 三个字段。
 
 ## GPU 完整性与恢复
 

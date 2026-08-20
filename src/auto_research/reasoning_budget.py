@@ -115,8 +115,9 @@ class ReasoningBudgetEvolutionEvaluator:
             self.dataset, self.dataset_dir, self.allow_network,
             self.maximum_examples, seed,
         )
+        examples = getattr(suite, target)[: self.maximum_examples]
         return evaluate_reasoning_budget(
-            self.backend, getattr(suite, target), samples=genome.reasoning_samples,
+            self.backend, examples, samples=genome.reasoning_samples,
             max_new_tokens=genome.reasoning_max_new_tokens,
             stop_consensus=genome.reasoning_stop_consensus, seed=seed,
         )

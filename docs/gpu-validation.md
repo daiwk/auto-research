@@ -67,6 +67,13 @@
 | micro-VLM / visual-shapes | validation accuracy `0.325`；验证图像 connector 与 CUDA 训练链路 |
 | post-training / arithmetic | IPO free-generation 路径完成；accuracy `0`，仅证明训练/生成/评分链路可执行 |
 | real VLM checkpoint / ScienceQA | SmolVLM2-256M 共 5 trial 全部完成；详见[多模态统一评测](multimodal-models/benchmark.md) |
+| real causal LM / reasoning budget | 固定 SmolLM2-135M revision 的 baseline 与 2-sample 候选均完成；候选生成 152 tokens，accuracy `0`，验证预算/延迟/成本约束和报告链路 |
+| real causal LM / GSM8K SFT | BF16 单步参数更新完成；从 `checkpoint-1` 恢复后只执行 step 2，`resumed_from_step=1` |
+| real causal LM / UltraFeedback | 固定公开 train/test preference 子集分别完成 DPO 与 ORPO 单步更新；held-out accuracy 均为 `0`，只作为工程 smoke |
+
+后三项于 2026-08-20 补测，结构化记录见
+[`a30-reasoning-posttraining-smoke-20260820.json`](experiments/a30-reasoning-posttraining-smoke-20260820.json)。
+checkpoint 与公开数据子集不提交到 Git；JSON 只保留复现所需的版本、命令口径和指标。
 
 ## 复现审计
 

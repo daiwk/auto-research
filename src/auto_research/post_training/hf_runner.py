@@ -31,6 +31,7 @@ class HFPostTrainingConfig:
     model_revision: str = SMOLLM2_135M_REVISION
     checkpoint_path: Path | None = None
     dataset_revision: str = ULTRAFEEDBACK_REVISION
+    preference_data_path: Path | None = None
     steps: int = 20
     batch_size: int = 2
     gradient_accumulation: int = 1
@@ -83,27 +84,69 @@ def _message_text(value) -> str:
     return str(value)
 
 
-def load_ultrafeedback(config: HFPostTrainingConfig) -> tuple[PreferenceExample, ...]:
+def _completion_text(value) -> str:
+    if isinstance(value, list):
+        assistant = [
+            str(item.get("content", "")) for item in value
+            if isinstance(item, dict) and item.get("role") == "assistant"
+        ]
+        if assistant:
+            return assistant[-1]
+    return _message_text(value)
+
+
+def _preference_rows(rows, limit: int) -> tuple[PreferenceExample, ...]:
+    result = []
+    for row in rows:
+        prompt = _message_text(row.get("prompt", ""))
+        chosen = _completion_text(row.get("chosen", ""))
+        rejected = _completion_text(row.get("rejected", ""))
+        if prompt and chosen and rejected:
+            result.append(PreferenceExample(prompt, chosen, rejected))
+        if len(result) >= limit:
+            break
+    if len(result) < 2:
+        raise RuntimeError("UltraFeedback produced fewer than two usable preference pairs")
+    return tuple(result)
+
+
+def _load_preference_jsonl(path: Path, limit: int) -> tuple[PreferenceExample, ...]:
+    return _preference_rows(
+        (json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line),
+        limit,
+    )
+
+
+def load_ultrafeedback(
+    config: HFPostTrainingConfig,
+) -> tuple[tuple[PreferenceExample, ...], tuple[PreferenceExample, ...]]:
+    if config.preference_data_path:
+        root = config.preference_data_path
+        if root.is_dir():
+            return (
+                _load_preference_jsonl(root / "train.jsonl", config.maximum_examples),
+                _load_preference_jsonl(root / "test.jsonl", config.evaluation_examples),
+            )
+        rows = _load_preference_jsonl(
+            root, config.maximum_examples + config.evaluation_examples
+        )
+        split = min(config.maximum_examples, len(rows) - 2)
+        return rows[:split], rows[split:]
     try:
         from datasets import load_dataset
     except ImportError as exc:
         raise RuntimeError("UltraFeedback requires the post-training-gpu extra") from exc
     dataset = load_dataset(
-        ULTRAFEEDBACK_ID, split="train_prefs",
+        ULTRAFEEDBACK_ID,
+        split={"train": "train_prefs", "test": "test_prefs"},
         revision=config.dataset_revision,
         cache_dir=str(config.dataset_dir / "huggingface"),
         download_mode="reuse_dataset_if_exists",
     )
-    rows = []
-    for row in dataset.select(range(min(config.maximum_examples, len(dataset)))):
-        prompt = _message_text(row.get("prompt", ""))
-        chosen = _message_text(row.get("chosen", ""))
-        rejected = _message_text(row.get("rejected", ""))
-        if prompt and chosen and rejected:
-            rows.append(PreferenceExample(prompt, chosen, rejected))
-    if len(rows) < 2:
-        raise RuntimeError("UltraFeedback produced fewer than two usable preference pairs")
-    return tuple(rows)
+    return (
+        _preference_rows(dataset["train"], config.maximum_examples),
+        _preference_rows(dataset["test"], config.evaluation_examples),
+    )
 
 
 def load_gsm8k_sft(config: HFPostTrainingConfig) -> tuple[PreferenceExample, ...]:
@@ -138,7 +181,7 @@ class HFPostTrainingRunner:
             tokenizer.pad_token = tokenizer.eos_token
         device = device_for(torch)
         precision, dtype = _precision(torch, device, config.mixed_precision)
-        model = AutoModelForCausalLM.from_pretrained(source, torch_dtype=dtype, **kwargs).to(device)
+        model = AutoModelForCausalLM.from_pretrained(source, dtype=dtype, **kwargs).to(device)
         reference = None
         if config.objective == "dpo":
             reference_source = str(config.checkpoint_path or config.model_id)
@@ -149,11 +192,14 @@ class HFPostTrainingRunner:
             if config.checkpoint_path is None:
                 reference_kwargs["revision"] = config.model_revision
             reference = AutoModelForCausalLM.from_pretrained(
-                reference_source, torch_dtype=dtype, **reference_kwargs
+                reference_source, dtype=dtype, **reference_kwargs
             ).to(device).eval()
             for parameter in reference.parameters():
                 parameter.requires_grad_(False)
-        rows = load_gsm8k_sft(config) if config.dataset == "gsm8k" else load_ultrafeedback(config)
+        if config.dataset == "gsm8k":
+            rows, evaluation_rows = load_gsm8k_sft(config), ()
+        else:
+            rows, evaluation_rows = load_ultrafeedback(config)
         optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
         start_step = 0
         if config.resume_from:
@@ -187,7 +233,7 @@ class HFPostTrainingRunner:
         metrics = (
             _evaluate_gsm8k(model, tokenizer, config, device)
             if config.dataset == "gsm8k"
-            else _evaluate_preferences(model, tokenizer, rows, config, device)
+            else _evaluate_preferences(model, tokenizer, evaluation_rows, config, device)
         )
         payload = {
             "schema_version": 2,
@@ -271,7 +317,7 @@ def _save_checkpoint(model, tokenizer, optimizer, path, step, torch):
 
 
 def _evaluate_preferences(model, tokenizer, rows, config, device):
-    model.eval(); selected = rows[-config.evaluation_examples:]
+    model.eval(); selected = rows[:config.evaluation_examples]
     correct = 0
     with __import__("torch").inference_mode():
         for row in selected:

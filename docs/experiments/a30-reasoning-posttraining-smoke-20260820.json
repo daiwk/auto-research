@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-20",
+  "scope": "engineering_smoke_only",
+  "hardware": {
+    "device": "cuda",
+    "gpu": "NVIDIA A30 24GB",
+    "mixed_precision": "bf16"
+  },
+  "model": {
+    "id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+  },
+  "reasoning_evolve": {
+    "dataset": "arithmetic-generate",
+    "evaluation_examples": 2,
+    "baseline": {
+      "samples": 1,
+      "accuracy": 0.0,
+      "generated_tokens": 0.0,
+      "latency_seconds": 0.43901340290904045
+    },
+    "candidate": {
+      "samples": 2,
+      "accuracy": 0.0,
+      "generated_tokens": 152.0,
+      "tokens_per_example": 76.0,
+      "latency_seconds": 3.298396397382021
+    },
+    "result": "completed_with_markdown_and_json_report"
+  },
+  "gsm8k_sft": {
+    "train_examples": 8,
+    "batch_size": 2,
+    "step_1_loss": 1.5169668197631836,
+    "resumed_step_2_loss": 1.3653311729431152,
+    "resumed_from_step": 1,
+    "three_seed_accuracy": 0.0,
+    "result": "parameter_update_checkpoint_and_optimizer_resume_completed"
+  },
+  "ultrafeedback": {
+    "dataset_id": "HuggingFaceH4/ultrafeedback_binarized",
+    "revision": "292c16329d921287c4166934cac1a6ad1e13a6c5",
+    "train_examples": 4,
+    "heldout_examples": 2,
+    "dpo": {
+      "steps": 1,
+      "loss": 0.6931471824645996,
+      "heldout_preference_accuracy": 0.0
+    },
+    "orpo": {
+      "steps": 1,
+      "loss": 1.3450264930725098,
+      "heldout_preference_accuracy": 0.0
+    },
+    "result": "both_real_parameter_update_paths_completed"
+  },
+  "limitations": [
+    "The reduced examples and steps validate engineering integrity only.",
+    "Zero accuracy is reported as observed and is not an algorithm conclusion.",
+    "Checkpoints and dataset samples remain outside Git."
+  ]
+}
