@@ -44,8 +44,8 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | --- | --- | --- | --- |
 | FM-001 | DONE · 本 MR | test-time compute、verifier、动态 reasoning budget | 固定 SmolLM2 revision；GSM8K/算术多预算曲线同时报告正确率、token、延迟和调用成本 |
 | FM-002 | DONE · [PR #114](https://github.com/daiwk/auto-research/pull/114) | scaling-law 多预算基础设施 | 默认 4 个模型规模/数据/step 预算点；记录实际参数量、tokens seen、FLOPs proxy、逐点残差、RMSE/R² 和不可外推边界 |
-| MM-001 | DONE · 本 MR | 视频多模态 | 固定 SmolVLM2 commit；Video-MME-v2 Parquet/JSONL + MP4；逐题续跑、三 seed、置信区间和子集边界 |
-| MM-002 | DONE · 本 MR | 音频多模态 | 固定 CLAP commit；ESC-50/ESC-10 真实 WAV；zero-shot top-1/top-5 和 text embedding cache fingerprint |
+| MM-001 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 视频多模态 | 固定 SmolVLM2 commit；Video-MME-v2 Parquet/JSONL + MP4；逐题续跑、三 seed、置信区间和子集边界 |
+| MM-002 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 音频多模态 | 固定 CLAP commit；ESC-50/ESC-10 真实 WAV；zero-shot top-1/top-5 和 text embedding cache fingerprint |
 | MM-003 | P1 | 具身与大规模多模态后训练 | 可下载数据和可执行环境；区分机制验证、离线 benchmark 与真实系统能力 |
 
 ### LLM 后训练
@@ -53,7 +53,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
 | PT-001 | DONE · 本 MR | L2 切换到可下载 pretrained causal LM | SmolLM2 固定 revision，GSM8K unrestricted generation 与 3 seeds |
-| PT-002 | DONE · 本 MR | CoBA-RL 完整教师路径 | 固定 Qwen2.5 teacher commit；pass@k/教师双缓存、真实调用率、token 成本与训练前后能力边界曲线 |
+| PT-002 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | CoBA-RL 完整教师路径 | 固定 Qwen2.5 teacher commit；pass@k/教师双缓存、真实调用率、token 成本与训练前后能力边界曲线 |
 | PT-003 | DONE · 本 MR | 公开偏好数据 | 固定 UltraFeedback revision/MIT 元数据，DPO/ORPO 同预算真实模型对照 |
 | PT-004 | DONE · 本 MR | GPU 训练完整性 | batch、gradient accumulation、mixed precision、safe checkpoint 与 optimizer resume；CPU/Mac 保留路径 |
 
