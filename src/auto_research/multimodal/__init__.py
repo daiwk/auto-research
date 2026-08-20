@@ -24,6 +24,8 @@ from .lmms_eval import (
     normalize_lmms_eval_results,
     run_lmms_eval,
 )
+from .video import VideoBenchmarkConfig, run_video_benchmark
+from .audio import AudioBenchmarkConfig, run_audio_benchmark
 
 __all__ = [
     "MicroVLMEvaluator", "load_cifar10_qa", "load_fashion_mnist_qa",
@@ -37,4 +39,6 @@ __all__ = [
     "MatrixCell", "load_matrix", "run_checkpoint_matrix",
     "LMMSEvalConfig", "build_lmms_eval_command", "normalize_lmms_eval_results",
     "run_lmms_eval",
+    "VideoBenchmarkConfig", "run_video_benchmark",
+    "AudioBenchmarkConfig", "run_audio_benchmark",
 ]

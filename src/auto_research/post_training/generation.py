@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
+import hashlib
+import json
 import math
 from pathlib import Path
 import random
@@ -141,6 +143,12 @@ def train_free_generation(
     group_size: int,
     seed: int,
     target: str = "validation",
+    teacher=None,
+    teacher_cache_path: Path | None = None,
+    boundary_cache_path: Path | None = None,
+    boundary_samples: int = 8,
+    teacher_input_cost_per_million: float = 0.0,
+    teacher_output_cost_per_million: float = 0.0,
 ):
     import torch
 
@@ -172,14 +180,32 @@ def train_free_generation(
     baseline = evaluate_generation(
         policy, tokenizer, getattr(suite, target), device, seed
     )
+    baseline_boundary_curve = (
+        evaluate_pass_at_k(
+            policy, tokenizer, getattr(suite, target), device, seed,
+            (1, 2, 4, boundary_samples),
+        )
+        if algorithm == "coba-rl" and teacher is not None else {}
+    )
+
+    boundary_rows = {}
+    if algorithm == "coba-rl" and teacher is not None:
+        boundary_rows = _boundary_pass_at_k(
+            policy, tokenizer, suite.train, device, seed,
+            boundary_samples, boundary_cache_path,
+        )
+    teacher_cache = _load_teacher_cache(teacher_cache_path, teacher)
+    teacher_calls = teacher_cache_hits = teacher_input_tokens = teacher_output_tokens = 0
 
     history, boundary = [], 0.5
     for step in range(steps):
         if algorithm == "coba-rl":
-            example = min(
-                (suite.train[rng.randrange(len(suite.train))] for _ in range(8)),
-                key=lambda row: abs(row.difficulty - boundary),
-            )
+            candidates = [suite.train[rng.randrange(len(suite.train))] for _ in range(8)]
+            example = min(candidates, key=lambda row: abs(
+                boundary_rows.get(_prompt_key(row.prompt), {}).get(
+                    "pass_rate", row.difficulty
+                ) - boundary
+            ))
         else:
             example = suite.train[rng.randrange(len(suite.train))]
         rollouts = [
@@ -221,6 +247,40 @@ def train_free_generation(
                     "curriculum_boundary": boundary,
                     "teacher_guidance": float(exacts.max() == 0),
                 })
+                if teacher is not None and exacts.max() == 0:
+                    key = _prompt_key(example.prompt)
+                    cached = teacher_cache.get(key)
+                    if cached is None:
+                        completion = teacher.complete(example.prompt)
+                        cached = {
+                            "text": completion.text,
+                            "input_tokens": completion.input_tokens,
+                            "output_tokens": completion.output_tokens,
+                        }
+                        teacher_cache[key] = cached
+                        teacher_calls += 1
+                        teacher_input_tokens += completion.input_tokens
+                        teacher_output_tokens += completion.output_tokens
+                        _write_teacher_cache(teacher_cache_path, teacher, teacher_cache)
+                    else:
+                        teacher_cache_hits += 1
+                    teacher_example = GenerationExample(
+                        example.prompt, cached["text"], example.answer,
+                        example.difficulty,
+                    )
+                    teacher_loss = _completion_nll(
+                        policy, tokenizer, teacher_example, device
+                    )
+                    loss = loss + 0.25 * teacher_loss
+                    teacher_reward, teacher_checks = verify_completion(
+                        cached["text"], example.answer
+                    )
+                    diagnostic.update({
+                        "real_teacher_used": 1.0,
+                        "teacher_exact": float(teacher_checks["exact"]),
+                        "teacher_reward": float(teacher_reward),
+                        "teacher_sft_weight": 0.25,
+                    })
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(policy.parameters(), 1.0)
@@ -235,6 +295,17 @@ def train_free_generation(
     final = evaluate_generation(
         policy, tokenizer, getattr(suite, target), device, seed + 1
     )
+    final_boundary_curve = (
+        evaluate_pass_at_k(
+            policy, tokenizer, getattr(suite, target), device, seed + 1,
+            (1, 2, 4, boundary_samples),
+        )
+        if algorithm == "coba-rl" and teacher is not None else {}
+    )
+    teacher_cost = (
+        teacher_input_tokens * teacher_input_cost_per_million
+        + teacher_output_tokens * teacher_output_cost_per_million
+    ) / 1_000_000
     return baseline, final, {
         "seed": seed,
         "tokenizer": "auditable character tokenizer",
@@ -247,8 +318,99 @@ def train_free_generation(
         "rl_steps": steps,
         "free_generation": True,
         "verifier": "exact final numeric answer + format/length diagnostics",
+        "boundary_cache": {
+            "enabled": bool(boundary_rows),
+            "entries": len(boundary_rows),
+            "samples_per_example": boundary_samples if boundary_rows else 0,
+            "pass_at_k": float(np.mean([
+                row["pass_at_k"] for row in boundary_rows.values()
+            ])) if boundary_rows else None,
+        },
+        "teacher": {
+            "enabled": teacher is not None,
+            "actual_calls": teacher_calls,
+            "cache_hits": teacher_cache_hits,
+            "input_tokens": teacher_input_tokens,
+            "output_tokens": teacher_output_tokens,
+            "estimated_cost": teacher_cost,
+            "input_cost_per_million": teacher_input_cost_per_million,
+            "output_cost_per_million": teacher_output_cost_per_million,
+            "provenance": teacher.provenance() if teacher is not None else None,
+        },
+        "capability_boundary_curve": {
+            "baseline_pass_at_k": baseline_boundary_curve,
+            "final_pass_at_k": final_boundary_curve,
+        },
         "history": history,
     }
+
+
+def _boundary_pass_at_k(
+    policy, tokenizer, examples, device, seed, samples, cache_path,
+):
+    fingerprint = hashlib.sha256(json.dumps({
+        "seed": seed,
+        "samples": samples,
+        "prompts": [row.prompt for row in examples],
+    }, sort_keys=True).encode()).hexdigest()
+    if cache_path and cache_path.exists():
+        payload = json.loads(cache_path.read_text(encoding="utf-8"))
+        if payload.get("fingerprint") != fingerprint:
+            raise ValueError("CoBA-RL boundary cache fingerprint mismatch")
+        return payload["entries"]
+    rng = random.Random(seed + 31_337)
+    entries = {}
+    for example in examples:
+        exact = []
+        for _ in range(samples):
+            text = generate(policy, tokenizer, example.prompt, device, rng, sample=True)
+            exact.append(verify_completion(text, example.answer)[1]["exact"])
+        entries[_prompt_key(example.prompt)] = {
+            "pass_rate": float(np.mean(exact)),
+            "pass_at_k": float(any(exact)),
+            "samples": samples,
+        }
+    if cache_path:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        _write_json(cache_path, {"fingerprint": fingerprint, "entries": entries})
+    return entries
+
+
+def _load_teacher_cache(path, teacher):
+    if path is None or not path.exists():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if teacher is None:
+        raise ValueError("teacher cache provided without a real teacher")
+    if (
+        payload.get("teacher_model_id") != teacher.model_id
+        or payload.get("teacher_revision") != teacher.requested_revision
+    ):
+        raise ValueError("CoBA-RL teacher cache fingerprint mismatch")
+    return payload.get("entries", {})
+
+
+def _write_teacher_cache(path, teacher, entries):
+    if path is None:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _write_json(path, {
+        "teacher_model_id": teacher.model_id,
+        "teacher_revision": teacher.requested_revision,
+        "entries": entries,
+    })
+
+
+def _prompt_key(prompt):
+    return hashlib.sha256(prompt.encode()).hexdigest()
+
+
+def _write_json(path, payload):
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    temporary.replace(path)
 
 
 def _completion_nll(model, tokenizer, example, device):
@@ -399,3 +561,26 @@ def evaluate_generation(model, tokenizer, examples, device, seed):
         "mean_response_characters": length / count,
         "kl_from_reference": 0.0,
     }
+
+
+def evaluate_pass_at_k(model, tokenizer, examples, device, seed, k_values):
+    """Measure empirical pass@k using the same verifier and sampled policy."""
+    values = tuple(sorted(set(int(value) for value in k_values)))
+    if not values or values[0] < 1:
+        raise ValueError("pass@k values must be positive")
+    rng = random.Random(seed)
+    hits = {value: 0 for value in values}
+    maximum = values[-1]
+    for example in examples:
+        exact = [
+            verify_completion(
+                generate(model=model, tokenizer=tokenizer, prompt=example.prompt,
+                         device=device, rng=rng, sample=True),
+                example.answer,
+            )[1]["exact"]
+            for _ in range(maximum)
+        ]
+        for value in values:
+            hits[value] += int(any(exact[:value]))
+    count = max(1, len(examples))
+    return {f"pass@{value}": hits[value] / count for value in values}

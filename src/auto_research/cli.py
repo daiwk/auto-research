@@ -17,6 +17,7 @@ from .evolution.promotion import CandidatePluginSpec, CandidatePromotionPipeline
 from .post_training import PostTrainingConfig, PostTrainingRunner
 from .post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
 from .post_training.hf_runner import HFPostTrainingConfig, HFPostTrainingRunner
+from .post_training.coba_teacher import QWEN25_TEACHER_REVISION
 from .publish import publish_report
 from .reproductions.base import ReproductionFidelity
 from .reproductions.manifest import PaperManifest, write_manifest
@@ -40,6 +41,8 @@ from .multimodal import (
     RETRIEVAL_BENCHMARKS, RetrievalPredictionConfig,
     generate_retrieval_predictions,
     run_checkpoint_matrix, LMMSEvalConfig, run_lmms_eval,
+    VideoBenchmarkConfig, run_video_benchmark,
+    AudioBenchmarkConfig, run_audio_benchmark,
 )
 
 
@@ -263,6 +266,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="comma-separated seeds; generation suites default to seed,seed+1,seed+2",
     )
     post_train.add_argument("--offline", action="store_true")
+    post_train.add_argument(
+        "--teacher-model-id",
+        help="real public teacher checkpoint; currently only valid for coba-rl",
+    )
+    post_train.add_argument("--teacher-revision", default=QWEN25_TEACHER_REVISION)
+    post_train.add_argument("--teacher-checkpoint-path", type=Path)
+    post_train.add_argument("--teacher-cache", type=Path)
+    post_train.add_argument("--boundary-cache", type=Path)
+    post_train.add_argument("--boundary-samples", type=int, default=8)
+    post_train.add_argument("--teacher-max-new-tokens", type=int, default=96)
+    post_train.add_argument("--teacher-input-cost-per-million", type=float, default=0.0)
+    post_train.add_argument("--teacher-output-cost-per-million", type=float, default=0.0)
     _add_runtime_arguments(post_train)
 
     checkpoint_post = commands.add_parser(
@@ -426,6 +441,47 @@ def build_parser() -> argparse.ArgumentParser:
     lmms.add_argument("--gen-kwargs")
     lmms.add_argument("--dry-run", action="store_true")
     _add_runtime_arguments(lmms)
+
+    video = commands.add_parser(
+        "multimodal-video-eval",
+        help="run resumable multi-seed Video-MME-v2 checkpoint evaluation",
+    )
+    video.add_argument("--annotations", type=Path, required=True)
+    video.add_argument("--video-root", type=Path, required=True)
+    video.add_argument("--output-dir", type=Path, default=Path("runs/video-mme-v2"))
+    video.add_argument(
+        "--model-id", default="HuggingFaceTB/SmolVLM2-256M-Video-Instruct"
+    )
+    video.add_argument(
+        "--model-revision", default="067788b187b95ebe7b2e040b3e4299e342e5b8fd"
+    )
+    video.add_argument("--checkpoint-path", type=Path)
+    video.add_argument("--seeds", default="42,43,44")
+    video.add_argument("--maximum-examples", type=int)
+    video.add_argument("--num-frames", type=int, default=32)
+    video.add_argument("--max-new-tokens", type=int, default=12)
+    video.add_argument("--sample", action="store_true")
+    video.add_argument("--temperature", type=float, default=0.2)
+    video.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(video)
+
+    audio = commands.add_parser(
+        "multimodal-audio-eval",
+        help="run pinned CLAP zero-shot ESC-50 evaluation with cache validation",
+    )
+    audio.add_argument("--annotations", type=Path, required=True)
+    audio.add_argument("--audio-root", type=Path, required=True)
+    audio.add_argument("--output-dir", type=Path, default=Path("runs/esc50-clap"))
+    audio.add_argument("--model-id", default="laion/clap-htsat-unfused")
+    audio.add_argument(
+        "--model-revision", default="8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a"
+    )
+    audio.add_argument("--checkpoint-path", type=Path)
+    audio.add_argument("--maximum-examples", type=int)
+    audio.add_argument("--fold", type=int)
+    audio.add_argument("--prompt-template", default="This is a sound of {label}.")
+    audio.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(audio)
 
     candidate = commands.add_parser(
         "candidate", help="stage, verify or explicitly promote a generated evolve plugin"
@@ -614,6 +670,7 @@ def main(argv: list[str] | None = None) -> int:
                 maximum_train_tokens=args.maximum_train_tokens,
                 maximum_eval_tokens=args.maximum_eval_tokens,
                 maximum_examples=args.maximum_examples,
+                num_frames=args.num_frames,
                 agent_episodes=args.agent_episodes,
                 vocab_size=args.vocab_size,
                 llm_dimensions=args.llm_dimensions,
@@ -714,6 +771,15 @@ def main(argv: list[str] | None = None) -> int:
                     ),
                     allow_network=not args.offline,
                     maximum_examples=args.maximum_examples,
+                    teacher_model_id=args.teacher_model_id,
+                    teacher_revision=args.teacher_revision,
+                    teacher_checkpoint_path=args.teacher_checkpoint_path,
+                    teacher_cache=args.teacher_cache,
+                    boundary_cache=args.boundary_cache,
+                    boundary_samples=args.boundary_samples,
+                    teacher_max_new_tokens=args.teacher_max_new_tokens,
+                    teacher_input_cost_per_million=args.teacher_input_cost_per_million,
+                    teacher_output_cost_per_million=args.teacher_output_cost_per_million,
                 )
             ).run()
             print(f"Validation accuracy: {result.final['accuracy']:.4f}")
@@ -867,6 +933,43 @@ def main(argv: list[str] | None = None) -> int:
                 dry_run=args.dry_run,
             )
             print(json.dumps(result, ensure_ascii=False))
+            return 0
+        if args.command == "multimodal-video-eval":
+            seeds = tuple(
+                int(value.strip()) for value in args.seeds.split(",") if value.strip()
+            )
+            payload, run_dir = run_video_benchmark(VideoBenchmarkConfig(
+                annotations=args.annotations,
+                video_root=args.video_root,
+                output_dir=args.output_dir,
+                model_id=args.model_id,
+                model_revision=args.model_revision,
+                checkpoint_path=args.checkpoint_path,
+                seeds=seeds,
+                maximum_examples=args.maximum_examples,
+                max_new_tokens=args.max_new_tokens,
+                do_sample=args.sample,
+                temperature=args.temperature,
+                offline=args.offline,
+            ))
+            print(json.dumps(payload["metrics"], ensure_ascii=False))
+            print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "multimodal-audio-eval":
+            payload, run_dir = run_audio_benchmark(AudioBenchmarkConfig(
+                annotations=args.annotations,
+                audio_root=args.audio_root,
+                output_dir=args.output_dir,
+                model_id=args.model_id,
+                model_revision=args.model_revision,
+                checkpoint_path=args.checkpoint_path,
+                maximum_examples=args.maximum_examples,
+                fold=args.fold,
+                prompt_template=args.prompt_template,
+                offline=args.offline,
+            ))
+            print(json.dumps(payload["metrics"], ensure_ascii=False))
+            print(f"Report: {run_dir / 'report.md'}")
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

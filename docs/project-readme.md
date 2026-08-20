@@ -190,11 +190,17 @@ DEMO_TRACK=multimodal ./demo.sh
 auto-research multimodal-eval --benchmark cifar10-qa \
   --architecture micro_vlm_query --steps 300 --seeds 42,43,44
 
+# 真实视频/音频 checkpoint 评测；先按文档准备官方媒体子集
+auto-research multimodal-video-eval --help
+auto-research multimodal-audio-eval --help
+
 # 完整 micro-LLM 研究
 DEMO_TRACK=llm DEMO_PROFILE=full ./demo-linux-gpu.sh
 ```
 
 首次运行会创建平台隔离的 `.venv-demo-*` 环境并安装依赖；后续直接复用。Linux GPU 如需指定 PyTorch CUDA wheel，可传 `TORCH_INDEX_URL`；其他参数见[运行环境指南](runtime.md)。
+视频、音频公开 checkpoint、固定数据 revision 和 A30 验证结果见
+[视频与音频评测](multimodal-models/video-audio.md)。
 
 后训练 demo 默认运行 Lightning OPD；可用同一 CLI 切换 DPO、KTO、ORPO、GRPO、
 SLiC-HF、SteerLM、SPIN、

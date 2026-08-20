@@ -21,7 +21,10 @@ multimodal = [
   "torchvision>=0.22,<1",
   "transformers>=5.0,<6",
   "huggingface-hub>=1.0,<2",
+  "datasets>=4.0,<5",
   "Pillow>=11,<13",
+  "soundfile>=0.13,<1",
+  "yt-dlp>=2025.1",
   "num2words>=0.5,<1",
 ]
 lmms-eval = [
