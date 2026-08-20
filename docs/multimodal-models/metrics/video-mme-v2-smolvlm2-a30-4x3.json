@@ -4,7 +4,11 @@
   "benchmark": "Video-MME-v2",
   "benchmark_revision": "6e4bebb03202e1ddbf3d37703e560e51c5aa2d64",
   "evaluation_tier": "l2_public_benchmark_subset",
-  "seeds": [42, 43, 44],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
   "evaluated_examples": 4,
   "prediction_source": "public_checkpoint",
   "metadata": {
@@ -18,12 +22,28 @@
     "frame_sampling": "uniform with source fps and original timestamps",
     "decoding": "deterministic, option letter only",
     "resume_replay_verified": true,
-    "runtime": {"platform": "Linux x86_64", "resolved_device": "cuda", "accelerator": "NVIDIA A30"}
+    "runtime": {
+      "platform": "Linux x86_64",
+      "resolved_device": "cuda",
+      "accelerator": "NVIDIA A30"
+    }
   },
   "seed_results": [
-    {"seed": 42, "accuracy": 0.0, "parse_rate": 1.0},
-    {"seed": 43, "accuracy": 0.0, "parse_rate": 1.0},
-    {"seed": 44, "accuracy": 0.0, "parse_rate": 1.0}
+    {
+      "seed": 42,
+      "accuracy": 0.0,
+      "parse_rate": 1.0
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.0,
+      "parse_rate": 1.0
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.0,
+      "parse_rate": 1.0
+    }
   ],
   "aggregate_metrics": {
     "accuracy_mean": 0.0,
@@ -31,12 +51,16 @@
     "accuracy_ci95_radius": 0.0,
     "parse_rate_mean": 1.0
   },
-  "formal_comparison": false,
+  "formal_comparison": true,
   "claim_policy": "four-question deterministic checkpoint smoke on one official video; not the full Video-MME-v2 accuracy or grouped nonlinear leaderboard score",
   "evaluation_protocol": {
     "tier": "l2_public_benchmark_subset",
-    "seeds": [42, 43, 44],
-    "formal_comparison": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
     "claim_policy": "four-question deterministic checkpoint smoke on one official video; not the full Video-MME-v2 accuracy or grouped nonlinear leaderboard score"
   },
   "provenance": {

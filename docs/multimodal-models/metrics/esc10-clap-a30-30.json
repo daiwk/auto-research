@@ -3,7 +3,9 @@
   "manifest_ref": "multimodal-models:audio-checkpoint-benchmark",
   "benchmark": "ESC-10 subset of ESC-50",
   "evaluation_tier": "l2_public_benchmark_subset",
-  "seeds": [42],
+  "seeds": [
+    42
+  ],
   "evaluated_examples": 30,
   "prediction_source": "public_checkpoint",
   "metadata": {
@@ -15,7 +17,11 @@
     "checkpoint_committed": false,
     "prompt_template": "This is a sound of {label}.",
     "cache_replay_verified": true,
-    "runtime": {"platform": "Linux x86_64", "resolved_device": "cuda", "accelerator": "NVIDIA A30"}
+    "runtime": {
+      "platform": "Linux x86_64",
+      "resolved_device": "cuda",
+      "accelerator": "NVIDIA A30"
+    }
   },
   "aggregate_metrics": {
     "zero_shot_top1_accuracy": 1.0,
@@ -27,7 +33,9 @@
   "claim_policy": "deterministic zero-shot checkpoint regression on a fixed 30-example ESC-10 subset; not the full supervised five-fold ESC-50 protocol",
   "evaluation_protocol": {
     "tier": "l2_public_benchmark_subset",
-    "seeds": [42],
+    "seeds": [
+      42
+    ],
     "formal_comparison": false,
     "claim_policy": "deterministic zero-shot checkpoint regression on a fixed 30-example ESC-10 subset; not the full supervised five-fold ESC-50 protocol"
   },

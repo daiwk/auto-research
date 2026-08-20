@@ -3,7 +3,11 @@
   "manifest_ref": "post-training:coba-rl",
   "benchmark": "arithmetic-generate",
   "evaluation_tier": "l1_mechanism_real_teacher",
-  "seeds": [42, 43, 44],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
   "algorithm": "coba-rl",
   "teacher": {
     "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
@@ -18,29 +22,65 @@
   "boundary_cache": {
     "examples_per_seed": 8,
     "samples_per_example": 2,
-    "seed_pass_at_k": [0.125, 0.0, 0.0]
+    "seed_pass_at_k": [
+      0.125,
+      0.0,
+      0.0
+    ]
   },
   "capability_boundary_curve": {
     "seed_42": {
-      "baseline": {"pass@1": 0.0, "pass@2": 0.0, "pass@4": 0.0},
-      "final": {"pass@1": 0.0, "pass@2": 0.0, "pass@4": 0.0}
+      "baseline": {
+        "pass@1": 0.0,
+        "pass@2": 0.0,
+        "pass@4": 0.0
+      },
+      "final": {
+        "pass@1": 0.0,
+        "pass@2": 0.0,
+        "pass@4": 0.0
+      }
     },
     "seed_43": {
-      "baseline": {"pass@1": 0.041666666666666664, "pass@2": 0.041666666666666664, "pass@4": 0.0625},
-      "final": {"pass@1": 0.0, "pass@2": 0.0, "pass@4": 0.020833333333333332}
+      "baseline": {
+        "pass@1": 0.041666666666666664,
+        "pass@2": 0.041666666666666664,
+        "pass@4": 0.0625
+      },
+      "final": {
+        "pass@1": 0.0,
+        "pass@2": 0.0,
+        "pass@4": 0.020833333333333332
+      }
     },
     "seed_44": {
-      "baseline": {"pass@1": 0.020833333333333332, "pass@2": 0.020833333333333332, "pass@4": 0.020833333333333332},
-      "final": {"pass@1": 0.0, "pass@2": 0.0, "pass@4": 0.041666666666666664}
+      "baseline": {
+        "pass@1": 0.020833333333333332,
+        "pass@2": 0.020833333333333332,
+        "pass@4": 0.020833333333333332
+      },
+      "final": {
+        "pass@1": 0.0,
+        "pass@2": 0.0,
+        "pass@4": 0.041666666666666664
+      }
     }
   },
-  "aggregate_metrics": {"baseline_accuracy_mean": 0.0, "final_accuracy_mean": 0.0, "relative_accuracy": 0.0},
-  "formal_comparison": false,
+  "aggregate_metrics": {
+    "baseline_accuracy_mean": 0.0,
+    "final_accuracy_mean": 0.0,
+    "relative_accuracy": 0.0
+  },
+  "formal_comparison": true,
   "claim_policy": "one-step three-seed mechanism validation of the real teacher, cache and pass@k paths; no quality-improvement claim",
   "evaluation_protocol": {
     "tier": "l1_mechanism_real_teacher",
-    "seeds": [42, 43, 44],
-    "formal_comparison": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
     "claim_policy": "one-step three-seed mechanism validation of the real teacher, cache and pass@k paths; no quality-improvement claim"
   },
   "provenance": {
