@@ -81,6 +81,18 @@ ALGORITHMS = (
     "pto",
     "c2-dpo",
     "gcpo",
+    "r2-opd",
+    "sr-opsd",
+    "opd2",
+    "causal-opd",
+    "smopd",
+    "rstg",
+    "sa-mrpo",
+    "rubric-dropout",
+    "erils",
+    "crpo",
+    "serpo",
+    "iso-rlvr",
 )
 
 

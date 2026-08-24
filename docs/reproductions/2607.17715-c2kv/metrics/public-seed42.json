@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference"
+  },
+  "dataset": {
+    "name": "deterministic long-context public mini-suite",
+    "samples": 64,
+    "sequence_length": 96
+  },
+  "setup": {
+    "adapter": "c2kv",
+    "seed": 42,
+    "same_examples": true
+  },
+  "baseline": {
+    "name": "recent-window attention",
+    "accuracy": 0.078125,
+    "memory_fraction": 0.25,
+    "relative_cost": 1.0
+  },
+  "method": {
+    "name": "c2kv",
+    "accuracy": 0.84375,
+    "memory_fraction": 0.25,
+    "relative_cost": 0.18,
+    "composable_chunks": 1536.0
+  },
+  "relative": {
+    "accuracy_percent": 980.0,
+    "accuracy_points": 76.5625,
+    "cost_percent": -82.0
+  },
+  "paper_results": {
+    "reported": "跨长上下文 benchmark 最高 17× 推理加速并保持生成质量。"
+  },
+  "scope": "固定 numpy 长上下文/多模态/评测 mini-suite；不冒充论文规模预训练、GPU kernel 或完整公开 benchmark。",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:c2kv",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.17715-c2kv/metrics/public-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  }
+}

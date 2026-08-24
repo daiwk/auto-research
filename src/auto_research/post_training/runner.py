@@ -27,6 +27,7 @@ class PostTrainingRunner:
             "gkd", "minillm", "opsd", "dash", "beta-opsd", "opcd", "flux-opd",
             "lightning-opd", "relay-opd", "turn-opd", "distilled-rl",
             "u-opsd", "rp-opsd", "pcsd", "adrs", "mopd", "opd-lm",
+            "r2-opd", "sr-opsd", "opd2", "causal-opd", "smopd", "rstg",
         }
         state.teacher_calls = len(data.train) if config.algorithm in teacher_cached else 0
         baseline = metrics(state, data.validation)
@@ -63,6 +64,18 @@ class PostTrainingRunner:
             "chord": state.variant_updates,
             "vapo": state.variant_updates,
             "vad": state.variant_updates,
+            "r2-opd": state.variant_updates,
+            "sr-opsd": state.variant_updates,
+            "opd2": state.variant_updates,
+            "causal-opd": state.variant_updates,
+            "smopd": state.variant_updates,
+            "rstg": state.variant_updates,
+            "sa-mrpo": state.variant_updates,
+            "rubric-dropout": state.variant_updates,
+            "erils": state.variant_updates,
+            "crpo": state.variant_updates,
+            "serpo": state.variant_updates,
+            "iso-rlvr": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

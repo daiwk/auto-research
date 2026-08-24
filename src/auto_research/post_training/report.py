@@ -4,6 +4,18 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "r2-opd": ("Reasoning-Progress-Aware OPD", "https://arxiv.org/abs/2608.19408"),
+    "sr-opsd": ("Self-Referenced OPSD", "https://arxiv.org/abs/2608.09745"),
+    "opd2": ("On-Policy Delta Distillation", "https://arxiv.org/abs/2608.05802"),
+    "causal-opd": ("CausalOPD", "https://arxiv.org/abs/2608.03673"),
+    "smopd": ("Specialize-and-Merge OPD", "https://arxiv.org/abs/2608.03092"),
+    "rstg": ("Recovering Learning Signals via Adaptive Teacher Guidance", "https://arxiv.org/abs/2608.00782"),
+    "sa-mrpo": ("Saturation-Aware MRPO", "https://arxiv.org/abs/2608.16072"),
+    "rubric-dropout": ("Rubric Dropout", "https://arxiv.org/abs/2608.11669"),
+    "erils": ("External Rollout Integration for dLLM RL", "https://arxiv.org/abs/2608.01717"),
+    "crpo": ("Contrastive Reinforced Policy Optimization", "https://arxiv.org/abs/2607.28026"),
+    "serpo": ("Self-Evolving Rubric Policy Optimization", "https://arxiv.org/abs/2607.26873"),
+    "iso-rlvr": ("Isospectral Optimization", "https://arxiv.org/abs/2607.19331"),
     "gcpo": ("Geometrically Constrained Policy Optimization", "https://arxiv.org/abs/2608.11674"),
     "pto": ("Preference Tree Optimization", "https://arxiv.org/abs/2608.12062"),
     "c2-dpo": ("Context-Calibrated DPO", "https://arxiv.org/abs/2608.12158"),

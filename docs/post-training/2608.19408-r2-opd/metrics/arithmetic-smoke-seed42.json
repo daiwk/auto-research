@@ -1,0 +1,145 @@
+{
+  "algorithm": "r2-opd",
+  "dataset": "arithmetic-smoke",
+  "baseline": {
+    "accuracy": 0.1953125,
+    "mean_reward": 0.359689058826365,
+    "entropy": 1.791759469222057,
+    "kl_from_reference": 0.0
+  },
+  "final": {
+    "accuracy": 0.6640625,
+    "mean_reward": 0.732082365939624,
+    "entropy": 1.517513949749238,
+    "kl_from_reference": 0.27424551947281656
+  },
+  "relative_accuracy": 2.4,
+  "training": {
+    "steps": 120,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "train_examples": 512,
+    "validation_examples": 128,
+    "data_source": "deterministic arithmetic smoke suite",
+    "teacher_cache_entries": 512,
+    "teacher_prefill_calls": 512,
+    "online_teacher_calls": 0,
+    "drift_events": 0,
+    "critic_updates": 0,
+    "rollout_policy_refreshes": 7,
+    "last_diagnostics": {
+      "mechanism_id": 6.0,
+      "filtered_conflicts": 0.0,
+      "advantage_std": 1.9933927558471263,
+      "loss": -1.4662071133823382,
+      "policy_entropy": 1.5347080492536667
+    },
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "history": [
+    {
+      "step": 1.0,
+      "loss": 8.326672684688674e-17,
+      "accuracy": 0.5390625,
+      "mean_reward": 0.6292284645371297,
+      "entropy": 1.7916114034826707,
+      "kl_from_reference": 0.00014806573938384263
+    },
+    {
+      "step": 12.0,
+      "loss": -0.2765757912213085,
+      "accuracy": 0.6015625,
+      "mean_reward": 0.678723381084538,
+      "entropy": 1.780902749931372,
+      "kl_from_reference": 0.01085671929068208
+    },
+    {
+      "step": 24.0,
+      "loss": -0.1390931568370225,
+      "accuracy": 0.6328125,
+      "mean_reward": 0.7028083639263925,
+      "entropy": 1.75565441807734,
+      "kl_from_reference": 0.03610505114471463
+    },
+    {
+      "step": 36.0,
+      "loss": -0.1598903854565321,
+      "accuracy": 0.65625,
+      "mean_reward": 0.7262394126505946,
+      "entropy": 1.7294380655904809,
+      "kl_from_reference": 0.06232140363157405
+    },
+    {
+      "step": 48.0,
+      "loss": 0.12958720259903772,
+      "accuracy": 0.640625,
+      "mean_reward": 0.7190951240303389,
+      "entropy": 1.7047102168370298,
+      "kl_from_reference": 0.08704925238502437
+    },
+    {
+      "step": 60.0,
+      "loss": -0.39641546457109955,
+      "accuracy": 0.671875,
+      "mean_reward": 0.7329681908541236,
+      "entropy": 1.665681616826753,
+      "kl_from_reference": 0.12607785239530214
+    },
+    {
+      "step": 72.0,
+      "loss": -1.252714911016302,
+      "accuracy": 0.6796875,
+      "mean_reward": 0.7398911544766772,
+      "entropy": 1.6324307802148343,
+      "kl_from_reference": 0.1593286890072208
+    },
+    {
+      "step": 84.0,
+      "loss": -0.6647677708773138,
+      "accuracy": 0.6640625,
+      "mean_reward": 0.7315481882787143,
+      "entropy": 1.5944941784988484,
+      "kl_from_reference": 0.19726529072320645
+    },
+    {
+      "step": 96.0,
+      "loss": -0.6147573145055352,
+      "accuracy": 0.6640625,
+      "mean_reward": 0.7346536659901375,
+      "entropy": 1.5693152645915422,
+      "kl_from_reference": 0.22244420463051212
+    },
+    {
+      "step": 108.0,
+      "loss": -0.23881486909659888,
+      "accuracy": 0.6328125,
+      "mean_reward": 0.714514301150916,
+      "entropy": 1.5463712464452586,
+      "kl_from_reference": 0.24538822277679656
+    },
+    {
+      "step": 120.0,
+      "loss": -1.4662071133823382,
+      "accuracy": 0.6640625,
+      "mean_reward": 0.732082365939624,
+      "entropy": 1.517513949749238,
+      "kl_from_reference": 0.27424551947281656
+    }
+  ],
+  "schema_version": 2,
+  "manifest_ref": "post-training:arithmetic-smoke-seed42",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2608.19408-r2-opd/metrics/arithmetic-smoke-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  }
+}

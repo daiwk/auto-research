@@ -260,6 +260,15 @@ def test_builtin_adapters_are_discoverable():
             "sarm",
             "ml-dcn",
             "rag-qac",
+            "tcab",
+            "olmpool-long-context",
+            "distillcache",
+            "autonomy-heads",
+            "physics-mm-pretraining",
+            "ttcd",
+            "dart",
+            "transmem",
+            "c2kv",
         }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE

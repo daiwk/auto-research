@@ -7,7 +7,23 @@ from ..data import CandidateGroup
 from ..rollout_correction import (icepop_weights, rollout_engine_probabilities, truncated_importance_weights)
 
 def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, probabilities, reference, rollout_training_probabilities, sampling_probabilities, sampled, diagnostics):
-    if algorithm in {'rrc', 'rail', 'specroll', 'pto', 'c2-dpo', 'gcpo'}:
+    if algorithm in {
+        'rrc', 'rail', 'specroll', 'pto', 'c2-dpo', 'gcpo',
+        'r2-opd', 'sr-opsd', 'opd2', 'causal-opd', 'smopd', 'rstg',
+        'sa-mrpo', 'rubric-dropout', 'erils', 'crpo', 'serpo', 'iso-rlvr',
+    }:
+        if algorithm in {
+            'r2-opd', 'sr-opsd', 'opd2', 'causal-opd', 'smopd', 'rstg',
+            'sa-mrpo', 'rubric-dropout', 'erils', 'crpo', 'serpo', 'iso-rlvr',
+        }:
+            from ..historical_b08_b09 import update_historical
+
+            gradient, loss, latest = update_historical(
+                algorithm, state, group, probabilities, reference,
+                rollout_training_probabilities, sampled, rng,
+            )
+            diagnostics.update(latest)
+            return gradient, loss, diagnostics
         if algorithm == 'gcpo':
             from ..latest_20260824 import update_gcpo
 

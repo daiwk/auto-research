@@ -104,6 +104,24 @@
 
 - [GCPO](2608.11674-gcpo/README.md)：诊断 rollout update 与预训练权重主奇异空间的重合，并以硬双侧正交投影限制更新可行域。
 
+<!-- historical-post-training:start -->
+## 2026 历史扫描 B08～B09
+
+- [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](2608.19408-r2-opd/README.md)：分别按教师奖励和独立进展奖励排序 reasoning spans，冲突时屏蔽蒸馏信号。
+- [SR-OPSD: Self-Referenced On-Policy Self-Distillation](2608.09745-sr-opsd/README.md)：把自教师与 reference 做几何插值得到有效目标，再用 Rényi divergence 控制投影几何和密度比敏感度。
+- [On-Policy Delta Distillation for Multilingual Math Reasoning](2608.05802-opd2/README.md)：以 post-trained teacher 相对其 base model 的概率增量作为蒸馏信号，减少复制教师原有偏差。
+- [CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning](2608.03673-causal-opd/README.md)：教师定位 on-policy 因果链第一个错误步骤，以短 horizon RL 修复，并按证据→机制→结论推进课程。
+- [SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation](2608.03092-smopd/README.md)：先用 reward-priority 分别训练专长教师，再在学生自身轨迹上合并多个教师能力。
+- [Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance](2608.00782-rstg/README.md)：只对负向零方差 group 启用教师，并在高熵或大 teacher-student gap token 上蒸馏，同时注入教师正确轨迹 SFT。
+- [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](2608.16072-sa-mrpo/README.md)：逐 reward 维度标准化优势，并依据 batch 饱和度动态把梯度预算转移到尚未掌握的目标。
+- [Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL](2608.11669-rubric-dropout/README.md)：每个 rollout group 共享随机丢弃的 rubric 子集，使策略无法持续利用固定 judge proxy。
+- [Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models](2608.01717-erils/README.md)：约束外部策略 rollout 长度，并对 on-policy/external 来源分别处理奖励以防联合归一化崩溃。
+- [Contrastive Reinforced Policy Optimization via Privileged Self-Distillation](2607.28026-crpo/README.md)：按预测熵区分反思探索正位置和 exposure-bias 负位置，对 privileged self-distillation 做组内对比。
+- [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](2607.26873-serpo/README.md)：让 Good–Normal–Bad 响应档案、query-specific rubrics 和 actor 策略形成三方闭环自进化。
+- [ISO: An RLVR-Native Optimization Stack](2607.19331-iso-rlvr/README.md)：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
+
+<!-- historical-post-training:end -->
+
 ## 研究闭环
 
 ```mermaid

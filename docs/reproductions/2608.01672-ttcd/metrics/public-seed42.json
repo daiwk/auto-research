@@ -1,0 +1,53 @@
+{
+  "paper": {
+    "title": "Learning What to Remember: Test-Time Training via Context Distillation"
+  },
+  "dataset": {
+    "name": "deterministic long-context public mini-suite",
+    "samples": 64,
+    "sequence_length": 96
+  },
+  "setup": {
+    "adapter": "ttcd",
+    "seed": 42,
+    "same_examples": true
+  },
+  "baseline": {
+    "name": "recent-window attention",
+    "accuracy": 0.078125,
+    "memory_fraction": 0.25,
+    "relative_cost": 1.0
+  },
+  "method": {
+    "name": "ttcd",
+    "accuracy": 0.859375,
+    "memory_fraction": 0.25,
+    "relative_cost": 0.42,
+    "context_distillation_updates": 64.0
+  },
+  "relative": {
+    "accuracy_percent": 1000.0,
+    "accuracy_points": 78.125,
+    "cost_percent": -58.00000000000001
+  },
+  "paper_results": {
+    "reported": "IP-TTCD 在长上下文语言建模中持续优于 DeltaNet、Gated DeltaNet、滑窗注意力和 TTT。"
+  },
+  "scope": "固定 numpy 长上下文/多模态/评测 mini-suite；不冒充论文规模预训练、GPU kernel 或完整公开 benchmark。",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:ttcd",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.01672-ttcd/metrics/public-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  }
+}

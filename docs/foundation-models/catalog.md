@@ -10,13 +10,21 @@
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 网络架构 | [RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models](../reproductions/2608.21236-rare/README.md) | Huazhong University of Science and Technology，2026-08-21 | 未发现官方代码 | `rare` |
+| 预训练与数据 | [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](../reproductions/2608.12831-tcab/README.md) | New York University，2026-08-13 | 未发现官方代码 | `tcab` |
 | 多模态基础模型 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | 未发现官方代码 | `gas` |
+| 注意力与长上下文 | [Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension](../reproductions/2608.10296-olmpool-long-context/README.md) | Ai2，2026-08-10 | [已开源](https://github.com/allenai/olmpool/) | `olmpool-long-context` |
+| 推理与系统效率 | [DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference](../reproductions/2608.08878-distillcache/README.md) | Oklahoma State University，2026-08-09 | 未发现官方代码 | `distillcache` |
+| 注意力与长上下文 | [Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](../reproductions/2608.06849-autonomy-heads/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-08-07 | 未发现官方代码 | `autonomy-heads` |
 | 推理与系统效率 | [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../reproductions/2608.06291-bakron/README.md) | University of California, San Diego，2026-08-06 | 未发现官方代码 | `bakron` |
 | 预训练与数据 | [Hierarchical Latent Prediction for Language Models](../reproductions/2608.05806-hilp/README.md) | University of Texas at Austin，2026-08-06 | 未发现官方代码 | `hilp` |
 | 网络架构 | [MACRO: Markov Chain Routing of Transformer Layers](../reproductions/2608.05872-macro/README.md) | Heinrich Heine University Düsseldorf，2026-08-06 | [已开源](https://github.com/Batorskq/MACRO) | `macro` |
 | 推理与系统效率 | [DBLast: Dependent Block Drafting for Stochastic Speculative Decoding](../reproductions/2608.05448-dblast/README.md) | Huawei Technologies Canada，2026-08-05 | 未发现官方代码 | `dblast` |
 | 推理与系统效率 | [QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding](../reproductions/2608.05326-qevict/README.md) | Indian Institute of Technology Roorkee，2026-08-05 | 未发现官方代码 | `qevict` |
+| 多模态基础模型 | [Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes](../reproductions/2608.05000-physics-mm-pretraining/README.md) | Meta，2026-08-05 | 未发现官方代码 | `physics-mm-pretraining` |
+| 网络架构 | [DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling](../reproductions/2608.02032-dart/README.md) | Zhejiang University，2026-08-03 | 未发现官方代码 | `dart` |
+| 注意力与长上下文 | [Learning What to Remember: Test-Time Training via Context Distillation](../reproductions/2608.01672-ttcd/README.md) | Princeton University，2026-08-03 | [已开源](https://github.com/dangxingyu/ttcd) | `ttcd` |
 | 网络架构 | [Role-Decoupled Attention Residuals](../reproductions/2608.01075-rd-attnres/README.md) | Kehan Wang（论文未列机构），2026-08-03 | 未发现官方代码 | `rd-attnres` |
+| 网络架构 | [TransMem: Transforming Hidden States into Memory for Large Language Models](../reproductions/2607.29032-transmem/README.md) | Authors did not disclose affiliation，2026-07-31 | 未发现官方代码 | `transmem` |
 | 多模态基础模型 | [ReToken: One Token to Improve Vision–Language Models for Visual Retrieval](../reproductions/2607.28627-retoken/README.md) | UIUC / Microsoft Research / Google DeepMind，2026-07-30 | [已开源](https://github.com/avaxiao/ReToken) | `retoken` |
 | 推理与系统效率 | [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../reproductions/2607.28418-wide/README.md) | EIT-NLP / LMU Munich，2026-07-30 | [已开源](https://github.com/EIT-NLP/LLM-Pruning/tree/main/WIDE) | `wide` |
 | 网络架构 | [Penelope: Localized Latent Recurrence for Efficient Structured Reasoning](../reproductions/2607.25915-penelope/README.md) | Academic author team，2026-07-28 | 未发现官方代码 | `penelope` |
@@ -28,6 +36,7 @@
 | 推理与系统效率 | [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../reproductions/2607.21535-windowed-mtp/README.md) | NVIDIA，2026-07-23 | [已开源](https://github.com/avalliappan-nvidia/windowed-mtp-b200) | `windowed-mtp` |
 | 推理与系统效率 | [GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries](../reproductions/2607.20757-gaugequant/README.md) | University of Cambridge，2026-07-22 | [已开源](https://github.com/MPedraBento/gauge-quant) | `gaugequant` |
 | 网络架构 | [Convolution for Large Language Models](../reproductions/2607.18413-conv-llm/README.md) | Huawei / Peking University / Tsinghua University，2026-07-20 | 未发现官方代码 | `conv-llm` |
+| 推理与系统效率 | [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](../reproductions/2607.17715-c2kv/README.md) | Shanghai Jiao Tong University，2026-07-20 | [已开源](https://github.com/s7a9/C2KV) | `c2kv` |
 | 预训练与数据 | [PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning](../reproductions/2607.18199-ppl-factory/README.md) | McGill University，2026-07-20 | 未发现官方代码 | `ppl-factory` |
 | 预训练与数据 | [OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research](../reproductions/2607.16669-open-language-model/README.md) | Indian Institute of Technology Madras，2026-07-18 | [已开源](https://github.com/openlanguagemodel/openlanguagemodel) | `open-language-model` |
 | 注意力与长上下文 | [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../reproductions/2607.15456-looped-latent-attention/README.md) | University of Maryland / Meta AI，2026-07-16 | 未发现官方代码 | `looped-latent-attention` |

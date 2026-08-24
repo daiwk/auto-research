@@ -91,6 +91,24 @@
 - [AgentX](2606.26859-agentx/README.md)：把有界提案、仓库约束实现、护栏 A/B、正负结果资产化和 SGPO harness 更新组成工业推荐自迭代闭环。
 - [AUSO](2608.21292-auso/README.md)：以渐进技能生命周期和动作级 JSD 信号统一技能内化、探索与有界利用。
 
+<!-- historical-agent-research:start -->
+## 2026 历史扫描 B10～B11
+
+- [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](2608.19842-sapo/README.md)：同一自回归骨干在不同因果边界输出 policy/value，结合 PPO、on-policy SARSA 和 trajectory GAE。
+- [SPADE: Self-Play in Adaptive Synthetic Executable Environments](2608.19197-spade/README.md)：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
+- [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](2608.18682-rtpo/README.md)：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。
+- [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](2608.17289-planpo/README.md)：在成功轨迹内同时比较 trajectory turn 数和单 turn response 长度，形成 coarse-to-fine planning advantages。
+- [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](2608.16156-trca/README.md)：无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。
+- [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](2608.11967-loongreflect/README.md)：把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。
+- [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](2608.15703-hymem/README.md)：把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。
+- [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](2608.09380-openloopevolve/README.md)：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
+- [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](2608.06811-pmcoder/README.md)：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+- [ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning](2608.03468-toollift/README.md)：把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。
+- [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](2608.02650-hyperagent/README.md)：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
+- [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](2607.28527-manta/README.md)：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
+
+<!-- historical-agent-research:end -->
+
 ## 研究闭环
 
 ```mermaid

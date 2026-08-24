@@ -10,6 +10,10 @@
 
 - 2026-07-07 · 一作：Yuhang Zhou · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
 
+## Adelaide University
+
+- 2026-08-19 · 一作：Yugu Li · [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../2608.18682-rtpo/README.md)（`rtpo`）：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。
+
 ## All-Hands-AI
 
 - 2024-07-23 · 一作：Xingyao Wang · [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
@@ -17,6 +21,12 @@
 ## Apple
 
 - 2025-02-03 · 一作：Kevin Chen · [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
+
+## Authors did not disclose affiliation
+
+- 2026-08-17 · 一作：Huan Zhang · [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](../2608.16156-trca/README.md)（`trca`）：无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。
+- 2026-08-12 · 一作：Zhixin Zhang · [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](../2608.11967-loongreflect/README.md)（`loongreflect`）：把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。
+- 2026-08-04 · 一作：Xiuhui You · [ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning](../2608.03468-toollift/README.md)（`toollift`）：把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。
 
 ## Baidu Inc.
 
@@ -47,6 +57,10 @@
 - 2023-03-30 · 一作：Aman Madaan · [Self-Refine](../2303.17651-self-refine/README.md)（`self-refine`）：一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。
 - 2022-11-18 · 一作：Luyu Gao · [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
 
+## Cornell University
+
+- 2026-07-30 · 一作：MaoXun Huang · [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
+
 ## DeepWisdom
 
 - 2023-08-01 · 一作：Sirui Hong · [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
@@ -58,6 +72,10 @@
 ## Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS
 
 - 2026-08-05 · 一作：Songxin Lei · [MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off](../2608.04843-memorycpt/README.md)（`memorycpt`）：**主题：端到端 Agent 记忆。** QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。
+
+## Institute of Automation, Chinese Academy of Sciences
+
+- 2026-08-16 · 一作：XinQi Wang · [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](../2608.15703-hymem/README.md)（`hymem`）：把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。
 
 ## King Abdullah University of Science and Technology
 
@@ -180,6 +198,7 @@
 
 ## Tsinghua University
 
+- 2026-08-10 · 一作：Siqi Wang · [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
 - 2026-08-06 · 一作：Zi-Han Wang · [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
 - 2026-07-16 · 一作：Jinyang Wu · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
 - 2023-05-25 · 一作：Qiantong Xu · [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
@@ -202,6 +221,10 @@
 
 - 2026-08-05 · 一作：Xuying Ning · [EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents](../2608.05446-evoharness-rl/README.md)（`evoharness-rl`）：**主题：Harness policy RL。** 把 Belief、Progress、Experience 暴露为策略可操作的外部状态；先 SFT 学会 harness action，再以成本感知 GRPO 学习何时读写和合并。
 
+## University of New South Wales
+
+- 2026-07-31 · 一作：Zian Zhai · [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
+
 ## University of North Carolina at Chapel Hill
 
 - 2025-11-20 · 一作：Peng Xia · [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
@@ -219,11 +242,21 @@
 
 ## University of Washington
 
+- 2026-08-19 · 一作：Bo Liu · [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../2608.19197-spade/README.md)（`spade`）：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
 - 2023-03-16 · 一作：Bhargavi Paranjape · [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
 
 ## University of Wisconsin–Madison
 
 - 2025-12-18 · 一作：Jiongxiao Wang · [SAGE](../2512.17102-sage/README.md)（`sage`）：从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。
+
+## Vanderbilt University
+
+- 2026-08-07 · 一作：Jiahao Zhang · [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+
+## Xiamen University
+
+- 2026-08-20 · 一作：Dayang Liang · [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](../2608.19842-sapo/README.md)（`sapo`）：同一自回归骨干在不同因果边界输出 policy/value，结合 PPO、on-policy SARSA 和 trajectory GAE。
+- 2026-08-18 · 一作：Dayang Liang · [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](../2608.17289-planpo/README.md)（`planpo`）：在成功轨迹内同时比较 trajectory turn 数和单 turn response 长度，形成 coarse-to-fine planning advantages。
 
 ## Zhejiang University
 

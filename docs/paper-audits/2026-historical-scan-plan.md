@@ -9,8 +9,8 @@
 |---|---:|
 | 去重后的新候选 | 3906 |
 | 需要全文审查 | 404 |
-| 当前 PR 已实现 | 41 |
-| 固定后续实现队列 | 33 |
+| 当前 PR 已实现 | 74 |
+| 固定后续实现队列 | 0 |
 | 仍待全文决定、未承诺实现 | 331 |
 | P2 或查询碰撞（保留审计记录） | 3501 |
 
@@ -80,7 +80,7 @@
 - [2602.09194](https://arxiv.org/abs/2602.09194) ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest — 搜广推与 LLM 应用
 - [2602.01023](https://arxiv.org/abs/2602.01023) Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment — 搜广推与 LLM 应用
 
-### B07：LLM 架构、长上下文、KV cache 与评测基础设施
+### B07：LLM 架构、长上下文、KV cache 与评测基础设施（已完成）
 
 - [2608.12831](https://arxiv.org/abs/2608.12831) Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing — LLM 后训练、搜广推与 LLM 应用
 - [2608.10296](https://arxiv.org/abs/2608.10296) Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension — 基础模型
@@ -92,7 +92,7 @@
 - [2607.29032](https://arxiv.org/abs/2607.29032) TransMem: Transforming Hidden States into Memory for Large Language Models — Agent、基础模型
 - [2607.17715](https://arxiv.org/abs/2607.17715) C$^2$KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference — 基础模型
 
-### B08：OPD 与多教师/过程蒸馏
+### B08：OPD 与多教师/过程蒸馏（已完成）
 
 - [2608.19408](https://arxiv.org/abs/2608.19408) Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress — LLM 后训练
 - [2608.09745](https://arxiv.org/abs/2608.09745) SR-OPSD: Self-Referenced On-Policy Self-Distillation — LLM 后训练
@@ -101,7 +101,7 @@
 - [2608.03092](https://arxiv.org/abs/2608.03092) SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation — LLM 后训练
 - [2608.00782](https://arxiv.org/abs/2608.00782) Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance — LLM 后训练
 
-### B09：Rubric、外部 rollout 与多奖励 RL
+### B09：Rubric、外部 rollout 与多奖励 RL（已完成）
 
 - [2608.16072](https://arxiv.org/abs/2608.16072) Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization — LLM 后训练
 - [2608.11669](https://arxiv.org/abs/2608.11669) Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL — LLM 后训练
@@ -110,7 +110,7 @@
 - [2607.26873](https://arxiv.org/abs/2607.26873) SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning — LLM 后训练
 - [2607.19331](https://arxiv.org/abs/2607.19331) ISO: An RLVR-Native Optimization Stack — LLM 后训练
 
-### B10：Agentic RL 与长时序 credit assignment
+### B10：Agentic RL 与长时序 credit assignment（已完成）
 
 - [2608.19842](https://arxiv.org/abs/2608.19842) SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning — Agent
 - [2608.19197](https://arxiv.org/abs/2608.19197) SPADE: Self-Play in Adaptive Synthetic Executable Environments — Agent、LLM 后训练
@@ -119,7 +119,7 @@
 - [2608.16156](https://arxiv.org/abs/2608.16156) TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents — Agent
 - [2608.11967](https://arxiv.org/abs/2608.11967) LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation — Agent、基础模型、LLM 后训练
 
-### B11：Agent 记忆、工具规划与自进化系统
+### B11：Agent 记忆、工具规划与自进化系统（已完成）
 
 - [2608.15703](https://arxiv.org/abs/2608.15703) HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation — Agent
 - [2608.09380](https://arxiv.org/abs/2608.09380) OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks — Agent

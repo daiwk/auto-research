@@ -79,6 +79,18 @@ METHODS = (
     "sinkflex-rl",
     "auso",
     "agentx",
+    "sapo",
+    "spade",
+    "rtpo",
+    "planpo",
+    "trca",
+    "loongreflect",
+    "hymem",
+    "openloopevolve",
+    "pmcoder",
+    "toollift",
+    "hyperagent",
+    "manta",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

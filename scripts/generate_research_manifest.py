@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from auto_research.reproductions.manifest import PaperManifest
 from auto_research.reproductions.registry import list_adapters
+from auto_research.historical_b07_b11 import PAPERS as HISTORICAL_B07_B11
 
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis"}
@@ -50,6 +51,22 @@ LATEST_METHOD_PAPERS = (
         "published": "2026-06-26", "code": None,
         "adapter": "agentx",
     },
+) + tuple(
+    {
+        "domain": paper.domain,
+        "key": paper.key,
+        "title": paper.title,
+        "paper_url": f"https://arxiv.org/abs/{paper.arxiv_id}",
+        "detail_path": f"{paper.domain}/{paper.arxiv_id}-{paper.key}/README.md",
+        "topic": list(paper.topic),
+        "first_author": paper.first_author,
+        "first_author_affiliation": paper.organization,
+        "published": paper.published,
+        "code": paper.code_url,
+        "adapter": paper.key,
+    }
+    for paper in HISTORICAL_B07_B11
+    if paper.domain in {"post-training", "agent-research"}
 )
 
 
