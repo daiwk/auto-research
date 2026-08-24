@@ -89,13 +89,16 @@ def migrate_payload(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     )
     provenance = dict(payload.get("provenance") or {})
     provenance["artifact_path"] = str(path.relative_to(ROOT))
+    # Early v2 artifacts sometimes carried only ``artifact_path``.  The
+    # migration must remain a repairable, idempotent contract rather than
+    # treating every v2 marker as proof that provenance is complete.
+    provenance.setdefault(
+        "dataset_fingerprint", "not recorded in historical artifact"
+    )
     if not already_v2:
         provenance.update({
             "historical_migration": MIGRATION_ID,
             "original_code_commit": provenance.get("original_code_commit", "not recorded"),
-            "dataset_fingerprint": provenance.get(
-                "dataset_fingerprint", "not recorded in historical artifact"
-            ),
         })
     migrated = dict(payload)
     migrated["schema_version"] = 2

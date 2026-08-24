@@ -31,6 +31,7 @@
     "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
-    "artifact_path": "docs/reproductions/2607.24789-next-vlm/metrics/movielens-1m-seed42.json"
+    "artifact_path": "docs/reproductions/2607.24789-next-vlm/metrics/movielens-1m-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
   }
 }
