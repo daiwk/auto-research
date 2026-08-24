@@ -19,6 +19,29 @@ from auto_research.reproductions.registry import list_adapters
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis"}
 
+LATEST_METHOD_PAPERS = (
+    {
+        "domain": "post-training", "key": "gcpo",
+        "title": "GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs",
+        "paper_url": "https://arxiv.org/abs/2608.11674",
+        "detail_path": "post-training/2608.11674-gcpo/README.md",
+        "topic": ["几何约束 RL"], "first_author": "Kai Yang",
+        "first_author_affiliation": "Shanghai AI Laboratory",
+        "published": "2026-08-12", "code": "https://github.com/Icarus1411/GCPO",
+        "adapter": "gcpo",
+    },
+    {
+        "domain": "agent-research", "key": "auso",
+        "title": "AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization",
+        "paper_url": "https://arxiv.org/abs/2608.21292",
+        "detail_path": "agent-research/2608.21292-auso/README.md",
+        "topic": ["动作级技能优化"], "first_author": "Huizu Lin",
+        "first_author_affiliation": "University of Science and Technology of China",
+        "published": "2026-08-21", "code": "https://github.com/JordanSancholhz/Action-Skill",
+        "adapter": "auso",
+    },
+)
+
 
 def _detail_path(adapter) -> str:
     matches = sorted((DOCS / "reproductions").glob(
@@ -71,6 +94,15 @@ def synchronize(payload: dict) -> dict:
             "code": adapter.paper.code_url,
             "adapter": PaperManifest.from_adapter(adapter).to_dict(),
         }
+        if identity in positions:
+            papers[positions[identity]] = record
+        else:
+            positions[identity] = len(papers)
+            papers.append(record)
+    for record in LATEST_METHOD_PAPERS:
+        identity = (record["domain"], record["key"])
+        if not (DOCS / record["detail_path"]).is_file():
+            raise ValueError(f"missing detail page for {identity}: {record['detail_path']}")
         if identity in positions:
             papers[positions[identity]] = record
         else:

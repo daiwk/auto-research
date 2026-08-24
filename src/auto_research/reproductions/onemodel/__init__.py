@@ -1,0 +1,1 @@
+"""OneModel reproduction adapter."""

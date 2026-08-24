@@ -80,6 +80,7 @@ ALGORITHMS = (
     "specroll",
     "pto",
     "c2-dpo",
+    "gcpo",
 )
 
 

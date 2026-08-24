@@ -280,6 +280,7 @@ class AgentEvolutionEvaluator:
                     "memgpt": 0.6,
                     "voyager": 0.55,
                     "skillrise": 0.65,
+                    "auso": 0.55,
                     "vermem": 0.42,
                     "coevo-mem": 0.46,
                     "sage": 0.38,

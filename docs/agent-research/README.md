@@ -86,6 +86,10 @@
 
 九个方法均接入统一 runner 和 Agent evolve 组合 genome，并在 PlanBench mini-suite 上留下固定 seed 结果。
 
+## 2026-08-24 增量
+
+- [AUSO](2608.21292-auso/README.md)：以渐进技能生命周期和动作级 JSD 信号统一技能内化、探索与有界利用。
+
 ## 研究闭环
 
 ```mermaid

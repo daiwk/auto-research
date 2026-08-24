@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking](../2608.18606-onemodel/README.md) | Xiaohongshu，2026-08-19 | 未发现官方代码 | `onemodel` |
 | 生成、排序与冷启动 | [Sona Technical Report](../2608.11015-sona/README.md) | Yandex，2026-08-11 | 未发现官方代码 | `sona` |
 | 大模型能力与推荐融合 | [ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning](../2608.10187-connectionmind/README.md) | Michigan State University，2026-08-10 | 未发现官方代码 | `connectionmind` |
 | 大模型能力与推荐融合 | [DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models](../2608.09408-dream/README.md) | Taobao & Tmall Group / Alibaba，2026-08-10 | 未发现官方代码 | `dream` |

@@ -79,6 +79,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "auso",
+      "title": "AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization",
+      "paper_url": "https://arxiv.org/abs/2608.21292",
+      "detail_path": "agent-research/2608.21292-auso/README.md",
+      "topic": [
+        "动作级技能优化"
+      ],
+      "first_author": "Huizu Lin",
+      "first_author_affiliation": "University of Science and Technology of China",
+      "published": "2026-08-21",
+      "code": "https://github.com/JordanSancholhz/Action-Skill",
+      "adapter": "auso"
+    },
+    {
+      "domain": "agent-research",
       "key": "autogen",
       "title": "AutoGen",
       "paper_url": "https://arxiv.org/abs/2308.08155",
@@ -3372,6 +3387,61 @@
     },
     {
       "domain": "foundation-models",
+      "key": "rare",
+      "title": "RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models",
+      "paper_url": "https://arxiv.org/abs/2608.21236",
+      "detail_path": "reproductions/2608.21236-rare/README.md",
+      "topic": [
+        "llm-architecture",
+        "mixture-of-experts",
+        "representation-steering",
+        "model-editing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Huazhong University of Science and Technology",
+      "published": "2026-08-21",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rare",
+        "arxiv_id": "2608.21236",
+        "title": "RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models",
+        "paper_url": "https://arxiv.org/abs/2608.21236",
+        "track": "llm",
+        "organization": "Huazhong University of Science and Technology",
+        "published": "2026-08-21",
+        "code_url": null,
+        "topics": [
+          "llm-architecture",
+          "mixture-of-experts",
+          "representation-steering",
+          "model-editing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rare",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic MoE routing mini-suite"
+        ],
+        "baseline": "unprojected representation steering",
+        "metrics": [
+          "route agreement",
+          "route flip rate",
+          "steering gain"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "rd-attnres",
       "title": "Role-Decoupled Attention Residuals",
       "paper_url": "https://arxiv.org/abs/2608.01075",
@@ -4275,6 +4345,21 @@
       "published": "2026-07-30",
       "code": "未发现官方代码",
       "adapter": "flux-opd"
+    },
+    {
+      "domain": "post-training",
+      "key": "gcpo",
+      "title": "GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs",
+      "paper_url": "https://arxiv.org/abs/2608.11674",
+      "detail_path": "post-training/2608.11674-gcpo/README.md",
+      "topic": [
+        "几何约束 RL"
+      ],
+      "first_author": "Kai Yang",
+      "first_author_affiliation": "Shanghai AI Laboratory",
+      "published": "2026-08-12",
+      "code": "https://github.com/Icarus1411/GCPO",
+      "adapter": "gcpo"
     },
     {
       "domain": "post-training",
@@ -12697,6 +12782,89 @@
             "traffic": "online A/B",
             "source_url": "https://arxiv.org/abs/2601.21770",
             "source_location": "original paper online-result disclosure: product=Kuaishou live; metric=orders"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "onemodel",
+      "title": "OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking",
+      "paper_url": "https://arxiv.org/abs/2608.18606",
+      "detail_path": "reproductions/2608.18606-onemodel/README.md",
+      "topic": [
+        "ranking",
+        "multi-scenario",
+        "foundation-model",
+        "long-sequence"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Xiaohongshu",
+      "published": "2026-08-19",
+      "code": null,
+      "adapter": {
+        "adapter_key": "onemodel",
+        "arxiv_id": "2608.18606",
+        "title": "OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking",
+        "paper_url": "https://arxiv.org/abs/2608.18606",
+        "track": "recommendation",
+        "organization": "Xiaohongshu",
+        "published": "2026-08-19",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "multi-scenario",
+          "foundation-model",
+          "long-sequence"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/onemodel",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "shared global sequential ranker",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Xiaohongshu Explore Feed",
+            "metric": "time spent",
+            "lift_percent": 0.33,
+            "traffic": "production A/B",
+            "source_url": "https://arxiv.org/html/2608.18606v1#S5.SS3",
+            "source_location": "Section 5.3 Table 4",
+            "retrieved_at": "2026-08-24"
+          },
+          {
+            "product": "Xiaohongshu Feed Ads",
+            "metric": "advertising value",
+            "lift_percent": 3.43,
+            "traffic": "production A/B",
+            "source_url": "https://arxiv.org/html/2608.18606v1#S5.SS3",
+            "source_location": "Section 5.3 Table 4",
+            "retrieved_at": "2026-08-24"
+          },
+          {
+            "product": "Xiaohongshu Merchant Recommendation",
+            "metric": "DGMV",
+            "lift_percent": 1.1867,
+            "traffic": "production A/B",
+            "source_url": "https://arxiv.org/html/2608.18606v1#S5.SS3",
+            "source_location": "Section 5.3 Table 4",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,

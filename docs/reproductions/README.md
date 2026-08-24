@@ -71,6 +71,11 @@ pytest tests/test_research_module_docs.py
 
 这批候选均由机构/主题先召回，再逐篇检查正文和表格；不再要求摘要先出现 `A/B` 关键词。六篇均完成公开数据实验、固定指标、论文原图与 evolve 可执行映射（AgenticRecTune 对应控制器回归样例，而非伪造网络结构）。
 
+## 2026-08-24 近期跨领域增量
+
+- `onemodel` · [OneModel](2608.18606-onemodel/README.md)：小红书以共享长序列 backbone、场景门控和分层用户表征统一推荐、广告与商家排序，并披露三个生产场景的量化 A/B。
+- `rare` · [RARE](2608.21236-rare/README.md)：把表征编辑方向投影到 MoE router 零空间，并在下游保护层校正传播漂移，保持原专家路径。
+
 ## 本轮全域 P0 补齐（19 个 adapter）
 
 - `glorank` · [GloRank](2604.25291-glorank/README.md)

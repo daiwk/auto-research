@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 网络架构 | [RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models](../reproductions/2608.21236-rare/README.md) | Huazhong University of Science and Technology，2026-08-21 | 未发现官方代码 | `rare` |
 | 多模态基础模型 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | 未发现官方代码 | `gas` |
 | 推理与系统效率 | [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../reproductions/2608.06291-bakron/README.md) | University of California, San Diego，2026-08-06 | 未发现官方代码 | `bakron` |
 | 预训练与数据 | [Hierarchical Latent Prediction for Language Models](../reproductions/2608.05806-hilp/README.md) | University of Texas at Austin，2026-08-06 | 未发现官方代码 | `hilp` |

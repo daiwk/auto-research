@@ -100,6 +100,10 @@
 
 三者均接入统一 post-training runner 与组合式 evolve genome；稳定指标分别保存在各论文目录的 `metrics/arithmetic-smoke-seed42.json`，不再以日期批次文件作为事实源。
 
+## 2026-08-24 增量
+
+- [GCPO](2608.11674-gcpo/README.md)：诊断 rollout update 与预训练权重主奇异空间的重合，并以硬双侧正交投影限制更新可行域。
+
 ## 研究闭环
 
 ```mermaid

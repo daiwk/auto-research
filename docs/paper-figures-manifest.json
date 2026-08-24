@@ -4870,5 +4870,61 @@
     "height": 289,
     "score": 0,
     "error": ""
+  },
+  {
+    "page": "docs/agent-research/2608.21292-auso/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.21292",
+    "arxiv_id": "2608.21292",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2. Overview of Our AUSO (Action-Level Unified Skill Optimization from Internalization to Utilization): (1) General Skills Internalization: Internalize transferable general skills through action-level teacher–student guidance. (2) Skills Exploration: Explore and optimize diverse skills via GRPO. (3) Specific Skill Utilization: Evaluate the benefit of task-specific skills for each action to guide action-level skill utilization.",
+    "source_url": "https://arxiv.org/html/2608.21292v1/figure/model.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/agent-research/2608.21292-auso/assets/paper-figure-01.png",
+    "width": 1651,
+    "height": 866,
+    "score": 49,
+    "error": ""
+  },
+  {
+    "page": "docs/post-training/2608.11674-gcpo/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.11674",
+    "arxiv_id": "2608.11674",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2: Controlled intervention on the step-150 GRPO update of Qwen3-8B on ToolAlpaca. (a) Increasing the principal-overlapping component under layer-wise norm matching produces a dose-dependent accuracy drop. (b) Orthogonalization improves accuracy, whereas matched principal-subspace injection is substantially more harmful than a random-subspace intervention.",
+    "source_url": "https://arxiv.org/html/2608.11674v1/principal_intervention_combined.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/post-training/2608.11674-gcpo/assets/paper-figure-01.png",
+    "width": 1119,
+    "height": 396,
+    "score": -4,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2608.18606-onemodel/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.18606",
+    "arxiv_id": "2608.18606",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1. A typical user’s sequential behavior log across multiple scenarios in Xiaohongshu.",
+    "source_url": "https://arxiv.org/html/2608.18606v2/story.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2608.18606-onemodel/assets/paper-figure-01.png",
+    "width": 780,
+    "height": 265,
+    "score": 16,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2608.21236-rare/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.21236",
+    "arxiv_id": "2608.21236",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3: RARE’s framework augments conventional perturbation construction with a router-agnostic projection step in order to adapt to the MoE structure. Given contrastive hidden representations, an arbitrary construction method first produces a raw perturbation, whose router-visible component is then removed. The resulting perturbation lies in the router-invisible subspace, enabling representation editing while preserving routing patterns.",
+    "source_url": "https://arxiv.org/html/2608.21236v1/methodology.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2608.21236-rare/assets/paper-figure-01.png",
+    "width": 1531,
+    "height": 504,
+    "score": 54,
+    "error": ""
   }
 ]

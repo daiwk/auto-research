@@ -1,0 +1,1 @@
+"""RARE reproduction adapter."""

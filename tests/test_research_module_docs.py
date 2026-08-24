@@ -85,6 +85,7 @@ MODULES = {
         "stare": "2606.19236-stare",
         "pto": "2608.12062-pto",
         "c2-dpo": "2608.12158-c2-dpo",
+        "gcpo": "2608.11674-gcpo",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -148,6 +149,7 @@ MODULES = {
         "toolbench": "2305.16504-toolbench",
         "gaia": "2311.12983-gaia",
         "sinkflex-rl": "2608.10357-sinkflex-rl",
+        "auso": "2608.21292-auso",
     },
 }
 

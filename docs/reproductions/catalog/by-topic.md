@@ -99,6 +99,7 @@
 - [TIGER](../2305.05065-tiger/README.md)：先用 RQ-VAE 构造层级 Semantic ID，再自回归生成目标物品。
 
 ### 排序网络与长序列
+- [OneModel](../2608.18606-onemodel/README.md)：将推荐、广告与商家混合行为映射到共享序列模型，并以 SAIM 场景门控兼顾迁移和专门化。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：用 prefill-only LLM 取代逐 token 解码，联合 catalog head、language loss 和 reward-weighted ranking loss 执行大目录精排。
 - [CCFormer](../2607.28070-ccformer/README.md)：以字段分离的 ID/content 编码和门控融合增强冷内容泛化，再分层压缩远期 token、保留近期行为细节。
 - [HA-MoE](../2607.27577-ha-moe/README.md)：用内容异构性控制多门控 MoE，在同一排序器内平衡通用与领域专长信号。

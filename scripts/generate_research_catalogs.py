@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "几何约束 RL": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "AI 反馈安全对齐": ("偏好建模与监督", "安全对齐与可控监督"),
         "直接偏好优化": ("偏好建模与监督", "成对、单样本与排序偏好"),
         "二元反馈对齐": ("偏好建模与监督", "成对、单样本与排序偏好"),
@@ -127,6 +128,7 @@ TOPIC_HIERARCHY = {
         "RL rollout 加速": ("训推一致性与高效 rollout", "预算分配与 speculative rollout"),
     },
     "agent-research": {
+        "动作级技能优化": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
         "环境 rehearsal / Agent RL": ("Agentic RL 与后训练", "环境模型与 world rehearsal"),
         "Agent group credit": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
@@ -206,6 +208,7 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "rare": ("网络架构", "MoE、状态空间与残差路径"),
     "macro": ("网络架构", "动态层路由与残差路径"),
     "hilp": ("预训练与数据", "latent 与多步预测"),
     "qevict": ("推理与系统效率", "推测解码与 KV cache"),

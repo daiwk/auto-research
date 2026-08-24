@@ -4,6 +4,7 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "gcpo": ("Geometrically Constrained Policy Optimization", "https://arxiv.org/abs/2608.11674"),
     "pto": ("Preference Tree Optimization", "https://arxiv.org/abs/2608.12062"),
     "c2-dpo": ("Context-Calibrated DPO", "https://arxiv.org/abs/2608.12158"),
     "rrc": ("RRC", "https://arxiv.org/abs/2608.06310"),
