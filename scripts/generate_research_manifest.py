@@ -40,6 +40,16 @@ LATEST_METHOD_PAPERS = (
         "published": "2026-08-21", "code": "https://github.com/JordanSancholhz/Action-Skill",
         "adapter": "auso",
     },
+    {
+        "domain": "agent-research", "key": "agentx",
+        "title": "AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2606.26859",
+        "detail_path": "agent-research/2606.26859-agentx/README.md",
+        "topic": ["研究自动化", "工业推荐 Agent"], "first_author": "AgentX Team",
+        "first_author_affiliation": "Kuaishou",
+        "published": "2026-06-26", "code": None,
+        "adapter": "agentx",
+    },
 )
 
 

@@ -35,6 +35,7 @@ class DiscoveredPaper:
         return {
             "arxiv_id": canonical_arxiv_id(self.paper.arxiv_id),
             "title": self.paper.title,
+            "abstract": self.paper.abstract,
             "published": self.paper.published,
             "url": self.paper.url,
             "authors": self.paper.authors,

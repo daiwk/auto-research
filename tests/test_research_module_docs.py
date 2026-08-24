@@ -150,6 +150,7 @@ MODULES = {
         "gaia": "2311.12983-gaia",
         "sinkflex-rl": "2608.10357-sinkflex-rl",
         "auso": "2608.21292-auso",
+        "agentx": "2606.26859-agentx",
     },
 }
 

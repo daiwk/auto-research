@@ -4,6 +4,7 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "agentx": ("AgentX", "https://arxiv.org/abs/2606.26859"),
     "auso": ("Action-Level Unified Skill Optimization", "https://arxiv.org/abs/2608.21292"),
     "sinkflex-rl": ("SinkFlex-RL", "https://arxiv.org/abs/2608.10357"),
     "evoharness-rl": ("EvoHarness-RL", "https://arxiv.org/abs/2608.05446"),

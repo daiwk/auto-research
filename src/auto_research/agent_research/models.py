@@ -78,6 +78,7 @@ METHODS = (
     "hindsearch",
     "sinkflex-rl",
     "auso",
+    "agentx",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

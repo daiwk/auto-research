@@ -26,3 +26,21 @@ def test_gcpo_and_auso_are_public_runner_choices():
     agent = build_agent("auso", 8, np.random.default_rng(42))
     assert agent.__class__.__name__ == "AUSOAgent"
     assert action_information((0.8, 0.15, 0.05), (0.4, 0.35, 0.25)) > 0
+
+
+def test_agentx_closes_the_loop_and_reuses_experiment_memory():
+    config = AgentResearchConfig(method="agentx")
+    assert config.method == "agentx"
+    agent = build_agent("agentx", 8, np.random.default_rng(42))
+    from auto_research.agent_research.models import AgentTask
+
+    task = AgentTask(
+        "t0", "research", "improve ranking family-0", (), "ok",
+        ("search:x", "edit:x", "verify:x"), ("search", "edit", "verify"),
+    )
+    assert "assetize" in agent.solve(task, 0)[2]
+    assert "experiment-kb" in agent.solve(task, 1)[2]
+    assert agent.archival_writes == 1
+    assert agent.local_verifier_calls == 3
+    assert agent.global_verifier_calls == 2
+    assert agent.skills_reused == 1

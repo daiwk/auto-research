@@ -64,6 +64,22 @@
     },
     {
       "domain": "agent-research",
+      "key": "agentx",
+      "title": "AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2606.26859",
+      "detail_path": "agent-research/2606.26859-agentx/README.md",
+      "topic": [
+        "研究自动化",
+        "工业推荐 Agent"
+      ],
+      "first_author": "AgentX Team",
+      "first_author_affiliation": "Kuaishou",
+      "published": "2026-06-26",
+      "code": null,
+      "adapter": "agentx"
+    },
+    {
+      "domain": "agent-research",
       "key": "art",
       "title": "ART",
       "paper_url": "https://arxiv.org/abs/2303.09014",
@@ -6324,6 +6340,81 @@
     },
     {
       "domain": "recommendation",
+      "key": "clockrope",
+      "title": "ClockRoPE: Random Fourier Rotations for Temporal Routine Modeling",
+      "paper_url": "https://arxiv.org/abs/2607.26369",
+      "detail_path": "reproductions/2607.26369-clockrope/README.md",
+      "topic": [
+        "generative-retrieval",
+        "temporal-modeling",
+        "rope",
+        "long-sequence"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "YouTube / Google DeepMind",
+      "published": "2026-07-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "clockrope",
+        "arxiv_id": "2607.26369",
+        "title": "ClockRoPE: Random Fourier Rotations for Temporal Routine Modeling",
+        "paper_url": "https://arxiv.org/abs/2607.26369",
+        "track": "recommendation",
+        "organization": "YouTube / Google DeepMind",
+        "published": "2026-07-29",
+        "code_url": null,
+        "topics": [
+          "generative-retrieval",
+          "temporal-modeling",
+          "rope",
+          "long-sequence"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/clockrope",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "RoPE-style recency ranker",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "major video platform",
+            "metric": "engagement",
+            "lift_percent": 0.08,
+            "traffic": "14-day A/B; 1% traffic per variant",
+            "source_url": "https://arxiv.org/html/2607.26369v2#S4.SS2",
+            "source_location": "Section 4.2 Table 6",
+            "experiment_duration": "14 days",
+            "retrieved_at": "2026-08-24"
+          },
+          {
+            "product": "major video platform",
+            "metric": "valued engagement",
+            "lift_percent": 0.08,
+            "traffic": "14-day A/B; 1% traffic per variant",
+            "source_url": "https://arxiv.org/html/2607.26369v2#S4.SS2",
+            "source_location": "Section 4.2 Table 6",
+            "experiment_duration": "14 days",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "cluster-goobs",
       "title": "Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval",
       "paper_url": "https://arxiv.org/abs/2607.00448",
@@ -12458,6 +12549,83 @@
     },
     {
       "domain": "recommendation",
+      "key": "next-vlm",
+      "title": "NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model",
+      "paper_url": "https://arxiv.org/abs/2607.24789",
+      "detail_path": "reproductions/2607.24789-next-vlm/README.md",
+      "topic": [
+        "multimodal",
+        "reasoning",
+        "retrieval",
+        "knowledge-graph",
+        "vlm"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta",
+      "published": "2026-06-27",
+      "code": null,
+      "adapter": {
+        "adapter_key": "next-vlm",
+        "arxiv_id": "2607.24789",
+        "title": "NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model",
+        "paper_url": "https://arxiv.org/abs/2607.24789",
+        "track": "recommendation",
+        "organization": "Meta",
+        "published": "2026-06-27",
+        "code_url": null,
+        "topics": [
+          "multimodal",
+          "reasoning",
+          "retrieval",
+          "knowledge-graph",
+          "vlm"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/next_vlm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "multi-path transition/semantic ranker",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "commercial short-form video platform",
+            "metric": "watch time",
+            "lift_percent": 0.53,
+            "traffic": "multi-week A/B at approximately 100M users",
+            "source_url": "https://arxiv.org/html/2607.24789v1#S5.SS2",
+            "source_location": "Section 5.2 Table 5",
+            "experiment_duration": "multiple weeks",
+            "retrieved_at": "2026-08-24"
+          },
+          {
+            "product": "commercial short-form video platform",
+            "metric": "distinct video exposure",
+            "lift_percent": 0.51,
+            "traffic": "multi-week A/B at approximately 100M users",
+            "source_url": "https://arxiv.org/html/2607.24789v1#S5.SS2",
+            "source_location": "Section 5.2 Table 5",
+            "experiment_duration": "multiple weeks",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "nontp",
       "title": "Not Only NTP: Extending Training Signal Coverage for Generative Recommendation",
       "paper_url": "https://arxiv.org/abs/2607.12277",
@@ -13153,6 +13321,79 @@
             "traffic": "5% traffic, one week",
             "source_url": "https://arxiv.org/abs/2508.20900",
             "source_location": "original paper online-result disclosure: product=Kuaishou Lite; metric=app stay time"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "oneshot-index",
+      "title": "OneShot: Index-in-Ranking with Neural Scoring for Large-Scale Retrieval",
+      "paper_url": "https://arxiv.org/abs/2607.27475",
+      "detail_path": "reproductions/2607.27475-oneshot-index/README.md",
+      "topic": [
+        "retrieval",
+        "learnable-index",
+        "neural-scoring",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta / Instagram",
+      "published": "2026-07-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "oneshot-index",
+        "arxiv_id": "2607.27475",
+        "title": "OneShot: Index-in-Ranking with Neural Scoring for Large-Scale Retrieval",
+        "paper_url": "https://arxiv.org/abs/2607.27475",
+        "track": "recommendation",
+        "organization": "Meta / Instagram",
+        "published": "2026-07-29",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "learnable-index",
+          "neural-scoring",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/oneshot_index",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "two-tower dot-product retrieval",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Instagram short video",
+            "metric": "daily sessions",
+            "lift_percent": 0.035,
+            "traffic": "fully deployed to global traffic",
+            "source_url": "https://arxiv.org/html/2607.27475v2#S5.SS1.SSS2",
+            "source_location": "Section 5.1.2 Table 3",
+            "retrieved_at": "2026-08-24"
+          },
+          {
+            "product": "Instagram short video",
+            "metric": "watch time",
+            "lift_percent": 0.136,
+            "traffic": "fully deployed to global traffic",
+            "source_url": "https://arxiv.org/html/2607.27475v2#S5.SS1.SSS2",
+            "source_location": "Section 5.1.2 Table 3",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,

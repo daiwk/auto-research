@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "adapter": "oneshot-index",
+  "paper": "2607.27475",
+  "dataset": "MovieLens-100K",
+  "seed": 42,
+  "baseline": {"hit_at_10": 0.0409090909, "ndcg_at_10": 0.0143519359},
+  "method": {"hit_at_10": 0.0363636364, "ndcg_at_10": 0.0132467605},
+  "relative": {"hit_at_10_percent": -11.1111111111, "ndcg_at_10_percent": -7.7005323059},
+  "diagnostic_only": true,
+  "reproduction_fidelity": "core_mechanism"
+}

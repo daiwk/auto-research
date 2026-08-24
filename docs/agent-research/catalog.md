@@ -35,6 +35,7 @@
 | Continual agent memory | [UniMem](2607.26017-unimem/README.md) | CASIA，2026-07-28 | 未发现官方代码 | `unimem` |
 | Agentic RL / hindsight skill | [SEED](2607.14777-seed/README.md) | Tsinghua University，2026-07-16 | [已开源](https://github.com/jinyangwu/SEED) | `seed` |
 | Agentic OPD / rollout budgeting | [TurnOPD](2607.05804-turn-opd/README.md) | Academic author team，2026-07-07 | 未发现官方代码 | `turn-opd` |
+| 研究自动化 | [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](2606.26859-agentx/README.md) | Kuaishou，2026-06-26 | 未发现官方代码 | `agentx` |
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | University of Science and Technology of China，2026-04-20 | 未发现官方代码 | `steppo` |
 | 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Shanghai AI Laboratory，2026-04-09 | 未发现官方代码 | `searl` |
 | 技能设计 | [Memento-Skills](2603.18743-memento-skills/README.md) | Memento Team，2026-03-19 | [已开源](https://github.com/Memento-Teams/Memento-Skills) | `memento-skills` |

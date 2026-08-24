@@ -4926,5 +4926,61 @@
     "height": 504,
     "score": 54,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2607.24789-next-vlm/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.24789",
+    "arxiv_id": "2607.24789",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1: NEXT system architecture: watched videos are converted into explicit continuation links or implicit next-intent queries, then retrieved, verified, and served through the NEXT Knowledge Graph.",
+    "source_url": "https://arxiv.org/html/2607.24789v1/figures/next_system_strict_pro.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2607.24789-next-vlm/assets/paper-figure-01.png",
+    "width": 1376,
+    "height": 768,
+    "score": 74,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2607.26369-clockrope/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.26369",
+    "arxiv_id": "2607.26369",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3. Visualization of average attention probability over six weeks. Key observations: (1) ClockRoPE introduces weekly attention peak that is not explicit in the baseline. (2) With ClockRoPE-gaussian-fold, more attention is allocated to the day immediate before the weekly cycle mark than the day immediate after (3) The model with ClockRoPE-gaussian-symmetric allocates attention much more evenly between the two days surrounding the weekly cycle mark.",
+    "source_url": "https://arxiv.org/html/2607.26369v2/week.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2607.26369-clockrope/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 1281,
+    "score": 26,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2607.27475-oneshot-index/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.27475",
+    "arxiv_id": "2607.27475",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1 : (a) k k -means ANN as an example of an existing retrieval pipeline; graph-based models are similar except that their index training is hierarchical. (b) OneShot multi-layer pipeline. In both panels, 𝐮 {\\mathbf{u}} denotes user embeddings, 𝐯 {\\mathbf{v}} and 𝐯 d {\\mathbf{v}}_{d} denote dense item embeddings, 𝐯 c ( ℓ ) {\\mathbf{v}}_{c}^{(\\ell)} denotes item code embeddings, and NN d \\mathrm{NN}_{d} and NN c \\mathrm{NN}_{c} are arbitrary trainable neural networks. Common overheads such as item embedding caching and model packing are omitted for simplicity.",
+    "source_url": "https://arxiv.org/html/2607.27475v2/system_comparison_new.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2607.27475-oneshot-index/assets/paper-figure-01.png",
+    "width": 1425,
+    "height": 780,
+    "score": 66,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2606.26859-agentx/README.md",
+    "paper_url": "https://arxiv.org/abs/2606.26859",
+    "arxiv_id": "2606.26859",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1 : AgentX transforms recommendation iteration from a human-driven, manually handed-off pipeline into an agent-driven closed loop, where online A/B feedback and trajectory data continuously improve the system itself.",
+    "source_url": "https://arxiv.org/html/2606.26859v2/figures/Agentx_introduction.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/agent-research/2606.26859-agentx/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 531,
+    "score": 93,
+    "error": ""
   }
 ]
