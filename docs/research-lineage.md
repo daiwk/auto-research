@@ -85,9 +85,10 @@ UniMem，以及近期记忆与规划方法；软件 Agent
 已有真实文件编辑和回归测试路径。完整谱系见
 [Agent 谱系](agent-research/lineage.md)。
 
-memory、planner、tool policy 和 critic 已成为可组合 genome，并在同一任务套件比较成功率、
-token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实浏览器/代码环境 benchmark，
-并区分算法收益和更强 foundation model 的收益。
+memory、planner、tool、critic、policy、recovery 和 capacity 已成为可组合 genome，并在
+同一任务套件比较成功率、token/tool 成本、跨 episode 复用与错误恢复。真实代码 executor
+已有公平矩阵；官方 SWE-bench Lite、ToolHop 全集和真实浏览器环境按用户要求保持延后，
+不能把本地 fixture 结果写成官方 benchmark 结论。
 
 ## 已完成批次与新优先级
 
@@ -96,7 +97,8 @@ token/tool 成本、跨 episode 复用与错误恢复。后续仍需增加真实
 3. **P1 经典论文已完成**：DeepFM、YouTube DNN、ESMM、MMoE、PLE 已按用户批准的经典例外实现。
 4. **2026-08-08 P0/P1 队列已闭环**：结果和边界见[全主题系统缺口审计](full-domain-gap-review-20260808.md)；新候选不能继续沿用该日的旧队列。
 
-## 当前真实遗留项（2026-08-13）
+## 当前状态（2026-08-24）
 
 完整优先级、编号、验收条件和状态统一维护在
-[统一后续路线图与 TODO](research-roadmap.md)。本页不再复制待办表，避免多个清单漂移。
+[统一后续路线图与 TODO](research-roadmap.md)。已登记的静态 P0/P1 均已收口；本页不再
+复制待办表，后续只从动态论文扫描或用户恢复的延后项目产生新任务。

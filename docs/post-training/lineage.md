@@ -27,7 +27,7 @@
 | Off-policy 与序列稳定 | LUFFY、CISPO、ConSPO | 已实现 | 混合 support、token IS clip、长度归一化对比序列目标 |
 | 异步/MoE 与 entropy 稳定 | Stabilizing RL、Missing Old Logits、STARE | 已实现 | Routing Replay、old-logit 语义分解与 EWMA 修复、surprisal 分位数和目标 entropy 闭环 |
 
-## 下一阶段缺口
+## 静态能力收口
 
 二级主题复查识别出的 11 个 P0 已全部实现：RLAIF、Let's Verify Step by Step、
 Math-Shepherd、Self-Rewarding LM、LUFFY、TTRL、Absolute Zero、INTUITOR、CISPO、
@@ -36,12 +36,20 @@ SPIRAL 和 ConSPO。每种目标都进入统一 candidate-policy 训练器和 ev
 
 同页识别的 3 个 P1 也已闭环：Stabilizing RL with LLMs、Missing Old Logits 与 STARE。
 
-当前 L2 已具备 tokenizer、自由生成、verifier 与多 seed，但仍是小型 GRU。下一阶段是：
+此前登记的四项平台能力均已闭环：
 
-- 在 `gsm8k-generate` 上扩大训练并接入可下载的小型 pretrained causal LM；
-- 为 CoBA-RL 增加 pass@k 边界缓存和真实教师模型；
-- 为偏好方法接入 UltraFeedback 等公开 chosen/rejected 数据；
-- GPU 路径增加 batch rollout、mixed precision 与 checkpoint resume。
+- [PR #113](https://github.com/daiwk/auto-research/pull/113) 将 L2 切换到固定 revision 的
+  SmolLM2，接入 UltraFeedback，并完成 batch、gradient accumulation、mixed precision、
+  safe checkpoint 与 optimizer resume；
+- [PR #115](https://github.com/daiwk/auto-research/pull/115) 为 CoBA-RL 增加 pass@k/教师双缓存、
+  固定 Qwen2.5 teacher revision、真实调用率和 token 成本；
+- [PR #116](https://github.com/daiwk/auto-research/pull/116) 把 data、objective、teacher、
+  rollout、accumulation 和 precision 作为后训练 evolve 的可继承组合轴；
+- [PR #117](https://github.com/daiwk/auto-research/pull/117) 将代表方法纳入可恢复的三 seed
+  证据晋级协议。
+
+当前没有尚未实现的静态 P0/P1。扩大公开 rollout 规模或接入新方法属于动态研究批次，
+必须重新登记并遵守同预算、多 seed 和 checkpoint-free 指标合同。
 
 ## 当前结论
 

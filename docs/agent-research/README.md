@@ -11,7 +11,7 @@
 
 ## 快速入口
 
-- [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态和待接入接口。
+- [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态、组合轴和执行边界。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
 - 分类浏览：[按机构/公司/学校](catalog/by-organization.md) ·
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。

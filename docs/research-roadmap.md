@@ -28,8 +28,8 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | DISC-001 | DONE | 每日四领域多查询、分页、canonical arXiv ID 去重 | GitHub Actions 生成四个候选 artifact |
 | DISC-002 | DONE | 候选与 manifest、历史 ledger 自动差分 | JSON 和 Actions 摘要区分新候选、已实现、已审计 |
 | DISC-003 | DONE | Google / Meta 新候选自动置顶预警 | 仅两家触发 warning；Netflix 等保持普通候选 |
-| DISC-004 | DONE · 本 MR | 跨来源召回 | 官方研究页、会议列表、作者主页/GitHub 和 citation snowball 均保留 provenance 与单源失败 |
-| DISC-005 | DONE · 本 MR | 批次终态自动回写 | 回写器要求全部新候选终态；strict audit 可核对待审 artifact 与 ledger |
+| DISC-004 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 跨来源召回 | 官方研究页、会议列表、作者主页/GitHub 和 citation snowball 均保留 provenance 与单源失败 |
+| DISC-005 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 批次终态自动回写 | 回写器要求全部新候选终态；strict audit 可核对待审 artifact 与 ledger |
 
 每个新工业候选先按“机构/主题”召回，再读 PDF/HTML 全文。只有量化线上 A/B，或用户
 明确认可的统计显著全流量部署，才进入实现队列；摘要未写 A/B 不能作为拒绝依据。
@@ -42,38 +42,38 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| FM-001 | DONE · 本 MR | test-time compute、verifier、动态 reasoning budget | 固定 SmolLM2 revision；GSM8K/算术多预算曲线同时报告正确率、token、延迟和调用成本 |
+| FM-001 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | test-time compute、verifier、动态 reasoning budget | 固定 SmolLM2 revision；GSM8K/算术多预算曲线同时报告正确率、token、延迟和调用成本 |
 | FM-002 | DONE · [PR #114](https://github.com/daiwk/auto-research/pull/114) | scaling-law 多预算基础设施 | 默认 4 个模型规模/数据/step 预算点；记录实际参数量、tokens seen、FLOPs proxy、逐点残差、RMSE/R² 和不可外推边界 |
 | MM-001 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 视频多模态 | 固定 SmolVLM2 commit；Video-MME-v2 Parquet/JSONL + MP4；逐题续跑、三 seed、置信区间和子集边界 |
 | MM-002 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 音频多模态 | 固定 CLAP commit；ESC-50/ESC-10 真实 WAV；zero-shot top-1/top-5 和 text embedding cache fingerprint |
-| MM-003 | DONE · 本 MR | 具身与大规模多模态后训练 | SmolVLA/LeRobot 真实训练入口、数据 manifest 与明确的 simulator/硬件成功率边界 |
+| MM-003 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | 具身与大规模多模态后训练 | SmolVLA/LeRobot 真实训练入口、数据 manifest 与明确的 simulator/硬件成功率边界 |
 
 ### LLM 后训练
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| PT-001 | DONE · 本 MR | L2 切换到可下载 pretrained causal LM | SmolLM2 固定 revision，GSM8K unrestricted generation 与 3 seeds |
+| PT-001 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | L2 切换到可下载 pretrained causal LM | SmolLM2 固定 revision，GSM8K unrestricted generation 与 3 seeds |
 | PT-002 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | CoBA-RL 完整教师路径 | 固定 Qwen2.5 teacher commit；pass@k/教师双缓存、真实调用率、token 成本与训练前后能力边界曲线 |
-| PT-003 | DONE · 本 MR | 公开偏好数据 | 固定 UltraFeedback revision/MIT 元数据，DPO/ORPO 同预算真实模型对照 |
-| PT-004 | DONE · 本 MR | GPU 训练完整性 | batch、gradient accumulation、mixed precision、safe checkpoint 与 optimizer resume；CPU/Mac 保留路径 |
+| PT-003 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 公开偏好数据 | 固定 UltraFeedback revision/MIT 元数据，DPO/ORPO 同预算真实模型对照 |
+| PT-004 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | GPU 训练完整性 | batch、gradient accumulation、mixed precision、safe checkpoint 与 optimizer resume；CPU/Mac 保留路径 |
 
 ### Agent
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| AG-001 | DONE · 本 MR | Agent Lightning 连接可训练 LLM policy | SmolLM2 pairwise policy update、显式 transition credit、真实测试 executor 与 token/tool 成本 |
-| AG-002 | DONE · 本 MR | Agent 真实 executor 的公平矩阵 | 相同仓库 fixture、相同 subprocess 上限、三 seed 比较 controller policy |
+| AG-001 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | Agent Lightning 连接可训练 LLM policy | SmolLM2 pairwise policy update、显式 transition credit、真实测试 executor 与 token/tool 成本 |
+| AG-002 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | Agent 真实 executor 的公平矩阵 | 相同仓库 fixture、相同 subprocess 上限、三 seed 比较 controller policy |
 
 ### Auto Research / Evolve
 
 | ID | 状态 | 工作 | 最小验收条件 |
 | --- | --- | --- | --- |
-| EV-001 | DONE · 本 MR | 将 FM-001 的推理预算算子接入统一 genome | `reasoning-checkpoint` 搜索采样预算、self-consistency verifier、停止阈值并生成逐代报告 |
-| EV-002 | DONE · 本 MR | 将 PT-001～PT-004 接入后训练 genome | data/objective/teacher/rollout/accumulation/precision 成为可继承组合轴并进入逐代报告 |
-| EV-003 | DONE · 本 MR | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy/recovery 可组合，跨 episode 复用与失败恢复可测 |
-| EV-004 | DONE · 本 MR | GenRec 类生成式推荐 evolve | MovieLens-1M 真实全目录 head、context/reward/distillation 旋钮和统一 ID-catalog 基线；Netflix 不因此获得论文优先级 |
+| EV-001 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 将 FM-001 的推理预算算子接入统一 genome | `reasoning-checkpoint` 搜索采样预算、self-consistency verifier、停止阈值并生成逐代报告 |
+| EV-002 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | 将 PT-001～PT-004 接入后训练 genome | data/objective/teacher/rollout/accumulation/precision 成为可继承组合轴并进入逐代报告 |
+| EV-003 | DONE · [PR #117](https://github.com/daiwk/auto-research/pull/117) | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy/recovery 可组合，跨 episode 复用与失败恢复可测 |
+| EV-004 | DONE · [PR #117](https://github.com/daiwk/auto-research/pull/117) | GenRec 类生成式推荐 evolve | MovieLens-1M 真实全目录 head、context/reward/distillation 旋钮和统一 ID-catalog 基线；Netflix 不因此获得论文优先级 |
 | INFRA-001 | DONE · [PR #111](https://github.com/daiwk/auto-research/pull/111) | GPU 依赖防护 | pip dry-run 阻止静默替换现有 PyTorch；Linux CPU 合同测试覆盖，既有 A30 关键路径回归继续保留 |
-| INFRA-002 | DONE · 本 MR | 重点方法多 seed 晋级 | 推荐/基础模型 adapter、后训练和 Agent 统一 3 seeds、置信区间、逐 seed 失败记录与断点续跑 |
+| INFRA-002 | DONE · [PR #117](https://github.com/daiwk/auto-research/pull/117) | 重点方法多 seed 晋级 | 推荐/基础模型 adapter、后训练和 Agent 统一 3 seeds、置信区间、逐 seed 失败记录与断点续跑 |
 
 ## 等待公开证据，不创建占位实现
 
