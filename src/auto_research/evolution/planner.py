@@ -8,6 +8,20 @@ from .models import Genome, PaperInspiration
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
+    if model == "genrec":
+        defaults = [
+            "context:full", "context:longer-compressed",
+            "head:semantic-catalog", "head:hybrid-catalog",
+            "reward:novelty", "reward:content-discovery",
+            "distillation:popularity-teacher",
+            "distillation:semantic-teacher",
+        ]
+        mapped = [
+            paper.architecture for paper in papers
+            if paper.architecture and paper.architecture.split(":", 1)[0]
+            in {"context", "head", "reward", "distillation"}
+        ]
+        return list(dict.fromkeys([*mapped, *defaults]))
     if model == "reasoning-checkpoint":
         return ["reasoning:1", "reasoning:2", "reasoning:4", "reasoning:8"]
     if model == "vlm-checkpoint":
@@ -62,7 +76,10 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             # Put one operator from each axis first so a small first generation is
             # still a fair component ablation rather than four planner variants.
             interleaved = []
-            for component in ("memory:", "planner:", "tool:", "critic:"):
+            for component in (
+                "memory:", "planner:", "tool:", "critic:", "policy:",
+                "recovery:",
+            ):
                 match = next(
                     (
                         value for value in operators
@@ -76,9 +93,9 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         return [
             "memory:u-mem", "memory:legomem", "planner:react", "planner:rewoo",
             "planner:tree-of-thoughts", "planner:lats", "tool:toolformer",
-            "tool:memtool", "critic:self-refine", "critic:reflexion",
+            "tool:memtool", "critic:self-refine", "recovery:reflexion",
             "planner:metagpt", "planner:swe-agent", "planner:openhands",
-            "critic:critic", "critic:agent-lightning",
+            "critic:critic", "policy:agent-lightning",
             "tool:mrkl", "planner:hugginggpt",
             "memory:generative-agents", "memory:memgpt",
             "tool:webgpt", "planner:saycan", "tool:pal", "planner:art",
@@ -226,6 +243,8 @@ def propose(parent: Genome, generation: int, index: int, architectures: list[str
         return _propose_post_training(parent, generation, index, architectures, rng)
     if model == "agent":
         return _propose_agent(parent, generation, index, architectures, rng)
+    if model == "genrec":
+        return _propose_genrec(parent, generation, index, architectures, rng)
     if model == "micro-llm":
         return _propose_llm(parent, generation, index, architectures, rng)
     if model == "micro-vlm":
@@ -401,6 +420,8 @@ def _propose_agent(parent, generation, index, operators, rng):
         "planner": ["fast"],
         "tool": ["direct"],
         "critic": ["none"],
+        "policy": ["heuristic", "replay-policy", "pairwise-policy"],
+        "recovery": ["none", "retry", "rollback"],
     }
     for operator in operators:
         if ":" not in operator:
@@ -414,6 +435,7 @@ def _propose_agent(parent, generation, index, operators, rng):
         field = {
             "memory": "agent_memory", "planner": "agent_planner",
             "tool": "agent_tool_policy", "critic": "agent_critic",
+            "policy": "agent_policy", "recovery": "agent_failure_recovery",
         }[component]
         return replace(parent, architecture="composable-agent", **{field: value}), (
             f"论文算子单组件消融：{operator}；其余组件保持基线"
@@ -425,8 +447,53 @@ def _propose_agent(parent, generation, index, operators, rng):
         agent_planner=rng.choice(values["planner"]),
         agent_tool_policy=rng.choice(values["tool"]),
         agent_critic=rng.choice(values["critic"]),
+        agent_policy=rng.choice(values["policy"]),
+        agent_failure_recovery=rng.choice(values["recovery"]),
         memory_size=rng.choice((8, 16, 24, 48)),
-    ), "论文检索约束下的 Agent 组合 genome：搜索 memory / planner / tool / critic / capacity"
+    ), (
+        "论文检索约束下的 Agent 组合 genome：搜索 memory / planner / tool / "
+        "critic / policy / recovery / capacity"
+    )
+
+
+def _propose_genrec(parent, generation, index, operators, rng):
+    fields = {
+        "context": "genrec_context",
+        "head": "genrec_head",
+        "reward": "genrec_reward",
+        "distillation": "genrec_distillation",
+    }
+    values = {
+        "context": ["recent", "full", "longer-compressed"],
+        "head": ["id-catalog", "semantic-catalog", "hybrid-catalog"],
+        "reward": ["uniform", "novelty", "content-discovery"],
+        "distillation": ["none", "popularity-teacher", "semantic-teacher"],
+    }
+    if generation == 1:
+        operator = operators[index % len(operators)]
+        component, value = operator.split(":", 1)
+        return replace(
+            parent, architecture="genrec-catalog", **{fields[component]: value},
+        ), f"生成式推荐单轴消融：{operator}；其余 catalog 训练条件保持基线"
+    genome = replace(
+        parent,
+        architecture="genrec-catalog",
+        genrec_context=rng.choice(values["context"]),
+        genrec_head=rng.choice(values["head"]),
+        genrec_reward=rng.choice(values["reward"]),
+        genrec_distillation=rng.choice(values["distillation"]),
+    )
+    if generation >= 3:
+        field, choices = rng.choice((
+            ("dimensions", (32, 64, 96)),
+            ("sequence_length", (8, 12, 24)),
+            ("learning_rate", (1e-3, 3e-3, 1e-2)),
+        ))
+        genome = replace(genome, **{field: rng.choice(choices)})
+    return genome, (
+        "围绕冠军组合 context / catalog head / reward / distillation；"
+        "validation 仅以全目录排序指标晋级"
+    )
 
 
 def round_record(generation, parent, trials, champion):

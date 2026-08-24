@@ -473,5 +473,5 @@ def test_free_generation_post_training_and_code_agent_configs_are_supported():
         "agent", "组合 SWE-agent、CRITIC 与 Agent Lightning", agent_papers,
     )
     assert agent_operators[:3] == [
-        "critic:critic", "planner:swe-agent", "critic:agent-lightning",
+        "critic:critic", "planner:swe-agent", "policy:agent-lightning",
     ]

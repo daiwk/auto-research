@@ -4,8 +4,8 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-08-13**。截至该日，已登记的 P0/P1 论文候选均有终态，当前没有
-尚未实现的静态 P0 论文队列；每日扫描发现的新候选会动态产生新任务。
+更新基线：**2026-08-24**。已登记的静态 P0/P1 队列均有终态；当前没有尚未实现的
+静态能力建设任务。每日扫描发现的新候选仍会动态产生新的论文任务。
 
 ## 优先级和状态
 
@@ -70,10 +70,10 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | --- | --- | --- | --- |
 | EV-001 | DONE · 本 MR | 将 FM-001 的推理预算算子接入统一 genome | `reasoning-checkpoint` 搜索采样预算、self-consistency verifier、停止阈值并生成逐代报告 |
 | EV-002 | DONE · 本 MR | 将 PT-001～PT-004 接入后训练 genome | data/objective/teacher/rollout/accumulation/precision 成为可继承组合轴并进入逐代报告 |
-| EV-003 | P1 | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy 可组合，跨 episode 复用与失败恢复可测 |
-| EV-004 | P1 | GenRec 类生成式推荐 evolve | 真实 catalog head、context/reward/distillation 旋钮和统一推荐基线；Netflix 不因此获得论文优先级 |
+| EV-003 | DONE · 本 MR | 将 AG-001/AG-002 接入 Agent genome | memory/planner/tool/critic/policy/recovery 可组合，跨 episode 复用与失败恢复可测 |
+| EV-004 | DONE · 本 MR | GenRec 类生成式推荐 evolve | MovieLens-1M 真实全目录 head、context/reward/distillation 旋钮和统一 ID-catalog 基线；Netflix 不因此获得论文优先级 |
 | INFRA-001 | DONE · [PR #111](https://github.com/daiwk/auto-research/pull/111) | GPU 依赖防护 | pip dry-run 阻止静默替换现有 PyTorch；Linux CPU 合同测试覆盖，既有 A30 关键路径回归继续保留 |
-| INFRA-002 | P1 | 重点 adapter 多 seed 晋级 | 从单 seed 机制验证挑选 P0/代表 P1，统一 3 seeds、置信区间和失败结果 |
+| INFRA-002 | DONE · 本 MR | 重点方法多 seed 晋级 | 推荐/基础模型 adapter、后训练和 Agent 统一 3 seeds、置信区间、逐 seed 失败记录与断点续跑 |
 
 ## 等待公开证据，不创建占位实现
 

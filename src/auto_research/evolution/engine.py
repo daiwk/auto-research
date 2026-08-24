@@ -360,6 +360,12 @@ def _paper_ids(genome, papers):
                 "planner": genome.agent_planner,
                 "tool": genome.agent_tool_policy,
                 "critic": genome.agent_critic,
+                "policy": genome.agent_policy,
+                "recovery": genome.agent_failure_recovery,
+                "context": genome.genrec_context,
+                "head": genome.genrec_head,
+                "reward": genome.genrec_reward,
+                "distillation": genome.genrec_distillation,
             }.get(component)
             if selected == value:
                 matched.append(paper.arxiv_id)

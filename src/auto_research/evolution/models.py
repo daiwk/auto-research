@@ -150,7 +150,13 @@ class Genome:
     agent_planner: str = "long-context"
     agent_tool_policy: str = "direct"
     agent_critic: str = "none"
+    agent_policy: str = "heuristic"
+    agent_failure_recovery: str = "none"
     memory_size: int = 24
+    genrec_context: str = "recent"
+    genrec_head: str = "id-catalog"
+    genrec_reward: str = "uniform"
+    genrec_distillation: str = "none"
     multimodal_objective: str = "cross_entropy"
     checkpoint_prompt_style: str = "direct"
     checkpoint_use_hint: bool = True

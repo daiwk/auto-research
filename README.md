@@ -382,6 +382,30 @@ auto-research evolve \
 
 默认 `micro-llm` 约 12M–16M 参数；WikiText-2、Tiny Shakespeare、Stanford Alpaca、官方 GSM8K 和 BPE tokenizer 自动下载/构建并缓存到 `data/`。第一轮只比较结构，第二轮只比较数据配方，第三轮比较 SFT、NEFTune、DynamicRubric 与 Off-Context GRPO。public suite 同时记录 Alpaca preference accuracy 和 GSM8K candidate Pass@1；详细定义见[模型自动进化文档](docs/model-evolution.md)。
 
+Agent 与生成式推荐也使用同一多轮控制器。Agent 可组合 memory、planner、tool、critic、
+可训练 policy 和 failure recovery；`genrec` 在 MovieLens-1M 真实保留 catalog 上组合
+context、catalog head、reward 与 distillation，并强制全目录评估：
+
+```bash
+auto-research evolve --model agent --dataset evomem-mini \
+  --direction "组合 Agent Lightning policy、跨 episode memory 与 Reflexion recovery" \
+  --generations 3 --population 8 --seeds 42,43,44
+
+auto-research evolve --model genrec --dataset movielens-1m \
+  --direction "组合 Netflix/JD GenRec 与 OxygenREC-v2 的 context、reward 和蒸馏" \
+  --generations 3 --population 8 --steps 100 --seeds 42,43,44
+```
+
+重点方法从单 seed 机制验证晋级到三 seed 正式证据时，使用可断点续跑的统一入口：
+
+```bash
+auto-research promote-evidence --dataset-dir data --seeds 42,43,44
+```
+
+默认覆盖 RankMixer、Switch Transformer、GRPO 和 Agent Lightning，输出逐 seed 成败、
+均值、标准差与 95% 置信区间；少于三个成功 seed 时禁止稳定提升声明。详细协议见
+[模型自动进化文档](docs/model-evolution.md#three-seed-evidence-promotion)。
+
 ## 运行 Topic research loop
 
 LLM 示例：
