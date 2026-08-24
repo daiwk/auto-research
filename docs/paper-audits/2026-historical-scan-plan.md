@@ -9,8 +9,8 @@
 |---|---:|
 | 去重后的新候选 | 3906 |
 | 需要全文审查 | 404 |
-| 当前 PR 已实现 | 22 |
-| 固定后续实现队列 | 52 |
+| 当前 PR 已实现 | 41 |
+| 固定后续实现队列 | 33 |
 | 仍待全文决定、未承诺实现 | 331 |
 | P2 或查询碰撞（保留审计记录） | 3501 |
 
@@ -52,7 +52,7 @@
 - [2605.21752](https://arxiv.org/abs/2605.21752) PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation — 搜广推与 LLM 应用
 - [2605.17863](https://arxiv.org/abs/2605.17863) DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems — 搜广推与 LLM 应用
 
-### B04：推荐 RL、知识迁移与 Semantic ID
+### B04：推荐 RL、知识迁移与 Semantic ID（已完成）
 
 - [2605.16344](https://arxiv.org/abs/2605.16344) A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems — 搜广推与 LLM 应用
 - [2605.05730](https://arxiv.org/abs/2605.05730) Effective Knowledge Transfer for Multi-Task Recommendation Models — 搜广推与 LLM 应用
@@ -61,7 +61,7 @@
 - [2603.24226](https://arxiv.org/abs/2603.24226) UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking — 搜广推与 LLM 应用
 - [2603.22916](https://arxiv.org/abs/2603.22916) GateSID: Adaptive Gating for Balancing Semantic and Collaborative Signals in Recommendation — 搜广推与 LLM 应用
 
-### B05：电商生成、搜索融合与工业排序
+### B05：电商生成、搜索融合与工业排序（已完成）
 
 - [2603.19710](https://arxiv.org/abs/2603.19710) AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation — 搜广推与 LLM 应用
 - [2603.19585](https://arxiv.org/abs/2603.19585) SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search — 搜广推与 LLM 应用
@@ -70,7 +70,7 @@
 - [2602.20995](https://arxiv.org/abs/2602.20995) Generative Pseudo-Labeling for Pre-Ranking with LLMs — 搜广推与 LLM 应用
 - [2602.17058](https://arxiv.org/abs/2602.17058) A Long-term Value Prediction Framework In Video Ranking — 搜广推与 LLM 应用
 
-### B06：2 月召回、广告、长序列与 LLM 排序
+### B06：2 月召回、广告、长序列与 LLM 排序（已完成）
 
 - [2602.12968](https://arxiv.org/abs/2602.12968) RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems — 搜广推与 LLM 应用
 - [2602.12354](https://arxiv.org/abs/2602.12354) An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking — 搜广推与 LLM 应用

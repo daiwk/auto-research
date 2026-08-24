@@ -158,7 +158,9 @@
 - 2026-07 · [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 决定是否触发 shopping candidate generator。
 - 2026-07 · [MESH](../2607.12392-mesh/README.md)：把 user/item/context 特征放入独立放大塔，再用 residual gated bias correction 保护 fresh 内容信号。
 - 2026-05 · [Complementary LLM Ads Predictor](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 作为传统广告召回与排序的补充预测器。
+- 2026-05 · [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md)：以双头 Q 网络和 Pareto 扫描选择可治理的个性化多目标 utility 策略。
 - 2026-03 · [PinCLIP](../2603.03544-pinclip/README.md)：以 VLM 图文对齐加 Pin-Board 邻居目标改善 fresh 内容表征。
+- 2026-02 · [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
 - 2025-09 · [DRL-PUT](../2509.05292-drl-put/README.md)：从 logged ads behavior 学习相关性、新颖性和收益等排序 utility 的动态权重策略。
 - 2025-07 · [Click A, Buy B](../2507.15113-click-a-buy-b/README.md)：拆分同物品 CABA 与跨物品 CABB 转化归因，并用商品 taxonomy 建立协同权重。
 - 2025-07 · [PinFM](../2507.12704-pinfm/README.md)：以 DCAT 等序列模块构建推荐 foundation model，并通过预训练—微调适配多个流量场景。
@@ -231,6 +233,7 @@
 - 2026-08 · [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
 - 2026-08 · [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。
 - 2026-05 · [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
+- 2026-03 · [SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search](../2603.19585-safro/README.md)：用满意度奖励和双重相对优势优化短视频搜索多任务融合。
 
 ## Amap / Alibaba
 - 2026-08 · [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md)：让多个业务任务在长短双流的不同层级执行交互查询，而非仅共享底层编码。
@@ -260,3 +263,43 @@
 
 ## TikTok
 - 2026-05 · [PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation](../2605.21752-pearl-percentile/README.md)：通过多样本对比估计低方差行为 percentile，并扩展到多个直播目标。
+
+## Huawei Technologies
+- 2026-05 · [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
+
+## University of Electronic Science and Technology of China / Kuaishou
+- 2026-04 · [Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale](../2604.23522-adasid/README.md)：依据碰撞负载、语义相容性和训练阶段动态调节 SID 重叠约束。
+- 2026-02 · [Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale](../2603.00632-quasid/README.md)：按业务资格信号设定碰撞 margin，提升冷启动 SID 可辨识度。
+
+## Authors did not disclose affiliation / large-scale e-commerce platform
+- 2026-04 · [UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute](../2604.12234-unirec-coa/README.md)：先生成属性链再生成容量受限 SID，并以 RFT/DPO 对齐业务目标。
+
+## Taobao & Tmall Group / Alibaba
+- 2026-03 · [UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking](../2603.24226-uniscale/README.md)：以 Entire-Space 数据和分层异构融合协同扩展搜索排序模型。
+- 2026-03 · [AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation](../2603.19710-aigq/README.md)：组合 Direct/Reasoning query 生成、IL-GRPO 与混合在线服务。
+
+## Alibaba International Digital Commerce
+- 2026-03 · [GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation](../2603.22916-gatesid/README.md)：用冷启动感知门控动态融合语义 SID 与协同行为信号。
+- 2026-03 · [SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders](../2603.03988-sort-ranking/README.md)：系统优化 token 化、注意力和 FFN，统一替代工业 DLRM 排序。
+
+## Alibaba Group / Renmin University
+- 2026-02 · [Generative Pseudo-Labeling for Pre-Ranking with LLMs](../2602.20995-gpl-prerank/README.md)：LLM 为未曝光候选生成伪标签，线上预排序器不增加 LLM 时延。
+
+## Alibaba Group / Tsinghua University
+- 2026-02 · [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md)：组合位置去偏、会话归因与作者周期任务建模长期价值。
+
+## Forth AI / Shopee / Singapore University of Technology and Design
+- 2026-02 · [RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems](../2602.12968-rgalign-rec/README.md)：用真实排序模型偏好指导潜在 query 的 SFT 与 DPO 对齐。
+
+## LinkedIn
+- 2026-02 · [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
+- 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
+
+## Tencent
+- 2026-02 · [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
+
+## Institute of Information Engineering, CAS / Kuaishou
+- 2026-02 · [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md)：离线 MLLM 生成语义 anchor，轻量非对称模块注入直播排序。
+
+## Apple
+- 2026-02 · [Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment](../2602.01023-rag-qac/README.md)：以 RAG、SFT 和 DPO 同时优化补全相关性、安全与 groundedness。

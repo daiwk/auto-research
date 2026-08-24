@@ -5450,6 +5450,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "adasid",
+      "title": "Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale",
+      "paper_url": "https://arxiv.org/abs/2604.23522",
+      "detail_path": "reproductions/2604.23522-adasid/README.md",
+      "topic": [
+        "semantic-id",
+        "multimodal-recommendation",
+        "retrieval"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "University of Electronic Science and Technology of China / Kuaishou",
+      "published": "2026-04-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "adasid",
+        "arxiv_id": "2604.23522",
+        "title": "Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale",
+        "paper_url": "https://arxiv.org/abs/2604.23522",
+        "track": "recommendation",
+        "organization": "University of Electronic Science and Technology of China / Kuaishou",
+        "published": "2026-04-26",
+        "code_url": null,
+        "topics": [
+          "semantic-id",
+          "multimodal-recommendation",
+          "retrieval"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/adasid",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Kuaishou e-commerce",
+            "metric": "GPM",
+            "lift_percent": 1.16,
+            "traffic": "tens of millions of users, four days",
+            "source_url": "https://arxiv.org/html/2604.23522v1",
+            "source_location": "Section 5.3 / Table 3",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "agentic-rec-tune",
       "title": "AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization",
       "paper_url": "https://arxiv.org/abs/2604.26969",
@@ -5531,6 +5595,70 @@
             "source_location": "Section 5 Table 1",
             "significance": "p<0.05",
             "retrieved_at": "2026-08-09"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "aigq",
+      "title": "AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation",
+      "paper_url": "https://arxiv.org/abs/2603.19710",
+      "detail_path": "reproductions/2603.19710-aigq/README.md",
+      "topic": [
+        "query-recommendation",
+        "generative-recommendation",
+        "reinforcement-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Taobao & Tmall Group / Alibaba",
+      "published": "2026-03-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "aigq",
+        "arxiv_id": "2603.19710",
+        "title": "AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation",
+        "paper_url": "https://arxiv.org/abs/2603.19710",
+        "track": "recommendation",
+        "organization": "Taobao & Tmall Group / Alibaba",
+        "published": "2026-03-20",
+        "code_url": null,
+        "topics": [
+          "query-recommendation",
+          "generative-recommendation",
+          "reinforcement-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/aigq",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Taobao HintQ",
+            "metric": "GMV",
+            "lift_percent": 10.68,
+            "traffic": "thirty-day A/B",
+            "source_url": "https://arxiv.org/html/2603.19710v1",
+            "source_location": "Section 5.4",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -6092,6 +6220,70 @@
             "traffic": "online A/B vs WDL control",
             "source_url": "https://arxiv.org/abs/1905.06874",
             "source_location": "original paper online-result disclosure: product=Taobao recommendation; metric=CTR"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "cadet",
+      "title": "CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer",
+      "paper_url": "https://arxiv.org/abs/2602.11410",
+      "detail_path": "reproductions/2602.11410-cadet/README.md",
+      "topic": [
+        "advertising",
+        "ctr-prediction",
+        "decoder-only-transformer"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "LinkedIn",
+      "published": "2026-02-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "cadet",
+        "arxiv_id": "2602.11410",
+        "title": "CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer",
+        "paper_url": "https://arxiv.org/abs/2602.11410",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-02-11",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "ctr-prediction",
+          "decoder-only-transformer"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/cadet",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "LinkedIn sponsored feed",
+            "metric": "CTR",
+            "lift_percent": 11.04,
+            "traffic": "large-scale online A/B",
+            "source_url": "https://arxiv.org/html/2602.11410v1",
+            "source_location": "Section 5.3 / Table 3",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -7715,6 +7907,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "diffureason",
+      "title": "DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation",
+      "paper_url": "https://arxiv.org/abs/2602.09744",
+      "detail_path": "reproductions/2602.09744-diffureason/README.md",
+      "topic": [
+        "generative-recommendation",
+        "diffusion",
+        "reinforcement-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent",
+      "published": "2026-02-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "diffureason",
+        "arxiv_id": "2602.09744",
+        "title": "DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation",
+        "paper_url": "https://arxiv.org/abs/2602.09744",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-02-10",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "diffusion",
+          "reinforcement-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/diffureason",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Tencent Ads / WeChat Channels",
+            "metric": "ad consumption",
+            "lift_percent": 1.1462,
+            "traffic": "20% traffic, five days",
+            "source_url": "https://arxiv.org/html/2602.09744v1",
+            "source_location": "Section 4.7",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "din",
       "title": "Deep Interest Network for Click-Through Rate Prediction",
       "paper_url": "https://arxiv.org/abs/1706.06978",
@@ -8488,6 +8744,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "ektm",
+      "title": "Effective Knowledge Transfer for Multi-Task Recommendation Models",
+      "paper_url": "https://arxiv.org/abs/2605.05730",
+      "detail_path": "reproductions/2605.05730-ektm/README.md",
+      "topic": [
+        "multi-task-learning",
+        "knowledge-transfer",
+        "conversion"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Huawei Technologies",
+      "published": "2026-05-07",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ektm",
+        "arxiv_id": "2605.05730",
+        "title": "Effective Knowledge Transfer for Multi-Task Recommendation Models",
+        "paper_url": "https://arxiv.org/abs/2605.05730",
+        "track": "recommendation",
+        "organization": "Huawei Technologies",
+        "published": "2026-05-07",
+        "code_url": null,
+        "topics": [
+          "multi-task-learning",
+          "knowledge-transfer",
+          "conversion"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/ektm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "commercial recommendation platform",
+            "metric": "eCPM",
+            "lift_percent": 3.93,
+            "traffic": "5%→20%→50%→100% traffic",
+            "source_url": "https://arxiv.org/html/2605.05730v1",
+            "source_location": "Section 4.4.2 / Figure 3",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "esmm",
       "title": "Entire Space Multi-Task Model: An Effective Approach for Estimating Post-Click Conversion Rate",
       "paper_url": "https://arxiv.org/abs/1804.07931",
@@ -9077,6 +9397,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "gatesid",
+      "title": "GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation",
+      "paper_url": "https://arxiv.org/abs/2603.22916",
+      "detail_path": "reproductions/2603.22916-gatesid/README.md",
+      "topic": [
+        "semantic-id",
+        "cold-start",
+        "contrastive-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba International Digital Commerce",
+      "published": "2026-03-24",
+      "code": null,
+      "adapter": {
+        "adapter_key": "gatesid",
+        "arxiv_id": "2603.22916",
+        "title": "GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation",
+        "paper_url": "https://arxiv.org/abs/2603.22916",
+        "track": "recommendation",
+        "organization": "Alibaba International Digital Commerce",
+        "published": "2026-03-24",
+        "code_url": null,
+        "topics": [
+          "semantic-id",
+          "cold-start",
+          "contrastive-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gatesid",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "industrial recommendation",
+            "metric": "GMV",
+            "lift_percent": 2.6,
+            "traffic": "20% traffic, two weeks",
+            "source_url": "https://arxiv.org/html/2603.22916v1",
+            "source_location": "Section 3.4",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "genpage",
       "title": "GenPage: Towards End-to-End Generative Homepage Construction at Netflix",
       "paper_url": "https://arxiv.org/abs/2606.31031",
@@ -9525,6 +9909,70 @@
             "traffic": "7.8% traffic, 14 days",
             "source_url": "https://arxiv.org/abs/2604.25291",
             "source_location": "original paper online-result disclosure: product=Kuaishou; metric=Watch Time"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "gpl-prerank",
+      "title": "Generative Pseudo-Labeling for Pre-Ranking with LLMs",
+      "paper_url": "https://arxiv.org/abs/2602.20995",
+      "detail_path": "reproductions/2602.20995-gpl-prerank/README.md",
+      "topic": [
+        "pre-ranking",
+        "pseudo-labeling",
+        "llm-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba Group / Renmin University",
+      "published": "2026-02-24",
+      "code": null,
+      "adapter": {
+        "adapter_key": "gpl-prerank",
+        "arxiv_id": "2602.20995",
+        "title": "Generative Pseudo-Labeling for Pre-Ranking with LLMs",
+        "paper_url": "https://arxiv.org/abs/2602.20995",
+        "track": "recommendation",
+        "organization": "Alibaba Group / Renmin University",
+        "published": "2026-02-24",
+        "code_url": null,
+        "topics": [
+          "pre-ranking",
+          "pseudo-labeling",
+          "llm-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gpl_prerank",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Taobao Guess What You Like",
+            "metric": "CTR",
+            "lift_percent": 3.07,
+            "traffic": "hundreds of millions DAU, two weeks",
+            "source_url": "https://arxiv.org/html/2602.20995v1",
+            "source_location": "Section 4.5 / Table 4",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -11219,6 +11667,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "linkedin-feed-sr",
+      "title": "An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking",
+      "paper_url": "https://arxiv.org/abs/2602.12354",
+      "detail_path": "reproductions/2602.12354-linkedin-feed-sr/README.md",
+      "topic": [
+        "ranking",
+        "sequential-recommendation",
+        "long-sequence"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "LinkedIn",
+      "published": "2026-02-12",
+      "code": null,
+      "adapter": {
+        "adapter_key": "linkedin-feed-sr",
+        "arxiv_id": "2602.12354",
+        "title": "An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking",
+        "paper_url": "https://arxiv.org/abs/2602.12354",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-02-12",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "sequential-recommendation",
+          "long-sequence"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/linkedin_feed_sr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "LinkedIn Feed",
+            "metric": "time spent",
+            "lift_percent": 2.1,
+            "traffic": "production A/B",
+            "source_url": "https://arxiv.org/html/2602.12354v1",
+            "source_location": "Section 7 / Table 5",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "llatte",
       "title": "LLaTTE: Scaling Laws for Multi-Stage Sequence Modeling in Large-Scale Ads Recommendation",
       "paper_url": "https://arxiv.org/abs/2601.20083",
@@ -11658,6 +12170,70 @@
             "traffic": "20K users, 2 weeks",
             "source_url": "https://arxiv.org/abs/2403.13574",
             "source_location": "original paper online-result disclosure: product=Kuaishou comments; metric=Watch Time"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "ltv-video-ranking",
+      "title": "A Long-term Value Prediction Framework In Video Ranking",
+      "paper_url": "https://arxiv.org/abs/2602.17058",
+      "detail_path": "reproductions/2602.17058-ltv-video-ranking/README.md",
+      "topic": [
+        "ranking",
+        "long-term-value",
+        "debiasing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba Group / Tsinghua University",
+      "published": "2026-02-19",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ltv-video-ranking",
+        "arxiv_id": "2602.17058",
+        "title": "A Long-term Value Prediction Framework In Video Ranking",
+        "paper_url": "https://arxiv.org/abs/2602.17058",
+        "track": "recommendation",
+        "organization": "Alibaba Group / Tsinghua University",
+        "published": "2026-02-19",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "long-term-value",
+          "debiasing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/ltv_video_ranking",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Taobao video ranking",
+            "metric": "VV",
+            "lift_percent": 2.49,
+            "traffic": "multi-day production A/B",
+            "source_url": "https://arxiv.org/html/2602.17058v1",
+            "source_location": "Section 5.3 / Table 6",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -12697,6 +13273,70 @@
           "cuda"
         ],
         "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "ml-dcn",
+      "title": "ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest",
+      "paper_url": "https://arxiv.org/abs/2602.09194",
+      "detail_path": "reproductions/2602.09194-ml-dcn/README.md",
+      "topic": [
+        "advertising",
+        "feature-crossing",
+        "serving-efficiency"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Pinterest",
+      "published": "2026-02-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ml-dcn",
+        "arxiv_id": "2602.09194",
+        "title": "ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest",
+        "paper_url": "https://arxiv.org/abs/2602.09194",
+        "track": "recommendation",
+        "organization": "Pinterest",
+        "published": "2026-02-09",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "feature-crossing",
+          "serving-efficiency"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/ml_dcn",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Pinterest Ads",
+            "metric": "platform-wide CTR",
+            "lift_percent": 1.89,
+            "traffic": "production A/B at neutral cost",
+            "source_url": "https://arxiv.org/html/2602.09194v1",
+            "source_location": "Section 4.2 / Table 6",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
         "selection_exception": null,
         "evolve_operators": []
       }
@@ -15213,6 +15853,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "prl-puts",
+      "title": "A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2605.16344",
+      "detail_path": "reproductions/2605.16344-prl-puts/README.md",
+      "topic": [
+        "reinforcement-learning",
+        "multi-objective-ranking",
+        "homefeed"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Pinterest",
+      "published": "2026-05-08",
+      "code": null,
+      "adapter": {
+        "adapter_key": "prl-puts",
+        "arxiv_id": "2605.16344",
+        "title": "A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2605.16344",
+        "track": "recommendation",
+        "organization": "Pinterest",
+        "published": "2026-05-08",
+        "code_url": null,
+        "topics": [
+          "reinforcement-learning",
+          "multi-objective-ranking",
+          "homefeed"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/prl_puts",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Pinterest Homefeed",
+            "metric": "P2P impressions",
+            "lift_percent": 0.3,
+            "traffic": "1% per arm, two weeks",
+            "source_url": "https://arxiv.org/html/2605.16344v1",
+            "source_location": "Section 6.4 / Table 1",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "prompt-generation",
       "title": "Prompt Generation Technical Report",
       "paper_url": "https://arxiv.org/abs/2607.11326",
@@ -15511,6 +16215,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "quasid",
+      "title": "Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale",
+      "paper_url": "https://arxiv.org/abs/2603.00632",
+      "detail_path": "reproductions/2603.00632-quasid/README.md",
+      "topic": [
+        "semantic-id",
+        "collision-handling",
+        "e-commerce"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "University of Electronic Science and Technology of China / Kuaishou",
+      "published": "2026-02-28",
+      "code": null,
+      "adapter": {
+        "adapter_key": "quasid",
+        "arxiv_id": "2603.00632",
+        "title": "Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale",
+        "paper_url": "https://arxiv.org/abs/2603.00632",
+        "track": "recommendation",
+        "organization": "University of Electronic Science and Technology of China / Kuaishou",
+        "published": "2026-02-28",
+        "code_url": null,
+        "topics": [
+          "semantic-id",
+          "collision-handling",
+          "e-commerce"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/quasid",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Kuaishou e-commerce",
+            "metric": "GMV-S2",
+            "lift_percent": 2.38,
+            "traffic": "5% traffic, five days",
+            "source_url": "https://arxiv.org/html/2603.00632v1",
+            "source_location": "Section 5.4",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "radar",
       "title": "RADAR: Recall Augmentation through Deferred Asynchronous Retrieval",
       "paper_url": "https://arxiv.org/abs/2506.07261",
@@ -15580,6 +16348,70 @@
             "traffic": "online A/B",
             "source_url": "https://arxiv.org/abs/2506.07261",
             "source_location": "original paper online-result disclosure: product=Meta recommendation product; metric=Engagement"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "rag-qac",
+      "title": "Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment",
+      "paper_url": "https://arxiv.org/abs/2602.01023",
+      "detail_path": "reproductions/2602.01023-rag-qac/README.md",
+      "topic": [
+        "query-auto-completion",
+        "retrieval-augmented-generation",
+        "preference-alignment"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Apple",
+      "published": "2026-02-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rag-qac",
+        "arxiv_id": "2602.01023",
+        "title": "Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment",
+        "paper_url": "https://arxiv.org/abs/2602.01023",
+        "track": "recommendation",
+        "organization": "Apple",
+        "published": "2026-02-01",
+        "code_url": null,
+        "topics": [
+          "query-auto-completion",
+          "retrieval-augmented-generation",
+          "preference-alignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rag_qac",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "production query auto-completion",
+            "metric": "suggestions taken",
+            "lift_percent": 3.46,
+            "traffic": "10% production traffic",
+            "source_url": "https://arxiv.org/html/2602.01023v1",
+            "source_location": "Section 7 / Table 3",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -16411,6 +17243,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "rgalign-rec",
+      "title": "RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems",
+      "paper_url": "https://arxiv.org/abs/2602.12968",
+      "detail_path": "reproductions/2602.12968-rgalign-rec/README.md",
+      "topic": [
+        "llm-recommendation",
+        "query-reasoning",
+        "preference-alignment"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Forth AI / Shopee / Singapore University of Technology and Design",
+      "published": "2026-02-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rgalign-rec",
+        "arxiv_id": "2602.12968",
+        "title": "RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems",
+        "paper_url": "https://arxiv.org/abs/2602.12968",
+        "track": "recommendation",
+        "organization": "Forth AI / Shopee / Singapore University of Technology and Design",
+        "published": "2026-02-13",
+        "code_url": null,
+        "topics": [
+          "llm-recommendation",
+          "query-reasoning",
+          "preference-alignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rgalign_rec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "production zero-query chatbot",
+            "metric": "CTR@3 incremental over QE-Rec",
+            "lift_percent": 0.13,
+            "traffic": "large-scale online A/B",
+            "source_url": "https://arxiv.org/html/2602.12968v1",
+            "source_location": "Section 5.4 / Table 5",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "rocs",
       "title": "ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation",
       "paper_url": "https://arxiv.org/abs/2607.27744",
@@ -16568,6 +17464,70 @@
     },
     {
       "domain": "recommendation",
+      "key": "safro",
+      "title": "SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search",
+      "paper_url": "https://arxiv.org/abs/2603.19585",
+      "detail_path": "reproductions/2603.19585-safro/README.md",
+      "topic": [
+        "search-ranking",
+        "reinforcement-learning",
+        "multi-task-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-03-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "safro",
+        "arxiv_id": "2603.19585",
+        "title": "SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search",
+        "paper_url": "https://arxiv.org/abs/2603.19585",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-03-20",
+        "code_url": null,
+        "topics": [
+          "search-ranking",
+          "reinforcement-learning",
+          "multi-task-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/safro",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Kuaishou Search",
+            "metric": "watch time",
+            "lift_percent": 0.611,
+            "traffic": "10% traffic, two months",
+            "source_url": "https://arxiv.org/html/2603.19585v1",
+            "source_location": "Section 5.4 / Table 3",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "sam",
       "title": "Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy",
       "paper_url": "https://arxiv.org/abs/2607.12714",
@@ -16635,6 +17595,70 @@
             "traffic": "1% traffic",
             "source_url": "https://arxiv.org/abs/2607.12714",
             "source_location": "original paper online-result disclosure: product=Alibaba recommendation; metric=GMV"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "sarm",
+      "title": "SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking",
+      "paper_url": "https://arxiv.org/abs/2602.09401",
+      "detail_path": "reproductions/2602.09401-sarm/README.md",
+      "topic": [
+        "live-streaming",
+        "semantic-anchor",
+        "multimodal-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Institute of Information Engineering, CAS / Kuaishou",
+      "published": "2026-02-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "sarm",
+        "arxiv_id": "2602.09401",
+        "title": "SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking",
+        "paper_url": "https://arxiv.org/abs/2602.09401",
+        "track": "recommendation",
+        "organization": "Institute of Information Engineering, CAS / Kuaishou",
+        "published": "2026-02-10",
+        "code_url": null,
+        "topics": [
+          "live-streaming",
+          "semantic-anchor",
+          "multimodal-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/sarm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Kuaishou Lite live-streaming",
+            "metric": "watch count",
+            "lift_percent": 1.19,
+            "traffic": "two-week A/B; subsequently fully deployed",
+            "source_url": "https://arxiv.org/html/2602.09401v1",
+            "source_location": "Section 4.4 / Table 3",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -17471,6 +18495,70 @@
             "traffic": "two-week A/B vs deployed FFT context model + fastDPP",
             "source_url": "https://arxiv.org/abs/2505.07197",
             "source_location": "original paper online-result disclosure: product=Taobao Baiyibutie; metric=GMV"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "sort-ranking",
+      "title": "SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders",
+      "paper_url": "https://arxiv.org/abs/2603.03988",
+      "detail_path": "reproductions/2603.03988-sort-ranking/README.md",
+      "topic": [
+        "ranking",
+        "transformer",
+        "serving-efficiency"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba International Digital Commerce",
+      "published": "2026-03-04",
+      "code": null,
+      "adapter": {
+        "adapter_key": "sort-ranking",
+        "arxiv_id": "2603.03988",
+        "title": "SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders",
+        "paper_url": "https://arxiv.org/abs/2603.03988",
+        "track": "recommendation",
+        "organization": "Alibaba International Digital Commerce",
+        "published": "2026-03-04",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "transformer",
+          "serving-efficiency"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/sort_ranking",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "AliExpress recommendation",
+            "metric": "orders",
+            "lift_percent": 6.35,
+            "traffic": "three production scenarios",
+            "source_url": "https://arxiv.org/html/2603.03988v1",
+            "source_location": "Section 4.7 / Table 5",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,
@@ -18774,6 +19862,134 @@
             "traffic": "5% traffic, two weeks",
             "source_url": "https://arxiv.org/abs/2607.24439",
             "source_location": "original paper online-result disclosure: product=Kuaishou Lite; metric=total gifting amount"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "unirec-coa",
+      "title": "UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute",
+      "paper_url": "https://arxiv.org/abs/2604.12234",
+      "detail_path": "reproductions/2604.12234-unirec-coa/README.md",
+      "topic": [
+        "generative-recommendation",
+        "semantic-id",
+        "preference-alignment"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Authors did not disclose affiliation / large-scale e-commerce platform",
+      "published": "2026-04-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "unirec-coa",
+        "arxiv_id": "2604.12234",
+        "title": "UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute",
+        "paper_url": "https://arxiv.org/abs/2604.12234",
+        "track": "recommendation",
+        "organization": "Authors did not disclose affiliation / large-scale e-commerce platform",
+        "published": "2026-04-14",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "semantic-id",
+          "preference-alignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/unirec_coa",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "e-commerce feed and landing page",
+            "metric": "GMV",
+            "lift_percent": 5.6,
+            "traffic": "20% user traffic per bucket",
+            "source_url": "https://arxiv.org/html/2604.12234v1",
+            "source_location": "Section 4.2 / Table 5",
+            "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "uniscale",
+      "title": "UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking",
+      "paper_url": "https://arxiv.org/abs/2603.24226",
+      "detail_path": "reproductions/2603.24226-uniscale/README.md",
+      "topic": [
+        "search-ranking",
+        "model-scaling",
+        "entire-space-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Taobao & Tmall Group / Alibaba",
+      "published": "2026-03-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "uniscale",
+        "arxiv_id": "2603.24226",
+        "title": "UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking",
+        "paper_url": "https://arxiv.org/abs/2603.24226",
+        "track": "recommendation",
+        "organization": "Taobao & Tmall Group / Alibaba",
+        "published": "2026-03-25",
+        "code_url": null,
+        "topics": [
+          "search-ranking",
+          "model-scaling",
+          "entire-space-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/uniscale",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K"
+        ],
+        "baseline": "shared transition + content scorer",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "Fresh Hit@10",
+          "Head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Taobao Search",
+            "metric": "GMV",
+            "lift_percent": 2.04,
+            "traffic": "5% traffic, ten days",
+            "source_url": "https://arxiv.org/html/2603.24226v1",
+            "source_location": "Section 4.5",
+            "retrieved_at": "2026-08-24"
           }
         ],
         "selection_exception": null,

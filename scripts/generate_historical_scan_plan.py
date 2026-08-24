@@ -37,7 +37,7 @@ COMPLETED = {
 # These fixed batches were completed after the initial scan PR.  Keeping the
 # batch identity (instead of moving papers into B00) makes the historical plan
 # auditable while removing them from the pending queue.
-COMPLETED_BATCHES = {"B01", "B02", "B03"}
+COMPLETED_BATCHES = {"B01", "B02", "B03", "B04", "B05", "B06"}
 
 
 BATCHES: dict[str, dict] = {
