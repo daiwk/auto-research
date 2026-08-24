@@ -409,6 +409,10 @@ def _plan(task, method, rng):
         return target, 0.55 + 0.30 * len(target)
     if method == "agent0":
         return target, 0.50 + 0.15 * len(target)
+    if method == "agentx":
+        # Closed-loop research: analysis and hypothesis select an executable
+        # plan, while the evaluation transition remains replayable.
+        return target, 0.48 + 0.20 * len(target)
     if method == "camel":
         return target, 0.40 + 0.25 * len(target)
     return target, float(len(task.context))

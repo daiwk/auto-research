@@ -1,0 +1,74 @@
+{
+  "paper": {
+    "title": "LLM-Based Re-Ranking for Real Estate Search"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "real-estate-rerank",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "LLM-Based Re-Ranking for Real Estate Search",
+    "hit_at_10": 0.1,
+    "ndcg_at_10": 0.04957084720937244,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.1809090909090909
+  },
+  "relative": {
+    "hit_at_10_percent": -8.333333333333325,
+    "ndcg_at_10_percent": -8.21142888146057,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -23.90057361376673
+  },
+  "stages": {
+    "mechanism": {
+      "mode": "real_estate",
+      "fitted": true,
+      "state_keys": [
+        "align",
+        "domain_eye",
+        "fitted",
+        "semantic"
+      ]
+    },
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.13636363636363635,
+      "ndcg_at_10": 0.07012691954360847,
+      "fresh_hit_at_10": 0.08771929824561403,
+      "head_share_at_10": 0.1831818181818182
+    }
+  },
+  "paper_results": {
+    "ctr_percent": 5.3,
+    "scheduled_visits_percent": 4.8
+  },
+  "scope": "在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:real-estate-rerank",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.14835-real-estate-rerank/metrics/public-seed42.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

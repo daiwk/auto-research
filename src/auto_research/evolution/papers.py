@@ -128,6 +128,7 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2606.26859": ("planner:agentx", "AgentX 将分析、假设、执行与评估组织成可回放的闭环研究轨迹"),
     "2608.06197": ("critic:envace", "同一策略交替承担 act 与环境 rehearsal 角色，并以 role-wise GRPO 分别归一化优势"),
     "2210.03629": ("planner:react", "ReAct 交替生成推理轨迹与工具动作"),
     "2302.04761": ("tool:toolformer", "Toolformer 通过自监督 API 调用标注学习何时调用工具"),
@@ -313,6 +314,7 @@ POST_TRAINING_FALLBACK_PAPERS = (
 )
 
 AGENT_FALLBACK_PAPERS = (
+    Paper("AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems", "Closes the loop between analysis, hypothesis, execution and evaluation with replayable action trajectories.", [], "2026-06-26", "https://arxiv.org/abs/2606.26859", "2606.26859"),
     Paper("HarnessOpt-Bench: Evaluating LLMs at Harness Optimization", "Budgeted and auditable end-to-end harness optimization benchmark.", [], "2026-08-06", "https://arxiv.org/abs/2608.06301", "2608.06301"),
     Paper("Learning Globally Reusable Skills for Coding Agents", "Skill relation graphs, cluster consolidation and replay verification.", [], "2026-08-06", "https://arxiv.org/abs/2608.06153", "2608.06153"),
     Paper("Contextual Information Policy Optimization for Search Agents", "Dense evidence-use credit for search-agent actions.", [], "2026-08-06", "https://arxiv.org/abs/2608.06128", "2608.06128"),

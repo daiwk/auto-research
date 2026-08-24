@@ -4,9 +4,34 @@
   "paper": "2607.24789",
   "dataset": "MovieLens-1M",
   "seed": 42,
-  "baseline": {"hit_at_10": 0.175, "ndcg_at_10": 0.0997484294, "head_share_at_10": 0.4145833333},
-  "method": {"hit_at_10": 0.1916666667, "ndcg_at_10": 0.1200258533, "head_share_at_10": 0.215},
-  "relative": {"hit_at_10_percent": 9.5238095238, "ndcg_at_10_percent": 20.3285646131, "head_share_at_10_percent": -48.1407035176},
+  "baseline": {
+    "hit_at_10": 0.175,
+    "ndcg_at_10": 0.0997484294,
+    "head_share_at_10": 0.4145833333
+  },
+  "method": {
+    "hit_at_10": 0.1916666667,
+    "ndcg_at_10": 0.1200258533,
+    "head_share_at_10": 0.215
+  },
+  "relative": {
+    "hit_at_10_percent": 9.5238095238,
+    "ndcg_at_10_percent": 20.3285646131,
+    "head_share_at_10_percent": -48.1407035176
+  },
   "diagnostic_only": true,
-  "reproduction_fidelity": "core_mechanism"
+  "reproduction_fidelity": "core_mechanism",
+  "manifest_ref": "reproduction:next-vlm",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2607.24789-next-vlm/metrics/movielens-1m-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

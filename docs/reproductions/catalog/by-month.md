@@ -3,12 +3,17 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-08
+- [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。
 - [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
+- [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md)：把冻结多模态 embedding 接入统一资产双塔，并用查询相似度增强搜索画布打分。
+- [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
 - [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - [ConnectionMind](../2608.10187-connectionmind/README.md)：在 user-item-tag-social 异构图上以最短正路径 SFT、规则奖励 GRPO 和路径蒸馏执行多步可解释推荐。
 - [DREAM](../2608.09408-dream/README.md)：把分层用户意图翻译为可校验的推荐策略参数，并以离线模拟和线上反馈双环更新策略记忆。
+- [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md)：让多个业务任务在长短双流的不同层级执行交互查询，而非仅共享底层编码。
 - [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：把用户历史和内容元数据文本化，以 causal LLM、全目录 ranking head、联合语言/排序目标和 reward weighting 做 prefill-only 精排。
+- [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：Yandex 用共享 encoder 串联 SID 生成与 item-level ranking，并从当前 rollout 和真实曝光双路蒸馏高容量 teacher。
 - [DEGR](../2608.04809-degr/README.md)：京东把 cohort 多样性约束与 reward-adaptive ORPO 加入生成式重排，再以多样性 greedy selection 输出列表。
 - [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：以 fresh/delayed 双目标、生命周期 gate 与共享专家联合优化直播推荐，兼顾即时互动和延迟价值。
@@ -20,7 +25,10 @@
 - [HRPO](../2608.00750-hrpo/README.md)：按 Semantic ID 层级分配残差 credit-to-go，使生成式推荐的组相对策略优化能感知前缀质量和后续回报。
 
 ## 2026-07
+- [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md)：通过三元组预训练、GRPO 行为对齐和 ID/多模态门控形成可部署表示。
+- [RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems](../2607.29241-recharness/README.md)：用 bandit 在有限预算下路由候选结构实验，并把验证反馈写回下一轮。
 - [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。
+- [From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation](../2607.27789-feedback-policy/README.md)：从真实反馈发现生成策略，再用双空间关系蒸馏到轻量线上排序器。
 - [HA-MoE](../2607.27577-ha-moe/README.md)：Google Discover 依据 session 内容异构性动态路由多个专长 expert，统一排序开放网页内容。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。
 - [ROCS](../2607.27744-rocs/README.md)：Meta 将请求侧特征只编码一次，把候选相关交互延后到批量评分阶段，以统一服务检索和排序并提升 QPS。
@@ -46,6 +54,8 @@
 - [WHALE](../2607.17017-whale/README.md)：逐层交换 Wukong 特征交互分支与 HSTU 行为序列分支，构成统一可扩展排序模型。
 - [RECAP](../2607.15730-recap/README.md)：维护固定容量流式语义画像，并把历史推荐反馈训练成 GRPO reward，形成画像优化闭环。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用可演化 Memory Hub、文本/SID 混合基础模型和可重建 latent reasoning 同时改进长期用户理解、商品 grounding 与推理效率。
+- [LLM-Based Re-Ranking for Real Estate Search](../2607.14835-real-estate-rerank/README.md)：结合对话需求、房源属性、文本描述与候选集合统计执行 LLM 重排。
+- [Adaptive Ad Load Design for Sponsored Search Markets: Evidence, Theory, and Deployment](../2607.14418-adaptive-ad-load/README.md)：从随机现场实验学习收入—转化曲线，再按请求动态选择广告数量。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选与未来参与度相关的 session reward，并通过模型无关 reward heads 接入多个推荐 surface。
 - [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：离线编码完整历史并缓存固定状态，在线仅融合近期行为以控制广告排序延迟。
 - [TMallGS](../2607.13398-tmallgs/README.md)：以 field-wise QKV、噪声门控、FiLM 和逐层误差监督统一电商搜索异构字段。
@@ -56,28 +66,36 @@
 - [Proximity Features](../2607.12246-proximity-features/README.md)：自适应聚合地理群体行为，为匿名用户提供不依赖持久 ID 的冷启动信号。
 - [SAM](../2607.12714-sam/README.md)：学习购买后兴趣退出及恢复节奏，在注意力层抑制重复推荐。
 - [SlimPer](../2607.12281-slimper/README.md)：通过固定知识库的 Select–Match–Refine 循环替代全序列逐层传播，降低长历史排序的计算和中间状态。
+- [Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap](../2607.26073-guess-where-you-go/README.md)：把时空历史编码为 SID，并以课程训练和长期反馈优化下一 POI 生成。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征组织成配置驱动的生成提示，通过 token 压缩和多种合并策略服务搜索与推荐召回。
 - [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：在线聚类用户或物品表征，并以 cluster-aware sampler 改善训练样本覆盖和头部集中。
 
 ## 2026-06
+- [GenPage: Towards End-to-End Generative Homepage Construction at Netflix](../2606.31031-genpage/README.md)：用一个模型直接生成整页，并以长期用户奖励和业务约束进行后训练。
 - [NEXT](../2607.24789-next-vlm/README.md)：以 VLM 推理 next intent、检索并验证 directed video edges，再通过离线 NKG 支持低延迟在线注入。
 - [CMSL](../2606.28533-cmsl/README.md)：用可学习兴趣 lenses 拆分多兴趣序列，并结合 HSTU 建模不同语义 strand。
 - [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 汇总验证和指标反馈，并通过四级级联阻断静默错误架构。
 - [TokenMinds](../2606.25147-tokenminds/README.md)：共享序列 encoder，同时输出稠密用户向量和分层 SID 用户 token，再以可学习 token embedding 注入生产排序模型。
 - [G2Rec](../2606.20554-g2rec/README.md)：构建可微 soft graph，并联合图结构与生成式双目标学习用户—物品关系。
+- [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md)：统一编码长短 guest journey 与事件时间，在生产搜索中替代手工序列特征。
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：对图边去热门偏置，离线预计算多跳 PPR，再以 cluster index 服务召回。
 - [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。
 
 ## 2026-05
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
 - [Pinterest Ads LLM](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 作为传统广告召回与排序的补充预测器。
+- [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md)：用个性化双视图 LoRA-MoE 分别适配语义和行为，再自适应融合。
 - [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead evaluator 的列表价值蒸馏成在线 dense 生成监督。
+- [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md)：把 query-item 联合序列交给 Linear HSTU，并融合稀疏交叉特征做生成式搜索。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用 LLM Semantic ID 构造语义簇，以非对称对比学习和活动度门控把头部知识迁移到长尾。
 - [HARNESS-LM](../2605.23572-harness-lm/README.md)：以 teacher、L2 对齐和对比精修三阶段训练轻量非对称检索器。
 - [Memento](../2605.24051-memento/README.md)：采用 query-conditioned MMR 在相关性与多样性之间动态权衡，进行候选重排。
+- [TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery](../2605.23702-tubifm/README.md)：以统一 user story 和任务提示让同一模型完成 item、carousel 与 search 排序。
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：通过 domain SFT 生成层级广告属性，构建语义图并约束召回结果对属性扰动的稳定性。
 - [FLUID](../2605.21832-fluid/README.md)：将直播多模态切片离散为 slice/room LUCID，以独立 prefix token 晚融合并逐阶段退掉候选 item ID。
+- [PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation](../2605.21752-pearl-percentile/README.md)：通过多样本对比估计低方差行为 percentile，并扩展到多个直播目标。
 - [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型更新降低单一采样偏差。
+- [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
 - [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 与多价值 MoPO 引导生成式召回发现高潜新品。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 与 expert-guided GRPO 优化天猫搜索生成式检索。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。

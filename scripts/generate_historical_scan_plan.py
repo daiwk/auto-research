@@ -34,6 +34,11 @@ COMPLETED = {
     "2606.26859": "PR #120 / AgentX",
 }
 
+# These fixed batches were completed after the initial scan PR.  Keeping the
+# batch identity (instead of moving papers into B00) makes the historical plan
+# auditable while removing them from the pending queue.
+COMPLETED_BATCHES = {"B01", "B02", "B03"}
+
 
 BATCHES: dict[str, dict] = {
     "B01": {
@@ -131,6 +136,10 @@ def _load(artifacts: list[tuple[str, Path]]) -> list[dict]:
             row["plan_status"] = "implemented-in-current-pr"
             row["implementation_batch"] = "B00"
             row["plan_reason"] = COMPLETED[paper_id]
+        elif paper_id in batch_for and batch_for[paper_id] in COMPLETED_BATCHES:
+            row["plan_status"] = "implemented-in-current-pr"
+            row["implementation_batch"] = batch_for[paper_id]
+            row["plan_reason"] = f"{BATCHES[batch_for[paper_id]]['name']} — completed"
         elif paper_id in batch_for:
             row["plan_status"] = "planned-implementation"
             row["implementation_batch"] = batch_for[paper_id]
@@ -178,7 +187,8 @@ def _render(rows: list[dict]) -> str:
         row = by_id[paper_id]
         lines.append(f"- [{paper_id}](https://arxiv.org/abs/{paper_id}) {row['title']} — {reason}")
     for batch, spec in BATCHES.items():
-        lines.extend(["", f"### {batch}：{spec['name']}", ""])
+        status = "（已完成）" if batch in COMPLETED_BATCHES else ""
+        lines.extend(["", f"### {batch}：{spec['name']}{status}", ""])
         for paper_id in spec["ids"]:
             row = by_id[paper_id]
             labels = "、".join(TRACK_LABELS[track] for track in row["tracks"])

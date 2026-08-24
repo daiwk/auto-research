@@ -9,8 +9,8 @@
 |---|---:|
 | 去重后的新候选 | 3906 |
 | 需要全文审查 | 404 |
-| 当前 PR 已实现 | 4 |
-| 固定后续实现队列 | 70 |
+| 当前 PR 已实现 | 22 |
+| 固定后续实现队列 | 52 |
 | 仍待全文决定、未承诺实现 | 331 |
 | P2 或查询碰撞（保留审计记录） | 3501 |
 
@@ -25,7 +25,7 @@
 - [2607.24789](https://arxiv.org/abs/2607.24789) NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model — PR #120 / NEXT
 - [2606.26859](https://arxiv.org/abs/2606.26859) AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems — PR #120 / AgentX
 
-### B01：8 月工业生成推荐与多模态
+### B01：8 月工业生成推荐与多模态（已完成）
 
 - [2608.21012](https://arxiv.org/abs/2608.21012) From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation — 搜广推与 LLM 应用
 - [2608.18322](https://arxiv.org/abs/2608.18322) Multimedia Asset Personalization via Multimodal Embeddings at Netflix — 搜广推与 LLM 应用
@@ -33,7 +33,7 @@
 - [2608.09634](https://arxiv.org/abs/2608.09634) IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation — 搜广推与 LLM 应用
 - [2608.07989](https://arxiv.org/abs/2608.07989) PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation — 搜广推与 LLM 应用
 
-### B02：7 月工业生成推荐、Agent harness 与搜索
+### B02：7 月工业生成推荐、Agent harness 与搜索（已完成）
 
 - [2607.29241](https://arxiv.org/abs/2607.29241) RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems — 搜广推与 LLM 应用
 - [2607.29213](https://arxiv.org/abs/2607.29213) GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System — 搜广推与 LLM 应用
@@ -43,7 +43,7 @@
 - [2607.26073](https://arxiv.org/abs/2607.26073) Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap — 搜广推与 LLM 应用
 - [2606.31031](https://arxiv.org/abs/2606.31031) GenPage: Towards End-to-End Generative Homepage Construction at Netflix — 搜广推与 LLM 应用
 
-### B03：6–5 月序列建模、生成搜索与多场景排序
+### B03：6–5 月序列建模、生成搜索与多场景排序（已完成）
 
 - [2606.19108](https://arxiv.org/abs/2606.19108) JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling — 搜广推与 LLM 应用
 - [2605.26717](https://arxiv.org/abs/2605.26717) L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation — 搜广推与 LLM 应用
