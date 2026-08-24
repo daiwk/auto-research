@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 228 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 253 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -159,10 +159,61 @@ pytest tests/test_research_module_docs.py
 
 两篇均执行了各自核心训练/控制链路；ConnectionMind 使用论文同款 Delicious 数据并保留 NDCG@10 -7.44% 的负结果，DREAM 的本地正向相关性伴随明显头部偏置，文档同时披露。
 
-## 全部复现（228/228）
+## 2026 历史扫描 B04～B06（19 个 adapter）
+
+19 篇均逐篇核验正文中的生产 A/B 位置，并在 MovieLens-100K 的相同切分、候选集与 seed 42 下运行独立核心机制；线上数字与本地结果严格分栏。
+
+### B04
+
+- `prl-puts` · [PRL-PUTS](2605.16344-prl-puts/README.md)：双头 Q 网络与 Pareto utility 扫描。
+- `ektm` · [Effective Knowledge Transfer for Multi-Task Recommendation Models](2605.05730-ektm/README.md)：任务相似度驱动的多任务知识迁移。
+- `adasid` · [AdaSID](2604.23522-adasid/README.md)：碰撞负载与语义相容性驱动的动态 SID。
+- `unirec-coa` · [UniRec](2604.12234-unirec-coa/README.md)：属性链生成与业务偏好对齐。
+- `uniscale` · [UniScale](2603.24226-uniscale/README.md)：Entire-Space 数据与模型协同扩展。
+- `gatesid` · [GateSID](2603.22916-gatesid/README.md)：冷启动感知的语义/协同门控。
+
+### B05
+
+- `aigq` · [AIGQ](2603.19710-aigq/README.md)：混合 query 生成与 IL-GRPO。
+- `safro` · [SaFRO](2603.19585-safro/README.md)：满意度感知的双重相对策略优化。
+- `sort-ranking` · [SORT](2603.03988-sort-ranking/README.md)：工业 Ranking Transformer 系统优化。
+- `quasid` · [QuaSID](2603.00632-quasid/README.md)：资格感知的 SID 碰撞约束。
+- `gpl-prerank` · [Generative Pseudo-Labeling](2602.20995-gpl-prerank/README.md)：LLM 伪标签增强在线预排序。
+- `ltv-video-ranking` · [Long-term Value Prediction](2602.17058-ltv-video-ranking/README.md)：位置去偏与长期价值建模。
+
+### B06
+
+- `rgalign-rec` · [RGAlign-Rec](2602.12968-rgalign-rec/README.md)：排序器指导的潜在 query 对齐。
+- `linkedin-feed-sr` · [LinkedIn Feed SR](2602.12354-linkedin-feed-sr/README.md)：工业长序列 Feed 排序。
+- `cadet` · [CADET](2602.11410-cadet/README.md)：候选后上下文条件化广告 CTR。
+- `diffureason` · [DiffuReason](2602.09744-diffureason/README.md)：扩散式潜在推理与 GRPO。
+- `sarm` · [SARM](2602.09401-sarm/README.md)：MLLM 语义 anchor 增强直播排序。
+- `ml-dcn` · [ML-DCN](2602.09194-ml-dcn/README.md)：Masked Low-Rank DCN 特征交叉。
+- `rag-qac` · [RAG-QAC](2602.01023-rag-qac/README.md)：RAG 与多目标对齐的查询补全。
+
+## 全部复现（253/253）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `prl-puts` · [PRL-PUTS](2605.16344-prl-puts/README.md) | P2P impressions +0.30% | 双头 Q 网络与 Pareto utility 扫描；NDCG@10 +39.64% |
+| 核心机制 | `ektm` · [Effective Knowledge Transfer for Multi-Task Recommendation Models](2605.05730-ektm/README.md) | eCPM +3.93% | 任务相似度驱动的多任务知识迁移；NDCG@10 +10.98% |
+| 核心机制 | `adasid` · [AdaSID](2604.23522-adasid/README.md) | GPM +1.16% | 碰撞负载与语义相容性驱动的动态 SID；NDCG@10 -6.30% |
+| 核心机制 | `unirec-coa` · [UniRec](2604.12234-unirec-coa/README.md) | GMV +5.60% | 属性链生成与业务偏好对齐；NDCG@10 -4.93% |
+| 核心机制 | `uniscale` · [UniScale](2603.24226-uniscale/README.md) | GMV +2.04% | Entire-Space 数据与模型协同扩展；NDCG@10 -2.20% |
+| 核心机制 | `gatesid` · [GateSID](2603.22916-gatesid/README.md) | GMV +2.60% | 冷启动感知的语义/协同门控；NDCG@10 +34.95% |
+| 核心机制 | `aigq` · [AIGQ](2603.19710-aigq/README.md) | GMV +10.68% | 混合 query 生成与 IL-GRPO；NDCG@10 +8.09% |
+| 核心机制 | `safro` · [SaFRO](2603.19585-safro/README.md) | watch time +0.61% | 满意度感知的双重相对策略优化；NDCG@10 +81.86% |
+| 核心机制 | `sort-ranking` · [SORT](2603.03988-sort-ranking/README.md) | orders +6.35% | 工业 Ranking Transformer 系统优化；NDCG@10 -13.11% |
+| 核心机制 | `quasid` · [QuaSID](2603.00632-quasid/README.md) | GMV-S2 +2.38% | 资格感知的 SID 碰撞约束；NDCG@10 -0.55% |
+| 核心机制 | `gpl-prerank` · [Generative Pseudo-Labeling](2602.20995-gpl-prerank/README.md) | CTR +3.07% | LLM 伪标签增强在线预排序；NDCG@10 +12.84% |
+| 核心机制 | `ltv-video-ranking` · [Long-term Value Prediction](2602.17058-ltv-video-ranking/README.md) | VV +2.49% | 位置去偏与长期价值建模；NDCG@10 +9.73% |
+| 核心机制 | `rgalign-rec` · [RGAlign-Rec](2602.12968-rgalign-rec/README.md) | CTR@3 incremental over QE-Rec +0.13% | 排序器指导的潜在 query 对齐；NDCG@10 -14.03% |
+| 核心机制 | `linkedin-feed-sr` · [LinkedIn Feed SR](2602.12354-linkedin-feed-sr/README.md) | time spent +2.10% | 工业长序列 Feed 排序；NDCG@10 -0.12% |
+| 核心机制 | `cadet` · [CADET](2602.11410-cadet/README.md) | CTR +11.04% | 候选后上下文条件化广告 CTR；NDCG@10 -6.20% |
+| 核心机制 | `diffureason` · [DiffuReason](2602.09744-diffureason/README.md) | ad consumption +1.15% | 扩散式潜在推理与 GRPO；NDCG@10 -6.50% |
+| 核心机制 | `sarm` · [SARM](2602.09401-sarm/README.md) | watch count +1.19% | MLLM 语义 anchor 增强直播排序；NDCG@10 +44.74% |
+| 核心机制 | `ml-dcn` · [ML-DCN](2602.09194-ml-dcn/README.md) | platform-wide CTR +1.89% | Masked Low-Rank DCN 特征交叉；NDCG@10 -2.08% |
+| 核心机制 | `rag-qac` · [RAG-QAC](2602.01023-rag-qac/README.md) | suggestions taken +3.46% | RAG 与多目标对齐的查询补全；NDCG@10 -4.48% |
 | 核心机制 | `dynamic-codebook` · [Dynamic Codebook](2608.21012-dynamic-codebook/README.md) | 消费指标 +0.792%，解码 FLOPs 约 -48% | 动态码本与碰撞码；NDCG@10 -18.73%，保留负结果 |
 | 核心机制 | `netflix-mediafm` · [Netflix MediaFM](2608.18322-netflix-mediafm/README.md) | Search playthrough +0.36% | 冻结多模态特征与查询打分；NDCG@10 -9.52% |
 | 核心机制 | `ogr` · [OGR](2608.17613-ogr/README.md) | Effective Views +1.120% | 统一 SID、列表规划与保守对齐；NDCG@10 +13.25% |

@@ -66122,9 +66122,9 @@
         "recommendation-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B04",
-      "plan_reason": "推荐 RL、知识迁移与 Semantic ID"
+      "plan_reason": "推荐 RL、知识迁移与 Semantic ID — completed"
     },
     {
       "arxiv_id": "2605.07076",
@@ -66395,9 +66395,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B04",
-      "plan_reason": "推荐 RL、知识迁移与 Semantic ID"
+      "plan_reason": "推荐 RL、知识迁移与 Semantic ID — completed"
     },
     {
       "arxiv_id": "2605.05096",
@@ -67408,9 +67408,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B04",
-      "plan_reason": "推荐 RL、知识迁移与 Semantic ID"
+      "plan_reason": "推荐 RL、知识迁移与 Semantic ID — completed"
     },
     {
       "arxiv_id": "2604.23488",
@@ -68635,9 +68635,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B04",
-      "plan_reason": "推荐 RL、知识迁移与 Semantic ID"
+      "plan_reason": "推荐 RL、知识迁移与 Semantic ID — completed"
     },
     {
       "arxiv_id": "2604.11790",
@@ -69612,9 +69612,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B04",
-      "plan_reason": "推荐 RL、知识迁移与 Semantic ID"
+      "plan_reason": "推荐 RL、知识迁移与 Semantic ID — completed"
     },
     {
       "arxiv_id": "2604.16379",
@@ -69649,9 +69649,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B04",
-      "plan_reason": "推荐 RL、知识迁移与 Semantic ID"
+      "plan_reason": "推荐 RL、知识迁移与 Semantic ID — completed"
     },
     {
       "arxiv_id": "2603.22117",
@@ -69849,9 +69849,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B05",
-      "plan_reason": "电商生成、搜索融合与工业排序"
+      "plan_reason": "电商生成、搜索融合与工业排序 — completed"
     },
     {
       "arxiv_id": "2603.19665",
@@ -69888,9 +69888,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B05",
-      "plan_reason": "电商生成、搜索融合与工业排序"
+      "plan_reason": "电商生成、搜索融合与工业排序 — completed"
     },
     {
       "arxiv_id": "2603.19551",
@@ -70521,9 +70521,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B05",
-      "plan_reason": "电商生成、搜索融合与工业排序"
+      "plan_reason": "电商生成、搜索融合与工业排序 — completed"
     },
     {
       "arxiv_id": "2604.20861",
@@ -70631,9 +70631,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B05",
-      "plan_reason": "电商生成、搜索融合与工业排序"
+      "plan_reason": "电商生成、搜索融合与工业排序 — completed"
     },
     {
       "arxiv_id": "2603.00502",
@@ -70796,9 +70796,9 @@
         "recommendation-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B05",
-      "plan_reason": "电商生成、搜索融合与工业排序"
+      "plan_reason": "电商生成、搜索融合与工业排序 — completed"
     },
     {
       "arxiv_id": "2603.13253",
@@ -70980,9 +70980,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B05",
-      "plan_reason": "电商生成、搜索融合与工业排序"
+      "plan_reason": "电商生成、搜索融合与工业排序 — completed"
     },
     {
       "arxiv_id": "2602.15508",
@@ -71111,9 +71111,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2602.12806",
@@ -71205,9 +71205,9 @@
         "recommendation-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2602.12041",
@@ -71262,9 +71262,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2604.20848",
@@ -71355,9 +71355,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2602.09401",
@@ -71375,9 +71375,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2602.09387",
@@ -71433,9 +71433,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2602.08837",
@@ -71745,9 +71745,9 @@
         "industrial-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B06",
-      "plan_reason": "2 月召回、广告、长序列与 LLM 排序"
+      "plan_reason": "2 月召回、广告、长序列与 LLM 排序 — completed"
     },
     {
       "arxiv_id": "2602.00899",
