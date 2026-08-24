@@ -1,0 +1,61 @@
+{
+  "paper": {
+    "title": "Once Generated, Ranked"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "ogr",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "Once Generated, Ranked",
+    "hit_at_10": 0.1,
+    "ndcg_at_10": 0.06116124457163518,
+    "fresh_hit_at_10": 0.047619047619047616,
+    "head_share_at_10": 0.08318181818181818
+  },
+  "relative": {
+    "hit_at_10_percent": -8.333333333333325,
+    "ndcg_at_10_percent": 13.250096843220586,
+    "fresh_hit_at_10_percent": 50.0,
+    "head_share_at_10_percent": -65.0095602294455
+  },
+  "stages": {
+    "mechanism": {
+      "mode": "ogr",
+      "fitted": true,
+      "state_keys": [
+        "code_prior",
+        "code_width",
+        "codes",
+        "domain_eye",
+        "fitted"
+      ]
+    },
+    "validation_selected_alpha": 0.7000000000000001,
+    "validation": {
+      "hit_at_10": 0.11818181818181818,
+      "ndcg_at_10": 0.07150456413789076,
+      "fresh_hit_at_10": 0.14035087719298245,
+      "head_share_at_10": 0.085
+    }
+  },
+  "paper_results": {
+    "effective_views_percent": 1.12,
+    "comments_percent": 2.954,
+    "likes_percent": 0.505,
+    "forwards_percent": 1.255
+  },
+  "scope": "在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。"
+}

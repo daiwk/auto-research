@@ -1,0 +1,62 @@
+{
+  "paper": {
+    "title": "Query-Conditioned Generative Search"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "qgs",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "Query-Conditioned Generative Search",
+    "hit_at_10": 0.09545454545454546,
+    "ndcg_at_10": 0.05439846102377432,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.20136363636363636
+  },
+  "relative": {
+    "hit_at_10_percent": -12.499999999999991,
+    "ndcg_at_10_percent": 0.7276915669849657,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -15.296367112810712
+  },
+  "stages": {
+    "mechanism": {
+      "mode": "qgs",
+      "fitted": true,
+      "state_keys": [
+        "align",
+        "code_prior",
+        "code_width",
+        "codes",
+        "domain_eye",
+        "fitted",
+        "semantic"
+      ]
+    },
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.11818181818181818,
+      "ndcg_at_10": 0.06314909970072027,
+      "fresh_hit_at_10": 0.05263157894736842,
+      "head_share_at_10": 0.20545454545454545
+    }
+  },
+  "paper_results": {
+    "ctr_percent": 0.62,
+    "click_search_ratio_percent": 0.38,
+    "pv_duration_percent": 3.55
+  },
+  "scope": "在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。"
+}

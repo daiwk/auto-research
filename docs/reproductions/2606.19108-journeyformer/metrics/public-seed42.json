@@ -1,0 +1,56 @@
+{
+  "paper": {
+    "title": "JourneyFormer"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "journeyformer",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "JourneyFormer",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05251199324314045,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.21181818181818182
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": -2.7654135904513173,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -10.898661567877628
+  },
+  "stages": {
+    "mechanism": {
+      "mode": "journeyformer",
+      "fitted": true,
+      "state_keys": [
+        "domain_eye",
+        "fitted"
+      ]
+    },
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.13636363636363635,
+      "ndcg_at_10": 0.06998047662575506,
+      "fresh_hit_at_10": 0.07017543859649122,
+      "head_share_at_10": 0.21954545454545454
+    }
+  },
+  "paper_results": {
+    "bookers_percent": 0.55,
+    "booked_nights_percent": 0.82
+  },
+  "scope": "在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。"
+}

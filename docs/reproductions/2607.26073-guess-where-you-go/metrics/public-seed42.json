@@ -1,0 +1,60 @@
+{
+  "paper": {
+    "title": "Guess Where You Go"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "guess-where-you-go",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "Guess Where You Go",
+    "hit_at_10": 0.10454545454545454,
+    "ndcg_at_10": 0.05907328861279427,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.22772727272727272
+  },
+  "relative": {
+    "hit_at_10_percent": -4.166666666666668,
+    "ndcg_at_10_percent": 9.38390320705026,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -4.206500956022948
+  },
+  "stages": {
+    "mechanism": {
+      "mode": "next_poi",
+      "fitted": true,
+      "state_keys": [
+        "code_prior",
+        "code_width",
+        "codes",
+        "domain_eye",
+        "fitted"
+      ]
+    },
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.12727272727272726,
+      "ndcg_at_10": 0.06726030033415753,
+      "fresh_hit_at_10": 0.07017543859649122,
+      "head_share_at_10": 0.21727272727272728
+    }
+  },
+  "paper_results": {
+    "p_ctr_percent": 5.83,
+    "u_ctr_percent": 6.2,
+    "negative_feedback_percent": -11.11
+  },
+  "scope": "在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。"
+}

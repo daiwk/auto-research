@@ -723,9 +723,9 @@
         "recsys-general"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B01",
-      "plan_reason": "8 月工业生成推荐与多模态"
+      "plan_reason": "8 月工业生成推荐与多模态 — completed"
     },
     {
       "arxiv_id": "2608.20999",
@@ -4924,9 +4924,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B01",
-      "plan_reason": "8 月工业生成推荐与多模态"
+      "plan_reason": "8 月工业生成推荐与多模态 — completed"
     },
     {
       "arxiv_id": "2608.18312",
@@ -5813,9 +5813,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B01",
-      "plan_reason": "8 月工业生成推荐与多模态"
+      "plan_reason": "8 月工业生成推荐与多模态 — completed"
     },
     {
       "arxiv_id": "2608.17605",
@@ -18224,9 +18224,9 @@
         "generative-recommendation"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B01",
-      "plan_reason": "8 月工业生成推荐与多模态"
+      "plan_reason": "8 月工业生成推荐与多模态 — completed"
     },
     {
       "arxiv_id": "2608.09628",
@@ -20437,9 +20437,9 @@
         "recsys-general"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B01",
-      "plan_reason": "8 月工业生成推荐与多模态"
+      "plan_reason": "8 月工业生成推荐与多模态 — completed"
     },
     {
       "arxiv_id": "2608.07987",
@@ -32141,9 +32141,9 @@
         "recsys-general"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2607.29213",
@@ -32165,9 +32165,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2607.29211",
@@ -33761,9 +33761,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2607.27773",
@@ -43723,9 +43723,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2607.14713",
@@ -44037,9 +44037,9 @@
         "generative-recommendation"
       ],
       "full_text_review_required": false,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2607.14399",
@@ -45435,9 +45435,9 @@
         "recsys-general"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2607.11715",
@@ -51210,9 +51210,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B02",
-      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索"
+      "plan_reason": "7 月工业生成推荐、Agent harness 与搜索 — completed"
     },
     {
       "arxiv_id": "2606.30923",
@@ -55045,9 +55045,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B03",
-      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序"
+      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序 — completed"
     },
     {
       "arxiv_id": "2606.19057",
@@ -63149,9 +63149,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B03",
-      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序"
+      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序 — completed"
     },
     {
       "arxiv_id": "2605.26554",
@@ -63441,9 +63441,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B03",
-      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序"
+      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序 — completed"
     },
     {
       "arxiv_id": "2605.25360",
@@ -63732,9 +63732,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B03",
-      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序"
+      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序 — completed"
     },
     {
       "arxiv_id": "2605.23657",
@@ -64095,9 +64095,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B03",
-      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序"
+      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序 — completed"
     },
     {
       "arxiv_id": "2605.21482",
@@ -64657,9 +64657,9 @@
         "production-evidence"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B03",
-      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序"
+      "plan_reason": "6–5 月序列建模、生成搜索与多场景排序 — completed"
     },
     {
       "arxiv_id": "2605.17497",

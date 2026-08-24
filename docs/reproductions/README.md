@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 210 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 228 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -78,6 +78,27 @@ pytest tests/test_research_module_docs.py
 - `next-vlm` · [NEXT](2607.24789-next-vlm/README.md)：Meta 用 8B VLM 构造 item→intent→item 的 directed NKG，并把推理移到离线、线上只注入验证边。
 - `onemodel` · [OneModel](2608.18606-onemodel/README.md)：小红书以共享长序列 backbone、场景门控和分层用户表征统一推荐、广告与商家排序，并披露三个生产场景的量化 A/B。
 - `rare` · [RARE](2608.21236-rare/README.md)：把表征编辑方向投影到 MoE router 零空间，并在下游保护层校正传播漂移，保持原专家路径。
+
+## 2026 历史扫描 B01～B03（18 个 adapter）
+
+- `dynamic-codebook` · [Dynamic Single-Level Large Semantic Codebook](2608.21012-dynamic-codebook/README.md)：曝光加权动态大码本、独立碰撞码和短 SID 解码。
+- `netflix-mediafm` · [Netflix Multimedia Asset Personalization](2608.18322-netflix-mediafm/README.md)：冻结多模态特征、统一资产双塔和查询感知打分。
+- `ogr` · [Once Generated, Ranked](2608.17613-ogr/README.md)：统一语义-协同 ID、列表规划与保守策略对齐。
+- `inthq` · [IntHQ](2608.09634-inthq/README.md)：长短双流上的分层任务交互查询。
+- `pushdualgen` · [PushDualGen](2608.07989-pushdualgen/README.md)：先生成 SID，再按需生成可解释 copy。
+- `recharness` · [RecHarness](2607.29241-recharness/README.md)：用 bandit 在有限预算下路由多轮结构实验。
+- `gala` · [GALA](2607.29213-gala/README.md)：多模态三元组预训练、GRPO 行为对齐和 ID 门控融合。
+- `feedback-policy` · [Feedback-Grounded Policy Discovery](2607.27789-feedback-policy/README.md)：从反馈发现生成策略并蒸馏到线上轻量排序器。
+- `real-estate-rerank` · [LLM-Based Re-Ranking for Real Estate Search](2607.14835-real-estate-rerank/README.md)：结合对话意图、房源文本和候选集合统计重排。
+- `adaptive-ad-load` · [Adaptive Ad Load Design](2607.14418-adaptive-ad-load/README.md)：在收入与转化约束下动态选择广告数量。
+- `guess-where-you-go` · [Guess Where You Go](2607.26073-guess-where-you-go/README.md)：时空 SID、课程训练和长期反馈策略优化。
+- `genpage` · [GenPage](2606.31031-genpage/README.md)：以单模型生成整页并用长期奖励后训练。
+- `journeyformer` · [JourneyFormer](2606.19108-journeyformer/README.md)：统一编码长期与短期 Airbnb guest journey。
+- `l2rec` · [L2Rec](2605.26717-l2rec/README.md)：个性化双视图 LoRA-MoE 与跨视图融合。
+- `qgs` · [QGS](2605.25514-qgs/README.md)：query-item 联合序列、Linear HSTU 和生成式搜索。
+- `tubifm` · [TubiFM](2605.23702-tubifm/README.md)：同一 user-story foundation model 统一三种排序任务。
+- `pearl-percentile` · [PEARL](2605.21752-pearl-percentile/README.md)：多样本对比得到低方差、低偏置的行为 percentile。
+- `dadf` · [DADF](2605.17863-dadf/README.md)：冻结基模型并学习分布感知的乘性残差校正。
 
 ## 本轮全域 P0 补齐（19 个 adapter）
 
@@ -138,10 +159,28 @@ pytest tests/test_research_module_docs.py
 
 两篇均执行了各自核心训练/控制链路；ConnectionMind 使用论文同款 Delicious 数据并保留 NDCG@10 -7.44% 的负结果，DREAM 的本地正向相关性伴随明显头部偏置，文档同时披露。
 
-## 全部复现（210/210）
+## 全部复现（228/228）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `dynamic-codebook` · [Dynamic Codebook](2608.21012-dynamic-codebook/README.md) | 消费指标 +0.792%，解码 FLOPs 约 -48% | 动态码本与碰撞码；NDCG@10 -18.73%，保留负结果 |
+| 核心机制 | `netflix-mediafm` · [Netflix MediaFM](2608.18322-netflix-mediafm/README.md) | Search playthrough +0.36% | 冻结多模态特征与查询打分；NDCG@10 -9.52% |
+| 核心机制 | `ogr` · [OGR](2608.17613-ogr/README.md) | Effective Views +1.120% | 统一 SID、列表规划与保守对齐；NDCG@10 +13.25% |
+| 核心机制 | `inthq` · [IntHQ](2608.09634-inthq/README.md) | UVCTR +1.60% | 分层任务查询；NDCG@10 -7.38% |
+| 核心机制 | `pushdualgen` · [PushDualGen](2608.07989-pushdualgen/README.md) | 有效播放率 +8.50%、不满意率 -37.70% | SID→可选 copy；NDCG@10 +1.19% |
+| 核心机制 | `recharness` · [RecHarness](2607.29241-recharness/README.md) | ADVV +2.084%、Revenue +0.534% | UCB 预算路由；NDCG@10 -9.02% |
+| 核心机制 | `gala` · [GALA](2607.29213-gala/README.md) | 订单量 +0.55% | 多模态行为对齐门控；NDCG@10 -5.60% |
+| 核心机制 | `feedback-policy` · [Feedback Policy](2607.27789-feedback-policy/README.md) | Revenue +4.506%、ADVV +4.621% | 反馈策略与保守增量；NDCG@10 +2.76% |
+| 核心机制 | `real-estate-rerank` · [Real Estate Re-ranker](2607.14835-real-estate-rerank/README.md) | CTR +5.3%、预约看房 +4.8% | 文本/属性集合重排；NDCG@10 -8.21% |
+| 核心机制 | `adaptive-ad-load` · [Adaptive Ad Load](2607.14418-adaptive-ad-load/README.md) | Revenue +36.8%、Conversion -1.1% | 受约束广告负载；NDCG@10 持平 |
+| 核心机制 | `guess-where-you-go` · [Gwhere](2607.26073-guess-where-you-go/README.md) | P-CTR +5.83%、U-CTR +6.20% | 时空 SID 下一 POI；NDCG@10 +9.38% |
+| 核心机制 | `genpage` · [GenPage](2606.31031-genpage/README.md) | 核心参与度 +0.24%、时延 -20% | 页面联合效用；NDCG@10 -3.98% |
+| 核心机制 | `journeyformer` · [JourneyFormer](2606.19108-journeyformer/README.md) | Bookers +0.55%、Booked Nights +0.82% | 长短 journey 时间编码；NDCG@10 -2.77% |
+| 核心机制 | `l2rec` · [L2Rec](2605.26717-l2rec/README.md) | CTR +9.24%、Reply Rate +3.15% | 双视图个性化适配；NDCG@10 -5.04% |
+| 核心机制 | `qgs` · [QGS](2605.25514-qgs/README.md) | CTR +0.62%、PV Duration +3.55% | query-conditioned SID 打分；NDCG@10 +0.73% |
+| 核心机制 | `tubifm` · [TubiFM](2605.23702-tubifm/README.md) | Search TVT +3.9%、Carousel TVT +0.30% | 统一三任务模型；NDCG@10 +0.45% |
+| 核心机制 | `pearl-percentile` · [PEARL](2605.21752-pearl-percentile/README.md) | Watch Duration +2.10%、Report Rate -6.91% | 多样本 percentile；NDCG@10 -10.65% |
+| 核心机制 | `dadf` · [DADF](2605.17863-dadf/README.md) | Time Spent +0.649%、生产 MAE -12.57% | 冻结基模乘性残差；NDCG@10 持平 |
 | 核心机制 | `connectionmind` · [ConnectionMind](2608.10187-connectionmind/README.md) | Meta 数千万用户多周 A/B：曝光 +0.33%、观看时长 +0.43%、视频 session +0.22% | Delicious-2K 路径 SFT→GRPO→蒸馏混合推理；NDCG@10 -7.44%，保留负结果 |
 | 核心机制 | `dream` · [DREAM](2608.09408-dream/README.md) | 淘宝精排+重排 IPV +2.71%、Core IPV +3.06%、GMV +1.31% | 意图→策略记忆→安全编译→双环门控；NDCG@10 +39.36%，但 head share +94.37% |
 | 核心机制 | `gas` · [GAS](2608.12209-gas/README.md) | 纯多模态：from-scratch Overall 47.25→48.25；推理开销 0% | MoT + NEP + EMA；Fashion-MNIST QA 61.1%→63.5%，部署参数开销 0% |

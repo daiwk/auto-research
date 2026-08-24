@@ -9,12 +9,17 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md) | Kuaishou Technology，2026-08-21 | 未发现官方代码 | `dynamic-codebook` |
 | 生成、排序与冷启动 | [OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking](../2608.18606-onemodel/README.md) | Xiaohongshu，2026-08-19 | 未发现官方代码 | `onemodel` |
+| 内容理解、审核与风险控制 | [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md) | Netflix，2026-08-18 | 未发现官方代码 | `netflix-mediafm` |
+| 多阶段排序与混排 | [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md) | Kuaishou Technology，2026-08-18 | 未发现官方代码 | `ogr` |
 | 生成、排序与冷启动 | [Sona Technical Report](../2608.11015-sona/README.md) | Yandex，2026-08-11 | 未发现官方代码 | `sona` |
 | 大模型能力与推荐融合 | [ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning](../2608.10187-connectionmind/README.md) | Michigan State University，2026-08-10 | 未发现官方代码 | `connectionmind` |
 | 大模型能力与推荐融合 | [DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models](../2608.09408-dream/README.md) | Taobao & Tmall Group / Alibaba，2026-08-10 | 未发现官方代码 | `dream` |
 | 大模型能力与推荐融合 | [GenRec: An LLM-Backed Recommendation Ranker at Netflix](../2608.10257-genrec-netflix/README.md) | Netflix，2026-08-10 | 未发现官方代码 | `genrec-netflix` |
+| 生成、排序与冷启动 | [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md) | Amap / Alibaba，2026-08-10 | 未发现官方代码 | `inthq` |
 | 生成、排序与冷启动 | [MetaStrategy: Generative Ranking with Executable LLM Strategies](../2608.09440-metastrategy/README.md) | Alibaba / Taobao，2026-08-10 | 未发现官方代码 | `metastrategy` |
+| 生成、排序与冷启动 | [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md) | Kuaishou Technology，2026-08-08 | 未发现官方代码 | `pushdualgen` |
 | 生成、排序与冷启动 | [Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation](../2608.06213-gryphon-v2/README.md) | Yandex，2026-08-06 | 未发现官方代码 | `gryphon-v2` |
 | 多阶段排序与混排 | [DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging](../2608.04809-degr/README.md) | JD.com，2026-08-05 | 未发现官方代码 | `degr` |
 | 多阶段排序与混排 | [Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting](../2608.04455-twitch-mor/README.md) | Twitch，2026-08-05 | 未发现官方代码 | `twitch-mor` |
@@ -24,8 +29,11 @@
 | 训练目标与决策优化 | [Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation](../2608.02738-kgd/README.md) | Xiamen University / Shopee，2026-08-03 | [已开源](https://github.com/FuCongResearchSquad/KGD4REC) | `kgd` |
 | 多阶段排序与混排 | [SPEAR: Selection-aware Personalized End-to-end Adaptive Rewriting and Retrieval for Community Search](../2608.01738-spear/README.md) | Dewu，2026-08-03 | [已开源](https://github.com/mallocagi1-cell/spear) | `spear` |
 | 生成、排序与冷启动 | [Hierarchical Residual Policy Optimization for Generative Recommendations](../2608.00750-hrpo/README.md) | City University of Hong Kong / Kuaishou，2026-08-01 | [已开源](https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO) | `hrpo` |
+| 内容理解、审核与风险控制 | [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md) | Rajax Network Technology / Taobao Shangou / Alibaba，2026-07-31 | 未发现官方代码 | `gala` |
+| 训练目标与决策优化 | [RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems](../2607.29241-recharness/README.md) | Huazhong Agricultural University (Kuaishou internship)，2026-07-31 | [已开源](https://github.com/6lyc/RecHarness) | `recharness` |
 | 大模型能力与推荐融合 | [Building a User Foundation Model for the Open Web](../2607.28019-open-web-ufm/README.md) | Teads，2026-07-30 | 未发现官方代码 | `open-web-ufm` |
 | 生成、排序与冷启动 | [CCFormer: Efficient Cross-Field Interaction and Hierarchical Sequence Compression for Industrial Recommendation at Tencent](../2607.28070-ccformer/README.md) | Tencent Platform and Content Group，2026-07-30 | 未发现官方代码 | `ccformer` |
+| 训练目标与决策优化 | [From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation](../2607.27789-feedback-policy/README.md) | Huazhong Agricultural University (Kuaishou internship)，2026-07-30 | 未发现官方代码 | `feedback-policy` |
 | 生成、排序与冷启动 | [Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study](../2607.27577-ha-moe/README.md) | Google / Discover，2026-07-30 | 未发现官方代码 | `ha-moe` |
 | 生成、排序与冷启动 | [ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation](../2607.27744-rocs/README.md) | Meta AI，2026-07-30 | [已开源](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) | `rocs` |
 | 训练目标与决策优化 | [ASARL: Autonomous Social-Aware Relevance Learning for QQ Search](../2607.26593-asarl/README.md) | Tencent PCG，2026-07-29 | 未发现官方代码 | `asarl` |
@@ -50,6 +58,8 @@
 | 生成、排序与冷启动 | [WHALE: A Scalable Unified Model for Recommendation with Wukong-HSTU Architecture](../2607.17017-whale/README.md) | Meta Platforms, Inc.，2026-07-19 | 未发现官方代码 | `whale` |
 | 大模型能力与推荐融合 | [RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation](../2607.15730-recap/README.md) | Kuaishou Technology / USTC，2026-07-17 | 未发现官方代码 | `recap` |
 | 大模型能力与推荐融合 | [RecGPT-V3 Technical Report](../2607.15591-recgpt-v3/README.md) | Alibaba / Taobao，2026-07-17 | 未发现官方代码 | `recgpt-v3` |
+| 多阶段排序与混排 | [LLM-Based Re-Ranking for Real Estate Search](../2607.14835-real-estate-rerank/README.md) | QuintoAndar，2026-07-16 | 未发现官方代码 | `real-estate-rerank` |
+| 训练目标与决策优化 | [Adaptive Ad Load Design for Sponsored Search Markets: Evidence, Theory, and Deployment](../2607.14418-adaptive-ad-load/README.md) | University of Washington，2026-07-15 | 未发现官方代码 | `adaptive-ad-load` |
 | 生成、排序与冷启动 | [Long-History User Transformers for Real-Time Ad Ranking](../2607.14331-long-history-transformer/README.md) | Yandex，2026-07-15 | 未发现官方代码 | `long-history-transformer` |
 | 训练目标与决策优化 | [Long-term User Engagement Optimization through Model-agnostic Downstream Rewards Learning](../2607.14192-downstream-rewards/README.md) | Pinterest，2026-07-15 | 未发现官方代码 | `downstream-rewards` |
 | 生成、排序与冷启动 | [TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search](../2607.13398-tmallgs/README.md) | Taobao & Tmall Group of Alibaba，2026-07-15 | 未发现官方代码 | `tmallgs` |
@@ -60,22 +70,30 @@
 | 生成、排序与冷启动 | [Not Only NTP: Extending Training Signal Coverage for Generative Recommendation](../2607.12277-nontp/README.md) | Meituan，2026-07-14 | 未发现官方代码 | `nontp` |
 | 生成、排序与冷启动 | [Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb](../2607.12246-proximity-features/README.md) | Airbnb，2026-07-14 | 未发现官方代码 | `proximity-features` |
 | 生成、排序与冷启动 | [SlimPer: Make Personalization Model Slim and Smart](../2607.12281-slimper/README.md) | Meta Platforms, Inc.，2026-07-14 | 未发现官方代码 | `slimper` |
+| 生成、排序与冷启动 | [Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap](../2607.26073-guess-where-you-go/README.md) | Amap / Alibaba，2026-07-13 | [已开源](https://github.com/alibaba/SimCIT) | `guess-where-you-go` |
 | 训练目标与决策优化 | [Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval](../2607.00448-cluster-goobs/README.md) | Meta，2026-07-01 | 未发现官方代码 | `cluster-goobs` |
 | 大模型能力与推荐融合 | [Prompt Generation Technical Report](../2607.11326-prompt-generation/README.md) | Alibaba / Taobao Search，2026-07 | 未发现官方代码 | `prompt-generation` |
+| 多阶段排序与混排 | [GenPage: Towards End-to-End Generative Homepage Construction at Netflix](../2606.31031-genpage/README.md) | Netflix，2026-06-30 | 未发现官方代码 | `genpage` |
 | 大模型能力与推荐融合 | [NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model](../2607.24789-next-vlm/README.md) | Meta，2026-06-27 | 未发现官方代码 | `next-vlm` |
 | 生成、排序与冷启动 | [CMSL: Constructive Multi-Sequence Learning for Recommendation Systems](../2606.28533-cmsl/README.md) | Meta，2026-06-26 | 未发现官方代码 | `cmsl` |
 | Serving 与研究基础设施 | [NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems](../2606.27243-nova/README.md) | Tencent，2026-06-25 | 未发现官方代码 | `nova` |
 | 大模型能力与推荐融合 | [TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems](../2606.25147-tokenminds/README.md) | Google DeepMind / YouTube，2026-06-23 | 未发现官方代码 | `tokenminds` |
 | 生成、排序与冷启动 | [Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation](../2606.20554-g2rec/README.md) | Meta，2026-06-18 | 未发现官方代码 | `g2rec` |
+| 生成、排序与冷启动 | [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md) | Airbnb，2026-06-17 | 未发现官方代码 | `journeyformer` |
 | Serving 与研究基础设施 | [RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation](../2606.18379-rankgraph2/README.md) | Meta，2026-06-16 | 未发现官方代码 | `rankgraph2` |
 | Serving 与研究基础设施 | [EvoRec: Self-Evolving Agentic Recommender Systems](../2606.28368-evorec/README.md) | Alibaba International Digital Commerce Group，2026-06-15 | 未发现官方代码 | `evorec` |
 | 训练目标与决策优化 | [Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models](../2605.29755-rec-distill/README.md) | ByteDance / Douyin / TikTok，2026-05-28 | 未发现官方代码 | `rec-distill` |
+| 大模型能力与推荐融合 | [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md) | NetEase Cloud Music，2026-05-26 | 未发现官方代码 | `l2rec` |
 | 生成、排序与冷启动 | [DeGRe: Listwise Generative Reranking with Offline Lookahead Distillation](../2605.25749-degre/README.md) | Alibaba Group / Zhejiang University，2026-05-25 | 未发现官方代码 | `degre` |
+| 生成、排序与冷启动 | [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md) | University of Science and Technology of China / Alibaba，2026-05-25 | 未发现官方代码 | `qgs` |
 | 大模型能力与推荐融合 | [From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs](../2605.23310-akt-rec/README.md) | Alibaba Group / Peking University，2026-05-22 | 未发现官方代码 | `akt-rec` |
 | 大模型能力与推荐融合 | [HARNESS-LM: A Three-Phase Training Recipe for Harnessing SLMs in Sponsored Search Retrieval](../2605.23572-harness-lm/README.md) | Microsoft AI / Bing Ads，2026-05-22 | 未发现官方代码 | `harness-lm` |
 | 生成、排序与冷启动 | [Memento: Personalized RAG-Style Long-Retention Data Scaling for Online Ads Recommendation](../2605.24051-memento/README.md) | Meta，2026-05-22 | 未发现官方代码 | `memento` |
+| 大模型能力与推荐融合 | [TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery](../2605.23702-tubifm/README.md) | Tubi，2026-05-22 | 未发现官方代码 | `tubifm` |
 | 大模型能力与推荐融合 | [FLUID: From Ephemeral IDs to Multimodal Semantic Codes for Industrial-Scale Livestreaming Recommendation](../2605.21832-fluid/README.md) | TikTok / ByteDance，2026-05-20 | 未发现官方代码 | `fluid` |
+| 训练目标与决策优化 | [PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation](../2605.21752-pearl-percentile/README.md) | TikTok，2026-05-20 | 未发现官方代码 | `pearl-percentile` |
 | 训练目标与决策优化 | [Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation](../2605.19651-mdcns/README.md) | 论文作者团队（原文未标注公司），2026-05-19 | [已开源](https://github.com/Lyz103/SIGIR26-MDCNS) | `mdcns` |
+| 训练目标与决策优化 | [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md) | Kuaishou Technology，2026-05-18 | [已开源](https://github.com/liuzhao09/DADF) | `dadf` |
 | 生成、排序与冷启动 | [Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search](../2605.17994-growthgr/README.md) | Alibaba Group / Taobao & Tmall，2026-05-18 | 未发现官方代码 | `growthgr` |
 | 生成、排序与冷启动 | [Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL](../2605.14434-cq-sid/README.md) | Alibaba Taobao & Tmall Group，2026-05-14 | 未发现官方代码 | `cq-sid` |
 | 大模型能力与推荐融合 | [RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation](../2605.04726-recgpt-mobile/README.md) | Alibaba / Taobao，2026-05-06 | 未发现官方代码 | `recgpt-mobile` |

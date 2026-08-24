@@ -1,0 +1,57 @@
+{
+  "paper": {
+    "title": "DADF"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "dadf",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "shared transition + content baseline",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "DADF",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 0.0,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": 0.0
+  },
+  "stages": {
+    "mechanism": {
+      "mode": "dadf",
+      "fitted": true,
+      "state_keys": [
+        "correction",
+        "domain_eye",
+        "fitted"
+      ]
+    },
+    "validation_selected_alpha": 0.1,
+    "validation": {
+      "hit_at_10": 0.15,
+      "ndcg_at_10": 0.07426696311942374,
+      "fresh_hit_at_10": 0.07017543859649122,
+      "head_share_at_10": 0.25136363636363634
+    }
+  },
+  "paper_results": {
+    "time_spent_percent": 0.649,
+    "production_mae_percent": -12.57
+  },
+  "scope": "在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。"
+}
