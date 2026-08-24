@@ -16,7 +16,7 @@
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
 - 分类浏览：[按机构/公司/学校](catalog/by-organization.md) ·
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
-- [论文谱系与缺口](lineage.md)：系统审计已覆盖主干、P1 缺口和下一步评测前置条件。
+- [论文谱系与边界](lineage.md)：系统审计已覆盖主干、静态能力收口和后续评测边界。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
 - [DPO](2305.18290-dpo/README.md)：reference-relative 偏好分类，无 reward model。
 - [KTO](2402.01306-kto/README.md)：只需单条 desirable/undesirable 标签的前景理论目标。

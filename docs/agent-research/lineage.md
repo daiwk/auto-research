@@ -28,7 +28,7 @@
 | 零数据多 Agent 课程 | Agent0 | 已实现 | 自生成任务、多 executor 投票与能力边界课程 |
 | Step-level Agent RL 与公共评测 | Agent-R1、CAMEL、ToolBench、GAIA | 已实现 | transition-level context/credit、多 Agent role-play、工具指令检索、三级通用助理 mini-suite |
 
-## 下一阶段缺口
+## 静态能力收口
 
 本轮复查新增的 8 个算法 P0 已全部实现：DeepResearcher、ReTool、ToolRL、SAGE、
 MemSkill、Memento-Skills、SEARL 和 Agent0；它们补齐 deep research、工具 RL、技能固化、
@@ -38,15 +38,18 @@ MemSkill、Memento-Skills、SEARL 和 Agent0；它们补齐 deep research、工�
 本轮 4 个 P1 也已实现：Agent-R1、CAMEL、ToolBench/ToolLLM 与 GAIA；GAIA 使用
 `gaia-mini` 验证公开协议与工具证据链，不冒充官方 466 题 leaderboard。
 
-| 环境 | 当前状态 | 下一步 |
+| 环境 | 当前状态 | 完成证据或边界 |
 |---|---|---|
-| Agent Lightning LLM RL | transition/credit 机制已实现 | 连接可训练 LLM policy 与统一多轮 controller |
+| Agent Lightning LLM RL | 已连接可训练 policy | [PR #116](https://github.com/daiwk/auto-research/pull/116)：SmolLM2 pairwise update、transition credit 与真实代码 executor |
+| Agent 组合式 evolve | 已完成 | [PR #117](https://github.com/daiwk/auto-research/pull/117)：memory/planner/tool/critic/policy/recovery/capacity 七轴组合和三 seed 晋级 |
+| 官方 SWE-bench Lite、ToolHop 全集、真实浏览器 | 用户已延后 | 需要官方容器、模型调用预算、隔离 sandbox、网络与凭据策略；不冒充已接入 |
 
 ## 当前结论
 
 经典主干已覆盖思考/行动、搜索、反思、神经符号与专家模型编排、多 Agent、长期记忆、
-虚拟上下文、Planner RL 和真实代码执行。`swebench-local` 的受控 fixture 边界保持显式；
-下一优先级只保留可训练 LLM executor。
+虚拟上下文、Planner RL、可训练 LLM policy 和真实代码执行。`swebench-local` 的受控
+fixture 边界保持显式；当前没有尚未实现的静态 P0/P1，新的工作来自动态论文扫描，或由
+用户恢复上述延后环境。
 
 本轮系统复查补齐了三个互补分支：LOOP 的长时程 leave-one-out PPO 与旧轨迹复用、
 WebAgent-R1 的上下文压缩和并行完整轨迹 M-GRPO、MUA-RL 的模拟用户澄清与真实工具
