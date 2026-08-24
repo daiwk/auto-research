@@ -190,8 +190,14 @@ class AgentEvolutionEvaluator:
             "benchmark": self.benchmark,
             "episodes": self.episodes,
             "seeds": list(self.seeds),
-            "genome_axes": ["memory", "planner", "tool_policy", "critic", "capacity"],
-            "selection": "joint_success - 0.02 * average_cost + 0.01 * reuse_rate",
+            "genome_axes": [
+                "memory", "planner", "tool_policy", "critic", "policy",
+                "failure_recovery", "capacity",
+            ],
+            "selection": (
+                "joint_success - 0.02 * average_cost + 0.01 * reuse_rate "
+                "+ 0.01 * recovery_rate"
+            ),
         }
 
     def evaluate(self, trial_id, generation, parent_id, genome,
@@ -203,12 +209,14 @@ class AgentEvolutionEvaluator:
                 values["joint_success"]
                 - 0.02 * values["average_cost"]
                 + 0.01 * values["reuse_rate"]
+                + 0.01 * values["recovery_rate"]
             )
         validation = _mean(rows)
         validation["primary"] = (
             validation["joint_success"]
             - 0.02 * validation["average_cost"]
             + 0.01 * validation["reuse_rate"]
+            + 0.01 * validation["recovery_rate"]
         )
         validation["fitness"] = validation["primary"]
         validation["fitness_std"] = validation["primary_std"]
@@ -222,6 +230,8 @@ class AgentEvolutionEvaluator:
                     "planner": genome.agent_planner,
                     "tool_policy": genome.agent_tool_policy,
                     "critic": genome.agent_critic,
+                    "policy": genome.agent_policy,
+                    "failure_recovery": genome.agent_failure_recovery,
                 },
             },
             source_papers, rationale, time.monotonic() - started,
@@ -235,6 +245,7 @@ class AgentEvolutionEvaluator:
             result["joint_success"]
             - 0.02 * result["average_cost"]
             + 0.01 * result["reuse_rate"]
+            + 0.01 * result["recovery_rate"]
         )
         return result
 
@@ -245,9 +256,11 @@ class AgentEvolutionEvaluator:
         tasks = build_benchmark(self.benchmark, self.episodes, seed)
         rng = np.random.default_rng(seed)
         memory: dict[str, tuple[str, ...]] = {}
+        policy_cache: dict[str, tuple[str, ...]] = {}
         active_tools: dict[str, int] = {}
         correct = cost = reused = 0.0
         transition_targets = reflective_groups = guidance_updates = 0.0
+        policy_updates = policy_reuses = recovery_attempts = recoveries = 0.0
         for step, task in enumerate(tasks):
             key = (
                 task.axis
@@ -255,6 +268,10 @@ class AgentEvolutionEvaluator:
                 else f"{task.intent.split(' family-', 1)[0]}|{'/'.join(task.required_tools)}"
             )
             plan = None
+            if genome.agent_policy != "heuristic" and key in policy_cache:
+                plan = policy_cache[key]
+                policy_reuses += 1
+                cost += 0.18
             if genome.agent_memory != "none" and key in memory:
                 plan, reused = memory[key], reused + 1
                 memory_cost = {
@@ -278,7 +295,8 @@ class AgentEvolutionEvaluator:
                 genome.memory_size, step,
             )
             cost += tool_cost
-            if tuple(plan) != task.plan and genome.agent_critic != "none":
+            failed_plan = tuple(plan) != task.plan
+            if failed_plan and genome.agent_critic != "none":
                 if genome.agent_critic == "tapo":
                     # TAPO's auxiliary transition objective supervises the
                     # action-conditioned next observation at every plan step.
@@ -291,7 +309,6 @@ class AgentEvolutionEvaluator:
                 elif genome.agent_critic in {"agent-opsd", "ocsd", "searl", "agent-r1"}:
                     guidance_updates += len(task.plan)
                     reflective_groups += 1
-                plan = task.plan
                 critic_cost = {
                     "self-refine": 1.0,
                     "loop": 0.7,
@@ -310,8 +327,28 @@ class AgentEvolutionEvaluator:
                     "agent-r1": 0.66,
                 }.get(genome.agent_critic, 1.5)
                 cost += critic_cost
+            if failed_plan and genome.agent_failure_recovery != "none":
+                recovery_attempts += 1
+                if genome.agent_failure_recovery == "retry":
+                    plan, retry_cost = _plan(task, "react", rng)
+                    cost += 0.5 + retry_cost
+                elif genome.agent_failure_recovery == "rollback":
+                    plan = policy_cache.get(key, task.plan)
+                    cost += 0.45
+                elif genome.agent_failure_recovery == "reflexion":
+                    plan = task.plan
+                    memory[f"reflection:{key}"] = task.plan
+                    cost += 0.65
+                recoveries += float(tuple(plan) == task.plan)
             success = tuple(plan) == task.plan
             correct += float(success)
+            if success and genome.agent_policy != "heuristic":
+                if genome.agent_policy == "agent-lightning":
+                    transition_targets += len(task.plan)
+                    policy_updates += len(task.plan)
+                else:
+                    policy_updates += 1
+                policy_cache[key] = task.plan
             if success and genome.agent_memory != "none":
                 if len(memory) >= genome.memory_size and key not in memory:
                     memory.pop(next(iter(memory)))
@@ -325,6 +362,11 @@ class AgentEvolutionEvaluator:
             "transition_targets": transition_targets,
             "reflective_groups": reflective_groups,
             "privileged_guidance_updates": guidance_updates,
+            "policy_updates": policy_updates,
+            "policy_reuse_rate": policy_reuses / len(tasks),
+            "recovery_attempts": recovery_attempts,
+            "recoveries": recoveries,
+            "recovery_rate": recoveries / max(recovery_attempts, 1.0),
         }
 
 

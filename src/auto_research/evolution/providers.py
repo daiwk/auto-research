@@ -95,6 +95,14 @@ def _load_builtins() -> None:
             config.dataset, config.seeds, config.agent_episodes,
         )
 
+    def genrec(config: EvolutionConfig, project_dir: Path):
+        from .genrec import GenRecEvolutionEvaluator
+        return GenRecEvolutionEvaluator(
+            (project_dir / config.dataset_dir).resolve(), config.steps,
+            config.seeds, config.allow_network, config.maximum_users,
+            config.maximum_items,
+        )
+
     def multimodal(config: EvolutionConfig, project_dir: Path):
         from ..multimodal import MicroVLMEvaluator
         return MicroVLMEvaluator(
@@ -199,5 +207,20 @@ def _load_builtins() -> None:
             architecture="composable-agent", agent_memory="none",
             agent_planner="long-context", agent_tool_policy="direct",
             agent_critic="none", memory_size=24,
+        ),
+    ))
+    register_provider(EvolutionProvider(
+        "genrec", ("movielens-1m",), "recommendation",
+        "generative recommendation catalog head reward distillation",
+        genrec,
+        lambda config: Genome(
+            architecture="genrec-catalog",
+            dimensions=64,
+            sequence_length=12,
+            learning_rate=3e-3,
+            genrec_context="recent",
+            genrec_head="id-catalog",
+            genrec_reward="uniform",
+            genrec_distillation="none",
         ),
     ))

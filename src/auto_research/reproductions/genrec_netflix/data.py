@@ -19,9 +19,13 @@ class GenRecData:
 
 
 def load_genrec_data(
-    root: Path, *, maximum_users: int = 240, maximum_items: int = 500
+    root: Path, *, maximum_users: int = 240, maximum_items: int = 500,
+    allow_network: bool = True,
 ) -> GenRecData:
-    ratings = [row for row in movielens_1m(root) if row[2] >= 3.0]
+    ratings = [
+        row for row in movielens_1m(root, allow_network=allow_network)
+        if row[2] >= 3.0
+    ]
     counts: dict[int, int] = {}
     for _, item, _, _ in ratings:
         counts[item] = counts.get(item, 0) + 1

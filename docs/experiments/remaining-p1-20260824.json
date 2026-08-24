@@ -1,0 +1,120 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-24",
+  "scope": [
+    "EV-003",
+    "EV-004",
+    "INFRA-002"
+  ],
+  "agent_evolve": {
+    "dataset": "planbench-mini",
+    "generations": 2,
+    "population": 6,
+    "episodes_per_seed": 48,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "champion": "g2-t1",
+    "champion_genome": {
+      "memory": "memorycpt",
+      "planner": "saycan",
+      "tool_policy": "direct",
+      "critic": "ragen",
+      "policy": "replay-policy",
+      "failure_recovery": "retry",
+      "memory_size": 16
+    },
+    "validation_joint_success_mean": 1.0,
+    "validation_average_cost_mean": 1.185,
+    "validation_policy_reuse_rate_mean": 0.75,
+    "baseline_test_fitness": 0.9,
+    "champion_test_fitness": 0.9838,
+    "claim_boundary": "确定性 PlanBench mini-suite 验证六轴组合、跨 episode 复用和失败恢复接口；不代表开放式 Agent benchmark 能力。"
+  },
+  "genrec_evolve": {
+    "dataset": "MovieLens-1M",
+    "retained_users": 100,
+    "retained_catalog_items": 160,
+    "catalog_evaluation": "full retained catalog",
+    "generations": 2,
+    "population": 4,
+    "steps_per_trial": 12,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "champion": "g1-t3",
+    "champion_genome": {
+      "context": "recent",
+      "catalog_head": "hybrid-catalog",
+      "reward": "uniform",
+      "distillation": "none"
+    },
+    "validation_ndcg_at_10_mean": 0.1110163103,
+    "validation_ndcg_at_10_std": 0.0153601379,
+    "baseline_test_ndcg_at_10_mean": 0.0426947729,
+    "champion_test_ndcg_at_10_mean": 0.1028899257,
+    "claim_boundary": "真实 MovieLens-1M 序列和 160-item 保留 catalog 的三 seed 缩步数验证；未复刻公司私有 LLM、reward model、全量 catalog 或线上服务。"
+  },
+  "evidence_promotion": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_targets": 4,
+    "targets": {
+      "rankmixer": {
+        "family": "recommendation adapter",
+        "formal_comparison": true,
+        "rankmixer_dense_ndcg_at_10_mean": 0.0093728948,
+        "rankmixer_dense_ndcg_at_10_std": 0.0038649814,
+        "rankmixer_dense_ndcg_at_10_ci95": 0.0043736382
+      },
+      "switch-transformer": {
+        "family": "foundation-model adapter",
+        "formal_comparison": true
+      },
+      "grpo": {
+        "family": "post-training",
+        "formal_comparison": true,
+        "baseline_accuracy_mean": 0.171875,
+        "final_accuracy_mean": 0.5416666667,
+        "final_accuracy_std": 0.1983103267,
+        "final_accuracy_ci95": 0.2244092602
+      },
+      "agent-lightning": {
+        "family": "agent",
+        "benchmark": "swebench-local",
+        "formal_comparison": true,
+        "joint_success_mean": 1.0,
+        "joint_success_std": 0.0,
+        "previous_failed_attempts": 3,
+        "failure_note": "最初错误路由到 evomem-mini 的三个 KeyError 被保留；修复后显式重试并在本地代码 executor 完成三 seed。"
+      }
+    },
+    "claim_boundary": "标准/缩步数混合的工程晋级证据；各目标只在自身固定协议内解释，不跨任务比较绝对指标。"
+  },
+  "manifest_ref": "experiments:remaining-p1-20260824",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset_and_deterministic_agent_suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "three-seed engineering comparison with mean, sample standard deviation and normal 95% confidence interval; smoke boundaries remain explicit"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/remaining-p1-20260824.json",
+    "dataset_fingerprint": {
+      "genrec": "MovieLens-1M:ratings>=3:100-users:160-items:leave-two-out",
+      "agent_evolve": "planbench-mini:48-episodes:seeds42-44",
+      "evidence_promotion": "stateful-runner:rankmixer:switch-transformer:grpo:agent-lightning"
+    }
+  }
+}

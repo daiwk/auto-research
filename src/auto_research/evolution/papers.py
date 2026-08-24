@@ -6,6 +6,9 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2608.10257": ("head:hybrid-catalog", "Netflix GenRec 的文本化上下文、prefill-only 全目录 head 与长期 reward 加权"),
+    "2604.14878": ("reward:content-discovery", "JD GenRec 的页面级生成目标、GRPO-SR 与 NLL 约束"),
+    "2607.24255": ("distillation:semantic-teacher", "OxygenREC-v2 的行为指令生成与未来交互 privileged distillation"),
     "2507.15551": ("rankmixer_smoe", "RankMixer per-token FFN 与 dense-training/sparse-serving ReLU MoE"),
     "2602.06563": ("tokenmixer_large", "Mixing-Reverting、per-token SwiGLU、interval residual 与辅助头"),
     "2601.21285": ("zenith", "Prime Token Fusion 与 tokenwise SwiGLU Token Boost"),
@@ -127,7 +130,7 @@ AGENT_MUTATIONS = {
     "2608.06197": ("critic:envace", "同一策略交替承担 act 与环境 rehearsal 角色，并以 role-wise GRPO 分别归一化优势"),
     "2210.03629": ("planner:react", "ReAct 交替生成推理轨迹与工具动作"),
     "2302.04761": ("tool:toolformer", "Toolformer 通过自监督 API 调用标注学习何时调用工具"),
-    "2303.11366": ("critic:reflexion", "Reflexion 将执行反馈写成语言反思并用于下一 episode"),
+    "2303.11366": ("recovery:reflexion", "Reflexion 将执行反馈写成语言反思并用于下一 episode"),
     "2303.17651": ("critic:self-refine", "Self-Refine 以生成、反馈、修订循环改进输出"),
     "2305.10601": ("planner:tree-of-thoughts", "Tree of Thoughts 显式搜索并评估多条推理分支"),
     "2305.18323": ("planner:rewoo", "ReWOO 先规划工具依赖，再批量执行与汇总证据"),
@@ -147,7 +150,7 @@ AGENT_MUTATIONS = {
     "2607.26017": ("memory:unimem", "UniMem 在 episodic retrieval 与可扩展 parametric memory 之间自路由和巩固"),
     "2308.00352": ("planner:metagpt", "MetaGPT 以标准作业流程组织产品、架构、工程与 QA 角色产物"),
     "2305.11738": ("critic:critic", "CRITIC 用外部工具执行结果验证并据反馈修订输出"),
-    "2508.03680": ("critic:agent-lightning", "Agent Lightning 将运行轨迹与 RL 训练解耦并做分层信用分配"),
+    "2508.03680": ("policy:agent-lightning", "Agent Lightning 将运行轨迹与 RL 训练解耦并做分层信用分配"),
     "2405.15793": ("planner:swe-agent", "SWE-agent 使用面向代码仓库的 Agent-Computer Interface 定位、编辑和测试"),
     "2407.16741": ("planner:openhands", "OpenHands 以事件流统一编辑器、终端和浏览器动作"),
     "2205.00445": ("tool:mrkl", "MRKL 用 router 将请求分发给神经或离散符号专家"),
@@ -197,6 +200,9 @@ AGENT_MUTATIONS = {
 }
 
 FALLBACK_PAPERS = (
+    Paper("GenRec: An LLM-Backed Recommendation Ranker at Netflix", "Textual histories feed a prefill-only full-catalog ranker with joint language, ranking and long-term reward objectives.", [], "2026-08-10", "https://arxiv.org/abs/2608.10257", "2608.10257"),
+    Paper("GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation", "Page-wise generation combines Token Merger and reward-regularized policy optimization.", [], "2026-04-16", "https://arxiv.org/abs/2604.14878", "2604.14878"),
+    Paper("OxygenREC-v2: Internalizing Discrimination into Generative Recommendation", "Future interactions provide a privileged teacher for behavior-conditioned generative recommendation.", [], "2026-07-27", "https://arxiv.org/abs/2607.24255", "2607.24255"),
     Paper("Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study", "HA-MoE uses heterogeneity-aware gates over specialized experts.", [], "2026-07-30", "https://arxiv.org/abs/2607.27577", "2607.27577"),
     Paper("Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems", "Hierarchical collaborative IDs reconstruct semantic content representations.", [], "2026-07-26", "https://arxiv.org/abs/2607.24865", "2607.24865"),
     Paper("AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization", "Actor, Critic, Insight, Skill and Online agents close the experiment feedback loop.", [], "2026-04-21", "https://arxiv.org/abs/2604.26969", "2604.26969"),

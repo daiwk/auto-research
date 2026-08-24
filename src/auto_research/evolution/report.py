@@ -310,11 +310,14 @@ def _render_composable_report(result: EvolutionResult) -> str:
             f"planner=`{champion.genome.agent_planner}`，"
             f"tool policy=`{champion.genome.agent_tool_policy}`，"
             f"critic=`{champion.genome.agent_critic}`，"
+            f"trainable policy=`{champion.genome.agent_policy}`，"
+            f"failure recovery=`{champion.genome.agent_failure_recovery}`，"
             f"capacity=`{champion.genome.memory_size}`",
             f"- validation：joint success "
             f"`{champion.validation['joint_success']:.4f}`，average cost "
             f"`{champion.validation['average_cost']:.4f}`，reuse "
-            f"`{champion.validation['reuse_rate']:.4f}`",
+            f"`{champion.validation['reuse_rate']:.4f}`，recovery "
+            f"`{champion.validation['recovery_rate']:.4f}`",
         ]
     else:
         lines += [

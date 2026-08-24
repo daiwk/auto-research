@@ -432,18 +432,68 @@ auto-research evolve \
   --steps 100 --maximum-examples 512 --seeds 42,43,44
 ```
 
-Agent genome 把 memory、planner、tool policy、critic 和 memory capacity 作为独立可组合轴；第一轮做单组件公平消融，后续轮次围绕冠军组合：
+Agent genome 把 memory、planner、tool policy、critic、可训练 policy、failure recovery
+和 memory capacity 作为独立可组合轴。第一轮做单组件公平消融，后续轮次围绕冠军组合；
+报告单独记录跨 episode policy/memory 复用、恢复尝试、恢复成功率和 transition credit：
 
 ```bash
 auto-research evolve \
   --model agent \
   --dataset evomem-mini \
-  --direction "联合进化 U-Mem/LEGOMem、ReAct/ReWOO/LATS、Toolformer/MemTool 和 Reflexion critic" \
+  --direction "联合进化 U-Mem、ReAct、Toolformer、Agent Lightning policy 和 Reflexion recovery" \
   --generations 3 --population 8 --workers 4 \
   --agent-episodes 240 --seeds 42,43,44
 ```
 
-这两个 mini-suite 用于验证自动研究机制和组合归因，不代表生产级开放式 LLM/Agent 能力。完整 genome、负结果、每轮假设与选择原因都会写入结果；checkpoint 仍不提交。
+生成式推荐使用独立 `genrec` provider。它在 MovieLens-1M 的真实保留 catalog 上训练
+catalog-aware head，并且每次 validation/test 都做全目录排序，不用 sampled candidates
+冒充全库效果。可组合轴包括 recent/full/长历史压缩 context、ID/semantic/hybrid catalog
+head、uniform/novelty/content-discovery reward，以及 popularity/semantic teacher distillation：
+
+```bash
+auto-research evolve \
+  --model genrec \
+  --dataset movielens-1m \
+  --direction "组合 Netflix GenRec、JD GenRec 与 OxygenREC-v2 的 context、reward 和蒸馏" \
+  --generations 3 --population 8 --workers 3 \
+  --steps 100 --seeds 42,43,44
+```
+
+基线固定为 `recent context + ID catalog + uniform CE`；晋级分数为全目录
+`NDCG@10 - 0.02 × head-share@10`。这是公开 MovieLens 上的缩小模型研究，不复刻公司私有
+LLM、reward model、长期满意度标签或线上服务，也不会把 Netflix 自动置顶。
+
+上述 mini-suite/缩小模型用于验证自动研究机制和组合归因，不代表生产级开放式
+LLM/Agent/推荐能力。完整 genome、负结果、每轮假设与选择原因都会写入结果；checkpoint
+仍不提交。
+
+<a id="three-seed-evidence-promotion"></a>
+
+## 三 seed 证据晋级
+
+重点方法用统一的可恢复 runner 从机制验证晋级为三 seed 证据。默认覆盖 RankMixer、
+Switch Transformer、GRPO 和 Agent Lightning；也可显式替换目标：
+
+```bash
+auto-research promote-evidence \
+  --dataset-dir data \
+  --seeds 42,43,44 \
+  --adapters rankmixer,switch-transformer \
+  --post-training grpo \
+  --agent-methods agent-lightning
+```
+
+`state.json` 在每个 target/seed 后原子更新；中断后重复命令只补缺失项。失败 seed 作为
+终态写入 `metrics.json` 和报告，不会导致其他目标消失；排除环境问题后可显式传入
+`--retry-failed` 重跑失败项，原失败尝试仍保留在历史中。只有至少三个成功 seed 才写
+`formal_comparison=true`，同时生成均值、样本标准差和 95% 置信区间；否则明确禁止稳定
+提升声明。
+
+2026-08-24 的本地三 seed 收口记录见
+[`experiments/remaining-p1-20260824.json`](experiments/remaining-p1-20260824.json)：GenRec
+和 Agent evolve 均完成两代机制验证；RankMixer、Switch Transformer、GRPO 与 Agent
+Lightning 四个代表目标完成三 seed 晋级。该文件保留缩步数、保留 catalog 和确定性
+mini-suite 边界，不把工程 smoke 写成论文级结论。
 
 ## 数据规模
 
