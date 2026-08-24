@@ -11,7 +11,11 @@
     "generations": 2,
     "population": 6,
     "episodes_per_seed": 48,
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "champion": "g2-t1",
     "champion_genome": {
       "memory": "memorycpt",
@@ -37,7 +41,11 @@
     "generations": 2,
     "population": 4,
     "steps_per_trial": 12,
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "champion": "g1-t3",
     "champion_genome": {
       "context": "recent",
@@ -52,7 +60,11 @@
     "claim_boundary": "真实 MovieLens-1M 序列和 160-item 保留 catalog 的三 seed 缩步数验证；未复刻公司私有 LLM、reward model、全量 catalog 或线上服务。"
   },
   "evidence_promotion": {
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "formal_targets": 4,
     "targets": {
       "rankmixer": {
@@ -89,7 +101,11 @@
   "manifest_ref": "experiments:remaining-p1-20260824",
   "evaluation_protocol": {
     "tier": "l2_public_dataset_and_deterministic_agent_suite",
-    "seeds": [42, 43, 44],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "formal_comparison": true,
     "claim_policy": "three-seed engineering comparison with mean, sample standard deviation and normal 95% confidence interval; smoke boundaries remain explicit"
   },
