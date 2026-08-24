@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from ..models import Paper
 from ..papers import ArxivClient
+from ..historical_b07_b11 import PAPERS as HISTORICAL_B07_B11
 from .models import PaperInspiration
 
 
@@ -125,6 +126,18 @@ POST_TRAINING_MUTATIONS = {
     "2608.12062": ("pto", "以 oracle look-ahead preference tree 构造长期对话偏好，再迭代执行 DPO"),
     "2608.12158": ("c2-dpo", "显式最大化有无上下文时的 preference gain，同时保留原偏好顺序"),
     "2608.11674": ("gcpo", "以预训练权重主奇异空间的双侧正交补约束 rollout RL 更新，降低能力覆盖与训练失稳"),
+    "2608.19408": ("r2-opd", "按教师奖励与推理进展排序的一致性过滤 OPD 信号"),
+    "2608.09745": ("sr-opsd", "以 reference 几何插值和 Rényi 散度执行自引用 on-policy 自蒸馏"),
+    "2608.05802": ("opd2", "蒸馏后训练教师相对 base teacher 的概率增量"),
+    "2608.03673": ("causal-opd", "定位因果链第一个错误步骤并进行短 horizon 修复"),
+    "2608.03092": ("smopd", "多 reward 专长教师先分化再在学生 rollout 上合并"),
+    "2608.00782": ("rstg", "只在负向零方差 group 和高熵 token 上启用教师指导"),
+    "2608.16072": ("sa-mrpo", "依据 reward 饱和度将优势预算转移到未掌握目标"),
+    "2608.11669": ("rubric-dropout", "组内共享随机 rubric dropout 以缓解 judge reward hacking"),
+    "2608.01717": ("erils", "按来源分别归一化 on-policy 与外部策略 rollout"),
+    "2607.28026": ("crpo", "以 privileged self-distillation 对比反思探索与 exposure-bias 位置"),
+    "2607.26873": ("serpo", "响应档案、query-specific rubric 与策略三方闭环自进化"),
+    "2607.19331": ("iso-rlvr", "固定参数奇异值并只优化输入输出 singular frames"),
 }
 
 AGENT_MUTATIONS = {
@@ -200,6 +213,18 @@ AGENT_MUTATIONS = {
     "2608.01597": ("critic:hindsearch", "HindSearch 用 gold-aware 失败轨迹 hindsight critique 蒸馏搜索动作"),
     "2608.10357": ("memory:sinkflex-rl", "以 sink-aware sliding-window FlexAttention 降低长轨迹 GRPO 的显存开销"),
     "2608.21292": ("memory:auso", "以动作级有技能/无技能 JSD 统一技能内化、探索和有界利用"),
+    "2608.19842": ("policy:sapo", "单次 rollout 中共享 policy/value 骨干并执行 SARSA-GAE"),
+    "2608.19197": ("planner:spade", "设计者与 Agent 自博弈生成可执行环境，并用 privileged regret 定位能力边界"),
+    "2608.18682": ("critic:rtpo", "在稀疏反向树上逆序更新 turn，保持 continuation on-policy"),
+    "2608.17289": ("planner:planpo", "按轨迹 turn 数与单 turn 长度形成 coarse-to-fine planning advantage"),
+    "2608.16156": ("critic:trca", "用 evidence、execution、invalidity 与 breakthrough rubric 分配 transition 信用"),
+    "2608.11967": ("recovery:loongreflect", "privileged reflection distillation 与 outcome GRPO 双通道训练"),
+    "2608.15703": ("memory:hymem", "隔离 planning、execution、reasoning 上下文并持续写入结构化摘要"),
+    "2608.09380": ("planner:openloopevolve", "版本化 Loop Policy 并通过 Champion–Challenger、监控和回滚进化"),
+    "2608.06811": ("memory:pmcoder", "phase planner 与 episodic memory 联合检测 stuck 并重规划"),
+    "2608.03468": ("tool:toollift", "把工具轨迹提升为可迁移 function workflow graph"),
+    "2608.02650": ("tool:hyperagent", "在 tool-schema hypergraph 上先规划 Task DAG 再补齐状态缺口"),
+    "2607.28527": ("planner:manta", "在预算内根据协作 trace 调整多 Agent 通信拓扑"),
 }
 
 FALLBACK_PAPERS = (
@@ -362,6 +387,24 @@ AGENT_FALLBACK_PAPERS = (
     Paper("Observation-Calibrated Self-Distillation for Agentic Reinforcement Learning", "Contrasts matched full-observation and observation-ablated replays for calibrated turn credit.", [], "2026-08-05", "https://arxiv.org/abs/2608.04788", "2608.04788"),
     Paper("VerMem: Verifiable Memory for Long-Horizon Agents", "Audits long-term, active and episodic memory operations with local and global verifiers.", [], "2026-08-04", "https://arxiv.org/abs/2608.03137", "2608.03137"),
     Paper("CoEvo-Mem: Co-Evolving Memory and Retrieval for Language Agents", "Alternates retrieval-router and memory-bank optimization instead of freezing either side.", [], "2026-08-03", "https://arxiv.org/abs/2608.01739", "2608.01739"),
+)
+
+# Keep reviewed, executable historical methods discoverable when network search
+# is disabled.  The canonical metadata module is the single source of truth for
+# titles, dates and summaries; this avoids another hand-maintained paper list.
+POST_TRAINING_FALLBACK_PAPERS += tuple(
+    Paper(
+        paper.title, paper.summary, [], paper.published,
+        f"https://arxiv.org/abs/{paper.arxiv_id}", paper.arxiv_id,
+    )
+    for paper in HISTORICAL_B07_B11 if paper.domain == "post-training"
+)
+AGENT_FALLBACK_PAPERS += tuple(
+    Paper(
+        paper.title, paper.summary, [], paper.published,
+        f"https://arxiv.org/abs/{paper.arxiv_id}", paper.arxiv_id,
+    )
+    for paper in HISTORICAL_B07_B11 if paper.domain == "agent-research"
 )
 
 

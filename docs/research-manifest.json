@@ -410,6 +410,38 @@
     },
     {
       "domain": "agent-research",
+      "key": "hymem",
+      "title": "HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation",
+      "paper_url": "https://arxiv.org/abs/2608.15703",
+      "detail_path": "agent-research/2608.15703-hymem/README.md",
+      "topic": [
+        "记忆",
+        "长时序 Agent"
+      ],
+      "first_author": "XinQi Wang",
+      "first_author_affiliation": "Institute of Automation, Chinese Academy of Sciences",
+      "published": "2026-08-16",
+      "code": null,
+      "adapter": "hymem"
+    },
+    {
+      "domain": "agent-research",
+      "key": "hyperagent",
+      "title": "HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2608.02650",
+      "detail_path": "agent-research/2608.02650-hyperagent/README.md",
+      "topic": [
+        "工具规划",
+        "超图"
+      ],
+      "first_author": "Zian Zhai",
+      "first_author_affiliation": "University of New South Wales",
+      "published": "2026-07-31",
+      "code": null,
+      "adapter": "hyperagent"
+    },
+    {
+      "domain": "agent-research",
       "key": "lats",
       "title": "LATS",
       "paper_url": "https://arxiv.org/abs/2310.04406",
@@ -440,6 +472,22 @@
     },
     {
       "domain": "agent-research",
+      "key": "loongreflect",
+      "title": "LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation",
+      "paper_url": "https://arxiv.org/abs/2608.11967",
+      "detail_path": "agent-research/2608.11967-loongreflect/README.md",
+      "topic": [
+        "反思",
+        "Agentic RL"
+      ],
+      "first_author": "Zhixin Zhang",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-08-12",
+      "code": null,
+      "adapter": "loongreflect"
+    },
+    {
+      "domain": "agent-research",
       "key": "loop",
       "title": "LOOP",
       "paper_url": "https://arxiv.org/abs/2502.01600",
@@ -452,6 +500,22 @@
       "published": "2025-02-03",
       "code": "https://github.com/apple/ml-loop",
       "adapter": "loop"
+    },
+    {
+      "domain": "agent-research",
+      "key": "manta",
+      "title": "MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems",
+      "paper_url": "https://arxiv.org/abs/2607.28527",
+      "detail_path": "agent-research/2607.28527-manta/README.md",
+      "topic": [
+        "多 Agent",
+        "自进化"
+      ],
+      "first_author": "MaoXun Huang",
+      "first_author_affiliation": "Cornell University",
+      "published": "2026-07-30",
+      "code": null,
+      "adapter": "manta"
     },
     {
       "domain": "agent-research",
@@ -605,6 +669,22 @@
     },
     {
       "domain": "agent-research",
+      "key": "openloopevolve",
+      "title": "OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks",
+      "paper_url": "https://arxiv.org/abs/2608.09380",
+      "detail_path": "agent-research/2608.09380-openloopevolve/README.md",
+      "topic": [
+        "自进化",
+        "策略治理"
+      ],
+      "first_author": "Siqi Wang",
+      "first_author_affiliation": "Tsinghua University",
+      "published": "2026-08-10",
+      "code": "https://github.com/yoyoshikc/OpenLoopEvolve",
+      "adapter": "openloopevolve"
+    },
+    {
+      "domain": "agent-research",
       "key": "os-shepherd",
       "title": "OSReward / OS-Shepherd",
       "paper_url": "https://arxiv.org/abs/2607.28609",
@@ -647,6 +727,38 @@
       "published": "2026-01-28",
       "code": "未发现官方代码",
       "adapter": "pearl"
+    },
+    {
+      "domain": "agent-research",
+      "key": "planpo",
+      "title": "PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs",
+      "paper_url": "https://arxiv.org/abs/2608.17289",
+      "detail_path": "agent-research/2608.17289-planpo/README.md",
+      "topic": [
+        "Agentic RL",
+        "规划"
+      ],
+      "first_author": "Dayang Liang",
+      "first_author_affiliation": "Xiamen University",
+      "published": "2026-08-18",
+      "code": null,
+      "adapter": "planpo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "pmcoder",
+      "title": "Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution",
+      "paper_url": "https://arxiv.org/abs/2608.06811",
+      "detail_path": "agent-research/2608.06811-pmcoder/README.md",
+      "topic": [
+        "代码 Agent",
+        "记忆与规划"
+      ],
+      "first_author": "Jiahao Zhang",
+      "first_author_affiliation": "Vanderbilt University",
+      "published": "2026-08-07",
+      "code": null,
+      "adapter": "pmcoder"
     },
     {
       "domain": "agent-research",
@@ -725,6 +837,22 @@
     },
     {
       "domain": "agent-research",
+      "key": "rtpo",
+      "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+      "paper_url": "https://arxiv.org/abs/2608.18682",
+      "detail_path": "agent-research/2608.18682-rtpo/README.md",
+      "topic": [
+        "Agentic RL",
+        "credit assignment"
+      ],
+      "first_author": "Yugu Li",
+      "first_author_affiliation": "Adelaide University",
+      "published": "2026-08-19",
+      "code": null,
+      "adapter": "rtpo"
+    },
+    {
+      "domain": "agent-research",
       "key": "sage",
       "title": "SAGE",
       "paper_url": "https://arxiv.org/abs/2512.17102",
@@ -737,6 +865,22 @@
       "published": "2025-12-18",
       "code": "未发现官方代码",
       "adapter": "sage"
+    },
+    {
+      "domain": "agent-research",
+      "key": "sapo",
+      "title": "SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2608.19842",
+      "detail_path": "agent-research/2608.19842-sapo/README.md",
+      "topic": [
+        "Agentic RL",
+        "credit assignment"
+      ],
+      "first_author": "Dayang Liang",
+      "first_author_affiliation": "Xiamen University",
+      "published": "2026-08-20",
+      "code": null,
+      "adapter": "sapo"
     },
     {
       "domain": "agent-research",
@@ -845,6 +989,22 @@
     },
     {
       "domain": "agent-research",
+      "key": "spade",
+      "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+      "paper_url": "https://arxiv.org/abs/2608.19197",
+      "detail_path": "agent-research/2608.19197-spade/README.md",
+      "topic": [
+        "Agentic RL",
+        "环境生成"
+      ],
+      "first_author": "Bo Liu",
+      "first_author_affiliation": "University of Washington",
+      "published": "2026-08-19",
+      "code": "https://github.com/spade-rl/spade",
+      "adapter": "spade"
+    },
+    {
+      "domain": "agent-research",
       "key": "state2state",
       "title": "State2State: Environment-Derived Mid-Training for LLM Agents",
       "paper_url": "https://arxiv.org/abs/2608.04934",
@@ -935,6 +1095,22 @@
     },
     {
       "domain": "agent-research",
+      "key": "toollift",
+      "title": "ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning",
+      "paper_url": "https://arxiv.org/abs/2608.03468",
+      "detail_path": "agent-research/2608.03468-toollift/README.md",
+      "topic": [
+        "工具规划",
+        "图结构"
+      ],
+      "first_author": "Xiuhui You",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-08-04",
+      "code": null,
+      "adapter": "toollift"
+    },
+    {
+      "domain": "agent-research",
       "key": "toolrl",
       "title": "ToolRL",
       "paper_url": "https://arxiv.org/abs/2504.13958",
@@ -947,6 +1123,22 @@
       "published": "2025-04-16",
       "code": "未发现官方代码",
       "adapter": "toolrl"
+    },
+    {
+      "domain": "agent-research",
+      "key": "trca",
+      "title": "TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2608.16156",
+      "detail_path": "agent-research/2608.16156-trca/README.md",
+      "topic": [
+        "Agentic RL",
+        "过程奖励"
+      ],
+      "first_author": "Huan Zhang",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-08-17",
+      "code": null,
+      "adapter": "trca"
     },
     {
       "domain": "agent-research",
@@ -1222,6 +1414,56 @@
     },
     {
       "domain": "foundation-models",
+      "key": "autonomy-heads",
+      "title": "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
+      "paper_url": "https://arxiv.org/abs/2608.06849",
+      "detail_path": "reproductions/2608.06849-autonomy-heads/README.md",
+      "topic": [
+        "注意力与长上下文",
+        "稀疏注意力"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Institute of Computing Technology, Chinese Academy of Sciences",
+      "published": "2026-08-07",
+      "code": null,
+      "adapter": {
+        "adapter_key": "autonomy-heads",
+        "arxiv_id": "2608.06849",
+        "title": "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
+        "paper_url": "https://arxiv.org/abs/2608.06849",
+        "track": "llm",
+        "organization": "Institute of Computing Technology, Chinese Academy of Sciences",
+        "published": "2026-08-07",
+        "code_url": null,
+        "topics": [
+          "注意力与长上下文",
+          "稀疏注意力"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "awq",
       "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
       "paper_url": "https://arxiv.org/abs/2306.00978",
@@ -1467,6 +1709,56 @@
     },
     {
       "domain": "foundation-models",
+      "key": "c2kv",
+      "title": "C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference",
+      "paper_url": "https://arxiv.org/abs/2607.17715",
+      "detail_path": "reproductions/2607.17715-c2kv/README.md",
+      "topic": [
+        "推理与系统效率",
+        "KV cache"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Shanghai Jiao Tong University",
+      "published": "2026-07-20",
+      "code": "https://github.com/s7a9/C2KV",
+      "adapter": {
+        "adapter_key": "c2kv",
+        "arxiv_id": "2607.17715",
+        "title": "C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference",
+        "paper_url": "https://arxiv.org/abs/2607.17715",
+        "track": "llm",
+        "organization": "Shanghai Jiao Tong University",
+        "published": "2026-07-20",
+        "code_url": "https://github.com/s7a9/C2KV",
+        "topics": [
+          "推理与系统效率",
+          "KV cache"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "clip",
       "title": "Learning Transferable Visual Models From Natural Language Supervision",
       "paper_url": "https://arxiv.org/abs/2103.00020",
@@ -1570,6 +1862,56 @@
           "cpu",
           "mps",
           "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "dart",
+      "title": "DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling",
+      "paper_url": "https://arxiv.org/abs/2608.02032",
+      "detail_path": "reproductions/2608.02032-dart/README.md",
+      "topic": [
+        "网络架构",
+        "注意力与长上下文"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Zhejiang University",
+      "published": "2026-08-03",
+      "code": null,
+      "adapter": {
+        "adapter_key": "dart",
+        "arxiv_id": "2608.02032",
+        "title": "DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling",
+        "paper_url": "https://arxiv.org/abs/2608.02032",
+        "track": "llm",
+        "organization": "Zhejiang University",
+        "published": "2026-08-03",
+        "code_url": null,
+        "topics": [
+          "网络架构",
+          "注意力与长上下文"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
         ],
         "online_evidence": [],
         "selection_exception": null,
@@ -1750,6 +2092,56 @@
           "cpu",
           "mps",
           "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "distillcache",
+      "title": "DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference",
+      "paper_url": "https://arxiv.org/abs/2608.08878",
+      "detail_path": "reproductions/2608.08878-distillcache/README.md",
+      "topic": [
+        "推理与系统效率",
+        "KV cache"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Oklahoma State University",
+      "published": "2026-08-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "distillcache",
+        "arxiv_id": "2608.08878",
+        "title": "DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference",
+        "paper_url": "https://arxiv.org/abs/2608.08878",
+        "track": "llm",
+        "organization": "Oklahoma State University",
+        "published": "2026-08-09",
+        "code_url": null,
+        "topics": [
+          "推理与系统效率",
+          "KV cache"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
         ],
         "online_evidence": [],
         "selection_exception": null,
@@ -3120,6 +3512,56 @@
     },
     {
       "domain": "foundation-models",
+      "key": "olmpool-long-context",
+      "title": "Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension",
+      "paper_url": "https://arxiv.org/abs/2608.10296",
+      "detail_path": "reproductions/2608.10296-olmpool-long-context/README.md",
+      "topic": [
+        "注意力与长上下文",
+        "网络架构"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Ai2",
+      "published": "2026-08-10",
+      "code": "https://github.com/allenai/olmpool/",
+      "adapter": {
+        "adapter_key": "olmpool-long-context",
+        "arxiv_id": "2608.10296",
+        "title": "Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension",
+        "paper_url": "https://arxiv.org/abs/2608.10296",
+        "track": "llm",
+        "organization": "Ai2",
+        "published": "2026-08-10",
+        "code_url": "https://github.com/allenai/olmpool/",
+        "topics": [
+          "注意力与长上下文",
+          "网络架构"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "open-language-model",
       "title": "OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research",
       "paper_url": "https://arxiv.org/abs/2607.16669",
@@ -3279,6 +3721,56 @@
           "cpu",
           "mps",
           "cuda"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "physics-mm-pretraining",
+      "title": "Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes",
+      "paper_url": "https://arxiv.org/abs/2608.05000",
+      "detail_path": "reproductions/2608.05000-physics-mm-pretraining/README.md",
+      "topic": [
+        "多模态基础模型",
+        "预训练与数据"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta",
+      "published": "2026-08-05",
+      "code": null,
+      "adapter": {
+        "adapter_key": "physics-mm-pretraining",
+        "arxiv_id": "2608.05000",
+        "title": "Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes",
+        "paper_url": "https://arxiv.org/abs/2608.05000",
+        "track": "llm",
+        "organization": "Meta",
+        "published": "2026-08-05",
+        "code_url": null,
+        "topics": [
+          "多模态基础模型",
+          "预训练与数据"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
         ],
         "online_evidence": [],
         "selection_exception": null,
@@ -3934,6 +4426,156 @@
     },
     {
       "domain": "foundation-models",
+      "key": "tcab",
+      "title": "Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing",
+      "paper_url": "https://arxiv.org/abs/2608.12831",
+      "detail_path": "reproductions/2608.12831-tcab/README.md",
+      "topic": [
+        "评测基础设施",
+        "在线实验"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "New York University",
+      "published": "2026-08-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tcab",
+        "arxiv_id": "2608.12831",
+        "title": "Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing",
+        "paper_url": "https://arxiv.org/abs/2608.12831",
+        "track": "llm",
+        "organization": "New York University",
+        "published": "2026-08-13",
+        "code_url": null,
+        "topics": [
+          "评测基础设施",
+          "在线实验"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "transmem",
+      "title": "TransMem: Transforming Hidden States into Memory for Large Language Models",
+      "paper_url": "https://arxiv.org/abs/2607.29032",
+      "detail_path": "reproductions/2607.29032-transmem/README.md",
+      "topic": [
+        "注意力与长上下文",
+        "Agent 记忆"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-07-31",
+      "code": null,
+      "adapter": {
+        "adapter_key": "transmem",
+        "arxiv_id": "2607.29032",
+        "title": "TransMem: Transforming Hidden States into Memory for Large Language Models",
+        "paper_url": "https://arxiv.org/abs/2607.29032",
+        "track": "llm",
+        "organization": "Authors did not disclose affiliation",
+        "published": "2026-07-31",
+        "code_url": null,
+        "topics": [
+          "注意力与长上下文",
+          "Agent 记忆"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "ttcd",
+      "title": "Learning What to Remember: Test-Time Training via Context Distillation",
+      "paper_url": "https://arxiv.org/abs/2608.01672",
+      "detail_path": "reproductions/2608.01672-ttcd/README.md",
+      "topic": [
+        "注意力与长上下文",
+        "测试时训练"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Princeton University",
+      "published": "2026-08-03",
+      "code": "https://github.com/dangxingyu/ttcd",
+      "adapter": {
+        "adapter_key": "ttcd",
+        "arxiv_id": "2608.01672",
+        "title": "Learning What to Remember: Test-Time Training via Context Distillation",
+        "paper_url": "https://arxiv.org/abs/2608.01672",
+        "track": "llm",
+        "organization": "Princeton University",
+        "published": "2026-08-03",
+        "code_url": "https://github.com/dangxingyu/ttcd",
+        "topics": [
+          "注意力与长上下文",
+          "测试时训练"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "deterministic long-context public mini-suite"
+        ],
+        "baseline": "recent-window attention",
+        "metrics": [
+          "accuracy",
+          "relative cost"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "wide",
       "title": "WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning",
       "paper_url": "https://arxiv.org/abs/2607.28418",
@@ -4126,6 +4768,22 @@
     },
     {
       "domain": "post-training",
+      "key": "causal-opd",
+      "title": "CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning",
+      "paper_url": "https://arxiv.org/abs/2608.03673",
+      "detail_path": "post-training/2608.03673-causal-opd/README.md",
+      "topic": [
+        "OPD",
+        "过程监督"
+      ],
+      "first_author": "Jian Zhang",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-08-04",
+      "code": null,
+      "adapter": "causal-opd"
+    },
+    {
+      "domain": "post-training",
       "key": "chord",
       "title": "CHORD",
       "paper_url": "https://arxiv.org/abs/2508.11408",
@@ -4213,6 +4871,22 @@
       "published": "2026-07-28",
       "code": "未发现官方代码",
       "adapter": "cort"
+    },
+    {
+      "domain": "post-training",
+      "key": "crpo",
+      "title": "Contrastive Reinforced Policy Optimization via Privileged Self-Distillation",
+      "paper_url": "https://arxiv.org/abs/2607.28026",
+      "detail_path": "post-training/2607.28026-crpo/README.md",
+      "topic": [
+        "OPD",
+        "Agentic RL"
+      ],
+      "first_author": "Xingjian Wu",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-07-30",
+      "code": null,
+      "adapter": "crpo"
     },
     {
       "domain": "post-training",
@@ -4346,6 +5020,22 @@
         "selection_exception": "The paper reports statistically significant online A/B gains and a full-traffic WeChat Search deployment, but withholds exact lifts.",
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "post-training",
+      "key": "erils",
+      "title": "Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models",
+      "paper_url": "https://arxiv.org/abs/2608.01717",
+      "detail_path": "post-training/2608.01717-erils/README.md",
+      "topic": [
+        "外部 rollout",
+        "Diffusion LM RL"
+      ],
+      "first_author": "Wonseok Lee",
+      "first_author_affiliation": "Seoul National University",
+      "published": "2026-08-03",
+      "code": null,
+      "adapter": "erils"
     },
     {
       "domain": "post-training",
@@ -4496,6 +5186,22 @@
       "published": "2023-10-18",
       "code": "未发现官方代码",
       "adapter": "ipo"
+    },
+    {
+      "domain": "post-training",
+      "key": "iso-rlvr",
+      "title": "ISO: An RLVR-Native Optimization Stack",
+      "paper_url": "https://arxiv.org/abs/2607.19331",
+      "detail_path": "post-training/2607.19331-iso-rlvr/README.md",
+      "topic": [
+        "RLVR",
+        "优化器"
+      ],
+      "first_author": "Hanqing Zhu",
+      "first_author_affiliation": "The University of Texas at Austin",
+      "published": "2026-07-21",
+      "code": "https://github.com/zhuhanqing/ISO",
+      "adapter": "iso-rlvr"
     },
     {
       "domain": "post-training",
@@ -4753,6 +5459,22 @@
     },
     {
       "domain": "post-training",
+      "key": "opd2",
+      "title": "On-Policy Delta Distillation for Multilingual Math Reasoning",
+      "paper_url": "https://arxiv.org/abs/2608.05802",
+      "detail_path": "post-training/2608.05802-opd2/README.md",
+      "topic": [
+        "OPD",
+        "多语言推理"
+      ],
+      "first_author": "Byeongho Heo",
+      "first_author_affiliation": "NAVER AI Lab",
+      "published": "2026-08-06",
+      "code": "https://github.com/naver-ai/opd2",
+      "adapter": "opd2"
+    },
+    {
+      "domain": "post-training",
       "key": "opsd",
       "title": "OPSD",
       "paper_url": "https://arxiv.org/abs/2601.18734",
@@ -4840,6 +5562,22 @@
       "published": "2026-08-12",
       "code": null,
       "adapter": "pto"
+    },
+    {
+      "domain": "post-training",
+      "key": "r2-opd",
+      "title": "Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress",
+      "paper_url": "https://arxiv.org/abs/2608.19408",
+      "detail_path": "post-training/2608.19408-r2-opd/README.md",
+      "topic": [
+        "OPD",
+        "过程蒸馏"
+      ],
+      "first_author": "Chen Yang",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-08-19",
+      "code": null,
+      "adapter": "r2-opd"
     },
     {
       "domain": "post-training",
@@ -5023,6 +5761,54 @@
     },
     {
       "domain": "post-training",
+      "key": "rstg",
+      "title": "Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance",
+      "paper_url": "https://arxiv.org/abs/2608.00782",
+      "detail_path": "post-training/2608.00782-rstg/README.md",
+      "topic": [
+        "OPD",
+        "RLVR"
+      ],
+      "first_author": "Zhuowen Han",
+      "first_author_affiliation": "Tianjin University",
+      "published": "2026-08-01",
+      "code": null,
+      "adapter": "rstg"
+    },
+    {
+      "domain": "post-training",
+      "key": "rubric-dropout",
+      "title": "Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL",
+      "paper_url": "https://arxiv.org/abs/2608.11669",
+      "detail_path": "post-training/2608.11669-rubric-dropout/README.md",
+      "topic": [
+        "Rubric RL",
+        "reward hacking"
+      ],
+      "first_author": "Minglai Yang",
+      "first_author_affiliation": "Scale AI",
+      "published": "2026-08-12",
+      "code": null,
+      "adapter": "rubric-dropout"
+    },
+    {
+      "domain": "post-training",
+      "key": "sa-mrpo",
+      "title": "Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization",
+      "paper_url": "https://arxiv.org/abs/2608.16072",
+      "detail_path": "post-training/2608.16072-sa-mrpo/README.md",
+      "topic": [
+        "多奖励 RL",
+        "稳定性"
+      ],
+      "first_author": "Yixuan Wang",
+      "first_author_affiliation": "University of Florida",
+      "published": "2026-08-17",
+      "code": null,
+      "adapter": "sa-mrpo"
+    },
+    {
+      "domain": "post-training",
       "key": "self-rewarding",
       "title": "Self-Rewarding LM",
       "paper_url": "https://arxiv.org/abs/2401.10020",
@@ -5035,6 +5821,22 @@
       "published": "2024-01-18",
       "code": "未发现官方代码",
       "adapter": "self-rewarding"
+    },
+    {
+      "domain": "post-training",
+      "key": "serpo",
+      "title": "SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2607.26873",
+      "detail_path": "post-training/2607.26873-serpo/README.md",
+      "topic": [
+        "Rubric RL",
+        "测试时自进化"
+      ],
+      "first_author": "Jianze Wang",
+      "first_author_affiliation": "Authors did not disclose affiliation",
+      "published": "2026-07-29",
+      "code": null,
+      "adapter": "serpo"
     },
     {
       "domain": "post-training",
@@ -5123,6 +5925,22 @@
     },
     {
       "domain": "post-training",
+      "key": "smopd",
+      "title": "SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2608.03092",
+      "detail_path": "post-training/2608.03092-smopd/README.md",
+      "topic": [
+        "OPD",
+        "多奖励 RL"
+      ],
+      "first_author": "Wen Wang",
+      "first_author_affiliation": "Alibaba / Qwen",
+      "published": "2026-08-04",
+      "code": null,
+      "adapter": "smopd"
+    },
+    {
+      "domain": "post-training",
       "key": "specroll",
       "title": "SpecRoll: Fast-Slow Verifier-Feedback Adaptation for Speculative Reinforcement Learning Rollouts",
       "paper_url": "https://arxiv.org/abs/2608.04962",
@@ -5165,6 +5983,22 @@
       "published": "2025-06-30",
       "code": "https://github.com/spiral-rl/spiral",
       "adapter": "spiral"
+    },
+    {
+      "domain": "post-training",
+      "key": "sr-opsd",
+      "title": "SR-OPSD: Self-Referenced On-Policy Self-Distillation",
+      "paper_url": "https://arxiv.org/abs/2608.09745",
+      "detail_path": "post-training/2608.09745-sr-opsd/README.md",
+      "topic": [
+        "OPD",
+        "自蒸馏"
+      ],
+      "first_author": "Zhuo Sun",
+      "first_author_affiliation": "Independent Researcher",
+      "published": "2026-08-10",
+      "code": null,
+      "adapter": "sr-opsd"
     },
     {
       "domain": "post-training",

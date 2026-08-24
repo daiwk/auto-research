@@ -4,6 +4,18 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "sapo": ("Single-Rollout Autoregressive Policy Optimization", "https://arxiv.org/abs/2608.19842"),
+    "spade": ("Self-Play in Adaptive Synthetic Executable Environments", "https://arxiv.org/abs/2608.19197"),
+    "rtpo": ("Reverse-Turn Policy Optimization", "https://arxiv.org/abs/2608.18682"),
+    "planpo": ("Group Planning-Aware Policy Optimization", "https://arxiv.org/abs/2608.17289"),
+    "trca": ("Transition-wise Rubric Credit Assignment", "https://arxiv.org/abs/2608.16156"),
+    "loongreflect": ("LoongReflect", "https://arxiv.org/abs/2608.11967"),
+    "hymem": ("Hierarchical Context Management", "https://arxiv.org/abs/2608.15703"),
+    "openloopevolve": ("OpenLoopEvolve", "https://arxiv.org/abs/2608.09380"),
+    "pmcoder": ("Planning + Episodic Memory for Software Resolution", "https://arxiv.org/abs/2608.06811"),
+    "toollift": ("ToolLIFT", "https://arxiv.org/abs/2608.03468"),
+    "hyperagent": ("HyperAgent", "https://arxiv.org/abs/2608.02650"),
+    "manta": ("Multi-Agent Network Topology Adaptation", "https://arxiv.org/abs/2607.28527"),
     "agentx": ("AgentX", "https://arxiv.org/abs/2606.26859"),
     "auso": ("Action-Level Unified Skill Optimization", "https://arxiv.org/abs/2608.21292"),
     "sinkflex-rl": ("SinkFlex-RL", "https://arxiv.org/abs/2608.10357"),

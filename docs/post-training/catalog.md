@@ -9,25 +9,37 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| OPD | [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](2608.19408-r2-opd/README.md) | Authors did not disclose affiliation，2026-08-19 | 未发现官方代码 | `r2-opd` |
+| 多奖励 RL | [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](2608.16072-sa-mrpo/README.md) | University of Florida，2026-08-17 | 未发现官方代码 | `sa-mrpo` |
 | 多模态上下文偏好校准 | [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](2608.12158-c2-dpo/README.md) | Korea University，2026-08-12 | [已开源](https://github.com/mlvlab/C2-DPO) | `c2-dpo` |
 | 几何约束 RL | [GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs](2608.11674-gcpo/README.md) | Shanghai AI Laboratory，2026-08-12 | [已开源](https://github.com/Icarus1411/GCPO) | `gcpo` |
 | 前瞻偏好树 | [Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations](2608.12062-pto/README.md) | Reichman University，2026-08-12 | 未发现官方代码 | `pto` |
+| Rubric RL | [Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL](2608.11669-rubric-dropout/README.md) | Scale AI，2026-08-12 | 未发现官方代码 | `rubric-dropout` |
+| OPD | [SR-OPSD: Self-Referenced On-Policy Self-Distillation](2608.09745-sr-opsd/README.md) | Independent Researcher，2026-08-10 | 未发现官方代码 | `sr-opsd` |
 | 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/DBtxy/DASH-OPSD) | `dash` |
+| OPD | [On-Policy Delta Distillation for Multilingual Math Reasoning](2608.05802-opd2/README.md) | NAVER AI Lab，2026-08-06 | [已开源](https://github.com/naver-ai/opd2) | `opd2` |
 | 推理枢纽蒸馏 | [RP-OPSD](2608.06347-rp-opsd/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/NJUNLP/RP-OPSD) | `rp-opsd` |
 | 生成式奖励模型 | [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](2608.06310-rrc/README.md) | Northeastern University，2026-08-06 | [已开源](https://github.com/wangclnlp/RRC) | `rrc` |
 | 无监督自蒸馏 | [U-OPSD](2608.06296-u-opsd/README.md) | University of California, San Diego，2026-08-06 | 未发现官方代码 | `u-opsd` |
 | rollout 预算分配 | [Optimizing What Policies Learn From: Recoverability-Aware Rollout Intervention Learning](2608.05080-rail/README.md) | University of Notre Dame / Amazon，2026-08-05 | 未发现官方代码 | `rail` |
 | RL rollout 加速 | [SpecRoll: Fast-Slow Verifier-Feedback Adaptation for Speculative Reinforcement Learning Rollouts](2608.04962-specroll/README.md) | VNU University of Engineering and Technology / Viettel AI，2026-08-05 | [已开源](https://anonymous.4open.science/r/SpecRoll-26062006) | `specroll` |
 | 回报相关奖励塑形 | [ADRS](2608.03223-adrs/README.md) | University of Science and Technology of China，2026-08-04 | [已开源](https://github.com/gitrxh/ADRS-arxiv) | `adrs` |
+| OPD | [CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning](2608.03673-causal-opd/README.md) | Authors did not disclose affiliation，2026-08-04 | 未发现官方代码 | `causal-opd` |
+| OPD | [SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation](2608.03092-smopd/README.md) | Alibaba / Qwen，2026-08-04 | 未发现官方代码 | `smopd` |
+| 外部 rollout | [Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models](2608.01717-erils/README.md) | Seoul National University，2026-08-03 | 未发现官方代码 | `erils` |
 | 持续一致性蒸馏 | [PCSD](2608.01837-pcsd/README.md) | 论文未列机构，2026-08-03 | 未发现官方代码 | `pcsd` |
+| OPD | [Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance](2608.00782-rstg/README.md) | Tianjin University，2026-08-01 | 未发现官方代码 | `rstg` |
+| OPD | [Contrastive Reinforced Policy Optimization via Privileged Self-Distillation](2607.28026-crpo/README.md) | Authors did not disclose affiliation，2026-07-30 | 未发现官方代码 | `crpo` |
 | Context distillation | [Flux-OPD](2607.28022-flux-opd/README.md) | Peking University，2026-07-30 | 未发现官方代码 | `flux-opd` |
 | 多模态证据归因蒸馏 | [VAD](2607.28590-vad/README.md) | Shanghai Jiao Tong University，2026-07-30 | [已开源](https://github.com/DeepExperience/VAD_Multimodal_OPD) | `vad` |
 | On-policy self-distillation | [β-OPSD](2607.28582-beta-opsd/README.md) | University of Maryland, College Park，2026-07-30 | 未发现官方代码 | `beta-opsd` |
 | 分布保持 RL | [ReCo](2607.26862-reco/README.md) | Seoul National University，2026-07-29 | 未发现官方代码 | `reco-grpo` |
+| Rubric RL | [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](2607.26873-serpo/README.md) | Authors did not disclose affiliation，2026-07-29 | 未发现官方代码 | `serpo` |
 | Token-level credit assignment | [CoRT](2607.25659-cort/README.md) | ByteDance internship，2026-07-28 | 未发现官方代码 | `cort` |
 | On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | Zhejiang University，2026-07-28 | [已开源](https://github.com/ZJU-REAL/Relay-OPD) | `relay-opd` |
 | post-training | [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../reproductions/2607.20083-dynamic-rubric/README.md) | WeChat / Tencent，2026-07-22 | 未发现官方代码 | `dynamic-rubric` |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | 论文未列机构，2026-07-22 | 未发现官方代码 | `tcr` |
+| RLVR | [ISO: An RLVR-Native Optimization Stack](2607.19331-iso-rlvr/README.md) | The University of Texas at Austin，2026-07-21 | [已开源](https://github.com/zhuhanqing/ISO) | `iso-rlvr` |
 | rlvr | [Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information](../reproductions/2607.19313-off-context-grpo/README.md) | Meta AI，2026-07-21 | [已开源](https://github.com/AgPriyank/OC-GRPO) | `off-context-grpo` |
 | 教师奖励重权重 | [Distilled RL](2607.17247-distilled-rl/README.md) | Nankai University，2026-07-19 | [已开源](https://github.com/597358816/Distilled-RL) | `distilled-rl` |
 | Reference anchor | [ARMOR](2607.10481-armor/README.md) | University of Science and Technology of China，2026-07-11 | 未发现官方代码 | `armor` |

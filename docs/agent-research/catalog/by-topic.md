@@ -49,6 +49,7 @@
 ### 角色协作与软件开发
 
 - [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](../2608.05886-codegrep/README.md)（`codegrep`）：**主题：代码检索 Agent。** 以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。
+- [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
 - [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
 - [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
 - [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
@@ -65,6 +66,35 @@
 ### 研究自动化
 
 - [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../2606.26859-agentx/README.md)（`agentx`）：传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。
+
+### 记忆
+
+- [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](../2608.15703-hymem/README.md)（`hymem`）：把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。
+
+### 工具规划
+
+- [ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning](../2608.03468-toollift/README.md)（`toollift`）：把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。
+- [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
+
+### 反思
+
+- [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](../2608.11967-loongreflect/README.md)（`loongreflect`）：把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。
+
+### 自进化
+
+- [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
+
+### Agentic RL
+
+- [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](../2608.19842-sapo/README.md)（`sapo`）：同一自回归骨干在不同因果边界输出 policy/value，结合 PPO、on-policy SARSA 和 trajectory GAE。
+- [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../2608.18682-rtpo/README.md)（`rtpo`）：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。
+- [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../2608.19197-spade/README.md)（`spade`）：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
+- [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](../2608.17289-planpo/README.md)（`planpo`）：在成功轨迹内同时比较 trajectory turn 数和单 turn response 长度，形成 coarse-to-fine planning advantages。
+- [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](../2608.16156-trca/README.md)（`trca`）：无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。
+
+### 代码 Agent
+
+- [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
 
 ### Agentic RL / efficient long context
 

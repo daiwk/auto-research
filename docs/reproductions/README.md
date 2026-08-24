@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 253 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 262 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -191,7 +191,22 @@ pytest tests/test_research_module_docs.py
 - `ml-dcn` · [ML-DCN](2602.09194-ml-dcn/README.md)：Masked Low-Rank DCN 特征交叉。
 - `rag-qac` · [RAG-QAC](2602.01023-rag-qac/README.md)：RAG 与多目标对齐的查询补全。
 
-## 全部复现（253/253）
+<!-- historical-b07:start -->
+## 2026 历史扫描 B07（9 个基础模型 / 基础设施 adapter）
+
+- `tcab` · [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](2608.12831-tcab/README.md)：用最大耦合和最小生成树共享相同决策的反馈，同时保持每个自适应策略的边际轨迹分布不变。
+- `olmpool-long-context` · [Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension](2608.10296-olmpool-long-context/README.md)：以受控 7B 模型池隔离 normalization、GQA、预训练长度和滑窗注意力对长上下文扩展的复合影响。
+- `distillcache` · [DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference](2608.08878-distillcache/README.md)：把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。
+- `autonomy-heads` · [Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](2608.06849-autonomy-heads/README.md)：直接从冻结 QK 投影的谱有效秩区分 retrieval 与 streaming heads，无需校准数据或运行时门控。
+- `physics-mm-pretraining` · [Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes](2608.05000-physics-mm-pretraining/README.md)：用受控实验刻画模态知识流、协同/竞争、早期统一和共享 attention+norm/模态专属 FFN 配方。
+- `ttcd` · [Learning What to Remember: Test-Time Training via Context Distillation](2608.01672-ttcd/README.md)：长窗口教师以隐藏状态差异监督短窗口学生的 fast weights，使有限记忆优先保留未来有用信息。
+- `dart` · [DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling](2608.02032-dart/README.md)：保留 Mamba-2 chunk state contributions，解码 token-conditioned K/V 并执行 state-memory attention。
+- `transmem` · [TransMem: Transforming Hidden States into Memory for Large Language Models](2607.29032-transmem/README.md)：将冻结骨干的稀疏历史 hidden states 变换成可复用参数记忆，并用 evidence-conditioned self-distillation 学门控。
+- `c2kv` · [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](2607.17715-c2kv/README.md)：以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。
+
+<!-- historical-b07:end -->
+
+## 全部复现（262/262）
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|

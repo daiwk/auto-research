@@ -2483,9 +2483,9 @@
         "llm-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B10",
-      "plan_reason": "Agentic RL 与长时序 credit assignment"
+      "plan_reason": "Agentic RL 与长时序 credit assignment — completed"
     },
     {
       "arxiv_id": "2608.19836",
@@ -3260,9 +3260,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B08",
-      "plan_reason": "OPD 与多教师/过程蒸馏"
+      "plan_reason": "OPD 与多教师/过程蒸馏 — completed"
     },
     {
       "arxiv_id": "2608.19395",
@@ -3413,9 +3413,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B10",
-      "plan_reason": "Agentic RL 与长时序 credit assignment"
+      "plan_reason": "Agentic RL 与长时序 credit assignment — completed"
     },
     {
       "arxiv_id": "2608.19303",
@@ -4106,9 +4106,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B10",
-      "plan_reason": "Agentic RL 与长时序 credit assignment"
+      "plan_reason": "Agentic RL 与长时序 credit assignment — completed"
     },
     {
       "arxiv_id": "2608.18681",
@@ -6503,9 +6503,9 @@
         "multi-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B10",
-      "plan_reason": "Agentic RL 与长时序 credit assignment"
+      "plan_reason": "Agentic RL 与长时序 credit assignment — completed"
     },
     {
       "arxiv_id": "2608.17288",
@@ -8553,9 +8553,9 @@
         "multi-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B10",
-      "plan_reason": "Agentic RL 与长时序 credit assignment"
+      "plan_reason": "Agentic RL 与长时序 credit assignment — completed"
     },
     {
       "arxiv_id": "2608.16114",
@@ -8700,9 +8700,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B09",
-      "plan_reason": "Rubric、外部 rollout 与多奖励 RL"
+      "plan_reason": "Rubric、外部 rollout 与多奖励 RL — completed"
     },
     {
       "arxiv_id": "2608.16071",
@@ -9329,9 +9329,9 @@
         "llm-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B11",
-      "plan_reason": "Agent 记忆、工具规划与自进化系统"
+      "plan_reason": "Agent 记忆、工具规划与自进化系统 — completed"
     },
     {
       "arxiv_id": "2608.15698",
@@ -13936,9 +13936,9 @@
         "search-ranking"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.12821",
@@ -14948,9 +14948,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B10",
-      "plan_reason": "Agentic RL 与长时序 credit assignment"
+      "plan_reason": "Agentic RL 与长时序 credit assignment — completed"
     },
     {
       "arxiv_id": "2608.11965",
@@ -15510,9 +15510,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B09",
-      "plan_reason": "Rubric、外部 rollout 与多奖励 RL"
+      "plan_reason": "Rubric、外部 rollout 与多奖励 RL — completed"
     },
     {
       "arxiv_id": "2608.11661",
@@ -17547,9 +17547,9 @@
         "transformer-architecture"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.10288",
@@ -18151,9 +18151,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B08",
-      "plan_reason": "OPD 与多教师/过程蒸馏"
+      "plan_reason": "OPD 与多教师/过程蒸馏 — completed"
     },
     {
       "arxiv_id": "2608.09703",
@@ -18548,9 +18548,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B11",
-      "plan_reason": "Agent 记忆、工具规划与自进化系统"
+      "plan_reason": "Agent 记忆、工具规划与自进化系统 — completed"
     },
     {
       "arxiv_id": "2608.09374",
@@ -19258,9 +19258,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.08872",
@@ -22007,9 +22007,9 @@
         "model-compression"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.06834",
@@ -22063,9 +22063,9 @@
         "software-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B11",
-      "plan_reason": "Agent 记忆、工具规划与自进化系统"
+      "plan_reason": "Agent 记忆、工具规划与自进化系统 — completed"
     },
     {
       "arxiv_id": "2608.06802",
@@ -23351,9 +23351,9 @@
         "post-training"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B08",
-      "plan_reason": "OPD 与多教师/过程蒸馏"
+      "plan_reason": "OPD 与多教师/过程蒸馏 — completed"
     },
     {
       "arxiv_id": "2608.05792",
@@ -24378,9 +24378,9 @@
         "pretraining-data"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.04949",
@@ -26034,9 +26034,9 @@
         "opd"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B08",
-      "plan_reason": "OPD 与多教师/过程蒸馏"
+      "plan_reason": "OPD 与多教师/过程蒸馏 — completed"
     },
     {
       "arxiv_id": "2608.03659",
@@ -26393,9 +26393,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B11",
-      "plan_reason": "Agent 记忆、工具规划与自进化系统"
+      "plan_reason": "Agent 记忆、工具规划与自进化系统 — completed"
     },
     {
       "arxiv_id": "2608.03452",
@@ -26908,9 +26908,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B08",
-      "plan_reason": "OPD 与多教师/过程蒸馏"
+      "plan_reason": "OPD 与多教师/过程蒸馏 — completed"
     },
     {
       "arxiv_id": "2608.03091",
@@ -28389,9 +28389,9 @@
         "transformer-architecture"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.02031",
@@ -28973,9 +28973,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B09",
-      "plan_reason": "Rubric、外部 rollout 与多奖励 RL"
+      "plan_reason": "Rubric、外部 rollout 与多奖励 RL — completed"
     },
     {
       "arxiv_id": "2608.01715",
@@ -29130,9 +29130,9 @@
         "transformer-architecture"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2608.01667",
@@ -30701,9 +30701,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B08",
-      "plan_reason": "OPD 与多教师/过程蒸馏"
+      "plan_reason": "OPD 与多教师/过程蒸馏 — completed"
     },
     {
       "arxiv_id": "2608.04030",
@@ -31320,9 +31320,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B11",
-      "plan_reason": "Agent 记忆、工具规划与自进化系统"
+      "plan_reason": "Agent 记忆、工具规划与自进化系统 — completed"
     },
     {
       "arxiv_id": "2608.00303",
@@ -32335,9 +32335,9 @@
         "transformer-architecture"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2607.29010",
@@ -32958,9 +32958,9 @@
         "tool-agent"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B11",
-      "plan_reason": "Agent 记忆、工具规划与自进化系统"
+      "plan_reason": "Agent 记忆、工具规划与自进化系统 — completed"
     },
     {
       "arxiv_id": "2607.28496",
@@ -33447,9 +33447,9 @@
         "reward-model"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B09",
-      "plan_reason": "Rubric、外部 rollout 与多奖励 RL"
+      "plan_reason": "Rubric、外部 rollout 与多奖励 RL — completed"
     },
     {
       "arxiv_id": "2607.27968",
@@ -34801,9 +34801,9 @@
         "test-time-rl"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B09",
-      "plan_reason": "Rubric、外部 rollout 与多奖励 RL"
+      "plan_reason": "Rubric、外部 rollout 与多奖励 RL — completed"
     },
     {
       "arxiv_id": "2607.26832",
@@ -41147,9 +41147,9 @@
         "post-training"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B09",
-      "plan_reason": "Rubric、外部 rollout 与多奖励 RL"
+      "plan_reason": "Rubric、外部 rollout 与多奖励 RL — completed"
     },
     {
       "arxiv_id": "2607.19253",
@@ -42167,9 +42167,9 @@
         "model-compression"
       ],
       "full_text_review_required": true,
-      "plan_status": "planned-implementation",
+      "plan_status": "implemented-in-current-pr",
       "implementation_batch": "B07",
-      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施"
+      "plan_reason": "LLM 架构、长上下文、KV cache 与评测基础设施 — completed"
     },
     {
       "arxiv_id": "2607.17641",

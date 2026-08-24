@@ -10,7 +10,16 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 动作级技能优化 | [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](2608.21292-auso/README.md) | University of Science and Technology of China，2026-08-21 | [已开源](https://github.com/JordanSancholhz/Action-Skill) | `auso` |
+| Agentic RL | [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](2608.19842-sapo/README.md) | Xiamen University，2026-08-20 | 未发现官方代码 | `sapo` |
+| Agentic RL | [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](2608.18682-rtpo/README.md) | Adelaide University，2026-08-19 | 未发现官方代码 | `rtpo` |
+| Agentic RL | [SPADE: Self-Play in Adaptive Synthetic Executable Environments](2608.19197-spade/README.md) | University of Washington，2026-08-19 | [已开源](https://github.com/spade-rl/spade) | `spade` |
+| Agentic RL | [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](2608.17289-planpo/README.md) | Xiamen University，2026-08-18 | 未发现官方代码 | `planpo` |
+| Agentic RL | [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](2608.16156-trca/README.md) | Authors did not disclose affiliation，2026-08-17 | 未发现官方代码 | `trca` |
+| 记忆 | [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](2608.15703-hymem/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-08-16 | 未发现官方代码 | `hymem` |
+| 反思 | [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](2608.11967-loongreflect/README.md) | Authors did not disclose affiliation，2026-08-12 | 未发现官方代码 | `loongreflect` |
 | Agentic RL / efficient long context | [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](2608.10357-sinkflex-rl/README.md) | Capital One AI Foundations，2026-08-11 | 未发现官方代码 | `sinkflex-rl` |
+| 自进化 | [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](2608.09380-openloopevolve/README.md) | Tsinghua University，2026-08-10 | [已开源](https://github.com/yoyoshikc/OpenLoopEvolve) | `openloopevolve` |
+| 代码 Agent | [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](2608.06811-pmcoder/README.md) | Vanderbilt University，2026-08-07 | 未发现官方代码 | `pmcoder` |
 | 递归 turn 信用 | [AgentOPSD](2608.05987-agent-opsd/README.md) | Tsinghua University，2026-08-06 | [已开源](https://github.com/ZethWang/AgentOPSD) | `agent-opsd` |
 | 代码检索 Agent | [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](2608.05886-codegrep/README.md) | NetEase Guangzhou AI Lab，2026-08-06 | 未发现官方代码 | `codegrep` |
 | 搜索 Agent RL | [Contextual Information Policy Optimization for Search Agents](2608.06128-cipo/README.md) | Beihang University，2026-08-06 | 未发现官方代码 | `cipo` |
@@ -22,10 +31,13 @@
 | 端到端 Agent 记忆 | [MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off](2608.04843-memorycpt/README.md) | Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS，2026-08-05 | 未发现官方代码 | `memorycpt` |
 | 观测校准蒸馏 | [OCSD](2608.04788-ocsd/README.md) | Nanjing University，2026-08-05 | [已开源](https://github.com/yiy1x/OCSD) | `ocsd` |
 | 环境派生中训练 | [State2State: Environment-Derived Mid-Training for LLM Agents](2608.04934-state2state/README.md) | Tsinghua University AIR / Alibaba Group，2026-08-05 | [已开源](https://github.com/THUNLP-MT/State2State) | `state2state` |
+| 工具规划 | [ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning](2608.03468-toollift/README.md) | Authors did not disclose affiliation，2026-08-04 | 未发现官方代码 | `toollift` |
 | 可验证统一记忆 | [VerMem](2608.03137-vermem/README.md) | Sun Yat-sen University，2026-08-04 | [已开源](https://github.com/Sun-SYSU-24/VerMem) | `vermem` |
 | 检索—记忆共进化 | [CoEvo-Mem](2608.01739-coevo-mem/README.md) | 论文未列机构，2026-08-03 | 未发现官方代码 | `coevo-mem` |
 | 搜索轨迹 hindsight | [HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning](2608.01597-hindsearch/README.md) | Santa Clara University，2026-08-03 | [已开源](https://anonymous.4open.science/r/hindsearch-anon-EBDC) | `hindsearch` |
+| 工具规划 | [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](2608.02650-hyperagent/README.md) | University of New South Wales，2026-07-31 | 未发现官方代码 | `hyperagent` |
 | Agent group credit | [Group-Reflective Self-Distillation](2607.28076-grsd/README.md) | Baidu Inc.，2026-07-30 | [已开源](https://github.com/BinbZheng1/GRSD) | `grsd` |
+| 多 Agent | [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](2607.28527-manta/README.md) | Cornell University，2026-07-30 | 未发现官方代码 | `manta` |
 | CUA Reward 评测 | [OSReward / OS-Shepherd](2607.28609-osreward/README.md) | The University of Hong Kong，2026-07-30 | [已开源](https://os-copilot.github.io/OSReward-Home/) | `os-shepherd` |
 | Agent RL | [TAPO](2607.27973-tapo/README.md) | Peking University，2026-07-30 | 未发现官方代码 | `tapo` |
 | 成本感知工具停止 | [CAM-DF](2607.27083-cam-df/README.md) | Peking University，2026-07-29 | 未发现官方代码 | `cam-df` |

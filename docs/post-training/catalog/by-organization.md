@@ -2,6 +2,10 @@
 
 按论文一作的第一署名单位聚合；单位内按首次公开日期倒序排列。每篇论文同时显示一作姓名，并附一至两句中文方法简介。联合工作不会重复归入所有合作单位。
 
+## Alibaba / Qwen
+
+- 2026-08-04 · 一作：Wen Wang · [SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation](../2608.03092-smopd/README.md)（`smopd`）：先用 reward-priority 分别训练专长教师，再在学生自身轨迹上合并多个教师能力。
+
 ## Alibaba DAMO Academy
 
 - 2023-04-11 · 一作：Zheng Yuan · [RRHF](../2304.05302-rrhf/README.md)（`rrhf`）：PPO-RLHF 需要 policy、old policy、reward 和 value 等多模型协同，训练和调参复杂。RRHF 从多个模型或人工答案中采样响应，以 reward 给出完整排序，让模型自身的平均 log-likelihood 顺序与 reward 顺序一致，并对最高质量响应继续做 SFT。
@@ -28,6 +32,13 @@
 ## Apple
 
 - 2025-06-30 · 一作：Bo Liu · [SPIRAL](../2506.24119-spiral/README.md)（`spiral`）：同一模型扮演出题者和解题者，在可自动判定的零和多轮语言游戏中形成逐步变难的课程。
+
+## Authors did not disclose affiliation
+
+- 2026-08-19 · 一作：Chen Yang · [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](../2608.19408-r2-opd/README.md)（`r2-opd`）：分别按教师奖励和独立进展奖励排序 reasoning spans，冲突时屏蔽蒸馏信号。
+- 2026-08-04 · 一作：Jian Zhang · [CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning](../2608.03673-causal-opd/README.md)（`causal-opd`）：教师定位 on-policy 因果链第一个错误步骤，以短 horizon RL 修复，并按证据→机制→结论推进课程。
+- 2026-07-30 · 一作：Xingjian Wu · [Contrastive Reinforced Policy Optimization via Privileged Self-Distillation](../2607.28026-crpo/README.md)（`crpo`）：按预测熵区分反思探索正位置和 exposure-bias 负位置，对 privileged self-distillation 做组内对比。
+- 2026-07-29 · 一作：Jianze Wang · [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](../2607.26873-serpo/README.md)（`serpo`）：让 Good–Normal–Bad 响应档案、query-specific rubrics 和 actor 策略形成三方闭环自进化。
 
 ## Beijing Institute of Technology
 
@@ -67,6 +78,10 @@
 ## HKUST
 
 - 2023-04-13 · 一作：Hanze Dong · [RAFT](../2304.06767-raft/README.md)（`raft`）：PPO 的在线更新不稳定，而在固定 SFT 数据上训练又无法持续利用变好的策略。RAFT 每轮从当前模型生成多个响应，用 reward model 排序并丢弃低质量样本，只对选中的高质量响应执行普通 maximum-likelihood fine-tuning，然后用新策略进入下一轮。
+
+## Independent Researcher
+
+- 2026-08-10 · 一作：Zhuo Sun · [SR-OPSD: Self-Referenced On-Policy Self-Distillation](../2608.09745-sr-opsd/README.md)（`sr-opsd`）：把自教师与 reference 做几何插值得到有效目标，再用 Rényi divergence 控制投影几何和密度比敏感度。
 
 ## Independent researchers
 
@@ -108,6 +123,10 @@
 ## MiniMax
 
 - 2025-06-16 · 一作：MiniMax · [CISPO / MiniMax-M1](../2506.13585-cispo/README.md)（`cispo`）：固定 rollout policy 采样，token 级计算 importance ratio，只裁剪比率以保留优势方向和有效梯度。
+
+## NAVER AI Lab
+
+- 2026-08-06 · 一作：Byeongho Heo · [On-Policy Delta Distillation for Multilingual Math Reasoning](../2608.05802-opd2/README.md)（`opd2`）：以 post-trained teacher 相对其 base model 的概率增量作为蒸馏信号，减少复制教师原有偏差。
 
 ## NVIDIA
 
@@ -156,8 +175,13 @@
 
 - 2025-03-26 · 一作：Zichen Liu · [Dr. GRPO](../2503.20783-dr-grpo/README.md)（`dr-grpo`）：原始 GRPO 的 response 内长度平均和组内标准差会引入长度与题目难度偏置。Dr. GRPO 移除这两个归一化项，保留中心化的组相对奖励，让每条轨迹以原始尺度参与更新。
 
+## Scale AI
+
+- 2026-08-12 · 一作：Minglai Yang · [Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL](../2608.11669-rubric-dropout/README.md)（`rubric-dropout`）：每个 rollout group 共享随机丢弃的 rubric 子集，使策略无法持续利用固定 judge proxy。
+
 ## Seoul National University
 
+- 2026-08-03 · 一作：Wonseok Lee · [Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models](../2608.01717-erils/README.md)（`erils`）：约束外部策略 rollout 长度，并对 on-policy/external 来源分别处理奖励以防联合归一化崩溃。
 - 2026-07-29 · 一作：Junoh Park · [ReCo](../2607.26862-reco/README.md)（`reco-grpo`）：GRPO 容易重复采到高概率回答，并继续放大已经占优的 token，导致大 $k$ 下推理路径覆盖率下降。ReCo 同时修正 response 和 token：按 rollout 组中的期望出现次数抑制高频回答，再用 Bernoulli 方差比把更新集中到尚未饱和的决策点。
 
 ## Shanghai AI Laboratory
@@ -177,8 +201,13 @@
 
 - 2026-06-04 · 一作：Xingyu Su · [OPDLM](../2606.06712-opd-lm/README.md)（`opd-lm`）：ARLM 改成双向注意力后既会遗忘原知识，也有随机 mask 训练与 confidence decoding 推理之间的偏移。OPDLM 让双向学生在自身推理轨迹上生成，冻结 AR 教师在同一轨迹给 target logits。
 
+## The University of Texas at Austin
+
+- 2026-07-21 · 一作：Hanqing Zhu · [ISO: An RLVR-Native Optimization Stack](../2607.19331-iso-rlvr/README.md)（`iso-rlvr`）：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
+
 ## Tianjin University
 
+- 2026-08-01 · 一作：Zhuowen Han · [Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance](../2608.00782-rstg/README.md)（`rstg`）：只对负向零方差 group 启用教师，并在高熵或大 teacher-student gap token 上蒸馏，同时注入教师正确轨迹 SFT。
 - 2026-05-12 · 一作：Zhong Guan · [Missing Old Logits](../2605.12070-missing-old-logits/README.md)（`missing-old-logits`）：指出异步 RL 丢失历史训练侧 logits 后，训推校正与策略陈旧校正发生语义混叠；给出快照、old-logit model、中断同步和 PPO-EWMA 修复。
 
 ## Tsinghua University
@@ -201,6 +230,10 @@
 
 - 2026-08-06 · 一作：Yijiang Li · [U-OPSD](../2608.06296-u-opsd/README.md)（`u-opsd`）：U-OPSD 不使用答案、环境奖励或更大教师。模型多次采样后做多数投票，以最短一致解作为 privileged view，定点修复最长且高置信错误轨迹，是真正依赖内部一致性的自蒸馏。
 - 2025-08-05 · 一作：Feng Yao · [TIS](../web-2025-tis/README.md)（`tis`）：混合训练框架由 rollout 引擎采样、训练引擎重算 log-prob；即使权重相同，数值精度和 kernel 差异也会让行为分布与训练分布偏离。TIS 将训练侧与 rollout 引擎概率比乘入策略梯度，并只对过大的校正权重做单侧上截断，保留小权重样本而控制重尾方差。
+
+## University of Florida
+
+- 2026-08-17 · 一作：Yixuan Wang · [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](../2608.16072-sa-mrpo/README.md)（`sa-mrpo`）：逐 reward 维度标准化优势，并依据 batch 饱和度动态把梯度预算转移到尚未掌握的目标。
 
 ## University of Maryland, College Park
 

@@ -18,11 +18,8 @@ def test_historical_scan_keeps_every_candidate_and_fixed_batch_visible():
 
     planned = [paper for paper in papers if paper["plan_status"] == "planned-implementation"]
     completed = [paper for paper in papers if paper["plan_status"] == "implemented-in-current-pr"]
-    assert len(planned) == 33
-    assert len(completed) == 41
-    assert {paper["implementation_batch"] for paper in planned} == {
-        f"B{number:02d}" for number in range(7, 12)
-    }
+    assert len(planned) == 0
+    assert len(completed) == 74
 
     markdown = MARKDOWN_PATH.read_text(encoding="utf-8")
     for paper in papers:

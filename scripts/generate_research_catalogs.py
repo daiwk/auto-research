@@ -208,6 +208,15 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "tcab": ("预训练与数据", "训练框架与可组合实验"),
+    "olmpool-long-context": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "distillcache": ("推理与系统效率", "推测解码与 KV cache"),
+    "autonomy-heads": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "physics-mm-pretraining": ("多模态基础模型", "对比预训练与自蒸馏"),
+    "ttcd": ("注意力与长上下文", "位置编码与 KV 压缩"),
+    "dart": ("网络架构", "递归与 latent computation"),
+    "transmem": ("网络架构", "条件记忆与知识注入"),
+    "c2kv": ("推理与系统效率", "推测解码与 KV cache"),
     "rare": ("网络架构", "MoE、状态空间与残差路径"),
     "macro": ("网络架构", "动态层路由与残差路径"),
     "hilp": ("预训练与数据", "latent 与多步预测"),
