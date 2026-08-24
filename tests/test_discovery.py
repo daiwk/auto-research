@@ -58,6 +58,7 @@ def test_discovery_uses_all_queries_keeps_provenance_and_deduplicates_versions()
     assert len(papers) == 1
     assert papers[0].paper.title == "GenRec revised"
     assert papers[0].query_names == ("llm", "online")
+    assert papers[0].to_dict()["abstract"] == "recommendation ranking production experiment"
     assert papers[0].to_dict()["evidence_status"] == "full-text-review-required"
 
 

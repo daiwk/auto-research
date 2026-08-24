@@ -5,7 +5,11 @@
     "2608.18606-onemodel",
     "2608.21236-rare",
     "2608.11674-gcpo",
-    "2608.21292-auso"
+    "2608.21292-auso",
+    "2607.26369-clockrope",
+    "2607.27475-oneshot-index",
+    "2607.24789-next-vlm",
+    "2606.26859-agentx"
   ],
   "results": {
     "onemodel": {
@@ -31,9 +35,34 @@
       "baseline_average_cost": 0.655,
       "method_average_cost": 0.5954579618,
       "relative_cost_change": -0.0909
+    },
+    "clockrope": {
+      "source": "../reproductions/2607.26369-clockrope/metrics/movielens-100k-seed42.json",
+      "baseline_ndcg_at_10": 0.0540054678,
+      "method_ndcg_at_10": 0.0527646212,
+      "relative_change": -0.022976313383
+    },
+    "oneshot-index": {
+      "source": "../reproductions/2607.27475-oneshot-index/metrics/movielens-100k-seed42.json",
+      "baseline_ndcg_at_10": 0.0143519359,
+      "method_ndcg_at_10": 0.0132467605,
+      "relative_change": -0.077005323059
+    },
+    "next-vlm": {
+      "source": "../reproductions/2607.24789-next-vlm/metrics/movielens-1m-seed42.json",
+      "baseline_ndcg_at_10": 0.0997484294,
+      "method_ndcg_at_10": 0.1200258533,
+      "relative_change": 0.203285646131
+    },
+    "agentx": {
+      "source": "../agent-research/2606.26859-agentx/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.587,
+      "closed_loops": 12,
+      "experiment_memory_reuses": 108
     }
   },
-  "claim_boundary": "The aggregate is an index over per-paper source metrics, not a shared cross-task leaderboard. OneModel is a negative public-data result; RARE, GCPO and AUSO are mechanism-level mini-suite results.",
+  "claim_boundary": "The aggregate is an index over per-paper source metrics, not a shared cross-task leaderboard. OneModel, ClockRoPE and OneShot retain negative public-data results; NEXT is a positive single-seed diagnostic; RARE, GCPO, AUSO and AgentX are mechanism-level mini-suite results.",
   "manifest_ref": "experiments:recent-papers-20260824-seed42",
   "evaluation_protocol": {
     "tier": "l1_mechanism",
@@ -49,7 +78,11 @@
       "onemodel": "MovieLens-1M:leave-two-out:seed42",
       "rare": "deterministic-moe-routing-mini-suite:seed42",
       "gcpo": "arithmetic-smoke:120-steps:seed42",
-      "auso": "planbench-mini:120-episodes:seed42"
+      "auso": "planbench-mini:120-episodes:seed42",
+      "clockrope": "MovieLens-100K:leave-two-out:seed42",
+      "oneshot-index": "MovieLens-100K:leave-two-out:seed42",
+      "next-vlm": "MovieLens-1M:leave-two-out:seed42",
+      "agentx": "planbench-mini:120-episodes:seed42"
     }
   }
 }

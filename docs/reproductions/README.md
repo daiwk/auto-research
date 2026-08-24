@@ -73,6 +73,9 @@ pytest tests/test_research_module_docs.py
 
 ## 2026-08-24 近期跨领域增量
 
+- `oneshot-index` · [OneShot](2607.27475-oneshot-index/README.md)：Meta/Instagram 将层级索引与排序目标共同训练，并以 neural scoring 替代纯点积检索；已全量部署全球流量。
+- `clockrope` · [ClockRoPE](2607.26369-clockrope/README.md)：YouTube/Google DeepMind 从周期 kernel 的 Fourier 频谱采样旋转频率，为生成式召回显式建模日、周 routine。
+- `next-vlm` · [NEXT](2607.24789-next-vlm/README.md)：Meta 用 8B VLM 构造 item→intent→item 的 directed NKG，并把推理移到离线、线上只注入验证边。
 - `onemodel` · [OneModel](2608.18606-onemodel/README.md)：小红书以共享长序列 backbone、场景门控和分层用户表征统一推荐、广告与商家排序，并披露三个生产场景的量化 A/B。
 - `rare` · [RARE](2608.21236-rare/README.md)：把表征编辑方向投影到 MoE router 零空间，并在下游保护层校正传播漂移，保持原专家路径。
 

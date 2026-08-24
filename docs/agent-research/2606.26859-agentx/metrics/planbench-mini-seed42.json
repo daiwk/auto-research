@@ -1,0 +1,24 @@
+{
+  "paper": "2606.26859",
+  "method": "agentx",
+  "benchmark": "planbench-mini",
+  "seed": 42,
+  "episodes": 120,
+  "metrics": {
+    "answer_accuracy": 1.0,
+    "plan_success": 1.0,
+    "joint_success": 1.0,
+    "average_cost": 0.5869999999999987
+  },
+  "diagnostics": {
+    "skills_created": 12,
+    "skills_reused": 108,
+    "plan_explorations": 36,
+    "local_verifier_calls": 132,
+    "global_verifier_calls": 120,
+    "archival_writes": 12,
+    "policy_updates": 120,
+    "fidelity": "mechanism reproduction on deterministic benchmark mini-suite"
+  },
+  "diagnostic_only": true
+}

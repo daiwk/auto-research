@@ -17,6 +17,10 @@ class GenRecData:
     item_genres: tuple[tuple[str, ...], ...]
     popularity: np.ndarray
 
+    @property
+    def item_count(self) -> int:
+        return len(self.item_texts)
+
 
 def load_genrec_data(
     root: Path, *, maximum_users: int = 240, maximum_items: int = 500,

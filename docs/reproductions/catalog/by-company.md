@@ -76,6 +76,7 @@
 
 ## Google / YouTube
 - 2026-07 · [HA-MoE](../2607.27577-ha-moe/README.md)：依据内容异构性动态路由领域、转移、内容与新鲜度专家，在单一模型中统一开放网页排序。
+- 2026-07 · [ClockRoPE](../2607.26369-clockrope/README.md)：从日/周周期 kernel 的 Fourier 频谱采样旋转频率，为生成式召回显式建模用户 routine。
 - 2026-07 · [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：让分层 SID 同时承载协同身份并通过 Semantic Decoder 重建内容 embedding。
 - 2026-07 · [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：比较 recency、IPS、bias tower 与不确定性探索对新内容反馈环的影响。
 - 2026-06 · [TokenMinds](../2606.25147-tokenminds/README.md)：让共享 encoder 同时产生稠密用户向量，并由 decoder 生成可落到内容语义空间的 SID 用户 token，再共同服务下游排序。
@@ -128,10 +129,12 @@
 
 ## Meta
 - 2026-07 · [ROCS](../2607.27744-rocs/README.md)：复用单次 request encoding，并在候选端执行轻量 late interaction，统一覆盖广告/自然流量的检索和排序 serving。
+- 2026-07 · [OneShot](../2607.27475-oneshot-index/README.md)：将层级索引纳入 ranking objective 共同训练，并以 neural interaction scoring 突破纯点积检索。
 - 2026-07 · [Mosaic](../2607.24015-mosaic/README.md)：将多类用户 embedding 组织为 specialist fleet，并通过 MRM 联合标签与 cosine redundancy loss 保持新增表征的独特信息。
 - 2026-07 · [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶特征交互和门控 HSTU 序列建模，形成共同扩展的统一排序模型。
 - 2026-07 · [SlimPer](../2607.12281-slimper/README.md)：用固定容量 user-item knowledge base 逐层查询完整历史，并通过 Select–Match–Refine 把计算集中到候选相关证据。
 - 2026-07 · [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：在线聚类用户或物品表征，并以 cluster-aware sampler 改善训练样本覆盖和头部集中。
+- 2026-06 · [NEXT](../2607.24789-next-vlm/README.md)：用 VLM 生成并验证 item→intent→item directed edges，离线构图后在正反馈时在线注入。
 - 2026-06 · [CMSL](../2606.28533-cmsl/README.md)：用可学习兴趣 lenses 拆分多兴趣序列，并结合 HSTU 建模不同语义 strand。
 - 2026-06 · [G2Rec](../2606.20554-g2rec/README.md)：构建可微 soft graph，并联合图结构与生成式双目标学习用户—物品关系。
 - 2026-06 · [RankGraph-2](../2606.18379-rankgraph2/README.md)：用流行度校正边、离线多跳 PPR 和 residual cluster index 降低工业图召回的在线成本。

@@ -25,6 +25,8 @@
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。
 - [ROCS](../2607.27744-rocs/README.md)：Meta 将请求侧特征只编码一次，把候选相关交互延后到批量评分阶段，以统一服务检索和排序并提升 QPS。
 - [ASARL](../2607.26593-asarl/README.md)：以 ReasonAgent、CriticAgent、GenAgent 闭环整理 QQ 社交搜索数据，再经 SCT、PGO 和 Social Distillation 服务在线模型。
+- [ClockRoPE](../2607.26369-clockrope/README.md)：以随机 Fourier 旋转近似日/周周期注意力 prior，并与标准 RoPE 组合建模 routine。
+- [OneShot](../2607.27475-oneshot-index/README.md)：把 ranking-shaped 层级索引、全局路径平衡和 neural scoring 统一进端到端工业检索模型。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用冻结推荐双塔的目标/非目标亲和力差训练内容描述，并保持线上 content-only serving。
 - [SWAG](../2607.25233-swag-bid/README.md)：用 masked future plan、七日滑窗目标和逐步 gate 优化跨 episode 自动出价。
 - [TWICE](../2607.25404-twice/README.md)：分离点击和转化时钟，以 current-status likelihood 和单调 delay CDF 学习长期 CVR。
@@ -58,6 +60,7 @@
 - [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：在线聚类用户或物品表征，并以 cluster-aware sampler 改善训练样本覆盖和头部集中。
 
 ## 2026-06
+- [NEXT](../2607.24789-next-vlm/README.md)：以 VLM 推理 next intent、检索并验证 directed video edges，再通过离线 NKG 支持低延迟在线注入。
 - [CMSL](../2606.28533-cmsl/README.md)：用可学习兴趣 lenses 拆分多兴趣序列，并结合 HSTU 建模不同语义 strand。
 - [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 汇总验证和指标反馈，并通过四级级联阻断静默错误架构。
 - [TokenMinds](../2606.25147-tokenminds/README.md)：共享序列 encoder，同时输出稠密用户向量和分层 SID 用户 token，再以可学习 token embedding 注入生产排序模型。

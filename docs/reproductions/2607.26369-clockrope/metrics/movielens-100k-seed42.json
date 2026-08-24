@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "adapter": "clockrope",
+  "paper": "2607.26369",
+  "dataset": "MovieLens-100K",
+  "seed": 42,
+  "baseline": {"hit_at_10": 0.1090909091, "ndcg_at_10": 0.0540054678},
+  "method": {"hit_at_10": 0.1090909091, "ndcg_at_10": 0.0527646212},
+  "relative": {"hit_at_10_percent": 0.0, "ndcg_at_10_percent": -2.2976313383},
+  "diagnostic_only": true,
+  "reproduction_fidelity": "core_mechanism"
+}

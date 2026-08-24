@@ -15,6 +15,7 @@
 - [RECAP](../2607.15730-recap/README.md)：用 causal Transformer 更新固定容量语义画像，再通过双塔反馈评价器与 GRPO 让画像直接服务未来推荐。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：让 LLM 读取可演化用户记忆并联合生成文本/SID，再以 latent token 重建蒸馏与排序反馈降低显式推理成本。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构推荐特征转成 Qwen 生成提示，并通过 token 压缩与配置化合并完成召回。
+- [NEXT](../2607.24789-next-vlm/README.md)：训练面向推荐的 8B VLM 生成 next-intent query，并把高置信 directed edges 离线物化为 NKG。
 - [TokenMinds](../2606.25147-tokenminds/README.md)：把观看、搜索与场景信号编码为稠密用户向量和 SID 用户 token，以双输出和 multi-context decoding 支持下游排序与跨场景复用。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 补充传统召回和排序特征。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用真实 LLM 对齐物品共现和用户兴趣，再以 Semantic ID 支持面向长尾的非对称知识迁移。
@@ -104,6 +105,7 @@
 - [CCFormer](../2607.28070-ccformer/README.md)：以字段分离的 ID/content 编码和门控融合增强冷内容泛化，再分层压缩远期 token、保留近期行为细节。
 - [HA-MoE](../2607.27577-ha-moe/README.md)：用内容异构性控制多门控 MoE，在同一排序器内平衡通用与领域专长信号。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
+- [ClockRoPE](../2607.26369-clockrope/README.md)：从周期 kernel 的 Fourier 变换采样旋转频率，让 attention 同时识别 recency 与日/周 routine。
 - [TWICE](../2607.25404-twice/README.md)：以点击/转化双时钟和单调 delay CDF 处理长期转化反馈未成熟问题。
 - [CORE](../2607.24417-core-relevance/README.md)：将有序相关性拆成 High/Non-High 与条件 Mid/Low 两道边界，并把 step-GRPO reasoning 经 PostCoT 蒸馏给在线双头排序器。
 - [Mosaic](../2607.24015-mosaic/README.md)：把不同归纳偏置的 user embedding 作为可独立演进的 specialist fleet，用 MRM 复合监督和去冗余损失增加下游有效信息。
@@ -201,6 +203,7 @@
 - [SPEAR](../2608.01738-spear/README.md)：以双 embedding 和乘法选择门把 query rewrite 与 item relevance 端到端对齐，同时保留原 query residual。
 - [STEPS](../2608.01949-steps/README.md)：以 planning、execution、filter 三 Agent 联合决定推送动作和下一次系统唤醒时刻。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
+- [OneShot](../2607.27475-oneshot-index/README.md)：把索引 assignment 与排序目标共同训练，再在命中路径内执行比点积更强的 neural scoring。
 - [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复读取用户历史，让 request-only 表征可跨候选复用，再进行候选相关精排。
 - [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 召回兼容的前提下，通过循环修正、跨塔同步和级联教师增强交互能力。
 - [COBRA](../2503.02453-cobra/README.md)：先执行稀疏生成缩小候选空间，再用稠密生成细排，形成级联召回—排序路径。

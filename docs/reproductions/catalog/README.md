@@ -29,6 +29,8 @@
 | 生成、排序与冷启动 | [Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study](../2607.27577-ha-moe/README.md) | Google / Discover，2026-07-30 | 未发现官方代码 | `ha-moe` |
 | 生成、排序与冷启动 | [ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation](../2607.27744-rocs/README.md) | Meta AI，2026-07-30 | [已开源](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) | `rocs` |
 | 训练目标与决策优化 | [ASARL: Autonomous Social-Aware Relevance Learning for QQ Search](../2607.26593-asarl/README.md) | Tencent PCG，2026-07-29 | 未发现官方代码 | `asarl` |
+| 生成、排序与冷启动 | [ClockRoPE: Random Fourier Rotations for Temporal Routine Modeling](../2607.26369-clockrope/README.md) | YouTube / Google DeepMind，2026-07-29 | 未发现官方代码 | `clockrope` |
+| 多阶段排序与混排 | [OneShot: Index-in-Ranking with Neural Scoring for Large-Scale Retrieval](../2607.27475-oneshot-index/README.md) | Meta / Instagram，2026-07-29 | 未发现官方代码 | `oneshot-index` |
 | 训练目标与决策优化 | [Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness](../2607.25233-swag-bid/README.md) | Alibaba International Digital Commerce / Dalian University of Technology，2026-07-28 | 未发现官方代码 | `swag-bid` |
 | 大模型能力与推荐融合 | [RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation](../2607.25901-reco-reward/README.md) | Kuaishou / Nankai University / Chinese Academy of Sciences，2026-07-28 | 未发现官方代码 | `reco-reward` |
 | 生成、排序与冷启动 | [TWICE: Two-Clock, Two-Window Learning for Long-Horizon Conversion Prediction in Online Advertising](../2607.25404-twice/README.md) | Kuaishou，2026-07-28 | 未发现官方代码 | `twice` |
@@ -60,6 +62,7 @@
 | 生成、排序与冷启动 | [SlimPer: Make Personalization Model Slim and Smart](../2607.12281-slimper/README.md) | Meta Platforms, Inc.，2026-07-14 | 未发现官方代码 | `slimper` |
 | 训练目标与决策优化 | [Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval](../2607.00448-cluster-goobs/README.md) | Meta，2026-07-01 | 未发现官方代码 | `cluster-goobs` |
 | 大模型能力与推荐融合 | [Prompt Generation Technical Report](../2607.11326-prompt-generation/README.md) | Alibaba / Taobao Search，2026-07 | 未发现官方代码 | `prompt-generation` |
+| 大模型能力与推荐融合 | [NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model](../2607.24789-next-vlm/README.md) | Meta，2026-06-27 | 未发现官方代码 | `next-vlm` |
 | 生成、排序与冷启动 | [CMSL: Constructive Multi-Sequence Learning for Recommendation Systems](../2606.28533-cmsl/README.md) | Meta，2026-06-26 | 未发现官方代码 | `cmsl` |
 | Serving 与研究基础设施 | [NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems](../2606.27243-nova/README.md) | Tencent，2026-06-25 | 未发现官方代码 | `nova` |
 | 大模型能力与推荐融合 | [TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems](../2606.25147-tokenminds/README.md) | Google DeepMind / YouTube，2026-06-23 | 未发现官方代码 | `tokenminds` |
