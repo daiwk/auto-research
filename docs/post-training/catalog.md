@@ -10,6 +10,7 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 多模态上下文偏好校准 | [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](2608.12158-c2-dpo/README.md) | Korea University，2026-08-12 | [已开源](https://github.com/mlvlab/C2-DPO) | `c2-dpo` |
+| 几何约束 RL | [GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs](2608.11674-gcpo/README.md) | Shanghai AI Laboratory，2026-08-12 | [已开源](https://github.com/Icarus1411/GCPO) | `gcpo` |
 | 前瞻偏好树 | [Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations](2608.12062-pto/README.md) | Reichman University，2026-08-12 | 未发现官方代码 | `pto` |
 | 自适应自蒸馏 | [DASH](2608.06243-dash/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/DBtxy/DASH-OPSD) | `dash` |
 | 推理枢纽蒸馏 | [RP-OPSD](2608.06347-rp-opsd/README.md) | Nanjing University，2026-08-06 | [已开源](https://github.com/NJUNLP/RP-OPSD) | `rp-opsd` |

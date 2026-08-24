@@ -124,6 +124,7 @@ POST_TRAINING_MUTATIONS = {
     "2608.04962": ("specroll", "用 fast hidden-state correction 与 slow drafter refresh 加速 on-policy rollout"),
     "2608.12062": ("pto", "以 oracle look-ahead preference tree 构造长期对话偏好，再迭代执行 DPO"),
     "2608.12158": ("c2-dpo", "显式最大化有无上下文时的 preference gain，同时保留原偏好顺序"),
+    "2608.11674": ("gcpo", "以预训练权重主奇异空间的双侧正交补约束 rollout RL 更新，降低能力覆盖与训练失稳"),
 }
 
 AGENT_MUTATIONS = {
@@ -197,6 +198,7 @@ AGENT_MUTATIONS = {
     "2608.04843": ("memory:memorycpt", "MemoryCPT 蒸馏离线记忆构建，并用 cost-aware GRPO 训练查询摘要器"),
     "2608.01597": ("critic:hindsearch", "HindSearch 用 gold-aware 失败轨迹 hindsight critique 蒸馏搜索动作"),
     "2608.10357": ("memory:sinkflex-rl", "以 sink-aware sliding-window FlexAttention 降低长轨迹 GRPO 的显存开销"),
+    "2608.21292": ("memory:auso", "以动作级有技能/无技能 JSD 统一技能内化、探索和有界利用"),
 }
 
 FALLBACK_PAPERS = (

@@ -198,6 +198,8 @@ PUBLISHED_DATES = {
     "2608.10257": "2026-08-10",
     "2608.10187": "2026-08-10",
     "2608.09408": "2026-08-10",
+    "2608.18606": "2026-08-19",
+    "2608.21236": "2026-08-21",
 }
 
 # Older adapters predate the catalog metadata contract. Keep verified affiliations here

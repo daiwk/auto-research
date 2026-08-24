@@ -15,6 +15,7 @@ nav:
   - 论文实现与评测:
       - 研究库总览: research-library.md
       - 发现闭环与防遗漏审计: paper-discovery-audit.md
+      - 近期论文扫描（2026-08-24）: recent-paper-scan-20260824.md
       - 统一后续路线图与 TODO: research-roadmap.md
       - 全主题缺口审计（2026-08-08）: full-domain-gap-review-20260808.md
       - 搜广推与 LLM 应用:

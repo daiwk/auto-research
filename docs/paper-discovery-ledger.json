@@ -1166,6 +1166,101 @@
           }
         }
       ]
+    },
+    {
+      "batch": "2026-08-24-recent-representative-review",
+      "scope_kind": "recent-representative-review",
+      "checked_at": "2026-08-24T18:00:00+08:00",
+      "window": "2026-08-10 through 2026-08-24",
+      "sources": [
+        "official arXiv API multi-query pagination",
+        "cross-source official publication pages",
+        "paper HTML/PDF full-text review",
+        "Google and Meta priority reverse search",
+        "official repository search"
+      ],
+      "candidate_pool": {
+        "recommendation": {"total": 74, "new": 68},
+        "foundation-model": {"total": 505, "new": 502},
+        "post-training": {"total": 162, "new": 161},
+        "agent": {"total": 430, "new": 428}
+      },
+      "closure_claim": "representative full-text shortlist only; the high-recall candidate artifacts remain pending incremental review",
+      "candidates": [
+        {
+          "id": "2608.18606",
+          "title": "OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking",
+          "organization": "Xiaohongshu",
+          "priority": "P0",
+          "track": "recommendation",
+          "subtopic": "multi-scenario-ranking",
+          "status": "implemented",
+          "key": "onemodel",
+          "doc": "reproductions/2608.18606-onemodel/README.md",
+          "evidence_gate": "three quantified production A/B experiments",
+          "priority_reason": "platform-scale ranking foundation with online recommendation, advertising and merchant results"
+        },
+        {
+          "id": "2608.21236",
+          "title": "RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models",
+          "organization": "Huazhong University of Science and Technology",
+          "priority": "P0",
+          "track": "foundation-model",
+          "subtopic": "moe-routing-and-steering",
+          "status": "implemented",
+          "key": "rare",
+          "doc": "reproductions/2608.21236-rare/README.md"
+        },
+        {
+          "id": "2608.11674",
+          "title": "GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs",
+          "organization": "Shanghai AI Laboratory",
+          "priority": "P0",
+          "track": "post-training",
+          "subtopic": "geometric-constrained-policy-optimization",
+          "status": "implemented",
+          "key": "gcpo",
+          "doc": "post-training/2608.11674-gcpo/README.md"
+        },
+        {
+          "id": "2608.21292",
+          "title": "AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization",
+          "organization": "University of Science and Technology of China",
+          "priority": "P0",
+          "track": "agent",
+          "subtopic": "action-level-skill-optimization",
+          "status": "implemented",
+          "key": "auso",
+          "doc": "agent-research/2608.21292-auso/README.md"
+        },
+        {
+          "id": "2608.18531",
+          "title": "Pairwise Ranking",
+          "organization": "not a qualifying Google/Meta industrial recommendation paper",
+          "priority": "P2",
+          "track": "recommendation",
+          "status": "rejected",
+          "reason": "priority-organization query false positive; topic and full-text scope do not satisfy the industrial recommendation online-evidence gate"
+        },
+        {
+          "id": "2608.15780",
+          "title": "Decomposing Staleness",
+          "organization": "not a qualifying Google/Meta industrial recommendation paper",
+          "priority": "P2",
+          "track": "recommendation",
+          "status": "rejected",
+          "reason": "priority-organization query false positive; outside the repository's industrial recommendation implementation scope"
+        },
+        {
+          "id": "2608.15424",
+          "title": "ETHOS",
+          "organization": "not a qualifying Google/Meta industrial recommendation paper",
+          "priority": "P2",
+          "track": "recommendation",
+          "status": "rejected",
+          "reason": "priority-organization query false positive; no qualifying industrial recommendation online-evidence target was found"
+        }
+      ]
     }
   ]
 }

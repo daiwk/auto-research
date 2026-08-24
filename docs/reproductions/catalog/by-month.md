@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-08
+- [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
 - [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - [ConnectionMind](../2608.10187-connectionmind/README.md)：在 user-item-tag-social 异构图上以最短正路径 SFT、规则奖励 GRPO 和路径蒸馏执行多步可解释推荐。
 - [DREAM](../2608.09408-dream/README.md)：把分层用户意图翻译为可校验的推荐策略参数，并以离线模拟和线上反馈双环更新策略记忆。

@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-24",
+  "scope": [
+    "2608.18606-onemodel",
+    "2608.21236-rare",
+    "2608.11674-gcpo",
+    "2608.21292-auso"
+  ],
+  "results": {
+    "onemodel": {
+      "source": "../reproductions/2608.18606-onemodel/metrics/movielens-1m-seed42.json",
+      "baseline_ndcg_at_10": 0.12851715765416122,
+      "method_ndcg_at_10": 0.08701532450732896,
+      "relative_change": -0.322928
+    },
+    "rare": {
+      "source": "../reproductions/2608.21236-rare/metrics/routing-mini-suite-seed42.json",
+      "baseline_route_agreement": 0.82373046875,
+      "method_route_agreement": 1.0,
+      "method_route_flip_rate": 0.0
+    },
+    "gcpo": {
+      "source": "../post-training/2608.11674-gcpo/metrics/arithmetic-smoke-seed42.json",
+      "baseline_accuracy": 0.1953125,
+      "final_accuracy": 0.6328125,
+      "principal_overlap_removed": 0.995594
+    },
+    "auso": {
+      "source": "../agent-research/2608.21292-auso/metrics/planbench-mini-seed42.json",
+      "baseline_average_cost": 0.655,
+      "method_average_cost": 0.5954579618,
+      "relative_cost_change": -0.0909
+    }
+  },
+  "claim_boundary": "The aggregate is an index over per-paper source metrics, not a shared cross-task leaderboard. OneModel is a negative public-data result; RARE, GCPO and AUSO are mechanism-level mini-suite results.",
+  "manifest_ref": "experiments:recent-papers-20260824-seed42",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/recent-papers-20260824-seed42.json",
+    "dataset_fingerprint": {
+      "onemodel": "MovieLens-1M:leave-two-out:seed42",
+      "rare": "deterministic-moe-routing-mini-suite:seed42",
+      "gcpo": "arithmetic-smoke:120-steps:seed42",
+      "auso": "planbench-mini:120-episodes:seed42"
+    }
+  }
+}

@@ -13,6 +13,7 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
     from .p1_20260808 import P1_AGENTS
     from .latest_20260809 import LATEST_AGENTS
     from .latest_20260813 import LATEST_AGENTS as LATEST_20260813_AGENTS
+    from .latest_20260824 import LATEST_AGENTS as LATEST_20260824_AGENTS
 
     classes = {
         "long-context": LongContextAgent,
@@ -62,5 +63,6 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         **P1_AGENTS,
         **LATEST_AGENTS,
         **LATEST_20260813_AGENTS,
+        **LATEST_20260824_AGENTS,
     }
     return classes[method](capacity, rng)
