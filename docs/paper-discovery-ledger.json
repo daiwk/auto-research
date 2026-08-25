@@ -1261,6 +1261,29 @@
           "reason": "priority-organization query false positive; no qualifying industrial recommendation online-evidence target was found"
         }
       ]
+    },
+    {
+      "batch": "2026-08-25-daily-increment",
+      "scope_kind": "daily-high-recall-increment",
+      "checked_at": "2026-08-25T12:00:00+08:00",
+      "window": "new arXiv daily batch visible on 2026-08-25; submitted 2026-08-24 UTC",
+      "sources": [
+        "official arXiv API submittedDate exhaustive metadata",
+        "DeepXiv semantic cross-check",
+        "paper HTML/PDF full-text review",
+        "Google and Meta priority reverse search",
+        "official repository links"
+      ],
+      "candidate_pool": {"cross_domain_metadata_total": 329},
+      "industrial_recommendation_result": "no new paper passed the quantified online A/B or full-traffic evidence gate",
+      "candidates": [
+        {"id": "2608.23493", "key": "srpo", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.23493-srpo/README.md"},
+        {"id": "2608.23311", "key": "erpo", "track": "post-training", "priority": "P0", "organization": "AMAP, Alibaba Group", "status": "implemented", "doc": "post-training/2608.23311-erpo/README.md"},
+        {"id": "2608.23318", "key": "agent-g2", "track": "agent", "priority": "P0", "organization": "Baidu", "status": "implemented", "doc": "agent-research/2608.23318-agent-g2/README.md"},
+        {"id": "2608.23041", "key": "autosaddler", "track": "agent", "priority": "P0", "organization": "Microsoft / POSTECH", "status": "implemented", "doc": "agent-research/2608.23041-autosaddler/README.md"},
+        {"id": "2608.23400", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "public-dataset academic recommendation; no quantified production online A/B"},
+        {"id": "2608.22734", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "public-dataset academic recommendation; no quantified production online A/B"}
+      ]
     }
   ]
 }

@@ -91,6 +91,8 @@ METHODS = (
     "toollift",
     "hyperagent",
     "manta",
+    "agent-g2",
+    "autosaddler",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

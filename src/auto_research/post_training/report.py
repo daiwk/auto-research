@@ -4,6 +4,8 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "srpo": ("Self-Reflective Policy Optimization", "https://arxiv.org/abs/2608.23493"),
+    "erpo": ("Environment-Regularized Policy Optimization", "https://arxiv.org/abs/2608.23311"),
     "r2-opd": ("Reasoning-Progress-Aware OPD", "https://arxiv.org/abs/2608.19408"),
     "sr-opsd": ("Self-Referenced OPSD", "https://arxiv.org/abs/2608.09745"),
     "opd2": ("On-Policy Delta Distillation", "https://arxiv.org/abs/2608.05802"),

@@ -5962,5 +5962,61 @@
     "height": 827,
     "score": 0,
     "error": ""
+  },
+  {
+    "page": "docs/post-training/2608.23493-srpo/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.23493",
+    "arxiv_id": "2608.23493",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1. Overview of the SRPO Framework. The process consists",
+    "source_url": "https://arxiv.org/pdf/2608.23493#page=3",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/post-training/2608.23493-srpo/assets/paper-figure-01.png",
+    "width": 611,
+    "height": 412,
+    "score": 70,
+    "error": ""
+  },
+  {
+    "page": "docs/post-training/2608.23311-erpo/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.23311",
+    "arxiv_id": "2608.23311",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2: The Proposed ERPO Overview. (a) For each query, the policy and reference induce current and reference query samplers, and we pre-compute a Query-KL to penalize environment drift. (b) For each query, the policy samples a response group scored by the reward model to produce the standard GRPO learning signal. (c) On top of GRPO we replace response-KL with pre-computed Query-KL and weight within-query advantages by the query’s occurrence probability, yielding an environment-aware update.",
+    "source_url": "https://arxiv.org/html/2608.23311v1/main_pipeline_final.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/post-training/2608.23311-erpo/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 485,
+    "score": 68,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2608.23041-autosaddler/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.23041",
+    "arxiv_id": "2608.23041",
+    "figure": "Figure 2",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2608.23041v1/main_figure_revised.png",
+    "extraction": "existing",
+    "asset": "docs/agent-research/2608.23041-autosaddler/assets/paper-figure-01.png",
+    "width": 1254,
+    "height": 650,
+    "score": 0,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2608.23318-agent-g2/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.23318",
+    "arxiv_id": "2608.23318",
+    "figure": "Figure 4",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2608.23318v1/main.png",
+    "extraction": "existing",
+    "asset": "docs/agent-research/2608.23318-agent-g2/assets/paper-figure-01.png",
+    "width": 1582,
+    "height": 647,
+    "score": 0,
+    "error": ""
   }
 ]

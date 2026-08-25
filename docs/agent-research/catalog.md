@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 高斯 guidance Agent RL | [Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning](2608.23318-agent-g2/README.md) | Baidu，2026-08-24 | [已开源](https://github.com/ZJU-REAL/Agent-G2) | `agent-g2` |
+| Harness 自动优化 | [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](2608.23041-autosaddler/README.md) | Microsoft / POSTECH，2026-08-24 | 未发现官方代码 | `autosaddler` |
 | 动作级技能优化 | [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](2608.21292-auso/README.md) | University of Science and Technology of China，2026-08-21 | [已开源](https://github.com/JordanSancholhz/Action-Skill) | `auso` |
 | Agentic RL | [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](2608.19842-sapo/README.md) | Xiamen University，2026-08-20 | 未发现官方代码 | `sapo` |
 | Agentic RL | [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](2608.18682-rtpo/README.md) | Adelaide University，2026-08-19 | 未发现官方代码 | `rtpo` |

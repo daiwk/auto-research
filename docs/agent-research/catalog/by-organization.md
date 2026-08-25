@@ -28,6 +28,10 @@
 - 2026-08-12 · 一作：Zhixin Zhang · [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](../2608.11967-loongreflect/README.md)（`loongreflect`）：把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。
 - 2026-08-04 · 一作：Xiuhui You · [ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning](../2608.03468-toollift/README.md)（`toollift`）：把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。
 
+## Baidu
+
+- 2026-08-24 · 一作：Zixuan Wang · [Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning](../2608.23318-agent-g2/README.md)（`agent-g2`）：Hint-based Agent RL 保留专家轨迹前缀再让策略探索，但固定深度忽略任务难度，逐样本 probe 又浪费 rollout。Agent-G² 从已有 policy rollout 按难度簇估计 guidance band 的中心和方差，对每个任务采样不同前缀深度。
+
 ## Baidu Inc.
 
 - 2026-07-30 · 一作：Binbin Zheng · [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
@@ -104,6 +108,10 @@
 ## Microsoft
 
 - 2023-05-19 · 一作：Zhibin Gou · [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
+
+## Microsoft / POSTECH
+
+- 2026-08-24 · 一作：Sungho Park · [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](../2608.23041-autosaddler/README.md)（`autosaddler`）：长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。
 
 ## Microsoft Research
 

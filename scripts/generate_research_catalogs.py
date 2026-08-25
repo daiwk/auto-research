@@ -125,6 +125,8 @@ TOPIC_HIERARCHY = {
         "稳定 MoE RL": ("训推一致性与高效 rollout", "重要性采样与引擎失配"),
         "生成式奖励模型": ("奖励、信用与课程", "奖励构造与排序信号"),
         "rollout 预算分配": ("训推一致性与高效 rollout", "预算分配与 speculative rollout"),
+        "反思式 token 信用": ("奖励、信用与课程", "过程 / token 信用分配"),
+        "输入侧 Query-KL": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "RL rollout 加速": ("训推一致性与高效 rollout", "预算分配与 speculative rollout"),
     },
     "agent-research": {
@@ -195,6 +197,8 @@ TOPIC_HIERARCHY = {
         "代码检索 Agent": ("多 Agent 与软件工程", "角色协作与软件开发"),
         "端到端 Agent 记忆": ("记忆、技能与持续学习", "主动 / 长期记忆"),
         "搜索轨迹 hindsight": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
+        "高斯 guidance Agent RL": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
+        "Harness 自动优化": ("Agentic RL 与后训练", "Harness 与运行时策略"),
     },
 }
 

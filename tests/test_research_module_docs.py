@@ -98,6 +98,8 @@ MODULES = {
         "crpo": "2607.28026-crpo",
         "serpo": "2607.26873-serpo",
         "iso-rlvr": "2607.19331-iso-rlvr",
+        "srpo": "2608.23493-srpo",
+        "erpo": "2608.23311-erpo",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -175,6 +177,8 @@ MODULES = {
         "toollift": "2608.03468-toollift",
         "hyperagent": "2608.02650-hyperagent",
         "manta": "2607.28527-manta",
+        "agent-g2": "2608.23318-agent-g2",
+        "autosaddler": "2608.23041-autosaddler",
     },
 }
 

@@ -18,6 +18,8 @@
 - [论文谱系与缺口](lineage.md)：系统审计经典主干、最新覆盖和真实环境前置条件。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
 - [可训练 policy 与真实 executor](training-executor.md)：Agent Lightning checkpoint 更新与同预算代码执行矩阵。
+- [Agent-G²](2608.23318-agent-g2/README.md)：从已有 rollout 在线估计高斯 guidance band，无额外 probing。
+- [AutoSaddler](2608.23041-autosaddler/README.md)：由失败 trace 诊断、生成并验证 durable harness patch。
 - [Toolformer](2302.04761-toolformer/README.md)：按 token loss improvement 自监督过滤工具调用。
 - [Self-Refine](2303.17651-self-refine/README.md)：同一模型生成、自反馈并迭代改写。
 - [ReWOO](2305.18323-rewoo/README.md)：Planner、Worker、Solver 解耦，减少观察重放。

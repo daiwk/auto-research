@@ -18,6 +18,8 @@
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
 - [论文谱系与边界](lineage.md)：系统审计已覆盖主干、静态能力收口和后续评测边界。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
+- [SRPO](2608.23493-srpo/README.md)：用自我反思 patch 构造同模型特权教师和 token 级稠密信用。
+- [ERPO](2608.23311-erpo/README.md)：以 reference typicality 与 Query-KL 稳定输入分布，同时保留回答侧探索。
 - [DPO](2305.18290-dpo/README.md)：reference-relative 偏好分类，无 reward model。
 - [KTO](2402.01306-kto/README.md)：只需单条 desirable/undesirable 标签的前景理论目标。
 - [ORPO](2403.07691-orpo/README.md)：SFT 与 odds-ratio 偏好合一，无 reference model。

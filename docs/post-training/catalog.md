@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 输入侧 Query-KL | [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](2608.23311-erpo/README.md) | AMAP, Alibaba Group，2026-08-24 | [已开源](https://github.com/alibaba/ERPO) | `erpo` |
+| 反思式 token 信用 | [SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning](2608.23493-srpo/README.md) | Wuhan University，2026-08-24 | [已开源](https://github.com/Galleons2029/SRPO) | `srpo` |
 | OPD | [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](2608.19408-r2-opd/README.md) | Authors did not disclose affiliation，2026-08-19 | 未发现官方代码 | `r2-opd` |
 | 多奖励 RL | [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](2608.16072-sa-mrpo/README.md) | University of Florida，2026-08-17 | 未发现官方代码 | `sa-mrpo` |
 | 多模态上下文偏好校准 | [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](2608.12158-c2-dpo/README.md) | Korea University，2026-08-12 | [已开源](https://github.com/mlvlab/C2-DPO) | `c2-dpo` |

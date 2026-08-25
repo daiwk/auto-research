@@ -93,6 +93,8 @@ ALGORITHMS = (
     "crpo",
     "serpo",
     "iso-rlvr",
+    "srpo",
+    "erpo",
 )
 
 
