@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-08 · [Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning](../2608.23318-agent-g2/README.md)（`agent-g2`）：Hint-based Agent RL 保留专家轨迹前缀再让策略探索，但固定深度忽略任务难度，逐样本 probe 又浪费 rollout。Agent-G² 从已有 policy rollout 按难度簇估计 guidance band 的中心和方差，对每个任务采样不同前缀深度。
+- 2026-08 · [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](../2608.23041-autosaddler/README.md)（`autosaddler`）：长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。
 - 2026-08 · [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](../2608.21292-auso/README.md)（`auso`）：外部技能检索有上下文开销，完全内化又失去按任务选择能力；按整条轨迹成功率硬切阶段还无法判断某一个动作是否真正受益。AUSO 先用 skill-conditioned teacher 内化通用技能，再进行 outcome-driven exploration，最后对每个动作比较有技能和无技能策略的 JSD，以有界权重调整 GRPO advantage。
 - 2026-08 · [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](../2608.19842-sapo/README.md)（`sapo`）：同一自回归骨干在不同因果边界输出 policy/value，结合 PPO、on-policy SARSA 和 trajectory GAE。
 - 2026-08 · [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../2608.18682-rtpo/README.md)（`rtpo`）：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。

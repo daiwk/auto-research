@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-25",
+  "scope": [
+    "2608.23493-srpo",
+    "2608.23311-erpo",
+    "2608.23318-agent-g2",
+    "2608.23041-autosaddler"
+  ],
+  "results": {
+    "srpo": {
+      "source": "../post-training/2608.23493-srpo/metrics/arithmetic-smoke-seed42.json",
+      "baseline_accuracy": 0.1953125,
+      "final_accuracy": 0.5703125,
+      "reflection_patches_last_batch": 3
+    },
+    "erpo": {
+      "source": "../post-training/2608.23311-erpo/metrics/arithmetic-smoke-seed42.json",
+      "baseline_accuracy": 0.1953125,
+      "final_accuracy": 0.609375,
+      "query_kl_last_batch": 0.0056632246,
+      "response_policy_kl_coefficient": 0.0
+    },
+    "agent-g2": {
+      "source": "../agent-research/2608.23318-agent-g2/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.8252638889,
+      "gaussian_guidance_rollouts": 120
+    },
+    "autosaddler": {
+      "source": "../agent-research/2608.23041-autosaddler/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.544,
+      "durable_updates": 12,
+      "harness_reuses": 108
+    }
+  },
+  "claim_boundary": "This is an index over per-paper L1 mechanism artifacts, not a cross-task leaderboard. Candidate-policy and deterministic Agent mini-suite results must not be presented as paper-scale LLM or official benchmark reproductions.",
+  "manifest_ref": "experiments:latest-20260825-seed42",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed mechanism verification; do not claim stable generalization"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/latest-20260825-seed42.json",
+    "dataset_fingerprint": {
+      "srpo": "arithmetic-smoke:100-steps:seed42",
+      "erpo": "arithmetic-smoke:100-steps:seed42",
+      "agent-g2": "planbench-mini:120-episodes:seed42",
+      "autosaddler": "planbench-mini:120-episodes:seed42"
+    }
+  }
+}

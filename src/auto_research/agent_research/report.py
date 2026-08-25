@@ -4,6 +4,8 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "agent-g2": ("Agent-G²", "https://arxiv.org/abs/2608.23318"),
+    "autosaddler": ("AutoSaddler", "https://arxiv.org/abs/2608.23041"),
     "sapo": ("Single-Rollout Autoregressive Policy Optimization", "https://arxiv.org/abs/2608.19842"),
     "spade": ("Self-Play in Adaptive Synthetic Executable Environments", "https://arxiv.org/abs/2608.19197"),
     "rtpo": ("Reverse-Turn Policy Optimization", "https://arxiv.org/abs/2608.18682"),

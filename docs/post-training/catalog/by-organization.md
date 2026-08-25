@@ -2,6 +2,10 @@
 
 按论文一作的第一署名单位聚合；单位内按首次公开日期倒序排列。每篇论文同时显示一作姓名，并附一至两句中文方法简介。联合工作不会重复归入所有合作单位。
 
+## AMAP, Alibaba Group
+
+- 2026-08-24 · 一作：Xianlei Zhou · [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](../2608.23311-erpo/README.md)（`erpo`）：传统 Policy-KL 直接压回答分布，稳定训练的同时消耗探索预算。ERPO 观察到 RL 过程中模型诱导的问题分布也会漂移，于是把正则放到输入侧：用冻结 reference 的问题似然给 query 静态加权，再以 Query-KL 控制环境分布漂移，不直接对 response score function 施压。
+
 ## Alibaba / Qwen
 
 - 2026-08-04 · 一作：Wen Wang · [SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation](../2608.03092-smopd/README.md)（`smopd`）：先用 reward-priority 分别训练专长教师，再在学生自身轨迹上合并多个教师能力。
@@ -259,6 +263,10 @@
 ## WeChat / Tencent
 
 - 2026-07-22 · 一作：Beining Wang · [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../../reproductions/2607.20083-dynamic-rubric/README.md)（`dynamic-rubric`）：固定 judge 或固定 rubric 会在策略模型进步后失去区分力。DynamicRubric 根据当前 prompt 和一组候选回答动态生成评估维度与权重，用 discriminability 目标寻找能区分当代 hard negatives 的标准，用 anchor 目标限制评估器漂移，再让 evaluator 和 policy 多轮协同进化。
+
+## Wuhan University
+
+- 2026-08-24 · 一作：Jialong Liu · [SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning](../2608.23493-srpo/README.md)（`srpo`）：长轨迹只给终局 reward 时，很难知道具体哪个 token/动作导致失败。SRPO 让当前模型先根据完整轨迹和环境结果写出简短 reflection patch，再把 patch 拼回原问题；同一个模型在这个特权上下文中充当教师，对学生的 on-policy rollout 给出逐 token 分数。
 
 ## Xiaomi
 

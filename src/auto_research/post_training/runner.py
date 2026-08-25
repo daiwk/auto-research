@@ -76,6 +76,8 @@ class PostTrainingRunner:
             "crpo": state.variant_updates,
             "serpo": state.variant_updates,
             "iso-rlvr": state.variant_updates,
+            "srpo": state.variant_updates,
+            "erpo": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

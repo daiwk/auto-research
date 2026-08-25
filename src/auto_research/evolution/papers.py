@@ -138,6 +138,8 @@ POST_TRAINING_MUTATIONS = {
     "2607.28026": ("crpo", "以 privileged self-distillation 对比反思探索与 exposure-bias 位置"),
     "2607.26873": ("serpo", "响应档案、query-specific rubric 与策略三方闭环自进化"),
     "2607.19331": ("iso-rlvr", "固定参数奇异值并只优化输入输出 singular frames"),
+    "2608.23493": ("srpo", "用完整轨迹反思 patch 构造同模型特权教师，并把终局反馈转成 token 级稠密信用"),
+    "2608.23311": ("erpo", "以 reference query typicality 和 Query-KL 控制输入分布漂移，不直接压制回答探索"),
 }
 
 AGENT_MUTATIONS = {
@@ -225,6 +227,8 @@ AGENT_MUTATIONS = {
     "2608.03468": ("tool:toollift", "把工具轨迹提升为可迁移 function workflow graph"),
     "2608.02650": ("tool:hyperagent", "在 tool-schema hypergraph 上先规划 Task DAG 再补齐状态缺口"),
     "2607.28527": ("planner:manta", "在预算内根据协作 trace 调整多 Agent 通信拓扑"),
+    "2608.23318": ("policy:agent-g2", "从已有 rollout 在线估计任务簇 guidance band，并按高斯分布采样专家前缀深度"),
+    "2608.23041": ("planner:autosaddler", "从失败轨迹深度诊断并生成结构化 harness patch，经局部与 held-out 验证后持久化"),
 }
 
 FALLBACK_PAPERS = (
