@@ -9,6 +9,7 @@ on:
       - "requirements-docs.txt"
       - "scripts/sync_project_readme.py"
       - "scripts/generate_research_catalogs.py"
+      - "scripts/generate_public_experiment_dashboard.py"
       - "tests/test_docs_math.py"
       - ".github/workflows/docs.yml"
   push:
@@ -20,6 +21,7 @@ on:
       - "requirements-docs.txt"
       - "scripts/sync_project_readme.py"
       - "scripts/generate_research_catalogs.py"
+      - "scripts/generate_public_experiment_dashboard.py"
       - "tests/test_docs_math.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
@@ -45,6 +47,8 @@ jobs:
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
       - run: python scripts/sync_project_readme.py --check
+      - run: python scripts/generate_public_experiment_dashboard.py
+      - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
