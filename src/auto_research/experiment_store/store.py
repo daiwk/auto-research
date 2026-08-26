@@ -70,6 +70,23 @@ def _first(payload: dict[str, Any], *keys: str, default: str = "") -> str:
     return default
 
 
+def _method_for(payload: dict[str, Any], path: Path) -> str:
+    declared = _first(
+        payload, "method", "adapter", "paper.adapter", "config.algorithm", "config.model",
+    )
+    if declared:
+        return declared
+    if path.parent.name == "metrics":
+        container = path.parent.parent.name
+        if container in {
+            "docs", "experiments", "multimodal-models", "foundation-models",
+            "post-training", "agent-research", "reproductions",
+        }:
+            return path.stem
+        return container
+    return path.parent.name
+
+
 class ExperimentStore:
     """Idempotent SQLite index over committed and local experiment artifacts."""
 
@@ -136,10 +153,7 @@ class ExperimentStore:
         logical_path = relative.as_posix()
         artifact_id = hashlib.sha256(logical_path.encode()).hexdigest()[:20]
         domain = _first(payload, "domain", "track", "config.model") or _domain_for(relative)
-        method = _first(
-            payload, "method", "adapter", "paper.adapter", "config.algorithm",
-            "config.model", default=path.parent.name,
-        )
+        method = _method_for(payload, path)
         dataset = _first(payload, "dataset", "config.dataset", "protocol.dataset")
         seed = _first(payload, "seed", "config.seed", "seeds")
         created_at = _first(

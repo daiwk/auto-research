@@ -2,6 +2,227 @@
   max-width: 92rem;
 }
 
+/* Public experiment dashboard: card-first layout keeps long metric names out
+   of the main reading path while retaining every raw value in details. */
+.ar-dashboard {
+  --ar-dashboard-line: var(--md-default-fg-color--lightest);
+  margin-top: 1.6rem;
+}
+
+.ar-dashboard__summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.ar-dashboard__summary article,
+.ar-dashboard-card {
+  border: 0.05rem solid var(--ar-dashboard-line);
+  border-radius: 0.7rem;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.35rem 1.1rem color-mix(in srgb, var(--md-default-fg-color) 7%, transparent);
+}
+
+.ar-dashboard__summary article {
+  padding: 0.8rem 0.9rem;
+}
+
+.ar-dashboard__summary strong {
+  display: block;
+  color: var(--md-primary-fg-color);
+  font-size: 1.35rem;
+}
+
+.ar-dashboard__summary span,
+.ar-dashboard__status {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.72rem;
+}
+
+.ar-dashboard__controls {
+  position: sticky;
+  top: 2.4rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.7rem;
+  align-items: end;
+  margin: 0 -0.25rem;
+  padding: 0.7rem 0.25rem;
+  background: color-mix(in srgb, var(--md-default-bg-color) 92%, transparent);
+  backdrop-filter: blur(0.4rem);
+}
+
+.ar-dashboard__controls label {
+  display: grid;
+  gap: 0.2rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.68rem;
+}
+
+.ar-dashboard__controls select,
+.ar-dashboard__controls input {
+  min-height: 2.25rem;
+  padding: 0.45rem 0.65rem;
+  border: 0.05rem solid var(--ar-dashboard-line);
+  border-radius: 0.45rem;
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+  font: inherit;
+  font-size: 0.76rem;
+}
+
+.ar-dashboard__search {
+  flex: 1;
+}
+
+.ar-dashboard__status {
+  margin: 0.55rem 0;
+}
+
+.ar-dashboard__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.ar-dashboard-card {
+  min-width: 0;
+  padding: 0.9rem;
+}
+
+.ar-dashboard-card header {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ar-dashboard-card h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.ar-dashboard-card__seed {
+  flex: none;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.62rem;
+}
+
+.ar-dashboard-card__badges {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 0.7rem;
+}
+
+.ar-dashboard-card__badges span {
+  padding: 0.14rem 0.45rem;
+  border-radius: 999px;
+  color: var(--md-primary-fg-color);
+  background: color-mix(in srgb, var(--md-primary-fg-color) 10%, transparent);
+  font-size: 0.6rem;
+}
+
+.ar-dashboard-card__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.ar-dashboard-card__metrics > div {
+  min-width: 0;
+  padding: 0.48rem;
+  border-radius: 0.45rem;
+  background: var(--md-code-bg-color);
+}
+
+.ar-dashboard-card__metrics strong,
+.ar-dashboard-card__metrics span {
+  display: block;
+}
+
+.ar-dashboard-card__metrics strong {
+  font-size: 0.82rem;
+}
+
+.ar-dashboard-card__metrics span {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.55rem;
+  overflow-wrap: anywhere;
+}
+
+.ar-dashboard-card details {
+  margin-top: 0.65rem;
+}
+
+.ar-dashboard-card summary {
+  color: var(--md-primary-fg-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ar-dashboard-card__all {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.2rem 0.65rem;
+  margin-top: 0.45rem;
+}
+
+.ar-dashboard-card__all > div {
+  display: flex;
+  gap: 0.45rem;
+  justify-content: space-between;
+  padding-bottom: 0.15rem;
+  border-bottom: 0.05rem dashed var(--ar-dashboard-line);
+  font-size: 0.55rem;
+  overflow-wrap: anywhere;
+}
+
+.ar-dashboard-card__source {
+  display: inline-block;
+  margin-top: 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.ar-dashboard__more {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.5rem 0.9rem;
+  border: 0;
+  border-radius: 0.45rem;
+  color: var(--md-primary-bg-color);
+  background: var(--md-primary-fg-color);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 60rem) {
+  .ar-dashboard__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 44.984rem) {
+  .ar-dashboard__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ar-dashboard__controls {
+    position: static;
+    display: grid;
+  }
+
+  .ar-dashboard-card__metrics,
+  .ar-dashboard-card__all {
+    grid-template-columns: 1fr;
+  }
+}
+
 .md-typeset .arithmatex,
 .md-typeset .mermaid,
 .md-typeset__scrollwrap {

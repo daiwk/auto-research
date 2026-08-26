@@ -16,10 +16,7 @@ nav:
   - 论文实现与评测:
       - 研究库总览: research-library.md
       - 发现闭环与防遗漏审计: paper-discovery-audit.md
-      - 2026 历史论文扫描: recent-paper-scan-20260824.md
-      - 历史扫描清单与实现批次: paper-audits/2026-historical-scan-plan.md
-      - 统一后续路线图与 TODO: research-roadmap.md
-      - 全主题缺口审计（2026-08-08）: full-domain-gap-review-20260808.md
+      - 公开实验看板: public-experiment-dashboard.md
       - 搜广推与 LLM 应用:
           - 研究总览: reproductions/industrial.md
           - 方法索引: reproductions/catalog/README.md
@@ -135,5 +132,6 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js
   - assets/javascripts/mermaid.js
+  - assets/javascripts/experiment-dashboard.js
 
 strict: true

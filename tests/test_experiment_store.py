@@ -38,3 +38,22 @@ def test_dashboard_embeds_filters_and_wrap_safe_table(tmp_path):
     assert "统一实验看板" in text
     assert "a-very-long-method" in text
     assert "overflow-wrap:anywhere" in text
+    assert "查看全部" in text
+
+
+def test_metrics_directory_uses_paper_or_artifact_as_method(tmp_path):
+    docs = tmp_path / "docs"
+    nested = docs / "multimodal-models" / "metrics" / "clip-a30.json"
+    nested.parent.mkdir(parents=True)
+    nested.write_text(json.dumps({"metrics": {"accuracy": 0.8}}), encoding="utf-8")
+    paper = docs / "reproductions" / "2601.00001-example" / "metrics" / "result.json"
+    paper.parent.mkdir(parents=True)
+    paper.write_text(json.dumps({"metrics": {"ndcg": 0.1}}), encoding="utf-8")
+
+    database = tmp_path / "experiments.sqlite"
+    sync_experiments(database, [docs])
+    with ExperimentStore(database) as store:
+        methods = {row.method for row in store.rows()}
+
+    assert methods == {"clip-a30", "2601.00001-example"}
+    assert "metrics" not in methods
