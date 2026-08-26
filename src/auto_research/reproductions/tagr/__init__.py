@@ -1,0 +1,1 @@
+"""TAGR paper adapter."""

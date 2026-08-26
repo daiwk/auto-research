@@ -93,6 +93,10 @@ METHODS = (
     "manta",
     "agent-g2",
     "autosaddler",
+    "spo-plus-plus",
+    "skillforge",
+    "ahead",
+    "smith",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

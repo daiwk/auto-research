@@ -7,6 +7,7 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2608.24034": ("rankmixer_tagr", "TAGR 的可刷新稳定词表 LSID、多尺度实时 intent 与行为/价值对齐 IOPO"),
     "2608.10257": ("head:hybrid-catalog", "Netflix GenRec 的文本化上下文、prefill-only 全目录 head 与长期 reward 加权"),
     "2604.14878": ("reward:content-discovery", "JD GenRec 的页面级生成目标、GRPO-SR 与 NLL 约束"),
     "2607.24255": ("distillation:semantic-teacher", "OxygenREC-v2 的行为指令生成与未来交互 privileged distillation"),
@@ -30,6 +31,7 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2608.24053": ("multimodal:wemm-embedding", "WeMM 的两阶段全模态对齐、细粒度 relevance refinement、跨尺度蒸馏与 Matryoshka 表征"),
     "2103.00020": ("multimodal:clip", "CLIP 双塔归一化与对称图文对比预训练"),
     "2608.12209": (
         "objective:gas-nep",
@@ -71,6 +73,8 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2608.24310": ("opd-search-plus", "以冻结通用教师执行 clipped forward-KL 搜索轨迹蒸馏，再用可验证奖励继续 RL refinement"),
+    "2608.24696": ("opdvr", "用 ReLU gate 让 sampled-token OPD 隐式奖励的符号与轨迹正确性一致，无需新增损失权重"),
     "2203.02155": ("ppo-rlhf", "PPO-RLHF 的 clipped policy objective、value baseline 与 KL 约束"),
     "2305.18290": ("dpo", "DPO 直接从偏好对优化隐式奖励，无需单独训练 reward model"),
     "2310.10505": ("remax", "ReMax 使用 greedy response baseline 降低 policy-gradient 方差"),
@@ -143,6 +147,10 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2608.24870": ("policy:spo-plus-plus", "按生成策略事件冻结 prompt value，并在 action-token measure 下标准化异步单流 advantage"),
+    "2608.24747": ("memory:skillforge", "显式调用技能并以环境证据持续验证、修订技能库，而非只追加经验"),
+    "2608.24114": ("critic:ahead", "普通步骤注入环境反馈，错误步骤额外注入纠错 hint，形成 step-aware 特权蒸馏信用"),
+    "2608.24571": ("tool:smith", "在同一策略中联合优化工具创建与调用，并分离 schema、代码和结果三轴奖励"),
     "2606.26859": ("planner:agentx", "AgentX 将分析、假设、执行与评估组织成可回放的闭环研究轨迹"),
     "2608.06197": ("critic:envace", "同一策略交替承担 act 与环境 rehearsal 角色，并以 role-wise GRPO 分别归一化优势"),
     "2210.03629": ("planner:react", "ReAct 交替生成推理轨迹与工具动作"),

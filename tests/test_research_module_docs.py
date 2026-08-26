@@ -100,6 +100,8 @@ MODULES = {
         "iso-rlvr": "2607.19331-iso-rlvr",
         "srpo": "2608.23493-srpo",
         "erpo": "2608.23311-erpo",
+        "opd-search-plus": "2608.24310-opd-search-plus",
+        "opdvr": "2608.24696-opdvr",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -179,6 +181,10 @@ MODULES = {
         "manta": "2607.28527-manta",
         "agent-g2": "2608.23318-agent-g2",
         "autosaddler": "2608.23041-autosaddler",
+        "spo-plus-plus": "2608.24870-spo-plus-plus",
+        "skillforge": "2608.24747-skillforge",
+        "ahead": "2608.24114-ahead",
+        "smith": "2608.24571-smith",
     },
 }
 

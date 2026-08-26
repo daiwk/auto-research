@@ -78,6 +78,8 @@ class PostTrainingRunner:
             "iso-rlvr": state.variant_updates,
             "srpo": state.variant_updates,
             "erpo": state.variant_updates,
+            "opd-search-plus": state.variant_updates,
+            "opdvr": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

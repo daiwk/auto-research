@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising](../2608.24034-tagr/README.md) | Kuaishou Technology，2026-08-25 | 未发现官方代码 | `tagr` |
 | 生成、排序与冷启动 | [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md) | Kuaishou Technology，2026-08-21 | 未发现官方代码 | `dynamic-codebook` |
 | 生成、排序与冷启动 | [OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking](../2608.18606-onemodel/README.md) | Xiaohongshu，2026-08-19 | 未发现官方代码 | `onemodel` |
 | 内容理解、审核与风险控制 | [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md) | Netflix，2026-08-18 | 未发现官方代码 | `netflix-mediafm` |

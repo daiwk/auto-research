@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 搜索增强 OPD + RL | [OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning](2608.24310-opd-search-plus/README.md) | University of Chinese Academy of Sciences，2026-08-25 | 未发现官方代码 | `opd-search-plus` |
+| 可验证奖励 OPD | [OPDVR: On-Policy Distillation with Verifiable Rewards](2608.24696-opdvr/README.md) | LeapLab, Tsinghua University，2026-08-25 | [已开源](https://github.com/LeapLabTHU/OPDVR) | `opdvr` |
 | 输入侧 Query-KL | [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](2608.23311-erpo/README.md) | AMAP, Alibaba Group，2026-08-24 | [已开源](https://github.com/alibaba/ERPO) | `erpo` |
 | 反思式 token 信用 | [SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning](2608.23493-srpo/README.md) | Wuhan University，2026-08-24 | [已开源](https://github.com/Galleons2029/SRPO) | `srpo` |
 | OPD | [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](2608.19408-r2-opd/README.md) | Authors did not disclose affiliation，2026-08-19 | 未发现官方代码 | `r2-opd` |

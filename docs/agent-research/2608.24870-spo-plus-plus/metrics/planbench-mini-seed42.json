@@ -1,0 +1,276 @@
+{
+  "method": "spo-plus-plus",
+  "benchmark": "planbench-mini",
+  "metrics": {
+    "answer_accuracy": 1.0,
+    "plan_success": 1.0,
+    "joint_success": 1.0,
+    "average_cost": 0.6400000000000005
+  },
+  "axis_metrics": {
+    "cross_episode_execution": 1.0
+  },
+  "diagnostics": {
+    "episodes": 120,
+    "memory_size": 24,
+    "tool_evictions": 0,
+    "reused_plans": 0,
+    "reasoning_steps": 0,
+    "actions": 360,
+    "reflections": 0,
+    "skills_created": 0,
+    "skills_reused": 0,
+    "verification_retries": 0,
+    "tree_nodes_expanded": 0,
+    "search_rollouts": 0,
+    "backtracks": 0,
+    "tool_call_candidates": 0,
+    "tool_calls_accepted": 0,
+    "refinements": 0,
+    "plans_created": 0,
+    "worker_calls": 0,
+    "agent_messages": 0,
+    "critic_rounds": 0,
+    "plan_explorations": 0,
+    "policy_updates": 120,
+    "router_calls": 0,
+    "symbolic_expert_calls": 0,
+    "model_matches": 0,
+    "dependency_edges": 0,
+    "memories_retrieved": 0,
+    "reflection_syntheses": 0,
+    "archival_writes": 0,
+    "page_ins": 0,
+    "interrupts": 0,
+    "browser_queries": 0,
+    "references_collected": 0,
+    "rejection_candidates": 0,
+    "affordance_checks": 0,
+    "infeasible_skills_filtered": 0,
+    "programs_generated": 0,
+    "interpreter_calls": 0,
+    "task_examples_retrieved": 0,
+    "generation_pauses": 0,
+    "task_library_updates": 0,
+    "hindsight_skills": 0,
+    "dense_credit_updates": 0,
+    "solver_value_queries": 0,
+    "turn_credit_updates": 0,
+    "rollout_turns_saved": 0,
+    "skill_graph_nodes": 0,
+    "skill_graph_edges": 0,
+    "atomic_ops_reused": 0,
+    "episodic_routes": 0,
+    "parametric_routes": 0,
+    "memory_consolidations": 0,
+    "search_queries": 0,
+    "retrieved_tokens_masked": 0,
+    "outcome_rewards": 0,
+    "trajectory_rollouts": 120,
+    "trajectory_filters": 0,
+    "critic_baseline_updates": 0,
+    "gradient_clips": 0,
+    "echo_trap_events": 0,
+    "reasoning_rewards": 0,
+    "off_policy_reuses": 0,
+    "leave_one_out_updates": 0,
+    "per_token_clips": 360,
+    "context_compressions": 0,
+    "parallel_trajectory_groups": 0,
+    "multi_turn_group_updates": 0,
+    "simulated_user_turns": 0,
+    "intent_refinements": 0,
+    "real_tool_responses": 0,
+    "task_completion_rewards": 0,
+    "tools_exposed": 0,
+    "tools_available": 0,
+    "tool_exposure_reduction": 0.0,
+    "cost_aware_stops": 0,
+    "regret_weighted_labels": 0,
+    "skill_document_updates": 0,
+    "cross_task_skill_reuses": 0,
+    "downstream_credit_updates": 0,
+    "step_value_queries": 120,
+    "step_gae_updates": 0,
+    "step_sequence_ratios": 0,
+    "intra_group_advantages": 0,
+    "inter_group_advantages": 0,
+    "transition_targets": 0,
+    "transition_accuracy": 0.0,
+    "reflective_groups": 0,
+    "success_failure_contrasts": 0,
+    "privileged_guidance_updates": 0,
+    "world_rehearsals": 0,
+    "rolewise_advantage_updates": 0,
+    "private_rehearsals": 0,
+    "recursive_belief_updates": 0,
+    "pivotal_turns": 0,
+    "observation_calibrations": 0,
+    "scaffold_ablations": 0,
+    "local_verifier_calls": 0,
+    "global_verifier_calls": 0,
+    "memory_operations": 0,
+    "coevolution_alternations": 0,
+    "router_updates": 0,
+    "memory_bank_updates": 0,
+    "fidelity": "mechanism reproduction on deterministic benchmark mini-suites"
+  },
+  "trace": [
+    {
+      "task_id": "planbench-mini-0000",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.500/token-measure=1.000/adv=0.500",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0001",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.682/token-measure=1.000/adv=0.318",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0002",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.775/token-measure=1.000/adv=0.225",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0003",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.832/token-measure=1.000/adv=0.168",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0004",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.869/token-measure=1.000/adv=0.131",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0005",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.896/token-measure=1.000/adv=0.104",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0006",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.915/token-measure=1.000/adv=0.085",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0007",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.930/token-measure=1.000/adv=0.070",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0008",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.942/token-measure=1.000/adv=0.058",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0009",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.951/token-measure=1.000/adv=0.049",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0010",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.959/token-measure=1.000/adv=0.041",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0011",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.965/token-measure=1.000/adv=0.035",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0012",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.970/token-measure=1.000/adv=0.030",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0013",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.975/token-measure=1.000/adv=0.025",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0014",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.978/token-measure=1.000/adv=0.022",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0015",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.981/token-measure=1.000/adv=0.019",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0016",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.984/token-measure=1.000/adv=0.016",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0017",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.986/token-measure=1.000/adv=0.014",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0018",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.988/token-measure=1.000/adv=0.012",
+      "answer_correct": true,
+      "plan_correct": true
+    },
+    {
+      "task_id": "planbench-mini-0019",
+      "axis": "cross_episode_execution",
+      "source": "event-time-value=0.989/token-measure=1.000/adv=0.011",
+      "answer_correct": true,
+      "plan_correct": true
+    }
+  ],
+  "schema_version": 2,
+  "manifest_ref": "agent-research:planbench-mini-seed42",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2608.24870-spo-plus-plus/metrics/planbench-mini-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  }
+}

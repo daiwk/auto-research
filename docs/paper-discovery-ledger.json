@@ -1284,6 +1284,30 @@
         {"id": "2608.23400", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "public-dataset academic recommendation; no quantified production online A/B"},
         {"id": "2608.22734", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "public-dataset academic recommendation; no quantified production online A/B"}
       ]
+    },
+    {
+      "batch": "2026-08-26-daily-increment",
+      "scope_kind": "daily-high-recall-increment",
+      "checked_at": "2026-08-26T18:00:00+08:00",
+      "window": "new arXiv listings visible on 2026-08-26; submitted 2026-08-25 UTC",
+      "sources": ["official arXiv new-list pages", "DeepXiv semantic cross-check", "paper HTML/PDF full-text review", "Google and Meta priority reverse search", "official repositories"],
+      "candidate_pool": {"cross_domain_metadata_total": 363},
+      "industrial_recommendation_result": "TAGR passed quantified production A/B; no new Google/Meta paper passed the topic plus full-text online-evidence gate",
+      "candidates": [
+        {"id": "2608.24034", "key": "tagr", "track": "recommendation", "priority": "P0", "organization": "Kuaishou Technology", "status": "implemented", "doc": "reproductions/2608.24034-tagr/README.md", "evidence_gate": "production A/B: LRE +8.5%, SCC +7.4%, revenue +16.1%"},
+        {"id": "2608.24053", "key": "wemm-embedding", "track": "foundation-model", "priority": "P0", "organization": "WeChat, Tencent", "status": "implemented", "doc": "reproductions/2608.24053-wemm-embedding/README.md"},
+        {"id": "2608.24310", "key": "opd-search-plus", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.24310-opd-search-plus/README.md"},
+        {"id": "2608.24696", "key": "opdvr", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.24696-opdvr/README.md"},
+        {"id": "2608.24870", "key": "spo-plus-plus", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24870-spo-plus-plus/README.md"},
+        {"id": "2608.24747", "key": "skillforge", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24747-skillforge/README.md"},
+        {"id": "2608.24114", "key": "ahead", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24114-ahead/README.md"},
+        {"id": "2608.24571", "key": "smith", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24571-smith/README.md"},
+        {"id": "2608.24295", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "full text has deployment-oriented analysis but no quantified production A/B or explicit full-traffic rollout"},
+        {"id": "2608.24132", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "production migration case study reports fixed-population offline evaluation, not a production online experiment"},
+        {"id": "2608.24091", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "no quantified production online evidence"},
+        {"id": "2608.24079", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "academic public-data evaluation; no quantified production online evidence"},
+        {"id": "2608.24176", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "academic offline evaluation; no quantified production online evidence"}
+      ]
     }
   ]
 }

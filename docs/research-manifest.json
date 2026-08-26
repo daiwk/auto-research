@@ -95,6 +95,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "ahead",
+      "title": "AHEAD: Agentic Hints for Effective Agent Development",
+      "paper_url": "https://arxiv.org/abs/2608.24114",
+      "detail_path": "agent-research/2608.24114-ahead/README.md",
+      "topic": [
+        "环境反馈提示训练"
+      ],
+      "first_author": "Xiaolong Jin",
+      "first_author_affiliation": "AWS AI Labs / Purdue University",
+      "published": "2026-08-25",
+      "code": null,
+      "adapter": "ahead"
+    },
+    {
+      "domain": "agent-research",
       "key": "art",
       "title": "ART",
       "paper_url": "https://arxiv.org/abs/2303.09014",
@@ -1004,6 +1019,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "skillforge",
+      "title": "SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents",
+      "paper_url": "https://arxiv.org/abs/2608.24747",
+      "detail_path": "agent-research/2608.24747-skillforge/README.md",
+      "topic": [
+        "可验证技能锻造"
+      ],
+      "first_author": "Shidong Yang",
+      "first_author_affiliation": "AMAP, Alibaba Group",
+      "published": "2026-08-25",
+      "code": null,
+      "adapter": "skillforge"
+    },
+    {
+      "domain": "agent-research",
       "key": "skillrise",
       "title": "SkillRise",
       "paper_url": "https://arxiv.org/abs/2607.26784",
@@ -1016,6 +1046,21 @@
       "published": "2026-07-29",
       "code": "https://github.com/Within-yao/SkillRise",
       "adapter": "skillrise"
+    },
+    {
+      "domain": "agent-research",
+      "key": "smith",
+      "title": "SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification",
+      "paper_url": "https://arxiv.org/abs/2608.24571",
+      "detail_path": "agent-research/2608.24571-smith/README.md",
+      "topic": [
+        "多维验证工具自进化"
+      ],
+      "first_author": "Zhi Rui Tam",
+      "first_author_affiliation": "Appier AI Research / National Taiwan University",
+      "published": "2026-08-25",
+      "code": "https://github.com/appier-research/smith",
+      "adapter": "smith"
     },
     {
       "domain": "agent-research",
@@ -1032,6 +1077,21 @@
       "published": "2026-08-19",
       "code": "https://github.com/spade-rl/spade",
       "adapter": "spade"
+    },
+    {
+      "domain": "agent-research",
+      "key": "spo-plus-plus",
+      "title": "SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction",
+      "paper_url": "https://arxiv.org/abs/2608.24870",
+      "detail_path": "agent-research/2608.24870-spo-plus-plus/README.md",
+      "topic": [
+        "异步单流 Agent RL"
+      ],
+      "first_author": "Kai Ruan",
+      "first_author_affiliation": "Renmin University of China",
+      "published": "2026-08-25",
+      "code": null,
+      "adapter": "spo-plus-plus"
     },
     {
       "domain": "agent-research",
@@ -4606,6 +4666,61 @@
     },
     {
       "domain": "foundation-models",
+      "key": "wemm-embedding",
+      "title": "WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report",
+      "paper_url": "https://arxiv.org/abs/2608.24053",
+      "detail_path": "reproductions/2608.24053-wemm-embedding/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "embedding",
+        "retrieval",
+        "matryoshka-representation"
+      ],
+      "first_author": "Junjie Zhou",
+      "first_author_affiliation": "WeChat Vision, Tencent",
+      "published": "2026-08-25",
+      "code": "https://github.com/Tencent/WeMM-Embedding",
+      "adapter": {
+        "adapter_key": "wemm-embedding",
+        "arxiv_id": "2608.24053",
+        "title": "WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report",
+        "paper_url": "https://arxiv.org/abs/2608.24053",
+        "track": "llm",
+        "organization": "WeChat Vision, Tencent",
+        "published": "2026-08-25",
+        "code_url": "https://github.com/Tencent/WeMM-Embedding",
+        "topics": [
+          "multimodal-foundation-model",
+          "embedding",
+          "retrieval",
+          "matryoshka-representation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/wemm_embedding",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M paired content/collaborative views"
+        ],
+        "baseline": "stage-1 multimodal alignment without refinement",
+        "metrics": [
+          "Recall@1",
+          "Recall@10",
+          "MRR"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "wide",
       "title": "WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning",
       "paper_url": "https://arxiv.org/abs/2607.28418",
@@ -5504,6 +5619,21 @@
     },
     {
       "domain": "post-training",
+      "key": "opd-search-plus",
+      "title": "OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2608.24310",
+      "detail_path": "post-training/2608.24310-opd-search-plus/README.md",
+      "topic": [
+        "搜索增强 OPD + RL"
+      ],
+      "first_author": "Qinglin Ye",
+      "first_author_affiliation": "University of Chinese Academy of Sciences",
+      "published": "2026-08-25",
+      "code": null,
+      "adapter": "opd-search-plus"
+    },
+    {
+      "domain": "post-training",
       "key": "opd2",
       "title": "On-Policy Delta Distillation for Multilingual Math Reasoning",
       "paper_url": "https://arxiv.org/abs/2608.05802",
@@ -5517,6 +5647,21 @@
       "published": "2026-08-06",
       "code": "https://github.com/naver-ai/opd2",
       "adapter": "opd2"
+    },
+    {
+      "domain": "post-training",
+      "key": "opdvr",
+      "title": "OPDVR: On-Policy Distillation with Verifiable Rewards",
+      "paper_url": "https://arxiv.org/abs/2608.24696",
+      "detail_path": "post-training/2608.24696-opdvr/README.md",
+      "topic": [
+        "可验证奖励 OPD"
+      ],
+      "first_author": "Wenze Lin",
+      "first_author_affiliation": "LeapLab, Tsinghua University",
+      "published": "2026-08-25",
+      "code": "https://github.com/LeapLabTHU/OPDVR",
+      "adapter": "opdvr"
     },
     {
       "domain": "post-training",
@@ -19716,6 +19861,89 @@
             "traffic": "21-day campaign-randomized online A/B",
             "source_url": "https://arxiv.org/abs/2607.25233",
             "source_location": "original paper online-result disclosure: product=AliExpress advertising; metric=ROAS"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "tagr",
+      "title": "TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising",
+      "paper_url": "https://arxiv.org/abs/2608.24034",
+      "detail_path": "reproductions/2608.24034-tagr/README.md",
+      "topic": [
+        "generative-recommendation",
+        "live-streaming-advertising",
+        "semantic-id",
+        "online-rl"
+      ],
+      "first_author": "Wencai Ye",
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-08-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tagr",
+        "arxiv_id": "2608.24034",
+        "title": "TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising",
+        "paper_url": "https://arxiv.org/abs/2608.24034",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-08-25",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "live-streaming-advertising",
+          "semantic-id",
+          "online-rl"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/tagr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "production-style first-order transition recommender",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "head share@10"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Kuaishou live-stream advertising",
+            "metric": "live-room entry rate",
+            "lift_percent": 8.5,
+            "traffic": "production A/B under the same downstream stack",
+            "source_url": "https://arxiv.org/html/2608.24034v1#S4.SS3",
+            "source_location": "Section 4.3 / Table 1",
+            "retrieved_at": "2026-08-26"
+          },
+          {
+            "product": "Kuaishou live-stream advertising",
+            "metric": "shopping-cart click rate",
+            "lift_percent": 7.4,
+            "traffic": "production A/B under the same downstream stack",
+            "source_url": "https://arxiv.org/html/2608.24034v1#S4.SS3",
+            "source_location": "Section 4.3 / Table 1",
+            "retrieved_at": "2026-08-26"
+          },
+          {
+            "product": "Kuaishou live-stream advertising",
+            "metric": "revenue",
+            "lift_percent": 16.1,
+            "traffic": "multi-week production experiment",
+            "source_url": "https://arxiv.org/html/2608.24034v1#S4.SS3",
+            "source_location": "Section 4.3 / Table 1",
+            "retrieved_at": "2026-08-26"
           }
         ],
         "selection_exception": null,

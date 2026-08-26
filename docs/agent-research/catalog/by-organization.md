@@ -6,6 +6,14 @@
 
 - 2022-05-01 · 一作：Ehud Karpas · [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
 
+## AMAP, Alibaba Group
+
+- 2026-08-25 · 一作：Shidong Yang · [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](../2608.24747-skillforge/README.md)（`skillforge`）：SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。
+
+## AWS AI Labs / Purdue University
+
+- 2026-08-25 · 一作：Xiaolong Jin · [AHEAD: Agentic Hints for Effective Agent Development](../2608.24114-ahead/README.md)（`ahead`）：轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。
+
 ## Academic author team
 
 - 2026-07-07 · 一作：Yuhang Zhou · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
@@ -17,6 +25,10 @@
 ## All-Hands-AI
 
 - 2024-07-23 · 一作：Xingyao Wang · [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
+
+## Appier AI Research / National Taiwan University
+
+- 2026-08-25 · 一作：Zhi Rui Tam · [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
 
 ## Apple
 
@@ -167,6 +179,10 @@
 - 2024-05-06 · 一作：John Yang · [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
 - 2023-05-17 · 一作：Shunyu Yao · [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。
 - 2022-10-06 · 一作：Shunyu Yao · [ReAct](../2210.03629-react/README.md)（`react`）：纯 CoT 容易在封闭知识上幻觉，纯 action agent 又缺少计划与状态跟踪。ReAct 让模型交替生成自然语言推理和环境 action，再把 observation 放回下一步上下文，使推理可以纠错、行动可以获取外部事实。
+
+## Renmin University of China
+
+- 2026-08-25 · 一作：Kai Ruan · [SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction](../2608.24870-spo-plus-plus/README.md)（`spo-plus-plus`）：SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。
 
 ## Robotics at Google
 

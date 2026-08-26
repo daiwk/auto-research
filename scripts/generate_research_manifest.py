@@ -20,7 +20,72 @@ from auto_research.historical_b07_b11 import PAPERS as HISTORICAL_B07_B11
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis"}
 
+FIRST_AUTHOR_OVERRIDES = {
+    "tagr": "Wencai Ye",
+    "wemm-embedding": "Junjie Zhou",
+}
+
 LATEST_METHOD_PAPERS = (
+    {
+        "domain": "post-training", "key": "opd-search-plus",
+        "title": "OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning",
+        "paper_url": "https://arxiv.org/abs/2608.24310",
+        "detail_path": "post-training/2608.24310-opd-search-plus/README.md",
+        "topic": ["搜索增强 OPD + RL"], "first_author": "Qinglin Ye",
+        "first_author_affiliation": "University of Chinese Academy of Sciences",
+        "published": "2026-08-25", "code": None,
+        "adapter": "opd-search-plus",
+    },
+    {
+        "domain": "post-training", "key": "opdvr",
+        "title": "OPDVR: On-Policy Distillation with Verifiable Rewards",
+        "paper_url": "https://arxiv.org/abs/2608.24696",
+        "detail_path": "post-training/2608.24696-opdvr/README.md",
+        "topic": ["可验证奖励 OPD"], "first_author": "Wenze Lin",
+        "first_author_affiliation": "LeapLab, Tsinghua University",
+        "published": "2026-08-25", "code": "https://github.com/LeapLabTHU/OPDVR",
+        "adapter": "opdvr",
+    },
+    {
+        "domain": "agent-research", "key": "spo-plus-plus",
+        "title": "SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction",
+        "paper_url": "https://arxiv.org/abs/2608.24870",
+        "detail_path": "agent-research/2608.24870-spo-plus-plus/README.md",
+        "topic": ["异步单流 Agent RL"], "first_author": "Kai Ruan",
+        "first_author_affiliation": "Renmin University of China",
+        "published": "2026-08-25", "code": None,
+        "adapter": "spo-plus-plus",
+    },
+    {
+        "domain": "agent-research", "key": "skillforge",
+        "title": "SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents",
+        "paper_url": "https://arxiv.org/abs/2608.24747",
+        "detail_path": "agent-research/2608.24747-skillforge/README.md",
+        "topic": ["可验证技能锻造"], "first_author": "Shidong Yang",
+        "first_author_affiliation": "AMAP, Alibaba Group",
+        "published": "2026-08-25", "code": None,
+        "adapter": "skillforge",
+    },
+    {
+        "domain": "agent-research", "key": "ahead",
+        "title": "AHEAD: Agentic Hints for Effective Agent Development",
+        "paper_url": "https://arxiv.org/abs/2608.24114",
+        "detail_path": "agent-research/2608.24114-ahead/README.md",
+        "topic": ["环境反馈提示训练"], "first_author": "Xiaolong Jin",
+        "first_author_affiliation": "AWS AI Labs / Purdue University",
+        "published": "2026-08-25", "code": None,
+        "adapter": "ahead",
+    },
+    {
+        "domain": "agent-research", "key": "smith",
+        "title": "SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification",
+        "paper_url": "https://arxiv.org/abs/2608.24571",
+        "detail_path": "agent-research/2608.24571-smith/README.md",
+        "topic": ["多维验证工具自进化"], "first_author": "Zhi Rui Tam",
+        "first_author_affiliation": "Appier AI Research / National Taiwan University",
+        "published": "2026-08-25", "code": "https://github.com/appier-research/smith",
+        "adapter": "smith",
+    },
     {
         "domain": "post-training", "key": "srpo",
         "title": "SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning",
@@ -152,7 +217,10 @@ def synchronize(payload: dict) -> dict:
             "paper_url": adapter.paper.url,
             "detail_path": _detail_path(adapter),
             "topic": list(adapter.paper.topics),
-            "first_author": previous.get("first_author"),
+            "first_author": (
+                previous.get("first_author")
+                or FIRST_AUTHOR_OVERRIDES.get(adapter.key)
+            ),
             "first_author_affiliation": (
                 previous.get("first_author_affiliation")
                 or adapter.paper.organization

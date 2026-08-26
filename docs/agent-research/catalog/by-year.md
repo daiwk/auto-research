@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-08 · [AHEAD: Agentic Hints for Effective Agent Development](../2608.24114-ahead/README.md)（`ahead`）：轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。
+- 2026-08 · [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](../2608.24747-skillforge/README.md)（`skillforge`）：SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。
+- 2026-08 · [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
+- 2026-08 · [SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction](../2608.24870-spo-plus-plus/README.md)（`spo-plus-plus`）：SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。
 - 2026-08 · [Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning](../2608.23318-agent-g2/README.md)（`agent-g2`）：Hint-based Agent RL 保留专家轨迹前缀再让策略探索，但固定深度忽略任务难度，逐样本 probe 又浪费 rollout。Agent-G² 从已有 policy rollout 按难度簇估计 guidance band 的中心和方差，对每个任务采样不同前缀深度。
 - 2026-08 · [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](../2608.23041-autosaddler/README.md)（`autosaddler`）：长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。
 - 2026-08 · [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](../2608.21292-auso/README.md)（`auso`）：外部技能检索有上下文开销，完全内化又失去按任务选择能力；按整条轨迹成功率硬切阶段还无法判断某一个动作是否真正受益。AUSO 先用 skill-conditioned teacher 内化通用技能，再进行 outcome-driven exploration，最后对每个动作比较有技能和无技能策略的 JSD，以有界权重调整 GRPO advantage。

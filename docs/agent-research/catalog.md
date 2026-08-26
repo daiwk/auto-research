@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 环境反馈提示训练 | [AHEAD: Agentic Hints for Effective Agent Development](2608.24114-ahead/README.md) | AWS AI Labs / Purdue University，2026-08-25 | 未发现官方代码 | `ahead` |
+| 可验证技能锻造 | [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](2608.24747-skillforge/README.md) | AMAP, Alibaba Group，2026-08-25 | 未发现官方代码 | `skillforge` |
+| 多维验证工具自进化 | [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](2608.24571-smith/README.md) | Appier AI Research / National Taiwan University，2026-08-25 | [已开源](https://github.com/appier-research/smith) | `smith` |
+| 异步单流 Agent RL | [SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction](2608.24870-spo-plus-plus/README.md) | Renmin University of China，2026-08-25 | 未发现官方代码 | `spo-plus-plus` |
 | 高斯 guidance Agent RL | [Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning](2608.23318-agent-g2/README.md) | Baidu，2026-08-24 | [已开源](https://github.com/ZJU-REAL/Agent-G2) | `agent-g2` |
 | Harness 自动优化 | [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](2608.23041-autosaddler/README.md) | Microsoft / POSTECH，2026-08-24 | 未发现官方代码 | `autosaddler` |
 | 动作级技能优化 | [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](2608.21292-auso/README.md) | University of Science and Technology of China，2026-08-21 | [已开源](https://github.com/JordanSancholhz/Action-Skill) | `auso` |
