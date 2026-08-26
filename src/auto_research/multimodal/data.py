@@ -23,7 +23,7 @@ FASHION_MNIST_LABELS = (
     "sandal", "shirt", "sneaker", "bag", "ankle boot",
 )
 FASHION_MNIST_BASE = (
-    "https://github.com/zalandoresearch/fashion-mnist/raw/refs/heads/master/"
+    "https://raw.githubusercontent.com/zalandoresearch/fashion-mnist/master/"
     "data/fashion"
 )
 FASHION_MNIST_FILES = {
@@ -258,7 +258,13 @@ def _md5(path: Path) -> str:
 def _download_with_resume(url: str, target: Path) -> None:
     """Download a large public archive while preserving interrupted progress."""
     existing = target.stat().st_size if target.exists() else 0
-    request = urllib.request.Request(url)
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "auto-research-dataset-fetcher/1.0",
+            "Accept": "application/octet-stream,*/*;q=0.8",
+        },
+    )
     if existing:
         request.add_header("Range", f"bytes={existing}-")
     with urllib.request.urlopen(request, timeout=60) as response:
