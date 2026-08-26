@@ -14,11 +14,11 @@
 
 | ID | 状态 | 交付 |
 | --- | --- | --- |
-| INFRA-005 | DONE | Local / SSH / Slurm 统一执行契约，含日志、状态、重试、硬超时、显存声明和成本上限 |
-| EVAL-001 | DONE | 推荐、基础模型、多模态、后训练与 Agent 的版本化公平评测协议；拒绝跨协议横向比较 |
-| AUTO-001 | DONE | `paper.yaml` 到实验假设、算子、消融、搜索空间的可审计提案，保留来源并要求人工确认 |
-| EVAL-002 | DONE | 配对 bootstrap、置换检验、Holm 校正、顺序 seed 与成本约束决策 |
-| MEMORY-001 | DONE | 精确上下文负结果知识库，并接入 Evolve 的候选过滤和逐轮研究记忆 |
+| INFRA-005 | DONE · [PR #128](https://github.com/daiwk/auto-research/pull/128) | Local / SSH / Slurm 统一执行契约，含日志、状态、重试、硬超时、显存声明和成本上限 |
+| EVAL-001 | DONE · [PR #128](https://github.com/daiwk/auto-research/pull/128) | 推荐、基础模型、多模态、后训练与 Agent 的版本化公平评测协议；拒绝跨协议横向比较 |
+| AUTO-001 | DONE · [PR #128](https://github.com/daiwk/auto-research/pull/128) | `paper.yaml` 到实验假设、算子、消融、搜索空间的可审计提案，保留来源并要求人工确认 |
+| EVAL-002 | DONE · [PR #128](https://github.com/daiwk/auto-research/pull/128) | 配对 bootstrap、置换检验、Holm 校正、顺序 seed 与成本约束决策 |
+| MEMORY-001 | DONE · [PR #128](https://github.com/daiwk/auto-research/pull/128) | 精确上下文负结果知识库，并接入 Evolve 的候选过滤和逐轮研究记忆 |
 
 完整使用方式、边界和命令见[自动研究平台 P1](research-platform-p1.md)。
 
