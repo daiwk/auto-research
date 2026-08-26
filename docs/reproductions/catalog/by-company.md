@@ -229,6 +229,7 @@
 - 2026-08 · [ConnectionMind](../2608.10187-connectionmind/README.md)：在时序异构社交图上用最短正路径 SFT 和规则奖励 GRPO 学习多步探索，再把路径教师蒸馏给 GNN student。
 
 ## Kuaishou Technology
+- 2026-08 · [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
 - 2026-08 · [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。
 - 2026-08 · [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
 - 2026-08 · [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。

@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-26",
+  "scope": [
+    "2608.24034-tagr",
+    "2608.24053-wemm-embedding",
+    "2608.24310-opd-search-plus",
+    "2608.24696-opdvr",
+    "2608.24870-spo-plus-plus",
+    "2608.24747-skillforge",
+    "2608.24114-ahead",
+    "2608.24571-smith"
+  ],
+  "results": {
+    "tagr": {
+      "source": "../reproductions/2608.24034-tagr/metrics/movielens-1m-seed42.json",
+      "baseline_ndcg_at_10": 0.1122723,
+      "final_ndcg_at_10": 0.0821179,
+      "relative_ndcg_at_10": -0.26858
+    },
+    "wemm-embedding": {
+      "source": "../reproductions/2608.24053-wemm-embedding/metrics/movielens-1m-seed42.json",
+      "stage1_recall_at_10": 0.561111,
+      "refined_recall_at_10": 0.838889,
+      "relative_recall_at_10": 0.49505
+    },
+    "opd-search-plus": {
+      "source": "../post-training/2608.24310-opd-search-plus/metrics/arithmetic-smoke-seed42.json",
+      "baseline_accuracy": 0.1953125,
+      "final_accuracy": 0.6640625
+    },
+    "opdvr": {
+      "source": "../post-training/2608.24696-opdvr/metrics/arithmetic-smoke-seed42.json",
+      "baseline_accuracy": 0.1953125,
+      "final_accuracy": 0.6640625
+    },
+    "spo-plus-plus": {
+      "source": "../agent-research/2608.24870-spo-plus-plus/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.64
+    },
+    "skillforge": {
+      "source": "../agent-research/2608.24747-skillforge/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.62
+    },
+    "ahead": {
+      "source": "../agent-research/2608.24114-ahead/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.616
+    },
+    "smith": {
+      "source": "../agent-research/2608.24571-smith/metrics/planbench-mini-seed42.json",
+      "joint_success": 1.0,
+      "average_cost": 0.455
+    }
+  },
+  "claim_boundary": "Index over per-paper L1/public-data mechanism artifacts; not a cross-task leaderboard or a paper-scale reproduction.",
+  "manifest_ref": "experiments:latest-20260826-seed42",
+  "evaluation_protocol": {
+    "tier": "mixed_l1_and_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed mechanism verification; paper and local results remain separate"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/latest-20260826-seed42.json",
+    "dataset_fingerprint": {
+      "tagr": "movielens-1m:seed42",
+      "wemm-embedding": "movielens-1m-paired-views:seed42",
+      "post-training": "arithmetic-smoke:100-steps:seed42",
+      "agent": "planbench-mini:120-episodes:seed42"
+    }
+  }
+}

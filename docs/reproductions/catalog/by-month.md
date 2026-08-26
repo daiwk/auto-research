@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-08
+- [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
 - [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。
 - [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
 - [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md)：把冻结多模态 embedding 接入统一资产双塔，并用查询相似度增强搜索画布打分。

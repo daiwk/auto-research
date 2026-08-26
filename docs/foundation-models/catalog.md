@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 多模态基础模型 | [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../reproductions/2608.24053-wemm-embedding/README.md) | WeChat Vision, Tencent，2026-08-25 | [已开源](https://github.com/Tencent/WeMM-Embedding) | `wemm-embedding` |
 | 网络架构 | [RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models](../reproductions/2608.21236-rare/README.md) | Huazhong University of Science and Technology，2026-08-21 | 未发现官方代码 | `rare` |
 | 预训练与数据 | [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](../reproductions/2608.12831-tcab/README.md) | New York University，2026-08-13 | 未发现官方代码 | `tcab` |
 | 多模态基础模型 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | 未发现官方代码 | `gas` |

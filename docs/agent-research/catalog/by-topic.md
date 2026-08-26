@@ -17,12 +17,19 @@
 
 ### 通用轨迹与 credit assignment
 
+- [SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction](../2608.24870-spo-plus-plus/README.md)（`spo-plus-plus`）：SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。
 - [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
 - [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
 - [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
 - [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
 - [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
 - [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
+
+### 环境模型与 world rehearsal
+
+- [AHEAD: Agentic Hints for Effective Agent Development](../2608.24114-ahead/README.md)（`ahead`）：轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。
+- [EnvACE](../2608.06197-envace/README.md)（`envace`）：EnvACE 不另训 world model，而让同一个 agent policy 在真实 act 之间切换到 rehearsal role，自行预测下一 observation；训练时分别为 acting 与 rehearsal 轨迹计算 group-relative advantage，避免两种奖励尺度互相污染，测试时可用少量私有 rehearsal 扩展规划。
+- [State2State: Environment-Derived Mid-Training for LLM Agents](../2608.04934-state2state/README.md)（`state2state`）：**主题：环境派生中训练。** 从环境探索自动采样起点与目标状态，用规则化状态匹配做 verifier，形成无需人工任务与专家轨迹的可扩展 mid-training。
 
 ### Harness 与运行时策略
 
@@ -40,11 +47,6 @@
 - [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
 - [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
 - [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
-
-### 环境模型与 world rehearsal
-
-- [EnvACE](../2608.06197-envace/README.md)（`envace`）：EnvACE 不另训 world model，而让同一个 agent policy 在真实 act 之间切换到 rehearsal role，自行预测下一 observation；训练时分别为 acting 与 rehearsal 轨迹计算 group-relative advantage，避免两种奖励尺度互相污染，测试时可用少量私有 rehearsal 扩展规划。
-- [State2State: Environment-Derived Mid-Training for LLM Agents](../2608.04934-state2state/README.md)（`state2state`）：**主题：环境派生中训练。** 从环境探索自动采样起点与目标状态，用规则化状态匹配做 verifier，形成无需人工任务与专家轨迹的可扩展 mid-training。
 
 ## 多 Agent 与软件工程
 
@@ -106,6 +108,7 @@
 
 ### 工具选择、反馈与程序执行
 
+- [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
 - [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
 - [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
 - [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
@@ -131,6 +134,7 @@
 
 ### 技能图与跨任务积累
 
+- [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](../2608.24747-skillforge/README.md)（`skillforge`）：SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。
 - [Learning Globally Reusable Skills for Coding Agents](../2608.06153-gse/README.md)（`gse`）：**主题：全局技能进化。** GSE 用 Skill Relation Graph 显式维护技能关系，以聚类合并局部经验，并通过 replay verification 防止过拟合与行为回退。
 - [When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents](../2608.05810-vag/README.md)（`vag`）：**主题：技能进化安全。** 技能一旦进入上下文会污染后代，事后删除无法彻底回滚。
 - [CoEvo-Mem](../2608.01739-coevo-mem/README.md)（`coevo-mem`）：只优化 query routing 或只更新 memory bank 会忽略二者反馈环。CoEvo-Mem 让冻结 LLM 生成 route-specific rewrite 和 prior，轻量 residual router 在线修正；任务结果更新路由，轨迹反馈更新 memory value 与 graph relation，并交替冻结一侧控制非平稳性。

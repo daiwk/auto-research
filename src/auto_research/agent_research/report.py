@@ -4,6 +4,10 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "spo-plus-plus": ("SPO++", "https://arxiv.org/abs/2608.24870"),
+    "skillforge": ("SkillForge", "https://arxiv.org/abs/2608.24747"),
+    "ahead": ("AHEAD", "https://arxiv.org/abs/2608.24114"),
+    "smith": ("SMITH", "https://arxiv.org/abs/2608.24571"),
     "agent-g2": ("Agent-G²", "https://arxiv.org/abs/2608.23318"),
     "autosaddler": ("AutoSaddler", "https://arxiv.org/abs/2608.23041"),
     "sapo": ("Single-Rollout Autoregressive Policy Optimization", "https://arxiv.org/abs/2608.19842"),

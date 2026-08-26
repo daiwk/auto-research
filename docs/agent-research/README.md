@@ -18,6 +18,10 @@
 - [论文谱系与缺口](lineage.md)：系统审计经典主干、最新覆盖和真实环境前置条件。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
 - [可训练 policy 与真实 executor](training-executor.md)：Agent Lightning checkpoint 更新与同预算代码执行矩阵。
+- [SPO++](2608.24870-spo-plus-plus/README.md)：按生成事件冻结 prompt value，并在 action-token measure 下校正异步 advantage。
+- [SkillForge](2608.24747-skillforge/README.md)：显式创建、调用、验证与修订可复用技能。
+- [AHEAD](2608.24114-ahead/README.md)：普通步骤注入环境反馈，错误步骤再注入纠错 hint。
+- [SMITH](2608.24571-smith/README.md)：联合优化工具创建和使用，并分离 schema、代码与结果验证。
 - [Agent-G²](2608.23318-agent-g2/README.md)：从已有 rollout 在线估计高斯 guidance band，无额外 probing。
 - [AutoSaddler](2608.23041-autosaddler/README.md)：由失败 trace 诊断、生成并验证 durable harness patch。
 - [Toolformer](2302.04761-toolformer/README.md)：按 token loss improvement 自监督过滤工具调用。

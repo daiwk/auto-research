@@ -128,6 +128,8 @@ TOPIC_HIERARCHY = {
         "反思式 token 信用": ("奖励、信用与课程", "过程 / token 信用分配"),
         "输入侧 Query-KL": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "RL rollout 加速": ("训推一致性与高效 rollout", "预算分配与 speculative rollout"),
+        "搜索增强 OPD + RL": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "可验证奖励 OPD": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
     },
     "agent-research": {
         "动作级技能优化": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
@@ -199,6 +201,10 @@ TOPIC_HIERARCHY = {
         "搜索轨迹 hindsight": ("Agentic RL 与后训练", "搜索、网页与多轮交互 RL"),
         "高斯 guidance Agent RL": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "Harness 自动优化": ("Agentic RL 与后训练", "Harness 与运行时策略"),
+        "异步单流 Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "可验证技能锻造": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "环境反馈提示训练": ("Agentic RL 与后训练", "环境模型与 world rehearsal"),
+        "多维验证工具自进化": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
     },
 }
 
@@ -212,6 +218,7 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "wemm-embedding": ("多模态基础模型", "对比预训练与自蒸馏"),
     "tcab": ("预训练与数据", "训练框架与可组合实验"),
     "olmpool-long-context": ("注意力与长上下文", "稀疏、门控与动态注意力"),
     "distillcache": ("推理与系统效率", "推测解码与 KV cache"),

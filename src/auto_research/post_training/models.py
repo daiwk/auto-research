@@ -95,6 +95,8 @@ ALGORITHMS = (
     "iso-rlvr",
     "srpo",
     "erpo",
+    "opd-search-plus",
+    "opdvr",
 )
 
 

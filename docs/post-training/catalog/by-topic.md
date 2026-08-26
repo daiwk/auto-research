@@ -36,6 +36,8 @@
 
 ### on-policy / context 蒸馏
 
+- [OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning](../2608.24310-opd-search-plus/README.md)（`opd-search-plus`）：搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。
+- [OPDVR: On-Policy Distillation with Verifiable Rewards](../2608.24696-opdvr/README.md)（`opdvr`）：Sampled-token OPD 的隐式奖励由教师/学生概率比决定，可能给正确轨迹负奖励、给错误轨迹正奖励。OPDVR 不再额外混合一个 RL loss，而是直接用 verifier correctness 对该隐式奖励做单侧 ReLU：正确轨迹只保留非负教师信号，错误轨迹只保留非正信号。
 - [DASH](../2608.06243-dash/README.md)（`dash`）：普通 OPSD 对每个 token 独立匹配 privileged teacher，难把后续可靠推理对前面决策的信用传回去。DASH 由局部 teacher/student divergence 产生停止梯度 gate，再从后向前递推聚合权重；不增加 teacher forward pass，却获得自适应 distillation horizon。
 - [RP-OPSD](../2608.06347-rp-opsd/README.md)（`rp-opsd`）：跨语言迁移中，表面措辞与真正改变推理状态的 pivot 不应同权。RP-OPSD 比较带英文参考解与去掉参考解的匹配教师视图，用分布位移定位 pivot，再在这些位置强化 privileged distillation 并保留 reference anchor。
 - [U-OPSD](../2608.06296-u-opsd/README.md)（`u-opsd`）：U-OPSD 不使用答案、环境奖励或更大教师。模型多次采样后做多数投票，以最短一致解作为 privileged view，定点修复最长且高置信错误轨迹，是真正依赖内部一致性的自蒸馏。

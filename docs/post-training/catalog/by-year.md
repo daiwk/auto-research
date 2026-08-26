@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-08 · [OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning](../2608.24310-opd-search-plus/README.md)（`opd-search-plus`）：搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。
+- 2026-08 · [OPDVR: On-Policy Distillation with Verifiable Rewards](../2608.24696-opdvr/README.md)（`opdvr`）：Sampled-token OPD 的隐式奖励由教师/学生概率比决定，可能给正确轨迹负奖励、给错误轨迹正奖励。OPDVR 不再额外混合一个 RL loss，而是直接用 verifier correctness 对该隐式奖励做单侧 ReLU：正确轨迹只保留非负教师信号，错误轨迹只保留非正信号。
 - 2026-08 · [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](../2608.23311-erpo/README.md)（`erpo`）：传统 Policy-KL 直接压回答分布，稳定训练的同时消耗探索预算。ERPO 观察到 RL 过程中模型诱导的问题分布也会漂移，于是把正则放到输入侧：用冻结 reference 的问题似然给 query 静态加权，再以 Query-KL 控制环境分布漂移，不直接对 response score function 施压。
 - 2026-08 · [SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning](../2608.23493-srpo/README.md)（`srpo`）：长轨迹只给终局 reward 时，很难知道具体哪个 token/动作导致失败。SRPO 让当前模型先根据完整轨迹和环境结果写出简短 reflection patch，再把 patch 拼回原问题；同一个模型在这个特权上下文中充当教师，对学生的 on-policy rollout 给出逐 token 分数。
 - 2026-08 · [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](../2608.19408-r2-opd/README.md)（`r2-opd`）：分别按教师奖励和独立进展奖励排序 reasoning spans，冲突时屏蔽蒸馏信号。

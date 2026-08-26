@@ -16,6 +16,8 @@
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
 - 分类浏览：[按机构/公司/学校](catalog/by-organization.md) ·
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
+- [OPDSearch+](2608.24310-opd-search-plus/README.md)：先在学生在线搜索轨迹上做冻结教师 forward-KL 蒸馏，再用可验证奖励继续 RL refinement。
+- [OPDVR](2608.24696-opdvr/README.md)：用正确性约束的 ReLU gate 校正 sampled-token OPD 隐式奖励符号，不增加额外损失超参数。
 - [论文谱系与边界](lineage.md)：系统审计已覆盖主干、静态能力收口和后续评测边界。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
 - [SRPO](2608.23493-srpo/README.md)：用自我反思 patch 构造同模型特权教师和 token 级稠密信用。

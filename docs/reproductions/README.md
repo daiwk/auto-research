@@ -79,6 +79,11 @@ pytest tests/test_research_module_docs.py
 - `onemodel` · [OneModel](2608.18606-onemodel/README.md)：小红书以共享长序列 backbone、场景门控和分层用户表征统一推荐、广告与商家排序，并披露三个生产场景的量化 A/B。
 - `rare` · [RARE](2608.21236-rare/README.md)：把表征编辑方向投影到 MoE router 零空间，并在下游保护层校正传播漂移，保持原专家路径。
 
+## 2026-08-26 最新增量
+
+- `tagr` · [TAGR](2608.24034-tagr/README.md)：快手直播广告用稳定词表的两级语义/协同 ID、多尺度兴趣和行为价值门控做生成式推荐；论文生产 A/B 的 LRE +8.5%、SCC +7.4%、Revenue +16.1%。
+- `wemm-embedding` · [WeMM-Embedding](2608.24053-wemm-embedding/README.md)：微信把多模态对齐、跨尺度 teacher refinement 与 Matryoshka embedding 合成统一检索模型；报告说明 14 项线上 A/B 收益已全量发布并公开代码与权重。
+
 ## 2026 历史扫描 B01～B03（18 个 adapter）
 
 - `dynamic-codebook` · [Dynamic Single-Level Large Semantic Codebook](2608.21012-dynamic-codebook/README.md)：曝光加权动态大码本、独立碰撞码和短 SID 解码。
