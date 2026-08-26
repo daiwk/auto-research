@@ -92,6 +92,7 @@ class RankMixerEvaluator:
             "final_loss": float(np.mean([row["final_loss"] for row in training_runs])),
             "parameters": int(np.mean([row["parameters"] for row in training_runs])),
             "seeds": list(self.seeds),
+            "fitness_by_seed": [float(row[selected]) for row in validation_runs],
         }
         return EvolutionTrial(trial_id, generation, parent_id, genome, validation, training, source_papers, rationale, time.monotonic() - started)
 

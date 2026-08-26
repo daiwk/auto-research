@@ -68,6 +68,7 @@ class PostTrainingEvolutionEvaluator:
             trial_id, generation, parent_id, genome, validation,
             {
                 "seeds": list(self.seeds),
+                "fitness_by_seed": [float(row["primary"]) for row in rows],
                 "steps": int(np.mean([row["steps"] for row in training])),
                 "algorithm": genome.post_training,
                 "group_size": genome.group_size,
@@ -224,6 +225,7 @@ class AgentEvolutionEvaluator:
             trial_id, generation, parent_id, genome, validation,
             {
                 "seeds": list(self.seeds),
+                "fitness_by_seed": [float(row["primary"]) for row in rows],
                 "episodes": self.episodes,
                 "components": {
                     "memory": genome.agent_memory,

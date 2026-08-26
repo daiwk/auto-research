@@ -74,6 +74,7 @@ class GenRecEvolutionEvaluator:
             validation,
             {
                 "seeds": list(self.seeds),
+                "fitness_by_seed": [float(row["primary"]) for row in rows],
                 "steps": self.steps,
                 "catalog_items": len(self.data.item_texts),
                 "full_catalog": True,

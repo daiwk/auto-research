@@ -78,7 +78,9 @@ class HyFormerEvaluator:
             trial_id, generation, parent_id, genome, validation,
             {"initial_loss": float(np.mean([x["initial_loss"] for x in trainings])),
              "final_loss": float(np.mean([x["final_loss"] for x in trainings])),
-             "parameters": int(np.mean([x["parameters"] for x in trainings])), "seeds": list(self.seeds)},
+             "parameters": int(np.mean([x["parameters"] for x in trainings])),
+             "seeds": list(self.seeds),
+             "fitness_by_seed": [float(row[selected]) for row in validations]},
             source_papers, rationale, time.monotonic() - started,
         )
 
