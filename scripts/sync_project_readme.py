@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import re
-import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,11 +15,11 @@ COUNT_PATTERN = re.compile(r"仓库目前注册 \*\*\d+ 个\*\*论文 adapter")
 
 
 def normalized_source() -> str:
-    sys.path.insert(0, str(ROOT / "src"))
-    from auto_research.reproductions.registry import list_adapters
-
     content = SOURCE.read_text(encoding="utf-8")
-    replacement = f"仓库目前注册 **{len(list_adapters())} 个**论文 adapter"
+    specifications = list(
+        (ROOT / "src" / "auto_research" / "reproductions").glob("*/paper.yaml")
+    )
+    replacement = f"仓库目前注册 **{len(specifications)} 个**论文 adapter"
     if not COUNT_PATTERN.search(content):
         raise SystemExit("README.md is missing the generated adapter-count sentence")
     return COUNT_PATTERN.sub(replacement, content)
