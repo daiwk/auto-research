@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "key": "rope",
+  "arxiv_id": "2104.09864",
+  "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+  "paper_url": "https://arxiv.org/abs/2104.09864",
+  "organization": "Zhuiyi Technology",
+  "published": "2021-04-20",
+  "upstream_code": "https://github.com/ZhuiyiTechnology/roformer",
+  "track": "llm",
+  "topics": [
+    "position-encoding",
+    "long-context",
+    "architecture"
+  ],
+  "local_code": "src/auto_research/reproductions/rope",
+  "documentation": "docs/reproductions/2104.09864-rope/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 llamamodern，实验组为 rope",
+  "metrics": [
+    "baseline.composite_loss",
+    "baseline.final_loss",
+    "baseline.fitness",
+    "baseline.initial_loss",
+    "baseline.instruction_loss",
+    "baseline.lm_loss",
+    "baseline.muon_orthogonality_error",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "baseline.post_training_loss",
+    "baseline.primary",
+    "baseline.public_composite",
+    "baseline.reward_bearing_group_rate",
+    "method.architecture_stats.relative_phase",
+    "method.composite_loss",
+    "method.final_loss",
+    "method.fitness",
+    "method.initial_loss",
+    "method.instruction_loss",
+    "method.lm_loss",
+    "method.muon_orthogonality_error",
+    "method.parameters",
+    "method.perplexity",
+    "method.post_training_loss",
+    "method.primary",
+    "method.public_composite",
+    "method.reward_bearing_group_rate",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "large-scale Chinese pretraining"
+  ],
+  "evolve_operators": []
+}

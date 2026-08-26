@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "oxygenrec-v2",
+  "arxiv_id": "2607.24255",
+  "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.24255",
+  "organization": "JD.COM",
+  "published": "2026-07-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "privileged-distillation",
+    "behavior-instruction"
+  ],
+  "local_code": "src/auto_research/reproductions/oxygenrec_v2",
+  "documentation": "docs/reproductions/2607.24255-oxygenrec-v2/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "matched control without the oxygenrec-v2 mechanism",
+  "metrics": [
+    "paper_results.offline_recall_at_512",
+    "paper_results.online_gmv_best_lift_percent",
+    "relative.entropy_routed_positions_percent",
+    "relative.final_loss_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.initial_loss_percent",
+    "relative.ndcg_at_10_percent",
+    "relative.parameters_percent",
+    "variants.OxygenREC-v2 core.final_loss",
+    "variants.OxygenREC-v2 core.hit_at_10",
+    "variants.OxygenREC-v2 core.initial_loss",
+    "variants.OxygenREC-v2 core.ndcg_at_10",
+    "variants.PT-only generator.final_loss",
+    "variants.PT-only generator.hit_at_10",
+    "variants.PT-only generator.initial_loss",
+    "variants.PT-only generator.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "JD private multi-behavior logs",
+    "three-level production semantic IDs",
+    "3B-A1B MoE serving stack"
+  ],
+  "evolve_operators": []
+}

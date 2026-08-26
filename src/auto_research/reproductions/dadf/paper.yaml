@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "dadf",
+  "arxiv_id": "2605.17863",
+  "title": "DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2605.17863",
+  "organization": "Kuaishou Technology",
+  "published": "2026-05-18",
+  "upstream_code": "https://github.com/liuzhao09/DADF",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "watch-time",
+    "debiasing"
+  ],
+  "local_code": "src/auto_research/reproductions/dadf",
+  "documentation": "docs/reproductions/2605.17863-dadf/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

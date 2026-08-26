@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "key": "mim",
+  "arxiv_id": "2502.00321",
+  "title": "MIM: Multi-modal Content Interest Modeling Paradigm for User Behavior Modeling",
+  "paper_url": "https://arxiv.org/abs/2502.00321",
+  "organization": "Alibaba / Taobao",
+  "published": "2025-02-01",
+  "upstream_code": "https://pan.quark.cn/s/8fc8ec3e74f3",
+  "track": "recommendation",
+  "topics": [
+    "multimodal-recommendation",
+    "user-modeling",
+    "pretraining",
+    "ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/mim",
+  "documentation": "docs/reproductions/2502.00321-mim/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "ID co-occurrence interest model",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.mrr_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.mrr_at_10",
+    "method.ndcg_at_10",
+    "paper_results.ctr_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.mrr_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Taobao private multimodal corpus",
+    "production CiUBM serving"
+  ],
+  "evolve_operators": []
+}

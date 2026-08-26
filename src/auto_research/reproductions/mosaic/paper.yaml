@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "mosaic",
+  "arxiv_id": "2607.24015",
+  "title": "Mosaic: A Fleet of User Embedding Specialists for Recommendation at Meta",
+  "paper_url": "https://arxiv.org/abs/2607.24015",
+  "organization": "Meta",
+  "published": "2026-07-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "user-embedding",
+    "multi-task-learning",
+    "sequential-recommendation",
+    "mixture-of-experts"
+  ],
+  "local_code": "src/auto_research/reproductions/mosaic",
+  "documentation": "docs/reproductions/2607.24015-mosaic/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "同一 MovieLens-1M 切分、同一 full-catalog 候选集上的单 GRU sequential embedding",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "training.baseline.final_loss",
+    "training.baseline.initial_loss",
+    "training.mosaic.final_loss",
+    "training.mosaic.final_mrm_loss",
+    "training.mosaic.initial_loss"
+  ],
+  "mechanisms": [
+    "Meta private multi-surface features and labels",
+    "HSTU-2048 specialists and production-scale CoTrain",
+    "CoEval, zero-out evaluation, AOTI and hybrid serving"
+  ],
+  "evolve_operators": []
+}

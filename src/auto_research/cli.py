@@ -17,6 +17,11 @@ from .agent_research.models import METHODS as AGENT_METHODS
 from .evolution import EvolutionConfig, ModelEvolutionEngine
 from .evolution.providers import list_providers
 from .evolution.promotion import CandidatePluginSpec, CandidatePromotionPipeline
+from .evolution.compatibility import (
+    operator_registry, validate_operator_set, write_compatibility_graph,
+)
+from .experiment_store.dashboard import write_dashboard
+from .experiment_store.store import ExperimentStore, sync_experiments
 from .evidence_promotion import EvidencePromotionConfig, EvidencePromotionRunner
 from .post_training import PostTrainingConfig, PostTrainingRunner
 from .post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
@@ -586,6 +591,33 @@ def build_parser() -> argparse.ArgumentParser:
         "--retry-failed", action="store_true",
         help="retry failed target/seed cells while retaining previous attempts",
     )
+
+    experiments = commands.add_parser(
+        "experiments", help="index and browse experiment artifacts across all research domains"
+    )
+    experiments.add_argument("action", choices=["sync", "list", "dashboard", "pareto"])
+    experiments.add_argument("--database", type=Path, default=Path("runs/experiments.sqlite"))
+    experiments.add_argument("--roots", default="docs,runs")
+    experiments.add_argument("--output", type=Path, default=Path("runs/experiment-dashboard.html"))
+    experiments.add_argument("--domain")
+    experiments.add_argument("--method")
+    experiments.add_argument("--dataset")
+    experiments.add_argument("--metric")
+    experiments.add_argument("--x-metric")
+    experiments.add_argument("--y-metric")
+    experiments.add_argument("--maximize-x", action="store_true")
+    experiments.add_argument("--minimize-y", action="store_true")
+
+    operators = commands.add_parser(
+        "operators", help="inspect and validate paper-derived Evolve operator combinations"
+    )
+    operators.add_argument("action", choices=["list", "check", "export"])
+    operators.add_argument("--model")
+    operators.add_argument("--operators", default="")
+    operators.add_argument("--max-compute", type=int)
+    operators.add_argument("--max-memory", type=int)
+    operators.add_argument("--max-latency", type=int)
+    operators.add_argument("--output", type=Path, default=Path("runs/operator-graph.json"))
     return parser
 
 
@@ -607,6 +639,61 @@ def main(argv: list[str] | None = None) -> int:
                     f"{adapter.key:20} {adapter.fidelity.value:16} "
                     f"{adapter.paper.arxiv_id:12} {adapter.paper.title}"
                 )
+            return 0
+        if args.command == "experiments":
+            roots = [Path(value.strip()) for value in args.roots.split(",") if value.strip()]
+            if args.action == "sync":
+                imported, failed = sync_experiments(args.database, roots)
+                print(f"Indexed {imported} artifacts; skipped {failed} invalid artifacts")
+                return 0 if not failed else 2
+            if args.action == "dashboard":
+                imported, failed = sync_experiments(args.database, roots)
+                print(f"Indexed {imported} artifacts; skipped {failed} invalid artifacts")
+                print(write_dashboard(args.database, args.output).resolve())
+                return 0
+            with ExperimentStore(args.database) as store:
+                if args.action == "pareto":
+                    if not args.x_metric or not args.y_metric:
+                        raise ValueError("pareto requires --x-metric and --y-metric")
+                    rows = store.pareto_frontier(
+                        args.x_metric, args.y_metric,
+                        minimize_x=not args.maximize_x, minimize_y=args.minimize_y,
+                    )
+                else:
+                    rows = store.rows(
+                        domain=args.domain, method=args.method,
+                        dataset=args.dataset, metric=args.metric,
+                    )
+            for row in rows:
+                print(json.dumps({
+                    "domain": row.domain, "method": row.method,
+                    "dataset": row.dataset, "seed": row.seed,
+                    "metrics": row.metrics, "path": row.path,
+                }, ensure_ascii=False))
+            return 0
+        if args.command == "operators":
+            if args.action == "export":
+                print(write_compatibility_graph(args.output).resolve())
+                return 0
+            if args.action == "list":
+                for key, spec in sorted(operator_registry().items()):
+                    print(
+                        f"{key:32} {spec.domain:18} {spec.slot:14} "
+                        f"{','.join(spec.compatible_models)}"
+                    )
+                return 0
+            if not args.model:
+                raise ValueError("operators check requires --model")
+            values = [value.strip() for value in args.operators.split(",") if value.strip()]
+            if not values:
+                raise ValueError("operators check requires --operators")
+            errors = validate_operator_set(
+                args.model, values, max_compute=args.max_compute,
+                max_memory=args.max_memory, max_latency=args.max_latency,
+            )
+            if errors:
+                raise ValueError("; ".join(errors))
+            print("compatible")
             return 0
         if args.command == "candidate":
             pipeline = CandidatePromotionPipeline(Path.cwd())
@@ -820,6 +907,10 @@ def main(argv: list[str] | None = None) -> int:
                 reasoning_checkpoint_path=args.reasoning_checkpoint_path,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
+            result_artifact = run_dir / "result.json"
+            if result_artifact.exists():
+                with ExperimentStore(args.output_dir.parent / "experiments.sqlite") as store:
+                    store.import_artifact(result_artifact, root=Path.cwd())
             champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
             print(f"Champion: {champion.trial_id} ({champion.genome.architecture})")
             if args.model == "micro-llm":

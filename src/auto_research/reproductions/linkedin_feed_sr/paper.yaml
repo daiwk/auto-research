@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "linkedin-feed-sr",
+  "arxiv_id": "2602.12354",
+  "title": "An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking",
+  "paper_url": "https://arxiv.org/abs/2602.12354",
+  "organization": "LinkedIn",
+  "published": "2026-02-12",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "sequential-recommendation",
+    "long-sequence"
+  ],
+  "local_code": "src/auto_research/reproductions/linkedin_feed_sr",
+  "documentation": "docs/reproductions/2602.12354-linkedin-feed-sr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

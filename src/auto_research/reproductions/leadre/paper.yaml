@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "leadre",
+  "arxiv_id": "2411.13789",
+  "title": "LEADRE: Multi-Faceted Knowledge Enhanced LLM Empowered Display Advertisement Recommender System",
+  "paper_url": "https://arxiv.org/abs/2411.13789",
+  "organization": "Tencent / WeChat",
+  "published": "2024-11-21",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "generative-retrieval",
+    "advertising",
+    "preference-alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/leadre",
+  "documentation": "docs/reproductions/2411.13789-leadre/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "DIN，LEADRE NDCG@10 相对 DIN +12.94%",
+  "metrics": [
+    "paper_online_ab.channels_gmv_percent",
+    "paper_online_ab.moments_gmv_percent",
+    "results.din.hit_at_10",
+    "results.din.ndcg_at_10",
+    "results.leadre_dpo.hit_at_10",
+    "results.leadre_dpo.ndcg_at_10",
+    "results.ndcg_ablation_percent",
+    "results.ndcg_vs_din_percent",
+    "results.sft.hit_at_10",
+    "results.sft.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "private WeChat ad corpus and tens-of-billions-request serving stack"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "key": "onepiece",
+  "arxiv_id": "2509.18091",
+  "title": "OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking",
+  "paper_url": "https://arxiv.org/abs/2509.18091",
+  "organization": "Shopee",
+  "published": "2025-09-22",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "retrieval",
+    "latent-reasoning",
+    "multi-task"
+  ],
+  "local_code": "src/auto_research/reproductions/onepiece",
+  "documentation": "docs/reproductions/2509.18091-onepiece/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 onepiece 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.ad_revenue_percent",
+    "paper_results.ranking_gmv_uu_percent",
+    "paper_results.retrieval_gmv_uu_percent",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Shopee private user feedback chains",
+    "production cascade"
+  ],
+  "evolve_operators": []
+}

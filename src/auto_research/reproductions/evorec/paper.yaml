@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "evorec",
+  "arxiv_id": "2606.28368",
+  "title": "EvoRec: Self-Evolving Agentic Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2606.28368",
+  "organization": "Alibaba International Digital Commerce Group",
+  "published": "2026-06-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "auto-research",
+    "agent",
+    "skill-evolution"
+  ],
+  "local_code": "src/auto_research/reproductions/evorec",
+  "documentation": "docs/reproductions/2606.28368-evorec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (260 users / 420 items)"
+  ],
+  "baseline": "固定 ensemble，实验组为三代 skill-memory 进化结果",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "production multi-agent toolchain",
+    "private industrial dataset"
+  ],
+  "evolve_operators": []
+}

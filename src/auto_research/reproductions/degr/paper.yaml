@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "degr",
+  "arxiv_id": "2608.04809",
+  "title": "DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging",
+  "paper_url": "https://arxiv.org/abs/2608.04809",
+  "organization": "JD.com",
+  "published": "2026-08-05",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "slate-optimization",
+    "exploration",
+    "preference-optimization"
+  ],
+  "local_code": "src/auto_research/reproductions/degr",
+  "documentation": "docs/reproductions/2608.04809-degr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "同预算 CE generator，实验组加入 diversity 与 adaptive reward ORPO",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "degr.adaptive_reward_orpo_updates",
+    "degr.hit_at_10",
+    "degr.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "JD one-billion-request private dataset",
+    "industrial exploratory reward model",
+    "cross-request exposure trajectories"
+  ],
+  "evolve_operators": []
+}

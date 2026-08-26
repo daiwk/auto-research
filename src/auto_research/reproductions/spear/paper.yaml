@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "spear",
+  "arxiv_id": "2608.01738",
+  "title": "SPEAR: Selection-aware Personalized End-to-end Adaptive Rewriting and Retrieval for Community Search",
+  "paper_url": "https://arxiv.org/abs/2608.01738",
+  "organization": "Dewu",
+  "published": "2026-08-03",
+  "upstream_code": "https://github.com/mallocagi1-cell/spear",
+  "track": "recommendation",
+  "topics": [
+    "search",
+    "query-rewriting",
+    "retrieval",
+    "personalization"
+  ],
+  "local_code": "src/auto_research/reproductions/spear",
+  "documentation": "docs/reproductions/2608.01738-spear/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 SPEAR 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.click_recall_at_10_percent",
+    "paper_results.query_view_ctr_percent",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Dewu private query/rewrite/item logs",
+    "production request-level feature schema and serving stack"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "key": "saviorrec",
+  "arxiv_id": "2508.01375",
+  "title": "SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation",
+  "paper_url": "https://arxiv.org/abs/2508.01375",
+  "organization": "Alibaba",
+  "published": "2025-08-02",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "cold start",
+    "semantic ID",
+    "multimodal recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/saviorrec",
+  "documentation": "docs/reproductions/2508.01375-saviorrec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K genres and chronological co-interactions"
+  ],
+  "baseline": "等预算 Content Ranker",
+  "metrics": [
+    "aggregate.auc_relative_percent",
+    "aggregate.cold_auc_relative_percent",
+    "aggregate.content_auc_mean",
+    "aggregate.content_auc_std",
+    "aggregate.content_cold_auc_mean",
+    "aggregate.content_cold_auc_std",
+    "aggregate.positive_auc_seeds",
+    "aggregate.positive_cold_auc_seeds",
+    "aggregate.saviorrec_auc_mean",
+    "aggregate.saviorrec_auc_std",
+    "aggregate.saviorrec_cold_auc_mean",
+    "aggregate.saviorrec_cold_auc_std",
+    "per_seed.42.content_auc",
+    "per_seed.42.content_cold_auc",
+    "per_seed.42.saviorrec_auc",
+    "per_seed.42.saviorrec_cold_auc",
+    "per_seed.43.content_auc",
+    "per_seed.43.content_cold_auc",
+    "per_seed.43.saviorrec_auc",
+    "per_seed.43.saviorrec_cold_auc",
+    "per_seed.44.content_auc",
+    "per_seed.44.content_cold_auc",
+    "per_seed.44.saviorrec_auc",
+    "per_seed.44.saviorrec_cold_auc"
+  ],
+  "mechanisms": [
+    "proprietary image/text encoders",
+    "Taobao production features"
+  ],
+  "evolve_operators": []
+}

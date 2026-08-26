@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "key": "llm-ad-retrieval",
+  "arxiv_id": "2605.21969",
+  "title": "LLM Retrieval for Stable and Predictable Ad Recommendations",
+  "paper_url": "https://arxiv.org/abs/2605.21969",
+  "organization": "Meta",
+  "published": "2026-05-21",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "retrieval",
+    "stability"
+  ],
+  "local_code": "src/auto_research/reproductions/llm_ad_retrieval",
+  "documentation": "docs/reproductions/2605.21969-llm-ad-retrieval/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K titles, genres, and chronological positive feedback"
+  ],
+  "baseline": "Collaborative Item Graph",
+  "metrics": [
+    "paper_online_ab.final_stage_recall_lift_percent",
+    "results.collaborative_graph.ndcg_at_20",
+    "results.collaborative_graph.recall_at_20",
+    "results.collaborative_plus_llm_graph.ndcg_at_20",
+    "results.collaborative_plus_llm_graph.recall_at_20",
+    "results.ndcg_relative_gain_percent",
+    "results.recall_relative_gain_percent",
+    "training.attribute_head_final_loss",
+    "training.attribute_head_initial_loss",
+    "training.domain_sft_final_loss",
+    "training.domain_sft_initial_loss"
+  ],
+  "mechanisms": [
+    "Llama-3-8B and private ads fine-tuning data",
+    "Meta distributed inference and online serving stack",
+    "conversion/revenue-weighted live A/A' shadow-ad framework"
+  ],
+  "evolve_operators": []
+}

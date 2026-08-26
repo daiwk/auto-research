@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "key": "sort-gen",
+  "arxiv_id": "2505.07197",
+  "title": "A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao",
+  "paper_url": "https://arxiv.org/abs/2505.07197",
+  "organization": "Alibaba / Taobao & Tmall",
+  "published": "2025-05-12",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "multi-objective",
+    "ordered-regression",
+    "diversity"
+  ],
+  "local_code": "src/auto_research/reproductions/sort_gen",
+  "documentation": "docs/reproductions/2505.07197-sort-gen/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 1M exposure-slate proxy"
+  ],
+  "baseline": "item-level greedy formula",
+  "metrics": [
+    "baseline.click_per_slate",
+    "baseline.gmv_proxy_per_slate",
+    "baseline.ilad",
+    "baseline.model_calls_per_slate",
+    "baseline.pay_per_slate",
+    "method.click_per_slate",
+    "method.gmv_proxy_per_slate",
+    "method.ilad",
+    "method.model_calls_per_slate",
+    "method.pay_per_slate",
+    "paper_results.latency_ms",
+    "paper_results.vs_deployed_FFT_fastDPP_GMV_percent",
+    "paper_results.vs_formula_GMV_percent",
+    "relative.click_per_slate_percent",
+    "relative.gmv_proxy_per_slate_percent",
+    "relative.ilad_percent",
+    "relative.pay_per_slate_percent",
+    "training.final_loss",
+    "training.initial_loss"
+  ],
+  "mechanisms": [
+    "private Taobao exposures and CTR/CVR priors",
+    "production multimodal embeddings",
+    "online 19 ms tensor engine"
+  ],
+  "evolve_operators": []
+}

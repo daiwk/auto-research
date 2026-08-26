@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "danet",
+  "arxiv_id": "2607.12578",
+  "title": "Cheaper is Better: A Discount-Aware Network for Conversion Rate Prediction in E-commerce Recommendation System",
+  "paper_url": "https://arxiv.org/abs/2607.12578",
+  "organization": "Alibaba Group / Tmall",
+  "published": "2026-07-14",
+  "upstream_code": "https://github.com/tangrc/DANet",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "cvr",
+    "discount"
+  ],
+  "local_code": "src/auto_research/reproductions/danet",
+  "documentation": "docs/reproductions/2607.12578-danet/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "movielens 100k"
+  ],
+  "baseline": "IPN interest score",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private 400-day discount series and production feature platform"
+  ],
+  "evolve_operators": []
+}

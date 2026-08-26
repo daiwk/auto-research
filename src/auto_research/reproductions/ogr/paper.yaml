@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "ogr",
+  "arxiv_id": "2608.17613",
+  "title": "Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs",
+  "paper_url": "https://arxiv.org/abs/2608.17613",
+  "organization": "Kuaishou Technology",
+  "published": "2026-08-18",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "slate-ranking",
+    "semantic-id",
+    "reinforcement-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/ogr",
+  "documentation": "docs/reproductions/2608.17613-ogr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

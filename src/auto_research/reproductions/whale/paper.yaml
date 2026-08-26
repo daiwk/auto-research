@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "whale",
+  "arxiv_id": "2607.17017",
+  "title": "WHALE: A Scalable Unified Model for Recommendation with Wukong-HSTU Architecture",
+  "paper_url": "https://arxiv.org/abs/2607.17017",
+  "organization": "Meta Platforms, Inc.",
+  "published": "2026-07-19",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "hstu",
+    "feature-interaction",
+    "scaling"
+  ],
+  "local_code": "src/auto_research/reproductions/whale",
+  "documentation": "docs/reproductions/2607.17017-whale/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "双分支 late fusion，实验组为 WHALE 渐进交换",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private Meta ranking features and labels",
+    "production Triton and AOTInductor kernels"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "drl-put",
+  "arxiv_id": "2509.05292",
+  "title": "Deep Reinforcement Learning for Ranking Utility Tuning in the Ad Recommender System at Pinterest",
+  "paper_url": "https://arxiv.org/abs/2509.05292",
+  "organization": "Pinterest",
+  "published": "2025-09-05",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ads-ranking",
+    "reinforcement-learning",
+    "utility-tuning",
+    "off-policy"
+  ],
+  "local_code": "src/auto_research/reproductions/drl_put",
+  "documentation": "docs/reproductions/2509.05292-drl-put/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "fixed ranking utility weights",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.mrr_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.mrr_at_10",
+    "method.ndcg_at_10",
+    "paper_results.ctr_percent",
+    "paper_results.cvr_percent",
+    "paper_results.platform_revenue_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.mrr_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Pinterest auction and revenue labels",
+    "production counterfactual calibration"
+  ],
+  "evolve_operators": []
+}

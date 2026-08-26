@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "clip",
+  "arxiv_id": "2103.00020",
+  "title": "Learning Transferable Visual Models From Natural Language Supervision",
+  "paper_url": "https://arxiv.org/abs/2103.00020",
+  "organization": "OpenAI",
+  "published": "2021-02-26",
+  "upstream_code": "https://github.com/openai/CLIP",
+  "track": "llm",
+  "topics": [
+    "multimodal",
+    "contrastive-pretraining"
+  ],
+  "local_code": "src/auto_research/reproductions/clip",
+  "documentation": "docs/reproductions/2103.00020-clip/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Fashion-MNIST image-text pairs"
+  ],
+  "baseline": "uniform label retrieval",
+  "metrics": [
+    "test_accuracy",
+    "visual_dependency_delta"
+  ],
+  "mechanisms": [
+    "400M image-text pairs",
+    "large vision encoder"
+  ],
+  "evolve_operators": []
+}

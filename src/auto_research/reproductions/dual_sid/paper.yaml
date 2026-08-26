@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "key": "dual-sid",
+  "arxiv_id": "2607.24865",
+  "title": "Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2607.24865",
+  "organization": "Google DeepMind / YouTube",
+  "published": "2026-07-26",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "semantic-id",
+    "retrieval",
+    "ranking",
+    "content-understanding",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/dual_sid",
+  "documentation": "docs/reproductions/2607.24865-dual-sid/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "同切分的 dense transition-content retrieval，实验组加入 Dual-purpose SID 与 SiDec",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "YouTube-scale codebooks and private logs",
+    "production embedding reconstruction service"
+  ],
+  "evolve_operators": []
+}

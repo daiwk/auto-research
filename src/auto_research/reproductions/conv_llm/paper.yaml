@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "conv-llm",
+  "arxiv_id": "2607.18413",
+  "title": "Convolution for Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2607.18413",
+  "organization": "Huawei / Peking University / Tsinghua University",
+  "published": "2026-07-20",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "attention",
+    "depthwise-convolution"
+  ],
+  "local_code": "src/auto_research/reproductions/conv_llm",
+  "documentation": "docs/reproductions/2607.18413-conv-llm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "相同 96-d、3-layer、60-step Transformer",
+  "metrics": [
+    "baseline.parameters",
+    "baseline.perplexity",
+    "baseline.test_loss",
+    "method.parameters",
+    "method.perplexity",
+    "method.test_loss",
+    "perplexity_reduction_percent"
+  ],
+  "mechanisms": [
+    "Qwen3 0.6B–4B full pre-training",
+    "seven downstream benchmark suite"
+  ],
+  "evolve_operators": []
+}

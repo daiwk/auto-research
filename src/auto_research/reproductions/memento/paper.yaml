@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "key": "memento",
+  "arxiv_id": "2605.24051",
+  "title": "Memento: Personalized RAG-Style Long-Retention Data Scaling for Online Ads Recommendation",
+  "paper_url": "https://arxiv.org/abs/2605.24051",
+  "organization": "Meta",
+  "published": "2026-05-22",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/memento",
+  "documentation": "docs/reproductions/2605.24051-memento/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "LastN 历史截断",
+  "metrics": [
+    "relative_ndcg_change_percent",
+    "results.last_n.hit_at_10",
+    "results.last_n.ndcg_at_10",
+    "results.memento_mmr.hit_at_10",
+    "results.memento_mmr.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Memento: Personalized RAG-Style Long-Retention Data Scaling for Online Ads Recommendation"
+  ],
+  "evolve_operators": []
+}

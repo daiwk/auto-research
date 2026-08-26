@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "ppl-factory",
+  "arxiv_id": "2607.18199",
+  "title": "PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning",
+  "paper_url": "https://arxiv.org/abs/2607.18199",
+  "organization": "McGill University",
+  "published": "2026-07-20",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-training",
+    "data-selection",
+    "efficient-finetuning"
+  ],
+  "local_code": "src/auto_research/reproductions/ppl_factory",
+  "documentation": "docs/reproductions/2607.18199-ppl-factory/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "20% 随机 block",
+  "metrics": [
+    "perplexity_reduction_vs_random_percent",
+    "variants.Easy-NLL.perplexity",
+    "variants.Easy-NLL.test_loss",
+    "variants.PPL-Factory.perplexity",
+    "variants.PPL-Factory.test_loss",
+    "variants.Random.perplexity",
+    "variants.Random.test_loss"
+  ],
+  "mechanisms": [
+    "Qwen2.5-7B reasoning SFT",
+    "GSM8K and MATH answer accuracy"
+  ],
+  "evolve_operators": []
+}

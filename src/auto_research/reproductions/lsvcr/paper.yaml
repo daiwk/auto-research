@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "lsvcr",
+  "arxiv_id": "2403.13574",
+  "title": "A Large Language Model Enhanced Sequential Recommender for Joint Video and Comment Recommendation",
+  "paper_url": "https://arxiv.org/abs/2403.13574",
+  "organization": "Kuaishou",
+  "published": "2024-03-20",
+  "upstream_code": "https://github.com/RUCAIBox/LSVCR",
+  "track": "recommendation",
+  "topics": [
+    "LLM recommendation",
+    "comment recommendation",
+    "preference alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/lsvcr",
+  "documentation": "docs/reproductions/2403.13574-lsvcr/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "Amazon Beauty 5-core product interactions and real review text"
+  ],
+  "baseline": "相同 SR 网络但不做 LLM preference alignment",
+  "metrics": [
+    "aggregate.baseline_comment_ndcg_mean",
+    "aggregate.baseline_item_ndcg_mean",
+    "aggregate.lsvcr_comment_ndcg_mean",
+    "aggregate.lsvcr_item_ndcg_mean",
+    "per_seed.42.baseline_comment_ndcg_at_10",
+    "per_seed.42.baseline_item_ndcg_at_10",
+    "per_seed.42.lsvcr_comment_ndcg_at_10",
+    "per_seed.42.lsvcr_item_ndcg_at_10",
+    "per_seed.43.baseline_comment_ndcg_at_10",
+    "per_seed.43.baseline_item_ndcg_at_10",
+    "per_seed.43.lsvcr_comment_ndcg_at_10",
+    "per_seed.43.lsvcr_item_ndcg_at_10",
+    "per_seed.44.baseline_comment_ndcg_at_10",
+    "per_seed.44.baseline_item_ndcg_at_10",
+    "per_seed.44.lsvcr_comment_ndcg_at_10",
+    "per_seed.44.lsvcr_item_ndcg_at_10"
+  ],
+  "mechanisms": [
+    "ChatGLM3 scale",
+    "Kuaishou private video/comment logs"
+  ],
+  "evolve_operators": []
+}

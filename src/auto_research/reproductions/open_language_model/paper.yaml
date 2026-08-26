@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "key": "open-language-model",
+  "arxiv_id": "2607.16669",
+  "title": "OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research",
+  "paper_url": "https://arxiv.org/abs/2607.16669",
+  "organization": "Indian Institute of Technology Madras",
+  "published": "2026-07-18",
+  "upstream_code": "https://github.com/openlanguagemodel/openlanguagemodel",
+  "track": "llm",
+  "topics": [
+    "pretraining-infrastructure",
+    "composable-architecture",
+    "small-language-model",
+    "evolve"
+  ],
+  "local_code": "src/auto_research/reproductions/open_language_model",
+  "documentation": "docs/reproductions/2607.16669-open-language-model/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 LLaMA-modern，实验组为 olmcomposable",
+  "metrics": [
+    "baseline.composite_loss",
+    "baseline.final_loss",
+    "baseline.fitness",
+    "baseline.initial_loss",
+    "baseline.instruction_loss",
+    "baseline.lm_loss",
+    "baseline.muon_orthogonality_error",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "baseline.post_training_loss",
+    "baseline.primary",
+    "baseline.public_composite",
+    "baseline.reward_bearing_group_rate",
+    "method.architecture_stats.ordinary_pytorch_modules",
+    "method.composite_loss",
+    "method.final_loss",
+    "method.fitness",
+    "method.initial_loss",
+    "method.instruction_loss",
+    "method.lm_loss",
+    "method.muon_orthogonality_error",
+    "method.parameters",
+    "method.perplexity",
+    "method.post_training_loss",
+    "method.primary",
+    "method.public_composite",
+    "method.reward_bearing_group_rate",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "complete upstream 27-preset package",
+    "348M four-GPU weak-scaling experiment"
+  ],
+  "evolve_operators": []
+}

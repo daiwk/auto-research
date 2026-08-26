@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "naju",
+  "arxiv_id": "2607.21000",
+  "title": "Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory",
+  "paper_url": "https://arxiv.org/abs/2607.21000",
+  "organization": "Independent researchers",
+  "published": "2026-07-23",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "state-space-model",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/naju",
+  "documentation": "docs/reproductions/2607.21000-naju/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同 token、optimizer、70 steps 的 96-d、3-layer Transformer",
+  "metrics": [
+    "naju.loss",
+    "naju.perplexity",
+    "relative.perplexity_reduction_percent",
+    "transformer.loss",
+    "transformer.perplexity"
+  ],
+  "mechanisms": [
+    "official fused parallel scan kernel",
+    "1.2B-token WikiText-103 training",
+    "Mamba/Mamba-2/xLSTM/LRA full benchmark matrix"
+  ],
+  "evolve_operators": []
+}

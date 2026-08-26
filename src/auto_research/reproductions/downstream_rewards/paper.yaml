@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "downstream-rewards",
+  "arxiv_id": "2607.14192",
+  "title": "Long-term User Engagement Optimization through Model-agnostic Downstream Rewards Learning",
+  "paper_url": "https://arxiv.org/abs/2607.14192",
+  "organization": "Pinterest",
+  "published": "2026-07-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "long-term-value",
+    "reward-design",
+    "multi-surface",
+    "retention"
+  ],
+  "local_code": "src/auto_research/reproductions/downstream_rewards",
+  "documentation": "docs/reproductions/2607.14192-downstream-rewards/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "即时 next-item engagement，实验组加入筛选后的 downstream reward",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "billions of private Pinterest cross-surface events",
+    "production Pinnability and TransAct rankers"
+  ],
+  "evolve_operators": []
+}

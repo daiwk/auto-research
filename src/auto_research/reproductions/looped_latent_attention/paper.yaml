@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "looped-latent-attention",
+  "arxiv_id": "2607.15456",
+  "title": "Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers",
+  "paper_url": "https://arxiv.org/abs/2607.15456",
+  "organization": "University of Maryland / Meta AI",
+  "published": "2026-07-16",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "kv-cache",
+    "looped-transformer"
+  ],
+  "local_code": "src/auto_research/reproductions/looped_latent_attention",
+  "documentation": "docs/reproductions/2607.15456-looped-latent-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "两层 llamamodern",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.lm_loss",
+    "method.parameters",
+    "method.perplexity",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "large looped checkpoint post-training",
+    "fused inference codec"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "llm-ts-prior",
+  "arxiv_id": "2608.03382",
+  "title": "LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation",
+  "paper_url": "https://arxiv.org/abs/2608.03382",
+  "organization": "NAVER WEBTOON",
+  "published": "2026-08-04",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "bandit",
+    "cold-start",
+    "comment-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/llm_ts_prior",
+  "documentation": "docs/reproductions/2608.03382-llm-ts-prior/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "paper_results.content_prior_overall_ctr_percent",
+    "paper_results.gender_prior_cold_10_49_ctr_percent",
+    "paper_results.gender_prior_overall_ctr_percent",
+    "relative.cold_start_ctr_percent",
+    "relative.ctr_percent",
+    "variants.llm semantic prior.cold_start_ctr",
+    "variants.llm semantic prior.ctr",
+    "variants.uniform thompson prior.cold_start_ctr",
+    "variants.uniform thompson prior.ctr"
+  ],
+  "mechanisms": [
+    "production prompts and service calibration",
+    "WEBTOON private comment inventory"
+  ],
+  "evolve_operators": []
+}

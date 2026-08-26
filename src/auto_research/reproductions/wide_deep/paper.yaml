@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "wide-deep",
+  "arxiv_id": "1606.07792",
+  "title": "Wide & Deep Learning for Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/1606.07792",
+  "organization": "Google",
+  "published": "2016-06-24",
+  "upstream_code": "https://github.com/tensorflow/models/tree/master/official/r1/wide_deep",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "classic",
+    "feature-interaction"
+  ],
+  "local_code": "src/auto_research/reproductions/wide_deep",
+  "documentation": "docs/reproductions/1606.07792-wide-deep/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K compact"
+  ],
+  "baseline": "参数匹配的 deep-only 模型",
+  "metrics": [
+    "baseline.ndcg_at_10",
+    "method.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Google Play sparse IDs and production crosses",
+    "distributed serving stack"
+  ],
+  "evolve_operators": []
+}

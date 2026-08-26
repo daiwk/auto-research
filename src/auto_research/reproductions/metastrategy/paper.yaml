@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "metastrategy",
+  "arxiv_id": "2608.09440",
+  "title": "MetaStrategy: Generative Ranking with Executable LLM Strategies",
+  "paper_url": "https://arxiv.org/abs/2608.09440",
+  "organization": "Alibaba / Taobao",
+  "published": "2026-08-10",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-13）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "llm-recommendation",
+    "executable-strategy",
+    "online-policy"
+  ],
+  "local_code": "src/auto_research/reproductions/metastrategy",
+  "documentation": "docs/reproductions/2608.09440-metastrategy/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "同预算单目标排序器，实验组为 typed strategy generator + deterministic compiler",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "metastrategy.hit_at_10",
+    "metastrategy.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Taobao private logs and production replay environment",
+    "4B teacher to 0.8B student OPD",
+    "diff-triggered nearline serving"
+  ],
+  "evolve_operators": []
+}

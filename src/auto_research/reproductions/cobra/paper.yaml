@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "cobra",
+  "arxiv_id": "2503.02453",
+  "title": "Sparse Meets Dense: Unified Generative Recommendations with Cascaded Sparse-Dense Representations",
+  "paper_url": "https://arxiv.org/abs/2503.02453",
+  "organization": "Baidu",
+  "published": "2025-03-04",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-retrieval",
+    "semantic-id",
+    "dense-retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/cobra",
+  "documentation": "docs/reproductions/2503.02453-cobra/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "DIN，COBRA NDCG@10 相对 DIN +25.75%",
+  "metrics": [
+    "results.cobra_cascade.hit_at_10",
+    "results.cobra_cascade.ndcg_at_10",
+    "results.din.hit_at_10",
+    "results.din.ndcg_at_10",
+    "results.ndcg_ablation_percent",
+    "results.ndcg_vs_din_percent",
+    "results.sparse_only.hit_at_10",
+    "results.sparse_only.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "private ad data and production ANN/BeamFusion serving"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "kar",
+  "arxiv_id": "2306.10933",
+  "title": "Towards Open-World Recommendation with Knowledge Augmentation from Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2306.10933",
+  "organization": "Huawei",
+  "published": "2023-06-19",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "knowledge-augmentation",
+    "ctr-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/kar",
+  "documentation": "docs/reproductions/2306.10933-kar/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K title/genre text"
+  ],
+  "baseline": "纯 ID ranker",
+  "metrics": [
+    "auc.id_ranker.mean",
+    "auc.id_ranker.std",
+    "auc.kar_hybrid_expert.mean",
+    "auc.kar_hybrid_expert.std",
+    "auc.mean_absolute_gain",
+    "auc.mean_relative_gain_percent"
+  ],
+  "mechanisms": [
+    "Towards Open-World Recommendation with Knowledge Augmentation from Large Language Models"
+  ],
+  "evolve_operators": []
+}

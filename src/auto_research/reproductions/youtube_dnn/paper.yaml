@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "youtube-dnn",
+  "arxiv_id": "recsys2016-youtube-dnn",
+  "title": "Deep Neural Networks for YouTube Recommendations",
+  "paper_url": "https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/",
+  "organization": "Google / YouTube",
+  "published": "2016-09-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "ranking",
+    "classic",
+    "two-stage"
+  ],
+  "local_code": "src/auto_research/reproductions/youtube_dnn",
+  "documentation": "docs/reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K compact"
+  ],
+  "baseline": "历史均值 two-tower，实验组增加 YouTube DNN 非线性用户塔",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.head_share_at_10_std",
+    "baseline.hit_at_10",
+    "baseline.hit_at_10_std",
+    "baseline.ndcg_at_10",
+    "baseline.ndcg_at_10_std",
+    "method.head_share_at_10",
+    "method.head_share_at_10_std",
+    "method.hit_at_10",
+    "method.hit_at_10_std",
+    "method.ndcg_at_10",
+    "method.ndcg_at_10_std",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "YouTube private watch corpus",
+    "sampled-softmax candidate generation and production ranker"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "idproxy",
+  "arxiv_id": "2603.01590",
+  "title": "IDProxy: Cold-Start CTR Prediction for Ads and Recommendation at Xiaohongshu with Multimodal LLMs",
+  "paper_url": "https://arxiv.org/abs/2603.01590",
+  "organization": "Xiaohongshu / Shanghai Jiao Tong University / Fudan University",
+  "published": "2026-03-02",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "multimodal-llm",
+    "id-alignment",
+    "ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/idproxy",
+  "documentation": "docs/reproductions/2603.01590-idproxy/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (260 users / 420 items)"
+  ],
+  "baseline": "ID-only ranker，实验组为 coarse-to-fine IDProxy",
+  "metrics": [
+    "alignment.contrastive_final_loss",
+    "alignment.contrastive_initial_loss",
+    "baseline.fresh_hit_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "InternVL checkpoint",
+    "private image/text and advertising features"
+  ],
+  "evolve_operators": []
+}

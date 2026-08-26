@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "growthgr",
+  "arxiv_id": "2605.17994",
+  "title": "Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search",
+  "paper_url": "https://arxiv.org/abs/2605.17994",
+  "organization": "Alibaba Group / Taobao & Tmall",
+  "published": "2026-05-18",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "reinforcement-learning",
+    "new-items"
+  ],
+  "local_code": "src/auto_research/reproductions/growthgr",
+  "documentation": "docs/reproductions/2605.17994-growthgr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "movielens 100k"
+  ],
+  "baseline": "同一 transition policy 的 NTP retrieval",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private order funnel and foundation-model multimodal embeddings"
+  ],
+  "evolve_operators": []
+}

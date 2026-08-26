@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "ltv-video-ranking",
+  "arxiv_id": "2602.17058",
+  "title": "A Long-term Value Prediction Framework In Video Ranking",
+  "paper_url": "https://arxiv.org/abs/2602.17058",
+  "organization": "Alibaba Group / Tsinghua University",
+  "published": "2026-02-19",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "long-term-value",
+    "debiasing"
+  ],
+  "local_code": "src/auto_research/reproductions/ltv_video_ranking",
+  "documentation": "docs/reproductions/2602.17058-ltv-video-ranking/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

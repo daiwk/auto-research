@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "beque",
+  "arxiv_id": "2311.03758",
+  "title": "Large Language Model based Long-tail Query Rewriting in Taobao Search",
+  "paper_url": "https://arxiv.org/abs/2311.03758",
+  "organization": "Alibaba",
+  "published": "2023-11-07",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "query-rewriting",
+    "preference-optimization",
+    "search"
+  ],
+  "local_code": "src/auto_research/reproductions/beque",
+  "documentation": "docs/reproductions/2311.03758-beque/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K catalog text (public query-rewrite proxy)"
+  ],
+  "baseline": "T5 SFT",
+  "metrics": [
+    "hit_at_1.pro_mean",
+    "hit_at_1.pro_std",
+    "hit_at_1.relative_gain_percent",
+    "hit_at_1.sft_mean",
+    "hit_at_1.sft_std"
+  ],
+  "mechanisms": [
+    "Large Language Model based Long-tail Query Rewriting in Taobao Search"
+  ],
+  "evolve_operators": []
+}

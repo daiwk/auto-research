@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "pushdualgen",
+  "arxiv_id": "2608.07989",
+  "title": "PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation",
+  "paper_url": "https://arxiv.org/abs/2608.07989",
+  "organization": "Kuaishou Technology",
+  "published": "2026-08-08",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "llm-recommendation",
+    "push"
+  ],
+  "local_code": "src/auto_research/reproductions/pushdualgen",
+  "documentation": "docs/reproductions/2608.07989-pushdualgen/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

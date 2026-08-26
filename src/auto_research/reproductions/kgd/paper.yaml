@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "kgd",
+  "arxiv_id": "2608.02738",
+  "title": "Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation",
+  "paper_url": "https://arxiv.org/abs/2608.02738",
+  "organization": "Xiamen University / Shopee",
+  "published": "2026-08-03",
+  "upstream_code": "https://github.com/FuCongResearchSquad/KGD4REC",
+  "track": "recommendation",
+  "topics": [
+    "sequential-recommendation",
+    "pretraining",
+    "streaming",
+    "transfer"
+  ],
+  "local_code": "src/auto_research/reproductions/kgd",
+  "documentation": "docs/reproductions/2608.02738-kgd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "paper_results.advertising_revenue_percent",
+    "paper_results.gmv_per_user_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "variants.adjacent ntp transfer.hit_at_10",
+    "variants.adjacent ntp transfer.ndcg_at_10",
+    "variants.kgd bmtp + read-only transfer + acr.hit_at_10",
+    "variants.kgd bmtp + read-only transfer + acr.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Shopee private 90-day stream",
+    "production continual refresh service"
+  ],
+  "evolve_operators": []
+}

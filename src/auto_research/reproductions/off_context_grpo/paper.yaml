@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "off-context-grpo",
+  "arxiv_id": "2607.19313",
+  "title": "Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information",
+  "paper_url": "https://arxiv.org/abs/2607.19313",
+  "organization": "Meta AI / Columbia University",
+  "published": "2026-07-21",
+  "upstream_code": "https://github.com/AgPriyank/OC-GRPO",
+  "track": "llm",
+  "topics": [
+    "rlvr",
+    "grpo",
+    "reasoning",
+    "privileged-information"
+  ],
+  "local_code": "src/auto_research/reproductions/off_context_grpo",
+  "documentation": "docs/reproductions/2607.19313-off-context-grpo/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "GSM8K official"
+  ],
+  "baseline": "同 2,400 step、group size 8 的 vanilla GRPO，实验组为 Off-Context GRPO",
+  "metrics": [
+    "baseline.pass_at_1",
+    "baseline.pass_at_8",
+    "method.pass_at_1",
+    "method.pass_at_8",
+    "relative.pass_at_1_percent"
+  ],
+  "mechanisms": [
+    "Qwen2.5 1.5B/3B/7B token-level rollouts",
+    "multi-GPU veRL training stack"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "sort-ranking",
+  "arxiv_id": "2603.03988",
+  "title": "SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders",
+  "paper_url": "https://arxiv.org/abs/2603.03988",
+  "organization": "Alibaba International Digital Commerce",
+  "published": "2026-03-04",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "transformer",
+    "serving-efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/sort_ranking",
+  "documentation": "docs/reproductions/2603.03988-sort-ranking/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

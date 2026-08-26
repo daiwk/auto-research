@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "key": "gqa",
+  "arxiv_id": "2305.13245",
+  "title": "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints",
+  "paper_url": "https://arxiv.org/abs/2305.13245",
+  "organization": "Google Research",
+  "published": "2023-05-22",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "attention",
+    "kv-cache",
+    "serving",
+    "architecture"
+  ],
+  "local_code": "src/auto_research/reproductions/gqa",
+  "documentation": "docs/reproductions/2305.13245-gqa/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 llamamodern，实验组为 gqa",
+  "metrics": [
+    "baseline.composite_loss",
+    "baseline.final_loss",
+    "baseline.fitness",
+    "baseline.initial_loss",
+    "baseline.instruction_loss",
+    "baseline.lm_loss",
+    "baseline.muon_orthogonality_error",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "baseline.post_training_loss",
+    "baseline.primary",
+    "baseline.public_composite",
+    "baseline.reward_bearing_group_rate",
+    "method.architecture_stats.kv_cache_reduction_x",
+    "method.architecture_stats.kv_heads",
+    "method.architecture_stats.query_heads",
+    "method.composite_loss",
+    "method.final_loss",
+    "method.fitness",
+    "method.initial_loss",
+    "method.instruction_loss",
+    "method.lm_loss",
+    "method.muon_orthogonality_error",
+    "method.parameters",
+    "method.perplexity",
+    "method.post_training_loss",
+    "method.primary",
+    "method.public_composite",
+    "method.reward_bearing_group_rate",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "T5-XXL checkpoint uptraining",
+    "production decode benchmark"
+  ],
+  "evolve_operators": []
+}

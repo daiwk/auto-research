@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "notellm",
+  "arxiv_id": "2403.01744",
+  "title": "NoteLLM: A Retrievable Large Language Model for Note Recommendation",
+  "paper_url": "https://arxiv.org/abs/2403.01744",
+  "organization": "Xiaohongshu",
+  "published": "2024-03-04",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "contrastive-learning",
+    "i2i-retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/notellm",
+  "documentation": "docs/reproductions/2403.01744-notellm/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K title/genre and co-occurrence pairs"
+  ],
+  "baseline": "冻结 compression-state embedding",
+  "metrics": [
+    "hit_at_10.frozen_compression_embedding.mean",
+    "hit_at_10.frozen_compression_embedding.std",
+    "hit_at_10.notellm_gcl_csft.mean",
+    "hit_at_10.notellm_gcl_csft.std",
+    "hit_at_10.relative_change_percent",
+    "ndcg_at_10.frozen_compression_embedding.mean",
+    "ndcg_at_10.frozen_compression_embedding.std",
+    "ndcg_at_10.notellm_gcl_csft.mean",
+    "ndcg_at_10.notellm_gcl_csft.std",
+    "ndcg_at_10.relative_change_percent"
+  ],
+  "mechanisms": [
+    "NoteLLM: A Retrievable Large Language Model for Note Recommendation"
+  ],
+  "evolve_operators": []
+}

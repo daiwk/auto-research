@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "clockrope",
+  "arxiv_id": "2607.26369",
+  "title": "ClockRoPE: Random Fourier Rotations for Temporal Routine Modeling",
+  "paper_url": "https://arxiv.org/abs/2607.26369",
+  "organization": "YouTube / Google DeepMind",
+  "published": "2026-07-29",
+  "upstream_code": "否：截至 2026-08-24 未发现原作者公开代码",
+  "track": "recommendation",
+  "topics": [
+    "generative-retrieval",
+    "temporal-modeling",
+    "rope",
+    "long-sequence"
+  ],
+  "local_code": "src/auto_research/reproductions/clockrope",
+  "documentation": "docs/reproductions/2607.26369-clockrope/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "RoPE-style recency ranker",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10"
+  ],
+  "mechanisms": [
+    "YouTube private timestamped logs",
+    "production generative retrieval stack"
+  ],
+  "evolve_operators": []
+}

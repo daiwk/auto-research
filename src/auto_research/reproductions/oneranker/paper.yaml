@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "oneranker",
+  "arxiv_id": "2603.02999",
+  "title": "OneRanker: Unified Generation and Ranking with One Model in Industrial Advertising Recommendation",
+  "paper_url": "https://arxiv.org/abs/2603.02999",
+  "organization": "Tencent",
+  "published": "2026-03-03",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "generative-recommendation",
+    "ranking",
+    "multi-task"
+  ],
+  "local_code": "src/auto_research/reproductions/oneranker",
+  "documentation": "docs/reproductions/2603.02999-oneranker/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 oneranker 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.gmv_percent",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.distribution_consistency_loss",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Weixin private ad logs",
+    "production generative backbone"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "dart",
+  "arxiv_id": "2608.02032",
+  "title": "DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling",
+  "paper_url": "https://arxiv.org/abs/2608.02032",
+  "organization": "Zhejiang University",
+  "published": "2026-08-03",
+  "upstream_code": "否：截至 2026-08-24 未发现原作者公开代码",
+  "track": "llm",
+  "topics": [
+    "网络架构",
+    "注意力与长上下文"
+  ],
+  "local_code": "src/auto_research/reproductions/dart",
+  "documentation": "docs/reproductions/2608.02032-dart/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

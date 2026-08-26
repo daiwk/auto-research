@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "recharness",
+  "arxiv_id": "2607.29241",
+  "title": "RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2607.29241",
+  "organization": "Huazhong Agricultural University (Kuaishou internship)",
+  "published": "2026-07-31",
+  "upstream_code": "https://github.com/6lyc/RecHarness",
+  "track": "recommendation",
+  "topics": [
+    "auto-research",
+    "bandit",
+    "ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/recharness",
+  "documentation": "docs/reproductions/2607.29241-recharness/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

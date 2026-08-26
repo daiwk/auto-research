@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "self-evolving-rec",
+  "arxiv_id": "2602.10226",
+  "title": "Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2602.10226",
+  "organization": "Google / YouTube",
+  "published": "2026-02-10",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/self_evolving_rec",
+  "documentation": "docs/reproductions/2602.10226-self-evolving-rec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "Human/Adagrad 配置",
+  "metrics": [
+    "relative_ndcg_change_percent",
+    "results.human_baseline.hit_at_10",
+    "results.human_baseline.hit_at_10_std",
+    "results.human_baseline.ndcg_at_10",
+    "results.human_baseline.ndcg_at_10_std",
+    "results.llm_agent_promoted.hit_at_10",
+    "results.llm_agent_promoted.hit_at_10_std",
+    "results.llm_agent_promoted.ndcg_at_10",
+    "results.llm_agent_promoted.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "Google production A/B infrastructure"
+  ],
+  "evolve_operators": []
+}

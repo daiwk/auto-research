@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "key": "adaf2m2",
+  "arxiv_id": "2501.15816",
+  "title": "AdaF²M²: Comprehensive Learning and Responsive Leveraging Features in Recommendation System",
+  "paper_url": "https://arxiv.org/abs/2501.15816",
+  "organization": "ByteDance / Douyin",
+  "published": "2025-01-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "feature-masking",
+    "state-aware-adapter",
+    "multi-forward"
+  ],
+  "local_code": "src/auto_research/reproductions/adaf2m2",
+  "documentation": "docs/reproductions/2501.15816-adaf2m2/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "single-forward full-feature ranker",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.mrr_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.mrr_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.mrr_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Douyin private features",
+    "production retrieval/ranking/cold-start stack"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "causal-retrieval",
+  "arxiv_id": "2607.14161",
+  "title": "Deep-learning Causal Retrieval Optimization for Efficient e-commerce Distribution in Pinterest",
+  "paper_url": "https://arxiv.org/abs/2607.14161",
+  "organization": "Pinterest",
+  "published": "2026-07-14",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "causal-retrieval",
+    "uplift",
+    "candidate-generation"
+  ],
+  "local_code": "src/auto_research/reproductions/causal_retrieval",
+  "documentation": "docs/reproductions/2607.14161-causal-retrieval/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K with synthetic randomized treatment"
+  ],
+  "baseline": "固定的非因果 transition/content/popularity retrieval ensemble",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Pinterest randomized traffic logs",
+    "production retrieval RPC and replay system"
+  ],
+  "evolve_operators": []
+}

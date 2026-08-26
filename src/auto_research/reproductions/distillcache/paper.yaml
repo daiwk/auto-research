@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "distillcache",
+  "arxiv_id": "2608.08878",
+  "title": "DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference",
+  "paper_url": "https://arxiv.org/abs/2608.08878",
+  "organization": "Oklahoma State University",
+  "published": "2026-08-09",
+  "upstream_code": "否：截至 2026-08-24 未发现原作者公开代码",
+  "track": "llm",
+  "topics": [
+    "推理与系统效率",
+    "KV cache"
+  ],
+  "local_code": "src/auto_research/reproductions/distillcache",
+  "documentation": "docs/reproductions/2608.08878-distillcache/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

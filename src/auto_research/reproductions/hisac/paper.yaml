@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "hisac",
+  "arxiv_id": "2602.21009",
+  "title": "HiSAC: Hierarchical Sparse Activation Compression for Ultra-long Sequence Modeling in Recommenders",
+  "paper_url": "https://arxiv.org/abs/2602.21009",
+  "organization": "Alibaba / Taobao",
+  "published": "2026-02-24",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "long-sequence",
+    "sparse-activation",
+    "semantic-id"
+  ],
+  "local_code": "src/auto_research/reproductions/hisac",
+  "documentation": "docs/reproductions/2602.21009-hisac/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "recent-window dense proxy",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private multimodal embeddings",
+    "production ultra-long sequence serving"
+  ],
+  "evolve_operators": []
+}

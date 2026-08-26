@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "key": "hymba",
+  "arxiv_id": "2411.13676",
+  "title": "Hymba: A Hybrid-head Architecture for Small Language Models",
+  "paper_url": "https://arxiv.org/abs/2411.13676",
+  "organization": "NVIDIA",
+  "published": "2024-11-20",
+  "upstream_code": "https://github.com/NVlabs/hymba",
+  "track": "llm",
+  "topics": [
+    "hybrid-attention-ssm",
+    "small-language-model",
+    "architecture"
+  ],
+  "local_code": "src/auto_research/reproductions/hymba",
+  "documentation": "docs/reproductions/2411.13676-hymba/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 llamamodern，实验组为 hymba",
+  "metrics": [
+    "baseline.composite_loss",
+    "baseline.final_loss",
+    "baseline.fitness",
+    "baseline.initial_loss",
+    "baseline.instruction_loss",
+    "baseline.lm_loss",
+    "baseline.muon_orthogonality_error",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "baseline.post_training_loss",
+    "baseline.primary",
+    "baseline.public_composite",
+    "baseline.reward_bearing_group_rate",
+    "method.architecture_stats.hybrid_gate_mean",
+    "method.architecture_stats.parallel_attention_ssm",
+    "method.composite_loss",
+    "method.final_loss",
+    "method.fitness",
+    "method.initial_loss",
+    "method.instruction_loss",
+    "method.lm_loss",
+    "method.muon_orthogonality_error",
+    "method.parameters",
+    "method.perplexity",
+    "method.post_training_loss",
+    "method.primary",
+    "method.public_composite",
+    "method.reward_bearing_group_rate",
+    "paper_results.accuracy_vs_llama32_3b_percent",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "1.5B pretraining",
+    "learnable meta tokens and fused kernels"
+  ],
+  "evolve_operators": []
+}

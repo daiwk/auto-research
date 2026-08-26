@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "key": "precise",
+  "arxiv_id": "2412.06308",
+  "title": "PRECISE: Pre-training Sequential Recommenders with Collaborative and Semantic Information",
+  "paper_url": "https://arxiv.org/abs/2412.06308",
+  "organization": "Tencent / WeChat",
+  "published": "2024-12-09",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "LLM semantic embedding",
+    "sequential pre-training",
+    "MoE",
+    "targeted training"
+  ],
+  "local_code": "src/auto_research/reproductions/precise",
+  "documentation": "docs/reproductions/2412.06308-precise/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "只做目标任务训练的 PRECISE-TT",
+  "metrics": [
+    "aggregate.relative_lift.cold_recall_at_10_percent",
+    "aggregate.relative_lift.ndcg_at_10_percent",
+    "aggregate.relative_lift.recall_at_10_percent",
+    "aggregate.tt_only.cold_recall_at_10_mean",
+    "aggregate.tt_only.cold_recall_at_10_std",
+    "aggregate.tt_only.ndcg_at_10_mean",
+    "aggregate.tt_only.ndcg_at_10_std",
+    "aggregate.tt_only.recall_at_10_mean",
+    "aggregate.tt_only.recall_at_10_std",
+    "aggregate.ut_plus_tt.cold_recall_at_10_mean",
+    "aggregate.ut_plus_tt.cold_recall_at_10_std",
+    "aggregate.ut_plus_tt.ndcg_at_10_mean",
+    "aggregate.ut_plus_tt.ndcg_at_10_std",
+    "aggregate.ut_plus_tt.recall_at_10_mean",
+    "aggregate.ut_plus_tt.recall_at_10_std"
+  ],
+  "mechanisms": [
+    "Qwen2-1.5B is scaled to SmolLM2-135M for local initialization",
+    "WeChat private cross-scene logs and production embedding/ANN servers",
+    "daily periodic warm-start deployment schedule"
+  ],
+  "evolve_operators": []
+}

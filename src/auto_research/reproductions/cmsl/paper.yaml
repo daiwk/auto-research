@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "cmsl",
+  "arxiv_id": "2606.28533",
+  "title": "CMSL: Constructive Multi-Sequence Learning for Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2606.28533",
+  "organization": "Meta",
+  "published": "2026-06-26",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/cmsl",
+  "documentation": "docs/reproductions/2606.28533-cmsl/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "single sequence hstu",
+  "metrics": [
+    "relative_ndcg_change_percent",
+    "results.cmsl.hit_at_10",
+    "results.cmsl.hit_at_10_std",
+    "results.cmsl.ndcg_at_10",
+    "results.cmsl.ndcg_at_10_std",
+    "results.single_sequence_hstu.hit_at_10",
+    "results.single_sequence_hstu.hit_at_10_std",
+    "results.single_sequence_hstu.ndcg_at_10",
+    "results.single_sequence_hstu.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "private Meta features",
+    "production distributed serving"
+  ],
+  "evolve_operators": []
+}

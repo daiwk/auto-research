@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "gr4ad",
+  "arxiv_id": "2602.22732",
+  "title": "Generative Recommendation for Large-Scale Advertising",
+  "paper_url": "https://arxiv.org/abs/2602.22732",
+  "organization": "Kuaishou",
+  "published": "2026-02-26",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-retrieval",
+    "advertising",
+    "reinforcement-learning",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/gr4ad",
+  "documentation": "docs/reproductions/2602.22732-gr4ad/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "DIN，GR4AD NDCG@10 相对 DIN +69.67%",
+  "metrics": [
+    "paper_online_ab.ad_revenue_percent",
+    "results.din.hit_at_10",
+    "results.din.ndcg_at_10",
+    "results.dlrm.hit_at_10",
+    "results.dlrm.ndcg_at_10",
+    "results.gr4ad.hit_at_10",
+    "results.gr4ad.ndcg_at_10",
+    "results.ndcg_ablation_percent",
+    "results.ndcg_vs_din_percent"
+  ],
+  "mechanisms": [
+    "multimodal ad corpus, eCPM rewards, continual online learning, and dynamic beam service"
+  ],
+  "evolve_operators": []
+}

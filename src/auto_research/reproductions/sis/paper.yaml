@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "key": "sis",
+  "arxiv_id": "2607.04728",
+  "title": "Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment",
+  "paper_url": "https://arxiv.org/abs/2607.04728",
+  "organization": "Paper author team",
+  "published": "2026-07-06",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "post-training",
+    "off-policy-correction",
+    "importance-sampling"
+  ],
+  "local_code": "src/auto_research/reproductions/sis",
+  "documentation": "docs/reproductions/2607.04728-sis/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Tiny Shakespeare"
+  ],
+  "baseline": "标准 token-level Importance Sampling",
+  "metrics": [
+    "sis.reported_objective"
+  ],
+  "mechanisms": [
+    "Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment"
+  ],
+  "evolve_operators": []
+}

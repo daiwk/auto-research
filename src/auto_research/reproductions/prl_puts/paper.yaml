@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "prl-puts",
+  "arxiv_id": "2605.16344",
+  "title": "A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2605.16344",
+  "organization": "Pinterest",
+  "published": "2026-05-08",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "reinforcement-learning",
+    "multi-objective-ranking",
+    "homefeed"
+  ],
+  "local_code": "src/auto_research/reproductions/prl_puts",
+  "documentation": "docs/reproductions/2605.16344-prl-puts/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

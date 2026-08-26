@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "medusa",
+  "arxiv_id": "2401.10774",
+  "title": "Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads",
+  "paper_url": "https://arxiv.org/abs/2401.10774",
+  "organization": "Together AI / Princeton University / University of Illinois Urbana-Champaign",
+  "published": "2024-01-19",
+  "upstream_code": "https://github.com/FasterDecoding/Medusa",
+  "track": "llm",
+  "topics": [
+    "inference-serving",
+    "decoding"
+  ],
+  "local_code": "src/auto_research/reproductions/medusa",
+  "documentation": "docs/reproductions/2401.10774-medusa/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "single-head greedy，实验组为 three future heads + tree verification，只改变论文核心机制",
+  "metrics": [
+    "baseline.backbone_calls",
+    "method.backbone_calls",
+    "relative.backbone_call_reduction_percent"
+  ],
+  "mechanisms": [
+    "multi-billion-parameter backbone",
+    "GPU tree-attention kernel"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "engram",
+  "arxiv_id": "2601.07372",
+  "title": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2601.07372",
+  "organization": "DeepSeek",
+  "published": "2026-01-12",
+  "upstream_code": "https://github.com/deepseek-ai/Engram",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "conditional-memory",
+    "sparsity"
+  ],
+  "local_code": "src/auto_research/reproductions/engram",
+  "documentation": "docs/reproductions/2601.07372-engram/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 llamamodern",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.lm_loss",
+    "method.parameters",
+    "method.perplexity",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "27B-scale pretraining",
+    "distributed memory prefetch infrastructure"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "recap",
+  "arxiv_id": "2607.15730",
+  "title": "RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.15730",
+  "organization": "Kuaishou Technology / USTC",
+  "published": "2026-07-17",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "semantic-profile",
+    "grpo"
+  ],
+  "local_code": "src/auto_research/reproductions/recap",
+  "documentation": "docs/reproductions/2607.15730-recap/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "open-loop SFT 流式画像",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "ndcg_at_10_relative_percent",
+    "training.grpo_reward_first",
+    "training.grpo_reward_last",
+    "training.sft_final_loss"
+  ],
+  "mechanisms": [
+    "production natural-language profiles",
+    "industrial LLM judge and generator scale",
+    "private short-video logs"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "key": "unir2",
+  "arxiv_id": "2607.24439",
+  "title": "Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence",
+  "paper_url": "https://arxiv.org/abs/2607.24439",
+  "organization": "Kuaishou / IIE, CAS / UCAS",
+  "published": "2026-07-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "unified-recall-ranking",
+    "multi-objective-ranking",
+    "lora"
+  ],
+  "local_code": "src/auto_research/reproductions/unir2",
+  "documentation": "docs/reproductions/2607.24439-unir2/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "同一 MovieLens-1M 数据、SID、训练 step 和 full-catalog 候选上的独立生成 recall + ranking cascade",
+  "metrics": [
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "relative.sid_code_accuracy_percent",
+    "variants.UniR2.final_loss",
+    "variants.UniR2.hit_at_10",
+    "variants.UniR2.initial_loss",
+    "variants.UniR2.ndcg_at_10",
+    "variants.UniR2.sid_code_accuracy",
+    "variants.separate cascade.final_loss",
+    "variants.separate cascade.hit_at_10",
+    "variants.separate cascade.initial_loss",
+    "variants.separate cascade.ndcg_at_10",
+    "variants.separate cascade.sid_code_accuracy"
+  ],
+  "mechanisms": [
+    "Kuaishou private full-stream multi-objective samples",
+    "three-level 8129-way SID and production beam search",
+    "3-layer 640-d online service and pipeline parallelism"
+  ],
+  "evolve_operators": []
+}

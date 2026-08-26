@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "switch-transformer",
+  "arxiv_id": "2101.03961",
+  "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+  "paper_url": "https://arxiv.org/abs/2101.03961",
+  "organization": "Google Brain",
+  "published": "2021-01-11",
+  "upstream_code": "https://github.com/tensorflow/mesh",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "mixture-of-experts",
+    "classic"
+  ],
+  "local_code": "src/auto_research/reproductions/switch_transformer",
+  "documentation": "docs/reproductions/2101.03961-switch-transformer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "参数预算内 dense Transformer",
+  "metrics": [
+    "baseline.perplexity",
+    "method.perplexity"
+  ],
+  "mechanisms": [
+    "trillion-parameter distributed training",
+    "expert capacity overflow/all-to-all communication"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "seral",
+  "arxiv_id": "2502.13539",
+  "title": "Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2502.13539",
+  "organization": "Alibaba / Taobao",
+  "published": "2025-02-19",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "preference-alignment",
+    "serendipity"
+  ],
+  "local_code": "src/auto_research/reproductions/seral",
+  "documentation": "docs/reproductions/2502.13539-seral/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "DIN，SERAL NDCG@10 相对 DIN +50.60%",
+  "metrics": [
+    "results.din.hit_at_10",
+    "results.din.ndcg_at_10",
+    "results.ndcg_ablation_percent",
+    "results.ndcg_vs_din_percent",
+    "results.seral_ipo.hit_at_10",
+    "results.seral_ipo.ndcg_at_10",
+    "results.sft.hit_at_10",
+    "results.sft.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "private Taobao profiles and GPT-4/human CDI annotations"
+  ],
+  "evolve_operators": []
+}

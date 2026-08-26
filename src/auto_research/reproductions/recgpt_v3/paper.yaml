@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "key": "recgpt-v3",
+  "arxiv_id": "2607.15591",
+  "title": "RecGPT-V3 Technical Report",
+  "paper_url": "https://arxiv.org/abs/2607.15591",
+  "organization": "Alibaba / Taobao",
+  "published": "2026-07-17",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "user-memory",
+    "latent-reasoning"
+  ],
+  "local_code": "src/auto_research/reproductions/recgpt_v3",
+  "documentation": "docs/reproductions/2607.15591-recgpt-v3/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 1M"
+  ],
+  "baseline": "同一 MovieLens-1M split、item tower 和训练步数下，重算完整 40-event 历史的无状态 hybrid Transformer",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "diagnostics.memory_input_tokens",
+    "diagnostics.memory_token_reduction_percent",
+    "diagnostics.memory_traceable_fraction",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.feed_CTR_percent",
+    "paper_results.feed_GMV_percent",
+    "paper_results.item_CTR_percent",
+    "paper_results.item_GMV_percent",
+    "paper_results.memory_compute_reduction_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "rqvae.final_loss",
+    "rqvae.initial_loss",
+    "setup.memory_slots"
+  ],
+  "mechanisms": [
+    "Qwen3-14B continual pre-training and general-domain mixture",
+    "CN-CLIP/Q-Former image tower and private Taobao behavior",
+    "DeepSeek-V3.2 teacher and production CTR ranker",
+    "online GRPO and production serving stack"
+  ],
+  "evolve_operators": []
+}

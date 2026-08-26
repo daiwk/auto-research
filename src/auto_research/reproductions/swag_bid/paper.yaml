@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "swag-bid",
+  "arxiv_id": "2607.25233",
+  "title": "Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness",
+  "paper_url": "https://arxiv.org/abs/2607.25233",
+  "organization": "Alibaba International Digital Commerce / Dalian University of Technology",
+  "published": "2026-07-28",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "generative-model",
+    "decision-transformer",
+    "long-horizon"
+  ],
+  "local_code": "src/auto_research/reproductions/swag_bid",
+  "documentation": "docs/reproductions/2607.25233-swag-bid/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "single-episode Decision Transformer proxy，实验组为 sliding-window planner",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.cost_percent",
+    "paper_results.gmv_percent",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.validation_only_model_selection.fresh_hit_at_10",
+    "stages.validation_only_model_selection.hit_at_10",
+    "stages.validation_only_model_selection.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "AliExpress private campaign logs",
+    "production Decision Transformer checkpoint"
+  ],
+  "evolve_operators": []
+}

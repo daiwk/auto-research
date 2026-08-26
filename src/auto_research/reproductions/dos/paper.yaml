@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "dos",
+  "arxiv_id": "2602.04460",
+  "title": "DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan",
+  "paper_url": "https://arxiv.org/abs/2602.04460",
+  "organization": "Meituan",
+  "published": "2026-02-04",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "orthogonal-quantization"
+  ],
+  "local_code": "src/auto_research/reproductions/dos",
+  "documentation": "docs/reproductions/2602.04460-dos/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "未旋转的 content/collaborative ensemble",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private Meituan features and LLM embeddings",
+    "production generator"
+  ],
+  "evolve_operators": []
+}

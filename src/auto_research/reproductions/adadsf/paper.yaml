@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "adadsf",
+  "arxiv_id": "2607.21291",
+  "title": "Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs",
+  "paper_url": "https://arxiv.org/abs/2607.21291",
+  "organization": "Huawei ACS Lab / Southern University of Science and Technology",
+  "published": "2026-07-23",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "efficient-inference",
+    "token-routing"
+  ],
+  "local_code": "src/auto_research/reproductions/adadsf",
+  "documentation": "docs/reproductions/2607.21291-adadsf/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同一个 96-d、4-layer dense teacher",
+  "metrics": [
+    "variants.adadsf_80.perplexity",
+    "variants.dense_teacher.perplexity",
+    "variants.uniform_mod_80.perplexity"
+  ],
+  "mechanisms": [
+    "GPT-NeoX-130M and Qwen2.5-0.5B/1.5B checkpoints",
+    "WikiText-103 and six full commonsense benchmarks",
+    "hardware-level FLOP profiling"
+  ],
+  "evolve_operators": []
+}

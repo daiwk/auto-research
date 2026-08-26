@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "mdl",
+  "arxiv_id": "2602.07520",
+  "title": "MDL: A Unified Multi-Distribution Learner in Large-scale Industrial Recommendation through Tokenization",
+  "paper_url": "https://arxiv.org/abs/2602.07520",
+  "organization": "ByteDance / Douyin",
+  "published": "2026-02-07",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "multi-scenario",
+    "multi-task",
+    "tokenization"
+  ],
+  "local_code": "src/auto_research/reproductions/mdl",
+  "documentation": "docs/reproductions/2602.07520-mdl/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享但非 tokenized ranker",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "hundreds-of-millions-user production model",
+    "private scenario/task labels"
+  ],
+  "evolve_operators": []
+}

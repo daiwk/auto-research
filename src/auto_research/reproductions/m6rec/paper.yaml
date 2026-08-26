@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "m6rec",
+  "arxiv_id": "2205.08084",
+  "title": "M6-Rec: Generative Pretrained Language Models are Open-Ended Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2205.08084",
+  "organization": "Alibaba",
+  "published": "2022-05-17",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "foundation-model",
+    "parameter-efficient-tuning"
+  ],
+  "local_code": "src/auto_research/reproductions/m6rec",
+  "documentation": "docs/reproductions/2205.08084-m6rec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K title and genre text"
+  ],
+  "baseline": "只训练 option prototype 的 Option Tuning",
+  "metrics": [
+    "summary.option_adapter_auc_mean",
+    "summary.option_adapter_auc_std",
+    "summary.option_tuning_auc_mean",
+    "summary.option_tuning_auc_std",
+    "summary.relative_auc_gain_percent_mean",
+    "summary.relative_auc_gain_percent_std"
+  ],
+  "mechanisms": [
+    "M6-Rec: Generative Pretrained Language Models are Open-Ended Recommender Systems"
+  ],
+  "evolve_operators": []
+}

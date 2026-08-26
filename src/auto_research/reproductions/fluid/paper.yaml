@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "key": "fluid",
+  "arxiv_id": "2605.21832",
+  "title": "FLUID: From Ephemeral IDs to Multimodal Semantic Codes for Industrial-Scale Livestreaming Recommendation",
+  "paper_url": "https://arxiv.org/abs/2605.21832",
+  "organization": "TikTok / ByteDance",
+  "published": "2026-05-20",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "multimodal",
+    "semantic-id",
+    "cold-start",
+    "ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/fluid",
+  "documentation": "docs/reproductions/2605.21832-fluid/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "含 item transition/popularity 的 ID ranker",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private livestream slices and user traffic",
+    "SigLIP2 + Qwen3-Embedding-0.6B encoder",
+    "production incremental training"
+  ],
+  "evolve_operators": []
+}

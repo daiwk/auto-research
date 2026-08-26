@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "plum",
+  "arxiv_id": "2510.07784",
+  "title": "PLUM: Adapting Pre-trained Language Models for Industrial-scale Generative Recommendations",
+  "paper_url": "https://arxiv.org/abs/2510.07784",
+  "organization": "Google DeepMind / YouTube",
+  "published": "2025-10-09",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/plum",
+  "documentation": "docs/reproductions/2510.07784-plum/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 1M"
+  ],
+  "baseline": "随机初始化无 CPT（R1），实验组是随机初始化有 CPT（CR1）",
+  "metrics": [
+    "variants.CR1.cpt_final_loss",
+    "variants.CR1.ndcg_at_10",
+    "variants.CR1.recall_at_10",
+    "variants.CR1.sft_final_loss",
+    "variants.CR2.cpt_final_loss",
+    "variants.CR2.ndcg_at_10",
+    "variants.CR2.recall_at_10",
+    "variants.CR2.sft_final_loss",
+    "variants.R1.ndcg_at_10",
+    "variants.R1.recall_at_10",
+    "variants.R1.sft_final_loss",
+    "variants.R2.ndcg_at_10",
+    "variants.R2.recall_at_10",
+    "variants.R2.sft_final_loss"
+  ],
+  "mechanisms": [
+    "PLUM: Adapting Pre-trained Language Models for Industrial-scale Generative Recommendations"
+  ],
+  "evolve_operators": []
+}

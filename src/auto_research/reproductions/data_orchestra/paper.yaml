@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "key": "data-orchestra",
+  "arxiv_id": "2607.24717",
+  "title": "DataOrchestra: Learning to Orchestrate Per-Example Curation of Pretraining Data",
+  "paper_url": "https://arxiv.org/abs/2607.24717",
+  "organization": "Fudan University / Shanghai Jiao Tong University / SII-GAIR",
+  "published": "2026-07-27",
+  "upstream_code": "https://github.com/GAIR-NLP/DataOrchestra",
+  "track": "llm",
+  "topics": [
+    "llm-pretraining",
+    "data-curation",
+    "data-cleaning",
+    "learned-orchestration"
+  ],
+  "local_code": "src/auto_research/reproductions/data_orchestra",
+  "documentation": "docs/reproductions/2607.24717-data-orchestra/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "在 WikiText-2 raw 文本上训练同一个 208,872 参数 Llama-style LM",
+  "metrics": [
+    "orchestrator_training.final_loss",
+    "orchestrator_training.held_out_action_accuracy",
+    "orchestrator_training.held_out_operation_accuracy",
+    "orchestrator_training.initial_loss",
+    "relative.perplexity_reduction_vs_raw_percent",
+    "setup.same_tokens_steps_optimizer_architecture",
+    "variants.DataOrchestra.final_loss",
+    "variants.DataOrchestra.initial_loss",
+    "variants.DataOrchestra.loss",
+    "variants.DataOrchestra.perplexity",
+    "variants.Raw.final_loss",
+    "variants.Raw.initial_loss",
+    "variants.Raw.loss",
+    "variants.Raw.perplexity",
+    "variants.Static cleaner.final_loss",
+    "variants.Static cleaner.initial_loss",
+    "variants.Static cleaner.loss",
+    "variants.Static cleaner.perplexity"
+  ],
+  "mechanisms": [
+    "LLM-generated orchestration supervision",
+    "20B/30B-token multi-corpus pretraining",
+    "0.5B/1.5B/7B model scaling"
+  ],
+  "evolve_operators": []
+}

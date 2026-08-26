@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "bahe",
+  "arxiv_id": "2403.19347",
+  "title": "Breaking the Length Barrier: LLM-Enhanced CTR Prediction in Long Textual User Behaviors",
+  "paper_url": "https://arxiv.org/abs/2403.19347",
+  "organization": "Ant Group",
+  "published": "2024-03-28",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "ctr-ranking",
+    "long-sequence",
+    "efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/bahe",
+  "documentation": "docs/reproductions/2403.19347-bahe/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K title text"
+  ],
+  "baseline": "逐样本运行完整文本上层微调",
+  "metrics": [
+    "auc.bahe_atomic_hierarchical.mean",
+    "auc.bahe_atomic_hierarchical.std",
+    "auc.full_text_upper_tuning.mean",
+    "auc.full_text_upper_tuning.std",
+    "auc.mean_absolute_gain",
+    "auc.mean_relative_gain_percent",
+    "latency_milliseconds_per_example.bahe_atomic_hierarchical.mean",
+    "latency_milliseconds_per_example.bahe_atomic_hierarchical.std",
+    "latency_milliseconds_per_example.full_text_upper_tuning.mean",
+    "latency_milliseconds_per_example.full_text_upper_tuning.std",
+    "latency_milliseconds_per_example.mean_relative_change_percent"
+  ],
+  "mechanisms": [
+    "Breaking the Length Barrier: LLM-Enhanced CTR Prediction in Long Textual User Behaviors"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "key": "fuxi-alpha",
+  "arxiv_id": "2502.03036",
+  "title": "FuXi-α: Scaling Recommendation Model with Feature Interaction Enhanced Transformer",
+  "paper_url": "https://arxiv.org/abs/2502.03036",
+  "organization": "Huawei / USTC",
+  "published": "2025-02-05",
+  "upstream_code": "https://github.com/USTC-StarTeam/FuXi-alpha",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "transformer",
+    "feature-interaction",
+    "scaling"
+  ],
+  "local_code": "src/auto_research/reproductions/fuxi_alpha",
+  "documentation": "docs/reproductions/2502.03036-fuxi-alpha/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "single-channel sequential attention",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.mrr_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.mrr_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.mrr_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Huawei private features",
+    "billion-parameter distributed training"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "rgalign-rec",
+  "arxiv_id": "2602.12968",
+  "title": "RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2602.12968",
+  "organization": "Forth AI / Shopee / Singapore University of Technology and Design",
+  "published": "2026-02-13",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "query-reasoning",
+    "preference-alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/rgalign_rec",
+  "documentation": "docs/reproductions/2602.12968-rgalign-rec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

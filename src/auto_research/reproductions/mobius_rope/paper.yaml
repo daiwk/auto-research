@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "mobius-rope",
+  "arxiv_id": "2607.21405",
+  "title": "Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable",
+  "paper_url": "https://arxiv.org/abs/2607.21405",
+  "organization": "Independent researcher",
+  "published": "2026-07-23",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "positional-encoding",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/mobius_rope",
+  "documentation": "docs/reproductions/2607.21405-mobius-rope/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2 + synthetic single-needle retrieval"
+  ],
+  "baseline": "standard RoPE",
+  "metrics": [
+    "hybrid_mobius_rope.far_needle_accuracy",
+    "hybrid_mobius_rope.needle_accuracy",
+    "hybrid_mobius_rope.perplexity",
+    "relative.far_needle_accuracy_points",
+    "relative.needle_accuracy_points",
+    "relative.perplexity_reduction_percent",
+    "standard_rope.far_needle_accuracy",
+    "standard_rope.needle_accuracy",
+    "standard_rope.perplexity"
+  ],
+  "mechanisms": [
+    "48 runs at 160M/410M parameters",
+    "2B FineWeb-Edu tokens per run",
+    "six-seed variance significance study"
+  ],
+  "evolve_operators": []
+}

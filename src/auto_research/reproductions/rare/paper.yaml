@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "rare",
+  "arxiv_id": "2608.21236",
+  "title": "RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models",
+  "paper_url": "https://arxiv.org/abs/2608.21236",
+  "organization": "Huazhong University of Science and Technology",
+  "published": "2026-08-21",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "mixture-of-experts",
+    "representation-steering",
+    "model-editing"
+  ],
+  "local_code": "src/auto_research/reproductions/rare",
+  "documentation": "docs/reproductions/2608.21236-rare/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic MoE routing mini-suite"
+  ],
+  "baseline": "unprojected representation steering",
+  "metrics": [
+    "route agreement",
+    "route flip rate",
+    "steering gain"
+  ],
+  "mechanisms": [
+    "large pretrained MoE checkpoints",
+    "TruthfulQA and CounterFact full evaluation"
+  ],
+  "evolve_operators": []
+}

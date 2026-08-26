@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "reco-reward",
+  "arxiv_id": "2607.25901",
+  "title": "RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.25901",
+  "organization": "Kuaishou / Nankai University / Chinese Academy of Sciences",
+  "published": "2026-07-28",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "multimodal",
+    "reinforcement-learning",
+    "retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/reco_reward",
+  "documentation": "docs/reproductions/2607.25901-reco-reward/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "content-only semantic recall，实验组为 RAS 选择",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.validation_only_model_selection.fresh_hit_at_10",
+    "stages.validation_only_model_selection.hit_at_10",
+    "stages.validation_only_model_selection.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Qwen3.5-9B multimodal policy",
+    "private Kuaishou live-stream behavior"
+  ],
+  "evolve_operators": []
+}

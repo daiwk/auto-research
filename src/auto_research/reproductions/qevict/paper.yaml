@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "qevict",
+  "arxiv_id": "2608.05326",
+  "title": "QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding",
+  "paper_url": "https://arxiv.org/abs/2608.05326",
+  "organization": "Indian Institute of Technology Roorkee",
+  "published": "2026-08-05",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "long-context",
+    "kv-cache",
+    "quantization",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/qevict",
+  "documentation": "docs/reproductions/2608.05326-qevict/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic public-style mini-suite"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "binary_evict_recall",
+    "full_precision_slots",
+    "qevict_recall"
+  ],
+  "mechanisms": [
+    "transformer KV kernels",
+    "full long-context benchmark"
+  ],
+  "evolve_operators": []
+}

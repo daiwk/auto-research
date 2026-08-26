@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "solaris",
+  "arxiv_id": "2604.12110",
+  "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
+  "paper_url": "https://arxiv.org/abs/2604.12110",
+  "organization": "Meta",
+  "published": "2026-04-13",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "foundation-model",
+    "serving",
+    "latent-cache"
+  ],
+  "local_code": "src/auto_research/reproductions/solaris",
+  "documentation": "docs/reproductions/2604.12110-solaris/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (260 users / 420 items)"
+  ],
+  "baseline": "request-time ranker，实验组为 predictive latent cache",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Meta foundation-model weights",
+    "production cache infrastructure"
+  ],
+  "evolve_operators": []
+}

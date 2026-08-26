@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "key": "click-a-buy-b",
+  "arxiv_id": "2507.15113",
+  "title": "Click A, Buy B: Rethinking Conversion Attribution in E-Commerce Recommendations",
+  "paper_url": "https://arxiv.org/abs/2507.15113",
+  "organization": "Pinterest",
+  "published": "2025-07-20",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "conversion-attribution",
+    "multi-task-learning",
+    "taxonomy",
+    "ads-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/click_a_buy_b",
+  "documentation": "docs/reproductions/2507.15113-click-a-buy-b/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "last-click single-item conversion attribution",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.mrr_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.mrr_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.mrr_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Pinterest conversion windows",
+    "private purchase and ad exposure labels"
+  ],
+  "evolve_operators": []
+}

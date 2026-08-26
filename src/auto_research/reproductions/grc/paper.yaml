@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "grc",
+  "arxiv_id": "2602.23639",
+  "title": "Learning to Reflect and Correct: Towards Better Decoding Trajectories for Large-Scale Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2602.23639",
+  "organization": "Alibaba International / Wuhan University",
+  "published": "2026-02-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "reinforcement-learning",
+    "self-correction"
+  ],
+  "local_code": "src/auto_research/reproductions/grc",
+  "documentation": "docs/reproductions/2602.23639-grc/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "movielens 100k"
+  ],
+  "baseline": "同一 SID 的 GR backbone",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "industrial LLM backbone and private seller/brand attributes"
+  ],
+  "evolve_operators": []
+}
