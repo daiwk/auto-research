@@ -113,6 +113,11 @@ class MicroLLMEvaluator:
                 )
             ),
             "seeds": list(self.seeds),
+            "fitness_by_seed": [
+                float(row[
+                    "public_composite" if self.fitness_metric == "public_composite" else "primary"
+                ]) for row in validations
+            ],
         }
         return EvolutionTrial(
             trial_id, generation, parent_id, genome, validation, training,

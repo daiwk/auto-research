@@ -20,6 +20,10 @@ from .evolution.promotion import CandidatePluginSpec, CandidatePromotionPipeline
 from .evolution.compatibility import (
     operator_registry, validate_operator_set, write_compatibility_graph,
 )
+from .evolution.statistics import decide_experiment
+from .execution import ExecutionSpec, ResourceBudget, create_executor
+from .experiment_proposals import find_paper_spec, propose_from_paper, write_proposal
+from .protocols import comparability_errors, get_protocol, list_protocols
 from .experiment_store.dashboard import write_dashboard
 from .experiment_store.store import ExperimentStore, sync_experiments
 from .evidence_promotion import EvidencePromotionConfig, EvidencePromotionRunner
@@ -179,6 +183,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="external generator command; receives paper-candidates.json and may only stage verified code",
     )
     evolve.add_argument("--candidate-timeout-seconds", type=int, default=300)
+    evolve.add_argument("--evaluation-protocol", default="",
+                        help="versioned fair-evaluation protocol id")
+    evolve.add_argument("--negative-memory", type=Path,
+                        help="persistent exact-context negative-result store")
     evolve.add_argument("--promotion-min-seeds", type=int, default=1)
     evolve.add_argument("--confidence-z", type=float, default=1.0, help="uncertainty penalty for champion selection")
     evolve.add_argument("--maximum-users", type=int, help="explicit smoke-test user limit")
@@ -618,6 +626,52 @@ def build_parser() -> argparse.ArgumentParser:
     operators.add_argument("--max-memory", type=int)
     operators.add_argument("--max-latency", type=int)
     operators.add_argument("--output", type=Path, default=Path("runs/operator-graph.json"))
+
+    execute = commands.add_parser("execute", help="run a command through local, SSH or Slurm")
+    execute.add_argument("--backend", choices=["local", "ssh", "slurm"], default="local")
+    execute.add_argument("--run-id", required=True)
+    execute.add_argument("--output-dir", type=Path, default=Path("runs/execution"))
+    execute.add_argument("--host")
+    execute.add_argument("--partition")
+    execute.add_argument("--working-directory")
+    execute.add_argument("--timeout", type=int, default=3600)
+    execute.add_argument("--retries", type=int, default=0)
+    execute.add_argument("--gpu-memory-mb", type=int)
+    execute.add_argument("--estimated-gpu-memory-mb", type=int)
+    execute.add_argument("--maximum-cost", type=float)
+    execute.add_argument("--estimated-cost", type=float, default=0.0)
+    execute.add_argument("--submit-only", action="store_true")
+    execute.add_argument("--dry-run", action="store_true")
+    execute.add_argument("--resume", action="store_true")
+    execute.add_argument("command_args", nargs=argparse.REMAINDER)
+
+    protocols = commands.add_parser("protocols", help="inspect fair-evaluation protocols")
+    protocols.add_argument("action", choices=["list", "show", "compare"])
+    protocols.add_argument("--id")
+    protocols.add_argument("--left", type=Path)
+    protocols.add_argument("--right", type=Path)
+
+    proposals = commands.add_parser("proposals", help="create auditable paper-to-experiment plans")
+    proposals.add_argument("action", choices=["create"])
+    proposals.add_argument("--paper")
+    proposals.add_argument("--spec", type=Path, help="paper.yaml for a newly retrieved paper")
+    proposals.add_argument("--model", required=True)
+    proposals.add_argument("--protocol", required=True)
+    proposals.add_argument("--direction", default="")
+    proposals.add_argument("--source", default="installed-paper-component")
+    proposals.add_argument("--operators", default="")
+    proposals.add_argument("--output", type=Path, default=Path("runs/proposal.json"))
+
+    stats = commands.add_parser("stats", help="make a paired, sequential experiment decision")
+    stats.add_argument("action", choices=["decide"])
+    stats.add_argument("--baseline", required=True)
+    stats.add_argument("--candidate", required=True)
+    stats.add_argument("--minimum-effect", type=float, default=0.0)
+    stats.add_argument("--alpha", type=float, default=.05)
+    stats.add_argument("--maximum-seeds", type=int, default=9)
+    stats.add_argument("--estimated-cost", type=float, default=0.0)
+    stats.add_argument("--maximum-cost", type=float)
+    stats.add_argument("--minimize", action="store_true")
     return parser
 
 
@@ -694,6 +748,56 @@ def main(argv: list[str] | None = None) -> int:
             if errors:
                 raise ValueError("; ".join(errors))
             print("compatible")
+            return 0
+        if args.command == "execute":
+            command = tuple(args.command_args[1:] if args.command_args[:1] == ["--"] else args.command_args)
+            result = create_executor(args.backend).execute(ExecutionSpec(
+                run_id=args.run_id, command=command, output_dir=args.output_dir,
+                backend=args.backend, working_directory=args.working_directory,
+                host=args.host, partition=args.partition, submit_only=args.submit_only,
+                dry_run=args.dry_run, resume=args.resume, budget=ResourceBudget(
+                    args.timeout, args.retries, args.gpu_memory_mb,
+                    args.maximum_cost, args.estimated_cost, args.estimated_gpu_memory_mb,
+                ),
+            ))
+            print(json.dumps(result.to_dict(), ensure_ascii=False))
+            return 0 if result.status in {"completed", "submitted", "planned"} else 2
+        if args.command == "protocols":
+            if args.action == "list":
+                for protocol in list_protocols():
+                    print(f"{protocol.protocol_id:36} {protocol.dataset:20} {protocol.primary_metric}")
+                return 0
+            if args.action == "show":
+                if not args.id: raise ValueError("protocols show requires --id")
+                print(json.dumps(get_protocol(args.id).to_dict(), ensure_ascii=False, indent=2))
+                return 0
+            if not args.left or not args.right:
+                raise ValueError("protocols compare requires --left and --right")
+            errors = comparability_errors(json.loads(args.left.read_text()), json.loads(args.right.read_text()))
+            if errors: raise ValueError("not comparable: " + "; ".join(errors))
+            print("comparable")
+            return 0
+        if args.command == "proposals":
+            if not args.paper and not args.spec:
+                raise ValueError("proposals create requires --paper or --spec")
+            from .paper_specs import load_spec
+            spec = load_spec(args.spec) if args.spec else find_paper_spec(Path.cwd(), args.paper)
+            operators = tuple(value.strip() for value in args.operators.split(",") if value.strip())
+            proposal = propose_from_paper(
+                spec, model=args.model, protocol_id=args.protocol, direction=args.direction,
+                source_kind=args.source, operators=operators or None,
+            )
+            print(write_proposal(proposal, args.output).resolve())
+            return 0
+        if args.command == "stats":
+            values = lambda text: tuple(float(value) for value in text.split(",") if value.strip())
+            decision = decide_experiment(
+                values(args.baseline), values(args.candidate),
+                minimum_effect=args.minimum_effect, alpha=args.alpha,
+                maximum_seeds=args.maximum_seeds, estimated_cost=args.estimated_cost,
+                maximum_cost=args.maximum_cost, maximize=not args.minimize,
+            )
+            print(json.dumps(decision.to_dict(), ensure_ascii=False, indent=2))
             return 0
         if args.command == "candidate":
             pipeline = CandidatePromotionPipeline(Path.cwd())
@@ -905,6 +1009,8 @@ def main(argv: list[str] | None = None) -> int:
                 reasoning_model_id=args.reasoning_model_id,
                 reasoning_model_revision=args.reasoning_model_revision,
                 reasoning_checkpoint_path=args.reasoning_checkpoint_path,
+                evaluation_protocol_id=args.evaluation_protocol,
+                negative_memory_path=args.negative_memory,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             result_artifact = run_dir / "result.json"

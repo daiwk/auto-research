@@ -13,6 +13,9 @@ Auto Research 负责把“我想研究什么”转成一条可追踪、可复现
 
 [查看领域 adapter 与当前支持状态 →](evolution-domains.md)
 
+跨本地、SSH、Slurm 执行，版本化公平协议，论文到实验提案，配对统计决策和负结果记忆
+由统一平台层提供：[查看自动研究平台 P1 →](research-platform-p1.md)。
+
 ## 先理解候选来源
 
 Directed evolution 不是“搜到一篇论文后现场生成实现”。它把论文发现和代码执行分成

@@ -54,6 +54,8 @@ class EvolutionConfig:
     reasoning_model_id: str = "HuggingFaceTB/SmolLM2-135M-Instruct"
     reasoning_model_revision: str = "12fd25f77366fa6b3b4b768ec3050bf629380bac"
     reasoning_checkpoint_path: Path | None = None
+    evaluation_protocol_id: str = ""
+    negative_memory_path: Path | None = None
 
     def validate(self) -> None:
         from .providers import get_provider
@@ -102,6 +104,9 @@ class EvolutionConfig:
                 )
         if self.model == "reasoning-checkpoint" and self.maximum_examples < 1:
             raise ValueError("reasoning checkpoint requires at least one example")
+        if self.evaluation_protocol_id:
+            from ..protocols import get_protocol
+            get_protocol(self.evaluation_protocol_id)
 
 
 @dataclass(frozen=True)
@@ -222,6 +227,7 @@ class EvolutionResult:
                 "checkpoint_annotations": str(self.config.checkpoint_annotations) if self.config.checkpoint_annotations else None,
                 "checkpoint_image_root": str(self.config.checkpoint_image_root) if self.config.checkpoint_image_root else None,
                 "reasoning_checkpoint_path": str(self.config.reasoning_checkpoint_path) if self.config.reasoning_checkpoint_path else None,
+                "negative_memory_path": str(self.config.negative_memory_path) if self.config.negative_memory_path else None,
                 "seeds": list(self.config.seeds),
             },
             "papers": [paper.to_dict() for paper in self.papers],
@@ -244,6 +250,7 @@ class EvolutionResult:
         for key in (
             "checkpoint_path", "checkpoint_annotations", "checkpoint_image_root",
             "reasoning_checkpoint_path",
+            "negative_memory_path",
         ):
             raw_config[key] = Path(raw_config[key]) if raw_config.get(key) else None
         raw_config["seeds"] = tuple(raw_config["seeds"])

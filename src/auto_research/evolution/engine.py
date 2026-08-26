@@ -20,7 +20,9 @@ from .planner import allowed_architectures, propose, round_record
 from .providers import get_provider
 from .report import write_evolution_artifacts
 from .research_memory import methodology_order, update_research_memory, verify_trial
+from .statistics import decide_experiment
 from ..runtime import configure_runtime
+from ..negative_results import NegativeResult, NegativeResultStore, classify_negative
 
 
 class ModelEvolutionEngine:
@@ -84,6 +86,14 @@ class ModelEvolutionEngine:
         rng = random.Random(config.seeds[0])
         seen = {_fingerprint(trial.genome) for trial in result.trials}
         architectures = allowed_architectures(config.model, config.direction, papers)
+        negative_store = NegativeResultStore(
+            (config.negative_memory_path or (self.project_dir / ".auto-research/negative-results.json")).resolve()
+        )
+        protocol_id = config.evaluation_protocol_id or _default_protocol(config)
+        architectures = [name for name in architectures if not negative_store.should_skip(
+            domain=domain, model=config.model, dataset=config.dataset,
+            protocol_id=protocol_id, method=name, budget=_budget_key(config), seeds=config.seeds,
+        )[0]] or architectures
         if config.model == "post-training" and config.dataset.endswith("-generate"):
             generation_algorithms = {"ipo", "simpo", "luspo", "coba-rl"}
             architectures = [
@@ -132,6 +142,28 @@ class ModelEvolutionEngine:
                 champion,
                 result.verification_records,
             )
+            for child in children:
+                decision = _paired_decision(parent, child, config)
+                if decision:
+                    result.research_memory.setdefault("statistical_decisions", []).append({
+                        "parent_id": parent.trial_id, "trial_id": child.trial_id,
+                        **decision.to_dict(),
+                    })
+            for child in children:
+                delta = child.fitness - parent.fitness
+                if child.status != "completed" or delta <= 0:
+                    category = classify_negative(
+                        status=child.status, error=child.error, fitness_delta=delta,
+                    )
+                    negative = NegativeResult(
+                        domain, config.model, config.dataset, protocol_id,
+                        child.genome.architecture, _budget_key(config), config.seeds,
+                        category, child.error or f"fitness delta {delta:.8g}", delta,
+                    )
+                    negative_store.record(negative)
+                    result.research_memory.setdefault("negative_results", []).append(
+                        negative.to_dict()
+                    )
             result.rounds.append(round_record(generation, parent, children, champion))
             write_evolution_artifacts(result, run_dir)
 
@@ -166,6 +198,35 @@ class ModelEvolutionEngine:
 
 def _make_evaluator(config, project_dir):
     return get_provider(config.model).evaluator_factory(config, project_dir)
+
+
+def _default_protocol(config):
+    if config.model in {"rankmixer", "hyformer", "genrec"} and config.dataset == "movielens-1m":
+        return "recommendation.movielens1m.v2"
+    if config.model == "post-training" and "gsm8k" in config.dataset:
+        return "post_training.gsm8k.v1"
+    if config.model == "agent":
+        return "agent.swe_local.v2"
+    if config.model in {"micro-vlm", "vlm-checkpoint"} and "scienceqa" in config.dataset:
+        return "multimodal.scienceqa.v1"
+    if config.model in {"micro-llm", "reasoning-checkpoint"}:
+        return "foundation.wikitext2.v1"
+    return f"internal.{config.model}.{config.dataset}.v1"
+
+
+def _budget_key(config):
+    return f"steps={config.steps};seeds={len(config.seeds)};suite={config.benchmark_suite}"
+
+
+def _paired_decision(parent, child, config):
+    baseline = parent.training.get("fitness_by_seed", ())
+    candidate = child.training.get("fitness_by_seed", ())
+    if child.status != "completed" or not baseline or len(baseline) != len(candidate):
+        return None
+    return decide_experiment(
+        baseline, candidate, minimum_effect=0.0,
+        maximum_seeds=max(9, len(config.seeds)), maximize=True,
+    )
 
 
 def _evaluate_worker(config, project_dir, spec):

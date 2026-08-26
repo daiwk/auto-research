@@ -64,6 +64,7 @@ nav:
           - 可训练 policy 与真实 executor: agent-research/training-executor.md
   - 项目文档:
       - 项目 README: project-readme.md
+      - 自动研究平台 P1: research-platform-p1.md
       - 统一实验数据库与看板: experiment-tracking.md
       - 声明式论文实现规范: paper-specs.md
       - 架构与扩展: architecture.md
