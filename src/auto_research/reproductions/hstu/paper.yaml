@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "hstu",
+  "arxiv_id": "2402.17152",
+  "title": "Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations",
+  "paper_url": "https://arxiv.org/abs/2402.17152",
+  "organization": "Meta",
+  "published": "2024-02-27",
+  "upstream_code": "https://github.com/meta-recsys/generative-recommenders",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/hstu",
+  "documentation": "docs/reproductions/2402.17152-hstu/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "维度、层数、heads、loss 和训练步数匹配的 SASRec",
+  "metrics": [
+    "hstu.hit_at_10",
+    "hstu.hit_at_10_std",
+    "hstu.ndcg_at_10",
+    "hstu.ndcg_at_10_std",
+    "ndcg_gain_percent",
+    "sasrec.hit_at_10",
+    "sasrec.hit_at_10_std",
+    "sasrec.ndcg_at_10",
+    "sasrec.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "heterogeneous action tokens",
+    "stochastic-length training",
+    "M-FALCON serving"
+  ],
+  "evolve_operators": []
+}

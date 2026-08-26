@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "safro",
+  "arxiv_id": "2603.19585",
+  "title": "SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search",
+  "paper_url": "https://arxiv.org/abs/2603.19585",
+  "organization": "Kuaishou Technology",
+  "published": "2026-03-20",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "search-ranking",
+    "reinforcement-learning",
+    "multi-task-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/safro",
+  "documentation": "docs/reproductions/2603.19585-safro/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

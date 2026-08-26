@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "inthq",
+  "arxiv_id": "2608.09634",
+  "title": "IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2608.09634",
+  "organization": "Amap / Alibaba",
+  "published": "2026-08-10",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "multi-task-learning",
+    "generative-recommendation",
+    "long-sequence"
+  ],
+  "local_code": "src/auto_research/reproductions/inthq",
+  "documentation": "docs/reproductions/2608.09634-inthq/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

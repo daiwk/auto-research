@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "dien",
+  "arxiv_id": "1809.03672",
+  "title": "Deep Interest Evolution Network for Click-Through Rate Prediction",
+  "paper_url": "https://arxiv.org/abs/1809.03672",
+  "organization": "Alibaba",
+  "published": "2018-09-11",
+  "upstream_code": "https://github.com/mouna99/dien",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "classic",
+    "sequence-modeling"
+  ],
+  "local_code": "src/auto_research/reproductions/dien",
+  "documentation": "docs/reproductions/1809.03672-dien/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K compact"
+  ],
+  "baseline": "同一训练协议的 DIN",
+  "metrics": [
+    "baseline.ndcg_at_10",
+    "method.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Taobao private ads features",
+    "fused production AUGRU kernels"
+  ],
+  "evolve_operators": []
+}

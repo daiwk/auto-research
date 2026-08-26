@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "key": "minimax-sparse-attention",
+  "arxiv_id": "2606.13392",
+  "title": "MiniMax Sparse Attention",
+  "paper_url": "https://arxiv.org/abs/2606.13392",
+  "organization": "MiniMax",
+  "published": "2026-06-11",
+  "upstream_code": "https://github.com/MiniMax-AI/MSA",
+  "track": "llm",
+  "topics": [
+    "llm",
+    "sparse-attention",
+    "gqa",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/minimax_sparse_attention",
+  "documentation": "docs/reproductions/2606.13392-minimax-sparse-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "dense GQA，实验组为带 index 辅助损失的 MiniMax block-sparse GQA",
+  "metrics": [
+    "baseline.attention_pair_ratio",
+    "baseline.perplexity",
+    "baseline.seconds",
+    "baseline.validation_loss",
+    "method.attention_pair_ratio",
+    "method.perplexity",
+    "method.seconds",
+    "method.validation_loss",
+    "relative.attention_pairs_percent",
+    "relative.measured_training_seconds_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "109B pretraining",
+    "official fused H800 kernel"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "rec-distill",
+  "arxiv_id": "2605.29755",
+  "title": "Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models",
+  "paper_url": "https://arxiv.org/abs/2605.29755",
+  "organization": "ByteDance / Douyin / TikTok",
+  "published": "2026-05-28",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/rec_distill",
+  "documentation": "docs/reproductions/2605.29755-rec-distill/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "相同日程训练的 Raw Student",
+  "metrics": [
+    "results.large_teacher.hit_at_10",
+    "results.large_teacher.ndcg_at_10",
+    "results.raw_student.hit_at_10",
+    "results.raw_student.ndcg_at_10",
+    "results.rec_distill_student.hit_at_10",
+    "results.rec_distill_student.ndcg_at_10",
+    "validation_ndcg_by_alpha.0.1",
+    "validation_ndcg_by_alpha.0.3",
+    "validation_ndcg_by_alpha.1.0",
+    "validation_ndcg_by_alpha.3.0"
+  ],
+  "mechanisms": [
+    "Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models"
+  ],
+  "evolve_operators": []
+}

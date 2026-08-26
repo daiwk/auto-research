@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "speculative-decoding",
+  "arxiv_id": "2211.17192",
+  "title": "Fast Inference from Transformers via Speculative Decoding",
+  "paper_url": "https://arxiv.org/abs/2211.17192",
+  "organization": "Google Research",
+  "published": "2022-11-30",
+  "upstream_code": "https://github.com/google-research/google-research/tree/master/speculative_decoding",
+  "track": "llm",
+  "topics": [
+    "inference-serving",
+    "decoding"
+  ],
+  "local_code": "src/auto_research/reproductions/speculative_decoding",
+  "documentation": "docs/reproductions/2211.17192-speculative-decoding/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "target-only greedy decoding，实验组为 four-token draft and exact target verification，只改变论文核心机制",
+  "metrics": [
+    "baseline.target_calls",
+    "method.target_calls",
+    "relative.target_call_reduction_percent"
+  ],
+  "mechanisms": [
+    "T5-XXL",
+    "accelerator kernels"
+  ],
+  "evolve_operators": []
+}

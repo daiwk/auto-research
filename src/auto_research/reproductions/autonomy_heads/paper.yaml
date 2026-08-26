@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "autonomy-heads",
+  "arxiv_id": "2608.06849",
+  "title": "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
+  "paper_url": "https://arxiv.org/abs/2608.06849",
+  "organization": "Institute of Computing Technology, Chinese Academy of Sciences",
+  "published": "2026-08-07",
+  "upstream_code": "否：截至 2026-08-24 未发现原作者公开代码",
+  "track": "llm",
+  "topics": [
+    "注意力与长上下文",
+    "稀疏注意力"
+  ],
+  "local_code": "src/auto_research/reproductions/autonomy_heads",
+  "documentation": "docs/reproductions/2608.06849-autonomy-heads/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

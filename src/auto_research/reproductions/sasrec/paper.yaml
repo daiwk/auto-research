@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "sasrec",
+  "arxiv_id": "1808.09781",
+  "title": "Self-Attentive Sequential Recommendation",
+  "paper_url": "https://arxiv.org/abs/1808.09781",
+  "organization": "UC San Diego",
+  "published": "2018-08-20",
+  "upstream_code": "https://github.com/kang205/SASRec",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/sasrec",
+  "documentation": "docs/reproductions/1808.09781-sasrec/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "popularity 排序",
+  "metrics": [
+    "ndcg_gain_percent",
+    "popularity.hit_at_10",
+    "popularity.ndcg_at_10",
+    "sasrec.hit_at_10",
+    "sasrec.hit_at_10_std",
+    "sasrec.ndcg_at_10",
+    "sasrec.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "Self-Attentive Sequential Recommendation"
+  ],
+  "evolve_operators": []
+}

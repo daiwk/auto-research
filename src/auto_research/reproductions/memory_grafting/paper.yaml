@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "key": "memory-grafting",
+  "arxiv_id": "2605.20948",
+  "title": "Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory",
+  "paper_url": "https://arxiv.org/abs/2605.20948",
+  "organization": "Tsinghua University / Microsoft Research Asia",
+  "published": "2026-05-20",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-pretraining",
+    "conditional-memory",
+    "offline-knowledge-transfer"
+  ],
+  "local_code": "src/auto_research/reproductions/memory_grafting",
+  "documentation": "docs/reproductions/2605.20948-memory-grafting/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同结构普通 Transformer",
+  "metrics": [
+    "paper_benchmark_average.Memory Grafting",
+    "relative.ppl_reduction_vs_engram_percent",
+    "relative.ppl_reduction_vs_transformer_percent",
+    "setup.memory_capacity",
+    "variants.Engram.loss",
+    "variants.Engram.perplexity",
+    "variants.Memory Grafting.exact_hit_rate",
+    "variants.Memory Grafting.loss",
+    "variants.Memory Grafting.perplexity",
+    "variants.Memory Grafting.trainable_parameters",
+    "variants.Transformer.loss",
+    "variants.Transformer.perplexity"
+  ],
+  "mechanisms": [
+    "0.92B/2.8B MoE recipients",
+    "Qwen3.5/DeepSeek teacher and 3M-entry memory bank"
+  ],
+  "evolve_operators": []
+}

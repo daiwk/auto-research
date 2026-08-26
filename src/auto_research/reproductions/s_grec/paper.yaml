@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "key": "s-grec",
+  "arxiv_id": "2602.10606",
+  "title": "S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage",
+  "paper_url": "https://arxiv.org/abs/2602.10606",
+  "organization": "Tencent / WeChat Channels",
+  "published": "2026-02-11",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "llm-as-judge",
+    "grpo",
+    "a2po"
+  ],
+  "local_code": "src/auto_research/reproductions/s_grec",
+  "documentation": "docs/reproductions/2602.10606-s-grec/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MiniOneRec Amazon Office_Products"
+  ],
+  "baseline": "相同公开 Office 数据、相同 SID Transformer 和 600-step 训练预算的 MiniOneRec-style business SFT checkpoint",
+  "metrics": [
+    "psj.aligned_point_accuracy",
+    "psj.pairwise_accuracy",
+    "psj.sft_final_loss",
+    "psj.sft_initial_loss",
+    "psj.sft_point_accuracy",
+    "test.a2po.ndcg_at_10",
+    "test.adv_sum.ndcg_at_10",
+    "test.business.ndcg_at_10",
+    "test.reward_sum.hr_at_10",
+    "test.reward_sum.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Qwen3-4B judge, Qwen2.5-1.5B MiniOneRec backbone and production-scale training",
+    "20k human-verified point-wise and 40k pairwise proprietary ad annotations",
+    "WeChat eCPM reward model, ad inventory and online sample server"
+  ],
+  "evolve_operators": []
+}

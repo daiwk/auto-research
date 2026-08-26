@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "wemm-embedding",
+  "arxiv_id": "2608.24053",
+  "title": "WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report",
+  "paper_url": "https://arxiv.org/abs/2608.24053",
+  "organization": "WeChat Vision, Tencent",
+  "published": "2026-08-25",
+  "upstream_code": "https://github.com/Tencent/WeMM-Embedding",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "embedding",
+    "retrieval",
+    "matryoshka-representation"
+  ],
+  "local_code": "src/auto_research/reproductions/wemm_embedding",
+  "documentation": "docs/reproductions/2608.24053-wemm-embedding/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M paired content/collaborative views"
+  ],
+  "baseline": "stage-1 multimodal alignment without refinement",
+  "metrics": [
+    "Recall@1",
+    "Recall@10",
+    "MRR"
+  ],
+  "mechanisms": [
+    "2B/4B/9B released checkpoints",
+    "hundreds of millions of private pairs",
+    "WeChat production indexes"
+  ],
+  "evolve_operators": []
+}

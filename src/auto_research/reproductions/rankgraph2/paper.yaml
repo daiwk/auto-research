@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "rankgraph2",
+  "arxiv_id": "2606.18379",
+  "title": "RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation",
+  "paper_url": "https://arxiv.org/abs/2606.18379",
+  "organization": "Meta",
+  "published": "2026-06-16",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "graph-retrieval",
+    "ppr",
+    "residual-quantization"
+  ],
+  "local_code": "src/auto_research/reproductions/rankgraph2",
+  "documentation": "docs/reproductions/2606.18379-rankgraph2/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (260 users / 420 items)"
+  ],
+  "baseline": "one-hop retrieval，实验组为 debiased PPR + 两级 residual cluster index",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Meta-scale graph",
+    "distributed PPR and ANN serving"
+  ],
+  "evolve_operators": []
+}

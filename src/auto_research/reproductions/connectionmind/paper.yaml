@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "connectionmind",
+  "arxiv_id": "2608.10187",
+  "title": "ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning",
+  "paper_url": "https://arxiv.org/abs/2608.10187",
+  "organization": "Michigan State University / Meta Platforms, Inc.",
+  "published": "2026-08-10",
+  "upstream_code": "否：截至 2026-08-20 未发现原作者公开代码",
+  "track": "recommendation",
+  "topics": [
+    "social-recommendation",
+    "llm-recommendation",
+    "graph-reasoning",
+    "reinforcement-learning",
+    "distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/connectionmind",
+  "documentation": "docs/reproductions/2608.10187-connectionmind/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "HetRec 2011 Delicious-2K"
+  ],
+  "baseline": "fixed heterogeneous graph aggregation",
+  "metrics": [
+    "Recall@10",
+    "Precision@10",
+    "NDCG@10"
+  ],
+  "mechanisms": [
+    "Meta private short-video graph and production serving",
+    "Llama-3.1 3B/8B policies and production-scale GNN student"
+  ],
+  "evolve_operators": []
+}

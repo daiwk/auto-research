@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "next-vlm",
+  "arxiv_id": "2607.24789",
+  "title": "NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model",
+  "paper_url": "https://arxiv.org/abs/2607.24789",
+  "organization": "Meta",
+  "published": "2026-06-27",
+  "upstream_code": "否：截至 2026-08-24 未发现原作者公开代码",
+  "track": "recommendation",
+  "topics": [
+    "multimodal",
+    "reasoning",
+    "retrieval",
+    "knowledge-graph",
+    "vlm"
+  ],
+  "local_code": "src/auto_research/reproductions/next_vlm",
+  "documentation": "docs/reproductions/2607.24789-next-vlm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "multi-path transition/semantic ranker",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10"
+  ],
+  "mechanisms": [
+    "NEXT-8B VLM post-training",
+    "Meta private short-video corpus and production injection service"
+  ],
+  "evolve_operators": []
+}

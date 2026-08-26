@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "genrec",
+  "arxiv_id": "2604.14878",
+  "title": "GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation",
+  "paper_url": "https://arxiv.org/abs/2604.14878",
+  "organization": "JD.com",
+  "published": "2026-04-16",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "grpo",
+    "page-wise"
+  ],
+  "local_code": "src/auto_research/reproductions/genrec",
+  "documentation": "docs/reproductions/2604.14878-genrec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (260 users / 420 items)"
+  ],
+  "baseline": "point-wise ranker，实验组为 page-wise NTP + GRPO-SR",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "JD private page logs",
+    "production LLM and online RL stack"
+  ],
+  "evolve_operators": []
+}

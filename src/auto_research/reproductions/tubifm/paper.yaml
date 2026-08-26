@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "tubifm",
+  "arxiv_id": "2605.23702",
+  "title": "TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery",
+  "paper_url": "https://arxiv.org/abs/2605.23702",
+  "organization": "Tubi",
+  "published": "2026-05-22",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "foundation-model",
+    "multi-task-learning",
+    "search-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/tubifm",
+  "documentation": "docs/reproductions/2605.23702-tubifm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

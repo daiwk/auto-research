@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "key": "akt-rec",
+  "arxiv_id": "2605.23310",
+  "title": "From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs",
+  "paper_url": "https://arxiv.org/abs/2605.23310",
+  "organization": "Alibaba Group / Peking University",
+  "published": "2026-05-22",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "semantic-id",
+    "long-tail",
+    "ctr-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/akt_rec",
+  "documentation": "docs/reproductions/2605.23310-akt-rec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K sampled CTR"
+  ],
+  "baseline": "只使用 individual embedding 和实例级 target attention 的 onlinebase",
+  "metrics": [
+    "relative_akt_rec_vs_online_base_percent.auc",
+    "relative_akt_rec_vs_online_base_percent.gauc",
+    "relative_akt_rec_vs_online_base_percent.tail_auc",
+    "setup.ctr_steps_per_variant_seed",
+    "test.akt_rec.auc",
+    "test.akt_rec.auc_std",
+    "test.akt_rec.gauc",
+    "test.akt_rec.gauc_std",
+    "test.akt_rec.tail_auc",
+    "test.akt_rec.tail_auc_std",
+    "test.online_base.auc",
+    "test.online_base.auc_std",
+    "test.online_base.gauc",
+    "test.online_base.gauc_std",
+    "test.online_base.tail_auc",
+    "test.online_base.tail_auc_std",
+    "validation.akt_rec.auc",
+    "validation.akt_rec.gauc",
+    "validation.akt_rec.tail_auc",
+    "validation.online_base.auc",
+    "validation.online_base.gauc",
+    "validation.online_base.tail_auc"
+  ],
+  "mechanisms": [
+    "GME-Qwen2-VL-7B images/statistics and Qwen3-30B-A3B scale",
+    "36M-user/300M-item Tmall data and production cluster-feature store"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "olmpool-long-context",
+  "arxiv_id": "2608.10296",
+  "title": "Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension",
+  "paper_url": "https://arxiv.org/abs/2608.10296",
+  "organization": "Ai2",
+  "published": "2026-08-10",
+  "upstream_code": "https://github.com/allenai/olmpool/",
+  "track": "llm",
+  "topics": [
+    "注意力与长上下文",
+    "网络架构"
+  ],
+  "local_code": "src/auto_research/reproductions/olmpool_long_context",
+  "documentation": "docs/reproductions/2608.10296-olmpool-long-context/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

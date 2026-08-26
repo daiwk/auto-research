@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "sam",
+  "arxiv_id": "2607.12714",
+  "title": "Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy",
+  "paper_url": "https://arxiv.org/abs/2607.12714",
+  "organization": "Alibaba Group",
+  "published": "2026-07-14",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "long-sequence",
+    "satiation"
+  ],
+  "local_code": "src/auto_research/reproductions/sam",
+  "documentation": "docs/reproductions/2607.12714-sam/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "movielens 100k"
+  ],
+  "baseline": "DIN-like interest score",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private click/purchase logs and production long-sequence transducer"
+  ],
+  "evolve_operators": []
+}

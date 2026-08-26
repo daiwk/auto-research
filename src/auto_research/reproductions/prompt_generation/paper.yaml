@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "prompt-generation",
+  "arxiv_id": "2607.11326",
+  "title": "Prompt Generation Technical Report",
+  "paper_url": "https://arxiv.org/abs/2607.11326",
+  "organization": "Alibaba / Taobao Search",
+  "published": "2026-07-13",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "generative-retrieval",
+    "autoresearch",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/prompt_generation",
+  "documentation": "docs/reproductions/2607.11326-prompt-generation/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MiniOneRec Amazon Office_Products"
+  ],
+  "baseline": "相同 Qwen2.5-0.5B、相同步数和候选集下的 SID only",
+  "metrics": [
+    "variants.sid_only.final_loss",
+    "variants.sid_only.initial_loss",
+    "variants.sid_plus_merged_title_brand.final_loss",
+    "variants.sid_plus_merged_title_brand.initial_loss",
+    "variants.sid_plus_title.final_loss",
+    "variants.sid_plus_title.initial_loss"
+  ],
+  "mechanisms": [
+    "full 36,586-row SFT schedule and production-scale evaluation",
+    "C++ batched assembly and Alibaba serving infrastructure",
+    "online event tracking/replay and live A/B traffic"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "genrec-netflix",
+  "arxiv_id": "2608.10257",
+  "title": "GenRec: An LLM-Backed Recommendation Ranker at Netflix",
+  "paper_url": "https://arxiv.org/abs/2608.10257",
+  "organization": "Netflix",
+  "published": "2026-08-10",
+  "upstream_code": "否：截至 2026-08-13 未发现原作者公开代码或模型 checkpoint",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "llm-recommendation",
+    "post-training",
+    "reward-weighting",
+    "context-engineering",
+    "training-serving"
+  ],
+  "local_code": "src/auto_research/reproductions/genrec_netflix",
+  "documentation": "docs/reproductions/2608.10257-genrec-netflix/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "ID-only discriminative GRU ranker with matched Phase-2 examples",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "MRR",
+    "head share@10"
+  ],
+  "mechanisms": [
+    "Netflix proprietary Phase-1 foundation model and hundreds of billions of events",
+    "private long-term satisfaction reward models",
+    "production vLLM serving and batch-compute traffic"
+  ],
+  "evolve_operators": []
+}

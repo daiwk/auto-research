@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "onerec",
+  "arxiv_id": "2502.18965",
+  "title": "OneRec: Unifying Retrieve and Rank with Generative Recommender and Iterative Preference Alignment",
+  "paper_url": "https://arxiv.org/abs/2502.18965",
+  "organization": "Kuaishou",
+  "published": "2025-02-26",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/onerec",
+  "documentation": "docs/reproductions/2502.18965-onerec/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 1M"
+  ],
+  "baseline": "Session Generator SFT",
+  "metrics": [
+    "configuration.reward_steps",
+    "results.onerec_iterative_preference_alignment.hit_at_10",
+    "results.onerec_iterative_preference_alignment.ndcg_at_10",
+    "results.session_generator_sft.hit_at_10",
+    "results.session_generator_sft.ndcg_at_10",
+    "training.dpo_final_loss",
+    "training.dpo_initial_loss",
+    "training.reward_final_loss",
+    "training.sft_final_loss"
+  ],
+  "mechanisms": [
+    "OneRec: Unifying Retrieve and Rank with Generative Recommender and Iterative Preference Alignment"
+  ],
+  "evolve_operators": []
+}

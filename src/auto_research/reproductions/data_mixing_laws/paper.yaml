@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "data-mixing-laws",
+  "arxiv_id": "2403.16952",
+  "title": "Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance",
+  "paper_url": "https://arxiv.org/abs/2403.16952",
+  "organization": "University of Cambridge / Shanghai AI Laboratory",
+  "published": "2024-03-25",
+  "upstream_code": "https://github.com/yegcjs/mixinglaws",
+  "track": "llm",
+  "topics": [
+    "pretraining-data",
+    "scaling-law",
+    "data-mixture"
+  ],
+  "local_code": "src/auto_research/reproductions/data_mixing_laws",
+  "documentation": "docs/reproductions/2403.16952-data-mixing-laws/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2 + public narrative domain"
+  ],
+  "baseline": "均匀数据混合，实验组为 data-mixing-laws",
+  "metrics": [
+    "baseline.validation_loss",
+    "method.validation_loss",
+    "relative.validation_loss_percent"
+  ],
+  "mechanisms": [
+    "RedPajama multi-scale training",
+    "large-model extrapolation"
+  ],
+  "evolve_operators": []
+}

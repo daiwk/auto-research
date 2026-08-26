@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "llatte",
+  "arxiv_id": "2601.20083",
+  "title": "LLaTTE: Scaling Laws for Multi-Stage Sequence Modeling in Large-Scale Ads Recommendation",
+  "paper_url": "https://arxiv.org/abs/2601.20083",
+  "organization": "Meta",
+  "published": "2026-01-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/llatte",
+  "documentation": "docs/reproductions/2601.20083-llatte/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "相同 ID/语义 embedding 的 short online sequence",
+  "metrics": [
+    "relative_ndcg_change_percent",
+    "results.llatte_mla_dhen.hit_at_10",
+    "results.llatte_mla_dhen.hit_at_10_std",
+    "results.llatte_mla_dhen.ndcg_at_10",
+    "results.llatte_mla_dhen.ndcg_at_10_std",
+    "results.short_online_sequence.hit_at_10",
+    "results.short_online_sequence.hit_at_10_std",
+    "results.short_online_sequence.ndcg_at_10",
+    "results.short_online_sequence.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "private Meta ads features",
+    "asynchronous production serving"
+  ],
+  "evolve_operators": []
+}

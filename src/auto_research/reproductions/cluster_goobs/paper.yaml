@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "cluster-goobs",
+  "arxiv_id": "2607.00448",
+  "title": "Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval",
+  "paper_url": "https://arxiv.org/abs/2607.00448",
+  "organization": "Meta",
+  "published": "2026-07-01",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/cluster_goobs",
+  "documentation": "docs/reproductions/2607.00448-cluster-goobs/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "Random OOB negative sampler",
+  "metrics": [
+    "relative_ndcg_change_percent",
+    "results.cluster_goobs.hit_at_10",
+    "results.cluster_goobs.hit_at_10_std",
+    "results.cluster_goobs.ndcg_at_10",
+    "results.cluster_goobs.ndcg_at_10_std",
+    "results.random_oob.hit_at_10",
+    "results.random_oob.hit_at_10_std",
+    "results.random_oob.ndcg_at_10",
+    "results.random_oob.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval"
+  ],
+  "evolve_operators": []
+}

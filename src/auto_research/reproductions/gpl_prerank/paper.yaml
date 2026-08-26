@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "gpl-prerank",
+  "arxiv_id": "2602.20995",
+  "title": "Generative Pseudo-Labeling for Pre-Ranking with LLMs",
+  "paper_url": "https://arxiv.org/abs/2602.20995",
+  "organization": "Alibaba Group / Renmin University",
+  "published": "2026-02-24",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "pre-ranking",
+    "pseudo-labeling",
+    "llm-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/gpl_prerank",
+  "documentation": "docs/reproductions/2602.20995-gpl-prerank/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

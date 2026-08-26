@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "onemall",
+  "arxiv_id": "2601.21770",
+  "title": "OneMall: One Model, More Scenarios -- End-to-End Generative Recommender Family at Kuaishou E-Commerce",
+  "paper_url": "https://arxiv.org/abs/2601.21770",
+  "organization": "Kuaishou",
+  "published": "2026-01-29",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "multi-scenario",
+    "semantic-id"
+  ],
+  "local_code": "src/auto_research/reproductions/onemall",
+  "documentation": "docs/reproductions/2601.21770-onemall/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition/content ensemble",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "production Sparse MoE and Query-Former",
+    "private e-commerce data and RL alignment"
+  ],
+  "evolve_operators": []
+}

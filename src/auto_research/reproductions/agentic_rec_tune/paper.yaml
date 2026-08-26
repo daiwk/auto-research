@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "key": "agentic-rec-tune",
+  "arxiv_id": "2604.26969",
+  "title": "AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization",
+  "paper_url": "https://arxiv.org/abs/2604.26969",
+  "organization": "Google / Discover",
+  "published": "2026-04-21",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "agent",
+    "auto-research",
+    "retrieval",
+    "ranking",
+    "reranking"
+  ],
+  "local_code": "src/auto_research/reproductions/agentic_rec_tune",
+  "documentation": "docs/reproductions/2604.26969-agentic-rec-tune/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "固定手调排序配方，实验组运行三轮 Actor–Critic–SkillHub",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Google experiment scheduling APIs",
+    "production Actor/Critic/Insight/Online agents"
+  ],
+  "evolve_operators": []
+}

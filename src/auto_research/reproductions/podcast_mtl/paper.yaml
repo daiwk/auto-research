@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "podcast-mtl",
+  "arxiv_id": "2601.02306",
+  "title": "Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify",
+  "paper_url": "https://arxiv.org/abs/2601.02306",
+  "organization": "Spotify",
+  "published": "2026-01-05",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "cold-start",
+    "multi-task",
+    "ads"
+  ],
+  "local_code": "src/auto_research/reproductions/podcast_mtl",
+  "documentation": "docs/reproductions/2601.02306-podcast-mtl/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "single-task popularity/content ranker",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private Spotify ad/promotion logs",
+    "production imbalance and gradient-balancing stack"
+  ],
+  "evolve_operators": []
+}

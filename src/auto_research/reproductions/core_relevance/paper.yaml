@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "key": "core-relevance",
+  "arxiv_id": "2607.24417",
+  "title": "CORE: A Unified Cascaded Ordinal Relevance Estimation Framework for E-commerce Search",
+  "paper_url": "https://arxiv.org/abs/2607.24417",
+  "organization": "Meituan / Beijing Institute of Technology",
+  "published": "2026-07-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "search-ranking",
+    "ordinal-relevance",
+    "step-grpo",
+    "llm-distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/core_relevance",
+  "documentation": "docs/reproductions/2607.24417-core-relevance/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M ordinal relevance"
+  ],
+  "baseline": "MovieLens-1M 构造的同一 Low/Mid/High query-item 集上的 flat 三分类",
+  "metrics": [
+    "paper_results.cascaded_bert_accuracy",
+    "paper_results.direct_bert_accuracy",
+    "paper_results.distilled_accuracy",
+    "paper_results.online_ndcg_at_5_percent",
+    "paper_results.postcot_core_accuracy",
+    "paper_results.step_grpo_accuracy",
+    "relative.accuracy_points",
+    "relative.badcase_reduction_percent",
+    "relative.ndcg_at_5_percent",
+    "training.cascade_sft.final_loss",
+    "training.cascade_sft.initial_loss",
+    "training.flat.final_loss",
+    "training.flat.initial_loss",
+    "training.postcot_distillation.final_loss",
+    "training.postcot_distillation.initial_loss",
+    "training.step_grpo.final_policy_loss",
+    "training.step_grpo.mean_step_reward",
+    "variants.Cascaded + step-GRPO.accuracy",
+    "variants.Cascaded + step-GRPO.ndcg_at_5",
+    "variants.Cascaded classifier.accuracy",
+    "variants.Cascaded classifier.ndcg_at_5",
+    "variants.Flat classifier.accuracy",
+    "variants.Flat classifier.ndcg_at_5",
+    "variants.PostCoT distilled cascade.accuracy",
+    "variants.PostCoT distilled cascade.ndcg_at_5"
+  ],
+  "mechanisms": [
+    "Meituan private 90K query-item relevance labels",
+    "Qwen3-14B reasoning traces",
+    "production BERT encoder and online thresholds"
+  ],
+  "evolve_operators": []
+}

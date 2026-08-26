@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "key": "pinterest-ads-llm",
+  "arxiv_id": "2605.27856",
+  "title": "Fine-Tuned LLM as a Complementary Predictor Improving Ads System",
+  "paper_url": "https://arxiv.org/abs/2605.27856",
+  "organization": "Pinterest",
+  "published": "2026-05-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "llm-sft",
+    "grpo",
+    "candidate-generation"
+  ],
+  "local_code": "src/auto_research/reproductions/pinterest_ads_llm",
+  "documentation": "docs/reproductions/2605.27856-pinterest-ads-llm/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MiniOneRec Office"
+  ],
+  "baseline": "同一 SmolLM2-135M、同一公开 advertiser 集合下的 SFT",
+  "metrics": [
+    "downstream.ranking_auc_baseline",
+    "downstream.ranking_auc_relative_percent",
+    "downstream.ranking_auc_with_llm_feature",
+    "downstream.retrieval_recall_at_50_baseline",
+    "downstream.retrieval_recall_at_50_complementary",
+    "test.sft.recall_at_1",
+    "test.sft.recall_at_20",
+    "test.sft.recall_at_5",
+    "test.sft_grpo.recall_at_1",
+    "test.sft_grpo.recall_at_20",
+    "test.sft_grpo.recall_at_5"
+  ],
+  "mechanisms": [
+    "Pinterest private conversion, URL, advertiser-spend and PinCLIP SID data",
+    "4B full-scale training and distributed vLLM/Ray daily serving",
+    "live ctcvr/vtcvr and production candidate-blending traffic"
+  ],
+  "evolve_operators": []
+}

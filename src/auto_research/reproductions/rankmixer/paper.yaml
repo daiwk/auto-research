@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "rankmixer",
+  "arxiv_id": "2507.15551",
+  "title": "RankMixer: Scaling Up Ranking Models in Industrial Recommenders",
+  "paper_url": "https://arxiv.org/abs/2507.15551",
+  "organization": "ByteDance / Douyin",
+  "published": "2025-07-21",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/rankmixer",
+  "documentation": "docs/reproductions/2507.15551-rankmixer/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "Shared FFN",
+  "metrics": [
+    "results.rankmixer_dense.hit_at_10",
+    "results.rankmixer_dense.ndcg_at_10",
+    "results.rankmixer_smoe.hit_at_10",
+    "results.rankmixer_smoe.ndcg_at_10",
+    "results.shared_ffn.hit_at_10",
+    "results.shared_ffn.ndcg_at_10",
+    "sparse_vs_shared_ndcg_gain_percent"
+  ],
+  "mechanisms": [
+    "RankMixer: Scaling Up Ranking Models in Industrial Recommenders"
+  ],
+  "evolve_operators": []
+}

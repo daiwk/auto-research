@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "unirec-coa",
+  "arxiv_id": "2604.12234",
+  "title": "UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute",
+  "paper_url": "https://arxiv.org/abs/2604.12234",
+  "organization": "Authors did not disclose affiliation / large-scale e-commerce platform",
+  "published": "2026-04-14",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "preference-alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/unirec_coa",
+  "documentation": "docs/reproductions/2604.12234-unirec-coa/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "key": "recgpt-mobile",
+  "arxiv_id": "2605.04726",
+  "title": "RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation",
+  "paper_url": "https://arxiv.org/abs/2605.04726",
+  "organization": "Alibaba / Taobao",
+  "published": "2026-05-06",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "on-device",
+    "intent-understanding",
+    "serving-efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/recgpt_mobile",
+  "documentation": "docs/reproductions/2605.04726-recgpt-mobile/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 1M next-intent proxy"
+  ],
+  "baseline": "同一 SmolLM2-135M-Instruct 的零样本 intent completion",
+  "metrics": [
+    "baseline.examples",
+    "baseline.mean_latency_ms",
+    "baseline.primary_intent_accuracy",
+    "baseline.semantic_intent_accuracy",
+    "method.examples",
+    "method.mean_latency_ms",
+    "method.primary_intent_accuracy",
+    "method.semantic_intent_accuracy",
+    "paper_results.online_GMV_percent",
+    "quantized_method.mean_latency_ms",
+    "quantized_method.primary_intent_accuracy",
+    "quantized_method.semantic_intent_accuracy",
+    "relative.lora_semantic_accuracy_percent",
+    "relative.quantized_vs_lora_semantic_percent",
+    "relative.serialized_size_reduction_percent",
+    "training.final_loss",
+    "training.initial_loss"
+  ],
+  "mechanisms": [
+    "Qwen3-0.6B proprietary intent data and human annotations",
+    "GPT rewriting and production item retrieval",
+    "real mobile runtime, device fleet and operating-system integration"
+  ],
+  "evolve_operators": []
+}

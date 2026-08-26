@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "univa",
+  "arxiv_id": "2605.05803",
+  "title": "Unified Value Alignment for Generative Recommendation in Industrial Advertising",
+  "paper_url": "https://arxiv.org/abs/2605.05803",
+  "organization": "Tencent / WeChat Channels",
+  "published": "2026-05-07",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-advertising",
+    "commercial-sid",
+    "ppo",
+    "value-aware-serving"
+  ],
+  "local_code": "src/auto_research/reproductions/univa",
+  "documentation": "docs/reproductions/2605.05803-univa/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MiniOneRec Amazon Office_Products"
+  ],
+  "baseline": "同一 MiniOneRec Office 数据、相同 HSTU/decoder 容量、步数、随机种子和全商品目录下的 semanticsidsl（原始三级 Semantic SID + 监督学习）",
+  "metrics": [
+    "selected_relative_to_semantic_sid_percent.wndcg_at_100",
+    "test.commercial_sid_sl.wndcg_at_100",
+    "test.semantic_sid_sl.wndcg_at_100",
+    "test.univa_full.wndcg_at_100"
+  ],
+  "mechanisms": [
+    "Tencent private multimodal ads, optimization goal, ROI, industry, and bid fields",
+    "production pCTR/pCVR simulator snapshots and MCTS sampler",
+    "80M decoder, 2048-token histories, production inventory and live serving"
+  ],
+  "evolve_operators": []
+}

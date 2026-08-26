@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "hyformer",
+  "arxiv_id": "2601.12681",
+  "title": "HyFormer: Revisiting the Roles of Sequence Modeling and Feature Interaction in CTR Prediction",
+  "paper_url": "https://arxiv.org/abs/2601.12681",
+  "organization": "ByteDance / Douyin Search",
+  "published": "2026-01-19",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/hyformer",
+  "documentation": "docs/reproductions/2601.12681-hyformer/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "独立 sequence Transformer+dense MLP 的 Late Fusion",
+  "metrics": [
+    "ndcg_gain_percent",
+    "results.hyformer.hit_at_10",
+    "results.hyformer.hit_at_10_std",
+    "results.hyformer.ndcg_at_10",
+    "results.hyformer.ndcg_at_10_std",
+    "results.late_fusion.hit_at_10",
+    "results.late_fusion.hit_at_10_std",
+    "results.late_fusion.ndcg_at_10",
+    "results.late_fusion.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "HyFormer: Revisiting the Roles of Sequence Modeling and Feature Interaction in CTR Prediction"
+  ],
+  "evolve_operators": []
+}

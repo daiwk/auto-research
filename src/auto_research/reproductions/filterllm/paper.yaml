@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "filterllm",
+  "arxiv_id": "2502.16924",
+  "title": "FilterLLM: Text-To-Distribution LLM for Billion-Scale Cold-Start Recommendation",
+  "paper_url": "https://arxiv.org/abs/2502.16924",
+  "organization": "Alibaba",
+  "published": "2025-02-24",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "cold-start",
+    "retrieval",
+    "text-to-distribution"
+  ],
+  "local_code": "src/auto_research/reproductions/filterllm",
+  "documentation": "docs/reproductions/2502.16924-filterllm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "content-to-item judgment",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.mrr_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.mrr_at_10",
+    "method.ndcg_at_10",
+    "paper_results.gmv_percent",
+    "paper_results.latency_reduction_percent",
+    "paper_results.pctr_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.mrr_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "billion-user vocabulary",
+    "proprietary LLM and cold-start traffic"
+  ],
+  "evolve_operators": []
+}

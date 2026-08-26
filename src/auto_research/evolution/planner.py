@@ -5,9 +5,13 @@ import random
 
 from ..post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
 from .models import Genome, PaperInspiration
+from .compatibility import compatible_architectures
 
 
 def allowed_architectures(model: str, direction: str, papers: list[PaperInspiration]) -> list[str]:
+    def compatible(values: list[str]) -> list[str]:
+        return compatible_architectures(model, list(dict.fromkeys(values)))
+
     if model == "genrec":
         defaults = [
             "context:full", "context:longer-compressed",
@@ -21,16 +25,16 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             if paper.architecture and paper.architecture.split(":", 1)[0]
             in {"context", "head", "reward", "distillation"}
         ]
-        return list(dict.fromkeys([*mapped, *defaults]))
+        return compatible([*mapped, *defaults])
     if model == "reasoning-checkpoint":
-        return ["reasoning:1", "reasoning:2", "reasoning:4", "reasoning:8"]
+        return compatible(["reasoning:1", "reasoning:2", "reasoning:4", "reasoning:8"])
     if model == "vlm-checkpoint":
-        return [
+        return compatible([
             "checkpoint_vlm:direct",
             "checkpoint_vlm:context-first",
             "checkpoint_vlm:elimination",
             "checkpoint_vlm:no-hint",
-        ]
+        ])
     if model == "micro-vlm":
         values = [
             "micro_vlm_linear", "micro_vlm_mlp", "micro_vlm_query",
@@ -49,7 +53,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             if any(term in text for term in terms):
                 values.remove(architecture)
                 values.insert(0, architecture)
-        return values
+        return compatible(values)
     if model == "post-training":
         installed = list(POST_TRAINING_ALGORITHMS)
         mapped = [paper.architecture for paper in papers if paper.architecture in installed]
@@ -59,7 +63,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         ]
         if "reco" in direction.lower() and "reco-grpo" not in requested:
             requested.insert(0, "reco-grpo")
-        return list(dict.fromkeys([*requested, *mapped, *installed]))
+        return compatible([*requested, *mapped, *installed])
     if model == "agent":
         operators = [paper.architecture for paper in papers if paper.architecture and ":" in paper.architecture]
         operators = list(dict.fromkeys(operators))
@@ -89,8 +93,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
                 )
                 if match:
                     interleaved.append(match)
-            return list(dict.fromkeys([*requested, *interleaved, *operators]))
-        return [
+            return compatible([*requested, *interleaved, *operators])
+        return compatible([
             "memory:u-mem", "memory:legomem", "planner:react", "planner:rewoo",
             "planner:tree-of-thoughts", "planner:lats", "tool:toolformer",
             "tool:memtool", "critic:self-refine", "recovery:reflexion",
@@ -109,7 +113,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "critic:envace",
             "critic:agent-opsd", "critic:ocsd",
             "memory:vermem", "memory:coevo-mem",
-        ]
+        ])
     if model == "micro-llm":
         values = [
             "gpt_baseline", "gpt_gqa", "llama_modern", "llama_gqa",
@@ -183,7 +187,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         if any(term in text for term in ("adadsf", "adaptive depth", "动态深度", "深度稀疏")):
             values.remove("adadsf")
             values.insert(0, "adadsf")
-        return values
+        return compatible(values)
     text = direction.lower()
     requested = []
     if "longer" in text or "长序列" in text or "long sequence" in text:
@@ -198,7 +202,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         if "longer" in requested: values.append("hyformer_longer")
         if "unimixer" in requested: values.append("hyformer_unimixer")
         if set(requested) >= {"longer", "unimixer"}: values.append("hyformer_longer_unimixer")
-        return values
+        return compatible(values)
     values = ["rankmixer_dense"]
     if "longer" in requested: values.append("rankmixer_longer")
     if "unimixer" in requested: values.append("rankmixer_unimixer")
@@ -233,7 +237,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         and (not text or p.architecture.replace("_", "") in text.replace("-", "").replace("_", "") or p.title.lower().split(":", 1)[0] in text)
     }
     values.extend(mapping.values())
-    return list(dict.fromkeys(values))
+    return compatible(values)
 
 
 def propose(parent: Genome, generation: int, index: int, architectures: list[str], rng: random.Random, model: str = "rankmixer"):

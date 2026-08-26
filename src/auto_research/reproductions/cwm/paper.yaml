@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "cwm",
+  "arxiv_id": "2406.07932",
+  "title": "Counteracting Duration Bias in Video Recommendation via Counterfactual Watch Time",
+  "paper_url": "https://arxiv.org/abs/2406.07932",
+  "organization": "Kuaishou Technology / Renmin University of China",
+  "published": "2024-06-12",
+  "upstream_code": "https://github.com/hyz20/CWM",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "counterfactual-learning",
+    "watch-time",
+    "bias"
+  ],
+  "local_code": "src/auto_research/reproductions/cwm",
+  "documentation": "docs/reproductions/2406.07932-cwm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 cwm 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.ctr_percent",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.cost_transform_to_interest",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "true video duration/watch-time censoring logs",
+    "production survival model"
+  ],
+  "evolve_operators": []
+}

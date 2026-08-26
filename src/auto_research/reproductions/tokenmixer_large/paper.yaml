@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "tokenmixer-large",
+  "arxiv_id": "2602.06563",
+  "title": "TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders",
+  "paper_url": "https://arxiv.org/abs/2602.06563",
+  "organization": "ByteDance",
+  "published": "2026-02-06",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "token-mixing",
+    "scaling"
+  ],
+  "local_code": "src/auto_research/reproductions/tokenmixer_large",
+  "documentation": "docs/reproductions/2602.06563-tokenmixer-large/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K (932 users / 1682 items)"
+  ],
+  "baseline": "同协议 RankMixer dense，实验组为 TokenMixer-Large",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "baseline.parameters",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "method.parameters",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private trillion-scale training data",
+    "production fused kernels"
+  ],
+  "evolve_operators": []
+}

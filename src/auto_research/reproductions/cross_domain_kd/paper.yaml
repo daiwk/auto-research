@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "cross-domain-kd",
+  "arxiv_id": "2603.28994",
+  "title": "Zero-shot Cross-domain Knowledge Distillation: A Case study on YouTube Music",
+  "paper_url": "https://arxiv.org/abs/2603.28994",
+  "organization": "Google / YouTube",
+  "published": "2026-03-30",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "distillation",
+    "cross-domain",
+    "ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/cross_domain_kd",
+  "documentation": "docs/reproductions/2603.28994-cross-domain-kd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K source/target domains"
+  ],
+  "baseline": "在相同 target split 上训练的 DIN，实验组 KD student 的 NDCG@10 相对 DIN -68.46%",
+  "metrics": [
+    "results.din.hit_at_10",
+    "results.din.ndcg_at_10",
+    "results.ndcg_ablation_percent",
+    "results.ndcg_vs_din_percent",
+    "results.target_only.hit_at_10",
+    "results.target_only.ndcg_at_10",
+    "results.zero_shot_kd.hit_at_10",
+    "results.zero_shot_kd.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "private YouTube teacher and YouTube Music feature/task schemas"
+  ],
+  "evolve_operators": []
+}

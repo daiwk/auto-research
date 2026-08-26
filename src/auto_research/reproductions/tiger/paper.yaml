@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "tiger",
+  "arxiv_id": "2305.05065",
+  "title": "Recommender Systems with Generative Retrieval",
+  "paper_url": "https://arxiv.org/abs/2305.05065",
+  "organization": "Google / Google DeepMind",
+  "published": "2023-05-08",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/tiger",
+  "documentation": "docs/reproductions/2305.05065-tiger/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K genre content"
+  ],
+  "baseline": "词表容量和参数量匹配的随机分层 ID 生成器",
+  "metrics": [
+    "ndcg_gain_percent",
+    "random_id.hit_at_10",
+    "random_id.hit_at_10_std",
+    "random_id.ndcg_at_10",
+    "random_id.ndcg_at_10_std",
+    "rqvae.final_loss",
+    "rqvae.initial_loss",
+    "tiger.hit_at_10",
+    "tiger.hit_at_10_std",
+    "tiger.ndcg_at_10",
+    "tiger.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "Sentence-T5 item encoder",
+    "hashed user token",
+    "cold-start epsilon mixing"
+  ],
+  "evolve_operators": []
+}

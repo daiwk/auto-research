@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "hilp",
+  "arxiv_id": "2608.05806",
+  "title": "Hierarchical Latent Prediction for Language Models",
+  "paper_url": "https://arxiv.org/abs/2608.05806",
+  "organization": "University of Texas at Austin",
+  "published": "2026-08-06",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "pretraining",
+    "latent-prediction",
+    "multi-token-prediction",
+    "speculative-decoding"
+  ],
+  "local_code": "src/auto_research/reproductions/hilp",
+  "documentation": "docs/reproductions/2608.05806-hilp/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic public-style mini-suite"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "hilp.reported_objective"
+  ],
+  "mechanisms": [
+    "large-scale language model pretraining",
+    "paper speculative decoder"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "guess-where-you-go",
+  "arxiv_id": "2607.26073",
+  "title": "Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap",
+  "paper_url": "https://arxiv.org/abs/2607.26073",
+  "organization": "Amap / Alibaba",
+  "published": "2026-07-13",
+  "upstream_code": "https://github.com/alibaba/SimCIT",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "next-poi",
+    "semantic-id",
+    "reinforcement-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/guess_where_you_go",
+  "documentation": "docs/reproductions/2607.26073-guess-where-you-go/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

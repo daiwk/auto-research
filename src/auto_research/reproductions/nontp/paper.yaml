@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "nontp",
+  "arxiv_id": "2607.12277",
+  "title": "Not Only NTP: Extending Training Signal Coverage for Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.12277",
+  "organization": "Meituan",
+  "published": "2026-07-14",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "contrastive-learning",
+    "multi-domain"
+  ],
+  "local_code": "src/auto_research/reproductions/nontp",
+  "documentation": "docs/reproductions/2607.12277-nontp/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K chronological leave-two-out; primary genre domain"
+  ],
+  "baseline": "相同 causal backbone、相同初始化和训练预算的 ntp",
+  "metrics": [
+    "relative_nontp_vs_ntp_percent.hit_at_10",
+    "relative_nontp_vs_ntp_percent.ndcg_at_10",
+    "results.nontp.hit_at_10",
+    "results.nontp.hit_at_10_std",
+    "results.nontp.ndcg_at_10",
+    "results.nontp.ndcg_at_10_std",
+    "results.ntp.hit_at_10",
+    "results.ntp.hit_at_10_std",
+    "results.ntp.ndcg_at_10",
+    "results.ntp.ndcg_at_10_std",
+    "results.tcl.hit_at_10",
+    "results.tcl.hit_at_10_std",
+    "results.tcl.ndcg_at_10",
+    "results.tcl.ndcg_at_10_std",
+    "results.tdl.hit_at_10",
+    "results.tdl.hit_at_10_std",
+    "results.tdl.ndcg_at_10",
+    "results.tdl.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "HSTU backbone and 3.2M-item Amazon Movie-Book-CDs preprocessing",
+    "38.3M-user Meituan multi-business logs and full-ranking serving stack"
+  ],
+  "evolve_operators": []
+}

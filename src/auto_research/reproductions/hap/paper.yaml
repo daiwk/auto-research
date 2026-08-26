@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "key": "hap",
+  "arxiv_id": "2603.03770",
+  "title": "Not All Candidates are Created Equal: Heterogeneity-Aware Pre-ranking",
+  "paper_url": "https://arxiv.org/abs/2603.03770",
+  "organization": "ByteDance / Toutiao",
+  "published": "2026-03-04",
+  "upstream_code": "https://github.com/Toutiao-Rec/HAP",
+  "track": "recommendation",
+  "topics": [
+    "pre-ranking",
+    "contrastive-learning",
+    "dynamic-routing"
+  ],
+  "local_code": "src/auto_research/reproductions/hap",
+  "documentation": "docs/reproductions/2603.03770-hap/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 hap 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Toutiao private candidates",
+    "heterogeneous production model fleet"
+  ],
+  "evolve_operators": []
+}

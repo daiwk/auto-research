@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "key": "youtube-freshness",
+  "arxiv_id": "2607.23749",
+  "title": "Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music",
+  "paper_url": "https://arxiv.org/abs/2607.23749",
+  "organization": "YouTube Music / Google",
+  "published": "2026-07-26",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "feedback-loop",
+    "freshness",
+    "exploration"
+  ],
+  "local_code": "src/auto_research/reproductions/youtube_freshness",
+  "documentation": "docs/reproductions/2607.23749-youtube-freshness/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "popularity-biased continuous ranker，实验组为四机制组合",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.architecture_bias_tower_removed_at_serving",
+    "stages.validation_only_model_selection.fresh_hit_at_10",
+    "stages.validation_only_model_selection.hit_at_10",
+    "stages.validation_only_model_selection.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "continuous YouTube training loop",
+    "production SNGP ranker"
+  ],
+  "evolve_operators": []
+}

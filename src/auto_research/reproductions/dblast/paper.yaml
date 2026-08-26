@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "dblast",
+  "arxiv_id": "2608.05448",
+  "title": "DBLast: Dependent Block Drafting for Stochastic Speculative Decoding",
+  "paper_url": "https://arxiv.org/abs/2608.05448",
+  "organization": "Huawei Technologies Canada",
+  "published": "2026-08-05",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "speculative-decoding",
+    "inference-efficiency",
+    "stochastic-decoding"
+  ],
+  "local_code": "src/auto_research/reproductions/dblast",
+  "documentation": "docs/reproductions/2608.05448-dblast/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic public-style mini-suite"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "dblast.reported_objective"
+  ],
+  "mechanisms": [
+    "Qwen3 checkpoints",
+    "GPU block-drafter kernels"
+  ],
+  "evolve_operators": []
+}

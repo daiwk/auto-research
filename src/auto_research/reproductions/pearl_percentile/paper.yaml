@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "pearl-percentile",
+  "arxiv_id": "2605.21752",
+  "title": "PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation",
+  "paper_url": "https://arxiv.org/abs/2605.21752",
+  "organization": "TikTok",
+  "published": "2026-05-20",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "contrastive-learning",
+    "debiasing"
+  ],
+  "local_code": "src/auto_research/reproductions/pearl_percentile",
+  "documentation": "docs/reproductions/2605.21752-pearl-percentile/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

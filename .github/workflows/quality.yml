@@ -41,6 +41,8 @@ jobs:
       - run: python -m compileall -q src tests scripts
       - run: ruff check src tests scripts
       - run: python -m pytest
+      - run: python scripts/manage_paper_specs.py check
+      - run: python scripts/manage_paper_specs.py validate
       - run: python scripts/generate_research_manifest.py
       - run: python scripts/generate_research_catalogs.py
       - run: git diff --exit-code -- docs/research-manifest.json docs/post-training docs/agent-research docs/foundation-models docs/reproductions/catalog

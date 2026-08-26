@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "windowed-mtp",
+  "arxiv_id": "2607.21535",
+  "title": "Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context",
+  "paper_url": "https://arxiv.org/abs/2607.21535",
+  "organization": "NVIDIA",
+  "published": "2026-07-23",
+  "upstream_code": "https://github.com/avalliappan-nvidia/windowed-mtp-b200",
+  "track": "llm",
+  "topics": [
+    "llm-serving",
+    "speculative-decoding",
+    "kv-cache",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/windowed_mtp",
+  "documentation": "docs/reproductions/2607.21535-windowed-mtp/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "读取完整历史的同权重 MTP draft",
+  "metrics": [
+    "context_16384.latency_reduction_percent",
+    "target_perplexity"
+  ],
+  "mechanisms": [
+    "Qwen3.6-35B/122B and Nemotron-3-120B checkpoints",
+    "one-million-token contexts on B200/H100",
+    "SGLang paged-KV ring-buffer kernel and continuous batching"
+  ],
+  "evolve_operators": []
+}

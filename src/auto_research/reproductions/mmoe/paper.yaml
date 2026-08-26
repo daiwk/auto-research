@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "key": "mmoe",
+  "arxiv_id": "kdd2018-mmoe",
+  "title": "Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts",
+  "paper_url": "https://research.google/pubs/modeling-task-relationships-in-multi-task-learning-with-multi-gate-mixture-of-experts/",
+  "organization": "Google",
+  "published": "2018-08-19",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "classic",
+    "multi-task",
+    "mixture-of-experts"
+  ],
+  "local_code": "src/auto_research/reproductions/mmoe",
+  "documentation": "docs/reproductions/kdd2018-mmoe-mmoe/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K entire-space multitask construction"
+  ],
+  "baseline": "shared-bottom 双任务网络，实验组为每任务独立 gate 的共享 experts",
+  "metrics": [
+    "baseline.click_auc",
+    "baseline.click_auc_std",
+    "baseline.click_logloss",
+    "baseline.click_logloss_std",
+    "baseline.conversion_auc",
+    "baseline.conversion_auc_std",
+    "baseline.conversion_logloss",
+    "baseline.conversion_logloss_std",
+    "baseline.mean_auc",
+    "baseline.mean_auc_std",
+    "method.click_auc",
+    "method.click_auc_std",
+    "method.click_logloss",
+    "method.click_logloss_std",
+    "method.conversion_auc",
+    "method.conversion_auc_std",
+    "method.conversion_logloss",
+    "method.conversion_logloss_std",
+    "method.mean_auc",
+    "method.mean_auc_std",
+    "relative.conversion_auc_percent",
+    "relative.mean_auc_percent"
+  ],
+  "mechanisms": [
+    "Google private recommendation tasks and production features"
+  ],
+  "evolve_operators": []
+}

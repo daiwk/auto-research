@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "key": "sessionrec",
+  "arxiv_id": "2502.10157",
+  "title": "SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation",
+  "paper_url": "https://arxiv.org/abs/2502.10157",
+  "organization": "Meituan",
+  "published": "2025-02-14",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "session recommendation",
+    "generative retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/sessionrec",
+  "documentation": "docs/reproductions/2502.10157-sessionrec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "KuaiRand-Pure standard exposure log"
+  ],
+  "baseline": "等预算的扁平 Item Transformer",
+  "metrics": [
+    "aggregate.item_transformer.ndcg_at_20_mean",
+    "aggregate.item_transformer.ndcg_at_20_std",
+    "aggregate.item_transformer.recall_at_20_mean",
+    "aggregate.item_transformer.recall_at_20_std",
+    "aggregate.sessionrec_ndcg_relative_percent",
+    "aggregate.sessionrec_transformer.ndcg_at_20_mean",
+    "aggregate.sessionrec_transformer.ndcg_at_20_std",
+    "aggregate.sessionrec_transformer.recall_at_20_mean",
+    "aggregate.sessionrec_transformer.recall_at_20_std",
+    "per_seed.42.item_transformer_ndcg_at_20",
+    "per_seed.42.sessionrec_ndcg_at_20",
+    "per_seed.43.item_transformer_ndcg_at_20",
+    "per_seed.43.sessionrec_ndcg_at_20",
+    "per_seed.44.item_transformer_ndcg_at_20",
+    "per_seed.44.sessionrec_ndcg_at_20"
+  ],
+  "mechanisms": [
+    "Meituan production features",
+    "ANN serving"
+  ],
+  "evolve_operators": []
+}

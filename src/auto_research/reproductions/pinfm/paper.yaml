@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "pinfm",
+  "arxiv_id": "2507.12704",
+  "title": "PinFM: Foundation Model for User Activity Sequences at a Billion-scale Visual Discovery Platform",
+  "paper_url": "https://arxiv.org/abs/2507.12704",
+  "organization": "Pinterest",
+  "published": "2025-07-17",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/pinfm",
+  "documentation": "docs/reproductions/2507.12704-pinfm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "scratch DCAT",
+  "metrics": [
+    "test.pinfm.hit_at_10",
+    "test.pinfm.hit_at_10_std",
+    "test.pinfm.ndcg_at_10",
+    "test.pinfm.ndcg_at_10_std",
+    "test.scratch_dcat.hit_at_10",
+    "test.scratch_dcat.hit_at_10_std",
+    "test.scratch_dcat.ndcg_at_10",
+    "test.scratch_dcat.ndcg_at_10_std",
+    "test_ndcg_gain_percent",
+    "validation.ndcg_gain_percent",
+    "validation.pinfm.ndcg_at_10",
+    "validation.pinfm.ndcg_at_10_std",
+    "validation.scratch_dcat.ndcg_at_10",
+    "validation.scratch_dcat.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "Pinterest multi-action and multi-surface pretraining corpus",
+    "fresh-item age-dependent dropout",
+    "int4 embedding and Triton DCAT serving kernels"
+  ],
+  "evolve_operators": []
+}

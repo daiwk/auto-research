@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "awq",
+  "arxiv_id": "2306.00978",
+  "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+  "paper_url": "https://arxiv.org/abs/2306.00978",
+  "organization": "MIT / NVIDIA / Harvard / SJTU",
+  "published": "2023-06-01",
+  "upstream_code": "https://github.com/mit-han-lab/llm-awq",
+  "track": "llm",
+  "topics": [
+    "inference-serving",
+    "quantization"
+  ],
+  "local_code": "src/auto_research/reproductions/awq",
+  "documentation": "docs/reproductions/2306.00978-awq/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2 activation calibration"
+  ],
+  "baseline": "round-to-nearest W4，实验组为 activation-aware equivalent scaling W4，只改变论文核心机制",
+  "metrics": [
+    "baseline.output_mse",
+    "method.output_mse",
+    "relative.output_mse_percent"
+  ],
+  "mechanisms": [
+    "70B model",
+    "TinyChat kernels"
+  ],
+  "evolve_operators": []
+}

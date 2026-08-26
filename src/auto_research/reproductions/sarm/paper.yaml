@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "sarm",
+  "arxiv_id": "2602.09401",
+  "title": "SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking",
+  "paper_url": "https://arxiv.org/abs/2602.09401",
+  "organization": "Institute of Information Engineering, CAS / Kuaishou",
+  "published": "2026-02-10",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "live-streaming",
+    "semantic-anchor",
+    "multimodal-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/sarm",
+  "documentation": "docs/reproductions/2602.09401-sarm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

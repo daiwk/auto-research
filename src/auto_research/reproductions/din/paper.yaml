@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "din",
+  "arxiv_id": "1706.06978",
+  "title": "Deep Interest Network for Click-Through Rate Prediction",
+  "paper_url": "https://arxiv.org/abs/1706.06978",
+  "organization": "Alibaba",
+  "published": "2017-06-21",
+  "upstream_code": "https://github.com/zhougr1993/DeepInterestNetwork",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/din",
+  "documentation": "docs/reproductions/1706.06978-din/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "移除 candidate-aware attention、改用 mean pooling 的同参数模型",
+  "metrics": [
+    "din.hit_at_10",
+    "din.hit_at_10_std",
+    "din.ndcg_at_10",
+    "din.ndcg_at_10_std",
+    "mean_pool.hit_at_10",
+    "mean_pool.hit_at_10_std",
+    "mean_pool.ndcg_at_10",
+    "mean_pool.ndcg_at_10_std",
+    "ndcg_gain_percent"
+  ],
+  "mechanisms": [
+    "mini-batch-aware regularization",
+    "Alibaba production sparse features"
+  ],
+  "evolve_operators": []
+}

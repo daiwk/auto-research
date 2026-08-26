@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "onetrans",
+  "arxiv_id": "2510.26104",
+  "title": "OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer in Industrial Recommender",
+  "paper_url": "https://arxiv.org/abs/2510.26104",
+  "organization": "ByteDance",
+  "published": "2025-10-30",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/onetrans",
+  "documentation": "docs/reproductions/2510.26104-onetrans/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "独立 sequence encoder 后与 candidate 交互的 Encode-then-Interact",
+  "metrics": [
+    "ndcg_gain_percent",
+    "results.encode_then_interact.hit_at_10",
+    "results.encode_then_interact.hit_at_10_std",
+    "results.encode_then_interact.ndcg_at_10",
+    "results.encode_then_interact.ndcg_at_10_std",
+    "results.onetrans.hit_at_10",
+    "results.onetrans.hit_at_10_std",
+    "results.onetrans.ndcg_at_10",
+    "results.onetrans.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "OneTrans: Unified Feature Interaction and Sequence Modeling with One Transformer in Industrial Recommender"
+  ],
+  "evolve_operators": []
+}

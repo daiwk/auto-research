@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "cadet",
+  "arxiv_id": "2602.11410",
+  "title": "CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer",
+  "paper_url": "https://arxiv.org/abs/2602.11410",
+  "organization": "LinkedIn",
+  "published": "2026-02-11",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "ctr-prediction",
+    "decoder-only-transformer"
+  ],
+  "local_code": "src/auto_research/reproductions/cadet",
+  "documentation": "docs/reproductions/2602.11410-cadet/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "llava",
+  "arxiv_id": "2304.08485",
+  "title": "Visual Instruction Tuning",
+  "paper_url": "https://arxiv.org/abs/2304.08485",
+  "organization": "University of Wisconsin-Madison / Microsoft Research / Columbia University",
+  "published": "2023-04-17",
+  "upstream_code": "https://github.com/haotian-liu/LLaVA",
+  "track": "llm",
+  "topics": [
+    "multimodal",
+    "instruction-tuning"
+  ],
+  "local_code": "src/auto_research/reproductions/llava",
+  "documentation": "docs/reproductions/2304.08485-llava/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Fashion-MNIST object QA"
+  ],
+  "baseline": "linear mean-pooled connector",
+  "metrics": [
+    "test_accuracy",
+    "visual_dependency_delta"
+  ],
+  "mechanisms": [
+    "GPT-4 generated instructions",
+    "LLaMA-scale decoder"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "mdcns",
+  "arxiv_id": "2605.19651",
+  "title": "Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation",
+  "paper_url": "https://arxiv.org/abs/2605.19651",
+  "organization": "论文作者团队（原文未标注公司）",
+  "published": "2026-05-19",
+  "upstream_code": "https://github.com/Lyz103/SIGIR26-MDCNS",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/mdcns",
+  "documentation": "docs/reproductions/2605.19651-mdcns/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Amazon Beauty 5-core authors' split"
+  ],
+  "baseline": "Uniform negative sampling，辅助基线是 DNS",
+  "metrics": [
+    "ndcg_gain_vs_uniform_percent",
+    "results.dns.hit_at_10",
+    "results.dns.ndcg_at_10",
+    "results.mdcns.hit_at_10",
+    "results.mdcns.ndcg_at_10",
+    "results.uniform.hit_at_10",
+    "results.uniform.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation"
+  ],
+  "evolve_operators": []
+}

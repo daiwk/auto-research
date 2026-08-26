@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "rocs",
+  "arxiv_id": "2607.27744",
+  "title": "ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.27744",
+  "organization": "Meta AI",
+  "published": "2026-07-30",
+  "upstream_code": "https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "ranking",
+    "serving",
+    "compute-sharing"
+  ],
+  "local_code": "src/auto_research/reproductions/rocs",
+  "documentation": "docs/reproductions/2607.27744-rocs/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M (240 users / 400 items)"
+  ],
+  "baseline": "逐候选重复编码",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative_ndcg_percent"
+  ],
+  "mechanisms": [
+    "production GLM masking stack",
+    "IKBO GPU kernel benchmark",
+    "Meta private logs"
+  ],
+  "evolve_operators": []
+}

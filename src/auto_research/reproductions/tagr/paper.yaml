@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "tagr",
+  "arxiv_id": "2608.24034",
+  "title": "TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising",
+  "paper_url": "https://arxiv.org/abs/2608.24034",
+  "organization": "Kuaishou Technology",
+  "published": "2026-08-25",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-26）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "live-streaming-advertising",
+    "semantic-id",
+    "online-rl"
+  ],
+  "local_code": "src/auto_research/reproductions/tagr",
+  "documentation": "docs/reproductions/2608.24034-tagr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "production-style first-order transition recommender",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "head share@10"
+  ],
+  "mechanisms": [
+    "Kuaishou private live-ad logs",
+    "online reward model and GRPO training",
+    "real-time LSID and serving engine"
+  ],
+  "evolve_operators": []
+}

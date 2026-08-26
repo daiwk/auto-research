@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "hrpo",
+  "arxiv_id": "2608.00750",
+  "title": "Hierarchical Residual Policy Optimization for Generative Recommendations",
+  "paper_url": "https://arxiv.org/abs/2608.00750",
+  "organization": "City University of Hong Kong / Kuaishou",
+  "published": "2026-08-01",
+  "upstream_code": "https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "reinforcement-learning",
+    "semantic-id",
+    "credit-assignment"
+  ],
+  "local_code": "src/auto_research/reproductions/hrpo",
+  "documentation": "docs/reproductions/2608.00750-hrpo/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "paper_results.fiction_target_cost_percent",
+    "paper_results.mini_game_target_cost_percent",
+    "paper_results.short_drama_target_cost_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "variants.hrpo residual-return policy.hit_at_10",
+    "variants.hrpo residual-return policy.ndcg_at_10",
+    "variants.sid sft.hit_at_10",
+    "variants.sid sft.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Kuaishou private advertising logs",
+    "production SID policy and periodic deployment"
+  ],
+  "evolve_operators": []
+}

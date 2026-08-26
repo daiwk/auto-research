@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "switch-attention",
+  "arxiv_id": "2603.26380",
+  "title": "Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers",
+  "paper_url": "https://arxiv.org/abs/2603.26380",
+  "organization": "Peking University / Huawei Technologies",
+  "published": "2026-03-27",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "efficient-attention",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/switch_attention",
+  "documentation": "docs/reproductions/2603.26380-switch-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "full-attention tiny Transformer",
+  "metrics": [
+    "baseline.perplexity",
+    "method.perplexity"
+  ],
+  "mechanisms": [
+    "32K continual pretraining",
+    "branch-selective fused decode kernel"
+  ],
+  "evolve_operators": []
+}

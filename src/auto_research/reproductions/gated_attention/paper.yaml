@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "gated-attention",
+  "arxiv_id": "2505.06708",
+  "title": "Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free",
+  "paper_url": "https://arxiv.org/abs/2505.06708",
+  "organization": "Qwen / Alibaba",
+  "published": "2025-05-10",
+  "upstream_code": "https://github.com/qiuzh20/gated_attention",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "attention-gating",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/gated_attention",
+  "documentation": "docs/reproductions/2505.06708-gated-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 llamamodern",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.lm_loss",
+    "method.output_gate_below_0_5",
+    "method.output_gate_mean",
+    "method.parameters",
+    "method.perplexity",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "15B-parameter scaling experiments",
+    "large-scale learning-rate stability sweep",
+    "full long-context benchmark matrix"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "key": "msd",
+  "arxiv_id": "2412.06860",
+  "title": "Balancing Efficiency and Effectiveness: An LLM-Infused Approach for Optimized CTR Prediction",
+  "paper_url": "https://arxiv.org/abs/2412.06860",
+  "organization": "Meituan",
+  "published": "2024-12-09",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "LLM distillation",
+    "CTR",
+    "serving efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/msd",
+  "documentation": "docs/reproductions/2412.06860-msd/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-100K title/genre CTR"
+  ],
+  "baseline": "ID-only CTR ranker",
+  "metrics": [
+    "aggregate.id_auc_mean",
+    "aggregate.id_auc_std",
+    "aggregate.msd_auc_mean",
+    "aggregate.msd_auc_std",
+    "per_seed.42.distill_loss_final",
+    "per_seed.42.distill_loss_initial",
+    "per_seed.42.id_auc",
+    "per_seed.42.msd_auc",
+    "per_seed.43.distill_loss_final",
+    "per_seed.43.distill_loss_initial",
+    "per_seed.43.id_auc",
+    "per_seed.43.msd_auc",
+    "per_seed.44.distill_loss_final",
+    "per_seed.44.distill_loss_initial",
+    "per_seed.44.id_auc",
+    "per_seed.44.msd_auc"
+  ],
+  "mechanisms": [
+    "proprietary ad features",
+    "production cache service"
+  ],
+  "evolve_operators": []
+}

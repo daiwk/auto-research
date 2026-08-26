@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "onemodel",
+  "arxiv_id": "2608.18606",
+  "title": "OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking",
+  "paper_url": "https://arxiv.org/abs/2608.18606",
+  "organization": "Xiaohongshu",
+  "published": "2026-08-19",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "multi-scenario",
+    "foundation-model",
+    "long-sequence"
+  ],
+  "local_code": "src/auto_research/reproductions/onemodel",
+  "documentation": "docs/reproductions/2608.18606-onemodel/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "shared global sequential ranker",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "head share@10"
+  ],
+  "mechanisms": [
+    "Xiaohongshu private multi-stream logs",
+    "production unified decoder and serving stack"
+  ],
+  "evolve_operators": []
+}

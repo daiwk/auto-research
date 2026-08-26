@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "cs3",
+  "arxiv_id": "2604.19269",
+  "title": "CS3: Efficient Online Capability Synergy for Two-Tower Recommendation",
+  "paper_url": "https://arxiv.org/abs/2604.19269",
+  "organization": "Kuaishou Technology",
+  "published": "2026-04-21",
+  "upstream_code": "https://github.com/lixiangwang/CS3Rec",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "two-tower",
+    "online-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/cs3",
+  "documentation": "docs/reproductions/2604.19269-cs3/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K compact"
+  ],
+  "baseline": "matched two-tower",
+  "metrics": [
+    "baseline.ndcg_at_10",
+    "method.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "400M-DAU online feature cache",
+    "production EMA cross vectors and QPS stack"
+  ],
+  "evolve_operators": []
+}

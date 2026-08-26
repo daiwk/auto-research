@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "key": "blt",
+  "arxiv_id": "2412.09871",
+  "title": "Byte Latent Transformer: Patches Scale Better Than Tokens",
+  "paper_url": "https://arxiv.org/abs/2412.09871",
+  "organization": "Meta FAIR",
+  "published": "2024-12-13",
+  "upstream_code": "https://github.com/facebookresearch/blt",
+  "track": "llm",
+  "topics": [
+    "tokenizer-free",
+    "byte-model",
+    "dynamic-patching",
+    "architecture"
+  ],
+  "local_code": "src/auto_research/reproductions/blt",
+  "documentation": "docs/reproductions/2412.09871-blt/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 llamamodern，实验组为 blt",
+  "metrics": [
+    "baseline.composite_loss",
+    "baseline.final_loss",
+    "baseline.fitness",
+    "baseline.initial_loss",
+    "baseline.instruction_loss",
+    "baseline.lm_loss",
+    "baseline.muon_orthogonality_error",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "baseline.post_training_loss",
+    "baseline.primary",
+    "baseline.public_composite",
+    "baseline.reward_bearing_group_rate",
+    "method.architecture_stats.expanded_back_to_byte_targets",
+    "method.architecture_stats.observed_patch_boundary_rate",
+    "method.composite_loss",
+    "method.final_loss",
+    "method.fitness",
+    "method.initial_loss",
+    "method.instruction_loss",
+    "method.lm_loss",
+    "method.muon_orthogonality_error",
+    "method.parameters",
+    "method.perplexity",
+    "method.post_training_loss",
+    "method.primary",
+    "method.public_composite",
+    "method.reward_bearing_group_rate",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "raw-byte 8B pretraining",
+    "full local byte encoder/decoder"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "sigma",
+  "arxiv_id": "2602.22913",
+  "title": "SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress",
+  "paper_url": "https://arxiv.org/abs/2602.22913",
+  "organization": "Alibaba / AliExpress",
+  "published": "2026-02-26",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "multi-task-sft",
+    "hybrid-token",
+    "semantic-grounding"
+  ],
+  "local_code": "src/auto_research/reproductions/sigma",
+  "documentation": "docs/reproductions/2602.22913-sigma/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MiniOneRec Office"
+  ],
+  "baseline": "同一 grounded SmolLM、相同七任务 SFT 与 fused item vectors 下的 idonly item head",
+  "metrics": [
+    "selected_relative_to_id_only_percent.ndcg_at_10",
+    "test.apf.ndcg_at_10",
+    "test.id_only.ndcg_at_10",
+    "test.top1_prefix.ndcg_at_10",
+    "training.grounding_final_loss",
+    "training.grounding_initial_loss",
+    "training.sft_final_loss",
+    "training.sft_initial_loss"
+  ],
+  "mechanisms": [
+    "Qwen3-0.6B/4B scale and 280M private grounding/SFT pairs",
+    "AliExpress query, image, festival, trend, demographic and online ranking features",
+    "minute-level KV-cache inference and production U2I index serving"
+  ],
+  "evolve_operators": []
+}

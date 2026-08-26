@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "longer",
+  "arxiv_id": "2505.04421",
+  "title": "LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders",
+  "paper_url": "https://arxiv.org/abs/2505.04421",
+  "organization": "ByteDance / Douyin",
+  "published": "2025-05-07",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [],
+  "local_code": "src/auto_research/reproductions/longer",
+  "documentation": "docs/reproductions/2505.04421-longer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "recent sequence transformer",
+  "metrics": [
+    "relative_ndcg_change_percent",
+    "results.longer_hybrid_attention.hit_at_10",
+    "results.longer_hybrid_attention.hit_at_10_std",
+    "results.longer_hybrid_attention.ndcg_at_10",
+    "results.longer_hybrid_attention.ndcg_at_10_std",
+    "results.recent_sequence_transformer.hit_at_10",
+    "results.recent_sequence_transformer.hit_at_10_std",
+    "results.recent_sequence_transformer.ndcg_at_10",
+    "results.recent_sequence_transformer.ndcg_at_10_std"
+  ],
+  "mechanisms": [
+    "private Douyin features",
+    "distributed training and production serving"
+  ],
+  "evolve_operators": []
+}

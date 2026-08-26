@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "key": "asarl",
+  "arxiv_id": "2607.26593",
+  "title": "ASARL: Autonomous Social-Aware Relevance Learning for QQ Search",
+  "paper_url": "https://arxiv.org/abs/2607.26593",
+  "organization": "Tencent PCG",
+  "published": "2026-07-29",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "search-relevance",
+    "multi-agent-data-curation",
+    "knowledge-distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/asarl",
+  "documentation": "docs/reproductions/2607.26593-asarl/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "matched control without the asarl mechanism",
+  "metrics": [
+    "paper_results.channel_ctr_lift_percent",
+    "paper_results.group_ctr_lift_percent",
+    "relative.curated_examples_percent",
+    "relative.final_loss_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.initial_loss_percent",
+    "relative.ndcg_at_10_percent",
+    "relative.parameters_percent",
+    "relative.reason_critic_rounds_percent",
+    "relative.social_distillation_percent",
+    "variants.ASARL distilled.final_loss",
+    "variants.ASARL distilled.hit_at_10",
+    "variants.ASARL distilled.initial_loss",
+    "variants.ASARL distilled.ndcg_at_10",
+    "variants.online student.final_loss",
+    "variants.online student.hit_at_10",
+    "variants.online student.initial_loss",
+    "variants.online student.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "QQ private social-search logs",
+    "production LLM annotation agents",
+    "online RoBERTa deployment"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "key": "msn",
+  "arxiv_id": "2602.07526",
+  "title": "MSN: A Memory-based Sparse Activation Scaling Framework for Large-scale Industrial Recommendation",
+  "paper_url": "https://arxiv.org/abs/2602.07526",
+  "organization": "ByteDance / Douyin Search",
+  "published": "2026-02-07",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "search-ranking",
+    "sparse-memory",
+    "product-key-memory"
+  ],
+  "local_code": "src/auto_research/reproductions/msn",
+  "documentation": "docs/reproductions/2602.07526-msn/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (260 users / 420 items)"
+  ],
+  "baseline": "dense transition/content ranker，实验组为 gated top-k PKM",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "memory.active_slots_per_request",
+    "memory.occupied_slots",
+    "memory.slots",
+    "method.fresh_hit_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private search logs",
+    "production sparse-memory kernel"
+  ],
+  "evolve_operators": []
+}

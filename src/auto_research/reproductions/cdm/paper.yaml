@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "key": "cdm",
+  "arxiv_id": "2406.09021",
+  "title": "Contextual Distillation Model for Diversified Recommendation",
+  "paper_url": "https://arxiv.org/abs/2406.09021",
+  "organization": "Kuaishou Technology",
+  "published": "2024-06-13",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "diversity",
+    "knowledge-distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/cdm",
+  "documentation": "docs/reproductions/2406.09021-cdm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 cdm 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "private short-video features",
+    "production MMR teacher traffic"
+  ],
+  "evolve_operators": []
+}

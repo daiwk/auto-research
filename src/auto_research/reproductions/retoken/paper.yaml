@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "key": "retoken",
+  "arxiv_id": "2607.28627",
+  "title": "ReToken: One Token to Improve Vision–Language Models for Visual Retrieval",
+  "paper_url": "https://arxiv.org/abs/2607.28627",
+  "organization": "UIUC / Microsoft Research / Google DeepMind",
+  "published": "2026-07-30",
+  "upstream_code": "https://github.com/avaxiao/ReToken",
+  "track": "llm",
+  "topics": [
+    "vision-language-model",
+    "visual-retrieval",
+    "kv-cache",
+    "sparse-attention"
+  ],
+  "local_code": "src/auto_research/reproductions/retoken",
+  "documentation": "docs/reproductions/2607.28627-retoken/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 dense LLaMA，实验组为 ReToken value-cache Top-K",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.causal_cache_keep_rate",
+    "method.lm_loss",
+    "method.parameters",
+    "method.perplexity",
+    "method.retrieval_target_tokens",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "frozen billion-parameter VLM",
+    "MIRAGE multi-image QA supervision",
+    "long-video visual KV cache"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "gaugequant",
+  "arxiv_id": "2607.20757",
+  "title": "GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries",
+  "paper_url": "https://arxiv.org/abs/2607.20757",
+  "organization": "University of Cambridge",
+  "published": "2026-07-22",
+  "upstream_code": "https://github.com/MPedraBento/gauge-quant",
+  "track": "llm",
+  "topics": [
+    "llm-training",
+    "quantization",
+    "w4a4"
+  ],
+  "local_code": "src/auto_research/reproductions/gaugequant",
+  "documentation": "docs/reproductions/2607.20757-gaugequant/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "浮点 llamamodern",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.lm_loss",
+    "method.parameters",
+    "method.perplexity",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "LLaMA-2 7B training",
+    "integer inference kernels"
+  ],
+  "evolve_operators": []
+}

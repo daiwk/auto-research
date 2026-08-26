@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "bakron",
+  "arxiv_id": "2608.06291",
+  "title": "BaKron: Efficient Quantization with Kronecker-Factored Hessians",
+  "paper_url": "https://arxiv.org/abs/2608.06291",
+  "organization": "University of California, San Diego",
+  "published": "2026-08-06",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "quantization",
+    "hessian",
+    "inference-efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/bakron",
+  "documentation": "docs/reproductions/2608.06291-bakron/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic public-style mini-suite"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "bakron.reported_objective"
+  ],
+  "mechanisms": [
+    "anti-diagonal GPU solver",
+    "full pretrained model quantization sweep"
+  ],
+  "evolve_operators": []
+}

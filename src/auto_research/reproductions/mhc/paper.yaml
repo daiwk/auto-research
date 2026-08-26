@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "mhc",
+  "arxiv_id": "2512.24880",
+  "title": "mHC: Manifold-Constrained Hyper-Connections",
+  "paper_url": "https://arxiv.org/abs/2512.24880",
+  "organization": "DeepSeek-AI",
+  "published": "2025-12-31",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "hyper-connections",
+    "training-stability"
+  ],
+  "local_code": "src/auto_research/reproductions/mhc",
+  "documentation": "docs/reproductions/2512.24880-mhc/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同 token、优化器和主干宽度的普通 Transformer",
+  "metrics": [
+    "relative.ppl_reduction_vs_hc_percent",
+    "relative.ppl_reduction_vs_transformer_percent",
+    "variants.HC.loss",
+    "variants.HC.perplexity",
+    "variants.HC.spectral_norm_max",
+    "variants.Transformer.loss",
+    "variants.Transformer.perplexity",
+    "variants.mHC.loss",
+    "variants.mHC.perplexity",
+    "variants.mHC.spectral_norm_max"
+  ],
+  "mechanisms": [
+    "3B/9B/27B private pre-training",
+    "TileLang kernels, recomputation and DualPipe"
+  ],
+  "evolve_operators": []
+}

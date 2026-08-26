@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "key": "glorank",
+  "arxiv_id": "2604.25291",
+  "title": "From Local Indices to Global Identifiers: Generative Reranking via Global Action Space",
+  "paper_url": "https://arxiv.org/abs/2604.25291",
+  "organization": "City University of Hong Kong / Kuaishou / UC San Diego",
+  "published": "2026-04-28",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "generative-recommendation",
+    "semantic-id",
+    "reinforcement-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/glorank",
+  "documentation": "docs/reproductions/2604.25291-glorank/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 glorank 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.group_relative_reward_update",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Kuaishou private traffic",
+    "production LLM and constrained decoder"
+  ],
+  "evolve_operators": []
+}

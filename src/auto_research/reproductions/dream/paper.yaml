@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "dream",
+  "arxiv_id": "2608.09408",
+  "title": "DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2608.09408",
+  "organization": "Taobao & Tmall Group / Alibaba",
+  "published": "2026-08-10",
+  "upstream_code": "否：截至 2026-08-20 未发现原作者公开代码",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "ranking",
+    "reranking",
+    "intent-understanding",
+    "online-policy",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/dream",
+  "documentation": "docs/reproductions/2608.09408-dream/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "retrieval/ranking backbone without DREAM overlay",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "Taobao private multi-source signals and production traffic",
+    "Qwen3 Meta Engine and online conclusion feedback"
+  ],
+  "evolve_operators": []
+}

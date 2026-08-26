@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "key": "tokenminds",
+  "arxiv_id": "2606.25147",
+  "title": "TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2606.25147",
+  "organization": "Google DeepMind / YouTube",
+  "published": "2026-06-23",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "user-modeling",
+    "semantic-id",
+    "cross-scenario",
+    "ranking",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/tokenminds",
+  "documentation": "docs/reproductions/2606.25147-tokenminds/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "同数据、同 seed、同 120 steps 的 dense-only GRU 用户编码器",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "training.baseline.final_ranking_loss",
+    "training.baseline.initial_ranking_loss",
+    "training.tokenminds.final_ranking_loss",
+    "training.tokenminds.final_sid_loss",
+    "training.tokenminds.initial_ranking_loss"
+  ],
+  "mechanisms": [
+    "Gemini 370M MoE encoder and 370M decoder with PLUM CPT",
+    "YouTube LFV/SFV/search private training corpus",
+    "multi-context beam decoding and asynchronous billion-user serving"
+  ],
+  "evolve_operators": []
+}

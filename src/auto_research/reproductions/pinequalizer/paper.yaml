@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "pinequalizer",
+  "arxiv_id": "2607.22518",
+  "title": "PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest",
+  "paper_url": "https://arxiv.org/abs/2607.22518",
+  "organization": "Pinterest",
+  "published": "2026-07-23",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "cold-start",
+    "exploration",
+    "debiasing",
+    "ranking",
+    "retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/pinequalizer",
+  "documentation": "docs/reproductions/2607.22518-pinequalizer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "matched control without the pinequalizer mechanism",
+  "metrics": [
+    "baseline.fresh_ndcg_at_10",
+    "baseline.ndcg_at_10",
+    "baseline.underexplored_exposure_at_10",
+    "pinequalizer.fresh_ndcg_at_10",
+    "pinequalizer.ndcg_at_10",
+    "relative_percent.fresh_ndcg_at_10",
+    "relative_percent.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Pinterest private Pin, provider, PinCLIP, Semantic-ID and off-platform data",
+    "Homefeed/Search/Related Pins production retrieval and ranking stacks",
+    "multi-year content holdout, live traffic and near-real-time Flink features"
+  ],
+  "evolve_operators": []
+}

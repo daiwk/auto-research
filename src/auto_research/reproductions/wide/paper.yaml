@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "wide",
+  "arxiv_id": "2607.28418",
+  "title": "WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning",
+  "paper_url": "https://arxiv.org/abs/2607.28418",
+  "organization": "EIT-NLP / LMU Munich",
+  "published": "2026-07-30",
+  "upstream_code": "https://github.com/EIT-NLP/LLM-Pruning/tree/main/WIDE",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "dynamic-pruning",
+    "inference-efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/wide",
+  "documentation": "docs/reproductions/2607.28418-wide/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同预算 dense LLaMA",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.active_attention_head_fraction",
+    "method.active_ffn_channel_fraction",
+    "method.lm_loss",
+    "method.parameters",
+    "method.perplexity",
+    "relative_perplexity_percent"
+  ],
+  "mechanisms": [
+    "custom CUDA kernels",
+    "billion-parameter two-stage calibration"
+  ],
+  "evolve_operators": []
+}

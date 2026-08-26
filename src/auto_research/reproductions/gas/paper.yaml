@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "gas",
+  "arxiv_id": "2608.12209",
+  "title": "Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction",
+  "paper_url": "https://arxiv.org/abs/2608.12209",
+  "organization": "ByteDance",
+  "published": "2026-08-12",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-13）",
+  "track": "llm",
+  "topics": [
+    "multimodal",
+    "generation-guided-training",
+    "next-embedding-prediction"
+  ],
+  "local_code": "src/auto_research/reproductions/gas",
+  "documentation": "docs/reproductions/2608.12209-gas/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Fashion-MNIST object QA"
+  ],
+  "baseline": "understanding-only matched trunk",
+  "metrics": [
+    "test_accuracy",
+    "visual_dependency_delta",
+    "deployed_parameter_overhead_percent"
+  ],
+  "mechanisms": [
+    "Qwen3-VL 2B/4B backbones",
+    "10M generation corpus",
+    "two-stage 32-GPU training"
+  ],
+  "evolve_operators": []
+}

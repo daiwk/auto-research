@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "key": "ple",
+  "arxiv_id": "recsys2020-ple",
+  "title": "Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations",
+  "paper_url": "https://doi.org/10.1145/3383313.3412236",
+  "organization": "Tencent",
+  "published": "2020-09-22",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "classic",
+    "multi-task",
+    "mixture-of-experts"
+  ],
+  "local_code": "src/auto_research/reproductions/ple",
+  "documentation": "docs/reproductions/recsys2020-ple-ple/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K entire-space multitask construction"
+  ],
+  "baseline": "MMoE，实验组为共享与任务专属 experts 的 CGC/PLE",
+  "metrics": [
+    "baseline.click_auc",
+    "baseline.click_auc_std",
+    "baseline.click_logloss",
+    "baseline.click_logloss_std",
+    "baseline.conversion_auc",
+    "baseline.conversion_auc_std",
+    "baseline.conversion_logloss",
+    "baseline.conversion_logloss_std",
+    "baseline.mean_auc",
+    "baseline.mean_auc_std",
+    "method.click_auc",
+    "method.click_auc_std",
+    "method.click_logloss",
+    "method.click_logloss_std",
+    "method.conversion_auc",
+    "method.conversion_auc_std",
+    "method.conversion_logloss",
+    "method.conversion_logloss_std",
+    "method.mean_auc",
+    "method.mean_auc_std",
+    "relative.conversion_auc_percent",
+    "relative.mean_auc_percent"
+  ],
+  "mechanisms": [
+    "Tencent Video private watch/interaction tasks",
+    "production progressive tower depth"
+  ],
+  "evolve_operators": []
+}

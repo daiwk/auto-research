@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "long-history-transformer",
+  "arxiv_id": "2607.14331",
+  "title": "Long-History User Transformers for Real-Time Ad Ranking",
+  "paper_url": "https://arxiv.org/abs/2607.14331",
+  "organization": "Yandex",
+  "published": "2026-07-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "long-sequence",
+    "cached-user-representation",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/long_history_transformer",
+  "documentation": "docs/reproductions/2607.14331-long-history-transformer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "request-time recent-history Transformer，实验组为缓存全历史加轻量在线 Transformer",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private Yandex cross-surface logs",
+    "production CatBoost ranker and feature-store refresh stack"
+  ],
+  "evolve_operators": []
+}

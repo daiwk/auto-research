@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "mamba",
+  "arxiv_id": "2312.00752",
+  "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+  "paper_url": "https://arxiv.org/abs/2312.00752",
+  "organization": "Carnegie Mellon University / Princeton University",
+  "published": "2023-12-01",
+  "upstream_code": "https://github.com/state-spaces/mamba",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "state-space-model",
+    "classic"
+  ],
+  "local_code": "src/auto_research/reproductions/mamba",
+  "documentation": "docs/reproductions/2312.00752-mamba/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "tiny Transformer",
+  "metrics": [
+    "baseline.perplexity",
+    "method.perplexity"
+  ],
+  "mechanisms": [
+    "fused parallel selective-scan CUDA kernel",
+    "2.8B-scale pretraining"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "tmallgs",
+  "arxiv_id": "2607.13398",
+  "title": "TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search",
+  "paper_url": "https://arxiv.org/abs/2607.13398",
+  "organization": "Taobao & Tmall Group of Alibaba",
+  "published": "2026-07-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "search-ranking",
+    "transformer",
+    "scaling",
+    "feature-interaction"
+  ],
+  "local_code": "src/auto_research/reproductions/tmallgs",
+  "documentation": "docs/reproductions/2607.13398-tmallgs/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "DIN/RankMixer 风格 late-fusion Transformer，实验组为 TMallGS field-adaptive gated Transformer",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "private Tmall search features and labels",
+    "0.05B online model and production GPU serving"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "qgs",
+  "arxiv_id": "2605.25514",
+  "title": "From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark",
+  "paper_url": "https://arxiv.org/abs/2605.25514",
+  "organization": "University of Science and Technology of China / Alibaba",
+  "published": "2026-05-25",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "generative-search",
+    "search-ranking",
+    "long-sequence"
+  ],
+  "local_code": "src/auto_research/reproductions/qgs",
+  "documentation": "docs/reproductions/2605.25514-qgs/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

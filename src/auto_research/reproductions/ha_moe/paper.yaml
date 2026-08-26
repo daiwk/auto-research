@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "key": "ha-moe",
+  "arxiv_id": "2607.27577",
+  "title": "Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study",
+  "paper_url": "https://arxiv.org/abs/2607.27577",
+  "organization": "Google / Discover",
+  "published": "2026-07-30",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "mixture-of-experts",
+    "heterogeneity",
+    "diversity"
+  ],
+  "local_code": "src/auto_research/reproductions/ha_moe",
+  "documentation": "docs/reproductions/2607.27577-ha-moe/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "同切分的 homogeneous transition-content ranker，实验组加入 HA-MoE",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Google Discover private logs",
+    "LENS observability and production DL-AUC"
+  ],
+  "evolve_operators": []
+}

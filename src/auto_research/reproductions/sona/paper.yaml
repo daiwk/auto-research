@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "sona",
+  "arxiv_id": "2608.11015",
+  "title": "Sona Technical Report",
+  "paper_url": "https://arxiv.org/abs/2608.11015",
+  "organization": "Yandex",
+  "published": "2026-08-11",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-13）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "ranking",
+    "history-compression"
+  ],
+  "local_code": "src/auto_research/reproductions/sona",
+  "documentation": "docs/reproductions/2608.11015-sona/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "同预算共享 encoder 排序器，实验组为 history compression + SID decoder + item ranker",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "sona.hit_at_10",
+    "sona.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Yandex private music logs and semantic tokenizer",
+    "production candidate cascade and smart-speaker serving",
+    "full-capacity distillation teacher"
+  ],
+  "evolve_operators": []
+}

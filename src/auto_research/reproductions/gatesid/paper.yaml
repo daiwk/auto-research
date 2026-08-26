@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "gatesid",
+  "arxiv_id": "2603.22916",
+  "title": "GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation",
+  "paper_url": "https://arxiv.org/abs/2603.22916",
+  "organization": "Alibaba International Digital Commerce",
+  "published": "2026-03-24",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "semantic-id",
+    "cold-start",
+    "contrastive-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/gatesid",
+  "documentation": "docs/reproductions/2603.22916-gatesid/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

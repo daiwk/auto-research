@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "real-estate-rerank",
+  "arxiv_id": "2607.14835",
+  "title": "LLM-Based Re-Ranking for Real Estate Search",
+  "paper_url": "https://arxiv.org/abs/2607.14835",
+  "organization": "QuintoAndar",
+  "published": "2026-07-16",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "search-ranking",
+    "llm-reranking",
+    "content-understanding"
+  ],
+  "local_code": "src/auto_research/reproductions/real_estate_rerank",
+  "documentation": "docs/reproductions/2607.14835-real-estate-rerank/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

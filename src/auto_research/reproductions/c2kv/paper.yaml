@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "c2kv",
+  "arxiv_id": "2607.17715",
+  "title": "C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference",
+  "paper_url": "https://arxiv.org/abs/2607.17715",
+  "organization": "Shanghai Jiao Tong University",
+  "published": "2026-07-20",
+  "upstream_code": "https://github.com/s7a9/C2KV",
+  "track": "llm",
+  "topics": [
+    "推理与系统效率",
+    "KV cache"
+  ],
+  "local_code": "src/auto_research/reproductions/c2kv",
+  "documentation": "docs/reproductions/2607.17715-c2kv/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

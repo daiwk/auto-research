@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "twitch-mor",
+  "arxiv_id": "2608.04455",
+  "title": "Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting",
+  "paper_url": "https://arxiv.org/abs/2608.04455",
+  "organization": "Twitch",
+  "published": "2026-08-05",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "multi-task-learning",
+    "mmoe",
+    "live-streaming"
+  ],
+  "local_code": "src/auto_research/reproductions/twitch_mor",
+  "documentation": "docs/reproductions/2608.04455-twitch-mor/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "relative.objective_mse_percent",
+    "variants.fresh-delayed lifecycle mmoe.hit_at_10",
+    "variants.fresh-delayed lifecycle mmoe.ndcg_at_10",
+    "variants.single-objective dnn.hit_at_10",
+    "variants.single-objective dnn.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "Twitch private engagement and revenue labels",
+    "production p99 serving stack"
+  ],
+  "evolve_operators": []
+}

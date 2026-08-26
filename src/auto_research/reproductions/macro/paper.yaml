@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "macro",
+  "arxiv_id": "2608.05872",
+  "title": "MACRO: Markov Chain Routing of Transformer Layers",
+  "paper_url": "https://arxiv.org/abs/2608.05872",
+  "organization": "Heinrich Heine University Düsseldorf",
+  "published": "2026-08-06",
+  "upstream_code": "https://github.com/Batorskq/MACRO",
+  "track": "llm",
+  "topics": [
+    "network-architecture",
+    "dynamic-routing",
+    "inference-efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/macro",
+  "documentation": "docs/reproductions/2608.05872-macro/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic public-style mini-suite"
+  ],
+  "baseline": "去掉论文特有机制、其余数据切分与预算相同的 matched control",
+  "metrics": [
+    "macro_accuracy",
+    "paper_results.average_accuracy_percent",
+    "sequential_accuracy"
+  ],
+  "mechanisms": [
+    "open-weight LLM checkpoints",
+    "full benchmark route search"
+  ],
+  "evolve_operators": []
+}

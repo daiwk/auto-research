@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "transmem",
+  "arxiv_id": "2607.29032",
+  "title": "TransMem: Transforming Hidden States into Memory for Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2607.29032",
+  "organization": "Authors did not disclose affiliation",
+  "published": "2026-07-31",
+  "upstream_code": "否：截至 2026-08-24 未发现原作者公开代码",
+  "track": "llm",
+  "topics": [
+    "注意力与长上下文",
+    "Agent 记忆"
+  ],
+  "local_code": "src/auto_research/reproductions/transmem",
+  "documentation": "docs/reproductions/2607.29032-transmem/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

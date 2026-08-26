@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "rag-qac",
+  "arxiv_id": "2602.01023",
+  "title": "Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment",
+  "paper_url": "https://arxiv.org/abs/2602.01023",
+  "organization": "Apple",
+  "published": "2026-02-01",
+  "upstream_code": "否：原文未提供官方/作者代码（核查日期：2026-08-24）",
+  "track": "recommendation",
+  "topics": [
+    "query-auto-completion",
+    "retrieval-augmented-generation",
+    "preference-alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/rag_qac",
+  "documentation": "docs/reproductions/2602.01023-rag-qac/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K"
+  ],
+  "baseline": "shared transition + content scorer",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "Fresh Hit@10",
+    "Head share@10"
+  ],
+  "mechanisms": [
+    "private production data and features",
+    "production serving stack"
+  ],
+  "evolve_operators": []
+}

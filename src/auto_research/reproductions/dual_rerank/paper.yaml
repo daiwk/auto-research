@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "key": "dual-rerank",
+  "arxiv_id": "2604.07420",
+  "title": "Dual-Rerank: Fusing Sequential Dependencies and Utility for Generative Reranking",
+  "paper_url": "https://arxiv.org/abs/2604.07420",
+  "organization": "Kuaishou Technology",
+  "published": "2026-04-08",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "knowledge-distillation",
+    "listwise-rl",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/dual_rerank",
+  "documentation": "docs/reproductions/2604.07420-dual-rerank/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "共享 transition + content scorer，实验组只加入 dual-rerank 核心机制",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "paper_results.latency_ms",
+    "paper_results.whole_page_ctr_percent",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent",
+    "stages.ldro_detached_list_reward",
+    "stages.validation.fresh_hit_at_10",
+    "stages.validation.hit_at_10",
+    "stages.validation.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "production AR teacher",
+    "high-throughput NAR inference kernel"
+  ],
+  "evolve_operators": []
+}

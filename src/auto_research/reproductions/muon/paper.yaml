@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "muon",
+  "arxiv_id": "2502.16982",
+  "title": "Muon is Scalable for LLM Training",
+  "paper_url": "https://arxiv.org/abs/2502.16982",
+  "organization": "Moonshot AI / UCLA",
+  "published": "2025-02-24",
+  "upstream_code": "https://github.com/MoonshotAI/Moonlight",
+  "track": "llm",
+  "topics": [
+    "llm-training",
+    "optimizer",
+    "training-efficiency"
+  ],
+  "local_code": "src/auto_research/reproductions/muon",
+  "documentation": "docs/reproductions/2502.16982-muon/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "matched control without the muon mechanism",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.lm_loss",
+    "method.orthogonality_error",
+    "method.parameters",
+    "method.perplexity",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "distributed optimizer state and communication implementation",
+    "3B/16B MoE models and 5.7T-token training",
+    "large-scale compute-optimal frontier"
+  ],
+  "evolve_operators": []
+}

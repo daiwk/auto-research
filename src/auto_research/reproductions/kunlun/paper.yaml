@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "key": "kunlun",
+  "arxiv_id": "2602.10016",
+  "title": "Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design",
+  "paper_url": "https://arxiv.org/abs/2602.10016",
+  "organization": "Meta",
+  "published": "2026-02-10",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "scaling-law",
+    "long-sequence",
+    "mixture-of-experts",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/kunlun",
+  "documentation": "docs/reproductions/2602.10016-kunlun/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "shallow transition-content ranker，实验组执行 Kunlun compact core",
+  "metrics": [
+    "baseline.fresh_hit_at_10",
+    "baseline.head_share_at_10",
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.fresh_hit_at_10",
+    "method.head_share_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "relative.fresh_hit_at_10_percent",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Meta private ads data and massive scale",
+    "expert-parallel accelerator implementation"
+  ],
+  "evolve_operators": []
+}

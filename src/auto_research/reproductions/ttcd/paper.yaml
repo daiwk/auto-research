@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "key": "ttcd",
+  "arxiv_id": "2608.01672",
+  "title": "Learning What to Remember: Test-Time Training via Context Distillation",
+  "paper_url": "https://arxiv.org/abs/2608.01672",
+  "organization": "Princeton University",
+  "published": "2026-08-03",
+  "upstream_code": "https://github.com/dangxingyu/ttcd",
+  "track": "llm",
+  "topics": [
+    "注意力与长上下文",
+    "测试时训练"
+  ],
+  "local_code": "src/auto_research/reproductions/ttcd",
+  "documentation": "docs/reproductions/2608.01672-ttcd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "deterministic long-context public mini-suite"
+  ],
+  "baseline": "recent-window attention",
+  "metrics": [
+    "accuracy",
+    "relative cost"
+  ],
+  "mechanisms": [
+    "paper-scale checkpoints and training",
+    "custom CUDA kernels"
+  ],
+  "evolve_operators": []
+}

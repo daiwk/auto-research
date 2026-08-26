@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "key": "deepfm",
+  "arxiv_id": "1703.04247",
+  "title": "DeepFM: A Factorization-Machine based Neural Network for CTR Prediction",
+  "paper_url": "https://arxiv.org/abs/1703.04247",
+  "organization": "Huawei Noah's Ark Lab",
+  "published": "2017-03-13",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "classic",
+    "feature-interaction"
+  ],
+  "local_code": "src/auto_research/reproductions/deepfm",
+  "documentation": "docs/reproductions/1703.04247-deepfm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K compact"
+  ],
+  "baseline": "embedding MLP，实验组为共享 embedding 的 FM + deep 分支",
+  "metrics": [
+    "baseline.head_share_at_10",
+    "baseline.head_share_at_10_std",
+    "baseline.hit_at_10",
+    "baseline.hit_at_10_std",
+    "baseline.ndcg_at_10",
+    "baseline.ndcg_at_10_std",
+    "method.head_share_at_10",
+    "method.head_share_at_10_std",
+    "method.hit_at_10",
+    "method.hit_at_10_std",
+    "method.ndcg_at_10",
+    "method.ndcg_at_10_std",
+    "relative.head_share_at_10_percent",
+    "relative.hit_at_10_percent",
+    "relative.ndcg_at_10_percent"
+  ],
+  "mechanisms": [
+    "Huawei private App Market CTR features and production traffic"
+  ],
+  "evolve_operators": []
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "key": "native-sparse-attention",
+  "arxiv_id": "2502.11089",
+  "title": "Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention",
+  "paper_url": "https://arxiv.org/abs/2502.11089",
+  "organization": "DeepSeek",
+  "published": "2025-02-16",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "sparse-attention",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/native_sparse_attention",
+  "documentation": "docs/reproductions/2502.11089-native-sparse-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "同维度、层数、token、AdamW 和 30-step 预算的 llamamodern",
+  "metrics": [
+    "baseline.lm_loss",
+    "baseline.parameters",
+    "baseline.perplexity",
+    "method.attention_edge_fraction",
+    "method.compression_block",
+    "method.lm_loss",
+    "method.local_window",
+    "method.parameters",
+    "method.perplexity",
+    "method.selected_blocks",
+    "relative.lm_loss_percent",
+    "relative.perplexity_percent"
+  ],
+  "mechanisms": [
+    "custom Triton kernels and hardware speed claims",
+    "27B-parameter continued pretraining",
+    "64K-context benchmark matrix"
+  ],
+  "evolve_operators": []
+}

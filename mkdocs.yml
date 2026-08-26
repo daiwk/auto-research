@@ -11,6 +11,7 @@ nav:
       - 能力总览: auto-research.md
       - 领域适配: evolution-domains.md
       - 多轮进化协议: model-evolution.md
+      - Evolve 组件兼容图: evolution-operators.md
       - UniRank 公共评测: unirank.md
   - 论文实现与评测:
       - 研究库总览: research-library.md
@@ -66,6 +67,8 @@ nav:
           - 可训练 policy 与真实 executor: agent-research/training-executor.md
   - 项目文档:
       - 项目 README: project-readme.md
+      - 统一实验数据库与看板: experiment-tracking.md
+      - 声明式论文实现规范: paper-specs.md
       - 架构与扩展: architecture.md
       - GPU 与 Linux CPU: runtime.md
       - A30 GPU 回溯验证: gpu-validation.md

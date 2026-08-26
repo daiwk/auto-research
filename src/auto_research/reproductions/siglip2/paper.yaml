@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "siglip2",
+  "arxiv_id": "2502.14786",
+  "title": "SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features",
+  "paper_url": "https://arxiv.org/abs/2502.14786",
+  "organization": "Google DeepMind",
+  "published": "2025-02-20",
+  "upstream_code": "https://github.com/google-research/big_vision",
+  "track": "llm",
+  "topics": [
+    "multimodal",
+    "sigmoid-contrastive",
+    "self-distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/siglip2",
+  "documentation": "docs/reproductions/2502.14786-siglip2/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Fashion-MNIST image-text pairs"
+  ],
+  "baseline": "uniform label retrieval",
+  "metrics": [
+    "test_accuracy",
+    "visual_dependency_delta"
+  ],
+  "mechanisms": [
+    "multilingual web-scale mixture",
+    "caption decoder",
+    "dense localization heads"
+  ],
+  "evolve_operators": []
+}

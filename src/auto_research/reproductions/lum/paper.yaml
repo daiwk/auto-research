@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "key": "lum",
+  "arxiv_id": "2502.08309",
+  "title": "Unlocking Scaling Law in Industrial Recommendation Systems with a Three-step Paradigm based Large User Model",
+  "paper_url": "https://arxiv.org/abs/2502.08309",
+  "organization": "Alibaba",
+  "published": "2025-02-12",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "large user model",
+    "generative pretraining",
+    "knowledge querying",
+    "CTR"
+  ],
+  "local_code": "src/auto_research/reproductions/lum",
+  "documentation": "docs/reproductions/2502.08309-lum/README.md",
+  "fidelity": "full_pipeline",
+  "evaluation_tier": "l3_paper_pipeline",
+  "datasets": [
+    "MovieLens-1M ratings, genres, chronological behavior"
+  ],
+  "baseline": "ID-DLRM",
+  "metrics": [
+    "aggregate.dlrm_auc_mean",
+    "aggregate.dlrm_auc_std",
+    "aggregate.lum_auc_mean",
+    "aggregate.lum_auc_std",
+    "per_seed.42.dlrm_auc",
+    "per_seed.42.lum_auc",
+    "per_seed.43.dlrm_auc",
+    "per_seed.43.lum_auc",
+    "per_seed.44.dlrm_auc",
+    "per_seed.44.lum_auc"
+  ],
+  "mechanisms": [
+    "7B scaling study",
+    "Taobao scenario/search conditions",
+    "production pre-trigger service"
+  ],
+  "evolve_operators": []
+}

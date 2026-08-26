@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "mm-llm",
+  "arxiv_id": "2605.09338",
+  "title": "A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2605.09338",
+  "organization": "Meta",
+  "published": "2026-05-10",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-08-09）",
+  "track": "recommendation",
+  "topics": [
+    "multimodal",
+    "llm-recommendation",
+    "ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/mm_llm",
+  "documentation": "docs/reproductions/2605.09338-mm-llm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K content proxy"
+  ],
+  "baseline": "DIN，MM-LLM NDCG@10 相对 DIN -13.23%",
+  "metrics": [
+    "paper_online_ab.offline_auc_percent",
+    "results.din.hit_at_10",
+    "results.din.ndcg_at_10",
+    "results.mm_llm_features.hit_at_10",
+    "results.mm_llm_features.ndcg_at_10",
+    "results.ndcg_ablation_percent",
+    "results.ndcg_vs_din_percent",
+    "results.visual_id_baseline.hit_at_10",
+    "results.visual_id_baseline.ndcg_at_10"
+  ],
+  "mechanisms": [
+    "raw private multimedia and BLIP-2/LLaMA2-1.5B scale"
+  ],
+  "evolve_operators": []
+}

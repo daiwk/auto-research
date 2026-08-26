@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "smolvlm",
+  "arxiv_id": "2504.05299",
+  "title": "SmolVLM: Redefining small and efficient multimodal models",
+  "paper_url": "https://arxiv.org/abs/2504.05299",
+  "organization": "Hugging Face",
+  "published": "2025-04-07",
+  "upstream_code": "https://github.com/huggingface/smollm",
+  "track": "llm",
+  "topics": [
+    "multimodal",
+    "efficient-vlm",
+    "visual-token-compression"
+  ],
+  "local_code": "src/auto_research/reproductions/smolvlm",
+  "documentation": "docs/reproductions/2504.05299-smolvlm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Fashion-MNIST object QA"
+  ],
+  "baseline": "linear mean-pooled connector",
+  "metrics": [
+    "test_accuracy",
+    "visual_dependency_delta",
+    "visual_tokens"
+  ],
+  "mechanisms": [
+    "256M-2.2B language decoder",
+    "large multimodal data recipe",
+    "video training"
+  ],
+  "evolve_operators": []
+}
