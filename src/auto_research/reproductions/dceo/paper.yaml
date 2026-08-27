@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "dceo",
+  "arxiv_id": "2608.25635",
+  "title": "DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search",
+  "paper_url": "https://arxiv.org/abs/2608.25635",
+  "organization": "Taobao & Tmall Group, Alibaba",
+  "published": "2026-08-26",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-28）",
+  "track": "recommendation",
+  "topics": [
+    "search-ranking",
+    "long-term-value",
+    "causal-optimization",
+    "multi-objective-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/dceo",
+  "documentation": "docs/reproductions/2608.25635-dceo/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "fixed multi-objective log fusion over the same four proxy scores",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "head share@10",
+    "estimated relative causal effect"
+  ],
+  "mechanisms": [
+    "Alibaba private search logs",
+    "production long-term GMV critic",
+    "online serving stack"
+  ],
+  "evolve_operators": []
+}

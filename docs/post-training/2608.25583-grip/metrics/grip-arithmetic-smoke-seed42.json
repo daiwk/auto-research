@@ -1,0 +1,146 @@
+{
+  "algorithm": "grip",
+  "dataset": "arithmetic-smoke",
+  "baseline": {
+    "accuracy": 0.125,
+    "mean_reward": 0.3039061471113459,
+    "entropy": 1.7917594692220566,
+    "kl_from_reference": 0.0
+  },
+  "final": {
+    "accuracy": 0.234375,
+    "mean_reward": 0.41366344934761173,
+    "entropy": 1.7739840548500698,
+    "kl_from_reference": 0.017775414371985654
+  },
+  "relative_accuracy": 0.875,
+  "training": {
+    "steps": 100,
+    "learning_rate": 0.08,
+    "group_size": 4,
+    "train_examples": 64,
+    "validation_examples": 64,
+    "data_source": "deterministic arithmetic smoke suite",
+    "teacher_cache_entries": 0,
+    "teacher_prefill_calls": 0,
+    "online_teacher_calls": 0,
+    "drift_events": 0,
+    "critic_updates": 0,
+    "rollout_policy_refreshes": 6,
+    "last_diagnostics": {
+      "interpolation_alpha_mean": 0.3261351282513234,
+      "granular_reward_mean": 0.5637225003191624,
+      "interpolated_policy_probability_mean": 0.18281051517029698,
+      "extra_rollout_calls": 0.0,
+      "loss": -0.022648735369353336,
+      "policy_entropy": 1.7527963336144798
+    },
+    "fidelity": "mechanism reproduction on a candidate-policy model"
+  },
+  "history": [
+    {
+      "step": 1.0,
+      "loss": 4.163336342344337e-17,
+      "accuracy": 0.203125,
+      "mean_reward": 0.38792858424974397,
+      "entropy": 1.7917563379887897,
+      "kl_from_reference": 3.131233264708648e-06
+    },
+    {
+      "step": 10.0,
+      "loss": -0.0023404965544135594,
+      "accuracy": 0.203125,
+      "mean_reward": 0.38792858424974397,
+      "entropy": 1.7913069600700986,
+      "kl_from_reference": 0.0004525091519563867
+    },
+    {
+      "step": 20.0,
+      "loss": -0.012140240826747556,
+      "accuracy": 0.203125,
+      "mean_reward": 0.38792858424974397,
+      "entropy": 1.7904205760105274,
+      "kl_from_reference": 0.0013388932115275091
+    },
+    {
+      "step": 30.0,
+      "loss": -0.0005694025542456391,
+      "accuracy": 0.234375,
+      "mean_reward": 0.41366344934761173,
+      "entropy": 1.7901847427652884,
+      "kl_from_reference": 0.001574726456766615
+    },
+    {
+      "step": 40.0,
+      "loss": -0.005671426003104801,
+      "accuracy": 0.265625,
+      "mean_reward": 0.43943013355655564,
+      "entropy": 1.7889555244877868,
+      "kl_from_reference": 0.002803944734268184
+    },
+    {
+      "step": 50.0,
+      "loss": -0.011292308245923546,
+      "accuracy": 0.25,
+      "mean_reward": 0.4265063625097134,
+      "entropy": 1.7870091931066174,
+      "kl_from_reference": 0.004750276115437812
+    },
+    {
+      "step": 60.0,
+      "loss": -0.0026577591438083845,
+      "accuracy": 0.265625,
+      "mean_reward": 0.43943013355655564,
+      "entropy": 1.786376308492751,
+      "kl_from_reference": 0.005383160729304236
+    },
+    {
+      "step": 70.0,
+      "loss": -0.03755439669095526,
+      "accuracy": 0.265625,
+      "mean_reward": 0.43943013355655564,
+      "entropy": 1.7839775790411005,
+      "kl_from_reference": 0.007781890180953859
+    },
+    {
+      "step": 80.0,
+      "loss": -0.027225501463915926,
+      "accuracy": 0.265625,
+      "mean_reward": 0.43943013355655564,
+      "entropy": 1.7809596727552495,
+      "kl_from_reference": 0.010799796466805737
+    },
+    {
+      "step": 90.0,
+      "loss": -0.028267656845137788,
+      "accuracy": 0.25,
+      "mean_reward": 0.4265063625097134,
+      "entropy": 1.77781811140585,
+      "kl_from_reference": 0.013941357816204382
+    },
+    {
+      "step": 100.0,
+      "loss": -0.022648735369353336,
+      "accuracy": 0.234375,
+      "mean_reward": 0.41366344934761173,
+      "entropy": 1.7739840548500698,
+      "kl_from_reference": 0.017775414371985654
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed mechanism result; do not claim a stable improvement"
+  },
+  "schema_version": 2,
+  "manifest_ref": "post-training:grip-arithmetic-smoke-seed42",
+  "provenance": {
+    "artifact_path": "docs/post-training/2608.25583-grip/metrics/grip-arithmetic-smoke-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  }
+}

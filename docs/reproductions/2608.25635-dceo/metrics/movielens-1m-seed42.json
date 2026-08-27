@@ -1,0 +1,133 @@
+{
+  "paper": {
+    "arxiv_id": "2608.25635",
+    "title": "DCEO"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 320,
+    "items": 480
+  },
+  "setup": {
+    "seed": 42,
+    "full_catalog": true,
+    "proxy_objectives": 4
+  },
+  "variants": {
+    "fixed multi-objective fusion": {
+      "hit_at_10": 0.146875,
+      "ndcg_at_10": 0.07127401477576525,
+      "head_share_at_10": 0.20375
+    },
+    "DCEO core": {
+      "hit_at_10": 0.15,
+      "ndcg_at_10": 0.07078055113044687,
+      "head_share_at_10": 0.1996875
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": 2.1276595744680775,
+    "ndcg_at_10_percent": -0.6923471995661596,
+    "head_share_at_10_percent": -1.993865030674845
+  },
+  "diagnostics": {
+    "proxy_outcome_correlation": -0.017584595429621274,
+    "estimated_relative_causal_effect": -8.854896202385033e-07,
+    "serving_critic_calls": 0
+  },
+  "paper_results": {
+    "online_gmv_lift_percent": 0.36,
+    "ab_test_days": 41
+  },
+  "scope": "在 MovieLens-1M 上执行上下文相关 simplex actor、用户级 proxy 聚合与相对干预诊断；线上只运行 actor。未复刻淘宝私有搜索日志、长期 GMV critic 或生产流量。",
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "Darwin arm64"
+  },
+  "seed": 42,
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "dceo",
+    "arxiv_id": "2608.25635",
+    "title": "DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search",
+    "paper_url": "https://arxiv.org/abs/2608.25635",
+    "track": "recommendation",
+    "organization": "Taobao & Tmall Group, Alibaba",
+    "published": "2026-08-26",
+    "code_url": null,
+    "topics": [
+      "search-ranking",
+      "long-term-value",
+      "causal-optimization",
+      "multi-objective-ranking"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/dceo",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens-1M"
+    ],
+    "baseline": "fixed multi-objective log fusion over the same four proxy scores",
+    "metrics": [
+      "Hit@10",
+      "NDCG@10",
+      "head share@10",
+      "estimated relative causal effect"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "online_evidence": [
+      {
+        "product": "Alibaba e-commerce search",
+        "metric": "GMV",
+        "lift_percent": 0.36,
+        "traffic": "41-day production A/B test",
+        "source_url": "https://arxiv.org/html/2608.25635v1#S5.SS7",
+        "source_location": "Section 5.7",
+        "experiment_duration": "41 days",
+        "retrieved_at": "2026-08-28"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-08-27T16:29:37.531928+00:00",
+    "code_commit": "cfb01264c6575f3d1634226940df384a3632a036",
+    "python": "3.14.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "numpy": "2.4.3"
+    },
+    "artifact_path": "docs/reproductions/2608.25635-dceo/metrics/movielens-1m-seed42.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "Alibaba private search logs",
+      "production long-term GMV critic",
+      "online serving stack"
+    ]
+  },
+  "manifest_ref": "reproduction:dceo"
+}

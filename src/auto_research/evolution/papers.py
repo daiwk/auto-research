@@ -7,6 +7,8 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2608.25635": ("rankmixer_dceo", "DCEO 的上下文条件目标权重 actor 与用户级相对因果干预"),
+    "2608.25528": ("rankmixer_transretrieval", "TransRetrieval 的 norm-aware 聚合、目标压缩与位置化 domain embedding"),
     "2608.24034": ("rankmixer_tagr", "TAGR 的可刷新稳定词表 LSID、多尺度实时 intent 与行为/价值对齐 IOPO"),
     "2608.10257": ("head:hybrid-catalog", "Netflix GenRec 的文本化上下文、prefill-only 全目录 head 与长期 reward 加权"),
     "2604.14878": ("reward:content-discovery", "JD GenRec 的页面级生成目标、GRPO-SR 与 NLL 约束"),
@@ -31,6 +33,8 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2608.26105": ("multimodal:vbvr-verifier", "VBVR-Pro 的任务专用可执行 verifier、过程状态检查与失败归因"),
+    "2608.25575": ("multimodal:mllmclip-cka", "MLLMCLIP 的逐层注意力 token 选择与 CKA 引导轻量投影"),
     "2608.24053": ("multimodal:wemm-embedding", "WeMM 的两阶段全模态对齐、细粒度 relevance refinement、跨尺度蒸馏与 Matryoshka 表征"),
     "2103.00020": ("multimodal:clip", "CLIP 双塔归一化与对称图文对比预训练"),
     "2608.12209": (
@@ -73,6 +77,10 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2608.25580": ("v-rubrics", "以视觉忠实度、推理一致性、指令遵循 rubric 和 prefix-localized credit 执行 GRPO"),
+    "2608.25356": ("clue-opsd", "长视频训练期 clue 特权视图 on-policy self-distillation，推理时移除 clue"),
+    "2608.25243": ("grin", "失败 rollout 注入 golden response，并以 mixed-policy importance correction 做持续知识吸收"),
+    "2608.25583": ("grip", "以细粒度 reward 动态插值当前策略与参考策略，无需额外 rollout"),
     "2608.24310": ("opd-search-plus", "以冻结通用教师执行 clipped forward-KL 搜索轨迹蒸馏，再用可验证奖励继续 RL refinement"),
     "2608.24696": ("opdvr", "用 ReLU gate 让 sampled-token OPD 隐式奖励的符号与轨迹正确性一致，无需新增损失权重"),
     "2203.02155": ("ppo-rlhf", "PPO-RLHF 的 clipped policy objective、value baseline 与 KL 约束"),
@@ -147,6 +155,12 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2608.25593": ("planner:jit-agent", "按任务生成、修复并从 archive 蒸馏 memory/planning/protocol/tools 四模块 harness"),
+    "2608.26086": ("planner:traceml", "用人类 ML 开发轨迹先验交替数据、验证、模型与集成，并显式重开旧方案"),
+    "2608.25559": ("tool:adavdr", "模型条件 tool necessity filtering、冗余惩罚与不可靠证据反思回退"),
+    "2608.25523": ("policy:topas", "联合工作流关键路径、prefix reuse、迁移代价与 aging 的服务调度"),
+    "2608.25500": ("memory:caskg", "以 remove/substitute/reorder 反事实探针和 Bayesian smoothing 校准技能图边"),
+    "2608.25992": ("policy:progrouter", "按在线任务进展、剩余难度与成本预算逐步路由模型"),
     "2608.24870": ("policy:spo-plus-plus", "按生成策略事件冻结 prompt value，并在 action-token measure 下标准化异步单流 advantage"),
     "2608.24747": ("memory:skillforge", "显式调用技能并以环境证据持续验证、修订技能库，而非只追加经验"),
     "2608.24114": ("critic:ahead", "普通步骤注入环境反馈，错误步骤额外注入纠错 hint，形成 step-aware 特权蒸馏信用"),

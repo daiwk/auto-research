@@ -9,6 +9,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 视频研究自适应工具与反思 | [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](2608.25559-adavdr/README.md) | Accio Team, Alibaba Group，2026-08-26 | [已开源](https://github.com/Accio-Lab/AdaVDR) | `adavdr` |
+| 反事实因果技能图 | [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](2608.25500-caskg/README.md) | Jilin University / Ant Group，2026-08-26 | [已开源](https://github.com/ZhiyuanLi218/Caskg) | `caskg` |
+| Harness 即时生成与进化 | [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](2608.25593-jit-agent/README.md) | LV-NUS Lab，2026-08-26 | [已开源](https://github.com/bingreeky/JIT) | `jit-agent` |
+| 在线进展成本路由 | [ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs](2608.25992-progrouter/README.md) | Aston University，2026-08-26 | 未发现官方代码 | `progrouter` |
+| 工作流 Prefix-State 调度 | [TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving](2608.25523-topas/README.md) | University of Science and Technology of China，2026-08-26 | 未发现官方代码 | `topas` |
+| ML 开发轨迹规划 | [TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development](2608.26086-traceml/README.md) | Carnegie Mellon University，2026-08-26 | [已开源](https://huggingface.co/datasets/jerryyan/TraceML) | `traceml` |
 | 环境反馈提示训练 | [AHEAD: Agentic Hints for Effective Agent Development](2608.24114-ahead/README.md) | AWS AI Labs / Purdue University，2026-08-25 | 未发现官方代码 | `ahead` |
 | 可验证技能锻造 | [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](2608.24747-skillforge/README.md) | AMAP, Alibaba Group，2026-08-25 | 未发现官方代码 | `skillforge` |
 | 多维验证工具自进化 | [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](2608.24571-smith/README.md) | Appier AI Research / National Taiwan University，2026-08-25 | [已开源](https://github.com/appier-research/smith) | `smith` |

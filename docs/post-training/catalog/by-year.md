@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-08 · [From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection](../2608.25243-grin/README.md)（`grin`）：纯 on-policy RL 在新知识尚未掌握时几乎采不到正确答案。GRIN 在失败组注入 golden response，再以 mixed-policy importance correction 训练；能力提高后自动回到 on-policy 探索。
+- 2026-08 · [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
+- 2026-08 · [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](../2608.25580-v-rubrics/README.md)（`v-rubrics`）：把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。
+- 2026-08 · [Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding](../2608.25356-clue-opsd/README.md)（`clue-opsd`）：学生仍看完整长视频，冻结教师在训练时只看问题相关 clue interval；学生自己的 rollout 上做 on-policy self-distillation，推理时不需要 clue、标签或外部教师。
 - 2026-08 · [OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning](../2608.24310-opd-search-plus/README.md)（`opd-search-plus`）：搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。
 - 2026-08 · [OPDVR: On-Policy Distillation with Verifiable Rewards](../2608.24696-opdvr/README.md)（`opdvr`）：Sampled-token OPD 的隐式奖励由教师/学生概率比决定，可能给正确轨迹负奖励、给错误轨迹正奖励。OPDVR 不再额外混合一个 RL loss，而是直接用 verifier correctness 对该隐式奖励做单侧 ReLU：正确轨迹只保留非负教师信号，错误轨迹只保留非正信号。
 - 2026-08 · [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](../2608.23311-erpo/README.md)（`erpo`）：传统 Policy-KL 直接压回答分布，稳定训练的同时消耗探索预算。ERPO 观察到 RL 过程中模型诱导的问题分布也会漂移，于是把正则放到输入侧：用冻结 reference 的问题似然给 query 静态加权，再以 Query-KL 控制环境分布漂移，不直接对 response score function 施压。

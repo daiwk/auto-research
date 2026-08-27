@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 262 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 266 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -83,6 +83,13 @@ pytest tests/test_research_module_docs.py
 
 - `tagr` · [TAGR](2608.24034-tagr/README.md)：快手直播广告用稳定词表的两级语义/协同 ID、多尺度兴趣和行为价值门控做生成式推荐；论文生产 A/B 的 LRE +8.5%、SCC +7.4%、Revenue +16.1%。
 - `wemm-embedding` · [WeMM-Embedding](2608.24053-wemm-embedding/README.md)：微信把多模态对齐、跨尺度 teacher refinement 与 Matryoshka embedding 合成统一检索模型；报告说明 14 项线上 A/B 收益已全量发布并公开代码与权重。
+
+## 2026-08-27 最新增量
+
+- `dceo` · [DCEO](2608.25635-dceo/README.md)：淘宝搜索以上下文条件 actor 直接优化长期用户价值的相对因果效果；41 天生产 A/B GMV +0.36%。
+- `transretrieval` · [TransRetrieval](2608.25528-transretrieval/README.md)：跨域广告召回使用 norm-aware 聚合、target-token 压缩和位置化 domain embedding；一个月 5% 流量 A/B 收入 +2.53%。
+- `vbvr-pro` · [VBVR-Pro](2608.26105-vbvr-pro/README.md)：以任务专用可执行 scorer 替代通用 VLM judge，为原生视觉推理提供状态级 verifiable reward。
+- `mllmclip` · [MLLMCLIP](2608.25575-mllmclip/README.md)：从 MLLM 各层按 attention 选 teacher token，再以 CKA 对齐轻量 CLIP 的视觉与文本特征。
 
 ## 2026 历史扫描 B01～B03（18 个 adapter）
 

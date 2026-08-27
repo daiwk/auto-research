@@ -80,6 +80,10 @@ class PostTrainingRunner:
             "erpo": state.variant_updates,
             "opd-search-plus": state.variant_updates,
             "opdvr": state.variant_updates,
+            "v-rubrics": state.variant_updates,
+            "clue-opsd": state.variant_updates,
+            "grin": state.variant_updates,
+            "grip": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

@@ -12,7 +12,17 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'r2-opd', 'sr-opsd', 'opd2', 'causal-opd', 'smopd', 'rstg',
         'sa-mrpo', 'rubric-dropout', 'erils', 'crpo', 'serpo', 'iso-rlvr',
         'srpo', 'erpo', 'opd-search-plus', 'opdvr',
+        'v-rubrics', 'clue-opsd', 'grin', 'grip',
     }:
+        if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
+            from ..latest_20260827 import update_latest
+
+            gradient, loss, latest = update_latest(
+                algorithm, state, group, probabilities, reference,
+                rollout_training_probabilities, sampled, rng,
+            )
+            diagnostics.update(latest)
+            return gradient, loss, diagnostics
         if algorithm in {'opd-search-plus', 'opdvr'}:
             from ..latest_20260826 import update_latest
 

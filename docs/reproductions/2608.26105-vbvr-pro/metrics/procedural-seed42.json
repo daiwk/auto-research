@@ -1,0 +1,116 @@
+{
+  "paper": {
+    "arxiv_id": "2608.26105",
+    "title": "VBVR-Pro"
+  },
+  "dataset": {
+    "name": "VBVR-Pro procedural task specification",
+    "tasks": 300
+  },
+  "setup": {
+    "seed": 42,
+    "modalities": [
+      "image-state",
+      "interleaved",
+      "video-state"
+    ]
+  },
+  "variants": {
+    "scalar VLM-judge analogue": {
+      "reward_mean": 0.5941666666666666,
+      "reward_std": 0.3830895964247645
+    },
+    "task-grounded verifier": {
+      "reward_mean": 1.0,
+      "reward_std": 0.0
+    }
+  },
+  "relative": {
+    "reward_mean_percent": 68.30294530154279
+  },
+  "diagnostics": {
+    "deterministic_scorers": 3,
+    "judge_calls": 300,
+    "verifier_calls": 300
+  },
+  "scope": "复刻 300 个程序化状态转移任务与确定性 task-specific scorer，对比易受流畅度影响的标量 judge；不训练或加载 14B/19B 视频生成器，也不冒充七个外部 benchmark 结果。",
+  "diagnostic_only": true,
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "Darwin arm64"
+  },
+  "seed": 42,
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "vbvr-pro",
+    "arxiv_id": "2608.26105",
+    "title": "VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning",
+    "paper_url": "https://arxiv.org/abs/2608.26105",
+    "track": "llm",
+    "organization": "Nanyang Technological University / VBVR Community",
+    "published": "2026-08-26",
+    "code_url": "https://www.video-reason.com/?v=pro",
+    "topics": [
+      "multimodal-foundation-model",
+      "native-visual-reasoning",
+      "verifiable-reward",
+      "benchmark"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/vbvr_pro",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l1_mechanism",
+    "datasets": [
+      "VBVR-Pro procedural task specification"
+    ],
+    "baseline": "scalar VLM-as-a-judge analogue on the same 300 generated tasks",
+    "metrics": [
+      "reward mean",
+      "reward standard deviation",
+      "deterministic verifier agreement"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "online_evidence": [],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-08-27T16:29:36.470882+00:00",
+    "code_commit": "cfb01264c6575f3d1634226940df384a3632a036",
+    "python": "3.14.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "numpy": "2.4.3"
+    },
+    "artifact_path": "docs/reproductions/2608.26105-vbvr-pro/metrics/procedural-seed42.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "tier_label": "L1 核心机制 mini-suite",
+    "seeds": [
+      42
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "released large video/image generators",
+      "seven external transfer benchmarks",
+      "large-scale multi-task RL"
+    ]
+  },
+  "manifest_ref": "reproduction:vbvr-pro"
+}

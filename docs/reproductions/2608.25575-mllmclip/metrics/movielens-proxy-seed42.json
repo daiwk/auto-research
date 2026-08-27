@@ -1,0 +1,115 @@
+{
+  "paper": {
+    "arxiv_id": "2608.25575",
+    "title": "MLLMCLIP"
+  },
+  "dataset": {
+    "name": "MovieLens-1M public content/collaborative proxy",
+    "items": 360
+  },
+  "setup": {
+    "seed": 42,
+    "teacher_layers": 3,
+    "selected_tokens": 180
+  },
+  "variants": {
+    "CLIP feature baseline": {
+      "recall_at_10": 0.019444444444444445,
+      "linear_cka": 0.8270094777453544
+    },
+    "MLLMCLIP distillation": {
+      "recall_at_10": 0.8305555555555556,
+      "linear_cka": 0.9957838603463952
+    }
+  },
+  "relative": {
+    "recall_at_10": 4171.428571428572,
+    "linear_cka": 20.407793035354835
+  },
+  "diagnostics": {
+    "attention_selected_fraction": 0.5,
+    "cka_loss": 0.004216139653604789,
+    "synthetic_hard_negative_calls": 0,
+    "teacher_summary_norm": 0.23997370877505889
+  },
+  "scope": "在 MovieLens-1M 的公开内容/协同代理视图上执行逐层 attention token selection 与 CKA feature distillation；不加载原论文 MLLM teacher，也不把代理 retrieval 指标视为视觉 benchmark 结果。",
+  "diagnostic_only": true,
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "Darwin arm64"
+  },
+  "seed": 42,
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "mllmclip",
+    "arxiv_id": "2608.25575",
+    "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+    "paper_url": "https://arxiv.org/abs/2608.25575",
+    "track": "llm",
+    "organization": "KAIST / Sony AI",
+    "published": "2026-08-26",
+    "code_url": null,
+    "topics": [
+      "multimodal-foundation-model",
+      "feature-distillation",
+      "compositionality",
+      "cka"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/mllmclip",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l1_mechanism",
+    "datasets": [
+      "MovieLens-1M public content/collaborative proxy"
+    ],
+    "baseline": "same student features without attention selection or CKA projection",
+    "metrics": [
+      "Recall@10",
+      "linear CKA",
+      "attention selected fraction"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "online_evidence": [],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-08-27T16:29:37.450288+00:00",
+    "code_commit": "cfb01264c6575f3d1634226940df384a3632a036",
+    "python": "3.14.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "numpy": "2.4.3"
+    },
+    "artifact_path": "docs/reproductions/2608.25575-mllmclip/metrics/movielens-proxy-seed42.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "tier_label": "L1 核心机制 mini-suite",
+    "seeds": [
+      42
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "generative MLLM teacher checkpoint",
+      "vision compositionality benchmarks",
+      "full CLIP pretraining"
+    ]
+  },
+  "manifest_ref": "reproduction:mllmclip"
+}

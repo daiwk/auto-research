@@ -162,6 +162,21 @@ class AgentResearchRunner:
             "memory_bank_updates": agent.memory_bank_updates,
             "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
         }
+        # Paper-specific counters are intentionally surfaced explicitly.  The
+        # public dashboard uses them to distinguish a real mechanism path from
+        # the common deterministic answer/plan contract of the mini-suite.
+        for name in (
+            "harness_generations", "harness_repairs", "archive_distillations",
+            "reopened_approaches", "versioned_edits",
+            "tool_necessity_filters", "redundant_calls_avoided",
+            "reliability_reflections", "prefix_hits", "critical_path_updates",
+            "aging_promotions", "counterfactual_probes", "bayesian_edge_updates",
+            "progress_predictions", "meta_gate_decisions", "budget_downgrades",
+        ):
+            diagnostics[name] = getattr(agent, name, 0)
+        phase_counts = getattr(agent, "phase_counts", None)
+        if phase_counts is not None:
+            diagnostics["phase_counts"] = dict(phase_counts)
         result = AgentResearchResult(
             config.method, config.benchmark, metrics, axis_metrics, diagnostics, trace
         )

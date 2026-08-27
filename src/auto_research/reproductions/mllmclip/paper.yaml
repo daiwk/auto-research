@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "mllmclip",
+  "arxiv_id": "2608.25575",
+  "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+  "paper_url": "https://arxiv.org/abs/2608.25575",
+  "organization": "KAIST / Sony AI",
+  "published": "2026-08-26",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-28）",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "feature-distillation",
+    "compositionality",
+    "cka"
+  ],
+  "local_code": "src/auto_research/reproductions/mllmclip",
+  "documentation": "docs/reproductions/2608.25575-mllmclip/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "MovieLens-1M public content/collaborative proxy"
+  ],
+  "baseline": "same student features without attention selection or CKA projection",
+  "metrics": [
+    "Recall@10",
+    "linear CKA",
+    "attention selected fraction"
+  ],
+  "mechanisms": [
+    "generative MLLM teacher checkpoint",
+    "vision compositionality benchmarks",
+    "full CLIP pretraining"
+  ],
+  "evolve_operators": []
+}

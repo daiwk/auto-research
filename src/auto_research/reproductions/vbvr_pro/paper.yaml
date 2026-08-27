@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "vbvr-pro",
+  "arxiv_id": "2608.26105",
+  "title": "VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning",
+  "paper_url": "https://arxiv.org/abs/2608.26105",
+  "organization": "Nanyang Technological University / VBVR Community",
+  "published": "2026-08-26",
+  "upstream_code": "https://www.video-reason.com/?v=pro",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "native-visual-reasoning",
+    "verifiable-reward",
+    "benchmark"
+  ],
+  "local_code": "src/auto_research/reproductions/vbvr_pro",
+  "documentation": "docs/reproductions/2608.26105-vbvr-pro/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "VBVR-Pro procedural task specification"
+  ],
+  "baseline": "scalar VLM-as-a-judge analogue on the same 300 generated tasks",
+  "metrics": [
+    "reward mean",
+    "reward standard deviation",
+    "deterministic verifier agreement"
+  ],
+  "mechanisms": [
+    "released large video/image generators",
+    "seven external transfer benchmarks",
+    "large-scale multi-task RL"
+  ],
+  "evolve_operators": []
+}

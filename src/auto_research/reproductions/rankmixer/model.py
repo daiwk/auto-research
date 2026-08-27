@@ -38,6 +38,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
         "rankmixer_tokenminds",
         "rankmixer_ha_moe", "rankmixer_dual_sid", "rankmixer_mfli",
         "rankmixer_kunlun", "rankmixer_ultra_hstu",
+        "rankmixer_dceo", "rankmixer_transretrieval",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -368,6 +369,14 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 self.ultra_attention = nn.MultiheadAttention(config.dimensions, config.tokens, batch_first=True, dropout=0.0)
                 self.ultra_transducers = nn.ModuleList([nn.Linear(config.dimensions, config.dimensions) for _ in range(3)])
                 self.ultra_router = nn.Linear(config.dimensions, 3)
+            if kind == "rankmixer_dceo":
+                self.dceo_actor = nn.Sequential(
+                    nn.Linear(feature_count, config.dimensions), nn.GELU(),
+                    nn.Linear(config.dimensions, 3),
+                )
+            if kind == "rankmixer_transretrieval":
+                self.trans_target = nn.Linear(config.dimensions, config.dimensions, bias=False)
+                self.trans_domain = nn.Embedding(config.sequence_length, config.dimensions)
             self.auxiliary_logits = None
             self.alignment_logits = None
             self.restricted_logits = None
@@ -424,6 +433,21 @@ def build_model(kind: str, data, config: RankMixerConfig):
             last = self.item(history[:, -1])
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)
+            if kind == "rankmixer_dceo":
+                objective_weights = torch.softmax(self.dceo_actor(profile), dim=-1)
+                user_feature = (
+                    objective_weights[:, :1] * user_feature
+                    + objective_weights[:, 1:2] * recent
+                    + objective_weights[:, 2:3] * last
+                )
+            if kind == "rankmixer_transretrieval":
+                history_values = self.item(history)
+                norms = history_values.norm(dim=-1, keepdim=True).clamp_min(1e-6)
+                compressed = (history_values * norms).sum(1) / norms.sum(1)
+                position = self.trans_domain(
+                    torch.full((batch,), history.shape[1] - 1, device=history.device)
+                )
+                user_feature = user_feature + self.trans_target(compressed) + position
             if kind == "rankmixer_tokenminds":
                 history_codes = self.tokenminds_item_codes[history]
                 user_token = sum(

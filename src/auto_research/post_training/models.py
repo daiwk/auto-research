@@ -97,6 +97,10 @@ ALGORITHMS = (
     "erpo",
     "opd-search-plus",
     "opdvr",
+    "v-rubrics",
+    "clue-opsd",
+    "grin",
+    "grip",
 )
 
 

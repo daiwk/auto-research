@@ -18,6 +18,10 @@
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
 - [OPDSearch+](2608.24310-opd-search-plus/README.md)：先在学生在线搜索轨迹上做冻结教师 forward-KL 蒸馏，再用可验证奖励继续 RL refinement。
 - [OPDVR](2608.24696-opdvr/README.md)：用正确性约束的 ReLU gate 校正 sampled-token OPD 隐式奖励符号，不增加额外损失超参数。
+- [V-Rubrics](2608.25580-v-rubrics/README.md)：把视觉忠实度、推理一致性与指令遵循拆成原子 rubric，并执行局部信用分配。
+- [Clue-OPSD](2608.25356-clue-opsd/README.md)：只在教师提示能够修复学生推理的 clue token 上执行 on-policy self-distillation。
+- [GRIN](2608.25243-grin/README.md)：以组相对改进和难度自适应权重强化仍有学习空间的 reasoning rollout。
+- [GRIP](2608.25583-grip/README.md)：把过程 rubric 与结果回报结合，给长推理轨迹分配更细粒度的信用。
 - [论文谱系与边界](lineage.md)：系统审计已覆盖主干、静态能力收口和后续评测边界。
 - [统一评测协议](benchmark.md)：数据、指标、公平比较口径和新增方法验收标准。
 - [SRPO](2608.23493-srpo/README.md)：用自我反思 patch 构造同模型特权教师和 token 级稠密信用。

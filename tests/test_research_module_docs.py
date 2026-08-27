@@ -102,6 +102,10 @@ MODULES = {
         "erpo": "2608.23311-erpo",
         "opd-search-plus": "2608.24310-opd-search-plus",
         "opdvr": "2608.24696-opdvr",
+        "v-rubrics": "2608.25580-v-rubrics",
+        "clue-opsd": "2608.25356-clue-opsd",
+        "grin": "2608.25243-grin",
+        "grip": "2608.25583-grip",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -185,6 +189,12 @@ MODULES = {
         "skillforge": "2608.24747-skillforge",
         "ahead": "2608.24114-ahead",
         "smith": "2608.24571-smith",
+        "jit-agent": "2608.25593-jit-agent",
+        "traceml": "2608.26086-traceml",
+        "adavdr": "2608.25559-adavdr",
+        "topas": "2608.25523-topas",
+        "caskg": "2608.25500-caskg",
+        "progrouter": "2608.25992-progrouter",
     },
 }
 

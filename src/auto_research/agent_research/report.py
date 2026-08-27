@@ -4,6 +4,12 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "jit-agent": ("JIT-Agent", "https://arxiv.org/abs/2608.25593"),
+    "traceml": ("TraceML", "https://arxiv.org/abs/2608.26086"),
+    "adavdr": ("AdaVDR", "https://arxiv.org/abs/2608.25559"),
+    "topas": ("TOPAS", "https://arxiv.org/abs/2608.25523"),
+    "caskg": ("CaSKG", "https://arxiv.org/abs/2608.25500"),
+    "progrouter": ("ProgRouter", "https://arxiv.org/abs/2608.25992"),
     "spo-plus-plus": ("SPO++", "https://arxiv.org/abs/2608.24870"),
     "skillforge": ("SkillForge", "https://arxiv.org/abs/2608.24747"),
     "ahead": ("AHEAD", "https://arxiv.org/abs/2608.24114"),

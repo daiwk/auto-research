@@ -230,6 +230,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         "rankmixer_mfli": ("mfli", "learnable index", "可学习索引", "多切面"),
         "rankmixer_kunlun": ("kunlun", "gdpa", "昆仑"),
         "rankmixer_ultra_hstu": ("ultra-hstu", "ultra hstu", "semi-local", "半局部"),
+        "rankmixer_dceo": ("dceo", "causal effect", "因果效果", "长期价值"),
+        "rankmixer_transretrieval": ("transretrieval", "norm-aware", "目标压缩", "跨域召回"),
     }
     for architecture, terms in direct_terms.items():
         if any(term in text for term in terms):

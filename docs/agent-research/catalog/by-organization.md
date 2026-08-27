@@ -18,6 +18,10 @@
 
 - 2026-07-07 · 一作：Yuhang Zhou · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
 
+## Accio Team, Alibaba Group
+
+- 2026-08-26 · 一作：Xintong Zhang · [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](../2608.25559-adavdr/README.md)（`adavdr`）：先以目标模型能力过滤不必要工具调用，只在中间证据不可靠时回退反思；SFT 后用 redundancy-aware reward 做 RL，兼顾视频理解、外部检索和调用成本。
+
 ## Adelaide University
 
 - 2026-08-19 · 一作：Yugu Li · [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../2608.18682-rtpo/README.md)（`rtpo`）：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。
@@ -33,6 +37,10 @@
 ## Apple
 
 - 2025-02-03 · 一作：Kevin Chen · [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
+
+## Aston University
+
+- 2026-08-26 · 一作：Songyuan Li · [ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs](../2608.25992-progrouter/README.md)（`progrouter`）：用多视角 scorer 衡量子任务完成度、进展趋势和状态质量，再由双路径 predictor 估计候选模型的边际进展，以 meta-gate 在质量、时间和长期成本预算间逐步决策。
 
 ## Authors did not disclose affiliation
 
@@ -70,6 +78,7 @@
 
 ## Carnegie Mellon University
 
+- 2026-08-26 · 一作：Jiarui Yan · [TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development](../2608.26086-traceml/README.md)（`traceml`）：统一记录每个代码版本、得分、动作意图、编辑规模和效果，比较 4465 条人类轨迹与 Agent 轨迹；把人类会交替阶段、回开旧方案的规律蒸馏成 planning prior。
 - 2023-03-30 · 一作：Aman Madaan · [Self-Refine](../2303.17651-self-refine/README.md)（`self-refine`）：一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。
 - 2022-11-18 · 一作：Luyu Gao · [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
 
@@ -93,6 +102,10 @@
 
 - 2026-08-16 · 一作：XinQi Wang · [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](../2608.15703-hymem/README.md)（`hymem`）：把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。
 
+## Jilin University / Ant Group
+
+- 2026-08-26 · 一作：Zhiyuan Li · [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](../2608.25500-caskg/README.md)（`caskg`）：先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。
+
 ## King Abdullah University of Science and Technology
 
 - 2023-03-31 · 一作：Guohao Li · [CAMEL](../2303.17760-camel/README.md)（`camel`）：用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。
@@ -100,6 +113,10 @@
 ## Kuaishou
 
 - 2026-06-26 · 一作：AgentX Team · [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../2606.26859-agentx/README.md)（`agentx`）：传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。
+
+## LV-NUS Lab
+
+- 2026-08-26 · 一作：Guibin Zhang · [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](../2608.25593-jit-agent/README.md)（`jit-agent`）：把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。
 
 ## Meituan
 
@@ -255,6 +272,7 @@
 
 ## University of Science and Technology of China
 
+- 2026-08-26 · 一作：Hongqiu Ni · [TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving](../2608.25523-topas/README.md)（`topas`）：在共享 KV-cache 预算下，同时估算工作流最长剩余路径与下游 prefix reuse 收益，并纳入 prefix 移动、抢占和 aging，避免只优化局部命中率或单请求进度。
 - 2026-08-21 · 一作：Huizu Lin · [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](../2608.21292-auso/README.md)（`auso`）：外部技能检索有上下文开销，完全内化又失去按任务选择能力；按整条轨迹成功率硬切阶段还无法判断某一个动作是否真正受益。AUSO 先用 skill-conditioned teacher 内化通用技能，再进行 outcome-driven exploration，最后对每个动作比较有技能和无技能策略的 JSD，以有界权重调整 GRPO advantage。
 - 2026-07-28 · 一作：Yu Wang · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
 - 2026-04-20 · 一作：Daoyu Wang · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。

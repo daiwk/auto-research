@@ -15,6 +15,8 @@
 - 2026-08 · [DEGR](../2608.04809-degr/README.md)：联合 next-item CE、cohort 多样性与 reward-adaptive ORPO，并在推理时执行多样性感知重排。
 
 ## Alibaba
+- 2026-08 · [DCEO](../2608.25635-dceo/README.md)：以直接因果效应分离短期点击与长期用户价值，并用多目标策略权重优化电商搜索排序。
+- 2026-08 · [TransRetrieval](../2608.25528-transretrieval/README.md)：把 target token 压缩、多域归一化与大规模 Transformer 检索结合，在受控 serving 预算下扩展召回模型。
 - 2026-08 · [DREAM](../2608.09408-dream/README.md)：以 L0/L1/L2 意图、策略记忆和有界 typed compiler 控制现有推荐链路，再用离线探索与线上结论回流持续更新策略。
 - 2026-08 · [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - 2026-07 · [SWAG](../2607.25233-swag-bid/README.md)：以 masked future plan 和滑动窗口目标进行长周期生成式自动出价。
