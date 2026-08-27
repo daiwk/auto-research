@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 多模态基础模型 | [MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations](../reproductions/2608.25575-mllmclip/README.md) | KAIST / Sony AI，2026-08-26 | 未发现官方代码 | `mllmclip` |
+| 多模态基础模型 | [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../reproductions/2608.26105-vbvr-pro/README.md) | Nanyang Technological University / VBVR Community，2026-08-26 | [已开源](https://www.video-reason.com/?v=pro) | `vbvr-pro` |
 | 多模态基础模型 | [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../reproductions/2608.24053-wemm-embedding/README.md) | WeChat Vision, Tencent，2026-08-25 | [已开源](https://github.com/Tencent/WeMM-Embedding) | `wemm-embedding` |
 | 网络架构 | [RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models](../reproductions/2608.21236-rare/README.md) | Huazhong University of Science and Technology，2026-08-21 | 未发现官方代码 | `rare` |
 | 预训练与数据 | [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](../reproductions/2608.12831-tcab/README.md) | New York University，2026-08-13 | 未发现官方代码 | `tcab` |

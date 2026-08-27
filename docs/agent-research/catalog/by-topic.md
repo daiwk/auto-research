@@ -2,6 +2,33 @@
 
 采用“研究方向 → 方法簇 → 论文”的两级结构。一级用于快速定位研究范式，二级保留可比较的方法族；每篇论文独占一行，实验结果与复现边界请进入详情页查看。
 
+## 工具调用与环境执行
+
+### 工具选择、反馈与程序执行
+
+- [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](../2608.25559-adavdr/README.md)（`adavdr`）：先以目标模型能力过滤不必要工具调用，只在中间证据不可靠时回退反思；SFT 后用 redundancy-aware reward 做 RL，兼顾视频理解、外部检索和调用成本。
+- [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
+- [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
+- [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
+- [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
+- [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
+- [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
+- [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
+- [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
+
+### 电脑操作与 reward 评测
+
+- [HarnessOpt-Bench: Evaluating LLMs at Harness Optimization](../2608.06301-harnessopt-bench/README.md)（`harnessopt-bench`）：**主题：Harness 优化评测。** 在固定 target-evaluation 预算下，让优化器修改 prompt、工具、控制流和记忆；隐藏测试集与可信执行环境隔离搜索反馈，保留候选版本以供审计。
+- [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
+- [GAIA](../2311.12983-gaia/README.md)（`gaia`）：以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。
+
+### 专家路由与具身 / 浏览环境
+
+- [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
+- [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
+- [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
+- [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
+
 ## Agentic RL 与后训练
 
 ### 技能、turn 与 rollout credit
@@ -63,7 +90,13 @@
 
 ### 运行成本与工具暴露控制
 
+- [ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs](../2608.25992-progrouter/README.md)（`progrouter`）：用多视角 scorer 衡量子任务完成度、进展趋势和状态质量，再由双路径 predictor 估计候选模型的边际进展，以 meta-gate 在质量、时间和长期成本预算间逐步决策。
+- [TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving](../2608.25523-topas/README.md)（`topas`）：在共享 KV-cache 预算下，同时估算工作流最长剩余路径与下游 prefix reuse 收益，并纳入 prefix 移动、抢占和 aging，避免只优化局部命中率或单请求进度。
 - [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
+
+### ML / 软件开发轨迹
+
+- [TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development](../2608.26086-traceml/README.md)（`traceml`）：统一记录每个代码版本、得分、动作意图、编辑规模和效果，比较 4465 条人类轨迹与 Agent 轨迹；把人类会交替阶段、回开旧方案的规律蒸馏成 planning prior。
 
 ## 其他
 
@@ -104,36 +137,11 @@
 
 - [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](../2608.10357-sinkflex-rl/README.md)（`sinkflex-rl`）：长程工具 Agent 的 on-policy rollout 同时受环境状态、长上下文和训练显存限制。SinkFlex-RL 把 Gymnasium 双控制环境、VERL 风格数据流、无 value model 的 GRPO 与 sink-aware FlexAttention 组合，causal / sliding-window mask 下仍保留模型特有 sink scaling。
 
-## 工具调用与环境执行
-
-### 工具选择、反馈与程序执行
-
-- [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
-- [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
-- [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
-- [ToolBench](../2305.16504-toolbench/README.md)（`toolbench`）：分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。
-- [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
-- [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
-- [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
-- [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
-
-### 电脑操作与 reward 评测
-
-- [HarnessOpt-Bench: Evaluating LLMs at Harness Optimization](../2608.06301-harnessopt-bench/README.md)（`harnessopt-bench`）：**主题：Harness 优化评测。** 在固定 target-evaluation 预算下，让优化器修改 prompt、工具、控制流和记忆；隐藏测试集与可信执行环境隔离搜索反馈，保留候选版本以供审计。
-- [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
-- [GAIA](../2311.12983-gaia/README.md)（`gaia`）：以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。
-
-### 专家路由与具身 / 浏览环境
-
-- [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
-- [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
-- [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
-- [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
-
 ## 记忆、技能与持续学习
 
 ### 技能图与跨任务积累
 
+- [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](../2608.25500-caskg/README.md)（`caskg`）：先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。
 - [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](../2608.24747-skillforge/README.md)（`skillforge`）：SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。
 - [Learning Globally Reusable Skills for Coding Agents](../2608.06153-gse/README.md)（`gse`）：**主题：全局技能进化。** GSE 用 Skill Relation Graph 显式维护技能关系，以聚类合并局部经验，并通过 replay verification 防止过拟合与行为回退。
 - [When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents](../2608.05810-vag/README.md)（`vag`）：**主题：技能进化安全。** 技能一旦进入上下文会污染后代，事后删除无法彻底回滚。
@@ -157,6 +165,10 @@
 - [Generative Agents](../2304.03442-generative-agents/README.md)（`generative-agents`）：只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。
 
 ## 规划、搜索与反思
+
+### Harness 与自我改进
+
+- [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](../2608.25593-jit-agent/README.md)（`jit-agent`）：把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。
 
 ### 树搜索与自我改进
 

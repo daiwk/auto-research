@@ -1,0 +1,147 @@
+{
+  "paper": {
+    "arxiv_id": "2608.25528",
+    "title": "TransRetrieval"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 320,
+    "items": 480
+  },
+  "setup": {
+    "seed": 42,
+    "full_catalog": true,
+    "history_length": 20
+  },
+  "variants": {
+    "Transformer two-tower": {
+      "hit_at_10": 0.10625,
+      "ndcg_at_10": 0.05428956179752216,
+      "head_share_at_10": 0.0596875
+    },
+    "TransRetrieval core": {
+      "hit_at_10": 0.11875,
+      "ndcg_at_10": 0.05472929672758298,
+      "head_share_at_10": 0.0571875
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": 11.76470588235294,
+    "ndcg_at_10_percent": 0.8099806215066692,
+    "head_share_at_10_percent": -4.188481675392662
+  },
+  "diagnostics": {
+    "token_norm_std_before": 8.258790355892755e-09,
+    "token_norm_std_after": 6.929635869225387e-17,
+    "target_tokens_before": 8,
+    "target_tokens_after": 1,
+    "target_flops_reduction_percent": 85.0
+  },
+  "paper_results": {
+    "revenue_lift_percent": 2.53,
+    "rpm_lift_percent": 1.28
+  },
+  "scope": "在 MovieLens-1M 上执行 norm-aware weighted aggregation、8→1 target token compression 与 position-style domain embedding；未复刻 400 亿交互、52M 广告库和生产 ANN serving。",
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "Darwin arm64"
+  },
+  "seed": 42,
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "transretrieval",
+    "arxiv_id": "2608.25528",
+    "title": "TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation",
+    "paper_url": "https://arxiv.org/abs/2608.25528",
+    "track": "recommendation",
+    "organization": "Renmin University of China / Taobao & Tmall Group, Alibaba",
+    "published": "2026-08-26",
+    "code_url": null,
+    "topics": [
+      "retrieval",
+      "transformer-scaling",
+      "target-token-compression",
+      "multi-domain"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/transretrieval",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens-1M"
+    ],
+    "baseline": "same-feature Transformer-style two-tower mean aggregation",
+    "metrics": [
+      "Hit@10",
+      "NDCG@10",
+      "head share@10",
+      "token norm dispersion"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "online_evidence": [
+      {
+        "product": "Alibaba display advertising",
+        "metric": "platform revenue",
+        "lift_percent": 2.53,
+        "traffic": "5% traffic; month-long A/B; p<0.0001",
+        "source_url": "https://arxiv.org/html/2608.25528v1#S4.SS5",
+        "source_location": "Section 4.5 / Table 7",
+        "experiment_duration": "one month",
+        "significance": "p<0.0001",
+        "retrieved_at": "2026-08-28"
+      },
+      {
+        "product": "Alibaba display advertising",
+        "metric": "RPM",
+        "lift_percent": 1.28,
+        "traffic": "5% traffic; month-long A/B; p<0.0001",
+        "source_url": "https://arxiv.org/html/2608.25528v1#S4.SS5",
+        "source_location": "Section 4.5 / Table 7",
+        "experiment_duration": "one month",
+        "significance": "p<0.0001",
+        "retrieved_at": "2026-08-28"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-08-27T16:29:37.484173+00:00",
+    "code_commit": "cfb01264c6575f3d1634226940df384a3632a036",
+    "python": "3.14.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "numpy": "2.4.3"
+    },
+    "artifact_path": "docs/reproductions/2608.25528-transretrieval/metrics/movielens-1m-seed42.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "40B industrial interactions",
+      "52M-item advertisement corpus",
+      "production ANN serving"
+    ]
+  },
+  "manifest_ref": "reproduction:transretrieval"
+}

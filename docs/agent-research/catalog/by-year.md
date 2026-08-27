@@ -4,6 +4,12 @@
 
 ## 2026
 
+- 2026-08 · [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](../2608.25559-adavdr/README.md)（`adavdr`）：先以目标模型能力过滤不必要工具调用，只在中间证据不可靠时回退反思；SFT 后用 redundancy-aware reward 做 RL，兼顾视频理解、外部检索和调用成本。
+- 2026-08 · [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](../2608.25500-caskg/README.md)（`caskg`）：先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。
+- 2026-08 · [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](../2608.25593-jit-agent/README.md)（`jit-agent`）：把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。
+- 2026-08 · [ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs](../2608.25992-progrouter/README.md)（`progrouter`）：用多视角 scorer 衡量子任务完成度、进展趋势和状态质量，再由双路径 predictor 估计候选模型的边际进展，以 meta-gate 在质量、时间和长期成本预算间逐步决策。
+- 2026-08 · [TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving](../2608.25523-topas/README.md)（`topas`）：在共享 KV-cache 预算下，同时估算工作流最长剩余路径与下游 prefix reuse 收益，并纳入 prefix 移动、抢占和 aging，避免只优化局部命中率或单请求进度。
+- 2026-08 · [TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development](../2608.26086-traceml/README.md)（`traceml`）：统一记录每个代码版本、得分、动作意图、编辑规模和效果，比较 4465 条人类轨迹与 Agent 轨迹；把人类会交替阶段、回开旧方案的规律蒸馏成 planning prior。
 - 2026-08 · [AHEAD: Agentic Hints for Effective Agent Development](../2608.24114-ahead/README.md)（`ahead`）：轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。
 - 2026-08 · [SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents](../2608.24747-skillforge/README.md)（`skillforge`）：SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。
 - 2026-08 · [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。

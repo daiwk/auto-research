@@ -59,6 +59,10 @@
 
 ## 生成、排序与冷启动
 
+### 搜索、召回与长期价值
+- [DCEO](../2608.25635-dceo/README.md)：用直接因果效应替代短期相关性代理，并以动态多目标权重优化长期用户价值。
+- [TransRetrieval](../2608.25528-transretrieval/README.md)：通过 target-token 压缩、多域参数化与深层 Transformer 扩展工业检索。
+
 ### 生成式召回与端到端推荐
 - [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
 - [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。

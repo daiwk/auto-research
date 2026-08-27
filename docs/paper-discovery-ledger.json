@@ -896,7 +896,19 @@
           "evidence_gate": "quantified-online-ab",
           "priority": "P0",
           "priority_reason": "Google Discover heterogeneous ranking with 7-day 1% live-traffic A/B",
-          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 4.4", "Table 4"], "matched_terms": ["live experiments", "1% traffic", "7 days"]},
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.4",
+              "Table 4"
+            ],
+            "matched_terms": [
+              "live experiments",
+              "1% traffic",
+              "7 days"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "ha-moe",
@@ -909,7 +921,20 @@
           "evidence_gate": "quantified-production-online",
           "priority": "P0",
           "priority_reason": "YouTube ranking and retrieval production deployment with quantified online gains",
-          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 4.2", "Table 1"], "matched_terms": ["online experiments", "production", "ranking", "retrieval"]},
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.2",
+              "Table 1"
+            ],
+            "matched_terms": [
+              "online experiments",
+              "production",
+              "ranking",
+              "retrieval"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "dual-sid",
@@ -922,7 +947,20 @@
           "evidence_gate": "quantified-online-ab",
           "priority": "P0",
           "priority_reason": "Google Discover agentic optimization with statistically significant live-traffic A/B",
-          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 5", "Table 1", "Table 3"], "matched_terms": ["online A/B testing", "live traffic", "p < 0.05"]},
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 5",
+              "Table 1",
+              "Table 3"
+            ],
+            "matched_terms": [
+              "online A/B testing",
+              "live traffic",
+              "p < 0.05"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "agentic-rec-tune",
@@ -935,7 +973,18 @@
           "evidence_gate": "quantified-online-ab",
           "priority": "P0",
           "priority_reason": "Meta retrieval model with 7-day production A/B and QPS gain",
-          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 4.6"], "matched_terms": ["online A/B test", "7 days", "QPS"]},
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 4.6"
+            ],
+            "matched_terms": [
+              "online A/B test",
+              "7 days",
+              "QPS"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "mfli",
@@ -948,7 +997,18 @@
           "evidence_gate": "quantified-full-deployment",
           "priority": "P0",
           "priority_reason": "Deployed across major Meta Ads models with quantified topline gain",
-          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 5.5"], "matched_terms": ["deployed", "major Ads models", "topline"]},
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 5.5"
+            ],
+            "matched_terms": [
+              "deployed",
+              "major Ads models",
+              "topline"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "kunlun",
@@ -961,7 +1021,18 @@
           "evidence_gate": "quantified-online-ab-and-full-deployment",
           "priority": "P0",
           "priority_reason": "Meta recommendation with 30-day A/B and full deployment to billions of daily users",
-          "evidence_review": {"scope": "full-text", "abstract_used_as_gate": false, "locations": ["Section 5.4"], "matched_terms": ["30-day A/B", "fully deployed", "billions of daily active users"]},
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": [
+              "Section 5.4"
+            ],
+            "matched_terms": [
+              "30-day A/B",
+              "fully deployed",
+              "billions of daily active users"
+            ]
+          },
           "track": "recommendation",
           "status": "implemented",
           "key": "ultra-hstu",
@@ -980,12 +1051,29 @@
         "Google and Meta affiliation reverse search",
         "official repository search"
       ],
-      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
       "required_subtopics": [
-        {"track": "recommendation", "subtopic": "generative-ranking"},
-        {"track": "foundation-model", "subtopic": "multimodal"},
-        {"track": "post-training", "subtopic": "preference-optimization"},
-        {"track": "agent", "subtopic": "agentic-rl"}
+        {
+          "track": "recommendation",
+          "subtopic": "generative-ranking"
+        },
+        {
+          "track": "foundation-model",
+          "subtopic": "multimodal"
+        },
+        {
+          "track": "post-training",
+          "subtopic": "preference-optimization"
+        },
+        {
+          "track": "agent",
+          "subtopic": "agentic-rl"
+        }
       ],
       "candidates": [
         {
@@ -1180,10 +1268,22 @@
         "official repository search"
       ],
       "candidate_pool": {
-        "recommendation": {"total": 74, "new": 68},
-        "foundation-model": {"total": 505, "new": 502},
-        "post-training": {"total": 162, "new": 161},
-        "agent": {"total": 430, "new": 428}
+        "recommendation": {
+          "total": 74,
+          "new": 68
+        },
+        "foundation-model": {
+          "total": 505,
+          "new": 502
+        },
+        "post-training": {
+          "total": 162,
+          "new": 161
+        },
+        "agent": {
+          "total": 430,
+          "new": 428
+        }
       },
       "closure_claim": "representative full-text shortlist only; the high-recall candidate artifacts remain pending incremental review",
       "candidates": [
@@ -1274,15 +1374,60 @@
         "Google and Meta priority reverse search",
         "official repository links"
       ],
-      "candidate_pool": {"cross_domain_metadata_total": 329},
+      "candidate_pool": {
+        "cross_domain_metadata_total": 329
+      },
       "industrial_recommendation_result": "no new paper passed the quantified online A/B or full-traffic evidence gate",
       "candidates": [
-        {"id": "2608.23493", "key": "srpo", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.23493-srpo/README.md"},
-        {"id": "2608.23311", "key": "erpo", "track": "post-training", "priority": "P0", "organization": "AMAP, Alibaba Group", "status": "implemented", "doc": "post-training/2608.23311-erpo/README.md"},
-        {"id": "2608.23318", "key": "agent-g2", "track": "agent", "priority": "P0", "organization": "Baidu", "status": "implemented", "doc": "agent-research/2608.23318-agent-g2/README.md"},
-        {"id": "2608.23041", "key": "autosaddler", "track": "agent", "priority": "P0", "organization": "Microsoft / POSTECH", "status": "implemented", "doc": "agent-research/2608.23041-autosaddler/README.md"},
-        {"id": "2608.23400", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "public-dataset academic recommendation; no quantified production online A/B"},
-        {"id": "2608.22734", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "public-dataset academic recommendation; no quantified production online A/B"}
+        {
+          "id": "2608.23493",
+          "key": "srpo",
+          "track": "post-training",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "post-training/2608.23493-srpo/README.md"
+        },
+        {
+          "id": "2608.23311",
+          "key": "erpo",
+          "track": "post-training",
+          "priority": "P0",
+          "organization": "AMAP, Alibaba Group",
+          "status": "implemented",
+          "doc": "post-training/2608.23311-erpo/README.md"
+        },
+        {
+          "id": "2608.23318",
+          "key": "agent-g2",
+          "track": "agent",
+          "priority": "P0",
+          "organization": "Baidu",
+          "status": "implemented",
+          "doc": "agent-research/2608.23318-agent-g2/README.md"
+        },
+        {
+          "id": "2608.23041",
+          "key": "autosaddler",
+          "track": "agent",
+          "priority": "P0",
+          "organization": "Microsoft / POSTECH",
+          "status": "implemented",
+          "doc": "agent-research/2608.23041-autosaddler/README.md"
+        },
+        {
+          "id": "2608.23400",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "public-dataset academic recommendation; no quantified production online A/B"
+        },
+        {
+          "id": "2608.22734",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "public-dataset academic recommendation; no quantified production online A/B"
+        }
       ]
     },
     {
@@ -1290,23 +1435,283 @@
       "scope_kind": "daily-high-recall-increment",
       "checked_at": "2026-08-26T18:00:00+08:00",
       "window": "new arXiv listings visible on 2026-08-26; submitted 2026-08-25 UTC",
-      "sources": ["official arXiv new-list pages", "DeepXiv semantic cross-check", "paper HTML/PDF full-text review", "Google and Meta priority reverse search", "official repositories"],
-      "candidate_pool": {"cross_domain_metadata_total": 363},
+      "sources": [
+        "official arXiv new-list pages",
+        "DeepXiv semantic cross-check",
+        "paper HTML/PDF full-text review",
+        "Google and Meta priority reverse search",
+        "official repositories"
+      ],
+      "candidate_pool": {
+        "cross_domain_metadata_total": 363
+      },
       "industrial_recommendation_result": "TAGR passed quantified production A/B; no new Google/Meta paper passed the topic plus full-text online-evidence gate",
       "candidates": [
-        {"id": "2608.24034", "key": "tagr", "track": "recommendation", "priority": "P0", "organization": "Kuaishou Technology", "status": "implemented", "doc": "reproductions/2608.24034-tagr/README.md", "evidence_gate": "production A/B: LRE +8.5%, SCC +7.4%, revenue +16.1%"},
-        {"id": "2608.24053", "key": "wemm-embedding", "track": "foundation-model", "priority": "P0", "organization": "WeChat, Tencent", "status": "implemented", "doc": "reproductions/2608.24053-wemm-embedding/README.md"},
-        {"id": "2608.24310", "key": "opd-search-plus", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.24310-opd-search-plus/README.md"},
-        {"id": "2608.24696", "key": "opdvr", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.24696-opdvr/README.md"},
-        {"id": "2608.24870", "key": "spo-plus-plus", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24870-spo-plus-plus/README.md"},
-        {"id": "2608.24747", "key": "skillforge", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24747-skillforge/README.md"},
-        {"id": "2608.24114", "key": "ahead", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24114-ahead/README.md"},
-        {"id": "2608.24571", "key": "smith", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.24571-smith/README.md"},
-        {"id": "2608.24295", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "full text has deployment-oriented analysis but no quantified production A/B or explicit full-traffic rollout"},
-        {"id": "2608.24132", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "production migration case study reports fixed-population offline evaluation, not a production online experiment"},
-        {"id": "2608.24091", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "no quantified production online evidence"},
-        {"id": "2608.24079", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "academic public-data evaluation; no quantified production online evidence"},
-        {"id": "2608.24176", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "academic offline evaluation; no quantified production online evidence"}
+        {
+          "id": "2608.24034",
+          "key": "tagr",
+          "track": "recommendation",
+          "priority": "P0",
+          "organization": "Kuaishou Technology",
+          "status": "implemented",
+          "doc": "reproductions/2608.24034-tagr/README.md",
+          "evidence_gate": "production A/B: LRE +8.5%, SCC +7.4%, revenue +16.1%"
+        },
+        {
+          "id": "2608.24053",
+          "key": "wemm-embedding",
+          "track": "foundation-model",
+          "priority": "P0",
+          "organization": "WeChat, Tencent",
+          "status": "implemented",
+          "doc": "reproductions/2608.24053-wemm-embedding/README.md"
+        },
+        {
+          "id": "2608.24310",
+          "key": "opd-search-plus",
+          "track": "post-training",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "post-training/2608.24310-opd-search-plus/README.md"
+        },
+        {
+          "id": "2608.24696",
+          "key": "opdvr",
+          "track": "post-training",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "post-training/2608.24696-opdvr/README.md"
+        },
+        {
+          "id": "2608.24870",
+          "key": "spo-plus-plus",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.24870-spo-plus-plus/README.md"
+        },
+        {
+          "id": "2608.24747",
+          "key": "skillforge",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.24747-skillforge/README.md"
+        },
+        {
+          "id": "2608.24114",
+          "key": "ahead",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.24114-ahead/README.md"
+        },
+        {
+          "id": "2608.24571",
+          "key": "smith",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.24571-smith/README.md"
+        },
+        {
+          "id": "2608.24295",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "full text has deployment-oriented analysis but no quantified production A/B or explicit full-traffic rollout"
+        },
+        {
+          "id": "2608.24132",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "production migration case study reports fixed-population offline evaluation, not a production online experiment"
+        },
+        {
+          "id": "2608.24091",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "no quantified production online evidence"
+        },
+        {
+          "id": "2608.24079",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "academic public-data evaluation; no quantified production online evidence"
+        },
+        {
+          "id": "2608.24176",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "academic offline evaluation; no quantified production online evidence"
+        }
+      ]
+    },
+    {
+      "batch": "2026-08-27-daily-increment",
+      "scope_kind": "daily-high-recall-increment-with-one-day-announcement-overlap",
+      "checked_at": "2026-08-28T00:00:00+08:00",
+      "window": "new arXiv listing visible on 2026-08-27; API overlap includes submitted/published 2026-08-26 UTC",
+      "sources": [
+        "official arXiv API with one-day overlap",
+        "paper HTML/PDF full-text review",
+        "Google and Meta priority reverse search",
+        "official project and repository links"
+      ],
+      "candidate_pool": {
+        "recommendation": 6,
+        "foundation_model": 50,
+        "post_training": 14,
+        "agent": 38
+      },
+      "industrial_recommendation_result": "DCEO and TransRetrieval passed quantified production A/B; Meta AMBER was full-text reviewed and rejected for lack of quantified online/full-traffic evidence",
+      "candidates": [
+        {
+          "id": "2608.25635",
+          "key": "dceo",
+          "track": "recommendation",
+          "priority": "P0",
+          "organization": "Taobao & Tmall Group, Alibaba",
+          "status": "implemented",
+          "doc": "reproductions/2608.25635-dceo/README.md",
+          "evidence_gate": "41-day production A/B: GMV +0.36%"
+        },
+        {
+          "id": "2608.25528",
+          "key": "transretrieval",
+          "track": "recommendation",
+          "priority": "P0",
+          "organization": "Renmin University of China / Alibaba",
+          "status": "implemented",
+          "doc": "reproductions/2608.25528-transretrieval/README.md",
+          "evidence_gate": "month-long 5% traffic A/B: revenue +2.53%, RPM +1.28%"
+        },
+        {
+          "id": "2608.26105",
+          "key": "vbvr-pro",
+          "track": "foundation-model",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "reproductions/2608.26105-vbvr-pro/README.md"
+        },
+        {
+          "id": "2608.25575",
+          "key": "mllmclip",
+          "track": "foundation-model",
+          "priority": "P1",
+          "status": "implemented",
+          "doc": "reproductions/2608.25575-mllmclip/README.md"
+        },
+        {
+          "id": "2608.25580",
+          "key": "v-rubrics",
+          "track": "post-training",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "post-training/2608.25580-v-rubrics/README.md"
+        },
+        {
+          "id": "2608.25356",
+          "key": "clue-opsd",
+          "track": "post-training",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "post-training/2608.25356-clue-opsd/README.md"
+        },
+        {
+          "id": "2608.25243",
+          "key": "grin",
+          "track": "post-training",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "post-training/2608.25243-grin/README.md"
+        },
+        {
+          "id": "2608.25583",
+          "key": "grip",
+          "track": "post-training",
+          "priority": "P1",
+          "status": "implemented",
+          "doc": "post-training/2608.25583-grip/README.md"
+        },
+        {
+          "id": "2608.25593",
+          "key": "jit-agent",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.25593-jit-agent/README.md"
+        },
+        {
+          "id": "2608.26086",
+          "key": "traceml",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.26086-traceml/README.md"
+        },
+        {
+          "id": "2608.25559",
+          "key": "adavdr",
+          "track": "agent",
+          "priority": "P0",
+          "organization": "Alibaba",
+          "status": "implemented",
+          "doc": "agent-research/2608.25559-adavdr/README.md"
+        },
+        {
+          "id": "2608.25523",
+          "key": "topas",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.25523-topas/README.md"
+        },
+        {
+          "id": "2608.25500",
+          "key": "caskg",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.25500-caskg/README.md"
+        },
+        {
+          "id": "2608.25992",
+          "key": "progrouter",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "doc": "agent-research/2608.25992-progrouter/README.md"
+        },
+        {
+          "id": "2608.25546",
+          "title": "AMBER",
+          "track": "recommendation",
+          "priority": "P0",
+          "organization": "Meta",
+          "status": "rejected",
+          "reason": "full-text review found no quantified production A/B or explicit full-traffic rollout; organization priority does not waive the evidence gate"
+        },
+        {
+          "id": "2608.25446",
+          "title": "HSR",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "academic offline recommendation evaluation; no quantified production online evidence"
+        },
+        {
+          "id": "2608.25392",
+          "title": "MOTIF",
+          "track": "recommendation",
+          "priority": "P2",
+          "status": "rejected",
+          "reason": "academic offline recommendation evaluation; no quantified production online evidence"
+        }
       ]
     }
   ]

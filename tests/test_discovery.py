@@ -13,6 +13,7 @@ from auto_research.discovery import (
     triage_candidates,
 )
 from auto_research.models import Paper
+from scripts.discover_papers import effective_start_date
 
 
 def _paper(arxiv_id: str, title: str, published: str) -> Paper:
@@ -74,6 +75,12 @@ def test_all_research_tracks_have_multi_query_discovery_matrices():
         queries = queries_for_track(track)
         assert len(queries) >= 8
         assert len({query.name for query in queries}) == len(queries)
+
+
+def test_daily_announcement_scan_overlaps_the_preceding_submission_day():
+    assert effective_start_date(
+        dt.date(2026, 8, 27), announcement_overlap_days=1
+    ) == dt.date(2026, 8, 26)
 
 
 def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):

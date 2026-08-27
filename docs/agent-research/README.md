@@ -23,6 +23,12 @@
 - [SkillForge](2608.24747-skillforge/README.md)：显式创建、调用、验证与修订可复用技能。
 - [AHEAD](2608.24114-ahead/README.md)：普通步骤注入环境反馈，错误步骤再注入纠错 hint。
 - [SMITH](2608.24571-smith/README.md)：联合优化工具创建和使用，并分离 schema、代码与结果验证。
+- [JIT-Agent](2608.25593-jit-agent/README.md)：按任务即时生成 memory、planning、action protocol 与 tools/skills，并从失败中修复 harness。
+- [TraceML](2608.26086-traceml/README.md)：把执行轨迹转成可训练的状态、动作与信用记录，支持跨任务诊断和复用。
+- [AdaVDR](2608.25559-adavdr/README.md)：根据验证不确定性动态分配检索深度，并用证据一致性约束最终回答。
+- [TOPAS](2608.25523-topas/README.md)：用 typed observation、planning 和 action schema 约束长程工具执行。
+- [CaSKG](2608.25500-caskg/README.md)：构造因果技能知识图，按任务检索、组合并验证可复用技能路径。
+- [ProgRouter](2608.25992-progrouter/README.md)：依据任务与运行中反馈渐进路由 planner、tools 和 recovery policy。
 - [Agent-G²](2608.23318-agent-g2/README.md)：从已有 rollout 在线估计高斯 guidance band，无额外 probing。
 - [AutoSaddler](2608.23041-autosaddler/README.md)：由失败 trace 诊断、生成并验证 durable harness patch。
 - [Toolformer](2302.04761-toolformer/README.md)：按 token loss improvement 自监督过滤工具调用。

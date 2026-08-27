@@ -1,0 +1,1 @@
+"""TransRetrieval paper adapter."""

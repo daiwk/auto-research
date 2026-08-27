@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "transretrieval",
+  "arxiv_id": "2608.25528",
+  "title": "TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation",
+  "paper_url": "https://arxiv.org/abs/2608.25528",
+  "organization": "Renmin University of China / Taobao & Tmall Group, Alibaba",
+  "published": "2026-08-26",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-08-28）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "transformer-scaling",
+    "target-token-compression",
+    "multi-domain"
+  ],
+  "local_code": "src/auto_research/reproductions/transretrieval",
+  "documentation": "docs/reproductions/2608.25528-transretrieval/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "same-feature Transformer-style two-tower mean aggregation",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "head share@10",
+    "token norm dispersion"
+  ],
+  "mechanisms": [
+    "40B industrial interactions",
+    "52M-item advertisement corpus",
+    "production ANN serving"
+  ],
+  "evolve_operators": []
+}

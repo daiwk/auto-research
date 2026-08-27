@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-27",
+  "scope": [
+    "2608.25580-v-rubrics",
+    "2608.25356-clue-opsd",
+    "2608.25243-grin",
+    "2608.25583-grip",
+    "2608.25593-jit-agent",
+    "2608.26086-traceml",
+    "2608.25559-adavdr",
+    "2608.25523-topas",
+    "2608.25500-caskg",
+    "2608.25992-progrouter"
+  ],
+  "results": {
+    "v-rubrics": {
+      "source": "../post-training/2608.25580-v-rubrics/metrics/v-rubrics-arithmetic-smoke-seed42.json"
+    },
+    "clue-opsd": {
+      "source": "../post-training/2608.25356-clue-opsd/metrics/clue-opsd-arithmetic-smoke-seed42.json"
+    },
+    "grin": {
+      "source": "../post-training/2608.25243-grin/metrics/grin-arithmetic-smoke-seed42.json"
+    },
+    "grip": {
+      "source": "../post-training/2608.25583-grip/metrics/grip-arithmetic-smoke-seed42.json"
+    },
+    "jit-agent": {
+      "source": "../agent-research/2608.25593-jit-agent/metrics/jit-agent-planbench-mini-seed42.json"
+    },
+    "traceml": {
+      "source": "../agent-research/2608.26086-traceml/metrics/traceml-planbench-mini-seed42.json"
+    },
+    "adavdr": {
+      "source": "../agent-research/2608.25559-adavdr/metrics/adavdr-planbench-mini-seed42.json"
+    },
+    "topas": {
+      "source": "../agent-research/2608.25523-topas/metrics/topas-planbench-mini-seed42.json"
+    },
+    "caskg": {
+      "source": "../agent-research/2608.25500-caskg/metrics/caskg-planbench-mini-seed42.json"
+    },
+    "progrouter": {
+      "source": "../agent-research/2608.25992-progrouter/metrics/progrouter-planbench-mini-seed42.json"
+    }
+  },
+  "claim_boundary": "Per-paper L1 mechanism artifacts on arithmetic-smoke or PlanBench-mini; not paper-scale benchmark reproduction.",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed mechanism verification; paper and local results remain separate"
+  },
+  "manifest_ref": "experiments:latest-20260827-seed42",
+  "provenance": {
+    "artifact_path": "docs/experiments/latest-20260827-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

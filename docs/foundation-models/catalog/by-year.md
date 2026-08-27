@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-08 · [MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations](../../reproductions/2608.25575-mllmclip/README.md)（`mllmclip`）：MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。
+- 2026-08 · [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../../reproductions/2608.26105-vbvr-pro/README.md)（`vbvr-pro`）：通用 VLM judge 容易被流畅输出误导，难以逐实例核对时空状态。VBVR-Pro 为每种任务定义可执行 scorer，把中间状态、约束和最终状态都变成可验证奖励，并据此训练多模态生成模型。
 - 2026-08 · [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../../reproductions/2608.24053-wemm-embedding/README.md)（`wemm-embedding`）：不同检索任务通常维护独立的文本、图像、视频或文档 encoder。WeMM 把任意交错多模态输入映射到同一空间：第一阶段用数亿 pair 做大规模 alignment；第二阶段加入精选 relevance、细粒度监督和跨尺度知识迁移，并用 Matryoshka 表征支持按成本选择输出维度。
 - 2026-08 · [RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models](../../reproductions/2608.21236-rare/README.md)（`rare`）：Dense LLM 的 activation steering 直接用于 MoE 时会改变 router logits，token 被送往不同专家后，原估计的行为方向失效。RARE 将任意 steering direction 投影到 router 的零空间，并在后续保护层再次移除传播产生的 router-visible 分量，在保留原专家路径的同时改变行为表征。
 - 2026-08 · [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](../../reproductions/2608.12831-tcab/README.md)（`tcab`）：用最大耦合和最小生成树共享相同决策的反馈，同时保持每个自适应策略的边际轨迹分布不变。

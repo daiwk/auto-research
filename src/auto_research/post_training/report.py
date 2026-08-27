@@ -4,6 +4,10 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "v-rubrics": ("V-Rubrics", "https://arxiv.org/abs/2608.25580"),
+    "clue-opsd": ("Clue-OPSD", "https://arxiv.org/abs/2608.25356"),
+    "grin": ("GRIN / Golden-GRPO Injection", "https://arxiv.org/abs/2608.25243"),
+    "grip": ("GRIP", "https://arxiv.org/abs/2608.25583"),
     "opd-search-plus": ("OPDSearch+", "https://arxiv.org/abs/2608.24310"),
     "opdvr": ("On-policy Distillation with Verifiable Reward", "https://arxiv.org/abs/2608.24696"),
     "srpo": ("Self-Reflective Policy Optimization", "https://arxiv.org/abs/2608.23493"),

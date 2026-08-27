@@ -97,6 +97,12 @@ METHODS = (
     "skillforge",
     "ahead",
     "smith",
+    "jit-agent",
+    "traceml",
+    "adavdr",
+    "topas",
+    "caskg",
+    "progrouter",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

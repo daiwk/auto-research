@@ -21,6 +21,22 @@ from auto_research.discovery_sources import DiscoverySource, discover_external, 
 from auto_research.papers import ArxivClient
 
 
+def effective_start_date(
+    requested_start: dt.date,
+    *,
+    announcement_overlap_days: int,
+) -> dt.date:
+    """Include the preceding arXiv submission day in a daily announcement scan.
+
+    arXiv announces papers on the following business day, so a page labelled
+    ``27 Aug`` normally contains records whose API ``published`` timestamp is
+    ``26 Aug``.  The repository ledger de-duplicates the overlap.
+    """
+    if announcement_overlap_days < 0:
+        raise ValueError("announcement-overlap-days must be non-negative")
+    return requested_start - dt.timedelta(days=announcement_overlap_days)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -32,6 +48,15 @@ def main() -> int:
     window.add_argument("--start-date", type=dt.date.fromisoformat)
     window.add_argument("--lookback-days", type=int, default=14)
     parser.add_argument("--end-date", type=dt.date.fromisoformat, default=dt.date.today())
+    parser.add_argument(
+        "--announcement-overlap-days",
+        type=int,
+        default=1,
+        help=(
+            "preceding submission days included to match arXiv announcement dates; "
+            "ledger de-duplication keeps repeated records out of the new queue"
+        ),
+    )
     parser.add_argument("--page-size", type=int, default=50)
     parser.add_argument("--maximum-results-per-query", type=int, default=200)
     parser.add_argument("--output")
@@ -53,7 +78,11 @@ def main() -> int:
         help="author or project GitHub/API URL; repeat for multiple sources",
     )
     args = parser.parse_args()
-    start_date = args.start_date or args.end_date - dt.timedelta(days=args.lookback_days)
+    requested_start_date = args.start_date or args.end_date - dt.timedelta(days=args.lookback_days)
+    start_date = effective_start_date(
+        requested_start_date,
+        announcement_overlap_days=args.announcement_overlap_days,
+    )
     queries = queries_for_track(args.track)
     client = ArxivClient(minimum_interval_seconds=3.0)
     papers = discover_candidates(
@@ -99,6 +128,11 @@ def main() -> int:
         query_names=(query.name for query in queries),
         candidates=candidates,
     )
+    payload["requested_window"] = {
+        "start": str(requested_start_date),
+        "end": str(args.end_date),
+    }
+    payload["announcement_overlap_days"] = args.announcement_overlap_days
     payload["cross_source"] = {
         "enabled": bool(
             args.cross_source_config or args.author_page

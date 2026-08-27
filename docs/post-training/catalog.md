@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 混合策略知识注入 RL | [From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection](2608.25243-grin/README.md) | University of California, Merced，2026-08-26 | 未发现官方代码 | `grin` |
+| 奖励引导参数插值 | [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](2608.25583-grip/README.md) | Peking University，2026-08-26 | 未发现官方代码 | `grip` |
+| 多模态 rubric RL | [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](2608.25580-v-rubrics/README.md) | S-Lab, Nanyang Technological University，2026-08-26 | [已开源](https://shulin16.github.io/v-rubrics/) | `v-rubrics` |
+| 长视频特权视图 OPD | [Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding](2608.25356-clue-opsd/README.md) | University of Maryland, College Park，2026-08-26 | 未发现官方代码 | `clue-opsd` |
 | 搜索增强 OPD + RL | [OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning](2608.24310-opd-search-plus/README.md) | University of Chinese Academy of Sciences，2026-08-25 | 未发现官方代码 | `opd-search-plus` |
 | 可验证奖励 OPD | [OPDVR: On-Policy Distillation with Verifiable Rewards](2608.24696-opdvr/README.md) | LeapLab, Tsinghua University，2026-08-25 | [已开源](https://github.com/LeapLabTHU/OPDVR) | `opdvr` |
 | 输入侧 Query-KL | [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](2608.23311-erpo/README.md) | AMAP, Alibaba Group，2026-08-24 | [已开源](https://github.com/alibaba/ERPO) | `erpo` |

@@ -4,6 +4,21 @@
   "papers": [
     {
       "domain": "agent-research",
+      "key": "adavdr",
+      "title": "AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research",
+      "paper_url": "https://arxiv.org/abs/2608.25559",
+      "detail_path": "agent-research/2608.25559-adavdr/README.md",
+      "topic": [
+        "视频研究自适应工具与反思"
+      ],
+      "first_author": "Xintong Zhang",
+      "first_author_affiliation": "Accio Team, Alibaba Group",
+      "published": "2026-08-26",
+      "code": "https://github.com/Accio-Lab/AdaVDR",
+      "adapter": "adavdr"
+    },
+    {
+      "domain": "agent-research",
       "key": "agent-g2",
       "title": "Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning",
       "paper_url": "https://arxiv.org/abs/2608.23318",
@@ -197,6 +212,21 @@
       "published": "2023-03-31",
       "code": "https://github.com/camel-ai/camel",
       "adapter": "camel"
+    },
+    {
+      "domain": "agent-research",
+      "key": "caskg",
+      "title": "CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval",
+      "paper_url": "https://arxiv.org/abs/2608.25500",
+      "detail_path": "agent-research/2608.25500-caskg/README.md",
+      "topic": [
+        "反事实因果技能图"
+      ],
+      "first_author": "Zhiyuan Li",
+      "first_author_affiliation": "Jilin University / Ant Group",
+      "published": "2026-08-26",
+      "code": "https://github.com/ZhiyuanLi218/Caskg",
+      "adapter": "caskg"
     },
     {
       "domain": "agent-research",
@@ -484,6 +514,21 @@
       "published": "2026-07-31",
       "code": null,
       "adapter": "hyperagent"
+    },
+    {
+      "domain": "agent-research",
+      "key": "jit-agent",
+      "title": "JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution",
+      "paper_url": "https://arxiv.org/abs/2608.25593",
+      "detail_path": "agent-research/2608.25593-jit-agent/README.md",
+      "topic": [
+        "Harness 即时生成与进化"
+      ],
+      "first_author": "Guibin Zhang",
+      "first_author_affiliation": "LV-NUS Lab",
+      "published": "2026-08-26",
+      "code": "https://github.com/bingreeky/JIT",
+      "adapter": "jit-agent"
     },
     {
       "domain": "agent-research",
@@ -804,6 +849,21 @@
       "published": "2026-08-07",
       "code": null,
       "adapter": "pmcoder"
+    },
+    {
+      "domain": "agent-research",
+      "key": "progrouter",
+      "title": "ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs",
+      "paper_url": "https://arxiv.org/abs/2608.25992",
+      "detail_path": "agent-research/2608.25992-progrouter/README.md",
+      "topic": [
+        "在线进展成本路由"
+      ],
+      "first_author": "Songyuan Li",
+      "first_author_affiliation": "Aston University",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": "progrouter"
     },
     {
       "domain": "agent-research",
@@ -1213,6 +1273,36 @@
       "published": "2025-04-16",
       "code": "未发现官方代码",
       "adapter": "toolrl"
+    },
+    {
+      "domain": "agent-research",
+      "key": "topas",
+      "title": "TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving",
+      "paper_url": "https://arxiv.org/abs/2608.25523",
+      "detail_path": "agent-research/2608.25523-topas/README.md",
+      "topic": [
+        "工作流 Prefix-State 调度"
+      ],
+      "first_author": "Hongqiu Ni",
+      "first_author_affiliation": "University of Science and Technology of China",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": "topas"
+    },
+    {
+      "domain": "agent-research",
+      "key": "traceml",
+      "title": "TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development",
+      "paper_url": "https://arxiv.org/abs/2608.26086",
+      "detail_path": "agent-research/2608.26086-traceml/README.md",
+      "topic": [
+        "ML 开发轨迹规划"
+      ],
+      "first_author": "Jiarui Yan",
+      "first_author_affiliation": "Carnegie Mellon University",
+      "published": "2026-08-26",
+      "code": "https://huggingface.co/datasets/jerryyan/TraceML",
+      "adapter": "traceml"
     },
     {
       "domain": "agent-research",
@@ -3277,6 +3367,61 @@
     },
     {
       "domain": "foundation-models",
+      "key": "mllmclip",
+      "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+      "paper_url": "https://arxiv.org/abs/2608.25575",
+      "detail_path": "reproductions/2608.25575-mllmclip/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "feature-distillation",
+        "compositionality",
+        "cka"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "KAIST / Sony AI",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "mllmclip",
+        "arxiv_id": "2608.25575",
+        "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+        "paper_url": "https://arxiv.org/abs/2608.25575",
+        "track": "llm",
+        "organization": "KAIST / Sony AI",
+        "published": "2026-08-26",
+        "code_url": null,
+        "topics": [
+          "multimodal-foundation-model",
+          "feature-distillation",
+          "compositionality",
+          "cka"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/mllmclip",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "MovieLens-1M public content/collaborative proxy"
+        ],
+        "baseline": "same student features without attention selection or CKA projection",
+        "metrics": [
+          "Recall@10",
+          "linear CKA",
+          "attention selected fraction"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "moba",
       "title": "MoBA: Mixture of Block Attention for Long-Context LLMs",
       "paper_url": "https://arxiv.org/abs/2502.13189",
@@ -4666,6 +4811,61 @@
     },
     {
       "domain": "foundation-models",
+      "key": "vbvr-pro",
+      "title": "VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning",
+      "paper_url": "https://arxiv.org/abs/2608.26105",
+      "detail_path": "reproductions/2608.26105-vbvr-pro/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "native-visual-reasoning",
+        "verifiable-reward",
+        "benchmark"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Nanyang Technological University / VBVR Community",
+      "published": "2026-08-26",
+      "code": "https://www.video-reason.com/?v=pro",
+      "adapter": {
+        "adapter_key": "vbvr-pro",
+        "arxiv_id": "2608.26105",
+        "title": "VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning",
+        "paper_url": "https://arxiv.org/abs/2608.26105",
+        "track": "llm",
+        "organization": "Nanyang Technological University / VBVR Community",
+        "published": "2026-08-26",
+        "code_url": "https://www.video-reason.com/?v=pro",
+        "topics": [
+          "multimodal-foundation-model",
+          "native-visual-reasoning",
+          "verifiable-reward",
+          "benchmark"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/vbvr_pro",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "VBVR-Pro procedural task specification"
+        ],
+        "baseline": "scalar VLM-as-a-judge analogue on the same 300 generated tasks",
+        "metrics": [
+          "reward mean",
+          "reward standard deviation",
+          "deterministic verifier agreement"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "wemm-embedding",
       "title": "WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report",
       "paper_url": "https://arxiv.org/abs/2608.24053",
@@ -4956,6 +5156,21 @@
       "published": "2025-06-16",
       "code": "https://github.com/MiniMax-AI/MiniMax-M1",
       "adapter": "cispo"
+    },
+    {
+      "domain": "post-training",
+      "key": "clue-opsd",
+      "title": "Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding",
+      "paper_url": "https://arxiv.org/abs/2608.25356",
+      "detail_path": "post-training/2608.25356-clue-opsd/README.md",
+      "topic": [
+        "长视频特权视图 OPD"
+      ],
+      "first_author": "Kaishen Wang",
+      "first_author_affiliation": "University of Maryland, College Park",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": "clue-opsd"
     },
     {
       "domain": "post-training",
@@ -5271,6 +5486,36 @@
       "published": "2026-05-18",
       "code": "未发现官方代码",
       "adapter": "gprl"
+    },
+    {
+      "domain": "post-training",
+      "key": "grin",
+      "title": "From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection",
+      "paper_url": "https://arxiv.org/abs/2608.25243",
+      "detail_path": "post-training/2608.25243-grin/README.md",
+      "topic": [
+        "混合策略知识注入 RL"
+      ],
+      "first_author": "Zhibo Hou",
+      "first_author_affiliation": "University of California, Merced",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": "grin"
+    },
+    {
+      "domain": "post-training",
+      "key": "grip",
+      "title": "GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning",
+      "paper_url": "https://arxiv.org/abs/2608.25583",
+      "detail_path": "post-training/2608.25583-grip/README.md",
+      "topic": [
+        "奖励引导参数插值"
+      ],
+      "first_author": "Lam So",
+      "first_author_affiliation": "Peking University",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": "grip"
     },
     {
       "domain": "post-training",
@@ -6309,6 +6554,21 @@
       "published": "2026-08-06",
       "code": "未发现官方代码",
       "adapter": "u-opsd"
+    },
+    {
+      "domain": "post-training",
+      "key": "v-rubrics",
+      "title": "V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2608.25580",
+      "detail_path": "post-training/2608.25580-v-rubrics/README.md",
+      "topic": [
+        "多模态 rubric RL"
+      ],
+      "first_author": "Shulin Tian",
+      "first_author_affiliation": "S-Lab, Nanyang Technological University",
+      "published": "2026-08-26",
+      "code": "https://shulin16.github.io/v-rubrics/",
+      "adapter": "v-rubrics"
     },
     {
       "domain": "post-training",
@@ -8593,6 +8853,73 @@
             "traffic": "online A/B test",
             "source_url": "https://arxiv.org/abs/2607.12578",
             "source_location": "original paper online-result disclosure: product=Tmall; metric=GMV"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "dceo",
+      "title": "DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search",
+      "paper_url": "https://arxiv.org/abs/2608.25635",
+      "detail_path": "reproductions/2608.25635-dceo/README.md",
+      "topic": [
+        "search-ranking",
+        "long-term-value",
+        "causal-optimization",
+        "multi-objective-ranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Taobao & Tmall Group, Alibaba",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "dceo",
+        "arxiv_id": "2608.25635",
+        "title": "DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search",
+        "paper_url": "https://arxiv.org/abs/2608.25635",
+        "track": "recommendation",
+        "organization": "Taobao & Tmall Group, Alibaba",
+        "published": "2026-08-26",
+        "code_url": null,
+        "topics": [
+          "search-ranking",
+          "long-term-value",
+          "causal-optimization",
+          "multi-objective-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/dceo",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "fixed multi-objective log fusion over the same four proxy scores",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "head share@10",
+          "estimated relative causal effect"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Alibaba e-commerce search",
+            "metric": "GMV",
+            "lift_percent": 0.36,
+            "traffic": "41-day production A/B test",
+            "source_url": "https://arxiv.org/html/2608.25635v1#S5.SS7",
+            "source_location": "Section 5.7",
+            "experiment_duration": "41 days",
+            "retrieved_at": "2026-08-28"
           }
         ],
         "selection_exception": null,
@@ -20315,6 +20642,85 @@
           "cuda"
         ],
         "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "transretrieval",
+      "title": "TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation",
+      "paper_url": "https://arxiv.org/abs/2608.25528",
+      "detail_path": "reproductions/2608.25528-transretrieval/README.md",
+      "topic": [
+        "retrieval",
+        "transformer-scaling",
+        "target-token-compression",
+        "multi-domain"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Renmin University of China / Taobao & Tmall Group, Alibaba",
+      "published": "2026-08-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "transretrieval",
+        "arxiv_id": "2608.25528",
+        "title": "TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation",
+        "paper_url": "https://arxiv.org/abs/2608.25528",
+        "track": "recommendation",
+        "organization": "Renmin University of China / Taobao & Tmall Group, Alibaba",
+        "published": "2026-08-26",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "transformer-scaling",
+          "target-token-compression",
+          "multi-domain"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/transretrieval",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "same-feature Transformer-style two-tower mean aggregation",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "head share@10",
+          "token norm dispersion"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "online_evidence": [
+          {
+            "product": "Alibaba display advertising",
+            "metric": "platform revenue",
+            "lift_percent": 2.53,
+            "traffic": "5% traffic; month-long A/B; p<0.0001",
+            "source_url": "https://arxiv.org/html/2608.25528v1#S4.SS5",
+            "source_location": "Section 4.5 / Table 7",
+            "experiment_duration": "one month",
+            "significance": "p<0.0001",
+            "retrieved_at": "2026-08-28"
+          },
+          {
+            "product": "Alibaba display advertising",
+            "metric": "RPM",
+            "lift_percent": 1.28,
+            "traffic": "5% traffic; month-long A/B; p<0.0001",
+            "source_url": "https://arxiv.org/html/2608.25528v1#S4.SS5",
+            "source_location": "Section 4.5 / Table 7",
+            "experiment_duration": "one month",
+            "significance": "p<0.0001",
+            "retrieved_at": "2026-08-28"
+          }
+        ],
         "selection_exception": null,
         "evolve_operators": []
       }

@@ -164,6 +164,7 @@
 
 ## Peking University
 
+- 2026-08-26 · 一作：Lam So · [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
 - 2026-07-30 · 一作：Yuran Wang · [Flux-OPD](../2607.28022-flux-opd/README.md)（`flux-opd`）：固定上下文很快被学生吸收，直接更换上下文 teacher 又会让目标跳变。Flux-OPD 固定 context-free teacher 为锚，只注入多个演化上下文 teacher 相对锚点的 log-probability 差，并用几何均值归一化常数表示冲突、冲突越大修正越弱。
 - 2023-12-14 · 一作：Peiyi Wang · [Math-Shepherd](../2312.08935-math-shepherd/README.md)（`math-shepherd`）：从中间步骤采样多条 continuation，以最终答案正确率构造自动 step label，再训练 verifier 和重排器。
 
@@ -178,6 +179,10 @@
 ## Renmin University of China
 
 - 2026-07-06 · 一作：Yu Li · [Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment](../../reproductions/2607.04728-sis/README.md)（`sis`）：异步 rollout、样本复用和 stale policy 会让 LLM 强化学习变成 off-policy 更新。标准 importance sampling（IS）在长序列上连乘后方差很大，直接 clipping 又会丢失有效梯度。
+
+## S-Lab, Nanyang Technological University
+
+- 2026-08-26 · 一作：Shulin Tian · [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](../2608.25580-v-rubrics/README.md)（`v-rubrics`）：把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。
 
 ## SAIL 研究团队
 
@@ -234,6 +239,10 @@
 - 2026-01-26 · 一作：Siyan Zhao · [OPSD](../2601.18734-opsd/README.md)（`opsd`）：普通 OPD 仍需独立教师。OPSD 让同一个模型形成两个条件分布：学生只看问题，教师额外看到验证过的解题过程或答案。
 - 2024-01-02 · 一作：Zixiang Chen · [SPIN](../2401.01335-spin/README.md)（`spin`）：额外偏好标注昂贵。SPIN 从 SFT 模型出发，用上一轮模型为训练 prompt 生成回答，把人类示范视作正例、自生成回答视作负例，通过自博弈判别目标得到下一轮模型，循环提升而不引入新的人工偏好数据。
 
+## University of California, Merced
+
+- 2026-08-26 · 一作：Zhibo Hou · [From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection](../2608.25243-grin/README.md)（`grin`）：纯 on-policy RL 在新知识尚未掌握时几乎采不到正确答案。GRIN 在失败组注入 golden response，再以 mixed-policy importance correction 训练；能力提高后自动回到 on-policy 探索。
+
 ## University of California, San Diego
 
 - 2026-08-06 · 一作：Yijiang Li · [U-OPSD](../2608.06296-u-opsd/README.md)（`u-opsd`）：U-OPSD 不使用答案、环境奖励或更大教师。模型多次采样后做多数投票，以最短一致解作为 privileged view，定点修复最长且高置信错误轨迹，是真正依赖内部一致性的自蒸馏。
@@ -249,6 +258,7 @@
 
 ## University of Maryland, College Park
 
+- 2026-08-26 · 一作：Kaishen Wang · [Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding](../2608.25356-clue-opsd/README.md)（`clue-opsd`）：学生仍看完整长视频，冻结教师在训练时只看问题相关 clue interval；学生自己的 rollout 上做 on-policy self-distillation，推理时不需要 clue、标签或外部教师。
 - 2026-07-30 · 一作：Jiawei Xu · [β-OPSD](../2607.28582-beta-opsd/README.md)（`beta-opsd`）：论文指出 vanilla OPSD 是 β=1 的 KL 正则策略优化特例。先推导 reference policy 与 privileged teacher 之间的最优几何插值，再把昂贵高方差的 RL 解转成 token-logit 蒸馏目标，并以 return-to-go 做长推理信用分配。
 
 ## University of Notre Dame / Amazon
