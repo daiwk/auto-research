@@ -1,0 +1,359 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "experiments:agent-toolroute-l2-seeds42-44",
+  "benchmark": "toolroute-l2-v1",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "episodes_per_seed": 60,
+  "oracle_fields_exposed": false,
+  "results": {
+    "long-context": {
+      "metrics": {
+        "answer_accuracy": 0.4,
+        "plan_exact_match": 0.4,
+        "plan_step_f1": 0.75,
+        "joint_success": 0.4,
+        "recovery_success_rate": 0,
+        "invalid_tool_rate": 0.09374895257248199,
+        "average_tool_calls": 2.6055555555555556,
+        "average_cost": 2.6055555555555556
+      },
+      "aggregate_metrics": {
+        "answer_accuracy": {
+          "mean": 0.4,
+          "std": 0.016666666666666663,
+          "ci95_radius": 0.01886010879352777
+        },
+        "plan_exact_match": {
+          "mean": 0.4,
+          "std": 0.016666666666666663,
+          "ci95_radius": 0.01886010879352777
+        },
+        "plan_step_f1": {
+          "mean": 0.75,
+          "std": 0.004444444444444473,
+          "ci95_radius": 0.005029362344940773
+        },
+        "joint_success": {
+          "mean": 0.4,
+          "std": 0.016666666666666663,
+          "ci95_radius": 0.01886010879352777
+        },
+        "recovery_success_rate": {
+          "mean": 0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "invalid_tool_rate": {
+          "mean": 0.09374895257248199,
+          "std": 0.005484597735871627,
+          "ci95_radius": 0.0062064065992365
+        },
+        "average_tool_calls": {
+          "mean": 2.6055555555555556,
+          "std": 0.05853140973807078,
+          "ci95_radius": 0.06623452532991396
+        },
+        "average_cost": {
+          "mean": 2.6055555555555556,
+          "std": 0.05853140973807078,
+          "ci95_radius": 0.06623452532991396
+        }
+      },
+      "artifact_path": "docs/agent-research/metrics/toolroute-l2-long-context-seeds42-44.json"
+    },
+    "react": {
+      "metrics": {
+        "answer_accuracy": 0.8555555555555555,
+        "plan_exact_match": 0.8555555555555555,
+        "plan_step_f1": 0.9093738977072311,
+        "joint_success": 0.8555555555555555,
+        "recovery_success_rate": 0.7111111111111111,
+        "invalid_tool_rate": 0.05757874015748032,
+        "average_tool_calls": 4.2444444444444445,
+        "average_cost": 4.2444444444444445
+      },
+      "aggregate_metrics": {
+        "answer_accuracy": {
+          "mean": 0.8555555555555555,
+          "std": 0.025458753860865747,
+          "ci95_radius": 0.028809292053814398
+        },
+        "plan_exact_match": {
+          "mean": 0.8555555555555555,
+          "std": 0.025458753860865747,
+          "ci95_radius": 0.028809292053814398
+        },
+        "plan_step_f1": {
+          "mean": 0.9093738977072311,
+          "std": 0.004034550550542428,
+          "ci95_radius": 0.004565523738973055
+        },
+        "joint_success": {
+          "mean": 0.8555555555555555,
+          "std": 0.025458753860865747,
+          "ci95_radius": 0.028809292053814398
+        },
+        "recovery_success_rate": {
+          "mean": 0.7111111111111111,
+          "std": 0.050917507721731606,
+          "ci95_radius": 0.05761858410762892
+        },
+        "invalid_tool_rate": {
+          "mean": 0.05757874015748032,
+          "std": 0.004261936042246253,
+          "ci95_radius": 0.004822834645669292
+        },
+        "average_tool_calls": {
+          "mean": 4.2444444444444445,
+          "std": 0.019245008972987455,
+          "ci95_radius": 0.021777777777777698
+        },
+        "average_cost": {
+          "mean": 4.2444444444444445,
+          "std": 0.019245008972987455,
+          "ci95_radius": 0.021777777777777698
+        }
+      },
+      "artifact_path": "docs/agent-research/2210.03629-react/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "reflexion": {
+      "metrics": {
+        "answer_accuracy": 1,
+        "plan_exact_match": 1,
+        "plan_step_f1": 0.93668430335097,
+        "joint_success": 1,
+        "recovery_success_rate": 1,
+        "invalid_tool_rate": 0.0,
+        "average_tool_calls": 4.0,
+        "average_cost": 4.75
+      },
+      "aggregate_metrics": {
+        "answer_accuracy": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "plan_exact_match": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "plan_step_f1": {
+          "mean": 0.93668430335097,
+          "std": 0.0024438106632365237,
+          "ci95_radius": 0.0027654320987654467
+        },
+        "joint_success": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "recovery_success_rate": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "invalid_tool_rate": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "average_tool_calls": {
+          "mean": 4.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "average_cost": {
+          "mean": 4.75,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        }
+      },
+      "artifact_path": "docs/agent-research/2303.11366-reflexion/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "agent-g2": {
+      "metrics": {
+        "answer_accuracy": 0.8555555555555555,
+        "plan_exact_match": 0.8555555555555555,
+        "plan_step_f1": 0.9093738977072311,
+        "joint_success": 0.8555555555555555,
+        "recovery_success_rate": 0.7111111111111111,
+        "invalid_tool_rate": 0.05757874015748032,
+        "average_tool_calls": 4.2444444444444445,
+        "average_cost": 4.2444444444444445
+      },
+      "aggregate_metrics": {
+        "answer_accuracy": {
+          "mean": 0.8555555555555555,
+          "std": 0.025458753860865747,
+          "ci95_radius": 0.028809292053814398
+        },
+        "plan_exact_match": {
+          "mean": 0.8555555555555555,
+          "std": 0.025458753860865747,
+          "ci95_radius": 0.028809292053814398
+        },
+        "plan_step_f1": {
+          "mean": 0.9093738977072311,
+          "std": 0.004034550550542428,
+          "ci95_radius": 0.004565523738973055
+        },
+        "joint_success": {
+          "mean": 0.8555555555555555,
+          "std": 0.025458753860865747,
+          "ci95_radius": 0.028809292053814398
+        },
+        "recovery_success_rate": {
+          "mean": 0.7111111111111111,
+          "std": 0.050917507721731606,
+          "ci95_radius": 0.05761858410762892
+        },
+        "invalid_tool_rate": {
+          "mean": 0.05757874015748032,
+          "std": 0.004261936042246253,
+          "ci95_radius": 0.004822834645669292
+        },
+        "average_tool_calls": {
+          "mean": 4.2444444444444445,
+          "std": 0.019245008972987455,
+          "ci95_radius": 0.021777777777777698
+        },
+        "average_cost": {
+          "mean": 4.2444444444444445,
+          "std": 0.019245008972987455,
+          "ci95_radius": 0.021777777777777698
+        }
+      },
+      "artifact_path": "docs/agent-research/2608.23318-agent-g2/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "ahead": {
+      "metrics": {
+        "answer_accuracy": 1,
+        "plan_exact_match": 1,
+        "plan_step_f1": 0.93668430335097,
+        "joint_success": 1,
+        "recovery_success_rate": 1,
+        "invalid_tool_rate": 0.0,
+        "average_tool_calls": 4.0,
+        "average_cost": 4.75
+      },
+      "aggregate_metrics": {
+        "answer_accuracy": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "plan_exact_match": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "plan_step_f1": {
+          "mean": 0.93668430335097,
+          "std": 0.0024438106632365237,
+          "ci95_radius": 0.0027654320987654467
+        },
+        "joint_success": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "recovery_success_rate": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "invalid_tool_rate": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "average_tool_calls": {
+          "mean": 4.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "average_cost": {
+          "mean": 4.75,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        }
+      },
+      "artifact_path": "docs/agent-research/2608.24114-ahead/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "auso": {
+      "metrics": {
+        "answer_accuracy": 1,
+        "plan_exact_match": 1,
+        "plan_step_f1": 0.93668430335097,
+        "joint_success": 1,
+        "recovery_success_rate": 1,
+        "invalid_tool_rate": 0.0,
+        "average_tool_calls": 4.0,
+        "average_cost": 4.083333333333333
+      },
+      "aggregate_metrics": {
+        "answer_accuracy": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "plan_exact_match": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "plan_step_f1": {
+          "mean": 0.93668430335097,
+          "std": 0.0024438106632365237,
+          "ci95_radius": 0.0027654320987654467
+        },
+        "joint_success": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "recovery_success_rate": {
+          "mean": 1,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "invalid_tool_rate": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "average_tool_calls": {
+          "mean": 4.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
+        },
+        "average_cost": {
+          "mean": 4.083333333333333,
+          "std": 0.014433756729740337,
+          "ci95_radius": 0.016333333333332988
+        }
+      },
+      "artifact_path": "docs/agent-research/2608.21292-auso/metrics/toolroute-l2-seeds42-44.json"
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l2_capability",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "shared no-oracle benchmark; compare only within toolroute-l2-v1"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/agent-toolroute-l2-seeds42-44.json",
+    "dataset_fingerprint": "b0db62f1c8c1f5a10b95722397736d78c2c2d005d71b6efc6a5c994bc02dff25",
+    "original_code_commit": "generated from repository source"
+  }
+}

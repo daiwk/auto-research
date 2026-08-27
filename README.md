@@ -396,6 +396,18 @@ auto-research evolve --model genrec --dataset movielens-1m \
   --generations 3 --population 8 --steps 100 --seeds 42,43,44
 ```
 
+Agent 的论文机制回归与能力比较分层运行。L1 mini-suite 只验证机制；L2 在接口层隐藏
+reference answer/plan，用统一工具环境比较规划、故障恢复和成本：
+
+```bash
+auto-research agent-capability \
+  --methods long-context,react,reflexion,agent-g2,ahead,auso \
+  --episodes 60 --seeds 42,43,44
+```
+
+协议与固定三 seed 结果见
+[Agent L2 无 Oracle 能力评测](docs/agent-research/capability-benchmark.md)。
+
 重点方法从单 seed 机制验证晋级到三 seed 正式证据时，使用可断点续跑的统一入口：
 
 ```bash

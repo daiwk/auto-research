@@ -17,6 +17,7 @@
   [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)。
 - [论文谱系与缺口](lineage.md)：系统审计经典主干、最新覆盖和真实环境前置条件。
 - [统一评测协议](benchmark.md)：mini-suite、成本定义、公平比较与新增方法门槛。
+- [L2 无 Oracle 能力评测](capability-benchmark.md)：隔离 reference labels，在统一工具环境中比较规划、故障恢复与成本。
 - [可训练 policy 与真实 executor](training-executor.md)：Agent Lightning checkpoint 更新与同预算代码执行矩阵。
 - [SPO++](2608.24870-spo-plus-plus/README.md)：按生成事件冻结 prompt value，并在 action-token measure 下校正异步 advantage。
 - [SkillForge](2608.24747-skillforge/README.md)：显式创建、调用、验证与修订可复用技能。

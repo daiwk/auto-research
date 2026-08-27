@@ -64,3 +64,11 @@ auto-research agent-eval --method auso --benchmark planbench-mini --episodes 120
 ## 复现边界
 
 未运行 ALFWorld/WebShop/SearchQA、大模型 token rollout 或完整 GRPO；确定性 mini-suite 验证 progressive lifecycle、JSD 信息增益和 bounded reweighting 的控制流，不把成本代理指标冒充论文成功率。
+
+## 统一 L2 无 Oracle 结果
+
+在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，AUSO 的 joint
+success 为 **1.0000**、plan step F1 为 **0.9367**、故障恢复率为 **1.0000**，
+平均成本 **4.0833**。指标见
+[`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，统一口径见
+[L2 能力评测](../capability-benchmark.md)。

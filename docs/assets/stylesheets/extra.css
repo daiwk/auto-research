@@ -149,6 +149,15 @@
   font-size: 0.68rem;
 }
 
+.ar-dashboard-card__evidence--capability {
+  border-left-color: #16865c;
+  background: color-mix(in srgb, #16865c 9%, transparent);
+}
+
+.ar-dashboard-card__evidence--capability strong {
+  color: #16865c;
+}
+
 .ar-dashboard-card__evidence span,
 .ar-dashboard-card__notice {
   color: var(--md-default-fg-color--light);
