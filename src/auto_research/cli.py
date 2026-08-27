@@ -12,7 +12,9 @@ from .config import ResearchConfig
 from .agent_research import (
     AgentResearchConfig, AgentResearchRunner, run_executor_matrix,
     LightningPolicyConfig, run_lightning_policy_training,
+    CapabilitySuiteConfig, run_capability_suite,
 )
+from .agent_research.capability_methods import CAPABILITY_METHODS
 from .agent_research.models import METHODS as AGENT_METHODS
 from .evolution import EvolutionConfig, ModelEvolutionEngine
 from .evolution.providers import list_providers
@@ -356,6 +358,17 @@ def build_parser() -> argparse.ArgumentParser:
     agent_eval.add_argument("--seed", type=int, default=42)
     agent_eval.add_argument("--output-dir", type=Path, default=Path("runs/agent-research"))
     _add_runtime_arguments(agent_eval)
+
+    agent_capability = commands.add_parser(
+        "agent-capability",
+        help="compare Agent policies on the shared L2 benchmark without oracle labels",
+    )
+    agent_capability.add_argument("--methods", default=",".join(CAPABILITY_METHODS))
+    agent_capability.add_argument("--seeds", default="42,43,44")
+    agent_capability.add_argument("--episodes", type=int, default=60)
+    agent_capability.add_argument(
+        "--output-dir", type=Path, default=Path("runs/agent-capability"),
+    )
 
     agent_matrix = commands.add_parser(
         "agent-matrix",
@@ -1143,6 +1156,27 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Joint success: {result.metrics['joint_success']:.4f}")
             print(f"Average cost: {result.metrics['average_cost']:.4f}")
             print(f"Report: {run_dir / 'report.md'}")
+            return 0
+        if args.command == "agent-capability":
+            methods = tuple(
+                value.strip() for value in args.methods.split(",") if value.strip()
+            )
+            seeds = tuple(
+                int(value.strip()) for value in args.seeds.split(",") if value.strip()
+            )
+            results = run_capability_suite(CapabilitySuiteConfig(
+                methods=methods,
+                seeds=seeds,
+                episodes=args.episodes,
+                output_dir=args.output_dir,
+            ))
+            for method, payload in results.items():
+                print(
+                    f"{method}: joint={payload['metrics']['joint_success']:.4f}, "
+                    f"plan_f1={payload['metrics']['plan_step_f1']:.4f}, "
+                    f"cost={payload['metrics']['average_cost']:.4f}"
+                )
+            print(f"Summary: {args.output_dir / 'summary.json'}")
             return 0
         if args.command == "multimodal-eval":
             seeds = tuple(

@@ -78,7 +78,7 @@ def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[
     formal = protocol.get("formal_comparison")
     diagnostic_only = (
         tier.startswith("l1_")
-        or "deterministic" in fidelity.lower()
+        or (not tier and "deterministic" in fidelity.lower())
     )
     saturated = diagnostic_only and all(
         metrics.get(name) == 1.0 for name in AGENT_CAPABILITY_METRICS
@@ -99,7 +99,7 @@ def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[
         "claim_policy": str(protocol.get("claim_policy", "")),
         "diagnostic_only": diagnostic_only,
         "capability_metrics_saturated": saturated,
-        "episodes": diagnostics.get("episodes"),
+        "episodes": diagnostics.get("episodes", diagnostics.get("episodes_per_seed")),
         "mechanism_metrics": mechanism_metrics,
     }
 

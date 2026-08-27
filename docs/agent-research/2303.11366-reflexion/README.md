@@ -80,3 +80,11 @@ auto-research agent-eval --method reflexion --benchmark planbench-mini \
 实现跨 trial 的失败、语言经验与复用闭环，但反思模板和 evaluator 是确定性的；
 没有调用 GPT-4、ALFWorld、HotpotQA 或代码执行器。0.9 来自“每个新族首次失败”的
 可审计协议，不等同 HumanEval pass@1。
+
+## 统一 L2 无 Oracle 结果
+
+在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，Reflexion 的 joint
+success 为 **1.0000**、plan step F1 为 **0.9367**、故障恢复率为 **1.0000**。
+这里的满分仅限固定工具路由环境；指标见
+[`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，统一口径见
+[L2 能力评测](../capability-benchmark.md)。

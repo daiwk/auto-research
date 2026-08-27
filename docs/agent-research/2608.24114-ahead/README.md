@@ -62,3 +62,11 @@ auto-research agent-eval --method ahead --benchmark planbench-mini --episodes 12
 ## 复现边界
 
 mini-suite 使用确定性错误位置验证 step-aware PI 分流；未运行 LLM analyzer、Qwen、真实 GRPO 或三个原始 benchmark。
+
+## 统一 L2 无 Oracle 结果
+
+在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，AHEAD 的 joint
+success 为 **1.0000**、plan step F1 为 **0.9367**、故障恢复率为 **1.0000**。
+这里的满分只表示该固定工具环境全部完成；指标见
+[`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，统一口径见
+[L2 能力评测](../capability-benchmark.md)。

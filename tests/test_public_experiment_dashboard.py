@@ -45,6 +45,15 @@ def test_agent_mechanism_results_are_not_presented_as_capability_scores():
         )
     )
 
+    capabilities = [
+        item for item in agents
+        if item.get("evidence", {}).get("tier") == "l2_capability"
+    ]
+    assert len(capabilities) >= 6
+    assert all(not item["evidence"]["diagnostic_only"] for item in capabilities)
+    assert all(item["evidence"]["formal_comparison"] is True for item in capabilities)
+    assert all(item["dataset"] == "toolroute-l2-v1" for item in capabilities)
+
 
 def test_public_dashboard_page_uses_card_layout_and_progressive_disclosure():
     page = (ROOT / "docs/public-experiment-dashboard.md").read_text(encoding="utf-8")
@@ -59,6 +68,8 @@ def test_public_dashboard_page_uses_card_layout_and_progressive_disclosure():
     assert "L1 机制诊断" in script
     assert "非正式能力比较" in script
     assert "三个 success=1 只表示机制合约通过" in script
+    assert "L2 能力评测" in script
+    assert "三 seed 正式比较" in script
     assert "公开实验看板: public-experiment-dashboard.md" in navigation
     assert "2026 历史论文扫描:" not in navigation
     assert "历史扫描清单与实现批次:" not in navigation
