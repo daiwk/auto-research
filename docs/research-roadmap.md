@@ -85,6 +85,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | --- | --- | --- | --- |
 | AG-001 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | Agent Lightning 连接可训练 LLM policy | SmolLM2 pairwise policy update、显式 transition credit、真实测试 executor 与 token/tool 成本 |
 | AG-002 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | Agent 真实 executor 的公平矩阵 | 相同仓库 fixture、相同 subprocess 上限、三 seed 比较 controller policy |
+| AG-003 | DONE · [PR #131](https://github.com/daiwk/auto-research/pull/131) | Agent L2.1 隔离能力评测与九轴自动进化 | 删除 guide/oracle；train/validation/test 隔离；六方法、五消融、三 seed CI；validation 选冠军且 test 只在代际结束后运行 |
 
 ### Auto Research / Evolve
 

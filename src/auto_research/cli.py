@@ -361,11 +361,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     agent_capability = commands.add_parser(
         "agent-capability",
-        help="compare Agent policies on the shared L2 benchmark without oracle labels",
+        help="compare Agent policies on held-out L2.1 tasks without guide/oracle labels",
     )
     agent_capability.add_argument("--methods", default=",".join(CAPABILITY_METHODS))
     agent_capability.add_argument("--seeds", default="42,43,44")
     agent_capability.add_argument("--episodes", type=int, default=60)
+    agent_capability.add_argument("--train-episodes", type=int, default=36)
     agent_capability.add_argument(
         "--output-dir", type=Path, default=Path("runs/agent-capability"),
     )
@@ -1168,6 +1169,7 @@ def main(argv: list[str] | None = None) -> int:
                 methods=methods,
                 seeds=seeds,
                 episodes=args.episodes,
+                train_episodes=args.train_episodes,
                 output_dir=args.output_dir,
             ))
             for method, payload in results.items():

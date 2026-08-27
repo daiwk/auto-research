@@ -61,7 +61,7 @@ nav:
           - 按年份: agent-research/catalog/by-year.md
           - 论文谱系与缺口: agent-research/lineage.md
           - 统一评测协议: agent-research/benchmark.md
-          - L2 无 Oracle 能力评测: agent-research/capability-benchmark.md
+          - L2.1 隔离能力评测与自动进化: agent-research/capability-benchmark.md
           - 可训练 policy 与真实 executor: agent-research/training-executor.md
   - 项目文档:
       - 项目 README: project-readme.md

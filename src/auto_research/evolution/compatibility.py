@@ -86,7 +86,10 @@ def operator_registry() -> dict[str, OperatorSpec]:
         registry[operator] = OperatorSpec(
             key=operator, domain=domain, slot=slot,
             paper_ids=tuple(sorted(paper_ids)), compatible_models=_models(operator, domain),
-            composable=slot in {"memory", "planner", "tool", "critic", "policy", "recovery"},
+            composable=slot in {
+                "memory", "planner", "tool", "critic", "policy", "recovery",
+                "reflection", "verifier", "context",
+            },
             compute_cost=2 if any(term in operator for term in ("long", "moe", "rollout", "search")) else 1,
             memory_cost=2 if any(term in operator for term in ("memory", "long", "kv", "hstu")) else 1,
             latency_cost=2 if any(term in operator for term in ("agent", "search", "rollout", "planner")) else 1,

@@ -398,17 +398,27 @@ auto-research evolve --model genrec --dataset movielens-1m \
   --generations 3 --population 8 --steps 100 --seeds 42,43,44
 ```
 
-Agent 的论文机制回归与能力比较分层运行。L1 mini-suite 只验证机制；L2 在接口层隐藏
-reference answer/plan，用统一工具环境比较规划、故障恢复和成本：
+Agent 的论文机制回归与能力比较分层运行。L1 mini-suite 只验证机制；L2.1 在接口层隐藏
+reference answer/plan/route，删除 guide，并用隔离 train/validation/test 比较规划、故障恢复和成本：
 
 ```bash
 auto-research agent-capability \
   --methods long-context,react,reflexion,agent-g2,ahead,auso \
-  --episodes 60 --seeds 42,43,44
+  --train-episodes 36 --episodes 60 --seeds 42,43,44
 ```
 
 协议与固定三 seed 结果见
-[Agent L2 无 Oracle 能力评测](agent-research/capability-benchmark.md)。
+[Agent L2.1 隔离能力评测与自动进化](agent-research/capability-benchmark.md)。
+
+同一评测也可直接作为 Agent Evolve 的 validation/test 目标；多轮控制器搜索九个组件轴，
+只用 validation 晋级，并在全部代际结束后运行隔离 test：
+
+```bash
+auto-research evolve --model agent --dataset toolroute-l2.1 \
+  --direction "组合 memory、planner、tool、critic、policy、recovery、reflection、verifier 与 context compression" \
+  --generations 3 --population 9 --workers 3 \
+  --agent-episodes 60 --seeds 42,43,44
+```
 
 重点方法从单 seed 机制验证晋级到三 seed 正式证据时，使用可断点续跑的统一入口：
 

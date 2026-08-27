@@ -63,10 +63,10 @@ auto-research agent-eval --method ahead --benchmark planbench-mini --episodes 12
 
 mini-suite 使用确定性错误位置验证 step-aware PI 分流；未运行 LLM analyzer、Qwen、真实 GRPO 或三个原始 benchmark。
 
-## 统一 L2 无 Oracle 结果
+## 统一 L2.1 隔离能力结果
 
-在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，AHEAD 的 joint
-success 为 **1.0000**、plan step F1 为 **0.9367**、故障恢复率为 **1.0000**。
-这里的满分只表示该固定工具环境全部完成；指标见
+在 `toolroute-l2.1-v1` 的隔离 test、60 episodes/seed、seeds 42/43/44 上，AHEAD 的
+joint success 为 **0.7556**、plan step F1 为 **0.7887**、故障恢复率为
+**0.6667**，平均成本为 **4.5571**；上下文压缩降低决策成本但会保留对应负结果。指标见
 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，统一口径见
-[L2 能力评测](../capability-benchmark.md)。
+[L2.1 隔离能力评测](../capability-benchmark.md)。

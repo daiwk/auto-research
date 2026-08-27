@@ -12,15 +12,16 @@ mini-suite 保证 Mac/Linux CPU 可重复运行，后续真实 LLM executor 沿�
 | `scalemcp-mini` | 有限上下文中的动态工具集合 | 多轮工具路由 | task success、上下文成本、tool evictions |
 | `swebench-local` | 代码定位、编辑、测试与修订 | 临时 Python 仓库 + 真实 unittest | resolved rate、命令/编辑、反馈轮次、复用 |
 | `osreward-mini` | CUA reward 判分与宽松偏差 | 四平台完成/未完成证据轨迹 | success/fail recall、balanced accuracy、leniency |
-| `toolroute-l2` | 无 oracle 规划、工具反馈与故障恢复 | evaluator 隐藏 labels 的多步工具环境 | answer accuracy、plan F1、recovery、invalid-tool rate、cost |
+| `toolroute-l2.1` | 无 guide/oracle 的隔离规划、工具反馈与故障恢复 | train/validation/test 任务族隔离，test 路径更长 | answer accuracy、plan F1、recovery、invalid/irreversible rate、cost |
 
 前三项与 `osreward-mini` 是仓库自带的确定性 mini-suite；`swebench-local` 会真实执行
 代码，但任务仍是仓库自带 micro fixtures，不是官方 SWE-bench Lite；`osreward-mini`
 复现官方指标与证据核验协议，不是官方 1,019 条截图轨迹。
 
-`toolroute-l2`与上述 L1 mini-suite 分层：policy 接口没有 reference answer/plan，结果可以
-在相同 benchmark 版本、预算和 seeds 内公平比较。详细协议和三 seed 结果见
-[Agent L2 无 Oracle 能力评测](capability-benchmark.md)。
+`toolroute-l2.1`与上述 L1 mini-suite 分层：policy 接口没有 reference
+answer/plan/route，也不存在提示正确 tag 的 guide；validation 只选冠军，test 只在全部
+代际后运行。详细协议和三 seed 结果见
+[Agent L2.1 隔离能力评测与自动进化](capability-benchmark.md)。
 
 ## 公平口径
 

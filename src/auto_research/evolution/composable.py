@@ -193,32 +193,28 @@ class AgentEvolutionEvaluator:
             "seeds": list(self.seeds),
             "genome_axes": [
                 "memory", "planner", "tool_policy", "critic", "policy",
-                "failure_recovery", "capacity",
+                "failure_recovery", "reflection", "verifier",
+                "context_compression", "capacity",
             ],
             "selection": (
+                "joint_success + 0.10 * plan_step_f1 + 0.05 * recovery_rate "
+                "- 0.10 * invalid_tool_rate - 0.02 * average_cost"
+                if self.benchmark.startswith("toolroute-l2") else
                 "joint_success - 0.02 * average_cost + 0.01 * reuse_rate "
                 "+ 0.01 * recovery_rate"
             ),
+            "selection_split": "validation",
+            "final_split": "test",
         }
 
     def evaluate(self, trial_id, generation, parent_id, genome,
                  source_papers, rationale):
         started = time.monotonic()
-        rows = [self._run(genome, seed) for seed in self.seeds]
+        rows = [self._run(genome, seed, split="validation") for seed in self.seeds]
         for values in rows:
-            values["primary"] = (
-                values["joint_success"]
-                - 0.02 * values["average_cost"]
-                + 0.01 * values["reuse_rate"]
-                + 0.01 * values["recovery_rate"]
-            )
+            values["primary"] = self._fitness(values)
         validation = _mean(rows)
-        validation["primary"] = (
-            validation["joint_success"]
-            - 0.02 * validation["average_cost"]
-            + 0.01 * validation["reuse_rate"]
-            + 0.01 * validation["recovery_rate"]
-        )
+        validation["primary"] = self._fitness(validation)
         validation["fitness"] = validation["primary"]
         validation["fitness_std"] = validation["primary_std"]
         return EvolutionTrial(
@@ -234,6 +230,9 @@ class AgentEvolutionEvaluator:
                     "critic": genome.agent_critic,
                     "policy": genome.agent_policy,
                     "failure_recovery": genome.agent_failure_recovery,
+                    "reflection": genome.agent_reflection,
+                    "verifier": genome.agent_verifier,
+                    "context_compression": genome.agent_context_compression,
                 },
             },
             source_papers, rationale, time.monotonic() - started,
@@ -241,20 +240,34 @@ class AgentEvolutionEvaluator:
 
     def test(self, genome):
         result = _mean([
-            self._run(genome, seed + 10_000) for seed in self.seeds
+            self._run(genome, seed, split="test") for seed in self.seeds
         ])
-        result["primary"] = (
-            result["joint_success"]
-            - 0.02 * result["average_cost"]
-            + 0.01 * result["reuse_rate"]
-            + 0.01 * result["recovery_rate"]
-        )
+        result["primary"] = self._fitness(result)
         return result
 
-    def _run(self, genome, seed):
+    def _fitness(self, values):
+        if self.benchmark.startswith("toolroute-l2"):
+            return (
+                values["joint_success"]
+                + 0.10 * values["plan_step_f1"]
+                + 0.05 * values["recovery_rate"]
+                - 0.10 * values["invalid_tool_rate"]
+                - 0.02 * values["average_cost"]
+            )
+        return (
+            values["joint_success"]
+            - 0.02 * values["average_cost"]
+            + 0.01 * values["reuse_rate"]
+            + 0.01 * values["recovery_rate"]
+        )
+
+    def _run(self, genome, seed, split="validation"):
         if self.benchmark == "swebench-local":
             from ..agent_research.code_benchmark import run_code_genome
             return run_code_genome(genome, self.episodes)
+        if self.benchmark.startswith("toolroute-l2"):
+            from ..agent_research.capability_runner import run_genome_capability
+            return run_genome_capability(genome, seed, self.episodes, split)
         tasks = build_benchmark(self.benchmark, self.episodes, seed)
         rng = np.random.default_rng(seed)
         memory: dict[str, tuple[str, ...]] = {}

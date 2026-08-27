@@ -78,10 +78,10 @@ auto-research agent-eval --method react --benchmark scalemcp-mini \
 保留交替 trace 和工具动作计数，但 observation 来自确定性 mini-suite；未调用
 Wikipedia、WebShop 或付费 LLM，因此本地 1.0 只说明执行循环正确，不能对标论文。
 
-## 统一 L2 无 Oracle 结果
+## 统一 L2.1 隔离能力结果
 
-在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，ReAct 的 joint success
-为 **0.8556**、plan step F1 为 **0.9094**、故障恢复率为 **0.7111**。Policy 接口
-不包含 reference answer/plan；指标见
+在 `toolroute-l2.1-v1` 的隔离 test、60 episodes/seed、seeds 42/43/44 上，ReAct 的
+joint success 为 **0.6833**、plan step F1 为 **0.7683**、故障恢复率为 **0.6667**。
+Policy 接口不包含 reference answer/plan/route，也没有 guide；指标见
 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，统一口径见
-[L2 能力评测](../capability-benchmark.md)。
+[L2.1 隔离能力评测](../capability-benchmark.md)。

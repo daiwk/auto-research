@@ -65,9 +65,10 @@ auto-research agent-eval --method agent-g2 --benchmark planbench-mini --episodes
 
 mini-suite 验证按任务簇在线估计、Gaussian sampling 和专家前缀/策略续写的控制流；没有运行 Qwen2.5、ALFWorld/WebShop 或真实 GRPO。
 
-## 统一 L2 无 Oracle 结果
+## 统一 L2.1 隔离能力结果
 
-在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，Agent-G² 的 joint
-success 为 **0.8556**、plan step F1 为 **0.9094**、故障恢复率为 **0.7111**。
+在 `toolroute-l2.1-v1` 的隔离 test、60 episodes/seed、seeds 42/43/44 上，Agent-G²
+的 joint success 为 **0.7778**、plan step F1 为 **0.8276**、故障恢复率为
+**0.6667**；public-evidence verifier 只使用公开可靠性、可逆性和成本元数据。
 指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，
-统一口径见 [L2 能力评测](../capability-benchmark.md)。
+统一口径见 [L2.1 隔离能力评测](../capability-benchmark.md)。

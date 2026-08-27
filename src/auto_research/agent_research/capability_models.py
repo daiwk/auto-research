@@ -11,6 +11,9 @@ class ToolSpec:
     name: str
     tag: str
     description: str
+    reliability: float = 1.0
+    reversible: bool = True
+    cost: float = 1.0
 
 
 @dataclass(frozen=True)
@@ -18,6 +21,7 @@ class CapabilityObservation:
     """Public task view; deliberately contains no answer or reference plan."""
 
     task_id: str
+    split: str
     family: str
     request: str
     start_tags: tuple[str, ...]
@@ -30,6 +34,7 @@ class ToolFeedback:
     message: str
     next_tags: tuple[str, ...] = ()
     answer: str = ""
+    terminal: bool = False
 
 
 ToolCaller = Callable[[str], ToolFeedback]
@@ -43,4 +48,7 @@ class CapabilityPrediction:
     reflections: int = 0
     hints: int = 0
     skill_reuses: int = 0
-
+    verifications: int = 0
+    compressions: int = 0
+    memory_writes: int = 0
+    decision_cost: float = 0.0

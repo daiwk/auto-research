@@ -457,6 +457,38 @@ def test_agent_components_form_composable_multiround_genomes(tmp_path):
     assert "success=" in (run_dir / "index.html").read_text(encoding="utf-8")
 
 
+def test_agent_l21_evolve_selects_on_validation_and_tests_once(tmp_path):
+    config = EvolutionConfig(
+        model="agent",
+        dataset="toolroute-l2.1",
+        direction=(
+            "组合 memory、planner、tool、critic、policy、recovery、reflection、"
+            "verifier 与 context compression"
+        ),
+        output_dir=tmp_path / "runs",
+        generations=2,
+        population=9,
+        steps=1,
+        seeds=(42, 43, 44),
+        agent_episodes=12,
+        allow_network=False,
+    )
+    result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path).run()
+
+    assert result.dataset_summary["selection_split"] == "validation"
+    assert result.dataset_summary["final_split"] == "test"
+    assert set(result.dataset_summary["genome_axes"]) >= {
+        "reflection", "verifier", "context_compression",
+    }
+    assert result.champion_test is not None
+    assert 0 <= result.champion_test["joint_success"] < 1
+    assert "plan_step_f1" in result.champion_test
+    assert len(result.rounds) == 2
+    assert all(round_["hypotheses"] for round_ in result.rounds)
+    report = (run_dir / "report.md").read_text(encoding="utf-8")
+    assert "toolroute-l2.1" in report
+
+
 def test_free_generation_post_training_and_code_agent_configs_are_supported():
     EvolutionConfig(
         model="post-training", dataset="arithmetic-generate",

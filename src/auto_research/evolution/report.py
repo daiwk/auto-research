@@ -312,12 +312,20 @@ def _render_composable_report(result: EvolutionResult) -> str:
             f"critic=`{champion.genome.agent_critic}`，"
             f"trainable policy=`{champion.genome.agent_policy}`，"
             f"failure recovery=`{champion.genome.agent_failure_recovery}`，"
+            f"reflection=`{champion.genome.agent_reflection}`，"
+            f"verifier=`{champion.genome.agent_verifier}`，"
+            f"context=`{champion.genome.agent_context_compression}`，"
             f"capacity=`{champion.genome.memory_size}`",
             f"- validation：joint success "
             f"`{champion.validation['joint_success']:.4f}`，average cost "
             f"`{champion.validation['average_cost']:.4f}`，reuse "
             f"`{champion.validation['reuse_rate']:.4f}`，recovery "
-            f"`{champion.validation['recovery_rate']:.4f}`",
+            f"`{champion.validation['recovery_rate']:.4f}`"
+            + (
+                f"，plan F1 `{champion.validation['plan_step_f1']:.4f}`，"
+                f"invalid-tool rate `{champion.validation['invalid_tool_rate']:.4f}`"
+                if "plan_step_f1" in champion.validation else ""
+            ),
         ]
     else:
         lines += [

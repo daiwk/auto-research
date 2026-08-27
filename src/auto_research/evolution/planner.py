@@ -66,7 +66,11 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         return compatible([*requested, *mapped, *installed])
     if model == "agent":
         operators = [paper.architecture for paper in papers if paper.architecture and ":" in paper.architecture]
-        operators = list(dict.fromkeys(operators))
+        operators = list(dict.fromkeys([
+            *operators,
+            "reflection:reflexion", "verifier:public-evidence",
+            "context:compressed",
+        ]))
         if operators:
             text = direction.lower().replace("_", "-")
             compact_text = text.replace("-", "").replace(" ", "")
@@ -82,7 +86,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             interleaved = []
             for component in (
                 "memory:", "planner:", "tool:", "critic:", "policy:",
-                "recovery:",
+                "recovery:", "reflection:", "verifier:", "context:",
             ):
                 match = next(
                     (
@@ -100,6 +104,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "tool:memtool", "critic:self-refine", "recovery:reflexion",
             "planner:metagpt", "planner:swe-agent", "planner:openhands",
             "critic:critic", "policy:agent-lightning",
+            "reflection:reflexion", "verifier:public-evidence",
+            "context:compressed",
             "tool:mrkl", "planner:hugginggpt",
             "memory:generative-agents", "memory:memgpt",
             "tool:webgpt", "planner:saycan", "tool:pal", "planner:art",
@@ -426,6 +432,9 @@ def _propose_agent(parent, generation, index, operators, rng):
         "critic": ["none"],
         "policy": ["heuristic", "replay-policy", "pairwise-policy"],
         "recovery": ["none", "retry", "rollback"],
+        "reflection": ["none", "reflexion"],
+        "verifier": ["none", "public-evidence"],
+        "context": ["full", "compressed"],
     }
     for operator in operators:
         if ":" not in operator:
@@ -440,6 +449,8 @@ def _propose_agent(parent, generation, index, operators, rng):
             "memory": "agent_memory", "planner": "agent_planner",
             "tool": "agent_tool_policy", "critic": "agent_critic",
             "policy": "agent_policy", "recovery": "agent_failure_recovery",
+            "reflection": "agent_reflection", "verifier": "agent_verifier",
+            "context": "agent_context_compression",
         }[component]
         return replace(parent, architecture="composable-agent", **{field: value}), (
             f"论文算子单组件消融：{operator}；其余组件保持基线"
@@ -453,10 +464,13 @@ def _propose_agent(parent, generation, index, operators, rng):
         agent_critic=rng.choice(values["critic"]),
         agent_policy=rng.choice(values["policy"]),
         agent_failure_recovery=rng.choice(values["recovery"]),
+        agent_reflection=rng.choice(values["reflection"]),
+        agent_verifier=rng.choice(values["verifier"]),
+        agent_context_compression=rng.choice(values["context"]),
         memory_size=rng.choice((8, 16, 24, 48)),
     ), (
         "论文检索约束下的 Agent 组合 genome：搜索 memory / planner / tool / "
-        "critic / policy / recovery / capacity"
+        "critic / policy / recovery / reflection / verifier / context / capacity"
     )
 
 
