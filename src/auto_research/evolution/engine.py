@@ -206,7 +206,11 @@ def _default_protocol(config):
     if config.model == "post-training" and "gsm8k" in config.dataset:
         return "post_training.gsm8k.v1"
     if config.model == "agent":
-        return "agent.swe_local.v2"
+        return (
+            "agent.toolroute_l21.v1"
+            if config.dataset.startswith("toolroute-l2")
+            else "agent.swe_local.v2"
+        )
     if config.model in {"micro-vlm", "vlm-checkpoint"} and "scienceqa" in config.dataset:
         return "multimodal.scienceqa.v1"
     if config.model in {"micro-llm", "reasoning-checkpoint"}:

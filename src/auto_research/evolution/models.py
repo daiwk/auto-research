@@ -157,6 +157,9 @@ class Genome:
     agent_critic: str = "none"
     agent_policy: str = "heuristic"
     agent_failure_recovery: str = "none"
+    agent_reflection: str = "none"
+    agent_verifier: str = "none"
+    agent_context_compression: str = "full"
     memory_size: int = 24
     genrec_context: str = "recent"
     genrec_head: str = "id-catalog"

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "manifest_ref": "experiments:agent-toolroute-l2-seeds42-44",
-  "benchmark": "toolroute-l2-v1",
+  "manifest_ref": "experiments:agent-toolroute-l2.1-seeds42-44",
+  "benchmark": "toolroute-l2.1-v1",
   "seeds": [
     42,
     43,
@@ -9,36 +9,38 @@
   ],
   "episodes_per_seed": 60,
   "oracle_fields_exposed": false,
+  "guide_endpoint": "absent",
   "results": {
     "long-context": {
       "metrics": {
-        "answer_accuracy": 0.4,
-        "plan_exact_match": 0.4,
-        "plan_step_f1": 0.75,
-        "joint_success": 0.4,
+        "answer_accuracy": 0.35,
+        "plan_exact_match": 0.35,
+        "plan_step_f1": 0.5212301587301588,
+        "joint_success": 0.35,
         "recovery_success_rate": 0,
-        "invalid_tool_rate": 0.09374895257248199,
-        "average_tool_calls": 2.6055555555555556,
-        "average_cost": 2.6055555555555556
+        "invalid_tool_rate": 0.053211908639440475,
+        "irreversible_error_rate": 0.07222222222222222,
+        "average_tool_calls": 3.1444444444444444,
+        "average_cost": 2.857111111111111
       },
       "aggregate_metrics": {
         "answer_accuracy": {
-          "mean": 0.4,
+          "mean": 0.35,
           "std": 0.016666666666666663,
           "ci95_radius": 0.01886010879352777
         },
         "plan_exact_match": {
-          "mean": 0.4,
+          "mean": 0.35,
           "std": 0.016666666666666663,
           "ci95_radius": 0.01886010879352777
         },
         "plan_step_f1": {
-          "mean": 0.75,
-          "std": 0.004444444444444473,
-          "ci95_radius": 0.005029362344940773
+          "mean": 0.5212301587301588,
+          "std": 0.012826425681661901,
+          "ci95_radius": 0.014514467027294526
         },
         "joint_success": {
-          "mean": 0.4,
+          "mean": 0.35,
           "std": 0.016666666666666663,
           "ci95_radius": 0.01886010879352777
         },
@@ -48,299 +50,457 @@
           "ci95_radius": 0.0
         },
         "invalid_tool_rate": {
-          "mean": 0.09374895257248199,
-          "std": 0.005484597735871627,
-          "ci95_radius": 0.0062064065992365
+          "mean": 0.053211908639440475,
+          "std": 0.01516947708034028,
+          "ci95_radius": 0.017165879284568628
+        },
+        "irreversible_error_rate": {
+          "mean": 0.07222222222222222,
+          "std": 0.00962250448649376,
+          "ci95_radius": 0.010888888888888887
         },
         "average_tool_calls": {
-          "mean": 2.6055555555555556,
-          "std": 0.05853140973807078,
-          "ci95_radius": 0.06623452532991396
+          "mean": 3.1444444444444444,
+          "std": 0.07876359377087677,
+          "ci95_radius": 0.08912939684927776
         },
         "average_cost": {
-          "mean": 2.6055555555555556,
-          "std": 0.05853140973807078,
-          "ci95_radius": 0.06623452532991396
+          "mean": 2.857111111111111,
+          "std": 0.0644785350444742,
+          "ci95_radius": 0.07296433114716461
         }
       },
       "artifact_path": "docs/agent-research/metrics/toolroute-l2-long-context-seeds42-44.json"
     },
     "react": {
       "metrics": {
-        "answer_accuracy": 0.8555555555555555,
-        "plan_exact_match": 0.8555555555555555,
-        "plan_step_f1": 0.9093738977072311,
-        "joint_success": 0.8555555555555555,
-        "recovery_success_rate": 0.7111111111111111,
-        "invalid_tool_rate": 0.05757874015748032,
-        "average_tool_calls": 4.2444444444444445,
-        "average_cost": 4.2444444444444445
+        "answer_accuracy": 0.6833333333333333,
+        "plan_exact_match": 0.6833333333333333,
+        "plan_step_f1": 0.7683076491409825,
+        "joint_success": 0.6833333333333333,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04554420919793445,
+        "irreversible_error_rate": 0.07222222222222222,
+        "average_tool_calls": 5.366666666666667,
+        "average_cost": 4.798444444444445
       },
       "aggregate_metrics": {
         "answer_accuracy": {
-          "mean": 0.8555555555555555,
-          "std": 0.025458753860865747,
-          "ci95_radius": 0.028809292053814398
+          "mean": 0.6833333333333333,
+          "std": 0.016666666666666663,
+          "ci95_radius": 0.01886010879352777
         },
         "plan_exact_match": {
-          "mean": 0.8555555555555555,
-          "std": 0.025458753860865747,
-          "ci95_radius": 0.028809292053814398
+          "mean": 0.6833333333333333,
+          "std": 0.016666666666666663,
+          "ci95_radius": 0.01886010879352777
         },
         "plan_step_f1": {
-          "mean": 0.9093738977072311,
-          "std": 0.004034550550542428,
-          "ci95_radius": 0.004565523738973055
+          "mean": 0.7683076491409825,
+          "std": 0.00644999586686913,
+          "ci95_radius": 0.007298857426017377
         },
         "joint_success": {
-          "mean": 0.8555555555555555,
-          "std": 0.025458753860865747,
-          "ci95_radius": 0.028809292053814398
+          "mean": 0.6833333333333333,
+          "std": 0.016666666666666663,
+          "ci95_radius": 0.01886010879352777
         },
         "recovery_success_rate": {
-          "mean": 0.7111111111111111,
-          "std": 0.050917507721731606,
-          "ci95_radius": 0.05761858410762892
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "ci95_radius": 0.0
         },
         "invalid_tool_rate": {
-          "mean": 0.05757874015748032,
-          "std": 0.004261936042246253,
-          "ci95_radius": 0.004822834645669292
+          "mean": 0.04554420919793445,
+          "std": 0.0034731968812121063,
+          "ci95_radius": 0.0039302922624601016
+        },
+        "irreversible_error_rate": {
+          "mean": 0.07222222222222222,
+          "std": 0.00962250448649376,
+          "ci95_radius": 0.010888888888888887
         },
         "average_tool_calls": {
-          "mean": 4.2444444444444445,
-          "std": 0.019245008972987455,
-          "ci95_radius": 0.021777777777777698
+          "mean": 5.366666666666667,
+          "std": 0.04409585518441019,
+          "ci95_radius": 0.04989915756729732
         },
         "average_cost": {
-          "mean": 4.2444444444444445,
-          "std": 0.019245008972987455,
-          "ci95_radius": 0.021777777777777698
+          "mean": 4.798444444444445,
+          "std": 0.029622313911669484,
+          "ci95_radius": 0.03352080378540707
         }
       },
       "artifact_path": "docs/agent-research/2210.03629-react/metrics/toolroute-l2-seeds42-44.json"
     },
     "reflexion": {
       "metrics": {
-        "answer_accuracy": 1,
-        "plan_exact_match": 1,
-        "plan_step_f1": 0.93668430335097,
-        "joint_success": 1,
-        "recovery_success_rate": 1,
-        "invalid_tool_rate": 0.0,
-        "average_tool_calls": 4.0,
-        "average_cost": 4.75
+        "answer_accuracy": 0.7277777777777777,
+        "plan_exact_match": 0.7277777777777777,
+        "plan_step_f1": 0.7785640593973927,
+        "joint_success": 0.7277777777777777,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.03757984173139372,
+        "irreversible_error_rate": 0.07222222222222222,
+        "average_tool_calls": 5.322222222222222,
+        "average_cost": 4.792000000000001
       },
       "aggregate_metrics": {
         "answer_accuracy": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7277777777777777,
+          "std": 0.009622504486493728,
+          "ci95_radius": 0.010888888888888849
         },
         "plan_exact_match": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7277777777777777,
+          "std": 0.009622504486493728,
+          "ci95_radius": 0.010888888888888849
         },
         "plan_step_f1": {
-          "mean": 0.93668430335097,
-          "std": 0.0024438106632365237,
-          "ci95_radius": 0.0027654320987654467
+          "mean": 0.7785640593973927,
+          "std": 0.006752434179036209,
+          "ci95_radius": 0.007641098594265499
         },
         "joint_success": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7277777777777777,
+          "std": 0.009622504486493728,
+          "ci95_radius": 0.010888888888888849
         },
         "recovery_success_rate": {
-          "mean": 1,
+          "mean": 0.6666666666666666,
           "std": 0.0,
           "ci95_radius": 0.0
         },
         "invalid_tool_rate": {
-          "mean": 0.0,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.03757984173139372,
+          "std": 0.0002957135766726038,
+          "ci95_radius": 0.0003346314136661115
+        },
+        "irreversible_error_rate": {
+          "mean": 0.07222222222222222,
+          "std": 0.00962250448649376,
+          "ci95_radius": 0.010888888888888887
         },
         "average_tool_calls": {
-          "mean": 4.0,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 5.322222222222222,
+          "std": 0.04194352464039291,
+          "ci95_radius": 0.0474635662741094
         },
         "average_cost": {
-          "mean": 4.75,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 4.792000000000001,
+          "std": 0.029310597249307582,
+          "ci95_radius": 0.03316806317551302
         }
       },
       "artifact_path": "docs/agent-research/2303.11366-reflexion/metrics/toolroute-l2-seeds42-44.json"
     },
     "agent-g2": {
       "metrics": {
-        "answer_accuracy": 0.8555555555555555,
-        "plan_exact_match": 0.8555555555555555,
-        "plan_step_f1": 0.9093738977072311,
-        "joint_success": 0.8555555555555555,
-        "recovery_success_rate": 0.7111111111111111,
-        "invalid_tool_rate": 0.05757874015748032,
-        "average_tool_calls": 4.2444444444444445,
-        "average_cost": 4.2444444444444445
+        "answer_accuracy": 0.7777777777777778,
+        "plan_exact_match": 0.7777777777777778,
+        "plan_step_f1": 0.8276025209358543,
+        "joint_success": 0.7777777777777778,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.03944502980868784,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.633333333333334,
+        "average_cost": 5.066222222222223
       },
       "aggregate_metrics": {
         "answer_accuracy": {
-          "mean": 0.8555555555555555,
-          "std": 0.025458753860865747,
-          "ci95_radius": 0.028809292053814398
+          "mean": 0.7777777777777778,
+          "std": 0.025458753860865796,
+          "ci95_radius": 0.028809292053814453
         },
         "plan_exact_match": {
-          "mean": 0.8555555555555555,
-          "std": 0.025458753860865747,
-          "ci95_radius": 0.028809292053814398
+          "mean": 0.7777777777777778,
+          "std": 0.025458753860865796,
+          "ci95_radius": 0.028809292053814453
         },
         "plan_step_f1": {
-          "mean": 0.9093738977072311,
-          "std": 0.004034550550542428,
-          "ci95_radius": 0.004565523738973055
+          "mean": 0.8276025209358543,
+          "std": 0.006782471749829366,
+          "ci95_radius": 0.007675089305448633
         },
         "joint_success": {
-          "mean": 0.8555555555555555,
-          "std": 0.025458753860865747,
-          "ci95_radius": 0.028809292053814398
+          "mean": 0.7777777777777778,
+          "std": 0.025458753860865796,
+          "ci95_radius": 0.028809292053814453
         },
         "recovery_success_rate": {
-          "mean": 0.7111111111111111,
-          "std": 0.050917507721731606,
-          "ci95_radius": 0.05761858410762892
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "ci95_radius": 0.0
         },
         "invalid_tool_rate": {
-          "mean": 0.05757874015748032,
-          "std": 0.004261936042246253,
-          "ci95_radius": 0.004822834645669292
+          "mean": 0.03944502980868784,
+          "std": 0.004486914687208469,
+          "ci95_radius": 0.005077421948881763
+        },
+        "irreversible_error_rate": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95_radius": 0.0
         },
         "average_tool_calls": {
-          "mean": 4.2444444444444445,
-          "std": 0.019245008972987455,
-          "ci95_radius": 0.021777777777777698
+          "mean": 5.633333333333334,
+          "std": 0.01666666666666705,
+          "ci95_radius": 0.018860108793528212
         },
         "average_cost": {
-          "mean": 4.2444444444444445,
-          "std": 0.019245008972987455,
-          "ci95_radius": 0.021777777777777698
+          "mean": 5.066222222222223,
+          "std": 0.012098362301169978,
+          "ci95_radius": 0.01369058575341485
         }
       },
       "artifact_path": "docs/agent-research/2608.23318-agent-g2/metrics/toolroute-l2-seeds42-44.json"
     },
     "ahead": {
       "metrics": {
-        "answer_accuracy": 1,
-        "plan_exact_match": 1,
-        "plan_step_f1": 0.93668430335097,
-        "joint_success": 1,
-        "recovery_success_rate": 1,
-        "invalid_tool_rate": 0.0,
-        "average_tool_calls": 4.0,
-        "average_cost": 4.75
+        "answer_accuracy": 0.7555555555555555,
+        "plan_exact_match": 0.7555555555555555,
+        "plan_step_f1": 0.7886946386946387,
+        "joint_success": 0.7555555555555555,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.033423200650924474,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.011111111111111,
+        "average_cost": 4.557111111111111
       },
       "aggregate_metrics": {
         "answer_accuracy": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7555555555555555,
+          "std": 0.019245008972987584,
+          "ci95_radius": 0.021777777777777844
         },
         "plan_exact_match": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7555555555555555,
+          "std": 0.019245008972987584,
+          "ci95_radius": 0.021777777777777844
         },
         "plan_step_f1": {
-          "mean": 0.93668430335097,
-          "std": 0.0024438106632365237,
-          "ci95_radius": 0.0027654320987654467
+          "mean": 0.7886946386946387,
+          "std": 0.014839329090731549,
+          "ci95_radius": 0.016792281664449515
         },
         "joint_success": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7555555555555555,
+          "std": 0.019245008972987584,
+          "ci95_radius": 0.021777777777777844
         },
         "recovery_success_rate": {
-          "mean": 1,
+          "mean": 0.6666666666666666,
           "std": 0.0,
           "ci95_radius": 0.0
         },
         "invalid_tool_rate": {
+          "mean": 0.033423200650924474,
+          "std": 0.009765182300528781,
+          "ci95_radius": 0.011050344034596279
+        },
+        "irreversible_error_rate": {
           "mean": 0.0,
           "std": 0.0,
           "ci95_radius": 0.0
         },
         "average_tool_calls": {
-          "mean": 4.0,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 5.011111111111111,
+          "std": 0.12619796324000615,
+          "ci95_radius": 0.1428064389736881
         },
         "average_cost": {
-          "mean": 4.75,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 4.557111111111111,
+          "std": 0.10424401572663461,
+          "ci95_radius": 0.11796320866071296
         }
       },
       "artifact_path": "docs/agent-research/2608.24114-ahead/metrics/toolroute-l2-seeds42-44.json"
     },
     "auso": {
       "metrics": {
-        "answer_accuracy": 1,
-        "plan_exact_match": 1,
-        "plan_step_f1": 0.93668430335097,
-        "joint_success": 1,
-        "recovery_success_rate": 1,
-        "invalid_tool_rate": 0.0,
-        "average_tool_calls": 4.0,
-        "average_cost": 4.083333333333333
+        "answer_accuracy": 0.7555555555555555,
+        "plan_exact_match": 0.7555555555555555,
+        "plan_step_f1": 0.7886946386946387,
+        "joint_success": 0.7555555555555555,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.033423200650924474,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.011111111111111,
+        "average_cost": 4.519222222222223
       },
       "aggregate_metrics": {
         "answer_accuracy": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7555555555555555,
+          "std": 0.019245008972987584,
+          "ci95_radius": 0.021777777777777844
         },
         "plan_exact_match": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7555555555555555,
+          "std": 0.019245008972987584,
+          "ci95_radius": 0.021777777777777844
         },
         "plan_step_f1": {
-          "mean": 0.93668430335097,
-          "std": 0.0024438106632365237,
-          "ci95_radius": 0.0027654320987654467
+          "mean": 0.7886946386946387,
+          "std": 0.014839329090731549,
+          "ci95_radius": 0.016792281664449515
         },
         "joint_success": {
-          "mean": 1,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 0.7555555555555555,
+          "std": 0.019245008972987584,
+          "ci95_radius": 0.021777777777777844
         },
         "recovery_success_rate": {
-          "mean": 1,
+          "mean": 0.6666666666666666,
           "std": 0.0,
           "ci95_radius": 0.0
         },
         "invalid_tool_rate": {
+          "mean": 0.033423200650924474,
+          "std": 0.009765182300528781,
+          "ci95_radius": 0.011050344034596279
+        },
+        "irreversible_error_rate": {
           "mean": 0.0,
           "std": 0.0,
           "ci95_radius": 0.0
         },
         "average_tool_calls": {
-          "mean": 4.0,
-          "std": 0.0,
-          "ci95_radius": 0.0
+          "mean": 5.011111111111111,
+          "std": 0.12619796324000615,
+          "ci95_radius": 0.1428064389736881
         },
         "average_cost": {
-          "mean": 4.083333333333333,
-          "std": 0.014433756729740337,
-          "ci95_radius": 0.016333333333332988
+          "mean": 4.519222222222223,
+          "std": 0.10003184678076471,
+          "ci95_radius": 0.11319669078616341
         }
       },
       "artifact_path": "docs/agent-research/2608.21292-auso/metrics/toolroute-l2-seeds42-44.json"
     }
   },
+  "ablations": {
+    "react-no-retry": {
+      "metrics": {
+        "answer_accuracy": 0.5166666666666667,
+        "plan_exact_match": 0.5166666666666667,
+        "plan_step_f1": 0.6608220791554125,
+        "joint_success": 0.5166666666666667,
+        "recovery_success_rate": 0.3333333333333333,
+        "invalid_tool_rate": 0.052805653041113364,
+        "irreversible_error_rate": 0.07222222222222222,
+        "average_tool_calls": 4.627777777777778,
+        "average_cost": 4.147333333333333
+      },
+      "validation_metrics": {
+        "answer_accuracy": 0.5111111111111111,
+        "plan_exact_match": 0.5111111111111111,
+        "plan_step_f1": 0.6578122494789161,
+        "joint_success": 0.5111111111111111,
+        "recovery_success_rate": 0.3333333333333333,
+        "invalid_tool_rate": 0.05915516460463897,
+        "irreversible_error_rate": 0.08888888888888889,
+        "average_tool_calls": 3.9444444444444446,
+        "average_cost": 3.612444444444445
+      }
+    },
+    "reflexion-no-reflection": {
+      "metrics": {
+        "answer_accuracy": 0.6833333333333333,
+        "plan_exact_match": 0.6833333333333333,
+        "plan_step_f1": 0.7683076491409825,
+        "joint_success": 0.6833333333333333,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04554420919793445,
+        "irreversible_error_rate": 0.07222222222222222,
+        "average_tool_calls": 5.366666666666667,
+        "average_cost": 4.798444444444445
+      },
+      "validation_metrics": {
+        "answer_accuracy": 0.6777777777777778,
+        "plan_exact_match": 0.6777777777777778,
+        "plan_step_f1": 0.7571869488536155,
+        "joint_success": 0.6777777777777778,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.05136523384698567,
+        "irreversible_error_rate": 0.08888888888888889,
+        "average_tool_calls": 4.544444444444444,
+        "average_cost": 4.172888888888889
+      }
+    },
+    "agent-g2-no-verifier": {
+      "metrics": {
+        "answer_accuracy": 0.6833333333333333,
+        "plan_exact_match": 0.6833333333333333,
+        "plan_step_f1": 0.7683076491409825,
+        "joint_success": 0.6833333333333333,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04554420919793445,
+        "irreversible_error_rate": 0.07222222222222222,
+        "average_tool_calls": 5.366666666666667,
+        "average_cost": 4.798444444444445
+      },
+      "validation_metrics": {
+        "answer_accuracy": 0.6777777777777778,
+        "plan_exact_match": 0.6777777777777778,
+        "plan_step_f1": 0.7571869488536155,
+        "joint_success": 0.6777777777777778,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.05136523384698567,
+        "irreversible_error_rate": 0.08888888888888889,
+        "average_tool_calls": 4.544444444444444,
+        "average_cost": 4.172888888888889
+      }
+    },
+    "ahead-no-compression": {
+      "metrics": {
+        "answer_accuracy": 0.7555555555555555,
+        "plan_exact_match": 0.7555555555555555,
+        "plan_step_f1": 0.8224743158076492,
+        "joint_success": 0.7555555555555555,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04322401526982474,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.655555555555556,
+        "average_cost": 5.089333333333333
+      },
+      "validation_metrics": {
+        "answer_accuracy": 0.7666666666666667,
+        "plan_exact_match": 0.7666666666666667,
+        "plan_step_f1": 0.820679012345679,
+        "joint_success": 0.7666666666666667,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04850297962322184,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 4.811111111111111,
+        "average_cost": 4.453777777777778
+      }
+    },
+    "auso-no-memory": {
+      "metrics": {
+        "answer_accuracy": 0.7555555555555555,
+        "plan_exact_match": 0.7555555555555555,
+        "plan_step_f1": 0.7886946386946387,
+        "joint_success": 0.7555555555555555,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.033423200650924474,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.011111111111111,
+        "average_cost": 4.557111111111111
+      },
+      "validation_metrics": {
+        "answer_accuracy": 0.7666666666666667,
+        "plan_exact_match": 0.7666666666666667,
+        "plan_step_f1": 0.7996632996632996,
+        "joint_success": 0.7666666666666667,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.036436151817406885,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 4.288888888888889,
+        "average_cost": 4.014444444444445
+      }
+    }
+  },
+  "evolve_artifact": "docs/agent-research/metrics/toolroute-l21-evolve-seeds42-44.json",
   "evaluation_protocol": {
     "tier": "l2_capability",
     "seeds": [
@@ -349,11 +509,92 @@
       44
     ],
     "formal_comparison": true,
-    "claim_policy": "shared no-oracle benchmark; compare only within toolroute-l2-v1"
+    "claim_policy": "held-out no-guide test; compare only within toolroute-l2.1-v1"
   },
   "provenance": {
     "artifact_path": "docs/experiments/agent-toolroute-l2-seeds42-44.json",
-    "dataset_fingerprint": "b0db62f1c8c1f5a10b95722397736d78c2c2d005d71b6efc6a5c994bc02dff25",
+    "dataset_fingerprint": "25d906c4d33d7476f423f672765ab420349dbc390492744612d987d6c614ec60",
     "original_code_commit": "generated from repository source"
+  },
+  "evolve_champion": {
+    "metrics": {
+      "answer_accuracy": 0.8000000000000002,
+      "answer_accuracy_std": 1.3597399555105182e-16,
+      "plan_exact_match": 0.8000000000000002,
+      "plan_exact_match_std": 1.3597399555105182e-16,
+      "plan_step_f1": 0.8327307260640594,
+      "plan_step_f1_std": 0.0009395476107850075,
+      "joint_success": 0.8000000000000002,
+      "joint_success_std": 1.3597399555105182e-16,
+      "recovery_success_rate": 0.6666666666666666,
+      "recovery_success_rate_std": 0.0,
+      "invalid_tool_rate": 0.035644054235870325,
+      "invalid_tool_rate_std": 0.00016195458446435212,
+      "irreversible_error_rate": 0.0,
+      "irreversible_error_rate_std": 0.0,
+      "average_tool_calls": 5.611111111111111,
+      "average_tool_calls_std": 0.025458753860866077,
+      "average_cost": 4.966222222222222,
+      "average_cost_std": 0.021922422142468423,
+      "reuse_rate": 4.566666666666666,
+      "reuse_rate_std": 0.028867513459481187,
+      "recovery_rate": 0.6666666666666666,
+      "recovery_rate_std": 0.0,
+      "verification_rate": 0.0,
+      "verification_rate_std": 0.0,
+      "compression_rate": 0.0,
+      "compression_rate_std": 0.0,
+      "primary": 0.8137175560717079
+    },
+    "champion_id": "g2-t2",
+    "champion_genome": {
+      "architecture": "composable-agent",
+      "dimensions": 64,
+      "layers": 2,
+      "learning_rate": 0.0003,
+      "optimizer": "adamw",
+      "batch_size": 48,
+      "experts": 4,
+      "interval_residual": 2,
+      "auxiliary_weight": 0.15,
+      "heads": 4,
+      "kv_heads": 4,
+      "sequence_length": 128,
+      "expansion": 4,
+      "data_recipe": "wikitext",
+      "data_mix_ratio": 0.2,
+      "post_training": "none",
+      "neftune_alpha": 0.0,
+      "post_steps": 0,
+      "group_size": 4,
+      "post_data_recipe": "base",
+      "post_teacher": "auto",
+      "post_rollout": "on-policy",
+      "gradient_accumulation": 1,
+      "mixed_precision": "no",
+      "agent_memory": "evoharness-rl",
+      "agent_planner": "pearl",
+      "agent_tool_policy": "direct",
+      "agent_critic": "none",
+      "agent_policy": "heuristic",
+      "agent_failure_recovery": "retry",
+      "agent_reflection": "none",
+      "agent_verifier": "none",
+      "agent_context_compression": "full",
+      "memory_size": 48,
+      "genrec_context": "recent",
+      "genrec_head": "id-catalog",
+      "genrec_reward": "uniform",
+      "genrec_distillation": "none",
+      "multimodal_objective": "cross_entropy",
+      "checkpoint_prompt_style": "direct",
+      "checkpoint_use_hint": true,
+      "checkpoint_image_size": 0,
+      "checkpoint_max_new_tokens": 16,
+      "reasoning_samples": 1,
+      "reasoning_max_new_tokens": 96,
+      "reasoning_stop_consensus": 1.0,
+      "reasoning_verifier": "self-consistency"
+    }
   }
 }

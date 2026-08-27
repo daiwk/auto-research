@@ -1,138 +1,229 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 from .capability_models import (
     CapabilityObservation,
     CapabilityPrediction,
     ToolCaller,
     ToolFeedback,
+    ToolSpec,
 )
 
 
 CAPABILITY_METHODS = (
     "long-context", "react", "reflexion", "agent-g2", "ahead", "auso",
 )
+CAPABILITY_ABLATIONS = (
+    "react-no-retry", "reflexion-no-reflection", "agent-g2-no-verifier",
+    "ahead-no-compression", "auso-no-memory",
+)
 
 
-def _tool_map(observation: CapabilityObservation) -> dict[str, str]:
-    return {tool.tag: tool.name for tool in observation.tools}
+@dataclass(frozen=True)
+class _Strategy:
+    ordering: str = "listed"
+    retry: bool = False
+    explore: bool = False
+    recover_fallback: bool = False
+    reflect: bool = False
+    verify: bool = False
+    compress: bool = False
+    memory: bool = False
 
 
-def _call_candidates(
-    tags: tuple[str, ...], mapping: dict[str, str], call: ToolCaller,
-    *, retry: bool,
-) -> tuple[ToolFeedback, int]:
-    retries = 0
-    feedback = ToolFeedback("wrong_tool", "No candidate tool was available.")
-    for tag in tags:
-        tool = mapping.get(tag)
-        if not tool:
-            continue
-        feedback = call(tool)
-        if feedback.status == "transient_error" and retry:
-            retries += 1
-            feedback = call(tool)
-        if feedback.status in {"ok", "hint"}:
-            return feedback, retries
-    return feedback, retries
+def _strategy(method: str) -> _Strategy:
+    strategies = {
+        "long-context": _Strategy(ordering="listed"),
+        "react": _Strategy(retry=True, explore=True, recover_fallback=True),
+        "react-no-retry": _Strategy(explore=True, recover_fallback=True),
+        "reflexion": _Strategy(
+            ordering="listed", retry=True, explore=True, recover_fallback=True,
+            reflect=True,
+        ),
+        "reflexion-no-reflection": _Strategy(
+            ordering="listed", retry=True, explore=True, recover_fallback=True,
+        ),
+        "agent-g2": _Strategy(
+            ordering="verified", retry=True, explore=True, recover_fallback=True,
+            verify=True,
+        ),
+        "agent-g2-no-verifier": _Strategy(
+            retry=True, explore=True, recover_fallback=True,
+        ),
+        "ahead": _Strategy(
+            ordering="safe", retry=True, explore=True, recover_fallback=True,
+            verify=True, compress=True,
+        ),
+        "ahead-no-compression": _Strategy(
+            ordering="safe", retry=True, explore=True, recover_fallback=True,
+            verify=True,
+        ),
+        "auso": _Strategy(
+            ordering="memory", retry=True, explore=True, recover_fallback=True,
+            verify=True, compress=True, memory=True,
+        ),
+        "auso-no-memory": _Strategy(
+            ordering="safe", retry=True, explore=True, recover_fallback=True,
+            verify=True, compress=True,
+        ),
+    }
+    if method not in strategies:
+        raise ValueError(f"unsupported L2.1 capability method: {method}")
+    return strategies[method]
+
+
+def _rank_tags(
+    tags: tuple[str, ...],
+    specs: dict[str, ToolSpec],
+    strategy: _Strategy,
+    learned_tag: str | None,
+) -> tuple[str, ...]:
+    if learned_tag in tags:
+        return (learned_tag, *(tag for tag in tags if tag != learned_tag))
+    if strategy.ordering == "memory":
+        return tuple(sorted(tags, key=lambda tag: (not specs[tag].reversible,)))
+    if strategy.ordering == "safe":
+        return tuple(sorted(tags, key=lambda tag: (
+            not specs[tag].reversible,
+        )))
+    if strategy.ordering == "verified":
+        return tuple(sorted(tags, key=lambda tag: -(
+            specs[tag].reliability
+            + 0.16 * float(specs[tag].reversible)
+            - 0.04 * specs[tag].cost
+        )))
+    return tags
 
 
 @dataclass
 class CapabilityPolicy:
     method: str
-    skills: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    skills: dict[str, str] = field(default_factory=dict)
+    learning_enabled: bool = True
+    components: dict[str, str] = field(default_factory=dict)
+
+    @classmethod
+    def from_genome(cls, genome: Any) -> "CapabilityPolicy":
+        components = {
+            "memory": genome.agent_memory,
+            "planner": genome.agent_planner,
+            "tool": genome.agent_tool_policy,
+            "critic": genome.agent_critic,
+            "policy": genome.agent_policy,
+            "recovery": genome.agent_failure_recovery,
+            "reflection": getattr(genome, "agent_reflection", "none"),
+            "verifier": getattr(genome, "agent_verifier", "none"),
+            "context": getattr(genome, "agent_context_compression", "full"),
+        }
+        return cls("genome", components=components)
+
+    def freeze(self) -> None:
+        self.learning_enabled = False
+
+    def _effective_strategy(self) -> _Strategy:
+        if self.method != "genome":
+            return _strategy(self.method)
+        values = self.components
+        memory = values.get("memory", "none") != "none"
+        verifier = values.get("verifier", "none") != "none"
+        reflection = (
+            values.get("reflection", "none") != "none"
+            or values.get("critic", "none") != "none"
+        )
+        recovery = values.get("recovery", "none")
+        retry = recovery in {"retry", "rollback", "reflexion"}
+        planner = values.get("planner", "long-context")
+        tool = values.get("tool", "direct")
+        ordering = (
+            "memory" if memory else
+            "verified" if verifier or tool not in {"direct", "none"} else
+            "safe" if planner not in {"long-context", "fast"} else
+            "listed"
+        )
+        return _Strategy(
+            ordering=ordering,
+            retry=retry or planner in {"react", "lats"},
+            explore=planner not in {"long-context", "fast"} or verifier,
+            recover_fallback=recovery != "none" or planner != "long-context",
+            reflect=reflection,
+            verify=verifier,
+            compress=values.get("context", "full") != "full",
+            memory=memory,
+        )
 
     def solve(
-        self, observation: CapabilityObservation, call: ToolCaller,
+        self,
+        observation: CapabilityObservation,
+        call: ToolCaller,
     ) -> CapabilityPrediction:
-        if self.method not in CAPABILITY_METHODS:
-            raise ValueError(f"unsupported L2 capability method: {self.method}")
-        if self.method == "auso":
-            return self._solve_auso(observation, call)
-        mapping = _tool_map(observation)
+        strategy = self._effective_strategy()
+        specs = {tool.tag: tool for tool in observation.tools}
         tags = observation.start_tags
         answer = ""
-        retries = reflections = hints = 0
+        retries = reflections = verifications = compressions = 0
+        skill_reuses = memory_writes = 0
         while tags:
-            if self.method == "long-context":
-                feedback, added = _call_candidates(tags[:1], mapping, call, retry=False)
-            elif self.method in {"react", "agent-g2"}:
-                feedback, added = _call_candidates(tags, mapping, call, retry=True)
-            else:
-                if len(tags) > 1:
-                    feedback = call("guide")
-                    hints += 1
-                    reflections += int(self.method == "reflexion")
-                    tags = feedback.next_tags
-                feedback, added = _call_candidates(tags, mapping, call, retry=True)
-                if feedback.status not in {"ok", "hint"} and self.method == "reflexion":
+            signature = "|".join(sorted(tags))
+            learned_key = (
+                signature if strategy.memory else f"reflection:{signature}"
+            )
+            learned = self.skills.get(learned_key) if (strategy.memory or strategy.reflect) else None
+            if learned:
+                skill_reuses += 1
+            ranked = _rank_tags(tags, specs, strategy, learned)
+            if strategy.verify and len(ranked) > 1 and not learned:
+                verifications += len(ranked)
+            if strategy.compress and len(ranked) > 1 and not learned:
+                compressions += 1
+                ranked = ranked[:1]
+            feedback = ToolFeedback("wrong_tool", "No candidate tool was available.")
+            chosen_tag = ""
+            saw_failure = False
+            limit = len(ranked) if strategy.explore else min(1, len(ranked))
+            for tag in ranked[:limit]:
+                chosen_tag = tag
+                feedback = call(specs[tag].name)
+                if feedback.status == "transient_error" and strategy.retry:
+                    retries += 1
+                    feedback = call(specs[tag].name)
+                if feedback.status == "permanent_error" and strategy.recover_fallback:
+                    retries += 1
+                    fallback = feedback.next_tags[0] if feedback.next_tags else ""
+                    if fallback in specs:
+                        chosen_tag = fallback
+                        feedback = call(specs[fallback].name)
+                if feedback.status == "ok":
+                    break
+                saw_failure = True
+                if feedback.terminal:
+                    break
+                if strategy.reflect:
                     reflections += 1
-                    guide = call("guide")
-                    hints += 1
-                    feedback, extra = _call_candidates(
-                        guide.next_tags, mapping, call, retry=True,
-                    )
-                    added += extra
-            retries += added
             if feedback.status != "ok":
                 break
+            if strategy.memory and self.learning_enabled and chosen_tag:
+                if self.skills.get(signature) != chosen_tag:
+                    memory_writes += 1
+                self.skills[signature] = chosen_tag
+            if strategy.reflect and saw_failure and self.learning_enabled and chosen_tag:
+                self.skills[f"reflection:{signature}"] = chosen_tag
             if feedback.answer:
                 answer = feedback.answer
                 break
             tags = feedback.next_tags
         return CapabilityPrediction(
             answer=answer,
-            source=f"l2/{self.method}/observation-tool-loop",
+            source=f"l2.1/{self.method}/public-observation-tool-loop",
             retries=retries,
             reflections=reflections,
-            hints=hints,
+            skill_reuses=skill_reuses,
+            verifications=verifications,
+            compressions=compressions,
+            memory_writes=memory_writes,
+            decision_cost=(
+                0.04 * retries + 0.10 * reflections
+                + 0.08 * verifications + 0.06 * compressions
+            ),
         )
-
-    def _solve_auso(
-        self, observation: CapabilityObservation, call: ToolCaller,
-    ) -> CapabilityPrediction:
-        mapping = _tool_map(observation)
-        learned = self.skills.get(observation.family)
-        answer = ""
-        retries = hints = 0
-        used: list[str] = []
-        if learned:
-            for tool in learned:
-                feedback = call(tool)
-                if feedback.status == "transient_error":
-                    retries += 1
-                    feedback = call(tool)
-                if feedback.status != "ok":
-                    self.skills.pop(observation.family, None)
-                    break
-                used.append(tool)
-                if feedback.answer:
-                    answer = feedback.answer
-                    return CapabilityPrediction(
-                        answer, "l2/auso/reused-skill", retries,
-                        hints=hints, skill_reuses=1,
-                    )
-        tags = observation.start_tags
-        used = []
-        while tags:
-            if len(tags) > 1:
-                guide = call("guide")
-                hints += 1
-                tags = guide.next_tags
-            feedback, added = _call_candidates(tags, mapping, call, retry=True)
-            retries += added
-            if feedback.status != "ok":
-                break
-            tool = mapping[tags[0]]
-            used.append(tool)
-            if feedback.answer:
-                answer = feedback.answer
-                self.skills[observation.family] = tuple(used)
-                break
-            tags = feedback.next_tags
-        return CapabilityPrediction(
-            answer, "l2/auso/explore-internalize", retries,
-            hints=hints,
-        )
-

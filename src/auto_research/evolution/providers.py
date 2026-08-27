@@ -201,12 +201,17 @@ def _load_builtins() -> None:
     ))
     register_provider(EvolutionProvider(
         "agent",
-        ("evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local"),
+        (
+            "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",
+            "toolroute-l2.1",
+        ),
         "agent", "agent memory planning tools critic", agent,
         lambda config: Genome(
             architecture="composable-agent", agent_memory="none",
             agent_planner="long-context", agent_tool_policy="direct",
-            agent_critic="none", memory_size=24,
+            agent_critic="none", agent_reflection="none",
+            agent_verifier="none", agent_context_compression="full",
+            memory_size=24,
         ),
     ))
     register_provider(EvolutionProvider(

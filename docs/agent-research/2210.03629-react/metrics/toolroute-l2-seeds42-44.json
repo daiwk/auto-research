@@ -1,1312 +1,2918 @@
 {
   "schema_version": 2,
-  "manifest_ref": "agent-research:react:toolroute-l2-v1",
+  "manifest_ref": "agent-research:react:toolroute-l2.1-v1",
   "method": "react",
-  "benchmark": "toolroute-l2",
-  "dataset": "toolroute-l2-v1",
+  "benchmark": "toolroute-l2.1",
+  "dataset": "toolroute-l2.1-v1",
   "seeds": [
     42,
     43,
     44
   ],
   "metrics": {
-    "answer_accuracy": 0.8555555555555555,
-    "plan_exact_match": 0.8555555555555555,
-    "plan_step_f1": 0.9093738977072311,
-    "joint_success": 0.8555555555555555,
-    "recovery_success_rate": 0.7111111111111111,
-    "invalid_tool_rate": 0.05757874015748032,
-    "average_tool_calls": 4.2444444444444445,
-    "average_cost": 4.2444444444444445
+    "answer_accuracy": 0.6833333333333333,
+    "plan_exact_match": 0.6833333333333333,
+    "plan_step_f1": 0.7683076491409825,
+    "joint_success": 0.6833333333333333,
+    "recovery_success_rate": 0.6666666666666666,
+    "invalid_tool_rate": 0.04554420919793445,
+    "irreversible_error_rate": 0.07222222222222222,
+    "average_tool_calls": 5.366666666666667,
+    "average_cost": 4.798444444444445
   },
   "aggregate_metrics": {
     "answer_accuracy": {
-      "mean": 0.8555555555555555,
+      "mean": 0.6833333333333333,
+      "std": 0.016666666666666663,
+      "ci95_radius": 0.01886010879352777
+    },
+    "plan_exact_match": {
+      "mean": 0.6833333333333333,
+      "std": 0.016666666666666663,
+      "ci95_radius": 0.01886010879352777
+    },
+    "plan_step_f1": {
+      "mean": 0.7683076491409825,
+      "std": 0.00644999586686913,
+      "ci95_radius": 0.007298857426017377
+    },
+    "joint_success": {
+      "mean": 0.6833333333333333,
+      "std": 0.016666666666666663,
+      "ci95_radius": 0.01886010879352777
+    },
+    "recovery_success_rate": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "invalid_tool_rate": {
+      "mean": 0.04554420919793445,
+      "std": 0.0034731968812121063,
+      "ci95_radius": 0.0039302922624601016
+    },
+    "irreversible_error_rate": {
+      "mean": 0.07222222222222222,
+      "std": 0.00962250448649376,
+      "ci95_radius": 0.010888888888888887
+    },
+    "average_tool_calls": {
+      "mean": 5.366666666666667,
+      "std": 0.04409585518441019,
+      "ci95_radius": 0.04989915756729732
+    },
+    "average_cost": {
+      "mean": 4.798444444444445,
+      "std": 0.029622313911669484,
+      "ci95_radius": 0.03352080378540707
+    }
+  },
+  "validation_metrics": {
+    "answer_accuracy": 0.6777777777777778,
+    "plan_exact_match": 0.6777777777777778,
+    "plan_step_f1": 0.7571869488536155,
+    "joint_success": 0.6777777777777778,
+    "recovery_success_rate": 0.6666666666666666,
+    "invalid_tool_rate": 0.05136523384698567,
+    "irreversible_error_rate": 0.08888888888888889,
+    "average_tool_calls": 4.544444444444444,
+    "average_cost": 4.172888888888889
+  },
+  "validation_aggregate_metrics": {
+    "answer_accuracy": {
+      "mean": 0.6777777777777778,
       "std": 0.025458753860865747,
       "ci95_radius": 0.028809292053814398
     },
     "plan_exact_match": {
-      "mean": 0.8555555555555555,
+      "mean": 0.6777777777777778,
       "std": 0.025458753860865747,
       "ci95_radius": 0.028809292053814398
     },
     "plan_step_f1": {
-      "mean": 0.9093738977072311,
-      "std": 0.004034550550542428,
-      "ci95_radius": 0.004565523738973055
+      "mean": 0.7571869488536155,
+      "std": 0.012889885088111683,
+      "ci95_radius": 0.014586278105871462
     },
     "joint_success": {
-      "mean": 0.8555555555555555,
+      "mean": 0.6777777777777778,
       "std": 0.025458753860865747,
       "ci95_radius": 0.028809292053814398
     },
     "recovery_success_rate": {
-      "mean": 0.7111111111111111,
-      "std": 0.050917507721731606,
-      "ci95_radius": 0.05761858410762892
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
     },
     "invalid_tool_rate": {
-      "mean": 0.05757874015748032,
-      "std": 0.004261936042246253,
-      "ci95_radius": 0.004822834645669292
+      "mean": 0.05136523384698567,
+      "std": 0.004061903001166996,
+      "ci95_radius": 0.004596475950645992
+    },
+    "irreversible_error_rate": {
+      "mean": 0.08888888888888889,
+      "std": 0.00962250448649377,
+      "ci95_radius": 0.010888888888888898
     },
     "average_tool_calls": {
-      "mean": 4.2444444444444445,
-      "std": 0.019245008972987455,
-      "ci95_radius": 0.021777777777777698
+      "mean": 4.544444444444444,
+      "std": 0.03849001794597491,
+      "ci95_radius": 0.043555555555555396
     },
     "average_cost": {
-      "mean": 4.2444444444444445,
-      "std": 0.019245008972987455,
-      "ci95_radius": 0.021777777777777698
+      "mean": 4.172888888888889,
+      "std": 0.030377867186733267,
+      "ci95_radius": 0.03437579280342762
     }
   },
   "seed_results": [
     {
       "seed": 42,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.7222222222222222,
+          "plan_exact_match": 0.7222222222222222,
+          "plan_step_f1": 0.7772266313932981,
+          "joint_success": 0.7222222222222222,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.058394160583941604,
+          "irreversible_error_rate": 0.05555555555555555,
+          "average_tool_calls": 3.8055555555555554,
+          "average_cost": 3.5155555555555558
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6666666666666666,
+          "fallback": 1,
+          "irreversible": 0.6666666666666666,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 18,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.65,
+          "plan_exact_match": 0.65,
+          "plan_step_f1": 0.7425865800865801,
+          "joint_success": 0.65,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.05555555555555555,
+          "irreversible_error_rate": 0.1,
+          "average_tool_calls": 4.5,
+          "average_cost": 4.138666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.5,
+          "fallback": 1,
+          "irreversible": 0.4,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 30,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-42-0000",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.760000000000001,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0001",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.720000000000001,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0002",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0003",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7272727272727273,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.2,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0004",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.680000000000001,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0005",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "delete"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0006",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0007",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.4,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0008",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0009",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "delete"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0010",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.44,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0011",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.3200000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "search"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.6666666666666666,
+          "plan_exact_match": 0.6666666666666666,
+          "plan_step_f1": 0.7662626262626263,
+          "joint_success": 0.6666666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.04953560371517028,
+          "irreversible_error_rate": 0.06666666666666667,
+          "average_tool_calls": 5.383333333333334,
+          "average_cost": 4.810666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.4,
+          "fallback": 1,
+          "irreversible": 0.6,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 30,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-42-0000",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0001",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0002",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0003",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7692307692307693,
+            "has_failure": false,
+            "tool_calls": 7.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0004",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0005",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0006",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0007",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0008",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0009",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0010",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0011",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          }
+        ]
+      },
       "metrics": {
-        "answer_accuracy": 0.85,
-        "plan_exact_match": 0.85,
-        "plan_step_f1": 0.9121693121693122,
-        "joint_success": 0.85,
-        "recovery_success_rate": 0.7,
-        "invalid_tool_rate": 0.05511811023622047,
-        "average_tool_calls": 4.233333333333333,
-        "average_cost": 4.233333333333333
+        "answer_accuracy": 0.6666666666666666,
+        "plan_exact_match": 0.6666666666666666,
+        "plan_step_f1": 0.7662626262626263,
+        "joint_success": 0.6666666666666666,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04953560371517028,
+        "irreversible_error_rate": 0.06666666666666667,
+        "average_tool_calls": 5.383333333333334,
+        "average_cost": 4.810666666666667
       },
       "axis_metrics": {
         "clean": 1,
         "transient": 1,
-        "ambiguous": 1,
-        "combined": 0.4
+        "ambiguous": 0.4,
+        "fallback": 1,
+        "irreversible": 0.6,
+        "combined": 0
       },
       "telemetry": {
         "retries": 30,
         "reflections": 0,
-        "hints": 0,
-        "skill_reuses": 0
+        "skill_reuses": 0,
+        "verifications": 0,
+        "compressions": 0,
+        "memory_writes": 0
       },
       "trace": [
         {
-          "task_id": "toolroute-l2-42-0000",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
-          "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0001",
-          "axis": "combined",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "calendar",
-            "search",
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0002",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 1.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0003",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0004",
-          "axis": "combined",
-          "answer_ok": false,
-          "plan_ok": false,
-          "joint_ok": false,
-          "plan_step_f1": 0.75,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "maps",
-            "maps",
-            "database",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0005",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "validator",
-            "maps",
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0006",
-          "axis": "combined",
-          "answer_ok": false,
-          "plan_ok": false,
-          "joint_ok": false,
-          "plan_step_f1": 0.75,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
-            "search",
-            "weather",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0007",
+          "task_id": "toolroute-l21-test-42-0000",
+          "split": "test",
           "axis": "ambiguous",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
           "plan_step_f1": 1.0,
           "has_failure": false,
-          "tool_calls": 4.0,
+          "tool_calls": 5.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
-            "calendar",
-            "search",
+            "maps",
+            "database",
+            "catalog",
             "weather",
             "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-42-0008",
+          "task_id": "toolroute-l21-test-42-0001",
+          "split": "test",
           "axis": "combined",
           "answer_ok": false,
           "plan_ok": false,
           "joint_ok": false,
-          "plan_step_f1": 0.75,
+          "plan_step_f1": 0.2,
           "has_failure": true,
-          "tool_calls": 5.0,
+          "tool_calls": 4.0,
           "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "files",
-            "calendar",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0009",
-          "axis": "combined",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0010",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
-          "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0011",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "validator",
+            "calculator",
             "maps",
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0012",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
-            "weather",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0013",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "calendar",
-            "search",
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0014",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "calendar",
-            "calendar",
             "search"
           ]
         },
         {
-          "task_id": "toolroute-l2-42-0015",
-          "axis": "combined",
-          "answer_ok": false,
-          "plan_ok": false,
-          "joint_ok": false,
-          "plan_step_f1": 0.8,
+          "task_id": "toolroute-l21-test-42-0002",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
           "has_failure": true,
           "tool_calls": 6.0,
-          "invalid_calls": 1.0,
-          "cost": 6.0,
-          "source": "l2/react/observation-tool-loop",
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
             "database",
-            "database",
-            "files",
-            "files",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0003",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.7692307692307693,
+          "has_failure": false,
+          "tool_calls": 7.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.32,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
             "calendar",
+            "files",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0004",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0005",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0006",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0007",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0008",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0009",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator",
+            "maps",
             "search"
           ]
         },
         {
-          "task_id": "toolroute-l2-42-0016",
+          "task_id": "toolroute-l21-test-42-0010",
+          "split": "test",
           "axis": "transient",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
+          "plan_step_f1": 0.9090909090909091,
           "has_failure": true,
-          "tool_calls": 4.0,
+          "tool_calls": 6.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
-            "maps",
-            "database",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0017",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
+            "search",
+            "validator",
             "validator",
             "maps",
             "database",
-            "files"
+            "catalog"
           ]
         },
         {
-          "task_id": "toolroute-l2-42-0018",
-          "axis": "clean",
+          "task_id": "toolroute-l21-test-42-0011",
+          "split": "test",
+          "axis": "fallback",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
-          "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-42-0019",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
+          "plan_step_f1": 0.9230769230769231,
           "has_failure": true,
-          "tool_calls": 5.0,
+          "tool_calls": 7.0,
           "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "calendar",
             "search",
-            "search",
-            "weather",
-            "calculator"
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
           ]
         }
       ]
     },
     {
       "seed": 43,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.6111111111111112,
+          "plan_exact_match": 0.6111111111111112,
+          "plan_step_f1": 0.7256393298059964,
+          "joint_success": 0.6111111111111112,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.07194244604316546,
+          "irreversible_error_rate": 0.1111111111111111,
+          "average_tool_calls": 3.861111111111111,
+          "average_cost": 3.595555555555556
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.3333333333333333,
+          "fallback": 1,
+          "irreversible": 0.3333333333333333,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 18,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.6833333333333333,
+          "plan_exact_match": 0.6833333333333333,
+          "plan_step_f1": 0.7619829244829245,
+          "joint_success": 0.6833333333333333,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.051094890510948905,
+          "irreversible_error_rate": 0.08333333333333333,
+          "average_tool_calls": 4.566666666666666,
+          "average_cost": 4.196666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6,
+          "fallback": 1,
+          "irreversible": 0.5,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 30,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-43-0000",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0001",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "delete"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0002",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0003",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0004",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0005",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0006",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0007",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "delete"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0008",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0009",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.720000000000001,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0010",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0011",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "delete"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.6833333333333333,
+          "plan_exact_match": 0.6833333333333333,
+          "plan_step_f1": 0.7631280756280756,
+          "joint_success": 0.6833333333333333,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.0438871473354232,
+          "irreversible_error_rate": 0.08333333333333333,
+          "average_tool_calls": 5.316666666666666,
+          "average_cost": 4.764666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6,
+          "fallback": 1,
+          "irreversible": 0.5,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 30,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-43-0000",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0001",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "search",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0002",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0003",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7692307692307693,
+            "has_failure": false,
+            "tool_calls": 7.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0004",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0005",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0006",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0007",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0008",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.4800000000000004,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0009",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7692307692307693,
+            "has_failure": false,
+            "tool_calls": 7.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.4,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calendar",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0010",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0011",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "weather",
+              "search",
+              "database"
+            ]
+          }
+        ]
+      },
       "metrics": {
-        "answer_accuracy": 0.8333333333333334,
-        "plan_exact_match": 0.8333333333333334,
-        "plan_step_f1": 0.9047486772486772,
-        "joint_success": 0.8333333333333334,
+        "answer_accuracy": 0.6833333333333333,
+        "plan_exact_match": 0.6833333333333333,
+        "plan_step_f1": 0.7631280756280756,
+        "joint_success": 0.6833333333333333,
         "recovery_success_rate": 0.6666666666666666,
-        "invalid_tool_rate": 0.0625,
-        "average_tool_calls": 4.266666666666667,
-        "average_cost": 4.266666666666667
+        "invalid_tool_rate": 0.0438871473354232,
+        "irreversible_error_rate": 0.08333333333333333,
+        "average_tool_calls": 5.316666666666666,
+        "average_cost": 4.764666666666667
       },
       "axis_metrics": {
         "clean": 1,
         "transient": 1,
-        "ambiguous": 1,
-        "combined": 0.3333333333333333
+        "ambiguous": 0.6,
+        "fallback": 1,
+        "irreversible": 0.5,
+        "combined": 0
       },
       "telemetry": {
         "retries": 30,
         "reflections": 0,
-        "hints": 0,
-        "skill_reuses": 0
+        "skill_reuses": 0,
+        "verifications": 0,
+        "compressions": 0,
+        "memory_writes": 0
       },
       "trace": [
         {
-          "task_id": "toolroute-l2-43-0000",
-          "axis": "combined",
+          "task_id": "toolroute-l21-test-43-0000",
+          "split": "test",
+          "axis": "fallback",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
+          "plan_step_f1": 0.9090909090909091,
           "has_failure": true,
-          "tool_calls": 4.0,
+          "tool_calls": 6.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
+            "maps",
+            "database",
             "search",
-            "weather",
+            "catalog",
             "weather",
             "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-43-0001",
-          "axis": "clean",
+          "task_id": "toolroute-l21-test-43-0001",
+          "split": "test",
+          "axis": "fallback",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "calendar",
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0002",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
+          "plan_step_f1": 0.9230769230769231,
           "has_failure": true,
-          "tool_calls": 4.0,
+          "tool_calls": 7.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "calendar",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0003",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0004",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 1.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "maps",
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0005",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "validator",
             "maps",
-            "maps",
+            "search",
             "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0006",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 1.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
-            "search",
+            "catalog",
             "weather",
             "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-43-0007",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": false,
-          "tool_calls": 5.0,
-          "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "calendar",
-            "calendar",
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0008",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "calendar",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0009",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0010",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
-          "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0011",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "validator",
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0012",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
-            "weather",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0013",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "calendar",
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0014",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "calendar",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0015",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-43-0016",
+          "task_id": "toolroute-l21-test-43-0002",
+          "split": "test",
           "axis": "combined",
           "answer_ok": false,
           "plan_ok": false,
           "joint_ok": false,
-          "plan_step_f1": 0.75,
+          "plan_step_f1": 0.2222222222222222,
           "has_failure": true,
-          "tool_calls": 5.0,
+          "tool_calls": 4.0,
           "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 3.72,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
-            "maps",
-            "maps",
-            "database",
-            "database",
-            "files"
+            "search",
+            "validator",
+            "search",
+            "calendar"
           ]
         },
         {
-          "task_id": "toolroute-l2-43-0017",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
+          "task_id": "toolroute-l21-test-43-0003",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.7692307692307693,
           "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "tool_calls": 7.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.32,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
+            "calendar",
+            "files",
+            "search",
             "validator",
             "maps",
             "database",
-            "files"
+            "catalog"
           ]
         },
         {
-          "task_id": "toolroute-l2-43-0018",
+          "task_id": "toolroute-l21-test-43-0004",
+          "split": "test",
           "axis": "ambiguous",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
           "plan_step_f1": 1.0,
           "has_failure": false,
-          "tool_calls": 3.0,
+          "tool_calls": 5.0,
           "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
-            "search",
+            "maps",
+            "database",
+            "catalog",
             "weather",
             "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-43-0019",
+          "task_id": "toolroute-l21-test-43-0005",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator",
+            "maps",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0006",
+          "split": "test",
           "axis": "ambiguous",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
+          "plan_step_f1": 1.0,
           "has_failure": false,
           "tool_calls": 5.0,
-          "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0007",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "calendar",
-            "calendar",
             "search",
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0008",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2222222222222222,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.4800000000000004,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0009",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.7692307692307693,
+          "has_failure": false,
+          "tool_calls": 7.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.4,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calendar",
+            "maps",
+            "database",
+            "catalog",
             "weather",
             "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0010",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0011",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "weather",
+            "search",
+            "database"
           ]
         }
       ]
     },
     {
       "seed": 44,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.6944444444444444,
+          "plan_exact_match": 0.6944444444444444,
+          "plan_step_f1": 0.7791005291005291,
+          "joint_success": 0.6944444444444444,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.07042253521126761,
+          "irreversible_error_rate": 0.027777777777777776,
+          "average_tool_calls": 3.9444444444444446,
+          "average_cost": 3.6100000000000003
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.3333333333333333,
+          "fallback": 1,
+          "irreversible": 0.8333333333333334,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 18,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7,
+          "plan_exact_match": 0.7,
+          "plan_step_f1": 0.766991341991342,
+          "joint_success": 0.7,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.04744525547445255,
+          "irreversible_error_rate": 0.08333333333333333,
+          "average_tool_calls": 4.566666666666666,
+          "average_cost": 4.183333333333334
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.7,
+          "fallback": 1,
+          "irreversible": 0.5,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 30,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-44-0000",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0001",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.28,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "delete"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0002",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0003",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0004",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0005",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0006",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0007",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.3200000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0008",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0009",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.5600000000000005,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "search",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0010",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0011",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7272727272727273,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.2,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.7,
+          "plan_exact_match": 0.7,
+          "plan_step_f1": 0.7755322455322455,
+          "joint_success": 0.7,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.043209876543209874,
+          "irreversible_error_rate": 0.06666666666666667,
+          "average_tool_calls": 5.4,
+          "average_cost": 4.82
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6,
+          "fallback": 1,
+          "irreversible": 0.6,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 30,
+          "reflections": 0,
+          "skill_reuses": 0,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 0
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-44-0000",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0001",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0002",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0003",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 1.0,
+            "cost": 2.44,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "delete"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0004",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.4800000000000004,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0005",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0006",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0007",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0008",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0009",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0010",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0011",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7692307692307693,
+            "has_failure": false,
+            "tool_calls": 7.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.32,
+            "source": "l2.1/react/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          }
+        ]
+      },
       "metrics": {
-        "answer_accuracy": 0.8833333333333333,
-        "plan_exact_match": 0.8833333333333333,
-        "plan_step_f1": 0.9112037037037037,
-        "joint_success": 0.8833333333333333,
-        "recovery_success_rate": 0.7666666666666667,
-        "invalid_tool_rate": 0.05511811023622047,
-        "average_tool_calls": 4.233333333333333,
-        "average_cost": 4.233333333333333
+        "answer_accuracy": 0.7,
+        "plan_exact_match": 0.7,
+        "plan_step_f1": 0.7755322455322455,
+        "joint_success": 0.7,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.043209876543209874,
+        "irreversible_error_rate": 0.06666666666666667,
+        "average_tool_calls": 5.4,
+        "average_cost": 4.82
       },
       "axis_metrics": {
         "clean": 1,
         "transient": 1,
-        "ambiguous": 1,
-        "combined": 0.5333333333333333
+        "ambiguous": 0.6,
+        "fallback": 1,
+        "irreversible": 0.6,
+        "combined": 0
       },
       "telemetry": {
         "retries": 30,
         "reflections": 0,
-        "hints": 0,
-        "skill_reuses": 0
+        "skill_reuses": 0,
+        "verifications": 0,
+        "compressions": 0,
+        "memory_writes": 0
       },
       "trace": [
         {
-          "task_id": "toolroute-l2-44-0000",
+          "task_id": "toolroute-l21-test-44-0000",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.24,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0001",
+          "split": "test",
           "axis": "combined",
           "answer_ok": false,
           "plan_ok": false,
           "joint_ok": false,
-          "plan_step_f1": 0.75,
+          "plan_step_f1": 0.2,
           "has_failure": true,
-          "tool_calls": 5.0,
+          "tool_calls": 4.0,
           "invalid_calls": 1.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
-            "search",
-            "search",
-            "weather",
-            "weather",
-            "calculator"
+            "validator",
+            "calculator",
+            "maps",
+            "search"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0001",
-          "axis": "ambiguous",
+          "task_id": "toolroute-l21-test-44-0002",
+          "split": "test",
+          "axis": "fallback",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0003",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": false,
+          "tool_calls": 2.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 1.0,
+          "cost": 2.44,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "calendar",
-            "search",
-            "weather",
-            "calculator"
+            "delete"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0002",
+          "task_id": "toolroute-l21-test-44-0004",
+          "split": "test",
           "axis": "combined",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2222222222222222,
           "has_failure": true,
           "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "calendar",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0003",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0004",
-          "axis": "clean",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
-          "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.4800000000000004,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "maps",
             "database",
-            "files"
+            "search",
+            "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0005",
+          "task_id": "toolroute-l21-test-44-0005",
+          "split": "test",
           "axis": "clean",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
           "plan_step_f1": 1.0,
           "has_failure": false,
-          "tool_calls": 4.0,
+          "tool_calls": 6.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "validator",
             "maps",
             "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0006",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
-          "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "search",
+            "catalog",
             "weather",
             "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0007",
+          "task_id": "toolroute-l21-test-44-0006",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0007",
+          "split": "test",
           "axis": "clean",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
           "plan_step_f1": 1.0,
           "has_failure": false,
-          "tool_calls": 4.0,
+          "tool_calls": 6.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "calendar",
             "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0008",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 1.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0009",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0010",
-          "axis": "combined",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "maps",
-            "database",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0011",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
             "validator",
             "maps",
             "database",
-            "files"
+            "catalog"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0012",
-          "axis": "clean",
+          "task_id": "toolroute-l21-test-44-0008",
+          "split": "test",
+          "axis": "fallback",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
-          "plan_step_f1": 1.0,
-          "has_failure": false,
-          "tool_calls": 3.0,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
           "invalid_calls": 0.0,
-          "cost": 3.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
+            "maps",
+            "database",
             "search",
+            "catalog",
             "weather",
             "calculator"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0013",
+          "task_id": "toolroute-l21-test-44-0009",
+          "split": "test",
           "axis": "combined",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
           "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "calendar",
-            "search",
-            "search",
-            "weather",
-            "calculator"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0014",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "files",
-            "calendar",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0015",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "database",
-            "files",
-            "files",
-            "calendar",
-            "search"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0016",
-          "axis": "combined",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": true,
-          "tool_calls": 4.0,
-          "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "maps",
-            "database",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0017",
-          "axis": "transient",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8888888888888888,
-          "has_failure": true,
-          "tool_calls": 5.0,
-          "invalid_calls": 0.0,
-          "cost": 5.0,
-          "source": "l2/react/observation-tool-loop",
-          "calls": [
-            "validator",
-            "maps",
-            "maps",
-            "database",
-            "files"
-          ]
-        },
-        {
-          "task_id": "toolroute-l2-44-0018",
-          "axis": "ambiguous",
-          "answer_ok": true,
-          "plan_ok": true,
-          "joint_ok": true,
-          "plan_step_f1": 0.8571428571428571,
-          "has_failure": false,
           "tool_calls": 4.0,
           "invalid_calls": 1.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
-            "search",
-            "search",
-            "weather",
-            "calculator"
+            "validator",
+            "calculator",
+            "maps",
+            "search"
           ]
         },
         {
-          "task_id": "toolroute-l2-44-0019",
+          "task_id": "toolroute-l21-test-44-0010",
+          "split": "test",
           "axis": "clean",
           "answer_ok": true,
           "plan_ok": true,
           "joint_ok": true,
           "plan_step_f1": 1.0,
           "has_failure": false,
-          "tool_calls": 4.0,
+          "tool_calls": 5.0,
           "invalid_calls": 0.0,
-          "cost": 4.0,
-          "source": "l2/react/observation-tool-loop",
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/react/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0011",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.7692307692307693,
+          "has_failure": false,
+          "tool_calls": 7.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.32,
+          "source": "l2.1/react/public-observation-tool-loop",
           "calls": [
             "calendar",
+            "files",
             "search",
-            "weather",
-            "calculator"
+            "validator",
+            "maps",
+            "database",
+            "catalog"
           ]
         }
       ]
     }
   ],
   "diagnostics": {
-    "episodes_per_seed": 60,
-    "total_episodes": 180,
+    "split_episodes": {
+      "train": 36,
+      "validation": 60,
+      "test": 60
+    },
+    "total_episodes": 468,
     "oracle_fields_exposed": false,
+    "guide_endpoint": "absent",
+    "split_family_overlap": false,
+    "test_route_depths": [
+      5,
+      6
+    ],
     "public_observation_type": "CapabilityObservation",
     "hidden_labels": [
       "answer",
-      "reference_plan"
+      "allowed_steps",
+      "canonical_route"
     ],
-    "fidelity": "shared no-oracle deterministic capability benchmark"
+    "fidelity": "shared no-oracle held-out capability benchmark"
   },
   "evaluation_protocol": {
     "tier": "l2_capability",
@@ -1316,10 +2922,10 @@
       44
     ],
     "formal_comparison": true,
-    "claim_policy": "shared no-oracle benchmark; compare only within toolroute-l2-v1"
+    "claim_policy": "held-out test, no guide/oracle; compare only within toolroute-l2.1-v1"
   },
   "provenance": {
-    "dataset_fingerprint": "b0db62f1c8c1f5a10b95722397736d78c2c2d005d71b6efc6a5c994bc02dff25",
+    "dataset_fingerprint": "25d906c4d33d7476f423f672765ab420349dbc390492744612d987d6c614ec60",
     "artifact_path": "docs/agent-research/2210.03629-react/metrics/toolroute-l2-seeds42-44.json",
     "original_code_commit": "generated from repository source"
   }

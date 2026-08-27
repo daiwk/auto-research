@@ -49,10 +49,11 @@ def test_agent_mechanism_results_are_not_presented_as_capability_scores():
         item for item in agents
         if item.get("evidence", {}).get("tier") == "l2_capability"
     ]
-    assert len(capabilities) >= 6
+    assert len(capabilities) >= 7
     assert all(not item["evidence"]["diagnostic_only"] for item in capabilities)
     assert all(item["evidence"]["formal_comparison"] is True for item in capabilities)
-    assert all(item["dataset"] == "toolroute-l2-v1" for item in capabilities)
+    assert all(item["dataset"] == "toolroute-l2.1-v1" for item in capabilities)
+    assert any(item["method"] == "agent-evolve" for item in capabilities)
 
 
 def test_public_dashboard_page_uses_card_layout_and_progressive_disclosure():
@@ -68,7 +69,7 @@ def test_public_dashboard_page_uses_card_layout_and_progressive_disclosure():
     assert "L1 机制诊断" in script
     assert "非正式能力比较" in script
     assert "三个 success=1 只表示机制合约通过" in script
-    assert "L2 能力评测" in script
+    assert "L2.1 隔离能力评测" in script
     assert "三 seed 正式比较" in script
     assert "公开实验看板: public-experiment-dashboard.md" in navigation
     assert "2026 历史论文扫描:" not in navigation

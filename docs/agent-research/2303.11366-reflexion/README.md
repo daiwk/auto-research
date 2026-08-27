@@ -81,10 +81,10 @@ auto-research agent-eval --method reflexion --benchmark planbench-mini \
 没有调用 GPT-4、ALFWorld、HotpotQA 或代码执行器。0.9 来自“每个新族首次失败”的
 可审计协议，不等同 HumanEval pass@1。
 
-## 统一 L2 无 Oracle 结果
+## 统一 L2.1 隔离能力结果
 
-在 `toolroute-l2-v1`、60 episodes/seed、seeds 42/43/44 上，Reflexion 的 joint
-success 为 **1.0000**、plan step F1 为 **0.9367**、故障恢复率为 **1.0000**。
-这里的满分仅限固定工具路由环境；指标见
+在 `toolroute-l2.1-v1` 的隔离 test、60 episodes/seed、seeds 42/43/44 上，Reflexion
+的 joint success 为 **0.7278**、plan step F1 为 **0.7786**、故障恢复率为
+**0.6667**。相对 `reflexion-no-reflection` 的差异来自跨 episode 失败反思复用；指标见
 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)，统一口径见
-[L2 能力评测](../capability-benchmark.md)。
+[L2.1 隔离能力评测](../capability-benchmark.md)。
