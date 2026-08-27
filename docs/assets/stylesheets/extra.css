@@ -132,6 +132,34 @@
   gap: 0.4rem;
 }
 
+.ar-dashboard-card__evidence {
+  display: flex;
+  gap: 0.45rem 0.7rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin: -0.05rem 0 0.7rem;
+  padding: 0.5rem 0.6rem;
+  border-left: 0.16rem solid var(--md-accent-fg-color);
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--md-accent-fg-color) 8%, transparent);
+}
+
+.ar-dashboard-card__evidence strong {
+  color: var(--md-accent-fg-color);
+  font-size: 0.68rem;
+}
+
+.ar-dashboard-card__evidence span,
+.ar-dashboard-card__notice {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.6rem;
+}
+
+.ar-dashboard-card__notice {
+  margin: 0.55rem 0 0;
+  line-height: 1.45;
+}
+
 .ar-dashboard-card__metrics > div {
   min-width: 0;
   padding: 0.48rem;

@@ -33,16 +33,25 @@
     || left[0].localeCompare(right[0])
   ));
   const artifactUrl = (path) => `https://github.com/daiwk/auto-research/blob/main/${encodeURI(path)}`;
+  const metricTile = ([key, value]) => `<div><strong>${number(value)}</strong><span>${escape(pretty(key))}</span></div>`;
 
   function card(item) {
     const metrics = metricEntries(item);
-    const primary = metrics.slice(0, 6);
+    const evidence = item.evidence || {};
+    const diagnostic = item.domain === "agent" && evidence.diagnostic_only;
+    const mechanism = Object.entries(evidence.mechanism_metrics || {})
+      .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));
+    const primary = diagnostic
+      ? [...metrics.filter(([key]) => key === "average_cost"), ...mechanism].slice(0, 6)
+      : metrics.slice(0, 6);
     const method = item.method.replace(/^\d{4}\.\d+-/, "").replaceAll("_", " ");
     return `<article class="ar-dashboard-card">
       <header><h3>${escape(item.title || method)}</h3><span class="ar-dashboard-card__seed">seed ${escape(item.seed || "—")}</span></header>
-      <div class="ar-dashboard-card__badges"><span>${escape(labels[item.domain] || item.domain)}</span><span>${escape(method)}</span>${item.dataset ? `<span>${escape(item.dataset)}</span>` : ""}</div>
-      <div class="ar-dashboard-card__metrics">${primary.map(([key, value]) => `<div><strong>${number(value)}</strong><span>${escape(pretty(key))}</span></div>`).join("")}</div>
-      ${metrics.length > 6 ? `<details><summary>查看全部 ${metrics.length} 项指标</summary><div class="ar-dashboard-card__all">${metrics.map(([key, value]) => `<div><span>${escape(key)}</span><strong>${number(value)}</strong></div>`).join("")}</div></details>` : ""}
+      <div class="ar-dashboard-card__badges"><span>${escape(labels[item.domain] || item.domain)}</span><span>${escape(method)}</span>${item.dataset ? `<span>${escape(item.dataset)}</span>` : ""}${evidence.episodes ? `<span>${escape(evidence.episodes)} episodes</span>` : ""}</div>
+      ${diagnostic ? `<div class="ar-dashboard-card__evidence"><strong>L1 机制诊断</strong><span>非正式能力比较，不参与模型效果排名</span></div>` : ""}
+      ${primary.length ? `<div class="ar-dashboard-card__metrics">${primary.map(metricTile).join("")}</div>` : ""}
+      ${evidence.capability_metrics_saturated ? `<p class="ar-dashboard-card__notice">确定性 mini-suite 已饱和；三个 success=1 只表示机制合约通过，并非模型准确率 100%。</p>` : ""}
+      ${diagnostic ? `<details><summary>查看原始 smoke 指标与机制计数</summary><div class="ar-dashboard-card__all">${[...metrics, ...mechanism].map(([key, value]) => `<div><span>${escape(key)}</span><strong>${number(value)}</strong></div>`).join("")}</div></details>` : (metrics.length > 6 ? `<details><summary>查看全部 ${metrics.length} 项指标</summary><div class="ar-dashboard-card__all">${metrics.map(([key, value]) => `<div><span>${escape(key)}</span><strong>${number(value)}</strong></div>`).join("")}</div></details>` : "")}
       <a class="ar-dashboard-card__source" href="${artifactUrl(item.path)}">查看指标产物 →</a>
     </article>`;
   }
