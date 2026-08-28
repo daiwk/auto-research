@@ -155,3 +155,8 @@ class ReproductionAdapter:
     budget: str = "paper-specific"
     device_capabilities: tuple[str, ...] = ("cpu",)
     infer_device_capabilities: bool = True
+    # GPU-required implementations must point at a committed, sanitized
+    # validation receipt.  Historical CPU implementations are grandfathered;
+    # new checkpoint/CUDA paths opt in and are enforced by CI.
+    requires_gpu_validation: bool = False
+    gpu_validation_artifact: str | None = None

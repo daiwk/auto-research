@@ -267,8 +267,30 @@ def propose(parent: Genome, generation: int, index: int, architectures: list[str
     genome = replace(parent, architecture=architecture)
     changes = [f"结构假设：{architecture}"]
     if generation == 1:
+        if architecture == "rankmixer_dceo":
+            gains = (0.10, 0.20, 0.35, 0.50, 0.75)
+            temperatures = (0.75, 1.0, 1.25, 1.5)
+            genome = replace(
+                genome,
+                dceo_causal_gain=gains[index % len(gains)],
+                dceo_temperature=temperatures[index % len(temperatures)],
+            )
+            changes.append(
+                "DCEO validation 搜索："
+                f"gain={genome.dceo_causal_gain}, temperature={genome.dceo_temperature}"
+            )
         changes.append("公平结构消融：保持基线超参数不变")
         return genome, "；".join(changes)
+    if architecture == "rankmixer_dceo" and (generation + index) % 2 == 0:
+        genome = replace(
+            genome,
+            dceo_causal_gain=rng.choice((0.10, 0.20, 0.35, 0.50, 0.75)),
+            dceo_temperature=rng.choice((0.75, 1.0, 1.25, 1.5)),
+        )
+        changes.append(
+            "DCEO 因果融合变异："
+            f"gain={genome.dceo_causal_gain}, temperature={genome.dceo_temperature}"
+        )
     knobs = (
         ("dimensions", [32, 64, 96, 128]), ("layers", [1, 2, 3, 4]),
         ("learning_rate", [1e-4, 3e-4, 6e-4, 1e-3]),

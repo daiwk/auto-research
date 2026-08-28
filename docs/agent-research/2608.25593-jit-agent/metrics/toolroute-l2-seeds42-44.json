@@ -1,0 +1,2876 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:jit-agent:toolroute-l2.1-v1",
+  "method": "jit-agent",
+  "benchmark": "toolroute-l2.1",
+  "dataset": "toolroute-l2.1-v1",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "answer_accuracy": 0.7555555555555555,
+    "plan_exact_match": 0.7555555555555555,
+    "plan_step_f1": 0.7886946386946387,
+    "joint_success": 0.7555555555555555,
+    "recovery_success_rate": 0.6666666666666666,
+    "invalid_tool_rate": 0.033423200650924474,
+    "irreversible_error_rate": 0.0,
+    "average_tool_calls": 5.011111111111111,
+    "average_cost": 4.4912222222222224
+  },
+  "aggregate_metrics": {
+    "answer_accuracy": {
+      "mean": 0.7555555555555555,
+      "std": 0.019245008972987584,
+      "ci95_radius": 0.021777777777777844
+    },
+    "plan_exact_match": {
+      "mean": 0.7555555555555555,
+      "std": 0.019245008972987584,
+      "ci95_radius": 0.021777777777777844
+    },
+    "plan_step_f1": {
+      "mean": 0.7886946386946387,
+      "std": 0.014839329090731549,
+      "ci95_radius": 0.016792281664449515
+    },
+    "joint_success": {
+      "mean": 0.7555555555555555,
+      "std": 0.019245008972987584,
+      "ci95_radius": 0.021777777777777844
+    },
+    "recovery_success_rate": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "invalid_tool_rate": {
+      "mean": 0.033423200650924474,
+      "std": 0.009765182300528781,
+      "ci95_radius": 0.011050344034596279
+    },
+    "irreversible_error_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "average_tool_calls": {
+      "mean": 5.011111111111111,
+      "std": 0.12619796324000615,
+      "ci95_radius": 0.1428064389736881
+    },
+    "average_cost": {
+      "mean": 4.4912222222222224,
+      "std": 0.10118044021193778,
+      "ci95_radius": 0.11449644661045075
+    }
+  },
+  "validation_metrics": {
+    "answer_accuracy": 0.7777777777777778,
+    "plan_exact_match": 0.7777777777777778,
+    "plan_step_f1": 0.8076118326118326,
+    "joint_success": 0.7777777777777778,
+    "recovery_success_rate": 0.6666666666666666,
+    "invalid_tool_rate": 0.04931747868596934,
+    "irreversible_error_rate": 0.0,
+    "average_tool_calls": 4.511111111111111,
+    "average_cost": 4.16
+  },
+  "validation_aggregate_metrics": {
+    "answer_accuracy": {
+      "mean": 0.7777777777777778,
+      "std": 0.009622504486493728,
+      "ci95_radius": 0.010888888888888849
+    },
+    "plan_exact_match": {
+      "mean": 0.7777777777777778,
+      "std": 0.009622504486493728,
+      "ci95_radius": 0.010888888888888849
+    },
+    "plan_step_f1": {
+      "mean": 0.8076118326118326,
+      "std": 0.005387557670961173,
+      "ci95_radius": 0.006096595428343971
+    },
+    "joint_success": {
+      "mean": 0.7777777777777778,
+      "std": 0.009622504486493728,
+      "ci95_radius": 0.010888888888888849
+    },
+    "recovery_success_rate": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "invalid_tool_rate": {
+      "mean": 0.04931747868596934,
+      "std": 0.00339988641485968,
+      "ci95_radius": 0.0038473336601934404
+    },
+    "irreversible_error_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "average_tool_calls": {
+      "mean": 4.511111111111111,
+      "std": 0.1134476547592337,
+      "ci95_radius": 0.1283781066677836
+    },
+    "average_cost": {
+      "mean": 4.16,
+      "std": 0.09536304898183097,
+      "ci95_radius": 0.10791344872079102
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.7777777777777778,
+          "plan_exact_match": 0.7777777777777778,
+          "plan_step_f1": 0.8086419753086419,
+          "joint_success": 0.7777777777777778,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.056451612903225805,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 3.4444444444444446,
+          "average_cost": 3.222777777777778
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6666666666666666,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 13,
+          "reflections": 8,
+          "skill_reuses": 92,
+          "verifications": 0,
+          "compressions": 13,
+          "memory_writes": 20
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7666666666666667,
+          "plan_exact_match": 0.7666666666666667,
+          "plan_step_f1": 0.8028318903318903,
+          "joint_success": 0.7666666666666667,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.053231939163498096,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.383333333333334,
+          "average_cost": 4.054333333333334
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 18,
+          "skill_reuses": 215,
+          "verifications": 0,
+          "compressions": 15,
+          "memory_writes": 31
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-42-0000",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.760000000000001,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0001",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.720000000000001,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0002",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0003",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 1.84,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0004",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.680000000000001,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0005",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.78,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0006",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.58,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0007",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.4,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0008",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9000000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0009",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.720000000000001,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0010",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.44,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0011",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 1.84,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.7333333333333333,
+          "plan_exact_match": 0.7333333333333333,
+          "plan_step_f1": 0.7715617715617715,
+          "joint_success": 0.7333333333333333,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.04452054794520548,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.866666666666666,
+          "average_cost": 4.375
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.4,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 23,
+          "reflections": 16,
+          "skill_reuses": 244,
+          "verifications": 0,
+          "compressions": 21,
+          "memory_writes": 29
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-42-0000",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.38,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0001",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0002",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0003",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0004",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0005",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0006",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0007",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0008",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0009",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0010",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0011",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "answer_accuracy": 0.7333333333333333,
+        "plan_exact_match": 0.7333333333333333,
+        "plan_step_f1": 0.7715617715617715,
+        "joint_success": 0.7333333333333333,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.04452054794520548,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 4.866666666666666,
+        "average_cost": 4.375
+      },
+      "axis_metrics": {
+        "clean": 1,
+        "transient": 1,
+        "ambiguous": 0.4,
+        "fallback": 1,
+        "irreversible": 1,
+        "combined": 0
+      },
+      "telemetry": {
+        "retries": 23,
+        "reflections": 16,
+        "skill_reuses": 244,
+        "verifications": 0,
+        "compressions": 21,
+        "memory_writes": 29
+      },
+      "trace": [
+        {
+          "task_id": "toolroute-l21-test-42-0000",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.38,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0001",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0002",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0003",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": false,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "files"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0004",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0005",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0006",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0007",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0008",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0009",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0010",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0011",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.7222222222222222,
+          "plan_exact_match": 0.7222222222222222,
+          "plan_step_f1": 0.7716049382716049,
+          "joint_success": 0.7222222222222222,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.0390625,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 3.5555555555555554,
+          "average_cost": 3.33
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.3333333333333333,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 17,
+          "reflections": 10,
+          "skill_reuses": 91,
+          "verifications": 0,
+          "compressions": 14,
+          "memory_writes": 21
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7833333333333333,
+          "plan_exact_match": 0.7833333333333333,
+          "plan_step_f1": 0.8134499759499759,
+          "joint_success": 0.7833333333333333,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.04710144927536232,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.6,
+          "average_cost": 4.239666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.7,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 28,
+          "reflections": 21,
+          "skill_reuses": 225,
+          "verifications": 0,
+          "compressions": 10,
+          "memory_writes": 32
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-43-0000",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9000000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0001",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.78,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0002",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0003",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0004",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0005",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9200000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0006",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0007",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.46,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0008",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9000000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0009",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.720000000000001,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0010",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0011",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.4,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.7666666666666667,
+          "plan_exact_match": 0.7666666666666667,
+          "plan_step_f1": 0.7974941724941725,
+          "joint_success": 0.7666666666666667,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.029605263157894735,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 5.066666666666666,
+          "average_cost": 4.539000000000001
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 25,
+          "reflections": 14,
+          "skill_reuses": 256,
+          "verifications": 0,
+          "compressions": 19,
+          "memory_writes": 28
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-43-0000",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0001",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "search",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0002",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 3.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.8400000000000003,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0003",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0004",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.38,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0005",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0006",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.38,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0007",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0008",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 3.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.68,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0009",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.24,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0010",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0011",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.08,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "weather"
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "answer_accuracy": 0.7666666666666667,
+        "plan_exact_match": 0.7666666666666667,
+        "plan_step_f1": 0.7974941724941725,
+        "joint_success": 0.7666666666666667,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.029605263157894735,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.066666666666666,
+        "average_cost": 4.539000000000001
+      },
+      "axis_metrics": {
+        "clean": 1,
+        "transient": 1,
+        "ambiguous": 0.6,
+        "fallback": 1,
+        "irreversible": 1,
+        "combined": 0
+      },
+      "telemetry": {
+        "retries": 25,
+        "reflections": 14,
+        "skill_reuses": 256,
+        "verifications": 0,
+        "compressions": 19,
+        "memory_writes": 28
+      },
+      "trace": [
+        {
+          "task_id": "toolroute-l21-test-43-0000",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0001",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "search",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0002",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 3.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.8400000000000003,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0003",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": false,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "files"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0004",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.38,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0005",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0006",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.38,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0007",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0008",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 3.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.68,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0009",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": false,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.24,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calendar"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0010",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0011",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.08,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "weather"
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.7222222222222222,
+          "plan_exact_match": 0.7222222222222222,
+          "plan_step_f1": 0.7724867724867724,
+          "joint_success": 0.7222222222222222,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.06557377049180328,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 3.388888888888889,
+          "average_cost": 3.1594444444444445
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.3333333333333333,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 14,
+          "reflections": 10,
+          "skill_reuses": 87,
+          "verifications": 0,
+          "compressions": 15,
+          "memory_writes": 23
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7833333333333333,
+          "plan_exact_match": 0.7833333333333333,
+          "plan_step_f1": 0.8065536315536316,
+          "joint_success": 0.7833333333333333,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.047619047619047616,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.55,
+          "average_cost": 4.186
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.7,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 28,
+          "reflections": 21,
+          "skill_reuses": 222,
+          "verifications": 0,
+          "compressions": 11,
+          "memory_writes": 30
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-44-0000",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0001",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.78,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0002",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.58,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0003",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0004",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9000000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0005",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9200000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0006",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.58,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0007",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 1.84,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0008",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.9000000000000004,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0009",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.5600000000000005,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "search",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0010",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0011",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2857142857142857,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 1.84,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.7666666666666667,
+          "plan_exact_match": 0.7666666666666667,
+          "plan_step_f1": 0.797027972027972,
+          "joint_success": 0.7666666666666667,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.026143790849673203,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 5.1,
+          "average_cost": 4.559666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.6,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 26,
+          "reflections": 14,
+          "skill_reuses": 257,
+          "verifications": 0,
+          "compressions": 19,
+          "memory_writes": 28
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-44-0000",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0001",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0002",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0003",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.42,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0004",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 3.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.68,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0005",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0006",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0007",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0008",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0009",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0010",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0011",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": false,
+            "tool_calls": 2.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 2.16,
+            "source": "l2.1/jit-agent/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files"
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "answer_accuracy": 0.7666666666666667,
+        "plan_exact_match": 0.7666666666666667,
+        "plan_step_f1": 0.797027972027972,
+        "joint_success": 0.7666666666666667,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.026143790849673203,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.1,
+        "average_cost": 4.559666666666667
+      },
+      "axis_metrics": {
+        "clean": 1,
+        "transient": 1,
+        "ambiguous": 0.6,
+        "fallback": 1,
+        "irreversible": 1,
+        "combined": 0
+      },
+      "telemetry": {
+        "retries": 26,
+        "reflections": 14,
+        "skill_reuses": 257,
+        "verifications": 0,
+        "compressions": 19,
+        "memory_writes": 28
+      },
+      "trace": [
+        {
+          "task_id": "toolroute-l21-test-44-0000",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.24,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0001",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0002",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0003",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.42,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0004",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 3.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.68,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0005",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0006",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0007",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0008",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0009",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": true,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0010",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0011",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.25,
+          "has_failure": false,
+          "tool_calls": 2.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 2.16,
+          "source": "l2.1/jit-agent/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "files"
+          ]
+        }
+      ]
+    }
+  ],
+  "diagnostics": {
+    "split_episodes": {
+      "train": 36,
+      "validation": 60,
+      "test": 60
+    },
+    "total_episodes": 468,
+    "oracle_fields_exposed": false,
+    "guide_endpoint": "absent",
+    "split_family_overlap": false,
+    "test_route_depths": [
+      5,
+      6
+    ],
+    "public_observation_type": "CapabilityObservation",
+    "hidden_labels": [
+      "answer",
+      "allowed_steps",
+      "canonical_route"
+    ],
+    "fidelity": "shared no-oracle held-out capability benchmark"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_capability",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "held-out test, no guide/oracle; compare only within toolroute-l2.1-v1"
+  },
+  "provenance": {
+    "dataset_fingerprint": "25d906c4d33d7476f423f672765ab420349dbc390492744612d987d6c614ec60",
+    "artifact_path": "docs/agent-research/2608.25593-jit-agent/metrics/toolroute-l2-seeds42-44.json",
+    "original_code_commit": "current working tree"
+  }
+}

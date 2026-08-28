@@ -127,6 +127,8 @@ class RankMixerEvaluator:
             auxiliary_weight=genome.auxiliary_weight,
             sequence_length=24,
             negatives=15,
+            dceo_causal_gain=genome.dceo_causal_gain,
+            dceo_temperature=genome.dceo_temperature,
         )
 
 

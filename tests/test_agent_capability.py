@@ -106,7 +106,7 @@ def test_committed_l2_evidence_is_complete_and_not_saturated():
     assert summary["oracle_fields_exposed"] is False
     assert summary["manifest_ref"] == "experiments:agent-toolroute-l2.1-seeds42-44"
     assert summary["seeds"] == [42, 43, 44]
-    assert len(summary["results"]) == 6
+    assert len(summary["results"]) == 12
     assert len(summary["ablations"]) == 5
     assert summary["guide_endpoint"] == "absent"
     assert summary["evaluation_protocol"]["formal_comparison"] is True

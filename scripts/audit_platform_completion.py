@@ -66,6 +66,8 @@ def audit() -> list[str]:
             errors.append(f"{prefix}: budget missing")
         if not manifest.device_capabilities:
             errors.append(f"{prefix}: device capabilities missing")
+        if manifest.requires_gpu_validation and not manifest.gpu_validation_artifact:
+            errors.append(f"{prefix}: required GPU validation receipt missing")
         for index, evidence in enumerate(manifest.online_evidence):
             if not evidence.get("source_url") or not evidence.get("source_location"):
                 errors.append(f"{prefix}: online evidence {index} is not traceable")

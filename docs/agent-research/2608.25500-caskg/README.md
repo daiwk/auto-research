@@ -47,6 +47,12 @@ $$
 
 ## 本地复现
 
+### L2 隔离能力评测（主结果）
+
+CaSKG 从训练 split 学习可复用 skill 路由，在隔离 test 上结合图式记忆与候选验证调用工具。ToolRoute-L2.1 三 seed 的 joint success 为 **0.8000**，plan step F1 为 **0.8327**，平均成本 **5.0116**。
+
+指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)。下方 PlanBench-mini 只作机制诊断。
+
 > **本地对照口径**：PlanBench-mini 120 episodes，joint success **1.0000**、平均成本 **0.5200**；关注 counterfactual probes、Bayesian edge updates 和图规模。
 
 指标见 [`metrics/caskg-planbench-mini-seed42.json`](metrics/caskg-planbench-mini-seed42.json)。 批次索引见 [`../../experiments/latest-20260827-seed42.json`](../../experiments/latest-20260827-seed42.json)。

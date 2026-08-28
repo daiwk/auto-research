@@ -47,6 +47,12 @@ HumanEval+ pass rate **93.0%** 且满足 4800J 预算；MBPP **79.4%**、3376J�
 
 ## 本地复现
 
+### L2 隔离能力评测（主结果）
+
+ProgRouter 把验证后的工具选择压缩为可复用程序路由，validation/test 冻结路由后再执行。ToolRoute-L2.1 三 seed的 joint success 为 **0.7778**，plan step F1 为 **0.8037**，平均成本 **4.6324**。
+
+指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)。下方 PlanBench-mini 只作机制诊断。
+
 > **本地对照口径**：PlanBench-mini 120 episodes，joint success **1.0000**、平均成本 **0.3100**；关注 progress predictions、meta-gate 和 budget downgrade。
 
 指标见 [`metrics/progrouter-planbench-mini-seed42.json`](metrics/progrouter-planbench-mini-seed42.json)。 批次索引见 [`../../experiments/latest-20260827-seed42.json`](../../experiments/latest-20260827-seed42.json)。

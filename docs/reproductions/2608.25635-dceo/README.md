@@ -49,6 +49,8 @@ $$
 
 ## 本地复现
 
+本地实现现在把 `causal_gain × temperature` 纳入 evolve 搜索空间：20 个候选只在 validation 上按 `NDCG@10 + 0.15 × Hit@10` 选择，随后仅对冠军运行一次 held-out test。这样不会再用固定 `0.75` 增益换取 Hit 上升、NDCG 下降后仍把它描述为整体提升。
+
 > **本地对照口径**：基线为同一组 proxy score 的固定 log fusion；实验组为上下文条件 actor。MovieLens-1M 上 Hit@10 **0.1469 → 0.1500（+2.13%）**，NDCG@10 **0.07127 → 0.07078（-0.69%）**。
 
 指标见 [`metrics/movielens-1m-seed42.json`](metrics/movielens-1m-seed42.json)。

@@ -39,14 +39,15 @@ def actor_weights(data, history):
     return weights / weights.sum()
 
 
-def score_dceo(data, history):
+def score_dceo(data, history, *, causal_gain: float = 0.75, temperature: float = 1.0):
     proxies = objective_scores(data, history)
     weights = actor_weights(data, history)
-    proxy = proxies @ weights
+    calibrated = np.power(np.maximum(proxies, 1e-6), 1.0 / temperature)
+    proxy = calibrated @ weights
     # The causal-effect intervention is applied only in offline training.  At
     # serving, DCEO contributes one calibrated proxy to the existing formula.
     fixed = score_fixed(data, history)
-    return fixed + 0.75 * np.log(np.maximum(proxy, 1e-6))
+    return fixed + causal_gain * np.log(np.maximum(proxy, 1e-6))
 
 
 def causal_diagnostics(data):

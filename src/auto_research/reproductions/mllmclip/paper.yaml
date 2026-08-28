@@ -17,19 +17,20 @@
   "local_code": "src/auto_research/reproductions/mllmclip",
   "documentation": "docs/reproductions/2608.25575-mllmclip/README.md",
   "fidelity": "core_mechanism",
-  "evaluation_tier": "l1_mechanism",
+  "evaluation_tier": "l2_public_dataset",
   "datasets": [
-    "MovieLens-1M public content/collaborative proxy"
+    "CIFAR-10 public checkpoint subset",
+    "MovieLens-1M diagnostic proxy"
   ],
-  "baseline": "same student features without attention selection or CKA projection",
+  "baseline": "frozen CLIP features with an untrained matched projection",
   "metrics": [
-    "Recall@10",
     "linear CKA",
-    "attention selected fraction"
+    "1-NN accuracy",
+    "training loss",
+    "peak GPU memory"
   ],
   "mechanisms": [
-    "generative MLLM teacher checkpoint",
-    "vision compositionality benchmarks",
+    "paper-scale vision compositionality suite",
     "full CLIP pretraining"
   ],
   "evolve_operators": []

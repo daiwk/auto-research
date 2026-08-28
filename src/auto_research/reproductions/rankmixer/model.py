@@ -20,6 +20,8 @@ class RankMixerConfig(NeuralRankingConfig):
     interval_residual: int = 2
     auxiliary_weight: float = 0.15
     expansion: int = 3
+    dceo_causal_gain: float = 0.35
+    dceo_temperature: float = 1.0
 
 
 def build_model(kind: str, data, config: RankMixerConfig):
@@ -434,11 +436,16 @@ def build_model(kind: str, data, config: RankMixerConfig):
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)
             if kind == "rankmixer_dceo":
-                objective_weights = torch.softmax(self.dceo_actor(profile), dim=-1)
-                user_feature = (
+                objective_weights = torch.softmax(
+                    self.dceo_actor(profile) / config.dceo_temperature, dim=-1,
+                )
+                causal_feature = (
                     objective_weights[:, :1] * user_feature
                     + objective_weights[:, 1:2] * recent
                     + objective_weights[:, 2:3] * last
+                )
+                user_feature = user_feature + config.dceo_causal_gain * (
+                    causal_feature - user_feature
                 )
             if kind == "rankmixer_transretrieval":
                 history_values = self.item(history)

@@ -47,6 +47,12 @@ $$
 
 ## 本地复现
 
+### L2 隔离能力评测（主结果）
+
+TraceML 策略从训练 split 的失败轨迹写入反思先验，validation/test 只读取先验并通过真实工具反馈推进，不读取隐藏 route 或答案。ToolRoute-L2.1 三 seed 的 joint success 为 **0.7278**，plan step F1 为 **0.7786**，平均成本 **4.7920**。
+
+指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)。下方 PlanBench-mini 的 1.0 仅表示机制 smoke 饱和。
+
 > **本地对照口径**：PlanBench-mini 120 episodes，joint success **1.0000**、平均成本 **0.4400**；重点指标是四阶段覆盖、versioned edits 和 reopened approaches。
 
 指标见 [`metrics/traceml-planbench-mini-seed42.json`](metrics/traceml-planbench-mini-seed42.json)。 批次索引见 [`../../experiments/latest-20260827-seed42.json`](../../experiments/latest-20260827-seed42.json)。

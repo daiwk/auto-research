@@ -47,6 +47,12 @@ $$
 
 ## 本地复现
 
+### L2 隔离能力评测（主结果）
+
+TOPAS 在状态化工具环境里先做安全排序与候选压缩，再根据调用反馈恢复。ToolRoute-L2.1 三 seed 的 joint success 为 **0.7556**，plan step F1 为 **0.7887**，平均成本 **4.5571**。
+
+指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)。下方 PlanBench-mini 只作机制诊断。
+
 > **本地对照口径**：PlanBench-mini 120 episodes，joint success **1.0000**、平均成本 **0.4098**；只模拟 prefix hit、critical-path update 和 aging。
 
 指标见 [`metrics/topas-planbench-mini-seed42.json`](metrics/topas-planbench-mini-seed42.json)。 批次索引见 [`../../experiments/latest-20260827-seed42.json`](../../experiments/latest-20260827-seed42.json)。

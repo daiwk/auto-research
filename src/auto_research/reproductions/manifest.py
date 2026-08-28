@@ -33,6 +33,8 @@ class PaperManifest:
     default_seeds: tuple[int, ...]
     budget: str
     device_capabilities: tuple[str, ...]
+    requires_gpu_validation: bool
+    gpu_validation_artifact: str | None
     online_evidence: tuple[dict[str, Any], ...]
     selection_exception: str | None
     evolve_operators: tuple[str, ...] = ()
@@ -73,6 +75,8 @@ class PaperManifest:
             default_seeds=adapter.default_seeds,
             budget=adapter.budget,
             device_capabilities=adapter.device_capabilities,
+            requires_gpu_validation=adapter.requires_gpu_validation,
+            gpu_validation_artifact=adapter.gpu_validation_artifact,
             online_evidence=tuple(evidence),
             selection_exception=paper.selection_exception,
             evolve_operators=tuple(evolve_operators),
