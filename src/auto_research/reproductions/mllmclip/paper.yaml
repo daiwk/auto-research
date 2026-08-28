@@ -19,13 +19,12 @@
   "fidelity": "core_mechanism",
   "evaluation_tier": "l2_public_dataset",
   "datasets": [
-    "CIFAR-10 public checkpoint subset",
+    "POPE adversarial / COCO val2014 checkpoint subset",
     "MovieLens-1M diagnostic proxy"
   ],
   "baseline": "frozen CLIP features with an untrained matched projection",
   "metrics": [
     "linear CKA",
-    "1-NN accuracy",
     "training loss",
     "peak GPU memory"
   ],
