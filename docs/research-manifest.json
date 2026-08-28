@@ -3470,11 +3470,14 @@
         "baseline": "frozen CLIP features with a validation-selected ridge projection",
         "metrics": [
           "linear CKA",
+          "neighbor overlap@5",
           "training loss",
           "peak GPU memory"
         ],
         "default_seeds": [
-          42
+          42,
+          43,
+          44
         ],
         "budget": "steps=40",
         "device_capabilities": [

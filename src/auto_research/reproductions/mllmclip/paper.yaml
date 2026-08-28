@@ -25,6 +25,7 @@
   "baseline": "frozen CLIP features with a validation-selected ridge projection",
   "metrics": [
     "linear CKA",
+    "neighbor overlap@5",
     "training loss",
     "peak GPU memory"
   ],
