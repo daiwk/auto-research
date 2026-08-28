@@ -66,7 +66,7 @@ AUTO_RESEARCH_DEVICE=cuda python -m \
 
 2026-08-28 的 A100 三 seed 验证中，held-out linear CKA 为 **0.3494 → 0.3466**，neighbor overlap@5 为 **0.2642 → 0.2596**，两项均未显示稳定提升。此前 A30 单 seed 的 `+5.72%` 只保留为工程历史，不再作为效果结论。进一步审计发现，该 POPE 子集每张图的正例计数完全相同，旧 1-NN `1.0` 是退化标签造成的伪满分；新版将其置为 `null` 并显式写入 `label_diagnostic_valid=false`。
 
-完整的[三 seed 指标](metrics/pope-checkpoint-a100-seeds42-44.json)与[去机器标识 A100 验证凭证](../../gpu-validations/mllmclip-a100-20260828.json)纳入 CI 门禁；不提交 checkpoint、缓存和原始预测。
+完整的[三 seed 指标](metrics/pope-checkpoint-a100-seeds42-44.json)与[去机器标识 A100 验证凭证](../../gpu-validations/mllmclip-a100-20260828.json)纳入 CI 门禁；旧的[A30 单 seed 指标](metrics/pope-checkpoint-a30-seed42.json)仅供追溯，不再用于效果声明。不提交 checkpoint、缓存和原始预测。
 
 ### NumPy 机制诊断（非主结果）
 

@@ -21,5 +21,5 @@ ADAPTER = register(ReproductionAdapter(
     metrics=("linear CKA", "neighbor overlap@5", "training loss", "peak GPU memory"),
     device_capabilities=("cuda",), infer_device_capabilities=False,
     requires_gpu_validation=True,
-    gpu_validation_artifact="docs/gpu-validations/mllmclip-a30-20260828.json",
+    gpu_validation_artifact="docs/gpu-validations/mllmclip-a100-20260828.json",
 ))

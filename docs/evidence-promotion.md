@@ -28,6 +28,11 @@ revision 上运行的候选接入 Evolve，而不是保证每个方法都产生�
 - [DPO / UltraFeedback 三 seed](experiments/a100-promotion/dpo-ultrafeedback-seeds42-44.json)
 - [ORPO / UltraFeedback 三 seed](experiments/a100-promotion/orpo-ultrafeedback-seeds42-44.json)
 
+脱敏 GPU 凭证：[MLLMCLIP](gpu-validations/mllmclip-a100-20260828.json)、
+[Agent Lightning](gpu-validations/agent-lightning-policy-a100-20260828.json)、
+[DPO](gpu-validations/checkpoint-dpo-a100-20260828.json) 与
+[ORPO](gpu-validations/checkpoint-orpo-a100-20260828.json)。
+
 ## 为什么仍接入 Evolve
 
 一次固定小预算的负结果可以排除“直接照搬就一定有效”，却不能排除该结构在不同数据、
