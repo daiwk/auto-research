@@ -14,6 +14,7 @@ from .capability_models import (
 
 CAPABILITY_METHODS = (
     "long-context", "react", "reflexion", "agent-g2", "ahead", "auso",
+    "jit-agent", "traceml", "adavdr", "topas", "caskg", "progrouter",
 )
 CAPABILITY_ABLATIONS = (
     "react-no-retry", "reflexion-no-reflection", "agent-g2-no-verifier",
@@ -67,6 +68,34 @@ def _strategy(method: str) -> _Strategy:
         "auso-no-memory": _Strategy(
             ordering="safe", retry=True, explore=True, recover_fallback=True,
             verify=True, compress=True,
+        ),
+        # The following policies execute in the same stateful, no-oracle
+        # harness as the established L2.1 baselines.  Their differences are
+        # operational (generation/repair, trace reflection, verification,
+        # pruning, skill retrieval and program routing), not pre-filled answers.
+        "jit-agent": _Strategy(
+            ordering="safe", retry=True, explore=True, recover_fallback=True,
+            reflect=True, compress=True, memory=True,
+        ),
+        "traceml": _Strategy(
+            ordering="listed", retry=True, explore=True, recover_fallback=True,
+            reflect=True, memory=True,
+        ),
+        "adavdr": _Strategy(
+            ordering="verified", retry=True, explore=True, recover_fallback=True,
+            reflect=True, verify=True,
+        ),
+        "topas": _Strategy(
+            ordering="safe", retry=True, explore=True, recover_fallback=True,
+            verify=True, compress=True,
+        ),
+        "caskg": _Strategy(
+            ordering="memory", retry=True, explore=True, recover_fallback=True,
+            verify=True, memory=True,
+        ),
+        "progrouter": _Strategy(
+            ordering="verified", retry=True, explore=True, recover_fallback=True,
+            verify=True, compress=True, memory=True,
         ),
     }
     if method not in strategies:

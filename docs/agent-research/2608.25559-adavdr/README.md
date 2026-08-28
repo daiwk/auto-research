@@ -47,6 +47,12 @@ VDR-EE 消融中 adaptive data + reflection 达 **48.0%** 且工具调用 **7.73
 
 ## 本地复现
 
+### L2 隔离能力评测（主结果）
+
+AdaVDR 在无 oracle 的状态化工具环境中执行候选验证、失败反思与回退。ToolRoute-L2.1 三 seed 的 joint success 为 **0.8167**，plan step F1 为 **0.8366**，平均成本 **5.0577**；更高成功率伴随额外 verifier 成本。
+
+指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)。下方 PlanBench-mini 只作机制诊断。
+
 > **本地对照口径**：PlanBench-mini 120 episodes，joint success **1.0000**、平均成本 **0.4600**；确定性答案不作为主结论，关注 necessity filters、avoided calls 与 reflections。
 
 指标见 [`metrics/adavdr-planbench-mini-seed42.json`](metrics/adavdr-planbench-mini-seed42.json)。 批次索引见 [`../../experiments/latest-20260827-seed42.json`](../../experiments/latest-20260827-seed42.json)。

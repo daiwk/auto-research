@@ -49,7 +49,9 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线为同一组 proxy score 的固定 log fusion；实验组为上下文条件 actor。MovieLens-1M 上 Hit@10 **0.1469 → 0.1500（+2.13%）**，NDCG@10 **0.07127 → 0.07078（-0.69%）**。
+本地实现现在把 `causal_gain × temperature` 纳入 evolve 搜索空间：20 个候选只在 validation 上按 `NDCG@10 + 0.15 × Hit@10` 选择，随后仅对冠军运行一次 held-out test。这样不会再用固定 `0.75` 增益换取 Hit 上升、NDCG 下降后仍把它描述为整体提升。
+
+> **本地对照口径**：基线为同一组 proxy score 的固定 log fusion；实验组为 validation-only 搜索选出的上下文条件 actor（`causal_gain=0.75, temperature=0.75`）。MovieLens-1M 上 Hit@10 **0.1469 → 0.1500（+2.13%）**，NDCG@10 **0.07127 → 0.07095（-0.45%）**，head share **0.2038 → 0.1988（-2.45%）**。这说明搜索减轻了固定配置的 NDCG 损失，但仍不能宣称全面优于基线。
 
 指标见 [`metrics/movielens-1m-seed42.json`](metrics/movielens-1m-seed42.json)。
 

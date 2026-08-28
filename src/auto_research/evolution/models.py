@@ -174,6 +174,8 @@ class Genome:
     reasoning_max_new_tokens: int = 96
     reasoning_stop_consensus: float = 1.0
     reasoning_verifier: str = "self-consistency"
+    dceo_causal_gain: float = 0.35
+    dceo_temperature: float = 1.0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

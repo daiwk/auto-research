@@ -47,6 +47,12 @@ $$
 
 ## 本地复现
 
+### L2 隔离能力评测（主结果）
+
+JIT harness 在训练任务上即时写入/修复可复用路由，在 validation/test 冻结后仅通过公开 observation、工具元数据和真实调用反馈执行；不存在 answer、guide 或 reference-plan 接口。ToolRoute-L2.1 三 seed 的 joint success 为 **0.7556**，plan step F1 为 **0.7887**，平均成本 **4.4912**，说明它不再依赖会直接返回答案的确定性 L1 环境。
+
+指标见 [`metrics/toolroute-l2-seeds42-44.json`](metrics/toolroute-l2-seeds42-44.json)。下方 PlanBench-mini 只保留为机制诊断。
+
 > **本地对照口径**：PlanBench-mini 120 episodes，joint success **0.1500**、平均成本 **0.6180**；低成功率暴露按 axis 归档不足，未伪装成论文效果。
 
 指标见 [`metrics/jit-agent-planbench-mini-seed42.json`](metrics/jit-agent-planbench-mini-seed42.json)。 批次索引见 [`../../experiments/latest-20260827-seed42.json`](../../experiments/latest-20260827-seed42.json)。

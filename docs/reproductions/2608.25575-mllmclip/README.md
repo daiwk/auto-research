@@ -1,6 +1,6 @@
 # MLLMCLIP：从多模态大模型蒸馏通用 CLIP
 
-> **Fidelity：核心机制概念验证。** 本地执行逐层 attention token selection 与 CKA feature alignment；不加载原论文 teacher checkpoint。
+> **Fidelity：公开 checkpoint 核心路径。** 主路径加载真实 SmolVLM teacher 与 CLIP student，在公开图像上训练 CKA projection；MovieLens/NumPy 路径仅保留为快速机制诊断。
 
 ## 论文信息
 
@@ -48,6 +48,26 @@ $$
 
 ## 本地复现
 
+### 真实 checkpoint CUDA 路径（主结果）
+
+该路径加载公开的 **SmolVLM2-256M** teacher 与 **CLIP ViT-B/32** student，在 POPE adversarial / COCO val2014 公开图像上冻结两个 encoder，只训练匹配维度的 feature projection，并联合优化 cosine 与 linear CKA loss。128 张 train 图像内部再拆 fit/validation 选择 ridge 与 early-stopped 权重，64 张 test 图像只评一次。结果记录精确 checkpoint revision、seed、loss、held-out CKA、耗时与峰值显存；checkpoint 和缓存不提交 GitHub。
+
+```bash
+AUTO_RESEARCH_DEVICE=cuda python -m \
+  auto_research.reproductions.mllmclip.checkpoint \
+  --annotations data/pope/coco_pope_adversarial.json \
+  --image-root data/pope/images \
+  --train-examples 128 --test-examples 64 \
+  --steps 40 --seed 42 \
+  --output runs/mllmclip/checkpoint-seed42.json
+```
+
+该路径受 `python scripts/validate_gpu_evidence.py` 合入门禁约束：必须先在真实 A100/A30 上跑通并提交去机器标识的 receipt。
+
+2026-08-28 的 A30 验证中，held-out linear CKA 从 **0.4633 提升到 0.4898（+5.72%）**；训练内 validation CKA 为 0.6204，峰值显存约 4.13 GiB。POPE 正例计数的 1-NN 诊断已饱和为 1.0，因此不作为主指标，也不用于选择模型。完整的[标准指标文件](metrics/pope-checkpoint-a30-seed42.json)与[去机器标识 GPU 验证凭证](../../gpu-validations/mllmclip-a30-20260828.json)已纳入 CI 门禁；不提交 checkpoint、缓存和原始预测。
+
+### NumPy 机制诊断（非主结果）
+
 > **本地对照口径**：基线为未蒸馏的公开内容特征；实验组以同一数据的协同视图作 teacher proxy。MovieLens proxy Recall@10 **0.0194 → 0.8306（+4171.43%）**；这个巨大增幅只反映代理视图可预测性，不能外推视觉 benchmark。
 
 指标见 [`metrics/movielens-proxy-seed42.json`](metrics/movielens-proxy-seed42.json)。
@@ -58,4 +78,4 @@ auto-research reproduce --paper mllmclip --dataset-dir data --seed 42
 
 ## 复现边界
 
-未使用真实图像、MLLM attention 或 26 个论文 benchmark；因此标记为 diagnostic-only，不作为正式视觉效果复现。
+真实 checkpoint 路径使用公开图像和 SmolVLM 视觉 encoder feature，但仍未复刻论文完整 26-benchmark 训练规模、原始 teacher 配方与全量 CLIP 预训练。MovieLens proxy 仍为 diagnostic-only，不能与视觉 benchmark 混报。

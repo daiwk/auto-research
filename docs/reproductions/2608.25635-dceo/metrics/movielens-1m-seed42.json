@@ -11,7 +11,9 @@
   "setup": {
     "seed": 42,
     "full_catalog": true,
-    "proxy_objectives": 4
+    "proxy_objectives": 4,
+    "model_selection": "validation-only grid; held-out test evaluated once",
+    "candidate_count": 20
   },
   "variants": {
     "fixed multi-objective fusion": {
@@ -21,19 +23,39 @@
     },
     "DCEO core": {
       "hit_at_10": 0.15,
-      "ndcg_at_10": 0.07078055113044687,
-      "head_share_at_10": 0.1996875
+      "ndcg_at_10": 0.07095207788296207,
+      "head_share_at_10": 0.19875
     }
   },
   "relative": {
     "hit_at_10_percent": 2.1276595744680775,
-    "ndcg_at_10_percent": -0.6923471995661596,
-    "head_share_at_10_percent": -1.993865030674845
+    "ndcg_at_10_percent": -0.4516890115086558,
+    "head_share_at_10_percent": -2.453987730061338
   },
   "diagnostics": {
     "proxy_outcome_correlation": -0.017584595429621274,
     "estimated_relative_causal_effect": -8.854896202385033e-07,
-    "serving_critic_calls": 0
+    "serving_critic_calls": 0,
+    "selected_causal_gain": 0.75,
+    "selected_temperature": 0.75,
+    "selected_validation_fitness": 0.07402786918098403,
+    "validation_grid_summary": {
+      "primary_objective": "NDCG@10 + 0.15 * Hit@10",
+      "causal_gains": [
+        0.1,
+        0.2,
+        0.35,
+        0.5,
+        0.75
+      ],
+      "temperatures": [
+        0.75,
+        1.0,
+        1.25,
+        1.5
+      ],
+      "test_evaluations": 1
+    }
   },
   "paper_results": {
     "online_gmv_lift_percent": 0.36,

@@ -69,14 +69,23 @@ def _manifest_ref(path: Path, adapter) -> str:
 
 
 def migrate_payload(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
-    adapter = _adapter_for(path)
     seeds = _integer_seeds(payload, path)
     already_v2 = payload.get("schema_version") == 2
     protocol = dict(payload.get("evaluation_protocol") or {})
-    tier = (
-        adapter.evaluation_tier.value if adapter else
-        protocol.get("tier", payload.get("evaluation_tier", "l1_mechanism"))
-    )
+    # An adapter declares the strongest/default tier for new runs, while an
+    # individual artifact records the tier that run actually reached.  Keep
+    # an explicit artifact protocol authoritative so a historical L1 proxy is
+    # not silently relabelled L2 when the adapter later gains a real dataset
+    # implementation.
+    tier = protocol.get("tier")
+    adapter = None
+    if not tier:
+        adapter = _adapter_for(path)
+        tier = (
+            payload.get("evaluation_tier")
+            or (adapter.evaluation_tier.value if adapter else None)
+            or "l1_mechanism"
+        )
     protocol.update({
         "tier": tier,
         "seeds": seeds,
@@ -102,6 +111,8 @@ def migrate_payload(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
         })
     migrated = dict(payload)
     migrated["schema_version"] = 2
+    if not payload.get("manifest_ref") and adapter is None:
+        adapter = _adapter_for(path)
     migrated["manifest_ref"] = payload.get("manifest_ref") or _manifest_ref(path, adapter)
     migrated["evaluation_protocol"] = protocol
     migrated["provenance"] = provenance

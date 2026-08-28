@@ -36,3 +36,29 @@ def test_migration_preserves_native_v2_protocol_and_provenance():
     assert migrated["evaluation_protocol"]["claim_policy"] == "L1 result; not open-ended VQA"
     assert "historical_migration" not in migrated["provenance"]
     assert migrated["provenance"]["original_code_commit"] == "abc123"
+
+
+def test_migration_does_not_promote_historical_proxy_to_adapter_default_tier():
+    path = (
+        ROOT
+        / "docs"
+        / "reproductions"
+        / "2608.25575-mllmclip"
+        / "metrics"
+        / "historical-proxy.json"
+    )
+    payload = {
+        "schema_version": 2,
+        "manifest_ref": "reproduction:mllmclip",
+        "evaluation_protocol": {
+            "tier": "l1_mechanism",
+            "seeds": [42],
+        },
+        "provenance": {
+            "dataset_fingerprint": "proxy-v1",
+        },
+    }
+
+    migrated = MODULE.migrate_payload(path, payload)
+
+    assert migrated["evaluation_protocol"]["tier"] == "l1_mechanism"

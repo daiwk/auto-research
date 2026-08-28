@@ -50,5 +50,6 @@ jobs:
       - run: git diff --exit-code -- docs/research-manifest.json docs/post-training docs/agent-research docs/foundation-models docs/reproductions/catalog
       - run: python scripts/migrate_metric_schema_v2.py
       - run: python scripts/audit_platform_completion.py
+      - run: python scripts/validate_gpu_evidence.py
       - run: auto-research reproduce --write-manifest /tmp/papers.json
       - run: python -c "import json; p=json.load(open('/tmp/papers.json')); assert p['schema_version'] == 1 and len(p['papers']) >= 180"

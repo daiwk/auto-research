@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "adapter_key": "mllmclip",
+  "validated_at": "2026-08-28",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A30"
+  },
+  "command": [
+    "python",
+    "-m",
+    "auto_research.reproductions.mllmclip.checkpoint",
+    "--teacher-revision",
+    "067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+    "--student-revision",
+    "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "--annotations",
+    "data/pope/coco_pope_adversarial.json",
+    "--image-root",
+    "data/pope/images",
+    "--train-examples",
+    "128",
+    "--test-examples",
+    "64",
+    "--batch-size",
+    "8",
+    "--steps",
+    "40",
+    "--seed",
+    "42",
+    "--output",
+    "runs/mllmclip/checkpoint-seed42.json"
+  ],
+  "dataset": {
+    "name": "POPE adversarial / COCO val2014",
+    "train_examples": 128,
+    "test_examples": 64
+  },
+  "checkpoint": {
+    "teacher": {
+      "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+      "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd"
+    },
+    "student": {
+      "model_id": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "baseline_linear_cka": 0.463273286819458,
+    "method_linear_cka": 0.4897761940956116,
+    "relative_linear_cka_percent": 5.721704546717681,
+    "best_validation_cka": 0.6203527450561523,
+    "peak_gpu_memory_mb": 4230.86474609375
+  },
+  "provenance": {
+    "commit": "bee4bee037c5f09db383ddb3ce659474cb7a25a3",
+    "artifact_path": "docs/gpu-validations/mllmclip-a30-20260828.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

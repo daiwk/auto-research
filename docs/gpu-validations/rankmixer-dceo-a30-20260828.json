@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "adapter_key": "rankmixer-dceo",
+  "validated_at": "2026-08-28",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A30"
+  },
+  "command": [
+    "python",
+    "-c",
+    "load MovieLens; train rankmixer_dceo for 3 CUDA steps; assert parameters are CUDA tensors"
+  ],
+  "dataset": {
+    "name": "MovieLens public sequence subset",
+    "users": 932,
+    "items": 1682
+  },
+  "checkpoint": {
+    "used": false,
+    "reason": "ranking model is trained from initialization"
+  },
+  "result": "passed",
+  "metrics": {
+    "training_steps": 3,
+    "final_loss": 0.7570082346598307,
+    "parameters_on_cuda": true
+  },
+  "provenance": {
+    "commit": "895be1d8766b21b1131a3170bcd2fad9723bc737",
+    "artifact_path": "docs/gpu-validations/rankmixer-dceo-a30-20260828.json"
+  }
+}

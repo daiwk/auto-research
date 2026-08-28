@@ -12,3 +12,9 @@
 - The block must list the paper link, company or author institution, exact original publication date, whether the original authors released source code (including its link when available), the local adapter key, and the local reproduction-code directory.
 - An absent upstream repository must be written explicitly as not found/not released; never omit the field.
 - New or updated reproductions must keep this metadata complete and covered by documentation tests.
+
+## GPU validation gate
+
+- Any new or materially upgraded implementation whose advertised path requires CUDA must be executed on a real NVIDIA A100 or A30 before its MR is declared complete.
+- The adapter must set `requires_gpu_validation=True` and point `gpu_validation_artifact` at a committed sanitized receipt accepted by `scripts/validate_gpu_evidence.py`.
+- Receipts must include the public dataset/checkpoint revision, command, seed, metrics, accelerator model and commit, while excluding hostnames, SSH aliases, usernames, driver/build strings and checkpoints.
