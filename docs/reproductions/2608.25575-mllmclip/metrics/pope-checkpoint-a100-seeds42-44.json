@@ -1,24 +1,123 @@
 {
-  "schema_version": 3,
+  "schema_version": 2,
   "method": "mllmclip-real-checkpoint-cka",
-  "dataset": {"name": "POPE adversarial / COCO val2014", "train_examples": 320, "test_examples": 160},
+  "dataset": {
+    "name": "POPE adversarial / COCO val2014",
+    "train_examples": 320,
+    "test_examples": 160
+  },
   "checkpoints": {
-    "teacher": {"model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct", "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd"},
-    "student": {"model_id": "openai/clip-vit-base-patch32", "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"}
+    "teacher": {
+      "model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+      "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd"
+    },
+    "student": {
+      "model_id": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+    }
   },
   "metrics": {
     "seed_results": [
-      {"seed": 42, "baseline": {"linear_cka": 0.3728191, "knn_accuracy": null, "neighbor_overlap_at_5": 0.26125}, "method": {"linear_cka": 0.3728191, "knn_accuracy": null, "neighbor_overlap_at_5": 0.26125}, "model_selection": {"label_classes": 1, "label_diagnostic_valid": false, "test_used_for_selection": false}},
-      {"seed": 43, "baseline": {"linear_cka": 0.3359644, "knn_accuracy": null, "neighbor_overlap_at_5": 0.26375}, "method": {"linear_cka": 0.3310811, "knn_accuracy": null, "neighbor_overlap_at_5": 0.26}, "model_selection": {"label_classes": 1, "label_diagnostic_valid": false, "test_used_for_selection": false}},
-      {"seed": 44, "baseline": {"linear_cka": 0.3393617, "knn_accuracy": null, "neighbor_overlap_at_5": 0.2675}, "method": {"linear_cka": 0.3358021, "knn_accuracy": null, "neighbor_overlap_at_5": 0.2575}, "model_selection": {"label_classes": 1, "label_diagnostic_valid": false, "test_used_for_selection": false}}
+      {
+        "seed": 42,
+        "baseline": {
+          "linear_cka": 0.3728191,
+          "knn_accuracy": null,
+          "neighbor_overlap_at_5": 0.26125
+        },
+        "method": {
+          "linear_cka": 0.3728191,
+          "knn_accuracy": null,
+          "neighbor_overlap_at_5": 0.26125
+        },
+        "model_selection": {
+          "label_classes": 1,
+          "label_diagnostic_valid": false,
+          "test_used_for_selection": false
+        }
+      },
+      {
+        "seed": 43,
+        "baseline": {
+          "linear_cka": 0.3359644,
+          "knn_accuracy": null,
+          "neighbor_overlap_at_5": 0.26375
+        },
+        "method": {
+          "linear_cka": 0.3310811,
+          "knn_accuracy": null,
+          "neighbor_overlap_at_5": 0.26
+        },
+        "model_selection": {
+          "label_classes": 1,
+          "label_diagnostic_valid": false,
+          "test_used_for_selection": false
+        }
+      },
+      {
+        "seed": 44,
+        "baseline": {
+          "linear_cka": 0.3393617,
+          "knn_accuracy": null,
+          "neighbor_overlap_at_5": 0.2675
+        },
+        "method": {
+          "linear_cka": 0.3358021,
+          "knn_accuracy": null,
+          "neighbor_overlap_at_5": 0.2575
+        },
+        "model_selection": {
+          "label_classes": 1,
+          "label_diagnostic_valid": false,
+          "test_used_for_selection": false
+        }
+      }
     ],
     "aggregate": {
-      "baseline_linear_cka": {"mean": 0.3493817, "std": 0.0203683, "ci95_low": 0.3263328, "ci95_high": 0.3724307},
-      "method_linear_cka": {"mean": 0.3465675, "std": 0.0228568, "ci95_low": 0.3207025, "ci95_high": 0.3724324},
-      "baseline_neighbor_overlap_at_5": {"mean": 0.2641667, "std": 0.0031458, "ci95_low": 0.2606069, "ci95_high": 0.2677264},
-      "method_neighbor_overlap_at_5": {"mean": 0.2595833, "std": 0.0019094, "ci95_low": 0.2574226, "ci95_high": 0.2617440}
+      "baseline_linear_cka": {
+        "mean": 0.3493817,
+        "std": 0.0203683,
+        "ci95_low": 0.3263328,
+        "ci95_high": 0.3724307
+      },
+      "method_linear_cka": {
+        "mean": 0.3465675,
+        "std": 0.0228568,
+        "ci95_low": 0.3207025,
+        "ci95_high": 0.3724324
+      },
+      "baseline_neighbor_overlap_at_5": {
+        "mean": 0.2641667,
+        "std": 0.0031458,
+        "ci95_low": 0.2606069,
+        "ci95_high": 0.2677264
+      },
+      "method_neighbor_overlap_at_5": {
+        "mean": 0.2595833,
+        "std": 0.0019094,
+        "ci95_low": 0.2574226,
+        "ci95_high": 0.261744
+      }
     }
   },
-  "evaluation_protocol": {"seeds": [42, 43, 44], "validation_selects_ridge_only": true, "heldout_test_used_for_selection": false},
-  "scope": "The POPE label-count diagnostic is degenerate on this subset and is deliberately reported as null; CKA and neighbor overlap show no stable gain."
+  "evaluation_protocol": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "validation_selects_ridge_only": true,
+    "heldout_test_used_for_selection": false,
+    "tier": "l2_public_dataset",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "scope": "The POPE label-count diagnostic is degenerate on this subset and is deliberately reported as null; CKA and neighbor overlap show no stable gain.",
+  "manifest_ref": "reproduction:mllmclip",
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.25575-mllmclip/metrics/pope-checkpoint-a100-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  }
 }

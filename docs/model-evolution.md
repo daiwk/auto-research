@@ -505,7 +505,7 @@ auto-research evolve --model post-training --dataset arithmetic-smoke \
   --generations 3 --population 6 --seeds 42,43,44
 ```
 
-加载器只接受至少三个不同 seed 的 schema-v3 产物；被晋级的方法只改变 proposal 顺序。
+加载器只接受至少三个不同 seed 的统一指标产物；被晋级的方法只改变 proposal 顺序。
 每个 genome 仍由当前数据、预算和 evaluator 从头评估，checkpoint 产物中的 accuracy、CKA
 或 margin 永远不会复制到 fitness。来源、seed 与这条政策同时写入 `research_memory`，便于
 看板审计。
