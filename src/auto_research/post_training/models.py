@@ -101,6 +101,10 @@ ALGORITHMS = (
     "clue-opsd",
     "grin",
     "grip",
+    "ttpo",
+    "weak-guide-rlvr",
+    "uc-mopd",
+    "spear",
 )
 
 

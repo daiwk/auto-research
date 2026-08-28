@@ -77,6 +77,10 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2608.27448": ("ttpo", "多数票路由下对同意 rollout 做 OPSD、对分歧 rollout 做 grouped RL，并筛选 token"),
+    "2608.27420": ("weak-guide-rlvr", "以弱模型部分推理前缀扰动过度自信策略，扩大 RLVR reasoning coverage"),
+    "2608.26735": ("uc-mopd", "双温采样、正优势密度轨迹筛选与 CLL 方向一致 token 门控"),
+    "2608.26550": ("spear", "以领域符号 milestone 的 LCS 顺序对齐构造无神经 PRM 的稠密过程奖励"),
     "2608.25580": ("v-rubrics", "以视觉忠实度、推理一致性、指令遵循 rubric 和 prefix-localized credit 执行 GRPO"),
     "2608.25356": ("clue-opsd", "长视频训练期 clue 特权视图 on-policy self-distillation，推理时移除 clue"),
     "2608.25243": ("grin", "失败 rollout 注入 golden response，并以 mixed-policy importance correction 做持续知识吸收"),
@@ -155,6 +159,10 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2608.27449": ("policy:swe-prime", "先筛选高质量代表性轨迹，再只对高价值语义段计算 imitation loss"),
+    "2608.27311": ("verifier:harnesslens", "只在行为相关任务上配对验证 harness 修改，并用可归因证据门防回退"),
+    "2608.26895": ("memory:covemem", "以候选集检索协同向量状态并映射为可训练 soft-token 记忆"),
+    "2608.26563": ("memory:spt", "把 reference-aware 多文件 skill package 作为 Agent mid-training 数据先验"),
     "2608.25593": ("planner:jit-agent", "按任务生成、修复并从 archive 蒸馏 memory/planning/protocol/tools 四模块 harness"),
     "2608.26086": ("planner:traceml", "用人类 ML 开发轨迹先验交替数据、验证、模型与集成，并显式重开旧方案"),
     "2608.25559": ("tool:adavdr", "模型条件 tool necessity filtering、冗余惩罚与不可靠证据反思回退"),

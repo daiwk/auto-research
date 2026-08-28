@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-08 · [Boosting LLM Exploration via Weak-Model Guidance in RLVR](../2608.27420-weak-guide-rlvr/README.md)（`weak-guide-rlvr`）：RLVR 容易熵坍缩。论文用更小弱模型生成部分推理前缀，迫使目标模型进入陌生轨迹，再以 entropy 截断和原生/前缀样本混训保持覆盖率。
+- 2026-08 · [Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD](../2608.26735-uc-mopd/README.md)（`uc-mopd`）：普通 MOPD 很少采到强正优势 token，也无法判断更新方向是否可靠。方法扩大温度覆盖，按轨迹正优势密度挑样本，再用熵校准 CLL 概率门控 token 更新。
+- 2026-08 · [SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning](../2608.26550-spear/README.md)（`spear`）：结果奖励过稀，神经 PRM 又昂贵。SPEAR 把教师推理投影为领域符号 milestone，用 LCS-F1 给学生轨迹提供顺序敏感的稠密奖励。
+- 2026-08 · [TTPO: Test-Time Policy Optimization](../2608.27448-ttpo/README.md)（`ttpo`）：多数票伪标签可能错误，但与多数票分歧的 rollout 通常仍是错的。TTPO 因而对同意分支做 OPSD，对分歧分支做 grouped RL，并分别过滤已收敛 token 与高置信错误。
 - 2026-08 · [From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection](../2608.25243-grin/README.md)（`grin`）：纯 on-policy RL 在新知识尚未掌握时几乎采不到正确答案。GRIN 在失败组注入 golden response，再以 mixed-policy importance correction 训练；能力提高后自动回到 on-policy 探索。
 - 2026-08 · [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
 - 2026-08 · [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](../2608.25580-v-rubrics/README.md)（`v-rubrics`）：把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。

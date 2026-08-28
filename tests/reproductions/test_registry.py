@@ -8,6 +8,7 @@ from auto_research.reproductions.reporting import write_reproduction_result
 def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
         "bahe",
+        "friend-gnn",
         "argus",
         "akt-rec",
         "adadsf",

@@ -106,6 +106,10 @@ MODULES = {
         "clue-opsd": "2608.25356-clue-opsd",
         "grin": "2608.25243-grin",
         "grip": "2608.25583-grip",
+        "spear": "2608.26550-spear",
+        "uc-mopd": "2608.26735-uc-mopd",
+        "weak-guide-rlvr": "2608.27420-weak-guide-rlvr",
+        "ttpo": "2608.27448-ttpo",
     },
     "agent-research": {
         "toolformer": "2302.04761-toolformer",
@@ -195,6 +199,10 @@ MODULES = {
         "topas": "2608.25523-topas",
         "caskg": "2608.25500-caskg",
         "progrouter": "2608.25992-progrouter",
+        "spt": "2608.26563-spt",
+        "covemem": "2608.26895-covemem",
+        "harnesslens": "2608.27311-harnesslens",
+        "swe-prime": "2608.27449-swe-prime",
     },
 }
 

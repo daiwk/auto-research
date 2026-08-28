@@ -271,6 +271,15 @@ L2 小预算实验固定 arithmetic free generation、48 train examples、20-ste
 format rate 从 0 提升到 0.3333、mean verifier reward 从 0.1000 到 0.1333，其余
 没有最终指标提升。这说明真实序列路径已跑通，但当前预算不足以支持“效果复现”结论。
 
+## 2026-08-29 最新方法
+
+- [TTPO](2608.27448-ttpo/README.md)：多数票路由的 OPSD 与 grouped RL。
+- [Weak-Model Guidance](2608.27420-weak-guide-rlvr/README.md)：弱模型前缀恢复 RLVR 探索。
+- [Uncertainty-Calibrated MOPD](2608.26735-uc-mopd/README.md)：双温轨迹筛选与 CLL token 门控。
+- [SPEAR](2608.26550-spear/README.md)：符号 milestone 和顺序敏感过程奖励。
+
+统一批次索引见 [`latest-20260829-seed42.json`](../experiments/latest-20260829-seed42.json)。
+
 ## 一键运行
 
 ```bash

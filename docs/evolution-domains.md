@@ -1,5 +1,16 @@
 # 自动进化的领域适配
 
+## 2026-08-29 新增论文算子
+
+- 后训练：`ttpo`、`weak-guide-rlvr`、`uc-mopd`、`spear` 已成为可继承、可组合的
+  objective / rollout / reward 候选。
+- Agent：`swe-prime`、`harnesslens`、`covemem`、`spt` 已进入 policy、verifier、memory
+  和 data/skill 槽位。
+- `friend-gnn` 暂不接入 RankMixer genome：好友图 GNN 与当前序列排序槽位不相容；
+  在图模型 genome 建立前，强行映射会制造错误的可组合性声明。
+
+这些名字均来自仓库内已经实现并有公开实验产物的论文，不是运行时临时编造的结构。
+
 Auto Research 的核心不是某个推荐模型，而是一套开放的研究协议。任意领域只要提供
 研究对象、数据、可搜索改动和评测器，就能复用论文检索、并行实验、选择与多轮迭代。
 

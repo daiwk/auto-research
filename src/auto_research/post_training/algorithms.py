@@ -75,6 +75,7 @@ def update(
         "sa-mrpo", "rubric-dropout", "erils", "crpo", "serpo", "iso-rlvr",
         "srpo", "erpo", "opd-search-plus", "opdvr",
         "v-rubrics", "clue-opsd", "grin", "grip",
+        "ttpo", "weak-guide-rlvr", "uc-mopd", "spear",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

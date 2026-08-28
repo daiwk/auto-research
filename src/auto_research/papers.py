@@ -5,6 +5,7 @@ import re
 import time
 from collections.abc import Iterable
 import urllib.parse
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -22,10 +23,14 @@ class ArxivClient:
         timeout: int = 30,
         user_agent: str = "auto-research/0.1",
         minimum_interval_seconds: float = 0.0,
+        maximum_retries: int = 3,
+        retry_backoff_seconds: float = 2.0,
     ):
         self.timeout = timeout
         self.user_agent = user_agent
         self.minimum_interval_seconds = minimum_interval_seconds
+        self.maximum_retries = maximum_retries
+        self.retry_backoff_seconds = retry_backoff_seconds
         self._last_request_at: float | None = None
 
     def search(
@@ -65,9 +70,7 @@ class ArxivClient:
             elapsed = time.monotonic() - self._last_request_at
             if elapsed < self.minimum_interval_seconds:
                 time.sleep(self.minimum_interval_seconds - elapsed)
-        with urllib.request.urlopen(request, timeout=self.timeout) as response:
-            payload = response.read()
-        self._last_request_at = time.monotonic()
+        payload = self._read(request)
         return parse_arxiv_feed(payload)
 
     def search_pages(
@@ -121,10 +124,33 @@ class ArxivClient:
             elapsed = time.monotonic() - self._last_request_at
             if elapsed < self.minimum_interval_seconds:
                 time.sleep(self.minimum_interval_seconds - elapsed)
-        with urllib.request.urlopen(request, timeout=self.timeout) as response:
-            payload = response.read()
-        self._last_request_at = time.monotonic()
+        payload = self._read(request)
         return parse_arxiv_feed(payload)
+
+    def _read(self, request: urllib.request.Request) -> bytes:
+        """Read arXiv with bounded backoff for transient throttling.
+
+        arXiv returns 429/5xx during announcement bursts.  Retrying here keeps
+        every discovery entry point consistent and avoids four track-specific
+        scripts each inventing a different recovery policy.
+        """
+        for attempt in range(self.maximum_retries + 1):
+            try:
+                with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                    payload = response.read()
+                self._last_request_at = time.monotonic()
+                return payload
+            except urllib.error.HTTPError as exc:
+                if exc.code not in {429, 500, 502, 503, 504} or attempt >= self.maximum_retries:
+                    raise
+                retry_after = exc.headers.get("Retry-After") if exc.headers else None
+                try:
+                    delay = float(retry_after) if retry_after else 0.0
+                except ValueError:
+                    delay = 0.0
+                delay = max(delay, self.retry_backoff_seconds * (2**attempt))
+                time.sleep(delay)
+        raise AssertionError("unreachable")
 
 
 def canonical_arxiv_id(arxiv_id: str) -> str:

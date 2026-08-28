@@ -260,6 +260,15 @@ P1 候选指标见
 本页新增 step-credit 算法的固定 seed 指标见
 [`rl-papers-summary-seed42.json`](../experiments/rl-papers-summary-seed42.json)。
 
+## 2026-08-29 最新方法
+
+- [SWE-Prime](2608.27449-swe-prime/README.md)：轨迹与语义段两级筛选。
+- [HarnessLens](2608.27311-harnesslens/README.md)：行为相关任务选择和可归因验证。
+- [CoVeMem](2608.26895-covemem/README.md)：可训练协同向量记忆。
+- [SPT](2608.26563-spt/README.md)：多文件 skill package 的 Reference Insert 与中训练。
+
+统一批次索引见 [`latest-20260829-seed42.json`](../experiments/latest-20260829-seed42.json)。
+
 ## 一键运行
 
 ```bash

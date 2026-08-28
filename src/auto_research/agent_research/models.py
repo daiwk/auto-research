@@ -103,6 +103,10 @@ METHODS = (
     "topas",
     "caskg",
     "progrouter",
+    "swe-prime",
+    "harnesslens",
+    "covemem",
+    "spt",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

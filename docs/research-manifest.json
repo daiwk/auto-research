@@ -290,6 +290,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "covemem",
+      "title": "When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2608.26895",
+      "detail_path": "agent-research/2608.26895-covemem/README.md",
+      "topic": [
+        "可训练协同记忆"
+      ],
+      "first_author": "Hanchong Chen",
+      "first_author_affiliation": "Shenzhen Technology University",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "covemem"
+    },
+    {
+      "domain": "agent-research",
       "key": "critic",
       "title": "CRITIC",
       "paper_url": "https://arxiv.org/abs/2305.11738",
@@ -422,6 +437,21 @@
       "published": "2026-08-06",
       "code": null,
       "adapter": "gse"
+    },
+    {
+      "domain": "agent-research",
+      "key": "harnesslens",
+      "title": "Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification",
+      "paper_url": "https://arxiv.org/abs/2608.27311",
+      "detail_path": "agent-research/2608.27311-harnesslens/README.md",
+      "topic": [
+        "行为相关 Harness 验证"
+      ],
+      "first_author": "Jinghan Xu",
+      "first_author_affiliation": "Fudan University",
+      "published": "2026-08-27",
+      "code": "https://github.com/jhxu5214/HarnessLens",
+      "adapter": "harnesslens"
     },
     {
       "domain": "agent-research",
@@ -1155,6 +1185,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "spt",
+      "title": "SPT: Skills as Pre-Training Data for Agentic Language Models",
+      "paper_url": "https://arxiv.org/abs/2608.26563",
+      "detail_path": "agent-research/2608.26563-spt/README.md",
+      "topic": [
+        "Agent 技能预训练"
+      ],
+      "first_author": "Yufei Sun",
+      "first_author_affiliation": "Beijing University of Posts and Telecommunications",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "spt"
+    },
+    {
+      "domain": "agent-research",
       "key": "state2state",
       "title": "State2State: Environment-Derived Mid-Training for LLM Agents",
       "paper_url": "https://arxiv.org/abs/2608.04934",
@@ -1197,6 +1242,21 @@
       "published": "2024-05-06",
       "code": "https://github.com/SWE-agent/SWE-agent",
       "adapter": "swe-agent"
+    },
+    {
+      "domain": "agent-research",
+      "key": "swe-prime",
+      "title": "SWE-Prime: Fewer Trajectories, Better Performance",
+      "paper_url": "https://arxiv.org/abs/2608.27449",
+      "detail_path": "agent-research/2608.27449-swe-prime/README.md",
+      "topic": [
+        "软件轨迹筛选"
+      ],
+      "first_author": "Dewu Zheng",
+      "first_author_affiliation": "Sun Yat-sen University",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "swe-prime"
     },
     {
       "domain": "agent-research",
@@ -6506,6 +6566,21 @@
     },
     {
       "domain": "post-training",
+      "key": "spear",
+      "title": "SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2608.26550",
+      "detail_path": "post-training/2608.26550-spear/README.md",
+      "topic": [
+        "过程奖励"
+      ],
+      "first_author": "Zhuochun Li",
+      "first_author_affiliation": "University of Pittsburgh",
+      "published": "2026-08-27",
+      "code": "https://github.com/zhuochunli/SPEAR",
+      "adapter": "spear"
+    },
+    {
+      "domain": "post-training",
       "key": "specroll",
       "title": "SpecRoll: Fast-Slow Verifier-Feedback Adaptation for Speculative Reinforcement Learning Rollouts",
       "paper_url": "https://arxiv.org/abs/2608.04962",
@@ -6657,6 +6732,21 @@
     },
     {
       "domain": "post-training",
+      "key": "ttpo",
+      "title": "TTPO: Test-Time Policy Optimization",
+      "paper_url": "https://arxiv.org/abs/2608.27448",
+      "detail_path": "post-training/2608.27448-ttpo/README.md",
+      "topic": [
+        "测试时强化学习"
+      ],
+      "first_author": "Aozhe Wang",
+      "first_author_affiliation": "Zhejiang University",
+      "published": "2026-08-27",
+      "code": "https://github.com/ZJU-REAL/TTPO",
+      "adapter": "ttpo"
+    },
+    {
+      "domain": "post-training",
       "key": "ttrl",
       "title": "TTRL",
       "paper_url": "https://arxiv.org/abs/2504.16084",
@@ -6684,6 +6774,21 @@
       "published": "2026-08-06",
       "code": "未发现官方代码",
       "adapter": "u-opsd"
+    },
+    {
+      "domain": "post-training",
+      "key": "uc-mopd",
+      "title": "Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD",
+      "paper_url": "https://arxiv.org/abs/2608.26735",
+      "detail_path": "post-training/2608.26735-uc-mopd/README.md",
+      "topic": [
+        "多教师能力整合"
+      ],
+      "first_author": "Ziyuan Liu",
+      "first_author_affiliation": "Peking University",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "uc-mopd"
     },
     {
       "domain": "post-training",
@@ -6729,6 +6834,21 @@
       "published": "2025-04-07",
       "code": "未发现官方代码",
       "adapter": "vapo"
+    },
+    {
+      "domain": "post-training",
+      "key": "weak-guide-rlvr",
+      "title": "Boosting LLM Exploration via Weak-Model Guidance in RLVR",
+      "paper_url": "https://arxiv.org/abs/2608.27420",
+      "detail_path": "post-training/2608.27420-weak-guide-rlvr/README.md",
+      "topic": [
+        "弱模型前缀探索"
+      ],
+      "first_author": "Xingyu Shen",
+      "first_author_affiliation": "Peking University",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "weak-guide-rlvr"
     },
     {
       "domain": "recommendation",
@@ -10792,6 +10912,83 @@
             "traffic": "production online A/B test",
             "source_url": "https://arxiv.org/abs/2605.21832",
             "source_location": "original paper online-result disclosure: product=TikTok / ByteDance livestreaming; metric=Cold-Start Room Views"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "friend-gnn",
+      "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
+      "paper_url": "https://arxiv.org/abs/2608.27413",
+      "detail_path": "reproductions/2608.27413-friend-gnn/README.md",
+      "topic": [
+        "friend-recommendation",
+        "graph-ranking",
+        "multi-hash-embedding",
+        "temporal-sampling"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "AI VK",
+      "published": "2026-08-27",
+      "code": "https://github.com/makut/VK-GNN",
+      "adapter": {
+        "adapter_key": "friend-gnn",
+        "arxiv_id": "2608.27413",
+        "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
+        "paper_url": "https://arxiv.org/abs/2608.27413",
+        "track": "recommendation",
+        "organization": "AI VK",
+        "published": "2026-08-27",
+        "code_url": "https://github.com/makut/VK-GNN",
+        "topics": [
+          "friend-recommendation",
+          "graph-ranking",
+          "multi-hash-embedding",
+          "temporal-sampling"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/friend_gnn",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-1M"
+        ],
+        "baseline": "popularity ranker on the identical full candidate catalog",
+        "metrics": [
+          "Hit@10",
+          "NDCG@10",
+          "hash table compression",
+          "temporal sampling complexity"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "VK friend recommendation",
+            "metric": "friend additions",
+            "lift_percent": 16.0,
+            "traffic": "production A/B test",
+            "source_url": "https://arxiv.org/html/2608.27413v1#S6.SS6",
+            "source_location": "Section 6.6",
+            "retrieved_at": "2026-08-29"
+          },
+          {
+            "product": "VK friend recommendation",
+            "metric": "unique friend adders",
+            "lift_percent": 11.5,
+            "traffic": "production A/B test",
+            "source_url": "https://arxiv.org/html/2608.27413v1#S6.SS6",
+            "source_location": "Section 6.6",
+            "retrieved_at": "2026-08-29"
           }
         ],
         "selection_exception": null,

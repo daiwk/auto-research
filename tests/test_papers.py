@@ -1,3 +1,5 @@
+import urllib.error
+
 from auto_research.papers import ArxivClient, canonical_arxiv_id, parse_arxiv_feed
 
 
@@ -40,3 +42,30 @@ def test_search_builds_quoted_category_query(monkeypatch):
 def test_canonical_arxiv_id_removes_only_version_suffix():
     assert canonical_arxiv_id("2608.10257v1") == "2608.10257"
     assert canonical_arxiv_id("2608.10257") == "2608.10257"
+
+
+def test_search_retries_transient_arxiv_throttling(monkeypatch):
+    calls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return None
+
+        def read(self):
+            return b'<feed xmlns="http://www.w3.org/2005/Atom" />'
+
+    def fake_open(request, timeout):
+        calls.append(request.full_url)
+        if len(calls) == 1:
+            raise urllib.error.HTTPError(request.full_url, 429, "rate limited", {}, None)
+        return Response()
+
+    sleeps = []
+    monkeypatch.setattr("urllib.request.urlopen", fake_open)
+    monkeypatch.setattr("time.sleep", sleeps.append)
+    assert ArxivClient(maximum_retries=1, retry_backoff_seconds=0.25).search("agent") == []
+    assert len(calls) == 2
+    assert sleeps == [0.25]

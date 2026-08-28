@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-08
+- [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
 - [DCEO](../2608.25635-dceo/README.md)：以直接因果效应估计长期用户价值，并学习请求级多目标排序权重。
 - [TransRetrieval](../2608.25528-transretrieval/README.md)：用 target-token 压缩和多域归一化扩展 Transformer 工业召回。
 - [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。

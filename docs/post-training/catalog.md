@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 弱模型前缀探索 | [Boosting LLM Exploration via Weak-Model Guidance in RLVR](2608.27420-weak-guide-rlvr/README.md) | Peking University，2026-08-27 | 未发现官方代码 | `weak-guide-rlvr` |
+| 多教师能力整合 | [Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD](2608.26735-uc-mopd/README.md) | Peking University，2026-08-27 | 未发现官方代码 | `uc-mopd` |
+| 过程奖励 | [SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning](2608.26550-spear/README.md) | University of Pittsburgh，2026-08-27 | [已开源](https://github.com/zhuochunli/SPEAR) | `spear` |
+| 测试时强化学习 | [TTPO: Test-Time Policy Optimization](2608.27448-ttpo/README.md) | Zhejiang University，2026-08-27 | [已开源](https://github.com/ZJU-REAL/TTPO) | `ttpo` |
 | 混合策略知识注入 RL | [From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection](2608.25243-grin/README.md) | University of California, Merced，2026-08-26 | 未发现官方代码 | `grin` |
 | 奖励引导参数插值 | [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](2608.25583-grip/README.md) | Peking University，2026-08-26 | 未发现官方代码 | `grip` |
 | 多模态 rubric RL | [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](2608.25580-v-rubrics/README.md) | S-Lab, Nanyang Technological University，2026-08-26 | [已开源](https://shulin16.github.io/v-rubrics/) | `v-rubrics` |

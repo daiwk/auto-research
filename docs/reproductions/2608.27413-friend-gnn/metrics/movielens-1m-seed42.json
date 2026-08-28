@@ -1,0 +1,145 @@
+{
+  "paper": {
+    "arxiv_id": "2608.27413",
+    "title": "Scaling GNNs for Friend Recommendation"
+  },
+  "dataset": {
+    "name": "MovieLens-1M",
+    "users": 320,
+    "items": 480
+  },
+  "setup": {
+    "seed": 42,
+    "full_catalog": true,
+    "temporal_edges": 45310,
+    "hash_functions": 3
+  },
+  "variants": {
+    "popularity ranker": {
+      "hit_at_10": 0.065625,
+      "ndcg_at_10": 0.03873560814122877,
+      "head_share_at_10": 0.944375
+    },
+    "multi-hash temporal GNN proxy": {
+      "hit_at_10": 0.228125,
+      "ndcg_at_10": 0.11001305656054891,
+      "head_share_at_10": 0.4525
+    }
+  },
+  "relative": {
+    "hit_at_10_percent": 247.61904761904756,
+    "ndcg_at_10_percent": 184.01014425653233,
+    "head_share_at_10_percent": -52.08471211118464
+  },
+  "diagnostics": {
+    "hash_table_rows": 120,
+    "nominal_full_table_rows": 480,
+    "temporal_lookup": "bisect_left over timestamp-sorted adjacency"
+  },
+  "paper_results": {
+    "friend_additions_lift_percent": 16.0,
+    "unique_friend_adders_lift_percent": 11.5,
+    "embedding_table_reduction_percent": 98.0
+  },
+  "scope": "在 MovieLens-1M 顺序交互上验证多哈希表示、按时间排序邻接表与二分 cutoff；未复刻 VK 的 194M 用户图、GATv2 分布式训练和线上排序器。",
+  "runtime": {
+    "requested_device": "auto",
+    "cpu_threads": null,
+    "platform": "Darwin arm64"
+  },
+  "seed": 42,
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "friend-gnn",
+    "arxiv_id": "2608.27413",
+    "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
+    "paper_url": "https://arxiv.org/abs/2608.27413",
+    "track": "recommendation",
+    "organization": "AI VK",
+    "published": "2026-08-27",
+    "code_url": "https://github.com/makut/VK-GNN",
+    "topics": [
+      "friend-recommendation",
+      "graph-ranking",
+      "multi-hash-embedding",
+      "temporal-sampling"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/friend_gnn",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens-1M"
+    ],
+    "baseline": "popularity ranker on the identical full candidate catalog",
+    "metrics": [
+      "Hit@10",
+      "NDCG@10",
+      "hash table compression",
+      "temporal sampling complexity"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "VK friend recommendation",
+        "metric": "friend additions",
+        "lift_percent": 16.0,
+        "traffic": "production A/B test",
+        "source_url": "https://arxiv.org/html/2608.27413v1#S6.SS6",
+        "source_location": "Section 6.6",
+        "retrieved_at": "2026-08-29"
+      },
+      {
+        "product": "VK friend recommendation",
+        "metric": "unique friend adders",
+        "lift_percent": 11.5,
+        "traffic": "production A/B test",
+        "source_url": "https://arxiv.org/html/2608.27413v1#S6.SS6",
+        "source_location": "Section 6.6",
+        "retrieved_at": "2026-08-29"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-08-28T18:46:49.178253+00:00",
+    "code_commit": "493050229bfa27deac7654d5ee987d70a4558fc6",
+    "python": "3.14.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "numpy": "2.4.3"
+    },
+    "artifact_path": "docs/reproductions/2608.27413-friend-gnn/metrics/movielens-1m-seed42.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "reproduction_fidelity": {
+    "level": "core_mechanism",
+    "label": "核心机制复现",
+    "description": "论文中心算法被实际执行，但生产模型、私有特征或基础设施未复刻。",
+    "omitted_core_components": [
+      "VK private 194M-user graph",
+      "distributed GATv2 training",
+      "production ranker"
+    ]
+  },
+  "manifest_ref": "reproduction:friend-gnn"
+}

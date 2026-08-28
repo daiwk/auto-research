@@ -1,0 +1,2963 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:spt:toolroute-l2.1-v1",
+  "method": "spt",
+  "benchmark": "toolroute-l2.1",
+  "dataset": "toolroute-l2.1-v1",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "answer_accuracy": 0.8055555555555556,
+    "plan_exact_match": 0.8055555555555556,
+    "plan_step_f1": 0.8339646464646465,
+    "joint_success": 0.8055555555555556,
+    "recovery_success_rate": 0.6666666666666666,
+    "invalid_tool_rate": 0.03478922722062106,
+    "irreversible_error_rate": 0.0,
+    "average_tool_calls": 5.590277777777778,
+    "average_cost": 4.943888888888889
+  },
+  "aggregate_metrics": {
+    "answer_accuracy": {
+      "mean": 0.8055555555555556,
+      "std": 0.012028130608117225,
+      "ci95_radius": 0.013611111111111136
+    },
+    "plan_exact_match": {
+      "mean": 0.8055555555555556,
+      "std": 0.012028130608117225,
+      "ci95_radius": 0.013611111111111136
+    },
+    "plan_step_f1": {
+      "mean": 0.8339646464646465,
+      "std": 0.0035894436526708044,
+      "ci95_radius": 0.004061837867856546
+    },
+    "joint_success": {
+      "mean": 0.8055555555555556,
+      "std": 0.012028130608117225,
+      "ci95_radius": 0.013611111111111136
+    },
+    "recovery_success_rate": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "invalid_tool_rate": {
+      "mean": 0.03478922722062106,
+      "std": 0.0023070538303527114,
+      "ci95_radius": 0.0026106771739786263
+    },
+    "irreversible_error_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "average_tool_calls": {
+      "mean": 5.590277777777778,
+      "std": 0.024056261216234578,
+      "ci95_radius": 0.027222222222222415
+    },
+    "average_cost": {
+      "mean": 4.943888888888889,
+      "std": 0.02311404895857183,
+      "ci95_radius": 0.026156008681055526
+    }
+  },
+  "validation_metrics": {
+    "answer_accuracy": 0.7916666666666666,
+    "plan_exact_match": 0.7916666666666666,
+    "plan_step_f1": 0.8279320987654321,
+    "joint_success": 0.7916666666666666,
+    "recovery_success_rate": 0.6666666666666666,
+    "invalid_tool_rate": 0.04347989760578226,
+    "irreversible_error_rate": 0.0,
+    "average_tool_calls": 4.791666666666666,
+    "average_cost": 4.361111111111112
+  },
+  "validation_aggregate_metrics": {
+    "answer_accuracy": {
+      "mean": 0.7916666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "plan_exact_match": {
+      "mean": 0.7916666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "plan_step_f1": {
+      "mean": 0.8279320987654321,
+      "std": 0.0007593516798054006,
+      "ci95_radius": 0.0008592873176206753
+    },
+    "joint_success": {
+      "mean": 0.7916666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "recovery_success_rate": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "invalid_tool_rate": {
+      "mean": 0.04347989760578226,
+      "std": 0.0003260146829485133,
+      "ci95_radius": 0.0003689203433217855
+    },
+    "irreversible_error_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95_radius": 0.0
+    },
+    "average_tool_calls": {
+      "mean": 4.791666666666666,
+      "std": 0.03608439182435161,
+      "ci95_radius": 0.04083333333333333
+    },
+    "average_cost": {
+      "mean": 4.361111111111112,
+      "std": 0.026475005683208336,
+      "ci95_radius": 0.029959289249674524
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.7916666666666666,
+          "plan_exact_match": 0.7916666666666666,
+          "plan_step_f1": 0.8217592592592592,
+          "joint_success": 0.7916666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.05263157894736842,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 3.9583333333333335,
+          "average_cost": 3.596666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.75,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 12,
+          "reflections": 0,
+          "skill_reuses": 62,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 20
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7916666666666666,
+          "plan_exact_match": 0.7916666666666666,
+          "plan_step_f1": 0.8274936868686869,
+          "joint_success": 0.7916666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.043668122270742356,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.770833333333333,
+          "average_cost": 4.346666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.75,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 0,
+          "skill_reuses": 185,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 27
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-42-0000",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0001",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7272727272727273,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.76,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0002",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0003",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.4,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0004",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.760000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0005",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.5600000000000005,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "search",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0006",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0007",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0008",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.680000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0009",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "search",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0010",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-42-0011",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7272727272727273,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.7916666666666666,
+          "plan_exact_match": 0.7916666666666666,
+          "plan_step_f1": 0.8298335923335923,
+          "joint_success": 0.7916666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.03745318352059925,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 5.5625,
+          "average_cost": 4.918333333333334
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.75,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 0,
+          "skill_reuses": 215,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 25
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-42-0000",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0001",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0002",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0003",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7692307692307693,
+            "has_failure": false,
+            "tool_calls": 7.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "files",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0004",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0005",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "search",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0006",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.4,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0007",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.28,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "database",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0008",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0009",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "search",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0010",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-42-0011",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "answer_accuracy": 0.7916666666666666,
+        "plan_exact_match": 0.7916666666666666,
+        "plan_step_f1": 0.8298335923335923,
+        "joint_success": 0.7916666666666666,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.03745318352059925,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.5625,
+        "average_cost": 4.918333333333334
+      },
+      "axis_metrics": {
+        "clean": 1,
+        "transient": 1,
+        "ambiguous": 0.75,
+        "fallback": 1,
+        "irreversible": 1,
+        "combined": 0
+      },
+      "telemetry": {
+        "retries": 24,
+        "reflections": 0,
+        "skill_reuses": 215,
+        "verifications": 0,
+        "compressions": 0,
+        "memory_writes": 25
+      },
+      "trace": [
+        {
+          "task_id": "toolroute-l21-test-42-0000",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0001",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0002",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0003",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.7692307692307693,
+          "has_failure": false,
+          "tool_calls": 7.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "files",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0004",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0005",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "search",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0006",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.4,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0007",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.28,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "database",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0008",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0009",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "search",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0010",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-42-0011",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.7916666666666666,
+          "plan_exact_match": 0.7916666666666666,
+          "plan_step_f1": 0.8217592592592592,
+          "joint_success": 0.7916666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.05263157894736842,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 3.9583333333333335,
+          "average_cost": 3.6333333333333337
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.75,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 12,
+          "reflections": 0,
+          "skill_reuses": 63,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 18
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7916666666666666,
+          "plan_exact_match": 0.7916666666666666,
+          "plan_step_f1": 0.8288089225589226,
+          "joint_success": 0.7916666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.04310344827586207,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.833333333333333,
+          "average_cost": 4.391666666666667
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.75,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 0,
+          "skill_reuses": 183,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 29
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-43-0000",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.680000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0001",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.720000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0002",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0003",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.3200000000000003,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0004",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.56,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "database"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0005",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7272727272727273,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.76,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0006",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.56,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0007",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.7272727272727273,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0008",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0009",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.720000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0010",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.25,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.56,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-43-0011",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.8125,
+          "plan_exact_match": 0.8125,
+          "plan_step_f1": 0.8363215488215489,
+          "joint_success": 0.8125,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.03345724907063197,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 5.604166666666667,
+          "average_cost": 4.95
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.875,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 0,
+          "skill_reuses": 219,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 25
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-43-0000",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.4800000000000004,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0001",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0002",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0003",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0004",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0005",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0006",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0007",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0008",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0009",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0010",
+            "split": "test",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-43-0011",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "answer_accuracy": 0.8125,
+        "plan_exact_match": 0.8125,
+        "plan_step_f1": 0.8363215488215489,
+        "joint_success": 0.8125,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.03345724907063197,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.604166666666667,
+        "average_cost": 4.95
+      },
+      "axis_metrics": {
+        "clean": 1,
+        "transient": 1,
+        "ambiguous": 0.875,
+        "fallback": 1,
+        "irreversible": 1,
+        "combined": 0
+      },
+      "telemetry": {
+        "retries": 24,
+        "reflections": 0,
+        "skill_reuses": 219,
+        "verifications": 0,
+        "compressions": 0,
+        "memory_writes": 25
+      },
+      "trace": [
+        {
+          "task_id": "toolroute-l21-test-43-0000",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2222222222222222,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.4800000000000004,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0001",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator",
+            "maps",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0002",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0003",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0004",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0005",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator",
+            "maps",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0006",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2222222222222222,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.72,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "calendar"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0007",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0008",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0009",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0010",
+          "split": "test",
+          "axis": "ambiguous",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-43-0011",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "training": {
+        "split": "train",
+        "metrics": {
+          "answer_accuracy": 0.75,
+          "plan_exact_match": 0.75,
+          "plan_step_f1": 0.8078703703703703,
+          "joint_success": 0.75,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.0625,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.0,
+          "average_cost": 3.66
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.5,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 12,
+          "reflections": 0,
+          "skill_reuses": 61,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 21
+        },
+        "trace": []
+      },
+      "validation": {
+        "split": "validation",
+        "metrics": {
+          "answer_accuracy": 0.7916666666666666,
+          "plan_exact_match": 0.7916666666666666,
+          "plan_step_f1": 0.8274936868686869,
+          "joint_success": 0.7916666666666666,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.043668122270742356,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 4.770833333333333,
+          "average_cost": 4.345000000000001
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.75,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 0,
+          "skill_reuses": 179,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 27
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-validation-44-0000",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.8400000000000003,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0001",
+            "split": "validation",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.720000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0002",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0003",
+            "split": "validation",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.4,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0004",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.680000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0005",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calendar",
+              "calculator",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0006",
+            "split": "validation",
+            "axis": "ambiguous",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 4.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.52,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0007",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.3200000000000003,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0008",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.680000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calculator",
+              "resolver",
+              "search",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0009",
+            "split": "validation",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.720000000000001,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "weather",
+              "calculator",
+              "calculator",
+              "resolver",
+              "files",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0010",
+            "split": "validation",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.8888888888888888,
+            "has_failure": true,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "catalog",
+              "weather",
+              "search",
+              "calculator",
+              "resolver"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-validation-44-0011",
+            "split": "validation",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.3200000000000003,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "database",
+              "maps",
+              "catalog",
+              "search"
+            ]
+          }
+        ]
+      },
+      "test": {
+        "split": "test",
+        "metrics": {
+          "answer_accuracy": 0.8125,
+          "plan_exact_match": 0.8125,
+          "plan_step_f1": 0.8357387982387983,
+          "joint_success": 0.8125,
+          "recovery_success_rate": 0.6666666666666666,
+          "invalid_tool_rate": 0.03345724907063197,
+          "irreversible_error_rate": 0.0,
+          "average_tool_calls": 5.604166666666667,
+          "average_cost": 4.963333333333334
+        },
+        "axis_metrics": {
+          "clean": 1,
+          "transient": 1,
+          "ambiguous": 0.875,
+          "fallback": 1,
+          "irreversible": 1,
+          "combined": 0
+        },
+        "telemetry": {
+          "retries": 24,
+          "reflections": 0,
+          "skill_reuses": 219,
+          "verifications": 0,
+          "compressions": 0,
+          "memory_writes": 25
+        },
+        "trace": [
+          {
+            "task_id": "toolroute-l21-test-44-0000",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0001",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0002",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2222222222222222,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.72,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "calendar"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0003",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0004",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.24,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0005",
+            "split": "test",
+            "axis": "combined",
+            "answer_ok": false,
+            "plan_ok": false,
+            "joint_ok": false,
+            "plan_step_f1": 0.2,
+            "has_failure": true,
+            "tool_calls": 4.0,
+            "invalid_calls": 1.0,
+            "irreversible_errors": 0.0,
+            "cost": 3.64,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "calculator",
+              "maps",
+              "search"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0006",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 5.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 4.32,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0007",
+            "split": "test",
+            "axis": "transient",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9230769230769231,
+            "has_failure": true,
+            "tool_calls": 7.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 6.2,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0008",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "maps",
+              "database",
+              "search",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0009",
+            "split": "test",
+            "axis": "irreversible",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "validator",
+              "maps",
+              "database",
+              "catalog",
+              "weather",
+              "calculator"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0010",
+            "split": "test",
+            "axis": "fallback",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 0.9090909090909091,
+            "has_failure": true,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.16,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "search",
+              "validator",
+              "search",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          },
+          {
+            "task_id": "toolroute-l21-test-44-0011",
+            "split": "test",
+            "axis": "clean",
+            "answer_ok": true,
+            "plan_ok": true,
+            "joint_ok": true,
+            "plan_step_f1": 1.0,
+            "has_failure": false,
+            "tool_calls": 6.0,
+            "invalid_calls": 0.0,
+            "irreversible_errors": 0.0,
+            "cost": 5.36,
+            "source": "l2.1/spt/public-observation-tool-loop",
+            "calls": [
+              "calendar",
+              "search",
+              "validator",
+              "maps",
+              "database",
+              "catalog"
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "answer_accuracy": 0.8125,
+        "plan_exact_match": 0.8125,
+        "plan_step_f1": 0.8357387982387983,
+        "joint_success": 0.8125,
+        "recovery_success_rate": 0.6666666666666666,
+        "invalid_tool_rate": 0.03345724907063197,
+        "irreversible_error_rate": 0.0,
+        "average_tool_calls": 5.604166666666667,
+        "average_cost": 4.963333333333334
+      },
+      "axis_metrics": {
+        "clean": 1,
+        "transient": 1,
+        "ambiguous": 0.875,
+        "fallback": 1,
+        "irreversible": 1,
+        "combined": 0
+      },
+      "telemetry": {
+        "retries": 24,
+        "reflections": 0,
+        "skill_reuses": 219,
+        "verifications": 0,
+        "compressions": 0,
+        "memory_writes": 25
+      },
+      "trace": [
+        {
+          "task_id": "toolroute-l21-test-44-0000",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0001",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0002",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2222222222222222,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.72,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "calendar"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0003",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0004",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.24,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0005",
+          "split": "test",
+          "axis": "combined",
+          "answer_ok": false,
+          "plan_ok": false,
+          "joint_ok": false,
+          "plan_step_f1": 0.2,
+          "has_failure": true,
+          "tool_calls": 4.0,
+          "invalid_calls": 1.0,
+          "irreversible_errors": 0.0,
+          "cost": 3.64,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "calculator",
+            "maps",
+            "search"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0006",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 5.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 4.32,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0007",
+          "split": "test",
+          "axis": "transient",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9230769230769231,
+          "has_failure": true,
+          "tool_calls": 7.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 6.2,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0008",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "maps",
+            "database",
+            "search",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0009",
+          "split": "test",
+          "axis": "irreversible",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "validator",
+            "maps",
+            "database",
+            "catalog",
+            "weather",
+            "calculator"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0010",
+          "split": "test",
+          "axis": "fallback",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 0.9090909090909091,
+          "has_failure": true,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.16,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "search",
+            "validator",
+            "search",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        },
+        {
+          "task_id": "toolroute-l21-test-44-0011",
+          "split": "test",
+          "axis": "clean",
+          "answer_ok": true,
+          "plan_ok": true,
+          "joint_ok": true,
+          "plan_step_f1": 1.0,
+          "has_failure": false,
+          "tool_calls": 6.0,
+          "invalid_calls": 0.0,
+          "irreversible_errors": 0.0,
+          "cost": 5.36,
+          "source": "l2.1/spt/public-observation-tool-loop",
+          "calls": [
+            "calendar",
+            "search",
+            "validator",
+            "maps",
+            "database",
+            "catalog"
+          ]
+        }
+      ]
+    }
+  ],
+  "diagnostics": {
+    "split_episodes": {
+      "train": 24,
+      "validation": 48,
+      "test": 48
+    },
+    "total_episodes": 360,
+    "oracle_fields_exposed": false,
+    "guide_endpoint": "absent",
+    "split_family_overlap": false,
+    "test_route_depths": [
+      5,
+      6
+    ],
+    "public_observation_type": "CapabilityObservation",
+    "hidden_labels": [
+      "answer",
+      "allowed_steps",
+      "canonical_route"
+    ],
+    "fidelity": "shared no-oracle held-out capability benchmark"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_capability",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "held-out test, no guide/oracle; compare only within toolroute-l2.1-v1"
+  },
+  "provenance": {
+    "dataset_fingerprint": "fdcc0e5e4184be0fa8d6a2ef79daa1d3044cc6344fa3b6079cb6e0180ed6e5db",
+    "artifact_path": "docs/agent-research/2608.26563-spt/metrics/toolroute-l2-seeds42-44.json",
+    "original_code_commit": "current working tree"
+  }
+}
