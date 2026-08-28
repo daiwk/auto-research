@@ -5,9 +5,11 @@ from __future__ import annotations
 from contextlib import nullcontext
 from dataclasses import asdict, dataclass
 import json
+import math
 from pathlib import Path
 import random
 import re
+import statistics
 import time
 
 import numpy as np
@@ -64,6 +66,8 @@ class HFPostTrainingConfig:
             raise ValueError("training sizes and steps must be positive")
         if len(self.seeds) != 3:
             raise ValueError("checkpoint post-training requires exactly three evaluation seeds")
+        if len(set(self.seeds)) != 3:
+            raise ValueError("checkpoint post-training requires three distinct seeds")
 
 
 @dataclass(frozen=True)
@@ -167,12 +171,11 @@ class HFPostTrainingRunner:
 
     def run(self) -> tuple[dict, Path]:
         import torch
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoTokenizer
 
         config = self.config
-        random.seed(config.seeds[0]); np.random.seed(config.seeds[0]); torch.manual_seed(config.seeds[0])
-        source = str(config.resume_from or config.checkpoint_path or config.model_id)
-        local = config.resume_from is not None or config.checkpoint_path is not None
+        source = str(config.checkpoint_path or config.model_id)
+        local = config.checkpoint_path is not None
         kwargs = {"local_files_only": local or not config.allow_network, "trust_remote_code": False}
         if not local:
             kwargs["revision"] = config.model_revision
@@ -181,76 +184,57 @@ class HFPostTrainingRunner:
             tokenizer.pad_token = tokenizer.eos_token
         device = device_for(torch)
         precision, dtype = _precision(torch, device, config.mixed_precision)
-        model = AutoModelForCausalLM.from_pretrained(source, dtype=dtype, **kwargs).to(device)
-        reference = None
-        if config.objective == "dpo":
-            reference_source = str(config.checkpoint_path or config.model_id)
-            reference_kwargs = {
-                "local_files_only": config.checkpoint_path is not None or not config.allow_network,
-                "trust_remote_code": False,
-            }
-            if config.checkpoint_path is None:
-                reference_kwargs["revision"] = config.model_revision
-            reference = AutoModelForCausalLM.from_pretrained(
-                reference_source, dtype=dtype, **reference_kwargs
-            ).to(device).eval()
-            for parameter in reference.parameters():
-                parameter.requires_grad_(False)
         if config.dataset == "gsm8k":
             rows, evaluation_rows = load_gsm8k_sft(config), ()
         else:
             rows, evaluation_rows = load_ultrafeedback(config)
-        optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
-        start_step = 0
-        if config.resume_from:
-            state = torch.load(config.resume_from / "trainer-state.pt", map_location="cpu")
-            optimizer.load_state_dict(state["optimizer"])
-            start_step = int(state["step"])
         run_dir = config.output_dir / f"{config.objective}-{config.dataset}"
         run_dir.mkdir(parents=True, exist_ok=True)
-        history = []
-        model.train(); optimizer.zero_grad(set_to_none=True)
-        for step in range(start_step, config.steps):
-            batch = [rows[(step * config.batch_size + offset) % len(rows)] for offset in range(config.batch_size)]
-            context = _autocast(torch, device, precision)
-            with context:
-                losses = [
-                    _pair_loss(
-                        model, reference, tokenizer, row, device, config.maximum_length,
-                        config.objective,
-                    )
-                    for row in batch
-                ]
-                loss = torch.stack(losses).mean() / config.gradient_accumulation
-            loss.backward()
-            update = (step + 1) % config.gradient_accumulation == 0 or step + 1 == config.steps
-            if update:
-                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-                optimizer.step(); optimizer.zero_grad(set_to_none=True)
-            history.append({"step": step + 1, "loss": float(loss.detach().cpu())})
-            if (step + 1) % config.save_every == 0 or step + 1 == config.steps:
-                _save_checkpoint(model, tokenizer, optimizer, run_dir / f"checkpoint-{step + 1}", step + 1, torch)
-        metrics = (
-            _evaluate_gsm8k(model, tokenizer, config, device)
-            if config.dataset == "gsm8k"
-            else _evaluate_preferences(model, tokenizer, evaluation_rows, config, device)
-        )
+        seed_results = [
+            self._run_seed(
+                seed, source, kwargs, tokenizer, rows, evaluation_rows,
+                run_dir / f"seed-{seed}", torch, device, precision, dtype,
+            )
+            for seed in config.seeds
+        ]
+        metric_name = "accuracy" if config.dataset == "gsm8k" else "preference_accuracy"
         payload = {
-            "schema_version": 2,
+            "schema_version": 3,
             "config": {**asdict(config), **{
                 key: str(value) if isinstance(value, Path) else value
                 for key, value in asdict(config).items()
             }},
-            "metrics": metrics,
-            "history": history,
+            "seed_results": seed_results,
+            "metrics": {
+                "metric": metric_name,
+                "baseline": _aggregate([
+                    row["baseline"][metric_name] for row in seed_results
+                ]),
+                "final": _aggregate([
+                    row["final"][metric_name] for row in seed_results
+                ]),
+                **({
+                    "baseline_preference_margin": _aggregate([
+                        row["baseline"]["preference_margin"] for row in seed_results
+                    ]),
+                    "final_preference_margin": _aggregate([
+                        row["final"]["preference_margin"] for row in seed_results
+                    ]),
+                } if config.dataset == "ultrafeedback" else {}),
+            },
             "training": {
                 "backend": "transformers AutoModelForCausalLM",
                 "device": device.type,
                 "mixed_precision": precision,
                 "batch_size": config.batch_size,
                 "gradient_accumulation": config.gradient_accumulation,
-                "resumed_from_step": start_step,
+                "independent_checkpoint_updates": len(config.seeds),
                 "checkpoint_resume": True,
+            },
+            "evaluation_protocol": {
+                "three_independent_training_seeds": True,
+                "fixed_public_test_split": True,
+                "test_used_for_model_selection": False,
             },
             "provenance": {
                 "model_id": config.model_id,
@@ -265,6 +249,93 @@ class HFPostTrainingRunner:
             json.dumps(payload, ensure_ascii=False, indent=2, default=str) + "\n", encoding="utf-8"
         )
         return payload, run_dir
+
+    def _run_seed(
+        self, seed, source, kwargs, tokenizer, rows, evaluation_rows,
+        seed_dir, torch, device, precision, dtype,
+    ):
+        from transformers import AutoModelForCausalLM
+
+        config = self.config
+        random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+        seed_source = source
+        seed_kwargs = dict(kwargs)
+        resume = None
+        if config.resume_from:
+            candidate = config.resume_from / f"seed-{seed}"
+            resume_root = candidate if candidate.exists() else config.resume_from
+            checkpoints = sorted(
+                resume_root.glob("checkpoint-*"),
+                key=lambda path: int(path.name.rsplit("-", 1)[-1]),
+            )
+            resume = checkpoints[-1] if checkpoints else resume_root
+            seed_source = str(resume)
+            seed_kwargs = {"local_files_only": True, "trust_remote_code": False}
+        model = AutoModelForCausalLM.from_pretrained(
+            seed_source, dtype=dtype, **seed_kwargs
+        ).to(device)
+        reference = None
+        if config.objective == "dpo":
+            reference = AutoModelForCausalLM.from_pretrained(
+                source, dtype=dtype, **kwargs
+            ).to(device).eval()
+            for parameter in reference.parameters():
+                parameter.requires_grad_(False)
+        baseline = (
+            _evaluate_gsm8k(model, tokenizer, config, device, seed)
+            if config.dataset == "gsm8k"
+            else _evaluate_preferences(model, tokenizer, evaluation_rows, config, device)
+        )
+        optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
+        start_step = 0
+        if resume and (resume / "trainer-state.pt").exists():
+            state = torch.load(resume / "trainer-state.pt", map_location="cpu")
+            optimizer.load_state_dict(state["optimizer"])
+            start_step = int(state["step"])
+        history = []
+        model.train(); optimizer.zero_grad(set_to_none=True)
+        order = list(range(len(rows)))
+        random.Random(seed).shuffle(order)
+        for step in range(start_step, config.steps):
+            batch = [
+                rows[order[(step * config.batch_size + offset) % len(order)]]
+                for offset in range(config.batch_size)
+            ]
+            with _autocast(torch, device, precision):
+                losses = [
+                    _pair_loss(
+                        model, reference, tokenizer, row, device,
+                        config.maximum_length, config.objective,
+                    )
+                    for row in batch
+                ]
+                loss = torch.stack(losses).mean() / config.gradient_accumulation
+            loss.backward()
+            update = (step + 1) % config.gradient_accumulation == 0 or step + 1 == config.steps
+            if update:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                optimizer.step(); optimizer.zero_grad(set_to_none=True)
+            history.append({"step": step + 1, "loss": float(loss.detach().cpu())})
+            if (step + 1) % config.save_every == 0 or step + 1 == config.steps:
+                _save_checkpoint(
+                    model, tokenizer, optimizer,
+                    seed_dir / f"checkpoint-{step + 1}", step + 1, torch,
+                )
+        final = (
+            _evaluate_gsm8k(model, tokenizer, config, device, seed)
+            if config.dataset == "gsm8k"
+            else _evaluate_preferences(model, tokenizer, evaluation_rows, config, device)
+        )
+        result = {
+            "seed": seed, "baseline": baseline, "final": final,
+            "history": history, "resumed_from_step": start_step,
+        }
+        del model, optimizer, reference
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        return result
 
 
 def _precision(torch, device, requested):
@@ -319,40 +390,52 @@ def _save_checkpoint(model, tokenizer, optimizer, path, step, torch):
 def _evaluate_preferences(model, tokenizer, rows, config, device):
     model.eval(); selected = rows[:config.evaluation_examples]
     correct = 0
+    margins = []
     with __import__("torch").inference_mode():
         for row in selected:
             chosen, _ = _token_logprob(model, tokenizer, row.prompt, row.chosen, device, config.maximum_length)
             rejected, _ = _token_logprob(model, tokenizer, row.prompt, row.rejected, device, config.maximum_length)
             correct += int(chosen > rejected)
-    model.train()
-    return {"preference_accuracy": correct / len(selected), "evaluation_pairs": len(selected)}
-
-
-def _evaluate_gsm8k(model, tokenizer, config, device):
-    import torch
-    heldout = gsm8k(config.dataset_dir, config.allow_network)["test"][: config.evaluation_examples]
-    seed_rows = []
-    model.eval()
-    for seed in config.seeds:
-        torch.manual_seed(seed); correct = tokens = 0
-        for row in heldout:
-            prompt = f"Problem: {row['question']}\nShow concise reasoning, then write Answer:"
-            encoded = tokenizer(prompt, return_tensors="pt").to(device)
-            with torch.inference_mode():
-                output = model.generate(**encoded, max_new_tokens=96, do_sample=False)
-            generated = output[0, encoded["input_ids"].shape[1]:]
-            text = tokenizer.decode(generated, skip_special_tokens=True)
-            expected_match = re.search(r"####\s*(-?[\d,]+(?:\.\d+)?)", row["answer"])
-            actual = re.findall(r"(?:Answer\s*:\s*)?(-?[\d,]+(?:\.\d+)?)", text)
-            expected = expected_match.group(1).replace(",", "") if expected_match else ""
-            correct += int(bool(actual) and actual[-1].replace(",", "") == expected)
-            tokens += len(generated)
-        seed_rows.append({"seed": seed, "accuracy": correct / len(heldout), "tokens": tokens})
+            margins.append(float((chosen - rejected).detach().cpu()))
     model.train()
     return {
-        "accuracy": float(np.mean([row["accuracy"] for row in seed_rows])),
-        "accuracy_std": float(np.std([row["accuracy"] for row in seed_rows])),
-        "generated_tokens": float(np.mean([row["tokens"] for row in seed_rows])),
-        "seeds": list(config.seeds),
+        "preference_accuracy": correct / len(selected),
+        "preference_margin": float(np.mean(margins)),
+        "evaluation_pairs": len(selected),
+    }
+
+
+def _evaluate_gsm8k(model, tokenizer, config, device, seed):
+    import torch
+    heldout = gsm8k(config.dataset_dir, config.allow_network)["test"][: config.evaluation_examples]
+    model.eval()
+    torch.manual_seed(seed); correct = tokens = 0
+    for row in heldout:
+        prompt = f"Problem: {row['question']}\nShow concise reasoning, then write Answer:"
+        encoded = tokenizer(prompt, return_tensors="pt").to(device)
+        with torch.inference_mode():
+            output = model.generate(**encoded, max_new_tokens=96, do_sample=False)
+        generated = output[0, encoded["input_ids"].shape[1]:]
+        text = tokenizer.decode(generated, skip_special_tokens=True)
+        expected_match = re.search(r"####\s*(-?[\d,]+(?:\.\d+)?)", row["answer"])
+        actual = re.findall(r"(?:Answer\s*:\s*)?(-?[\d,]+(?:\.\d+)?)", text)
+        expected = expected_match.group(1).replace(",", "") if expected_match else ""
+        correct += int(bool(actual) and actual[-1].replace(",", "") == expected)
+        tokens += len(generated)
+    model.train()
+    return {
+        "accuracy": correct / len(heldout),
+        "generated_tokens": tokens,
+        "seed": seed,
         "evaluation_examples": len(heldout),
+    }
+
+
+def _aggregate(values):
+    mean = statistics.fmean(values)
+    std = statistics.stdev(values) if len(values) > 1 else 0.0
+    radius = 1.96 * std / math.sqrt(len(values))
+    return {
+        "mean": mean, "std": std,
+        "ci95_low": mean - radius, "ci95_high": mean + radius,
     }

@@ -236,7 +236,9 @@ auto-research evolve --model agent --dataset swebench-local \
 真实 checkpoint / executor 与具身训练入口：
 
 ```bash
-auto-research agent-policy-train --steps 6 --episodes 6 --device cuda
+auto-research agent-policy-train --steps 10 \
+  --train-episodes 10 --validation-episodes 4 --test-episodes 4 \
+  --seeds 42,43,44 --device cuda
 auto-research agent-matrix --episodes 12 --seeds 42,43,44
 auto-research embodied-post-train --dataset-root data/svla_so100_pickplace \
   --checkpoint-path checkpoints/smolvla_base \

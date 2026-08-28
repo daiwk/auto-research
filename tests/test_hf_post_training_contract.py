@@ -25,6 +25,16 @@ def test_checkpoint_training_rejects_mismatched_objective_or_unstable_seed_proto
         HFPostTrainingConfig(
             objective="orpo", dataset="ultrafeedback", seeds=(42,)
         )
+    with pytest.raises(ValueError, match="distinct"):
+        HFPostTrainingConfig(
+            objective="dpo", dataset="ultrafeedback", seeds=(42, 42, 43)
+        )
+
+
+def test_resume_contract_selects_latest_per_seed_checkpoint():
+    source = Path("src/auto_research/post_training/hf_runner.py").read_text(encoding="utf-8")
+    assert 'resume_root.glob("checkpoint-*")' in source
+    assert "checkpoints[-1]" in source
 
 
 def test_runner_source_contains_real_gpu_integrity_contracts():

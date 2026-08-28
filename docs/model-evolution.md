@@ -489,11 +489,37 @@ auto-research promote-evidence \
 `formal_comparison=true`，同时生成均值、样本标准差和 95% 置信区间；否则明确禁止稳定
 提升声明。
 
+真实 checkpoint 产物也可以作为下一轮候选的**提案先验**，但不能把旧指标直接当作新
+fitness：
+
+```bash
+auto-research evolve --model agent --dataset toolroute-l2.1 \
+  --direction "继续验证 Agent Lightning policy" \
+  --checkpoint-evidence docs/experiments/a100-promotion/agent-lightning-seeds42-44.json \
+  --generations 3 --population 8 --seeds 42,43,44
+
+auto-research evolve --model post-training --dataset arithmetic-smoke \
+  --direction "比较 DPO 与 ORPO" \
+  --checkpoint-evidence docs/experiments/a100-promotion/dpo-ultrafeedback-seeds42-44.json \
+  --checkpoint-evidence docs/experiments/a100-promotion/orpo-ultrafeedback-seeds42-44.json \
+  --generations 3 --population 6 --seeds 42,43,44
+```
+
+加载器只接受至少三个不同 seed 的 schema-v3 产物；被晋级的方法只改变 proposal 顺序。
+每个 genome 仍由当前数据、预算和 evaluator 从头评估，checkpoint 产物中的 accuracy、CKA
+或 margin 永远不会复制到 fitness。来源、seed 与这条政策同时写入 `research_memory`，便于
+看板审计。
+
 2026-08-24 的本地三 seed 收口记录见
 [`experiments/remaining-p1-20260824.json`](experiments/remaining-p1-20260824.json)：GenRec
 和 Agent evolve 均完成两代机制验证；RankMixer、Switch Transformer、GRPO 与 Agent
 Lightning 四个代表目标完成三 seed 晋级。该文件保留缩步数、保留 catalog 和确定性
 mini-suite 边界，不把工程 smoke 写成论文级结论。
+
+2026-08-28 的真实 checkpoint 三 seed 晋级结果见
+[A100 高保真证据晋级](evidence-promotion.md)。该轮 Agent joint success 和 DPO/ORPO
+preference accuracy 均未提升；多模态 CKA 与邻域重合率同样未提升。负结果仍可作为
+“值得由统一 evaluator 复核”的候选来源，但不构成优先胜出证据。
 
 ## 数据规模
 

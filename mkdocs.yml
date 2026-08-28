@@ -71,6 +71,7 @@ nav:
       - 架构与扩展: architecture.md
       - GPU 与 Linux CPU: runtime.md
       - A30 GPU 回溯验证: gpu-validation.md
+      - A100 高保真证据晋级: evidence-promotion.md
       - 本地预览与发布: getting-started.md
       - 设计记录: design/automated-w2s-adoption.md
 
