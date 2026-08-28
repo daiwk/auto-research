@@ -64,7 +64,7 @@ AUTO_RESEARCH_DEVICE=cuda python -m \
 
 该路径受 `python scripts/validate_gpu_evidence.py` 合入门禁约束：必须先在真实 A100/A30 上跑通并提交去机器标识的 receipt。
 
-2026-08-28 的 A30 验证中，held-out linear CKA 从 **0.4633 提升到 0.4898（+5.72%）**；训练内 validation CKA 为 0.6204，峰值显存约 4.13 GiB。POPE 正例计数的 1-NN 诊断已饱和为 1.0，因此不作为主指标，也不用于选择模型。
+2026-08-28 的 A30 验证中，held-out linear CKA 从 **0.4633 提升到 0.4898（+5.72%）**；训练内 validation CKA 为 0.6204，峰值显存约 4.13 GiB。POPE 正例计数的 1-NN 诊断已饱和为 1.0，因此不作为主指标，也不用于选择模型。完整的[标准指标文件](metrics/pope-checkpoint-a30-seed42.json)与[去机器标识 GPU 验证凭证](../../gpu-validations/mllmclip-a30-20260828.json)已纳入 CI 门禁；不提交 checkpoint、缓存和原始预测。
 
 ### NumPy 机制诊断（非主结果）
 

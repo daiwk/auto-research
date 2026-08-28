@@ -198,3 +198,7 @@ export AUTO_RESEARCH_CPU_THREADS=16
 `python scripts/validate_gpu_evidence.py`。对应实现必须先在真实 NVIDIA A100 或 A30 上执行，
 再提交一个去机器标识的 receipt；receipt 只保留 accelerator 型号、公开 checkpoint revision、
 公开数据集、命令、seed、指标和 commit，不允许写 hostname、SSH alias、用户名、驱动或构建字符串。
+
+除强制门禁外，`docs/gpu-validations/rankmixer-dceo-a30-20260828.json` 还保存了
+DCEO Evolve 算子的真实 CUDA 前向、反向与优化器烟测记录；它不替代 MovieLens 上的正式
+CPU 公平比较。

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:mllmclip",
+  "paper": {
+    "arxiv_id": "2608.25575",
+    "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations"
+  },
+  "dataset": {
+    "name": "POPE adversarial / COCO val2014",
+    "train_examples": 128,
+    "test_examples": 64
+  },
+  "setup": {
+    "seed": 42,
+    "batch_size": 8,
+    "steps": 40,
+    "teacher": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct@067788b187b95ebe7b2e040b3e4299e342e5b8fd",
+    "student": "openai/clip-vit-base-patch32@3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "selection": "train-only 80/20 fit/validation split; held-out test evaluated once"
+  },
+  "metrics": {
+    "baseline_linear_cka": 0.463273286819458,
+    "method_linear_cka": 0.4897761940956116,
+    "relative_linear_cka_percent": 5.721704546717681,
+    "best_validation_cka": 0.6203527450561523,
+    "diagnostic_baseline_knn_accuracy": 1.0,
+    "diagnostic_method_knn_accuracy": 1.0,
+    "duration_seconds": 70.727,
+    "peak_gpu_memory_mb": 4230.86474609375
+  },
+  "diagnostics": {
+    "knn_saturated": true,
+    "knn_used_for_selection": false,
+    "test_used_for_selection": false,
+    "selected_ridge": 0.1
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集真实 checkpoint 验证",
+    "seeds": [
+      42
+    ],
+    "budget": "128 train / 64 held-out test images, 40 projection steps",
+    "formal_comparison": false,
+    "claim_policy": "single-seed real-checkpoint engineering validation; do not claim a stable paper-scale improvement"
+  },
+  "provenance": {
+    "created_at": "2026-08-28",
+    "code_commit": "bee4bee037c5f09db383ddb3ce659474cb7a25a3",
+    "original_code_commit": "bee4bee037c5f09db383ddb3ce659474cb7a25a3",
+    "dataset_fingerprint": "pope-adversarial-coco-val2014-public-subset-sorted-first192-v1",
+    "artifact_path": "docs/reproductions/2608.25575-mllmclip/metrics/pope-checkpoint-a30-seed42.json",
+    "gpu_validation_artifact": "docs/gpu-validations/mllmclip-a30-20260828.json",
+    "checkpoint_committed": false,
+    "raw_predictions_committed": false
+  },
+  "diagnostic_only": false
+}
