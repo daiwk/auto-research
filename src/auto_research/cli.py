@@ -189,6 +189,10 @@ def build_parser() -> argparse.ArgumentParser:
                         help="versioned fair-evaluation protocol id")
     evolve.add_argument("--negative-memory", type=Path,
                         help="persistent exact-context negative-result store")
+    evolve.add_argument(
+        "--checkpoint-evidence", type=Path, action="append", default=[],
+        help="three-seed real-checkpoint artifact used as a proposal prior; repeatable",
+    )
     evolve.add_argument("--promotion-min-seeds", type=int, default=1)
     evolve.add_argument("--confidence-z", type=float, default=1.0, help="uncertainty penalty for champion selection")
     evolve.add_argument("--maximum-users", type=int, help="explicit smoke-test user limit")
@@ -396,10 +400,12 @@ def build_parser() -> argparse.ArgumentParser:
         "--model-revision", default="12fd25f77366fa6b3b4b768ec3050bf629380bac"
     )
     lightning_policy.add_argument("--checkpoint-path", type=Path)
-    lightning_policy.add_argument("--steps", type=int, default=6)
-    lightning_policy.add_argument("--episodes", type=int, default=6)
+    lightning_policy.add_argument("--steps", type=int, default=10)
+    lightning_policy.add_argument("--train-episodes", type=int, default=10)
+    lightning_policy.add_argument("--validation-episodes", type=int, default=4)
+    lightning_policy.add_argument("--test-episodes", type=int, default=4)
     lightning_policy.add_argument("--learning-rate", type=float, default=1e-5)
-    lightning_policy.add_argument("--seed", type=int, default=42)
+    lightning_policy.add_argument("--seeds", default="42,43,44")
     lightning_policy.add_argument("--maximum-length", type=int, default=512)
     lightning_policy.add_argument("--offline", action="store_true")
     lightning_policy.add_argument(
@@ -1025,6 +1031,7 @@ def main(argv: list[str] | None = None) -> int:
                 reasoning_checkpoint_path=args.reasoning_checkpoint_path,
                 evaluation_protocol_id=args.evaluation_protocol,
                 negative_memory_path=args.negative_memory,
+                checkpoint_evidence=tuple(args.checkpoint_evidence),
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             result_artifact = run_dir / "result.json"
@@ -1360,14 +1367,18 @@ def main(argv: list[str] | None = None) -> int:
                 model_revision=args.model_revision,
                 checkpoint_path=args.checkpoint_path,
                 steps=args.steps,
-                episodes=args.episodes,
+                train_episodes=args.train_episodes,
+                validation_episodes=args.validation_episodes,
+                test_episodes=args.test_episodes,
                 learning_rate=args.learning_rate,
-                seed=args.seed,
+                seeds=tuple(
+                    int(value) for value in args.seeds.split(",") if value.strip()
+                ),
                 device=args.device or "cuda",
                 offline=args.offline,
                 maximum_length=args.maximum_length,
             ))
-            print(json.dumps({"baseline": payload["baseline"], "final": payload["final"], "metrics": str(path)}))
+            print(json.dumps({"aggregate": payload["aggregate"], "metrics": str(path)}))
             return 0
         config = _run_config(args)
         result, run_dir = ResearchRunner(config).run()

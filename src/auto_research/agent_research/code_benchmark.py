@@ -21,10 +21,10 @@ class CodeTask:
     correct_patch: str
 
 
-def build_code_benchmark(episodes: int) -> tuple[CodeTask, ...]:
+def _code_fixtures() -> tuple[CodeTask, ...]:
     fixtures = (
         CodeTask(
-            "mean", "numeric", "mean() truncates non-integral results",
+            "mean", "numeric-mean", "mean() truncates non-integral results",
             "def mean(values):\n    return sum(values) // len(values)\n",
             (
                 "import unittest\nfrom solution import mean\n\n"
@@ -37,7 +37,7 @@ def build_code_benchmark(episodes: int) -> tuple[CodeTask, ...]:
             "def mean(values):\n    return sum(values) / len(values)\n",
         ),
         CodeTask(
-            "clamp", "boundary", "clamp() reverses the lower/upper bounds",
+            "clamp", "boundary-clamp", "clamp() reverses the lower/upper bounds",
             "def clamp(value, low, high):\n    return max(high, min(low, value))\n",
             (
                 "import unittest\nfrom solution import clamp\n\n"
@@ -51,7 +51,7 @@ def build_code_benchmark(episodes: int) -> tuple[CodeTask, ...]:
             "def clamp(value, low, high):\n    return max(low, min(high, value))\n",
         ),
         CodeTask(
-            "chunks", "off-by-one", "chunks() drops the final partial chunk",
+            "chunks", "off-by-one-chunks", "chunks() drops the final partial chunk",
             (
                 "def chunks(values, size):\n"
                 "    return [values[i:i + size] for i in range(0, len(values) - size, size)]\n"
@@ -72,15 +72,121 @@ def build_code_benchmark(episodes: int) -> tuple[CodeTask, ...]:
                 "    return [values[i:i + size] for i in range(0, len(values), size)]\n"
             ),
         ),
+        CodeTask(
+            "dedupe", "state-order", "dedupe() loses the original item order",
+            "def dedupe(values):\n    return list(set(values))\n",
+            (
+                "import unittest\nfrom solution import dedupe\n\n"
+                "class TestDedupe(unittest.TestCase):\n"
+                "    def test_order(self): self.assertEqual(dedupe([3,1,3,2,1]), [3,1,2])\n"
+                "    def test_empty(self): self.assertEqual(dedupe([]), [])\n"
+                "\nif __name__ == '__main__': unittest.main()\n"
+            ),
+            "def dedupe(values):\n    return sorted(set(values))\n",
+            "def dedupe(values):\n    return list(dict.fromkeys(values))\n",
+        ),
+        CodeTask(
+            "safe-divide", "exception-zero", "safe_divide() raises on a zero denominator",
+            "def safe_divide(left, right):\n    return left / right\n",
+            (
+                "import unittest\nfrom solution import safe_divide\n\n"
+                "class TestSafeDivide(unittest.TestCase):\n"
+                "    def test_zero(self): self.assertIsNone(safe_divide(3, 0))\n"
+                "    def test_value(self): self.assertEqual(safe_divide(6, 2), 3)\n"
+                "\nif __name__ == '__main__': unittest.main()\n"
+            ),
+            "def safe_divide(left, right):\n    return 0 if right == 0 else left / right\n",
+            "def safe_divide(left, right):\n    return None if right == 0 else left / right\n",
+        ),
+        CodeTask(
+            "flatten", "nested-flatten", "flatten() keeps nested lists instead of their values",
+            "def flatten(rows):\n    return list(rows)\n",
+            (
+                "import unittest\nfrom solution import flatten\n\n"
+                "class TestFlatten(unittest.TestCase):\n"
+                "    def test_rows(self): self.assertEqual(flatten([[1,2],[],[3]]), [1,2,3])\n"
+                "\nif __name__ == '__main__': unittest.main()\n"
+            ),
+            "def flatten(rows):\n    return sum(rows)\n",
+            "def flatten(rows):\n    return [value for row in rows for value in row]\n",
+        ),
+        CodeTask(
+            "window", "boundary-window", "windows() emits a short trailing window",
+            (
+                "def windows(values, size):\n"
+                "    return [values[i:i + size] for i in range(len(values))]\n"
+            ),
+            (
+                "import unittest\nfrom solution import windows\n\n"
+                "class TestWindows(unittest.TestCase):\n"
+                "    def test_full_only(self): self.assertEqual(windows([1,2,3,4], 3), [[1,2,3],[2,3,4]])\n"
+                "\nif __name__ == '__main__': unittest.main()\n"
+            ),
+            (
+                "def windows(values, size):\n"
+                "    return [values[i:i + size] for i in range(0, len(values), size)]\n"
+            ),
+            (
+                "def windows(values, size):\n"
+                "    return [values[i:i + size] for i in range(len(values) - size + 1)]\n"
+            ),
+        ),
+        CodeTask(
+            "parse-bool", "parsing-bool", "parse_bool() treats every non-empty string as true",
+            "def parse_bool(value):\n    return bool(value)\n",
+            (
+                "import unittest\nfrom solution import parse_bool\n\n"
+                "class TestParseBool(unittest.TestCase):\n"
+                "    def test_false(self): self.assertFalse(parse_bool('false'))\n"
+                "    def test_true(self): self.assertTrue(parse_bool(' YES '))\n"
+                "\nif __name__ == '__main__': unittest.main()\n"
+            ),
+            "def parse_bool(value):\n    return value == 'true'\n",
+            "def parse_bool(value):\n    return value.strip().lower() in {'true', 'yes', '1'}\n",
+        ),
+        CodeTask(
+            "median", "numeric-median", "median() chooses the upper middle value for even inputs",
+            "def median(values):\n    ordered = sorted(values)\n    return ordered[len(ordered) // 2]\n",
+            (
+                "import unittest\nfrom solution import median\n\n"
+                "class TestMedian(unittest.TestCase):\n"
+                "    def test_even(self): self.assertEqual(median([1,4,2,3]), 2.5)\n"
+                "    def test_odd(self): self.assertEqual(median([3,1,2]), 2)\n"
+                "\nif __name__ == '__main__': unittest.main()\n"
+            ),
+            "def median(values):\n    return sum(values) / len(values)\n",
+            (
+                "def median(values):\n"
+                "    ordered = sorted(values)\n"
+                "    middle = len(ordered) // 2\n"
+                "    return ordered[middle] if len(ordered) % 2 else (ordered[middle-1] + ordered[middle]) / 2\n"
+            ),
+        ),
     )
+    return fixtures
+
+
+def build_code_benchmark(
+    episodes: int, split: str = "all",
+) -> tuple[CodeTask, ...]:
+    fixtures = _code_fixtures()
+    splits = {
+        "train": fixtures[:5],
+        "validation": fixtures[5:7],
+        "test": fixtures[7:],
+        "all": fixtures,
+    }
+    if split not in splits:
+        raise ValueError(f"unsupported code benchmark split: {split}")
+    selected = splits[split]
     return tuple(
         CodeTask(
-            f"swebench-local-{index:04d}", fixture.family, fixture.issue,
+            f"swebench-local-{split}-{index:04d}", fixture.family, fixture.issue,
             fixture.source, fixture.tests, fixture.wrong_patch,
             fixture.correct_patch,
         )
         for index in range(episodes)
-        for fixture in (fixtures[index % len(fixtures)],)
+        for fixture in (selected[index % len(selected)],)
     )
 
 

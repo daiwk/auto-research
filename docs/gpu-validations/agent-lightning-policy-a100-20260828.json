@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "adapter_key": "agent-lightning-policy",
+  "validated_at": "2026-08-28",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "auto-research", "agent-policy-train",
+    "--model-id", "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "--model-revision", "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "--steps", "8", "--train-episodes", "10", "--validation-episodes", "4",
+    "--test-episodes", "4", "--seeds", "42,43,44", "--device", "cuda"
+  ],
+  "dataset": {"name": "local isolated code benchmark", "train_families": 5, "validation_families": 2, "test_families": 2},
+  "checkpoint": {"model_id": "HuggingFaceTB/SmolLM2-135M-Instruct", "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"},
+  "result": "passed",
+  "metrics": {"seeds": [42, 43, 44], "baseline_joint_success_mean": 0.5, "final_joint_success_mean": 0.5},
+  "provenance": {
+    "commit": "e88b5aa4b3d96ed07d8890c747abfb97e0dd89c8",
+    "artifact_path": "docs/gpu-validations/agent-lightning-policy-a100-20260828.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

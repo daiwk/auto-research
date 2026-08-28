@@ -21,6 +21,9 @@ from .providers import get_provider
 from .report import write_evolution_artifacts
 from .research_memory import methodology_order, update_research_memory, verify_trial
 from .statistics import decide_experiment
+from .checkpoint_evidence import (
+    evidence_summary, load_checkpoint_evidence, promoted_operators,
+)
 from ..runtime import configure_runtime
 from ..negative_results import NegativeResult, NegativeResultStore, classify_negative
 
@@ -86,6 +89,16 @@ class ModelEvolutionEngine:
         rng = random.Random(config.seeds[0])
         seen = {_fingerprint(trial.genome) for trial in result.trials}
         architectures = allowed_architectures(config.model, config.direction, papers)
+        checkpoint_records = load_checkpoint_evidence(tuple(
+            path if path.is_absolute() else (self.project_dir / path).resolve()
+            for path in config.checkpoint_evidence
+        ))
+        promoted = promoted_operators(checkpoint_records, config.model)
+        architectures = list(dict.fromkeys((*promoted, *architectures)))
+        if checkpoint_records:
+            result.research_memory["checkpoint_evidence"] = evidence_summary(
+                checkpoint_records
+            )
         negative_store = NegativeResultStore(
             (config.negative_memory_path or (self.project_dir / ".auto-research/negative-results.json")).resolve()
         )

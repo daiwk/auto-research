@@ -1,0 +1,27 @@
+{
+  "schema_version": 3,
+  "config": {
+    "objective": "dpo",
+    "dataset": "ultrafeedback",
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "dataset_revision": "292c16329d921287c4166934cac1a6ad1e13a6c5",
+    "steps": 40,
+    "maximum_examples": 64,
+    "evaluation_examples": 24,
+    "seeds": [42, 43, 44]
+  },
+  "seed_results": [
+    {"seed": 42, "baseline": {"preference_accuracy": 0.3333333333, "preference_margin": -49.0416667}, "final": {"preference_accuracy": 0.3333333333, "preference_margin": -48.375}},
+    {"seed": 43, "baseline": {"preference_accuracy": 0.3333333333, "preference_margin": -49.0416667}, "final": {"preference_accuracy": 0.3333333333, "preference_margin": -49.0416667}},
+    {"seed": 44, "baseline": {"preference_accuracy": 0.3333333333, "preference_margin": -49.0416667}, "final": {"preference_accuracy": 0.3333333333, "preference_margin": -49.125}}
+  ],
+  "metrics": {
+    "metric": "preference_accuracy",
+    "baseline": {"mean": 0.3333333333, "std": 0.0, "ci95_low": 0.3333333333, "ci95_high": 0.3333333333},
+    "final": {"mean": 0.3333333333, "std": 0.0, "ci95_low": 0.3333333333, "ci95_high": 0.3333333333},
+    "baseline_preference_margin": {"mean": -49.0416667, "std": 0.0, "ci95_low": -49.0416667, "ci95_high": -49.0416667},
+    "final_preference_margin": {"mean": -48.8472222, "std": 0.4110736, "ci95_low": -49.3123958, "ci95_high": -48.3820487}
+  },
+  "evaluation_protocol": {"three_independent_training_seeds": true, "fixed_public_test_split": true, "test_used_for_model_selection": false}
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 3,
+  "task": "ag-001-agent-lightning-checkpoint-policy",
+  "config": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "steps": 8,
+    "train_episodes": 10,
+    "validation_episodes": 4,
+    "test_episodes": 4,
+    "seeds": [42, 43, 44]
+  },
+  "seed_results": [
+    {"seed": 42, "baseline": {"joint_success": 0.5}, "final": {"joint_success": 0.5}},
+    {"seed": 43, "baseline": {"joint_success": 0.5}, "final": {"joint_success": 0.5}},
+    {"seed": 44, "baseline": {"joint_success": 0.5}, "final": {"joint_success": 0.5}}
+  ],
+  "aggregate": {
+    "baseline_joint_success": {"mean": 0.5, "std": 0.0, "ci95_low": 0.5, "ci95_high": 0.5},
+    "final_joint_success": {"mean": 0.5, "std": 0.0, "ci95_low": 0.5, "ci95_high": 0.5}
+  },
+  "evaluation_protocol": {
+    "train_split": "five bug families",
+    "validation_split": "two disjoint bug families; checkpoint selection only",
+    "test_split": "two disjoint bug families; evaluated after selection",
+    "three_independent_training_seeds": true,
+    "test_used_for_model_selection": false
+  },
+  "claim_boundary": "Real checkpoint update and local executor bridge validation only; not SWE-bench evidence."
+}

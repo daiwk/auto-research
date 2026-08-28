@@ -6,7 +6,9 @@ import argparse
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import json
+import math
 from pathlib import Path
+import statistics
 import time
 from typing import Any
 
@@ -30,7 +32,8 @@ class CheckpointConfig:
     batch_size: int = 8
     steps: int = 40
     learning_rate: float = 3e-3
-    seed: int = 42
+    seeds: tuple[int, ...] = (42, 43, 44)
+    seed: int | None = None
 
 
 def _normalize(values, torch):
@@ -53,6 +56,23 @@ def _knn_accuracy(train, train_labels, test, test_labels, torch) -> float:
     return float((predictions == test_labels).float().mean().cpu())
 
 
+def _neighbor_overlap(left, right, torch, k: int = 5) -> float:
+    count = len(left)
+    if count < 2:
+        return 0.0
+    k = min(k, count - 1)
+    left_scores = _normalize(left, torch) @ _normalize(left, torch).T
+    right_scores = _normalize(right, torch) @ _normalize(right, torch).T
+    left_scores.fill_diagonal_(-float("inf"))
+    right_scores.fill_diagonal_(-float("inf"))
+    left_neighbors = left_scores.topk(k, dim=-1).indices
+    right_neighbors = right_scores.topk(k, dim=-1).indices
+    overlap = (
+        left_neighbors.unsqueeze(-1) == right_neighbors.unsqueeze(-2)
+    ).any(-1).float().mean()
+    return float(overlap.cpu())
+
+
 def fit_projection(train_student, train_teacher, test_student, test_teacher,
                    train_labels, test_labels, config: CheckpointConfig, torch, device):
     projection = torch.nn.Linear(
@@ -61,8 +81,15 @@ def fit_projection(train_student, train_teacher, test_student, test_teacher,
     train_student = train_student.to(device)
     train_teacher = train_teacher.to(device)
     split = max(2, int(0.8 * len(train_student)))
-    fit_x, validation_x = train_student[:split].float(), train_student[split:].float()
-    fit_y, validation_y = train_teacher[:split].float(), train_teacher[split:].float()
+    generator = torch.Generator(device="cpu").manual_seed(
+        config.seed if config.seed is not None else config.seeds[0]
+    )
+    order = torch.randperm(len(train_student), generator=generator)
+    fit_indices, validation_indices = order[:split], order[split:]
+    fit_x = train_student[fit_indices].float()
+    validation_x = train_student[validation_indices].float()
+    fit_y = train_teacher[fit_indices].float()
+    validation_y = train_teacher[validation_indices].float()
     # Choose ridge initialization on an internal validation slice.  The held-out
     # test tensors below are never consulted by model selection.
     identity = torch.eye(fit_x.shape[1], device=device)
@@ -113,21 +140,34 @@ def fit_projection(train_student, train_teacher, test_student, test_teacher,
     with torch.inference_mode():
         method_train = projection(train_student)
         method_test = projection(test_student.to(device))
+    label_classes = int(torch.unique(train_labels).numel())
+    baseline_knn = (
+        _knn_accuracy(
+            baseline_train, train_labels.to(device), baseline_test,
+            test_labels.to(device), torch,
+        ) if label_classes > 1 else None
+    )
+    method_knn = (
+        _knn_accuracy(
+            method_train, train_labels.to(device), method_test,
+            test_labels.to(device), torch,
+        ) if label_classes > 1 else None
+    )
     return {
         "initial_loss": initial_loss,
         "final_loss": losses[-1],
         "baseline": {
             "linear_cka": linear_cka(baseline_test, test_teacher.to(device), torch),
-            "knn_accuracy": _knn_accuracy(
-                baseline_train, train_labels.to(device), baseline_test,
-                test_labels.to(device), torch,
+            "knn_accuracy": baseline_knn,
+            "neighbor_overlap_at_5": _neighbor_overlap(
+                baseline_test, test_teacher.to(device), torch,
             ),
         },
         "method": {
             "linear_cka": linear_cka(method_test, test_teacher.to(device), torch),
-            "knn_accuracy": _knn_accuracy(
-                method_train, train_labels.to(device), method_test,
-                test_labels.to(device), torch,
+            "knn_accuracy": method_knn,
+            "neighbor_overlap_at_5": _neighbor_overlap(
+                method_test, test_teacher.to(device), torch,
             ),
         },
         "parameters": sum(parameter.numel() for parameter in projection.parameters()),
@@ -135,6 +175,8 @@ def fit_projection(train_student, train_teacher, test_student, test_teacher,
             "selected_ridge": selected_ridge,
             "best_validation_cka": best_validation_cka,
             "test_used_for_selection": False,
+            "label_classes": label_classes,
+            "label_diagnostic_valid": label_classes > 1,
         },
     }
 
@@ -167,6 +209,9 @@ def _features(images, processor, model, *, teacher: bool, torch, device, batch_s
                 value = model.get_image_features(
                     pixel_values=inputs["pixel_values"].to(device)
                 )
+                # Transformers 5 may return a structured pooling output while
+                # earlier releases returned the tensor directly.
+                value = getattr(value, "pooler_output", value)
             vectors.append(value.float().cpu())
     return torch.cat(vectors)
 
@@ -216,8 +261,9 @@ def run_checkpoint_distillation(config: CheckpointConfig) -> dict[str, Any]:
     from transformers import AutoModel, AutoModelForImageTextToText, AutoProcessor
 
     device = device_for(torch, "cuda")
-    torch.manual_seed(config.seed)
-    torch.cuda.manual_seed_all(config.seed)
+    seeds = (config.seed,) if config.seed is not None else config.seeds
+    if len(seeds) < 3 and config.seed is None:
+        raise ValueError("formal checkpoint distillation requires at least three seeds")
     teacher_revision = (
         config.teacher_revision if config.teacher_path else
         model_info(config.teacher_id, revision=config.teacher_revision).sha
@@ -268,12 +314,33 @@ def run_checkpoint_distillation(config: CheckpointConfig) -> dict[str, Any]:
         test_images, student_processor, student, teacher=False, torch=torch,
         device=device, batch_size=config.batch_size,
     )
-    fit = fit_projection(
-        train_student, train_teacher, test_student, test_teacher,
-        train_labels, test_labels, config, torch, device,
-    )
+    seed_results = []
+    for seed in seeds:
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        seed_config = CheckpointConfig(**{**asdict(config), "seed": seed})
+        fit = fit_projection(
+            train_student, train_teacher, test_student, test_teacher,
+            train_labels, test_labels, seed_config, torch, device,
+        )
+        seed_results.append({"seed": seed, **fit})
+    first = seed_results[0]
+    aggregate = {
+        "baseline_linear_cka": _aggregate([
+            row["baseline"]["linear_cka"] for row in seed_results
+        ]),
+        "method_linear_cka": _aggregate([
+            row["method"]["linear_cka"] for row in seed_results
+        ]),
+        "baseline_neighbor_overlap_at_5": _aggregate([
+            row["baseline"]["neighbor_overlap_at_5"] for row in seed_results
+        ]),
+        "method_neighbor_overlap_at_5": _aggregate([
+            row["method"]["neighbor_overlap_at_5"] for row in seed_results
+        ]),
+    }
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "method": "mllmclip-real-checkpoint-cka",
         "dataset": {
             "name": dataset_name, "train_examples": config.train_examples,
@@ -290,7 +357,18 @@ def run_checkpoint_distillation(config: CheckpointConfig) -> dict[str, Any]:
             "annotations": config.annotations.name if config.annotations else None,
             "image_root": "configured public image root" if config.image_root else None,
         },
-        "metrics": fit,
+        "metrics": {
+            "baseline": first["baseline"],
+            "method": first["method"],
+            "seed_results": seed_results,
+            "aggregate": aggregate,
+        },
+        "evaluation_protocol": {
+            "feature_extraction_reused_across_seeds": True,
+            "independent_projection_initialization_and_train_validation_split": True,
+            "test_used_for_selection": False,
+            "seeds": list(seeds),
+        },
         "runtime": {
             "accelerator": torch.cuda.get_device_name(device),
             "duration_seconds": time.perf_counter() - started,
@@ -305,6 +383,13 @@ def run_checkpoint_distillation(config: CheckpointConfig) -> dict[str, Any]:
     config.output.parent.mkdir(parents=True, exist_ok=True)
     config.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
     return payload
+
+
+def _aggregate(values: list[float]) -> dict[str, float]:
+    mean = statistics.fmean(values)
+    std = statistics.stdev(values) if len(values) > 1 else 0.0
+    radius = 1.96 * std / math.sqrt(len(values))
+    return {"mean": mean, "std": std, "ci95_low": mean - radius, "ci95_high": mean + radius}
 
 
 def main() -> int:
@@ -324,9 +409,12 @@ def main() -> int:
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--steps", type=int, default=40)
     parser.add_argument("--learning-rate", type=float, default=3e-3)
-    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--seeds", default="42,43,44")
+    parser.add_argument("--seed", type=int, help="legacy one-seed diagnostic mode")
     args = parser.parse_args()
-    payload = run_checkpoint_distillation(CheckpointConfig(**vars(args)))
+    values = vars(args)
+    values["seeds"] = tuple(int(value) for value in values["seeds"].split(",") if value)
+    payload = run_checkpoint_distillation(CheckpointConfig(**values))
     print(json.dumps(payload["metrics"], ensure_ascii=False, indent=2))
     return 0
 

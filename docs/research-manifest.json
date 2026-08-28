@@ -3467,21 +3467,24 @@
           "POPE adversarial / COCO val2014 checkpoint subset",
           "MovieLens-1M diagnostic proxy"
         ],
-        "baseline": "frozen CLIP features with an untrained matched projection",
+        "baseline": "frozen CLIP features with a validation-selected ridge projection",
         "metrics": [
           "linear CKA",
+          "neighbor overlap@5",
           "training loss",
           "peak GPU memory"
         ],
         "default_seeds": [
-          42
+          42,
+          43,
+          44
         ],
         "budget": "steps=40",
         "device_capabilities": [
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/mllmclip-a30-20260828.json",
+        "gpu_validation_artifact": "docs/gpu-validations/mllmclip-a100-20260828.json",
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []

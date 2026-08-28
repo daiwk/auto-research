@@ -3,8 +3,10 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 import importlib.metadata
 import json
+import math
 from pathlib import Path
 import random
+import statistics
 import time
 from typing import Any
 
@@ -22,19 +24,26 @@ class LightningPolicyConfig:
     model_id: str = SMOLLM2_MODEL_ID
     model_revision: str = SMOLLM2_REVISION
     checkpoint_path: Path | None = None
-    steps: int = 6
-    episodes: int = 6
+    steps: int = 10
+    train_episodes: int = 10
+    validation_episodes: int = 4
+    test_episodes: int = 4
     learning_rate: float = 1e-5
-    seed: int = 42
+    seeds: tuple[int, ...] = (42, 43, 44)
     device: str = "cuda"
     offline: bool = False
     maximum_length: int = 512
 
     def validate(self) -> None:
-        if min(self.steps, self.episodes, self.maximum_length) < 1:
-            raise ValueError("steps, episodes and maximum-length must be positive")
+        if min(
+            self.steps, self.train_episodes, self.validation_episodes,
+            self.test_episodes, self.maximum_length,
+        ) < 1:
+            raise ValueError("steps, split sizes and maximum-length must be positive")
         if self.learning_rate <= 0:
             raise ValueError("learning-rate must be positive")
+        if len(self.seeds) != 3 or len(set(self.seeds)) != 3:
+            raise ValueError("checkpoint policy promotion requires three distinct seeds")
 
 
 def transition_spans(task) -> tuple[dict[str, Any], ...]:
@@ -128,53 +137,90 @@ def run_lightning_policy_training(
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    random.seed(config.seed)
-    torch.manual_seed(config.seed)
     source = str(config.checkpoint_path or config.model_id)
     common = {
         "revision": None if config.checkpoint_path else config.model_revision,
         "local_files_only": config.offline or config.checkpoint_path is not None,
     }
     tokenizer = AutoTokenizer.from_pretrained(source, **common)
-    model = AutoModelForCausalLM.from_pretrained(source, **common)
     device = torch.device(config.device)
-    model.to(device)
-    model.config.use_cache = False
-    optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
-    tasks = build_code_benchmark(config.episodes)
-    baseline, baseline_trace = _evaluate(
-        model, tokenizer, tasks, device, config.maximum_length
-    )
-    losses = []
     started = time.monotonic()
-    for step in range(config.steps):
-        task = tasks[step % len(tasks)]
-        model.train()
-        chosen = _sequence_score(
-            model, tokenizer, _prompt(task), task.correct_patch,
-            device, config.maximum_length,
+    seed_results = []
+    for seed in config.seeds:
+        random.seed(seed)
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+        model = AutoModelForCausalLM.from_pretrained(source, **common).to(device)
+        model.config.use_cache = False
+        optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
+        train_tasks = list(build_code_benchmark(config.train_episodes, "train"))
+        validation_tasks = build_code_benchmark(
+            config.validation_episodes, "validation"
         )
-        rejected = _sequence_score(
-            model, tokenizer, _prompt(task), task.wrong_patch,
-            device, config.maximum_length,
+        test_tasks = build_code_benchmark(config.test_episodes, "test")
+        random.Random(seed).shuffle(train_tasks)
+        baseline, baseline_trace = _evaluate(
+            model, tokenizer, test_tasks, device, config.maximum_length
         )
-        # Agent Lightning's transition decomposition reaches the trainable
-        # policy here as a pairwise positive/negative credit signal.
-        loss = -torch.nn.functional.logsigmoid(chosen - rejected)
-        optimizer.zero_grad(set_to_none=True)
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-        optimizer.step()
-        losses.append(float(loss.detach().cpu()))
-    final, final_trace = _evaluate(
-        model, tokenizer, tasks, device, config.maximum_length
-    )
+        losses = []
+        best_validation = -1.0
+        best_state = None
+        validation_history = []
+        for step in range(config.steps):
+            task = train_tasks[step % len(train_tasks)]
+            model.train()
+            chosen = _sequence_score(
+                model, tokenizer, _prompt(task), task.correct_patch,
+                device, config.maximum_length,
+            )
+            rejected = _sequence_score(
+                model, tokenizer, _prompt(task), task.wrong_patch,
+                device, config.maximum_length,
+            )
+            # Agent Lightning's transition decomposition reaches the trainable
+            # policy here as a pairwise positive/negative credit signal.
+            loss = -torch.nn.functional.logsigmoid(chosen - rejected)
+            optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            optimizer.step()
+            losses.append(float(loss.detach().cpu()))
+            validation, _ = _evaluate(
+                model, tokenizer, validation_tasks, device, config.maximum_length
+            )
+            score = validation["joint_success"]
+            validation_history.append({"step": step + 1, **validation})
+            if score > best_validation:
+                best_validation = score
+                best_state = {
+                    name: value.detach().cpu().clone()
+                    for name, value in model.state_dict().items()
+                }
+        model.load_state_dict(best_state)
+        final, final_trace = _evaluate(
+            model, tokenizer, test_tasks, device, config.maximum_length
+        )
+        seed_results.append({
+            "seed": seed,
+            "baseline": baseline,
+            "final": final,
+            "validation": {
+                "best_joint_success": best_validation,
+                "history": validation_history,
+            },
+            "training": {"losses": losses, "steps": config.steps},
+            "traces": {"baseline": baseline_trace, "final": final_trace},
+        })
+        del model, optimizer, best_state
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
     try:
         lightning_version = importlib.metadata.version("agentlightning")
     except importlib.metadata.PackageNotFoundError:
         lightning_version = None
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "task": "ag-001-agent-lightning-checkpoint-policy",
         "config": {
             **asdict(config),
@@ -188,16 +234,32 @@ def run_lightning_policy_training(
             "agentlightning_revision": AGENT_LIGHTNING_REVISION,
             "adapter_contract": "rollout spans -> transition credit -> pairwise policy update",
         },
-        "baseline": baseline,
-        "final": final,
+        "seed_results": seed_results,
+        "aggregate": {
+            "baseline_joint_success": _aggregate(
+                [row["baseline"]["joint_success"] for row in seed_results]
+            ),
+            "final_joint_success": _aggregate(
+                [row["final"]["joint_success"] for row in seed_results]
+            ),
+        },
         "training": {
-            "steps": config.steps,
-            "credit_updates": config.steps * 2,
-            "transition_spans": sum(len(transition_spans(task)) for task in tasks),
-            "losses": losses,
+            "steps_per_seed": config.steps,
+            "independent_checkpoint_updates": len(config.seeds),
+            "credit_updates": config.steps * 2 * len(config.seeds),
+            "transition_spans": sum(
+                len(transition_spans(task))
+                for task in build_code_benchmark(config.train_episodes, "train")
+            ) * len(config.seeds),
             "duration_seconds": time.monotonic() - started,
         },
-        "traces": {"baseline": baseline_trace, "final": final_trace},
+        "evaluation_protocol": {
+            "train_split": "five bug families",
+            "validation_split": "two disjoint bug families; checkpoint selection only",
+            "test_split": "two disjoint bug families; evaluated after selection",
+            "three_independent_training_seeds": True,
+            "test_used_for_selection": False,
+        },
         "claim_boundary": (
             "real checkpoint update and real local executor; the tiny fixture suite validates "
             "the training bridge, not SWE-bench generalization"
@@ -209,3 +271,14 @@ def run_lightning_policy_training(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     return payload, path
+
+
+def _aggregate(values: list[float]) -> dict[str, float]:
+    mean = statistics.fmean(values)
+    std = statistics.stdev(values) if len(values) > 1 else 0.0
+    return {
+        "mean": mean,
+        "std": std,
+        "ci95_low": mean - 1.96 * std / math.sqrt(len(values)),
+        "ci95_high": mean + 1.96 * std / math.sqrt(len(values)),
+    }

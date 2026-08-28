@@ -56,6 +56,7 @@ class EvolutionConfig:
     reasoning_checkpoint_path: Path | None = None
     evaluation_protocol_id: str = ""
     negative_memory_path: Path | None = None
+    checkpoint_evidence: tuple[Path, ...] = ()
 
     def validate(self) -> None:
         from .providers import get_provider
@@ -233,6 +234,9 @@ class EvolutionResult:
                 "checkpoint_image_root": str(self.config.checkpoint_image_root) if self.config.checkpoint_image_root else None,
                 "reasoning_checkpoint_path": str(self.config.reasoning_checkpoint_path) if self.config.reasoning_checkpoint_path else None,
                 "negative_memory_path": str(self.config.negative_memory_path) if self.config.negative_memory_path else None,
+                "checkpoint_evidence": [
+                    str(path) for path in self.config.checkpoint_evidence
+                ],
                 "seeds": list(self.config.seeds),
             },
             "papers": [paper.to_dict() for paper in self.papers],
@@ -261,6 +265,9 @@ class EvolutionResult:
         raw_config["seeds"] = tuple(raw_config["seeds"])
         raw_config["candidate_generator_command"] = tuple(
             raw_config.get("candidate_generator_command", ())
+        )
+        raw_config["checkpoint_evidence"] = tuple(
+            Path(value) for value in raw_config.get("checkpoint_evidence", ())
         )
         loaded_config = config or EvolutionConfig(**raw_config)
         result = cls(

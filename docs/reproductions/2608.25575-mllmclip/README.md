@@ -50,21 +50,23 @@ $$
 
 ### 真实 checkpoint CUDA 路径（主结果）
 
-该路径加载公开的 **SmolVLM2-256M** teacher 与 **CLIP ViT-B/32** student，在 POPE adversarial / COCO val2014 公开图像上冻结两个 encoder，只训练匹配维度的 feature projection，并联合优化 cosine 与 linear CKA loss。128 张 train 图像内部再拆 fit/validation 选择 ridge 与 early-stopped 权重，64 张 test 图像只评一次。结果记录精确 checkpoint revision、seed、loss、held-out CKA、耗时与峰值显存；checkpoint 和缓存不提交 GitHub。
+该路径加载公开的 **SmolVLM2-256M** teacher 与 **CLIP ViT-B/32** student，在 POPE adversarial / COCO val2014 公开图像上冻结两个 encoder，只训练匹配维度的 feature projection，并联合优化 cosine 与 linear CKA loss。320 张 train 图像内部再拆 fit/validation 选择 ridge 与 early-stopped 权重，160 张 test 图像只评一次。结果记录精确 checkpoint revision、三个独立 seed、loss、held-out CKA、邻域重合率、耗时与峰值显存；checkpoint 和缓存不提交 GitHub。
 
 ```bash
 AUTO_RESEARCH_DEVICE=cuda python -m \
   auto_research.reproductions.mllmclip.checkpoint \
   --annotations data/pope/coco_pope_adversarial.json \
   --image-root data/pope/images \
-  --train-examples 128 --test-examples 64 \
-  --steps 40 --seed 42 \
-  --output runs/mllmclip/checkpoint-seed42.json
+  --train-examples 320 --test-examples 160 \
+  --steps 60 --seeds 42,43,44 \
+  --output runs/mllmclip/checkpoint-seeds42-44.json
 ```
 
 该路径受 `python scripts/validate_gpu_evidence.py` 合入门禁约束：必须先在真实 A100/A30 上跑通并提交去机器标识的 receipt。
 
-2026-08-28 的 A30 验证中，held-out linear CKA 从 **0.4633 提升到 0.4898（+5.72%）**；训练内 validation CKA 为 0.6204，峰值显存约 4.13 GiB。POPE 正例计数的 1-NN 诊断已饱和为 1.0，因此不作为主指标，也不用于选择模型。完整的[标准指标文件](metrics/pope-checkpoint-a30-seed42.json)与[去机器标识 GPU 验证凭证](../../gpu-validations/mllmclip-a30-20260828.json)已纳入 CI 门禁；不提交 checkpoint、缓存和原始预测。
+2026-08-28 的 A100 三 seed 验证中，held-out linear CKA 为 **0.3494 → 0.3466**，neighbor overlap@5 为 **0.2642 → 0.2596**，两项均未显示稳定提升。此前 A30 单 seed 的 `+5.72%` 只保留为工程历史，不再作为效果结论。进一步审计发现，该 POPE 子集每张图的正例计数完全相同，旧 1-NN `1.0` 是退化标签造成的伪满分；新版将其置为 `null` 并显式写入 `label_diagnostic_valid=false`。
+
+完整的[三 seed 指标](metrics/pope-checkpoint-a100-seeds42-44.json)与[去机器标识 A100 验证凭证](../../gpu-validations/mllmclip-a100-20260828.json)纳入 CI 门禁；旧的[A30 单 seed 指标](metrics/pope-checkpoint-a30-seed42.json)仅供追溯，不再用于效果声明。不提交 checkpoint、缓存和原始预测。
 
 ### NumPy 机制诊断（非主结果）
 
