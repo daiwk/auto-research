@@ -12,6 +12,7 @@ import argparse
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import json
+import math
 from pathlib import Path
 import re
 import time
@@ -87,7 +88,17 @@ def _extract_features(model, processor, image, torch, device):
     return features.reshape(-1, features.shape[-1])
 
 
-def _generate(model, processor, image, question, torch, device, maximum_new_tokens):
+def _generate(
+    model,
+    processor,
+    image,
+    question,
+    torch,
+    device,
+    maximum_new_tokens,
+    *,
+    longest_edge: int | None = None,
+):
     messages = [
         {
             "role": "user",
@@ -102,7 +113,10 @@ def _generate(model, processor, image, question, torch, device, maximum_new_toke
         tokenize=False,
         add_generation_prompt=True,
     )
-    inputs = processor(text=[prompt], images=[image], padding=True, return_tensors="pt")
+    image_kwargs = {"size": {"longest_edge": longest_edge}} if longest_edge else {}
+    inputs = processor(
+        text=[prompt], images=[image], padding=True, return_tensors="pt", **image_kwargs
+    )
     inputs = {key: value.to(device) for key, value in inputs.items()}
     torch.cuda.synchronize()
     started = time.perf_counter()
@@ -206,6 +220,12 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
         .eval()
     )
     rows, dataset_metadata = _load_rows(config)
+    processor_size = getattr(getattr(processor, "image_processor", None), "size", {})
+    baseline_edge = (
+        int(processor_size["longest_edge"])
+        if isinstance(processor_size, dict) and "longest_edge" in processor_size
+        else None
+    )
     torch.cuda.reset_peak_memory_stats(device)
     records = []
     for row in rows:
@@ -227,6 +247,9 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
             patch_size=28,
         )
         resized = image.resize((new_width, new_height))
+        method_edge = (
+            max(28, round(baseline_edge * math.sqrt(actual))) if baseline_edge is not None else None
+        )
         baseline_answer, baseline_seconds, baseline_inputs = _generate(
             model,
             processor,
@@ -235,6 +258,7 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
             torch,
             device,
             config.maximum_new_tokens,
+            longest_edge=baseline_edge,
         )
         method_answer, method_seconds, method_inputs = _generate(
             model,
@@ -244,6 +268,7 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
             torch,
             device,
             config.maximum_new_tokens,
+            longest_edge=method_edge,
         )
         baseline_tokens = int(baseline_inputs["attention_mask"].sum())
         method_tokens = int(method_inputs["attention_mask"].sum())
@@ -256,6 +281,8 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
                 "baseline_input_tokens": baseline_tokens,
                 "method_input_tokens": method_tokens,
                 "retention": actual,
+                "baseline_longest_edge": baseline_edge,
+                "pace_longest_edge": method_edge,
                 "global_density": density,
                 "local_detail": detail,
             }
