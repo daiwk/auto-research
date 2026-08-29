@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import gzip
+import hashlib
 import io
 import json
 import tarfile
@@ -9,34 +10,33 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-SHAKESPEARE_URL = "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt"
-MOVIELENS_URL = "https://files.grouplens.org/datasets/movielens/ml-100k.zip"
+SHAKESPEARE_URL = (
+    "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt"
+)
+# GroupLens' TLS certificate expired in August 2026 and broke clean CI runners.
+# This immutable GitHub mirror is byte-identical to the official archive; the
+# SHA-256 gate below prevents the mirror from silently changing the benchmark.
+MOVIELENS_URL = (
+    "https://raw.githubusercontent.com/rudrasingh21/Data-ML-100k-/"
+    "f74a79d7debb00d39a8b757876b6b2038d52825c/ml-100k.zip"
+)
+MOVIELENS_SHA256 = "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229"
 MOVIELENS_1M_URL = "https://files.grouplens.org/datasets/movielens/ml-1m.zip"
 AMAZON_BEAUTY_5CORE_URL = (
-    "https://snap.stanford.edu/data/amazon/productGraph/"
-    "categoryFiles/reviews_Beauty_5.json.gz"
+    "https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Beauty_5.json.gz"
 )
 MDCNS_BEAUTY_BASE_URL = (
-    "https://raw.githubusercontent.com/Lyz103/SIGIR26-MDCNS/main/"
-    "MDCNS_Code/data"
+    "https://raw.githubusercontent.com/Lyz103/SIGIR26-MDCNS/main/MDCNS_Code/data"
 )
 KUAIRAND_PURE_URL = "https://zenodo.org/records/10439422/files/KuaiRand-Pure.tar.gz"
 WIKITEXT_2_BASE_URL = (
-    "https://raw.githubusercontent.com/pytorch/examples/main/"
-    "word_language_model/data/wikitext-2"
+    "https://raw.githubusercontent.com/pytorch/examples/main/word_language_model/data/wikitext-2"
 )
-ALPACA_URL = (
-    "https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/"
-    "alpaca_data.json"
-)
+ALPACA_URL = "https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/alpaca_data.json"
 GSM8K_BASE_URL = (
-    "https://raw.githubusercontent.com/openai/grade-school-math/master/"
-    "grade_school_math/data"
+    "https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data"
 )
-DELICIOUS_2K_URL = (
-    "https://files.grouplens.org/datasets/hetrec2011/"
-    "hetrec2011-delicious-2k.zip"
-)
+DELICIOUS_2K_URL = "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-delicious-2k.zip"
 
 
 def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
@@ -95,9 +95,7 @@ def gsm8k(root: Path, allow_network: bool = True) -> dict[str, list[dict[str, st
         target = directory / f"{split}.jsonl"
         if not target.exists():
             if not allow_network:
-                raise FileNotFoundError(
-                    f"dataset missing and network disabled: {target}"
-                )
+                raise FileNotFoundError(f"dataset missing and network disabled: {target}")
             target.parent.mkdir(parents=True, exist_ok=True)
             _download(f"{GSM8K_BASE_URL}/{split}.jsonl", target)
         result[split] = [
@@ -121,7 +119,7 @@ def movielens_100k(root: Path, allow_network: bool = True) -> list[tuple[int, in
             raise FileNotFoundError(f"dataset missing and network disabled: {target}")
         archive = root / "ml-100k.zip"
         archive.parent.mkdir(parents=True, exist_ok=True)
-        _download(MOVIELENS_URL, archive)
+        _download(MOVIELENS_URL, archive, expected_sha256=MOVIELENS_SHA256)
         with zipfile.ZipFile(archive) as bundle:
             bundle.extractall(root)
     rows: list[tuple[int, int, float, int]] = []
@@ -251,7 +249,14 @@ def _download_and_extract(
         bundle.extractall(root)
 
 
-def _download(url: str, target: Path) -> None:
+def _download(url: str, target: Path, *, expected_sha256: str | None = None) -> None:
     request = urllib.request.Request(url, headers={"User-Agent": "auto-research/0.1"})
     with urllib.request.urlopen(request, timeout=120) as response:
-        target.write_bytes(response.read())
+        payload = response.read()
+    if expected_sha256:
+        actual = hashlib.sha256(payload).hexdigest()
+        if actual != expected_sha256:
+            raise ValueError(
+                f"dataset checksum mismatch for {url}: expected {expected_sha256}, got {actual}"
+            )
+    target.write_bytes(payload)
