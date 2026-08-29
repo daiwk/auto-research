@@ -21,11 +21,14 @@ MOVIELENS_URL = (
     "f74a79d7debb00d39a8b757876b6b2038d52825c/ml-100k.zip"
 )
 MOVIELENS_SHA256 = "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229"
-MOVIELENS_1M_URL = (
+MOVIELENS_1M_BASE_URL = (
     "https://raw.githubusercontent.com/vandit15/Movielens-Data/"
-    "19e4c9d1423bf3f2ccc1a3093823c362c49950b9/ml-1m/ratings.dat"
+    "19e4c9d1423bf3f2ccc1a3093823c362c49950b9/ml-1m"
 )
-MOVIELENS_1M_SHA256 = "506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f"
+MOVIELENS_1M_FILES = {
+    "ratings.dat": "506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f",
+    "movies.dat": "0140fc2356357c1a851d0f52e893a1e4d3696df632c4141cea8d5bc3d621f0b9",
+}
 AMAZON_BEAUTY_5CORE_URL = (
     "https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Beauty_5.json.gz"
 )
@@ -146,12 +149,20 @@ def movielens_100k(root: Path, allow_network: bool = True) -> list[tuple[int, in
 
 
 def movielens_1m(root: Path, allow_network: bool = True) -> list[tuple[int, int, float, int]]:
-    target = root / "ml-1m" / "ratings.dat"
-    if not target.exists():
+    directory = root / "ml-1m"
+    required = tuple(directory / filename for filename in MOVIELENS_1M_FILES)
+    missing = tuple(path for path in required if not path.exists())
+    if missing:
         if not allow_network:
-            raise FileNotFoundError(f"dataset missing and network disabled: {target}")
-        target.parent.mkdir(parents=True, exist_ok=True)
-        _download(MOVIELENS_1M_URL, target, expected_sha256=MOVIELENS_1M_SHA256)
+            raise FileNotFoundError(f"dataset missing and network disabled: {missing[0]}")
+        directory.mkdir(parents=True, exist_ok=True)
+        for path in missing:
+            _download(
+                f"{MOVIELENS_1M_BASE_URL}/{path.name}",
+                path,
+                expected_sha256=MOVIELENS_1M_FILES[path.name],
+            )
+    target = directory / "ratings.dat"
     rows: list[tuple[int, int, float, int]] = []
     with target.open(encoding="utf-8") as stream:
         for line in stream:
