@@ -233,6 +233,8 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "pace-vlm": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    "twinkv": ("注意力与长上下文", "KV cache 与上下文压缩"),
     "vbvr-pro": ("多模态基础模型", "可验证视觉推理与评测"),
     "mllmclip": ("多模态基础模型", "视觉 token 与跨模态检索"),
     "wemm-embedding": ("多模态基础模型", "对比预训练与自蒸馏"),

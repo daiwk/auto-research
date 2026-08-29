@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "method": "twinkv-fixed-budget-repair",
+  "seed": 42,
+  "diagnostic_only": true,
+  "sequence_length": 192,
+  "retained_tokens": 96,
+  "budget_change_percent": 0.0
+}

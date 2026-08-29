@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 266 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 268 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -94,6 +94,8 @@ pytest tests/test_research_module_docs.py
 ## 2026-08-29 最新增量
 
 - `friend-gnn` · [VK Friend-GNN](2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用按时间排序邻接与二分 cutoff 避免时序邻居采样的数据泄漏；论文在 VK 生产 A/B 中报告好友添加数 +16.0%、独立添加好友用户数 +11.5%。
+- `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md)：用浅层视觉 preview 自适应设置 token budget，并融合 LLM/ViT 注意力；真实 Qwen2.5-VL + RealWorldQA 路径在 A100 验证。
+- `twinkv` · [TwinKV](2608.27128-twinkv/README.md)：以 orphan/donor 配对修复任意 KV eviction policy，保持缓存预算严格不变；真实 Qwen3 KV + WikiText-2 长上下文路径在 A100 验证。
 
 ## 2026 历史扫描 B01～B03（18 个 adapter）
 
@@ -226,6 +228,8 @@ pytest tests/test_research_module_docs.py
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
+| 核心机制 | `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md) | 无工业 A/B；论文报告 10% 视觉 token 保留 93.8% 平均性能、TTFT 最高 3.1× | APC/DDAE 公式、RealWorldQA 同 checkpoint 质量/token/延迟/显存和 Evolve 配方均可审计 |
+| 核心机制 | `twinkv` · [TwinKV](2608.27128-twinkv/README.md) | 无工业 A/B；LongBench/LooGLE/RULER/MMLU-Pro 离线结果且含失败任务 | fixed-budget repair、真实 Qwen3 KV reconstruction/延迟/显存和 Evolve attention operator 均可审计 |
 | 核心机制 | `prl-puts` · [PRL-PUTS](2605.16344-prl-puts/README.md) | P2P impressions +0.30% | 双头 Q 网络与 Pareto utility 扫描；NDCG@10 +39.64% |
 | 核心机制 | `ektm` · [Effective Knowledge Transfer for Multi-Task Recommendation Models](2605.05730-ektm/README.md) | eCPM +3.93% | 任务相似度驱动的多任务知识迁移；NDCG@10 +10.98% |
 | 核心机制 | `adasid` · [AdaSID](2604.23522-adasid/README.md) | GPM +1.16% | 碰撞负载与语义相容性驱动的动态 SID；NDCG@10 -6.30% |

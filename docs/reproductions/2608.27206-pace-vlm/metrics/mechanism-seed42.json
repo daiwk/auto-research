@@ -1,0 +1,11 @@
+{
+  "schema_version": 2,
+  "method": "pace-apc-ddae-mechanism",
+  "seed": 42,
+  "diagnostic_only": true,
+  "smooth_retention": 0.05,
+  "detailed_retention": 1.0,
+  "detail_vs_smooth_retention_points": 95.0,
+  "ddae_llm_weight": 0.506151,
+  "ddae_vision_weight": 0.493849
+}

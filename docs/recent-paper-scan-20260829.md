@@ -23,10 +23,15 @@ Agent 数字来自无 guide/oracle 的 ToolRoute L2.1 隔离协议，不是早�
 确定性 smoke test。后训练 mini-suite 用于验证更新目标和训练动态，不等同论文的大模型
 benchmark。
 
-## 全文复核后未进入 P0
+## P1 checkpoint 复现
 
-- PACE（2608.27206）和 TwinKV（2608.27128）登记为 P1：只有在真实 VLM/长上下文
-  checkpoint 上测到质量、延迟和显存曲线后才值得接入，当前不以 toy proxy 冒充。
+- [PACE（2608.27206）](reproductions/2608.27206-pace-vlm/README.md)：已实现 APC/DDAE、真实 Qwen2.5-VL + RealWorldQA 路径、Evolve operator，并在 A100 记录质量、token、延迟和显存。
+- [TwinKV（2608.27128）](reproductions/2608.27128-twinkv/README.md)：已实现 fixed-budget repair、真实 Qwen3 KV + WikiText-2 长上下文路径、Evolve operator，并在 A100 记录等预算 reconstruction、延迟与显存。
+
+两项均明确保留 checkpoint smoke 与论文完整 benchmark 的边界，不再处于 deferred 队列。
+
+## 全文复核后未进入 P0/P1
+
 - 2608.27006、2608.26579、2608.25381 等推荐候选没有量化生产 A/B 或用户认可的
   全流量证据，因此不进入工业实现队列。
 - 本轮其他高召回结果以 benchmark、综述、安全审计或垂直应用为主，不满足“重要新算法

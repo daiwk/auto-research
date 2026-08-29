@@ -45,6 +45,8 @@ def build_attention_layers(torch, nn, config, architecture, modern, parallel, kv
                 if architecture == "retoken" else None
             )
             self.last_retoken_keep_rate = 1.0
+            self.last_twinkv_keep_rate = 1.0
+            self.last_twinkv_swaps = 0.0
             self.last_active_head_fraction = 1.0
             qkv_width = config.heads * head_dim + 2 * kv_heads * head_dim
             self.qkv_conv = (
@@ -142,6 +144,62 @@ def build_attention_layers(torch, nn, config, architecture, modern, parallel, kv
                 )
                 self.last_selected_block_fraction = float(
                     block_mask.float().mean().detach().cpu()
+                )
+            elif architecture == "twinkv":
+                causal = torch.ones(
+                    length, length, device=values.device, dtype=torch.bool,
+                ).tril()
+                mask = torch.zeros(
+                    batch, config.heads, length, length,
+                    device=values.device, dtype=torch.bool,
+                )
+                total_swaps = 0
+                with torch.no_grad():
+                    normalized = torch.nn.functional.normalize(k.float(), dim=-1)
+                    for prefix in range(length):
+                        visible = prefix + 1
+                        budget = max(1, (visible + 1) // 2)
+                        sink = min(2, budget)
+                        recent = budget - sink
+                        retained = torch.unique(torch.cat((
+                            torch.arange(sink, device=values.device),
+                            torch.arange(visible - recent, visible, device=values.device),
+                        )), sorted=True)
+                        for row in range(batch):
+                            for head in range(config.heads):
+                                keys = normalized[row, head, :visible]
+                                similarities = keys @ keys[retained].T
+                                positions = torch.arange(visible, device=values.device)
+                                allowed = (positions[:, None] - retained[None, :]).abs() > 8
+                                best = similarities.masked_fill(~allowed, -1).max(-1).values
+                                selected = torch.zeros(
+                                    visible, dtype=torch.bool, device=values.device,
+                                )
+                                selected[retained] = True
+                                protected = torch.zeros_like(selected)
+                                protected[:sink] = True
+                                protected[max(0, visible - min(16, recent)):] = True
+                                orphans = torch.where(~selected & (best < .85))[0]
+                                donors = torch.where(selected & ~protected & (best >= .85))[0]
+                                orphans = orphans[torch.argsort(best[orphans])]
+                                donors = donors[torch.argsort(best[donors], descending=True)]
+                                swaps = min(len(orphans), len(donors))
+                                if swaps:
+                                    selected[donors[:swaps]] = False
+                                    selected[orphans[:swaps]] = True
+                                mask[row, head, prefix, :visible] = selected
+                                total_swaps += swaps
+                bias = torch.zeros_like(mask, dtype=q.dtype).masked_fill(
+                    ~mask, float("-inf"),
+                )
+                mixed = torch.nn.functional.scaled_dot_product_attention(
+                    q, k, v, attn_mask=bias, is_causal=False,
+                )
+                self.last_twinkv_keep_rate = float(
+                    mask.sum().cpu() / causal.sum().cpu() / batch / config.heads
+                )
+                self.last_twinkv_swaps = total_swaps / max(
+                    1, batch * config.heads * length,
                 )
             elif self.retoken is not None:
                 # RETOKEN scores the cached value vectors rather than the keys.

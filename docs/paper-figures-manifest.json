@@ -6452,5 +6452,33 @@
     "height": 786,
     "score": 70,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2608.27128-twinkv/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.27128",
+    "arxiv_id": "2608.27128",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1(a) plots attention against marginal utility, pooled across every chunk from every sample (marginal histograms shown on each axis). The two are statistically indistinguishable from uncor- related: pooled Spearman ρ = −0.004 (p = 0.96), computed over n = 136 chunks. Chunks that received essentially no attention span the full range of true marginal utility, including some of the most useful chunks in the entire pool, and chunks that received comparatively high attention are no more likely to be useful than chunks that received almost none.",
+    "source_url": "https://arxiv.org/pdf/2608.27128#page=3",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2608.27128-twinkv/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 985,
+    "score": 7,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2608.27206-pace-vlm/README.md",
+    "paper_url": "https://arxiv.org/abs/2608.27206",
+    "arxiv_id": "2608.27206",
+    "figure": "Figure 4",
+    "original_caption": "Figure 4: Overview of PACE’s unified Condense-and-Extract pipeline. In the Condense stage, APC uses a shallow visual preview to estimate global redundancy and local detail, then adaptively resizes the input before the vision encoder. In the Extract stage, DDAE fuses semantic attention from the LLM with self-attention from the ViT and retains the top- K K visual tokens at decoder layer k k . Together, APC lowers vision-encoder cost and DDAE shortens LLM prefill, enabling efficient low-budget inference while preserving holistic layouts and fine-grained task evidence.",
+    "source_url": "https://arxiv.org/html/2608.27206v1/figures/overview.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2608.27206-pace-vlm/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 939,
+    "score": 65,
+    "error": ""
   }
 ]
