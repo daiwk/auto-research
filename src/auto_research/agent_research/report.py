@@ -4,6 +4,10 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "swe-prime": ("SWE-Prime", "https://arxiv.org/abs/2608.27449"),
+    "harnesslens": ("HarnessLens", "https://arxiv.org/abs/2608.27311"),
+    "covemem": ("CoVeMem", "https://arxiv.org/abs/2608.26895"),
+    "spt": ("SPT", "https://arxiv.org/abs/2608.26563"),
     "jit-agent": ("JIT-Agent", "https://arxiv.org/abs/2608.25593"),
     "traceml": ("TraceML", "https://arxiv.org/abs/2608.26086"),
     "adavdr": ("AdaVDR", "https://arxiv.org/abs/2608.25559"),

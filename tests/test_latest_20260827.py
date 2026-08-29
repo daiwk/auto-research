@@ -84,3 +84,36 @@ def test_latest_batch_is_registered_for_reproduction_and_evolution():
         "policy:topas", "memory:caskg", "policy:progrouter",
     ):
         assert operator in registry
+
+
+def test_20260829_post_training_and_agent_batch_executes_and_is_evolve_visible(tmp_path: Path):
+    post_markers = {
+        "ttpo": "pseudo_label_agreement",
+        "weak-guide-rlvr": "guided_entropy",
+        "uc-mopd": "cll_retention_rate",
+        "spear": "lcs_alignment_reward",
+    }
+    for algorithm, marker in post_markers.items():
+        result, _ = PostTrainingRunner(PostTrainingConfig(
+            algorithm=algorithm, steps=4, maximum_examples=32,
+            output_dir=tmp_path / algorithm, allow_network=False,
+        )).run()
+        assert marker in result.training["last_diagnostics"]
+
+    task = AgentTask(
+        "new", "planning", "deploy safely", ("repo",), "ok",
+        ("inspect", "patch", "verify"), ("inspect", "patch", "verify"),
+    )
+    agent_markers = {
+        "swe-prime": "segment-loss-mask",
+        "harnesslens": "attribution-gate",
+        "covemem": "soft-token-read",
+        "spt": "reference-insert",
+    }
+    for method, marker in agent_markers.items():
+        assert marker in build_agent(method, 8, np.random.default_rng(42)).solve(task, 0)[2]
+
+    assert get_adapter("friend-gnn").paper.arxiv_id == "2608.27413"
+    registry = operator_registry()
+    for operator in (*post_markers, "policy:swe-prime", "verifier:harnesslens", "memory:covemem", "memory:spt"):
+        assert operator in registry

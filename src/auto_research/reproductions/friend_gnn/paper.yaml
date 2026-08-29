@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "friend-gnn",
+  "arxiv_id": "2608.27413",
+  "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
+  "paper_url": "https://arxiv.org/abs/2608.27413",
+  "organization": "AI VK",
+  "published": "2026-08-27",
+  "upstream_code": "https://github.com/makut/VK-GNN",
+  "track": "recommendation",
+  "topics": [
+    "friend-recommendation",
+    "graph-ranking",
+    "multi-hash-embedding",
+    "temporal-sampling"
+  ],
+  "local_code": "src/auto_research/reproductions/friend_gnn",
+  "documentation": "docs/reproductions/2608.27413-friend-gnn/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-1M"
+  ],
+  "baseline": "popularity ranker on the identical full candidate catalog",
+  "metrics": [
+    "Hit@10",
+    "NDCG@10",
+    "hash table compression",
+    "temporal sampling complexity"
+  ],
+  "mechanisms": [
+    "VK private 194M-user graph",
+    "distributed GATv2 training",
+    "production ranker"
+  ],
+  "evolve_operators": []
+}

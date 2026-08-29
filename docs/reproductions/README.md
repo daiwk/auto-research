@@ -91,6 +91,10 @@ pytest tests/test_research_module_docs.py
 - `vbvr-pro` · [VBVR-Pro](2608.26105-vbvr-pro/README.md)：以任务专用可执行 scorer 替代通用 VLM judge，为原生视觉推理提供状态级 verifiable reward。
 - `mllmclip` · [MLLMCLIP](2608.25575-mllmclip/README.md)：从 MLLM 各层按 attention 选 teacher token，再以 CKA 对齐轻量 CLIP 的视觉与文本特征。
 
+## 2026-08-29 最新增量
+
+- `friend-gnn` · [VK Friend-GNN](2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用按时间排序邻接与二分 cutoff 避免时序邻居采样的数据泄漏；论文在 VK 生产 A/B 中报告好友添加数 +16.0%、独立添加好友用户数 +11.5%。
+
 ## 2026 历史扫描 B01～B03（18 个 adapter）
 
 - `dynamic-codebook` · [Dynamic Single-Level Large Semantic Codebook](2608.21012-dynamic-codebook/README.md)：曝光加权动态大码本、独立碰撞码和短 SID 解码。

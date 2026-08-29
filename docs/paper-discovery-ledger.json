@@ -1713,6 +1713,37 @@
           "reason": "academic offline recommendation evaluation; no quantified production online evidence"
         }
       ]
+    },
+    {
+      "batch": "2026-08-29-cross-domain-incremental",
+      "date": "2026-08-29",
+      "scope_kind": "incremental-full-text-review",
+      "window": "2026-08-27 through 2026-08-29 (one-day announcement overlap)",
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "priority_institutions": ["Google", "Meta"],
+      "institution_review": "No new Google or Meta paper in the increment passed the repository scope and evidence gates.",
+      "source_artifact": "GitHub Actions run 33172409179 plus targeted 2026-08-28 web verification",
+      "candidates": [
+        {"id": "2608.27413", "key": "friend-gnn", "track": "recommendation", "priority": "P0", "status": "implemented", "doc": "reproductions/2608.27413-friend-gnn/README.md", "evidence_gate": "quantified production A/B: friend additions +16.0%, unique friend adders +11.5%"},
+        {"id": "2608.27448", "key": "ttpo", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.27448-ttpo/README.md"},
+        {"id": "2608.27420", "key": "weak-guide-rlvr", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.27420-weak-guide-rlvr/README.md"},
+        {"id": "2608.26735", "key": "uc-mopd", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.26735-uc-mopd/README.md"},
+        {"id": "2608.26550", "key": "spear", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.26550-spear/README.md"},
+        {"id": "2608.27449", "key": "swe-prime", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.27449-swe-prime/README.md"},
+        {"id": "2608.27311", "key": "harnesslens", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.27311-harnesslens/README.md"},
+        {"id": "2608.26895", "key": "covemem", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.26895-covemem/README.md"},
+        {"id": "2608.26563", "key": "spt", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.26563-spt/README.md"},
+        {"id": "2608.27206", "title": "PACE", "track": "foundation-model", "priority": "P1", "status": "deferred", "reason": "checkpoint-faithful VLM latency and quality evaluation is required; a toy proxy would not support the paper claim"},
+        {"id": "2608.27128", "title": "TwinKV", "track": "foundation-model", "priority": "P1", "status": "deferred", "reason": "requires a real long-context checkpoint and KV-cache runtime benchmark before it can be advertised as implemented"},
+        {"id": "2608.27006", "title": "Conversational Recommendation over Live E-Commerce Catalogues with Self-Refreshing Retrieval", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "full-text review found no quantified production A/B or accepted full-traffic evidence"},
+        {"id": "2608.26579", "title": "Preference Flow Matching with Spectral Factorization for Micro-video Recommendation", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "offline academic recommendation evaluation without quantified production online evidence"},
+        {"id": "2608.25381", "title": "MOTIF", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "offline academic recommendation evaluation without quantified production online evidence"}
+      ]
     }
   ]
 }

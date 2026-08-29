@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling](../2608.27413-friend-gnn/README.md) | AI VK，2026-08-27 | [已开源](https://github.com/makut/VK-GNN) | `friend-gnn` |
 | 生成、排序与冷启动 | [DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search](../2608.25635-dceo/README.md) | Taobao & Tmall Group, Alibaba，2026-08-26 | 未发现官方代码 | `dceo` |
 | 生成、排序与冷启动 | [TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation](../2608.25528-transretrieval/README.md) | Renmin University of China / Taobao & Tmall Group, Alibaba，2026-08-26 | 未发现官方代码 | `transretrieval` |
 | 生成、排序与冷启动 | [TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising](../2608.24034-tagr/README.md) | Kuaishou Technology，2026-08-25 | 未发现官方代码 | `tagr` |

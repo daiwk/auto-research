@@ -13,10 +13,15 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'sa-mrpo', 'rubric-dropout', 'erils', 'crpo', 'serpo', 'iso-rlvr',
         'srpo', 'erpo', 'opd-search-plus', 'opdvr',
         'v-rubrics', 'clue-opsd', 'grin', 'grip',
+        'ttpo', 'weak-guide-rlvr', 'uc-mopd', 'spear',
     }:
         if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
             from ..latest_20260827 import update_latest
-
+        elif algorithm in {'ttpo', 'weak-guide-rlvr', 'uc-mopd', 'spear'}:
+            from ..latest_20260829 import update_latest
+        else:
+            update_latest = None
+        if update_latest is not None:
             gradient, loss, latest = update_latest(
                 algorithm, state, group, probabilities, reference,
                 rollout_training_probabilities, sampled, rng,

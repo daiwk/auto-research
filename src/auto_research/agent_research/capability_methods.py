@@ -15,6 +15,7 @@ from .capability_models import (
 CAPABILITY_METHODS = (
     "long-context", "react", "reflexion", "agent-g2", "ahead", "auso",
     "jit-agent", "traceml", "adavdr", "topas", "caskg", "progrouter",
+    "swe-prime", "harnesslens", "covemem", "spt",
 )
 CAPABILITY_ABLATIONS = (
     "react-no-retry", "reflexion-no-reflection", "agent-g2-no-verifier",
@@ -96,6 +97,21 @@ def _strategy(method: str) -> _Strategy:
         "progrouter": _Strategy(
             ordering="verified", retry=True, explore=True, recover_fallback=True,
             verify=True, compress=True, memory=True,
+        ),
+        "swe-prime": _Strategy(
+            ordering="safe", retry=True, recover_fallback=True, verify=True,
+        ),
+        "harnesslens": _Strategy(
+            ordering="verified", retry=True, explore=True,
+            recover_fallback=True, verify=True, reflect=True,
+        ),
+        "covemem": _Strategy(
+            ordering="memory", retry=True, recover_fallback=True,
+            verify=True, memory=True,
+        ),
+        "spt": _Strategy(
+            ordering="memory", retry=True, explore=True,
+            recover_fallback=True, memory=True,
         ),
     }
     if method not in strategies:

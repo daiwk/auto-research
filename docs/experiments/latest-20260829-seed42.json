@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "date": "2026-08-29",
+  "scope": [
+    "2608.27448-ttpo",
+    "2608.27420-weak-guide-rlvr",
+    "2608.26735-uc-mopd",
+    "2608.26550-spear",
+    "2608.27449-swe-prime",
+    "2608.27311-harnesslens",
+    "2608.26895-covemem",
+    "2608.26563-spt"
+  ],
+  "results": {
+    "ttpo": {
+      "source": "../post-training/2608.27448-ttpo/metrics/arithmetic-smoke-seed42.json"
+    },
+    "weak-guide-rlvr": {
+      "source": "../post-training/2608.27420-weak-guide-rlvr/metrics/arithmetic-smoke-seed42.json"
+    },
+    "uc-mopd": {
+      "source": "../post-training/2608.26735-uc-mopd/metrics/arithmetic-smoke-seed42.json"
+    },
+    "spear": {
+      "source": "../post-training/2608.26550-spear/metrics/arithmetic-smoke-seed42.json"
+    },
+    "swe-prime": {
+      "source": "../agent-research/2608.27449-swe-prime/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "harnesslens": {
+      "source": "../agent-research/2608.27311-harnesslens/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "covemem": {
+      "source": "../agent-research/2608.26895-covemem/metrics/toolroute-l2-seeds42-44.json"
+    },
+    "spt": {
+      "source": "../agent-research/2608.26563-spt/metrics/toolroute-l2-seeds42-44.json"
+    }
+  },
+  "claim_boundary": "Post-training uses a CPU arithmetic mechanism mini-suite; Agent methods use the no-oracle ToolRoute L2.1 split. Neither substitutes for paper-scale benchmarks.",
+  "evaluation_protocol": {
+    "tier": "mixed_l1_mechanism_and_l2_1_agent",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "paper results and local public-data evidence remain separate"
+  },
+  "manifest_ref": "experiments:latest-20260829-seed42",
+  "provenance": {
+    "artifact_path": "docs/experiments/latest-20260829-seed42.json",
+    "dataset_fingerprint": "per-paper artifacts"
+  }
+}

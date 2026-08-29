@@ -6,6 +6,9 @@
 - 2026-08 · [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - 2026-08 · [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：以共享历史编码器统一 SID 生成和 item-level 排序，用 rollout 与 logged impression 双来源蒸馏训练期 teacher。
 
+## AI VK
+- 2026-08 · [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
+
 ## Netflix
 - 2026-08 · [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md)：把冻结多模态 embedding 接入统一资产双塔，并用查询相似度增强搜索画布打分。
 - 2026-08 · [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：用文本化上下文和 causal LLM 产生用户表示，catalog-aware head 一次打分全目录，并以联合语言/排序与长期 reward 目标后训练。

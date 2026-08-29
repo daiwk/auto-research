@@ -4,6 +4,10 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "ttpo": ("TTPO", "https://arxiv.org/abs/2608.27448"),
+    "weak-guide-rlvr": ("Weak-Model Guidance for RLVR", "https://arxiv.org/abs/2608.27420"),
+    "uc-mopd": ("Uncertainty-Calibrated MOPD", "https://arxiv.org/abs/2608.26735"),
+    "spear": ("SPEAR", "https://arxiv.org/abs/2608.26550"),
     "v-rubrics": ("V-Rubrics", "https://arxiv.org/abs/2608.25580"),
     "clue-opsd": ("Clue-OPSD", "https://arxiv.org/abs/2608.25356"),
     "grin": ("GRIN / Golden-GRPO Injection", "https://arxiv.org/abs/2608.25243"),
