@@ -71,7 +71,7 @@ python -m auto_research.reproductions.twinkv.checkpoint \
   --examples 3 --sequence-length 2048 --compression-ratio 0.5 --seed 42
 ```
 
-机制指标见 [`metrics/mechanism-seed42.json`](metrics/mechanism-seed42.json)，A100 的真实 checkpoint 指标见 [`../../gpu-validations/twinkv-a100-20260829.json`](../../gpu-validations/twinkv-a100-20260829.json)。checkpoint 不上传 GitHub。
+机制指标见 [`metrics/mechanism-seed42.json`](metrics/mechanism-seed42.json)，A30 的真实 checkpoint 指标见 [`../../gpu-validations/twinkv-a30-20260829.json`](../../gpu-validations/twinkv-a30-20260829.json)。CUDA smoke test 使用公开 Qwen2.5-0.5B 与 WikiText-2 上下文提取真实 KV tensor；默认 runner 仍支持 Qwen3-4B，指标只代表等预算 attention reconstruction，不冒充 LongBench 完整生成结果。checkpoint 不上传 GitHub。
 
 ## Evolve 接入
 

@@ -25,5 +25,5 @@ ADAPTER = register(ReproductionAdapter(
     device_capabilities=("cuda",),
     infer_device_capabilities=False,
     requires_gpu_validation=True,
-    gpu_validation_artifact="docs/gpu-validations/twinkv-a100-20260829.json",
+    gpu_validation_artifact="docs/gpu-validations/twinkv-a30-20260829.json",
 ))

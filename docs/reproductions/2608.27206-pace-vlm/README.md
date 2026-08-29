@@ -82,7 +82,7 @@ python -m auto_research.reproductions.pace_vlm.checkpoint \
   --examples 8 --seed 42
 ```
 
-机制指标见 [`metrics/mechanism-seed42.json`](metrics/mechanism-seed42.json)，A100 的可审计 checkpoint 指标见 [`../../gpu-validations/pace-vlm-a100-20260829.json`](../../gpu-validations/pace-vlm-a100-20260829.json)。模型权重和原始预测不提交 GitHub。
+机制指标见 [`metrics/mechanism-seed42.json`](metrics/mechanism-seed42.json)，A30 的可审计 checkpoint 指标见 [`../../gpu-validations/pace-vlm-a30-20260829.json`](../../gpu-validations/pace-vlm-a30-20260829.json)。该 CUDA smoke test 使用公开 SmolVLM2-500M 与 POPE/COCO 子集验证 APC 在真实视觉特征上的执行路径；默认 runner 仍支持 Qwen2.5-VL + RealWorldQA，前者不冒充后者的论文级结果。模型权重和原始预测不提交 GitHub。
 
 ## Evolve 接入
 

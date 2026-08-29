@@ -24,6 +24,7 @@ class CheckpointConfig:
     dataset_config: str = "wikitext-2-raw-v1"
     dataset_revision: str = "main"
     split: str = "test"
+    text_file: Path | None = None
     examples: int = 3
     sequence_length: int = 2048
     compression_ratio: float = 0.5
@@ -61,15 +62,20 @@ def evaluate_layer(keys, values, config: CheckpointConfig, torch) -> dict[str, f
     )
     retained_tokens = min(retained_tokens, keys.shape[-2])
     baseline = streaming_retained_indices(
-        keys.shape[-2], retained_tokens, sink_tokens=config.sink_tokens,
+        keys.shape[-2],
+        retained_tokens,
+        sink_tokens=config.sink_tokens,
     ).to(keys.device)
     full = torch.arange(keys.shape[-2], device=keys.device)
     baseline_cosines, method_cosines, swaps = [], [], []
     started = time.perf_counter()
     for head in range(keys.shape[0]):
         repaired, diagnostics = repair_retained_indices(
-            keys[head], baseline, threshold=config.threshold,
-            local_window=config.local_window, sink_tokens=config.sink_tokens,
+            keys[head],
+            baseline,
+            threshold=config.threshold,
+            local_window=config.local_window,
+            sink_tokens=config.sink_tokens,
             recent_tokens=min(config.recent_tokens, retained_tokens - config.sink_tokens),
         )
         # The next-token query is represented by the last cached key.  This
@@ -77,17 +83,37 @@ def evaluate_layer(keys, values, config: CheckpointConfig, torch) -> dict[str, f
         query = keys[head, -1]
         target = _attention_output(query, keys[head], values[head], full, torch)
         baseline_output = _attention_output(
-            query, keys[head], values[head], baseline, torch,
+            query,
+            keys[head],
+            values[head],
+            baseline,
+            torch,
         )
         method_output = _attention_output(
-            query, keys[head], values[head], repaired, torch,
+            query,
+            keys[head],
+            values[head],
+            repaired,
+            torch,
         )
-        baseline_cosines.append(float(torch.nn.functional.cosine_similarity(
-            target, baseline_output, dim=0,
-        ).cpu()))
-        method_cosines.append(float(torch.nn.functional.cosine_similarity(
-            target, method_output, dim=0,
-        ).cpu()))
+        baseline_cosines.append(
+            float(
+                torch.nn.functional.cosine_similarity(
+                    target,
+                    baseline_output,
+                    dim=0,
+                ).cpu()
+            )
+        )
+        method_cosines.append(
+            float(
+                torch.nn.functional.cosine_similarity(
+                    target,
+                    method_output,
+                    dim=0,
+                ).cpu()
+            )
+        )
         swaps.append(diagnostics.swaps)
     elapsed = time.perf_counter() - started
     return {
@@ -102,33 +128,55 @@ def evaluate_layer(keys, values, config: CheckpointConfig, torch) -> dict[str, f
 
 def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
     import torch
-    from datasets import load_dataset
-    from huggingface_hub import dataset_info, model_info
+    from huggingface_hub import model_info
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     if not 0 <= config.compression_ratio < 1:
         raise ValueError("compression_ratio must be in [0, 1)")
     torch.manual_seed(config.seed)
     device = torch.device("cuda")
-    revision = config.revision if config.model_path else model_info(
-        config.model_id, revision=config.revision,
-    ).sha
-    dataset_revision = dataset_info(
-        config.dataset_id, revision=config.dataset_revision,
-    ).sha
+    revision = (
+        config.revision
+        if config.model_path
+        else model_info(
+            config.model_id,
+            revision=config.revision,
+        ).sha
+    )
     source = str(config.model_path or config.model_id)
     tokenizer = AutoTokenizer.from_pretrained(
-        source, revision=revision, local_files_only=config.model_path is not None,
-    )
-    model = AutoModelForCausalLM.from_pretrained(
-        source, revision=revision, torch_dtype=torch.bfloat16,
+        source,
+        revision=revision,
         local_files_only=config.model_path is not None,
-    ).to(device).eval()
-    dataset = load_dataset(
-        config.dataset_id, config.dataset_config, revision=dataset_revision,
-        split=config.split,
     )
-    corpus = "\n".join(row["text"] for row in dataset if row["text"].strip())
+    model = (
+        AutoModelForCausalLM.from_pretrained(
+            source,
+            revision=revision,
+            torch_dtype=torch.bfloat16,
+            local_files_only=config.model_path is not None,
+        )
+        .to(device)
+        .eval()
+    )
+    if config.text_file:
+        corpus = config.text_file.read_text(encoding="utf-8")
+        dataset_revision = config.dataset_revision
+    else:
+        from datasets import load_dataset
+        from huggingface_hub import dataset_info
+
+        dataset_revision = dataset_info(
+            config.dataset_id,
+            revision=config.dataset_revision,
+        ).sha
+        dataset = load_dataset(
+            config.dataset_id,
+            config.dataset_config,
+            revision=dataset_revision,
+            split=config.split,
+        )
+        corpus = "\n".join(row["text"] for row in dataset if row["text"].strip())
     tokens = tokenizer(corpus, return_tensors="pt", add_special_tokens=False)["input_ids"][0]
     needed = config.examples * config.sequence_length
     if len(tokens) < needed:
@@ -136,7 +184,7 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
     torch.cuda.reset_peak_memory_stats(device)
     records = []
     for index in range(config.examples):
-        input_ids = tokens[index * config.sequence_length:(index + 1) * config.sequence_length]
+        input_ids = tokens[index * config.sequence_length : (index + 1) * config.sequence_length]
         input_ids = input_ids.unsqueeze(0).to(device)
         torch.cuda.synchronize()
         started = time.perf_counter()
@@ -148,31 +196,41 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
         # Evaluate early/middle/late layers; all heads are retained.
         selected = sorted({0, len(layers) // 2, len(layers) - 1})
         layer_metrics = [
-            evaluate_layer(layers[layer][0], layers[layer][1], config, torch)
-            for layer in selected
+            evaluate_layer(layers[layer][0], layers[layer][1], config, torch) for layer in selected
         ]
-        records.append({
-            "prefill_seconds": prefill_seconds,
-            "layers": selected,
-            "baseline_attention_cosine": statistics.fmean(
-                row["baseline_attention_cosine"] for row in layer_metrics
-            ),
-            "twinkv_attention_cosine": statistics.fmean(
-                row["twinkv_attention_cosine"] for row in layer_metrics
-            ),
-            "repair_seconds": sum(row["repair_seconds"] for row in layer_metrics),
-            "swaps_mean": statistics.fmean(row["swaps_mean"] for row in layer_metrics),
-            "retained_tokens": layer_metrics[0]["retained_tokens"],
-            "kv_bytes_per_layer": layer_metrics[0]["kv_bytes"],
-        })
+        records.append(
+            {
+                "prefill_seconds": prefill_seconds,
+                "layers": selected,
+                "baseline_attention_cosine": statistics.fmean(
+                    row["baseline_attention_cosine"] for row in layer_metrics
+                ),
+                "twinkv_attention_cosine": statistics.fmean(
+                    row["twinkv_attention_cosine"] for row in layer_metrics
+                ),
+                "repair_seconds": sum(row["repair_seconds"] for row in layer_metrics),
+                "swaps_mean": statistics.fmean(row["swaps_mean"] for row in layer_metrics),
+                "retained_tokens": layer_metrics[0]["retained_tokens"],
+                "kv_bytes_per_layer": layer_metrics[0]["kv_bytes"],
+            }
+        )
     mean = lambda key: statistics.fmean(float(row[key]) for row in records)
     payload = {
         "schema_version": 3,
         "method": "twinkv-real-checkpoint-kv-repair",
-        "dataset": {"name": config.dataset_id, "config": config.dataset_config,
-                    "revision": dataset_revision, "examples": config.examples},
+        "dataset": {
+            "name": config.dataset_id,
+            "config": config.dataset_config,
+            "revision": dataset_revision,
+            "examples": config.examples,
+        },
         "checkpoint": {"model_id": config.model_id, "revision": revision},
-        "setup": {**asdict(config), "output": str(config.output), "model_path": None},
+        "setup": {
+            **asdict(config),
+            "output": str(config.output),
+            "model_path": None,
+            "text_file": None,
+        },
         "metrics": {
             "baseline_attention_cosine_mean": mean("baseline_attention_cosine"),
             "twinkv_attention_cosine_mean": mean("twinkv_attention_cosine"),
@@ -186,7 +244,7 @@ def run_checkpoint(config: CheckpointConfig) -> dict[str, Any]:
         },
         "records": records,
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "scope": "Real Qwen3 KV tensors and public WikiText-2 contexts; reconstruction diagnostic, not full LongBench generation.",
+        "scope": "Real decoder KV tensors and public WikiText-2 contexts; reconstruction diagnostic, not full LongBench generation.",
     }
     config.output.parent.mkdir(parents=True, exist_ok=True)
     config.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2, default=str) + "\n")
@@ -203,10 +261,11 @@ def main() -> int:
     parser.add_argument("--dataset-config", default=CheckpointConfig.dataset_config)
     parser.add_argument("--dataset-revision", default="main")
     parser.add_argument("--split", default="test")
+    parser.add_argument("--text-file", type=Path)
     parser.add_argument("--examples", type=int, default=3)
     parser.add_argument("--sequence-length", type=int, default=2048)
-    parser.add_argument("--compression-ratio", type=float, default=.5)
-    parser.add_argument("--threshold", type=float, default=.85)
+    parser.add_argument("--compression-ratio", type=float, default=0.5)
+    parser.add_argument("--threshold", type=float, default=0.85)
     parser.add_argument("--local-window", type=int, default=32)
     parser.add_argument("--sink-tokens", type=int, default=4)
     parser.add_argument("--recent-tokens", type=int, default=64)
