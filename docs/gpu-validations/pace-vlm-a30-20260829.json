@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "adapter_key": "pace-vlm",
+  "validated_at": "2026-08-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A30"
+  },
+  "command": [
+    "python",
+    "-m",
+    "auto_research.reproductions.pace_vlm.checkpoint",
+    "--model-id",
+    "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "--revision",
+    "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "--annotations",
+    "data/pope/coco_pope_adversarial.json",
+    "--image-root",
+    "data/pope/images",
+    "--examples",
+    "8",
+    "--maximum-new-tokens",
+    "16",
+    "--seed",
+    "42",
+    "--output",
+    "runs/pace-vlm/checkpoint-seed42.json"
+  ],
+  "dataset": {
+    "name": "POPE adversarial / COCO val2014",
+    "revision": "public POPE release",
+    "examples": 8
+  },
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  },
+  "result": "passed",
+  "metrics": {
+    "baseline_accuracy": 0.625,
+    "pace_accuracy": 0.625,
+    "baseline_input_tokens_mean": 878.5,
+    "pace_input_tokens_mean": 481.5,
+    "token_reduction_percent": 45.19066590779738,
+    "baseline_latency_seconds_mean": 0.20026353420689702,
+    "pace_latency_seconds_mean": 0.15056169359013438,
+    "peak_gpu_memory_mb": 1473.486328125
+  },
+  "provenance": {
+    "commit": "62a2fa5a45f6f504dd123f61d6fc94c12bcd770f",
+    "artifact_path": "docs/gpu-validations/pace-vlm-a30-20260829.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

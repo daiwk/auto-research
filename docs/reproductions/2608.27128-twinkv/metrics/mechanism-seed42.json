@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "method": "twinkv-fixed-budget-repair",
+  "seed": 42,
+  "diagnostic_only": true,
+  "sequence_length": 192,
+  "retained_tokens": 96,
+  "budget_change_percent": 0.0,
+  "manifest_ref": "reproduction:twinkv",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.27128-twinkv/metrics/mechanism-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

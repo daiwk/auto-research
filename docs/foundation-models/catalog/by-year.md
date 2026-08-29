@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-08 · [PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference](../../reproductions/2608.27206-pace-vlm/README.md)（`pace-vlm`）：VLM 的视觉 token 一方面在 prefill 阶段带来大量计算，另一方面在抽取阶段仍会保留大量与问题无关的内容。PACE 将两个阶段拆开处理：APC 用浅层 ViT preview 同时估计全局语义密度和局部细节，按图像难度自适应缩放；DDAE 再融合 LLM 与视觉编码器的注意力，以置信度决定两种证据各占多少权重，而不是固定只信一种注意力图。
+- 2026-08 · [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../../reproductions/2608.27128-twinkv/README.md)（`twinkv`）：现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。
 - 2026-08 · [MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations](../../reproductions/2608.25575-mllmclip/README.md)（`mllmclip`）：MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。
 - 2026-08 · [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../../reproductions/2608.26105-vbvr-pro/README.md)（`vbvr-pro`）：通用 VLM judge 容易被流畅输出误导，难以逐实例核对时空状态。VBVR-Pro 为每种任务定义可执行 scorer，把中间状态、约束和最终状态都变成可验证奖励，并据此训练多模态生成模型。
 - 2026-08 · [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../../reproductions/2608.24053-wemm-embedding/README.md)（`wemm-embedding`）：不同检索任务通常维护独立的文本、图像、视频或文档 encoder。WeMM 把任意交错多模态输入映射到同一空间：第一阶段用数亿 pair 做大规模 alignment；第二阶段加入精选 relevance、细粒度监督和跨尺度知识迁移，并用 Matryoshka 表征支持按成本选择输出维度。

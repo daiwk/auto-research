@@ -4024,6 +4024,62 @@
     },
     {
       "domain": "foundation-models",
+      "key": "pace-vlm",
+      "title": "PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference",
+      "paper_url": "https://arxiv.org/abs/2608.27206",
+      "detail_path": "reproductions/2608.27206-pace-vlm/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "visual-token-compression",
+        "inference-serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Sun Yat-sen University",
+      "published": "2026-08-27",
+      "code": "https://github.com/jjL357/PACE",
+      "adapter": {
+        "adapter_key": "pace-vlm",
+        "arxiv_id": "2608.27206",
+        "title": "PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference",
+        "paper_url": "https://arxiv.org/abs/2608.27206",
+        "track": "llm",
+        "organization": "Sun Yat-sen University",
+        "published": "2026-08-27",
+        "code_url": "https://github.com/jjL357/PACE",
+        "topics": [
+          "multimodal-foundation-model",
+          "visual-token-compression",
+          "inference-serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/pace_vlm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "RealWorldQA checkpoint subset"
+        ],
+        "baseline": "Qwen2.5-VL at the original visual-token budget",
+        "metrics": [
+          "answer accuracy",
+          "visual tokens",
+          "latency",
+          "peak GPU memory"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/pace-vlm-a30-20260829.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "penelope",
       "title": "Penelope: Localized Latent Recurrence for Efficient Structured Reasoning",
       "paper_url": "https://arxiv.org/abs/2607.25915",
@@ -4980,6 +5036,64 @@
         ],
         "requires_gpu_validation": false,
         "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "twinkv",
+      "title": "TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy",
+      "paper_url": "https://arxiv.org/abs/2608.27128",
+      "detail_path": "reproductions/2608.27128-twinkv/README.md",
+      "topic": [
+        "kv-cache",
+        "long-context",
+        "inference-serving",
+        "compression"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "The Hong Kong University of Science and Technology (Guangzhou)",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": {
+        "adapter_key": "twinkv",
+        "arxiv_id": "2608.27128",
+        "title": "TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy",
+        "paper_url": "https://arxiv.org/abs/2608.27128",
+        "track": "llm",
+        "organization": "The Hong Kong University of Science and Technology (Guangzhou)",
+        "published": "2026-08-27",
+        "code_url": null,
+        "topics": [
+          "kv-cache",
+          "long-context",
+          "inference-serving",
+          "compression"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/twinkv",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "WikiText-2 long-context checkpoint subset"
+        ],
+        "baseline": "StreamingLLM sink + recent eviction at the same KV budget",
+        "metrics": [
+          "attention-output cosine",
+          "repair latency",
+          "KV bytes",
+          "peak GPU memory"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/twinkv-a30-20260829.json",
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []

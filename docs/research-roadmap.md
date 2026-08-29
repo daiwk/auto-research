@@ -70,6 +70,8 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | MM-001 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 视频多模态 | 固定 SmolVLM2 commit；Video-MME-v2 Parquet/JSONL + MP4；逐题续跑、三 seed、置信区间和子集边界 |
 | MM-002 | DONE · [PR #115](https://github.com/daiwk/auto-research/pull/115) | 音频多模态 | 固定 CLAP commit；ESC-50/ESC-10 真实 WAV；zero-shot top-1/top-5 和 text embedding cache fingerprint |
 | MM-003 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | 具身与大规模多模态后训练 | SmolVLA/LeRobot 真实训练入口、数据 manifest 与明确的 simulator/硬件成功率边界 |
+| FM-003 | DONE · [PR #137](https://github.com/daiwk/auto-research/pull/137) | TwinKV 固定预算 KV eviction repair | 精确公式、Qwen3/Qwen2.5 真实 KV runner、公开 WikiText-2 长上下文、等预算质量/延迟/显存与 A30 receipt |
+| MM-004 | DONE · [PR #137](https://github.com/daiwk/auto-research/pull/137) | PACE 视觉 token 压缩与抽取 | APC/DDAE、Qwen2.5-VL + RealWorldQA 默认路径、SmolVLM2 + POPE 真实验证、质量/token/延迟/显存与 A30 receipt |
 
 ### LLM 后训练
 
@@ -98,6 +100,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | EV-004 | DONE · [PR #117](https://github.com/daiwk/auto-research/pull/117) | GenRec 类生成式推荐 evolve | MovieLens-1M 真实全目录 head、context/reward/distillation 旋钮和统一 ID-catalog 基线；Netflix 不因此获得论文优先级 |
 | INFRA-001 | DONE · [PR #111](https://github.com/daiwk/auto-research/pull/111) | GPU 依赖防护 | pip dry-run 阻止静默替换现有 PyTorch；Linux CPU 合同测试覆盖，既有 A30 关键路径回归继续保留 |
 | INFRA-002 | DONE · [PR #117](https://github.com/daiwk/auto-research/pull/117) | 重点方法多 seed 晋级 | 推荐/基础模型 adapter、后训练和 Agent 统一 3 seeds、置信区间、逐 seed 失败记录与断点续跑 |
+| EV-005 | DONE · [PR #137](https://github.com/daiwk/auto-research/pull/137) | PACE 与 TwinKV checkpoint/结构算子 | 论文 ID → operator 可追踪；PACE 接入 VLM checkpoint 配方，TwinKV 接入可执行 micro-LLM attention，并与真实 checkpoint 复用 repair 函数 |
 
 ## 等待公开证据，不创建占位实现
 

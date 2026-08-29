@@ -30,6 +30,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         return compatible(["reasoning:1", "reasoning:2", "reasoning:4", "reasoning:8"])
     if model == "vlm-checkpoint":
         return compatible([
+            "checkpoint_vlm:pace-apc",
             "checkpoint_vlm:direct",
             "checkpoint_vlm:context-first",
             "checkpoint_vlm:elimination",
@@ -129,7 +130,7 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "engram", "looped_latent_attention", "gaugequant", "penelope",
             "switch_transformer", "mamba", "switch_attention",
             "native_sparse_attention", "gated_attention",
-            "nsa_gated_attention", "wide_dynamic_width", "retoken", "optimizer:muon",
+            "nsa_gated_attention", "wide_dynamic_width", "retoken", "twinkv", "optimizer:muon",
             "block_attnres", "rd_attnres",
             "olm_composable",
             "macro", "hilp",
@@ -163,6 +164,9 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "retoken": (
                 "retoken", "retrieval token", "value cache retrieval",
                 "检索 token", "视觉缓存检索",
+            ),
+            "twinkv": (
+                "twinkv", "kv cache repair", "kv eviction", "kv 修复", "缓存淘汰",
             ),
             "rd_attnres": (
                 "rd-attnres", "role decoupled", "qk v route", "残差路由", "角色解耦",
@@ -376,6 +380,11 @@ def _propose_multimodal(parent, generation, index, architectures, rng):
 def _propose_checkpoint_vlm(parent, generation, index, architectures, rng):
     if generation == 1:
         candidate = architectures[index % len(architectures)].split(":", 1)[1]
+        if candidate == "pace-apc":
+            return replace(
+                parent, checkpoint_prompt_style="pace-apc",
+                checkpoint_image_size=rng.choice([224, 336, 448]),
+            ), "PACE APC：搜索自适应视觉 token budget；保持 checkpoint、样本和解码预算不变"
         if candidate == "no-hint":
             return replace(parent, checkpoint_use_hint=False), (
                 "真实 checkpoint 输入消融：移除 ScienceQA hint；其余推理参数保持基线"

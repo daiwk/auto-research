@@ -42,7 +42,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-仓库目前注册 **269 个**论文 adapter，统一事实源是
+仓库目前注册 **271 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](research-manifest.json)。站点提供按研究域、机构、
 主题和年份浏览的[论文实现索引](reproductions/README.md)，每篇详情页包含论文链接、
 一作机构、发布日期、原作者代码状态、本地 adapter/代码路径、架构与公式、原文线上/离线

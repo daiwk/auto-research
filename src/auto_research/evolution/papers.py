@@ -33,6 +33,8 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2608.27206": ("checkpoint_vlm:pace-apc", "PACE 的浅层视觉预览、自适应视觉 token budget 与双源注意力融合"),
+    "2608.27128": ("twinkv", "TwinKV 在固定 KV budget 下以 pairwise key redundancy 修复 wrapped eviction policy"),
     "2608.26105": ("multimodal:vbvr-verifier", "VBVR-Pro 的任务专用可执行 verifier、过程状态检查与失败归因"),
     "2608.25575": ("multimodal:mllmclip-cka", "MLLMCLIP 的逐层注意力 token 选择与 CKA 引导轻量投影"),
     "2608.24053": ("multimodal:wemm-embedding", "WeMM 的两阶段全模态对齐、细粒度 relevance refinement、跨尺度蒸馏与 Matryoshka 表征"),
@@ -289,6 +291,8 @@ FALLBACK_PAPERS = (
 )
 
 LLM_FALLBACK_PAPERS = (
+    Paper("PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference", "Adaptive preview-based visual compression and dual-source attention extraction.", [], "2026-08-27", "https://arxiv.org/abs/2608.27206", "2608.27206"),
+    Paper("TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy", "A fixed-budget redundancy repair pass wraps existing KV eviction policies.", [], "2026-08-27", "https://arxiv.org/abs/2608.27128", "2608.27128"),
     Paper("Learning Transferable Visual Models From Natural Language Supervision", "CLIP learns aligned image and text encoders with a symmetric contrastive objective.", [], "2021-02-26", "https://arxiv.org/abs/2103.00020", "2103.00020"),
     Paper("BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models", "A query transformer bridges frozen image encoders and frozen language models.", [], "2023-01-30", "https://arxiv.org/abs/2301.12597", "2301.12597"),
     Paper("Visual Instruction Tuning", "LLaVA projects frozen visual features into a language model and performs multimodal instruction tuning.", [], "2023-04-17", "https://arxiv.org/abs/2304.08485", "2304.08485"),

@@ -33,25 +33,29 @@ def test_all_micro_vlm_connectors_execute():
             continue
         model = build_micro_vlm(architecture, 32)
         assert model(images, questions).shape == (2, 9)
-        expected_tokens = 4 if architecture in {
-            "micro_vlm_qformer", "micro_vlm_pixelshuffle"
-        } else 16
+        expected_tokens = (
+            4 if architecture in {"micro_vlm_qformer", "micro_vlm_pixelshuffle"} else 16
+        )
         assert model.architecture_stats()["visual_tokens"] == expected_tokens
 
 
 def test_checkpoint_vlm_search_space_changes_only_inference_recipe():
     import random
+
     architectures = allowed_architectures("vlm-checkpoint", "prompt and hint", [])
     assert architectures == [
-        "checkpoint_vlm:direct", "checkpoint_vlm:context-first",
-        "checkpoint_vlm:elimination", "checkpoint_vlm:no-hint",
+        "checkpoint_vlm:pace-apc",
+        "checkpoint_vlm:direct",
+        "checkpoint_vlm:context-first",
+        "checkpoint_vlm:elimination",
+        "checkpoint_vlm:no-hint",
     ]
     baseline = Genome(architecture="checkpoint_vlm")
     candidate, rationale = propose(
         baseline, 1, 1, architectures, random.Random(42), "vlm-checkpoint"
     )
     assert candidate.architecture == "checkpoint_vlm"
-    assert candidate.checkpoint_prompt_style == "context-first"
+    assert candidate.checkpoint_prompt_style == "direct"
     assert candidate.dimensions == baseline.dimensions
     assert "不变" in rationale
 
@@ -59,25 +63,38 @@ def test_checkpoint_vlm_search_space_changes_only_inference_recipe():
 def test_multimodal_paper_source_attribution_uses_the_selected_operator():
     papers = [
         PaperInspiration(
-            "2301.12597", "BLIP-2", "https://arxiv.org/abs/2301.12597",
-            "2023-01-30", "micro_vlm_qformer", "query connector", "fallback",
+            "2301.12597",
+            "BLIP-2",
+            "https://arxiv.org/abs/2301.12597",
+            "2023-01-30",
+            "micro_vlm_qformer",
+            "query connector",
+            "fallback",
             executable=True,
         ),
         PaperInspiration(
-            "2502.14786", "SigLIP 2", "https://arxiv.org/abs/2502.14786",
-            "2025-02-20", "objective:siglip2", "sigmoid objective", "fallback",
+            "2502.14786",
+            "SigLIP 2",
+            "https://arxiv.org/abs/2502.14786",
+            "2025-02-20",
+            "objective:siglip2",
+            "sigmoid objective",
+            "fallback",
             executable=True,
         ),
         PaperInspiration(
-            "2401.02385", "TinyLlama", "https://arxiv.org/abs/2401.02385",
-            "2024-01-04", "small_llm", "small language model", "fallback",
+            "2401.02385",
+            "TinyLlama",
+            "https://arxiv.org/abs/2401.02385",
+            "2024-01-04",
+            "small_llm",
+            "small language model",
+            "fallback",
             executable=True,
         ),
     ]
     qformer = Genome(architecture="micro_vlm_qformer")
-    siglip = Genome(
-        architecture="micro_vlm_linear", multimodal_objective="siglip2"
-    )
+    siglip = Genome(architecture="micro_vlm_linear", multimodal_objective="siglip2")
     assert _paper_ids(qformer, papers) == ("2301.12597",)
     assert _paper_ids(siglip, papers) == ("2502.14786",)
 

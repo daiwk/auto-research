@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "pace-vlm",
+  "arxiv_id": "2608.27206",
+  "title": "PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference",
+  "paper_url": "https://arxiv.org/abs/2608.27206",
+  "organization": "Sun Yat-sen University",
+  "published": "2026-08-27",
+  "upstream_code": "https://github.com/jjL357/PACE",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "visual-token-compression",
+    "inference-serving"
+  ],
+  "local_code": "src/auto_research/reproductions/pace_vlm",
+  "documentation": "docs/reproductions/2608.27206-pace-vlm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "RealWorldQA checkpoint subset"
+  ],
+  "baseline": "Qwen2.5-VL at the original visual-token budget",
+  "metrics": [
+    "answer accuracy",
+    "visual tokens",
+    "latency",
+    "peak GPU memory"
+  ],
+  "mechanisms": [
+    "paper-scale benchmark suite",
+    "custom fused serving kernels"
+  ],
+  "evolve_operators": []
+}

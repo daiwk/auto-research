@@ -167,6 +167,14 @@
 
 - 2023-05-17 · [DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining](../../reproductions/2305.10429-doremi/README.md)（`doremi`）：用小型 proxy model 的 excess loss 做 group DRO，动态提升欠拟合域权重，再按所得配比训练目标模型。
 
+## Sun Yat-sen University
+
+- 2026-08-27 · [PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference](../../reproductions/2608.27206-pace-vlm/README.md)（`pace-vlm`）：VLM 的视觉 token 一方面在 prefill 阶段带来大量计算，另一方面在抽取阶段仍会保留大量与问题无关的内容。PACE 将两个阶段拆开处理：APC 用浅层 ViT preview 同时估计全局语义密度和局部细节，按图像难度自适应缩放；DDAE 再融合 LLM 与视觉编码器的注意力，以置信度决定两种证据各占多少权重，而不是固定只信一种注意力图。
+
+## The Hong Kong University of Science and Technology (Guangzhou)
+
+- 2026-08-27 · [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../../reproductions/2608.27128-twinkv/README.md)（`twinkv`）：现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。
+
 ## Together AI
 
 - 2024-01-19 · [Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads](../../reproductions/2401.10774-medusa/README.md)（`medusa`）：在冻结或联合微调的 backbone 上增加多个 future-token heads，以 tree attention 同时验证候选分支，减少串行解码步数。
