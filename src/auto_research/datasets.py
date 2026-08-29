@@ -21,7 +21,11 @@ MOVIELENS_URL = (
     "f74a79d7debb00d39a8b757876b6b2038d52825c/ml-100k.zip"
 )
 MOVIELENS_SHA256 = "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229"
-MOVIELENS_1M_URL = "https://files.grouplens.org/datasets/movielens/ml-1m.zip"
+MOVIELENS_1M_URL = (
+    "https://raw.githubusercontent.com/vandit15/Movielens-Data/"
+    "19e4c9d1423bf3f2ccc1a3093823c362c49950b9/ml-1m/ratings.dat"
+)
+MOVIELENS_1M_SHA256 = "506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f"
 AMAZON_BEAUTY_5CORE_URL = (
     "https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Beauty_5.json.gz"
 )
@@ -36,7 +40,19 @@ ALPACA_URL = "https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/a
 GSM8K_BASE_URL = (
     "https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data"
 )
-DELICIOUS_2K_URL = "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-delicious-2k.zip"
+DELICIOUS_2K_BASE_URL = (
+    "https://raw.githubusercontent.com/qcymkxyc/RecSys/"
+    "cb313bf92f80d3cd7c7bde39b12ab4319ccf61a8/data/delicious-2k"
+)
+DELICIOUS_2K_FILES = {
+    "user_taggedbookmarks-timestamps.dat": (
+        "df88bb692dc67dbdb844221f967dc8d1a89fb068c6d2f3bb8f602b952dd9cca2"
+    ),
+    "user_contacts-timestamps.dat": (
+        "67bb2d462bd794a331f501d7d480fc02eef196548f51a5a23a28e2e50736968c"
+    ),
+    "bookmark_tags.dat": "a178dfa1169729c0fe592449342856e2e855dbaf280a5016faff75d2f65464b4",
+}
 
 
 def tiny_shakespeare(root: Path, allow_network: bool = True) -> str:
@@ -132,7 +148,10 @@ def movielens_100k(root: Path, allow_network: bool = True) -> list[tuple[int, in
 def movielens_1m(root: Path, allow_network: bool = True) -> list[tuple[int, int, float, int]]:
     target = root / "ml-1m" / "ratings.dat"
     if not target.exists():
-        _download_and_extract(root, "ml-1m.zip", MOVIELENS_1M_URL, target, allow_network)
+        if not allow_network:
+            raise FileNotFoundError(f"dataset missing and network disabled: {target}")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        _download(MOVIELENS_1M_URL, target, expected_sha256=MOVIELENS_1M_SHA256)
     rows: list[tuple[int, int, float, int]] = []
     with target.open(encoding="utf-8") as stream:
         for line in stream:
@@ -147,24 +166,23 @@ def delicious_2k_files(root: Path, allow_network: bool = True) -> Path:
     ConnectionMind evaluates on Delicious and Foursquare.  Delicious-2K is the
     smaller fully public graph and contains the three relations needed by the
     local reproduction: user-bookmark-tag events, bookmark-tag edges and social
-    contacts.  The archive is data-only and is intentionally never committed.
+    contacts.  Only those relations are downloaded; each file is pinned to an
+    immutable mirror commit and checksum-verified.
     """
     directory = root / "hetrec2011-delicious-2k"
     target = directory / "user_taggedbookmarks-timestamps.dat"
-    if target.exists():
+    required = tuple(directory / filename for filename in DELICIOUS_2K_FILES)
+    if all(path.exists() for path in required):
         return directory
     if not allow_network:
         raise FileNotFoundError(f"dataset missing and network disabled: {target}")
-    archive = root / "hetrec2011-delicious-2k.zip"
-    archive.parent.mkdir(parents=True, exist_ok=True)
-    _download(DELICIOUS_2K_URL, archive)
     directory.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(archive) as bundle:
-        for member in bundle.infolist():
-            destination = (directory / member.filename).resolve()
-            if directory.resolve() not in destination.parents:
-                raise ValueError(f"unsafe archive member: {member.filename}")
-            bundle.extract(member, directory)
+    for filename, sha256 in DELICIOUS_2K_FILES.items():
+        _download(
+            f"{DELICIOUS_2K_BASE_URL}/{filename}",
+            directory / filename,
+            expected_sha256=sha256,
+        )
     return directory
 
 
