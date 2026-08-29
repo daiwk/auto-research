@@ -4072,7 +4072,7 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/pace-vlm-a100-20260829.json",
+        "gpu_validation_artifact": "docs/gpu-validations/pace-vlm-a30-20260829.json",
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []
@@ -5093,7 +5093,7 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/twinkv-a100-20260829.json",
+        "gpu_validation_artifact": "docs/gpu-validations/twinkv-a30-20260829.json",
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []

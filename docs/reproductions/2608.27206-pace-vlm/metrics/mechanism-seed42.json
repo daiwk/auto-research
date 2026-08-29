@@ -7,5 +7,18 @@
   "detailed_retention": 1.0,
   "detail_vs_smooth_retention_points": 95.0,
   "ddae_llm_weight": 0.506151,
-  "ddae_vision_weight": 0.493849
+  "ddae_vision_weight": 0.493849,
+  "manifest_ref": "reproduction:pace-vlm",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.27206-pace-vlm/metrics/mechanism-seed42.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
 }

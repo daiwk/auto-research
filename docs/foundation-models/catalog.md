@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 多模态基础模型 | [PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference](../reproductions/2608.27206-pace-vlm/README.md) | Sun Yat-sen University，2026-08-27 | [已开源](https://github.com/jjL357/PACE) | `pace-vlm` |
+| 注意力与长上下文 | [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../reproductions/2608.27128-twinkv/README.md) | The Hong Kong University of Science and Technology (Guangzhou)，2026-08-27 | 未发现官方代码 | `twinkv` |
 | 多模态基础模型 | [MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations](../reproductions/2608.25575-mllmclip/README.md) | KAIST / Sony AI，2026-08-26 | 未发现官方代码 | `mllmclip` |
 | 多模态基础模型 | [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../reproductions/2608.26105-vbvr-pro/README.md) | Nanyang Technological University / VBVR Community，2026-08-26 | [已开源](https://www.video-reason.com/?v=pro) | `vbvr-pro` |
 | 多模态基础模型 | [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../reproductions/2608.24053-wemm-embedding/README.md) | WeChat Vision, Tencent，2026-08-25 | [已开源](https://github.com/Tencent/WeMM-Embedding) | `wemm-embedding` |

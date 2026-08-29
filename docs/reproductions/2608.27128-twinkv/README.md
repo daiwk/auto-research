@@ -51,7 +51,9 @@ $$
 
 被淘汰且 $s_i<\tau$ 的 token 是 orphan；已保留、非 sink/recent 且 $s_i\ge\tau$ 的 token 是 donor。orphan 按 $s_i$ 升序、donor 按 $s_i$ 降序配对，交换数量
 
-$$m=\min(|O|,|D|),\qquad |R'|=|R|.$$
+$$
+m=\min(|O|,|D|),\qquad |R'|=|R|.
+$$
 
 ### 论文离线与线上效果
 
@@ -72,6 +74,8 @@ python -m auto_research.reproductions.twinkv.checkpoint \
 ```
 
 机制指标见 [`metrics/mechanism-seed42.json`](metrics/mechanism-seed42.json)，A30 的真实 checkpoint 指标见 [`../../gpu-validations/twinkv-a30-20260829.json`](../../gpu-validations/twinkv-a30-20260829.json)。CUDA smoke test 使用公开 Qwen2.5-0.5B 与 WikiText-2 上下文提取真实 KV tensor；默认 runner 仍支持 Qwen3-4B，指标只代表等预算 attention reconstruction，不冒充 LongBench 完整生成结果。checkpoint 不上传 GitHub。
+
+这次固定 50% KV budget 的验证是一个重要负结果：StreamingLLM 基线相对 full-cache attention output 的 cosine 为 **0.99786**，加入当前 TwinKV repair 后为 **0.91000（-0.08787）**。也就是说，实现与预算约束都正常执行，但 `StreamingLLM + threshold=0.85` 在该 checkpoint/上下文上不合适；后续应把 wrapped policy、阈值与 recent-token 保护区交给 Evolve 搜索，而不能把论文在其他模型和任务上的平均改善直接外推到这里。
 
 ## Evolve 接入
 

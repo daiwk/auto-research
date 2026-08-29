@@ -8,14 +8,29 @@
   "published": "2026-08-27",
   "upstream_code": "否：原作者未发布代码（核查日期：2026-08-29）",
   "track": "llm",
-  "topics": ["kv-cache", "long-context", "inference-serving", "compression"],
+  "topics": [
+    "kv-cache",
+    "long-context",
+    "inference-serving",
+    "compression"
+  ],
   "local_code": "src/auto_research/reproductions/twinkv",
   "documentation": "docs/reproductions/2608.27128-twinkv/README.md",
   "fidelity": "core_mechanism",
   "evaluation_tier": "l2_public_dataset",
-  "datasets": ["WikiText-2 long-context checkpoint subset"],
+  "datasets": [
+    "WikiText-2 long-context checkpoint subset"
+  ],
   "baseline": "StreamingLLM sink + recent eviction at the same KV budget",
-  "metrics": ["attention-output cosine", "repair latency", "KV bytes", "peak GPU memory"],
-  "mechanisms": ["full LongBench/LooGLE/RULER matrix", "production KV-cache kernels"],
-  "evolve_operators": ["twinkv"]
+  "metrics": [
+    "attention-output cosine",
+    "repair latency",
+    "KV bytes",
+    "peak GPU memory"
+  ],
+  "mechanisms": [
+    "full LongBench/LooGLE/RULER matrix",
+    "production KV-cache kernels"
+  ],
+  "evolve_operators": []
 }

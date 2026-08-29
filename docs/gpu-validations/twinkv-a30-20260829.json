@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "adapter_key": "twinkv",
+  "validated_at": "2026-08-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A30"
+  },
+  "command": [
+    "python",
+    "-m",
+    "auto_research.reproductions.twinkv.checkpoint",
+    "--model-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--dataset-revision",
+    "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "--examples",
+    "3",
+    "--sequence-length",
+    "2048",
+    "--compression-ratio",
+    "0.5",
+    "--seed",
+    "42",
+    "--output",
+    "runs/twinkv/checkpoint-seed42.json"
+  ],
+  "dataset": {
+    "name": "Salesforce/wikitext",
+    "config": "wikitext-2-raw-v1",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "examples": 3,
+    "sequence_length": 2048
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+  },
+  "result": "passed",
+  "metrics": {
+    "baseline_attention_cosine_mean": 0.9978649781809913,
+    "twinkv_attention_cosine_mean": 0.9099964433246188,
+    "cosine_delta": -0.08786853485637247,
+    "prefill_seconds_mean": 0.1158857320745786,
+    "repair_seconds_mean": 0.07349139327804248,
+    "swaps_mean": 264.6111111111111,
+    "retained_tokens": 1024,
+    "kv_bytes_per_layer": 524288,
+    "peak_gpu_memory_mb": 2198.80712890625
+  },
+  "provenance": {
+    "commit": "62a2fa5a45f6f504dd123f61d6fc94c12bcd770f",
+    "artifact_path": "docs/gpu-validations/twinkv-a30-20260829.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

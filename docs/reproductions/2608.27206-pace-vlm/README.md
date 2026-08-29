@@ -9,9 +9,11 @@
 | 论文链接 | [arXiv 2608.27206](https://arxiv.org/abs/2608.27206) |
 | 公司/机构 | Sun Yat-sen University |
 | 首次公开日期 | 2026-08-27（arXiv v1） |
-| 原文开源代码 | 是：[PACE](https://github.com/jjL357/PACE)（本次核对 commit `7755240`） |
+| 原文开源代码 | 是：[PACE](https://github.com/jjL357/PACE) |
 | Adapter | `pace-vlm` |
 | 本地复现代码 | [`src/auto_research/reproductions/pace_vlm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/pace_vlm/) |
+
+本次实现核对的上游 commit 为 `7755240eb02510507c270457ed1768ddfe80c206`。
 
 ## 原始论文总结
 
@@ -83,6 +85,8 @@ python -m auto_research.reproductions.pace_vlm.checkpoint \
 ```
 
 机制指标见 [`metrics/mechanism-seed42.json`](metrics/mechanism-seed42.json)，A30 的可审计 checkpoint 指标见 [`../../gpu-validations/pace-vlm-a30-20260829.json`](../../gpu-validations/pace-vlm-a30-20260829.json)。该 CUDA smoke test 使用公开 SmolVLM2-500M 与 POPE/COCO 子集验证 APC 在真实视觉特征上的执行路径；默认 runner 仍支持 Qwen2.5-VL + RealWorldQA，前者不冒充后者的论文级结果。模型权重和原始预测不提交 GitHub。
+
+这次 8 样本验证中，原分辨率与 APC 的 answer accuracy 都是 **0.625**；平均输入 token 从 **878.5** 降到 **481.5（-45.19%）**，平均生成时延从 **0.2003s** 降到 **0.1506s（-24.82%）**。样本数很小，因此这里只证明真实 checkpoint 路径与压缩方向可执行，不据此宣称统计显著的质量无损加速。
 
 ## Evolve 接入
 

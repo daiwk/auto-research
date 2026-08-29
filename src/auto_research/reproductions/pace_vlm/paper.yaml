@@ -8,14 +8,28 @@
   "published": "2026-08-27",
   "upstream_code": "https://github.com/jjL357/PACE",
   "track": "llm",
-  "topics": ["multimodal-foundation-model", "visual-token-compression", "inference-serving"],
+  "topics": [
+    "multimodal-foundation-model",
+    "visual-token-compression",
+    "inference-serving"
+  ],
   "local_code": "src/auto_research/reproductions/pace_vlm",
   "documentation": "docs/reproductions/2608.27206-pace-vlm/README.md",
   "fidelity": "core_mechanism",
   "evaluation_tier": "l2_public_dataset",
-  "datasets": ["RealWorldQA checkpoint subset"],
+  "datasets": [
+    "RealWorldQA checkpoint subset"
+  ],
   "baseline": "Qwen2.5-VL at the original visual-token budget",
-  "metrics": ["answer accuracy", "visual tokens", "latency", "peak GPU memory"],
-  "mechanisms": ["paper-scale benchmark suite", "custom fused serving kernels"],
-  "evolve_operators": ["checkpoint_vlm:pace-apc"]
+  "metrics": [
+    "answer accuracy",
+    "visual tokens",
+    "latency",
+    "peak GPU memory"
+  ],
+  "mechanisms": [
+    "paper-scale benchmark suite",
+    "custom fused serving kernels"
+  ],
+  "evolve_operators": []
 }
