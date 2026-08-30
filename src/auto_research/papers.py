@@ -150,6 +150,14 @@ class ArxivClient:
                     delay = 0.0
                 delay = max(delay, self.retry_backoff_seconds * (2**attempt))
                 time.sleep(delay)
+            except (TimeoutError, urllib.error.URLError, ConnectionError):
+                # A read timeout or a transient socket/DNS reset is as common
+                # as HTTP 429 around arXiv announcement bursts.  Previously
+                # these escaped immediately, aborting the entire four-track
+                # discovery job before its bounded retry policy could help.
+                if attempt >= self.maximum_retries:
+                    raise
+                time.sleep(self.retry_backoff_seconds * (2**attempt))
         raise AssertionError("unreachable")
 
 

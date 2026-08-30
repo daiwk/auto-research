@@ -94,8 +94,8 @@ pytest tests/test_research_module_docs.py
 ## 2026-08-29 最新增量
 
 - `friend-gnn` · [VK Friend-GNN](2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用按时间排序邻接与二分 cutoff 避免时序邻居采样的数据泄漏；论文在 VK 生产 A/B 中报告好友添加数 +16.0%、独立添加好友用户数 +11.5%。
-- `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md)：用浅层视觉 preview 自适应设置 token budget，并融合 LLM/ViT 注意力；真实 Qwen2.5-VL + RealWorldQA 路径在 A100 验证。
-- `twinkv` · [TwinKV](2608.27128-twinkv/README.md)：以 orphan/donor 配对修复任意 KV eviction policy，保持缓存预算严格不变；真实 Qwen3 KV + WikiText-2 长上下文路径在 A100 验证。
+- `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md)：用浅层视觉 preview 自适应设置 token budget，并融合 LLM/ViT 注意力；真实 Qwen2.5-VL + RealWorldQA 路径在 A30 验证。
+- `twinkv` · [TwinKV](2608.27128-twinkv/README.md)：以 orphan/donor 配对修复任意 KV eviction policy，保持缓存预算严格不变；真实 Qwen3 KV + WikiText-2 长上下文路径在 A30 验证。
 
 ## 2026 历史扫描 B01～B03（18 个 adapter）
 

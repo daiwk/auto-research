@@ -17,6 +17,16 @@ def test_latest_p0_p1_discovery_batch_is_closed():
     assert "closed" in completed.stdout
 
 
+def test_weekend_empty_batch_is_explicitly_verified():
+    root = Path(__file__).resolve().parents[1]
+    data = json.loads((root / "docs/paper-discovery-ledger.json").read_text(encoding="utf-8"))
+    latest = data["batches"][-1]
+    assert latest["scope_kind"] == "incremental-weekend-review"
+    assert set(latest["empty_tracks_verified"]) == set(latest["required_tracks"])
+    assert latest["candidates"] == []
+    assert latest["empty_review"]["source_artifact"]
+
+
 def test_global_discovery_batch_covers_declared_subtopics():
     root = Path(__file__).resolve().parents[1]
     data = json.loads((root / "docs/paper-discovery-ledger.json").read_text(encoding="utf-8"))
