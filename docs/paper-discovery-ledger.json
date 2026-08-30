@@ -1744,6 +1744,37 @@
         {"id": "2608.26579", "title": "Preference Flow Matching with Spectral Factorization for Micro-video Recommendation", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "offline academic recommendation evaluation without quantified production online evidence"},
         {"id": "2608.25381", "title": "MOTIF", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "offline academic recommendation evaluation without quantified production online evidence"}
       ]
+    },
+    {
+      "batch": "2026-08-30-cross-domain-incremental",
+      "date": "2026-08-30",
+      "scope_kind": "incremental-weekend-review",
+      "window": "2026-08-28 through 2026-08-30 (one-day announcement overlap)",
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "priority_institutions": [
+        "Google",
+        "Meta"
+      ],
+      "institution_review": "No new in-scope Google or Meta paper was published after the previous waterline.",
+      "source_artifact": "GitHub Actions run 33241816208 plus targeted Google, Google DeepMind, Meta and arXiv weekend verification",
+      "empty_tracks_verified": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "empty_review": {
+        "source_artifact": "GitHub Actions run 33241816208",
+        "current_manifest_diff": "zero new candidates in all four tracks",
+        "announcement_schedule": "no arXiv weekend announcement on 2026-08-30",
+        "priority_institution_check": "Google, Google DeepMind and Meta public research pages reviewed"
+      },
+      "candidates": []
     }
   ]
 }

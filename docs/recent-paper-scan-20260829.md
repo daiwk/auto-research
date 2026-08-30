@@ -25,8 +25,8 @@ benchmark。
 
 ## P1 checkpoint 复现
 
-- [PACE（2608.27206）](reproductions/2608.27206-pace-vlm/README.md)：已实现 APC/DDAE、真实 Qwen2.5-VL + RealWorldQA 路径、Evolve operator，并在 A100 记录质量、token、延迟和显存。
-- [TwinKV（2608.27128）](reproductions/2608.27128-twinkv/README.md)：已实现 fixed-budget repair、真实 Qwen3 KV + WikiText-2 长上下文路径、Evolve operator，并在 A100 记录等预算 reconstruction、延迟与显存。
+- [PACE（2608.27206）](reproductions/2608.27206-pace-vlm/README.md)：已实现 APC/DDAE、真实 Qwen2.5-VL + RealWorldQA 路径、Evolve operator，并在 A30 记录质量、token、延迟和显存。
+- [TwinKV（2608.27128）](reproductions/2608.27128-twinkv/README.md)：已实现 fixed-budget repair、真实 Qwen3 KV + WikiText-2 长上下文路径、Evolve operator，并在 A30 记录等预算 reconstruction、延迟与显存。
 
 两项均明确保留 checkpoint smoke 与论文完整 benchmark 的边界，不再处于 deferred 队列。
 

@@ -48,8 +48,22 @@ def audit(strict: bool = False, pending_artifacts: tuple[Path, ...] = ()) -> lis
     for batch in data.get("batches", []):
         required = set(batch.get("required_tracks", []))
         present = {entry.get("track") for entry in batch.get("candidates", [])}
-        if strict and required - present:
-            errors.append(f"{batch['batch']}: tracks without candidates: {sorted(required - present)}")
+        verified_empty = set(batch.get("empty_tracks_verified", []))
+        if verified_empty - required:
+            errors.append(
+                f"{batch['batch']}: verified empty tracks were not required: "
+                f"{sorted(verified_empty - required)}"
+            )
+        if verified_empty & present:
+            errors.append(
+                f"{batch['batch']}: tracks cannot be both present and verified empty: "
+                f"{sorted(verified_empty & present)}"
+            )
+        if verified_empty and not batch.get("empty_review", {}).get("source_artifact"):
+            errors.append(f"{batch['batch']}: verified empty batch lacks source artifact")
+        missing = required - present - verified_empty
+        if strict and missing:
+            errors.append(f"{batch['batch']}: tracks without candidates: {sorted(missing)}")
         if batch.get("scope_kind") == "global":
             required_subtopics = {
                 (entry["track"], entry["subtopic"])
