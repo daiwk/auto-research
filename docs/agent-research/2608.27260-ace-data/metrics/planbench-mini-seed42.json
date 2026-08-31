@@ -282,5 +282,13 @@
       "answer_correct": true,
       "plan_correct": true
     }
-  ]
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed deterministic mechanism result; do not claim a stable capability improvement"
+  }
 }

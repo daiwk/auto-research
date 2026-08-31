@@ -190,6 +190,15 @@ class AgentResearchRunner:
             "method": result.method, "benchmark": result.benchmark,
             "metrics": result.metrics, "axis_metrics": result.axis_metrics,
             "diagnostics": result.diagnostics, "trace": result.trace,
+            "evaluation_protocol": {
+                "tier": "l1_mechanism",
+                "seeds": [config.seed],
+                "formal_comparison": False,
+                "claim_policy": (
+                    "single-seed deterministic mechanism result; "
+                    "do not claim a stable capability improvement"
+                ),
+            },
         }
         (run_dir / "metrics.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
