@@ -14,7 +14,7 @@ from .checkpoint_backend import (
     SMOLLM2_135M_ID,
     SMOLLM2_135M_REVISION,
 )
-from .datasets import gsm8k
+from .datasets import GSM8K_FILES, GSM8K_REVISION, gsm8k
 from .foundation_methods import CritiqueExample, build_criticl_prompt
 
 
@@ -113,6 +113,8 @@ def run_criticl_checkpoint_evaluation(
         },
         "provenance": {
             "dataset": "openai/grade-school-math official train/test JSONL",
+            "dataset_revision": GSM8K_REVISION,
+            "dataset_sha256": GSM8K_FILES,
             "weak_checkpoint": {"model_id": config.weak_model_id, "revision": config.weak_model_revision},
             "strong_checkpoint": {"model_id": config.strong_model_id, "revision": config.strong_model_revision},
         },
