@@ -9,9 +9,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 论文到代码状态子规划 | [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](2608.26557-deeprepro/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-08-27 | [已开源](https://github.com/ruyisy/DeepRepro) | `deeprepro` |
+| 红队技能进化 | [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](2608.27439-redevoagent/README.md) | City University of Hong Kong，2026-08-27 | 未发现官方代码 | `redevoagent` |
 | Agent 技能预训练 | [SPT: Skills as Pre-Training Data for Agentic Language Models](2608.26563-spt/README.md) | Beijing University of Posts and Telecommunications，2026-08-27 | 未发现官方代码 | `spt` |
 | 软件轨迹筛选 | [SWE-Prime: Fewer Trajectories, Better Performance](2608.27449-swe-prime/README.md) | Sun Yat-sen University，2026-08-27 | 未发现官方代码 | `swe-prime` |
 | 行为相关 Harness 验证 | [Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification](2608.27311-harnesslens/README.md) | Fudan University，2026-08-27 | [已开源](https://github.com/jhxu5214/HarnessLens) | `harnesslens` |
+| Agent 数据质量 | [What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents](2608.27260-ace-data/README.md) | Huawei Technologies Co., Ltd，2026-08-27 | 未发现官方代码 | `ace-data` |
 | 可训练协同记忆 | [When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems](2608.26895-covemem/README.md) | Shenzhen Technology University，2026-08-27 | 未发现官方代码 | `covemem` |
 | 视频研究自适应工具与反思 | [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](2608.25559-adavdr/README.md) | Accio Team, Alibaba Group，2026-08-26 | [已开源](https://github.com/Accio-Lab/AdaVDR) | `adavdr` |
 | 反事实因果技能图 | [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](2608.25500-caskg/README.md) | Jilin University / Ant Group，2026-08-26 | [已开源](https://github.com/ZhiyuanLi218/Caskg) | `caskg` |

@@ -172,6 +172,10 @@ class AgentResearchRunner:
             "reliability_reflections", "prefix_hits", "critical_path_updates",
             "aging_promotions", "counterfactual_probes", "bayesian_edge_updates",
             "progress_predictions", "meta_gate_decisions", "budget_downgrades",
+            "deciding_tool_attributions", "validation_ratchet_accepts",
+            "validation_ratchet_rejects", "accuracy_gates",
+            "complexity_calibrations", "diversity_accepts", "diversity_rejections",
+            "state_snapshots", "subplan_revisions", "runtime_feedback_repairs",
         ):
             diagnostics[name] = getattr(agent, name, 0)
         phase_counts = getattr(agent, "phase_counts", None)
@@ -186,6 +190,15 @@ class AgentResearchRunner:
             "method": result.method, "benchmark": result.benchmark,
             "metrics": result.metrics, "axis_metrics": result.axis_metrics,
             "diagnostics": result.diagnostics, "trace": result.trace,
+            "evaluation_protocol": {
+                "tier": "l1_mechanism",
+                "seeds": [config.seed],
+                "formal_comparison": False,
+                "claim_policy": (
+                    "single-seed deterministic mechanism result; "
+                    "do not claim a stable capability improvement"
+                ),
+            },
         }
         (run_dir / "metrics.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

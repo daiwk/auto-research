@@ -79,6 +79,9 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2608.27409": ("rlvr-fusion", "统一比较 task-vector Merge、混合数据 RLVR 与多教师 on-policy distillation"),
+    "2608.27065": ("video-opsd", "用证据帧构造特权自教师，并按视觉证据依赖度加权 token 蒸馏"),
+    "2608.27032": ("normalized-dpo", "以 centered-softplus 除去 DPO beta 的直接梯度缩放，同时保留偏好尺度"),
     "2608.27448": ("ttpo", "多数票路由下对同意 rollout 做 OPSD、对分歧 rollout 做 grouped RL，并筛选 token"),
     "2608.27420": ("weak-guide-rlvr", "以弱模型部分推理前缀扰动过度自信策略，扩大 RLVR reasoning coverage"),
     "2608.26735": ("uc-mopd", "双温采样、正优势密度轨迹筛选与 CLL 方向一致 token 门控"),
@@ -161,6 +164,9 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2608.27439": ("policy:redevoagent", "用工具效果画像和 deciding-tool attribution 蒸馏攻击技能，只接受通过 held-out validation ratchet 的更新"),
+    "2608.27260": ("memory:ace-data", "按 Accuracy、学习者相对 Complexity 与行为 Diversity 约束生成 Agent 经验"),
+    "2608.26557": ("planner:deeprepro", "依据当前仓库状态与运行反馈持续重写细粒度 subplan，而非固守一次性全局计划"),
     "2608.27449": ("policy:swe-prime", "先筛选高质量代表性轨迹，再只对高价值语义段计算 imitation loss"),
     "2608.27311": ("verifier:harnesslens", "只在行为相关任务上配对验证 harness 修改，并用可归因证据门防回退"),
     "2608.26895": ("memory:covemem", "以候选集检索协同向量状态并映射为可训练 soft-token 记忆"),

@@ -4,6 +4,9 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "redevoagent": ("RedEvoAgent", "https://arxiv.org/abs/2608.27439"),
+    "ace-data": ("ACE Agentic Data", "https://arxiv.org/abs/2608.27260"),
+    "deeprepro": ("DeepRepro", "https://arxiv.org/abs/2608.26557"),
     "swe-prime": ("SWE-Prime", "https://arxiv.org/abs/2608.27449"),
     "harnesslens": ("HarnessLens", "https://arxiv.org/abs/2608.27311"),
     "covemem": ("CoVeMem", "https://arxiv.org/abs/2608.26895"),

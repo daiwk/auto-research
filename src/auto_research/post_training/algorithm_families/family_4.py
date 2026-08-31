@@ -14,11 +14,14 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'srpo', 'erpo', 'opd-search-plus', 'opdvr',
         'v-rubrics', 'clue-opsd', 'grin', 'grip',
         'ttpo', 'weak-guide-rlvr', 'uc-mopd', 'spear',
+        'rlvr-fusion', 'video-opsd', 'normalized-dpo',
     }:
         if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
             from ..latest_20260827 import update_latest
         elif algorithm in {'ttpo', 'weak-guide-rlvr', 'uc-mopd', 'spear'}:
             from ..latest_20260829 import update_latest
+        elif algorithm in {'rlvr-fusion', 'video-opsd', 'normalized-dpo'}:
+            from ..latest_20260831 import update_latest
         else:
             update_latest = None
         if update_latest is not None:
