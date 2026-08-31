@@ -107,6 +107,9 @@ METHODS = (
     "harnesslens",
     "covemem",
     "spt",
+    "redevoagent",
+    "ace-data",
+    "deeprepro",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

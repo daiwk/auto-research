@@ -5,9 +5,12 @@
 ## 2026
 
 - 2026-08 · [Boosting LLM Exploration via Weak-Model Guidance in RLVR](../2608.27420-weak-guide-rlvr/README.md)（`weak-guide-rlvr`）：RLVR 容易熵坍缩。论文用更小弱模型生成部分推理前缀，迫使目标模型进入陌生轨迹，再以 entropy 截断和原生/前缀样本混训保持覆盖率。
+- 2026-08 · [Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms](../2608.27409-rlvr-fusion/README.md)（`rlvr-fusion`）：论文统一比较三种复用产物不同的跨域能力融合：Merge 合并专家 task vector，Mix RL 合并训练数据，MOPD 同时复用专家和数据。平均差距不超过 1.4 points，但单项可达 8.6 points，因此选择取决于专家、数据和成本条件。
+- 2026-08 · [Disentangling Optimization Scale from Preference Scale in DPO](../2608.27032-normalized-dpo/README.md)（`normalized-dpo`）：标准 DPO 的 $\beta$ 同时改变偏好噪声尺度与梯度幅度，导致有效学习率被隐式重缩放。论文用除以 $\beta$ 的 centered-softplus 保持相同 argmin，同时让梯度尺度在 $\beta\to0$ 时不消失。
 - 2026-08 · [Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD](../2608.26735-uc-mopd/README.md)（`uc-mopd`）：普通 MOPD 很少采到强正优势 token，也无法判断更新方向是否可靠。方法扩大温度覆盖，按轨迹正优势密度挑样本，再用熵校准 CLL 概率门控 token 更新。
 - 2026-08 · [SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning](../2608.26550-spear/README.md)（`spear`）：结果奖励过稀，神经 PRM 又昂贵。SPEAR 把教师推理投影为领域符号 milestone，用 LCS-F1 给学生轨迹提供顺序敏感的稠密奖励。
 - 2026-08 · [TTPO: Test-Time Policy Optimization](../2608.27448-ttpo/README.md)（`ttpo`）：多数票伪标签可能错误，但与多数票分歧的 rollout 通常仍是错的。TTPO 因而对同意分支做 OPSD，对分歧分支做 grouped RL，并分别过滤已收敛 token 与高置信错误。
+- 2026-08 · [Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models](../2608.27065-video-opsd/README.md)（`video-opsd`）：学生读取完整视频，训练期自教师只读取人工标注的证据帧；再按 token 对证据的依赖度加权蒸馏。论文称效果接近 GRPO，而训练时间减少约 60%。
 - 2026-08 · [From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection](../2608.25243-grin/README.md)（`grin`）：纯 on-policy RL 在新知识尚未掌握时几乎采不到正确答案。GRIN 在失败组注入 golden response，再以 mixed-policy importance correction 训练；能力提高后自动回到 on-policy 探索。
 - 2026-08 · [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
 - 2026-08 · [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](../2608.25580-v-rubrics/README.md)（`v-rubrics`）：把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。

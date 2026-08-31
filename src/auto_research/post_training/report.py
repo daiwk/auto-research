@@ -4,6 +4,9 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "rlvr-fusion": ("Consolidating RLVR Capabilities Across Domains", "https://arxiv.org/abs/2608.27409"),
+    "video-opsd": ("Video-OPSD", "https://arxiv.org/abs/2608.27065"),
+    "normalized-dpo": ("Disentangling Optimization Scale from Preference Scale in DPO", "https://arxiv.org/abs/2608.27032"),
     "ttpo": ("TTPO", "https://arxiv.org/abs/2608.27448"),
     "weak-guide-rlvr": ("Weak-Model Guidance for RLVR", "https://arxiv.org/abs/2608.27420"),
     "uc-mopd": ("Uncertainty-Calibrated MOPD", "https://arxiv.org/abs/2608.26735"),

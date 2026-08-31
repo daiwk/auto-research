@@ -88,6 +88,9 @@ class PostTrainingRunner:
             "clue-opsd": state.variant_updates,
             "grin": state.variant_updates,
             "grip": state.variant_updates,
+            "rlvr-fusion": state.variant_updates,
+            "video-opsd": state.variant_updates,
+            "normalized-dpo": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

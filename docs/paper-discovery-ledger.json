@@ -1775,6 +1775,27 @@
         "priority_institution_check": "Google, Google DeepMind and Meta public research pages reviewed"
       },
       "candidates": []
+    },
+    {
+      "batch": "2026-08-31-late-august-residual-review",
+      "date": "2026-08-31",
+      "scope_kind": "incremental-full-text-residual-review",
+      "window": "2026-08-27 through 2026-08-31 (announcement overlap and residual status review)",
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "priority_institutions": ["Google", "Meta"],
+      "institution_review": "No new Google or Meta paper in the residual batch passed repository scope and evidence gates.",
+      "source_artifact": "GitHub Actions runs 33241816208 and 33297350285 plus full-text review",
+      "candidates": [
+        {"id": "2608.27455", "key": "criticl", "track": "foundation-model", "priority": "P1", "status": "implemented", "doc": "foundation-models/2608.27455-criticl/README.md"},
+        {"id": "2608.27409", "key": "rlvr-fusion", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.27409-rlvr-fusion/README.md"},
+        {"id": "2608.27065", "key": "video-opsd", "track": "post-training", "priority": "P0", "status": "implemented", "doc": "post-training/2608.27065-video-opsd/README.md"},
+        {"id": "2608.27032", "key": "normalized-dpo", "track": "post-training", "priority": "P1", "status": "implemented", "doc": "post-training/2608.27032-normalized-dpo/README.md"},
+        {"id": "2608.27439", "key": "redevoagent", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.27439-redevoagent/README.md"},
+        {"id": "2608.27260", "key": "ace-data", "track": "agent", "priority": "P1", "status": "implemented", "doc": "agent-research/2608.27260-ace-data/README.md"},
+        {"id": "2608.26557", "key": "deeprepro", "track": "agent", "priority": "P0", "status": "implemented", "doc": "agent-research/2608.26557-deeprepro/README.md"},
+        {"id": "2608.26755", "title": "Residual recommendation candidate", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "full-text review found no quantified production A/B or explicit full-traffic rollout"},
+        {"id": "2608.26728", "title": "Meta-review false positive", "track": "recommendation", "priority": "P2", "status": "rejected", "reason": "keyword Meta refers to review terminology rather than Meta company; no industrial online evidence"}
+      ]
     }
   ]
 }

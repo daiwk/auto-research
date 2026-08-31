@@ -105,6 +105,9 @@ ALGORITHMS = (
     "weak-guide-rlvr",
     "uc-mopd",
     "spear",
+    "rlvr-fusion",
+    "video-opsd",
+    "normalized-dpo",
 )
 
 

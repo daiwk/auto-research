@@ -4,9 +4,12 @@
 
 ## 2026
 
+- 2026-08 · [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
+- 2026-08 · [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
 - 2026-08 · [SPT: Skills as Pre-Training Data for Agentic Language Models](../2608.26563-spt/README.md)（`spt`）：Agent 轨迹昂贵且只描述一次执行；skill package 则显式编码可复用工作流。SPT 在 post-training 前对 SkillCorpus 做 causal LM mid-training，并把被引用文件插到主说明的首次引用附近。
 - 2026-08 · [SWE-Prime: Fewer Trajectories, Better Performance](../2608.27449-swe-prime/README.md)（`swe-prime`）：成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。
 - 2026-08 · [Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification](../2608.27311-harnesslens/README.md)（`harnesslens`）：固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。
+- 2026-08 · [What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents](../2608.27260-ace-data/README.md)（`ace-data`）：论文把 Agent 数据统一表示为 $(E,q,\tau,v)$：环境、任务、交互轨迹与可选 verifier。Accuracy 先限定可信支持集，Complexity 相对指定学习者校准难度，Diversity 再控制环境、任务和行为覆盖。
 - 2026-08 · [When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems](../2608.26895-covemem/README.md)（`covemem`）：文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。
 - 2026-08 · [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](../2608.25559-adavdr/README.md)（`adavdr`）：先以目标模型能力过滤不必要工具调用，只在中间证据不可靠时回退反思；SFT 后用 redundancy-aware reward 做 RL，兼顾视频理解、外部检索和调用成本。
 - 2026-08 · [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](../2608.25500-caskg/README.md)（`caskg`）：先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。

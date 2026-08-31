@@ -4,6 +4,21 @@
   "papers": [
     {
       "domain": "agent-research",
+      "key": "ace-data",
+      "title": "What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2608.27260",
+      "detail_path": "agent-research/2608.27260-ace-data/README.md",
+      "topic": [
+        "Agent 数据质量"
+      ],
+      "first_author": "Xingshan Zeng",
+      "first_author_affiliation": "Huawei Technologies Co., Ltd",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "ace-data"
+    },
+    {
+      "domain": "agent-research",
       "key": "adavdr",
       "title": "AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research",
       "paper_url": "https://arxiv.org/abs/2608.25559",
@@ -317,6 +332,21 @@
       "published": "2023-05-19",
       "code": "https://github.com/microsoft/ProphetNet/tree/master/CRITIC",
       "adapter": "critic"
+    },
+    {
+      "domain": "agent-research",
+      "key": "deeprepro",
+      "title": "DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories",
+      "paper_url": "https://arxiv.org/abs/2608.26557",
+      "detail_path": "agent-research/2608.26557-deeprepro/README.md",
+      "topic": [
+        "论文到代码状态子规划"
+      ],
+      "first_author": "Hongru Song",
+      "first_author_affiliation": "Institute of Computing Technology, Chinese Academy of Sciences",
+      "published": "2026-08-27",
+      "code": "https://github.com/ruyisy/DeepRepro",
+      "adapter": "deeprepro"
     },
     {
       "domain": "agent-research",
@@ -924,6 +954,21 @@
       "published": "2022-10-06",
       "code": "https://github.com/ysymyth/ReAct",
       "adapter": "react"
+    },
+    {
+      "domain": "agent-research",
+      "key": "redevoagent",
+      "title": "RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution",
+      "paper_url": "https://arxiv.org/abs/2608.27439",
+      "detail_path": "agent-research/2608.27439-redevoagent/README.md",
+      "topic": [
+        "红队技能进化"
+      ],
+      "first_author": "Junjie Zhang",
+      "first_author_affiliation": "City University of Hong Kong",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "redevoagent"
     },
     {
       "domain": "agent-research",
@@ -2127,6 +2172,21 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "criticl",
+      "title": "CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes",
+      "paper_url": "https://arxiv.org/abs/2608.27455",
+      "detail_path": "foundation-models/2608.27455-criticl/README.md",
+      "topic": [
+        "弱模型失败模式 ICL"
+      ],
+      "first_author": "Yufan Wu",
+      "first_author_affiliation": "The Ohio State University",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "criticl"
     },
     {
       "domain": "foundation-models",
@@ -6060,6 +6120,21 @@
     },
     {
       "domain": "post-training",
+      "key": "normalized-dpo",
+      "title": "Disentangling Optimization Scale from Preference Scale in DPO",
+      "paper_url": "https://arxiv.org/abs/2608.27032",
+      "detail_path": "post-training/2608.27032-normalized-dpo/README.md",
+      "topic": [
+        "DPO 偏好/优化尺度解耦"
+      ],
+      "first_author": "Ivan Kruzhilov",
+      "first_author_affiliation": "Affiliation not listed in the paper",
+      "published": "2026-08-27",
+      "code": "https://github.com/ivankru/bayesian_dpo",
+      "adapter": "normalized-dpo"
+    },
+    {
+      "domain": "post-training",
       "key": "off-context-grpo",
       "title": "Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information",
       "paper_url": "https://arxiv.org/abs/2607.19313",
@@ -6450,6 +6525,21 @@
       "published": "2024-02-22",
       "code": "未发现官方代码",
       "adapter": "rloo"
+    },
+    {
+      "domain": "post-training",
+      "key": "rlvr-fusion",
+      "title": "Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms",
+      "paper_url": "https://arxiv.org/abs/2608.27409",
+      "detail_path": "post-training/2608.27409-rlvr-fusion/README.md",
+      "topic": [
+        "跨领域 RLVR 能力融合"
+      ],
+      "first_author": "Siye Wu",
+      "first_author_affiliation": "Fudan University",
+      "published": "2026-08-27",
+      "code": "https://github.com/Di-viner/LLM-Fusion",
+      "adapter": "rlvr-fusion"
     },
     {
       "domain": "post-training",
@@ -6948,6 +7038,21 @@
       "published": "2025-04-07",
       "code": "未发现官方代码",
       "adapter": "vapo"
+    },
+    {
+      "domain": "post-training",
+      "key": "video-opsd",
+      "title": "Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models",
+      "paper_url": "https://arxiv.org/abs/2608.27065",
+      "detail_path": "post-training/2608.27065-video-opsd/README.md",
+      "topic": [
+        "证据帧特权自蒸馏"
+      ],
+      "first_author": "Ziyue Wang",
+      "first_author_affiliation": "Nanyang Technological University",
+      "published": "2026-08-27",
+      "code": null,
+      "adapter": "video-opsd"
     },
     {
       "domain": "post-training",
