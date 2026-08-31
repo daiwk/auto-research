@@ -49,3 +49,15 @@ planbench-mini、120 episodes：joint success **1.0000**、average cost **0.4300
 ## 复现边界
 
 未运行官方 PaperBench Code-Dev，也未把 deterministic plan/answer 满分包装成论文结果；本地验证的是状态驱动重规划路径。
+
+## PaperBench / Code-Dev 产物回放
+
+新增 `public-agent-artifact-eval --method deeprepro`，读取固定 revision 的 PaperBench Code-Dev 或官方 DeepRepro 导出，按 paper/state 顺序回放 plan、executed steps 和 test 结果；比较首轮静态计划与每轮读取 repository state 后重写 subplan 的覆盖率，三种子只用于等预算静态基线采样。
+
+```bash
+auto-research public-agent-artifact-eval --method deeprepro \
+  --artifact paperbench-code-dev.jsonl --dataset-id paperbench-code-dev \
+  --dataset-revision <immutable-sha> --seeds 42,43,44
+```
+
+官方仓库当前公开系统代码但未附论文整套 API-budget 轨迹；因此本地支持真实产物 replay，却不会声称已复刻完整 agent/API 成本实验。

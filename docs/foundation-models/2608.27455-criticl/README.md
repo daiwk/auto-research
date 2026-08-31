@@ -45,3 +45,15 @@ $$
 ## 本地复现与边界
 
 单元测试覆盖确定性 static/dynamic 检索、failure-mode 去重和零在线弱模型调用。当前没有下载大 checkpoint，因此不发布准确率；该机制也没有冒充 Micro-LLM 结构算子。
+
+## 真实 checkpoint 与 GSM8K 路径
+
+`auto-research criticl-eval` 只用 GSM8K train 构造 CritBank，再在官方 test 子集等预算比较 zero-shot、CritICL-static 和 CritICL-dynamic；弱/强 checkpoint、revision、三种子和 95% CI 全部入指标文件。
+
+```bash
+auto-research criticl-eval --bank-examples 24 \
+  --evaluation-examples 12 --seeds 42,43,44
+```
+
+单卡验收默认使用公开 SmolLM2 以验证端到端路径。启发式 failure label 替代论文中的 frontier-LLM critic，且小 checkpoint 在小子集上可能三种方法都为 0；这些边界均写入产物，不把流程可运行误写成效果复现。
+脱敏验收记录见 [CritICL A100 receipt](../../gpu-validations/criticl-checkpoint-a100-20260901.json)。

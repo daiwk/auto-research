@@ -10,7 +10,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from auto_research.gpu_validation import load_gpu_receipt  # noqa: E402
+from auto_research.gpu_validation import (  # noqa: E402
+    STANDALONE_GPU_RECEIPTS,
+    load_gpu_receipt,
+)
 from auto_research.reproductions.registry import list_adapters  # noqa: E402
 
 
@@ -37,6 +40,20 @@ def audit() -> list[str]:
             errors.append(f"{adapter.key}: receipt adapter_key differs")
         if payload["provenance"]["artifact_path"] != adapter.gpu_validation_artifact:
             errors.append(f"{adapter.key}: receipt artifact_path differs")
+    for key, artifact in STANDALONE_GPU_RECEIPTS.items():
+        path = ROOT / artifact
+        if not path.is_file():
+            errors.append(f"{key}: standalone GPU validation artifact does not exist: {path}")
+            continue
+        try:
+            payload = load_gpu_receipt(path)
+        except (OSError, ValueError) as exc:
+            errors.append(str(exc))
+            continue
+        if payload["adapter_key"] != key:
+            errors.append(f"{key}: standalone receipt adapter_key differs")
+        if payload["provenance"]["artifact_path"] != artifact:
+            errors.append(f"{key}: standalone receipt artifact_path differs")
     return errors
 
 

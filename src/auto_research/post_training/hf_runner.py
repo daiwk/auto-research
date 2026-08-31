@@ -38,6 +38,7 @@ class HFPostTrainingConfig:
     batch_size: int = 2
     gradient_accumulation: int = 1
     learning_rate: float = 5e-6
+    beta: float = 0.1
     maximum_examples: int = 64
     maximum_length: int = 384
     evaluation_examples: int = 16
@@ -48,8 +49,8 @@ class HFPostTrainingConfig:
     allow_network: bool = True
 
     def __post_init__(self):
-        if self.objective not in {"sft", "dpo", "orpo"}:
-            raise ValueError("objective must be sft, dpo or orpo")
+        if self.objective not in {"sft", "dpo", "normalized-dpo", "orpo"}:
+            raise ValueError("objective must be sft, dpo, normalized-dpo or orpo")
         if self.dataset not in {"gsm8k", "ultrafeedback"}:
             raise ValueError("dataset must be gsm8k or ultrafeedback")
         if self.dataset == "gsm8k" and self.objective != "sft":
@@ -68,6 +69,8 @@ class HFPostTrainingConfig:
             raise ValueError("checkpoint post-training requires exactly three evaluation seeds")
         if len(set(self.seeds)) != 3:
             raise ValueError("checkpoint post-training requires three distinct seeds")
+        if self.beta <= 0:
+            raise ValueError("beta must be positive")
 
 
 @dataclass(frozen=True)
@@ -277,7 +280,7 @@ class HFPostTrainingRunner:
             seed_source, dtype=dtype, **seed_kwargs
         ).to(device)
         reference = None
-        if config.objective == "dpo":
+        if config.objective in {"dpo", "normalized-dpo"}:
             reference = AutoModelForCausalLM.from_pretrained(
                 source, dtype=dtype, **kwargs
             ).to(device).eval()
@@ -307,7 +310,7 @@ class HFPostTrainingRunner:
                 losses = [
                     _pair_loss(
                         model, reference, tokenizer, row, device,
-                        config.maximum_length, config.objective,
+                        config.maximum_length, config.objective, config.beta,
                     )
                     for row in batch
                 ]
@@ -366,18 +369,35 @@ def _token_logprob(model, tokenizer, prompt, response, device, maximum_length):
     return selected[0, mask].sum(), mask.sum().clamp_min(1)
 
 
-def _pair_loss(model, reference, tokenizer, row, device, maximum_length, objective):
+def _pair_loss(
+    model, reference, tokenizer, row, device, maximum_length, objective, beta=0.1,
+):
     import torch
     chosen, chosen_tokens = _token_logprob(model, tokenizer, row.prompt, row.chosen, device, maximum_length)
     if objective == "sft":
         return -chosen / chosen_tokens
     rejected, _ = _token_logprob(model, tokenizer, row.prompt, row.rejected, device, maximum_length)
-    if objective == "dpo":
+    if objective in {"dpo", "normalized-dpo"}:
         with torch.no_grad():
             ref_chosen, _ = _token_logprob(reference, tokenizer, row.prompt, row.chosen, device, maximum_length)
             ref_rejected, _ = _token_logprob(reference, tokenizer, row.prompt, row.rejected, device, maximum_length)
-        return -torch.nn.functional.logsigmoid(0.1 * ((chosen - rejected) - (ref_chosen - ref_rejected)))
+        margin = (chosen - rejected) - (ref_chosen - ref_rejected)
+        if objective == "normalized-dpo":
+            # Centering keeps zero preference margin at zero loss; dividing by
+            # beta removes beta's direct gradient-scale effect while retaining
+            # its intended preference-temperature role.
+            return normalized_dpo_loss(margin, beta)
+        return -torch.nn.functional.logsigmoid(beta * margin)
     return -chosen / chosen_tokens - 0.1 * torch.nn.functional.logsigmoid(chosen - rejected)
+
+
+def normalized_dpo_loss(margin, beta: float):
+    """Centered-softplus DPO objective with beta-normalized gradients."""
+    import torch
+
+    if beta <= 0:
+        raise ValueError("beta must be positive")
+    return (torch.nn.functional.softplus(-beta * margin) - math.log(2.0)) / beta
 
 
 def _save_checkpoint(model, tokenizer, optimizer, path, step, torch):

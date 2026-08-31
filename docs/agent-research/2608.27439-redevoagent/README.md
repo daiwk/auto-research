@@ -49,3 +49,9 @@ planbench-mini、120 episodes：joint success **1.0000**、average cost **0.4300
 ## 复现边界
 
 未对真实产品 Agent 执行越权攻击；mini-suite 只验证安全的技能更新控制流。
+
+## 公开 benchmark 产物回放
+
+新增 `public-agent-artifact-eval --method redevoagent`：读取固定 revision 的 Agent Security Bench / AgentHarm 兼容脱敏导出，只保留 split、工具轨迹和成功标签；从 train 建工具画像、在 validation 做 incumbent ratchet、最后锁定 test，并用三种子等预算随机 skill 作对照。
+
+该路径不会执行 jailbreak、不连接真实目标 Agent，也不会提交原始有害 prompt。上游当前未发布 RedEvoAgent 官方代码/产物，因此仓库只发布 schema 与安全 replay 结果，不伪造论文原始分数。

@@ -1,0 +1,1 @@
+{"video_id":"demo","video":"demo.mp4","question_id":"demo-q1","question":"Did the ball exist underneath any of the shells?","options":["No.","Yes.","Cannot be determined."],"answer":"B","evidence_frame_indices":[0,1,2,3],"evidence_annotation_source":"manual protocol annotation over the official Video-MME-v2 demo asset; not an upstream paper annotation"}

@@ -48,3 +48,15 @@ planbench-mini、120 episodes：joint success **1.0000**、average cost **0.3700
 ## 复现边界
 
 这是框架的可执行准入合同，不声称复刻某个训练模型或公开 benchmark SOTA。
+
+## 公开 Agent 数据评测路径
+
+`public-agent-artifact-eval --method ace-data` 接受 ToolACE、APIGen-MT 等公开轨迹的固定 revision 导出，要求 verifier、learner loss、environment、task 和 trajectory 字段；在同一预算下比较随机抽样与 Accuracy → learner-relative Complexity → Diversity 三段准入。
+
+```bash
+auto-research public-agent-artifact-eval --method ace-data \
+  --artifact toolace-export.jsonl --dataset-id Team-ACE/ToolACE \
+  --dataset-revision <immutable-sha> --seeds 42,43,44
+```
+
+论文是统一分析框架而非单个训练 checkpoint，因此真实升级落在可审计数据选择、三种子等预算对照和 provenance，而不是杜撰一个“ACE 模型”。

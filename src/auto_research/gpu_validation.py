@@ -15,6 +15,18 @@ FORBIDDEN_FIELDS = (
     "hostname", "host", "driver_version", "torch_build", "cuda_build",
     "ssh_alias", "user", "ip_address",
 )
+STANDALONE_GPU_RECEIPTS = {
+    "checkpoint-normalized-dpo": (
+        "docs/gpu-validations/checkpoint-normalized-dpo-a100-20260901.json"
+    ),
+    "criticl-checkpoint": "docs/gpu-validations/criticl-checkpoint-a100-20260901.json",
+    "rlvr-fusion-checkpoints": (
+        "docs/gpu-validations/rlvr-fusion-checkpoints-a100-20260901.json"
+    ),
+    "video-opsd-checkpoint": (
+        "docs/gpu-validations/video-opsd-checkpoint-a100-20260901.json"
+    ),
+}
 
 
 def load_gpu_receipt(path: Path) -> dict[str, Any]:

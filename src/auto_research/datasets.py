@@ -40,9 +40,15 @@ WIKITEXT_2_BASE_URL = (
     "https://raw.githubusercontent.com/pytorch/examples/main/word_language_model/data/wikitext-2"
 )
 ALPACA_URL = "https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/main/alpaca_data.json"
+GSM8K_REVISION = "3101c7d5072418e28b9008a6636bde82a006892c"
 GSM8K_BASE_URL = (
-    "https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data"
+    "https://raw.githubusercontent.com/openai/grade-school-math/"
+    f"{GSM8K_REVISION}/grade_school_math/data"
 )
+GSM8K_FILES = {
+    "train.jsonl": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test.jsonl": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+}
 DELICIOUS_2K_BASE_URL = (
     "https://raw.githubusercontent.com/qcymkxyc/RecSys/"
     "cb313bf92f80d3cd7c7bde39b12ab4319ccf61a8/data/delicious-2k"
@@ -116,7 +122,11 @@ def gsm8k(root: Path, allow_network: bool = True) -> dict[str, list[dict[str, st
             if not allow_network:
                 raise FileNotFoundError(f"dataset missing and network disabled: {target}")
             target.parent.mkdir(parents=True, exist_ok=True)
-            _download(f"{GSM8K_BASE_URL}/{split}.jsonl", target)
+            _download(
+                f"{GSM8K_BASE_URL}/{split}.jsonl",
+                target,
+                expected_sha256=GSM8K_FILES[f"{split}.jsonl"],
+            )
         result[split] = [
             {
                 "question": str(row["question"]),

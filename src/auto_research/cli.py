@@ -15,6 +15,9 @@ from .agent_research import (
     CapabilitySuiteConfig, run_capability_suite,
 )
 from .agent_research.capability_methods import CAPABILITY_METHODS
+from .agent_research.public_artifacts import (
+    PublicAgentArtifactConfig, run_public_agent_artifact,
+)
 from .agent_research.models import METHODS as AGENT_METHODS
 from .evolution import EvolutionConfig, ModelEvolutionEngine
 from .evolution.providers import list_providers
@@ -29,9 +32,14 @@ from .protocols import comparability_errors, get_protocol, list_protocols
 from .experiment_store.dashboard import write_dashboard
 from .experiment_store.store import ExperimentStore, sync_experiments
 from .evidence_promotion import EvidencePromotionConfig, EvidencePromotionRunner
+from .foundation_criticl_eval import CritICLEvalConfig, run_criticl_checkpoint_evaluation
 from .post_training import PostTrainingConfig, PostTrainingRunner
 from .post_training.models import ALGORITHMS as POST_TRAINING_ALGORITHMS
 from .post_training.hf_runner import HFPostTrainingConfig, HFPostTrainingRunner
+from .post_training.rlvr_fusion_eval import (
+    RLVRFusionEvalConfig, run_rlvr_fusion_evaluation,
+)
+from .post_training.video_opsd_eval import VideoOPSDEvalConfig, run_video_opsd_evaluation
 from .post_training.coba_teacher import QWEN25_TEACHER_REVISION
 from .publish import publish_report
 from .reproductions.base import ReproductionFidelity
@@ -306,9 +314,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     checkpoint_post = commands.add_parser(
         "checkpoint-post-train",
-        help="train a pinned public causal LM with GSM8K SFT or UltraFeedback DPO/ORPO",
+        help="train a pinned public causal LM with GSM8K SFT or UltraFeedback DPO/normalized-DPO/ORPO",
     )
-    checkpoint_post.add_argument("--objective", choices=["sft", "dpo", "orpo"], required=True)
+    checkpoint_post.add_argument(
+        "--objective", choices=["sft", "dpo", "normalized-dpo", "orpo"], required=True
+    )
     checkpoint_post.add_argument("--dataset", choices=["gsm8k", "ultrafeedback"], required=True)
     checkpoint_post.add_argument("--dataset-dir", type=Path, default=Path("data"))
     checkpoint_post.add_argument("--output-dir", type=Path, default=Path("runs/checkpoint-post-training"))
@@ -328,6 +338,7 @@ def build_parser() -> argparse.ArgumentParser:
     checkpoint_post.add_argument("--batch-size", type=int, default=2)
     checkpoint_post.add_argument("--gradient-accumulation", type=int, default=1)
     checkpoint_post.add_argument("--learning-rate", type=float, default=5e-6)
+    checkpoint_post.add_argument("--beta", type=float, default=0.1)
     checkpoint_post.add_argument("--maximum-examples", type=int, default=64)
     checkpoint_post.add_argument("--maximum-length", type=int, default=384)
     checkpoint_post.add_argument("--evaluation-examples", type=int, default=16)
@@ -339,6 +350,70 @@ def build_parser() -> argparse.ArgumentParser:
     checkpoint_post.add_argument("--resume-from", type=Path)
     checkpoint_post.add_argument("--offline", action="store_true")
     _add_runtime_arguments(checkpoint_post)
+
+    criticl = commands.add_parser(
+        "criticl-eval",
+        help="evaluate CritICL static/dynamic retrieval with pinned checkpoints on GSM8K",
+    )
+    criticl.add_argument("--dataset-dir", type=Path, default=Path("data"))
+    criticl.add_argument("--output-dir", type=Path, default=Path("runs/criticl-checkpoint"))
+    criticl.add_argument("--weak-model-id", default="HuggingFaceTB/SmolLM2-135M-Instruct")
+    criticl.add_argument("--weak-model-revision", default="12fd25f77366fa6b3b4b768ec3050bf629380bac")
+    criticl.add_argument("--weak-checkpoint-path", type=Path)
+    criticl.add_argument("--strong-model-id", default="HuggingFaceTB/SmolLM2-135M-Instruct")
+    criticl.add_argument("--strong-model-revision", default="12fd25f77366fa6b3b4b768ec3050bf629380bac")
+    criticl.add_argument("--strong-checkpoint-path", type=Path)
+    criticl.add_argument("--bank-examples", type=int, default=24)
+    criticl.add_argument("--evaluation-examples", type=int, default=12)
+    criticl.add_argument("--maximum-critiques", type=int, default=3)
+    criticl.add_argument("--maximum-new-tokens", type=int, default=96)
+    criticl.add_argument("--seeds", default="42,43,44")
+    criticl.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(criticl)
+
+    public_agent = commands.add_parser(
+        "public-agent-artifact-eval",
+        help="replay RedEvoAgent, ACE Lens or DeepRepro on a pinned public export",
+    )
+    public_agent.add_argument(
+        "--method", choices=["redevoagent", "ace-data", "deeprepro"], required=True,
+    )
+    public_agent.add_argument("--artifact", type=Path, required=True)
+    public_agent.add_argument("--dataset-id", required=True)
+    public_agent.add_argument("--dataset-revision", required=True)
+    public_agent.add_argument("--output-dir", type=Path, default=Path("runs/public-agent-artifacts"))
+    public_agent.add_argument("--budget", type=int, default=32)
+    public_agent.add_argument("--seeds", default="42,43,44")
+
+    rlvr_fusion = commands.add_parser(
+        "rlvr-fusion-eval",
+        help="compare official Base/Merge/Mix/MOPD checkpoints on pinned released data",
+    )
+    rlvr_fusion.add_argument("--benchmark", choices=["AIME2025", "AIME2026", "GPQA"], default="AIME2025")
+    rlvr_fusion.add_argument("--dataset-dir", type=Path, default=Path("data"))
+    rlvr_fusion.add_argument("--output-dir", type=Path, default=Path("runs/rlvr-fusion-checkpoints"))
+    rlvr_fusion.add_argument("--maximum-examples", type=int, default=10)
+    rlvr_fusion.add_argument("--maximum-new-tokens", type=int, default=1024)
+    rlvr_fusion.add_argument("--seeds", default="42,43,44")
+    rlvr_fusion.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(rlvr_fusion)
+
+    video_opsd = commands.add_parser(
+        "video-opsd-eval",
+        help="compare full-video and annotation-provided evidence views with a pinned VLM",
+    )
+    video_opsd.add_argument("--annotations", type=Path, required=True)
+    video_opsd.add_argument("--video-root", type=Path, required=True)
+    video_opsd.add_argument("--output-dir", type=Path, default=Path("runs/video-opsd-checkpoint"))
+    video_opsd.add_argument("--model-id", default="HuggingFaceTB/SmolVLM2-256M-Video-Instruct")
+    video_opsd.add_argument("--model-revision", default="067788b187b95ebe7b2e040b3e4299e342e5b8fd")
+    video_opsd.add_argument("--checkpoint-path", type=Path)
+    video_opsd.add_argument("--maximum-examples", type=int, default=12)
+    video_opsd.add_argument("--num-frames", type=int, default=32)
+    video_opsd.add_argument("--maximum-new-tokens", type=int, default=12)
+    video_opsd.add_argument("--seeds", default="42,43,44")
+    video_opsd.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(video_opsd)
 
     agent_eval = commands.add_parser(
         "agent-eval",
@@ -967,6 +1042,7 @@ def main(argv: list[str] | None = None) -> int:
                 sequence_length=args.sequence_length,
                 maximum_eval_tokens=args.maximum_eval_tokens,
                 learning_rate=args.learning_rate,
+                beta=args.beta,
                 optimizer=args.optimizer,
                 allow_network=not args.offline,
                 resume=args.resume,
@@ -1138,6 +1214,7 @@ def main(argv: list[str] | None = None) -> int:
                 batch_size=args.batch_size,
                 gradient_accumulation=args.gradient_accumulation,
                 learning_rate=args.learning_rate,
+                beta=args.beta,
                 maximum_examples=args.maximum_examples,
                 maximum_length=args.maximum_length,
                 evaluation_examples=args.evaluation_examples,
@@ -1149,6 +1226,69 @@ def main(argv: list[str] | None = None) -> int:
             )).run()
             print(json.dumps(payload["metrics"], ensure_ascii=False))
             print(f"Metrics: {run_dir / 'metrics.json'}")
+            return 0
+        if args.command == "criticl-eval":
+            payload, path = run_criticl_checkpoint_evaluation(CritICLEvalConfig(
+                output_dir=args.output_dir,
+                dataset_dir=args.dataset_dir,
+                weak_model_id=args.weak_model_id,
+                weak_model_revision=args.weak_model_revision,
+                weak_checkpoint_path=args.weak_checkpoint_path,
+                strong_model_id=args.strong_model_id,
+                strong_model_revision=args.strong_model_revision,
+                strong_checkpoint_path=args.strong_checkpoint_path,
+                bank_examples=args.bank_examples,
+                evaluation_examples=args.evaluation_examples,
+                maximum_critiques=args.maximum_critiques,
+                maximum_new_tokens=args.maximum_new_tokens,
+                seeds=tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip()),
+                offline=args.offline,
+            ))
+            print(json.dumps(payload["metrics"], ensure_ascii=False))
+            print(f"Metrics: {path}")
+            return 0
+        if args.command == "public-agent-artifact-eval":
+            payload, path = run_public_agent_artifact(PublicAgentArtifactConfig(
+                method=args.method,
+                artifact=args.artifact,
+                dataset_id=args.dataset_id,
+                dataset_revision=args.dataset_revision,
+                output_dir=args.output_dir,
+                budget=args.budget,
+                seeds=tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip()),
+            ))
+            print(json.dumps(payload["metrics"], ensure_ascii=False))
+            print(f"Metrics: {path}")
+            return 0
+        if args.command == "rlvr-fusion-eval":
+            payload, path = run_rlvr_fusion_evaluation(RLVRFusionEvalConfig(
+                output_dir=args.output_dir,
+                dataset_dir=args.dataset_dir,
+                benchmark=args.benchmark,
+                maximum_examples=args.maximum_examples,
+                maximum_new_tokens=args.maximum_new_tokens,
+                seeds=tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip()),
+                offline=args.offline,
+            ))
+            print(json.dumps({row["name"]: row["metrics"] for row in payload["variants"]}, ensure_ascii=False))
+            print(f"Metrics: {path}")
+            return 0
+        if args.command == "video-opsd-eval":
+            payload, path = run_video_opsd_evaluation(VideoOPSDEvalConfig(
+                annotations=args.annotations,
+                video_root=args.video_root,
+                output_dir=args.output_dir,
+                model_id=args.model_id,
+                model_revision=args.model_revision,
+                checkpoint_path=args.checkpoint_path,
+                maximum_examples=args.maximum_examples,
+                num_frames=args.num_frames,
+                max_new_tokens=args.maximum_new_tokens,
+                seeds=tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip()),
+                offline=args.offline,
+            ))
+            print(json.dumps(payload["metrics"], ensure_ascii=False))
+            print(f"Metrics: {path}")
             return 0
         if args.command == "agent-eval":
             result, run_dir = AgentResearchRunner(
