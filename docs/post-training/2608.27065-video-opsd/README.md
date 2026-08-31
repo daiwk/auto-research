@@ -60,3 +60,4 @@ auto-research video-opsd-eval --annotations video-mme-v2-evidence.jsonl \
 ```
 
 该入口强制逐题证据帧标注，缺失即失败。它是公开 checkpoint 的证据视图审计，不宣称完成论文 6,500 条训练数据和 8×H100 的完整 OPSD 训练。
+A100 验收使用 Video-MME-v2 固定 revision 的官方 demo 视频；仓库中的证据帧是额外协议标注，不是论文作者发布的 OPSD 标注。记录见 [Video-OPSD A100 receipt](../../gpu-validations/video-opsd-checkpoint-a100-20260901.json)。

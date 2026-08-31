@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "adapter_key": "criticl-checkpoint",
+  "validated_at": "2026-09-01",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "auto-research", "criticl-eval",
+    "--weak-model-id", "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "--weak-model-revision", "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "--strong-model-id", "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "--strong-model-revision", "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "--bank-examples", "6", "--evaluation-examples", "3",
+    "--maximum-new-tokens", "48", "--seeds", "42,43,44"
+  ],
+  "dataset": {
+    "name": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test_sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "bank_examples": 6,
+    "test_examples": 3
+  },
+  "checkpoint": {
+    "weak_model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "strong_model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "zero_shot_accuracy_mean": 0.0,
+    "static_accuracy_mean": 0.0,
+    "dynamic_accuracy_mean": 0.0,
+    "effect_claimed": false
+  },
+  "provenance": {
+    "commit": "583e7a439003e6d4581d2415bd678289553b0e7e",
+    "artifact_path": "docs/gpu-validations/criticl-checkpoint-a100-20260901.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "adapter_key": "rlvr-fusion-checkpoints",
+  "validated_at": "2026-09-01",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "auto-research", "rlvr-fusion-eval", "--benchmark", "AIME2025",
+    "--maximum-examples", "1", "--maximum-new-tokens", "256",
+    "--seeds", "42,43,44"
+  ],
+  "dataset": {
+    "name": "Siye01/LLM-Fusion-Test",
+    "configuration": "AIME2025",
+    "revision": "c044cd49eaeb9e147ee5a8c001891ba5b6eb225c",
+    "test_examples": 1
+  },
+  "checkpoint": {
+    "base": ["Qwen/Qwen3-4B-Instruct-2507", "cdbee75f17c01a7cc42f958dc650907174af0554"],
+    "merge": ["Siye01/Qwen3-4B-Inst-Merge", "3253439e014b7c0fca9ed3ca11e4f899e854f440"],
+    "mix": ["Siye01/Qwen3-4B-Inst-Mix", "88cec4c121782d8a3af0a806b28d3c12445d824e"],
+    "mopd": ["Siye01/Qwen3-4B-Inst-MOPD", "b61a9f00b77302b6e947af1215b7cb994b884c4a"]
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "base_accuracy_mean": 0.0,
+    "merge_accuracy_mean": 0.0,
+    "mix_accuracy_mean": 0.0,
+    "mopd_accuracy_mean": 0.0,
+    "all_parse_rate_mean": 1.0,
+    "effect_claimed": false
+  },
+  "provenance": {
+    "commit": "583e7a439003e6d4581d2415bd678289553b0e7e",
+    "artifact_path": "docs/gpu-validations/rlvr-fusion-checkpoints-a100-20260901.json",
+    "official_code_revision": "e314dd28cea056e617490065fc08c4aed90204f3",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

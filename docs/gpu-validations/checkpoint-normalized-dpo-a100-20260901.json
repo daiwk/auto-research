@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "adapter_key": "checkpoint-normalized-dpo",
+  "validated_at": "2026-09-01",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "auto-research", "checkpoint-post-train", "--objective", "normalized-dpo",
+    "--dataset", "ultrafeedback", "--beta", "0.1", "--steps", "2",
+    "--model-id", "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "--model-revision", "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "--dataset-revision", "292c16329d921287c4166934cac1a6ad1e13a6c5",
+    "--maximum-examples", "8", "--evaluation-examples", "4",
+    "--batch-size", "2", "--maximum-length", "192",
+    "--mixed-precision", "bf16", "--seeds", "42,43,44"
+  ],
+  "dataset": {
+    "name": "HuggingFaceH4/ultrafeedback_binarized",
+    "revision": "292c16329d921287c4166934cac1a6ad1e13a6c5",
+    "train_examples": 8,
+    "test_examples": 4
+  },
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "baseline_preference_accuracy_mean": 0.0,
+    "final_preference_accuracy_mean": 0.0,
+    "baseline_preference_margin_mean": -1.25,
+    "final_preference_margin_mean": -1.21875,
+    "final_preference_margin_std": 0.03125
+  },
+  "provenance": {
+    "commit": "583e7a439003e6d4581d2415bd678289553b0e7e",
+    "artifact_path": "docs/gpu-validations/checkpoint-normalized-dpo-a100-20260901.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

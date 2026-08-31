@@ -60,3 +60,4 @@ auto-research checkpoint-post-train --objective normalized-dpo \
 ```
 
 A100 验收使用公开数据小子集，确认 CUDA/bf16、冻结 reference、三种子、保存与指标路径均可执行；小子集没有准确率提升，因此不包装成正结果。
+脱敏验收记录见 [Normalized DPO A100 receipt](../../gpu-validations/checkpoint-normalized-dpo-a100-20260901.json)。

@@ -61,3 +61,4 @@ auto-research rlvr-fusion-eval --benchmark AIME2025 \
 ```
 
 实现见 `src/auto_research/post_training/rlvr_fusion_eval.py`。这是可在单卡 A100 运行的官方 checkpoint 子集比较；论文完整协议含八个 benchmark、代码沙箱和多卡 vLLM，不把本地子集结果冒充论文全表。
+脱敏验收记录见 [RLVR Fusion A100 receipt](../../gpu-validations/rlvr-fusion-checkpoints-a100-20260901.json)。
