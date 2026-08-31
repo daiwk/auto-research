@@ -6,6 +6,7 @@ from auto_research.post_training.hf_runner import (
     HFPostTrainingConfig, SMOLLM2_135M_REVISION, ULTRAFEEDBACK_REVISION,
     load_ultrafeedback,
 )
+from auto_research.cli import build_parser
 
 
 def test_real_checkpoint_config_pins_model_dataset_and_three_seeds():
@@ -16,6 +17,16 @@ def test_real_checkpoint_config_pins_model_dataset_and_three_seeds():
     assert len(ULTRAFEEDBACK_REVISION) == 40
     assert config.mixed_precision == "auto"
     assert config.save_every > 0
+
+
+def test_normalized_dpo_beta_is_exposed_and_forwarded_by_cli():
+    args = build_parser().parse_args([
+        "checkpoint-post-train", "--objective", "normalized-dpo",
+        "--dataset", "ultrafeedback", "--beta", "0.25",
+    ])
+    assert args.beta == 0.25
+    source = Path("src/auto_research/cli.py").read_text(encoding="utf-8")
+    assert "beta=args.beta" in source
 
 
 def test_checkpoint_training_rejects_mismatched_objective_or_unstable_seed_protocol():

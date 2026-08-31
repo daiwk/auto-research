@@ -48,3 +48,15 @@ arithmetic-smoke、100 steps：accuracy **0.1953 → 0.4766**，并记录 prefer
 ## 复现边界
 
 本地为候选策略机制验证，不是语言模型偏好数据全量训练。
+
+## 真实 checkpoint 训练路径
+
+Normalized DPO 已接入统一的 causal-LM 训练器：固定 SmolLM2 与 UltraFeedback revision，保留冻结 reference，执行三次独立 checkpoint 更新，并统一比较 preference accuracy、margin 与 95% CI。
+
+```bash
+auto-research checkpoint-post-train --objective normalized-dpo \
+  --dataset ultrafeedback --beta 0.1 --steps 40 \
+  --maximum-examples 64 --evaluation-examples 24 --seeds 42,43,44
+```
+
+A100 验收使用公开数据小子集，确认 CUDA/bf16、冻结 reference、三种子、保存与指标路径均可执行；小子集没有准确率提升，因此不包装成正结果。

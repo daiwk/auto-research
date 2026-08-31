@@ -50,3 +50,14 @@ arithmetic-smoke、100 steps：accuracy **0.1953 → 0.2812**；同时记录 tas
 ## 复现边界
 
 本地候选策略不是大模型 checkpoint；只执行“已有 experts”条件下的 Merge，Mix RL/MOPD 作为等预算可审计诊断，不声称复刻论文多模型规模结果。
+
+## 真实公开 checkpoint 评测
+
+仓库另提供单卡桥接，直接读取原作者发布且固定 revision 的 Qwen3-4B Base、Merge、Mix、MOPD，以及 `Siye01/LLM-Fusion-Test`。四个 checkpoint 使用同一批样本、生成预算和三种子：
+
+```bash
+auto-research rlvr-fusion-eval --benchmark AIME2025 \
+  --maximum-examples 10 --seeds 42,43,44
+```
+
+实现见 `src/auto_research/post_training/rlvr_fusion_eval.py`。这是可在单卡 A100 运行的官方 checkpoint 子集比较；论文完整协议含八个 benchmark、代码沙箱和多卡 vLLM，不把本地子集结果冒充论文全表。

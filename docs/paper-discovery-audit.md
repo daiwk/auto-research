@@ -58,6 +58,7 @@ TokenMinds（Google/YouTube）和 SlimPer（Meta/Instagram）触发。
 2026-08-24 的扫描窗口已扩大为 2026-01-01 至 2026-08-24。扫描规模与首批结果见
 [历史论文扫描与实现](recent-paper-scan-20260824.md)，完整的 3,906 篇机器账本、404 篇
 全文清单和 B00–B11 固定实现安排见[历史扫描清单与实现批次](paper-audits/2026-historical-scan-plan.md)。
+原先 331 篇未决全文候选已完成逐篇终态审计，55 篇晋级 P0 实现队列、273 篇审后保留为 P2、3 篇原文不可用；证据与零未决结论见[历史全文审计终态](paper-audits/2026-historical-fulltext-review.md)。
 
 上述历史批次已全部关闭。2026-08-25 起恢复日批增量扫描；首轮结果、筛除理由和四篇
 实现见[2026-08-25 最新论文增量扫描](recent-paper-scan-20260825.md)。

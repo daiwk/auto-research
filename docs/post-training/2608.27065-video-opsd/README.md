@@ -49,3 +49,14 @@ arithmetic-smoke、100 steps：accuracy **0.1953 → 0.6562**，记录 evidence 
 ## 复现边界
 
 公开 smoke 数据没有视频帧，使用独立奖励轴模拟“证据依赖”；未训练 Video-LLM，不把概念验证写成论文指标复刻。
+
+## 真实视频 checkpoint 路径
+
+`auto-research video-opsd-eval` 在公开 Video-MME-v2 兼容数据上，用同一固定 SmolVLM2 checkpoint 和相同解码预算比较完整视频与 `evidence_frame_indices` 指定的特权证据视图，并报告三种子 accuracy、parse rate 与答案一致率：
+
+```bash
+auto-research video-opsd-eval --annotations video-mme-v2-evidence.jsonl \
+  --video-root videos --seeds 42,43,44
+```
+
+该入口强制逐题证据帧标注，缺失即失败。它是公开 checkpoint 的证据视图审计，不宣称完成论文 6,500 条训练数据和 8×H100 的完整 OPSD 训练。

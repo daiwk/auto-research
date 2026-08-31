@@ -22,6 +22,7 @@ llm-evolution = ["torch>=2.7.0a0,<3", "tokenizers>=0.21,<1"]
 multimodal = [
   "torch>=2.7.0a0,<3",
   "torchvision>=0.22,<1",
+  "av>=14,<17",
   "transformers>=5.0,<6",
   "huggingface-hub>=1.0,<2",
   "datasets>=4.0,<5",

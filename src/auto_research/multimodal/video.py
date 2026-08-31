@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -37,6 +38,7 @@ class VideoBenchmarkConfig:
     do_sample: bool = False
     temperature: float = 0.2
     offline: bool = False
+    frame_indices_by_id: dict[str, tuple[int, ...]] | None = None
 
     def validate(self) -> None:
         if len(self.seeds) < 3:
@@ -75,7 +77,7 @@ def run_video_benchmark(
     digest = _video_digest(config, rows, resolved)
     config.output_dir.mkdir(parents=True, exist_ok=True)
     seed_metrics = []
-    video_cache: dict[Path, tuple[Any, Any]] = {}
+    video_cache: dict[tuple[Path, tuple[int, ...] | None], tuple[Any, Any]] = {}
     load_frames = video_loader or _load_video_frames
     with exclusive_file_lock(config.output_dir / "metrics.json"):
         for seed in config.seeds:
@@ -245,10 +247,26 @@ def _generate_video_answer(
         f"{row['question']}\n{row['options']}\n"
         "Answer with only the option letter."
     )
-    cached = video_cache.get(row["video"])
+    selected = None
+    if config.frame_indices_by_id is not None:
+        selected = tuple(config.frame_indices_by_id.get(row["id"], ()))
+        if not selected:
+            raise ValueError(f"missing frame indices for video question {row['id']}")
+    cache_key = (row["video"], selected)
+    cached = video_cache.get(cache_key)
     if cached is None:
-        cached = load_frames(row["video"], config.num_frames)
-        video_cache[row["video"]] = cached
+        frames, metadata = load_frames(row["video"], config.num_frames)
+        if selected is not None:
+            valid = [index for index in selected if 0 <= index < len(frames)]
+            if not valid:
+                raise ValueError(f"frame indices are outside sampled frames for {row['id']}")
+            frames = frames[valid]
+            metadata = copy.copy(metadata)
+            sampled = getattr(metadata, "frames_indices", None)
+            if sampled is not None:
+                metadata.frames_indices = [sampled[index] for index in valid]
+        cached = frames, metadata
+        video_cache[cache_key] = cached
     frames, metadata = cached
     messages = [{"role": "user", "content": [
         {"type": "video", "video": frames},
@@ -283,7 +301,7 @@ def _generate_video_answer(
 def _load_video_frames(path: Path, num_frames: int):
     from transformers.video_utils import load_video
     return load_video(
-        str(path), num_frames=num_frames, backend="torchvision"
+        str(path), num_frames=num_frames, backend="pyav"
     )
 
 
