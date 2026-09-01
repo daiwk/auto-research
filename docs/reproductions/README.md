@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 276 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 292 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -88,6 +88,20 @@ pytest tests/test_research_module_docs.py
 - `reward-guided-decoding` · [Reward Guided Decoding](2607.25344-reward-guided-decoding/README.md)：以 KL 正则闭式策略在不重训生成器的情况下引入业务 reward。
 
 八篇均保存 seeds 42/43/44 的公开数据结果、原论文关键图、线上证据与明确复现边界；对应结构已注册为可执行 genrec evolve mutation。
+
+## 2026 历史 P0 · H03（9 个 adapter）
+
+- `specformer` · [SpecFormer](2607.24025-specformer/README.md)：谱软化 attention 与谱残差位置编码。
+- `egr` · [EGR](2607.23038-egr/README.md)：共享编码器联合学习 item 索引向量和用户查询向量。
+- `zorro` · [ZoRRO](2607.10910-zorro/README.md)：零训练参数的 recency、语义和类别关系排序。
+- `elise` · [Apple Music ELISE](2607.10239-elise/README.md)：dense/lexical 分位数校准与混合检索。
+- `poem` · [POEM](2606.29946-poem/README.md)：由实时多目标排名信号构造偏序行为序列。
+- `uniformer` · [UniFormer](2606.27058-uniformer/README.md)：特征空间与任务空间统一 token 交互。
+- `rag-generation` · [Recommendation as Generation](2606.25496-rag-generation/README.md)：解耦语义 ID 连接推荐和内容生成。
+- `onerank` · [OneRank](2606.16838-onerank/README.md)：Transformer-native 多任务私有通道与梯度隔离。
+- `piano` · [PIANO](2606.16641-piano/README.md)：query-driven interest refiner 与 listwise information node。
+
+九篇均执行独立核心计算、保存三随机种子公开结果和原文关键图，并注册为可执行 genrec Evolve 算子。所有本地结果只用于机制验证，不外推为论文生产 lift。
 
 ## 2026-08-24 近期跨领域增量
 

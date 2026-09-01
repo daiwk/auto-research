@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "piano",
+  "arxiv_id": "2606.16641",
+  "title": "PIANO: Personalized Reranking via Information Aggregation Node for Music Search Optimization",
+  "paper_url": "https://arxiv.org/abs/2606.16641",
+  "organization": "NetEase Cloud Music",
+  "published": "2026-06-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "search",
+    "reranking",
+    "listwise"
+  ],
+  "local_code": "src/auto_research/reproductions/piano",
+  "documentation": "docs/reproductions/2606.16641-piano/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "pointwise personalized reranker",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "interest_refiner",
+    "information_nodes"
+  ],
+  "mechanisms": [
+    "music-query logs",
+    "production multimodal encoders",
+    "95%-traffic serving deployment"
+  ],
+  "evolve_operators": [
+    "head:listwise-node"
+  ]
+}

@@ -23,6 +23,7 @@
 - 2026-08 · [DREAM](../2608.09408-dream/README.md)：以 L0/L1/L2 意图、策略记忆和有界 typed compiler 控制现有推荐链路，再用离线探索与线上结论回流持续更新策略。
 - 2026-08 · [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - 2026-07 · [SWAG](../2607.25233-swag-bid/README.md)：以 masked future plan 和滑动窗口目标进行长周期生成式自动出价。
+- 2026-07 · [SpecFormer](../2607.24025-specformer/README.md)：以谱软化 attention 与谱残差位置编码缓解推荐 Transformer 的表征坍缩。
 - 2026-07 · [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 加并行全局/query 价值码生成候选，再以联合 VRM 把相关性与商业价值统一排序。
 - 2026-07 · [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：以可增量 Memory Hub 压缩长期行为，把文本与商品 Semantic ID 统一进基础模型，再将显式 CoT 蒸馏为可重建 latent intent token。
 - 2026-07 · [TMallGS](../2607.13398-tmallgs/README.md)：通过 field-wise QKV、噪声门控、FiLM 与 progressive supervision 统一 query、行为和商品字段。
@@ -112,6 +113,9 @@
 - 2026-07 · [UniR²](../2607.24439-unir2/README.md)：用统一 decoder 和 Dual-Query Prefix-Causal Attention 同时学习层级 SID 生成与多目标排序，并以 ranking-only LoRA 避免梯度冲突。
 - 2026-07 · [UAME](../2607.17092-uame/README.md)：把满意度分数建模为均值—方差 Gaussian 变量，用多目标冲突产生的不确定性加权 pairwise 排序训练。
 - 2026-07 · [RECAP](../2607.15730-recap/README.md)：把流式用户画像维护为固定容量语义状态，并用推荐反馈评价器和 GRPO 闭环优化画像更新策略。
+- 2026-06 · [POEM](../2606.29946-poem/README.md)：将实时多目标排序信号转成偏序，动态构造兴趣序列。
+- 2026-06 · [UniFormer](../2606.27058-uniformer/README.md)：拆分 feature/task token 空间并统一交互，支持模型中心协同扩展。
+- 2026-06 · [Recommendation as Generation](../2606.25496-rag-generation/README.md)：以解耦语义 ID 连接生成式推荐和兴趣条件内容生成。
 - 2026-04 · [GloRank](../2604.25291-glorank/README.md)：在全局 Semantic ID action space 上做 listwise SFT 与组相对奖励优化，避免局部候选池限制。
 - 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
 - 2026-04 · [Dual-Rerank](../2604.07420-dual-rerank/README.md)：以 AR 顺序教师蒸馏 NAR 并行名次学生，并把列表效用与延迟共同纳入目标。
@@ -216,9 +220,11 @@
 
 ## NetEase
 - 2026-07 · [Melo](../2607.23718-melo/README.md)：用多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
+- 2026-06 · [PIANO](../2606.16641-piano/README.md)：用查询驱动兴趣精炼和信息聚合节点执行个性化 listwise 音乐重排。
 
 ## Shopee
 - 2026-08 · [KGD](../2608.02738-kgd/README.md)：以 BMTP、冻结知识迁移和正交 ACR 解耦预训练知识与推荐几何，使流式模型可以低成本刷新外部知识。
+- 2026-06 · [OneRank](../2606.16838-onerank/README.md)：用原生统一 Transformer、任务私有通道和梯度隔离执行多任务排序。
 - 2025-09 · [OnePiece](../2509.18091-onepiece/README.md)：用上下文 token、块级 latent reasoning 和递进多任务训练统一级联排序。
 
 ## Twitch
@@ -317,6 +323,7 @@
 - 2026-02 · [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md)：离线 MLLM 生成语义 anchor，轻量非对称模块注入直播排序。
 
 ## Apple
+- 2026-07 · [Apple Music ELISE](../2607.10239-elise/README.md)：以多语言双塔、分位数校准和 dense/lexical 混合检索减少无结果查询。
 - 2026-02 · [Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment](../2602.01023-rag-qac/README.md)：以 RAG、SFT 和 DPO 同时优化补全相关性、安全与 groundedness。
 
 ## Shenzhen University
@@ -324,6 +331,10 @@
 
 ## Snap Inc.
 - 2026-07 · [SnapLGR](../2607.28895-snaplgr/README.md)：把共参与传播、分层 residual SID、token grounding 和 SID SFT 组成生成式召回流水线。
+- 2026-07 · [EGR](../2607.23038-egr/README.md)：共享 LLM 联合编码 item 索引和 user query，并持续重叠训练 IRL/NIP。
 
 ## University of Science and Technology of China
 - 2026-07 · [DIRECTOR](../2607.26418-director/README.md)：用 Sinkhorn transport 与全局匹配并行生成无重复动态索引 slate。
+
+## Technical University of Denmark
+- 2026-07 · [ZoRRO](../2607.10910-zorro/README.md)：零训练参数地融合时间衰减、内容相似和类别关系完成新闻个性化。

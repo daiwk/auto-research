@@ -54,10 +54,12 @@
 - [Memory Layer](../2607.25110-memory-layer/README.md)：把 cache 纳入模型训练，以 eta=1 writeback 和 always-on 属性表征消除训练服务偏差与冷启动缺口。
 - [Mosaic](../2607.24015-mosaic/README.md)：Meta 将 memorization、dense、sequential 与 CoTrain 用户表征组织成 specialist fleet，并以 MRM 和 cosine redundancy loss 挖掘增量信息。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把目标行为写入生成 decoder prefix，并用未来交互 privileged teacher 和熵路由蒸馏内化判别能力。
+- [SpecFormer](../2607.24025-specformer/README.md)：谱软化 attention 与谱残差位置编码缓解推荐 Transformer 表征坍缩。
 - [UniR²](../2607.24439-unir2/README.md)：快手用 Dual-Query Prefix-Causal Attention 在同一 decoder 序列内统一层级 SID 生成和多目标排序，并以 ranking-only LoRA 隔离梯度。
 - [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：YouTube 用同一分层 SID 表达协同身份，并以 Semantic Decoder 恢复内容语义表示。
 - [Melo](../2607.23718-melo/README.md)：以多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
 - [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：组合 recency、IPS、可移除 bias tower 与不确定性探索打破新内容反馈环。
+- [EGR](../2607.23038-egr/README.md)：共享 LLM 联合学习 item 索引和 user query 向量。
 - [BARGE](../2607.21028-barge/README.md)：用 ICA 恢复 item token 结构、HPR 重排累计语义路径，再以 OSQ 正交双通道和 OR-fusion 补充可达候选。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 Pinterest 全漏斗维护 fresh exploration corpus，并以 engagement dropout、内容交叉、分 cohort calibration 和 UCB 减少旧内容偏置。
 - [TSGR](../2607.18796-tsgr/README.md)：把 residual semantic prefix 与并行全局/query 价值码结合，再由联合 VRM 完成价值感知生成召回。
@@ -81,18 +83,25 @@
 - [SlimPer](../2607.12281-slimper/README.md)：通过固定知识库的 Select–Match–Refine 循环替代全序列逐层传播，降低长历史排序的计算和中间状态。
 - [Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap](../2607.26073-guess-where-you-go/README.md)：把时空历史编码为 SID，并以课程训练和长期反馈优化下一 POI 生成。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征组织成配置驱动的生成提示，通过 token 压缩和多种合并策略服务搜索与推荐召回。
+- [ZoRRO](../2607.10910-zorro/README.md)：零权重新闻推荐融合 recency、语义和类别关系。
+- [Apple Music ELISE](../2607.10239-elise/README.md)：多语言 dense retrieval 与词法索引的分位数校准融合。
 - [Cluster GOOBS](../2607.00448-cluster-goobs/README.md)：在线聚类用户或物品表征，并以 cluster-aware sampler 改善训练样本覆盖和头部集中。
 
 ## 2026-06
 - [GenPage: Towards End-to-End Generative Homepage Construction at Netflix](../2606.31031-genpage/README.md)：用一个模型直接生成整页，并以长期用户奖励和业务约束进行后训练。
+- [POEM](../2606.29946-poem/README.md)：由实时多目标排序信号动态构造偏序兴趣序列。
 - [NEXT](../2607.24789-next-vlm/README.md)：以 VLM 推理 next intent、检索并验证 directed video edges，再通过离线 NKG 支持低延迟在线注入。
 - [CMSL](../2606.28533-cmsl/README.md)：用可学习兴趣 lenses 拆分多兴趣序列，并结合 HSTU 建模不同语义 strand。
 - [NOVA](../2606.27243-nova/README.md)：以 architecture gradient 汇总验证和指标反馈，并通过四级级联阻断静默错误架构。
+- [UniFormer](../2606.27058-uniformer/README.md)：统一扩展特征 token、行为序列与多任务交互。
+- [Recommendation as Generation](../2606.25496-rag-generation/README.md)：用解耦语义 ID 连接生成式推荐和个性化视频生成。
 - [TokenMinds](../2606.25147-tokenminds/README.md)：共享序列 encoder，同时输出稠密用户向量和分层 SID 用户 token，再以可学习 token embedding 注入生产排序模型。
 - [G2Rec](../2606.20554-g2rec/README.md)：构建可微 soft graph，并联合图结构与生成式双目标学习用户—物品关系。
 - [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md)：统一编码长短 guest journey 与事件时间，在生产搜索中替代手工序列特征。
 - [RankGraph-2](../2606.18379-rankgraph2/README.md)：对图边去热门偏置，离线预计算多跳 PPR，再以 cluster index 服务召回。
 - [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。
+- [OneRank](../2606.16838-onerank/README.md)：原生统一 Transformer 多任务排序与任务私有通道。
+- [PIANO](../2606.16641-piano/README.md)：查询驱动兴趣精炼和信息聚合节点的音乐 listwise 重排。
 
 ## 2026-05
 - [SCALR](../2606.00282-scalr/README.md)：学习跨域条件分布并概率采样合成训练事件，替代覆盖度较低的确定性 top-k 翻译。

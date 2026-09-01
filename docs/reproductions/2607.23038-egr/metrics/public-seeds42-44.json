@@ -1,0 +1,409 @@
+{
+  "paper": {
+    "arxiv_id": "2607.23038",
+    "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+    "url": "https://arxiv.org/abs/2607.23038",
+    "organization": "Snap Inc."
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "egr",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "transition + content + popularity",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "egr core mechanism (validation blend=0.1)",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05025330564696371,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.21227272727272728
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": -6.947744914759068,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -10.707456978967492
+  },
+  "stages": {
+    "finite_scores": 360,
+    "score_std": 0.08483691417636738,
+    "shared_encoder_passes": 2,
+    "indexed_items": 360
+  },
+  "paper_results": {
+    "impression_lift_percent": 0.15,
+    "ctr_lift_percent": 0.23,
+    "cvr_lift_percent": 2.91
+  },
+  "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型、多媒体生成器或线上服务栈。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "egr",
+    "arxiv_id": "2607.23038",
+    "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+    "paper_url": "https://arxiv.org/abs/2607.23038",
+    "track": "recommendation",
+    "organization": "Snap Inc.",
+    "published": "2026-07-25",
+    "code_url": null,
+    "topics": [
+      "retrieval",
+      "generative-retrieval",
+      "shared-encoder"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K"
+    ],
+    "baseline": "separate transition/content retrieval",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "shared_encoder_passes",
+      "indexed_items"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Snap DPA",
+        "metric": "CVR",
+        "lift_percent": 2.91,
+        "traffic": "two-week test; 10%/10% traffic split",
+        "source_url": "https://arxiv.org/html/2607.23038v1",
+        "source_location": "Section 4.5, Table 6",
+        "retrieved_at": "2026-09-02"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T16:16:52.817478+00:00",
+    "code_commit": "1d956119a5ece6c757bd4acbc1ed0935420a7915",
+    "python": "3.12.9",
+    "platform": "sanitized public CPU run",
+    "dataset_dir": "data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2607.23038-egr/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2607.23038",
+        "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+        "url": "https://arxiv.org/abs/2607.23038",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "egr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "egr core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05025330564696371,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.21227272727272728
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -6.947744914759068,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -10.707456978967492
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.08483691417636738,
+        "shared_encoder_passes": 2,
+        "indexed_items": 360
+      },
+      "paper_results": {
+        "impression_lift_percent": 0.15,
+        "ctr_lift_percent": 0.23,
+        "cvr_lift_percent": 2.91
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型、多媒体生成器或线上服务栈。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.23038",
+        "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+        "url": "https://arxiv.org/abs/2607.23038",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "egr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "egr core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05025330564696371,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.21227272727272728
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -6.947744914759068,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -10.707456978967492
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.08483691417636738,
+        "shared_encoder_passes": 2,
+        "indexed_items": 360
+      },
+      "paper_results": {
+        "impression_lift_percent": 0.15,
+        "ctr_lift_percent": 0.23,
+        "cvr_lift_percent": 2.91
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型、多媒体生成器或线上服务栈。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.23038",
+        "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+        "url": "https://arxiv.org/abs/2607.23038",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "egr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "egr core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05025330564696371,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.21227272727272728
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -6.947744914759068,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -10.707456978967492
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.08483691417636738,
+        "shared_encoder_passes": 2,
+        "indexed_items": 360
+      },
+      "paper_results": {
+        "impression_lift_percent": 0.15,
+        "ctr_lift_percent": 0.23,
+        "cvr_lift_percent": 2.91
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型、多媒体生成器或线上服务栈。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.05400546778896325,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.2377272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.05025330564696371,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.21227272727272728,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": -6.947744914759068,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -10.707456978967492,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.finite_scores": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.score_std": {
+      "mean": 0.08483691417636736,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.shared_encoder_passes": {
+      "mean": 2.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.indexed_items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.impression_lift_percent": {
+      "mean": 0.15,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.ctr_lift_percent": {
+      "mean": 0.23,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.cvr_lift_percent": {
+      "mean": 2.91,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:egr"
+}

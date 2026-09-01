@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "rag-generation",
+  "arxiv_id": "2606.25496",
+  "title": "Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale",
+  "paper_url": "https://arxiv.org/abs/2606.25496",
+  "organization": "Kuaishou / Beihang University",
+  "published": "2026-06-24",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "video-generation"
+  ],
+  "local_code": "src/auto_research/reproductions/rag_generation",
+  "documentation": "docs/reproductions/2606.25496-rag-generation/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "fixed-catalog generative recommendation",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "sid_levels",
+    "sid_width"
+  ],
+  "mechanisms": [
+    "video generation agents",
+    "instruction model",
+    "cross-domain reward service"
+  ],
+  "evolve_operators": [
+    "head:disentangled-sid"
+  ]
+}

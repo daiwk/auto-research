@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "onerank",
+  "arxiv_id": "2606.16838",
+  "title": "OneRank: Unified Transformer-Native Ranking Architecture for Multi-Task Recommendation",
+  "paper_url": "https://arxiv.org/abs/2606.16838",
+  "organization": "Renmin University of China",
+  "published": "2026-06-15",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "multi-task",
+    "transformer"
+  ],
+  "local_code": "src/auto_research/reproductions/onerank",
+  "documentation": "docs/reproductions/2606.16838-onerank/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "Transformer encoder plus separate task predictor",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "task_private_channels",
+    "gradient_detach_boundaries"
+  ],
+  "mechanisms": [
+    "Shopee feature schema",
+    "production multi-stage score fusion",
+    "large-scale training"
+  ],
+  "evolve_operators": [
+    "head:unified-ranker"
+  ]
+}

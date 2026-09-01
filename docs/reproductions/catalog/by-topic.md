@@ -12,9 +12,11 @@
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：在开放网页行为上联合双裁剪对比学习与 next-item 目标预训练共享 user encoder，再迁移到广告 CTR 和访问率任务。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用行为推荐器产生 RAS reward 来优化多模态内容描述，但 serving 不读取用户行为。
 - [Melo](../2607.23718-melo/README.md)：将 LLM 音乐 Agent 与实体 grounding、检索校验和反思重试组合为生产 playlist 流程。
+- [EGR](../2607.23038-egr/README.md)：以同一 LLM 表征 item 索引与用户查询，并联合 item representation learning 和 next-item prediction。
 - [RECAP](../2607.15730-recap/README.md)：用 causal Transformer 更新固定容量语义画像，再通过双塔反馈评价器与 GRPO 让画像直接服务未来推荐。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：让 LLM 读取可演化用户记忆并联合生成文本/SID，再以 latent token 重建蒸馏与排序反馈降低显式推理成本。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构推荐特征转成 Qwen 生成提示，并通过 token 压缩与配置化合并完成召回。
+- [Apple Music ELISE](../2607.10239-elise/README.md)：将多语言语义向量召回与 token index 通过分位数匹配融合。
 - [NEXT](../2607.24789-next-vlm/README.md)：训练面向推荐的 8B VLM 生成 next-intent query，并把高置信 directed edges 离线物化为 NKG。
 - [TokenMinds](../2606.25147-tokenminds/README.md)：把观看、搜索与场景信号编码为稠密用户向量和 SID 用户 token，以双输出和 multi-context decoding 支持下游排序与跨场景复用。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 补充传统召回和排序特征。
@@ -77,6 +79,7 @@
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
 - [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：以分层协同 SID 统一检索 token 与可重建的内容 embedding，减少推荐模型 I/O。
+- [EGR](../2607.23038-egr/README.md)：共享向量空间原生支持 item indexing 与 query retrieval。
 - [BARGE](../2607.21028-barge/README.md)：以 ICA 保留 item 内多 token 结构，用 HPR 修正逐层 beam 漂移，并融合两个正交量化通道的候选。
 - [TSGR](../2607.18796-tsgr/README.md)：用 residual semantic prefix 和并行价值码同时表达商品语义、全局价值与 query 条件价值，再联合训练 VRM。
 - [RecGPT-V3](../2607.15591-recgpt-v3/README.md)：用两级 RQ-VAE 建立 SID 模态，联合记忆驱动意图与 latent reasoning 生成可直接检索的商品标识。
@@ -84,6 +87,7 @@
 - [Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap](../2607.26073-guess-where-you-go/README.md)：把时空历史编码为 SID，并以课程训练和长期反馈优化下一 POI 生成。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征压缩为生成提示，并以配置驱动方式支持多种召回合并策略。
 - [CMSL](../2606.28533-cmsl/README.md)：以可学习 lenses 切分多兴趣 strand，再使用 HSTU 生成推荐结果。
+- [Recommendation as Generation](../2606.25496-rag-generation/README.md)：以解耦 Semantic ID 让推荐意图可同时驱动候选选择和个性化视频生成。
 - [G2Rec](../2606.20554-g2rec/README.md)：联合 soft graph 与生成式双目标学习结构化用户—物品关系。
 - [DeGRe](../2605.25749-degre/README.md)：用离线前瞻列表价值产生 dense prefix labels，再蒸馏到低延迟在线生成器。
 - [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md)：把 query-item 联合序列交给 Linear HSTU，并融合稀疏交叉特征做生成式搜索。
@@ -136,6 +140,7 @@
 - [TWICE](../2607.25404-twice/README.md)：以点击/转化双时钟和单调 delay CDF 处理长期转化反馈未成熟问题。
 - [CORE](../2607.24417-core-relevance/README.md)：将有序相关性拆成 High/Non-High 与条件 Mid/Low 两道边界，并把 step-GRPO reasoning 经 PostCoT 蒸馏给在线双头排序器。
 - [Mosaic](../2607.24015-mosaic/README.md)：把不同归纳偏置的 user embedding 作为可独立演进的 specialist fleet，用 MRM 复合监督和去冗余损失增加下游有效信息。
+- [SpecFormer](../2607.24025-specformer/README.md)：以可学习谱软化和谱残差位置编码缓解 embedding/attention collapse。
 - [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：联合训练去偏与 serving 探索，专门改善新发行内容的曝光反馈闭环。
 - [WHALE](../2607.17017-whale/README.md)：逐层耦合 Wukong 高阶交互和门控 HSTU 序列状态，避免双分支只在末端融合。
 - [Long-History User Transformers](../2607.14331-long-history-transformer/README.md)：把长历史异步压缩成固定缓存，线上只运行近期事件 Transformer，兼顾历史容量与实时延迟。
@@ -144,7 +149,10 @@
 - [MESH](../2607.12392-mesh/README.md)：用异构模块塔、信号放大与 RGBC 缓解 fresh/tail 梯度被头部内容淹没的问题。
 - [SAM](../2607.12714-sam/README.md)：预测品类补货周期并动态屏蔽购买前已满足意图，降低购买后重复推荐。
 - [SlimPer](../2607.12281-slimper/README.md)：以固定 knowledge slots 反复访问原始用户 token，把逐层状态从序列长度中解耦并支持 request-only 共享。
+- [ZoRRO](../2607.10910-zorro/README.md)：无需训练，用 recency、semantic 和 category 关系直接排序新闻候选。
+- [UniFormer](../2606.27058-uniformer/README.md)：在特征空间和任务空间中组织统一语义 token 与交互模块。
 - [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md)：统一编码长短 guest journey 与事件时间，在生产搜索中替代手工序列特征。
+- [OneRank](../2606.16838-onerank/README.md)：将结构特征、任务 token 和任务私有通道放入同一 Transformer-native ranking 架构。
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 动态平衡相关性与多样性。
 - [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
 - [Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md)：以层级语义 ID、bigram、时间折叠和 global-local pooling 扩展视频长历史。
@@ -241,6 +249,10 @@
 - [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md)：组合位置去偏、会话归因与作者周期任务建模长期价值。
 
 ## 多阶段排序与混排
+
+### 实时序列与 listwise 重排
+- [POEM](../2606.29946-poem/README.md)：用当前请求的多路 rank signal 构造偏序序列，补充纯时间历史。
+- [PIANO](../2606.16641-piano/README.md)：query-driven interest refiner 选择相关历史，information node 汇总候选列表并条件化 item score。
 
 ### 召回、粗排与精排协同
 - [SPEAR](../2608.01738-spear/README.md)：以双 embedding 和乘法选择门把 query rewrite 与 item relevance 端到端对齐，同时保留原 query residual。

@@ -58,10 +58,12 @@
 | Serving 与研究基础设施 | [Memory Layer: Train the In-Model Cache for Recommendation Models](../2607.25110-memory-layer/README.md) | Meta / Instagram Reels，2026-07-27 | 未发现官方代码 | `memory-layer` |
 | 生成、排序与冷启动 | [Mosaic: A Fleet of User Embedding Specialists for Recommendation at Meta](../2607.24015-mosaic/README.md) | Meta，2026-07-27 | 未发现官方代码 | `mosaic` |
 | 生成、排序与冷启动 | [OxygenREC-v2: Internalizing Discrimination into Generative Recommendation](../2607.24255-oxygenrec-v2/README.md) | JD.COM，2026-07-27 | 未发现官方代码 | `oxygenrec-v2` |
+| 生成、排序与冷启动 | [SpecFormer: Mitigating Embedding and Attention Collapse via Spectral-Aware Transformer for Recommendation](../2607.24025-specformer/README.md) | Zhejiang University，2026-07-27 | 未发现官方代码 | `specformer` |
 | 生成、排序与冷启动 | [Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence](../2607.24439-unir2/README.md) | Kuaishou / IIE, CAS / UCAS，2026-07-27 | 未发现官方代码 | `unir2` |
 | 生成、排序与冷启动 | [Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music](../2607.23749-youtube-freshness/README.md) | YouTube Music / Google，2026-07-26 | 未发现官方代码 | `youtube-freshness` |
 | 大模型能力与推荐融合 | [Melo: A Production LLM-Powered Music Recommendation Agent](../2607.23718-melo/README.md) | NetEase Cloud Music / Zhejiang University of Technology，2026-07-26 | 未发现官方代码 | `melo` |
 | 生成、排序与冷启动 | [Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems](../2607.24865-dual-sid/README.md) | Google DeepMind / YouTube，2026-07-26 | 未发现官方代码 | `dual-sid` |
+| 大模型能力与推荐融合 | [EGR: Embedding-Native Generative Retrieval with a Shared LLM](../2607.23038-egr/README.md) | Snap Inc.，2026-07-25 | 未发现官方代码 | `egr` |
 | 生成、排序与冷启动 | [Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation](../2607.21028-barge/README.md) | Tencent，2026-07-23 | 未发现官方代码 | `barge` |
 | 生成、排序与冷启动 | [PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest](../2607.22518-pinequalizer/README.md) | Pinterest，2026-07-23 | 未发现官方代码 | `pinequalizer` |
 | 生成、排序与冷启动 | [TSGR: Taobao Search Generative Retrieval](../2607.18796-tsgr/README.md) | Taobao & Tmall Group of Alibaba / Zhejiang University，2026-07-21 | 未发现官方代码 | `tsgr` |
@@ -84,17 +86,24 @@
 | 生成、排序与冷启动 | [Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb](../2607.12246-proximity-features/README.md) | Airbnb，2026-07-14 | 未发现官方代码 | `proximity-features` |
 | 生成、排序与冷启动 | [SlimPer: Make Personalization Model Slim and Smart](../2607.12281-slimper/README.md) | Meta Platforms, Inc.，2026-07-14 | 未发现官方代码 | `slimper` |
 | 生成、排序与冷启动 | [Guess Where You Go: Generative Next Point-of-Interest Recommendation in Amap](../2607.26073-guess-where-you-go/README.md) | Amap / Alibaba，2026-07-13 | [已开源](https://github.com/alibaba/SimCIT) | `guess-where-you-go` |
+| 生成、排序与冷启动 | [ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation](../2607.10910-zorro/README.md) | Technical University of Denmark，2026-07-12 | 未发现官方代码 | `zorro` |
+| 大模型能力与推荐融合 | [Multilingual Semantic Retrieval for Apple Music Search](../2607.10239-elise/README.md) | Apple，2026-07-11 | 未发现官方代码 | `elise` |
 | 训练目标与决策优化 | [Real-Time Hard Negative Sampling via LLM-based Clustering for Large-Scale Two-Tower Retrieval](../2607.00448-cluster-goobs/README.md) | Meta，2026-07-01 | 未发现官方代码 | `cluster-goobs` |
 | 大模型能力与推荐融合 | [Prompt Generation Technical Report](../2607.11326-prompt-generation/README.md) | Alibaba / Taobao Search，2026-07 | 未发现官方代码 | `prompt-generation` |
 | 多阶段排序与混排 | [GenPage: Towards End-to-End Generative Homepage Construction at Netflix](../2606.31031-genpage/README.md) | Netflix，2026-06-30 | 未发现官方代码 | `genpage` |
+| 多阶段排序与混排 | [POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation](../2606.29946-poem/README.md) | Kuaishou，2026-06-29 | 未发现官方代码 | `poem` |
 | 大模型能力与推荐融合 | [NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model](../2607.24789-next-vlm/README.md) | Meta，2026-06-27 | 未发现官方代码 | `next-vlm` |
 | 生成、排序与冷启动 | [CMSL: Constructive Multi-Sequence Learning for Recommendation Systems](../2606.28533-cmsl/README.md) | Meta，2026-06-26 | 未发现官方代码 | `cmsl` |
 | Serving 与研究基础设施 | [NOVA: A Verification-Aware Agent Harness for Architecture Evolution in Industrial Recommender Systems](../2606.27243-nova/README.md) | Tencent，2026-06-25 | 未发现官方代码 | `nova` |
+| 生成、排序与冷启动 | [UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation](../2606.27058-uniformer/README.md) | Kuaishou，2026-06-25 | 未发现官方代码 | `uniformer` |
+| 生成、排序与冷启动 | [Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale](../2606.25496-rag-generation/README.md) | Kuaishou / Beihang University，2026-06-24 | 未发现官方代码 | `rag-generation` |
 | 大模型能力与推荐融合 | [TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems](../2606.25147-tokenminds/README.md) | Google DeepMind / YouTube，2026-06-23 | 未发现官方代码 | `tokenminds` |
 | 生成、排序与冷启动 | [Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation](../2606.20554-g2rec/README.md) | Meta，2026-06-18 | 未发现官方代码 | `g2rec` |
 | 生成、排序与冷启动 | [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md) | Airbnb，2026-06-17 | 未发现官方代码 | `journeyformer` |
 | Serving 与研究基础设施 | [RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation](../2606.18379-rankgraph2/README.md) | Meta，2026-06-16 | 未发现官方代码 | `rankgraph2` |
 | Serving 与研究基础设施 | [EvoRec: Self-Evolving Agentic Recommender Systems](../2606.28368-evorec/README.md) | Alibaba International Digital Commerce Group，2026-06-15 | 未发现官方代码 | `evorec` |
+| 生成、排序与冷启动 | [OneRank: Unified Transformer-Native Ranking Architecture for Multi-Task Recommendation](../2606.16838-onerank/README.md) | Renmin University of China，2026-06-15 | 未发现官方代码 | `onerank` |
+| 多阶段排序与混排 | [PIANO: Personalized Reranking via Information Aggregation Node for Music Search Optimization](../2606.16641-piano/README.md) | NetEase Cloud Music，2026-06-15 | 未发现官方代码 | `piano` |
 | 训练目标与决策优化 | [Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems](../2606.00282-scalr/README.md) | Meta，2026-05-29 | 未发现官方代码 | `scalr` |
 | 训练目标与决策优化 | [Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models](../2605.29755-rec-distill/README.md) | ByteDance / Douyin / TikTok，2026-05-28 | 未发现官方代码 | `rec-distill` |
 | 大模型能力与推荐融合 | [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md) | NetEase Cloud Music，2026-05-26 | 未发现官方代码 | `l2rec` |

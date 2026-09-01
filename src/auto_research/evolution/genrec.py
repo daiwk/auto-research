@@ -141,6 +141,22 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
         _, _, right = np.linalg.svd(centered, full_matrices=False)
         catalog = centered @ right.T
         return catalog / np.maximum(np.linalg.norm(catalog, axis=1, keepdims=True), 1e-12)
+    if genome.genrec_head == "embedding-native":
+        coengagement = np.eye(len(data.item_texts), dtype=np.float64) * 1e-3
+        for sequence in data.train:
+            for left, right in zip(sequence, sequence[1:]):
+                coengagement[left, right] += 1.0
+        coengagement /= np.maximum(coengagement.sum(1, keepdims=True), 1e-12)
+        return learned + 0.40 * semantic + 0.25 * (coengagement @ semantic)
+    if genome.genrec_head == "disentangled-sid":
+        # Separate collaborative identity from semantic content before fusion.
+        return np.concatenate((learned[:, : dimensions // 2], semantic[:, dimensions // 2 :]), axis=1)
+    if genome.genrec_head == "unified-ranker":
+        value = np.log1p(data.popularity)[:, None]
+        return learned + semantic + value * np.linspace(0.0, 0.15, dimensions)[None]
+    if genome.genrec_head == "listwise-node":
+        information_node = semantic.mean(0, keepdims=True)
+        return learned + semantic + 0.20 * information_node
     if genome.genrec_head == "semantic-catalog":
         return semantic
     if genome.genrec_head == "hybrid-catalog":
@@ -150,7 +166,31 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
 
 def _context(history, catalog, mode: str, maximum: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     values = np.asarray(history, dtype=np.int64)
-    if mode == "tm20k-merge":
+    if mode == "spectral-soften":
+        values = values[-maximum:]
+        centered = catalog[values] - catalog[values].mean(0, keepdims=True)
+        u, singular, right = np.linalg.svd(centered, full_matrices=False)
+        softened = u @ np.diag(np.sqrt(singular + 1e-6)) @ right
+        weights = np.linspace(0.5, 1.0, len(values))
+        weights /= weights.sum()
+        return (softened * weights[:, None]).sum(0), values, weights
+    if mode == "zero-weight":
+        values = values[-maximum:]
+        weights = np.exp(np.linspace(-2.0, 0.0, len(values)))
+    elif mode == "quantile-fusion":
+        values = values[-maximum:]
+        raw = np.linalg.norm(catalog[values], axis=1)
+        weights = np.argsort(np.argsort(raw)).astype(np.float64) + 1.0
+    elif mode == "partial-order":
+        values = values[-maximum:]
+        scores = catalog[values] @ catalog[values[-1]]
+        weights = (len(values) - np.argsort(np.argsort(-scores))).astype(np.float64)
+    elif mode == "unified-token":
+        values = values[-maximum:]
+        split = max(1, catalog.shape[1] // 2)
+        scores = catalog[values, :split] @ catalog[values[-1], :split]
+        weights = np.exp(scores - scores.max())
+    elif mode == "tm20k-merge":
         values = values[-max(8, maximum * 2):]
         groups = np.array_split(np.arange(len(values)), min(maximum, len(values)))
         merged = np.stack(

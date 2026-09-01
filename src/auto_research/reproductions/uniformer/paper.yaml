@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "uniformer",
+  "arxiv_id": "2606.27058",
+  "title": "UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation",
+  "paper_url": "https://arxiv.org/abs/2606.27058",
+  "organization": "Kuaishou",
+  "published": "2026-06-25",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "feature-tokenization",
+    "multi-task"
+  ],
+  "local_code": "src/auto_research/reproductions/uniformer",
+  "documentation": "docs/reproductions/2606.27058-uniformer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "single-space feature interaction",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "feature_spaces",
+    "task_tokens"
+  ],
+  "mechanisms": [
+    "512-candidate production scorer",
+    "industrial feature schema",
+    "distributed serving"
+  ],
+  "evolve_operators": [
+    "context:unified-token"
+  ]
+}
