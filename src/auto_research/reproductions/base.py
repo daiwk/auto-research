@@ -26,8 +26,11 @@ class OnlineABEvidence:
             "traffic": self.traffic,
         }
         for key in (
-            "source_url", "source_location", "experiment_duration",
-            "significance", "retrieved_at",
+            "source_url",
+            "source_location",
+            "experiment_duration",
+            "significance",
+            "retrieved_at",
         ):
             value = getattr(self, key)
             if value:
@@ -137,6 +140,7 @@ class EvaluationTier(str, Enum):
             self.PAPER_PIPELINE: "L3 接近论文训练链路",
         }[self]
 
+
 @dataclass(frozen=True)
 class ReproductionAdapter:
     """Everything unique to one paper, behind a stable runner interface."""
@@ -151,6 +155,7 @@ class ReproductionAdapter:
     datasets: tuple[str, ...] = ()
     baseline: str | None = None
     metrics: tuple[str, ...] = ()
+    evolve_operators: tuple[str, ...] = ()
     default_seeds: tuple[int, ...] = (42,)
     budget: str = "paper-specific"
     device_capabilities: tuple[str, ...] = ("cpu",)

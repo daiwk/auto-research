@@ -47,6 +47,7 @@
 | 大模型能力与推荐融合 | [RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation](../2607.25901-reco-reward/README.md) | Kuaishou / Nankai University / Chinese Academy of Sciences，2026-07-28 | 未发现官方代码 | `reco-reward` |
 | 生成、排序与冷启动 | [TWICE: Two-Clock, Two-Window Learning for Long-Horizon Conversion Prediction in Online Advertising](../2607.25404-twice/README.md) | Kuaishou，2026-07-28 | 未发现官方代码 | `twice` |
 | 生成、排序与冷启动 | [CORE: A Unified Cascaded Ordinal Relevance Estimation Framework for E-commerce Search](../2607.24417-core-relevance/README.md) | Meituan / Beijing Institute of Technology，2026-07-27 | 未发现官方代码 | `core-relevance` |
+| Serving 与研究基础设施 | [Memory Layer: Train the In-Model Cache for Recommendation Models](../2607.25110-memory-layer/README.md) | Meta / Instagram Reels，2026-07-27 | 未发现官方代码 | `memory-layer` |
 | 生成、排序与冷启动 | [Mosaic: A Fleet of User Embedding Specialists for Recommendation at Meta](../2607.24015-mosaic/README.md) | Meta，2026-07-27 | 未发现官方代码 | `mosaic` |
 | 生成、排序与冷启动 | [OxygenREC-v2: Internalizing Discrimination into Generative Recommendation](../2607.24255-oxygenrec-v2/README.md) | JD.COM，2026-07-27 | 未发现官方代码 | `oxygenrec-v2` |
 | 生成、排序与冷启动 | [Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence](../2607.24439-unir2/README.md) | Kuaishou / IIE, CAS / UCAS，2026-07-27 | 未发现官方代码 | `unir2` |
@@ -86,6 +87,7 @@
 | 生成、排序与冷启动 | [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md) | Airbnb，2026-06-17 | 未发现官方代码 | `journeyformer` |
 | Serving 与研究基础设施 | [RankGraph-2: Lifecycle Co-Design for Billion-Node Graph Learning in Recommendation](../2606.18379-rankgraph2/README.md) | Meta，2026-06-16 | 未发现官方代码 | `rankgraph2` |
 | Serving 与研究基础设施 | [EvoRec: Self-Evolving Agentic Recommender Systems](../2606.28368-evorec/README.md) | Alibaba International Digital Commerce Group，2026-06-15 | 未发现官方代码 | `evorec` |
+| 训练目标与决策优化 | [Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems](../2606.00282-scalr/README.md) | Meta，2026-05-29 | 未发现官方代码 | `scalr` |
 | 训练目标与决策优化 | [Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models](../2605.29755-rec-distill/README.md) | ByteDance / Douyin / TikTok，2026-05-28 | 未发现官方代码 | `rec-distill` |
 | 大模型能力与推荐融合 | [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md) | NetEase Cloud Music，2026-05-26 | 未发现官方代码 | `l2rec` |
 | 生成、排序与冷启动 | [DeGRe: Listwise Generative Reranking with Offline Lookahead Distillation](../2605.25749-degre/README.md) | Alibaba Group / Zhejiang University，2026-05-25 | 未发现官方代码 | `degre` |
@@ -103,6 +105,7 @@
 | 多阶段排序与混排 | [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md) | Pinterest，2026-05-08 | 未发现官方代码 | `prl-puts` |
 | 生成、排序与冷启动 | [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md) | Huawei Technologies，2026-05-07 | 未发现官方代码 | `ektm` |
 | 大模型能力与推荐融合 | [RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation](../2605.04726-recgpt-mobile/README.md) | Alibaba / Taobao，2026-05-06 | 未发现官方代码 | `recgpt-mobile` |
+| 生成、排序与冷启动 | [Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md) | Google，2026-05-04 | 未发现官方代码 | `semantic-native-longseq` |
 | 大模型能力与推荐融合 | [A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems](../2605.09338-mm-llm/README.md) | Meta，2026-05 | 未发现官方代码 | `mm-llm` |
 | 大模型能力与推荐融合 | [Fine-Tuned LLM as a Complementary Predictor Improving Ads System](../2605.27856-pinterest-ads-llm/README.md) | Pinterest，2026-05 | 未发现官方代码 | `pinterest-ads-llm` |
 | 大模型能力与推荐融合 | [LLM Retrieval for Stable and Predictable Ad Recommendations](../2605.21969-llm-ad-retrieval/README.md) | Meta，2026-05 | 未发现官方代码 | `llm-ad-retrieval` |
@@ -113,6 +116,7 @@
 | 训练目标与决策优化 | [AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization](../2604.26969-agentic-rec-tune/README.md) | Google / Discover，2026-04-21 | 未发现官方代码 | `agentic-rec-tune` |
 | 多阶段排序与混排 | [CS3: Efficient Online Capability Synergy for Two-Tower Recommendation](../2604.19269-cs3/README.md) | Kuaishou Technology，2026-04-21 | [已开源](https://github.com/lixiangwang/CS3Rec) | `cs3` |
 | 生成、排序与冷启动 | [GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation](../2604.14878-genrec/README.md) | JD.com，2026-04-16 | 未发现官方代码 | `genrec` |
+| 生成、排序与冷启动 | [Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation](../2604.12965-hill-index/README.md) | Meta / Facebook and Instagram Ads，2026-04-14 | 未发现官方代码 | `hill-index` |
 | 生成、排序与冷启动 | [UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute](../2604.12234-unirec-coa/README.md) | Authors did not disclose affiliation / large-scale e-commerce platform，2026-04-14 | 未发现官方代码 | `unirec-coa` |
 | 大模型能力与推荐融合 | [SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling](../2604.12110-solaris/README.md) | Meta，2026-04-13 | 未发现官方代码 | `solaris` |
 | 多阶段排序与混排 | [Dual-Rerank: Fusing Sequential Dependencies and Utility for Generative Reranking](../2604.07420-dual-rerank/README.md) | Kuaishou Technology，2026-04-08 | 未发现官方代码 | `dual-rerank` |

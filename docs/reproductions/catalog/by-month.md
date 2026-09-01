@@ -43,6 +43,7 @@
 - [SWAG](../2607.25233-swag-bid/README.md)：用 masked future plan、七日滑窗目标和逐步 gate 优化跨 episode 自动出价。
 - [TWICE](../2607.25404-twice/README.md)：分离点击和转化时钟，以 current-status likelihood 和单调 delay CDF 学习长期 CVR。
 - [CORE](../2607.24417-core-relevance/README.md)：美团把 High/Mid/Low 相关性拆成条件二分类，用逐 step GRPO 优化 reasoning，再通过 PostCoT 蒸馏到低延迟双头模型。
+- [Memory Layer](../2607.25110-memory-layer/README.md)：把 cache 纳入模型训练，以 eta=1 writeback 和 always-on 属性表征消除训练服务偏差与冷启动缺口。
 - [Mosaic](../2607.24015-mosaic/README.md)：Meta 将 memorization、dense、sequential 与 CoTrain 用户表征组织成 specialist fleet，并以 MRM 和 cosine redundancy loss 挖掘增量信息。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：把目标行为写入生成 decoder prefix，并用未来交互 privileged teacher 和熵路由蒸馏内化判别能力。
 - [UniR²](../2607.24439-unir2/README.md)：快手用 Dual-Query Prefix-Causal Attention 在同一 decoder 序列内统一层级 SID 生成和多目标排序，并以 ranking-only LoRA 隔离梯度。
@@ -86,6 +87,7 @@
 - [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。
 
 ## 2026-05
+- [SCALR](../2606.00282-scalr/README.md)：学习跨域条件分布并概率采样合成训练事件，替代覆盖度较低的确定性 top-k 翻译。
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
 - [Pinterest Ads LLM](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 作为传统广告召回与排序的补充预测器。
 - [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md)：用个性化双视图 LoRA-MoE 分别适配语义和行为，再自适应融合。
@@ -107,6 +109,7 @@
 - [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
 - [UniVA](../2605.05803-univa/README.md)：用 Commercial SID 和 generation-as-ranking 统一广告生成，并通过价值对齐 RL 与 trie beam 优化收益。
 - [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：将 LoRA+INT8 小模型部署到端侧，通过预算约束 prompt 和 entropy/Jaccard/JS 漂移分数按需生成用户意图。
+- [Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md)：以层级语义 ID、bigram、时间折叠和 global-local pooling 扩展视频长历史。
 - [LWGR](../2605.18771-lwgr/README.md)：把个性化 soft instruction 注入 LLM 世界知识，并用交叉注意力和拉格朗日约束与推荐分数融合。
 
 ## 2026-04
@@ -115,6 +118,7 @@
 - [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：Google Discover 以多 Agent 和自进化 SkillHub 自动提出、审查、执行并沉淀推荐配置实验。
 - [CS3](../2604.19269-cs3/README.md)：以循环自修正、跨塔同步和级联教师增强可在线部署的双塔召回。
 - [GenRec](../2604.14878-genrec/README.md)：用 page-wise NTP、非对称 Token Merger 和带 NLL 正则的 GRPO-SR 优化整页结果。
+- [HILL](../2604.12965-hill-index/README.md)：用跨层 residual quantization 学习 coarse-to-fine 检索索引，减少候选打分量。
 - [UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute](../2604.12234-unirec-coa/README.md)：先生成属性链再生成容量受限 SID，并以 RFT/DPO 对齐业务目标。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item pair，异步预计算并缓存 foundation-model latent，在线命中直接消费。
 - [Dual-Rerank](../2604.07420-dual-rerank/README.md)：蒸馏 AR 顺序知识到 NAR 并行重排器并显式优化效用/延迟。

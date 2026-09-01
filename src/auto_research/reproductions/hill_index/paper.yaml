@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "hill-index",
+  "arxiv_id": "2604.12965",
+  "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
+  "paper_url": "https://arxiv.org/abs/2604.12965",
+  "organization": "Meta / Facebook and Instagram Ads",
+  "published": "2026-04-14",
+  "upstream_code": "否：论文未发布 HILL/MoNN 官方实现；只链接 Gowalla、Yelp 2018、Amazon-Book 的第三方数据仓库（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "hierarchical-index",
+    "residual-quantization",
+    "test-time-training",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/hill_index",
+  "documentation": "docs/reproductions/2604.12965-hill-index/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "one-layer learned index with the same public item features and retrieval protocol",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "head_share_at_10",
+    "mean_scored_items"
+  ],
+  "mechanisms": [
+    "Meta MoNN production model",
+    "distributed FAISS EM",
+    "Facebook and Instagram Ads logs"
+  ],
+  "evolve_operators": [
+    "rankmixer_hill_index"
+  ]
+}
