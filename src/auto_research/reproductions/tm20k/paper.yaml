@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "tm20k",
+  "arxiv_id": "2608.07055",
+  "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+  "paper_url": "https://arxiv.org/abs/2608.07055",
+  "organization": "ByteDance",
+  "published": "2026-08-07",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "long-sequence",
+    "token-merging",
+    "distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/tm20k",
+  "documentation": "docs/reproductions/2608.07055-tm20k/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (full public histories)"
+  ],
+  "baseline": "same merged-token student without teacher distillation",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "compression_ratio",
+    "distilled_teacher_mse"
+  ],
+  "mechanisms": [
+    "20K private behavior streams",
+    "M-Falcon serving",
+    "advertising feature tower"
+  ],
+  "evolve_operators": [
+    "context:tm20k-merge"
+  ]
+}

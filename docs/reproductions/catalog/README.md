@@ -17,13 +17,16 @@
 | 生成、排序与冷启动 | [OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking](../2608.18606-onemodel/README.md) | Xiaohongshu，2026-08-19 | 未发现官方代码 | `onemodel` |
 | 内容理解、审核与风险控制 | [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md) | Netflix，2026-08-18 | 未发现官方代码 | `netflix-mediafm` |
 | 多阶段排序与混排 | [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md) | Kuaishou Technology，2026-08-18 | 未发现官方代码 | `ogr` |
+| 生成、排序与冷启动 | [DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation](../2608.12778-drem/README.md) | Shenzhen University，2026-08-13 | 未发现官方代码 | `drem` |
 | 生成、排序与冷启动 | [Sona Technical Report](../2608.11015-sona/README.md) | Yandex，2026-08-11 | 未发现官方代码 | `sona` |
 | 大模型能力与推荐融合 | [ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning](../2608.10187-connectionmind/README.md) | Michigan State University，2026-08-10 | 未发现官方代码 | `connectionmind` |
 | 大模型能力与推荐融合 | [DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models](../2608.09408-dream/README.md) | Taobao & Tmall Group / Alibaba，2026-08-10 | 未发现官方代码 | `dream` |
+| 训练目标与决策优化 | [From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation](../2608.10182-incrementality/README.md) | LinkedIn，2026-08-10 | 未发现官方代码 | `incrementality` |
 | 大模型能力与推荐融合 | [GenRec: An LLM-Backed Recommendation Ranker at Netflix](../2608.10257-genrec-netflix/README.md) | Netflix，2026-08-10 | 未发现官方代码 | `genrec-netflix` |
 | 生成、排序与冷启动 | [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md) | Amap / Alibaba，2026-08-10 | 未发现官方代码 | `inthq` |
 | 生成、排序与冷启动 | [MetaStrategy: Generative Ranking with Executable LLM Strategies](../2608.09440-metastrategy/README.md) | Alibaba / Taobao，2026-08-10 | 未发现官方代码 | `metastrategy` |
 | 生成、排序与冷启动 | [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md) | Kuaishou Technology，2026-08-08 | 未发现官方代码 | `pushdualgen` |
+| 生成、排序与冷启动 | [Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation](../2608.07055-tm20k/README.md) | ByteDance，2026-08-07 | 未发现官方代码 | `tm20k` |
 | 生成、排序与冷启动 | [Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation](../2608.06213-gryphon-v2/README.md) | Yandex，2026-08-06 | 未发现官方代码 | `gryphon-v2` |
 | 多阶段排序与混排 | [DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging](../2608.04809-degr/README.md) | JD.com，2026-08-05 | 未发现官方代码 | `degr` |
 | 多阶段排序与混排 | [Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting](../2608.04455-twitch-mor/README.md) | Twitch，2026-08-05 | 未发现官方代码 | `twitch-mor` |
@@ -35,16 +38,21 @@
 | 生成、排序与冷启动 | [Hierarchical Residual Policy Optimization for Generative Recommendations](../2608.00750-hrpo/README.md) | City University of Hong Kong / Kuaishou，2026-08-01 | [已开源](https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO) | `hrpo` |
 | 内容理解、审核与风险控制 | [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md) | Rajax Network Technology / Taobao Shangou / Alibaba，2026-07-31 | 未发现官方代码 | `gala` |
 | 训练目标与决策优化 | [RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems](../2607.29241-recharness/README.md) | Huazhong Agricultural University (Kuaishou internship)，2026-07-31 | [已开源](https://github.com/6lyc/RecHarness) | `recharness` |
+| 生成、排序与冷启动 | [TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings](../2607.28940-transx/README.md) | LinkedIn，2026-07-31 | 未发现官方代码 | `transx` |
 | 大模型能力与推荐融合 | [Building a User Foundation Model for the Open Web](../2607.28019-open-web-ufm/README.md) | Teads，2026-07-30 | 未发现官方代码 | `open-web-ufm` |
 | 生成、排序与冷启动 | [CCFormer: Efficient Cross-Field Interaction and Hierarchical Sequence Compression for Industrial Recommendation at Tencent](../2607.28070-ccformer/README.md) | Tencent Platform and Content Group，2026-07-30 | 未发现官方代码 | `ccformer` |
 | 训练目标与决策优化 | [From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation](../2607.27789-feedback-policy/README.md) | Huazhong Agricultural University (Kuaishou internship)，2026-07-30 | 未发现官方代码 | `feedback-policy` |
 | 生成、排序与冷启动 | [Heterogeneous Ranking in Industrial-Scale Recommender Systems: A Case Study](../2607.27577-ha-moe/README.md) | Google / Discover，2026-07-30 | 未发现官方代码 | `ha-moe` |
+| 生成、排序与冷启动 | [LLM-Based Generative Retrieval for Snapchat Content Recommendation](../2607.28895-snaplgr/README.md) | Snap Inc.，2026-07-30 | 未发现官方代码 | `snaplgr` |
 | 生成、排序与冷启动 | [ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation](../2607.27744-rocs/README.md) | Meta AI，2026-07-30 | [已开源](https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo) | `rocs` |
 | 训练目标与决策优化 | [ASARL: Autonomous Social-Aware Relevance Learning for QQ Search](../2607.26593-asarl/README.md) | Tencent PCG，2026-07-29 | 未发现官方代码 | `asarl` |
 | 生成、排序与冷启动 | [ClockRoPE: Random Fourier Rotations for Temporal Routine Modeling](../2607.26369-clockrope/README.md) | YouTube / Google DeepMind，2026-07-29 | 未发现官方代码 | `clockrope` |
+| 多阶段排序与混排 | [DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval](../2607.26418-director/README.md) | University of Science and Technology of China，2026-07-29 | 未发现官方代码 | `director` |
 | 多阶段排序与混排 | [OneShot: Index-in-Ranking with Neural Scoring for Large-Scale Retrieval](../2607.27475-oneshot-index/README.md) | Meta / Instagram，2026-07-29 | 未发现官方代码 | `oneshot-index` |
+| 多阶段排序与混排 | [PSG: Pair-Space Generation for Efficient Generative Reranking](../2607.26427-psg/README.md) | Kuaishou Technology，2026-07-29 | 未发现官方代码 | `psg` |
 | 训练目标与决策优化 | [Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness](../2607.25233-swag-bid/README.md) | Alibaba International Digital Commerce / Dalian University of Technology，2026-07-28 | 未发现官方代码 | `swag-bid` |
 | 大模型能力与推荐融合 | [RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation](../2607.25901-reco-reward/README.md) | Kuaishou / Nankai University / Chinese Academy of Sciences，2026-07-28 | 未发现官方代码 | `reco-reward` |
+| 训练目标与决策优化 | [Reward Guided Decoding for Generative Recommendation](../2607.25344-reward-guided-decoding/README.md) | Institute of Information Engineering, Chinese Academy of Sciences，2026-07-28 | 未发现官方代码 | `reward-guided-decoding` |
 | 生成、排序与冷启动 | [TWICE: Two-Clock, Two-Window Learning for Long-Horizon Conversion Prediction in Online Advertising](../2607.25404-twice/README.md) | Kuaishou，2026-07-28 | 未发现官方代码 | `twice` |
 | 生成、排序与冷启动 | [CORE: A Unified Cascaded Ordinal Relevance Estimation Framework for E-commerce Search](../2607.24417-core-relevance/README.md) | Meituan / Beijing Institute of Technology，2026-07-27 | 未发现官方代码 | `core-relevance` |
 | Serving 与研究基础设施 | [Memory Layer: Train the In-Model Cache for Recommendation Models](../2607.25110-memory-layer/README.md) | Meta / Instagram Reels，2026-07-27 | 未发现官方代码 | `memory-layer` |

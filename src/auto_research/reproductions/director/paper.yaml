@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "director",
+  "arxiv_id": "2607.26418",
+  "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+  "paper_url": "https://arxiv.org/abs/2607.26418",
+  "organization": "University of Science and Technology of China",
+  "published": "2026-07-29",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "dynamic-index",
+    "optimal-transport",
+    "non-autoregressive"
+  ],
+  "local_code": "src/auto_research/reproductions/director",
+  "documentation": "docs/reproductions/2607.26418-director/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "independent position-wise dynamic-index retrieval",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "matched_duplicate_count",
+    "transport_row_error"
+  ],
+  "mechanisms": [
+    "CVAE/DIFF production generators",
+    "opaque listwise evaluator",
+    "20K-QPS serving stack"
+  ],
+  "evolve_operators": [
+    "head:transport-index"
+  ]
+}

@@ -51,7 +51,7 @@ pytest tests/test_research_module_docs.py
 ## 当前进度
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 268 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记并复核 276 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
@@ -75,6 +75,19 @@ pytest tests/test_research_module_docs.py
 - `ultra-hstu` · [Meta ULTRA-HSTU](2602.16986-ultra-hstu/README.md)：semi-local attention、LBSL 与 Mixture of Transducers。
 
 这批候选均由机构/主题先召回，再逐篇检查正文和表格；不再要求摘要先出现 `A/B` 关键词。六篇均完成公开数据实验、固定指标、论文原图与 evolve 可执行映射（AgenticRecTune 对应控制器回归样例，而非伪造网络结构）。
+
+## 2026 历史 P0 · H02（8 个 adapter）
+
+- `drem` · [DrEM](2608.12778-drem/README.md)：以偏好保持噪声筛选、pair-label 翻转风险反演和一致性融合稳定多路 pxtr 排序。
+- `incrementality` · [From Prediction to Incrementality](2608.10182-incrementality/README.md)：以潜在结果差和不确定度执行同预算因果 targeting，不再按 treated outcome 直接排序。
+- `tm20k` · [TM20K](2608.07055-tm20k/README.md)：教师保留完整历史，学生用连续 token merge 与注意力蒸馏压缩超长序列。
+- `transx` · [TransX](2607.28940-transx/README.md)：分离可缓存行为流和请求时服务流，以 cross-attention 降低重复计算。
+- `snaplgr` · [SnapLGR](2607.28895-snaplgr/README.md)：共参与传播、分层 residual SID、token grounding 与 SID sequence SFT。
+- `psg` · [PSG](2607.26427-psg/README.md)：在 ordered pair 空间生成并展开 slate，将六 item 解码缩短为三步。
+- `director` · [DIRECTOR](2607.26418-director/README.md)：用 Sinkhorn transport 和全局匹配并行生成无重复动态索引 slate。
+- `reward-guided-decoding` · [Reward Guided Decoding](2607.25344-reward-guided-decoding/README.md)：以 KL 正则闭式策略在不重训生成器的情况下引入业务 reward。
+
+八篇均保存 seeds 42/43/44 的公开数据结果、原论文关键图、线上证据与明确复现边界；对应结构已注册为可执行 genrec evolve mutation。
 
 ## 2026-08-24 近期跨领域增量
 

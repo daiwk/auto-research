@@ -1,0 +1,430 @@
+{
+  "paper": {
+    "arxiv_id": "2607.28940",
+    "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+    "url": "https://arxiv.org/abs/2607.28940",
+    "organization": "LinkedIn"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "transx",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "monolithic recent-sequence scorer",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "cached behavior encoder + serving-stream cross attention",
+    "hit_at_10": 0.07727272727272727,
+    "ndcg_at_10": 0.04475488754459977,
+    "fresh_hit_at_10": 0.1111111111111111,
+    "head_share_at_10": 0.065
+  },
+  "relative": {
+    "hit_at_10_percent": -29.166666666666668,
+    "ndcg_at_10_percent": -17.128969756380787,
+    "fresh_hit_at_10_percent": 250.0,
+    "head_share_at_10_percent": -72.65774378585087
+  },
+  "stages": {
+    "behavior_events": 73,
+    "serving_events": 4,
+    "cached_behavior_tokens": 9,
+    "monolithic_attention_pairs": 5929,
+    "cross_stream_attention_pairs": 36,
+    "attention_pair_reduction": 0.9939281497723056
+  },
+  "paper_results": {
+    "ctr_lift_percent": 6.0,
+    "conversion_lift_percent": 4.4,
+    "online_compute_reduction_percent": 80
+  },
+  "scope": "实际拆分 nearline 行为流和实时 serving 流，构造 global-local cache 并执行 candidate-to-cache cross attention；未复刻 LinkedIn Kafka、KV 服务、TTL/version 管理和生产候选特征。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "transx",
+    "arxiv_id": "2607.28940",
+    "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+    "paper_url": "https://arxiv.org/abs/2607.28940",
+    "track": "recommendation",
+    "organization": "LinkedIn",
+    "published": "2026-07-31",
+    "code_url": null,
+    "topics": [
+      "ranking",
+      "long-sequence",
+      "cross-attention",
+      "serving"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K"
+    ],
+    "baseline": "monolithic recent-sequence scorer",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "attention_pair_reduction"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; global token plus 8 cached local tokens",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "LinkedIn recommender systems",
+        "metric": "CTR",
+        "lift_percent": 6.0,
+        "traffic": "large-scale online A/B test",
+        "source_url": "https://arxiv.org/html/2607.28940v1",
+        "source_location": "Abstract and Section 6",
+        "significance": "statistically significant for users with eligible history",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T10:55:35.958213+00:00",
+    "code_commit": "996ac89dd9bb16d0ac38be27d53639bc9d4ff859",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2607.28940-transx/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; global token plus 8 cached local tokens",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2607.28940",
+        "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+        "url": "https://arxiv.org/abs/2607.28940",
+        "organization": "LinkedIn"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "transx",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "monolithic recent-sequence scorer",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "cached behavior encoder + serving-stream cross attention",
+        "hit_at_10": 0.07727272727272727,
+        "ndcg_at_10": 0.04475488754459977,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.065
+      },
+      "relative": {
+        "hit_at_10_percent": -29.166666666666668,
+        "ndcg_at_10_percent": -17.128969756380787,
+        "fresh_hit_at_10_percent": 250.0,
+        "head_share_at_10_percent": -72.65774378585087
+      },
+      "stages": {
+        "behavior_events": 73,
+        "serving_events": 4,
+        "cached_behavior_tokens": 9,
+        "monolithic_attention_pairs": 5929,
+        "cross_stream_attention_pairs": 36,
+        "attention_pair_reduction": 0.9939281497723056
+      },
+      "paper_results": {
+        "ctr_lift_percent": 6.0,
+        "conversion_lift_percent": 4.4,
+        "online_compute_reduction_percent": 80
+      },
+      "scope": "实际拆分 nearline 行为流和实时 serving 流，构造 global-local cache 并执行 candidate-to-cache cross attention；未复刻 LinkedIn Kafka、KV 服务、TTL/version 管理和生产候选特征。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.28940",
+        "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+        "url": "https://arxiv.org/abs/2607.28940",
+        "organization": "LinkedIn"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "transx",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "monolithic recent-sequence scorer",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "cached behavior encoder + serving-stream cross attention",
+        "hit_at_10": 0.07727272727272727,
+        "ndcg_at_10": 0.04475488754459977,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.065
+      },
+      "relative": {
+        "hit_at_10_percent": -29.166666666666668,
+        "ndcg_at_10_percent": -17.128969756380787,
+        "fresh_hit_at_10_percent": 250.0,
+        "head_share_at_10_percent": -72.65774378585087
+      },
+      "stages": {
+        "behavior_events": 73,
+        "serving_events": 4,
+        "cached_behavior_tokens": 9,
+        "monolithic_attention_pairs": 5929,
+        "cross_stream_attention_pairs": 36,
+        "attention_pair_reduction": 0.9939281497723056
+      },
+      "paper_results": {
+        "ctr_lift_percent": 6.0,
+        "conversion_lift_percent": 4.4,
+        "online_compute_reduction_percent": 80
+      },
+      "scope": "实际拆分 nearline 行为流和实时 serving 流，构造 global-local cache 并执行 candidate-to-cache cross attention；未复刻 LinkedIn Kafka、KV 服务、TTL/version 管理和生产候选特征。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.28940",
+        "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+        "url": "https://arxiv.org/abs/2607.28940",
+        "organization": "LinkedIn"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "transx",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "monolithic recent-sequence scorer",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "cached behavior encoder + serving-stream cross attention",
+        "hit_at_10": 0.07727272727272727,
+        "ndcg_at_10": 0.04475488754459977,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.065
+      },
+      "relative": {
+        "hit_at_10_percent": -29.166666666666668,
+        "ndcg_at_10_percent": -17.128969756380787,
+        "fresh_hit_at_10_percent": 250.0,
+        "head_share_at_10_percent": -72.65774378585087
+      },
+      "stages": {
+        "behavior_events": 73,
+        "serving_events": 4,
+        "cached_behavior_tokens": 9,
+        "monolithic_attention_pairs": 5929,
+        "cross_stream_attention_pairs": 36,
+        "attention_pair_reduction": 0.9939281497723056
+      },
+      "paper_results": {
+        "ctr_lift_percent": 6.0,
+        "conversion_lift_percent": 4.4,
+        "online_compute_reduction_percent": 80
+      },
+      "scope": "实际拆分 nearline 行为流和实时 serving 流，构造 global-local cache 并执行 candidate-to-cache cross attention；未复刻 LinkedIn Kafka、KV 服务、TTL/version 管理和生产候选特征。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.05400546778896325,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.2377272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.07727272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.04475488754459977,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.1111111111111111,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.065,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": -29.166666666666668,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": -17.128969756380787,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 250.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -72.65774378585087,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.behavior_events": {
+      "mean": 73.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.serving_events": {
+      "mean": 4.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.cached_behavior_tokens": {
+      "mean": 9.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.monolithic_attention_pairs": {
+      "mean": 5929.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.cross_stream_attention_pairs": {
+      "mean": 36.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.attention_pair_reduction": {
+      "mean": 0.9939281497723056,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.ctr_lift_percent": {
+      "mean": 6.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.conversion_lift_percent": {
+      "mean": 4.4,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.online_compute_reduction_percent": {
+      "mean": 80.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:transx"
+}

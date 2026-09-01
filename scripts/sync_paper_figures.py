@@ -84,6 +84,7 @@ FIGURE_OVERRIDES = {
     "2502.16982-muon": "2",
     "2512.24880-mhc": "1",
     "2606.13392-minimax-sparse-attention": "1",
+    "2607.28895-snaplgr": "1",
 }
 CAPTION_OVERRIDES = {
     "2112.09332-webgpt": "demonstration interface",

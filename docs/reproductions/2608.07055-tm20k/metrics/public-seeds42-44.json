@@ -1,0 +1,451 @@
+{
+  "paper": {
+    "arxiv_id": "2608.07055",
+    "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+    "url": "https://arxiv.org/abs/2608.07055",
+    "organization": "ByteDance"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "tm20k",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "merged-token full-attention student without KD",
+    "hit_at_10": 0.05909090909090909,
+    "ndcg_at_10": 0.0344591300218021,
+    "fresh_hit_at_10": 0.06349206349206349,
+    "head_share_at_10": 0.04863636363636364
+  },
+  "method": {
+    "name": "sum-merge student distilled from full-token teacher",
+    "hit_at_10": 0.08181818181818182,
+    "ndcg_at_10": 0.04022122909205616,
+    "fresh_hit_at_10": 0.1111111111111111,
+    "head_share_at_10": 0.05409090909090909
+  },
+  "relative": {
+    "hit_at_10_percent": 38.46153846153847,
+    "ndcg_at_10_percent": 16.721545397717268,
+    "fresh_hit_at_10_percent": 75.0,
+    "head_share_at_10_percent": 11.214953271028039
+  },
+  "stages": {
+    "input_tokens": 77,
+    "merged_tokens": 8,
+    "compression_ratio": 0.1038961038961039,
+    "largest_merge_group": 10,
+    "student_teacher_mse": 0.29454893135246507,
+    "distilled_teacher_mse": 0.1443289763627079
+  },
+  "paper_results": {
+    "sequence_length": 20000,
+    "adss_lift_percent": 1.036,
+    "advv_lift_percent": 0.78,
+    "serving_latency_increase_percent": 5.6,
+    "experiment_days": 5
+  },
+  "scope": "实际执行全 token teacher、连续分组 sum/sqrt(n) token merge、全注意力 student 和teacher-logit 蒸馏；公开序列远短于 20K，未复刻 M-Falcon、广告私有特征或线上 GPU 集群。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "tm20k",
+    "arxiv_id": "2608.07055",
+    "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+    "paper_url": "https://arxiv.org/abs/2608.07055",
+    "track": "recommendation",
+    "organization": "ByteDance",
+    "published": "2026-08-07",
+    "code_url": null,
+    "topics": [
+      "advertising",
+      "long-sequence",
+      "token-merging",
+      "distillation"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K (full public histories)"
+    ],
+    "baseline": "same merged-token student without teacher distillation",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "compression_ratio",
+      "distilled_teacher_mse"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; at most 8 merged tokens",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "ByteDance e-commerce advertising",
+        "metric": "ADSS",
+        "lift_percent": 1.036,
+        "traffic": "5-day experiment serving hundreds of millions of users",
+        "source_url": "https://arxiv.org/html/2608.07055v1",
+        "source_location": "Section 5.4, Table 7",
+        "significance": "reported p-value 0% after rounding",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T10:55:35.570158+00:00",
+    "code_commit": "996ac89dd9bb16d0ac38be27d53639bc9d4ff859",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2608.07055-tm20k/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; at most 8 merged tokens",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2608.07055",
+        "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+        "url": "https://arxiv.org/abs/2608.07055",
+        "organization": "ByteDance"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "tm20k",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "merged-token full-attention student without KD",
+        "hit_at_10": 0.05909090909090909,
+        "ndcg_at_10": 0.0344591300218021,
+        "fresh_hit_at_10": 0.06349206349206349,
+        "head_share_at_10": 0.04863636363636364
+      },
+      "method": {
+        "name": "sum-merge student distilled from full-token teacher",
+        "hit_at_10": 0.08181818181818182,
+        "ndcg_at_10": 0.04022122909205616,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.05409090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": 38.46153846153847,
+        "ndcg_at_10_percent": 16.721545397717268,
+        "fresh_hit_at_10_percent": 75.0,
+        "head_share_at_10_percent": 11.214953271028039
+      },
+      "stages": {
+        "input_tokens": 77,
+        "merged_tokens": 8,
+        "compression_ratio": 0.1038961038961039,
+        "largest_merge_group": 10,
+        "student_teacher_mse": 0.29454893135246507,
+        "distilled_teacher_mse": 0.1443289763627079
+      },
+      "paper_results": {
+        "sequence_length": 20000,
+        "adss_lift_percent": 1.036,
+        "advv_lift_percent": 0.78,
+        "serving_latency_increase_percent": 5.6,
+        "experiment_days": 5
+      },
+      "scope": "实际执行全 token teacher、连续分组 sum/sqrt(n) token merge、全注意力 student 和teacher-logit 蒸馏；公开序列远短于 20K，未复刻 M-Falcon、广告私有特征或线上 GPU 集群。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.07055",
+        "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+        "url": "https://arxiv.org/abs/2608.07055",
+        "organization": "ByteDance"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "tm20k",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "merged-token full-attention student without KD",
+        "hit_at_10": 0.05909090909090909,
+        "ndcg_at_10": 0.0344591300218021,
+        "fresh_hit_at_10": 0.06349206349206349,
+        "head_share_at_10": 0.04863636363636364
+      },
+      "method": {
+        "name": "sum-merge student distilled from full-token teacher",
+        "hit_at_10": 0.08181818181818182,
+        "ndcg_at_10": 0.04022122909205616,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.05409090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": 38.46153846153847,
+        "ndcg_at_10_percent": 16.721545397717268,
+        "fresh_hit_at_10_percent": 75.0,
+        "head_share_at_10_percent": 11.214953271028039
+      },
+      "stages": {
+        "input_tokens": 77,
+        "merged_tokens": 8,
+        "compression_ratio": 0.1038961038961039,
+        "largest_merge_group": 10,
+        "student_teacher_mse": 0.29454893135246507,
+        "distilled_teacher_mse": 0.1443289763627079
+      },
+      "paper_results": {
+        "sequence_length": 20000,
+        "adss_lift_percent": 1.036,
+        "advv_lift_percent": 0.78,
+        "serving_latency_increase_percent": 5.6,
+        "experiment_days": 5
+      },
+      "scope": "实际执行全 token teacher、连续分组 sum/sqrt(n) token merge、全注意力 student 和teacher-logit 蒸馏；公开序列远短于 20K，未复刻 M-Falcon、广告私有特征或线上 GPU 集群。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.07055",
+        "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+        "url": "https://arxiv.org/abs/2608.07055",
+        "organization": "ByteDance"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "tm20k",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "merged-token full-attention student without KD",
+        "hit_at_10": 0.05909090909090909,
+        "ndcg_at_10": 0.0344591300218021,
+        "fresh_hit_at_10": 0.06349206349206349,
+        "head_share_at_10": 0.04863636363636364
+      },
+      "method": {
+        "name": "sum-merge student distilled from full-token teacher",
+        "hit_at_10": 0.08181818181818182,
+        "ndcg_at_10": 0.04022122909205616,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.05409090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": 38.46153846153847,
+        "ndcg_at_10_percent": 16.721545397717268,
+        "fresh_hit_at_10_percent": 75.0,
+        "head_share_at_10_percent": 11.214953271028039
+      },
+      "stages": {
+        "input_tokens": 77,
+        "merged_tokens": 8,
+        "compression_ratio": 0.1038961038961039,
+        "largest_merge_group": 10,
+        "student_teacher_mse": 0.29454893135246507,
+        "distilled_teacher_mse": 0.1443289763627079
+      },
+      "paper_results": {
+        "sequence_length": 20000,
+        "adss_lift_percent": 1.036,
+        "advv_lift_percent": 0.78,
+        "serving_latency_increase_percent": 5.6,
+        "experiment_days": 5
+      },
+      "scope": "实际执行全 token teacher、连续分组 sum/sqrt(n) token merge、全注意力 student 和teacher-logit 蒸馏；公开序列远短于 20K，未复刻 M-Falcon、广告私有特征或线上 GPU 集群。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.05909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.0344591300218021,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.06349206349206349,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.04863636363636364,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.08181818181818182,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.04022122909205616,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.1111111111111111,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.0540909090909091,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": 38.46153846153847,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": 16.721545397717268,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 75.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": 11.214953271028039,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.input_tokens": {
+      "mean": 77.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.merged_tokens": {
+      "mean": 8.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.compression_ratio": {
+      "mean": 0.10389610389610389,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.largest_merge_group": {
+      "mean": 10.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.student_teacher_mse": {
+      "mean": 0.29454893135246507,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.distilled_teacher_mse": {
+      "mean": 0.1443289763627079,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.sequence_length": {
+      "mean": 20000.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.adss_lift_percent": {
+      "mean": 1.036,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.advv_lift_percent": {
+      "mean": 0.7799999999999999,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.serving_latency_increase_percent": {
+      "mean": 5.599999999999999,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.experiment_days": {
+      "mean": 5.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:tm20k"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "psg",
+  "arxiv_id": "2607.26427",
+  "title": "PSG: Pair-Space Generation for Efficient Generative Reranking",
+  "paper_url": "https://arxiv.org/abs/2607.26427",
+  "organization": "Kuaishou Technology",
+  "published": "2026-07-29",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "reranking",
+    "generative-recommendation",
+    "pair-token",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/psg",
+  "documentation": "docs/reproductions/2607.26427-psg/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "item-space autoregressive scorer",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "decode_step_reduction",
+    "duplicate_items"
+  ],
+  "mechanisms": [
+    "pretrained pair-token module on exposure logs",
+    "GoalRank evaluator",
+    "production beam service"
+  ],
+  "evolve_operators": [
+    "head:pair-space"
+  ]
+}

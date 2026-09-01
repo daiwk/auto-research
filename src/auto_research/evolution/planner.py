@@ -16,10 +16,18 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
         defaults = [
             "context:full",
             "context:longer-compressed",
+            "context:tm20k-merge",
+            "context:transx-cross-stream",
             "head:semantic-catalog",
             "head:hybrid-catalog",
+            "head:snaplgr-sid",
+            "head:pair-space",
+            "head:transport-index",
             "reward:novelty",
             "reward:content-discovery",
+            "reward:robust-preference",
+            "reward:incrementality",
+            "reward:reward-guided",
             "distillation:popularity-teacher",
             "distillation:semantic-teacher",
         ]
@@ -672,9 +680,29 @@ def _propose_genrec(parent, generation, index, operators, rng):
         "distillation": "genrec_distillation",
     }
     values = {
-        "context": ["recent", "full", "longer-compressed"],
-        "head": ["id-catalog", "semantic-catalog", "hybrid-catalog"],
-        "reward": ["uniform", "novelty", "content-discovery"],
+        "context": [
+            "recent",
+            "full",
+            "longer-compressed",
+            "tm20k-merge",
+            "transx-cross-stream",
+        ],
+        "head": [
+            "id-catalog",
+            "semantic-catalog",
+            "hybrid-catalog",
+            "snaplgr-sid",
+            "pair-space",
+            "transport-index",
+        ],
+        "reward": [
+            "uniform",
+            "novelty",
+            "content-discovery",
+            "robust-preference",
+            "incrementality",
+            "reward-guided",
+        ],
         "distillation": ["none", "popularity-teacher", "semantic-teacher"],
     }
     if generation == 1:

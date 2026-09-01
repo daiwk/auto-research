@@ -63,6 +63,7 @@
 - 2025-03 · [COBRA](../2503.02453-cobra/README.md)：先用稀疏生成缩小候选空间，再用稠密生成细排，形成级联式生成召回。
 
 ## ByteDance / Douyin / TikTok
+- 2026-08 · [TM20K](../2608.07055-tm20k/README.md)：教师保留完整行为 token，学生用连续合并和蒸馏压缩超长序列。
 - 2026-08 · [DME](../2608.02148-dme/README.md)：先做多模态对比预训练，再以 typed latent evidence 和 cross-conditional reconstruction 保留细粒度对侧语义。
 - 2026-08 · [STEPS](../2608.01949-steps/README.md)：用 ordinal planning、trajectory execution 与 filtering agent 闭合“是否推送—何时再唤醒”，并已在抖音全量部署。
 - 2026-05 · [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
@@ -242,6 +243,7 @@
 - 2026-08 · [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。
 - 2026-08 · [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
 - 2026-08 · [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。
+- 2026-07 · [PSG](../2607.26427-psg/README.md)：在 ordered pair 空间生成半长度序列，再无重复展开为 item slate。
 - 2026-05 · [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
 - 2026-03 · [SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search](../2603.19585-safro/README.md)：用满意度奖励和双重相对优势优化短视频搜索多任务融合。
 
@@ -302,6 +304,8 @@
 - 2026-02 · [RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems](../2602.12968-rgalign-rec/README.md)：用真实排序模型偏好指导潜在 query 的 SFT 与 DPO 对齐。
 
 ## LinkedIn
+- 2026-08 · [From Prediction to Incrementality](../2608.10182-incrementality/README.md)：估计处理增量而非 treated outcome，并在不确定度约束下执行固定预算 targeting。
+- 2026-07 · [TransX](../2607.28940-transx/README.md)：分离可缓存行为流与在线服务流，以 cross-attention 避免逐请求重算长历史。
 - 2026-02 · [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
@@ -309,7 +313,17 @@
 - 2026-02 · [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
 
 ## Institute of Information Engineering, CAS / Kuaishou
+- 2026-07 · [Reward Guided Decoding](../2607.25344-reward-guided-decoding/README.md)：以 KL 正则闭式策略在不重训生成器时注入业务 reward。
 - 2026-02 · [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md)：离线 MLLM 生成语义 anchor，轻量非对称模块注入直播排序。
 
 ## Apple
 - 2026-02 · [Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment](../2602.01023-rag-qac/README.md)：以 RAG、SFT 和 DPO 同时优化补全相关性、安全与 groundedness。
+
+## Shenzhen University
+- 2026-08 · [DrEM](../2608.12778-drem/README.md)：用偏好保持筛选、翻转风险反演和一致性融合稳定噪声 pxtr 集成排序。
+
+## Snap Inc.
+- 2026-07 · [SnapLGR](../2607.28895-snaplgr/README.md)：把共参与传播、分层 residual SID、token grounding 和 SID SFT 组成生成式召回流水线。
+
+## University of Science and Technology of China
+- 2026-07 · [DIRECTOR](../2607.26418-director/README.md)：用 Sinkhorn transport 与全局匹配并行生成无重复动态索引 slate。

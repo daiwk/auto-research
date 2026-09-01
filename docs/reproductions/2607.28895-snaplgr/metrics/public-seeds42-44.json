@@ -1,0 +1,452 @@
+{
+  "paper": {
+    "arxiv_id": "2607.28895",
+    "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+    "url": "https://arxiv.org/abs/2607.28895",
+    "organization": "Snap Inc."
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "snaplgr",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "vanilla RQ semantic IDs",
+    "hit_at_10": 0.03636363636363636,
+    "ndcg_at_10": 0.017525802432681013,
+    "fresh_hit_at_10": 0.06349206349206349,
+    "head_share_at_10": 0.09227272727272727
+  },
+  "method": {
+    "name": "PPR co-engagement SID + token grounding + SID transition SFT",
+    "hit_at_10": 0.031818181818181815,
+    "ndcg_at_10": 0.010439117768165465,
+    "fresh_hit_at_10": 0.015873015873015872,
+    "head_share_at_10": 0.09909090909090909
+  },
+  "relative": {
+    "hit_at_10_percent": -12.500000000000005,
+    "ndcg_at_10_percent": -40.435721512532545,
+    "fresh_hit_at_10_percent": -75.0,
+    "head_share_at_10_percent": 7.389162561576358
+  },
+  "stages": {
+    "sid_levels": 3,
+    "codebook_width": 8,
+    "sid_utilization": 0.25555555555555554,
+    "baseline_sid_utilization": 0.2361111111111111,
+    "sid_collision_rate": 0.7444444444444445,
+    "grounded_tokens": 24
+  },
+  "paper_results": {
+    "view_time_lift_percent": 0.37,
+    "time_spent_lift_percent": 0.09,
+    "deep_sessions_lift_percent": 0.18,
+    "experiment_days": 7,
+    "serving_throughput_multiplier": 45.7
+  },
+  "scope": "实际执行 co-engagement 图传播、残差量化 SID、code token 语义 grounding 和 code-level next-token transition；未加载预训练 LLM/Qwen3-VL，也未复刻 TensorRT-LLM 与 64×A100 服务。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "snaplgr",
+    "arxiv_id": "2607.28895",
+    "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+    "paper_url": "https://arxiv.org/abs/2607.28895",
+    "track": "recommendation",
+    "organization": "Snap Inc.",
+    "published": "2026-07-30",
+    "code_url": null,
+    "topics": [
+      "retrieval",
+      "generative-recommendation",
+      "semantic-id",
+      "llm",
+      "multimodal"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K content/co-engagement proxy"
+    ],
+    "baseline": "vanilla residual-quantized semantic IDs",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "sid_utilization",
+      "sid_collision_rate"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 3-level width-8 SID",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Snapchat content recommendation",
+        "metric": "View Time",
+        "lift_percent": 0.37,
+        "traffic": "7-day production A/B test",
+        "source_url": "https://arxiv.org/html/2607.28895v1",
+        "source_location": "Section 4.5, Table 8",
+        "significance": "p = 0.007",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T10:55:36.415911+00:00",
+    "code_commit": "996ac89dd9bb16d0ac38be27d53639bc9d4ff859",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2607.28895-snaplgr/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 3-level width-8 SID",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2607.28895",
+        "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+        "url": "https://arxiv.org/abs/2607.28895",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "snaplgr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "vanilla RQ semantic IDs",
+        "hit_at_10": 0.03636363636363636,
+        "ndcg_at_10": 0.017525802432681013,
+        "fresh_hit_at_10": 0.06349206349206349,
+        "head_share_at_10": 0.09227272727272727
+      },
+      "method": {
+        "name": "PPR co-engagement SID + token grounding + SID transition SFT",
+        "hit_at_10": 0.031818181818181815,
+        "ndcg_at_10": 0.010439117768165465,
+        "fresh_hit_at_10": 0.015873015873015872,
+        "head_share_at_10": 0.09909090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": -12.500000000000005,
+        "ndcg_at_10_percent": -40.435721512532545,
+        "fresh_hit_at_10_percent": -75.0,
+        "head_share_at_10_percent": 7.389162561576358
+      },
+      "stages": {
+        "sid_levels": 3,
+        "codebook_width": 8,
+        "sid_utilization": 0.25555555555555554,
+        "baseline_sid_utilization": 0.2361111111111111,
+        "sid_collision_rate": 0.7444444444444445,
+        "grounded_tokens": 24
+      },
+      "paper_results": {
+        "view_time_lift_percent": 0.37,
+        "time_spent_lift_percent": 0.09,
+        "deep_sessions_lift_percent": 0.18,
+        "experiment_days": 7,
+        "serving_throughput_multiplier": 45.7
+      },
+      "scope": "实际执行 co-engagement 图传播、残差量化 SID、code token 语义 grounding 和 code-level next-token transition；未加载预训练 LLM/Qwen3-VL，也未复刻 TensorRT-LLM 与 64×A100 服务。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.28895",
+        "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+        "url": "https://arxiv.org/abs/2607.28895",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "snaplgr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "vanilla RQ semantic IDs",
+        "hit_at_10": 0.07272727272727272,
+        "ndcg_at_10": 0.028047452415331867,
+        "fresh_hit_at_10": 0.06349206349206349,
+        "head_share_at_10": 0.15636363636363637
+      },
+      "method": {
+        "name": "PPR co-engagement SID + token grounding + SID transition SFT",
+        "hit_at_10": 0.03636363636363636,
+        "ndcg_at_10": 0.013656703387767661,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.056818181818181816
+      },
+      "relative": {
+        "hit_at_10_percent": -50.0,
+        "ndcg_at_10_percent": -51.30857809994052,
+        "fresh_hit_at_10_percent": -25.0,
+        "head_share_at_10_percent": -63.66279069767442
+      },
+      "stages": {
+        "sid_levels": 3,
+        "codebook_width": 8,
+        "sid_utilization": 0.23333333333333334,
+        "baseline_sid_utilization": 0.24166666666666667,
+        "sid_collision_rate": 0.7666666666666666,
+        "grounded_tokens": 24
+      },
+      "paper_results": {
+        "view_time_lift_percent": 0.37,
+        "time_spent_lift_percent": 0.09,
+        "deep_sessions_lift_percent": 0.18,
+        "experiment_days": 7,
+        "serving_throughput_multiplier": 45.7
+      },
+      "scope": "实际执行 co-engagement 图传播、残差量化 SID、code token 语义 grounding 和 code-level next-token transition；未加载预训练 LLM/Qwen3-VL，也未复刻 TensorRT-LLM 与 64×A100 服务。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.28895",
+        "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+        "url": "https://arxiv.org/abs/2607.28895",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "snaplgr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "vanilla RQ semantic IDs",
+        "hit_at_10": 0.045454545454545456,
+        "ndcg_at_10": 0.01966271157489848,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.09409090909090909
+      },
+      "method": {
+        "name": "PPR co-engagement SID + token grounding + SID transition SFT",
+        "hit_at_10": 0.05,
+        "ndcg_at_10": 0.02504735257015246,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.04090909090909091
+      },
+      "relative": {
+        "hit_at_10_percent": 10.000000000000004,
+        "ndcg_at_10_percent": 27.385037789640574,
+        "fresh_hit_at_10_percent": -40.0,
+        "head_share_at_10_percent": -56.521739130434774
+      },
+      "stages": {
+        "sid_levels": 3,
+        "codebook_width": 8,
+        "sid_utilization": 0.2611111111111111,
+        "baseline_sid_utilization": 0.26666666666666666,
+        "sid_collision_rate": 0.7388888888888889,
+        "grounded_tokens": 24
+      },
+      "paper_results": {
+        "view_time_lift_percent": 0.37,
+        "time_spent_lift_percent": 0.09,
+        "deep_sessions_lift_percent": 0.18,
+        "experiment_days": 7,
+        "serving_throughput_multiplier": 45.7
+      },
+      "scope": "实际执行 co-engagement 图传播、残差量化 SID、code token 语义 grounding 和 code-level next-token transition；未加载预训练 LLM/Qwen3-VL，也未复刻 TensorRT-LLM 与 64×A100 服务。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.051515151515151514,
+      "std": 0.018924236358783025,
+      "ci95": 0.021414789393664906,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.02174532214097045,
+      "std": 0.0055614053679614245,
+      "ci95": 0.00629332261707971,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.06878306878306878,
+      "std": 0.009164289987136916,
+      "ci95": 0.01037037037037037,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.11424242424242424,
+      "std": 0.036489365974227375,
+      "ci95": 0.04129160472484674,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.03939393939393939,
+      "std": 0.009462118179391516,
+      "ci95": 0.010707394696832457,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.016381057908695196,
+      "std": 0.007675722224929047,
+      "ci95": 0.008685897373863655,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.037037037037037035,
+      "std": 0.018328579974273833,
+      "ci95": 0.02074074074074074,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.0656060606060606,
+      "std": 0.030069936846098873,
+      "ci95": 0.03402733681991606,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": -17.5,
+      "std": 30.310889132455355,
+      "ci95": 34.300000000000004,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": -21.453087274277497,
+      "std": 42.64301346541731,
+      "ci95": 48.255112394498425,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": -46.666666666666664,
+      "std": 25.658007197234422,
+      "ci95": 29.034768429897593,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -37.59845575551095,
+      "std": 39.12368854996217,
+      "ci95": 44.272621347383,
+      "n": 3
+    },
+    "stages.sid_levels": {
+      "mean": 3.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.codebook_width": {
+      "mean": 8.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.sid_utilization": {
+      "mean": 0.25,
+      "std": 0.01469861839480328,
+      "ci95": 0.016633052522432308,
+      "n": 3
+    },
+    "stages.baseline_sid_utilization": {
+      "mean": 0.24814814814814815,
+      "std": 0.016276292436339764,
+      "ci95": 0.01841835876627847,
+      "n": 3
+    },
+    "stages.sid_collision_rate": {
+      "mean": 0.75,
+      "std": 0.014698618394803228,
+      "ci95": 0.01663305252243225,
+      "n": 3
+    },
+    "stages.grounded_tokens": {
+      "mean": 24.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.view_time_lift_percent": {
+      "mean": 0.36999999999999994,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.time_spent_lift_percent": {
+      "mean": 0.09000000000000001,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.deep_sessions_lift_percent": {
+      "mean": 0.18000000000000002,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.experiment_days": {
+      "mean": 7.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.serving_throughput_multiplier": {
+      "mean": 45.70000000000001,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:snaplgr"
+}
