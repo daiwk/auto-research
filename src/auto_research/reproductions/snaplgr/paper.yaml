@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "snaplgr",
+  "arxiv_id": "2607.28895",
+  "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.28895",
+  "organization": "Snap Inc.",
+  "published": "2026-07-30",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "generative-recommendation",
+    "semantic-id",
+    "llm",
+    "multimodal"
+  ],
+  "local_code": "src/auto_research/reproductions/snaplgr",
+  "documentation": "docs/reproductions/2607.28895-snaplgr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K content/co-engagement proxy"
+  ],
+  "baseline": "vanilla residual-quantized semantic IDs",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "sid_utilization",
+    "sid_collision_rate"
+  ],
+  "mechanisms": [
+    "pretrained LLM and Qwen3-VL",
+    "TensorRT-LLM CUDA beam search",
+    "64-A100 worker loop"
+  ],
+  "evolve_operators": [
+    "head:snaplgr-sid"
+  ]
+}

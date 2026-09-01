@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "transx",
+  "arxiv_id": "2607.28940",
+  "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+  "paper_url": "https://arxiv.org/abs/2607.28940",
+  "organization": "LinkedIn",
+  "published": "2026-07-31",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "long-sequence",
+    "cross-attention",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/transx",
+  "documentation": "docs/reproductions/2607.28940-transx/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "monolithic recent-sequence scorer",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "attention_pair_reduction"
+  ],
+  "mechanisms": [
+    "LinkedIn nearline Kafka pipeline",
+    "distributed KV cache",
+    "production candidate tower"
+  ],
+  "evolve_operators": [
+    "context:transx-cross-stream"
+  ]
+}

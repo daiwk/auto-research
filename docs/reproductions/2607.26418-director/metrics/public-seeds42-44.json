@@ -1,0 +1,451 @@
+{
+  "paper": {
+    "arxiv_id": "2607.26418",
+    "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+    "url": "https://arxiv.org/abs/2607.26418",
+    "organization": "University of Science and Technology of China"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "director",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "independent position-wise dynamic indices",
+    "hit_at_10": 0.06818181818181818,
+    "ndcg_at_10": 0.03857378073809315,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.09227272727272727
+  },
+  "method": {
+    "name": "Sinkhorn coordinated indices + duplicate-free global matching",
+    "hit_at_10": 0.11363636363636363,
+    "ndcg_at_10": 0.053340995437824223,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.2109090909090909
+  },
+  "relative": {
+    "hit_at_10_percent": 66.66666666666667,
+    "ndcg_at_10_percent": 38.283036863814225,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": 128.57142857142858
+  },
+  "stages": {
+    "positions": 6,
+    "parallel_decode_steps": 1,
+    "independent_duplicate_count": 0,
+    "matched_duplicate_count": 0,
+    "transport_row_error": 2.220446049250313e-16,
+    "transport_max_column_mass": 0.0221270127193992
+  },
+  "paper_results": {
+    "valid_view_lift_percent": 0.519,
+    "comment_lift_percent": 0.695,
+    "like_lift_percent": 0.33,
+    "cpu_reduction_percent": 66.7,
+    "service_availability_percent": 99
+  },
+  "scope": "实际执行 request-conditioned 连续索引、熵正则 Sinkhorn capacity coupling、并行 position logits 和无重复 hard matching；未复刻论文 CVAE/DIFF generator、私有 evaluator 与 20K QPS 服务。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "director",
+    "arxiv_id": "2607.26418",
+    "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+    "paper_url": "https://arxiv.org/abs/2607.26418",
+    "track": "recommendation",
+    "organization": "University of Science and Technology of China",
+    "published": "2026-07-29",
+    "code_url": null,
+    "topics": [
+      "reranking",
+      "dynamic-index",
+      "optimal-transport",
+      "non-autoregressive"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K"
+    ],
+    "baseline": "independent position-wise dynamic-index retrieval",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "matched_duplicate_count",
+      "transport_row_error"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; six parallel positions",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Kuaishou main application",
+        "metric": "Valid View",
+        "lift_percent": 0.519,
+        "traffic": "7-day test; two mutually exclusive 10% buckets",
+        "source_url": "https://arxiv.org/html/2607.26418v1",
+        "source_location": "Section 6.2 and Appendix online protocol, Table 4",
+        "significance": "p < 0.05; 95% CI [0.45%, 0.59%]",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T10:55:37.467689+00:00",
+    "code_commit": "996ac89dd9bb16d0ac38be27d53639bc9d4ff859",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2607.26418-director/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; six parallel positions",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2607.26418",
+        "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+        "url": "https://arxiv.org/abs/2607.26418",
+        "organization": "University of Science and Technology of China"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "director",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "independent position-wise dynamic indices",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.03857378073809315,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.09227272727272727
+      },
+      "method": {
+        "name": "Sinkhorn coordinated indices + duplicate-free global matching",
+        "hit_at_10": 0.11363636363636363,
+        "ndcg_at_10": 0.053340995437824223,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.2109090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": 66.66666666666667,
+        "ndcg_at_10_percent": 38.283036863814225,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": 128.57142857142858
+      },
+      "stages": {
+        "positions": 6,
+        "parallel_decode_steps": 1,
+        "independent_duplicate_count": 0,
+        "matched_duplicate_count": 0,
+        "transport_row_error": 2.220446049250313e-16,
+        "transport_max_column_mass": 0.0221270127193992
+      },
+      "paper_results": {
+        "valid_view_lift_percent": 0.519,
+        "comment_lift_percent": 0.695,
+        "like_lift_percent": 0.33,
+        "cpu_reduction_percent": 66.7,
+        "service_availability_percent": 99
+      },
+      "scope": "实际执行 request-conditioned 连续索引、熵正则 Sinkhorn capacity coupling、并行 position logits 和无重复 hard matching；未复刻论文 CVAE/DIFF generator、私有 evaluator 与 20K QPS 服务。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.26418",
+        "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+        "url": "https://arxiv.org/abs/2607.26418",
+        "organization": "University of Science and Technology of China"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "director",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "independent position-wise dynamic indices",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.03857378073809315,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.09227272727272727
+      },
+      "method": {
+        "name": "Sinkhorn coordinated indices + duplicate-free global matching",
+        "hit_at_10": 0.11363636363636363,
+        "ndcg_at_10": 0.053340995437824223,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.2109090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": 66.66666666666667,
+        "ndcg_at_10_percent": 38.283036863814225,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": 128.57142857142858
+      },
+      "stages": {
+        "positions": 6,
+        "parallel_decode_steps": 1,
+        "independent_duplicate_count": 0,
+        "matched_duplicate_count": 0,
+        "transport_row_error": 2.220446049250313e-16,
+        "transport_max_column_mass": 0.0221270127193992
+      },
+      "paper_results": {
+        "valid_view_lift_percent": 0.519,
+        "comment_lift_percent": 0.695,
+        "like_lift_percent": 0.33,
+        "cpu_reduction_percent": 66.7,
+        "service_availability_percent": 99
+      },
+      "scope": "实际执行 request-conditioned 连续索引、熵正则 Sinkhorn capacity coupling、并行 position logits 和无重复 hard matching；未复刻论文 CVAE/DIFF generator、私有 evaluator 与 20K QPS 服务。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.26418",
+        "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+        "url": "https://arxiv.org/abs/2607.26418",
+        "organization": "University of Science and Technology of China"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "director",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "independent position-wise dynamic indices",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.03857378073809315,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.09227272727272727
+      },
+      "method": {
+        "name": "Sinkhorn coordinated indices + duplicate-free global matching",
+        "hit_at_10": 0.11363636363636363,
+        "ndcg_at_10": 0.053340995437824223,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.2109090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": 66.66666666666667,
+        "ndcg_at_10_percent": 38.283036863814225,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": 128.57142857142858
+      },
+      "stages": {
+        "positions": 6,
+        "parallel_decode_steps": 1,
+        "independent_duplicate_count": 0,
+        "matched_duplicate_count": 0,
+        "transport_row_error": 2.220446049250313e-16,
+        "transport_max_column_mass": 0.0221270127193992
+      },
+      "paper_results": {
+        "valid_view_lift_percent": 0.519,
+        "comment_lift_percent": 0.695,
+        "like_lift_percent": 0.33,
+        "cpu_reduction_percent": 66.7,
+        "service_availability_percent": 99
+      },
+      "scope": "实际执行 request-conditioned 连续索引、熵正则 Sinkhorn capacity coupling、并行 position logits 和无重复 hard matching；未复刻论文 CVAE/DIFF generator、私有 evaluator 与 20K QPS 服务。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.06818181818181818,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.03857378073809315,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.09227272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.11363636363636363,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.053340995437824223,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.2109090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": 66.66666666666667,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": 38.283036863814225,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": 128.57142857142858,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.positions": {
+      "mean": 6.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.parallel_decode_steps": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.independent_duplicate_count": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.matched_duplicate_count": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.transport_row_error": {
+      "mean": 2.220446049250313e-16,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.transport_max_column_mass": {
+      "mean": 0.022127012719399198,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.valid_view_lift_percent": {
+      "mean": 0.519,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.comment_lift_percent": {
+      "mean": 0.695,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.like_lift_percent": {
+      "mean": 0.33,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.cpu_reduction_percent": {
+      "mean": 66.7,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.service_availability_percent": {
+      "mean": 99.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:director"
+}

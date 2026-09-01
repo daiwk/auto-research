@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "reward-guided-decoding",
+  "arxiv_id": "2607.25344",
+  "title": "Reward Guided Decoding for Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.25344",
+  "organization": "Institute of Information Engineering, Chinese Academy of Sciences",
+  "published": "2026-07-28",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "decoding",
+    "reward",
+    "business-alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/reward_guided_decoding",
+  "documentation": "docs/reproductions/2607.25344-reward-guided-decoding/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "generator likelihood decoding",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "guided_expected_reward",
+    "kl_from_generator"
+  ],
+  "mechanisms": [
+    "Kuaishou SID generator",
+    "shared-decoder reward model",
+    "production beam search"
+  ],
+  "evolve_operators": [
+    "reward:reward-guided"
+  ]
+}

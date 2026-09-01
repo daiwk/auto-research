@@ -7,6 +7,38 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2608.12778": (
+        "reward:robust-preference",
+        "DrEM 的监督侧 flip-risk 修正与特征侧 preference-preserving consistency",
+    ),
+    "2608.10182": (
+        "reward:incrementality",
+        "因果 uplift、不确定性探索与全局预算约束下的增量价值优化",
+    ),
+    "2608.07055": (
+        "context:tm20k-merge",
+        "TM20K 的连续 token merge、全注意力 student 与 full-token teacher distillation",
+    ),
+    "2607.28940": (
+        "context:transx-cross-stream",
+        "TransX 的 nearline behavior cache、serving stream 与 grouped cross attention",
+    ),
+    "2607.28895": (
+        "head:snaplgr-sid",
+        "SnapLGR 的 PPR co-engagement SID、CPT vocabulary grounding 与 SID SFT",
+    ),
+    "2607.26427": (
+        "head:pair-space",
+        "PSG 的 request-specific ordered pair tokens 与半长度自回归解码",
+    ),
+    "2607.26418": (
+        "head:transport-index",
+        "DIRECTOR 的动态连续索引、Sinkhorn capacity coupling 与全局 hard matching",
+    ),
+    "2607.25344": (
+        "reward:reward-guided",
+        "RGD 的 KL 正则闭式 Boltzmann reward-guided decoding",
+    ),
     "2607.25110": (
         "rankmixer_memory_layer",
         "Memory Layer 的训练内 eta=1 writeback、always-on 属性表征与训练服务一致性",

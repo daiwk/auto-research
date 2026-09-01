@@ -11,13 +11,16 @@
 - [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
 - [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md)：把冻结多模态 embedding 接入统一资产双塔，并用查询相似度增强搜索画布打分。
 - [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
+- [DrEM](../2608.12778-drem/README.md)：以风险修正和一致性融合提高噪声 pxtr 集成鲁棒性。
 - [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - [ConnectionMind](../2608.10187-connectionmind/README.md)：在 user-item-tag-social 异构图上以最短正路径 SFT、规则奖励 GRPO 和路径蒸馏执行多步可解释推荐。
 - [DREAM](../2608.09408-dream/README.md)：把分层用户意图翻译为可校验的推荐策略参数，并以离线模拟和线上反馈双环更新策略记忆。
+- [From Prediction to Incrementality](../2608.10182-incrementality/README.md)：用因果 uplift 和不确定度执行固定预算增量优化。
 - [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md)：让多个业务任务在长短双流的不同层级执行交互查询，而非仅共享底层编码。
 - [MetaStrategy](../2608.09440-metastrategy/README.md)：根据请求生成带类型的多目标排序策略，并由确定性 compiler 校验、执行和审计。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：把用户历史和内容元数据文本化，以 causal LLM、全目录 ranking head、联合语言/排序目标和 reward weighting 做 prefill-only 精排。
 - [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。
+- [TM20K](../2608.07055-tm20k/README.md)：教师全 token、学生合并 token 的长序列蒸馏。
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：Yandex 用共享 encoder 串联 SID 生成与 item-level ranking，并从当前 rollout 和真实曝光双路蒸馏高容量 teacher。
 - [DEGR](../2608.04809-degr/README.md)：京东把 cohort 多样性约束与 reward-adaptive ORPO 加入生成式重排，再以多样性 greedy selection 输出列表。
 - [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：以 fresh/delayed 双目标、生命周期 gate 与共享专家联合优化直播推荐，兼顾即时互动和延迟价值。
@@ -31,15 +34,20 @@
 ## 2026-07
 - [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md)：通过三元组预训练、GRPO 行为对齐和 ID/多模态门控形成可部署表示。
 - [RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems](../2607.29241-recharness/README.md)：用 bandit 在有限预算下路由候选结构实验，并把验证反馈写回下一轮。
+- [TransX](../2607.28940-transx/README.md)：行为/服务双流交叉与可缓存长序列编码。
 - [CCFormer](../2607.28070-ccformer/README.md)：腾讯以字段分离的 ID/content 表征、门控融合和分层历史压缩，同时降低超长行为序列开销并增强内容泛化。
 - [From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation](../2607.27789-feedback-policy/README.md)：从真实反馈发现生成策略，再用双空间关系蒸馏到轻量线上排序器。
 - [HA-MoE](../2607.27577-ha-moe/README.md)：Google Discover 依据 session 内容异构性动态路由多个专长 expert，统一排序开放网页内容。
 - [Open Web UFM](../2607.28019-open-web-ufm/README.md)：Teads 在开放网页行为上用双裁剪对比学习与 next-item 目标预训练共享用户编码器，再迁移到广告排序。
 - [ROCS](../2607.27744-rocs/README.md)：Meta 将请求侧特征只编码一次，把候选相关交互延后到批量评分阶段，以统一服务检索和排序并提升 QPS。
+- [SnapLGR](../2607.28895-snaplgr/README.md)：共参与监督的 residual SID 与 LLM 生成召回。
 - [ASARL](../2607.26593-asarl/README.md)：以 ReasonAgent、CriticAgent、GenAgent 闭环整理 QQ 社交搜索数据，再经 SCT、PGO 和 Social Distillation 服务在线模型。
 - [ClockRoPE](../2607.26369-clockrope/README.md)：以随机 Fourier 旋转近似日/周周期注意力 prior，并与标准 RoPE 组合建模 routine。
+- [DIRECTOR](../2607.26418-director/README.md)：运输优化动态索引与并行全局匹配。
 - [OneShot](../2607.27475-oneshot-index/README.md)：把 ranking-shaped 层级索引、全局路径平衡和 neural scoring 统一进端到端工业检索模型。
+- [PSG](../2607.26427-psg/README.md)：pair-space 半长度生成式重排。
 - [RecoReward](../2607.25901-reco-reward/README.md)：用冻结推荐双塔的目标/非目标亲和力差训练内容描述，并保持线上 content-only serving。
+- [Reward Guided Decoding](../2607.25344-reward-guided-decoding/README.md)：KL 正则 reward 引导解码。
 - [SWAG](../2607.25233-swag-bid/README.md)：用 masked future plan、七日滑窗目标和逐步 gate 优化跨 episode 自动出价。
 - [TWICE](../2607.25404-twice/README.md)：分离点击和转化时钟，以 current-status likelihood 和单调 delay CDF 学习长期 CVR。
 - [CORE](../2607.24417-core-relevance/README.md)：美团把 High/Mid/Low 相关性拆成条件二分类，用逐 step GRPO 优化 reasoning，再通过 PostCoT 蒸馏到低延迟双头模型。

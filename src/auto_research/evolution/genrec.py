@@ -118,6 +118,29 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
     features = _genre_features(data)
     projection = rng.normal(0.0, 1 / math.sqrt(dimensions), (features.shape[1], dimensions))
     semantic = features @ projection
+    if genome.genrec_head == "snaplgr-sid":
+        graph = np.eye(len(data.item_texts), dtype=np.float64) * 1e-3
+        for sequence in data.train:
+            values = np.asarray(tuple(dict.fromkeys(sequence)), dtype=np.int64)
+            graph[np.ix_(values, values)] += 1.0
+        graph /= np.maximum(graph.sum(axis=1, keepdims=True), 1e-12)
+        return semantic + 0.35 * (graph @ semantic)
+    if genome.genrec_head == "pair-space":
+        # Encode the strongest ordered continuation into each item token so the
+        # catalog head represents an item pair while retaining item-level output.
+        continuation = np.full((len(data.item_texts), len(data.item_texts)), 1e-3)
+        for sequence in data.train:
+            for left, right in zip(sequence, sequence[1:]):
+                continuation[left, right] += 1.0
+        partner = continuation.argmax(axis=1)
+        return learned + 0.45 * semantic[partner]
+    if genome.genrec_head == "transport-index":
+        # Whiten the retrieval space as a compact proxy for globally coordinated
+        # dynamic indices; row normalization limits candidate capacity conflicts.
+        centered = semantic - semantic.mean(0, keepdims=True)
+        _, _, right = np.linalg.svd(centered, full_matrices=False)
+        catalog = centered @ right.T
+        return catalog / np.maximum(np.linalg.norm(catalog, axis=1, keepdims=True), 1e-12)
     if genome.genrec_head == "semantic-catalog":
         return semantic
     if genome.genrec_head == "hybrid-catalog":
@@ -127,7 +150,29 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
 
 def _context(history, catalog, mode: str, maximum: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     values = np.asarray(history, dtype=np.int64)
-    if mode == "recent":
+    if mode == "tm20k-merge":
+        values = values[-max(8, maximum * 2):]
+        groups = np.array_split(np.arange(len(values)), min(maximum, len(values)))
+        merged = np.stack(
+            [catalog[values[group]].sum(0) / math.sqrt(len(group)) for group in groups]
+        )
+        query = catalog[values[-1]]
+        group_weights = np.exp((merged @ query) / math.sqrt(catalog.shape[1]))
+        group_weights /= group_weights.sum()
+        weights = np.zeros(len(values), dtype=np.float64)
+        for group, weight in zip(groups, group_weights):
+            weights[group] = weight / len(group)
+    elif mode == "transx-cross-stream":
+        values = values[-max(8, maximum * 2):]
+        split = max(1, len(values) - min(4, len(values)))
+        weights = np.zeros(len(values), dtype=np.float64)
+        weights[:split] = 0.45 / split
+        weights[split:] = 0.55 / max(len(values) - split, 1)
+        global_behavior = catalog[values[:split]].mean(0)
+        serving = catalog[values[split:]].mean(0)
+        user = 0.45 * global_behavior + 0.55 * serving
+        return user, values, weights
+    elif mode == "recent":
         values = values[-max(2, maximum // 2):]
         weights = np.ones(len(values))
     elif mode == "longer-compressed":
@@ -148,6 +193,22 @@ def _reward(data: GenRecData, history, target: int, name: str) -> float:
         seen = {genre for item in history for genre in data.item_genres[item]}
         target_genres = set(data.item_genres[target])
         return 0.75 + len(target_genres - seen) / max(len(target_genres), 1)
+    if name == "robust-preference":
+        seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
+        overlap = len(seen.intersection(data.item_genres[target]))
+        confidence = 1.0 / (1.0 + np.sqrt(float(data.popularity[target]) + 1.0))
+        return 0.75 + 0.15 * overlap + 0.20 * confidence
+    if name == "incrementality":
+        seen = {genre for item in history for genre in data.item_genres[item]}
+        new = len(set(data.item_genres[target]) - seen)
+        return 0.65 + 0.35 * new / max(len(data.item_genres[target]), 1)
+    if name == "reward-guided":
+        novelty = 1.0 - float(data.popularity[target]) / max(float(data.popularity.max()), 1.0)
+        seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
+        relevance = len(seen.intersection(data.item_genres[target])) / max(
+            len(data.item_genres[target]), 1
+        )
+        return float(np.exp((0.6 * relevance + 0.4 * novelty) / 0.55))
     return 1.0
 
 

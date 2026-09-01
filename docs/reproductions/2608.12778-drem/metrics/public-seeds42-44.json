@@ -1,0 +1,431 @@
+{
+  "paper": {
+    "arxiv_id": "2608.12778",
+    "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+    "url": "https://arxiv.org/abs/2608.12778",
+    "organization": "Shenzhen University"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "drem",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "naive pxtr ensemble",
+    "hit_at_10": 0.14545454545454545,
+    "ndcg_at_10": 0.07518240935675152,
+    "fresh_hit_at_10": 0.07936507936507936,
+    "head_share_at_10": 0.3195454545454545
+  },
+  "method": {
+    "name": "dual-side risk correction + preference-preserving consistency",
+    "hit_at_10": 0.15454545454545454,
+    "ndcg_at_10": 0.077261060787596,
+    "fresh_hit_at_10": 0.09523809523809523,
+    "head_share_at_10": 0.32681818181818184
+  },
+  "relative": {
+    "hit_at_10_percent": 6.250000000000003,
+    "ndcg_at_10_percent": 2.7648108761465293,
+    "fresh_hit_at_10_percent": 20.0,
+    "head_share_at_10_percent": 2.2759601706970276
+  },
+  "stages": {
+    "noise_perturbations": 24,
+    "naive_mean_absolute_drift": 0.06214129920418448,
+    "robust_mean_absolute_drift": 0.020038195645535408,
+    "risk_flip_probability_mean": 0.20015432098765432
+  },
+  "paper_results": {
+    "traffic_percent_per_group": 5.1,
+    "experiment_days": 7,
+    "emer_comment_lift_percent": 1.388,
+    "emer_follow_lift_percent": 1.197,
+    "all_p_values_below": 0.005
+  },
+  "scope": "实际执行 logit-space pxtr 扰动、偏好保持筛选、pair-label flip 风险反演和一致性融合；公开数据以转移、内容和热度三路代理 pxtr，未复刻生产 EMER/EASQ 与私有短视频日志。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "drem",
+    "arxiv_id": "2608.12778",
+    "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+    "paper_url": "https://arxiv.org/abs/2608.12778",
+    "track": "recommendation",
+    "organization": "Shenzhen University",
+    "published": "2026-08-13",
+    "code_url": null,
+    "topics": [
+      "ranking",
+      "multi-objective",
+      "robust-learning",
+      "video-recommendation"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K (proxy multi-objective channels)"
+    ],
+    "baseline": "naive weighted pxtr fusion under the same perturbations",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "naive_mean_absolute_drift",
+      "robust_mean_absolute_drift"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 24 fixed logit perturbations",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "industrial video recommendation",
+        "metric": "Comment",
+        "lift_percent": 1.388,
+        "traffic": "7-day experiment; 5.1% main traffic per group",
+        "source_url": "https://arxiv.org/html/2608.12778v1",
+        "source_location": "Section 5.4, Table 2",
+        "significance": "p < 0.005",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T10:55:34.819417+00:00",
+    "code_commit": "996ac89dd9bb16d0ac38be27d53639bc9d4ff859",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2608.12778-drem/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 24 fixed logit perturbations",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2608.12778",
+        "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+        "url": "https://arxiv.org/abs/2608.12778",
+        "organization": "Shenzhen University"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "drem",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "naive pxtr ensemble",
+        "hit_at_10": 0.14545454545454545,
+        "ndcg_at_10": 0.07518240935675152,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.3195454545454545
+      },
+      "method": {
+        "name": "dual-side risk correction + preference-preserving consistency",
+        "hit_at_10": 0.15454545454545454,
+        "ndcg_at_10": 0.077261060787596,
+        "fresh_hit_at_10": 0.09523809523809523,
+        "head_share_at_10": 0.32681818181818184
+      },
+      "relative": {
+        "hit_at_10_percent": 6.250000000000003,
+        "ndcg_at_10_percent": 2.7648108761465293,
+        "fresh_hit_at_10_percent": 20.0,
+        "head_share_at_10_percent": 2.2759601706970276
+      },
+      "stages": {
+        "noise_perturbations": 24,
+        "naive_mean_absolute_drift": 0.06214129920418448,
+        "robust_mean_absolute_drift": 0.020038195645535408,
+        "risk_flip_probability_mean": 0.20015432098765432
+      },
+      "paper_results": {
+        "traffic_percent_per_group": 5.1,
+        "experiment_days": 7,
+        "emer_comment_lift_percent": 1.388,
+        "emer_follow_lift_percent": 1.197,
+        "all_p_values_below": 0.005
+      },
+      "scope": "实际执行 logit-space pxtr 扰动、偏好保持筛选、pair-label flip 风险反演和一致性融合；公开数据以转移、内容和热度三路代理 pxtr，未复刻生产 EMER/EASQ 与私有短视频日志。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.12778",
+        "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+        "url": "https://arxiv.org/abs/2608.12778",
+        "organization": "Shenzhen University"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "drem",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "naive pxtr ensemble",
+        "hit_at_10": 0.14545454545454545,
+        "ndcg_at_10": 0.07518240935675152,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.3195454545454545
+      },
+      "method": {
+        "name": "dual-side risk correction + preference-preserving consistency",
+        "hit_at_10": 0.15454545454545454,
+        "ndcg_at_10": 0.07722270182099172,
+        "fresh_hit_at_10": 0.09523809523809523,
+        "head_share_at_10": 0.32727272727272727
+      },
+      "relative": {
+        "hit_at_10_percent": 6.250000000000003,
+        "ndcg_at_10_percent": 2.713789677261758,
+        "fresh_hit_at_10_percent": 20.0,
+        "head_share_at_10_percent": 2.4182076813655833
+      },
+      "stages": {
+        "noise_perturbations": 24,
+        "naive_mean_absolute_drift": 0.062488874975793196,
+        "robust_mean_absolute_drift": 0.02036692183617658,
+        "risk_flip_probability_mean": 0.19830246913580246
+      },
+      "paper_results": {
+        "traffic_percent_per_group": 5.1,
+        "experiment_days": 7,
+        "emer_comment_lift_percent": 1.388,
+        "emer_follow_lift_percent": 1.197,
+        "all_p_values_below": 0.005
+      },
+      "scope": "实际执行 logit-space pxtr 扰动、偏好保持筛选、pair-label flip 风险反演和一致性融合；公开数据以转移、内容和热度三路代理 pxtr，未复刻生产 EMER/EASQ 与私有短视频日志。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.12778",
+        "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+        "url": "https://arxiv.org/abs/2608.12778",
+        "organization": "Shenzhen University"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "drem",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "naive pxtr ensemble",
+        "hit_at_10": 0.14545454545454545,
+        "ndcg_at_10": 0.07518240935675152,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.3195454545454545
+      },
+      "method": {
+        "name": "dual-side risk correction + preference-preserving consistency",
+        "hit_at_10": 0.15454545454545454,
+        "ndcg_at_10": 0.0774078941406385,
+        "fresh_hit_at_10": 0.09523809523809523,
+        "head_share_at_10": 0.3240909090909091
+      },
+      "relative": {
+        "hit_at_10_percent": 6.250000000000003,
+        "ndcg_at_10_percent": 2.960113679420318,
+        "fresh_hit_at_10_percent": 20.0,
+        "head_share_at_10_percent": 1.4224751066856423
+      },
+      "stages": {
+        "noise_perturbations": 24,
+        "naive_mean_absolute_drift": 0.0632994006883574,
+        "robust_mean_absolute_drift": 0.019994806644473152,
+        "risk_flip_probability_mean": 0.20108024691358026
+      },
+      "paper_results": {
+        "traffic_percent_per_group": 5.1,
+        "experiment_days": 7,
+        "emer_comment_lift_percent": 1.388,
+        "emer_follow_lift_percent": 1.197,
+        "all_p_values_below": 0.005
+      },
+      "scope": "实际执行 logit-space pxtr 扰动、偏好保持筛选、pair-label flip 风险反演和一致性融合；公开数据以转移、内容和热度三路代理 pxtr，未复刻生产 EMER/EASQ 与私有短视频日志。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.14545454545454545,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.07518240935675152,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.07936507936507936,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.3195454545454545,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.15454545454545454,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.07729721891640874,
+      "std": 9.7747667611398e-05,
+      "ci95": 0.00011061189872787347,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.09523809523809523,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.3260606060606061,
+      "std": 0.0017208813169091752,
+      "ci95": 0.0019473605314593836,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": 6.250000000000003,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": 2.8129047442762016,
+      "std": 0.13001401318168865,
+      "ci95": 0.14712470599738814,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 20.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": 2.0388809862494175,
+      "std": 0.5385403836700122,
+      "ci95": 0.6094158135434772,
+      "n": 3
+    },
+    "stages.noise_perturbations": {
+      "mean": 24.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.naive_mean_absolute_drift": {
+      "mean": 0.06264319162277836,
+      "std": 0.0005942726500213863,
+      "ci95": 0.0006724828099452841,
+      "n": 3
+    },
+    "stages.robust_mean_absolute_drift": {
+      "mean": 0.020133308042061714,
+      "std": 0.00020347531780010153,
+      "ci95": 0.0002302539978304532,
+      "n": 3
+    },
+    "stages.risk_flip_probability_mean": {
+      "mean": 0.19984567901234565,
+      "std": 0.0014143752144925514,
+      "ci95": 0.001600516225211922,
+      "n": 3
+    },
+    "paper_results.traffic_percent_per_group": {
+      "mean": 5.1,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.experiment_days": {
+      "mean": 7.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.emer_comment_lift_percent": {
+      "mean": 1.388,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.emer_follow_lift_percent": {
+      "mean": 1.197,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.all_p_values_below": {
+      "mean": 0.005,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:drem"
+}

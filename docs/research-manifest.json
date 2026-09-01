@@ -9937,6 +9937,79 @@
     },
     {
       "domain": "recommendation",
+      "key": "director",
+      "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+      "paper_url": "https://arxiv.org/abs/2607.26418",
+      "detail_path": "reproductions/2607.26418-director/README.md",
+      "topic": [
+        "reranking",
+        "dynamic-index",
+        "optimal-transport",
+        "non-autoregressive"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "University of Science and Technology of China",
+      "published": "2026-07-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "director",
+        "arxiv_id": "2607.26418",
+        "title": "DIRECTOR: Dynamic Index-based Recommendation with Transport-Optimized Retrieval",
+        "paper_url": "https://arxiv.org/abs/2607.26418",
+        "track": "recommendation",
+        "organization": "University of Science and Technology of China",
+        "published": "2026-07-29",
+        "code_url": null,
+        "topics": [
+          "reranking",
+          "dynamic-index",
+          "optimal-transport",
+          "non-autoregressive"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "independent position-wise dynamic-index retrieval",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "matched_duplicate_count",
+          "transport_row_error"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; six parallel positions",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou main application",
+            "metric": "Valid View",
+            "lift_percent": 0.519,
+            "traffic": "7-day test; two mutually exclusive 10% buckets",
+            "source_url": "https://arxiv.org/html/2607.26418v1",
+            "source_location": "Section 6.2 and Appendix online protocol, Table 4",
+            "significance": "p < 0.05; 95% CI [0.45%, 0.59%]",
+            "retrieved_at": "2026-09-01"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "dme",
       "title": "Douyin Multimodal Embedding Model Technical Report",
       "paper_url": "https://arxiv.org/abs/2608.02148",
@@ -10258,6 +10331,79 @@
             "source_url": "https://arxiv.org/pdf/2608.09408",
             "source_location": "Section 5.3.1 Table 7",
             "retrieved_at": "2026-08-20"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "drem",
+      "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+      "paper_url": "https://arxiv.org/abs/2608.12778",
+      "detail_path": "reproductions/2608.12778-drem/README.md",
+      "topic": [
+        "ranking",
+        "multi-objective",
+        "robust-learning",
+        "video-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Shenzhen University",
+      "published": "2026-08-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "drem",
+        "arxiv_id": "2608.12778",
+        "title": "DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation",
+        "paper_url": "https://arxiv.org/abs/2608.12778",
+        "track": "recommendation",
+        "organization": "Shenzhen University",
+        "published": "2026-08-13",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "multi-objective",
+          "robust-learning",
+          "video-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (proxy multi-objective channels)"
+        ],
+        "baseline": "naive weighted pxtr fusion under the same perturbations",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "naive_mean_absolute_drift",
+          "robust_mean_absolute_drift"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; 24 fixed logit perturbations",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "industrial video recommendation",
+            "metric": "Comment",
+            "lift_percent": 1.388,
+            "traffic": "7-day experiment; 5.1% main traffic per group",
+            "source_url": "https://arxiv.org/html/2608.12778v1",
+            "source_location": "Section 5.4, Table 2",
+            "significance": "p < 0.005",
+            "retrieved_at": "2026-09-01"
           }
         ],
         "selection_exception": null,
@@ -13138,6 +13284,78 @@
             "traffic": "online A/B",
             "source_url": "https://arxiv.org/abs/2603.01590",
             "source_location": "original paper online-result disclosure: product=Xiaohongshu ads; metric=ADVV"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "incrementality",
+      "title": "From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation",
+      "paper_url": "https://arxiv.org/abs/2608.10182",
+      "detail_path": "reproductions/2608.10182-incrementality/README.md",
+      "topic": [
+        "causal-recommendation",
+        "uplift",
+        "bandit",
+        "constrained-allocation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "LinkedIn",
+      "published": "2026-08-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "incrementality",
+        "arxiv_id": "2608.10182",
+        "title": "From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation",
+        "paper_url": "https://arxiv.org/abs/2608.10182",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-08-10",
+        "code_url": null,
+        "topics": [
+          "causal-recommendation",
+          "uplift",
+          "bandit",
+          "constrained-allocation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/incrementality",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K causal targeting simulation"
+        ],
+        "baseline": "predictive treated-outcome targeting at the same budget",
+        "metrics": [
+          "policy_value",
+          "total_incremental_value",
+          "uplift_rank_correlation"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users; 30% treatment budget",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "LinkedIn Feed marketing traffic",
+            "metric": "primary long-term-value KPI",
+            "lift_percent": 7.2,
+            "traffic": "online A/B test",
+            "source_url": "https://arxiv.org/html/2608.10182v1",
+            "source_location": "Section 4 online evaluation",
+            "significance": "p = 0.041",
+            "retrieved_at": "2026-09-01"
           }
         ],
         "selection_exception": null,
@@ -18449,6 +18667,78 @@
     },
     {
       "domain": "recommendation",
+      "key": "psg",
+      "title": "PSG: Pair-Space Generation for Efficient Generative Reranking",
+      "paper_url": "https://arxiv.org/abs/2607.26427",
+      "detail_path": "reproductions/2607.26427-psg/README.md",
+      "topic": [
+        "reranking",
+        "generative-recommendation",
+        "pair-token",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-07-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "psg",
+        "arxiv_id": "2607.26427",
+        "title": "PSG: Pair-Space Generation for Efficient Generative Reranking",
+        "paper_url": "https://arxiv.org/abs/2607.26427",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-07-29",
+        "code_url": null,
+        "topics": [
+          "reranking",
+          "generative-recommendation",
+          "pair-token",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "item-space autoregressive scorer",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "decode_step_reduction",
+          "duplicate_items"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; six-item slate",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou single-column feed",
+            "metric": "Stay Time per user",
+            "lift_percent": 0.178,
+            "traffic": "7-day test; two disjoint 10% traffic buckets",
+            "source_url": "https://arxiv.org/html/2607.26427v1",
+            "source_location": "Section 5 online A/B test, Table 8",
+            "retrieved_at": "2026-09-01"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "pushdualgen",
       "title": "PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation",
       "paper_url": "https://arxiv.org/abs/2608.07989",
@@ -19631,6 +19921,78 @@
             "traffic": "one-week online A/B",
             "source_url": "https://arxiv.org/abs/2607.25901",
             "source_location": "original paper online-result disclosure: product=Kuaishou live recommendation; metric=outflow exposure"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "reward-guided-decoding",
+      "title": "Reward Guided Decoding for Generative Recommendation",
+      "paper_url": "https://arxiv.org/abs/2607.25344",
+      "detail_path": "reproductions/2607.25344-reward-guided-decoding/README.md",
+      "topic": [
+        "generative-recommendation",
+        "decoding",
+        "reward",
+        "business-alignment"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Institute of Information Engineering, Chinese Academy of Sciences",
+      "published": "2026-07-28",
+      "code": null,
+      "adapter": {
+        "adapter_key": "reward-guided-decoding",
+        "arxiv_id": "2607.25344",
+        "title": "Reward Guided Decoding for Generative Recommendation",
+        "paper_url": "https://arxiv.org/abs/2607.25344",
+        "track": "recommendation",
+        "organization": "Institute of Information Engineering, Chinese Academy of Sciences",
+        "published": "2026-07-28",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "decoding",
+          "reward",
+          "business-alignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "generator likelihood decoding",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "guided_expected_reward",
+          "kl_from_generator"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; beta=0.55",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou live-streaming recommendation",
+            "metric": "watch time",
+            "lift_percent": 0.689,
+            "traffic": "two-week online A/B test",
+            "source_url": "https://arxiv.org/html/2607.25344v1",
+            "source_location": "Section 5.4 online A/B test",
+            "retrieved_at": "2026-09-01"
           }
         ],
         "selection_exception": null,
@@ -20846,6 +21208,81 @@
     },
     {
       "domain": "recommendation",
+      "key": "snaplgr",
+      "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+      "paper_url": "https://arxiv.org/abs/2607.28895",
+      "detail_path": "reproductions/2607.28895-snaplgr/README.md",
+      "topic": [
+        "retrieval",
+        "generative-recommendation",
+        "semantic-id",
+        "llm",
+        "multimodal"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Snap Inc.",
+      "published": "2026-07-30",
+      "code": null,
+      "adapter": {
+        "adapter_key": "snaplgr",
+        "arxiv_id": "2607.28895",
+        "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
+        "paper_url": "https://arxiv.org/abs/2607.28895",
+        "track": "recommendation",
+        "organization": "Snap Inc.",
+        "published": "2026-07-30",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "generative-recommendation",
+          "semantic-id",
+          "llm",
+          "multimodal"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K content/co-engagement proxy"
+        ],
+        "baseline": "vanilla residual-quantized semantic IDs",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "sid_utilization",
+          "sid_collision_rate"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; 3-level width-8 SID",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Snapchat content recommendation",
+            "metric": "View Time",
+            "lift_percent": 0.37,
+            "traffic": "7-day production A/B test",
+            "source_url": "https://arxiv.org/html/2607.28895v1",
+            "source_location": "Section 4.5, Table 8",
+            "significance": "p = 0.007",
+            "retrieved_at": "2026-09-01"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "solaris",
       "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
       "paper_url": "https://arxiv.org/abs/2604.12110",
@@ -21573,6 +22010,79 @@
     },
     {
       "domain": "recommendation",
+      "key": "tm20k",
+      "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+      "paper_url": "https://arxiv.org/abs/2608.07055",
+      "detail_path": "reproductions/2608.07055-tm20k/README.md",
+      "topic": [
+        "advertising",
+        "long-sequence",
+        "token-merging",
+        "distillation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-08-07",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tm20k",
+        "arxiv_id": "2608.07055",
+        "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
+        "paper_url": "https://arxiv.org/abs/2608.07055",
+        "track": "recommendation",
+        "organization": "ByteDance",
+        "published": "2026-08-07",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "long-sequence",
+          "token-merging",
+          "distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K (full public histories)"
+        ],
+        "baseline": "same merged-token student without teacher distillation",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "compression_ratio",
+          "distilled_teacher_mse"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; at most 8 merged tokens",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "ByteDance e-commerce advertising",
+            "metric": "ADSS",
+            "lift_percent": 1.036,
+            "traffic": "5-day experiment serving hundreds of millions of users",
+            "source_url": "https://arxiv.org/html/2608.07055v1",
+            "source_location": "Section 5.4, Table 7",
+            "significance": "reported p-value 0% after rounding",
+            "retrieved_at": "2026-09-01"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "tmallgs",
       "title": "TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search",
       "paper_url": "https://arxiv.org/abs/2607.13398",
@@ -21966,6 +22476,78 @@
             "experiment_duration": "one month",
             "significance": "p<0.0001",
             "retrieved_at": "2026-08-28"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "transx",
+      "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+      "paper_url": "https://arxiv.org/abs/2607.28940",
+      "detail_path": "reproductions/2607.28940-transx/README.md",
+      "topic": [
+        "ranking",
+        "long-sequence",
+        "cross-attention",
+        "serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "LinkedIn",
+      "published": "2026-07-31",
+      "code": null,
+      "adapter": {
+        "adapter_key": "transx",
+        "arxiv_id": "2607.28940",
+        "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
+        "paper_url": "https://arxiv.org/abs/2607.28940",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-07-31",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "long-sequence",
+          "cross-attention",
+          "serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "monolithic recent-sequence scorer",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "attention_pair_reduction"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; global token plus 8 cached local tokens",
+        "device_capabilities": [
+          "cpu",
+          "mps",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "LinkedIn recommender systems",
+            "metric": "CTR",
+            "lift_percent": 6.0,
+            "traffic": "large-scale online A/B test",
+            "source_url": "https://arxiv.org/html/2607.28940v1",
+            "source_location": "Abstract and Section 6",
+            "significance": "statistically significant for users with eligible history",
+            "retrieved_at": "2026-09-01"
           }
         ],
         "selection_exception": null,

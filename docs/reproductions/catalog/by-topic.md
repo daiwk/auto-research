@@ -73,6 +73,7 @@
 - [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。
 - [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：共享生成和排序 encoder，以当前 rollout 与真实曝光双路 teacher distillation 统一召回、预排和精排。
 - [HRPO](../2608.00750-hrpo/README.md)：将序列总奖励拆成层级 Semantic ID 前缀的 residual credit-to-go，以细粒度组相对更新改善生成推荐轨迹。
+- [SnapLGR](../2607.28895-snaplgr/README.md)：以共参与 PPR 监督 residual SID，并经 token grounding 与序列 SFT 生成内容。
 - [OxygenREC-v2](../2607.24255-oxygenrec-v2/README.md)：以目标行为 instruction 直接控制 SID 候选生成，再以训练期未来交互做熵感知自蒸馏。
 - [UniR²](../2607.24439-unir2/README.md)：把用户 prefix、SID 轨迹和 item features 放入单一 decoder，以 DQ-PCA 和 ranking-only LoRA 同时完成生成召回与多目标排序。
 - [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：以分层协同 SID 统一检索 token 与可重建的内容 embedding，减少推荐模型 I/O。
@@ -123,8 +124,11 @@
 
 ### 排序网络与长序列
 - [OneModel](../2608.18606-onemodel/README.md)：将推荐、广告与商家混合行为映射到共享序列模型，并以 SAIM 场景门控兼顾迁移和专门化。
+- [DrEM](../2608.12778-drem/README.md)：在 logit 扰动下反演 pair-label 翻转风险，并以一致性融合降低多目标排序漂移。
 - [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md)：让多个业务任务在长短双流的不同层级执行交互查询，而非仅共享底层编码。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：用 prefill-only LLM 取代逐 token 解码，联合 catalog head、language loss 和 reward-weighted ranking loss 执行大目录精排。
+- [TM20K](../2608.07055-tm20k/README.md)：教师保留完整历史，学生把连续行为合并到固定 token 预算并蒸馏注意力。
+- [TransX](../2607.28940-transx/README.md)：离线缓存行为流，在线候选只对 global-local cache 做 cross-attention。
 - [CCFormer](../2607.28070-ccformer/README.md)：以字段分离的 ID/content 编码和门控融合增强冷内容泛化，再分层压缩远期 token、保留近期行为细节。
 - [HA-MoE](../2607.27577-ha-moe/README.md)：用内容异构性控制多门控 MoE，在同一排序器内平衡通用与领域专长信号。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
@@ -202,6 +206,7 @@
 - [RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems](../2607.29241-recharness/README.md)：用 bandit 在有限预算下路由候选结构实验，并把验证反馈写回下一轮。
 - [From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation](../2607.27789-feedback-policy/README.md)：从真实反馈发现生成策略，再用双空间关系蒸馏到轻量线上排序器。
 - [ASARL](../2607.26593-asarl/README.md)：用多 Agent 校验与补齐长尾 relevance 数据，执行 SCT、交互偏好优化和在线 student 蒸馏。
+- [Reward Guided Decoding](../2607.25344-reward-guided-decoding/README.md)：用 reward 对生成先验做指数倾斜，并以 KL 温度限制策略偏离。
 - [RAMP](../2607.17473-ramp/README.md)：以富个性化路径为 teacher，通过 feature mask 和 KL alignment 改善仅有公共字段的流量。
 - [UAME](../2607.17092-uame/README.md)：利用 Gaussian 排序不确定性识别多 pxtr 冲突样本，并自适应提高高偏差 pair 的训练权重。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：先筛选预测长期参与度的候选奖励，再将独立 reward heads 与即时目标联合优化。
@@ -225,6 +230,7 @@
 - [BEQUE](../2311.03758-beque/README.md)：结合离线检索反馈、自采样和 PRO，优化生成式 query rewrite。
 
 ### 因果推断与长期价值
+- [From Prediction to Incrementality](../2608.10182-incrementality/README.md)：估计潜在结果差与不确定度，在同一触达预算下优化增量价值。
 - [SWAG](../2607.25233-swag-bid/README.md)：把七日滑窗长期目标编码为 future plan，并门控影响当前广告 bid。
 - [Adaptive Ad Load Design for Sponsored Search Markets: Evidence, Theory, and Deployment](../2607.14418-adaptive-ad-load/README.md)：从随机现场实验学习收入—转化曲线，再按请求动态选择广告数量。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选能预测未来参与度的长期 reward，再以独立 reward heads 注入多个推荐 surface。
@@ -249,6 +255,8 @@
 - [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
 - [DEGR](../2608.04809-degr/README.md)：用 cohort 内 embedding 多样性、adaptive reward ORPO 和 greedy selection 控制跨曝光重复。
 - [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：以 fresh/delayed 标签、生命周期 gate 和共享专家统一直播场景的多目标排序，显式平衡即时互动与滞后价值。
+- [DIRECTOR](../2607.26418-director/README.md)：以最优运输协调位置分布，再用硬全局匹配消除重复候选。
+- [PSG](../2607.26427-psg/README.md)：将两个有序 item 编成 pair token，使六 item slate 仅需三步生成。
 - [LLM-Based Re-Ranking for Real Estate Search](../2607.14835-real-estate-rerank/README.md)：结合对话需求、房源属性、文本描述与候选集合统计执行 LLM 重排。
 - [GenPage: Towards End-to-End Generative Homepage Construction at Netflix](../2606.31031-genpage/README.md)：用一个模型直接生成整页，并以长期用户奖励和业务约束进行后训练。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：把 LLM advertiser prior 与常规候选按 validation 选择的 quota 混合，再作为排序特征使用。
