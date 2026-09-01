@@ -1,0 +1,492 @@
+{
+  "paper": {
+    "arxiv_id": "2607.25110",
+    "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
+    "url": "https://arxiv.org/abs/2607.25110",
+    "organization": "Meta"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "memory-layer",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "external frozen item cache",
+    "hit_at_10": 0.06363636363636363,
+    "ndcg_at_10": 0.027506091905372378,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.1459090909090909
+  },
+  "method": {
+    "name": "co-trained writeback memory + always-on embedding",
+    "hit_at_10": 0.06818181818181818,
+    "ndcg_at_10": 0.028704824908861216,
+    "fresh_hit_at_10": 0.047619047619047616,
+    "head_share_at_10": 0.145
+  },
+  "relative": {
+    "hit_at_10_percent": 7.142857142857146,
+    "ndcg_at_10_percent": 4.358063688628578,
+    "fresh_hit_at_10_percent": 50.0,
+    "head_share_at_10_percent": -0.6230529595015617
+  },
+  "stages": {
+    "snapshot_coverage": 0.9611111111111111,
+    "memory_coverage": 1.0,
+    "prediction_coverage_with_always_on": 1.0,
+    "snapshot_mean_staleness_steps": 7449.456647398844,
+    "memory_mean_staleness_steps": 429.1694444444444,
+    "writeback_l2_error": 0.0
+  },
+  "paper_results": {
+    "coverage_before_percent": 96,
+    "coverage_after_percent": 100,
+    "freshness_before_seconds": 300,
+    "freshness_after_seconds": 20,
+    "training_serving_ne_gap_reduction_percent": 86,
+    "cold_start_engagement_lift_percent": [
+      5,
+      6
+    ],
+    "training_publish_cost_reduction_percent": 30
+  },
+  "scope": "实际执行训练内 eta=1 cache writeback、冻结外部快照对照、cache miss 与 always-on 属性表征；未复刻 MPZCH/FBGEMM 分布式存储、15 秒流式发布和 Instagram 私有日志。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "memory-layer",
+    "arxiv_id": "2607.25110",
+    "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
+    "paper_url": "https://arxiv.org/abs/2607.25110",
+    "track": "recommendation",
+    "organization": "Meta / Instagram Reels",
+    "published": "2026-07-27",
+    "code_url": null,
+    "topics": [
+      "ranking",
+      "training-serving-consistency",
+      "cold-start",
+      "cache",
+      "serving"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K (220 users / 360 items)"
+    ],
+    "baseline": "same item tower with an external early frozen cache and no always-on miss path",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "head_share_at_10",
+      "snapshot_coverage",
+      "memory_coverage"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; one chronological writeback pass",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Instagram Reels early-stage ranking",
+        "metric": "cold-start reshare rate",
+        "lift_percent": 5.0,
+        "traffic": "post-launch A/B backtest; paper reports a statistically significant +5% to +6% range",
+        "source_url": "https://arxiv.org/html/2607.25110v1#S6.SS3",
+        "source_location": "Section 6.3, Table 1",
+        "significance": "all Table 1 A/B improvements statistically significant",
+        "retrieved_at": "2026-09-01"
+      },
+      {
+        "product": "Instagram Reels early-stage ranking",
+        "metric": "video views for media younger than one hour",
+        "lift_percent": 6.0,
+        "traffic": "post-launch A/B backtest; paper reports a +6% to +7% range",
+        "source_url": "https://arxiv.org/html/2607.25110v1#S6.SS3",
+        "source_location": "Section 6.3, Table 1",
+        "significance": "statistically significant",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T01:50:52.008250+00:00",
+    "code_commit": "df64a338410bf9bdc3e6e2feb9d2d1f5000bf221",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2607.25110-memory-layer/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; one chronological writeback pass",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2607.25110",
+        "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
+        "url": "https://arxiv.org/abs/2607.25110",
+        "organization": "Meta"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "memory-layer",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "external frozen item cache",
+        "hit_at_10": 0.06363636363636363,
+        "ndcg_at_10": 0.027506091905372378,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1459090909090909
+      },
+      "method": {
+        "name": "co-trained writeback memory + always-on embedding",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.028704824908861216,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.145
+      },
+      "relative": {
+        "hit_at_10_percent": 7.142857142857146,
+        "ndcg_at_10_percent": 4.358063688628578,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -0.6230529595015617
+      },
+      "stages": {
+        "snapshot_coverage": 0.9611111111111111,
+        "memory_coverage": 1.0,
+        "prediction_coverage_with_always_on": 1.0,
+        "snapshot_mean_staleness_steps": 7449.456647398844,
+        "memory_mean_staleness_steps": 429.1694444444444,
+        "writeback_l2_error": 0.0
+      },
+      "paper_results": {
+        "coverage_before_percent": 96,
+        "coverage_after_percent": 100,
+        "freshness_before_seconds": 300,
+        "freshness_after_seconds": 20,
+        "training_serving_ne_gap_reduction_percent": 86,
+        "cold_start_engagement_lift_percent": [
+          5,
+          6
+        ],
+        "training_publish_cost_reduction_percent": 30
+      },
+      "scope": "实际执行训练内 eta=1 cache writeback、冻结外部快照对照、cache miss 与 always-on 属性表征；未复刻 MPZCH/FBGEMM 分布式存储、15 秒流式发布和 Instagram 私有日志。",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.25110",
+        "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
+        "url": "https://arxiv.org/abs/2607.25110",
+        "organization": "Meta"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "memory-layer",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "external frozen item cache",
+        "hit_at_10": 0.06363636363636363,
+        "ndcg_at_10": 0.027506091905372378,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1459090909090909
+      },
+      "method": {
+        "name": "co-trained writeback memory + always-on embedding",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.028704824908861216,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.145
+      },
+      "relative": {
+        "hit_at_10_percent": 7.142857142857146,
+        "ndcg_at_10_percent": 4.358063688628578,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -0.6230529595015617
+      },
+      "stages": {
+        "snapshot_coverage": 0.9611111111111111,
+        "memory_coverage": 1.0,
+        "prediction_coverage_with_always_on": 1.0,
+        "snapshot_mean_staleness_steps": 7449.456647398844,
+        "memory_mean_staleness_steps": 429.1694444444444,
+        "writeback_l2_error": 0.0
+      },
+      "paper_results": {
+        "coverage_before_percent": 96,
+        "coverage_after_percent": 100,
+        "freshness_before_seconds": 300,
+        "freshness_after_seconds": 20,
+        "training_serving_ne_gap_reduction_percent": 86,
+        "cold_start_engagement_lift_percent": [
+          5,
+          6
+        ],
+        "training_publish_cost_reduction_percent": 30
+      },
+      "scope": "实际执行训练内 eta=1 cache writeback、冻结外部快照对照、cache miss 与 always-on 属性表征；未复刻 MPZCH/FBGEMM 分布式存储、15 秒流式发布和 Instagram 私有日志。",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2607.25110",
+        "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
+        "url": "https://arxiv.org/abs/2607.25110",
+        "organization": "Meta"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "memory-layer",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "external frozen item cache",
+        "hit_at_10": 0.06363636363636363,
+        "ndcg_at_10": 0.027506091905372378,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1459090909090909
+      },
+      "method": {
+        "name": "co-trained writeback memory + always-on embedding",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.028704824908861216,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.145
+      },
+      "relative": {
+        "hit_at_10_percent": 7.142857142857146,
+        "ndcg_at_10_percent": 4.358063688628578,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -0.6230529595015617
+      },
+      "stages": {
+        "snapshot_coverage": 0.9611111111111111,
+        "memory_coverage": 1.0,
+        "prediction_coverage_with_always_on": 1.0,
+        "snapshot_mean_staleness_steps": 7449.456647398844,
+        "memory_mean_staleness_steps": 429.1694444444444,
+        "writeback_l2_error": 0.0
+      },
+      "paper_results": {
+        "coverage_before_percent": 96,
+        "coverage_after_percent": 100,
+        "freshness_before_seconds": 300,
+        "freshness_after_seconds": 20,
+        "training_serving_ne_gap_reduction_percent": 86,
+        "cold_start_engagement_lift_percent": [
+          5,
+          6
+        ],
+        "training_publish_cost_reduction_percent": 30
+      },
+      "scope": "实际执行训练内 eta=1 cache writeback、冻结外部快照对照、cache miss 与 always-on 属性表征；未复刻 MPZCH/FBGEMM 分布式存储、15 秒流式发布和 Instagram 私有日志。",
+      "seed": 44
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.06363636363636363,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.02750609190537238,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.1459090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.06818181818181818,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.028704824908861216,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.047619047619047616,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.145,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": 7.142857142857146,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": 4.358063688628578,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 50.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -0.6230529595015617,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.snapshot_coverage": {
+      "mean": 0.9611111111111111,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.memory_coverage": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.prediction_coverage_with_always_on": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.snapshot_mean_staleness_steps": {
+      "mean": 7449.456647398844,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.memory_mean_staleness_steps": {
+      "mean": 429.1694444444444,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.writeback_l2_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.coverage_before_percent": {
+      "mean": 96.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.coverage_after_percent": {
+      "mean": 100.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.freshness_before_seconds": {
+      "mean": 300.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.freshness_after_seconds": {
+      "mean": 20.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.training_serving_ne_gap_reduction_percent": {
+      "mean": 86.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.training_publish_cost_reduction_percent": {
+      "mean": 30.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:memory-layer"
+}

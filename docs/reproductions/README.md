@@ -60,7 +60,12 @@ pytest tests/test_research_module_docs.py
 - 2025 工业 P0 补漏加入 MIM、FilterLLM、FuXi-α、RecGPT-V2、HiGR、DRL-PUT、AdaF²M²、MGOE 与 Click A Buy B；9 篇均有量化生产 A/B，并已在 MovieLens-1M 上执行独立核心机制。
 - 2025 LLM evolve P0 加入 DeepSeek NSA、Qwen Gated Attention 与 Moonshot Muon；结构和优化器可组合搜索，并完成 WikiText-2 同预算对照与四轮 evolve。
 
-## Google / Meta 正文证据补漏（6 个 P0 adapter）
+## Google / Meta 正文证据补漏（10 个 P0 adapter）
+
+- `memory-layer` · [Meta Memory Layer](2607.25110-memory-layer/README.md)：训练内 eta=1 writeback 把 item cache 纳入模型状态，并用 always-on 属性表征覆盖冷启动与缺失 ID。
+- `scalr` · [Meta SCALR](2606.00282-scalr/README.md)：从跨域事件学习条件分布，以概率采样而非 top-k 复制生成覆盖更广的训练事件。
+- `hill-index` · [Meta HILL](2604.12965-hill-index/README.md)：以 coarse-to-fine residual quantization 学习分层索引并减少在线候选打分量。
+- `semantic-native-longseq` · [Google Semantic-Native Long Sequence Modeling](2606.07546-semantic-native-longseq/README.md)：用层级语义 ID、bigram、时间折叠及 global-local pooling 扩展视频历史。
 
 - `ha-moe` · [Google Discover HA-MoE](2607.27577-ha-moe/README.md)：异构性门控多专家；7 天 1% 流量 A/B。
 - `dual-sid` · [YouTube Dual-purpose Semantic IDs](2607.24865-dual-sid/README.md)：SID 同时表达协同身份并重建内容 embedding。

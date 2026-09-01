@@ -31,16 +31,31 @@ def build_model(kind: str, data, config: RankMixerConfig):
     feature_count = features.shape[1]
     head_width = config.dimensions // config.tokens
     supported = {
-        "shared_ffn", "rankmixer_dense", "rankmixer_smoe",
-        "tokenmixer_large", "zenith", "moi_mixer",
-        "rankmixer_longer", "rankmixer_unimixer", "rankmixer_longer_unimixer",
-        "rankmixer_whale", "rankmixer_tmallgs", "rankmixer_long_history",
+        "shared_ffn",
+        "rankmixer_dense",
+        "rankmixer_smoe",
+        "tokenmixer_large",
+        "zenith",
+        "moi_mixer",
+        "rankmixer_longer",
+        "rankmixer_unimixer",
+        "rankmixer_longer_unimixer",
+        "rankmixer_whale",
+        "rankmixer_tmallgs",
+        "rankmixer_long_history",
         "rankmixer_ramp",
         "rankmixer_kgd",
         "rankmixer_tokenminds",
-        "rankmixer_ha_moe", "rankmixer_dual_sid", "rankmixer_mfli",
-        "rankmixer_kunlun", "rankmixer_ultra_hstu",
-        "rankmixer_dceo", "rankmixer_transretrieval",
+        "rankmixer_ha_moe",
+        "rankmixer_dual_sid",
+        "rankmixer_mfli",
+        "rankmixer_kunlun",
+        "rankmixer_ultra_hstu",
+        "rankmixer_dceo",
+        "rankmixer_transretrieval",
+        "rankmixer_memory_layer",
+        "rankmixer_hill_index",
+        "rankmixer_semantic_native_longseq",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -51,12 +66,16 @@ def build_model(kind: str, data, config: RankMixerConfig):
         def __init__(self, shared: bool):
             super().__init__()
             count = 1 if shared else config.tokens
-            self.networks = nn.ModuleList([
-                nn.Sequential(
-                    nn.Linear(config.dimensions, 4 * config.dimensions), nn.GELU(),
-                    nn.Linear(4 * config.dimensions, config.dimensions),
-                ) for _ in range(count)
-            ])
+            self.networks = nn.ModuleList(
+                [
+                    nn.Sequential(
+                        nn.Linear(config.dimensions, 4 * config.dimensions),
+                        nn.GELU(),
+                        nn.Linear(4 * config.dimensions, config.dimensions),
+                    )
+                    for _ in range(count)
+                ]
+            )
             self.shared = shared
 
         def forward(self, values):
@@ -71,32 +90,51 @@ def build_model(kind: str, data, config: RankMixerConfig):
         def __init__(self):
             super().__init__()
             width = config.expansion * config.dimensions
-            self.up = nn.ModuleList([nn.Linear(config.dimensions, width) for _ in range(config.tokens)])
-            self.gate = nn.ModuleList([nn.Linear(config.dimensions, width) for _ in range(config.tokens)])
-            self.down = nn.ModuleList([nn.Linear(width, config.dimensions) for _ in range(config.tokens)])
+            self.up = nn.ModuleList(
+                [nn.Linear(config.dimensions, width) for _ in range(config.tokens)]
+            )
+            self.gate = nn.ModuleList(
+                [nn.Linear(config.dimensions, width) for _ in range(config.tokens)]
+            )
+            self.down = nn.ModuleList(
+                [nn.Linear(width, config.dimensions) for _ in range(config.tokens)]
+            )
             for layer in self.down:
                 nn.init.xavier_uniform_(layer.weight, gain=0.01)
 
         def forward(self, values):
-            return torch.stack([
-                self.down[token](torch.nn.functional.silu(self.gate[token](values[:, token])) * self.up[token](values[:, token]))
-                for token in range(config.tokens)
-            ], dim=1)
+            return torch.stack(
+                [
+                    self.down[token](
+                        torch.nn.functional.silu(self.gate[token](values[:, token]))
+                        * self.up[token](values[:, token])
+                    )
+                    for token in range(config.tokens)
+                ],
+                dim=1,
+            )
 
     class SparsePerTokenMoE(nn.Module):
         def __init__(self):
             super().__init__()
-            self.routers = nn.ModuleList([
-                nn.Linear(config.dimensions, config.experts) for _ in range(config.tokens)
-            ])
-            self.experts = nn.ModuleList([
-                nn.ModuleList([
-                    nn.Sequential(
-                        nn.Linear(config.dimensions, 2 * config.dimensions), nn.GELU(),
-                        nn.Linear(2 * config.dimensions, config.dimensions),
-                    ) for _ in range(config.experts)
-                ]) for _ in range(config.tokens)
-            ])
+            self.routers = nn.ModuleList(
+                [nn.Linear(config.dimensions, config.experts) for _ in range(config.tokens)]
+            )
+            self.experts = nn.ModuleList(
+                [
+                    nn.ModuleList(
+                        [
+                            nn.Sequential(
+                                nn.Linear(config.dimensions, 2 * config.dimensions),
+                                nn.GELU(),
+                                nn.Linear(2 * config.dimensions, config.dimensions),
+                            )
+                            for _ in range(config.experts)
+                        ]
+                    )
+                    for _ in range(config.tokens)
+                ]
+            )
             self.routing_penalty = None
 
         def forward(self, values):
@@ -123,13 +161,20 @@ def build_model(kind: str, data, config: RankMixerConfig):
 
     class HeterogeneousMoEBlock(nn.Module):
         """HA-MoE: sample-dependent gates over specialized token experts."""
+
         def __init__(self):
             super().__init__()
             self.gate = nn.Linear(2 * config.dimensions, config.experts)
-            self.experts = nn.ModuleList([
-                nn.Sequential(nn.Linear(config.dimensions, 2 * config.dimensions), nn.GELU(), nn.Linear(2 * config.dimensions, config.dimensions))
-                for _ in range(config.experts)
-            ])
+            self.experts = nn.ModuleList(
+                [
+                    nn.Sequential(
+                        nn.Linear(config.dimensions, 2 * config.dimensions),
+                        nn.GELU(),
+                        nn.Linear(2 * config.dimensions, config.dimensions),
+                    )
+                    for _ in range(config.experts)
+                ]
+            )
             self.norm = nn.LayerNorm(config.dimensions)
 
         def forward(self, values):
@@ -140,9 +185,12 @@ def build_model(kind: str, data, config: RankMixerConfig):
 
     class KunlunBlock(nn.Module):
         """GDPA-gated attention plus personalized interaction and CompSkip."""
+
         def __init__(self):
             super().__init__()
-            self.attention = nn.MultiheadAttention(config.dimensions, config.tokens, batch_first=True, dropout=0.0)
+            self.attention = nn.MultiheadAttention(
+                config.dimensions, config.tokens, batch_first=True, dropout=0.0
+            )
             self.gate = nn.Linear(config.dimensions, config.tokens)
             self.interaction = PerTokenSwiGLU()
             self.norm = nn.LayerNorm(config.dimensions)
@@ -166,40 +214,73 @@ def build_model(kind: str, data, config: RankMixerConfig):
 
         def forward(self, values):
             # Paper Eq. 4: concatenate equal-index heads across heterogeneous tokens.
-            mixed = values.reshape(
-                len(values), config.tokens, config.tokens, head_width
-            ).transpose(1, 2).reshape(len(values), config.tokens, config.dimensions)
+            mixed = (
+                values.reshape(len(values), config.tokens, config.tokens, head_width)
+                .transpose(1, 2)
+                .reshape(len(values), config.tokens, config.dimensions)
+            )
             values = self.first_norm(values + mixed)
             return self.second_norm(values + self.ffn(values))
 
     class TokenMixerLargeBlock(nn.Module):
         """TokenMixer-Large mixing→head SwiGLU→reverting→token SwiGLU."""
+
         def __init__(self):
             super().__init__()
             self.pre_mix = nn.RMSNorm(config.dimensions)
             self.pre_token = nn.RMSNorm(config.dimensions)
-            self.head_up = nn.ModuleList([nn.Linear(config.dimensions, config.expansion * config.dimensions) for _ in range(config.tokens)])
-            self.head_gate = nn.ModuleList([nn.Linear(config.dimensions, config.expansion * config.dimensions) for _ in range(config.tokens)])
-            self.head_down = nn.ModuleList([nn.Linear(config.expansion * config.dimensions, config.dimensions) for _ in range(config.tokens)])
+            self.head_up = nn.ModuleList(
+                [
+                    nn.Linear(config.dimensions, config.expansion * config.dimensions)
+                    for _ in range(config.tokens)
+                ]
+            )
+            self.head_gate = nn.ModuleList(
+                [
+                    nn.Linear(config.dimensions, config.expansion * config.dimensions)
+                    for _ in range(config.tokens)
+                ]
+            )
+            self.head_down = nn.ModuleList(
+                [
+                    nn.Linear(config.expansion * config.dimensions, config.dimensions)
+                    for _ in range(config.tokens)
+                ]
+            )
             self.token_ffn = PerTokenSwiGLU()
 
         def forward(self, values):
             original = values
-            mixed = self.pre_mix(values).reshape(
-                len(values), config.tokens, config.tokens, head_width
-            ).transpose(1, 2).reshape(len(values), config.tokens, config.dimensions)
-            mixed = torch.stack([
-                self.head_down[head](torch.nn.functional.silu(self.head_gate[head](mixed[:, head])) * self.head_up[head](mixed[:, head]))
-                for head in range(config.tokens)
-            ], dim=1) + mixed
-            reverted = mixed.reshape(
-                len(values), config.tokens, config.tokens, head_width
-            ).transpose(1, 2).reshape(len(values), config.tokens, config.dimensions)
+            mixed = (
+                self.pre_mix(values)
+                .reshape(len(values), config.tokens, config.tokens, head_width)
+                .transpose(1, 2)
+                .reshape(len(values), config.tokens, config.dimensions)
+            )
+            mixed = (
+                torch.stack(
+                    [
+                        self.head_down[head](
+                            torch.nn.functional.silu(self.head_gate[head](mixed[:, head]))
+                            * self.head_up[head](mixed[:, head])
+                        )
+                        for head in range(config.tokens)
+                    ],
+                    dim=1,
+                )
+                + mixed
+            )
+            reverted = (
+                mixed.reshape(len(values), config.tokens, config.tokens, head_width)
+                .transpose(1, 2)
+                .reshape(len(values), config.tokens, config.dimensions)
+            )
             reverted = original + reverted
             return reverted + self.token_ffn(self.pre_token(reverted))
 
     class ZenithBlock(nn.Module):
         """Prime-token RSA fusion followed by tokenwise SwiGLU boost."""
+
         def __init__(self):
             super().__init__()
             self.fusion = nn.Linear(config.dimensions, config.dimensions)
@@ -217,8 +298,12 @@ def build_model(kind: str, data, config: RankMixerConfig):
     class MultiOrderBlock(nn.Module):
         def __init__(self):
             super().__init__()
-            self.linear = nn.ModuleList([nn.Linear(config.dimensions, config.dimensions) for _ in range(config.tokens)])
-            self.quadratic = nn.ModuleList([nn.Linear(config.dimensions, config.dimensions) for _ in range(config.tokens)])
+            self.linear = nn.ModuleList(
+                [nn.Linear(config.dimensions, config.dimensions) for _ in range(config.tokens)]
+            )
+            self.quadratic = nn.ModuleList(
+                [nn.Linear(config.dimensions, config.dimensions) for _ in range(config.tokens)]
+            )
             self.norm = nn.LayerNorm(config.dimensions)
 
         def forward(self, values):
@@ -266,13 +351,10 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 ),
                 diagonal=1,
             )
-            exchanged, _ = self.attention(
-                features, features, features, attn_mask=causal
-            )
+            exchanged, _ = self.attention(features, features, features, attn_mask=causal)
             update, gate = self.gate(exchanged).chunk(2, dim=-1)
             return self.second_norm(
-                features
-                + torch.nn.functional.silu(update) * torch.sigmoid(gate)
+                features + torch.nn.functional.silu(update) * torch.sigmoid(gate)
             )
 
     class TMallGSBlock(nn.Module):
@@ -280,21 +362,13 @@ def build_model(kind: str, data, config: RankMixerConfig):
 
         def __init__(self):
             super().__init__()
-            self.q = nn.Parameter(
-                torch.empty(config.tokens, config.dimensions, config.dimensions)
-            )
-            self.k = nn.Parameter(
-                torch.empty(config.tokens, config.dimensions, config.dimensions)
-            )
-            self.v = nn.Parameter(
-                torch.empty(config.tokens, config.dimensions, config.dimensions)
-            )
+            self.q = nn.Parameter(torch.empty(config.tokens, config.dimensions, config.dimensions))
+            self.k = nn.Parameter(torch.empty(config.tokens, config.dimensions, config.dimensions))
+            self.v = nn.Parameter(torch.empty(config.tokens, config.dimensions, config.dimensions))
             nn.init.xavier_uniform_(self.q)
             nn.init.xavier_uniform_(self.k)
             nn.init.xavier_uniform_(self.v)
-            self.noise_gate = nn.Sequential(
-                nn.Linear(config.dimensions, 1), nn.Sigmoid()
-            )
+            self.noise_gate = nn.Sequential(nn.Linear(config.dimensions, 1), nn.Sigmoid())
             self.ffn = PerTokenSwiGLU()
             self.norm = nn.LayerNorm(config.dimensions)
 
@@ -302,9 +376,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
             q = torch.einsum("btd,tdh->bth", values, self.q)
             k = torch.einsum("btd,tdh->bth", values, self.k)
             v = torch.einsum("btd,tdh->bth", values, self.v)
-            attention = torch.softmax(
-                q @ k.transpose(1, 2) / config.dimensions**0.5, dim=-1
-            )
+            attention = torch.softmax(q @ k.transpose(1, 2) / config.dimensions**0.5, dim=-1)
             gate = self.noise_gate(values)
             updated = self.norm(values + gate * (attention @ v))
             return updated + self.ffn(updated)
@@ -313,9 +385,9 @@ def build_model(kind: str, data, config: RankMixerConfig):
         def __init__(self):
             super().__init__()
             self.item = nn.Embedding(item_count, config.dimensions)
-            self.feature_projections = nn.ModuleList([
-                nn.Linear(feature_count, config.dimensions) for _ in range(2)
-            ])
+            self.feature_projections = nn.ModuleList(
+                [nn.Linear(feature_count, config.dimensions) for _ in range(2)]
+            )
             block_type = {
                 "tokenmixer_large": TokenMixerLargeBlock,
                 "zenith": ZenithBlock,
@@ -329,7 +401,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
             }.get(kind, Block)
             self.blocks = nn.ModuleList([block_type() for _ in range(config.layers)])
             self.output = nn.Sequential(
-                nn.Linear(config.dimensions, config.dimensions), nn.GELU(),
+                nn.Linear(config.dimensions, config.dimensions),
+                nn.GELU(),
                 nn.Linear(config.dimensions, 1),
             )
             self.register_buffer("features", features)
@@ -344,9 +417,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
                     dimensions=config.dimensions,
                     sid_cardinality=sid_cardinality,
                 )
-                item_codes = build_semantic_codes(
-                    np.asarray(data.item_features), sid_config
-                )
+                item_codes = build_semantic_codes(np.asarray(data.item_features), sid_config)
                 self.register_buffer(
                     "tokenminds_item_codes",
                     torch.tensor(item_codes, dtype=torch.long),
@@ -359,21 +430,40 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 # representation intact at initialization, then learns how much
                 # discrete user-token signal the downstream ranker should use.
                 self.tokenminds_gate = nn.Parameter(torch.tensor(-3.0))
-            if kind in {"rankmixer_dual_sid", "rankmixer_mfli"}:
+            if kind in {
+                "rankmixer_dual_sid",
+                "rankmixer_mfli",
+                "rankmixer_hill_index",
+                "rankmixer_semantic_native_longseq",
+            }:
                 from ..industrial_2026 import hierarchical_codes
-                codes = hierarchical_codes(np.asarray(data.item_features), levels=3, width=min(8, item_count))
+
+                codes = hierarchical_codes(
+                    np.asarray(data.item_features), levels=3, width=min(8, item_count)
+                )
                 self.register_buffer("evolve_item_codes", torch.tensor(codes, dtype=torch.long))
                 self.evolve_code_embeddings = nn.ModuleList(
                     nn.Embedding(min(8, item_count), config.dimensions) for _ in range(3)
                 )
                 self.evolve_code_gate = nn.Parameter(torch.tensor(-3.0))
+            if kind == "rankmixer_memory_layer":
+                # A train-owned item representation replaces an out-of-model
+                # frozen cache.  The feature path is always available for new
+                # or missing item IDs, matching the paper's serving contract.
+                self.memory_projection = nn.Linear(feature_count, config.dimensions)
+                self.memory_gate = nn.Parameter(torch.tensor(-2.0))
             if kind == "rankmixer_ultra_hstu":
-                self.ultra_attention = nn.MultiheadAttention(config.dimensions, config.tokens, batch_first=True, dropout=0.0)
-                self.ultra_transducers = nn.ModuleList([nn.Linear(config.dimensions, config.dimensions) for _ in range(3)])
+                self.ultra_attention = nn.MultiheadAttention(
+                    config.dimensions, config.tokens, batch_first=True, dropout=0.0
+                )
+                self.ultra_transducers = nn.ModuleList(
+                    [nn.Linear(config.dimensions, config.dimensions) for _ in range(3)]
+                )
                 self.ultra_router = nn.Linear(config.dimensions, 3)
             if kind == "rankmixer_dceo":
                 self.dceo_actor = nn.Sequential(
-                    nn.Linear(feature_count, config.dimensions), nn.GELU(),
+                    nn.Linear(feature_count, config.dimensions),
+                    nn.GELU(),
                     nn.Linear(config.dimensions, 3),
                 )
             if kind == "rankmixer_transretrieval":
@@ -384,9 +474,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
             self.restricted_logits = None
             self.personalized_logits = None
             if kind == "rankmixer_long_history":
-                self.long_position = nn.Embedding(
-                    config.sequence_length, config.dimensions
-                )
+                self.long_position = nn.Embedding(config.sequence_length, config.dimensions)
                 layer = nn.TransformerEncoderLayer(
                     config.dimensions,
                     config.tokens,
@@ -411,6 +499,22 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 cached = self.long_encoder(tokens[:, :boundary])[:, -1]
                 runtime = tokens[:, -4:].mean(dim=1)
                 recent = self.long_fusion(torch.cat((cached, runtime), dim=-1))
+            elif kind == "rankmixer_semantic_native_longseq":
+                codes = self.evolve_item_codes[history]
+                semantic = sum(
+                    embedding(codes[:, :, level])
+                    for level, embedding in enumerate(self.evolve_code_embeddings)
+                ) / len(self.evolve_code_embeddings)
+                fold = 4
+                folded = torch.stack(
+                    [
+                        semantic[:, start : start + fold].mean(1)
+                        for start in range(0, semantic.shape[1], fold)
+                    ],
+                    dim=1,
+                )
+                global_query = semantic.mean(1)
+                recent = 0.6 * global_query + 0.4 * folded.mean(1)
             elif "longer" in kind and history.shape[1] > 8:
                 embedded = self.item(history)
                 prefix, local = embedded[:, :-8], embedded[:, -8:]
@@ -422,22 +526,28 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 sequence = self.item(history)
                 local = sequence[:, -8:]
                 width = max(1, sequence.shape[1] // 4)
-                landmarks = torch.stack([
-                    sequence[:, start:start + width].mean(1)
-                    for start in range(0, sequence.shape[1], width)
-                ], dim=1)
+                landmarks = torch.stack(
+                    [
+                        sequence[:, start : start + width].mean(1)
+                        for start in range(0, sequence.shape[1], width)
+                    ],
+                    dim=1,
+                )
                 sparse = torch.cat((local, landmarks), dim=1)
                 attended, _ = self.ultra_attention(sparse, sparse, sparse)
                 summary = attended[:, -1]
                 routes = torch.softmax(self.ultra_router(summary), dim=-1)
-                transduced = torch.stack([layer(summary) for layer in self.ultra_transducers], dim=1)
+                transduced = torch.stack(
+                    [layer(summary) for layer in self.ultra_transducers], dim=1
+                )
                 recent = recent + (routes.unsqueeze(-1) * transduced).sum(1)
             last = self.item(history[:, -1])
             profile = self.features[history].mean(dim=1)
             user_feature = self.feature_projections[0](profile)
             if kind == "rankmixer_dceo":
                 objective_weights = torch.softmax(
-                    self.dceo_actor(profile) / config.dceo_temperature, dim=-1,
+                    self.dceo_actor(profile) / config.dceo_temperature,
+                    dim=-1,
                 )
                 causal_feature = (
                     objective_weights[:, :1] * user_feature
@@ -461,10 +571,13 @@ def build_model(kind: str, data, config: RankMixerConfig):
                     embedding(history_codes[:, :, level]).mean(dim=1)
                     for level, embedding in enumerate(self.tokenminds_embeddings)
                 ) / len(self.tokenminds_embeddings)
-                user_feature = user_feature + torch.sigmoid(
-                    self.tokenminds_gate
-                ) * user_token
-            if kind in {"rankmixer_dual_sid", "rankmixer_mfli"}:
+                user_feature = user_feature + torch.sigmoid(self.tokenminds_gate) * user_token
+            if kind in {
+                "rankmixer_dual_sid",
+                "rankmixer_mfli",
+                "rankmixer_hill_index",
+                "rankmixer_semantic_native_longseq",
+            }:
                 codes = self.evolve_item_codes[history]
                 sid_user = sum(
                     embedding(codes[:, :, level]).mean(1)
@@ -481,12 +594,23 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 )
                 recent = recent + knowledge
                 user_feature = user_feature + calibration
-            public_profile = self.features.mean(dim=0, keepdim=True).expand(
-                batch, -1
-            )
+            public_profile = self.features.mean(dim=0, keepdim=True).expand(batch, -1)
             public_user_feature = self.feature_projections[0](public_profile)
             candidate_feature = self.feature_projections[1](self.features[candidates])
             candidate = self.item(candidates) + candidate_feature
+            if kind == "rankmixer_memory_layer":
+                always_on = self.memory_projection(self.features[candidates])
+                candidate = candidate + torch.sigmoid(self.memory_gate) * always_on
+                user_feature = user_feature + torch.sigmoid(
+                    self.memory_gate
+                ) * self.memory_projection(profile)
+            if kind in {"rankmixer_hill_index", "rankmixer_semantic_native_longseq"}:
+                candidate_codes = self.evolve_item_codes[candidates]
+                candidate_sid = sum(
+                    embedding(candidate_codes[:, :, level])
+                    for level, embedding in enumerate(self.evolve_code_embeddings)
+                ) / len(self.evolve_code_embeddings)
+                candidate = candidate + torch.sigmoid(self.evolve_code_gate) * candidate_sid
             fixed = torch.stack((user_feature, recent, last), dim=1)
             fixed = fixed[:, None].expand(-1, candidate_count, -1, -1)
             values = torch.cat((fixed, candidate[:, :, None]), dim=2)
@@ -499,12 +623,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 ),
                 dim=1,
             )
-            public_fixed = public_fixed[:, None].expand(
-                -1, candidate_count, -1, -1
-            )
-            public_values = torch.cat(
-                (public_fixed, candidate[:, :, None]), dim=2
-            ).reshape(
+            public_fixed = public_fixed[:, None].expand(-1, candidate_count, -1, -1)
+            public_values = torch.cat((public_fixed, candidate[:, :, None]), dim=2).reshape(
                 batch * candidate_count, config.tokens, config.dimensions
             )
 
@@ -522,12 +642,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
                         encoded = encoded + anchor
                         anchor = encoded
                     if index + 1 == max(1, len(self.blocks) // 2):
-                        auxiliary = self.output(encoded.mean(dim=1)).reshape(
-                            batch, candidate_count
-                        )
-                logits = self.output(encoded.mean(dim=1)).reshape(
-                    batch, candidate_count
-                )
+                        auxiliary = self.output(encoded.mean(dim=1)).reshape(batch, candidate_count)
+                logits = self.output(encoded.mean(dim=1)).reshape(batch, candidate_count)
                 return logits, auxiliary
 
             personalized, auxiliary = score(values)
@@ -539,12 +655,8 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 self.alignment_logits = restricted
                 self.restricted_logits = restricted
                 if self.training and mode is None:
-                    availability = (
-                        torch.arange(batch, device=history.device) % 5 != 0
-                    )
-                    logits = torch.where(
-                        availability[:, None], personalized, restricted
-                    )
+                    availability = torch.arange(batch, device=history.device) % 5 != 0
+                    logits = torch.where(availability[:, None], personalized, restricted)
                 else:
                     logits = restricted if mode == "restricted" else personalized
             else:
@@ -553,18 +665,22 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 self.restricted_logits = None
                 logits = restricted if mode == "restricted" else personalized
             self.auxiliary_logits = (
-                auxiliary
-                if kind in {"tokenmixer_large", "rankmixer_tmallgs"}
-                else None
+                auxiliary if kind in {"tokenmixer_large", "rankmixer_tmallgs"} else None
             )
             return logits
 
         def forward(self, history, mode=None):
-            candidates = torch.arange(item_count, device=history.device)[None].expand(len(history), -1)
+            candidates = torch.arange(item_count, device=history.device)[None].expand(
+                len(history), -1
+            )
             return self.pair_scores(history, candidates, mode=mode)
 
         def routing_penalty(self):
-            penalties = [block.ffn.routing_penalty for block in self.blocks if hasattr(block, "ffn") and isinstance(block.ffn, SparsePerTokenMoE)]
+            penalties = [
+                block.ffn.routing_penalty
+                for block in self.blocks
+                if hasattr(block, "ffn") and isinstance(block.ffn, SparsePerTokenMoE)
+            ]
             return sum(penalties) / len(penalties) if penalties else None
 
     return Ranker()
@@ -603,7 +719,13 @@ def train_model(kind: str, data, config: RankMixerConfig, seed: int):
         labels[:, 0] = 1.0
         loss = torch.nn.functional.binary_cross_entropy_with_logits(logits, labels)
         if model.auxiliary_logits is not None:
-            loss = loss + config.auxiliary_weight * torch.nn.functional.binary_cross_entropy_with_logits(model.auxiliary_logits, labels)
+            loss = (
+                loss
+                + config.auxiliary_weight
+                * torch.nn.functional.binary_cross_entropy_with_logits(
+                    model.auxiliary_logits, labels
+                )
+            )
         if model.alignment_logits is not None:
             teacher = torch.sigmoid(model.personalized_logits.detach())
             alignment = torch.nn.functional.binary_cross_entropy_with_logits(

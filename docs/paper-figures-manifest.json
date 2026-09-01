@@ -6578,5 +6578,61 @@
     "height": 827,
     "score": 79,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2607.25110-memory-layer/README.md",
+    "paper_url": "https://arxiv.org/abs/2607.25110",
+    "arxiv_id": "2607.25110",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1 (b) illustrates the resulting system architecture. The memory layer is a shared sparse embedding table using MPZCH [36] that serves as the single source of truth for item representations in both training and serving. Multi-table training reads from both the training data scribe and candidate pool scribe directly, the item tower writes embeddings into the memory layer via Writeback, and raw embedding streaming propagates all updates to the predictor at 15-second intervals. The predictor performs MPZCH lookup with cache-miss handling via always-on embeddings, scoring 100% of items. Compared to Figure 1 (a), the three separate update paths are consolidated into a single self-contained pipeline centered on the shared memory layer.",
+    "source_url": "https://arxiv.org/pdf/2607.25110#page=2",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2607.25110-memory-layer/assets/paper-figure-01.png",
+    "width": 625,
+    "height": 654,
+    "score": 96,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2606.00282-scalr/README.md",
+    "paper_url": "https://arxiv.org/abs/2606.00282",
+    "arxiv_id": "2606.00282",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3: Illustration of model architecture for cross domain learning with Synthetic data",
+    "source_url": "https://arxiv.org/html/2606.00282v1/SynRec_crossdomain.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2606.00282-scalr/assets/paper-figure-01.png",
+    "width": 1490,
+    "height": 1871,
+    "score": 39,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2604.12965-hill-index/README.md",
+    "paper_url": "https://arxiv.org/abs/2604.12965",
+    "arxiv_id": "2604.12965",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1. Overall Pipeline of MoNN Foundation Retrieval Model with HILL Index.",
+    "source_url": "https://arxiv.org/html/2604.12965v1/figures/framework.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2604.12965-hill-index/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 712,
+    "score": 65,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2606.07546-semantic-native-longseq/README.md",
+    "paper_url": "https://arxiv.org/abs/2606.07546",
+    "arxiv_id": "2606.07546",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2. Global-Aware Compressed Transformer Overview.",
+    "source_url": "https://arxiv.org/html/2606.07546v1/2026sigir.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2606.07546-semantic-native-longseq/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 973,
+    "score": 49,
+    "error": ""
   }
 ]

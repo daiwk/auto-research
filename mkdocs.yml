@@ -17,6 +17,7 @@ nav:
       - 研究库总览: research-library.md
       - 发现闭环与防遗漏审计: paper-discovery-audit.md
       - 2026 历史全文审计终态: paper-audits/2026-historical-fulltext-review.md
+      - 2026 历史 P0 固定实现路线图: paper-audits/2026-historical-p0-implementation-roadmap.md
       - 公开实验看板: public-experiment-dashboard.md
       - 搜广推与 LLM 应用:
           - 研究总览: reproductions/industrial.md

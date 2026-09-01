@@ -1,0 +1,424 @@
+{
+  "paper": {
+    "arxiv_id": "2604.12965",
+    "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
+    "url": "https://arxiv.org/abs/2604.12965",
+    "organization": "Meta"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "hill-index",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "one-layer learned index",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05518934137305569,
+    "fresh_hit_at_10": 0.07936507936507936,
+    "head_share_at_10": 0.10363636363636364
+  },
+  "method": {
+    "name": "HILL residual two-layer index",
+    "hit_at_10": 0.05454545454545454,
+    "ndcg_at_10": 0.035973142239490156,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.10681818181818181
+  },
+  "relative": {
+    "hit_at_10_percent": -50.0,
+    "ndcg_at_10_percent": -34.818678127851676,
+    "fresh_hit_at_10_percent": -60.0,
+    "head_share_at_10_percent": 3.0701754385964843
+  },
+  "stages": {
+    "coarse_nodes": 6,
+    "residual_children_per_node": 6,
+    "flat_mean_scored_items": 61.328125,
+    "hill_mean_scored_items": 83.875,
+    "hill_candidate_fraction": 0.23298611111111112,
+    "test_time_training_nodes": 28
+  },
+  "paper_results": {
+    "two_layer_monn_medium_small_online_metric_percent": 2.57,
+    "two_layer_monn_small_small_online_metric_percent": 1.22
+  },
+  "scope": "实际学习 coarse attention assignment、跨层 residual quantization、层级 beam 检索，并与同公开切分的单层索引比较候选量和质量；未复刻 Meta MoNN、十亿级 Ads 索引和分布式 FAISS EM。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "hill-index",
+    "arxiv_id": "2604.12965",
+    "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
+    "paper_url": "https://arxiv.org/abs/2604.12965",
+    "track": "recommendation",
+    "organization": "Meta / Facebook and Instagram Ads",
+    "published": "2026-04-14",
+    "code_url": null,
+    "topics": [
+      "retrieval",
+      "hierarchical-index",
+      "residual-quantization",
+      "test-time-training",
+      "serving"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K (220 users / 360 items)"
+    ],
+    "baseline": "one-layer learned index with the same public item features and retrieval protocol",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "head_share_at_10",
+      "mean_scored_items"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "6 coarse nodes; up to 6 residual child nodes per parent",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Meta Ads Retrieval",
+        "metric": "online ads metric",
+        "lift_percent": 2.57,
+        "traffic": "production online A/B: 2-layer MoNN Large/Small versus MoNN Small",
+        "source_url": "https://arxiv.org/html/2604.12965v1#S4.SS5",
+        "source_location": "Section 4.5, Table 8",
+        "retrieved_at": "2026-09-01"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-09-01T01:50:54.010622+00:00",
+    "code_commit": "df64a338410bf9bdc3e6e2feb9d2d1f5000bf221",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2604.12965-hill-index/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "6 coarse nodes; up to 6 residual child nodes per parent",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2604.12965",
+        "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
+        "url": "https://arxiv.org/abs/2604.12965",
+        "organization": "Meta"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "hill-index",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "one-layer learned index",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05518934137305569,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.10363636363636364
+      },
+      "method": {
+        "name": "HILL residual two-layer index",
+        "hit_at_10": 0.05454545454545454,
+        "ndcg_at_10": 0.035973142239490156,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.10681818181818181
+      },
+      "relative": {
+        "hit_at_10_percent": -50.0,
+        "ndcg_at_10_percent": -34.818678127851676,
+        "fresh_hit_at_10_percent": -60.0,
+        "head_share_at_10_percent": 3.0701754385964843
+      },
+      "stages": {
+        "coarse_nodes": 6,
+        "residual_children_per_node": 6,
+        "flat_mean_scored_items": 61.328125,
+        "hill_mean_scored_items": 83.875,
+        "hill_candidate_fraction": 0.23298611111111112,
+        "test_time_training_nodes": 28
+      },
+      "paper_results": {
+        "two_layer_monn_medium_small_online_metric_percent": 2.57,
+        "two_layer_monn_small_small_online_metric_percent": 1.22
+      },
+      "scope": "实际学习 coarse attention assignment、跨层 residual quantization、层级 beam 检索，并与同公开切分的单层索引比较候选量和质量；未复刻 Meta MoNN、十亿级 Ads 索引和分布式 FAISS EM。",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2604.12965",
+        "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
+        "url": "https://arxiv.org/abs/2604.12965",
+        "organization": "Meta"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "hill-index",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "one-layer learned index",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.05635913257742555,
+        "fresh_hit_at_10": 0.06349206349206349,
+        "head_share_at_10": 0.11227272727272727
+      },
+      "method": {
+        "name": "HILL residual two-layer index",
+        "hit_at_10": 0.07727272727272727,
+        "ndcg_at_10": 0.045418828808666205,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.09636363636363636
+      },
+      "relative": {
+        "hit_at_10_percent": -19.047619047619055,
+        "ndcg_at_10_percent": -19.411767478375715,
+        "fresh_hit_at_10_percent": -50.0,
+        "head_share_at_10_percent": -14.170040485829965
+      },
+      "stages": {
+        "coarse_nodes": 6,
+        "residual_children_per_node": 6,
+        "flat_mean_scored_items": 69.875,
+        "hill_mean_scored_items": 52.1875,
+        "hill_candidate_fraction": 0.1449652777777778,
+        "test_time_training_nodes": 34
+      },
+      "paper_results": {
+        "two_layer_monn_medium_small_online_metric_percent": 2.57,
+        "two_layer_monn_small_small_online_metric_percent": 1.22
+      },
+      "scope": "实际学习 coarse attention assignment、跨层 residual quantization、层级 beam 检索，并与同公开切分的单层索引比较候选量和质量；未复刻 Meta MoNN、十亿级 Ads 索引和分布式 FAISS EM。",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2604.12965",
+        "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
+        "url": "https://arxiv.org/abs/2604.12965",
+        "organization": "Meta"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "hill-index",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "one-layer learned index",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.04988833268900992,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.10454545454545454
+      },
+      "method": {
+        "name": "HILL residual two-layer index",
+        "hit_at_10": 0.05,
+        "ndcg_at_10": 0.03448482384798187,
+        "fresh_hit_at_10": 0.015873015873015872,
+        "head_share_at_10": 0.10954545454545454
+      },
+      "relative": {
+        "hit_at_10_percent": -47.61904761904762,
+        "ndcg_at_10_percent": -30.875974422815986,
+        "fresh_hit_at_10_percent": -66.66666666666667,
+        "head_share_at_10_percent": 4.782608695652178
+      },
+      "stages": {
+        "coarse_nodes": 6,
+        "residual_children_per_node": 6,
+        "flat_mean_scored_items": 60.046875,
+        "hill_mean_scored_items": 78.15625,
+        "hill_candidate_fraction": 0.21710069444444444,
+        "test_time_training_nodes": 27
+      },
+      "paper_results": {
+        "two_layer_monn_medium_small_online_metric_percent": 2.57,
+        "two_layer_monn_small_small_online_metric_percent": 1.22
+      },
+      "scope": "实际学习 coarse attention assignment、跨层 residual quantization、层级 beam 检索，并与同公开切分的单层索引比较候选量和质量；未复刻 Meta MoNN、十亿级 Ads 索引和分布式 FAISS EM。",
+      "seed": 44
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.09999999999999999,
+      "std": 0.007872958216222165,
+      "ci95": 0.008909090909090905,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.05381226887983039,
+      "std": 0.003448196526835189,
+      "ci95": 0.003902001698254577,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.06349206349206349,
+      "std": 0.015873015873015872,
+      "ci95": 0.017962008374788358,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.10681818181818181,
+      "std": 0.0047455938676866155,
+      "ci95": 0.0053701449980680695,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.06060606060606061,
+      "std": 0.014611592062110537,
+      "ci95": 0.016534572956283095,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.03862559829871274,
+      "std": 0.0059299880674118875,
+      "ci95": 0.006710413205742584,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.026455026455026454,
+      "std": 0.009164289987136916,
+      "ci95": 0.01037037037037037,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.10424242424242425,
+      "std": 0.006958159092851536,
+      "ci95": 0.00787389824963127,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": -38.88888888888889,
+      "std": 17.224233662071985,
+      "ci95": 19.49105524510926,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": -28.36880667634779,
+      "std": 8.003601784317592,
+      "ci95": 9.056928023538168,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": -58.88888888888889,
+      "std": 8.388704928078614,
+      "ci95": 9.492713254821915,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -2.1057521171937674,
+      "std": 10.483005165322375,
+      "ci95": 11.862637074065617,
+      "n": 3
+    },
+    "stages.coarse_nodes": {
+      "mean": 6.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.residual_children_per_node": {
+      "mean": 6.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.flat_mean_scored_items": {
+      "mean": 63.75,
+      "std": 5.342950415325319,
+      "ci95": 6.046117566687596,
+      "n": 3
+    },
+    "stages.hill_mean_scored_items": {
+      "mean": 71.40625,
+      "std": 16.887755595771157,
+      "ci95": 19.11029446888509,
+      "n": 3
+    },
+    "stages.hill_candidate_fraction": {
+      "mean": 0.19835069444444445,
+      "std": 0.046910432210475424,
+      "ci95": 0.05308415130245857,
+      "n": 3
+    },
+    "stages.test_time_training_nodes": {
+      "mean": 29.666666666666668,
+      "std": 3.7859388972001824,
+      "ci95": 4.28419316921064,
+      "n": 3
+    },
+    "paper_results.two_layer_monn_medium_small_online_metric_percent": {
+      "mean": 2.57,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.two_layer_monn_small_small_online_metric_percent": {
+      "mean": 1.22,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:hill-index"
+}

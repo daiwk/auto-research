@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "scalr",
+  "arxiv_id": "2606.00282",
+  "title": "Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2606.00282",
+  "organization": "Meta",
+  "published": "2026-05-29",
+  "upstream_code": "否：论文与 arXiv 页面未提供官方/作者实现（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "cross-domain",
+    "synthetic-data",
+    "sampling",
+    "conversion",
+    "data-augmentation"
+  ],
+  "local_code": "src/auto_research/reproductions/scalr",
+  "documentation": "docs/reproductions/2606.00282-scalr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items; genre-derived domains)"
+  ],
+  "baseline": "deterministic top-k translation under the identical source events and candidate catalog",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "head_share_at_10",
+    "synthetic_catalog_coverage"
+  ],
+  "mechanisms": [
+    "Meta cross-product logs",
+    "production conversion model",
+    "multi-source generation service"
+  ],
+  "evolve_operators": [
+    "data:scalr"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "key": "semantic-native-longseq",
+  "arxiv_id": "2606.07546",
+  "title": "Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling",
+  "paper_url": "https://arxiv.org/abs/2606.07546",
+  "organization": "Google",
+  "published": "2026-05-04",
+  "upstream_code": "否：论文与 arXiv 页面未提供官方/作者实现（核查日期：2026-09-01）",
+  "track": "recommendation",
+  "topics": [
+    "long-sequence",
+    "semantic-id",
+    "rq-vae",
+    "efficient-transformer",
+    "cold-start"
+  ],
+  "local_code": "src/auto_research/reproductions/semantic_native_longseq",
+  "documentation": "docs/reproductions/2606.07546-semantic-native-longseq/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "12-event item-ID feature attention under the same public split and full catalog",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "head_share_at_10",
+    "attention_pair_reduction"
+  ],
+  "mechanisms": [
+    "Google production RQ-VAE",
+    "2,000-event private video histories",
+    "hybrid asynchronous serving stack"
+  ],
+  "evolve_operators": [
+    "rankmixer_semantic_native_longseq"
+  ]
+}

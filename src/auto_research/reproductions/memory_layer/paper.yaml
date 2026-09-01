@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "key": "memory-layer",
+  "arxiv_id": "2607.25110",
+  "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
+  "paper_url": "https://arxiv.org/abs/2607.25110",
+  "organization": "Meta / Instagram Reels",
+  "published": "2026-07-27",
+  "upstream_code": "是：[TorchRec](https://github.com/meta-pytorch/torchrec/)",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "training-serving-consistency",
+    "cold-start",
+    "cache",
+    "serving"
+  ],
+  "local_code": "src/auto_research/reproductions/memory_layer",
+  "documentation": "docs/reproductions/2607.25110-memory-layer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K (220 users / 360 items)"
+  ],
+  "baseline": "same item tower with an external early frozen cache and no always-on miss path",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "head_share_at_10",
+    "snapshot_coverage",
+    "memory_coverage"
+  ],
+  "mechanisms": [
+    "Meta MPZCH distributed storage",
+    "raw embedding streaming",
+    "Instagram private logs"
+  ],
+  "evolve_operators": [
+    "rankmixer_memory_layer"
+  ]
+}

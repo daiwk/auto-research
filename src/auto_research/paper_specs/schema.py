@@ -39,7 +39,11 @@ class PaperSpec:
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
         for key in (
-            "topics", "datasets", "metrics", "mechanisms", "evolve_operators",
+            "topics",
+            "datasets",
+            "metrics",
+            "mechanisms",
+            "evolve_operators",
         ):
             payload[key] = list(payload[key])
         return payload
@@ -56,8 +60,7 @@ def _documentation_path(root: Path, adapter: ReproductionAdapter) -> str:
     candidates = [path for path in documents if path.parent.name == needle]
     if not candidates:
         candidates = [
-            path for path in documents
-            if path.parent.name.startswith(f"{adapter.paper.arxiv_id}-")
+            path for path in documents if path.parent.name.startswith(f"{adapter.paper.arxiv_id}-")
         ]
     return candidates[0].relative_to(root).as_posix() if candidates else ""
 
@@ -70,13 +73,10 @@ def adapter_directory(adapter: ReproductionAdapter, root: Path) -> Path:
     matches = []
     key_pattern = re.compile(rf"\bkey\s*=\s*['\"]{re.escape(adapter.key)}['\"]")
     for path in base.glob("*/adapter.py"):
-        module = importlib.import_module(
-            f"auto_research.reproductions.{path.parent.name}.adapter"
-        )
-        if (
-            getattr(getattr(module, "ADAPTER", None), "key", None) == adapter.key
-            or key_pattern.search(path.read_text(encoding="utf-8"))
-        ):
+        module = importlib.import_module(f"auto_research.reproductions.{path.parent.name}.adapter")
+        if getattr(
+            getattr(module, "ADAPTER", None), "key", None
+        ) == adapter.key or key_pattern.search(path.read_text(encoding="utf-8")):
             matches.append(path.parent)
     if len(matches) != 1:
         raise ValueError(
@@ -112,23 +112,36 @@ def spec_from_adapter(adapter: ReproductionAdapter, root: Path) -> PaperSpec:
     if not DATE_PATTERN.match(published):
         published = _exact_date_from_document(root, documentation)
     organization = paper.organization or _field_from_document(
-        root, documentation, ("公司/机构", "机构/公司/学校", "机构"),
+        root,
+        documentation,
+        ("公司/机构", "机构/公司/学校", "机构"),
     )
     upstream_code = paper.code_url or _field_from_document(
-        root, documentation, ("原文开源代码", "原作者开源代码"),
+        root,
+        documentation,
+        ("原文开源代码", "原作者开源代码"),
     )
     mechanism = tuple(adapter.omitted_core_components) or (paper.title,)
     return PaperSpec(
-        schema_version=1, key=adapter.key, arxiv_id=paper.arxiv_id,
-        title=paper.title, paper_url=paper.url,
+        schema_version=1,
+        key=adapter.key,
+        arxiv_id=paper.arxiv_id,
+        title=paper.title,
+        paper_url=paper.url,
         organization=organization or "not listed in paper",
         published=published,
         upstream_code=upstream_code or "not released / not found",
-        track=paper.track, topics=paper.topics, local_code=module_path,
+        track=paper.track,
+        topics=paper.topics,
+        local_code=module_path,
         documentation=documentation,
-        fidelity=adapter.fidelity.value, evaluation_tier=adapter.evaluation_tier.value,
-        datasets=adapter.datasets, baseline=adapter.baseline or "not declared",
-        metrics=adapter.metrics, mechanisms=mechanism,
+        fidelity=adapter.fidelity.value,
+        evaluation_tier=adapter.evaluation_tier.value,
+        datasets=adapter.datasets,
+        baseline=adapter.baseline or "not declared",
+        metrics=adapter.metrics,
+        mechanisms=mechanism,
+        evolve_operators=adapter.evolve_operators,
     )
 
 
@@ -147,16 +160,24 @@ def load_spec(path: Path) -> PaperSpec:
 
 
 def validate_spec(
-    spec: PaperSpec, *, root: Path | None = None,
+    spec: PaperSpec,
+    *,
+    root: Path | None = None,
     adapter: ReproductionAdapter | None = None,
 ) -> list[str]:
     errors: list[str] = []
     required = {
-        "key": spec.key, "arxiv_id": spec.arxiv_id, "title": spec.title,
-        "paper_url": spec.paper_url, "organization": spec.organization,
-        "published": spec.published, "upstream_code": spec.upstream_code,
-        "track": spec.track, "local_code": spec.local_code,
-        "documentation": spec.documentation, "baseline": spec.baseline,
+        "key": spec.key,
+        "arxiv_id": spec.arxiv_id,
+        "title": spec.title,
+        "paper_url": spec.paper_url,
+        "organization": spec.organization,
+        "published": spec.published,
+        "upstream_code": spec.upstream_code,
+        "track": spec.track,
+        "local_code": spec.local_code,
+        "documentation": spec.documentation,
+        "baseline": spec.baseline,
     }
     errors.extend(f"{key} is required" for key, value in required.items() if not value)
     if spec.schema_version != 1:
@@ -168,13 +189,18 @@ def validate_spec(
     if not spec.metrics:
         errors.append("at least one metric is required")
     if root:
-        for label, value in (("local_code", spec.local_code), ("documentation", spec.documentation)):
+        for label, value in (
+            ("local_code", spec.local_code),
+            ("documentation", spec.documentation),
+        ):
             if value and not (root / value).exists():
                 errors.append(f"{label} does not exist: {value}")
     if adapter:
         expected = {
-            "key": adapter.key, "arxiv_id": adapter.paper.arxiv_id,
-            "title": adapter.paper.title, "paper_url": adapter.paper.url,
+            "key": adapter.key,
+            "arxiv_id": adapter.paper.arxiv_id,
+            "title": adapter.paper.title,
+            "paper_url": adapter.paper.url,
             "track": adapter.paper.track,
         }
         for key, value in expected.items():
