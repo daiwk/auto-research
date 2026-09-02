@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "egr",
+  "arxiv_id": "2607.23038",
+  "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+  "paper_url": "https://arxiv.org/abs/2607.23038",
+  "organization": "Snap Inc.",
+  "published": "2026-07-25",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "generative-retrieval",
+    "shared-encoder"
+  ],
+  "local_code": "src/auto_research/reproductions/egr",
+  "documentation": "docs/reproductions/2607.23038-egr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "separate transition/content retrieval",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "shared_encoder_passes",
+    "indexed_items"
+  ],
+  "mechanisms": [
+    "shared production LLM",
+    "daily embedding pipeline",
+    "ANN serving"
+  ],
+  "evolve_operators": [
+    "head:embedding-native"
+  ]
+}

@@ -10819,6 +10819,74 @@
     },
     {
       "domain": "recommendation",
+      "key": "egr",
+      "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+      "paper_url": "https://arxiv.org/abs/2607.23038",
+      "detail_path": "reproductions/2607.23038-egr/README.md",
+      "topic": [
+        "retrieval",
+        "generative-retrieval",
+        "shared-encoder"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Snap Inc.",
+      "published": "2026-07-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "egr",
+        "arxiv_id": "2607.23038",
+        "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
+        "paper_url": "https://arxiv.org/abs/2607.23038",
+        "track": "recommendation",
+        "organization": "Snap Inc.",
+        "published": "2026-07-25",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "generative-retrieval",
+          "shared-encoder"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "separate transition/content retrieval",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "shared_encoder_passes",
+          "indexed_items"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Snap DPA",
+            "metric": "CVR",
+            "lift_percent": 2.91,
+            "traffic": "two-week test; 10%/10% traffic split",
+            "source_url": "https://arxiv.org/html/2607.23038v1",
+            "source_location": "Section 4.5, Table 6",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "ektm",
       "title": "Effective Knowledge Transfer for Multi-Task Recommendation Models",
       "paper_url": "https://arxiv.org/abs/2605.05730",
@@ -10877,6 +10945,74 @@
             "source_url": "https://arxiv.org/html/2605.05730v1",
             "source_location": "Section 4.4.2 / Figure 3",
             "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "elise",
+      "title": "Multilingual Semantic Retrieval for Apple Music Search",
+      "paper_url": "https://arxiv.org/abs/2607.10239",
+      "detail_path": "reproductions/2607.10239-elise/README.md",
+      "topic": [
+        "search",
+        "multilingual-retrieval",
+        "score-calibration"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Apple",
+      "published": "2026-07-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "elise",
+        "arxiv_id": "2607.10239",
+        "title": "Multilingual Semantic Retrieval for Apple Music Search",
+        "paper_url": "https://arxiv.org/abs/2607.10239",
+        "track": "recommendation",
+        "organization": "Apple",
+        "published": "2026-07-11",
+        "code_url": null,
+        "topics": [
+          "search",
+          "multilingual-retrieval",
+          "score-calibration"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "lexical/token-index retrieval",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "retrieval_sources",
+          "quantile_matched"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Apple Music worldwide search",
+            "metric": "Conversion Rate",
+            "lift_percent": 2.28,
+            "traffic": "18-day test; 10% treatment and 10% control",
+            "source_url": "https://arxiv.org/html/2607.10239v1",
+            "source_location": "Section 7.2, Table 8",
+            "retrieved_at": "2026-09-02"
           }
         ],
         "selection_exception": null,
@@ -17074,6 +17210,74 @@
     },
     {
       "domain": "recommendation",
+      "key": "onerank",
+      "title": "OneRank: Unified Transformer-Native Ranking Architecture for Multi-Task Recommendation",
+      "paper_url": "https://arxiv.org/abs/2606.16838",
+      "detail_path": "reproductions/2606.16838-onerank/README.md",
+      "topic": [
+        "ranking",
+        "multi-task",
+        "transformer"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Renmin University of China",
+      "published": "2026-06-15",
+      "code": null,
+      "adapter": {
+        "adapter_key": "onerank",
+        "arxiv_id": "2606.16838",
+        "title": "OneRank: Unified Transformer-Native Ranking Architecture for Multi-Task Recommendation",
+        "paper_url": "https://arxiv.org/abs/2606.16838",
+        "track": "recommendation",
+        "organization": "Renmin University of China",
+        "published": "2026-06-15",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "multi-task",
+          "transformer"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "Transformer encoder plus separate task predictor",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "task_private_channels",
+          "gradient_detach_boundaries"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Shopee personalized ranking",
+            "metric": "GMV per user",
+            "lift_percent": 1.01,
+            "traffic": "seven-day test; 10% treatment and 10% control",
+            "source_url": "https://arxiv.org/html/2606.16838v1",
+            "source_location": "Section 4.5, Table 3",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "oneranker",
       "title": "OneRanker: Unified Generation and Ranking with One Model in Industrial Advertising Recommendation",
       "paper_url": "https://arxiv.org/abs/2603.02999",
@@ -17644,6 +17848,74 @@
             "source_url": "https://arxiv.org/html/2605.21752v1",
             "source_location": "paper online evaluation section",
             "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "piano",
+      "title": "PIANO: Personalized Reranking via Information Aggregation Node for Music Search Optimization",
+      "paper_url": "https://arxiv.org/abs/2606.16641",
+      "detail_path": "reproductions/2606.16641-piano/README.md",
+      "topic": [
+        "search",
+        "reranking",
+        "listwise"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "NetEase Cloud Music",
+      "published": "2026-06-15",
+      "code": null,
+      "adapter": {
+        "adapter_key": "piano",
+        "arxiv_id": "2606.16641",
+        "title": "PIANO: Personalized Reranking via Information Aggregation Node for Music Search Optimization",
+        "paper_url": "https://arxiv.org/abs/2606.16641",
+        "track": "recommendation",
+        "organization": "NetEase Cloud Music",
+        "published": "2026-06-15",
+        "code_url": null,
+        "topics": [
+          "search",
+          "reranking",
+          "listwise"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "pointwise personalized reranker",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "interest_refiner",
+          "information_nodes"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "NetEase Cloud Music search",
+            "metric": "CVR",
+            "lift_percent": 4.45,
+            "traffic": "multi-week stable-bucket experiment",
+            "source_url": "https://arxiv.org/html/2606.16641v1",
+            "source_location": "Section 5.1, Table 6",
+            "retrieved_at": "2026-09-02"
           }
         ],
         "selection_exception": null,
@@ -18331,6 +18603,74 @@
     },
     {
       "domain": "recommendation",
+      "key": "poem",
+      "title": "POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation",
+      "paper_url": "https://arxiv.org/abs/2606.29946",
+      "detail_path": "reproductions/2606.29946-poem/README.md",
+      "topic": [
+        "sequential-recommendation",
+        "partial-order",
+        "real-time"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou",
+      "published": "2026-06-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "poem",
+        "arxiv_id": "2606.29946",
+        "title": "POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation",
+        "paper_url": "https://arxiv.org/abs/2606.29946",
+        "track": "recommendation",
+        "organization": "Kuaishou",
+        "published": "2026-06-29",
+        "code_url": null,
+        "topics": [
+          "sequential-recommendation",
+          "partial-order",
+          "real-time"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "chronological sequential ranking",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "ranking_signals",
+          "partial_order_pairs"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou main page",
+            "metric": "Usage Time per User",
+            "lift_percent": 0.249,
+            "traffic": "seven-day test; 5% treatment and 5% control",
+            "source_url": "https://arxiv.org/html/2606.29946v1",
+            "source_location": "Section 4.2.3, Table 5",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "precise",
       "title": "PRECISE: Pre-training Sequential Recommenders with Collaborative and Semantic Information",
       "paper_url": "https://arxiv.org/abs/2412.06308",
@@ -19010,6 +19350,74 @@
             "traffic": "online A/B",
             "source_url": "https://arxiv.org/abs/2506.07261",
             "source_location": "original paper online-result disclosure: product=Meta recommendation product; metric=Engagement"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "rag-generation",
+      "title": "Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale",
+      "paper_url": "https://arxiv.org/abs/2606.25496",
+      "detail_path": "reproductions/2606.25496-rag-generation/README.md",
+      "topic": [
+        "generative-recommendation",
+        "semantic-id",
+        "video-generation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou / Beihang University",
+      "published": "2026-06-24",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rag-generation",
+        "arxiv_id": "2606.25496",
+        "title": "Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale",
+        "paper_url": "https://arxiv.org/abs/2606.25496",
+        "track": "recommendation",
+        "organization": "Kuaishou / Beihang University",
+        "published": "2026-06-24",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "semantic-id",
+          "video-generation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "fixed-catalog generative recommendation",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "sid_levels",
+          "sid_width"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou advertising",
+            "metric": "Ad Revenue vs GRM",
+            "lift_percent": 1.87,
+            "traffic": "large-scale production A/B test",
+            "source_url": "https://arxiv.org/html/2606.25496v1",
+            "source_location": "Section 4.1, Table 1",
+            "retrieved_at": "2026-09-02"
           }
         ],
         "selection_exception": null,
@@ -21687,6 +22095,74 @@
     },
     {
       "domain": "recommendation",
+      "key": "specformer",
+      "title": "SpecFormer: Mitigating Embedding and Attention Collapse via Spectral-Aware Transformer for Recommendation",
+      "paper_url": "https://arxiv.org/abs/2607.24025",
+      "detail_path": "reproductions/2607.24025-specformer/README.md",
+      "topic": [
+        "ranking",
+        "transformer",
+        "spectral-softening"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Zhejiang University",
+      "published": "2026-07-27",
+      "code": null,
+      "adapter": {
+        "adapter_key": "specformer",
+        "arxiv_id": "2607.24025",
+        "title": "SpecFormer: Mitigating Embedding and Attention Collapse via Spectral-Aware Transformer for Recommendation",
+        "paper_url": "https://arxiv.org/abs/2607.24025",
+        "track": "recommendation",
+        "organization": "Zhejiang University",
+        "published": "2026-07-27",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "transformer",
+          "spectral-softening"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "standard Transformer/DLRM-style interaction",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "spectral_condition_before",
+          "softened_rank"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Alibaba e-commerce advertising",
+            "metric": "CTR",
+            "lift_percent": 1.34,
+            "traffic": "10-day test; 10% production traffic",
+            "source_url": "https://arxiv.org/html/2607.24025v1",
+            "source_location": "Section V-F, Table V",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "steps",
       "title": "A Self-Triggered Agentic Push Recommendation System",
       "paper_url": "https://arxiv.org/abs/2608.01949",
@@ -23149,6 +23625,74 @@
     },
     {
       "domain": "recommendation",
+      "key": "uniformer",
+      "title": "UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation",
+      "paper_url": "https://arxiv.org/abs/2606.27058",
+      "detail_path": "reproductions/2606.27058-uniformer/README.md",
+      "topic": [
+        "ranking",
+        "feature-tokenization",
+        "multi-task"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou",
+      "published": "2026-06-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "uniformer",
+        "arxiv_id": "2606.27058",
+        "title": "UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation",
+        "paper_url": "https://arxiv.org/abs/2606.27058",
+        "track": "recommendation",
+        "organization": "Kuaishou",
+        "published": "2026-06-25",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "feature-tokenization",
+          "multi-task"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "single-space feature interaction",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "feature_spaces",
+          "task_tokens"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou Lite",
+            "metric": "Watch Time",
+            "lift_percent": 1.113,
+            "traffic": "seven-day test; 5% production traffic",
+            "source_url": "https://arxiv.org/html/2606.27058v1",
+            "source_location": "Section 5.6, Table 2",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "unir2",
       "title": "Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence",
       "paper_url": "https://arxiv.org/abs/2607.24439",
@@ -23746,6 +24290,74 @@
             "traffic": "two-week A/B; millions of daily users per arm",
             "source_url": "https://arxiv.org/abs/2607.23749",
             "source_location": "original paper online-result disclosure: product=YouTube Music homepage; metric=1-day new-release engagement"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "zorro",
+      "title": "ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation",
+      "paper_url": "https://arxiv.org/abs/2607.10910",
+      "detail_path": "reproductions/2607.10910-zorro/README.md",
+      "topic": [
+        "news-recommendation",
+        "training-free",
+        "recency"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Technical University of Denmark",
+      "published": "2026-07-12",
+      "code": null,
+      "adapter": {
+        "adapter_key": "zorro",
+        "arxiv_id": "2607.10910",
+        "title": "ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation",
+        "paper_url": "https://arxiv.org/abs/2607.10910",
+        "track": "recommendation",
+        "organization": "Technical University of Denmark",
+        "published": "2026-07-12",
+        "code_url": null,
+        "topics": [
+          "news-recommendation",
+          "training-free",
+          "recency"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "most-popular/content-transition ranker",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "trainable_parameters",
+          "history_items"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Ekstra Bladet",
+            "metric": "CTR",
+            "lift_percent": 4.19,
+            "traffic": "six-day live test; 45% treatment traffic",
+            "source_url": "https://arxiv.org/html/2607.10910v1",
+            "source_location": "Section 4.3, Table 7",
+            "retrieved_at": "2026-09-02"
           }
         ],
         "selection_exception": null,

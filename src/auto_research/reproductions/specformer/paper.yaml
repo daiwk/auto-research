@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "specformer",
+  "arxiv_id": "2607.24025",
+  "title": "SpecFormer: Mitigating Embedding and Attention Collapse via Spectral-Aware Transformer for Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.24025",
+  "organization": "Zhejiang University",
+  "published": "2026-07-27",
+  "upstream_code": "是：[istarryn/SpecFormer](https://github.com/istarryn/SpecFormer)",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "transformer",
+    "spectral-softening"
+  ],
+  "local_code": "src/auto_research/reproductions/specformer",
+  "documentation": "docs/reproductions/2607.24025-specformer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "standard Transformer/DLRM-style interaction",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "spectral_condition_before",
+    "softened_rank"
+  ],
+  "mechanisms": [
+    "97M production stack",
+    "distributed dynamic embeddings",
+    "FlashAttention serving"
+  ],
+  "evolve_operators": [
+    "context:spectral-soften"
+  ]
+}

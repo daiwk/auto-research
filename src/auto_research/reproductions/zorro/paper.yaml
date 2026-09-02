@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "zorro",
+  "arxiv_id": "2607.10910",
+  "title": "ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation",
+  "paper_url": "https://arxiv.org/abs/2607.10910",
+  "organization": "Technical University of Denmark",
+  "published": "2026-07-12",
+  "upstream_code": "是：[johanneskruse/zorro](https://github.com/johanneskruse/zorro)",
+  "track": "recommendation",
+  "topics": [
+    "news-recommendation",
+    "training-free",
+    "recency"
+  ],
+  "local_code": "src/auto_research/reproductions/zorro",
+  "documentation": "docs/reproductions/2607.10910-zorro/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "most-popular/content-transition ranker",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "trainable_parameters",
+    "history_items"
+  ],
+  "mechanisms": [
+    "Ekstra Bladet live candidate service",
+    "publisher embeddings",
+    "AWS Fargate stack"
+  ],
+  "evolve_operators": [
+    "context:zero-weight"
+  ]
+}

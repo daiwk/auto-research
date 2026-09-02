@@ -7,6 +7,15 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2607.24025": ("context:spectral-soften", "SpecFormer 的谱软化表征与谱残差位置信息"),
+    "2607.23038": ("head:embedding-native", "EGR 的共享编码器、索引向量与查询向量联合空间"),
+    "2607.10910": ("context:zero-weight", "ZoRRO 的零训练参数 recency 与内容相似度组合"),
+    "2607.10239": ("context:quantile-fusion", "ELISE 的 dense/lexical 分位数分布匹配融合"),
+    "2606.29946": ("context:partial-order", "POEM 的实时多信号偏序行为序列"),
+    "2606.27058": ("context:unified-token", "UniFormer 的特征空间拆分与统一任务 token 交互"),
+    "2606.25496": ("head:disentangled-sid", "RaG 的解耦语义 ID 与兴趣条件生成接口"),
+    "2606.16838": ("head:unified-ranker", "OneRank 的 Transformer-native 多任务私有通道"),
+    "2606.16641": ("head:listwise-node", "PIANO 的 query-driven interest refiner 与信息聚合节点"),
     "2608.12778": (
         "reward:robust-preference",
         "DrEM 的监督侧 flip-risk 修正与特征侧 preference-preserving consistency",

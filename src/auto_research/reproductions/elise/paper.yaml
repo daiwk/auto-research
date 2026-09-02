@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "elise",
+  "arxiv_id": "2607.10239",
+  "title": "Multilingual Semantic Retrieval for Apple Music Search",
+  "paper_url": "https://arxiv.org/abs/2607.10239",
+  "organization": "Apple",
+  "published": "2026-07-11",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "search",
+    "multilingual-retrieval",
+    "score-calibration"
+  ],
+  "local_code": "src/auto_research/reproductions/elise",
+  "documentation": "docs/reproductions/2607.10239-elise/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "lexical/token-index retrieval",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "retrieval_sources",
+    "quantile_matched"
+  ],
+  "mechanisms": [
+    "GTE multilingual checkpoint fine-tuning",
+    "Apple catalog annotations",
+    "global storefront serving"
+  ],
+  "evolve_operators": [
+    "context:quantile-fusion"
+  ]
+}
