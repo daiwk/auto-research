@@ -110,6 +110,7 @@ METHODS = (
     "redevoagent",
     "ace-data",
     "deeprepro",
+    "draco",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

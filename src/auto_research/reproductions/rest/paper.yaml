@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "rest",
+  "arxiv_id": "2609.01240",
+  "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
+  "paper_url": "https://arxiv.org/abs/2609.01240",
+  "organization": "ByteDance",
+  "published": "2026-09-01",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "ranking-network",
+    "long-sequence",
+    "shared-prefix-serving"
+  ],
+  "local_code": "src/auto_research/reproductions/rest",
+  "documentation": "docs/reproductions/2609.01240-rest/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private behavior logs",
+    "production sequence checkpoint",
+    "shared-prefix serving kernel"
+  ],
+  "evolve_operators": [
+    "context:rest-dual-gate"
+  ]
+}

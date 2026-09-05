@@ -74,6 +74,7 @@
 - [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
 ### 生成式召回与端到端推荐
+- [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
 - [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
 - [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。
 - [Sona](../2608.11015-sona/README.md)：以历史压缩、层级 Semantic ID 生成和 item ranking 统一原有音乐推荐级联。
@@ -139,6 +140,7 @@
 - [TIGER](../2305.05065-tiger/README.md)：先用 RQ-VAE 构造层级 Semantic ID，再自回归生成目标物品。
 
 ### 排序网络与长序列
+- [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
 - [OneModel](../2608.18606-onemodel/README.md)：将推荐、广告与商家混合行为映射到共享序列模型，并以 SAIM 场景门控兼顾迁移和专门化。
 - [DrEM](../2608.12778-drem/README.md)：在 logit 扰动下反演 pair-label 翻转风险，并以一致性融合降低多目标排序漂移。
 - [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md)：让多个业务任务在长短双流的不同层级执行交互查询，而非仅共享底层编码。
@@ -312,6 +314,7 @@
 ## 内容理解、审核与风险控制
 
 ### 内容理解与语义表征
+- [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md)：用共同互动商品对训练对称多模态向量，使内容表征同时保留用户旅程中的行为相似性。
 - [Multimedia Asset Personalization via Multimodal Embeddings at Netflix](../2608.18322-netflix-mediafm/README.md)：把冻结多模态 embedding 接入统一资产双塔，并用查询相似度增强搜索画布打分。
 - [DME](../2608.02148-dme/README.md)：以对比预训练建立统一向量空间，再用 typed latent reasoning 和双向重建保留检索相关的细粒度多模态证据。
 - [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md)：通过三元组预训练、GRPO 行为对齐和 ID/多模态门控形成可部署表示。
@@ -370,6 +373,7 @@
 - [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
 
 ### 召回、触发与多通道路由
+- [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md)：把多兴趣召回改写为集合预测，以 presence gate 和 query-level NMS 动态减少重复 ANN 请求。
 - [CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval](../2602.12564-capts/README.md)：以价值感知匹配和跨渠道自适应路由选择 I2I 召回 trigger。
 - [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一 Airbnb 的体验推荐链路。
 

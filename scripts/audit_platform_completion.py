@@ -103,8 +103,11 @@ def audit() -> list[str]:
         seeds = protocol.get("seeds") or []
         if not seeds or not protocol.get("claim_policy"):
             errors.append(f"{relative}: incomplete evaluation protocol")
-        if protocol.get("formal_comparison") != (len(seeds) >= 3):
-            errors.append(f"{relative}: formal comparison contradicts seed count")
+        # Three or more seeds are necessary for a formal comparison, but are
+        # not sufficient: an L1 mechanism diagnostic can use multiple seeds
+        # solely to check determinism/stability without measuring capability.
+        if protocol.get("formal_comparison") and len(seeds) < 3:
+            errors.append(f"{relative}: formal comparison requires at least three seeds")
         provenance = payload.get("provenance") or {}
         if not provenance.get("artifact_path") or not provenance.get("dataset_fingerprint"):
             errors.append(f"{relative}: incomplete provenance")

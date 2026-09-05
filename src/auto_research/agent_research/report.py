@@ -4,6 +4,7 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "draco": ("DRACO", "https://arxiv.org/abs/2609.04094"),
     "redevoagent": ("RedEvoAgent", "https://arxiv.org/abs/2608.27439"),
     "ace-data": ("ACE Agentic Data", "https://arxiv.org/abs/2608.27260"),
     "deeprepro": ("DeepRepro", "https://arxiv.org/abs/2608.26557"),

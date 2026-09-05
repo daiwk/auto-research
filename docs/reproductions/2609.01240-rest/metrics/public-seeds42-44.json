@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "adapter": "rest",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.01240",
+        "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
+        "url": "https://arxiv.org/abs/2609.01240",
+        "organization": "ByteDance"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "rest",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "rest core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05371790401992833,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.21454545454545454
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -0.532471582615735,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -9.75143403441683
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "online_auc_lift_percent": 1.31,
+        "revenue_lift_percent": 11.93,
+        "p99_latency_ms": 50.0
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:rest",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.01240",
+        "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
+        "url": "https://arxiv.org/abs/2609.01240",
+        "organization": "ByteDance"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "rest",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "rest core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05371790401992833,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.21454545454545454
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -0.532471582615735,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -9.75143403441683
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "online_auc_lift_percent": 1.31,
+        "revenue_lift_percent": 11.93,
+        "p99_latency_ms": 50.0
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:rest",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.01240",
+        "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
+        "url": "https://arxiv.org/abs/2609.01240",
+        "organization": "ByteDance"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "rest",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "rest core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05371790401992833,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.21454545454545454
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -0.532471582615735,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -9.75143403441683
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "online_auc_lift_percent": 1.31,
+        "revenue_lift_percent": 11.93,
+        "p99_latency_ms": 50.0
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:rest",
+      "seed": 44
+    }
+  ],
+  "manifest_ref": "reproduction:rest",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.01240-rest/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

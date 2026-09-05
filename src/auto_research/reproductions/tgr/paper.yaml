@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "tgr",
+  "arxiv_id": "2609.00986",
+  "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.00986",
+  "organization": "Tencent",
+  "published": "2026-09-01",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "ranking-network",
+    "reason-token"
+  ],
+  "local_code": "src/auto_research/reproductions/tgr",
+  "documentation": "docs/reproductions/2609.00986-tgr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private semantic-ID catalog",
+    "production CCFormer checkpoint",
+    "online generative serving"
+  ],
+  "evolve_operators": [
+    "head:tgr-generation-reasoning"
+  ]
+}

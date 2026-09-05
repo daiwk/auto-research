@@ -4,6 +4,7 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "gapo": ("Group Adaptive Clipping Policy Optimization", "https://arxiv.org/abs/2609.00444"),
     "rlvr-fusion": ("Consolidating RLVR Capabilities Across Domains", "https://arxiv.org/abs/2608.27409"),
     "video-opsd": ("Video-OPSD", "https://arxiv.org/abs/2608.27065"),
     "normalized-dpo": ("Disentangling Optimization Scale from Preference Scale in DPO", "https://arxiv.org/abs/2608.27032"),

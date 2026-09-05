@@ -8226,6 +8226,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "camie",
+      "title": "CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval",
+      "paper_url": "https://arxiv.org/abs/2608.30255",
+      "detail_path": "reproductions/2608.30255-camie/README.md",
+      "topic": [
+        "multimodal-retrieval",
+        "co-engagement",
+        "advertising"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Snap Inc.",
+      "published": "2026-08-31",
+      "code": null,
+      "adapter": {
+        "adapter_key": "camie",
+        "arxiv_id": "2608.30255",
+        "title": "CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval",
+        "paper_url": "https://arxiv.org/abs/2608.30255",
+        "track": "recommendation",
+        "organization": "Snap Inc.",
+        "published": "2026-08-31",
+        "code_url": null,
+        "topics": [
+          "multimodal-retrieval",
+          "co-engagement",
+          "advertising"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/camie",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Snap Dynamic Product Ads",
+            "metric": "overall CVR",
+            "lift_percent": 1.911,
+            "traffic": "production deployment on overall DPA traffic",
+            "source_url": "https://arxiv.org/html/2608.30255v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:coengagement-embedding"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "capts",
       "title": "CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval",
       "paper_url": "https://arxiv.org/abs/2602.12564",
@@ -21831,6 +21901,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "rest",
+      "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
+      "paper_url": "https://arxiv.org/abs/2609.01240",
+      "detail_path": "reproductions/2609.01240-rest/README.md",
+      "topic": [
+        "ranking-network",
+        "long-sequence",
+        "shared-prefix-serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-09-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rest",
+        "arxiv_id": "2609.01240",
+        "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
+        "paper_url": "https://arxiv.org/abs/2609.01240",
+        "track": "recommendation",
+        "organization": "ByteDance",
+        "published": "2026-09-01",
+        "code_url": null,
+        "topics": [
+          "ranking-network",
+          "long-sequence",
+          "shared-prefix-serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rest",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "production advertising platform",
+            "metric": "core revenue metric",
+            "lift_percent": 11.93,
+            "traffic": "one-week online A/B; fully deployed",
+            "source_url": "https://arxiv.org/html/2609.01240v1",
+            "source_location": "Abstract; Section 3.5",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:rest-dual-gate"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "reward-guided-decoding",
       "title": "Reward Guided Decoding for Generative Recommendation",
       "paper_url": "https://arxiv.org/abs/2607.25344",
@@ -23088,6 +23228,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "setmir",
+      "title": "SetMIR: Multi-Interest Retrieval as Set Prediction",
+      "paper_url": "https://arxiv.org/abs/2608.30251",
+      "detail_path": "reproductions/2608.30251-setmir/README.md",
+      "topic": [
+        "multi-interest-retrieval",
+        "set-prediction",
+        "dynamic-dispatch"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Snap Inc.",
+      "published": "2026-08-31",
+      "code": null,
+      "adapter": {
+        "adapter_key": "setmir",
+        "arxiv_id": "2608.30251",
+        "title": "SetMIR: Multi-Interest Retrieval as Set Prediction",
+        "paper_url": "https://arxiv.org/abs/2608.30251",
+        "track": "recommendation",
+        "organization": "Snap Inc.",
+        "published": "2026-08-31",
+        "code_url": null,
+        "topics": [
+          "multi-interest-retrieval",
+          "set-prediction",
+          "dynamic-dispatch"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/setmir",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Snap Dynamic Product Ads",
+            "metric": "overall CVR",
+            "lift_percent": 3.1,
+            "traffic": "deployed production retrieval source",
+            "source_url": "https://arxiv.org/html/2608.30251v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:setmir-query-set"
+        ]
       }
     },
     {
@@ -24556,6 +24766,76 @@
         "selection_exception": null,
         "evolve_operators": [
           "reward:pareto-semantic-id"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "tgr",
+      "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+      "paper_url": "https://arxiv.org/abs/2609.00986",
+      "detail_path": "reproductions/2609.00986-tgr/README.md",
+      "topic": [
+        "generative-recommendation",
+        "ranking-network",
+        "reason-token"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent",
+      "published": "2026-09-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tgr",
+        "arxiv_id": "2609.00986",
+        "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+        "paper_url": "https://arxiv.org/abs/2609.00986",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-09-01",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "ranking-network",
+          "reason-token"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/tgr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Tencent production surfaces",
+            "metric": "advertising revenue",
+            "lift_percent": 1.71,
+            "traffic": "five A/B-tested scenarios; full launches",
+            "source_url": "https://arxiv.org/html/2609.00986v1",
+            "source_location": "Abstract and online results",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:tgr-generation-reasoning"
         ]
       }
     },

@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "adapter": "camie",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2608.30255",
+        "title": "CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval",
+        "url": "https://arxiv.org/abs/2608.30255",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "camie",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "camie core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.1,
+        "ndcg_at_10": 0.051212459197414434,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.17181818181818181
+      },
+      "relative": {
+        "hit_at_10_percent": -8.333333333333325,
+        "ndcg_at_10_percent": -5.17171446873312,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -27.72466539196941
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "overall_ctr_lift_percent": 0.211,
+        "overall_cvr_lift_percent": 1.911,
+        "multimodal_control_cvr_lift_percent": 10.832
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:camie",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.30255",
+        "title": "CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval",
+        "url": "https://arxiv.org/abs/2608.30255",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "camie",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "camie core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.1,
+        "ndcg_at_10": 0.051212459197414434,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.17181818181818181
+      },
+      "relative": {
+        "hit_at_10_percent": -8.333333333333325,
+        "ndcg_at_10_percent": -5.17171446873312,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -27.72466539196941
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "overall_ctr_lift_percent": 0.211,
+        "overall_cvr_lift_percent": 1.911,
+        "multimodal_control_cvr_lift_percent": 10.832
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:camie",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.30255",
+        "title": "CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval",
+        "url": "https://arxiv.org/abs/2608.30255",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "camie",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "camie core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.1,
+        "ndcg_at_10": 0.051212459197414434,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.17181818181818181
+      },
+      "relative": {
+        "hit_at_10_percent": -8.333333333333325,
+        "ndcg_at_10_percent": -5.17171446873312,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -27.72466539196941
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "overall_ctr_lift_percent": 0.211,
+        "overall_cvr_lift_percent": 1.911,
+        "multimodal_control_cvr_lift_percent": 10.832
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:camie",
+      "seed": 44
+    }
+  ],
+  "manifest_ref": "reproduction:camie",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.30255-camie/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

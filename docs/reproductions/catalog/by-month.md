@@ -2,7 +2,13 @@
 
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
+## 2026-09
+- [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
+- [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
+
 ## 2026-08
+- [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md)：用共同互动商品对训练对称多模态向量，使内容表征同时保留用户旅程中的行为相似性。
+- [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md)：把多兴趣召回改写为集合预测，以 presence gate 和 query-level NMS 动态减少重复 ANN 请求。
 - [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
 - [DCEO](../2608.25635-dceo/README.md)：以直接因果效应估计长期用户价值，并学习请求级多目标排序权重。
 - [TransRetrieval](../2608.25528-transretrieval/README.md)：用 target-token 压缩和多域归一化扩展 Transformer 工业召回。
@@ -229,15 +235,15 @@
 ## 2025-11
 - [DualGR](../2511.12518-dualgr/README.md)：长短兴趣双路由、约束 SID 和曝光感知生成召回。
 
-## 2025-09
-- [IntSR](../2509.21179-intsr/README.md)：显式/隐式意图和时间词表统一搜索与推荐生成。
-- [OnePiece](../2509.18091-onepiece/README.md)：上下文工程、块级 latent reasoning 和级联多任务排序。
-- [DRL-PUT](../2509.05292-drl-put/README.md)：从 logged ads behavior 学习相关性、新颖性和收益等排序 utility 的动态权重策略。
-
 ## 2025-10
 - [OneTrans](../2510.26104-onetrans/README.md)：用统一因果 Transformer 覆盖多场景排序，并复用 KV cache 降低线上推理成本。
 - [CRSD](../2510.11056-crsd/README.md)：用领域 reasoning teacher 和普通/推理双视图对比自蒸馏训练轻量在线学生。
 - [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。
+
+## 2025-09
+- [IntSR](../2509.21179-intsr/README.md)：显式/隐式意图和时间词表统一搜索与推荐生成。
+- [OnePiece](../2509.18091-onepiece/README.md)：上下文工程、块级 latent reasoning 和级联多任务排序。
+- [DRL-PUT](../2509.05292-drl-put/README.md)：从 logged ads behavior 学习相关性、新颖性和收益等排序 utility 的动态权重策略。
 
 ## 2025-08
 - [MPFormer](../2508.20400-mpformer/README.md)：任务条件化序列检索和资源自适应共享。

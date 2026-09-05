@@ -66,6 +66,7 @@
 - 2025-03 · [COBRA](../2503.02453-cobra/README.md)：先用稀疏生成缩小候选空间，再用稠密生成细排，形成级联式生成召回。
 
 ## ByteDance / Douyin / TikTok
+- 2026-09 · [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
 - 2026-08 · [TM20K](../2608.07055-tm20k/README.md)：教师保留完整行为 token，学生用连续合并和蒸馏压缩超长序列。
 - 2026-08 · [DME](../2608.02148-dme/README.md)：先做多模态对比预训练，再以 typed latent evidence 和 cross-conditional reconstruction 保留细粒度对侧语义。
 - 2026-08 · [STEPS](../2608.01949-steps/README.md)：用 ordinal planning、trajectory execution 与 filtering agent 闭合“是否推送—何时再唤醒”，并已在抖音全量部署。
@@ -333,6 +334,7 @@
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
 ## Tencent
+- 2026-09 · [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
 - 2026-04 · [RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems](../2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
 - 2026-02 · [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。
 - 2026-02 · [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
@@ -358,6 +360,8 @@
 - 2026-08 · [DrEM](../2608.12778-drem/README.md)：用偏好保持筛选、翻转风险反演和一致性融合稳定噪声 pxtr 集成排序。
 
 ## Snap Inc.
+- 2026-08 · [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md)：用共同互动商品对训练对称多模态向量，使内容表征同时保留用户旅程中的行为相似性。
+- 2026-08 · [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md)：把多兴趣召回改写为集合预测，以 presence gate 和 query-level NMS 动态减少重复 ANN 请求。
 - 2026-07 · [SnapLGR](../2607.28895-snaplgr/README.md)：把共参与传播、分层 residual SID、token grounding 和 SID SFT 组成生成式召回流水线。
 - 2026-07 · [EGR](../2607.23038-egr/README.md)：共享 LLM 联合编码 item 索引和 user query，并持续重叠训练 IRL/NIP。
 

@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md) | ByteDance，2026-09-01 | 未发现官方代码 | `rest` |
+| 生成、排序与冷启动 | [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md) | Tencent，2026-09-01 | 未发现官方代码 | `tgr` |
+| 内容理解、审核与风险控制 | [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md) | Snap Inc.，2026-08-31 | 未发现官方代码 | `camie` |
+| Serving 与研究基础设施 | [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md) | Snap Inc.，2026-08-31 | 未发现官方代码 | `setmir` |
 | 生成、排序与冷启动 | [Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling](../2608.27413-friend-gnn/README.md) | AI VK，2026-08-27 | [已开源](https://github.com/makut/VK-GNN) | `friend-gnn` |
 | 生成、排序与冷启动 | [DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search](../2608.25635-dceo/README.md) | Taobao & Tmall Group, Alibaba，2026-08-26 | 未发现官方代码 | `dceo` |
 | 生成、排序与冷启动 | [TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation](../2608.25528-transretrieval/README.md) | Renmin University of China / Taobao & Tmall Group, Alibaba，2026-08-26 | 未发现官方代码 | `transretrieval` |
