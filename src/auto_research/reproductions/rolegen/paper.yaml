@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "rolegen",
+  "arxiv_id": "2602.13134",
+  "title": "Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning",
+  "paper_url": "https://arxiv.org/abs/2602.13134",
+  "organization": "Beihang University",
+  "published": "2026-02-13",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "counterfactual-reasoning",
+    "dormant-users"
+  ],
+  "local_code": "src/auto_research/reproductions/rolegen",
+  "documentation": "docs/reproductions/2602.13134-rolegen/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "LLM trajectory reasoner",
+    "private dormant-user logs",
+    "reasoning-feedback serving loop"
+  ],
+  "evolve_operators": [
+    "reward:counterfactual-role"
+  ]
+}

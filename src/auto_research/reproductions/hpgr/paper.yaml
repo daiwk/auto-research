@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "hpgr",
+  "arxiv_id": "2603.00980",
+  "title": "Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations",
+  "paper_url": "https://arxiv.org/abs/2603.00980",
+  "organization": "Harbin Institute of Technology",
+  "published": "2026-03-01",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "hierarchical-sequence",
+    "sparse-attention"
+  ],
+  "local_code": "src/auto_research/reproductions/hpgr",
+  "documentation": "docs/reproductions/2603.00980-hpgr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "industrial pretraining corpus",
+    "production HSTU backbone",
+    "AppGallery serving stack"
+  ],
+  "evolve_operators": [
+    "context:hierarchical-preference"
+  ]
+}

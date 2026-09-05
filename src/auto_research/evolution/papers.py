@@ -7,6 +7,16 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2604.18146": ("head:modular-compression", "MARC 的任务解耦中层表征与低维压缩模块"),
+    "2604.17878": ("head:high-rank-representation", "RankUp 的随机置换多 embedding 与全局 token 高秩表征"),
+    "2604.10471": ("head:sid-coordination", "SID-Coord 的层级 SID、HID-SID 门控与兴趣对齐"),
+    "2603.28124": ("context:reverse-curriculum", "RCLRec 的转化相关逆序短课程与中间监督"),
+    "2603.21481": ("head:fine-grained-tags", "TagLLM 的兴趣手册、层级细粒度 tag 与知识蒸馏"),
+    "2603.19665": ("reward:facet-preference", "GenFacet 的分面生成、查询改写与检索偏好联合对齐"),
+    "2603.04227": ("reward:constraint-aware", "CGR 的可行域内生成与约束感知奖励剪枝"),
+    "2603.00980": ("context:hierarchical-preference", "HPGR 的 session 层级编码与偏好引导稀疏注意力"),
+    "2602.13581": ("context:instruction-foresight", "Climber-Pilot 的多步前瞻与条件引导稀疏注意力"),
+    "2602.13134": ("reward:counterfactual-role", "RoleGen 的功能角色反事实增益与闭环反馈"),
     "2606.10357": ("context:atomic-intent-tree", "AIR 的离线原子意图缓存、在线意图树与目标感知检索"),
     "2606.08466": ("reward:tool-calibration", "ToolRec 的用户侧与工具频率动态偏好校准"),
     "2606.06970": ("head:dynamic-sid", "SSRLive 的静态/动态语义 ID 与交互特征融合"),

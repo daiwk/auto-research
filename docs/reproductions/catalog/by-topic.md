@@ -32,6 +32,7 @@
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转为 LLM caption/token 特征，再注入推荐排序模型。
 - [UniVA](../2605.05803-univa/README.md)：以 Commercial SID 和 generation-as-ranking 统一广告生成，再用价值对齐 RL 优化收益。
 - [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：用端侧 LoRA+INT8 LLM 将近期行为生成为下一意图 query，并依据意图漂移按需触发推理。
+- [Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations](../2604.18146-marc/README.md)：从中间层抽取任务相关表征，显式解耦推荐适配与低维压缩。
 - [LWGR](../2605.18771-lwgr/README.md)：把个性化 soft instruction 注入 LLM 世界知识，并用拉格朗日约束完成分数融合。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来请求并异步缓存 foundation-model latent，把大模型计算移出线上请求路径。
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把源域大模型知识蒸馏到目标推荐域，实现零样本跨域迁移。
@@ -70,6 +71,7 @@
 - [TransRetrieval](../2608.25528-transretrieval/README.md)：通过 target-token 压缩、多域参数化与深层 Transformer 扩展工业检索。
 - [Policy-Grounded Dynamic Facet Suggestions](../2605.16479-policy-facet/README.md)：离线构建 facet taxonomy，在线按 query/member 召回并在策略约束下排序关键词。
 - [HILL](../2604.12965-hill-index/README.md)：用跨层 residual quantization 学习 coarse-to-fine 检索索引，减少候选打分量。
+- [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
 ### 生成式召回与端到端推荐
 - [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
@@ -105,6 +107,7 @@
 - [LWGR](../2605.18771-lwgr/README.md)：把 LLM 世界知识与推荐分数做约束融合，生成兼顾相关性与知识性的候选。
 - [UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute](../2604.12234-unirec-coa/README.md)：先生成属性链再生成容量受限 SID，并以 RFT/DPO 对齐业务目标。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由联合多个业务生成目标。
+- [RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation](../2603.28124-rclrec/README.md)：把转化相关行为逆序组成短课程，为稀疏转化增加中间监督。
 - [GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation](../2603.22916-gatesid/README.md)：用冷启动感知门控动态融合语义 SID 与协同行为信号。
 - [AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation](../2603.19710-aigq/README.md)：组合 Direct/Reasoning query 生成、IL-GRPO 与混合在线服务。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 与长短期双 prompt 直接生成召回候选，强化非习惯内容探索。
@@ -113,6 +116,7 @@
 - [GR4AD](../2602.22732-gr4ad/README.md)：结合用户感知 Semantic ID、LazyAR 和可变长度生成完成广告召回。
 - [SIGMA](../2602.22913-sigma/README.md)：以多视角 grounding 和混合 SID/ID token 进行多任务生成式推荐。
 - [MFLI](../2602.16124-mfli/README.md)：把语义、新鲜度等多个索引 facet 联合学习，并以请求相关 allocation 完成快速召回。
+- [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../2602.13581-climber-pilot/README.md)：将多步消费前瞻蒸馏到单步召回，并在注意力内注入业务指令。
 - [S-GRec](../2602.10606-s-grec/README.md)：用 LLM judge 生成个性化偏好监督，再通过 A2PO 蒸馏到 SID 生成器。
 - [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
 - [DOS](../2602.04460-dos/README.md)：以协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
@@ -161,10 +165,12 @@
 - [Memento](../2605.24051-memento/README.md)：用 query-conditioned MMR 动态平衡相关性与多样性。
 - [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
 - [Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md)：以层级语义 ID、bigram、时间折叠和 global-local pooling 扩展视频长历史。
+- [RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems](../2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
 - [UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking](../2603.24226-uniscale/README.md)：以 Entire-Space 数据和分层异构融合协同扩展搜索排序模型。
 - [HAP](../2603.03770-hap/README.md)：按候选难度分配轻量或强分支并对齐异构预排输出。
 - [SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders](../2603.03988-sort-ranking/README.md)：系统优化 token 化、注意力和 FFN，统一替代工业 DLRM 排序。
 - [OneRanker](../2603.02999-oneranker/README.md)：用 fake item token 和一致性损失统一 generation/value/ranking。
+- [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力建模长行为序列。
 - [HiSAC](../2602.21009-hisac/README.md)：用层级投票压缩超长历史，再以 query-conditioned soft routing 选择兴趣 agent。
 - [ULTRA-HSTU](../2602.16986-ultra-hstu/README.md)：以半局部 attention、LBSL 逐层扩窗和 Mixture of Transducers 扩展 16k 用户历史。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一网络中融合 dense 特征交互和序列建模，并按预算选择训练模块。
@@ -206,6 +212,7 @@
 - [Proximity Features](../2607.12246-proximity-features/README.md)：以自适应群体地理 key 聚合行为，为匿名和首次访问用户提供冷启动特征。
 - [Taiji](../2606.03866-taiji/README.md)：自适应融合语义匹配与协同信号，在冷启动覆盖和成熟内容精度之间选择 Pareto 工作点。
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：生成 creative 层级语义属性，并用 primary/shadow 机制稳定广告召回。
+- [SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search](../2604.10471-sid-coord/README.md)：以层级 SID、目标感知 HID–SID 门控和兴趣对齐增强长尾泛化。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把图文 contrastive learning 与 Pin-Board 共现邻居对齐，改善 fresh 内容表示。
 - [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享 organic stream 与 ads/promotion 表征，把高资源任务知识迁移到冷启动 podcast。
 - [SaviorRec](../2508.01375-saviorrec/README.md)：用行为监督训练内容 encoder，生成 RQ Semantic ID，再通过多行为模块对齐冷启动物品。
@@ -256,6 +263,7 @@
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。
 - [PA-Bridge](../2605.05855-pa-bridge/README.md)：约束主动搜索与被动推荐的分布距离，并保留两域各自可辨识的偏好信号。
 - [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md)：组合位置去偏、会话归因与作者周期任务建模长期价值。
+- [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
 
 ## 多阶段排序与混排
 
@@ -286,6 +294,7 @@
 - [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md)：以双头 Q 网络和 Pareto 扫描选择可治理的个性化多目标 utility 策略。
 - [GenRec](../2604.14878-genrec/README.md)：把整页结果作为生成目标，并联合 page reward 与 NLL 约束优化页面级决策。
 - [Dual-Rerank](../2604.07420-dual-rerank/README.md)：AR 教师刻画顺序依赖，NAR 学生并行推理并联合列表效用蒸馏。
+- [Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds](../2603.04227-cgr/README.md)：在自回归重排中直接执行约束感知奖励剪枝。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：利用 logged propensity 和策略梯度自动调节广告混排 utility 权重。
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：以 ordered regression 估计列表前缀价值，再按 CLICK/PAY 队列、mask 和 MMR 生成混排结果。
 - [CDM](../2406.09021-cdm/README.md)：用 MMR 教师生成可控多样性列表并蒸馏上下文边际收益。
@@ -298,6 +307,7 @@
 - [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md)：通过三元组预训练、GRPO 行为对齐和 ID/多模态门控形成可部署表示。
 - [FLUID](../2605.21832-fluid/README.md)：把直播内容切片量化为两级 LUCID，以内容表示替代生命周期很短的候选 ID。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把图像、视频等内容转换为 caption/token 特征，再注入推荐模型增强内容理解。
+- [TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation](../2603.21481-tagllm/README.md)：用用户兴趣手册约束细粒度多模态标签，并把生成能力蒸馏到小模型。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把图文对比学习与 Pin-Board 共现邻居目标结合，改善 fresh 内容表示。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容先对齐到 item-ID 协同空间，再通过多层 proxy 与 gate 接入排序。
 - [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md)：离线 MLLM 生成语义 anchor，轻量非对称模块注入直播排序。

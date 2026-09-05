@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "climber-pilot",
+  "arxiv_id": "2602.13581",
+  "title": "Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following",
+  "paper_url": "https://arxiv.org/abs/2602.13581",
+  "organization": "NetEase Cloud Music",
+  "published": "2026-02-14",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "generative-retrieval",
+    "long-horizon",
+    "instruction-following"
+  ],
+  "local_code": "src/auto_research/reproductions/climber_pilot",
+  "documentation": "docs/reproductions/2602.13581-climber-pilot/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "production generative retriever",
+    "private music sequences",
+    "business instruction service"
+  ],
+  "evolve_operators": [
+    "context:instruction-foresight"
+  ]
+}

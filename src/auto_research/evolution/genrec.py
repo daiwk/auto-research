@@ -173,6 +173,31 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
         facets = _genre_features(data)
         facet_projection = facets @ rng.normal(0.0, 0.2, (facets.shape[1], dimensions))
         return learned + semantic + 0.25 * facet_projection
+    if genome.genrec_head == "modular-compression":
+        nuisance = np.column_stack((np.ones(len(data.popularity)), np.log1p(data.popularity)))
+        residual = semantic - nuisance @ np.linalg.lstsq(nuisance, semantic, rcond=None)[0]
+        _, _, right = np.linalg.svd(residual, full_matrices=False)
+        width = max(2, dimensions // 2)
+        compressed = residual @ right[:width].T
+        projector = rng.normal(0.0, 1.0 / np.sqrt(width), (width, dimensions))
+        return learned + compressed @ projector
+    if genome.genrec_head == "high-rank-representation":
+        views = []
+        for _ in range(3):
+            permutation = rng.permutation(dimensions)
+            views.append(np.tanh(semantic[:, permutation] + rng.normal(0.0, 0.02, semantic.shape)))
+        global_token = semantic.mean(0, keepdims=True)
+        return learned + np.mean(views, axis=0) + 0.15 * global_token
+    if genome.genrec_head == "sid-coordination":
+        facets = _genre_features(data)
+        sid = facets @ rng.normal(0.0, 0.25, (facets.shape[1], dimensions))
+        tail_gate = 1.0 - data.popularity / max(float(data.popularity.max()), 1.0)
+        return learned * (1.0 - 0.55 * tail_gate[:, None]) + sid * (0.55 * tail_gate[:, None]) + 0.25 * semantic
+    if genome.genrec_head == "fine-grained-tags":
+        facets = _genre_features(data)
+        coarse = facets @ rng.normal(0.0, 0.20, (facets.shape[1], dimensions))
+        fine = np.tanh(semantic @ rng.normal(0.0, 0.18, (dimensions, dimensions)))
+        return learned + 0.35 * coarse + 0.45 * fine
     if genome.genrec_head == "semantic-catalog":
         return semantic
     if genome.genrec_head == "hybrid-catalog":
@@ -244,6 +269,28 @@ def _context(history, catalog, mode: str, maximum: int) -> tuple[np.ndarray, np.
         split = max(1, len(values) - min(4, len(values)))
         weights = np.full(len(values), 0.45 / split)
         weights[split:] = 0.55 / max(len(values) - split, 1)
+    elif mode == "reverse-curriculum":
+        values = values[-max(8, maximum):]
+        similarity = catalog[values] @ catalog[values[-1]]
+        chosen = np.argsort(-similarity)[: min(maximum, len(values))]
+        values = values[chosen][::-1]
+        weights = np.linspace(1.0, 0.35, len(values))
+    elif mode == "hierarchical-preference":
+        values = values[-max(8, maximum * 2):]
+        groups = np.array_split(np.arange(len(values)), min(4, len(values)))
+        query = catalog[values[-1]]
+        group_scores = np.asarray([catalog[values[group]].mean(0) @ query for group in groups])
+        group_scores = np.exp(group_scores - group_scores.max())
+        weights = np.zeros(len(values), dtype=np.float64)
+        for group, weight in zip(groups, group_scores):
+            local = catalog[values[group]] @ query
+            keep = np.argsort(-local)[: max(1, len(group) // 2)]
+            weights[group[keep]] = weight / len(keep)
+    elif mode == "instruction-foresight":
+        values = values[-max(8, maximum):]
+        semantic = catalog[values] @ catalog[values[-1]]
+        horizon = np.linspace(0.45, 1.0, len(values))
+        weights = np.exp(semantic - semantic.max()) * horizon
     elif mode == "recent":
         values = values[-max(2, maximum // 2):]
         weights = np.ones(len(values))
@@ -301,6 +348,21 @@ def _reward(data: GenRecData, history, target: int, name: str) -> float:
         ])
         multiplier = float(np.exp(np.clip(target_share - recent_novelty, -1.0, 1.0)))
         return 0.75 + 0.25 * multiplier * novelty
+    if name == "facet-preference":
+        seen = [genre for item in history[-8:] for genre in data.item_genres[item]]
+        overlap = sum(genre in seen for genre in data.item_genres[target])
+        query_rewrite = overlap / max(len(data.item_genres[target]), 1)
+        return 0.75 + 0.25 * query_rewrite
+    if name == "constraint-aware":
+        recent = history[-8:]
+        repeated = sum(bool(set(data.item_genres[item]) & set(data.item_genres[target])) for item in recent)
+        feasibility = 1.0 / (1.0 + repeated / max(len(recent), 1))
+        return 0.75 + 0.25 * feasibility
+    if name == "counterfactual-role":
+        popularity = float(data.popularity[target]) / max(float(data.popularity.max()), 1.0)
+        seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
+        bridge = len(set(data.item_genres[target]) - seen) / max(len(data.item_genres[target]), 1)
+        return 0.75 + 0.15 * bridge + 0.10 * (1.0 - popularity)
     return 1.0
 
 
