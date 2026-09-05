@@ -1,0 +1,486 @@
+{
+  "schema_version": 2,
+  "seeds_by_adapter": {
+    "random-attention": [
+      42,
+      43,
+      44
+    ]
+  },
+  "budget": "paper-specific",
+  "papers": {
+    "random-attention": {
+      "manifest": {
+        "adapter_key": "random-attention",
+        "arxiv_id": "2609.03430",
+        "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+        "paper_url": "https://arxiv.org/abs/2609.03430",
+        "track": "llm",
+        "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+        "published": "2026-09-03",
+        "code_url": "https://github.com/SalesforceAIResearch/Random-Attention",
+        "topics": [
+          "kv-cache",
+          "reasoning",
+          "inference-serving",
+          "compression"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/random_attention",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "WikiText-2 real-checkpoint subset"
+        ],
+        "baseline": "prompt-protected recent-token eviction at equal budget",
+        "metrics": [
+          "attention-output cosine",
+          "selection latency",
+          "KV bytes",
+          "peak GPU memory"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/random-attention-a100-20260906.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": [
+          "attention:prompt-protected-random-eviction"
+        ]
+      },
+      "seed_results": [
+        {
+          "paper": {
+            "arxiv_id": "2609.03430",
+            "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+            "url": "https://arxiv.org/abs/2609.03430",
+            "organization": "Salesforce AI Research / UIUC"
+          },
+          "dataset": {
+            "name": "deterministic KV mechanism fixture",
+            "tokens": 512,
+            "heads": 8
+          },
+          "setup": {
+            "adapter": "random-attention",
+            "seed": 42,
+            "prompt_tokens": 64,
+            "retained_tokens": 192
+          },
+          "baseline": {
+            "name": "prompt + recent",
+            "attention_cosine": 0.9799612760543823,
+            "selection_seconds": 0.0005530419875867665
+          },
+          "method": {
+            "name": "prompt-protected per-head random eviction",
+            "attention_cosine": 0.46664106845855713,
+            "selection_seconds": 0.001109291973989457
+          },
+          "stages": {
+            "prompt_protected": true,
+            "independent_head_patterns": 8,
+            "scoring_passes": 0
+          },
+          "paper_results": {
+            "vllm_throughput_gain_min_percent": 32.0,
+            "vllm_throughput_gain_max_percent": 43.0
+          },
+          "scope": "CPU fixture tests the exact eviction rule; the committed A100 receipt uses real checkpoint KV tensors. Full six-task/vLLM paper matrix is not claimed.",
+          "manifest_ref": "reproduction:random-attention",
+          "runtime": {
+            "requested_device": "auto",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 42,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "random-attention",
+            "arxiv_id": "2609.03430",
+            "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+            "paper_url": "https://arxiv.org/abs/2609.03430",
+            "track": "llm",
+            "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+            "published": "2026-09-03",
+            "code_url": "https://github.com/SalesforceAIResearch/Random-Attention",
+            "topics": [
+              "kv-cache",
+              "reasoning",
+              "inference-serving",
+              "compression"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/random_attention",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "WikiText-2 real-checkpoint subset"
+            ],
+            "baseline": "prompt-protected recent-token eviction at equal budget",
+            "metrics": [
+              "attention-output cosine",
+              "selection latency",
+              "KV bytes",
+              "peak GPU memory"
+            ],
+            "default_seeds": [
+              42
+            ],
+            "budget": "adapter-defined fixed budget",
+            "device_capabilities": [
+              "cuda"
+            ],
+            "requires_gpu_validation": true,
+            "gpu_validation_artifact": "docs/gpu-validations/random-attention-a100-20260906.json",
+            "online_evidence": [],
+            "selection_exception": null,
+            "evolve_operators": [
+              "attention:prompt-protected-random-eviction"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-05T19:38:51.814123+00:00",
+            "code_commit": "6d97d3b2028b651e46229d2596e866d2a6f567c9",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              42
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        },
+        {
+          "paper": {
+            "arxiv_id": "2609.03430",
+            "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+            "url": "https://arxiv.org/abs/2609.03430",
+            "organization": "Salesforce AI Research / UIUC"
+          },
+          "dataset": {
+            "name": "deterministic KV mechanism fixture",
+            "tokens": 512,
+            "heads": 8
+          },
+          "setup": {
+            "adapter": "random-attention",
+            "seed": 43,
+            "prompt_tokens": 64,
+            "retained_tokens": 192
+          },
+          "baseline": {
+            "name": "prompt + recent",
+            "attention_cosine": 0.9815215468406677,
+            "selection_seconds": 9.829201735556126e-05
+          },
+          "method": {
+            "name": "prompt-protected per-head random eviction",
+            "attention_cosine": 0.8317930102348328,
+            "selection_seconds": 0.00021783399279229343
+          },
+          "stages": {
+            "prompt_protected": true,
+            "independent_head_patterns": 8,
+            "scoring_passes": 0
+          },
+          "paper_results": {
+            "vllm_throughput_gain_min_percent": 32.0,
+            "vllm_throughput_gain_max_percent": 43.0
+          },
+          "scope": "CPU fixture tests the exact eviction rule; the committed A100 receipt uses real checkpoint KV tensors. Full six-task/vLLM paper matrix is not claimed.",
+          "manifest_ref": "reproduction:random-attention",
+          "runtime": {
+            "requested_device": "auto",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 43,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "random-attention",
+            "arxiv_id": "2609.03430",
+            "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+            "paper_url": "https://arxiv.org/abs/2609.03430",
+            "track": "llm",
+            "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+            "published": "2026-09-03",
+            "code_url": "https://github.com/SalesforceAIResearch/Random-Attention",
+            "topics": [
+              "kv-cache",
+              "reasoning",
+              "inference-serving",
+              "compression"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/random_attention",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "WikiText-2 real-checkpoint subset"
+            ],
+            "baseline": "prompt-protected recent-token eviction at equal budget",
+            "metrics": [
+              "attention-output cosine",
+              "selection latency",
+              "KV bytes",
+              "peak GPU memory"
+            ],
+            "default_seeds": [
+              42
+            ],
+            "budget": "adapter-defined fixed budget",
+            "device_capabilities": [
+              "cuda"
+            ],
+            "requires_gpu_validation": true,
+            "gpu_validation_artifact": "docs/gpu-validations/random-attention-a100-20260906.json",
+            "online_evidence": [],
+            "selection_exception": null,
+            "evolve_operators": [
+              "attention:prompt-protected-random-eviction"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-05T19:38:51.925679+00:00",
+            "code_commit": "6d97d3b2028b651e46229d2596e866d2a6f567c9",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              43
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        },
+        {
+          "paper": {
+            "arxiv_id": "2609.03430",
+            "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+            "url": "https://arxiv.org/abs/2609.03430",
+            "organization": "Salesforce AI Research / UIUC"
+          },
+          "dataset": {
+            "name": "deterministic KV mechanism fixture",
+            "tokens": 512,
+            "heads": 8
+          },
+          "setup": {
+            "adapter": "random-attention",
+            "seed": 44,
+            "prompt_tokens": 64,
+            "retained_tokens": 192
+          },
+          "baseline": {
+            "name": "prompt + recent",
+            "attention_cosine": 0.961534857749939,
+            "selection_seconds": 8.71660013217479e-05
+          },
+          "method": {
+            "name": "prompt-protected per-head random eviction",
+            "attention_cosine": 0.8214170336723328,
+            "selection_seconds": 0.00022124999668449163
+          },
+          "stages": {
+            "prompt_protected": true,
+            "independent_head_patterns": 8,
+            "scoring_passes": 0
+          },
+          "paper_results": {
+            "vllm_throughput_gain_min_percent": 32.0,
+            "vllm_throughput_gain_max_percent": 43.0
+          },
+          "scope": "CPU fixture tests the exact eviction rule; the committed A100 receipt uses real checkpoint KV tensors. Full six-task/vLLM paper matrix is not claimed.",
+          "manifest_ref": "reproduction:random-attention",
+          "runtime": {
+            "requested_device": "auto",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 44,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "random-attention",
+            "arxiv_id": "2609.03430",
+            "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+            "paper_url": "https://arxiv.org/abs/2609.03430",
+            "track": "llm",
+            "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+            "published": "2026-09-03",
+            "code_url": "https://github.com/SalesforceAIResearch/Random-Attention",
+            "topics": [
+              "kv-cache",
+              "reasoning",
+              "inference-serving",
+              "compression"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/random_attention",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "WikiText-2 real-checkpoint subset"
+            ],
+            "baseline": "prompt-protected recent-token eviction at equal budget",
+            "metrics": [
+              "attention-output cosine",
+              "selection latency",
+              "KV bytes",
+              "peak GPU memory"
+            ],
+            "default_seeds": [
+              42
+            ],
+            "budget": "adapter-defined fixed budget",
+            "device_capabilities": [
+              "cuda"
+            ],
+            "requires_gpu_validation": true,
+            "gpu_validation_artifact": "docs/gpu-validations/random-attention-a100-20260906.json",
+            "online_evidence": [],
+            "selection_exception": null,
+            "evolve_operators": [
+              "attention:prompt-protected-random-eviction"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-05T19:38:51.967247+00:00",
+            "code_commit": "6d97d3b2028b651e46229d2596e866d2a6f567c9",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              44
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        }
+      ],
+      "aggregate_metrics": {
+        "dataset.tokens": {
+          "mean": 512.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "dataset.heads": {
+          "mean": 8.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "setup.prompt_tokens": {
+          "mean": 64.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "setup.retained_tokens": {
+          "mean": 192.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.attention_cosine": {
+          "mean": 0.974339226881663,
+          "std": 0.011116317415300784,
+          "ci95": 0.012579297350157616,
+          "n": 3
+        },
+        "baseline.selection_seconds": {
+          "mean": 0.0002461666687546919,
+          "std": 0.00026582003882215453,
+          "ci95": 0.00030080369110113665,
+          "n": 3
+        },
+        "method.attention_cosine": {
+          "mean": 0.7066170374552408,
+          "std": 0.20789002980982368,
+          "ci95": 0.23524971475818043,
+          "n": 3
+        },
+        "method.selection_seconds": {
+          "mean": 0.000516125321155414,
+          "std": 0.000513700229507837,
+          "ci95": 0.0005813065329466796,
+          "n": 3
+        },
+        "stages.independent_head_patterns": {
+          "mean": 8.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "stages.scoring_passes": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.vllm_throughput_gain_min_percent": {
+          "mean": 32.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.vllm_throughput_gain_max_percent": {
+          "mean": 43.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        }
+      },
+      "formal_comparison": true
+    }
+  }
+}

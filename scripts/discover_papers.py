@@ -16,6 +16,7 @@ from auto_research.discovery import (
     repository_paper_statuses,
     triage_candidates,
     merge_external_candidates,
+    paper_is_in_window,
 )
 from auto_research.discovery_sources import DiscoverySource, discover_external, load_sources
 from auto_research.papers import ArxivClient
@@ -114,10 +115,9 @@ def main() -> int:
                 value.strip() for value in args.snowball_seeds.split(",") if value.strip()
             ),
         )
-        external = [
-            paper for paper in external
-            if start_date <= dt.date.fromisoformat(paper.published[:10]) <= args.end_date
-        ]
+        external = [paper for paper in external if paper_is_in_window(
+            paper, start_date=start_date, end_date=args.end_date
+        )]
         papers = merge_external_candidates(papers, external, provenance)
     statuses = repository_paper_statuses(Path(args.manifest), Path(args.ledger))
     candidates = triage_candidates(papers, statuses)

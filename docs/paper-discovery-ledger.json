@@ -2055,9 +2055,14 @@
         },
         {
           "id": "2609.02730",
-          "status": "rejected",
-          "priority": "P2",
-          "reason": "高召回标题命中；经摘要与可执行性复核，不满足本批工业线上证据或独立公开复现门槛。",
+          "status": "implemented",
+          "priority": "P0",
+          "reason": "纠正摘要级误拒：全文 Section 5.1/Table 1 与 Section 5.2 给出量化线上 A/B、部署配置和容量节省证据；已实现约束反馈闭环。",
+          "documentation": "docs/reproductions/2609.02730-coral/README.md",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": ["Section 5.1, Table 1", "Section 5.2"]
+          },
           "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
           "track": "recommendation",
           "matched_queries": [
@@ -3004,9 +3009,10 @@
         },
         {
           "id": "2609.03430",
-          "status": "deferred",
+          "status": "implemented",
           "priority": "P1",
-          "reason": "核心方向成立，但公开主路径需要真实 checkpoint/CUDA 或更大资源公平对照；待 A100/A30 独立验证批次。",
+          "reason": "已实现 prompt 保护、逐 head 随机 KV 淘汰，并完成真实公开 checkpoint/A100 等预算验证。",
+          "documentation": "docs/reproductions/2609.03430-random-attention/README.md",
           "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
           "track": "foundation-model",
           "matched_queries": [
@@ -3016,9 +3022,10 @@
         },
         {
           "id": "2609.03426",
-          "status": "deferred",
+          "status": "implemented",
           "priority": "P1",
-          "reason": "核心方向成立，但公开主路径需要真实 checkpoint/CUDA 或更大资源公平对照；待 A100/A30 独立验证批次。",
+          "reason": "已实现离散 n-gram memory、反事实梯度和 GQA zero sink，并完成真实公开 VLM checkpoint/A100 验证。",
+          "documentation": "docs/reproductions/2609.03426-lngram-v2/README.md",
           "title": "Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations",
           "track": "foundation-model",
           "matched_queries": [
@@ -8041,9 +8048,14 @@
         },
         {
           "id": "2609.02730",
-          "status": "rejected",
-          "priority": "P2",
-          "reason": "高召回标题命中；经摘要与可执行性复核，不满足本批工业线上证据或独立公开复现门槛。",
+          "status": "implemented",
+          "priority": "P0",
+          "reason": "纠正摘要级误拒：全文证实生产推荐闭环、量化线上 A/B 与部署配置；同一实现同时覆盖推荐与 Agent 控制器视角。",
+          "documentation": "docs/reproductions/2609.02730-coral/README.md",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": ["Section 5.1, Table 1", "Section 5.2"]
+          },
           "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
           "track": "agent",
           "matched_queries": [

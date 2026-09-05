@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "recevolve",
+  "arxiv_id": "2609.01622",
+  "title": "RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2609.01622",
+  "organization": "Google",
+  "published": "2026-07-20",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-06）",
+  "track": "recommendation",
+  "topics": [
+    "auto-research",
+    "agent",
+    "two-tower",
+    "reward-hacking"
+  ],
+  "local_code": "src/auto_research/reproductions/recevolve",
+  "documentation": "docs/reproductions/2609.01622-recevolve/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "fixed Two-Tower-style similarity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "rollbacks",
+    "reward hacks blocked"
+  ],
+  "mechanisms": [
+    "Google private Two-Tower and logs",
+    "distributed TPU execution",
+    "production coding-agent toolchain"
+  ],
+  "evolve_operators": [
+    "controller:recevolve-knowledge-vcs-loop"
+  ]
+}

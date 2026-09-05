@@ -7,6 +7,14 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2609.02730": (
+        "controller:coral-constrained-feedback-loop",
+        "CORAL 的预算约束配置、短期实验记忆与效果反馈闭环",
+    ),
+    "2609.01622": (
+        "controller:recevolve-knowledge-vcs-loop",
+        "RecEvolve 的知识驱动提案、隔离实验、回滚和 reward-hack gate",
+    ),
     "2609.01240": ("context:rest-dual-gate", "ReST 的双门控时序编码与共享用户前缀排序"),
     "2609.00986": ("head:tgr-generation-reasoning", "TGR 的分层语义 ID、列表目标与离线 reason token"),
     "2608.30255": ("context:coengagement-embedding", "CAMIE 的共同互动对称对比商品表征"),
@@ -157,6 +165,14 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2609.03430": (
+        "attention:prompt-protected-random-eviction",
+        "Random Attention 的 prompt 保护与逐 head 无打分随机 KV 淘汰",
+    ),
+    "2609.03426": (
+        "memory:latent-ngram-gqa",
+        "Lngram v2 的多路离散 latent n-gram 查表、反事实梯度与 GQA 读出",
+    ),
     "2608.27206": (
         "checkpoint_vlm:pace-apc",
         "PACE 的浅层视觉预览、自适应视觉 token budget 与双源注意力融合",

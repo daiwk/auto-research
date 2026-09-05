@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "lngram-v2",
+  "arxiv_id": "2609.03426",
+  "title": "Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations",
+  "paper_url": "https://arxiv.org/abs/2609.03426",
+  "organization": "Beijing University of Posts and Telecommunications / Kuaishou Technology",
+  "published": "2026-09-03",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-06）",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "conditional-memory",
+    "discrete-routing",
+    "model-architecture"
+  ],
+  "local_code": "src/auto_research/reproductions/lngram_v2",
+  "documentation": "docs/reproductions/2609.03426-lngram-v2/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "Qwen2.5-VL-3B-Instruct checkpoint + deterministic RGB geometry probe"
+  ],
+  "baseline": "same checkpoint without latent memory branch",
+  "metrics": [
+    "finite output",
+    "route diversity",
+    "sink selectivity",
+    "activation memory"
+  ],
+  "mechanisms": [
+    "Keye 2B/30B pretraining",
+    "paper-scale multimodal corpus"
+  ],
+  "evolve_operators": [
+    "memory:latent-ngram-gqa"
+  ]
+}

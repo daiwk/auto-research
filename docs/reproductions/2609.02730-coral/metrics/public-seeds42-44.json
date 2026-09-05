@@ -1,0 +1,816 @@
+{
+  "schema_version": 2,
+  "seeds_by_adapter": {
+    "coral": [
+      42,
+      43,
+      44
+    ]
+  },
+  "budget": "paper-specific",
+  "papers": {
+    "coral": {
+      "manifest": {
+        "adapter_key": "coral",
+        "arxiv_id": "2609.02730",
+        "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.02730",
+        "track": "recommendation",
+        "organization": "Meta AI",
+        "published": "2026-09-02",
+        "code_url": null,
+        "topics": [
+          "auto-research",
+          "agent",
+          "retrieval-budget",
+          "constrained-optimization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/coral",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "fixed equal retrieval allocation",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "budget feasibility",
+          "cycle effect"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Meta large-scale video service",
+            "metric": "video-viewing sessions",
+            "lift_percent": 0.16,
+            "traffic": "millions-user online A/B; deployed configuration",
+            "source_url": "https://arxiv.org/pdf/2609.02730v1",
+            "source_location": "Section 5.1, Table 1",
+            "retrieved_at": "2026-09-06"
+          },
+          {
+            "product": "Meta serving-capacity service",
+            "metric": "annualized capacity savings",
+            "lift_percent": 44.0,
+            "traffic": "second A/B round increased first-round savings by 44%; engagement neutral",
+            "source_url": "https://arxiv.org/pdf/2609.02730v1",
+            "source_location": "Section 5.2",
+            "retrieved_at": "2026-09-06"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "controller:coral-constrained-feedback-loop"
+        ]
+      },
+      "seed_results": [
+        {
+          "paper": {
+            "arxiv_id": "2609.02730",
+            "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+            "url": "https://arxiv.org/abs/2609.02730",
+            "organization": "Meta AI"
+          },
+          "dataset": {
+            "name": "MovieLens 100K",
+            "users": 220,
+            "items": 360
+          },
+          "setup": {
+            "adapter": "coral",
+            "same_split_and_candidates": true
+          },
+          "baseline": {
+            "name": "fixed equal retrieval allocation",
+            "hit_at_10": 0.10909090909090909,
+            "ndcg_at_10": 0.05400546778896325,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23772727272727273
+          },
+          "method": {
+            "name": "five-cycle CORAL allocation (blend=0.3)",
+            "hit_at_10": 0.1,
+            "ndcg_at_10": 0.05021363472290861,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23045454545454547
+          },
+          "relative": {
+            "hit_at_10_percent": -8.333333333333325,
+            "ndcg_at_10_percent": -7.021202150996931,
+            "fresh_hit_at_10_percent": 0.0,
+            "head_share_at_10_percent": -3.059273422562138
+          },
+          "stages": {
+            "cycles": 5,
+            "memory_horizon": 3,
+            "all_budget_feasible": true,
+            "trace": [
+              {
+                "cycle": 1,
+                "configuration": [
+                  1.1551439011387066,
+                  1.107160638020637,
+                  0.9689604967557849,
+                  0.7687349640848716
+                ],
+                "effect": 0.04564307309317406,
+                "budget": 4.0
+              },
+              {
+                "cycle": 2,
+                "configuration": [
+                  1.2715538077536952,
+                  1.1838292026174924,
+                  0.9494978587289522,
+                  0.5951191308998603
+                ],
+                "effect": 0.03404820053984758,
+                "budget": 4.0
+              },
+              {
+                "cycle": 3,
+                "configuration": [
+                  1.3878533634937729,
+                  1.2566137899775471,
+                  0.9339563015989184,
+                  0.4215765449297618
+                ],
+                "effect": 0.033849244859569964,
+                "budget": 4.0
+              },
+              {
+                "cycle": 4,
+                "configuration": [
+                  1.50366950553129,
+                  1.3250024150658977,
+                  0.9213280794028128,
+                  0.25
+                ],
+                "effect": 0.03341295175710572,
+                "budget": 4.0
+              },
+              {
+                "cycle": 5,
+                "configuration": [
+                  1.5622879231527524,
+                  1.3323314740416796,
+                  0.8553806028055684,
+                  0.25
+                ],
+                "effect": 0.005453075788960237,
+                "budget": 4.0
+              }
+            ]
+          },
+          "paper_results": {
+            "watch_time_percent": 0.15,
+            "sessions_percent": 0.16,
+            "new_low_signal_sessions_percent": 0.23,
+            "second_round_savings_increase_percent": 44.0
+          },
+          "scope": "公开 MovieLens 上运行固定控制流、三周期记忆、约束投影和结果反馈；不接入 Meta 私有遥测、LLM 或线上实验系统。",
+          "runtime": {
+            "requested_device": "auto",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 42,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "coral",
+            "arxiv_id": "2609.02730",
+            "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+            "paper_url": "https://arxiv.org/abs/2609.02730",
+            "track": "recommendation",
+            "organization": "Meta AI",
+            "published": "2026-09-02",
+            "code_url": null,
+            "topics": [
+              "auto-research",
+              "agent",
+              "retrieval-budget",
+              "constrained-optimization"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/coral",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "MovieLens 100K"
+            ],
+            "baseline": "fixed equal retrieval allocation",
+            "metrics": [
+              "hit_at_10",
+              "ndcg_at_10",
+              "budget feasibility",
+              "cycle effect"
+            ],
+            "default_seeds": [
+              42,
+              43,
+              44
+            ],
+            "budget": "adapter-defined fixed budget",
+            "device_capabilities": [
+              "cpu"
+            ],
+            "requires_gpu_validation": false,
+            "gpu_validation_artifact": null,
+            "online_evidence": [
+              {
+                "product": "Meta large-scale video service",
+                "metric": "video-viewing sessions",
+                "lift_percent": 0.16,
+                "traffic": "millions-user online A/B; deployed configuration",
+                "source_url": "https://arxiv.org/pdf/2609.02730v1",
+                "source_location": "Section 5.1, Table 1",
+                "retrieved_at": "2026-09-06"
+              },
+              {
+                "product": "Meta serving-capacity service",
+                "metric": "annualized capacity savings",
+                "lift_percent": 44.0,
+                "traffic": "second A/B round increased first-round savings by 44%; engagement neutral",
+                "source_url": "https://arxiv.org/pdf/2609.02730v1",
+                "source_location": "Section 5.2",
+                "retrieved_at": "2026-09-06"
+              }
+            ],
+            "selection_exception": null,
+            "evolve_operators": [
+              "controller:coral-constrained-feedback-loop"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-05T19:38:33.597719+00:00",
+            "code_commit": "6d97d3b2028b651e46229d2596e866d2a6f567c9",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              42
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        },
+        {
+          "paper": {
+            "arxiv_id": "2609.02730",
+            "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+            "url": "https://arxiv.org/abs/2609.02730",
+            "organization": "Meta AI"
+          },
+          "dataset": {
+            "name": "MovieLens 100K",
+            "users": 220,
+            "items": 360
+          },
+          "setup": {
+            "adapter": "coral",
+            "same_split_and_candidates": true
+          },
+          "baseline": {
+            "name": "fixed equal retrieval allocation",
+            "hit_at_10": 0.10909090909090909,
+            "ndcg_at_10": 0.05400546778896325,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23772727272727273
+          },
+          "method": {
+            "name": "five-cycle CORAL allocation (blend=0.9)",
+            "hit_at_10": 0.09090909090909091,
+            "ndcg_at_10": 0.04580523905657015,
+            "fresh_hit_at_10": 0.015873015873015872,
+            "head_share_at_10": 0.22727272727272727
+          },
+          "relative": {
+            "hit_at_10_percent": -16.66666666666666,
+            "ndcg_at_10_percent": -15.18407129521972,
+            "fresh_hit_at_10_percent": -50.0,
+            "head_share_at_10_percent": -4.397705544933084
+          },
+          "stages": {
+            "cycles": 5,
+            "memory_horizon": 3,
+            "all_budget_feasible": true,
+            "trace": [
+              {
+                "cycle": 1,
+                "configuration": [
+                  1.1465989548247164,
+                  1.1204842325012874,
+                  0.9621808741456788,
+                  0.7707359385283175
+                ],
+                "effect": 0.05002072930924285,
+                "budget": 4.0
+              },
+              {
+                "cycle": 2,
+                "configuration": [
+                  1.2566952886464655,
+                  1.2074370880936784,
+                  0.9373267150639234,
+                  0.5985409081959325
+                ],
+                "effect": 0.0372672142863525,
+                "budget": 4.0
+              },
+              {
+                "cycle": 3,
+                "configuration": [
+                  1.3667991682734866,
+                  1.2907893640104764,
+                  0.9160946613080732,
+                  0.42631680640796343
+                ],
+                "effect": 0.03699984429122709,
+                "budget": 4.0
+              },
+              {
+                "cycle": 4,
+                "configuration": [
+                  1.4774059413153626,
+                  1.3709561004461677,
+                  0.898348954310779,
+                  0.2532890039276905
+                ],
+                "effect": 0.03693717037569675,
+                "budget": 4.0
+              },
+              {
+                "cycle": 5,
+                "configuration": [
+                  1.531515130760818,
+                  1.3909274067292117,
+                  0.8275574625099709,
+                  0.25
+                ],
+                "effect": 0.006896004126088141,
+                "budget": 4.0
+              }
+            ]
+          },
+          "paper_results": {
+            "watch_time_percent": 0.15,
+            "sessions_percent": 0.16,
+            "new_low_signal_sessions_percent": 0.23,
+            "second_round_savings_increase_percent": 44.0
+          },
+          "scope": "公开 MovieLens 上运行固定控制流、三周期记忆、约束投影和结果反馈；不接入 Meta 私有遥测、LLM 或线上实验系统。",
+          "runtime": {
+            "requested_device": "auto",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 43,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "coral",
+            "arxiv_id": "2609.02730",
+            "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+            "paper_url": "https://arxiv.org/abs/2609.02730",
+            "track": "recommendation",
+            "organization": "Meta AI",
+            "published": "2026-09-02",
+            "code_url": null,
+            "topics": [
+              "auto-research",
+              "agent",
+              "retrieval-budget",
+              "constrained-optimization"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/coral",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "MovieLens 100K"
+            ],
+            "baseline": "fixed equal retrieval allocation",
+            "metrics": [
+              "hit_at_10",
+              "ndcg_at_10",
+              "budget feasibility",
+              "cycle effect"
+            ],
+            "default_seeds": [
+              42,
+              43,
+              44
+            ],
+            "budget": "adapter-defined fixed budget",
+            "device_capabilities": [
+              "cpu"
+            ],
+            "requires_gpu_validation": false,
+            "gpu_validation_artifact": null,
+            "online_evidence": [
+              {
+                "product": "Meta large-scale video service",
+                "metric": "video-viewing sessions",
+                "lift_percent": 0.16,
+                "traffic": "millions-user online A/B; deployed configuration",
+                "source_url": "https://arxiv.org/pdf/2609.02730v1",
+                "source_location": "Section 5.1, Table 1",
+                "retrieved_at": "2026-09-06"
+              },
+              {
+                "product": "Meta serving-capacity service",
+                "metric": "annualized capacity savings",
+                "lift_percent": 44.0,
+                "traffic": "second A/B round increased first-round savings by 44%; engagement neutral",
+                "source_url": "https://arxiv.org/pdf/2609.02730v1",
+                "source_location": "Section 5.2",
+                "retrieved_at": "2026-09-06"
+              }
+            ],
+            "selection_exception": null,
+            "evolve_operators": [
+              "controller:coral-constrained-feedback-loop"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-05T19:38:33.941861+00:00",
+            "code_commit": "6d97d3b2028b651e46229d2596e866d2a6f567c9",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              43
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        },
+        {
+          "paper": {
+            "arxiv_id": "2609.02730",
+            "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+            "url": "https://arxiv.org/abs/2609.02730",
+            "organization": "Meta AI"
+          },
+          "dataset": {
+            "name": "MovieLens 100K",
+            "users": 220,
+            "items": 360
+          },
+          "setup": {
+            "adapter": "coral",
+            "same_split_and_candidates": true
+          },
+          "baseline": {
+            "name": "fixed equal retrieval allocation",
+            "hit_at_10": 0.10909090909090909,
+            "ndcg_at_10": 0.05400546778896325,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23772727272727273
+          },
+          "method": {
+            "name": "five-cycle CORAL allocation (blend=1.0)",
+            "hit_at_10": 0.1,
+            "ndcg_at_10": 0.053887345968488334,
+            "fresh_hit_at_10": 0.015873015873015872,
+            "head_share_at_10": 0.21954545454545454
+          },
+          "relative": {
+            "hit_at_10_percent": -8.333333333333325,
+            "ndcg_at_10_percent": -0.2187219652211878,
+            "fresh_hit_at_10_percent": -50.0,
+            "head_share_at_10_percent": -7.648183556405356
+          },
+          "stages": {
+            "cycles": 5,
+            "memory_horizon": 3,
+            "all_budget_feasible": true,
+            "trace": [
+              {
+                "cycle": 1,
+                "configuration": [
+                  1.1559477015674835,
+                  1.1114904746757255,
+                  0.9597918721350773,
+                  0.7727699516217132
+                ],
+                "effect": 0.04691773037540472,
+                "budget": 3.999999999999999
+              },
+              {
+                "cycle": 2,
+                "configuration": [
+                  1.273022433946683,
+                  1.1915275854817484,
+                  0.9333875247557902,
+                  0.6020624558157779
+                ],
+                "effect": 0.03496947835993952,
+                "budget": 3.999999999999999
+              },
+              {
+                "cycle": 3,
+                "configuration": [
+                  1.3900537165871714,
+                  1.2677965117909877,
+                  0.9108528485604858,
+                  0.4312969230613547
+                ],
+                "effect": 0.03473485418457347,
+                "budget": 3.999999999999999
+              },
+              {
+                "cycle": 4,
+                "configuration": [
+                  1.5075604872821324,
+                  1.3406806664810298,
+                  0.8920412296018816,
+                  0.2597176166349555
+                ],
+                "effect": 0.034694439042462034,
+                "budget": 3.999999999999999
+              },
+              {
+                "cycle": 5,
+                "configuration": [
+                  1.5711376144435165,
+                  1.355810423730501,
+                  0.8230519618259828,
+                  0.25
+                ],
+                "effect": 0.008005459101508516,
+                "budget": 4.0
+              }
+            ]
+          },
+          "paper_results": {
+            "watch_time_percent": 0.15,
+            "sessions_percent": 0.16,
+            "new_low_signal_sessions_percent": 0.23,
+            "second_round_savings_increase_percent": 44.0
+          },
+          "scope": "公开 MovieLens 上运行固定控制流、三周期记忆、约束投影和结果反馈；不接入 Meta 私有遥测、LLM 或线上实验系统。",
+          "runtime": {
+            "requested_device": "auto",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 44,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "coral",
+            "arxiv_id": "2609.02730",
+            "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+            "paper_url": "https://arxiv.org/abs/2609.02730",
+            "track": "recommendation",
+            "organization": "Meta AI",
+            "published": "2026-09-02",
+            "code_url": null,
+            "topics": [
+              "auto-research",
+              "agent",
+              "retrieval-budget",
+              "constrained-optimization"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/coral",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "MovieLens 100K"
+            ],
+            "baseline": "fixed equal retrieval allocation",
+            "metrics": [
+              "hit_at_10",
+              "ndcg_at_10",
+              "budget feasibility",
+              "cycle effect"
+            ],
+            "default_seeds": [
+              42,
+              43,
+              44
+            ],
+            "budget": "adapter-defined fixed budget",
+            "device_capabilities": [
+              "cpu"
+            ],
+            "requires_gpu_validation": false,
+            "gpu_validation_artifact": null,
+            "online_evidence": [
+              {
+                "product": "Meta large-scale video service",
+                "metric": "video-viewing sessions",
+                "lift_percent": 0.16,
+                "traffic": "millions-user online A/B; deployed configuration",
+                "source_url": "https://arxiv.org/pdf/2609.02730v1",
+                "source_location": "Section 5.1, Table 1",
+                "retrieved_at": "2026-09-06"
+              },
+              {
+                "product": "Meta serving-capacity service",
+                "metric": "annualized capacity savings",
+                "lift_percent": 44.0,
+                "traffic": "second A/B round increased first-round savings by 44%; engagement neutral",
+                "source_url": "https://arxiv.org/pdf/2609.02730v1",
+                "source_location": "Section 5.2",
+                "retrieved_at": "2026-09-06"
+              }
+            ],
+            "selection_exception": null,
+            "evolve_operators": [
+              "controller:coral-constrained-feedback-loop"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-05T19:38:34.140373+00:00",
+            "code_commit": "6d97d3b2028b651e46229d2596e866d2a6f567c9",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              44
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        }
+      ],
+      "aggregate_metrics": {
+        "dataset.users": {
+          "mean": 220.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "dataset.items": {
+          "mean": 360.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.hit_at_10": {
+          "mean": 0.10909090909090909,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.ndcg_at_10": {
+          "mean": 0.05400546778896325,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.fresh_hit_at_10": {
+          "mean": 0.031746031746031744,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.head_share_at_10": {
+          "mean": 0.2377272727272727,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "method.hit_at_10": {
+          "mean": 0.09696969696969697,
+          "std": 0.0052486388108147815,
+          "ci95": 0.005939393939393941,
+          "n": 3
+        },
+        "method.ndcg_at_10": {
+          "mean": 0.049968739915989026,
+          "std": 0.004046615021689247,
+          "ci95": 0.004579175973274977,
+          "n": 3
+        },
+        "method.fresh_hit_at_10": {
+          "mean": 0.021164021164021163,
+          "std": 0.009164289987136916,
+          "ci95": 0.01037037037037037,
+          "n": 3
+        },
+        "method.head_share_at_10": {
+          "mean": 0.22575757575757574,
+          "std": 0.005610154115628375,
+          "ci95": 0.006348487018152525,
+          "n": 3
+        },
+        "relative.hit_at_10_percent": {
+          "mean": -11.111111111111105,
+          "std": 4.811252243246883,
+          "ci95": 5.4444444444444455,
+          "n": 3
+        },
+        "relative.ndcg_at_10_percent": {
+          "mean": -7.474665137145947,
+          "std": 7.492972818052743,
+          "ci95": 8.479096952125268,
+          "n": 3
+        },
+        "relative.fresh_hit_at_10_percent": {
+          "mean": -33.333333333333336,
+          "std": 28.867513459481287,
+          "ci95": 32.666666666666664,
+          "n": 3
+        },
+        "relative.head_share_at_10_percent": {
+          "mean": -5.035054174633526,
+          "std": 2.3599118650826814,
+          "ci95": 2.670491671115785,
+          "n": 3
+        },
+        "stages.cycles": {
+          "mean": 5.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "stages.memory_horizon": {
+          "mean": 3.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.watch_time_percent": {
+          "mean": 0.15,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.sessions_percent": {
+          "mean": 0.16,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.new_low_signal_sessions_percent": {
+          "mean": 0.23,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.second_round_savings_increase_percent": {
+          "mean": 44.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        }
+      },
+      "formal_comparison": true
+    }
+  }
+}
