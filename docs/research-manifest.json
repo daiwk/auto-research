@@ -8461,6 +8461,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "cgr",
+      "title": "Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds",
+      "paper_url": "https://arxiv.org/abs/2603.04227",
+      "detail_path": "reproductions/2603.04227-cgr/README.md",
+      "topic": [
+        "advertising",
+        "generative-reranking",
+        "constraint-optimization"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Bilibili",
+      "published": "2026-03-04",
+      "code": null,
+      "adapter": {
+        "adapter_key": "cgr",
+        "arxiv_id": "2603.04227",
+        "title": "Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds",
+        "paper_url": "https://arxiv.org/abs/2603.04227",
+        "track": "recommendation",
+        "organization": "Bilibili",
+        "published": "2026-03-04",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "generative-reranking",
+          "constraint-optimization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/cgr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Bilibili advertising feeds",
+            "metric": "Inference latency reduction",
+            "lift_percent": 85.0,
+            "traffic": "millions of daily requests; production online A/B",
+            "source_url": "https://arxiv.org/html/2603.04227v1",
+            "source_location": "Conclusion",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:constraint-aware"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "click-a-buy-b",
       "title": "Click A, Buy B: Rethinking Conversion Attribution in E-Commerce Recommendations",
       "paper_url": "https://arxiv.org/abs/2507.15113",
@@ -8534,6 +8604,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "climber-pilot",
+      "title": "Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following",
+      "paper_url": "https://arxiv.org/abs/2602.13581",
+      "detail_path": "reproductions/2602.13581-climber-pilot/README.md",
+      "topic": [
+        "generative-retrieval",
+        "long-horizon",
+        "instruction-following"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "NetEase Cloud Music",
+      "published": "2026-02-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "climber-pilot",
+        "arxiv_id": "2602.13581",
+        "title": "Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following",
+        "paper_url": "https://arxiv.org/abs/2602.13581",
+        "track": "recommendation",
+        "organization": "NetEase Cloud Music",
+        "published": "2026-02-14",
+        "code_url": null,
+        "topics": [
+          "generative-retrieval",
+          "long-horizon",
+          "instruction-following"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/climber_pilot",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "NetEase Cloud Music",
+            "metric": "Core business metric",
+            "lift_percent": 4.24,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2602.13581v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:instruction-foresight"
+        ]
       }
     },
     {
@@ -11917,6 +12057,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "genfacet",
+      "title": "GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce",
+      "paper_url": "https://arxiv.org/abs/2603.19665",
+      "detail_path": "reproductions/2603.19665-genfacet/README.md",
+      "topic": [
+        "e-commerce-search",
+        "facet-generation",
+        "preference-alignment"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "JD.com",
+      "published": "2026-03-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "genfacet",
+        "arxiv_id": "2603.19665",
+        "title": "GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce",
+        "paper_url": "https://arxiv.org/abs/2603.19665",
+        "track": "recommendation",
+        "organization": "JD.com",
+        "published": "2026-03-20",
+        "code_url": null,
+        "topics": [
+          "e-commerce-search",
+          "facet-generation",
+          "preference-alignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/genfacet",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "JD.com e-commerce search",
+            "metric": "Facet CTR",
+            "lift_percent": 42.0,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2603.19665v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:facet-preference"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "genpage",
       "title": "GenPage: Towards End-to-End Generative Homepage Construction at Netflix",
       "paper_url": "https://arxiv.org/abs/2606.31031",
@@ -13295,6 +13505,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "hpgr",
+      "title": "Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations",
+      "paper_url": "https://arxiv.org/abs/2603.00980",
+      "detail_path": "reproductions/2603.00980-hpgr/README.md",
+      "topic": [
+        "generative-recommendation",
+        "hierarchical-sequence",
+        "sparse-attention"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Harbin Institute of Technology",
+      "published": "2026-03-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "hpgr",
+        "arxiv_id": "2603.00980",
+        "title": "Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations",
+        "paper_url": "https://arxiv.org/abs/2603.00980",
+        "track": "recommendation",
+        "organization": "Harbin Institute of Technology",
+        "published": "2026-03-01",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "hierarchical-sequence",
+          "sparse-attention"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/hpgr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Huawei AppGallery recommendation",
+            "metric": "eCPM",
+            "lift_percent": 1.99,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2603.00980v1",
+            "source_location": "Section 1 and online experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:hierarchical-preference"
+        ]
       }
     },
     {
@@ -15165,6 +15445,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "marc",
+      "title": "Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations",
+      "paper_url": "https://arxiv.org/abs/2604.18146",
+      "detail_path": "reproductions/2604.18146-marc/README.md",
+      "topic": [
+        "llm-recommendation",
+        "representation-compression",
+        "modular-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Shanghai Jiao Tong University",
+      "published": "2026-04-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "marc",
+        "arxiv_id": "2604.18146",
+        "title": "Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations",
+        "paper_url": "https://arxiv.org/abs/2604.18146",
+        "track": "recommendation",
+        "organization": "Shanghai Jiao Tong University",
+        "published": "2026-04-20",
+        "code_url": null,
+        "topics": [
+          "llm-recommendation",
+          "representation-compression",
+          "modular-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/marc",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Commercial search advertising",
+            "metric": "eCPM",
+            "lift_percent": 2.82,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2604.18146v1",
+            "source_location": "Abstract and experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:modular-compression"
+        ]
       }
     },
     {
@@ -20139,6 +20489,146 @@
     },
     {
       "domain": "recommendation",
+      "key": "rankup",
+      "title": "RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2604.17878",
+      "detail_path": "reproductions/2604.17878-rankup/README.md",
+      "topic": [
+        "advertising",
+        "representation-collapse",
+        "feature-interaction"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent",
+      "published": "2026-04-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rankup",
+        "arxiv_id": "2604.17878",
+        "title": "RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2604.17878",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-04-20",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "representation-collapse",
+          "feature-interaction"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rankup",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Weixin advertising",
+            "metric": "GMV",
+            "lift_percent": 4.81,
+            "traffic": "fully deployed across three products",
+            "source_url": "https://arxiv.org/html/2604.17878v1",
+            "source_location": "Abstract and Section 1",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:high-rank-representation"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "rclrec",
+      "title": "RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation",
+      "paper_url": "https://arxiv.org/abs/2603.28124",
+      "detail_path": "reproductions/2603.28124-rclrec/README.md",
+      "topic": [
+        "generative-recommendation",
+        "conversion-modeling",
+        "curriculum-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba International Digital Commerce Group",
+      "published": "2026-03-30",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rclrec",
+        "arxiv_id": "2603.28124",
+        "title": "RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation",
+        "paper_url": "https://arxiv.org/abs/2603.28124",
+        "track": "recommendation",
+        "organization": "Alibaba International Digital Commerce Group",
+        "published": "2026-03-30",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "conversion-modeling",
+          "curriculum-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rclrec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Alibaba advertising recommendation",
+            "metric": "Advertising revenue",
+            "lift_percent": 2.09,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2603.28124v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:reverse-curriculum"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "real-estate-rerank",
       "title": "LLM-Based Re-Ranking for Real Estate Search",
       "paper_url": "https://arxiv.org/abs/2607.14835",
@@ -20999,6 +21489,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "rolegen",
+      "title": "Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning",
+      "paper_url": "https://arxiv.org/abs/2602.13134",
+      "detail_path": "reproductions/2602.13134-rolegen/README.md",
+      "topic": [
+        "generative-recommendation",
+        "counterfactual-reasoning",
+        "dormant-users"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Beihang University",
+      "published": "2026-02-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rolegen",
+        "arxiv_id": "2602.13134",
+        "title": "Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning",
+        "paper_url": "https://arxiv.org/abs/2602.13134",
+        "track": "recommendation",
+        "organization": "Beihang University",
+        "published": "2026-02-13",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "counterfactual-reasoning",
+          "dormant-users"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rolegen",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou e-commerce",
+            "metric": "Order volume",
+            "lift_percent": 7.3,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2602.13134v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:counterfactual-role"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "s-grec",
       "title": "S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage",
       "paper_url": "https://arxiv.org/abs/2602.10606",
@@ -21828,6 +22388,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "sid-coord",
+      "title": "SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search",
+      "paper_url": "https://arxiv.org/abs/2604.10471",
+      "detail_path": "reproductions/2604.10471-sid-coord/README.md",
+      "topic": [
+        "short-video-search",
+        "semantic-id",
+        "long-tail-ranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-04-12",
+      "code": null,
+      "adapter": {
+        "adapter_key": "sid-coord",
+        "arxiv_id": "2604.10471",
+        "title": "SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search",
+        "paper_url": "https://arxiv.org/abs/2604.10471",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-04-12",
+        "code_url": null,
+        "topics": [
+          "short-video-search",
+          "semantic-id",
+          "long-tail-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/sid_coord",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou short-video search",
+            "metric": "Long-play rate",
+            "lift_percent": 0.664,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2604.10471v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:sid-coordination"
+        ]
       }
     },
     {
@@ -22862,6 +23492,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "tagllm",
+      "title": "TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation",
+      "paper_url": "https://arxiv.org/abs/2603.21481",
+      "detail_path": "reproductions/2603.21481-tagllm/README.md",
+      "topic": [
+        "content-understanding",
+        "tag-generation",
+        "knowledge-distillation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tongji University",
+      "published": "2026-03-23",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tagllm",
+        "arxiv_id": "2603.21481",
+        "title": "TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation",
+        "paper_url": "https://arxiv.org/abs/2603.21481",
+        "track": "recommendation",
+        "organization": "Tongji University",
+        "published": "2026-03-23",
+        "code_url": null,
+        "topics": [
+          "content-understanding",
+          "tag-generation",
+          "knowledge-distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/tagllm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Note recommendation",
+            "metric": "Cold-start page-view CTR",
+            "lift_percent": 32.37,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2603.21481v1",
+            "source_location": "Abstract",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:fine-grained-tags"
+        ]
       }
     },
     {

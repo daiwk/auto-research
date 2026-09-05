@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "marc",
+  "arxiv_id": "2604.18146",
+  "title": "Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations",
+  "paper_url": "https://arxiv.org/abs/2604.18146",
+  "organization": "Shanghai Jiao Tong University",
+  "published": "2026-04-20",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "representation-compression",
+    "modular-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/marc",
+  "documentation": "docs/reproductions/2604.18146-marc/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "production LLM hidden states",
+    "private advertising logs",
+    "online serving stack"
+  ],
+  "evolve_operators": [
+    "head:modular-compression"
+  ]
+}

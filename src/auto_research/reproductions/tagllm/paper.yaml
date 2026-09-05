@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "tagllm",
+  "arxiv_id": "2603.21481",
+  "title": "TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation",
+  "paper_url": "https://arxiv.org/abs/2603.21481",
+  "organization": "Tongji University",
+  "published": "2026-03-23",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "content-understanding",
+    "tag-generation",
+    "knowledge-distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/tagllm",
+  "documentation": "docs/reproductions/2603.21481-tagllm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "multimodal teacher LLM",
+    "private note corpus",
+    "production distillation pipeline"
+  ],
+  "evolve_operators": [
+    "head:fine-grained-tags"
+  ]
+}

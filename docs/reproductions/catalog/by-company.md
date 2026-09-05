@@ -16,6 +16,7 @@
 
 ## JD.com
 - 2026-08 · [DEGR](../2608.04809-degr/README.md)：联合 next-item CE、cohort 多样性与 reward-adaptive ORPO，并在推理时执行多样性感知重排。
+- 2026-03 · [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
 ## Alibaba
 - 2026-08 · [DCEO](../2608.25635-dceo/README.md)：以直接因果效应分离短期点击与长期用户价值，并用多目标策略权重优化电商搜索排序。
@@ -256,6 +257,7 @@
 - 2026-08 · [PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation](../2608.07989-pushdualgen/README.md)：先生成可服务 SID，再按需生成可解释 copy，并在在线侧融合两种表示。
 - 2026-07 · [PSG](../2607.26427-psg/README.md)：在 ordered pair 空间生成半长度序列，再无重复展开为 item slate。
 - 2026-05 · [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
+- 2026-04 · [SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search](../2604.10471-sid-coord/README.md)：以层级 SID、目标感知 HID–SID 门控和兴趣对齐增强长尾泛化。
 - 2026-03 · [SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search](../2603.19585-safro/README.md)：用满意度奖励和双重相对优势优化短视频搜索多任务融合。
 
 ## Amap / Alibaba
@@ -277,6 +279,7 @@
 
 ## NetEase Cloud Music
 - 2026-05 · [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md)：用个性化双视图 LoRA-MoE 分别适配语义和行为，再自适应融合。
+- 2026-02 · [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../2602.13581-climber-pilot/README.md)：将多步消费前瞻蒸馏到单步召回，并在注意力内注入业务指令。
 
 ## University of Science and Technology of China / Alibaba
 - 2026-05 · [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md)：把 query-item 联合序列交给 Linear HSTU，并融合稀疏交叉特征做生成式搜索。
@@ -322,6 +325,7 @@
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
 ## Tencent
+- 2026-04 · [RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems](../2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
 - 2026-02 · [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
 
 ## The Hong Kong Polytechnic University
@@ -353,3 +357,21 @@
 
 ## Technical University of Denmark
 - 2026-07 · [ZoRRO](../2607.10910-zorro/README.md)：零训练参数地融合时间衰减、内容相似和类别关系完成新闻个性化。
+
+## Shanghai Jiao Tong University
+- 2026-04 · [Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations](../2604.18146-marc/README.md)：从中间层抽取任务相关表征，显式解耦推荐适配与低维压缩。
+
+## Alibaba International Digital Commerce Group
+- 2026-03 · [RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation](../2603.28124-rclrec/README.md)：把转化相关行为逆序组成短课程，为稀疏转化增加中间监督。
+
+## Tongji University
+- 2026-03 · [TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation](../2603.21481-tagllm/README.md)：用用户兴趣手册约束细粒度多模态标签，并把生成能力蒸馏到小模型。
+
+## Bilibili
+- 2026-03 · [Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds](../2603.04227-cgr/README.md)：在自回归重排中直接执行约束感知奖励剪枝。
+
+## Harbin Institute of Technology
+- 2026-03 · [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力建模长行为序列。
+
+## Beihang University
+- 2026-02 · [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。

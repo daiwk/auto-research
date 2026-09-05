@@ -117,6 +117,21 @@ pytest tests/test_research_module_docs.py
 
 九篇均保留论文生产证据和公开数据复现边界，使用 MovieLens 三随机种子执行相互独立的核心机制，并把对应结构注册为可运行的 genrec Evolve mutation；本地负结果不会被隐藏或改写为提升。
 
+## 2026 历史 P0 · H05（10 个 adapter）
+
+- `marc` · [MARC](2604.18146-marc/README.md)：从中间层抽取任务相关表征，显式解耦推荐适配与低维压缩。
+- `rankup` · [RankUp](2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
+- `sid-coord` · [SID-Coord](2604.10471-sid-coord/README.md)：用层级 SID、目标感知 HID–SID 门控和兴趣对齐增强长尾泛化。
+- `rclrec` · [RCLRec](2603.28124-rclrec/README.md)：把转化相关行为逆序组成短课程，为稀疏转化提供中间监督。
+- `tagllm` · [TagLLM](2603.21481-tagllm/README.md)：用用户兴趣手册约束细粒度多模态标签，再将标签能力蒸馏到小模型。
+- `genfacet` · [GenFacet](2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，并以检索满意度做偏好对齐。
+- `cgr` · [CGR](2603.04227-cgr/README.md)：在自回归重排中直接执行约束感知奖励剪枝。
+- `hpgr` · [HPGR](2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力改造平铺行为序列。
+- `climber-pilot` · [Climber-Pilot](2602.13581-climber-pilot/README.md)：将多步消费前瞻蒸馏到单步召回，并在 attention 内注入业务指令。
+- `rolegen` · [RoleGen](2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径发现能激活休眠用户的桥接物品。
+
+十篇均有独立核心计算、seeds 42/43/44 公开数据产物、论文关键原图和可执行 genrec Evolve operator；线上数字与本地机制实验严格分栏记录。
+
 ## 2026-08-24 近期跨领域增量
 
 - `oneshot-index` · [OneShot](2607.27475-oneshot-index/README.md)：Meta/Instagram 将层级索引与排序目标共同训练，并以 neural scoring 替代纯点积检索；已全量部署全球流量。

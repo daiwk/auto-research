@@ -143,25 +143,33 @@
 - [Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale](../2604.23522-adasid/README.md)：依据碰撞负载、语义相容性和训练阶段动态调节 SID 重叠约束。
 - [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：Google Discover 以多 Agent 和自进化 SkillHub 自动提出、审查、执行并沉淀推荐配置实验。
 - [CS3](../2604.19269-cs3/README.md)：以循环自修正、跨塔同步和级联教师增强可在线部署的双塔召回。
+- [Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations](../2604.18146-marc/README.md)：从中间层抽取任务相关表征，显式解耦推荐适配与低维压缩。
+- [RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems](../2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
 - [GenRec](../2604.14878-genrec/README.md)：用 page-wise NTP、非对称 Token Merger 和带 NLL 正则的 GRPO-SR 优化整页结果。
 - [HILL](../2604.12965-hill-index/README.md)：用跨层 residual quantization 学习 coarse-to-fine 检索索引，减少候选打分量。
 - [UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute](../2604.12234-unirec-coa/README.md)：先生成属性链再生成容量受限 SID，并以 RFT/DPO 对齐业务目标。
 - [SOLARIS](../2604.12110-solaris/README.md)：预测未来 user-item pair，异步预计算并缓存 foundation-model latent，在线命中直接消费。
+- [SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search](../2604.10471-sid-coord/README.md)：以层级 SID、目标感知 HID–SID 门控和兴趣对齐增强长尾泛化。
 - [Dual-Rerank](../2604.07420-dual-rerank/README.md)：蒸馏 AR 顺序知识到 NAR 并行重排器并显式优化效用/延迟。
 - [MBGR](../2604.02684-mbgr/README.md)：以 business-aware SID、共享专家和动态标签路由统一多个业务域的生成式推荐。
 
 ## 2026-03
 - [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
+- [RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation](../2603.28124-rclrec/README.md)：把转化相关行为逆序组成短课程，为稀疏转化增加中间监督。
 - [UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking](../2603.24226-uniscale/README.md)：以 Entire-Space 数据和分层异构融合协同扩展搜索排序模型。
 - [GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation](../2603.22916-gatesid/README.md)：用冷启动感知门控动态融合语义 SID 与协同行为信号。
+- [TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation](../2603.21481-tagllm/README.md)：用用户兴趣手册约束细粒度多模态标签，并把生成能力蒸馏到小模型。
 - [AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation](../2603.19710-aigq/README.md)：组合 Direct/Reasoning query 生成、IL-GRPO 与混合在线服务。
+- [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 - [SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search](../2603.19585-safro/README.md)：用满意度奖励和双重相对优势优化短视频搜索多任务融合。
 - [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归生成候选，并同时注入近期历史和长期用户 prompt。
+- [Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds](../2603.04227-cgr/README.md)：在自回归重排中直接执行约束感知奖励剪枝。
 - [HAP](../2603.03770-hap/README.md)：按候选异质性动态路由不同计算量的预排模型。
 - [SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders](../2603.03988-sort-ranking/README.md)：系统优化 token 化、注意力和 FFN，统一替代工业 DLRM 排序。
 - [OneRanker](../2603.02999-oneranker/README.md)：用统一 token 空间联合生成和 value-aware 广告排序。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把 VLM 图文对齐与 Pin-Board 共现邻居目标结合，改善 fresh 内容表征。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容表征先对齐到 item-ID 协同空间，再经多层 proxy 与 gate 接入排序。
+- [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力建模长行为序列。
 
 ## 2026-02
 - [Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale](../2603.00632-quasid/README.md)：按业务资格信号设定碰撞 margin，提升冷启动 SID 可辨识度。
@@ -174,6 +182,8 @@
 - [ULTRA-HSTU](../2602.16986-ultra-hstu/README.md)：Meta 用 semi-local attention、LBSL 和 Mixture of Transducers 提升超长历史的训练与推理 scaling efficiency。
 - [MFLI](../2602.16124-mfli/README.md)：Meta 将多切面 index 与 item 表示联合学习，并按请求动态分配 facet 召回预算。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一 Transformer 中平衡 dense 特征交互与序列建模，并按预算选择可训练模块。
+- [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../2602.13581-climber-pilot/README.md)：将多步消费前瞻蒸馏到单步召回，并在注意力内注入业务指令。
+- [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
 - [RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems](../2602.12968-rgalign-rec/README.md)：用真实排序模型偏好指导潜在 query 的 SFT 与 DPO 对齐。
 - [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
 - [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。

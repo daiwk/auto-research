@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "sid-coord",
+  "arxiv_id": "2604.10471",
+  "title": "SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search",
+  "paper_url": "https://arxiv.org/abs/2604.10471",
+  "organization": "Kuaishou Technology",
+  "published": "2026-04-12",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "short-video-search",
+    "semantic-id",
+    "long-tail-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/sid_coord",
+  "documentation": "docs/reproductions/2604.10471-sid-coord/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "production SID tokenizer",
+    "private short-video logs",
+    "online ranking backbone"
+  ],
+  "evolve_operators": [
+    "head:sid-coordination"
+  ]
+}
