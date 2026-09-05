@@ -1,0 +1,674 @@
+{
+  "paper": {
+    "arxiv_id": "2605.16479",
+    "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+    "url": "https://arxiv.org/abs/2605.16479",
+    "organization": "LinkedIn"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "policy-facet",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "transition + content + popularity",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "policy-facet core mechanism (validation blend=0.3)",
+    "hit_at_10": 0.09090909090909091,
+    "ndcg_at_10": 0.04713208612966207,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.16136363636363638
+  },
+  "relative": {
+    "hit_at_10_percent": -16.66666666666666,
+    "ndcg_at_10_percent": -12.727195857575461,
+    "fresh_hit_at_10_percent": 0.0,
+    "head_share_at_10_percent": -32.122370936902485
+  },
+  "stages": {
+    "finite_scores": 360,
+    "score_std": 0.20261219602280975,
+    "retrieval_stages": 1,
+    "pointwise_policy_ranker": 1
+  },
+  "paper_results": {
+    "facet_ctr_lift_percent": 34.8,
+    "apply_ratio_lift_percent": 2.6,
+    "successful_session_lift_percent": 1.6
+  },
+  "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型或线上服务栈。",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "policy-facet",
+    "arxiv_id": "2605.16479",
+    "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+    "paper_url": "https://arxiv.org/abs/2605.16479",
+    "track": "recommendation",
+    "organization": "LinkedIn",
+    "published": "2026-05-15",
+    "code_url": null,
+    "topics": [
+      "job-search",
+      "facet-retrieval",
+      "policy-ranking"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/policy_facet",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K"
+    ],
+    "baseline": "transition + content + popularity",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "fresh_hit_at_10",
+      "head_share_at_10"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "LinkedIn Job Search",
+        "metric": "Facet CTR",
+        "lift_percent": 34.8,
+        "traffic": "production A/B; p<0.0001",
+        "source_url": "https://arxiv.org/html/2605.16479v1",
+        "source_location": "Section 4.2, Table 5",
+        "retrieved_at": "2026-09-02"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": [
+      "head:policy-facet"
+    ]
+  },
+  "provenance": {
+    "created_at": "2026-09-02T03:57:45.938107+00:00",
+    "code_commit": "4786d139b957890340a7f58e54ee48d083b12944",
+    "python": "3.12.9",
+    "platform": "sanitized public CPU run",
+    "dataset_dir": "data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2605.16479-policy-facet/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "url": "https://arxiv.org/abs/2605.16479",
+        "organization": "LinkedIn"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "policy-facet",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "policy-facet core mechanism (validation blend=0.3)",
+        "hit_at_10": 0.09090909090909091,
+        "ndcg_at_10": 0.04713208612966207,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.16136363636363638
+      },
+      "relative": {
+        "hit_at_10_percent": -16.66666666666666,
+        "ndcg_at_10_percent": -12.727195857575461,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -32.122370936902485
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.20261219602280975,
+        "retrieval_stages": 1,
+        "pointwise_policy_ranker": 1
+      },
+      "paper_results": {
+        "facet_ctr_lift_percent": 34.8,
+        "apply_ratio_lift_percent": 2.6,
+        "successful_session_lift_percent": 1.6
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型或线上服务栈。",
+      "runtime": {
+        "requested_device": "auto",
+        "cpu_threads": null,
+        "platform": "Darwin arm64",
+        "resolved_device": "cpu",
+        "torch_version": "2.13.0",
+        "accelerator": "arm"
+      },
+      "seed": 42,
+      "schema_version": 2,
+      "manifest": {
+        "adapter_key": "policy-facet",
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "paper_url": "https://arxiv.org/abs/2605.16479",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-05-15",
+        "code_url": null,
+        "topics": [
+          "job-search",
+          "facet-retrieval",
+          "policy-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/policy_facet",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "LinkedIn Job Search",
+            "metric": "Facet CTR",
+            "lift_percent": 34.8,
+            "traffic": "production A/B; p<0.0001",
+            "source_url": "https://arxiv.org/html/2605.16479v1",
+            "source_location": "Section 4.2, Table 5",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:policy-facet"
+        ]
+      },
+      "provenance": {
+        "created_at": "2026-09-02T03:57:45.938107+00:00",
+        "code_commit": "4786d139b957890340a7f58e54ee48d083b12944",
+        "python": "3.12.9",
+        "platform": "sanitized public CPU run",
+        "dataset_dir": "data",
+        "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+        "packages": {
+          "auto-research": "0.1.0",
+          "numpy": "2.5.2",
+          "torch": "2.13.0",
+          "transformers": "5.14.1"
+        },
+        "artifact_path": "docs/reproductions/2605.16479-policy-facet/metrics/public-seeds42-44.json"
+      },
+      "evaluation_protocol": {
+        "tier": "l2_public_dataset",
+        "tier_label": "L2 公开数据集训练",
+        "seeds": [
+          42
+        ],
+        "budget": "paper-specific",
+        "formal_comparison": false,
+        "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+      }
+    },
+    {
+      "paper": {
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "url": "https://arxiv.org/abs/2605.16479",
+        "organization": "LinkedIn"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "policy-facet",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "policy-facet core mechanism (validation blend=0.3)",
+        "hit_at_10": 0.09090909090909091,
+        "ndcg_at_10": 0.04713208612966207,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.16136363636363638
+      },
+      "relative": {
+        "hit_at_10_percent": -16.66666666666666,
+        "ndcg_at_10_percent": -12.727195857575461,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -32.122370936902485
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.20261219602280975,
+        "retrieval_stages": 1,
+        "pointwise_policy_ranker": 1
+      },
+      "paper_results": {
+        "facet_ctr_lift_percent": 34.8,
+        "apply_ratio_lift_percent": 2.6,
+        "successful_session_lift_percent": 1.6
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型或线上服务栈。",
+      "runtime": {
+        "requested_device": "auto",
+        "cpu_threads": null,
+        "platform": "Darwin arm64",
+        "resolved_device": "cpu",
+        "torch_version": "2.13.0",
+        "accelerator": "arm"
+      },
+      "seed": 43,
+      "schema_version": 2,
+      "manifest": {
+        "adapter_key": "policy-facet",
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "paper_url": "https://arxiv.org/abs/2605.16479",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-05-15",
+        "code_url": null,
+        "topics": [
+          "job-search",
+          "facet-retrieval",
+          "policy-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/policy_facet",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "LinkedIn Job Search",
+            "metric": "Facet CTR",
+            "lift_percent": 34.8,
+            "traffic": "production A/B; p<0.0001",
+            "source_url": "https://arxiv.org/html/2605.16479v1",
+            "source_location": "Section 4.2, Table 5",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:policy-facet"
+        ]
+      },
+      "provenance": {
+        "created_at": "2026-09-02T03:57:46.376339+00:00",
+        "code_commit": "4786d139b957890340a7f58e54ee48d083b12944",
+        "python": "3.12.9",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+        "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+        "packages": {
+          "auto-research": "0.1.0",
+          "numpy": "2.5.2",
+          "torch": "2.13.0",
+          "transformers": "5.14.1"
+        }
+      },
+      "evaluation_protocol": {
+        "tier": "l2_public_dataset",
+        "tier_label": "L2 公开数据集训练",
+        "seeds": [
+          43
+        ],
+        "budget": "paper-specific",
+        "formal_comparison": false,
+        "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+      }
+    },
+    {
+      "paper": {
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "url": "https://arxiv.org/abs/2605.16479",
+        "organization": "LinkedIn"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "policy-facet",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "policy-facet core mechanism (validation blend=0.3)",
+        "hit_at_10": 0.09090909090909091,
+        "ndcg_at_10": 0.04713208612966207,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.16136363636363638
+      },
+      "relative": {
+        "hit_at_10_percent": -16.66666666666666,
+        "ndcg_at_10_percent": -12.727195857575461,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -32.122370936902485
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.20261219602280975,
+        "retrieval_stages": 1,
+        "pointwise_policy_ranker": 1
+      },
+      "paper_results": {
+        "facet_ctr_lift_percent": 34.8,
+        "apply_ratio_lift_percent": 2.6,
+        "successful_session_lift_percent": 1.6
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产大模型或线上服务栈。",
+      "runtime": {
+        "requested_device": "auto",
+        "cpu_threads": null,
+        "platform": "Darwin arm64",
+        "resolved_device": "cpu",
+        "torch_version": "2.13.0",
+        "accelerator": "arm"
+      },
+      "seed": 44,
+      "schema_version": 2,
+      "manifest": {
+        "adapter_key": "policy-facet",
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "paper_url": "https://arxiv.org/abs/2605.16479",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-05-15",
+        "code_url": null,
+        "topics": [
+          "job-search",
+          "facet-retrieval",
+          "policy-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/policy_facet",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "LinkedIn Job Search",
+            "metric": "Facet CTR",
+            "lift_percent": 34.8,
+            "traffic": "production A/B; p<0.0001",
+            "source_url": "https://arxiv.org/html/2605.16479v1",
+            "source_location": "Section 4.2, Table 5",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:policy-facet"
+        ]
+      },
+      "provenance": {
+        "created_at": "2026-09-02T03:57:46.674565+00:00",
+        "code_commit": "4786d139b957890340a7f58e54ee48d083b12944",
+        "python": "3.12.9",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+        "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+        "packages": {
+          "auto-research": "0.1.0",
+          "numpy": "2.5.2",
+          "torch": "2.13.0",
+          "transformers": "5.14.1"
+        }
+      },
+      "evaluation_protocol": {
+        "tier": "l2_public_dataset",
+        "tier_label": "L2 公开数据集训练",
+        "seeds": [
+          44
+        ],
+        "budget": "paper-specific",
+        "formal_comparison": false,
+        "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.05400546778896325,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.2377272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.0909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.04713208612966207,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.16136363636363638,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": -16.66666666666666,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": -12.727195857575461,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -32.122370936902485,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.finite_scores": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.score_std": {
+      "mean": 0.20261219602280975,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.retrieval_stages": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.pointwise_policy_ranker": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.facet_ctr_lift_percent": {
+      "mean": 34.8,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.apply_ratio_lift_percent": {
+      "mean": 2.6,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.successful_session_lift_percent": {
+      "mean": 1.6000000000000003,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:policy-facet"
+}

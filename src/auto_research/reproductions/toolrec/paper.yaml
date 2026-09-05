@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "toolrec",
+  "arxiv_id": "2606.08466",
+  "title": "ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants",
+  "paper_url": "https://arxiv.org/abs/2606.08466",
+  "organization": "Huazhong University of Science and Technology",
+  "published": "2026-06-07",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "query-recommendation",
+    "preference-alignment",
+    "tool-use"
+  ],
+  "local_code": "src/auto_research/reproductions/toolrec",
+  "documentation": "docs/reproductions/2606.08466-toolrec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Qwen3-14B LoRA",
+    "private assistant logs",
+    "online tool service"
+  ],
+  "evolve_operators": [
+    "reward:tool-calibration"
+  ]
+}

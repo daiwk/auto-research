@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "muchator",
+  "arxiv_id": "2605.27103",
+  "title": "MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music",
+  "paper_url": "https://arxiv.org/abs/2605.27103",
+  "organization": "ByteDance",
+  "published": "2026-05-26",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "music-recommendation",
+    "conversational-llm",
+    "active-discovery"
+  ],
+  "local_code": "src/auto_research/reproductions/muchator",
+  "documentation": "docs/reproductions/2605.27103-muchator/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Qwen3-8B pretraining/SFT/RL",
+    "private music corpus",
+    "conversational serving"
+  ],
+  "evolve_operators": [
+    "context:conversational-intent"
+  ]
+}

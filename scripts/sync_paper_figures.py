@@ -85,6 +85,9 @@ FIGURE_OVERRIDES = {
     "2512.24880-mhc": "1",
     "2606.13392-minimax-sparse-attention": "1",
     "2607.28895-snaplgr": "1",
+    "2606.06970-ssrlive": "2",
+    "2605.27043-causal-representation": "1",
+    "2605.16479-policy-facet": "2",
 }
 CAPTION_OVERRIDES = {
     "2112.09332-webgpt": "demonstration interface",

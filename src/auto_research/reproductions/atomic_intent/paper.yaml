@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "atomic-intent",
+  "arxiv_id": "2606.10357",
+  "title": "Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations",
+  "paper_url": "https://arxiv.org/abs/2606.10357",
+  "organization": "The Hong Kong Polytechnic University",
+  "published": "2026-06-09",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "cross-domain",
+    "llm-recommendation",
+    "intent-retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/atomic_intent",
+  "documentation": "docs/reproductions/2606.10357-atomic-intent/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "offline production LLM",
+    "Kuaishou intent store",
+    "online serving stack"
+  ],
+  "evolve_operators": [
+    "context:atomic-intent-tree"
+  ]
+}

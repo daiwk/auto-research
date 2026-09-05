@@ -104,9 +104,16 @@
 | Serving 与研究基础设施 | [EvoRec: Self-Evolving Agentic Recommender Systems](../2606.28368-evorec/README.md) | Alibaba International Digital Commerce Group，2026-06-15 | 未发现官方代码 | `evorec` |
 | 生成、排序与冷启动 | [OneRank: Unified Transformer-Native Ranking Architecture for Multi-Task Recommendation](../2606.16838-onerank/README.md) | Renmin University of China，2026-06-15 | 未发现官方代码 | `onerank` |
 | 多阶段排序与混排 | [PIANO: Personalized Reranking via Information Aggregation Node for Music Search Optimization](../2606.16641-piano/README.md) | NetEase Cloud Music，2026-06-15 | 未发现官方代码 | `piano` |
+| 大模型能力与推荐融合 | [Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations](../2606.10357-atomic-intent/README.md) | The Hong Kong Polytechnic University，2026-06-09 | 未发现官方代码 | `atomic-intent` |
+| 大模型能力与推荐融合 | [ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants](../2606.08466-toolrec/README.md) | Huazhong University of Science and Technology，2026-06-07 | 未发现官方代码 | `toolrec` |
+| 生成、排序与冷启动 | [SSRLive: Live Streaming Recommendation with Dynamic Semantic ID](../2606.06970-ssrlive/README.md) | Taobao & Tmall Group, Alibaba，2026-06-05 | 未发现官方代码 | `ssrlive` |
+| 生成、排序与冷启动 | [Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation](../2606.03866-taiji/README.md) | Kuaishou Technology，2026-06-02 | 未发现官方代码 | `taiji` |
 | 训练目标与决策优化 | [Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems](../2606.00282-scalr/README.md) | Meta，2026-05-29 | 未发现官方代码 | `scalr` |
 | 训练目标与决策优化 | [Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models](../2605.29755-rec-distill/README.md) | ByteDance / Douyin / TikTok，2026-05-28 | 未发现官方代码 | `rec-distill` |
+| 训练目标与决策优化 | [Causal Representation Learning for Generalisable Recommendation](../2605.27043-causal-representation/README.md) | University of Warwick，2026-05-26 | 未发现官方代码 | `causal-representation` |
 | 大模型能力与推荐融合 | [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md) | NetEase Cloud Music，2026-05-26 | 未发现官方代码 | `l2rec` |
+| 大模型能力与推荐融合 | [MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music](../2605.27103-muchator/README.md) | ByteDance，2026-05-26 | 未发现官方代码 | `muchator` |
+| 训练目标与决策优化 | [Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems](../2607.19357-primal-dual-decoding/README.md) | Spotify，2026-05-26 | 未发现官方代码 | `primal-dual-decoding` |
 | 生成、排序与冷启动 | [DeGRe: Listwise Generative Reranking with Offline Lookahead Distillation](../2605.25749-degre/README.md) | Alibaba Group / Zhejiang University，2026-05-25 | 未发现官方代码 | `degre` |
 | 生成、排序与冷启动 | [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md) | University of Science and Technology of China / Alibaba，2026-05-25 | 未发现官方代码 | `qgs` |
 | 大模型能力与推荐融合 | [From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs](../2605.23310-akt-rec/README.md) | Alibaba Group / Peking University，2026-05-22 | 未发现官方代码 | `akt-rec` |
@@ -118,8 +125,10 @@
 | 训练目标与决策优化 | [Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation](../2605.19651-mdcns/README.md) | 论文作者团队（原文未标注公司），2026-05-19 | [已开源](https://github.com/Lyz103/SIGIR26-MDCNS) | `mdcns` |
 | 训练目标与决策优化 | [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md) | Kuaishou Technology，2026-05-18 | [已开源](https://github.com/liuzhao09/DADF) | `dadf` |
 | 生成、排序与冷启动 | [Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search](../2605.17994-growthgr/README.md) | Alibaba Group / Taobao & Tmall，2026-05-18 | 未发现官方代码 | `growthgr` |
+| 生成、排序与冷启动 | [Policy-Grounded Dynamic Facet Suggestions for Job Search](../2605.16479-policy-facet/README.md) | LinkedIn，2026-05-15 | 未发现官方代码 | `policy-facet` |
 | 生成、排序与冷启动 | [Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL](../2605.14434-cq-sid/README.md) | Alibaba Taobao & Tmall Group，2026-05-14 | 未发现官方代码 | `cq-sid` |
 | 多阶段排序与混排 | [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md) | Pinterest，2026-05-08 | 未发现官方代码 | `prl-puts` |
+| 训练目标与决策优化 | [Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling](../2605.05855-pa-bridge/README.md) | ByteDance，2026-05-07 | 未发现官方代码 | `pa-bridge` |
 | 生成、排序与冷启动 | [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md) | Huawei Technologies，2026-05-07 | 未发现官方代码 | `ektm` |
 | 大模型能力与推荐融合 | [RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation](../2605.04726-recgpt-mobile/README.md) | Alibaba / Taobao，2026-05-06 | 未发现官方代码 | `recgpt-mobile` |
 | 生成、排序与冷启动 | [Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md) | Google，2026-05-04 | 未发现官方代码 | `semantic-native-longseq` |
