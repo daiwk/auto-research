@@ -77,6 +77,7 @@ def update(
         "v-rubrics", "clue-opsd", "grin", "grip",
         "ttpo", "weak-guide-rlvr", "uc-mopd", "spear",
         "rlvr-fusion", "video-opsd", "normalized-dpo",
+        "gapo",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

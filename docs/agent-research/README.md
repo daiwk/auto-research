@@ -11,6 +11,8 @@
 
 ## 快速入口
 
+- [DRACO](2609.04094-draco/README.md)：动态 rubric 与闭式步骤信用重分配。
+
 - [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态、组合轴和执行边界。
 - [方法索引](catalog.md)：按记忆、规划、工具管理等方向浏览。
 - 分类浏览：[按机构/公司/学校](catalog/by-organization.md) ·

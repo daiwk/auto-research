@@ -12,6 +12,8 @@
 
 ## 快速入口
 
+- [GAPO](2609.00444-gapo/README.md)：按组内正确数自适应放宽稀有正确 rollout 的 clip 上界。
+
 - [自动进化中的基础模型](../evolution-domains.md)：查看结构、数据和后训练的组合方式。
 - [方法索引](catalog.md)：按研究方向查看基线、已实现论文、原作者代码和本地入口。
 - 分类浏览：[按机构/公司/学校](catalog/by-organization.md) ·

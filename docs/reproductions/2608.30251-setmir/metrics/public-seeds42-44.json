@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "adapter": "setmir",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2608.30251",
+        "title": "SetMIR: Multi-Interest Retrieval as Set Prediction",
+        "url": "https://arxiv.org/abs/2608.30251",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "setmir",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "setmir core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.05665010575481588,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1968181818181818
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": 4.896981868923094,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -17.208413001912053
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "overall_cvr_lift_percent": 3.1,
+        "source_ctr_lift_percent": 44.0,
+        "ann_query_reduction_percent": 33.0
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:setmir",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.30251",
+        "title": "SetMIR: Multi-Interest Retrieval as Set Prediction",
+        "url": "https://arxiv.org/abs/2608.30251",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "setmir",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "setmir core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.05665010575481588,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1968181818181818
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": 4.896981868923094,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -17.208413001912053
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "overall_cvr_lift_percent": 3.1,
+        "source_ctr_lift_percent": 44.0,
+        "ann_query_reduction_percent": 33.0
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:setmir",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2608.30251",
+        "title": "SetMIR: Multi-Interest Retrieval as Set Prediction",
+        "url": "https://arxiv.org/abs/2608.30251",
+        "organization": "Snap Inc."
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "setmir",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "setmir core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.05665010575481588,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1968181818181818
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": 4.896981868923094,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -17.208413001912053
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "overall_cvr_lift_percent": 3.1,
+        "source_ctr_lift_percent": 44.0,
+        "ann_query_reduction_percent": 33.0
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:setmir",
+      "seed": 44
+    }
+  ],
+  "manifest_ref": "reproduction:setmir",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2608.30251-setmir/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

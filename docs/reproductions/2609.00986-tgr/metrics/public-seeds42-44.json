@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "adapter": "tgr",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.00986",
+        "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+        "url": "https://arxiv.org/abs/2609.00986",
+        "organization": "Tencent"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "tgr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "tgr core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.059533785697752924,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.16545454545454547
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": 10.236589247578852,
+        "fresh_hit_at_10_percent": 150.0,
+        "head_share_at_10_percent": -30.401529636711278
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "ctr_lift_percent": 3.57,
+        "advertising_revenue_lift_percent": 1.71,
+        "new_user_conversion_lift_percent": 13.09
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:tgr",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.00986",
+        "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+        "url": "https://arxiv.org/abs/2609.00986",
+        "organization": "Tencent"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "tgr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "tgr core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.059533785697752924,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.16545454545454547
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": 10.236589247578852,
+        "fresh_hit_at_10_percent": 150.0,
+        "head_share_at_10_percent": -30.401529636711278
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "ctr_lift_percent": 3.57,
+        "advertising_revenue_lift_percent": 1.71,
+        "new_user_conversion_lift_percent": 13.09
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:tgr",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.00986",
+        "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+        "url": "https://arxiv.org/abs/2609.00986",
+        "organization": "Tencent"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "tgr",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "tgr core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.059533785697752924,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.16545454545454547
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": 10.236589247578852,
+        "fresh_hit_at_10_percent": 150.0,
+        "head_share_at_10_percent": -30.401529636711278
+      },
+      "stages": {
+        "finite_scores": 360,
+        "mechanism_paths": 3
+      },
+      "paper_results": {
+        "ctr_lift_percent": 3.57,
+        "advertising_revenue_lift_percent": 1.71,
+        "new_user_conversion_lift_percent": 13.09
+      },
+      "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上服务。",
+      "manifest_ref": "reproduction:tgr",
+      "seed": 44
+    }
+  ],
+  "manifest_ref": "reproduction:tgr",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.00986-tgr/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

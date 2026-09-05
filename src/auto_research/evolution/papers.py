@@ -7,6 +7,10 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2609.01240": ("context:rest-dual-gate", "ReST 的双门控时序编码与共享用户前缀排序"),
+    "2609.00986": ("head:tgr-generation-reasoning", "TGR 的分层语义 ID、列表目标与离线 reason token"),
+    "2608.30255": ("context:coengagement-embedding", "CAMIE 的共同互动对称对比商品表征"),
+    "2608.30251": ("context:setmir-query-set", "SetMIR 的兴趣集合、presence 门控与 query NMS"),
     "2604.18146": ("head:modular-compression", "MARC 的任务解耦中层表征与低维压缩模块"),
     "2604.17878": ("head:high-rank-representation", "RankUp 的随机置换多 embedding 与全局 token 高秩表征"),
     "2604.10471": ("head:sid-coordination", "SID-Coord 的层级 SID、HID-SID 门控与兴趣对齐"),
@@ -277,6 +281,10 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2609.00444": (
+        "gapo",
+        "按组内正确数自适应放宽稀有正确轨迹的上裁剪边界，保留困难题探索梯度",
+    ),
     "2608.27409": (
         "rlvr-fusion",
         "统一比较 task-vector Merge、混合数据 RLVR 与多教师 on-policy distillation",
@@ -467,6 +475,10 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.04094": (
+        "critic:draco",
+        "动态生成能力相关 rubric，并把轨迹级判断闭式分配到负责步骤",
+    ),
     "2608.27439": (
         "policy:redevoagent",
         "用工具效果画像和 deciding-tool attribution 蒸馏攻击技能，只接受通过 held-out validation ratchet 的更新",

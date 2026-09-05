@@ -89,11 +89,14 @@ def migrate_payload(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     protocol.update({
         "tier": tier,
         "seeds": seeds,
-        "formal_comparison": len(seeds) >= 3,
     })
+    # Keep an explicit per-artifact comparison declaration authoritative.
+    # Multiple seeds improve stability, but do not turn an L1 mechanism
+    # diagnostic into a formal capability comparison.
+    protocol.setdefault("formal_comparison", len(seeds) >= 3)
     protocol.setdefault(
         "claim_policy",
-        "formal multi-seed comparison" if len(seeds) >= 3 else
+        "formal multi-seed comparison" if protocol["formal_comparison"] else
         "single/few-seed smoke result; do not claim a stable improvement",
     )
     provenance = dict(payload.get("provenance") or {})

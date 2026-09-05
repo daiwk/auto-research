@@ -50,6 +50,11 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `rest` · [ReST](2609.01240-rest/README.md)：双门控时序编码与可复用用户前缀的工业排序。
+- `tgr` · [TGR](2609.00986-tgr/README.md)：统一生成式排序、语义 ID 和离线 reason token。
+- `camie` · [CAMIE](2608.30255-camie/README.md)：用共同互动对齐多模态商品向量。
+- `setmir` · [SetMIR](2608.30251-setmir/README.md)：兴趣集合预测、presence 门控与动态 ANN 派发。
+
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
 - 已登记并复核 292 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。

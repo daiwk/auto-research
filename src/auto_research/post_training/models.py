@@ -108,6 +108,7 @@ ALGORITHMS = (
     "rlvr-fusion",
     "video-opsd",
     "normalized-dpo",
+    "gapo",
 )
 
 

@@ -74,6 +74,8 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2609.00986-tgr": "1",
+    "2609.00444-gapo": "2",
     "2604.18146-marc": "5",
     "2008.13535-dcn-v2": "2",
     "2205.08084-m6rec": "3",
