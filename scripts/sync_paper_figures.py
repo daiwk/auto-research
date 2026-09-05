@@ -89,6 +89,9 @@ FIGURE_OVERRIDES = {
     "2606.06970-ssrlive": "2",
     "2605.27043-causal-representation": "1",
     "2605.16479-policy-facet": "2",
+    "2602.09386-smes": "2",
+    "2601.20215-easq": "1",
+    "2601.02955-harmonrank": "3",
 }
 CAPTION_OVERRIDES = {
     "2112.09332-webgpt": "demonstration interface",

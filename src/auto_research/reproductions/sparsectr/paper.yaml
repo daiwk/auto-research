@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "sparsectr",
+  "arxiv_id": "2601.17836",
+  "title": "Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction",
+  "paper_url": "https://arxiv.org/abs/2601.17836",
+  "organization": "Institute of Software, Chinese Academy of Sciences",
+  "published": "2026-01-25",
+  "upstream_code": "是：[https://github.com/laiweijiang/SparseCTR](https://github.com/laiweijiang/SparseCTR)",
+  "track": "recommendation",
+  "topics": [
+    "ctr-prediction",
+    "long-sequence",
+    "sparse-attention"
+  ],
+  "local_code": "src/auto_research/reproductions/sparsectr",
+  "documentation": "docs/reproductions/2601.17836-sparsectr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private advertising histories",
+    "production HSTU stack",
+    "40 ms serving implementation"
+  ],
+  "evolve_operators": [
+    "context:evolutionary-sparse-attention"
+  ]
+}

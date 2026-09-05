@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "rq-gmm",
+  "arxiv_id": "2602.12593",
+  "title": "RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction",
+  "paper_url": "https://arxiv.org/abs/2602.12593",
+  "organization": "Tencent",
+  "published": "2026-02-13",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "multimodal-recommendation",
+    "semantic-tokenization",
+    "ctr-prediction"
+  ],
+  "local_code": "src/auto_research/reproductions/rq_gmm",
+  "documentation": "docs/reproductions/2602.12593-rq-gmm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "production multimodal encoder",
+    "private advertising features",
+    "online CTR serving"
+  ],
+  "evolve_operators": [
+    "head:residual-gmm"
+  ]
+}

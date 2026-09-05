@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "harmonrank",
+  "arxiv_id": "2601.02955",
+  "title": "Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency",
+  "paper_url": "https://arxiv.org/abs/2601.02955",
+  "organization": "Kuaishou Technology",
+  "published": "2026-01-06",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "multi-objective-ranking",
+    "rank-consistency",
+    "ensemble"
+  ],
+  "local_code": "src/auto_research/reproductions/harmonrank",
+  "documentation": "docs/reproductions/2601.02955-harmonrank/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private multi-objective labels",
+    "production ensemble models",
+    "live serving stack"
+  ],
+  "evolve_operators": [
+    "reward:rank-consistency"
+  ]
+}

@@ -184,15 +184,22 @@
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一 Transformer 中平衡 dense 特征交互与序列建模，并按预算选择可训练模块。
 - [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../2602.13581-climber-pilot/README.md)：将多步消费前瞻蒸馏到单步召回，并在注意力内注入业务指令。
 - [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
+- [CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval](../2602.12564-capts/README.md)：以价值感知匹配和跨渠道自适应路由选择 I2I 召回 trigger。
+- [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../2602.12972-unimvt/README.md)：联合学习去偏 CTR 与因果 uplift，并显式估计 treatment 和 counterfactual 响应。
 - [RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems](../2602.12968-rgalign-rec/README.md)：用真实排序模型偏好指导潜在 query 的 SFT 与 DPO 对齐。
+- [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。
 - [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
+- [Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems](../2602.12041-mlcc/README.md)：分层压缩并交叉低维特征，在受控计算量下扩大推荐网络容量。
 - [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
+- [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../2602.10455-ug-sep/README.md)：拆分用户侧与通用计算，使大规模推荐模型复用只需计算一次的表示。
 - [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。
 - [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
 - [Kunlun](../2602.10016-kunlun/README.md)：Meta 在逐层 Transformer/Interaction 双 block 中组合 GDPA、HSP、全局交互与 CompSkip。
 - [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md)：离线 MLLM 生成语义 anchor，轻量非对称模块注入直播排序。
 - [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
+- [SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity](../2602.09386-smes/README.md)：用渐进式稀疏路由和去重执行，为不同任务动态分配专家容量。
 - [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
+- [PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation](../2602.08530-pit/README.md)：按用户动态组合 item token，使生成式推荐的语义 ID 同时表达个体偏好。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task 统一 token 化，以 domain-feature attention 支持多分布推荐。
 - [MSN](../2602.07526-msn/README.md)：用 Product-Key Memory 增加容量，只读取 top-k 槽位并门控融合 dense 主干。
 - [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：以 token mixing/reverting、head/token SwiGLU、间隔残差和辅助监督扩展排序模型。
@@ -201,8 +208,16 @@
 
 ## 2026-01
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、层级 Semantic ID 和跨行为融合统一多个电商推荐场景。
+- [Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation](../2601.21285-zenith/README.md)：以 Prime Token Fusion 和 Boost 扩展直播排序模型的深度与宽度。
+- [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../2601.20215-easq/README.md)：用独立 LoRA 与多任务路径把稀疏问卷满意度接入持续在线学习。
 - [LLaTTE](../2601.20083-llatte/README.md)：把 LLM 语义特征与推荐表征结合，并面向大规模排序设计特征交互结构。
+- [S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation](../2601.18664-s2gr/README.md)：把语义引导逐步写入潜空间推理，增强生成式推荐的中间决策。
+- [Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction](../2601.17836-sparsectr/README.md)：组合全局、转移和局部稀疏注意力，建模千级长期行为序列。
+- [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../2601.14333-hcub/README.md)：用层级上下文 uplift bandit 在目录个性化中学习增量收益。
 - [HyFormer](../2601.12681-hyformer/README.md)：联合编码用户序列与搜索 query，通过 query decoding 和 boosting 强化搜索推荐信号。
+- [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一 Airbnb 的体验推荐链路。
+- [PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations](../2601.04674-promise/README.md)：以过程奖励监督生成式推荐的中间推理，而非只依赖最终命中。
+- [Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency](../2601.02955-harmonrank/README.md)：用关系感知注意力和一致性约束协调多阶段工业排序。
 - [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，改善 podcast 冷启动。
 
 ## 2025-12

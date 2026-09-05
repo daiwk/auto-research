@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "easq",
+  "arxiv_id": "2601.20215",
+  "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+  "paper_url": "https://arxiv.org/abs/2601.20215",
+  "organization": "Kuaishou Technology",
+  "published": "2026-01-28",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "satisfaction-alignment",
+    "preference-learning",
+    "online-learning"
+  ],
+  "local_code": "src/auto_research/reproductions/easq",
+  "documentation": "docs/reproductions/2601.20215-easq/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private questionnaire responses",
+    "production ranking backbone",
+    "online DPO update service"
+  ],
+  "evolve_operators": [
+    "context:questionnaire-alignment"
+  ]
+}

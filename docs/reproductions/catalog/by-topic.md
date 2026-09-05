@@ -119,8 +119,11 @@
 - [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../2602.13581-climber-pilot/README.md)：将多步消费前瞻蒸馏到单步召回，并在注意力内注入业务指令。
 - [S-GRec](../2602.10606-s-grec/README.md)：用 LLM judge 生成个性化偏好监督，再通过 A2PO 蒸馏到 SID 生成器。
 - [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
+- [PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation](../2602.08530-pit/README.md)：按用户动态组合 item token，使生成式推荐的语义 ID 同时表达个体偏好。
 - [DOS](../2602.04460-dos/README.md)：以协同/语义双流和正交 residual quantization 对齐 SID codebook 与生成空间。
 - [OneMall](../2601.21770-onemall/README.md)：以场景 prompt、Semantic ID 和跨行为融合统一多个电商生成推荐场景。
+- [S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation](../2601.18664-s2gr/README.md)：把语义引导逐步写入潜空间推理，增强生成式推荐的中间决策。
+- [PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations](../2601.04674-promise/README.md)：以过程奖励监督生成式推荐的中间推理，而非只依赖最终命中。
 - [HiGR](../2512.24787-higr/README.md)：通过层级 Semantic ID、粗到细 slate decoder 和 ORPO 生成整组推荐结果。
 - [DualGR](../2511.12518-dualgr/README.md)：以长短兴趣路由、约束 SID 前缀和曝光惩罚改善生成召回。
 - [IntSR](../2509.21179-intsr/README.md)：用显式 query、隐式会话意图与时间上下文统一搜索和推荐生成。
@@ -175,10 +178,14 @@
 - [ULTRA-HSTU](../2602.16986-ultra-hstu/README.md)：以半局部 attention、LBSL 逐层扩窗和 Mixture of Transducers 扩展 16k 用户历史。
 - [MixFormer](../2602.14110-mixformer/README.md)：在统一网络中融合 dense 特征交互和序列建模，并按预算选择训练模块。
 - [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
+- [Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems](../2602.12041-mlcc/README.md)：分层压缩并交叉低维特征，在受控计算量下扩大推荐网络容量。
+- [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../2602.10455-ug-sep/README.md)：拆分用户侧与通用计算，使大规模推荐模型复用只需计算一次的表示。
 - [Kunlun](../2602.10016-kunlun/README.md)：在每层组合 GDPA Transformer 与分层 seed/global interaction block，并以 CompSkip 稳定深层训练。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task token 化，让领域与任务参与每层特征交互。
 - [MSN](../2602.07526-msn/README.md)：把大容量参数放入稀疏 Product-Key Memory，只激活 top-k 槽位控制计算。
 - [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：用 mixing/reverting、双粒度 SwiGLU、interval residual 和辅助监督扩展工业精排。
+- [Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation](../2601.21285-zenith/README.md)：以 Prime Token Fusion 和 Boost 扩展直播排序模型的深度与宽度。
+- [Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction](../2601.17836-sparsectr/README.md)：组合全局、转移和局部稀疏注意力，建模千级长期行为序列。
 - [HyFormer](../2601.12681-hyformer/README.md)：联合用户序列与 query decoding，通过 query boosting 强化搜索排序。
 - [OneTrans](../2510.26104-onetrans/README.md)：用统一因果 Transformer 覆盖多场景排序，并复用 KV cache。
 - [ARGUS](../2507.15994-argus/README.md)：分解用户反馈与物品表示，在 Transformer 中建模超长音乐序列。
@@ -264,6 +271,8 @@
 - [PA-Bridge](../2605.05855-pa-bridge/README.md)：约束主动搜索与被动推荐的分布距离，并保留两域各自可辨识的偏好信号。
 - [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md)：组合位置去偏、会话归因与作者周期任务建模长期价值。
 - [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
+- [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../2602.12972-unimvt/README.md)：联合学习去偏 CTR 与因果 uplift，并显式估计 treatment 和 counterfactual 响应。
+- [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../2601.14333-hcub/README.md)：用层级上下文 uplift bandit 在目录个性化中学习增量收益。
 
 ## 多阶段排序与混排
 
@@ -295,6 +304,7 @@
 - [GenRec](../2604.14878-genrec/README.md)：把整页结果作为生成目标，并联合 page reward 与 NLL 约束优化页面级决策。
 - [Dual-Rerank](../2604.07420-dual-rerank/README.md)：AR 教师刻画顺序依赖，NAR 学生并行推理并联合列表效用蒸馏。
 - [Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds](../2603.04227-cgr/README.md)：在自回归重排中直接执行约束感知奖励剪枝。
+- [Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency](../2601.02955-harmonrank/README.md)：用关系感知注意力和一致性约束协调多阶段工业排序。
 - [DRL-PUT](../2509.05292-drl-put/README.md)：利用 logged propensity 和策略梯度自动调节广告混排 utility 权重。
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：以 ordered regression 估计列表前缀价值，再按 CLICK/PAY 队列、mask 和 MMR 生成混排结果。
 - [CDM](../2406.09021-cdm/README.md)：用 MMR 教师生成可控多样性列表并蒸馏上下文边际收益。
@@ -310,6 +320,7 @@
 - [TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation](../2603.21481-tagllm/README.md)：用用户兴趣手册约束细粒度多模态标签，并把生成能力蒸馏到小模型。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把图文对比学习与 Pin-Board 共现邻居目标结合，改善 fresh 内容表示。
 - [IDProxy](../2603.01590-idproxy/README.md)：把多模态内容先对齐到 item-ID 协同空间，再通过多层 proxy 与 gate 接入排序。
+- [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。
 - [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md)：离线 MLLM 生成语义 anchor，轻量非对称模块注入直播排序。
 - [MIM](../2502.00321-mim/README.md)：以遮盖多模态预训练和内容兴趣感知 SFT 对齐内容与协同空间。
 - [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动内容进行序列预训练。
@@ -357,3 +368,11 @@
 ### 广告与商业决策
 - [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 - [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
+
+### 召回、触发与多通道路由
+- [CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval](../2602.12564-capts/README.md)：以价值感知匹配和跨渠道自适应路由选择 I2I 召回 trigger。
+- [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一 Airbnb 的体验推荐链路。
+
+### 多任务学习与多目标优化
+- [SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity](../2602.09386-smes/README.md)：用渐进式稀疏路由和去重执行，为不同任务动态分配专家容量。
+- [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../2601.20215-easq/README.md)：用独立 LoRA 与多任务路径把稀疏问卷满意度接入持续在线学习。

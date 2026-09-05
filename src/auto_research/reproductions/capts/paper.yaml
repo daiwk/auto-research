@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "capts",
+  "arxiv_id": "2602.12564",
+  "title": "CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval",
+  "paper_url": "https://arxiv.org/abs/2602.12564",
+  "organization": "Kuaishou Technology",
+  "published": "2026-02-13",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "trigger-selection",
+    "multi-channel-routing"
+  ],
+  "local_code": "src/auto_research/reproductions/capts",
+  "documentation": "docs/reproductions/2602.12564-capts/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "four production I2I retrievers",
+    "private downstream attribution logs",
+    "online quota service"
+  ],
+  "evolve_operators": [
+    "context:channel-trigger-routing"
+  ]
+}
