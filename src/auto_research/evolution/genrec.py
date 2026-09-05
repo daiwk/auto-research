@@ -198,6 +198,48 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
         coarse = facets @ rng.normal(0.0, 0.20, (facets.shape[1], dimensions))
         fine = np.tanh(semantic @ rng.normal(0.0, 0.18, (dimensions, dimensions)))
         return learned + 0.35 * coarse + 0.45 * fine
+    if genome.genrec_head == "residual-gmm":
+        residual = semantic.copy()
+        quantized = np.zeros_like(residual)
+        for _ in range(3):
+            centers = residual[rng.choice(len(residual), size=min(8, len(residual)), replace=False)]
+            distance = ((residual[:, None] - centers[None]) ** 2).sum(2)
+            posterior = np.exp(-distance / 0.15)
+            posterior /= np.maximum(posterior.sum(1, keepdims=True), 1e-12)
+            component = posterior @ centers
+            quantized += component
+            residual -= component
+        return learned + quantized
+    if genome.genrec_head == "multi-level-cross":
+        state = semantic.copy()
+        output = learned.copy()
+        for width in (max(2, dimensions // 2), max(2, dimensions // 4), 2):
+            _, _, right = np.linalg.svd(state - state.mean(0), full_matrices=False)
+            compressed = state @ right[: min(width, right.shape[0])].T
+            crossed = compressed * compressed.mean(0, keepdims=True)
+            output += crossed @ rng.normal(0.0, 0.15, (crossed.shape[1], dimensions))
+            state = np.tanh(state + 0.1 * output)
+        return output
+    if genome.genrec_head == "ug-separation":
+        reusable = semantic.mean(0, keepdims=True)
+        compensation = semantic * reusable
+        return learned + semantic + 0.3 * compensation
+    if genome.genrec_head == "personalized-tokenizer":
+        popularity_bin = np.minimum(
+            np.argsort(np.argsort(data.popularity)) * 10 // len(data.popularity), 9,
+        )
+        phases = np.linspace(0.0, np.pi, dimensions)
+        primary = np.sin((popularity_bin[:, None] + 1.0) * phases[None])
+        alternate = np.cos((popularity_bin[:, None] + 1.0) * phases[None])
+        return learned + 0.35 * semantic + 0.20 * (primary + alternate)
+    if genome.genrec_head == "stepwise-semantic-reasoning":
+        state = semantic.copy()
+        reasoning = np.zeros_like(state)
+        for level in range(4):
+            thinking = np.tanh(state @ rng.normal(0.0, 0.12, (dimensions, dimensions)))
+            reasoning += thinking / (level + 1)
+            state = 0.7 * state + 0.3 * thinking
+        return learned + semantic + 0.25 * reasoning
     if genome.genrec_head == "semantic-catalog":
         return semantic
     if genome.genrec_head == "hybrid-catalog":
@@ -291,6 +333,42 @@ def _context(history, catalog, mode: str, maximum: int) -> tuple[np.ndarray, np.
         semantic = catalog[values] @ catalog[values[-1]]
         horizon = np.linspace(0.45, 1.0, len(values))
         weights = np.exp(semantic - semantic.max()) * horizon
+    elif mode == "channel-trigger-routing":
+        values = values[-max(8, maximum):]
+        channels = np.arange(len(values)) % 4
+        downstream = catalog[values] @ catalog[values[-1]]
+        channel_value = np.asarray([
+            downstream[channels == channel].mean() if np.any(channels == channel) else 0.0
+            for channel in range(4)
+        ])
+        weights = np.exp(downstream - downstream.max()) * (1.0 + channel_value[channels])
+    elif mode == "questionnaire-alignment":
+        values = values[-max(8, maximum):]
+        dense = np.linspace(0.5, 1.0, len(values))
+        sparse_preference = catalog[values] @ catalog[values[-1]]
+        weights = dense * (1.0 + 0.35 * np.tanh(sparse_preference))
+    elif mode == "evolutionary-sparse-attention":
+        values = values[-max(12, maximum * 2):]
+        groups = np.array_split(np.arange(len(values)), min(4, len(values)))
+        weights = np.zeros(len(values), dtype=np.float64)
+        weights[-min(4, len(values)):] += 1.0
+        for group in groups:
+            weights[group] += 0.5 / len(group)
+            weights[group[-min(2, len(group)):]] += 0.75
+    elif mode == "hierarchical-uplift":
+        values = values[-max(8, maximum):]
+        similarity = catalog[values] @ catalog[values[-1]]
+        coarse = np.repeat(
+            [similarity[group].mean() for group in np.array_split(np.arange(len(values)), min(4, len(values)))],
+            [len(group) for group in np.array_split(np.arange(len(values)), min(4, len(values)))],
+        )
+        weights = np.exp(similarity + 0.3 * coarse - np.max(similarity + 0.3 * coarse))
+    elif mode == "journey-retrieval":
+        values = values[-max(8, maximum):]
+        recency = np.linspace(0.4, 1.0, len(values))
+        similarity = catalog[values] @ catalog[values[-1]]
+        hard_negative_guard = 1.0 / (1.0 + np.maximum(-similarity, 0.0))
+        weights = recency * hard_negative_guard
     elif mode == "recent":
         values = values[-max(2, maximum // 2):]
         weights = np.ones(len(values))
@@ -363,6 +441,27 @@ def _reward(data: GenRecData, history, target: int, name: str) -> float:
         seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
         bridge = len(set(data.item_genres[target]) - seen) / max(len(data.item_genres[target]), 1)
         return 0.75 + 0.15 * bridge + 0.10 * (1.0 - popularity)
+    if name == "causal-uplift":
+        popularity = float(data.popularity[target]) / max(float(data.popularity.max()), 1.0)
+        propensity = 0.15 + 0.70 * popularity
+        treatment = (target % 4) / 3.0
+        return 0.75 + 0.25 * treatment * (1.0 - propensity) / max(propensity, 0.15)
+    if name == "expert-balance":
+        seen = [genre for item in history[-8:] for genre in data.item_genres[item]]
+        loads = np.asarray([seen.count(genre) for genre in data.item_genres[target]], dtype=np.float64)
+        balance = 1.0 / (1.0 + (loads.std() if len(loads) else 0.0))
+        return 0.75 + 0.25 * balance
+    if name == "process-reward":
+        seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
+        steps = [genre in seen for genre in data.item_genres[target]]
+        prefix = np.cumprod([0.5 + 0.5 * float(step) for step in steps])
+        return 0.75 + 0.25 * float(prefix.mean() if len(prefix) else 0.0)
+    if name == "rank-consistency":
+        popularity = float(data.popularity[target]) / max(float(data.popularity.max()), 1.0)
+        seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
+        relevance = len(seen.intersection(data.item_genres[target])) / max(len(data.item_genres[target]), 1)
+        consistency = 1.0 - abs(popularity - relevance)
+        return 0.75 + 0.25 * consistency
     return 1.0
 
 

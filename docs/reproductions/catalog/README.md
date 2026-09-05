@@ -176,14 +176,21 @@
 | 生成、排序与冷启动 | [MixFormer: Co-Scaling Up Dense and Sequence in Industrial Recommenders](../2602.14110-mixformer/README.md) | ByteDance / Douyin，2026-02-15 | 未发现官方代码 | `mixformer` |
 | 生成、排序与冷启动 | [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../2602.13581-climber-pilot/README.md) | NetEase Cloud Music，2026-02-14 | 未发现官方代码 | `climber-pilot` |
 | 训练目标与决策优化 | [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md) | Beihang University，2026-02-13 | 未发现官方代码 | `rolegen` |
+| Serving 与研究基础设施 | [CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval](../2602.12564-capts/README.md) | Kuaishou Technology，2026-02-13 | 未发现官方代码 | `capts` |
+| 训练目标与决策优化 | [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../2602.12972-unimvt/README.md) | Kuaishou Technology，2026-02-13 | 未发现官方代码 | `unimvt` |
 | 大模型能力与推荐融合 | [RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems](../2602.12968-rgalign-rec/README.md) | Forth AI / Shopee / Singapore University of Technology and Design，2026-02-13 | 未发现官方代码 | `rgalign-rec` |
+| 内容理解、审核与风险控制 | [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md) | Tencent，2026-02-13 | 未发现官方代码 | `rq-gmm` |
 | 生成、排序与冷启动 | [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md) | LinkedIn，2026-02-12 | 未发现官方代码 | `linkedin-feed-sr` |
+| 生成、排序与冷启动 | [Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems](../2602.12041-mlcc/README.md) | Bilibili，2026-02-12 | 未发现官方代码 | `mlcc` |
 | Serving 与研究基础设施 | [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md) | LinkedIn，2026-02-11 | 未发现官方代码 | `cadet` |
+| 生成、排序与冷启动 | [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../2602.10455-ug-sep/README.md) | ByteDance AML，2026-02-11 | 未发现官方代码 | `ug-sep` |
 | 生成、排序与冷启动 | [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md) | Tencent，2026-02-10 | 未发现官方代码 | `diffureason` |
 | 生成、排序与冷启动 | [Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design](../2602.10016-kunlun/README.md) | Meta，2026-02-10 | 未发现官方代码 | `kunlun` |
 | 内容理解、审核与风险控制 | [SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking](../2602.09401-sarm/README.md) | Institute of Information Engineering, CAS / Kuaishou，2026-02-10 | 未发现官方代码 | `sarm` |
 | 大模型能力与推荐融合 | [Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents](../2602.10226-self-evolving-rec/README.md) | Google / YouTube，2026-02-10 | 未发现官方代码 | `self-evolving-rec` |
+| Serving 与研究基础设施 | [SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity](../2602.09386-smes/README.md) | Kuaishou Technology，2026-02-10 | 未发现官方代码 | `smes` |
 | Serving 与研究基础设施 | [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md) | Pinterest，2026-02-09 | 未发现官方代码 | `ml-dcn` |
+| 生成、排序与冷启动 | [PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation](../2602.08530-pit/README.md) | Beijing University of Posts and Telecommunications，2026-02-09 | 未发现官方代码 | `pit` |
 | 生成、排序与冷启动 | [MDL: A Unified Multi-Distribution Learner in Large-scale Industrial Recommendation through Tokenization](../2602.07520-mdl/README.md) | ByteDance / Douyin，2026-02-07 | 未发现官方代码 | `mdl` |
 | 生成、排序与冷启动 | [MSN: A Memory-based Sparse Activation Scaling Framework for Large-scale Industrial Recommendation](../2602.07526-msn/README.md) | ByteDance / Douyin Search，2026-02-07 | 未发现官方代码 | `msn` |
 | 生成、排序与冷启动 | [TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders](../2602.06563-tokenmixer-large/README.md) | ByteDance，2026-02-06 | 未发现官方代码 | `tokenmixer-large` |
@@ -193,8 +200,16 @@
 | 大模型能力与推荐融合 | [S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage](../2602.10606-s-grec/README.md) | Tencent / WeChat Channels，2026-02 | 未发现官方代码 | `s-grec` |
 | 大模型能力与推荐融合 | [SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress](../2602.22913-sigma/README.md) | Alibaba / AliExpress，2026-02 | 未发现官方代码 | `sigma` |
 | 生成、排序与冷启动 | [OneMall: One Model, More Scenarios -- End-to-End Generative Recommender Family at Kuaishou E-Commerce](../2601.21770-onemall/README.md) | Kuaishou，2026-01-29 | 未发现官方代码 | `onemall` |
+| 生成、排序与冷启动 | [Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation](../2601.21285-zenith/README.md) | North Carolina State University，2026-01-29 | 未发现官方代码 | `zenith` |
+| Serving 与研究基础设施 | [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../2601.20215-easq/README.md) | Kuaishou Technology，2026-01-28 | 未发现官方代码 | `easq` |
 | 大模型能力与推荐融合 | [LLaTTE: Scaling Laws for Multi-Stage Sequence Modeling in Large-Scale Ads Recommendation](../2601.20083-llatte/README.md) | Meta，2026-01-27 | 未发现官方代码 | `llatte` |
+| 生成、排序与冷启动 | [S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation](../2601.18664-s2gr/README.md) | Kuaishou Technology，2026-01-26 | 未发现官方代码 | `s2gr` |
+| 生成、排序与冷启动 | [Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction](../2601.17836-sparsectr/README.md) | Institute of Software, Chinese Academy of Sciences，2026-01-25 | 未发现官方代码 | `sparsectr` |
+| 训练目标与决策优化 | [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../2601.14333-hcub/README.md) | Dream11，2026-01-20 | 未发现官方代码 | `hcub` |
 | 生成、排序与冷启动 | [HyFormer: Revisiting the Roles of Sequence Modeling and Feature Interaction in CTR Prediction](../2601.12681-hyformer/README.md) | ByteDance / Douyin Search，2026-01-19 | 未发现官方代码 | `hyformer` |
+| Serving 与研究基础设施 | [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md) | Airbnb，2026-01-11 | 未发现官方代码 | `airbnb-ebr` |
+| 生成、排序与冷启动 | [PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations](../2601.04674-promise/README.md) | Kuaishou Technology，2026-01-08 | 未发现官方代码 | `promise` |
+| 多阶段排序与混排 | [Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency](../2601.02955-harmonrank/README.md) | Kuaishou Technology，2026-01-06 | 未发现官方代码 | `harmonrank` |
 | 生成、排序与冷启动 | [Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify](../2601.02306-podcast-mtl/README.md) | Spotify，2026-01-05 | 未发现官方代码 | `podcast-mtl` |
 | 生成、排序与冷启动 | [HiGR: Industrial-Scale Hierarchical Generative Slate Recommendation Framework in Tencent](../2512.24787-higr/README.md) | Tencent，2025-12-31 | 未发现官方代码 | `higr` |
 | 大模型能力与推荐融合 | [RecGPT-V2 Technical Report](../2512.14503-recgpt-v2/README.md) | Alibaba / Taobao，2025-12-16 | 未发现官方代码 | `recgpt-v2` |

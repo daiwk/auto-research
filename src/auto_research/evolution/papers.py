@@ -136,6 +136,20 @@ INSTALLED_MUTATIONS = {
         "rankmixer_ultra_hstu",
         "ULTRA-HSTU 的半局部注意力、LBSL 与 Mixture of Transducers",
     ),
+    "2602.12972": ("reward:causal-uplift", "UniMVT 的去混杂 CTR、反事实 X-Network 与单元 uplift"),
+    "2602.12593": ("head:residual-gmm", "RQ-GMM 的软分配高斯混合残差量化"),
+    "2602.12564": ("context:channel-trigger-routing", "CAPTS 的下游价值归因与跨通道触发路由"),
+    "2602.12041": ("head:multi-level-cross", "MLCC 的分层压缩、动态交叉与并行子空间扩展"),
+    "2602.10455": ("head:ug-separation", "UG-Sep 的用户侧复用掩码与信息补偿"),
+    "2602.09386": ("reward:expert-balance", "SMES 的共享/私有稀疏专家路由与全局负载均衡"),
+    "2602.08530": ("head:personalized-tokenizer", "PIT 的动态个性化 SID 与一对多 beam index"),
+    "2601.20215": ("context:questionnaire-alignment", "EASQ 的问卷监督 LoRA 路径与在线偏好对齐"),
+    "2601.18664": ("head:stepwise-semantic-reasoning", "S2GR 的逐层 thinking token 与层级 SID 推理"),
+    "2601.17836": ("context:evolutionary-sparse-attention", "SparseCTR 的个性化时间分块与三分支稀疏注意力"),
+    "2601.14333": ("context:hierarchical-uplift", "HCUB 的层级上下文、reward inheritance 与 uplift bandit"),
+    "2601.06873": ("context:journey-retrieval", "Airbnb EBR 的多阶段旅程、hard negative 与动态库存召回"),
+    "2601.04674": ("reward:process-reward", "PROMISE 的逐 SID 过程奖励与 test-time beam 剪枝"),
+    "2601.02955": ("reward:rank-consistency", "HarmonRank 的可微排序与跨目标依赖对齐"),
 }
 
 LLM_MUTATIONS = {

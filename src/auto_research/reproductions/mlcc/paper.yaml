@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "mlcc",
+  "arxiv_id": "2602.12041",
+  "title": "Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2602.12041",
+  "organization": "Bilibili",
+  "published": "2026-02-12",
+  "upstream_code": "是：[https://github.com/shishishu/MLCC](https://github.com/shishishu/MLCC)",
+  "track": "recommendation",
+  "topics": [
+    "feature-interaction",
+    "compression",
+    "scaling-law"
+  ],
+  "local_code": "src/auto_research/reproductions/mlcc",
+  "documentation": "docs/reproductions/2602.12041-mlcc/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private sparse features",
+    "production DLRM stack",
+    "industrial serving kernels"
+  ],
+  "evolve_operators": [
+    "head:multi-level-cross"
+  ]
+}

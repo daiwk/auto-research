@@ -1,0 +1,395 @@
+{
+  "paper": {
+    "arxiv_id": "2601.04674",
+    "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+    "url": "https://arxiv.org/abs/2601.04674",
+    "organization": "Kuaishou Technology"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "promise",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "transition + content + popularity",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "promise core mechanism (validation blend=0.1)",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05929407808418097,
+    "fresh_hit_at_10": 0.07936507936507936,
+    "head_share_at_10": 0.17772727272727273
+  },
+  "relative": {
+    "hit_at_10_percent": 0.0,
+    "ndcg_at_10_percent": 9.792731202484864,
+    "fresh_hit_at_10_percent": 150.0,
+    "head_share_at_10_percent": -25.239005736137667
+  },
+  "stages": {
+    "finite_scores": 360,
+    "score_std": 0.10048112927060601,
+    "process_reward_steps": 4,
+    "beam_pruning_signals": 1
+  },
+  "paper_results": {
+    "online_core_metric_lift_percent": 5.0
+  },
+  "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+  "manifest_ref": "reproduction:promise",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "promise",
+    "arxiv_id": "2601.04674",
+    "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+    "paper_url": "https://arxiv.org/abs/2601.04674",
+    "track": "recommendation",
+    "organization": "Kuaishou Technology",
+    "published": "2026-01-08",
+    "code_url": null,
+    "topics": [
+      "generative-recommendation",
+      "process-reward",
+      "test-time-scaling"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/promise",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K"
+    ],
+    "baseline": "transition + content + popularity",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "fresh_hit_at_10",
+      "head_share_at_10"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Kuaishou generative recommendation",
+        "metric": "Online core metric",
+        "lift_percent": 5.0,
+        "traffic": "production online A/B",
+        "source_url": "https://arxiv.org/html/2601.04674v1",
+        "source_location": "Section 4.3",
+        "retrieved_at": "2026-09-05"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": [
+      "reward:process-reward"
+    ]
+  },
+  "provenance": {
+    "created_at": "2026-09-05T08:50:51.672909+00:00",
+    "code_commit": "2e0122e2076fde02d644c754315875a68f7d87c6",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2601.04674-promise/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2601.04674",
+        "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+        "url": "https://arxiv.org/abs/2601.04674",
+        "organization": "Kuaishou Technology"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "promise",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "promise core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05929407808418097,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.17772727272727273
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": 9.792731202484864,
+        "fresh_hit_at_10_percent": 150.0,
+        "head_share_at_10_percent": -25.239005736137667
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.10048112927060601,
+        "process_reward_steps": 4,
+        "beam_pruning_signals": 1
+      },
+      "paper_results": {
+        "online_core_metric_lift_percent": 5.0
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+      "manifest_ref": "reproduction:promise",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2601.04674",
+        "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+        "url": "https://arxiv.org/abs/2601.04674",
+        "organization": "Kuaishou Technology"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "promise",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "promise core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05929407808418097,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.17772727272727273
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": 9.792731202484864,
+        "fresh_hit_at_10_percent": 150.0,
+        "head_share_at_10_percent": -25.239005736137667
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.10048112927060601,
+        "process_reward_steps": 4,
+        "beam_pruning_signals": 1
+      },
+      "paper_results": {
+        "online_core_metric_lift_percent": 5.0
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+      "manifest_ref": "reproduction:promise",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2601.04674",
+        "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+        "url": "https://arxiv.org/abs/2601.04674",
+        "organization": "Kuaishou Technology"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "promise",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "promise core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05929407808418097,
+        "fresh_hit_at_10": 0.07936507936507936,
+        "head_share_at_10": 0.17772727272727273
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": 9.792731202484864,
+        "fresh_hit_at_10_percent": 150.0,
+        "head_share_at_10_percent": -25.239005736137667
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.10048112927060601,
+        "process_reward_steps": 4,
+        "beam_pruning_signals": 1
+      },
+      "paper_results": {
+        "online_core_metric_lift_percent": 5.0
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+      "manifest_ref": "reproduction:promise",
+      "seed": 44
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.05400546778896325,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.2377272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.05929407808418097,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.07936507936507936,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.17772727272727273,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": 9.792731202484864,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 150.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -25.239005736137667,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.finite_scores": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.score_std": {
+      "mean": 0.100481129270606,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.process_reward_steps": {
+      "mean": 4.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.beam_pruning_signals": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.online_core_metric_lift_percent": {
+      "mean": 5.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  }
+}

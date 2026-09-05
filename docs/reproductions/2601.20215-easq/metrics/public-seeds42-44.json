@@ -1,0 +1,395 @@
+{
+  "paper": {
+    "arxiv_id": "2601.20215",
+    "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+    "url": "https://arxiv.org/abs/2601.20215",
+    "organization": "Kuaishou Technology"
+  },
+  "dataset": {
+    "name": "MovieLens 100K",
+    "users": 220,
+    "items": 360
+  },
+  "setup": {
+    "adapter": "easq",
+    "same_split_and_candidates": true
+  },
+  "baseline": {
+    "name": "transition + content + popularity",
+    "hit_at_10": 0.10909090909090909,
+    "ndcg_at_10": 0.05400546778896325,
+    "fresh_hit_at_10": 0.031746031746031744,
+    "head_share_at_10": 0.23772727272727273
+  },
+  "method": {
+    "name": "easq core mechanism (validation blend=0.1)",
+    "hit_at_10": 0.10454545454545454,
+    "ndcg_at_10": 0.051598481568305946,
+    "fresh_hit_at_10": 0.047619047619047616,
+    "head_share_at_10": 0.17636363636363636
+  },
+  "relative": {
+    "hit_at_10_percent": -4.166666666666668,
+    "ndcg_at_10_percent": -4.456930602032865,
+    "fresh_hit_at_10_percent": 50.0,
+    "head_share_at_10_percent": -25.81261950286807
+  },
+  "stages": {
+    "finite_scores": 360,
+    "score_std": 0.06986318737720693,
+    "questionnaire_paths": 1,
+    "preference_alignment_paths": 1
+  },
+  "paper_results": {
+    "satisfaction_lift_percent": 5.1
+  },
+  "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+  "manifest_ref": "reproduction:easq",
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "easq",
+    "arxiv_id": "2601.20215",
+    "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+    "paper_url": "https://arxiv.org/abs/2601.20215",
+    "track": "recommendation",
+    "organization": "Kuaishou Technology",
+    "published": "2026-01-28",
+    "code_url": null,
+    "topics": [
+      "satisfaction-alignment",
+      "preference-learning",
+      "online-learning"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/easq",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l2_public_dataset",
+    "datasets": [
+      "MovieLens 100K"
+    ],
+    "baseline": "transition + content + popularity",
+    "metrics": [
+      "hit_at_10",
+      "ndcg_at_10",
+      "fresh_hit_at_10",
+      "head_share_at_10"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null,
+    "online_evidence": [
+      {
+        "product": "Kuaishou video recommendation",
+        "metric": "User satisfaction metric",
+        "lift_percent": 5.1,
+        "traffic": "production online A/B",
+        "source_url": "https://arxiv.org/html/2601.20215v1",
+        "source_location": "Section 5.3",
+        "retrieved_at": "2026-09-05"
+      }
+    ],
+    "selection_exception": null,
+    "evolve_operators": [
+      "context:questionnaire-alignment"
+    ]
+  },
+  "provenance": {
+    "created_at": "2026-09-05T08:50:48.083060+00:00",
+    "code_commit": "2e0122e2076fde02d644c754315875a68f7d87c6",
+    "python": "3.12.9",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+    "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+    "packages": {
+      "auto-research": "0.1.0",
+      "numpy": "2.5.2",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "artifact_path": "docs/reproductions/2601.20215-easq/metrics/public-seeds42-44.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "tier_label": "L2 公开数据集训练",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "paper-specific",
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "seed_results": [
+    {
+      "paper": {
+        "arxiv_id": "2601.20215",
+        "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+        "url": "https://arxiv.org/abs/2601.20215",
+        "organization": "Kuaishou Technology"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "easq",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "easq core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.051598481568305946,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.17636363636363636
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -4.456930602032865,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -25.81261950286807
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.06986318737720693,
+        "questionnaire_paths": 1,
+        "preference_alignment_paths": 1
+      },
+      "paper_results": {
+        "satisfaction_lift_percent": 5.1
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+      "manifest_ref": "reproduction:easq",
+      "seed": 42
+    },
+    {
+      "paper": {
+        "arxiv_id": "2601.20215",
+        "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+        "url": "https://arxiv.org/abs/2601.20215",
+        "organization": "Kuaishou Technology"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "easq",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "easq core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.051598481568305946,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.17636363636363636
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -4.456930602032865,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -25.81261950286807
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.06986318737720693,
+        "questionnaire_paths": 1,
+        "preference_alignment_paths": 1
+      },
+      "paper_results": {
+        "satisfaction_lift_percent": 5.1
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+      "manifest_ref": "reproduction:easq",
+      "seed": 43
+    },
+    {
+      "paper": {
+        "arxiv_id": "2601.20215",
+        "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+        "url": "https://arxiv.org/abs/2601.20215",
+        "organization": "Kuaishou Technology"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "easq",
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "easq core mechanism (validation blend=0.1)",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.051598481568305946,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.17636363636363636
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -4.456930602032865,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -25.81261950286807
+      },
+      "stages": {
+        "finite_scores": 360,
+        "score_std": 0.06986318737720693,
+        "questionnaire_paths": 1,
+        "preference_alignment_paths": 1
+      },
+      "paper_results": {
+        "satisfaction_lift_percent": 5.1
+      },
+      "scope": "执行论文可由公开 MovieLens 特征审计的核心计算；不复刻私有日志、生产模型或线上服务栈。",
+      "manifest_ref": "reproduction:easq",
+      "seed": 44
+    }
+  ],
+  "aggregate_metrics": {
+    "dataset.users": {
+      "mean": 220.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "dataset.items": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.hit_at_10": {
+      "mean": 0.10909090909090909,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.ndcg_at_10": {
+      "mean": 0.05400546778896325,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.fresh_hit_at_10": {
+      "mean": 0.031746031746031744,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "baseline.head_share_at_10": {
+      "mean": 0.2377272727272727,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.hit_at_10": {
+      "mean": 0.10454545454545454,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.ndcg_at_10": {
+      "mean": 0.05159848156830595,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.fresh_hit_at_10": {
+      "mean": 0.047619047619047616,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "method.head_share_at_10": {
+      "mean": 0.17636363636363636,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.hit_at_10_percent": {
+      "mean": -4.166666666666668,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.ndcg_at_10_percent": {
+      "mean": -4.456930602032865,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.fresh_hit_at_10_percent": {
+      "mean": 50.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "relative.head_share_at_10_percent": {
+      "mean": -25.81261950286807,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.finite_scores": {
+      "mean": 360.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.score_std": {
+      "mean": 0.06986318737720693,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.questionnaire_paths": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "stages.preference_alignment_paths": {
+      "mean": 1.0,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    },
+    "paper_results.satisfaction_lift_percent": {
+      "mean": 5.1,
+      "std": 0.0,
+      "ci95": 0.0,
+      "n": 3
+    }
+  }
+}

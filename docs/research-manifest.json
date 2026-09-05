@@ -7445,6 +7445,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "airbnb-ebr",
+      "title": "Applying Embedding-Based Retrieval to Airbnb Search",
+      "paper_url": "https://arxiv.org/abs/2601.06873",
+      "detail_path": "reproductions/2601.06873-airbnb-ebr/README.md",
+      "topic": [
+        "search-retrieval",
+        "embedding-retrieval",
+        "hard-negative-mining"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Airbnb",
+      "published": "2026-01-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "airbnb-ebr",
+        "arxiv_id": "2601.06873",
+        "title": "Applying Embedding-Based Retrieval to Airbnb Search",
+        "paper_url": "https://arxiv.org/abs/2601.06873",
+        "track": "recommendation",
+        "organization": "Airbnb",
+        "published": "2026-01-11",
+        "code_url": null,
+        "topics": [
+          "search-retrieval",
+          "embedding-retrieval",
+          "hard-negative-mining"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/airbnb_ebr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Airbnb search",
+            "metric": "Booking conversion",
+            "lift_percent": 0.31,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.06873v1",
+            "source_location": "Section 6.3",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:journey-retrieval"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "akt-rec",
       "title": "From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs",
       "paper_url": "https://arxiv.org/abs/2605.23310",
@@ -8152,6 +8222,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "capts",
+      "title": "CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval",
+      "paper_url": "https://arxiv.org/abs/2602.12564",
+      "detail_path": "reproductions/2602.12564-capts/README.md",
+      "topic": [
+        "retrieval",
+        "trigger-selection",
+        "multi-channel-routing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-02-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "capts",
+        "arxiv_id": "2602.12564",
+        "title": "CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval",
+        "paper_url": "https://arxiv.org/abs/2602.12564",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-02-13",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "trigger-selection",
+          "multi-channel-routing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/capts",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kwai multi-channel retrieval",
+            "metric": "Total app time spent",
+            "lift_percent": 0.713,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2602.12564v1",
+            "source_location": "Section 4.4.1",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:channel-trigger-routing"
+        ]
       }
     },
     {
@@ -11103,6 +11243,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "easq",
+      "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+      "paper_url": "https://arxiv.org/abs/2601.20215",
+      "detail_path": "reproductions/2601.20215-easq/README.md",
+      "topic": [
+        "satisfaction-alignment",
+        "preference-learning",
+        "online-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-01-28",
+      "code": null,
+      "adapter": {
+        "adapter_key": "easq",
+        "arxiv_id": "2601.20215",
+        "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
+        "paper_url": "https://arxiv.org/abs/2601.20215",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-01-28",
+        "code_url": null,
+        "topics": [
+          "satisfaction-alignment",
+          "preference-learning",
+          "online-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/easq",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou video recommendation",
+            "metric": "User satisfaction metric",
+            "lift_percent": 5.1,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.20215v1",
+            "source_location": "Section 5.3",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:questionnaire-alignment"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "egr",
       "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
       "paper_url": "https://arxiv.org/abs/2607.23038",
@@ -13202,6 +13412,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "harmonrank",
+      "title": "Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency",
+      "paper_url": "https://arxiv.org/abs/2601.02955",
+      "detail_path": "reproductions/2601.02955-harmonrank/README.md",
+      "topic": [
+        "multi-objective-ranking",
+        "rank-consistency",
+        "ensemble"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-01-06",
+      "code": null,
+      "adapter": {
+        "adapter_key": "harmonrank",
+        "arxiv_id": "2601.02955",
+        "title": "Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency",
+        "paper_url": "https://arxiv.org/abs/2601.02955",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-01-06",
+        "code_url": null,
+        "topics": [
+          "multi-objective-ranking",
+          "rank-consistency",
+          "ensemble"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/harmonrank",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou live e-commerce",
+            "metric": "Purchase",
+            "lift_percent": 2.635,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.02955v1",
+            "source_location": "Section 5.7",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:rank-consistency"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "harness-lm",
       "title": "HARNESS-LM: A Three-Phase Training Recipe for Harnessing SLMs in Sponsored Search Retrieval",
       "paper_url": "https://arxiv.org/abs/2605.23572",
@@ -13275,6 +13555,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "hcub",
+      "title": "Hierarchical Contextual Uplift Bandits for Catalog Personalization",
+      "paper_url": "https://arxiv.org/abs/2601.14333",
+      "detail_path": "reproductions/2601.14333-hcub/README.md",
+      "topic": [
+        "bandit",
+        "uplift-modeling",
+        "catalog-personalization"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Dream11",
+      "published": "2026-01-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "hcub",
+        "arxiv_id": "2601.14333",
+        "title": "Hierarchical Contextual Uplift Bandits for Catalog Personalization",
+        "paper_url": "https://arxiv.org/abs/2601.14333",
+        "track": "recommendation",
+        "organization": "Dream11",
+        "published": "2026-01-20",
+        "code_url": null,
+        "topics": [
+          "bandit",
+          "uplift-modeling",
+          "catalog-personalization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/hcub",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Dream11 catalog personalization",
+            "metric": "Revenue",
+            "lift_percent": 0.51,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.14333v1",
+            "source_location": "Introduction and online experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:hierarchical-uplift"
+        ]
       }
     },
     {
@@ -16493,6 +16843,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "mlcc",
+      "title": "Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2602.12041",
+      "detail_path": "reproductions/2602.12041-mlcc/README.md",
+      "topic": [
+        "feature-interaction",
+        "compression",
+        "scaling-law"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Bilibili",
+      "published": "2026-02-12",
+      "code": null,
+      "adapter": {
+        "adapter_key": "mlcc",
+        "arxiv_id": "2602.12041",
+        "title": "Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2602.12041",
+        "track": "recommendation",
+        "organization": "Bilibili",
+        "published": "2026-02-12",
+        "code_url": null,
+        "topics": [
+          "feature-interaction",
+          "compression",
+          "scaling-law"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/mlcc",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Bilibili advertising",
+            "metric": "Advertiser value",
+            "lift_percent": 32.0,
+            "traffic": "production online A/B under latency constraint",
+            "source_url": "https://arxiv.org/html/2602.12041v1",
+            "source_location": "Online experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:multi-level-cross"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "mm-llm",
       "title": "A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems",
       "paper_url": "https://arxiv.org/abs/2605.09338",
@@ -19034,6 +19454,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "pit",
+      "title": "PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation",
+      "paper_url": "https://arxiv.org/abs/2602.08530",
+      "detail_path": "reproductions/2602.08530-pit/README.md",
+      "topic": [
+        "generative-recommendation",
+        "semantic-id",
+        "dynamic-tokenizer"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Beijing University of Posts and Telecommunications",
+      "published": "2026-02-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "pit",
+        "arxiv_id": "2602.08530",
+        "title": "PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation",
+        "paper_url": "https://arxiv.org/abs/2602.08530",
+        "track": "recommendation",
+        "organization": "Beijing University of Posts and Telecommunications",
+        "published": "2026-02-09",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "semantic-id",
+          "dynamic-tokenizer"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/pit",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou generative recommendation",
+            "metric": "Online business metric",
+            "lift_percent": 0.402,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2602.08530v1",
+            "source_location": "Online experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:personalized-tokenizer"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "ple",
       "title": "Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations",
       "paper_url": "https://doi.org/10.1145/3383313.3412236",
@@ -19621,6 +20111,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "promise",
+      "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+      "paper_url": "https://arxiv.org/abs/2601.04674",
+      "detail_path": "reproductions/2601.04674-promise/README.md",
+      "topic": [
+        "generative-recommendation",
+        "process-reward",
+        "test-time-scaling"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-01-08",
+      "code": null,
+      "adapter": {
+        "adapter_key": "promise",
+        "arxiv_id": "2601.04674",
+        "title": "PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations",
+        "paper_url": "https://arxiv.org/abs/2601.04674",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-01-08",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "process-reward",
+          "test-time-scaling"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/promise",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou generative recommendation",
+            "metric": "Online core metric",
+            "lift_percent": 5.0,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.04674v1",
+            "source_location": "Section 4.3",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:process-reward"
+        ]
       }
     },
     {
@@ -21559,6 +22119,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "rq-gmm",
+      "title": "RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction",
+      "paper_url": "https://arxiv.org/abs/2602.12593",
+      "detail_path": "reproductions/2602.12593-rq-gmm/README.md",
+      "topic": [
+        "multimodal-recommendation",
+        "semantic-tokenization",
+        "ctr-prediction"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent",
+      "published": "2026-02-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rq-gmm",
+        "arxiv_id": "2602.12593",
+        "title": "RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction",
+        "paper_url": "https://arxiv.org/abs/2602.12593",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-02-13",
+        "code_url": null,
+        "topics": [
+          "multimodal-recommendation",
+          "semantic-tokenization",
+          "ctr-prediction"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rq_gmm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Tencent short-video advertising",
+            "metric": "Advertiser value",
+            "lift_percent": 1.502,
+            "traffic": "large-scale production online A/B",
+            "source_url": "https://arxiv.org/html/2602.12593v1",
+            "source_location": "Abstract and online experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:residual-gmm"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "s-grec",
       "title": "S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage",
       "paper_url": "https://arxiv.org/abs/2602.10606",
@@ -21638,6 +22268,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "s2gr",
+      "title": "S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation",
+      "paper_url": "https://arxiv.org/abs/2601.18664",
+      "detail_path": "reproductions/2601.18664-s2gr/README.md",
+      "topic": [
+        "generative-recommendation",
+        "latent-reasoning",
+        "semantic-id"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-01-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "s2gr",
+        "arxiv_id": "2601.18664",
+        "title": "S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation",
+        "paper_url": "https://arxiv.org/abs/2601.18664",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-01-26",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "latent-reasoning",
+          "semantic-id"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/s2gr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou recommendation",
+            "metric": "Online core metric",
+            "lift_percent": 5.25,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.18664v1",
+            "source_location": "Section 5.4",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:stepwise-semantic-reasoning"
+        ]
       }
     },
     {
@@ -22696,6 +23396,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "smes",
+      "title": "SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity",
+      "paper_url": "https://arxiv.org/abs/2602.09386",
+      "detail_path": "reproductions/2602.09386-smes/README.md",
+      "topic": [
+        "multi-task-learning",
+        "sparse-moe",
+        "expert-routing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-02-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "smes",
+        "arxiv_id": "2602.09386",
+        "title": "SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity",
+        "paper_url": "https://arxiv.org/abs/2602.09386",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-02-10",
+        "code_url": null,
+        "topics": [
+          "multi-task-learning",
+          "sparse-moe",
+          "expert-routing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/smes",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou short-video recommendation",
+            "metric": "User watch time",
+            "lift_percent": 0.31,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2602.09386v1",
+            "source_location": "Section 4.7",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:expert-balance"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "snaplgr",
       "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
       "paper_url": "https://arxiv.org/abs/2607.28895",
@@ -23083,6 +23853,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "sparsectr",
+      "title": "Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction",
+      "paper_url": "https://arxiv.org/abs/2601.17836",
+      "detail_path": "reproductions/2601.17836-sparsectr/README.md",
+      "topic": [
+        "ctr-prediction",
+        "long-sequence",
+        "sparse-attention"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Institute of Software, Chinese Academy of Sciences",
+      "published": "2026-01-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "sparsectr",
+        "arxiv_id": "2601.17836",
+        "title": "Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction",
+        "paper_url": "https://arxiv.org/abs/2601.17836",
+        "track": "recommendation",
+        "organization": "Institute of Software, Chinese Academy of Sciences",
+        "published": "2026-01-25",
+        "code_url": null,
+        "topics": [
+          "ctr-prediction",
+          "long-sequence",
+          "sparse-attention"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/sparsectr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Meituan list advertising",
+            "metric": "CTR",
+            "lift_percent": 1.72,
+            "traffic": "1% traffic production online A/B for 7 days",
+            "source_url": "https://arxiv.org/html/2601.17836v1",
+            "source_location": "Section 4.7",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:evolutionary-sparse-attention"
+        ]
       }
     },
     {
@@ -24902,6 +25742,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "ug-sep",
+      "title": "Compute Only Once: UG-Separation for Efficient Large Recommendation Models",
+      "paper_url": "https://arxiv.org/abs/2602.10455",
+      "detail_path": "reproductions/2602.10455-ug-sep/README.md",
+      "topic": [
+        "ranking-network",
+        "inference-efficiency",
+        "token-mixing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance AML",
+      "published": "2026-02-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ug-sep",
+        "arxiv_id": "2602.10455",
+        "title": "Compute Only Once: UG-Separation for Efficient Large Recommendation Models",
+        "paper_url": "https://arxiv.org/abs/2602.10455",
+        "track": "recommendation",
+        "organization": "ByteDance AML",
+        "published": "2026-02-11",
+        "code_url": null,
+        "topics": [
+          "ranking-network",
+          "inference-efficiency",
+          "token-mixing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/ug_sep",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "ByteDance recommendation",
+            "metric": "Inference latency reduction",
+            "lift_percent": 20.0,
+            "traffic": "production online A/B and deployment",
+            "source_url": "https://arxiv.org/html/2602.10455v1",
+            "source_location": "Abstract and online experiments",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:ug-separation"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "ultra-hstu",
       "title": "Bending the Scaling Law Curve in Large-Scale Recommendation Systems",
       "paper_url": "https://arxiv.org/abs/2602.16986",
@@ -25058,6 +25968,76 @@
         "selection_exception": null,
         "evolve_operators": [
           "context:unified-token"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "unimvt",
+      "title": "Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework",
+      "paper_url": "https://arxiv.org/abs/2602.12972",
+      "detail_path": "reproductions/2602.12972-unimvt/README.md",
+      "topic": [
+        "causal-recommendation",
+        "uplift-modeling",
+        "coupon-marketing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-02-13",
+      "code": null,
+      "adapter": {
+        "adapter_key": "unimvt",
+        "arxiv_id": "2602.12972",
+        "title": "Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework",
+        "paper_url": "https://arxiv.org/abs/2602.12972",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-02-13",
+        "code_url": null,
+        "topics": [
+          "causal-recommendation",
+          "uplift-modeling",
+          "coupon-marketing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/unimvt",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou coupon marketing",
+            "metric": "Coupon revenue",
+            "lift_percent": 18.14,
+            "traffic": "10% production traffic online A/B",
+            "source_url": "https://arxiv.org/html/2602.12972v1",
+            "source_location": "Section 5.4",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:causal-uplift"
         ]
       }
     },
@@ -25664,6 +26644,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "zenith",
+      "title": "Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation",
+      "paper_url": "https://arxiv.org/abs/2601.21285",
+      "detail_path": "reproductions/2601.21285-zenith/README.md",
+      "topic": [
+        "ranking-network",
+        "scaling-law",
+        "feature-interaction"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "North Carolina State University",
+      "published": "2026-01-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "zenith",
+        "arxiv_id": "2601.21285",
+        "title": "Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation",
+        "paper_url": "https://arxiv.org/abs/2601.21285",
+        "track": "recommendation",
+        "organization": "North Carolina State University",
+        "published": "2026-01-29",
+        "code_url": null,
+        "topics": [
+          "ranking-network",
+          "scaling-law",
+          "feature-interaction"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/zenith",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "TikTok Live",
+            "metric": "Quality watch sessions per user",
+            "lift_percent": 9.93,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2601.21285v1",
+            "source_location": "Table 4",
+            "retrieved_at": "2026-09-05"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "zenith"
+        ]
       }
     },
     {

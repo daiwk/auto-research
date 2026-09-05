@@ -132,6 +132,26 @@ pytest tests/test_research_module_docs.py
 
 十篇均有独立核心计算、seeds 42/43/44 公开数据产物、论文关键原图和可执行 genrec Evolve operator；线上数字与本地机制实验严格分栏记录。
 
+## 2026 历史 P0 · H06/H07（15 个 adapter）
+
+- `unimvt` · [UniMVT](2602.12972-unimvt/README.md)：联合学习去偏 CTR 与因果 uplift，显式估计 treatment 和 counterfactual 响应。
+- `rq-gmm` · [RQ-GMM](2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。
+- `capts` · [CAPTS](2602.12564-capts/README.md)：以价值感知匹配和跨渠道自适应路由选择 I2I 召回 trigger。
+- `mlcc` · [MLCC](2602.12041-mlcc/README.md)：分层压缩并交叉低维特征，在受控计算量下扩大推荐网络容量。
+- `ug-sep` · [UG-Sep](2602.10455-ug-sep/README.md)：拆分用户侧与通用计算，复用只需计算一次的表示。
+- `smes` · [SMES](2602.09386-smes/README.md)：用渐进式稀疏路由和去重执行，为不同任务动态分配专家容量。
+- `pit` · [PIT](2602.08530-pit/README.md)：按用户动态组合 item token，使生成式推荐的语义 ID 表达个体偏好。
+- `zenith` · [Zenith](2601.21285-zenith/README.md)：以 Prime Token Fusion 和 Boost 扩展直播排序模型。
+- `easq` · [EASQ](2601.20215-easq/README.md)：用独立 LoRA 与多任务路径把稀疏问卷满意度接入在线学习。
+- `s2gr` · [S2GR](2601.18664-s2gr/README.md)：把语义引导逐步写入潜空间推理，增强生成式推荐的中间决策。
+- `sparsectr` · [SparseCTR](2601.17836-sparsectr/README.md)：组合全局、转移和局部稀疏注意力，建模千级长期行为序列。
+- `hcub` · [HCUB](2601.14333-hcub/README.md)：用层级上下文 uplift bandit 学习目录个性化的增量收益。
+- `airbnb-ebr` · [Airbnb EBR](2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一体验推荐链路。
+- `promise` · [PROMISE](2601.04674-promise/README.md)：以过程奖励监督生成式推荐的中间推理。
+- `harmonrank` · [HarmonRank](2601.02955-harmonrank/README.md)：用关系感知注意力和一致性约束协调多阶段工业排序。
+
+十五篇均有相互独立的核心机制、seeds 42/43/44 公开数据结果、论文关键原图和可执行 Evolve operator。H06/H07 完成后，冻结的 55 篇 2026 历史 P0 队列已全部实现。
+
 ## 2026-08-24 近期跨领域增量
 
 - `oneshot-index` · [OneShot](2607.27475-oneshot-index/README.md)：Meta/Instagram 将层级索引与排序目标共同训练，并以 neural scoring 替代纯点积检索；已全量部署全球流量。

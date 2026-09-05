@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "zenith",
+  "arxiv_id": "2601.21285",
+  "title": "Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation",
+  "paper_url": "https://arxiv.org/abs/2601.21285",
+  "organization": "North Carolina State University",
+  "published": "2026-01-29",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "ranking-network",
+    "scaling-law",
+    "feature-interaction"
+  ],
+  "local_code": "src/auto_research/reproductions/zenith",
+  "documentation": "docs/reproductions/2601.21285-zenith/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "billion-scale sparse features",
+    "production TSMoE kernels",
+    "TikTok Live serving stack"
+  ],
+  "evolve_operators": [
+    "zenith"
+  ]
+}

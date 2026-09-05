@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "smes",
+  "arxiv_id": "2602.09386",
+  "title": "SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity",
+  "paper_url": "https://arxiv.org/abs/2602.09386",
+  "organization": "Kuaishou Technology",
+  "published": "2026-02-10",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-05）",
+  "track": "recommendation",
+  "topics": [
+    "multi-task-learning",
+    "sparse-moe",
+    "expert-routing"
+  ],
+  "local_code": "src/auto_research/reproductions/smes",
+  "documentation": "docs/reproductions/2602.09386-smes/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private multi-task labels",
+    "production expert parallelism",
+    "online routing service"
+  ],
+  "evolve_operators": [
+    "reward:expert-balance"
+  ]
+}

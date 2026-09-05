@@ -215,6 +215,7 @@
 ## Airbnb
 - 2026-07 · [Proximity Features](../2607.12246-proximity-features/README.md)：用自适应地理桶聚合群体行为，为无持久 user ID 的匿名用户提供隐私合规冷启动特征。
 - 2026-06 · [JourneyFormer: Encoding Airbnb Guest Journey with Sequence Modeling](../2606.19108-journeyformer/README.md)：统一编码长短 guest journey 与事件时间，在生产搜索中替代手工序列特征。
+- 2026-01 · [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一 Airbnb 的体验推荐链路。
 
 ## Teads
 - 2026-07 · [Open Web UFM](../2607.28019-open-web-ufm/README.md)：以开放网页用户行为做双裁剪对比预训练和 next-item 监督，再把共享 user encoder 迁移到广告 CTR 与访问预测。
@@ -259,6 +260,13 @@
 - 2026-05 · [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
 - 2026-04 · [SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search](../2604.10471-sid-coord/README.md)：以层级 SID、目标感知 HID–SID 门控和兴趣对齐增强长尾泛化。
 - 2026-03 · [SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search](../2603.19585-safro/README.md)：用满意度奖励和双重相对优势优化短视频搜索多任务融合。
+- 2026-02 · [CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval](../2602.12564-capts/README.md)：以价值感知匹配和跨渠道自适应路由选择 I2I 召回 trigger。
+- 2026-02 · [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../2602.12972-unimvt/README.md)：联合学习去偏 CTR 与因果 uplift，并显式估计 treatment 和 counterfactual 响应。
+- 2026-02 · [SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity](../2602.09386-smes/README.md)：用渐进式稀疏路由和去重执行，为不同任务动态分配专家容量。
+- 2026-01 · [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../2601.20215-easq/README.md)：用独立 LoRA 与多任务路径把稀疏问卷满意度接入持续在线学习。
+- 2026-01 · [S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation](../2601.18664-s2gr/README.md)：把语义引导逐步写入潜空间推理，增强生成式推荐的中间决策。
+- 2026-01 · [PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations](../2601.04674-promise/README.md)：以过程奖励监督生成式推荐的中间推理，而非只依赖最终命中。
+- 2026-01 · [Rethinking Multi-objective Ranking Ensemble in Recommender System: From Score Fusion to Rank Consistency](../2601.02955-harmonrank/README.md)：用关系感知注意力和一致性约束协调多阶段工业排序。
 
 ## Amap / Alibaba
 - 2026-08 · [IntHQ: Task-Interactive Hierarchical Query on Dual-Stream Representations for Generative Recommendation](../2608.09634-inthq/README.md)：让多个业务任务在长短双流的不同层级执行交互查询，而非仅共享底层编码。
@@ -326,6 +334,7 @@
 
 ## Tencent
 - 2026-04 · [RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems](../2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
+- 2026-02 · [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。
 - 2026-02 · [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
 
 ## The Hong Kong Polytechnic University
@@ -369,9 +378,25 @@
 
 ## Bilibili
 - 2026-03 · [Constraint-Aware Generative Re-ranking for Multi-Objective Optimization in Advertising Feeds](../2603.04227-cgr/README.md)：在自回归重排中直接执行约束感知奖励剪枝。
+- 2026-02 · [Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems](../2602.12041-mlcc/README.md)：分层压缩并交叉低维特征，在受控计算量下扩大推荐网络容量。
 
 ## Harbin Institute of Technology
 - 2026-03 · [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力建模长行为序列。
 
 ## Beihang University
 - 2026-02 · [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
+
+## ByteDance AML
+- 2026-02 · [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../2602.10455-ug-sep/README.md)：拆分用户侧与通用计算，使大规模推荐模型复用只需计算一次的表示。
+
+## Beijing University of Posts and Telecommunications
+- 2026-02 · [PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation](../2602.08530-pit/README.md)：按用户动态组合 item token，使生成式推荐的语义 ID 同时表达个体偏好。
+
+## North Carolina State University
+- 2026-01 · [Zenith: Scaling up Ranking Models for Billion-scale Livestreaming Recommendation](../2601.21285-zenith/README.md)：以 Prime Token Fusion 和 Boost 扩展直播排序模型的深度与宽度。
+
+## Institute of Software, Chinese Academy of Sciences
+- 2026-01 · [Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction](../2601.17836-sparsectr/README.md)：组合全局、转移和局部稀疏注意力，建模千级长期行为序列。
+
+## Dream11
+- 2026-01 · [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../2601.14333-hcub/README.md)：用层级上下文 uplift bandit 在目录个性化中学习增量收益。
