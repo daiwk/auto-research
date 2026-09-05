@@ -700,6 +700,9 @@ def _propose_genrec(parent, generation, index, operators, rng):
             "quantile-fusion",
             "partial-order",
             "unified-token",
+            "atomic-intent-tree",
+            "conversational-intent",
+            "active-expression",
         ],
         "head": [
             "id-catalog",
@@ -712,6 +715,9 @@ def _propose_genrec(parent, generation, index, operators, rng):
             "disentangled-sid",
             "unified-ranker",
             "listwise-node",
+            "dynamic-sid",
+            "causal-bottleneck",
+            "policy-facet",
         ],
         "reward": [
             "uniform",
@@ -720,6 +726,9 @@ def _propose_genrec(parent, generation, index, operators, rng):
             "robust-preference",
             "incrementality",
             "reward-guided",
+            "tool-calibration",
+            "pareto-semantic-id",
+            "primal-dual",
         ],
         "distillation": ["none", "popularity-teacher", "semantic-teacher"],
     }

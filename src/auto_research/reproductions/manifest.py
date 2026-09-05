@@ -41,11 +41,15 @@ class PaperManifest:
 
     @classmethod
     def from_adapter(
-        cls, adapter: ReproductionAdapter, evolve_operators: Iterable[str] = ()
+        cls,
+        adapter: ReproductionAdapter,
+        evolve_operators: Iterable[str] | None = None,
     ) -> "PaperManifest":
         paper = adapter.paper
-        module = adapter.render.__module__.split(".reproductions.", 1)[-1]
-        package = module.split(".", 1)[0]
+        # Every registered adapter has a conventional package, while renderers
+        # are often shared by a batch.  Inferring the path from ``render`` made
+        # those manifests point at the shared helper instead of the adapter.
+        package = adapter.key.replace("-", "_")
         evidence = []
         for item in paper.online_ab:
             normalized = item.to_dict()
@@ -79,7 +83,11 @@ class PaperManifest:
             gpu_validation_artifact=adapter.gpu_validation_artifact,
             online_evidence=tuple(evidence),
             selection_exception=paper.selection_exception,
-            evolve_operators=tuple(evolve_operators),
+            evolve_operators=tuple(
+                adapter.evolve_operators
+                if evolve_operators is None
+                else evolve_operators
+            ),
         )
 
     def to_dict(self) -> dict[str, Any]:

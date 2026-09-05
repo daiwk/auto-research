@@ -103,6 +103,20 @@ pytest tests/test_research_module_docs.py
 
 九篇均执行独立核心计算、保存三随机种子公开结果和原文关键图，并注册为可执行 genrec Evolve 算子。所有本地结果只用于机制验证，不外推为论文生产 lift。
 
+## 2026 历史 P0 · H04（9 个 adapter）
+
+- `atomic-intent` · [Atomic Intent Reasoning](2606.10357-atomic-intent/README.md)：以层级原子意图树拆解查询，再按候选与意图路径的一致性重排。
+- `toolrec` · [ToolRec](2606.08466-toolrec/README.md)：联合建模工具相关性、置信度校准和业务代价，过滤过度触发的工具推荐。
+- `ssrlive` · [SSRLive](2606.06970-ssrlive/README.md)：静态与动态语义 ID 配合用户—直播间交叉模块，统一内容身份和实时状态。
+- `taiji` · [Taiji](2606.03866-taiji/README.md)：在语义匹配与协同信号之间自适应选择 Pareto 工作点。
+- `primal-dual-decoding` · [Stochastic Primal-Dual Decoding](2607.19357-primal-dual-decoding/README.md)：解码时动态更新约束乘子，在相关性与业务约束之间逐步校正。
+- `muchator` · [MuChator](2605.27103-muchator/README.md)：从多轮会话发现潜在意图，并把显式与隐式反馈共同用于候选排序。
+- `causal-representation` · [Causal Representation Learning for Generalisable Recommendation](2605.27043-causal-representation/README.md)：残差化环境混杂因素，保留跨环境更稳定的因果偏好表示。
+- `policy-facet` · [Policy-Grounded Dynamic Facet Suggestions](2605.16479-policy-facet/README.md)：以离线 taxonomy、在线召回和策略约束排序生成动态搜索 facet。
+- `pa-bridge` · [PA-Bridge](2605.05855-pa-bridge/README.md)：对齐主动搜索与被动推荐的表征分布，桥接两类用户表达信号。
+
+九篇均保留论文生产证据和公开数据复现边界，使用 MovieLens 三随机种子执行相互独立的核心机制，并把对应结构注册为可运行的 genrec Evolve mutation；本地负结果不会被隐藏或改写为提升。
+
 ## 2026-08-24 近期跨领域增量
 
 - `oneshot-index` · [OneShot](2607.27475-oneshot-index/README.md)：Meta/Instagram 将层级索引与排序目标共同训练，并以 neural scoring 替代纯点积检索；已全量部署全球流量。

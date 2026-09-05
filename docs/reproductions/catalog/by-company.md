@@ -31,6 +31,7 @@
 - 2026-07 · [SAM](../2607.12714-sam/README.md)：学习购买后的兴趣退出与个性化恢复周期，通过 ASGU 在注意力 logit 上动态压制重复意图。
 - 2026-07 · [Prompt Generation](../2607.11326-prompt-generation/README.md)：把异构特征组织成配置驱动的生成提示，通过 token 压缩和多种合并策略服务搜索与推荐召回。
 - 2026-06 · [EvoRec](../2606.28368-evorec/README.md)：让模型候选和优化方法双轨进化，并从持久实验记忆中提炼下一代可复用技能。
+- 2026-06 · [SSRLive](../2606.06970-ssrlive/README.md)：以静态/动态 Semantic ID、用户侧 decoder 和 User–Live Cross Module 联合建模直播内容身份与实时状态。
 - 2026-05 · [DeGRe](../2605.25749-degre/README.md)：离线用累计价值评估器做前瞻 beam 搜索，把逐前缀 dense 价值分布蒸馏到在线单次生成器。
 - 2026-05 · [AKT-Rec](../2605.23310-akt-rec/README.md)：用 LLM 对齐内容与协同信号并生成层级 Semantic ID，通过非对称 head-to-tail 迁移改善长尾 CTR 排序。
 - 2026-05 · [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 估计新品点击的长期增量，并以多价值 MoPO 对 Semantic ID 生成策略做偏好对齐。
@@ -68,7 +69,9 @@
 - 2026-08 · [DME](../2608.02148-dme/README.md)：先做多模态对比预训练，再以 typed latent evidence 和 cross-conditional reconstruction 保留细粒度对侧语义。
 - 2026-08 · [STEPS](../2608.01949-steps/README.md)：用 ordinal planning、trajectory execution 与 filtering agent 闭合“是否推送—何时再唤醒”，并已在抖音全量部署。
 - 2026-05 · [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
+- 2026-05 · [MuChator](../2605.27103-muchator/README.md)：从多轮对话中发现显式与潜在意图，并结合会话反馈选择后续推荐候选。
 - 2026-05 · [FLUID](../2605.21832-fluid/README.md)：把直播多模态切片量化成 slice/room 两级 LUCID，以 prefix n-gram late fusion 完全替代短生命周期候选 ID。
+- 2026-05 · [PA-Bridge](../2605.05855-pa-bridge/README.md)：对齐主动搜索与被动推荐的表征分布，使两种用户表达方式互相补充。
 - 2026-03 · [HAP](../2603.03770-hap/README.md)：按候选异质难度路由轻量/强预排分支，并以 harmonization 对齐不同计算预算。
 - 2026-02 · [MixFormer](../2602.14110-mixformer/README.md)：在统一 Transformer 中平衡 dense 特征交互与序列建模，并按预算选择可训练模块。
 - 2026-02 · [MDL](../2602.07520-mdl/README.md)：把 feature、scenario、task 全部 token 化，并以 domain-feature attention 深层共享。
@@ -116,6 +119,7 @@
 - 2026-06 · [POEM](../2606.29946-poem/README.md)：将实时多目标排序信号转成偏序，动态构造兴趣序列。
 - 2026-06 · [UniFormer](../2606.27058-uniformer/README.md)：拆分 feature/task token 空间并统一交互，支持模型中心协同扩展。
 - 2026-06 · [Recommendation as Generation](../2606.25496-rag-generation/README.md)：以解耦语义 ID 连接生成式推荐和兴趣条件内容生成。
+- 2026-06 · [Taiji](../2606.03866-taiji/README.md)：在语义匹配与协同信号之间自适应选择 Pareto 工作点，兼顾冷启动与成熟内容。
 - 2026-04 · [GloRank](../2604.25291-glorank/README.md)：在全局 Semantic ID action space 上做 listwise SFT 与组相对奖励优化，避免局部候选池限制。
 - 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
 - 2026-04 · [Dual-Rerank](../2604.07420-dual-rerank/README.md)：以 AR 顺序教师蒸馏 NAR 并行名次学生，并把列表效用与延迟共同纳入目标。
@@ -215,6 +219,7 @@
 - 2026-07 · [Open Web UFM](../2607.28019-open-web-ufm/README.md)：以开放网页用户行为做双裁剪对比预训练和 next-item 监督，再把共享 user encoder 迁移到广告 CTR 与访问预测。
 
 ## Spotify
+- 2026-05 · [Stochastic Primal-Dual Decoding](../2607.19357-primal-dual-decoding/README.md)：解码时逐步更新约束乘子，在推荐相关性与用户满意度约束之间做序列级校正。
 - 2026-03 · [GLIDE](../2603.17540-glide/README.md)：用 residual Semantic ID 自回归检索，并联合近期历史与长期用户 soft prompt 扩大探索。
 - 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，将高资源任务知识迁移给冷启动 podcast。
 
@@ -312,11 +317,21 @@
 ## LinkedIn
 - 2026-08 · [From Prediction to Incrementality](../2608.10182-incrementality/README.md)：估计处理增量而非 treated outcome，并在不确定度约束下执行固定预算 targeting。
 - 2026-07 · [TransX](../2607.28940-transx/README.md)：分离可缓存行为流与在线服务流，以 cross-attention 避免逐请求重算长历史。
+- 2026-05 · [Policy-Grounded Dynamic Facet Suggestions](../2605.16479-policy-facet/README.md)：以离线 LLM taxonomy、在线关键词召回和策略约束排序生成动态职位搜索 facet。
 - 2026-02 · [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
 ## Tencent
 - 2026-02 · [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md)：将 Thinking Tokens、扩散去噪和 GRPO 组成端到端序列推荐。
+
+## The Hong Kong Polytechnic University
+- 2026-06 · [Atomic Intent Reasoning](../2606.10357-atomic-intent/README.md)：把跨域行为离线拆成可缓存的层级原子意图，再按目标商品检索并聚合意图链。
+
+## Huazhong University of Science and Technology
+- 2026-06 · [ToolRec](../2606.08466-toolrec/README.md)：联合工具相关性、置信度校准和调用代价，减少大模型助手的无效工具推荐。
+
+## University of Warwick
+- 2026-05 · [Causal Representation Learning for Generalisable Recommendation](../2605.27043-causal-representation/README.md)：残差化环境混杂因素，学习跨环境更稳定的因果偏好表示。
 
 ## Institute of Information Engineering, CAS / Kuaishou
 - 2026-07 · [Reward Guided Decoding](../2607.25344-reward-guided-decoding/README.md)：以 KL 正则闭式策略在不重训生成器时注入业务 reward。

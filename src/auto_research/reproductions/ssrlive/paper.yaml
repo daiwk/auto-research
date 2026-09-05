@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "ssrlive",
+  "arxiv_id": "2606.06970",
+  "title": "SSRLive: Live Streaming Recommendation with Dynamic Semantic ID",
+  "paper_url": "https://arxiv.org/abs/2606.06970",
+  "organization": "Taobao & Tmall Group, Alibaba",
+  "published": "2026-06-05",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "live-streaming",
+    "semantic-id",
+    "multitask-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/ssrlive",
+  "documentation": "docs/reproductions/2606.06970-ssrlive/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "production multimodal encoder",
+    "0.04B industrial model",
+    "partial-run serving"
+  ],
+  "evolve_operators": [
+    "head:dynamic-sid"
+  ]
+}

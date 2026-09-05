@@ -157,6 +157,22 @@ def _initial_catalog(data: GenRecData, genome: Genome, rng) -> np.ndarray:
     if genome.genrec_head == "listwise-node":
         information_node = semantic.mean(0, keepdims=True)
         return learned + semantic + 0.20 * information_node
+    if genome.genrec_head == "dynamic-sid":
+        popularity_bin = np.minimum(
+            (np.argsort(np.argsort(data.popularity)) * 8 // len(data.popularity)), 7,
+        )
+        phase = np.linspace(0.0, np.pi, dimensions, dtype=np.float64)
+        sid = np.sin((popularity_bin[:, None] + 1.0) * phase[None])
+        return learned + 0.45 * semantic + 0.20 * sid
+    if genome.genrec_head == "causal-bottleneck":
+        confounder = np.column_stack((np.ones(len(data.popularity)), np.log1p(data.popularity)))
+        projection = np.linalg.lstsq(confounder, semantic, rcond=None)[0]
+        residual = semantic - confounder @ projection
+        return learned + residual / np.maximum(np.linalg.norm(residual, axis=1, keepdims=True), 1e-12)
+    if genome.genrec_head == "policy-facet":
+        facets = _genre_features(data)
+        facet_projection = facets @ rng.normal(0.0, 0.2, (facets.shape[1], dimensions))
+        return learned + semantic + 0.25 * facet_projection
     if genome.genrec_head == "semantic-catalog":
         return semantic
     if genome.genrec_head == "hybrid-catalog":
@@ -212,6 +228,22 @@ def _context(history, catalog, mode: str, maximum: int) -> tuple[np.ndarray, np.
         serving = catalog[values[split:]].mean(0)
         user = 0.45 * global_behavior + 0.55 * serving
         return user, values, weights
+    elif mode == "atomic-intent-tree":
+        values = values[-max(8, maximum):]
+        similarity = catalog[values] @ catalog[values[-1]]
+        coarse = np.maximum(similarity, 0.0) + 0.05
+        recency = np.exp(np.linspace(-1.5, 0.0, len(values)))
+        weights = coarse * recency
+    elif mode == "conversational-intent":
+        values = values[-max(4, maximum // 2):]
+        similarity = catalog[values] @ catalog[values[-1]]
+        weights = np.exp(similarity - similarity.max())
+        weights[-min(3, len(weights)):] *= 1.5
+    elif mode == "active-expression":
+        values = values[-max(8, maximum):]
+        split = max(1, len(values) - min(4, len(values)))
+        weights = np.full(len(values), 0.45 / split)
+        weights[split:] = 0.55 / max(len(values) - split, 1)
     elif mode == "recent":
         values = values[-max(2, maximum // 2):]
         weights = np.ones(len(values))
@@ -249,6 +281,26 @@ def _reward(data: GenRecData, history, target: int, name: str) -> float:
             len(data.item_genres[target]), 1
         )
         return float(np.exp((0.6 * relevance + 0.4 * novelty) / 0.55))
+    if name == "tool-calibration":
+        seen = [genre for item in history[-8:] for genre in data.item_genres[item]]
+        overlap = sum(genre in seen for genre in data.item_genres[target])
+        frequency = sum(seen.count(genre) for genre in data.item_genres[target])
+        return 0.75 + 0.10 * overlap + 0.05 * np.log1p(frequency)
+    if name == "pareto-semantic-id":
+        seen = {genre for item in history[-8:] for genre in data.item_genres[item]}
+        semantic = len(seen.intersection(data.item_genres[target])) / max(len(data.item_genres[target]), 1)
+        collaborative = float(data.popularity[target]) / max(float(data.popularity.max()), 1.0)
+        gap = abs(semantic - collaborative)
+        return 0.75 + 0.25 * ((0.5 + 0.25 * gap) * semantic + (0.5 - 0.25 * gap) * collaborative)
+    if name == "primal-dual":
+        target_share = 0.35
+        novelty = 1.0 - float(data.popularity[target]) / max(float(data.popularity.max()), 1.0)
+        recent_novelty = np.mean([
+            1.0 - float(data.popularity[item]) / max(float(data.popularity.max()), 1.0)
+            for item in history[-8:]
+        ])
+        multiplier = float(np.exp(np.clip(target_share - recent_novelty, -1.0, 1.0)))
+        return 0.75 + 0.25 * multiplier * novelty
     return 1.0
 
 

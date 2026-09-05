@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "pa-bridge",
+  "arxiv_id": "2605.05855",
+  "title": "Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling",
+  "paper_url": "https://arxiv.org/abs/2605.05855",
+  "organization": "ByteDance",
+  "published": "2026-05-07",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "conversation-starter",
+    "distribution-alignment",
+    "debiasing"
+  ],
+  "local_code": "src/auto_research/reproductions/pa_bridge",
+  "documentation": "docs/reproductions/2605.05855-pa-bridge/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private active-expression logs",
+    "production base model",
+    "online feedback loop"
+  ],
+  "evolve_operators": [
+    "context:active-expression"
+  ]
+}

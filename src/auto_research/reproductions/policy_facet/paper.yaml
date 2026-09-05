@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "policy-facet",
+  "arxiv_id": "2605.16479",
+  "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+  "paper_url": "https://arxiv.org/abs/2605.16479",
+  "organization": "LinkedIn",
+  "published": "2026-05-15",
+  "upstream_code": "否：未找到原作者公开代码（核查日期：2026-09-02）",
+  "track": "recommendation",
+  "topics": [
+    "job-search",
+    "facet-retrieval",
+    "policy-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/policy_facet",
+  "documentation": "docs/reproductions/2605.16479-policy-facet/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "LLM-curated production taxonomy",
+    "fine-tuned SLMs",
+    "LinkedIn serving cache"
+  ],
+  "evolve_operators": [
+    "head:policy-facet"
+  ]
+}

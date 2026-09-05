@@ -19,8 +19,11 @@
 - [Apple Music ELISE](../2607.10239-elise/README.md)：将多语言语义向量召回与 token index 通过分位数匹配融合。
 - [NEXT](../2607.24789-next-vlm/README.md)：训练面向推荐的 8B VLM 生成 next-intent query，并把高置信 directed edges 离线物化为 NKG。
 - [TokenMinds](../2606.25147-tokenminds/README.md)：把观看、搜索与场景信号编码为稠密用户向量和 SID 用户 token，以双输出和 multi-context decoding 支持下游排序与跨场景复用。
+- [Atomic Intent Reasoning](../2606.10357-atomic-intent/README.md)：用大模型离线拆分层级原子意图，在线只检索和聚合缓存意图链。
+- [ToolRec](../2606.08466-toolrec/README.md)：为大模型助手显式校准工具相关性与调用成本，抑制无效工具触发。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 补充传统召回和排序特征。
 - [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md)：用个性化双视图 LoRA-MoE 分别适配语义和行为，再自适应融合。
+- [MuChator](../2605.27103-muchator/README.md)：从多轮会话发现潜在推荐意图，并融合显式与隐式反馈更新候选。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用真实 LLM 对齐物品共现和用户兴趣，再以 Semantic ID 支持面向长尾的非对称知识迁移。
 - [HARNESS-LM](../2605.23572-harness-lm/README.md)：通过强 teacher、L2 embedding alignment 与冻结文档索引精修构造非对称轻量检索器。
 - [TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery](../2605.23702-tubifm/README.md)：以统一 user story 和任务提示让同一模型完成 item、carousel 与 search 排序。
@@ -65,6 +68,7 @@
 - [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
 - [DCEO](../2608.25635-dceo/README.md)：用直接因果效应替代短期相关性代理，并以动态多目标权重优化长期用户价值。
 - [TransRetrieval](../2608.25528-transretrieval/README.md)：通过 target-token 压缩、多域参数化与深层 Transformer 扩展工业检索。
+- [Policy-Grounded Dynamic Facet Suggestions](../2605.16479-policy-facet/README.md)：离线构建 facet taxonomy，在线按 query/member 召回并在策略约束下排序关键词。
 - [HILL](../2604.12965-hill-index/README.md)：用跨层 residual quantization 学习 coarse-to-fine 检索索引，减少候选打分量。
 
 ### 生成式召回与端到端推荐
@@ -89,6 +93,7 @@
 - [CMSL](../2606.28533-cmsl/README.md)：以可学习 lenses 切分多兴趣 strand，再使用 HSTU 生成推荐结果。
 - [Recommendation as Generation](../2606.25496-rag-generation/README.md)：以解耦 Semantic ID 让推荐意图可同时驱动候选选择和个性化视频生成。
 - [G2Rec](../2606.20554-g2rec/README.md)：联合 soft graph 与生成式双目标学习结构化用户—物品关系。
+- [SSRLive](../2606.06970-ssrlive/README.md)：用静态/动态 Semantic ID 和用户—直播间交叉模块生成可随实时状态变化的直播表示。
 - [DeGRe](../2605.25749-degre/README.md)：用离线前瞻列表价值产生 dense prefix labels，再蒸馏到低延迟在线生成器。
 - [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md)：把 query-item 联合序列交给 Linear HSTU，并融合稀疏交叉特征做生成式搜索。
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 uplift 纳入生成式召回 reward，以 MoPO 平衡即时和长期价值。
@@ -199,6 +204,7 @@
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 corpus、召回、排序和 utility 全漏斗识别 fresh 内容瓶颈，以内容特征、engagement dropout、cohort calibration 和 UCB 打破曝光反馈回路。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以 engagement-aware residual codebook 和多视角对齐把 Semantic ID 接入判别式召回。
 - [Proximity Features](../2607.12246-proximity-features/README.md)：以自适应群体地理 key 聚合行为，为匿名和首次访问用户提供冷启动特征。
+- [Taiji](../2606.03866-taiji/README.md)：自适应融合语义匹配与协同信号，在冷启动覆盖和成熟内容精度之间选择 Pareto 工作点。
 - [LLM Retrieval](../2605.21969-llm-ad-retrieval/README.md)：生成 creative 层级语义属性，并用 primary/shadow 机制稳定广告召回。
 - [PinCLIP](../2603.03544-pinclip/README.md)：把图文 contrastive learning 与 Pin-Board 共现邻居对齐，改善 fresh 内容表示。
 - [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享 organic stream 与 ads/promotion 表征，把高资源任务知识迁移到冷启动 podcast。
@@ -222,6 +228,7 @@
 - [SCALR](../2606.00282-scalr/README.md)：学习跨域条件分布并概率采样合成训练事件，替代覆盖度较低的确定性 top-k 翻译。
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch/stream teacher，把大模型知识蒸馏到轻量 student。
 - [Pinterest Complementary LLM Predictor](../2605.27856-pinterest-ads-llm/README.md)：先用 SFT 学习广告主列表，再以 GRPO 奖励优化列表质量。
+- [Stochastic Primal-Dual Decoding](../2607.19357-primal-dual-decoding/README.md)：在逐 token 解码中同步更新随机约束乘子，以无需重训的方式控制序列级业务目标。
 - [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型交替更新减少偏差。
 - [UniVA](../2605.05803-univa/README.md)：在请求内归一化 eCPM reward，并交替执行监督学习与强化学习。
 - [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：用 Actor–Critic 生成和审查配置，以 Online agent 回收实验反馈并由 SkillHub 跨轮复用。
@@ -243,9 +250,11 @@
 - [Adaptive Ad Load Design for Sponsored Search Markets: Evidence, Theory, and Deployment](../2607.14418-adaptive-ad-load/README.md)：从随机现场实验学习收入—转化曲线，再按请求动态选择广告数量。
 - [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：筛选能预测未来参与度的长期 reward，再以独立 reward heads 注入多个推荐 surface。
 - [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 估计触发 shopping candidate generator 的增量收益，并同时考虑召回成本。
+- [Causal Representation Learning for Generalisable Recommendation](../2605.27043-causal-representation/README.md)：从表征中残差化环境混杂信号，保留可跨环境迁移的因果偏好。
 - [PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation](../2605.21752-pearl-percentile/README.md)：通过多样本对比估计低方差行为 percentile，并扩展到多个直播目标。
 - [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
 - [GrowthGR](../2605.17994-growthgr/README.md)：把新品长期 ItemLTV 纳入生成式召回 reward，平衡即时反馈与长期价值。
+- [PA-Bridge](../2605.05855-pa-bridge/README.md)：约束主动搜索与被动推荐的分布距离，并保留两域各自可辨识的偏好信号。
 - [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md)：组合位置去偏、会话归因与作者周期任务建模长期价值。
 
 ## 多阶段排序与混排

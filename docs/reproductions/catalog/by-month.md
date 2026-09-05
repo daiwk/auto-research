@@ -102,12 +102,19 @@
 - [EvoRec](../2606.28368-evorec/README.md)：让 Research/Code Agent 迭代模型，Skill Evolver 从持久 Memory 中提炼优化方法。
 - [OneRank](../2606.16838-onerank/README.md)：原生统一 Transformer 多任务排序与任务私有通道。
 - [PIANO](../2606.16641-piano/README.md)：查询驱动兴趣精炼和信息聚合节点的音乐 listwise 重排。
+- [Atomic Intent Reasoning](../2606.10357-atomic-intent/README.md)：将跨域行为拆成层级原子意图，离线缓存后按目标候选检索并聚合意图链。
+- [ToolRec](../2606.08466-toolrec/README.md)：联合工具相关性、置信度校准和调用代价，减少大模型助手的无效工具推荐。
+- [SSRLive](../2606.06970-ssrlive/README.md)：静态/动态 Semantic ID 配合用户—直播间交叉模块，统一内容身份与实时状态。
+- [Taiji](../2606.03866-taiji/README.md)：在语义匹配与协同信号之间自适应选择 Pareto 工作点。
 
 ## 2026-05
 - [SCALR](../2606.00282-scalr/README.md)：学习跨域条件分布并概率采样合成训练事件，替代覆盖度较低的确定性 top-k 翻译。
 - [Rec-Distill](../2605.29755-rec-distill/README.md)：结合 batch 与 streaming teacher，把大模型知识蒸馏到轻量推荐 student，并优化跨任务可迁移性。
 - [Pinterest Ads LLM](../2605.27856-pinterest-ads-llm/README.md)：对广告主列表进行 SFT/GRPO，让 LLM 作为传统广告召回与排序的补充预测器。
+- [Causal Representation Learning for Generalisable Recommendation](../2605.27043-causal-representation/README.md)：残差化环境混杂因素，保留跨环境稳定的因果偏好。
 - [L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation](../2605.26717-l2rec/README.md)：用个性化双视图 LoRA-MoE 分别适配语义和行为，再自适应融合。
+- [MuChator](../2605.27103-muchator/README.md)：从多轮对话发现显式和潜在意图，并结合会话反馈选择候选。
+- [Stochastic Primal-Dual Decoding](../2607.19357-primal-dual-decoding/README.md)：解码时逐步更新约束乘子，在相关性与用户满意度约束之间校正。
 - [DeGRe](../2605.25749-degre/README.md)：将离线 lookahead evaluator 的列表价值蒸馏成在线 dense 生成监督。
 - [From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark](../2605.25514-qgs/README.md)：把 query-item 联合序列交给 Linear HSTU，并融合稀疏交叉特征做生成式搜索。
 - [AKT-Rec](../2605.23310-akt-rec/README.md)：用 LLM Semantic ID 构造语义簇，以非对称对比学习和活动度门控把头部知识迁移到长尾。
@@ -120,10 +127,12 @@
 - [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型更新降低单一采样偏差。
 - [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../2605.17863-dadf/README.md)：冻结成熟 watch-time 模型，学习分布感知乘性残差且保持服务接口不变。
 - [GrowthGR](../2605.17994-growthgr/README.md)：用 ItemLTV 与多价值 MoPO 引导生成式召回发现高潜新品。
+- [Policy-Grounded Dynamic Facet Suggestions](../2605.16479-policy-facet/README.md)：以离线 taxonomy、在线召回和策略约束排序生成动态搜索 facet。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 与 expert-guided GRPO 优化天猫搜索生成式检索。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
 - [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md)：以双头 Q 网络和 Pareto 扫描选择可治理的个性化多目标 utility 策略。
 - [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
+- [PA-Bridge](../2605.05855-pa-bridge/README.md)：对齐主动搜索和被动推荐的表征分布，桥接两类用户表达信号。
 - [UniVA](../2605.05803-univa/README.md)：用 Commercial SID 和 generation-as-ranking 统一广告生成，并通过价值对齐 RL 与 trie beam 优化收益。
 - [RecGPT-Mobile](../2605.04726-recgpt-mobile/README.md)：将 LoRA+INT8 小模型部署到端侧，通过预算约束 prompt 和 entropy/Jaccard/JS 漂移分数按需生成用户意图。
 - [Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md)：以层级语义 ID、bigram、时间折叠和 global-local pooling 扩展视频长历史。

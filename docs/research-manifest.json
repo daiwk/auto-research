@@ -1646,7 +1646,7 @@
           "length-extrapolation",
           "attention"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/alibi",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -1728,7 +1728,7 @@
           "注意力与长上下文",
           "稀疏注意力"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/autonomy_heads",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -1780,7 +1780,7 @@
           "inference-serving",
           "quantization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_p1",
+        "local_code_dir": "src/auto_research/reproductions/awq",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -1837,7 +1837,7 @@
           "hessian",
           "inference-efficiency"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/bakron",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -1951,7 +1951,7 @@
           "dynamic-patching",
           "architecture"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/blt",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2033,7 +2033,7 @@
           "推理与系统效率",
           "KV cache"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/c2kv",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2215,7 +2215,7 @@
           "网络架构",
           "注意力与长上下文"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/dart",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2269,7 +2269,7 @@
           "scaling-law",
           "data-mixture"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_data_p0",
+        "local_code_dir": "src/auto_research/reproductions/data_mixing_laws",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2400,7 +2400,7 @@
           "inference-efficiency",
           "stochastic-decoding"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/dblast",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2453,7 +2453,7 @@
           "推理与系统效率",
           "KV cache"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/distillcache",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2507,7 +2507,7 @@
           "data-mixture",
           "group-dro"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_data_p0",
+        "local_code_dir": "src/auto_research/reproductions/doremi",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2566,7 +2566,7 @@
           "conditional-memory",
           "sparsity"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/engram",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2685,7 +2685,7 @@
           "attention-gating",
           "long-context"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/gated_attention",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2749,7 +2749,7 @@
           "quantization",
           "w4a4"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/gaugequant",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2813,7 +2813,7 @@
           "serving",
           "architecture"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/gqa",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -2957,7 +2957,7 @@
           "multi-token-prediction",
           "speculative-decoding"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/hilp",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3012,7 +3012,7 @@
           "small-language-model",
           "architecture"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/hymba",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3151,7 +3151,7 @@
           "kv-cache",
           "looped-transformer"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/looped_latent_attention",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3213,7 +3213,7 @@
           "dynamic-routing",
           "inference-efficiency"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/macro",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3270,7 +3270,7 @@
           "state-space-model",
           "classic"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/mamba",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3324,7 +3324,7 @@
           "inference-serving",
           "decoding"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_p1",
+        "local_code_dir": "src/auto_research/reproductions/medusa",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3639,7 +3639,7 @@
           "long-context",
           "block-routing"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/moba",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3786,7 +3786,7 @@
           "optimizer",
           "training-efficiency"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/muon",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3908,7 +3908,7 @@
           "sparse-attention",
           "long-context"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/native_sparse_attention",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -3972,7 +3972,7 @@
           "注意力与长上下文",
           "网络架构"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/olmpool_long_context",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4028,7 +4028,7 @@
           "small-language-model",
           "evolve"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/open_language_model",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4169,7 +4169,7 @@
           "recurrence",
           "efficiency"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/penelope",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4251,7 +4251,7 @@
           "多模态基础模型",
           "预训练与数据"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/physics_mm_pretraining",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4368,7 +4368,7 @@
           "quantization",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/qevict",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4482,7 +4482,7 @@
           "attention",
           "residual-routing"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/rd_attnres",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4547,7 +4547,7 @@
           "kv-cache",
           "sparse-attention"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/retoken",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4611,7 +4611,7 @@
           "long-context",
           "architecture"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/rope",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4805,7 +4805,7 @@
           "inference-serving",
           "decoding"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundation_p1",
+        "local_code_dir": "src/auto_research/reproductions/speculative_decoding",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4862,7 +4862,7 @@
           "efficient-attention",
           "long-context"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/switch_attention",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4918,7 +4918,7 @@
           "mixture-of-experts",
           "classic"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/switch_transformer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -4972,7 +4972,7 @@
           "评测基础设施",
           "在线实验"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/tcab",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -5024,7 +5024,7 @@
           "注意力与长上下文",
           "Agent 记忆"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/transmem",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -5076,7 +5076,7 @@
           "注意力与长上下文",
           "测试时训练"
         ],
-        "local_code_dir": "src/auto_research/reproductions/historical_b07",
+        "local_code_dir": "src/auto_research/reproductions/ttcd",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -5302,7 +5302,7 @@
           "dynamic-pruning",
           "inference-efficiency"
         ],
-        "local_code_dir": "src/auto_research/reproductions/llm_evolve_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/wide",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -7100,7 +7100,7 @@
           "state-aware-adapter",
           "multi-forward"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/adaf2m2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -7319,7 +7319,7 @@
           "ranking",
           "reranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/agentic_rec_tune",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -7650,7 +7650,7 @@
           "multi-agent-data-curation",
           "knowledge-distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260730_common",
+        "local_code_dir": "src/auto_research/reproductions/asarl",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -7709,6 +7709,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "atomic-intent",
+      "title": "Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations",
+      "paper_url": "https://arxiv.org/abs/2606.10357",
+      "detail_path": "reproductions/2606.10357-atomic-intent/README.md",
+      "topic": [
+        "cross-domain",
+        "llm-recommendation",
+        "intent-retrieval"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "The Hong Kong Polytechnic University",
+      "published": "2026-06-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "atomic-intent",
+        "arxiv_id": "2606.10357",
+        "title": "Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations",
+        "paper_url": "https://arxiv.org/abs/2606.10357",
+        "track": "recommendation",
+        "organization": "The Hong Kong Polytechnic University",
+        "published": "2026-06-09",
+        "code_url": null,
+        "topics": [
+          "cross-domain",
+          "llm-recommendation",
+          "intent-retrieval"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/atomic_intent",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou E-commerce",
+            "metric": "GMV",
+            "lift_percent": 3.446,
+            "traffic": "5.08% production traffic",
+            "source_url": "https://arxiv.org/html/2606.10357v1",
+            "source_location": "Section 5.6",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:atomic-intent-tree"
+        ]
       }
     },
     {
@@ -7980,7 +8050,7 @@
           "classic",
           "sequence-modeling"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/bst",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -8086,6 +8156,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "causal-representation",
+      "title": "Causal Representation Learning for Generalisable Recommendation",
+      "paper_url": "https://arxiv.org/abs/2605.27043",
+      "detail_path": "reproductions/2605.27043-causal-representation/README.md",
+      "topic": [
+        "causal-recommendation",
+        "distribution-shift",
+        "representation-learning"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "University of Warwick",
+      "published": "2026-05-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "causal-representation",
+        "arxiv_id": "2605.27043",
+        "title": "Causal Representation Learning for Generalisable Recommendation",
+        "paper_url": "https://arxiv.org/abs/2605.27043",
+        "track": "recommendation",
+        "organization": "University of Warwick",
+        "published": "2026-05-26",
+        "code_url": null,
+        "topics": [
+          "causal-recommendation",
+          "distribution-shift",
+          "representation-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/causal_representation",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Spotify playlist generation",
+            "metric": "Track streams",
+            "lift_percent": 0.75,
+            "traffic": "2 weeks; millions of users; 95% CI [+0.54%, +0.96%]",
+            "source_url": "https://arxiv.org/html/2605.27043v1",
+            "source_location": "Section 4.3, Table 2",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:causal-bottleneck"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "causal-retrieval",
       "title": "Deep-learning Causal Retrieval Optimization for Efficient e-commerce Distribution in Pinterest",
       "paper_url": "https://arxiv.org/abs/2607.14161",
@@ -8113,7 +8253,7 @@
           "uplift",
           "candidate-generation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/causal_retrieval",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -8192,7 +8332,7 @@
           "sequence-compression",
           "token-mixing"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260801_common",
+        "local_code_dir": "src/auto_research/reproductions/ccformer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -8270,7 +8410,7 @@
           "diversity",
           "knowledge-distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/cdm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -8350,7 +8490,7 @@
           "taxonomy",
           "ads-ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/click_a_buy_b",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -8888,7 +9028,7 @@
           "semantic-id",
           "reinforcement-learning"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/cq_sid",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9034,7 +9174,7 @@
           "content-understanding",
           "llm-distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/crsd",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9122,7 +9262,7 @@
           "two-tower",
           "online-learning"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/cs3",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9191,7 +9331,7 @@
           "watch-time",
           "bias"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/cwm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9337,7 +9477,7 @@
           "cvr",
           "discount"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/danet",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9486,7 +9626,7 @@
           "classic",
           "feature-interaction"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/dcn_v2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9544,7 +9684,7 @@
           "classic",
           "feature-interaction"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/deepfm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9617,7 +9757,7 @@
           "exploration",
           "preference-optimization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260808_common",
+        "local_code_dir": "src/auto_research/reproductions/degr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9697,7 +9837,7 @@
           "reranking",
           "distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/degre",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9774,7 +9914,7 @@
           "classic",
           "sequence-modeling"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/dien",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -9966,7 +10106,7 @@
           "optimal-transport",
           "non-autoregressive"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/director",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10005,7 +10145,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:transport-index"
+        ]
       }
     },
     {
@@ -10039,7 +10181,7 @@
           "embedding",
           "llm-recommendation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/dme",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10117,7 +10259,7 @@
           "semantic-id",
           "orthogonal-quantization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/dos",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10188,7 +10330,7 @@
           "multi-surface",
           "retention"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/downstream_rewards",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10368,7 +10510,7 @@
           "robust-learning",
           "video-recommendation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/drem",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10407,7 +10549,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "reward:robust-preference"
+        ]
       }
     },
     {
@@ -10441,7 +10585,7 @@
           "utility-tuning",
           "off-policy"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/drl_put",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10529,7 +10673,7 @@
           "listwise-rl",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/dual_rerank",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10614,7 +10758,7 @@
           "content-understanding",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/dual_sid",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10701,7 +10845,7 @@
           "semantic-id",
           "long-short-interest"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/dualgr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10846,7 +10990,7 @@
           "generative-retrieval",
           "shared-encoder"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/egr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -10882,7 +11026,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:embedding-native"
+        ]
       }
     },
     {
@@ -10980,7 +11126,7 @@
           "multilingual-retrieval",
           "score-calibration"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/elise",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -11016,7 +11162,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:quantile-fusion"
+        ]
       }
     },
     {
@@ -11050,7 +11198,7 @@
           "multi-task",
           "conversion"
         ],
-        "local_code_dir": "src/auto_research/reproductions/classic_multitask",
+        "local_code_dir": "src/auto_research/reproductions/esmm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -11128,7 +11276,7 @@
           "agent",
           "skill-evolution"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/evorec",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -11275,7 +11423,7 @@
           "retrieval",
           "text-to-distribution"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/filterllm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -11365,7 +11513,7 @@
           "cold-start",
           "ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/fluid",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -11527,7 +11675,7 @@
           "feature-interaction",
           "scaling"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/fuxi_alpha",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -11937,7 +12085,7 @@
           "grpo",
           "page-wise"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/genrec",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12103,7 +12251,7 @@
           "semantic-id",
           "soft-prompt"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/glide",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12185,7 +12333,7 @@
           "semantic-id",
           "reinforcement-learning"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/glorank",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12406,7 +12554,7 @@
           "reinforcement-learning",
           "self-correction"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/grc",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12483,7 +12631,7 @@
           "reinforcement-learning",
           "new-items"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/growthgr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12563,7 +12711,7 @@
           "ranking",
           "rollout-distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260808_common",
+        "local_code_dir": "src/auto_research/reproductions/gryphon_v2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12704,7 +12852,7 @@
           "heterogeneity",
           "diversity"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/ha_moe",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12793,7 +12941,7 @@
           "contrastive-learning",
           "dynamic-routing"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/hap",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12871,7 +13019,7 @@
           "retrieval",
           "distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/harness_lm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -12950,7 +13098,7 @@
           "semantic-id",
           "preference-optimization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/higr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13037,7 +13185,7 @@
           "test-time-training",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/hill_index",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13075,7 +13223,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "rankmixer_hill_index"
+        ]
       }
     },
     {
@@ -13107,7 +13257,7 @@
           "sparse-activation",
           "semantic-id"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/hisac",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13178,7 +13328,7 @@
           "semantic-id",
           "credit-assignment"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/hrpo",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13373,7 +13523,7 @@
           "id-alignment",
           "ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/idproxy",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13495,7 +13645,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "reward:incrementality"
+        ]
       }
     },
     {
@@ -13595,7 +13747,7 @@
           "generative-retrieval",
           "content-understanding"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/intsr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13822,7 +13974,7 @@
           "streaming",
           "transfer"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/kgd",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -13906,7 +14058,7 @@
           "mixture-of-experts",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/kunlun",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -14409,7 +14561,7 @@
           "cold-start",
           "comment-ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/llm_ts_prior",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -14502,7 +14654,7 @@
           "cached-user-representation",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/july_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/long_history_transformer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15044,7 +15196,7 @@
           "multi-domain",
           "semantic-id"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/mbgr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15168,7 +15320,7 @@
           "multi-task",
           "tokenization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/mdl",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15250,7 +15402,7 @@
           "entity-grounding",
           "reflection"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/melo",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15383,7 +15535,7 @@
           "cache",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/memory_layer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15433,7 +15585,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "rankmixer_memory_layer"
+        ]
       }
     },
     {
@@ -15465,7 +15619,7 @@
           "fresh-content",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/mesh",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15544,7 +15698,7 @@
           "executable-strategy",
           "online-policy"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260813_common",
+        "local_code_dir": "src/auto_research/reproductions/metastrategy",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15631,7 +15785,7 @@
           "diversity",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/mfli",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15720,7 +15874,7 @@
           "graph-neural-network",
           "ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/mgoe",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -15809,7 +15963,7 @@
           "pretraining",
           "ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/mim",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -16092,7 +16246,7 @@
           "multi-task",
           "mixture-of-experts"
         ],
-        "local_code_dir": "src/auto_research/reproductions/classic_multitask",
+        "local_code_dir": "src/auto_research/reproductions/mmoe",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -16267,7 +16421,7 @@
           "sequence",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/mpformer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -16434,7 +16588,7 @@
           "sparse-memory",
           "product-key-memory"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/msn",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -16485,6 +16639,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "muchator",
+      "title": "MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music",
+      "paper_url": "https://arxiv.org/abs/2605.27103",
+      "detail_path": "reproductions/2605.27103-muchator/README.md",
+      "topic": [
+        "music-recommendation",
+        "conversational-llm",
+        "active-discovery"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-05-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "muchator",
+        "arxiv_id": "2605.27103",
+        "title": "MuChator: Enabling Active Music Discovery via Conversational Music LLMs in Douyin Music",
+        "paper_url": "https://arxiv.org/abs/2605.27103",
+        "track": "recommendation",
+        "organization": "ByteDance",
+        "published": "2026-05-26",
+        "code_url": null,
+        "topics": [
+          "music-recommendation",
+          "conversational-llm",
+          "active-discovery"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/muchator",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Douyin Music",
+            "metric": "Active days",
+            "lift_percent": 46.49,
+            "traffic": "approximately one month; >0.1B daily users",
+            "source_url": "https://arxiv.org/html/2605.27103v1",
+            "source_location": "Section 4.2, Table 2",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:conversational-intent"
+        ]
       }
     },
     {
@@ -16827,7 +17051,7 @@
           "architecture-evolution",
           "verification"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/nova",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -16984,7 +17208,7 @@
           "multi-scenario",
           "semantic-id"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/onemall",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17156,7 +17380,7 @@
           "latent-reasoning",
           "multi-task"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/onepiece",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17237,7 +17461,7 @@
           "multi-task",
           "transformer"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/onerank",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17273,7 +17497,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:unified-ranker"
+        ]
       }
     },
     {
@@ -17307,7 +17533,7 @@
           "ranking",
           "multi-task"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/oneranker",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17652,7 +17878,7 @@
           "self-supervised-learning",
           "llm-optimizer"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260801_common",
+        "local_code_dir": "src/auto_research/reproductions/open_web_ufm",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17729,7 +17955,7 @@
           "privileged-distillation",
           "behavior-instruction"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260730_common",
+        "local_code_dir": "src/auto_research/reproductions/oxygenrec_v2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17786,6 +18012,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "pa-bridge",
+      "title": "Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling",
+      "paper_url": "https://arxiv.org/abs/2605.05855",
+      "detail_path": "reproductions/2605.05855-pa-bridge/README.md",
+      "topic": [
+        "conversation-starter",
+        "distribution-alignment",
+        "debiasing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-05-07",
+      "code": null,
+      "adapter": {
+        "adapter_key": "pa-bridge",
+        "arxiv_id": "2605.05855",
+        "title": "Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling",
+        "paper_url": "https://arxiv.org/abs/2605.05855",
+        "track": "recommendation",
+        "organization": "ByteDance",
+        "published": "2026-05-07",
+        "code_url": null,
+        "topics": [
+          "conversation-starter",
+          "distribution-alignment",
+          "debiasing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/pa_bridge",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "ByteDance conversation starter",
+            "metric": "Feature penetration",
+            "lift_percent": 0.54,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2605.05855v1",
+            "source_location": "Section 3.3, Table 2",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:active-expression"
+        ]
       }
     },
     {
@@ -17883,7 +18179,7 @@
           "reranking",
           "listwise"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/piano",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -17919,7 +18215,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:listwise-node"
+        ]
       }
     },
     {
@@ -17951,7 +18249,7 @@
           "engagement-aware",
           "generative-retrieval"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/pin_scale",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -18031,7 +18329,7 @@
           "contrastive-learning",
           "cold-start"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/pinclip",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -18415,7 +18713,7 @@
           "multi-task",
           "mixture-of-experts"
         ],
-        "local_code_dir": "src/auto_research/reproductions/classic_multitask",
+        "local_code_dir": "src/auto_research/reproductions/ple",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -18553,7 +18851,7 @@
           "multi-task",
           "ads"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/podcast_mtl",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -18630,7 +18928,7 @@
           "partial-order",
           "real-time"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/poem",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -18666,7 +18964,79 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:partial-order"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "policy-facet",
+      "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+      "paper_url": "https://arxiv.org/abs/2605.16479",
+      "detail_path": "reproductions/2605.16479-policy-facet/README.md",
+      "topic": [
+        "job-search",
+        "facet-retrieval",
+        "policy-ranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "LinkedIn",
+      "published": "2026-05-15",
+      "code": null,
+      "adapter": {
+        "adapter_key": "policy-facet",
+        "arxiv_id": "2605.16479",
+        "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
+        "paper_url": "https://arxiv.org/abs/2605.16479",
+        "track": "recommendation",
+        "organization": "LinkedIn",
+        "published": "2026-05-15",
+        "code_url": null,
+        "topics": [
+          "job-search",
+          "facet-retrieval",
+          "policy-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/policy_facet",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "LinkedIn Job Search",
+            "metric": "Facet CTR",
+            "lift_percent": 34.8,
+            "traffic": "production A/B; p<0.0001",
+            "source_url": "https://arxiv.org/html/2605.16479v1",
+            "source_location": "Section 4.2, Table 5",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:policy-facet"
+        ]
       }
     },
     {
@@ -18765,6 +19135,76 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "primal-dual-decoding",
+      "title": "Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2607.19357",
+      "detail_path": "reproductions/2607.19357-primal-dual-decoding/README.md",
+      "topic": [
+        "generative-recommendation",
+        "multiobjective",
+        "constrained-decoding"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Spotify",
+      "published": "2026-05-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "primal-dual-decoding",
+        "arxiv_id": "2607.19357",
+        "title": "Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2607.19357",
+        "track": "recommendation",
+        "organization": "Spotify",
+        "published": "2026-05-26",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "multiobjective",
+          "constrained-decoding"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/primal_dual_decoding",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Spotify recommender",
+            "metric": "Auxiliary objective",
+            "lift_percent": 1.8,
+            "traffic": "large-scale online A/B; zero user-satisfaction cost",
+            "source_url": "https://arxiv.org/html/2607.19357v1",
+            "source_location": "Section 5.2",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:primal-dual"
+        ]
       }
     },
     {
@@ -18957,7 +19397,7 @@
           "privacy",
           "features"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/proximity_features",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -19036,7 +19476,7 @@
           "pair-token",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/psg",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -19074,7 +19514,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:pair-space"
+        ]
       }
     },
     {
@@ -19306,7 +19748,7 @@
           "asynchronous-serving",
           "ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/radar",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -19385,7 +19827,7 @@
           "semantic-id",
           "video-generation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/rag_generation",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -19421,7 +19863,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:disentangled-sid"
+        ]
       }
     },
     {
@@ -19521,7 +19965,7 @@
           "distillation",
           "missing-features"
         ],
-        "local_code_dir": "src/auto_research/reproductions/july_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/ramp",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -19590,7 +20034,7 @@
           "ppr",
           "residual-quantization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/rankgraph2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -19844,7 +20288,7 @@
           "semantic-profile",
           "grpo"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/recap",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -20017,7 +20461,7 @@
           "reinforcement-learning",
           "ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_p0_2025",
+        "local_code_dir": "src/auto_research/reproductions/recgpt_v2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -20278,7 +20722,7 @@
           "reinforcement-learning",
           "retrieval"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/reco_reward",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -20366,7 +20810,7 @@
           "reward",
           "business-alignment"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/reward_guided_decoding",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -20404,7 +20848,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "reward:reward-guided"
+        ]
       }
     },
     {
@@ -20504,7 +20950,7 @@
           "serving",
           "compute-sharing"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260801_common",
+        "local_code_dir": "src/auto_research/reproductions/rocs",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -20729,7 +21175,7 @@
           "long-sequence",
           "satiation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/sam",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -21036,7 +21482,7 @@
           "conversion",
           "data-augmentation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/scalr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -21076,7 +21522,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "data:scalr"
+        ]
       }
     },
     {
@@ -21169,7 +21617,7 @@
           "efficient-transformer",
           "cold-start"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/semantic_native_longseq",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -21218,7 +21666,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "rankmixer_semantic_native_longseq"
+        ]
       }
     },
     {
@@ -21490,7 +21940,7 @@
           "long-sequence",
           "training-serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/sim",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -21647,7 +22097,7 @@
           "llm",
           "multimodal"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/snaplgr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -21686,7 +22136,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "head:snaplgr-sid"
+        ]
       }
     },
     {
@@ -21718,7 +22170,7 @@
           "serving",
           "latent-cache"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/solaris",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -21791,7 +22243,7 @@
           "ranking",
           "history-compression"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260813_common",
+        "local_code_dir": "src/auto_research/reproductions/sona",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22034,7 +22486,7 @@
           "retrieval",
           "personalization"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/spear",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22122,7 +22574,7 @@
           "transformer",
           "spectral-softening"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/specformer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22158,7 +22610,79 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:spectral-soften"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "ssrlive",
+      "title": "SSRLive: Live Streaming Recommendation with Dynamic Semantic ID",
+      "paper_url": "https://arxiv.org/abs/2606.06970",
+      "detail_path": "reproductions/2606.06970-ssrlive/README.md",
+      "topic": [
+        "live-streaming",
+        "semantic-id",
+        "multitask-ranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Taobao & Tmall Group, Alibaba",
+      "published": "2026-06-05",
+      "code": null,
+      "adapter": {
+        "adapter_key": "ssrlive",
+        "arxiv_id": "2606.06970",
+        "title": "SSRLive: Live Streaming Recommendation with Dynamic Semantic ID",
+        "paper_url": "https://arxiv.org/abs/2606.06970",
+        "track": "recommendation",
+        "organization": "Taobao & Tmall Group, Alibaba",
+        "published": "2026-06-05",
+        "code_url": null,
+        "topics": [
+          "live-streaming",
+          "semantic-id",
+          "multitask-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/ssrlive",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Alibaba live streaming",
+            "metric": "Watch time",
+            "lift_percent": 3.38,
+            "traffic": "production A/B; statistically significant",
+            "source_url": "https://arxiv.org/html/2606.06970v1",
+            "source_location": "Section 6, Table 4",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "head:dynamic-sid"
+        ]
       }
     },
     {
@@ -22192,7 +22716,7 @@
           "decision-transformer",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/steps",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22281,7 +22805,7 @@
           "decision-transformer",
           "long-horizon"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/swag_bid",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22427,6 +22951,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "taiji",
+      "title": "Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation",
+      "paper_url": "https://arxiv.org/abs/2606.03866",
+      "detail_path": "reproductions/2606.03866-taiji/README.md",
+      "topic": [
+        "advertising",
+        "reinforcement-alignment",
+        "pareto-optimization"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-06-02",
+      "code": null,
+      "adapter": {
+        "adapter_key": "taiji",
+        "arxiv_id": "2606.03866",
+        "title": "Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation",
+        "paper_url": "https://arxiv.org/abs/2606.03866",
+        "track": "recommendation",
+        "organization": "Kuaishou Technology",
+        "published": "2026-06-02",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "reinforcement-alignment",
+          "pareto-optimization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/taiji",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou advertising",
+            "metric": "Revenue",
+            "lift_percent": 3.3,
+            "traffic": "7 days; 10% control and 10% treatment",
+            "source_url": "https://arxiv.org/html/2606.03866v1",
+            "source_location": "Section 3.4, Table 2",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:pareto-semantic-id"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "tiger",
       "title": "Recommender Systems with Generative Retrieval",
       "paper_url": "https://arxiv.org/abs/2305.05065",
@@ -22515,7 +23109,7 @@
           "token-merging",
           "distillation"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/tm20k",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22554,7 +23148,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:tm20k-merge"
+        ]
       }
     },
     {
@@ -22588,7 +23184,7 @@
           "scaling",
           "feature-interaction"
         ],
-        "local_code_dir": "src/auto_research/reproductions/july_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/tmallgs",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -22822,6 +23418,76 @@
     },
     {
       "domain": "recommendation",
+      "key": "toolrec",
+      "title": "ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants",
+      "paper_url": "https://arxiv.org/abs/2606.08466",
+      "detail_path": "reproductions/2606.08466-toolrec/README.md",
+      "topic": [
+        "query-recommendation",
+        "preference-alignment",
+        "tool-use"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Huazhong University of Science and Technology",
+      "published": "2026-06-07",
+      "code": null,
+      "adapter": {
+        "adapter_key": "toolrec",
+        "arxiv_id": "2606.08466",
+        "title": "ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants",
+        "paper_url": "https://arxiv.org/abs/2606.08466",
+        "track": "recommendation",
+        "organization": "Huazhong University of Science and Technology",
+        "published": "2026-06-07",
+        "code_url": null,
+        "topics": [
+          "query-recommendation",
+          "preference-alignment",
+          "tool-use"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/toolrec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "OPPO Xiaobu",
+            "metric": "CTR",
+            "lift_percent": 3.32,
+            "traffic": "7 days; 5% traffic per model",
+            "source_url": "https://arxiv.org/html/2606.08466v1",
+            "source_location": "Section 5.2, Table 1",
+            "retrieved_at": "2026-09-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "reward:tool-calibration"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "transact-v2",
       "title": "TransAct V2: Lifelong User Action Sequence Modeling on Pinterest Recommendation",
       "paper_url": "https://arxiv.org/abs/2506.02267",
@@ -22989,7 +23655,7 @@
           "cross-attention",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/transx",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23027,7 +23693,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:transx-cross-stream"
+        ]
       }
     },
     {
@@ -23061,7 +23729,7 @@
           "search",
           "pre-ranking"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/tsgr",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23217,7 +23885,7 @@
           "delayed-feedback",
           "full-traffic"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/twice",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23305,7 +23973,7 @@
           "long-sequence",
           "training-serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/twin_v2",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23393,7 +24061,7 @@
           "mmoe",
           "live-streaming"
         ],
-        "local_code_dir": "src/auto_research/reproductions/latest_20260809_common",
+        "local_code_dir": "src/auto_research/reproductions/twitch_mor",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23483,7 +24151,7 @@
           "uncertainty",
           "loss-design"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/uame",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23565,7 +24233,7 @@
           "attention",
           "serving"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/ultra_hstu",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23652,7 +24320,7 @@
           "feature-tokenization",
           "multi-task"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/uniformer",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -23688,7 +24356,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:unified-token"
+        ]
       }
     },
     {
@@ -24027,7 +24697,7 @@
           "feature-interaction",
           "scaling"
         ],
-        "local_code_dir": "src/auto_research/reproductions/july_2026_common",
+        "local_code_dir": "src/auto_research/reproductions/whale",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -24104,7 +24774,7 @@
           "classic",
           "feature-interaction"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/wide_deep",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -24173,7 +24843,7 @@
           "classic",
           "two-stage"
         ],
-        "local_code_dir": "src/auto_research/reproductions/foundational_ranking",
+        "local_code_dir": "src/auto_research/reproductions/youtube_dnn",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -24246,7 +24916,7 @@
           "freshness",
           "exploration"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/youtube_freshness",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -24325,7 +24995,7 @@
           "training-free",
           "recency"
         ],
-        "local_code_dir": "src/auto_research/reproductions/industrial_2026",
+        "local_code_dir": "src/auto_research/reproductions/zorro",
         "fidelity": "core_mechanism",
         "evaluation_tier": "l2_public_dataset",
         "datasets": [
@@ -24361,7 +25031,9 @@
           }
         ],
         "selection_exception": null,
-        "evolve_operators": []
+        "evolve_operators": [
+          "context:zero-weight"
+        ]
       }
     }
   ]

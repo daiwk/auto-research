@@ -8,6 +8,15 @@ from auto_research.reproductions.reporting import write_reproduction_result
 def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
         "bahe",
+        "atomic-intent",
+        "toolrec",
+        "ssrlive",
+        "taiji",
+        "primal-dual-decoding",
+        "muchator",
+        "causal-representation",
+        "policy-facet",
+        "pa-bridge",
         "specformer",
         "egr",
         "zorro",

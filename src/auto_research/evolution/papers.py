@@ -7,6 +7,15 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2606.10357": ("context:atomic-intent-tree", "AIR 的离线原子意图缓存、在线意图树与目标感知检索"),
+    "2606.08466": ("reward:tool-calibration", "ToolRec 的用户侧与工具频率动态偏好校准"),
+    "2606.06970": ("head:dynamic-sid", "SSRLive 的静态/动态语义 ID 与交互特征融合"),
+    "2606.03866": ("reward:pareto-semantic-id", "Taiji POPO 的语义奖励与协同 ID 奖励自适应 Pareto 平衡"),
+    "2607.19357": ("reward:primal-dual", "Spotify 的约束余量驱动随机原始-对偶解码"),
+    "2605.27103": ("context:conversational-intent", "MuChator 的即时对话意图与主动音乐发现"),
+    "2605.27043": ("head:causal-bottleneck", "CRL 的候选表征去混杂与分布偏移鲁棒瓶颈"),
+    "2605.16479": ("head:policy-facet", "LinkedIn DFS 的策略约束 facet 检索与点式排序"),
+    "2605.05855": ("context:active-expression", "PA-Bridge 的主动/被动表达分布对齐与语义离散化"),
     "2607.24025": ("context:spectral-soften", "SpecFormer 的谱软化表征与谱残差位置信息"),
     "2607.23038": ("head:embedding-native", "EGR 的共享编码器、索引向量与查询向量联合空间"),
     "2607.10910": ("context:zero-weight", "ZoRRO 的零训练参数 recency 与内容相似度组合"),
