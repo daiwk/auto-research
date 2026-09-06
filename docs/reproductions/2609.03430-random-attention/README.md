@@ -39,7 +39,7 @@ flowchart LR
 
 ## 本地复现与 GPU 证据
 
-CPU 三 seed 机制结果见 [`metrics/public-seeds42-44.json`](metrics/public-seeds42-44.json)；真实 Qwen checkpoint、WikiText-2 KV 张量和 A100 运行回执见 [`../../gpu-validations/random-attention-a100-20260906.json`](../../gpu-validations/random-attention-a100-20260906.json)。验证严格使用等预算 prompt+recent 基线。
+CPU 三 seed 机制结果见 [`metrics/public-seeds42-44.json`](metrics/public-seeds42-44.json)；真实 Qwen3-4B checkpoint、固定公开域长文本探针和 A100 运行回执见 [`../../gpu-validations/random-attention-a100-20260906.json`](../../gpu-validations/random-attention-a100-20260906.json)。验证严格使用等预算 prompt+recent 基线。
 
 ## 复现边界
 

@@ -8,14 +8,14 @@ from pathlib import Path
 from .model import LngramV2
 
 
-def run(output:Path,model_id:str,revision:str,seed:int):
+def run(output:Path,model_id:str,revision:str,seed:int,local_files_only:bool=False):
     import torch
     from huggingface_hub import model_info
     from PIL import Image, ImageDraw
     from transformers import AutoModelForImageTextToText,AutoProcessor
-    torch.manual_seed(seed); resolved=model_info(model_id,revision=revision).sha
-    processor=AutoProcessor.from_pretrained(model_id,revision=resolved)
-    model=AutoModelForImageTextToText.from_pretrained(model_id,revision=resolved,torch_dtype=torch.bfloat16).cuda().eval()
+    torch.manual_seed(seed); resolved=revision if local_files_only else model_info(model_id,revision=revision).sha
+    processor=AutoProcessor.from_pretrained(model_id,revision=resolved,local_files_only=local_files_only)
+    model=AutoModelForImageTextToText.from_pretrained(model_id,revision=resolved,torch_dtype=torch.bfloat16,local_files_only=local_files_only).cuda().eval()
     image=Image.new("RGB",(224,224),"white"); draw=ImageDraw.Draw(image); draw.rectangle((20,60,90,130),fill="red"); draw.ellipse((130,60,205,135),fill="blue")
     messages=[{"role":"user","content":[{"type":"image","image":image},{"type":"text","text":"Describe the relationship between the red square and blue circle."}]}]
     prompt=processor.apply_chat_template(messages,tokenize=False,add_generation_prompt=True)
@@ -31,5 +31,5 @@ def run(output:Path,model_id:str,revision:str,seed:int):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument("--output",type=Path,required=True); p.add_argument("--model-id",default="Qwen/Qwen2.5-VL-3B-Instruct"); p.add_argument("--revision",default="main"); p.add_argument("--seed",type=int,default=42); a=p.parse_args(); print(json.dumps(run(a.output,a.model_id,a.revision,a.seed)["metrics"],indent=2)); return 0
+    p=argparse.ArgumentParser(); p.add_argument("--output",type=Path,required=True); p.add_argument("--model-id",default="HuggingFaceTB/SmolVLM2-256M-Video-Instruct"); p.add_argument("--revision",default="main"); p.add_argument("--seed",type=int,default=42); p.add_argument("--local-files-only",action="store_true"); a=p.parse_args(); print(json.dumps(run(a.output,a.model_id,a.revision,a.seed,a.local_files_only)["metrics"],indent=2)); return 0
 if __name__=="__main__": raise SystemExit(main())

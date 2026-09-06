@@ -40,7 +40,7 @@ flowchart LR
 
 ## 本地复现与 GPU 证据
 
-CPU 三 seed 机制结果见 [`metrics/public-seeds42-44.json`](metrics/public-seeds42-44.json)；真实 Qwen2.5-VL-3B-Instruct 多模态 hidden state 与 A100 反向传播回执见 [`../../gpu-validations/lngram-v2-a100-20260906.json`](../../gpu-validations/lngram-v2-a100-20260906.json)。
+CPU 三 seed 机制结果见 [`metrics/public-seeds42-44.json`](metrics/public-seeds42-44.json)；真实 SmolVLM2-256M-Video-Instruct 多模态 hidden state 与 A100 反向传播回执见 [`../../gpu-validations/lngram-v2-a100-20260906.json`](../../gpu-validations/lngram-v2-a100-20260906.json)。
 
 ## 复现边界
 

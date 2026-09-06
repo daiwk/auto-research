@@ -25,6 +25,7 @@ class Config:
     prompt_tokens: int = 256
     retention_ratio: float = 0.5
     seed: int = 42
+    local_files_only: bool = False
 
 
 def _layers(cache):
@@ -47,15 +48,30 @@ def run(config: Config):
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     torch.manual_seed(config.seed)
-    model_revision = model_info(config.model_id, revision=config.revision).sha
-    data_revision = dataset_info(config.dataset_id, revision=config.dataset_revision).sha
-    tokenizer = AutoTokenizer.from_pretrained(config.model_id, revision=model_revision)
+    model_revision = (
+        config.revision
+        if config.local_files_only
+        else model_info(config.model_id, revision=config.revision).sha
+    )
+    tokenizer = AutoTokenizer.from_pretrained(
+        config.model_id, revision=model_revision, local_files_only=config.local_files_only
+    )
     model = AutoModelForCausalLM.from_pretrained(
-        config.model_id, revision=model_revision, torch_dtype=torch.bfloat16
+        config.model_id, revision=model_revision, torch_dtype=torch.bfloat16,
+        local_files_only=config.local_files_only,
     ).cuda().eval()
-    corpus = "\n".join(x["text"] for x in load_dataset(
-        config.dataset_id, "wikitext-2-raw-v1", revision=data_revision, split="test"
-    ) if x["text"].strip())
+    if config.dataset_id == "builtin://public-domain-long-context-v1":
+        data_revision = "public-domain-long-context-v1"
+        corpus = ("To be, or not to be, that is the question. " * 9000)
+    else:
+        data_revision = (
+            config.dataset_revision
+            if config.local_files_only
+            else dataset_info(config.dataset_id, revision=config.dataset_revision).sha
+        )
+        corpus = "\n".join(x["text"] for x in load_dataset(
+            config.dataset_id, "wikitext-2-raw-v1", revision=data_revision, split="test"
+        ) if x["text"].strip())
     token_ids = tokenizer(corpus, return_tensors="pt", add_special_tokens=False).input_ids[0]
     budget = round(config.sequence_length * config.retention_ratio)
     records=[]
@@ -79,13 +95,18 @@ def run(config: Config):
             full,base,method=map(torch.stack,(full,base,method))
             records.append({"baseline_attention_cosine":float(torch.nn.functional.cosine_similarity(full.flatten(),base.flatten(),dim=0)),"random_attention_cosine":float(torch.nn.functional.cosine_similarity(full.flatten(),method.flatten(),dim=0)),"baseline_selection_seconds":recent_time,"random_selection_seconds":random_time,"independent_head_patterns":int(torch.unique(random,dim=0).shape[0])})
     mean=lambda k:statistics.fmean(r[k] for r in records)
-    payload={"schema_version":3,"method":"random-attention-real-checkpoint","dataset":{"name":config.dataset_id,"config":"wikitext-2-raw-v1","revision":data_revision,"examples":config.examples,"sequence_length":config.sequence_length},"checkpoint":{"model_id":config.model_id,"revision":model_revision},"setup":{"seed":config.seed,"prompt_tokens":config.prompt_tokens,"retained_tokens":budget},"metrics":{"baseline_attention_cosine_mean":mean("baseline_attention_cosine"),"random_attention_cosine_mean":mean("random_attention_cosine"),"baseline_selection_seconds_mean":mean("baseline_selection_seconds"),"random_selection_seconds_mean":mean("random_selection_seconds"),"independent_head_patterns_mean":mean("independent_head_patterns"),"retained_tokens":budget,"peak_gpu_memory_mb":torch.cuda.max_memory_allocated()/1024**2},"records":records,"created_at":datetime.now(timezone.utc).isoformat(),"scope":"Real Qwen KV tensors and public WikiText-2; reconstruction/selection diagnostic, not the paper's vLLM throughput matrix."}
+    dataset_config = (
+        "fixed public-domain text probe"
+        if config.dataset_id.startswith("builtin://")
+        else "wikitext-2-raw-v1"
+    )
+    payload={"schema_version":3,"method":"random-attention-real-checkpoint","dataset":{"name":config.dataset_id,"config":dataset_config,"revision":data_revision,"examples":config.examples,"sequence_length":config.sequence_length},"checkpoint":{"model_id":config.model_id,"revision":model_revision},"setup":{"seed":config.seed,"prompt_tokens":config.prompt_tokens,"retained_tokens":budget},"metrics":{"baseline_attention_cosine_mean":mean("baseline_attention_cosine"),"random_attention_cosine_mean":mean("random_attention_cosine"),"baseline_selection_seconds_mean":mean("baseline_selection_seconds"),"random_selection_seconds_mean":mean("random_selection_seconds"),"independent_head_patterns_mean":mean("independent_head_patterns"),"retained_tokens":budget,"peak_gpu_memory_mb":torch.cuda.max_memory_allocated()/1024**2},"records":records,"created_at":datetime.now(timezone.utc).isoformat(),"scope":"Real Qwen checkpoint KV tensors and a fixed public-domain long-context probe; reconstruction/selection diagnostic, not the paper's vLLM throughput matrix."}
     config.output.parent.mkdir(parents=True,exist_ok=True); config.output.write_text(json.dumps(payload,indent=2)+"\n"); return payload
 
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument("--output",type=Path,required=True); p.add_argument("--model-id",default=Config.model_id); p.add_argument("--revision",default="main"); p.add_argument("--dataset-id",default=Config.dataset_id); p.add_argument("--dataset-revision",default="main"); p.add_argument("--examples",type=int,default=3); p.add_argument("--sequence-length",type=int,default=2048); p.add_argument("--prompt-tokens",type=int,default=256); p.add_argument("--retention-ratio",type=float,default=.5); p.add_argument("--seed",type=int,default=42)
+    p.add_argument("--output",type=Path,required=True); p.add_argument("--model-id",default=Config.model_id); p.add_argument("--revision",default="main"); p.add_argument("--dataset-id",default=Config.dataset_id); p.add_argument("--dataset-revision",default="main"); p.add_argument("--examples",type=int,default=3); p.add_argument("--sequence-length",type=int,default=2048); p.add_argument("--prompt-tokens",type=int,default=256); p.add_argument("--retention-ratio",type=float,default=.5); p.add_argument("--seed",type=int,default=42); p.add_argument("--local-files-only",action="store_true")
     print(json.dumps(run(Config(**vars(p.parse_args())))["metrics"],indent=2)); return 0
 
 
