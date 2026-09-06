@@ -3124,6 +3124,68 @@
     },
     {
       "domain": "foundation-models",
+      "key": "lngram-v2",
+      "title": "Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations",
+      "paper_url": "https://arxiv.org/abs/2609.03426",
+      "detail_path": "reproductions/2609.03426-lngram-v2/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "conditional-memory",
+        "discrete-routing",
+        "model-architecture"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Beijing University of Posts and Telecommunications / Kuaishou Technology",
+      "published": "2026-09-03",
+      "code": null,
+      "adapter": {
+        "adapter_key": "lngram-v2",
+        "arxiv_id": "2609.03426",
+        "title": "Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations",
+        "paper_url": "https://arxiv.org/abs/2609.03426",
+        "track": "llm",
+        "organization": "Beijing University of Posts and Telecommunications / Kuaishou Technology",
+        "published": "2026-09-03",
+        "code_url": null,
+        "topics": [
+          "multimodal-foundation-model",
+          "conditional-memory",
+          "discrete-routing",
+          "model-architecture"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/lngram_v2",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "SmolVLM2-256M-Video-Instruct checkpoint + deterministic RGB geometry probe"
+        ],
+        "baseline": "same checkpoint without latent memory branch",
+        "metrics": [
+          "finite output",
+          "route diversity",
+          "sink selectivity",
+          "activation memory"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/lngram-v2-a100-20260906.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": [
+          "memory:latent-ngram-gqa"
+        ]
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "looped-latent-attention",
       "title": "Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers",
       "paper_url": "https://arxiv.org/abs/2607.15456",
@@ -4394,6 +4456,68 @@
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "random-attention",
+      "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+      "paper_url": "https://arxiv.org/abs/2609.03430",
+      "detail_path": "reproductions/2609.03430-random-attention/README.md",
+      "topic": [
+        "kv-cache",
+        "reasoning",
+        "inference-serving",
+        "compression"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+      "published": "2026-09-03",
+      "code": "https://github.com/SalesforceAIResearch/Random-Attention",
+      "adapter": {
+        "adapter_key": "random-attention",
+        "arxiv_id": "2609.03430",
+        "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+        "paper_url": "https://arxiv.org/abs/2609.03430",
+        "track": "llm",
+        "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+        "published": "2026-09-03",
+        "code_url": "https://github.com/SalesforceAIResearch/Random-Attention",
+        "topics": [
+          "kv-cache",
+          "reasoning",
+          "inference-serving",
+          "compression"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/random_attention",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "WikiText-2 real-checkpoint subset"
+        ],
+        "baseline": "prompt-protected recent-token eviction at equal budget",
+        "metrics": [
+          "attention-output cosine",
+          "selection latency",
+          "KV bytes",
+          "peak GPU memory"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/random-attention-a100-20260906.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": [
+          "attention:prompt-protected-random-eviction"
+        ]
       }
     },
     {
@@ -9249,6 +9373,87 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "coral",
+      "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2609.02730",
+      "detail_path": "reproductions/2609.02730-coral/README.md",
+      "topic": [
+        "auto-research",
+        "agent",
+        "retrieval-budget",
+        "constrained-optimization"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta AI",
+      "published": "2026-09-02",
+      "code": null,
+      "adapter": {
+        "adapter_key": "coral",
+        "arxiv_id": "2609.02730",
+        "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.02730",
+        "track": "recommendation",
+        "organization": "Meta AI",
+        "published": "2026-09-02",
+        "code_url": null,
+        "topics": [
+          "auto-research",
+          "agent",
+          "retrieval-budget",
+          "constrained-optimization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/coral",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "fixed equal retrieval allocation",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "budget feasibility",
+          "cycle effect"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Meta large-scale video service",
+            "metric": "video-viewing sessions",
+            "lift_percent": 0.16,
+            "traffic": "millions-user online A/B; deployed configuration",
+            "source_url": "https://arxiv.org/pdf/2609.02730v1",
+            "source_location": "Section 5.1, Table 1",
+            "retrieved_at": "2026-09-06"
+          },
+          {
+            "product": "Meta serving-capacity service",
+            "metric": "annualized capacity savings",
+            "lift_percent": 44.0,
+            "traffic": "second A/B round increased first-round savings by 44%; engagement neutral",
+            "source_url": "https://arxiv.org/pdf/2609.02730v1",
+            "source_location": "Section 5.2",
+            "retrieved_at": "2026-09-06"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "controller:coral-constrained-feedback-loop"
+        ]
       }
     },
     {
@@ -21450,6 +21655,78 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "recevolve",
+      "title": "RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2609.01622",
+      "detail_path": "reproductions/2609.01622-recevolve/README.md",
+      "topic": [
+        "auto-research",
+        "agent",
+        "two-tower",
+        "reward-hacking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google",
+      "published": "2026-07-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "recevolve",
+        "arxiv_id": "2609.01622",
+        "title": "RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.01622",
+        "track": "recommendation",
+        "organization": "Google",
+        "published": "2026-07-20",
+        "code_url": null,
+        "topics": [
+          "auto-research",
+          "agent",
+          "two-tower",
+          "reward-hacking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/recevolve",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "fixed Two-Tower-style similarity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "rollbacks",
+          "reward hacks blocked"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Google production Two-Tower retrieval",
+            "metric": "user satisfaction",
+            "lift_percent": 3.77,
+            "traffic": "live production A/B champion versus production baseline",
+            "source_url": "https://arxiv.org/pdf/2609.01622v1",
+            "source_location": "Section 5.7, Table 2",
+            "retrieved_at": "2026-09-06"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "controller:recevolve-knowledge-vcs-loop"
+        ]
       }
     },
     {

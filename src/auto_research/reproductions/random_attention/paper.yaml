@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "random-attention",
+  "arxiv_id": "2609.03430",
+  "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.03430",
+  "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+  "published": "2026-09-03",
+  "upstream_code": "https://github.com/SalesforceAIResearch/Random-Attention",
+  "track": "llm",
+  "topics": [
+    "kv-cache",
+    "reasoning",
+    "inference-serving",
+    "compression"
+  ],
+  "local_code": "src/auto_research/reproductions/random_attention",
+  "documentation": "docs/reproductions/2609.03430-random-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2 real-checkpoint subset"
+  ],
+  "baseline": "prompt-protected recent-token eviction at equal budget",
+  "metrics": [
+    "attention-output cosine",
+    "selection latency",
+    "KV bytes",
+    "peak GPU memory"
+  ],
+  "mechanisms": [
+    "full six-task reasoning matrix",
+    "official vLLM serving integration"
+  ],
+  "evolve_operators": [
+    "attention:prompt-protected-random-eviction"
+  ]
+}

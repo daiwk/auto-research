@@ -12,6 +12,7 @@ from auto_research.discovery import (
     repository_paper_statuses,
     triage_candidates,
 )
+from auto_research.discovery import paper_is_in_window
 from auto_research.models import Paper
 from scripts.discover_papers import effective_start_date
 
@@ -81,6 +82,20 @@ def test_daily_announcement_scan_overlaps_the_preceding_submission_day():
     assert effective_start_date(
         dt.date(2026, 8, 27), announcement_overlap_days=1
     ) == dt.date(2026, 8, 26)
+
+
+def test_late_indexed_arxiv_id_month_is_an_independent_recall_path():
+    paper = _paper("2609.01622", "RecEvolve", "2026-07-20")
+    assert paper_is_in_window(
+        paper,
+        start_date=dt.date(2026, 9, 1),
+        end_date=dt.date(2026, 9, 6),
+    )
+    assert not paper_is_in_window(
+        paper,
+        start_date=dt.date(2026, 8, 1),
+        end_date=dt.date(2026, 8, 31),
+    )
 
 
 def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):

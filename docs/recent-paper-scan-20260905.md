@@ -20,9 +20,11 @@
 
 六篇均具备论文信息块、中文方法说明、原论文关键图、核心公式、本地代码、指标产物、边界和 Evolve 映射。四篇推荐执行 MovieLens 100K 三 seed；GAPO 与 DRACO 执行统一 deterministic mini-suite。
 
-## 保留到下一批的资源门槛
+## 后续资源门槛状态（2026-09-06 更新）
 
-- [Random Attention](https://arxiv.org/abs/2609.03430)：论文核心结论包含 vLLM 吞吐和 KV-cache CUDA 路径，必须在 A100/A30 上做等预算 checkpoint 验证，不能用 NumPy eviction 占位。
-- [Lngram v2](https://arxiv.org/abs/2609.03426)：需要真实 VLM checkpoint 的离散路由、memory readout 和规模/激活量对照；待独立 GPU 批次。
+- [Random Attention](reproductions/2609.03430-random-attention/README.md)：已完成核心机制、真实 Qwen checkpoint KV 等预算 A100 验证和 Evolve 映射。
+- [Lngram v2](reproductions/2609.03426-lngram-v2/README.md)：已完成离散路由、memory readout、反事实梯度、真实 VLM hidden state A100 验证和 Evolve 映射。
+- [CORAL](reproductions/2609.02730-coral/README.md)：纠正摘要级误拒；全文的多处 A/B/部署证据已登记并实现。
+- [RecEvolve](reproductions/2609.01622-recevolve/README.md)：通过 arXiv ID 月份 late-arrival 召回，已实现多轮研究控制器。
 
-其余高召回项已经在 [`paper-discovery-ledger.json`](paper-discovery-ledger.json) 获得终态，不会在下次窗口重复出现。下一轮增量水位从 **2026-09-05** 继续，并保留重叠天数处理 arXiv 修订和跨源延迟。
+其余高召回项已经在 [`paper-discovery-ledger.json`](paper-discovery-ledger.json) 获得终态，不会在下次窗口重复出现。下一轮增量水位从 **2026-09-05** 继续；扫描同时使用 API 公开日期、公告重叠日和 arXiv ID 月份，覆盖修订、跨源延迟和晚索引记录。

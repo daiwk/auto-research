@@ -50,6 +50,10 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `coral` · [CORAL](2609.02730-coral/README.md)：Meta 的约束配置、短期实验记忆与生产效果反馈闭环。
+- `recevolve` · [RecEvolve](2609.01622-recevolve/README.md)：Google 的知识驱动提案、隔离实验、回滚与防 reward hacking 控制器。
+- `random-attention` · [Random Attention](2609.03430-random-attention/README.md)：prompt 保护、逐 head 随机 KV 淘汰及真实 Qwen/A100 验证。
+- `lngram-v2` · [Lngram v2](2609.03426-lngram-v2/README.md)：离散 latent n-gram memory、GQA zero sink 及真实 VLM/A100 验证。
 - `rest` · [ReST](2609.01240-rest/README.md)：双门控时序编码与可复用用户前缀的工业排序。
 - `tgr` · [TGR](2609.00986-tgr/README.md)：统一生成式排序、语义 ID 和离线 reason token。
 - `camie` · [CAMIE](2608.30255-camie/README.md)：用共同互动对齐多模态商品向量。

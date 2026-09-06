@@ -3,8 +3,10 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
 - [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
 - [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
+- [RecEvolve](../2609.01622-recevolve/README.md)：以知识库驱动候选提案、隔离实验、critic gate、冠军继承和回滚，形成可审计的推荐自主进化闭环。
 
 ## 2026-08
 - [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md)：用共同互动商品对训练对称多模态向量，使内容表征同时保留用户旅程中的行为相似性。

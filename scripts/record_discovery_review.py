@@ -37,6 +37,22 @@ def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
             raise ValueError(f"{candidate['arxiv_id']}: invalid priority {priority!r}")
         if status != "implemented" and not decision.get("reason"):
             raise ValueError(f"{candidate['arxiv_id']}: {status} requires reason")
+        priority_hit = any(
+            str(query).startswith((
+                "priority-org-google", "priority-org-google-deepmind", "priority-org-meta"
+            ))
+            for query in candidate.get("matched_queries", [])
+        )
+        review = decision.get("full_text_review", {})
+        if priority_hit and status != "implemented" and not (
+            isinstance(review, dict)
+            and review.get("scope") == "full-text"
+            and review.get("source_locations")
+        ):
+            raise ValueError(
+                f"{candidate['arxiv_id']}: Google/Meta rejection or deferral requires "
+                "full_text_review.scope=full-text and source_locations"
+            )
         rows.append({
             **decision,
             "id": candidate["arxiv_id"],

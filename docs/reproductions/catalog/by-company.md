@@ -93,6 +93,7 @@
 - 2026-07 · [ClockRoPE](../2607.26369-clockrope/README.md)：从日/周周期 kernel 的 Fourier 频谱采样旋转频率，为生成式召回显式建模用户 routine。
 - 2026-07 · [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：让分层 SID 同时承载协同身份并通过 Semantic Decoder 重建内容 embedding。
 - 2026-07 · [YouTube Freshness](../2607.23749-youtube-freshness/README.md)：比较 recency、IPS、bias tower 与不确定性探索对新内容反馈环的影响。
+- 2026-07 · [RecEvolve](../2609.01622-recevolve/README.md)：以知识库驱动候选提案、隔离实验、critic gate、冠军继承和回滚，形成可审计的推荐自主进化闭环。
 - 2026-06 · [TokenMinds](../2606.25147-tokenminds/README.md)：让共享 encoder 同时产生稠密用户向量，并由 decoder 生成可落到内容语义空间的 SID 用户 token，再共同服务下游排序。
 - 2026-05 · [Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md)：以层级语义 ID、bigram、时间折叠和 global-local pooling 扩展视频长历史。
 - 2026-04 · [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：以 Actor、Critic、Insight、Skill 和 Online agent 闭合推荐配置的多轮实验反馈。
@@ -147,6 +148,7 @@
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
 
 ## Meta
+- 2026-09 · [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
 - 2026-07 · [ROCS](../2607.27744-rocs/README.md)：复用单次 request encoding，并在候选端执行轻量 late interaction，统一覆盖广告/自然流量的检索和排序 serving。
 - 2026-07 · [OneShot](../2607.27475-oneshot-index/README.md)：将层级索引纳入 ranking objective 共同训练，并以 neural interaction scoring 突破纯点积检索。
 - 2026-07 · [Memory Layer](../2607.25110-memory-layer/README.md)：把 cache 纳入模型训练，以 eta=1 writeback 和 always-on 属性表征消除训练服务偏差与冷启动缺口。

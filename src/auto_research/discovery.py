@@ -292,8 +292,7 @@ def discover_candidates(
             match=query.match,
         )
         for paper in papers:
-            published = dt.date.fromisoformat(paper.published[:10])
-            if not start_date <= published <= end_date:
+            if not paper_is_in_window(paper, start_date=start_date, end_date=end_date):
                 continue
             identity = canonical_arxiv_id(paper.arxiv_id)
             if identity not in found or paper.published > found[identity].published:
@@ -303,6 +302,27 @@ def discover_candidates(
         DiscoveredPaper(found[identity], tuple(sorted(origins[identity])))
         for identity in sorted(found, key=lambda key: found[key].published, reverse=True)
     ]
+
+
+def paper_is_in_window(paper: Paper, *, start_date: dt.date, end_date: dt.date) -> bool:
+    """Keep normal submissions and late-indexed records whose arXiv ID month is current.
+
+    The arXiv API ``published`` date can precede the identifier month for records that
+    are indexed late (for example 2609.01622 reports a July publication date).  A
+    date-only filter silently loses those papers, so the canonical ID month is an
+    independent recall path; repository/ledger de-duplication handles overlap.
+    """
+    published = dt.date.fromisoformat(paper.published[:10])
+    if start_date <= published <= end_date:
+        return True
+    identity = canonical_arxiv_id(paper.arxiv_id)
+    match = __import__("re").match(r"^(\d{2})(\d{2})\.\d+$", identity)
+    if not match:
+        return False
+    id_month = dt.date(2000 + int(match.group(1)), int(match.group(2)), 1)
+    start_month = start_date.replace(day=1)
+    end_month = end_date.replace(day=1)
+    return start_month <= id_month <= end_month
 
 
 def merge_external_candidates(
