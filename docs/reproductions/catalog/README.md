@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Serving 与研究基础设施 | [CORAL: An LLM-Native Harness for Production Recommender Systems](../2609.02730-coral/README.md) | Meta AI，2026-09-02 | 未发现官方代码 | `coral` |
 | 生成、排序与冷启动 | [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md) | ByteDance，2026-09-01 | 未发现官方代码 | `rest` |
 | 生成、排序与冷启动 | [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md) | Tencent，2026-09-01 | 未发现官方代码 | `tgr` |
 | 内容理解、审核与风险控制 | [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md) | Snap Inc.，2026-08-31 | 未发现官方代码 | `camie` |
@@ -72,6 +73,7 @@
 | 生成、排序与冷启动 | [PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest](../2607.22518-pinequalizer/README.md) | Pinterest，2026-07-23 | 未发现官方代码 | `pinequalizer` |
 | 生成、排序与冷启动 | [TSGR: Taobao Search Generative Retrieval](../2607.18796-tsgr/README.md) | Taobao & Tmall Group of Alibaba / Zhejiang University，2026-07-21 | 未发现官方代码 | `tsgr` |
 | 训练目标与决策优化 | [RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways](../2607.17473-ramp/README.md) | Huawei Ireland Research Center / University College Dublin，2026-07-20 | [已开源](https://github.com/Ruixinhua/RAMP) | `ramp` |
+| Serving 与研究基础设施 | [RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems](../2609.01622-recevolve/README.md) | Google，2026-07-20 | 未发现官方代码 | `recevolve` |
 | 生成、排序与冷启动 | [Pin-SCALE: Semantic Cascading and Alignment Learning for Engagement-Aware IDs in Cold-Start Recommendations](../sigir2026-pin-scale-pin-scale/README.md) | Pinterest，2026-07-19 | 未发现官方代码 | `pin-scale` |
 | 训练目标与决策优化 | [Uncertainty as Remedy: Mitigating Satisfaction Label Bias in Short Video Multi-Objective Ensemble Ranking](../2607.17092-uame/README.md) | Kuaishou Technology，2026-07-19 | 未发现官方代码 | `uame` |
 | 生成、排序与冷启动 | [WHALE: A Scalable Unified Model for Recommendation with Wukong-HSTU Architecture](../2607.17017-whale/README.md) | Meta Platforms, Inc.，2026-07-19 | 未发现官方代码 | `whale` |

@@ -346,6 +346,10 @@
 
 ## Serving 与研究基础设施
 
+### 自主研究与反馈闭环
+- [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
+- [RecEvolve](../2609.01622-recevolve/README.md)：以知识库驱动候选提案、隔离实验、critic gate、冠军继承和回滚，形成可审计的推荐自主进化闭环。
+
 ### Serving / efficiency
 - [ROCS](../2607.27744-rocs/README.md)：请求表征只计算一次，候选相关交互延后并批量执行；本地同时报告排序质量和进程内候选评分吞吐。
 - [Memory Layer](../2607.25110-memory-layer/README.md)：把 cache 纳入模型训练，以 eta=1 writeback 和 always-on 属性表征消除训练服务偏差与冷启动缺口。

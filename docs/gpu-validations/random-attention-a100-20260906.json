@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "adapter_key": "random-attention",
+  "validated_at": "2026-09-06",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-m", "auto_research.reproductions.random_attention.checkpoint",
+    "--model-id", "Qwen/Qwen3-4B-Instruct-2507",
+    "--revision", "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--dataset-id", "builtin://public-domain-long-context-v1",
+    "--dataset-revision", "public-domain-long-context-v1",
+    "--examples", "2", "--sequence-length", "1024", "--prompt-tokens", "128",
+    "--retention-ratio", "0.5", "--seed", "42", "--local-files-only"
+  ],
+  "dataset": {
+    "name": "fixed public-domain long-context probe",
+    "revision": "public-domain-long-context-v1",
+    "examples": 2,
+    "sequence_length": 1024
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "retained_tokens": 512,
+    "baseline_attention_cosine_mean": 0.9999555051,
+    "random_attention_cosine_mean": 0.9400152167,
+    "independent_head_patterns_mean": 8.0,
+    "random_selection_seconds_mean": 0.0064102237,
+    "peak_gpu_memory_mb": 8661.9824
+  },
+  "provenance": {
+    "commit": "a7cc98e525128560d7224631af9a22212d172a99",
+    "artifact_path": "docs/gpu-validations/random-attention-a100-20260906.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}
