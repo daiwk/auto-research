@@ -11,6 +11,10 @@
 
 ## 快速入口
 
+- [AtomRec](2609.04882-atomrec/README.md)：原子偏好记忆、语义协同链接与多跳推荐证据。
+- [CoSkill](2609.04865-coskill/README.md)：联合训练推理策略、元技能策略和层级技能库。
+- [SiLR](2609.04629-silr/README.md)：影子执行、逐分支乘积序准入与同源过程奖励。
+- [Multi-Harness RL](2609.04518-multi-harness-rl/README.md)：固定经验后区分分组信用与执行 harness 的可迁移性审计。
 - [DRACO](2609.04094-draco/README.md)：动态 rubric 与闭式步骤信用重分配。
 
 - [自动进化中的 Agent](../evolution-domains.md)：查看当前支持状态、组合轴和执行边界。

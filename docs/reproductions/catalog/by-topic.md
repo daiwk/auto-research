@@ -347,6 +347,7 @@
 ## Serving 与研究基础设施
 
 ### 自主研究与反馈闭环
+- [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md)：以多专家评审、证据加权预算和确定性晋级门串联研究、实验与上线评审。
 - [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
 - [RecEvolve](../2609.01622-recevolve/README.md)：以知识库驱动候选提案、隔离实验、critic gate、冠军继承和回滚，形成可审计的推荐自主进化闭环。
 
@@ -377,6 +378,7 @@
 - [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
 
 ### 召回、触发与多通道路由
+- [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../2609.05063-allecompanion/README.md)：用 ComCat 互补类别图、类别约束双塔和 Category Adapter 过滤共购噪声。
 - [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md)：把多兴趣召回改写为集合预测，以 presence gate 和 query-level NMS 动态减少重复 ANN 请求。
 - [CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval](../2602.12564-capts/README.md)：以价值感知匹配和跨渠道自适应路由选择 I2I 召回 trigger。
 - [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一 Airbnb 的体验推荐链路。

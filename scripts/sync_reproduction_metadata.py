@@ -15,6 +15,10 @@ GITHUB_TREE = "https://github.com/daiwk/auto-research/tree/main"
 
 # arXiv v1 publication dates, retrieved from the official arXiv API.
 PUBLISHED_DATES = {
+    "2609.05063": "2026-09-04",
+    "2609.04971": "2026-09-04",
+    "2609.04871": "2026-09-04",
+    "2609.04852": "2026-09-04",
     "2602.12972": "2026-02-13",
     "2602.12593": "2026-02-13",
     "2602.12564": "2026-02-13",

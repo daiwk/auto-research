@@ -4,6 +4,7 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "sparse-opd": ("Extremely Sparse Supervision Incentivizes Reasoning Ability", "https://arxiv.org/abs/2609.04565"),
     "gapo": ("Group Adaptive Clipping Policy Optimization", "https://arxiv.org/abs/2609.00444"),
     "rlvr-fusion": ("Consolidating RLVR Capabilities Across Domains", "https://arxiv.org/abs/2608.27409"),
     "video-opsd": ("Video-OPSD", "https://arxiv.org/abs/2608.27065"),

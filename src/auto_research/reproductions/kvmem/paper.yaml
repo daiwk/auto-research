@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "kvmem",
+  "arxiv_id": "2609.04852",
+  "title": "KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU",
+  "paper_url": "https://arxiv.org/abs/2609.04852",
+  "organization": "Shanghai University of Finance and Economics",
+  "published": "2026-09-04",
+  "upstream_code": "https://github.com/kvmem/kvmem-qw3",
+  "track": "llm",
+  "topics": [
+    "agent-memory",
+    "kv-cache",
+    "long-context",
+    "inference-serving"
+  ],
+  "local_code": "src/auto_research/reproductions/kvmem",
+  "documentation": "docs/reproductions/2609.04852-kvmem/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "public-domain long-context probe"
+  ],
+  "baseline": "equal-budget recent-context compaction",
+  "metrics": [
+    "attention-output cosine",
+    "materialized blocks",
+    "peak GPU memory"
+  ],
+  "mechanisms": [
+    "NVMe asynchronous paging engine",
+    "QW3 production inference integration",
+    "million-token benchmark matrix"
+  ],
+  "evolve_operators": [
+    "memory:query-conditioned-paged-kv"
+  ]
+}

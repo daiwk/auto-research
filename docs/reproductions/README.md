@@ -50,6 +50,10 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `allecompanion` · [AlleCompanion](2609.05063-allecompanion/README.md)：类别约束双塔、ComCat 互补类别图与受控 Category Adapter。
+- `autolr` · [AutoLR](2609.04871-autolr/README.md)：多专家评审、证据加权实验预算与确定性上线晋级门。
+- `beaconkv` · [BeaconKV](2609.04971-beaconkv/README.md)：用 query 簇 beacon 预测长推理中的远程 KV 重访。
+- `kvmem` · [KVMEM](2609.04852-kvmem/README.md)：分页 KV 虚拟化与查询相关 Agent 工作区物化。
 - `coral` · [CORAL](2609.02730-coral/README.md)：Meta 的约束配置、短期实验记忆与生产效果反馈闭环。
 - `recevolve` · [RecEvolve](2609.01622-recevolve/README.md)：Google 的知识驱动提案、隔离实验、回滚与防 reward hacking 控制器。
 - `random-attention` · [Random Attention](2609.03430-random-attention/README.md)：prompt 保护、逐 head 随机 KV 淘汰及真实 Qwen/A100 验证。

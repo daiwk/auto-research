@@ -92,6 +92,7 @@ class PostTrainingRunner:
             "video-opsd": state.variant_updates,
             "normalized-dpo": state.variant_updates,
             "gapo": state.variant_updates,
+            "sparse-opd": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

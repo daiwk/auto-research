@@ -7,6 +7,14 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2609.05063": (
+        "context:complementary-category-adapter",
+        "AlleCompanion 的互补类别图、类别约束双塔与受控 Category Adapter",
+    ),
+    "2609.04871": (
+        "controller:autolr-evidence-council",
+        "AutoLR 的多专家辩论、证据加权预算分配与确定性上线晋级门",
+    ),
     "2609.02730": (
         "controller:coral-constrained-feedback-loop",
         "CORAL 的预算约束配置、短期实验记忆与效果反馈闭环",
@@ -165,6 +173,14 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2609.04971": (
+        "attention:beacon-query-kv",
+        "BeaconKV 用全局 query 簇代表预测远程重访，并与近期窗口共享固定 KV 预算",
+    ),
+    "2609.04852": (
+        "memory:query-conditioned-paged-kv",
+        "KVMEM 的注意力空间 block 索引、分层 KV 存储与查询相关执行视图",
+    ),
     "2609.03430": (
         "attention:prompt-protected-random-eviction",
         "Random Attention 的 prompt 保护与逐 head 无打分随机 KV 淘汰",
@@ -297,6 +313,10 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2609.04565": (
+        "sparse-opd",
+        "Sparse OPD 每条在线轨迹只监督教师—学生差异最大的一个或两个关键 token",
+    ),
     "2609.00444": (
         "gapo",
         "按组内正确数自适应放宽稀有正确轨迹的上裁剪边界，保留困难题探索梯度",
@@ -491,6 +511,22 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.04882": (
+        "memory:atomrec",
+        "AtomRec 的原子偏好字段、可演化语义链接与多跳协同证据检索",
+    ),
+    "2609.04865": (
+        "policy:coskill",
+        "CoSkill 联合优化 Reasoning Agent、Meta-Skill Agent 与层级技能库",
+    ),
+    "2609.04629": (
+        "verifier:silr",
+        "SiLR 以 shadow execution 和逐分支乘积序实施恢复准入及过程奖励",
+    ),
+    "2609.04518": (
+        "audit:multi-harness-credit",
+        "固定轨迹区分 within/cross-harness 信用，并在未见 harness 上审计能力迁移",
+    ),
     "2609.04094": (
         "critic:draco",
         "动态生成能力相关 rubric，并把轨迹级判断闭式分配到负责步骤",
@@ -2011,6 +2047,61 @@ AGENT_FALLBACK_PAPERS = (
         "2026-08-03",
         "https://arxiv.org/abs/2608.01739",
         "2608.01739",
+    ),
+)
+
+# Keep the latest reviewed batch usable by Evolve in fully offline mode.
+FALLBACK_PAPERS += (
+    Paper(
+        "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+        "Category-constrained complementary recommendation with a maintainable multi-source category graph.",
+        [], "2026-09-04", "https://arxiv.org/abs/2609.05063", "2609.05063",
+    ),
+    Paper(
+        "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+        "Evidence-gated multi-agent research controller for long-running recommendation experiments.",
+        [], "2026-09-04", "https://arxiv.org/abs/2609.04871", "2609.04871",
+    ),
+)
+LLM_FALLBACK_PAPERS += (
+    Paper(
+        "BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference",
+        "Training-free query-cluster beacons retain KV entries likely to be revisited during long reasoning.",
+        [], "2026-09-04", "https://arxiv.org/abs/2609.04971", "2609.04971",
+    ),
+    Paper(
+        "KVMEM: Virtualizing Million-Token Agent Workspaces on a Consumer GPU",
+        "Paged KV virtualization materializes query-selected history within the model context budget.",
+        [], "2026-09-04", "https://arxiv.org/abs/2609.04852", "2609.04852",
+    ),
+)
+POST_TRAINING_FALLBACK_PAPERS += (
+    Paper(
+        "Extremely Sparse Supervision Incentivizes Reasoning Ability",
+        "On-policy distillation supervises only one or two high-discrepancy tokens per trajectory.",
+        [], "2026-09-03", "https://arxiv.org/abs/2609.04565", "2609.04565",
+    ),
+)
+AGENT_FALLBACK_PAPERS += (
+    Paper(
+        "AtomRec: Evolving Atomic Memory for Agentic Recommendation",
+        "Atomic memories and semantic links support multi-hop collaborative recommendation evidence.",
+        [], "2026-09-04", "https://arxiv.org/abs/2609.04882", "2609.04882",
+    ),
+    Paper(
+        "CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution",
+        "Reasoning and meta-skill policies jointly evolve a hierarchical reusable skill library.",
+        [], "2026-09-04", "https://arxiv.org/abs/2609.04865", "2609.04865",
+    ),
+    Paper(
+        "SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents",
+        "Shadow execution and a branchwise product order govern recovery actions and process rewards.",
+        [], "2026-09-03", "https://arxiv.org/abs/2609.04629", "2609.04629",
+    ),
+    Paper(
+        "What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents",
+        "Controlled grouping and held-out harness evaluation separate scaffold effects from portable policy gains.",
+        [], "2026-09-03", "https://arxiv.org/abs/2609.04518", "2609.04518",
     ),
 )
 

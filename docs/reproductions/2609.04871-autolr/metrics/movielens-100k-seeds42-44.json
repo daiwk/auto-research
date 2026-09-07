@@ -1,0 +1,609 @@
+{
+  "schema_version": 2,
+  "seeds_by_adapter": {
+    "autolr": [
+      42,
+      43,
+      44
+    ]
+  },
+  "budget": "paper-specific",
+  "papers": {
+    "autolr": {
+      "manifest": {
+        "adapter_key": "autolr",
+        "arxiv_id": "2609.04871",
+        "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.04871",
+        "track": "recommendation",
+        "organization": "NetEase, Inc.",
+        "published": "2026-09-04",
+        "code_url": null,
+        "topics": [
+          "auto-research",
+          "experiment-controller",
+          "launch-review",
+          "industrial-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/autolr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "NetEase DASHEN feed and immersive-video feed",
+            "metric": "content-consumption time",
+            "lift_percent": 10.83,
+            "traffic": "nine Launch Review records with online A/B and production decisions",
+            "source_url": "https://arxiv.org/html/2609.04871",
+            "source_location": "Section 5.2, Table 1",
+            "retrieved_at": "2026-09-07"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "controller:autolr-evidence-council"
+        ]
+      },
+      "seed_results": [
+        {
+          "paper": {
+            "arxiv_id": "2609.04871",
+            "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+            "url": "https://arxiv.org/abs/2609.04871",
+            "organization": "NetEase, Inc."
+          },
+          "dataset": {
+            "name": "MovieLens 100K",
+            "users": 220,
+            "items": 360
+          },
+          "setup": {
+            "adapter": "autolr",
+            "same_split_and_candidates": true
+          },
+          "baseline": {
+            "name": "transition + content + popularity",
+            "hit_at_10": 0.10909090909090909,
+            "ndcg_at_10": 0.05400546778896325,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23772727272727273
+          },
+          "method": {
+            "name": "autolr core mechanism (validation blend=0.1)",
+            "hit_at_10": 0.18636363636363637,
+            "ndcg_at_10": 0.10832163371945402,
+            "fresh_hit_at_10": 0.07936507936507936,
+            "head_share_at_10": 0.2631818181818182
+          },
+          "relative": {
+            "hit_at_10_percent": 70.83333333333334,
+            "ndcg_at_10_percent": 100.57530867567269,
+            "fresh_hit_at_10_percent": 150.0,
+            "head_share_at_10_percent": 10.707456978967492
+          },
+          "stages": {
+            "finite_scores": 360,
+            "mechanism_paths": 3
+          },
+          "paper_results": {
+            "completed_offline_evaluations": 1586,
+            "canonical_ledger_records": 3289,
+            "launch_reviews": 9,
+            "content_time_lift_sum_percent": 10.83
+          },
+          "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上系统。",
+          "manifest_ref": "reproduction:autolr",
+          "runtime": {
+            "requested_device": "cpu",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 42,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "autolr",
+            "arxiv_id": "2609.04871",
+            "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+            "paper_url": "https://arxiv.org/abs/2609.04871",
+            "track": "recommendation",
+            "organization": "NetEase, Inc.",
+            "published": "2026-09-04",
+            "code_url": null,
+            "topics": [
+              "auto-research",
+              "experiment-controller",
+              "launch-review",
+              "industrial-recommendation"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/autolr",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "MovieLens 100K"
+            ],
+            "baseline": "transition + content + popularity",
+            "metrics": [
+              "hit_at_10",
+              "ndcg_at_10",
+              "fresh_hit_at_10",
+              "head_share_at_10"
+            ],
+            "default_seeds": [
+              42,
+              43,
+              44
+            ],
+            "budget": "220 users / 360 items; validation-only blend selection",
+            "device_capabilities": [
+              "cpu"
+            ],
+            "requires_gpu_validation": false,
+            "gpu_validation_artifact": null,
+            "online_evidence": [
+              {
+                "product": "NetEase DASHEN feed and immersive-video feed",
+                "metric": "content-consumption time",
+                "lift_percent": 10.83,
+                "traffic": "nine Launch Review records with online A/B and production decisions",
+                "source_url": "https://arxiv.org/html/2609.04871",
+                "source_location": "Section 5.2, Table 1",
+                "retrieved_at": "2026-09-07"
+              }
+            ],
+            "selection_exception": null,
+            "evolve_operators": [
+              "controller:autolr-evidence-council"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-07T08:31:27.538233+00:00",
+            "code_commit": "f00cb330ae68d2de0253511148e7116708171291",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              42
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        },
+        {
+          "paper": {
+            "arxiv_id": "2609.04871",
+            "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+            "url": "https://arxiv.org/abs/2609.04871",
+            "organization": "NetEase, Inc."
+          },
+          "dataset": {
+            "name": "MovieLens 100K",
+            "users": 220,
+            "items": 360
+          },
+          "setup": {
+            "adapter": "autolr",
+            "same_split_and_candidates": true
+          },
+          "baseline": {
+            "name": "transition + content + popularity",
+            "hit_at_10": 0.10909090909090909,
+            "ndcg_at_10": 0.05400546778896325,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23772727272727273
+          },
+          "method": {
+            "name": "autolr core mechanism (validation blend=0.1)",
+            "hit_at_10": 0.18636363636363637,
+            "ndcg_at_10": 0.10832163371945402,
+            "fresh_hit_at_10": 0.07936507936507936,
+            "head_share_at_10": 0.2631818181818182
+          },
+          "relative": {
+            "hit_at_10_percent": 70.83333333333334,
+            "ndcg_at_10_percent": 100.57530867567269,
+            "fresh_hit_at_10_percent": 150.0,
+            "head_share_at_10_percent": 10.707456978967492
+          },
+          "stages": {
+            "finite_scores": 360,
+            "mechanism_paths": 3
+          },
+          "paper_results": {
+            "completed_offline_evaluations": 1586,
+            "canonical_ledger_records": 3289,
+            "launch_reviews": 9,
+            "content_time_lift_sum_percent": 10.83
+          },
+          "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上系统。",
+          "manifest_ref": "reproduction:autolr",
+          "runtime": {
+            "requested_device": "cpu",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 43,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "autolr",
+            "arxiv_id": "2609.04871",
+            "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+            "paper_url": "https://arxiv.org/abs/2609.04871",
+            "track": "recommendation",
+            "organization": "NetEase, Inc.",
+            "published": "2026-09-04",
+            "code_url": null,
+            "topics": [
+              "auto-research",
+              "experiment-controller",
+              "launch-review",
+              "industrial-recommendation"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/autolr",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "MovieLens 100K"
+            ],
+            "baseline": "transition + content + popularity",
+            "metrics": [
+              "hit_at_10",
+              "ndcg_at_10",
+              "fresh_hit_at_10",
+              "head_share_at_10"
+            ],
+            "default_seeds": [
+              42,
+              43,
+              44
+            ],
+            "budget": "220 users / 360 items; validation-only blend selection",
+            "device_capabilities": [
+              "cpu"
+            ],
+            "requires_gpu_validation": false,
+            "gpu_validation_artifact": null,
+            "online_evidence": [
+              {
+                "product": "NetEase DASHEN feed and immersive-video feed",
+                "metric": "content-consumption time",
+                "lift_percent": 10.83,
+                "traffic": "nine Launch Review records with online A/B and production decisions",
+                "source_url": "https://arxiv.org/html/2609.04871",
+                "source_location": "Section 5.2, Table 1",
+                "retrieved_at": "2026-09-07"
+              }
+            ],
+            "selection_exception": null,
+            "evolve_operators": [
+              "controller:autolr-evidence-council"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-07T08:31:27.888018+00:00",
+            "code_commit": "f00cb330ae68d2de0253511148e7116708171291",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              43
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        },
+        {
+          "paper": {
+            "arxiv_id": "2609.04871",
+            "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+            "url": "https://arxiv.org/abs/2609.04871",
+            "organization": "NetEase, Inc."
+          },
+          "dataset": {
+            "name": "MovieLens 100K",
+            "users": 220,
+            "items": 360
+          },
+          "setup": {
+            "adapter": "autolr",
+            "same_split_and_candidates": true
+          },
+          "baseline": {
+            "name": "transition + content + popularity",
+            "hit_at_10": 0.10909090909090909,
+            "ndcg_at_10": 0.05400546778896325,
+            "fresh_hit_at_10": 0.031746031746031744,
+            "head_share_at_10": 0.23772727272727273
+          },
+          "method": {
+            "name": "autolr core mechanism (validation blend=0.1)",
+            "hit_at_10": 0.18636363636363637,
+            "ndcg_at_10": 0.10832163371945402,
+            "fresh_hit_at_10": 0.07936507936507936,
+            "head_share_at_10": 0.2631818181818182
+          },
+          "relative": {
+            "hit_at_10_percent": 70.83333333333334,
+            "ndcg_at_10_percent": 100.57530867567269,
+            "fresh_hit_at_10_percent": 150.0,
+            "head_share_at_10_percent": 10.707456978967492
+          },
+          "stages": {
+            "finite_scores": 360,
+            "mechanism_paths": 3
+          },
+          "paper_results": {
+            "completed_offline_evaluations": 1586,
+            "canonical_ledger_records": 3289,
+            "launch_reviews": 9,
+            "content_time_lift_sum_percent": 10.83
+          },
+          "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上系统。",
+          "manifest_ref": "reproduction:autolr",
+          "runtime": {
+            "requested_device": "cpu",
+            "cpu_threads": null,
+            "platform": "Darwin arm64",
+            "resolved_device": "cpu",
+            "torch_version": "2.13.0",
+            "accelerator": "arm"
+          },
+          "seed": 44,
+          "schema_version": 2,
+          "manifest": {
+            "adapter_key": "autolr",
+            "arxiv_id": "2609.04871",
+            "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+            "paper_url": "https://arxiv.org/abs/2609.04871",
+            "track": "recommendation",
+            "organization": "NetEase, Inc.",
+            "published": "2026-09-04",
+            "code_url": null,
+            "topics": [
+              "auto-research",
+              "experiment-controller",
+              "launch-review",
+              "industrial-recommendation"
+            ],
+            "local_code_dir": "src/auto_research/reproductions/autolr",
+            "fidelity": "core_mechanism",
+            "evaluation_tier": "l2_public_dataset",
+            "datasets": [
+              "MovieLens 100K"
+            ],
+            "baseline": "transition + content + popularity",
+            "metrics": [
+              "hit_at_10",
+              "ndcg_at_10",
+              "fresh_hit_at_10",
+              "head_share_at_10"
+            ],
+            "default_seeds": [
+              42,
+              43,
+              44
+            ],
+            "budget": "220 users / 360 items; validation-only blend selection",
+            "device_capabilities": [
+              "cpu"
+            ],
+            "requires_gpu_validation": false,
+            "gpu_validation_artifact": null,
+            "online_evidence": [
+              {
+                "product": "NetEase DASHEN feed and immersive-video feed",
+                "metric": "content-consumption time",
+                "lift_percent": 10.83,
+                "traffic": "nine Launch Review records with online A/B and production decisions",
+                "source_url": "https://arxiv.org/html/2609.04871",
+                "source_location": "Section 5.2, Table 1",
+                "retrieved_at": "2026-09-07"
+              }
+            ],
+            "selection_exception": null,
+            "evolve_operators": [
+              "controller:autolr-evidence-council"
+            ]
+          },
+          "provenance": {
+            "created_at": "2026-09-07T08:31:28.162777+00:00",
+            "code_commit": "f00cb330ae68d2de0253511148e7116708171291",
+            "python": "3.12.9",
+            "platform": "macOS-26.5.2-arm64-arm-64bit",
+            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
+            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
+            "packages": {
+              "auto-research": "0.1.0",
+              "numpy": "2.5.2",
+              "torch": "2.13.0",
+              "transformers": "5.14.1"
+            }
+          },
+          "evaluation_protocol": {
+            "tier": "l2_public_dataset",
+            "tier_label": "L2 公开数据集训练",
+            "seeds": [
+              44
+            ],
+            "budget": "paper-specific",
+            "formal_comparison": false,
+            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+          }
+        }
+      ],
+      "aggregate_metrics": {
+        "dataset.users": {
+          "mean": 220.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "dataset.items": {
+          "mean": 360.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.hit_at_10": {
+          "mean": 0.10909090909090909,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.ndcg_at_10": {
+          "mean": 0.05400546778896325,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.fresh_hit_at_10": {
+          "mean": 0.031746031746031744,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "baseline.head_share_at_10": {
+          "mean": 0.2377272727272727,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "method.hit_at_10": {
+          "mean": 0.18636363636363637,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "method.ndcg_at_10": {
+          "mean": 0.10832163371945402,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "method.fresh_hit_at_10": {
+          "mean": 0.07936507936507936,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "method.head_share_at_10": {
+          "mean": 0.2631818181818182,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "relative.hit_at_10_percent": {
+          "mean": 70.83333333333334,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "relative.ndcg_at_10_percent": {
+          "mean": 100.5753086756727,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "relative.fresh_hit_at_10_percent": {
+          "mean": 150.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "relative.head_share_at_10_percent": {
+          "mean": 10.707456978967492,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "stages.finite_scores": {
+          "mean": 360.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "stages.mechanism_paths": {
+          "mean": 3.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.completed_offline_evaluations": {
+          "mean": 1586.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.canonical_ledger_records": {
+          "mean": 3289.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.launch_reviews": {
+          "mean": 9.0,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        },
+        "paper_results.content_time_lift_sum_percent": {
+          "mean": 10.83,
+          "std": 0.0,
+          "ci95": 0.0,
+          "n": 3
+        }
+      },
+      "formal_comparison": true
+    }
+  }
+}

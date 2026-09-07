@@ -111,6 +111,10 @@ METHODS = (
     "ace-data",
     "deeprepro",
     "draco",
+    "atomrec",
+    "coskill",
+    "silr",
+    "multi-harness-rl",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

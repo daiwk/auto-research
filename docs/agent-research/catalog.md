@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agentic recommendation memory | [AtomRec: Evolving Atomic Memory for Agentic Recommendation](2609.04882-atomrec/README.md) | Xi'an Jiaotong-Liverpool University，2026-09-04 | 未发现官方代码 | `atomrec` |
+| Hierarchical skill coevolution | [CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution](2609.04865-coskill/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-09-04 | [已开源](https://github.com/jinyuan-cookie/CoSkill) | `coskill` |
+| Structure-preserving verifier and reward | [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](2609.04629-silr/README.md) | Institute of Science Tokyo，2026-09-03 | 未发现官方代码 | `silr` |
+| Multi-harness RL audit | [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](2609.04518-multi-harness-rl/README.md) | New York University，2026-09-03 | 未发现官方代码 | `multi-harness-rl` |
 | 论文到代码状态子规划 | [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](2608.26557-deeprepro/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-08-27 | [已开源](https://github.com/ruyisy/DeepRepro) | `deeprepro` |
 | 红队技能进化 | [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](2608.27439-redevoagent/README.md) | City University of Hong Kong，2026-08-27 | 未发现官方代码 | `redevoagent` |
 | Agent 技能预训练 | [SPT: Skills as Pre-Training Data for Agentic Language Models](2608.26563-spt/README.md) | Beijing University of Posts and Telecommunications，2026-08-27 | 未发现官方代码 | `spt` |

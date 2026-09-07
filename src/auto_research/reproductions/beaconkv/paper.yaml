@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "beaconkv",
+  "arxiv_id": "2609.04971",
+  "title": "BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference",
+  "paper_url": "https://arxiv.org/abs/2609.04971",
+  "organization": "Hanyang University",
+  "published": "2026-09-04",
+  "upstream_code": "not released / not found",
+  "track": "llm",
+  "topics": [
+    "kv-cache",
+    "long-context",
+    "reasoning",
+    "inference-serving"
+  ],
+  "local_code": "src/auto_research/reproductions/beaconkv",
+  "documentation": "docs/reproductions/2609.04971-beaconkv/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "public-domain long-context probe"
+  ],
+  "baseline": "equal-budget recent-token KV retention",
+  "metrics": [
+    "attention-output cosine",
+    "retained tokens",
+    "peak GPU memory"
+  ],
+  "mechanisms": [
+    "four-model reasoning benchmark matrix",
+    "vLLM throughput integration"
+  ],
+  "evolve_operators": [
+    "attention:beacon-query-kv"
+  ]
+}

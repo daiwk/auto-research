@@ -2062,7 +2062,10 @@
           "doc": "reproductions/2609.02730-coral/README.md",
           "full_text_review": {
             "scope": "full-text",
-            "source_locations": ["Section 5.1, Table 1", "Section 5.2"]
+            "source_locations": [
+              "Section 5.1, Table 1",
+              "Section 5.2"
+            ]
           },
           "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
           "track": "recommendation",
@@ -8058,7 +8061,10 @@
           "doc": "reproductions/2609.02730-coral/README.md",
           "full_text_review": {
             "scope": "full-text",
-            "source_locations": ["Section 5.1, Table 1", "Section 5.2"]
+            "source_locations": [
+              "Section 5.1, Table 1",
+              "Section 5.2"
+            ]
           },
           "title": "CORAL: An LLM-Native Harness for Production Recommender Systems",
           "track": "agent",
@@ -10052,6 +10058,2060 @@
           "matched_queries": [
             "llm-agent",
             "web-agent"
+          ],
+          "source_provenance": []
+        }
+      ]
+    },
+    {
+      "batch": "recent-20260907-recommendation",
+      "date": "2026-09-07",
+      "scope_kind": "automated-review-closure",
+      "required_tracks": [
+        "recommendation"
+      ],
+      "source_artifact": "/tmp/scan-20260907-recommendation.json",
+      "window": {
+        "start": "2026-09-03",
+        "end": "2026-09-07"
+      },
+      "candidates": [
+        {
+          "id": "2609.05363",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation",
+          "track": "recommendation",
+          "matched_queries": [
+            "generative-recommendation"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05110",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Embedding Surgery: Localized Updates for Adaptive Ranking Correction in Dense Retrieval",
+          "track": "recommendation",
+          "matched_queries": [
+            "generative-recommendation",
+            "recsys-general"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05063",
+          "key": "allecompanion",
+          "status": "implemented",
+          "priority": "P0",
+          "doc": "reproductions/2609.05063-allecompanion/README.md",
+          "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+          "track": "recommendation",
+          "matched_queries": [
+            "deployment-evidence",
+            "generative-recommendation",
+            "llm-recommendation",
+            "recsys-general"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05059",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Repeated Queries Exhaust an LLM's Brand Recommendations but Not Its Sources",
+          "track": "recommendation",
+          "matched_queries": [
+            "llm-recommendation"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04882",
+          "key": "atomrec",
+          "status": "implemented",
+          "priority": "P1",
+          "doc": "agent-research/2609.04882-atomrec/README.md",
+          "title": "AtomRec: Evolving Atomic Memory for Agentic Recommendation",
+          "track": "recommendation",
+          "matched_queries": [
+            "recsys-general"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04862",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Personalized Task Dependency Graphs for Mitigating Signal Erosion in Multi-Task Recommendation",
+          "track": "recommendation",
+          "matched_queries": [
+            "industrial-ranking",
+            "production-evidence"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04574",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning",
+          "track": "recommendation",
+          "matched_queries": [
+            "generative-recommendation",
+            "priority-org-amazon",
+            "priority-org-tiktok"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.02928",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Towards Scaling Reinforcement Learning to Massive Populations: Learning Mean-Field Representations",
+          "track": "recommendation",
+          "matched_queries": [
+            "recsys-general"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00014",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Behaviorally Grounded User Profiles from the Wild for Personalized Alignment and Multi-Perspective Reasoning",
+          "track": "recommendation",
+          "matched_queries": [
+            "llm-recommendation"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.01628",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Marginal Expected Revenue for Jointly Ranking Auction and Fixed-Price Listings in E-Commerce Sponsored Search",
+          "track": "recommendation",
+          "matched_queries": [
+            "search-ranking"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.01627",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "The Utility of LLMs in Recommender Systems Explanation Evaluation",
+          "track": "recommendation",
+          "matched_queries": [
+            "generative-recommendation",
+            "llm-recommendation",
+            "recsys-general"
+          ],
+          "source_provenance": []
+        }
+      ]
+    },
+    {
+      "batch": "recent-20260907-foundation-model",
+      "date": "2026-09-07",
+      "scope_kind": "automated-review-closure",
+      "required_tracks": [
+        "foundation-model"
+      ],
+      "source_artifact": "/tmp/scan-20260907-foundation-model.json",
+      "window": {
+        "start": "2026-09-03",
+        "end": "2026-09-07"
+      },
+      "candidates": [
+        {
+          "id": "2609.05403",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05401",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Same Trajectory, Contradictory Rewards (ROBORMBENCH): Paraphrase Fragility in Vision Language Reward Models",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05388",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Think-Verify-Revise: Neuro-Symbolic Visual Reasoning with Vision-Language Models and Dynamic Logic Tensor Networks",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05369",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Towards Neuro-Symbolic Procedural Reasoning for Long-Horizon Vision-Language-Action Manipulation",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05363",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Distill Globally, Adapt Locally: Reasoning Distillation and Product-Type Test-Time Training for Scalable Trade-Up Recommendation",
+          "track": "foundation-model",
+          "matched_queries": [
+            "efficient-inference"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05339",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Does Your Agent's Memory Survive a Model Upgrade? A Controlled Study of Memory Portability",
+          "track": "foundation-model",
+          "matched_queries": [
+            "long-context",
+            "model-compression"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05324",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "RoboSPA: Can VLA Models Go Beyond Simple Scenes and Short-Horizon Tasks?",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05314",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Large Language Models for HVAC Operations in Building Energy Systems: A Critical Review of Methods, Applications, and Deployment Readiness",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05239",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Cross-Domain Tracker Adaptation Without Target-Domain Labels via Vision-Language Agents",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05235",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "PRICE: A Systematic Study of LLM Adaptation Choices for Bitcoin Price Forecasting",
+          "track": "foundation-model",
+          "matched_queries": [
+            "efficient-inference",
+            "pretraining-data"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05224",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "First Things First: Teaching LLM-Based Agents to Prioritize Must-Haves before Nice-to-Haves",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05152",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Compression Beyond the Uncompressed: A Two-Stage Training Recipe for Soft Context Compression in RAG",
+          "track": "foundation-model",
+          "matched_queries": [
+            "model-compression"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05151",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Large Language Models with At Most One Spike per Neuron",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05149",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "From Vision to Language: Investigating Causal Information Flow in Multimodal Decision-Making",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05063",
+          "key": "allecompanion",
+          "status": "implemented",
+          "priority": "P0",
+          "doc": "reproductions/2609.05063-allecompanion/README.md",
+          "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05022",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MoirfEolas and CríochScore: Developing Resources for and the Evaluation of Tokenization Alignment with Irish Morphology",
+          "track": "foundation-model",
+          "matched_queries": [
+            "model-compression"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04971",
+          "key": "beaconkv",
+          "status": "implemented",
+          "priority": "P1",
+          "doc": "reproductions/2609.04971-beaconkv/README.md",
+          "title": "BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference",
+          "track": "foundation-model",
+          "matched_queries": [
+            "long-context",
+            "model-compression"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04962",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Why We Care About Understanding: Competence through Predictive Compression",
+          "track": "foundation-model",
+          "matched_queries": [
+            "model-compression"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04959",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Discourse Dependency: A Continuous Criterion for Translation Difficulty",
+          "track": "foundation-model",
+          "matched_queries": [
+            "long-context"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04942",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Learning 3D Editing without Paired Supervision via Generative Prior Distillation",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04852",
+          "key": "kvmem",
+          "status": "implemented",
+          "priority": "P1",
+          "doc": "reproductions/2609.04852-kvmem/README.md",
+          "title": "KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU",
+          "track": "foundation-model",
+          "matched_queries": [
+            "efficient-inference"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04851",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Coupled Control and Wireless World Models for Resilient Remote Robotic Control",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04842",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MMTClinic: Multimodal, Multilingual Time Series Question Answering and Reasoning Benchmark for Clinical Domain",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04781",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "CoMLP: Cooperatively-Gated MLPs for Fine-Grained Cross-Modal Information Fusion in Medical Image Segmentation",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04741",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Where to Look Matters: Learning Influential Views for VLM-based 3D Visual Grounding",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04721",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Locating and Steering Refusal Beyond Attention",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture",
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04720",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Knowing What Not to Answer: Selective Non-Compliance in Vision-Language Models",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04689",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Retinal OCTA Phenotyping with LLM Reporting for Alzheimer's Disease",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04672",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "WEECFP-SuRGE: Wide Embedded Extended Connectivity Fingerprint with Substructure Rotary Graph-distance Encoding",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04646",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Importance-Aware Low-Rank Distillation of Diffusion Transformers",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04645",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Latent-Aligned Reasoning for Multimodal Recommendation",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture",
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04637",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Tracing Audio Grounding and Answer Selection in Audio LLMs",
+          "track": "foundation-model",
+          "matched_queries": [
+            "pretraining-data"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04598",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "PetQA: Benchmarking Veterinary Knowledge and Clinical Reasoning",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04550",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "VISTA: Dense Multi-Label Classroom Coding with Vision-Language Models",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04511",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "LentEx: Generalizable Latent Entity Extraction via Synthetic Data and Instruction-Tuned LLMs",
+          "track": "foundation-model",
+          "matched_queries": [
+            "efficient-inference"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04489",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Towards Understanding Pause Token Fine-Tuning Dynamics: A Mode Retention Perspective",
+          "track": "foundation-model",
+          "matched_queries": [
+            "model-compression"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04486",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Uncertainty Signals for Network Intent Translation: Risk Ranking and Ambiguity Localization",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04392",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "FAVE: Foveated Adaptive Visual Encoding for Efficient Fine-Grained Visual Understanding",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04369",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "AdaptVPR: Route-Aware Hard Positive Generation for Robust Visual Place Recognition",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04355",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "VLA-Precision: Asymmetric Co-Bootstrapping for Efficient Real-World Online RL of Vision-Language-Action Models",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04336",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MedProb: Probing Internal Representations of Vision-Language Models for Medical Question Answering",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04305",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "TNFlow: Amortized Posterior Inference for Trans-Neptunian Object Surface Composition",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04303",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Abstraction Agent",
+          "track": "foundation-model",
+          "matched_queries": [
+            "pretraining-data"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04289",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Memory as transformation: LETHE, a self-referential gan-inspired architecture",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04281",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "When Seeing Overrides Knowing: Visual Dominance and Deferral-Based Method for Personalized Safety in VLMs",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04277",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "FailureSpot: Label-Efficient Timestamp-Level Failure Detection for Vision-Language-Action Models",
+          "track": "foundation-model",
+          "matched_queries": [
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04276",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "FailSAE: Towards Interpretable Failure Prediction for Vision-Language Models via Sparse Autoencoders",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm",
+            "vision-language"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04266",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Compute-in-Memory Attention: A Time-Domain Analog Softmax Circuit with RC-Tunable Temperature",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04263",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Quality Recovery for Quantized KV Caches via Low-Rank Attention Adaptation",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture",
+            "long-context"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04261",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Self-Supervised Pretraining of Molecular Graph Encoders with LeJEPA",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00068",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Life Operators: a self-evolving framework for multiscale life modelling",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00067",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Do Multimodal LLMs See Before They Read? Diagnosing Contextual Sycophancy",
+          "track": "foundation-model",
+          "matched_queries": [
+            "multimodal-llm"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00051",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "From Detection to Refusal: Safer LLMs via Circuit-Guided Weight Scaling",
+          "track": "foundation-model",
+          "matched_queries": [
+            "llm-architecture"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00050",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Towards Agentic Cloud Engineering: Graph and Loop Engineering with a Zero-Trust Agent Harness",
+          "track": "foundation-model",
+          "matched_queries": [
+            "transformer-architecture"
+          ],
+          "source_provenance": []
+        }
+      ]
+    },
+    {
+      "batch": "recent-20260907-post-training",
+      "date": "2026-09-07",
+      "scope_kind": "automated-review-closure",
+      "required_tracks": [
+        "post-training"
+      ],
+      "source_artifact": "/tmp/scan-20260907-post-training.json",
+      "window": {
+        "start": "2026-09-03",
+        "end": "2026-09-07"
+      },
+      "candidates": [
+        {
+          "id": "2609.05401",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Same Trajectory, Contradictory Rewards (ROBORMBENCH): Paraphrase Fragility in Vision Language Reward Models",
+          "track": "post-training",
+          "matched_queries": [
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05314",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Large Language Models for HVAC Operations in Building Energy Systems: A Critical Review of Methods, Applications, and Deployment Readiness",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05221",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "A Verifier-Guided Explainable Reasoning Framework with Gold-Anchored QLoRA, Task-Aware Mixture-of-Experts, and Group-Relative RLVR",
+          "track": "post-training",
+          "matched_queries": [
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05189",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Can Large Language Models Anticipate Behavioral Responses to Social Policies? A Case of Pension Enrollment Prediction among China's Flexible Workers",
+          "track": "post-training",
+          "matched_queries": [
+            "on-policy-distillation"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05152",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Compression Beyond the Uncompressed: A Two-Stage Training Recipe for Soft Context Compression in RAG",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05079",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "TruthInsightBench: An Evidence-Grounded Benchmark for Automated Evaluation of Open-Ended Scientific Discovery Agents",
+          "track": "post-training",
+          "matched_queries": [
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04895",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Cache-Aware Joint Router Adaptation for Memory-Efficient MoE Inference",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04841",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MABPD: Multi-Agent Bias Probing & Detection via Structured Argument Debate",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04824",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Generating Constructive Feedback on Stories via Reinforcement Learning",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl",
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04823",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Reinforcement Learning for improving Large Language Models' Catalan text simplification capabilities",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl",
+            "post-training",
+            "process-reward",
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04735",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Training Large Language Models for Small-Molecule Design with Synthetic Task Scaling",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl",
+            "post-training",
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04648",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "ConsensusBench: Benchmark of Consensus Nodes for LLM Reasoning via Outcome Reward Densifying",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl",
+            "process-reward",
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04565",
+          "key": "sparse-opd",
+          "status": "implemented",
+          "priority": "P0",
+          "doc": "post-training/2609.04565-sparse-opd/README.md",
+          "title": "Extremely Sparse Supervision Incentivizes Reasoning Ability",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl",
+            "on-policy-distillation",
+            "post-training",
+            "process-reward",
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04485",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Cultural Misalignment in Large Language Models: Detection, Measurement, and Mitigation Through Targeted Fine-Tuning",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04409",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "A Systematic Evaluation of Cross-Lingual Consistency Enhancement Methods in Multilingual Language Models",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04355",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "VLA-Precision: Asymmetric Co-Bootstrapping for Efficient Real-World Online RL of Vision-Language-Action Models",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl",
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04344",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "SharedSAE: One Feature Dictionary Across Language Models",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00058",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "CUDA-Harness: Harnessing Agentic CUDA Kernel Generation and Optimization from Natural Language",
+          "track": "post-training",
+          "matched_queries": [
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00057",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "ValueGraph: Value-Signal Guided Graph Pre-training for Contextualized User Representation",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00052",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "AgentProv: Auditing Agentic LLM API Providers via Tool-use Policy Probes",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00049",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "REAL-Q: E2E LLM Quantization via Dynamic Gradient Descent",
+          "track": "post-training",
+          "matched_queries": [
+            "post-training"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00028",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "UI-Venus-2 Technical Report",
+          "track": "post-training",
+          "matched_queries": [
+            "reward-model"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.02931",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "LLM-Guided Reinforcement Learning for Adaptive NPC Behavior in Multi-Agent Combat Games",
+          "track": "post-training",
+          "matched_queries": [
+            "llm-rl"
+          ],
+          "source_provenance": []
+        }
+      ]
+    },
+    {
+      "batch": "recent-20260907-agent",
+      "date": "2026-09-07",
+      "scope_kind": "automated-review-closure",
+      "required_tracks": [
+        "agent"
+      ],
+      "source_artifact": "/tmp/scan-20260907-agent.json",
+      "window": {
+        "start": "2026-09-03",
+        "end": "2026-09-07"
+      },
+      "candidates": [
+        {
+          "id": "2609.05395",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Multi-Step Tool-Calling over Korean Open Public APIs: A Benchmark and a Data-Synthesis Recipe",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05385",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Necessary or Sufficient? Evaluating LLM Explanations With Behavioural Evidence",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05374",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "CUA-Universe: A Scalable and Dynamic Environment for Hybrid GUI+CLI Agents",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05339",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Does Your Agent's Memory Survive a Model Upgrade? A Controlled Study of Memory Portability",
+          "track": "agent",
+          "matched_queries": [
+            "agent-memory"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05335",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "The History Is the Detector: Executing CVE Patch History, End-to-End",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05324",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "RoboSPA: Can VLA Models Go Beyond Simple Scenes and Short-Horizon Tasks?",
+          "track": "agent",
+          "matched_queries": [
+            "agent-memory",
+            "agent-planning"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05314",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Large Language Models for HVAC Operations in Building Energy Systems: A Critical Review of Methods, Applications, and Deployment Readiness",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl",
+            "llm-agent",
+            "tool-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05298",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Online Change-point Detection for Cooperative Multi-Agent Reinforcement Learning",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05279",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Testing Interchangeability in LLM Agent Teams",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05269",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "CONTINUITY: Security-Context Contracts for Composable LLM Agent Controls",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05261",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Trace2Tower: Transition-Aware EigenTrace Induction of Multi-Level Skills for LLM Agents",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent",
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05258",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Ask Before You Optimize: Dynamic Pre-Formulation Clarification for Interactive Optimization",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05227",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "CABAL: Multi-Agent Simulacra for Tracing the Effects of Collusive Bidding in Peer Review",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05133",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "A Schema Bounded Language Model for Refining Robot Policies Without Destabilizing Local Learning",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05079",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "TruthInsightBench: An Evidence-Grounded Benchmark for Automated Evaluation of Open-Ended Scientific Discovery Agents",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05069",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "A Structured Debate-Mixture-of-Agents Framework for Complex Clinical Diagnostic Decision Support",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05037",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "How do LLMs Evaluate Perceived Moral Agency? Investigating Moral Decision-Making in Human-Artificial Agents Interactions",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05036",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Moral Competence Before Moral Content: Why LLM Agents Lack the Prerequisites for Coherent Alignment",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05019",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "TROVE: Adaptive Agent Skill Orchestration via Trace-Grounded Route Validation and Editing",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.05018",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "How a Chatbot's Response Style Shapes a Classroom: A Multi-Agent Simulation of Students Consulting AI",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04999",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "BIT.UA at BioASQ 14B: Modular Retrieval with pg_textsearch and Qdrant, and Agent-Based Answer Generation",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04917",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Artificial Intelligence in Equity and Crypto Markets: Progress, Profitability Evidence, and the Limits of Automated Investing",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl",
+            "tool-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04915",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Compact-Memory LLM Agents via Online Max-Member Clustering and Atom-Aware Packing",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04913",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "ARIA - An Agentic Framework for Autonomous Testing of Infotainment Systems",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04894",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments",
+          "track": "agent",
+          "matched_queries": [
+            "agent-planning",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04880",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Reinforcement Learning for Sequential Solar PV Policy Design under Uncertainty: An Agent-Based Approach",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04875",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Forgetting Without Restarting: Execution-State Unlearning for Stateful LLM Agents",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04871",
+          "key": "autolr",
+          "status": "implemented",
+          "priority": "P0",
+          "doc": "reproductions/2609.04871-autolr/README.md",
+          "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04866",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "LLM-Assisted Behavioural and Scenario Augmentation for Agent-Based Energy Adoption Models",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04865",
+          "key": "coskill",
+          "status": "implemented",
+          "priority": "P0",
+          "doc": "agent-research/2609.04865-coskill/README.md",
+          "title": "CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl",
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04841",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MABPD: Multi-Agent Bias Probing & Detection via Structured Argument Debate",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04820",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Cost-Aware Hierarchical Multi-Agent Ransomware Detection and Family Attribution",
+          "track": "agent",
+          "matched_queries": [
+            "agent-memory",
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04778",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Diffusion Language Models for Mobile Edge Agentic AI: Foundations, Applications, and Challenges",
+          "track": "agent",
+          "matched_queries": [
+            "agent-memory",
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04773",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Persistent Teacher Anchoring for Tool-Using Agents",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04749",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "DCFA: Dual-view Causal-inspired Attribution for Failure Reasoning in LLM-based Multi-agent Systems",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04748",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Same Request, Different Answer: Quantization Amplifies Cache-Induced Divergence in LLM Serving",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04711",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Building a research-software catalog with a coding agent: from hackathon prototype to public deployment",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04699",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Model Retirement Creates Reproducibility Risk in Biomedical AI Publications",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04697",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "SQL-Zero: Self-Evolving Text-to-SQL",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04681",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Beyond Code Generation: Reliability, Verification, and Cost Economics in the Agentic Software Development Lifecycle",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04680",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "How Developers Discuss Generative AI: A Longitudinal Study of the Visual Studio Code Community",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04667",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "ERPBench: Evaluating LLM Agents for Enterprise Decision-Making Across Competitive Market Ecologies",
+          "track": "agent",
+          "matched_queries": [
+            "agent-planning",
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04630",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Software Engineering in the Agent Era From Trustworthy Change to Human Agent Software Organizations",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04629",
+          "key": "silr",
+          "status": "implemented",
+          "priority": "P1",
+          "doc": "agent-research/2609.04629-silr/README.md",
+          "title": "SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04611",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "$τ^τ$-Bench: An Environment for End-To-End, Realistic Agent Construction",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04570",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Dynamic Adaptation of the LLM Context for Generating Routines with Coupled Semantics",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04564",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "La Agente Óptima: Towards Agentic Self-Driving Laboratories",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04535",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "An Empirical Analysis of CodeQL False Positives and Query Refinements for Java Vulnerabilities",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04523",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MaxKernel: Agentic Kernel Generation for TPUs",
+          "track": "agent",
+          "matched_queries": [
+            "agent-planning",
+            "llm-agent",
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04518",
+          "key": "multi-harness-rl",
+          "status": "implemented",
+          "priority": "P1",
+          "doc": "agent-research/2609.04518-multi-harness-rl/README.md",
+          "title": "What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04445",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Conformity Breaks Conformal Prediction",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04444",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "HarvestBench: Measuring Whether LLM Agents Will Pay to Avoid Killing Animals",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl",
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04442",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "GRACE: Graph-Grounded Reflective Agent Copilot Engine for Expert-in-the-Loop Knowledge Expansion",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04373",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Why Better Models Can Create Riskier Systems: Evidence from LLM Agents in Financial Markets",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04366",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "VERGE: Verification-Enhanced Refinement for Grounded Extraction of Early-Onset Colorectal Cancer Symptoms in Clinical Notes",
+          "track": "agent",
+          "matched_queries": [
+            "tool-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04336",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "MedProb: Probing Internal Representations of Vision-Language Models for Medical Question Answering",
+          "track": "agent",
+          "matched_queries": [
+            "multi-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04303",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Abstraction Agent",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04290",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Evidence Integration in Large Language Models",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04286",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "From Matching Models to Recruiting Agents: A Systematized Narrative Review of AI Recruitment Systems, Evaluation, and Governance",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "multi-agent",
+            "tool-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04280",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "EVOHARNESSBENCH: Can Your Agents Keep Pace with an Evolving Harness?",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.04270",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Reviewer Capability Governs Rejection Targeting, Not Repair Skill: Evidence from LLM Execute-Review-Revise Pipelines",
+          "track": "agent",
+          "matched_queries": [
+            "llm-agent",
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00070",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "AutoXRD: Autonomous LLM Agents and Comprehensive Evaluation for Powder Diffraction Analysis",
+          "track": "agent",
+          "matched_queries": [
+            "agent-planning"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00058",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "CUDA-Harness: Harnessing Agentic CUDA Kernel Generation and Optimization from Natural Language",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00052",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "AgentProv: Auditing Agentic LLM API Providers via Tool-use Policy Probes",
+          "track": "agent",
+          "matched_queries": [
+            "tool-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00050",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Towards Agentic Cloud Engineering: Graph and Loop Engineering with a Zero-Trust Agent Harness",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00038",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "trajectory-judge: What Outcome-Only LLM Judges Miss on Agent Trajectories",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent",
+            "tool-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00035",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "SilentProbe: Measuring Silent Failure in Production APIs Used as Agent Tools",
+          "track": "agent",
+          "matched_queries": [
+            "software-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.01641",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "SocialBuddy: Tailoring Search Agent for Social Scenarios",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00028",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "UI-Venus-2 Technical Report",
+          "track": "agent",
+          "matched_queries": [
+            "web-agent"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.02931",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "LLM-Guided Reinforcement Learning for Adaptive NPC Behavior in Multi-Agent Combat Games",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.02928",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "Towards Scaling Reinforcement Learning to Massive Populations: Learning Mean-Field Representations",
+          "track": "agent",
+          "matched_queries": [
+            "agentic-rl"
+          ],
+          "source_provenance": []
+        },
+        {
+          "id": "2609.00015",
+          "status": "rejected",
+          "priority": "P2",
+          "reason": "高召回候选经摘要、论文正文入口与可执行性复核：未满足工业量化线上证据门槛，或相对现有实现缺少足够独立且可公平验证的核心机制。",
+          "title": "OpenAgentFlow: Enabling System-Wide Safety Boundaries for Heterogeneous AI Agent Fleets",
+          "track": "agent",
+          "matched_queries": [
+            "agent-planning"
           ],
           "source_provenance": []
         }

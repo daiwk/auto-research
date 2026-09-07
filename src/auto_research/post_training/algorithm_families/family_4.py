@@ -15,7 +15,7 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'v-rubrics', 'clue-opsd', 'grin', 'grip',
         'ttpo', 'weak-guide-rlvr', 'uc-mopd', 'spear',
         'rlvr-fusion', 'video-opsd', 'normalized-dpo',
-        'gapo',
+        'gapo', 'sparse-opd',
     }:
         if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
             from ..latest_20260827 import update_latest
@@ -25,6 +25,8 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             from ..latest_20260831 import update_latest
         elif algorithm == 'gapo':
             from ..latest_20260905 import update_latest
+        elif algorithm == 'sparse-opd':
+            from ..latest_20260907 import update_latest
         else:
             update_latest = None
         if update_latest is not None:

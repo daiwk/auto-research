@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "autolr",
+  "arxiv_id": "2609.04871",
+  "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2609.04871",
+  "organization": "NetEase, Inc.",
+  "published": "2026-09-04",
+  "upstream_code": "not released / not found",
+  "track": "recommendation",
+  "topics": [
+    "auto-research",
+    "experiment-controller",
+    "launch-review",
+    "industrial-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/autolr",
+  "documentation": "docs/reproductions/2609.04871-autolr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private DASHEN repository",
+    "production experiment ledger",
+    "online admission and Launch Review authority"
+  ],
+  "evolve_operators": [
+    "controller:autolr-evidence-council"
+  ]
+}

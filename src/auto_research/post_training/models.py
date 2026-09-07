@@ -109,6 +109,7 @@ ALGORITHMS = (
     "video-opsd",
     "normalized-dpo",
     "gapo",
+    "sparse-opd",
 )
 
 
