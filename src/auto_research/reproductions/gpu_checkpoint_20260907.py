@@ -50,15 +50,25 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
     ).cuda().eval()
     corpus = "To be, or not to be, that is the question. " * 9000
     token_ids = tokenizer(corpus, return_tensors="pt", add_special_tokens=False).input_ids[0][:sequence_length][None].cuda()
+    layer_indices = sorted({0, len(model.model.layers) // 2, len(model.model.layers) - 1})
+    hidden_by_layer = {}
+    hooks = []
+    for layer_index in layer_indices:
+        def capture_input(_module, args, *, index=layer_index):
+            hidden_by_layer[index] = args[0].detach()
+
+        hooks.append(model.model.layers[layer_index].register_forward_pre_hook(capture_input))
     torch.cuda.reset_peak_memory_stats()
     with torch.inference_mode():
-        result = model(token_ids, use_cache=True, output_hidden_states=True)
+        result = model(token_ids, use_cache=True)
+    for hook in hooks:
+        hook.remove()
     sequence_length = token_ids.shape[-1]
     layers = _layers(result.past_key_values)
     records = []
-    for layer_index in sorted({0, len(layers) // 2, len(layers) - 1}):
+    for layer_index in layer_indices:
         layer = model.model.layers[layer_index]
-        hidden = result.hidden_states[layer_index]
+        hidden = hidden_by_layer[layer_index]
         q_heads = model.config.num_attention_heads
         kv_heads = model.config.num_key_value_heads
         head_dim = layer.self_attn.head_dim
