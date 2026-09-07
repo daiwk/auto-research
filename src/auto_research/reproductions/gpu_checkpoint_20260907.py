@@ -45,7 +45,7 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
     model = AutoModelForCausalLM.from_pretrained(
         checkpoint_source,
         revision=None if local_files_only else resolved_revision,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         local_files_only=local_files_only,
     ).cuda().eval()
     corpus = "To be, or not to be, that is the question. " * 9000
@@ -61,7 +61,13 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
         q_heads = model.config.num_attention_heads
         kv_heads = model.config.num_key_value_heads
         head_dim = layer.self_attn.head_dim
-        queries = layer.self_attn.q_proj(hidden)[0].view(sequence_length, q_heads, head_dim).transpose(0, 1)
+        with torch.inference_mode():
+            normalized_hidden = layer.input_layernorm(hidden)
+            queries = (
+                layer.self_attn.q_proj(normalized_hidden)[0]
+                .view(sequence_length, q_heads, head_dim)
+                .transpose(0, 1)
+            )
         queries = queries.view(kv_heads, q_heads // kv_heads, sequence_length, head_dim).mean(1)
         keys, values = layers[layer_index][0][0], layers[layer_index][1][0]
         for head in range(kv_heads):
