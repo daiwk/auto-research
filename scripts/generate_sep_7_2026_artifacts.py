@@ -84,7 +84,7 @@ def main() -> None:
                 "evaluation_protocol": {
                     "tier": "l1_mechanism",
                     "seeds": list(SEEDS),
-                    "formal_comparison": True,
+                    "formal_comparison": False,
                     "claim_policy": "mechanism counters, not benchmark capability",
                 },
             },

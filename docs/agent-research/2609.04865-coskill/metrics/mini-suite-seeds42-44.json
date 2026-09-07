@@ -917,7 +917,7 @@
       43,
       44
     ],
-    "formal_comparison": true,
+    "formal_comparison": false,
     "claim_policy": "mechanism counters, not benchmark capability"
   },
   "provenance": {
