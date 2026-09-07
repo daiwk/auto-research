@@ -524,7 +524,7 @@ AGENT_MUTATIONS = {
         "SiLR 以 shadow execution 和逐分支乘积序实施恢复准入及过程奖励",
     ),
     "2609.04518": (
-        "audit:multi-harness-credit",
+        "audit:multi-harness-rl",
         "固定轨迹区分 within/cross-harness 信用，并在未见 harness 上审计能力迁移",
     ),
     "2609.04094": (

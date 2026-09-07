@@ -919,5 +919,9 @@
     ],
     "formal_comparison": true,
     "claim_policy": "mechanism counters, not benchmark capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.04629-silr/metrics/mini-suite-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
   }
 }

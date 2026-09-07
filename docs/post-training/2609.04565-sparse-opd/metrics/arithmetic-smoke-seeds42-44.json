@@ -408,5 +408,9 @@
     ],
     "formal_comparison": true,
     "claim_policy": "formal multi-seed mechanism comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.04565-sparse-opd/metrics/arithmetic-smoke-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
   }
 }

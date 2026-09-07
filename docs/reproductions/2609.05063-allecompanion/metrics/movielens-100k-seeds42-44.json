@@ -609,5 +609,20 @@
       },
       "formal_comparison": true
     }
+  },
+  "manifest_ref": "reproduction:allecompanion",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "formal multi-seed comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.05063-allecompanion/metrics/movielens-100k-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
   }
 }

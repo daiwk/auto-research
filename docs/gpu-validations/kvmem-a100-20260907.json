@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "adapter_key": "kvmem",
+  "validated_at": "2026-09-07",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-m", "auto_research.reproductions.kvmem.checkpoint",
+    "--model-id", "Qwen/Qwen3-4B-Instruct-2507",
+    "--revision", "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--sequence-length", "1024", "--retained-tokens", "256",
+    "--seed", "42", "--local-files-only"
+  ],
+  "dataset": {
+    "name": "fixed public-domain long-context probe",
+    "revision": "public-domain-long-context-v1",
+    "examples": 1,
+    "sequence_length": 1024
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "retained_tokens": 256,
+    "evaluated_head_layers": 24,
+    "baseline_attention_cosine_mean": 0.7241525765,
+    "method_attention_cosine_mean": 0.9892065475,
+    "peak_gpu_memory_mb": 8234.1553
+  },
+  "provenance": {
+    "commit": "633daa9330572b7f4ee84d168aee4598a7907ea3",
+    "artifact_path": "docs/gpu-validations/kvmem-a100-20260907.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}
