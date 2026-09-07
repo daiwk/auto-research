@@ -25,7 +25,7 @@ def _attend(query, keys, values, indices, torch):
 def run(method: str, *, output: Path, model_id: str, revision: str, sequence_length: int,
         retained_tokens: int, seed: int, local_files_only: bool):
     import torch
-    from huggingface_hub import model_info
+    from huggingface_hub import model_info, snapshot_download
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     from .beaconkv.model import beacon_retained_indices
@@ -33,9 +33,19 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
 
     torch.manual_seed(seed)
     resolved_revision = revision if local_files_only else model_info(model_id, revision=revision).sha
-    tokenizer = AutoTokenizer.from_pretrained(model_id, revision=resolved_revision, local_files_only=local_files_only)
+    checkpoint_source = (
+        snapshot_download(model_id, revision=resolved_revision, local_files_only=True)
+        if local_files_only else model_id
+    )
+    tokenizer = AutoTokenizer.from_pretrained(
+        checkpoint_source,
+        revision=None if local_files_only else resolved_revision,
+        local_files_only=local_files_only,
+    )
     model = AutoModelForCausalLM.from_pretrained(
-        model_id, revision=resolved_revision, torch_dtype=torch.bfloat16,
+        checkpoint_source,
+        revision=None if local_files_only else resolved_revision,
+        torch_dtype=torch.bfloat16,
         local_files_only=local_files_only,
     ).cuda().eval()
     corpus = "To be, or not to be, that is the question. " * 9000
