@@ -53,6 +53,7 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
     torch.cuda.reset_peak_memory_stats()
     with torch.inference_mode():
         result = model(token_ids, use_cache=True, output_hidden_states=True)
+    sequence_length = token_ids.shape[-1]
     layers = _layers(result.past_key_values)
     records = []
     for layer_index in sorted({0, len(layers) // 2, len(layers) - 1}):
@@ -63,11 +64,10 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
         head_dim = layer.self_attn.head_dim
         with torch.inference_mode():
             normalized_hidden = layer.input_layernorm(hidden)
-            queries = (
-                layer.self_attn.q_proj(normalized_hidden)[0]
-                .view(sequence_length, q_heads, head_dim)
-                .transpose(0, 1)
-            )
+            projected_queries = layer.self_attn.q_proj(normalized_hidden)
+            if projected_queries.ndim == 3:
+                projected_queries = projected_queries[0]
+            queries = projected_queries.view(sequence_length, q_heads, head_dim).transpose(0, 1)
         queries = queries.view(kv_heads, q_heads // kv_heads, sequence_length, head_dim).mean(1)
         keys, values = layers[layer_index][0][0], layers[layer_index][1][0]
         for head in range(kv_heads):
