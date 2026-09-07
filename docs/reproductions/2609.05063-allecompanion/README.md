@@ -9,7 +9,7 @@
 | 论文链接 | [RecSys 2026](https://arxiv.org/abs/2609.05063) |
 | 公司/机构 | Allegro.com |
 | 首次公开日期 | 2026-09-04（arXiv v1） |
-| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-08-13） |
+| 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-07） |
 | Adapter | `allecompanion` |
 | 本地复现代码 | [`src/auto_research/reproductions/allecompanion/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/allecompanion/) |
 
