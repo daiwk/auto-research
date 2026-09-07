@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Serving 与研究基础设施 | [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md) | NetEase, Inc.，2026-09-04 | 未发现官方代码 | `autolr` |
+| Serving 与研究基础设施 | [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../2609.05063-allecompanion/README.md) | Allegro.com，2026-09-04 | 未发现官方代码 | `allecompanion` |
 | Serving 与研究基础设施 | [CORAL: An LLM-Native Harness for Production Recommender Systems](../2609.02730-coral/README.md) | Meta AI，2026-09-02 | 未发现官方代码 | `coral` |
 | 生成、排序与冷启动 | [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md) | ByteDance，2026-09-01 | 未发现官方代码 | `rest` |
 | 生成、排序与冷启动 | [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md) | Tencent，2026-09-01 | 未发现官方代码 | `tgr` |

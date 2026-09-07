@@ -229,6 +229,7 @@
 - 2026-01 · [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享广告、推广与 organic stream 表征，将高资源任务知识迁移给冷启动 podcast。
 
 ## NetEase
+- 2026-09 · [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md)：以多专家评审、证据加权预算和确定性晋级门串联研究、实验与上线评审。
 - 2026-07 · [Melo](../2607.23718-melo/README.md)：用多节点音乐 Agent、实体目录 grounding 和反思重试生成可靠 playlist。
 - 2026-06 · [PIANO](../2606.16641-piano/README.md)：用查询驱动兴趣精炼和信息聚合节点执行个性化 listwise 音乐重排。
 
@@ -406,3 +407,6 @@
 
 ## Dream11
 - 2026-01 · [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../2601.14333-hcub/README.md)：用层级上下文 uplift bandit 在目录个性化中学习增量收益。
+
+## Allegro.com
+- 2026-09 · [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../2609.05063-allecompanion/README.md)：用 ComCat 互补类别图、类别约束双塔和 Category Adapter 过滤共购噪声。

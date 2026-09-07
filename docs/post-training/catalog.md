@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 极稀疏 On-policy distillation | [Extremely Sparse Supervision Incentivizes Reasoning Ability](2609.04565-sparse-opd/README.md) | Amazon / Duke University，2026-09-03 | 未发现官方代码 | `sparse-opd` |
 | 弱模型前缀探索 | [Boosting LLM Exploration via Weak-Model Guidance in RLVR](2608.27420-weak-guide-rlvr/README.md) | Peking University，2026-08-27 | 未发现官方代码 | `weak-guide-rlvr` |
 | 跨领域 RLVR 能力融合 | [Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms](2608.27409-rlvr-fusion/README.md) | Fudan University，2026-08-27 | [已开源](https://github.com/Di-viner/LLM-Fusion) | `rlvr-fusion` |
 | DPO 偏好/优化尺度解耦 | [Disentangling Optimization Scale from Preference Scale in DPO](2608.27032-normalized-dpo/README.md) | Affiliation not listed in the paper，2026-08-27 | [已开源](https://github.com/ivankru/bayesian_dpo) | `normalized-dpo` |

@@ -12,6 +12,7 @@
 
 ## 快速入口
 
+- [Sparse OPD](2609.04565-sparse-opd/README.md)：每条在线轨迹只监督教师—学生差异最大的一个或两个关键 token。
 - [GAPO](2609.00444-gapo/README.md)：按组内正确数自适应放宽稀有正确 rollout 的 clip 上界。
 
 - [自动进化中的基础模型](../evolution-domains.md)：查看结构、数据和后训练的组合方式。

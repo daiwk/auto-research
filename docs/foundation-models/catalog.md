@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与系统效率 | [BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference](../reproductions/2609.04971-beaconkv/README.md) | Hanyang University，2026-09-04 | 未发现官方代码 | `beaconkv` |
+| 推理与系统效率 | [KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU](../reproductions/2609.04852-kvmem/README.md) | Shanghai University of Finance and Economics，2026-09-04 | [已开源](https://github.com/kvmem/kvmem-qw3) | `kvmem` |
 | 网络架构 | [Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations](../reproductions/2609.03426-lngram-v2/README.md) | Beijing University of Posts and Telecommunications / Kuaishou Technology，2026-09-03 | 未发现官方代码 | `lngram-v2` |
 | 推理与系统效率 | [Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning](../reproductions/2609.03430-random-attention/README.md) | Salesforce AI Research / University of Illinois Urbana-Champaign，2026-09-03 | [已开源](https://github.com/SalesforceAIResearch/Random-Attention) | `random-attention` |
 | 弱模型失败模式 ICL | [CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes](2608.27455-criticl/README.md) | The Ohio State University，2026-08-27 | 未发现官方代码 | `criticl` |

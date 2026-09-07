@@ -155,6 +155,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "atomrec",
+      "title": "AtomRec: Evolving Atomic Memory for Agentic Recommendation",
+      "paper_url": "https://arxiv.org/abs/2609.04882",
+      "detail_path": "agent-research/2609.04882-atomrec/README.md",
+      "topic": [
+        "Agentic recommendation memory"
+      ],
+      "first_author": "Peiyu Hu",
+      "first_author_affiliation": "Xi'an Jiaotong-Liverpool University",
+      "published": "2026-09-04",
+      "code": null,
+      "adapter": "atomrec"
+    },
+    {
+      "domain": "agent-research",
       "key": "auso",
       "title": "AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization",
       "paper_url": "https://arxiv.org/abs/2608.21292",
@@ -302,6 +317,21 @@
       "published": "2026-08-03",
       "code": "未发现官方代码",
       "adapter": "coevo-mem"
+    },
+    {
+      "domain": "agent-research",
+      "key": "coskill",
+      "title": "CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution",
+      "paper_url": "https://arxiv.org/abs/2609.04865",
+      "detail_path": "agent-research/2609.04865-coskill/README.md",
+      "topic": [
+        "Hierarchical skill coevolution"
+      ],
+      "first_author": "Jinyuan Feng",
+      "first_author_affiliation": "Institute of Automation, Chinese Academy of Sciences",
+      "published": "2026-09-04",
+      "code": "https://github.com/jinyuan-cookie/CoSkill",
+      "adapter": "coskill"
     },
     {
       "domain": "agent-research",
@@ -789,6 +819,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "multi-harness-rl",
+      "title": "What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2609.04518",
+      "detail_path": "agent-research/2609.04518-multi-harness-rl/README.md",
+      "topic": [
+        "Multi-harness RL audit"
+      ],
+      "first_author": "Chenqian Le",
+      "first_author_affiliation": "New York University",
+      "published": "2026-09-03",
+      "code": null,
+      "adapter": "multi-harness-rl"
+    },
+    {
+      "domain": "agent-research",
       "key": "ocsd",
       "title": "OCSD",
       "paper_url": "https://arxiv.org/abs/2608.04788",
@@ -1136,6 +1181,21 @@
       "published": "2023-03-30",
       "code": "https://github.com/madaan/self-refine",
       "adapter": "self-refine"
+    },
+    {
+      "domain": "agent-research",
+      "key": "silr",
+      "title": "SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents",
+      "paper_url": "https://arxiv.org/abs/2609.04629",
+      "detail_path": "agent-research/2609.04629-silr/README.md",
+      "topic": [
+        "Structure-preserving verifier and reward"
+      ],
+      "first_author": "Chenyu Zhou",
+      "first_author_affiliation": "Institute of Science Tokyo",
+      "published": "2026-09-03",
+      "code": null,
+      "adapter": "silr"
     },
     {
       "domain": "agent-research",
@@ -1861,6 +1921,67 @@
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "beaconkv",
+      "title": "BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference",
+      "paper_url": "https://arxiv.org/abs/2609.04971",
+      "detail_path": "reproductions/2609.04971-beaconkv/README.md",
+      "topic": [
+        "kv-cache",
+        "long-context",
+        "reasoning",
+        "inference-serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Hanyang University",
+      "published": "2026-09-04",
+      "code": null,
+      "adapter": {
+        "adapter_key": "beaconkv",
+        "arxiv_id": "2609.04971",
+        "title": "BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference",
+        "paper_url": "https://arxiv.org/abs/2609.04971",
+        "track": "llm",
+        "organization": "Hanyang University",
+        "published": "2026-09-04",
+        "code_url": null,
+        "topics": [
+          "kv-cache",
+          "long-context",
+          "reasoning",
+          "inference-serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/beaconkv",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "public-domain long-context probe"
+        ],
+        "baseline": "equal-budget recent-token KV retention",
+        "metrics": [
+          "attention-output cosine",
+          "retained tokens",
+          "peak GPU memory"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/beaconkv-a100-20260907.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": [
+          "attention:beacon-query-kv"
+        ]
       }
     },
     {
@@ -3066,6 +3187,67 @@
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "kvmem",
+      "title": "KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU",
+      "paper_url": "https://arxiv.org/abs/2609.04852",
+      "detail_path": "reproductions/2609.04852-kvmem/README.md",
+      "topic": [
+        "agent-memory",
+        "kv-cache",
+        "long-context",
+        "inference-serving"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Shanghai University of Finance and Economics",
+      "published": "2026-09-04",
+      "code": "https://github.com/kvmem/kvmem-qw3",
+      "adapter": {
+        "adapter_key": "kvmem",
+        "arxiv_id": "2609.04852",
+        "title": "KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU",
+        "paper_url": "https://arxiv.org/abs/2609.04852",
+        "track": "llm",
+        "organization": "Shanghai University of Finance and Economics",
+        "published": "2026-09-04",
+        "code_url": "https://github.com/kvmem/kvmem-qw3",
+        "topics": [
+          "agent-memory",
+          "kv-cache",
+          "long-context",
+          "inference-serving"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/kvmem",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "public-domain long-context probe"
+        ],
+        "baseline": "equal-budget recent-context compaction",
+        "metrics": [
+          "attention-output cosine",
+          "materialized blocks",
+          "peak GPU memory"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/kvmem-a100-20260907.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": [
+          "memory:query-conditioned-paged-kv"
+        ]
       }
     },
     {
@@ -6894,6 +7076,21 @@
     },
     {
       "domain": "post-training",
+      "key": "sparse-opd",
+      "title": "Extremely Sparse Supervision Incentivizes Reasoning Ability",
+      "paper_url": "https://arxiv.org/abs/2609.04565",
+      "detail_path": "post-training/2609.04565-sparse-opd/README.md",
+      "topic": [
+        "极稀疏 On-policy distillation"
+      ],
+      "first_author": "Zhishuai Liu",
+      "first_author_affiliation": "Amazon / Duke University",
+      "published": "2026-09-03",
+      "code": null,
+      "adapter": "sparse-opd"
+    },
+    {
+      "domain": "post-training",
       "key": "spear",
       "title": "SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning",
       "paper_url": "https://arxiv.org/abs/2608.26550",
@@ -7736,6 +7933,79 @@
     },
     {
       "domain": "recommendation",
+      "key": "allecompanion",
+      "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+      "paper_url": "https://arxiv.org/abs/2609.05063",
+      "detail_path": "reproductions/2609.05063-allecompanion/README.md",
+      "topic": [
+        "complementary-recommendation",
+        "two-tower",
+        "category-adapter",
+        "e-commerce"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Allegro.com",
+      "published": "2026-09-04",
+      "code": null,
+      "adapter": {
+        "adapter_key": "allecompanion",
+        "arxiv_id": "2609.05063",
+        "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+        "paper_url": "https://arxiv.org/abs/2609.05063",
+        "track": "recommendation",
+        "organization": "Allegro.com",
+        "published": "2026-09-04",
+        "code_url": null,
+        "topics": [
+          "complementary-recommendation",
+          "two-tower",
+          "category-adapter",
+          "e-commerce"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/allecompanion",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Allegro product and cart placements",
+            "metric": "attributed GMV",
+            "lift_percent": 21.25,
+            "traffic": "two-week tests routed over 100% platform traffic",
+            "source_url": "https://arxiv.org/html/2609.05063",
+            "source_location": "Section 4.4, Table 5",
+            "experiment_duration": "two weeks",
+            "retrieved_at": "2026-09-07"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "context:complementary-category-adapter"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "argus",
       "title": "Scaling Recommender Transformers to One Billion Parameters",
       "paper_url": "https://arxiv.org/abs/2507.15994",
@@ -7972,6 +8242,78 @@
         "selection_exception": null,
         "evolve_operators": [
           "context:atomic-intent-tree"
+        ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "autolr",
+      "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2609.04871",
+      "detail_path": "reproductions/2609.04871-autolr/README.md",
+      "topic": [
+        "auto-research",
+        "experiment-controller",
+        "launch-review",
+        "industrial-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "NetEase, Inc.",
+      "published": "2026-09-04",
+      "code": null,
+      "adapter": {
+        "adapter_key": "autolr",
+        "arxiv_id": "2609.04871",
+        "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.04871",
+        "track": "recommendation",
+        "organization": "NetEase, Inc.",
+        "published": "2026-09-04",
+        "code_url": null,
+        "topics": [
+          "auto-research",
+          "experiment-controller",
+          "launch-review",
+          "industrial-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/autolr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "NetEase DASHEN feed and immersive-video feed",
+            "metric": "content-consumption time",
+            "lift_percent": 10.83,
+            "traffic": "nine Launch Review records with online A/B and production decisions",
+            "source_url": "https://arxiv.org/html/2609.04871",
+            "source_location": "Section 5.2, Table 1",
+            "retrieved_at": "2026-09-07"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": [
+          "controller:autolr-evidence-council"
         ]
       }
     },

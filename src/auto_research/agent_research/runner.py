@@ -176,6 +176,10 @@ class AgentResearchRunner:
             "validation_ratchet_rejects", "accuracy_gates",
             "complexity_calibrations", "diversity_accepts", "diversity_rejections",
             "state_snapshots", "subplan_revisions", "runtime_feedback_repairs",
+            "atomic_memory_writes", "multi_hop_retrievals",
+            "task_skill_retrievals", "step_skill_retrievals", "meta_skill_updates",
+            "shadow_executions", "product_order_admissions", "unsafe_scalar_rejections",
+            "within_harness_groups", "cross_harness_groups", "heldout_harness_evaluations",
         ):
             diagnostics[name] = getattr(agent, name, 0)
         phase_counts = getattr(agent, "phase_counts", None)

@@ -4,6 +4,10 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "atomrec": ("AtomRec", "https://arxiv.org/abs/2609.04882"),
+    "coskill": ("CoSkill", "https://arxiv.org/abs/2609.04865"),
+    "silr": ("SiLR", "https://arxiv.org/abs/2609.04629"),
+    "multi-harness-rl": ("What Does Multi-Harness RL Learn?", "https://arxiv.org/abs/2609.04518"),
     "draco": ("DRACO", "https://arxiv.org/abs/2609.04094"),
     "redevoagent": ("RedEvoAgent", "https://arxiv.org/abs/2608.27439"),
     "ace-data": ("ACE Agentic Data", "https://arxiv.org/abs/2608.27260"),

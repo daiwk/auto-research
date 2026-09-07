@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "极稀疏 On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "几何约束 RL": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "AI 反馈安全对齐": ("偏好建模与监督", "安全对齐与可控监督"),
         "直接偏好优化": ("偏好建模与监督", "成对、单样本与排序偏好"),
@@ -137,6 +138,10 @@ TOPIC_HIERARCHY = {
         "弱模型前缀探索": ("在线强化学习与稳定性", "优势估计与多目标优化"),
     },
     "agent-research": {
+        "Agentic recommendation memory": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "Hierarchical skill coevolution": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "Structure-preserving verifier and reward": ("工具调用与环境执行", "安全准入与可验证执行"),
+        "Multi-harness RL audit": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
         "动作级技能优化": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "Agent RL": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
         "环境 rehearsal / Agent RL": ("Agentic RL 与后训练", "环境模型与 world rehearsal"),
@@ -233,6 +238,8 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "beaconkv": ("推理与系统效率", "推测解码与 KV cache"),
+    "kvmem": ("推理与系统效率", "推测解码与 KV cache"),
     "random-attention": ("推理与系统效率", "推测解码与 KV cache"),
     "lngram-v2": ("网络架构", "条件记忆与知识注入"),
     "pace-vlm": ("多模态基础模型", "视觉 token 与跨模态检索"),

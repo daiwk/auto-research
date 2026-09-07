@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "key": "allecompanion",
+  "arxiv_id": "2609.05063",
+  "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+  "paper_url": "https://arxiv.org/abs/2609.05063",
+  "organization": "Allegro.com",
+  "published": "2026-09-04",
+  "upstream_code": "否：论文未提供官方/作者代码（核查日期：2026-09-07）",
+  "track": "recommendation",
+  "topics": [
+    "complementary-recommendation",
+    "two-tower",
+    "category-adapter",
+    "e-commerce"
+  ],
+  "local_code": "src/auto_research/reproductions/allecompanion",
+  "documentation": "docs/reproductions/2609.05063-allecompanion/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private 90-day Allegro transaction log",
+    "production Faiss index",
+    "ComCat expert rules"
+  ],
+  "evolve_operators": [
+    "context:complementary-category-adapter"
+  ]
+}
