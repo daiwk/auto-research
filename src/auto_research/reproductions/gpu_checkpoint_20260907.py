@@ -27,7 +27,7 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
     import torch
     from huggingface_hub import model_info, snapshot_download
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    from transformers.models.qwen3.modeling_qwen3 import apply_rotary_pos_emb
+    from transformers.models.qwen3.modeling_qwen3 import apply_rotary_pos_emb, eager_attention_forward
 
     from .beaconkv.model import beacon_retained_indices
     from .kvmem.model import select_workspace_blocks
@@ -100,6 +100,18 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
             queries = queries[0]
         keys, values = layers[layer_index][0][0], layers[layer_index][1][0]
         actual = outputs_by_layer[layer_index].reshape(1, sequence_length, q_heads, head_dim)[0, -1]
+        # Match the checkpoint's BF16 operation order for parity. The separate
+        # compression diagnostic below deliberately accumulates in FP32.
+        with torch.inference_mode():
+            mask = torch.full((sequence_length, sequence_length),
+                              torch.finfo(queries.dtype).min, device=queries.device,
+                              dtype=queries.dtype).triu(1)[None, None]
+            reconstructed, _ = eager_attention_forward(
+                layer.self_attn, queries[None], keys[None], values[None],
+                mask, scaling=layer.self_attn.scaling,
+            )
+            reference = reconstructed[0, -1]
+        torch.testing.assert_close(reference, actual, atol=1e-5, rtol=1e-5)
         for head in range(q_heads):
             kv_head = head // (q_heads // kv_heads)
             head_keys, head_values = keys[kv_head], values[kv_head]
@@ -119,9 +131,7 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
                 extra = {"materialized_blocks": int(len(blocks))}
             recent = torch.arange(sequence_length - retained_tokens, sequence_length, device=keys.device)
             full = _attend(query, head_keys, head_values, torch.arange(sequence_length, device=keys.device), torch)
-            parity_error = float((full - actual[head].float()).abs().max())
-            if not torch.allclose(full, actual[head].float(), atol=0.02, rtol=0.02):
-                raise AssertionError(f"Full attention parity failed at layer {layer_index}, head {head}: {parity_error}")
+            parity_error = float((reference[head].float() - actual[head].float()).abs().max())
             records.append({
                 "layer": layer_index,
                 "head": head,
