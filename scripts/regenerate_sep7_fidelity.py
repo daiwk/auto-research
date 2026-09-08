@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import statistics
 
 from auto_research.agent_research import AgentResearchConfig, AgentResearchRunner
 from auto_research.reproductions.latest_20260907 import reproduce
@@ -40,9 +41,17 @@ def main():
                     memory_size=24, seed=seed, output_dir=ROOT / "runs/agent-research")).run()
                 result = asdict(result)
             runs.append(result)
+        metric_rows = [run["method"] if recommendation else run["metrics"] for run in runs]
+        aggregates = {}
+        for name, value in metric_rows[0].items():
+            if not isinstance(value, (float, int)):
+                continue
+            values = [float(row[name]) for row in metric_rows]
+            aggregates[f"{name}_mean"] = statistics.fmean(values)
+            aggregates[f"{name}_std"] = statistics.stdev(values)
         payload = {"schema_version": 2, "method": method,
             "dataset": "MovieLens 100K" if recommendation else "evomem-mini",
-            "seeds": seeds, "runs": runs,
+            "seeds": seeds, "runs": runs, "aggregate_metrics": aggregates,
             "manifest_ref": f"reproduction:{method}" if recommendation else "agent-research:evomem-mini-seeds42-44",
             "evaluation_protocol": {"tier": "l1_mechanism", "seeds": seeds,
                 "formal_comparison": False,

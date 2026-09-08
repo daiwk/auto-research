@@ -80,6 +80,7 @@ class HierarchicalSkills:
     """Task-to-step bundles; edits stay private until post-edit execution."""
     def __init__(self, capacity=24):
         self.capacity, self.bundles, self.pending = capacity, {}, {}
+        self.lineage = {}
 
     def retrieve(self, query):
         scores = [(AtomicMemory.lexical_similarity(query, key), key) for key in self.bundles]
@@ -87,6 +88,29 @@ class HierarchicalSkills:
 
     def stage(self, task, children):
         self.pending[task] = deepcopy(children)
+
+    def edit(self, task, operation, index=None, procedure=None):
+        bundle = self.pending.setdefault(task, deepcopy(self.bundles.get(task, [])))
+        if operation == "insert":
+            if procedure is None:
+                raise ValueError("insert requires a procedure")
+            bundle.append(deepcopy(procedure))
+        elif operation in {"update", "delete"}:
+            if index is None or not 0 <= index < len(bundle):
+                raise ValueError("invalid child index")
+            if operation == "delete":
+                del bundle[index]
+            elif procedure is None:
+                raise ValueError("update requires a procedure")
+            else:
+                bundle[index] = deepcopy(procedure)
+        elif operation != "keep":
+            raise ValueError("unsupported skill operation")
+
+    def retrieve_step(self, task, observation):
+        children = self.bundles.get(task, [])
+        return max(children, key=lambda child: AtomicMemory.lexical_similarity(
+            observation, str(child))) if children else None
 
     def verify(self, task, execute, baseline, attempts=2):
         if attempts < 1:
@@ -96,8 +120,9 @@ class HierarchicalSkills:
         rewards = [float(execute(deepcopy(candidate))) for _ in range(attempts)]
         if not all(math.isfinite(r) for r in rewards):
             raise ValueError("nonfinite verification reward")
-        if np.mean(rewards) <= baseline:
+        if np.mean(rewards) <= baseline or candidate == self.bundles.get(task):
             return False
+        self.lineage.setdefault(task, []).append(deepcopy(self.bundles.get(task, [])))
         self.bundles[task] = candidate
         while len(self.bundles) > self.capacity:
             del self.bundles[next(iter(self.bundles))]
@@ -144,14 +169,33 @@ def relative_credit(rewards, tasks, harnesses, mode="within"):
     return advantages
 
 
-def policy_objective(log_probs, old_log_probs, advantages, clip=0.2):
+def policy_objective(log_probs, old_log_probs, advantages, clip=0.2, reference_log_probs=None, beta=0.0):
     """Differentiable clipped group-relative objective shared by both arms."""
     import torch
     advantage = torch.as_tensor(advantages, device=log_probs.device, dtype=log_probs.dtype).detach()
     if log_probs.shape != old_log_probs.shape or log_probs.shape != advantage.shape:
         raise ValueError("rollout tensors must have equal shapes")
     ratio = (log_probs - old_log_probs.detach()).exp()
-    return -torch.minimum(ratio * advantage, ratio.clamp(1-clip, 1+clip) * advantage).mean()
+    loss = -torch.minimum(ratio * advantage, ratio.clamp(1-clip, 1+clip) * advantage).mean()
+    if reference_log_probs is not None:
+        if reference_log_probs.shape != log_probs.shape:
+            raise ValueError("reference shape mismatch")
+        difference = reference_log_probs.detach() - log_probs
+        loss = loss + beta * (difference.exp() - difference - 1).mean()
+    return loss
+
+
+def gigpo_credit(episode_returns, step_returns, task_groups, anchor_groups, weight=1.0):
+    """Equation 14, called separately per role to isolate reward scales.
+
+    R groups by task/state; S by task+base skill/state+target step skill.
+    Episode returns are broadcast to the corresponding actions by the caller.
+    """
+    if len(episode_returns) != len(step_returns):
+        raise ValueError("episode and step returns must align")
+    episode = relative_credit(episode_returns, task_groups, task_groups, mode="cross")
+    step = relative_credit(step_returns, anchor_groups, anchor_groups, mode="cross")
+    return episode + weight * step
 
 
 def joint_skill_objective(reasoning_log_probs, editing_log_probs, old_reasoning,
@@ -162,4 +206,4 @@ def joint_skill_objective(reasoning_log_probs, editing_log_probs, old_reasoning,
     does not replace delayed verification with the edit-triggering reward.
     """
     return (policy_objective(reasoning_log_probs, old_reasoning, reasoning_advantage)
-            + policy_objective(editing_log_probs, old_editing, verified_edit_advantage)) / 2
+            + policy_objective(editing_log_probs, old_editing, verified_edit_advantage))

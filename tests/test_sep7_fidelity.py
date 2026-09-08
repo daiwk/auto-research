@@ -7,7 +7,7 @@ import torch
 from auto_research.agent_research.methods import build_agent
 from auto_research.agent_research.sep7_mechanisms import (
     AtomicMemory, HierarchicalSkills, ShadowGate, relative_credit,
-    policy_objective, joint_skill_objective,
+    policy_objective, joint_skill_objective, gigpo_credit,
 )
 from auto_research.reproductions.sep7_models import CategoryTwoTower, EvidenceController
 
@@ -104,6 +104,19 @@ def test_shared_policy_receives_both_role_gradients():
                                 [1, -1], [-1, 1])
     loss.backward()
     assert torch.count_nonzero(shared.weight.grad) == 4
+
+
+def test_gigpo_separates_state_groups_and_skill_edits():
+    credit = gigpo_credit([0, 1, 0, 1], [1, 1, 0, 1], ["t"]*4,
+                          ["s1", "s1", "s2", "s2"])
+    np.testing.assert_allclose(credit, [-1, 1, -2, 2], atol=1e-6)
+    skills = HierarchicalSkills()
+    skills.bundles = {"a": ["search"], "b": ["unrelated"]}
+    skills.edit("a", "update", 0, "verify")
+    assert skills.bundles["a"] == ["search"]
+    assert skills.verify("a", lambda bundle: float(bundle == ["verify"]), baseline=0)
+    assert skills.lineage["a"] == [["search"]]
+    assert skills.retrieve_step("a", "unrelated") == "verify"
 
 
 def test_category_adapter_reconstruction_and_shared_encoder_train():
