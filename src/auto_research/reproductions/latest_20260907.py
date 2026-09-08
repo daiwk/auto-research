@@ -23,7 +23,7 @@ PAPERS = {
         "operator": "context:complementary-category-adapter",
         "paper_results": {"web_organic_gmv_lift_percent": 8.05, "app_organic_gmv_lift_percent": 9.35, "web_cart_gmv_lift_percent": 21.25, "app_cart_gmv_lift_percent": 15.73},
         "evidence": ("Allegro product and cart placements", "attributed GMV", 21.25, "two-week tests routed over 100% platform traffic", "Section 4.4, Table 5"),
-        "omitted": ("private 90-day Allegro transaction log", "production Faiss index", "ComCat expert rules"),
+        "omitted": ("private 90-day Allegro transaction log", "production Faiss index", "ComCat expert/LLM mapping", "product complementarity benchmark; MovieLens is a structural diagnostic"),
     },
     "autolr": {
         "arxiv_id": "2609.04871",
@@ -35,7 +35,7 @@ PAPERS = {
         "operator": "controller:autolr-evidence-council",
         "paper_results": {"completed_offline_evaluations": 1586, "canonical_ledger_records": 3289, "launch_reviews": 9, "content_time_lift_sum_percent": 10.83},
         "evidence": ("NetEase DASHEN feed and immersive-video feed", "content-consumption time", 10.83, "nine Launch Review records with online A/B and production decisions", "Section 5.2, Table 1"),
-        "omitted": ("private DASHEN repository", "production experiment ledger", "online admission and Launch Review authority"),
+        "omitted": ("live LLM research and repository code generation", "multi-expert LLM debate", "private DASHEN repository", "online admission and Launch Review authority"),
     },
 }
 
@@ -110,7 +110,7 @@ def make_adapter(key: str) -> ReproductionAdapter:
         run=lambda dataset_dir, seed=42: reproduce(key, dataset_dir, seed), render=render,
         fidelity=ReproductionFidelity.CORE_MECHANISM, omitted_core_components=row["omitted"],
         evaluation_tier=EvaluationTier.PUBLIC_DATASET, datasets=("MovieLens 100K",),
-        baseline="transition + content + popularity", metrics=("hit_at_10", "ndcg_at_10", "fresh_hit_at_10", "head_share_at_10"),
+        baseline="shared two-tower without category adapter" if key == "allecompanion" else "transition + content + popularity", metrics=("hit_at_10", "ndcg_at_10", "fresh_hit_at_10", "head_share_at_10"),
         evolve_operators=(row["operator"],), default_seeds=(42, 43, 44),
         budget="220 users / 360 items; 80 CPU updates; validation-only candidate selection", device_capabilities=("cpu",), infer_device_capabilities=False,
     )
