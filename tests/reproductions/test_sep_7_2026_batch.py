@@ -38,19 +38,13 @@ def test_kvmem_materializes_only_query_selected_blocks():
     assert len(scores) == 10
 
 
-def test_new_agent_mechanisms_expose_paper_specific_paths():
+def test_new_agents_abstain_without_public_evidence():
     task = AgentTask("t", "tools", "inspect then verify", ("ctx",), "ok", ("inspect", "verify"), ("inspect", "verify"))
-    expected = {
-        "atomrec": "multi-hop-evidence",
-        "coskill": "joint-policy-update",
-        "silr": "process-reward",
-        "multi-harness-rl": "heldout-harness-audit",
-    }
-    for key, marker in expected.items():
+    for key in ("atomrec", "coskill", "silr", "multi-harness-rl"):
         agent = build_agent(key, 8, np.random.default_rng(42))
         answer, plan, trace = agent.solve(task, 0)
-        assert answer == "ok" and plan == task.plan
-        assert marker in trace
+        assert answer == "" and plan == ()
+        assert trace
 
 
 def test_sparse_opd_uses_only_one_or_two_supervision_positions(tmp_path):
