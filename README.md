@@ -85,6 +85,8 @@ tests/reproductions/
 
 新增论文不需要修改 CLI：registry 会自动发现带有 `adapter.py` 的论文目录。详细约定见[架构与扩展指南](docs/architecture.md)。
 
+使用编码助手参与开发时，项目约束由根目录 `AGENTS.md` 维护；任务写法、完成证据和验证范围见 [GPT-6 Astra 协作指南](docs/astra-collaboration.md)。
+
 本轮参考了 [automated-w2s-research](https://github.com/safety-research/automated-w2s-research) 的 idea 隔离、统一配置、迭代研究和结果缓存设计，但没有合并其 Claude/Flask/RunPod/VERL 重型运行栈。逐项取舍见[架构采用记录](docs/design/automated-w2s-adoption.md)。
 
 ## 安装
