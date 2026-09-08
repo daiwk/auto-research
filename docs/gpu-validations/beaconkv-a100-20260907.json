@@ -1,14 +1,15 @@
 {
   "schema_version": 1,
   "adapter_key": "beaconkv",
-  "validated_at": "2026-09-07",
+  "validated_at": "2026-09-08",
+  "correction": "Supersedes the invalid September 7 query reconstruction; uses query normalization, checkpoint rotary implementation and separate GQA query heads. Full BF16 attention output parity is asserted before FP32 compression diagnostics.",
   "accelerator": {"vendor": "NVIDIA", "model": "A100"},
   "command": [
     "python", "-m", "auto_research.reproductions.beaconkv.checkpoint",
     "--model-id", "Qwen/Qwen3-4B-Instruct-2507",
     "--revision", "cdbee75f17c01a7cc42f958dc650907174af0554",
     "--sequence-length", "1024", "--retained-tokens", "256",
-    "--seed", "42", "--local-files-only"
+    "--seed", "42", "--local-files-only", "--output", "beaconkv-validation.json"
   ],
   "dataset": {
     "name": "fixed public-domain long-context probe",
@@ -24,13 +25,14 @@
   "metrics": {
     "seed": 42,
     "retained_tokens": 256,
-    "evaluated_head_layers": 24,
-    "baseline_attention_cosine_mean": 0.7241525765,
-    "method_attention_cosine_mean": 0.9607827663,
-    "peak_gpu_memory_mb": 8234.1543
+    "evaluated_head_layers": 96,
+    "full_attention_max_abs_error": 0.0,
+    "baseline_attention_cosine_mean": 0.8995949868112803,
+    "method_attention_cosine_mean": 0.9934627022594213,
+    "peak_gpu_memory_mb": 8610.654296875
   },
   "provenance": {
-    "commit": "633daa9330572b7f4ee84d168aee4598a7907ea3",
+    "commit": "cd153061905420014de600ad262c9f41c3af47f4",
     "artifact_path": "docs/gpu-validations/beaconkv-a100-20260907.json",
     "raw_predictions_committed": false,
     "checkpoint_committed": false

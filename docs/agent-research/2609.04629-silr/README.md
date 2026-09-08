@@ -1,6 +1,6 @@
 # SiLR：保持约束结构的 Agent 准入与过程奖励
 
-> **复现级别：结构化 verifier mini-suite。** 实现 shadow execution、逐分支乘积序准入和同源过程奖励。
+> **复现级别：CPU 准入算子。** `ShadowGate` 在真实传入的 simulator 深拷贝上执行动作，比较逐分支严重度；legacy 文本 mini-suite 没有 simulator，不生成安全或过程奖励结论。
 
 ## 论文信息
 
@@ -46,6 +46,12 @@ flowchart LR
 Gym-ANM 多动作场景中 SiLR 恢复 21/21，terminal admission 为 0/21、最佳标量门为 9/21；完整乘积序在 42,410 个不安全动作上错误准入为 0，并在过程奖励实验中达到 0.844 对未训练 0.778。
 
 ## 本地复现
+
+### 2026-09-08 保真度更正
+
+旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。新 legacy 结果仅是公开文本格式解析诊断，即使为 1 也不是 Agent 能力；cost 是读取记录数，不是实际工具费用。
+
+实际算子位置：[`sep7_mechanisms.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/agent_research/sep7_mechanisms.py)。运行 `python -m pytest tests/test_sep7_fidelity.py -q` 检查记忆路径、私有技能编辑、拒绝后状态不变、组间信用差异与反向传播。独立算子不能被当作已集成完整 LLM、真实工具环境或端到端 evolve 的证明。
 
 seeds 42/43/44 的 shadow 次数、结构准入/拒绝、verifier 调用和成功成本见 [`metrics/mini-suite-seeds42-44.json`](metrics/mini-suite-seeds42-44.json)。
 

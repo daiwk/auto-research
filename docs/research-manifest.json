@@ -7968,7 +7968,7 @@
         "datasets": [
           "MovieLens 100K"
         ],
-        "baseline": "transition + content + popularity",
+        "baseline": "shared two-tower without category adapter",
         "metrics": [
           "hit_at_10",
           "ndcg_at_10",
@@ -7980,7 +7980,7 @@
           43,
           44
         ],
-        "budget": "220 users / 360 items; validation-only blend selection",
+        "budget": "220 users / 360 items; 80 CPU updates; validation-only candidate selection",
         "device_capabilities": [
           "cpu"
         ],
@@ -8294,7 +8294,7 @@
           43,
           44
         ],
-        "budget": "220 users / 360 items; validation-only blend selection",
+        "budget": "220 users / 360 items; 80 CPU updates; validation-only candidate selection",
         "device_capabilities": [
           "cpu"
         ],

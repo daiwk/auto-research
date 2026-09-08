@@ -85,7 +85,7 @@ def main() -> None:
                     "tier": "l1_mechanism",
                     "seeds": list(SEEDS),
                     "formal_comparison": False,
-                    "claim_policy": "mechanism counters, not benchmark capability",
+                    "claim_policy": "public observation parser diagnostic, not tool-use or trained LLM capability",
                 },
             },
         )

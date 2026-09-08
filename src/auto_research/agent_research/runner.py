@@ -183,6 +183,12 @@ class AgentResearchRunner:
         ):
             diagnostics[name] = getattr(agent, name, 0)
         phase_counts = getattr(agent, "phase_counts", None)
+        if config.method in {"atomrec", "coskill", "silr", "multi-harness-rl"}:
+            diagnostics["fidelity"] = "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration"
+            diagnostics["gold_fields_available_to_policy"] = False
+            diagnostics["tool_execution_performed"] = False
+            diagnostics["policy_training_performed"] = False
+            diagnostics["cost_unit"] = "public records inspected"
         if phase_counts is not None:
             diagnostics["phase_counts"] = dict(phase_counts)
         result = AgentResearchResult(

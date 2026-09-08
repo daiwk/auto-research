@@ -29,8 +29,9 @@
     "head_share_at_10"
   ],
   "mechanisms": [
+    "live LLM research and repository code generation",
+    "multi-expert LLM debate",
     "private DASHEN repository",
-    "production experiment ledger",
     "online admission and Launch Review authority"
   ],
   "evolve_operators": [

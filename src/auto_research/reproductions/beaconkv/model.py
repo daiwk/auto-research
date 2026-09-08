@@ -12,6 +12,7 @@ def farthest_point_beacons(queries, count: int):
     selected = [int(torch.linalg.vector_norm(normalized, dim=-1).argmax())]
     nearest = 1.0 - normalized @ normalized[selected[0]]
     for _ in range(1, count):
+        nearest[selected] = -torch.inf
         index = int(nearest.argmax())
         selected.append(index)
         nearest = torch.minimum(nearest, 1.0 - normalized @ normalized[index])

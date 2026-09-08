@@ -51,4 +51,8 @@ CPU fixture 指标见 [`metrics/synthetic-long-context-seeds42-44.json`](metrics
 
 ## 复现边界
 
+### 2026-09-08 验证更正
+
+旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。已在 A100 上重跑：使用模型实际 rotary 算子、逐 query head 计算，3 层共 96 个 head-layer 的完整 BF16 attention 与模型输出最大绝对误差为 0。压缩相似度另用 FP32 累积，结果见上述已更新 receipt。这仍只是单条 1024-token 固定文本的机制诊断，不是任务准确率、完整论文复现或吞吐提升证据。
+
 本地没有实现推理引擎级 KV page 管理和 CUDA kernel；完整 32K 推理曲线仍以原论文为准。

@@ -1,6 +1,6 @@
 # AutoLR：从研究想法自动走到上线评审
 
-> **复现级别：确定性多轮研究控制器。** 实现多专家评审、证据加权探索/利用和持久状态晋级。
+> **复现级别：离线控制器核心。** 对输入候选与评审执行预算排序、独立指标门槛、持久化账本和人工评审打包；不包含实时 LLM 调研、自动代码生成或线上发布。
 
 ## 论文信息
 
@@ -47,6 +47,10 @@ flowchart LR
 论文审计数月日志得到 1,586 次完成的离线评估和 9 条 Launch Review；异质记录的正向相对提升描述性求和为内容消费渗透率 +5.75%、消费时长 +10.83%、有效播放 +5.55%，作者明确说明这些不是合并处理效应。
 
 ## 本地复现
+
+2026-09-08 更正：旧版推荐分数混合不能代表 AutoLR，旧结果作废。`src/auto_research/reproductions/sep7_models.py` 的 `EvidenceController` 消费明确的候选和评审，调用实际训练/验证函数，冻结参考基线，逐指标拒绝违规候选，仅用 validation 选择后再报告 test。内置示例评审是确定性预算/数据检查，不冒充专家 LLM 辩论。
+
+Python 调用 `reproduce("autolr", Path("data"), 42, ledger_path=Path("runs/autolr-ledger.json"))` 可保存并恢复离线账本。无合格候选时保留基线，不强制报告提升；`online_authorized` 始终为 false。
 
 MovieLens 公开数据、seeds 42/43/44 的候选选择、分歧惩罚、NDCG 与 Recall 见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
 
