@@ -27,10 +27,15 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
     import torch
     from huggingface_hub import model_info, snapshot_download
     from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers.models.qwen3.modeling_qwen3 import apply_rotary_pos_emb
 
     from .beaconkv.model import beacon_retained_indices
     from .kvmem.model import select_workspace_blocks
 
+    if method not in {"beaconkv", "kvmem"}:
+        raise ValueError(f"Unsupported method: {method}")
+    if not 0 < retained_tokens <= sequence_length:
+        raise ValueError("Require 0 < retained_tokens <= sequence_length")
     torch.manual_seed(seed)
     resolved_revision = revision if local_files_only else model_info(model_id, revision=revision).sha
     checkpoint_source = (
@@ -47,22 +52,35 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
         revision=None if local_files_only else resolved_revision,
         dtype=torch.bfloat16,
         local_files_only=local_files_only,
+        attn_implementation="eager",
     ).cuda().eval()
+    if model.config.model_type != "qwen3":
+        raise ValueError("This attention parity probe supports Qwen3 only")
     corpus = "To be, or not to be, that is the question. " * 9000
     token_ids = tokenizer(corpus, return_tensors="pt", add_special_tokens=False).input_ids[0][:sequence_length][None].cuda()
     layer_indices = sorted({0, len(model.model.layers) // 2, len(model.model.layers) - 1})
     hidden_by_layer = {}
+    positions_by_layer = {}
+    outputs_by_layer = {}
     hooks = []
     for layer_index in layer_indices:
-        def capture_input(_module, args, *, index=layer_index):
-            hidden_by_layer[index] = args[0].detach()
+        def capture_input(_module, args, kwargs, *, index=layer_index):
+            hidden_by_layer[index] = kwargs["hidden_states"].detach()
+            positions_by_layer[index] = kwargs["position_embeddings"]
 
-        hooks.append(model.model.layers[layer_index].register_forward_pre_hook(capture_input))
+        def capture_output(_module, args, *, index=layer_index):
+            outputs_by_layer[index] = args[0].detach()
+
+        attention = model.model.layers[layer_index].self_attn
+        hooks.append(attention.register_forward_pre_hook(capture_input, with_kwargs=True))
+        hooks.append(attention.o_proj.register_forward_pre_hook(capture_output))
     torch.cuda.reset_peak_memory_stats()
-    with torch.inference_mode():
-        result = model(token_ids, use_cache=True)
-    for hook in hooks:
-        hook.remove()
+    try:
+        with torch.inference_mode():
+            result = model(token_ids, use_cache=True)
+    finally:
+        for hook in hooks:
+            hook.remove()
     sequence_length = token_ids.shape[-1]
     layers = _layers(result.past_key_values)
     records = []
@@ -73,35 +91,44 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
         kv_heads = model.config.num_key_value_heads
         head_dim = layer.self_attn.head_dim
         with torch.inference_mode():
-            normalized_hidden = layer.input_layernorm(hidden)
-            projected_queries = layer.self_attn.q_proj(normalized_hidden)
-            if projected_queries.ndim == 3:
-                projected_queries = projected_queries[0]
-            queries = projected_queries.view(sequence_length, q_heads, head_dim).transpose(0, 1)
-        queries = queries.view(kv_heads, q_heads // kv_heads, sequence_length, head_dim).mean(1)
+            projected_queries = layer.self_attn.q_proj(hidden)
+            queries = layer.self_attn.q_norm(
+                projected_queries.reshape(1, sequence_length, q_heads, head_dim)
+            ).transpose(1, 2)
+            cos, sin = positions_by_layer[layer_index]
+            queries, _ = apply_rotary_pos_emb(queries, queries, cos, sin)
+            queries = queries[0]
         keys, values = layers[layer_index][0][0], layers[layer_index][1][0]
-        for head in range(kv_heads):
+        actual = outputs_by_layer[layer_index].reshape(1, sequence_length, q_heads, head_dim)[0, -1]
+        for head in range(q_heads):
+            kv_head = head // (q_heads // kv_heads)
+            head_keys, head_values = keys[kv_head], values[kv_head]
             query = queries[head, -1]
             if method == "beaconkv":
                 chosen = beacon_retained_indices(
-                    keys[head], queries[head], retained_tokens,
+                    head_keys, queries[head], retained_tokens,
                     beacon_count=8, recent_tokens=min(128, retained_tokens // 2),
                 )
                 extra = {"beacon_count": 8}
             else:
                 chosen, blocks, _ = select_workspace_blocks(
-                    keys[head], query, block_size=32,
+                    head_keys, query, block_size=32,
                     selected_blocks=max(1, retained_tokens // 32),
                 )
                 chosen = chosen[:retained_tokens]
-                extra = {"materialized_blocks": int(len(blocks)), "virtualization_tiers": 3}
+                extra = {"materialized_blocks": int(len(blocks))}
             recent = torch.arange(sequence_length - retained_tokens, sequence_length, device=keys.device)
-            full = _attend(query, keys[head], values[head], torch.arange(sequence_length, device=keys.device), torch)
+            full = _attend(query, head_keys, head_values, torch.arange(sequence_length, device=keys.device), torch)
+            parity_error = float((full - actual[head].float()).abs().max())
+            if not torch.allclose(full, actual[head].float(), atol=0.02, rtol=0.02):
+                raise AssertionError(f"Full attention parity failed at layer {layer_index}, head {head}: {parity_error}")
             records.append({
                 "layer": layer_index,
                 "head": head,
-                "baseline_attention_cosine": float(torch.nn.functional.cosine_similarity(full, _attend(query, keys[head], values[head], recent, torch), dim=0)),
-                "method_attention_cosine": float(torch.nn.functional.cosine_similarity(full, _attend(query, keys[head], values[head], chosen, torch), dim=0)),
+                "kv_head": kv_head,
+                "full_attention_max_abs_error": parity_error,
+                "baseline_attention_cosine": float(torch.nn.functional.cosine_similarity(full, _attend(query, head_keys, head_values, recent, torch), dim=0)),
+                "method_attention_cosine": float(torch.nn.functional.cosine_similarity(full, _attend(query, head_keys, head_values, chosen, torch), dim=0)),
                 "retained_tokens": int(len(chosen)),
                 **extra,
             })
