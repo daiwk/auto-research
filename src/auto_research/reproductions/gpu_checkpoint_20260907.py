@@ -96,7 +96,8 @@ def run(method: str, *, output: Path, model_id: str, revision: str, sequence_len
                 projected_queries.reshape(1, sequence_length, q_heads, head_dim)
             ).transpose(1, 2)
             cos, sin = positions_by_layer[layer_index]
-            queries, _ = apply_rotary_pos_emb(queries, queries, cos, sin)
+            rotary = getattr(layer.self_attn, "_rotary_emb", apply_rotary_pos_emb)
+            queries, _ = rotary(queries, queries, cos, sin)
             queries = queries[0]
         keys, values = layers[layer_index][0][0], layers[layer_index][1][0]
         actual = outputs_by_layer[layer_index].reshape(1, sequence_length, q_heads, head_dim)[0, -1]
