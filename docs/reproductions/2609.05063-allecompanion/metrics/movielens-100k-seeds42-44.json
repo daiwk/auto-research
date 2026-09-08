@@ -1,628 +1,229 @@
 {
   "schema_version": 2,
-  "seeds_by_adapter": {
-    "allecompanion": [
-      42,
-      43,
-      44
-    ]
-  },
-  "budget": "paper-specific",
-  "papers": {
-    "allecompanion": {
-      "manifest": {
-        "adapter_key": "allecompanion",
+  "method": "allecompanion",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
         "arxiv_id": "2609.05063",
         "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-        "paper_url": "https://arxiv.org/abs/2609.05063",
-        "track": "recommendation",
-        "organization": "Allegro.com",
-        "published": "2026-09-04",
-        "code_url": null,
-        "topics": [
-          "complementary-recommendation",
-          "two-tower",
-          "category-adapter",
-          "e-commerce"
-        ],
-        "local_code_dir": "src/auto_research/reproductions/allecompanion",
-        "fidelity": "core_mechanism",
-        "evaluation_tier": "l2_public_dataset",
-        "datasets": [
-          "MovieLens 100K"
-        ],
-        "baseline": "transition + content + popularity",
-        "metrics": [
-          "hit_at_10",
-          "ndcg_at_10",
-          "fresh_hit_at_10",
-          "head_share_at_10"
-        ],
-        "default_seeds": [
-          42,
-          43,
-          44
-        ],
-        "budget": "220 users / 360 items; validation-only blend selection",
-        "device_capabilities": [
-          "cpu"
-        ],
-        "requires_gpu_validation": false,
-        "gpu_validation_artifact": null,
-        "online_evidence": [
-          {
-            "product": "Allegro product and cart placements",
-            "metric": "attributed GMV",
-            "lift_percent": 21.25,
-            "traffic": "two-week tests routed over 100% platform traffic",
-            "source_url": "https://arxiv.org/html/2609.05063",
-            "source_location": "Section 4.4, Table 5",
-            "experiment_duration": "two weeks",
-            "retrieved_at": "2026-09-07"
-          }
-        ],
-        "selection_exception": null,
-        "evolve_operators": [
-          "context:complementary-category-adapter"
-        ]
+        "url": "https://arxiv.org/abs/2609.05063",
+        "organization": "Allegro.com"
       },
-      "seed_results": [
-        {
-          "paper": {
-            "arxiv_id": "2609.05063",
-            "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-            "url": "https://arxiv.org/abs/2609.05063",
-            "organization": "Allegro.com"
-          },
-          "dataset": {
-            "name": "MovieLens 100K",
-            "users": 220,
-            "items": 360
-          },
-          "setup": {
-            "adapter": "allecompanion",
-            "same_split_and_candidates": true
-          },
-          "baseline": {
-            "name": "transition + content + popularity",
-            "hit_at_10": 0.10909090909090909,
-            "ndcg_at_10": 0.05400546778896325,
-            "fresh_hit_at_10": 0.031746031746031744,
-            "head_share_at_10": 0.23772727272727273
-          },
-          "method": {
-            "name": "allecompanion core mechanism (validation blend=0.2)",
-            "hit_at_10": 0.1,
-            "ndcg_at_10": 0.05066080594607861,
-            "fresh_hit_at_10": 0.047619047619047616,
-            "head_share_at_10": 0.17954545454545454
-          },
-          "relative": {
-            "hit_at_10_percent": -8.333333333333325,
-            "ndcg_at_10_percent": -6.193191133821028,
-            "fresh_hit_at_10_percent": 50.0,
-            "head_share_at_10_percent": -24.474187380497135
-          },
-          "stages": {
-            "finite_scores": 360,
-            "mechanism_paths": 3
-          },
-          "paper_results": {
-            "web_organic_gmv_lift_percent": 8.05,
-            "app_organic_gmv_lift_percent": 9.35,
-            "web_cart_gmv_lift_percent": 21.25,
-            "app_cart_gmv_lift_percent": 15.73
-          },
-          "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上系统。",
-          "manifest_ref": "reproduction:allecompanion",
-          "runtime": {
-            "requested_device": "cpu",
-            "cpu_threads": null,
-            "platform": "Darwin arm64",
-            "resolved_device": "cpu",
-            "torch_version": "2.13.0",
-            "accelerator": "arm"
-          },
-          "seed": 42,
-          "schema_version": 2,
-          "manifest": {
-            "adapter_key": "allecompanion",
-            "arxiv_id": "2609.05063",
-            "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-            "paper_url": "https://arxiv.org/abs/2609.05063",
-            "track": "recommendation",
-            "organization": "Allegro.com",
-            "published": "2026-09-04",
-            "code_url": null,
-            "topics": [
-              "complementary-recommendation",
-              "two-tower",
-              "category-adapter",
-              "e-commerce"
-            ],
-            "local_code_dir": "src/auto_research/reproductions/allecompanion",
-            "fidelity": "core_mechanism",
-            "evaluation_tier": "l2_public_dataset",
-            "datasets": [
-              "MovieLens 100K"
-            ],
-            "baseline": "transition + content + popularity",
-            "metrics": [
-              "hit_at_10",
-              "ndcg_at_10",
-              "fresh_hit_at_10",
-              "head_share_at_10"
-            ],
-            "default_seeds": [
-              42,
-              43,
-              44
-            ],
-            "budget": "220 users / 360 items; validation-only blend selection",
-            "device_capabilities": [
-              "cpu"
-            ],
-            "requires_gpu_validation": false,
-            "gpu_validation_artifact": null,
-            "online_evidence": [
-              {
-                "product": "Allegro product and cart placements",
-                "metric": "attributed GMV",
-                "lift_percent": 21.25,
-                "traffic": "two-week tests routed over 100% platform traffic",
-                "source_url": "https://arxiv.org/html/2609.05063",
-                "source_location": "Section 4.4, Table 5",
-                "experiment_duration": "two weeks",
-                "retrieved_at": "2026-09-07"
-              }
-            ],
-            "selection_exception": null,
-            "evolve_operators": [
-              "context:complementary-category-adapter"
-            ]
-          },
-          "provenance": {
-            "created_at": "2026-09-07T08:31:05.469898+00:00",
-            "code_commit": "f00cb330ae68d2de0253511148e7116708171291",
-            "python": "3.12.9",
-            "platform": "macOS-26.5.2-arm64-arm-64bit",
-            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
-            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
-            "packages": {
-              "auto-research": "0.1.0",
-              "numpy": "2.5.2",
-              "torch": "2.13.0",
-              "transformers": "5.14.1"
-            }
-          },
-          "evaluation_protocol": {
-            "tier": "l2_public_dataset",
-            "tier_label": "L2 公开数据集训练",
-            "seeds": [
-              42
-            ],
-            "budget": "paper-specific",
-            "formal_comparison": false,
-            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
-          }
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "allecompanion",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "shared two-tower without category adapter",
+        "hit_at_10": 0.1,
+        "ndcg_at_10": 0.04893522960086115,
+        "fresh_hit_at_10": 0.14285714285714285,
+        "head_share_at_10": 0.08045454545454546
+      },
+      "method": {
+        "name": "allecompanion executable offline mechanism",
+        "hit_at_10": 0.022727272727272728,
+        "ndcg_at_10": 0.011734269348703004,
+        "fresh_hit_at_10": 0.015873015873015872,
+        "head_share_at_10": 0.07090909090909091
+      },
+      "relative": {
+        "hit_at_10_percent": -77.27272727272727,
+        "ndcg_at_10_percent": -76.02081477002714,
+        "fresh_hit_at_10_percent": -88.88888888888889,
+        "head_share_at_10_percent": -11.864406779661024
+      },
+      "stages": {
+        "finite_scores": 360,
+        "baseline_training": {
+          "steps": 80,
+          "first_loss": 6.6189398765563965,
+          "last_loss": 4.5534210205078125,
+          "train_pairs": 12582,
+          "seed": 42
         },
-        {
-          "paper": {
-            "arxiv_id": "2609.05063",
-            "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-            "url": "https://arxiv.org/abs/2609.05063",
-            "organization": "Allegro.com"
-          },
-          "dataset": {
-            "name": "MovieLens 100K",
-            "users": 220,
-            "items": 360
-          },
-          "setup": {
-            "adapter": "allecompanion",
-            "same_split_and_candidates": true
-          },
-          "baseline": {
-            "name": "transition + content + popularity",
-            "hit_at_10": 0.10909090909090909,
-            "ndcg_at_10": 0.05400546778896325,
-            "fresh_hit_at_10": 0.031746031746031744,
-            "head_share_at_10": 0.23772727272727273
-          },
-          "method": {
-            "name": "allecompanion core mechanism (validation blend=0.2)",
-            "hit_at_10": 0.1,
-            "ndcg_at_10": 0.05066080594607861,
-            "fresh_hit_at_10": 0.047619047619047616,
-            "head_share_at_10": 0.17954545454545454
-          },
-          "relative": {
-            "hit_at_10_percent": -8.333333333333325,
-            "ndcg_at_10_percent": -6.193191133821028,
-            "fresh_hit_at_10_percent": 50.0,
-            "head_share_at_10_percent": -24.474187380497135
-          },
-          "stages": {
-            "finite_scores": 360,
-            "mechanism_paths": 3
-          },
-          "paper_results": {
-            "web_organic_gmv_lift_percent": 8.05,
-            "app_organic_gmv_lift_percent": 9.35,
-            "web_cart_gmv_lift_percent": 21.25,
-            "app_cart_gmv_lift_percent": 15.73
-          },
-          "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上系统。",
-          "manifest_ref": "reproduction:allecompanion",
-          "runtime": {
-            "requested_device": "cpu",
-            "cpu_threads": null,
-            "platform": "Darwin arm64",
-            "resolved_device": "cpu",
-            "torch_version": "2.13.0",
-            "accelerator": "arm"
-          },
-          "seed": 43,
-          "schema_version": 2,
-          "manifest": {
-            "adapter_key": "allecompanion",
-            "arxiv_id": "2609.05063",
-            "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-            "paper_url": "https://arxiv.org/abs/2609.05063",
-            "track": "recommendation",
-            "organization": "Allegro.com",
-            "published": "2026-09-04",
-            "code_url": null,
-            "topics": [
-              "complementary-recommendation",
-              "two-tower",
-              "category-adapter",
-              "e-commerce"
-            ],
-            "local_code_dir": "src/auto_research/reproductions/allecompanion",
-            "fidelity": "core_mechanism",
-            "evaluation_tier": "l2_public_dataset",
-            "datasets": [
-              "MovieLens 100K"
-            ],
-            "baseline": "transition + content + popularity",
-            "metrics": [
-              "hit_at_10",
-              "ndcg_at_10",
-              "fresh_hit_at_10",
-              "head_share_at_10"
-            ],
-            "default_seeds": [
-              42,
-              43,
-              44
-            ],
-            "budget": "220 users / 360 items; validation-only blend selection",
-            "device_capabilities": [
-              "cpu"
-            ],
-            "requires_gpu_validation": false,
-            "gpu_validation_artifact": null,
-            "online_evidence": [
-              {
-                "product": "Allegro product and cart placements",
-                "metric": "attributed GMV",
-                "lift_percent": 21.25,
-                "traffic": "two-week tests routed over 100% platform traffic",
-                "source_url": "https://arxiv.org/html/2609.05063",
-                "source_location": "Section 4.4, Table 5",
-                "experiment_duration": "two weeks",
-                "retrieved_at": "2026-09-07"
-              }
-            ],
-            "selection_exception": null,
-            "evolve_operators": [
-              "context:complementary-category-adapter"
-            ]
-          },
-          "provenance": {
-            "created_at": "2026-09-07T08:31:05.853539+00:00",
-            "code_commit": "f00cb330ae68d2de0253511148e7116708171291",
-            "python": "3.12.9",
-            "platform": "macOS-26.5.2-arm64-arm-64bit",
-            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
-            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
-            "packages": {
-              "auto-research": "0.1.0",
-              "numpy": "2.5.2",
-              "torch": "2.13.0",
-              "transformers": "5.14.1"
-            }
-          },
-          "evaluation_protocol": {
-            "tier": "l2_public_dataset",
-            "tier_label": "L2 公开数据集训练",
-            "seeds": [
-              43
-            ],
-            "budget": "paper-specific",
-            "formal_comparison": false,
-            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
-          }
-        },
-        {
-          "paper": {
-            "arxiv_id": "2609.05063",
-            "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-            "url": "https://arxiv.org/abs/2609.05063",
-            "organization": "Allegro.com"
-          },
-          "dataset": {
-            "name": "MovieLens 100K",
-            "users": 220,
-            "items": 360
-          },
-          "setup": {
-            "adapter": "allecompanion",
-            "same_split_and_candidates": true
-          },
-          "baseline": {
-            "name": "transition + content + popularity",
-            "hit_at_10": 0.10909090909090909,
-            "ndcg_at_10": 0.05400546778896325,
-            "fresh_hit_at_10": 0.031746031746031744,
-            "head_share_at_10": 0.23772727272727273
-          },
-          "method": {
-            "name": "allecompanion core mechanism (validation blend=0.2)",
-            "hit_at_10": 0.1,
-            "ndcg_at_10": 0.05066080594607861,
-            "fresh_hit_at_10": 0.047619047619047616,
-            "head_share_at_10": 0.17954545454545454
-          },
-          "relative": {
-            "hit_at_10_percent": -8.333333333333325,
-            "ndcg_at_10_percent": -6.193191133821028,
-            "fresh_hit_at_10_percent": 50.0,
-            "head_share_at_10_percent": -24.474187380497135
-          },
-          "stages": {
-            "finite_scores": 360,
-            "mechanism_paths": 3
-          },
-          "paper_results": {
-            "web_organic_gmv_lift_percent": 8.05,
-            "app_organic_gmv_lift_percent": 9.35,
-            "web_cart_gmv_lift_percent": 21.25,
-            "app_cart_gmv_lift_percent": 15.73
-          },
-          "scope": "公开 MovieLens 上的核心机制验证；不复刻私有日志、生产 checkpoint 或线上系统。",
-          "manifest_ref": "reproduction:allecompanion",
-          "runtime": {
-            "requested_device": "cpu",
-            "cpu_threads": null,
-            "platform": "Darwin arm64",
-            "resolved_device": "cpu",
-            "torch_version": "2.13.0",
-            "accelerator": "arm"
-          },
-          "seed": 44,
-          "schema_version": 2,
-          "manifest": {
-            "adapter_key": "allecompanion",
-            "arxiv_id": "2609.05063",
-            "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
-            "paper_url": "https://arxiv.org/abs/2609.05063",
-            "track": "recommendation",
-            "organization": "Allegro.com",
-            "published": "2026-09-04",
-            "code_url": null,
-            "topics": [
-              "complementary-recommendation",
-              "two-tower",
-              "category-adapter",
-              "e-commerce"
-            ],
-            "local_code_dir": "src/auto_research/reproductions/allecompanion",
-            "fidelity": "core_mechanism",
-            "evaluation_tier": "l2_public_dataset",
-            "datasets": [
-              "MovieLens 100K"
-            ],
-            "baseline": "transition + content + popularity",
-            "metrics": [
-              "hit_at_10",
-              "ndcg_at_10",
-              "fresh_hit_at_10",
-              "head_share_at_10"
-            ],
-            "default_seeds": [
-              42,
-              43,
-              44
-            ],
-            "budget": "220 users / 360 items; validation-only blend selection",
-            "device_capabilities": [
-              "cpu"
-            ],
-            "requires_gpu_validation": false,
-            "gpu_validation_artifact": null,
-            "online_evidence": [
-              {
-                "product": "Allegro product and cart placements",
-                "metric": "attributed GMV",
-                "lift_percent": 21.25,
-                "traffic": "two-week tests routed over 100% platform traffic",
-                "source_url": "https://arxiv.org/html/2609.05063",
-                "source_location": "Section 4.4, Table 5",
-                "experiment_duration": "two weeks",
-                "retrieved_at": "2026-09-07"
-              }
-            ],
-            "selection_exception": null,
-            "evolve_operators": [
-              "context:complementary-category-adapter"
-            ]
-          },
-          "provenance": {
-            "created_at": "2026-09-07T08:31:06.123186+00:00",
-            "code_commit": "f00cb330ae68d2de0253511148e7116708171291",
-            "python": "3.12.9",
-            "platform": "macOS-26.5.2-arm64-arm-64bit",
-            "dataset_dir": "/Users/bytedance/Documents/git_daiwk/auto-research/data",
-            "dataset_fingerprint": "e66c261317a7b3179720ef3e3f5f79d7a204b135d1f217e2911b153ad2ce50a0",
-            "packages": {
-              "auto-research": "0.1.0",
-              "numpy": "2.5.2",
-              "torch": "2.13.0",
-              "transformers": "5.14.1"
-            }
-          },
-          "evaluation_protocol": {
-            "tier": "l2_public_dataset",
-            "tier_label": "L2 公开数据集训练",
-            "seeds": [
-              44
-            ],
-            "budget": "paper-specific",
-            "formal_comparison": false,
-            "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
-          }
-        }
-      ],
-      "aggregate_metrics": {
-        "dataset.users": {
-          "mean": 220.0,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "dataset.items": {
-          "mean": 360.0,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "baseline.hit_at_10": {
-          "mean": 0.10909090909090909,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "baseline.ndcg_at_10": {
-          "mean": 0.05400546778896325,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "baseline.fresh_hit_at_10": {
-          "mean": 0.031746031746031744,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "baseline.head_share_at_10": {
-          "mean": 0.2377272727272727,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "method.hit_at_10": {
-          "mean": 0.10000000000000002,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "method.ndcg_at_10": {
-          "mean": 0.05066080594607861,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "method.fresh_hit_at_10": {
-          "mean": 0.047619047619047616,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "method.head_share_at_10": {
-          "mean": 0.17954545454545454,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "relative.hit_at_10_percent": {
-          "mean": -8.333333333333325,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "relative.ndcg_at_10_percent": {
-          "mean": -6.193191133821028,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "relative.fresh_hit_at_10_percent": {
-          "mean": 50.0,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "relative.head_share_at_10_percent": {
-          "mean": -24.47418738049713,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "stages.finite_scores": {
-          "mean": 360.0,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "stages.mechanism_paths": {
-          "mean": 3.0,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "paper_results.web_organic_gmv_lift_percent": {
-          "mean": 8.05,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "paper_results.app_organic_gmv_lift_percent": {
-          "mean": 9.35,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "paper_results.web_cart_gmv_lift_percent": {
-          "mean": 21.25,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
-        },
-        "paper_results.app_cart_gmv_lift_percent": {
-          "mean": 15.729999999999999,
-          "std": 0.0,
-          "ci95": 0.0,
-          "n": 3
+        "method_training": {
+          "steps": 80,
+          "first_loss": 8.152290344238281,
+          "last_loss": 2.7733588218688965,
+          "train_pairs": 12582,
+          "seed": 42
         }
       },
-      "formal_comparison": true
+      "paper_results": {
+        "web_organic_gmv_lift_percent": 8.05,
+        "app_organic_gmv_lift_percent": 9.35,
+        "web_cart_gmv_lift_percent": 21.25,
+        "app_cart_gmv_lift_percent": 15.73
+      },
+      "scope": "CPU 小型机制验证：MovieLens 邻接关系不等于商品互补性；AutoLR 仅执行预定义候选的离线控制，不包含 LLM 调研/代码生成或线上发布。",
+      "manifest_ref": "reproduction:allecompanion"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.05063",
+        "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+        "url": "https://arxiv.org/abs/2609.05063",
+        "organization": "Allegro.com"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "allecompanion",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "shared two-tower without category adapter",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.044183263072872216,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.08818181818181818
+      },
+      "method": {
+        "name": "allecompanion executable offline mechanism",
+        "hit_at_10": 0.05909090909090909,
+        "ndcg_at_10": 0.02454929435725856,
+        "fresh_hit_at_10": 0.1111111111111111,
+        "head_share_at_10": 0.03727272727272727
+      },
+      "relative": {
+        "hit_at_10_percent": -38.095238095238095,
+        "ndcg_at_10_percent": -44.437570586923414,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -57.7319587628866
+      },
+      "stages": {
+        "finite_scores": 360,
+        "baseline_training": {
+          "steps": 80,
+          "first_loss": 6.109635353088379,
+          "last_loss": 4.635900497436523,
+          "train_pairs": 12582,
+          "seed": 43
+        },
+        "method_training": {
+          "steps": 80,
+          "first_loss": 9.109804153442383,
+          "last_loss": 2.8505043983459473,
+          "train_pairs": 12582,
+          "seed": 43
+        }
+      },
+      "paper_results": {
+        "web_organic_gmv_lift_percent": 8.05,
+        "app_organic_gmv_lift_percent": 9.35,
+        "web_cart_gmv_lift_percent": 21.25,
+        "app_cart_gmv_lift_percent": 15.73
+      },
+      "scope": "CPU 小型机制验证：MovieLens 邻接关系不等于商品互补性；AutoLR 仅执行预定义候选的离线控制，不包含 LLM 调研/代码生成或线上发布。",
+      "manifest_ref": "reproduction:allecompanion"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.05063",
+        "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+        "url": "https://arxiv.org/abs/2609.05063",
+        "organization": "Allegro.com"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "allecompanion",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "shared two-tower without category adapter",
+        "hit_at_10": 0.08636363636363636,
+        "ndcg_at_10": 0.050441245423048425,
+        "fresh_hit_at_10": 0.12698412698412698,
+        "head_share_at_10": 0.08136363636363636
+      },
+      "method": {
+        "name": "allecompanion executable offline mechanism",
+        "hit_at_10": 0.06818181818181818,
+        "ndcg_at_10": 0.03669891000926487,
+        "fresh_hit_at_10": 0.09523809523809523,
+        "head_share_at_10": 0.11272727272727273
+      },
+      "relative": {
+        "hit_at_10_percent": -21.052631578947373,
+        "ndcg_at_10_percent": -27.244242878079667,
+        "fresh_hit_at_10_percent": -25.0,
+        "head_share_at_10_percent": 38.54748603351956
+      },
+      "stages": {
+        "finite_scores": 360,
+        "baseline_training": {
+          "steps": 80,
+          "first_loss": 6.600045204162598,
+          "last_loss": 4.649892330169678,
+          "train_pairs": 12582,
+          "seed": 44
+        },
+        "method_training": {
+          "steps": 80,
+          "first_loss": 9.005352020263672,
+          "last_loss": 2.8096840381622314,
+          "train_pairs": 12582,
+          "seed": 44
+        }
+      },
+      "paper_results": {
+        "web_organic_gmv_lift_percent": 8.05,
+        "app_organic_gmv_lift_percent": 9.35,
+        "web_cart_gmv_lift_percent": 21.25,
+        "app_cart_gmv_lift_percent": 15.73
+      },
+      "scope": "CPU 小型机制验证：MovieLens 邻接关系不等于商品互补性；AutoLR 仅执行预定义候选的离线控制，不包含 LLM 调研/代码生成或线上发布。",
+      "manifest_ref": "reproduction:allecompanion"
     }
+  ],
+  "aggregate_metrics": {
+    "hit_at_10_mean": 0.049999999999999996,
+    "hit_at_10_std": 0.02405228464604173,
+    "ndcg_at_10_mean": 0.02432749123840881,
+    "ndcg_at_10_std": 0.01248379823192418,
+    "fresh_hit_at_10_mean": 0.07407407407407407,
+    "fresh_hit_at_10_std": 0.05102460720102092,
+    "head_share_at_10_mean": 0.07363636363636364,
+    "head_share_at_10_std": 0.03780113252053053
   },
   "manifest_ref": "reproduction:allecompanion",
   "evaluation_protocol": {
-    "tier": "l2_public_dataset",
+    "tier": "l1_mechanism",
     "seeds": [
       42,
       43,
       44
     ],
-    "formal_comparison": true,
-    "claim_policy": "formal multi-seed comparison"
+    "formal_comparison": false,
+    "claim_policy": "CPU mechanism diagnostic; no production or LLM capability claim"
   },
   "provenance": {
+    "commit": "c943542b7685e4f24af8e4fce3a3b0f6f5df4b2b",
     "artifact_path": "docs/reproductions/2609.05063-allecompanion/metrics/movielens-100k-seeds42-44.json",
-    "dataset_fingerprint": "not recorded in historical artifact"
-  }
+    "dataset_fingerprint": "b9913d93c70ffb6e98ee4e42085e312272b749fd4322d9c66eba02335eff8209",
+    "command": "PYTHONPATH=src python scripts/regenerate_sep7_fidelity.py"
+  },
+  "correction": "Previous heuristic/oracle-based result withdrawn; this artifact executes corrected paths."
 }

@@ -1,6 +1,6 @@
 # CoSkill：推理 Agent 与元技能 Agent 的联合强化学习
 
-> **复现级别：层级技能协同 mini-suite。** 实现任务技能、子步骤技能与交替协同更新的可观测状态。
+> **复现级别：层级技能与联合损失算子。** 实现私有编辑、执行验证后晋级及共享参数双角色可微目标；不是完整 GiGPO/VERL 大模型训练复现。
 
 ## 论文信息
 
@@ -47,9 +47,15 @@ flowchart LR
 
 ## 本地复现
 
+### 2026-09-08 保真度更正
+
+旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。新 legacy 结果仅是公开文本格式解析诊断，即使为 1 也不是 Agent 能力；cost 是读取记录数，不是实际工具费用。
+
+实际算子位置：[`sep7_mechanisms.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/agent_research/sep7_mechanisms.py)。运行 `python -m pytest tests/test_sep7_fidelity.py -q` 检查记忆路径、私有技能编辑、拒绝后状态不变、组间信用差异与反向传播。独立算子不能被当作已集成完整 LLM、真实工具环境或端到端 evolve 的证明。
+
 seeds 42/43/44 的任务/步骤技能检索、技能创建与复用、协同交替次数和成本见 [`metrics/mini-suite-seeds42-44.json`](metrics/mini-suite-seeds42-44.json)。
 
-> **本地对照口径**：本地验证跨 episode 的层级技能状态确实演化，不复刻 LLM 强化学习或论文 benchmark 分数。
+> **本地对照口径**：legacy mini-suite 仅暂存公开观察中的程序，不把存储动作记作策略训练。独立回归测试验证编辑隔离、拒绝无收益编辑和双角色梯度；不复刻论文 benchmark 分数。
 
 ## 复现边界
 

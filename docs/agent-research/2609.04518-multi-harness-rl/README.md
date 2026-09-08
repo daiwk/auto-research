@@ -1,6 +1,6 @@
 # Multi-Harness RL：训练收益究竟来自策略还是执行 Harness
 
-> **复现级别：分组与可迁移性审计 mini-suite。** 显式区分 within-harness、cross-harness advantage 和 held-out harness。
+> **复现级别：CPU 分组信用与可微训练算子。** 在相同 rollout 上计算 task×harness 与 task 两种标准化优势；尚不包含真实编码 Agent 的 held-out harness 迁移实验。
 
 ## 论文信息
 
@@ -46,6 +46,12 @@ Within 在每个 $(task,harness)$ 内标准化 reward；Cross 在同一 task 的
 24,000 次 sealed SWE-bench Verified 评估中，评测 harness 令平均解决率从 2.14% 变化到 9.27%，而训练配方影响小得多；held-out 上 Cross-Within 仅 +0.25pp，95% CI 为 [-0.48,+1.02]。
 
 ## 本地复现
+
+### 2026-09-08 保真度更正
+
+旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。新 legacy 结果仅是公开文本格式解析诊断，即使为 1 也不是 Agent 能力；cost 是读取记录数，不是实际工具费用。
+
+实际算子位置：[`sep7_mechanisms.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/agent_research/sep7_mechanisms.py)。运行 `python -m pytest tests/test_sep7_fidelity.py -q` 检查记忆路径、私有技能编辑、拒绝后状态不变、组间信用差异与反向传播。独立算子不能被当作已集成完整 LLM、真实工具环境或端到端 evolve 的证明。
 
 seeds 42/43/44 的 within/cross 分组、held-out 审计、rolewise update 与成本见 [`metrics/mini-suite-seeds42-44.json`](metrics/mini-suite-seeds42-44.json)。
 

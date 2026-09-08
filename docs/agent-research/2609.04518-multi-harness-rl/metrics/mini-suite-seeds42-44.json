@@ -15,7 +15,7 @@
         "answer_accuracy": 1.0,
         "plan_success": 1.0,
         "joint_success": 1.0,
-        "average_cost": 0.34000000000000064
+        "average_cost": 5.0
       },
       "axis_metrics": {
         "in_episode_knowledge": 1.0,
@@ -114,7 +114,7 @@
         "success_failure_contrasts": 0,
         "privileged_guidance_updates": 0,
         "world_rehearsals": 0,
-        "rolewise_advantage_updates": 240,
+        "rolewise_advantage_updates": 0,
         "private_rehearsals": 0,
         "recursive_belief_updates": 0,
         "pivotal_turns": 0,
@@ -126,7 +126,7 @@
         "coevolution_alternations": 0,
         "router_updates": 0,
         "memory_bank_updates": 0,
-        "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
+        "fidelity": "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration",
         "harness_generations": 0,
         "harness_repairs": 0,
         "archive_distillations": 0,
@@ -161,148 +161,152 @@
         "shadow_executions": 0,
         "product_order_admissions": 0,
         "unsafe_scalar_rejections": 0,
-        "within_harness_groups": 120,
-        "cross_harness_groups": 120,
-        "heldout_harness_evaluations": 40
+        "within_harness_groups": 0,
+        "cross_harness_groups": 0,
+        "heldout_harness_evaluations": 0,
+        "gold_fields_available_to_policy": false,
+        "tool_execution_performed": false,
+        "policy_training_performed": false,
+        "cost_unit": "public records inspected"
       },
       "trace": [
         {
           "task_id": "evomem-mini-0000",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0001",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0002",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0003",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0004",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0005",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0006",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0007",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0008",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0009",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0010",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0011",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0012",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0013",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0014",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0015",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0016",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0017",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0018",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0019",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         }
@@ -315,7 +319,7 @@
         "answer_accuracy": 1.0,
         "plan_success": 1.0,
         "joint_success": 1.0,
-        "average_cost": 0.34000000000000064
+        "average_cost": 5.0
       },
       "axis_metrics": {
         "in_episode_knowledge": 1.0,
@@ -414,7 +418,7 @@
         "success_failure_contrasts": 0,
         "privileged_guidance_updates": 0,
         "world_rehearsals": 0,
-        "rolewise_advantage_updates": 240,
+        "rolewise_advantage_updates": 0,
         "private_rehearsals": 0,
         "recursive_belief_updates": 0,
         "pivotal_turns": 0,
@@ -426,7 +430,7 @@
         "coevolution_alternations": 0,
         "router_updates": 0,
         "memory_bank_updates": 0,
-        "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
+        "fidelity": "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration",
         "harness_generations": 0,
         "harness_repairs": 0,
         "archive_distillations": 0,
@@ -461,148 +465,152 @@
         "shadow_executions": 0,
         "product_order_admissions": 0,
         "unsafe_scalar_rejections": 0,
-        "within_harness_groups": 120,
-        "cross_harness_groups": 120,
-        "heldout_harness_evaluations": 40
+        "within_harness_groups": 0,
+        "cross_harness_groups": 0,
+        "heldout_harness_evaluations": 0,
+        "gold_fields_available_to_policy": false,
+        "tool_execution_performed": false,
+        "policy_training_performed": false,
+        "cost_unit": "public records inspected"
       },
       "trace": [
         {
           "task_id": "evomem-mini-0000",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0001",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0002",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0003",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0004",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0005",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0006",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0007",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0008",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0009",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0010",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0011",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0012",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0013",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0014",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0015",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0016",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0017",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0018",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0019",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         }
@@ -615,7 +623,7 @@
         "answer_accuracy": 1.0,
         "plan_success": 1.0,
         "joint_success": 1.0,
-        "average_cost": 0.34000000000000064
+        "average_cost": 5.0
       },
       "axis_metrics": {
         "in_episode_knowledge": 1.0,
@@ -714,7 +722,7 @@
         "success_failure_contrasts": 0,
         "privileged_guidance_updates": 0,
         "world_rehearsals": 0,
-        "rolewise_advantage_updates": 240,
+        "rolewise_advantage_updates": 0,
         "private_rehearsals": 0,
         "recursive_belief_updates": 0,
         "pivotal_turns": 0,
@@ -726,7 +734,7 @@
         "coevolution_alternations": 0,
         "router_updates": 0,
         "memory_bank_updates": 0,
-        "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
+        "fidelity": "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration",
         "harness_generations": 0,
         "harness_repairs": 0,
         "archive_distillations": 0,
@@ -761,154 +769,168 @@
         "shadow_executions": 0,
         "product_order_admissions": 0,
         "unsafe_scalar_rejections": 0,
-        "within_harness_groups": 120,
-        "cross_harness_groups": 120,
-        "heldout_harness_evaluations": 40
+        "within_harness_groups": 0,
+        "cross_harness_groups": 0,
+        "heldout_harness_evaluations": 0,
+        "gold_fields_available_to_policy": false,
+        "tool_execution_performed": false,
+        "policy_training_performed": false,
+        "cost_unit": "public records inspected"
       },
       "trace": [
         {
           "task_id": "evomem-mini-0000",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0001",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0002",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0003",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0004",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0005",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0006",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0007",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0008",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0009",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0010",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0011",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0012",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0013",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0014",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0015",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0016",
           "axis": "in_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0017",
           "axis": "cross_episode_knowledge",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0018",
           "axis": "in_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         },
         {
           "task_id": "evomem-mini-0019",
           "axis": "cross_episode_execution",
-          "source": "within-cross-credit/heldout-harness-audit",
+          "source": "public-fixture-parser; no-tool-execution-or-training",
           "answer_correct": true,
           "plan_correct": true
         }
       ]
     }
   ],
+  "aggregate_metrics": {
+    "answer_accuracy_mean": 1.0,
+    "answer_accuracy_std": 0.0,
+    "plan_success_mean": 1.0,
+    "plan_success_std": 0.0,
+    "joint_success_mean": 1.0,
+    "joint_success_std": 0.0,
+    "average_cost_mean": 5.0,
+    "average_cost_std": 0.0
+  },
   "manifest_ref": "agent-research:evomem-mini-seeds42-44",
   "evaluation_protocol": {
     "tier": "l1_mechanism",
@@ -918,10 +940,13 @@
       44
     ],
     "formal_comparison": false,
-    "claim_policy": "mechanism counters, not benchmark capability"
+    "claim_policy": "CPU mechanism diagnostic; no production or LLM capability claim"
   },
   "provenance": {
+    "commit": "c943542b7685e4f24af8e4fce3a3b0f6f5df4b2b",
     "artifact_path": "docs/agent-research/2609.04518-multi-harness-rl/metrics/mini-suite-seeds42-44.json",
-    "dataset_fingerprint": "not recorded in historical artifact"
-  }
+    "dataset_fingerprint": "evomem-mini-generator-seeds42-44-120-episodes",
+    "command": "PYTHONPATH=src python scripts/regenerate_sep7_fidelity.py"
+  },
+  "correction": "Previous heuristic/oracle-based result withdrawn; this artifact executes corrected paths."
 }

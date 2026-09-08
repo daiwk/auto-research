@@ -21,7 +21,7 @@
   "datasets": [
     "MovieLens 100K"
   ],
-  "baseline": "transition + content + popularity",
+  "baseline": "shared two-tower without category adapter",
   "metrics": [
     "hit_at_10",
     "ndcg_at_10",
@@ -31,7 +31,8 @@
   "mechanisms": [
     "private 90-day Allegro transaction log",
     "production Faiss index",
-    "ComCat expert rules"
+    "ComCat expert/LLM mapping",
+    "product complementarity benchmark; MovieLens is a structural diagnostic"
   ],
   "evolve_operators": [
     "context:complementary-category-adapter"

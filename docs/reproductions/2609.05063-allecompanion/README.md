@@ -1,6 +1,6 @@
 # AlleCompanion：从共购噪声中学习互补商品推荐
 
-> **复现级别：公开数据上的核心机制 mini-suite。** 实现类别约束双塔、Category Adapter 与互补类别映射的组合打分。
+> **复现级别：CPU 可训练检索核心。** 共享内容/类别编码器、Category Adapter、混合负样本检索损失和类别重建损失均参与反向传播。MovieLens 邻接关系不是商品互补性，不声称复现 ComCat 或线上效果。
 
 ## 论文信息
 
@@ -45,6 +45,8 @@ flowchart LR
 论文报告在 Allegro 全量平台流量上运行两周：Web/App 自然流量归因 GMV 分别提升 8.05%/9.35%，购物车场景分别提升 21.25%/15.73%，并服务每月超过 2,000 万活跃用户。
 
 ## 本地复现
+
+2026-09-08 更正：旧版固定加权打分结果作废。实际模型在 `src/auto_research/reproductions/sep7_models.py` 的 `CategoryTwoTower`，每个 seed 训练 80 步，对照组为同预算无 Category Adapter 双塔。只使用 train 邻接对；推理对所有候选类别分别计算，不读取测试目标类别。使用 `PYTHONPATH=src python scripts/regenerate_sep7_fidelity.py` 重跑三 seed 诊断。
 
 MovieLens 公开数据、seeds 42/43/44 的 NDCG、Recall、类别一致性与运行配置见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
 
