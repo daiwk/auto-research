@@ -401,7 +401,7 @@ def test_micro_llm_config_uses_wikitext_benchmark():
 def test_post_training_uses_unified_multiround_controller(tmp_path):
     config = EvolutionConfig(
         model="post-training",
-        dataset="arithmetic-smoke",
+        dataset="arithmetic-generate",
         direction="组合比较 GRPO、DPO 与学习率和 group size",
         output_dir=tmp_path / "runs",
         generations=2,
@@ -421,7 +421,7 @@ def test_post_training_uses_unified_multiround_controller(tmp_path):
     assert "accuracy=" in (run_dir / "index.html").read_text(encoding="utf-8")
 
 
-def test_agent_components_form_composable_multiround_genomes(tmp_path):
+def test_legacy_agent_fixture_cannot_form_promoted_genomes(tmp_path):
     config = EvolutionConfig(
         model="agent",
         dataset="evomem-mini",
@@ -434,27 +434,10 @@ def test_agent_components_form_composable_multiround_genomes(tmp_path):
         agent_episodes=24,
         allow_network=False,
     )
-    result, run_dir = ModelEvolutionEngine(config, project_dir=tmp_path).run()
-    assert len(result.rounds) == 2
-    assert result.papers
-    first_round = [trial for trial in result.trials if trial.generation == 1]
-    assert any(trial.genome.agent_memory != "none" for trial in first_round)
-    assert any(trial.genome.agent_planner != "long-context" for trial in first_round)
-    combined = [trial for trial in result.trials if trial.generation == 2]
-    assert combined and any(
-        sum(
-            (
-                trial.genome.agent_memory != "none",
-                trial.genome.agent_planner != "long-context",
-                trial.genome.agent_tool_policy != "direct",
-                trial.genome.agent_critic != "none",
-            )
-        ) >= 2
-        for trial in combined
-    )
-    report = (run_dir / "report.md").read_text(encoding="utf-8")
-    assert "memory=`" in report and "tool policy=`" in report
-    assert "success=" in (run_dir / "index.html").read_text(encoding="utf-8")
+    import pytest
+
+    with pytest.raises(ValueError, match="Diagnostic evaluator cannot select"):
+        ModelEvolutionEngine(config, project_dir=tmp_path).run()
 
 
 def test_agent_l21_evolve_selects_on_validation_and_tests_once(tmp_path):
@@ -485,6 +468,10 @@ def test_agent_l21_evolve_selects_on_validation_and_tests_once(tmp_path):
     assert "plan_step_f1" in result.champion_test
     assert len(result.rounds) == 2
     assert all(round_["hypotheses"] for round_ in result.rounds)
+    assert all(trial.status == "completed" for trial in result.trials)
+    assert any(trial.genome.agent_memory == "lookup" for trial in result.trials)
+    assert any(trial.genome.agent_planner == "safe" for trial in result.trials)
+    assert result.dataset_summary["unresolved_paper_operators"]
     report = (run_dir / "report.md").read_text(encoding="utf-8")
     assert "toolroute-l2.1" in report
 

@@ -71,7 +71,18 @@ class ModelEvolutionEngine:
                     )
                 )
         evaluator = self.evaluator or _make_evaluator(config, self.project_dir)
+        if hasattr(evaluator, "bind_run_directory"):
+            evaluator.bind_run_directory(run_dir)
         result.dataset_summary = evaluator.summary() if hasattr(evaluator, "summary") else {}
+        if (
+            result.dataset_summary.get("diagnostic_only", False)
+            or result.dataset_summary.get("promotion_eligible") is False
+        ):
+            raise ValueError(
+                "Diagnostic evaluator cannot select an evolve champion. "
+                "Run the fixture separately or choose an independently "
+                "evaluated capability benchmark."
+            )
         baseline_genome = provider.baseline_factory(config)
         if result.trials:
             baseline = result.trials[0]
@@ -89,6 +100,10 @@ class ModelEvolutionEngine:
         rng = random.Random(config.seeds[0])
         seen = {_fingerprint(trial.genome) for trial in result.trials}
         architectures = allowed_architectures(config.model, config.direction, papers)
+        proposal_fn = getattr(evaluator, "propose", propose)
+        if getattr(evaluator, "executable_operators", ()):
+            result.dataset_summary["unresolved_paper_operators"] = list(architectures)
+            architectures = list(evaluator.executable_operators)
         checkpoint_records = load_checkpoint_evidence(tuple(
             path if path.is_absolute() else (self.project_dir / path).resolve()
             for path in config.checkpoint_evidence
@@ -128,10 +143,10 @@ class ModelEvolutionEngine:
                 trial_id = f"g{generation}-t{index + 1}"
                 if trial_id in existing_ids:
                     continue
-                genome, rationale = propose(parent.genome, generation, index, architectures, rng, config.model)
+                genome, rationale = proposal_fn(parent.genome, generation, index, architectures, rng, config.model)
                 attempts = 0
                 while _fingerprint(genome) in seen and attempts < 20:
-                    genome, rationale = propose(parent.genome, generation, index + attempts + 1, architectures, rng, config.model)
+                    genome, rationale = proposal_fn(parent.genome, generation, index + attempts + 1, architectures, rng, config.model)
                     attempts += 1
                 if _fingerprint(genome) in seen:
                     continue
@@ -376,6 +391,13 @@ def _collect_with_deadlines(submitted, timeout_seconds):
 
 
 def _selection_score(trial, config: EvolutionConfig) -> float:
+    if (
+        trial.status != "completed"
+        or trial.training.get("diagnostic_only", False)
+        or trial.training.get("promotion_eligible") is False
+        or trial.validation.get("diagnostic_only", False)
+    ):
+        return float("-inf")
     seed_count = len(trial.training.get("seeds", config.seeds))
     if seed_count < config.promotion_min_seeds:
         return -1e30

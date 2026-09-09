@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:allecompanion",
+  "method": "allecompanion",
+  "dataset": {
+    "name": "Amazon Beauty 2014 5-core",
+    "users": 1000,
+    "items": 2000,
+    "categories": 183,
+    "revision": "sha256:e5925ec99023f1dc9c7d3dff7ef34cfeacd40d1b981b5525e1e4ba9c8abc18fe"
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "baseline": {
+        "validation_hit_at_10": 0.072,
+        "validation_ndcg_at_10": 0.03818202268167949,
+        "test_hit_at_10": 0.074,
+        "test_ndcg_at_10": 0.042644062612898916
+      },
+      "method": {
+        "validation_hit_at_10": 0.008,
+        "validation_ndcg_at_10": 0.00475629276112497,
+        "test_hit_at_10": 0.004,
+        "test_ndcg_at_10": 0.001391413448285032
+      }
+    },
+    {
+      "seed": 43,
+      "baseline": {
+        "validation_hit_at_10": 0.077,
+        "validation_ndcg_at_10": 0.04069240958238991,
+        "test_hit_at_10": 0.076,
+        "test_ndcg_at_10": 0.04079896740791593
+      },
+      "method": {
+        "validation_hit_at_10": 0.007,
+        "validation_ndcg_at_10": 0.0026835992480426234,
+        "test_hit_at_10": 0.003,
+        "test_ndcg_at_10": 0.00093786303643695
+      }
+    },
+    {
+      "seed": 44,
+      "baseline": {
+        "validation_hit_at_10": 0.076,
+        "validation_ndcg_at_10": 0.04505055818683816,
+        "test_hit_at_10": 0.082,
+        "test_ndcg_at_10": 0.043105888830079674
+      },
+      "method": {
+        "validation_hit_at_10": 0.008,
+        "validation_ndcg_at_10": 0.003272010833408763,
+        "test_hit_at_10": 0.009,
+        "test_ndcg_at_10": 0.004915132462570863
+      }
+    }
+  ],
+  "training": {
+    "steps": 200,
+    "same_budget": true,
+    "split": "chronological last-two; catalog from train counts only",
+    "diagnostic_only": true,
+    "promotion_eligible": false
+  },
+  "evaluation_protocol": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "next-product substitution is not a semantic-complementarity benchmark",
+    "tier": "l2_public_dataset"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.05063-allecompanion/metrics/amazon-beauty-5core-seeds42-44.json",
+    "dataset_fingerprint": "sha256:b6f86bcc1a7be984600b23ff4b77672bfd8ca15ac3fb07af77911c2499b94d7a"
+  }
+}

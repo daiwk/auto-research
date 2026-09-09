@@ -74,16 +74,22 @@ def load_generation_suite(
             train, heldout[:middle], heldout[middle:],
             "OpenAI GSM8K official JSONL; model emits unrestricted token sequences",
         )
-    rng = random.Random(seed)
-    train = tuple(_arithmetic_example(rng, index) for index in range(maximum_examples))
-    validation = tuple(
-        _arithmetic_example(random.Random(seed + 10_000), index)
-        for index in range(max(48, maximum_examples // 3))
-    )
-    test = tuple(
-        _arithmetic_example(random.Random(seed + 20_000), index)
-        for index in range(max(48, maximum_examples // 3))
-    )
+    seen = set()
+
+    def distinct_examples(split_seed, count):
+        rng, rows = random.Random(split_seed), []
+        for attempt in range(100_000):
+            example = _arithmetic_example(rng, attempt)
+            if example.prompt not in seen:
+                seen.add(example.prompt)
+                rows.append(example)
+            if len(rows) == count:
+                return tuple(rows)
+        raise ValueError("requested arithmetic split exceeds distinct problem space")
+
+    train = distinct_examples(seed, maximum_examples)
+    validation = distinct_examples(seed + 10_000, max(48, maximum_examples // 3))
+    test = distinct_examples(seed + 20_000, max(48, maximum_examples // 3))
     return GenerationSuite(
         train, validation, test,
         "deterministic arithmetic free-generation suite with exact-answer verifier",
@@ -152,12 +158,15 @@ def train_free_generation(
 ):
     import torch
 
+    if algorithm not in {"none", "grpo", "ipo", "simpo", "luspo", "coba-rl"}:
+        raise ValueError(f"No free-generation implementation for {algorithm}")
+    if algorithm == "none" and steps != 0:
+        raise ValueError("the frozen baseline must have zero post-training steps")
     torch.manual_seed(seed)
     random.seed(seed)
     np.random.seed(seed)
-    all_examples = (*suite.train, *suite.validation, *suite.test)
     tokenizer = CharacterTokenizer(
-        [text for row in all_examples for text in (row.prompt, row.completion)]
+        [text for row in suite.train for text in (row.prompt, row.completion)]
     )
     device = device_for(torch)
     policy = build_policy(len(tokenizer)).to(device)
@@ -208,10 +217,12 @@ def train_free_generation(
             ))
         else:
             example = suite.train[rng.randrange(len(suite.train))]
-        rollouts = [
-            generate(policy, tokenizer, example.prompt, device, rng, sample=True)
+        generated_rollouts = [
+            generate(policy, tokenizer, example.prompt, device, rng, sample=True, return_tokens=True)
             for _ in range(max(2, group_size))
         ]
+        rollouts = [row[0] for row in generated_rollouts]
+        rollout_tokens = [row[1] for row in generated_rollouts]
         verified = [
             verify_completion(text, example.answer) for text in rollouts
         ]
@@ -235,6 +246,7 @@ def train_free_generation(
             loss, diagnostic = _sequence_rl_loss(
                 policy, reference, tokenizer, example.prompt, rollouts,
                 rewards, device, length_unbiased=algorithm == "luspo",
+                token_sequences=rollout_tokens,
             )
             if algorithm == "coba-rl":
                 pass_rate = float(rewards.mean())
@@ -468,7 +480,7 @@ def _simpo_loss(policy, tokenizer, prompt, chosen, rejected, device):
 
 def _sequence_rl_loss(
     policy, reference, tokenizer, prompt, outputs, rewards, device,
-    length_unbiased: bool,
+    length_unbiased: bool, token_sequences=None,
 ):
     import torch
 
@@ -476,26 +488,39 @@ def _sequence_rl_loss(
         (rewards - rewards.mean()) / (rewards.std() + 1e-6),
         dtype=torch.float32, device=device,
     )
-    logps = torch.stack([
-        _text_logprob(
-            policy, tokenizer, prompt, output, device,
-            normalize=length_unbiased,
-        )
-        for output in outputs
-    ])
-    with torch.no_grad():
-        reference_logps = torch.stack([
-            _text_logprob(
-                reference, tokenizer, prompt, output, device,
-                normalize=length_unbiased,
-            )
-            for output in outputs
-        ])
-    ratios = torch.exp(torch.clamp(logps - reference_logps, -4, 4))
-    loss = -(torch.clamp(ratios, 0.8, 1.2) * advantages * logps).mean()
+    if token_sequences is None:
+        raise ValueError("RL loss requires the actual sampled token sequences")
+    prefix = [tokenizer.bos_id, *tokenizer.encode(prompt), tokenizer.sep_id]
+    losses, kls = [], []
+    for advantage, sequence in zip(advantages, token_sequences, strict=True):
+        if not sequence:
+            raise ValueError("empty rollout token sequence")
+        tokens = torch.tensor([[*prefix, *sequence]], dtype=torch.long, device=device)
+        targets = tokens[:, 1:]
+
+        def selected(model):
+            logits, _ = model(tokens[:, :-1])
+            return logits.log_softmax(-1).gather(-1, targets.unsqueeze(-1)).squeeze(-1)[0, len(prefix) - 1:]
+
+        logps = selected(policy)
+        # A fresh rollout group receives exactly one update. The behavior
+        # snapshot equals the current policy, not the frozen KL reference.
+        old_logps = logps.detach()
+        with torch.no_grad():
+            reference_logps = selected(reference)
+        ratio = (logps - old_logps).exp()
+        surrogate = torch.minimum(ratio * advantage, ratio.clamp(.8, 1.2) * advantage)
+        delta = (reference_logps - logps).clamp(-20, 20)
+        kl = delta.exp() - delta - 1
+        token_loss = -surrogate + .02 * kl
+        losses.append(token_loss.mean() if not length_unbiased else token_loss.sum())
+        kls.append(kl.detach().mean())
+    loss = torch.stack(losses).mean()
     lengths = np.asarray([max(1, len(output)) for output in outputs])
     return loss, {
         "length_unbiased": float(length_unbiased),
+        "reference_kl": float(torch.stack(kls).mean().cpu()),
+        "behavior_policy": "fresh-on-policy-one-update",
         "mean_response_characters": float(lengths.mean()),
         "length_reward_correlation": float(
             np.corrcoef(lengths, rewards)[0, 1]
@@ -504,7 +529,7 @@ def _sequence_rl_loss(
     }
 
 
-def generate(model, tokenizer, prompt, device, rng, sample=True, max_new_tokens=48):
+def generate(model, tokenizer, prompt, device, rng, sample=True, max_new_tokens=48, return_tokens=False):
     import torch
 
     prefix = [tokenizer.bos_id, *tokenizer.encode(prompt), tokenizer.sep_id]
@@ -514,19 +539,21 @@ def generate(model, tokenizer, prompt, device, rng, sample=True, max_new_tokens=
         logits, hidden = model(tokens)
         generated = []
         for _ in range(max_new_tokens):
-            values = logits[0, -1] / 0.8
+            values = logits[0, -1]
             if sample:
                 probabilities = torch.softmax(values, -1).cpu().numpy()
                 next_id = int(rng.choices(range(len(probabilities)), weights=probabilities)[0])
             else:
                 next_id = int(values.argmax())
             if next_id == tokenizer.eos_id:
+                generated.append(next_id)
                 break
             generated.append(next_id)
             current = torch.tensor([[next_id]], dtype=torch.long, device=device)
             logits, hidden = model(current, hidden)
     model.train()
-    return tokenizer.decode(generated)
+    text = tokenizer.decode(generated)
+    return (text, tuple(generated)) if return_tokens else text
 
 
 def verify_completion(text: str, expected: str) -> tuple[float, dict[str, float]]:

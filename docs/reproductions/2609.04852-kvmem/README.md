@@ -53,6 +53,8 @@ flowchart LR
 
 CPU fixture 见 [`metrics/synthetic-workspace-seeds42-44.json`](metrics/synthetic-workspace-seeds42-44.json)；真实公开 checkpoint 的 A100 结果见 [`../../gpu-validations/kvmem-a100-20260907.json`](../../gpu-validations/kvmem-a100-20260907.json)。
 
+WikiText-2 test 的同一任务级评测完整产物见 [`metrics/wikitext2-task-a100-seed42.json`](metrics/wikitext2-task-a100-seed42.json)。完整注意力平均 NLL/accuracy 为 1.9174/0.5729，KVMem 为 2.1585/0.5677，recent-only 为 4.2391/0.3906。当前 Python KVMem 平均总耗时 77.66 秒，完整 backing cache 仍保留且峰值显存未下降；这验证实际注意力替换与任务质量，不代表生产 kernel 性能。
+
 > **本地对照口径**：基线 recent-only 与实验组 query-conditioned selection 使用相同 block 预算；相对变化见 receipt（无法计算时不适用），不声称达到原系统吞吐。
 
 ## 复现边界

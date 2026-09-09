@@ -115,6 +115,9 @@ class PostTrainingRunner:
             "rollout_policy_refreshes": rollout_policy_refreshes,
             "last_diagnostics": last_diagnostics,
             "fidelity": "mechanism reproduction on a candidate-policy model",
+            "diagnostic_only": True,
+            "promotion_eligible": False,
+            "gold_derived_candidate_set": True,
         }
         result = PostTrainingResult(
             config.algorithm, config.dataset, baseline, final, training, history

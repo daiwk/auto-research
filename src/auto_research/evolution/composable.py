@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -8,12 +9,13 @@ import numpy as np
 from ..agent_research.benchmarks import build_benchmark
 from ..post_training.algorithms import initialize, metrics, update
 from ..post_training.data import load_post_training_data
-from ..post_training.models import ALGORITHMS
 from .models import EvolutionTrial, Genome
 from .statistics import mean_with_std
 
 
 class PostTrainingEvolutionEvaluator:
+    executable_operators = ("grpo", "ipo", "simpo")
+
     def __init__(self, dataset_dir: Path, dataset: str, steps: int,
                  seeds: tuple[int, ...], allow_network: bool,
                  maximum_examples: int = 512):
@@ -24,24 +26,29 @@ class PostTrainingEvolutionEvaluator:
 
     def summary(self):
         return {
+            "diagnostic_only": not self.dataset.endswith("-generate"),
+            "promotion_eligible": self.dataset.endswith("-generate"),
+            "scope": "free generation only is eligible; gold-derived candidate policies are mechanism diagnostics",
             "dataset": self.dataset,
-            "algorithms": len(ALGORITHMS),
+            "algorithms": list(self.executable_operators),
             "seeds": list(self.seeds),
             "selection": (
                 "free-generation exact accuracy + verifier reward"
                 if self.dataset.endswith("-generate")
                 else "accuracy - 0.05 * KL(reference)"
             ),
-            "execution_axis_semantics": {
-                "effective_in_numpy_evaluator": [
-                    "algorithm", "data_recipe", "teacher", "rollout",
-                    "learning_rate", "group_size", "steps",
-                ],
-                "promotion_contract_only": [
-                    "gradient_accumulation", "mixed_precision",
-                ],
-            },
+            "execution_axis_semantics": {"effective": ["algorithm", "learning_rate", "group_size", "steps"],
+                                         "unsupported": ["teacher", "gradient_accumulation", "mixed_precision"]},
         }
+
+    def propose(self, parent, generation, index, operators, rng, model):
+        method = operators[index % len(operators)]
+        return replace(parent, post_training=method, post_steps=self.steps,
+                       learning_rate=(1e-4, 3e-4, 1e-3)[index % 3], group_size=(2, 4)[index % 2],
+                       post_data_recipe="base", post_teacher="auto", post_rollout="on-policy",
+                       gradient_accumulation=1, mixed_precision="no"), (
+            f"自由生成 objective={method}；仅调整实际执行的学习率/group size，冻结训练预算"
+        )
 
     def evaluate(self, trial_id, generation, parent_id, genome,
                  source_papers, rationale):
@@ -67,6 +74,8 @@ class PostTrainingEvolutionEvaluator:
         return EvolutionTrial(
             trial_id, generation, parent_id, genome, validation,
             {
+                "diagnostic_only": not self.dataset.endswith("-generate"),
+                "promotion_eligible": self.dataset.endswith("-generate"),
                 "seeds": list(self.seeds),
                 "fitness_by_seed": [float(row["primary"]) for row in rows],
                 "steps": int(np.mean([row["steps"] for row in training])),
@@ -83,7 +92,7 @@ class PostTrainingEvolutionEvaluator:
 
     def test(self, genome):
         rows = [
-            self._run(genome, seed + 10_000, test=True)[0]
+            self._run(genome, seed, test=True)[0]
             for seed in self.seeds
         ]
         result = _mean(rows)
@@ -96,6 +105,9 @@ class PostTrainingEvolutionEvaluator:
 
     def _run(self, genome, seed, test):
         if self.dataset.endswith("-generate"):
+            if (genome.post_data_recipe, genome.post_teacher, genome.post_rollout,
+                    genome.gradient_accumulation, genome.mixed_precision) != ("base", "auto", "on-policy", 1, "no"):
+                raise ValueError("free-generation evaluator cannot execute those recipe/teacher/system operators")
             from ..post_training.generation import (
                 load_generation_suite, train_free_generation,
             )
@@ -124,6 +136,11 @@ class PostTrainingEvolutionEvaluator:
             self.dataset, self.dataset_dir, self.allow_network,
             self.maximum_examples, seed,
         )
+        if test:
+            raise ValueError(
+                "candidate-policy diagnostic has no independent test split; "
+                "use a free-generation dataset for evolve evaluation"
+            )
         train = _post_training_recipe(data.train, genome.post_data_recipe)
         state = initialize(len(data.feature_names), train)
         if genome.post_training == "none":
@@ -186,9 +203,26 @@ class AgentEvolutionEvaluator:
                  episodes: int = 120):
         self.benchmark, self.seeds, self.episodes = benchmark, seeds, episodes
 
+    @property
+    def diagnostic_only(self):
+        # Legacy fixtures expose labels; fixed-patch code fixtures are not
+        # independently sampled checkpoint policies either.
+        return not self.benchmark.startswith("toolroute-l2")
+
+    @property
+    def executable_operators(self):
+        return (
+            "memory:lookup", "planner:safe", "tool:verified", "critic:feedback",
+            "recovery:retry", "reflection:feedback", "verifier:tool-metadata",
+            "context:compact",
+        ) if self.benchmark.startswith("toolroute-l2") else ()
+
     def summary(self):
         return {
             "benchmark": self.benchmark,
+            "diagnostic_only": self.diagnostic_only,
+            "promotion_eligible": not self.diagnostic_only,
+            "operator_scope": "generic executable routing operations; no paper-method equivalence",
             "episodes": self.episodes,
             "seeds": list(self.seeds),
             "genome_axes": [
@@ -223,6 +257,8 @@ class AgentEvolutionEvaluator:
                 "seeds": list(self.seeds),
                 "fitness_by_seed": [float(row["primary"]) for row in rows],
                 "episodes": self.episodes,
+                "diagnostic_only": self.diagnostic_only,
+                "promotion_eligible": not self.diagnostic_only,
                 "components": {
                     "memory": genome.agent_memory,
                     "planner": genome.agent_planner,

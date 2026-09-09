@@ -41,6 +41,7 @@ jobs:
       - run: python -m compileall -q src tests scripts
       - run: ruff check src tests scripts
       - run: python -m pytest
+      - run: python scripts/audit_fidelity_boundaries.py --check
       - run: python scripts/manage_paper_specs.py check
       - run: python scripts/manage_paper_specs.py validate
       - run: python scripts/generate_public_experiment_dashboard.py

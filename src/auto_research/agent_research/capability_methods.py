@@ -162,6 +162,29 @@ class CapabilityPolicy:
             "verifier": getattr(genome, "agent_verifier", "none"),
             "context": getattr(genome, "agent_context_compression", "full"),
         }
+        # These are the actual generic routing operations implemented below.
+        # A paper name must not silently become a boolean feature toggle.
+        supported = {
+            "memory": {"none", "lookup"},
+            "planner": {"long-context", "fast", "safe"},
+            "tool": {"direct", "none", "verified"},
+            "critic": {"none", "feedback"},
+            "policy": {"heuristic"},
+            "recovery": {"none", "retry", "rollback"},
+            "reflection": {"none", "feedback"},
+            "verifier": {"none", "tool-metadata"},
+            "context": {"full", "compact"},
+        }
+        unsupported = [
+            f"{axis}:{value}" for axis, value in components.items()
+            if value not in supported[axis]
+        ]
+        if unsupported:
+            raise ValueError(
+                "No executable ToolRoute genome operator for "
+                + ", ".join(unsupported)
+                + "; paper labels cannot substitute for implementations"
+            )
         return cls("genome", components=components)
 
     def freeze(self) -> None:

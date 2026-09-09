@@ -494,6 +494,9 @@ def test_free_generation_algorithms_use_token_rollouts_and_verifier(
     assert run["tokenizer"] == "auditable character tokenizer"
     assert run["model"] == "GRU causal LM"
     assert "exact final numeric answer" in run["verifier"]
+    if algorithm not in {"ipo", "simpo"}:
+        assert run["history"][-1]["behavior_policy"] == "fresh-on-policy-one-update"
+        assert run["history"][-1]["reference_kl"] >= 0
     assert 0 <= result.final["accuracy"] <= 1
     assert "format_rate" in result.final
     assert (run_dir / "metrics.json").exists()

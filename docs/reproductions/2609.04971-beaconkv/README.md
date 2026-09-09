@@ -47,6 +47,8 @@ flowchart LR
 
 CPU fixture 指标见 [`metrics/synthetic-long-context-seeds42-44.json`](metrics/synthetic-long-context-seeds42-44.json)；真实公开 checkpoint 的 A100 结果见 [`../../gpu-validations/beaconkv-a100-20260907.json`](../../gpu-validations/beaconkv-a100-20260907.json)。
 
+WikiText-2 test 的 6 段非重叠文本任务级评测使用 Qwen3-4B、2,048 context、32 个 teacher-forced target token 和 512-token 工作集，完整产物见 [`metrics/wikitext2-task-a100-seed42.json`](metrics/wikitext2-task-a100-seed42.json)。完整注意力平均 NLL/accuracy 为 1.9174/0.5729，BeaconKV 为 2.1430/0.5469。当前 Python 选择器平均总耗时 12.34 秒，慢于 full 的 1.38 秒；完整 backing cache 仍保留，峰值显存相同，不作加速或省显存声明。
+
 > **本地对照口径**：基线 recent-only 与实验组 beacon 使用同一 checkpoint、序列和预算；相对变化见 receipt（无法计算时不适用），不复刻完整吞吐基准。
 
 ## 复现边界

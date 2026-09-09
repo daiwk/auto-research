@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:atomrec",
+  "method": "atomrec-checkpoint",
+  "dataset": {
+    "name": "Amazon Beauty 2014 5-core",
+    "users": 6,
+    "candidate_count": 10,
+    "split_policy": "per-user chronological validation/test; pre-target memory rebuilt for every case",
+    "sha256": {
+      "meta_Beauty.json.gz": "c7977dc0e0ead14ac7df8c1c6de74da00e4bebfad87a0f0c5763d4c5bc9b53a0",
+      "reviews_Beauty_5.json.gz": "e5925ec99023f1dc9c7d3dff7ef34cfeacd40d1b981b5525e1e4ba9c8abc18fe"
+    }
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "validation": {
+    "recent_history_hit_at_3": [
+      0.5,
+      0.5,
+      0.6666666666666666
+    ],
+    "atomrec_hit_at_3": [
+      0.3333333333333333,
+      0.16666666666666666,
+      0.3333333333333333
+    ],
+    "recent_history_ndcg_at_3": [
+      0.37697658452381916,
+      0.4384882922619096,
+      0.46030991785715253
+    ],
+    "atomrec_ndcg_at_3": [
+      0.25,
+      0.10515495892857625,
+      0.25
+    ],
+    "atomrec_valid_rate": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "test": {
+    "recent_history_hit_at_3": [
+      0.5,
+      0.6666666666666666,
+      0.6666666666666666
+    ],
+    "atomrec_hit_at_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recent_history_ndcg_at_3": [
+      0.4384882922619096,
+      0.5218216255952429,
+      0.4384882922619096
+    ],
+    "atomrec_ndcg_at_3": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "atomrec_valid_rate": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334
+    ]
+  },
+  "execution": {
+    "generator_calls": 105,
+    "memory_stages": [
+      "atomic extraction",
+      "semantic linking",
+      "field evolution",
+      "multi-hop retrieval",
+      "grounded synthesis"
+    ],
+    "downstream_ranker": "frozen checkpoint mean-hidden-state cosine over supplied candidates",
+    "failure_policy": "invalid generations score zero; no target or gold fallback"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_execution_evidence",
+    "formal_comparison": false,
+    "claim_policy": "small public checkpoint execution with a negative test result; not the paper benchmark",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.04882-atomrec/metrics/amazon-beauty-checkpoint-seeds42-44.json",
+    "dataset_fingerprint": "sha256:c7977dc0e0ead14ac7df8c1c6de74da00e4bebfad87a0f0c5763d4c5bc9b53a0+e5925ec99023f1dc9c7d3dff7ef34cfeacd40d1b981b5525e1e4ba9c8abc18fe"
+  }
+}

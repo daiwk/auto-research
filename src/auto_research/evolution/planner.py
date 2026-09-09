@@ -663,6 +663,10 @@ def _propose_agent(parent, generation, index, operators, rng):
         "verifier": ["none", "public-evidence"],
         "context": ["full", "compressed"],
     }
+    generic = "memory:lookup" in operators
+    if generic:
+        values.update(policy=["heuristic"], reflection=["none"],
+                      verifier=["none"], context=["full"])
     for operator in operators:
         if ":" not in operator:
             continue
@@ -684,7 +688,7 @@ def _propose_agent(parent, generation, index, operators, rng):
             "context": "agent_context_compression",
         }[component]
         return replace(parent, architecture="composable-agent", **{field: value}), (
-            f"论文算子单组件消融：{operator}；其余组件保持基线"
+            f"{'通用路由' if generic else '论文算子'}单组件消融：{operator}；其余组件保持基线"
         )
     return replace(
         parent,

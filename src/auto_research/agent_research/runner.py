@@ -160,11 +160,15 @@ class AgentResearchRunner:
             "coevolution_alternations": agent.coevolution_alternations,
             "router_updates": agent.router_updates,
             "memory_bank_updates": agent.memory_bank_updates,
-            "fidelity": "mechanism reproduction on deterministic benchmark mini-suites",
+            "fidelity": "legacy fixture diagnostic; not an independently evaluated agent",
+            "diagnostic_only": True,
+            "promotion_eligible": False,
+            "gold_fields_available_to_policy": True,
+            "tool_execution_performed": False,
+            "policy_training_performed": False,
         }
-        # Paper-specific counters are intentionally surfaced explicitly.  The
-        # public dashboard uses them to distinguish a real mechanism path from
-        # the common deterministic answer/plan contract of the mini-suite.
+        # Preserve historical counters for debugging, never as proof that a
+        # paper's model, optimizer or environment was actually executed.
         for name in (
             "harness_generations", "harness_repairs", "archive_distillations",
             "reopened_approaches", "versioned_edits",

@@ -76,10 +76,22 @@ def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[
     fidelity = str(diagnostics.get("fidelity", payload.get("fidelity", "")))
     tier = str(protocol.get("tier", payload.get("evaluation_tier", "")))
     formal = protocol.get("formal_comparison")
+    training = payload.get("training", {})
+    training = training if isinstance(training, dict) else {}
+    dataset = payload.get("dataset", "")
+    if isinstance(dataset, dict):
+        dataset = dataset.get("id", dataset.get("name", ""))
     diagnostic_only = (
-        tier.startswith("l1_")
+        any(section.get("diagnostic_only") is True or section.get("promotion_eligible") is False
+            for section in (payload, diagnostics, training, protocol))
+        or str(dataset) in {"arithmetic-smoke", "gsm8k-candidate"}
+        or tier.startswith("l1_")
         or (not tier and "deterministic" in fidelity.lower())
     )
+    if diagnostic_only:
+        formal = False
+        if not tier.startswith("l1_"):
+            tier = "l1_mechanism_diagnostic"
     saturated = diagnostic_only and all(
         metrics.get(name) == 1.0 for name in AGENT_CAPABILITY_METRICS
     )
@@ -128,8 +140,7 @@ def build_payload() -> dict:
             "seed": _seed(row.seed, payload, row.path),
             "metrics": row.metrics,
         }
-        if public_domain == "agent":
-            item["evidence"] = _agent_evidence(payload, row.metrics)
+        item["evidence"] = _agent_evidence(payload, row.metrics)
         experiments.append(item)
     experiments.sort(key=lambda item: (item["domain"], item["method"], item["path"]))
     return {

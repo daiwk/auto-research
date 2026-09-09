@@ -7,6 +7,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_explicit_diagnostic_flags_override_formal_labels():
+    from scripts.generate_public_experiment_dashboard import _agent_evidence
+
+    evidence = _agent_evidence({"training": {"diagnostic_only": True},
+                               "evaluation_protocol": {"tier": "l2_capability", "formal_comparison": True}}, {})
+    assert evidence["diagnostic_only"] and evidence["formal_comparison"] is False
+    assert evidence["tier"].startswith("l1_")
+    assert not _agent_evidence({"dataset": {"id": "public-dataset"}}, {})["diagnostic_only"]
+
+
 def test_public_dashboard_contains_only_committed_documentation_metrics():
     payload = json.loads(
         (ROOT / "docs/assets/data/experiment-dashboard.json").read_text(encoding="utf-8")
