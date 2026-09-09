@@ -61,6 +61,6 @@ WikiText-2 test 的同一任务级评测完整产物见 [`metrics/wikitext2-task
 
 ### 2026-09-08 验证更正
 
-旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。已在 A100 上重跑：使用模型实际 rotary 算子、逐 query head 计算，3 层共 96 个 head-layer 的完整 BF16 attention 与模型输出最大绝对误差为 0。压缩相似度另用 FP32 累积，结果见上述已更新 receipt。这仍只是单条 1024-token 固定文本的机制诊断，不是任务准确率、完整论文复现或吞吐提升证据。
+旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。修正后又在 A100 上以 6 段互不重叠的 WikiText-2 文本执行 2048-token context 和 32-token next-token 任务：KVMem accuracy 为 0.5677，full 为 0.5729，recent-only 为 0.3906。当前 Python 参考实现比 full 慢且保留完整 backing cache，因此不宣称加速或节省显存；任务结果见 [`metrics/wikitext2-task-a100-seed42.json`](metrics/wikitext2-task-a100-seed42.json)。
 
 本地未复刻 GPU/CPU/NVMe 异步调度、NVFP4、MTP 和百万 token 完整系统实验。

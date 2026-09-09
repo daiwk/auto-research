@@ -1,21 +1,19 @@
 {
   "schema_version": 1,
   "adapter_key": "beaconkv",
-  "validated_at": "2026-09-08",
-  "correction": "Supersedes the invalid September 7 query reconstruction; uses query normalization, checkpoint rotary implementation and separate GQA query heads. Full BF16 attention output parity is asserted before FP32 compression diagnostics.",
+  "validated_at": "2026-09-10",
+  "correction": "Supersedes the single-text mechanism receipt with task-level next-token evaluation on six non-overlapping public WikiText-2 contexts. The reference implementation retains the full backing cache and makes no speed or memory-saving claim.",
   "accelerator": {"vendor": "NVIDIA", "model": "A100"},
   "command": [
-    "python", "-m", "auto_research.reproductions.beaconkv.checkpoint",
-    "--model-id", "Qwen/Qwen3-4B-Instruct-2507",
-    "--revision", "cdbee75f17c01a7cc42f958dc650907174af0554",
-    "--sequence-length", "1024", "--retained-tokens", "256",
-    "--seed", "42", "--local-files-only", "--output", "beaconkv-validation.json"
+    "python", "-m", "auto_research.reproductions.kv_task_evaluation",
+    "--dataset-file", "wikitext-2-raw-v1-test.txt", "--context-tokens", "2048",
+    "--examples", "6", "--seed", "42", "--output", "kv-task-evaluation.json"
   ],
   "dataset": {
-    "name": "fixed public-domain long-context probe",
-    "revision": "public-domain-long-context-v1",
-    "examples": 1,
-    "sequence_length": 1024
+    "name": "WikiText-2 raw test",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "text_sha256": "aca2f46735043bcfd0a44eca981d04627b9cdf74c4c9a04bf0856d04066f58fc",
+    "examples": 6
   },
   "checkpoint": {
     "model_id": "Qwen/Qwen3-4B-Instruct-2507",
@@ -24,15 +22,19 @@
   "result": "passed",
   "metrics": {
     "seed": 42,
-    "retained_tokens": 256,
-    "evaluated_head_layers": 96,
-    "full_attention_max_abs_error": 0.0,
-    "baseline_attention_cosine_mean": 0.8995949868112803,
-    "method_attention_cosine_mean": 0.9934627022594213,
-    "peak_gpu_memory_mb": 8610.654296875
+    "context_tokens": 2048,
+    "target_tokens_per_example": 32,
+    "workspace_tokens": 512,
+    "full_next_token_accuracy": 0.5729166666666666,
+    "recent_only_next_token_accuracy": 0.390625,
+    "method_next_token_accuracy": 0.546875,
+    "full_total_seconds": 1.3771060903867085,
+    "method_total_seconds": 12.335182178144654,
+    "full_peak_allocated_bytes": 10422372352,
+    "method_peak_allocated_bytes": 10422372352
   },
   "provenance": {
-    "commit": "cd153061905420014de600ad262c9f41c3af47f4",
+    "commit": "f1a35df149bfd6dec7344d19b35de6540c70fc81",
     "artifact_path": "docs/gpu-validations/beaconkv-a100-20260907.json",
     "raw_predictions_committed": false,
     "checkpoint_committed": false

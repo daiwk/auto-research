@@ -48,7 +48,7 @@ flowchart LR
 
 ## 本地复现
 
-真实 Qwen checkpoint 已在公开 Amazon Beauty 2014 5-core 上完成三轮有界研究：每轮动态生成参数提案，分别调用两个 reviewer，再执行一轮真实反向传播验证和完整 validation 训练。三个候选均未超过固定 baseline，最终 test 只评估一次，baseline 保持 incumbent；完整脱敏结果见 [`metrics/amazon-beauty-checkpoint-seeds42-44.json`](metrics/amazon-beauty-checkpoint-seeds42-44.json)。
+真实 Qwen checkpoint 已在公开 Amazon Beauty 2014 5-core 上完成三轮有界研究：每轮动态生成参数提案，分别调用两个 reviewer，再执行一轮真实反向传播验证和完整 validation 训练。三个候选均未超过固定 baseline，最终 test 只评估一次，baseline 保持 incumbent；完整脱敏结果见 [`metrics/amazon-beauty-checkpoint-seeds42-44.json`](metrics/amazon-beauty-checkpoint-seeds42-44.json)，GPU 执行收据见 [`autolr-checkpoint-a100-20260910.json`](../../gpu-validations/autolr-checkpoint-a100-20260910.json)。
 
 2026-09-09 更正：旧版推荐分数混合不能代表 AutoLR，旧结果作废。新增 `autolr_product.py`：真实 checkpoint 根据研究证据和已执行 validation 账本生成双塔维度、学习率与 Category Adapter 提案；两次独立模型调用分别审查方法保真和预算；候选先执行一步反向传播/有限值验证，再按固定三种子预算训练。每轮从磁盘账本恢复，test 只在最终选择后运行一次，且永远不授予线上权限。
 

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "adapter_key": "coskill-checkpoint",
+  "validated_at": "2026-09-10",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-m", "auto_research.agent_research.coskill_checkpoint",
+    "--seed", "42", "--train-episodes", "12", "--eval-episodes", "12",
+    "--max-turns", "8", "--output", "coskill-seed42.json"
+  ],
+  "dataset": {
+    "name": "ToolRoute L2.1 public simulator",
+    "revision": "sha256:880e26372d4828025759d40dbd6bdb1b7d9e5fa7ed6e809e79f9f48c440ba7a2",
+    "split_policy": "independent train, validation and final test"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "parameter_l1_change": [3106.815837052185, 3276.4615972605534, 3541.83045935072],
+    "validation_success": [0.8333333333333334, 0.8333333333333334, 0.9166666666666666],
+    "test_success": [0.9166666666666666, 0.75, 0.8333333333333334],
+    "evolve_resume_verified": true,
+    "promoted_skill_edits": 0
+  },
+  "provenance": {
+    "commit": "f1a35df149bfd6dec7344d19b35de6540c70fc81",
+    "artifact_path": "docs/gpu-validations/coskill-checkpoint-a100-20260910.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

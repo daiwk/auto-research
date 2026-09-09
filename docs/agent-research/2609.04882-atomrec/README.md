@@ -53,7 +53,7 @@ flowchart LR
 
 统一 Agent mini-suite 的 seeds 42/43/44 记录原子写入、多跳检索、回答/计划成功率与成本，见 [`metrics/mini-suite-seeds42-44.json`](metrics/mini-suite-seeds42-44.json)。
 
-> **本地对照口径**：Amazon Beauty 2014 5-core 上做 6 用户、10 候选、seeds 42/43/44 的 next-product 小样本对照，不是论文完整候选协议。完整结果见 [`metrics/amazon-beauty-checkpoint-seeds42-44.json`](metrics/amazon-beauty-checkpoint-seeds42-44.json)。validation 上 AtomRec Hit@3 为 0.333/0.167/0.333，recent-history 为 0.500/0.500/0.667；test 上 AtomRec 三个 seed 均为 0，recent-history 为 0.500/0.667/0.667。一个 test case 的语义 linker 越权引用被严格记零，因此 AtomRec 有效率为 0.833。该负结果证明完整记忆链路与失败策略执行，不支持效果提升声明。
+> **本地对照口径**：Amazon Beauty 2014 5-core 上做 6 用户、10 候选、seeds 42/43/44 的 next-product 小样本对照，不是论文完整候选协议。完整结果见 [`metrics/amazon-beauty-checkpoint-seeds42-44.json`](metrics/amazon-beauty-checkpoint-seeds42-44.json)，GPU 执行收据见 [`atomrec-checkpoint-a100-20260910.json`](../../gpu-validations/atomrec-checkpoint-a100-20260910.json)。validation 上 AtomRec Hit@3 为 0.333/0.167/0.333，recent-history 为 0.500/0.500/0.667；test 上 AtomRec 三个 seed 均为 0，recent-history 为 0.500/0.667/0.667。一个 test case 的语义 linker 越权引用被严格记零，因此 AtomRec 有效率为 0.833。该负结果证明完整记忆链路与失败策略执行，不支持效果提升声明。
 
 ## 复现边界
 

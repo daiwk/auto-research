@@ -53,7 +53,7 @@ flowchart LR
 
 真实路径先让共享 checkpoint 生成工具 JSON，执行环境只返回本次转移的公开反馈；Meta-Skill 在整组 baseline 完成后才应用私有编辑，再以重置后的验证轨迹计算相对回报。不同角色分别归一化信用，但更新同一个可训练 block。`toolroute-checkpoint` 已接入统一 evolve，仅进化真实执行的学习率与 rollout group；legacy mini-suite 和仅注册名称的论文算子不能晋级。A100 上还从 CLI 完整执行了一轮 baseline → CoSkill 候选 → validation → 选优 → final test → 报告，并验证运行目录内 checkpoint 可恢复；该小规模 smoke 的候选参数变化为 828.94，但 validation 与基线同为 1.0，因此基线保留为冠军。
 
-A100 的 seeds 42/43/44 均出现实际参数变化和双角色非零梯度，但验证成功率没有稳定提升：分别为 0.9167 → 0.8333、0.8333 → 0.8333、0.9167 → 0.9167；对应 test 为 0.9167、0.7500、0.8333。所有候选技能编辑在重置验证后均未取得正增益，因此没有晋级。完整脱敏结果见 [`metrics/qwen3-toolroute-a100-seeds42-44.json`](metrics/qwen3-toolroute-a100-seeds42-44.json)。这些负结果证明训练和拒绝路径实际执行，不证明 CoSkill 优于冻结 checkpoint，也不复刻论文原基准。
+A100 的 seeds 42/43/44 均出现实际参数变化和双角色非零梯度，但验证成功率没有稳定提升：分别为 0.9167 → 0.8333、0.8333 → 0.8333、0.9167 → 0.9167；对应 test 为 0.9167、0.7500、0.8333。所有候选技能编辑在重置验证后均未取得正增益，因此没有晋级。完整脱敏结果见 [`metrics/qwen3-toolroute-a100-seeds42-44.json`](metrics/qwen3-toolroute-a100-seeds42-44.json)，GPU 执行收据见 [`coskill-checkpoint-a100-20260910.json`](../../gpu-validations/coskill-checkpoint-a100-20260910.json)。这些负结果证明训练和拒绝路径实际执行，不证明 CoSkill 优于冻结 checkpoint，也不复刻论文原基准。
 
 seeds 42/43/44 的任务/步骤技能检索、技能创建与复用、协同交替次数和成本见 [`metrics/mini-suite-seeds42-44.json`](metrics/mini-suite-seeds42-44.json)。
 

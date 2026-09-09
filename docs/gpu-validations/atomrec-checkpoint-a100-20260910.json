@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "adapter_key": "atomrec-checkpoint",
+  "validated_at": "2026-09-10",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-m", "auto_research.agent_research.atomrec_checkpoint",
+    "--directory", "public-product-data", "--users", "6", "--split", "both",
+    "--output", "atomrec-amazon-beauty.json"
+  ],
+  "dataset": {
+    "name": "Amazon Beauty 2014 5-core",
+    "revision": "sha256:c7977dc0e0ead14ac7df8c1c6de74da00e4bebfad87a0f0c5763d4c5bc9b53a0+e5925ec99023f1dc9c7d3dff7ef34cfeacd40d1b981b5525e1e4ba9c8abc18fe",
+    "users": 6,
+    "candidate_count": 10
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "generator_calls": 105,
+    "validation_hit_at_3": [0.3333333333333333, 0.16666666666666666, 0.3333333333333333],
+    "test_hit_at_3": [0.0, 0.0, 0.0],
+    "test_valid_rate": [0.8333333333333334, 0.8333333333333334, 0.8333333333333334]
+  },
+  "provenance": {
+    "commit": "f1a35df149bfd6dec7344d19b35de6540c70fc81",
+    "artifact_path": "docs/gpu-validations/atomrec-checkpoint-a100-20260910.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

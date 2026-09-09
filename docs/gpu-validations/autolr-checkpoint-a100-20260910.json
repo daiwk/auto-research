@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "adapter_key": "autolr-checkpoint",
+  "validated_at": "2026-09-10",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-m", "auto_research.reproductions.autolr_product",
+    "--dataset-dir", "public-product-data", "--output-dir", "autolr-product-run",
+    "--steps", "20", "--rounds", "3"
+  ],
+  "dataset": {
+    "name": "Amazon Beauty 2014 5-core",
+    "revision": "sha256:b6f86bcc1a7be984600b23ff4b77672bfd8ca15ac3fb07af77911c2499b94d7a",
+    "users": 1000,
+    "items": 2000
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "rounds": 3,
+    "baseline_validation_ndcg_at_10": 0.028567775043316167,
+    "accepted_candidates": 0,
+    "final_test_ndcg_at_10": 0.025303288455369926,
+    "final_incumbent": "baseline"
+  },
+  "provenance": {
+    "commit": "f1a35df149bfd6dec7344d19b35de6540c70fc81",
+    "artifact_path": "docs/gpu-validations/autolr-checkpoint-a100-20260910.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}
