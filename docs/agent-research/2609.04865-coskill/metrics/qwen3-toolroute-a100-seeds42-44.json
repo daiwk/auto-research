@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:coskill",
+  "method": "coskill-checkpoint",
+  "dataset": {
+    "name": "ToolRoute L2.1",
+    "split_policy": "train / validation / final test"
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "baseline_validation_success": 0.9166666666666666,
+      "validation_success": 0.8333333333333334,
+      "test_success": 0.9166666666666666,
+      "parameter_l1_change": 3106.815837052185,
+      "promoted_skill_edits": 0
+    },
+    {
+      "seed": 43,
+      "baseline_validation_success": 0.8333333333333334,
+      "validation_success": 0.8333333333333334,
+      "test_success": 0.75,
+      "parameter_l1_change": 3276.4615972605534,
+      "promoted_skill_edits": 0
+    },
+    {
+      "seed": 44,
+      "baseline_validation_success": 0.9166666666666666,
+      "validation_success": 0.9166666666666666,
+      "test_success": 0.8333333333333334,
+      "parameter_l1_change": 3541.83045935072,
+      "promoted_skill_edits": 0
+    }
+  ],
+  "training": {
+    "train_episodes": 12,
+    "validation_episodes": 12,
+    "test_episodes": 12,
+    "shared_trainable_block": true,
+    "role_specific_nonzero_gradients": true,
+    "diagnostic_only": false,
+    "promotion_eligible": true
+  },
+  "evolve_smoke": {
+    "seed": 42,
+    "train_episodes": 2,
+    "evaluation_episodes": 2,
+    "baseline_validation_success": 1.0,
+    "candidate_validation_success": 1.0,
+    "candidate_parameter_l1_change": 828.9351041358896,
+    "champion": "baseline",
+    "resume_verified": true
+  },
+  "evaluation_protocol": {
+    "tier": "l2_execution_evidence",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed execution evidence; all verified skill edits were non-positive and no improvement or paper-benchmark claim is made"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.04865-coskill/metrics/qwen3-toolroute-a100-seeds42-44.json",
+    "dataset_fingerprint": "sha256:880e26372d4828025759d40dbd6bdb1b7d9e5fa7ed6e809e79f9f48c440ba7a2"
+  }
+}

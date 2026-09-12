@@ -47,12 +47,14 @@ flowchart LR
 
 CPU fixture 指标见 [`metrics/synthetic-long-context-seeds42-44.json`](metrics/synthetic-long-context-seeds42-44.json)；真实公开 checkpoint 的 A100 结果见 [`../../gpu-validations/beaconkv-a100-20260907.json`](../../gpu-validations/beaconkv-a100-20260907.json)。
 
+WikiText-2 test 的 6 段非重叠文本任务级评测使用 Qwen3-4B、2,048 context、32 个 teacher-forced target token 和 512-token 工作集，完整产物见 [`metrics/wikitext2-task-a100-seed42.json`](metrics/wikitext2-task-a100-seed42.json)。完整注意力平均 NLL/accuracy 为 1.9174/0.5729，BeaconKV 为 2.1430/0.5469。当前 Python 选择器平均总耗时 12.34 秒，慢于 full 的 1.38 秒；完整 backing cache 仍保留，峰值显存相同，不作加速或省显存声明。
+
 > **本地对照口径**：基线 recent-only 与实验组 beacon 使用同一 checkpoint、序列和预算；相对变化见 receipt（无法计算时不适用），不复刻完整吞吐基准。
 
 ## 复现边界
 
 ### 2026-09-08 验证更正
 
-旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。已在 A100 上重跑：使用模型实际 rotary 算子、逐 query head 计算，3 层共 96 个 head-layer 的完整 BF16 attention 与模型输出最大绝对误差为 0。压缩相似度另用 FP32 累积，结果见上述已更新 receipt。这仍只是单条 1024-token 固定文本的机制诊断，不是任务准确率、完整论文复现或吞吐提升证据。
+旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。修正后又在 A100 上以 6 段互不重叠的 WikiText-2 文本执行 2048-token context 和 32-token next-token 任务：BeaconKV accuracy 为 0.5469，full 为 0.5729，recent-only 为 0.3906。当前 Python 参考实现比 full 慢且保留完整 backing cache，因此不宣称加速或节省显存；任务结果见 [`metrics/wikitext2-task-a100-seed42.json`](metrics/wikitext2-task-a100-seed42.json)。
 
 本地没有实现推理引擎级 KV page 管理和 CUDA kernel；完整 32K 推理曲线仍以原论文为准。

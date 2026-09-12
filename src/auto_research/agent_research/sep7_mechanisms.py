@@ -78,12 +78,13 @@ class AtomicMemory:
 
 class HierarchicalSkills:
     """Task-to-step bundles; edits stay private until post-edit execution."""
-    def __init__(self, capacity=24):
+    def __init__(self, capacity=24, similarity=None):
         self.capacity, self.bundles, self.pending = capacity, {}, {}
         self.lineage = {}
+        self.similarity = similarity or AtomicMemory.lexical_similarity
 
     def retrieve(self, query):
-        scores = [(AtomicMemory.lexical_similarity(query, key), key) for key in self.bundles]
+        scores = [(self.similarity(query, key), key) for key in self.bundles]
         return max(scores)[1] if scores and max(scores)[0] > 0 else None
 
     def stage(self, task, children):
@@ -109,7 +110,7 @@ class HierarchicalSkills:
 
     def retrieve_step(self, task, observation):
         children = self.bundles.get(task, [])
-        return max(children, key=lambda child: AtomicMemory.lexical_similarity(
+        return max(children, key=lambda child: self.similarity(
             observation, str(child))) if children else None
 
     def verify(self, task, execute, baseline, attempts=2):

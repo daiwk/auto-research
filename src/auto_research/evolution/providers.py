@@ -90,6 +90,11 @@ def _load_builtins() -> None:
         )
 
     def agent(config: EvolutionConfig, project_dir: Path):
+        if config.dataset == "toolroute-checkpoint":
+            from .coskill_evaluator import CoSkillEvolutionEvaluator
+            if config.device not in {"cuda", "auto"}:
+                raise ValueError("toolroute-checkpoint currently requires validated CUDA execution")
+            return CoSkillEvolutionEvaluator(config, project_dir)
         from .composable import AgentEvolutionEvaluator
         return AgentEvolutionEvaluator(
             config.dataset, config.seeds, config.agent_episodes,
@@ -203,7 +208,7 @@ def _load_builtins() -> None:
         "agent",
         (
             "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",
-            "toolroute-l2.1",
+            "toolroute-l2.1", "toolroute-checkpoint",
         ),
         "agent", "agent memory planning tools critic", agent,
         lambda config: Genome(

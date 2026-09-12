@@ -50,6 +50,8 @@ flowchart LR
 
 MovieLens 公开数据、seeds 42/43/44 的 NDCG、Recall、类别一致性与运行配置见 [`metrics/movielens-100k-seeds42-44.json`](metrics/movielens-100k-seeds42-44.json)。
 
+此外已在 Amazon Beauty 2014 5-core 的 1,000 用户、最多 2,000 商品上执行三种子、同预算 200 步 next-product 对照，完整产物见 [`metrics/amazon-beauty-5core-seeds42-44.json`](metrics/amazon-beauty-5core-seeds42-44.json)。数据按用户时间留下最后两个行为，目录只用训练频次构建；内容只含 title/description/brand，不使用 review 文本或 `also_bought` 边。Category Adapter 是明确负结果：三个 seed 的 test Hit@10 为 0.004/0.003/0.009，共享双塔为 0.074/0.076/0.082。该替代任务没有显式目标类别，不能冒充 ComCat 互补标签，也不能用来否定论文结论。
+
 > **本地对照口径**：基线与实验组使用相同公开数据和候选预算；相对变化见指标产物（基线为零时不适用），不与 Allegro 线上 GMV 横向比较。
 
 ## 复现边界

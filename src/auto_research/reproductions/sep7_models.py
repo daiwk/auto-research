@@ -41,12 +41,14 @@ class CategoryTwoTower(nn.Module):
         return retrieval + auxiliary
 
 
-def train_two_tower(data, seed, adapter=True, steps=80):
-    """Train solely on train adjacency; public genres stand in for categories."""
+def train_two_tower(data, seed, adapter=True, steps=80, dimensions=32, learning_rate=0.003):
+    """Train solely on train adjacency with explicit, executable hyperparameters."""
+    if steps < 1 or dimensions < 1 or not 0 < learning_rate < 1:
+        raise ValueError("invalid training budget/dimensions/learning rate")
     with torch.random.fork_rng():
         torch.manual_seed(seed)
         model = CategoryTwoTower(data.sequences.features.shape[1], int(data.domains.max()) + 1,
-                                 adapter=adapter)
+                                 dim=dimensions, adapter=adapter)
         features = torch.tensor(data.sequences.features, dtype=torch.float32)
         categories = torch.tensor(data.domains, dtype=torch.long)
         pairs = torch.tensor([(a, b) for history in data.sequences.train
@@ -54,7 +56,7 @@ def train_two_tower(data, seed, adapter=True, steps=80):
         if not len(pairs):
             raise ValueError("training pairs required")
         generator = torch.Generator().manual_seed(seed)
-        optimizer = torch.optim.Adam(model.parameters(), lr=0.003)
+        optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
         losses = []
         for _ in range(steps):
             batch = pairs[torch.randint(len(pairs), (64,), generator=generator)]
@@ -75,7 +77,8 @@ def train_two_tower(data, seed, adapter=True, steps=80):
                 queries = model.query(features, categories, category.expand(len(features)))
                 table[:, selected] = queries @ targets[selected].T
         return table.numpy(), {"steps": steps, "first_loss": losses[0], "last_loss": losses[-1],
-                               "train_pairs": len(pairs), "seed": seed}
+                               "train_pairs": len(pairs), "seed": seed,
+                               "dimensions": dimensions, "learning_rate": learning_rate}
 
 
 class EvidenceController:
@@ -108,9 +111,47 @@ class EvidenceController:
             return (float(np.mean(values)) + 0.1 * float(np.std(values)), candidate["key"])
         return max(legal, key=score)
 
-    def evaluate(self, candidate, execute, guardrails):
-        events = ["selected", "verified"]
+    def research(self, propose, reviewers, verify, execute, guardrails, rounds=3):
+        """Consume freshly generated proposals, not a fixed candidate mixture.
+
+        Callbacks are explicit application integrations: propose sees only the
+        validation ledger; reviewers independently inspect each actual proposal;
+        verify must execute the proposed implementation's acceptance checks.
+        This controller never accepts test results or grants launch authority.
+        """
+        if len(reviewers) < 2 or rounds < 1:
+            raise ValueError("research needs at least two reviewers and one round")
+        for iteration in range(rounds):
+            context = {"round": iteration, "reference": deepcopy(self.reference),
+                       "records": deepcopy(self.records), "incumbent": self.incumbent}
+            proposals = propose(context)
+            candidates = []
+            for proposal in proposals:
+                candidate = deepcopy(proposal)
+                if not candidate.get("key") or not candidate.get("evidence"):
+                    raise ValueError("proposal requires a stable key and research evidence")
+                if "test" in candidate or candidate.get("selection_split", "validation") != "validation":
+                    raise ValueError("test information cannot enter proposal selection")
+                candidate["reviews"] = [review(deepcopy(candidate), deepcopy(context))
+                                        for review in reviewers]
+                candidates.append(candidate)
+            candidate = self.select(candidates)
+            if candidate is None:
+                break
+            self.evaluate(candidate, execute, guardrails, verify=verify)
+        return deepcopy(self.records)
+
+    def evaluate(self, candidate, execute, guardrails, verify=None):
+        events = ["selected"]
+        verification = None
         try:
+            if verify is not None:
+                verification = verify(deepcopy(candidate))
+                if not isinstance(verification, dict) or verification.get("passed") is not True:
+                    raise ValueError("candidate execution verification failed")
+                events.append("execution-verified")
+            else:
+                events.append("structural-review-only")
             metrics = execute(candidate)
             events.append("offline-evaluated")
             if not all(math.isfinite(float(v)) for v in metrics.values()):
@@ -127,6 +168,8 @@ class EvidenceController:
             metrics, verdict = {}, "failed"
             events.append(type(error).__name__)
         row = {"candidate": candidate["key"], "events": [*events, verdict],
+               "verification": verification,
+               "proposal": deepcopy(candidate),
                "metrics": metrics, "verdict": verdict, "evidence": candidate["evidence"],
                "reviews": deepcopy(candidate["reviews"]), "online_authorized": False}
         self.records.append(row)

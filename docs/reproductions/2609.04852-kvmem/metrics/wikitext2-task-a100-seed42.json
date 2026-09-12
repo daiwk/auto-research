@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:kvmem",
+  "method": "kvmem-task-reference",
+  "dataset": {
+    "name": "WikiText-2 raw test",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "text_sha256": "aca2f46735043bcfd0a44eca981d04627b9cdf74c4c9a04bf0856d04066f58fc"
+  },
+  "seed": 42,
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "setup": {
+    "examples": 6,
+    "context_tokens": 2048,
+    "target_tokens": 32,
+    "workspace_tokens": 512,
+    "accelerator": "NVIDIA A100"
+  },
+  "baseline": {
+    "nll": 1.9173577563045472,
+    "next_token_accuracy": 0.5729166666666666,
+    "total_seconds": 1.3771060903867085,
+    "peak_allocated_bytes": 10422372352
+  },
+  "recent_only": {
+    "nll": 4.239119310318722,
+    "next_token_accuracy": 0.390625,
+    "total_seconds": 1.7594866041714947
+  },
+  "method_metrics": {
+    "nll": 2.158501695045685,
+    "next_token_accuracy": 0.5677083333333334,
+    "total_seconds": 77.66178662857662,
+    "peak_allocated_bytes": 10422375168
+  },
+  "evaluation_protocol": {
+    "tier": "l2_execution_evidence",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "reference Python attention replacement; full backing cache retained; no speed or memory-saving claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.04852-kvmem/metrics/wikitext2-task-a100-seed42.json",
+    "dataset_fingerprint": "sha256:aca2f46735043bcfd0a44eca981d04627b9cdf74c4c9a04bf0856d04066f58fc"
+  }
+}

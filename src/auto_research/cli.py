@@ -81,6 +81,18 @@ def _add_runtime_arguments(command: argparse.ArgumentParser) -> None:
     )
 
 
+def _format_agent_evolution_summary(validation: dict[str, float]) -> str:
+    labels = (
+        ("Joint success", "joint_success"),
+        ("average cost", "average_cost"),
+        ("reuse", "reuse_rate"),
+    )
+    return "; ".join(
+        f"{label}: {validation[key]:.4f}"
+        for label, key in labels if key in validation
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="auto-research")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -1152,11 +1164,7 @@ def main(argv: list[str] | None = None) -> int:
                     f"objective: {champion.genome.post_training}"
                 )
             elif args.model == "agent":
-                print(
-                    f"Joint success: {champion.validation['joint_success']:.4f}; "
-                    f"average cost: {champion.validation['average_cost']:.4f}; "
-                    f"reuse: {champion.validation['reuse_rate']:.4f}"
-                )
+                print(_format_agent_evolution_summary(champion.validation))
             else:
                 print(f"Validation NDCG@10: {champion.validation['ndcg_at_10']:.6f}")
             print(

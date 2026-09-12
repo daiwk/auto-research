@@ -38,7 +38,7 @@
   function card(item) {
     const metrics = metricEntries(item);
     const evidence = item.evidence || {};
-    const diagnostic = item.domain === "agent" && evidence.diagnostic_only;
+    const diagnostic = evidence.diagnostic_only;
     const capability = item.domain === "agent" && evidence.tier === "l2_capability";
     const mechanism = Object.entries(evidence.mechanism_metrics || {})
       .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));

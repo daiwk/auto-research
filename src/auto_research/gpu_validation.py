@@ -16,10 +16,19 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "atomrec-checkpoint": (
+        "docs/gpu-validations/atomrec-checkpoint-a100-20260910.json"
+    ),
+    "autolr-checkpoint": (
+        "docs/gpu-validations/autolr-checkpoint-a100-20260910.json"
+    ),
     "checkpoint-normalized-dpo": (
         "docs/gpu-validations/checkpoint-normalized-dpo-a100-20260901.json"
     ),
     "criticl-checkpoint": "docs/gpu-validations/criticl-checkpoint-a100-20260901.json",
+    "coskill-checkpoint": (
+        "docs/gpu-validations/coskill-checkpoint-a100-20260910.json"
+    ),
     "rlvr-fusion-checkpoints": (
         "docs/gpu-validations/rlvr-fusion-checkpoints-a100-20260901.json"
     ),
