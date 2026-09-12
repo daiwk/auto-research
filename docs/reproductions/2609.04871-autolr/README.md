@@ -11,7 +11,8 @@
 | 首次公开日期 | 2026-09-04（arXiv v1） |
 | 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-07） |
 | Adapter | `autolr` |
-| 本地复现代码 | [`src/auto_research/reproductions/autolr/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/autolr/)、[`autolr_product.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/reproductions/autolr_product.py) |
+| 本地复现代码 | [`src/auto_research/reproductions/autolr/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/autolr/) |
+| Checkpoint 实验入口 | [`autolr_product.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/reproductions/autolr_product.py) |
 
 ## 原始论文总结
 
