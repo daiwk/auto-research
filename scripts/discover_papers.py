@@ -65,6 +65,11 @@ def main() -> int:
     parser.add_argument("--github-actions", action="store_true")
     parser.add_argument("--manifest", default="docs/research-manifest.json")
     parser.add_argument("--ledger", default="docs/paper-discovery-ledger.json")
+    parser.add_argument(
+        "--arxiv-cache-dir", type=Path,
+        default=Path(".cache/paper-discovery/arxiv"),
+        help="successful arXiv pages are checkpointed here and reused only after transient failure",
+    )
     parser.add_argument("--cross-source-config", type=Path)
     parser.add_argument(
         "--snowball-seeds", default="",
@@ -85,7 +90,9 @@ def main() -> int:
         announcement_overlap_days=args.announcement_overlap_days,
     )
     queries = queries_for_track(args.track)
-    client = ArxivClient(minimum_interval_seconds=3.0)
+    client = ArxivClient(
+        minimum_interval_seconds=3.0, cache_dir=args.arxiv_cache_dir
+    )
     papers = discover_candidates(
         client,
         queries,
@@ -140,6 +147,16 @@ def main() -> int:
         ),
         "config": str(args.cross_source_config) if args.cross_source_config else None,
         "source_failures": source_failures,
+    }
+    payload["arxiv_transport"] = {
+        "cache_dir": str(args.arxiv_cache_dir),
+        "cache_fallback_pages": len(client.cache_fallbacks),
+        "coverage_complete": not client.cache_fallbacks,
+        "note": (
+            "cached checkpoints were used after arXiv throttling; rerun before "
+            "advancing the review watermark" if client.cache_fallbacks else
+            "all arXiv pages were fetched successfully in this run"
+        ),
     }
     rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     if args.output:

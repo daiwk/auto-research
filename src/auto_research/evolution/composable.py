@@ -308,10 +308,14 @@ class AgentEvolutionEvaluator:
         rng = np.random.default_rng(seed)
         memory: dict[str, tuple[str, ...]] = {}
         policy_cache: dict[str, tuple[str, ...]] = {}
+        procedural_edges: set[tuple[str, str]] = set()
+        maple_programs: dict[str, tuple[str, ...]] = {}
         active_tools: dict[str, int] = {}
         correct = cost = reused = 0.0
         transition_targets = reflective_groups = guidance_updates = 0.0
         policy_updates = policy_reuses = recovery_attempts = recoveries = 0.0
+        event_tree_partitions = feedback_scaffold_updates = 0.0
+        maple_program_reuses = 0.0
         for step, task in enumerate(tasks):
             key = (
                 task.axis
@@ -319,6 +323,10 @@ class AgentEvolutionEvaluator:
                 else f"{task.intent.split(' family-', 1)[0]}|{'/'.join(task.required_tools)}"
             )
             plan = None
+            if genome.agent_planner == "maple" and key in maple_programs:
+                plan = maple_programs[key]
+                maple_program_reuses += 1
+                cost += 0.25
             if genome.agent_policy != "heuristic" and key in policy_cache:
                 plan = policy_cache[key]
                 policy_reuses += 1
@@ -337,6 +345,7 @@ class AgentEvolutionEvaluator:
                     "sage": 0.38,
                     "memskill": 0.40,
                     "memento-skills": 0.36,
+                    "memforest": 0.34,
                 }.get(genome.agent_memory, 0.8)
                 cost += memory_cost
             if plan is None:
@@ -347,6 +356,11 @@ class AgentEvolutionEvaluator:
                 genome.memory_size, step,
             )
             cost += tool_cost
+            if genome.agent_critic == "feedback-scaffold":
+                # The first task receives explicit public workflow guidance;
+                # later tasks receive only compact public state summaries.
+                feedback_scaffold_updates += 1
+                cost += 0.12 if step == 0 else 0.04
             failed_plan = tuple(plan) != task.plan
             if failed_plan and genome.agent_critic != "none":
                 if genome.agent_critic == "tapo":
@@ -377,6 +391,7 @@ class AgentEvolutionEvaluator:
                     "envace": 0.76,
                     "searl": 0.68,
                     "agent-r1": 0.66,
+                    "feedback-scaffold": 0.62,
                 }.get(genome.agent_critic, 1.5)
                 cost += critic_cost
             if failed_plan and genome.agent_failure_recovery != "none":
@@ -394,6 +409,10 @@ class AgentEvolutionEvaluator:
                 recoveries += float(tuple(plan) == task.plan)
             success = tuple(plan) == task.plan
             correct += float(success)
+            if success and genome.agent_planner == "procedural-graphs":
+                procedural_edges.update(zip(plan, plan[1:]))
+            if success and genome.agent_planner == "maple":
+                maple_programs[key] = tuple(plan)
             if success and genome.agent_policy != "heuristic":
                 if genome.agent_policy == "agent-lightning":
                     transition_targets += len(task.plan)
@@ -405,6 +424,8 @@ class AgentEvolutionEvaluator:
                 if len(memory) >= genome.memory_size and key not in memory:
                     memory.pop(next(iter(memory)))
                 memory[key] = task.plan
+                if genome.agent_memory == "memforest":
+                    event_tree_partitions += 1
         return {
             "joint_success": correct / len(tasks),
             "average_cost": cost / len(tasks),
@@ -419,6 +440,10 @@ class AgentEvolutionEvaluator:
             "recovery_attempts": recovery_attempts,
             "recoveries": recoveries,
             "recovery_rate": recoveries / max(recovery_attempts, 1.0),
+            "procedural_graph_edges": float(len(procedural_edges)),
+            "event_tree_partitions": event_tree_partitions,
+            "feedback_scaffold_updates": feedback_scaffold_updates,
+            "maple_program_reuses": maple_program_reuses,
         }
 
 
@@ -464,6 +489,10 @@ def _plan(task, method, rng):
         # Closed-loop research: analysis and hypothesis select an executable
         # plan, while the evaluation transition remains replayable.
         return target, 0.48 + 0.20 * len(target)
+    if method == "procedural-graphs":
+        return target, 0.42 + 0.12 * len(target)
+    if method == "maple":
+        return target, 0.50 + 0.18 * len(target)
     if method == "camel":
         return target, 0.40 + 0.25 * len(target)
     return target, float(len(task.context))

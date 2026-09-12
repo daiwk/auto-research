@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "unirec",
+  "arxiv_id": "2609.11052",
+  "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2609.11052",
+  "organization": "Kuaishou",
+  "published": "2026-09-10",
+  "upstream_code": "否：未找到作者公开仓库（核查日期：2026-09-12）",
+  "track": "recommendation",
+  "topics": [
+    "pre-ranking",
+    "ranking",
+    "cross-stage-alignment",
+    "industrial-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/unirec",
+  "documentation": "docs/reproductions/2609.11052-unirec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private Kuaishou logs and features",
+    "production pre-ranking/ranking serving graph",
+    "full-scale cascaded model"
+  ],
+  "evolve_operators": []
+}

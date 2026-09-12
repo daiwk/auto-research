@@ -9,6 +9,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 多阶段排序与混排 | [UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems](../2609.11052-unirec/README.md) | Kuaishou，2026-09-10 | 未发现官方代码 | `unirec` |
+| Serving 与研究基础设施 | [BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests](../2609.08725-baff/README.md) | Dable，2026-09-08 | 未发现官方代码 | `baff` |
+| 多阶段排序与混排 | [SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching](../2609.08443-sequenceo1/README.md) | ByteDance / Douyin，2026-09-08 | 未发现官方代码 | `sequenceo1` |
 | Serving 与研究基础设施 | [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md) | NetEase, Inc.，2026-09-04 | 未发现官方代码 | `autolr` |
 | Serving 与研究基础设施 | [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../2609.05063-allecompanion/README.md) | Allegro.com，2026-09-04 | 未发现官方代码 | `allecompanion` |
 | Serving 与研究基础设施 | [CORAL: An LLM-Native Harness for Production Recommender Systems](../2609.02730-coral/README.md) | Meta AI，2026-09-02 | 未发现官方代码 | `coral` |

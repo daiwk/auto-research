@@ -3,6 +3,9 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [UniRec](../2609.11052-unirec/README.md)：联合预排和精排融合，以跨阶段偏好对齐和组相对正则减少级联偏差。
+- [BAFF](../2609.08725-baff/README.md)：按广告排名差和出价差过滤受 RTB A/B 对侧策略污染的训练日志。
+- [SequenceO1](../2609.08443-sequenceo1/README.md)：把远期超长历史压成固定预算 sketch，并与近期行为分支融合。
 - [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md)：以多专家评审、证据加权预算和确定性晋级门串联研究、实验与上线评审。
 - [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../2609.05063-allecompanion/README.md)：用 ComCat 互补类别图、类别约束双塔和 Category Adapter 过滤共购噪声。
 - [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。

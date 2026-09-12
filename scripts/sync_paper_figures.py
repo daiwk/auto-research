@@ -44,6 +44,7 @@ DOC_ROOTS = (
     ROOT / "docs" / "post-training",
     ROOT / "docs" / "agent-research",
     ROOT / "docs" / "foundation-models",
+    ROOT / "docs" / "evolution",
 )
 TMP = ROOT / "tmp" / "paper-figures"
 MANIFEST = ROOT / "docs" / "paper-figures-manifest.json"

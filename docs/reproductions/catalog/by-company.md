@@ -6,6 +6,9 @@
 - 2026-08 · [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - 2026-08 · [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：以共享历史编码器统一 SID 生成和 item-level 排序，用 rollout 与 logged impression 双来源蒸馏训练期 teacher。
 
+## Dable
+- 2026-09 · [BAFF](../2609.08725-baff/README.md)：用广告排名差与出价差的双轴过滤，降低 RTB A/B 共享训练日志的相互干扰。
+
 ## AI VK
 - 2026-08 · [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
 
@@ -66,6 +69,7 @@
 - 2025-03 · [COBRA](../2503.02453-cobra/README.md)：先用稀疏生成缩小候选空间，再用稠密生成细排，形成级联式生成召回。
 
 ## ByteDance / Douyin / TikTok
+- 2026-09 · [SequenceO1](../2609.08443-sequenceo1/README.md)：把远期超长历史压成固定预算 prototype sketch，并与近期行为分支共同建模。
 - 2026-09 · [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
 - 2026-08 · [TM20K](../2608.07055-tm20k/README.md)：教师保留完整行为 token，学生用连续合并和蒸馏压缩超长序列。
 - 2026-08 · [DME](../2608.02148-dme/README.md)：先做多模态对比预训练，再以 typed latent evidence 和 cross-conditional reconstruction 保留细粒度对侧语义。
@@ -113,6 +117,7 @@
 - 2017-03 · [DeepFM](../1703.04247-deepfm/README.md)：用共享 embedding 联合 FM 二阶交互和 deep 高阶交互，减少手工特征交叉。
 
 ## Kuaishou
+- 2026-09 · [UniRec](../2609.11052-unirec/README.md)：联合预排和精排融合，以纵向偏好对齐、紧凑 pairwise 聚合和组相对正则协调级联阶段。
 - 2026-08 · [HRPO](../2608.00750-hrpo/README.md)：按层级 Semantic ID 前缀构造 residual credit-to-go，让生成式推荐的策略更新同时优化局部 token 与整条推荐轨迹。
 - 2026-07 · [RecoReward](../2607.25901-reco-reward/README.md)：以目标/非目标推荐亲和力差作为多模态描述的训练奖励。
 - 2026-07 · [TWICE](../2607.25404-twice/README.md)：用双时钟和双窗口校正在线广告长期延迟转化。

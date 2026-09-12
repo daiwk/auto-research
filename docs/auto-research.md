@@ -16,6 +16,10 @@ Auto Research 负责把“我想研究什么”转成一条可追踪、可复现
 跨本地、SSH、Slurm 执行，版本化公平协议，论文到实验提案，配对统计决策和负结果记忆
 由统一平台层提供：[查看自动研究平台 P1 →](research-platform-p1.md)。
 
+多个长周期 idea 的并行状态、失败隔离、重启恢复和双层经验记忆由
+[长周期研究组合控制器 →](evolution/research-portfolio.md) 提供。它包在现有领域
+adapter、trainer 和 evaluator 外层，不把自然语言论文建议直接当作可执行算子。
+
 ## 先理解候选来源
 
 Directed evolution 不是“搜到一篇论文后现场生成实现”。它把论文发现和代码执行分成

@@ -12,6 +12,7 @@ nav:
       - 领域适配: evolution-domains.md
       - 多轮进化协议: model-evolution.md
       - Evolve 组件兼容图: evolution-operators.md
+      - 长周期研究组合控制器: evolution/research-portfolio.md
       - UniRank 公共评测: unirank.md
   - 论文实现与评测:
       - 研究库总览: research-library.md

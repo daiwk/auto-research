@@ -115,6 +115,10 @@ METHODS = (
     "coskill",
     "silr",
     "multi-harness-rl",
+    "procedural-graphs",
+    "memforest",
+    "feedback-scaffold",
+    "maple",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

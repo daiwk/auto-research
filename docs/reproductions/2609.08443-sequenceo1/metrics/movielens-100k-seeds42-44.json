@@ -1,0 +1,203 @@
+{
+  "schema_version": 2,
+  "method": "sequenceo1",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.08443",
+        "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
+        "url": "https://arxiv.org/abs/2609.08443",
+        "organization": "ByteDance / Douyin"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "sequenceo1",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "sequenceo1 executable mechanism",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.051043764990484665,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.20363636363636364
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -5.484079519599772,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -14.340344168260037
+      },
+      "stages": {
+        "validation_only_alpha": 0.30000000000000004,
+        "validation_metrics": {
+          "hit_at_10": 0.15454545454545454,
+          "ndcg_at_10": 0.07319095903145054,
+          "fresh_hit_at_10": 0.05263157894736842,
+          "head_share_at_10": 0.20454545454545456
+        },
+        "finite_scores": 360
+      },
+      "paper_results": {
+        "thirty_day_activeness_lift_percent": 0.1968,
+        "duration_lift_percent": 1.4999,
+        "finish_lift_percent": 2.3256
+      },
+      "scope": "MovieLens 历史远短于 100K；这里只验证固定预算 prototype sketch 与 recent 双分支，不复刻 MRLB/FlashSA。",
+      "manifest_ref": "reproduction:sequenceo1"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.08443",
+        "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
+        "url": "https://arxiv.org/abs/2609.08443",
+        "organization": "ByteDance / Douyin"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "sequenceo1",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "sequenceo1 executable mechanism",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.051043764990484665,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.20363636363636364
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -5.484079519599772,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -14.340344168260037
+      },
+      "stages": {
+        "validation_only_alpha": 0.30000000000000004,
+        "validation_metrics": {
+          "hit_at_10": 0.15454545454545454,
+          "ndcg_at_10": 0.07319095903145054,
+          "fresh_hit_at_10": 0.05263157894736842,
+          "head_share_at_10": 0.20454545454545456
+        },
+        "finite_scores": 360
+      },
+      "paper_results": {
+        "thirty_day_activeness_lift_percent": 0.1968,
+        "duration_lift_percent": 1.4999,
+        "finish_lift_percent": 2.3256
+      },
+      "scope": "MovieLens 历史远短于 100K；这里只验证固定预算 prototype sketch 与 recent 双分支，不复刻 MRLB/FlashSA。",
+      "manifest_ref": "reproduction:sequenceo1"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.08443",
+        "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
+        "url": "https://arxiv.org/abs/2609.08443",
+        "organization": "ByteDance / Douyin"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "sequenceo1",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "sequenceo1 executable mechanism",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.051043764990484665,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.20363636363636364
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -5.484079519599772,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -14.340344168260037
+      },
+      "stages": {
+        "validation_only_alpha": 0.30000000000000004,
+        "validation_metrics": {
+          "hit_at_10": 0.15454545454545454,
+          "ndcg_at_10": 0.07319095903145054,
+          "fresh_hit_at_10": 0.05263157894736842,
+          "head_share_at_10": 0.20454545454545456
+        },
+        "finite_scores": 360
+      },
+      "paper_results": {
+        "thirty_day_activeness_lift_percent": 0.1968,
+        "duration_lift_percent": 1.4999,
+        "finish_lift_percent": 2.3256
+      },
+      "scope": "MovieLens 历史远短于 100K；这里只验证固定预算 prototype sketch 与 recent 双分支，不复刻 MRLB/FlashSA。",
+      "manifest_ref": "reproduction:sequenceo1"
+    }
+  ],
+  "aggregate_metrics": {
+    "fresh_hit_at_10_mean": 0.031746031746031744,
+    "fresh_hit_at_10_std": 0.0,
+    "head_share_at_10_mean": 0.20363636363636364,
+    "head_share_at_10_std": 0.0,
+    "hit_at_10_mean": 0.10454545454545454,
+    "hit_at_10_std": 0.0,
+    "ndcg_at_10_mean": 0.051043764990484665,
+    "ndcg_at_10_std": 0.0
+  },
+  "manifest_ref": "reproduction:sequenceo1",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+  },
+  "provenance": {
+    "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
+    "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
+    "dataset_fingerprint": "0d7a122af22cb569eb83664d34d1c8fb443a0631bfab827d8e63c7fc3b44ef46"
+  }
+}

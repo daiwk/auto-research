@@ -511,6 +511,22 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.11636": (
+        "planner:maple",
+        "MAPLE 持久化已验证的候选计划，并在后续同类任务中检索复用",
+    ),
+    "2609.09153": (
+        "planner:procedural-graphs",
+        "Procedural Graphs 把成功过程写成 procedure-relation-procedure 边并复用局部结构",
+    ),
+    "2609.08404": (
+        "critic:feedback-scaffold",
+        "Environments as Scaffold 从早期动作引导切换到后期 observation enrichment",
+    ),
+    "2609.08273": (
+        "memory:memforest",
+        "MemForest 以事件分区、渐进合并与 anchor 传播维护有限容量记忆",
+    ),
     "2609.04882": (
         "memory:atomrec",
         "AtomRec 的原子偏好字段、可演化语义链接与多跳协同证据检索",

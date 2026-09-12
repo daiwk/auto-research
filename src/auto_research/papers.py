@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import re
 import time
 from collections.abc import Iterable
+from pathlib import Path
 import urllib.parse
 import urllib.error
 import urllib.request
@@ -25,12 +27,15 @@ class ArxivClient:
         minimum_interval_seconds: float = 0.0,
         maximum_retries: int = 3,
         retry_backoff_seconds: float = 2.0,
+        cache_dir: Path | None = None,
     ):
         self.timeout = timeout
         self.user_agent = user_agent
         self.minimum_interval_seconds = minimum_interval_seconds
         self.maximum_retries = maximum_retries
         self.retry_backoff_seconds = retry_backoff_seconds
+        self.cache_dir = cache_dir
+        self.cache_fallbacks: list[str] = []
         self._last_request_at: float | None = None
 
     def search(
@@ -139,10 +144,13 @@ class ArxivClient:
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
                     payload = response.read()
                 self._last_request_at = time.monotonic()
+                self._write_cache(request.full_url, payload)
                 return payload
             except urllib.error.HTTPError as exc:
-                if exc.code not in {429, 500, 502, 503, 504} or attempt >= self.maximum_retries:
+                if exc.code not in {429, 500, 502, 503, 504}:
                     raise
+                if attempt >= self.maximum_retries:
+                    return self._cached_or_raise(request.full_url, exc)
                 retry_after = exc.headers.get("Retry-After") if exc.headers else None
                 try:
                     delay = float(retry_after) if retry_after else 0.0
@@ -156,9 +164,37 @@ class ArxivClient:
                 # these escaped immediately, aborting the entire four-track
                 # discovery job before its bounded retry policy could help.
                 if attempt >= self.maximum_retries:
-                    raise
+                    return self._cached_or_raise(request.full_url, None)
                 time.sleep(self.retry_backoff_seconds * (2**attempt))
         raise AssertionError("unreachable")
+
+    def _cache_path(self, url: str) -> Path | None:
+        if self.cache_dir is None:
+            return None
+        digest = hashlib.sha256(url.encode("utf-8")).hexdigest()
+        return self.cache_dir / f"{digest}.xml"
+
+    def _write_cache(self, url: str, payload: bytes) -> None:
+        path = self._cache_path(url)
+        if path is None:
+            return
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(".tmp")
+        temporary.write_bytes(payload)
+        temporary.replace(path)
+
+    def _cached_or_raise(
+        self, url: str, error: BaseException | None
+    ) -> bytes:
+        path = self._cache_path(url)
+        if path is not None and path.is_file():
+            self.cache_fallbacks.append(url)
+            return path.read_bytes()
+        if error is not None:
+            raise error
+        raise urllib.error.URLError(
+            "arXiv request exhausted retries and no cached page is available"
+        )
 
 
 def canonical_arxiv_id(arxiv_id: str) -> str:
