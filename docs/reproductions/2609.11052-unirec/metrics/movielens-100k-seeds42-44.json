@@ -1,0 +1,207 @@
+{
+  "schema_version": 2,
+  "method": "unirec",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.11052",
+        "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+        "url": "https://arxiv.org/abs/2609.11052",
+        "organization": "Kuaishou"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "unirec",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "unirec executable mechanism",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.04721159695893885,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1859090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": -12.499999999999991,
+        "ndcg_at_10_percent": -12.57996848869591,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -21.797323135755256
+      },
+      "stages": {
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.06828848761354278,
+          "fresh_hit_at_10": 0.10526315789473684,
+          "head_share_at_10": 0.19636363636363635
+        },
+        "finite_scores": 360
+      },
+      "paper_results": {
+        "app_usage_lift_percent": 0.616,
+        "total_watch_time_lift_percent": 0.675,
+        "video_watch_time_lift_percent": 0.755,
+        "active_users_lift_percent": 0.189
+      },
+      "scope": "MovieLens 的短公开序列仅验证跨阶段对齐/组相对聚合，不等于快手生产级 cascade。",
+      "manifest_ref": "reproduction:unirec"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.11052",
+        "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+        "url": "https://arxiv.org/abs/2609.11052",
+        "organization": "Kuaishou"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "unirec",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "unirec executable mechanism",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.04721159695893885,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1859090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": -12.499999999999991,
+        "ndcg_at_10_percent": -12.57996848869591,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -21.797323135755256
+      },
+      "stages": {
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.06828848761354278,
+          "fresh_hit_at_10": 0.10526315789473684,
+          "head_share_at_10": 0.19636363636363635
+        },
+        "finite_scores": 360
+      },
+      "paper_results": {
+        "app_usage_lift_percent": 0.616,
+        "total_watch_time_lift_percent": 0.675,
+        "video_watch_time_lift_percent": 0.755,
+        "active_users_lift_percent": 0.189
+      },
+      "scope": "MovieLens 的短公开序列仅验证跨阶段对齐/组相对聚合，不等于快手生产级 cascade。",
+      "manifest_ref": "reproduction:unirec"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.11052",
+        "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+        "url": "https://arxiv.org/abs/2609.11052",
+        "organization": "Kuaishou"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "unirec",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "unirec executable mechanism",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.04721159695893885,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.1859090909090909
+      },
+      "relative": {
+        "hit_at_10_percent": -12.499999999999991,
+        "ndcg_at_10_percent": -12.57996848869591,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -21.797323135755256
+      },
+      "stages": {
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.06828848761354278,
+          "fresh_hit_at_10": 0.10526315789473684,
+          "head_share_at_10": 0.19636363636363635
+        },
+        "finite_scores": 360
+      },
+      "paper_results": {
+        "app_usage_lift_percent": 0.616,
+        "total_watch_time_lift_percent": 0.675,
+        "video_watch_time_lift_percent": 0.755,
+        "active_users_lift_percent": 0.189
+      },
+      "scope": "MovieLens 的短公开序列仅验证跨阶段对齐/组相对聚合，不等于快手生产级 cascade。",
+      "manifest_ref": "reproduction:unirec"
+    }
+  ],
+  "aggregate_metrics": {
+    "fresh_hit_at_10_mean": 0.031746031746031744,
+    "fresh_hit_at_10_std": 0.0,
+    "head_share_at_10_mean": 0.1859090909090909,
+    "head_share_at_10_std": 0.0,
+    "hit_at_10_mean": 0.09545454545454546,
+    "hit_at_10_std": 0.0,
+    "ndcg_at_10_mean": 0.04721159695893886,
+    "ndcg_at_10_std": 0.0
+  },
+  "manifest_ref": "reproduction:unirec",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+  },
+  "provenance": {
+    "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
+    "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
+    "dataset_fingerprint": "e88b3319624ef15d6107ccfe92c407d0194180185437a2047500c5fd6b9cf389",
+    "artifact_path": "docs/reproductions/2609.11052-unirec/metrics/movielens-100k-seeds42-44.json"
+  }
+}

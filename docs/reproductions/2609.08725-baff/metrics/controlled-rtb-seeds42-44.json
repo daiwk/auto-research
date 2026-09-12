@@ -1,0 +1,167 @@
+{
+  "schema_version": 2,
+  "method": "baff",
+  "dataset": "controlled RTB simulation",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.08725",
+        "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
+        "url": "https://arxiv.org/abs/2609.08725",
+        "organization": "Dable"
+      },
+      "dataset": {
+        "name": "controlled RTB simulation",
+        "requests": 2400,
+        "candidates": 30
+      },
+      "setup": {
+        "adapter": "baff",
+        "seed": 42,
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "naive pooled training",
+        "parameter_deviation": 0.0554115075749221,
+        "retained_control_fraction": 1.0
+      },
+      "method": {
+        "name": "BAFF F(0.5,0.5)",
+        "parameter_deviation": 0.05586013600227267,
+        "retained_control_fraction": 0.9791666666666666
+      },
+      "relative": {
+        "parameter_deviation_reduction_percent": -0.8096304305454585
+      },
+      "stages": {
+        "d_ad_mean": 0.06244444444444445,
+        "d_bp_mean": 0.023356297046995933,
+        "filter_exactly_matches_equation": true
+      },
+      "paper_results": {
+        "cpc_te_gap_naive": 9.85,
+        "cpc_te_gap_baff": 0.44,
+        "ctr_te_gap_naive_pp": 1.94,
+        "ctr_te_gap_baff_pp": 0.4
+      },
+      "scope": "受控 RTB 仿真执行论文 F(k,l) 判据与 ridge 偏差诊断；不是论文线上 KPI，也不替代私有 DSP 日志。",
+      "manifest_ref": "reproduction:baff"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.08725",
+        "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
+        "url": "https://arxiv.org/abs/2609.08725",
+        "organization": "Dable"
+      },
+      "dataset": {
+        "name": "controlled RTB simulation",
+        "requests": 2400,
+        "candidates": 30
+      },
+      "setup": {
+        "adapter": "baff",
+        "seed": 43,
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "naive pooled training",
+        "parameter_deviation": 0.04554116250067161,
+        "retained_control_fraction": 1.0
+      },
+      "method": {
+        "name": "BAFF F(0.5,0.5)",
+        "parameter_deviation": 0.04755823018759019,
+        "retained_control_fraction": 0.9591666666666666
+      },
+      "relative": {
+        "parameter_deviation_reduction_percent": -4.429108911940567
+      },
+      "stages": {
+        "d_ad_mean": 0.09970833333333334,
+        "d_bp_mean": 0.04248299025237329,
+        "filter_exactly_matches_equation": true
+      },
+      "paper_results": {
+        "cpc_te_gap_naive": 9.85,
+        "cpc_te_gap_baff": 0.44,
+        "ctr_te_gap_naive_pp": 1.94,
+        "ctr_te_gap_baff_pp": 0.4
+      },
+      "scope": "受控 RTB 仿真执行论文 F(k,l) 判据与 ridge 偏差诊断；不是论文线上 KPI，也不替代私有 DSP 日志。",
+      "manifest_ref": "reproduction:baff"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.08725",
+        "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
+        "url": "https://arxiv.org/abs/2609.08725",
+        "organization": "Dable"
+      },
+      "dataset": {
+        "name": "controlled RTB simulation",
+        "requests": 2400,
+        "candidates": 30
+      },
+      "setup": {
+        "adapter": "baff",
+        "seed": 44,
+        "same_split_and_candidates": true
+      },
+      "baseline": {
+        "name": "naive pooled training",
+        "parameter_deviation": 0.048334301663495546,
+        "retained_control_fraction": 1.0
+      },
+      "method": {
+        "name": "BAFF F(0.5,0.5)",
+        "parameter_deviation": 0.048272486315664234,
+        "retained_control_fraction": 0.9991666666666666
+      },
+      "relative": {
+        "parameter_deviation_reduction_percent": 0.12789126087239647
+      },
+      "stages": {
+        "d_ad_mean": 0.027638888888888893,
+        "d_bp_mean": 0.019645088153180917,
+        "filter_exactly_matches_equation": true
+      },
+      "paper_results": {
+        "cpc_te_gap_naive": 9.85,
+        "cpc_te_gap_baff": 0.44,
+        "ctr_te_gap_naive_pp": 1.94,
+        "ctr_te_gap_baff_pp": 0.4
+      },
+      "scope": "受控 RTB 仿真执行论文 F(k,l) 判据与 ridge 偏差诊断；不是论文线上 KPI，也不替代私有 DSP 日志。",
+      "manifest_ref": "reproduction:baff"
+    }
+  ],
+  "aggregate_metrics": {
+    "parameter_deviation_mean": 0.05056361750184237,
+    "parameter_deviation_std": 0.004600801193615434,
+    "retained_control_fraction_mean": 0.9791666666666666,
+    "retained_control_fraction_std": 0.020000000000000018
+  },
+  "manifest_ref": "reproduction:baff",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+  },
+  "provenance": {
+    "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
+    "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
+    "dataset_fingerprint": "fed6f202d032852dffd662670266666bf7ad6145daf4f66f10cb6b6d50d03d7d",
+    "artifact_path": "docs/reproductions/2609.08725-baff/metrics/controlled-rtb-seeds42-44.json"
+  }
+}

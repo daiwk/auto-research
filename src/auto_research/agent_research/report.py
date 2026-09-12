@@ -4,6 +4,10 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "procedural-graphs": ("Procedural Graphs", "https://arxiv.org/abs/2609.09153"),
+    "memforest": ("MemForest", "https://arxiv.org/abs/2609.08273"),
+    "feedback-scaffold": ("Environments as Scaffold", "https://arxiv.org/abs/2609.08404"),
+    "maple": ("MAPLE", "https://arxiv.org/abs/2609.11636"),
     "atomrec": ("AtomRec", "https://arxiv.org/abs/2609.04882"),
     "coskill": ("CoSkill", "https://arxiv.org/abs/2609.04865"),
     "silr": ("SiLR", "https://arxiv.org/abs/2609.04629"),

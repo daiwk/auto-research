@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 跨模型族 OPD | [CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts](2609.10154-compass-opd/README.md) | Institute of Information Engineering, Chinese Academy of Sciences，2026-09-09 | 未发现官方代码 | `compass-opd` |
+| 概率传输 OPD | [Distillation as Probability Transport: Routed On-Policy Distillation](2609.08337-route-opd/README.md) | Tencent，2026-09-08 | 未发现官方代码 | `route-opd` |
+| 弱到强反向蒸馏 | [Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation](2609.08798-oprd/README.md) | KAIST AI，2026-09-08 | 未发现官方代码 | `oprd` |
+| 代码测试时 RL | [Entropy-Regularized Rank-Masked Policy Optimization for Test-Time Reinforcement Learning in Code Generation](2609.09135-probe-erpo/README.md) | Nanyang Technological University，2026-09-08 | 未发现官方代码 | `probe-erpo` |
 | 极稀疏 On-policy distillation | [Extremely Sparse Supervision Incentivizes Reasoning Ability](2609.04565-sparse-opd/README.md) | Amazon / Duke University，2026-09-03 | 未发现官方代码 | `sparse-opd` |
 | 弱模型前缀探索 | [Boosting LLM Exploration via Weak-Model Guidance in RLVR](2608.27420-weak-guide-rlvr/README.md) | Peking University，2026-08-27 | 未发现官方代码 | `weak-guide-rlvr` |
 | 跨领域 RLVR 能力融合 | [Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms](2608.27409-rlvr-fusion/README.md) | Fudan University，2026-08-27 | [已开源](https://github.com/Di-viner/LLM-Fusion) | `rlvr-fusion` |

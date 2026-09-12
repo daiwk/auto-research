@@ -32,6 +32,7 @@ def update(
             "seed", "cast", "cort", "ripo", "tis", "icepop", "kpop",
             "gppo", "dr-grpo", "armor", "reinforce-plus", "taco",
             "chord", "vapo",
+            "oprd", "route-opd", "compass-opd", "probe-erpo",
         } else probabilities
     )
     if algorithm in {"tis", "icepop", "online-icepop"}:
@@ -78,6 +79,7 @@ def update(
         "ttpo", "weak-guide-rlvr", "uc-mopd", "spear",
         "rlvr-fusion", "video-opsd", "normalized-dpo",
         "gapo", "sparse-opd",
+        "oprd", "route-opd", "compass-opd", "probe-erpo",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

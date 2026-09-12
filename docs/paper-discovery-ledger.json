@@ -12116,6 +12116,46 @@
           "source_provenance": []
         }
       ]
+    },
+    {
+      "batch": "recent-20260912-cross-domain",
+      "scope_kind": "partial-cross-source-review",
+      "checked_at": "2026-09-12T23:00:00+08:00",
+      "window": "2026-09-05 through 2026-09-12",
+      "sources": [
+        "DeepXiv candidate search",
+        "arXiv abstract pages",
+        "arXiv HTML and PDF full text",
+        "official repositories"
+      ],
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "coverage": {
+        "arxiv_api": "rate-limited (HTTP 429); primary full text and DeepXiv fallback used",
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "overlap_start": "2026-09-05",
+        "source_artifact": "recent-paper-scan-20260912.md"
+      },
+      "candidates": [
+        {"id": "2609.11052", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "unirec", "doc": "reproductions/2609.11052-unirec/README.md"},
+        {"id": "2609.08443", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "sequenceo1", "doc": "reproductions/2609.08443-sequenceo1/README.md"},
+        {"id": "2609.08725", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "baff", "doc": "reproductions/2609.08725-baff/README.md"},
+        {"id": "2609.08248", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "research-portfolio-amle", "doc": "evolution/2609.08248-amle/README.md"},
+        {"id": "2609.10922", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "research-portfolio-auto-recsys", "doc": "evolution/2609.10922-auto-recsys/README.md"},
+        {"id": "2609.08798", "priority": "P1", "track": "post-training", "status": "implemented", "key": "oprd", "doc": "post-training/2609.08798-oprd/README.md"},
+        {"id": "2609.08337", "priority": "P1", "track": "post-training", "status": "implemented", "key": "route-opd", "doc": "post-training/2609.08337-route-opd/README.md"},
+        {"id": "2609.10154", "priority": "P1", "track": "post-training", "status": "implemented", "key": "compass-opd", "doc": "post-training/2609.10154-compass-opd/README.md"},
+        {"id": "2609.09135", "priority": "P1", "track": "post-training", "status": "implemented", "key": "probe-erpo", "doc": "post-training/2609.09135-probe-erpo/README.md"},
+        {"id": "2609.09153", "priority": "P1", "track": "agent", "status": "implemented", "key": "procedural-graphs", "doc": "agent-research/2609.09153-procedural-graphs/README.md"},
+        {"id": "2609.08273", "priority": "P1", "track": "agent", "status": "implemented", "key": "memforest", "doc": "agent-research/2609.08273-memforest/README.md"},
+        {"id": "2609.08404", "priority": "P1", "track": "agent", "status": "implemented", "key": "feedback-scaffold", "doc": "agent-research/2609.08404-feedback-scaffold/README.md"},
+        {"id": "2609.11636", "priority": "P1", "track": "agent", "status": "implemented", "key": "maple", "doc": "agent-research/2609.11636-maple/README.md"}
+      ]
     }
   ]
 }

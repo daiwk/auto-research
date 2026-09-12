@@ -1,0 +1,1 @@
+"""BAFF reproduction adapter."""

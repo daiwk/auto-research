@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 持久化优化规划 | [MAPLE: Memory-Augmented Planning with Language and Evolution](2609.11636-maple/README.md) | Harbin Institute of Technology, Shenzhen，2026-09-10 | [已开源](https://github.com/xin8coder/MAPLE) | `maple` |
+| 环境反馈脚手架 | [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](2609.08404-feedback-scaffold/README.md) | Fudan University，2026-09-08 | [已开源](https://github.com/HongbangYuan/EnvAsScaffold) | `feedback-scaffold` |
+| 事件树记忆压缩 | [MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging](2609.08273-memforest/README.md) | Shanghai Jiao Tong University，2026-09-08 | [已开源](https://github.com/Celina-love-sweet/MemForest) | `memforest` |
+| 自进化程序图 | [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](2609.09153-procedural-graphs/README.md) | Google，2026-09-08 | 未发现官方代码 | `procedural-graphs` |
 | Agentic recommendation memory | [AtomRec: Evolving Atomic Memory for Agentic Recommendation](2609.04882-atomrec/README.md) | Xi'an Jiaotong-Liverpool University，2026-09-04 | 未发现官方代码 | `atomrec` |
 | Hierarchical skill coevolution | [CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution](2609.04865-coskill/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-09-04 | [已开源](https://github.com/jinyuan-cookie/CoSkill) | `coskill` |
 | Structure-preserving verifier and reward | [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](2609.04629-silr/README.md) | Institute of Science Tokyo，2026-09-03 | 未发现官方代码 | `silr` |

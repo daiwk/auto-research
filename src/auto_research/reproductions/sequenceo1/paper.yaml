@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "sequenceo1",
+  "arxiv_id": "2609.08443",
+  "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
+  "paper_url": "https://arxiv.org/abs/2609.08443",
+  "organization": "ByteDance / Douyin",
+  "published": "2026-09-08",
+  "upstream_code": "否：未找到作者公开仓库（核查日期：2026-09-12）",
+  "track": "recommendation",
+  "topics": [
+    "long-sequence",
+    "sketch-attention",
+    "prototype-compression",
+    "industrial-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/sequenceo1",
+  "documentation": "docs/reproductions/2609.08443-sequenceo1/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "private 100K-event histories",
+    "MRLB/FlashSA production kernels",
+    "online cache service"
+  ],
+  "evolve_operators": []
+}

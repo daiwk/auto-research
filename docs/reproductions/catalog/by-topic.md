@@ -279,10 +279,12 @@
 ## 多阶段排序与混排
 
 ### 实时序列与 listwise 重排
+- [SequenceO1](../2609.08443-sequenceo1/README.md)：将远期超长历史压成固定预算 prototype sketch，再与近期行为分支融合。
 - [POEM](../2606.29946-poem/README.md)：用当前请求的多路 rank signal 构造偏序序列，补充纯时间历史。
 - [PIANO](../2606.16641-piano/README.md)：query-driven interest refiner 选择相关历史，information node 汇总候选列表并条件化 item score。
 
 ### 召回、粗排与精排协同
+- [UniRec](../2609.11052-unirec/README.md)：联合预排与精排融合，以纵向偏好对齐、紧凑 pairwise 聚合和组相对正则协调级联阶段。
 - [SPEAR](../2608.01738-spear/README.md)：以双 embedding 和乘法选择门把 query rewrite 与 item relevance 端到端对齐，同时保留原 query residual。
 - [STEPS](../2608.01949-steps/README.md)：以 planning、execution、filter 三 Agent 联合决定推送动作和下一次系统唤醒时刻。
 - [ROCS](../2607.27744-rocs/README.md)：把 request-side encoder 与 candidate-side late interaction 解耦，使同一表征路径覆盖大候选检索和精排序批量打分。
@@ -374,6 +376,7 @@
 - [M6-Rec](../2205.08084-m6rec/README.md)：冻结大部分预训练语言模型，仅用 option-adapter 适配推荐任务。
 
 ### 广告与商业决策
+- [BAFF](../2609.08725-baff/README.md)：用广告排名差和出价差的双轴过滤，降低 RTB A/B 对侧策略造成的训练日志干扰。
 - [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 - [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
 

@@ -110,6 +110,10 @@ ALGORITHMS = (
     "normalized-dpo",
     "gapo",
     "sparse-opd",
+    "oprd",
+    "route-opd",
+    "compass-opd",
+    "probe-erpo",
 )
 
 

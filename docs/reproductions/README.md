@@ -50,6 +50,9 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `unirec` · [UniRec](2609.11052-unirec/README.md)：统一预排/精排融合、纵向偏好对齐与组相对正则。
+- `sequenceo1` · [SequenceO1](2609.08443-sequenceo1/README.md)：固定预算 Sketch Attention、近期分支与超长序列缓存设计。
+- `baff` · [BAFF](2609.08725-baff/README.md)：RTB 共享日志的广告排名/出价双轴干扰过滤。
 - `allecompanion` · [AlleCompanion](2609.05063-allecompanion/README.md)：类别约束双塔、ComCat 互补类别图与受控 Category Adapter。
 - `autolr` · [AutoLR](2609.04871-autolr/README.md)：多专家评审、证据加权实验预算与确定性上线晋级门。
 - `beaconkv` · [BeaconKV](2609.04971-beaconkv/README.md)：用 query 簇 beacon 预测长推理中的远程 KV 重访。

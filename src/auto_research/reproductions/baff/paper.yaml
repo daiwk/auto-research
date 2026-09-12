@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "baff",
+  "arxiv_id": "2609.08725",
+  "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
+  "paper_url": "https://arxiv.org/abs/2609.08725",
+  "organization": "Dable",
+  "published": "2026-09-08",
+  "upstream_code": "否：未找到作者公开仓库（核查日期：2026-09-12）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "rtb",
+    "ab-testing",
+    "training-data-interference"
+  ],
+  "local_code": "src/auto_research/reproductions/baff",
+  "documentation": "docs/reproductions/2609.08725-baff/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "controlled RTB simulation"
+  ],
+  "baseline": "naive pooled training",
+  "metrics": [
+    "parameter_deviation",
+    "retained_control_fraction"
+  ],
+  "mechanisms": [
+    "private DSP auction logs",
+    "production CTR model",
+    "market-side reference experiment"
+  ],
+  "evolve_operators": []
+}

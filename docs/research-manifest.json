@@ -425,6 +425,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "feedback-scaffold",
+      "title": "Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks",
+      "paper_url": "https://arxiv.org/abs/2609.08404",
+      "detail_path": "agent-research/2609.08404-feedback-scaffold/README.md",
+      "topic": [
+        "环境反馈脚手架"
+      ],
+      "first_author": "Hongbang Yuan",
+      "first_author_affiliation": "Fudan University",
+      "published": "2026-09-08",
+      "code": "https://github.com/HongbangYuan/EnvAsScaffold",
+      "adapter": "feedback-scaffold"
+    },
+    {
+      "domain": "agent-research",
       "key": "gaia",
       "title": "GAIA",
       "paper_url": "https://arxiv.org/abs/2311.12983",
@@ -699,6 +714,21 @@
     },
     {
       "domain": "agent-research",
+      "key": "maple",
+      "title": "MAPLE: Memory-Augmented Planning with Language and Evolution",
+      "paper_url": "https://arxiv.org/abs/2609.11636",
+      "detail_path": "agent-research/2609.11636-maple/README.md",
+      "topic": [
+        "持久化优化规划"
+      ],
+      "first_author": "Kesheng Chen",
+      "first_author_affiliation": "Harbin Institute of Technology, Shenzhen",
+      "published": "2026-09-10",
+      "code": "https://github.com/xin8coder/MAPLE",
+      "adapter": "maple"
+    },
+    {
+      "domain": "agent-research",
       "key": "memento-skills",
       "title": "Memento-Skills",
       "paper_url": "https://arxiv.org/abs/2603.18743",
@@ -711,6 +741,21 @@
       "published": "2026-03-19",
       "code": "https://github.com/Memento-Teams/Memento-Skills",
       "adapter": "memento-skills"
+    },
+    {
+      "domain": "agent-research",
+      "key": "memforest",
+      "title": "MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging",
+      "paper_url": "https://arxiv.org/abs/2609.08273",
+      "detail_path": "agent-research/2609.08273-memforest/README.md",
+      "topic": [
+        "事件树记忆压缩"
+      ],
+      "first_author": "Junxi Wang",
+      "first_author_affiliation": "Shanghai Jiao Tong University",
+      "published": "2026-09-08",
+      "code": "https://github.com/Celina-love-sweet/MemForest",
+      "adapter": "memforest"
     },
     {
       "domain": "agent-research",
@@ -954,6 +999,21 @@
       "published": "2026-08-07",
       "code": null,
       "adapter": "pmcoder"
+    },
+    {
+      "domain": "agent-research",
+      "key": "procedural-graphs",
+      "title": "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2609.09153",
+      "detail_path": "agent-research/2609.09153-procedural-graphs/README.md",
+      "topic": [
+        "自进化程序图"
+      ],
+      "first_author": "Yuxing Lu",
+      "first_author_affiliation": "Google",
+      "published": "2026-09-08",
+      "code": null,
+      "adapter": "procedural-graphs"
     },
     {
       "domain": "agent-research",
@@ -5853,6 +5913,21 @@
     },
     {
       "domain": "post-training",
+      "key": "compass-opd",
+      "title": "CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts",
+      "paper_url": "https://arxiv.org/abs/2609.10154",
+      "detail_path": "post-training/2609.10154-compass-opd/README.md",
+      "topic": [
+        "跨模型族 OPD"
+      ],
+      "first_author": "Naibin Gu",
+      "first_author_affiliation": "Institute of Information Engineering, Chinese Academy of Sciences",
+      "published": "2026-09-09",
+      "code": null,
+      "adapter": "compass-opd"
+    },
+    {
+      "domain": "post-training",
       "key": "conspo",
       "title": "ConSPO",
       "paper_url": "https://arxiv.org/abs/2605.12969",
@@ -6593,6 +6668,21 @@
     },
     {
       "domain": "post-training",
+      "key": "oprd",
+      "title": "Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.08798",
+      "detail_path": "post-training/2609.08798-oprd/README.md",
+      "topic": [
+        "弱到强反向蒸馏"
+      ],
+      "first_author": "Youngrok Park",
+      "first_author_affiliation": "KAIST AI",
+      "published": "2026-09-08",
+      "code": null,
+      "adapter": "oprd"
+    },
+    {
+      "domain": "post-training",
       "key": "opsd",
       "title": "OPSD",
       "paper_url": "https://arxiv.org/abs/2601.18734",
@@ -6650,6 +6740,21 @@
       "published": "2022-03-04",
       "code": "https://github.com/openai/following-instructions-human-feedback",
       "adapter": "ppo-rlhf"
+    },
+    {
+      "domain": "post-training",
+      "key": "probe-erpo",
+      "title": "Entropy-Regularized Rank-Masked Policy Optimization for Test-Time Reinforcement Learning in Code Generation",
+      "paper_url": "https://arxiv.org/abs/2609.09135",
+      "detail_path": "post-training/2609.09135-probe-erpo/README.md",
+      "topic": [
+        "代码测试时 RL"
+      ],
+      "first_author": "Jiacheng Xu",
+      "first_author_affiliation": "Nanyang Technological University",
+      "published": "2026-09-08",
+      "code": null,
+      "adapter": "probe-erpo"
     },
     {
       "domain": "post-training",
@@ -6846,6 +6951,21 @@
       "published": "2026-08-27",
       "code": "https://github.com/Di-viner/LLM-Fusion",
       "adapter": "rlvr-fusion"
+    },
+    {
+      "domain": "post-training",
+      "key": "route-opd",
+      "title": "Distillation as Probability Transport: Routed On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.08337",
+      "detail_path": "post-training/2609.08337-route-opd/README.md",
+      "topic": [
+        "概率传输 OPD"
+      ],
+      "first_author": "Tianle Xia",
+      "first_author_affiliation": "Tencent",
+      "published": "2026-09-08",
+      "code": null,
+      "adapter": "route-opd"
     },
     {
       "domain": "post-training",
@@ -8315,6 +8435,74 @@
         "evolve_operators": [
           "controller:autolr-evidence-council"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "baff",
+      "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
+      "paper_url": "https://arxiv.org/abs/2609.08725",
+      "detail_path": "reproductions/2609.08725-baff/README.md",
+      "topic": [
+        "advertising",
+        "rtb",
+        "ab-testing",
+        "training-data-interference"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Dable",
+      "published": "2026-09-08",
+      "code": null,
+      "adapter": {
+        "adapter_key": "baff",
+        "arxiv_id": "2609.08725",
+        "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
+        "paper_url": "https://arxiv.org/abs/2609.08725",
+        "track": "recommendation",
+        "organization": "Dable",
+        "published": "2026-09-08",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "rtb",
+          "ab-testing",
+          "training-data-interference"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/baff",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "controlled RTB simulation"
+        ],
+        "baseline": "naive pooled training",
+        "metrics": [
+          "parameter_deviation",
+          "retained_control_fraction"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "2,400 simulated auctions",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "production DSP real-time bidding",
+            "metric": "absolute CPC treatment-effect gap reduction versus naive shared log",
+            "lift_percent": 95.53,
+            "traffic": "single advertiser/SSP; two- and three-day measurement phases",
+            "source_url": "https://arxiv.org/html/2609.08725",
+            "source_location": "Section 5.4, Tables 6-7",
+            "retrieved_at": "2026-09-12"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
       }
     },
     {
@@ -23692,6 +23880,78 @@
     },
     {
       "domain": "recommendation",
+      "key": "sequenceo1",
+      "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
+      "paper_url": "https://arxiv.org/abs/2609.08443",
+      "detail_path": "reproductions/2609.08443-sequenceo1/README.md",
+      "topic": [
+        "long-sequence",
+        "sketch-attention",
+        "prototype-compression",
+        "industrial-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance / Douyin",
+      "published": "2026-09-08",
+      "code": null,
+      "adapter": {
+        "adapter_key": "sequenceo1",
+        "arxiv_id": "2609.08443",
+        "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
+        "paper_url": "https://arxiv.org/abs/2609.08443",
+        "track": "recommendation",
+        "organization": "ByteDance / Douyin",
+        "published": "2026-09-08",
+        "code_url": null,
+        "topics": [
+          "long-sequence",
+          "sketch-attention",
+          "prototype-compression",
+          "industrial-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/sequenceo1",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Douyin and Douyin Lite recommender",
+            "metric": "30-day activeness",
+            "lift_percent": 0.1968,
+            "traffic": "one-month A/B followed by full-traffic deployment",
+            "source_url": "https://arxiv.org/html/2609.08443",
+            "source_location": "Section 4.3, Table 4",
+            "experiment_duration": "one month",
+            "significance": "all reported effects statistically significant",
+            "retrieved_at": "2026-09-12"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "seral",
       "title": "Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models",
       "paper_url": "https://arxiv.org/abs/2502.13539",
@@ -27028,6 +27288,76 @@
             "traffic": "5% traffic, two weeks",
             "source_url": "https://arxiv.org/abs/2607.24439",
             "source_location": "original paper online-result disclosure: product=Kuaishou Lite; metric=total gifting amount"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "unirec",
+      "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2609.11052",
+      "detail_path": "reproductions/2609.11052-unirec/README.md",
+      "topic": [
+        "pre-ranking",
+        "ranking",
+        "cross-stage-alignment",
+        "industrial-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Kuaishou",
+      "published": "2026-09-10",
+      "code": null,
+      "adapter": {
+        "adapter_key": "unirec",
+        "arxiv_id": "2609.11052",
+        "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.11052",
+        "track": "recommendation",
+        "organization": "Kuaishou",
+        "published": "2026-09-10",
+        "code_url": null,
+        "topics": [
+          "pre-ranking",
+          "ranking",
+          "cross-stage-alignment",
+          "industrial-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/unirec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Kuaishou live recommender",
+            "metric": "app usage",
+            "lift_percent": 0.616,
+            "traffic": "20% live traffic followed by full deployment",
+            "source_url": "https://arxiv.org/html/2609.11052",
+            "source_location": "Section 5.4, Table 5",
+            "retrieved_at": "2026-09-12"
           }
         ],
         "selection_exception": null,

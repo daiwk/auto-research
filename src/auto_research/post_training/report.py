@@ -4,6 +4,10 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "oprd": ("On-Policy Reverse Distillation", "https://arxiv.org/abs/2609.08798"),
+    "route-opd": ("RouteOPD", "https://arxiv.org/abs/2609.08337"),
+    "compass-opd": ("CompassOPD", "https://arxiv.org/abs/2609.10154"),
+    "probe-erpo": ("Probe-Driven Test-Time Reinforcement Learning", "https://arxiv.org/abs/2609.09135"),
     "sparse-opd": ("Extremely Sparse Supervision Incentivizes Reasoning Ability", "https://arxiv.org/abs/2609.04565"),
     "gapo": ("Group Adaptive Clipping Policy Optimization", "https://arxiv.org/abs/2609.00444"),
     "rlvr-fusion": ("Consolidating RLVR Capabilities Across Domains", "https://arxiv.org/abs/2608.27409"),

@@ -4211,6 +4211,160 @@
         "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
       }
     ],
+    "src/auto_research/agent_research/latest_20260912.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 36,
+        "qualified_name": "ProceduralGraphAgent.solve_observation",
+        "expression": "self.heldout_edit_accepts += 1",
+        "fingerprint": "975ed7d337cba9369d28e49a1cd8e7912649fa8f74a376ea227053fe89403259"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 40,
+        "qualified_name": "ProceduralGraphAgent.solve_observation",
+        "expression": "self.heldout_edit_rejects += 1",
+        "fingerprint": "c8e99083005b399338b1a2a6564e242841efc1b0364d56cf5f8ab2f89b5e9166"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 43,
+        "qualified_name": "ProceduralGraphAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 44,
+        "qualified_name": "ProceduralGraphAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_insert",
+        "line": 74,
+        "qualified_name": "MemForestAgent._insert",
+        "expression": "tree.anchor_tokens |= tokens",
+        "fingerprint": "09b7cc38ca137c95c5dd87b02c83367fa0318dee0535a12ccef3a61493ffe7be"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_insert",
+        "line": 77,
+        "qualified_name": "MemForestAgent._insert",
+        "expression": "self.event_tree_partitions += 1",
+        "fingerprint": "f2f10d6e63a8d388ff8bfa1b7e0f62e0203ff3f1b3b74890bc2677c3af1c71a3"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_insert",
+        "line": 88,
+        "qualified_name": "MemForestAgent._insert",
+        "expression": "self.progressive_merges += 1",
+        "fingerprint": "dae7b132c8536364707b9e539e4d87689ef82811fc57a6573069379dab3985e0"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 100,
+        "qualified_name": "MemForestAgent.solve_observation",
+        "expression": "self.anchor_propagations += len(neighborhood)",
+        "fingerprint": "5c0aeb0a1560c6071365fd777565484eba0b7c344f9f4d95636cef7581f6a621"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 107,
+        "qualified_name": "MemForestAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 108,
+        "qualified_name": "MemForestAgent.solve_observation",
+        "expression": "self.cost += len(observation.context) + len(neighborhood)",
+        "fingerprint": "dcb7c7049bf244e01a80d266599eb25eccdcfb73608f17884dbebc5d4a758f0c"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 128,
+        "qualified_name": "FeedbackScaffoldAgent.solve_observation",
+        "expression": "self.early_action_guidance += 1",
+        "fingerprint": "96ec37097f63a60c9c97b84d90510f168739611274e863a578e2b38e33c95f60"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 135,
+        "qualified_name": "FeedbackScaffoldAgent.solve_observation",
+        "expression": "self.feedback_observations += len(summaries)",
+        "fingerprint": "1107cf6fb6904e71635f5d0d1f3a816ec5c02cbbcaa2fde40bd5b62be1cbaef5"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 136,
+        "qualified_name": "FeedbackScaffoldAgent.solve_observation",
+        "expression": "self.late_stage_enrichments += int(bool(summaries))",
+        "fingerprint": "0c0d731eb92305e5059789fc249825c0576f19e060f055cd0e709e2b45290322"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 141,
+        "qualified_name": "FeedbackScaffoldAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 142,
+        "qualified_name": "FeedbackScaffoldAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 166,
+        "qualified_name": "MAPLEAgent.solve_observation",
+        "expression": "self.accepted_solution_updates += 1",
+        "fingerprint": "929546ed4271684a469463718b9f6151933fa2f2adfe9538ca0d41fd70d3dc92"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 169,
+        "qualified_name": "MAPLEAgent.solve_observation",
+        "expression": "self.reused_executable_states += 1",
+        "fingerprint": "fb9dce8b6c775be17570a4e20d13a5fb60c2402719de85a751a9a07c3fd063e2"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 170,
+        "qualified_name": "MAPLEAgent.solve_observation",
+        "expression": "self.actions += len(proposed)",
+        "fingerprint": "d7f1b7a993bab35d209bb906c71984ca7409fd914f9a2e5c3f66dc3bf497892b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 171,
+        "qualified_name": "MAPLEAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      }
+    ],
     "src/auto_research/agent_research/lightning_policy.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -9279,7 +9433,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 319,
+        "line": 323,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9287,7 +9441,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 350,
+        "line": 364,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9295,7 +9449,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 355,
+        "line": 369,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9303,7 +9457,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 360,
+        "line": 374,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9311,63 +9465,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 362,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 388,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 391,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 392,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 394,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 395,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 399,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 400,
+        "line": 376,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9383,6 +9481,14 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
+        "line": 406,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
         "line": 407,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
@@ -9390,8 +9496,56 @@
       },
       {
         "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 409,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 410,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 418,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 419,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 422,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 426,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
         "function": "_plan",
-        "line": 427,
+        "line": 452,
         "qualified_name": "_plan",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9399,87 +9553,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 476,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 477,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 480,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 484,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 485,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 493,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 495,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 498,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 498,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 502,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 502,
+        "line": 505,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9489,13 +9563,13 @@
         "function": "_apply_tools",
         "line": 506,
         "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
       },
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 506,
+        "line": 509,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9503,15 +9577,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 510,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 510,
+        "line": 513,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9519,23 +9585,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 520,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 525,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 529,
+        "line": 514,
         "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9543,7 +9593,15 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 533,
+        "line": 522,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 524,
         "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9551,7 +9609,31 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 533,
+        "line": 527,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 527,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 531,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 531,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9575,7 +9657,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 537,
+        "line": 539,
         "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9583,7 +9665,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 537,
+        "line": 539,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9591,7 +9673,23 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 539,
+        "line": 549,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 554,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 558,
         "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9599,7 +9697,63 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 539,
+        "line": 562,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 562,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 564,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 564,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 566,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 566,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 568,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 568,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -10115,7 +10269,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 104,
+        "line": 107,
         "qualified_name": "apply",
         "expression": "state.reward_axis_weights /= state.reward_axis_weights.sum()",
         "fingerprint": "09f33b5afa92e20e613d9cd0d8c98dc7808363f0495a7a1b2902d242cca9856b"
@@ -10123,7 +10277,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 105,
+        "line": 108,
         "qualified_name": "apply",
         "expression": "state.drift_events += 1",
         "fingerprint": "549eef05733c5296b37b8e3aa03551ed1f1c77dc2fa8a78165b34ba82cc72515"
@@ -10133,7 +10287,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 53,
+        "line": 54,
         "qualified_name": "update",
         "expression": "state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)",
         "fingerprint": "b6a0c91a64d121c2aebc293682cc80891fb4b00f45df453786621db9c500d8b7"
@@ -10141,7 +10295,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 82,
+        "line": 84,
         "qualified_name": "update",
         "expression": "state.variant_updates += 1",
         "fingerprint": "893bef108fce174b29a88dcfb593d6773edd36efd7d2862213d54d73a56b808c"
@@ -10149,7 +10303,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 87,
+        "line": 89,
         "qualified_name": "update",
         "expression": "state.online_rollout_refreshes += 1",
         "fingerprint": "7c428a44c4ff081ae94e4d66fcd286d3affd4bdc54a29da050685b33110e603c"
@@ -10437,6 +10591,16 @@
         "qualified_name": "ResearchLoop.evaluate",
         "expression": "self.rollbacks += 1",
         "fingerprint": "84ec7bf43e0b8fb0c9351eb2a6b28acfd7e147238d7050c7bcfba9937825fa5d"
+      }
+    ],
+    "src/auto_research/research_loop/portfolio.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "claim",
+        "line": 176,
+        "qualified_name": "ResearchPortfolio.claim",
+        "expression": "idea.attempts += 1",
+        "fingerprint": "a104e12872f2237f1240b279028b875922ab2e7a8ae01ed8121d18cff1310f96"
       }
     ]
   }
