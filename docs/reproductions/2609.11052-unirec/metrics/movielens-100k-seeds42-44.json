@@ -201,6 +201,7 @@
   "provenance": {
     "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
     "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
-    "dataset_fingerprint": "e88b3319624ef15d6107ccfe92c407d0194180185437a2047500c5fd6b9cf389"
+    "dataset_fingerprint": "e88b3319624ef15d6107ccfe92c407d0194180185437a2047500c5fd6b9cf389",
+    "artifact_path": "docs/reproductions/2609.11052-unirec/metrics/movielens-100k-seeds42-44.json"
   }
 }

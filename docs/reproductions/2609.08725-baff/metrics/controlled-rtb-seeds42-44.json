@@ -161,6 +161,7 @@
   "provenance": {
     "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
     "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
-    "dataset_fingerprint": "fed6f202d032852dffd662670266666bf7ad6145daf4f66f10cb6b6d50d03d7d"
+    "dataset_fingerprint": "fed6f202d032852dffd662670266666bf7ad6145daf4f66f10cb6b6d50d03d7d",
+    "artifact_path": "docs/reproductions/2609.08725-baff/metrics/controlled-rtb-seeds42-44.json"
   }
 }

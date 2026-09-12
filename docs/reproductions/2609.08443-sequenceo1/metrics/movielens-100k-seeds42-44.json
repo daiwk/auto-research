@@ -198,6 +198,7 @@
   "provenance": {
     "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
     "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
-    "dataset_fingerprint": "0d7a122af22cb569eb83664d34d1c8fb443a0631bfab827d8e63c7fc3b44ef46"
+    "dataset_fingerprint": "0d7a122af22cb569eb83664d34d1c8fb443a0631bfab827d8e63c7fc3b44ef46",
+    "artifact_path": "docs/reproductions/2609.08443-sequenceo1/metrics/movielens-100k-seeds42-44.json"
   }
 }

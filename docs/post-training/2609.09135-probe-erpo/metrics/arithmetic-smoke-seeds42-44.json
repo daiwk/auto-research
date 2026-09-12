@@ -431,6 +431,8 @@
   },
   "provenance": {
     "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",
-    "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py"
+    "command": "PYTHONPATH=src python scripts/generate_sep_12_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.09135-probe-erpo/metrics/arithmetic-smoke-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
   }
 }
