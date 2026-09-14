@@ -33,6 +33,7 @@ def update(
             "gppo", "dr-grpo", "armor", "reinforce-plus", "taco",
             "chord", "vapo",
             "oprd", "route-opd", "compass-opd", "probe-erpo",
+            "nsd", "adaptive-opd-gate", "locus", "tasco",
         } else probabilities
     )
     if algorithm in {"tis", "icepop", "online-icepop"}:
@@ -80,6 +81,7 @@ def update(
         "rlvr-fusion", "video-opsd", "normalized-dpo",
         "gapo", "sparse-opd",
         "oprd", "route-opd", "compass-opd", "probe-erpo",
+        "nsd", "adaptive-opd-gate", "locus", "tasco",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

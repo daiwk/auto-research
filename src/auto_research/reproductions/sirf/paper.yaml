@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "sirf",
+  "arxiv_id": "2609.11752",
+  "title": "SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control",
+  "paper_url": "https://arxiv.org/abs/2609.11752",
+  "organization": "Xiaohongshu",
+  "published": "2026-09-10",
+  "upstream_code": "否：未找到作者公开仓库（核查日期：2026-09-14）",
+  "track": "recommendation",
+  "topics": [
+    "content-understanding",
+    "risk-control",
+    "foundation-model",
+    "industrial-deployment"
+  ],
+  "local_code": "src/auto_research/reproductions/sirf",
+  "documentation": "docs/reproductions/2609.11752-sirf/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic synthetic policy cases"
+  ],
+  "baseline": "same-source SFT linear features",
+  "metrics": [
+    "precision",
+    "black_recall",
+    "accuracy"
+  ],
+  "mechanisms": [
+    "8B Qwen continued pretraining",
+    "private account-level data",
+    "EntiGraph/MAGA language generation",
+    "production adjudication serving"
+  ],
+  "evolve_operators": []
+}

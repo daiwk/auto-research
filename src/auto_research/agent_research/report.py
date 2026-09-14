@@ -4,6 +4,14 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "cobra-skills": ("COBRA-Skills", "https://arxiv.org/abs/2609.11682"),
+    "ecdysis": ("Ecdysis", "https://arxiv.org/abs/2609.11677"),
+    "grounded-memory": ("Grounding Agent Memory", "https://arxiv.org/abs/2609.11060"),
+    "toolgrad": ("ToolGrad", "https://arxiv.org/abs/2508.04086"),
+    "prompts": ("PROMPTS", "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/"),
+    "searchatlas": ("SearchAtlas", "https://arxiv.org/abs/2609.10901"),
+    "skill-retention": ("When Synthetic Data Hurts", "https://arxiv.org/abs/2609.10750"),
+    "t1-terminal-rl": ("T1", "https://arxiv.org/abs/2609.11042"),
     "procedural-graphs": ("Procedural Graphs", "https://arxiv.org/abs/2609.09153"),
     "memforest": ("MemForest", "https://arxiv.org/abs/2609.08273"),
     "feedback-scaffold": ("Environments as Scaffold", "https://arxiv.org/abs/2609.08404"),

@@ -4365,6 +4365,280 @@
         "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
       }
     ],
+    "src/auto_research/agent_research/latest_20260914.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 46,
+        "qualified_name": "COBRASkillsAgent.solve_observation",
+        "expression": "self.bandit_allocations += 1",
+        "fingerprint": "4ef98f016a5f769f05d8eb5276a9b3a8047e5ccd8e63ced9bd41b59cce6fce7e"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 53,
+        "qualified_name": "COBRASkillsAgent.solve_observation",
+        "expression": "self.skill_evolutions += 1",
+        "fingerprint": "f183c0949548091ecc791a66dba11d9865edf604dae2b9899128c8bf43bbcb2e"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 54,
+        "qualified_name": "COBRASkillsAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 55,
+        "qualified_name": "COBRASkillsAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 78,
+        "qualified_name": "EcdysisAgent.solve_observation",
+        "expression": "self.fdcr_repairs += 1",
+        "fingerprint": "6573f16211de5fd2b5da2b324a5a3729af80328683894767b937ea8b38b0b7cc"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 79,
+        "qualified_name": "EcdysisAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 80,
+        "qualified_name": "EcdysisAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 87,
+        "qualified_name": "EcdysisAgent.observe",
+        "expression": "self.cross_instance_failures += 1",
+        "fingerprint": "b6365ce9913870425eda57b6efeace22ad98fe46a2f01a56d39ae45ea952f163"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 104,
+        "qualified_name": "GroundedMemoryAgent.solve_observation",
+        "expression": "self.environment_probes += 1",
+        "fingerprint": "264d8a92495db65f2e177402ec1a774adae6fd5bac7e5fccf18d0d19246b61aa"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 107,
+        "qualified_name": "GroundedMemoryAgent.solve_observation",
+        "expression": "self.stale_rejections += 1",
+        "fingerprint": "9a530cdea99a53ad45f6d992f6ad4b825f4caa52fc96961f5d3a3e76fcffc27e"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 111,
+        "qualified_name": "GroundedMemoryAgent.solve_observation",
+        "expression": "self.memory_admissions += 1",
+        "fingerprint": "7dec41141f13b12b5b9f47e361845f0aee54094e6799c9c9907aff6a96ffd80e"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 116,
+        "qualified_name": "GroundedMemoryAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 117,
+        "qualified_name": "GroundedMemoryAgent.solve_observation",
+        "expression": "self.cost += len(evidence)",
+        "fingerprint": "c50810a5da162447cd2dab12e5917d2fd199fca7233079389aee1eaa8227cb29"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 130,
+        "qualified_name": "ToolGradAgent.solve_observation",
+        "expression": "self.answer_first_generations += 1",
+        "fingerprint": "32934b33ca879f7f2f0f1cc7aa717a14047b4a99da1e495e0ab607779c2ba6a7"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 135,
+        "qualified_name": "ToolGradAgent.solve_observation",
+        "expression": "self.textual_gradient_edits += int(refined != plan)",
+        "fingerprint": "8d11d2fbe97a052d069d0604525028eb1778a944921620fdcd68cf8e04f96785"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 136,
+        "qualified_name": "ToolGradAgent.solve_observation",
+        "expression": "self.actions += len(refined)",
+        "fingerprint": "88b87e3184ca8b7e388881828bb21c0713af96eaee4f70dcab91c2db35d076bb"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 137,
+        "qualified_name": "ToolGradAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 152,
+        "qualified_name": "PROMPTSAgent.solve_observation",
+        "expression": "self.profile_bottlenecks += 1",
+        "fingerprint": "a6fb7387c67408b03bcb661da4c04caa0e48c1f649941e6976be544f285f2935"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 155,
+        "qualified_name": "PROMPTSAgent.solve_observation",
+        "expression": "self.sharding_proposals += int(bool(plan))",
+        "fingerprint": "5a75daa5a1cc134a06c96675468feb7d80c2b7db84eea89afc87cdbc1bfe9530"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 156,
+        "qualified_name": "PROMPTSAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 157,
+        "qualified_name": "PROMPTSAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 171,
+        "qualified_name": "SearchAtlasAgent.solve_observation",
+        "expression": "self.evidence_graph_edges += len(plan) + len(evidence)",
+        "fingerprint": "61277ef0af4aa349404e3d84aff7cb54b43142b1812a4e7a649caa11c639ff6b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 172,
+        "qualified_name": "SearchAtlasAgent.solve_observation",
+        "expression": "self.unsupported_answer_flags += int(bool(answer) and (not evidence))",
+        "fingerprint": "a411c04995408014a8af7c3ba1cec694f0433cb4cad1698fde45c9ba96000b6c"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 173,
+        "qualified_name": "SearchAtlasAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 174,
+        "qualified_name": "SearchAtlasAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 192,
+        "qualified_name": "SkillRetentionAgent.solve_observation",
+        "expression": "self.anchor_penalties += 1",
+        "fingerprint": "08ba0a66d53c037cc17a7e22e0c8934ef4627465025c206e89080e27396b64f7"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 195,
+        "qualified_name": "SkillRetentionAgent.solve_observation",
+        "expression": "self.replay_retrievals += 1",
+        "fingerprint": "668eb5557b5d1b6fe7c1434ac089b13daee1209d264ed6a8954afcafcbd4d3aa"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 197,
+        "qualified_name": "SkillRetentionAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 198,
+        "qualified_name": "SkillRetentionAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 212,
+        "qualified_name": "T1TerminalAgent.solve_observation",
+        "expression": "self.tito_tokens += len(token_ids)",
+        "fingerprint": "150606688ed0f34edc4d7d10bc28b40ebe6d95c8ced57dc335fd6898f34ae014"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 213,
+        "qualified_name": "T1TerminalAgent.solve_observation",
+        "expression": "self.routing_replays += len(plan)",
+        "fingerprint": "5fdd5f845ba9143d870351b3171bbdf5b9591f356a04139cc635fff46de71853"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 214,
+        "qualified_name": "T1TerminalAgent.solve_observation",
+        "expression": "self.turn_boundary_repairs += sum((not action.strip() for action in plan))",
+        "fingerprint": "02cd6daed4f8e094abb9f92c61f010d4069fbf9d64a89dc9f90718842e4945d5"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 215,
+        "qualified_name": "T1TerminalAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 216,
+        "qualified_name": "T1TerminalAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      }
+    ],
     "src/auto_research/agent_research/lightning_policy.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -9401,7 +9675,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "_run",
-        "line": 158,
+        "line": 164,
         "qualified_name": "PostTrainingEvolutionEvaluator._run",
         "expression": "state.online_teacher_calls += 1",
         "fingerprint": "b01f4ab56f705499b4d37fc9b59784f91d3c6a0cd62d25cffe01300d9c778a38"
@@ -9409,7 +9683,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_post_training_recipe",
-        "line": 178,
+        "line": 184,
         "qualified_name": "_post_training_recipe",
         "expression": "group.gold",
         "fingerprint": "2d8e6cb605b89b12de389dd5cbc329d83a599309871705ab0449686d16185fd9"
@@ -9417,7 +9691,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_post_training_recipe",
-        "line": 179,
+        "line": 185,
         "qualified_name": "_post_training_recipe",
         "expression": "group.gold",
         "fingerprint": "2d8e6cb605b89b12de389dd5cbc329d83a599309871705ab0449686d16185fd9"
@@ -9425,7 +9699,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_post_training_recipe",
-        "line": 186,
+        "line": 192,
         "qualified_name": "_post_training_recipe",
         "expression": "group.gold",
         "fingerprint": "2d8e6cb605b89b12de389dd5cbc329d83a599309871705ab0449686d16185fd9"
@@ -9433,7 +9707,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 323,
+        "line": 332,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9441,7 +9715,31 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 364,
+        "line": 349,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 350,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 383,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 399,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9449,47 +9747,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 369,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 374,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 376,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 403,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 406,
-        "qualified_name": "AgentEvolutionEvaluator._run",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_run",
-        "line": 407,
+        "line": 404,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9505,7 +9763,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 410,
+        "line": 411,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9513,7 +9771,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 418,
+        "line": 438,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9521,7 +9779,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 419,
+        "line": 441,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9529,7 +9787,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 422,
+        "line": 442,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9537,7 +9795,47 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_run",
-        "line": 426,
+        "line": 444,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 445,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 453,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 454,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 457,
+        "qualified_name": "AgentEvolutionEvaluator._run",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_run",
+        "line": 461,
         "qualified_name": "AgentEvolutionEvaluator._run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9545,7 +9843,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_plan",
-        "line": 452,
+        "line": 494,
         "qualified_name": "_plan",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9553,7 +9851,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 505,
+        "line": 550,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9561,7 +9859,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 506,
+        "line": 551,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9569,119 +9867,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 509,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 513,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 514,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 522,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 524,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 527,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 527,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 531,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 531,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 535,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 535,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 539,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 539,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 549,
-        "qualified_name": "_apply_tools",
-        "expression": "task.required_tools",
-        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 554,
+        "line": 556,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9691,21 +9877,13 @@
         "function": "_apply_tools",
         "line": 558,
         "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
       },
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 562,
-        "qualified_name": "_apply_tools",
-        "expression": "task.plan",
-        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
-      },
-      {
-        "kind": "label_access_requires_role_review",
-        "function": "_apply_tools",
-        "line": 562,
+        "line": 560,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9715,13 +9893,21 @@
         "function": "_apply_tools",
         "line": 564,
         "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 565,
+        "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
       },
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 564,
+        "line": 573,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9729,7 +9915,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 566,
+        "line": 575,
         "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9737,7 +9923,15 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 566,
+        "line": 578,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 578,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -9745,7 +9939,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 568,
+        "line": 582,
         "qualified_name": "_apply_tools",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
@@ -9753,7 +9947,127 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_apply_tools",
-        "line": 568,
+        "line": 582,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 586,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 586,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 590,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 590,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 600,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 605,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 609,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 613,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 613,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 615,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 615,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 617,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 617,
+        "qualified_name": "_apply_tools",
+        "expression": "task.required_tools",
+        "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 619,
+        "qualified_name": "_apply_tools",
+        "expression": "task.plan",
+        "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_apply_tools",
+        "line": 619,
         "qualified_name": "_apply_tools",
         "expression": "task.required_tools",
         "fingerprint": "dcc1a25d3740c97da9a42fac4c11601501dc14ed3a11fdf520d2b3c5bcd55d12"
@@ -10269,7 +10583,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 107,
+        "line": 110,
         "qualified_name": "apply",
         "expression": "state.reward_axis_weights /= state.reward_axis_weights.sum()",
         "fingerprint": "09f33b5afa92e20e613d9cd0d8c98dc7808363f0495a7a1b2902d242cca9856b"
@@ -10277,7 +10591,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 108,
+        "line": 111,
         "qualified_name": "apply",
         "expression": "state.drift_events += 1",
         "fingerprint": "549eef05733c5296b37b8e3aa03551ed1f1c77dc2fa8a78165b34ba82cc72515"
@@ -10287,7 +10601,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 54,
+        "line": 55,
         "qualified_name": "update",
         "expression": "state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)",
         "fingerprint": "b6a0c91a64d121c2aebc293682cc80891fb4b00f45df453786621db9c500d8b7"
@@ -10295,7 +10609,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 84,
+        "line": 86,
         "qualified_name": "update",
         "expression": "state.variant_updates += 1",
         "fingerprint": "893bef108fce174b29a88dcfb593d6773edd36efd7d2862213d54d73a56b808c"
@@ -10303,7 +10617,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 89,
+        "line": 91,
         "qualified_name": "update",
         "expression": "state.online_rollout_refreshes += 1",
         "fingerprint": "7c428a44c4ff081ae94e4d66fcd286d3affd4bdc54a29da050685b33110e603c"

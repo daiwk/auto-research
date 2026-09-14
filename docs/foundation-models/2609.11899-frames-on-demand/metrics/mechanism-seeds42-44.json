@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "method": "frames-on-demand",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "caption_query_similarity": 0.16864392274059783,
+      "visual_need": 1.0,
+      "selected_frames": 4.0,
+      "budget_respected": 1.0
+    },
+    {
+      "seed": 43,
+      "caption_query_similarity": 0.18240920942831382,
+      "visual_need": 1.0,
+      "selected_frames": 4.0,
+      "budget_respected": 1.0
+    },
+    {
+      "seed": 44,
+      "caption_query_similarity": 0.02568816167519212,
+      "visual_need": 1.0,
+      "selected_frames": 4.0,
+      "budget_respected": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "budget_respected_mean": 1.0,
+    "budget_respected_std": 0.0,
+    "caption_query_similarity_mean": 0.12558043128136792,
+    "caption_query_similarity_std": 0.0867826015091933,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "selected_frames_mean": 4.0,
+    "selected_frames_std": 0.0,
+    "visual_need_mean": 1.0,
+    "visual_need_std": 0.0
+  },
+  "manifest_ref": "foundation-models:frames-on-demand",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "commit": "6149448867b0e247d25957486b37a4e06629c5d7",
+    "command": "PYTHONPATH=src python scripts/generate_sep_14_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.11899-frames-on-demand/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

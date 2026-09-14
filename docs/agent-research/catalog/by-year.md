@@ -4,7 +4,13 @@
 
 ## 2026
 
+- 2026-09 · [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
+- 2026-09 · [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
 - 2026-09 · [MAPLE: Memory-Augmented Planning with Language and Evolution](../2609.11636-maple/README.md)（`maple`）：MAPLE 把自然语言优化知识变成可持续修改的程序状态：生成候选、检查可执行性、接纳更好的方案，并把已接受程序带到后续问题中继续进化，而不是每次从零提示。
+- 2026-09 · [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](../2609.11060-grounded-memory/README.md)（`grounded-memory`）：给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。
+- 2026-09 · [SearchAtlas: Analyzing Agentic Search Strategies via Evidential Query Graphs](../2609.10901-searchatlas/README.md)（`searchatlas`）：把搜索轨迹转为 query—evidence—answer 有向图，审计证据是否真正覆盖问题约束和最终回答。
+- 2026-09 · [T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks](../2609.11042-t1-terminal-rl/README.md)（`t1-terminal-rl`）：TITO 使用 rollout 实际采样 token id 训练，turn boundary repair 修正漂移，R3 重放 MoE 路由选择。
+- 2026-09 · [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](../2609.10750-skill-retention/README.md)（`skill-retention`）：混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。
 - 2026-09 · [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
 - 2026-09 · [MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging](../2609.08273-memforest/README.md)（`memforest`）：MemForest 不把全部历史压进一条摘要，而是先按事件切分成多棵树，再在容量压力下渐进合并节点。查询从语义 anchor 出发向邻域传播，保留时间结构和跨事件关联。
 - 2026-09 · [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](../2609.09153-procedural-graphs/README.md)（`procedural-graphs`）：方法把成功经验从自然语言片段提升为 procedure–relation–procedure 图。新经验先局部化为候选图编辑，再经过 held-out 验证门才写入长期结构，减少错误经验污染。
@@ -70,6 +76,7 @@
 - 2026-07 · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
 - 2026-07 · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
 - 2026-06 · [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../2606.26859-agentx/README.md)（`agentx`）：传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。
+- 2026-05 · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 - 2026-04 · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
 - 2026-04 · [SEARL](../2604.07791-searl/README.md)（`searl`）：把工具和成功转移维护为图记忆；新 rollout 同时更新 policy 与图边权，形成经验池—检索—改进闭环。
 - 2026-03 · [Memento-Skills](../2603.18743-memento-skills/README.md)（`memento-skills`）：从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。
@@ -84,6 +91,7 @@
 - 2025-11 · [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
 - 2025-10 · [LEGOMem](../2510.04851-legomem/README.md)（`legomem`）：整段成功轨迹难以迁移到新任务，单一全局记忆又混合了任务分解和工具执行。LEGOMem 把经验拆成像积木一样的 procedural units：orchestrator memory 保存任务分解与委派，agent memory 保存具体动作模板，运行时按新任务重新组合。
 - 2025-08 · [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：既有 tool-use RL 通常把用户请求视为固定输入，但真实用户会根据 Agent 回答不断修改需求。MUA-RL 将 LLM 模拟用户直接放入 rollout，Agent 在对话中澄清意图并调用真实 MCP/数据库工具；用户消息和工具结果不计入策略 loss，只用最终任务完成奖励鼓励探索。
+- 2025-08 · [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](../2508.04086-toolgrad/README.md)（`toolgrad`）：先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。
 - 2025-08 · [Agent Lightning](../2508.03680-agent-lightning/README.md)（`agent-lightning`）：传统 Agent RL 常把所有上下文拼成单序列并与框架强耦合。Agent Lightning 将执行记录成统一 MDP transition，以 credit assignment 拆解轨迹，并采用训练/执行分离架构。
 - 2025-07 · [MemTool](../2507.21428-memtool/README.md)（`memtool`）：大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。
 - 2025-05 · [WebAgent-R1](../2505.16421-webagent-r1/README.md)（`webagent-r1`）：网页交互会不断累积 HTML 和历史动作，单轮 GRPO 无法处理状态变化。WebAgent-R1 动态保留近期和任务相关上下文，并行采集完整多轮轨迹，再用 M-GRPO 根据最终成功奖励执行组内相对更新；论文同时强调行为克隆 warm-up 和长 CoT 初始化。

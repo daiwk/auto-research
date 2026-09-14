@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients](2609.11768-adaptive-opd-gate/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `adaptive-opd-gate` |
+| 测试时适配 | [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](2609.11393-tasco/README.md) | Chongqing University，2026-09-10 | 未发现官方代码 | `tasco` |
+| 低秩后训练 | [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](2609.11739-locus/README.md) | University of Washington，2026-09-10 | 未发现官方代码 | `locus` |
+| 负向自蒸馏 | [Negative Self-Distillation: Learning to Reason by Avoiding Flaws](2609.11699-nsd/README.md) | University of Virginia，2026-09-10 | [已开源](https://github.com/Prongcan/NSD) | `nsd` |
 | 跨模型族 OPD | [CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts](2609.10154-compass-opd/README.md) | Institute of Information Engineering, Chinese Academy of Sciences，2026-09-09 | 未发现官方代码 | `compass-opd` |
 | 概率传输 OPD | [Distillation as Probability Transport: Routed On-Policy Distillation](2609.08337-route-opd/README.md) | Tencent，2026-09-08 | 未发现官方代码 | `route-opd` |
 | 弱到强反向蒸馏 | [Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation](2609.08798-oprd/README.md) | KAIST AI，2026-09-08 | 未发现官方代码 | `oprd` |

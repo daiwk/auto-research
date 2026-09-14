@@ -1,0 +1,199 @@
+{
+  "schema_version": 2,
+  "method": "sirf",
+  "diagnostic_only": true,
+  "dataset": "deterministic synthetic policy cases",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.11752",
+        "title": "SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control",
+        "url": "https://arxiv.org/abs/2609.11752",
+        "organization": "Xiaohongshu"
+      },
+      "dataset": {
+        "name": "deterministic synthetic policy cases",
+        "train_examples": 4000,
+        "test_examples": 2000
+      },
+      "setup": {
+        "adapter": "sirf",
+        "seed": 42,
+        "heldout_split": true,
+        "target_precision": 0.95
+      },
+      "baseline": {
+        "name": "same-source SFT linear features",
+        "precision": 0.9566326530612245,
+        "black_recall": 0.5274261603375527,
+        "threshold": 0.6363926530024296,
+        "accuracy": 0.8495,
+        "parameters": 6
+      },
+      "method": {
+        "name": "spec-internalized interaction features",
+        "precision": 0.9640062597809077,
+        "black_recall": 0.8663853727144867,
+        "threshold": 0.4996684456552267,
+        "accuracy": 0.91,
+        "parameters": 10
+      },
+      "relative": {
+        "black_recall_at_p95_points": 33.89592123769339
+      },
+      "stages": {
+        "entigraph_policy_relations": 4,
+        "maga_rewrite_families": 3,
+        "verdict_only": true,
+        "tunable_threshold": true
+      },
+      "paper_results": {
+        "black_recall_at_p95": 71.3,
+        "same_source_gain_points": 15.1,
+        "cpt_tokens_million": 70,
+        "mis_penalization_reduction_percent": 70
+      },
+      "scope": "执行规则关系合成、trigger/exemption 交互内化、单次 verdict 与 P95 阈值选择；线性小模型替代 8B LLM CPT，因此是概念诊断，不复刻私有账户数据或线上系统。",
+      "manifest_ref": "reproduction:sirf"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.11752",
+        "title": "SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control",
+        "url": "https://arxiv.org/abs/2609.11752",
+        "organization": "Xiaohongshu"
+      },
+      "dataset": {
+        "name": "deterministic synthetic policy cases",
+        "train_examples": 4000,
+        "test_examples": 2000
+      },
+      "setup": {
+        "adapter": "sirf",
+        "seed": 43,
+        "heldout_split": true,
+        "target_precision": 0.95
+      },
+      "baseline": {
+        "name": "same-source SFT linear features",
+        "precision": 0.975,
+        "black_recall": 0.507959479015919,
+        "threshold": 0.6252672466879915,
+        "accuracy": 0.8615,
+        "parameters": 6
+      },
+      "method": {
+        "name": "spec-internalized interaction features",
+        "precision": 0.9720394736842105,
+        "black_recall": 0.8552821997105644,
+        "threshold": 0.4765097040844363,
+        "accuracy": 0.891,
+        "parameters": 10
+      },
+      "relative": {
+        "black_recall_at_p95_points": 34.73227206946454
+      },
+      "stages": {
+        "entigraph_policy_relations": 4,
+        "maga_rewrite_families": 3,
+        "verdict_only": true,
+        "tunable_threshold": true
+      },
+      "paper_results": {
+        "black_recall_at_p95": 71.3,
+        "same_source_gain_points": 15.1,
+        "cpt_tokens_million": 70,
+        "mis_penalization_reduction_percent": 70
+      },
+      "scope": "执行规则关系合成、trigger/exemption 交互内化、单次 verdict 与 P95 阈值选择；线性小模型替代 8B LLM CPT，因此是概念诊断，不复刻私有账户数据或线上系统。",
+      "manifest_ref": "reproduction:sirf"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.11752",
+        "title": "SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control",
+        "url": "https://arxiv.org/abs/2609.11752",
+        "organization": "Xiaohongshu"
+      },
+      "dataset": {
+        "name": "deterministic synthetic policy cases",
+        "train_examples": 4000,
+        "test_examples": 2000
+      },
+      "setup": {
+        "adapter": "sirf",
+        "seed": 44,
+        "heldout_split": true,
+        "target_precision": 0.95
+      },
+      "baseline": {
+        "name": "same-source SFT linear features",
+        "precision": 0.9643835616438357,
+        "black_recall": 0.5079365079365079,
+        "threshold": 0.6155286797313774,
+        "accuracy": 0.8225,
+        "parameters": 6
+      },
+      "method": {
+        "name": "spec-internalized interaction features",
+        "precision": 0.9682804674457429,
+        "black_recall": 0.836940836940837,
+        "threshold": 0.45949499390480836,
+        "accuracy": 0.8765,
+        "parameters": 10
+      },
+      "relative": {
+        "black_recall_at_p95_points": 32.90043290043291
+      },
+      "stages": {
+        "entigraph_policy_relations": 4,
+        "maga_rewrite_families": 3,
+        "verdict_only": true,
+        "tunable_threshold": true
+      },
+      "paper_results": {
+        "black_recall_at_p95": 71.3,
+        "same_source_gain_points": 15.1,
+        "cpt_tokens_million": 70,
+        "mis_penalization_reduction_percent": 70
+      },
+      "scope": "执行规则关系合成、trigger/exemption 交互内化、单次 verdict 与 P95 阈值选择；线性小模型替代 8B LLM CPT，因此是概念诊断，不复刻私有账户数据或线上系统。",
+      "manifest_ref": "reproduction:sirf"
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.8925000000000001,
+    "accuracy_std": 0.016800297616411483,
+    "black_recall_mean": 0.8528694697886294,
+    "black_recall_std": 0.014869805680928876,
+    "parameters_mean": 10.0,
+    "parameters_std": 0.0,
+    "precision_mean": 0.9681087336369537,
+    "precision_std": 0.004019359498709379,
+    "threshold_mean": 0.47855771454815715,
+    "threshold_std": 0.020164878291981596
+  },
+  "manifest_ref": "reproduction:sirf",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "linear concept diagnostic; not 8B CPT or online A/B",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "commit": "6149448867b0e247d25957486b37a4e06629c5d7",
+    "command": "PYTHONPATH=src python scripts/generate_sep_14_2026_artifacts.py",
+    "artifact_path": "docs/reproductions/2609.11752-sirf/metrics/policy-cases-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

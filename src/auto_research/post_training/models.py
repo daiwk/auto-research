@@ -114,6 +114,10 @@ ALGORITHMS = (
     "route-opd",
     "compass-opd",
     "probe-erpo",
+    "nsd",
+    "adaptive-opd-gate",
+    "locus",
+    "tasco",
 )
 
 

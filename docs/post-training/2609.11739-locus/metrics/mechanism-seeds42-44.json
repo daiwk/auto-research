@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "method": "locus",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.515625,
+      "mean_reward": 0.6193968617445513,
+      "entropy": 1.7894473919242035,
+      "kl_from_reference": 0.002312077297850775,
+      "subspace_rank": 2.0,
+      "ambient_dimensions": 8.0,
+      "gradient_energy_retained": 0.9991872904377197,
+      "loss": -0.018254183669224322,
+      "policy_entropy": 1.7884516930386725
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.359375,
+      "mean_reward": 0.5185839464403702,
+      "entropy": 1.7887447043025044,
+      "kl_from_reference": 0.0030147649195514407,
+      "subspace_rank": 2.0,
+      "ambient_dimensions": 8.0,
+      "gradient_energy_retained": 0.9950578226370799,
+      "loss": -0.006326517268956014,
+      "policy_entropy": 1.7911266477944658
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.46875,
+      "mean_reward": 0.6014697821693883,
+      "entropy": 1.7884953810979263,
+      "kl_from_reference": 0.0032640881241292018,
+      "subspace_rank": 2.0,
+      "ambient_dimensions": 8.0,
+      "gradient_energy_retained": 0.9849940716093551,
+      "loss": -0.02014282979477537,
+      "policy_entropy": 1.7890642377690176
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.4479166666666667,
+    "accuracy_std": 0.08018127249135756,
+    "ambient_dimensions_mean": 8.0,
+    "ambient_dimensions_std": 0.0,
+    "entropy_mean": 1.788895825774878,
+    "entropy_std": 0.0004936693507769844,
+    "gradient_energy_retained_mean": 0.9930797282280516,
+    "gradient_energy_retained_std": 0.007300445760070563,
+    "kl_from_reference_mean": 0.0028636434471771394,
+    "kl_from_reference_std": 0.00049366935077769,
+    "loss_mean": -0.014907843577651902,
+    "loss_std": 0.007491402869898728,
+    "mean_reward_mean": 0.5798168634514366,
+    "mean_reward_std": 0.05378148045365306,
+    "policy_entropy_mean": 1.7895475262007186,
+    "policy_entropy_std": 0.001401435520296047,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "subspace_rank_mean": 2.0,
+    "subspace_rank_std": 0.0
+  },
+  "manifest_ref": "post-training:locus",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "commit": "6149448867b0e247d25957486b37a4e06629c5d7",
+    "command": "PYTHONPATH=src python scripts/generate_sep_14_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.11739-locus/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}
