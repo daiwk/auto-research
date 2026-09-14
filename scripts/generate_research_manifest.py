@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from auto_research.reproductions.manifest import PaperManifest
 from auto_research.reproductions.registry import list_adapters
 from auto_research.historical_b07_b11 import PAPERS as HISTORICAL_B07_B11
+from auto_research.latest_20260914_catalog import LATEST_METHOD_PAPERS as SEP14_METHOD_PAPERS
 
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis"}
@@ -25,7 +26,7 @@ FIRST_AUTHOR_OVERRIDES = {
     "wemm-embedding": "Junjie Zhou",
 }
 
-LATEST_METHOD_PAPERS = (
+LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + (
     {
         "domain": "agent-research", "key": "maple",
         "title": "MAPLE: Memory-Augmented Planning with Language and Evolution",

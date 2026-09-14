@@ -22,6 +22,7 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
     from .latest_20260905 import LATEST_AGENTS as LATEST_20260905_AGENTS
     from .latest_20260907 import LATEST_AGENTS as LATEST_20260907_AGENTS
     from .latest_20260912 import LATEST_AGENTS as LATEST_20260912_AGENTS
+    from .latest_20260914 import LATEST_AGENTS as LATEST_20260914_AGENTS
     from .historical_b10_b11 import HISTORICAL_AGENTS
 
     classes = {
@@ -81,6 +82,7 @@ def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAge
         **LATEST_20260905_AGENTS,
         **LATEST_20260907_AGENTS,
         **LATEST_20260912_AGENTS,
+        **LATEST_20260914_AGENTS,
         **HISTORICAL_AGENTS,
     }
     return classes[method](capacity, rng)

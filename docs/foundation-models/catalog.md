@@ -9,6 +9,12 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 长视频理解 | [Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding](2609.11899-frames-on-demand/README.md) | Queen Mary University of London，2026-09-10 | 未发现官方代码 | `frames-on-demand` |
+| MoE | [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](2609.11917-repeat-aware-moe/README.md) | Stanford University，2026-09-10 | 未发现官方代码 | `repeat-aware-moe` |
+| 优化器 | [Musec: MomentUm SpEctral Clipping for Stable Muon-type Training](2609.11655-musec/README.md) | National University of Singapore，2026-09-10 | 未发现官方代码 | `musec` |
+| 多模态推理 | [OmniKVQuant: KV Cache Quantization for Omni-LLMs](2609.11582-omnikvquant/README.md) | KAIST，2026-09-10 | [已开源](https://github.com/kaistmm/OmniKVQuant) | `omnikvquant` |
+| 统一多模态 | [SenseNova-U1.5: Towards Native Unified Visual Intelligence](2609.11929-sensenova-u1-5/README.md) | SenseTime Research，2026-09-10 | [已开源](https://github.com/OpenSenseNova/SenseNova-U1) | `sensenova-u1-5` |
+| 模型路由 | [SWRouter: Similarity-Contractive Window Routing for Multi-Turn Large Language Model Conversations](2609.11414-swrouter/README.md) | Shanghai Jiao Tong University，2026-09-10 | 未发现官方代码 | `swrouter` |
 | 推理与系统效率 | [BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference](../reproductions/2609.04971-beaconkv/README.md) | Hanyang University，2026-09-04 | 未发现官方代码 | `beaconkv` |
 | 推理与系统效率 | [KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU](../reproductions/2609.04852-kvmem/README.md) | Shanghai University of Finance and Economics，2026-09-04 | [已开源](https://github.com/kvmem/kvmem-qw3) | `kvmem` |
 | 网络架构 | [Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations](../reproductions/2609.03426-lngram-v2/README.md) | Beijing University of Posts and Telecommunications / Kuaishou Technology，2026-09-03 | 未发现官方代码 | `lngram-v2` |

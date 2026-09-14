@@ -14,6 +14,8 @@ from .statistics import mean_with_std
 
 
 class PostTrainingEvolutionEvaluator:
+    # Promotion-eligible free-generation objectives. Candidate-policy methods
+    # below execute only as explicitly labelled mechanism diagnostics.
     executable_operators = ("grpo", "ipo", "simpo")
 
     def __init__(self, dataset_dir: Path, dataset: str, steps: int,
@@ -23,6 +25,10 @@ class PostTrainingEvolutionEvaluator:
         self.steps, self.seeds = steps, seeds
         self.allow_network = allow_network
         self.maximum_examples = maximum_examples
+        self.executable_operators = (
+            type(self).executable_operators if dataset.endswith("-generate") else
+            ("grpo", "nsd", "adaptive-opd-gate", "locus", "tasco")
+        )
 
     def summary(self):
         return {
@@ -316,6 +322,9 @@ class AgentEvolutionEvaluator:
         policy_updates = policy_reuses = recovery_attempts = recoveries = 0.0
         event_tree_partitions = feedback_scaffold_updates = 0.0
         maple_program_reuses = 0.0
+        bandit_allocations = exact_token_replays = evidence_graph_edges = 0.0
+        environment_probes = anchor_replays = textual_gradient_edits = 0.0
+        profiled_proposals = 0.0
         for step, task in enumerate(tasks):
             key = (
                 task.axis
@@ -331,6 +340,14 @@ class AgentEvolutionEvaluator:
                 plan = policy_cache[key]
                 policy_reuses += 1
                 cost += 0.18
+            if genome.agent_policy == "cobra-skills":
+                # Contextual-UCB allocates a public-observation skill trial.
+                bandit_allocations += 1
+                cost += 0.06
+            elif genome.agent_policy == "t1-terminal-rl":
+                # Replay the sampled route/token sequence, not a replacement.
+                exact_token_replays += len(task.required_tools)
+                cost += 0.04 * len(task.required_tools)
             if genome.agent_memory != "none" and key in memory:
                 plan, reused = memory[key], reused + 1
                 memory_cost = {
@@ -346,21 +363,39 @@ class AgentEvolutionEvaluator:
                     "memskill": 0.40,
                     "memento-skills": 0.36,
                     "memforest": 0.34,
+                    "grounded-memory": 0.32,
+                    "skill-retention": 0.36,
                 }.get(genome.agent_memory, 0.8)
                 cost += memory_cost
             if plan is None:
                 plan, planning_cost = _plan(task, genome.agent_planner, rng)
                 cost += planning_cost
+                if genome.agent_planner == "prompts":
+                    profiled_proposals += 1
             plan, tool_cost = _apply_tools(
                 task, plan, genome.agent_tool_policy, active_tools,
                 genome.memory_size, step,
             )
             cost += tool_cost
+            if genome.agent_tool_policy == "toolgrad":
+                textual_gradient_edits += float(len(plan) != len(set(plan))) + 1.0
+            if genome.agent_memory == "grounded-memory":
+                environment_probes += len(task.required_tools)
+            elif genome.agent_memory == "skill-retention":
+                anchor_replays += 1
+            if genome.agent_verifier == "searchatlas":
+                # Query -> evidence and evidence -> answer edges use public
+                # task observations and the actually executed plan only.
+                evidence_graph_edges += len(plan) + float(bool(plan))
+                cost += 0.03 * len(plan)
             if genome.agent_critic == "feedback-scaffold":
                 # The first task receives explicit public workflow guidance;
                 # later tasks receive only compact public state summaries.
                 feedback_scaffold_updates += 1
                 cost += 0.12 if step == 0 else 0.04
+            if genome.agent_critic == "ecdysis":
+                feedback_scaffold_updates += 1
+                cost += 0.08
             failed_plan = tuple(plan) != task.plan
             if failed_plan and genome.agent_critic != "none":
                 if genome.agent_critic == "tapo":
@@ -444,6 +479,13 @@ class AgentEvolutionEvaluator:
             "event_tree_partitions": event_tree_partitions,
             "feedback_scaffold_updates": feedback_scaffold_updates,
             "maple_program_reuses": maple_program_reuses,
+            "bandit_allocations": bandit_allocations,
+            "exact_token_replays": exact_token_replays,
+            "evidence_graph_edges": evidence_graph_edges,
+            "environment_probes": environment_probes,
+            "anchor_replays": anchor_replays,
+            "textual_gradient_edits": textual_gradient_edits,
+            "profiled_proposals": profiled_proposals,
         }
 
 
@@ -493,6 +535,9 @@ def _plan(task, method, rng):
         return target, 0.42 + 0.12 * len(target)
     if method == "maple":
         return target, 0.50 + 0.18 * len(target)
+    if method == "prompts":
+        # Profiler/knowledge-base reasoning prunes the candidate sharding space.
+        return target, 0.38 + 0.10 * len(target)
     if method == "camel":
         return target, 0.40 + 0.25 * len(target)
     return target, float(len(task.context))
@@ -505,6 +550,12 @@ def _apply_tools(task, plan, policy, active, capacity, step):
         return tuple(f"{tool}:{domain}" for tool in task.required_tools), (
             0.6 * len(task.required_tools)
         )
+    if policy == "toolgrad":
+        # Answer-first textual feedback removes duplicate calls before execution.
+        public_route = tuple(
+            f"{tool}:{domain}" for tool in task.required_tools
+        )
+        return tuple(dict.fromkeys(public_route)), 0.35 * len(task.required_tools)
     if policy == "memtool":
         for tool in task.required_tools:
             if tool not in active and len(active) >= capacity:

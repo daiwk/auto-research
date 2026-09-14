@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 内容理解、审核与风险控制 | [SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control](../2609.11752-sirf/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `sirf` |
 | 多阶段排序与混排 | [UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems](../2609.11052-unirec/README.md) | Kuaishou，2026-09-10 | 未发现官方代码 | `unirec` |
 | Serving 与研究基础设施 | [BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests](../2609.08725-baff/README.md) | Dable，2026-09-08 | 未发现官方代码 | `baff` |
 | 多阶段排序与混排 | [SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching](../2609.08443-sequenceo1/README.md) | ByteDance / Douyin，2026-09-08 | 未发现官方代码 | `sequenceo1` |

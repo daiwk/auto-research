@@ -104,6 +104,30 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2609.10750-skill-retention": {
+        "pdf_url": "https://arxiv.org/pdf/2609.10750",
+        "page": 4,
+        "rect": (42, 45, 555, 474),
+        "label": "Table 1–3",
+        "caption": (
+            "真实任务、合成任务与 OOD rings 上的遗忘对照，以及 anchor/LwF/EWC/"
+            "L2-init 等缓解方法比较。"
+        ),
+    },
+    "2609.11677-ecdysis": {
+        "pdf_url": "https://arxiv.org/pdf/2609.11677",
+        "page": 3,
+        "rect": (294, 35, 588, 451),
+        "label": "Algorithm 1",
+        "caption": "Ecdysis 的批级失败聚合、FDCR 诊断与 harness 接纳循环。",
+    },
+    "mlsys2026-prompts": {
+        "pdf_url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1038279.pdf",
+        "page": 2,
+        "rect": (55, 55, 557, 735),
+        "label": "Figure 2",
+        "caption": "PROMPTS Coordinator、Analyzer、Proposal 与 Sharding Memory 的整体工作流。",
+    },
     "2608.06291-bakron": {
         "pdf_url": "https://arxiv.org/pdf/2608.06291",
         "page": 6,

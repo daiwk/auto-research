@@ -65,6 +65,10 @@
 
 - 2026-07-28 · 一作：Bo-Wen Zhang · [CoRT](../2607.25659-cort/README.md)（`cort`）：对同一响应分别在带 rubric 和去 criteria 的上下文中重放，用 token 似然差重分配 GRPO 的响应级 advantage。
 
+## Chongqing University
+
+- 2026-09-10 · 一作：Bincheng Gu · [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](../2609.11393-tasco/README.md)（`tasco`）：冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。
+
 ## Cohere For AI
 
 - 2024-02-22 · 一作：Arash Ahmadian · [RLOO](../2402.14740-rloo/README.md)（`rloo`）：PPO 为一般长时域 RL 设计，价值网络、GAE 和多轮 clipping 给 LLM RLHF 带来较大显存与调参开销。RLOO 把一整段 response 视作一个 action；同一 prompt 采样多个 response，用其余样本的平均 reward 作为当前样本 baseline。
@@ -305,8 +309,13 @@
 - 2026-08-04 · 一作：Ranxu Zhang · [ADRS](../2608.03223-adrs/README.md)（`adrs`）：privileged teacher 的高置信并不必然与真实任务回报一致。ADRS 在每个交互 step 内标准化教师分数，以教师置信与 realized return 的相关性形成 TVA gate，再把 gated token signal 写入原生 reward-to-advantage 路径，推理时无需技能。
 - 2026-07-11 · 一作：Kexin Huang · [ARMOR](../2607.10481-armor/README.md)（`armor`）：单纯 reverse-KL 只能被动惩罚偏离，无法保证 reference 中已有有效解法仍被覆盖。ARMOR 从冻结 reference 主动采样 anchor trajectories，与当前策略 rollout 混合优化，用数据而不是辅助 KL 项稳定长程 RL。
 
+## University of Virginia
+
+- 2026-09-10 · 一作：Rongcan Pei · [Negative Self-Distillation: Learning to Reason by Avoiding Flaws](../2609.11699-nsd/README.md)（`nsd`）：让学生远离自身生成的错误推理分布，并用动态 gate 只更新推理关键位置，避免把普通语言 token 一并遗忘。
+
 ## University of Washington
 
+- 2026-09-10 · 一作：Dongfang Zhao · [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](../2609.11739-locus/README.md)（`locus`）：学习任务相关低秩后训练子空间，只在紧凑方向上更新以缩短回答，同时保留任务能力。
 - 2025-04-21 · 一作：Jianhao Yan · [LUFFY](../2504.14945-luffy/README.md)（`luffy`）：把离线高质量推理与在线 rollout 放进同一 support，通过正则化 importance ratio 保留 on-policy 行为。
 
 ## VNU University of Engineering and Technology / Viettel AI
@@ -320,6 +329,10 @@
 ## Wuhan University
 
 - 2026-08-24 · 一作：Jialong Liu · [SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning](../2608.23493-srpo/README.md)（`srpo`）：长轨迹只给终局 reward 时，很难知道具体哪个 token/动作导致失败。SRPO 让当前模型先根据完整轨迹和环境结果写出简短 reflection patch，再把 patch 拼回原问题；同一个模型在这个特权上下文中充当教师，对学生的 on-policy rollout 给出逐 token 分数。
+
+## Xiaohongshu
+
+- 2026-09-10 · 一作：Suwan Wu · [A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients](../2609.11768-adaptive-opd-gate/README.md)（`adaptive-opd-gate`）：把熵、不确定性、reference 偏移和教师—学生差距组合成逐 token gate，在 FKL/RKL 蒸馏方向间自适应分配。
 
 ## Xiaomi
 

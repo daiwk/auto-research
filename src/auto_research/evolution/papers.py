@@ -313,6 +313,22 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2609.11699": (
+        "nsd",
+        "NSD 从自生成负教师分布反向更新，并用动态 gate 保护语言基础 token",
+    ),
+    "2609.11768": (
+        "adaptive-opd-gate",
+        "按熵、不确定性、reference 偏移和教师差距构造逐 token OPD gate",
+    ),
+    "2609.11739": (
+        "locus",
+        "LOCUS 把后训练梯度投影到任务相关低秩子空间以降低输出开销",
+    ),
+    "2609.11393": (
+        "tasco",
+        "TASCO 在置信度目标上加入局部扰动稳定性惩罚",
+    ),
     "2609.04565": (
         "sparse-opd",
         "Sparse OPD 每条在线轨迹只监督教师—学生差异最大的一个或两个关键 token",
@@ -511,6 +527,14 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.11682": ("policy:cobra-skills", "COBRA-Skills 以 contextual bandit 分配技能评估预算并依据执行反馈演化"),
+    "2609.11677": ("critic:ecdysis", "Ecdysis 聚合跨实例重复失败，再以 FDCR 形成 harness 修复规格"),
+    "2609.11060": ("memory:grounded-memory", "写入长期记忆前以最小权限只读环境探测验证并限定作用域"),
+    "2508.04086": ("tool:toolgrad", "ToolGrad 从答案反推工具轨迹并以 textual gradient 修订失败调用"),
+    "mlsys2026-prompts": ("planner:prompts", "PROMPTS 联合 profiler、知识库与多 Agent 诊断生成 sharding 提案"),
+    "2609.10901": ("verifier:searchatlas", "SearchAtlas 构造 query-evidence-answer 图审计搜索过程"),
+    "2609.10750": ("memory:skill-retention", "真实路线 replay 与 anchor 正则抑制合成技能训练遗忘"),
+    "2609.11042": ("policy:t1-terminal-rl", "T1 的 exact-token TITO 与 MoE rollout routing replay"),
     "2609.11636": (
         "planner:maple",
         "MAPLE 持久化已验证的候选计划，并在后续同类任务中检索复用",

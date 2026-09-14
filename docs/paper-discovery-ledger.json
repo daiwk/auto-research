@@ -12156,6 +12156,51 @@
         {"id": "2609.08404", "priority": "P1", "track": "agent", "status": "implemented", "key": "feedback-scaffold", "doc": "agent-research/2609.08404-feedback-scaffold/README.md"},
         {"id": "2609.11636", "priority": "P1", "track": "agent", "status": "implemented", "key": "maple", "doc": "agent-research/2609.11636-maple/README.md"}
       ]
+    },
+    {
+      "batch": "recent-20260914-cross-domain",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-09-14T00:45:00+08:00",
+      "window": "2026-09-09 through 2026-09-11",
+      "sources": [
+        "arXiv recent pages, HTML and PDF full text",
+        "Google Research official publications and blog",
+        "official author repositories"
+      ],
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "coverage": {
+        "coverage_complete": true,
+        "watermark_advanced": true,
+        "watermark": "2026-09-11",
+        "overlap_start": "2026-09-09",
+        "source_artifact": "recent-paper-scan-20260914.md"
+      },
+      "candidates": [
+        {"id": "2609.11752", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "sirf", "doc": "reproductions/2609.11752-sirf/README.md"},
+        {"id": "2609.11699", "priority": "P0", "track": "post-training", "status": "implemented", "key": "nsd", "doc": "post-training/2609.11699-nsd/README.md"},
+        {"id": "2609.11682", "priority": "P0", "track": "agent", "status": "implemented", "key": "cobra-skills", "doc": "agent-research/2609.11682-cobra-skills/README.md"},
+        {"id": "2609.11677", "priority": "P0", "track": "agent", "status": "implemented", "key": "ecdysis", "doc": "agent-research/2609.11677-ecdysis/README.md"},
+        {"id": "2609.11060", "priority": "P0", "track": "agent", "status": "implemented", "key": "grounded-memory", "doc": "agent-research/2609.11060-grounded-memory/README.md"},
+        {"id": "2609.11582", "priority": "P0", "track": "foundation-model", "status": "implemented", "key": "omnikvquant", "doc": "foundation-models/2609.11582-omnikvquant/README.md"},
+        {"id": "2508.04086", "priority": "P0", "track": "agent", "status": "implemented", "key": "toolgrad", "doc": "agent-research/2508.04086-toolgrad/README.md"},
+        {"id": "mlsys2026-prompts", "priority": "P0", "track": "agent", "status": "implemented", "key": "prompts", "doc": "agent-research/mlsys2026-prompts/README.md"},
+        {"id": "2609.11929", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "sensenova-u1-5", "doc": "foundation-models/2609.11929-sensenova-u1-5/README.md"},
+        {"id": "2609.11899", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "frames-on-demand", "doc": "foundation-models/2609.11899-frames-on-demand/README.md"},
+        {"id": "2609.11917", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "repeat-aware-moe", "doc": "foundation-models/2609.11917-repeat-aware-moe/README.md"},
+        {"id": "2609.11768", "priority": "P1", "track": "post-training", "status": "implemented", "key": "adaptive-opd-gate", "doc": "post-training/2609.11768-adaptive-opd-gate/README.md"},
+        {"id": "2609.11739", "priority": "P1", "track": "post-training", "status": "implemented", "key": "locus", "doc": "post-training/2609.11739-locus/README.md"},
+        {"id": "2609.11655", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "musec", "doc": "foundation-models/2609.11655-musec/README.md"},
+        {"id": "2609.11414", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "swrouter", "doc": "foundation-models/2609.11414-swrouter/README.md"},
+        {"id": "2609.11393", "priority": "P1", "track": "post-training", "status": "implemented", "key": "tasco", "doc": "post-training/2609.11393-tasco/README.md"},
+        {"id": "2609.10901", "priority": "P1", "track": "agent", "status": "implemented", "key": "searchatlas", "doc": "agent-research/2609.10901-searchatlas/README.md"},
+        {"id": "2609.10750", "priority": "P1", "track": "agent", "status": "implemented", "key": "skill-retention", "doc": "agent-research/2609.10750-skill-retention/README.md"},
+        {"id": "2609.11042", "priority": "P1", "track": "agent", "status": "implemented", "key": "t1-terminal-rl", "doc": "agent-research/2609.11042-t1-terminal-rl/README.md"}
+      ]
     }
   ]
 }

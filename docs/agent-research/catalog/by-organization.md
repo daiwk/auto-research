@@ -83,6 +83,10 @@
 - 2023-03-30 · 一作：Aman Madaan · [Self-Refine](../2303.17651-self-refine/README.md)（`self-refine`）：一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。
 - 2022-11-18 · 一作：Luyu Gao · [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
 
+## Chengdu Institute of Computer Applications, Chinese Academy of Sciences
+
+- 2026-09-10 · 一作：Ruiqing Yue · [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
+
 ## City University of Hong Kong
 
 - 2026-08-27 · 一作：Junjie Zhang · [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
@@ -95,6 +99,10 @@
 
 - 2023-08-01 · 一作：Sirui Hong · [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
 
+## Duke University
+
+- 2026-09-09 · 一作：Jiacheng Sang · [SearchAtlas: Analyzing Agentic Search Strategies via Evidential Query Graphs](../2609.10901-searchatlas/README.md)（`searchatlas`）：把搜索轨迹转为 query—evidence—answer 有向图，审计证据是否真正覆盖问题约束和最终回答。
+
 ## Fudan University
 
 - 2026-09-08 · 一作：Hongbang Yuan · [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
@@ -103,6 +111,7 @@
 ## Google
 
 - 2026-09-08 · 一作：Yuxing Lu · [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](../2609.09153-procedural-graphs/README.md)（`procedural-graphs`）：方法把成功经验从自然语言片段提升为 procedure–relation–procedure 图。新经验先局部化为候选图编辑，再经过 held-out 验证门才写入长期结构，减少错误经验污染。
+- 2025-08-06 · 一作：Zhongyi Zhou · [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](../2508.04086-toolgrad/README.md)（`toolgrad`）：先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。
 
 ## HKU
 
@@ -149,6 +158,10 @@
 
 - 2026-08-26 · 一作：Guibin Zhang · [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](../2608.25593-jit-agent/README.md)（`jit-agent`）：把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。
 
+## Manulife
+
+- 2026-09-09 · 一作：Syed Shariyar Murtaza · [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](../2609.10750-skill-retention/README.md)（`skill-retention`）：混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。
+
 ## Meituan
 
 - 2025-08-26 · 一作：Weikang Zhao · [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：既有 tool-use RL 通常把用户请求视为固定输入，但真实用户会根据 Agent 回答不断修改需求。MUA-RL 将 LLM 模拟用户直接放入 rollout，Agent 在对话中澄清意图并调用真实 MCP/数据库工具；用户消息和工具结果不计入策略 loss，只用最终任务完成奖励鼓励探索。
@@ -167,6 +180,7 @@
 
 ## Microsoft
 
+- 2026-09-09 · 一作：Susheel Suresh · [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](../2609.11060-grounded-memory/README.md)（`grounded-memory`）：给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。
 - 2023-05-19 · 一作：Zhibin Gou · [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
 
 ## Microsoft / POSTECH
@@ -196,6 +210,10 @@
 ## National University of Singapore
 
 - 2026-02-25 · 一作：Xinle Wu · [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。
+
+## National University of Singapore / Tencent
+
+- 2026-09-09 · 一作：Junyao Yang · [T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks](../2609.11042-t1-terminal-rl/README.md)（`t1-terminal-rl`）：TITO 使用 rollout 实际采样 token id 训练，turn boundary repair 修正漂移，R3 重放 MoE 路由选择。
 
 ## NetEase Guangzhou AI Lab
 
@@ -273,6 +291,10 @@
 - 2026-08-27 · 一作：Dewu Zheng · [SWE-Prime: Fewer Trajectories, Better Performance](../2608.27449-swe-prime/README.md)（`swe-prime`）：成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。
 - 2026-08-04 · 一作：Xiaolong Sun · [VerMem](../2608.03137-vermem/README.md)（`vermem`）：长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。
 
+## The Chinese University of Hong Kong, Shenzhen
+
+- 2026-09-10 · 一作：Pingchen Lu · [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
+
 ## The University of Hong Kong
 
 - 2026-07-30 · 一作：Qiushi Sun · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
@@ -305,6 +327,10 @@
 ## University of Illinois Urbana–Champaign / Meta AI
 
 - 2026-08-05 · 一作：Xuying Ning · [EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents](../2608.05446-evoharness-rl/README.md)（`evoharness-rl`）：**主题：Harness policy RL。** 把 Belief、Progress、Experience 暴露为策略可操作的外部状态；先 SFT 学会 harness action，再以成本感知 GRPO 学习何时读写和合并。
+
+## University of Maryland / Google
+
+- 2026-05-18 · 一作：Yuran Ding · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 
 ## University of New South Wales
 

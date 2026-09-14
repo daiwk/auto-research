@@ -1,0 +1,93 @@
+{
+  "schema_version": 2,
+  "method": "tasco",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.234375,
+      "mean_reward": 0.388413129487314,
+      "entropy": 1.7917594691841134,
+      "kl_from_reference": 3.794149410107689e-11,
+      "local_stability_variance": 2.54541919965692e-05,
+      "perturbation_samples": 4.0,
+      "stability_penalty": 1.0472196160426116e-05,
+      "update_weight_abs_mean": 2.1036296247487838e-05,
+      "loss": 1.0480679456949764e-10,
+      "policy_entropy": 1.7917594691836567
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.28125,
+      "mean_reward": 0.45429363230689995,
+      "entropy": 1.7917594691922725,
+      "kl_from_reference": 2.978333292508686e-11,
+      "local_stability_variance": 1.0215177960741056e-05,
+      "perturbation_samples": 4.0,
+      "stability_penalty": 7.880093607051983e-06,
+      "update_weight_abs_mean": 1.5808929333167104e-05,
+      "loss": 4.9915656101463726e-11,
+      "policy_entropy": 1.7917594691916907
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.296875,
+      "mean_reward": 0.46671875360459697,
+      "entropy": 1.7917594692087493,
+      "kl_from_reference": 1.3305636385569632e-11,
+      "local_stability_variance": 6.477280218445335e-05,
+      "perturbation_samples": 4.0,
+      "stability_penalty": 3.3346554373912345e-05,
+      "update_weight_abs_mean": 6.788135199090234e-05,
+      "loss": 4.4457460294784843e-10,
+      "policy_entropy": 1.7917594691926715
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.2708333333333333,
+    "accuracy_std": 0.03252603124165832,
+    "entropy_mean": 1.7917594691950451,
+    "entropy_std": 1.254977025342206e-11,
+    "kl_from_reference_mean": 2.7010154470577794e-11,
+    "kl_from_reference_std": 1.2549870931610994e-11,
+    "local_stability_variance_mean": 3.348072404725454e-05,
+    "local_stability_variance_std": 2.8150532904448878e-05,
+    "loss_mean": 1.9976568453960327e-10,
+    "loss_std": 2.1377982638626207e-10,
+    "mean_reward_mean": 0.4364751717996036,
+    "mean_reward_std": 0.042084033115147856,
+    "perturbation_samples_mean": 4.0,
+    "perturbation_samples_std": 0.0,
+    "policy_entropy_mean": 1.7917594691893397,
+    "policy_entropy_std": 4.945937297848438e-12,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "stability_penalty_mean": 1.723294804713015e-05,
+    "stability_penalty_std": 1.4014848574019222e-05,
+    "update_weight_abs_mean_mean": 3.49088591905191e-05,
+    "update_weight_abs_mean_std": 2.8674384079134592e-05
+  },
+  "manifest_ref": "post-training:tasco",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "commit": "6149448867b0e247d25957486b37a4e06629c5d7",
+    "command": "PYTHONPATH=src python scripts/generate_sep_14_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.11393-tasco/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

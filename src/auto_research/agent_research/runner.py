@@ -188,12 +188,21 @@ class AgentResearchRunner:
             "event_tree_partitions", "progressive_merges", "anchor_propagations",
             "early_action_guidance", "feedback_observations", "late_stage_enrichments",
             "accepted_solution_updates", "reused_executable_states",
+            "bandit_allocations", "skill_evolutions", "cross_instance_failures",
+            "fdcr_repairs", "environment_probes", "memory_admissions",
+            "stale_rejections", "answer_first_generations",
+            "textual_gradient_edits", "profile_bottlenecks",
+            "sharding_proposals", "evidence_graph_edges",
+            "unsupported_answer_flags", "anchor_penalties", "replay_retrievals",
+            "tito_tokens", "routing_replays", "turn_boundary_repairs",
         ):
             diagnostics[name] = getattr(agent, name, 0)
         phase_counts = getattr(agent, "phase_counts", None)
         if config.method in {
             "atomrec", "coskill", "silr", "multi-harness-rl",
             "procedural-graphs", "memforest", "feedback-scaffold", "maple",
+            "cobra-skills", "ecdysis", "grounded-memory", "toolgrad",
+            "prompts", "searchatlas", "skill-retention", "t1-terminal-rl",
         }:
             diagnostics["fidelity"] = "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration"
             diagnostics["gold_fields_available_to_policy"] = False

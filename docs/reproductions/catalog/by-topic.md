@@ -341,6 +341,7 @@
     当前实现主要覆盖相关性审核、训练数据质量、隐私受限特征与策略约束；内容安全、
     作弊/欺诈和广告合规仍是明确缺口，不能用相关性模型冒充已实现。
 
+- [SIRF](../2609.11752-sirf/README.md)：通过 EntiGraph、MAGA 与账户级 CoT 合成长尾规则训练数据，把 trigger/exemption 关系内化进风控模型并按 P95 门槛出 verdict。
 - [RAMP](../2607.17473-ramp/README.md)：训练个性化/公共双路径，并用 feature mask 与预测对齐适配隐私受限和字段缺失流量。
 - [UAME](../2607.17092-uame/README.md)：显式建模多目标不确定性和标签冲突，降低高分歧样本对排序策略的风险。
 - [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 同时评估触发候选源的增量收益与调用成本，控制无效干预。

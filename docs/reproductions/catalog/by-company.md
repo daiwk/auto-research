@@ -208,6 +208,7 @@
 - 2020-09 · [PLE](../recsys2020-ple-ple/README.md)：把共享 experts 与任务专属 experts 分组，通过 CGC gates 逐层分离共性和任务特性。
 
 ## Xiaohongshu
+- 2026-09 · [SIRF](../2609.11752-sirf/README.md)：把 trigger、exemption 与账户级规则关系合成为持续预训练数据，并以单次 verdict 和 P95 阈值服务工业内容风控。
 - 2026-08 · [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
 - 2026-03 · [IDProxy](../2603.01590-idproxy/README.md)：先把多模态 LLM 表征对齐到协同 ID 空间，再通过多层 proxy adapter 和残差门控注入排序器。
 - 2025-05 · [GenRank](../2505.04180-genrank/README.md)：把多种用户动作编码为生成目标，通过 action-oriented generation 完成端到端排序。

@@ -9,7 +9,13 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 技能进化 | [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](2609.11682-cobra-skills/README.md) | The Chinese University of Hong Kong, Shenzhen，2026-09-10 | [已开源](https://github.com/Jerry-LuP/COBRA-Skills) | `cobra-skills` |
+| Harness 自进化 | [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](2609.11677-ecdysis/README.md) | Chengdu Institute of Computer Applications, Chinese Academy of Sciences，2026-09-10 | [已开源](https://github.com/cuiyu-ai/Ecdysis) | `ecdysis` |
 | 持久化优化规划 | [MAPLE: Memory-Augmented Planning with Language and Evolution](2609.11636-maple/README.md) | Harbin Institute of Technology, Shenzhen，2026-09-10 | [已开源](https://github.com/xin8coder/MAPLE) | `maple` |
+| Agent 记忆 | [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](2609.11060-grounded-memory/README.md) | Microsoft，2026-09-09 | 未发现官方代码 | `grounded-memory` |
+| 搜索 Agent | [SearchAtlas: Analyzing Agentic Search Strategies via Evidential Query Graphs](2609.10901-searchatlas/README.md) | Duke University，2026-09-09 | [已开源](https://github.com/DukeNLP/SearchAtlas) | `searchatlas` |
+| Agent RL | [T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks](2609.11042-t1-terminal-rl/README.md) | National University of Singapore / Tencent，2026-09-09 | 未发现官方代码 | `t1-terminal-rl` |
+| 技能检索 | [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](2609.10750-skill-retention/README.md) | Manulife，2026-09-09 | [已开源](https://github.com/manulife-ai/emnlp2026/) | `skill-retention` |
 | 环境反馈脚手架 | [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](2609.08404-feedback-scaffold/README.md) | Fudan University，2026-09-08 | [已开源](https://github.com/HongbangYuan/EnvAsScaffold) | `feedback-scaffold` |
 | 事件树记忆压缩 | [MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging](2609.08273-memforest/README.md) | Shanghai Jiao Tong University，2026-09-08 | [已开源](https://github.com/Celina-love-sweet/MemForest) | `memforest` |
 | 自进化程序图 | [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](2609.09153-procedural-graphs/README.md) | Google，2026-09-08 | 未发现官方代码 | `procedural-graphs` |
@@ -75,6 +81,7 @@
 | Agentic RL / hindsight skill | [SEED](2607.14777-seed/README.md) | Tsinghua University，2026-07-16 | [已开源](https://github.com/jinyangwu/SEED) | `seed` |
 | Agentic OPD / rollout budgeting | [TurnOPD](2607.05804-turn-opd/README.md) | Academic author team，2026-07-07 | 未发现官方代码 | `turn-opd` |
 | 研究自动化 | [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](2606.26859-agentx/README.md) | Kuaishou，2026-06-26 | 未发现官方代码 | `agentx` |
+| 训练服务优化 | [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](mlsys2026-prompts/README.md) | University of Maryland / Google，2026-05-18 | 未发现官方代码 | `prompts` |
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | University of Science and Technology of China，2026-04-20 | 未发现官方代码 | `steppo` |
 | 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Shanghai AI Laboratory，2026-04-09 | 未发现官方代码 | `searl` |
 | 技能设计 | [Memento-Skills](2603.18743-memento-skills/README.md) | Memento Team，2026-03-19 | [已开源](https://github.com/Memento-Teams/Memento-Skills) | `memento-skills` |
@@ -86,6 +93,7 @@
 | Agentic RL 基础设施 | [Agent-R1](2511.14460-agent-r1/README.md) | University of Science and Technology of China，2025-11-18 | [已开源](https://github.com/AgentR1/Agent-R1) | `agent-r1` |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | Microsoft Research，2025-10-06 | 未发现官方代码 | `legomem` |
 | 多轮用户 Agent RL | [MUA-RL](2508.18669-mua-rl/README.md) | Meituan，2025-08-26 | [已开源](https://github.com/zzwkk/MUA-RL) | `mua-rl` |
+| 工具学习 | [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](2508.04086-toolgrad/README.md) | Google，2025-08-06 | [已开源](https://github.com/zhongyi-zhou/toolgrad) | `toolgrad` |
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
 | 工具记忆 | [MemTool](2507.21428-memtool/README.md) | PricewaterhouseCoopers Commercial Technology and Innovation Office，2025-07-29 | 未发现官方代码 | `memtool` |
 | 网页 Agent RL | [WebAgent-R1](2505.16421-webagent-r1/README.md) | University of Virginia，2025-05-22 | [已开源](https://github.com/weizhepei/WebAgent-R1) | `webagent-r1` |

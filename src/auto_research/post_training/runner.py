@@ -97,6 +97,10 @@ class PostTrainingRunner:
             "route-opd": state.variant_updates,
             "compass-opd": state.variant_updates,
             "probe-erpo": state.variant_updates,
+            "nsd": state.variant_updates,
+            "adaptive-opd-gate": state.variant_updates,
+            "locus": state.variant_updates,
+            "tasco": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

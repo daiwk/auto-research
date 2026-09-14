@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "method": "sensenova-u1-5",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "masked_fraction": 0.390625,
+      "target_finite": 1.0,
+      "expert_entropy": 0.9250036932192871,
+      "delta_norm": 2.4292414534428337
+    },
+    {
+      "seed": 43,
+      "masked_fraction": 0.359375,
+      "target_finite": 1.0,
+      "expert_entropy": 0.8472001257479191,
+      "delta_norm": 2.4616091980648873
+    },
+    {
+      "seed": 44,
+      "masked_fraction": 0.375,
+      "target_finite": 1.0,
+      "expert_entropy": 0.7665222411789934,
+      "delta_norm": 2.1450010839239715
+    }
+  ],
+  "aggregate_metrics": {
+    "delta_norm_mean": 2.345283911810564,
+    "delta_norm_std": 0.17420340433719286,
+    "expert_entropy_mean": 0.8462420200487332,
+    "expert_entropy_std": 0.07924507009964778,
+    "masked_fraction_mean": 0.375,
+    "masked_fraction_std": 0.015625,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "target_finite_mean": 1.0,
+    "target_finite_std": 0.0
+  },
+  "manifest_ref": "foundation-models:sensenova-u1-5",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "commit": "6149448867b0e247d25957486b37a4e06629c5d7",
+    "command": "PYTHONPATH=src python scripts/generate_sep_14_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.11929-sensenova-u1-5/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

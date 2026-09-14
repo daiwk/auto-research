@@ -119,6 +119,14 @@ METHODS = (
     "memforest",
     "feedback-scaffold",
     "maple",
+    "cobra-skills",
+    "ecdysis",
+    "grounded-memory",
+    "toolgrad",
+    "prompts",
+    "searchatlas",
+    "skill-retention",
+    "t1-terminal-rl",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

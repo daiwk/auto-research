@@ -4,6 +4,10 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "nsd": ("Negative Self-Distillation", "https://arxiv.org/abs/2609.11699"),
+    "adaptive-opd-gate": ("Unified Per-token OPD Gating", "https://arxiv.org/abs/2609.11768"),
+    "locus": ("LOCUS", "https://arxiv.org/abs/2609.11739"),
+    "tasco": ("TASCO", "https://arxiv.org/abs/2609.11393"),
     "oprd": ("On-Policy Reverse Distillation", "https://arxiv.org/abs/2609.08798"),
     "route-opd": ("RouteOPD", "https://arxiv.org/abs/2609.08337"),
     "compass-opd": ("CompassOPD", "https://arxiv.org/abs/2609.10154"),
