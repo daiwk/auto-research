@@ -1,6 +1,6 @@
 # 论文实现与评测库
 
-想先判断四个领域的经典主干是否完整、还有哪些候选未达到实现门槛，请看[全域论文谱系与缺口](research-lineage.md)。历史全量扫描已经完成，后续采用增量发现流程；固定日期的扫描清单和已完成 TODO 仍保留在仓库中作为审计记录，但不再占用主导航。
+想先判断四个领域的经典主干是否完整、还有哪些候选未达到实现门槛，请看[全域论文谱系与缺口](research-lineage.md)。历史全量扫描已经完成，后续采用增量发现流程；[历史全文审计终态](paper-audits/2026-historical-fulltext-review.md)、[历史 P0 固定实现路线图](paper-audits/2026-historical-p0-implementation-roadmap.md)、固定日期的扫描清单和已完成 TODO 仍保留为可追溯记录，但不再占用主导航。
 
 已提交论文的公开结果可直接进入[公开实验看板](public-experiment-dashboard.md)，按领域、方法、数据集和指标检索；本地临时实验不会出现在公开页面。
 
