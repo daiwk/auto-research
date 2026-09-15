@@ -12201,6 +12201,93 @@
         {"id": "2609.10750", "priority": "P1", "track": "agent", "status": "implemented", "key": "skill-retention", "doc": "agent-research/2609.10750-skill-retention/README.md"},
         {"id": "2609.11042", "priority": "P1", "track": "agent", "status": "implemented", "key": "t1-terminal-rl", "doc": "agent-research/2609.11042-t1-terminal-rl/README.md"}
       ]
+    },
+    {
+      "batch": "recent-20260915-cross-domain",
+      "scope_kind": "partial-primary-source-review",
+      "checked_at": "2026-09-15T12:00:00+08:00",
+      "window": "2026-09-10 through 2026-09-15",
+      "sources": [
+        "arXiv official recent pages, abstracts, HTML and PDF full text",
+        "official author repositories",
+        "full-text production experiment sections"
+      ],
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "coverage": {
+        "arxiv_api": "connection reset; official recent pages used as fallback",
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-09-11",
+        "overlap_start": "2026-09-10",
+        "source_artifact": "recent-paper-scan-20260915.md"
+      },
+      "candidates": [
+        {
+          "id": "2609.11943",
+          "priority": "P0",
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "pindco",
+          "doc": "reproductions/2609.11943-pindco/README.md"
+        },
+        {
+          "id": "2609.12842",
+          "priority": "P0",
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "mima",
+          "doc": "reproductions/2609.12842-mima/README.md"
+        },
+        {
+          "id": "2609.12375",
+          "priority": "P0",
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "chronicle-rec",
+          "doc": "reproductions/2609.12375-chronicle-rec/README.md"
+        },
+        {
+          "id": "2609.13141",
+          "priority": "P1",
+          "track": "foundation-model",
+          "status": "implemented",
+          "key": "sas-attention",
+          "doc": "reproductions/2609.13141-sas-attention/README.md"
+        },
+        {
+          "id": "2609.12399",
+          "priority": "P1",
+          "track": "recommendation",
+          "status": "deferred",
+          "reason": "Defining contribution is a fused GPU large-beam linear-attention decode path; requires real A100/A30 correctness, memory and latency validation."
+        },
+        {
+          "id": "2609.13060",
+          "priority": "P1",
+          "track": "post-training",
+          "status": "deferred",
+          "reason": "Requires a public diffusion LM, teacher-canvas curriculum and a reproducible RL/tool-use training budget."
+        },
+        {
+          "id": "2609.12191",
+          "priority": "P1",
+          "track": "agent",
+          "status": "deferred",
+          "reason": "Requires released transcripts and blind human labels to reproduce grounded-reward ranking and construct validity."
+        },
+        {
+          "id": "2609.12471",
+          "priority": "P1",
+          "track": "agent",
+          "status": "deferred",
+          "reason": "Defining HIP/ROCm execution environment cannot be validated on the available NVIDIA A100/A30 hosts."
+        }
+      ]
     }
   ]
 }

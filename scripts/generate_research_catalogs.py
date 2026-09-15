@@ -246,6 +246,7 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "sas-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
     "beaconkv": ("推理与系统效率", "推测解码与 KV cache"),
     "kvmem": ("推理与系统效率", "推测解码与 KV cache"),
     "random-attention": ("推理与系统效率", "推测解码与 KV cache"),

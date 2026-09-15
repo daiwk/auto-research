@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "mima",
+  "arxiv_id": "2609.12842",
+  "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
+  "paper_url": "https://arxiv.org/abs/2609.12842",
+  "organization": "Alibaba International Digital Commerce Group",
+  "published": "2026-09-11",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-15）",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "multi-interest",
+    "exclusive-assignment",
+    "industrial-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/mima",
+  "documentation": "docs/reproductions/2609.12842-mima/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Alibaba private request groups and catalog",
+    "production causal Transformer checkpoint",
+    "online retrieval serving graph"
+  ],
+  "evolve_operators": []
+}

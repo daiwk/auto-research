@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "sas-attention",
+  "arxiv_id": "2609.13141",
+  "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
+  "paper_url": "https://arxiv.org/abs/2609.13141",
+  "organization": "Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST",
+  "published": "2026-09-11",
+  "upstream_code": "https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification",
+  "track": "llm",
+  "topics": [
+    "sparse-attention",
+    "long-context",
+    "post-training",
+    "context-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/sas_attention",
+  "documentation": "docs/reproductions/2609.13141-sas-attention/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "WikiText-2"
+  ],
+  "baseline": "same trained tiny decoder with full causal attention",
+  "metrics": [
+    "test.sas.perplexity",
+    "test.dense.perplexity",
+    "routing.retained_attention_fraction",
+    "selector_training.selector_gradient_norm_mean"
+  ],
+  "mechanisms": [
+    "Qwen3-4B/8B/14B and OLMo3-7B checkpoints",
+    "OpenR1-Math-220k, LongBench, BFCL and VitaBench paper-scale runs",
+    "Triton/FlashAttention kernel and SGLang decode benchmark"
+  ],
+  "evolve_operators": []
+}

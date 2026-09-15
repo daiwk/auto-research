@@ -34,12 +34,9 @@
 
 ## 注意力与长上下文
 
-### KV cache 与上下文压缩
-
-- [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../../reproductions/2608.27128-twinkv/README.md)（`twinkv`）：现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。
-
 ### 稀疏、门控与动态注意力
 
+- [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../../reproductions/2609.13141-sas-attention/README.md)（`sas-attention`）：硬 Top-K 只能改变被选中的索引，语言模型损失无法沿离散索引直接训练 selector。SAS 不再蒸馏 dense attention：selector 先给历史块连续打分，训练时保留 Top-K 块的连续 gate，并把 `log(gate)` 加到注意力 logits 内。
 - [Cracks in the Foundation: Seemingly Minor Architectural Choices Impact Long Context Extension](../../reproductions/2608.10296-olmpool-long-context/README.md)（`olmpool-long-context`）：以受控 7B 模型池隔离 normalization、GQA、预训练长度和滑窗注意力对长上下文扩展的复合影响。
 - [Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](../../reproductions/2608.06849-autonomy-heads/README.md)（`autonomy-heads`）：直接从冻结 QK 投影的谱有效秩区分 retrieval 与 streaming heads，无需校准数据或运行时门控。
 - [Parameter-free Adaptive Sparse Attention via Compression-Based Content Selection](../../reproductions/2607.21752-gzip-sparse-attention/README.md)（`gzip-sparse-attention`）：固定 BigBird/Longformer mask 不理解内容，learned mask 又需要额外参数、梯度估计或专用 kernel。论文把字节序列切成固定 block，用 gzip 压缩率作为无需训练的信息密度信号：高于样本均值的 literal blocks 互相建立长程连接，所有 block 保留局部窗口，不设置固定 global token。
@@ -48,6 +45,10 @@
 - [Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free](../../reproductions/2505.06708-gated-attention/README.md)（`gated-attention`）：softmax attention 的 value aggregation 到 output projection 之间基本是线性映射。论文系统比较 30 种门控变体，发现最简单稳定的方案是在每个 attention head 的 SDPA 输出后施加 query-dependent sigmoid gate：既增加非线性，也能稀疏抑制无用 head 输出。
 - [MoBA: Mixture of Block Attention for Long-Context LLMs](../../reproductions/2502.13189-moba/README.md)（`moba`）：把序列切成 block，以可微 router 为每个 query 选择少量相关块，同时保留当前因果块。
 - [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](../../reproductions/2502.11089-native-sparse-attention/README.md)（`native-sparse-attention`）：全注意力的计算和 KV 读取随上下文长度平方增长。NSA 不是在训练后裁剪 attention，而是从预训练开始并行学习三条路径：压缩历史块负责全局轮廓，query 相关的 block selection 恢复重要细节，滑窗保留近期精确信息；三路输出再由可学习门控融合。
+
+### KV cache 与上下文压缩
+
+- [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../../reproductions/2608.27128-twinkv/README.md)（`twinkv`）：现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。
 
 ### 位置编码与 KV 压缩
 

@@ -3,6 +3,8 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [ChronicleRec](../2609.12375-chronicle-rec/README.md)：把超长历史压成有时间顺序、可缓存、覆盖多个 horizon 的 Chronicle Tokens。
+- [MIMA](../2609.12842-mima/README.md)：将同请求多正例排他分配给多个兴趣，并以 activation routing 校准跨兴趣召回分数。
 - [SIRF](../2609.11752-sirf/README.md)：将复杂平台规则内化为 trigger/exemption 交互表征，再在独立数据上选择满足 P95 的裁决阈值。
 - [UniRec](../2609.11052-unirec/README.md)：联合预排和精排融合，以跨阶段偏好对齐和组相对正则减少级联偏差。
 - [BAFF](../2609.08725-baff/README.md)：按广告排名差和出价差过滤受 RTB A/B 对侧策略污染的训练日志。
@@ -76,6 +78,7 @@
 - [EGR](../2607.23038-egr/README.md)：共享 LLM 联合学习 item 索引和 user query 向量。
 - [BARGE](../2607.21028-barge/README.md)：用 ICA 恢复 item token 结构、HPR 重排累计语义路径，再以 OSQ 正交双通道和 OR-fusion 补充可达候选。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 Pinterest 全漏斗维护 fresh exploration corpus，并以 engagement dropout、内容交叉、分 cohort calibration 和 UCB 减少旧内容偏置。
+- [PinDCO](../2609.11943-pindco/README.md)：以创意组件专塔、相对广告分数的增量融合和整页像素惩罚完成动态创意选择。
 - [TSGR](../2607.18796-tsgr/README.md)：把 residual semantic prefix 与并行全局/query 价值码结合，再由联合 VRM 完成价值感知生成召回。
 - [RAMP](../2607.17473-ramp/README.md)：显式训练个性化和公共字段双路径，用 feature mask 与 prediction alignment 适配隐私受限流量。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：Pinterest 用 engagement-aware Semantic ID、级联 pooling 与多视角对比学习接入 dense retrieval。

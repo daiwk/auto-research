@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling](../2609.12375-chronicle-rec/README.md) | Tencent，2026-09-11 | 未发现官方代码 | `chronicle-rec` |
+| 生成、排序与冷启动 | [MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment](../2609.12842-mima/README.md) | Alibaba International Digital Commerce Group，2026-09-11 | 未发现官方代码 | `mima` |
 | 内容理解、审核与风险控制 | [SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control](../2609.11752-sirf/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `sirf` |
 | 多阶段排序与混排 | [UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems](../2609.11052-unirec/README.md) | Kuaishou，2026-09-10 | 未发现官方代码 | `unirec` |
 | Serving 与研究基础设施 | [BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests](../2609.08725-baff/README.md) | Dable，2026-09-08 | 未发现官方代码 | `baff` |
@@ -77,6 +79,7 @@
 | 大模型能力与推荐融合 | [EGR: Embedding-Native Generative Retrieval with a Shared LLM](../2607.23038-egr/README.md) | Snap Inc.，2026-07-25 | 未发现官方代码 | `egr` |
 | 生成、排序与冷启动 | [Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation](../2607.21028-barge/README.md) | Tencent，2026-07-23 | 未发现官方代码 | `barge` |
 | 生成、排序与冷启动 | [PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest](../2607.22518-pinequalizer/README.md) | Pinterest，2026-07-23 | 未发现官方代码 | `pinequalizer` |
+| Serving 与研究基础设施 | [PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale](../2609.11943-pindco/README.md) | Pinterest，2026-07-21 | 未发现官方代码 | `pindco` |
 | 生成、排序与冷启动 | [TSGR: Taobao Search Generative Retrieval](../2607.18796-tsgr/README.md) | Taobao & Tmall Group of Alibaba / Zhejiang University，2026-07-21 | 未发现官方代码 | `tsgr` |
 | 训练目标与决策优化 | [RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways](../2607.17473-ramp/README.md) | Huawei Ireland Research Center / University College Dublin，2026-07-20 | [已开源](https://github.com/Ruixinhua/RAMP) | `ramp` |
 | Serving 与研究基础设施 | [RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems](../2609.01622-recevolve/README.md) | Google，2026-07-20 | 未发现官方代码 | `recevolve` |

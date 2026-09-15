@@ -21,6 +21,9 @@
 - 2026-08 · [DEGR](../2608.04809-degr/README.md)：联合 next-item CE、cohort 多样性与 reward-adaptive ORPO，并在推理时执行多样性感知重排。
 - 2026-03 · [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
+## Alibaba International Digital Commerce Group
+- 2026-09 · [MIMA](../2609.12842-mima/README.md)：将同请求物品组成多正例集合，以排他匹配监督互补兴趣，并用 activation routing 校准多通道分数。
+
 ## Alibaba
 - 2026-08 · [DCEO](../2608.25635-dceo/README.md)：以直接因果效应分离短期点击与长期用户价值，并用多目标策略权重优化电商搜索排序。
 - 2026-08 · [TransRetrieval](../2608.25528-transretrieval/README.md)：把 target token 压缩、多域归一化与大规模 Transformer 检索结合，在受控 serving 预算下扩展召回模型。
@@ -180,6 +183,7 @@
 
 ## Pinterest
 - 2026-07 · [PinEqualizer](../2607.22518-pinequalizer/README.md)：贯通探索 corpus、召回、排序与 utility，通过 engagement dropout、内容交叉、分 cohort calibration 和 UCB 缓解 fresh 内容反馈回路。
+- 2026-07 · [PinDCO](../2609.11943-pindco/README.md)：以组件专塔学习相对广告基线的创意增量分数，再用 PAM 协调整页像素收益并以预筛控制成本。
 - 2026-07 · [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：用 engagement-aware SID、级联 pooling 和多视角对比对齐接入 dense retrieval。
 - 2026-07 · [Downstream Rewards](../2607.14192-downstream-rewards/README.md)：离线筛选能预测未来参与度的长期 reward，再以模型无关附加头接入多个推荐 surface。
 - 2026-07 · [Causal Retrieval](../2607.14161-causal-retrieval/README.md)：用 doubly-robust uplift 决定是否触发 shopping candidate generator。
@@ -343,6 +347,7 @@
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
 ## Tencent
+- 2026-09 · [ChronicleRec](../2609.12375-chronicle-rec/README.md)：用近密远疏合并、因果时间锚点和多 horizon alignment 把终身历史压成可缓存用户 token。
 - 2026-09 · [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
 - 2026-04 · [RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems](../2604.17878-rankup/README.md)：随机置换多 embedding、全局 token 和任务解耦共同提升表征有效秩。
 - 2026-02 · [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。

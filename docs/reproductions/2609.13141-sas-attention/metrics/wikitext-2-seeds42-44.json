@@ -1,0 +1,270 @@
+{
+  "schema_version": 2,
+  "method": "sas-attention",
+  "dataset": "WikiText-2",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.13141",
+        "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
+        "url": "https://arxiv.org/abs/2609.13141",
+        "track": "llm"
+      },
+      "dataset": {
+        "name": "WikiText-2",
+        "train_tokens": 12000,
+        "validation_tokens": 4096,
+        "test_tokens": 4096
+      },
+      "setup": {
+        "seed": 42,
+        "backbone_pretraining_steps": 30,
+        "selector_training_steps": 24,
+        "sequence_length": 64,
+        "block_size": 8,
+        "top_k_historical_blocks": 2,
+        "frozen_backbone_during_selector_training": true,
+        "test_isolation": "hyperparameters fixed before test evaluation"
+      },
+      "pretraining": {
+        "initial_loss": 5.46513786315918,
+        "final_loss": 4.904762554168701,
+        "parameters": 23392,
+        "device": "cpu"
+      },
+      "selector_training": {
+        "initial_loss": 4.879951477050781,
+        "final_loss": 4.863845443725586,
+        "selector_gradient_norm_mean": 6.835307923817406e-05
+      },
+      "validation": {
+        "dense": {
+          "loss": 4.977421204249064,
+          "perplexity": 145.0997162367571,
+          "batches": 12
+        },
+        "sas": {
+          "loss": 4.977461338043213,
+          "perplexity": 145.1055397557587,
+          "batches": 12
+        }
+      },
+      "test": {
+        "dense": {
+          "loss": 4.916358192761739,
+          "perplexity": 136.504583492615,
+          "batches": 12
+        },
+        "sas": {
+          "loss": 4.916582425435384,
+          "perplexity": 136.53519571233804,
+          "batches": 12
+        }
+      },
+      "routing": {
+        "retained_attention_fraction": 0.5384615384615384,
+        "selector_gate_entropy": 1.2174460887908936
+      },
+      "relative": {
+        "test_ppl_change_vs_dense_percent": 0.022425781567020665,
+        "attention_positions_reduced_percent": 46.15384615384615
+      },
+      "paper_results": {
+        "math500_qwen3_4b_budget1024_sas": 90.65,
+        "math500_qwen3_4b_budget1024_seer_attention_r": 84.67,
+        "bfcl_qwen3_4b_budget2048_sas": 32.5,
+        "bfcl_qwen3_4b_budget2048_seer_attention_r": 29.0,
+        "decode_speedup_batch1_context512k": 5.6
+      },
+      "manifest_ref": "reproduction:sas-attention",
+      "scope": "在 WikiText-2 上真实训练 tiny decoder，并冻结 dense backbone、只用语言模型损失训练 SAS selector；执行历史块 softmax 归一化、硬 Top-K、连续 gate 及 softmax 内 log-gate。PyTorch 参考实现仍物化稠密注意力矩阵，不复刻论文 Triton/FlashAttention kernel、Qwen3/OLMo3 规模训练或论文 benchmark，因此不能据此声称吞吐加速或论文精度复现。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.13141",
+        "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
+        "url": "https://arxiv.org/abs/2609.13141",
+        "track": "llm"
+      },
+      "dataset": {
+        "name": "WikiText-2",
+        "train_tokens": 12000,
+        "validation_tokens": 4096,
+        "test_tokens": 4096
+      },
+      "setup": {
+        "seed": 43,
+        "backbone_pretraining_steps": 30,
+        "selector_training_steps": 24,
+        "sequence_length": 64,
+        "block_size": 8,
+        "top_k_historical_blocks": 2,
+        "frozen_backbone_during_selector_training": true,
+        "test_isolation": "hyperparameters fixed before test evaluation"
+      },
+      "pretraining": {
+        "initial_loss": 5.506737136840821,
+        "final_loss": 4.96820707321167,
+        "parameters": 23392,
+        "device": "cpu"
+      },
+      "selector_training": {
+        "initial_loss": 4.900539875030518,
+        "final_loss": 4.8952594757080075,
+        "selector_gradient_norm_mean": 3.2778751763847445e-05
+      },
+      "validation": {
+        "dense": {
+          "loss": 5.0111375252405805,
+          "perplexity": 150.07535359252532,
+          "batches": 12
+        },
+        "sas": {
+          "loss": 5.011876463890076,
+          "perplexity": 150.18629105457273,
+          "batches": 12
+        }
+      },
+      "test": {
+        "dense": {
+          "loss": 4.955202619234721,
+          "perplexity": 141.91135743074227,
+          "batches": 12
+        },
+        "sas": {
+          "loss": 4.955198605855306,
+          "perplexity": 141.91078788776443,
+          "batches": 12
+        }
+      },
+      "routing": {
+        "retained_attention_fraction": 0.5384615384615384,
+        "selector_gate_entropy": 1.2178430557250977
+      },
+      "relative": {
+        "test_ppl_change_vs_dense_percent": -0.0004013371361912923,
+        "attention_positions_reduced_percent": 46.15384615384615
+      },
+      "paper_results": {
+        "math500_qwen3_4b_budget1024_sas": 90.65,
+        "math500_qwen3_4b_budget1024_seer_attention_r": 84.67,
+        "bfcl_qwen3_4b_budget2048_sas": 32.5,
+        "bfcl_qwen3_4b_budget2048_seer_attention_r": 29.0,
+        "decode_speedup_batch1_context512k": 5.6
+      },
+      "manifest_ref": "reproduction:sas-attention",
+      "scope": "在 WikiText-2 上真实训练 tiny decoder，并冻结 dense backbone、只用语言模型损失训练 SAS selector；执行历史块 softmax 归一化、硬 Top-K、连续 gate 及 softmax 内 log-gate。PyTorch 参考实现仍物化稠密注意力矩阵，不复刻论文 Triton/FlashAttention kernel、Qwen3/OLMo3 规模训练或论文 benchmark，因此不能据此声称吞吐加速或论文精度复现。"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.13141",
+        "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
+        "url": "https://arxiv.org/abs/2609.13141",
+        "track": "llm"
+      },
+      "dataset": {
+        "name": "WikiText-2",
+        "train_tokens": 12000,
+        "validation_tokens": 4096,
+        "test_tokens": 4096
+      },
+      "setup": {
+        "seed": 44,
+        "backbone_pretraining_steps": 30,
+        "selector_training_steps": 24,
+        "sequence_length": 64,
+        "block_size": 8,
+        "top_k_historical_blocks": 2,
+        "frozen_backbone_during_selector_training": true,
+        "test_isolation": "hyperparameters fixed before test evaluation"
+      },
+      "pretraining": {
+        "initial_loss": 5.50233736038208,
+        "final_loss": 4.956244373321534,
+        "parameters": 23392,
+        "device": "cpu"
+      },
+      "selector_training": {
+        "initial_loss": 4.914968585968017,
+        "final_loss": 4.921072673797608,
+        "selector_gradient_norm_mean": 3.8291004405740146e-05
+      },
+      "validation": {
+        "dense": {
+          "loss": 5.00391964117686,
+          "perplexity": 148.99602700244847,
+          "batches": 12
+        },
+        "sas": {
+          "loss": 5.004136681556702,
+          "perplexity": 149.02836866634055,
+          "batches": 12
+        }
+      },
+      "test": {
+        "dense": {
+          "loss": 4.945485591888428,
+          "perplexity": 140.53907892133813,
+          "batches": 12
+        },
+        "sas": {
+          "loss": 4.945818781852722,
+          "perplexity": 140.58591293390413,
+          "batches": 12
+        }
+      },
+      "routing": {
+        "retained_attention_fraction": 0.5384615384615384,
+        "selector_gate_entropy": 1.21761155128479
+      },
+      "relative": {
+        "test_ppl_change_vs_dense_percent": 0.03332454782360476,
+        "attention_positions_reduced_percent": 46.15384615384615
+      },
+      "paper_results": {
+        "math500_qwen3_4b_budget1024_sas": 90.65,
+        "math500_qwen3_4b_budget1024_seer_attention_r": 84.67,
+        "bfcl_qwen3_4b_budget2048_sas": 32.5,
+        "bfcl_qwen3_4b_budget2048_seer_attention_r": 29.0,
+        "decode_speedup_batch1_context512k": 5.6
+      },
+      "manifest_ref": "reproduction:sas-attention",
+      "scope": "在 WikiText-2 上真实训练 tiny decoder，并冻结 dense backbone、只用语言模型损失训练 SAS selector；执行历史块 softmax 归一化、硬 Top-K、连续 gate 及 softmax 内 log-gate。PyTorch 参考实现仍物化稠密注意力矩阵，不复刻论文 Triton/FlashAttention kernel、Qwen3/OLMo3 规模训练或论文 benchmark，因此不能据此声称吞吐加速或论文精度复现。"
+    }
+  ],
+  "aggregate_metrics": {
+    "dense_test_perplexity_mean": 139.65167328156514,
+    "dense_test_perplexity_std": 2.8105013221183017,
+    "retained_attention_fraction_mean": 0.5384615384615384,
+    "retained_attention_fraction_std": 0.0,
+    "sas_test_perplexity_mean": 139.67729884466885,
+    "sas_test_perplexity_std": 2.8006128760494513,
+    "selector_gradient_norm_mean_mean": 4.6474278469253884e-05,
+    "selector_gradient_norm_mean_std": 1.9147001713364678e-05,
+    "test_ppl_change_vs_dense_percent_mean": 0.018449664084811378,
+    "test_ppl_change_vs_dense_percent_std": 0.017210925650719577
+  },
+  "manifest_ref": "reproduction:sas-attention",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "selection_split": "train selector; inspect validation; evaluate isolated test",
+    "claim_policy": "CPU reference mechanism comparison; no Triton throughput claim"
+  },
+  "provenance": {
+    "commit": "7313785b5828c54e112d2c161a1b17657fec9426",
+    "command": "PYTHONPATH=src python scripts/generate_sep_15_2026_artifacts.py",
+    "dataset_fingerprint": "5f34399dee9c598676553cd5c5223526902ce3f2cad4844988402fdab55dde5e",
+    "artifact_path": "docs/reproductions/2609.13141-sas-attention/metrics/wikitext-2-seeds42-44.json"
+  }
+}
