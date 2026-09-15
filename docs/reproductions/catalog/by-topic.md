@@ -66,6 +66,7 @@
 ## 生成、排序与冷启动
 
 ### 搜索、召回与长期价值
+- [MIMA](../2609.12842-mima/README.md)：用同请求多正例与排他一对一匹配显式监督互补兴趣，并以 activation routing 校准召回通道。
 - [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
 - [DCEO](../2608.25635-dceo/README.md)：用直接因果效应替代短期相关性代理，并以动态多目标权重优化长期用户价值。
 - [TransRetrieval](../2608.25528-transretrieval/README.md)：通过 target-token 压缩、多域参数化与深层 Transformer 扩展工业检索。
@@ -140,6 +141,7 @@
 - [TIGER](../2305.05065-tiger/README.md)：先用 RQ-VAE 构造层级 Semantic ID，再自回归生成目标物品。
 
 ### 排序网络与长序列
+- [ChronicleRec](../2609.12375-chronicle-rec/README.md)：以非均匀历史合并、因果 query 锚点和多 horizon alignment 生成可缓存的长期用户 token。
 - [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
 - [OneModel](../2608.18606-onemodel/README.md)：将推荐、广告与商家混合行为映射到共享序列模型，并以 SAIM 场景门控兼顾迁移和专门化。
 - [DrEM](../2608.12778-drem/README.md)：在 logit 扰动下反演 pair-label 翻转风险，并以一致性融合降低多目标排序漂移。
@@ -378,6 +380,7 @@
 
 ### 广告与商业决策
 - [BAFF](../2609.08725-baff/README.md)：用广告排名差和出价差的双轴过滤，降低 RTB A/B 对侧策略造成的训练日志干扰。
+- [PinDCO](../2609.11943-pindco/README.md)：组件专塔预测创意增量分数，PAM 对创意尺寸施加整页像素惩罚，并结合候选预筛和探索反馈。
 - [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 - [ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest](../2602.09194-ml-dcn/README.md)：用可学习 mask 与低秩交叉扩大 DCN 容量并保持线上成本中性。
 

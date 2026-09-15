@@ -5237,6 +5237,66 @@
     },
     {
       "domain": "foundation-models",
+      "key": "sas-attention",
+      "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
+      "paper_url": "https://arxiv.org/abs/2609.13141",
+      "detail_path": "reproductions/2609.13141-sas-attention/README.md",
+      "topic": [
+        "sparse-attention",
+        "long-context",
+        "post-training",
+        "context-ranking"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST",
+      "published": "2026-09-11",
+      "code": "https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification",
+      "adapter": {
+        "adapter_key": "sas-attention",
+        "arxiv_id": "2609.13141",
+        "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
+        "paper_url": "https://arxiv.org/abs/2609.13141",
+        "track": "llm",
+        "organization": "Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST",
+        "published": "2026-09-11",
+        "code_url": "https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification",
+        "topics": [
+          "sparse-attention",
+          "long-context",
+          "post-training",
+          "context-ranking"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/sas_attention",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "WikiText-2"
+        ],
+        "baseline": "same trained tiny decoder with full causal attention",
+        "metrics": [
+          "test.sas.perplexity",
+          "test.dense.perplexity",
+          "routing.retained_attention_fraction",
+          "selector_training.selector_gradient_norm_mean"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "adapter-defined fixed budget",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "foundation-models",
       "key": "sensenova-u1-5",
       "title": "SenseNova-U1.5: Towards Native Unified Visual Intelligence",
       "paper_url": "https://arxiv.org/abs/2609.11929",
@@ -9697,6 +9757,78 @@
         "evolve_operators": [
           "reward:constraint-aware"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "chronicle-rec",
+      "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
+      "paper_url": "https://arxiv.org/abs/2609.12375",
+      "detail_path": "reproductions/2609.12375-chronicle-rec/README.md",
+      "topic": [
+        "ranking",
+        "long-sequence",
+        "sequence-compression",
+        "pretraining"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent",
+      "published": "2026-09-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "chronicle-rec",
+        "arxiv_id": "2609.12375",
+        "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
+        "paper_url": "https://arxiv.org/abs/2609.12375",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-09-11",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "long-sequence",
+          "sequence-compression",
+          "pretraining"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/chronicle_rec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Weixin Moments Ads pCVR",
+            "metric": "GMV",
+            "lift_percent": 1.61,
+            "traffic": "seven-day production A/B",
+            "source_url": "https://arxiv.org/html/2609.12375v1",
+            "source_location": "Section 4.9",
+            "experiment_duration": "seven days",
+            "significance": "95% CI excludes zero",
+            "retrieved_at": "2026-09-15"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
       }
     },
     {
@@ -17831,6 +17963,87 @@
     },
     {
       "domain": "recommendation",
+      "key": "mima",
+      "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
+      "paper_url": "https://arxiv.org/abs/2609.12842",
+      "detail_path": "reproductions/2609.12842-mima/README.md",
+      "topic": [
+        "retrieval",
+        "multi-interest",
+        "exclusive-assignment",
+        "industrial-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba International Digital Commerce Group",
+      "published": "2026-09-11",
+      "code": null,
+      "adapter": {
+        "adapter_key": "mima",
+        "arxiv_id": "2609.12842",
+        "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
+        "paper_url": "https://arxiv.org/abs/2609.12842",
+        "track": "recommendation",
+        "organization": "Alibaba International Digital Commerce Group",
+        "published": "2026-09-11",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "multi-interest",
+          "exclusive-assignment",
+          "industrial-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/mima",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "large-scale e-commerce homepage retrieval",
+            "metric": "transaction count",
+            "lift_percent": 5.6,
+            "traffic": "seven-day production A/B",
+            "source_url": "https://arxiv.org/html/2609.12842v1",
+            "source_location": "Section 5.5.2, Table 6",
+            "experiment_duration": "seven days",
+            "retrieved_at": "2026-09-15"
+          },
+          {
+            "product": "large-scale e-commerce homepage retrieval",
+            "metric": "transaction amount",
+            "lift_percent": 5.44,
+            "traffic": "seven-day production A/B",
+            "source_url": "https://arxiv.org/html/2609.12842v1",
+            "source_location": "Section 5.5.2, Table 6",
+            "experiment_duration": "seven days",
+            "retrieved_at": "2026-09-15"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "mixformer",
       "title": "MixFormer: Co-Scaling Up Dense and Sequence in Industrial Recommenders",
       "paper_url": "https://arxiv.org/abs/2602.14110",
@@ -20252,6 +20465,76 @@
             "traffic": "online A/B",
             "source_url": "https://arxiv.org/abs/2603.03544",
             "source_location": "original paper online-result disclosure: product=Pinterest new Ads; metric=clicks"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "pindco",
+      "title": "PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale",
+      "paper_url": "https://arxiv.org/abs/2609.11943",
+      "detail_path": "reproductions/2609.11943-pindco/README.md",
+      "topic": [
+        "advertising",
+        "creative-optimization",
+        "whole-page-optimization",
+        "multi-tower"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Pinterest",
+      "published": "2026-07-21",
+      "code": null,
+      "adapter": {
+        "adapter_key": "pindco",
+        "arxiv_id": "2609.11943",
+        "title": "PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale",
+        "paper_url": "https://arxiv.org/abs/2609.11943",
+        "track": "recommendation",
+        "organization": "Pinterest",
+        "published": "2026-07-21",
+        "code_url": null,
+        "topics": [
+          "advertising",
+          "creative-optimization",
+          "whole-page-optimization",
+          "multi-tower"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/pindco",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Pinterest Ads",
+            "metric": "ad CTR",
+            "lift_percent": 3.09,
+            "traffic": "production A/B followed by platform launch",
+            "source_url": "https://arxiv.org/html/2609.11943v1",
+            "source_location": "Abstract; Section 4.2",
+            "retrieved_at": "2026-09-15"
           }
         ],
         "selection_exception": null,

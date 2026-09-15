@@ -1,0 +1,204 @@
+{
+  "schema_version": 2,
+  "method": "pindco",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.11943",
+        "title": "PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale",
+        "url": "https://arxiv.org/abs/2609.11943",
+        "organization": "Pinterest"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "pindco",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "pindco executable mechanism",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05322514022580983,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.2290909090909091
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -1.4449047385399882,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -3.632887189292543
+      },
+      "stages": {
+        "component_towers": 2,
+        "ad_conditioned_delta": true,
+        "pixel_penalty_exact": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.1409090909090909,
+          "ndcg_at_10": 0.06895410936607232,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.23636363636363636
+        }
+      },
+      "paper_results": {
+        "ad_ctr_lift_percent": 3.09
+      },
+      "scope": "公开 MovieLens 执行组件专塔、ad-conditioned delta 融合与 PAM 精确公式；内容范数仅替代私有像素尺寸，不等于 Pinterest 创意线上复现。",
+      "manifest_ref": "reproduction:pindco"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.11943",
+        "title": "PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale",
+        "url": "https://arxiv.org/abs/2609.11943",
+        "organization": "Pinterest"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "pindco",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "pindco executable mechanism",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05322514022580983,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.2290909090909091
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -1.4449047385399882,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -3.632887189292543
+      },
+      "stages": {
+        "component_towers": 2,
+        "ad_conditioned_delta": true,
+        "pixel_penalty_exact": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.1409090909090909,
+          "ndcg_at_10": 0.06895410936607232,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.23636363636363636
+        }
+      },
+      "paper_results": {
+        "ad_ctr_lift_percent": 3.09
+      },
+      "scope": "公开 MovieLens 执行组件专塔、ad-conditioned delta 融合与 PAM 精确公式；内容范数仅替代私有像素尺寸，不等于 Pinterest 创意线上复现。",
+      "manifest_ref": "reproduction:pindco"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.11943",
+        "title": "PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale",
+        "url": "https://arxiv.org/abs/2609.11943",
+        "organization": "Pinterest"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "pindco",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "pindco executable mechanism",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05322514022580983,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.2290909090909091
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -1.4449047385399882,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -3.632887189292543
+      },
+      "stages": {
+        "component_towers": 2,
+        "ad_conditioned_delta": true,
+        "pixel_penalty_exact": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.1409090909090909,
+          "ndcg_at_10": 0.06895410936607232,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.23636363636363636
+        }
+      },
+      "paper_results": {
+        "ad_ctr_lift_percent": 3.09
+      },
+      "scope": "公开 MovieLens 执行组件专塔、ad-conditioned delta 融合与 PAM 精确公式；内容范数仅替代私有像素尺寸，不等于 Pinterest 创意线上复现。",
+      "manifest_ref": "reproduction:pindco"
+    }
+  ],
+  "aggregate_metrics": {
+    "fresh_hit_at_10_mean": 0.031746031746031744,
+    "fresh_hit_at_10_std": 0.0,
+    "head_share_at_10_mean": 0.2290909090909091,
+    "head_share_at_10_std": 0.0,
+    "hit_at_10_mean": 0.10909090909090909,
+    "hit_at_10_std": 0.0,
+    "ndcg_at_10_mean": 0.05322514022580984,
+    "ndcg_at_10_std": 0.0
+  },
+  "manifest_ref": "reproduction:pindco",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+  },
+  "provenance": {
+    "commit": "7313785b5828c54e112d2c161a1b17657fec9426",
+    "command": "PYTHONPATH=src python scripts/generate_sep_15_2026_artifacts.py",
+    "dataset_fingerprint": "fdd57ff855f2483261b174d043f9b50f10a0d58ecbf720c24f5136a80fc34798",
+    "artifact_path": "docs/reproductions/2609.11943-pindco/metrics/movielens-100k-seeds42-44.json"
+  }
+}

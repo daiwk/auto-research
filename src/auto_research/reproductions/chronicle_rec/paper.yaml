@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "chronicle-rec",
+  "arxiv_id": "2609.12375",
+  "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
+  "paper_url": "https://arxiv.org/abs/2609.12375",
+  "organization": "Tencent",
+  "published": "2026-09-11",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-15）",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "long-sequence",
+    "sequence-compression",
+    "pretraining"
+  ],
+  "local_code": "src/auto_research/reproductions/chronicle_rec",
+  "documentation": "docs/reproductions/2609.12375-chronicle-rec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Tencent private AdLive logs",
+    "production MixFormer checkpoint",
+    "asynchronous KV-cache serving"
+  ],
+  "evolve_operators": []
+}

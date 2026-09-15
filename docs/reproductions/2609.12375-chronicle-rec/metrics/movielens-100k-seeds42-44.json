@@ -1,0 +1,213 @@
+{
+  "schema_version": 2,
+  "method": "chronicle-rec",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.12375",
+        "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
+        "url": "https://arxiv.org/abs/2609.12375",
+        "organization": "Tencent"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "chronicle-rec",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "chronicle-rec executable mechanism",
+        "hit_at_10": 0.08636363636363636,
+        "ndcg_at_10": 0.04052514776374793,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.115
+      },
+      "relative": {
+        "hit_at_10_percent": -20.83333333333333,
+        "ndcg_at_10_percent": -24.96102816457819,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -51.62523900573614
+      },
+      "stages": {
+        "chronicle_tokens": 12,
+        "multi_horizon": true,
+        "causal_anchors": true,
+        "alignment_fitted_on_validation": true,
+        "validation_only_alpha": 0.5,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.07990200787057217,
+          "fresh_hit_at_10": 0.12280701754385964,
+          "head_share_at_10": 0.12136363636363637
+        }
+      },
+      "paper_results": {
+        "gmv_lift_percent": 1.61,
+        "gmv_ci95_low_percent": 0.678,
+        "gmv_ci95_high_percent": 2.547
+      },
+      "scope": "公开序列执行非均匀合并、因果锚点、多 horizon 与 alignment；不复刻腾讯私有 MixFormer、AdLive 和异步缓存。",
+      "manifest_ref": "reproduction:chronicle-rec"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.12375",
+        "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
+        "url": "https://arxiv.org/abs/2609.12375",
+        "organization": "Tencent"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "chronicle-rec",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "chronicle-rec executable mechanism",
+        "hit_at_10": 0.08636363636363636,
+        "ndcg_at_10": 0.04052514776374793,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.115
+      },
+      "relative": {
+        "hit_at_10_percent": -20.83333333333333,
+        "ndcg_at_10_percent": -24.96102816457819,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -51.62523900573614
+      },
+      "stages": {
+        "chronicle_tokens": 12,
+        "multi_horizon": true,
+        "causal_anchors": true,
+        "alignment_fitted_on_validation": true,
+        "validation_only_alpha": 0.5,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.07990200787057217,
+          "fresh_hit_at_10": 0.12280701754385964,
+          "head_share_at_10": 0.12136363636363637
+        }
+      },
+      "paper_results": {
+        "gmv_lift_percent": 1.61,
+        "gmv_ci95_low_percent": 0.678,
+        "gmv_ci95_high_percent": 2.547
+      },
+      "scope": "公开序列执行非均匀合并、因果锚点、多 horizon 与 alignment；不复刻腾讯私有 MixFormer、AdLive 和异步缓存。",
+      "manifest_ref": "reproduction:chronicle-rec"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.12375",
+        "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
+        "url": "https://arxiv.org/abs/2609.12375",
+        "organization": "Tencent"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "chronicle-rec",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "chronicle-rec executable mechanism",
+        "hit_at_10": 0.08636363636363636,
+        "ndcg_at_10": 0.04052514776374793,
+        "fresh_hit_at_10": 0.047619047619047616,
+        "head_share_at_10": 0.115
+      },
+      "relative": {
+        "hit_at_10_percent": -20.83333333333333,
+        "ndcg_at_10_percent": -24.96102816457819,
+        "fresh_hit_at_10_percent": 50.0,
+        "head_share_at_10_percent": -51.62523900573614
+      },
+      "stages": {
+        "chronicle_tokens": 12,
+        "multi_horizon": true,
+        "causal_anchors": true,
+        "alignment_fitted_on_validation": true,
+        "validation_only_alpha": 0.5,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.07990200787057217,
+          "fresh_hit_at_10": 0.12280701754385964,
+          "head_share_at_10": 0.12136363636363637
+        }
+      },
+      "paper_results": {
+        "gmv_lift_percent": 1.61,
+        "gmv_ci95_low_percent": 0.678,
+        "gmv_ci95_high_percent": 2.547
+      },
+      "scope": "公开序列执行非均匀合并、因果锚点、多 horizon 与 alignment；不复刻腾讯私有 MixFormer、AdLive 和异步缓存。",
+      "manifest_ref": "reproduction:chronicle-rec"
+    }
+  ],
+  "aggregate_metrics": {
+    "fresh_hit_at_10_mean": 0.047619047619047616,
+    "fresh_hit_at_10_std": 0.0,
+    "head_share_at_10_mean": 0.115,
+    "head_share_at_10_std": 0.0,
+    "hit_at_10_mean": 0.08636363636363636,
+    "hit_at_10_std": 0.0,
+    "ndcg_at_10_mean": 0.04052514776374793,
+    "ndcg_at_10_std": 0.0
+  },
+  "manifest_ref": "reproduction:chronicle-rec",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+  },
+  "provenance": {
+    "commit": "7313785b5828c54e112d2c161a1b17657fec9426",
+    "command": "PYTHONPATH=src python scripts/generate_sep_15_2026_artifacts.py",
+    "dataset_fingerprint": "cbe2a02e2d96c8ef07dc1105d367a186471714f481b04a86a1ab942325ab9620",
+    "artifact_path": "docs/reproductions/2609.12375-chronicle-rec/metrics/movielens-100k-seeds42-44.json"
+  }
+}

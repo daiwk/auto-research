@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "pindco",
+  "arxiv_id": "2609.11943",
+  "title": "PinDCO: Whole-Page Aware Dynamic Creative Optimization at Scale",
+  "paper_url": "https://arxiv.org/abs/2609.11943",
+  "organization": "Pinterest",
+  "published": "2026-07-21",
+  "upstream_code": "否：未发现原作者公开代码（核查日期：2026-09-15）",
+  "track": "recommendation",
+  "topics": [
+    "advertising",
+    "creative-optimization",
+    "whole-page-optimization",
+    "multi-tower"
+  ],
+  "local_code": "src/auto_research/reproductions/pindco",
+  "documentation": "docs/reproductions/2609.11943-pindco/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Pinterest private creative and traffic logs",
+    "production feature store/cache",
+    "online bandit traffic allocation"
+  ],
+  "evolve_operators": []
+}

@@ -26,12 +26,11 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-14**。9 月 9 日至 9 月 11 日的重叠扫描完成 **8 篇 P0 和
-11 篇 P1**，代码、中文文档、论文原图、三 seed 指标、可执行 Evolve 映射及目录产物已由
-[PR #154](https://github.com/daiwk/auto-research/pull/154) 合并，详见
-[扫描审计](recent-paper-scan-20260914.md)。Random Attention 与 Lngram v2 也已完成真实
-checkpoint 的 A100 公平验证，不再是待办。已登记的静态 P0/P1 队列均有终态；当前没有
-尚未实现的静态能力建设任务。下一轮从 **2026-09-11** 保留重叠窗口继续增量扫描。
+更新基线：**2026-09-15**。本轮新增三篇通过工业线上证据门槛的 P0（PinDCO、MIMA、
+ChronicleRec）和一篇基础模型 P1（SAS），代码、中文文档、论文原图及三 seed 指标已完成，
+详见[扫描审计](recent-paper-scan-20260915.md)。OneLA、CanvasAnneal、GAUGE 与
+AMDKernelVault 已登记为有明确恢复条件的 DEFERRED，不创建占位 adapter。由于 arXiv API
+连接重置，本轮不推进 watermark；下一轮从 **2026-09-10** 保留重叠窗口继续增量扫描。
 
 ## 优先级和状态
 
@@ -75,6 +74,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | MM-003 | DONE · [PR #116](https://github.com/daiwk/auto-research/pull/116) | 具身与大规模多模态后训练 | SmolVLA/LeRobot 真实训练入口、数据 manifest 与明确的 simulator/硬件成功率边界 |
 | FM-003 | DONE · [PR #137](https://github.com/daiwk/auto-research/pull/137) | TwinKV 固定预算 KV eviction repair | 精确公式、Qwen3/Qwen2.5 真实 KV runner、公开 WikiText-2 长上下文、等预算质量/延迟/显存与 A30 receipt |
 | MM-004 | DONE · [PR #137](https://github.com/daiwk/auto-research/pull/137) | PACE 视觉 token 压缩与抽取 | APC/DDAE、Qwen2.5-VL + RealWorldQA 默认路径、SmolVLM2 + POPE 真实验证、质量/token/延迟/显存与 A30 receipt |
+| FM-004 | DONE | SAS 端到端稀疏注意力排序 | WikiText-2 真实 selector 训练、连续 log-gate 梯度、Top-K 路由与三 seed 隔离 test；Triton 性能明确不在本批声明 |
 
 ### LLM 后训练
 
@@ -122,6 +122,10 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | DEF-001 | DEFERRED | 官方 SWE-bench Lite | 准备官方容器、镜像缓存、执行预算和长时 CI/开发机窗口 |
 | DEF-002 | DEFERRED | ToolHop 正式全集 | 确认数据/评测依赖、模型调用预算和可复现 runner |
 | DEF-003 | DEFERRED | 真实浏览器 Agent 环境 | 提供隔离 sandbox、凭据策略、网络策略和失败重放能力 |
+| DEF-004 | DEFERRED | OneLA fused GPU 大 beam decode | 在 A100/A30 执行定义性 kernel，并提交显存、延迟和正确性 receipt |
+| DEF-005 | DEFERRED | CanvasAnneal diffusion LM curriculum RL | 固定公开 DLM/teacher、训练预算和 MATH/tool-use 公平协议 |
+| DEF-006 | DEFERRED | GAUGE grounded Agent 评测 | 公开 transcript/盲评标注可用，并接入 ranking/construct validity 协议 |
+| DEF-007 | DEFERRED | AMDKernelVault ROCm/HIP | 提供 AMD CDNA/ROCm 执行环境并运行 kernel correctness/latency gate |
 
 ## 每个后续 MR 的更新契约
 

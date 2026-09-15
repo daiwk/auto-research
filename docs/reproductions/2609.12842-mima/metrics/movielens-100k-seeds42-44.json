@@ -1,0 +1,207 @@
+{
+  "schema_version": 2,
+  "method": "mima",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.12842",
+        "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
+        "url": "https://arxiv.org/abs/2609.12842",
+        "organization": "Alibaba International Digital Commerce Group"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "mima",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "mima executable mechanism",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.045885865647856926,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.195
+      },
+      "relative": {
+        "hit_at_10_percent": -12.499999999999991,
+        "ndcg_at_10_percent": -15.034777909590991,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -17.97323135755258
+      },
+      "stages": {
+        "exclusive_assignments": 8,
+        "activation_sum": 1.0,
+        "one_to_one": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.10909090909090909,
+          "ndcg_at_10": 0.05478472051586772,
+          "fresh_hit_at_10": 0.05263157894736842,
+          "head_share_at_10": 0.2040909090909091
+        }
+      },
+      "paper_results": {
+        "transaction_count_lift_percent": 5.6,
+        "transaction_amount_lift_percent": 5.44
+      },
+      "scope": "公开序列执行多正例一对一匹配、互补兴趣更新与 activation calibration；用分段特征替代生产 causal Transformer 与请求日志。",
+      "manifest_ref": "reproduction:mima"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.12842",
+        "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
+        "url": "https://arxiv.org/abs/2609.12842",
+        "organization": "Alibaba International Digital Commerce Group"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "mima",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "mima executable mechanism",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.045885865647856926,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.195
+      },
+      "relative": {
+        "hit_at_10_percent": -12.499999999999991,
+        "ndcg_at_10_percent": -15.034777909590991,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -17.97323135755258
+      },
+      "stages": {
+        "exclusive_assignments": 8,
+        "activation_sum": 1.0,
+        "one_to_one": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.10909090909090909,
+          "ndcg_at_10": 0.05478472051586772,
+          "fresh_hit_at_10": 0.05263157894736842,
+          "head_share_at_10": 0.2040909090909091
+        }
+      },
+      "paper_results": {
+        "transaction_count_lift_percent": 5.6,
+        "transaction_amount_lift_percent": 5.44
+      },
+      "scope": "公开序列执行多正例一对一匹配、互补兴趣更新与 activation calibration；用分段特征替代生产 causal Transformer 与请求日志。",
+      "manifest_ref": "reproduction:mima"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.12842",
+        "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
+        "url": "https://arxiv.org/abs/2609.12842",
+        "organization": "Alibaba International Digital Commerce Group"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "mima",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "mima executable mechanism",
+        "hit_at_10": 0.09545454545454546,
+        "ndcg_at_10": 0.045885865647856926,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.195
+      },
+      "relative": {
+        "hit_at_10_percent": -12.499999999999991,
+        "ndcg_at_10_percent": -15.034777909590991,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -17.97323135755258
+      },
+      "stages": {
+        "exclusive_assignments": 8,
+        "activation_sum": 1.0,
+        "one_to_one": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.10909090909090909,
+          "ndcg_at_10": 0.05478472051586772,
+          "fresh_hit_at_10": 0.05263157894736842,
+          "head_share_at_10": 0.2040909090909091
+        }
+      },
+      "paper_results": {
+        "transaction_count_lift_percent": 5.6,
+        "transaction_amount_lift_percent": 5.44
+      },
+      "scope": "公开序列执行多正例一对一匹配、互补兴趣更新与 activation calibration；用分段特征替代生产 causal Transformer 与请求日志。",
+      "manifest_ref": "reproduction:mima"
+    }
+  ],
+  "aggregate_metrics": {
+    "fresh_hit_at_10_mean": 0.031746031746031744,
+    "fresh_hit_at_10_std": 0.0,
+    "head_share_at_10_mean": 0.19499999999999998,
+    "head_share_at_10_std": 0.0,
+    "hit_at_10_mean": 0.09545454545454546,
+    "hit_at_10_std": 0.0,
+    "ndcg_at_10_mean": 0.045885865647856926,
+    "ndcg_at_10_std": 0.0
+  },
+  "manifest_ref": "reproduction:mima",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+  },
+  "provenance": {
+    "commit": "7313785b5828c54e112d2c161a1b17657fec9426",
+    "command": "PYTHONPATH=src python scripts/generate_sep_15_2026_artifacts.py",
+    "dataset_fingerprint": "fd9166bf97fab47a5a508073fc46b96a9cb10bea4d22fad132471342fe1cbe2c",
+    "artifact_path": "docs/reproductions/2609.12842-mima/metrics/movielens-100k-seeds42-44.json"
+  }
+}

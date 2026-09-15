@@ -7880,5 +7880,61 @@
     "height": 958,
     "score": 100,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.11943-pindco/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.11943",
+    "arxiv_id": "2609.11943",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2: PinDCO system architecture. Given ads retrieved upstream, the ad service expands each ad into a candidate set of creatives by querying a key-value store, and prunes candidates using a local lightweight model to reduce downstream inference cost. The ad service then invokes the model server to run the Creative Component Fusion Network for creative scoring. A Pixel-aware Adjustment Module is applied to support whole-page optimization. Finally, we balance exploration and exploitation with a multi-armed bandit to collect higher-quality training data.",
+    "source_url": "https://arxiv.org/pdf/2609.11943#page=4",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2609.11943-pindco/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 958,
+    "score": 87,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.12842-mima/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.12842",
+    "arxiv_id": "2609.12842",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2. The overall framework of MIMA. Items co-occurring within the same request are grouped into a positive set. Then (a) a causal decoder generates complementary interests, (b) Hungarian matching exclusively assigns each positive to a distinct interest, and (c) a routing module estimates user-interest activation probabilities to calibrate per-interest scores.",
+    "source_url": "https://arxiv.org/html/2609.12842v1/method.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2609.12842-mima/assets/paper-figure-01.png",
+    "width": 1499,
+    "height": 730,
+    "score": 52,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.12375-chronicle-rec/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.12375",
+    "arxiv_id": "2609.12375",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3: Multi-branch multi-horizon learning. Different branches mask progressively larger recent-history windows before compression, forcing them to model increasingly distant temporal horizons. Each branch is independently supervised to predict the present behavior, encouraging complementary interest representations across multiple temporal scales.",
+    "source_url": "https://arxiv.org/pdf/2609.12375#page=5",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2609.12375-chronicle-rec/assets/paper-figure-01.png",
+    "width": 628,
+    "height": 1006,
+    "score": 14,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.13141-sas-attention/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.13141",
+    "arxiv_id": "2609.13141",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1 : (a) Gradient Blockage in Discrete Selection. Sparse attention with discrete Top- K K selection prevents gradients propagation from language modeling loss to selector. Existing approaches bypass this issue using auxiliary distillation [ DeepSeek-AI, 2026 , Gao et al., 2026 ] or heuristics [ Lu et al., 2025 , Zhao et al., 2026 ] . (b) Differentiable Continuous Gating. SAS keeps discrete Top- K K selection but attaches a continuous soft gate to each selected block, enabling gradient flow from the language modeling loss to the selector.",
+    "source_url": "https://arxiv.org/html/2609.13141v1/ours5.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2609.13141-sas-attention/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 869,
+    "score": 32,
+    "error": ""
   }
 ]

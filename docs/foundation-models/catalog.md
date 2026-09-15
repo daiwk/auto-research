@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 注意力与长上下文 | [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../reproductions/2609.13141-sas-attention/README.md) | Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST，2026-09-11 | [已开源](https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification) | `sas-attention` |
 | 长视频理解 | [Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding](2609.11899-frames-on-demand/README.md) | Queen Mary University of London，2026-09-10 | 未发现官方代码 | `frames-on-demand` |
 | MoE | [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](2609.11917-repeat-aware-moe/README.md) | Stanford University，2026-09-10 | 未发现官方代码 | `repeat-aware-moe` |
 | 优化器 | [Musec: MomentUm SpEctral Clipping for Stable Muon-type Training](2609.11655-musec/README.md) | National University of Singapore，2026-09-10 | 未发现官方代码 | `musec` |
