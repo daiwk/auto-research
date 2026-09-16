@@ -4,17 +4,37 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 from pathlib import Path
-import sys
 
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
 
-from auto_research.foundation_latest_20260916_followup import echo_cuda_kernel, videomm_cuda_kernel
-from auto_research.post_training.latest_20260916_followup import tiao_cuda_kernel
+
+def _load_module(name: str, path: Path):
+    """Load one implementation file without importing the full package tree."""
+
+    spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load module from {path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+foundation = _load_module(
+    "sep16_foundation",
+    ROOT / "src/auto_research/foundation_latest_20260916_followup.py",
+)
+post_training = _load_module(
+    "sep16_post_training",
+    ROOT / "src/auto_research/post_training/latest_20260916_followup.py",
+)
+echo_cuda_kernel = foundation.echo_cuda_kernel
+videomm_cuda_kernel = foundation.videomm_cuda_kernel
+tiao_cuda_kernel = post_training.tiao_cuda_kernel
 
 
 def main():
@@ -46,7 +66,7 @@ def main():
     accelerator = "A100" if "A100" in model else "A30" if "A30" in model else model
     artifact = f"docs/gpu-validations/{args.method}-a100-20260916.json"
     payload = {
-        "schema_version": 1, "adapter_key": args.method, "validated_at": "2026-09-16",
+        "schema_version": 1, "adapter_key": args.method, "validated_at": "2026-09-17",
         "accelerator": {"vendor": "NVIDIA", "model": accelerator},
         "command": ["python", "scripts/validate_sep16_followup_gpu.py", "--method", args.method, "--seed", str(args.seed), "--output", artifact, "--commit", args.commit],
         "dataset": {"name": "deterministic public mechanism fixture", "revision": "sep16-followup-v1", "examples": int(metrics.get("trajectories", metrics.get("input_tokens", 1)))},
