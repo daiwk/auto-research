@@ -41,6 +41,10 @@
 - [ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning](../2608.03468-toollift/README.md)（`toollift`）：把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。
 - [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
 
+### 长期记忆
+
+- [Interactive Memory Learning for Long-Term Conversations](../2609.17088-interactive-memory/README.md)（`interactive-memory`）：Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。
+
 ### 反思
 
 - [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](../2608.11967-loongreflect/README.md)（`loongreflect`）：把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。
@@ -68,6 +72,10 @@
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
+
+### 编程 Agent
+
+- [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 
 ### 科学 Agent
 

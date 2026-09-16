@@ -107,6 +107,8 @@ class PostTrainingRunner:
             "df-opd": state.variant_updates,
             "opd-aha": state.variant_updates,
             "growmtp": state.variant_updates,
+            "tiao": state.variant_updates,
+            "sd-dpo": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

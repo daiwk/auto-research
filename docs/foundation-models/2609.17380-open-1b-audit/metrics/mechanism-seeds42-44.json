@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "method": "open-1b-audit",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "shards": 4.0,
+      "bitwise_replay": true
+    },
+    {
+      "seed": 43,
+      "shards": 4.0,
+      "bitwise_replay": true
+    },
+    {
+      "seed": 44,
+      "shards": 4.0,
+      "bitwise_replay": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "shards_mean": 4.0,
+    "shards_std": 0.0
+  },
+  "manifest_ref": "foundation-models:open-1b-audit",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_followup_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.17380-open-1b-audit/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-followup-mini-suite-v1"
+  }
+}

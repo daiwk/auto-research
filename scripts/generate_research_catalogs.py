@@ -630,6 +630,45 @@ def reproduction_summary(link: str) -> str:
     return "".join(sentences[:2]).strip()
 
 
+def detail_summary(path: str) -> str:
+    """Read the same concise summary from any manifest-backed detail page."""
+
+    page = DOCS / path
+    text = page.read_text(encoding="utf-8")
+    paragraph = []
+    for line in text.split(BACKGROUND_HEADING, 1)[1].splitlines():
+        stripped = line.strip()
+        if not stripped:
+            if paragraph:
+                break
+            continue
+        if stripped.startswith(("#", "```", "<!--")):
+            if paragraph:
+                break
+            continue
+        paragraph.append(stripped)
+    return re.sub(r"\s+", " ", " ".join(paragraph)).strip()
+
+
+def manifest_domain_rows(domain: str, hierarchy: dict[str, tuple[str, str]]) -> list[dict[str, str]]:
+    payload = json.loads((DOCS / "research-manifest.json").read_text(encoding="utf-8"))
+    rows = []
+    for paper in payload["papers"]:
+        if paper["domain"] != domain:
+            continue
+        cluster = hierarchy.get(paper["key"])
+        if cluster is None:
+            continue
+        rows.append({
+            "key": paper["key"], "title": paper["title"],
+            "link": paper["detail_path"], "href": f"../../{paper['detail_path']}",
+            "organization": _normalize_affiliation(paper["first_author_affiliation"].split(" / ", 1)[0]),
+            "date": paper["published"], "summary": detail_summary(paper["detail_path"]),
+            "domain": cluster[0], "cluster": cluster[1],
+        })
+    return rows
+
+
 def foundation_rows() -> list[dict[str, str]]:
     links = reproduction_doc_links()
     rows = []
@@ -649,6 +688,7 @@ def foundation_rows() -> list[dict[str, str]]:
                 "key": adapter.key,
                 "title": paper.title,
                 "link": link,
+                "href": f"../../reproductions/{link}",
                 "organization": foundation_first_author_affiliation(
                     adapter.key, paper.organization or "作者团队"
                 ),
@@ -658,7 +698,13 @@ def foundation_rows() -> list[dict[str, str]]:
                 "cluster": cluster,
             }
         )
-    return _date_descending(rows)
+    extra = manifest_domain_rows("foundation-models", {
+        "echo": ("推理与系统效率", "推测解码与 KV cache"),
+        "open-1b-audit": ("预训练与数据", "训练框架与可组合实验"),
+        "persistent-recurrent-memory": ("网络架构", "条件记忆与知识注入"),
+        "register-tokens-dllm": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    })
+    return _date_descending(rows + extra)
 
 
 def foundation_first_author_affiliation(key: str, organization: str) -> str:
@@ -709,7 +755,7 @@ def render_foundation_catalog(dimension: str) -> str:
                 lines.extend([f"### {cluster}", ""])
                 for row in _date_descending(papers):
                     lines.append(
-                        f"- [{row['title']}](../../reproductions/{row['link']})"
+                        f"- [{row['title']}]({row['href']})"
                         f"（`{row['key']}`）：{row['summary']}"
                     )
                 lines.append("")
@@ -724,7 +770,7 @@ def render_foundation_catalog(dimension: str) -> str:
         for row in _date_descending(grouped[group]):
             prefix = f"{row['date'][:7]} · " if dimension == "year" else f"{row['date']} · "
             lines.append(
-                f"- {prefix}[{row['title']}](../../reproductions/{row['link']})"
+                f"- {prefix}[{row['title']}]({row['href']})"
                 f"（`{row['key']}`）：{row['summary']}"
             )
         lines.append("")
@@ -734,7 +780,14 @@ def render_foundation_catalog(dimension: str) -> str:
 def multimodal_rows() -> list[dict[str, str]]:
     """Return paper rows that belong to the dedicated multimodal research view."""
 
-    return [row for row in foundation_rows() if row["key"] in MULTIMODAL_ADAPTER_KEYS]
+    rows = [row for row in foundation_rows() if row["key"] in MULTIMODAL_ADAPTER_KEYS]
+    for row in rows:
+        row["index_href"] = f"../reproductions/{row['link']}"
+    rows.extend(manifest_domain_rows("multimodal-models", {
+        "videomm": ("多模态基础模型", "视频理解与 token 压缩"),
+        "stacktok": ("多模态基础模型", "视觉 token 与跨模态检索"),
+    }))
+    return _date_descending(rows)
 
 
 def render_multimodal_method_index() -> str:
@@ -753,7 +806,7 @@ def render_multimodal_method_index() -> str:
     ]
     for row in multimodal_rows():
         lines.append(
-            f"| {row['cluster']} | [{row['title']}](../reproductions/{row['link']}) | "
+            f"| {row['cluster']} | [{row['title']}]({row.get('index_href', row['link'].removeprefix('multimodal-models/'))}) | "
             f"{row['organization']}，{row['date']} | `{row['key']}` |"
         )
     lines.extend([
@@ -804,7 +857,7 @@ def render_multimodal_catalog(dimension: str) -> str:
         for row in _date_descending(grouped[group]):
             prefix = f"{row['date']} · " if dimension != "year" else f"{row['date'][:7]} · "
             lines.append(
-                f"- {prefix}[{row['title']}](../../reproductions/{row['link']})"
+                f"- {prefix}[{row['title']}]({row['href']})"
                 f"（`{row['key']}`）：{row['summary']}"
             )
         lines.append("")

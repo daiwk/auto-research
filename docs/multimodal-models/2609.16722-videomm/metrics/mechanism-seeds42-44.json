@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "method": "videomm",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "macro_groups": 12.0,
+      "activated_micro_tokens": 12.0,
+      "retained_fraction": 0.25,
+      "consensus_margin": 0.09203958007283097
+    },
+    {
+      "seed": 43,
+      "macro_groups": 12.0,
+      "activated_micro_tokens": 12.0,
+      "retained_fraction": 0.25,
+      "consensus_margin": 0.12540920535933042
+    },
+    {
+      "seed": 44,
+      "macro_groups": 12.0,
+      "activated_micro_tokens": 16.0,
+      "retained_fraction": 0.3333333333333333,
+      "consensus_margin": 0.05202368427080839
+    }
+  ],
+  "aggregate_metrics": {
+    "activated_micro_tokens_mean": 13.333333333333334,
+    "activated_micro_tokens_std": 2.309401076758503,
+    "consensus_margin_mean": 0.08982415656765659,
+    "consensus_margin_std": 0.036742887098579195,
+    "macro_groups_mean": 12.0,
+    "macro_groups_std": 0.0,
+    "retained_fraction_mean": 0.27777777777777773,
+    "retained_fraction_std": 0.0481125224324688,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "multimodal-models:videomm",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_followup_artifacts.py",
+    "artifact_path": "docs/multimodal-models/2609.16722-videomm/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-followup-mini-suite-v1"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "method": "stacktok",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "query_entropy": 0.9881602266009952,
+      "relevance_steps": 0.0,
+      "coverage_steps": 8.0,
+      "retained_fraction": 0.2
+    },
+    {
+      "seed": 43,
+      "query_entropy": 0.9886815224902871,
+      "relevance_steps": 0.0,
+      "coverage_steps": 8.0,
+      "retained_fraction": 0.2
+    },
+    {
+      "seed": 44,
+      "query_entropy": 0.9880160676267793,
+      "relevance_steps": 0.0,
+      "coverage_steps": 8.0,
+      "retained_fraction": 0.2
+    }
+  ],
+  "aggregate_metrics": {
+    "coverage_steps_mean": 8.0,
+    "coverage_steps_std": 0.0,
+    "query_entropy_mean": 0.9882859389060205,
+    "query_entropy_std": 0.0003500860345223995,
+    "relevance_steps_mean": 0.0,
+    "relevance_steps_std": 0.0,
+    "retained_fraction_mean": 0.20000000000000004,
+    "retained_fraction_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "multimodal-models:stacktok",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_followup_artifacts.py",
+    "artifact_path": "docs/multimodal-models/2609.16841-stacktok/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-followup-mini-suite-v1"
+  }
+}

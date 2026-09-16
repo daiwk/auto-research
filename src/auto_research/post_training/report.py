@@ -4,6 +4,8 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "tiao": ("TIAO", "https://arxiv.org/abs/2609.16748"),
+    "sd-dpo": ("Style-Debiased DPO", "https://arxiv.org/abs/2609.16532"),
     "gamma-opd": ("gammaOPD", "https://arxiv.org/abs/2609.16937"),
     "tlm-dre": ("tlm-DRE", "https://arxiv.org/abs/2609.16760"),
     "stride-opd": ("STRIDE", "https://arxiv.org/abs/2609.14636"),

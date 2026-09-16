@@ -16,6 +16,9 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "echo": "docs/gpu-validations/echo-a100-20260916.json",
+    "videomm": "docs/gpu-validations/videomm-a100-20260916.json",
+    "tiao": "docs/gpu-validations/tiao-a100-20260916.json",
     "atomrec-checkpoint": (
         "docs/gpu-validations/atomrec-checkpoint-a100-20260910.json"
     ),

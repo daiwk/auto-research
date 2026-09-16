@@ -4753,6 +4753,88 @@
         "fingerprint": "b7f513ced71435da44e0fc3e4535bf526aaedf1dbcbbf4785a149c0b344c835a"
       }
     ],
+    "src/auto_research/agent_research/latest_20260916_followup.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 36,
+        "qualified_name": "RepoAtlasAgent.solve_observation",
+        "expression": "self.view_refreshes += 1",
+        "fingerprint": "aa0d6bf99997ab1aec3408a42c29602bd9c9ea272b0fc83dbb6219c1d93abfe9"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 37,
+        "qualified_name": "RepoAtlasAgent.solve_observation",
+        "expression": "self.selected_nodes += len(self.view)",
+        "fingerprint": "b9652eddd8a865ec6f9aedb7712a99d3a553a991ba156df0f9cd8b132a86d2f8"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 38,
+        "qualified_name": "RepoAtlasAgent.solve_observation",
+        "expression": "self.text_projections += 1",
+        "fingerprint": "43d43210494b8812604a0649f27b3736f1e716fe95a7410533de7b9e267efdb4"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 39,
+        "qualified_name": "RepoAtlasAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 40,
+        "qualified_name": "RepoAtlasAgent.solve_observation",
+        "expression": "self.cost += len(self.view)",
+        "fingerprint": "1f621d2056d291b09204b60c155988c2d6e033b5b3d997e4d104ced93ea2f48d"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 62,
+        "qualified_name": "InteractiveMemoryAgent.solve_observation",
+        "expression": "self.trigger_updates += int(trigger)",
+        "fingerprint": "6b6b8b6a0270f4df901f306f4fbcfde9bec0e922d57026bb900375024abdc135"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 63,
+        "qualified_name": "InteractiveMemoryAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 64,
+        "qualified_name": "InteractiveMemoryAgent.solve_observation",
+        "expression": "self.cost += len(observation.context) + int(trigger)",
+        "fingerprint": "bad19a62c72e8689b821d05aaef94a151b76d0c27999b56aac663c508006c3d5"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 71,
+        "qualified_name": "InteractiveMemoryAgent.observe",
+        "expression": "self.delayed_rewards += 1",
+        "fingerprint": "2633ffbda0005f13d92581cd9baa0f1cfbd528433ad5cacef615df3938e614cc"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 77,
+        "qualified_name": "InteractiveMemoryAgent.observe",
+        "expression": "self.planner_updates += 1",
+        "fingerprint": "ef8e529e3a04af1612da1d772200603af558f3b2c46859965a3b246e2c4cebb1"
+      }
+    ],
     "src/auto_research/agent_research/lightning_policy.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10697,7 +10779,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 113,
+        "line": 116,
         "qualified_name": "apply",
         "expression": "state.reward_axis_weights /= state.reward_axis_weights.sum()",
         "fingerprint": "09f33b5afa92e20e613d9cd0d8c98dc7808363f0495a7a1b2902d242cca9856b"
@@ -10705,7 +10787,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 114,
+        "line": 117,
         "qualified_name": "apply",
         "expression": "state.drift_events += 1",
         "fingerprint": "549eef05733c5296b37b8e3aa03551ed1f1c77dc2fa8a78165b34ba82cc72515"
@@ -10715,7 +10797,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 56,
+        "line": 57,
         "qualified_name": "update",
         "expression": "state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)",
         "fingerprint": "b6a0c91a64d121c2aebc293682cc80891fb4b00f45df453786621db9c500d8b7"
@@ -10723,7 +10805,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 88,
+        "line": 90,
         "qualified_name": "update",
         "expression": "state.variant_updates += 1",
         "fingerprint": "893bef108fce174b29a88dcfb593d6773edd36efd7d2862213d54d73a56b808c"
@@ -10731,7 +10813,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 93,
+        "line": 95,
         "qualified_name": "update",
         "expression": "state.online_rollout_refreshes += 1",
         "fingerprint": "7c428a44c4ff081ae94e4d66fcd286d3affd4bdc54a29da050685b33110e603c"

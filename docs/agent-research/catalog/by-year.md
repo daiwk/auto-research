@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-09 · [Interactive Memory Learning for Long-Term Conversations](../2609.17088-interactive-memory/README.md)（`interactive-memory`）：Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。
+- 2026-09 · [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 - 2026-09 · [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
 - 2026-09 · [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
 - 2026-09 · [HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning](../2609.13739-harness-bandit/README.md)（`harness-bandit`）：联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。
