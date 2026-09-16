@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "method": "r4t",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "alignment": 0.1121215673137345,
+      "vendi_score": 5.322182479601088,
+      "single_pass_targets": 6.0
+    },
+    {
+      "seed": 43,
+      "alignment": 0.08996830914490901,
+      "vendi_score": 5.441235332780709,
+      "single_pass_targets": 6.0
+    },
+    {
+      "seed": 44,
+      "alignment": 0.14348902776786296,
+      "vendi_score": 5.1162382946898,
+      "single_pass_targets": 6.0
+    }
+  ],
+  "aggregate_metrics": {
+    "alignment_mean": 0.11519296807550217,
+    "alignment_std": 0.026892228569958508,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "single_pass_targets_mean": 6.0,
+    "single_pass_targets_std": 0.0,
+    "vendi_score_mean": 5.293218702357199,
+    "vendi_score_std": 0.16442306403342918
+  },
+  "manifest_ref": "foundation-models:r4t",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2603.06397-r4t/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "method": "gamma-opd",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.671875,
+      "mean_reward": 0.7452392150826321,
+      "entropy": 1.7917394168639187,
+      "kl_from_reference": 2.0052358136011932e-05,
+      "discounted_credit_span": 0.012477433206055573,
+      "rbm_bound": 1.0,
+      "loss": 0.009908579220056984,
+      "policy_entropy": 1.791741581893798
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.40625,
+      "mean_reward": 0.5570882654912057,
+      "entropy": 1.7917398160910898,
+      "kl_from_reference": 1.965313096563435e-05,
+      "discounted_credit_span": 0.00482550457149574,
+      "rbm_bound": 1.0,
+      "loss": -0.008200207871218957,
+      "policy_entropy": 1.791755271872382
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.46875,
+      "mean_reward": 0.6018871052444983,
+      "entropy": 1.7917310129337636,
+      "kl_from_reference": 2.8456288290807534e-05,
+      "discounted_credit_span": 0.009544536678880448,
+      "rbm_bound": 1.0,
+      "loss": 0.0012581588594631956,
+      "policy_entropy": 1.7917429001887737
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.515625,
+    "accuracy_std": 0.13887803777055607,
+    "discounted_credit_span_mean": 0.00894915815214392,
+    "discounted_credit_span_std": 0.0038605517286617722,
+    "entropy_mean": 1.7917367486295905,
+    "entropy_std": 4.971267499275203e-06,
+    "kl_from_reference_mean": 2.272059246415127e-05,
+    "kl_from_reference_std": 4.971267498871235e-06,
+    "loss_mean": 0.000988843402767074,
+    "loss_std": 0.009057397009665753,
+    "mean_reward_mean": 0.6347381952727787,
+    "mean_reward_std": 0.09828321598865958,
+    "policy_entropy_mean": 1.7917465846516514,
+    "policy_entropy_std": 7.552173755192713e-06,
+    "rbm_bound_mean": 1.0,
+    "rbm_bound_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "post-training:gamma-opd",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.16937-gamma-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

@@ -54,6 +54,8 @@ pytest tests/test_research_module_docs.py
 - `mima` · [MIMA](2609.12842-mima/README.md)：以同请求多正例、排他匹配和兴趣激活校准缓解多兴趣坍缩。
 - `chronicle-rec` · [ChronicleRec](2609.12375-chronicle-rec/README.md)：近密远疏压缩、因果时间锚点、多 horizon 与 alignment 预训练。
 - `pindco` · [PinDCO](2609.11943-pindco/README.md)：组件专塔增量融合、整页像素惩罚、预筛与探索反馈闭环。
+- `gese` · [GESE](2609.15094-gese/README.md)：集合级标题探索、忠实度约束与上下文个性化选择。
+- `lazformer` · [LazFormer](2609.14978-lazformer/README.md)：可迁移生成式预训练、排序残差适配与近密远疏注意力。
 - `sirf` · [SIRF](2609.11752-sirf/README.md)：将策略规范内化为可训练交互特征，并以独立的高分位误惩罚约束验证策略决策。
 - `unirec` · [UniRec](2609.11052-unirec/README.md)：统一预排/精排融合、纵向偏好对齐与组相对正则。
 - `sequenceo1` · [SequenceO1](2609.08443-sequenceo1/README.md)：固定预算 Sketch Attention、近期分支与超长序列缓存设计。

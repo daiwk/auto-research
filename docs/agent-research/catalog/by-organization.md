@@ -108,14 +108,26 @@
 - 2026-09-08 · 一作：Hongbang Yuan · [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
 - 2026-08-27 · 一作：Jinghan Xu · [Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification](../2608.27311-harnesslens/README.md)（`harnesslens`）：固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。
 
+## Gen-Verse research collaboration
+
+- 2026-09-15 · 一作：Shuhan Xue · [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
+
 ## Google
 
 - 2026-09-08 · 一作：Yuxing Lu · [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](../2609.09153-procedural-graphs/README.md)（`procedural-graphs`）：方法把成功经验从自然语言片段提升为 procedure–relation–procedure 图。新经验先局部化为候选图编辑，再经过 held-out 验证门才写入长期结构，减少错误经验污染。
 - 2025-08-06 · 一作：Zhongyi Zhou · [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](../2508.04086-toolgrad/README.md)（`toolgrad`）：先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。
 
+## Google Research / Hebrew University of Jerusalem / University of Cambridge
+
+- 2026-09-15 · 一作：Amir Taubenfeld · [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
+
 ## HKU
 
 - 2025-04-04 · 一作：Yuxiang Zheng · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
+
+## Harbin Institute of Technology / Alibaba Cloud
+
+- 2026-09-12 · 一作：Hongliang Wei · [HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning](../2609.13739-harness-bandit/README.md)（`harness-bandit`）：联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。
 
 ## Harbin Institute of Technology, Shenzhen
 

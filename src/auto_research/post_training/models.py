@@ -118,6 +118,12 @@ ALGORITHMS = (
     "adaptive-opd-gate",
     "locus",
     "tasco",
+    "gamma-opd",
+    "tlm-dre",
+    "stride-opd",
+    "df-opd",
+    "opd-aha",
+    "growmtp",
 )
 
 

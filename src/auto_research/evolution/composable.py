@@ -27,7 +27,11 @@ class PostTrainingEvolutionEvaluator:
         self.maximum_examples = maximum_examples
         self.executable_operators = (
             type(self).executable_operators if dataset.endswith("-generate") else
-            ("grpo", "nsd", "adaptive-opd-gate", "locus", "tasco")
+            (
+                "grpo", "nsd", "adaptive-opd-gate", "locus", "tasco",
+                "gamma-opd", "tlm-dre", "stride-opd", "df-opd",
+                "opd-aha", "growmtp",
+            )
         )
 
     def summary(self):
@@ -323,6 +327,7 @@ class AgentEvolutionEvaluator:
         event_tree_partitions = feedback_scaffold_updates = 0.0
         maple_program_reuses = 0.0
         bandit_allocations = exact_token_replays = evidence_graph_edges = 0.0
+        social_framing_checks = recursive_harness_updates = 0.0
         environment_probes = anchor_replays = textual_gradient_edits = 0.0
         profiled_proposals = 0.0
         for step, task in enumerate(tasks):
@@ -340,10 +345,10 @@ class AgentEvolutionEvaluator:
                 plan = policy_cache[key]
                 policy_reuses += 1
                 cost += 0.18
-            if genome.agent_policy == "cobra-skills":
+            if genome.agent_policy in {"cobra-skills", "harness-bandit"}:
                 # Contextual-UCB allocates a public-observation skill trial.
                 bandit_allocations += 1
-                cost += 0.06
+                cost += 0.05 if genome.agent_policy == "harness-bandit" else 0.06
             elif genome.agent_policy == "t1-terminal-rl":
                 # Replay the sampled route/token sequence, not a replacement.
                 exact_token_replays += len(task.required_tools)
@@ -388,6 +393,11 @@ class AgentEvolutionEvaluator:
                 # task observations and the actually executed plan only.
                 evidence_graph_edges += len(plan) + float(bool(plan))
                 cost += 0.03 * len(plan)
+            elif genome.agent_verifier == "fuse-evaluator":
+                # Fuse-style auditing uses only public context variation; the
+                # hidden benchmark answer and plan remain unavailable.
+                social_framing_checks += max(0, len(task.context) - 1)
+                cost += 0.02 * len(task.context)
             if genome.agent_critic == "feedback-scaffold":
                 # The first task receives explicit public workflow guidance;
                 # later tasks receive only compact public state summaries.
@@ -448,6 +458,9 @@ class AgentEvolutionEvaluator:
                 procedural_edges.update(zip(plan, plan[1:]))
             if success and genome.agent_planner == "maple":
                 maple_programs[key] = tuple(plan)
+            if success and genome.agent_planner == "sciencebuddy":
+                maple_programs[key] = tuple(plan)
+                recursive_harness_updates += 1
             if success and genome.agent_policy != "heuristic":
                 if genome.agent_policy == "agent-lightning":
                     transition_targets += len(task.plan)
@@ -486,6 +499,8 @@ class AgentEvolutionEvaluator:
             "anchor_replays": anchor_replays,
             "textual_gradient_edits": textual_gradient_edits,
             "profiled_proposals": profiled_proposals,
+            "social_framing_checks": social_framing_checks,
+            "recursive_harness_updates": recursive_harness_updates,
         }
 
 
@@ -535,6 +550,10 @@ def _plan(task, method, rng):
         return target, 0.42 + 0.12 * len(target)
     if method == "maple":
         return target, 0.50 + 0.18 * len(target)
+    if method == "sciencebuddy":
+        # Inner harness proposal plus outer policy update, both derived from
+        # the observable required-tool signature.
+        return target, 0.54 + 0.16 * len(target)
     if method == "prompts":
         # Profiler/knowledge-base reasoning prunes the candidate sharding space.
         return target, 0.38 + 0.10 * len(target)

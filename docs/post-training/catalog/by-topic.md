@@ -34,6 +34,9 @@
 
 ### on-policy / context 蒸馏
 
+- [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../2609.16937-gamma-opd/README.md)（`gamma-opd`）：以折扣时间信用逼近序列级 reverse-KL，再用有界奖励优势补入可验证结果。
+- [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](../2609.14636-stride-opd/README.md)（`stride-opd`）：teacher 累积置信度越界时早停，并从最弱正确 turn 的缓存前缀重新开始。
+- [Data-free On-policy Distillation](../2609.14193-df-opd/README.md)（`df-opd`）：由教师在自身策略空间生成问题，减少对外部后训练语料的依赖。本地实现保留决定性状态转换，并输出统一预算下可审计的中间量。
 - [A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients](../2609.11768-adaptive-opd-gate/README.md)（`adaptive-opd-gate`）：把熵、不确定性、reference 偏移和教师—学生差距组合成逐 token gate，在 FKL/RKL 蒸馏方向间自适应分配。
 - [Distillation as Probability Transport: Routed On-Policy Distillation](../2609.08337-route-opd/README.md)（`route-opd`）：普通 OPD 对整个教师分布做密集匹配。RouteOPD 先识别学生高估的 source token 和低估的 destination token，再只搬运需要修正的概率质量，使监督更聚焦且可解释。
 - [Extremely Sparse Supervision Incentivizes Reasoning Ability](../2609.04565-sparse-opd/README.md)（`sparse-opd`）：常规 on-policy distillation 对生成轨迹的每个 token 使用教师分布。论文发现只挑一到两个关键位置、约占全部 token 的 0.05%，也能达到或超过全 token 训练。
@@ -91,6 +94,10 @@
 
 - [Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models](../2608.01717-erils/README.md)（`erils`）：约束外部策略 rollout 长度，并对 on-policy/external 来源分别处理奖励以防联合归一化崩溃。
 
+### RL 训练加速
+
+- [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
+
 ### RLVR
 
 - [ISO: An RLVR-Native Optimization Stack](../2607.19331-iso-rlvr/README.md)（`iso-rlvr`）：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
@@ -110,6 +117,10 @@
 ### rlvr
 
 - [Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information](../../reproductions/2607.19313-off-context-grpo/README.md)（`off-context-grpo`）：困难题上 vanilla GRPO 常因整组 rollout 都失败而没有有效优势信号。Off-Context GRPO 只在采样时向 behavior policy 提供解题草稿或提示等 privileged information，提高成功轨迹出现率；优化目标仍是原始无提示 policy，并用 importance ratio 校正两种采样分布的偏差，因此推理时不需要特权上下文。
+
+### 多模态后训练
+
+- [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](../2609.16459-opd-aha/README.md)（`opd-aha`）：用真实视觉与空视觉教师分布之差重建视觉偏好目标，抑制错误语言前缀的惯性。
 
 ### 前瞻偏好树
 
@@ -131,6 +142,10 @@
 ### 测试时适配
 
 - [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](../2609.11393-tasco/README.md)（`tasco`）：冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。
+
+### 多轮 Agent 对齐
+
+- [Turn-level Multiscale Density Ratio Estimation for LLM Agents](../2609.16760-tlm-dre/README.md)（`tlm-dre`）：按 turn 分配多尺度权重，并对正负 token 密度比采用非对称更新。
 
 ### 证据帧特权自蒸馏
 

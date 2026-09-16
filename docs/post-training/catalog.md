@@ -9,6 +9,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](2609.16937-gamma-opd/README.md) | Tsinghua University / DiDi Voyager Labs，2026-09-15 | 未发现官方代码 | `gamma-opd` |
+| RL 训练加速 | [GrowMTP: Can RL Grow Its Own Draft Head?](2609.16648-growmtp/README.md) | WeChat AI, Tencent / Peking University，2026-09-15 | 未发现官方代码 | `growmtp` |
+| 多模态后训练 | [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](2609.16459-opd-aha/README.md) | Arizona State University / University of Virginia / Stevens Institute of Technology，2026-09-15 | [已开源](https://github.com/Echochef/OPD-Aha) | `opd-aha` |
+| 多轮 Agent 对齐 | [Turn-level Multiscale Density Ratio Estimation for LLM Agents](2609.16760-tlm-dre/README.md) | Alibaba Group，2026-09-15 | 未发现官方代码 | `tlm-dre` |
+| On-policy distillation | [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](2609.14636-stride-opd/README.md) | University of Science and Technology of China / Ant Group，2026-09-13 | 未发现官方代码 | `stride-opd` |
+| On-policy distillation | [Data-free On-policy Distillation](2609.14193-df-opd/README.md) | Institute of Automation, Chinese Academy of Sciences / Tencent，2026-09-12 | 未发现官方代码 | `df-opd` |
 | On-policy distillation | [A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients](2609.11768-adaptive-opd-gate/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `adaptive-opd-gate` |
 | 测试时适配 | [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](2609.11393-tasco/README.md) | Chongqing University，2026-09-10 | 未发现官方代码 | `tasco` |
 | 低秩后训练 | [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](2609.11739-locus/README.md) | University of Washington，2026-09-10 | 未发现官方代码 | `locus` |

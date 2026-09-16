@@ -4,6 +4,12 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "gamma-opd": ("gammaOPD", "https://arxiv.org/abs/2609.16937"),
+    "tlm-dre": ("tlm-DRE", "https://arxiv.org/abs/2609.16760"),
+    "stride-opd": ("STRIDE", "https://arxiv.org/abs/2609.14636"),
+    "df-opd": ("Data-free OPD", "https://arxiv.org/abs/2609.14193"),
+    "opd-aha": ("OPD-Aha", "https://arxiv.org/abs/2609.16459"),
+    "growmtp": ("GrowMTP", "https://arxiv.org/abs/2609.16648"),
     "nsd": ("Negative Self-Distillation", "https://arxiv.org/abs/2609.11699"),
     "adaptive-opd-gate": ("Unified Per-token OPD Gating", "https://arxiv.org/abs/2609.11768"),
     "locus": ("LOCUS", "https://arxiv.org/abs/2609.11739"),

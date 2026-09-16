@@ -101,6 +101,12 @@ class PostTrainingRunner:
             "adaptive-opd-gate": state.variant_updates,
             "locus": state.variant_updates,
             "tasco": state.variant_updates,
+            "gamma-opd": state.variant_updates,
+            "tlm-dre": state.variant_updates,
+            "stride-opd": state.variant_updates,
+            "df-opd": state.variant_updates,
+            "opd-aha": state.variant_updates,
+            "growmtp": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

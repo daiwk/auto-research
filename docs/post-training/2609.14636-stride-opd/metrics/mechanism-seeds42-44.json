@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "method": "stride-opd",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.21875,
+      "mean_reward": 0.37543359369622153,
+      "entropy": 1.7917594692220566,
+      "kl_from_reference": 0.0,
+      "adaptive_stop": 3.0,
+      "prefix_restart": 0.0,
+      "saved_rollout_fraction": 0.25,
+      "loss": -0.0,
+      "policy_entropy": 1.791759469222055
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.09375,
+      "mean_reward": 0.29445010883453737,
+      "entropy": 1.7917594692220566,
+      "kl_from_reference": 0.0,
+      "adaptive_stop": 3.0,
+      "prefix_restart": 0.0,
+      "saved_rollout_fraction": 0.25,
+      "loss": -0.0,
+      "policy_entropy": 1.791759469222055
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.125,
+      "mean_reward": 0.3084124873907742,
+      "entropy": 1.7917594692220566,
+      "kl_from_reference": 0.0,
+      "adaptive_stop": 3.0,
+      "prefix_restart": 0.0,
+      "saved_rollout_fraction": 0.25,
+      "loss": -0.0,
+      "policy_entropy": 1.791759469222055
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.14583333333333334,
+    "accuracy_std": 0.06505206248331664,
+    "adaptive_stop_mean": 3.0,
+    "adaptive_stop_std": 0.0,
+    "entropy_mean": 1.7917594692220566,
+    "entropy_std": 0.0,
+    "kl_from_reference_mean": 0.0,
+    "kl_from_reference_std": 0.0,
+    "loss_mean": 0.0,
+    "loss_std": 0.0,
+    "mean_reward_mean": 0.32609872997384437,
+    "mean_reward_std": 0.04329184204461691,
+    "policy_entropy_mean": 1.791759469222055,
+    "policy_entropy_std": 0.0,
+    "prefix_restart_mean": 0.0,
+    "prefix_restart_std": 0.0,
+    "saved_rollout_fraction_mean": 0.25,
+    "saved_rollout_fraction_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "post-training:stride-opd",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.14636-stride-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

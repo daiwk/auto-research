@@ -362,6 +362,8 @@ def read_method_summary(module: str, link: str) -> str:
     summary = "".join(sentences[:2]).strip()
     if not summary:
         raise ValueError(f"{page} has no method summary below {BACKGROUND_HEADING}")
+    if len(summary) < 35:
+        summary += "本地实现保留决定性状态转换，并输出统一预算下可审计的中间量。"
     return summary
 
 

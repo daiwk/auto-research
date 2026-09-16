@@ -474,6 +474,23 @@
     },
     {
       "domain": "agent-research",
+      "key": "fuse-evaluator",
+      "title": "Verifiable Social Reasoning for LLM Assistants",
+      "paper_url": "https://arxiv.org/abs/2609.17496",
+      "detail_path": "agent-research/2609.17496-fuse-evaluator/README.md",
+      "topic": [
+        "Agent 评测",
+        "社会推理"
+      ],
+      "first_author": "Amir Taubenfeld",
+      "first_author_affiliation": "Google Research / Hebrew University of Jerusalem / University of Cambridge",
+      "published": "2026-09-15",
+      "code": null,
+      "adapter": "fuse-evaluator",
+      "priority": "P0"
+    },
+    {
+      "domain": "agent-research",
       "key": "gaia",
       "title": "GAIA",
       "paper_url": "https://arxiv.org/abs/2311.12983",
@@ -563,6 +580,23 @@
       "published": "2026-08-06",
       "code": null,
       "adapter": "gse"
+    },
+    {
+      "domain": "agent-research",
+      "key": "harness-bandit",
+      "title": "HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2609.13739",
+      "detail_path": "agent-research/2609.13739-harness-bandit/README.md",
+      "topic": [
+        "Agent RL",
+        "Harness 调度"
+      ],
+      "first_author": "Hongliang Wei",
+      "first_author_affiliation": "Harbin Institute of Technology / Alibaba Cloud",
+      "published": "2026-09-12",
+      "code": null,
+      "adapter": "harness-bandit",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -1252,6 +1286,23 @@
     },
     {
       "domain": "agent-research",
+      "key": "sciencebuddy",
+      "title": "ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents",
+      "paper_url": "https://arxiv.org/abs/2609.17523",
+      "detail_path": "agent-research/2609.17523-sciencebuddy/README.md",
+      "topic": [
+        "科学 Agent",
+        "递归自进化"
+      ],
+      "first_author": "Shuhan Xue",
+      "first_author_affiliation": "Gen-Verse research collaboration",
+      "published": "2026-09-15",
+      "code": "https://github.com/Gen-Verse/ScienceBuddy",
+      "adapter": "sciencebuddy",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "search-r1",
       "title": "Search-R1",
       "paper_url": "https://arxiv.org/abs/2503.09516",
@@ -1872,6 +1923,23 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "agentkv",
+      "title": "AgentKV: Phase-Aware KV Eviction for Agentic LLMs",
+      "paper_url": "https://arxiv.org/abs/2609.14872",
+      "detail_path": "foundation-models/2609.14872-agentkv/README.md",
+      "topic": [
+        "Agent 推理",
+        "KV Cache"
+      ],
+      "first_author": "Taowen Tony Liu",
+      "first_author_affiliation": "University of Cambridge",
+      "published": "2026-09-14",
+      "code": "https://github.com/LiuTaowen-Tony/agentkv",
+      "adapter": "agentkv",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -3643,6 +3711,23 @@
     },
     {
       "domain": "foundation-models",
+      "key": "loopspec",
+      "title": "LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers",
+      "paper_url": "https://arxiv.org/abs/2609.17184",
+      "detail_path": "foundation-models/2609.17184-loopspec/README.md",
+      "topic": [
+        "推测解码",
+        "循环 Transformer"
+      ],
+      "first_author": "SangLyul Cho",
+      "first_author_affiliation": "Seoul National University / KAIST",
+      "published": "2026-09-15",
+      "code": null,
+      "adapter": "loopspec",
+      "priority": "P1"
+    },
+    {
+      "domain": "foundation-models",
       "key": "macro",
       "title": "MACRO: Markov Chain Routing of Transformer Layers",
       "paper_url": "https://arxiv.org/abs/2608.05872",
@@ -4886,6 +4971,23 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "r4t",
+      "title": "Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion",
+      "paper_url": "https://arxiv.org/abs/2603.06397",
+      "detail_path": "foundation-models/2603.06397-r4t/README.md",
+      "topic": [
+        "生成式检索",
+        "RL 编译"
+      ],
+      "first_author": "Pengcheng Jiang",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign / Google Research",
+      "published": "2026-03-06",
+      "code": null,
+      "adapter": "r4t",
+      "priority": "P0"
     },
     {
       "domain": "foundation-models",
@@ -6334,6 +6436,23 @@
     },
     {
       "domain": "post-training",
+      "key": "df-opd",
+      "title": "Data-free On-policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.14193",
+      "detail_path": "post-training/2609.14193-df-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "数据合成"
+      ],
+      "first_author": "Gengsheng Li",
+      "first_author_affiliation": "Institute of Automation, Chinese Academy of Sciences / Tencent",
+      "published": "2026-09-12",
+      "code": null,
+      "adapter": "df-opd",
+      "priority": "P0"
+    },
+    {
+      "domain": "post-training",
       "key": "distilled-rl",
       "title": "Distilled RL",
       "paper_url": "https://arxiv.org/abs/2607.17247",
@@ -6485,6 +6604,23 @@
     },
     {
       "domain": "post-training",
+      "key": "gamma-opd",
+      "title": "Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.16937",
+      "detail_path": "post-training/2609.16937-gamma-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "时间信用分配"
+      ],
+      "first_author": "Shiqi Liu",
+      "first_author_affiliation": "Tsinghua University / DiDi Voyager Labs",
+      "published": "2026-09-15",
+      "code": null,
+      "adapter": "gamma-opd",
+      "priority": "P0"
+    },
+    {
+      "domain": "post-training",
       "key": "gcpo",
       "title": "GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs",
       "paper_url": "https://arxiv.org/abs/2608.11674",
@@ -6572,6 +6708,23 @@
       "published": "2026-08-26",
       "code": null,
       "adapter": "grip"
+    },
+    {
+      "domain": "post-training",
+      "key": "growmtp",
+      "title": "GrowMTP: Can RL Grow Its Own Draft Head?",
+      "paper_url": "https://arxiv.org/abs/2609.16648",
+      "detail_path": "post-training/2609.16648-growmtp/README.md",
+      "topic": [
+        "RL 训练加速",
+        "推测解码"
+      ],
+      "first_author": "Minghua He",
+      "first_author_affiliation": "WeChat AI, Tencent / Peking University",
+      "published": "2026-09-15",
+      "code": null,
+      "adapter": "growmtp",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -6953,6 +7106,23 @@
       "published": "2026-02-12",
       "code": "https://github.com/microsoft/LMOps/tree/main/opcd",
       "adapter": "opcd"
+    },
+    {
+      "domain": "post-training",
+      "key": "opd-aha",
+      "title": "OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.16459",
+      "detail_path": "post-training/2609.16459-opd-aha/README.md",
+      "topic": [
+        "多模态后训练",
+        "On-policy distillation"
+      ],
+      "first_author": "Chenhao Qiu",
+      "first_author_affiliation": "Arizona State University / University of Virginia / Stevens Institute of Technology",
+      "published": "2026-09-15",
+      "code": "https://github.com/Echochef/OPD-Aha",
+      "adapter": "opd-aha",
+      "priority": "P0"
     },
     {
       "domain": "post-training",
@@ -7681,6 +7851,23 @@
     },
     {
       "domain": "post-training",
+      "key": "stride-opd",
+      "title": "Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.14636",
+      "detail_path": "post-training/2609.14636-stride-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "多轮加速"
+      ],
+      "first_author": "Zhiyu Gui",
+      "first_author_affiliation": "University of Science and Technology of China / Ant Group",
+      "published": "2026-09-13",
+      "code": null,
+      "adapter": "stride-opd",
+      "priority": "P0"
+    },
+    {
+      "domain": "post-training",
       "key": "taco",
       "title": "TACO",
       "paper_url": "https://arxiv.org/abs/2607.07976",
@@ -7740,6 +7927,23 @@
       "published": "2025-08-05",
       "code": "未发现官方代码",
       "adapter": "tis"
+    },
+    {
+      "domain": "post-training",
+      "key": "tlm-dre",
+      "title": "Turn-level Multiscale Density Ratio Estimation for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2609.16760",
+      "detail_path": "post-training/2609.16760-tlm-dre/README.md",
+      "topic": [
+        "多轮 Agent 对齐",
+        "密度比估计"
+      ],
+      "first_author": "Zishuo Zhao",
+      "first_author_affiliation": "Alibaba Group",
+      "published": "2026-09-15",
+      "code": null,
+      "adapter": "tlm-dre",
+      "priority": "P0"
     },
     {
       "domain": "post-training",
@@ -13887,6 +14091,85 @@
     },
     {
       "domain": "recommendation",
+      "key": "gese",
+      "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
+      "paper_url": "https://arxiv.org/abs/2609.15094",
+      "detail_path": "reproductions/2609.15094-gese/README.md",
+      "topic": [
+        "presentation-layer",
+        "headline-generation",
+        "gspo",
+        "bandit-selection"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Baidu",
+      "published": "2026-09-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "gese",
+        "arxiv_id": "2609.15094",
+        "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
+        "paper_url": "https://arxiv.org/abs/2609.15094",
+        "track": "recommendation",
+        "organization": "Baidu",
+        "published": "2026-09-14",
+        "code_url": null,
+        "topics": [
+          "presentation-layer",
+          "headline-generation",
+          "gspo",
+          "bandit-selection"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gese",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "commercial information feed with 100M+ DAU",
+            "metric": "CTR",
+            "lift_percent": 2.57,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.15094v1",
+            "source_location": "Section 4.2; Table 2",
+            "retrieved_at": "2026-09-16"
+          },
+          {
+            "product": "commercial information feed with 100M+ DAU",
+            "metric": "dwell time",
+            "lift_percent": 0.87,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.15094v1",
+            "source_location": "Section 4.2; Table 2",
+            "retrieved_at": "2026-09-16"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "glide",
       "title": "Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify",
       "paper_url": "https://arxiv.org/abs/2603.17540",
@@ -16038,6 +16321,107 @@
             "source_url": "https://arxiv.org/html/2605.26717v1",
             "source_location": "paper online evaluation section",
             "retrieved_at": "2026-08-24"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "lazformer",
+      "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
+      "paper_url": "https://arxiv.org/abs/2609.14978",
+      "detail_path": "reproductions/2609.14978-lazformer/README.md",
+      "topic": [
+        "ranking",
+        "generative-pretraining",
+        "residual-adapter",
+        "hybrid-sparse-attention"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Alibaba International Digital Commerce Group",
+      "published": "2026-09-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "lazformer",
+        "arxiv_id": "2609.14978",
+        "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
+        "paper_url": "https://arxiv.org/abs/2609.14978",
+        "track": "recommendation",
+        "organization": "Alibaba International Digital Commerce Group",
+        "published": "2026-09-14",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "generative-pretraining",
+          "residual-adapter",
+          "hybrid-sparse-attention"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/lazformer",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "large-scale e-commerce homepage ranking",
+            "metric": "IPV",
+            "lift_percent": 5.21,
+            "traffic": "two-week production A/B",
+            "source_url": "https://arxiv.org/html/2609.14978v1",
+            "source_location": "Section 4.7; Table 7",
+            "experiment_duration": "two weeks",
+            "retrieved_at": "2026-09-16"
+          },
+          {
+            "product": "large-scale e-commerce homepage ranking",
+            "metric": "orders",
+            "lift_percent": 3.38,
+            "traffic": "two-week production A/B",
+            "source_url": "https://arxiv.org/html/2609.14978v1",
+            "source_location": "Section 4.7; Table 7",
+            "experiment_duration": "two weeks",
+            "retrieved_at": "2026-09-16"
+          },
+          {
+            "product": "large-scale e-commerce homepage ranking",
+            "metric": "buyers",
+            "lift_percent": 3.7,
+            "traffic": "two-week production A/B",
+            "source_url": "https://arxiv.org/html/2609.14978v1",
+            "source_location": "Section 4.7; Table 7",
+            "experiment_duration": "two weeks",
+            "retrieved_at": "2026-09-16"
+          },
+          {
+            "product": "large-scale e-commerce homepage ranking",
+            "metric": "GMV",
+            "lift_percent": 9.85,
+            "traffic": "two-week production A/B",
+            "source_url": "https://arxiv.org/html/2609.14978v1",
+            "source_location": "Section 4.7; Table 7",
+            "experiment_duration": "two weeks",
+            "retrieved_at": "2026-09-16"
           }
         ],
         "selection_exception": null,

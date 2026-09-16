@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "gese",
+  "arxiv_id": "2609.15094",
+  "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
+  "paper_url": "https://arxiv.org/abs/2609.15094",
+  "organization": "Baidu",
+  "published": "2026-09-14",
+  "upstream_code": "否：截至 2026-09-16 未找到原作者公开仓库",
+  "track": "recommendation",
+  "topics": [
+    "presentation-layer",
+    "headline-generation",
+    "gspo",
+    "bandit-selection"
+  ],
+  "local_code": "src/auto_research/reproductions/gese",
+  "documentation": "docs/reproductions/2609.15094-gese/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Baidu private headline logs",
+    "Qwen3-14B SFT/GSPO checkpoint",
+    "production feedback selector"
+  ],
+  "evolve_operators": []
+}

@@ -9,6 +9,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 科学 Agent | [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](2609.17523-sciencebuddy/README.md) | Gen-Verse research collaboration，2026-09-15 | [已开源](https://github.com/Gen-Verse/ScienceBuddy) | `sciencebuddy` |
+| Agent 评测 | [Verifiable Social Reasoning for LLM Assistants](2609.17496-fuse-evaluator/README.md) | Google Research / Hebrew University of Jerusalem / University of Cambridge，2026-09-15 | 未发现官方代码 | `fuse-evaluator` |
+| Agent RL | [HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning](2609.13739-harness-bandit/README.md) | Harbin Institute of Technology / Alibaba Cloud，2026-09-12 | 未发现官方代码 | `harness-bandit` |
 | 技能进化 | [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](2609.11682-cobra-skills/README.md) | The Chinese University of Hong Kong, Shenzhen，2026-09-10 | [已开源](https://github.com/Jerry-LuP/COBRA-Skills) | `cobra-skills` |
 | Harness 自进化 | [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](2609.11677-ecdysis/README.md) | Chengdu Institute of Computer Applications, Chinese Academy of Sciences，2026-09-10 | [已开源](https://github.com/cuiyu-ai/Ecdysis) | `ecdysis` |
 | 持久化优化规划 | [MAPLE: Memory-Augmented Planning with Language and Evolution](2609.11636-maple/README.md) | Harbin Institute of Technology, Shenzhen，2026-09-10 | [已开源](https://github.com/xin8coder/MAPLE) | `maple` |

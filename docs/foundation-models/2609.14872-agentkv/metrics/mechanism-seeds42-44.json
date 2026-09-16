@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "method": "agentkv",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "phases": 2.0,
+      "queries": 10.0,
+      "retained_top_quartile_mean": 0.6510234607893254
+    },
+    {
+      "seed": 43,
+      "phases": 2.0,
+      "queries": 10.0,
+      "retained_top_quartile_mean": 0.6407312539611648
+    },
+    {
+      "seed": 44,
+      "phases": 2.0,
+      "queries": 10.0,
+      "retained_top_quartile_mean": 0.6744381655547702
+    }
+  ],
+  "aggregate_metrics": {
+    "phases_mean": 2.0,
+    "phases_std": 0.0,
+    "queries_mean": 10.0,
+    "queries_std": 0.0,
+    "retained_top_quartile_mean_mean": 0.6553976267684202,
+    "retained_top_quartile_mean_std": 0.01727393899214319,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "foundation-models:agentkv",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.14872-agentkv/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

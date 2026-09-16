@@ -195,6 +195,9 @@ class AgentResearchRunner:
             "sharding_proposals", "evidence_graph_edges",
             "unsupported_answer_flags", "anchor_penalties", "replay_retrievals",
             "tito_tokens", "routing_replays", "turn_boundary_repairs",
+            "simulated_dialogues", "framing_checks", "verifiable_motives",
+            "harness_allocations", "gradient_sketch_updates",
+            "inner_harness_updates", "outer_policy_updates", "cross_branch_lessons",
         ):
             diagnostics[name] = getattr(agent, name, 0)
         phase_counts = getattr(agent, "phase_counts", None)
@@ -203,6 +206,7 @@ class AgentResearchRunner:
             "procedural-graphs", "memforest", "feedback-scaffold", "maple",
             "cobra-skills", "ecdysis", "grounded-memory", "toolgrad",
             "prompts", "searchatlas", "skill-retention", "t1-terminal-rl",
+            "fuse-evaluator", "harness-bandit", "sciencebuddy",
         }:
             diagnostics["fidelity"] = "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration"
             diagnostics["gold_fields_available_to_policy"] = False

@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推测解码 | [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](2609.17184-loopspec/README.md) | Seoul National University / KAIST，2026-09-15 | 未发现官方代码 | `loopspec` |
+| Agent 推理 | [AgentKV: Phase-Aware KV Eviction for Agentic LLMs](2609.14872-agentkv/README.md) | University of Cambridge，2026-09-14 | [已开源](https://github.com/LiuTaowen-Tony/agentkv) | `agentkv` |
 | 注意力与长上下文 | [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../reproductions/2609.13141-sas-attention/README.md) | Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST，2026-09-11 | [已开源](https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification) | `sas-attention` |
 | 长视频理解 | [Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding](2609.11899-frames-on-demand/README.md) | Queen Mary University of London，2026-09-10 | 未发现官方代码 | `frames-on-demand` |
 | MoE | [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](2609.11917-repeat-aware-moe/README.md) | Stanford University，2026-09-10 | 未发现官方代码 | `repeat-aware-moe` |
@@ -60,6 +62,7 @@
 | 注意力与长上下文 | [MiniMax Sparse Attention](../reproductions/2606.13392-minimax-sparse-attention/README.md) | MiniMax，2026-06-11 | [已开源](https://github.com/MiniMax-AI/MSA) | `minimax-sparse-attention` |
 | 网络架构 | [Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory](../reproductions/2605.20948-memory-grafting/README.md) | Tsinghua University / Microsoft Research Asia，2026-05-20 | 未发现官方代码 | `memory-grafting` |
 | 注意力与长上下文 | [Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers](../reproductions/2603.26380-switch-attention/README.md) | Peking University / Huawei Technologies，2026-03-27 | 未发现官方代码 | `switch-attention` |
+| 生成式检索 | [Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion](2603.06397-r4t/README.md) | University of Illinois Urbana-Champaign / Google Research，2026-03-06 | 未发现官方代码 | `r4t` |
 | 网络架构 | [Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](../reproductions/2601.07372-engram/README.md) | DeepSeek，2026-01-12 | [已开源](https://github.com/deepseek-ai/Engram) | `engram` |
 | 网络架构 | [mHC: Manifold-Constrained Hyper-Connections](../reproductions/2512.24880-mhc/README.md) | DeepSeek-AI，2025-12-31 | 未发现官方代码 | `mhc` |
 | 注意力与长上下文 | [Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free](../reproductions/2505.06708-gated-attention/README.md) | Qwen / Alibaba，2025-05-10 | [已开源](https://github.com/qiuzh20/gated_attention) | `gated-attention` |
