@@ -18,6 +18,7 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'gapo', 'sparse-opd',
         'oprd', 'route-opd', 'compass-opd', 'probe-erpo',
         'nsd', 'adaptive-opd-gate', 'locus', 'tasco',
+        'gamma-opd', 'tlm-dre', 'stride-opd', 'df-opd', 'opd-aha', 'growmtp',
     }:
         if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
             from ..latest_20260827 import update_latest
@@ -33,6 +34,8 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             from ..latest_20260912 import update_latest
         elif algorithm in {'nsd', 'adaptive-opd-gate', 'locus', 'tasco'}:
             from ..latest_20260914 import update_latest
+        elif algorithm in {'gamma-opd', 'tlm-dre', 'stride-opd', 'df-opd', 'opd-aha', 'growmtp'}:
+            from ..latest_20260916 import update_latest
         else:
             update_latest = None
         if update_latest is not None:

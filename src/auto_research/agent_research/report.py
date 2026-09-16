@@ -4,6 +4,9 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "fuse-evaluator": ("Fuse", "https://arxiv.org/abs/2609.17496"),
+    "harness-bandit": ("HarnessBandit", "https://arxiv.org/abs/2609.13739"),
+    "sciencebuddy": ("ScienceBuddy", "https://arxiv.org/abs/2609.17523"),
     "cobra-skills": ("COBRA-Skills", "https://arxiv.org/abs/2609.11682"),
     "ecdysis": ("Ecdysis", "https://arxiv.org/abs/2609.11677"),
     "grounded-memory": ("Grounding Agent Memory", "https://arxiv.org/abs/2609.11060"),

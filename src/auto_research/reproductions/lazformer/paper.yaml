@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "lazformer",
+  "arxiv_id": "2609.14978",
+  "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
+  "paper_url": "https://arxiv.org/abs/2609.14978",
+  "organization": "Alibaba International Digital Commerce Group",
+  "published": "2026-09-14",
+  "upstream_code": "否：截至 2026-09-16 未找到原作者公开仓库",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "generative-pretraining",
+    "residual-adapter",
+    "hybrid-sparse-attention"
+  ],
+  "local_code": "src/auto_research/reproductions/lazformer",
+  "documentation": "docs/reproductions/2609.14978-lazformer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Alibaba private homepage logs",
+    "production five-layer Transformer checkpoint",
+    "A10 serving stack"
+  ],
+  "evolve_operators": []
+}

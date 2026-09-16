@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "method": "growmtp",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.484375,
+      "mean_reward": 0.5932800534207904,
+      "entropy": 1.7915373241416839,
+      "kl_from_reference": 0.0002221450803712562,
+      "draft_acceptance_depth": 2.0,
+      "depth_coupled_loss": 1.7917594692280552,
+      "detached_backbone": 1.0,
+      "loss": -0.0005657581304911036,
+      "policy_entropy": 1.7916388681099593
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.28125,
+      "mean_reward": 0.45429363230689995,
+      "entropy": 1.7915509840559742,
+      "kl_from_reference": 0.00020848516608080938,
+      "draft_acceptance_depth": 3.0,
+      "depth_coupled_loss": 1.7917594692280552,
+      "detached_backbone": 1.0,
+      "loss": 0.003284238310573853,
+      "policy_entropy": 1.7914783954164504
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.4375,
+      "mean_reward": 0.545742335800438,
+      "entropy": 1.7887851093723903,
+      "kl_from_reference": 0.0029743598496646665,
+      "draft_acceptance_depth": 1.0,
+      "depth_coupled_loss": 1.791759469228055,
+      "detached_backbone": 1.0,
+      "loss": -0.017561978467025646,
+      "policy_entropy": 1.7887766839205061
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.4010416666666667,
+    "accuracy_std": 0.10635717633678196,
+    "depth_coupled_loss_mean": 1.7917594692280552,
+    "depth_coupled_loss_std": 1.2819751242557092e-16,
+    "detached_backbone_mean": 1.0,
+    "detached_backbone_std": 0.0,
+    "draft_acceptance_depth_mean": 2.0,
+    "draft_acceptance_depth_std": 1.0,
+    "entropy_mean": 1.7906244725233496,
+    "entropy_std": 0.001592949857699355,
+    "kl_from_reference_mean": 0.0011349966987055774,
+    "kl_from_reference_std": 0.0015929498576992991,
+    "loss_mean": -0.004947832762314299,
+    "loss_std": 0.011092480427921386,
+    "mean_reward_mean": 0.5311053405093761,
+    "mean_reward_std": 0.07063984383387924,
+    "policy_entropy_mean": 1.7906313158156386,
+    "policy_entropy_std": 0.001608161208079737,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "post-training:growmtp",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.16648-growmtp/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

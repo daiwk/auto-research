@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "method": "loopspec",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "expected_saved_depth": 2.62,
+      "residual_gate_open": 0.0,
+      "first_depth": 7.0,
+      "residual_depth": 7.0
+    },
+    {
+      "seed": 43,
+      "expected_saved_depth": 2.62,
+      "residual_gate_open": 0.0,
+      "first_depth": 7.0,
+      "residual_depth": 7.0
+    },
+    {
+      "seed": 44,
+      "expected_saved_depth": 2.62,
+      "residual_gate_open": 0.0,
+      "first_depth": 7.0,
+      "residual_depth": 7.0
+    }
+  ],
+  "aggregate_metrics": {
+    "expected_saved_depth_mean": 2.62,
+    "expected_saved_depth_std": 0.0,
+    "first_depth_mean": 7.0,
+    "first_depth_std": 0.0,
+    "residual_depth_mean": 7.0,
+    "residual_depth_std": 0.0,
+    "residual_gate_open_mean": 0.0,
+    "residual_gate_open_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "foundation-models:loopspec",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.17184-loopspec/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

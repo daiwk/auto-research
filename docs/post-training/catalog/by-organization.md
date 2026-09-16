@@ -20,6 +20,7 @@
 
 ## Alibaba Group
 
+- 2026-09-15 · 一作：Zishuo Zhao · [Turn-level Multiscale Density Ratio Estimation for LLM Agents](../2609.16760-tlm-dre/README.md)（`tlm-dre`）：按 turn 分配多尺度权重，并对正负 token 密度比采用非对称更新。
 - 2025-08-15 · 一作：Wenhao Zhang · [CHORD](../2508.11408-chord/README.md)（`chord`）：将 SFT 与 RL 串成两个独立阶段会造成 expert data 的过拟合或过早遗忘。CHORD 把专家 SFT 作为 on-policy RL 中动态退火的辅助目标，并以 token 级不确定性权重平滑从模仿过渡到探索。
 - 2025-08-11 · 一作：Zhenpeng Su · [GPPO](../2508.07629-gppo/README.md)（`gppo`）：普通 PPO 在正优势高 ratio、负优势低 ratio 的越界象限直接令梯度为零，可能同时压制探索和从负样本学习。GPPO 保持 PPO 的前向 clipped objective，但通过 stop-gradient 边界权重恢复这些越界位置的反向信号。
 
@@ -44,6 +45,10 @@
 ## Apple
 
 - 2025-06-30 · 一作：Bo Liu · [SPIRAL](../2506.24119-spiral/README.md)（`spiral`）：同一模型扮演出题者和解题者，在可自动判定的零和多轮语言游戏中形成逐步变难的课程。
+
+## Arizona State University / University of Virginia / Stevens Institute of Technology
+
+- 2026-09-15 · 一作：Chenhao Qiu · [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](../2609.16459-opd-aha/README.md)（`opd-aha`）：用真实视觉与空视觉教师分布之差重建视觉偏好目标，抑制错误语言前缀的惯性。
 
 ## Authors did not disclose affiliation
 
@@ -106,6 +111,10 @@
 ## Independent researchers
 
 - 2025-01-04 · 一作：Jian Hu · [REINFORCE++](../2501.03262-reinforce-plus/README.md)（`reinforce-plus`）：GRPO/RLOO 的 prompt-local 标准差会让不同难度组被随机方差重新加权。REINFORCE++ 保留组内中心化，但使用跨 batch 的全局优势尺度归一化，从而在不引入 critic 的前提下降低方差与局部偏置。
+
+## Institute of Automation, Chinese Academy of Sciences / Tencent
+
+- 2026-09-12 · 一作：Gengsheng Li · [Data-free On-policy Distillation](../2609.14193-df-opd/README.md)（`df-opd`）：由教师在自身策略空间生成问题，减少对外部后训练语料的依赖。本地实现保留决定性状态转换，并输出统一预算下可审计的中间量。
 
 ## Institute of Information Engineering, Chinese Academy of Sciences
 
@@ -265,6 +274,10 @@
 - 2025-05-06 · 一作：Andrew Zhao · [Absolute Zero](../2505.03335-absolute-zero/README.md)（`absolute-zero`）：proposer 自己生成可验证任务，solver 求解，程序 verifier 提供奖励；按当前能力边界组织课程。
 - 2023-06-14 · 一作：Yuxian Gu · [MiniLLM](../2306.08543-minillm/README.md)（`minillm`）：标准 forward KL 倾向覆盖教师所有概率质量，小学生可能因此高估教师的低概率区域。MiniLLM 改用 mode-seeking 的 reverse KL，在学生自身生成分布上优化，并通过 teacher-mixed sampling、单步分解、长度归一化和 reward baseline 稳定策略梯度。
 
+## Tsinghua University / DiDi Voyager Labs
+
+- 2026-09-15 · 一作：Shiqi Liu · [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../2609.16937-gamma-opd/README.md)（`gamma-opd`）：以折扣时间信用逼近序列级 reverse-KL，再用有界奖励优势补入可验证结果。
+
 ## University of California, Berkeley
 
 - 2025-05-26 · 一作：Xuandong Zhao · [INTUITOR](../2505.19590-intuitor/README.md)（`intuitor`）：把答案分布相对均匀分布的 KL 作为 intrinsic self-certainty reward，在没有答案和 verifier 时优化。
@@ -309,6 +322,10 @@
 - 2026-08-04 · 一作：Ranxu Zhang · [ADRS](../2608.03223-adrs/README.md)（`adrs`）：privileged teacher 的高置信并不必然与真实任务回报一致。ADRS 在每个交互 step 内标准化教师分数，以教师置信与 realized return 的相关性形成 TVA gate，再把 gated token signal 写入原生 reward-to-advantage 路径，推理时无需技能。
 - 2026-07-11 · 一作：Kexin Huang · [ARMOR](../2607.10481-armor/README.md)（`armor`）：单纯 reverse-KL 只能被动惩罚偏离，无法保证 reference 中已有有效解法仍被覆盖。ARMOR 从冻结 reference 主动采样 anchor trajectories，与当前策略 rollout 混合优化，用数据而不是辅助 KL 项稳定长程 RL。
 
+## University of Science and Technology of China / Ant Group
+
+- 2026-09-13 · 一作：Zhiyu Gui · [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](../2609.14636-stride-opd/README.md)（`stride-opd`）：teacher 累积置信度越界时早停，并从最弱正确 turn 的缓存前缀重新开始。
+
 ## University of Virginia
 
 - 2026-09-10 · 一作：Rongcan Pei · [Negative Self-Distillation: Learning to Reason by Avoiding Flaws](../2609.11699-nsd/README.md)（`nsd`）：让学生远离自身生成的错误推理分布，并用动态 gate 只更新推理关键位置，避免把普通语言 token 一并遗忘。
@@ -325,6 +342,10 @@
 ## WeChat / Tencent
 
 - 2026-07-22 · 一作：Beining Wang · [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../../reproductions/2607.20083-dynamic-rubric/README.md)（`dynamic-rubric`）：固定 judge 或固定 rubric 会在策略模型进步后失去区分力。DynamicRubric 根据当前 prompt 和一组候选回答动态生成评估维度与权重，用 discriminability 目标寻找能区分当代 hard negatives 的标准，用 anchor 目标限制评估器漂移，再让 evaluator 和 policy 多轮协同进化。
+
+## WeChat AI, Tencent / Peking University
+
+- 2026-09-15 · 一作：Minghua He · [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
 
 ## Wuhan University
 

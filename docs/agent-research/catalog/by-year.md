@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-09 · [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
+- 2026-09 · [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
+- 2026-09 · [HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning](../2609.13739-harness-bandit/README.md)（`harness-bandit`）：联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。
 - 2026-09 · [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
 - 2026-09 · [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
 - 2026-09 · [MAPLE: Memory-Augmented Planning with Language and Evolution](../2609.11636-maple/README.md)（`maple`）：MAPLE 把自然语言优化知识变成可持续修改的程序状态：生成候选、检查可执行性、接纳更好的方案，并把已接受程序带到后续问题中继续进化，而不是每次从零提示。

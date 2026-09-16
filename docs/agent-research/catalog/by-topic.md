@@ -24,6 +24,10 @@
 
 - [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
 
+### Agent 评测
+
+- [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
+
 ### Agent 记忆
 
 - [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](../2609.11060-grounded-memory/README.md)（`grounded-memory`）：给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。
@@ -64,6 +68,10 @@
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
+
+### 科学 Agent
+
+- [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
 
 ### 搜索 Agent
 
@@ -125,6 +133,7 @@
 
 ### 通用轨迹与 credit assignment
 
+- [HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning](../2609.13739-harness-bandit/README.md)（`harness-bandit`）：联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。
 - [T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks](../2609.11042-t1-terminal-rl/README.md)（`t1-terminal-rl`）：TITO 使用 rollout 实际采样 token id 训练，turn boundary repair 修正漂移，R3 重放 MoE 路由选择。
 - [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](../2609.04518-multi-harness-rl/README.md)（`multi-harness-rl`）：多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。
 - [SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction](../2608.24870-spo-plus-plus/README.md)（`spo-plus-plus`）：SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。

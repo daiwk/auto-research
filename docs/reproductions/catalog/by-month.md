@@ -3,6 +3,8 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [GESE](../2609.15094-gese/README.md)：多样性/忠实度约束的标题探索与上下文选择。
+- [LazFormer](../2609.14978-lazformer/README.md)：生成式预训练、排序残差适配与 hybrid sparse attention。
 - [ChronicleRec](../2609.12375-chronicle-rec/README.md)：把超长历史压成有时间顺序、可缓存、覆盖多个 horizon 的 Chronicle Tokens。
 - [MIMA](../2609.12842-mima/README.md)：将同请求多正例排他分配给多个兴趣，并以 activation routing 校准跨兴趣召回分数。
 - [SIRF](../2609.11752-sirf/README.md)：将复杂平台规则内化为 trigger/exemption 交互表征，再在独立数据上选择满足 P95 的裁决阈值。

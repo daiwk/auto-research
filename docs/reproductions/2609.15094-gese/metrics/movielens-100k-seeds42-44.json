@@ -1,0 +1,198 @@
+{
+  "schema_version": 2,
+  "method": "gese",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.15094",
+        "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
+        "url": "https://arxiv.org/abs/2609.15094",
+        "organization": "Baidu"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "gese",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "gese executable mechanism",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.04420505268168976,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.22045454545454546
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -18.14707937642628,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -7.265774378585086
+      },
+      "stages": {
+        "candidate_set_size": 5,
+        "setwise_diversity_reward": true,
+        "contextual_selector": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.1590909090909091,
+          "ndcg_at_10": 0.0651882080035453,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.23045454545454547
+        }
+      },
+      "paper_results": {
+        "ctr_lift_percent": 2.57,
+        "dwell_time_lift_percent": 0.87
+      },
+      "scope": "公开内容向量执行集合级多样性探索、faithfulness 约束和上下文选择；不把候选标题向量冒充 Qwen3-14B 生成或线上反馈。",
+      "manifest_ref": "reproduction:gese"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.15094",
+        "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
+        "url": "https://arxiv.org/abs/2609.15094",
+        "organization": "Baidu"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "gese",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "gese executable mechanism",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.04420505268168976,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.22045454545454546
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -18.14707937642628,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -7.265774378585086
+      },
+      "stages": {
+        "candidate_set_size": 5,
+        "setwise_diversity_reward": true,
+        "contextual_selector": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.1590909090909091,
+          "ndcg_at_10": 0.0651882080035453,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.23045454545454547
+        }
+      },
+      "paper_results": {
+        "ctr_lift_percent": 2.57,
+        "dwell_time_lift_percent": 0.87
+      },
+      "scope": "公开内容向量执行集合级多样性探索、faithfulness 约束和上下文选择；不把候选标题向量冒充 Qwen3-14B 生成或线上反馈。",
+      "manifest_ref": "reproduction:gese"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.15094",
+        "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
+        "url": "https://arxiv.org/abs/2609.15094",
+        "organization": "Baidu"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "gese",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "gese executable mechanism",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.04420505268168976,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.22045454545454546
+      },
+      "relative": {
+        "hit_at_10_percent": 0.0,
+        "ndcg_at_10_percent": -18.14707937642628,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -7.265774378585086
+      },
+      "stages": {
+        "candidate_set_size": 5,
+        "setwise_diversity_reward": true,
+        "contextual_selector": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.1590909090909091,
+          "ndcg_at_10": 0.0651882080035453,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.23045454545454547
+        }
+      },
+      "paper_results": {
+        "ctr_lift_percent": 2.57,
+        "dwell_time_lift_percent": 0.87
+      },
+      "scope": "公开内容向量执行集合级多样性探索、faithfulness 约束和上下文选择；不把候选标题向量冒充 Qwen3-14B 生成或线上反馈。",
+      "manifest_ref": "reproduction:gese"
+    }
+  ],
+  "manifest_ref": "reproduction:gese",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": false,
+    "claim_policy": "public-data core mechanism; online numbers are paper-only"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/reproductions/2609.15094-gese/metrics/movielens-100k-seeds42-44.json",
+    "dataset_fingerprint": "movielens-100k-public-subset-v1"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "method": "tlm-dre",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.03125,
+      "mean_reward": 0.19929878377259266,
+      "entropy": 1.7915431053535127,
+      "kl_from_reference": 0.00021636386854292548,
+      "turn_weight_entropy": 1.0986040757582243,
+      "asymmetric_token_weights": 0.0869180865305372,
+      "loss": -0.0002515587475113573,
+      "policy_entropy": 1.7916124256403154
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.015625,
+      "mean_reward": 0.12425064657368294,
+      "entropy": 1.7916501009427548,
+      "kl_from_reference": 0.00010936827930056243,
+      "turn_weight_entropy": 1.098522049874477,
+      "asymmetric_token_weights": 0.08854549154317576,
+      "loss": 0.0007809760648813946,
+      "policy_entropy": 1.7916696398685386
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.296875,
+      "mean_reward": 0.46671875360459697,
+      "entropy": 1.7913996961343843,
+      "kl_from_reference": 0.0003597730876707044,
+      "turn_weight_entropy": 1.0985512176234855,
+      "asymmetric_token_weights": 0.08890838446014426,
+      "loss": 0.0004980060726363922,
+      "policy_entropy": 1.7914129456114245
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.11458333333333333,
+    "accuracy_std": 0.15806240526555748,
+    "asymmetric_token_weights_mean": 0.08812398751128574,
+    "asymmetric_token_weights_std": 0.001059986178600548,
+    "entropy_mean": 1.791530967476884,
+    "entropy_std": 0.00012564289892609654,
+    "kl_from_reference_mean": 0.00022850174517139742,
+    "kl_from_reference_std": 0.00012564289892591575,
+    "loss_mean": 0.0003424744633354765,
+    "loss_std": 0.0005335490566194765,
+    "mean_reward_mean": 0.2634227279836242,
+    "mean_reward_std": 0.1800139195985105,
+    "policy_entropy_mean": 1.7915650037067596,
+    "policy_entropy_std": 0.00013475761665104934,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "turn_weight_entropy_mean": 1.0985591144187288,
+    "turn_weight_entropy_std": 4.157921274468798e-05
+  },
+  "manifest_ref": "post-training:tlm-dre",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.16760-tlm-dre/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-mechanism-mini-suite-v1"
+  }
+}

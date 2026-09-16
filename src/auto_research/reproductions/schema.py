@@ -25,7 +25,27 @@ def _commit_sha() -> str | None:
             text=True, timeout=2,
         ).stdout.strip()
     except (OSError, subprocess.SubprocessError):
-        return None
+        # Xcode's git shim can be unavailable until a host-level license is
+        # accepted.  Provenance must still be deterministic, so resolve the
+        # loose ref directly instead of silently dropping the commit.
+        git_dir = Path(__file__).resolve().parents[3] / ".git"
+        try:
+            head = (git_dir / "HEAD").read_text(encoding="utf-8").strip()
+            if head.startswith("ref: "):
+                ref = head.removeprefix("ref: ")
+                loose = git_dir / ref
+                if loose.exists():
+                    return loose.read_text(encoding="utf-8").strip()
+                for line in (git_dir / "packed-refs").read_text(encoding="utf-8").splitlines():
+                    if line and not line.startswith(("#", "^")):
+                        sha, name = line.split(" ", 1)
+                        if name == ref:
+                            return sha
+            elif len(head) == 40:
+                return head
+        except (OSError, ValueError):
+            pass
+        return "unknown-working-tree"
 
 
 @lru_cache(maxsize=16)

@@ -4,6 +4,12 @@
 
 ## 2026
 
+- 2026-09 · [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../2609.16937-gamma-opd/README.md)（`gamma-opd`）：以折扣时间信用逼近序列级 reverse-KL，再用有界奖励优势补入可验证结果。
+- 2026-09 · [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
+- 2026-09 · [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](../2609.16459-opd-aha/README.md)（`opd-aha`）：用真实视觉与空视觉教师分布之差重建视觉偏好目标，抑制错误语言前缀的惯性。
+- 2026-09 · [Turn-level Multiscale Density Ratio Estimation for LLM Agents](../2609.16760-tlm-dre/README.md)（`tlm-dre`）：按 turn 分配多尺度权重，并对正负 token 密度比采用非对称更新。
+- 2026-09 · [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](../2609.14636-stride-opd/README.md)（`stride-opd`）：teacher 累积置信度越界时早停，并从最弱正确 turn 的缓存前缀重新开始。
+- 2026-09 · [Data-free On-policy Distillation](../2609.14193-df-opd/README.md)（`df-opd`）：由教师在自身策略空间生成问题，减少对外部后训练语料的依赖。本地实现保留决定性状态转换，并输出统一预算下可审计的中间量。
 - 2026-09 · [A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients](../2609.11768-adaptive-opd-gate/README.md)（`adaptive-opd-gate`）：把熵、不确定性、reference 偏移和教师—学生差距组合成逐 token gate，在 FKL/RKL 蒸馏方向间自适应分配。
 - 2026-09 · [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](../2609.11393-tasco/README.md)（`tasco`）：冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。
 - 2026-09 · [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](../2609.11739-locus/README.md)（`locus`）：学习任务相关低秩后训练子空间，只在紧凑方向上更新以缩短回答，同时保留任务能力。

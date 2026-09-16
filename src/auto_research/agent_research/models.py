@@ -127,6 +127,9 @@ METHODS = (
     "searchatlas",
     "skill-retention",
     "t1-terminal-rl",
+    "fuse-evaluator",
+    "harness-bandit",
+    "sciencebuddy",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

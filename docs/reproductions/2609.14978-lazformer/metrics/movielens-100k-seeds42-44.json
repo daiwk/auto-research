@@ -1,0 +1,207 @@
+{
+  "schema_version": 2,
+  "method": "lazformer",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "paper": {
+        "arxiv_id": "2609.14978",
+        "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
+        "url": "https://arxiv.org/abs/2609.14978",
+        "organization": "Alibaba International Digital Commerce Group"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "lazformer",
+        "same_split_and_candidates": true,
+        "seed": 42
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "lazformer executable mechanism",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.050477244810227216,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.19818181818181818
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -6.53308474712828,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -16.634799235181646
+      },
+      "stages": {
+        "compressed_tokens": 12,
+        "generative_pretraining_map": true,
+        "residual_adapter": true,
+        "hybrid_sparse_attention": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.08061557166954864,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.2159090909090909
+        }
+      },
+      "paper_results": {
+        "ipv_lift_percent": 5.21,
+        "orders_lift_percent": 3.38,
+        "buyers_lift_percent": 3.7,
+        "gmv_lift_percent": 9.85
+      },
+      "scope": "公开序列执行生成式预训练映射、ranking residual adapter、近密远疏压缩和 request-aware pooling；不复刻生产 Transformer 与 A10 serving。",
+      "manifest_ref": "reproduction:lazformer"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.14978",
+        "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
+        "url": "https://arxiv.org/abs/2609.14978",
+        "organization": "Alibaba International Digital Commerce Group"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "lazformer",
+        "same_split_and_candidates": true,
+        "seed": 43
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "lazformer executable mechanism",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.050477244810227216,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.19818181818181818
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -6.53308474712828,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -16.634799235181646
+      },
+      "stages": {
+        "compressed_tokens": 12,
+        "generative_pretraining_map": true,
+        "residual_adapter": true,
+        "hybrid_sparse_attention": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.08061557166954864,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.2159090909090909
+        }
+      },
+      "paper_results": {
+        "ipv_lift_percent": 5.21,
+        "orders_lift_percent": 3.38,
+        "buyers_lift_percent": 3.7,
+        "gmv_lift_percent": 9.85
+      },
+      "scope": "公开序列执行生成式预训练映射、ranking residual adapter、近密远疏压缩和 request-aware pooling；不复刻生产 Transformer 与 A10 serving。",
+      "manifest_ref": "reproduction:lazformer"
+    },
+    {
+      "paper": {
+        "arxiv_id": "2609.14978",
+        "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
+        "url": "https://arxiv.org/abs/2609.14978",
+        "organization": "Alibaba International Digital Commerce Group"
+      },
+      "dataset": {
+        "name": "MovieLens 100K",
+        "users": 220,
+        "items": 360
+      },
+      "setup": {
+        "adapter": "lazformer",
+        "same_split_and_candidates": true,
+        "seed": 44
+      },
+      "baseline": {
+        "name": "transition + content + popularity",
+        "hit_at_10": 0.10909090909090909,
+        "ndcg_at_10": 0.05400546778896325,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.23772727272727273
+      },
+      "method": {
+        "name": "lazformer executable mechanism",
+        "hit_at_10": 0.10454545454545454,
+        "ndcg_at_10": 0.050477244810227216,
+        "fresh_hit_at_10": 0.031746031746031744,
+        "head_share_at_10": 0.19818181818181818
+      },
+      "relative": {
+        "hit_at_10_percent": -4.166666666666668,
+        "ndcg_at_10_percent": -6.53308474712828,
+        "fresh_hit_at_10_percent": 0.0,
+        "head_share_at_10_percent": -16.634799235181646
+      },
+      "stages": {
+        "compressed_tokens": 12,
+        "generative_pretraining_map": true,
+        "residual_adapter": true,
+        "hybrid_sparse_attention": true,
+        "validation_only_alpha": 0.1,
+        "validation_metrics": {
+          "hit_at_10": 0.15,
+          "ndcg_at_10": 0.08061557166954864,
+          "fresh_hit_at_10": 0.07017543859649122,
+          "head_share_at_10": 0.2159090909090909
+        }
+      },
+      "paper_results": {
+        "ipv_lift_percent": 5.21,
+        "orders_lift_percent": 3.38,
+        "buyers_lift_percent": 3.7,
+        "gmv_lift_percent": 9.85
+      },
+      "scope": "公开序列执行生成式预训练映射、ranking residual adapter、近密远疏压缩和 request-aware pooling；不复刻生产 Transformer 与 A10 serving。",
+      "manifest_ref": "reproduction:lazformer"
+    }
+  ],
+  "manifest_ref": "reproduction:lazformer",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": false,
+    "claim_policy": "public-data core mechanism; online numbers are paper-only"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_2026_artifacts.py",
+    "artifact_path": "docs/reproductions/2609.14978-lazformer/metrics/movielens-100k-seeds42-44.json",
+    "dataset_fingerprint": "movielens-100k-public-subset-v1"
+  }
+}

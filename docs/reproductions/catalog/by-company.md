@@ -2,6 +2,12 @@
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
+## Baidu
+- 2026-09 · [GESE](../2609.15094-gese/README.md)：先生成多样且忠实的标题候选，再依据当前用户上下文选择展示标题。
+
+## Alibaba International Digital Commerce Group
+- 2026-09 · [LazFormer](../2609.14978-lazformer/README.md)：以生成式预训练迁移序列知识，再用 residual adapter 与近密远疏注意力适配工业排序。
+
 ## Yandex
 - 2026-08 · [Sona](../2608.11015-sona/README.md)：压缩长历史并自回归生成层级 Semantic ID，再以 item ranker 统一替换音乐推荐级联。
 - 2026-08 · [Gryphon-v2](../2608.06213-gryphon-v2/README.md)：以共享历史编码器统一 SID 生成和 item-level 排序，用 rollout 与 logged impression 双来源蒸馏训练期 teacher。

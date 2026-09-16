@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 展示层生成与个性化 | [Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation](../2609.15094-gese/README.md) | Baidu，2026-09-14 | 未发现官方代码 | `gese` |
+| 排序与长序列建模 | [LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training](../2609.14978-lazformer/README.md) | Alibaba International Digital Commerce Group，2026-09-14 | 未发现官方代码 | `lazformer` |
 | 生成、排序与冷启动 | [ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling](../2609.12375-chronicle-rec/README.md) | Tencent，2026-09-11 | 未发现官方代码 | `chronicle-rec` |
 | 生成、排序与冷启动 | [MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment](../2609.12842-mima/README.md) | Alibaba International Digital Commerce Group，2026-09-11 | 未发现官方代码 | `mima` |
 | 内容理解、审核与风险控制 | [SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control](../2609.11752-sirf/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `sirf` |

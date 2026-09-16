@@ -313,6 +313,30 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2609.16937": (
+        "gamma-opd",
+        "gammaOPD 的折扣时间信用与 reward-compatible bounded mixing",
+    ),
+    "2609.16760": (
+        "tlm-dre",
+        "tlm-DRE 的 turn-level 多尺度权重与正负空间非对称 token 密度比",
+    ),
+    "2609.14636": (
+        "stride-opd",
+        "STRIDE 的 teacher log-prob 自适应早停与最弱正确 turn 前缀重启",
+    ),
+    "2609.14193": (
+        "df-opd",
+        "DF-OPD 的教师自生成问题与无外部后训练数据蒸馏",
+    ),
+    "2609.16459": (
+        "opd-aha",
+        "OPD-Aha 的真实视觉/空视觉教师差分偏好目标重建",
+    ),
+    "2609.16648": (
+        "growmtp",
+        "GrowMTP 在 RL rollout 内按接受深度训练 draft head",
+    ),
     "2609.11699": (
         "nsd",
         "NSD 从自生成负教师分布反向更新，并用动态 gate 保护语言基础 token",
@@ -527,6 +551,18 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.17496": (
+        "verifier:fuse-evaluator",
+        "Fuse 以隐藏动机可验证的模拟审计用户转述、framing bias 与社会推理",
+    ),
+    "2609.13739": (
+        "policy:harness-bandit",
+        "HarnessBandit 联合 learnability、transferability 与探索奖励调度 harness",
+    ),
+    "2609.17523": (
+        "planner:sciencebuddy",
+        "ScienceBuddy 以内层 harness 演化和外层策略更新形成递归自改进",
+    ),
     "2609.11682": ("policy:cobra-skills", "COBRA-Skills 以 contextual bandit 分配技能评估预算并依据执行反馈演化"),
     "2609.11677": ("critic:ecdysis", "Ecdysis 聚合跨实例重复失败，再以 FDCR 形成 harness 修复规格"),
     "2609.11060": ("memory:grounded-memory", "写入长期记忆前以最小权限只读环境探测验证并限定作用域"),
