@@ -191,6 +191,10 @@
 
 - 2026-09-15 · 一作：Qixiu Li · [TIAO: Token Importance-Aware Policy Optimization for Text Summarization](../2609.16748-tiao/README.md)（`tiao`）：通过遮蔽源文档前后的 token 概率变化估计依赖性，同时重塑轨迹优势并聚焦重要 token 更新。
 
+## National University of Singapore
+
+- 2026-09-16 · 一作：Yihao Ai · [Trajectory Learnability for Offline On-Policy Distillation](../2609.18321-trajectory-learnability/README.md)（`trajectory-learnability`）：用成功轨迹训练参考模型，以参考与当前策略逐 token 对数似然变化衡量可学性，并据此重加权离线 OPD 轨迹。
+
 ## Northeastern University
 
 - 2026-08-06 · 一作：Chenglong Wang · [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](../2608.06310-rrc/README.md)（`rrc`）：**主题：生成式奖励模型。** 生成式 RM 擅长相对比较，却被传统 RL 强制压成独立标量。
@@ -284,6 +288,7 @@
 
 ## University of California, Berkeley
 
+- 2026-09-16 · 一作：Peter Chen · [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
 - 2025-05-26 · 一作：Xuandong Zhao · [INTUITOR](../2505.19590-intuitor/README.md)（`intuitor`）：把答案分布相对均匀分布的 KL 作为 intrinsic self-certainty reward，在没有答案和 verifier 时优化。
 
 ## University of California, Los Angeles
@@ -369,6 +374,7 @@
 
 ## Zhejiang University
 
+- 2026-09-17 · 一作：ZJU-REAL team · [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。
 - 2026-08-27 · 一作：Aozhe Wang · [TTPO: Test-Time Policy Optimization](../2608.27448-ttpo/README.md)（`ttpo`）：多数票伪标签可能错误，但与多数票分歧的 rollout 通常仍是错的。TTPO 因而对同意分支做 OPSD，对分歧分支做 grouped RL，并分别过滤已收敛 token 与高置信错误。
 - 2026-07-28 · 一作：Haolei Xu · [Relay-OPD](../2607.26057-relay-opd/README.md)（`relay-opd`）：检测学生前缀失效后让教师短暂接管，再把轨迹交还学生；有限接力预算把监督集中到关键早期位置。
 - 2026-06-21 · 一作：Pengxiang Cai · [CoBA-RL](../2606.22317-coba-rl/README.md)（`coba-rl`）：普通 RLVR 可能只重新分配 base model 已有轨迹的概率，提升 pass@1 却不扩展高采样 pass@k 所反映的能力边界。该方法先用多次采样估计边界，在边界附近/之外注入教师推理，再用 RL 巩固。

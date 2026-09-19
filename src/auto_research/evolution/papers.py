@@ -313,6 +313,9 @@ LLM_MUTATIONS = {
 }
 
 POST_TRAINING_MUTATIONS = {
+    "2609.20784": ("retire-opd", "按学生成功率与分布差距收敛状态自适应退休技能教师"),
+    "2609.19144": ("compo", "用比较 oracle 的一比特方向和逐坐标阈值执行零阶偏好优化"),
+    "2609.18321": ("trajectory-learnability", "按成功参考模型诱导的逐 token 可学性重加权离线轨迹"),
     "2609.16937": (
         "gamma-opd",
         "gammaOPD 的折扣时间信用与 reward-compatible bounded mixing",
@@ -551,6 +554,10 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.17653": ("memory:evoskill-gui", "EvoSkill-GUI 反思、局部修订并复用经过验证的结构化 GUI 技能包"),
+    "2609.18417": ("planner:dependency-refinement", "以轮级依赖 DAG 裁剪叶节点并合并冗余 Agent 轨迹"),
+    "2609.20804": ("planner:harness-design-study", "显式搜索 planning、action space 与 context management 的 harness 组合"),
+    "2609.18779": ("policy:cera-moa", "按中层熟悉度自适应路由并定向更新多 Agent 专家"),
     "2609.17088": (
         "memory:interactive-memory",
         "Interactive Memory Learning 联合优化 Planner 与 Trigger，并仅用延迟环境结果更新有限容量记忆",

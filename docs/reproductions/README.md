@@ -50,6 +50,7 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `angle` · [ANGLE](2609.18296-angle/README.md)：层次文本标识、生成/判别/排序联合目标与动态约束检索。
 - `sas-attention` · [SAS](2609.13141-sas-attention/README.md)：用 softmax 内连续 log-gate 让语言模型损失端到端训练稀疏上下文排序。
 - `mima` · [MIMA](2609.12842-mima/README.md)：以同请求多正例、排他匹配和兴趣激活校准缓解多兴趣坍缩。
 - `chronicle-rec` · [ChronicleRec](2609.12375-chronicle-rec/README.md)：近密远疏压缩、因果时间锚点、多 horizon 与 alignment 预训练。

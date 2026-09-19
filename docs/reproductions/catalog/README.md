@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations](../2609.18296-angle/README.md) | Tencent，2026-09-16 | 未发现官方代码 | `angle` |
 | 展示层生成与个性化 | [Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation](../2609.15094-gese/README.md) | Baidu，2026-09-14 | 未发现官方代码 | `gese` |
 | 排序与长序列建模 | [LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training](../2609.14978-lazformer/README.md) | Alibaba International Digital Commerce Group，2026-09-14 | 未发现官方代码 | `lazformer` |
 | 生成、排序与冷启动 | [ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling](../2609.12375-chronicle-rec/README.md) | Tencent，2026-09-11 | 未发现官方代码 | `chronicle-rec` |

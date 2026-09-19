@@ -9,6 +9,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](2609.20784-retire-opd/README.md) | Zhejiang University，2026-09-17 | [已开源](https://github.com/ZJU-REAL/SDAR) | `retire-opd` |
+| 偏好优化 | [A Zeroth-Order Paradigm for LLM Preference Alignment](2609.19144-compo/README.md) | University of California, Berkeley，2026-09-16 | 未发现官方代码 | `compo` |
+| On-policy distillation | [Trajectory Learnability for Offline On-Policy Distillation](2609.18321-trajectory-learnability/README.md) | National University of Singapore，2026-09-16 | 未发现官方代码 | `trajectory-learnability` |
 | On-policy distillation | [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](2609.16937-gamma-opd/README.md) | Tsinghua University / DiDi Voyager Labs，2026-09-15 | 未发现官方代码 | `gamma-opd` |
 | RL 训练加速 | [GrowMTP: Can RL Grow Its Own Draft Head?](2609.16648-growmtp/README.md) | WeChat AI, Tencent / Peking University，2026-09-15 | 未发现官方代码 | `growmtp` |
 | 多模态后训练 | [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](2609.16459-opd-aha/README.md) | Arizona State University / University of Virginia / Stevens Institute of Technology，2026-09-15 | [已开源](https://github.com/Echochef/OPD-Aha) | `opd-aha` |

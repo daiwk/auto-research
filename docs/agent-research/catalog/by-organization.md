@@ -146,6 +146,10 @@
 
 - 2026-08-27 · 一作：Xingshan Zeng · [What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents](../2608.27260-ace-data/README.md)（`ace-data`）：论文把 Agent 数据统一表示为 $(E,q,\tau,v)$：环境、任务、交互轨迹与可选 verifier。Accuracy 先限定可信支持集，Complexity 相对指定学习者校准难度，Diversity 再控制环境、任务和行为覆盖。
 
+## IIIS, Tsinghua University
+
+- 2026-09-16 · 一作：Jiaxuan Jiang · [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](../2609.18779-cera-moa/README.md)（`cera-moa`）：用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。
+
 ## Institute of Automation, Chinese Academy of Sciences
 
 - 2026-09-04 · 一作：Jinyuan Feng · [CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution](../2609.04865-coskill/README.md)（`coskill`）：以往技能库要么与策略优化分离，要么把元技能写成固定工作流。CoSkill 让 Reasoning Agent 使用任务技能及其子步骤技能，让可学习 Meta-Skill Agent 根据执行回报改写技能；二者共享 backbone 并端到端联合训练。
@@ -295,6 +299,10 @@
 
 - 2026-09-08 · 一作：Junxi Wang · [MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging](../2609.08273-memforest/README.md)（`memforest`）：MemForest 不把全部历史压进一条摘要，而是先按事件切分成多棵树，再在容量压力下渐进合并节点。查询从语义 anchor 出发向邻域传播，保留时间结构和跨事件关联。
 
+## ShanghaiTech University
+
+- 2026-09-16 · 一作：Zhuo Chen · [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
+
 ## Shenzhen Technology University
 
 - 2026-08-27 · 一作：Hanchong Chen · [When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems](../2608.26895-covemem/README.md)（`covemem`）：文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。
@@ -349,6 +357,10 @@
 
 - 2026-05-18 · 一作：Yuran Ding · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 
+## University of Massachusetts Amherst
+
+- 2026-09-17 · 一作：Run-Ze Fan · [An Empirical Study of Harness Design for Coding Agents](../2609.20804-harness-design-study/README.md)（`harness-design-study`）：固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。
+
 ## University of New South Wales
 
 - 2026-07-31 · 一作：Zian Zhai · [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
@@ -393,6 +405,7 @@
 
 ## Zhejiang University
 
+- 2026-09-15 · 一作：Bofan Chen · [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
 - 2026-07-29 · 一作：Zhiyuan Yao · [SkillRise](../2607.26784-skillrise/README.md)（`skillrise`）：标准 Agent RL 把任务视为独立 episode，外部 skill bank 又把抽取、检索和执行缠在一起。SkillRise 把相关但不同的任务排成由易到难的序列，让同一 policy 交替求解当前任务与整理一个直接传给下一任务的 skill document；求解阶段由当前结果监督，整理阶段由折扣后的下游任务结果监督。
 - 2023-03-30 · 一作：Yongliang Shen · [HuggingGPT](../2303.17580-hugginggpt/README.md)（`hugginggpt`）：单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。
 

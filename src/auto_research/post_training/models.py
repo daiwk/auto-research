@@ -126,6 +126,9 @@ ALGORITHMS = (
     "growmtp",
     "tiao",
     "sd-dpo",
+    "retire-opd",
+    "compo",
+    "trajectory-learnability",
 )
 
 

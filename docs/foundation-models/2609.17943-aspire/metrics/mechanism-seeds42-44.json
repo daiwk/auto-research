@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "method": "aspire",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "mean_draft_length": 4.1875,
+      "refresh_fraction": 0.25,
+      "positive_gain_fraction": 1.0
+    },
+    {
+      "seed": 43,
+      "mean_draft_length": 3.625,
+      "refresh_fraction": 0.25,
+      "positive_gain_fraction": 1.0
+    },
+    {
+      "seed": 44,
+      "mean_draft_length": 4.0,
+      "refresh_fraction": 0.25,
+      "positive_gain_fraction": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "mean_draft_length_mean": 3.9375,
+    "mean_draft_length_std": 0.28641098093474,
+    "positive_gain_fraction_mean": 1.0,
+    "positive_gain_fraction_std": 0.0,
+    "refresh_fraction_mean": 0.25,
+    "refresh_fraction_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "foundation-models:aspire",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.17943-aspire/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

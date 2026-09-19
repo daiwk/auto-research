@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "adapter_key": "dqwen35",
+  "validated_at": "2026-09-19",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/validate_sep19_gpu.py",
+    "--method",
+    "dqwen35",
+    "--seed",
+    "42",
+    "--output",
+    "docs/gpu-validations/dqwen35-a100-20260919.json",
+    "--commit",
+    "a90a4fd"
+  ],
+  "dataset": {
+    "name": "deterministic public mechanism fixture",
+    "revision": "sep19-v1",
+    "examples": 256
+  },
+  "checkpoint": {
+    "model_id": "not-required/reference-kernel",
+    "revision": "arxiv-v1"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "output_finite": true,
+    "tokens": 256,
+    "hidden_size": 512
+  },
+  "provenance": {
+    "commit": "a90a4fd",
+    "artifact_path": "docs/gpu-validations/dqwen35-a100-20260919.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

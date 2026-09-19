@@ -20,9 +20,17 @@
 
 - [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
 
+### 轨迹精炼
+
+- [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
+
 ### Harness 自进化
 
 - [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
+
+### GUI Agent
+
+- [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
 
 ### Agent 评测
 
@@ -31,6 +39,11 @@
 ### Agent 记忆
 
 - [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](../2609.11060-grounded-memory/README.md)（`grounded-memory`）：给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。
+
+### 编程 Agent
+
+- [An Empirical Study of Harness Design for Coding Agents](../2609.20804-harness-design-study/README.md)（`harness-design-study`）：固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。
+- [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 
 ### 记忆
 
@@ -72,10 +85,6 @@
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
-
-### 编程 Agent
-
-- [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 
 ### 科学 Agent
 
@@ -179,6 +188,7 @@
 
 ### 角色协作与软件开发
 
+- [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](../2609.18779-cera-moa/README.md)（`cera-moa`）：用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。
 - [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](../2608.05886-codegrep/README.md)（`codegrep`）：**主题：代码检索 Agent。** 以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。
 - [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
 - [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。

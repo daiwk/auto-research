@@ -4,6 +4,9 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "retire-opd": ("RetireOPD", "https://arxiv.org/abs/2609.20784"),
+    "compo": ("ComPO", "https://arxiv.org/abs/2609.19144"),
+    "trajectory-learnability": ("Trajectory Learnability", "https://arxiv.org/abs/2609.18321"),
     "tiao": ("TIAO", "https://arxiv.org/abs/2609.16748"),
     "sd-dpo": ("Style-Debiased DPO", "https://arxiv.org/abs/2609.16532"),
     "gamma-opd": ("gammaOPD", "https://arxiv.org/abs/2609.16937"),
