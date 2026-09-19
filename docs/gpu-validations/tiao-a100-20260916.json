@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "adapter_key": "tiao",
+  "validated_at": "2026-09-17",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/validate_sep16_followup_gpu.py",
+    "--method",
+    "tiao",
+    "--seed",
+    "42",
+    "--output",
+    "docs/gpu-validations/tiao-a100-20260916.json",
+    "--commit",
+    "cfd98d7cb78dcae1d1be617b6f80b69970bf1edb"
+  ],
+  "dataset": {
+    "name": "deterministic public mechanism fixture",
+    "revision": "sep16-followup-v1",
+    "examples": 16
+  },
+  "checkpoint": {
+    "model_id": "not-required/reference-kernel",
+    "revision": "arxiv-v1"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "trajectories": 16,
+    "tokens_per_trajectory": 512,
+    "selected_fraction": 0.5,
+    "credit_finite": true,
+    "importance_nonnegative": true
+  },
+  "provenance": {
+    "commit": "cfd98d7cb78dcae1d1be617b6f80b69970bf1edb",
+    "artifact_path": "docs/gpu-validations/tiao-a100-20260916.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

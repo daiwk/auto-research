@@ -130,6 +130,8 @@ METHODS = (
     "fuse-evaluator",
     "harness-bandit",
     "sciencebuddy",
+    "repoatlas",
+    "interactive-memory",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

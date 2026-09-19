@@ -9,8 +9,12 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推测解码 | [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](2609.17241-echo/README.md) | Wuhan University，2026-09-15 | [已开源](https://github.com/whucs21Mzy/ECHO) | `echo` |
 | 推测解码 | [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](2609.17184-loopspec/README.md) | Seoul National University / KAIST，2026-09-15 | 未发现官方代码 | `loopspec` |
+| 可复现训练 | [OPEN-1B: A Fully Auditable Training Run](2609.17380-open-1b-audit/README.md) | Gensyn，2026-09-15 | [已开源](https://github.com/gensyn-ai/open-transformers) | `open-1b-audit` |
+| 网络架构 | [Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization](2609.17251-persistent-recurrent-memory/README.md) | FITec Labs / Ericsson São Paulo，2026-09-15 | 未发现官方代码 | `persistent-recurrent-memory` |
 | Agent 推理 | [AgentKV: Phase-Aware KV Eviction for Agentic LLMs](2609.14872-agentkv/README.md) | University of Cambridge，2026-09-14 | [已开源](https://github.com/LiuTaowen-Tony/agentkv) | `agentkv` |
+| 扩散语言模型 | [Register Tokens for Bounded-State Reasoning in Diffusion Language Models](2609.16372-register-tokens-dllm/README.md) | University of Wisconsin–Madison，2026-09-14 | 未发现官方代码 | `register-tokens-dllm` |
 | 注意力与长上下文 | [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../reproductions/2609.13141-sas-attention/README.md) | Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST，2026-09-11 | [已开源](https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification) | `sas-attention` |
 | 长视频理解 | [Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding](2609.11899-frames-on-demand/README.md) | Queen Mary University of London，2026-09-10 | 未发现官方代码 | `frames-on-demand` |
 | MoE | [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](2609.11917-repeat-aware-moe/README.md) | Stanford University，2026-09-10 | 未发现官方代码 | `repeat-aware-moe` |

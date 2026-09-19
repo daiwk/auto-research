@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "method": "persistent-recurrent-memory",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "state_norm": 0.9999999999992173,
+      "mean_gate": 0.41891564458659825
+    },
+    {
+      "seed": 43,
+      "state_norm": 0.9999999999994522,
+      "mean_gate": 0.6569051219836013
+    },
+    {
+      "seed": 44,
+      "state_norm": 0.9999999999992639,
+      "mean_gate": 0.5398512620561652
+    }
+  ],
+  "aggregate_metrics": {
+    "mean_gate_mean": 0.538557342875455,
+    "mean_gate_std": 0.1190000147397441,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "state_norm_mean": 0.9999999999993111,
+    "state_norm_std": 1.2437695964202056e-13
+  },
+  "manifest_ref": "foundation-models:persistent-recurrent-memory",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_followup_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.17251-persistent-recurrent-memory/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-followup-mini-suite-v1"
+  }
+}

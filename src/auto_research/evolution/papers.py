@@ -551,6 +551,14 @@ POST_TRAINING_MUTATIONS = {
 }
 
 AGENT_MUTATIONS = {
+    "2609.17088": (
+        "memory:interactive-memory",
+        "Interactive Memory Learning 联合优化 Planner 与 Trigger，并仅用延迟环境结果更新有限容量记忆",
+    ),
+    "2609.16936": (
+        "planner:repoatlas",
+        "RepoAtlas 按任务意图选择、投影并刷新 bounded repository view，避免无边界加载整个代码库",
+    ),
     "2609.17496": (
         "verifier:fuse-evaluator",
         "Fuse 以隐藏动机可验证的模拟审计用户转述、framing bias 与社会推理",

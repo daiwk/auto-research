@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "method": "echo",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "early_bonus_mass": 6.891599144826018,
+      "final_bonus_mass": 2.8578741563707855,
+      "candidate_count": 5.0,
+      "accepted_tokens": 1.0,
+      "state_reuse_fraction": 0.25,
+      "lossless_correction_used": 1.0
+    },
+    {
+      "seed": 43,
+      "early_bonus_mass": 6.989606583307717,
+      "final_bonus_mass": 8.185259715523863,
+      "candidate_count": 6.0,
+      "accepted_tokens": 2.0,
+      "state_reuse_fraction": 0.5,
+      "lossless_correction_used": 1.0
+    },
+    {
+      "seed": 44,
+      "early_bonus_mass": 5.396575059122581,
+      "final_bonus_mass": 9.965561273111172,
+      "candidate_count": 5.0,
+      "accepted_tokens": 0.0,
+      "state_reuse_fraction": 0.0,
+      "lossless_correction_used": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "accepted_tokens_mean": 1.0,
+    "accepted_tokens_std": 1.0,
+    "candidate_count_mean": 5.333333333333333,
+    "candidate_count_std": 0.5773502691896257,
+    "early_bonus_mass_mean": 6.425926929085438,
+    "early_bonus_mass_std": 0.8927907474019093,
+    "final_bonus_mass_mean": 7.002898381668607,
+    "final_bonus_mass_std": 3.698416928932743,
+    "lossless_correction_used_mean": 1.0,
+    "lossless_correction_used_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "state_reuse_fraction_mean": 0.25,
+    "state_reuse_fraction_std": 0.25
+  },
+  "manifest_ref": "foundation-models:echo",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_followup_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.17241-echo/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-followup-mini-suite-v1"
+  }
+}

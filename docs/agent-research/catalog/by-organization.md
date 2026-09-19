@@ -58,6 +58,7 @@
 
 ## Beihang University
 
+- 2026-09-15 · 一作：Yunxiang Zhang · [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 - 2026-08-06 · 一作：Xingyu Guo · [Contextual Information Policy Optimization for Search Agents](../2608.06128-cipo/README.md)（`cipo`）：**主题：搜索 Agent RL。** 只奖励最终答案会让检索退化成确认偏见。
 
 ## Beijing University of Posts and Telecommunications
@@ -132,6 +133,10 @@
 ## Harbin Institute of Technology, Shenzhen
 
 - 2026-09-10 · 一作：Kesheng Chen · [MAPLE: Memory-Augmented Planning with Language and Evolution](../2609.11636-maple/README.md)（`maple`）：MAPLE 把自然语言优化知识变成可持续修改的程序状态：生成候选、检查可执行性、接纳更好的方案，并把已接受程序带到后续问题中继续进化，而不是每次从零提示。
+
+## Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory
+
+- 2026-09-15 · 一作：Cai Ke · [Interactive Memory Learning for Long-Term Conversations](../2609.17088-interactive-memory/README.md)（`interactive-memory`）：Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。
 
 ## Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS
 

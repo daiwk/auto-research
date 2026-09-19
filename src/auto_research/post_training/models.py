@@ -124,6 +124,8 @@ ALGORITHMS = (
     "df-opd",
     "opd-aha",
     "growmtp",
+    "tiao",
+    "sd-dpo",
 )
 
 

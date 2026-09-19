@@ -4,6 +4,8 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "repoatlas": ("RepoAtlas", "https://arxiv.org/abs/2609.16936"),
+    "interactive-memory": ("Interactive Memory Learning", "https://arxiv.org/abs/2609.17088"),
     "fuse-evaluator": ("Fuse", "https://arxiv.org/abs/2609.17496"),
     "harness-bandit": ("HarnessBandit", "https://arxiv.org/abs/2609.13739"),
     "sciencebuddy": ("ScienceBuddy", "https://arxiv.org/abs/2609.17523"),

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "method": "register-tokens-dllm",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "register_slots": 4.0,
+      "cleared_text_tokens": 16.0,
+      "carry_norm": 3.6048996669722793
+    },
+    {
+      "seed": 43,
+      "register_slots": 4.0,
+      "cleared_text_tokens": 16.0,
+      "carry_norm": 4.068489569089635
+    },
+    {
+      "seed": 44,
+      "register_slots": 4.0,
+      "cleared_text_tokens": 16.0,
+      "carry_norm": 3.997637021436907
+    }
+  ],
+  "aggregate_metrics": {
+    "carry_norm_mean": 3.8903420858329407,
+    "carry_norm_std": 0.24972595327876806,
+    "cleared_text_tokens_mean": 16.0,
+    "cleared_text_tokens_std": 0.0,
+    "register_slots_mean": 4.0,
+    "register_slots_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "foundation-models:register-tokens-dllm",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution only; not a paper-scale capability result"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_16_followup_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.16372-register-tokens-dllm/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic-sep16-followup-mini-suite-v1"
+  }
+}
