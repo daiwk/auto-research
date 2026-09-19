@@ -9,6 +9,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 扩散语言模型 | [dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models](2609.20751-dqwen35/README.md) | University of Texas at Austin，2026-09-17 | 未发现官方代码 | `dqwen35` |
+| 注意力与长上下文 | [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](2609.20734-oda/README.md) | Southern University of Science and Technology，2026-09-17 | 未发现官方代码 | `oda` |
+| 推测解码 | [ASPIRE: Asynchronous Batch Self-Speculative Decoding](2609.17943-aspire/README.md) | University of Southern California，2026-09-16 | 未发现官方代码 | `aspire` |
 | 推测解码 | [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](2609.17241-echo/README.md) | Wuhan University，2026-09-15 | [已开源](https://github.com/whucs21Mzy/ECHO) | `echo` |
 | 推测解码 | [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](2609.17184-loopspec/README.md) | Seoul National University / KAIST，2026-09-15 | 未发现官方代码 | `loopspec` |
 | 可复现训练 | [OPEN-1B: A Fully Auditable Training Run](2609.17380-open-1b-audit/README.md) | Gensyn，2026-09-15 | [已开源](https://github.com/gensyn-ai/open-transformers) | `open-1b-audit` |

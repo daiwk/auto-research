@@ -6,6 +6,10 @@ from .models import AgentResearchResult
 PAPERS = {
     "repoatlas": ("RepoAtlas", "https://arxiv.org/abs/2609.16936"),
     "interactive-memory": ("Interactive Memory Learning", "https://arxiv.org/abs/2609.17088"),
+    "evoskill-gui": ("EvoSkill-GUI", "https://arxiv.org/abs/2609.17653"),
+    "dependency-refinement": ("Dependency-Aware Trajectory Refinement", "https://arxiv.org/abs/2609.18417"),
+    "harness-design-study": ("Harness Design for Coding Agents", "https://arxiv.org/abs/2609.20804"),
+    "cera-moa": ("CERA-MoA", "https://arxiv.org/abs/2609.18779"),
     "fuse-evaluator": ("Fuse", "https://arxiv.org/abs/2609.17496"),
     "harness-bandit": ("HarnessBandit", "https://arxiv.org/abs/2609.13739"),
     "sciencebuddy": ("ScienceBuddy", "https://arxiv.org/abs/2609.17523"),

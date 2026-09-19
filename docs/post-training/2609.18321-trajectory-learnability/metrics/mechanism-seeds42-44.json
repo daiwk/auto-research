@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "method": "trajectory-learnability",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.203125,
+      "mean_reward": 0.38792858424974397,
+      "entropy": 1.7916892567362355,
+      "kl_from_reference": 7.021248581927212e-05,
+      "learnability_entropy": 1.3862269751957492,
+      "positive_learnability_fraction": 0.0,
+      "max_trajectory_weight": 0.2525174534616529,
+      "loss": 0.00995548092024349,
+      "policy_entropy": 1.7916917381113617
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.59375,
+      "mean_reward": 0.690636681277262,
+      "entropy": 1.7917171174992201,
+      "kl_from_reference": 4.23517228346308e-05,
+      "learnability_entropy": 1.3860977814245667,
+      "positive_learnability_fraction": 0.0,
+      "max_trajectory_weight": 0.25470673413322836,
+      "loss": 0.0147467188253002,
+      "policy_entropy": 1.7917225572374864
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.734375,
+      "mean_reward": 0.7788216538811203,
+      "entropy": 1.791741660834862,
+      "kl_from_reference": 1.780838719277837e-05,
+      "learnability_entropy": 1.3861521637317276,
+      "positive_learnability_fraction": 0.0,
+      "max_trajectory_weight": 0.2565500913320996,
+      "loss": 0.07462340471983955,
+      "policy_entropy": 1.7917412025108397
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.5104166666666666,
+    "accuracy_std": 0.27525438045257944,
+    "entropy_mean": 1.7917160116901059,
+    "entropy_std": 2.621954420965292e-05,
+    "kl_from_reference_mean": 4.345753194889377e-05,
+    "kl_from_reference_std": 2.6219544209648487e-05,
+    "learnability_entropy_mean": 1.3861589734506812,
+    "learnability_entropy_std": 6.48655288443568e-05,
+    "loss_mean": 0.03310853482179441,
+    "loss_std": 0.03603265612128009,
+    "max_trajectory_weight_mean": 0.2545914263089936,
+    "max_trajectory_weight_std": 0.0020187902241906113,
+    "mean_reward_mean": 0.6191289731360421,
+    "mean_reward_std": 0.20502283339708147,
+    "policy_entropy_mean": 1.7917184992865627,
+    "policy_entropy_std": 2.4980631060955077e-05,
+    "positive_learnability_fraction_mean": 0.0,
+    "positive_learnability_fraction_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "post-training:trajectory-learnability",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.18321-trajectory-learnability/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

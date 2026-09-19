@@ -132,6 +132,10 @@ METHODS = (
     "sciencebuddy",
     "repoatlas",
     "interactive-memory",
+    "evoskill-gui",
+    "dependency-refinement",
+    "harness-design-study",
+    "cera-moa",
 )
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",

@@ -9,7 +9,11 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 编程 Agent | [An Empirical Study of Harness Design for Coding Agents](2609.20804-harness-design-study/README.md) | University of Massachusetts Amherst，2026-09-17 | 未发现官方代码 | `harness-design-study` |
+| 多 Agent | [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](2609.18779-cera-moa/README.md) | IIIS, Tsinghua University，2026-09-16 | 未发现官方代码 | `cera-moa` |
+| 轨迹精炼 | [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](2609.18417-dependency-refinement/README.md) | ShanghaiTech University，2026-09-16 | [已开源](https://github.com/Alibaba-NLP/VLLM-KB) | `dependency-refinement` |
 | 长期记忆 | [Interactive Memory Learning for Long-Term Conversations](2609.17088-interactive-memory/README.md) | Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory，2026-09-15 | 未发现官方代码 | `interactive-memory` |
+| GUI Agent | [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](2609.17653-evoskill-gui/README.md) | Zhejiang University，2026-09-15 | [已开源](https://github.com/ZJU-REAL/EvoSkill-GUI) | `evoskill-gui` |
 | 编程 Agent | [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](2609.16936-repoatlas/README.md) | Beihang University，2026-09-15 | 未发现官方代码 | `repoatlas` |
 | 科学 Agent | [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](2609.17523-sciencebuddy/README.md) | Gen-Verse research collaboration，2026-09-15 | [已开源](https://github.com/Gen-Verse/ScienceBuddy) | `sciencebuddy` |
 | Agent 评测 | [Verifiable Social Reasoning for LLM Assistants](2609.17496-fuse-evaluator/README.md) | Google Research / Hebrew University of Jerusalem / University of Cambridge，2026-09-15 | 未发现官方代码 | `fuse-evaluator` |

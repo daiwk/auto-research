@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "adapter_key": "aspire",
+  "validated_at": "2026-09-19",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/validate_sep19_gpu.py",
+    "--method",
+    "aspire",
+    "--seed",
+    "42",
+    "--output",
+    "docs/gpu-validations/aspire-a100-20260919.json",
+    "--commit",
+    "a90a4fd"
+  ],
+  "dataset": {
+    "name": "deterministic public mechanism fixture",
+    "revision": "sep19-v1",
+    "examples": 4096
+  },
+  "checkpoint": {
+    "model_id": "not-required/reference-kernel",
+    "revision": "arxiv-v1"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "requests": 4096,
+    "mean_draft_length": 2.574951171875,
+    "refresh_fraction": 0.25
+  },
+  "provenance": {
+    "commit": "a90a4fd",
+    "artifact_path": "docs/gpu-validations/aspire-a100-20260919.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

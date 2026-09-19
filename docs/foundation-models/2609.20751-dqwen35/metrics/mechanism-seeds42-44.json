@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "method": "dqwen35",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "bidirectional_passes": 2,
+      "mask_ratio": 0.3,
+      "hybrid_state_norm": 6.194372327384927
+    },
+    {
+      "seed": 43,
+      "bidirectional_passes": 2,
+      "mask_ratio": 0.3,
+      "hybrid_state_norm": 6.6195284807131936
+    },
+    {
+      "seed": 44,
+      "bidirectional_passes": 2,
+      "mask_ratio": 0.3,
+      "hybrid_state_norm": 5.904998821894869
+    }
+  ],
+  "aggregate_metrics": {
+    "bidirectional_passes_mean": 2.0,
+    "bidirectional_passes_std": 0.0,
+    "hybrid_state_norm_mean": 6.239633209997663,
+    "hybrid_state_norm_std": 0.35940863783988397,
+    "mask_ratio_mean": 0.3,
+    "mask_ratio_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "foundation-models:dqwen35",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.20751-dqwen35/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

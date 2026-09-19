@@ -34,6 +34,8 @@
 
 ### on-policy / context 蒸馏
 
+- [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。
+- [Trajectory Learnability for Offline On-Policy Distillation](../2609.18321-trajectory-learnability/README.md)（`trajectory-learnability`）：用成功轨迹训练参考模型，以参考与当前策略逐 token 对数似然变化衡量可学性，并据此重加权离线 OPD 轨迹。
 - [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../2609.16937-gamma-opd/README.md)（`gamma-opd`）：以折扣时间信用逼近序列级 reverse-KL，再用有界奖励优势补入可验证结果。
 - [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](../2609.14636-stride-opd/README.md)（`stride-opd`）：teacher 累积置信度越界时早停，并从最弱正确 turn 的缓存前缀重新开始。
 - [Data-free On-policy Distillation](../2609.14193-df-opd/README.md)（`df-opd`）：由教师在自身策略空间生成问题，减少对外部后训练语料的依赖。本地实现保留决定性状态转换，并输出统一预算下可审计的中间量。
@@ -84,6 +86,11 @@
 - [SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation](../2608.03092-smopd/README.md)（`smopd`）：先用 reward-priority 分别训练专长教师，再在学生自身轨迹上合并多个教师能力。
 - [Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance](../2608.00782-rstg/README.md)（`rstg`）：只对负向零方差 group 启用教师，并在高熵或大 teacher-student gap token 上蒸馏，同时注入教师正确轨迹 SFT。
 - [Contrastive Reinforced Policy Optimization via Privileged Self-Distillation](../2607.28026-crpo/README.md)（`crpo`）：按预测熵区分反思探索正位置和 exposure-bias 负位置，对 privileged self-distillation 做组内对比。
+
+### 偏好优化
+
+- [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
+- [Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data](../2609.16532-sd-dpo/README.md)（`sd-dpo`）：识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。
 
 ### post-training
 
@@ -138,10 +145,6 @@
 ### 多奖励 RL
 
 - [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](../2608.16072-sa-mrpo/README.md)（`sa-mrpo`）：逐 reward 维度标准化优势，并依据 batch 饱和度动态把梯度预算转移到尚未掌握的目标。
-
-### 偏好优化
-
-- [Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data](../2609.16532-sd-dpo/README.md)（`sd-dpo`）：识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。
 
 ### 测试时适配
 

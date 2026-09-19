@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "method": "oda",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "predicted_global_gain": -0.5419423908808008,
+      "global_attention_used": false,
+      "kv_retained": 64
+    },
+    {
+      "seed": 43,
+      "predicted_global_gain": -0.08856977819867112,
+      "global_attention_used": false,
+      "kv_retained": 64
+    },
+    {
+      "seed": 44,
+      "predicted_global_gain": -0.26333399239273414,
+      "global_attention_used": false,
+      "kv_retained": 64
+    }
+  ],
+  "aggregate_metrics": {
+    "kv_retained_mean": 64.0,
+    "kv_retained_std": 0.0,
+    "predicted_global_gain_mean": -0.29794872049073534,
+    "predicted_global_gain_std": 0.2286598260156974,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "foundation-models:oda",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/foundation-models/2609.20734-oda/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

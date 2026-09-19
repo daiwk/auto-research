@@ -4835,6 +4835,176 @@
         "fingerprint": "ef8e529e3a04af1612da1d772200603af558f3b2c46859965a3b246e2c4cebb1"
       }
     ],
+    "src/auto_research/agent_research/latest_20260919.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 25,
+        "qualified_name": "EvoSkillGUIAgent.solve_observation",
+        "expression": "self.skill_reuses += int(key in self.skills)",
+        "fingerprint": "78810a3f6e3ba1f29c948affae5bebf0ac0f08c0e85ac970b5e34d0c8bd4260d"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 27,
+        "qualified_name": "EvoSkillGUIAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 27,
+        "qualified_name": "EvoSkillGUIAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 32,
+        "qualified_name": "EvoSkillGUIAgent.observe",
+        "expression": "self.critic_reviews += 1",
+        "fingerprint": "edd4965fb58f47c91b968ce428e0958fe70d80aa93a4130c387dbcf3f6bab851"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 37,
+        "qualified_name": "EvoSkillGUIAgent.observe",
+        "expression": "self.skill_revisions += 1",
+        "fingerprint": "5638dcdc36bdb36a55564a6d2a145e17f36b9bf31fd1227555bd2fa786b4a162"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 54,
+        "qualified_name": "DependencyRefinementAgent.solve_observation",
+        "expression": "self.dependency_edges += int(bool(refined))",
+        "fingerprint": "0d2ac26c30ad2c0987da797f1964717ac68c56f414734c29f139cc3b5c55a5cf"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 56,
+        "qualified_name": "DependencyRefinementAgent.solve_observation",
+        "expression": "self.leaf_prunes += 1",
+        "fingerprint": "823636636d6c4568045ad064a9e1de089cba6846d53a1719af30db412284e8e7"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 58,
+        "qualified_name": "DependencyRefinementAgent.solve_observation",
+        "expression": "self.strict_merges += 1",
+        "fingerprint": "bf2c2571974661ef9ec5263dd6abd59184efa2f0fa0f1c26eb5a4353c54b140c"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 60,
+        "qualified_name": "DependencyRefinementAgent.solve_observation",
+        "expression": "self.relaxed_merges += 1",
+        "fingerprint": "9aa923b9f35d2cb2068771ec3c601983902e781666bf9340d39d3110dbd740a3"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 64,
+        "qualified_name": "DependencyRefinementAgent.solve_observation",
+        "expression": "self.actions += len(refined)",
+        "fingerprint": "88b87e3184ca8b7e388881828bb21c0713af96eaee4f70dcab91c2db35d076bb"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 64,
+        "qualified_name": "DependencyRefinementAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 78,
+        "qualified_name": "HarnessDesignStudyAgent.solve_observation",
+        "expression": "self.rule_elisions += max(0, len(observation.context) - len(context))",
+        "fingerprint": "0bb3efd95656805c90415cf4703bff484f2ff6d821cf59db50faa0d0284e9c72"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 79,
+        "qualified_name": "HarnessDesignStudyAgent.solve_observation",
+        "expression": "self.context_summaries += int(len(observation.context) > self.capacity)",
+        "fingerprint": "83ee2e5d1c2b5537a6b6e48219c96feecce00125005b578c5b583f68102eb0a0"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 80,
+        "qualified_name": "HarnessDesignStudyAgent.solve_observation",
+        "expression": "self.action_granularity_choices += 1",
+        "fingerprint": "f7ff15be51b86b54e580eb2e4fa919b79d053088fe3475eae405eb9349c5f5c4"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 82,
+        "qualified_name": "HarnessDesignStudyAgent.solve_observation",
+        "expression": "self.actions += len(chosen)",
+        "fingerprint": "df9dbfc57ba6287aefdfcc70fcea63d3efbeceb1eee4cad975fff26e8964c465"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 82,
+        "qualified_name": "HarnessDesignStudyAgent.solve_observation",
+        "expression": "self.cost += len(context)",
+        "fingerprint": "592823041d601684aa23583c48150cc3ce6ff04836e09843548fd6c9661c6c3b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 99,
+        "qualified_name": "CERAMoAAgent.solve_observation",
+        "expression": "self.familiarity_routes += 1",
+        "fingerprint": "5e3f576d3b4c223d52f90ad754f139fa60a4b94967156b9a56aa7dfeac2be9f9"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 100,
+        "qualified_name": "CERAMoAAgent.solve_observation",
+        "expression": "self.actions += len(plan)",
+        "fingerprint": "fdcb9eed3223f895edebfdb0d1de595afcd0e214b408c692b00ebc1c31c8c158"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "solve_observation",
+        "line": 100,
+        "qualified_name": "CERAMoAAgent.solve_observation",
+        "expression": "self.cost += len(observation.context)",
+        "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 106,
+        "qualified_name": "CERAMoAAgent.observe",
+        "expression": "self.router_updates += 1",
+        "fingerprint": "43787e005157dcc6b1ddb031d909a8416b061b73231ed1fe6cb4ae421c092f7d"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 106,
+        "qualified_name": "CERAMoAAgent.observe",
+        "expression": "self.targeted_allocations += 1",
+        "fingerprint": "3fdf61def9c3938d996b48e91754296d0f9ecd3cbfda00a7be6ad18a4f85d1bc"
+      }
+    ],
     "src/auto_research/agent_research/lightning_policy.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10779,7 +10949,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 116,
+        "line": 119,
         "qualified_name": "apply",
         "expression": "state.reward_axis_weights /= state.reward_axis_weights.sum()",
         "fingerprint": "09f33b5afa92e20e613d9cd0d8c98dc7808363f0495a7a1b2902d242cca9856b"
@@ -10787,7 +10957,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 117,
+        "line": 120,
         "qualified_name": "apply",
         "expression": "state.drift_events += 1",
         "fingerprint": "549eef05733c5296b37b8e3aa03551ed1f1c77dc2fa8a78165b34ba82cc72515"
@@ -10797,7 +10967,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 57,
+        "line": 58,
         "qualified_name": "update",
         "expression": "state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)",
         "fingerprint": "b6a0c91a64d121c2aebc293682cc80891fb4b00f45df453786621db9c500d8b7"
@@ -10805,7 +10975,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 90,
+        "line": 92,
         "qualified_name": "update",
         "expression": "state.variant_updates += 1",
         "fingerprint": "893bef108fce174b29a88dcfb593d6773edd36efd7d2862213d54d73a56b808c"
@@ -10813,7 +10983,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 95,
+        "line": 97,
         "qualified_name": "update",
         "expression": "state.online_rollout_refreshes += 1",
         "fingerprint": "7c428a44c4ff081ae94e4d66fcd286d3affd4bdc54a29da050685b33110e603c"

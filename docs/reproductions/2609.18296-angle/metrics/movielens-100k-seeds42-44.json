@@ -1,0 +1,98 @@
+{
+  "schema_version": 2,
+  "method": "angle",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "hit_at_10": 0.06363636363636363,
+      "ndcg_at_10": 0.03193296750404471,
+      "fresh_hit_at_10": 0.047619047619047616,
+      "head_share_at_10": 0.12409090909090909,
+      "generation_loss_proxy": -0.29475336093358734,
+      "discrimination_margin": 3.341666666666667,
+      "ranking_score_std": 0.4715075518725152,
+      "valid_pair_count": 20,
+      "beam_size": 40,
+      "invalid_pruned": 19,
+      "validation_only_alpha": 0.30000000000000004
+    },
+    {
+      "seed": 43,
+      "hit_at_10": 0.06363636363636363,
+      "ndcg_at_10": 0.03193296750404471,
+      "fresh_hit_at_10": 0.047619047619047616,
+      "head_share_at_10": 0.12409090909090909,
+      "generation_loss_proxy": -0.29475336093358734,
+      "discrimination_margin": 3.341666666666667,
+      "ranking_score_std": 0.4715075518725152,
+      "valid_pair_count": 20,
+      "beam_size": 40,
+      "invalid_pruned": 19,
+      "validation_only_alpha": 0.30000000000000004
+    },
+    {
+      "seed": 44,
+      "hit_at_10": 0.06363636363636363,
+      "ndcg_at_10": 0.03193296750404471,
+      "fresh_hit_at_10": 0.047619047619047616,
+      "head_share_at_10": 0.12409090909090909,
+      "generation_loss_proxy": -0.29475336093358734,
+      "discrimination_margin": 3.341666666666667,
+      "ranking_score_std": 0.4715075518725152,
+      "valid_pair_count": 20,
+      "beam_size": 40,
+      "invalid_pruned": 19,
+      "validation_only_alpha": 0.30000000000000004
+    }
+  ],
+  "aggregate_metrics": {
+    "beam_size_mean": 40.0,
+    "beam_size_std": 0.0,
+    "discrimination_margin_mean": 3.341666666666667,
+    "discrimination_margin_std": 0.0,
+    "fresh_hit_at_10_mean": 0.047619047619047616,
+    "fresh_hit_at_10_std": 0.0,
+    "generation_loss_proxy_mean": -0.29475336093358734,
+    "generation_loss_proxy_std": 0.0,
+    "head_share_at_10_mean": 0.12409090909090909,
+    "head_share_at_10_std": 0.0,
+    "hit_at_10_mean": 0.06363636363636363,
+    "hit_at_10_std": 0.0,
+    "invalid_pruned_mean": 19.0,
+    "invalid_pruned_std": 0.0,
+    "ndcg_at_10_mean": 0.03193296750404471,
+    "ndcg_at_10_std": 0.0,
+    "ranking_score_std_mean": 0.4715075518725152,
+    "ranking_score_std_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "valid_pair_count_mean": 20.0,
+    "valid_pair_count_std": 0.0,
+    "validation_only_alpha_mean": 0.30000000000000004,
+    "validation_only_alpha_std": 0.0
+  },
+  "manifest_ref": "recommendation:angle",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "diagnostic_only": false,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/reproductions/2609.18296-angle/metrics/movielens-100k-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

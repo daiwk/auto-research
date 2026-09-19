@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-09 · [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。
+- 2026-09 · [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
+- 2026-09 · [Trajectory Learnability for Offline On-Policy Distillation](../2609.18321-trajectory-learnability/README.md)（`trajectory-learnability`）：用成功轨迹训练参考模型，以参考与当前策略逐 token 对数似然变化衡量可学性，并据此重加权离线 OPD 轨迹。
 - 2026-09 · [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../2609.16937-gamma-opd/README.md)（`gamma-opd`）：以折扣时间信用逼近序列级 reverse-KL，再用有界奖励优势补入可验证结果。
 - 2026-09 · [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
 - 2026-09 · [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](../2609.16459-opd-aha/README.md)（`opd-aha`）：用真实视觉与空视觉教师分布之差重建视觉偏好目标，抑制错误语言前缀的惯性。

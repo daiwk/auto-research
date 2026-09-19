@@ -4,7 +4,11 @@
 
 ## 2026
 
+- 2026-09 · [An Empirical Study of Harness Design for Coding Agents](../2609.20804-harness-design-study/README.md)（`harness-design-study`）：固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。
+- 2026-09 · [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](../2609.18779-cera-moa/README.md)（`cera-moa`）：用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。
+- 2026-09 · [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
 - 2026-09 · [Interactive Memory Learning for Long-Term Conversations](../2609.17088-interactive-memory/README.md)（`interactive-memory`）：Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。
+- 2026-09 · [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
 - 2026-09 · [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 - 2026-09 · [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
 - 2026-09 · [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。

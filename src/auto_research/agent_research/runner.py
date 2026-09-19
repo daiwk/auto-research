@@ -200,6 +200,10 @@ class AgentResearchRunner:
             "inner_harness_updates", "outer_policy_updates", "cross_branch_lessons",
             "view_refreshes", "selected_nodes", "text_projections",
             "planner_updates", "trigger_updates", "delayed_rewards",
+            "skill_revisions", "skill_reuses", "critic_reviews",
+            "dependency_edges", "leaf_prunes", "strict_merges", "relaxed_merges",
+            "rule_elisions", "context_summaries", "action_granularity_choices",
+            "familiarity_routes", "targeted_allocations",
         ):
             diagnostics[name] = getattr(agent, name, 0)
         phase_counts = getattr(agent, "phase_counts", None)
@@ -210,6 +214,7 @@ class AgentResearchRunner:
             "prompts", "searchatlas", "skill-retention", "t1-terminal-rl",
             "fuse-evaluator", "harness-bandit", "sciencebuddy",
             "repoatlas", "interactive-memory",
+            "evoskill-gui", "dependency-refinement", "harness-design-study", "cera-moa",
         }:
             diagnostics["fidelity"] = "public observation parser diagnostic; independent kernels require explicit rollout/simulator integration"
             diagnostics["gold_fields_available_to_policy"] = False

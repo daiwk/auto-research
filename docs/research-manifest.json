@@ -275,6 +275,23 @@
     },
     {
       "domain": "agent-research",
+      "key": "cera-moa",
+      "title": "CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents",
+      "paper_url": "https://arxiv.org/abs/2609.18779",
+      "detail_path": "agent-research/2609.18779-cera-moa/README.md",
+      "topic": [
+        "多 Agent",
+        "路由与协同进化"
+      ],
+      "first_author": "Jiaxuan Jiang",
+      "first_author_affiliation": "IIIS, Tsinghua University",
+      "published": "2026-09-16",
+      "code": null,
+      "adapter": "cera-moa",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "cipo",
       "title": "Contextual Information Policy Optimization for Search Agents",
       "paper_url": "https://arxiv.org/abs/2608.06128",
@@ -412,6 +429,23 @@
     },
     {
       "domain": "agent-research",
+      "key": "dependency-refinement",
+      "title": "Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning",
+      "paper_url": "https://arxiv.org/abs/2609.18417",
+      "detail_path": "agent-research/2609.18417-dependency-refinement/README.md",
+      "topic": [
+        "轨迹精炼",
+        "Agent 微调"
+      ],
+      "first_author": "Zhuo Chen",
+      "first_author_affiliation": "ShanghaiTech University",
+      "published": "2026-09-16",
+      "code": "https://github.com/Alibaba-NLP/VLLM-KB",
+      "adapter": "dependency-refinement",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "ecdysis",
       "title": "Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents",
       "paper_url": "https://arxiv.org/abs/2609.11677",
@@ -456,6 +490,23 @@
       "published": "2026-08-05",
       "code": null,
       "adapter": "evoharness-rl"
+    },
+    {
+      "domain": "agent-research",
+      "key": "evoskill-gui",
+      "title": "Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents",
+      "paper_url": "https://arxiv.org/abs/2609.17653",
+      "detail_path": "agent-research/2609.17653-evoskill-gui/README.md",
+      "topic": [
+        "GUI Agent",
+        "技能进化"
+      ],
+      "first_author": "Bofan Chen",
+      "first_author_affiliation": "Zhejiang University",
+      "published": "2026-09-15",
+      "code": "https://github.com/ZJU-REAL/EvoSkill-GUI",
+      "adapter": "evoskill-gui",
+      "priority": "P0"
     },
     {
       "domain": "agent-research",
@@ -596,6 +647,23 @@
       "published": "2026-09-12",
       "code": null,
       "adapter": "harness-bandit",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "harness-design-study",
+      "title": "An Empirical Study of Harness Design for Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2609.20804",
+      "detail_path": "agent-research/2609.20804-harness-design-study/README.md",
+      "topic": [
+        "编程 Agent",
+        "Harness 设计"
+      ],
+      "first_author": "Run-Ze Fan",
+      "first_author_affiliation": "University of Massachusetts Amherst",
+      "published": "2026-09-17",
+      "code": null,
+      "adapter": "harness-design-study",
       "priority": "P1"
     },
     {
@@ -2061,6 +2129,25 @@
     },
     {
       "domain": "foundation-models",
+      "key": "aspire",
+      "title": "ASPIRE: Asynchronous Batch Self-Speculative Decoding",
+      "paper_url": "https://arxiv.org/abs/2609.17943",
+      "detail_path": "foundation-models/2609.17943-aspire/README.md",
+      "topic": [
+        "推测解码",
+        "推理效率"
+      ],
+      "first_author": "Amir Ziashahabi",
+      "first_author_affiliation": "University of Southern California",
+      "published": "2026-09-16",
+      "code": null,
+      "adapter": "aspire",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/aspire-a100-20260919.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "autonomy-heads",
       "title": "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
       "paper_url": "https://arxiv.org/abs/2608.06849",
@@ -2955,6 +3042,26 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "dqwen35",
+      "title": "dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models",
+      "paper_url": "https://arxiv.org/abs/2609.20751",
+      "detail_path": "foundation-models/2609.20751-dqwen35/README.md",
+      "topic": [
+        "扩散语言模型",
+        "网络架构"
+      ],
+      "first_author": "Anton Xue",
+      "first_author_affiliation": "University of Texas at Austin",
+      "published": "2026-09-17",
+      "code": null,
+      "checkpoint": "https://huggingface.co/UT-IFML/dQwen3.5-9B-Base",
+      "adapter": "dqwen35",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/dqwen35-a100-20260919.json"
     },
     {
       "domain": "foundation-models",
@@ -4556,6 +4663,25 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "oda",
+      "title": "On-Demand Attention: Efficient Long-Context Decoding with Learned Recall",
+      "paper_url": "https://arxiv.org/abs/2609.20734",
+      "detail_path": "foundation-models/2609.20734-oda/README.md",
+      "topic": [
+        "注意力与长上下文",
+        "推理效率"
+      ],
+      "first_author": "Paper author team",
+      "first_author_affiliation": "Southern University of Science and Technology",
+      "published": "2026-09-17",
+      "code": null,
+      "adapter": "oda",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oda-a100-20260919.json"
     },
     {
       "domain": "foundation-models",
@@ -6486,6 +6612,23 @@
     },
     {
       "domain": "post-training",
+      "key": "compo",
+      "title": "A Zeroth-Order Paradigm for LLM Preference Alignment",
+      "paper_url": "https://arxiv.org/abs/2609.19144",
+      "detail_path": "post-training/2609.19144-compo/README.md",
+      "topic": [
+        "偏好优化",
+        "零阶优化"
+      ],
+      "first_author": "Peter Chen",
+      "first_author_affiliation": "University of California, Berkeley",
+      "published": "2026-09-16",
+      "code": null,
+      "adapter": "compo",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "conspo",
       "title": "ConSPO",
       "paper_url": "https://arxiv.org/abs/2605.12969",
@@ -7554,6 +7697,23 @@
     },
     {
       "domain": "post-training",
+      "key": "retire-opd",
+      "title": "RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2609.20784",
+      "detail_path": "post-training/2609.20784-retire-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "Agent RL"
+      ],
+      "first_author": "ZJU-REAL team",
+      "first_author_affiliation": "Zhejiang University",
+      "published": "2026-09-17",
+      "code": "https://github.com/ZJU-REAL/SDAR",
+      "adapter": "retire-opd",
+      "priority": "P0"
+    },
+    {
+      "domain": "post-training",
       "key": "ripo",
       "title": "RIPO",
       "paper_url": "https://arxiv.org/abs/2607.10169",
@@ -8121,6 +8281,23 @@
       "code": null,
       "adapter": "tlm-dre",
       "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "trajectory-learnability",
+      "title": "Trajectory Learnability for Offline On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.18321",
+      "detail_path": "post-training/2609.18321-trajectory-learnability/README.md",
+      "topic": [
+        "On-policy distillation",
+        "轨迹加权"
+      ],
+      "first_author": "Yihao Ai",
+      "first_author_affiliation": "National University of Singapore",
+      "published": "2026-09-16",
+      "code": null,
+      "adapter": "trajectory-learnability",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -8869,6 +9046,110 @@
         "evolve_operators": [
           "context:complementary-category-adapter"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "angle",
+      "title": "One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations",
+      "paper_url": "https://arxiv.org/abs/2609.18296",
+      "detail_path": "reproductions/2609.18296-angle/README.md",
+      "topic": [
+        "sponsored-search",
+        "generative-retrieval",
+        "hierarchical-identifiers"
+      ],
+      "first_author": "Jinrui Zhang",
+      "first_author_affiliation": "Tencent",
+      "published": "2026-09-16",
+      "code": null,
+      "adapter": {
+        "adapter_key": "angle",
+        "arxiv_id": "2609.18296",
+        "title": "One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations",
+        "paper_url": "https://arxiv.org/abs/2609.18296",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-09-16",
+        "code_url": null,
+        "topics": [
+          "sponsored-search",
+          "generative-retrieval",
+          "hierarchical-identifiers"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/angle",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "transition + content + popularity",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10",
+          "fresh_hit_at_10",
+          "head_share_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Weixin Top Stories sponsored search",
+            "metric": "consumption",
+            "lift_percent": 1.81,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.18296v1",
+            "source_location": "online experiment table",
+            "retrieved_at": "2026-09-19"
+          },
+          {
+            "product": "Weixin Top Stories sponsored search",
+            "metric": "GMV",
+            "lift_percent": 2.16,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.18296v1",
+            "source_location": "online experiment table",
+            "retrieved_at": "2026-09-19"
+          },
+          {
+            "product": "Weixin Top Stories sponsored search",
+            "metric": "clicks",
+            "lift_percent": 1.5,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.18296v1",
+            "source_location": "online experiment table",
+            "retrieved_at": "2026-09-19"
+          },
+          {
+            "product": "Weixin Top Stories sponsored search",
+            "metric": "conversions",
+            "lift_percent": 1.44,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.18296v1",
+            "source_location": "online experiment table",
+            "retrieved_at": "2026-09-19"
+          },
+          {
+            "product": "Weixin Top Stories sponsored search",
+            "metric": "exposure",
+            "lift_percent": 2.49,
+            "traffic": "production online A/B",
+            "source_url": "https://arxiv.org/html/2609.18296v1",
+            "source_location": "online experiment table",
+            "retrieved_at": "2026-09-19"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
       }
     },
     {

@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "method": "compo",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.0,
+      "mean_reward": 0.1617246398833813,
+      "entropy": 1.7911293605999232,
+      "kl_from_reference": 0.000630108622131285,
+      "oracle_preference_rate": 0.75,
+      "active_coordinate_fraction": 1.0,
+      "direction_norm": 2.0,
+      "loss": 0.75,
+      "policy_entropy": 1.7914208937108038
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.34375,
+      "mean_reward": 0.465965399527053,
+      "entropy": 1.7903978694116673,
+      "kl_from_reference": 0.0013615998103871161,
+      "oracle_preference_rate": 1.0,
+      "active_coordinate_fraction": 1.0,
+      "direction_norm": 2.0,
+      "loss": 0.0,
+      "policy_entropy": 1.7905911938391026
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.296875,
+      "mean_reward": 0.47102770169636315,
+      "entropy": 1.790416664503117,
+      "kl_from_reference": 0.0013428047189380083,
+      "oracle_preference_rate": 0.75,
+      "active_coordinate_fraction": 0.75,
+      "direction_norm": 1.7320508075688772,
+      "loss": 0.75,
+      "policy_entropy": 1.791388647152004
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.21354166666666666,
+    "accuracy_std": 0.18641177258513833,
+    "active_coordinate_fraction_mean": 0.9166666666666666,
+    "active_coordinate_fraction_std": 0.14433756729740643,
+    "direction_norm_mean": 1.910683602522959,
+    "direction_norm_std": 0.15470053837925157,
+    "entropy_mean": 1.7906479648382359,
+    "entropy_std": 0.0004170068625257579,
+    "kl_from_reference_mean": 0.001111504383818803,
+    "kl_from_reference_std": 0.00041700686252587547,
+    "loss_mean": 0.5,
+    "loss_std": 0.4330127018922193,
+    "mean_reward_mean": 0.3662392470355991,
+    "mean_reward_std": 0.1771329306757579,
+    "oracle_preference_rate_mean": 0.8333333333333334,
+    "oracle_preference_rate_std": 0.14433756729740643,
+    "policy_entropy_mean": 1.7911335782339701,
+    "policy_entropy_std": 0.00046999530208872753,
+    "seed_mean": 43.0,
+    "seed_std": 1.0
+  },
+  "manifest_ref": "post-training:compo",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.19144-compo/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

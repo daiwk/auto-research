@@ -1,0 +1,88 @@
+{
+  "schema_version": 2,
+  "method": "retire-opd",
+  "dataset": "deterministic mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "accuracy": 0.21875,
+      "mean_reward": 0.40066753689370793,
+      "entropy": 1.7912896522968134,
+      "kl_from_reference": 0.0004698169252424484,
+      "retired_fraction": 0.0,
+      "student_teacher_ratio": 0.14330037615578525,
+      "discrepancy_improvement": -0.0005878137044841858,
+      "loss": 0.03957718756807123,
+      "policy_entropy": 1.7912994827995612
+    },
+    {
+      "seed": 43,
+      "accuracy": 0.609375,
+      "mean_reward": 0.7027521932326924,
+      "entropy": 1.791405201384315,
+      "kl_from_reference": 0.00035426783774033035,
+      "retired_fraction": 0.0,
+      "student_teacher_ratio": 0.15820507535911515,
+      "discrepancy_improvement": 0.0034689658349575103,
+      "loss": 0.059274086393203744,
+      "policy_entropy": 1.791444998295649
+    },
+    {
+      "seed": 44,
+      "accuracy": 0.71875,
+      "mean_reward": 0.7688085059891876,
+      "entropy": 1.7915648575614136,
+      "kl_from_reference": 0.0001946116606414355,
+      "retired_fraction": 0.0,
+      "student_teacher_ratio": 0.41000098730725626,
+      "discrepancy_improvement": -0.0010755772706999012,
+      "loss": 0.29333215282395164,
+      "policy_entropy": 1.7915659900749181
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.515625,
+    "accuracy_std": 0.2628531850196988,
+    "discrepancy_improvement_mean": 0.0006018582865911412,
+    "discrepancy_improvement_std": 0.0024949363908838293,
+    "entropy_mean": 1.7914199037475138,
+    "entropy_std": 0.00013819046287153177,
+    "kl_from_reference_mean": 0.0003395654745414047,
+    "kl_from_reference_std": 0.00013819046287191176,
+    "loss_mean": 0.13072780892840888,
+    "loss_std": 0.1411634564825714,
+    "mean_reward_mean": 0.624076078705196,
+    "mean_reward_std": 0.1962763142345442,
+    "policy_entropy_mean": 1.791436823723376,
+    "policy_entropy_std": 0.00013344155903775967,
+    "retired_fraction_mean": 0.0,
+    "retired_fraction_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "student_teacher_ratio_mean": 0.2371688129407189,
+    "student_teacher_ratio_std": 0.14986246323474173
+  },
+  "manifest_ref": "post-training:retire-opd",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "paper-scale claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_19_2026_artifacts.py",
+    "artifact_path": "docs/post-training/2609.20784-retire-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep19-public-fixture-v1"
+  }
+}

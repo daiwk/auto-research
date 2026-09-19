@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "angle",
+  "arxiv_id": "2609.18296",
+  "title": "One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations",
+  "paper_url": "https://arxiv.org/abs/2609.18296",
+  "organization": "Tencent",
+  "published": "2026-09-16",
+  "upstream_code": "否：截至 2026-09-19 未找到原作者公开仓库",
+  "track": "recommendation",
+  "topics": [
+    "sponsored-search",
+    "generative-retrieval",
+    "hierarchical-identifiers"
+  ],
+  "local_code": "src/auto_research/reproductions/angle",
+  "documentation": "docs/reproductions/2609.18296-angle/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "transition + content + popularity",
+  "metrics": [
+    "hit_at_10",
+    "ndcg_at_10",
+    "fresh_hit_at_10",
+    "head_share_at_10"
+  ],
+  "mechanisms": [
+    "Tencent private sponsored-search logs",
+    "production hierarchical index",
+    "online serving stack"
+  ],
+  "evolve_operators": []
+}
