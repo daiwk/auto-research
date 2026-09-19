@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "adapter_key": "echo",
+  "validated_at": "2026-09-17",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/validate_sep16_followup_gpu.py",
+    "--method",
+    "echo",
+    "--seed",
+    "42",
+    "--output",
+    "docs/gpu-validations/echo-a100-20260916.json",
+    "--commit",
+    "cfd98d7cb78dcae1d1be617b6f80b69970bf1edb"
+  ],
+  "dataset": {
+    "name": "deterministic public mechanism fixture",
+    "revision": "sep16-followup-v1",
+    "examples": 1
+  },
+  "checkpoint": {
+    "model_id": "not-required/reference-kernel",
+    "revision": "arxiv-v1"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "candidate_count": 32,
+    "early_bonus_finite": true,
+    "final_bonus_finite": true
+  },
+  "provenance": {
+    "commit": "cfd98d7cb78dcae1d1be617b6f80b69970bf1edb",
+    "artifact_path": "docs/gpu-validations/echo-a100-20260916.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

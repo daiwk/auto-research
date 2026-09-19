@@ -46,7 +46,7 @@ flowchart LR
 
 三种子结果见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。统一 receipt 标记 `diagnostic_only=true`，不能进入正式能力排名。
 
-CUDA 路径的真实机器验证见本页论文信息所对应的 `docs/gpu-validations/` receipt；receipt 不包含主机名、SSH alias 或驱动/build 字符串。
+CUDA 路径已在 NVIDIA A100 上执行；详见脱敏的 [GPU 验证 receipt](../../gpu-validations/echo-a100-20260916.json)。receipt 不包含主机名、SSH alias 或驱动/build 字符串。
 
 ## 复现边界
 

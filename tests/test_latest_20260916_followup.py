@@ -63,3 +63,10 @@ def test_agent_followup_methods_are_observation_safe_diagnostics(tmp_path):
         assert result.diagnostics["gold_fields_available_to_policy"] is False
         assert result.diagnostics["policy_training_performed"] is False
         assert len(result.trace) >= 12
+
+
+def test_agent_followup_methods_are_executable_evolve_mutations():
+    from auto_research.evolution.papers import AGENT_MUTATIONS
+
+    assert AGENT_MUTATIONS["2609.16936"][0] == "planner:repoatlas"
+    assert AGENT_MUTATIONS["2609.17088"][0] == "memory:interactive-memory"
