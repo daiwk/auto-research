@@ -16,12 +16,17 @@
 | 置信度训练 | [RLCR](../post-training/2507.16806-rlcr/README.md) | MIT | 2025-07-22 | 把 proper scoring rule 加入奖励，使正确性与诚实置信度共同进入优化目标 | `system-one:rival-brier`、`system-one:rival-hybrid` |
 | 决策概率校准 | [Calibration-Aware RL](../post-training/2601.13284-calibration-aware-rl/README.md) | USC / AWS AI Labs | 2026-01-19 | 直接约束 decision-token 概率，并以 validation 温度校准降低过度自信 | validation calibration 与 ECE/Brier 报告 |
 
-## 开放实现
+## 开放实现主干
 
-| 实现 | 作者/机构 | 方法摘要 | 边界 |
+| 实现 | 路线 | 方法摘要 | 集成状态 |
 |---|---|---|---|
-| [NanoJev](https://github.com/TianyuCodings/NanoJev) | TianyuCodings | 在公开 Qwen3 基座上实现动态候选式结构化决策，提供可审计模型与数据路径 | 社区独立实现，不代表 Jev 内部结构 |
-| [jevlike](https://github.com/vinnylarouge/jevlike) | vinnylarouge | 使用 option attention 为每个候选输出概率，复现 Jev 风格接口 | 社区独立实现，不与官方模型宣称等价 |
+| [Bespoke Nimble](https://github.com/bespokelabsai/nimble) | 训练模型 | Qwen3.5-9B LoRA 对 flat typed schema 直接读取 enum/boolean logits | P0 候选；已收录、待统一执行 |
+| [NanoJev](https://github.com/TianyuCodings/NanoJev) | 训练决策头 | Qwen3-0.6B + set-attention heads，覆盖 Choice、Boolean、Score | P0 候选；已收录、待统一执行 |
+| [Laya](https://github.com/NandhaKishorM/laya) | 训练模型与校准 | typed decision + validation 温度校准 | P0 候选；已收录、待统一执行 |
+| [SemIf](https://github.com/TheoLeeCJ/SemIf) | 并行约束解码 | shared-state prefill 后直接比较 option logits | P1 工程候选；不是训练式复现 |
+| [DiffusionGemma routes](implementation-tracker.md#diffusion-routes) | 扩散模型 | 非自回归并行决策实验 | 独立路线；待校准和吞吐验证 |
+
+[选型与集成路线图](implementations.md)解释各路线的适用场景；[社区实现全量快照](implementation-tracker.md)保存 tracker 的 48 项资料，避免把索引、解释文章或未发布预告计作可运行模型。
 
 ## 浏览入口
 
@@ -30,3 +35,5 @@
 - [按年份](catalog/by-year.md)
 - [论文谱系与缺口](lineage.md)
 - [统一评测协议](benchmark.md)
+- [Jev 开放实现选型](implementations.md)
+- [社区实现全量快照](implementation-tracker.md)

@@ -20,5 +20,9 @@
 
 ## 社区独立实现
 
-- [NanoJev](https://github.com/TianyuCodings/NanoJev)：公开基座上的 Jev 风格动态候选实现。
-- [jevlike](https://github.com/vinnylarouge/jevlike)：基于 option attention 的 Jev 风格概率决策实现。
+- [Bespoke Labs — Nimble](https://github.com/bespokelabsai/nimble)：公开 Qwen3.5-9B LoRA、训练数据和配方的 typed-schema logits 模型。
+- [TianyuCodings — NanoJev](https://github.com/TianyuCodings/NanoJev)：Qwen3-0.6B + Choice、Boolean、Score 决策头。
+- [ConvAI Innovations — Laya](https://github.com/NandhaKishorM/laya)：公开 checkpoint、demo、微调与温度校准路径。
+- [TheoLeeCJ — SemIf](https://github.com/TheoLeeCJ/SemIf)：shared-state prefill 与直接 option logits 的工程基线。
+
+这里只列优先集成主干；其他社区作者和项目见[48 项全量快照](../implementation-tracker.md)。社区署名来自公开仓库，不等同于论文第一作者机构。
