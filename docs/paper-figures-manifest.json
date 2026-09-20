@@ -8426,5 +8426,47 @@
     "height": 549,
     "score": 106,
     "error": ""
+  },
+  {
+    "page": "docs/post-training/2507.16806-rlcr/README.md",
+    "paper_url": "https://arxiv.org/abs/2507.16806",
+    "arxiv_id": "2507.16806",
+    "figure": "Figure 11",
+    "original_caption": "Figure 11: (a) Reward curves for RLCR (ours) and RLVR . Both correctness and calibration rewards improve under our method, demonstrating simultaneous gains in correctness and calibration. The Brier reward is shifted upward by 1 for clarity. (b) Completion lengths during training. The completion lengths of our method gradually increase during training as uncertainty reasoning improves.",
+    "source_url": "https://arxiv.org/html/2507.16806v2/training-curves.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/post-training/2507.16806-rlcr/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 563,
+    "score": 35,
+    "error": ""
+  },
+  {
+    "page": "docs/post-training/2601.13284-calibration-aware-rl/README.md",
+    "paper_url": "https://arxiv.org/abs/2601.13284",
+    "arxiv_id": "2601.13284",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1: Reliability diagrams of Qwen3-1.7B model. Confidence distributions indicate that the Base and GRPO fine-tuned models exhibit extreme overconfidence, with most predictions assigned probabilities near 1. In contrast, SFT and our proposal produce a broader spread of confidence values and reliability diagrams that align more closely with the diagonal, indicating improved calibration.",
+    "source_url": "https://arxiv.org/html/2601.13284v1/figures/main_plots.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/post-training/2601.13284-calibration-aware-rl/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 510,
+    "score": 32,
+    "error": ""
+  },
+  {
+    "page": "docs/foundation-models/2508.07662-gliclass/README.md",
+    "paper_url": "https://arxiv.org/abs/2508.07662",
+    "arxiv_id": "2508.07662",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1: GLiClass Uni-Encoder Architecture",
+    "source_url": "https://arxiv.org/html/2508.07662v1/images/gliclass-uni-encoder.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/foundation-models/2508.07662-gliclass/assets/paper-figure-01.png",
+    "width": 1100,
+    "height": 687,
+    "score": 62,
+    "error": ""
   }
 ]

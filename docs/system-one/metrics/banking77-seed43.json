@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "domain": "foundation-model",
+  "manifest_ref": "foundation-models:gliclass",
+  "method": "system-one:rival-hybrid",
+  "dataset": "Banking77",
+  "seed": 43,
+  "metrics": {
+    "accuracy": 0.09,
+    "nll": 4.001897876221521,
+    "brier": 0.975354043108553,
+    "ece": 0.05585795364269889,
+    "coverage": 0.0,
+    "selective_accuracy": 0.0,
+    "latency_ms_mean": 0.42454607877880335,
+    "schema_validity": 1.0,
+    "probability_sum_error_max": 4.440892098500626e-16,
+    "evaluated_examples": 1000.0
+  },
+  "evaluation_protocol": {
+    "id": "foundation.banking77.system_one.v1",
+    "tier": "l2_public_dataset",
+    "test_isolation": true,
+    "formal_comparison": false,
+    "seeds": [
+      43
+    ],
+    "claim_policy": "single-seed constituent; formal comparison is the three-seed aggregate"
+  },
+  "provenance": {
+    "dataset": "PolyAI Banking77",
+    "dataset_license": "CC BY 4.0",
+    "source_artifact": "docs/system-one/metrics/banking77-local-seeds42-44.json",
+    "artifact_path": "docs/system-one/metrics/banking77-seed43.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  },
+  "claim_policy": "public-dataset local comparison; no claim about TypeSafe's unpublished architecture or vendor-reported performance"
+}

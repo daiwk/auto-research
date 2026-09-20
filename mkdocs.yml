@@ -35,6 +35,11 @@ nav:
           - 论文谱系与缺口: foundation-models/lineage.md
           - 统一评测协议: foundation-models/benchmark.md
           - Scaling-law 多预算实验: foundation-models/scaling-law.md
+          - System One / Jev:
+              - 总览与运行: system-one/README.md
+              - 论文与方法谱系: system-one/papers.md
+              - 开源实现对照: system-one/implementations.md
+              - 统一评测协议: system-one/benchmark.md
       - 多模态大模型:
           - 研究总览: multimodal-models/README.md
           - 方法索引: multimodal-models/catalog.md

@@ -53,6 +53,7 @@ from .reproductions.reporting import (
 )
 from .runner import ResearchRunner
 from .runtime import configure_runtime, runtime_summary
+from .system_one import SystemOneBenchmarkConfig, run_system_one_benchmark
 from .scaling_law import (
     DEFAULT_SCALING_POINTS, ScalingLawConfig, ScalingLawRunner,
     parse_scaling_points,
@@ -758,6 +759,24 @@ def build_parser() -> argparse.ArgumentParser:
     protocols.add_argument("--left", type=Path)
     protocols.add_argument("--right", type=Path)
 
+    system_one = commands.add_parser(
+        "system-one-eval",
+        help="evaluate a local Jev-shaped decision model or the optional TypeSafe API",
+    )
+    system_one.add_argument("--backend", choices=["local", "typesafe"], default="local")
+    system_one.add_argument("--dataset-dir", type=Path, default=Path("data/system-one"))
+    system_one.add_argument("--output-dir", type=Path, default=Path("runs/system-one"))
+    system_one.add_argument("--architecture", choices=["bilinear", "rival_attention"], default="rival_attention")
+    system_one.add_argument("--objective", choices=["cross_entropy", "brier", "hybrid"], default="hybrid")
+    system_one.add_argument("--dimensions", type=int, default=256)
+    system_one.add_argument("--steps", type=int, default=800)
+    system_one.add_argument("--learning-rate", type=float, default=0.15)
+    system_one.add_argument("--seeds", default="42,43,44")
+    system_one.add_argument("--maximum-train-examples", type=int, default=4000)
+    system_one.add_argument("--maximum-eval-examples", type=int, default=1000)
+    system_one.add_argument("--confidence-threshold", type=float, default=0.8)
+    system_one.add_argument("--offline", action="store_true")
+
     proposals = commands.add_parser("proposals", help="create auditable paper-to-experiment plans")
     proposals.add_argument("action", choices=["create"])
     proposals.add_argument("--paper")
@@ -800,6 +819,30 @@ def main(argv: list[str] | None = None) -> int:
                     f"{adapter.key:20} {adapter.fidelity.value:16} "
                     f"{adapter.paper.arxiv_id:12} {adapter.paper.title}"
                 )
+            return 0
+        if args.command == "system-one-eval":
+            seeds = tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip())
+            result, run_dir = run_system_one_benchmark(SystemOneBenchmarkConfig(
+                dataset_dir=args.dataset_dir,
+                output_dir=args.output_dir,
+                backend=args.backend,
+                architecture=args.architecture,
+                objective=args.objective,
+                dimensions=args.dimensions,
+                steps=args.steps,
+                learning_rate=args.learning_rate,
+                seeds=seeds,
+                maximum_train_examples=args.maximum_train_examples,
+                maximum_eval_examples=args.maximum_eval_examples,
+                allow_network=not args.offline,
+                confidence_threshold=args.confidence_threshold,
+            ))
+            metrics = result["aggregate_metrics"]
+            print(
+                f"Accuracy: {metrics['accuracy_mean']:.4f}; "
+                f"Brier: {metrics['brier_mean']:.4f}; ECE: {metrics['ece_mean']:.4f}"
+            )
+            print(f"Report: {run_dir / 'report.md'}")
             return 0
         if args.command == "experiments":
             roots = [Path(value.strip()) for value in args.roots.split(",") if value.strip()]
@@ -1165,6 +1208,12 @@ def main(argv: list[str] | None = None) -> int:
                 )
             elif args.model == "agent":
                 print(_format_agent_evolution_summary(champion.validation))
+            elif args.model == "system-one":
+                print(
+                    f"Validation accuracy: {champion.validation['accuracy']:.4f}; "
+                    f"Brier: {champion.validation['brier']:.4f}; "
+                    f"ECE: {champion.validation['ece']:.4f}"
+                )
             else:
                 print(f"Validation NDCG@10: {champion.validation['ndcg_at_10']:.6f}")
             print(

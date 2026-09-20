@@ -72,6 +72,7 @@
 | 生成式检索 | [Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion](2603.06397-r4t/README.md) | University of Illinois Urbana-Champaign / Google Research，2026-03-06 | 未发现官方代码 | `r4t` |
 | 网络架构 | [Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](../reproductions/2601.07372-engram/README.md) | DeepSeek，2026-01-12 | [已开源](https://github.com/deepseek-ai/Engram) | `engram` |
 | 网络架构 | [mHC: Manifold-Constrained Hyper-Connections](../reproductions/2512.24880-mhc/README.md) | DeepSeek-AI，2025-12-31 | 未发现官方代码 | `mhc` |
+| 动态候选分类 | [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](2508.07662-gliclass/README.md) | Knowledgator，2025-08-11 | [已开源](https://github.com/Knowledgator/GLiClass) | `gliclass` |
 | 注意力与长上下文 | [Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free](../reproductions/2505.06708-gated-attention/README.md) | Qwen / Alibaba，2025-05-10 | [已开源](https://github.com/qiuzh20/gated_attention) | `gated-attention` |
 | 多模态基础模型 | [SmolVLM: Redefining small and efficient multimodal models](../reproductions/2504.05299-smolvlm/README.md) | Hugging Face，2025-04-07 | [已开源](https://github.com/huggingface/smollm) | `smolvlm` |
 | 预训练与数据 | [Muon is Scalable for LLM Training](../reproductions/2502.16982-muon/README.md) | Moonshot AI / UCLA，2025-02-24 | [已开源](https://github.com/MoonshotAI/Moonlight) | `muon` |

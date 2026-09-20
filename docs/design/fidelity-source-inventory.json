@@ -11282,6 +11282,24 @@
         "expression": "idea.attempts += 1",
         "fingerprint": "a104e12872f2237f1240b279028b875922ab2e7a8ae01ed8121d18cff1310f96"
       }
+    ],
+    "src/auto_research/system_one/local.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "__init__",
+        "line": 61,
+        "qualified_name": "LocalDecisionModel.__init__",
+        "expression": "self.weight += rng.normal(0.0, 0.01, size=(dimensions, dimensions))",
+        "fingerprint": "0b709519f328968750151ec0d2d4831b2f92535e55286c3929893bfdc5435a10"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "fit",
+        "line": 97,
+        "qualified_name": "LocalDecisionModel.fit",
+        "expression": "self.weight -= learning_rate * np.clip(gradient, -2.0, 2.0)",
+        "fingerprint": "38d82b80ad2cfc1f412ef9a7f845def210d3ddb9daed4bb747fe8dc7bbb7baa0"
+      }
     ]
   }
 }

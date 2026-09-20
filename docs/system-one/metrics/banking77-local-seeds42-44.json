@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "domain": "foundation-model",
+  "subdomain": "system-one",
+  "method": "system-one:rival_attention:hybrid",
+  "dataset": "Banking77",
+  "config": {
+    "backend": "local",
+    "architecture": "rival_attention",
+    "objective": "hybrid",
+    "dimensions": 256,
+    "steps": 800,
+    "learning_rate": 0.15,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "maximum_train_examples": 4000,
+    "maximum_eval_examples": 1000,
+    "allow_network": true,
+    "confidence_threshold": 0.8
+  },
+  "dataset_summary": {
+    "source": "PolyAI Banking77",
+    "license": "CC BY 4.0",
+    "train_examples": 4000,
+    "validation_examples": 1000,
+    "test_examples": 1000,
+    "validation_selected_temperature": true,
+    "test_isolation": true
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "training": {
+        "initial_loss": 2.643844390885497,
+        "final_loss": 2.5637957276289307,
+        "steps": 800.0
+      },
+      "temperature": 0.4,
+      "validation": {
+        "accuracy": 0.189,
+        "nll": 3.9724673847411927,
+        "brier": 0.9747155796111203,
+        "ece": 0.16277281580918584,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "latency_ms_mean": 0.44634599529672414,
+        "schema_validity": 1.0,
+        "probability_sum_error_max": 4.440892098500626e-16,
+        "evaluated_examples": 1000.0
+      },
+      "test": {
+        "accuracy": 0.201,
+        "nll": 3.96568016224287,
+        "brier": 0.9744206950417572,
+        "ece": 0.17480116978130603,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "latency_ms_mean": 0.46278222429100424,
+        "schema_validity": 1.0,
+        "probability_sum_error_max": 4.440892098500626e-16,
+        "evaluated_examples": 1000.0
+      },
+      "duration_seconds": 24.87478608393576
+    },
+    {
+      "seed": 43,
+      "training": {
+        "initial_loss": 2.6552005173511493,
+        "final_loss": 2.6328984872363477,
+        "steps": 800.0
+      },
+      "temperature": 0.4,
+      "validation": {
+        "accuracy": 0.086,
+        "nll": 4.012871236036289,
+        "brier": 0.9758909337956868,
+        "ece": 0.05162312624916035,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "latency_ms_mean": 0.4257418748456985,
+        "schema_validity": 1.0,
+        "probability_sum_error_max": 4.440892098500626e-16,
+        "evaluated_examples": 1000.0
+      },
+      "test": {
+        "accuracy": 0.09,
+        "nll": 4.001897876221521,
+        "brier": 0.975354043108553,
+        "ece": 0.05585795364269889,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "latency_ms_mean": 0.42454607877880335,
+        "schema_validity": 1.0,
+        "probability_sum_error_max": 4.440892098500626e-16,
+        "evaluated_examples": 1000.0
+      },
+      "duration_seconds": 22.733215166023
+    },
+    {
+      "seed": 44,
+      "training": {
+        "initial_loss": 2.6508601472731095,
+        "final_loss": 2.6897996289937924,
+        "steps": 800.0
+      },
+      "temperature": 0.4,
+      "validation": {
+        "accuracy": 0.123,
+        "nll": 3.997205095961136,
+        "brier": 0.9747553606978409,
+        "ece": 0.09159911234924382,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "latency_ms_mean": 0.4132741199573502,
+        "schema_validity": 1.0,
+        "probability_sum_error_max": 4.440892098500626e-16,
+        "evaluated_examples": 1000.0
+      },
+      "test": {
+        "accuracy": 0.115,
+        "nll": 3.993492521512264,
+        "brier": 0.974788434901968,
+        "ece": 0.08377338919561828,
+        "coverage": 0.0,
+        "selective_accuracy": 0.0,
+        "latency_ms_mean": 0.4157441788120195,
+        "schema_validity": 1.0,
+        "probability_sum_error_max": 5.551115123125783e-16,
+        "evaluated_examples": 1000.0
+      },
+      "duration_seconds": 21.327665625023656
+    }
+  ],
+  "aggregate_metrics": {
+    "accuracy_mean": 0.13533333333333333,
+    "accuracy_std": 0.04754179447835581,
+    "brier_mean": 0.9748543910174261,
+    "brier_std": 0.00038388132742867335,
+    "coverage_mean": 0.0,
+    "coverage_std": 0.0,
+    "ece_mean": 0.1048108375398744,
+    "ece_std": 0.050785843440712145,
+    "evaluated_examples_mean": 1000.0,
+    "evaluated_examples_std": 0.0,
+    "latency_ms_mean_mean": 0.434357493960609,
+    "latency_ms_mean_std": 0.020418004008277986,
+    "nll_mean": 3.9870235199922184,
+    "nll_std": 0.01547722384580215,
+    "probability_sum_error_max_mean": 4.810966440042345e-16,
+    "probability_sum_error_max_std": 5.233641528945917e-17,
+    "schema_validity_mean": 1.0,
+    "schema_validity_std": 0.0,
+    "selective_accuracy_mean": 0.0,
+    "selective_accuracy_std": 0.0
+  },
+  "claim_policy": "public-dataset local comparison; no claim about TypeSafe's unpublished architecture or vendor-reported performance",
+  "artifact_kind": "public_benchmark",
+  "protocol_id": "foundation.banking77.system_one.v1",
+  "manifest_ref": "foundation-models:gliclass",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "public-dataset local comparison; no claim about TypeSafe's unpublished architecture or vendor-reported performance",
+    "id": "foundation.banking77.system_one.v1",
+    "test_isolation": true
+  },
+  "provenance": {
+    "artifact_path": "docs/system-one/metrics/banking77-local-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact",
+    "dataset": "PolyAI Banking77",
+    "dataset_license": "CC BY 4.0"
+  }
+}

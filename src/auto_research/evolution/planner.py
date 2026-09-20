@@ -12,6 +12,14 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
     def compatible(values: list[str]) -> list[str]:
         return compatible_architectures(model, list(dict.fromkeys(values)))
 
+    if model == "system-one":
+        return compatible([
+            "system-one:bilinear-ce",
+            "system-one:rival-ce",
+            "system-one:rival-brier",
+            "system-one:rival-hybrid",
+        ])
+
     if model == "genrec":
         defaults = [
             "context:full",
