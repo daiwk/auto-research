@@ -48,7 +48,7 @@ TypeSafe 尚未公开 Jev 的技术论文、权重、训练数据和内部架构
 
 ## P0：开放 checkpoint 对照
 
-优先在相同数据切分和预算下接入 Bespoke Nimble、NanoJev、Laya，比较准确率、校准、延迟和显存，而不是把不同仓库的自报数字横向拼接。三者目前是“已收录、待接入”，完成适配和真实执行后才能进入实验看板。
+优先在相同数据切分和预算下接入 Bespoke Nimble、NanoJev、Laya，比较准确率、校准、延迟和显存，而不是把不同仓库的自报数字横向拼接。NanoJev 已完成固定 checkpoint 的 A100 小样本 OOD 互操作烟测；下一步扩大公共协议并接入 Bespoke Nimble、Laya。小样本烟测不会进入稳定能力排名。
 
 ## P1：工程与评测对照
 

@@ -25,10 +25,10 @@
 | 项目 | 公开资产 | 定义性机制 | 主要限制 | 建议 |
 |---|---|---|---|---|
 | [Bespoke Nimble](https://github.com/bespokelabsai/nimble) | 9B checkpoint、训练数据与配方；支持 MLX/CUDA | 对 flat typed schema 直接读取 enum/boolean logits，不生成 JSON | 作者明确不保证概率已校准；Score/嵌套 schema 不完整 | **P0 checkpoint 对照**：最适合先验证真实模型、延迟和 Choice/Noul |
-| [NanoJev](https://github.com/TianyuCodings/NanoJev) | Qwen3-0.6B 权重、数据、训练与服务代码 | set attention 决策头；Choice、Boolean、Score；proper loss | 小模型与社区数据，不能代表官方产品质量 | **P0 多原语对照**：最适合扩展当前 Choice-only 公共协议 |
+| [NanoJev](https://github.com/TianyuCodings/NanoJev) | Qwen3-0.6B 权重、数据、训练与服务代码 | set attention 决策头；Choice、Boolean、Score；proper loss | 小模型与社区数据，不能代表官方产品质量 | **已接入真实 checkpoint**：typed provider、固定 revision、A100 Banking77 OOD 烟测 |
 | [Laya](https://github.com/NandhaKishorM/laya) | checkpoint、demo 与微调 notebook | 类型化决策和温度校准 | 零样本接近随机；微调模型有领域依赖；高候选数受 token budget 限制 | **P0 校准对照**：验证 ECE/Brier 与 validation-only 温度拟合 |
 
-只有把公开 revision 固定、接入相同数据切分、实际执行并产出指标，才算“已接入”。当前三项均为**已收录、待接入**，不能在看板上作为本仓库实验结果展示。
+只有把公开 revision 固定、接入相同数据切分、实际执行并产出指标，才算“已接入”。NanoJev 已完成首个真实 checkpoint 互操作烟测；Bespoke Nimble 与 Laya 仍为**已收录、待接入**，不能在看板上作为本仓库实验结果展示。
 
 ## P1：工程与服务基线
 

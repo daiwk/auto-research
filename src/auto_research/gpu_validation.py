@@ -16,6 +16,9 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "nanojev-checkpoint": (
+        "docs/gpu-validations/nanojev-checkpoint-a100-20260921.json"
+    ),
     "oda": "docs/gpu-validations/oda-a100-20260919.json",
     "dqwen35": "docs/gpu-validations/dqwen35-a100-20260919.json",
     "aspire": "docs/gpu-validations/aspire-a100-20260919.json",
