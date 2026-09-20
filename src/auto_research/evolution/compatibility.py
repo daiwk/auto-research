@@ -32,7 +32,7 @@ MODEL_DOMAIN = {
     "genrec": "recommendation", "micro-llm": "foundation-model",
     "micro-vlm": "multimodal", "vlm-checkpoint": "multimodal",
     "reasoning-checkpoint": "foundation-model", "post-training": "post-training",
-    "agent": "agent",
+    "system-one": "system-one", "agent": "agent",
 }
 
 
@@ -61,6 +61,8 @@ def _models(operator: str, domain: str) -> tuple[str, ...]:
         return ("micro-vlm", "vlm-checkpoint")
     if domain == "foundation-model":
         return ("micro-llm", "reasoning-checkpoint")
+    if domain == "system-one":
+        return ("system-one",)
     return (domain,)
 
 
@@ -93,6 +95,17 @@ def operator_registry() -> dict[str, OperatorSpec]:
             compute_cost=2 if any(term in operator for term in ("long", "moe", "rollout", "search")) else 1,
             memory_cost=2 if any(term in operator for term in ("memory", "long", "kv", "hstu")) else 1,
             latency_cost=2 if any(term in operator for term in ("agent", "search", "rollout", "planner")) else 1,
+        )
+    system_one_papers = {
+        "system-one:bilinear-ce": ("2508.07662",),
+        "system-one:rival-ce": ("2508.07662",),
+        "system-one:rival-brier": ("2507.16806",),
+        "system-one:rival-hybrid": ("2507.16806", "2601.13284"),
+    }
+    for operator, paper_ids in system_one_papers.items():
+        registry[operator] = OperatorSpec(
+            key=operator, domain="system-one", slot="architecture",
+            paper_ids=paper_ids, compatible_models=("system-one",),
         )
     return registry
 

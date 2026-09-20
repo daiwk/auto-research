@@ -11,7 +11,9 @@ def test_registry_covers_all_research_domains():
     assert len(registry) >= 150
     assert {spec.domain for spec in registry.values()} >= {
         "recommendation", "foundation-model", "multimodal", "post-training", "agent",
+        "system-one",
     }
+    assert registry["system-one:rival-hybrid"].paper_ids == ("2507.16806", "2601.13284")
 
 
 def test_compatibility_rejects_model_slot_and_budget_conflicts():

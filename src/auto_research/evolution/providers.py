@@ -139,6 +139,10 @@ def _load_builtins() -> None:
             config.reasoning_checkpoint_path,
         )
 
+    def system_one(config: EvolutionConfig, project_dir: Path):
+        from .system_one import SystemOneEvolutionEvaluator
+        return SystemOneEvolutionEvaluator(config, project_dir)
+
     recommendation_data = ("movielens-100k", "movielens-1m")
     for name in ("rankmixer", "hyformer"):
         register_provider(EvolutionProvider(
@@ -187,6 +191,17 @@ def _load_builtins() -> None:
         lambda config: Genome(
             architecture="reasoning-checkpoint", reasoning_samples=1,
             reasoning_max_new_tokens=96, reasoning_stop_consensus=1.0,
+        ),
+    ))
+    register_provider(EvolutionProvider(
+        "system-one", ("banking77",), "llm",
+        "typed decisions dynamic labels calibration System One Jev",
+        system_one,
+        lambda config: Genome(
+            architecture="system-one:bilinear-ce",
+            dimensions=128,
+            learning_rate=0.15,
+            batch_size=1,
         ),
     ))
     for entry_point in importlib.metadata.entry_points(

@@ -148,6 +148,10 @@
 
 - 2026-04-14 · 一作：Yecheng Wu · [Lightning OPD](../2604.13010-lightning-opd/README.md)（`lightning-opd`）：传统在线蒸馏在每一步训练都调用教师，吞吐和成本受教师推理限制。Lightning OPD 先让学生在 SFT 数据上产生 on-policy rollout，再由同一个教师一次性计算 token 分布并缓存。
 
+## Massachusetts Institute of Technology
+
+- 2025-07-22 · 一作：Mehul Damani · [Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty](../2507.16806-rlcr/README.md)（`rlcr`）：普通 binary reward 只奖励答对，容易鼓励模型无差别地自信。RLCR 让模型同时输出预测与置信度，并把 bounded proper scoring rule 加入奖励，使诚实概率具有最优激励。
+
 ## Meituan
 
 - 2026-02-05 · 一作：Fanfan Liu · [LUSPO](../2602.05261-luspo/README.md)（`luspo`）：论文从目标函数分解解释不同 RLVR 算法为何产生不同的响应长度轨迹，并指出 GSPO 的 sequence ratio 仍含长度偏置。LUSPO 对 sequence log-probability 作长度无偏归一化，避免训练中的长度坍塌。
@@ -334,6 +338,10 @@
 ## University of Science and Technology of China / Ant Group
 
 - 2026-09-13 · 一作：Zhiyu Gui · [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](../2609.14636-stride-opd/README.md)（`stride-opd`）：teacher 累积置信度越界时早停，并从最弱正确 turn 的缓存前缀重新开始。
+
+## University of Southern California
+
+- 2026-01-19 · 一作：Duygu Nur Yaldiz · [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](../2601.13284-calibration-aware-rl/README.md)（`calibration-aware-rl`）：论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。
 
 ## University of Virginia
 

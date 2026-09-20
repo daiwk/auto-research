@@ -23,6 +23,7 @@
 - [论文谱系与边界](lineage.md)：查看已覆盖的技术主干、已收口能力与复现边界；
 - [统一评测协议](benchmark.md)：明确质量、计算和复现保真度的共同口径。
 - [Scaling-law 多预算实验](scaling-law.md)：运行可恢复的模型规模 × 数据量预算网格，查看逐点误差和拟合边界。
+- [System One / Jev](../system-one/README.md)：结构化决策契约、开源相邻实现、Banking77 校准评测与可执行 Evolve operator。
 
 ## 最新实现
 

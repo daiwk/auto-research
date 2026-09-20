@@ -93,6 +93,7 @@
 | Context distillation | [OPCD](2602.12275-opcd/README.md) | Microsoft Research，2026-02-12 | [已开源](https://github.com/microsoft/LMOps/tree/main/opcd) | `opcd` |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | Meituan，2026-02-05 | 未发现官方代码 | `luspo` |
 | On-policy self-distillation | [OPSD](2601.18734-opsd/README.md) | University of California, Los Angeles，2026-01-26 | [已开源](https://github.com/siyan-zhao/OPSD) | `opsd` |
+| 校准强化学习 | [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](2601.13284-calibration-aware-rl/README.md) | University of Southern California，2026-01-19 | 未发现官方代码 | `calibration-aware-rl` |
 | 纯在线训推校正 | [Online IcePop](web-2025-online-icepop/README.md) | Ant Group，2025-12-16 | 未发现官方代码 | `online-icepop` |
 | 稳定 MoE RL | [Stabilizing RL with LLMs](2512.01374-minirl/README.md) | Alibaba Qwen Team，2025-12-01 | 未发现官方代码 | `minirl` |
 | MoE 训推失配 | [IcePop](2510.18855-icepop/README.md) | Ant Group，2025-10-21 | 未发现官方代码 | `icepop` |
@@ -100,6 +101,7 @@
 | 梯度保留 clip | [GPPO](2508.07629-gppo/README.md) | Alibaba Group，2025-08-11 | 未发现官方代码 | `gppo` |
 | 训推失配校正 | [TIS](web-2025-tis/README.md) | University of California, San Diego，2025-08-05 | 未发现官方代码 | `tis` |
 | 稳定序列 RL | [GSPO](2507.18071-gspo/README.md) | Alibaba Qwen Team，2025-07-24 | [已开源](https://alibaba.github.io/ROLL/docs/User%20Guides/Algorithms/GSPO/) | `gspo` |
+| 校准奖励 | [Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty](2507.16806-rlcr/README.md) | Massachusetts Institute of Technology，2025-07-22 | [已开源](https://github.com/damanimehul/RLCR) | `rlcr` |
 | 自博弈课程 | [SPIRAL](2506.24119-spiral/README.md) | Apple，2025-06-30 | [已开源](https://github.com/spiral-rl/spiral) | `spiral` |
 | 长上下文 RL | [CISPO / MiniMax-M1](2506.13585-cispo/README.md) | MiniMax，2025-06-16 | [已开源](https://github.com/MiniMax-AI/MiniMax-M1) | `cispo` |
 | 自置信奖励 | [INTUITOR](2505.19590-intuitor/README.md) | University of California, Berkeley，2025-05-26 | [已开源](https://github.com/sunblaze-ucb/Intuitor) | `intuitor` |

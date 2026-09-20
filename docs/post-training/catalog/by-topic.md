@@ -77,6 +77,10 @@
 
 - [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](../2608.12158-c2-dpo/README.md)（`c2-dpo`）：普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。
 
+### 校准强化学习
+
+- [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](../2601.13284-calibration-aware-rl/README.md)（`calibration-aware-rl`）：论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。
+
 ### OPD
 
 - [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](../2608.19408-r2-opd/README.md)（`r2-opd`）：分别按教师奖励和独立进展奖励排序 reasoning spans，冲突时屏蔽蒸馏信号。
@@ -132,6 +136,10 @@
 ### 前瞻偏好树
 
 - [Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations](../2608.12062-pto/README.md)（`pto`）：逐轮偏好只判断当前回答，难以优化目标导向对话的长期结果。PTO 让 agent 和虚拟用户展开候选对话树，oracle 评价当前回答及未来延续，以偏好对迭代执行 DPO；更深 look-ahead 带来更稳定的长期策略。
+
+### 校准奖励
+
+- [Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty](../2507.16806-rlcr/README.md)（`rlcr`）：普通 binary reward 只奖励答对，容易鼓励模型无差别地自信。RLCR 让模型同时输出预测与置信度，并把 bounded proper scoring rule 加入奖励，使诚实概率具有最优激励。
 
 ### 跨领域 RLVR 能力融合
 

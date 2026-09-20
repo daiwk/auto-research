@@ -20,6 +20,7 @@ from auto_research.latest_20260914_catalog import LATEST_METHOD_PAPERS as SEP14_
 from auto_research.latest_20260916_catalog import LATEST_METHOD_PAPERS as SEP16_METHOD_PAPERS
 from auto_research.latest_20260916_followup_catalog import LATEST_METHOD_PAPERS as SEP16_FOLLOWUP_METHOD_PAPERS
 from auto_research.latest_20260919_catalog import LATEST_METHOD_PAPERS as SEP19_METHOD_PAPERS
+from auto_research.latest_20260920_system_one_catalog import LATEST_METHOD_PAPERS as SYSTEM_ONE_PAPERS
 
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis"}
@@ -29,7 +30,7 @@ FIRST_AUTHOR_OVERRIDES = {
     "wemm-embedding": "Junjie Zhou",
 }
 
-LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + (
+LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + (
     {
         "domain": "agent-research", "key": "maple",
         "title": "MAPLE: Memory-Augmented Planning with Language and Evolution",

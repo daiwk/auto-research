@@ -31,6 +31,7 @@ evaluator 接入[自动研究与进化](auto-research.md)。
   [按主题](foundation-models/catalog/by-topic.md) ·
   [按年份](foundation-models/catalog/by-year.md)
 - [基础模型统一评测协议](foundation-models/benchmark.md)
+- [System One / Jev 结构化决策研究](system-one/README.md)
 
 ### LLM 后训练
 

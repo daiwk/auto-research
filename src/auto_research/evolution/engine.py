@@ -241,6 +241,8 @@ def _default_protocol(config):
         )
     if config.model in {"micro-vlm", "vlm-checkpoint"} and "scienceqa" in config.dataset:
         return "multimodal.scienceqa.v1"
+    if config.model == "system-one":
+        return "foundation.banking77.system_one.v1"
     if config.model in {"micro-llm", "reasoning-checkpoint"}:
         return "foundation.wikitext2.v1"
     return f"internal.{config.model}.{config.dataset}.v1"
