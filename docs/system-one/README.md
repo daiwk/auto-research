@@ -8,7 +8,7 @@ Jev 是 TypeSafe AI 公布的第一个 **System One** 模型：输入一份 `sta
 |---|---|---|
 | 官方契约 | Choice、Score、Noul 数据结构与可选 TypeSafe HTTP provider | 只实现公开 API；TypeSafe 未公布 Jev 的权重、训练集或模型结构 |
 | 可复现实验 | 动态候选 scorer、proper-scoring objective、温度校准、Banking77 三 seed 协议 | 独立、可审计的本地基线，不宣称复现 Jev 内部架构 |
-| 开放生态 | GLiClass、NanoJev、jevlike、RLCR、Calibration-Aware RL 的定位与链接 | 论文方法和社区复现分别标注来源 |
+| 开放生态 | 48 项社区实现、评测和索引的分层快照 | 训练 checkpoint、推理解码、扩散路线和解释材料分别标注，收录不等于已集成 |
 
 ## 一键运行
 
@@ -63,6 +63,7 @@ auto-research evolve \
 - [方法索引](catalog.md)
 - [按机构/公司/学校](catalog/by-organization.md) · [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)
 - [Jev 与开放实现](implementations.md)
+- [社区实现全量快照](implementation-tracker.md)：48 项资料按技术路线归类，含 P0/P1 集成候选
 - [论文谱系与缺口](lineage.md)
 - [评测协议](benchmark.md)
 - [TypeSafe 官方介绍](https://docs.typesafe.ai/introduction)

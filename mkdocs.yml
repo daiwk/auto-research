@@ -41,7 +41,9 @@ nav:
           - 按机构/公司/学校: system-one/catalog/by-organization.md
           - 按主题: system-one/catalog/by-topic.md
           - 按年份: system-one/catalog/by-year.md
-          - Jev 与开放实现: system-one/implementations.md
+          - Jev 与开放实现:
+              - 选型与集成路线图: system-one/implementations.md
+              - 社区实现全量快照: system-one/implementation-tracker.md
           - 论文谱系与缺口: system-one/lineage.md
           - 统一评测协议: system-one/benchmark.md
       - 多模态大模型:
