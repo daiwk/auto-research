@@ -14,6 +14,14 @@ from .contracts import (
     SystemOneResponse,
 )
 from .local import LocalDecisionModel, LocalSystemOneProvider
+from .nanojev import (
+    NANOJEV_BASE_MODEL,
+    NANOJEV_BASE_REVISION,
+    NANOJEV_REPO_ID,
+    NANOJEV_REVISION,
+    NANOJEV_WEIGHT_SHA256,
+    NanoJevProvider,
+)
 from .providers import TypeSafeHTTPProvider
 
 __all__ = [
@@ -22,6 +30,12 @@ __all__ = [
     "LocalDecisionModel",
     "LocalSystemOneProvider",
     "NoulQuestion",
+    "NANOJEV_BASE_MODEL",
+    "NANOJEV_BASE_REVISION",
+    "NANOJEV_REPO_ID",
+    "NANOJEV_REVISION",
+    "NANOJEV_WEIGHT_SHA256",
+    "NanoJevProvider",
     "ScoreQuestion",
     "SystemOneBenchmarkConfig",
     "SystemOneRequest",

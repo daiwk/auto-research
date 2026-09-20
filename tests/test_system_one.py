@@ -13,6 +13,8 @@ from auto_research.system_one import (
     LocalDecisionModel,
     LocalSystemOneProvider,
     NoulQuestion,
+    NANOJEV_REVISION,
+    NanoJevProvider,
     ScoreQuestion,
     SystemOneBenchmarkConfig,
     SystemOneRequest,
@@ -20,6 +22,43 @@ from auto_research.system_one import (
     run_system_one_benchmark,
 )
 from auto_research.system_one.local import DecisionTrainingExample
+
+
+class FakeNanoJevPredictor:
+    def __init__(self):
+        self.payload = None
+        self.options = None
+
+    def predict(self, payload, *, batch_questions=0, temperature=1.0):
+        self.payload = payload
+        self.options = (batch_questions, temperature)
+        return {
+            "execution": {
+                "candidate_paths": 7,
+                "forward_passes": 1,
+                "autoregressive_decode_steps": 0,
+            },
+            "states": [{
+                "id": "request",
+                "answers": {
+                    "route": {
+                        "type": "choice",
+                        "probabilities": {"card": 0.2, "transfer": 0.8},
+                        "choice": "transfer",
+                    },
+                    "urgency": {
+                        "type": "score",
+                        "probabilities": {"0": 0.25, "1": 0.75},
+                        "score": 0.75,
+                    },
+                    "escalate": {
+                        "type": "boolean",
+                        "probabilities": {"false": 0.4, "true": 0.6},
+                        "p_true": 0.6,
+                    },
+                },
+            }],
+        }
 
 
 def test_contracts_cover_choice_score_and_noul_without_generated_answers():
@@ -38,6 +77,64 @@ def test_contracts_cover_choice_score_and_noul_without_generated_answers():
     assert isinstance(response.answers["escalate"].value, bool)
     for answer in response.answers.values():
         assert sum(answer.probabilities.values()) == pytest.approx(1.0)
+
+
+def test_nanojev_provider_maps_all_typed_questions_without_gold_or_decoding():
+    predictor = FakeNanoJevPredictor()
+    provider = NanoJevProvider(
+        predictor, temperature=0.9, batch_questions=3
+    )
+    response = provider.decide(SystemOneRequest(
+        state={"message": "The transfer has not arrived"},
+        questions={
+            "route": ChoiceQuestion(
+                "Route this ticket", {"card": "card issue", "transfer": "bank transfer"}
+            ),
+            "urgency": ScoreQuestion("Rate urgency", {"1": "low", "2": "high"}),
+            "escalate": NoulQuestion("The ticket requires escalation"),
+        },
+    ))
+    questions = predictor.payload["states"][0]["questions"]
+    assert questions["escalate"]["type"] == "boolean"
+    assert questions["urgency"]["criteria"] == ["low", "high"]
+    assert "gold" not in json.dumps(predictor.payload).lower()
+    assert response.answers["route"].value == "transfer"
+    assert response.answers["urgency"].value == pytest.approx(1.75)
+    assert response.answers["escalate"].value is True
+    assert response.usage == {
+        "candidate_paths": 7,
+        "forward_passes": 1,
+        "autoregressive_decode_steps": 0,
+    }
+    assert response.model.endswith(f"@{NANOJEV_REVISION}")
+    assert predictor.options == (3, 0.9)
+
+
+def test_nanojev_provider_rejects_probability_labels_that_do_not_match_request():
+    class BrokenPredictor:
+        def predict(self, payload, **kwargs):
+            return {
+                "states": [{
+                    "id": "request",
+                    "answers": {"route": {
+                        "type": "choice",
+                        "probabilities": {"unexpected": 1.0},
+                    }},
+                }],
+            }
+
+    provider = NanoJevProvider(BrokenPredictor())
+    with pytest.raises(ValueError, match="probability labels"):
+        provider.decide(SystemOneRequest(
+            "late transfer",
+            {"route": ChoiceQuestion("route", {"card": "card", "transfer": "transfer"})},
+        ))
+
+
+def test_system_one_config_keeps_nanojev_checkpoint_revision_immutable():
+    config = SystemOneBenchmarkConfig(backend="nanojev")
+    config.validate()
+    assert config.checkpoint_revision == NANOJEV_REVISION
 
 
 def test_online_provider_keeps_secret_in_header_and_validates_question_ids():

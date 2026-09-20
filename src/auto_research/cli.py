@@ -761,9 +761,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     system_one = commands.add_parser(
         "system-one-eval",
-        help="evaluate a local Jev-shaped decision model or the optional TypeSafe API",
+        help="evaluate local, NanoJev checkpoint, or optional TypeSafe decision backends",
     )
-    system_one.add_argument("--backend", choices=["local", "typesafe"], default="local")
+    system_one.add_argument(
+        "--backend", choices=["local", "typesafe", "nanojev"], default="local"
+    )
     system_one.add_argument("--dataset-dir", type=Path, default=Path("data/system-one"))
     system_one.add_argument("--output-dir", type=Path, default=Path("runs/system-one"))
     system_one.add_argument("--architecture", choices=["bilinear", "rival_attention"], default="rival_attention")
@@ -775,7 +777,14 @@ def build_parser() -> argparse.ArgumentParser:
     system_one.add_argument("--maximum-train-examples", type=int, default=4000)
     system_one.add_argument("--maximum-eval-examples", type=int, default=1000)
     system_one.add_argument("--confidence-threshold", type=float, default=0.8)
+    system_one.add_argument("--checkpoint-dir", type=Path)
+    system_one.add_argument("--checkpoint-revision", default=None)
+    system_one.add_argument("--precision", choices=["fp32", "bf16"], default="bf16")
+    system_one.add_argument("--temperature", type=float, default=1.0)
+    system_one.add_argument("--batch-questions", type=int, default=0)
+    system_one.add_argument("--disable-native-triton", action="store_true")
     system_one.add_argument("--offline", action="store_true")
+    _add_runtime_arguments(system_one)
 
     proposals = commands.add_parser("proposals", help="create auditable paper-to-experiment plans")
     proposals.add_argument("action", choices=["create"])
@@ -836,6 +845,17 @@ def main(argv: list[str] | None = None) -> int:
                 maximum_eval_examples=args.maximum_eval_examples,
                 allow_network=not args.offline,
                 confidence_threshold=args.confidence_threshold,
+                checkpoint_dir=args.checkpoint_dir,
+                checkpoint_revision=(
+                    args.checkpoint_revision
+                    if args.checkpoint_revision is not None
+                    else SystemOneBenchmarkConfig.checkpoint_revision
+                ),
+                device=args.device or "cuda:0",
+                precision=args.precision,
+                temperature=args.temperature,
+                batch_questions=args.batch_questions,
+                disable_native_triton=args.disable_native_triton,
             ))
             metrics = result["aggregate_metrics"]
             print(
