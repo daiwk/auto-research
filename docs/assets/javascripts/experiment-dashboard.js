@@ -11,6 +11,7 @@
   const labels = {
     recommendation: "搜广推与 LLM 应用",
     "foundation-model": "基础模型",
+    "system-one": "结构化决策 / System One",
     multimodal: "多模态大模型",
     "post-training": "LLM 后训练",
     agent: "Agent",

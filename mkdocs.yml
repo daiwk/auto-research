@@ -1,5 +1,5 @@
 site_name: Auto Research
-site_description: 面向搜广推、基础模型、LLM 后训练、Agent 和可扩展主题的论文实现与多轮自动进化平台
+site_description: 面向搜广推、基础模型、结构化决策、多模态、LLM 后训练与 Agent 的论文实现和多轮自动进化平台
 site_url: https://daiwk.github.io/auto-research/
 repo_url: https://github.com/daiwk/auto-research
 repo_name: daiwk/auto-research
@@ -35,11 +35,15 @@ nav:
           - 论文谱系与缺口: foundation-models/lineage.md
           - 统一评测协议: foundation-models/benchmark.md
           - Scaling-law 多预算实验: foundation-models/scaling-law.md
-          - System One / Jev:
-              - 总览与运行: system-one/README.md
-              - 论文与方法谱系: system-one/papers.md
-              - 开源实现对照: system-one/implementations.md
-              - 统一评测协议: system-one/benchmark.md
+      - 结构化决策 / System One:
+          - 研究总览: system-one/README.md
+          - 方法索引: system-one/catalog.md
+          - 按机构/公司/学校: system-one/catalog/by-organization.md
+          - 按主题: system-one/catalog/by-topic.md
+          - 按年份: system-one/catalog/by-year.md
+          - Jev 与开放实现: system-one/implementations.md
+          - 论文谱系与缺口: system-one/lineage.md
+          - 统一评测协议: system-one/benchmark.md
       - 多模态大模型:
           - 研究总览: multimodal-models/README.md
           - 方法索引: multimodal-models/catalog.md

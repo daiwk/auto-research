@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "domain": "foundation-model",
+  "domain": "system-one",
   "manifest_ref": "foundation-models:gliclass",
   "method": "system-one:rival-hybrid",
   "dataset": "Banking77",

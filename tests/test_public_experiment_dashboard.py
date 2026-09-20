@@ -30,6 +30,7 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
     assert all(item["method"] != "metrics" for item in experiments)
     assert all(item["metrics"] for item in experiments)
     assert any(item["domain"] == "foundation-model" for item in experiments)
+    assert any(item["domain"] == "system-one" for item in experiments)
     assert any(item["title"] for item in experiments)
 
 

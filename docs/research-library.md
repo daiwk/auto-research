@@ -1,14 +1,14 @@
 # 论文实现与评测库
 
-想先判断四个领域的经典主干是否完整、还有哪些候选未达到实现门槛，请看[全域论文谱系与缺口](research-lineage.md)。历史全量扫描已经完成，后续采用增量发现流程；[历史全文审计终态](paper-audits/2026-historical-fulltext-review.md)、[历史 P0 固定实现路线图](paper-audits/2026-historical-p0-implementation-roadmap.md)、固定日期的扫描清单和已完成 TODO 仍保留为可追溯记录，但不再占用主导航。
+想先判断各领域的经典主干是否完整、还有哪些候选未达到实现门槛，请看[全域论文谱系与缺口](research-lineage.md)。历史全量扫描已经完成，后续采用增量发现流程；[历史全文审计终态](paper-audits/2026-historical-fulltext-review.md)、[历史 P0 固定实现路线图](paper-audits/2026-historical-p0-implementation-roadmap.md)、固定日期的扫描清单和已完成 TODO 仍保留为可追溯记录，但不再占用主导航。
 
 已提交论文的公开结果可直接进入[公开实验看板](public-experiment-dashboard.md)，按领域、方法、数据集和指标检索；本地临时实验不会出现在公开页面。
 
 论文实现是研究工作流，不是单一业务领域。仓库用统一的论文信息、实现、数据和指标
-合同承载搜广推、基础模型、LLM 后训练与 Agent；实现成熟后，还可以作为 mutation、训练目标或
+合同承载搜广推、基础模型、结构化决策、多模态、LLM 后训练与 Agent；实现成熟后，还可以作为 mutation、训练目标或
 evaluator 接入[自动研究与进化](auto-research.md)。
 
-## 四个内置研究域
+## 六个内置研究域
 
 ### 搜广推与 LLM 应用
 
@@ -31,7 +31,28 @@ evaluator 接入[自动研究与进化](auto-research.md)。
   [按主题](foundation-models/catalog/by-topic.md) ·
   [按年份](foundation-models/catalog/by-year.md)
 - [基础模型统一评测协议](foundation-models/benchmark.md)
-- [System One / Jev 结构化决策研究](system-one/README.md)
+
+### 结构化决策 / System One
+
+覆盖 typed questions、动态候选分类、概率校准、置信度、选择性预测与结构化评分。
+Jev 是该领域的重要产品入口，但不是领域本身；官方托管模型、论文方法和社区独立实现会分别标注。
+
+- [结构化决策研究总览](system-one/README.md)
+- [方法索引](system-one/catalog.md) ·
+  [按机构/公司/学校](system-one/catalog/by-organization.md) ·
+  [按主题](system-one/catalog/by-topic.md) ·
+  [按年份](system-one/catalog/by-year.md)
+- [Jev 与开放实现](system-one/implementations.md)
+- [统一评测协议](system-one/benchmark.md)
+
+### 多模态大模型
+
+覆盖视觉、视频、音频与语言的统一表征、跨模态检索和多模态推理，使用公开 checkpoint、
+可审计数据切片和多模态专用指标。
+
+- [多模态研究总览](multimodal-models/README.md)
+- [多模态方法索引](multimodal-models/catalog.md)
+- [多模态统一评测协议](multimodal-models/benchmark.md)
 
 ### LLM 后训练
 
@@ -73,7 +94,8 @@ evaluator 接入[自动研究与进化](auto-research.md)。
 docs/<研究域>/<论文目录>/metrics/<数据集>-seed<seed>.json
 ```
 
-- 搜广推与基础模型位于 `docs/reproductions/<论文目录>/metrics/`；
+- 搜广推位于 `docs/reproductions/<论文目录>/metrics/`，基础模型位于对应详情页或公共实验目录；
+- 结构化决策位于 `docs/system-one/metrics/`；
 - LLM 后训练位于 `docs/post-training/<论文目录>/metrics/`；
 - Agent 位于 `docs/agent-research/<论文目录>/metrics/`；
 - 文件必须记录 seed、评测层级、claim policy、manifest 引用和数据来源信息；

@@ -1,5 +1,7 @@
 # 开源实现对照
 
+## 官方托管模型 {#official-jev}
+
 | 实现 | 类型 | 特点 | 集成方式 |
 |---|---|---|---|
 | [TypeSafe Jev](https://docs.typesafe.ai/introduction) | 官方托管模型 | Choice / Score / Noul；完整概率与 confidence | 可选 HTTPS provider；不缓存密钥或响应内容 |
