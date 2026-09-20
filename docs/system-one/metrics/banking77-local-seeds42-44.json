@@ -1,7 +1,6 @@
 {
   "schema_version": 2,
-  "domain": "foundation-model",
-  "subdomain": "system-one",
+  "domain": "system-one",
   "method": "system-one:rival_attention:hybrid",
   "dataset": "Banking77",
   "config": {

@@ -101,8 +101,7 @@ def run_system_one_benchmark(
             break  # identical online model; never multiply billable calls by seed
     result = {
         "schema_version": 2,
-        "domain": "foundation-model",
-        "subdomain": "system-one",
+        "domain": "system-one",
         "method": f"system-one:{config.architecture}:{config.objective}",
         "dataset": "Banking77",
         "config": {

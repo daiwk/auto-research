@@ -50,6 +50,8 @@ def _domain_for(path: Path) -> str:
         return "multimodal"
     if "foundation-models" in parts:
         return "foundation-model"
+    if "system-one" in parts:
+        return "system-one"
     if "reproductions" in parts:
         return "recommendation"
     if "evolution" in parts:
@@ -80,7 +82,7 @@ def _method_for(payload: dict[str, Any], path: Path) -> str:
         container = path.parent.parent.name
         if container in {
             "docs", "experiments", "multimodal-models", "foundation-models",
-            "post-training", "agent-research", "reproductions",
+            "post-training", "agent-research", "system-one", "reproductions",
         }:
             return path.stem
         return container

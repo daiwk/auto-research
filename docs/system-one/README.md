@@ -1,6 +1,8 @@
-# System One / Jev：结构化决策模型
+# 结构化决策 / System One
 
 Jev 是 TypeSafe AI 公布的第一个 **System One** 模型：输入一份 `state` 和若干 typed questions，直接返回可供程序消费的结构化决策，不生成自然语言答案。本仓库把这条路线拆成三层，避免把社区猜测写成官方事实。
+
+这是与基础模型、后训练和 Agent 并列的独立研究域。它研究的不是如何生成自然语言，而是如何在动态候选、评分量表或布尔命题上给出类型安全、概率可校准、可直接执行的决策。Jev 是核心产品入口；GLiClass、校准学习与社区实现构成可公开验证的方法谱系。
 
 | 层次 | 本仓库提供什么 | 证据边界 |
 |---|---|---|
@@ -58,8 +60,10 @@ auto-research evolve \
 
 ## 延伸阅读
 
-- [论文与方法谱系](papers.md)
-- [开源实现对照](implementations.md)
+- [方法索引](catalog.md)
+- [按机构/公司/学校](catalog/by-organization.md) · [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)
+- [Jev 与开放实现](implementations.md)
+- [论文谱系与缺口](lineage.md)
 - [评测协议](benchmark.md)
 - [TypeSafe 官方介绍](https://docs.typesafe.ai/introduction)
 - [TypeSafe Choice 契约](https://docs.typesafe.ai/primitives/choice)
