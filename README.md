@@ -7,6 +7,16 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 可读版文档站：[daiwk.github.io/auto-research](https://daiwk.github.io/auto-research/)。站点支持全文搜索、MathJax 公式、Mermaid 架构图、深色模式和移动端横向滚动；本地预览方式见[文档说明](docs/getting-started.md)。
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=daiwk%2Fauto-research&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=daiwk/auto-research&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=daiwk/auto-research&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=daiwk/auto-research&type=date&legend=top-left" />
+ </picture>
+</a>
+
 ## 当前能力
 
 ### 论文实现与评测
