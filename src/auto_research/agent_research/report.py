@@ -4,6 +4,10 @@ from .models import AgentResearchResult
 
 
 PAPERS = {
+    "autoviewmem": ("AutoViewMem", "https://arxiv.org/abs/2609.21940"),
+    "mace": ("MACE", "https://arxiv.org/abs/2609.21533"),
+    "arenaflow": ("ArenaFlow", "https://arxiv.org/abs/2609.21378"),
+    "graphskillevo": ("GraphSkillEvo", "https://arxiv.org/abs/2609.21749"),
     "repoatlas": ("RepoAtlas", "https://arxiv.org/abs/2609.16936"),
     "interactive-memory": ("Interactive Memory Learning", "https://arxiv.org/abs/2609.17088"),
     "evoskill-gui": ("EvoSkill-GUI", "https://arxiv.org/abs/2609.17653"),

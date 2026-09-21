@@ -162,6 +162,7 @@
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
 
 ## Meta
+- 2026-09 · [EvoPilot](../2609.21257-evopilot/README.md)：把匹配的 control/treatment 产物作为证据单元，以 fail-closed 校验和人工审核阻止不公平比较进入下一轮自动研究。
 - 2026-09 · [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
 - 2026-07 · [ROCS](../2607.27744-rocs/README.md)：复用单次 request encoding，并在候选端执行轻量 late interaction，统一覆盖广告/自然流量的检索和排序 serving。
 - 2026-07 · [OneShot](../2607.27475-oneshot-index/README.md)：将层级索引纳入 ranking objective 共同训练，并以 neural interaction scoring 突破纯点积检索。

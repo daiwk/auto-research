@@ -165,7 +165,7 @@ def test_all_executable_post_training_methods_are_in_evolve():
 
 
 def test_implemented_agent_papers_have_composable_evolve_operators():
-    from auto_research.agent_research.models import METHODS
+    from auto_research.agent_research.models import DIAGNOSTIC_ONLY_METHODS, METHODS
     from auto_research.evolution.papers import AGENT_MUTATIONS
 
     papers = discover_papers("agent methods", 100, False, track="agent")
@@ -188,7 +188,7 @@ def test_implemented_agent_papers_have_composable_evolve_operators():
         operator.split(":", 1)[1]
         for operator, _ in AGENT_MUTATIONS.values()
     }
-    assert set(METHODS) - {"long-context"} <= mapped_methods
+    assert set(METHODS) - {"long-context"} - DIAGNOSTIC_ONLY_METHODS <= mapped_methods
 
     agent = discover_papers("memory planning tools reflection", 8, False, track="agent")
     agent_map = {paper.arxiv_id: paper.architecture for paper in agent}

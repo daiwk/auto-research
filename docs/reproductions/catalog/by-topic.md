@@ -363,6 +363,7 @@
 ## Serving 与研究基础设施
 
 ### 自主研究与反馈闭环
+- [EvoPilot](../2609.21257-evopilot/README.md)：把 shared base、数据、评测器与有效输出深度固定成比较协议，只接纳经产物校验和人工审核的 treatment 结论。
 - [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md)：以多专家评审、证据加权预算和确定性晋级门串联研究、实验与上线评审。
 - [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
 - [RecEvolve](../2609.01622-recevolve/README.md)：以知识库驱动候选提案、隔离实验、critic gate、冠军继承和回滚，形成可审计的推荐自主进化闭环。

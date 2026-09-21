@@ -15,11 +15,16 @@ from auto_research.system_one import (
     NoulQuestion,
     NANOJEV_REVISION,
     NanoJevProvider,
+    NimbleProvider,
+    LayaProvider,
     ScoreQuestion,
     SystemOneBenchmarkConfig,
     SystemOneRequest,
     TypeSafeHTTPProvider,
     run_system_one_benchmark,
+    evaluate_public_decisions,
+    load_public_decisions,
+    split_public_decisions,
 )
 from auto_research.system_one.local import DecisionTrainingExample
 
@@ -59,6 +64,101 @@ class FakeNanoJevPredictor:
                 },
             }],
         }
+
+
+class FakeNimbleScorer:
+    def __init__(self):
+        self.context = None
+        self.schema = None
+
+    def score(self, context, schema, score_fields=()):
+        self.context, self.schema = context, schema
+        return {"fields": {
+            "route": {"logits": {"card": -1.0, "transfer": 2.0}},
+            "urgency": {"logits": {"0": -1.0, "1": 1.0}},
+            "escalate": {"logits": {"false": -0.5, "true": 0.5}},
+        }}
+
+
+class FakeLayaAgent:
+    def __init__(self):
+        self.state = None
+        self.questions = None
+
+    def system_one(self, state, questions):
+        self.state, self.questions = state, questions
+        return {"answers": {
+            "route": {"probabilities": {"card": 0.1, "transfer": 0.9}},
+            "urgency": {"probabilities": {"0": 0.2, "1": 0.8}},
+            "escalate": {"noul": 0.7},
+        }, "usage": {"forward_passes": 1}}
+
+
+@pytest.mark.parametrize("provider", [
+    NimbleProvider(FakeNimbleScorer()),
+    LayaProvider(FakeLayaAgent()),
+])
+def test_open_checkpoint_providers_map_all_types_without_gold(provider):
+    request = SystemOneRequest(
+        {"message": "The transfer has not arrived"},
+        {
+            "route": ChoiceQuestion("Route", {"card": "card", "transfer": "transfer"}),
+            "urgency": ScoreQuestion("Urgency", {"1": "low", "2": "high"}),
+            "escalate": NoulQuestion("Escalate"),
+        },
+    )
+    response = provider.decide(request)
+    assert response.answers["route"].value == "transfer"
+    assert response.answers["urgency"].value > 1.5
+    assert response.answers["escalate"].value is True
+    captured = getattr(provider, "scorer", getattr(provider, "agent", None))
+    assert "gold" not in json.dumps(vars(captured)).lower()
+
+
+def test_public_suite_keeps_references_out_of_requests_and_splits_by_family(tmp_path):
+    records = [
+        {
+            "id": "choice-1", "domain": "intent", "family": "family-a",
+            "input": {"state": "late transfer", "questions": {"decision": {
+                "type": "choice", "instructions": "route", "criteria": {
+                    "card": "card", "transfer": "transfer"}}}},
+            "reference": {"target": "transfer", "human_reviewed": True},
+        },
+        {
+            "id": "noul-1", "domain": "safety", "family": "family-b",
+            "input": {"state": "unsafe", "questions": {"decision": {
+                "type": "noul", "instructions": "escalate"}}},
+            "reference": {"target": True, "human_reviewed": True},
+        },
+        {
+            "id": "score-1", "domain": "quality", "family": "family-c",
+            "input": {"state": "excellent", "questions": {"decision": {
+                "type": "score", "instructions": "quality", "criteria": ["low", "high"]}}},
+            "reference": {"target": 1, "human_reviewed": True},
+        },
+    ]
+    path = tmp_path / "suite.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in records) + "\n")
+    rows = load_public_decisions(path)
+    validation, test = split_public_decisions(rows)
+    assert {row.family for row in validation}.isdisjoint({row.family for row in test})
+    assert "reference" not in json.dumps(rows[0].request.to_dict()).lower()
+
+    class PerfectProvider:
+        def decide(self, request):
+            key, question = next(iter(request.questions.items()))
+            if isinstance(question, ChoiceQuestion):
+                answer = {"type": "choice", "choice": "transfer", "probabilities": {"card": 0.0, "transfer": 1.0}}
+            elif isinstance(question, NoulQuestion):
+                answer = {"type": "noul", "noul": 1.0}
+            else:
+                answer = {"type": "score", "score": 1.0, "probabilities": {"0": 0.0, "1": 1.0}}
+            from auto_research.system_one import SystemOneResponse
+            return SystemOneResponse.from_payload({"model": "perfect", "answers": {key: answer}})
+
+    metrics = evaluate_public_decisions(PerfectProvider(), rows, 0.8)
+    assert metrics["accuracy"] == 1.0
+    assert set(metrics["by_type"]) == {"choice", "noul", "score"}
 
 
 def test_contracts_cover_choice_score_and_noul_without_generated_answers():
@@ -134,7 +234,7 @@ def test_nanojev_provider_rejects_probability_labels_that_do_not_match_request()
 def test_system_one_config_keeps_nanojev_checkpoint_revision_immutable():
     config = SystemOneBenchmarkConfig(backend="nanojev")
     config.validate()
-    assert config.checkpoint_revision == NANOJEV_REVISION
+    assert config.checkpoint_revision is None
 
 
 def test_online_provider_keeps_secret_in_header_and_validates_question_ids():
@@ -233,3 +333,80 @@ def test_system_one_evolve_operator_executes_instead_of_only_registering(tmp_pat
     assert trial.status == "completed"
     assert trial.training["test_read_during_selection"] is False
     assert "accuracy" in trial.validation and "brier" in trial.validation
+
+
+def test_system_one_checkpoint_operators_are_only_executable_with_real_paths(tmp_path, monkeypatch):
+    records = []
+    for index, family in enumerate(("a", "b", "c", "d")):
+        records.append({
+            "id": str(index), "domain": "routing", "family": family,
+            "input": {"state": "late transfer", "questions": {"decision": {
+                "type": "choice", "instructions": "route",
+                "criteria": {"card": "card", "transfer": "transfer"}}}},
+            "reference": {"target": "transfer", "human_reviewed": True},
+        })
+    suite = tmp_path / "suite.jsonl"
+    suite.write_text("\n".join(json.dumps(row) for row in records) + "\n")
+    checkpoint = tmp_path / "nimble"
+    checkpoint.mkdir()
+    config = EvolutionConfig(
+        model="system-one", dataset="system-one-public",
+        system_one_public_data=suite, system_one_nimble_checkpoint=checkpoint,
+        direction="compare public checkpoints", allow_network=False,
+    )
+    evaluator = SystemOneEvolutionEvaluator(config, tmp_path)
+    assert evaluator.executable_operators == ("system-one:nimble",)
+
+    class PerfectProvider:
+        def decide(self, request):
+            key = next(iter(request.questions))
+            from auto_research.system_one import SystemOneResponse
+            return SystemOneResponse.from_payload({
+                "model": "fake-nimble", "answers": {key: {
+                    "type": "choice", "choice": "transfer",
+                    "probabilities": {"card": 0.1, "transfer": 0.9},
+                }},
+            })
+
+    monkeypatch.setattr(evaluator, "_load_external_provider", lambda *args: PerfectProvider())
+    trial = evaluator.evaluate(
+        "g1-t1", 1, None,
+        Genome(architecture="system-one:nimble", system_one_temperature=0.7),
+        ("2508.07662",), "real checkpoint comparison",
+    )
+    assert trial.training["external_checkpoint"] is True
+    assert trial.validation["accuracy"] == 1.0
+
+
+def test_system_one_public_baseline_uses_configured_checkpoint(tmp_path):
+    from auto_research.evolution.providers import get_provider
+
+    data = tmp_path / "public.jsonl"
+    data.write_text("{}\n", encoding="utf-8")
+    config = EvolutionConfig(
+        model="system-one",
+        dataset="system-one-public",
+        system_one_public_data=data,
+        system_one_nimble_checkpoint=tmp_path / "nimble",
+    )
+    baseline = get_provider("system-one").baseline_factory(config)
+    assert baseline.architecture == "system-one:nimble"
+
+
+def test_system_one_aggregate_ignores_breakdown_dicts():
+    from auto_research.system_one.benchmark import _aggregate_runs
+
+    aggregate = _aggregate_runs([
+        {"test": {"accuracy": 0.75, "by_type": {"choice": 0.75}}},
+        {"test": {"accuracy": 0.25, "by_type": {"choice": 0.25}}},
+    ])
+    assert aggregate == {"accuracy_mean": 0.5, "accuracy_std": 0.25}
+
+
+def test_nimble_checkpoint_hash_verifier_fails_closed(tmp_path):
+    from auto_research.system_one.nimble import _assert_sha256
+
+    weight = tmp_path / "adapter_model.safetensors"
+    weight.write_bytes(b"tampered")
+    with pytest.raises(ValueError, match="SHA256"):
+        _assert_sha256(weight, "0" * 64, "Nimble adapter")

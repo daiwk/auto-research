@@ -12288,6 +12288,53 @@
           "reason": "Defining HIP/ROCm execution environment cannot be validated on the available NVIDIA A100/A30 hosts."
         }
       ]
+    },
+    {
+      "batch": "recent-20260921-cross-domain",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-09-21T14:00:00+08:00",
+      "window": "2026-09-18 through 2026-09-21",
+      "sources": [
+        "arXiv official abstracts, HTML and PDF full text",
+        "DeepXiv discovery fallback",
+        "official author repositories"
+      ],
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent",
+        "multimodal",
+        "system-one"
+      ],
+      "empty_tracks_verified": [
+        "foundation-model",
+        "post-training",
+        "system-one"
+      ],
+      "empty_review": {
+        "source_artifact": "recent-paper-scan-20260921.md",
+        "note": "The scan record documents the same-window search and full-text spot review for tracks with no qualifying new candidate."
+      },
+      "coverage": {
+        "coverage_complete": true,
+        "watermark_advanced": true,
+        "watermark": "2026-09-21",
+        "overlap_start": "2026-09-18",
+        "source_artifact": "recent-paper-scan-20260921.md"
+      },
+      "candidates": [
+        {"id": "2609.21257", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "evopilot", "doc": "reproductions/2609.21257-evopilot/README.md"},
+        {"id": "2609.21940", "priority": "P1", "track": "agent", "status": "implemented", "key": "autoviewmem", "doc": "agent-research/2609.21940-autoviewmem/README.md"},
+        {"id": "2609.21533", "priority": "P1", "track": "agent", "status": "implemented", "key": "mace", "doc": "agent-research/2609.21533-mace/README.md"},
+        {"id": "2609.21378", "priority": "P1", "track": "agent", "status": "implemented", "key": "arenaflow", "doc": "agent-research/2609.21378-arenaflow/README.md"},
+        {"id": "2609.21749", "priority": "P1", "track": "agent", "status": "implemented", "key": "graphskillevo", "doc": "agent-research/2609.21749-graphskillevo/README.md"},
+        {"id": "2609.22083", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires large-scale visual-agent trajectories and a real GUI environment."},
+        {"id": "2609.21967", "priority": "P1", "track": "multimodal", "status": "deferred", "reason": "Requires an 11B full-duplex voice checkpoint, audio data and real-time latency evaluation."},
+        {"id": "2609.21924", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an interactive retrieval environment and actual RL training."},
+        {"id": "2609.21709", "priority": "P1", "track": "multimodal", "status": "deferred", "reason": "Requires sign-language video/pose data and checkpoint evaluation."},
+        {"id": "2609.21386", "priority": "P1", "track": "agent", "status": "rejected", "reason": "Public evaluation dataset/protocol rather than a method implementation; retained as a future benchmark candidate."}
+      ]
     }
   ]
 }

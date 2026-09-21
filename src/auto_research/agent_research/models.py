@@ -136,7 +136,19 @@ METHODS = (
     "dependency-refinement",
     "harness-design-study",
     "cera-moa",
+    "autoviewmem",
+    "mace",
+    "arenaflow",
+    "graphskillevo",
 )
+
+# These entries implement observation-safe L1 mechanism diagnostics, not
+# held-out ToolRoute policies.  Keep them runnable from ``agent-research`` but
+# do not advertise them as Evolve operators until a capability implementation
+# exists for the same mechanism.
+DIAGNOSTIC_ONLY_METHODS = frozenset({
+    "autoviewmem", "mace", "arenaflow", "graphskillevo",
+})
 BENCHMARKS = (
     "evomem-mini", "planbench-mini", "scalemcp-mini", "swebench-local",
     "osreward-mini",

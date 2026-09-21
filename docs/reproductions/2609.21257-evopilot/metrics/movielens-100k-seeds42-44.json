@@ -1,0 +1,99 @@
+{
+  "schema_version": 2,
+  "method": "evopilot",
+  "dataset": "MovieLens 100K",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "baseline_hit_at_10": 0.10909090909090909,
+      "baseline_ndcg_at_10": 0.05400546778896325,
+      "baseline_fresh_hit_at_10": 0.031746031746031744,
+      "baseline_head_share_at_10": 0.23772727272727273,
+      "method_hit_at_10": 0.10454545454545454,
+      "method_ndcg_at_10": 0.05078228660346273,
+      "method_fresh_hit_at_10": 0.031746031746031744,
+      "method_head_share_at_10": 0.19590909090909092,
+      "hit_at_10_relative_percent": -4.1666666666666625,
+      "validation_only_alpha": 0.1,
+      "historical_mismatch_rejected": true,
+      "matched_comparison_admitted": true
+    },
+    {
+      "seed": 43,
+      "baseline_hit_at_10": 0.10909090909090909,
+      "baseline_ndcg_at_10": 0.05400546778896325,
+      "baseline_fresh_hit_at_10": 0.031746031746031744,
+      "baseline_head_share_at_10": 0.23772727272727273,
+      "method_hit_at_10": 0.10454545454545454,
+      "method_ndcg_at_10": 0.05078228660346273,
+      "method_fresh_hit_at_10": 0.031746031746031744,
+      "method_head_share_at_10": 0.19590909090909092,
+      "hit_at_10_relative_percent": -4.1666666666666625,
+      "validation_only_alpha": 0.1,
+      "historical_mismatch_rejected": true,
+      "matched_comparison_admitted": true
+    },
+    {
+      "seed": 44,
+      "baseline_hit_at_10": 0.10909090909090909,
+      "baseline_ndcg_at_10": 0.05400546778896325,
+      "baseline_fresh_hit_at_10": 0.031746031746031744,
+      "baseline_head_share_at_10": 0.23772727272727273,
+      "method_hit_at_10": 0.10454545454545454,
+      "method_ndcg_at_10": 0.05078228660346273,
+      "method_fresh_hit_at_10": 0.031746031746031744,
+      "method_head_share_at_10": 0.19590909090909092,
+      "hit_at_10_relative_percent": -4.1666666666666625,
+      "validation_only_alpha": 0.1,
+      "historical_mismatch_rejected": true,
+      "matched_comparison_admitted": true
+    }
+  ],
+  "aggregate_metrics": {
+    "baseline_fresh_hit_at_10_mean": 0.031746031746031744,
+    "baseline_fresh_hit_at_10_std": 0.0,
+    "baseline_head_share_at_10_mean": 0.2377272727272727,
+    "baseline_head_share_at_10_std": 0.0,
+    "baseline_hit_at_10_mean": 0.10909090909090909,
+    "baseline_hit_at_10_std": 0.0,
+    "baseline_ndcg_at_10_mean": 0.05400546778896325,
+    "baseline_ndcg_at_10_std": 0.0,
+    "hit_at_10_relative_percent_mean": -4.1666666666666625,
+    "hit_at_10_relative_percent_std": 0.0,
+    "method_fresh_hit_at_10_mean": 0.031746031746031744,
+    "method_fresh_hit_at_10_std": 0.0,
+    "method_head_share_at_10_mean": 0.19590909090909092,
+    "method_head_share_at_10_std": 0.0,
+    "method_hit_at_10_mean": 0.10454545454545454,
+    "method_hit_at_10_std": 0.0,
+    "method_ndcg_at_10_mean": 0.05078228660346273,
+    "method_ndcg_at_10_std": 0.0,
+    "seed_mean": 43.0,
+    "seed_std": 1.0,
+    "validation_only_alpha_mean": 0.10000000000000002,
+    "validation_only_alpha_std": 0.0
+  },
+  "manifest_ref": "recommendation:evopilot",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "diagnostic_only": false,
+    "claim_policy": "matched public comparison; negative results retained; paper-scale and production VDD claims excluded"
+  },
+  "provenance": {
+    "commit": "working tree before commit",
+    "command": "PYTHONPATH=src python scripts/generate_sep_21_agent_artifacts.py",
+    "artifact_path": "docs/reproductions/2609.21257-evopilot/metrics/movielens-100k-seeds42-44.json",
+    "dataset_fingerprint": "movielens-100k-compact-temporal-v1"
+  }
+}
