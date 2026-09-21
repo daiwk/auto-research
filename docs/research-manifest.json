@@ -13555,6 +13555,77 @@
     },
     {
       "domain": "recommendation",
+      "key": "evopilot",
+      "title": "Verify, Don't Trust: Agentic Model Development for Video Discovery Retrieval at Scale",
+      "paper_url": "https://arxiv.org/abs/2609.21257",
+      "detail_path": "reproductions/2609.21257-evopilot/README.md",
+      "topic": [
+        "autoresearch",
+        "experiment-verification",
+        "video-retrieval"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Meta Platforms",
+      "published": "2026-09-18",
+      "code": null,
+      "adapter": {
+        "adapter_key": "evopilot",
+        "arxiv_id": "2609.21257",
+        "title": "Verify, Don't Trust: Agentic Model Development for Video Discovery Retrieval at Scale",
+        "paper_url": "https://arxiv.org/abs/2609.21257",
+        "track": "recommendation",
+        "organization": "Meta Platforms",
+        "published": "2026-09-18",
+        "code_url": null,
+        "topics": [
+          "autoresearch",
+          "experiment-verification",
+          "video-retrieval"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/evopilot",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "matched two-tower public proxy",
+        "metrics": [
+          "baseline.hit_at_10",
+          "baseline.ndcg_at_10",
+          "method.hit_at_10",
+          "method.ndcg_at_10",
+          "stages.historical_mismatch_rejected",
+          "stages.matched_comparison_admitted"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "220 users / 360 items; validation-only blend selection",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Video Deep Dive",
+            "metric": "Good Search Result Rate for Retention",
+            "lift_percent": 0.66,
+            "traffic": "seven-day randomized online evaluation",
+            "source_url": "https://arxiv.org/html/2609.21257v1",
+            "source_location": "Abstract; Section 5.5",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-09-21"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "evorec",
       "title": "EvoRec: Self-Evolving Agentic Recommender Systems",
       "paper_url": "https://arxiv.org/abs/2606.28368",

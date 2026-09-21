@@ -101,6 +101,9 @@ def operator_registry() -> dict[str, OperatorSpec]:
         "system-one:rival-ce": ("2508.07662",),
         "system-one:rival-brier": ("2507.16806",),
         "system-one:rival-hybrid": ("2507.16806", "2601.13284"),
+        "system-one:nanojev": ("2508.07662",),
+        "system-one:nimble": ("2508.07662",),
+        "system-one:laya": ("2508.07662",),
     }
     for operator, paper_ids in system_one_papers.items():
         registry[operator] = OperatorSpec(

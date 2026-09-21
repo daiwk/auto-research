@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [EvoPilot](../2609.21257-evopilot/README.md)：以匹配比较协议、artifact attestation 和 fail-closed verifier 审计 Agent 自动提出的工业推荐实验。
 - [ANGLE](../2609.18296-angle/README.md)：以层次文本标识、生成/判别/排序联合目标和动态约束 beam 完成一步广告检索。
 - [GESE](../2609.15094-gese/README.md)：多样性/忠实度约束的标题探索与上下文选择。
 - [LazFormer](../2609.14978-lazformer/README.md)：生成式预训练、排序残差适配与 hybrid sparse attention。

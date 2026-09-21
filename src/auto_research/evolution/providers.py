@@ -194,11 +194,22 @@ def _load_builtins() -> None:
         ),
     ))
     register_provider(EvolutionProvider(
-        "system-one", ("banking77",), "llm",
+        "system-one", ("banking77", "system-one-public"), "llm",
         "typed decisions dynamic labels calibration System One Jev",
         system_one,
         lambda config: Genome(
-            architecture="system-one:bilinear-ce",
+            architecture=(
+                "system-one:nanojev"
+                if config.dataset == "system-one-public"
+                and config.system_one_nanojev_checkpoint is not None
+                else "system-one:nimble"
+                if config.dataset == "system-one-public"
+                and config.system_one_nimble_checkpoint is not None
+                else "system-one:laya"
+                if config.dataset == "system-one-public"
+                and config.system_one_laya_checkpoint is not None
+                else "system-one:bilinear-ce"
+            ),
             dimensions=128,
             learning_rate=0.15,
             batch_size=1,

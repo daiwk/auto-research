@@ -15,7 +15,10 @@ import numpy as np
 from .contracts import ChoiceQuestion, SystemOneRequest
 from .local import DecisionTrainingExample, LocalDecisionModel, LocalSystemOneProvider
 from .nanojev import NANOJEV_REVISION, NanoJevProvider
+from .nimble import NIMBLE_REVISION, NimbleProvider
+from .laya import LAYA_REVISION, LayaProvider
 from .providers import TypeSafeHTTPProvider
+from .public_suite import evaluate_public_decisions, load_public_decisions, split_public_decisions
 
 
 BASE_URL = (
@@ -26,7 +29,9 @@ BASE_URL = (
 
 @dataclass(frozen=True)
 class SystemOneBenchmarkConfig:
+    dataset: str = "banking77"
     dataset_dir: Path = Path("data/system-one")
+    public_data: Path | None = None
     output_dir: Path = Path("runs/system-one")
     backend: str = "local"
     architecture: str = "rival_attention"
@@ -40,7 +45,8 @@ class SystemOneBenchmarkConfig:
     allow_network: bool = True
     confidence_threshold: float = 0.8
     checkpoint_dir: Path | None = None
-    checkpoint_revision: str = NANOJEV_REVISION
+    checkpoint_revision: str | None = None
+    base_model_dir: Path | None = None
     device: str = "cuda:0"
     precision: str = "bf16"
     temperature: float = 1.0
@@ -48,8 +54,14 @@ class SystemOneBenchmarkConfig:
     disable_native_triton: bool = False
 
     def validate(self) -> None:
-        if self.backend not in {"local", "typesafe", "nanojev"}:
-            raise ValueError("backend must be local, typesafe or nanojev")
+        if self.backend not in {"local", "typesafe", "nanojev", "nimble", "laya"}:
+            raise ValueError("unsupported System One backend")
+        if self.dataset not in {"banking77", "public-jsonl"}:
+            raise ValueError("dataset must be banking77 or public-jsonl")
+        if self.dataset == "public-jsonl" and self.public_data is None:
+            raise ValueError("public-jsonl requires public_data")
+        if self.dataset == "public-jsonl" and self.backend == "local":
+            raise ValueError("public-jsonl currently evaluates fixed checkpoint backends")
         if not self.seeds:
             raise ValueError("at least one seed is required")
         if min(self.dimensions, self.steps) < 1 or self.learning_rate <= 0:
@@ -68,12 +80,19 @@ def run_system_one_benchmark(
     config: SystemOneBenchmarkConfig,
 ) -> tuple[dict, Path]:
     config.validate()
-    train, validation, test = load_banking77(
-        config.dataset_dir,
-        allow_network=config.allow_network,
-        maximum_train_examples=config.maximum_train_examples,
-        maximum_eval_examples=config.maximum_eval_examples,
-    )
+    if config.dataset == "banking77":
+        train, validation, test = load_banking77(
+            config.dataset_dir,
+            allow_network=config.allow_network,
+            maximum_train_examples=config.maximum_train_examples,
+            maximum_eval_examples=config.maximum_eval_examples,
+        )
+        dataset_name = "Banking77"
+    else:
+        public_rows = load_public_decisions(config.public_data)
+        validation, test = split_public_decisions(public_rows)
+        train = ()
+        dataset_name = config.public_data.stem
     run_dir = config.output_dir / time.strftime("%Y%m%d-%H%M%S")
     runs = []
     for seed in config.seeds:
@@ -98,16 +117,7 @@ def run_system_one_benchmark(
             training = {"initial_loss": None, "final_loss": None, "steps": 0}
             temperature = None
         else:
-            provider = NanoJevProvider.from_checkpoint(
-                config.checkpoint_dir,
-                allow_download=config.allow_network,
-                revision=config.checkpoint_revision,
-                device=config.device,
-                precision=config.precision,
-                temperature=config.temperature,
-                batch_questions=config.batch_questions,
-                disable_native_triton=config.disable_native_triton,
-            )
+            provider = _checkpoint_provider(config)
             training = {
                 "initial_loss": None,
                 "final_loss": None,
@@ -115,10 +125,9 @@ def run_system_one_benchmark(
                 "external_checkpoint": True,
             }
             temperature = config.temperature
-        validation_metrics = evaluate_examples(
-            provider, validation, config.confidence_threshold
-        )
-        test_metrics = evaluate_examples(provider, test, config.confidence_threshold)
+        evaluator = evaluate_examples if config.dataset == "banking77" else evaluate_public_decisions
+        validation_metrics = evaluator(provider, validation, config.confidence_threshold)
+        test_metrics = evaluator(provider, test, config.confidence_threshold)
         runs.append(
             {
                 "seed": seed,
@@ -129,7 +138,7 @@ def run_system_one_benchmark(
                 "duration_seconds": time.monotonic() - started,
             }
         )
-        if config.backend in {"typesafe", "nanojev"}:
+        if config.backend != "local":
             # Both are fixed checkpoints; repeating the identical model with a
             # nominal seed would misrepresent one run as multi-seed evidence.
             break
@@ -141,7 +150,7 @@ def run_system_one_benchmark(
         "schema_version": 2,
         "domain": "system-one",
         "method": method,
-        "dataset": "Banking77",
+        "dataset": dataset_name,
         "config": {
             **asdict(config),
             "dataset_dir": str(config.dataset_dir),
@@ -149,11 +158,13 @@ def run_system_one_benchmark(
             "checkpoint_dir": (
                 str(config.checkpoint_dir) if config.checkpoint_dir is not None else None
             ),
+            "public_data": str(config.public_data) if config.public_data else None,
+            "base_model_dir": str(config.base_model_dir) if config.base_model_dir else None,
             "seeds": list(config.seeds),
         },
         "dataset_summary": {
-            "source": "PolyAI Banking77",
-            "license": "CC BY 4.0",
+            "source": "PolyAI Banking77" if config.dataset == "banking77" else "human-labeled public decision JSONL",
+            "license": "CC BY 4.0" if config.dataset == "banking77" else "per-source licenses",
             "train_examples": len(train),
             "validation_examples": len(validation),
             "test_examples": len(test),
@@ -173,6 +184,33 @@ def run_system_one_benchmark(
     )
     write_system_one_report(result, run_dir / "report.md")
     return result, run_dir
+
+
+def _checkpoint_provider(config: SystemOneBenchmarkConfig):
+    common = {
+        "checkpoint_dir": config.checkpoint_dir,
+        "allow_download": config.allow_network,
+        "device": config.device,
+    }
+    if config.backend == "nanojev":
+        return NanoJevProvider.from_checkpoint(
+            **common, revision=config.checkpoint_revision or NANOJEV_REVISION,
+            precision=config.precision, temperature=config.temperature,
+            batch_questions=config.batch_questions,
+            disable_native_triton=config.disable_native_triton,
+        )
+    if config.backend == "nimble":
+        return NimbleProvider.from_checkpoint(
+            **common, base_model_dir=config.base_model_dir,
+            revision=config.checkpoint_revision or NIMBLE_REVISION,
+            precision=config.precision, temperature=config.temperature,
+        )
+    if config.backend == "laya":
+        return LayaProvider.from_checkpoint(
+            **common, revision=config.checkpoint_revision or LAYA_REVISION,
+            temperature_scale=config.temperature,
+        )
+    raise ValueError(f"backend {config.backend!r} is not a checkpoint backend")
 
 
 def load_banking77(
@@ -289,7 +327,7 @@ def write_system_one_report(result: dict, path: Path) -> Path:
         "",
         "## 协议",
         "",
-        f"- 数据：Banking77 train `{summary['train_examples']}` / validation "
+        f"- 数据：{result['dataset']} train `{summary['train_examples']}` / validation "
         f"`{summary['validation_examples']}` / test `{summary['test_examples']}`；",
         "- validation 只用于温度校准，test 仅在选择完成后报告；",
         "- 指标：accuracy、NLL、Brier、ECE、coverage、selective accuracy、schema validity。",
@@ -353,7 +391,11 @@ def _balanced_limit(
 
 
 def _aggregate_runs(runs: list[dict]) -> dict[str, float]:
-    keys = sorted(runs[0]["test"]) if runs else []
+    keys = sorted(
+        key
+        for key, value in (runs[0]["test"].items() if runs else ())
+        if isinstance(value, (int, float, np.number)) and not isinstance(value, bool)
+    )
     result: dict[str, float] = {}
     for key in keys:
         values = np.asarray([row["test"][key] for row in runs], dtype=np.float64)

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "evopilot",
+  "arxiv_id": "2609.21257",
+  "title": "Verify, Don't Trust: Agentic Model Development for Video Discovery Retrieval at Scale",
+  "paper_url": "https://arxiv.org/abs/2609.21257",
+  "organization": "Meta Platforms",
+  "published": "2026-09-18",
+  "upstream_code": "否：截至 2026-09-21 未找到原作者公开仓库",
+  "track": "recommendation",
+  "topics": [
+    "autoresearch",
+    "experiment-verification",
+    "video-retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/evopilot",
+  "documentation": "docs/reproductions/2609.21257-evopilot/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "matched two-tower public proxy",
+  "metrics": [
+    "baseline.hit_at_10",
+    "baseline.ndcg_at_10",
+    "method.hit_at_10",
+    "method.ndcg_at_10",
+    "stages.historical_mismatch_rejected",
+    "stages.matched_comparison_admitted"
+  ],
+  "mechanisms": [
+    "Meta VDD private video and interaction logs",
+    "production ANN index and serving funnel",
+    "remote workflow orchestration and human approval service"
+  ],
+  "evolve_operators": []
+}

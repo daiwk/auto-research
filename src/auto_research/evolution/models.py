@@ -57,6 +57,11 @@ class EvolutionConfig:
     evaluation_protocol_id: str = ""
     negative_memory_path: Path | None = None
     checkpoint_evidence: tuple[Path, ...] = ()
+    system_one_public_data: Path | None = None
+    system_one_nanojev_checkpoint: Path | None = None
+    system_one_nimble_checkpoint: Path | None = None
+    system_one_nimble_base: Path | None = None
+    system_one_laya_checkpoint: Path | None = None
 
     def validate(self) -> None:
         from .providers import get_provider
@@ -105,6 +110,15 @@ class EvolutionConfig:
                 )
         if self.model == "reasoning-checkpoint" and self.maximum_examples < 1:
             raise ValueError("reasoning checkpoint requires at least one example")
+        if self.model == "system-one" and self.dataset == "system-one-public":
+            if self.system_one_public_data is None:
+                raise ValueError("system-one-public requires --system-one-public-data")
+            if not any((
+                self.system_one_nanojev_checkpoint,
+                self.system_one_nimble_checkpoint,
+                self.system_one_laya_checkpoint,
+            )):
+                raise ValueError("system-one-public requires at least one executable checkpoint")
         if self.evaluation_protocol_id:
             from ..protocols import get_protocol
             get_protocol(self.evaluation_protocol_id)
@@ -177,6 +191,8 @@ class Genome:
     reasoning_verifier: str = "self-consistency"
     dceo_causal_gain: float = 0.35
     dceo_temperature: float = 1.0
+    system_one_temperature: float = 1.0
+    system_one_confidence_threshold: float = 0.8
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -237,6 +253,11 @@ class EvolutionResult:
                 "checkpoint_evidence": [
                     str(path) for path in self.config.checkpoint_evidence
                 ],
+                "system_one_public_data": str(self.config.system_one_public_data) if self.config.system_one_public_data else None,
+                "system_one_nanojev_checkpoint": str(self.config.system_one_nanojev_checkpoint) if self.config.system_one_nanojev_checkpoint else None,
+                "system_one_nimble_checkpoint": str(self.config.system_one_nimble_checkpoint) if self.config.system_one_nimble_checkpoint else None,
+                "system_one_nimble_base": str(self.config.system_one_nimble_base) if self.config.system_one_nimble_base else None,
+                "system_one_laya_checkpoint": str(self.config.system_one_laya_checkpoint) if self.config.system_one_laya_checkpoint else None,
                 "seeds": list(self.config.seeds),
             },
             "papers": [paper.to_dict() for paper in self.papers],
@@ -260,6 +281,9 @@ class EvolutionResult:
             "checkpoint_path", "checkpoint_annotations", "checkpoint_image_root",
             "reasoning_checkpoint_path",
             "negative_memory_path",
+            "system_one_public_data", "system_one_nanojev_checkpoint",
+            "system_one_nimble_checkpoint", "system_one_nimble_base",
+            "system_one_laya_checkpoint",
         ):
             raw_config[key] = Path(raw_config[key]) if raw_config.get(key) else None
         raw_config["seeds"] = tuple(raw_config["seeds"])

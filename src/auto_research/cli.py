@@ -240,6 +240,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="12fd25f77366fa6b3b4b768ec3050bf629380bac",
     )
     evolve.add_argument("--reasoning-checkpoint-path", type=Path)
+    evolve.add_argument("--system-one-public-data", type=Path)
+    evolve.add_argument("--system-one-nanojev-checkpoint", type=Path)
+    evolve.add_argument("--system-one-nimble-checkpoint", type=Path)
+    evolve.add_argument("--system-one-nimble-base", type=Path)
+    evolve.add_argument("--system-one-laya-checkpoint", type=Path)
     evolve.add_argument("--agent-episodes", type=int, default=120, help="agent benchmark episodes")
     evolve.add_argument("--vocab-size", type=int, default=4096, help="local BPE vocabulary for micro-llm")
     evolve.add_argument("--llm-dimensions", type=int, default=384, help="initial micro-llm hidden width")
@@ -761,12 +766,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     system_one = commands.add_parser(
         "system-one-eval",
-        help="evaluate local, NanoJev checkpoint, or optional TypeSafe decision backends",
+        help="evaluate local and pinned open System One decision backends",
     )
     system_one.add_argument(
-        "--backend", choices=["local", "typesafe", "nanojev"], default="local"
+        "--backend", choices=["local", "typesafe", "nanojev", "nimble", "laya"], default="local"
     )
+    system_one.add_argument("--dataset", choices=["banking77", "public-jsonl"], default="banking77")
     system_one.add_argument("--dataset-dir", type=Path, default=Path("data/system-one"))
+    system_one.add_argument("--public-data", type=Path)
     system_one.add_argument("--output-dir", type=Path, default=Path("runs/system-one"))
     system_one.add_argument("--architecture", choices=["bilinear", "rival_attention"], default="rival_attention")
     system_one.add_argument("--objective", choices=["cross_entropy", "brier", "hybrid"], default="hybrid")
@@ -778,6 +785,7 @@ def build_parser() -> argparse.ArgumentParser:
     system_one.add_argument("--maximum-eval-examples", type=int, default=1000)
     system_one.add_argument("--confidence-threshold", type=float, default=0.8)
     system_one.add_argument("--checkpoint-dir", type=Path)
+    system_one.add_argument("--base-model-dir", type=Path)
     system_one.add_argument("--checkpoint-revision", default=None)
     system_one.add_argument("--precision", choices=["fp32", "bf16"], default="bf16")
     system_one.add_argument("--temperature", type=float, default=1.0)
@@ -832,7 +840,9 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "system-one-eval":
             seeds = tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip())
             result, run_dir = run_system_one_benchmark(SystemOneBenchmarkConfig(
+                dataset=args.dataset,
                 dataset_dir=args.dataset_dir,
+                public_data=args.public_data,
                 output_dir=args.output_dir,
                 backend=args.backend,
                 architecture=args.architecture,
@@ -846,11 +856,8 @@ def main(argv: list[str] | None = None) -> int:
                 allow_network=not args.offline,
                 confidence_threshold=args.confidence_threshold,
                 checkpoint_dir=args.checkpoint_dir,
-                checkpoint_revision=(
-                    args.checkpoint_revision
-                    if args.checkpoint_revision is not None
-                    else SystemOneBenchmarkConfig.checkpoint_revision
-                ),
+                checkpoint_revision=args.checkpoint_revision,
+                base_model_dir=args.base_model_dir,
                 device=args.device or "cuda:0",
                 precision=args.precision,
                 temperature=args.temperature,
@@ -1183,6 +1190,11 @@ def main(argv: list[str] | None = None) -> int:
                 evaluation_protocol_id=args.evaluation_protocol,
                 negative_memory_path=args.negative_memory,
                 checkpoint_evidence=tuple(args.checkpoint_evidence),
+                system_one_public_data=args.system_one_public_data,
+                system_one_nanojev_checkpoint=args.system_one_nanojev_checkpoint,
+                system_one_nimble_checkpoint=args.system_one_nimble_checkpoint,
+                system_one_nimble_base=args.system_one_nimble_base,
+                system_one_laya_checkpoint=args.system_one_laya_checkpoint,
             )
             result, run_dir = ModelEvolutionEngine(config).run()
             result_artifact = run_dir / "result.json"
