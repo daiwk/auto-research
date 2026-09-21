@@ -14,6 +14,7 @@ import numpy as np
 
 from .contracts import ChoiceQuestion, SystemOneRequest
 from .local import DecisionTrainingExample, LocalDecisionModel, LocalSystemOneProvider
+from .nanojev import NANOJEV_REVISION, NanoJevProvider
 from .providers import TypeSafeHTTPProvider
 
 
@@ -38,16 +39,29 @@ class SystemOneBenchmarkConfig:
     maximum_eval_examples: int | None = 1000
     allow_network: bool = True
     confidence_threshold: float = 0.8
+    checkpoint_dir: Path | None = None
+    checkpoint_revision: str = NANOJEV_REVISION
+    device: str = "cuda:0"
+    precision: str = "bf16"
+    temperature: float = 1.0
+    batch_questions: int = 0
+    disable_native_triton: bool = False
 
     def validate(self) -> None:
-        if self.backend not in {"local", "typesafe"}:
-            raise ValueError("backend must be local or typesafe")
+        if self.backend not in {"local", "typesafe", "nanojev"}:
+            raise ValueError("backend must be local, typesafe or nanojev")
         if not self.seeds:
             raise ValueError("at least one seed is required")
         if min(self.dimensions, self.steps) < 1 or self.learning_rate <= 0:
             raise ValueError("dimensions, steps and learning_rate must be positive")
         if not 0.0 <= self.confidence_threshold <= 1.0:
             raise ValueError("confidence_threshold must be in [0, 1]")
+        if self.precision not in {"fp32", "bf16"}:
+            raise ValueError("precision must be fp32 or bf16")
+        if not math.isfinite(self.temperature) or self.temperature <= 0.0:
+            raise ValueError("temperature must be a finite positive number")
+        if self.batch_questions < 0:
+            raise ValueError("batch_questions must be non-negative")
 
 
 def run_system_one_benchmark(
@@ -79,10 +93,28 @@ def run_system_one_benchmark(
             )
             temperature = model.calibrate_temperature(validation)
             provider = LocalSystemOneProvider(model)
-        else:
+        elif config.backend == "typesafe":
             provider = TypeSafeHTTPProvider()
             training = {"initial_loss": None, "final_loss": None, "steps": 0}
             temperature = None
+        else:
+            provider = NanoJevProvider.from_checkpoint(
+                config.checkpoint_dir,
+                allow_download=config.allow_network,
+                revision=config.checkpoint_revision,
+                device=config.device,
+                precision=config.precision,
+                temperature=config.temperature,
+                batch_questions=config.batch_questions,
+                disable_native_triton=config.disable_native_triton,
+            )
+            training = {
+                "initial_loss": None,
+                "final_loss": None,
+                "steps": 0,
+                "external_checkpoint": True,
+            }
+            temperature = config.temperature
         validation_metrics = evaluate_examples(
             provider, validation, config.confidence_threshold
         )
@@ -97,17 +129,26 @@ def run_system_one_benchmark(
                 "duration_seconds": time.monotonic() - started,
             }
         )
-        if config.backend == "typesafe":
-            break  # identical online model; never multiply billable calls by seed
+        if config.backend in {"typesafe", "nanojev"}:
+            # Both are fixed checkpoints; repeating the identical model with a
+            # nominal seed would misrepresent one run as multi-seed evidence.
+            break
+    method = (
+        f"system-one:{config.architecture}:{config.objective}"
+        if config.backend == "local" else f"system-one:{config.backend}"
+    )
     result = {
         "schema_version": 2,
         "domain": "system-one",
-        "method": f"system-one:{config.architecture}:{config.objective}",
+        "method": method,
         "dataset": "Banking77",
         "config": {
             **asdict(config),
             "dataset_dir": str(config.dataset_dir),
             "output_dir": str(config.output_dir),
+            "checkpoint_dir": (
+                str(config.checkpoint_dir) if config.checkpoint_dir is not None else None
+            ),
             "seeds": list(config.seeds),
         },
         "dataset_summary": {
@@ -122,8 +163,8 @@ def run_system_one_benchmark(
         "runs": runs,
         "aggregate_metrics": _aggregate_runs(runs),
         "claim_policy": (
-            "public-dataset local comparison; no claim about TypeSafe's unpublished "
-            "architecture or vendor-reported performance"
+            "public-dataset checkpoint comparison; no claim about TypeSafe's unpublished "
+            "architecture, NanoJev's out-of-domain product quality, or vendor-reported performance"
         ),
     }
     run_dir.mkdir(parents=True, exist_ok=True)

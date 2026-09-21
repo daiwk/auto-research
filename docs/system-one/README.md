@@ -28,6 +28,19 @@ auto-research system-one-eval \
 TYPESAFE_API_KEY=... auto-research system-one-eval --backend typesafe
 ```
 
+公开 NanoJev checkpoint 后端需要 CUDA，并固定到经过审计的不可变 revision：
+
+```bash
+pip install -e '.[system-one-gpu]'
+auto-research system-one-eval \
+  --backend nanojev --device cuda:0 --precision bf16 \
+  --maximum-eval-examples 100
+```
+
+未指定 `--checkpoint-dir` 时会下载 `C-Tianyu/NanoJev` 的固定 commit；`--offline`
+模式必须提供已下载目录。该 provider 执行作者发布的真实 0.6B checkpoint，不读取
+gold answer，也没有自回归输出 token。
+
 ## 可执行契约
 
 - `Choice`：2–255 个动态候选，返回选择、完整概率分布和 confidence；
@@ -57,6 +70,11 @@ auto-research evolve \
 选择阶段只读取 validation；test 在冠军确定后报告。默认协议为 `foundation.banking77.system_one.v1`，同时报告 accuracy、NLL、Brier、ECE、覆盖率和选择性准确率。
 
 当前公开三 seed 本地基线为 accuracy `0.1353±0.0475`、Brier `0.9749±0.0004`、ECE `0.1048±0.0508`；完整逐 seed 数据见[指标产物](metrics/banking77-local-seeds42-44.json)。这是 800 次样本更新的小预算基线，明显不是 Jev 产品性能，也不应与 GLiClass 完整 checkpoint 数字横比。
+
+NanoJev 在 A100 上的真实 checkpoint 烟测使用 12 条 validation 与 12 条隔离 test：
+test accuracy `0.1667`、NLL `3.9825`、Brier `0.9745`、ECE `0.1397`、schema
+validity `1.0`。这是游戏/决策 checkpoint 到 Banking77 的小样本 OOD 互操作验证，**不是**
+稳定能力排名；去机器化证据见 [GPU receipt](../gpu-validations/nanojev-checkpoint-a100-20260921.json)。
 
 ## 延伸阅读
 

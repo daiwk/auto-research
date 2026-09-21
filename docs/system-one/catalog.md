@@ -21,7 +21,7 @@
 | 实现 | 路线 | 方法摘要 | 集成状态 |
 |---|---|---|---|
 | [Bespoke Nimble](https://github.com/bespokelabsai/nimble) | 训练模型 | Qwen3.5-9B LoRA 对 flat typed schema 直接读取 enum/boolean logits | P0 候选；已收录、待统一执行 |
-| [NanoJev](https://github.com/TianyuCodings/NanoJev) | 训练决策头 | Qwen3-0.6B + set-attention heads，覆盖 Choice、Boolean、Score | P0 候选；已收录、待统一执行 |
+| [NanoJev](https://github.com/TianyuCodings/NanoJev) | 训练决策头 | Qwen3-0.6B + set-attention heads，覆盖 Choice、Boolean、Score | 已接入固定 checkpoint provider；A100 OOD 烟测通过 |
 | [Laya](https://github.com/NandhaKishorM/laya) | 训练模型与校准 | typed decision + validation 温度校准 | P0 候选；已收录、待统一执行 |
 | [SemIf](https://github.com/TheoLeeCJ/SemIf) | 并行约束解码 | shared-state prefill 后直接比较 option logits | P1 工程候选；不是训练式复现 |
 | [DiffusionGemma routes](implementation-tracker.md#diffusion-routes) | 扩散模型 | 非自回归并行决策实验 | 独立路线；待校准和吞吐验证 |
