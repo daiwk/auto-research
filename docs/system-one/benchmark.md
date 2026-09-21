@@ -29,3 +29,5 @@
 - [三 seed 汇总结果](metrics/banking77-local-seeds42-44.json)
 - [可读报告](banking77-local-report.md)
 - [NanoJev A100 checkpoint receipt](../gpu-validations/nanojev-checkpoint-a100-20260921.json)
+- [Laya A100 checkpoint receipt](../gpu-validations/laya-checkpoint-a100-20260921.json)
+- [Nimble A100 checkpoint receipt](../gpu-validations/nimble-checkpoint-a100-20260921.json)

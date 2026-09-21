@@ -16,6 +16,12 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "laya-checkpoint": (
+        "docs/gpu-validations/laya-checkpoint-a100-20260921.json"
+    ),
+    "nimble-checkpoint": (
+        "docs/gpu-validations/nimble-checkpoint-a100-20260921.json"
+    ),
     "nanojev-checkpoint": (
         "docs/gpu-validations/nanojev-checkpoint-a100-20260921.json"
     ),

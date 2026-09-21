@@ -106,6 +106,11 @@ test accuracy `0.1667`、NLL `3.9825`、Brier `0.9745`、ECE `0.1397`、schema
 validity `1.0`。这是游戏/决策 checkpoint 到 Banking77 的小样本 OOD 互操作验证，**不是**
 稳定能力排名；去机器化证据见 [GPU receipt](../gpu-validations/nanojev-checkpoint-a100-20260921.json)。
 
+Laya 的固定公开 checkpoint 也已在 A100 上执行 Choice、Noul、Score 混合协议；结果和
+数据哈希见 [Laya GPU receipt](../gpu-validations/laya-checkpoint-a100-20260921.json)。
+同一协议下的 Qwen3.5-9B + Nimble LoRA 路径亦完成真实 A100 验证；见
+[Nimble GPU receipt](../gpu-validations/nimble-checkpoint-a100-20260921.json)。
+
 公共多类型协议与 Nimble 上游发布格式兼容：每条记录把 `input` 和 `reference` 物理
 分开，loader 会拒绝 input 中的 target/answer/label/gold 字段，并按完整 source family
 切分 validation/test。这样可以同时报告 Choice、Noul、Score 的 accuracy、NLL、Brier、

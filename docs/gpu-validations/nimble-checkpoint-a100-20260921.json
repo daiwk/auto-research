@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "adapter_key": "nimble-checkpoint",
+  "validated_at": "2026-09-21",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-c", "from pathlib import Path; from auto_research.system_one.benchmark import SystemOneBenchmarkConfig, run_system_one_benchmark; run_system_one_benchmark(SystemOneBenchmarkConfig(dataset='public-jsonl', public_data=Path('data/system-one/system-one-public-smoke.jsonl'), backend='nimble', checkpoint_dir=Path('checkpoint'), base_model_dir=Path('base-model'), allow_network=False, device='cuda:0', precision='bf16', temperature=1.0, confidence_threshold=0.7, seeds=(42,), output_dir=Path('runs/system-one-nimble')))"
+  ],
+  "dataset": {
+    "name": "System One public smoke suite (BoolQ, HelpSteer2, PubMedQA)",
+    "license": "CC BY-SA 3.0 / CC BY 4.0 / MIT",
+    "revision": "dataset sha256:3f49dae89d9c52bf184801ae45b16b40b520d49f7cc447e88cee0f46ed330966; source response sha256:8465a61f55422d8dd906ccf1b6655bcf6fb2eceb0e969d452aae4969414b5661,a5eae826f5d1f5a1105f70841c1b5a532a0d772ae578894081f3427c9f9aeaed,4fd896ff4fc89eb81467339b4bd3b7c047f60bf7a2f6caee06d2ee3dcf2b80a1",
+    "validation_examples": 4,
+    "test_examples": 2,
+    "test_isolation": true
+  },
+  "checkpoint": {
+    "model_id": "bespokelabs/Bespoke-Nimble-9B",
+    "revision": "594dfdcfb6f94e3d0c0db7535180d3c71689169a",
+    "weight_sha256": "ba7e28acb97f973e80fa51f3aa6fc6f75ea4081b89632ed45d8e5f3a1d7bfa6b",
+    "base_model": "Qwen/Qwen3.5-9B",
+    "base_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "base_shard_00004_sha256": "b62b0c4cd7e44edee103ee8f4fe225f246d5e768e07bfd5f25b63a8aa1fdd0c6"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "precision": "bf16",
+    "temperature": 1.0,
+    "confidence_threshold": 0.7,
+    "validation_accuracy": 0.5,
+    "validation_nll": 1.622356089581066,
+    "validation_brier": 0.8493677147989052,
+    "validation_ece": 0.4878502899957793,
+    "validation_coverage": 0.5,
+    "validation_selective_accuracy": 0.5,
+    "test_accuracy": 1.0,
+    "test_nll": 0.030326910123461642,
+    "test_brier": 0.0029776060239987364,
+    "test_ece": 0.029520673352901428,
+    "test_coverage": 1.0,
+    "test_selective_accuracy": 1.0,
+    "test_schema_validity": 1.0
+  },
+  "provenance": {
+    "commit": "c57eff27d33c21a0f5a576a741a0ea3ec8eb2df8",
+    "artifact_path": "docs/gpu-validations/nimble-checkpoint-a100-20260921.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

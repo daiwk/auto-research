@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "adapter_key": "laya-checkpoint",
+  "validated_at": "2026-09-21",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100"},
+  "command": [
+    "python", "-c", "from pathlib import Path; from auto_research.system_one.benchmark import SystemOneBenchmarkConfig, run_system_one_benchmark; run_system_one_benchmark(SystemOneBenchmarkConfig(dataset='public-jsonl', public_data=Path('data/system-one/system-one-public-smoke.jsonl'), backend='laya', checkpoint_dir=Path('checkpoint'), allow_network=False, device='cuda:0', precision='bf16', temperature=1.0, confidence_threshold=0.7, seeds=(42,), output_dir=Path('runs/system-one-laya')))"
+  ],
+  "dataset": {
+    "name": "System One public smoke suite (BoolQ, HelpSteer2, PubMedQA)",
+    "license": "CC BY-SA 3.0 / CC BY 4.0 / MIT",
+    "revision": "dataset sha256:3f49dae89d9c52bf184801ae45b16b40b520d49f7cc447e88cee0f46ed330966; source response sha256:8465a61f55422d8dd906ccf1b6655bcf6fb2eceb0e969d452aae4969414b5661,a5eae826f5d1f5a1105f70841c1b5a532a0d772ae578894081f3427c9f9aeaed,4fd896ff4fc89eb81467339b4bd3b7c047f60bf7a2f6caee06d2ee3dcf2b80a1",
+    "validation_examples": 4,
+    "test_examples": 2,
+    "test_isolation": true
+  },
+  "checkpoint": {
+    "model_id": "convaiinnovations/laya-typed-decisions",
+    "revision": "f9ab0b228f0fc0f14d873dbc99038f135c2da1b2",
+    "weight_sha256": "4fa56de72383a9d3efa9cfa78955733c81b9fc8067a587ca4beb82c78107a24e"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "precision": "bf16",
+    "temperature": 1.0,
+    "confidence_threshold": 0.7,
+    "validation_accuracy": 0.75,
+    "validation_nll": 0.8848620038738718,
+    "validation_brier": 0.44817759999999995,
+    "validation_ece": 0.13135,
+    "validation_coverage": 0.5,
+    "validation_selective_accuracy": 1.0,
+    "test_accuracy": 0.5,
+    "test_nll": 1.1996394380257644,
+    "test_brier": 0.6921193569501964,
+    "test_ece": 0.03855385538553868,
+    "test_coverage": 0.0,
+    "test_selective_accuracy": 0.0,
+    "test_schema_validity": 1.0
+  },
+  "provenance": {
+    "commit": "c57eff27d33c21a0f5a576a741a0ea3ec8eb2df8",
+    "artifact_path": "docs/gpu-validations/laya-checkpoint-a100-20260921.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}
