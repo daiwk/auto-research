@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "key": "music-rationales",
+  "arxiv_id": "2609.23877",
+  "title": "Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery",
+  "paper_url": "https://arxiv.org/abs/2609.23877",
+  "organization": "Google",
+  "published": "2026-09-20",
+  "upstream_code": "否：截至 2026-09-27 未找到原作者发布的系统实现仓库",
+  "track": "recommendation",
+  "topics": [
+    "music-discovery",
+    "llm-rationale",
+    "offline-online-decoupling"
+  ],
+  "local_code": "src/auto_research/reproductions/music_rationales",
+  "documentation": "docs/reproductions/2609.23877-music-rationales/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "HetRec Last.fm 2K"
+  ],
+  "baseline": "training-only collaborative filtering artist candidates",
+  "metrics": [
+    "results.cf_hit_at_5",
+    "results.generated_hit_at_5",
+    "results.served_hit_at_5_with_fallback",
+    "results.catalog_grounded_share",
+    "results.annotation_coverage_at_5",
+    "results.cache_coverage"
+  ],
+  "mechanisms": [
+    "private Gemini model, music knowledge graph and LLM-as-a-Judge",
+    "YouTube Music retrieval fleet, event-driven refresh and multi-arm online A/B",
+    "public Last.fm has neither music exposure nor rationale engagement labels"
+  ],
+  "evolve_operators": []
+}

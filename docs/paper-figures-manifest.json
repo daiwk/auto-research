@@ -8538,5 +8538,61 @@
     "height": 638,
     "score": 15,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.23718-unique/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.23718",
+    "arxiv_id": "2609.23718",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1: Overview of UNIQUE. The framework consists of three modules: UIGN encodes user profiles and multi-granularity behavior sequences; EQN learns feedback-aware flat semantic codes from item priors and behavioral posterior signals; and TDN injects candidate item/code targets into an early-fusion Transformer for code prediction and multi-objective ranking. Generation and discrimination losses jointly optimize retrieval and ranking under a shared representation.",
+    "source_url": "https://arxiv.org/pdf/2609.23718#page=4",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2609.23718-unique/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 932,
+    "score": 69,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.25433-light-heads/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.25433",
+    "arxiv_id": "2609.25433",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2. Ranking Model Training Fleet with Light Heads A recommendation model fleet with each model consisting of a shared tower with multi-task heads and Light Heads at the top. Each model shared Light Heads. The Light Heads are read from a central configuration outside the model and use stop-gradients.",
+    "source_url": "https://arxiv.org/html/2609.25433v1/ml-training-fleet-light-heads.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2609.25433-light-heads/assets/paper-figure-01.png",
+    "width": 1216,
+    "height": 684,
+    "score": 66,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.23677-muser/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.23677",
+    "arxiv_id": "2609.23677",
+    "figure": "Figure 2",
+    "original_caption": "Fig. 2 : Overview of the proposed MuSeR framework, which integrates hierarchical temporal compression, multi-query interest extraction, and multimodal semantic alignment for efficient user modeling and retrieval.",
+    "source_url": "https://arxiv.org/html/2609.23677v1/123.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2609.23677-muser/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 533,
+    "score": 88,
+    "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.23877-music-rationales/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.23877",
+    "arxiv_id": "2609.23877",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2. Overview of the decoupled two-phase recommendation architecture. An offline LLM asynchronously generates personalized discovery profiles containing novel candidates and rationales, which a low-latency online layer retrieves during live sessions. Diagram of the Decoupled LLM Architecture showing Asynchronous Offline Phase and Low-Latency Online Phase.",
+    "source_url": "https://arxiv.org/html/2609.23877v1/llm_arch_new.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2609.23877-music-rationales/assets/paper-figure-01.png",
+    "width": 1800,
+    "height": 1010,
+    "score": 67,
+    "error": ""
   }
 ]

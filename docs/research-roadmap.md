@@ -26,11 +26,25 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-15**。本轮新增三篇通过工业线上证据门槛的 P0（PinDCO、MIMA、
-ChronicleRec）和一篇基础模型 P1（SAS），代码、中文文档、论文原图及三 seed 指标已完成，
-详见[扫描审计](recent-paper-scan-20260915.md)。OneLA、CanvasAnneal、GAUGE 与
-AMDKernelVault 已登记为有明确恢复条件的 DEFERRED，不创建占位 adapter。由于 arXiv API
-连接重置，本轮不推进 watermark；下一轮从 **2026-09-10** 保留重叠窗口继续增量扫描。
+更新基线：**2026-09-26**。[近期扫描记录](recent-paper-scan-20260926.md)按
+2026-09-20～09-26 重叠窗口核验了四篇工业 P0 与一篇 Meta 评测 P1；完成和未完成的
+边界保持在下表队列，不用占位 adapter 冒充复现。arXiv export API 本轮返回
+HTTP 406，尚未恢复全量分页与终态差分，因此不推进发现 watermark。上一轮已合入
+的 [PR #164](https://github.com/daiwk/auto-research/pull/164) 不因本轮扫描重做。
+
+System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通；测试集与 OOD
+仅在选择后读取，冠军没有优于初始配置。数据哈希、指标和运行边界见
+[System One 评测协议](system-one/benchmark.md)。
+
+### 2026-09-26 新论文执行队列
+
+| ID | 优先级 | 状态 | 工作与完成条件 |
+|---|---|---|---|
+| SEP26-01 | P0 · Google | DONE（本分支） | Light Heads：共享塔动态轻头、重置和无 stop-gradient 消融；MovieLens 100K 显式评分双任务、三 seed、隔离 test，负结果原样保留 |
+| SEP26-02 | P0 · Google | DONE（公开数据概念验证） | YouTube Music rationale：Qwen2.5-7B/A100 异步发现画像、Last.fm 艺人目录/新颖性/共享标签校验、在线提名增强与只附解释两臂、CF 回退；100 用户 test 0.38 对 CF 0.40，无公开理由曝光结果，不能验证论文线上收益 |
+| SEP26-03 | P0 | DONE（缩比机制） | UNIQUE：KuaiRand-Pure 曝光时间留出，平面量化、早融合、target-attention split、生成/排序联合训练；三 seed CTR-AUC、code 召回和消融，负结果保留 |
+| SEP26-04 | P0 | 部分完成（本分支） | MuSeR：已在 KuaiRand-Pure 训练多尺度压缩、多 query、候选路由与全库检索对照；原论文 ERNIE/BGE 语义、异步缓存和生产召回未完成，adapter 标为概念验证，不宣称论文复现完毕 |
+| SEP26-05 | P1 · Meta | PROTOCOL（实证待数据） | layered engagement evaluation：已实现曝光前冻结校验、配对 bootstrap 与 CI-aware 决策协议；私有 scorer 和配对 A/B 不公开，不能声称复现 81.1% F1 |
 
 ## 优先级和状态
 

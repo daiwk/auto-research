@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "adapter_key": "system-one-formal-evolve",
+  "validated_at": "2026-09-26",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": [
+    "python", "scripts/run_system_one_formal_evolve.py",
+    "--data", "data/system-one/system-one-public-v1.jsonl",
+    "--nimble", "checkpoint/nimble",
+    "--nimble-base", "checkpoint/qwen3.5-9b",
+    "--laya", "checkpoint/laya",
+    "--generations", "2", "--population", "2", "--seed", "42", "--device", "cuda:0"
+  ],
+  "dataset": {
+    "name": "System One public v1: BoolQ, HelpSteer2, PubMedQA, ARC-Challenge, TruthfulQA",
+    "license": "CC BY-SA 3.0 / CC BY 4.0 / MIT / CC BY-SA 4.0 / Apache-2.0",
+    "revision": "sha256:387638878933f8b6293b240a1daf5017fb317bd3c226e511c4e72cf3af46140d",
+    "calibration_examples": 60,
+    "test_examples": 60,
+    "ood_examples": 80,
+    "test_isolation": true
+  },
+  "checkpoint": {
+    "models": [
+      {"model_id": "bespokelabs/Bespoke-Nimble-9B", "revision": "594dfdcfb6f94e3d0c0db7535180d3c71689169a", "base_model_id": "Qwen/Qwen3.5-9B", "base_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a"},
+      {"model_id": "convaiinnovations/laya-typed-decisions", "revision": "f9ab0b228f0fc0f14d873dbc99038f135c2da1b2"}
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "completed_generations": 2,
+    "trials_including_baseline": 5,
+    "champion_id": "g0-t0",
+    "baseline_validation_fitness": 0.6773663788134882,
+    "champion_validation_fitness": 0.6773663788134882,
+    "test_accuracy": 0.7333333333333333,
+    "test_coverage": 0.6166666666666667,
+    "test_selective_accuracy": 0.8648648648648649,
+    "test_schema_validity": 1.0,
+    "ood_accuracy": 0.7625,
+    "ood_coverage": 0.75,
+    "no_improvement_found": true,
+    "report_artifacts_written": ["result.json", "report.md", "index.html"]
+  },
+  "provenance": {
+    "commit": "916c1d580b8f8f498f7e292cb0ec2b4841c19029",
+    "artifact_path": "docs/gpu-validations/system-one-formal-evolve-a100-20260926.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

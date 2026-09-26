@@ -1,0 +1,96 @@
+{
+  "paper": "2609.23718",
+  "dataset": "KuaiRand-Pure",
+  "diagnostic_only": true,
+  "schema_version": 2,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "scaled public-data mechanism diagnostic, not paper-fidelity or production evidence"
+  },
+  "provenance": {
+    "dataset_fingerprint": "sha256:c814bf6f3624c0cfae83c57de3df26b2ed206e5c57bab4c4dcbfabbabe20cbf0",
+    "artifact_path": "docs/reproductions/2609.23718-unique/metrics/kuairand-pure-seeds42-44.json"
+  },
+  "setup": {
+    "source_rows_considered": 500000,
+    "retained_exposures": 107850,
+    "items": 7583,
+    "train": 16279,
+    "validation": 1709,
+    "test": 1917,
+    "steps_per_variant": 300,
+    "evaluation_impressions_per_seed": 400,
+    "code_retrieval_positives_per_seed": 100,
+    "split": "per-user last two chronological impressions held out"
+  },
+  "seeds": {
+    "42": {
+      "unique_scaled": {
+        "test_ctr_auc": 0.5184403578,
+        "test_code_recall_at_4": 0.12,
+        "test_reranked_recall_at_10": 0.01,
+        "code_perplexity": 59.88076019,
+        "mean_candidate_pool": 681.9
+      },
+      "without_joint_generation": {
+        "test_ctr_auc": 0.5144960305,
+        "code_perplexity": 60.01227951
+      },
+      "without_balance": {
+        "test_ctr_auc": 0.5159280474,
+        "test_code_recall_at_4": 0.33,
+        "test_reranked_recall_at_10": 0.01,
+        "code_perplexity": 24.56116676,
+        "mean_candidate_pool": 2218.26
+      }
+    },
+    "43": {
+      "unique_scaled": {
+        "test_ctr_auc": 0.5388431417,
+        "test_code_recall_at_4": 0.07,
+        "test_reranked_recall_at_10": 0.0,
+        "code_perplexity": 60.51030731,
+        "mean_candidate_pool": 704.5
+      },
+      "without_joint_generation": {
+        "test_ctr_auc": 0.5469265443,
+        "code_perplexity": 60.78816986
+      },
+      "without_balance": {
+        "test_ctr_auc": 0.5200070509,
+        "test_code_recall_at_4": 0.44,
+        "test_reranked_recall_at_10": 0.0,
+        "code_perplexity": 20.44973373,
+        "mean_candidate_pool": 2933.11
+      }
+    },
+    "44": {
+      "unique_scaled": {
+        "test_ctr_auc": 0.5237961855,
+        "test_code_recall_at_4": 0.06,
+        "test_reranked_recall_at_10": 0.0,
+        "code_perplexity": 60.48347855,
+        "mean_candidate_pool": 561.48
+      },
+      "without_joint_generation": {
+        "test_ctr_auc": 0.5232869038,
+        "code_perplexity": 60.42392349
+      },
+      "without_balance": {
+        "test_ctr_auc": 0.523337832,
+        "test_code_recall_at_4": 0.22,
+        "test_reranked_recall_at_10": 0.02,
+        "code_perplexity": 24.7651844,
+        "mean_candidate_pool": 1081.57
+      }
+    }
+  },
+  "interpretation": "No robust CTR or reranking improvement; balanced code usage reduces candidate-pool size but also lowers four-code recall on this slice.",
+  "manifest_ref": "reproduction:unique"
+}

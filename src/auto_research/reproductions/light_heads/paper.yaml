@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "light-heads",
+  "arxiv_id": "2609.25433",
+  "title": "Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2609.25433",
+  "organization": "Google",
+  "published": "2026-09-21",
+  "upstream_code": "否：截至 2026-09-26 未找到原作者发布的对应实现仓库",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "multi-task-learning",
+    "lightweight-heads"
+  ],
+  "local_code": "src/auto_research/reproductions/light_heads",
+  "documentation": "docs/reproductions/2609.25433-light-heads/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens 100K"
+  ],
+  "baseline": "frozen shared ranker with main rating task",
+  "metrics": [
+    "variants.light_head.test.main_auc",
+    "variants.light_head.test.light_auc",
+    "variants.no_reset.test.light_auc",
+    "variants.no_stop_gradient.test.main_auc"
+  ],
+  "mechanisms": [
+    "YouTube online continuous-training fleet and shared configuration service",
+    "private multi-task labels, downstream reward model and serving dependencies"
+  ],
+  "evolve_operators": []
+}

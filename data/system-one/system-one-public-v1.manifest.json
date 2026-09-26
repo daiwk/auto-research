@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "benchmark": "system-one-public-v1",
+  "purpose": "formal public checkpoint comparison and Evolve selection",
+  "selection": "fixed first rows; no model-dependent filtering",
+  "split_policy": "calibration selects genome; test/OOD remain isolated until champion",
+  "records": 200,
+  "counts": {
+    "calibration": 60,
+    "test": 60,
+    "ood": 80
+  },
+  "sources": {
+    "boolq": {
+      "dataset": "google/boolq",
+      "config": "default",
+      "split": "validation",
+      "license": "CC BY-SA 3.0",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=google%2Fboolq&config=default&split=validation&offset=0&length=40",
+      "response_sha256": "a3de8e5d93dabca9014bc31523ebcc08299efb048974c564f2178563592e3cd5"
+    },
+    "helpsteer2": {
+      "dataset": "nvidia/HelpSteer2",
+      "config": "default",
+      "split": "validation",
+      "license": "CC BY 4.0",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=nvidia%2FHelpSteer2&config=default&split=validation&offset=0&length=40",
+      "response_sha256": "55310e9d526093af3855c74aed3341a3bcfbe8074fac89f2667311be688c0c4b"
+    },
+    "pubmedqa": {
+      "dataset": "qiaojin/PubMedQA",
+      "config": "pqa_labeled",
+      "split": "train",
+      "license": "MIT",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=qiaojin%2FPubMedQA&config=pqa_labeled&split=train&offset=0&length=40",
+      "response_sha256": "18318bab6f2645d20457857ac376bf6f7dc74c1cb1ad3662a40288aa3560a938"
+    },
+    "arc-challenge": {
+      "dataset": "allenai/ai2_arc",
+      "config": "ARC-Challenge",
+      "split": "validation",
+      "license": "CC BY-SA 4.0",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fai2_arc&config=ARC-Challenge&split=validation&offset=0&length=40",
+      "response_sha256": "d0dde191123e89ea3a696c42fec9bee9a30f01d850f09eae39a4b6feff9c00a8"
+    },
+    "truthfulqa": {
+      "dataset": "truthfulqa/truthful_qa",
+      "config": "multiple_choice",
+      "split": "validation",
+      "license": "Apache-2.0",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=truthfulqa%2Ftruthful_qa&config=multiple_choice&split=validation&offset=0&length=40",
+      "response_sha256": "37dac490f2981d44fb0802b60faa4e77ee0db19ad02ef3e8e86fcd6ceff86716"
+    }
+  },
+  "dataset_sha256": "387638878933f8b6293b240a1daf5017fb317bd3c226e511c4e72cf3af46140d"
+}

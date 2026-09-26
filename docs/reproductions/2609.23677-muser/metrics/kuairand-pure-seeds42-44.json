@@ -1,0 +1,79 @@
+{
+  "dataset": "KuaiRand-Pure",
+  "protocol": "500000 raw rows; user_id<10000; positive click or long view; per-user last two held out; full 7583-item ranking; observed history masked; 1000 fixed-seed examples per evaluation split",
+  "events": 48075,
+  "training_examples": 12462,
+  "validation_examples": 2140,
+  "test_examples": 2140,
+  "steps_per_variant": 800,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "test_recall_at_10": {
+    "muser": [
+      0.022,
+      0.03,
+      0.025
+    ],
+    "recent_single_id": [
+      0.015,
+      0.003,
+      0.012
+    ],
+    "without_compression": [
+      0.022,
+      0.029,
+      0.023
+    ],
+    "without_semantics": [
+      0.014,
+      0.003,
+      0.016
+    ]
+  },
+  "test_ndcg_at_10": {
+    "muser": [
+      0.0113318671,
+      0.0138280143,
+      0.0136361107
+    ],
+    "recent_single_id": [
+      0.0092039706,
+      0.0010759486,
+      0.0057578901
+    ],
+    "without_compression": [
+      0.0123286691,
+      0.0143257214,
+      0.012996064
+    ],
+    "without_semantics": [
+      0.0083402579,
+      0.0009353933,
+      0.0068617004
+    ]
+  },
+  "evaluation_tier": "l2_public_dataset",
+  "diagnostic_only": true,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "public-data concept diagnostic; private semantic tower and serving omitted"
+  },
+  "provenance": {
+    "dataset_fingerprint": "sha256:c814bf6f3624c0cfae83c57de3df26b2ed206e5c57bab4c4dcbfabbabe20cbf0",
+    "artifact_path": "docs/reproductions/2609.23677-muser/metrics/kuairand-pure-seeds42-44.json",
+    "historical_migration": "historical-metrics-v2-2026-08-09",
+    "original_code_commit": "not recorded"
+  },
+  "limitations": "Public tags stand in for private multimodal LLM/BGE semantic features; not a paper-fidelity or online result.",
+  "schema_version": 2,
+  "manifest_ref": "reproduction:muser"
+}

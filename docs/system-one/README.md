@@ -43,12 +43,12 @@ Laya 是 421M ModernBERT typed-decision head：
 
 ```bash
 auto-research system-one-eval --backend nimble --dataset public-jsonl \
-  --public-data data/system-one/public-suite.jsonl \
+  --public-data data/system-one/system-one-public-v1.jsonl \
   --checkpoint-dir /checkpoints/nimble --base-model-dir /checkpoints/qwen3.5-9b \
   --offline --device cuda:0
 
 auto-research system-one-eval --backend laya --dataset public-jsonl \
-  --public-data data/system-one/public-suite.jsonl \
+  --public-data data/system-one/system-one-public-v1.jsonl \
   --checkpoint-dir /checkpoints/laya --offline --device cuda:0
 ```
 
@@ -90,14 +90,20 @@ auto-research evolve \
 ```bash
 auto-research evolve --model system-one --dataset system-one-public \
   --direction "比较开放 System One checkpoint、校准温度与拒答阈值" \
-  --system-one-public-data data/system-one/public-suite.jsonl \
+  --system-one-public-data data/system-one/system-one-public-v1.jsonl \
   --system-one-nimble-checkpoint /checkpoints/nimble \
   --system-one-nimble-base /checkpoints/qwen3.5-9b \
   --system-one-laya-checkpoint /checkpoints/laya \
   --offline --device cuda:0
 ```
 
-选择阶段只读取 validation；test 在冠军确定后报告。默认协议为 `foundation.banking77.system_one.v1`，同时报告 accuracy、NLL、Brier、ECE、覆盖率和选择性准确率。
+公开套件 v1 包含 200 条固定人工标注样本：calibration 60、test 60、独立来源
+OOD 80。选择阶段只读取 calibration；test/OOD 在冠军确定后报告。该套件用于
+比较 Choice/Noul/Score 契约、校准与跨来源行为，不能解释为通用产品性能排名。
+数据源、许可、逐源响应哈希及整体哈希见
+[`system-one-public-v1.manifest.json`](https://github.com/daiwk/auto-research/blob/main/data/system-one/system-one-public-v1.manifest.json)；
+可用 `python scripts/build_system_one_public_suite.py --output data/system-one/system-one-public-v1.jsonl`
+重新构建。Banking77 本地训练仍使用独立的 `foundation.banking77.system_one.v1` 协议。
 
 当前公开三 seed 本地基线为 accuracy `0.1353±0.0475`、Brier `0.9749±0.0004`、ECE `0.1048±0.0508`；完整逐 seed 数据见[指标产物](metrics/banking77-local-seeds42-44.json)。这是 800 次样本更新的小预算基线，明显不是 Jev 产品性能，也不应与 GLiClass 完整 checkpoint 数字横比。
 
@@ -112,8 +118,9 @@ Laya 的固定公开 checkpoint 也已在 A100 上执行 Choice、Noul、Score �
 [Nimble GPU receipt](../gpu-validations/nimble-checkpoint-a100-20260921.json)。
 
 公共多类型协议与 Nimble 上游发布格式兼容：每条记录把 `input` 和 `reference` 物理
-分开，loader 会拒绝 input 中的 target/answer/label/gold 字段，并按完整 source family
-切分 validation/test。这样可以同时报告 Choice、Noul、Score 的 accuracy、NLL、Brier、
+分开，loader 会拒绝 input 中的 target/answer/label/gold 字段。正式 v1 使用显式
+calibration/test/OOD 划分并核对唯一 ID；旧格式仍按 source family 切分。这样可以报告
+Choice、Noul、Score 的 accuracy、NLL、Brier、
 ECE、coverage、selective accuracy、Score MAE 和按类型/领域切片，而不会把标准答案交给模型。
 
 ## 延伸阅读

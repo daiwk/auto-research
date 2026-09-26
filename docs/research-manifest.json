@@ -17170,6 +17170,75 @@
     },
     {
       "domain": "recommendation",
+      "key": "light-heads",
+      "title": "Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2609.25433",
+      "detail_path": "reproductions/2609.25433-light-heads/README.md",
+      "topic": [
+        "ranking",
+        "multi-task-learning",
+        "lightweight-heads"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google",
+      "published": "2026-09-21",
+      "code": null,
+      "adapter": {
+        "adapter_key": "light-heads",
+        "arxiv_id": "2609.25433",
+        "title": "Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.25433",
+        "track": "recommendation",
+        "organization": "Google",
+        "published": "2026-09-21",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "multi-task-learning",
+          "lightweight-heads"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/light_heads",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 100K"
+        ],
+        "baseline": "frozen shared ranker with main rating task",
+        "metrics": [
+          "variants.light_head.test.main_auc",
+          "variants.light_head.test.light_auc",
+          "variants.no_reset.test.light_auc",
+          "variants.no_stop_gradient.test.main_auc"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "120 shared steps + 80 new-head steps per variant; chronological 70/15/15",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "YouTube",
+            "metric": "top-line engagement",
+            "lift_percent": 0.03,
+            "traffic": "production A/B experiment",
+            "source_url": "https://arxiv.org/html/2609.25433v1",
+            "source_location": "Section 5.2",
+            "significance": "p<0.05",
+            "retrieved_at": "2026-09-26"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "linkedin-feed-sr",
       "title": "An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking",
       "paper_url": "https://arxiv.org/abs/2602.12354",
@@ -19767,6 +19836,143 @@
         "evolve_operators": [
           "context:conversational-intent"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "muser",
+      "title": "MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling",
+      "paper_url": "https://arxiv.org/abs/2609.23677",
+      "detail_path": "reproductions/2609.23677-muser/README.md",
+      "topic": [
+        "retrieval",
+        "long-sequence",
+        "multi-interest"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Baidu",
+      "published": "2026-09-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "muser",
+        "arxiv_id": "2609.23677",
+        "title": "MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling",
+        "paper_url": "https://arxiv.org/abs/2609.23677",
+        "track": "recommendation",
+        "organization": "Baidu",
+        "published": "2026-09-20",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "long-sequence",
+          "multi-interest"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/muser",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "KuaiRand-Pure"
+        ],
+        "baseline": "recent-only single-interest ID retrieval",
+        "metrics": [
+          "variants.muser.test.recall_at_10",
+          "variants.recent_single_id.test.recall_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "800 steps each; full catalog; per-user last-two holdout",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Baidu APP",
+            "metric": "daily active users",
+            "lift_percent": 0.26,
+            "traffic": "online A/B",
+            "source_url": "https://arxiv.org/html/2609.23677v1",
+            "source_location": "Abstract and Introduction",
+            "significance": "p<0.05",
+            "retrieved_at": "2026-09-26"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "music-rationales",
+      "title": "Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery",
+      "paper_url": "https://arxiv.org/abs/2609.23877",
+      "detail_path": "reproductions/2609.23877-music-rationales/README.md",
+      "topic": [
+        "music-discovery",
+        "llm-rationale",
+        "offline-online-decoupling"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google",
+      "published": "2026-09-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "music-rationales",
+        "arxiv_id": "2609.23877",
+        "title": "Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery",
+        "paper_url": "https://arxiv.org/abs/2609.23877",
+        "track": "recommendation",
+        "organization": "Google",
+        "published": "2026-09-20",
+        "code_url": null,
+        "topics": [
+          "music-discovery",
+          "llm-rationale",
+          "offline-online-decoupling"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/music_rationales",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "HetRec Last.fm 2K"
+        ],
+        "baseline": "training-only collaborative filtering artist candidates",
+        "metrics": [
+          "results.cf_hit_at_5",
+          "results.generated_hit_at_5",
+          "results.served_hit_at_5_with_fallback",
+          "results.catalog_grounded_share",
+          "results.annotation_coverage_at_5",
+          "results.cache_coverage"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "default 20 validation users; published GPU audit 100 validation and 100 test users; at most 5 nominations",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/music-rationales-a100-20260927.json",
+        "online_evidence": [
+          {
+            "product": "YouTube Music",
+            "metric": "YDD shelf-level engagement",
+            "lift_percent": 22.43,
+            "traffic": "large-scale online multi-arm holdback A/B",
+            "source_url": "https://arxiv.org/html/2609.23877v1",
+            "source_location": "Section 4.3, Table 1",
+            "significance": "95% CI [16.93%, 27.93%]",
+            "retrieved_at": "2026-09-27"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
       }
     },
     {
@@ -28821,6 +29027,72 @@
         "evolve_operators": [
           "reward:causal-uplift"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "unique",
+      "title": "UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation",
+      "paper_url": "https://arxiv.org/abs/2609.23718",
+      "detail_path": "reproductions/2609.23718-unique/README.md",
+      "topic": [
+        "retrieval",
+        "ranking",
+        "generative-recommendation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Beihang University",
+      "published": "2026-09-20",
+      "code": null,
+      "adapter": {
+        "adapter_key": "unique",
+        "arxiv_id": "2609.23718",
+        "title": "UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation",
+        "paper_url": "https://arxiv.org/abs/2609.23718",
+        "track": "recommendation",
+        "organization": "Beihang University",
+        "published": "2026-09-20",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "ranking",
+          "generative-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/unique",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "KuaiRand-Pure"
+        ],
+        "baseline": "same early-fusion ranker without joint code generation",
+        "metrics": [
+          "variants.unique_scaled.test.ctr_auc",
+          "variants.unique_scaled.test.candidate_recall_at_4_codes"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "300 steps per variant; 500k raw exposures; chronological holdout",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Mobile Baidu",
+            "metric": "total watch duration",
+            "lift_percent": 0.96,
+            "traffic": "full-traffic online A/B",
+            "source_url": "https://arxiv.org/html/2609.23718v1",
+            "source_location": "Abstract and Section 4.4",
+            "retrieved_at": "2026-09-26"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
       }
     },
     {

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "muser",
+  "arxiv_id": "2609.23677",
+  "title": "MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling",
+  "paper_url": "https://arxiv.org/abs/2609.23677",
+  "organization": "Baidu",
+  "published": "2026-09-20",
+  "upstream_code": "否：截至 2026-09-26 未找到原作者发布的 MuSeR 实现仓库",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "long-sequence",
+    "multi-interest"
+  ],
+  "local_code": "src/auto_research/reproductions/muser",
+  "documentation": "docs/reproductions/2609.23677-muser/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "KuaiRand-Pure"
+  ],
+  "baseline": "recent-only single-interest ID retrieval",
+  "metrics": [
+    "variants.muser.test.recall_at_10",
+    "variants.recent_single_id.test.recall_at_10"
+  ],
+  "mechanisms": [
+    "ERNIE-generated summaries, ERNIE-Speed distillation, and BGE multimodal embeddings",
+    "asynchronous representation refresh, HNSW retrieval, and Baidu online traffic"
+  ],
+  "evolve_operators": []
+}

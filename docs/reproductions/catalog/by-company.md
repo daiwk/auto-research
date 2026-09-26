@@ -3,6 +3,7 @@
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
 ## Baidu
+- 2026-09 · [MuSeR](../2609.23677-muser/README.md)：对长期行为分层汇聚，再用多查询兴趣与候选相关路由进行检索；本地公开标签实验不复刻私有多模态链路。
 - 2026-09 · [GESE](../2609.15094-gese/README.md)：先生成多样且忠实的标题候选，再依据当前用户上下文选择展示标题。
 
 ## Alibaba International Digital Commerce Group
@@ -102,6 +103,8 @@
 - 2026-08 · [SPEAR](../2608.01738-spear/README.md)：用双 embedding、confidence×relevance 乘法门和动态 selector 联合优化个性化改写与检索。
 
 ## Google / YouTube
+- 2026-09 · [Light Heads](../2609.25433-light-heads/README.md)：在共享排序塔上配置化注入无梯度浅头，并比较窗口重置和负迁移消融。
+- 2026-09 · [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：异步生成新艺人及理由，经公开目录和标签证据校验后在线从缓存读取；本地不具备原论文的私有评审和 A/B。
 - 2026-07 · [HA-MoE](../2607.27577-ha-moe/README.md)：依据内容异构性动态路由领域、转移、内容与新鲜度专家，在单一模型中统一开放网页排序。
 - 2026-07 · [ClockRoPE](../2607.26369-clockrope/README.md)：从日/周周期 kernel 的 Fourier 频谱采样旋转频率，为生成式召回显式建模用户 routine。
 - 2026-07 · [Dual-purpose Semantic IDs](../2607.24865-dual-sid/README.md)：让分层 SID 同时承载协同身份并通过 Semantic Decoder 重建内容 embedding。
@@ -410,6 +413,7 @@
 - 2026-03 · [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力建模长行为序列。
 
 ## Beihang University
+- 2026-09 · [UNIQUE](../2609.23718-unique/README.md)：以反馈感知单层 code 和前缀目标注意力联合训练召回与排序；公开切片未复现论文收益。
 - 2026-02 · [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
 
 ## ByteDance AML

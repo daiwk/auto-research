@@ -3,6 +3,10 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [Light Heads](../2609.25433-light-heads/README.md)：通过 stop-gradient 隔离新多任务目标，并在训练窗口重置轻头以保持跨模型预测空间一致。
+- [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：把真实 LLM 艺人提名与理由生成放在异步离线阶段，在线仅用过滤后的缓存画像或 CF 回退。
+- [MuSeR](../2609.23677-muser/README.md)：分层压缩长序列、学习多组兴趣查询，并按候选自适应融合兴趣与物品内容特征。
+- [UNIQUE](../2609.23718-unique/README.md)：用反馈感知扁平 code、共享前缀与目标注意力联合执行生成召回和曝光排序。
 - [EvoPilot](../2609.21257-evopilot/README.md)：以匹配比较协议、artifact attestation 和 fail-closed verifier 审计 Agent 自动提出的工业推荐实验。
 - [ANGLE](../2609.18296-angle/README.md)：以层次文本标识、生成/判别/排序联合目标和动态约束 beam 完成一步广告检索。
 - [GESE](../2609.15094-gese/README.md)：多样性/忠实度约束的标题探索与上下文选择。

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "adapter_key": "music-rationales",
+  "validated_at": "2026-09-27",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python", "-u", "-c",
+    "from pathlib import Path; from auto_research.reproductions.music_rationales.experiment import reproduce; root=Path('/tmp/auto-research-music/data'); out={split:reproduce(root,seed=42,split=split,users=100,device='cuda:0',model_path='/tmp/auto-research-qwen2.5-7b') for split in ('validation','test')}"
+  ],
+  "dataset": {
+    "name": "HetRec Last.fm 2K",
+    "source": "https://files.grouplens.org/datasets/hetrec2011/hetrec2011-lastfm-2k.zip",
+    "revision": "sha256:6738f48195667ff03caaab4d32ca9a3133d8cc026b7c3cdaf6ce1010e913c59c",
+    "interactions": 92834,
+    "artists": 17632,
+    "evaluation_users_per_split": 100,
+    "split": "per-user seeded random 80/10/10; train-only candidate pool"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "local_weights_committed": false
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "validation_cf_hit_at_5": 0.43,
+    "validation_nomination_plus_cf_hit_at_5": 0.42,
+    "test_cf_hit_at_5": 0.4,
+    "test_llm_nomination_only_hit_at_5": 0.14,
+    "test_nomination_plus_cf_hit_at_5": 0.38,
+    "test_annotation_only_hit_at_5": 0.4,
+    "test_annotation_coverage_at_5": 0.276,
+    "catalog_grounded_share": 0.39558232931726905,
+    "cache_coverage": 0.48,
+    "improvement_found": false,
+    "online_rationale_effect_measured": false
+  },
+  "provenance": {
+    "commit": "7786606c67230a4f1a292963e38384fed503f465",
+    "artifact_path": "docs/gpu-validations/music-rationales-a100-20260927.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

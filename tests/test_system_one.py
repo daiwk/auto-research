@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import csv
 import json
+from types import SimpleNamespace
 
 import pytest
 
 from auto_research.protocols import get_protocol
 from auto_research.evolution import EvolutionConfig, Genome
 from auto_research.evolution.system_one import SystemOneEvolutionEvaluator
+from auto_research.evolution.report import render_dashboard, render_evolution_report
 from auto_research.system_one import (
     ChoiceQuestion,
     LocalDecisionModel,
@@ -378,6 +380,53 @@ def test_system_one_checkpoint_operators_are_only_executable_with_real_paths(tmp
     assert trial.validation["accuracy"] == 1.0
 
 
+def test_formal_public_suite_uses_explicit_calibration_test_and_ood(tmp_path):
+    from auto_research.system_one.public_suite import load_public_decision_splits
+
+    rows = []
+    for split in ("calibration", "test", "ood"):
+        rows.append({
+            "id": split, "domain": "routing", "family": f"family-{split}",
+            "source": f"source-{split}", "split": split,
+            "input": {"state": "late transfer", "questions": {"decision": {
+                "type": "choice", "instructions": "route",
+                "criteria": {"card": "card", "transfer": "transfer"}}}},
+            "reference": {"target": "transfer", "human_reviewed": True},
+        })
+    path = tmp_path / "formal.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+    splits = load_public_decision_splits(path)
+    assert [row.id for row in splits.calibration] == ["calibration"]
+    assert [row.id for row in splits.test] == ["test"]
+    assert [row.id for row in splits.ood] == ["ood"]
+
+
+def test_formal_public_suite_rejects_incomplete_explicit_splits(tmp_path):
+    from auto_research.system_one.public_suite import load_public_decision_splits
+
+    path = tmp_path / "broken.jsonl"
+    path.write_text(json.dumps({
+        "id": "only-calibration", "split": "calibration",
+        "input": {"state": "x", "questions": {"decision": {
+            "type": "noul", "instructions": "yes?"}}},
+        "reference": {"target": True},
+    }) + "\n")
+    with pytest.raises(ValueError, match="calibration and test"):
+        load_public_decision_splits(path)
+
+
+def test_formal_public_suite_rejects_modified_data(tmp_path):
+    from auto_research.system_one.public_suite import load_public_decision_splits
+
+    path = tmp_path / "formal.jsonl"
+    path.write_text("{}\n")
+    path.with_suffix(".manifest.json").write_text(json.dumps({
+        "dataset_sha256": "0" * 64,
+    }))
+    with pytest.raises(ValueError, match="SHA256"):
+        load_public_decision_splits(path)
+
+
 def test_system_one_public_baseline_uses_configured_checkpoint(tmp_path):
     from auto_research.evolution.providers import get_provider
 
@@ -410,3 +459,25 @@ def test_nimble_checkpoint_hash_verifier_fails_closed(tmp_path):
     weight.write_bytes(b"tampered")
     with pytest.raises(ValueError, match="SHA256"):
         _assert_sha256(weight, "0" * 64, "Nimble adapter")
+
+
+def test_system_one_reports_do_not_assume_recommendation_metrics():
+    trial = SimpleNamespace(
+        trial_id="g0-t0", generation=0, genome=Genome(architecture="system-one:nimble"),
+        fitness=0.6, validation={"accuracy": 0.75, "coverage": 0.8, "score_mae": 0.3},
+        status="completed", source_papers=(),
+    )
+    result = SimpleNamespace(
+        config=SimpleNamespace(model="system-one", dataset="system-one-public",
+                               system_one_public_data="data/system-one/public.jsonl"),
+        dataset_summary={"validation_examples": 60, "test_examples": 60, "ood_examples": 80},
+        trials=[trial], champion_id="g0-t0", rounds=[],
+        baseline_test={"accuracy": 0.7, "ood_accuracy": 0.6},
+        champion_test={"accuracy": 0.7, "ood_accuracy": 0.6},
+    )
+    report = render_evolution_report(result)
+    dashboard = render_dashboard(result)
+    assert "OOD：60 / 60 / 80" in report
+    assert "ood_accuracy" in report
+    assert "NDCG" not in report + dashboard
+    assert "Coverage" in dashboard
