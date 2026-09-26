@@ -26,10 +26,11 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-26**。[近期扫描记录](recent-paper-scan-20260926.md)按
+更新基线：**2026-09-27**。[本轮增量审计](recent-paper-scan-20260927.md)从 09-20
+保留重叠窗口运行四领域分页；arXiv API 已恢复，但 Google/Meta 官方发表页抓取超时，
+因此不宣称全来源穷尽，发现 watermark 暂不推进。[上一轮扫描记录](recent-paper-scan-20260926.md)按
 2026-09-20～09-26 重叠窗口核验了四篇工业 P0 与一篇 Meta 评测 P1；完成和未完成的
-边界保持在下表队列，不用占位 adapter 冒充复现。arXiv export API 本轮返回
-HTTP 406，尚未恢复全量分页与终态差分，因此不推进发现 watermark。上一轮已合入
+边界保持在下表队列，不用占位 adapter 冒充复现。上一轮已合入
 的 [PR #164](https://github.com/daiwk/auto-research/pull/164) 不因本轮扫描重做。
 
 System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通；测试集与 OOD
@@ -45,6 +46,19 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP26-03 | P0 | DONE（缩比机制） | UNIQUE：KuaiRand-Pure 曝光时间留出，平面量化、早融合、target-attention split、生成/排序联合训练；三 seed CTR-AUC、code 召回和消融，负结果保留 |
 | SEP26-04 | P0 | 部分完成（本分支） | MuSeR：已在 KuaiRand-Pure 训练多尺度压缩、多 query、候选路由与全库检索对照；原论文 ERNIE/BGE 语义、异步缓存和生产召回未完成，adapter 标为概念验证，不宣称论文复现完毕 |
 | SEP26-05 | P1 · Meta | PROTOCOL（实证待数据） | layered engagement evaluation：已实现曝光前冻结校验、配对 bootstrap 与 CI-aware 决策协议；私有 scorer 和配对 A/B 不公开，不能声称复现 81.1% F1 |
+
+### 2026-09-27 新论文执行队列
+
+下表只登记已读到明确线上证据的工业 P0，**尚未完成复现**；正文证据、
+各领域 P1 复核及排除项见[本轮扫描记录](recent-paper-scan-20260927.md)。
+
+| ID | 优先级 | 状态 | 工作与完成条件 |
+| --- | --- | --- | --- |
+| SEP27-01 | P0 · ByteDance | 待实现 | OneTrans-V2：共享 causal backbone、三级任务联合损失、DCGR、精排→预排蒸馏；公开数据三 seed 对照与阶段指标，不把 MovieLens 代理标签写成 GMV |
+| SEP27-02 | P0 · TikTok | 待实现 | X-Rec：anchor-conditioned Riemannian flow matching、late-interaction DiT、ANN 全库检索；公开数据与等预算 U2I/SID 对照，真实生成吞吐和检索指标 |
+| SEP27-03 | P0 · Alibaba | 待实现 | CMRec：一作单位已核对为 Alibaba International Digital Commerce Group；尚须核查官方代码与可用跨域数据，完成共享语义代码本、双约束 code-mixing 和上下文加权损失的跨域消融 |
+| SEP27-04 | P0 | 待实现 | AgentX-Model：双 Agent 提案/执行边界、四类研究动作、依赖约束历史回放；私有生产轨迹和线上收益明确隔离 |
+| SEP27-05 | P1 · Meta | 全文复核 | MaD-RL：Meta 官方页已确认 09-24 发表；须取得原文公式、目标分布/属性标注与公开训练评测协议，再决定 KL/Jensen–Shannon 分布匹配的可执行复现范围 |
 
 ## 优先级和状态
 

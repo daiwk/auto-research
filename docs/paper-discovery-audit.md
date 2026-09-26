@@ -64,6 +64,10 @@ TokenMinds（Google/YouTube）和 SlimPer（Meta/Instagram）触发。
 实现见[2026-08-25 最新论文增量扫描](recent-paper-scan-20260825.md)。
 未写入终态的论文不会因为下一次增量扫描而消失。
 
+2026-09-27 的[四领域重叠扫描](recent-paper-scan-20260927.md)已恢复 arXiv 分页，
+但 Google/Meta 官方发表页抓取失败；新的工业 P0 与跨领域 P1 全文复核队列已写入
+[统一路线图](research-roadmap.md)，来源补查和逐项终态完成前不推进全来源 watermark。
+
 2026-08-26 对五个 arXiv 分类的 363 篇新提交完成去重和高优先全文复核，新增 TAGR、
 WeMM-Embedding、两种后训练方法和四种 Agent 方法；完整结果与拒绝理由见
 [2026-08-26 最新论文增量扫描](recent-paper-scan-20260826.md)。本轮 Google / Meta
