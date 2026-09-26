@@ -11,11 +11,11 @@
 
 | 优先级 | 论文 | 正文证据与机制 | 状态 |
 |---|---|---|---|
-| P0 | [Google / YouTube Light Heads](https://arxiv.org/html/2609.25433v1)（2609.25433，09-21） | 无梯度浅头、定期重置与跨模型统一配置；正文 §5.2 报告线上显著 +0.03% engagement、低质曝光 -0.40%，另有垂类 +13.83% | 待实现；需冻结共享 tower、真实多任务标签与独立 test |
-| P0 | [Google / YouTube Music LLM Rationales](https://arxiv.org/html/2609.23877v1)（2609.23877，09-20） | 异步 LLM 用户画像、候选和解释、KG canonicalization、离线 judge、在线 fallback；正文 §4 两周多臂 A/B | 待实现；没有公开的 YouTube 用户/艺人反馈及原始服务，必须用合法公开数据和真实可运行 LLM，并分开呈现解释与召回消融 |
-| P0 | [UNIQUE](https://arxiv.org/html/2609.23718v1)（2609.23718，09-20） | 平面量化、早融合、目标注意力分离、统一生成与排序损失；正文 §4.4 一周全流量 A/B，watch duration +0.96%、distribution +1.08%、retention +0.70% | 待实现；需公开序列数据上的端到端训练及召回/排序共同指标 |
-| P0 | [MuSeR](https://arxiv.org/html/2609.23677v1)（2609.23677，09-20） | 分层时序压缩、多 query 兴趣、语义对齐；正文有线上 DAU +0.26%、session duration +0.89% | 待实现；需公开长序列/多模态数据和真实 retrieval 对照 |
-| P1 | [Meta layered engagement evaluation](https://arxiv.org/html/2609.25408v1)（2609.25408，09-21） | 行为标签→分类器→线上效应校准三层；冻结后 8 个实验、113 对照，正文报告 F1 81.1% | 待实现；私有线上 A/B 不可重建，须找公开配对离线/线上实验数据，否则仅做协议实现且不能验证论文效果 |
+| P0 | [Google / YouTube Light Heads](reproductions/2609.25433-light-heads/README.md)（2609.25433，09-21） | 无梯度浅头、定期重置与跨模型统一配置；正文 §5.2 报告线上显著 +0.03% engagement、低质曝光 -0.40%，另有垂类 +13.83% | 已实现公开数据核心机制：动态注入、隔离梯度与两项消融；MovieLens 三 seed，保留重置不利的负结果 |
+| P0 | [Google / YouTube Music LLM Rationales](reproductions/2609.23877-music-rationales/README.md)（2609.23877，09-20） | 异步 LLM 用户画像、候选和解释、KG canonicalization、离线 judge、在线 fallback；正文 §4 两周多臂 A/B | 已完成公开 Last.fm + 真实 7B/A100 离线生成、目录/理由校验、提名增强与只附解释两臂及缓存回退；test 命中 0.38 对 CF 0.40，概念验证，不推断线上理由效果 |
+| P0 | [UNIQUE](reproductions/2609.23718-unique/README.md)（2609.23718，09-20） | 平面量化、早融合、目标注意力分离、统一生成与排序损失；正文 §4.4 一周全流量 A/B，watch duration +0.96%、distribution +1.08%、retention +0.70% | 已完成 KuaiRand-Pure 缩比机制实验、三 seed 联合/消融、CTR-AUC 与 code 候选覆盖；未见稳定收益，列为概念验证 |
+| P0 | [MuSeR](reproductions/2609.23677-muser/README.md)（2609.23677，09-20） | 分层时序压缩、多 query 兴趣、语义对齐；正文有线上 DAU +0.26%、session duration +0.89% | 已实现公开 KuaiRand 多兴趣及分层压缩训练、全目录检索消融；公开标签替代私有 LLM/BGE 语义，明确为概念验证 |
+| P1 | [Meta layered engagement evaluation](agent-research/layered-engagement-protocol.md)（2609.25408，09-21） | 行为标签→分类器→线上效应校准三层；冻结后 8 个实验、113 对照，正文报告 F1 81.1% | 已实现曝光前冻结门禁、配对 bootstrap 和区间决策审计协议；缺私有 scorer、冻结系数及公开配对 A/B，不列为论文效果复现 |
 
 ## 执行门槛
 

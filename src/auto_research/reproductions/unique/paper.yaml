@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "unique",
+  "arxiv_id": "2609.23718",
+  "title": "UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation",
+  "paper_url": "https://arxiv.org/abs/2609.23718",
+  "organization": "Beihang University",
+  "published": "2026-09-20",
+  "upstream_code": "否：截至 2026-09-26 未找到原作者发布的 UNIQUE 实现仓库",
+  "track": "recommendation",
+  "topics": [
+    "retrieval",
+    "ranking",
+    "generative-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/unique",
+  "documentation": "docs/reproductions/2609.23718-unique/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "KuaiRand-Pure"
+  ],
+  "baseline": "same early-fusion ranker without joint code generation",
+  "metrics": [
+    "variants.unique_scaled.test.ctr_auc",
+    "variants.unique_scaled.test.candidate_recall_at_4_codes"
+  ],
+  "mechanisms": [
+    "production heterogeneous features and task-specific multi-head feedback objectives",
+    "full Mobile Baidu traffic, infrastructure and online A/B"
+  ],
+  "evolve_operators": []
+}

@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 排序与长序列建模 | [Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems](../2609.25433-light-heads/README.md) | Google，2026-09-21 | 未发现官方代码 | `light-heads` |
+| 大模型能力与推荐融合 | [Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery](../2609.23877-music-rationales/README.md) | Google，2026-09-20 | 未发现官方代码 | `music-rationales` |
+| 生成、排序与冷启动 | [MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling](../2609.23677-muser/README.md) | Baidu，2026-09-20 | 未发现官方代码 | `muser` |
+| 生成、排序与冷启动 | [UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation](../2609.23718-unique/README.md) | Beihang University，2026-09-20 | 未发现官方代码 | `unique` |
 | Serving 与研究基础设施 | [Verify, Don't Trust: Agentic Model Development for Video Discovery Retrieval at Scale](../2609.21257-evopilot/README.md) | Meta Platforms，2026-09-18 | 未发现官方代码 | `evopilot` |
 | 生成、排序与冷启动 | [One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations](../2609.18296-angle/README.md) | Tencent，2026-09-16 | 未发现官方代码 | `angle` |
 | 展示层生成与个性化 | [Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation](../2609.15094-gese/README.md) | Baidu，2026-09-14 | 未发现官方代码 | `gese` |

@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "paper": "2609.23877",
+  "adapter": "music-rationales",
+  "dataset": "HetRec Last.fm 2K",
+  "diagnostic_only": true,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Public artist discovery diagnostic only; no rationale-exposure outcomes or causal engagement claim"
+  },
+  "provenance": {
+    "dataset_fingerprint": "sha256:6738f48195667ff03caaab4d32ca9a3133d8cc026b7c3cdaf6ce1010e913c59c",
+    "artifact_path": "docs/reproductions/2609.23877-music-rationales/metrics/lastfm2k-qwen25-7b-seed42.json",
+    "checkpoint": "Qwen/Qwen2.5-7B-Instruct@bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "gpu_validation_artifact": "docs/gpu-validations/music-rationales-a100-20260927.json"
+  },
+  "setup": {
+    "seed": 42,
+    "split": "per-user seeded random 80/10/10; train-only CF candidates",
+    "users_per_evaluation_split": 100,
+    "artists": 17632,
+    "interactions": 92834,
+    "candidate_limit": 10,
+    "output_limit": 5,
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "validation": {
+    "cf_hit_at_5": 0.43,
+    "generated_hit_at_5": 0.14,
+    "served_hit_at_5_with_fallback": 0.42,
+    "annotation_only_hit_at_5": 0.43,
+    "annotation_coverage_at_5": 0.276,
+    "catalog_grounded_share": 0.39558232931726905,
+    "cache_coverage": 0.48,
+    "accepted_nominations": 197,
+    "rejected_nominations": 301
+  },
+  "test": {
+    "cf_hit_at_5": 0.4,
+    "generated_hit_at_5": 0.14,
+    "served_hit_at_5_with_fallback": 0.38,
+    "annotation_only_hit_at_5": 0.4,
+    "annotation_coverage_at_5": 0.276,
+    "catalog_grounded_share": 0.39558232931726905,
+    "cache_coverage": 0.48,
+    "accepted_nominations": 197,
+    "rejected_nominations": 301
+  },
+  "interpretation": "The LLM nomination arm slightly underperforms CF on hidden artist consumption; annotation-only leaves the ranked candidates unchanged and cannot measure rationale engagement. No local evidence for the paper's online gain.",
+  "manifest_ref": "reproduction:music-rationales"
+}

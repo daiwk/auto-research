@@ -10,12 +10,16 @@
 
 ## 排序与长序列建模
 
+### 多任务目标隔离
+- [Light Heads](../2609.25433-light-heads/README.md)：给共享排序塔动态挂浅层新目标头，stop-gradient 防止其损伤原任务并支持窗口级重置。
+
 ### 预训练与参数高效迁移
 - [LazFormer](../2609.14978-lazformer/README.md)：可迁移生成式预训练与轻量排序残差适配。
 
 ## 大模型能力与推荐融合
 
 ### LLM / Foundation model + Recommendation
+- [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：离线生成陌生艺人及基于已听艺人的解释，经实体和共享标签校验后缓存供在线使用。
 - [ConnectionMind](../2608.10187-connectionmind/README.md)：让 LLM policy 在 typed 社交图上逐步扩展证据路径，并以 SFT、GRPO 和 GNN 蒸馏兼顾推理质量与流量成本。
 - [DREAM](../2608.09408-dream/README.md)：以 LLM Meta Engine 将三层用户意图编译为安全的推荐策略覆盖，并通过 Reward Dual Loop 持续沉淀有效结论。
 - [Netflix GenRec](../2608.10257-genrec-netflix/README.md)：把用户历史、内容和请求上下文文本化，以 LoRA 后训练 causal LLM，再由 catalog-aware head 输出全目录分数。
@@ -74,9 +78,11 @@
 - [M6-Rec](../2205.08084-m6rec/README.md)：把多种推荐任务统一成自然语言形式，并以 option-adapter 轻量适配预训练模型。
 
 ## 生成、排序与冷启动
+- [UNIQUE](../2609.23718-unique/README.md)：以反馈双塔更新平面码本，让 code 提名与目标相关排序共享早融合用户前缀。
 - [ANGLE](../2609.18296-angle/README.md)：以层次文本标识、三目标联合训练和请求侧动态约束实现一步广告检索。
 
 ### 搜索、召回与长期价值
+- [MuSeR](../2609.23677-muser/README.md)：对近期、中期、远期行为分层池化，以多兴趣 query 提取偏好并结合候选相关路由进行全库检索。
 - [MIMA](../2609.12842-mima/README.md)：用同请求多正例与排他一对一匹配显式监督互补兴趣，并以 activation routing 校准召回通道。
 - [VK Friend-GNN](../2608.27413-friend-gnn/README.md)：以多哈希共享表压缩超大用户 embedding，并用时序邻接与 cutoff 避免邻居采样泄漏未来边。
 - [DCEO](../2608.25635-dceo/README.md)：用直接因果效应替代短期相关性代理，并以动态多目标权重优化长期用户价值。

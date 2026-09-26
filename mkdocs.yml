@@ -75,6 +75,7 @@ nav:
           - 统一评测协议: agent-research/benchmark.md
           - L2.1 隔离能力评测与自动进化: agent-research/capability-benchmark.md
           - 可训练 policy 与真实 executor: agent-research/training-executor.md
+          - 分层参与度评测协议: agent-research/layered-engagement-protocol.md
   - 项目文档:
       - 项目 README: project-readme.md
       - GPT-6 Astra 协作指南: astra-collaboration.md

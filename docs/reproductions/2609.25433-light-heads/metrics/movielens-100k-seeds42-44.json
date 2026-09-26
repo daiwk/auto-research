@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": true,
+    "claim_policy": "same public split and budget; report negative reset ablation, no online inference"
+  },
+  "provenance": {
+    "dataset_fingerprint": "sha256:50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+    "artifact_path": "docs/reproductions/2609.25433-light-heads/metrics/movielens-100k-seeds42-44.json"
+  },
+  "paper": "2609.25433",
+  "adapter": "light-heads",
+  "dataset": "MovieLens 100K",
+  "protocol": "per-user chronological 70/15/15; fixed 120 base + 80 head steps; no test-based selection",
+  "evaluation_tier": "l2_public_dataset",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "train_rows": 69572,
+  "validation_rows": 14973,
+  "test_rows": 15455,
+  "test_auc": {
+    "light_head_main": [
+      0.6304891823,
+      0.6517774982,
+      0.6433407694
+    ],
+    "light_head_new_task": [
+      0.4485702052,
+      0.5775707737,
+      0.5065805969
+    ],
+    "no_reset_new_task": [
+      0.6096563253,
+      0.6387191577,
+      0.6315765597
+    ],
+    "no_stop_gradient_main": [
+      0.610267527,
+      0.6391421777,
+      0.623892523
+    ],
+    "no_stop_gradient_new_task": [
+      0.5918222184,
+      0.625555402,
+      0.6232191109
+    ]
+  },
+  "interpretation": "在此短预算公开评分任务上，重置轻头降低了新任务 AUC；去掉 stop-gradient 降低原任务 AUC。负结果保留，不声称复现 YouTube 线上提升。",
+  "manifest_ref": "reproduction:light-heads"
+}

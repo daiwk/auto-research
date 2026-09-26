@@ -50,6 +50,10 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `music-rationales` · [Google YouTube Music](2609.23877-music-rationales/README.md)：真实 7B 模型离线生成发现画像，公开艺人目录过滤后缓存在线提供理由，缺失时退回 CF；只作为概念验证。
+- `light-heads` · [Google Light Heads](2609.25433-light-heads/README.md)：共享排序塔上动态注入无梯度浅头，对照窗口重置与去掉 stop-gradient 的影响。
+- `unique` · [UNIQUE](2609.23718-unique/README.md)：单层扁平量化与早融合联合召回/排序，在 KuaiRand-Pure 上保留低召回和排序无提升的结果。
+- `muser` · [MuSeR](2609.23677-muser/README.md)：分层时间压缩与多查询兴趣建模，公开标签代替私有多模态语义，因此明确为概念验证。
 - `evopilot` · [EvoPilot](2609.21257-evopilot/README.md)：以 artifact attestation、pair-level fail-closed verifier 和人工审核约束长周期线上自动研究。
 - `angle` · [ANGLE](2609.18296-angle/README.md)：层次文本标识、生成/判别/排序联合目标与动态约束检索。
 - `sas-attention` · [SAS](2609.13141-sas-attention/README.md)：用 softmax 内连续 log-gate 让语言模型损失端到端训练稀疏上下文排序。
