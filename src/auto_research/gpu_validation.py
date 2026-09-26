@@ -16,6 +16,9 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "system-one-formal-evolve": (
+        "docs/gpu-validations/system-one-formal-evolve-a100-20260926.json"
+    ),
     "laya-checkpoint": (
         "docs/gpu-validations/laya-checkpoint-a100-20260921.json"
     ),

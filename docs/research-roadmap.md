@@ -26,11 +26,25 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-15**。本轮新增三篇通过工业线上证据门槛的 P0（PinDCO、MIMA、
-ChronicleRec）和一篇基础模型 P1（SAS），代码、中文文档、论文原图及三 seed 指标已完成，
-详见[扫描审计](recent-paper-scan-20260915.md)。OneLA、CanvasAnneal、GAUGE 与
-AMDKernelVault 已登记为有明确恢复条件的 DEFERRED，不创建占位 adapter。由于 arXiv API
-连接重置，本轮不推进 watermark；下一轮从 **2026-09-10** 保留重叠窗口继续增量扫描。
+更新基线：**2026-09-26**。[近期扫描记录](recent-paper-scan-20260926.md)按
+2026-09-20～09-26 重叠窗口核验了四篇工业 P0 与一篇 Meta 评测 P1；它们尚未
+实现，保持在下表队列，不用占位 adapter 冒充复现。arXiv export API 本轮返回
+HTTP 406，尚未恢复全量分页与终态差分，因此不推进发现 watermark。上一轮已合入
+的 [PR #164](https://github.com/daiwk/auto-research/pull/164) 不因本轮扫描重做。
+
+System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通；测试集与 OOD
+仅在选择后读取，冠军没有优于初始配置。数据哈希、指标和运行边界见
+[System One 评测协议](system-one/benchmark.md)。
+
+### 2026-09-26 新论文执行队列
+
+| ID | 优先级 | 状态 | 工作与完成条件 |
+|---|---|---|---|
+| SEP26-01 | P0 · Google | 待实现 | Light Heads：冻结 tower 的轻头、重置和无 stop-gradient 消融；公开多任务数据与独立 test |
+| SEP26-02 | P0 · Google | 待实现 | YouTube Music rationale：真实 LLM 异步画像、KG/新颖性校验、在线 fallback；公开可合法使用的音乐交互与解释评测 |
+| SEP26-03 | P0 | 待实现 | UNIQUE：平面量化、早融合、target-attention split 与生成/排序联合损失；公开序列数据和召回/排序对照 |
+| SEP26-04 | P0 | 待实现 | MuSeR：多尺度压缩、多 query 兴趣、语义对齐及真实 retrieval 对照 |
+| SEP26-05 | P1 · Meta | EVIDENCE | layered engagement evaluation：先找到公开的配对离线/线上实验数据；否则只可实现评测协议，不能声称复现论文 81.1% F1 |
 
 ## 优先级和状态
 
