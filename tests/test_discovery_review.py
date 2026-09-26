@@ -35,6 +35,21 @@ def test_industrial_recommendation_evidence_is_not_decided_from_abstract():
     assert row["full_text_review_required"] is True
 
 
+def test_deployment_wording_recalls_papers_whose_ab_is_only_in_full_text():
+    for abstract in (
+        "Deployed across all three stages of an industrial recommendation system.",
+        "Deployed as a retrieval source after two consecutive launches.",
+        "A production evaluation of the recommendation research framework.",
+    ):
+        row = classify_candidate(
+            "recommendation",
+            _candidate(title="Industrial Recommender", abstract=abstract,
+                       matched_queries=["recsys-general"]),
+        )
+        assert row["review_bucket"] == "industrial-fulltext-review"
+        assert row["full_text_review_required"] is True
+
+
 def test_three_queries_are_kept_for_manual_review_and_weaker_hits_are_deferred():
     anchored = classify_candidate(
         "post-training",

@@ -37,6 +37,10 @@ PRIORITY_QUERY_PREFIXES = ("priority-org-google", "priority-org-google-deepmind"
 INDUSTRIAL_EVIDENCE_ANCHORS = (
     "online a/b", "online ab", "a/b test", "production a/b", "deployed in production",
     "fully deployed", "global traffic", "live traffic", "online experiment",
+    # Recall only: an abstract can report a launch without spelling out A/B;
+    # the full-text gate below still decides whether quantitative evidence exists.
+    "deployed as", "deployed across", "production launch", "consecutive launches",
+    "served in production", "production evaluation",
 )
 
 
