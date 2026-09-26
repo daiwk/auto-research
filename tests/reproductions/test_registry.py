@@ -357,6 +357,10 @@ def test_builtin_adapters_are_discoverable():
         "lazformer",
         "angle",
         "evopilot",
+        "light-heads",
+        "music-rationales",
+        "unique",
+        "muser",
     }
     assert get_adapter("sis").paper.arxiv_id == "2607.04728"
     assert get_adapter("plum").fidelity is ReproductionFidelity.FULL_PIPELINE
