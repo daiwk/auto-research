@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -21,11 +22,21 @@ class PublicDecisionExample:
     request: SystemOneRequest
     question_id: str
     target: str | bool | int
+    split: str = "legacy"
+    source: str = "unknown"
+
+
+@dataclass(frozen=True)
+class PublicDecisionSplits:
+    calibration: tuple[PublicDecisionExample, ...]
+    test: tuple[PublicDecisionExample, ...]
+    ood: tuple[PublicDecisionExample, ...] = ()
 
 
 def load_public_decisions(path: Path) -> tuple[PublicDecisionExample, ...]:
     """Load the Nimble-compatible JSONL format without exposing references."""
     rows: list[PublicDecisionExample] = []
+    ids: set[str] = set()
     for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
@@ -71,17 +82,47 @@ def load_public_decisions(path: Path) -> tuple[PublicDecisionExample, ...]:
                 raise ValueError(f"line {line_number}: score target is out of range")
         else:
             raise ValueError(f"line {line_number}: unsupported question type {kind!r}")
+        row_id = str(raw.get("id", f"line-{line_number}"))
+        if row_id in ids:
+            raise ValueError(f"line {line_number}: duplicate public decision id {row_id!r}")
+        ids.add(row_id)
         rows.append(PublicDecisionExample(
-            id=str(raw.get("id", f"line-{line_number}")),
+            id=row_id,
             domain=str(raw.get("domain", "unknown")),
             family=str(raw.get("family", raw.get("source_family", "unknown"))),
             request=SystemOneRequest(inputs.get("state", ""), {str(question_id): question}),
             question_id=str(question_id),
             target=target,
+            split=str(raw.get("split", "legacy")),
+            source=str(raw.get("source", raw.get("family", "unknown"))),
         ))
     if not rows:
         raise ValueError("public decision suite is empty")
     return tuple(rows)
+
+
+def load_public_decision_splits(path: Path) -> PublicDecisionSplits:
+    """Load explicit benchmark splits, with legacy family split compatibility."""
+    manifest_path = path.with_suffix(".manifest.json")
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != manifest.get("dataset_sha256"):
+            raise ValueError("public decision suite SHA256 does not match manifest")
+    rows = load_public_decisions(path)
+    explicit = {row.split for row in rows if row.split != "legacy"}
+    if not explicit:
+        calibration, test = split_public_decisions(rows)
+        return PublicDecisionSplits(calibration, test)
+    unknown = {row.split for row in rows} - {"calibration", "test", "ood"}
+    if unknown:
+        raise ValueError(f"unsupported public decision splits: {sorted(unknown)}")
+    calibration = tuple(row for row in rows if row.split == "calibration")
+    test = tuple(row for row in rows if row.split == "test")
+    ood = tuple(row for row in rows if row.split == "ood")
+    if not calibration or not test:
+        raise ValueError("formal public suite requires non-empty calibration and test splits")
+    return PublicDecisionSplits(calibration, test, ood)
 
 
 def split_public_decisions(
@@ -154,6 +195,8 @@ def evaluate_public_decisions(
         "evaluated_examples": float(len(examples)),
         "by_type": {key: float(np.mean(values)) for key, values in sorted(by_type.items())},
         "by_domain": {key: float(np.mean(values)) for key, values in sorted(by_domain.items())},
+        "worst_type_accuracy": min(float(np.mean(values)) for values in by_type.values()),
+        "worst_domain_accuracy": min(float(np.mean(values)) for values in by_domain.values()),
     }
 
 

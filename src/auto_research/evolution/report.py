@@ -32,6 +32,8 @@ def write_evolution_artifacts(result: EvolutionResult, run_dir: Path) -> None:
 
 
 def render_evolution_report(result: EvolutionResult) -> str:
+    if result.config.model == "system-one":
+        return _render_system_one_report(result)
     if result.config.model == "micro-llm":
         return _render_llm_report(result)
     if result.config.model == "micro-vlm":
@@ -468,7 +470,81 @@ def _render_llm_report(result: EvolutionResult) -> str:
     return "\n".join(lines)
 
 
+def _render_system_one_report(result: EvolutionResult) -> str:
+    champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
+    baseline = result.trials[0]
+    lines = [
+        "# System One 公开评测自动进化报告", "", "## 协议", "",
+        f"- 数据集：`{result.config.dataset}`；公开数据路径：`{result.config.system_one_public_data}`。",
+        f"- Calibration / test / OOD：{result.dataset_summary.get('validation_examples', '—')} / "
+        f"{result.dataset_summary.get('test_examples', '—')} / {result.dataset_summary.get('ood_examples', '—')} 条。",
+        "- 只在 calibration 选择 checkpoint、温度和拒答阈值；test 与 OOD 不参与选择。",
+        f"- 完成 {len(result.rounds)} 轮、{len(result.trials)} 个实验；冠军 `{champion.trial_id}`。",
+        f"- Calibration fitness：`{baseline.fitness:.4f} → {champion.fitness:.4f}`。",
+    ]
+    if result.baseline_test and result.champion_test:
+        for name in ("accuracy", "coverage", "selective_accuracy", "score_mae", "ood_accuracy", "ood_coverage"):
+            if name in result.baseline_test and name in result.champion_test:
+                lines.append(
+                    f"- 隔离评测 {name}：`{result.baseline_test[name]:.4f} → "
+                    f"{result.champion_test[name]:.4f}`。"
+                )
+    lines += ["", "## 完整实验轨迹", "",
+              "| 实验 | 来源 | 代 | Checkpoint / 算子 | Fitness | Accuracy | Coverage | Score MAE | 状态 |",
+              "|---|---|---:|---|---:|---:|---:|---:|---|"]
+    for trial in result.trials:
+        lines.append(
+            f"| {trial.trial_id} | {_trial_source_label(trial)} | {trial.generation} | "
+            f"`{trial.genome.architecture}` | {trial.fitness:.4f} | "
+            f"{trial.validation.get('accuracy', 0.0):.4f} | "
+            f"{trial.validation.get('coverage', 0.0):.4f} | "
+            f"{trial.validation.get('score_mae', 0.0):.4f} | {trial.status} |"
+        )
+    lines += ["", "## 研究过程", ""]
+    for round_ in result.rounds:
+        lines += [f"### 第 {round_['generation']} 轮", "",
+                  f"- 决策：{round_['decision']}",
+                  "- 候选：" + "；".join(item["trial_id"] for item in round_["hypotheses"]), ""]
+    lines += ["## 边界", "", "- 这是固定公开任务的 checkpoint / 选择性策略比较，不代表任意开放域 Agent 能力。", "- 负结果、失败实验和原始指标保存在 `result.json`。", ""]
+    return "\n".join(lines)
+
+
+def _render_system_one_dashboard(result: EvolutionResult) -> str:
+    from html import escape
+
+    champion = next(trial for trial in result.trials if trial.trial_id == result.champion_id)
+    rows = "".join(
+        "<tr>" + "".join(f"<td>{escape(str(value))}</td>" for value in (
+            trial.trial_id, trial.generation, trial.genome.architecture,
+            f"{trial.fitness:.4f}", f"{trial.validation.get('accuracy', 0.0):.4f}",
+            f"{trial.validation.get('coverage', 0.0):.4f}", trial.status,
+        )) + "</tr>"
+        for trial in result.trials
+    )
+    return (
+        '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<title>System One 自动研究</title><style>'
+        'body{font:16px system-ui,sans-serif;background:#f5f7fb;color:#172033;margin:0}'
+        'main{max-width:1100px;margin:40px auto;padding:24px}section{background:white;'
+        'border-radius:14px;padding:20px;margin:20px 0}table{width:100%;border-collapse:collapse}'
+        'th,td{text-align:left;padding:12px;border-bottom:1px solid #e4e8f0}'
+        '.scroll{overflow-x:auto}</style></head><body><main><h1>System One 自动研究</h1>'
+        f'<p>公开评测：{escape(result.config.dataset)} · 冠军 {escape(champion.trial_id)} · '
+        f'{len(result.rounds)} 轮 / {len(result.trials)} 个实验</p>'
+        '<section><h2>校准集实验</h2><p>只用 calibration 选择；隔离 test / OOD 在结束后评估。</p>'
+        '<div class="scroll"><table><thead><tr><th>实验</th><th>代</th><th>策略</th>'
+        '<th>Fitness</th><th>Accuracy</th><th>Coverage</th><th>状态</th>'
+        f'</tr></thead><tbody>{rows}</tbody></table></div></section>'
+        '<section><h2>隔离评测</h2><pre>'
+        f'{escape(json.dumps({"baseline": result.baseline_test, "champion": result.champion_test}, ensure_ascii=False, indent=2))}'
+        '</pre></section></main></body></html>'
+    )
+
+
 def render_dashboard(result: EvolutionResult) -> str:
+    if result.config.model == "system-one":
+        return _render_system_one_dashboard(result)
     data = result.to_dict()
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     title = f"{result.config.model} 自动研究"

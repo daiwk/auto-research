@@ -18,7 +18,7 @@ from .nanojev import NANOJEV_REVISION, NanoJevProvider
 from .nimble import NIMBLE_REVISION, NimbleProvider
 from .laya import LAYA_REVISION, LayaProvider
 from .providers import TypeSafeHTTPProvider
-from .public_suite import evaluate_public_decisions, load_public_decisions, split_public_decisions
+from .public_suite import evaluate_public_decisions, load_public_decision_splits
 
 
 BASE_URL = (
@@ -88,9 +88,12 @@ def run_system_one_benchmark(
             maximum_eval_examples=config.maximum_eval_examples,
         )
         dataset_name = "Banking77"
+        ood = ()
     else:
-        public_rows = load_public_decisions(config.public_data)
-        validation, test = split_public_decisions(public_rows)
+        public_splits = load_public_decision_splits(config.public_data)
+        validation, test, ood = (
+            public_splits.calibration, public_splits.test, public_splits.ood,
+        )
         train = ()
         dataset_name = config.public_data.stem
     run_dir = config.output_dir / time.strftime("%Y%m%d-%H%M%S")
@@ -128,6 +131,9 @@ def run_system_one_benchmark(
         evaluator = evaluate_examples if config.dataset == "banking77" else evaluate_public_decisions
         validation_metrics = evaluator(provider, validation, config.confidence_threshold)
         test_metrics = evaluator(provider, test, config.confidence_threshold)
+        ood_metrics = (
+            evaluator(provider, ood, config.confidence_threshold) if ood else None
+        )
         runs.append(
             {
                 "seed": seed,
@@ -135,6 +141,7 @@ def run_system_one_benchmark(
                 "temperature": temperature,
                 "validation": validation_metrics,
                 "test": test_metrics,
+                "ood": ood_metrics,
                 "duration_seconds": time.monotonic() - started,
             }
         )
@@ -168,8 +175,10 @@ def run_system_one_benchmark(
             "train_examples": len(train),
             "validation_examples": len(validation),
             "test_examples": len(test),
+            "ood_examples": len(ood) if config.dataset == "public-jsonl" else 0,
             "validation_selected_temperature": config.backend == "local",
             "test_isolation": True,
+            "ood_isolation": bool(ood),
         },
         "runs": runs,
         "aggregate_metrics": _aggregate_runs(runs),
@@ -345,6 +354,22 @@ def write_system_one_report(result: dict, path: Path) -> Path:
             f"| {name} | {aggregate.get(name + '_mean', 0.0):.6f} | "
             f"{aggregate.get(name + '_std', 0.0):.6f} |"
         )
+    lines.extend([
+        "",
+        "## OOD 汇总",
+        "",
+    ])
+    ood = result["runs"][0].get("ood") if result["runs"] else None
+    if ood:
+        lines.extend([
+            f"- 样本数：{int(ood['evaluated_examples'])}",
+            f"- accuracy：{ood['accuracy']:.6f}；NLL：{ood['nll']:.6f}；"
+            f"Brier：{ood['brier']:.6f}；ECE：{ood['ece']:.6f}",
+            f"- 最差类型 accuracy：{ood['worst_type_accuracy']:.6f}；"
+            f"最差领域 accuracy：{ood['worst_domain_accuracy']:.6f}",
+        ])
+    else:
+        lines.append("- 本次协议未提供独立 OOD 样本。")
     lines.extend([
         "",
         "## 边界",

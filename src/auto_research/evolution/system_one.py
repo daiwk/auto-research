@@ -14,8 +14,7 @@ from ..system_one.benchmark import evaluate_examples, load_banking77
 from ..system_one.local import LocalDecisionModel, LocalSystemOneProvider
 from ..system_one.public_suite import (
     evaluate_public_decisions,
-    load_public_decisions,
-    split_public_decisions,
+    load_public_decision_splits,
 )
 from .models import EvolutionTrial, Genome
 
@@ -41,8 +40,10 @@ class SystemOneEvolutionEvaluator:
             )
             self.executable_operators = LOCAL_OPERATORS
         elif config.dataset == "system-one-public":
-            rows = load_public_decisions(config.system_one_public_data)
-            self.validation, self.test_rows = split_public_decisions(rows)
+            splits = load_public_decision_splits(config.system_one_public_data)
+            self.validation, self.test_rows, self.ood_rows = (
+                splits.calibration, splits.test, splits.ood,
+            )
             self.train = ()
             operators = []
             for name, path in (
@@ -67,6 +68,7 @@ class SystemOneEvolutionEvaluator:
             "train_examples": len(self.train),
             "validation_examples": len(self.validation),
             "test_examples": len(self.test_rows),
+            "ood_examples": len(getattr(self, "ood_rows", ())),
             "genome_axes": [
                 "dynamic candidate scorer", "proper scoring objective",
                 "checkpoint backend", "temperature", "selective threshold",
@@ -176,6 +178,13 @@ class SystemOneEvolutionEvaluator:
                 genome.system_one_confidence_threshold,
             )
             result["fitness"] = _fitness(result)
+            if self.ood_rows:
+                ood = evaluate_public_decisions(
+                    self._external_provider(genome), self.ood_rows,
+                    genome.system_one_confidence_threshold,
+                )
+                result.update({f"ood_{key}": value for key, value in ood.items()
+                               if not isinstance(value, dict)})
             return result
         rows = []
         for seed in self.seeds:
