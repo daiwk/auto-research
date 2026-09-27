@@ -158,7 +158,7 @@ def train_free_generation(
 ):
     import torch
 
-    if algorithm not in {"none", "grpo", "ipo", "simpo", "luspo", "coba-rl"}:
+    if algorithm not in {"none", "grpo", "ipo", "simpo", "luspo", "coba-rl", "pact"}:
         raise ValueError(f"No free-generation implementation for {algorithm}")
     if algorithm == "none" and steps != 0:
         raise ValueError("the frozen baseline must have zero post-training steps")
@@ -186,6 +186,11 @@ def train_free_generation(
     reference = deepcopy(policy).eval()
     for parameter in reference.parameters():
         parameter.requires_grad_(False)
+    if algorithm == "pact":
+        from .pact import build_critic
+
+        critic = build_critic(len(tokenizer)).to(device)
+        critic_optimizer = torch.optim.AdamW(critic.parameters(), lr=min(learning_rate, 3e-3))
     baseline = evaluate_generation(
         policy, tokenizer, getattr(suite, target), device, seed
     )
@@ -230,14 +235,25 @@ def train_free_generation(
         exacts = np.asarray(
             [row[1]["exact"] for row in verified], dtype=np.float32
         )
-        chosen = example.completion
-        rejected = rollouts[int(np.argmin(rewards))]
-        if algorithm == "ipo":
+        if algorithm == "pact":
+            from .pact import pact_step
+
+            actor_loss, diagnostic = pact_step(
+                policy, critic, tokenizer, example.prompt, rollout_tokens, rewards,
+                optimizer, critic_optimizer, device,
+            )
+            diagnostic["mean_response_characters"] = float(np.mean([len(text) for text in rollouts]))
+            loss = torch.tensor(actor_loss, device=device)
+        elif algorithm == "ipo":
+            chosen = example.completion
+            rejected = rollouts[int(np.argmin(rewards))]
             loss = _ipo_loss(
                 policy, reference, tokenizer, example.prompt, chosen, rejected, device
             )
             diagnostic = {"preference_gap_target": 5.0}
         elif algorithm == "simpo":
+            chosen = example.completion
+            rejected = rollouts[int(np.argmin(rewards))]
             loss = _simpo_loss(
                 policy, tokenizer, example.prompt, chosen, rejected, device
             )
@@ -293,10 +309,11 @@ def train_free_generation(
                         "teacher_reward": float(teacher_reward),
                         "teacher_sft_weight": 0.25,
                     })
-        optimizer.zero_grad(set_to_none=True)
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(policy.parameters(), 1.0)
-        optimizer.step()
+        if algorithm != "pact":
+            optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(policy.parameters(), 1.0)
+            optimizer.step()
         if step == 0 or (step + 1) % max(1, steps // 5) == 0:
             history.append({
                 "step": step + 1,
@@ -324,6 +341,7 @@ def train_free_generation(
         "vocabulary_size": len(tokenizer),
         "model": "GRU causal LM",
         "parameters": sum(parameter.numel() for parameter in policy.parameters()),
+        "critic_parameters": sum(parameter.numel() for parameter in critic.parameters()) if algorithm == "pact" else 0,
         "warmup_steps": warmup_steps,
         "warmup_initial_loss": warmup_losses[0],
         "warmup_final_loss": warmup_losses[-1],

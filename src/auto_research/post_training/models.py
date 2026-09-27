@@ -37,6 +37,7 @@ ALGORITHMS = (
     "simpo",
     "luspo",
     "coba-rl",
+    "pact",
     "constitutional-ai",
     "rrhf",
     "raft",
@@ -166,7 +167,7 @@ class PostTrainingConfig:
                 "dataset must be arithmetic-smoke, gsm8k-candidate, "
                 "arithmetic-generate or gsm8k-generate"
             )
-        if self.algorithm in {"ipo", "simpo", "luspo", "coba-rl"} and not self.dataset.endswith("-generate"):
+        if self.algorithm in {"ipo", "simpo", "luspo", "coba-rl", "pact"} and not self.dataset.endswith("-generate"):
             raise ValueError(f"{self.algorithm} requires a free-generation dataset")
         if self.steps < 1 or self.maximum_examples < 8:
             raise ValueError("steps must be positive and maximum-examples must be >= 8")
@@ -197,6 +198,8 @@ class PostTrainingResult:
     history: list[dict[str, float]] = field(default_factory=list)
 
     @property
-    def relative_accuracy(self) -> float:
+    def relative_accuracy(self) -> float | None:
         initial = self.baseline["accuracy"]
-        return (self.final["accuracy"] - initial) / max(initial, 1e-12)
+        if initial == 0:
+            return None
+        return (self.final["accuracy"] - initial) / initial

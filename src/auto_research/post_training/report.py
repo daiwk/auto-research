@@ -96,6 +96,7 @@ PAPERS = {
     "simpo": ("SimPO", "https://arxiv.org/abs/2405.14734"),
     "luspo": ("Length-Unbiased Sequence Policy Optimization", "https://arxiv.org/abs/2602.05261"),
     "coba-rl": ("Boundary-aware Curriculum RL", "https://arxiv.org/abs/2606.22317"),
+    "pact": ("PACT: From Credit Assignment to Critic Alignment", "https://arxiv.org/abs/2609.26355"),
     "constitutional-ai": ("Constitutional AI", "https://arxiv.org/abs/2212.08073"),
     "rrhf": ("RRHF", "https://arxiv.org/abs/2304.05302"),
     "raft": ("RAFT", "https://arxiv.org/abs/2304.06767"),
@@ -132,7 +133,10 @@ PAPERS = {
 
 def render_report(result: PostTrainingResult) -> str:
     title, url = PAPERS[result.algorithm]
-    delta = 100 * result.relative_accuracy
+    delta = (
+        f"{100 * result.relative_accuracy:+.2f}%"
+        if result.relative_accuracy is not None else "不适用（基线为 0）"
+    )
     if "runs" in result.training:
         teacher = result.training.get("teacher_summary", {})
         teacher_block = ""
@@ -166,7 +170,7 @@ def render_report(result: PostTrainingResult) -> str:
 
 | 指标 | 后训练前 | 后训练后 | 变化 |
 |---|---:|---:|---:|
-| exact accuracy | {result.baseline['accuracy']:.4f} | {result.final['accuracy']:.4f} | {delta:+.2f}% |
+| exact accuracy | {result.baseline['accuracy']:.4f} | {result.final['accuracy']:.4f} | {delta} |
 | verifier reward | {result.baseline['mean_reward']:.4f} | {result.final['mean_reward']:.4f} | {result.final['mean_reward'] - result.baseline['mean_reward']:+.4f} |
 | format rate | {result.baseline['format_rate']:.4f} | {result.final['format_rate']:.4f} | {result.final['format_rate'] - result.baseline['format_rate']:+.4f} |
 | response characters | {result.baseline['mean_response_characters']:.2f} | {result.final['mean_response_characters']:.2f} | — |
@@ -192,7 +196,7 @@ def render_report(result: PostTrainingResult) -> str:
 
 | 指标 | 训练前 | 训练后 | 变化 |
 |---|---:|---:|---:|
-| accuracy | {result.baseline['accuracy']:.4f} | {result.final['accuracy']:.4f} | {delta:+.2f}% |
+| accuracy | {result.baseline['accuracy']:.4f} | {result.final['accuracy']:.4f} | {delta} |
 | mean reward | {result.baseline['mean_reward']:.4f} | {result.final['mean_reward']:.4f} | {result.final['mean_reward'] - result.baseline['mean_reward']:+.4f} |
 | KL(reference) | {result.baseline['kl_from_reference']:.4f} | {result.final['kl_from_reference']:.4f} | — |
 

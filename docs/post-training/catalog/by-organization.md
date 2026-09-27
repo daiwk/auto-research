@@ -29,6 +29,10 @@
 - 2025-12-01 · 一作：Chujie Zheng · [Stabilizing RL with LLMs](../2512.01374-minirl/README.md)（`minirl`）：分解训推差异与 policy staleness，on-policy 使用 importance correction，off-policy 结合 clipping 与 MoE Routing Replay。
 - 2025-07-24 · 一作：Chujie Zheng · [GSPO](../2507.18071-gspo/README.md)（`gspo`）：GRPO/PPO 常逐 token 裁剪 ratio，但 reward 在完整序列级给出；长序列中单个异常 token 会造成大量裁剪，MoE routing 变化还会放大不稳定。GSPO 对每条 response 取平均 log-ratio，再指数化为单一 sequence ratio，整条序列共享 clip 权重。
 
+## AllSpark Team
+
+- 2026-09-22 · 一作：Jiayan Fu · [PACT: From Credit Assignment to Critic Alignment](../2609.26355-pact/README.md)（`pact`）：终局奖励只有一个标量，但 actor 要更新每个生成 token。论文在完整性、前缀一致性和中性三个条件下，刻画 token 的理论信用为相邻前缀的条件期望之差。
+
 ## Amazon / Duke University
 
 - 2026-09-03 · 一作：Zhishuai Liu · [Extremely Sparse Supervision Incentivizes Reasoning Ability](../2609.04565-sparse-opd/README.md)（`sparse-opd`）：常规 on-policy distillation 对生成轨迹的每个 token 使用教师分布。论文发现只挑一到两个关键位置、约占全部 token 的 0.05%，也能达到或超过全 token 训练。

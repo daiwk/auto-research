@@ -32,6 +32,15 @@ FIRST_AUTHOR_OVERRIDES = {
 
 LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + (
     {
+        "domain": "post-training", "key": "pact",
+        "title": "PACT: From Credit Assignment to Critic Alignment",
+        "paper_url": "https://arxiv.org/abs/2609.26355",
+        "detail_path": "post-training/2609.26355-pact/README.md",
+        "topic": ["强化学习", "Token 信用分配"],
+        "first_author": "Jiayan Fu", "first_author_affiliation": "AllSpark Team",
+        "published": "2026-09-22", "code": None, "adapter": "pact",
+    },
+    {
         "domain": "agent-research", "key": "maple",
         "title": "MAPLE: Memory-Augmented Planning with Language and Evolution",
         "paper_url": "https://arxiv.org/abs/2609.11636",

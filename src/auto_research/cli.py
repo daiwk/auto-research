@@ -1284,7 +1284,12 @@ def main(argv: list[str] | None = None) -> int:
                 )
             ).run()
             print(f"Validation accuracy: {result.final['accuracy']:.4f}")
-            print(f"Relative to untrained policy: {result.relative_accuracy:+.2%}")
+            relative = result.relative_accuracy
+            print(
+                f"Relative to untrained policy: {relative:+.2%}"
+                if relative is not None else
+                "Relative to untrained policy: n/a (baseline accuracy is zero)"
+            )
             print(f"Report: {run_dir / 'report.md'}")
             return 0
         if args.command == "checkpoint-post-train":
