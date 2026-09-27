@@ -8594,5 +8594,19 @@
     "height": 1010,
     "score": 67,
     "error": ""
+  },
+  {
+    "page": "docs/post-training/2609.26355-pact/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.26355",
+    "arxiv_id": "2609.26355",
+    "figure": "Figure 2",
+    "original_caption": "PPO 的独立更新与 PACT 的 Actor-then-Critic、IS 校正流程对比。",
+    "source_url": "https://arxiv.org/pdf/2609.26355#page=7",
+    "extraction": "reviewed-source-crop",
+    "asset": "docs/post-training/2609.26355-pact/assets/paper-figure-01.png",
+    "width": 1081,
+    "height": 652,
+    "score": 100,
+    "error": ""
   }
 ]

@@ -11205,7 +11205,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "train_free_generation",
-        "line": 227,
+        "line": 232,
         "qualified_name": "train_free_generation",
         "expression": "example.answer",
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
@@ -11213,7 +11213,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "train_free_generation",
-        "line": 280,
+        "line": 296,
         "qualified_name": "train_free_generation",
         "expression": "example.answer",
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
@@ -11221,7 +11221,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "train_free_generation",
-        "line": 288,
+        "line": 304,
         "qualified_name": "train_free_generation",
         "expression": "example.answer",
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
@@ -11229,7 +11229,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_boundary_pass_at_k",
-        "line": 379,
+        "line": 397,
         "qualified_name": "_boundary_pass_at_k",
         "expression": "example.answer",
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
@@ -11237,7 +11237,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "evaluate_generation",
-        "line": 578,
+        "line": 596,
         "qualified_name": "evaluate_generation",
         "expression": "example.answer",
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
@@ -11245,7 +11245,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "evaluate_pass_at_k",
-        "line": 606,
+        "line": 624,
         "qualified_name": "evaluate_pass_at_k",
         "expression": "example.answer",
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"

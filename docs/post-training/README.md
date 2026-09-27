@@ -72,6 +72,7 @@
 - [SimPO](2405.14734-simpo/README.md)：reference-free、长度归一化偏好目标。
 - [LUSPO](2602.05261-luspo/README.md)：校正 sequence policy objective 的长度偏差。
 - [CoBA-RL](2606.22317-coba-rl/README.md)：能力边界探测、教师引导与课程 RL。
+- [PACT](2609.26355-pact/README.md)：先更新 actor，再用更新后策略的重要性比率训练前缀 critic。
 - [Constitutional AI](2212.08073-constitutional-ai/README.md)：自我批评/修订与 AI preference RLAIF。
 - [RRHF](2304.05302-rrhf/README.md)：全响应 reward ranking 与 best-response SFT。
 - [RAFT](2304.06767-raft/README.md)：当前策略采样、reward 选优与迭代 SFT。
@@ -184,6 +185,7 @@ flowchart LR
 | 离线偏好 | [SimPO](2405.14734-simpo/README.md) | 长度归一化、reference-free margin | arithmetic / GSM8K free generation | token 级复现 |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | length-unbiased sequence ratio | arithmetic / GSM8K free generation | token 级复现 |
 | 课程 RL | [CoBA-RL](2606.22317-coba-rl/README.md) | 动态能力边界与 teacher guidance | arithmetic / GSM8K free generation | token 级复现 |
+| Actor-Critic RL | [PACT](2609.26355-pact/README.md) | actor-then-critic、token IS 与概率 critic | arithmetic / GSM8K free generation | 小模型机制验证 |
 | AI 反馈安全对齐 | [Constitutional AI](2212.08073-constitutional-ai/README.md) | constitution critique/revision + AI preference | GSM8K candidate | 机制复现 |
 | 全排序偏好 | [RRHF](2304.05302-rrhf/README.md) | reward ordering、ranking hinge、best SFT | GSM8K candidate | 机制复现 |
 | 选优微调 | [RAFT](2304.06767-raft/README.md) | policy sampling、reward top-1 filtering、SFT | GSM8K candidate | 机制复现 |

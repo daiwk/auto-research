@@ -46,6 +46,7 @@ MODULES = {
         "simpo": "2405.14734-simpo",
         "luspo": "2602.05261-luspo",
         "coba-rl": "2606.22317-coba-rl",
+        "pact": "2609.26355-pact",
         "constitutional-ai": "2212.08073-constitutional-ai",
         "rrhf": "2304.05302-rrhf",
         "raft": "2304.06767-raft",

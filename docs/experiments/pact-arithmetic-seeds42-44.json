@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:pact",
+  "algorithm": "pact",
+  "dataset": "arithmetic-generate",
+  "protocol": {
+    "maximum_examples": 48,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "warmup_steps": 20,
+    "rl_steps": 3,
+    "group_size": 2,
+    "device": "cpu",
+    "model": "30378-parameter GRU causal LM and 27713-parameter prefix critic",
+    "verifier": "exact final numeric answer + format/length diagnostics"
+  },
+  "baseline": {
+    "accuracy": 0.0,
+    "mean_reward": 0.1,
+    "format_rate": 0.0
+  },
+  "final": {
+    "accuracy": 0.006944444444444444,
+    "accuracy_std": 0.009820927516479826,
+    "mean_reward": 0.10555555555555551,
+    "format_rate": 0.0
+  },
+  "relative_accuracy": null,
+  "mechanism_diagnostics": {
+    "update_order": "actor-then-critic",
+    "critic_target": "post-actor current-token IS * verifier reward",
+    "critic_final_loss_by_seed": [
+      0.5486676692962646,
+      0.5055667757987976,
+      0.5244128704071045
+    ],
+    "post_actor_ratio_mean_by_seed": [
+      0.9804801940917969,
+      0.9997652173042297,
+      0.9916771650314331
+    ]
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "small-model mechanism validation only; no LLM or paper-level capability claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/pact-arithmetic-seeds42-44.json",
+    "dataset_fingerprint": "e0a4daa74dd67573b73023217b8b4872c50ae499974ab887bbc2dd249bf85173",
+    "command": "auto-research post-train --algorithm pact --dataset arithmetic-generate --maximum-examples 48 --steps 3 --group-size 2 --seeds 42,43,44 --offline --device cpu --cpu-threads 2"
+  },
+  "conclusion": "Three CPU seeds execute actor-then-critic updates. Baseline exact accuracy is zero, so relative improvement is undefined. This tiny-budget result does not demonstrate stable capability gain."
+}

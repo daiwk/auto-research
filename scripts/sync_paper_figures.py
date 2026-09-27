@@ -105,6 +105,13 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2609.26355-pact": {
+        "pdf_url": "https://arxiv.org/pdf/2609.26355",
+        "page": 6,
+        "rect": (70, 72, 540, 355),
+        "label": "Figure 2",
+        "caption": "PPO 的独立更新与 PACT 的 Actor-then-Critic、IS 校正流程对比。",
+    },
     "2609.10750-skill-retention": {
         "pdf_url": "https://arxiv.org/pdf/2609.10750",
         "page": 4,
