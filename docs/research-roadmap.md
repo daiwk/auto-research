@@ -49,13 +49,13 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 
 ### 2026-09-27 新论文执行队列
 
-下表只登记已读到明确线上证据的工业 P0，**尚未完成复现**；正文证据、
+下表只登记已读到明确线上证据的工业 P0，其中 X-Rec 已有公开数据核心机制，但整项比较仍有缺口；正文证据、
 各领域 P1 复核及排除项见[本轮扫描记录](recent-paper-scan-20260927.md)。
 
 | ID | 优先级 | 状态 | 工作与完成条件 |
 | --- | --- | --- | --- |
 | SEP27-01 | P0 · ByteDance | 待实现 | OneTrans-V2：共享 causal backbone、三级任务联合损失、DCGR、精排→预排蒸馏；公开数据三 seed 对照与阶段指标，不把 MovieLens 代理标签写成 GMV |
-| SEP27-02 | P0 · TikTok | 待实现 | X-Rec：anchor-conditioned Riemannian flow matching、late-interaction DiT、ANN 全库检索；公开数据与等预算 U2I/SID 对照，真实生成吞吐和检索指标 |
+| SEP27-02 | P0 · TikTok | 核心机制已实现；比较未收口 | [X-Rec](reproductions/2609.29180-xrec/README.md)：已执行 anchor CE、RFM、末层交互、球面积分、多 trigger 全目录检索与 MovieLens-1M 三种子 U2I 对照（当前低预算负结果）；仍需等预算 SID-AR 与真实生成吞吐测量。当前使用精确全目录矩阵检索，非生产 ANN 索引 |
 | SEP27-03 | P0 · Alibaba | 待实现 | CMRec：一作单位已核对为 Alibaba International Digital Commerce Group；尚须核查官方代码与可用跨域数据，完成共享语义代码本、双约束 code-mixing 和上下文加权损失的跨域消融 |
 | SEP27-04 | P0 | 待实现 | AgentX-Model：双 Agent 提案/执行边界、四类研究动作、依赖约束历史回放；私有生产轨迹和线上收益明确隔离 |
 | SEP27-05 | P1 · Meta | 全文复核 | MaD-RL：Meta 官方页已确认 09-24 发表；须取得原文公式、目标分布/属性标注与公开训练评测协议，再决定 KL/Jensen–Shannon 分布匹配的可执行复现范围 |

@@ -92,6 +92,7 @@
 - [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
 ### 生成式召回与端到端推荐
+- [X-Rec](../2609.29180-xrec/README.md)：在连续 item 空间以锚点条件化球面流匹配生成多个检索 trigger，并把多步去噪限制在 Transformer 末层。
 - [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
 - [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
 - [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。

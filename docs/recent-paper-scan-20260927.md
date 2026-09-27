@@ -19,7 +19,7 @@
 | 优先级 | 论文 | 核查依据 | 当前状态 |
 | --- | --- | --- | --- |
 | P0 | [OneTrans-V2](https://arxiv.org/abs/2609.28589)（09-23，ByteDance） | 正文 §6.3：用户级 50/50 线上 A/B；共享 causal 用户上下文、三阶段联合训练、决策条件生成召回与精排→预排蒸馏 | 待实现；公开数据缺成交额/广告/真实三级漏斗，须严格区分替代口径 |
-| P0 | [X-Rec](https://arxiv.org/abs/2609.29180)（09-24，TikTok） | 正文 §5：两次垂类上线；论文报告垂类互动 +4.1484%、全局互动 +0.0111%；anchor-conditioned 球面 flow matching、late-interaction DiT | 待实现；公开数据只能检验检索核心和吞吐，不可声称 TikTok 线上复现 |
+| P0 | [X-Rec](https://arxiv.org/abs/2609.29180)（09-24，TikTok） | 正文 §5：两次垂类上线；论文报告垂类互动 +4.1484%、全局互动 +0.0111%；anchor-conditioned 球面 flow matching、late-interaction DiT | [公开数据核心机制已实现](reproductions/2609.29180-xrec/README.md)；MovieLens-1M 低预算三种子均值低于 U2I。尚缺等预算 SID-AR 与实际生成吞吐对照，不能声称 TikTok 线上复现 |
 | P0 | [CMRec](https://arxiv.org/abs/2609.28972)（09-24，Alibaba International Digital Commerce Group） | [正文 §4.2](https://arxiv.org/html/2609.28972v1)报告 2026-05-10～20、10% 流量线上 A/B：广告收入 +1.77%、订单 +2.64%；共享代码本、双约束 token 混合、上下文加权损失 | 待实现；工业广告数据私有，论文另用公开 Amazon M2 六语区数据；须核对原作者代码状态 |
 | P0 | [AgentX-Model](https://arxiv.org/abs/2609.30001)（09-24） | 正文 §4.3：五次线上 A/B；双 Agent、Reproduce/Follow-up/Composition/Diagnose 及有依赖的历史回放 | 待实现；私有 473 节点图与线上门禁不可复刻，公开历史回放应标机制边界 |
 

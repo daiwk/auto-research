@@ -50,6 +50,7 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `xrec` · [TikTok X-Rec](2609.29180-xrec/README.md)：在公开 MovieLens-1M 上执行锚点条件化球面流匹配、末层交互与多触发器全目录召回；低预算三种子结果低于同预算 U2I。
 - `music-rationales` · [Google YouTube Music](2609.23877-music-rationales/README.md)：真实 7B 模型离线生成发现画像，公开艺人目录过滤后缓存在线提供理由，缺失时退回 CF；只作为概念验证。
 - `light-heads` · [Google Light Heads](2609.25433-light-heads/README.md)：共享排序塔上动态注入无梯度浅头，对照窗口重置与去掉 stop-gradient 的影响。
 - `unique` · [UNIQUE](2609.23718-unique/README.md)：单层扁平量化与早融合联合召回/排序，在 KuaiRand-Pure 上保留低召回和排序无提升的结果。
@@ -80,7 +81,7 @@ pytest tests/test_research_module_docs.py
 - `setmir` · [SetMIR](2608.30251-setmir/README.md)：兴趣集合预测、presence 门控与动态 ANN 派发。
 
 - 已审计个人博客两个工业落地章节的 94 个主条目和 138 个 arXiv 链接。
-- 已登记并复核 292 个 adapter；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。
+- 已登记的 adapter 详见本页与各领域目录；其中推荐论文继续执行线上 A/B/full-traffic 证据门槛，基础模型论文执行公开 benchmark 与真实训练门槛。数量以自动生成的研究 manifest 为准，不在此维护易过期的手写计数。
 - 暂缓：AIGQ（缺等价 query/CTR reward）、RaG（依赖视频生成与质量反馈）、RoleGen（缺 conversion trajectory 与线上反馈闭环）、LCU（数据需保密协议）。
 - 跳过：EGA-V1；仅有离线结果或无法核验量化线上 A/B 的论文不进入实现队列。
 - 2026 年剩余硬门槛论文已进入核心机制复现；2026-07-27 的 P1 批次加入 8 篇工业推荐论文，并把 Engram、Looped Latent Attention、GaugeQuant 三个真实算子接入 LLM evolve。GRACE、DLMRec、LO-FAR、PRL 因缺量化线上证据未纳入推荐复现。
