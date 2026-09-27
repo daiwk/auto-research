@@ -29618,6 +29618,72 @@
     },
     {
       "domain": "recommendation",
+      "key": "xrec",
+      "title": "X-Rec Technical Report",
+      "paper_url": "https://arxiv.org/abs/2609.29180",
+      "detail_path": "reproductions/2609.29180-xrec/README.md",
+      "topic": [
+        "retrieval",
+        "generative-recommendation",
+        "flow-matching"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "TikTok (ByteDance)",
+      "published": "2026-09-24",
+      "code": null,
+      "adapter": {
+        "adapter_key": "xrec",
+        "arxiv_id": "2609.29180",
+        "title": "X-Rec Technical Report",
+        "paper_url": "https://arxiv.org/abs/2609.29180",
+        "track": "recommendation",
+        "organization": "TikTok (ByteDance)",
+        "published": "2026-09-24",
+        "code_url": null,
+        "topics": [
+          "retrieval",
+          "generative-recommendation",
+          "flow-matching"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/xrec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens 1M"
+        ],
+        "baseline": "same-data full-catalog two-layer Transformer U2I",
+        "metrics": [
+          "hit_at_10",
+          "ndcg_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "160 item-vector + 160 prefix pretrain + 40 last-prefix SFT steps; matched 200 U2I steps",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "TikTok vertical-content recommendation",
+            "metric": "vertical engagement",
+            "lift_percent": 4.1484,
+            "traffic": "two consecutive production launches (V1 then V2); paper does not disclose bucket share",
+            "source_url": "https://arxiv.org/html/2609.29180v1",
+            "source_location": "Section 5, Table 3",
+            "retrieved_at": "2026-09-27"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "youtube-dnn",
       "title": "Deep Neural Networks for YouTube Recommendations",
       "paper_url": "https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/",

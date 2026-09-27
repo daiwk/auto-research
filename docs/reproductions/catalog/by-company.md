@@ -320,6 +320,7 @@
 - 2026-05 · [TubiFM: Unified Item, Carousel, and Search Ranking for Streaming Discovery](../2605.23702-tubifm/README.md)：以统一 user story 和任务提示让同一模型完成 item、carousel 与 search 排序。
 
 ## TikTok
+- 2026-09 · [X-Rec](../2609.29180-xrec/README.md)：以锚点预测定位兴趣区域，再用球面流匹配和仅末层重复的去噪交互生成多个召回触发向量。
 - 2026-05 · [PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation](../2605.21752-pearl-percentile/README.md)：通过多样本对比估计低方差行为 percentile，并扩展到多个直播目标。
 
 ## Huawei Technologies

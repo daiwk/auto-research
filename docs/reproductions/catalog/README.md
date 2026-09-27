@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [X-Rec Technical Report](../2609.29180-xrec/README.md) | TikTok (ByteDance)，2026-09-24 | 未发现官方代码 | `xrec` |
 | 排序与长序列建模 | [Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems](../2609.25433-light-heads/README.md) | Google，2026-09-21 | 未发现官方代码 | `light-heads` |
 | 大模型能力与推荐融合 | [Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery](../2609.23877-music-rationales/README.md) | Google，2026-09-20 | 未发现官方代码 | `music-rationales` |
 | 生成、排序与冷启动 | [MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling](../2609.23677-muser/README.md) | Baidu，2026-09-20 | 未发现官方代码 | `muser` |

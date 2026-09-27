@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "paper": "2609.29180",
+  "adapter": "xrec",
+  "dataset": "MovieLens 1M",
+  "users": 6038,
+  "items": 3706,
+  "metrics": {
+    "validation_hit_at_10_xrec_mean": 0.0024842663,
+    "validation_hit_at_10_u2i_mean": 0.0043612675,
+    "validation_ndcg_at_10_xrec_mean": 0.0010923816,
+    "validation_ndcg_at_10_u2i_mean": 0.001779073,
+    "test_hit_at_10_xrec_mean": 0.0017665894,
+    "test_hit_at_10_u2i_mean": 0.0044164734,
+    "test_ndcg_at_10_xrec_mean": 0.0008587753,
+    "test_ndcg_at_10_u2i_mean": 0.0018499867
+  },
+  "protocol": "chronological leave-last-two-out; train-only item embeddings and anchors; full-catalog exact ranking with seen-item masking",
+  "training_steps": {
+    "item_contrastive": 160,
+    "xrec_prefix_pretrain": 160,
+    "xrec_last_prefix_sft": 40,
+    "u2i_baseline": 200
+  },
+  "seeds": [
+    {
+      "seed": 42,
+      "validation": {
+        "xrec": {
+          "hit_at_10": 0.0021530308,
+          "ndcg_at_10": 0.0012045713
+        },
+        "u2i": {
+          "hit_at_10": 0.0054653859,
+          "ndcg_at_10": 0.0024523989
+        }
+      },
+      "test": {
+        "xrec": {
+          "hit_at_10": 0.0014905598,
+          "ndcg_at_10": 0.0007969283
+        },
+        "u2i": {
+          "hit_at_10": 0.0057966214,
+          "ndcg_at_10": 0.0028012488
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "validation": {
+        "xrec": {
+          "hit_at_10": 0.0026498841,
+          "ndcg_at_10": 0.0010028772
+        },
+        "u2i": {
+          "hit_at_10": 0.0018217953,
+          "ndcg_at_10": 0.0006734526
+        }
+      },
+      "test": {
+        "xrec": {
+          "hit_at_10": 0.0018217953,
+          "ndcg_at_10": 0.0009397378
+        },
+        "u2i": {
+          "hit_at_10": 0.0014905598,
+          "ndcg_at_10": 0.0005498886
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "validation": {
+        "xrec": {
+          "hit_at_10": 0.0026498841,
+          "ndcg_at_10": 0.0010696962
+        },
+        "u2i": {
+          "hit_at_10": 0.0057966214,
+          "ndcg_at_10": 0.0022113676
+        }
+      },
+      "test": {
+        "xrec": {
+          "hit_at_10": 0.0019874131,
+          "ndcg_at_10": 0.0008396599
+        },
+        "u2i": {
+          "hit_at_10": 0.0059622392,
+          "ndcg_at_10": 0.0021988227
+        }
+      }
+    }
+  ],
+  "diagnostic_only": true,
+  "scope": "Public-data core-mechanism reproduction, not TikTok production or paper-result replication",
+  "manifest_ref": "reproduction:xrec",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "limited-budget L2 mechanism check; no paper-effectiveness or production-lift claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.29180-xrec/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "MovieLens-1M ratings.dat sha256:506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f"
+  }
+}
