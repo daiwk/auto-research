@@ -8608,5 +8608,19 @@
     "height": 652,
     "score": 100,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.28589-onetrans-v2/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.28589",
+    "arxiv_id": "2609.28589",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2 : Architecture of OneTrans-V2, with N N Transformer blocks. (a) Shared user behavior tokens and stage-specific non-sequential (NS) tokens are produced by separate tokenizers and processed by the unified backbone. DCGR uses the retrieval context token CTX , parallel and dependent decision tokens DT p \\texttt{DT}^{p} and DT d \\texttt{DT}^{d} , and three SID codes SID 0 \\texttt{SID}_{0} – SID 2 \\texttt{SID}_{2} to generate items. Pre-rank and fine-rank heads score candidates; the dashed KD arrow denotes knowledge distillation from the fine-rank teacher to the pre-rank student. (b) Behavior tokens share parameters, whereas stage-specific tokens use parameters specific to each token. Q Q , K K , and V V denote query, key, and value projections. G G denotes the gate of gated attention. (c) S S denotes the shared behavior sequence, and R R , P P , and F F denote the retrieval, pre-rank, and fine-rank tokens, respectively. The request timestamp anchors the tokens of each stage to its visible behavior prefix. In the mask, rows are queries and columns are keys; colored cells permit attention and white cells mask it. Behavior tokens attend causally within S S . Each stage-specific token attends to its visible behavior prefix, itself, and preceding tokens in the same stage and exposure; tokens from other stages or exposures are masked.",
+    "source_url": "https://arxiv.org/html/2609.28589v1/fig2v6.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/reproductions/2609.28589-onetrans-v2/assets/paper-figure-01.png",
+    "width": 1294,
+    "height": 477,
+    "score": 54,
+    "error": ""
   }
 ]

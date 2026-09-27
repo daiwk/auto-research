@@ -1,0 +1,244 @@
+{
+  "schema_version": 2,
+  "paper": "2609.28589",
+  "adapter": "onetrans-v2",
+  "dataset": "MovieLens 1M",
+  "seeds": [
+    {
+      "paper": "2609.28589",
+      "seed": 42,
+      "dataset": {
+        "name": "MovieLens 1M",
+        "train_events": 982089,
+        "validation_users": 6040,
+        "test_users": 6040
+      },
+      "training": {
+        "steps": 200,
+        "batch_size": 64,
+        "last_loss": {
+          "total": 2.6840903759002686,
+          "decision_ce": 1.000272512435913,
+          "sid_ce": 5.351376056671143,
+          "pre_bce": 0.6480097770690918,
+          "fine_bce": 0.7024819850921631,
+          "fine_to_pre_kd": 0.6984337568283081
+        },
+        "mean_last_20": {
+          "total": 2.504236662387848,
+          "decision_ce": 0.7206000983715057,
+          "sid_ce": 5.468018865585327,
+          "pre_bce": 0.6170205861330033,
+          "fine_bce": 0.5749220430850983,
+          "fine_to_pre_kd": 0.6934321254491806
+        }
+      },
+      "validation": {
+        "positive_events": 4979,
+        "decision_exact_accuracy": 0.6925085358505724,
+        "sid_exact_accuracy": 0.02068688491664993,
+        "pre_rating_ge_3_auc": 0.5492997072151671,
+        "pre_rating_ge_3_brier": 0.1742735356092453,
+        "pre_rating_ge_4_auc": 0.5348632475982912,
+        "pre_rating_ge_4_brier": 0.246366947889328,
+        "fine_rating_ge_3_auc": 0.5771110483067526,
+        "fine_rating_ge_3_brier": 0.14421899616718292,
+        "fine_rating_ge_4_auc": 0.5459319097623294,
+        "fine_rating_ge_4_brier": 0.24413670599460602
+      },
+      "test": {
+        "positive_events": 4976,
+        "decision_exact_accuracy": 0.7071945337620579,
+        "sid_exact_accuracy": 0.018689710610932476,
+        "pre_rating_ge_3_auc": 0.5368450895123662,
+        "pre_rating_ge_3_brier": 0.17551152408123016,
+        "pre_rating_ge_4_auc": 0.5353803405589067,
+        "pre_rating_ge_4_brier": 0.2450697273015976,
+        "fine_rating_ge_3_auc": 0.5775300389236758,
+        "fine_rating_ge_3_brier": 0.14441713690757751,
+        "fine_rating_ge_4_auc": 0.5626992014436266,
+        "fine_rating_ge_4_brier": 0.23964568972587585
+      },
+      "diagnostic_only": true,
+      "scope": "共享因果用户编码、三级 SID 的决策条件自回归检索、预排/精排双目标 BCE 与精排到预排蒸馏均执行；MovieLens 评分与流派仅是公开代理信号，非真实 CTR/CVR、购买/金额/广告供给或线上 A/B。"
+    },
+    {
+      "paper": "2609.28589",
+      "seed": 43,
+      "dataset": {
+        "name": "MovieLens 1M",
+        "train_events": 982089,
+        "validation_users": 6040,
+        "test_users": 6040
+      },
+      "training": {
+        "steps": 200,
+        "batch_size": 64,
+        "last_loss": {
+          "total": 2.450465202331543,
+          "decision_ce": 0.7070962190628052,
+          "sid_ce": 5.589990615844727,
+          "pre_bce": 0.5910247564315796,
+          "fine_bce": 0.5539333820343018,
+          "fine_to_pre_kd": 0.6757985353469849
+        },
+        "mean_last_20": {
+          "total": 2.453083610534668,
+          "decision_ce": 0.6755495637655258,
+          "sid_ce": 5.521530532836914,
+          "pre_bce": 0.5963001132011414,
+          "fine_bce": 0.5513559818267822,
+          "fine_to_pre_kd": 0.6857195049524307
+        }
+      },
+      "validation": {
+        "positive_events": 4979,
+        "decision_exact_accuracy": 0.6925085358505724,
+        "sid_exact_accuracy": 0.02450291223137176,
+        "pre_rating_ge_3_auc": 0.5496118570758732,
+        "pre_rating_ge_3_brier": 0.1719944030046463,
+        "pre_rating_ge_4_auc": 0.5591577070110625,
+        "pre_rating_ge_4_brier": 0.2462211698293686,
+        "fine_rating_ge_3_auc": 0.5766046802792274,
+        "fine_rating_ge_3_brier": 0.14368654787540436,
+        "fine_rating_ge_4_auc": 0.5685990971380769,
+        "fine_rating_ge_4_brier": 0.24113477766513824
+      },
+      "test": {
+        "positive_events": 4976,
+        "decision_exact_accuracy": 0.7071945337620579,
+        "sid_exact_accuracy": 0.018890675241157555,
+        "pre_rating_ge_3_auc": 0.5684000306735488,
+        "pre_rating_ge_3_brier": 0.17234134674072266,
+        "pre_rating_ge_4_auc": 0.5497875430100625,
+        "pre_rating_ge_4_brier": 0.24731409549713135,
+        "fine_rating_ge_3_auc": 0.5845296143292315,
+        "fine_rating_ge_3_brier": 0.14406828582286835,
+        "fine_rating_ge_4_auc": 0.5640586066524345,
+        "fine_rating_ge_4_brier": 0.2397204041481018
+      },
+      "diagnostic_only": true,
+      "scope": "共享因果用户编码、三级 SID 的决策条件自回归检索、预排/精排双目标 BCE 与精排到预排蒸馏均执行；MovieLens 评分与流派仅是公开代理信号，非真实 CTR/CVR、购买/金额/广告供给或线上 A/B。"
+    },
+    {
+      "paper": "2609.28589",
+      "seed": 44,
+      "dataset": {
+        "name": "MovieLens 1M",
+        "train_events": 982089,
+        "validation_users": 6040,
+        "test_users": 6040
+      },
+      "training": {
+        "steps": 200,
+        "batch_size": 64,
+        "last_loss": {
+          "total": 2.4138572216033936,
+          "decision_ce": 0.7036877274513245,
+          "sid_ce": 5.620285511016846,
+          "pre_bce": 0.6065928936004639,
+          "fine_bce": 0.5041950941085815,
+          "fine_to_pre_kd": 0.670671820640564
+        },
+        "mean_last_20": {
+          "total": 2.488551986217499,
+          "decision_ce": 0.7067403376102448,
+          "sid_ce": 5.428147912025452,
+          "pre_bce": 0.6175619572401047,
+          "fine_bce": 0.5757931917905807,
+          "fine_to_pre_kd": 0.6817080229520798
+        }
+      },
+      "validation": {
+        "positive_events": 4979,
+        "decision_exact_accuracy": 0.6925085358505724,
+        "sid_exact_accuracy": 0.11849769029925687,
+        "pre_rating_ge_3_auc": 0.5536271189135746,
+        "pre_rating_ge_3_brier": 0.1828976422548294,
+        "pre_rating_ge_4_auc": 0.556169582682447,
+        "pre_rating_ge_4_brier": 0.24755559861660004,
+        "fine_rating_ge_3_auc": 0.5731559827429775,
+        "fine_rating_ge_3_brier": 0.14461524784564972,
+        "fine_rating_ge_4_auc": 0.5772608276264247,
+        "fine_rating_ge_4_brier": 0.24038349092006683
+      },
+      "test": {
+        "positive_events": 4976,
+        "decision_exact_accuracy": 0.7071945337620579,
+        "sid_exact_accuracy": 0.1290192926045016,
+        "pre_rating_ge_3_auc": 0.5412571508655079,
+        "pre_rating_ge_3_brier": 0.18409031629562378,
+        "pre_rating_ge_4_auc": 0.5380855540917502,
+        "pre_rating_ge_4_brier": 0.24985040724277496,
+        "fine_rating_ge_3_auc": 0.5580179598916907,
+        "fine_rating_ge_3_brier": 0.14564022421836853,
+        "fine_rating_ge_4_auc": 0.5660239230389129,
+        "fine_rating_ge_4_brier": 0.23986969888210297
+      },
+      "diagnostic_only": true,
+      "scope": "共享因果用户编码、三级 SID 的决策条件自回归检索、预排/精排双目标 BCE 与精排到预排蒸馏均执行；MovieLens 评分与流派仅是公开代理信号，非真实 CTR/CVR、购买/金额/广告供给或线上 A/B。"
+    }
+  ],
+  "metrics": {
+    "validation_positive_events_mean": 4979.0,
+    "validation_positive_events_std": 0.0,
+    "validation_decision_exact_accuracy_mean": 0.6925085358505724,
+    "validation_decision_exact_accuracy_std": 0.0,
+    "validation_sid_exact_accuracy_mean": 0.054562495815759525,
+    "validation_sid_exact_accuracy_std": 0.04523584372558741,
+    "validation_pre_rating_ge_3_auc_mean": 0.5508462277348717,
+    "validation_pre_rating_ge_3_auc_std": 0.0019705119799561027,
+    "validation_pre_rating_ge_3_brier_mean": 0.17638852695624033,
+    "validation_pre_rating_ge_3_brier_std": 0.004695746148383043,
+    "validation_pre_rating_ge_4_auc_mean": 0.5500635124306003,
+    "validation_pre_rating_ge_4_auc_std": 0.010817216523673857,
+    "validation_pre_rating_ge_4_brier_mean": 0.24671457211176553,
+    "validation_pre_rating_ge_4_brier_std": 0.0005976660143519261,
+    "validation_fine_rating_ge_3_auc_mean": 0.5756239037763192,
+    "validation_fine_rating_ge_3_auc_std": 0.0017572853714242689,
+    "validation_fine_rating_ge_3_brier_mean": 0.144173597296079,
+    "validation_fine_rating_ge_3_brier_std": 0.0003804967821209238,
+    "validation_fine_rating_ge_4_auc_mean": 0.5639306115089436,
+    "validation_fine_rating_ge_4_auc_std": 0.01320912165098737,
+    "validation_fine_rating_ge_4_brier_mean": 0.2418849915266037,
+    "validation_fine_rating_ge_4_brier_std": 0.0016214749411956643,
+    "test_positive_events_mean": 4976.0,
+    "test_positive_events_std": 0.0,
+    "test_decision_exact_accuracy_mean": 0.7071945337620579,
+    "test_decision_exact_accuracy_std": 0.0,
+    "test_sid_exact_accuracy_mean": 0.05553322615219721,
+    "test_sid_exact_accuracy_std": 0.05196256068023093,
+    "test_pre_rating_ge_3_auc_mean": 0.5488340903504744,
+    "test_pre_rating_ge_3_auc_std": 0.01395196728996923,
+    "test_pre_rating_ge_3_brier_mean": 0.17731439570585886,
+    "test_pre_rating_ge_3_brier_std": 0.004963018635982667,
+    "test_pre_rating_ge_4_auc_mean": 0.5410844792202398,
+    "test_pre_rating_ge_4_auc_std": 0.006252308083785921,
+    "test_pre_rating_ge_4_brier_mean": 0.24741141001383463,
+    "test_pre_rating_ge_4_brier_std": 0.001952917093540636,
+    "test_fine_rating_ge_3_auc_mean": 0.5733592043815326,
+    "test_fine_rating_ge_3_auc_std": 0.011217957355280712,
+    "test_fine_rating_ge_3_brier_mean": 0.14470854898293814,
+    "test_fine_rating_ge_3_brier_std": 0.0006740120315748122,
+    "test_fine_rating_ge_4_auc_mean": 0.5642605770449913,
+    "test_fine_rating_ge_4_auc_std": 0.0013648046138899504,
+    "test_fine_rating_ge_4_brier_mean": 0.23974526425202689,
+    "test_fine_rating_ge_4_brier_std": 9.312552136326388e-05
+  },
+  "diagnostic_only": true,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "limited-budget public proxy; no paper or production lift claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.28589-onetrans-v2/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "MovieLens-1M ratings.dat sha256:506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f"
+  },
+  "manifest_ref": "reproduction:onetrans-v2"
+}

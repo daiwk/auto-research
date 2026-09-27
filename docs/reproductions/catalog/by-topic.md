@@ -304,6 +304,7 @@
 - [PIANO](../2606.16641-piano/README.md)：query-driven interest refiner 选择相关历史，information node 汇总候选列表并条件化 item score。
 
 ### 召回、粗排与精排协同
+- [OneTrans-V2](../2609.28589-onetrans-v2/README.md)：检索、预排与精排共用因果用户上下文，以决策条件 SID 检索和精排蒸馏协调级联阶段。
 - [UniRec](../2609.11052-unirec/README.md)：联合预排与精排融合，以纵向偏好对齐、紧凑 pairwise 聚合和组相对正则协调级联阶段。
 - [SPEAR](../2608.01738-spear/README.md)：以双 embedding 和乘法选择门把 query rewrite 与 item relevance 端到端对齐，同时保留原 query residual。
 - [STEPS](../2608.01949-steps/README.md)：以 planning、execution、filter 三 Agent 联合决定推送动作和下一次系统唤醒时刻。

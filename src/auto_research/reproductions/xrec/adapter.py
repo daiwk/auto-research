@@ -42,10 +42,10 @@ ADAPTER = register(ReproductionAdapter(
     ),
     evaluation_tier=EvaluationTier.PUBLIC_DATASET,
     datasets=("MovieLens 1M",),
-    baseline="same-data full-catalog two-layer Transformer U2I",
-    metrics=("hit_at_10", "ndcg_at_10"),
+    baseline="same-data two-layer U2I and trained residual-SID autoregressive decoder",
+    metrics=("hit_at_10", "ndcg_at_10", "recall_at_20", "generation_requests_per_second_cpu"),
     default_seeds=(42, 43, 44),
-    budget="160 item-vector + 160 prefix pretrain + 40 last-prefix SFT steps; matched 200 U2I steps",
+    budget="160 shared item-vector + 200 model updates (X-Rec 160+40, SID-AR 200, U2I 200); updates matched, not FLOPs",
     device_capabilities=("cpu",),
     infer_device_capabilities=False,
 ))

@@ -21129,6 +21129,73 @@
     },
     {
       "domain": "recommendation",
+      "key": "onetrans-v2",
+      "title": "OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender",
+      "paper_url": "https://arxiv.org/abs/2609.28589",
+      "detail_path": "reproductions/2609.28589-onetrans-v2/README.md",
+      "topic": [
+        "multi-stage-ranking",
+        "generative-retrieval",
+        "cross-stage-distillation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-09-23",
+      "code": null,
+      "adapter": {
+        "adapter_key": "onetrans-v2",
+        "arxiv_id": "2609.28589",
+        "title": "OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender",
+        "paper_url": "https://arxiv.org/abs/2609.28589",
+        "track": "recommendation",
+        "organization": "ByteDance",
+        "published": "2026-09-23",
+        "code_url": null,
+        "topics": [
+          "multi-stage-ranking",
+          "generative-retrieval",
+          "cross-stage-distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/onetrans_v2",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "MovieLens 1M"
+        ],
+        "baseline": "shared three-stage mechanism; no production cascade baseline available",
+        "metrics": [
+          "pre_rating_ge_3_auc",
+          "fine_rating_ge_3_auc",
+          "sid_exact_accuracy"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "200 shared-backbone updates, batch 64, three seeds",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "industrial recommendation cascade",
+            "metric": "GMV per user",
+            "lift_percent": 9.74,
+            "traffic": "user-level 50/50 randomized A/B",
+            "source_url": "https://arxiv.org/html/2609.28589v1",
+            "source_location": "Section 6.3",
+            "retrieved_at": "2026-09-27"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "open-web-ufm",
       "title": "Building a User Foundation Model for the Open Web",
       "paper_url": "https://arxiv.org/abs/2607.28019",
@@ -29667,17 +29734,19 @@
         "datasets": [
           "MovieLens 1M"
         ],
-        "baseline": "same-data full-catalog two-layer Transformer U2I",
+        "baseline": "same-data two-layer U2I and trained residual-SID autoregressive decoder",
         "metrics": [
           "hit_at_10",
-          "ndcg_at_10"
+          "ndcg_at_10",
+          "recall_at_20",
+          "generation_requests_per_second_cpu"
         ],
         "default_seeds": [
           42,
           43,
           44
         ],
-        "budget": "160 item-vector + 160 prefix pretrain + 40 last-prefix SFT steps; matched 200 U2I steps",
+        "budget": "160 shared item-vector + 200 model updates (X-Rec 160+40, SID-AR 200, U2I 200); updates matched, not FLOPs",
         "device_capabilities": [
           "cpu"
         ],
