@@ -330,6 +330,17 @@ def build_parser() -> argparse.ArgumentParser:
     post_train.add_argument("--teacher-output-cost-per-million", type=float, default=0.0)
     _add_runtime_arguments(post_train)
 
+    mad_rl = commands.add_parser(
+        "mad-rl", help="run the MaD-RL five-category synthetic-choice mechanism audit",
+    )
+    mad_rl.add_argument("--divergences", default="correctness,l2,forward-kl,reverse-kl,jsd")
+    mad_rl.add_argument("--target", default="0,0,0.3333333333333333,0.3333333333333333,0.3333333333333333")
+    mad_rl.add_argument("--seeds", default="42,43,44")
+    mad_rl.add_argument("--steps", type=int, default=60)
+    mad_rl.add_argument("--group-size", type=int, default=16)
+    mad_rl.add_argument("--output-dir", type=Path, default=Path("runs/post-training/mad-rl"))
+    _add_runtime_arguments(mad_rl)
+
     checkpoint_post = commands.add_parser(
         "checkpoint-post-train",
         help="train a pinned public causal LM with GSM8K SFT or UltraFeedback DPO/normalized-DPO/ORPO",
@@ -1254,6 +1265,18 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(f"Report: {run_dir / 'report.md'}")
             print(f"Dashboard: {run_dir / 'index.html'}")
+            return 0
+        if args.command == "mad-rl":
+            from .post_training.mad_rl import run_choice_experiment
+
+            payload, run_dir = run_choice_experiment(
+                seeds=tuple(int(value.strip()) for value in args.seeds.split(",") if value.strip()),
+                divergences=tuple(value.strip() for value in args.divergences.split(",") if value.strip()),
+                target=tuple(float(value.strip()) for value in args.target.split(",")),
+                steps=args.steps, group_size=args.group_size, output_dir=args.output_dir,
+            )
+            print(f"MaD-RL mechanism runs: {len(payload['runs'])}")
+            print(f"Report: {run_dir / 'report.md'}")
             return 0
         if args.command == "post-train":
             result, run_dir = PostTrainingRunner(

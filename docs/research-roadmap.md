@@ -58,7 +58,7 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP27-02 | P0 · TikTok | 核心机制已实现；比较未收口 | [X-Rec](reproductions/2609.29180-xrec/README.md)：已执行 anchor CE、RFM、末层交互、球面积分、多 trigger 全目录检索与 MovieLens-1M 三种子 U2I 对照（当前低预算负结果）；仍需等预算 SID-AR 与真实生成吞吐测量。当前使用精确全目录矩阵检索，非生产 ANN 索引 |
 | SEP27-03 | P0 · Alibaba | 待实现 | CMRec：一作单位已核对为 Alibaba International Digital Commerce Group；尚须核查官方代码与可用跨域数据，完成共享语义代码本、双约束 code-mixing 和上下文加权损失的跨域消融 |
 | SEP27-04 | P0 | 待实现 | AgentX-Model：双 Agent 提案/执行边界、四类研究动作、依赖约束历史回放；私有生产轨迹和线上收益明确隔离 |
-| SEP27-05 | P1 · Meta | 全文复核 | MaD-RL：Meta 官方页已确认 09-24 发表；须取得原文公式、目标分布/属性标注与公开训练评测协议，再决定 KL/Jensen–Shannon 分布匹配的可执行复现范围 |
+| SEP27-05 | P1 · Meta | 小模型机制诊断已运行；正式复现未完成 | [MaD-RL](experiments/mad-rl-mechanism.md)：已按原文公式实现 L2、forward/reverse KL 与 Jensen–Shannon 分布奖励，并跑完两种目标分布、五种奖励、三种子对照；仍缺可取得的原论文配图和原文规模的公开 checkpoint/任务实验，不登记为正式论文复现 |
 
 ## 优先级和状态
 
