@@ -1,0 +1,167 @@
+{
+  "schema_version": 2,
+  "paper": "2609.29180",
+  "adapter": "xrec",
+  "dataset": "MovieLens 1M",
+  "seeds": [
+    {
+      "seed": 42,
+      "dataset": {
+        "name": "MovieLens 1M",
+        "users": 6038,
+        "items": 3706
+      },
+      "training": {
+        "xrec_pretrain": {
+          "anchor_ce": 2.7592220306396484,
+          "rfm_squared_norm": 2.463858127593994
+        },
+        "xrec_sft": {
+          "anchor_ce": 2.756059169769287,
+          "rfm_squared_norm": 2.397055149078369
+        },
+        "sid_ar": {
+          "sid_ar_ce": 8.244064331054688
+        },
+        "u2i": {
+          "retrieval_ce": 9.735591888427734
+        }
+      },
+      "validation_recall_at_20": {
+        "xrec": 0.0038092083471348128,
+        "sid_ar": 0.006955945677376615,
+        "u2i": 0.009274594236502154
+      },
+      "test_recall_at_20": {
+        "xrec": 0.0028155018217952965,
+        "sid_ar": 0.00546538588936734,
+        "u2i": 0.00844650546538589
+      },
+      "generation_requests_per_second_cpu": {
+        "xrec": 1952.459819380749,
+        "sid_ar": 9965.74275020049,
+        "u2i": 11967.091073704572
+      },
+      "protocol": "train-only item vectors/SIDs; 200 model updates each; X-Rec and SID-AR 20 triggers × top1 exact NN; U2I 1 trigger × top20; seen-item filtered; CPU generation-only timing excludes packing and NN, batch 16, warmup 2, five repeats",
+      "diagnostic_only": true
+    },
+    {
+      "seed": 43,
+      "dataset": {
+        "name": "MovieLens 1M",
+        "users": 6038,
+        "items": 3706
+      },
+      "training": {
+        "xrec_pretrain": {
+          "anchor_ce": 2.8092663288116455,
+          "rfm_squared_norm": 2.418225049972534
+        },
+        "xrec_sft": {
+          "anchor_ce": 2.730889081954956,
+          "rfm_squared_norm": 2.4820799827575684
+        },
+        "sid_ar": {
+          "sid_ar_ce": 8.170690536499023
+        },
+        "u2i": {
+          "retrieval_ce": 9.716946601867676
+        }
+      },
+      "validation_recall_at_20": {
+        "xrec": 0.0038092083471348128,
+        "sid_ar": 0.007784034448492879,
+        "u2i": 0.006624710168930109
+      },
+      "test_recall_at_20": {
+        "xrec": 0.0028155018217952965,
+        "sid_ar": 0.009440211990725405,
+        "u2i": 0.005299768135144088
+      },
+      "generation_requests_per_second_cpu": {
+        "xrec": 1845.0007853394777,
+        "sid_ar": 9167.083880123191,
+        "u2i": 11900.333727243382
+      },
+      "protocol": "train-only item vectors/SIDs; 200 model updates each; X-Rec and SID-AR 20 triggers × top1 exact NN; U2I 1 trigger × top20; seen-item filtered; CPU generation-only timing excludes packing and NN, batch 16, warmup 2, five repeats",
+      "diagnostic_only": true
+    },
+    {
+      "seed": 44,
+      "dataset": {
+        "name": "MovieLens 1M",
+        "users": 6038,
+        "items": 3706
+      },
+      "training": {
+        "xrec_pretrain": {
+          "anchor_ce": 2.7605743408203125,
+          "rfm_squared_norm": 2.4760470390319824
+        },
+        "xrec_sft": {
+          "anchor_ce": 2.778311252593994,
+          "rfm_squared_norm": 2.486469030380249
+        },
+        "sid_ar": {
+          "sid_ar_ce": 8.184196472167969
+        },
+        "u2i": {
+          "retrieval_ce": 9.625663757324219
+        }
+      },
+      "validation_recall_at_20": {
+        "xrec": 0.0038092083471348128,
+        "sid_ar": 0.006955945677376615,
+        "u2i": 0.012421331566743955
+      },
+      "test_recall_at_20": {
+        "xrec": 0.0028155018217952965,
+        "sid_ar": 0.006293474660483604,
+        "u2i": 0.01093077177873468
+      },
+      "generation_requests_per_second_cpu": {
+        "xrec": 1956.9971863964308,
+        "sid_ar": 9567.713002066848,
+        "u2i": 11984.641114817294
+      },
+      "protocol": "train-only item vectors/SIDs; 200 model updates each; X-Rec and SID-AR 20 triggers × top1 exact NN; U2I 1 trigger × top20; seen-item filtered; CPU generation-only timing excludes packing and NN, batch 16, warmup 2, five repeats",
+      "diagnostic_only": true
+    }
+  ],
+  "metrics": {
+    "validation_recall_at_20_xrec_mean": 0.003809208347134813,
+    "validation_recall_at_20_xrec_std": 4.336808689942018e-19,
+    "validation_recall_at_20_sid_ar_mean": 0.007231975267748702,
+    "validation_recall_at_20_sid_ar_std": 0.00039036479032049674,
+    "validation_recall_at_20_u2i_mean": 0.009440211990725407,
+    "validation_recall_at_20_u2i_std": 0.00236935671125924,
+    "test_recall_at_20_xrec_mean": 0.0028155018217952965,
+    "test_recall_at_20_xrec_std": 0.0,
+    "test_recall_at_20_sid_ar_mean": 0.007066357513525449,
+    "test_recall_at_20_sid_ar_std": 0.001712273646822438,
+    "test_recall_at_20_u2i_mean": 0.008225681793088219,
+    "test_recall_at_20_u2i_std": 0.0023041445020105114,
+    "generation_requests_per_second_cpu_xrec_mean": 1918.152597038886,
+    "generation_requests_per_second_cpu_xrec_std": 51.75929926778373,
+    "generation_requests_per_second_cpu_sid_ar_mean": 9566.846544130176,
+    "generation_requests_per_second_cpu_sid_ar_std": 326.0516940101207,
+    "generation_requests_per_second_cpu_u2i_mean": 11950.688638588415,
+    "generation_requests_per_second_cpu_u2i_std": 36.32000191069414
+  },
+  "diagnostic_only": true,
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "limited-budget public proxy; no paper or production lift claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.29180-xrec/metrics/fair-budget-seeds42-44.json",
+    "dataset_fingerprint": "MovieLens-1M ratings.dat sha256:506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f"
+  },
+  "manifest_ref": "reproduction:xrec"
+}

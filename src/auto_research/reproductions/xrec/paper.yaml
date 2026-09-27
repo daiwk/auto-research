@@ -20,10 +20,12 @@
   "datasets": [
     "MovieLens 1M"
   ],
-  "baseline": "same-data full-catalog two-layer Transformer U2I",
+  "baseline": "same-data two-layer U2I and trained residual-SID autoregressive decoder",
   "metrics": [
     "hit_at_10",
-    "ndcg_at_10"
+    "ndcg_at_10",
+    "recall_at_20",
+    "generation_requests_per_second_cpu"
   ],
   "mechanisms": [
     "TikTok private multi-attribute sequence features and streaming benchmark",

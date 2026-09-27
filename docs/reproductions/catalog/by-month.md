@@ -4,6 +4,7 @@
 
 ## 2026-09
 - [X-Rec](../2609.29180-xrec/README.md)：先预测 item 的语义聚类锚点，再沿球面测地线训练条件速度场，以末层交互生成多兴趣召回向量。
+- [OneTrans-V2](../2609.28589-onetrans-v2/README.md)：用共享因果历史编码执行决策条件三级 SID 检索、预排/精排双目标学习和精排到预排蒸馏。
 - [Light Heads](../2609.25433-light-heads/README.md)：通过 stop-gradient 隔离新多任务目标，并在训练窗口重置轻头以保持跨模型预测空间一致。
 - [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：把真实 LLM 艺人提名与理由生成放在异步离线阶段，在线仅用过滤后的缓存画像或 CF 回退。
 - [MuSeR](../2609.23677-muser/README.md)：分层压缩长序列、学习多组兴趣查询，并按候选自适应融合兴趣与物品内容特征。

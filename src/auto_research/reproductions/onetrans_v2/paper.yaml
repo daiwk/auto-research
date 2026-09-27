@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "onetrans-v2",
+  "arxiv_id": "2609.28589",
+  "title": "OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender",
+  "paper_url": "https://arxiv.org/abs/2609.28589",
+  "organization": "ByteDance",
+  "published": "2026-09-23",
+  "upstream_code": "否：截至 2026-09-27 未找到作者发布的官方代码",
+  "track": "recommendation",
+  "topics": [
+    "multi-stage-ranking",
+    "generative-retrieval",
+    "cross-stage-distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/onetrans_v2",
+  "documentation": "docs/reproductions/2609.28589-onetrans-v2/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "MovieLens 1M"
+  ],
+  "baseline": "shared three-stage mechanism; no production cascade baseline available",
+  "metrics": [
+    "pre_rating_ge_3_auc",
+    "fine_rating_ge_3_auc",
+    "sid_exact_accuracy"
+  ],
+  "mechanisms": [
+    "real purchase, spend and sponsored-supply decision labels (MovieLens proxies only)",
+    "production exposure streams, SNT amortization and online serving stack",
+    "sparse MoE and production-scale item encoder"
+  ],
+  "evolve_operators": []
+}

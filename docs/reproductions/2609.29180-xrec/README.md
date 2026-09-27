@@ -55,7 +55,7 @@ $$
 
 ### 论文离线与线上效果
 
-论文在 TikTok 垂类内容召回上连续两次上线：第一阶段使用球面流与末层交互，第二阶段再加入 anchor；[§5 Table 3](https://arxiv.org/html/2609.29180v1#S5) 报告垂类互动合计 **+4.1484%**，全局互动 **+0.0111%**。论文工业 streaming benchmark 中相对 SID-AR 的生成吞吐为 **3.46×**。这些都是原论文报告，不是本地公开数据实验结果；本地也不验证生产吞吐。
+论文在 TikTok 垂类内容召回上连续两次上线：第一阶段使用球面流与末层交互，第二阶段再加入 anchor；[§5 Table 3](https://arxiv.org/html/2609.29180v1#S5) 报告垂类互动合计 **+4.1484%**，全局互动 **+0.0111%**。论文工业 streaming benchmark 中相对 SID-AR 的生成吞吐为 **3.46×**。这些都是原论文报告，不是本地公开数据实验结果；下方的 CPU 生成吞吐也不是生产 GPU streaming benchmark。
 
 ## 本地复现
 
@@ -70,6 +70,22 @@ $$
 
 这些数是三种子的算术均值；不同种子差异较大，不能推断线上 lift。逐种子验证集、测试集、训练预算及数据指纹见 [`metrics/public-seeds42-44.json`](metrics/public-seeds42-44.json)。
 
+### 等更新步数的 SID-AR 对照
+
+新增独立对照用同一份训练前缀和 train-only item 向量拟合三级 residual quantizer。SID-AR 使用双层历史 Transformer，逐级条件预测 SID token，并以 beam width 20 自回归生成；预测 SID 由量化码本重建为 trigger，随后对全物品向量做精确近邻检索。X-Rec 生成 20 个球面 trigger，两者均为 **20 trigger × 每个取 1 个近邻**；U2I 为 **1 trigger × 取 20 个近邻**。均在检索后过滤已看物品、按用户时间留最后两条作为 validation/test。三模型分别训练 200 次序列模型更新，训练批量均为 64；这只对齐更新次数，不对齐参数量、FLOPs 或收敛程度。
+
+| MovieLens-1M 三种子均值 | Validation Recall@20 | Test Recall@20 | CPU 生成请求/秒 |
+| --- | ---: | ---: | ---: |
+| X-Rec | 0.00381 | 0.00282 | 1,918 |
+| SID-AR | 0.00723 | 0.00707 | 9,567 |
+| U2I | 0.00944 | 0.00823 | 11,951 |
+
+吞吐只计模型生成，不计历史张量组装与精确近邻检索：同机 CPU、batch 16、预热 2 次、计时 5 次取中位数；三个 seed 的均值见[逐种子收据](metrics/fair-budget-seeds42-44.json)。它不是 A100/A30 的 GPU 数字，也不支持对论文的 3.46× 作直接验证。此缩比任务中 X-Rec 的召回和吞吐均低于 SID-AR，必须如实保留这个负结果。
+
+```bash
+PYTHONPATH=src python scripts/run_staged_retrieval_public.py --paper xrec-fair --dataset-dir data
+```
+
 ```bash
 auto-research reproduce --paper xrec --dataset-dir data --seed 42
 ```
@@ -77,5 +93,5 @@ auto-research reproduce --paper xrec --dataset-dir data --seed 42
 ## 复现边界
 
 - 实际执行：item 对比学习、球面 anchor 聚类与 CE、测地线 RFM 监督、末层历史 K/V 复用、时间/anchor 调制、切空间速度、球面 Euler 和多 trigger 全目录检索。
-- 未执行：TikTok 私有多属性日志与 streaming benchmark、工业 item encoder、ANN/在线 KV 服务、真实线上 A/B。MovieLens 没有原文的 target attribute，因此本地仅使用历史交互作为条件。
+- 未执行：TikTok 私有多属性日志与 streaming benchmark、工业 item encoder、ANN/在线 KV 服务、真实线上 A/B。MovieLens 没有原文的 target attribute，因此本地仅使用历史交互作为条件；本地新增的是 CPU 生成微基准，不是生产吞吐。
 - 当前是 CPU 缩比训练，不宣传 CUDA 路径；没有 A100/A30 的 GPU 验证收据。本地结果只说明核心机制可运行，不是原论文结果复刻。
