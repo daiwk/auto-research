@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "adapter_key": "recursive-opsd",
+  "validated_at": "2026-09-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python", "scripts/recursive_opsd_public_math.py",
+    "--checkpoint", "<public-Qwen3-4B-Instruct-2507-snapshot>",
+    "--data-dir", "<official-GSM8K-directory>",
+    "--output", "<local-result.json>",
+    "--seed", "42", "--steps", "2", "--train-examples", "4",
+    "--validation-examples", "2", "--test-examples", "2",
+    "--max-new-tokens", "192"
+  ],
+  "dataset": {
+    "name": "official GSM8K",
+    "source": "https://github.com/openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test_sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "split": "first 4 train rows for training; next 2 train rows for validation; first 2 official test rows read only after training"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "local_weights_committed": false
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "optimizer_updates": 2,
+    "lora_rank": 8,
+    "max_new_tokens": 192,
+    "dynamic_dce_srcl_validation_accuracy_before": 0.5,
+    "dynamic_dce_srcl_validation_accuracy_after": 0.5,
+    "dynamic_dce_srcl_validation_mean_tokens_before": 164.5,
+    "dynamic_dce_srcl_validation_mean_tokens_after": 174.5,
+    "dynamic_dce_srcl_accepted_rounds": 2,
+    "dynamic_dce_srcl_adapter_parameter_delta_l2": 0.01001878839044344,
+    "fixed_teacher_validation_accuracy_after": 0.5,
+    "dce_only_validation_accuracy_after": 0.5,
+    "formal_paper_result_reproduced": false,
+    "diagnostic_only": true
+  },
+  "provenance": {
+    "commit": "4c3051124c219e0ceb0bea7cee63cf123e52bb33",
+    "artifact_path": "docs/gpu-validations/recursive-opsd-a100-20260929.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

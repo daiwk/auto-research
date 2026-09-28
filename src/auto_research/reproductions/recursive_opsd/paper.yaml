@@ -6,7 +6,7 @@
   "paper_url": "https://arxiv.org/abs/2609.30652",
   "organization": "Meta AI / University of California, Riverside",
   "published": "2026-09-25",
-  "upstream_code": "未找到／未发布：截至 2026-09-29，论文未附官方训练仓库",
+  "upstream_code": "否：截至 2026-09-29，未找到原作者发布的训练仓库",
   "track": "llm",
   "topics": [
     "On-policy self-distillation",

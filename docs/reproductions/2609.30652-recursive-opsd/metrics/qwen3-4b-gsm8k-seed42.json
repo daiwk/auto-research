@@ -22,7 +22,10 @@
     "optimizer_updates": 2,
     "generation_cap": 192,
     "lora_rank": 8,
-    "lora_target_modules": ["q_proj", "v_proj"],
+    "lora_target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
     "accelerator": "NVIDIA A100-SXM4-80GB"
   },
   "controls": {
@@ -60,5 +63,20 @@
     "AIME/HMMT Average@12 evaluation",
     "200-step rank-128 eight-H100 training",
     "paper-matched SFT, GRPO, OPSD and test-time scaling controls"
-  ]
+  ],
+  "schema_version": 2,
+  "manifest_ref": "reproduction:recursive-opsd",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.30652-recursive-opsd/metrics/qwen3-4b-gsm8k-seed42.json",
+    "dataset_fingerprint": "sha256:17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "code_commit": "4c3051124c219e0ceb0bea7cee63cf123e52bb33"
+  }
 }

@@ -48,10 +48,10 @@ flowchart LR
 
 论文公式对应：
 
-\[
+$$
 L_{DCE}=\frac{1}{m}\sum_{t=1}^{m}D_{KL}\bigl(q_{k,t}\Vert p_{k,t}\bigr),\qquad
 L_{joint}=\lambda_G L_{DCE}+\lambda_S L_{SRCL}.
-\]
+$$
 
 实现将标准解只送给停止梯度的特权教师及验收器。学生 rollout 和 SRCL 改写提示均不含标准解，避免把答案泄漏当作模型能力。冻结教师控制组仅固定同一 assistant-side 提示下的初始权重，不冒称论文中 **user-side 提示 + 冻结权重** 的原版 OPSD 基线。
 
