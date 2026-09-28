@@ -33,6 +33,12 @@
 边界保持在下表队列，不用占位 adapter 冒充复现。上一轮已合入
 的 [PR #164](https://github.com/daiwk/auto-research/pull/164) 不因本轮扫描重做。
 
+2026-09-28 [重叠窗口扩扫](recent-paper-scan-20260928.md)已在 arXiv API 恢复后
+覆盖四领域、每查询前 50 条，并将原始本窗口发表与晚索引/历史未审分开；
+Meta 官方总入口 500 和 GitHub 机构 API 403 仍使跨来源水位不可推进。
+新增待验收优先队列：KuaFu（工业 P0）、Meta Recursive OPD（P0）、
+ActKV/ToolSearcher/Code Skills（P1）。这些均是**待实现**，不是本仓库已有 adapter。
+
 System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通；测试集与 OOD
 仅在选择后读取，冠军没有优于初始配置。数据哈希、指标和运行边界见
 [System One 评测协议](system-one/benchmark.md)。
@@ -68,7 +74,7 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 
 | ID | 优先级 | 状态 | 工作与完成条件 |
 | --- | --- | --- | --- |
-| SEP28-01 | P1 · Agent | L1 机制已实现，正式复现待办 | [GRAFT](experiments/sep28-three-mechanisms.md)：经验轨迹图、Bellman 值和 Graph GAE；仍须无泄漏环境中的可训练 policy、公平多 seed 成功率 |
+| SEP28-01 | P1 · Agent | L2.1 诊断已运行，正式复现待办 | [GRAFT](experiments/sep28-three-mechanisms.md)：经验轨迹图、Bellman 值、Graph GAE；无金标工具环境的三 seed tabular policy 对照未见提升，仍须 LLM policy 与论文任务环境 |
 | SEP28-02 | P1 · 基础模型 | 小模型公开语料诊断已运行，正式复现待办 | [KITE](experiments/sep28-three-mechanisms.md)：两阶段双塔、KV 不变量、WikiText-2 三 seed 负结果；仍须同 FLOPs scaling 和实测 prefill/decode |
 | SEP28-03 | P1 · 多模态 | L1 机制已实现，正式复现待办 | [DeltaS](experiments/sep28-three-mechanisms.md)：状态漂移与分桶 KV 淘汰；仍须真实混合模型状态、公开视频、等预算 GPU 验证 |
 | SEP28-04 | P1 · 后训练/Agent | 待全文与数据协议复核 | DCRL、IterSynth：尚未找到能忠实跑通原定义算法且公平评测的公开低预算链路，不用名称注册或金标轨迹冒充实现 |

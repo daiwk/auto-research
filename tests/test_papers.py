@@ -71,6 +71,32 @@ def test_search_retries_transient_arxiv_throttling(monkeypatch):
     assert sleeps == [0.25]
 
 
+def test_search_retries_intermittent_406_without_changing_query(monkeypatch):
+    calls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return None
+
+        def read(self):
+            return b'<feed xmlns="http://www.w3.org/2005/Atom" />'
+
+    def fake_open(request, timeout):
+        calls.append(request.full_url)
+        if len(calls) == 1:
+            raise urllib.error.HTTPError(request.full_url, 406, "intermittent", {}, None)
+        return Response()
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_open)
+    monkeypatch.setattr("time.sleep", lambda _: None)
+    assert ArxivClient(maximum_retries=1).search("agent") == []
+    assert len(calls) == 2
+    assert calls[0] == calls[1]
+
+
 def test_search_retries_transient_read_timeout(monkeypatch):
     calls = []
 

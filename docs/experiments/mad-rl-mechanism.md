@@ -8,7 +8,7 @@
 |---|---|
 | 论文链接 | [Meta 官方论文页](https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/) |
 | 公司 / 机构 | Meta Superintelligence Labs |
-| 首次公开日期 | 2026-09-24（Meta 官方论文页） |
+| 首次公开日期 | 2026-09-23（论文 PDF 落款）；Meta 官方论文页发布于 2026-09-24 |
 | 原作者代码 | 截至 2026-09-27 未找到公开源码 |
 | 本地 adapter / CLI key | `mad-rl`（独立机制实验，非正式论文 adapter） |
 | 本地复现代码 | `src/auto_research/post_training/mad_rl.py` |
