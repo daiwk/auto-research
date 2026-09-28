@@ -8650,5 +8650,19 @@
     "height": 784,
     "score": 32,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.30652-recursive-opsd/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.30652",
+    "arxiv_id": "2609.30652",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2 Overview of recursive co-evolution. At round k, the current model generates an on-policy rollout. DCE supplies gold-conditioned guidance along that rollout, while SRCL learns from accepted, shorter self-refinements. Their joint update produces θk+1, which initializes both roles in the next round and carries newly acquired revision behavior into future supervision.",
+    "source_url": "https://arxiv.org/pdf/2609.30652#page=5",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2609.30652-recursive-opsd/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 807,
+    "score": 77,
+    "error": ""
   }
 ]

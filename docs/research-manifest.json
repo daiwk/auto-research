@@ -7718,6 +7718,64 @@
     },
     {
       "domain": "post-training",
+      "key": "recursive-opsd",
+      "title": "Recursive Self-Improvement via On-Policy Distillation for Reasoning",
+      "paper_url": "https://arxiv.org/abs/2609.30652",
+      "detail_path": "reproductions/2609.30652-recursive-opsd/README.md",
+      "topic": [
+        "On-policy self-distillation",
+        "DCE",
+        "SRCL",
+        "reasoning"
+      ],
+      "first_author": "Shangjian Yin",
+      "first_author_affiliation": "Meta AI / University of California, Riverside",
+      "published": "2026-09-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "recursive-opsd",
+        "arxiv_id": "2609.30652",
+        "title": "Recursive Self-Improvement via On-Policy Distillation for Reasoning",
+        "paper_url": "https://arxiv.org/abs/2609.30652",
+        "track": "llm",
+        "organization": "Meta AI / University of California, Riverside",
+        "published": "2026-09-25",
+        "code_url": null,
+        "topics": [
+          "On-policy self-distillation",
+          "DCE",
+          "SRCL",
+          "reasoning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/recursive_opsd",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "official GSM8K train/test"
+        ],
+        "baseline": "pre-update same checkpoint plus two-step fixed-teacher and DCE-only controls",
+        "metrics": [
+          "baseline_validation.accuracy",
+          "final_validation.accuracy",
+          "final_test.accuracy",
+          "adapter_parameter_delta_l2"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "2 updates; 4 train + 2 validation + 2 test problems; 192 tokens",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/recursive-opsd-a100-20260929.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "post-training",
       "key": "reinforce-plus",
       "title": "REINFORCE++",
       "paper_url": "https://arxiv.org/abs/2501.03262",

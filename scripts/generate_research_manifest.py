@@ -23,9 +23,10 @@ from auto_research.latest_20260919_catalog import LATEST_METHOD_PAPERS as SEP19_
 from auto_research.latest_20260920_system_one_catalog import LATEST_METHOD_PAPERS as SYSTEM_ONE_PAPERS
 
 
-POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis"}
+POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis", "recursive-opsd"}
 
 FIRST_AUTHOR_OVERRIDES = {
+    "recursive-opsd": "Shangjian Yin",
     "tagr": "Wencai Ye",
     "wemm-embedding": "Junjie Zhou",
 }

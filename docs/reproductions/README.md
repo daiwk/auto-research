@@ -50,6 +50,7 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `recursive-opsd` · [Meta DCE+SRCL](2609.30652-recursive-opsd/README.md)：Qwen3-4B 在 A100 上执行动态特权教师、逐 token forward KL 与通过答案验收的精简自改写；公开 GSM8K 两轮诊断无准确率提升证据，标为概念验证。
 - `kuafu` · [腾讯 KuaFu](2609.31045-kuafu/README.md)：条目级独立压缩、双轴投影与公开 MRQA 小样本监督训练已在 A100 执行；dev F1 未超过同 token 数头截断输入，幻觉 RL 同组零优势，诚实标为概念验证。
 - `onetrans-v2` · [ByteDance OneTrans-V2](2609.28589-onetrans-v2/README.md)：共享因果用户骨干、三级 SID 生成检索、预排/精排联合训练与蒸馏已在 MovieLens-1M 代理标签上三种子执行；缺真实交易、广告和曝光漏斗，明确标为概念验证。
 - `xrec` · [TikTok X-Rec](2609.29180-xrec/README.md)：在公开 MovieLens-1M 上执行锚点条件化球面流匹配、末层交互与多触发器全目录召回；低预算三种子结果低于同预算 U2I。

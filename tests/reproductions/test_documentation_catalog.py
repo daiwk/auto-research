@@ -45,7 +45,9 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
     post_training_cross_links = (
         ROOT / "docs" / "post-training" / "README.md"
     ).read_text(encoding="utf-8")
-    post_training_reproductions = {"sis", "off-context-grpo", "dynamic-rubric"}
+    post_training_reproductions = {
+        "sis", "off-context-grpo", "dynamic-rubric", "recursive-opsd",
+    }
     for adapter in adapters:
         slug = _slug(adapter)
         assert adapter.key in manifest_adapter_keys
