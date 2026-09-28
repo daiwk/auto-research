@@ -8622,5 +8622,19 @@
     "height": 477,
     "score": 54,
     "error": ""
+  },
+  {
+    "page": "docs/agent-research/2609.30001-agentx-model/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.30001",
+    "arxiv_id": "2609.30001",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1 | Human–agent collaboration in AgentX-Model. The vertical line marks the interaction boundary. Automatic allocation supplies a task type for the Research Agent to consider. The blue return arrow feeds outcomes back into research, so the right-hand loop can continue within the specified goals, constraints, and resources without a new human request.",
+    "source_url": "https://arxiv.org/pdf/2609.30001#page=5",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/agent-research/2609.30001-agentx-model/assets/paper-figure-01.png",
+    "width": 1310,
+    "height": 930,
+    "score": 39,
+    "error": ""
   }
 ]

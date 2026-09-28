@@ -32,6 +32,15 @@ FIRST_AUTHOR_OVERRIDES = {
 
 LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + (
     {
+        "domain": "agent-research", "key": "agentx-model-replay",
+        "title": "Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.30001",
+        "detail_path": "agent-research/2609.30001-agentx-model/README.md",
+        "topic": ["研究自动化", "依赖约束历史回放"],
+        "first_author": "Shuang Yang", "first_author_affiliation": "Kuaishou",
+        "published": "2026-09-24", "code": None, "adapter": "agentx-model-replay",
+    },
+    {
         "domain": "post-training", "key": "pact",
         "title": "PACT: From Credit Assignment to Critic Alignment",
         "paper_url": "https://arxiv.org/abs/2609.26355",

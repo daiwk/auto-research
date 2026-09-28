@@ -1,0 +1,395 @@
+{
+  "schema_version": 2,
+  "diagnostic_only": true,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism_diagnostic",
+    "formal_comparison": false,
+    "claim_policy": "Fixed public graph and short budget; not a general scheduler comparison or production replication.",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "paper": "https://arxiv.org/abs/2609.30001",
+  "manifest_ref": "agent-research:agentx-model-replay",
+  "dataset": "MovieLens-1M",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.30001-agentx-model/metrics/movielens-1m-replay-seeds42-44.json",
+    "dataset_fingerprint": "sha256:cdff1a96c87e6aea02e64073827d35784813eed7ea6a775043d4961dd27bc9dd"
+  },
+  "metrics": {
+    "baseline_validation_auc_mean": 0.7171600097274942,
+    "diagnose_pcoc_absolute_error_before_mean": 0.036932079619937795,
+    "diagnose_pcoc_absolute_error_after_mean": 0.01737474545918623,
+    "fixed_best_validation_auc_mean": 0.7178416729858447,
+    "fixed_selected_test_auc_mean": 0.6981370926949997,
+    "random_best_validation_auc_mean": 0.7177486424115918,
+    "random_selected_test_auc_mean": 0.6975899246996438,
+    "parent-greedy_best_validation_auc_mean": 0.7177486424115918,
+    "parent-greedy_selected_test_auc_mean": 0.6975899246996438
+  },
+  "runs": [
+    {
+      "schema_version": 2,
+      "diagnostic_only": true,
+      "paper": "2609.30001",
+      "dataset": "MovieLens-1M",
+      "seed": 42,
+      "split": "per-user chronological last two; training subsample only; validation selection; champion-only test",
+      "counts": {
+        "train": 18000,
+        "validation": 800,
+        "test": 800,
+        "users": 800
+      },
+      "budget": 2,
+      "baseline_validation_auc": 0.7141509921455147,
+      "policies": {
+        "fixed": {
+          "best_validation_auc": 0.7141509921455147,
+          "selected_implementation": "business-baseline",
+          "selected_test_auc": 0.7072906882591093,
+          "target_reached_at": null,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7141509921455147,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.711903162463828,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "f-cross",
+              "action": "follow-up",
+              "parents": [
+                "r-cross"
+              ],
+              "starting_implementation": "rating-cross@40",
+              "reference_auc": 0.711903162463828,
+              "best_round": "cross-followup@40",
+              "validation_auc": 0.7122713414634146,
+              "delta_parent": 0.00036817899958663247,
+              "delta_path": 0.00036817899958663247
+            }
+          ]
+        },
+        "random": {
+          "best_validation_auc": 0.7145837639520463,
+          "selected_implementation": "genre-match@40",
+          "selected_test_auc": 0.7052372469635627,
+          "target_reached_at": null,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7141509921455147,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.711903162463828,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "r-genre",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7141509921455147,
+              "best_round": "genre-match@40",
+              "validation_auc": 0.7145837639520463,
+              "delta_parent": null,
+              "delta_path": null
+            }
+          ]
+        },
+        "parent-greedy": {
+          "best_validation_auc": 0.7145837639520463,
+          "selected_implementation": "genre-match@40",
+          "selected_test_auc": 0.7052372469635627,
+          "target_reached_at": null,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7141509921455147,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.711903162463828,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "r-genre",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7141509921455147,
+              "best_round": "genre-match@40",
+              "validation_auc": 0.7145837639520463,
+              "delta_parent": null,
+              "delta_path": null
+            }
+          ]
+        }
+      },
+      "diagnose": {
+        "source": "r-cross",
+        "validation_pcoc_before": 1.0172628015159382,
+        "validation_pcoc_after": 0.9940811643499632,
+        "validation_auc_after": 0.711903162463828,
+        "training_only_correction": true
+      },
+      "boundary": "Rule-based roles and public measured six-node graph; not the private 473-node agent replay or online A/B."
+    },
+    {
+      "schema_version": 2,
+      "diagnostic_only": true,
+      "paper": "2609.30001",
+      "dataset": "MovieLens-1M",
+      "seed": 43,
+      "split": "per-user chronological last two; training subsample only; validation selection; champion-only test",
+      "counts": {
+        "train": 18000,
+        "validation": 800,
+        "test": 800,
+        "users": 800
+      },
+      "budget": 2,
+      "baseline_validation_auc": 0.7164766128180763,
+      "policies": {
+        "fixed": {
+          "best_validation_auc": 0.7164766128180763,
+          "selected_implementation": "business-baseline",
+          "selected_test_auc": 0.6652416486948999,
+          "target_reached_at": null,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7164766128180763,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.7131242740998839,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "f-cross",
+              "action": "follow-up",
+              "parents": [
+                "r-cross"
+              ],
+              "starting_implementation": "rating-cross@40",
+              "reference_auc": 0.7131242740998839,
+              "best_round": "cross-followup@40",
+              "validation_auc": 0.7118968429944039,
+              "delta_parent": -0.0012274311054799592,
+              "delta_path": -0.0012274311054799592
+            }
+          ]
+        },
+        "random": {
+          "best_validation_auc": 0.7164766128180763,
+          "selected_implementation": "business-baseline",
+          "selected_test_auc": 0.6652416486948999,
+          "target_reached_at": null,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7164766128180763,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.7131242740998839,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "f-cross",
+              "action": "follow-up",
+              "parents": [
+                "r-cross"
+              ],
+              "starting_implementation": "rating-cross@40",
+              "reference_auc": 0.7131242740998839,
+              "best_round": "cross-followup@40",
+              "validation_auc": 0.7118968429944039,
+              "delta_parent": -0.0012274311054799592,
+              "delta_path": -0.0012274311054799592
+            }
+          ]
+        },
+        "parent-greedy": {
+          "best_validation_auc": 0.7164766128180763,
+          "selected_implementation": "business-baseline",
+          "selected_test_auc": 0.6652416486948999,
+          "target_reached_at": null,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7164766128180763,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.7131242740998839,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "r-genre",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7164766128180763,
+              "best_round": "genre-match@40",
+              "validation_auc": 0.7122795903283708,
+              "delta_parent": null,
+              "delta_path": null
+            }
+          ]
+        }
+      },
+      "diagnose": {
+        "source": "r-cross",
+        "validation_pcoc_before": 1.0500195785548612,
+        "validation_pcoc_after": 1.0241954080226612,
+        "validation_auc_after": 0.7131242740998839,
+        "training_only_correction": true
+      },
+      "boundary": "Rule-based roles and public measured six-node graph; not the private 473-node agent replay or online A/B."
+    },
+    {
+      "schema_version": 2,
+      "diagnostic_only": true,
+      "paper": "2609.30001",
+      "dataset": "MovieLens-1M",
+      "seed": 44,
+      "split": "per-user chronological last two; training subsample only; validation selection; champion-only test",
+      "counts": {
+        "train": 18000,
+        "validation": 800,
+        "test": 800,
+        "users": 800
+      },
+      "budget": 2,
+      "baseline_validation_auc": 0.7208524242188916,
+      "policies": {
+        "fixed": {
+          "best_validation_auc": 0.7228974139939427,
+          "selected_implementation": "cross-followup@40",
+          "selected_test_auc": 0.7218789411309897,
+          "target_reached_at": 1,
+          "selections": [
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7208524242188916,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.7221855504646527,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "f-cross",
+              "action": "follow-up",
+              "parents": [
+                "r-cross"
+              ],
+              "starting_implementation": "rating-cross@40",
+              "reference_auc": 0.7221855504646527,
+              "best_round": "cross-followup@40",
+              "validation_auc": 0.7228974139939427,
+              "delta_parent": 0.00071186352928998,
+              "delta_path": 0.00071186352928998
+            }
+          ]
+        },
+        "random": {
+          "best_validation_auc": 0.7221855504646527,
+          "selected_implementation": "rating-cross@40",
+          "selected_test_auc": 0.7222908784404687,
+          "target_reached_at": 2,
+          "selections": [
+            {
+              "id": "r-genre",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7208524242188916,
+              "best_round": "genre-match@40",
+              "validation_auc": 0.7205676788071755,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7208524242188916,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.7221855504646527,
+              "delta_parent": null,
+              "delta_path": null
+            }
+          ]
+        },
+        "parent-greedy": {
+          "best_validation_auc": 0.7221855504646527,
+          "selected_implementation": "rating-cross@40",
+          "selected_test_auc": 0.7222908784404687,
+          "target_reached_at": 2,
+          "selections": [
+            {
+              "id": "r-genre",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7208524242188916,
+              "best_round": "genre-match@40",
+              "validation_auc": 0.7205676788071755,
+              "delta_parent": null,
+              "delta_path": null
+            },
+            {
+              "id": "r-cross",
+              "action": "reproduce",
+              "parents": [],
+              "starting_implementation": "business-baseline",
+              "reference_auc": 0.7208524242188916,
+              "best_round": "rating-cross@40",
+              "validation_auc": 0.7221855504646527,
+              "delta_parent": null,
+              "delta_path": null
+            }
+          ]
+        }
+      },
+      "diagnose": {
+        "source": "r-cross",
+        "validation_pcoc_before": 1.043513858789014,
+        "validation_pcoc_after": 1.0220099927048607,
+        "validation_auc_after": 0.7221855504646527,
+        "training_only_correction": true
+      },
+      "boundary": "Rule-based roles and public measured six-node graph; not the private 473-node agent replay or online A/B."
+    }
+  ]
+}

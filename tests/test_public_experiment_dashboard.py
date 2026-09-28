@@ -67,6 +67,21 @@ def test_agent_mechanism_results_are_not_presented_as_capability_scores():
     assert any(item["method"] == "agent-evolve" for item in capabilities)
 
 
+def test_agentx_replay_dashboard_shows_measured_summary_not_schema_version():
+    payload = json.loads(
+        (ROOT / "docs/assets/data/experiment-dashboard.json").read_text(encoding="utf-8")
+    )
+    items = [item for item in payload["experiments"]
+             if item["method"] == "agentx-model-replay"]
+    assert len(items) == 1
+    item = items[0]
+    assert item["evidence"]["tier"] == "l1_mechanism_diagnostic"
+    assert item["evidence"]["formal_comparison"] is False
+    assert "fixed_best_validation_auc_mean" in item["metrics"]
+    assert "diagnose_pcoc_absolute_error_after_mean" in item["metrics"]
+    assert "schema_version" not in item["metrics"]
+
+
 def test_public_dashboard_page_uses_card_layout_and_progressive_disclosure():
     page = (ROOT / "docs/public-experiment-dashboard.md").read_text(encoding="utf-8")
     script = (ROOT / "docs/assets/javascripts/experiment-dashboard.js").read_text(

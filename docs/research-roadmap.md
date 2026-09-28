@@ -54,10 +54,10 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 
 | ID | 优先级 | 状态 | 工作与完成条件 |
 | --- | --- | --- | --- |
-| SEP27-01 | P0 · ByteDance | 待实现 | OneTrans-V2：共享 causal backbone、三级任务联合损失、DCGR、精排→预排蒸馏；公开数据三 seed 对照与阶段指标，不把 MovieLens 代理标签写成 GMV |
-| SEP27-02 | P0 · TikTok | 核心机制已实现；比较未收口 | [X-Rec](reproductions/2609.29180-xrec/README.md)：已执行 anchor CE、RFM、末层交互、球面积分、多 trigger 全目录检索与 MovieLens-1M 三种子 U2I 对照（当前低预算负结果）；仍需等预算 SID-AR 与真实生成吞吐测量。当前使用精确全目录矩阵检索，非生产 ANN 索引 |
+| SEP27-01 | P0 · ByteDance | 公开代理机制已实现 · [PR #169](https://github.com/daiwk/auto-research/pull/169) | [OneTrans-V2](reproductions/2609.28589-onetrans-v2/README.md)：共享 causal backbone、三级任务代理损失、DCGR 与精排→预排蒸馏，已记录三种子逐阶段指标；MovieLens 不具备真实交易/广告/漏斗标签，仍是概念验证 |
+| SEP27-02 | P0 · TikTok | 公开核心机制与公平对照已实现 · [PR #169](https://github.com/daiwk/auto-research/pull/169) | [X-Rec](reproductions/2609.29180-xrec/README.md)：同 200 更新步的 SID-AR 对照、20×1 全目录召回与 CPU 生成吞吐已测；本地低预算结果为负，非生产 ANN 或线上复现 |
 | SEP27-03 | P0 · Alibaba | 待实现 | CMRec：一作单位已核对为 Alibaba International Digital Commerce Group；尚须核查官方代码与可用跨域数据，完成共享语义代码本、双约束 code-mixing 和上下文加权损失的跨域消融 |
-| SEP27-04 | P0 | 待实现 | AgentX-Model：双 Agent 提案/执行边界、四类研究动作、依赖约束历史回放；私有生产轨迹和线上收益明确隔离 |
+| SEP27-04 | P0 | 公开机制验证已实现 | [AgentX-Model](agent-research/2609.30001-agentx-model/README.md)：双角色提案/执行审查、四类动作、结果盲依赖回放与 MovieLens-1M 六节点三种子对照已运行；原文私有 473 节点图、LLM Agent 和线上收益不可复刻，故标为 concept demo |
 | SEP27-05 | P1 · Meta | 小模型机制诊断已运行；正式复现未完成 | [MaD-RL](experiments/mad-rl-mechanism.md)：已按原文公式实现 L2、forward/reverse KL 与 Jensen–Shannon 分布奖励，并跑完两种目标分布、五种奖励、三种子对照；仍缺可取得的原论文配图和原文规模的公开 checkpoint/任务实验，不登记为正式论文复现 |
 
 ## 优先级和状态
