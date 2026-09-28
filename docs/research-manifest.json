@@ -16795,6 +16795,74 @@
     },
     {
       "domain": "recommendation",
+      "key": "kuafu",
+      "title": "KuaFu: Compressing Long User Behavior into Understanding at Billion Scale",
+      "paper_url": "https://arxiv.org/abs/2609.31045",
+      "detail_path": "reproductions/2609.31045-kuafu/README.md",
+      "topic": [
+        "long-behavior",
+        "item-compression",
+        "hallucination-aware-rl"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Tencent",
+      "published": "2026-09-25",
+      "code": null,
+      "adapter": {
+        "adapter_key": "kuafu",
+        "arxiv_id": "2609.31045",
+        "title": "KuaFu: Compressing Long User Behavior into Understanding at Billion Scale",
+        "paper_url": "https://arxiv.org/abs/2609.31045",
+        "track": "recommendation",
+        "organization": "Tencent",
+        "published": "2026-09-25",
+        "code_url": null,
+        "topics": [
+          "long-behavior",
+          "item-compression",
+          "hallucination-aware-rl"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/kuafu",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "MRQA 2019 SQuAD train/dev"
+        ],
+        "baseline": "same-decoder raw head/tail token-budget input ablations, not separately trained baselines",
+        "metrics": [
+          "dev_metrics.compressed.em",
+          "dev_metrics.compressed.f1",
+          "dev_metrics.raw_head_equal_tokens.f1",
+          "dev_metrics.raw_tail_equal_tokens.f1"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "default 32 train contexts, 32 dev contexts; 4 items x 24 tokens; 2 cache tokens/item",
+        "device_capabilities": [
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/kuafu-a100-20260929.json",
+        "online_evidence": [
+          {
+            "product": "Tencent advertising and recommendation",
+            "metric": "overall GMV",
+            "lift_percent": 1.37,
+            "traffic": "visitor-randomized; retained 5% holdout after full rollout",
+            "source_url": "https://arxiv.org/html/2609.31045v1",
+            "source_location": "Section 4.8",
+            "experiment_duration": "four-week ramp plus ten-month holdout",
+            "significance": "95% CI [0.71%, 2.03%]",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "kunlun",
       "title": "Kunlun: Establishing Scaling Laws for Massive-Scale Recommendation Systems through Unified Architecture Design",
       "paper_url": "https://arxiv.org/abs/2602.10016",

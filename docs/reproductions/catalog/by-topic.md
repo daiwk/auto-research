@@ -159,6 +159,7 @@
 - [TIGER](../2305.05065-tiger/README.md)：先用 RQ-VAE 构造层级 Semantic ID，再自回归生成目标物品。
 
 ### 排序网络与长序列
+- [KuaFu](../2609.31045-kuafu/README.md)：将单条行为独立编码、双轴压缩成可复用缓存，按顺序送入解码器，并以阶段化训练约束压缩事实保真。
 - [ChronicleRec](../2609.12375-chronicle-rec/README.md)：以非均匀历史合并、因果 query 锚点和多 horizon alignment 生成可缓存的长期用户 token。
 - [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
 - [OneModel](../2608.18606-onemodel/README.md)：将推荐、广告与商家混合行为映射到共享序列模型，并以 SAIM 场景门控兼顾迁移和专门化。

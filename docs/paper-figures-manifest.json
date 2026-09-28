@@ -8636,5 +8636,19 @@
     "height": 930,
     "score": 39,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.31045-kuafu/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.31045",
+    "arxiv_id": "2609.31045",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2: Evolution of the KuaFu training paradigm (a) and the two-axis projector (b). Encoding one item per forward pass learns neither cross-item joint compression nor positional information; encoding 𝑁items per pass – each independently, then concatenated in temporal order and interleaved with instruction tokens – lets them perceive each other’s positions inside the decoder. The projector then reduces the token count from 𝑚to 𝑘and the width from 𝑑to 𝑑′, adds a pooled residual, and only the low-dimensional 𝑧𝑖is cached online.",
+    "source_url": "https://arxiv.org/pdf/2609.31045#page=5",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2609.31045-kuafu/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 784,
+    "score": 32,
+    "error": ""
   }
 ]

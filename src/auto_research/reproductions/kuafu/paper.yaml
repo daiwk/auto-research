@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "key": "kuafu",
+  "arxiv_id": "2609.31045",
+  "title": "KuaFu: Compressing Long User Behavior into Understanding at Billion Scale",
+  "paper_url": "https://arxiv.org/abs/2609.31045",
+  "organization": "Tencent",
+  "published": "2026-09-25",
+  "upstream_code": "否：截至 2026-09-29，原文未给出 KuaFu 训练/部署仓库",
+  "track": "recommendation",
+  "topics": [
+    "long-behavior",
+    "item-compression",
+    "hallucination-aware-rl"
+  ],
+  "local_code": "src/auto_research/reproductions/kuafu",
+  "documentation": "docs/reproductions/2609.31045-kuafu/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "MRQA 2019 SQuAD train/dev"
+  ],
+  "baseline": "same-decoder raw head/tail token-budget input ablations, not separately trained baselines",
+  "metrics": [
+    "dev_metrics.compressed.em",
+    "dev_metrics.compressed.f1",
+    "dev_metrics.raw_head_equal_tokens.f1",
+    "dev_metrics.raw_tail_equal_tokens.f1"
+  ],
+  "mechanisms": [
+    "private two-year behavior log and four production profiling tasks",
+    "industrial-scale curriculum/data volume and RecBench comparison",
+    "effective hallucination RL update and Tencent online A/B"
+  ],
+  "evolve_operators": []
+}
