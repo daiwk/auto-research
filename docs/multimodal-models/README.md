@@ -1,5 +1,7 @@
 # 多模态大模型研究
 
+近期缩比机制实验：[DeltaS 状态漂移 KV 淘汰](../experiments/sep28-three-mechanisms.md)。尚未接入真实混合视频模型。
+
 本研究域承载视觉—语言基础模型、训练数据、跨模态连接器和视觉后训练。第一阶段提供
 一个可在 Mac、Linux CPU 和 GPU 从头训练的 `micro-vlm`，后续论文算子只有经过真实
 图像实验和测试后才会进入 evolve。

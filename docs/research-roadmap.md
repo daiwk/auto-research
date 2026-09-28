@@ -60,6 +60,20 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP27-04 | P0 | 公开机制验证已实现 | [AgentX-Model](agent-research/2609.30001-agentx-model/README.md)：双角色提案/执行审查、四类动作、结果盲依赖回放与 MovieLens-1M 六节点三种子对照已运行；原文私有 473 节点图、LLM Agent 和线上收益不可复刻，故标为 concept demo |
 | SEP27-05 | P1 · Meta | 小模型机制诊断已运行；正式复现未完成 | [MaD-RL](experiments/mad-rl-mechanism.md)：已按原文公式实现 L2、forward/reverse KL 与 Jensen–Shannon 分布奖励，并跑完两种目标分布、五种奖励、三种子对照；仍缺可取得的原论文配图和原文规模的公开 checkpoint/任务实验，不登记为正式论文复现 |
 
+### 2026-09-28 缩比机制批次与待验证项
+
+本轮 DeepXiv 检索服务不可达，arXiv API 四领域查询均返回 HTTP 406；
+以下是基于 09-27 已登记队列、arXiv 正文和作者页的**定向推进**，
+不是 09-28 全量新论文扫描。发现 watermark 不推进；恢复后须重新跑重叠窗口。
+
+| ID | 优先级 | 状态 | 工作与完成条件 |
+| --- | --- | --- | --- |
+| SEP28-01 | P1 · Agent | L1 机制已实现，正式复现待办 | [GRAFT](experiments/sep28-three-mechanisms.md)：经验轨迹图、Bellman 值和 Graph GAE；仍须无泄漏环境中的可训练 policy、公平多 seed 成功率 |
+| SEP28-02 | P1 · 基础模型 | 小模型公开语料诊断已运行，正式复现待办 | [KITE](experiments/sep28-three-mechanisms.md)：两阶段双塔、KV 不变量、WikiText-2 三 seed 负结果；仍须同 FLOPs scaling 和实测 prefill/decode |
+| SEP28-03 | P1 · 多模态 | L1 机制已实现，正式复现待办 | [DeltaS](experiments/sep28-three-mechanisms.md)：状态漂移与分桶 KV 淘汰；仍须真实混合模型状态、公开视频、等预算 GPU 验证 |
+| SEP28-04 | P1 · 后训练/Agent | 待全文与数据协议复核 | DCRL、IterSynth：尚未找到能忠实跑通原定义算法且公平评测的公开低预算链路，不用名称注册或金标轨迹冒充实现 |
+| SEP28-05 | P0 · Alibaba | 数据阻塞 | CMRec：Amazon-M2 暂不可用；不伪造跨语区数据或指标，保留 SEP27-03 |
+
 ## 优先级和状态
 
 | 标记 | 含义 |
