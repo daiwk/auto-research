@@ -1,0 +1,314 @@
+{
+  "schema_version": 2,
+  "domain": "agent",
+  "method": "graft-public-tool-policy",
+  "manifest_ref": "experiments:graft-public-toolroute-l21",
+  "dataset": "toolroute-l2.1-v1",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism_diagnostic",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "tabular policy diagnostic; not GRAFT LLM reproduction"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/metrics/graft-public-toolroute-l21.json",
+    "dataset_fingerprint": "880e26372d4828025759d40dbd6bdb1b7d9e5fa7ed6e809e79f9f48c440ba7a2"
+  },
+  "metrics": {
+    "graph_test_joint_success": 0.7777777777777778,
+    "outcome_test_joint_success": 0.7777777777777778,
+    "joint_success_delta": 0.0
+  },
+  "summary": {
+    "outcome": {
+      "validation": {
+        "joint_success": 0.7777777777777778,
+        "plan_step_f1": 0.8459490509490509,
+        "average_cost": 4.699111111111111,
+        "irreversible_error_rate": 0.06666666666666667
+      },
+      "test": {
+        "joint_success": 0.7777777777777778,
+        "plan_step_f1": 0.8534863284863283,
+        "average_cost": 5.317555555555556,
+        "irreversible_error_rate": 0.08333333333333333
+      }
+    },
+    "graph_td": {
+      "validation": {
+        "joint_success": 0.7777777777777778,
+        "plan_step_f1": 0.8459490509490509,
+        "average_cost": 4.699111111111111,
+        "irreversible_error_rate": 0.06666666666666667
+      },
+      "test": {
+        "joint_success": 0.7777777777777778,
+        "plan_step_f1": 0.8534863284863283,
+        "average_cost": 5.317555555555556,
+        "irreversible_error_rate": 0.08333333333333333
+      }
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "methods": {
+        "outcome": {
+          "history": [
+            {
+              "epoch": 1,
+              "train_joint_success": 0.7777777777777778
+            },
+            {
+              "epoch": 2,
+              "train_joint_success": 0.8333333333333334
+            },
+            {
+              "epoch": 3,
+              "train_joint_success": 0.75
+            },
+            {
+              "epoch": 4,
+              "train_joint_success": 0.8055555555555556
+            }
+          ],
+          "weight_l2_after_training": 0.05370705197486749,
+          "validation": {
+            "joint_success": 0.8,
+            "plan_step_f1": 0.8673829873829874,
+            "average_cost": 4.754666666666666,
+            "irreversible_error_rate": 0.03333333333333333
+          },
+          "test": {
+            "joint_success": 0.8,
+            "plan_step_f1": 0.8668997668997668,
+            "average_cost": 5.367999999999999,
+            "irreversible_error_rate": 0.06666666666666667
+          }
+        },
+        "graph_td": {
+          "history": [
+            {
+              "epoch": 1,
+              "train_joint_success": 0.7777777777777778
+            },
+            {
+              "epoch": 2,
+              "train_joint_success": 0.8333333333333334
+            },
+            {
+              "epoch": 3,
+              "train_joint_success": 0.75
+            },
+            {
+              "epoch": 4,
+              "train_joint_success": 0.8055555555555556
+            }
+          ],
+          "weight_l2_after_training": 0.013476909163548245,
+          "validation": {
+            "joint_success": 0.8,
+            "plan_step_f1": 0.8673829873829874,
+            "average_cost": 4.754666666666666,
+            "irreversible_error_rate": 0.03333333333333333
+          },
+          "test": {
+            "joint_success": 0.8,
+            "plan_step_f1": 0.8668997668997668,
+            "average_cost": 5.367999999999999,
+            "irreversible_error_rate": 0.06666666666666667
+          }
+        }
+      },
+      "protocol": {
+        "benchmark": "toolroute-l2.1-v1",
+        "train_episodes": 36,
+        "validation_episodes": 60,
+        "test_episodes": 60,
+        "epochs": 4,
+        "learning_rate": 0.25,
+        "policy": "tabular softmax over public tool tags, not an LLM",
+        "oracle_fields_exposed": false,
+        "diagnostic_only": true,
+        "test_used_for_selection": false
+      }
+    },
+    {
+      "seed": 43,
+      "methods": {
+        "outcome": {
+          "history": [
+            {
+              "epoch": 1,
+              "train_joint_success": 0.75
+            },
+            {
+              "epoch": 2,
+              "train_joint_success": 0.7777777777777778
+            },
+            {
+              "epoch": 3,
+              "train_joint_success": 0.6944444444444444
+            },
+            {
+              "epoch": 4,
+              "train_joint_success": 0.7222222222222222
+            }
+          ],
+          "weight_l2_after_training": 0.0757009727013157,
+          "validation": {
+            "joint_success": 0.8,
+            "plan_step_f1": 0.8405170755170754,
+            "average_cost": 4.599999999999999,
+            "irreversible_error_rate": 0.1
+          },
+          "test": {
+            "joint_success": 0.75,
+            "plan_step_f1": 0.8324175824175823,
+            "average_cost": 5.224666666666668,
+            "irreversible_error_rate": 0.11666666666666667
+          }
+        },
+        "graph_td": {
+          "history": [
+            {
+              "epoch": 1,
+              "train_joint_success": 0.75
+            },
+            {
+              "epoch": 2,
+              "train_joint_success": 0.7777777777777778
+            },
+            {
+              "epoch": 3,
+              "train_joint_success": 0.6944444444444444
+            },
+            {
+              "epoch": 4,
+              "train_joint_success": 0.7222222222222222
+            }
+          ],
+          "weight_l2_after_training": 0.02801708023526906,
+          "validation": {
+            "joint_success": 0.8,
+            "plan_step_f1": 0.8405170755170754,
+            "average_cost": 4.599999999999999,
+            "irreversible_error_rate": 0.1
+          },
+          "test": {
+            "joint_success": 0.75,
+            "plan_step_f1": 0.8324175824175823,
+            "average_cost": 5.224666666666668,
+            "irreversible_error_rate": 0.11666666666666667
+          }
+        }
+      },
+      "protocol": {
+        "benchmark": "toolroute-l2.1-v1",
+        "train_episodes": 36,
+        "validation_episodes": 60,
+        "test_episodes": 60,
+        "epochs": 4,
+        "learning_rate": 0.25,
+        "policy": "tabular softmax over public tool tags, not an LLM",
+        "oracle_fields_exposed": false,
+        "diagnostic_only": true,
+        "test_used_for_selection": false
+      }
+    },
+    {
+      "seed": 44,
+      "methods": {
+        "outcome": {
+          "history": [
+            {
+              "epoch": 1,
+              "train_joint_success": 0.6388888888888888
+            },
+            {
+              "epoch": 2,
+              "train_joint_success": 0.7222222222222222
+            },
+            {
+              "epoch": 3,
+              "train_joint_success": 0.75
+            },
+            {
+              "epoch": 4,
+              "train_joint_success": 0.75
+            }
+          ],
+          "weight_l2_after_training": 0.0813358905968823,
+          "validation": {
+            "joint_success": 0.7333333333333333,
+            "plan_step_f1": 0.8299470899470899,
+            "average_cost": 4.742666666666667,
+            "irreversible_error_rate": 0.06666666666666667
+          },
+          "test": {
+            "joint_success": 0.7833333333333333,
+            "plan_step_f1": 0.861141636141636,
+            "average_cost": 5.36,
+            "irreversible_error_rate": 0.06666666666666667
+          }
+        },
+        "graph_td": {
+          "history": [
+            {
+              "epoch": 1,
+              "train_joint_success": 0.6388888888888888
+            },
+            {
+              "epoch": 2,
+              "train_joint_success": 0.7222222222222222
+            },
+            {
+              "epoch": 3,
+              "train_joint_success": 0.75
+            },
+            {
+              "epoch": 4,
+              "train_joint_success": 0.75
+            }
+          ],
+          "weight_l2_after_training": 0.022820957384403713,
+          "validation": {
+            "joint_success": 0.7333333333333333,
+            "plan_step_f1": 0.8299470899470899,
+            "average_cost": 4.742666666666667,
+            "irreversible_error_rate": 0.06666666666666667
+          },
+          "test": {
+            "joint_success": 0.7833333333333333,
+            "plan_step_f1": 0.861141636141636,
+            "average_cost": 5.36,
+            "irreversible_error_rate": 0.06666666666666667
+          }
+        }
+      },
+      "protocol": {
+        "benchmark": "toolroute-l2.1-v1",
+        "train_episodes": 36,
+        "validation_episodes": 60,
+        "test_episodes": 60,
+        "epochs": 4,
+        "learning_rate": 0.25,
+        "policy": "tabular softmax over public tool tags, not an LLM",
+        "oracle_fields_exposed": false,
+        "diagnostic_only": true,
+        "test_used_for_selection": false
+      }
+    }
+  ],
+  "diagnostic_only": true
+}

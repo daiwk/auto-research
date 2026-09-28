@@ -135,7 +135,9 @@ class ArxivClient:
     def _read(self, request: urllib.request.Request) -> bytes:
         """Read arXiv with bounded backoff for transient throttling.
 
-        arXiv returns 429/5xx during announcement bursts.  Retrying here keeps
+        arXiv has also intermittently returned 406 for a previously valid query
+        that succeeds unchanged on the next request.  Retrying it alongside
+        429/5xx keeps
         every discovery entry point consistent and avoids four track-specific
         scripts each inventing a different recovery policy.
         """
@@ -147,7 +149,7 @@ class ArxivClient:
                 self._write_cache(request.full_url, payload)
                 return payload
             except urllib.error.HTTPError as exc:
-                if exc.code not in {429, 500, 502, 503, 504}:
+                if exc.code not in {406, 429, 500, 502, 503, 504}:
                     raise
                 if attempt >= self.maximum_retries:
                     return self._cached_or_raise(request.full_url, exc)

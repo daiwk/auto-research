@@ -23,7 +23,29 @@
 有一个值得继续核查的边界：在本地完整经验边、精确 Bellman 收敛下，
 每个后继节点的平均 TD 残差为零，Graph GAE 项数值退化为一步 TD。
 它不构成对论文其他近似图/训练设置的反证；本批也未运行 LLM policy
-更新、ALFWorld/WebShop 或 embedding 相似状态合并，因此不报告成功率。
+更新、ALFWorld/WebShop 或 embedding 相似状态合并。
+
+### 公开工具环境里的可训练策略对照
+
+为了检查图信用能否用于真实动作选择，现另用仓库已有的 `toolroute-l2.1-v1`
+无金标工具环境训练一个 **tabular softmax 工具策略**。策略只读取任务 observation、
+工具 tag 和实时反馈；训练结束后才运行独立 validation/test 任务族。对照为相同任务、
+轮数和学习率的终局结果 REINFORCE。这里的策略不是 LLM，环境也不是论文的
+ALFWorld/WebShop，因此仍只属于诊断，不登记正式 GRAFT adapter。
+
+```bash
+PYTHONPATH=src python scripts/run_graft_public.py \
+  --seeds 42,43,44 --train-episodes 36 --evaluation-episodes 60 \
+  --epochs 4 --learning-rate 0.25
+```
+
+每 seed 训练 36 个任务、4 轮，validation/test 各 60 个任务；三 seed 的 test
+联合成功率对两法均为 `0.7778`，计划步骤 F1 均为 `0.8535`，平均工具成本均为
+`5.3176`。本次预算下**图信用没有带来可测提升**。精确经验图在 Bellman
+收敛时多步平均 TD 残差接近零，且当前任务公开 tag 已使多数步骤只有一个可选
+动作；这两点均限制了此诊断对论文优势的检验力。三 seed 逐项结果见
+[公开指标产物](metrics/graft-public-toolroute-l21.json)。结果不支持将 GRAFT 提升为
+正式 L2 论文复现，也不把它作为 Evolve 的已证实算子。
 
 ## KITE：只由 Prefiller 生成 KV 的双塔
 

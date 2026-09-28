@@ -192,6 +192,13 @@ def build_discovery_payload(
 def render_discovery_summary(payload: dict) -> str:
     """Render a compact GitHub Actions review queue."""
     counts = payload["triage_counts"]
+    requested_start = payload.get("requested_window", payload["window"])["start"]
+    end = payload["window"]["end"]
+    new_candidates = [
+        item for item in payload["candidates"] if item["repository_status"] == "new"
+    ]
+    current = [item for item in new_candidates if requested_start <= item["published"][:10] <= end]
+    backlog = [item for item in new_candidates if not requested_start <= item["published"][:10] <= end]
     lines = [
         f"# {payload['track']} 论文候选差分",
         "",
@@ -202,21 +209,52 @@ def render_discovery_summary(payload: dict) -> str:
         f"| {counts['new']} | {counts['implemented']} | {counts['reviewed']} | "
         f"{counts['google_meta_priority_review']} |",
         "",
-        "## Google / Meta 重点复核",
+        f"其中原始发布日期在本次请求窗口内的未审候选 {len(current)} 篇；"
+        f"晚索引或历史未审候选 {len(backlog)} 篇。"
+        "‘新候选’只表示仓库尚未审计，并不等于当天新发表；机构词命中也不等于作者单位。",
+        "",
+        "## Google / Meta 本窗口重点复核",
         "",
         "机构查询命中只是召回信号，必须打开 PDF 核对一作 affiliation 和正文线上证据。",
         "Netflix 及其他机构进入普通候选队列，不享受自动置顶。",
         "",
     ]
-    priority = [item for item in payload["candidates"] if item["priority_review_required"]]
-    lines.extend(_candidate_lines(priority, empty="本次没有新的 Google / Meta 重点候选。"))
-    lines.extend(["", "## 其他新候选", ""])
+    transport = payload.get("arxiv_transport")
+    if transport:
+        lines.extend([
+            "arXiv API：" + (
+                "本次请求均成功" if transport["coverage_complete"] else
+                f"{transport['cache_fallback_pages']} 页使用缓存；不可据此推进扫描水位"
+            ),
+            "",
+        ])
+    cross_source = payload.get("cross_source")
+    if cross_source and cross_source["source_failures"]:
+        lines.extend([
+            f"跨来源失败 {len(cross_source['source_failures'])} 项；本次不宣称全来源覆盖。",
+            "",
+        ])
+    lines.extend(_candidate_lines(
+        [item for item in current if item["priority_review_required"]],
+        empty="本窗口没有新的 Google / Meta 重点候选。",
+    ))
+    lines.extend(["", "## Google / Meta 晚索引重点复核", ""])
+    lines.extend(_candidate_lines(
+        [item for item in backlog if item["priority_review_required"]],
+        empty="本次没有晚索引的 Google / Meta 重点候选。",
+    ))
+    lines.extend(["", "## 本窗口其他未审候选", ""])
     other_new = [
         item
-        for item in payload["candidates"]
-        if item["repository_status"] == "new" and not item["priority_review_required"]
+        for item in current
+        if not item["priority_review_required"]
     ]
-    lines.extend(_candidate_lines(other_new, empty="本次没有其他新候选。"))
+    lines.extend(_candidate_lines(other_new, empty="本窗口没有其他未审候选。"))
+    lines.extend(["", "## 晚索引或历史未审候选", ""])
+    lines.extend(_candidate_lines(
+        [item for item in backlog if not item["priority_review_required"]],
+        empty="本次没有晚索引或历史未审候选。",
+    ))
     lines.extend(
         [
             "",

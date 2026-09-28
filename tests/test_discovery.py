@@ -139,5 +139,33 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
         "reviewed": 1,
         "google_meta_priority_review": 1,
     }
-    assert summary.index("Google / Meta 重点复核") < summary.index("其他新候选")
+    assert summary.index("Google / Meta 重点复核") < summary.index("本窗口其他未审候选")
+    assert "晚索引或历史未审候选 0 篇" in summary
     assert "Netflix 及其他机构进入普通候选队列" in summary
+
+
+def test_summary_separates_recent_publications_from_late_indexed_backlog():
+    payload = build_discovery_payload(
+        track="agent",
+        start_date=dt.date(2026, 9, 19),
+        end_date=dt.date(2026, 9, 28),
+        query_names=("llm-agent",),
+        candidates=[
+            {
+                "arxiv_id": "2609.31001", "title": "Current", "url": "https://arxiv.org/abs/2609.31001",
+                "published": "2026-09-25T00:00:00Z", "repository_status": "new",
+                "priority_review_required": False,
+            },
+            {
+                "arxiv_id": "2609.00001", "title": "Late index", "url": "https://arxiv.org/abs/2609.00001",
+                "published": "2026-08-15T00:00:00Z", "repository_status": "new",
+                "priority_review_required": False,
+            },
+        ],
+    )
+    payload["requested_window"] = {"start": "2026-09-20", "end": "2026-09-28"}
+    summary = render_discovery_summary(payload)
+    assert "本次请求窗口内的未审候选 1 篇" in summary
+    assert "晚索引或历史未审候选 1 篇" in summary
+    assert summary.index("Current") < summary.index("## 晚索引或历史未审候选")
+    assert summary.index("## 晚索引或历史未审候选") < summary.index("Late index")

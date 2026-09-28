@@ -181,6 +181,16 @@
         "fingerprint": "2f4fb8888cced39ab4e9cf7884dfac62ad990f85f4fcf8adc6e646588ba07710"
       }
     ],
+    "src/auto_research/agent_research/graft_public.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_rollout",
+        "line": 45,
+        "qualified_name": "_rollout",
+        "expression": "feedback.answer",
+        "fingerprint": "eee3aee3492d41c256a522cdedbc3f861c0db2e3f6e09b001a08e9ec12a4dc05"
+      }
+    ],
     "src/auto_research/agent_research/historical_b10_b11.py": [
       {
         "kind": "label_access_requires_role_review",
