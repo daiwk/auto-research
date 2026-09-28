@@ -1,5 +1,7 @@
 # Agent 论文研究
 
+近期缩比机制实验：[GRAFT 轨迹图信用分配](../experiments/sep28-three-mechanisms.md)。尚未完成 LLM policy 和正式环境评测。
+
 这里是[论文实现与评测库](../research-library.md)中的 Agent 分支，覆盖记忆、规划、
 工具使用、多 Agent 协作和自我进化。确定性 mini-suite 验证状态与跨 episode 复用；
 `swebench-local` 则创建真实临时仓库、修改代码并执行回归测试。这些方法与评测器也是
