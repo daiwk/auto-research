@@ -4,11 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from statistics import mean
 
 from auto_research.agent_research.graft_public import run_graft_tool_policy
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
@@ -38,15 +42,23 @@ def main() -> None:
         for method in ("outcome", "graph_td")
     }
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "domain": "agent",
         "method": "graft-public-tool-policy",
+        "manifest_ref": "experiments:graft-public-toolroute-l21",
         "dataset": "toolroute-l2.1-v1",
         "seeds": list(seeds),
         "evaluation_protocol": {
             "tier": "l1_mechanism_diagnostic", "formal_comparison": False,
             "diagnostic_only": True,
+            "seeds": list(seeds),
             "claim_policy": "tabular policy diagnostic; not GRAFT LLM reproduction",
+        },
+        "provenance": {
+            "artifact_path": str(args.output.resolve().relative_to(ROOT)),
+            "dataset_fingerprint": hashlib.sha256(
+                (ROOT / "src/auto_research/agent_research/capability_benchmark.py").read_bytes()
+            ).hexdigest(),
         },
         "metrics": {
             "graph_test_joint_success": summary["graph_td"]["test"]["joint_success"],

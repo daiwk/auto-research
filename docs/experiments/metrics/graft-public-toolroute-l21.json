@@ -1,7 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "domain": "agent",
   "method": "graft-public-tool-policy",
+  "manifest_ref": "experiments:graft-public-toolroute-l21",
   "dataset": "toolroute-l2.1-v1",
   "seeds": [
     42,
@@ -12,7 +13,16 @@
     "tier": "l1_mechanism_diagnostic",
     "formal_comparison": false,
     "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "claim_policy": "tabular policy diagnostic; not GRAFT LLM reproduction"
+  },
+  "provenance": {
+    "artifact_path": "docs/experiments/metrics/graft-public-toolroute-l21.json",
+    "dataset_fingerprint": "880e26372d4828025759d40dbd6bdb1b7d9e5fa7ed6e809e79f9f48c440ba7a2"
   },
   "metrics": {
     "graph_test_joint_success": 0.7777777777777778,
