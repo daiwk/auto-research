@@ -21,7 +21,7 @@
 | P0 | [OneTrans-V2](https://arxiv.org/abs/2609.28589)（09-23，ByteDance） | 正文 §6.3：用户级 50/50 线上 A/B；共享 causal 用户上下文、三阶段联合训练、决策条件生成召回与精排→预排蒸馏 | [公开代理机制已实现](reproductions/2609.28589-onetrans-v2/README.md)，三种子逐阶段指标；MovieLens 无真实交易/广告/漏斗，明确标为概念验证 |
 | P0 | [X-Rec](https://arxiv.org/abs/2609.29180)（09-24，TikTok） | 正文 §5：两次垂类上线；论文报告垂类互动 +4.1484%、全局互动 +0.0111%；anchor-conditioned 球面 flow matching、late-interaction DiT | [公开数据核心机制与 SID-AR 对照已实现](reproductions/2609.29180-xrec/README.md)；同 200 更新步、20×1 全目录召回与 CPU 生成吞吐均已测量，低预算本地结果为负，非 TikTok 线上复现 |
 | P0 | [CMRec](https://arxiv.org/abs/2609.28972)（09-24，Alibaba International Digital Commerce Group） | [正文 §4.2](https://arxiv.org/html/2609.28972v1)报告 2026-05-10～20、10% 流量线上 A/B：广告收入 +1.77%、订单 +2.64%；共享代码本、双约束 token 混合、上下文加权损失 | 待实现；工业广告数据私有，论文另用公开 Amazon M2 六语区数据；须核对原作者代码状态 |
-| P0 | [AgentX-Model](https://arxiv.org/abs/2609.30001)（09-24） | 正文 §4.3：五次线上 A/B；双 Agent、Reproduce/Follow-up/Composition/Diagnose 及有依赖的历史回放 | 待实现；私有 473 节点图与线上门禁不可复刻，公开历史回放应标机制边界 |
+| P0 | [AgentX-Model](https://arxiv.org/abs/2609.30001)（09-24，Kuaishou） | 正文 §4.3：五次线上 A/B；双 Agent、Reproduce/Follow-up/Composition/Diagnose 及有依赖的历史回放 | [公开机制验证已实现](agent-research/2609.30001-agentx-model/README.md)：六节点 MovieLens-1M 结果盲依赖回放与三种子实测；私有 473 节点图、线上门禁和 LLM Agent 未复刻 |
 
 ## 其他领域的 P1 全文复核
 

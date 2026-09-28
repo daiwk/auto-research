@@ -11,6 +11,7 @@
 
 ## 快速入口
 
+- [AgentX-Model](2609.30001-agentx-model/README.md)：双角色提案/调查、四类研究动作、依赖图结果盲回放；公开 MovieLens-1M 机制验证，非私有生产系统复现。
 - [AtomRec](2609.04882-atomrec/README.md)：原子偏好记忆、语义协同链接与多跳推荐证据。
 - [CoSkill](2609.04865-coskill/README.md)：联合训练推理策略、元技能策略和层级技能库。
 - [SiLR](2609.04629-silr/README.md)：影子执行、逐分支乘积序准入与同源过程奖励。

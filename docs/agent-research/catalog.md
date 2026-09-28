@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 研究自动化 | [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](2609.30001-agentx-model/README.md) | Kuaishou，2026-09-24 | 未发现官方代码 | `agentx-model-replay` |
 | 编程 Agent | [An Empirical Study of Harness Design for Coding Agents](2609.20804-harness-design-study/README.md) | University of Massachusetts Amherst，2026-09-17 | 未发现官方代码 | `harness-design-study` |
 | 多 Agent | [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](2609.18779-cera-moa/README.md) | IIIS, Tsinghua University，2026-09-16 | 未发现官方代码 | `cera-moa` |
 | 轨迹精炼 | [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](2609.18417-dependency-refinement/README.md) | ShanghaiTech University，2026-09-16 | [已开源](https://github.com/Alibaba-NLP/VLLM-KB) | `dependency-refinement` |
