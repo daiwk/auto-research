@@ -52,6 +52,8 @@ flowchart LR
 
 `MultiScaleGLA` 是可前后向的紧凑 PyTorch 层；A100 receipt 只证明 CUDA 路径可运行。汇总实验见 [`../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json`](../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json)。
 
+真实 NVIDIA A100 脱敏记录见 [`../../gpu-validations/ms-gla-a100-20260930.json`](../../gpu-validations/ms-gla-a100-20260930.json)。
+
 ## 复现边界
 
 当前 recurrent kernel 面向正确性而非吞吐，没有复刻 Triton/Flash 实现或论文参数规模。尚未接入 Evolve，避免把结构名登记误称为已可搜索与公平评价。

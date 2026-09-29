@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "adapter_key": "ms-gla",
+  "validated_at": "2026-09-30",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": [
+    "python3", "scripts/validate_latest_20260930.py", "--device", "cuda",
+    "--model-id", "Qwen/Qwen3-4B-Instruct-2507", "--revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554"
+  ],
+  "dataset": {
+    "name": "public deterministic architecture mechanism tensors",
+    "revision": "sep30-v1",
+    "shapes": [[2, 31, 32]]
+  },
+  "checkpoint": {
+    "model_id": "MS-GLA standalone layer initialized from public seed",
+    "revision": "arXiv:2609.35664v1"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "loss": [0.1204969733953476, 0.08749069273471832, 0.1849096566438675],
+    "loss_mean": 0.13096577405929565,
+    "routing_sum_error_max": 1.1920928955078125e-07,
+    "finite_gradient": true,
+    "backward_completed": true
+  },
+  "provenance": {
+    "commit": "caabe7d26667e5f1eb3bb68eb9395818c51fac4c",
+    "artifact_path": "docs/gpu-validations/ms-gla-a100-20260930.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

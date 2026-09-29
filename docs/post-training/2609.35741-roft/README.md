@@ -43,6 +43,8 @@ flowchart LR
 
 原文在多种 Agent 任务上报告自我回顾监督的收益；本地不复写为自己的结果。这里只验证 mask、梯度和真实 checkpoint CUDA 前后向，三种子诊断见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。
 
+真实 NVIDIA A100 脱敏记录见 [`../../gpu-validations/roft-a100-20260930.json`](../../gpu-validations/roft-a100-20260930.json)。
+
 ## 本地复现
 
 `roft_retrospection_loss` 是可训练的 PyTorch 目标；通用后训练 CLI 中的 `roft` 只提供小型候选策略诊断。汇总实验见 [`../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json`](../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json)。

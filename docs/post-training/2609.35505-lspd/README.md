@@ -45,6 +45,8 @@ flowchart LR
 
 论文给出的推理 benchmark 与样本效率属于原文结果。本地三种子产物只证明教师停止梯度、稳健尾部、response mask 与回放边界正确，见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。
 
+真实 NVIDIA A100 脱敏记录见 [`../../gpu-validations/lspd-a100-20260930.json`](../../gpu-validations/lspd-a100-20260930.json)。
+
 ## 本地复现
 
 `lspd_objective` 和 `LSPDReplayBuffer` 可独立用于训练；通用后训练 CLI 的 `lspd` 为 L1 候选策略类比诊断。汇总实验见 [`../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json`](../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json)。
