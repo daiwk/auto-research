@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # The arXiv legacy API permits one connection and one request per three
+      # seconds across our jobs, not one concurrent client per track.
+      max-parallel: 1
       matrix:
         track: [recommendation, foundation-model, post-training, agent]
     steps:

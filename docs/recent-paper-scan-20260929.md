@@ -33,6 +33,21 @@ DeepMind 官网偶发返回 gzip 压缩正文但未以可直接解码的文本�
 
 本次 source-only 复核中，Google Research 官方页请求超时；它不是“无新论文”的证据，也没有被标记为覆盖完成。Meta 官方页和 GitHub API 的动态可用性同样需由每日 artifact 核对。未匹配标题仍须逐篇查原文身份、一作机构和全文线上证据；历史大队列没有因此获得终审状态，`cross_source.coverage_complete` 继续保持 `false`。
 
+### 09-30 合并后扫描失败与修复
+
+[首次合并后四领域工作流](https://github.com/daiwk/auto-research/actions/runs/36600018480)全部在 arXiv 查询阶段收到 HTTP 429，因而没有生成可审核的候选 artifact；这**不是零候选**。根因是四个 matrix job 并发运行，虽然每个客户端内部间隔三秒，但总体仍违反 [arXiv legacy API 的单连接、每三秒至多一请求限制](https://info.arxiv.org/help/api/tou.html)。后续工作流将四个领域串行调度，并把扫描专用的限流重试延长到最多五次；429 仍须显式失败，不能退化为空结果。修复合并后需重新运行并审核四领域 artifact，才进入下一批论文收录。
+
+[修复分支的四领域验证运行](https://github.com/daiwk/auto-research/actions/runs/36601663347)已全部成功。四个领域均由 arXiv 实时页面生成产物，`cache_fallback_pages` 为 0、`arxiv_transport.coverage_complete` 为 `true`，证明串行调度与全局三秒节流消除了本次并发 429。验证产物的规模如下；这里的“新”仍指**尚未入库或终审**，不是本日新发表或已通过复现门槛。
+
+| 领域 | 检索候选 | 尚未审计候选 | 已实现 | 已审计 | 官方待核身份 |
+|---|---:|---:|---:|---:|---:|
+| 搜广推与 LLM 应用 | 184 | 127 | 22 | 35 | 1192 |
+| 基础模型 | 1048 | 951 | 20 | 77 | 357 |
+| LLM 后训练 | 542 | 450 | 22 | 70 | 352 |
+| Agent | 950 | 846 | 19 | 85 | 355 |
+
+四条产物的 `cross_source.coverage_complete` 仍为 `false`：Google、Meta、DeepMind 与会议官网条目有大量标题身份尚未解析，不能因 arXiv 通道恢复而宣称跨来源扫描完结。推荐轨道机器规则标出的 4 个“Google/Meta”命中均为关键词误召回，不代表机构归属；本轮没有把它们晋级为优先论文。Meta 官方队列中的 MaD-RL 已在前述复核中关联到 arXiv:2609.31644，仍须按后训练论文门槛独立处理。
+
 ## 本轮全文复核后的明确项
 
 | 候选 | 处理 | 证据及边界 |

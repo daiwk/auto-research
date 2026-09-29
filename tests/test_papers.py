@@ -1,4 +1,5 @@
 import urllib.error
+from pathlib import Path
 
 from auto_research.papers import ArxivClient, canonical_arxiv_id, parse_arxiv_feed
 
@@ -42,6 +43,16 @@ def test_search_builds_quoted_category_query(monkeypatch):
 def test_canonical_arxiv_id_removes_only_version_suffix():
     assert canonical_arxiv_id("2608.10257v1") == "2608.10257"
     assert canonical_arxiv_id("2608.10257") == "2608.10257"
+
+
+def test_discovery_respects_arxiv_shared_api_limit():
+    workflow = Path(".github/workflows/paper-discovery.yml").read_text(
+        encoding="utf-8"
+    )
+    strategy = workflow.split("    strategy:\n", 1)[1].split("    steps:\n", 1)[0]
+    assert "      max-parallel: 1\n" in strategy
+    assert ArxivClient().minimum_interval_seconds >= 3.0
+    assert ArxivClient().retry_backoff_seconds >= 3.0
 
 
 def test_search_retries_transient_arxiv_throttling(monkeypatch):

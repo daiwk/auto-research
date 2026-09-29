@@ -24,9 +24,9 @@ class ArxivClient:
         self,
         timeout: int = 30,
         user_agent: str = "auto-research/0.1",
-        minimum_interval_seconds: float = 0.0,
+        minimum_interval_seconds: float = 3.0,
         maximum_retries: int = 3,
-        retry_backoff_seconds: float = 2.0,
+        retry_backoff_seconds: float = 3.0,
         cache_dir: Path | None = None,
     ):
         self.timeout = timeout
