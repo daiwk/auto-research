@@ -65,5 +65,5 @@ ADAPTER = register(ReproductionAdapter(
     device_capabilities=("cuda",),
     infer_device_capabilities=False,
     requires_gpu_validation=True,
-    gpu_validation_artifact="docs/gpu-validations/kuafu-a100-20260929.json",
+    gpu_validation_artifact="docs/gpu-validations/kuafu-a100-independent-control-20260929.json",
 ))

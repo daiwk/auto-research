@@ -63,7 +63,7 @@ flowchart LR
 
 **这轮没有发现压缩收益。** 三个 raw 控制复用的是在压缩输入上训练的解码器，只是输入消融，不是独立同预算训练的正式基线；32 题与单 seed 也不足以判断优劣。A100 的幻觉 RL smoke 在 4 个回答上得到同为 `1.0` 的奖励，梯度优势为零，因此返回 `skipped_zero_advantage`，没有把一次空更新写成成功训练。
 
-进一步在 A100 上用同一公开 checkpoint、相同 32/32 题和三个种子，**另起模型**训练开头截断原文对照；对照完成 64 次 QA 更新，对应压缩组的两个 QA 阶段。完整输入长度限定为每条缓存 2 token 的总预算，结果见[独立对照指标](metrics/mrqa-independent-control-seeds42-44.json)：压缩组 dev F1 均值 `0.0952`，独立对照 `0.1249`，三个种子均未超过对照，EM 均为零。这仍**不是等 FLOPs 正式比较**：压缩组还训练重建阶段、encoder 和 projector；任务样本过小，也没有原论文私有数据及生产评测。
+进一步在 A100 上用同一公开 checkpoint、相同 32/32 题和三个种子，**另起模型**训练开头截断原文对照；对照完成 64 次 QA 更新，对应压缩组的两个 QA 阶段。完整输入长度限定为每条缓存 2 token 的总预算，结果见[独立对照指标](metrics/mrqa-independent-control-seeds42-44.json)与[脱敏 GPU 验证记录](../../gpu-validations/kuafu-a100-independent-control-20260929.json)：压缩组 dev F1 均值 `0.0952`，独立对照 `0.1249`，三个种子均未超过对照，EM 均为零。这仍**不是等 FLOPs 正式比较**：压缩组还训练重建阶段、encoder 和 projector；任务样本过小，也没有原论文私有数据及生产评测。
 
 ## 运行方式与边界
 
