@@ -19,6 +19,7 @@ from auto_research.post_training.local_lora import attach_lora, disabled_adapter
 from auto_research.post_training.mad_rl import (
     CHOICES, TOPICS, distribution_rewards, jensen_shannon,
 )
+from auto_research.post_training.token_ids import token_ids
 
 
 QWEN_ID = "Qwen/Qwen3-4B-Instruct-2507"
@@ -35,10 +36,11 @@ def prompt_ids(tokenizer, topic_row):
         f"Pick one {topic} from the following list. All five are acceptable. "
         f"{options}\nAnswer with exactly one letter A, B, C, D, or E.\nChoice:"
     )
-    return tokenizer.apply_chat_template(
+    encoded = tokenizer.apply_chat_template(
         [{"role": "user", "content": message}], tokenize=True,
         add_generation_prompt=True, enable_thinking=False,
     )
+    return token_ids(encoded)
 
 
 def _category(tokenizer, token):

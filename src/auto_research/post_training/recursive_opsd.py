@@ -13,6 +13,7 @@ from dataclasses import dataclass
 import re
 
 from .local_lora import disabled_adapters
+from .token_ids import token_ids
 
 
 _REFLECTION = re.compile(
@@ -106,10 +107,12 @@ def _prompt_ids(tokenizer, messages, *, assistant_prefill: bool = False):
             messages[:1], tokenize=False, add_generation_prompt=True,
             enable_thinking=False,
         ) + messages[1]["content"]
-        return tokenizer.encode(prefix, add_special_tokens=False)
-    return tokenizer.apply_chat_template(
+        encoded = tokenizer.encode(prefix, add_special_tokens=False)
+        return token_ids(encoded)
+    encoded = tokenizer.apply_chat_template(
         messages, tokenize=True, add_generation_prompt=True, enable_thinking=False,
     )
+    return token_ids(encoded)
 
 
 def _score_response(model, prompt_ids, response_ids, *, device):
