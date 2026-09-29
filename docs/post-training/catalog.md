@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy self-distillation | [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../reproductions/2609.30652-recursive-opsd/README.md) | Meta AI / University of California, Riverside，2026-09-25 | 未发现官方代码 | `recursive-opsd` |
 | 强化学习 | [PACT: From Credit Assignment to Critic Alignment](2609.26355-pact/README.md) | AllSpark Team，2026-09-22 | 未发现官方代码 | `pact` |
 | On-policy distillation | [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](2609.20784-retire-opd/README.md) | Zhejiang University，2026-09-17 | [已开源](https://github.com/ZJU-REAL/SDAR) | `retire-opd` |
 | 偏好优化 | [A Zeroth-Order Paradigm for LLM Preference Alignment](2609.19144-compo/README.md) | University of California, Berkeley，2026-09-16 | 未发现官方代码 | `compo` |

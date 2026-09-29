@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "diagnostic_only": true,
+  "paper_result_reproduced": false,
+  "dataset": {
+    "name": "MRQA 2019 SQuAD train/dev",
+    "train_sha256": "096378373b48ee7e0a67ce23ef67217b12fc11ed12c34bc94a235a8ccb299024",
+    "dev_sha256": "b7f3214d3dfe2a9a368ccd8383c162787d08b978e5affd110bd0d9d58f53b0ed",
+    "train_questions": 32,
+    "dev_questions": 32,
+    "dev_skipped_short": 0,
+    "sampling": "first question from each of 32 distinct context records per split"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "weights_committed": false
+  },
+  "seed": 42,
+  "budget": {
+    "max_items": 4,
+    "max_item_tokens": 24,
+    "cached_tokens_per_item": 2,
+    "train_steps_per_supervised_stage": 32,
+    "max_answer_tokens": 16
+  },
+  "mean_stage_loss": {
+    "reconstruction": 6.3719901740550995,
+    "compressed_qa": 8.089023813605309,
+    "co_training": 8.016869366168976
+  },
+  "dev_metrics": {
+    "compressed": {
+      "em": 0.0,
+      "f1": 0.08904671717171717
+    },
+    "raw_head_equal_tokens": {
+      "em": 0.0,
+      "f1": 0.11627079517704515
+    },
+    "raw_tail_equal_tokens": {
+      "em": 0.0,
+      "f1": 0.09527549656226127
+    },
+    "raw_full": {
+      "em": 0.0,
+      "f1": 0.2633949383949384
+    }
+  },
+  "control_caveat": "Head/tail/full use the same decoder trained on compressed input; these are input ablations, not separately trained baselines.",
+  "missing": [
+    "effective hallucination RL update on public task",
+    "independently trained equal-budget baselines",
+    "multi-seed and full-scale MRQA/RecBench evaluation",
+    "private production data and online A/B"
+  ],
+  "schema_version": 2,
+  "manifest_ref": "reproduction:kuafu",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.31045-kuafu/metrics/mrqa-squad-qwen3-4b-seed42.json",
+    "dataset_fingerprint": "sha256:096378373b48ee7e0a67ce23ef67217b12fc11ed12c34bc94a235a8ccb299024",
+    "code_commit": "1eb1e3c95f4d4b2fdee03b7b7cc34ed5709ccc4b"
+  }
+}

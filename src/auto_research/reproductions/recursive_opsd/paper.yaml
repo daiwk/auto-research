@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "recursive-opsd",
+  "arxiv_id": "2609.30652",
+  "title": "Recursive Self-Improvement via On-Policy Distillation for Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.30652",
+  "organization": "Meta AI / University of California, Riverside",
+  "published": "2026-09-25",
+  "upstream_code": "否：截至 2026-09-29，未找到原作者发布的训练仓库",
+  "track": "llm",
+  "topics": [
+    "On-policy self-distillation",
+    "DCE",
+    "SRCL",
+    "reasoning"
+  ],
+  "local_code": "src/auto_research/reproductions/recursive_opsd",
+  "documentation": "docs/reproductions/2609.30652-recursive-opsd/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "official GSM8K train/test"
+  ],
+  "baseline": "pre-update same checkpoint plus two-step fixed-teacher and DCE-only controls",
+  "metrics": [
+    "baseline_validation.accuracy",
+    "final_validation.accuracy",
+    "final_test.accuracy",
+    "adapter_parameter_delta_l2"
+  ],
+  "mechanisms": [
+    "14,717 OpenThoughts training problems and 200-step rank-128 LoRA protocol",
+    "AIME24/25/26 and HMMT25 Average@12 with 32K generation budget",
+    "paper-matched SFT, GRPO, OPSD and test-time scaling baselines"
+  ],
+  "evolve_operators": []
+}

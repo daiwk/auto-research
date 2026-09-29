@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "adapter_key": "kuafu",
+  "validated_at": "2026-09-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python", "scripts/kuafu_public_mrqa.py",
+    "--checkpoint", "<public-Qwen3-4B-Instruct-2507-snapshot>",
+    "--mrqa-train", "data/mrqa/SQuAD-train.jsonl.gz",
+    "--mrqa-dev", "data/mrqa/SQuAD-dev.jsonl.gz",
+    "--train-limit", "32", "--dev-limit", "32",
+    "--max-items", "4", "--max-item-tokens", "24",
+    "--seed", "42", "--output", "<local-result.json>"
+  ],
+  "dataset": {
+    "name": "MRQA 2019 SQuAD train/dev",
+    "source": "https://github.com/mrqa/MRQA-Shared-Task-2019",
+    "train_revision": "sha256:096378373b48ee7e0a67ce23ef67217b12fc11ed12c34bc94a235a8ccb299024",
+    "dev_revision": "sha256:b7f3214d3dfe2a9a368ccd8383c162787d08b978e5affd110bd0d9d58f53b0ed",
+    "train_questions": 32,
+    "dev_questions": 32,
+    "split": "official train/dev; first question from each distinct context record"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "local_weights_committed": false
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "supervised_stages_executed": 3,
+    "train_questions": 32,
+    "dev_questions": 32,
+    "compressed_dev_em": 0.0,
+    "compressed_dev_f1": 0.08904671717171717,
+    "equal_budget_head_dev_f1": 0.11627079517704515,
+    "equal_budget_tail_dev_f1": 0.09527549656226127,
+    "full_context_dev_f1": 0.2633949383949384,
+    "hallucination_rl_probe_status": "skipped_zero_advantage",
+    "hallucination_rl_probe_group_size": 4,
+    "independently_trained_baseline": false,
+    "paper_result_reproduced": false,
+    "diagnostic_only": true
+  },
+  "provenance": {
+    "commit": "1eb1e3c95f4d4b2fdee03b7b7cc34ed5709ccc4b",
+    "artifact_path": "docs/gpu-validations/kuafu-a100-20260929.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

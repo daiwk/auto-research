@@ -1,0 +1,82 @@
+{
+  "status": "passed",
+  "diagnostic_only": true,
+  "paper_result_reproduced": false,
+  "dataset": {
+    "name": "official GSM8K",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test_sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "train_examples": 4,
+    "validation_examples": 2,
+    "test_examples": 2,
+    "split": "first 4 official train rows; next 2 official train rows validation; first 2 official test rows, read only after training"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "weights_committed": false
+  },
+  "seed": 42,
+  "budget": {
+    "optimizer_updates": 2,
+    "generation_cap": 192,
+    "lora_rank": 8,
+    "lora_target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "controls": {
+    "dynamic_dce_srcl": {
+      "baseline_validation_accuracy": 0.5,
+      "final_validation_accuracy": 0.5,
+      "baseline_validation_mean_tokens": 164.5,
+      "final_validation_mean_tokens": 174.5,
+      "final_test_accuracy": 1.0,
+      "srcl_accepted_rounds": 2,
+      "adapter_parameter_delta_l2": 0.01001878839044344
+    },
+    "fixed_teacher_same_assistant_prompt": {
+      "baseline_validation_accuracy": 0.5,
+      "final_validation_accuracy": 0.5,
+      "baseline_validation_mean_tokens": 164.5,
+      "final_validation_mean_tokens": 174.0,
+      "final_test_accuracy": 1.0,
+      "srcl_accepted_rounds": 2,
+      "adapter_parameter_delta_l2": 0.010018953337736036
+    },
+    "dynamic_dce_without_srcl": {
+      "baseline_validation_accuracy": 0.5,
+      "final_validation_accuracy": 0.5,
+      "baseline_validation_mean_tokens": 164.5,
+      "final_validation_mean_tokens": 174.5,
+      "final_test_accuracy": 1.0,
+      "srcl_accepted_rounds": 0,
+      "adapter_parameter_delta_l2": 0.00995904023904781
+    }
+  },
+  "comparison_caveat": "Two validation/test problems and two updates have no statistical power; fixed-teacher uses assistant-side placement and is not the paper OPSD baseline.",
+  "omitted": [
+    "14,717 OpenThoughts problems",
+    "AIME/HMMT Average@12 evaluation",
+    "200-step rank-128 eight-H100 training",
+    "paper-matched SFT, GRPO, OPSD and test-time scaling controls"
+  ],
+  "schema_version": 2,
+  "manifest_ref": "reproduction:recursive-opsd",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.30652-recursive-opsd/metrics/qwen3-4b-gsm8k-seed42.json",
+    "dataset_fingerprint": "sha256:17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "code_commit": "4c3051124c219e0ceb0bea7cee63cf123e52bb33"
+  }
+}

@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [KuaFu: Compressing Long User Behavior into Understanding at Billion Scale](../2609.31045-kuafu/README.md) | Tencent，2026-09-25 | 未发现官方代码 | `kuafu` |
 | 生成、排序与冷启动 | [X-Rec Technical Report](../2609.29180-xrec/README.md) | TikTok (ByteDance)，2026-09-24 | 未发现官方代码 | `xrec` |
 | 多阶段排序与混排 | [OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender](../2609.28589-onetrans-v2/README.md) | ByteDance，2026-09-23 | 未发现官方代码 | `onetrans-v2` |
 | 排序与长序列建模 | [Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems](../2609.25433-light-heads/README.md) | Google，2026-09-21 | 未发现官方代码 | `light-heads` |

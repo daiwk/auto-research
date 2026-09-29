@@ -16,6 +16,9 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "mad-rl-qwen-choice": (
+        "docs/gpu-validations/mad-rl-qwen-choice-a100-20260929.json"
+    ),
     "system-one-formal-evolve": (
         "docs/gpu-validations/system-one-formal-evolve-a100-20260926.json"
     ),

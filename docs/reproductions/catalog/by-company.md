@@ -359,6 +359,7 @@
 - 2026-02 · [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 
 ## Tencent
+- 2026-09 · [KuaFu](../2609.31045-kuafu/README.md)：独立压缩每条行为并以双轴投影缓存低维记忆，按时间拼接供任务解码；本地公开 MRQA 仅验证小规模机制，未复现论文收益。
 - 2026-09 · [ANGLE](../2609.18296-angle/README.md)：以意图×摘要层次文本标识、三目标联合训练和动态约束 beam 实现一步广告检索。
 - 2026-09 · [ChronicleRec](../2609.12375-chronicle-rec/README.md)：用近密远疏合并、因果时间锚点和多 horizon alignment 把终身历史压成可缓存用户 token。
 - 2026-09 · [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。

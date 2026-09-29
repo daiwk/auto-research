@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "adapter_key": "mad-rl-qwen-choice",
+  "validated_at": "2026-09-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python", "scripts/mad_rl_qwen_choice.py",
+    "--checkpoint", "<public-Qwen3-4B-Instruct-2507-snapshot>",
+    "--output", "<local-result.json>",
+    "--seed", "42", "--warmup-steps", "15", "--steps", "8",
+    "--group-size", "16", "--eval-samples", "16", "--divergence", "jsd"
+  ],
+  "dataset": {
+    "name": "public synthetic five-choice topic suite",
+    "source": "src/auto_research/post_training/mad_rl.py:TOPICS",
+    "revision": "4c3051124c219e0ceb0bea7cee63cf123e52bb33",
+    "split": "first 8 topics train; next 2 validation; final 2 test"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "local_weights_committed": false
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "warmup_updates": 15,
+    "rl_updates": 8,
+    "group_size": 16,
+    "target_distribution": [0.0, 0.0, 0.3333333333333333, 0.3333333333333333, 0.3333333333333333],
+    "baseline_validation_counts": [16, 0, 16, 0, 0],
+    "final_validation_counts": [16, 0, 16, 0, 0],
+    "baseline_validation_jsd_valid_only": 0.41272565263942185,
+    "final_validation_jsd_valid_only": 0.41272565263942185,
+    "final_test_jsd_valid_only": 0.6398253243279979,
+    "adapter_parameter_delta_l2": 0.09822092745005068,
+    "validation_improved": false,
+    "formal_paper_result_reproduced": false,
+    "diagnostic_only": true
+  },
+  "provenance": {
+    "commit": "4c3051124c219e0ceb0bea7cee63cf123e52bb33",
+    "artifact_path": "docs/gpu-validations/mad-rl-qwen-choice-a100-20260929.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

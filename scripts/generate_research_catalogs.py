@@ -243,6 +243,7 @@ TOPIC_HIERARCHY = {
 POST_TRAINING_REPRODUCTION_KEYS = {
     "dynamic-rubric",
     "off-context-grpo",
+    "recursive-opsd",
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
