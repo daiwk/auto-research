@@ -1,4 +1,6 @@
 import json
+import gzip
+import io
 
 import pytest
 
@@ -8,7 +10,7 @@ from auto_research.discovery import (
 )
 import datetime as dt
 from auto_research.discovery_sources import (
-    DiscoverySource, discover_external, extract_source_hits, page_url,
+    DiscoverySource, discover_external, extract_source_hits, fetch_text, page_url,
     publication_records, normalized_title,
     semantic_scholar_citation_hits,
 )
@@ -29,6 +31,13 @@ def test_external_sources_extract_arxiv_links_and_keep_provenance():
     assert len(hits) == 1
     assert hits[0].arxiv_id == "2608.12345"
     assert hits[0].provenance()["source_kind"] == "official-research"
+
+
+def test_fetch_text_decodes_gzip_even_when_origin_omits_content_encoding(monkeypatch):
+    response = io.BytesIO(gzip.compress(b"<html>official listing</html>"))
+    response.headers = {"Content-Type": "text/html"}
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: response)
+    assert fetch_text("https://example.org/") == "<html>official listing</html>"
 
 
 def test_title_identity_does_not_collapse_word_boundaries():
@@ -146,6 +155,93 @@ def test_official_listing_keeps_unresolved_title_and_paginates():
     assert stats[0]["unresolved_publications"] == [{
         "title": "Unmatched Work", "url": "https://ai.meta.com/research/publications/work/",
     }]
+
+
+def test_deepmind_listing_extracts_dated_official_cards_only():
+    source = DiscoverySource(
+        "DeepMind", "official-research", "https://deepmind.google/research/publications/"
+    )
+    html = (
+        '<a href="/research/publications/265605/">'
+        '<span class="list-group__date">1 September 2026</span>'
+        '<span class="list-group__description">Designing Proactive Thought Partners '
+        'for Writing</span></a>'
+        '<a href="/research/publications/">All publications</a>'
+    )
+    assert publication_records(source, html) == ((
+        "Designing Proactive Thought Partners for Writing",
+        "https://deepmind.google/research/publications/265605/", "2026-09-01",
+    ),)
+
+
+def test_recsys_posters_keep_distinct_titles_and_do_not_claim_page_arxiv_links():
+    source = DiscoverySource(
+        "RecSys 2026 posters 2", "official-conference",
+        "https://recsys.acm.org/recsys26/posters-2/", track="recommendation",
+    )
+    html = (
+        '<li><a rel="#accordion-1-slide-1">'
+        '<span class="paper-type" title="Research">Spot A1</span>'
+        'RankGraph-2: Lifecycle Co-Design<br />by Authors</a></li>'
+        '<li><a rel="#accordion-1-slide-2">'
+        '<span class="paper-type" title="Research">Spot A2</span>'
+        'PROMISE: Process Reward Models<br />by Authors</a></li>'
+        '<p>A related reference is arXiv:2609.99999, not a poster identity.</p>'
+    )
+    records = publication_records(source, html)
+    assert [record[0] for record in records] == [
+        "RankGraph-2: Lifecycle Co-Design", "PROMISE: Process Reward Models",
+    ]
+    assert records[0][1].endswith("#accordion-1-slide-1")
+    assert records[0][2] is None
+
+    class Client:
+        def lookup(self, ids):
+            assert list(ids) == []
+            return []
+
+    _, provenance, failures, stats = discover_external(
+        [source], client=Client(), fetcher=lambda _: html,
+    )
+    assert provenance == {}
+    assert failures == []
+    assert stats[0]["arxiv_ids_extracted"] == 0
+    assert stats[0]["official_publications"] == 2
+    assert len(stats[0]["unresolved_publications"]) == 2
+    assert stats[0]["status"] == "partial"
+
+
+def test_sigir_accepted_papers_deduplicates_serialized_tracks_without_fake_dates():
+    source = DiscoverySource(
+        "SIGIR 2026 accepted papers", "official-conference",
+        "https://sigir2026.org/en-AU/pages/program/accepted-papers",
+        track="recommendation",
+    )
+    html = (
+        r"\u003cp\u003e[fp] \u003ci\u003eFirst Ranking Paper\u003c/i\u003e"
+        r"\u003cp\u003e[ip] \u003ci\u003eSecond Search Paper\u003c/i\u003e"
+        r"\u003cp\u003e[rp] \u003ci\u003eThird Resource Paper\u003c/i\u003e"
+        r"\u003cp\u003e[fp] \u003ci\u003eFirst Ranking Paper\u003c/i\u003e"
+    )
+    records = publication_records(source, html)
+    assert records == (
+        ("First Ranking Paper", source.url, None),
+        ("Second Search Paper", source.url, None),
+        ("Third Resource Paper", source.url, None),
+    )
+
+    class Client:
+        def lookup(self, ids):
+            assert list(ids) == []
+            return []
+
+    _, provenance, failures, stats = discover_external(
+        [source], client=Client(), fetcher=lambda _: html,
+    )
+    assert provenance == {}
+    assert failures == []
+    assert stats[0]["official_publications"] == 3
+    assert len(stats[0]["unresolved_publications"]) == 3
 
 
 def test_ambiguous_exact_title_is_not_attributed_to_either_paper():

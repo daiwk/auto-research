@@ -19,6 +19,12 @@
 
 修复期间的 09-20～09-29 四领域重叠窗口试跑（候选数不是合格论文数）：推荐 184、基础模型 1048、后训练 542、Agent 950；Google 列表首 3 页约 45 条，Meta 首 2 页约 48 条，均为 `partial`，DeepMind 入口仍为 `no_arxiv_ids`。推荐、基础模型和后训练试跑发生在标题优先级与官方发布日期规则最终调整前，**这些数字不是最终覆盖计数**。后训练试跑从 [Meta 官方 MaD-RL 详情页](https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/)精确对上 [arXiv:2609.31644](https://arxiv.org/abs/2609.31644)；这只证明召回/来源归因，不代表该论文已通过复现门槛。下一步仍需补完整日期分页、DeepMind 官方详情、当前会议来源与所有未匹配条目的逐篇核查；在此之前 `cross_source.coverage_complete` 应继续为 `false`。
 
+### 后续来源解析补强（仍非覆盖完成）
+
+现已接入 [Google DeepMind 出版物列表](https://deepmind.google/research/publications/)的标题、详情页和列表日期，以及 [RecSys 2026 海报页 1](https://recsys.acm.org/recsys26/posters-1/)、[页 2](https://recsys.acm.org/recsys26/posters-2/)、[页 3](https://recsys.acm.org/recsys26/posters-3/)和 [SIGIR 2026 官方录用名单](https://sigir2026.org/en-AU/pages/program/accepted-papers)的标题。用真实官网页面做过解析核验：DeepMind **当前首页** 30 条，RecSys 三页 46/44/42 条，SIGIR 各轨道（含全文、短文、工业、资源、演示等）去重后 667 条。这些是**页面标题数，不是新论文数或合格论文数**；SIGIR 页面没有逐篇链接，记录指向官方名单页，RecSys 海报条目指向页面内对应 accordion，均待与原论文一一核对。会议举办日期不冒充论文首次发布日期。会议列表中的 arXiv 引文也不能当作该条海报的论文 ID，只有已知论文或 arXiv 精确标题且唯一匹配才关联。
+
+DeepMind 官网偶发返回 gzip 压缩正文但未以可直接解码的文本呈现，抓取器现识别 gzip 头并解压。上述来源仍标记 `partial`：DeepMind 仅首页、RecSys 仅海报、SIGIR 标题与原文身份仍未逐篇终审，标题反查也受每来源预算限制。`cross_source.coverage_complete` 继续为 `false`。后续应按时间窗口核查未匹配队列、补 DeepMind 分页和 RecSys 主论文列表，并对 Google/Meta 优先候选逐篇核验全文部署证据。
+
 ## 本轮全文复核后的明确项
 
 | 候选 | 处理 | 证据及边界 |

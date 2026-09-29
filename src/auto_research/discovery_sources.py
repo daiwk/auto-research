@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import datetime as dt
+import gzip
 from html.parser import HTMLParser
+import html
 import json
 import re
 from pathlib import Path
@@ -82,7 +84,10 @@ def fetch_text(url: str, timeout: int = 30) -> str:
     with urllib.request.urlopen(request, timeout=timeout) as response:
         if "pdf" in response.headers.get("Content-Type", "").lower():
             raise ValueError("PDF source needs a text/PDF extractor; no HTML coverage claimed")
-        return response.read().decode("utf-8", errors="replace")
+        content = response.read()
+        if content.startswith(b"\x1f\x8b"):
+            content = gzip.decompress(content)
+        return content.decode("utf-8", errors="replace")
 
 
 def extract_source_hits(source: DiscoverySource, content: str) -> tuple[CrossSourceHit, ...]:
@@ -165,13 +170,145 @@ class _PublicationLinks(HTMLParser):
             self.anchor = None
 
 
+class _DeepMindPublications(HTMLParser):
+    """Read dated publication cards, not unrelated links on the listing page."""
+
+    def __init__(self, source_url: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.source_url = source_url
+        self.records: list[tuple[str, str, str | None]] = []
+        self.href: str | None = None
+        self.field: str | None = None
+        self.title: list[str] = []
+        self.date: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag == "a" and self.href is None:
+            url = urljoin(self.source_url, attributes.get("href") or "")
+            parsed = urlparse(url)
+            if parsed.netloc == "deepmind.google" and re.fullmatch(
+                r"/research/publications/\d+/?", parsed.path
+            ):
+                self.href = url
+                self.title = []
+                self.date = []
+        elif tag == "span" and self.href:
+            classes = (attributes.get("class") or "").split()
+            if "list-group__description" in classes:
+                self.field = "title"
+            elif "list-group__date" in classes:
+                self.field = "date"
+
+    def handle_data(self, data: str) -> None:
+        if self.field == "title":
+            self.title.append(data)
+        elif self.field == "date":
+            self.date.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "span":
+            self.field = None
+        elif tag == "a" and self.href:
+            title = " ".join("".join(self.title).split())
+            date_text = " ".join("".join(self.date).split())
+            try:
+                published = dt.datetime.strptime(date_text, "%d %B %Y").date().isoformat()
+            except ValueError:
+                published = None
+            if title:
+                self.records.append((title, self.href, published))
+            self.href = None
+            self.field = None
+
+
+class _RecSysPosters(HTMLParser):
+    """Read paper titles from official 2026 poster accordion headers."""
+
+    def __init__(self, source_url: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.source_url = source_url
+        self.records: list[tuple[str, str, str | None]] = []
+        self.fragment: str | None = None
+        self.title: list[str] = []
+        self.in_spot = False
+        self.after_break = False
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag == "a" and self.fragment is None:
+            fragment = attributes.get("rel") or ""
+            if re.fullmatch(r"#accordion-\d+-slide-\d+", fragment):
+                self.fragment = fragment
+                self.title = []
+                self.after_break = False
+        elif self.fragment and tag == "span" and "paper-type" in (
+            attributes.get("class") or ""
+        ).split():
+            self.in_spot = True
+        elif self.fragment and tag == "br":
+            self.after_break = True
+
+    def handle_data(self, data: str) -> None:
+        if self.fragment and not self.in_spot and not self.after_break:
+            self.title.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "span":
+            self.in_spot = False
+        elif tag == "a" and self.fragment:
+            title = " ".join("".join(self.title).split())
+            if title:
+                self.records.append((title, urljoin(self.source_url, self.fragment), None))
+            self.fragment = None
+
+
+def _sigir_accepted_papers(source_url: str, content: str) -> tuple[
+    tuple[str, str, str | None], ...
+]:
+    """Extract only accepted paper titles from SIGIR's escaped Next.js payload.
+
+    The official page renders its track lists into serialized text blocks,
+    sometimes twice. There are no per-paper links or first-publication dates.
+    """
+    pattern = re.compile(
+        r"\\u003cp\\u003e\[(?:fp|sp|ip|rp|rr|pr|lre|de|dc)\]"
+        r"\s*\\u003ci\\u003e"
+        r"(.*?)\\u003c/i\\u003e", re.DOTALL | re.IGNORECASE,
+    )
+    records = []
+    for match in pattern.finditer(content):
+        title = re.sub(
+            r"\\u([0-9a-fA-F]{4})",
+            lambda item: chr(int(item.group(1), 16)), match.group(1),
+        )
+        title = " ".join(html.unescape(re.sub(r"<[^>]+>", "", title)).split())
+        if title:
+            records.append((title, source_url, None))
+    return tuple(dict.fromkeys(records))
+
+
 def publication_records(
     source: DiscoverySource, content: str,
 ) -> tuple[tuple[str, str, str | None], ...]:
     """Extract official detail links without assuming they expose arXiv IDs."""
-    if urlparse(source.url).netloc not in {"research.google", "ai.meta.com"}:
+    parsed = urlparse(source.url)
+    if parsed.netloc in {"research.google", "ai.meta.com"}:
+        parser = _PublicationLinks(source.url)
+    elif parsed.netloc == "deepmind.google" and parsed.path.startswith(
+        "/research/publications/"
+    ):
+        parser = _DeepMindPublications(source.url)
+    elif parsed.netloc == "recsys.acm.org" and re.fullmatch(
+        r"/recsys26/posters-\d+/?", parsed.path
+    ):
+        parser = _RecSysPosters(source.url)
+    elif parsed.netloc == "sigir2026.org" and parsed.path.endswith(
+        "/pages/program/accepted-papers"
+    ):
+        return _sigir_accepted_papers(source.url, content)
+    else:
         return ()
-    parser = _PublicationLinks(source.url)
     parser.feed(content)
     return tuple(dict.fromkeys(parser.records))
 
@@ -244,13 +381,16 @@ def discover_external(
             if source.max_pages < 1 or source.max_title_lookups < 0:
                 raise ValueError("max_pages must be positive and max_title_lookups non-negative")
             extracted: list[CrossSourceHit] = []
-            records: dict[str, tuple[str, str, str | None]] = {}
+            records: dict[tuple[str, str], tuple[str, str, str | None]] = {}
             for page in range(1, source.max_pages + 1):
                 url = source.url if page == 1 else page_url(source.url, page)
                 content = fetcher(url)
-                extracted.extend(extract_source_hits(source, content))
+                if source.kind != "official-conference":
+                    extracted.extend(extract_source_hits(source, content))
                 for title, detail_url, published in publication_records(source, content):
-                    records.setdefault(detail_url, (title, detail_url, published))
+                    records.setdefault(
+                        (normalized_title(title), detail_url), (title, detail_url, published)
+                    )
             direct_count = len(extracted)
             matched = 0
             title_lookups = 0
