@@ -1,0 +1,253 @@
+{
+  "roft": {
+    "schema_version": 2,
+    "manifest_ref": "post-training:roft",
+    "method": "roft",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "masked_ce": {
+        "mean": 4.723277568817139,
+        "std": 0.3799676184522421
+      },
+      "retrospection_tokens": {
+        "mean": 3.0,
+        "std": 0.0
+      },
+      "context_target_tokens": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "masked_ce": 5.138889789581299,
+        "retrospection_tokens": 3,
+        "context_target_tokens": 0
+      },
+      {
+        "seed": 43,
+        "masked_ce": 4.810451030731201,
+        "retrospection_tokens": 3,
+        "context_target_tokens": 0
+      },
+      {
+        "seed": 44,
+        "masked_ce": 4.220491886138916,
+        "retrospection_tokens": 3,
+        "context_target_tokens": 0
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    }
+  },
+  "lspd": {
+    "schema_version": 2,
+    "manifest_ref": "post-training:lspd",
+    "method": "lspd",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "loss": {
+        "mean": -0.01866375096142292,
+        "std": 0.0002326251190382462
+      },
+      "mean_penalty": {
+        "mean": 0.02250002510845661,
+        "std": 0.0
+      },
+      "mean_entropy": {
+        "mean": 4.116377671559651,
+        "std": 0.023262548718113
+      },
+      "tail_fraction": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "loss": -0.018448861315846443,
+        "mean_penalty": 0.02250002510845661,
+        "mean_entropy": 4.094888687133789,
+        "tail_fraction": 0.0
+      },
+      {
+        "seed": 43,
+        "loss": -0.01898692362010479,
+        "mean_penalty": 0.02250002510845661,
+        "mean_entropy": 4.14869499206543,
+        "tail_fraction": 0.0
+      },
+      {
+        "seed": 44,
+        "loss": -0.018555467948317528,
+        "mean_penalty": 0.02250002510845661,
+        "mean_entropy": 4.105549335479736,
+        "tail_fraction": 0.0
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    }
+  },
+  "harness-learning": {
+    "schema_version": 2,
+    "manifest_ref": "agent-research:harness-learning",
+    "method": "harness-learning",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "rounds": {
+        "mean": 3.0,
+        "std": 0.0
+      },
+      "final_harness_size": {
+        "mean": 3.0,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "rounds": 3,
+        "final_harness_size": 3,
+        "uses_execution_reports": true,
+        "gold_fields_exposed": false
+      },
+      {
+        "seed": 43,
+        "rounds": 3,
+        "final_harness_size": 3,
+        "uses_execution_reports": true,
+        "gold_fields_exposed": false
+      },
+      {
+        "seed": 44,
+        "rounds": 3,
+        "final_harness_size": 3,
+        "uses_execution_reports": true,
+        "gold_fields_exposed": false
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    }
+  },
+  "ms-gla": {
+    "schema_version": 2,
+    "manifest_ref": "foundation-models:ms-gla",
+    "method": "ms-gla",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "loss": {
+        "mean": 0.10698820402224858,
+        "std": 0.030546831479288786
+      },
+      "routing_sum_error": {
+        "mean": 1.1920928955078125e-07,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "loss": 0.06381452828645706,
+        "routing_sum_error": 1.1920928955078125e-07,
+        "finite_gradient": true
+      },
+      {
+        "seed": 43,
+        "loss": 0.12987452745437622,
+        "routing_sum_error": 1.1920928955078125e-07,
+        "finite_gradient": true
+      },
+      {
+        "seed": 44,
+        "loss": 0.12727555632591248,
+        "routing_sum_error": 1.1920928955078125e-07,
+        "finite_gradient": true
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    }
+  },
+  "graphhca": {
+    "schema_version": 2,
+    "manifest_ref": "agent-research:graphhca",
+    "method": "graphhca",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "start_value": {
+        "mean": 0.57,
+        "std": 0.0
+      },
+      "iterations": {
+        "mean": 3.0,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "start_value": 0.57,
+        "iterations": 3,
+        "successful_credit_above_failure": true,
+        "gold_fields_exposed": false
+      },
+      {
+        "seed": 43,
+        "start_value": 0.57,
+        "iterations": 3,
+        "successful_credit_above_failure": true,
+        "gold_fields_exposed": false
+      },
+      {
+        "seed": 44,
+        "start_value": 0.57,
+        "iterations": 3,
+        "successful_credit_above_failure": true,
+        "gold_fields_exposed": false
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    }
+  }
+}

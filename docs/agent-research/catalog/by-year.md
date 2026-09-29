@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-09 · [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](../2609.35084-graphhca/README.md)（`graphhca`）：稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。
+- 2026-09 · [Harness Learning Enables Generalizable Test-Time Adaptation](../2609.35738-harness-learning/README.md)（`harness-learning`）：论文把测试时适配的对象从模型参数转为可执行 harness：proposer 根据真实执行反馈修改验证、解释器、检索或重试组件；底层任务模型保持冻结，多轮执行后保留更有效的脚手架。
 - 2026-09 · [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](../2609.30001-agentx-model/README.md)（`agentx-model-replay`）：早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问**一次实验之后如何决定下一次做什么**。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。
 - 2026-09 · [An Empirical Study of Harness Design for Coding Agents](../2609.20804-harness-design-study/README.md)（`harness-design-study`）：固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。
 - 2026-09 · [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](../2609.18779-cera-moa/README.md)（`cera-moa`）：用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。

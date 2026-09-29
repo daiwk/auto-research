@@ -34,6 +34,7 @@
 
 ### on-policy / context 蒸馏
 
+- [An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning](../2609.35505-lspd/README.md)（`lspd`）：LSPD 把教师与学生的 token log-prob 差视作可优化残差，以 least-square 形式直接收缩分布差距，并用 Huber 式尾部限制异常差值的梯度；同时允许复用历史 query-response 轨迹，提高样本效率。
 - [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../../reproductions/2609.30652-recursive-opsd/README.md)（`recursive-opsd`）：传统 OPSD 让学生只看题目、冻结的特权教师额外看标准解，在学生自己的输出前缀上做逐 token 蒸馏。教师停留在初始权重时，后续学生学到的回看和纠错行为无法反哺教师。
 - [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。
 - [Trajectory Learnability for Offline On-Policy Distillation](../2609.18321-trajectory-learnability/README.md)（`trajectory-learnability`）：用成功轨迹训练参考模型，以参考与当前策略逐 token 对数似然变化衡量可学性，并据此重加权离线 OPD 轨迹。
@@ -150,6 +151,10 @@
 ### 跨领域 RLVR 能力融合
 
 - [Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms](../2608.27409-rlvr-fusion/README.md)（`rlvr-fusion`）：论文统一比较三种复用产物不同的跨域能力融合：Merge 合并专家 task vector，Mix RL 合并训练数据，MOPD 同时复用专家和数据。平均差距不超过 1.4 points，但单项可达 8.6 points，因此选择取决于专家、数据和成本条件。
+
+### 自我回顾
+
+- [Shockingly Simple Self-retrospection Improves Agentic Models Without RL](../2609.35741-roft/README.md)（`roft`）：ROFT 不直接用环境奖励更新动作策略，而是让模型在完整轨迹与反馈之后生成一段自我回顾，再只监督回顾 token。回顾成为后续行为可复用的训练信号，同时避免把环境文本或历史动作误当监督标签。
 
 ### Rubric RL
 

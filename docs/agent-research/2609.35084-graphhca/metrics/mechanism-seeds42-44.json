@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:graphhca",
+  "method": "graphhca",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "start_value": {
+      "mean": 0.57,
+      "std": 0.0
+    },
+    "iterations": {
+      "mean": 3.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "start_value": 0.57,
+      "iterations": 3,
+      "successful_credit_above_failure": true,
+      "gold_fields_exposed": false
+    },
+    {
+      "seed": 43,
+      "start_value": 0.57,
+      "iterations": 3,
+      "successful_credit_above_failure": true,
+      "gold_fields_exposed": false
+    },
+    {
+      "seed": 44,
+      "start_value": 0.57,
+      "iterations": 3,
+      "successful_credit_above_failure": true,
+      "gold_fields_exposed": false
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  }
+}

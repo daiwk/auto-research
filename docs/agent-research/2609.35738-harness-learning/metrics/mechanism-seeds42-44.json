@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:harness-learning",
+  "method": "harness-learning",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "rounds": {
+      "mean": 3.0,
+      "std": 0.0
+    },
+    "final_harness_size": {
+      "mean": 3.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "rounds": 3,
+      "final_harness_size": 3,
+      "uses_execution_reports": true,
+      "gold_fields_exposed": false
+    },
+    {
+      "seed": 43,
+      "rounds": 3,
+      "final_harness_size": 3,
+      "uses_execution_reports": true,
+      "gold_fields_exposed": false
+    },
+    {
+      "seed": 44,
+      "rounds": 3,
+      "final_harness_size": 3,
+      "uses_execution_reports": true,
+      "gold_fields_exposed": false
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  }
+}

@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 网络架构 | [MS-GLA: Multi-Scale Gated Linear Attention for Addressing Representational Bottlenecks via Multi-Temporal Resolution](2609.35664-ms-gla/README.md) | International Institute of Information Technology Hyderabad，2026-09-28 | [已开源](https://github.com/prasoondev/msgla) | `ms-gla` |
 | 扩散语言模型 | [dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models](2609.20751-dqwen35/README.md) | University of Texas at Austin，2026-09-17 | 未发现官方代码 | `dqwen35` |
 | 注意力与长上下文 | [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](2609.20734-oda/README.md) | Southern University of Science and Technology，2026-09-17 | 未发现官方代码 | `oda` |
 | 推测解码 | [ASPIRE: Asynchronous Batch Self-Speculative Decoding](2609.17943-aspire/README.md) | University of Southern California，2026-09-16 | 未发现官方代码 | `aspire` |

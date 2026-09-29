@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-09 · [An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning](../2609.35505-lspd/README.md)（`lspd`）：LSPD 把教师与学生的 token log-prob 差视作可优化残差，以 least-square 形式直接收缩分布差距，并用 Huber 式尾部限制异常差值的梯度；同时允许复用历史 query-response 轨迹，提高样本效率。
+- 2026-09 · [Shockingly Simple Self-retrospection Improves Agentic Models Without RL](../2609.35741-roft/README.md)（`roft`）：ROFT 不直接用环境奖励更新动作策略，而是让模型在完整轨迹与反馈之后生成一段自我回顾，再只监督回顾 token。回顾成为后续行为可复用的训练信号，同时避免把环境文本或历史动作误当监督标签。
 - 2026-09 · [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../../reproductions/2609.30652-recursive-opsd/README.md)（`recursive-opsd`）：传统 OPSD 让学生只看题目、冻结的特权教师额外看标准解，在学生自己的输出前缀上做逐 token 蒸馏。教师停留在初始权重时，后续学生学到的回看和纠错行为无法反哺教师。
 - 2026-09 · [PACT: From Credit Assignment to Critic Alignment](../2609.26355-pact/README.md)（`pact`）：终局奖励只有一个标量，但 actor 要更新每个生成 token。论文在完整性、前缀一致性和中性三个条件下，刻画 token 的理论信用为相邻前缀的条件期望之差。
 - 2026-09 · [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。

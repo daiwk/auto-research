@@ -58,6 +58,7 @@
 
 ## Beihang University
 
+- 2026-09-28 · 一作：Haodong Zhu · [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](../2609.35084-graphhca/README.md)（`graphhca`）：稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。
 - 2026-09-15 · 一作：Yunxiang Zhang · [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 - 2026-08-06 · 一作：Xingyu Guo · [Contextual Information Policy Optimization for Search Agents](../2608.06128-cipo/README.md)（`cipo`）：**主题：搜索 Agent RL。** 只奖励最终答案会让检索退化成确认偏见。
 
@@ -166,6 +167,10 @@
 ## Jilin University / Ant Group
 
 - 2026-08-26 · 一作：Zhiyuan Li · [CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval](../2608.25500-caskg/README.md)（`caskg`）：先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。
+
+## Johns Hopkins University
+
+- 2026-09-28 · 一作：Alvin Zhang · [Harness Learning Enables Generalizable Test-Time Adaptation](../2609.35738-harness-learning/README.md)（`harness-learning`）：论文把测试时适配的对象从模型参数转为可执行 harness：proposer 根据真实执行反馈修改验证、解释器、检索或重试组件；底层任务模型保持冻结，多轮执行后保留更有效的脚手架。
 
 ## King Abdullah University of Science and Technology
 

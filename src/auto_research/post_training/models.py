@@ -130,6 +130,8 @@ ALGORITHMS = (
     "retire-opd",
     "compo",
     "trajectory-learnability",
+    "roft",
+    "lspd",
 )
 
 

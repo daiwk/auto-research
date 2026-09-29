@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:lspd",
+  "method": "lspd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "loss": {
+      "mean": -0.01866375096142292,
+      "std": 0.0002326251190382462
+    },
+    "mean_penalty": {
+      "mean": 0.02250002510845661,
+      "std": 0.0
+    },
+    "mean_entropy": {
+      "mean": 4.116377671559651,
+      "std": 0.023262548718113
+    },
+    "tail_fraction": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": -0.018448861315846443,
+      "mean_penalty": 0.02250002510845661,
+      "mean_entropy": 4.094888687133789,
+      "tail_fraction": 0.0
+    },
+    {
+      "seed": 43,
+      "loss": -0.01898692362010479,
+      "mean_penalty": 0.02250002510845661,
+      "mean_entropy": 4.14869499206543,
+      "tail_fraction": 0.0
+    },
+    {
+      "seed": 44,
+      "loss": -0.018555467948317528,
+      "mean_penalty": 0.02250002510845661,
+      "mean_entropy": 4.105549335479736,
+      "tail_fraction": 0.0
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  }
+}

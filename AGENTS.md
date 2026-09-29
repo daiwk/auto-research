@@ -38,6 +38,7 @@
 ## Research and evaluation integrity
 
 - Prioritize qualifying Google and Meta papers. Check full-text production experiments, tables, and deployment evidence; an abstract without A/B wording is not a rejection reason. Use the discovery ledger's last reviewed coverage and overlap policy, and record unresolved candidates rather than claiming exhaustive coverage.
+- Do not use DeepXiv for paper discovery or evidence verification: repeated availability failures made it an unreliable dependency. Use official arXiv abstract/HTML/TeX/PDF pages, author or institution project pages, and upstream repositories instead; record an unavailable primary source as unresolved rather than silently substituting DeepXiv.
 - Preserve the paper's defining algorithm. A heuristic or fixture standing in for a core model, loss, or policy must retain the appropriate concept-demo/diagnostic designation. Read `docs/architecture.md` for fidelity and evaluation contracts.
 - Evaluated agents must not read gold answers/plans. Fixtures that do so are diagnostics only and must not be advertised as capability implementations or promoted by evolve as evidence of improvement.
 - Select candidates and hyperparameters on validation data; keep test data isolated. Multiple seeds alone do not turn a mechanism diagnostic into a formal capability comparison.
