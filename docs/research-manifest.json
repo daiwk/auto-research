@@ -16967,7 +16967,7 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/kuafu-a100-20260929.json",
+        "gpu_validation_artifact": "docs/gpu-validations/kuafu-a100-independent-control-20260929.json",
         "online_evidence": [
           {
             "product": "Tencent advertising and recommendation",
