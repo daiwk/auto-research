@@ -16,6 +16,9 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "kite-sst-gpu-latency": (
+        "docs/gpu-validations/kite-sst-gpu-latency-a100-20260929.json"
+    ),
     "mad-rl-qwen-choice": (
         "docs/gpu-validations/mad-rl-qwen-choice-a100-20260929.json"
     ),

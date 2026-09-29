@@ -78,7 +78,7 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | ID | 优先级 | 状态 | 工作与完成条件 |
 | --- | --- | --- | --- |
 | SEP28-01 | P1 · Agent | L2.1 诊断已运行，正式复现待办 | [GRAFT](experiments/sep28-three-mechanisms.md)：经验轨迹图、Bellman 值、Graph GAE；无金标工具环境的三 seed tabular policy 对照未见提升，仍须 LLM policy 与论文任务环境 |
-| SEP28-02 | P1 · 基础模型 | 小模型等算量诊断已运行，正式复现待办 | [KITE](experiments/sep28-three-mechanisms.md)：两阶段双塔、KV 不变量和 WikiText-2 三 seed 负结果；[补做近似等 FLOPs 对照与本机末 token 延迟](experiments/sep29-kite-equal-flops.md)，仍须原文模型规模及真实 GPU prefill/decode |
+| SEP28-02 | P1 · 基础模型 | 小模型等算量及 CUDA 延迟诊断已运行，正式复现待办 | [KITE](experiments/sep28-three-mechanisms.md)：两阶段双塔、KV 不变量和 WikiText-2 三 seed 诊断；[近似等 FLOPs 对照及 A100 小模型 prefill/decode](experiments/sep29-kite-equal-flops.md)均已测，CUDA 未见明确加速；仍须原文规模、长上下文及吞吐 |
 | SEP28-03 | P1 · 多模态 | L1 机制已实现，正式复现待办 | [DeltaS](experiments/sep28-three-mechanisms.md)：状态漂移与分桶 KV 淘汰；仍须真实混合模型状态、公开视频、等预算 GPU 验证 |
 | SEP28-04 | P1 · 后训练/Agent | 待全文与数据协议复核 | DCRL、IterSynth：尚未找到能忠实跑通原定义算法且公平评测的公开低预算链路，不用名称注册或金标轨迹冒充实现 |
 | SEP28-05 | P0 · Alibaba | 数据阻塞 | CMRec：Amazon-M2 暂不可用；不伪造跨语区数据或指标，保留 SEP27-03 |
@@ -94,7 +94,7 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP29-03 | P1 · Code-Based Skills | 原作者 CodeHack+定制 NLE 的真实 MiniHack 三模式、三种子环境烟测完成 | 同模型策略、同决策和环境步数预算的 primitive/skill/mixed 公平对照；当前随机控制器不用于论文性能比较 |
 | SEP29-04 | P0 · Meta 后训练 | Recursive OPSD 官方 GSM8K 三臂三种子 A100 小预算对照完成，负结果 | 原文 OpenThoughts 精确切分、数学基准、原版 OPSD 和更接近论文规模的预算 |
 | SEP29-05 | P1 · Meta 后训练 | MaD-RL Qwen3-4B 三奖励三种子 A100 五选项诊断完成，无差异 | 原文数学/代码自由生成任务与公平基线；合成选择题不能晋升正式复现 |
-| SEP29-06 | P1 · 基础模型 | KITE 小模型近似等 FLOPs/本机延迟对照完成 | 原文规模梯队与真实 GPU prefill/decode 测量 |
+| SEP29-06 | P1 · 基础模型 | KITE 小模型近似等 FLOPs/本机延迟及 A100 CUDA prefill/decode 微基准完成，GPU 未见明确加速 | 原文规模梯队、长上下文与吞吐；小模型随机权重的微基准不代表论文速度结论 |
 | SEP29-07 | P1 · Agent/多模态 | GRAFT、DeltaS 仍为机制诊断 | 前者需 LLM policy 与论文任务；后者需真实混合模型状态和公开视频 GPU 对照 |
 | SEP29-08 | P0 · 工业推荐 | MuSeR 仍为公开 KuaiRand tag 代理 | 可审计的商品文本/多模态语义与缓存刷新链路；当前公开数据不含相应内容 |
 
