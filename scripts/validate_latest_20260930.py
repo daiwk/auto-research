@@ -175,6 +175,7 @@ def write_metrics(results, output_root: Path):
             key: {"mean": float(np.mean(values)), "std": float(np.std(values))}
             for key, values in numeric.items()
         }
+        target = output_root / DOMAINS[method] / "metrics" / "mechanism-seeds42-44.json"
         payload = {
             "schema_version": 2,
             "manifest_ref": f"{DOMAINS[method].split('/')[0]}:{method}",
@@ -184,15 +185,36 @@ def write_metrics(results, output_root: Path):
             "seed_results": seed_results,
             "evaluation_protocol": {
                 "tier": "l1_mechanism",
+                "seeds": list(SEEDS),
                 "formal_comparison": False,
                 "diagnostic_only": True,
                 "claim_policy": "executable mechanism and invariant checks only",
             },
+            "provenance": {
+                "artifact_path": str(target.relative_to(output_root.parent)),
+                "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+                "original_code_commit": "working tree",
+            },
         }
-        target = output_root / DOMAINS[method] / "metrics" / "mechanism-seeds42-44.json"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         aggregate[method] = payload
+    aggregate.update({
+        "schema_version": 2,
+        "manifest_ref": "experiments:sep30-p0-p1-mechanisms-seeds42-44",
+        "evaluation_protocol": {
+            "tier": "l1_mechanism",
+            "seeds": list(SEEDS),
+            "formal_comparison": False,
+            "diagnostic_only": True,
+            "claim_policy": "cross-paper mechanism summary; not a capability comparison",
+        },
+        "provenance": {
+            "artifact_path": "docs/experiments/sep30-p0-p1-mechanisms-seeds42-44.json",
+            "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+            "original_code_commit": "working tree",
+        },
+    })
     experiment = output_root / "experiments" / "sep30-p0-p1-mechanisms-seeds42-44.json"
     experiment.parent.mkdir(parents=True, exist_ok=True)
     experiment.write_text(json.dumps(aggregate, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

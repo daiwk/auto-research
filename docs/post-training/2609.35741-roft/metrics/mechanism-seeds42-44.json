@@ -43,8 +43,18 @@
   ],
   "evaluation_protocol": {
     "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "formal_comparison": false,
     "diagnostic_only": true,
     "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.35741-roft/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
   }
 }

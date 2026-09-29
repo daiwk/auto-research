@@ -9,16 +9,16 @@
   ],
   "metrics": {
     "loss": {
-      "mean": -0.01866375096142292,
-      "std": 0.0002326251190382462
+      "mean": -0.01866374599436919,
+      "std": 0.0002326233939281733
     },
     "mean_penalty": {
-      "mean": 0.02250002510845661,
+      "mean": 0.02250002883374691,
       "std": 0.0
     },
     "mean_entropy": {
-      "mean": 4.116377671559651,
-      "std": 0.023262548718113
+      "mean": 4.116377512613933,
+      "std": 0.02326232790400811
     },
     "tail_fraction": {
       "mean": 0.0,
@@ -28,30 +28,40 @@
   "seed_results": [
     {
       "seed": 42,
-      "loss": -0.018448861315846443,
-      "mean_penalty": 0.02250002510845661,
+      "loss": -0.018448857590556145,
+      "mean_penalty": 0.02250002883374691,
       "mean_entropy": 4.094888687133789,
       "tail_fraction": 0.0
     },
     {
       "seed": 43,
-      "loss": -0.01898692362010479,
-      "mean_penalty": 0.02250002510845661,
-      "mean_entropy": 4.14869499206543,
+      "loss": -0.018986916169524193,
+      "mean_penalty": 0.02250002883374691,
+      "mean_entropy": 4.1486945152282715,
       "tail_fraction": 0.0
     },
     {
       "seed": 44,
-      "loss": -0.018555467948317528,
-      "mean_penalty": 0.02250002510845661,
+      "loss": -0.01855546422302723,
+      "mean_penalty": 0.02250002883374691,
       "mean_entropy": 4.105549335479736,
       "tail_fraction": 0.0
     }
   ],
   "evaluation_protocol": {
     "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
     "formal_comparison": false,
     "diagnostic_only": true,
     "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.35505-lspd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
   }
 }
