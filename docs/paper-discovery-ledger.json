@@ -12335,6 +12335,43 @@
         {"id": "2609.21709", "priority": "P1", "track": "multimodal", "status": "deferred", "reason": "Requires sign-language video/pose data and checkpoint evaluation."},
         {"id": "2609.21386", "priority": "P1", "track": "agent", "status": "rejected", "reason": "Public evaluation dataset/protocol rather than a method implementation; retained as a future benchmark candidate."}
       ]
+    },
+    {
+      "batch": "recent-20260929-google-flvm-reviewed",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-09-29T17:20:00+08:00",
+      "window": "2026-09-20 through 2026-09-29",
+      "sources": [
+        "arXiv official abstract and complete HTML, including Section 4 online A/B",
+        "KuaiRand-Pure public exposure log"
+      ],
+      "required_tracks": ["recommendation"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "overlap_start": "2026-09-20",
+        "source_artifact": "recent-paper-scan-20260929.md",
+        "note": "Four-track candidate recall is not full-text terminal review; official publication pages yielded zero arXiv IDs."
+      },
+      "candidates": [
+        {
+          "id": "2609.32839",
+          "priority": "P0",
+          "track": "recommendation",
+          "status": "implemented",
+          "key": "flvm",
+          "doc": "reproductions/2609.32839-flvm/README.md",
+          "organization": "Google / YouTube",
+          "evidence_gate": "Section 4: 14-day YouTube Shorts online A/B, primary viewer enjoyment +2.67%",
+          "priority_reason": "Google first-author affiliation and quantified online A/B",
+          "evidence_review": {
+            "scope": "full-text",
+            "abstract_used_as_gate": false,
+            "locations": ["paper author affiliations", "Section 4, online A/B paragraph"],
+            "matched_terms": ["14 days", "online A/B", "2.67%"]
+          }
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "adapter_key": "kuafu",
+  "validated_at": "2026-09-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python", "scripts/kuafu_public_mrqa.py",
+    "--checkpoint", "<public-Qwen3-4B-Instruct-2507-snapshot>",
+    "--mrqa-train", "data/mrqa/SQuAD-train.jsonl.gz",
+    "--mrqa-dev", "data/mrqa/SQuAD-dev.jsonl.gz",
+    "--train-limit", "32", "--dev-limit", "32",
+    "--max-items", "4", "--max-item-tokens", "24",
+    "--independent-control", "--seed", "<42|43|44>",
+    "--output", "<local-result.json>"
+  ],
+  "dataset": {
+    "name": "MRQA 2019 SQuAD train/dev",
+    "source": "https://github.com/mrqa/MRQA-Shared-Task-2019",
+    "train_revision": "sha256:096378373b48ee7e0a67ce23ef67217b12fc11ed12c34bc94a235a8ccb299024",
+    "dev_revision": "sha256:b7f3214d3dfe2a9a368ccd8383c162787d08b978e5affd110bd0d9d58f53b0ed",
+    "train_questions": 32,
+    "dev_questions": 32,
+    "split": "official train/dev; first question from each distinct context record"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "local_weights_committed": false
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "independently_trained_baseline": true,
+    "compressed_dev_f1_mean": 0.09516563229798523,
+    "independent_control_dev_f1_mean": 0.12486905455655455,
+    "compressed_winning_seeds": 0,
+    "qa_updates_per_control_seed": 64,
+    "equal_flops": false,
+    "paper_result_reproduced": false,
+    "diagnostic_only": true
+  },
+  "provenance": {
+    "commit": "2da0c46a06c4c54c2a96381d3bb158bf71fdd073",
+    "artifact_path": "docs/gpu-validations/kuafu-a100-independent-control-20260929.json",
+    "metrics_artifact": "docs/reproductions/2609.31045-kuafu/metrics/mrqa-independent-control-seeds42-44.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

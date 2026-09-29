@@ -234,6 +234,17 @@ def render_discovery_summary(payload: dict) -> str:
             f"跨来源失败 {len(cross_source['source_failures'])} 项；本次不宣称全来源覆盖。",
             "",
         ])
+    if cross_source:
+        empty_sources = [
+            source["source"] for source in cross_source.get("source_stats", [])
+            if source["status"] == "no_arxiv_ids"
+        ]
+        if empty_sources:
+            lines.extend([
+                "跨来源页面可访问但未提取到 arXiv ID：" + "、".join(empty_sources)
+                + "；不能据此宣称这些来源已覆盖。",
+                "",
+            ])
     lines.extend(_candidate_lines(
         [item for item in current if item["priority_review_required"]],
         empty="本窗口没有新的 Google / Meta 重点候选。",

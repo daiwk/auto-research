@@ -8664,5 +8664,19 @@
     "height": 807,
     "score": 77,
     "error": ""
+  },
+  {
+    "page": "docs/reproductions/2609.32839-flvm/README.md",
+    "paper_url": "https://arxiv.org/abs/2609.32839",
+    "arxiv_id": "2609.32839",
+    "figure": "Figure 1",
+    "original_caption": "Figure 1: Factorized Latent Value Model. The encoder maps full impression features 𝑥to a factorized latent value state 𝑧= [𝑧𝑝,𝑧𝑎,𝑧𝑠]. For each feedback reconstruction task 𝑘, a task-specific hard sparse mask 𝑚𝑘restricts the latent input to decoder ℎ𝑘, which produces a logit-scale advantage 𝛿𝑘. In parallel, a restricted baseline 𝑏𝑘uses only measurement-confounding features 𝑥𝑏⊆𝑥to produce ℓ𝑏",
+    "source_url": "https://arxiv.org/pdf/2609.32839#page=4",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/reproductions/2609.32839-flvm/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 813,
+    "score": 15,
+    "error": ""
   }
 ]

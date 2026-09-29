@@ -12,6 +12,7 @@ runs/
 *.sqlite-shm
 *.sqlite-wal
 data/
+.cache/
 !docs/assets/data/
 !docs/assets/data/experiment-dashboard.json
 tmp/

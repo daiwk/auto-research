@@ -51,10 +51,34 @@ def test_source_failure_is_visible_and_does_not_drop_other_sources():
         if url.endswith("bad"):
             raise OSError("down")
         return "https://arxiv.org/abs/2608.12345"
-    papers, provenance, failures = discover_external(sources, client=Client(), fetcher=fetcher)
+    papers, provenance, failures, source_stats = discover_external(
+        sources, client=Client(), fetcher=fetcher
+    )
     assert papers[0].arxiv_id == "2608.12345"
     assert provenance["2608.12345"][0]["source"] == "ok"
     assert failures == [{"source": "bad", "url": "https://bad", "error": "down"}]
+    assert [(item["source"], item["status"]) for item in source_stats] == [
+        ("ok", "ok"), ("bad", "error")
+    ]
+
+
+def test_successful_page_without_arxiv_ids_is_not_counted_as_covered():
+    class Client:
+        def lookup(self, ids):
+            assert not ids
+            return []
+
+    source = DiscoverySource("dynamic-page", "official-research", "https://example.test")
+    papers, provenance, failures, source_stats = discover_external(
+        (source,), client=Client(), fetcher=lambda _: "<html>Recent papers</html>"
+    )
+    assert papers == []
+    assert provenance == {}
+    assert failures == []
+    assert source_stats == [{
+        "source": "dynamic-page", "url": "https://example.test",
+        "arxiv_ids_extracted": 0, "status": "no_arxiv_ids",
+    }]
 
 
 def test_terminal_review_batch_requires_every_new_candidate_decision():

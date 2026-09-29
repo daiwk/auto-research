@@ -8,6 +8,9 @@
 合同承载搜广推、基础模型、结构化决策、多模态、LLM 后训练与 Agent；实现成熟后，还可以作为 mutation、训练目标或
 evaluator 接入[自动研究与进化](auto-research.md)。
 
+[递归自我改进（RSI）](evolution/recursive-self-improvement.md)是横跨后训练、Agent
+与自动进化的专题索引，不改变单篇论文的归属或指标事实源。
+
 ## 六个内置研究域
 
 ### 搜广推与 LLM 应用

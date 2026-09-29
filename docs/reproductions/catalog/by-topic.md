@@ -412,5 +412,6 @@
 - [Applying Embedding-Based Retrieval to Airbnb Search](../2601.06873-airbnb-ebr/README.md)：用旅程级检索和多阶段排序统一 Airbnb 的体验推荐链路。
 
 ### 多任务学习与多目标优化
+- [FLVM](../2609.32839-flvm/README.md)：以受限混杂基线、停止梯度和固定稀疏路由共同学习观看、点击、喜欢和讨厌，避免直接把单一行为当作用户价值。
 - [SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity](../2602.09386-smes/README.md)：用渐进式稀疏路由和去重执行，为不同任务动态分配专家容量。
 - [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../2601.20215-easq/README.md)：用独立 LoRA 与多任务路径把稀疏问卷满意度接入持续在线学习。

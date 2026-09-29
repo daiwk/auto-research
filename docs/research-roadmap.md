@@ -26,7 +26,10 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-27**。[本轮增量审计](recent-paper-scan-20260927.md)从 09-20
+更新基线：**2026-09-29**。[最新重叠扫描与 RSI 专题核查](recent-paper-scan-20260929.md)
+覆盖 09-20～09-29 四领域，并发现 Google/YouTube FLVM 工业 P0；arXiv 查询成功不等于
+官方来源覆盖，Google/Meta 总入口提取零条 ID，发现 watermark **不推进**。历史上
+[09-27 增量审计](recent-paper-scan-20260927.md)从 09-20
 保留重叠窗口运行四领域分页；arXiv API 已恢复，但 Google/Meta 官方发表页抓取超时，
 因此不宣称全来源穷尽，发现 watermark 暂不推进。[上一轮扫描记录](recent-paper-scan-20260926.md)按
 2026-09-20～09-26 重叠窗口核验了四篇工业 P0 与一篇 Meta 评测 P1；完成和未完成的
@@ -97,6 +100,10 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP29-06 | P1 · 基础模型 | KITE 小模型近似等 FLOPs/本机延迟及 A100 CUDA prefill/decode 微基准完成，GPU 未见明确加速 | 原文规模梯队、长上下文与吞吐；小模型随机权重的微基准不代表论文速度结论 |
 | SEP29-07 | P1 · Agent/多模态 | GRAFT、DeltaS 仍为机制诊断 | 前者需 LLM policy 与论文任务；后者需真实混合模型状态和公开视频 GPU 对照 |
 | SEP29-08 | P0 · 工业推荐 | MuSeR 仍为公开 KuaiRand tag 代理 | 可审计的商品文本/多模态语义与缓存刷新链路；当前公开数据不含相应内容 |
+| SEP29-09 | P0 · Google/YouTube 工业推荐 | [FLVM](reproductions/2609.32839-flvm/README.md) 公开 KuaiRand 三种子概念验证；Like AP 小幅变化，但长观看下降、稀疏负反馈波动，语义未稳定分离 | 无 YouTube 满意度调查、生产预排和线上流量；不能声称论文线上收益复现或推广为 Evolve 增益算子 |
+| SEP29-10 | 跨领域 RSI | [递归自我改进专题](evolution/recursive-self-improvement.md) 已建，区分已执行机制与待审候选 | RRSI/RSIBench-Data 仍须真实任务与多轮继承、公平成本及 OOD 验收；专题不是新论文代码域 |
+| SEP29-11 | 发现闭环 | 官方入口零 ID 与 PDF 误读已显性化 | 详情页遍历/feed 接入、机构全文核查、历史未审候选逐项终态后才能推进水位 |
+| SEP29-12 | P0 · KuaFu 公平对照 | [MRQA 三种子 A100 独立训练对照](reproductions/2609.31045-kuafu/README.md)完成；压缩组均未超过同 token 预算对照 | 等 FLOPs 训练、有效幻觉 RL 更新、原文任务数据与更大规模评测；目前仅为公开小样本诊断 |
 
 ## 优先级和状态
 
@@ -119,7 +126,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | DISC-001 | DONE | 每日四领域多查询、分页、canonical arXiv ID 去重 | GitHub Actions 生成四个候选 artifact |
 | DISC-002 | DONE | 候选与 manifest、历史 ledger 自动差分 | JSON 和 Actions 摘要区分新候选、已实现、已审计 |
 | DISC-003 | DONE | Google / Meta 新候选自动置顶预警 | 仅两家触发 warning；Netflix 等保持普通候选 |
-| DISC-004 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 跨来源召回 | 官方研究页、会议列表、作者主页/GitHub 和 citation snowball 均保留 provenance 与单源失败 |
+| DISC-004 | PARTIAL · [PR #113](https://github.com/daiwk/auto-research/pull/113) 建立框架；09-29 审计发现零 ID/403/PDF 缺口 | 跨来源召回 | 现已显式报告单源失败和零提取；待官方详情页/feed、会议 PDF 解析及 GitHub 限流处理通过真实复扫，才能称跨来源覆盖完成 |
 | DISC-005 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 批次终态自动回写 | 回写器要求全部新候选终态；strict audit 可核对待审 artifact 与 ledger |
 
 每个新工业候选先按“机构/主题”召回，再读 PDF/HTML 全文。只有量化线上 A/B，或用户

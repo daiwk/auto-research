@@ -13,6 +13,10 @@ Auto Research 负责把“我想研究什么”转成一条可追踪、可复现
 
 [查看领域 adapter 与当前支持状态 →](evolution-domains.md)
 
+递归自我改进（RSI）横跨模型、后训练和 Agent，不另建一套重复的论文库；
+[RSI 专题](evolution/recursive-self-improvement.md)说明哪些反馈能够被下一轮继承、
+当前实现到了哪一步，以及怎样检验是否真的持续改进。
+
 跨本地、SSH、Slurm 执行，版本化公平协议，论文到实验提案，配对统计决策和负结果记忆
 由统一平台层提供：[查看自动研究平台 P1 →](research-platform-p1.md)。
 

@@ -14036,6 +14036,72 @@
     },
     {
       "domain": "recommendation",
+      "key": "flvm",
+      "title": "Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation",
+      "paper_url": "https://arxiv.org/abs/2609.32839",
+      "detail_path": "reproductions/2609.32839-flvm/README.md",
+      "topic": [
+        "ranking",
+        "multi-task",
+        "feedback-debiasing"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google / YouTube",
+      "published": "2026-09-26",
+      "code": null,
+      "adapter": {
+        "adapter_key": "flvm",
+        "arxiv_id": "2609.32839",
+        "title": "Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation",
+        "paper_url": "https://arxiv.org/abs/2609.32839",
+        "track": "recommendation",
+        "organization": "Google / YouTube",
+        "published": "2026-09-26",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "multi-task",
+          "feedback-debiasing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/flvm",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "KuaiRand-Pure"
+        ],
+        "baseline": "independently trained shared-trunk multitask control on identical public signals",
+        "metrics": [
+          "variants.flvm.test.signals.is_like.average_precision",
+          "variants.flvm.test.signals.is_hate.average_precision"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "300 updates/model/seed; all KuaiRand-Pure impressions; chronological 70/15/15",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "YouTube Shorts",
+            "metric": "primary viewer enjoyment",
+            "lift_percent": 2.67,
+            "traffic": "14-day online A/B",
+            "source_url": "https://arxiv.org/html/2609.32839",
+            "source_location": "Section 4, online A/B paragraph",
+            "retrieved_at": "2026-09-29"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "friend-gnn",
       "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
       "paper_url": "https://arxiv.org/abs/2608.27413",
@@ -16901,7 +16967,7 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/kuafu-a100-20260929.json",
+        "gpu_validation_artifact": "docs/gpu-validations/kuafu-a100-independent-control-20260929.json",
         "online_evidence": [
           {
             "product": "Tencent advertising and recommendation",
