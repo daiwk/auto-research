@@ -1,0 +1,352 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:flvm",
+  "status": "completed_public_diagnostic",
+  "diagnostic_only": true,
+  "paper_result_reproduced": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "public proxy mechanisms only; sparse negative signal and no production satisfaction labels"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.32839-flvm/metrics/public-seeds42-44.json",
+    "dataset_fingerprint": "429e3b948828942e572f2c3a5be5a25799ffe75591d22d18cf417b9b534d31fd"
+  },
+  "runs": [
+    {
+      "paper": "2609.32839",
+      "seed": 42,
+      "steps_per_variant": 300,
+      "dataset": "KuaiRand-Pure",
+      "source_sha256": "429e3b948828942e572f2c3a5be5a25799ffe75591d22d18cf417b9b534d31fd",
+      "split": {
+        "train": 206847,
+        "validation": 44325,
+        "test": 44325,
+        "method": "global chronological 70/15/15"
+      },
+      "variants": {
+        "flvm": {
+          "train_final_loss": 0.4424484074115753,
+          "validation": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13857,
+                "average_precision": 0.31605682325726536
+              },
+              "is_click": {
+                "positive": 19648,
+                "average_precision": 0.4600577007202335
+              },
+              "is_like": {
+                "positive": 708,
+                "average_precision": 0.01733348910047795
+              },
+              "is_hate": {
+                "positive": 42,
+                "average_precision": 0.001175510808045246
+              }
+            },
+            "valence_mean_like_minus_hate": -0.15364575386047363
+          },
+          "test": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13707,
+                "average_precision": 0.3111645636851855
+              },
+              "is_click": {
+                "positive": 19472,
+                "average_precision": 0.4479436991624803
+              },
+              "is_like": {
+                "positive": 755,
+                "average_precision": 0.01779009165517246
+              },
+              "is_hate": {
+                "positive": 34,
+                "average_precision": 0.010635348535999919
+              }
+            },
+            "valence_mean_like_minus_hate": -0.03358817100524902
+          }
+        },
+        "multitask_control": {
+          "train_final_loss": 0.15926000475883484,
+          "validation": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13857,
+                "average_precision": 0.31728739997037103
+              },
+              "is_click": {
+                "positive": 19648,
+                "average_precision": 0.4524158359705734
+              },
+              "is_like": {
+                "positive": 708,
+                "average_precision": 0.01813240137555017
+              },
+              "is_hate": {
+                "positive": 42,
+                "average_precision": 0.0014829575034017305
+              }
+            }
+          },
+          "test": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13707,
+                "average_precision": 0.3149439683677181
+              },
+              "is_click": {
+                "positive": 19472,
+                "average_precision": 0.44605617367378364
+              },
+              "is_like": {
+                "positive": 755,
+                "average_precision": 0.018446689521838776
+              },
+              "is_hate": {
+                "positive": 34,
+                "average_precision": 0.001651485714629451
+              }
+            }
+          }
+        }
+      },
+      "scope": "Public-data concept diagnostic, not YouTube Shorts satisfaction or online A/B."
+    },
+    {
+      "paper": "2609.32839",
+      "seed": 43,
+      "steps_per_variant": 300,
+      "dataset": "KuaiRand-Pure",
+      "source_sha256": "429e3b948828942e572f2c3a5be5a25799ffe75591d22d18cf417b9b534d31fd",
+      "split": {
+        "train": 206847,
+        "validation": 44325,
+        "test": 44325,
+        "method": "global chronological 70/15/15"
+      },
+      "variants": {
+        "flvm": {
+          "train_final_loss": 0.3981071412563324,
+          "validation": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13857,
+                "average_precision": 0.3194691178338808
+              },
+              "is_click": {
+                "positive": 19648,
+                "average_precision": 0.45872584199105443
+              },
+              "is_like": {
+                "positive": 708,
+                "average_precision": 0.021251420177759817
+              },
+              "is_hate": {
+                "positive": 42,
+                "average_precision": 0.0011259375381507516
+              }
+            },
+            "valence_mean_like_minus_hate": 0.04744899272918701
+          },
+          "test": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13707,
+                "average_precision": 0.3093646735106628
+              },
+              "is_click": {
+                "positive": 19472,
+                "average_precision": 0.4461575850572147
+              },
+              "is_like": {
+                "positive": 755,
+                "average_precision": 0.023549965710726383
+              },
+              "is_hate": {
+                "positive": 34,
+                "average_precision": 0.001223791939244535
+              }
+            },
+            "valence_mean_like_minus_hate": 0.05599403381347656
+          }
+        },
+        "multitask_control": {
+          "train_final_loss": 0.1917411983013153,
+          "validation": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13857,
+                "average_precision": 0.33181863785882876
+              },
+              "is_click": {
+                "positive": 19648,
+                "average_precision": 0.46312592563403826
+              },
+              "is_like": {
+                "positive": 708,
+                "average_precision": 0.017664358273447932
+              },
+              "is_hate": {
+                "positive": 42,
+                "average_precision": 0.0010536861021558468
+              }
+            }
+          },
+          "test": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13707,
+                "average_precision": 0.3251630760009834
+              },
+              "is_click": {
+                "positive": 19472,
+                "average_precision": 0.46376276903407004
+              },
+              "is_like": {
+                "positive": 755,
+                "average_precision": 0.018008183578231623
+              },
+              "is_hate": {
+                "positive": 34,
+                "average_precision": 0.0012677108686924856
+              }
+            }
+          }
+        }
+      },
+      "scope": "Public-data concept diagnostic, not YouTube Shorts satisfaction or online A/B."
+    },
+    {
+      "paper": "2609.32839",
+      "seed": 44,
+      "steps_per_variant": 300,
+      "dataset": "KuaiRand-Pure",
+      "source_sha256": "429e3b948828942e572f2c3a5be5a25799ffe75591d22d18cf417b9b534d31fd",
+      "split": {
+        "train": 206847,
+        "validation": 44325,
+        "test": 44325,
+        "method": "global chronological 70/15/15"
+      },
+      "variants": {
+        "flvm": {
+          "train_final_loss": 0.3813537061214447,
+          "validation": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13857,
+                "average_precision": 0.3166764700850034
+              },
+              "is_click": {
+                "positive": 19648,
+                "average_precision": 0.4522925493011909
+              },
+              "is_like": {
+                "positive": 708,
+                "average_precision": 0.019526893383527005
+              },
+              "is_hate": {
+                "positive": 42,
+                "average_precision": 0.0010143168648779298
+              }
+            },
+            "valence_mean_like_minus_hate": 0.00898587703704834
+          },
+          "test": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13707,
+                "average_precision": 0.300061621042743
+              },
+              "is_click": {
+                "positive": 19472,
+                "average_precision": 0.4349558683489409
+              },
+              "is_like": {
+                "positive": 755,
+                "average_precision": 0.020905141649434657
+              },
+              "is_hate": {
+                "positive": 34,
+                "average_precision": 0.008355568654159568
+              }
+            },
+            "valence_mean_like_minus_hate": -0.0024628639221191406
+          }
+        },
+        "multitask_control": {
+          "train_final_loss": 0.17352968454360962,
+          "validation": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13857,
+                "average_precision": 0.3256517816999606
+              },
+              "is_click": {
+                "positive": 19648,
+                "average_precision": 0.4661139027068126
+              },
+              "is_like": {
+                "positive": 708,
+                "average_precision": 0.01809976850331222
+              },
+              "is_hate": {
+                "positive": 42,
+                "average_precision": 0.0011369043524293379
+              }
+            }
+          },
+          "test": {
+            "impressions": 44325,
+            "signals": {
+              "long_view": {
+                "positive": 13707,
+                "average_precision": 0.3203128248452783
+              },
+              "is_click": {
+                "positive": 19472,
+                "average_precision": 0.45762509745865537
+              },
+              "is_like": {
+                "positive": 755,
+                "average_precision": 0.019055786438287592
+              },
+              "is_hate": {
+                "positive": 34,
+                "average_precision": 0.0014256358317382824
+              }
+            }
+          }
+        }
+      },
+      "scope": "Public-data concept diagnostic, not YouTube Shorts satisfaction or online A/B."
+    }
+  ]
+}

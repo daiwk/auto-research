@@ -35,6 +35,8 @@ def main() -> int:
     parser.add_argument("--max-items", type=int, default=4)
     parser.add_argument("--max-item-tokens", type=int, default=24)
     parser.add_argument("--max-answer-tokens", type=int, default=16)
+    parser.add_argument("--independent-control", action="store_true",
+                        help="train a separate equal-cache-token raw-head Q&A control")
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
     if min(args.train_limit, args.dev_limit, args.max_items,
@@ -45,7 +47,7 @@ def main() -> int:
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from auto_research.reproductions.llm_lora import inject_lora
     from auto_research.reproductions.kuafu.evaluation import (
-        exact_match, greedy_answer, same_token_budget, token_f1,
+        exact_match, greedy_answer, raw_context_qa_loss, same_token_budget, token_f1,
     )
     from auto_research.reproductions.kuafu.model import (
         KuafuSystem, TwoAxisProjector, cosine_residual_scale,
@@ -196,6 +198,81 @@ def main() -> int:
         "control_caveat": "Head/tail/full use the same decoder trained on compressed input; "
                           "these are input ablations, not separately trained baselines.",
     }
+    if args.independent_control:
+        torch.manual_seed(args.seed)
+        control = load_model()
+        control.train()
+        control_optimizer = torch.optim.AdamW(
+            (parameter for parameter in control.parameters() if parameter.requires_grad),
+            lr=1e-5,
+        )
+        control_losses = []
+        control_train = []
+        for example in train:
+            items, question = inputs(example)
+            raw = torch.cat(items)
+            try:
+                head, _ = same_token_budget(
+                    raw, item_count=len(items), tokens_per_item=projector.output_tokens,
+                )
+            except ValueError:
+                continue
+            answer = torch.cat((
+                encode(example.answers[0], args.max_answer_tokens),
+                torch.tensor([tokenizer.eos_token_id], device="cuda"),
+            ))
+            control_train.append((head, question, answer))
+        if not control_train:
+            raise RuntimeError("no train examples support the equal-cache-token raw control")
+        # Match the two compressed QA stages by update count. The compressed
+        # reconstruction stage remains extra work, so this is a diagnostic,
+        # not a FLOP-matched paper baseline.
+        for _epoch in range(2):
+            for head, question, answer in control_train:
+                control_optimizer.zero_grad(set_to_none=True)
+                loss = raw_context_qa_loss(control, head, question, answer)
+                if not torch.isfinite(loss):
+                    raise RuntimeError("non-finite independent control loss")
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(
+                    [parameter for parameter in control.parameters()
+                     if parameter.requires_grad], 1.0,
+                )
+                control_optimizer.step()
+                control_losses.append(float(loss.detach().cpu()))
+        control.eval()
+        independent_scores = {"em": [], "f1": []}
+        with torch.no_grad():
+            for example in dev:
+                items, question = inputs(example)
+                raw = torch.cat(items)
+                try:
+                    head, _ = same_token_budget(
+                        raw, item_count=len(items), tokens_per_item=projector.output_tokens,
+                    )
+                except ValueError:
+                    continue
+                embeddings = control.get_input_embeddings()
+                prefix = torch.cat((embeddings(head), embeddings(question)))
+                answer_ids = greedy_answer(
+                    control, prefix, eos_token_id=tokenizer.eos_token_id,
+                    max_tokens=args.max_answer_tokens,
+                )
+                answer = tokenizer.decode(answer_ids, skip_special_tokens=True)
+                independent_scores["em"].append(exact_match(answer, example.answers))
+                independent_scores["f1"].append(token_f1(answer, example.answers))
+        result["independent_control"] = {
+            "input": "raw_head_equal_cache_tokens",
+            "train_questions": len(control_train),
+            "qa_updates": len(control_losses),
+            "train_final_loss": control_losses[-1],
+            "dev_metrics": {
+                metric: sum(values) / len(values)
+                for metric, values in independent_scores.items()
+            },
+            "budget_caveat": "Equal Q&A update count, not equal FLOPs: compressed arm "
+                             "also trains a reconstruction stage and an encoder/projector.",
+        }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result))

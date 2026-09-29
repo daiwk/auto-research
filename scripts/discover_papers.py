@@ -102,6 +102,7 @@ def main() -> int:
         maximum_results_per_query=args.maximum_results_per_query,
     )
     source_failures = []
+    source_stats = []
     if args.cross_source_config or args.author_page or args.github_page or args.snowball_seeds:
         sources = (
             list(load_sources(args.cross_source_config, args.track))
@@ -115,7 +116,7 @@ def main() -> int:
             DiscoverySource(f"github-page-{index}", "github-page", url)
             for index, url in enumerate(args.github_page, start=1)
         )
-        external, provenance, source_failures = discover_external(
+        external, provenance, source_failures, source_stats = discover_external(
             sources,
             client=client,
             snowball_seeds=(
@@ -147,6 +148,10 @@ def main() -> int:
         ),
         "config": str(args.cross_source_config) if args.cross_source_config else None,
         "source_failures": source_failures,
+        "source_stats": source_stats,
+        "coverage_complete": bool(source_stats) and not source_failures and all(
+            source["status"] == "ok" for source in source_stats
+        ),
     }
     payload["arxiv_transport"] = {
         "cache_dir": str(args.arxiv_cache_dir),

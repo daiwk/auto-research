@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "status": "passed",
+  "diagnostic_only": true,
+  "paper_result_reproduced": false,
+  "manifest_ref": "reproduction:kuafu",
+  "dataset": {
+    "name": "MRQA 2019 SQuAD train/dev",
+    "train_sha256": "096378373b48ee7e0a67ce23ef67217b12fc11ed12c34bc94a235a8ccb299024",
+    "dev_sha256": "b7f3214d3dfe2a9a368ccd8383c162787d08b978e5affd110bd0d9d58f53b0ed",
+    "train_questions": 32,
+    "dev_questions": 32,
+    "sampling": "first question from each of 32 distinct context records per split"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "weights_committed": false
+  },
+  "budget": {
+    "max_items": 4,
+    "max_item_tokens": 24,
+    "cached_tokens_per_item": 2,
+    "compressed_supervised_stages": 3,
+    "independent_control_qa_updates": 64,
+    "independent_control_input": "raw_head_equal_cache_tokens",
+    "fairness_caveat": "Q&A update counts are equal across the two Q&A stages, but total FLOPs are not: compression also trains an encoder, projector, and reconstruction stage."
+  },
+  "seeds": [
+    {
+      "seed": 42,
+      "compressed_dev_em": 0.0,
+      "compressed_dev_f1": 0.08904671717171717,
+      "independent_control_dev_em": 0.0,
+      "independent_control_dev_f1": 0.11462599900099898
+    },
+    {
+      "seed": 43,
+      "compressed_dev_em": 0.0,
+      "compressed_dev_f1": 0.11303488178488177,
+      "independent_control_dev_em": 0.0,
+      "independent_control_dev_f1": 0.12999058233433233
+    },
+    {
+      "seed": 44,
+      "compressed_dev_em": 0.0,
+      "compressed_dev_f1": 0.08341529793735676,
+      "independent_control_dev_em": 0.0,
+      "independent_control_dev_f1": 0.12999058233433233
+    }
+  ],
+  "aggregate_metrics": {
+    "compressed_dev_f1_mean": 0.09516563229798523,
+    "independent_control_dev_f1_mean": 0.12486905455655455,
+    "compressed_minus_control_dev_f1_mean": -0.029703422258569312,
+    "compressed_winning_seeds": 0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Three-seed public small-sample diagnostic; no production, statistical significance, or paper-result claim."
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.31045-kuafu/metrics/mrqa-independent-control-seeds42-44.json",
+    "dataset_fingerprint": "sha256:096378373b48ee7e0a67ce23ef67217b12fc11ed12c34bc94a235a8ccb299024",
+    "raw_predictions_committed": false
+  }
+}

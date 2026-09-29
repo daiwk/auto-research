@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "flvm",
+  "arxiv_id": "2609.32839",
+  "title": "Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation",
+  "paper_url": "https://arxiv.org/abs/2609.32839",
+  "organization": "Google / YouTube",
+  "published": "2026-09-26",
+  "upstream_code": "否：截至 2026-09-29，原文未列作者发布的 FLVM 实现仓库",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "multi-task",
+    "feedback-debiasing"
+  ],
+  "local_code": "src/auto_research/reproductions/flvm",
+  "documentation": "docs/reproductions/2609.32839-flvm/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "KuaiRand-Pure"
+  ],
+  "baseline": "independently trained shared-trunk multitask control on identical public signals",
+  "metrics": [
+    "variants.flvm.test.signals.is_like.average_precision",
+    "variants.flvm.test.signals.is_hate.average_precision"
+  ],
+  "mechanisms": [
+    "private YouTube satisfaction surveys, serving features and production ranker",
+    "production prescoring integration, traffic and online A/B"
+  ],
+  "evolve_operators": []
+}

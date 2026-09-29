@@ -104,6 +104,7 @@
 - 2026-08 · [SPEAR](../2608.01738-spear/README.md)：用双 embedding、confidence×relevance 乘法门和动态 selector 联合优化个性化改写与检索。
 
 ## Google / YouTube
+- 2026-09 · [FLVM](../2609.32839-flvm/README.md)：将观看、参与和正负反馈分为三种潜在因子，以仅见混杂特征的基线隔离时长偏置，再用稀疏路由学习行为残差。
 - 2026-09 · [Light Heads](../2609.25433-light-heads/README.md)：在共享排序塔上配置化注入无梯度浅头，并比较窗口重置和负迁移消融。
 - 2026-09 · [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：异步生成新艺人及理由，经公开目录和标签证据校验后在线从缓存读取；本地不具备原论文的私有评审和 A/B。
 - 2026-07 · [HA-MoE](../2607.27577-ha-moe/README.md)：依据内容异构性动态路由领域、转移、内容与新鲜度专家，在单一模型中统一开放网页排序。

@@ -63,6 +63,8 @@ flowchart LR
 
 **这轮没有发现压缩收益。** 三个 raw 控制复用的是在压缩输入上训练的解码器，只是输入消融，不是独立同预算训练的正式基线；32 题与单 seed 也不足以判断优劣。A100 的幻觉 RL smoke 在 4 个回答上得到同为 `1.0` 的奖励，梯度优势为零，因此返回 `skipped_zero_advantage`，没有把一次空更新写成成功训练。
 
+进一步在 A100 上用同一公开 checkpoint、相同 32/32 题和三个种子，**另起模型**训练开头截断原文对照；对照完成 64 次 QA 更新，对应压缩组的两个 QA 阶段。完整输入长度限定为每条缓存 2 token 的总预算，结果见[独立对照指标](metrics/mrqa-independent-control-seeds42-44.json)：压缩组 dev F1 均值 `0.0952`，独立对照 `0.1249`，三个种子均未超过对照，EM 均为零。这仍**不是等 FLOPs 正式比较**：压缩组还训练重建阶段、encoder 和 projector；任务样本过小，也没有原论文私有数据及生产评测。
+
 ## 运行方式与边界
 
 下载官方 MRQA 的 `SQuAD-train.jsonl.gz`、`SQuAD-dev.jsonl.gz` 到 `data/mrqa/`，本地准备公开 Qwen3-4B-Instruct-2507 checkpoint，并使用 NVIDIA CUDA：
@@ -73,6 +75,8 @@ auto-research reproduce --paper kuafu --dataset-dir data
 ```
 
 也可直接运行 `python scripts/kuafu_public_mrqa.py --help` 调整公开数据诊断预算。训练数据、checkpoint 和评判器不打包进仓库。
+
+若要重复上面的独立对照，在该脚本原有 MRQA 参数后添加 `--independent-control --seed 42`，再分别用 `43`、`44` 重跑；该模式需要足够显存重新加载一个 Qwen3-4B 模型。
 
 - 腾讯私有行为日志、四个画像任务、十亿用户条目缓存与线上 A/B 不可在公开 MRQA 上重现。
 - 公开脚本只跑三段监督训练；第四阶段的代码与采样已验证，但奖励没有形成有效更新。原文 generative reward model 的权重与完整标注未公开，不能拿小样本评判器代替生产结论。

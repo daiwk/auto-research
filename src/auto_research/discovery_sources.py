@@ -61,6 +61,8 @@ def load_sources(path: Path, track: str) -> tuple[DiscoverySource, ...]:
 def fetch_text(url: str, timeout: int = 30) -> str:
     request = urllib.request.Request(url, headers={"User-Agent": "auto-research/0.1"})
     with urllib.request.urlopen(request, timeout=timeout) as response:
+        if "pdf" in response.headers.get("Content-Type", "").lower():
+            raise ValueError("PDF source needs a text/PDF extractor; no HTML coverage claimed")
         return response.read().decode("utf-8", errors="replace")
 
 
@@ -112,15 +114,27 @@ def discover_external(
     client: ArxivClient,
     fetcher: Callable[[str], str] = fetch_text,
     snowball_seeds: Iterable[str] = (),
-) -> tuple[list[Paper], dict[str, list[dict]], list[dict]]:
-    """Fetch sources, resolve IDs through arXiv and retain source failures."""
+) -> tuple[list[Paper], dict[str, list[dict]], list[dict], list[dict]]:
+    """Fetch sources, resolve IDs, and distinguish empty extraction from coverage."""
     hits: list[CrossSourceHit] = []
     failures: list[dict] = []
+    source_stats: list[dict] = []
     for source in sources:
         try:
-            hits.extend(extract_source_hits(source, fetcher(source.url)))
+            extracted = extract_source_hits(source, fetcher(source.url))
+            hits.extend(extracted)
+            source_stats.append({
+                "source": source.name,
+                "url": source.url,
+                "arxiv_ids_extracted": len(extracted),
+                "status": "ok" if extracted else "no_arxiv_ids",
+            })
         except Exception as exc:  # each source is independently auditable
             failures.append({"source": source.name, "url": source.url, "error": str(exc)})
+            source_stats.append({
+                "source": source.name, "url": source.url,
+                "arxiv_ids_extracted": 0, "status": "error",
+            })
     if snowball_seeds:
         try:
             hits.extend(semantic_scholar_citation_hits(snowball_seeds, fetcher=fetcher))
@@ -130,4 +144,4 @@ def discover_external(
     for hit in hits:
         provenance.setdefault(hit.arxiv_id, []).append(hit.provenance())
     papers = client.lookup(provenance)
-    return papers, provenance, failures
+    return papers, provenance, failures, source_stats

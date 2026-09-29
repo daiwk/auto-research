@@ -50,6 +50,18 @@ def same_token_budget(raw_ids: Tensor, *, item_count: int,
     return raw_ids[:budget], raw_ids[-budget:]
 
 
+def raw_context_qa_loss(decoder: torch.nn.Module, context_ids: Tensor,
+                        question_ids: Tensor, answer_ids: Tensor) -> Tensor:
+    """Train an independent raw-token control without exposing answer in the prefix."""
+    if any(value.ndim != 1 or not value.numel()
+           for value in (context_ids, question_ids, answer_ids)):
+        raise ValueError("raw context, question and answer must be nonempty token vectors")
+    source = torch.cat((context_ids, question_ids))
+    tokens = torch.cat((source, answer_ids))
+    labels = torch.cat((torch.full_like(source, -100), answer_ids))
+    return decoder(input_ids=tokens[None], labels=labels[None], return_dict=True).loss
+
+
 def greedy_answer(decoder: torch.nn.Module, prefix: Tensor, *,
                   eos_token_id: int, max_tokens: int) -> Tensor:
     """Decode only from source/prompt prefix; no gold answer enters the model."""
