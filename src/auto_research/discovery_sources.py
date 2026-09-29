@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import datetime as dt
+from html.parser import HTMLParser
 import json
 import re
 from pathlib import Path
 from typing import Callable, Iterable
+import unicodedata
+from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 import urllib.request
 
 from .models import Paper
@@ -18,6 +22,15 @@ ARXIV_LINK = re.compile(
     re.IGNORECASE,
 )
 
+TRACK_TITLE_TERMS = {
+    "recommendation": ("recommend", "rank", "retriev", "advertis", "search", "personaliz"),
+    "foundation-model": ("language model", "transformer", "multimodal", "vision", "token"),
+    "post-training": (
+        "reinforcement", "post-train", "preference", "distill", "reward", "grpo", "dpo",
+    ),
+    "agent": ("agent", "tool", "memory", "planning", "reasoning"),
+}
+
 
 @dataclass(frozen=True)
 class DiscoverySource:
@@ -26,6 +39,8 @@ class DiscoverySource:
     url: str
     track: str = "all"
     organization: str | None = None
+    max_pages: int = 1
+    max_title_lookups: int = 0
 
 
 @dataclass(frozen=True)
@@ -37,9 +52,10 @@ class CrossSourceHit:
     organization: str | None
     relation: str = "direct"
     seed_arxiv_id: str | None = None
+    source_published: str | None = None
 
     def provenance(self) -> dict:
-        return {
+        result = {
             "source": self.source_name,
             "source_kind": self.source_kind,
             "source_url": self.source_url,
@@ -47,6 +63,9 @@ class CrossSourceHit:
             "relation": self.relation,
             "seed_arxiv_id": self.seed_arxiv_id,
         }
+        if self.source_published:
+            result["source_published"] = self.source_published
+        return result
 
 
 def load_sources(path: Path, track: str) -> tuple[DiscoverySource, ...]:
@@ -78,6 +97,99 @@ def extract_source_hits(source: DiscoverySource, content: str) -> tuple[CrossSou
         for identity in dict.fromkeys(
             canonical_arxiv_id(match.group(1)) for match in ARXIV_LINK.finditer(content)
         )
+    )
+
+
+def normalized_title(title: str) -> str:
+    """Conservative cross-source identity: never infer a paper from a fuzzy slug."""
+    normalized = unicodedata.normalize("NFKC", title).casefold()
+    return " ".join("".join(
+        character if character.isalnum() else " " for character in normalized
+    ).split())
+
+
+class _PublicationLinks(HTMLParser):
+    def __init__(self, source_url: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.source_url = source_url
+        self.records: list[tuple[str, str, str | None]] = []
+        self.heading: list[str] | None = None
+        self.last_heading = ""
+        self.paragraph: list[str] | None = None
+        self.last_date: str | None = None
+        self.anchor: list[str] | None = None
+        self.href = ""
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "h4":
+            self.heading = []
+        if tag == "p":
+            self.paragraph = []
+        if tag == "a":
+            self.anchor = []
+            self.href = dict(attrs).get("href") or ""
+
+    def handle_data(self, data: str) -> None:
+        if self.heading is not None:
+            self.heading.append(data)
+        if self.paragraph is not None:
+            self.paragraph.append(data)
+        if self.anchor is not None:
+            self.anchor.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "p" and self.paragraph is not None:
+            value = " ".join("".join(self.paragraph).split())
+            try:
+                self.last_date = dt.datetime.strptime(value, "%B %d, %Y").date().isoformat()
+            except ValueError:
+                pass
+            self.paragraph = None
+        if tag == "h4" and self.heading is not None:
+            self.last_heading = " ".join("".join(self.heading).split())
+            self.heading = None
+        if tag == "a" and self.anchor is not None:
+            url = urljoin(self.source_url, self.href)
+            parsed = urlparse(url)
+            google = parsed.netloc == "research.google" and parsed.path.startswith("/pubs/")
+            meta = parsed.netloc == "ai.meta.com" and parsed.path.startswith(
+                "/research/publications/"
+            )
+            if (google or meta) and parsed.path.rstrip("/") not in {
+                "/pubs", "/research/publications",
+            }:
+                label = " ".join("".join(self.anchor).split())
+                title = self.last_heading if meta or label.lower() == "view details" else label
+                if title and title.lower() not in {"read the paper", "view details"}:
+                    self.records.append((title, url, self.last_date if meta else None))
+            self.anchor = None
+
+
+def publication_records(
+    source: DiscoverySource, content: str,
+) -> tuple[tuple[str, str, str | None], ...]:
+    """Extract official detail links without assuming they expose arXiv IDs."""
+    if urlparse(source.url).netloc not in {"research.google", "ai.meta.com"}:
+        return ()
+    parser = _PublicationLinks(source.url)
+    parser.feed(content)
+    return tuple(dict.fromkeys(parser.records))
+
+
+def page_url(url: str, page: int) -> str:
+    parsed = urlparse(url)
+    query = dict(parse_qsl(parsed.query, keep_blank_values=True))
+    query["page"] = str(page)
+    return urlunparse(parsed._replace(query=urlencode(query)))
+
+
+def prioritized_records(
+    records: Iterable[tuple[str, str, str | None]], track: str,
+) -> list[tuple[str, str, str | None]]:
+    terms = TRACK_TITLE_TERMS.get(track, ())
+    return sorted(
+        records,
+        key=lambda record: not any(term in record[0].casefold() for term in terms),
     )
 
 
@@ -114,21 +226,81 @@ def discover_external(
     client: ArxivClient,
     fetcher: Callable[[str], str] = fetch_text,
     snowball_seeds: Iterable[str] = (),
+    known_papers: Iterable[Paper] = (),
+    track: str = "all",
 ) -> tuple[list[Paper], dict[str, list[dict]], list[dict], list[dict]]:
     """Fetch sources, resolve IDs, and distinguish empty extraction from coverage."""
     hits: list[CrossSourceHit] = []
+    title_resolved_papers: list[Paper] = []
     failures: list[dict] = []
     source_stats: list[dict] = []
+    title_index: dict[str, list[Paper]] = {}
+    known_ids: set[str] = set()
+    for paper in known_papers:
+        title_index.setdefault(normalized_title(paper.title), []).append(paper)
+        known_ids.add(canonical_arxiv_id(paper.arxiv_id))
     for source in sources:
         try:
-            extracted = extract_source_hits(source, fetcher(source.url))
+            if source.max_pages < 1 or source.max_title_lookups < 0:
+                raise ValueError("max_pages must be positive and max_title_lookups non-negative")
+            extracted: list[CrossSourceHit] = []
+            records: dict[str, tuple[str, str, str | None]] = {}
+            for page in range(1, source.max_pages + 1):
+                url = source.url if page == 1 else page_url(source.url, page)
+                content = fetcher(url)
+                extracted.extend(extract_source_hits(source, content))
+                for title, detail_url, published in publication_records(source, content):
+                    records.setdefault(detail_url, (title, detail_url, published))
+            direct_count = len(extracted)
+            matched = 0
+            title_lookups = 0
+            lookup_errors: list[dict] = []
+            unresolved: list[dict] = []
+            for title, detail_url, published in prioritized_records(records.values(), track):
+                candidates = title_index.get(normalized_title(title), ())
+                identities = {canonical_arxiv_id(item.arxiv_id) for item in candidates}
+                if not identities and title_lookups < source.max_title_lookups:
+                    title_lookups += 1
+                    try:
+                        searched = client.search(title, limit=5, match="all")
+                        exact = [
+                            item for item in searched
+                            if normalized_title(item.title) == normalized_title(title)
+                        ]
+                        identities = {canonical_arxiv_id(item.arxiv_id) for item in exact}
+                        if len(identities) == 1:
+                            title_resolved_papers.extend(exact)
+                    except Exception as exc:
+                        lookup_errors.append({"title": title, "error": str(exc)})
+                if len(identities) == 1:
+                    extracted.append(CrossSourceHit(
+                        identities.pop(), source.name, source.kind, detail_url,
+                        source.organization, "exact-title", source_published=published,
+                    ))
+                    matched += 1
+                else:
+                    item = {"title": title, "url": detail_url}
+                    if published:
+                        item["source_published"] = published
+                    unresolved.append(item)
             hits.extend(extracted)
-            source_stats.append({
+            stat = {
                 "source": source.name,
                 "url": source.url,
-                "arxiv_ids_extracted": len(extracted),
-                "status": "ok" if extracted else "no_arxiv_ids",
-            })
+                "arxiv_ids_extracted": direct_count,
+                "status": "partial" if records else "ok" if extracted else "no_arxiv_ids",
+            }
+            if records:
+                stat.update({
+                    "pages_scanned": source.max_pages,
+                    "official_publications": len(records),
+                    "exact_title_matches": matched,
+                    "title_lookups_attempted": title_lookups,
+                    "title_lookup_errors": lookup_errors,
+                    "unresolved_publications": unresolved,
+                    "note": "Listing is not proof of exhaustive date coverage; unresolved titles require review.",
+                })
+            source_stats.append(stat)
         except Exception as exc:  # each source is independently auditable
             failures.append({"source": source.name, "url": source.url, "error": str(exc)})
             source_stats.append({
@@ -143,5 +315,13 @@ def discover_external(
     provenance: dict[str, list[dict]] = {}
     for hit in hits:
         provenance.setdefault(hit.arxiv_id, []).append(hit.provenance())
-    papers = client.lookup(provenance)
-    return papers, provenance, failures, source_stats
+    try:
+        papers = client.lookup([
+            identity for identity in provenance if identity not in known_ids
+        ])
+    except Exception as exc:
+        failures.append({"source": "arxiv-id-lookup", "error": str(exc)})
+        papers = []
+    resolved = {canonical_arxiv_id(item.arxiv_id): item for item in papers}
+    resolved.update({canonical_arxiv_id(item.arxiv_id): item for item in title_resolved_papers})
+    return list(resolved.values()), provenance, failures, source_stats

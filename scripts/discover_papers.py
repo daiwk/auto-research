@@ -19,7 +19,8 @@ from auto_research.discovery import (
     paper_is_in_window,
 )
 from auto_research.discovery_sources import DiscoverySource, discover_external, load_sources
-from auto_research.papers import ArxivClient
+from auto_research.papers import ArxivClient, canonical_arxiv_id
+from auto_research.models import Paper
 
 
 def effective_start_date(
@@ -36,6 +37,19 @@ def effective_start_date(
     if announcement_overlap_days < 0:
         raise ValueError("announcement-overlap-days must be non-negative")
     return requested_start - dt.timedelta(days=announcement_overlap_days)
+
+
+def external_paper_in_window(
+    paper: Paper, provenance: dict[str, list[dict]], *,
+    start_date: dt.date, end_date: dt.date,
+) -> bool:
+    if paper_is_in_window(paper, start_date=start_date, end_date=end_date):
+        return True
+    return any(
+        start_date <= dt.date.fromisoformat(item["source_published"]) <= end_date
+        for item in provenance.get(canonical_arxiv_id(paper.arxiv_id), ())
+        if item.get("source_published")
+    )
 
 
 def main() -> int:
@@ -119,12 +133,14 @@ def main() -> int:
         external, provenance, source_failures, source_stats = discover_external(
             sources,
             client=client,
+            known_papers=(item.paper for item in papers),
+            track=args.track,
             snowball_seeds=(
                 value.strip() for value in args.snowball_seeds.split(",") if value.strip()
             ),
         )
-        external = [paper for paper in external if paper_is_in_window(
-            paper, start_date=start_date, end_date=args.end_date
+        external = [paper for paper in external if external_paper_in_window(
+            paper, provenance, start_date=start_date, end_date=args.end_date,
         )]
         papers = merge_external_candidates(papers, external, provenance)
     statuses = repository_paper_statuses(Path(args.manifest), Path(args.ledger))
