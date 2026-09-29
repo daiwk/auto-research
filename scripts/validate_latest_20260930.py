@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -47,12 +48,21 @@ def _language_model_logits(model_id: str, revision: str, device: str):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_id, revision=revision, local_files_only=True
+    load_target = model_id
+    cached_snapshot = (
+        Path(os.environ.get("HF_HOME", Path.home() / ".cache" / "huggingface"))
+        / "hub"
+        / f"models--{model_id.replace('/', '--')}"
+        / "snapshots"
+        / revision
     )
+    if cached_snapshot.is_dir():
+        # Passing the concrete cached snapshot avoids transformers metadata
+        # requests while the public id/revision remain the command contract.
+        load_target = str(cached_snapshot)
+    tokenizer = AutoTokenizer.from_pretrained(load_target, local_files_only=True)
     model = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        revision=revision,
+        load_target,
         local_files_only=True,
         torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32,
     ).to(device)
