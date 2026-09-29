@@ -39,7 +39,19 @@
     "adapter_parameter_delta_l2": 0.09822092745005068,
     "validation_improved": false,
     "formal_paper_result_reproduced": false,
-    "diagnostic_only": true
+    "diagnostic_only": true,
+    "tokenizer_compatibility_recheck": {
+      "code_commit": "cdb53fe5a914505f097e0798107de368740a6921",
+      "seed": 42,
+      "warmup_updates": 2,
+      "rl_updates": 2,
+      "group_size": 4,
+      "validation_jsd_before": 0.41272565263942185,
+      "validation_jsd_after": 0.41272565263942185,
+      "test_jsd_after": 0.44827065307054925,
+      "adapter_parameter_delta_l2": 0.029025848443696434,
+      "result": "passed"
+    }
   },
   "provenance": {
     "commit": "4c3051124c219e0ceb0bea7cee63cf123e52bb33",

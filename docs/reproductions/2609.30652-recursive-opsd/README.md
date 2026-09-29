@@ -75,6 +75,18 @@ $$
 
 三组在两道验证题上**没有准确率改善证据**，长度也没有变短；测试题仅在训练后读取，2/2 不能代表泛化收益。底层 JSON 及公开来源见 [A100 验证凭据](../../gpu-validations/recursive-opsd-a100-20260929.json)。
 
+### 三种子同预算补充诊断
+
+在同一公开 Qwen3-4B checkpoint 和官方 GSM8K 修订上，进一步固定 seed `42/43/44`、每臂 2 次更新、每次生成上限 96 token。各臂共用前 4 道训练题、随后 4 道验证题，以及与训练文件隔离的前 4 道官方测试题。只按三种子的**验证均值**选方法；测试结果不参与选择。`frozen` 是同一 assistant-side 提示的冻结教师控制，仍不是论文原版 OPSD 基线。
+
+| 方法 | 验证准确率（42/43/44） | 测试准确率（42/43/44） |
+|---|---|---|
+| 动态 DCE+SRCL | 0.25 / 0.25 / 0 | 0.5 / 0.5 / 0.5 |
+| 冻结教师+SRCL | 0.25 / 0.25 / 0.25 | 0.5 / 0.5 / 0.5 |
+| 动态 DCE-only | 0.25 / 0.25 / 0 | 0.5 / 0.5 / 0.5 |
+
+验证集选中冻结教师控制；其测试结果与其他两臂完全相同，**没有证明动态共演化或 SRCL 的效果提升**。四道验证与测试题只适合检查训练、对照、切分和指标链路，不支持统计显著性或论文级收益。可重跑的配对审计程序是 `scripts/compare_recursive_opsd_public.py`；[脱敏三种子指标](../../experiments/evidence/recursive-opsd-qwen3-gsm8k-seeds42-44.json)记录数据哈希、checkpoint 修订、逐 seed 数值和运行代码提交。
+
 ## 运行方式与边界
 
 准备官方 [GSM8K](https://github.com/openai/grade-school-math) 的 `train.jsonl`、`test.jsonl` 放进 `data/gsm8k/`，并准备公开的 Qwen3-4B-Instruct-2507 checkpoint。CUDA 环境运行：
@@ -88,3 +100,10 @@ PYTHONPATH=src python scripts/recursive_opsd_public_math.py \
 ```
 
 这是**概念验证**：目标函数、动态教师刷新、自改写及验收、真实 checkpoint 参数更新已经执行；但题目分布、规模、rank、训练步数及论文对照协议都不同。GSM8K 的数值答案验收也不能替代论文的 `math_verify` 盒装答案规则。后续只有在公开 OpenThoughts 精确切分、四项原始竞赛基准与同预算基线落地后，才能升级论文效果复现级别。
+
+三种子补充诊断复跑时，对 `42,43,44` 各执行动态、冻结教师及 DCE-only 三臂，保持 `--steps 2 --train-examples 4 --validation-examples 4 --test-examples 4 --max-new-tokens 96` 不变；三臂分别设 `--teacher-mode dynamic --lambda-srcl 0.1`、`--teacher-mode frozen --lambda-srcl 0.1`、`--teacher-mode dynamic --lambda-srcl 0`。产物命名为 `dynamic-42.json` 等，集中放在同一目录后运行：
+
+```bash
+PYTHONPATH=src python scripts/compare_recursive_opsd_public.py \
+  --directory runs/recursive-paired --output runs/recursive-paired-summary.json
+```

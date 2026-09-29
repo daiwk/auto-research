@@ -59,6 +59,25 @@ PYTHONPATH=src python scripts/mad_rl_qwen_choice.py \
 
 可训练 LoRA 参数变化 L2 为 `0.0982`，但这 32 次验证采样没有朝指定 C/D/E 混合目标靠近，不能据此宣称大模型分布匹配成功。独立测试主题在训练后评估，JSD 为 `0.6398`；样本太少，不作泛化结论。GPU、公开 checkpoint 修订与命令见[净化后的验证凭据](../gpu-validations/mad-rl-qwen-choice-a100-20260929.json)。
 
+### 三种子同预算补充诊断
+
+继续在同一 A100、同一公开 checkpoint 和训练/验证/测试主题切分上，对 L2、forward KL、Jensen–Shannon 奖励各跑 seed `42/43/44`。每臂均为 4 次平衡预热、4 次 RL 更新、组大小 8，每个验证或测试主题采样 16 次。只按验证集的有效选项条件 JSD 选奖励，另报告无效输出率；测试不用于选法。
+
+| 奖励 | 验证 JSD（42/43/44，↓） | 测试 JSD（42/43/44，↓） |
+|---|---|---|
+| L2 | 0.4127 / 0.4127 / 0.4127 | 0.5078 / 0.4483 / 0.4695 |
+| forward KL | 0.4127 / 0.4127 / 0.4127 | 0.5078 / 0.4483 / 0.4695 |
+| Jensen–Shannon | 0.4127 / 0.4127 / 0.4127 | 0.5078 / 0.4483 / 0.4695 |
+
+三臂验证完全打平，按预设平局规则保留 L2 控制；测试同样无差异。三种子验证无效输出率均为 0，但不能因此忽略无效 token 在训练采样分母中的作用。该实验仅证明真实 Qwen 参数更新与同预算对照链路可执行；由于任务仍是本地五选项合成主题，**不能**升级为原论文数学／代码分布匹配复现。逐 seed 脱敏指标见[本批实验记录](evidence/mad-rl-qwen-choice-seeds42-44.json)，选择程序见 `scripts/compare_mad_rl_qwen_choice.py`。
+
+复跑时对 seed `42,43,44` 与 `--divergence l2 / forward-kl / jsd` 分别执行上述 Qwen 脚本，把各臂固定为 `--warmup-steps 4 --steps 4 --group-size 8 --eval-samples 16`，产物命名为 `l2-42.json` 等。随后运行：
+
+```bash
+PYTHONPATH=src python scripts/compare_mad_rl_qwen_choice.py \
+  --directory runs/mad-paired --output runs/mad-paired-summary.json
+```
+
 ## 正式收录前还缺什么
 
 - 取得原论文 PDF 中的真实关键图，并按仓库统一论文页合同保存原图；当前 Meta 官方 PDF 下载在本地与 A100 环境均不可达，不能用自绘图冒充原图。

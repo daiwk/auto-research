@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "evidence_tier": "bounded_public_task_diagnostic",
+  "paper_result_reproduced": false,
+  "selected_by": "validation_only",
+  "test_used_for_selection": false,
+  "baseline": "frozen",
+  "winner": "frozen",
+  "seeds": [42, 43, 44],
+  "arms": ["dynamic", "frozen", "dce"],
+  "budget": {
+    "update_steps": 2,
+    "max_new_tokens_per_generation": 96,
+    "train_examples": 4,
+    "validation_examples": 4,
+    "test_examples": 4,
+    "dataset_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "checkpoint_revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "dataset_sha256": {
+    "train": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14"
+  },
+  "validation_accuracy_by_seed": {
+    "dynamic": [0.25, 0.25, 0.0],
+    "frozen": [0.25, 0.25, 0.25],
+    "dce": [0.25, 0.25, 0.0]
+  },
+  "test_accuracy_by_seed": {
+    "dynamic": [0.5, 0.5, 0.5],
+    "frozen": [0.5, 0.5, 0.5],
+    "dce": [0.5, 0.5, 0.5]
+  },
+  "paired_test_delta_selected_vs_frozen": [0.0, 0.0, 0.0],
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "code_commit": "cdb53fe5a914505f097e0798107de368740a6921"
+}

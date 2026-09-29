@@ -37,7 +37,10 @@
 覆盖四领域、每查询前 50 条，并将原始本窗口发表与晚索引/历史未审分开；
 Meta 官方总入口 500 和 GitHub 机构 API 403 仍使跨来源水位不可推进。
 新增待验收优先队列：KuaFu（工业 P0）、Meta Recursive OPD（P0）、
-ActKV/ToolSearcher/Code Skills（P1）。这些均是**待实现**，不是本仓库已有 adapter。
+ActKV/ToolSearcher/Code Skills（P1）。其中 ActKV 与 ToolSearcher 已有可测试的
+**机制内核**，但缺真实推理器、原文环境和同预算基线；Code-Based Skills 仍待
+NLE/MiniHack 环境对照。三者都**不是**完整论文 adapter，见
+[合并批次边界](experiments/sep29-consolidated-mechanisms.md)。
 
 System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通；测试集与 OOD
 仅在选择后读取，冠军没有优于初始配置。数据哈希、指标和运行边界见
@@ -64,7 +67,7 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP27-02 | P0 · TikTok | 公开核心机制与公平对照已实现 · [PR #169](https://github.com/daiwk/auto-research/pull/169) | [X-Rec](reproductions/2609.29180-xrec/README.md)：同 200 更新步的 SID-AR 对照、20×1 全目录召回与 CPU 生成吞吐已测；本地低预算结果为负，非生产 ANN 或线上复现 |
 | SEP27-03 | P0 · Alibaba | 待实现 | CMRec：一作单位已核对为 Alibaba International Digital Commerce Group；尚须核查官方代码与可用跨域数据，完成共享语义代码本、双约束 code-mixing 和上下文加权损失的跨域消融 |
 | SEP27-04 | P0 | 公开机制验证已实现 | [AgentX-Model](agent-research/2609.30001-agentx-model/README.md)：双角色提案/执行审查、四类动作、结果盲依赖回放与 MovieLens-1M 六节点三种子对照已运行；原文私有 473 节点图、LLM Agent 和线上收益不可复刻，故标为 concept demo |
-| SEP27-05 | P1 · Meta | 小模型机制诊断已运行；正式复现未完成 | [MaD-RL](experiments/mad-rl-mechanism.md)：已按原文公式实现 L2、forward/reverse KL 与 Jensen–Shannon 分布奖励，并跑完两种目标分布、五种奖励、三种子对照；仍缺可取得的原论文配图和原文规模的公开 checkpoint/任务实验，不登记为正式论文复现 |
+| SEP27-05 | P1 · Meta | 小模型与 A100 三种子机制诊断已运行；正式复现未完成 | [MaD-RL](experiments/mad-rl-mechanism.md)：原文四种分布奖励有单测；Qwen3-4B 在五选项任务上完成 L2/forward KL/JSD 三种子同预算更新，验证和测试没有测出奖励差异。缺原文数学/代码自由生成任务、可核验的原图与原文规模基线，仍不登记正式复现 |
 
 ### 2026-09-28 缩比机制批次与待验证项
 
@@ -75,10 +78,25 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | ID | 优先级 | 状态 | 工作与完成条件 |
 | --- | --- | --- | --- |
 | SEP28-01 | P1 · Agent | L2.1 诊断已运行，正式复现待办 | [GRAFT](experiments/sep28-three-mechanisms.md)：经验轨迹图、Bellman 值、Graph GAE；无金标工具环境的三 seed tabular policy 对照未见提升，仍须 LLM policy 与论文任务环境 |
-| SEP28-02 | P1 · 基础模型 | 小模型公开语料诊断已运行，正式复现待办 | [KITE](experiments/sep28-three-mechanisms.md)：两阶段双塔、KV 不变量、WikiText-2 三 seed 负结果；仍须同 FLOPs scaling 和实测 prefill/decode |
+| SEP28-02 | P1 · 基础模型 | 小模型等算量诊断已运行，正式复现待办 | [KITE](experiments/sep28-three-mechanisms.md)：两阶段双塔、KV 不变量和 WikiText-2 三 seed 负结果；[补做近似等 FLOPs 对照与本机末 token 延迟](experiments/sep29-kite-equal-flops.md)，仍须原文模型规模及真实 GPU prefill/decode |
 | SEP28-03 | P1 · 多模态 | L1 机制已实现，正式复现待办 | [DeltaS](experiments/sep28-three-mechanisms.md)：状态漂移与分桶 KV 淘汰；仍须真实混合模型状态、公开视频、等预算 GPU 验证 |
 | SEP28-04 | P1 · 后训练/Agent | 待全文与数据协议复核 | DCRL、IterSynth：尚未找到能忠实跑通原定义算法且公平评测的公开低预算链路，不用名称注册或金标轨迹冒充实现 |
 | SEP28-05 | P0 · Alibaba | 数据阻塞 | CMRec：Amazon-M2 暂不可用；不伪造跨语区数据或指标，保留 SEP27-03 |
+
+### 2026-09-29 Agent 与后训练合并批次
+
+此批的[证据边界和剩余验收项](experiments/sep29-consolidated-mechanisms.md)集中维护；下表的“机制/诊断”**不等于完整论文 adapter**。
+
+| ID | 优先级 | 当前状态 | 下一道正式验收门槛 |
+|---|---|---|---|
+| SEP29-01 | P1 · Agent 推理效率 | ActKV 动作 attention LRFU 与动态预算机制单测完成 | 原文混合模型真实 KV、paged cache 压实、同预算基线与 A100/A30 端到端延迟/显存 |
+| SEP29-02 | P1 · Agent 检索 | ToolSearcher 首次发现信用、门控和 masked policy loss 单测完成 | 固定版 StableToolBench/工具索引，真实 Qwen 组内 rollout 和 AppWorld 隔离评测 |
+| SEP29-03 | P1 · Code-Based Skills | 原作者 CodeHack+定制 NLE 的真实 MiniHack 三模式、三种子环境烟测完成 | 同模型策略、同决策和环境步数预算的 primitive/skill/mixed 公平对照；当前随机控制器不用于论文性能比较 |
+| SEP29-04 | P0 · Meta 后训练 | Recursive OPSD 官方 GSM8K 三臂三种子 A100 小预算对照完成，负结果 | 原文 OpenThoughts 精确切分、数学基准、原版 OPSD 和更接近论文规模的预算 |
+| SEP29-05 | P1 · Meta 后训练 | MaD-RL Qwen3-4B 三奖励三种子 A100 五选项诊断完成，无差异 | 原文数学/代码自由生成任务与公平基线；合成选择题不能晋升正式复现 |
+| SEP29-06 | P1 · 基础模型 | KITE 小模型近似等 FLOPs/本机延迟对照完成 | 原文规模梯队与真实 GPU prefill/decode 测量 |
+| SEP29-07 | P1 · Agent/多模态 | GRAFT、DeltaS 仍为机制诊断 | 前者需 LLM policy 与论文任务；后者需真实混合模型状态和公开视频 GPU 对照 |
+| SEP29-08 | P0 · 工业推荐 | MuSeR 仍为公开 KuaiRand tag 代理 | 可审计的商品文本/多模态语义与缓存刷新链路；当前公开数据不含相应内容 |
 
 ## 优先级和状态
 
