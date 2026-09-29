@@ -14,7 +14,7 @@
 |---|---|
 | ToolSearcher | 公开 StableToolBench 数据和 16k 工具索引固定版本、Qwen2.5-7B 或 Qwen3-4B 的同预算 RL/基线、AppWorld 测试 |
 | ActKV | 原文模型的真实动作 KV、同预算 FullKV/SnapKV/R-KV 对照、paged kernel 和 A100/A30 吞吐/内存实测 |
-| Code-Based Skills | 原作者 CodeHack 可获取仓库、NetHack/MiniHack 环境、primitive/skill/mixed 同 seed 对照 |
+| Code-Based Skills | 已定位原作者 [CodeHack](https://github.com/BartekCupial/codehack) 和[基线仓库](https://github.com/BartekCupial/codehack-baselines)；尚须固定 commit、安装 NLE/MiniHack、运行 primitive/skill/mixed 同 seed 对照 |
 | GRAFT/KITE/DeltaS | 各自原论文任务/模型环境与公平预算评测；已有低预算诊断不能替代 |
 | Recursive OPSD、MaD-RL | Qwen3-4B 公开任务的多 seed、同预算基线与隔离 test 结果 |
 | MuSeR | 公开商品语义与缓存刷新链路的可审计数据、在线/离线公平对照 |
