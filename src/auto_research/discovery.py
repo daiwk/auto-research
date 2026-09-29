@@ -248,6 +248,14 @@ def render_discovery_summary(payload: dict) -> str:
                 ) + "。未匹配标题与详情链接在 JSON artifact；不能推进全来源覆盖水位。",
                 "",
             ])
+        review_count = cross_source.get("official_review_queue_count", 0)
+        if review_count:
+            artifact = cross_source.get("official_review_output") or "JSON artifact"
+            lines.extend([
+                f"官方标题待核查 {review_count} 组：见 {artifact}。"
+                "同名分组不是论文身份确认，也不是通过收录门槛。",
+                "",
+            ])
         empty_sources = [
             source["source"] for source in cross_source.get("source_stats", [])
             if source["status"] == "no_arxiv_ids"

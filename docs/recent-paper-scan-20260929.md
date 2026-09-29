@@ -23,7 +23,15 @@
 
 现已接入 [Google DeepMind 出版物列表](https://deepmind.google/research/publications/)的标题、详情页和列表日期，以及 [RecSys 2026 海报页 1](https://recsys.acm.org/recsys26/posters-1/)、[页 2](https://recsys.acm.org/recsys26/posters-2/)、[页 3](https://recsys.acm.org/recsys26/posters-3/)和 [SIGIR 2026 官方录用名单](https://sigir2026.org/en-AU/pages/program/accepted-papers)的标题。用真实官网页面做过解析核验：DeepMind **当前首页** 30 条，RecSys 三页 46/44/42 条，SIGIR 各轨道（含全文、短文、工业、资源、演示等）去重后 667 条。这些是**页面标题数，不是新论文数或合格论文数**；SIGIR 页面没有逐篇链接，记录指向官方名单页，RecSys 海报条目指向页面内对应 accordion，均待与原论文一一核对。会议举办日期不冒充论文首次发布日期。会议列表中的 arXiv 引文也不能当作该条海报的论文 ID，只有已知论文或 arXiv 精确标题且唯一匹配才关联。
 
-DeepMind 官网偶发返回 gzip 压缩正文但未以可直接解码的文本呈现，抓取器现识别 gzip 头并解压。上述来源仍标记 `partial`：DeepMind 仅首页、RecSys 仅海报、SIGIR 标题与原文身份仍未逐篇终审，标题反查也受每来源预算限制。`cross_source.coverage_complete` 继续为 `false`。后续应按时间窗口核查未匹配队列、补 DeepMind 分页和 RecSys 主论文列表，并对 Google/Meta 优先候选逐篇核验全文部署证据。
+DeepMind 官网偶发返回 gzip 压缩正文但未以可直接解码的文本呈现，抓取器现识别 gzip 头并解压。此阶段来源仍标记 `partial`：当时 DeepMind 仅首页、RecSys 仅海报，SIGIR 标题与原文身份也未逐篇终审；标题反查受每来源预算限制。`cross_source.coverage_complete` 保持 `false`。以下记录后续补齐分页和正式场次的进展，但不改变逐篇核验全文部署证据的要求。
+
+### 09-29 再次收口：分页、会议场次与待审队列
+
+[Google DeepMind 出版物列表](https://deepmind.google/research/publications/)的实际分页路径是 `/research/publications/page/N/`；发现器现从首页读取末页，并受配置上限约束逐页抓取。真实页面核验时首页声明 9 页，九页分别解析出 30/30/30/30/30/30/30/30/24 个页面条目。此数是**列表条目数**，既未跨页按论文身份去重，也不表示符合本库门槛。现还补入 [RecSys 2026 正式程序](https://recsys.acm.org/recsys26/recsys-26-program/)链接的八个 session 页；真实页面依次解析出 14/13/14/14/14/12/13/14 个条目。它们可能与海报重复，不能直接相加成唯一论文数。
+
+每日扫描额外产出 `paper-official-review-<track>.json`：把官方列表中尚未匹配到唯一 arXiv 身份的标题、详情链接和机构集中保存，Google/Meta 来源优先；相同规范化标题只形成**待审组**，不自动认定为同一篇论文。已收录论文通过 manifest 的精确标题匹配标记，避免重复排队。GitHub API 请求在 Actions 中使用仓库作用域 `GITHUB_TOKEN`，只发送至 HTTPS `api.github.com`。某一分页临时失败会留下显式失败记录并保留其他已抓页面，不会虚报完整覆盖。
+
+本次 source-only 复核中，Google Research 官方页请求超时；它不是“无新论文”的证据，也没有被标记为覆盖完成。Meta 官方页和 GitHub API 的动态可用性同样需由每日 artifact 核对。未匹配标题仍须逐篇查原文身份、一作机构和全文线上证据；历史大队列没有因此获得终审状态，`cross_source.coverage_complete` 继续保持 `false`。
 
 ## 本轮全文复核后的明确项
 
