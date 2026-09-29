@@ -109,7 +109,10 @@ def main() -> int:
     )
     queries = queries_for_track(args.track)
     client = ArxivClient(
-        minimum_interval_seconds=3.0, cache_dir=args.arxiv_cache_dir
+        minimum_interval_seconds=3.0,
+        maximum_retries=5,
+        retry_backoff_seconds=3.0,
+        cache_dir=args.arxiv_cache_dir,
     )
     papers = discover_candidates(
         client,

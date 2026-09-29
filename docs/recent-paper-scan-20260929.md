@@ -33,6 +33,10 @@ DeepMind 官网偶发返回 gzip 压缩正文但未以可直接解码的文本�
 
 本次 source-only 复核中，Google Research 官方页请求超时；它不是“无新论文”的证据，也没有被标记为覆盖完成。Meta 官方页和 GitHub API 的动态可用性同样需由每日 artifact 核对。未匹配标题仍须逐篇查原文身份、一作机构和全文线上证据；历史大队列没有因此获得终审状态，`cross_source.coverage_complete` 继续保持 `false`。
 
+### 09-30 合并后扫描失败与修复
+
+[首次合并后四领域工作流](https://github.com/daiwk/auto-research/actions/runs/36600018480)全部在 arXiv 查询阶段收到 HTTP 429，因而没有生成可审核的候选 artifact；这**不是零候选**。根因是四个 matrix job 并发运行，虽然每个客户端内部间隔三秒，但总体仍违反 [arXiv legacy API 的单连接、每三秒至多一请求限制](https://info.arxiv.org/help/api/tou.html)。后续工作流将四个领域串行调度，并把扫描专用的限流重试延长到最多五次；429 仍须显式失败，不能退化为空结果。修复合并后需重新运行并审核四领域 artifact，才进入下一批论文收录。
+
 ## 本轮全文复核后的明确项
 
 | 候选 | 处理 | 证据及边界 |
