@@ -13,6 +13,12 @@
 
 四条 arXiv 查询本轮均无缓存回退，但**不能推进“全来源已覆盖”水位**。同一来源配置的直接解析复核发现：Google Research、Google DeepMind、Meta AI 官方总入口均可请求但提取 0 个 arXiv ID；RecSys 列表也为 0；SIGIR 配置实际指向 PDF，不能用 HTML 正则解析。首次复核 Google Research/Meta Research GitHub API 分别提取 8/2 个 ID，但验证性重扫时两者遇到 403 速率限制；它们不代表官方出版物入口已覆盖。此前的发现器把“HTTP 成功但提取 0”当作无异常；本轮增加每来源 `arxiv_ids_extracted`、`no_arxiv_ids` 与 `coverage_complete`，PDF 误读明确报错。重扫正确给出 `coverage_complete: false`，并记录 PDF 不兼容及 API 403。后续须补官方出版物详情页遍历或可核验的结构化 feed，再谈跨来源完结。
 
+### 官方来源修复后的复扫（仍为部分覆盖）
+
+发现器现读取 [Google Research 出版物列表](https://research.google/pubs/)与 [Meta AI 出版物列表](https://ai.meta.com/global_search/?content_types%5B0%5D=publication&page=1)的真实标题/详情链接，限定分页并按领域优先选择少量标题反查 arXiv；只有标题精确一致且身份唯一才关联论文。Meta 的列表发布日期另作跨月召回依据。未匹配标题、详情链接、已扫页数和标题查询失败均保留在 JSON artifact，任何一项都不能自动变成“来源覆盖完成”。2025 RecSys 静态页和 SIGIR PDF 已从**每日 HTML 来源配置**移出；它们的历史审计不删除，当前年份会议需另设可解析来源。
+
+修复期间的 09-20～09-29 四领域重叠窗口试跑（候选数不是合格论文数）：推荐 184、基础模型 1048、后训练 542、Agent 950；Google 列表首 3 页约 45 条，Meta 首 2 页约 48 条，均为 `partial`，DeepMind 入口仍为 `no_arxiv_ids`。推荐、基础模型和后训练试跑发生在标题优先级与官方发布日期规则最终调整前，**这些数字不是最终覆盖计数**。后训练试跑从 [Meta 官方 MaD-RL 详情页](https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/)精确对上 [arXiv:2609.31644](https://arxiv.org/abs/2609.31644)；这只证明召回/来源归因，不代表该论文已通过复现门槛。下一步仍需补完整日期分页、DeepMind 官方详情、当前会议来源与所有未匹配条目的逐篇核查；在此之前 `cross_source.coverage_complete` 应继续为 `false`。
+
 ## 本轮全文复核后的明确项
 
 | 候选 | 处理 | 证据及边界 |

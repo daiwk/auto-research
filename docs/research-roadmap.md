@@ -126,7 +126,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | DISC-001 | DONE | 每日四领域多查询、分页、canonical arXiv ID 去重 | GitHub Actions 生成四个候选 artifact |
 | DISC-002 | DONE | 候选与 manifest、历史 ledger 自动差分 | JSON 和 Actions 摘要区分新候选、已实现、已审计 |
 | DISC-003 | DONE | Google / Meta 新候选自动置顶预警 | 仅两家触发 warning；Netflix 等保持普通候选 |
-| DISC-004 | PARTIAL · [PR #113](https://github.com/daiwk/auto-research/pull/113) 建立框架；09-29 审计发现零 ID/403/PDF 缺口 | 跨来源召回 | 现已显式报告单源失败和零提取；待官方详情页/feed、会议 PDF 解析及 GitHub 限流处理通过真实复扫，才能称跨来源覆盖完成 |
+| DISC-004 | PARTIAL · [PR #113](https://github.com/daiwk/auto-research/pull/113) 建立框架；09-29 官方列表标题/详情链接有限分页对账，仍非全量 | 跨来源召回 | 保留未匹配官方论文队列与 `partial` 状态；待完整日期分页、DeepMind/当年会议来源及 GitHub 限流处理通过复扫，才能称跨来源覆盖完成 |
 | DISC-005 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 批次终态自动回写 | 回写器要求全部新候选终态；strict audit 可核对待审 artifact 与 ledger |
 
 每个新工业候选先按“机构/主题”召回，再读 PDF/HTML 全文。只有量化线上 A/B，或用户

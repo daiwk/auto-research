@@ -235,6 +235,19 @@ def render_discovery_summary(payload: dict) -> str:
             "",
         ])
     if cross_source:
+        partial_sources = [
+            source for source in cross_source.get("source_stats", [])
+            if source["status"] == "partial"
+        ]
+        if partial_sources:
+            lines.extend([
+                "官方列表仅部分对账：" + "、".join(
+                    f"{source['source']}（精确匹配 {source['exact_title_matches']}，"
+                    f"未匹配 {len(source['unresolved_publications'])}）"
+                    for source in partial_sources
+                ) + "。未匹配标题与详情链接在 JSON artifact；不能推进全来源覆盖水位。",
+                "",
+            ])
         empty_sources = [
             source["source"] for source in cross_source.get("source_stats", [])
             if source["status"] == "no_arxiv_ids"
@@ -381,7 +394,12 @@ def merge_external_candidates(
 ) -> list[DiscoveredPaper]:
     """Merge external recall without erasing query or source provenance."""
     merged = {
-        canonical_arxiv_id(item.paper.arxiv_id): item for item in arxiv_results
+        canonical_arxiv_id(item.paper.arxiv_id): DiscoveredPaper(
+            item.paper, item.query_names,
+            tuple((*item.source_provenance, *provenance.get(
+                canonical_arxiv_id(item.paper.arxiv_id), (),
+            ))),
+        ) for item in arxiv_results
     }
     for paper in external_papers:
         identity = canonical_arxiv_id(paper.arxiv_id)
@@ -390,9 +408,12 @@ def merge_external_candidates(
         if current is None:
             merged[identity] = DiscoveredPaper(paper, (), sources)
         else:
+            additional = tuple(
+                source for source in sources if source not in current.source_provenance
+            )
             merged[identity] = DiscoveredPaper(
                 paper if paper.published > current.paper.published else current.paper,
                 current.query_names,
-                tuple((*current.source_provenance, *sources)),
+                tuple((*current.source_provenance, *additional)),
             )
     return sorted(merged.values(), key=lambda item: item.paper.published, reverse=True)
