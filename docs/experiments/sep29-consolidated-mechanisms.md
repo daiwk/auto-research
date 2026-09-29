@@ -6,6 +6,7 @@
 
 - [ToolSearcher](https://arxiv.org/html/2609.30906)：`toolsearcher_credit.py` 实现原文式 (2)、(5)、(7) 的首次发现事件、组内归一化信用与“先搜齐、后选择”的门控。原作者[公开仓库](https://github.com/zhenlongDai/ToolSearcher)含 StableToolBench/AppWorld 训练流程。本地目前只检验信用分配，不宣称完成 Qwen RL、检索器或 AppWorld 评测。
 - [ActKV](https://arxiv.org/html/2609.31395)：`actkv_policy.py` 实现 Algorithm 1 的动作区域 attention-aware LRFU 选择。原文的 paged attention 恢复、CUDA 原位压实、真实 Agent 回合及吞吐未接入；因此这里只是算法单元，不是端到端 ActKV。
+- `paired_public_comparison.py` 严格要求至少三种子、同 checkpoint/数据版本、同更新与生成 token 预算，仅用 validation 选方法，再报告成对 test 差值。它只检查已运行实验的比较协议，**不会自行产生 Qwen 实验结果**。
 
 ## 完整复现前的门槛
 
