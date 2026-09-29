@@ -5201,6 +5201,16 @@
         "fingerprint": "4c9184854f8622eda4856454ba9aa99552a391191699624cee5d0e8b674bbb8b"
       }
     ],
+    "src/auto_research/agent_research/latest_20260930.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "train_step",
+        "line": 110,
+        "qualified_name": "HarnessProposer.train_step",
+        "expression": "self.logits += learning_rate * gradient",
+        "fingerprint": "fcadd80d24f89bb07878137f477329be037f25c5b8ff6c952d0b468a7923ee84"
+      }
+    ],
     "src/auto_research/agent_research/lightning_policy.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11145,7 +11155,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 119,
+        "line": 126,
         "qualified_name": "apply",
         "expression": "state.reward_axis_weights /= state.reward_axis_weights.sum()",
         "fingerprint": "09f33b5afa92e20e613d9cd0d8c98dc7808363f0495a7a1b2902d242cca9856b"
@@ -11153,7 +11163,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "apply",
-        "line": 120,
+        "line": 127,
         "qualified_name": "apply",
         "expression": "state.drift_events += 1",
         "fingerprint": "549eef05733c5296b37b8e3aa03551ed1f1c77dc2fa8a78165b34ba82cc72515"
@@ -11163,7 +11173,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 58,
+        "line": 59,
         "qualified_name": "update",
         "expression": "state.weights += learning_rate * np.clip(gradient, -5.0, 5.0)",
         "fingerprint": "b6a0c91a64d121c2aebc293682cc80891fb4b00f45df453786621db9c500d8b7"
@@ -11171,7 +11181,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 92,
+        "line": 94,
         "qualified_name": "update",
         "expression": "state.variant_updates += 1",
         "fingerprint": "893bef108fce174b29a88dcfb593d6773edd36efd7d2862213d54d73a56b808c"
@@ -11179,7 +11189,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "update",
-        "line": 97,
+        "line": 99,
         "qualified_name": "update",
         "expression": "state.online_rollout_refreshes += 1",
         "fingerprint": "7c428a44c4ff081ae94e4d66fcd286d3affd4bdc54a29da050685b33110e603c"

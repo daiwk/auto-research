@@ -37,7 +37,7 @@ flowchart LR
 
 ### 核心公式
 
-设回顾 token 集合为 \(R\)，本地严格执行论文的全局归一化目标：\(\mathcal L=-\frac{1}{|R|}\sum_{t\in R}\log p_\theta(r_t\mid x,\tau,f,r_{<t})\)。任务、动作、观察与反馈位置的 target mask 均为 0，但仍可作为回顾生成的上下文。
+设回顾 token 集合为 $R$，本地严格执行论文的全局归一化目标：$\mathcal L=-\frac{1}{|R|}\sum_{t\in R}\log p_\theta(r_t\mid x,\tau,f,r_{<t})$。任务、动作、观察与反馈位置的 target mask 均为 0，但仍可作为回顾生成的上下文。
 
 ### 论文离线与线上效果
 

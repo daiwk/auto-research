@@ -38,7 +38,7 @@ flowchart LR
 
 ### 核心公式
 
-非终态满足 \(\Phi(s)=\gamma\,\mathbb E_{a\sim\hat q}[\Phi(s')]\)，成功终态为 1、失败终态为 0。势能 \(\Psi(s)=\log\max(\Phi(s),\epsilon)\)，单步信用为 \(\Psi(s')-\Psi(s)\)，再在共享起点的动作间标准化。
+非终态满足 $\Phi(s)=\gamma\,\mathbb E_{a\sim\hat q}[\Phi(s')]$，成功终态为 1、失败终态为 0。势能 $\Psi(s)=\log\max(\Phi(s),\epsilon)$，单步信用为 $\Psi(s')-\Psi(s)$，再在共享起点的动作间标准化。
 
 ### 论文离线与线上效果
 

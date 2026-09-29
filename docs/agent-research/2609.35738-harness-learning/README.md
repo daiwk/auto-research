@@ -38,7 +38,7 @@ flowchart LR
 
 ### 核心公式
 
-本地 proposer 使用组内相对执行奖励更新分类策略：\(A_i=r_i-\bar r\)，并对 revision logit 做 REINFORCE 更新。适配接口只接收执行报告中的 score 与 failure 类型，没有 gold answer、gold plan 或隐藏 verifier 字段。
+本地 proposer 使用组内相对执行奖励更新分类策略：$A_i=r_i-\bar r$，并对 revision logit 做 REINFORCE 更新。适配接口只接收执行报告中的 score 与 failure 类型，没有 gold answer、gold plan 或隐藏 verifier 字段。
 
 ### 论文离线与线上效果
 

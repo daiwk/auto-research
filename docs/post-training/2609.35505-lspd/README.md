@@ -39,7 +39,7 @@ flowchart LR
 
 ### 核心公式
 
-对差值 \(d_t=\log\pi_\theta(y_t)-\operatorname{sg}(\log\pi_T(y_t))\)，本地实现 \(|d_t|\le c\) 时的 \(d_t^2\) 与尾部 \(2c|d_t|-c^2\)，再减去熵系数项。每个 response 先按有效 token 平均，再在 batch 内等权平均。
+对差值 $d_t=\log\pi_\theta(y_t)-\operatorname{sg}(\log\pi_T(y_t))$，本地实现 $|d_t|\le c$ 时的 $d_t^2$ 与尾部 $2c|d_t|-c^2$，再减去熵系数项。每个 response 先按有效 token 平均，再在 batch 内等权平均。
 
 ### 论文离线与线上效果
 

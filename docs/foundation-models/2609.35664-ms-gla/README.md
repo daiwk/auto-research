@@ -42,7 +42,7 @@ flowchart LR
 
 ### 核心公式
 
-本地实现论文式 masked block average；尺度 \(s\) 的块表示只有在块末 token 到达后才可见，杜绝未来信息泄漏。融合权重 \(\alpha_{t,s}=\operatorname{softmax}_s(W_f h_t)\)，输出为 \(\sum_s\alpha_{t,s}\tilde o_{t,s}\)。
+本地实现论文式 masked block average；尺度 $s$ 的块表示只有在块末 token 到达后才可见，杜绝未来信息泄漏。融合权重 $\alpha_{t,s}=\operatorname{softmax}_s(W_f h_t)$，输出为 $\sum_s\alpha_{t,s}\tilde o_{t,s}$。
 
 ### 论文离线与线上效果
 
