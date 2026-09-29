@@ -18,7 +18,10 @@ from auto_research.discovery import (
     merge_external_candidates,
     paper_is_in_window,
 )
-from auto_research.discovery_sources import DiscoverySource, discover_external, load_sources
+from auto_research.discovery_sources import (
+    DiscoverySource, catalog_papers_from_manifest, discover_external, load_sources,
+    official_review_queue,
+)
 from auto_research.papers import ArxivClient, canonical_arxiv_id
 from auto_research.models import Paper
 
@@ -76,6 +79,7 @@ def main() -> int:
     parser.add_argument("--maximum-results-per-query", type=int, default=200)
     parser.add_argument("--output")
     parser.add_argument("--summary-output")
+    parser.add_argument("--official-review-output")
     parser.add_argument("--github-actions", action="store_true")
     parser.add_argument("--manifest", default="docs/research-manifest.json")
     parser.add_argument("--ledger", default="docs/paper-discovery-ledger.json")
@@ -134,6 +138,7 @@ def main() -> int:
             sources,
             client=client,
             known_papers=(item.paper for item in papers),
+            catalog_papers=catalog_papers_from_manifest(Path(args.manifest)),
             track=args.track,
             snowball_seeds=(
                 value.strip() for value in args.snowball_seeds.split(",") if value.strip()
@@ -169,6 +174,19 @@ def main() -> int:
             source["status"] == "ok" for source in source_stats
         ),
     }
+    review_queue = official_review_queue(source_stats)
+    payload["cross_source"]["official_review_queue_count"] = len(review_queue)
+    if args.official_review_output:
+        Path(args.official_review_output).write_text(json.dumps({
+            "schema_version": 1,
+            "track": args.track,
+            "window": {"start": str(start_date), "end": str(args.end_date)},
+            "review_state": "identity_unresolved",
+            "coverage_complete": payload["cross_source"]["coverage_complete"],
+            "source_failures": source_failures,
+            "items": review_queue,
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        payload["cross_source"]["official_review_output"] = args.official_review_output
     payload["arxiv_transport"] = {
         "cache_dir": str(args.arxiv_cache_dir),
         "cache_fallback_pages": len(client.cache_fallbacks),

@@ -33,6 +33,7 @@ jobs:
       - name: Build high-recall candidate queue
         env:
           LOOKBACK_DAYS: ${{ inputs.lookback_days || '14' }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: >-
           python scripts/discover_papers.py
           --track "${{ matrix.track }}"
@@ -41,6 +42,7 @@ jobs:
           --maximum-results-per-query 200
           --output "paper-candidates-${{ matrix.track }}.json"
           --summary-output "paper-candidates-${{ matrix.track }}.md"
+          --official-review-output "paper-official-review-${{ matrix.track }}.json"
           --cross-source-config configs/paper-discovery-sources.json
           --github-actions
       - name: Publish candidate diff
@@ -51,4 +53,5 @@ jobs:
           path: |
             paper-candidates-${{ matrix.track }}.json
             paper-candidates-${{ matrix.track }}.md
+            paper-official-review-${{ matrix.track }}.json
           retention-days: 30

@@ -10,7 +10,8 @@ from auto_research.discovery import (
 )
 import datetime as dt
 from auto_research.discovery_sources import (
-    DiscoverySource, discover_external, extract_source_hits, fetch_text, page_url,
+    DiscoverySource, catalog_papers_from_manifest, discover_external, extract_source_hits,
+    fetch_text, official_review_queue, page_url,
     publication_records, normalized_title,
     semantic_scholar_citation_hits,
 )
@@ -38,6 +39,25 @@ def test_fetch_text_decodes_gzip_even_when_origin_omits_content_encoding(monkeyp
     response.headers = {"Content-Type": "text/html"}
     monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: response)
     assert fetch_text("https://example.org/") == "<html>official listing</html>"
+
+
+def test_github_token_is_only_sent_to_https_github_api(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token")
+    requests = []
+
+    def fake_urlopen(request, timeout):
+        requests.append(request)
+        response = io.BytesIO(b"{}")
+        response.headers = {"Content-Type": "application/json"}
+        return response
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    fetch_text("https://api.github.com/orgs/google-research/repos")
+    fetch_text("https://example.org/")
+    fetch_text("http://api.github.com/")
+    assert requests[0].get_header("Authorization") == "Bearer test-token"
+    assert requests[1].get_header("Authorization") is None
+    assert requests[2].get_header("Authorization") is None
 
 
 def test_title_identity_does_not_collapse_word_boundaries():
@@ -171,6 +191,137 @@ def test_deepmind_listing_extracts_dated_official_cards_only():
     assert publication_records(source, html) == ((
         "Designing Proactive Thought Partners for Writing",
         "https://deepmind.google/research/publications/265605/", "2026-09-01",
+    ),)
+
+
+def test_deepmind_pagination_follows_official_paths_and_reports_cap():
+    source = DiscoverySource(
+        "DeepMind", "official-research", "https://deepmind.google/research/publications/",
+        max_pages=2,
+    )
+    requested = []
+
+    def fetcher(url):
+        requested.append(url)
+        page = len(requested)
+        return (
+            '<a href="/research/publications/page/2/">2</a>'
+            '<a href="/research/publications/page/3/">3</a>'
+            f'<a href="/research/publications/{page}/">'
+            f'<span class="list-group__description">Paper {page}</span></a>'
+        )
+
+    class Client:
+        def lookup(self, ids):
+            assert not ids
+            return []
+
+    _, _, failures, stats = discover_external([source], client=Client(), fetcher=fetcher)
+    assert not failures
+    assert requested == [source.url, "https://deepmind.google/research/publications/page/2/"]
+    assert stats[0]["pages_scanned"] == 2
+    assert stats[0]["pages_available"] == 3
+    assert stats[0]["pagination_capped"] is True
+    assert stats[0]["official_publications"] == 2
+
+
+def test_one_failed_listing_page_preserves_other_pages_and_reports_gap():
+    source = DiscoverySource(
+        "Google", "official-research", "https://research.google/pubs/",
+        max_pages=3,
+    )
+
+    def fetcher(url):
+        if "page=2" in url:
+            raise TimeoutError("page unavailable")
+        return (
+            f'<a href="/pubs/paper-{url[-1]}/">'
+            f'Paper {url[-1]}</a>'
+        )
+
+    class Client:
+        def lookup(self, ids):
+            assert not ids
+            return []
+
+    _, _, failures, stats = discover_external(
+        [source], client=Client(), fetcher=fetcher,
+    )
+    assert failures == [{
+        "source": "Google", "url": page_url(source.url, 2),
+        "page": 2, "error": "page unavailable",
+    }]
+    assert stats[0]["status"] == "partial"
+    assert stats[0]["pages_scanned"] == 2
+    assert stats[0]["official_publications"] == 2
+    assert stats[0]["page_failures"] == failures
+
+
+def test_manifest_exact_title_is_counted_as_already_cataloged(tmp_path):
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps({"papers": [
+        {"title": "RankGraph-2", "paper_url": "https://arxiv.org/abs/2606.18379"},
+        {"title": "No arXiv paper", "paper_url": "https://example.org/paper"},
+    ]}), encoding="utf-8")
+    catalog = catalog_papers_from_manifest(path)
+    assert [paper.arxiv_id for paper in catalog] == ["2606.18379"]
+
+    class Client:
+        def lookup(self, ids):
+            assert not ids
+            return []
+
+    source = DiscoverySource(
+        "RecSys", "official-conference", "https://recsys.acm.org/recsys26/session-2/"
+    )
+    html = (
+        '<a rel="#accordion-1-slide-1"><span class="paper-type">IND</span>'
+        'RankGraph-2<br />by Authors</a>'
+    )
+    _, provenance, failures, stats = discover_external(
+        [source], client=Client(), fetcher=lambda _: html,
+        catalog_papers=iter(catalog),
+    )
+    assert not failures
+    assert provenance["2606.18379"][0]["relation"] == "exact-title"
+    assert stats[0]["catalog_title_matches"] == 1
+    assert stats[0]["unresolved_publications"] == []
+
+
+def test_official_review_queue_groups_titles_without_claiming_identity():
+    stats = [
+        {"source": "RecSys", "organization": "ACM RecSys", "unresolved_publications": [
+            {"title": "New Ranking Paper", "url": "https://recsys.acm.org/a"},
+        ]},
+        {"source": "Google", "organization": "Google", "unresolved_publications": [
+            {"title": "New Ranking Paper", "url": "https://research.google/a",
+             "source_published": "2026-09-29"},
+            {"title": "Other Google Paper", "url": "https://research.google/b",
+             "source_published": "2026-09-28"},
+        ]},
+    ]
+    queue = official_review_queue(stats)
+    assert len(queue) == 2
+    assert queue[0]["title"] == "New Ranking Paper"
+    assert queue[0]["review_state"] == "identity_unresolved"
+    assert queue[0]["google_meta_priority"] is True
+    assert len(queue[0]["sources"]) == 2
+    assert queue[0]["source_published"] == "2026-09-29"
+
+
+def test_recsys_session_uses_same_paper_header_contract_as_posters():
+    source = DiscoverySource(
+        "RecSys 2026 session 2", "official-conference",
+        "https://recsys.acm.org/recsys26/session-2/", track="recommendation",
+    )
+    html = (
+        '<li><a rel="#accordion-1-slide-1">'
+        '<span class="paper-type" title="Research">RES</span>'
+        'CONGA: Continual Neural Gated Architecture<br />by Authors</a></li>'
+    )
+    assert publication_records(source, html) == ((
+        "CONGA: Continual Neural Gated Architecture",
+        "https://recsys.acm.org/recsys26/session-2/#accordion-1-slide-1", None,
     ),)
 
 
@@ -358,6 +509,8 @@ def test_summary_discloses_partial_official_listing_coverage():
     )
     payload["cross_source"] = {
         "source_failures": [],
+        "official_review_queue_count": 1,
+        "official_review_output": "paper-official-review.json",
         "source_stats": [{
             "source": "Meta", "status": "partial", "exact_title_matches": 1,
             "unresolved_publications": [{"title": "Unmatched", "url": "https://example.org"}],
@@ -367,6 +520,7 @@ def test_summary_discloses_partial_official_listing_coverage():
     assert "官方列表仅部分对账" in summary
     assert "精确匹配 1，未匹配 1" in summary
     assert "不能推进全来源覆盖水位" in summary
+    assert "paper-official-review.json" in summary
 
 
 def test_terminal_review_batch_requires_every_new_candidate_decision():

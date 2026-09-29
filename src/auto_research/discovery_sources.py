@@ -8,6 +8,7 @@ import gzip
 from html.parser import HTMLParser
 import html
 import json
+import os
 import re
 from pathlib import Path
 from typing import Callable, Iterable
@@ -79,8 +80,29 @@ def load_sources(path: Path, track: str) -> tuple[DiscoverySource, ...]:
     )
 
 
+def catalog_papers_from_manifest(path: Path) -> tuple[Paper, ...]:
+    """Use committed paper identities to avoid re-queuing reproduced titles."""
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    papers = []
+    for item in payload.get("papers", []):
+        title = item.get("title") or ""
+        url = item.get("paper_url") or ""
+        match = ARXIV_LINK.search(url)
+        if title and match:
+            papers.append(Paper(
+                title, "", [], item.get("published") or "", url,
+                canonical_arxiv_id(match.group(1)),
+            ))
+    return tuple(papers)
+
+
 def fetch_text(url: str, timeout: int = 30) -> str:
-    request = urllib.request.Request(url, headers={"User-Agent": "auto-research/0.1"})
+    headers = {"User-Agent": "auto-research/0.1"}
+    if urlparse(url).scheme == "https" and urlparse(url).netloc == "api.github.com":
+        token = os.environ.get("GITHUB_TOKEN")
+        if token:
+            headers["Authorization"] = f"Bearer {token}"
+    request = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(request, timeout=timeout) as response:
         if "pdf" in response.headers.get("Content-Type", "").lower():
             raise ValueError("PDF source needs a text/PDF extractor; no HTML coverage claimed")
@@ -222,8 +244,8 @@ class _DeepMindPublications(HTMLParser):
             self.field = None
 
 
-class _RecSysPosters(HTMLParser):
-    """Read paper titles from official 2026 poster accordion headers."""
+class _RecSysPapers(HTMLParser):
+    """Read paper titles from official 2026 poster and session accordions."""
 
     def __init__(self, source_url: str) -> None:
         super().__init__(convert_charrefs=True)
@@ -300,9 +322,9 @@ def publication_records(
     ):
         parser = _DeepMindPublications(source.url)
     elif parsed.netloc == "recsys.acm.org" and re.fullmatch(
-        r"/recsys26/posters-\d+/?", parsed.path
+        r"/recsys26/(?:posters|session)-\d+/?", parsed.path
     ):
-        parser = _RecSysPosters(source.url)
+        parser = _RecSysPapers(source.url)
     elif parsed.netloc == "sigir2026.org" and parsed.path.endswith(
         "/pages/program/accepted-papers"
     ):
@@ -315,9 +337,21 @@ def publication_records(
 
 def page_url(url: str, page: int) -> str:
     parsed = urlparse(url)
+    if parsed.netloc == "deepmind.google" and parsed.path.rstrip("/") == (
+        "/research/publications"
+    ):
+        return urljoin(url, f"page/{page}/")
     query = dict(parse_qsl(parsed.query, keep_blank_values=True))
     query["page"] = str(page)
     return urlunparse(parsed._replace(query=urlencode(query)))
+
+
+def _deepmind_page_count(content: str) -> int | None:
+    pages = [int(value) for value in re.findall(
+        r"href=[\"']?(?:https://deepmind\.google)?/research/publications/page/(\d+)/",
+        content,
+    )]
+    return max(pages) if pages else None
 
 
 def prioritized_records(
@@ -364,6 +398,7 @@ def discover_external(
     fetcher: Callable[[str], str] = fetch_text,
     snowball_seeds: Iterable[str] = (),
     known_papers: Iterable[Paper] = (),
+    catalog_papers: Iterable[Paper] = (),
     track: str = "all",
 ) -> tuple[list[Paper], dict[str, list[dict]], list[dict], list[dict]]:
     """Fetch sources, resolve IDs, and distinguish empty extraction from coverage."""
@@ -373,7 +408,9 @@ def discover_external(
     source_stats: list[dict] = []
     title_index: dict[str, list[Paper]] = {}
     known_ids: set[str] = set()
-    for paper in known_papers:
+    catalog_papers = tuple(catalog_papers)
+    catalog_ids = {canonical_arxiv_id(paper.arxiv_id) for paper in catalog_papers}
+    for paper in (*known_papers, *catalog_papers):
         title_index.setdefault(normalized_title(paper.title), []).append(paper)
         known_ids.add(canonical_arxiv_id(paper.arxiv_id))
     for source in sources:
@@ -382,9 +419,34 @@ def discover_external(
                 raise ValueError("max_pages must be positive and max_title_lookups non-negative")
             extracted: list[CrossSourceHit] = []
             records: dict[tuple[str, str], tuple[str, str, str | None]] = {}
+            deepmind_listing = (
+                urlparse(source.url).netloc == "deepmind.google"
+                and urlparse(source.url).path.rstrip("/") == "/research/publications"
+            )
+            pages_available: int | None = None
+            pages_to_scan = source.max_pages
+            pages_scanned = 0
+            page_failures: list[dict] = []
             for page in range(1, source.max_pages + 1):
+                if page > pages_to_scan:
+                    break
                 url = source.url if page == 1 else page_url(source.url, page)
-                content = fetcher(url)
+                try:
+                    content = fetcher(url)
+                except Exception as exc:
+                    if source.max_pages == 1 or (deepmind_listing and page == 1):
+                        raise
+                    failure = {
+                        "source": source.name, "url": url, "page": page,
+                        "error": str(exc),
+                    }
+                    page_failures.append(failure)
+                    failures.append(failure)
+                    continue
+                pages_scanned += 1
+                if deepmind_listing and page == 1:
+                    pages_available = _deepmind_page_count(content)
+                    pages_to_scan = min(source.max_pages, pages_available or 1)
                 if source.kind != "official-conference":
                     extracted.extend(extract_source_hits(source, content))
                 for title, detail_url, published in publication_records(source, content):
@@ -393,6 +455,7 @@ def discover_external(
                     )
             direct_count = len(extracted)
             matched = 0
+            catalog_matched = 0
             title_lookups = 0
             lookup_errors: list[dict] = []
             unresolved: list[dict] = []
@@ -413,11 +476,13 @@ def discover_external(
                     except Exception as exc:
                         lookup_errors.append({"title": title, "error": str(exc)})
                 if len(identities) == 1:
+                    identity = identities.pop()
                     extracted.append(CrossSourceHit(
-                        identities.pop(), source.name, source.kind, detail_url,
+                        identity, source.name, source.kind, detail_url,
                         source.organization, "exact-title", source_published=published,
                     ))
                     matched += 1
+                    catalog_matched += identity in catalog_ids
                 else:
                     item = {"title": title, "url": detail_url}
                     if published:
@@ -428,18 +493,29 @@ def discover_external(
                 "source": source.name,
                 "url": source.url,
                 "arxiv_ids_extracted": direct_count,
-                "status": "partial" if records else "ok" if extracted else "no_arxiv_ids",
+                "status": "partial" if records or page_failures else (
+                    "ok" if extracted else "no_arxiv_ids"
+                ),
             }
+            if page_failures:
+                stat["page_failures"] = page_failures
             if records:
                 stat.update({
-                    "pages_scanned": source.max_pages,
+                    "organization": source.organization,
+                    "pages_scanned": pages_scanned,
                     "official_publications": len(records),
                     "exact_title_matches": matched,
+                    "catalog_title_matches": catalog_matched,
                     "title_lookups_attempted": title_lookups,
                     "title_lookup_errors": lookup_errors,
                     "unresolved_publications": unresolved,
                     "note": "Listing is not proof of exhaustive date coverage; unresolved titles require review.",
                 })
+                if deepmind_listing:
+                    stat["pages_available"] = pages_available
+                    stat["pagination_capped"] = (
+                        pages_available is None or pages_available > source.max_pages
+                    )
             source_stats.append(stat)
         except Exception as exc:  # each source is independently auditable
             failures.append({"source": source.name, "url": source.url, "error": str(exc)})
@@ -465,3 +541,42 @@ def discover_external(
     resolved = {canonical_arxiv_id(item.arxiv_id): item for item in papers}
     resolved.update({canonical_arxiv_id(item.arxiv_id): item for item in title_resolved_papers})
     return list(resolved.values()), provenance, failures, source_stats
+
+
+def official_review_queue(source_stats: Iterable[dict]) -> list[dict]:
+    """Group unresolved official titles for human identity/full-text review.
+
+    A title group is not a paper identity: no candidate is accepted or rejected here.
+    """
+    grouped: dict[str, dict] = {}
+    for stat in source_stats:
+        organization = stat.get("organization")
+        for item in stat.get("unresolved_publications", ()):
+            key = normalized_title(item["title"])
+            if not key:
+                continue
+            entry = grouped.setdefault(key, {
+                "title": item["title"],
+                "review_state": "identity_unresolved",
+                "google_meta_priority": False,
+                "source_published": None,
+                "sources": [],
+            })
+            entry["google_meta_priority"] |= organization in {
+                "Google", "Google DeepMind", "Meta",
+            }
+            published = item.get("source_published")
+            if published and (
+                entry["source_published"] is None or published > entry["source_published"]
+            ):
+                entry["source_published"] = published
+            source_ref = {
+                "name": stat["source"], "organization": organization, "url": item["url"],
+            }
+            if source_ref not in entry["sources"]:
+                entry["sources"].append(source_ref)
+    entries = list(grouped.values())
+    entries.sort(key=lambda item: normalized_title(item["title"]))
+    entries.sort(key=lambda item: item["source_published"] or "", reverse=True)
+    entries.sort(key=lambda item: item["google_meta_priority"], reverse=True)
+    return entries
