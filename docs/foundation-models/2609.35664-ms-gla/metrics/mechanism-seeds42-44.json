@@ -2,6 +2,7 @@
   "schema_version": 2,
   "manifest_ref": "foundation-models:ms-gla",
   "method": "ms-gla",
+  "dataset": "deterministic public mechanism mini-suite",
   "seeds": [
     42,
     43,

@@ -3,6 +3,7 @@
     "schema_version": 2,
     "manifest_ref": "post-training:roft",
     "method": "roft",
+    "dataset": "deterministic public mechanism mini-suite",
     "seeds": [
       42,
       43,
@@ -63,6 +64,7 @@
     "schema_version": 2,
     "manifest_ref": "post-training:lspd",
     "method": "lspd",
+    "dataset": "deterministic public mechanism mini-suite",
     "seeds": [
       42,
       43,
@@ -130,6 +132,7 @@
     "schema_version": 2,
     "manifest_ref": "agent-research:harness-learning",
     "method": "harness-learning",
+    "dataset": "deterministic public mechanism mini-suite",
     "seeds": [
       42,
       43,
@@ -189,6 +192,7 @@
     "schema_version": 2,
     "manifest_ref": "foundation-models:ms-gla",
     "method": "ms-gla",
+    "dataset": "deterministic public mechanism mini-suite",
     "seeds": [
       42,
       43,
@@ -245,6 +249,7 @@
     "schema_version": 2,
     "manifest_ref": "agent-research:graphhca",
     "method": "graphhca",
+    "dataset": "deterministic public mechanism mini-suite",
     "seeds": [
       42,
       43,

@@ -180,6 +180,7 @@ def write_metrics(results, output_root: Path):
             "schema_version": 2,
             "manifest_ref": f"{DOMAINS[method].split('/')[0]}:{method}",
             "method": method,
+            "dataset": "deterministic public mechanism mini-suite",
             "seeds": list(SEEDS),
             "metrics": metrics,
             "seed_results": seed_results,

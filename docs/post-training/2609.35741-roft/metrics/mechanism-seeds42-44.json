@@ -2,6 +2,7 @@
   "schema_version": 2,
   "manifest_ref": "post-training:roft",
   "method": "roft",
+  "dataset": "deterministic public mechanism mini-suite",
   "seeds": [
     42,
     43,
