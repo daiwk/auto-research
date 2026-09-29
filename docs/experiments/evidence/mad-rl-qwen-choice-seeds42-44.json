@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_tier": "bounded_synthetic_choice_diagnostic",
+  "paper_result_reproduced": false,
+  "selected_by": "validation_only",
+  "test_used_for_selection": false,
+  "baseline": "l2",
+  "winner": "l2",
+  "seeds": [42, 43, 44],
+  "arms": ["l2", "forward-kl", "jsd"],
+  "budget": {
+    "warmup_updates": 4,
+    "rl_updates": 4,
+    "group_size": 8,
+    "eval_samples_per_topic": 16,
+    "train_topics": 8,
+    "validation_topics": 2,
+    "test_topics": 2,
+    "suite_sha256": "c6d068ab55583c318ba23ca40db52a5c49c102684efa010f3106fa519db67ead",
+    "checkpoint_revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "validation_jsd_by_seed": {
+    "l2": [0.41272565263942185, 0.41272565263942185, 0.41272565263942185],
+    "forward-kl": [0.41272565263942185, 0.41272565263942185, 0.41272565263942185],
+    "jsd": [0.41272565263942185, 0.41272565263942185, 0.41272565263942185]
+  },
+  "test_jsd_by_seed": {
+    "l2": [0.5077984756824488, 0.44827065307054925, 0.46948644340713397],
+    "forward-kl": [0.5077984756824488, 0.44827065307054925, 0.46948644340713397],
+    "jsd": [0.5077984756824488, 0.44827065307054925, 0.46948644340713397]
+  },
+  "validation_off_support_rate_by_seed": {
+    "l2": [0.0, 0.0, 0.0],
+    "forward-kl": [0.0, 0.0, 0.0],
+    "jsd": [0.0, 0.0, 0.0]
+  },
+  "paired_test_delta_selected_vs_l2": [0.0, 0.0, 0.0],
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "code_commit": "cdb53fe5a914505f097e0798107de368740a6921"
+}

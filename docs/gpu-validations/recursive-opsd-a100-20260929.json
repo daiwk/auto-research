@@ -43,7 +43,18 @@
     "fixed_teacher_validation_accuracy_after": 0.5,
     "dce_only_validation_accuracy_after": 0.5,
     "formal_paper_result_reproduced": false,
-    "diagnostic_only": true
+    "diagnostic_only": true,
+    "tokenizer_compatibility_recheck": {
+      "code_commit": "cdb53fe5a914505f097e0798107de368740a6921",
+      "seed": 42,
+      "max_new_tokens": 96,
+      "optimizer_updates": 2,
+      "validation_accuracy_before": 0.0,
+      "validation_accuracy_after": 0.0,
+      "test_accuracy_after": 0.5,
+      "adapter_parameter_delta_l2": 0.010007916822253365,
+      "result": "passed"
+    }
   },
   "provenance": {
     "commit": "4c3051124c219e0ceb0bea7cee63cf123e52bb33",

@@ -2,11 +2,39 @@ import torch
 
 from auto_research.post_training.local_lora import attach_lora, disabled_adapters
 from auto_research.post_training.recursive_opsd import (
+    _prompt_ids,
     accept_refinement,
     forward_kl,
     numeric_answer,
     teacher_prompt,
 )
+
+
+def test_prompt_ids_accepts_tokenizers_encoding_and_plain_ids():
+    class Encoding:
+        ids = [1, 2, 3]
+
+    class Tokenizer:
+        def apply_chat_template(self, messages, **kwargs):
+            return "prefix" if not kwargs["tokenize"] else Encoding()
+
+        def encode(self, text, **kwargs):
+            return Encoding()
+
+    tokenizer = Tokenizer()
+    assert _prompt_ids(tokenizer, [{"role": "user", "content": "hi"}]) == [1, 2, 3]
+    assert _prompt_ids(
+        tokenizer, [{"role": "user", "content": "hi"}, {"role": "assistant", "content": "a"}],
+        assistant_prefill=True,
+    ) == [1, 2, 3]
+
+
+def test_prompt_ids_accepts_transformers_batch_encoding():
+    class Tokenizer:
+        def apply_chat_template(self, messages, **kwargs):
+            return {"input_ids": [1, 2, 3], "attention_mask": [1, 1, 1]}
+
+    assert _prompt_ids(Tokenizer(), [{"role": "user", "content": "hi"}]) == [1, 2, 3]
 
 
 def test_forward_kl_is_zero_for_equal_logits_and_detaches_teacher():

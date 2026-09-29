@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "adapter_key": "kite-sst-gpu-latency",
+  "validated_at": "2026-09-29",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": [
+    "python", "scripts/benchmark_kite_gpu_latency.py",
+    "--output", "<local-result.json>",
+    "--seeds", "42,43,44", "--context-lengths", "32,128,256",
+    "--repeats", "20"
+  ],
+  "dataset": {
+    "name": "procedural uniform byte-token microbenchmark",
+    "source": "scripts/benchmark_kite_gpu_latency.py",
+    "revision": "bdadfacff4a1c8ea07570637d07ee0553492f76f",
+    "split": "no train/validation/test or language-quality result; fixed seeds 42,43,44"
+  },
+  "checkpoint": {
+    "model_id": "randomly initialized SmallSST width-32 2+2 and dense-4 controls",
+    "revision": "bdadfacff4a1c8ea07570637d07ee0553492f76f",
+    "public_pretrained_checkpoint_used": false,
+    "weights_committed": false
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "repeats_per_case": 20,
+    "case_count": 9,
+    "median_over_seeds_ms": {
+      "32": {"sst_prefill_full": 1.421008, "sst_prefill_last_only": 1.417264, "sst_decode_one": 1.435296, "dense_prefill": 1.373712, "dense_decode_one": 1.447056},
+      "128": {"sst_prefill_full": 1.422752, "sst_prefill_last_only": 1.422384, "sst_decode_one": 1.43848, "dense_prefill": 1.378384, "dense_decode_one": 1.453808},
+      "256": {"sst_prefill_full": 1.440832, "sst_prefill_last_only": 1.43128, "sst_decode_one": 1.454768, "dense_prefill": 1.406272, "dense_decode_one": 1.457072}
+    },
+    "last_logit_max_abs_error": 2.4586915969848633e-7,
+    "latency_improvement_claimed": false,
+    "paper_result_reproduced": false,
+    "diagnostic_only": true
+  },
+  "provenance": {
+    "commit": "bdadfacff4a1c8ea07570637d07ee0553492f76f",
+    "artifact_path": "docs/gpu-validations/kite-sst-gpu-latency-a100-20260929.json",
+    "raw_tokens_committed": false,
+    "checkpoint_committed": false
+  }
+}

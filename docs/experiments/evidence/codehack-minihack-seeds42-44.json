@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "evidence_tier": "real_minihack_environment_smoke",
+  "paper_result_reproduced": false,
+  "controller": "seeded_uniform_random",
+  "environment": "MiniHack-Room-5x5-v0",
+  "seeds": [42, 43, 44],
+  "modes": ["primitives", "skills", "mixed"],
+  "budgets": {"max_decisions": 8, "primitive_budget": 64},
+  "upstream_codehack_commit": "3026cdb7378726eace9efe8ab655f1aee616844f",
+  "upstream_baselines_reference_only": "ba2c532bd505426913b82291adec455afd855df5",
+  "upstream_nle_wheel_sha256": "819063e40b3c1bc97e946695242b7cfe0633d61049ac44cfde53d72447948513",
+  "episodes": 9,
+  "errors": 0,
+  "primitive_steps_by_mode_and_seed": {
+    "primitives": [1, 1, 1],
+    "skills": [20, 20, 20],
+    "mixed": [0, 0, 20]
+  },
+  "terminated_by_mode_and_seed": {
+    "primitives": [false, false, false],
+    "skills": [true, true, true],
+    "mixed": [false, false, true]
+  },
+  "scope": "Action-space and real-environment integration only. Modes use different random action spaces; these rates are not a matched policy comparison, paper improvement, or RL/LLM result."
+}
