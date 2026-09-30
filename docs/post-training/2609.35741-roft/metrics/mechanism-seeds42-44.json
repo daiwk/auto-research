@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:roft",
+  "method": "roft",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "masked_ce": {
+      "mean": 4.723277568817139,
+      "std": 0.3799676184522421
+    },
+    "retrospection_tokens": {
+      "mean": 3.0,
+      "std": 0.0
+    },
+    "context_target_tokens": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "masked_ce": 5.138889789581299,
+      "retrospection_tokens": 3,
+      "context_target_tokens": 0
+    },
+    {
+      "seed": 43,
+      "masked_ce": 4.810451030731201,
+      "retrospection_tokens": 3,
+      "context_target_tokens": 0
+    },
+    {
+      "seed": 44,
+      "masked_ce": 4.220491886138916,
+      "retrospection_tokens": 3,
+      "context_target_tokens": 0
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.35741-roft/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

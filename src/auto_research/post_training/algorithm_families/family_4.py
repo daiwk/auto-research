@@ -20,7 +20,7 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'nsd', 'adaptive-opd-gate', 'locus', 'tasco',
         'gamma-opd', 'tlm-dre', 'stride-opd', 'df-opd', 'opd-aha', 'growmtp',
         'tiao', 'sd-dpo',
-        'retire-opd', 'compo', 'trajectory-learnability',
+        'retire-opd', 'compo', 'trajectory-learnability', 'roft', 'lspd',
     }:
         if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
             from ..latest_20260827 import update_latest
@@ -42,13 +42,20 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             from ..latest_20260916_followup import update_latest
         elif algorithm in {'retire-opd', 'compo', 'trajectory-learnability'}:
             from ..latest_20260919 import update_latest
+        elif algorithm in {'roft', 'lspd'}:
+            from ..latest_20260930 import update_latest
         else:
             update_latest = None
         if update_latest is not None:
-            gradient, loss, latest = update_latest(
-                algorithm, state, group, probabilities, reference,
-                rollout_training_probabilities, sampled, rng,
-            )
+            if algorithm in {'roft', 'lspd'}:
+                gradient, loss, latest = update_latest(
+                    algorithm, state, group, probabilities, reference, sampled, rng,
+                )
+            else:
+                gradient, loss, latest = update_latest(
+                    algorithm, state, group, probabilities, reference,
+                    rollout_training_probabilities, sampled, rng,
+                )
             diagnostics.update(latest)
             return gradient, loss, diagnostics
         if algorithm in {'opd-search-plus', 'opdvr'}:

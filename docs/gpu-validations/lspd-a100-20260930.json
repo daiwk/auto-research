@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "adapter_key": "lspd",
+  "validated_at": "2026-09-30",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": [
+    "python3", "scripts/validate_latest_20260930.py", "--device", "cuda",
+    "--model-id", "Qwen/Qwen3-4B-Instruct-2507", "--revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554"
+  ],
+  "dataset": {
+    "name": "public deterministic response-distillation mechanism prompt",
+    "revision": "sep30-v1",
+    "examples": 1
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "loss": [0.0077338432893157005, 0.0077338432893157005, 0.0077338432893157005],
+    "mean_penalty": 0.022499974817037582,
+    "mean_entropy": 1.476613163948059,
+    "tail_fraction": 0.0,
+    "teacher_detached": true,
+    "backward_completed": true
+  },
+  "provenance": {
+    "commit": "caabe7d26667e5f1eb3bb68eb9395818c51fac4c",
+    "artifact_path": "docs/gpu-validations/lspd-a100-20260930.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

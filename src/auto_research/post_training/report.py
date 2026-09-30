@@ -4,6 +4,8 @@ from .models import PostTrainingResult
 
 
 PAPERS = {
+    "roft": ("Retrospection-Only Fine-Tuning", "https://arxiv.org/abs/2609.35741"),
+    "lspd": ("Least Square Policy Distillation", "https://arxiv.org/abs/2609.35505"),
     "retire-opd": ("RetireOPD", "https://arxiv.org/abs/2609.20784"),
     "compo": ("ComPO", "https://arxiv.org/abs/2609.19144"),
     "trajectory-learnability": ("Trajectory Learnability", "https://arxiv.org/abs/2609.18321"),

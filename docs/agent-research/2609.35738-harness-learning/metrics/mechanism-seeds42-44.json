@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:harness-learning",
+  "method": "harness-learning",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "rounds": {
+      "mean": 3.0,
+      "std": 0.0
+    },
+    "final_harness_size": {
+      "mean": 3.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "rounds": 3,
+      "final_harness_size": 3,
+      "uses_execution_reports": true,
+      "gold_fields_exposed": false
+    },
+    {
+      "seed": 43,
+      "rounds": 3,
+      "final_harness_size": 3,
+      "uses_execution_reports": true,
+      "gold_fields_exposed": false
+    },
+    {
+      "seed": 44,
+      "rounds": 3,
+      "final_harness_size": 3,
+      "uses_execution_reports": true,
+      "gold_fields_exposed": false
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.35738-harness-learning/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -28,6 +28,7 @@ class PostTrainingRunner:
             "lightning-opd", "relay-opd", "turn-opd", "distilled-rl",
             "u-opsd", "rp-opsd", "pcsd", "adrs", "mopd", "opd-lm",
             "r2-opd", "sr-opsd", "opd2", "causal-opd", "smopd", "rstg",
+            "lspd",
         }
         state.teacher_calls = len(data.train) if config.algorithm in teacher_cached else 0
         baseline = metrics(state, data.validation)
@@ -109,6 +110,8 @@ class PostTrainingRunner:
             "growmtp": state.variant_updates,
             "tiao": state.variant_updates,
             "sd-dpo": state.variant_updates,
+            "roft": state.variant_updates,
+            "lspd": state.variant_updates,
         }.get(config.algorithm, 0)
         rollout_policy_refreshes = (
             state.online_rollout_refreshes

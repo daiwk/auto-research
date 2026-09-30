@@ -603,6 +603,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "graphhca",
+      "title": "GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2609.35084",
+      "detail_path": "agent-research/2609.35084-graphhca/README.md",
+      "topic": [
+        "Agentic RL",
+        "信用分配",
+        "轨迹图"
+      ],
+      "first_author": "Haodong Zhu",
+      "first_author_affiliation": "Beihang University",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "graphhca",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "grounded-memory",
       "title": "Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents",
       "paper_url": "https://arxiv.org/abs/2609.11060",
@@ -680,6 +698,24 @@
       "published": "2026-09-17",
       "code": null,
       "adapter": "harness-design-study",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "harness-learning",
+      "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
+      "paper_url": "https://arxiv.org/abs/2609.35738",
+      "detail_path": "agent-research/2609.35738-harness-learning/README.md",
+      "topic": [
+        "Harness 学习",
+        "测试时适配",
+        "元学习"
+      ],
+      "first_author": "Alvin Zhang",
+      "first_author_affiliation": "Johns Hopkins University",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "harness-learning",
       "priority": "P1"
     },
     {
@@ -4494,6 +4530,26 @@
     },
     {
       "domain": "foundation-models",
+      "key": "ms-gla",
+      "title": "MS-GLA: Multi-Scale Gated Linear Attention for Addressing Representational Bottlenecks via Multi-Temporal Resolution",
+      "paper_url": "https://arxiv.org/abs/2609.35664",
+      "detail_path": "foundation-models/2609.35664-ms-gla/README.md",
+      "topic": [
+        "网络架构",
+        "线性注意力",
+        "长上下文"
+      ],
+      "first_author": "Prasoon Dev",
+      "first_author_affiliation": "International Institute of Information Technology Hyderabad",
+      "published": "2026-09-28",
+      "code": "https://github.com/prasoondev/msgla",
+      "adapter": "ms-gla",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/ms-gla-a100-20260930.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "muon",
       "title": "Muon is Scalable for LLM Training",
       "paper_url": "https://arxiv.org/abs/2502.16982",
@@ -7215,6 +7271,26 @@
     },
     {
       "domain": "post-training",
+      "key": "lspd",
+      "title": "An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning",
+      "paper_url": "https://arxiv.org/abs/2609.35505",
+      "detail_path": "post-training/2609.35505-lspd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "离策略回放",
+        "推理"
+      ],
+      "first_author": "Shangzhe Li",
+      "first_author_affiliation": "University of North Carolina at Chapel Hill",
+      "published": "2026-09-28",
+      "code": "https://github.com/UNCSciML/LSPD",
+      "adapter": "lspd",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/lspd-a100-20260930.json"
+    },
+    {
+      "domain": "post-training",
       "key": "luffy",
       "title": "LUFFY",
       "paper_url": "https://arxiv.org/abs/2504.14945",
@@ -7912,6 +7988,26 @@
       "published": "2026-08-27",
       "code": "https://github.com/Di-viner/LLM-Fusion",
       "adapter": "rlvr-fusion"
+    },
+    {
+      "domain": "post-training",
+      "key": "roft",
+      "title": "Shockingly Simple Self-retrospection Improves Agentic Models Without RL",
+      "paper_url": "https://arxiv.org/abs/2609.35741",
+      "detail_path": "post-training/2609.35741-roft/README.md",
+      "topic": [
+        "自我回顾",
+        "监督微调",
+        "Agent 后训练"
+      ],
+      "first_author": "Jonathan Light",
+      "first_author_affiliation": "Rensselaer Polytechnic Institute",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "roft",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/roft-a100-20260930.json"
     },
     {
       "domain": "post-training",

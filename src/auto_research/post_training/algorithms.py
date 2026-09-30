@@ -37,6 +37,7 @@ def update(
             "gamma-opd", "tlm-dre", "stride-opd", "df-opd", "opd-aha", "growmtp",
             "tiao", "sd-dpo",
             "retire-opd", "compo", "trajectory-learnability",
+            "roft", "lspd",
         } else probabilities
     )
     if algorithm in {"tis", "icepop", "online-icepop"}:
@@ -88,6 +89,7 @@ def update(
         "gamma-opd", "tlm-dre", "stride-opd", "df-opd", "opd-aha", "growmtp",
         "tiao", "sd-dpo",
         "retire-opd", "compo", "trajectory-learnability",
+        "roft", "lspd",
     }:
         state.variant_updates += 1
         if state.variant_updates % 16 == 0:

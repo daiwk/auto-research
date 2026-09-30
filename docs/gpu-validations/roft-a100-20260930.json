@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "adapter_key": "roft",
+  "validated_at": "2026-09-30",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": [
+    "python3", "scripts/validate_latest_20260930.py", "--device", "cuda",
+    "--model-id", "Qwen/Qwen3-4B-Instruct-2507", "--revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554"
+  ],
+  "dataset": {
+    "name": "public deterministic retrospection mechanism prompt",
+    "revision": "sep30-v1",
+    "examples": 1
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [42, 43, 44],
+    "masked_ce": [6.4375, 6.4375, 6.4375],
+    "retrospection_tokens": 5,
+    "context_target_tokens": 0,
+    "backward_completed": true
+  },
+  "provenance": {
+    "commit": "caabe7d26667e5f1eb3bb68eb9395818c51fac4c",
+    "artifact_path": "docs/gpu-validations/roft-a100-20260930.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}
