@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:telescopic-lm",
+  "method": "telescopic-lm",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 5.867146015167236,
+      "sampled_depth": 1,
+      "sampled_loss": 2.8453993797302246,
+      "anchor_loss": 3.0217466354370117,
+      "full_anchor_gradient": true
+    },
+    {
+      "seed": 43,
+      "loss": 6.568492889404297,
+      "sampled_depth": 2,
+      "sampled_loss": 3.1025800704956055,
+      "anchor_loss": 3.4659125804901123,
+      "full_anchor_gradient": true
+    },
+    {
+      "seed": 44,
+      "loss": 6.079978942871094,
+      "sampled_depth": 3,
+      "sampled_loss": 3.35544753074646,
+      "anchor_loss": 2.7245311737060547,
+      "full_anchor_gradient": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "loss_mean": 6.171872615814209,
+    "sampled_depth_mean": 2.0,
+    "sampled_loss_mean": 3.101142326990763,
+    "anchor_loss_mean": 3.070730129877726
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.35769-telescopic-lm/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep30-closure-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

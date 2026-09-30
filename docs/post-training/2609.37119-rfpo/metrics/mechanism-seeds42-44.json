@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:rfpo",
+  "method": "rfpo",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "advantage_mean": 2.030998323709433,
+      "positive_rewards": 5,
+      "critic_frozen": true
+    },
+    {
+      "seed": 43,
+      "advantage_mean": 1.4042729068847828,
+      "positive_rewards": 3,
+      "critic_frozen": true
+    },
+    {
+      "seed": 44,
+      "advantage_mean": 1.8909860190763503,
+      "positive_rewards": 3,
+      "critic_frozen": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "advantage_mean_mean": 1.775419083223522,
+    "positive_rewards_mean": 3.6666666666666665
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.37119-rfpo/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep30-closure-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

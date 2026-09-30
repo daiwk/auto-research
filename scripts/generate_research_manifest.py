@@ -23,6 +23,7 @@ from auto_research.latest_20260919_catalog import LATEST_METHOD_PAPERS as SEP19_
 from auto_research.latest_20260920_system_one_catalog import LATEST_METHOD_PAPERS as SYSTEM_ONE_PAPERS
 from auto_research.latest_20260930_catalog import LATEST_METHOD_PAPERS as SEP30_METHOD_PAPERS
 from auto_research.latest_20260930_followup_catalog import LATEST_METHOD_PAPERS as SEP30_FOLLOWUP_METHOD_PAPERS
+from auto_research.latest_20260930_closure_catalog import LATEST_METHOD_PAPERS as SEP30_CLOSURE_METHOD_PAPERS
 
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis", "recursive-opsd"}
@@ -34,7 +35,7 @@ FIRST_AUTHOR_OVERRIDES = {
     "wemm-embedding": "Junjie Zhou",
 }
 
-LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + SEP30_METHOD_PAPERS + SEP30_FOLLOWUP_METHOD_PAPERS + (
+LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + SEP30_METHOD_PAPERS + SEP30_FOLLOWUP_METHOD_PAPERS + SEP30_CLOSURE_METHOD_PAPERS + (
     {
         "domain": "agent-research", "key": "agentx-model-replay",
         "title": "Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems",
@@ -618,6 +619,11 @@ def synchronize(payload: dict) -> dict:
         identity = (record["domain"], record["key"])
         if not (DOCS / record["detail_path"]).is_file():
             raise ValueError(f"missing detail page for {identity}: {record['detail_path']}")
+        # Registered adapters carry an executable, normalized protocol.  Batch
+        # catalogs remain the metadata source for non-adapter research pages,
+        # but must never replace a richer adapter record with a string key.
+        if record["key"] in adapter_keys and identity in positions:
+            continue
         if identity in positions:
             papers[positions[identity]] = record
         else:

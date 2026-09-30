@@ -56,6 +56,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
         "rankmixer_memory_layer",
         "rankmixer_hill_index",
         "rankmixer_semantic_native_longseq",
+        "rankmixer_evoskill",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -381,6 +382,30 @@ def build_model(kind: str, data, config: RankMixerConfig):
             updated = self.norm(values + gate * (attention @ v))
             return updated + self.ffn(updated)
 
+    class EvoSkillBlock(nn.Module):
+        """Promoted typed genome: mix[Tokens]->SwiGLU[Tokens]->gate[Tokens]."""
+
+        skill_genome = (
+            ("head-mix", "tokens", "tokens"),
+            ("token-swiglu", "tokens", "tokens"),
+            ("residual-gate", "tokens", "tokens"),
+        )
+
+        def __init__(self):
+            super().__init__()
+            self.mixer = nn.MultiheadAttention(
+                config.dimensions, config.tokens, batch_first=True, dropout=0.0
+            )
+            self.ffn = PerTokenSwiGLU()
+            self.gate = nn.Linear(2 * config.dimensions, config.dimensions)
+            self.norm = nn.LayerNorm(config.dimensions)
+
+        def forward(self, values):
+            mixed, _ = self.mixer(values, values, values)
+            update = self.ffn(mixed)
+            gate = torch.sigmoid(self.gate(torch.cat((values, update), dim=-1)))
+            return self.norm(values + gate * update)
+
     class Ranker(nn.Module):
         def __init__(self):
             super().__init__()
@@ -398,6 +423,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 "rankmixer_tmallgs": TMallGSBlock,
                 "rankmixer_ha_moe": HeterogeneousMoEBlock,
                 "rankmixer_kunlun": KunlunBlock,
+                "rankmixer_evoskill": EvoSkillBlock,
             }.get(kind, Block)
             self.blocks = nn.ModuleList([block_type() for _ in range(config.layers)])
             self.output = nn.Sequential(

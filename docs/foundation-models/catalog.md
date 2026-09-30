@@ -14,7 +14,9 @@
 | 网络架构 | [Pretraining Latent Information Feedback Transformers with Teacher Supervision](2609.38149-lift-feedback/README.md) | Tel Aviv University，2026-09-29 | [已开源](https://github.com/dortirosh1/LIFT) | `lift-feedback` |
 | 推理与系统效率 | [STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization](2609.38169-stepquant/README.md) | Zhejiang University，2026-09-29 | [已开源](https://github.com/Dreamer-Toby/STEPQuant) | `stepquant` |
 | 网络架构 | [Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling](2609.36529-triadic-linear-attention/README.md) | MIT / MIT-IBM Watson AI Lab，2026-09-29 | [已开源](https://github.com/OliverSieberling/TriadicLinearAttention) | `triadic-linear-attention` |
+| 状态空间模型 | [Fractional State Space Transition for Long Sequence Modeling](2609.36314-frac-ssm/README.md) | Huawei Noah's Ark Lab, Montreal Research Center，2026-09-28 | [已开源](https://github.com/anasiri/frac-ssm) | `frac-ssm` |
 | 网络架构 | [MS-GLA: Multi-Scale Gated Linear Attention for Addressing Representational Bottlenecks via Multi-Temporal Resolution](2609.35664-ms-gla/README.md) | International Institute of Information Technology Hyderabad，2026-09-28 | [已开源](https://github.com/prasoondev/msgla) | `ms-gla` |
+| 网络架构 | [Telescopic Language Models](2609.35769-telescopic-lm/README.md) | University of Cambridge，2026-09-28 | 未发现官方代码 | `telescopic-lm` |
 | 扩散语言模型 | [dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models](2609.20751-dqwen35/README.md) | University of Texas at Austin，2026-09-17 | 未发现官方代码 | `dqwen35` |
 | 注意力与长上下文 | [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](2609.20734-oda/README.md) | Southern University of Science and Technology，2026-09-17 | 未发现官方代码 | `oda` |
 | 推测解码 | [ASPIRE: Asynchronous Batch Self-Speculative Decoding](2609.17943-aspire/README.md) | University of Southern California，2026-09-16 | 未发现官方代码 | `aspire` |

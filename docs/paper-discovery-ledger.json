@@ -12446,6 +12446,47 @@
         {"id": "2609.36505", "priority": "P1", "track": "post-training", "status": "deferred", "reason": "Requires a real retriever plus RL training; a detached scoring heuristic would omit the defining loop."},
         {"id": "2609.37633", "priority": "P1", "track": "post-training", "status": "deferred", "reason": "Requires 9B coding/tool training and executable code environments beyond the current faithful budget."}
       ]
+    },
+    {
+      "batch": "recent-20260930-closure",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-09-30T23:50:00+08:00",
+      "window": "2026-09-28 through 2026-09-30",
+      "sources": [
+        "arXiv official API, complete HTML and PDF",
+        "Google Research, Google DeepMind and Meta official publication pages",
+        "RecSys 2026 and SIGIR 2026 official static lists",
+        "official author repositories and project pages"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": true,
+        "watermark_advanced": true,
+        "watermark": "2026-09-30",
+        "overlap_start": "2026-09-28",
+        "source_artifact": "recent-paper-scan-20260930-closure.md",
+        "note": "No arXiv cache fallback. Static conference inventories use a committed 906-title baseline; dynamic official pages have zero unresolved in-window identities. DeepXiv was not used."
+      },
+      "candidates": [
+        {"id": "2609.34552", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "evoskillrec", "doc": "reproductions/2609.34552-evoskillrec/README.md"},
+        {"id": "2609.34229", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "promptshift", "doc": "reproductions/2609.34229-promptshift/README.md"},
+        {"id": "2609.35769", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "telescopic-lm", "doc": "foundation-models/2609.35769-telescopic-lm/README.md"},
+        {"id": "2609.36314", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "frac-ssm", "doc": "foundation-models/2609.36314-frac-ssm/README.md"},
+        {"id": "2609.37119", "priority": "P1", "track": "post-training", "status": "implemented", "key": "rfpo", "doc": "post-training/2609.37119-rfpo/README.md"},
+        {"id": "2609.36246", "priority": "P1", "track": "post-training", "status": "implemented", "key": "olive", "doc": "post-training/2609.36246-olive/README.md"},
+        {"id": "2609.35954", "priority": "P1", "track": "post-training", "status": "implemented", "key": "ross", "doc": "post-training/2609.35954-ross/README.md"},
+        {"id": "2609.35517", "priority": "P1", "track": "post-training", "status": "implemented", "key": "r2-opd", "doc": "post-training/2609.35517-r2-opd/README.md"},
+        {"id": "2609.34234", "priority": "P1", "track": "post-training", "status": "implemented", "key": "mas-opd", "doc": "post-training/2609.34234-mas-opd/README.md"},
+        {"id": "2609.34296", "priority": "P1", "track": "agent", "status": "implemented", "key": "dr-credit", "doc": "agent-research/2609.34296-dr-credit/README.md"},
+        {"id": "2609.35540", "priority": "P1", "track": "agent", "status": "implemented", "key": "ccm", "doc": "agent-research/2609.35540-ccm/README.md"},
+        {"id": "2609.34268", "priority": "P1", "track": "agent", "status": "implemented", "key": "sage-planner", "doc": "agent-research/2609.34268-sage/README.md"},
+        {"id": "2609.34320", "priority": "P1", "track": "agent", "status": "implemented", "key": "certified-selective-eval", "doc": "agent-research/2609.34320-certified-selective-eval/README.md"},
+        {"id": "2609.36059", "priority": "P1", "track": "agent", "status": "implemented", "key": "mnemon", "doc": "agent-research/2609.36059-mnemon/README.md"},
+        {"id": "2609.34556", "priority": "P1", "track": "foundation-model", "status": "deferred", "reason": "Overlaps existing RoPE/long-context operators and lacks an independent real-checkpoint incremental protocol in this batch."},
+        {"id": "2609.36892", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an editable real harness and cross-generation execution feedback; a static tensor surrogate would omit the defining loop."},
+        {"id": "2609.35427", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an asynchronous tool environment and equal-budget latency/success evaluation."},
+        {"id": "2609.34227", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Overlaps the implemented Mnemon raw-record/Jev route; retained for a future real-checkpoint comparison."}
+      ]
     }
   ]
 }

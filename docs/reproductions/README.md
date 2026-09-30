@@ -50,6 +50,8 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `evoskillrec` · [EvoSkillRec](2609.34552-evoskillrec/README.md)：执行带输入/输出类型的 skill genome、validation evaluator、晋级与复用，并以 `rankmixer_evoskill` 接入统一 Evolve 控制器；本地只报告 L1 机制诊断，不外推论文的大规模搜索收益。
+- `promptshift` · [PromptShift](2609.34229-promptshift/README.md)：在固定相关性与身份 slice fixture 上执行 Drift、SliceShift、difficulty-weighted hit 和自适应逆流行度 reranker；不生成或推断真实用户身份画像。
 - `grp` · [Snap GRP v0.1](2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序；本地为公开张量 L1 机制实现，不冒充 Snap 线上效果复现。
 - `helix` · [TikTok HELIX](2609.37183-helix/README.md)：交错扩展特征交互与序列建模，同时以单向信息流保持用户状态跨候选复用；本地为公开张量 L1 架构机制，不冒充论文全流量 A/B 复现。
 - `flvm` · [Google/YouTube FLVM](2609.32839-flvm/README.md)：三因子潜变量、受限混杂基线、稀疏反馈路由与公开 KuaiRand 正负反馈三种子对照；稀疏负反馈及潜变量语义不稳定，标为概念验证。

@@ -2,6 +2,12 @@
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
+## City University of Hong Kong
+- 2026-09 · [EvoSkillRec](../2609.34552-evoskillrec/README.md)：把推荐结构拆成带类型的可执行 skill genome，只将 validation 改善的组合晋级到可复用技能库。
+
+## University of Electronic Science and Technology of China
+- 2026-09 · [PromptShift](../2609.34229-promptshift/README.md)：比较身份提示与无身份参考列表的偏移，并按用户主流度混合相关分和逆群体流行度进行缓解。
+
 ## Baidu
 - 2026-09 · [MuSeR](../2609.23677-muser/README.md)：对长期行为分层汇聚，再用多查询兴趣与候选相关路由进行检索；本地公开标签实验不复刻私有多模态链路。
 - 2026-09 · [GESE](../2609.15094-gese/README.md)：先生成多样且忠实的标题候选，再依据当前用户上下文选择展示标题。

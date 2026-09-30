@@ -237,7 +237,8 @@ def render_discovery_summary(payload: dict) -> str:
     if cross_source:
         partial_sources = [
             source for source in cross_source.get("source_stats", [])
-            if source["status"] == "partial"
+            if source.get("transport_status", source["status"]) != "ok"
+            or source.get("unresolved_publications")
         ]
         if partial_sources:
             lines.extend([
@@ -248,12 +249,31 @@ def render_discovery_summary(payload: dict) -> str:
                 ) + "。未匹配标题与详情链接在 JSON artifact；不能推进全来源覆盖水位。",
                 "",
             ])
+        snapshot_sources = [
+            source for source in cross_source.get("source_stats", [])
+            if source.get("review_policy") == "snapshot"
+        ]
+        if snapshot_sources:
+            lines.extend([
+                "静态会议目录按已审快照做增量对账：" + "、".join(
+                    f"{source['source']}（基线内 {source.get('snapshot_known_publications', 0)}，"
+                    f"新增 {source.get('snapshot_new_publications', 0)}）"
+                    for source in snapshot_sources
+                ) + "。快照仅是目录库存，不代表论文已收录或已复现。",
+                "",
+            ])
         review_count = cross_source.get("official_review_queue_count", 0)
         if review_count:
             artifact = cross_source.get("official_review_output") or "JSON artifact"
             lines.extend([
                 f"官方标题待核查 {review_count} 组：见 {artifact}。"
                 "同名分组不是论文身份确认，也不是通过收录门槛。",
+                "",
+            ])
+        elif cross_source.get("coverage_complete"):
+            lines.extend([
+                "本窗口官方来源传输正常，静态目录增量与动态研究页标题均已对账，"
+                "没有遗留身份待核条目。",
                 "",
             ])
         empty_sources = [

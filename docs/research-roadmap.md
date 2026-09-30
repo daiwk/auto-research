@@ -151,7 +151,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | DISC-001 | DONE | 每日四领域多查询、分页、canonical arXiv ID 去重 | GitHub Actions 生成四个候选 artifact |
 | DISC-002 | DONE | 候选与 manifest、历史 ledger 自动差分 | JSON 和 Actions 摘要区分新候选、已实现、已审计 |
 | DISC-003 | DONE | Google / Meta 新候选自动置顶预警 | 仅两家触发 warning；Netflix 等保持普通候选 |
-| DISC-004 | PARTIAL · [PR #113](https://github.com/daiwk/auto-research/pull/113) 建立框架；DeepMind 官方分页、RecSys 2026 海报及正式 session、SIGIR 2026 录用名单可解析，且每日输出官方待审队列；仍非全量 | 跨来源召回 | 每日检查来源失败与未匹配标题；逐篇核查身份、一作机构及全文线上证据，处理官方站点不可用与历史待审队列后，才能声称覆盖完成 |
+| DISC-004 | DONE | 跨来源召回 | 动态研究页详情 arXiv 对账；静态会议 906 标题显式快照增量；传输、分页、身份状态分离；本窗口官方待核队列为零 |
 | DISC-005 | DONE · [PR #113](https://github.com/daiwk/auto-research/pull/113) | 批次终态自动回写 | 回写器要求全部新候选终态；strict audit 可核对待审 artifact 与 ledger |
 
 每个新工业候选先按“机构/主题”召回，再读 PDF/HTML 全文。只有量化线上 A/B，或用户
@@ -202,6 +202,7 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 | INFRA-001 | DONE · [PR #111](https://github.com/daiwk/auto-research/pull/111) | GPU 依赖防护 | pip dry-run 阻止静默替换现有 PyTorch；Linux CPU 合同测试覆盖，既有 A30 关键路径回归继续保留 |
 | INFRA-002 | DONE · [PR #117](https://github.com/daiwk/auto-research/pull/117) | 重点方法多 seed 晋级 | 推荐/基础模型 adapter、后训练和 Agent 统一 3 seeds、置信区间、逐 seed 失败记录与断点续跑 |
 | EV-005 | DONE · [PR #137](https://github.com/daiwk/auto-research/pull/137) | PACE 与 TwinKV checkpoint/结构算子 | 论文 ID → operator 可追踪；PACE 接入 VLM checkpoint 配方，TwinKV 接入可执行 micro-LLM attention，并与真实 checkpoint 复用 repair 函数 |
+| EV-006 | DONE | EvoSkillRec typed skill genome | 控制器执行类型检查、候选运行、validation 评估、晋级和复用；RankMixer Evolve 可训练/评估 `rankmixer_evoskill`，不是 registry-only 标签 |
 
 ## 等待公开证据，不创建占位实现
 

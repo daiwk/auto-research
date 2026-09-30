@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:r2-opd",
+  "method": "r2-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "weight_mean": 1.0,
+      "weight_std": 1.060608148574829
+    },
+    {
+      "seed": 43,
+      "weight_mean": 0.9999999403953552,
+      "weight_std": 1.1384388208389282
+    },
+    {
+      "seed": 44,
+      "weight_mean": 1.0,
+      "weight_std": 0.9674504399299622
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "weight_mean_mean": 0.999999980131785,
+    "weight_std_mean": 1.0554991364479065
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.35517-r2-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep30-closure-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

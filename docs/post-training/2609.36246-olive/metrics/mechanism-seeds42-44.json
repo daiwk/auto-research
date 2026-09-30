@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:olive",
+  "method": "olive",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 1.9414628744125366,
+      "supervised_tokens": 7,
+      "prefix_gradient_zero": true
+    },
+    {
+      "seed": 43,
+      "loss": 2.7562382221221924,
+      "supervised_tokens": 7,
+      "prefix_gradient_zero": true
+    },
+    {
+      "seed": 44,
+      "loss": 2.2211482524871826,
+      "supervised_tokens": 7,
+      "prefix_gradient_zero": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "loss_mean": 2.306283116340637,
+    "supervised_tokens_mean": 7.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.36246-olive/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep30-closure-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

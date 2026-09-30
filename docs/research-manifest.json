@@ -291,6 +291,23 @@
     },
     {
       "domain": "agent-research",
+      "key": "ccm",
+      "title": "Continuous Context Management",
+      "paper_url": "https://arxiv.org/abs/2609.35540",
+      "detail_path": "agent-research/2609.35540-ccm/README.md",
+      "topic": [
+        "上下文管理",
+        "Agent RL"
+      ],
+      "first_author": "William Hoy",
+      "first_author_affiliation": "University of Miami",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "ccm",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "cera-moa",
       "title": "CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents",
       "paper_url": "https://arxiv.org/abs/2609.18779",
@@ -304,6 +321,24 @@
       "published": "2026-09-16",
       "code": null,
       "adapter": "cera-moa",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "certified-selective-eval",
+      "title": "Certified Selective Automation of LLM Agent Evaluation",
+      "paper_url": "https://arxiv.org/abs/2609.34320",
+      "detail_path": "agent-research/2609.34320-certified-selective-eval/README.md",
+      "topic": [
+        "Agent 评测",
+        "选择性自动化",
+        "统计证书"
+      ],
+      "first_author": "Chengguang Gan",
+      "first_author_affiliation": "Independent Researcher",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "certified-selective-eval",
       "priority": "P1"
     },
     {
@@ -458,6 +493,23 @@
       "published": "2026-09-16",
       "code": "https://github.com/Alibaba-NLP/VLLM-KB",
       "adapter": "dependency-refinement",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "dr-credit",
+      "title": "Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents",
+      "paper_url": "https://arxiv.org/abs/2609.34296",
+      "detail_path": "agent-research/2609.34296-dr-credit/README.md",
+      "topic": [
+        "Agent RL",
+        "过程信用分配"
+      ],
+      "first_author": "Yingjian Zhu",
+      "first_author_affiliation": "University of Chinese Academy of Sciences",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "dr-credit",
       "priority": "P1"
     },
     {
@@ -1056,6 +1108,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "mnemon",
+      "title": "Mnemon: Raw Records, Fast Judgments, Slow Thoughts",
+      "paper_url": "https://arxiv.org/abs/2609.36059",
+      "detail_path": "agent-research/2609.36059-mnemon/README.md",
+      "topic": [
+        "长期记忆",
+        "Jev",
+        "System 1/2"
+      ],
+      "first_author": "Guangren Wang",
+      "first_author_affiliation": "原文未列机构",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "mnemon",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "mrkl",
       "title": "MRKL",
       "paper_url": "https://arxiv.org/abs/2205.00445",
@@ -1424,6 +1494,24 @@
       "published": "2025-12-18",
       "code": "未发现官方代码",
       "adapter": "sage"
+    },
+    {
+      "domain": "agent-research",
+      "key": "sage-planner",
+      "title": "SAGE: Symbolic Action-Gating and Editing for LLM Task Planners",
+      "paper_url": "https://arxiv.org/abs/2609.34268",
+      "detail_path": "agent-research/2609.34268-sage/README.md",
+      "topic": [
+        "规划",
+        "安全门",
+        "局部恢复"
+      ],
+      "first_author": "Trung Minh Bui",
+      "first_author_affiliation": "原文首页未列机构",
+      "published": "2026-09-28",
+      "code": "https://github.com/mtbui2010/sage",
+      "adapter": "sage-planner",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -3285,6 +3373,23 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "frac-ssm",
+      "title": "Fractional State Space Transition for Long Sequence Modeling",
+      "paper_url": "https://arxiv.org/abs/2609.36314",
+      "detail_path": "foundation-models/2609.36314-frac-ssm/README.md",
+      "topic": [
+        "状态空间模型",
+        "长上下文"
+      ],
+      "first_author": "Ivan Kobyzev",
+      "first_author_affiliation": "Huawei Noah's Ark Lab, Montreal Research Center",
+      "published": "2026-09-28",
+      "code": "https://github.com/anasiri/frac-ssm",
+      "adapter": "frac-ssm",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -6233,6 +6338,23 @@
     },
     {
       "domain": "foundation-models",
+      "key": "telescopic-lm",
+      "title": "Telescopic Language Models",
+      "paper_url": "https://arxiv.org/abs/2609.35769",
+      "detail_path": "foundation-models/2609.35769-telescopic-lm/README.md",
+      "topic": [
+        "网络架构",
+        "弹性深度"
+      ],
+      "first_author": "Zhilin Guo",
+      "first_author_affiliation": "University of Cambridge",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "telescopic-lm",
+      "priority": "P1"
+    },
+    {
+      "domain": "foundation-models",
       "key": "transmem",
       "title": "TransMem: Transforming Hidden States into Memory for Large Language Models",
       "paper_url": "https://arxiv.org/abs/2607.29032",
@@ -7525,6 +7647,23 @@
     },
     {
       "domain": "post-training",
+      "key": "mas-opd",
+      "title": "MAS-OPD: On-Policy Distillation for Multi-Agent Systems",
+      "paper_url": "https://arxiv.org/abs/2609.34234",
+      "detail_path": "post-training/2609.34234-mas-opd/README.md",
+      "topic": [
+        "多 Agent",
+        "On-policy distillation"
+      ],
+      "first_author": "Qiyong Zhong",
+      "first_author_affiliation": "University of Science and Technology of China",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "mas-opd",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "math-shepherd",
       "title": "Math-Shepherd",
       "paper_url": "https://arxiv.org/abs/2312.08935",
@@ -7707,6 +7846,23 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "post-training",
+      "key": "olive",
+      "title": "Learning from Teacher Continuations at Student States",
+      "paper_url": "https://arxiv.org/abs/2609.36246",
+      "detail_path": "post-training/2609.36246-olive/README.md",
+      "topic": [
+        "在线蒸馏",
+        "Teacher continuation"
+      ],
+      "first_author": "Haojin Wang",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "published": "2026-09-28",
+      "code": "https://dylanzsz.github.io/olive/",
+      "adapter": "olive",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -8153,6 +8309,24 @@
     },
     {
       "domain": "post-training",
+      "key": "rfpo",
+      "title": "Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training",
+      "paper_url": "https://arxiv.org/abs/2609.37119",
+      "detail_path": "post-training/2609.37119-rfpo/README.md",
+      "topic": [
+        "RL",
+        "冻结 Critic",
+        "无标签奖励"
+      ],
+      "first_author": "Hongyang Li",
+      "first_author_affiliation": "University of Luxembourg",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "rfpo",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "ride-opd",
       "title": "The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation",
       "paper_url": "https://arxiv.org/abs/2609.36484",
@@ -8264,6 +8438,23 @@
       "priority": "P0",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/roft-a100-20260930.json"
+    },
+    {
+      "domain": "post-training",
+      "key": "ross",
+      "title": "ROSS: Relearning from Self-Generated Rollouts through Selective Supervision",
+      "paper_url": "https://arxiv.org/abs/2609.35954",
+      "detail_path": "post-training/2609.35954-ross/README.md",
+      "topic": [
+        "离线 SFT",
+        "选择性监督"
+      ],
+      "first_author": "AllSpark Team",
+      "first_author_affiliation": "AllSpark Team（原文以团队署名，未列机构）",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": "ross",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -14163,6 +14354,65 @@
         ],
         "selection_exception": null,
         "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "evoskillrec",
+      "title": "EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery",
+      "paper_url": "https://arxiv.org/abs/2609.34552",
+      "detail_path": "reproductions/2609.34552-evoskillrec/README.md",
+      "topic": [
+        "recommendation-auto-evolution",
+        "architecture-search",
+        "skill-genome"
+      ],
+      "first_author": "Xiaopeng Li",
+      "first_author_affiliation": "City University of Hong Kong",
+      "published": "2026-09-28",
+      "code": "https://github.com/Xiaopengli1/EvoSkill-Rec",
+      "adapter": {
+        "adapter_key": "evoskillrec",
+        "arxiv_id": "2609.34552",
+        "title": "EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery",
+        "paper_url": "https://arxiv.org/abs/2609.34552",
+        "track": "recommendation",
+        "organization": "City University of Hong Kong",
+        "published": "2026-09-28",
+        "code_url": "https://github.com/Xiaopengli1/EvoSkill-Rec",
+        "topics": [
+          "recommendation-auto-evolution",
+          "architecture-search",
+          "skill-genome"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/evoskillrec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "untransformed feature genome",
+        "metrics": [
+          "validation score",
+          "promotion decision",
+          "reusable genome count"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "one typed-genome promotion cycle per seed",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "用户明确批准本轮 P1 学术推荐研究条目；该条目不作为工业线上 A/B 证据样本。",
+        "evolve_operators": [
+          "rankmixer_evoskill"
+        ]
       }
     },
     {
@@ -23645,6 +23895,63 @@
           }
         ],
         "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "promptshift",
+      "title": "Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2609.34229",
+      "detail_path": "reproductions/2609.34229-promptshift/README.md",
+      "topic": [
+        "llm-recommendation",
+        "identity-cue-drift",
+        "fairness"
+      ],
+      "first_author": "Zhuoxiong Gan",
+      "first_author_affiliation": "University of Electronic Science and Technology of China",
+      "published": "2026-09-28",
+      "code": null,
+      "adapter": {
+        "adapter_key": "promptshift",
+        "arxiv_id": "2609.34229",
+        "title": "Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2609.34229",
+        "track": "recommendation",
+        "organization": "University of Electronic Science and Technology of China",
+        "published": "2026-09-28",
+        "code_url": null,
+        "topics": [
+          "llm-recommendation",
+          "identity-cue-drift",
+          "fairness"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/promptshift",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public identity-slice fixture"
+        ],
+        "baseline": "identity-cued ranking without adaptive mitigation",
+        "metrics": [
+          "drift",
+          "slice shift",
+          "difficulty at k"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "one ten-item diagnostic ranking per seed",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "用户明确批准本轮 P1 学术推荐研究条目；该条目不作为工业线上 A/B 证据样本。",
         "evolve_operators": []
       }
     },

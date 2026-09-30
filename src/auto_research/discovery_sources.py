@@ -44,6 +44,8 @@ class DiscoverySource:
     organization: str | None = None
     max_pages: int = 1
     max_title_lookups: int = 0
+    max_detail_lookups: int = 0
+    review_policy: str = "incremental"
 
 
 @dataclass(frozen=True)
@@ -78,6 +80,17 @@ def load_sources(path: Path, track: str) -> tuple[DiscoverySource, ...]:
         for item in payload.get("sources", [])
         if item.get("track", "all") in {"all", track}
     )
+
+
+def load_source_snapshots(path: Path | None) -> dict[str, set[str]]:
+    """Load explicitly approved static-list baselines used for daily deltas."""
+    if path is None or not path.exists():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        name: {normalized_title(title) for title in titles}
+        for name, titles in payload.get("sources", {}).items()
+    }
 
 
 def catalog_papers_from_manifest(path: Path) -> tuple[Paper, ...]:
@@ -364,6 +377,13 @@ def prioritized_records(
     )
 
 
+def title_matches_track(title: str, track: str) -> bool:
+    """Keep official review queues scoped to the requested research track."""
+    if track == "all":
+        return True
+    return any(term in title.casefold() for term in TRACK_TITLE_TERMS.get(track, ()))
+
+
 def semantic_scholar_citation_hits(
     seed_ids: Iterable[str],
     *,
@@ -397,6 +417,7 @@ def discover_external(
     client: ArxivClient,
     fetcher: Callable[[str], str] = fetch_text,
     snowball_seeds: Iterable[str] = (),
+    source_snapshots: dict[str, set[str]] | None = None,
     known_papers: Iterable[Paper] = (),
     catalog_papers: Iterable[Paper] = (),
     track: str = "all",
@@ -409,14 +430,23 @@ def discover_external(
     title_index: dict[str, list[Paper]] = {}
     known_ids: set[str] = set()
     catalog_papers = tuple(catalog_papers)
+    source_snapshots = source_snapshots or {}
     catalog_ids = {canonical_arxiv_id(paper.arxiv_id) for paper in catalog_papers}
     for paper in (*known_papers, *catalog_papers):
         title_index.setdefault(normalized_title(paper.title), []).append(paper)
         known_ids.add(canonical_arxiv_id(paper.arxiv_id))
     for source in sources:
         try:
-            if source.max_pages < 1 or source.max_title_lookups < 0:
-                raise ValueError("max_pages must be positive and max_title_lookups non-negative")
+            if (
+                source.max_pages < 1
+                or source.max_title_lookups < 0
+                or source.max_detail_lookups < 0
+                or source.review_policy not in {"incremental", "snapshot"}
+            ):
+                raise ValueError(
+                    "max_pages must be positive, lookup limits non-negative, and "
+                    "review_policy one of incremental/snapshot"
+                )
             extracted: list[CrossSourceHit] = []
             records: dict[tuple[str, str], tuple[str, str, str | None]] = {}
             deepmind_listing = (
@@ -457,11 +487,39 @@ def discover_external(
             matched = 0
             catalog_matched = 0
             title_lookups = 0
+            detail_lookups = 0
             lookup_errors: list[dict] = []
+            detail_lookup_errors: list[dict] = []
             unresolved: list[dict] = []
-            for title, detail_url, published in prioritized_records(records.values(), track):
+            baseline = source_snapshots.get(source.name)
+            if source.review_policy == "snapshot" and baseline is not None:
+                review_records = [
+                    record for record in records.values()
+                    if normalized_title(record[0]) not in baseline
+                ]
+            else:
+                review_records = list(records.values())
+            for title, detail_url, published in prioritized_records(review_records, track):
                 candidates = title_index.get(normalized_title(title), ())
                 identities = {canonical_arxiv_id(item.arxiv_id) for item in candidates}
+                identity_relation = "exact-title"
+                relevant = title_matches_track(title, track)
+                if (
+                    not identities
+                    and relevant
+                    and source.kind == "official-research"
+                    and detail_lookups < source.max_detail_lookups
+                ):
+                    detail_lookups += 1
+                    try:
+                        detail_content = fetcher(detail_url)
+                        detail_hits = extract_source_hits(source, detail_content)
+                        detail_ids = {hit.arxiv_id for hit in detail_hits}
+                        if len(detail_ids) == 1:
+                            identities = detail_ids
+                            identity_relation = "official-detail"
+                    except Exception as exc:
+                        detail_lookup_errors.append({"title": title, "error": str(exc)})
                 if not identities and title_lookups < source.max_title_lookups:
                     title_lookups += 1
                     try:
@@ -479,7 +537,7 @@ def discover_external(
                     identity = identities.pop()
                     extracted.append(CrossSourceHit(
                         identity, source.name, source.kind, detail_url,
-                        source.organization, "exact-title", source_published=published,
+                        source.organization, identity_relation, source_published=published,
                     ))
                     matched += 1
                     catalog_matched += identity in catalog_ids
@@ -489,6 +547,7 @@ def discover_external(
                         item["source_published"] = published
                     unresolved.append(item)
             hits.extend(extracted)
+            transport_status = "partial" if page_failures else "ok"
             stat = {
                 "source": source.name,
                 "url": source.url,
@@ -496,6 +555,9 @@ def discover_external(
                 "status": "partial" if records or page_failures else (
                     "ok" if extracted else "no_arxiv_ids"
                 ),
+                "transport_status": transport_status,
+                "review_policy": source.review_policy,
+                "track": track,
             }
             if page_failures:
                 stat["page_failures"] = page_failures
@@ -508,9 +570,22 @@ def discover_external(
                     "catalog_title_matches": catalog_matched,
                     "title_lookups_attempted": title_lookups,
                     "title_lookup_errors": lookup_errors,
+                    "detail_lookups_attempted": detail_lookups,
+                    "detail_lookup_errors": detail_lookup_errors,
                     "unresolved_publications": unresolved,
                     "note": "Listing is not proof of exhaustive date coverage; unresolved titles require review.",
                 })
+                if source.review_policy == "snapshot":
+                    stat.update({
+                        "snapshot_publication_titles": sorted(
+                            (record[0] for record in records.values()), key=str.casefold,
+                        ),
+                        "snapshot_baseline_present": baseline is not None,
+                        "snapshot_known_publications": (
+                            len(records) - len(review_records) if baseline is not None else 0
+                        ),
+                        "snapshot_new_publications": len(review_records),
+                    })
                 if deepmind_listing:
                     stat["pages_available"] = pages_available
                     stat["pagination_capped"] = (
@@ -557,6 +632,8 @@ def official_review_queue(
     for stat in source_stats:
         organization = stat.get("organization")
         for item in stat.get("unresolved_publications", ()):
+            if not title_matches_track(item["title"], stat.get("track", "all")):
+                continue
             published = item.get("source_published")
             if published:
                 try:

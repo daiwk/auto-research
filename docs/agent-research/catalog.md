@@ -13,8 +13,13 @@
 | Agent 记忆 | [UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval](2609.36805-upliftmem/README.md) | Beihang University，2026-09-29 | 未发现官方代码 | `upliftmem` |
 | Agent 评测 | [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](2609.38043-userproxybench/README.md) | 原文未列机构，2026-09-29 | 未发现官方代码 | `user-proxy-bench` |
 | RSI | [Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution](2609.37950-video-rsi/README.md) | Tsinghua University，2026-09-29 | [已开源](https://github.com/bingjunluo/Video-RSI) | `video-rsi` |
+| Agent 评测 | [Certified Selective Automation of LLM Agent Evaluation](2609.34320-certified-selective-eval/README.md) | Independent Researcher，2026-09-28 | 未发现官方代码 | `certified-selective-eval` |
+| 上下文管理 | [Continuous Context Management](2609.35540-ccm/README.md) | University of Miami，2026-09-28 | 未发现官方代码 | `ccm` |
+| Agent RL | [Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents](2609.34296-dr-credit/README.md) | University of Chinese Academy of Sciences，2026-09-28 | 未发现官方代码 | `dr-credit` |
 | Agentic RL | [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](2609.35084-graphhca/README.md) | Beihang University，2026-09-28 | 未发现官方代码 | `graphhca` |
 | Harness 学习 | [Harness Learning Enables Generalizable Test-Time Adaptation](2609.35738-harness-learning/README.md) | Johns Hopkins University，2026-09-28 | 未发现官方代码 | `harness-learning` |
+| 长期记忆 | [Mnemon: Raw Records, Fast Judgments, Slow Thoughts](2609.36059-mnemon/README.md) | 原文未列机构，2026-09-28 | 未发现官方代码 | `mnemon` |
+| 规划 | [SAGE: Symbolic Action-Gating and Editing for LLM Task Planners](2609.34268-sage/README.md) | 原文首页未列机构，2026-09-28 | [已开源](https://github.com/mtbui2010/sage) | `sage-planner` |
 | 研究自动化 | [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](2609.30001-agentx-model/README.md) | Kuaishou，2026-09-24 | 未发现官方代码 | `agentx-model-replay` |
 | 编程 Agent | [An Empirical Study of Harness Design for Coding Agents](2609.20804-harness-design-study/README.md) | University of Massachusetts Amherst，2026-09-17 | 未发现官方代码 | `harness-design-study` |
 | 多 Agent | [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](2609.18779-cera-moa/README.md) | IIIS, Tsinghua University，2026-09-16 | 未发现官方代码 | `cera-moa` |

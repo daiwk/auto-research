@@ -7,6 +7,10 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2609.34552": (
+        "rankmixer_evoskill",
+        "EvoSkillRec 的 typed skill genome、validation 晋级与已验证技能复用",
+    ),
     "2609.05063": (
         "context:complementary-category-adapter",
         "AlleCompanion 的互补类别图、类别约束双塔与受控 Category Adapter",

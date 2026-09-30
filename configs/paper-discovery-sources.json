@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "sources": [
-    {"name": "Google Research publications", "kind": "official-research", "url": "https://research.google/pubs/?sort=-publication__year", "organization": "Google", "max_pages": 3, "max_title_lookups": 5},
-    {"name": "Google DeepMind publications", "kind": "official-research", "url": "https://deepmind.google/research/publications/", "organization": "Google DeepMind", "max_pages": 20, "max_title_lookups": 5},
-    {"name": "Meta AI publications", "kind": "official-research", "url": "https://ai.meta.com/global_search/?content_types%5B0%5D=publication&page=1", "organization": "Meta", "max_pages": 2, "max_title_lookups": 5},
+    {"name": "Google Research publications", "kind": "official-research", "url": "https://research.google/pubs/?sort=-publication__year", "organization": "Google", "max_pages": 3, "max_title_lookups": 5, "max_detail_lookups": 12},
+    {"name": "Google DeepMind publications", "kind": "official-research", "url": "https://deepmind.google/research/publications/", "organization": "Google DeepMind", "max_pages": 20, "max_title_lookups": 5, "max_detail_lookups": 12},
+    {"name": "Meta AI publications", "kind": "official-research", "url": "https://ai.meta.com/global_search/?content_types%5B0%5D=publication&page=1", "organization": "Meta", "max_pages": 2, "max_title_lookups": 5, "max_detail_lookups": 12},
     {"name": "Google Research GitHub", "kind": "github-organization", "url": "https://api.github.com/orgs/google-research/repos?sort=updated&per_page=100", "organization": "Google"},
     {"name": "Meta Research GitHub", "kind": "github-organization", "url": "https://api.github.com/orgs/facebookresearch/repos?sort=updated&per_page=100", "organization": "Meta"},
-    {"name": "RecSys 2026 posters 1", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-1/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5},
-    {"name": "RecSys 2026 posters 2", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-2/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5},
-    {"name": "RecSys 2026 posters 3", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-3/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5},
-    {"name": "RecSys 2026 session 1", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-1/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 2", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-2/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 3", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-3/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 4", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-4/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 5", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-5/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 6", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-6/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 7", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-7/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "RecSys 2026 session 8", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-8/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2},
-    {"name": "SIGIR 2026 accepted papers", "kind": "official-conference", "url": "https://sigir2026.org/en-AU/pages/program/accepted-papers", "track": "recommendation", "organization": "ACM SIGIR", "max_title_lookups": 10}
+    {"name": "RecSys 2026 posters 1", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-1/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 posters 2", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-2/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 posters 3", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-3/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 1", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-1/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 2", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-2/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 3", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-3/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 4", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-4/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 5", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-5/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 6", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-6/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 7", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-7/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "RecSys 2026 session 8", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/session-8/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 2, "review_policy": "snapshot"},
+    {"name": "SIGIR 2026 accepted papers", "kind": "official-conference", "url": "https://sigir2026.org/en-AU/pages/program/accepted-papers", "track": "recommendation", "organization": "ACM SIGIR", "max_title_lookups": 10, "review_policy": "snapshot"}
   ]
 }

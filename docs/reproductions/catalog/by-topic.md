@@ -20,6 +20,7 @@
 ## 大模型能力与推荐融合
 
 ### LLM / Foundation model + Recommendation
+- [PromptShift](../2609.34229-promptshift/README.md)：比较身份提示与无身份参考列表的偏移，并按用户主流度混合相关分和逆群体流行度进行缓解。
 - [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：离线生成陌生艺人及基于已听艺人的解释，经实体和共享标签校验后缓存供在线使用。
 - [ConnectionMind](../2608.10187-connectionmind/README.md)：让 LLM policy 在 typed 社交图上逐步扩展证据路径，并以 SFT、GRPO 和 GNN 蒸馏兼顾推理质量与流量成本。
 - [DREAM](../2608.09408-dream/README.md)：以 LLM Meta Engine 将三层用户意图编译为安全的推荐策略覆盖，并通过 Reward Dual Loop 持续沉淀有效结论。
@@ -374,6 +375,7 @@
 ## Serving 与研究基础设施
 
 ### 自主研究与反馈闭环
+- [EvoSkillRec](../2609.34552-evoskillrec/README.md)：把推荐结构拆成带类型的可执行 skill genome，只将 validation 改善的组合晋级到可复用技能库。
 - [EvoPilot](../2609.21257-evopilot/README.md)：把 shared base、数据、评测器与有效输出深度固定成比较协议，只接纳经产物校验和人工审核的 treatment 结论。
 - [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md)：以多专家评审、证据加权预算和确定性晋级门串联研究、实验与上线评审。
 - [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
