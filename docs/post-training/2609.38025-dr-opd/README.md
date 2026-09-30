@@ -35,14 +35,14 @@ flowchart LR
 
 [![Dr. OPD 求解流程](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.38025#page=2)
 
-> 原论文 Figure 1：从 student rollout、teacher 信号到闭式 token weight 的求解器；版权归原作者所有。
+> 原论文 Figure 1：从 student rollout、teacher 信号到闭式 token weight 的求解器。图片来自[原论文](https://arxiv.org/abs/2609.38025)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 本地以 $c_t=d_t\,g_t$ 表示 teacher-student discrepancy 与 reward 对该 token 更新方向的 JVP 乘积，再计算 $w_t=\mathrm{clip}(1+c_t/\lambda,0,w_{max})$ 并做均值归一化；训练损失为 $\sum_t w_t D_{KL}(p_{student,t}\Vert p_{teacher,t})$。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文在数学与代码的强到弱/同规模蒸馏中报告稳定优于 vanilla OPD，强到弱数学平均提升 9.7 分。本站仅报告机制诊断 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)，不把论文值写成本地收益。
 

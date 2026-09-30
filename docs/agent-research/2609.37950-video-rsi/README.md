@@ -34,14 +34,14 @@ flowchart LR
 
 [![Video-RSI 从回答到 harness 改进](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.37950#page=2)
 
-> 原论文 Figure 1：直接回答、固定视频 Agent 与递归 harness 改进的区别；版权归原作者所有。
+> 原论文 Figure 1：直接回答、固定视频 Agent 与递归 harness 改进的区别。图片来自[原论文](https://arxiv.org/abs/2609.37950)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 本地接纳规则为 $a'\ge a-\epsilon_a$ 且 $c'\le c+\epsilon_c$，并要求至少一项严格改善；这保留论文 accuracy/cost 双门槛，拒绝用单一加权分数掩盖明显退化。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文报告在视频理解 benchmark 上同时提高准确率、减少处理帧数。本站只报告接纳逻辑三种子诊断 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)，不声称完成端到端视频复现。
 

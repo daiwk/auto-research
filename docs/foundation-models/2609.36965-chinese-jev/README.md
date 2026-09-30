@@ -34,14 +34,14 @@ flowchart LR
 
 [![Chinese-Jev 数据任务组成](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.36965#page=2)
 
-> 原论文 Figure 1，展示通用中文决策数据构成；版权归原作者所有。
+> 原论文 Figure 1，展示通用中文决策数据构成。图片来自[原论文](https://arxiv.org/abs/2609.36965)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 候选 $i$ 的分数为 $s_i=w^\top h_{m_i}$，$p_i=\mathrm{softmax}(s)_i$；本地目标组合软标签交叉熵 $-\sum_i q_i\log p_i$ 与以 reward-centered advantage 加权的 $-\log p_i$，保持论文“候选决策而非自回归生成”的核心边界。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文报告通用任务准确率较闭源 Jev 高 1.24%、速度快 20.3 倍；领域微调后医疗高 4.0%，并报告约 15ms 平均延迟。这些均为原论文结果。本地三种子机制指标见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。
 

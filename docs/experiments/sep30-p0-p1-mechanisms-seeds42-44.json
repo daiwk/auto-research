@@ -667,10 +667,21 @@
       43,
       44
     ],
-    "metrics": {},
+    "metrics": {
+      "accepted_branches": {
+        "mean": 2.0,
+        "std": 0.0
+      },
+      "rejected_branches": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    },
     "seed_results": [
       {
         "seed": 42,
+        "accepted_branches": 2,
+        "rejected_branches": 1,
         "accuracy_branch_accepts": true,
         "cost_branch_accepts": true,
         "non_pareto_candidate_rejected": true,
@@ -678,6 +689,8 @@
       },
       {
         "seed": 43,
+        "accepted_branches": 2,
+        "rejected_branches": 1,
         "accuracy_branch_accepts": true,
         "cost_branch_accepts": true,
         "non_pareto_candidate_rejected": true,
@@ -685,6 +698,8 @@
       },
       {
         "seed": 44,
+        "accepted_branches": 2,
+        "rejected_branches": 1,
         "accuracy_branch_accepts": true,
         "cost_branch_accepts": true,
         "non_pareto_candidate_rejected": true,
@@ -710,6 +725,7 @@
   },
   "helix": {
     "schema_version": 2,
+    "diagnostic_only": true,
     "manifest_ref": "reproductions:helix",
     "method": "helix",
     "dataset": "deterministic public mechanism mini-suite",

@@ -34,14 +34,14 @@ flowchart LR
 
 [![LeapQuant 的状态访存与内存动机](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.38166#page=2)
 
-> 原论文 Figure 1，展示递归状态访问的 decoding 开销；版权归原作者所有。
+> 原论文 Figure 1，展示递归状态访问的 decoding 开销。图片来自[原论文](https://arxiv.org/abs/2609.38166)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 窗口内状态写成 $S_t=Q(S_{kw})+\sum_{i=kw+1}^{t}\Delta S_i$，只在边界 $t=(k+1)w$ 重量化；本地用截断 SVD 构造 rank-$r$ 补偿项 $C=U_r\Sigma_rV_r^\top$，对 $S-C$ 对称量化，再把 $C$ 加回读出。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文在 Qwen/Kimi/GLM 家族报告接近 FP32 的 8-bit 结果、kernel 级 2.05–3.70 倍加速和端到端 1.47 倍加速。本站不复述为本地结果；本地指标见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。
 

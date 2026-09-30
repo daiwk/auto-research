@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "adapter_key": "leapquant",
+  "validated_at": "2026-09-30",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": ["python3", "scripts/validate_latest_20260930.py", "--device", "cuda", "--output-root", "out"],
+  "dataset": {"name": "public deterministic recurrent-state mechanism tensors", "revision": "sep30-v1", "seeds": [42, 43, 44]},
+  "checkpoint": {"model_id": "LeapQuant standalone window quantizer initialized from public seeds", "revision": "arXiv:2609.38166v1"},
+  "result": "passed",
+  "metrics": {"state_mse_mean": 0.000055891553832528494, "window_steps": 4, "compensator_rank": 2, "finite_boundary": true, "cuda_completed": true},
+  "provenance": {"commit": "93830c3", "artifact_path": "docs/gpu-validations/leapquant-a100-20260930.json", "raw_predictions_committed": false, "checkpoint_committed": false}
+}

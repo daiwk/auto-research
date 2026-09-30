@@ -12404,7 +12404,7 @@
         {"id": "2609.36742", "priority": "P1", "track": "post-training", "status": "implemented", "key": "sipo", "doc": "post-training/2609.36742-sipo/README.md"},
         {"id": "2609.37311", "priority": "P1", "track": "agent", "status": "implemented", "key": "remem", "doc": "agent-research/2609.37311-remem/README.md"},
         {"id": "2609.37950", "priority": "P1", "track": "agent", "status": "implemented", "key": "video-rsi", "doc": "agent-research/2609.37950-video-rsi/README.md"},
-        {"id": "2609.37905", "priority": "P0-review", "track": "recommendation", "status": "rejected", "organization": "Google Research", "reason": "Full text contains no quantified online A/B or user-approved full-traffic deployment evidence; Google priority does not waive the industrial evidence gate."},
+        {"id": "2609.37905", "priority": "P0", "track": "recommendation", "status": "rejected", "organization": "Google Research", "reason": "Full text contains no quantified online A/B or user-approved full-traffic deployment evidence; Google priority does not waive the industrial evidence gate."},
         {"id": "2609.37968", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an editable real search environment, reward-free trajectory selection and equal-budget agent evaluation; a tensor placeholder would not preserve the algorithm."},
         {"id": "2609.37105", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires a multi-tool executable agent environment, real execution feedback and cross-generation cost-controlled evaluation."}
       ]

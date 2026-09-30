@@ -9,7 +9,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
-| ranking | [HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation](../2609.37183-helix/README.md) | TikTok / ByteDance，2026-09-29 | 未发现官方代码 | `helix` |
+| 排序与长序列建模 | [HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation](../2609.37183-helix/README.md) | TikTok / ByteDance，2026-09-29 | 未发现官方代码 | `helix` |
 | Serving 与研究基础设施 | [Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation](../2609.32839-flvm/README.md) | Google / YouTube，2026-09-26 | 未发现官方代码 | `flvm` |
 | 生成、排序与冷启动 | [KuaFu: Compressing Long User Behavior into Understanding at Billion Scale](../2609.31045-kuafu/README.md) | Tencent，2026-09-25 | 未发现官方代码 | `kuafu` |
 | 生成、排序与冷启动 | [X-Rec Technical Report](../2609.29180-xrec/README.md) | TikTok (ByteDance)，2026-09-24 | 未发现官方代码 | `xrec` |

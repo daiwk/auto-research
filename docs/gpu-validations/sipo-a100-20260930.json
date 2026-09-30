@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "adapter_key": "sipo",
+  "validated_at": "2026-09-30",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": ["python3", "scripts/validate_latest_20260930.py", "--device", "cuda", "--output-root", "out"],
+  "dataset": {"name": "public deterministic grouped rollout mechanism tensors", "revision": "sep30-v1", "seeds": [42, 43, 44]},
+  "checkpoint": {"model_id": "SIPO objective initialized from public seeds", "revision": "arXiv:2609.36742v1"},
+  "result": "passed",
+  "metrics": {"mean_abs_evidence": 0.121867502729098, "uniform_failure_signal": true, "finite_gradient": true, "backward_completed": true},
+  "provenance": {"commit": "93830c3", "artifact_path": "docs/gpu-validations/sipo-a100-20260930.json", "raw_predictions_committed": false, "checkpoint_committed": false}
+}

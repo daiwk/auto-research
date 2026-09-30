@@ -34,14 +34,14 @@ flowchart LR
 
 [![ReMem 总体结构](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.37311#page=1)
 
-> 原论文 Figure 1：多模态“眼睛”和动态记忆“脑”的分工；版权归原作者所有。
+> 原论文 Figure 1：多模态“眼睛”和动态记忆“脑”的分工。图片来自[原论文](https://arxiv.org/abs/2609.37311)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 本地记忆更新保留最近观测，同时按衰减后的 relevance/recency 分数选择历史块，使 $|M_t|\le B$；多记忆目标对同一 query 的不同 memory view 分别计算 group-normalized advantage，再做共享 clipped policy objective。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文报告长上下文推荐 Agent 的准确率和 token 效率改进。本站只验证记忆预算、时间更新、目标函数及 gold isolation，指标见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。
 

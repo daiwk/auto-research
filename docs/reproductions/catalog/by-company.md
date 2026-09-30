@@ -79,6 +79,7 @@
 - 2025-03 · [COBRA](../2503.02453-cobra/README.md)：先用稀疏生成缩小候选空间，再用稠密生成细排，形成级联式生成召回。
 
 ## ByteDance / Douyin / TikTok
+- 2026-09 · [HELIX](../2609.37183-helix/README.md)：交错扩展序列建模与候选特征交互，并以单向信息流保持用户序列状态可跨候选复用。
 - 2026-09 · [OneTrans-V2](../2609.28589-onetrans-v2/README.md)：以共享因果用户骨干统一检索、预排与精排，三级 SID 决策生成和精排到预排蒸馏在公开代理标签上运行。
 - 2026-09 · [SequenceO1](../2609.08443-sequenceo1/README.md)：把远期超长历史压成固定预算 prototype sketch，并与近期行为分支共同建模。
 - 2026-09 · [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。

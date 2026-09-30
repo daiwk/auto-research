@@ -280,6 +280,8 @@ def run(device: str, model_id: str | None, revision: str | None):
         rejected, _ = video_rsi_accept(.6, 100, .59, 95)
         results["video-rsi"].append({
             "seed": seed,
+            "accepted_branches": 2,
+            "rejected_branches": 1,
             "accuracy_branch_accepts": accepted_accuracy,
             "cost_branch_accepts": accepted_cost,
             "non_pareto_candidate_rejected": not rejected,
@@ -306,6 +308,7 @@ def write_metrics(results, output_root: Path):
         target = output_root / DOMAINS[method] / "metrics" / "mechanism-seeds42-44.json"
         payload = {
             "schema_version": 2,
+            "diagnostic_only": True,
             "manifest_ref": f"{DOMAINS[method].split('/')[0]}:{method}",
             "method": method,
             "dataset": "deterministic public mechanism mini-suite",

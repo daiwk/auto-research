@@ -34,7 +34,7 @@ flowchart LR
 
 [![STEPQuant 的误差来源和量化动机](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.38169#page=2)
 
-> 原论文 Figure 1，展示状态内存、记忆寿命与量化误差的关系；版权归原作者所有。
+> 原论文 Figure 1，展示状态内存、记忆寿命与量化误差的关系。图片来自[原论文](https://arxiv.org/abs/2609.38169)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式

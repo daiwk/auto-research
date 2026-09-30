@@ -36,14 +36,14 @@ flowchart LR
 
 [![RLVR 与 OPD 对比](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.36742#page=2)
 
-> 原论文 Figure 1，说明稀疏 RLVR 与 dense OPD 信号差异；版权归原作者所有。
+> 原论文 Figure 1，说明稀疏 RLVR 与 dense OPD 信号差异。图片来自[原论文](https://arxiv.org/abs/2609.36742)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 本地实现 $e_t=\log q_t^+-\log q_t^-$，并将中心化后的 $e_t$ 与组相对 outcome advantage 组合为 $A_t=A_{outcome}+\beta(e_t-\bar e)$；即使整组 reward 相同，contrastive teacher 仍能提供非零、但不泄漏 gold 到 student rollout 的 token 信号。
 
-### 论文效果
+### 论文离线与线上效果
 
 论文在推理与代码任务上报告优于 RLVR 和 OPSD；本站不复制为本地效果。本地三种子指标见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)。
 

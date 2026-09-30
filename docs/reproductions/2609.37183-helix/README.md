@@ -6,14 +6,16 @@
 
 | 字段 | 内容 |
 |---|---|
-| 论文链接 | [HELIX](https://arxiv.org/abs/2609.37183) |
-| 公司 / 机构 | TikTok / ByteDance Global E-Commerce Recommendation Video Team |
-| 首次公开日期 | 2026-09-29（arXiv v1；文稿标注 2026-08-27） |
-| 原作者代码 | 否：截至 2026-09-30，未找到原作者发布仓库 |
-| 本地 adapter | `helix` |
+| 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.37183) |
+| 公司/机构 | TikTok / ByteDance Global E-Commerce Recommendation Video Team |
+| 首次公开日期 | 2026-09-29（arXiv v1） |
+| 原文开源代码 | 否：截至 2026-09-30，未找到原作者发布仓库 |
+| Adapter | `helix` |
 | 本地复现代码 | [`src/auto_research/reproductions/helix/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/helix/) |
 
 ## 原始论文总结
+
+论文文稿另标注 2026-08-27；本站按可公开核验的 arXiv v1 日期登记。
 
 ### 背景与主要改动
 
@@ -34,7 +36,7 @@ flowchart LR
 
 [![HELIX 总体架构](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.37183#page=1)
 
-> 原论文 Figure 1，展示 U-only / U×C / mix tokens 及 M-FALCON 单向交互；版权归原作者所有。
+> 原论文 Figure 1，展示 U-only / U×C / mix tokens 及 M-FALCON 单向交互。图片来自[原论文](https://arxiv.org/abs/2609.37183)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
@@ -46,6 +48,8 @@ flowchart LR
 原文在 TikTok 电商推荐完整流量 A/B 中报告约 6% GMV/user 提升，细表给出最高 5.4624% 的对应实验项；同时报告 CTR/CVR AUC 改善。这是进入工业 P0 队列的证据，不是本站结果。
 
 ## 本地复现
+
+> **本地对照口径**：基线为同一 user cache 下的候选 A，实验组为候选 B；只检查候选敏感性与 cache 不变量，没有公开效果指标，相对变化不适用。
 
 运行 `auto-research reproduce --paper helix` 可生成机制指标。三种子统一诊断见 [`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)；模型验证有限 loss、候选条件化 delta、user cache 不变与有限梯度。
 

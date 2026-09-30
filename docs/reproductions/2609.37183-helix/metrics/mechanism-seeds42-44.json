@@ -1,5 +1,6 @@
 {
   "schema_version": 2,
+  "diagnostic_only": true,
   "manifest_ref": "reproductions:helix",
   "method": "helix",
   "dataset": "deterministic public mechanism mini-suite",
