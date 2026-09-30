@@ -1,0 +1,1 @@
+"""TikTok HELIX architecture mechanism."""

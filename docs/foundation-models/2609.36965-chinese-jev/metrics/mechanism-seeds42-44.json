@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:chinese-jev",
+  "method": "chinese-jev",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "loss": {
+      "mean": 1.5964340766270955,
+      "std": 0.12320634264566757
+    },
+    "reward_std": {
+      "mean": 0.41116487979888916,
+      "std": 0.04942429696418572
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 1.728244662284851,
+      "reward_std": 0.36087170243263245,
+      "finite_gradient": true
+    },
+    {
+      "seed": 43,
+      "loss": 1.431841492652893,
+      "reward_std": 0.3942747116088867,
+      "finite_gradient": true
+    },
+    {
+      "seed": 44,
+      "loss": 1.6292160749435425,
+      "reward_std": 0.4783482253551483,
+      "finite_gradient": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.36965-chinese-jev/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "diagnostic_only": true,
+  "manifest_ref": "reproductions:helix",
+  "method": "helix",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "candidate_conditioned_delta": {
+      "mean": 0.11570185174544652,
+      "std": 0.008884967214959426
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "finite_loss": true,
+      "candidate_conditioned_delta": 0.1282322257757187,
+      "user_cache_unchanged": true,
+      "user_gradient_finite": true
+    },
+    {
+      "seed": 43,
+      "finite_loss": true,
+      "candidate_conditioned_delta": 0.10862656682729721,
+      "user_cache_unchanged": true,
+      "user_gradient_finite": true
+    },
+    {
+      "seed": 44,
+      "finite_loss": true,
+      "candidate_conditioned_delta": 0.11024676263332367,
+      "user_cache_unchanged": true,
+      "user_gradient_finite": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.37183-helix/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

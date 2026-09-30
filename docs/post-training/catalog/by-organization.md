@@ -244,6 +244,10 @@
 
 - 2026-09-28 · 一作：Jonathan Light · [Shockingly Simple Self-retrospection Improves Agentic Models Without RL](../2609.35741-roft/README.md)（`roft`）：ROFT 不直接用环境奖励更新动作策略，而是让模型在完整轨迹与反馈之后生成一段自我回顾，再只监督回顾 token。回顾成为后续行为可复用的训练信号，同时避免把环境文本或历史动作误当监督标签。
 
+## Rutgers University
+
+- 2026-09-29 · 一作：Zhenyu Wang · [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](../2609.38025-dr-opd/README.md)（`dr-opd`）：普通 OPD 对每个 teacher token 信号等权，但改正关键推理错误与替换同义措辞的下游价值不同。Dr. OPD 用双层优化定义“更新学生后预期 reward 最大”的 token 权重，并在每轮先闭式更新权重，再执行一次加权 OPD。
+
 ## S-Lab, Nanyang Technological University
 
 - 2026-08-26 · 一作：Shulin Tian · [V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning](../2608.25580-v-rubrics/README.md)（`v-rubrics`）：把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。
@@ -328,6 +332,10 @@
 ## University of Florida
 
 - 2026-08-17 · 一作：Yixuan Wang · [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](../2608.16072-sa-mrpo/README.md)（`sa-mrpo`）：逐 reward 维度标准化优势，并依据 batch 饱和度动态把梯度预算转移到尚未掌握的目标。
+
+## University of Illinois Urbana-Champaign
+
+- 2026-09-29 · 一作：Zhenrui Yue · [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](../2609.36742-sipo/README.md)（`sipo`）：RLVR 的轨迹 reward 稀疏，普通 OPSD 又会受自教师过度自信和长序列惩罚影响。SIPO 对同一 rollout 构造正/负两份特权上下文：两者 teacher log-prob 的差值抵消共享偏差，形成逐 token 信用；环境 reward 决定主方向，dense evidence 负责在 token 间重新分配。
 
 ## University of Maryland, College Park
 

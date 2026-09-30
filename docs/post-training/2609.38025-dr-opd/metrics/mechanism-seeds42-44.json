@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:dr-opd",
+  "method": "dr-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "credit_rms": {
+      "mean": 0.20002265771230063,
+      "std": 0.021288841537483238
+    },
+    "weight_range": {
+      "mean": 1.7405274932583172,
+      "std": 0.34956036327241213
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "credit_rms": 0.2263151854276657,
+      "weight_range": 2.0063036903738976,
+      "finite_gradient": true
+    },
+    {
+      "seed": 43,
+      "credit_rms": 0.19957873225212097,
+      "weight_range": 1.2466533407568932,
+      "finite_gradient": true
+    },
+    {
+      "seed": 44,
+      "credit_rms": 0.17417405545711517,
+      "weight_range": 1.9686254486441612,
+      "finite_gradient": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.38025-dr-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

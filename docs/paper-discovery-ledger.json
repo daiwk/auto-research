@@ -12372,6 +12372,42 @@
           }
         }
       ]
+    },
+    {
+      "batch": "recent-20260930-closeout",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-09-30T18:00:00+08:00",
+      "window": "2026-09-27 through 2026-09-30",
+      "sources": [
+        "arXiv official API, abstract and PDF full text",
+        "official author repositories and project pages"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "overlap_start": "2026-09-27",
+        "source_artifact": "recent-paper-scan-20260930.md",
+        "note": "All arXiv query pages completed without cache fallback; institution cross-source fetch timed out during TLS read, so cross-source coverage remains incomplete. DeepXiv was not used."
+      },
+      "candidates": [
+        {"id": "2609.35741", "priority": "P0", "track": "post-training", "status": "implemented", "key": "roft", "doc": "post-training/2609.35741-roft/README.md"},
+        {"id": "2609.35505", "priority": "P0", "track": "post-training", "status": "implemented", "key": "lspd", "doc": "post-training/2609.35505-lspd/README.md"},
+        {"id": "2609.35738", "priority": "P1", "track": "agent", "status": "implemented", "key": "harness-learning", "doc": "agent-research/2609.35738-harness-learning/README.md"},
+        {"id": "2609.35664", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "ms-gla", "doc": "foundation-models/2609.35664-ms-gla/README.md"},
+        {"id": "2609.35084", "priority": "P1", "track": "agent", "status": "implemented", "key": "graphhca", "doc": "agent-research/2609.35084-graphhca/README.md"},
+        {"id": "2609.37183", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "helix", "doc": "reproductions/2609.37183-helix/README.md", "evidence_gate": "TikTok full-traffic e-commerce A/B, Section 3.5 and Tables 4-5"},
+        {"id": "2609.38169", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "stepquant", "doc": "foundation-models/2609.38169-stepquant/README.md"},
+        {"id": "2609.38166", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "leapquant", "doc": "foundation-models/2609.38166-leapquant/README.md"},
+        {"id": "2609.36965", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "chinese-jev", "doc": "foundation-models/2609.36965-chinese-jev/README.md"},
+        {"id": "2609.38025", "priority": "P1", "track": "post-training", "status": "implemented", "key": "dr-opd", "doc": "post-training/2609.38025-dr-opd/README.md"},
+        {"id": "2609.36742", "priority": "P1", "track": "post-training", "status": "implemented", "key": "sipo", "doc": "post-training/2609.36742-sipo/README.md"},
+        {"id": "2609.37311", "priority": "P1", "track": "agent", "status": "implemented", "key": "remem", "doc": "agent-research/2609.37311-remem/README.md"},
+        {"id": "2609.37950", "priority": "P1", "track": "agent", "status": "implemented", "key": "video-rsi", "doc": "agent-research/2609.37950-video-rsi/README.md"},
+        {"id": "2609.37905", "priority": "P0", "track": "recommendation", "status": "rejected", "organization": "Google Research", "reason": "Full text contains no quantified online A/B or user-approved full-traffic deployment evidence; Google priority does not waive the industrial evidence gate."},
+        {"id": "2609.37968", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an editable real search environment, reward-free trajectory selection and equal-budget agent evaluation; a tensor placeholder would not preserve the algorithm."},
+        {"id": "2609.37105", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires a multi-tool executable agent environment, real execution feedback and cross-generation cost-controlled evaluation."}
+      ]
     }
   ]
 }

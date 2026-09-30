@@ -125,6 +125,7 @@ ECE、coverage、selective accuracy、Score MAE 和按类型/领域切片，而�
 
 ## 延伸阅读
 
+- [Chinese-Jev：中文候选决策、概率监督与 RLCD 目标](../foundation-models/2609.36965-chinese-jev/README.md)
 - [方法索引](catalog.md)
 - [按机构/公司/学校](catalog/by-organization.md) · [按主题](catalog/by-topic.md) · [按年份](catalog/by-year.md)
 - [Jev 与开放实现](implementations.md)

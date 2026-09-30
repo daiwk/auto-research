@@ -34,6 +34,7 @@
 
 ### on-policy / context 蒸馏
 
+- [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](../2609.38025-dr-opd/README.md)（`dr-opd`）：普通 OPD 对每个 teacher token 信号等权，但改正关键推理错误与替换同义措辞的下游价值不同。Dr. OPD 用双层优化定义“更新学生后预期 reward 最大”的 token 权重，并在每轮先闭式更新权重，再执行一次加权 OPD。
 - [An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning](../2609.35505-lspd/README.md)（`lspd`）：LSPD 把教师与学生的 token log-prob 差视作可优化残差，以 least-square 形式直接收缩分布差距，并用 Huber 式尾部限制异常差值的梯度；同时允许复用历史 query-response 轨迹，提高样本效率。
 - [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../../reproductions/2609.30652-recursive-opsd/README.md)（`recursive-opsd`）：传统 OPSD 让学生只看题目、冻结的特权教师额外看标准解，在学生自己的输出前缀上做逐 token 蒸馏。教师停留在初始权重时，后续学生学到的回看和纠错行为无法反哺教师。
 - [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。
@@ -113,6 +114,7 @@
 
 ### RLVR
 
+- [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](../2609.36742-sipo/README.md)（`sipo`）：RLVR 的轨迹 reward 稀疏，普通 OPSD 又会受自教师过度自信和长序列惩罚影响。SIPO 对同一 rollout 构造正/负两份特权上下文：两者 teacher log-prob 的差值抵消共享偏差，形成逐 token 信用；环境 reward 决定主方向，dense evidence 负责在 token 间重新分配。
 - [ISO: An RLVR-Native Optimization Stack](../2607.19331-iso-rlvr/README.md)（`iso-rlvr`）：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
 
 ### 低秩后训练

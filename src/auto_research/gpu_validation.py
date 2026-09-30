@@ -16,6 +16,10 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "stepquant": "docs/gpu-validations/stepquant-a100-20260930.json",
+    "leapquant": "docs/gpu-validations/leapquant-a100-20260930.json",
+    "dr-opd": "docs/gpu-validations/dr-opd-a100-20260930.json",
+    "sipo": "docs/gpu-validations/sipo-a100-20260930.json",
     "roft": "docs/gpu-validations/roft-a100-20260930.json",
     "lspd": "docs/gpu-validations/lspd-a100-20260930.json",
     "ms-gla": "docs/gpu-validations/ms-gla-a100-20260930.json",

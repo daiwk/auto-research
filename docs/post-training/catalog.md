@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](2609.38025-dr-opd/README.md) | Rutgers University，2026-09-29 | [已开源](https://github.com/zywang0701/Dr-OPD) | `dr-opd` |
+| RLVR | [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](2609.36742-sipo/README.md) | University of Illinois Urbana-Champaign，2026-09-29 | [已开源](https://github.com/Yueeeeeeee/SIPO) | `sipo` |
 | On-policy distillation | [An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning](2609.35505-lspd/README.md) | University of North Carolina at Chapel Hill，2026-09-28 | [已开源](https://github.com/UNCSciML/LSPD) | `lspd` |
 | 自我回顾 | [Shockingly Simple Self-retrospection Improves Agentic Models Without RL](2609.35741-roft/README.md) | Rensselaer Polytechnic Institute，2026-09-28 | 未发现官方代码 | `roft` |
 | On-policy self-distillation | [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../reproductions/2609.30652-recursive-opsd/README.md) | Meta AI / University of California, Riverside，2026-09-25 | 未发现官方代码 | `recursive-opsd` |

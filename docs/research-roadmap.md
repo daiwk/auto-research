@@ -26,7 +26,11 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-29**。[最新重叠扫描与 RSI 专题核查](recent-paper-scan-20260929.md)
+更新基线：**2026-09-30**。[最新重叠扫描与收口](recent-paper-scan-20260930.md)
+完成 09-27～09-30 四领域 arXiv 官方高召回扫描，并实现 HELIX、STEPQuant、LeapQuant、
+Chinese-Jev、Dr. OPD、SIPO、ReMem 与 Video-RSI；高召回池与真正新增合格论文已分开统计。
+机构官方入口本轮 TLS 超时，所以只确认 arXiv 传输完整，跨来源 watermark **不推进**。
+上一轮的 [09-29 扫描与 RSI 专题核查](recent-paper-scan-20260929.md)
 覆盖 09-20～09-29 四领域，并发现 Google/YouTube FLVM 工业 P0；arXiv 查询成功不等于
 官方来源覆盖，Google/Meta 总入口提取零条 ID，发现 watermark **不推进**。历史上
 [09-27 增量审计](recent-paper-scan-20260927.md)从 09-20
@@ -104,6 +108,17 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP29-10 | 跨领域 RSI | [递归自我改进专题](evolution/recursive-self-improvement.md) 已建，区分已执行机制与待审候选 | RRSI/RSIBench-Data 仍须真实任务与多轮继承、公平成本及 OOD 验收；专题不是新论文代码域 |
 | SEP29-11 | 发现闭环 | 官方入口零 ID 与 PDF 误读已显性化 | 详情页遍历/feed 接入、机构全文核查、历史未审候选逐项终态后才能推进水位 |
 | SEP29-12 | P0 · KuaFu 公平对照 | [MRQA 三种子 A100 独立训练对照](reproductions/2609.31045-kuafu/README.md)完成；压缩组均未超过同 token 预算对照 | 等 FLOPs 训练、有效幻觉 RL 更新、原文任务数据与更大规模评测；目前仅为公开小样本诊断 |
+
+### 2026-09-30 P0/P1 合并批次
+
+| ID | 优先级 | 状态 | 交付与边界 |
+|---|---|---|---|
+| SEP30-01 | P0 · 工业推荐 | DONE（本分支） | HELIX 三流 token、单向 user cache 与 MPTF；只引用 TikTok 全流量 A/B，公开张量诊断不冒充线上复现 |
+| SEP30-02 | P1 · 基础模型 | DONE（本分支） | STEPQuant 与 LeapQuant 定义性状态量化机制、三种子诊断和 A100 CUDA 回执；不声称复现专用 kernel 吞吐 |
+| SEP30-03 | P1 · System One | DONE（本分支） | Chinese-Jev 候选决策头与 CE/RLCD 目标，挂入 System One 索引；未训练 1000 万样本模型 |
+| SEP30-04 | P1 · 后训练 | DONE（本分支） | Dr. OPD 与 SIPO token 信用机制、三种子诊断和 A100 CUDA 回执；未执行论文规模 rollout 训练 |
+| SEP30-05 | P1 · Agent / RSI | DONE（本分支） | ReMem 时间演化记忆、Multi-Memory GRPO 与 Video-RSI Pareto 接纳；无真实浏览器/视频 Agent 环境，不登记为可执行 Evolve operator |
+| SEP30-06 | 发现闭环 | PARTIAL | arXiv 四轨传输完整；机构官方入口 TLS 超时，RECAP 无线上 A/B，SelfSearch/VACE 依赖真实环境，watermark 不推进 |
 
 ## 优先级和状态
 

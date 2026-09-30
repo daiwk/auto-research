@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "adapter_key": "dr-opd",
+  "validated_at": "2026-09-30",
+  "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+  "command": ["python3", "scripts/validate_latest_20260930.py", "--device", "cuda", "--output-root", "out"],
+  "dataset": {"name": "public deterministic teacher-student logit mechanism tensors", "revision": "sep30-v1", "seeds": [42, 43, 44]},
+  "checkpoint": {"model_id": "Dr. OPD objective initialized from public seeds", "revision": "arXiv:2609.38025v1"},
+  "result": "passed",
+  "metrics": {"credit_rms_mean": 0.1491092617313067, "weight_range_mean": 2.3230874414245286, "finite_gradient": true, "backward_completed": true},
+  "provenance": {"commit": "93830c3", "artifact_path": "docs/gpu-validations/dr-opd-a100-20260930.json", "raw_predictions_committed": false, "checkpoint_committed": false}
+}

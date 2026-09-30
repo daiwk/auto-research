@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "key": "helix",
+  "arxiv_id": "2609.37183",
+  "title": "HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
+  "paper_url": "https://arxiv.org/abs/2609.37183",
+  "organization": "TikTok / ByteDance",
+  "published": "2026-09-29",
+  "upstream_code": "否：截至 2026-09-30，未找到原作者发布仓库",
+  "track": "recommendation",
+  "topics": [
+    "ranking",
+    "feature-interaction",
+    "sequence-modeling"
+  ],
+  "local_code": "src/auto_research/reproductions/helix",
+  "documentation": "docs/reproductions/2609.37183-helix/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic tensor mini-suite"
+  ],
+  "baseline": "same user cache evaluated with two candidate-conditioned sequence streams",
+  "metrics": [
+    "metrics.candidate_conditioned_delta",
+    "metrics.user_cache_unchanged"
+  ],
+  "mechanisms": [
+    "private TikTok feature schema, multitask labels and production training data",
+    "pyramidal encoder, GQA kernels, M-FALCON serving and full-traffic validation"
+  ],
+  "evolve_operators": []
+}

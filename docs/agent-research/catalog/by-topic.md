@@ -70,6 +70,7 @@
 
 ### 长期记忆
 
+- [ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents](../2609.37311-remem/README.md)（`remem`）：推荐 Agent 一方面要从异构商品页稳定提取信息，另一方面不能把完整用户历史无限塞进上下文。ReMem 用 OCR 驱动的多模态 item perception 生成紧凑语义表示，再以固定预算、随时间更新的 dynamic memory 保存偏好；Multi-Memory GRPO 让多个记忆视图共享策略更新。
 - [Interactive Memory Learning for Long-Term Conversations](../2609.17088-interactive-memory/README.md)（`interactive-memory`）：Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。
 
 ### 反思
@@ -107,6 +108,10 @@
 ### 技能检索
 
 - [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](../2609.10750-skill-retention/README.md)（`skill-retention`）：混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。
+
+### RSI
+
+- [Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution](../2609.37950-video-rsi/README.md)（`video-rsi`）：视频 Agent 的执行 trace 只包含当前 harness 选择观察的证据，因此失败解释可能无法区分。Video-RSI 让模型回访原训练视频、主动收集额外观察，形成可检验诊断并改写 harness；候选只有在准确率提高且成本不恶化，或成本下降且准确率不恶化时才保留。
 
 ## 工具调用与环境执行
 
