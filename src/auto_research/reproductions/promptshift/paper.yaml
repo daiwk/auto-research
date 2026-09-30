@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "promptshift",
+  "arxiv_id": "2609.34229",
+  "title": "Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2609.34229",
+  "organization": "University of Electronic Science and Technology of China",
+  "published": "2026-09-28",
+  "upstream_code": "否：截至 2026-09-30 未找到原作者公开仓库",
+  "track": "recommendation",
+  "topics": [
+    "llm-recommendation",
+    "identity-cue-drift",
+    "fairness"
+  ],
+  "local_code": "src/auto_research/reproductions/promptshift",
+  "documentation": "docs/reproductions/2609.34229-promptshift/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic public identity-slice fixture"
+  ],
+  "baseline": "identity-cued ranking without adaptive mitigation",
+  "metrics": [
+    "drift",
+    "slice shift",
+    "difficulty at k"
+  ],
+  "mechanisms": [
+    "proprietary LLM recommendations",
+    "real identity slices"
+  ],
+  "evolve_operators": []
+}

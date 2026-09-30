@@ -20,7 +20,7 @@ from auto_research.discovery import (
 )
 from auto_research.discovery_sources import (
     DiscoverySource, catalog_papers_from_manifest, discover_external, load_sources,
-    official_review_queue,
+    load_source_snapshots, official_review_queue,
 )
 from auto_research.papers import ArxivClient, canonical_arxiv_id
 from auto_research.models import Paper
@@ -90,6 +90,11 @@ def main() -> int:
     )
     parser.add_argument("--cross-source-config", type=Path)
     parser.add_argument(
+        "--source-snapshots", type=Path,
+        default=Path("configs/paper-discovery-source-snapshots.json"),
+        help="approved baselines for static conference lists; only deltas enter daily review",
+    )
+    parser.add_argument(
         "--snowball-seeds", default="",
         help="comma-separated relevant arXiv IDs used for citation snowball",
     )
@@ -146,6 +151,7 @@ def main() -> int:
             snowball_seeds=(
                 value.strip() for value in args.snowball_seeds.split(",") if value.strip()
             ),
+            source_snapshots=load_source_snapshots(args.source_snapshots),
         )
         external = [paper for paper in external if external_paper_in_window(
             paper, provenance, start_date=start_date, end_date=args.end_date,
@@ -165,6 +171,9 @@ def main() -> int:
         "end": str(args.end_date),
     }
     payload["announcement_overlap_days"] = args.announcement_overlap_days
+    review_queue = official_review_queue(
+        source_stats, start_date=start_date, end_date=args.end_date,
+    )
     payload["cross_source"] = {
         "enabled": bool(
             args.cross_source_config or args.author_page
@@ -173,13 +182,17 @@ def main() -> int:
         "config": str(args.cross_source_config) if args.cross_source_config else None,
         "source_failures": source_failures,
         "source_stats": source_stats,
-        "coverage_complete": bool(source_stats) and not source_failures and all(
-            source["status"] == "ok" for source in source_stats
+        "coverage_complete": (
+            bool(source_stats)
+            and not source_failures
+            and not review_queue
+            and all(
+                source.get("transport_status", source["status"]) == "ok"
+                for source in source_stats
+            )
+            and not any(source.get("pagination_capped") for source in source_stats)
         ),
     }
-    review_queue = official_review_queue(
-        source_stats, start_date=start_date, end_date=args.end_date,
-    )
     payload["cross_source"]["official_review_queue_count"] = len(review_queue)
     if args.official_review_output:
         Path(args.official_review_output).write_text(json.dumps({

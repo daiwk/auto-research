@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:frac-ssm",
+  "method": "frac-ssm",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "output_norm": 14.346092555594497,
+      "state_norm": 14.236379940515269,
+      "modes": 8
+    },
+    {
+      "seed": 43,
+      "output_norm": 17.847167930355976,
+      "state_norm": 23.741502603451327,
+      "modes": 8
+    },
+    {
+      "seed": 44,
+      "output_norm": 15.952978732936627,
+      "state_norm": 11.728060043712237,
+      "modes": 8
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "output_norm_mean": 16.048746406295702,
+    "state_norm_mean": 16.56864752922628,
+    "modes_mean": 8.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.36314-frac-ssm/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep30-closure-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -33,6 +33,10 @@
 
 - 2026-09-22 · 一作：Jiayan Fu · [PACT: From Credit Assignment to Critic Alignment](../2609.26355-pact/README.md)（`pact`）：终局奖励只有一个标量，但 actor 要更新每个生成 token。论文在完整性、前缀一致性和中性三个条件下，刻画 token 的理论信用为相邻前缀的条件期望之差。
 
+## AllSpark Team（原文以团队署名，未列机构）
+
+- 2026-09-28 · 一作：AllSpark Team · [ROSS: Relearning from Self-Generated Rollouts through Selective Supervision](../2609.35954-ross/README.md)（`ross`）：保留历史 self-rollout 的完整上下文，但只对筛选出的模型 continuation 计算损失，避免模仿其中错误或冗余步骤。
+
 ## Amazon / Duke University
 
 - 2026-09-03 · 一作：Zhishuai Liu · [Extremely Sparse Supervision Incentivizes Reasoning Ability](../2609.04565-sparse-opd/README.md)（`sparse-opd`）：常规 on-policy distillation 对生成轨迹的每个 token 使用教师分布。论文发现只挑一到两个关键位置、约占全部 token 的 0.05%，也能达到或超过全 token 训练。
@@ -342,6 +346,11 @@
 ## University of Illinois Urbana-Champaign
 
 - 2026-09-29 · 一作：Zhenrui Yue · [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](../2609.36742-sipo/README.md)（`sipo`）：RLVR 的轨迹 reward 稀疏，普通 OPSD 又会受自教师过度自信和长序列惩罚影响。SIPO 对同一 rollout 构造正/负两份特权上下文：两者 teacher log-prob 的差值抵消共享偏差，形成逐 token 信用；环境 reward 决定主方向，dense evidence 负责在 token 间重新分配。
+- 2026-09-28 · 一作：Haojin Wang · [Learning from Teacher Continuations at Student States](../2609.36246-olive/README.md)（`olive`）：由当前 student 生成前缀，再让 teacher 从该 student state 续写；student 只在 teacher continuation token 上计算交叉熵。
+
+## University of Luxembourg
+
+- 2026-09-29 · 一作：Hongyang Li · [Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training](../2609.37119-rfpo/README.md)（`rfpo`）：冻结已校准 critic，把前缀成功概率同时作为 rollout reward、GAE baseline 和未完成轨迹预报，并在去长度偏置后二值化，降低策略利用 critic 偏差的风险。
 
 ## University of Maryland, College Park
 
@@ -362,6 +371,7 @@
 
 ## University of Science and Technology of China
 
+- 2026-09-28 · 一作：Qiyong Zhong · [MAS-OPD: On-Policy Distillation for Multi-Agent Systems](../2609.34234-mas-opd/README.md)（`mas-opd`）：以目标角色与非目标角色 teacher 信号差构造 role advantage，并把协作冲突归因只提供给 teacher 形成 privileged coordination supervision。
 - 2026-08-04 · 一作：Ranxu Zhang · [ADRS](../2608.03223-adrs/README.md)（`adrs`）：privileged teacher 的高置信并不必然与真实任务回报一致。ADRS 在每个交互 step 内标准化教师分数，以教师置信与 realized return 的相关性形成 TVA gate，再把 gated token signal 写入原生 reward-to-advantage 路径，推理时无需技能。
 - 2026-07-11 · 一作：Kexin Huang · [ARMOR](../2607.10481-armor/README.md)（`armor`）：单纯 reverse-KL 只能被动惩罚偏离，无法保证 reference 中已有有效解法仍被覆盖。ARMOR 从冻结 reference 主动采样 anchor trajectories，与当前策略 rollout 混合优化，用数据而不是辅助 KL 项稳定长程 RL。
 

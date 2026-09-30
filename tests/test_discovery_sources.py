@@ -12,12 +12,13 @@ import datetime as dt
 from auto_research.discovery_sources import (
     DiscoverySource, catalog_papers_from_manifest, discover_external, extract_source_hits,
     fetch_text, official_review_queue, page_url,
-    publication_records, normalized_title,
+    publication_records, normalized_title, load_source_snapshots,
     semantic_scholar_citation_hits,
 )
 from auto_research.models import Paper
 from scripts.record_discovery_review import build_batch
 from scripts.discover_papers import external_paper_in_window
+from scripts.build_discovery_source_snapshot import build_snapshot
 
 
 def test_external_sources_extract_arxiv_links_and_keep_provenance():
@@ -119,6 +120,7 @@ def test_successful_page_without_arxiv_ids_is_not_counted_as_covered():
     assert source_stats == [{
         "source": "dynamic-page", "url": "https://example.test",
         "arxiv_ids_extracted": 0, "status": "no_arxiv_ids",
+        "transport_status": "ok", "review_policy": "incremental", "track": "all",
     }]
 
 
@@ -175,6 +177,34 @@ def test_official_listing_keeps_unresolved_title_and_paginates():
     assert stats[0]["unresolved_publications"] == [{
         "title": "Unmatched Work", "url": "https://ai.meta.com/research/publications/work/",
     }]
+
+
+def test_official_detail_page_resolves_arxiv_before_title_search():
+    source = DiscoverySource(
+        "Google", "official-research", "https://research.google/pubs/",
+        organization="Google", max_detail_lookups=1,
+    )
+    listing = '<a href="/pubs/agent-memory/">Agent Memory</a>'
+
+    def fetcher(url):
+        if url == source.url:
+            return listing
+        assert url == "https://research.google/pubs/agent-memory/"
+        return '<a href="https://arxiv.org/abs/2609.12345v2">Download</a>'
+
+    class Client:
+        def lookup(self, ids):
+            assert list(ids) == ["2609.12345"]
+            return [Paper("Agent Memory", "", [], "2026-09-29", "", "2609.12345")]
+
+    papers, provenance, failures, stats = discover_external(
+        [source], client=Client(), fetcher=fetcher, track="agent",
+    )
+    assert not failures
+    assert [paper.arxiv_id for paper in papers] == ["2609.12345"]
+    assert provenance["2609.12345"][0]["relation"] == "official-detail"
+    assert stats[0]["detail_lookups_attempted"] == 1
+    assert stats[0]["unresolved_publications"] == []
 
 
 def test_deepmind_listing_extracts_dated_official_cards_only():
@@ -323,6 +353,74 @@ def test_official_review_queue_filters_dated_history_but_keeps_undated_review_it
         stats, start_date=dt.date(2026, 9, 27), end_date=dt.date(2026, 9, 30),
     )
     assert {item["title"] for item in queue} == {"Current paper", "Needs date review"}
+
+
+def test_official_review_queue_excludes_static_snapshot_and_cross_track_noise():
+    stats = [
+        {
+            "source": "SIGIR", "organization": "ACM SIGIR",
+            "review_policy": "snapshot", "track": "recommendation",
+            "unresolved_publications": [],
+        },
+        {
+            "source": "Google", "organization": "Google", "track": "agent",
+            "unresolved_publications": [
+                {"title": "Quantum Chemistry", "url": "https://google.example/q"},
+                {"title": "Agent Memory", "url": "https://google.example/a"},
+            ],
+        },
+    ]
+    queue = official_review_queue(stats)
+    assert [item["title"] for item in queue] == ["Agent Memory"]
+
+
+def test_static_snapshot_only_reviews_new_titles(tmp_path):
+    snapshot_path = tmp_path / "snapshots.json"
+    snapshot_path.write_text(json.dumps({
+        "sources": {"SIGIR": ["Known Ranking Paper"]},
+    }), encoding="utf-8")
+    snapshots = load_source_snapshots(snapshot_path)
+    source = DiscoverySource(
+        "SIGIR", "official-conference",
+        "https://sigir2026.org/en-AU/pages/program/accepted-papers",
+        track="recommendation", review_policy="snapshot",
+    )
+    html = (
+        r"\u003cp\u003e[fp] \u003ci\u003eKnown Ranking Paper\u003c/i\u003e"
+        r"\u003cp\u003e[fp] \u003ci\u003eNew Search Paper\u003c/i\u003e"
+    )
+
+    class Client:
+        def lookup(self, ids):
+            assert not ids
+            return []
+
+    _, _, failures, stats = discover_external(
+        [source], client=Client(), fetcher=lambda _: html,
+        track="recommendation", source_snapshots=snapshots,
+    )
+    assert not failures
+    assert stats[0]["snapshot_baseline_present"] is True
+    assert stats[0]["snapshot_publication_titles"] == [
+        "Known Ranking Paper", "New Search Paper",
+    ]
+    assert stats[0]["snapshot_known_publications"] == 1
+    assert stats[0]["snapshot_new_publications"] == 1
+    assert stats[0]["unresolved_publications"] == [{
+        "title": "New Search Paper", "url": source.url,
+    }]
+
+
+def test_snapshot_builder_prefers_complete_publication_inventory():
+    artifact = {"cross_source": {"source_stats": [{
+        "source": "SIGIR", "snapshot_publication_titles": ["Known", "Resolved"],
+        "unresolved_publications": [{"title": "Known"}],
+    }]}}
+    config = {"sources": [{"name": "SIGIR", "url": "https://example.test",
+                            "kind": "official-conference", "review_policy": "snapshot"}]}
+    payload = build_snapshot(artifact, config, checked_at="2026-09-30")
+    assert payload["sources"] == {"SIGIR": ["Known", "Resolved"]}
+    assert "not an acceptance" in payload["note"]
 
 
 def test_recsys_session_uses_same_paper_header_contract_as_posters():
@@ -537,6 +635,26 @@ def test_summary_discloses_partial_official_listing_coverage():
     assert "精确匹配 1，未匹配 1" in summary
     assert "不能推进全来源覆盖水位" in summary
     assert "paper-official-review.json" in summary
+
+
+def test_summary_reports_healthy_snapshot_delta_without_false_partial_warning():
+    payload = build_discovery_payload(
+        track="recommendation", start_date=dt.date(2026, 9, 28),
+        end_date=dt.date(2026, 9, 30), query_names=(), candidates=[],
+    )
+    payload["cross_source"] = {
+        "source_failures": [], "official_review_queue_count": 0,
+        "coverage_complete": True,
+        "source_stats": [{
+            "source": "SIGIR", "status": "partial", "transport_status": "ok",
+            "review_policy": "snapshot", "snapshot_known_publications": 100,
+            "snapshot_new_publications": 0, "unresolved_publications": [],
+        }],
+    }
+    summary = render_discovery_summary(payload)
+    assert "静态会议目录按已审快照做增量对账" in summary
+    assert "没有遗留身份待核条目" in summary
+    assert "官方列表仅部分对账" not in summary
 
 
 def test_terminal_review_batch_requires_every_new_candidate_decision():

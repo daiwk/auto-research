@@ -11,6 +11,8 @@
 |---|---|---|---|---|
 | 生成、排序与冷启动 | [GRP v0.1 Technical Report](../2609.36688-grp/README.md) | Snap Inc.，2026-09-29 | 未发现官方代码 | `grp` |
 | 排序与长序列建模 | [HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation](../2609.37183-helix/README.md) | TikTok / ByteDance，2026-09-29 | 未发现官方代码 | `helix` |
+| Serving 与研究基础设施 | [EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery](../2609.34552-evoskillrec/README.md) | City University of Hong Kong，2026-09-28 | [已开源](https://github.com/Xiaopengli1/EvoSkill-Rec) | `evoskillrec` |
+| 大模型能力与推荐融合 | [Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems](../2609.34229-promptshift/README.md) | University of Electronic Science and Technology of China，2026-09-28 | 未发现官方代码 | `promptshift` |
 | Serving 与研究基础设施 | [Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation](../2609.32839-flvm/README.md) | Google / YouTube，2026-09-26 | 未发现官方代码 | `flvm` |
 | 生成、排序与冷启动 | [KuaFu: Compressing Long User Behavior into Understanding at Billion Scale](../2609.31045-kuafu/README.md) | Tencent，2026-09-25 | 未发现官方代码 | `kuafu` |
 | 生成、排序与冷启动 | [X-Rec Technical Report](../2609.29180-xrec/README.md) | TikTok (ByteDance)，2026-09-24 | 未发现官方代码 | `xrec` |

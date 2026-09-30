@@ -13,6 +13,16 @@
 - [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](../2609.30001-agentx-model/README.md)（`agentx-model-replay`）：早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问**一次实验之后如何决定下一次做什么**。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。
 - [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../2606.26859-agentx/README.md)（`agentx`）：传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。
 
+### 上下文管理
+
+- [Continuous Context Management](../2609.35540-ccm/README.md)（`ccm`）：每轮输出动作和更新后的有界 memory；下一轮只读原任务、memory 与最新 observation，并用完整历史只在训练侧提供 privileged distillation。
+
+### Agent 评测
+
+- [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](../2609.38043-userproxybench/README.md)（`user-proxy-bench`）：UFS 与 agent task reward 独立：每个 episode 的所有适用 user-contract criteria 必须全部通过，episode 才计 1。重点审计 premature disclosure，即用户模拟器在 agent 请求之前就泄露私有字段；这可能维持任务成功，却让 agent 少做本应评测的信息收集。
+- [Certified Selective Automation of LLM Agent Evaluation](../2609.34320-certified-selective-eval/README.md)（`certified-selective-eval`）：按任务簇而非轨迹独立假设做 bootstrap，给自动判断区域的错误率建立上置信界，只有证书低于预算才自动接管。
+- [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
+
 ### 技能进化
 
 - [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
@@ -32,11 +42,6 @@
 ### GUI Agent
 
 - [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
-
-### Agent 评测
-
-- [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](../2609.38043-userproxybench/README.md)（`user-proxy-bench`）：UFS 与 agent task reward 独立：每个 episode 的所有适用 user-contract criteria 必须全部通过，episode 才计 1。重点审计 premature disclosure，即用户模拟器在 agent 请求之前就泄露私有字段；这可能维持任务成功，却让 agent 少做本应评测的信息收集。
-- [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
 
 ### Agentic RL
 
@@ -73,6 +78,7 @@
 ### 长期记忆
 
 - [ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents](../2609.37311-remem/README.md)（`remem`）：推荐 Agent 一方面要从异构商品页稳定提取信息，另一方面不能把完整用户历史无限塞进上下文。ReMem 用 OCR 驱动的多模态 item perception 生成紧凑语义表示，再以固定预算、随时间更新的 dynamic memory 保存偏好；Multi-Memory GRPO 让多个记忆视图共享策略更新。
+- [Mnemon: Raw Records, Fast Judgments, Slow Thoughts](../2609.36059-mnemon/README.md)（`mnemon`）：保存原始带日期记录，由慢速规划生成搜索、快速 Jev 判断记录是否需要，再在预算内构造供原回答模型使用的小视图。
 - [Interactive Memory Learning for Long-Term Conversations](../2609.17088-interactive-memory/README.md)（`interactive-memory`）：Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。
 
 ### 反思
@@ -94,6 +100,10 @@
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
+
+### 规划
+
+- [SAGE: Symbolic Action-Gating and Editing for LLM Task Planners](../2609.34268-sage/README.md)（`sage-planner`）：执行前用符号前置条件门阻止不安全动作并给出类型化原因；失败时只重写相关子目标的后缀，保留已完成前缀。
 
 ### 科学 Agent
 
@@ -163,6 +173,7 @@
 
 ### 通用轨迹与 credit assignment
 
+- [Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents](../2609.34296-dr-credit/README.md)（`dr-credit`）：按 rubric 的历史已接受支持计算本次工具结果带来的新增或部分支持，再与最终结果优势结合，避免重复证据反复得分。
 - [HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning](../2609.13739-harness-bandit/README.md)（`harness-bandit`）：联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。
 - [T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks](../2609.11042-t1-terminal-rl/README.md)（`t1-terminal-rl`）：TITO 使用 rollout 实际采样 token id 训练，turn boundary repair 修正漂移，R3 重放 MoE 路由选择。
 - [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](../2609.04518-multi-harness-rl/README.md)（`multi-harness-rl`）：多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。

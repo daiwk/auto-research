@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:certified-selective-eval",
+  "method": "certified-selective-eval",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "upper_error": 0.0,
+      "certified": true,
+      "tasks": 3
+    },
+    {
+      "seed": 43,
+      "upper_error": 0.5,
+      "certified": true,
+      "tasks": 3
+    },
+    {
+      "seed": 44,
+      "upper_error": 0.0,
+      "certified": true,
+      "tasks": 3
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "upper_error_mean": 0.16666666666666666,
+    "tasks_mean": 3.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.34320-certified-selective-eval/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sep30-closure-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

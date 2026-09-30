@@ -15,7 +15,11 @@
 | Agentic RL | [PR-OPD: Privileged Representation On-policy Self-Distillation for Agentic Reinforcement Learning](2609.36642-pr-opd/README.md) | University of Florida，2026-09-29 | [已开源](https://github.com/balibata/PR-OPD) | `pr-opd` |
 | RLVR | [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](2609.36742-sipo/README.md) | University of Illinois Urbana-Champaign，2026-09-29 | [已开源](https://github.com/Yueeeeeeee/SIPO) | `sipo` |
 | On-policy distillation | [The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation](2609.36484-ride/README.md) | 原文未列机构，2026-09-29 | [已开源](https://github.com/xixixixixxxx/RIDE) | `ride-opd` |
+| RL | [Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training](2609.37119-rfpo/README.md) | University of Luxembourg，2026-09-29 | 未发现官方代码 | `rfpo` |
 | On-policy distillation | [An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning](2609.35505-lspd/README.md) | University of North Carolina at Chapel Hill，2026-09-28 | [已开源](https://github.com/UNCSciML/LSPD) | `lspd` |
+| 在线蒸馏 | [Learning from Teacher Continuations at Student States](2609.36246-olive/README.md) | University of Illinois Urbana-Champaign，2026-09-28 | [已开源](https://dylanzsz.github.io/olive/) | `olive` |
+| 多 Agent | [MAS-OPD: On-Policy Distillation for Multi-Agent Systems](2609.34234-mas-opd/README.md) | University of Science and Technology of China，2026-09-28 | 未发现官方代码 | `mas-opd` |
+| 离线 SFT | [ROSS: Relearning from Self-Generated Rollouts through Selective Supervision](2609.35954-ross/README.md) | AllSpark Team（原文以团队署名，未列机构），2026-09-28 | 未发现官方代码 | `ross` |
 | 自我回顾 | [Shockingly Simple Self-retrospection Improves Agentic Models Without RL](2609.35741-roft/README.md) | Rensselaer Polytechnic Institute，2026-09-28 | 未发现官方代码 | `roft` |
 | On-policy self-distillation | [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../reproductions/2609.30652-recursive-opsd/README.md) | Meta AI / University of California, Riverside，2026-09-25 | 未发现官方代码 | `recursive-opsd` |
 | 强化学习 | [PACT: From Credit Assignment to Critic Alignment](2609.26355-pact/README.md) | AllSpark Team，2026-09-22 | 未发现官方代码 | `pact` |

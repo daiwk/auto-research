@@ -152,6 +152,10 @@
 
 - 2026-09-16 · 一作：Jiaxuan Jiang · [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](../2609.18779-cera-moa/README.md)（`cera-moa`）：用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。
 
+## Independent Researcher
+
+- 2026-09-28 · 一作：Chengguang Gan · [Certified Selective Automation of LLM Agent Evaluation](../2609.34320-certified-selective-eval/README.md)（`certified-selective-eval`）：按任务簇而非轨迹独立假设做 bootstrap，给自动判断区域的错误率建立上置信界，只有证书低于预算才自动接管。
+
 ## Institute of Automation, Chinese Academy of Sciences
 
 - 2026-09-04 · 一作：Jinyuan Feng · [CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution](../2609.04865-coskill/README.md)（`coskill`）：以往技能库要么与策略优化分离，要么把元技能写成固定工作流。CoSkill 让 Reasoning Agent 使用任务技能及其子步骤技能，让可学习 Meta-Skill Agent 根据执行回报改写技能；二者共享 backbone 并端到端联合训练。
@@ -355,6 +359,10 @@
 
 - 2023-10-12 · 一作：Charles Packer · [MemGPT](../2310.08560-memgpt/README.md)（`memgpt`）：有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。
 
+## University of Chinese Academy of Sciences
+
+- 2026-09-28 · 一作：Yingjian Zhu · [Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents](../2609.34296-dr-credit/README.md)（`dr-credit`）：按 rubric 的历史已接受支持计算本次工具结果带来的新增或部分支持，再与最终结果优势结合，避免重复证据反复得分。
+
 ## University of Illinois Urbana-Champaign
 
 - 2025-04-16 · 一作：Cheng Qian · [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
@@ -372,6 +380,10 @@
 ## University of Massachusetts Amherst
 
 - 2026-09-17 · 一作：Run-Ze Fan · [An Empirical Study of Harness Design for Coding Agents](../2609.20804-harness-design-study/README.md)（`harness-design-study`）：固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。
+
+## University of Miami
+
+- 2026-09-28 · 一作：William Hoy · [Continuous Context Management](../2609.35540-ccm/README.md)（`ccm`）：每轮输出动作和更新后的有界 memory；下一轮只读原任务、memory 与最新 observation，并用完整历史只在训练侧提供 privileged distillation。
 
 ## University of New South Wales
 
@@ -428,6 +440,11 @@
 ## 原文未列机构
 
 - 2026-09-29 · 一作：Ashish Jain · [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](../2609.38043-userproxybench/README.md)（`user-proxy-bench`）：UFS 与 agent task reward 独立：每个 episode 的所有适用 user-contract criteria 必须全部通过，episode 才计 1。重点审计 premature disclosure，即用户模拟器在 agent 请求之前就泄露私有字段；这可能维持任务成功，却让 agent 少做本应评测的信息收集。
+- 2026-09-28 · 一作：Guangren Wang · [Mnemon: Raw Records, Fast Judgments, Slow Thoughts](../2609.36059-mnemon/README.md)（`mnemon`）：保存原始带日期记录，由慢速规划生成搜索、快速 Jev 判断记录是否需要，再在预算内构造供原回答模型使用的小视图。
+
+## 原文首页未列机构
+
+- 2026-09-28 · 一作：Trung Minh Bui · [SAGE: Symbolic Action-Gating and Editing for LLM Task Planners](../2609.34268-sage/README.md)（`sage-planner`）：执行前用符号前置条件门阻止不安全动作并给出类型化原因；失败时只重写相关子目标的后缀，保留已完成前缀。
 
 ## 论文未列机构
 
