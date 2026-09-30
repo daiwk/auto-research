@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:oasis-opsd",
+  "method": "oasis-opsd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "loss": {
+      "mean": 0.858189195394516,
+      "std": 0.6605954787391561
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 1.790524959564209,
+      "verified_scaffold": true,
+      "distinct_context": true
+    },
+    {
+      "seed": 43,
+      "loss": 0.4434226453304291,
+      "verified_scaffold": true,
+      "distinct_context": true
+    },
+    {
+      "seed": 44,
+      "loss": 0.3406199812889099,
+      "verified_scaffold": true,
+      "distinct_context": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.37915-oasis/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -10,6 +10,8 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 长期记忆 | [ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents](2609.37311-remem/README.md) | The Hong Kong Polytechnic University，2026-09-29 | [已开源](https://github.com/Quhaoh233/ReMem) | `remem` |
+| Agent 记忆 | [UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval](2609.36805-upliftmem/README.md) | Beihang University，2026-09-29 | 未发现官方代码 | `upliftmem` |
+| Agent 评测 | [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](2609.38043-userproxybench/README.md) | 原文未列机构，2026-09-29 | 未发现官方代码 | `user-proxy-bench` |
 | RSI | [Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution](2609.37950-video-rsi/README.md) | Tsinghua University，2026-09-29 | [已开源](https://github.com/bingjunluo/Video-RSI) | `video-rsi` |
 | Agentic RL | [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](2609.35084-graphhca/README.md) | Beihang University，2026-09-28 | 未发现官方代码 | `graphhca` |
 | Harness 学习 | [Harness Learning Enables Generalizable Test-Time Adaptation](2609.35738-harness-learning/README.md) | Johns Hopkins University，2026-09-28 | 未发现官方代码 | `harness-learning` |

@@ -390,6 +390,7 @@
 - 2026-08 · [DrEM](../2608.12778-drem/README.md)：用偏好保持筛选、翻转风险反演和一致性融合稳定噪声 pxtr 集成排序。
 
 ## Snap Inc.
+- 2026-09 · [GRP v0.1](../2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序。
 - 2026-08 · [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md)：用共同互动商品对训练对称多模态向量，使内容表征同时保留用户旅程中的行为相似性。
 - 2026-08 · [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md)：把多兴趣召回改写为集合预测，以 presence gate 和 query-level NMS 动态减少重复 ANN 请求。
 - 2026-07 · [SnapLGR](../2607.28895-snaplgr/README.md)：把共参与传播、分层 residual SID、token grounding 和 SID SFT 组成生成式召回流水线。

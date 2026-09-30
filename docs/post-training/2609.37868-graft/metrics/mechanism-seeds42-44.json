@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:graft",
+  "method": "graft",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "loss": {
+      "mean": -0.7530232071876526,
+      "std": 0.0
+    },
+    "mean_compatibility": {
+      "mean": 0.9999999403953552,
+      "std": 0.0
+    },
+    "clipped_fraction": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": -0.7530232071876526,
+      "mean_compatibility": 0.9999999403953552,
+      "clipped_fraction": 0.0,
+      "finite_gradient": true
+    },
+    {
+      "seed": 43,
+      "loss": -0.7530232071876526,
+      "mean_compatibility": 0.9999999403953552,
+      "clipped_fraction": 0.0,
+      "finite_gradient": true
+    },
+    {
+      "seed": 44,
+      "loss": -0.7530232071876526,
+      "mean_compatibility": 0.9999999403953552,
+      "clipped_fraction": 0.0,
+      "finite_gradient": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.37868-graft/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}

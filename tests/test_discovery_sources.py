@@ -309,6 +309,22 @@ def test_official_review_queue_groups_titles_without_claiming_identity():
     assert queue[0]["source_published"] == "2026-09-29"
 
 
+def test_official_review_queue_filters_dated_history_but_keeps_undated_review_items():
+    stats = [{
+        "source": "Google", "organization": "Google",
+        "unresolved_publications": [
+            {"title": "Old paper", "url": "https://example/old", "source_published": "2025-01-01"},
+            {"title": "Current paper", "url": "https://example/new", "source_published": "2026-09-29"},
+            {"title": "Needs date review", "url": "https://example/undated"},
+            {"title": "2", "url": "https://example/pagination"},
+        ],
+    }]
+    queue = official_review_queue(
+        stats, start_date=dt.date(2026, 9, 27), end_date=dt.date(2026, 9, 30),
+    )
+    assert {item["title"] for item in queue} == {"Current paper", "Needs date review"}
+
+
 def test_recsys_session_uses_same_paper_header_contract_as_posters():
     source = DiscoverySource(
         "RecSys 2026 session 2", "official-conference",

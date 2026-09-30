@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "grp",
+  "arxiv_id": "2609.36688",
+  "title": "GRP v0.1 Technical Report",
+  "paper_url": "https://arxiv.org/abs/2609.36688",
+  "organization": "Snap Inc.",
+  "published": "2026-09-29",
+  "upstream_code": "否：截至 2026-09-30 未找到原作者仓库",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "ranking",
+    "rl-alignment"
+  ],
+  "local_code": "src/auto_research/reproductions/grp",
+  "documentation": "docs/reproductions/2609.36688-grp/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic tensor mini-suite"
+  ],
+  "baseline": "GRPO surrogate without the active one-sided logged-target guard",
+  "metrics": [
+    "metrics.independent_blocks",
+    "metrics.ranker_candidate_variance",
+    "metrics.recall_guard"
+  ],
+  "mechanisms": [
+    "private Snap user/item data, Qwen3-VL semantic-ID tokenizer and production objectives",
+    "full encoder-decoder training, CUDA-graph serving, reverse catalog and online traffic"
+  ],
+  "evolve_operators": []
+}
