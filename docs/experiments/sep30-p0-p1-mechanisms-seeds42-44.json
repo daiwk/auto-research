@@ -305,6 +305,465 @@
       "original_code_commit": "working tree"
     }
   },
+  "stepquant": {
+    "schema_version": 2,
+    "manifest_ref": "foundation-models:stepquant",
+    "method": "stepquant",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "state_mse": {
+        "mean": 0.025560750315586727,
+        "std": 0.0006991335282533404
+      },
+      "average_allocated_bits": {
+        "mean": 5.333333333333333,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "state_mse": 0.026501668617129326,
+        "average_allocated_bits": 5.333333333333333,
+        "finite_scales": true
+      },
+      {
+        "seed": 43,
+        "state_mse": 0.0253533236682415,
+        "average_allocated_bits": 5.333333333333333,
+        "finite_scales": true
+      },
+      {
+        "seed": 44,
+        "state_mse": 0.02482725866138935,
+        "average_allocated_bits": 5.333333333333333,
+        "finite_scales": true
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/foundation-models/2609.38169-stepquant/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "leapquant": {
+    "schema_version": 2,
+    "manifest_ref": "foundation-models:leapquant",
+    "method": "leapquant",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "state_mse": {
+        "mean": 4.499370576619791e-05,
+        "std": 6.758646927730397e-06
+      },
+      "window_steps": {
+        "mean": 4.0,
+        "std": 0.0
+      },
+      "compensator_rank": {
+        "mean": 2.0,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "state_mse": 3.667683631647378e-05,
+        "window_steps": 4,
+        "finite_boundary": true,
+        "compensator_rank": 2
+      },
+      {
+        "seed": 43,
+        "state_mse": 4.507277481025085e-05,
+        "window_steps": 4,
+        "finite_boundary": true,
+        "compensator_rank": 2
+      },
+      {
+        "seed": 44,
+        "state_mse": 5.3231506171869114e-05,
+        "window_steps": 4,
+        "finite_boundary": true,
+        "compensator_rank": 2
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/foundation-models/2609.38166-leapquant/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "chinese-jev": {
+    "schema_version": 2,
+    "manifest_ref": "foundation-models:chinese-jev",
+    "method": "chinese-jev",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "loss": {
+        "mean": 1.5964340766270955,
+        "std": 0.12320634264566757
+      },
+      "reward_std": {
+        "mean": 0.41116487979888916,
+        "std": 0.04942429696418572
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "loss": 1.728244662284851,
+        "reward_std": 0.36087170243263245,
+        "finite_gradient": true
+      },
+      {
+        "seed": 43,
+        "loss": 1.431841492652893,
+        "reward_std": 0.3942747116088867,
+        "finite_gradient": true
+      },
+      {
+        "seed": 44,
+        "loss": 1.6292160749435425,
+        "reward_std": 0.4783482253551483,
+        "finite_gradient": true
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/foundation-models/2609.36965-chinese-jev/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "dr-opd": {
+    "schema_version": 2,
+    "manifest_ref": "post-training:dr-opd",
+    "method": "dr-opd",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "credit_rms": {
+        "mean": 0.20002265771230063,
+        "std": 0.021288841537483238
+      },
+      "weight_range": {
+        "mean": 1.7405274932583172,
+        "std": 0.34956036327241213
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "credit_rms": 0.2263151854276657,
+        "weight_range": 2.0063036903738976,
+        "finite_gradient": true
+      },
+      {
+        "seed": 43,
+        "credit_rms": 0.19957873225212097,
+        "weight_range": 1.2466533407568932,
+        "finite_gradient": true
+      },
+      {
+        "seed": 44,
+        "credit_rms": 0.17417405545711517,
+        "weight_range": 1.9686254486441612,
+        "finite_gradient": true
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/post-training/2609.38025-dr-opd/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "sipo": {
+    "schema_version": 2,
+    "manifest_ref": "post-training:sipo",
+    "method": "sipo",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "mean_abs_evidence": {
+        "mean": 0.11643468091885249,
+        "std": 0.007528721869503832
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "mean_abs_evidence": 0.12633292376995087,
+        "uniform_failure_signal": true,
+        "finite_gradient": true
+      },
+      {
+        "seed": 43,
+        "mean_abs_evidence": 0.11488277465105057,
+        "uniform_failure_signal": true,
+        "finite_gradient": true
+      },
+      {
+        "seed": 44,
+        "mean_abs_evidence": 0.10808834433555603,
+        "uniform_failure_signal": true,
+        "finite_gradient": true
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/post-training/2609.36742-sipo/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "remem": {
+    "schema_version": 2,
+    "manifest_ref": "agent-research:remem",
+    "method": "remem",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "memory_tokens": {
+        "mean": 4.0,
+        "std": 0.0
+      },
+      "history_chunks": {
+        "mean": 4.0,
+        "std": 0.0
+      },
+      "memory_objective": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "memory_tokens": 4,
+        "history_chunks": 4,
+        "memory_objective": 0.0,
+        "gold_fields_exposed": false
+      },
+      {
+        "seed": 43,
+        "memory_tokens": 4,
+        "history_chunks": 4,
+        "memory_objective": 0.0,
+        "gold_fields_exposed": false
+      },
+      {
+        "seed": 44,
+        "memory_tokens": 4,
+        "history_chunks": 4,
+        "memory_objective": 0.0,
+        "gold_fields_exposed": false
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/agent-research/2609.37311-remem/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "video-rsi": {
+    "schema_version": 2,
+    "manifest_ref": "agent-research:video-rsi",
+    "method": "video-rsi",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {},
+    "seed_results": [
+      {
+        "seed": 42,
+        "accuracy_branch_accepts": true,
+        "cost_branch_accepts": true,
+        "non_pareto_candidate_rejected": true,
+        "private_example_scores_exposed": false
+      },
+      {
+        "seed": 43,
+        "accuracy_branch_accepts": true,
+        "cost_branch_accepts": true,
+        "non_pareto_candidate_rejected": true,
+        "private_example_scores_exposed": false
+      },
+      {
+        "seed": 44,
+        "accuracy_branch_accepts": true,
+        "cost_branch_accepts": true,
+        "non_pareto_candidate_rejected": true,
+        "private_example_scores_exposed": false
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/agent-research/2609.37950-video-rsi/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
+  "helix": {
+    "schema_version": 2,
+    "manifest_ref": "reproductions:helix",
+    "method": "helix",
+    "dataset": "deterministic public mechanism mini-suite",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "metrics": {
+      "candidate_conditioned_delta": {
+        "mean": 0.11570185174544652,
+        "std": 0.008884967214959426
+      }
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "finite_loss": true,
+        "candidate_conditioned_delta": 0.1282322257757187,
+        "user_cache_unchanged": true,
+        "user_gradient_finite": true
+      },
+      {
+        "seed": 43,
+        "finite_loss": true,
+        "candidate_conditioned_delta": 0.10862656682729721,
+        "user_cache_unchanged": true,
+        "user_gradient_finite": true
+      },
+      {
+        "seed": 44,
+        "finite_loss": true,
+        "candidate_conditioned_delta": 0.11024676263332367,
+        "user_cache_unchanged": true,
+        "user_gradient_finite": true
+      }
+    ],
+    "evaluation_protocol": {
+      "tier": "l1_mechanism",
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "formal_comparison": false,
+      "diagnostic_only": true,
+      "claim_policy": "executable mechanism and invariant checks only"
+    },
+    "provenance": {
+      "artifact_path": "docs/reproductions/2609.37183-helix/metrics/mechanism-seeds42-44.json",
+      "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+      "original_code_commit": "working tree"
+    }
+  },
   "schema_version": 2,
   "manifest_ref": "experiments:sep30-p0-p1-mechanisms-seeds42-44",
   "evaluation_protocol": {

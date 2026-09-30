@@ -326,6 +326,10 @@
 
 - 2026-09-10 · 一作：Pingchen Lu · [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
 
+## The Hong Kong Polytechnic University
+
+- 2026-09-29 · 一作：Haohao Qu · [ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents](../2609.37311-remem/README.md)（`remem`）：推荐 Agent 一方面要从异构商品页稳定提取信息，另一方面不能把完整用户历史无限塞进上下文。ReMem 用 OCR 驱动的多模态 item perception 生成紧凑语义表示，再以固定预算、随时间更新的 dynamic memory 保存偏好；Multi-Memory GRPO 让多个记忆视图共享策略更新。
+
 ## The University of Hong Kong
 
 - 2026-07-30 · 一作：Qiushi Sun · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
@@ -336,6 +340,7 @@
 
 ## Tsinghua University
 
+- 2026-09-29 · 一作：Bingjun Luo · [Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution](../2609.37950-video-rsi/README.md)（`video-rsi`）：视频 Agent 的执行 trace 只包含当前 harness 选择观察的证据，因此失败解释可能无法区分。Video-RSI 让模型回访原训练视频、主动收集额外观察，形成可检验诊断并改写 harness；候选只有在准确率提高且成本不恶化，或成本下降且准确率不恶化时才保留。
 - 2026-08-10 · 一作：Siqi Wang · [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
 - 2026-08-06 · 一作：Zi-Han Wang · [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
 - 2026-07-16 · 一作：Jinyang Wu · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。

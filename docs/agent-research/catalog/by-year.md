@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-09 · [ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents](../2609.37311-remem/README.md)（`remem`）：推荐 Agent 一方面要从异构商品页稳定提取信息，另一方面不能把完整用户历史无限塞进上下文。ReMem 用 OCR 驱动的多模态 item perception 生成紧凑语义表示，再以固定预算、随时间更新的 dynamic memory 保存偏好；Multi-Memory GRPO 让多个记忆视图共享策略更新。
+- 2026-09 · [Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution](../2609.37950-video-rsi/README.md)（`video-rsi`）：视频 Agent 的执行 trace 只包含当前 harness 选择观察的证据，因此失败解释可能无法区分。Video-RSI 让模型回访原训练视频、主动收集额外观察，形成可检验诊断并改写 harness；候选只有在准确率提高且成本不恶化，或成本下降且准确率不恶化时才保留。
 - 2026-09 · [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](../2609.35084-graphhca/README.md)（`graphhca`）：稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。
 - 2026-09 · [Harness Learning Enables Generalizable Test-Time Adaptation](../2609.35738-harness-learning/README.md)（`harness-learning`）：论文把测试时适配的对象从模型参数转为可执行 harness：proposer 根据真实执行反馈修改验证、解释器、检索或重试组件；底层任务模型保持冻结，多轮执行后保留更有效的脚手架。
 - 2026-09 · [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](../2609.30001-agentx-model/README.md)（`agentx-model-replay`）：早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问**一次实验之后如何决定下一次做什么**。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。

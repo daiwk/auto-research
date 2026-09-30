@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:leapquant",
+  "method": "leapquant",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "state_mse": {
+      "mean": 4.499370576619791e-05,
+      "std": 6.758646927730397e-06
+    },
+    "window_steps": {
+      "mean": 4.0,
+      "std": 0.0
+    },
+    "compensator_rank": {
+      "mean": 2.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "state_mse": 3.667683631647378e-05,
+      "window_steps": 4,
+      "finite_boundary": true,
+      "compensator_rank": 2
+    },
+    {
+      "seed": 43,
+      "state_mse": 4.507277481025085e-05,
+      "window_steps": 4,
+      "finite_boundary": true,
+      "compensator_rank": 2
+    },
+    {
+      "seed": 44,
+      "state_mse": 5.3231506171869114e-05,
+      "window_steps": 4,
+      "finite_boundary": true,
+      "compensator_rank": 2
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.38166-leapquant/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

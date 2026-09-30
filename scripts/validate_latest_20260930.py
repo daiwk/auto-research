@@ -26,12 +26,28 @@ from auto_research.agent_research.latest_20260930 import (  # noqa: E402
     Transition,
     adapt_harness,
     graphhca_credit,
+    multi_memory_grpo_objective,
+    time_evolving_memory,
+    video_rsi_accept,
 )
-from auto_research.foundation_latest_20260930 import MultiScaleGLA  # noqa: E402
+from auto_research.foundation_latest_20260930 import (  # noqa: E402
+    ChineseJevHead,
+    MultiScaleGLA,
+    chinese_jev_objective,
+    leapquant_compress,
+    leapquant_window,
+    stepquant_bit_allocation,
+    stepquant_dual_axis,
+)
 from auto_research.post_training.latest_20260930 import (  # noqa: E402
+    dr_opd_reverse_kl,
+    dr_opd_token_weights,
     lspd_objective,
     roft_retrospection_loss,
+    sipo_token_advantage,
+    token_policy_gradient_loss,
 )
+from auto_research.reproductions.helix.experiment import reproduce as reproduce_helix  # noqa: E402
 
 
 SEEDS = (42, 43, 44)
@@ -41,6 +57,14 @@ DOMAINS = {
     "harness-learning": "agent-research/2609.35738-harness-learning",
     "ms-gla": "foundation-models/2609.35664-ms-gla",
     "graphhca": "agent-research/2609.35084-graphhca",
+    "stepquant": "foundation-models/2609.38169-stepquant",
+    "leapquant": "foundation-models/2609.38166-leapquant",
+    "chinese-jev": "foundation-models/2609.36965-chinese-jev",
+    "dr-opd": "post-training/2609.38025-dr-opd",
+    "sipo": "post-training/2609.36742-sipo",
+    "remem": "agent-research/2609.37311-remem",
+    "video-rsi": "agent-research/2609.37950-video-rsi",
+    "helix": "reproductions/2609.37183-helix",
 }
 
 
@@ -160,6 +184,110 @@ def run(device: str, model_id: str | None, revision: str | None):
             "uses_execution_reports": True,
             "gold_fields_exposed": False,
         })
+
+        state = torch.randn(32, 32, device=device)
+        row_impact = torch.linspace(4, 1, 32, device=device)
+        step_state, step_audit = stepquant_dual_axis(state, row_impact, bits=6)
+        allocation = stepquant_bit_allocation(
+            [[1.0, .2], [.7, .15], [.3, .12]], [-.01, -.2, -.6], (4, 8), average_bits=6,
+        )
+        results["stepquant"].append({
+            "seed": seed,
+            "state_mse": float((step_state - state).square().mean().detach().cpu()),
+            "average_allocated_bits": float(allocation["bits"].mean()),
+            "finite_scales": bool(torch.isfinite(step_audit["row_scale"]).all()),
+        })
+        leap_state, leap_audit = leapquant_compress(state, bits=8, rank=2)
+        decays = torch.full((4, 32), .98, device=device)
+        keys = torch.randn(4, 32, device=device)
+        corrections = torch.randn(4, 32, device=device)
+        leap_boundary, window = leapquant_window(
+            leap_state, decays, keys, corrections, bits=8, rank=2,
+        )
+        results["leapquant"].append({
+            "seed": seed,
+            "state_mse": float((leap_state - state).square().mean().detach().cpu()),
+            "window_steps": len(window["intermediate_states"]),
+            "finite_boundary": bool(torch.isfinite(leap_boundary).all()),
+            "compensator_rank": int(torch.linalg.matrix_rank(leap_audit["compensator"].float()).cpu()),
+        })
+
+        jev = ChineseJevHead(32).to(device)
+        candidate_hidden = torch.randn(3, 5, 32, device=device, requires_grad=True)
+        jev_logits = jev(candidate_hidden, torch.tensor([0, 1, 2], device=device))
+        jev_targets = torch.eye(5, device=device)[:3]
+        jev_loss, jev_audit = chinese_jev_objective(
+            jev_logits, jev_targets, torch.tensor([0, 1, 2], device=device),
+            generator=torch.Generator(device=device).manual_seed(seed),
+        )
+        jev_loss.backward()
+        results["chinese-jev"].append({
+            "seed": seed,
+            "loss": float(jev_loss.detach().cpu()),
+            "reward_std": jev_audit["reward_std"],
+            "finite_gradient": bool(torch.isfinite(candidate_hidden.grad).all()),
+        })
+
+        discrepancy = torch.randn(3, 7, device=device) * .2
+        directional = torch.randn(3, 7, device=device)
+        dr_weights, dr_audit = dr_opd_token_weights(discrepancy, directional, strength=.5)
+        student = torch.randn(3, 7, device=device, requires_grad=True)
+        dr_loss = dr_opd_reverse_kl(student, student.detach() - discrepancy, dr_weights, torch.ones_like(student))
+        dr_loss.backward()
+        results["dr-opd"].append({
+            "seed": seed,
+            "credit_rms": dr_audit["credit_rms"],
+            "weight_range": dr_audit["maximum_weight"] - dr_audit["minimum_weight"],
+            "finite_gradient": bool(torch.isfinite(student.grad).all()),
+        })
+
+        rewards = torch.zeros(3, device=device)
+        positive = torch.randn(3, 7, device=device)
+        negative = positive - torch.randn(3, 7, device=device) * .2
+        advantage, sipo_audit = sipo_token_advantage(
+            rewards, positive, negative, torch.ones_like(positive),
+        )
+        sipo_student = torch.randn(3, 7, device=device, requires_grad=True)
+        sipo_loss = token_policy_gradient_loss(sipo_student, advantage, torch.ones_like(advantage))
+        sipo_loss.backward()
+        results["sipo"].append({
+            "seed": seed,
+            "mean_abs_evidence": sipo_audit["mean_abs_evidence"],
+            "uniform_failure_signal": bool(advantage.abs().sum() > 0),
+            "finite_gradient": bool(torch.isfinite(sipo_student.grad).all()),
+        })
+
+        history = [f"event-{index}" for index in range(12)]
+        memory, memory_trace = time_evolving_memory(
+            history, chunk_size=3, memory_budget=4,
+            update=lambda previous, chunk: previous + chunk,
+        )
+        ratio = torch.ones(3, 5, device=device)
+        mem_ratio = torch.ones(3, len(memory_trace), 4, device=device)
+        mem_objective, mem_audit = multi_memory_grpo_objective(
+            ratio, mem_ratio, torch.tensor([1.0, 0.0, .5], device=device),
+        )
+        results["remem"].append({
+            "seed": seed,
+            "memory_tokens": len(memory),
+            "history_chunks": len(memory_trace),
+            "memory_objective": mem_audit["memory_objective"],
+            "gold_fields_exposed": False,
+        })
+
+        accepted_accuracy, _ = video_rsi_accept(.6, 100, .61, 108)
+        accepted_cost, _ = video_rsi_accept(.6, 100, .595, 80)
+        rejected, _ = video_rsi_accept(.6, 100, .59, 95)
+        results["video-rsi"].append({
+            "seed": seed,
+            "accuracy_branch_accepts": accepted_accuracy,
+            "cost_branch_accepts": accepted_cost,
+            "non_pareto_candidate_rejected": not rejected,
+            "private_example_scores_exposed": False,
+        })
+
+        helix = reproduce_helix(None, seed=seed)
+        results["helix"].append({"seed": seed, **helix["metrics"]})
     return results
 
 

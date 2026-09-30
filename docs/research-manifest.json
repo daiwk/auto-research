@@ -1331,6 +1331,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "remem",
+      "title": "ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents",
+      "paper_url": "https://arxiv.org/abs/2609.37311",
+      "detail_path": "agent-research/2609.37311-remem/README.md",
+      "topic": [
+        "长期记忆",
+        "推荐 Agent",
+        "多模态感知"
+      ],
+      "first_author": "Haohao Qu",
+      "first_author_affiliation": "The Hong Kong Polytechnic University",
+      "published": "2026-09-29",
+      "code": "https://github.com/Quhaoh233/ReMem",
+      "adapter": "remem",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "repoatlas",
       "title": "RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views",
       "paper_url": "https://arxiv.org/abs/2609.16936",
@@ -1978,6 +1996,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "video-rsi",
+      "title": "Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution",
+      "paper_url": "https://arxiv.org/abs/2609.37950",
+      "detail_path": "agent-research/2609.37950-video-rsi/README.md",
+      "topic": [
+        "RSI",
+        "Harness 演化",
+        "视频理解 Agent"
+      ],
+      "first_author": "Bingjun Luo",
+      "first_author_affiliation": "Tsinghua University",
+      "published": "2026-09-29",
+      "code": "https://github.com/bingjunluo/Video-RSI",
+      "adapter": "video-rsi",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "voyager",
       "title": "Voyager",
       "paper_url": "https://arxiv.org/abs/2305.16291",
@@ -2615,6 +2651,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "chinese-jev",
+      "title": "Chinese-Jev: Bringing System One Model to Chinese-Language Tasks",
+      "paper_url": "https://arxiv.org/abs/2609.36965",
+      "detail_path": "foundation-models/2609.36965-chinese-jev/README.md",
+      "topic": [
+        "System One / JEV",
+        "中文理解",
+        "高效决策模型"
+      ],
+      "first_author": "Zexiao Wang",
+      "first_author_affiliation": "Fudan University",
+      "published": "2026-09-29",
+      "code": "https://gulucaptain.github.io/Chinese-Jev/",
+      "adapter": "chinese-jev",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -3759,6 +3813,26 @@
           "memory:query-conditioned-paged-kv"
         ]
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "leapquant",
+      "title": "LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization",
+      "paper_url": "https://arxiv.org/abs/2609.38166",
+      "detail_path": "foundation-models/2609.38166-leapquant/README.md",
+      "topic": [
+        "推理与系统效率",
+        "线性注意力",
+        "状态量化"
+      ],
+      "first_author": "Yi Pan",
+      "first_author_affiliation": "UC Berkeley",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "leapquant",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/leapquant-a100-20260930.json"
     },
     {
       "domain": "foundation-models",
@@ -5904,6 +5978,26 @@
     },
     {
       "domain": "foundation-models",
+      "key": "stepquant",
+      "title": "STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization",
+      "paper_url": "https://arxiv.org/abs/2609.38169",
+      "detail_path": "foundation-models/2609.38169-stepquant/README.md",
+      "topic": [
+        "推理与系统效率",
+        "线性注意力",
+        "状态量化"
+      ],
+      "first_author": "Bingchen Yao",
+      "first_author_affiliation": "Zhejiang University",
+      "published": "2026-09-29",
+      "code": "https://github.com/Dreamer-Toby/STEPQuant",
+      "adapter": "stepquant",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/stepquant-a100-20260930.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "switch-attention",
       "title": "Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers",
       "paper_url": "https://arxiv.org/abs/2603.26380",
@@ -6885,6 +6979,26 @@
       "published": "2025-03-26",
       "code": "https://github.com/sail-sg/understand-r1-zero",
       "adapter": "dr-grpo"
+    },
+    {
+      "domain": "post-training",
+      "key": "dr-opd",
+      "title": "Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models",
+      "paper_url": "https://arxiv.org/abs/2609.38025",
+      "detail_path": "post-training/2609.38025-dr-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "双层优化",
+        "Token 权重"
+      ],
+      "first_author": "Zhenyu Wang",
+      "first_author_affiliation": "Rutgers University",
+      "published": "2026-09-29",
+      "code": "https://github.com/zywang0701/Dr-OPD",
+      "adapter": "dr-opd",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/dr-opd-a100-20260930.json"
     },
     {
       "domain": "post-training",
@@ -8179,6 +8293,26 @@
       "published": "2024-05-23",
       "code": "https://github.com/princeton-nlp/SimPO",
       "adapter": "simpo"
+    },
+    {
+      "domain": "post-training",
+      "key": "sipo",
+      "title": "SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.36742",
+      "detail_path": "post-training/2609.36742-sipo/README.md",
+      "topic": [
+        "RLVR",
+        "On-policy self-distillation",
+        "Token 信用分配"
+      ],
+      "first_author": "Zhenrui Yue",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "published": "2026-09-29",
+      "code": "https://github.com/Yueeeeeeee/SIPO",
+      "adapter": "sipo",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/sipo-a100-20260930.json"
     },
     {
       "domain": "post-training",
@@ -15983,6 +16117,73 @@
         "evolve_operators": [
           "context:hierarchical-uplift"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "helix",
+      "title": "HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
+      "paper_url": "https://arxiv.org/abs/2609.37183",
+      "detail_path": "reproductions/2609.37183-helix/README.md",
+      "topic": [
+        "ranking",
+        "feature-interaction",
+        "sequence-modeling"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "TikTok / ByteDance",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "helix",
+        "arxiv_id": "2609.37183",
+        "title": "HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
+        "paper_url": "https://arxiv.org/abs/2609.37183",
+        "track": "recommendation",
+        "organization": "TikTok / ByteDance",
+        "published": "2026-09-29",
+        "code_url": null,
+        "topics": [
+          "ranking",
+          "feature-interaction",
+          "sequence-modeling"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/helix",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic tensor mini-suite"
+        ],
+        "baseline": "same user cache evaluated with two candidate-conditioned sequence streams",
+        "metrics": [
+          "metrics.candidate_conditioned_delta",
+          "metrics.user_cache_unchanged"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "two candidates, one reusable user cache, one HELIX core block per seed",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "TikTok e-commerce video recommendation",
+            "metric": "e-commerce video GMV per user",
+            "lift_percent": 5.4624,
+            "traffic": "randomized full-traffic online A/B",
+            "source_url": "https://arxiv.org/html/2609.37183",
+            "source_location": "Section 3.5, Tables 4-5",
+            "retrieved_at": "2026-09-30"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
       }
     },
     {

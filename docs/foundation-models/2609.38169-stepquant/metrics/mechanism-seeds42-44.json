@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:stepquant",
+  "method": "stepquant",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "state_mse": {
+      "mean": 0.025560750315586727,
+      "std": 0.0006991335282533404
+    },
+    "average_allocated_bits": {
+      "mean": 5.333333333333333,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "state_mse": 0.026501668617129326,
+      "average_allocated_bits": 5.333333333333333,
+      "finite_scales": true
+    },
+    {
+      "seed": 43,
+      "state_mse": 0.0253533236682415,
+      "average_allocated_bits": 5.333333333333333,
+      "finite_scales": true
+    },
+    {
+      "seed": 44,
+      "state_mse": 0.02482725866138935,
+      "average_allocated_bits": 5.333333333333333,
+      "finite_scales": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.38169-stepquant/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}

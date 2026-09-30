@@ -86,6 +86,79 @@ def lspd_objective(
     return objective, diagnostics
 
 
+def dr_opd_token_weights(
+    teacher_student_log_ratio,
+    reward_directional_derivative,
+    *,
+    strength: float = 1.0,
+    minimum: float = 0.1,
+    maximum: float = 3.0,
+    epsilon: float = 1e-6,
+):
+    """Dr. OPD Eqs. (12)-(14): credit-aware closed-form token weights.
+
+    The caller supplies the JVP directional derivative along the sampled
+    reward gradient.  Keeping that interface explicit prevents this L1 kernel
+    from pretending that a heuristic score is the paper's model-space JVP.
+    """
+    import torch
+
+    if teacher_student_log_ratio.shape != reward_directional_derivative.shape:
+        raise ValueError("discrepancy and reward directional derivative must match")
+    if not 0 < minimum <= maximum:
+        raise ValueError("weight bounds must be positive and ordered")
+    credits = teacher_student_log_ratio.detach() * reward_directional_derivative.detach()
+    rms = credits.square().mean().sqrt().clamp_min(epsilon)
+    weights = (1 + strength * credits / rms).clamp(minimum, maximum)
+    return weights, {"credit_rms": float(rms), "minimum_weight": float(weights.min()), "maximum_weight": float(weights.max())}
+
+
+def dr_opd_reverse_kl(student_log_prob, teacher_log_prob, token_weights, response_mask):
+    """Sampled weighted reverse-KL gradient target used after the Dr. OPD solve."""
+    if not (student_log_prob.shape == teacher_log_prob.shape == token_weights.shape == response_mask.shape):
+        raise ValueError("all token tensors must share a shape")
+    gap = student_log_prob - teacher_log_prob.detach()
+    mask = response_mask.to(gap.dtype)
+    return (token_weights.detach() * gap * mask).sum() / mask.sum().clamp_min(1)
+
+
+def sipo_token_advantage(
+    rewards,
+    positive_teacher_log_prob,
+    negative_teacher_log_prob,
+    valid_teacher_mask,
+    *,
+    teacher_weight: float = 0.5,
+    evidence_clip: float = 0.2,
+):
+    """SIPO Eqs. (5)-(6): reward direction plus contrastive self-teacher credit."""
+    import torch
+
+    if positive_teacher_log_prob.shape != negative_teacher_log_prob.shape:
+        raise ValueError("positive and negative teacher token scores must match")
+    if positive_teacher_log_prob.shape[0] != rewards.shape[0]:
+        raise ValueError("one reward per rollout is required")
+    if valid_teacher_mask.shape != positive_teacher_log_prob.shape:
+        raise ValueError("valid_teacher_mask must match token scores")
+    group_advantage = rewards - rewards.mean()
+    evidence = (positive_teacher_log_prob - negative_teacher_log_prob).detach()
+    evidence = evidence.clamp(-evidence_clip, evidence_clip) * valid_teacher_mask.to(evidence.dtype)
+    advantage = group_advantage[:, None] + teacher_weight * evidence
+    return advantage, {
+        "uniform_failure_group": bool((rewards == rewards[0]).all()),
+        "teacher_covered_tokens": int(valid_teacher_mask.sum()),
+        "mean_abs_evidence": float(evidence.abs().mean()),
+    }
+
+
+def token_policy_gradient_loss(student_log_prob, token_advantage, response_mask):
+    """Token-mean policy-gradient surrogate shared by SIPO diagnostics."""
+    if not (student_log_prob.shape == token_advantage.shape == response_mask.shape):
+        raise ValueError("student scores, advantage and mask must match")
+    mask = response_mask.to(student_log_prob.dtype)
+    return -(student_log_prob * token_advantage.detach() * mask).sum() / mask.sum().clamp_min(1)
+
+
 @dataclass(frozen=True)
 class ReplayItem:
     student_log_prob: np.ndarray

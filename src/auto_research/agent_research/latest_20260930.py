@@ -139,3 +139,79 @@ def adapt_harness(
             harness.append(revision)
         trace.append({"round": round_index, "revision": revision, "report": report})
     return tuple(harness), trace
+
+
+def time_evolving_memory(interactions, *, chunk_size: int, memory_budget: int, update):
+    """ReMem Eq. (3): bounded, sequential memory updates over history chunks.
+
+    ``update`` receives only the previous memory and current history chunk.  It
+    cannot inspect the final recommendation label, preserving the inference
+    boundary used by the paper.
+    """
+    if chunk_size < 1 or memory_budget < 1:
+        raise ValueError("chunk_size and memory_budget must be positive")
+    memory: tuple[str, ...] = ()
+    trace = []
+    for start in range(0, len(interactions), chunk_size):
+        chunk = tuple(interactions[start:start + chunk_size])
+        proposed = tuple(update(memory, chunk))
+        memory = proposed[-memory_budget:]
+        trace.append({"chunk_start": start, "chunk_size": len(chunk), "memory": memory})
+    return memory, trace
+
+
+def multi_memory_grpo_objective(
+    final_ratio,
+    memory_ratio,
+    rewards,
+    *,
+    clip: float = 0.2,
+    memory_weight: float = 1.0,
+    epsilon: float = 1e-6,
+):
+    """ReMem Eqs. (11), (14)-(16): propagate final reward to every memory."""
+    import torch
+
+    if final_ratio.ndim != 2 or memory_ratio.ndim != 3:
+        raise ValueError("final ratios are [group,tokens], memory ratios [group,memories,tokens]")
+    if final_ratio.shape[0] != memory_ratio.shape[0] or rewards.shape != final_ratio.shape[:1]:
+        raise ValueError("all tensors must share the rollout group dimension")
+    advantage = (rewards - rewards.mean()) / rewards.std(unbiased=False).clamp_min(epsilon)
+
+    def surrogate(ratio, expanded_advantage):
+        unclipped = ratio * expanded_advantage
+        clipped = ratio.clamp(1 - clip, 1 + clip) * expanded_advantage
+        return torch.minimum(unclipped, clipped).mean()
+
+    answer = surrogate(final_ratio, advantage[:, None])
+    memory = surrogate(memory_ratio, advantage[:, None, None])
+    return answer + memory_weight * memory, {
+        "answer_objective": float(answer.detach()),
+        "memory_objective": float(memory.detach()),
+        "memory_count": memory_ratio.shape[1],
+    }
+
+
+def video_rsi_accept(
+    incumbent_accuracy: float,
+    incumbent_cost: float,
+    candidate_accuracy: float,
+    candidate_cost: float,
+    *,
+    maximum_cost_growth: float = 0.1,
+    minimum_cost_reduction: float = 0.1,
+    maximum_accuracy_loss: float = 0.01,
+) -> tuple[bool, str]:
+    """Video-RSI Eq. (3), the private-selection accuracy/cost admission gate."""
+    delta = candidate_accuracy - incumbent_accuracy
+    accuracy_gain = delta > 0 and candidate_cost <= (1 + maximum_cost_growth) * incumbent_cost
+    cost_gain = (
+        -maximum_accuracy_loss <= delta <= 0
+        and incumbent_cost > 0
+        and candidate_cost <= (1 - minimum_cost_reduction) * incumbent_cost
+    )
+    if accuracy_gain:
+        return True, "accuracy_gain_with_bounded_cost"
+    if cost_gain:
+        return True, "cost_reduction_with_bounded_accuracy_loss"
+    return False, "rejected_by_private_selection_gate"

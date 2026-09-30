@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:sipo",
+  "method": "sipo",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "metrics": {
+    "mean_abs_evidence": {
+      "mean": 0.11643468091885249,
+      "std": 0.007528721869503832
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "mean_abs_evidence": 0.12633292376995087,
+      "uniform_failure_signal": true,
+      "finite_gradient": true
+    },
+    {
+      "seed": 43,
+      "mean_abs_evidence": 0.11488277465105057,
+      "uniform_failure_signal": true,
+      "finite_gradient": true
+    },
+    {
+      "seed": 44,
+      "mean_abs_evidence": 0.10808834433555603,
+      "uniform_failure_signal": true,
+      "finite_gradient": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.36742-sipo/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-v1",
+    "original_code_commit": "working tree"
+  }
+}
