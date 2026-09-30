@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:ride-opd",
+  "method": "ride-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "loss": {
+      "mean": 2.25,
+      "std": 0.0
+    },
+    "target_multiplier": {
+      "mean": 1.5,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 2.25,
+      "masked_gradient_zero": true,
+      "target_multiplier": 1.5
+    },
+    {
+      "seed": 43,
+      "loss": 2.25,
+      "masked_gradient_zero": true,
+      "target_multiplier": 1.5
+    },
+    {
+      "seed": 44,
+      "loss": 2.25,
+      "masked_gradient_zero": true,
+      "target_multiplier": 1.5
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.36484-ride/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}

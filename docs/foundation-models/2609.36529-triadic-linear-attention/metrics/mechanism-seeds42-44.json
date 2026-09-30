@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:triadic-linear-attention",
+  "method": "triadic-linear-attention",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "output_norm": {
+      "mean": 18.57304859161377,
+      "std": 3.9824924447673977
+    },
+    "state_entries": {
+      "mean": 24.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "output_norm": 16.98185157775879,
+      "state_entries": 24,
+      "finite": true
+    },
+    {
+      "seed": 43,
+      "output_norm": 14.689818382263184,
+      "state_entries": 24,
+      "finite": true
+    },
+    {
+      "seed": 44,
+      "output_norm": 24.047475814819336,
+      "state_entries": 24,
+      "finite": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.36529-triadic-linear-attention/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:pr-opd",
+  "method": "pr-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "alignment_loss": {
+      "mean": 0.041789611180623375,
+      "std": 0.051856919634000555
+    },
+    "layers": {
+      "mean": 2.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "alignment_loss": 0.11511309444904327,
+      "layers": 2,
+      "privileged_detached": true
+    },
+    {
+      "seed": 43,
+      "alignment_loss": 0.006336286664009094,
+      "layers": 2,
+      "privileged_detached": true
+    },
+    {
+      "seed": 44,
+      "alignment_loss": 0.003919452428817749,
+      "layers": 2,
+      "privileged_detached": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.36642-pr-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}

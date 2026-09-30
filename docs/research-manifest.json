@@ -1966,6 +1966,42 @@
     },
     {
       "domain": "agent-research",
+      "key": "upliftmem",
+      "title": "UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval",
+      "paper_url": "https://arxiv.org/abs/2609.36805",
+      "detail_path": "agent-research/2609.36805-upliftmem/README.md",
+      "topic": [
+        "Agent 记忆",
+        "集合 uplift",
+        "主动探测"
+      ],
+      "first_author": "Mengkun Liang",
+      "first_author_affiliation": "Beihang University",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "upliftmem",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "user-proxy-bench",
+      "title": "UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training",
+      "paper_url": "https://arxiv.org/abs/2609.38043",
+      "detail_path": "agent-research/2609.38043-userproxybench/README.md",
+      "topic": [
+        "Agent 评测",
+        "用户模拟器",
+        "信息泄漏审计"
+      ],
+      "first_author": "Ashish Jain",
+      "first_author_affiliation": "原文未列机构",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "user-proxy-bench",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "vag",
       "title": "When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents",
       "paper_url": "https://arxiv.org/abs/2608.05810",
@@ -3833,6 +3869,24 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/leapquant-a100-20260930.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "lift-feedback",
+      "title": "Pretraining Latent Information Feedback Transformers with Teacher Supervision",
+      "paper_url": "https://arxiv.org/abs/2609.38149",
+      "detail_path": "foundation-models/2609.38149-lift-feedback/README.md",
+      "topic": [
+        "网络架构",
+        "潜状态反馈",
+        "预训练"
+      ],
+      "first_author": "Dor Tirosh",
+      "first_author_affiliation": "Tel Aviv University",
+      "published": "2026-09-29",
+      "code": "https://github.com/dortirosh1/LIFT",
+      "adapter": "lift-feedback",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -6231,6 +6285,24 @@
     },
     {
       "domain": "foundation-models",
+      "key": "triadic-linear-attention",
+      "title": "Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling",
+      "paper_url": "https://arxiv.org/abs/2609.36529",
+      "detail_path": "foundation-models/2609.36529-triadic-linear-attention/README.md",
+      "topic": [
+        "网络架构",
+        "线性注意力",
+        "长上下文"
+      ],
+      "first_author": "Oliver Sieberling",
+      "first_author_affiliation": "MIT / MIT-IBM Watson AI Lab",
+      "published": "2026-09-29",
+      "code": "https://github.com/OliverSieberling/TriadicLinearAttention",
+      "adapter": "triadic-linear-attention",
+      "priority": "P1"
+    },
+    {
+      "domain": "foundation-models",
       "key": "ttcd",
       "title": "Learning What to Remember: Test-Time Training via Context Distillation",
       "paper_url": "https://arxiv.org/abs/2608.01672",
@@ -7185,6 +7257,24 @@
     },
     {
       "domain": "post-training",
+      "key": "graft",
+      "title": "Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR",
+      "paper_url": "https://arxiv.org/abs/2609.37868",
+      "detail_path": "post-training/2609.37868-graft/README.md",
+      "topic": [
+        "RLVR",
+        "跨模型轨迹交换",
+        "离策略校正"
+      ],
+      "first_author": "Doohyuk Jang",
+      "first_author_affiliation": "KAIST",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "graft",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "grin",
       "title": "From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection",
       "paper_url": "https://arxiv.org/abs/2608.25243",
@@ -7542,6 +7632,23 @@
     },
     {
       "domain": "post-training",
+      "key": "oasis-opsd",
+      "title": "Overcoming Scaling Limits in On-Policy Self-Distillation for LLM Reasoning",
+      "paper_url": "https://arxiv.org/abs/2609.37915",
+      "detail_path": "post-training/2609.37915-oasis/README.md",
+      "topic": [
+        "On-policy self-distillation",
+        "可验证推理"
+      ],
+      "first_author": "Md. Ismail Hossain",
+      "first_author_affiliation": "North South University",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "oasis-opsd",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "off-context-grpo",
       "title": "Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information",
       "paper_url": "https://arxiv.org/abs/2607.19313",
@@ -7802,6 +7909,24 @@
     },
     {
       "domain": "post-training",
+      "key": "pr-opd",
+      "title": "PR-OPD: Privileged Representation On-policy Self-Distillation for Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2609.36642",
+      "detail_path": "post-training/2609.36642-pr-opd/README.md",
+      "topic": [
+        "Agentic RL",
+        "On-policy distillation",
+        "表征对齐"
+      ],
+      "first_author": "Muyang Li",
+      "first_author_affiliation": "University of Florida",
+      "published": "2026-09-29",
+      "code": "https://github.com/balibata/PR-OPD",
+      "adapter": "pr-opd",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "probe-erpo",
       "title": "Entropy-Regularized Rank-Masked Policy Optimization for Test-Time Reinforcement Learning in Code Generation",
       "paper_url": "https://arxiv.org/abs/2609.09135",
@@ -8025,6 +8150,23 @@
       "code": "https://github.com/ZJU-REAL/SDAR",
       "adapter": "retire-opd",
       "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "ride-opd",
+      "title": "The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2609.36484",
+      "detail_path": "post-training/2609.36484-ride/README.md",
+      "topic": [
+        "On-policy distillation",
+        "表征蒸馏"
+      ],
+      "first_author": "Hao Li",
+      "first_author_affiliation": "原文未列机构",
+      "published": "2026-09-29",
+      "code": "https://github.com/xixixixixxxx/RIDE",
+      "adapter": "ride-opd",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -15586,6 +15728,82 @@
             "traffic": "online A/B test",
             "source_url": "https://arxiv.org/abs/2605.17994",
             "source_location": "original paper online-result disclosure: product=Taobao/Tmall Search; metric=overall search GMV"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "grp",
+      "title": "GRP v0.1 Technical Report",
+      "paper_url": "https://arxiv.org/abs/2609.36688",
+      "detail_path": "reproductions/2609.36688-grp/README.md",
+      "topic": [
+        "generative-recommendation",
+        "ranking",
+        "rl-alignment"
+      ],
+      "first_author": "Wenfeng Zhuo",
+      "first_author_affiliation": "Snap Inc.",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": {
+        "adapter_key": "grp",
+        "arxiv_id": "2609.36688",
+        "title": "GRP v0.1 Technical Report",
+        "paper_url": "https://arxiv.org/abs/2609.36688",
+        "track": "recommendation",
+        "organization": "Snap Inc.",
+        "published": "2026-09-29",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "ranking",
+          "rl-alignment"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/grp",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic tensor mini-suite"
+        ],
+        "baseline": "GRPO surrogate without the active one-sided logged-target guard",
+        "metrics": [
+          "metrics.independent_blocks",
+          "metrics.ranker_candidate_variance",
+          "metrics.recall_guard"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "two item blocks, three candidate scores and one mGRPO group per seed",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Snap short-video recommendation",
+            "metric": "view time",
+            "lift_percent": 0.46,
+            "traffic": "retrieval-only online A/B",
+            "source_url": "https://arxiv.org/html/2609.36688",
+            "source_location": "Section 6.2",
+            "retrieved_at": "2026-09-30"
+          },
+          {
+            "product": "Snap short-video recommendation",
+            "metric": "shares",
+            "lift_percent": 2.56,
+            "traffic": "bypass plus source-replacement online A/B",
+            "source_url": "https://arxiv.org/html/2609.36688",
+            "source_location": "Section 6.4",
+            "retrieved_at": "2026-09-30"
           }
         ],
         "selection_exception": null,

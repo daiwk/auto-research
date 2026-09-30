@@ -12408,6 +12408,44 @@
         {"id": "2609.37968", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an editable real search environment, reward-free trajectory selection and equal-budget agent evaluation; a tensor placeholder would not preserve the algorithm."},
         {"id": "2609.37105", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires a multi-tool executable agent environment, real execution feedback and cross-generation cost-controlled evaluation."}
       ]
+    },
+    {
+      "batch": "recent-20260930-followup",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-09-30T23:10:00+08:00",
+      "window": "2026-09-27 through 2026-09-30",
+      "sources": [
+        "arXiv official API and complete HTML/PDF",
+        "Google Research, Google DeepMind, Meta and conference official listings",
+        "official author repositories"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "overlap_start": "2026-09-27",
+        "source_artifact": "recent-paper-scan-20260930-followup.md",
+        "note": "ArXiv transport completed without cache fallback. Official listings were reachable but remain partial because some titles are undated or identity-unresolved; the queue is now date-window filtered. DeepXiv was not used."
+      },
+      "candidates": [
+        {"id": "2609.36688", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "grp", "doc": "reproductions/2609.36688-grp/README.md", "organization": "Snap Inc.", "evidence_gate": "Sections 6.2-6.4 quantified online A/B; view time +0.46% retrieval-only and +0.82% with bypass/source replacement, shares +2.56%"},
+        {"id": "2609.38149", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "lift-feedback", "doc": "foundation-models/2609.38149-lift-feedback/README.md"},
+        {"id": "2609.36529", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "triadic-linear-attention", "doc": "foundation-models/2609.36529-triadic-linear-attention/README.md"},
+        {"id": "2609.37915", "priority": "P1", "track": "post-training", "status": "implemented", "key": "oasis-opsd", "doc": "post-training/2609.37915-oasis/README.md"},
+        {"id": "2609.37868", "priority": "P1", "track": "post-training", "status": "implemented", "key": "graft", "doc": "post-training/2609.37868-graft/README.md"},
+        {"id": "2609.36484", "priority": "P1", "track": "post-training", "status": "implemented", "key": "ride-opd", "doc": "post-training/2609.36484-ride/README.md"},
+        {"id": "2609.36642", "priority": "P1", "track": "post-training", "status": "implemented", "key": "pr-opd", "doc": "post-training/2609.36642-pr-opd/README.md"},
+        {"id": "2609.38043", "priority": "P1", "track": "agent", "status": "implemented", "key": "user-proxy-bench", "doc": "agent-research/2609.38043-userproxybench/README.md"},
+        {"id": "2609.36805", "priority": "P1", "track": "agent", "status": "implemented", "key": "upliftmem", "doc": "agent-research/2609.36805-upliftmem/README.md"},
+        {"id": "2609.37976", "priority": "P1", "track": "foundation-model", "status": "deferred", "reason": "Requires paired real checkpoints and their spectral decomposition; a random tensor S3 label would not validate the paper."},
+        {"id": "2609.37590", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires real test-time agent trajectories and causal compression under closed tool APIs."},
+        {"id": "2609.37082", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires a real browser/search environment and equal-budget execution evaluation."},
+        {"id": "2609.37017", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires Qwen3-4B latent multi-agent training and evaluation; no low-cost faithful substitute was found."},
+        {"id": "2609.37539", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires the 6.8k-environment SkillGym generation and execution pipeline."},
+        {"id": "2609.37025", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires LiveMCPBench/OSMCP and real tool execution rather than fixtures."},
+        {"id": "2609.36505", "priority": "P1", "track": "post-training", "status": "deferred", "reason": "Requires a real retriever plus RL training; a detached scoring heuristic would omit the defining loop."},
+        {"id": "2609.37633", "priority": "P1", "track": "post-training", "status": "deferred", "reason": "Requires 9B coding/tool training and executable code environments beyond the current faithful budget."}
+      ]
     }
   ]
 }

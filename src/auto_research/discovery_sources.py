@@ -543,7 +543,12 @@ def discover_external(
     return list(resolved.values()), provenance, failures, source_stats
 
 
-def official_review_queue(source_stats: Iterable[dict]) -> list[dict]:
+def official_review_queue(
+    source_stats: Iterable[dict],
+    *,
+    start_date=None,
+    end_date=None,
+) -> list[dict]:
     """Group unresolved official titles for human identity/full-text review.
 
     A title group is not a paper identity: no candidate is accepted or rejected here.
@@ -552,8 +557,19 @@ def official_review_queue(source_stats: Iterable[dict]) -> list[dict]:
     for stat in source_stats:
         organization = stat.get("organization")
         for item in stat.get("unresolved_publications", ()):
+            published = item.get("source_published")
+            if published:
+                try:
+                    published_date = dt.date.fromisoformat(published[:10])
+                except ValueError:
+                    published_date = None
+                if published_date is not None and (
+                    (start_date is not None and published_date < start_date)
+                    or (end_date is not None and published_date > end_date)
+                ):
+                    continue
             key = normalized_title(item["title"])
-            if not key:
+            if not key or key.isdigit():
                 continue
             entry = grouped.setdefault(key, {
                 "title": item["title"],
@@ -565,7 +581,6 @@ def official_review_queue(source_stats: Iterable[dict]) -> list[dict]:
             entry["google_meta_priority"] |= organization in {
                 "Google", "Google DeepMind", "Meta",
             }
-            published = item.get("source_published")
             if published and (
                 entry["source_published"] is None or published > entry["source_published"]
             ):

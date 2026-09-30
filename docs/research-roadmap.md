@@ -26,7 +26,12 @@
 不再维护另一份易漂移的 TODO。以后每个实现 MR 都要更新本页的状态、验收证据和 PR；
 新发现的工作先登记，再开始实现。
 
-更新基线：**2026-09-30**。[最新重叠扫描与收口](recent-paper-scan-20260930.md)
+更新基线：**2026-09-30**。[最新官方来源重试与 P0/P1 合并批次](recent-paper-scan-20260930-followup.md)
+新增 Snap GRP 工业 P0，以及 LIFT、Triadic Linear Attention、OASIS、GRAFT、RIDE、
+PR-OPD、UserProxyBench、UpliftMem 八篇 P1。官方待审队列已按请求日期过滤历史噪声，
+但仍有无日期/identity unresolved 标题，因此跨来源 watermark **不推进**。
+
+[上一轮重叠扫描与收口](recent-paper-scan-20260930.md)
 完成 09-27～09-30 四领域 arXiv 官方高召回扫描，并实现 HELIX、STEPQuant、LeapQuant、
 Chinese-Jev、Dr. OPD、SIPO、ReMem 与 Video-RSI；高召回池与真正新增合格论文已分开统计。
 机构官方入口本轮 TLS 超时，所以只确认 arXiv 传输完整，跨来源 watermark **不推进**。
@@ -119,6 +124,11 @@ System One 的 200 条固定公开切片和 2 轮 A100 真实 Evolve 已跑通�
 | SEP30-04 | P1 · 后训练 | DONE（本分支） | Dr. OPD 与 SIPO token 信用机制、三种子诊断和 A100 CUDA 回执；未执行论文规模 rollout 训练 |
 | SEP30-05 | P1 · Agent / RSI | DONE（本分支） | ReMem 时间演化记忆、Multi-Memory GRPO 与 Video-RSI Pareto 接纳；无真实浏览器/视频 Agent 环境，不登记为可执行 Evolve operator |
 | SEP30-06 | 发现闭环 | PARTIAL | arXiv 四轨传输完整；机构官方入口 TLS 超时，RECAP 无线上 A/B，SelfSearch/VACE 依赖真实环境，watermark 不推进 |
+| SEP30-07 | P0 · 工业推荐 | DONE（本分支） | Snap GRP：block-wise SID、detached MHP、mGRPO；正文线上 A/B 只作工业证据，本地不冒充线上复现 |
+| SEP30-08 | P1 · 基础模型 | DONE（本分支） | LIFT top-k state feedback 与 Triadic 三阶线性注意力；均为 L1 mechanism，不声称大模型训练或 GPU kernel 性能 |
+| SEP30-09 | P1 · 后训练 | DONE（本分支） | OASIS、GRAFT、RIDE、PR-OPD 的定义性选择/目标/表征机制，三种子诊断；无论文规模 rollout 训练 |
+| SEP30-10 | P1 · Agent | DONE（本分支） | UserProxyBench UFS/泄漏审计与 UpliftMem paired uplift/EVSI；不使用 gold answer/plan |
+| SEP30-11 | 发现闭环 | PARTIAL（本分支） | 官方入口恢复；修复历史 dated 标题和分页数字污染本轮队列。无日期或 identity unresolved 项仍保留，watermark 不推进 |
 
 ## 优先级和状态
 

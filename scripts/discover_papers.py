@@ -177,7 +177,9 @@ def main() -> int:
             source["status"] == "ok" for source in source_stats
         ),
     }
-    review_queue = official_review_queue(source_stats)
+    review_queue = official_review_queue(
+        source_stats, start_date=start_date, end_date=args.end_date,
+    )
     payload["cross_source"]["official_review_queue_count"] = len(review_queue)
     if args.official_review_output:
         Path(args.official_review_output).write_text(json.dumps({

@@ -58,6 +58,7 @@
 
 ## Beihang University
 
+- 2026-09-29 · 一作：Mengkun Liang · [UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval](../2609.36805-upliftmem/README.md)（`upliftmem`）：相关记忆不一定提升执行。UpliftMem 以同一冻结 executor 在“使用完整 memory set”和“不使用 memory”时的结果差作为 supervision，并在集合级建模互补、冗余和冲突。
 - 2026-09-28 · 一作：Haodong Zhu · [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](../2609.35084-graphhca/README.md)（`graphhca`）：稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。
 - 2026-09-15 · 一作：Yunxiang Zhang · [RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views](../2609.16936-repoatlas/README.md)（`repoatlas`）：在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。
 - 2026-08-06 · 一作：Xingyu Guo · [Contextual Information Policy Optimization for Search Agents](../2608.06128-cipo/README.md)（`cipo`）：**主题：搜索 Agent RL。** 只奖励最终答案会让检索退化成确认偏见。
@@ -423,6 +424,10 @@
 ## 中国科学院信息工程研究所
 
 - 2026-01-28 · 一作：Qihao Wang · [PEARL](../2601.20439-pearl/README.md)（`pearl`）：多跳工具调用同时受工具幻觉、参数错误和长程规划薄弱影响。PEARL 的离线阶段用 trial-and-error 建立工具用法与失败条件；在线阶段把 Planner 与 Executor 解耦，用计划正确性、工具链与最终结果组成的密集 reward 进行 GRPO，而不是只依赖稀疏成功信号。
+
+## 原文未列机构
+
+- 2026-09-29 · 一作：Ashish Jain · [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](../2609.38043-userproxybench/README.md)（`user-proxy-bench`）：UFS 与 agent task reward 独立：每个 episode 的所有适用 user-contract criteria 必须全部通过，episode 才计 1。重点审计 premature disclosure，即用户模拟器在 agent 请求之前就泄露私有字段；这可能维持任务成功，却让 agent 少做本应评测的信息收集。
 
 ## 论文未列机构
 

@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:lift-feedback",
+  "method": "lift-feedback",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "loss": {
+      "mean": 4.622713565826416,
+      "std": 0.5364748037081787
+    },
+    "state_nonzero": {
+      "mean": 32.0,
+      "std": 0.0
+    },
+    "token_ce": {
+      "mean": 2.903599182764689,
+      "std": 0.5471041866762325
+    },
+    "state_kl": {
+      "mean": 1.7191143035888672,
+      "std": 0.22285014611190954
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 3.870548725128174,
+      "state_nonzero": 32,
+      "token_ce": 2.241995096206665,
+      "state_kl": 1.6285536289215088,
+      "teacher_detached": true
+    },
+    {
+      "seed": 43,
+      "loss": 4.912808418273926,
+      "state_nonzero": 32,
+      "token_ce": 2.8869900703430176,
+      "state_kl": 2.025818347930908,
+      "teacher_detached": true
+    },
+    {
+      "seed": 44,
+      "loss": 5.084783554077148,
+      "state_nonzero": 32,
+      "token_ce": 3.5818123817443848,
+      "state_kl": 1.5029709339141846,
+      "teacher_detached": true
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.38149-lift-feedback/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -50,6 +50,7 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `grp` · [Snap GRP v0.1](2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序；本地为公开张量 L1 机制实现，不冒充 Snap 线上效果复现。
 - `helix` · [TikTok HELIX](2609.37183-helix/README.md)：交错扩展特征交互与序列建模，同时以单向信息流保持用户状态跨候选复用；本地为公开张量 L1 架构机制，不冒充论文全流量 A/B 复现。
 - `flvm` · [Google/YouTube FLVM](2609.32839-flvm/README.md)：三因子潜变量、受限混杂基线、稀疏反馈路由与公开 KuaiRand 正负反馈三种子对照；稀疏负反馈及潜变量语义不稳定，标为概念验证。
 - `recursive-opsd` · [Meta DCE+SRCL](2609.30652-recursive-opsd/README.md)：Qwen3-4B 在 A100 上执行动态特权教师、逐 token forward KL 与通过答案验收的精简自改写；公开 GSM8K 两轮诊断无准确率提升证据，标为概念验证。

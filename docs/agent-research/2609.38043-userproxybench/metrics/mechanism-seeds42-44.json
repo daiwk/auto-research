@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:user-proxy-bench",
+  "method": "user-proxy-bench",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "metrics": {
+    "user_fidelity_score": {
+      "mean": 0.6666666666666666,
+      "std": 0.23570226039551584
+    },
+    "episodes": {
+      "mean": 2.0,
+      "std": 0.0
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "user_fidelity_score": 0.5,
+      "episodes": 2,
+      "agent_reward_used": false
+    },
+    {
+      "seed": 43,
+      "user_fidelity_score": 1.0,
+      "episodes": 2,
+      "agent_reward_used": false
+    },
+    {
+      "seed": 44,
+      "user_fidelity_score": 0.5,
+      "episodes": 2,
+      "agent_reward_used": false
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "executable mechanism and invariant checks only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.38043-userproxybench/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "deterministic public mechanism suite sep30-followup-v1",
+    "original_code_commit": "working tree"
+  }
+}
