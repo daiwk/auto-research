@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:vjepa-policy",
+  "method": "vjepa-policy",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "joint_loss": 1.4453125,
+      "latent_loss": 0.9259961247444153,
+      "action_loss": 0.5193163156509399
+    },
+    {
+      "seed": 43,
+      "joint_loss": 3.1248764991760254,
+      "latent_loss": 1.0895336866378784,
+      "action_loss": 2.0353426933288574
+    },
+    {
+      "seed": 44,
+      "joint_loss": 4.341325283050537,
+      "latent_loss": 1.3106361627578735,
+      "action_loss": 3.030689239501953
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "joint_loss_mean": 2.9705047607421875,
+    "latent_loss_mean": 1.1087219913800557,
+    "action_loss_mean": 1.8617827494939168
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.37250-vjepa-policy/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

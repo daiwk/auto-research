@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:advisd",
+  "method": "advisd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "selected_decisions": 5,
+      "threshold": 0.14675799012184143,
+      "mean_abs_contrast": 0.4794694483280182
+    },
+    {
+      "seed": 43,
+      "selected_decisions": 5,
+      "threshold": 0.2888627350330353,
+      "mean_abs_contrast": 0.6506406664848328
+    },
+    {
+      "seed": 44,
+      "selected_decisions": 6,
+      "threshold": 0.2870204448699951,
+      "mean_abs_contrast": 0.5403023362159729
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "selected_decisions_mean": 5.333333333333333,
+    "threshold_mean": 0.24088039000829062,
+    "mean_abs_contrast_mean": 0.5568041503429413
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.38142-advisd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

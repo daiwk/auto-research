@@ -9,7 +9,11 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 上下文管理 | [Context Language Models](2609.37725-context-lm/README.md) | University of Washington / Meta Superintelligence Labs，2026-09-29 | [已开源](https://github.com/facebookresearch/context-language-models) | `context-lm` |
+| Harness 设计 | [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](2609.38143-meta-skills/README.md) | Apodex / University of Illinois Urbana-Champaign，2026-09-29 | [已开源](https://github.com/qiancheng-apodex/MetaSkill-AI4AI) | `meta-skills` |
+| Harness 优化 | [Mixture of Self-Improving Branches for Agent Harness Optimization](2609.37834-branch-mixture/README.md) | 原文首页未列机构，2026-09-29 | 未发现官方代码 | `branch-mixture` |
 | 长期记忆 | [ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents](2609.37311-remem/README.md) | The Hong Kong Polytechnic University，2026-09-29 | [已开源](https://github.com/Quhaoh233/ReMem) | `remem` |
+| Agent 推理 | [Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning](2609.38147-meta-reasoning/README.md) | Meta Superintelligence Labs，2026-09-29 | 未发现官方代码 | `meta-reasoning` |
 | Agent 记忆 | [UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval](2609.36805-upliftmem/README.md) | Beihang University，2026-09-29 | 未发现官方代码 | `upliftmem` |
 | Agent 评测 | [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](2609.38043-userproxybench/README.md) | 原文未列机构，2026-09-29 | 未发现官方代码 | `user-proxy-bench` |
 | RSI | [Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution](2609.37950-video-rsi/README.md) | Tsinghua University，2026-09-29 | [已开源](https://github.com/bingjunluo/Video-RSI) | `video-rsi` |

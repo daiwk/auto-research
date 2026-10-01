@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:cohortmix-ts",
+  "method": "cohortmix-ts",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "prior_mean": 0.46527777777777785,
+      "maximum_draw": 0.5519731469280068,
+      "posterior_mass": 32.0
+    },
+    {
+      "seed": 43,
+      "prior_mean": 0.46527777777777785,
+      "maximum_draw": 0.7066268125485663,
+      "posterior_mass": 32.0
+    },
+    {
+      "seed": 44,
+      "prior_mean": 0.46527777777777785,
+      "maximum_draw": 0.6981454349505806,
+      "posterior_mass": 32.0
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "prior_mean_mean": 0.46527777777777785,
+    "maximum_draw_mean": 0.6522484648090513,
+    "posterior_mass_mean": 32.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.37800-cohortmix-ts/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

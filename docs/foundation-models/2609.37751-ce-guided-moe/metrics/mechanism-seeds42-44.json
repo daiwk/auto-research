@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:ce-guided-moe",
+  "method": "ce-guided-moe",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "probability_error": 1.1920928955078125e-07,
+      "mean_attenuation": 0.8859116435050964
+    },
+    {
+      "seed": 43,
+      "probability_error": 5.960464477539063e-08,
+      "mean_attenuation": 0.8139864802360535
+    },
+    {
+      "seed": 44,
+      "probability_error": 5.960464477539063e-08,
+      "mean_attenuation": 0.7824408411979675
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "probability_error_mean": 7.947285970052083e-08,
+    "mean_attenuation_mean": 0.8274463216463724
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.37751-ce-guided-moe/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

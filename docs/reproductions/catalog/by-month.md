@@ -3,8 +3,10 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-09
+- [CohortMix-TS](../2609.37800-cohortmix-ts/README.md)：用历史 cohort 的混合 Beta 先验 warm-start 新用户，再以 Thompson slate 和反馈后验更新执行跨 cohort 冷启动。
 - [GRP v0.1](../2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序。
 - [HELIX](../2609.37183-helix/README.md)：交错扩展序列建模与候选特征交互，并以单向信息流保持用户序列状态可跨候选复用。
+- [RECAP CTR](../2609.37905-recap-ctr/README.md)：在共享递归 backbone 上形成多条 estimator route，并通过 route 平均和 trajectory EMA 扩展 CTR estimator；无线上 A/B，只作为学术机制与 Evolve 算子。
 - [EvoSkillRec](../2609.34552-evoskillrec/README.md)：把推荐结构拆成带类型的可执行 skill genome，只将 validation 改善的组合晋级到可复用技能库。
 - [PromptShift](../2609.34229-promptshift/README.md)：比较身份提示与无身份参考列表的偏移，并按用户主流度混合相关分和逆群体流行度进行缓解。
 - [FLVM](../2609.32839-flvm/README.md)：用受限时长/时段基线与三因子高斯潜变量解释长观看、点击、喜欢和讨厌；公开数据诊断未证明稳定正负语义。

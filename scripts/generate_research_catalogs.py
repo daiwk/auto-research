@@ -140,6 +140,10 @@ TOPIC_HIERARCHY = {
         "概率传输 OPD": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "跨模型族 OPD": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
         "代码测试时 RL": ("在线强化学习与稳定性", "优势估计与多目标优化"),
+        "Advisor": ("蒸馏与训练闭环", "Advisor 与 targeted self-distillation"),
+        "Agentic RL": ("在线强化学习与稳定性", "Agentic RL 与教师调度"),
+        "策略蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
         "Agentic recommendation memory": ("记忆、技能与持续学习", "主动 / 长期记忆"),
@@ -233,6 +237,10 @@ TOPIC_HIERARCHY = {
         "事件树记忆压缩": ("记忆、技能与持续学习", "主动 / 长期记忆"),
         "环境反馈脚手架": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
         "持久化优化规划": ("规划、搜索与反思", "Harness 与自我改进"),
+        "Agent 推理": ("规划、搜索与反思", "元推理与预算控制"),
+        "上下文管理": ("记忆、技能与持续学习", "上下文、状态与分支管理"),
+        "Harness 设计": ("规划、搜索与反思", "Harness 与自我改进"),
+        "Harness 优化": ("规划、搜索与反思", "Harness 与自我改进"),
     },
 }
 
@@ -704,6 +712,11 @@ def foundation_rows() -> list[dict[str, str]]:
         "open-1b-audit": ("预训练与数据", "训练框架与可组合实验"),
         "persistent-recurrent-memory": ("网络架构", "条件记忆与知识注入"),
         "register-tokens-dllm": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+        "vjepa-policy": ("多模态基础模型", "世界模型与具身控制"),
+        "ce-guided-moe": ("网络架构", "MoE 与动态路由"),
+        "tadm": ("推理与系统效率", "扩散解码与缓存"),
+        "pumba": ("预训练与数据", "扩散语言模型训练"),
+        "splash": ("推理与系统效率", "并行服务与 KV cache"),
     })
     return _date_descending(rows + extra)
 

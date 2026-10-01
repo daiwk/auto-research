@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:tadm",
+  "method": "tadm",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "fused_norm": 3.988795280456543,
+      "mean_gate": 0.4621961712837219
+    },
+    {
+      "seed": 43,
+      "fused_norm": 3.670935869216919,
+      "mean_gate": 0.445072740316391
+    },
+    {
+      "seed": 44,
+      "fused_norm": 4.114856243133545,
+      "mean_gate": 0.37192079424858093
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "fused_norm_mean": 3.9248624642690024,
+    "mean_gate_mean": 0.42639656861623126
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.37924-tadm/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

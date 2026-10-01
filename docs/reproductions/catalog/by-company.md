@@ -2,6 +2,12 @@
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
 
+## DFKI / RPTU Kaiserslautern-Landau
+- 2026-09 · [CohortMix-TS](../2609.37800-cohortmix-ts/README.md)：从历史 cohort 构造固定强度混合 Beta 先验，为新用户 warm-start slate bandit，再按反馈更新后验。
+
+## Georgia Institute of Technology / Google Research
+- 2026-09 · [RECAP CTR](../2609.37905-recap-ctr/README.md)：共享参数递归产生多条 estimator route，并用 route 平均和 trajectory EMA 扩展 CTR estimator；无线上 A/B，只作为诊断与 Evolve 算子。
+
 ## City University of Hong Kong
 - 2026-09 · [EvoSkillRec](../2609.34552-evoskillrec/README.md)：把推荐结构拆成带类型的可执行 skill genome，只将 validation 改善的组合晋级到可复用技能库。
 
