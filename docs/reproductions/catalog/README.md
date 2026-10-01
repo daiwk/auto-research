@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction](../2609.37905-recap-ctr/README.md) | Georgia Institute of Technology / Google Research，2026-09-29 | 未发现官方代码 | `recap-ctr` |
+| 生成、排序与冷启动 | [Challenges and Solutions for Bandits in the Wild: Warm-Started Mixture Bandits for Cross-Cohort Slate Recommendation](../2609.37800-cohortmix-ts/README.md) | DFKI / RPTU Kaiserslautern-Landau，2026-09-29 | [已开源](https://github.com/etowho/university-games) | `cohortmix-ts` |
 | 生成、排序与冷启动 | [GRP v0.1 Technical Report](../2609.36688-grp/README.md) | Snap Inc.，2026-09-29 | 未发现官方代码 | `grp` |
 | 排序与长序列建模 | [HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation](../2609.37183-helix/README.md) | TikTok / ByteDance，2026-09-29 | 未发现官方代码 | `helix` |
 | Serving 与研究基础设施 | [EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery](../2609.34552-evoskillrec/README.md) | City University of Hong Kong，2026-09-28 | [已开源](https://github.com/Xiaopengli1/EvoSkill-Rec) | `evoskillrec` |

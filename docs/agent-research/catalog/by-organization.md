@@ -30,6 +30,10 @@
 
 - 2024-07-23 · 一作：Xingyao Wang · [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
 
+## Apodex / University of Illinois Urbana-Champaign
+
+- 2026-09-29 · 一作：Cheng Qian · [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](../2609.38143-meta-skills/README.md)（`meta-skills`）：从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。
+
 ## Appier AI Research / National Taiwan University
 
 - 2026-08-25 · 一作：Zhi Rui Tam · [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
@@ -209,6 +213,10 @@
 ## Meta AI Research
 
 - 2023-02-09 · 一作：Timo Schick · [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
+
+## Meta Superintelligence Labs
+
+- 2026-09-29 · 一作：Paras Dahal · [Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning](../2609.38147-meta-reasoning/README.md)（`meta-reasoning`）：把对象级工作交给 worker，把控制本身拆成 Assess、Propose、Evaluate 和 Dispatch；控制器只携带紧凑状态，通过持久 artifact memory 复用既有工作，并在统一调用预算内决定继续、分叉或停止。
 
 ## Microsoft
 
@@ -410,6 +418,10 @@
 - 2026-08-19 · 一作：Bo Liu · [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../2608.19197-spade/README.md)（`spade`）：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
 - 2023-03-16 · 一作：Bhargavi Paranjape · [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
 
+## University of Washington / Meta Superintelligence Labs
+
+- 2026-09-29 · 一作：Rulin Shao · [Context Language Models](../2609.37725-context-lm/README.md)（`context-lm`）：把上下文视为模型可直接编辑的文件，使保留、删除和重组信息成为模型行为，而不是外部 harness 的固定策略；多 Agent 各自维护 context file，服务端从第一个不匹配 token 起重新 prefill。
+
 ## University of Wisconsin–Madison
 
 - 2025-12-18 · 一作：Jiongxiao Wang · [SAGE](../2512.17102-sage/README.md)（`sage`）：从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。
@@ -444,6 +456,7 @@
 
 ## 原文首页未列机构
 
+- 2026-09-29 · 一作：Haoyu Dong · [Mixture of Self-Improving Branches for Agent Harness Optimization](../2609.37834-branch-mixture/README.md)（`branch-mixture`）：将 harness 搜索拆成多条分支，每条分支维护不同的开发子集和 proposal policy；全分支都解决的样本被移除，具有分支区分度的样本被保留，部署时由只看输入特征的 router 选择开发集冠军。
 - 2026-09-28 · 一作：Trung Minh Bui · [SAGE: Symbolic Action-Gating and Editing for LLM Task Planners](../2609.34268-sage/README.md)（`sage-planner`）：执行前用符号前置条件门阻止不安全动作并给出类型化原因；失败时只重写相关子目标的后缀，保留已完成前缀。
 
 ## 论文未列机构

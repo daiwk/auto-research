@@ -10,10 +10,15 @@
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | System One / JEV | [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](2609.36965-chinese-jev/README.md) | Fudan University，2026-09-29 | [已开源](https://gulucaptain.github.io/Chinese-Jev/) | `chinese-jev` |
+| MoE | [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](2609.37751-ce-guided-moe/README.md) | Bar-Ilan University，2026-09-29 | 未发现官方代码 | `ce-guided-moe` |
 | 推理与系统效率 | [LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization](2609.38166-leapquant/README.md) | UC Berkeley，2026-09-29 | 未发现官方代码 | `leapquant` |
+| 扩散语言模型 | [On Trajectory-Aware Training for Masked Diffusion Language Models](2609.37974-pumba/README.md) | Apple，2026-09-29 | 未发现官方代码 | `pumba` |
 | 网络架构 | [Pretraining Latent Information Feedback Transformers with Teacher Supervision](2609.38149-lift-feedback/README.md) | Tel Aviv University，2026-09-29 | [已开源](https://github.com/dortirosh1/LIFT) | `lift-feedback` |
+| 推理系统 | [SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving](2609.37626-splash/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-09-29 | [已开源](https://github.com/ict-agent/SPLASH-sglang) | `splash` |
 | 推理与系统效率 | [STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization](2609.38169-stepquant/README.md) | Zhejiang University，2026-09-29 | [已开源](https://github.com/Dreamer-Toby/STEPQuant) | `stepquant` |
+| 扩散语言模型 | [Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation](2609.37924-tadm/README.md) | The University of Texas at Austin，2026-09-29 | 未发现官方代码 | `tadm` |
 | 网络架构 | [Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling](2609.36529-triadic-linear-attention/README.md) | MIT / MIT-IBM Watson AI Lab，2026-09-29 | [已开源](https://github.com/OliverSieberling/TriadicLinearAttention) | `triadic-linear-attention` |
+| 世界动作模型 | [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](2609.37250-vjepa-policy/README.md) | Tsinghua University，2026-09-29 | [已开源](https://github.com/breez3young/VJEPA-Policy) | `vjepa-policy` |
 | 状态空间模型 | [Fractional State Space Transition for Long Sequence Modeling](2609.36314-frac-ssm/README.md) | Huawei Noah's Ark Lab, Montreal Research Center，2026-09-28 | [已开源](https://github.com/anasiri/frac-ssm) | `frac-ssm` |
 | 网络架构 | [MS-GLA: Multi-Scale Gated Linear Attention for Addressing Representational Bottlenecks via Multi-Temporal Resolution](2609.35664-ms-gla/README.md) | International Institute of Information Technology Hyderabad，2026-09-28 | [已开源](https://github.com/prasoondev/msgla) | `ms-gla` |
 | 网络架构 | [Telescopic Language Models](2609.35769-telescopic-lm/README.md) | University of Cambridge，2026-09-28 | 未发现官方代码 | `telescopic-lm` |

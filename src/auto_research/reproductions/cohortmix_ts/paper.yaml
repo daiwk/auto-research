@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "cohortmix-ts",
+  "arxiv_id": "2609.37800",
+  "title": "Challenges and Solutions for Bandits in the Wild: Warm-Started Mixture Bandits for Cross-Cohort Slate Recommendation",
+  "paper_url": "https://arxiv.org/abs/2609.37800",
+  "organization": "DFKI / RPTU Kaiserslautern-Landau",
+  "published": "2026-09-29",
+  "upstream_code": "https://github.com/etowho/university-games",
+  "track": "recommendation",
+  "topics": [
+    "cold-start",
+    "slate-bandit",
+    "cross-cohort-transfer"
+  ],
+  "local_code": "src/auto_research/reproductions/cohortmix_ts",
+  "documentation": "docs/reproductions/2609.37800-cohortmix-ts/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic public cross-cohort bandit fixture"
+  ],
+  "baseline": "uninformative Beta(1,1) Thompson sampling",
+  "metrics": [
+    "prior mean",
+    "selected slate",
+    "posterior update"
+  ],
+  "mechanisms": [
+    "historical matrix factorization",
+    "25-day Campus Games deployment"
+  ],
+  "evolve_operators": []
+}

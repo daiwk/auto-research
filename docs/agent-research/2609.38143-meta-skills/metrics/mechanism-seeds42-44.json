@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:meta-skills",
+  "method": "meta-skills",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "selected_skills": 1,
+      "bank_size": 1
+    },
+    {
+      "seed": 43,
+      "selected_skills": 1,
+      "bank_size": 1
+    },
+    {
+      "seed": 44,
+      "selected_skills": 1,
+      "bank_size": 1
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "selected_skills_mean": 1.0,
+    "bank_size_mean": 1.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2609.38143-meta-skills/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

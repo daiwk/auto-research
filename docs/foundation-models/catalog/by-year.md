@@ -4,6 +4,11 @@
 
 ## 2026
 
+- 2026-09 · [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
+- 2026-09 · [On Trajectory-Aware Training for Masked Diffusion Language Models](../../foundation-models/2609.37974-pumba/README.md)（`pumba`）：训练时沿模型自己的 progressive-unmasking 轨迹连续展开多个 denoising step，把隐藏 carry 传给下一步，并在固定窗口内通过时间反向传播，使前一步学会产生对后续有用的 carry。
+- 2026-09 · [SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving](../../foundation-models/2609.37626-splash/README.md)（`splash`）：统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。
+- 2026-09 · [Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation](../../foundation-models/2609.37924-tadm/README.md)（`tadm`）：将昂贵 anchor network 的潜表示跨多个反向扩散步缓存，只周期性刷新；小型 fusion module 根据当前状态门控修正陈旧 anchor，再交给轻量 denoiser。
+- 2026-09 · [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../foundation-models/2609.37250-vjepa-policy/README.md)（`vjepa-policy`）：冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。
 - 2026-09 · [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](../../foundation-models/2609.17241-echo/README.md)（`echo`）：用早层高频探索与末层低频权威校验组成双循环；两侧 bonus logits 协同补树，并保留精确拒绝采样校正。
 - 2026-09 · [OPEN-1B: A Fully Auditable Training Run](../../foundation-models/2609.17380-open-1b-audit/README.md)（`open-1b-audit`）：固定 kernel reduction、数据批次与集体通信顺序，并用逐步状态哈希支持异构硬件单步重放审计。
 - 2026-09 · [Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization](../../foundation-models/2609.17251-persistent-recurrent-memory/README.md)（`persistent-recurrent-memory`）：在 Transformer 上下半层之间插入 observe–GRU update–gated influence 的持久状态通路。

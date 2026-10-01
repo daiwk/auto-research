@@ -24,6 +24,7 @@ from auto_research.latest_20260920_system_one_catalog import LATEST_METHOD_PAPER
 from auto_research.latest_20260930_catalog import LATEST_METHOD_PAPERS as SEP30_METHOD_PAPERS
 from auto_research.latest_20260930_followup_catalog import LATEST_METHOD_PAPERS as SEP30_FOLLOWUP_METHOD_PAPERS
 from auto_research.latest_20260930_closure_catalog import LATEST_METHOD_PAPERS as SEP30_CLOSURE_METHOD_PAPERS
+from auto_research.latest_20261001_catalog import LATEST_METHOD_PAPERS as OCT01_METHOD_PAPERS
 
 
 POST_TRAINING_KEYS = {"dynamic-rubric", "off-context-grpo", "sis", "recursive-opsd"}
@@ -35,7 +36,7 @@ FIRST_AUTHOR_OVERRIDES = {
     "wemm-embedding": "Junjie Zhou",
 }
 
-LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + SEP30_METHOD_PAPERS + SEP30_FOLLOWUP_METHOD_PAPERS + SEP30_CLOSURE_METHOD_PAPERS + (
+LATEST_METHOD_PAPERS = SEP14_METHOD_PAPERS + SEP16_METHOD_PAPERS + SEP16_FOLLOWUP_METHOD_PAPERS + SEP19_METHOD_PAPERS + SYSTEM_ONE_PAPERS + SEP30_METHOD_PAPERS + SEP30_FOLLOWUP_METHOD_PAPERS + SEP30_CLOSURE_METHOD_PAPERS + OCT01_METHOD_PAPERS + (
     {
         "domain": "agent-research", "key": "agentx-model-replay",
         "title": "Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems",

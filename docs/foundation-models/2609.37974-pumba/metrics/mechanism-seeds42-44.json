@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:pumba",
+  "method": "pumba",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "window_loss": 4.579335689544678,
+      "steps": 3,
+      "initial_gradient_norm": 0.7704217433929443,
+      "boundary_carry_detached": true
+    },
+    {
+      "seed": 43,
+      "window_loss": 3.3977725505828857,
+      "steps": 3,
+      "initial_gradient_norm": 0.7224628329277039,
+      "boundary_carry_detached": true
+    },
+    {
+      "seed": 44,
+      "window_loss": 2.645535469055176,
+      "steps": 3,
+      "initial_gradient_norm": 0.6216925382614136,
+      "boundary_carry_detached": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "window_loss_mean": 3.5408812363942466,
+    "steps_mean": 3.0,
+    "initial_gradient_norm_mean": 0.7048590381940206
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2609.37974-pumba/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

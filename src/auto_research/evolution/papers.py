@@ -7,6 +7,10 @@ from .models import PaperInspiration
 
 
 INSTALLED_MUTATIONS = {
+    "2609.37905": (
+        "rankmixer_recap",
+        "RECAP 的权重共享递归 route、推理平均与训练轨迹 EMA；仅作学术 Evolve 算子，不表示通过工业线上门槛",
+    ),
     "2609.34552": (
         "rankmixer_evoskill",
         "EvoSkillRec 的 typed skill genome、validation 晋级与已验证技能复用",

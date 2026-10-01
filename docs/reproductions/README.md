@@ -50,6 +50,8 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `cohortmix-ts` · [CohortMix-TS](2609.37800-cohortmix-ts/README.md)：从历史 cohort 构造固定强度混合 Beta 先验，再用 Thompson sampling 选 slate 并按反馈更新；论文含 25 天随机部署，但显著结果来自受限完整窗口子组，本地只做状态更新诊断。
+- `recap-ctr` · [RECAP CTR](2609.37905-recap-ctr/README.md)：在共享参数递归 backbone 上产生多条 estimator route，结合 route 平均与训练轨迹 EMA，并以可执行 `rankmixer_recap` 算子接入 Evolve；原文没有线上 A/B，因此不进入工业证据集合。
 - `evoskillrec` · [EvoSkillRec](2609.34552-evoskillrec/README.md)：执行带输入/输出类型的 skill genome、validation evaluator、晋级与复用，并以 `rankmixer_evoskill` 接入统一 Evolve 控制器；本地只报告 L1 机制诊断，不外推论文的大规模搜索收益。
 - `promptshift` · [PromptShift](2609.34229-promptshift/README.md)：在固定相关性与身份 slice fixture 上执行 Drift、SliceShift、difficulty-weighted hit 和自适应逆流行度 reranker；不生成或推断真实用户身份画像。
 - `grp` · [Snap GRP v0.1](2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序；本地为公开张量 L1 机制实现，不冒充 Snap 线上效果复现。

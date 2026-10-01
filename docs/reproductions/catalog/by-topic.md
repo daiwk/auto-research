@@ -162,6 +162,7 @@
 - [TIGER](../2305.05065-tiger/README.md)：先用 RQ-VAE 构造层级 Semantic ID，再自回归生成目标物品。
 
 ### 排序网络与长序列
+- [RECAP CTR](../2609.37905-recap-ctr/README.md)：在共享参数递归 backbone 上形成多条 estimator route，以 route 平均与训练轨迹 EMA 扩展 estimator scaling；无线上 A/B，只作为诊断与 Evolve 算子。
 - [KuaFu](../2609.31045-kuafu/README.md)：将单条行为独立编码、双轴压缩成可复用缓存，按顺序送入解码器，并以阶段化训练约束压缩事实保真。
 - [ChronicleRec](../2609.12375-chronicle-rec/README.md)：以非均匀历史合并、因果 query 锚点和多 horizon alignment 生成可缓存的长期用户 token。
 - [From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs](../2609.01240-rest/README.md)：用双门控时序编码抑制行为噪声，并将重型用户编码与轻量候选交叉解耦，实现请求内共享计算。
@@ -239,6 +240,7 @@
 - [Wide & Deep](../1606.07792-wide-deep/README.md)：联合显式 wide 交叉与 deep 表征，是工业精排从线性模型向深度模型过渡的经典骨架。
 
 ### 冷启动与语义-行为对齐
+- [CohortMix-TS](../2609.37800-cohortmix-ts/README.md)：从历史 cohort 构造固定强度混合 Beta 先验，为新用户 warm-start slate bandit，再按真实反馈更新后验。
 - [LLM Thompson Priors](../2608.03382-llm-ts-prior/README.md)：把 LLM 对新评论质量的语义判断编码为分群 Beta 先验，再让真实曝光反馈逐步覆盖先验。
 - [PinEqualizer](../2607.22518-pinequalizer/README.md)：在 corpus、召回、排序和 utility 全漏斗识别 fresh 内容瓶颈，以内容特征、engagement dropout、cohort calibration 和 UCB 打破曝光反馈回路。
 - [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：以 engagement-aware residual codebook 和多视角对齐把 Semantic ID 接入判别式召回。

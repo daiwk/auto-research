@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:maestro-opd",
+  "method": "maestro-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "token_pds_mean": 0.813245415687561,
+      "prefix_pds_mean": 0.7938966155052185
+    },
+    {
+      "seed": 43,
+      "token_pds_mean": 0.8029363751411438,
+      "prefix_pds_mean": 0.8000279664993286
+    },
+    {
+      "seed": 44,
+      "token_pds_mean": 0.6638835668563843,
+      "prefix_pds_mean": 0.6295859813690186
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "token_pds_mean_mean": 0.7600217858950297,
+    "prefix_pds_mean_mean": 0.7411701877911886
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "mechanism execution and invariants only",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2609.37510-maestro/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct01-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

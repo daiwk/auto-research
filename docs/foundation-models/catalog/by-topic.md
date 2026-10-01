@@ -4,6 +4,10 @@
 
 ## 网络架构
 
+### MoE 与动态路由
+
+- [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
+
 ### 条件记忆与知识注入
 
 - [Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization](../../foundation-models/2609.17251-persistent-recurrent-memory/README.md)（`persistent-recurrent-memory`）：在 Transformer 上下半层之间插入 observe–GRU update–gated influence 的持久状态通路。
@@ -63,6 +67,10 @@
 
 ## 预训练与数据
 
+### 扩散语言模型训练
+
+- [On Trajectory-Aware Training for Masked Diffusion Language Models](../../foundation-models/2609.37974-pumba/README.md)（`pumba`）：训练时沿模型自己的 progressive-unmasking 轨迹连续展开多个 denoising step，把隐藏 carry 传给下一步，并在固定窗口内通过时间反向传播，使前一步学会产生对后续有用的 carry。
+
 ### 训练框架与可组合实验
 
 - [OPEN-1B: A Fully Auditable Training Run](../../foundation-models/2609.17380-open-1b-audit/README.md)（`open-1b-audit`）：固定 kernel reduction、数据批次与集体通信顺序，并用逐步状态哈希支持异构硬件单步重放审计。
@@ -85,6 +93,10 @@
 - [Muon is Scalable for LLM Training](../../reproductions/2502.16982-muon/README.md)（`muon`）：AdamW 把矩阵参数当作独立标量更新，Muon 则把隐藏层梯度视为矩阵，通过 momentum 与 Newton–Schulz 近似极分解得到正交化更新方向。论文为大规模训练补上 weight decay 和按参数形状缩放；非隐藏矩阵参数继续使用 AdamW。
 
 ## 多模态基础模型
+
+### 世界模型与具身控制
+
+- [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../foundation-models/2609.37250-vjepa-policy/README.md)（`vjepa-policy`）：冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。
 
 ### 视觉 token 与跨模态检索
 
@@ -117,6 +129,14 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 并行服务与 KV cache
+
+- [SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving](../../foundation-models/2609.37626-splash/README.md)（`splash`）：统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。
+
+### 扩散解码与缓存
+
+- [Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation](../../foundation-models/2609.37924-tadm/README.md)（`tadm`）：将昂贵 anchor network 的潜表示跨多个反向扩散步缓存，只周期性刷新；小型 fusion module 根据当前状态门控修正陈旧 anchor，再交给轻量 denoiser。
 
 ### 推测解码与 KV cache
 

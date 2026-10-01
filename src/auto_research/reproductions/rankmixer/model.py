@@ -22,6 +22,7 @@ class RankMixerConfig(NeuralRankingConfig):
     expansion: int = 3
     dceo_causal_gain: float = 0.35
     dceo_temperature: float = 1.0
+    recap_routes: int = 3
 
 
 def build_model(kind: str, data, config: RankMixerConfig):
@@ -57,6 +58,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
         "rankmixer_hill_index",
         "rankmixer_semantic_native_longseq",
         "rankmixer_evoskill",
+        "rankmixer_recap",
     }
     if kind not in supported:
         raise ValueError(f"unknown RankMixer evolution architecture: {kind}")
@@ -406,6 +408,28 @@ def build_model(kind: str, data, config: RankMixerConfig):
             gate = torch.sigmoid(self.gate(torch.cat((values, update), dim=-1)))
             return self.norm(values + gate * update)
 
+    class RecapBlock(nn.Module):
+        """Weight-shared recursive estimator routes with logit-space averaging."""
+
+        def __init__(self):
+            super().__init__()
+            if config.recap_routes < 1:
+                raise ValueError("recap_routes must be positive")
+            self.shared = nn.Sequential(
+                nn.Linear(config.dimensions, config.dimensions),
+                nn.GELU(),
+                nn.Linear(config.dimensions, config.dimensions),
+            )
+            self.norm = nn.LayerNorm(config.dimensions)
+
+        def forward(self, values):
+            hidden = values
+            routes = []
+            for _ in range(config.recap_routes):
+                hidden = self.norm(hidden + self.shared(hidden))
+                routes.append(hidden)
+            return torch.stack(routes, dim=0).mean(0)
+
     class Ranker(nn.Module):
         def __init__(self):
             super().__init__()
@@ -424,6 +448,7 @@ def build_model(kind: str, data, config: RankMixerConfig):
                 "rankmixer_ha_moe": HeterogeneousMoEBlock,
                 "rankmixer_kunlun": KunlunBlock,
                 "rankmixer_evoskill": EvoSkillBlock,
+                "rankmixer_recap": RecapBlock,
             }.get(kind, Block)
             self.blocks = nn.ModuleList([block_type() for _ in range(config.layers)])
             self.output = nn.Sequential(

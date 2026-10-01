@@ -9,7 +9,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Advisor | [AdviSD: Learning to Advise Frontier LLMs via Targeted Multi-Turn Self-Distillation](2609.38142-advisd/README.md) | University of Southern California，2026-09-29 | 未发现官方代码 | `advisd` |
 | On-policy distillation | [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](2609.38025-dr-opd/README.md) | Rutgers University，2026-09-29 | [已开源](https://github.com/zywang0701/Dr-OPD) | `dr-opd` |
+| On-policy distillation | [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](2609.37851-flowmap-opd/README.md) | Georgia Institute of Technology，2026-09-29 | [已开源](https://github.com/ZhiqiLi-CG/Flowmap_OPD_source) | `flowmap-opd` |
+| On-policy distillation | [From Dissonance to Orchestration: Teacher Intervention in On-Policy Distillation](2609.37510-maestro/README.md) | Nanyang Technological University，2026-09-29 | [已开源](https://github.com/yhao-wang/MAESTRO) | `maestro-opd` |
+| Agentic RL | [Guide, Then Let Go: Gap-Adaptive Teacher Scheduling for Sparse-Reward Agentic RL](2609.37898-gats/README.md) | Dalian University of Technology / Kuaishou，2026-09-29 | [已开源](https://github.com/Ricardo-H/guide-then-let-go) | `gats` |
+| 策略蒸馏 | [Interpolated Policy Distillation: A Controllable Continuum Between Off-Policy and On-Policy Distillation](2609.37170-ipd/README.md) | WeChat Vision, Tencent，2026-09-29 | 未发现官方代码 | `ipd` |
 | RLVR | [Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR](2609.37868-graft/README.md) | KAIST，2026-09-29 | 未发现官方代码 | `graft` |
 | On-policy self-distillation | [Overcoming Scaling Limits in On-Policy Self-Distillation for LLM Reasoning](2609.37915-oasis/README.md) | North South University，2026-09-29 | 未发现官方代码 | `oasis-opsd` |
 | Agentic RL | [PR-OPD: Privileged Representation On-policy Self-Distillation for Agentic Reinforcement Learning](2609.36642-pr-opd/README.md) | University of Florida，2026-09-29 | [已开源](https://github.com/balibata/PR-OPD) | `pr-opd` |

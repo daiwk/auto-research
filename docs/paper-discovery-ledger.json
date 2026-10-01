@@ -12487,6 +12487,44 @@
         {"id": "2609.35427", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Requires an asynchronous tool environment and equal-budget latency/success evaluation."},
         {"id": "2609.34227", "priority": "P1", "track": "agent", "status": "deferred", "reason": "Overlaps the implemented Mnemon raw-record/Jev route; retained for a future real-checkpoint comparison."}
       ]
+    },
+    {
+      "batch": "recent-20261001-p0-p1",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-10-01T16:00:00+08:00",
+      "window": "2026-09-29 through 2026-10-01",
+      "sources": [
+        "arXiv official daily listing, complete HTML and PDF",
+        "official author repositories and project pages"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": true,
+        "watermark_advanced": false,
+        "watermark": "2026-09-30",
+        "overlap_start": "2026-09-29",
+        "source_artifact": "recent-paper-scan-20261001.md",
+        "note": "The Oct 1 official daily listing had no 2610 identifiers yet. This batch closes all approved P0/P1 candidates from the Sep 29 announcement; DeepXiv was not used."
+      },
+      "candidates": [
+        {"id": "2609.38147", "priority": "P0", "track": "agent", "status": "implemented", "key": "meta-reasoning", "doc": "agent-research/2609.38147-meta-reasoning/README.md"},
+        {"id": "2609.37725", "priority": "P0", "track": "agent", "status": "implemented", "key": "context-lm", "doc": "agent-research/2609.37725-context-lm/README.md"},
+        {"id": "2609.38143", "priority": "P0", "track": "agent", "status": "implemented", "key": "meta-skills", "doc": "agent-research/2609.38143-meta-skills/README.md"},
+        {"id": "2609.37950", "priority": "P0", "track": "agent", "status": "implemented", "key": "video-rsi", "doc": "agent-research/2609.37950-video-rsi/README.md", "note": "implemented in the preceding closeout batch and deduplicated here"},
+        {"id": "2609.37834", "priority": "P0", "track": "agent", "status": "implemented", "key": "branch-mixture", "doc": "agent-research/2609.37834-branch-mixture/README.md"},
+        {"id": "2609.37898", "priority": "P0", "track": "post-training", "status": "implemented", "key": "gats", "doc": "post-training/2609.37898-gats/README.md"},
+        {"id": "2609.37800", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "cohortmix-ts", "doc": "reproductions/2609.37800-cohortmix-ts/README.md", "evidence_gate": "25-day randomized deployment; significant 6.23 pp change difference only in the restricted complete-window subgroup, with the post-assignment caveat retained"},
+        {"id": "2609.38142", "priority": "P0", "track": "post-training", "status": "implemented", "key": "advisd", "doc": "post-training/2609.38142-advisd/README.md"},
+        {"id": "2609.37905", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "recap-ctr", "doc": "reproductions/2609.37905-recap-ctr/README.md", "evidence_scope": "user-approved academic/Evolve diagnostic only; no quantified online A/B and excluded from industrial evidence claims"},
+        {"id": "2609.37510", "priority": "P1", "track": "post-training", "status": "implemented", "key": "maestro-opd", "doc": "post-training/2609.37510-maestro/README.md"},
+        {"id": "2609.37170", "priority": "P1", "track": "post-training", "status": "implemented", "key": "ipd", "doc": "post-training/2609.37170-ipd/README.md"},
+        {"id": "2609.37250", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "vjepa-policy", "doc": "foundation-models/2609.37250-vjepa-policy/README.md"},
+        {"id": "2609.37851", "priority": "P1", "track": "post-training", "status": "implemented", "key": "flowmap-opd", "doc": "post-training/2609.37851-flowmap-opd/README.md"},
+        {"id": "2609.37751", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "ce-guided-moe", "doc": "foundation-models/2609.37751-ce-guided-moe/README.md"},
+        {"id": "2609.37924", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "tadm", "doc": "foundation-models/2609.37924-tadm/README.md"},
+        {"id": "2609.37974", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "pumba", "doc": "foundation-models/2609.37974-pumba/README.md"},
+        {"id": "2609.37626", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "splash", "doc": "foundation-models/2609.37626-splash/README.md"}
+      ]
     }
   ]
 }
