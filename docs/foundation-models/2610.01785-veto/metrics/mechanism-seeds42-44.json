@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:veto",
+  "method": "veto",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "output_tokens": 12,
+      "spatial_indices": [
+        0,
+        11,
+        14,
+        15
+      ],
+      "frame_indices": [
+        0,
+        3,
+        4
+      ],
+      "compression_ratio": 0.09375
+    },
+    {
+      "seed": 43,
+      "output_tokens": 12,
+      "spatial_indices": [
+        0,
+        4,
+        14,
+        8
+      ],
+      "frame_indices": [
+        0,
+        7,
+        2
+      ],
+      "compression_ratio": 0.09375
+    },
+    {
+      "seed": 44,
+      "output_tokens": 12,
+      "spatial_indices": [
+        0,
+        9,
+        6,
+        7
+      ],
+      "frame_indices": [
+        0,
+        4,
+        7
+      ],
+      "compression_ratio": 0.09375
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "output_tokens_mean": 12.0,
+    "compression_ratio_mean": 0.09375
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.01785-veto/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

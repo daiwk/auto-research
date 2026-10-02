@@ -9,6 +9,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 优化器 | [TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning](2610.02199-taco-optimizer/README.md) | University of Central Florida，2026-10-01 | [已开源](https://github.com/Jichao2357/TACO_optimizer) | `taco-optimizer` |
+| 视频 VLM | [VETO: Video Efficient Token Optimization for Vision Language Models](2610.01785-veto/README.md) | National Taiwan University，2026-10-01 | 未发现官方代码 | `veto` |
 | System One / JEV | [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](2609.36965-chinese-jev/README.md) | Fudan University，2026-09-29 | [已开源](https://gulucaptain.github.io/Chinese-Jev/) | `chinese-jev` |
 | MoE | [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](2609.37751-ce-guided-moe/README.md) | Bar-Ilan University，2026-09-29 | 未发现官方代码 | `ce-guided-moe` |
 | 推理与系统效率 | [LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization](2609.38166-leapquant/README.md) | UC Berkeley，2026-09-29 | 未发现官方代码 | `leapquant` |
@@ -81,6 +83,7 @@
 | 注意力与长上下文 | [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../reproductions/2607.15456-looped-latent-attention/README.md) | University of Maryland / Meta AI，2026-07-16 | 未发现官方代码 | `looped-latent-attention` |
 | 注意力与长上下文 | [MiniMax Sparse Attention](../reproductions/2606.13392-minimax-sparse-attention/README.md) | MiniMax，2026-06-11 | [已开源](https://github.com/MiniMax-AI/MSA) | `minimax-sparse-attention` |
 | 网络架构 | [Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory](../reproductions/2605.20948-memory-grafting/README.md) | Tsinghua University / Microsoft Research Asia，2026-05-20 | 未发现官方代码 | `memory-grafting` |
+| 企业 LLM | [Customizing an LLM for Enterprise Software Engineering](2605.16517-gemini-for-google/README.md) | Google，2026-05-15 | 未发现官方代码 | `gemini-for-google` |
 | 注意力与长上下文 | [Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers](../reproductions/2603.26380-switch-attention/README.md) | Peking University / Huawei Technologies，2026-03-27 | 未发现官方代码 | `switch-attention` |
 | 生成式检索 | [Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion](2603.06397-r4t/README.md) | University of Illinois Urbana-Champaign / Google Research，2026-03-06 | 未发现官方代码 | `r4t` |
 | 网络架构 | [Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](../reproductions/2601.07372-engram/README.md) | DeepSeek，2026-01-12 | [已开源](https://github.com/deepseek-ai/Engram) | `engram` |

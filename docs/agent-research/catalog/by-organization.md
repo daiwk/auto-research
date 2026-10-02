@@ -124,6 +124,10 @@
 - 2026-09-08 · 一作：Yuxing Lu · [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](../2609.09153-procedural-graphs/README.md)（`procedural-graphs`）：方法把成功经验从自然语言片段提升为 procedure–relation–procedure 图。新经验先局部化为候选图编辑，再经过 held-out 验证门才写入长期结构，减少错误经验污染。
 - 2025-08-06 · 一作：Zhongyi Zhou · [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](../2508.04086-toolgrad/README.md)（`toolgrad`）：先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。
 
+## Google Cloud AI Research
+
+- 2026-10-01 · 一作：Caiqi Zhang · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
+
 ## Google Research / Hebrew University of Jerusalem / University of Cambridge
 
 - 2026-09-15 · 一作：Amir Taubenfeld · [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
@@ -275,6 +279,10 @@
 
 - 2021-12-17 · 一作：Reiichiro Nakano · [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
 
+## POSTECH
+
+- 2026-10-01 · 一作：Sungho Park · [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](../2610.00906-active-saddler/README.md)（`active-saddler`）：把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。
+
 ## Peking University
 
 - 2026-07-30 · 一作：Cong Li · [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
@@ -289,6 +297,10 @@
 - 2024-05-06 · 一作：John Yang · [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
 - 2023-05-17 · 一作：Shunyu Yao · [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。
 - 2022-10-06 · 一作：Shunyu Yao · [ReAct](../2210.03629-react/README.md)（`react`）：纯 CoT 容易在封闭知识上幻觉，纯 action agent 又缺少计划与状态跟踪。ReAct 让模型交替生成自然语言推理和环境 action，再把 observation 放回下一步上下文，使推理可以纠错、行动可以获取外部事实。
+
+## Qwen DianJin Team, Alibaba Cloud Computing
+
+- 2026-10-01 · 一作：Bo Deng · [DeFA: Dependency-Guided Failure Attribution for LLM Agents](../2610.01256-defa/README.md)（`defa`）：融合 protocol relation 和语义依赖构造 event dependency graph，再从违规事件逆向追踪 source 与下游影响，形成 failure propagation graph 并定位 decisive error。
 
 ## Renmin University of China
 
@@ -346,6 +358,10 @@
 ## The University of Hong Kong
 
 - 2026-07-30 · 一作：Qiushi Sun · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
+
+## The University of Texas at Austin
+
+- 2026-10-01 · 一作：Ahmad Yehia · [Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents](../2610.02002-mem-plus-plus/README.md)（`mem-plus-plus`）：写入时完整保留文档、日期和作者，不调用生成模型做不可逆摘要；读取时先按问题时间过滤，再融合 lexical 与 semantic ranking。
 
 ## Tianjin University
 
@@ -430,6 +446,10 @@
 
 - 2026-08-07 · 一作：Jiahao Zhang · [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
 
+## William & Mary
+
+- 2026-10-01 · 一作：Xuehang Guo · [It Takes Workflows to Evolve Better Workflows](../2610.01026-flowright/README.md)（`flowright`）：利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。
+
 ## Xi'an Jiaotong-Liverpool University
 
 - 2026-09-04 · 一作：Peiyu Hu · [AtomRec: Evolving Atomic Memory for Agentic Recommendation](../2609.04882-atomrec/README.md)（`atomrec`）：粗粒度用户摘要会在重写时覆盖旧偏好，单一协同边又难以解释推荐。AtomRec 将用户和物品历史拆成可独立演化的原子字段，建立语义协同链接，并以多跳路径取回“为什么推荐”的证据。
@@ -458,6 +478,10 @@
 
 - 2026-09-29 · 一作：Haoyu Dong · [Mixture of Self-Improving Branches for Agent Harness Optimization](../2609.37834-branch-mixture/README.md)（`branch-mixture`）：将 harness 搜索拆成多条分支，每条分支维护不同的开发子集和 proposal policy；全分支都解决的样本被移除，具有分支区分度的样本被保留，部署时由只看输入特征的 router 选择开发集冠军。
 - 2026-09-28 · 一作：Trung Minh Bui · [SAGE: Symbolic Action-Gating and Editing for LLM Task Planners](../2609.34268-sage/README.md)（`sage-planner`）：执行前用符号前置条件门阻止不安全动作并给出类型化原因；失败时只重写相关子目标的后缀，保留已完成前缀。
+
+## 原文首页未列第一作者机构
+
+- 2026-10-01 · 一作：Yunbei Zhang · [Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover](../2610.01073-safe-self-improvement/README.md)（`safe-self-improvement`）：把检测、当前可执行实现选择和下一轮编辑源分开；所有候选必须对当前条件重新验证，若无候选通过则回滚 founder，而不是继续运行已失败 incumbent。
 
 ## 论文未列机构
 

@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-10 · [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](../2610.01207-dars/README.md)（`dars`）：把任务进度表示为带先决条件的 predicate 图；验证、失效和修复事件更新图状态，最近破损依赖按图距离衰减已完成工作的 credit，独立分支不受牵连。
+- 2026-10 · [My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning](../2610.01161-my-fault/README.md)（`my-fault`）：自诊断器提出错误类别与位置，只有经证据验证的 claim 才进入在线 error pricing；学得的相对成本把终局 credit 守恒地重分配到步骤。
+- 2026-10 · [Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals](../2610.01548-range-grpo/README.md)（`range-grpo`）：用 conformal reward interval 代替单点 judge 分数；组内只对可确定排序的区间产生方向信号，区间重叠时不制造虚假偏好。
+- 2026-10 · [Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes](../2610.02117-where-opd/README.md)（`where-opd`）：程序化合成场景自动给出对象身份和空间坐标；teacher 接收文本化空间特权信息，student 只看图像与问题，在自己的 on-policy token 上蒸馏 teacher。
 - 2026-09 · [AdviSD: Learning to Advise Frontier LLMs via Targeted Multi-Turn Self-Distillation](../2609.38142-advisd/README.md)（`advisd`）：冻结 executor，只训练 advisor；反思先提出修正，再对同一已记录 executor 响应分别计算有建议与无建议的平均 log-likelihood，只有影响幅度超过 donor-advice 校准阈值的决定才进入自蒸馏。
 - 2026-09 · [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](../2609.38025-dr-opd/README.md)（`dr-opd`）：普通 OPD 对每个 teacher token 信号等权，但改正关键推理错误与替换同义措辞的下游价值不同。Dr. OPD 用双层优化定义“更新学生后预期 reward 最大”的 token 权重，并在每轮先闭式更新权重，再执行一次加权 OPD。
 - 2026-09 · [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](../2609.37851-flowmap-opd/README.md)（`flowmap-opd`）：把生成状态的 rollout 分布与 teacher/student 比较 kernel 解耦：rollout 只负责提供具有正确边缘分布的状态，优化 kernel 在这些冻结状态上比较 flow map、诱导速度或瞬时速度。

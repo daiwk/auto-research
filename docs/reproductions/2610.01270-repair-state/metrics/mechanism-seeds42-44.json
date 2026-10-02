@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:repair-state",
+  "method": "repair-state",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "state_norm": 1.7635208368301392,
+      "selected_timesteps": 3
+    },
+    {
+      "seed": 43,
+      "state_norm": 1.8291152715682983,
+      "selected_timesteps": 3
+    },
+    {
+      "seed": 44,
+      "state_norm": 1.2855243682861328,
+      "selected_timesteps": 3
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "state_norm_mean": 1.6260534922281902,
+    "selected_timesteps_mean": 3.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.01270-repair-state/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

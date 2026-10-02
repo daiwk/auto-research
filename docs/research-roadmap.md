@@ -157,6 +157,19 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 每个新工业候选先按“机构/主题”召回，再读 PDF/HTML 全文。只有量化线上 A/B，或用户
 明确认可的统计显著全流量部署，才进入实现队列；摘要未写 A/B 不能作为拒绝依据。
 
+## 2026-10-02 P0/P1 合并批次
+
+| 优先级 | 领域 | 已完成论文 / 方法 | 验收状态 |
+|---|---|---|---|
+| P0 | 工业 LLM / 搜广推 | Gemini for Google、GEAR | 全文线上证据、独立详情页、可执行 L1 机制 |
+| P0 | 后训练 | DARS、Range-GRPO | 依赖奖励与区间 GRPO 不变量测试通过 |
+| P0 | Agent / RSI | ActiveSaddler、Safety Must Survive Self-Improvement、VeriHarness | 课程、验证、回滚协议测试通过 |
+| P1 | 基础模型 / 多模态 | TACO、VETO | CUDA 机制实现；真实 A100 receipt 为合并门槛 |
+| P1 | Agent / 后训练 | Mem++、DeFA、My FAULT、FloWright、Where-OPD | 状态、梯度、credit 与信息隔离合同通过 |
+| P1 | 搜广推 | Effective Training Time、GrIS、REPAIR | 例外范围已写入元数据，不混入工业 A/B 结论 |
+
+完整扫描、原文证据和边界见 [2026-10-02 扫描收口](recent-paper-scan-20261002.md)。
+
 ## P1 执行队列
 
 建议按表内顺序推进；同一编号应尽量作为一个可独立合并的 MR。

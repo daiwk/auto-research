@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:gris",
+  "method": "gris",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "unique_ids": 8,
+      "levels": 3
+    },
+    {
+      "seed": 43,
+      "unique_ids": 8,
+      "levels": 3
+    },
+    {
+      "seed": 44,
+      "unique_ids": 8,
+      "levels": 3
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "unique_ids_mean": 8.0,
+    "levels_mean": 3.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.01533-gris/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:effective-training-time",
+  "method": "effective-training-time",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "ett": 0.8,
+      "loss_fraction": 0.2
+    },
+    {
+      "seed": 43,
+      "ett": 0.8,
+      "loss_fraction": 0.2
+    },
+    {
+      "seed": 44,
+      "ett": 0.8,
+      "loss_fraction": 0.2
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "ett_mean": 0.8000000000000002,
+    "loss_fraction_mean": 0.20000000000000004
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.02057-effective-training-time/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

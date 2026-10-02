@@ -12525,6 +12525,45 @@
         {"id": "2609.37974", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "pumba", "doc": "foundation-models/2609.37974-pumba/README.md"},
         {"id": "2609.37626", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "splash", "doc": "foundation-models/2609.37626-splash/README.md"}
       ]
+    },
+    {
+      "batch": "recent-20261002-p0-p1",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-10-02T20:00:00+08:00",
+      "window": "2026-09-30 through 2026-10-02, plus a Google full-text evidence backfill",
+      "sources": [
+        "arXiv official abstracts, complete HTML and PDF",
+        "Google Research official publication page",
+        "official author repositories and project pages"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": true,
+        "watermark_advanced": true,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261002.md",
+        "note": "All user-approved P0/P1 candidates are implemented. Google and Meta were checked first; DeepXiv was not used."
+      },
+      "candidates": [
+        {"id": "2605.16517", "priority": "P0", "track": "foundation-model", "status": "implemented", "key": "gemini-for-google", "doc": "foundation-models/2605.16517-gemini-for-google/README.md", "evidence_gate": "Blind A/B with 29,000 Google developers; iterations -23% and code survival +16.8%"},
+        {"id": "2609.39327", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "gear", "doc": "reproductions/2609.39327-gear/README.md", "evidence_gate": "Seven-day Douyin Ads A/B with 5% traffic per group; ADSS +0.563%, ADVV +0.658%, cold-start activation +1.46%"},
+        {"id": "2610.01207", "priority": "P0", "track": "post-training", "status": "implemented", "key": "dars", "doc": "post-training/2610.01207-dars/README.md", "note": "Official repository exists but states implementation is still being prepared"},
+        {"id": "2610.00906", "priority": "P0", "track": "agent", "status": "implemented", "key": "active-saddler", "doc": "agent-research/2610.00906-active-saddler/README.md"},
+        {"id": "2610.01073", "priority": "P0", "track": "agent", "status": "implemented", "key": "safe-self-improvement", "doc": "agent-research/2610.01073-safe-self-improvement/README.md"},
+        {"id": "2610.01548", "priority": "P0", "track": "post-training", "status": "implemented", "key": "range-grpo", "doc": "post-training/2610.01548-range-grpo/README.md"},
+        {"id": "2610.00972", "priority": "P0", "track": "agent", "status": "implemented", "key": "veriharness", "doc": "agent-research/2610.00972-veriharness/README.md"},
+        {"id": "2610.02057", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "effective-training-time", "doc": "reproductions/2610.02057-effective-training-time/README.md", "evidence_scope": "User-approved production infrastructure exception; ETT deployment evidence is not a recommendation-effect A/B claim"},
+        {"id": "2610.02199", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "taco-optimizer", "doc": "foundation-models/2610.02199-taco-optimizer/README.md", "gpu_gate": "A100 receipt required"},
+        {"id": "2610.01785", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "veto", "doc": "foundation-models/2610.01785-veto/README.md", "gpu_gate": "A100 receipt required"},
+        {"id": "2610.02002", "priority": "P1", "track": "agent", "status": "implemented", "key": "mem-plus-plus", "doc": "agent-research/2610.02002-mem-plus-plus/README.md"},
+        {"id": "2610.01256", "priority": "P1", "track": "agent", "status": "implemented", "key": "defa", "doc": "agent-research/2610.01256-defa/README.md"},
+        {"id": "2610.01161", "priority": "P1", "track": "post-training", "status": "implemented", "key": "my-fault", "doc": "post-training/2610.01161-my-fault/README.md"},
+        {"id": "2610.01026", "priority": "P1", "track": "agent", "status": "implemented", "key": "flowright", "doc": "agent-research/2610.01026-flowright/README.md"},
+        {"id": "2610.02117", "priority": "P1", "track": "post-training", "status": "implemented", "key": "where-opd", "doc": "post-training/2610.02117-where-opd/README.md"},
+        {"id": "2610.01533", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "gris", "doc": "reproductions/2610.01533-gris/README.md", "evidence_scope": "User-approved academic/Evolve mechanism exception; no quantified online A/B"},
+        {"id": "2610.01270", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "repair-state", "doc": "reproductions/2610.01270-repair-state/README.md", "evidence_scope": "User-approved academic/Evolve mechanism exception; no quantified online A/B"}
+      ]
     }
   ]
 }

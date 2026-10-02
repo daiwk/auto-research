@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:taco-optimizer",
+  "method": "taco-optimizer",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "parameter_delta": 0.0006388062029145658,
+      "state_elements": 16,
+      "dense_elements": 128
+    },
+    {
+      "seed": 43,
+      "parameter_delta": 0.0005947519675828516,
+      "state_elements": 16,
+      "dense_elements": 128
+    },
+    {
+      "seed": 44,
+      "parameter_delta": 0.00037853739922866225,
+      "state_elements": 16,
+      "dense_elements": 128
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "parameter_delta_mean": 0.0005373651899086932,
+    "state_elements_mean": 16.0,
+    "dense_elements_mean": 128.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.02199-taco-optimizer/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}
