@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成、排序与冷启动 | [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md) | Huawei Ireland Research Centre，2026-10-01 | [已开源](https://github.com/hirc-airecs/graph-informed-sids) | `gris` |
+| 排序与长序列建模 | [Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders](../2610.01270-repair-state/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `repair-state` |
+| Serving 与研究基础设施 | [Optimizing Effective Training Time for Large-Scale Recommendation Systems](../2610.02057-effective-training-time/README.md) | Meta Platforms, Inc.，2026-10-01 | 未发现官方代码 | `effective-training-time` |
+| 生成、排序与冷启动 | [Generative End-to-end Ad Retrieval at Douyin](../2609.39327-gear/README.md) | ByteDance，2026-09-30 | 未发现官方代码 | `gear` |
 | 生成、排序与冷启动 | [Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction](../2609.37905-recap-ctr/README.md) | Georgia Institute of Technology / Google Research，2026-09-29 | 未发现官方代码 | `recap-ctr` |
 | 生成、排序与冷启动 | [Challenges and Solutions for Bandits in the Wild: Warm-Started Mixture Bandits for Cross-Cohort Slate Recommendation](../2609.37800-cohortmix-ts/README.md) | DFKI / RPTU Kaiserslautern-Landau，2026-09-29 | [已开源](https://github.com/etowho/university-games) | `cohortmix-ts` |
 | 生成、排序与冷启动 | [GRP v0.1 Technical Report](../2609.36688-grp/README.md) | Snap Inc.，2026-09-29 | 未发现官方代码 | `grp` |

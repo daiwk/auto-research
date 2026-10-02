@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:my-fault",
+  "method": "my-fault",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "credit_total": 1.0,
+      "signal_coverage": 1.0
+    },
+    {
+      "seed": 43,
+      "credit_total": 1.0,
+      "signal_coverage": 1.0
+    },
+    {
+      "seed": 44,
+      "credit_total": 1.0,
+      "signal_coverage": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "credit_total_mean": 1.0,
+    "signal_coverage_mean": 1.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.01161-my-fault/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

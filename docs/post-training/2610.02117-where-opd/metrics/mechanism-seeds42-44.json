@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:where-opd",
+  "method": "where-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "spatial_kl": 0.8979946374893188
+    },
+    {
+      "seed": 43,
+      "spatial_kl": 1.0735331773757935
+    },
+    {
+      "seed": 44,
+      "spatial_kl": 0.739871621131897
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "spatial_kl_mean": 0.903799811999003
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.02117-where-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:range-grpo",
+  "method": "range-grpo",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "advantage_span": 1.2380951642990112,
+      "advantage_sum": 0.0
+    },
+    {
+      "seed": 43,
+      "advantage_span": 1.2380951642990112,
+      "advantage_sum": 0.0
+    },
+    {
+      "seed": 44,
+      "advantage_span": 1.2380951642990112,
+      "advantage_sum": 0.0
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "advantage_span_mean": 1.2380951642990112,
+    "advantage_sum_mean": 0.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.01548-range-grpo/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

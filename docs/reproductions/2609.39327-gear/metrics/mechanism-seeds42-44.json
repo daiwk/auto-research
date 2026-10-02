@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:gear",
+  "method": "gear",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "used_codes": 5,
+      "reranked_items": 4,
+      "score_std": 1.8645628690719604
+    },
+    {
+      "seed": 43,
+      "used_codes": 6,
+      "reranked_items": 4,
+      "score_std": 2.9699738025665283
+    },
+    {
+      "seed": 44,
+      "used_codes": 6,
+      "reranked_items": 4,
+      "score_std": 0.516301155090332
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "used_codes_mean": 5.666666666666667,
+    "reranked_items_mean": 4.0,
+    "score_std_mean": 1.783612608909607
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.39327-gear/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

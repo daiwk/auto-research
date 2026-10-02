@@ -1,3 +1,4 @@
+/Users/bytedance/.bash_profile: line 24: /Users/bytedance/.openclaw/completions/openclaw.bash: No such file or directory
 # 按公司
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
@@ -91,6 +92,7 @@
 - 2025-03 · [COBRA](../2503.02453-cobra/README.md)：先用稀疏生成缩小候选空间，再用稠密生成细排，形成级联式生成召回。
 
 ## ByteDance / Douyin / TikTok
+- 2026-09 · [Generative End-to-end Ad Retrieval at Douyin](../2609.39327-gear/README.md)：用正交基参数化的 BasisVQ/BasisRQ 学习层级广告 Semantic ID，并对碰撞候选执行上下文条件重排。
 - 2026-09 · [HELIX](../2609.37183-helix/README.md)：交错扩展序列建模与候选特征交互，并以单向信息流保持用户序列状态可跨候选复用。
 - 2026-09 · [OneTrans-V2](../2609.28589-onetrans-v2/README.md)：以共享因果用户骨干统一检索、预排与精排，三级 SID 决策生成和精排到预排蒸馏在公开代理标签上运行。
 - 2026-09 · [SequenceO1](../2609.08443-sequenceo1/README.md)：把远期超长历史压成固定预算 prototype sketch，并与近期行为分支共同建模。
@@ -180,6 +182,7 @@
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
 
 ## Meta
+- 2026-10 · [Optimizing Effective Training Time for Large-Scale Recommendation Systems](../2610.02057-effective-training-time/README.md)：把 wall time 拆为真正消费新数据的训练时间与初始化、编译、checkpoint、发布和恢复损耗，并按 owner 定位。
 - 2026-09 · [EvoPilot](../2609.21257-evopilot/README.md)：把匹配的 control/treatment 产物作为证据单元，以 fail-closed 校验和人工审核阻止不公平比较进入下一轮自动研究。
 - 2026-09 · [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。
 - 2026-07 · [ROCS](../2607.27744-rocs/README.md)：复用单次 request encoding，并在候选端执行轻量 late interaction，统一覆盖广告/自然流量的检索和排序 serving。
@@ -287,6 +290,9 @@
 - 2026-05 · [MDCNS](../2605.19651-mdcns/README.md)：从多种负样本分布协同采样，并通过双模型更新降低单一采样偏差。
 - 2018-08 · [SASRec](../1808.09781-sasrec/README.md)：用因果自注意力编码用户行为序列，并预测下一物品，作为经典序列推荐基线。
 
+## 原文未列一作机构
+- 2026-10 · [Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders](../2610.01270-repair-state/README.md)：从冻结 encoder 的历史 cache 选择纠正证据，以 residual update 修复有损 preference state。
+
 ## Michigan State University
 - 2026-08 · [ConnectionMind](../2608.10187-connectionmind/README.md)：在时序异构社交图上用最短正路径 SFT 和规则奖励 GRPO 学习多步探索，再把路径教师蒸馏给 GNN student。
 
@@ -339,6 +345,7 @@
 - 2026-05 · [PEARL: Unbiased Percentile Estimation via Contrastive Learning for Industrial-Scale Livestream Recommendation](../2605.21752-pearl-percentile/README.md)：通过多样本对比估计低方差行为 percentile，并扩展到多个直播目标。
 
 ## Huawei Technologies
+- 2026-10 · [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md)：将内容语义与协同图联合写入层级 Semantic ID；图为空时退化为内容量化。
 - 2026-05 · [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
 
 ## University of Electronic Science and Technology of China / Kuaishou

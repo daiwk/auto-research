@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:flowright",
+  "method": "flowright",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "credit_total": 1.0,
+      "lead_credit": 0.6666666666666666
+    },
+    {
+      "seed": 43,
+      "credit_total": 1.0,
+      "lead_credit": 0.6666666666666666
+    },
+    {
+      "seed": 44,
+      "credit_total": 1.0,
+      "lead_credit": 0.6666666666666666
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "credit_total_mean": 1.0,
+    "lead_credit_mean": 0.6666666666666666
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.01026-flowright/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

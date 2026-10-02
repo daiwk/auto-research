@@ -9,6 +9,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agentic RL | [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](2610.01207-dars/README.md) | University of Illinois Urbana-Champaign，2026-10-01 | 未发现官方代码 | `dars` |
+| Agentic RL | [My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning](2610.01161-my-fault/README.md) | Alibaba Group，2026-10-01 | 未发现官方代码 | `my-fault` |
+| GRPO | [Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals](2610.01548-range-grpo/README.md) | Yonsei University，2026-10-01 | 未发现官方代码 | `range-grpo` |
+| 多模态后训练 | [Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes](2610.02117-where-opd/README.md) | Valeo.ai，2026-10-01 | [已开源](https://github.com/sirkosophia/Where-OPD) | `where-opd` |
 | Advisor | [AdviSD: Learning to Advise Frontier LLMs via Targeted Multi-Turn Self-Distillation](2609.38142-advisd/README.md) | University of Southern California，2026-09-29 | 未发现官方代码 | `advisd` |
 | On-policy distillation | [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](2609.38025-dr-opd/README.md) | Rutgers University，2026-09-29 | [已开源](https://github.com/zywang0701/Dr-OPD) | `dr-opd` |
 | On-policy distillation | [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](2609.37851-flowmap-opd/README.md) | Georgia Institute of Technology，2026-09-29 | [已开源](https://github.com/ZhiqiLi-CG/Flowmap_OPD_source) | `flowmap-opd` |

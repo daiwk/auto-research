@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:active-saddler",
+  "method": "active-saddler",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "pulled_known_arm": true,
+      "target_length": 4,
+      "audit_items": 2
+    },
+    {
+      "seed": 43,
+      "pulled_known_arm": false,
+      "target_length": 3,
+      "audit_items": 1
+    },
+    {
+      "seed": 44,
+      "pulled_known_arm": true,
+      "target_length": 4,
+      "audit_items": 2
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "target_length_mean": 3.6666666666666665,
+    "audit_items_mean": 1.6666666666666667
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.00906-active-saddler/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct02-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

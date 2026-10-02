@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "adapter_key": "veto",
+  "validated_at": "2026-10-02",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/validate_oct02_gpu.py",
+    "--method",
+    "veto",
+    "--seed",
+    "42",
+    "--accelerator-model",
+    "A100",
+    "--commit",
+    "91a1b0acc2b9aa94ae85ed8443748c930d4e59ec",
+    "--output",
+    "docs/gpu-validations/veto-a100-20261002.json"
+  ],
+  "dataset": {
+    "name": "deterministic public CUDA mechanism fixture",
+    "revision": "oct02-v1",
+    "examples": 96
+  },
+  "checkpoint": {
+    "model_id": "not-required/reference-kernel",
+    "revision": "arxiv-v1"
+  },
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "input_tokens": 24576,
+    "output_tokens": 768,
+    "compression_ratio": 0.03125,
+    "spatial_representatives": 32,
+    "temporal_representatives": 24,
+    "peak_allocated_bytes": 119063552,
+    "kernel_seconds": 0.2577285747975111
+  },
+  "provenance": {
+    "commit": "91a1b0acc2b9aa94ae85ed8443748c930d4e59ec",
+    "artifact_path": "docs/gpu-validations/veto-a100-20261002.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

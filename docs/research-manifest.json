@@ -19,6 +19,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "active-saddler",
+      "title": "ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization",
+      "paper_url": "https://arxiv.org/abs/2610.00906",
+      "detail_path": "agent-research/2610.00906-active-saddler/README.md",
+      "topic": [
+        "Harness 优化",
+        "主动课程",
+        "RSI"
+      ],
+      "first_author": "Sungho Park",
+      "first_author_affiliation": "POSTECH",
+      "published": "2026-10-01",
+      "code": "https://github.com/microsoft/AutoSaddler/tree/feat/activesaddler",
+      "adapter": "active-saddler",
+      "priority": "P0"
+    },
+    {
+      "domain": "agent-research",
       "key": "adavdr",
       "title": "AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research",
       "paper_url": "https://arxiv.org/abs/2608.25559",
@@ -516,6 +534,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "defa",
+      "title": "DeFA: Dependency-Guided Failure Attribution for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2610.01256",
+      "detail_path": "agent-research/2610.01256-defa/README.md",
+      "topic": [
+        "失败归因",
+        "依赖图",
+        "技能进化"
+      ],
+      "first_author": "Bo Deng",
+      "first_author_affiliation": "Qwen DianJin Team, Alibaba Cloud Computing",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "defa",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "dependency-refinement",
       "title": "Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning",
       "paper_url": "https://arxiv.org/abs/2609.18417",
@@ -626,6 +662,24 @@
       "published": "2026-09-08",
       "code": "https://github.com/HongbangYuan/EnvAsScaffold",
       "adapter": "feedback-scaffold"
+    },
+    {
+      "domain": "agent-research",
+      "key": "flowright",
+      "title": "It Takes Workflows to Evolve Better Workflows",
+      "paper_url": "https://arxiv.org/abs/2610.01026",
+      "detail_path": "agent-research/2610.01026-flowright/README.md",
+      "topic": [
+        "工作流进化",
+        "多 Agent",
+        "层级奖励"
+      ],
+      "first_author": "Xuehang Guo",
+      "first_author_affiliation": "William & Mary",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "flowright",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -1036,6 +1090,24 @@
       "published": "2026-09-10",
       "code": "https://github.com/xin8coder/MAPLE",
       "adapter": "maple"
+    },
+    {
+      "domain": "agent-research",
+      "key": "mem-plus-plus",
+      "title": "Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2610.02002",
+      "detail_path": "agent-research/2610.02002-mem-plus-plus/README.md",
+      "topic": [
+        "Agent 记忆",
+        "时间检索",
+        "组织知识"
+      ],
+      "first_author": "Ahmad Yehia",
+      "first_author_affiliation": "The University of Texas at Austin",
+      "published": "2026-10-01",
+      "code": "https://github.com/AIDAChip-Inc/mem-plus-plus",
+      "adapter": "mem-plus-plus",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -1551,6 +1623,24 @@
       "published": "2026-08-19",
       "code": null,
       "adapter": "rtpo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "safe-self-improvement",
+      "title": "Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover",
+      "paper_url": "https://arxiv.org/abs/2610.01073",
+      "detail_path": "agent-research/2610.01073-safe-self-improvement/README.md",
+      "topic": [
+        "RSI 安全",
+        "验证",
+        "回滚"
+      ],
+      "first_author": "Yunbei Zhang",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "safe-self-improvement",
+      "priority": "P0"
     },
     {
       "domain": "agent-research",
@@ -2174,6 +2264,24 @@
       "published": "2026-08-06",
       "code": null,
       "adapter": "vag"
+    },
+    {
+      "domain": "agent-research",
+      "key": "veriharness",
+      "title": "VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks",
+      "paper_url": "https://arxiv.org/abs/2610.00972",
+      "detail_path": "agent-research/2610.00972-veriharness/README.md",
+      "topic": [
+        "Agent 验证",
+        "证据工具",
+        "长程任务"
+      ],
+      "first_author": "Caiqi Zhang",
+      "first_author_affiliation": "Google Cloud AI Research",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "veriharness",
+      "priority": "P0"
     },
     {
       "domain": "agent-research",
@@ -3680,6 +3788,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "gemini-for-google",
+      "title": "Customizing an LLM for Enterprise Software Engineering",
+      "paper_url": "https://arxiv.org/abs/2605.16517",
+      "detail_path": "foundation-models/2605.16517-gemini-for-google/README.md",
+      "topic": [
+        "企业 LLM",
+        "数据治理",
+        "中训练与后训练"
+      ],
+      "first_author": "Aditya Kini",
+      "first_author_affiliation": "Google",
+      "published": "2026-05-15",
+      "code": null,
+      "adapter": "gemini-for-google",
+      "priority": "P0"
     },
     {
       "domain": "foundation-models",
@@ -6412,6 +6538,26 @@
     },
     {
       "domain": "foundation-models",
+      "key": "taco-optimizer",
+      "title": "TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning",
+      "paper_url": "https://arxiv.org/abs/2610.02199",
+      "detail_path": "foundation-models/2610.02199-taco-optimizer/README.md",
+      "topic": [
+        "优化器",
+        "显存效率",
+        "全参微调"
+      ],
+      "first_author": "Jichao Jiang",
+      "first_author_affiliation": "University of Central Florida",
+      "published": "2026-10-01",
+      "code": "https://github.com/Jichao2357/TACO_optimizer",
+      "adapter": "taco-optimizer",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/taco-optimizer-a100-20261002.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "tadm",
       "title": "Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation",
       "paper_url": "https://arxiv.org/abs/2609.37924",
@@ -6733,6 +6879,26 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "veto",
+      "title": "VETO: Video Efficient Token Optimization for Vision Language Models",
+      "paper_url": "https://arxiv.org/abs/2610.01785",
+      "detail_path": "foundation-models/2610.01785-veto/README.md",
+      "topic": [
+        "视频 VLM",
+        "Token 压缩",
+        "推理效率"
+      ],
+      "first_author": "Gueter Josmy Faure",
+      "first_author_affiliation": "National Taiwan University",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "veto",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/veto-a100-20261002.json"
     },
     {
       "domain": "foundation-models",
@@ -7276,6 +7442,25 @@
       "published": "2025-03-18",
       "code": "https://github.com/BytedTsinghua-SIA/DAPO",
       "adapter": "dapo"
+    },
+    {
+      "domain": "post-training",
+      "key": "dars",
+      "title": "Dependency-Aware Reward Shaping for Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.01207",
+      "detail_path": "post-training/2610.01207-dars/README.md",
+      "topic": [
+        "Agentic RL",
+        "依赖图",
+        "步级奖励"
+      ],
+      "first_author": "Ziyi Chen",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "dars",
+      "priority": "P0",
+      "upstream_note": "否：官方仓库 https://github.com/JianhuiWei7/DARS 已建立，但截至 2026-10-02 明确标注实现仍在准备中"
     },
     {
       "domain": "post-training",
@@ -7991,6 +8176,24 @@
     },
     {
       "domain": "post-training",
+      "key": "my-fault",
+      "title": "My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.01161",
+      "detail_path": "post-training/2610.01161-my-fault/README.md",
+      "topic": [
+        "Agentic RL",
+        "信用分配",
+        "自诊断"
+      ],
+      "first_author": "Yihua Zhu",
+      "first_author_affiliation": "Alibaba Group",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "my-fault",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "normalized-dpo",
       "title": "Disentangling Optimization Scale from Preference Scale in DPO",
       "paper_url": "https://arxiv.org/abs/2608.27032",
@@ -8423,6 +8626,24 @@
       "published": "2026-08-05",
       "code": null,
       "adapter": "rail"
+    },
+    {
+      "domain": "post-training",
+      "key": "range-grpo",
+      "title": "Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals",
+      "paper_url": "https://arxiv.org/abs/2610.01548",
+      "detail_path": "post-training/2610.01548-range-grpo/README.md",
+      "topic": [
+        "GRPO",
+        "奖励区间",
+        "半监督后训练"
+      ],
+      "first_author": "Ryunyi Lee",
+      "first_author_affiliation": "Yonsei University",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "range-grpo",
+      "priority": "P0"
     },
     {
       "domain": "post-training",
@@ -9389,6 +9610,24 @@
       "published": "2026-08-27",
       "code": null,
       "adapter": "weak-guide-rlvr"
+    },
+    {
+      "domain": "post-training",
+      "key": "where-opd",
+      "title": "Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes",
+      "paper_url": "https://arxiv.org/abs/2610.02117",
+      "detail_path": "post-training/2610.02117-where-opd/README.md",
+      "topic": [
+        "多模态后训练",
+        "OPD",
+        "空间引导"
+      ],
+      "first_author": "Sophia Sirko-Galouchenko",
+      "first_author_affiliation": "Valeo.ai",
+      "published": "2026-10-01",
+      "code": "https://github.com/sirkosophia/Where-OPD",
+      "adapter": "where-opd",
+      "priority": "P1"
     },
     {
       "domain": "recommendation",
@@ -14243,6 +14482,62 @@
     },
     {
       "domain": "recommendation",
+      "key": "effective-training-time",
+      "title": "Optimizing Effective Training Time for Large-Scale Recommendation Systems",
+      "paper_url": "https://arxiv.org/abs/2610.02057",
+      "detail_path": "reproductions/2610.02057-effective-training-time/README.md",
+      "topic": [
+        "training-systems",
+        "effective-training-time",
+        "gpu-fleet"
+      ],
+      "first_author": "Mingming Ding",
+      "first_author_affiliation": "Meta Platforms, Inc.",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "effective-training-time",
+        "arxiv_id": "2610.02057",
+        "title": "Optimizing Effective Training Time for Large-Scale Recommendation Systems",
+        "paper_url": "https://arxiv.org/abs/2610.02057",
+        "track": "recommendation",
+        "organization": "Meta Platforms, Inc.",
+        "published": "2026-10-01",
+        "code_url": null,
+        "topics": [
+          "training-systems",
+          "effective-training-time",
+          "gpu-fleet"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/effective_training_time",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "mechanism disabled or default state",
+        "metrics": [
+          "ett",
+          "loss_fraction"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "deterministic L1 mechanism fixture",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "用户于 2026-10-02 明确批准的生产训练基础设施例外；部署指标是 ETT，不作为推荐模型效果或线上 A/B 收益。",
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "egr",
       "title": "EGR: Embedding-Native Generative Retrieval with a Shared LLM",
       "paper_url": "https://arxiv.org/abs/2607.23038",
@@ -15393,6 +15688,84 @@
     },
     {
       "domain": "recommendation",
+      "key": "gear",
+      "title": "Generative End-to-end Ad Retrieval at Douyin",
+      "paper_url": "https://arxiv.org/abs/2609.39327",
+      "detail_path": "reproductions/2609.39327-gear/README.md",
+      "topic": [
+        "ad-retrieval",
+        "generative-retrieval",
+        "semantic-id"
+      ],
+      "first_author": "Shaowen Zeng",
+      "first_author_affiliation": "ByteDance",
+      "published": "2026-09-30",
+      "code": null,
+      "adapter": {
+        "adapter_key": "gear",
+        "arxiv_id": "2609.39327",
+        "title": "Generative End-to-end Ad Retrieval at Douyin",
+        "paper_url": "https://arxiv.org/abs/2609.39327",
+        "track": "recommendation",
+        "organization": "ByteDance",
+        "published": "2026-09-30",
+        "code_url": null,
+        "topics": [
+          "ad-retrieval",
+          "generative-retrieval",
+          "semantic-id"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gear",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "mechanism disabled or default state",
+        "metrics": [
+          "used_codes",
+          "reranked_items",
+          "score_std"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "deterministic L1 mechanism fixture",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Douyin Ads",
+            "metric": "ADSS",
+            "lift_percent": 0.563,
+            "traffic": "seven-day online A/B; 5% traffic in each group",
+            "source_url": "https://arxiv.org/html/2609.39327v1",
+            "source_location": "Section 6.4, Table 6",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-10-02"
+          },
+          {
+            "product": "Douyin Ads",
+            "metric": "ADVV",
+            "lift_percent": 0.658,
+            "traffic": "seven-day online A/B; 5% traffic in each group",
+            "source_url": "https://arxiv.org/html/2609.39327v1",
+            "source_location": "Section 6.4, Table 6",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-10-02"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
       "key": "genfacet",
       "title": "GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce",
       "paper_url": "https://arxiv.org/abs/2603.19665",
@@ -16224,6 +16597,62 @@
           }
         ],
         "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "gris",
+      "title": "Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)",
+      "paper_url": "https://arxiv.org/abs/2610.01533",
+      "detail_path": "reproductions/2610.01533-gris/README.md",
+      "topic": [
+        "generative-recommendation",
+        "semantic-id",
+        "graph-partition"
+      ],
+      "first_author": "Aleksei Medvedev",
+      "first_author_affiliation": "Huawei Ireland Research Centre",
+      "published": "2026-10-01",
+      "code": "https://github.com/hirc-airecs/graph-informed-sids",
+      "adapter": {
+        "adapter_key": "gris",
+        "arxiv_id": "2610.01533",
+        "title": "Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)",
+        "paper_url": "https://arxiv.org/abs/2610.01533",
+        "track": "recommendation",
+        "organization": "Huawei Ireland Research Centre",
+        "published": "2026-10-01",
+        "code_url": "https://github.com/hirc-airecs/graph-informed-sids",
+        "topics": [
+          "generative-recommendation",
+          "semantic-id",
+          "graph-partition"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gris",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "mechanism disabled or default state",
+        "metrics": [
+          "unique_ids",
+          "levels"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "deterministic L1 mechanism fixture",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "用户于 2026-10-02 明确批准的学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业证据结论。",
         "evolve_operators": []
       }
     },
@@ -25955,6 +26384,62 @@
           }
         ],
         "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "repair-state",
+      "title": "Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders",
+      "paper_url": "https://arxiv.org/abs/2610.01270",
+      "detail_path": "reproductions/2610.01270-repair-state/README.md",
+      "topic": [
+        "personalization",
+        "state-repair",
+        "sequential-recommendation"
+      ],
+      "first_author": "Parthiv Chatterjee",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "repair-state",
+        "arxiv_id": "2610.01270",
+        "title": "Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders",
+        "paper_url": "https://arxiv.org/abs/2610.01270",
+        "track": "recommendation",
+        "organization": "原文首页未列第一作者机构",
+        "published": "2026-10-01",
+        "code_url": null,
+        "topics": [
+          "personalization",
+          "state-repair",
+          "sequential-recommendation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/repair_state",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "mechanism disabled or default state",
+        "metrics": [
+          "state_norm",
+          "selected_timesteps"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "deterministic L1 mechanism fixture",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "用户于 2026-10-02 明确批准的学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业证据结论。",
         "evolve_operators": []
       }
     },
