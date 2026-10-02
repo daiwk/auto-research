@@ -8,12 +8,12 @@
 
 | 字段 | 内容 |
 |---|---|
-| 论文链接 | [arXiv 2610.01270](https://arxiv.org/abs/2610.01270) |
+| 论文链接 | [arXiv v1](https://arxiv.org/abs/2610.01270) |
 | 公司/机构 | 原文首页未列第一作者机构（按第一作者署名单位） |
 | 首次公开日期 | 2026-10-01（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-10-02 未找到原作者公开实现 |
 | Adapter | `repair-state` |
-| 本地复现代码 | [`src/auto_research/recommendation_latest_20261002.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/recommendation_latest_20261002.py) |
+| 本地复现代码 | [`src/auto_research/reproductions/repair_state/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/repair_state/) |
 
 ## 原始论文总结
 
@@ -46,7 +46,7 @@ $z'=z+\sum_{t\in TopK}softmax(q^T(h_t-z))(h_t-z)$。
 
 ## 本地复现
 
-> **本地对照口径**：基线为机制关闭或默认状态，实验组为开启对应核心算子。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。
+> **本地对照口径**：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。
 
 - 三种子诊断：[`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)
 - `diagnostic_only=true`，不进入正式能力排名。

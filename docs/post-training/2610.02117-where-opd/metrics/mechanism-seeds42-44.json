@@ -12,20 +12,20 @@
   "seed_results": [
     {
       "seed": 42,
-      "spatial_kl": 0.8979947566986084
+      "spatial_kl": 0.8979946374893188
     },
     {
       "seed": 43,
-      "spatial_kl": 1.073533058166504
+      "spatial_kl": 1.0735331773757935
     },
     {
       "seed": 44,
-      "spatial_kl": 0.7398717403411865
+      "spatial_kl": 0.739871621131897
     }
   ],
   "aggregate_metrics": {
     "seed_mean": 43.0,
-    "spatial_kl_mean": 0.903799851735433
+    "spatial_kl_mean": 0.903799811999003
   },
   "evaluation_protocol": {
     "tier": "l1_mechanism",

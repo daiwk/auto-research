@@ -204,7 +204,11 @@ def run(record, seed):
     if key == "taco-optimizer":
         layer = torch.nn.Linear(16, 8, bias=False); layer(torch.randn(4, 16)).square().mean().backward()
         optimizer = TACO(layer.parameters(), lr=.01); before = layer.weight.detach().clone(); optimizer.step()
-        return {"parameter_delta": float((layer.weight - before).norm()), "state_elements": optimizer.state_elements, "dense_elements": layer.weight.numel()}
+        return {
+            "parameter_delta": float((layer.weight - before).detach().norm()),
+            "state_elements": optimizer.state_elements,
+            "dense_elements": layer.weight.numel(),
+        }
     if key == "veto":
         compressed, audit = veto_compress(torch.randn(8, 16, 12), spatial_keep=4, temporal_keep=3)
         return {"output_tokens": int(compressed.shape[0] * compressed.shape[1]), **audit}
@@ -259,6 +263,22 @@ def render(record):
         gpu = f"\n- GPU 验证：[`{record['gpu_validation_artifact']}`](https://github.com/daiwk/auto-research/blob/main/{record['gpu_validation_artifact']})"
     exception = f"\n> **收录例外**：{record['selection_exception']}\n" if record.get("selection_exception") else ""
     module = detail["module"]
+    if record["domain"] == "recommendation":
+        source_directory = (
+            "src/auto_research/reproductions/"
+            f"{record['key'].replace('-', '_')}/"
+        )
+        local_code = (
+            f"[`{source_directory}`]"
+            f"(https://github.com/daiwk/auto-research/tree/main/{source_directory})"
+        )
+        paper_label = "arXiv v1"
+    else:
+        local_code = (
+            f"[`{module}`]"
+            f"(https://github.com/daiwk/auto-research/blob/main/{module})"
+        )
+        paper_label = f"arXiv {record['paper_url'].rsplit('/', 1)[-1]}"
     return f"""# {record['title']}
 
 > **复现级别：L1 核心机制诊断。** {detail['boundary']}
@@ -267,12 +287,12 @@ def render(record):
 
 | 字段 | 内容 |
 |---|---|
-| 论文链接 | [arXiv {record['paper_url'].rsplit('/', 1)[-1]}]({record['paper_url']}) |
+| 论文链接 | [{paper_label}]({record['paper_url']}) |
 | 公司/机构 | {record['first_author_affiliation']}（按第一作者署名单位） |
 | 首次公开日期 | {record['published']}（arXiv v1） |
 | 原文开源代码 | {upstream} |
 | Adapter | `{record['adapter']}` |
-| 本地复现代码 | [`{module}`](https://github.com/daiwk/auto-research/blob/main/{module}) |
+| 本地复现代码 | {local_code} |
 
 ## 原始论文总结
 
@@ -305,7 +325,7 @@ flowchart LR
 
 ## 本地复现
 
-> **本地对照口径**：基线为机制关闭或默认状态，实验组为开启对应核心算子。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。
+> **本地对照口径**：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。
 
 - 三种子诊断：[`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)
 - `diagnostic_only=true`，不进入正式能力排名。{gpu}

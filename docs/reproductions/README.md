@@ -50,6 +50,10 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `gear` · [GEAR](2609.39327-gear/README.md)：正交基参数化的 BasisVQ/BasisRQ 与碰撞 item 上下文重排；论文披露抖音广告 7 天、每组 5% 流量 A/B，本地只执行 L1 核心机制。
+- `effective-training-time` · [Effective Training Time](2610.02057-effective-training-time/README.md)：拆分真正消费新数据的训练时间与初始化、编译、checkpoint、发布和恢复损耗；这是用户批准的生产基础设施例外，不作为推荐效果 A/B。
+- `gris` · [GrIS](2610.01533-gris/README.md)：把协同图与内容语义共同写入层级 Semantic ID；用户批准为学术/Evolve 机制例外，无线上 A/B。
+- `repair-state` · [REPAIR](2610.01270-repair-state/README.md)：从冻结 encoder 的历史 cache 选择纠正证据，残差修复有损 preference state；用户批准为学术/Evolve 机制例外，无线上 A/B。
 - `cohortmix-ts` · [CohortMix-TS](2609.37800-cohortmix-ts/README.md)：从历史 cohort 构造固定强度混合 Beta 先验，再用 Thompson sampling 选 slate 并按反馈更新；论文含 25 天随机部署，但显著结果来自受限完整窗口子组，本地只做状态更新诊断。
 - `recap-ctr` · [RECAP CTR](2609.37905-recap-ctr/README.md)：在共享参数递归 backbone 上产生多条 estimator route，结合 route 平均与训练轨迹 EMA，并以可执行 `rankmixer_recap` 算子接入 Evolve；原文没有线上 A/B，因此不进入工业证据集合。
 - `evoskillrec` · [EvoSkillRec](2609.34552-evoskillrec/README.md)：执行带输入/输出类型的 skill genome、validation evaluator、晋级与复用，并以 `rankmixer_evoskill` 接入统一 Evolve 控制器；本地只报告 L1 机制诊断，不外推论文的大规模搜索收益。

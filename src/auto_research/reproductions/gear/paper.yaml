@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "key": "gear",
+  "arxiv_id": "2609.39327",
+  "title": "Generative End-to-end Ad Retrieval at Douyin",
+  "paper_url": "https://arxiv.org/abs/2609.39327",
+  "organization": "ByteDance",
+  "published": "2026-09-30",
+  "upstream_code": "否：截至 2026-10-02 未找到原作者公开实现",
+  "track": "recommendation",
+  "topics": [
+    "ad-retrieval",
+    "generative-retrieval",
+    "semantic-id"
+  ],
+  "local_code": "src/auto_research/reproductions/gear",
+  "documentation": "docs/reproductions/2609.39327-gear/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic public mechanism mini-suite"
+  ],
+  "baseline": "mechanism disabled or default state",
+  "metrics": [
+    "used_codes",
+    "reranked_items",
+    "score_std"
+  ],
+  "mechanisms": [
+    "Douyin Ads private logs",
+    "streaming parameter server and minute-level index",
+    "production traffic"
+  ],
+  "evolve_operators": []
+}

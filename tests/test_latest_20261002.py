@@ -31,6 +31,7 @@ from auto_research.recommendation_latest_20261002 import (
     gris_hierarchical_ids,
     repair_preference_state,
 )
+from auto_research.reproductions.latest_20261002 import make_adapter
 
 
 def test_dars_preserves_independent_work_and_restores_repaired_dependency():
@@ -241,3 +242,14 @@ def test_batch_catalog_has_complete_metadata_and_explicit_evidence_boundaries():
     for key in ("taco-optimizer", "veto"):
         assert by_key[key]["requires_gpu_validation"] is True
         assert by_key[key]["gpu_validation_artifact"].endswith("20261002.json")
+
+
+@pytest.mark.parametrize(
+    "key", ("gear", "effective-training-time", "gris", "repair-state")
+)
+def test_recommendation_batch_adapters_execute_their_declared_mechanism(tmp_path, key):
+    adapter = make_adapter(key)
+    result = adapter.run(tmp_path, 42)
+    assert result["manifest_ref"] == f"reproduction:{key}"
+    assert result["setup"]["diagnostic_only"] is True
+    assert result["results"]

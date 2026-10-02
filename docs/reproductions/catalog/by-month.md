@@ -1,8 +1,15 @@
+/Users/bytedance/.bash_profile: line 24: /Users/bytedance/.openclaw/completions/openclaw.bash: No such file or directory
 # 按年月
 
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
+## 2026-10
+- [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md)：将内容语义与协同图联合写入层级 Semantic ID；图为空时退化为内容量化。
+- [Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders](../2610.01270-repair-state/README.md)：从冻结 encoder 的历史 cache 选择纠正证据，以 residual update 修复有损 preference state。
+- [Optimizing Effective Training Time for Large-Scale Recommendation Systems](../2610.02057-effective-training-time/README.md)：把 wall time 拆为真正消费新数据的训练时间与初始化、编译、checkpoint、发布和恢复损耗，并按 owner 定位。
+
 ## 2026-09
+- [Generative End-to-end Ad Retrieval at Douyin](../2609.39327-gear/README.md)：用正交基参数化的 BasisVQ/BasisRQ 学习层级广告 Semantic ID，并对碰撞候选执行上下文条件重排。
 - [CohortMix-TS](../2609.37800-cohortmix-ts/README.md)：用历史 cohort 的混合 Beta 先验 warm-start 新用户，再以 Thompson slate 和反馈后验更新执行跨 cohort 冷启动。
 - [GRP v0.1](../2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序。
 - [HELIX](../2609.37183-helix/README.md)：交错扩展序列建模与候选特征交互，并以单向信息流保持用户序列状态可跨候选复用。

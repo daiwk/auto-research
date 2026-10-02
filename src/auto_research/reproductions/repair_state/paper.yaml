@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "repair-state",
+  "arxiv_id": "2610.01270",
+  "title": "Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders",
+  "paper_url": "https://arxiv.org/abs/2610.01270",
+  "organization": "原文首页未列第一作者机构",
+  "published": "2026-10-01",
+  "upstream_code": "否：截至 2026-10-02 未找到原作者公开实现",
+  "track": "recommendation",
+  "topics": [
+    "personalization",
+    "state-repair",
+    "sequential-recommendation"
+  ],
+  "local_code": "src/auto_research/reproductions/repair_state",
+  "documentation": "docs/reproductions/2610.01270-repair-state/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic public mechanism mini-suite"
+  ],
+  "baseline": "mechanism disabled or default state",
+  "metrics": [
+    "state_norm",
+    "selected_timesteps"
+  ],
+  "mechanisms": [
+    "twelve pretrained host recommenders",
+    "large public benchmarks",
+    "generation heads"
+  ],
+  "evolve_operators": []
+}

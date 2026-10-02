@@ -1,3 +1,4 @@
+/Users/bytedance/.bash_profile: line 24: /Users/bytedance/.openclaw/completions/openclaw.bash: No such file or directory
 # 按主题
 
 采用“研究方向 → 方法簇 → 论文”的两级结构。同一篇论文可以出现在多个方法簇下；
@@ -16,6 +17,9 @@
 
 ### 预训练与参数高效迁移
 - [LazFormer](../2609.14978-lazformer/README.md)：可迁移生成式预训练与轻量排序残差适配。
+
+### 用户状态与偏好修复
+- [Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders](../2610.01270-repair-state/README.md)：从冻结 encoder 的历史 cache 选择纠正证据，以 residual update 修复有损 preference state。
 
 ## 大模型能力与推荐融合
 
@@ -94,6 +98,8 @@
 - [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
 ### 生成式召回与端到端推荐
+- [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md)：将内容语义与协同图联合写入层级 Semantic ID；图为空时退化为内容量化。
+- [Generative End-to-end Ad Retrieval at Douyin](../2609.39327-gear/README.md)：用正交基参数化的 BasisVQ/BasisRQ 学习层级广告 Semantic ID，并对碰撞候选执行上下文条件重排。
 - [GRP v0.1](../2609.36688-grp/README.md)：用独立 SID block 生成候选，以 stop-gradient 排序头提供 reward，并用 mGRPO 在提升策略时保护 logged-target 召回。
 - [X-Rec](../2609.29180-xrec/README.md)：在连续 item 空间以锚点条件化球面流匹配生成多个检索 trigger，并把多步去噪限制在 Transformer 末层。
 - [TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning](../2609.00986-tgr/README.md)：统一分层语义 ID 生成、列表排序和离线 reason token 注入，在一套框架中覆盖生成与推理。
@@ -384,6 +390,7 @@
 - [RecEvolve](../2609.01622-recevolve/README.md)：以知识库驱动候选提案、隔离实验、critic gate、冠军继承和回滚，形成可审计的推荐自主进化闭环。
 
 ### Serving / efficiency
+- [Optimizing Effective Training Time for Large-Scale Recommendation Systems](../2610.02057-effective-training-time/README.md)：把 wall time 拆为真正消费新数据的训练时间与初始化、编译、checkpoint、发布和恢复损耗，并按 owner 定位。
 - [ROCS](../2607.27744-rocs/README.md)：请求表征只计算一次，候选相关交互延后并批量执行；本地同时报告排序质量和进程内候选评分吞吐。
 - [Memory Layer](../2607.25110-memory-layer/README.md)：把 cache 纳入模型训练，以 eta=1 writeback 和 always-on 属性表征消除训练服务偏差与冷启动缺口。
 - [Prompt Generation](../2607.11326-prompt-generation/README.md)：训练和 serving 共享特征配置，并通过 event replay 与 token compression 控制延迟。

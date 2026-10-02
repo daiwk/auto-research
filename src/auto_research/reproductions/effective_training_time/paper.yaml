@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "key": "effective-training-time",
+  "arxiv_id": "2610.02057",
+  "title": "Optimizing Effective Training Time for Large-Scale Recommendation Systems",
+  "paper_url": "https://arxiv.org/abs/2610.02057",
+  "organization": "Meta Platforms, Inc.",
+  "published": "2026-10-01",
+  "upstream_code": "否：截至 2026-10-02 未找到原作者公开实现",
+  "track": "recommendation",
+  "topics": [
+    "training-systems",
+    "effective-training-time",
+    "gpu-fleet"
+  ],
+  "local_code": "src/auto_research/reproductions/effective_training_time",
+  "documentation": "docs/reproductions/2610.02057-effective-training-time/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic public mechanism mini-suite"
+  ],
+  "baseline": "mechanism disabled or default state",
+  "metrics": [
+    "ett",
+    "loss_fraction"
+  ],
+  "mechanisms": [
+    "Meta production trainers",
+    "fleet telemetry",
+    "deployment control plane"
+  ],
+  "evolve_operators": []
+}

@@ -8,12 +8,12 @@
 
 | 字段 | 内容 |
 |---|---|
-| 论文链接 | [arXiv 2610.01533](https://arxiv.org/abs/2610.01533) |
+| 论文链接 | [arXiv v1](https://arxiv.org/abs/2610.01533) |
 | 公司/机构 | Huawei Ireland Research Centre（按第一作者署名单位） |
 | 首次公开日期 | 2026-10-01（arXiv v1） |
 | 原文开源代码 | 是：[https://github.com/hirc-airecs/graph-informed-sids](https://github.com/hirc-airecs/graph-informed-sids) |
 | Adapter | `gris` |
-| 本地复现代码 | [`src/auto_research/recommendation_latest_20261002.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/recommendation_latest_20261002.py) |
+| 本地复现代码 | [`src/auto_research/reproductions/gris/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/gris/) |
 
 ## 原始论文总结
 
@@ -46,7 +46,7 @@ $SID(i)=RecursivePartition(G,X)_i$；每层显式组合平滑后的语义与图�
 
 ## 本地复现
 
-> **本地对照口径**：基线为机制关闭或默认状态，实验组为开启对应核心算子。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。
+> **本地对照口径**：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。
 
 - 三种子诊断：[`metrics/mechanism-seeds42-44.json`](metrics/mechanism-seeds42-44.json)
 - `diagnostic_only=true`，不进入正式能力排名。
