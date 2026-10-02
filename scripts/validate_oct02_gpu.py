@@ -19,10 +19,13 @@ def validate_taco(seed: int):
     import torch
 
     torch.manual_seed(seed)
-    layer = torch.nn.Linear(2048, 4096, bias=False, device="cuda", dtype=torch.bfloat16)
-    inputs = torch.randn(32, 2048, device="cuda", dtype=torch.bfloat16)
-    target = torch.randn(32, 4096, device="cuda", dtype=torch.bfloat16)
-    optimizer = TACO(layer.parameters(), lr=1e-3)
+    # Keep the reference step in FP32: with a freshly initialized BF16 layer,
+    # a small optimizer step may quantize back to the same stored weight and
+    # produce a false-positive CUDA receipt with zero parameter movement.
+    layer = torch.nn.Linear(2048, 4096, bias=False, device="cuda", dtype=torch.float32)
+    inputs = torch.randn(32, 2048, device="cuda", dtype=torch.float32)
+    target = torch.randn(32, 4096, device="cuda", dtype=torch.float32)
+    optimizer = TACO(layer.parameters(), lr=1e-2)
     torch.cuda.reset_peak_memory_stats()
     started = time.perf_counter()
     loss = (layer(inputs) - target).float().square().mean()
@@ -30,10 +33,13 @@ def validate_taco(seed: int):
     before = layer.weight.detach().clone()
     optimizer.step()
     torch.cuda.synchronize()
+    parameter_delta = float((layer.weight - before).float().norm())
+    if parameter_delta <= 0:
+        raise RuntimeError("TACO CUDA validation did not update any parameter")
     return {
         "seed": seed,
         "loss": float(loss.detach()),
-        "parameter_delta_l2": float((layer.weight - before).float().norm()),
+        "parameter_delta_l2": parameter_delta,
         "optimizer_state_elements": optimizer.state_elements,
         "dense_parameter_elements": layer.weight.numel(),
         "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
