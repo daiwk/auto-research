@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:drift-opd",
+  "method": "drift-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "loss": 0.5563887357711792
+    },
+    {
+      "seed": 43,
+      "loss": 0.2530636191368103
+    },
+    {
+      "seed": 44,
+      "loss": 0.21223148703575134
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "loss_mean": 0.34056128064791363
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.00317-drift-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

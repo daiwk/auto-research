@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:sharpo",
+  "method": "sharpo",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "credit_mean": 0.680500328540802,
+      "segment_gap": 0.20218420028686523
+    },
+    {
+      "seed": 43,
+      "credit_mean": 1.1173607110977173,
+      "segment_gap": 0.39933377504348755
+    },
+    {
+      "seed": 44,
+      "credit_mean": 0.9373304843902588,
+      "segment_gap": 0.4410807490348816
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "credit_mean_mean": 0.9117305080095927,
+    "segment_gap_mean": 0.3475329081217448
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.00838-sharpo/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

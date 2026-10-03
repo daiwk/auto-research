@@ -24,6 +24,8 @@
 ## 大模型能力与推荐融合
 
 ### LLM / Foundation model + Recommendation
+- [AgentWebRec](../2610.01705-agent-web-rec/README.md)：仅在目标用户证据不足时融合邻居 Agent 的紧凑偏好模式，不传输私有历史。
+- [RPTune](../2610.00964-rptune/README.md)：以学习式查询—商品相关性和目录调整项执行裁剪与提示词位置编排。
 - [PromptShift](../2609.34229-promptshift/README.md)：比较身份提示与无身份参考列表的偏移，并按用户主流度混合相关分和逆群体流行度进行缓解。
 - [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：离线生成陌生艺人及基于已听艺人的解释，经实体和共享标签校验后缓存供在线使用。
 - [ConnectionMind](../2608.10187-connectionmind/README.md)：让 LLM policy 在 typed 社交图上逐步扩展证据路径，并以 SFT、GRPO 和 GNN 蒸馏兼顾推理质量与流量成本。

@@ -105,6 +105,7 @@
 
 ## Georgia Institute of Technology
 
+- 2026-09-30 · 一作：Xinchen Du · [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](../2610.00838-sharpo/README.md)（`sharpo`）：用同组成功轨迹作为自蒸馏 teacher context，在环境交互 segment 内计算 teacher-student log-prob gap，并有界缩放 GRPO advantage。
 - 2026-09-29 · 一作：Zhiqi Li · [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](../2609.37851-flowmap-opd/README.md)（`flowmap-opd`）：把生成状态的 rollout 分布与 teacher/student 比较 kernel 解耦：rollout 只负责提供具有正确边缘分布的状态，优化 kernel 在这些冻结状态上比较 flow map、诱导速度或瞬时速度。
 
 ## Google DeepMind
@@ -143,7 +144,9 @@
 
 ## KAIST
 
+- 2026-09-29 · 一作：Youngjun Jun · [DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies](../2610.00317-drift-opd/README.md)（`drift-opd`）：把序列级 reverse-KL 拆成当前 chunk 的一步 reverse-KL 与刻画长期动作后果的 future potential；critic 从离线 demonstrations 学习。
 - 2026-09-29 · 一作：Doohyuk Jang · [Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR](../2609.37868-graft/README.md)（`graft`）：当 receiver 的 rollout group 全错、peer 在同题同时有成功和失败轨迹时，GRAFT 用完整 peer group 替换无信号组并保留 peer 内部 advantage。跨 tokenizer 的策略错配通过序列平均 log-likelihood compatibility 加权，再用 token importance ratio clipping 限制更新。
+- 2026-09-29 · 一作：Jaeyun Shin · [LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation](../2610.00333-lego-opd/README.md)（`lego-opd`）：把语言专家作为 token prior，把 grounding 专家只作为视觉 likelihood，以乘积专家形式组成 OPD teacher，避免连同 VLM 语言偏差一起蒸馏。
 - 2024-03-12 · 一作：Jiwoo Hong · [ORPO](../2403.07691-orpo/README.md)（`orpo`）：常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。
 
 ## KAIST AI
@@ -183,6 +186,10 @@
 
 - 2026-09-25 · 一作：Shangjian Yin · [Recursive Self-Improvement via On-Policy Distillation for Reasoning](../../reproductions/2609.30652-recursive-opsd/README.md)（`recursive-opsd`）：传统 OPSD 让学生只看题目、冻结的特权教师额外看标准解，在学生自己的输出前缀上做逐 token 蒸馏。教师停留在初始权重时，后续学生学到的回看和纠错行为无法反哺教师。
 
+## Meta Superintelligence Labs / University of Wisconsin–Madison
+
+- 2026-10-01 · 一作：Changdae Oh · [Sharpening Tax in Post-Training](../2610.01509-sharpening-tax/README.md)（`sharpening-tax`）：比较 base 与后训练策略在固定采样预算下的任务覆盖；再用 posterior-tempered group sampling 按估计难度调温，兼顾 pass@1 与覆盖率。
+
 ## Microsoft Research
 
 - 2026-02-12 · 一作：Tianzhu Ye · [OPCD](../2602.12275-opcd/README.md)（`opcd`）：提示词、检索文档和历史经验在上下文清空后会消失。OPCD 让无上下文学生生成轨迹，再由带经验或系统提示的教师沿同一轨迹打分，以 reverse KL 把高概率行为内化到学生参数中。
@@ -190,6 +197,10 @@
 ## MiniMax
 
 - 2025-06-16 · 一作：MiniMax · [CISPO / MiniMax-M1](../2506.13585-cispo/README.md)（`cispo`）：固定 rollout policy 采样，token 级计算 importance ratio，只裁剪比率以保留优势方向和有效梯度。
+
+## Moore Threads AI
+
+- 2026-10-01 · 一作：Yafei Zhang · [CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning](../2610.02039-carm/README.md)（`carm`）：对每个 token 的 current/rollout log-ratio 先取绝对值再平均，避免正负漂移在序列级几何均值中抵消。
 
 ## NAVER AI Lab
 
@@ -217,6 +228,10 @@
 ## National University of Defense Technology
 
 - 2026-09-15 · 一作：Qixiu Li · [TIAO: Token Importance-Aware Policy Optimization for Text Summarization](../2609.16748-tiao/README.md)（`tiao`）：通过遮蔽源文档前后的 token 概率变化估计依赖性，同时重塑轨迹优势并聚焦重要 token 更新。
+
+## National University of Science and Technology POLITEHNICA Bucharest
+
+- 2026-10-01 · 一作：Andreea Dutulescu · [GAW-PO: Preference Optimization with Gradient-Aligned Token Weights](../2610.01511-gaw-po/README.md)（`gaw-po`）：用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。
 
 ## National University of Singapore
 
@@ -304,6 +319,10 @@
 ## Texas A&M University
 
 - 2026-06-04 · 一作：Xingyu Su · [OPDLM](../2606.06712-opd-lm/README.md)（`opd-lm`）：ARLM 改成双向注意力后既会遗忘原知识，也有随机 mask 训练与 confidence decoding 推理之间的偏移。OPDLM 让双向学生在自身推理轨迹上生成，冻结 AR 教师在同一轨迹给 target logits。
+
+## The Ohio State University
+
+- 2026-10-01 · 一作：Qijia He · [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](../2610.01896-gmc-grpo/README.md)（`gmc-grpo`）：异步 rollout 的重要性比在 group 级统一缩放，使总质量受帽约束；在共同二阶矩保证下减少 trajectory-wise clipping 的持续偏差。
 
 ## The University of Texas at Austin
 
@@ -454,6 +473,10 @@
 ## 原文未列机构
 
 - 2026-09-29 · 一作：Hao Li · [The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation](../2609.36484-ride/README.md)（`ride-opd`）：RIDE 不在输出概率空间放大 teacher/student ratio，而是在每层每个 token 计算 RL teacher 相对其 pre-RL checkpoint 的 hidden residual：$r=h_T-h_B$；学生回归到 $h_B+\alpha r$，其中 $\alpha>1$ 把方向延伸到 teacher 之外。teacher/base 均 stop-gradient，避免目标分支被学生更新。
+
+## 原文首页未列第一作者机构
+
+- 2026-10-01 · 一作：Yifan Wang · [Token-Level Video Reinforcement Learning](../2610.01973-tvrl/README.md)（`tvrl`）：冻结 VLM 的视频输入梯度定位对 reward 最敏感的生成 token，再把同组 advantage 稠密重分配到 token。
 
 ## 论文未列机构
 

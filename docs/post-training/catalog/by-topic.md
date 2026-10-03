@@ -93,8 +93,17 @@
 
 - [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](../2601.13284-calibration-aware-rl/README.md)（`calibration-aware-rl`）：论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。
 
+### RLVR
+
+- [CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning](../2610.02039-carm/README.md)（`carm`）：对每个 token 的 current/rollout log-ratio 先取绝对值再平均，避免正负漂移在序列级几何均值中抵消。
+- [Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR](../2609.37868-graft/README.md)（`graft`）：当 receiver 的 rollout group 全错、peer 在同题同时有成功和失败轨迹时，GRAFT 用完整 peer group 替换无信号组并保留 peer 内部 advantage。跨 tokenizer 的策略错配通过序列平均 log-likelihood compatibility 加权，再用 token importance ratio clipping 限制更新。
+- [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](../2609.36742-sipo/README.md)（`sipo`）：RLVR 的轨迹 reward 稀疏，普通 OPSD 又会受自教师过度自信和长序列惩罚影响。SIPO 对同一 rollout 构造正/负两份特权上下文：两者 teacher log-prob 的差值抵消共享偏差，形成逐 token 信用；环境 reward 决定主方向，dense evidence 负责在 token 间重新分配。
+- [ISO: An RLVR-Native Optimization Stack](../2607.19331-iso-rlvr/README.md)（`iso-rlvr`）：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
+
 ### OPD
 
+- [DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies](../2610.00317-drift-opd/README.md)（`drift-opd`）：把序列级 reverse-KL 拆成当前 chunk 的一步 reverse-KL 与刻画长期动作后果的 future potential；critic 从离线 demonstrations 学习。
+- [LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation](../2610.00333-lego-opd/README.md)（`lego-opd`）：把语言专家作为 token prior，把 grounding 专家只作为视觉 likelihood，以乘积专家形式组成 OPD teacher，避免连同 VLM 语言偏差一起蒸馏。
 - [Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress](../2608.19408-r2-opd/README.md)（`r2-opd`）：分别按教师奖励和独立进展奖励排序 reasoning spans，冲突时屏蔽蒸馏信号。
 - [SR-OPSD: Self-Referenced On-Policy Self-Distillation](../2608.09745-sr-opsd/README.md)（`sr-opsd`）：把自教师与 reference 做几何插值得到有效目标，再用 Rényi divergence 控制投影几何和密度比敏感度。
 - [On-Policy Delta Distillation for Multilingual Math Reasoning](../2608.05802-opd2/README.md)（`opd2`）：以 post-trained teacher 相对其 base model 的概率增量作为蒸馏信号，减少复制教师原有偏差。
@@ -105,6 +114,7 @@
 
 ### 偏好优化
 
+- [GAW-PO: Preference Optimization with Gradient-Aligned Token Weights](../2610.01511-gaw-po/README.md)（`gaw-po`）：用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。
 - [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
 - [Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data](../2609.16532-sd-dpo/README.md)（`sd-dpo`）：识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。
 
@@ -117,11 +127,9 @@
 
 - [Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models](../2608.01717-erils/README.md)（`erils`）：约束外部策略 rollout 长度，并对 on-policy/external 来源分别处理奖励以防联合归一化崩溃。
 
-### RLVR
+### 异步 RL
 
-- [Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR](../2609.37868-graft/README.md)（`graft`）：当 receiver 的 rollout group 全错、peer 在同题同时有成功和失败轨迹时，GRAFT 用完整 peer group 替换无信号组并保留 peer 内部 advantage。跨 tokenizer 的策略错配通过序列平均 log-likelihood compatibility 加权，再用 token importance ratio clipping 限制更新。
-- [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](../2609.36742-sipo/README.md)（`sipo`）：RLVR 的轨迹 reward 稀疏，普通 OPSD 又会受自教师过度自信和长序列惩罚影响。SIPO 对同一 rollout 构造正/负两份特权上下文：两者 teacher log-prob 的差值抵消共享偏差，形成逐 token 信用；环境 reward 决定主方向，dense evidence 负责在 token 间重新分配。
-- [ISO: An RLVR-Native Optimization Stack](../2607.19331-iso-rlvr/README.md)（`iso-rlvr`）：固定预训练权重奇异值，仅优化输入/输出 singular frames；同时提供无数据 specialist merger。
+- [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](../2610.01896-gmc-grpo/README.md)（`gmc-grpo`）：异步 rollout 的重要性比在 group 级统一缩放，使总质量受帽约束；在共同二阶矩保证下减少 trajectory-wise clipping 的持续偏差。
 
 ### RL 训练加速
 
@@ -198,6 +206,10 @@
 
 - [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](../2608.16072-sa-mrpo/README.md)（`sa-mrpo`）：逐 reward 维度标准化优势，并依据 batch 饱和度动态把梯度预算转移到尚未掌握的目标。
 
+### RL 后训练
+
+- [Sharpening Tax in Post-Training](../2610.01509-sharpening-tax/README.md)（`sharpening-tax`）：比较 base 与后训练策略在固定采样预算下的任务覆盖；再用 posterior-tempered group sampling 按估计难度调温，兼顾 pass@1 与覆盖率。
+
 ### 测试时适配
 
 - [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](../2609.11393-tasco/README.md)（`tasco`）：冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。
@@ -205,6 +217,10 @@
 ### 多轮 Agent 对齐
 
 - [Turn-level Multiscale Density Ratio Estimation for LLM Agents](../2609.16760-tlm-dre/README.md)（`tlm-dre`）：按 turn 分配多尺度权重，并对正负 token 密度比采用非对称更新。
+
+### 视频生成
+
+- [Token-Level Video Reinforcement Learning](../2610.01973-tvrl/README.md)（`tvrl`）：冻结 VLM 的视频输入梯度定位对 reward 最敏感的生成 token，再把同组 advantage 稠密重分配到 token。
 
 ### 证据帧特权自蒸馏
 
@@ -243,6 +259,7 @@
 
 - [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](../2610.01207-dars/README.md)（`dars`）：把任务进度表示为带先决条件的 predicate 图；验证、失效和修复事件更新图状态，最近破损依赖按图距离衰减已完成工作的 credit，独立分支不受牵连。
 - [My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning](../2610.01161-my-fault/README.md)（`my-fault`）：自诊断器提出错误类别与位置，只有经证据验证的 claim 才进入在线 error pricing；学得的相对成本把终局 credit 守恒地重分配到步骤。
+- [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](../2610.00838-sharpo/README.md)（`sharpo`）：用同组成功轨迹作为自蒸馏 teacher context，在环境交互 segment 内计算 teacher-student log-prob gap，并有界缩放 GRPO advantage。
 - [Guide, Then Let Go: Gap-Adaptive Teacher Scheduling for Sparse-Reward Agentic RL](../2609.37898-gats/README.md)（`gats`）：用教师训练尾部成功率作为固定参考，以学生滞后一拍的移动平均估计能力差距；OPD 权重随差距线性下降，学生达到教师参考后永久关闭教师分支，继续只做 GRPO。
 - [PR-OPD: Privileged Representation On-policy Self-Distillation for Agentic Reinforcement Learning](../2609.36642-pr-opd/README.md)（`pr-opd`）：GRPO warm start 后，策略为每条已完成轨迹写一条 hindsight skill，并对同一 response 做普通 context 与 skill context 两次 forward。后者是 stop-gradient teacher；PR-OPD 在每层、每个 response token 对齐投影 hidden state，再与 reward objective 组合。
 

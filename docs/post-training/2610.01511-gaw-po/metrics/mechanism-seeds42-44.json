@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:gaw-po",
+  "method": "gaw-po",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "weight_mean": 0.745747447013855,
+      "tokens": 5
+    },
+    {
+      "seed": 43,
+      "weight_mean": 0.8683344125747681,
+      "tokens": 5
+    },
+    {
+      "seed": 44,
+      "weight_mean": 0.7046993374824524,
+      "tokens": 5
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "weight_mean_mean": 0.7729270656903585,
+    "tokens_mean": 5.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.01511-gaw-po/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

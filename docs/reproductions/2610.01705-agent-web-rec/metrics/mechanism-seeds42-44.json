@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:agent-web-rec",
+  "method": "agent-web-rec",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "retrieved": 3,
+      "patterns": 2,
+      "collaboration_activated": true,
+      "private_records_exposed": 0,
+      "patterns_fused": 2
+    },
+    {
+      "seed": 43,
+      "retrieved": 3,
+      "patterns": 2,
+      "collaboration_activated": true,
+      "private_records_exposed": 0,
+      "patterns_fused": 2
+    },
+    {
+      "seed": 44,
+      "retrieved": 3,
+      "patterns": 2,
+      "collaboration_activated": true,
+      "private_records_exposed": 0,
+      "patterns_fused": 2
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "retrieved_mean": 3.0,
+    "patterns_mean": 2.0,
+    "private_records_exposed_mean": 0.0,
+    "patterns_fused_mean": 2.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.01705-agent-web-rec/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

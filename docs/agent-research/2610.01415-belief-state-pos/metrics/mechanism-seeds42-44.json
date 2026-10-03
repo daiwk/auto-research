@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:belief-state-pos",
+  "method": "belief-state-pos",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "unresolved": 1,
+      "trapped": true
+    },
+    {
+      "seed": 43,
+      "unresolved": 1,
+      "trapped": true
+    },
+    {
+      "seed": 44,
+      "unresolved": 1,
+      "trapped": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "unresolved_mean": 1.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.01415-belief-state-pos/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

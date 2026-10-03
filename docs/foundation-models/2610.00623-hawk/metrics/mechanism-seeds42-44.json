@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:hawk",
+  "method": "hawk",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "mixed_hidden_mean": 0.9820137619972229,
+      "teacher_detached": true
+    },
+    {
+      "seed": 43,
+      "mixed_hidden_mean": 0.9820137619972229,
+      "teacher_detached": true
+    },
+    {
+      "seed": 44,
+      "mixed_hidden_mean": 0.9820137619972229,
+      "teacher_detached": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "mixed_hidden_mean_mean": 0.9820137619972229
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.00623-hawk/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:irekogpt",
+  "method": "irekogpt",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "width": 3,
+      "basis_columns": 3
+    },
+    {
+      "seed": 43,
+      "width": 3,
+      "basis_columns": 3
+    },
+    {
+      "seed": 44,
+      "width": 3,
+      "basis_columns": 3
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "width_mean": 3.0,
+    "basis_columns_mean": 3.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.00426-irekogpt/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

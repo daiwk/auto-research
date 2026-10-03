@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:llm2jev",
+  "method": "llm2jev",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "probability_sum": 1.0,
+      "choices": 5
+    },
+    {
+      "seed": 43,
+      "probability_sum": 1.0,
+      "choices": 5
+    },
+    {
+      "seed": 44,
+      "probability_sum": 0.9999999403953552,
+      "choices": 5
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "probability_sum_mean": 0.999999980131785,
+    "choices_mean": 5.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.02076-llm2jev/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

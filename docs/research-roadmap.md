@@ -170,6 +170,20 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 完整扫描、原文证据和边界见 [2026-10-02 扫描收口](recent-paper-scan-20261002.md)。
 
+## 2026-10-03 P0/P1 合并批次
+
+| 优先级 | 领域 | 已完成论文 / 方法 | 验收状态 |
+|---|---|---|---|
+| P0 | 搜索 / Jev | RPTune、LLM2Jev | Google 全文优先复核；定义性编排、决策分布与 KL 锚定可执行 |
+| P0 | 后训练 | Sharpening Tax | 固定预算覆盖率损失诊断与三种子 L1 receipt |
+| P0 | Agent | AutoCompact | 压缩决策、摘要、下一动作三字段纠错合同 |
+| P1 | 搜广推 / 基础模型 | AgentWebRec、Omni-Embed-Mini、MWOP、AF-Muon、REA、HAWK、IrekoGPT | 独立详情、原文关键图、机制代码和边界齐全 |
+| P1 | 后训练 | CARM、GMC-GRPO、GAW-PO、SHARPO、TVRL、LEGO-OPD、DriftOPD | 目标函数、掩码、credit 与 teacher composition 不变量通过 |
+| P1 | Agent / RSI / Jev | Explicit Belief State、PACE、RuleEvolve、JevSpawn、MemFit | 状态、权限、验证选择、分支后验与追加式记忆合同通过 |
+| 发现闭环 | 四领域 | PARTIAL | arXiv 成功；官方交叉源有 5 项失败，不推进 2026-10-02 watermark |
+
+完整扫描、拒绝边界和下一轮重叠起点见 [2026-10-03 扫描收口](recent-paper-scan-20261003.md)。
+
 ## P1 执行队列
 
 建议按表内顺序推进；同一编号应尽量作为一个可独立合并的 MR。

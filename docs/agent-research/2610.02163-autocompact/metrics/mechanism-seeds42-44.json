@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:autocompact",
+  "method": "autocompact",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "fields_corrected": 3,
+      "will_compact": true
+    },
+    {
+      "seed": 43,
+      "fields_corrected": 3,
+      "will_compact": true
+    },
+    {
+      "seed": 44,
+      "fields_corrected": 3,
+      "will_compact": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "fields_corrected_mean": 3.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.02163-autocompact/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}
