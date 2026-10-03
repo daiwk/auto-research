@@ -119,6 +119,7 @@
 - 2026-08 · [SPEAR](../2608.01738-spear/README.md)：用双 embedding、confidence×relevance 乘法门和动态 selector 联合优化个性化改写与检索。
 
 ## Google / YouTube
+- 2026-10 · [RPTune](../2610.00964-rptune/README.md)：用查询—商品联合打分裁剪目录，并把高优条目靠近提示词末端；没有量化线上 A/B，只作为学术/Evolve 机制诊断。
 - 2026-09 · [FLVM](../2609.32839-flvm/README.md)：将观看、参与和正负反馈分为三种潜在因子，以仅见混杂特征的基线隔离时长偏置，再用稀疏路由学习行为残差。
 - 2026-09 · [Light Heads](../2609.25433-light-heads/README.md)：在共享排序塔上配置化注入无梯度浅头，并比较窗口重置和负迁移消融。
 - 2026-09 · [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：异步生成新艺人及理由，经公开目录和标签证据校验后在线从缓存读取；本地不具备原论文的私有评审和 A/B。
@@ -438,6 +439,7 @@
 - 2026-03 · [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../2603.00980-hpgr/README.md)：以 session 层级预训练和偏好引导稀疏注意力建模长行为序列。
 
 ## Beihang University
+- 2026-10 · [AgentWebRec](../2610.01705-agent-web-rec/README.md)：融合平台语义、用户私有时序记忆和低置信协作模式，同时保持私有记录不出域。
 - 2026-09 · [UNIQUE](../2609.23718-unique/README.md)：以反馈感知单层 code 和前缀目标注意力联合训练召回与排序；公开切片未复现论文收益。
 - 2026-02 · [Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning](../2602.13134-rolegen/README.md)：通过功能角色和反事实转化路径寻找能激活休眠用户的桥接物品。
 

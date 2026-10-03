@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:tvrl",
+  "method": "tvrl",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "credit_mean": 1.5,
+      "tokens": 10
+    },
+    {
+      "seed": 43,
+      "credit_mean": 1.5,
+      "tokens": 10
+    },
+    {
+      "seed": 44,
+      "credit_mean": 1.5,
+      "tokens": 10
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "credit_mean_mean": 1.5,
+    "tokens_mean": 10.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.01973-tvrl/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

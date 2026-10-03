@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:carm",
+  "method": "carm",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "accepted": 1,
+      "max_drift": 2.3025851249694824
+    },
+    {
+      "seed": 43,
+      "accepted": 1,
+      "max_drift": 2.3025851249694824
+    },
+    {
+      "seed": 44,
+      "accepted": 1,
+      "max_drift": 2.3025851249694824
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "accepted_mean": 1.0,
+    "max_drift_mean": 2.3025851249694824
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.02039-carm/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

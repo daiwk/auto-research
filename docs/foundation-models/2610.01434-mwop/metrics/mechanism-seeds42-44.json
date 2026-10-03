@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:mwop",
+  "method": "mwop",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "attention_kept": 3,
+      "visual_kept": 3,
+      "text_kept": 3
+    },
+    {
+      "seed": 43,
+      "attention_kept": 3,
+      "visual_kept": 3,
+      "text_kept": 3
+    },
+    {
+      "seed": 44,
+      "attention_kept": 3,
+      "visual_kept": 3,
+      "text_kept": 3
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "attention_kept_mean": 3.0,
+    "visual_kept_mean": 3.0,
+    "text_kept_mean": 3.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.01434-mwop/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

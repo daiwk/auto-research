@@ -5,11 +5,17 @@
 ## 2026
 
 - 2026-10 · [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](../2610.00906-active-saddler/README.md)（`active-saddler`）：把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。
+- 2026-10 · [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](../2610.02163-autocompact/README.md)（`autocompact`）：judge 同时审查何时压缩、工作摘要写什么、压缩后下一步怎么做；纠错后的输出直接进入环境，随后以 SFT+结果 RL 联合学习。
+- 2026-10 · [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](../2610.01415-belief-state-pos/README.md)（`belief-state-pos`）：把当前世界事实与尚未解决的任务要求显式维护为 belief；若连续动作没有减少 unresolved requirements，则识别 Belief Trapping 并触发针对性恢复。
 - 2026-10 · [DeFA: Dependency-Guided Failure Attribution for LLM Agents](../2610.01256-defa/README.md)（`defa`）：融合 protocol relation 和语义依赖构造 event dependency graph，再从违规事件逆向追踪 source 与下游影响，形成 failure propagation graph 并定位 decisive error。
 - 2026-10 · [It Takes Workflows to Evolve Better Workflows](../2610.01026-flowright/README.md)（`flowright`）：利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。
 - 2026-10 · [Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents](../2610.02002-mem-plus-plus/README.md)（`mem-plus-plus`）：写入时完整保留文档、日期和作者，不调用生成模型做不可逆摘要；读取时先按问题时间过滤，再融合 lexical 与 semantic ranking。
+- 2026-10 · [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](../2610.01349-pace-capability/README.md)（`pace-capability`）：在每次工具副作用发生前，根据认证请求编译出的 authority 与输入 provenance 同时检查 effect；入库时安全不代表执行时可信。
 - 2026-10 · [Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover](../2610.01073-safe-self-improvement/README.md)（`safe-self-improvement`）：把检测、当前可执行实现选择和下一轮编辑源分开；所有候选必须对当前条件重新验证，若无候选通过则回滚 founder，而不是继续运行已失败 incumbent。
 - 2026-10 · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
+- 2026-09 · [JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces](../2610.00437-jev-spawn/README.md)（`jev-spawn`）：先从自然语言任务构造有限 compositional action space，以 Jev 分布并行保留多个分支；反馈更新后验并保留备选以支持恢复。
+- 2026-09 · [MemFit: Efficient Long-Term Agentic Memory](../2610.00872-memfit/README.md)（`memfit`）：原始 turn 追加写入不改写，只用 segment summary 建索引；读取融合 lexical、semantic 与 rerank 信号，避免昂贵 LLM 写入。
+- 2026-09 · [Self-Evolving Coding Rules for AI Coding Agents](../2610.00650-rule-evolve/README.md)（`rule-evolve`）：维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。
 - 2026-09 · [Context Language Models](../2609.37725-context-lm/README.md)（`context-lm`）：把上下文视为模型可直接编辑的文件，使保留、删除和重组信息成为模型行为，而不是外部 harness 的固定策略；多 Agent 各自维护 context file，服务端从第一个不匹配 token 起重新 prefill。
 - 2026-09 · [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](../2609.38143-meta-skills/README.md)（`meta-skills`）：从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。
 - 2026-09 · [Mixture of Self-Improving Branches for Agent Harness Optimization](../2609.37834-branch-mixture/README.md)（`branch-mixture`）：将 harness 搜索拆成多条分支，每条分支维护不同的开发子集和 proposal policy；全分支都解决的样本被移除，具有分支区分度的样本被保留，部署时由只看输入特征的 router 选择开发集冠军。

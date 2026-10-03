@@ -637,6 +637,25 @@ def test_summary_discloses_partial_official_listing_coverage():
     assert "paper-official-review.json" in summary
 
 
+def test_summary_handles_transport_failure_without_reconciliation_counts():
+    payload = build_discovery_payload(
+        track="recommendation", start_date=dt.date(2026, 10, 1),
+        end_date=dt.date(2026, 10, 3), query_names=(), candidates=[],
+    )
+    payload["cross_source"] = {
+        "source_failures": [{"source": "Google Research", "error": "timeout"}],
+        "official_review_queue_count": 0,
+        "source_stats": [{
+            "source": "Google Research", "status": "error",
+            "transport_status": "timeout",
+        }],
+    }
+    summary = render_discovery_summary(payload)
+    assert "跨来源失败 1 项" in summary
+    assert "Google Research（精确匹配 0，未匹配 0）" in summary
+    assert "不能推进全来源覆盖水位" in summary
+
+
 def test_summary_reports_healthy_snapshot_delta_without_false_partial_warning():
     payload = build_discovery_payload(
         track="recommendation", start_date=dt.date(2026, 9, 28),

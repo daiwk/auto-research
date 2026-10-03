@@ -12564,6 +12564,51 @@
         {"id": "2610.01533", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "gris", "doc": "reproductions/2610.01533-gris/README.md", "evidence_scope": "User-approved academic/Evolve mechanism exception; no quantified online A/B"},
         {"id": "2610.01270", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "repair-state", "doc": "reproductions/2610.01270-repair-state/README.md", "evidence_scope": "User-approved academic/Evolve mechanism exception; no quantified online A/B"}
       ]
+    },
+    {
+      "batch": "recent-20261003-p0-p1",
+      "scope_kind": "reviewed-primary-source-batch",
+      "checked_at": "2026-10-03T18:00:00+08:00",
+      "window": "2026-09-29 through 2026-10-03, with official-source reconciliation incomplete",
+      "sources": [
+        "arXiv official API, complete HTML and PDF",
+        "Google Research, Google DeepMind and Meta AI official listings (partial reconciliation)",
+        "official author repositories and project pages"
+      ],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261003.md",
+        "note": "All approved P0/P1 candidates in this intake are implemented, but five official cross-source requests or reconciliations failed. DeepXiv was not used; the next scan must repeat the overlap before advancing the watermark."
+      },
+      "candidates": [
+        {"id": "2610.00964", "priority": "P0", "track": "recommendation", "status": "implemented", "key": "rptune", "doc": "reproductions/2610.00964-rptune/README.md", "evidence_scope": "Google priority full-text review; seven merchant experiments, local L1 curation only"},
+        {"id": "2610.01705", "priority": "P1", "track": "recommendation", "status": "implemented", "key": "agent-web-rec", "doc": "reproductions/2610.01705-agent-web-rec/README.md", "evidence_scope": "academic/Evolve diagnostic only; no quantified online A/B"},
+        {"id": "2610.02076", "priority": "P0", "track": "foundation-model", "status": "implemented", "key": "llm2jev", "doc": "foundation-models/2610.02076-llm2jev/README.md"},
+        {"id": "2610.02148", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "omni-embed-mini", "doc": "foundation-models/2610.02148-omni-embed-mini/README.md"},
+        {"id": "2610.01434", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "mwop", "doc": "foundation-models/2610.01434-mwop/README.md"},
+        {"id": "2610.01395", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "af-muon", "doc": "foundation-models/2610.01395-af-muon/README.md"},
+        {"id": "2610.00958", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "rea", "doc": "foundation-models/2610.00958-rea/README.md"},
+        {"id": "2610.00623", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "hawk", "doc": "foundation-models/2610.00623-hawk/README.md"},
+        {"id": "2610.00426", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "irekogpt", "doc": "foundation-models/2610.00426-irekogpt/README.md"},
+        {"id": "2610.01509", "priority": "P0", "track": "post-training", "status": "implemented", "key": "sharpening-tax", "doc": "post-training/2610.01509-sharpening-tax/README.md"},
+        {"id": "2610.02039", "priority": "P1", "track": "post-training", "status": "implemented", "key": "carm", "doc": "post-training/2610.02039-carm/README.md"},
+        {"id": "2610.01896", "priority": "P1", "track": "post-training", "status": "implemented", "key": "gmc-grpo", "doc": "post-training/2610.01896-gmc-grpo/README.md"},
+        {"id": "2610.01511", "priority": "P1", "track": "post-training", "status": "implemented", "key": "gaw-po", "doc": "post-training/2610.01511-gaw-po/README.md"},
+        {"id": "2610.00838", "priority": "P1", "track": "post-training", "status": "implemented", "key": "sharpo", "doc": "post-training/2610.00838-sharpo/README.md"},
+        {"id": "2610.01973", "priority": "P1", "track": "post-training", "status": "implemented", "key": "tvrl", "doc": "post-training/2610.01973-tvrl/README.md"},
+        {"id": "2610.00333", "priority": "P1", "track": "post-training", "status": "implemented", "key": "lego-opd", "doc": "post-training/2610.00333-lego-opd/README.md"},
+        {"id": "2610.00317", "priority": "P1", "track": "post-training", "status": "implemented", "key": "drift-opd", "doc": "post-training/2610.00317-drift-opd/README.md"},
+        {"id": "2610.02163", "priority": "P0", "track": "agent", "status": "implemented", "key": "autocompact", "doc": "agent-research/2610.02163-autocompact/README.md"},
+        {"id": "2610.01415", "priority": "P1", "track": "agent", "status": "implemented", "key": "belief-state-pos", "doc": "agent-research/2610.01415-belief-state-pos/README.md"},
+        {"id": "2610.01349", "priority": "P1", "track": "agent", "status": "implemented", "key": "pace-capability", "doc": "agent-research/2610.01349-pace-capability/README.md"},
+        {"id": "2610.00650", "priority": "P1", "track": "agent", "status": "implemented", "key": "rule-evolve", "doc": "agent-research/2610.00650-rule-evolve/README.md"},
+        {"id": "2610.00437", "priority": "P1", "track": "agent", "status": "implemented", "key": "jev-spawn", "doc": "agent-research/2610.00437-jev-spawn/README.md"},
+        {"id": "2610.00872", "priority": "P1", "track": "agent", "status": "implemented", "key": "memfit", "doc": "agent-research/2610.00872-memfit/README.md"}
+      ]
     }
   ]
 }

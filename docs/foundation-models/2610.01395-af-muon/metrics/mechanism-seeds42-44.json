@@ -1,0 +1,50 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:af-muon",
+  "method": "af-muon",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "active_rows": 2,
+      "max_norm": 2.0
+    },
+    {
+      "seed": 43,
+      "active_rows": 2,
+      "max_norm": 2.0
+    },
+    {
+      "seed": 44,
+      "active_rows": 2,
+      "max_norm": 2.0
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "active_rows_mean": 2.0,
+    "max_norm_mean": 2.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.01395-af-muon/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

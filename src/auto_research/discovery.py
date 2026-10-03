@@ -237,14 +237,14 @@ def render_discovery_summary(payload: dict) -> str:
     if cross_source:
         partial_sources = [
             source for source in cross_source.get("source_stats", [])
-            if source.get("transport_status", source["status"]) != "ok"
+            if source.get("transport_status", source.get("status", "unknown")) != "ok"
             or source.get("unresolved_publications")
         ]
         if partial_sources:
             lines.extend([
                 "官方列表仅部分对账：" + "、".join(
-                    f"{source['source']}（精确匹配 {source['exact_title_matches']}，"
-                    f"未匹配 {len(source['unresolved_publications'])}）"
+                    f"{source['source']}（精确匹配 {source.get('exact_title_matches', 0)}，"
+                    f"未匹配 {len(source.get('unresolved_publications', ()))}）"
                     for source in partial_sources
                 ) + "。未匹配标题与详情链接在 JSON artifact；不能推进全来源覆盖水位。",
                 "",

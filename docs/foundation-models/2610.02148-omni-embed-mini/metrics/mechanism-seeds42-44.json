@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:omni-embed-mini",
+  "method": "omni-embed-mini",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "distillation_loss": 1.0657764673233032
+    },
+    {
+      "seed": 43,
+      "distillation_loss": 1.3358465433120728
+    },
+    {
+      "seed": 44,
+      "distillation_loss": 0.9551386833190918
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "distillation_loss_mean": 1.1189205646514893
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.02148-omni-embed-mini/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

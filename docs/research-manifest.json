@@ -219,6 +219,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "autocompact",
+      "title": "AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2610.02163",
+      "detail_path": "agent-research/2610.02163-autocompact/README.md",
+      "topic": [
+        "Coding Agent",
+        "上下文压缩",
+        "RL"
+      ],
+      "first_author": "Xuan Zhang",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "autocompact",
+      "priority": "P0"
+    },
+    {
+      "domain": "agent-research",
       "key": "autogen",
       "title": "AutoGen",
       "paper_url": "https://arxiv.org/abs/2308.08155",
@@ -246,6 +264,24 @@
       "published": "2026-08-24",
       "code": null,
       "adapter": "autosaddler"
+    },
+    {
+      "domain": "agent-research",
+      "key": "belief-state-pos",
+      "title": "Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States",
+      "paper_url": "https://arxiv.org/abs/2610.01415",
+      "detail_path": "agent-research/2610.01415-belief-state-pos/README.md",
+      "topic": [
+        "长程 Agent",
+        "belief state",
+        "恢复"
+      ],
+      "first_author": "Yu Luo",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "belief-state-pos",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -986,6 +1022,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "jev-spawn",
+      "title": "JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces",
+      "paper_url": "https://arxiv.org/abs/2610.00437",
+      "detail_path": "agent-research/2610.00437-jev-spawn/README.md",
+      "topic": [
+        "Jev",
+        "Agent 推理",
+        "分支搜索"
+      ],
+      "first_author": "Haoyang Su",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-09-30",
+      "code": null,
+      "adapter": "jev-spawn",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "jit-agent",
       "title": "JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution",
       "paper_url": "https://arxiv.org/abs/2608.25593",
@@ -1123,6 +1177,24 @@
       "published": "2026-03-19",
       "code": "https://github.com/Memento-Teams/Memento-Skills",
       "adapter": "memento-skills"
+    },
+    {
+      "domain": "agent-research",
+      "key": "memfit",
+      "title": "MemFit: Efficient Long-Term Agentic Memory",
+      "paper_url": "https://arxiv.org/abs/2610.00872",
+      "detail_path": "agent-research/2610.00872-memfit/README.md",
+      "topic": [
+        "Agent 记忆",
+        "无损写入",
+        "混合检索"
+      ],
+      "first_author": "Mitchell Piehl",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-09-30",
+      "code": null,
+      "adapter": "memfit",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -1376,6 +1448,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "pace-capability",
+      "title": "PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2610.01349",
+      "detail_path": "agent-research/2610.01349-pace-capability/README.md",
+      "topic": [
+        "Agent 安全",
+        "工具权限",
+        "provenance"
+      ],
+      "first_author": "Fengpeng Li",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "pace-capability",
+      "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
       "key": "pal",
       "title": "PAL",
       "paper_url": "https://arxiv.org/abs/2211.10435",
@@ -1623,6 +1713,24 @@
       "published": "2026-08-19",
       "code": null,
       "adapter": "rtpo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "rule-evolve",
+      "title": "Self-Evolving Coding Rules for AI Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2610.00650",
+      "detail_path": "agent-research/2610.00650-rule-evolve/README.md",
+      "topic": [
+        "RSI",
+        "Coding Agent",
+        "规则进化"
+      ],
+      "first_author": "Zhengyuan Jiang",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-09-30",
+      "code": null,
+      "adapter": "rule-evolve",
+      "priority": "P1"
     },
     {
       "domain": "agent-research",
@@ -2417,6 +2525,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "af-muon",
+      "title": "AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models",
+      "paper_url": "https://arxiv.org/abs/2610.01395",
+      "detail_path": "foundation-models/2610.01395-af-muon/README.md",
+      "topic": [
+        "优化器",
+        "Muon",
+        "显存效率"
+      ],
+      "first_author": "Arash Lagzian",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "af-muon",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -3970,6 +4096,24 @@
     },
     {
       "domain": "foundation-models",
+      "key": "hawk",
+      "title": "HAWK: Rethinking Multimodal Drafting for Speculative Decoding",
+      "paper_url": "https://arxiv.org/abs/2610.00623",
+      "detail_path": "foundation-models/2610.00623-hawk/README.md",
+      "topic": [
+        "多模态推理",
+        "投机解码",
+        "蒸馏"
+      ],
+      "first_author": "Wenhan Yang",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-09-30",
+      "code": null,
+      "adapter": "hawk",
+      "priority": "P1"
+    },
+    {
+      "domain": "foundation-models",
       "key": "hilp",
       "title": "Hierarchical Latent Prediction for Language Models",
       "paper_url": "https://arxiv.org/abs/2608.05806",
@@ -4109,6 +4253,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "irekogpt",
+      "title": "IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs",
+      "paper_url": "https://arxiv.org/abs/2610.00426",
+      "detail_path": "foundation-models/2610.00426-irekogpt/README.md",
+      "topic": [
+        "结构剪枝",
+        "可伸缩模型",
+        "推理效率"
+      ],
+      "first_author": "Pietro Moriello",
+      "first_author_affiliation": "University of Modena and Reggio Emilia",
+      "published": "2026-10-01",
+      "code": "https://github.com/aimagelab/IrekoGPT",
+      "adapter": "irekogpt",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -4262,6 +4424,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "llm2jev",
+      "title": "LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them",
+      "paper_url": "https://arxiv.org/abs/2610.02076",
+      "detail_path": "foundation-models/2610.02076-llm2jev/README.md",
+      "topic": [
+        "Jev",
+        "决策模型",
+        "校准"
+      ],
+      "first_author": "Yinheng Li",
+      "first_author_affiliation": "Microsoft（按作者邮箱）",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "llm2jev",
+      "priority": "P0"
     },
     {
       "domain": "foundation-models",
@@ -5079,6 +5259,24 @@
     },
     {
       "domain": "foundation-models",
+      "key": "mwop",
+      "title": "MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs",
+      "paper_url": "https://arxiv.org/abs/2610.01434",
+      "detail_path": "foundation-models/2610.01434-mwop/README.md",
+      "topic": [
+        "多模态大模型",
+        "结构剪枝",
+        "推理效率"
+      ],
+      "first_author": "Xudong Wang",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "mwop",
+      "priority": "P1"
+    },
+    {
+      "domain": "foundation-models",
       "key": "naju",
       "title": "Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory",
       "paper_url": "https://arxiv.org/abs/2607.21000",
@@ -5272,6 +5470,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "omni-embed-mini",
+      "title": "Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.02148",
+      "detail_path": "foundation-models/2610.02148-omni-embed-mini/README.md",
+      "topic": [
+        "多模态嵌入",
+        "蒸馏",
+        "LoRA"
+      ],
+      "first_author": "Mohammed Irfan Kurpath",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "omni-embed-mini",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -5940,6 +6156,24 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "rea",
+      "title": "Role-aware Heuristic Episodic Attention for Conversational LLMs",
+      "paper_url": "https://arxiv.org/abs/2610.00958",
+      "detail_path": "foundation-models/2610.00958-rea/README.md",
+      "topic": [
+        "长上下文",
+        "会话记忆",
+        "注意力"
+      ],
+      "first_author": "Wanyang Hong",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "rea",
+      "priority": "P1"
     },
     {
       "domain": "foundation-models",
@@ -7261,6 +7495,24 @@
     },
     {
       "domain": "post-training",
+      "key": "carm",
+      "title": "CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.02039",
+      "detail_path": "post-training/2610.02039-carm/README.md",
+      "topic": [
+        "RLVR",
+        "off-policy",
+        "响应掩码"
+      ],
+      "first_author": "Yafei Zhang",
+      "first_author_affiliation": "Moore Threads AI",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "carm",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "causal-opd",
       "title": "CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning",
       "paper_url": "https://arxiv.org/abs/2608.03673",
@@ -7561,6 +7813,24 @@
     },
     {
       "domain": "post-training",
+      "key": "drift-opd",
+      "title": "DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies",
+      "paper_url": "https://arxiv.org/abs/2610.00317",
+      "detail_path": "post-training/2610.00317-drift-opd/README.md",
+      "topic": [
+        "OPD",
+        "VLA",
+        "长程信用"
+      ],
+      "first_author": "Youngjun Jun",
+      "first_author_affiliation": "KAIST",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "drift-opd",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "dynamic-rubric",
       "title": "Co-Evolving LLM Evaluators and Policies via DynamicRubric",
       "paper_url": "https://arxiv.org/abs/2607.20083",
@@ -7720,6 +7990,24 @@
     },
     {
       "domain": "post-training",
+      "key": "gaw-po",
+      "title": "GAW-PO: Preference Optimization with Gradient-Aligned Token Weights",
+      "paper_url": "https://arxiv.org/abs/2610.01511",
+      "detail_path": "post-training/2610.01511-gaw-po/README.md",
+      "topic": [
+        "偏好优化",
+        "token credit",
+        "DPO"
+      ],
+      "first_author": "Andreea Dutulescu",
+      "first_author_affiliation": "National University of Science and Technology POLITEHNICA Bucharest",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "gaw-po",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "gcpo",
       "title": "GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs",
       "paper_url": "https://arxiv.org/abs/2608.11674",
@@ -7747,6 +8035,24 @@
       "published": "2023-06-23",
       "code": "https://github.com/huggingface/trl/blob/main/docs/source/distillation_trainer.md",
       "adapter": "gkd"
+    },
+    {
+      "domain": "post-training",
+      "key": "gmc-grpo",
+      "title": "Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis",
+      "paper_url": "https://arxiv.org/abs/2610.01896",
+      "detail_path": "post-training/2610.01896-gmc-grpo/README.md",
+      "topic": [
+        "异步 RL",
+        "GRPO",
+        "重要性采样"
+      ],
+      "first_author": "Qijia He",
+      "first_author_affiliation": "The Ohio State University",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "gmc-grpo",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -7981,6 +8287,24 @@
       "published": "2024-02-02",
       "code": "https://github.com/ContextualAI/HALOs",
       "adapter": "kto"
+    },
+    {
+      "domain": "post-training",
+      "key": "lego-opd",
+      "title": "LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.00333",
+      "detail_path": "post-training/2610.00333-lego-opd/README.md",
+      "topic": [
+        "OPD",
+        "多模态后训练",
+        "teacher composition"
+      ],
+      "first_author": "Jaeyun Shin",
+      "first_author_affiliation": "KAIST",
+      "published": "2026-09-29",
+      "code": null,
+      "adapter": "lego-opd",
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -9087,6 +9411,42 @@
     },
     {
       "domain": "post-training",
+      "key": "sharpening-tax",
+      "title": "Sharpening Tax in Post-Training",
+      "paper_url": "https://arxiv.org/abs/2610.01509",
+      "detail_path": "post-training/2610.01509-sharpening-tax/README.md",
+      "topic": [
+        "RL 后训练",
+        "覆盖率",
+        "Agentic RL"
+      ],
+      "first_author": "Changdae Oh",
+      "first_author_affiliation": "Meta Superintelligence Labs / University of Wisconsin–Madison",
+      "published": "2026-10-01",
+      "code": "https://github.com/changdaeoh/sharpening-tax",
+      "adapter": "sharpening-tax",
+      "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "sharpo",
+      "title": "SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.00838",
+      "detail_path": "post-training/2610.00838-sharpo/README.md",
+      "topic": [
+        "Agentic RL",
+        "segment credit",
+        "GRPO"
+      ],
+      "first_author": "Xinchen Du",
+      "first_author_affiliation": "Georgia Institute of Technology",
+      "published": "2026-09-30",
+      "code": null,
+      "adapter": "sharpo",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "simpo",
       "title": "SimPO",
       "paper_url": "https://arxiv.org/abs/2405.14734",
@@ -9508,6 +9868,24 @@
     },
     {
       "domain": "post-training",
+      "key": "tvrl",
+      "title": "Token-Level Video Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.01973",
+      "detail_path": "post-training/2610.01973-tvrl/README.md",
+      "topic": [
+        "视频生成",
+        "token credit",
+        "GRPO"
+      ],
+      "first_author": "Yifan Wang",
+      "first_author_affiliation": "原文首页未列第一作者机构",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": "tvrl",
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "u-opsd",
       "title": "U-OPSD",
       "paper_url": "https://arxiv.org/abs/2608.06296",
@@ -9843,6 +10221,65 @@
           }
         ],
         "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "agent-web-rec",
+      "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
+      "paper_url": "https://arxiv.org/abs/2610.01705",
+      "detail_path": "reproductions/2610.01705-agent-web-rec/README.md",
+      "topic": [
+        "agent-recommendation",
+        "private-memory",
+        "evidence-fusion"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Beihang University",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "agent-web-rec",
+        "arxiv_id": "2610.01705",
+        "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
+        "paper_url": "https://arxiv.org/abs/2610.01705",
+        "track": "recommendation",
+        "organization": "Beihang University",
+        "published": "2026-10-01",
+        "code_url": null,
+        "topics": [
+          "agent-recommendation",
+          "private-memory",
+          "evidence-fusion"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/agent_web_rec",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "mechanism disabled or default state",
+        "metrics": [
+          "retrieved_memories",
+          "patterns",
+          "collaboration_activated",
+          "private_records_exposed",
+          "patterns_fused"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "deterministic L1 mechanism fixture",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "近期学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业搜广推证据结论。",
         "evolve_operators": []
       }
     },
@@ -26799,6 +27236,63 @@
         "evolve_operators": [
           "reward:counterfactual-role"
         ]
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "rptune",
+      "title": "RPTune: Learned Context Curation for LLM Catalog Search",
+      "paper_url": "https://arxiv.org/abs/2610.00964",
+      "detail_path": "reproductions/2610.00964-rptune/README.md",
+      "topic": [
+        "search",
+        "llm-recommendation",
+        "context-curation"
+      ],
+      "first_author": null,
+      "first_author_affiliation": "Google",
+      "published": "2026-10-01",
+      "code": null,
+      "adapter": {
+        "adapter_key": "rptune",
+        "arxiv_id": "2610.00964",
+        "title": "RPTune: Learned Context Curation for LLM Catalog Search",
+        "paper_url": "https://arxiv.org/abs/2610.00964",
+        "track": "recommendation",
+        "organization": "Google",
+        "published": "2026-10-01",
+        "code_url": null,
+        "topics": [
+          "search",
+          "llm-recommendation",
+          "context-curation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rptune",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "deterministic public mechanism mini-suite"
+        ],
+        "baseline": "mechanism disabled or default state",
+        "metrics": [
+          "retained_items",
+          "highest_priority_last",
+          "score_std"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "deterministic L1 mechanism fixture",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "Google 高优先全文复核后的学术/Evolve 机制收录；论文报告真实商家实验，但没有量化线上 A/B，不进入工业搜广推线上证据结论。",
+        "evolve_operators": []
       }
     },
     {

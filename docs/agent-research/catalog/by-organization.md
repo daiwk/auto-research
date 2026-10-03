@@ -481,7 +481,13 @@
 
 ## 原文首页未列第一作者机构
 
+- 2026-10-01 · 一作：Xuan Zhang · [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](../2610.02163-autocompact/README.md)（`autocompact`）：judge 同时审查何时压缩、工作摘要写什么、压缩后下一步怎么做；纠错后的输出直接进入环境，随后以 SFT+结果 RL 联合学习。
+- 2026-10-01 · 一作：Yu Luo · [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](../2610.01415-belief-state-pos/README.md)（`belief-state-pos`）：把当前世界事实与尚未解决的任务要求显式维护为 belief；若连续动作没有减少 unresolved requirements，则识别 Belief Trapping 并触发针对性恢复。
+- 2026-10-01 · 一作：Fengpeng Li · [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](../2610.01349-pace-capability/README.md)（`pace-capability`）：在每次工具副作用发生前，根据认证请求编译出的 authority 与输入 provenance 同时检查 effect；入库时安全不代表执行时可信。
 - 2026-10-01 · 一作：Yunbei Zhang · [Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover](../2610.01073-safe-self-improvement/README.md)（`safe-self-improvement`）：把检测、当前可执行实现选择和下一轮编辑源分开；所有候选必须对当前条件重新验证，若无候选通过则回滚 founder，而不是继续运行已失败 incumbent。
+- 2026-09-30 · 一作：Haoyang Su · [JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces](../2610.00437-jev-spawn/README.md)（`jev-spawn`）：先从自然语言任务构造有限 compositional action space，以 Jev 分布并行保留多个分支；反馈更新后验并保留备选以支持恢复。
+- 2026-09-30 · 一作：Mitchell Piehl · [MemFit: Efficient Long-Term Agentic Memory](../2610.00872-memfit/README.md)（`memfit`）：原始 turn 追加写入不改写，只用 segment summary 建索引；读取融合 lexical、semantic 与 rerank 信号，避免昂贵 LLM 写入。
+- 2026-09-30 · 一作：Zhengyuan Jiang · [Self-Evolving Coding Rules for AI Coding Agents](../2610.00650-rule-evolve/README.md)（`rule-evolve`）：维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。
 
 ## 论文未列机构
 

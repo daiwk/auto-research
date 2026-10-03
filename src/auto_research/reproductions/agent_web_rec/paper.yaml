@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "key": "agent-web-rec",
+  "arxiv_id": "2610.01705",
+  "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
+  "paper_url": "https://arxiv.org/abs/2610.01705",
+  "organization": "Beihang University",
+  "published": "2026-10-01",
+  "upstream_code": "否：截至 2026-10-03 未找到原作者公开实现",
+  "track": "recommendation",
+  "topics": [
+    "agent-recommendation",
+    "private-memory",
+    "evidence-fusion"
+  ],
+  "local_code": "src/auto_research/reproductions/agent_web_rec",
+  "documentation": "docs/reproductions/2610.01705-agent-web-rec/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "deterministic public mechanism mini-suite"
+  ],
+  "baseline": "mechanism disabled or default state",
+  "metrics": [
+    "retrieved_memories",
+    "patterns",
+    "collaboration_activated",
+    "private_records_exposed",
+    "patterns_fused"
+  ],
+  "mechanisms": [
+    "LLM query generation",
+    "InstructRec full benchmark",
+    "deployed agent web"
+  ],
+  "evolve_operators": []
+}

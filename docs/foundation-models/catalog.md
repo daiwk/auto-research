@@ -9,8 +9,15 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 优化器 | [AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models](2610.01395-af-muon/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `af-muon` |
+| 结构剪枝 | [IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs](2610.00426-irekogpt/README.md) | University of Modena and Reggio Emilia，2026-10-01 | [已开源](https://github.com/aimagelab/IrekoGPT) | `irekogpt` |
+| Jev | [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](2610.02076-llm2jev/README.md) | Microsoft（按作者邮箱），2026-10-01 | 未发现官方代码 | `llm2jev` |
+| 多模态大模型 | [MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs](2610.01434-mwop/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `mwop` |
+| 多模态嵌入 | [Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation](2610.02148-omni-embed-mini/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `omni-embed-mini` |
+| 长上下文 | [Role-aware Heuristic Episodic Attention for Conversational LLMs](2610.00958-rea/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `rea` |
 | 优化器 | [TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning](2610.02199-taco-optimizer/README.md) | University of Central Florida，2026-10-01 | [已开源](https://github.com/Jichao2357/TACO_optimizer) | `taco-optimizer` |
 | 视频 VLM | [VETO: Video Efficient Token Optimization for Vision Language Models](2610.01785-veto/README.md) | National Taiwan University，2026-10-01 | 未发现官方代码 | `veto` |
+| 多模态推理 | [HAWK: Rethinking Multimodal Drafting for Speculative Decoding](2610.00623-hawk/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `hawk` |
 | System One / JEV | [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](2609.36965-chinese-jev/README.md) | Fudan University，2026-09-29 | [已开源](https://gulucaptain.github.io/Chinese-Jev/) | `chinese-jev` |
 | MoE | [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](2609.37751-ce-guided-moe/README.md) | Bar-Ilan University，2026-09-29 | 未发现官方代码 | `ce-guided-moe` |
 | 推理与系统效率 | [LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization](2609.38166-leapquant/README.md) | UC Berkeley，2026-09-29 | 未发现官方代码 | `leapquant` |

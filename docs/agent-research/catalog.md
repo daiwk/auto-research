@@ -10,11 +10,17 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | Harness 优化 | [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](2610.00906-active-saddler/README.md) | POSTECH，2026-10-01 | [已开源](https://github.com/microsoft/AutoSaddler/tree/feat/activesaddler) | `active-saddler` |
+| Coding Agent | [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](2610.02163-autocompact/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `autocompact` |
+| 长程 Agent | [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](2610.01415-belief-state-pos/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `belief-state-pos` |
 | 失败归因 | [DeFA: Dependency-Guided Failure Attribution for LLM Agents](2610.01256-defa/README.md) | Qwen DianJin Team, Alibaba Cloud Computing，2026-10-01 | 未发现官方代码 | `defa` |
 | 工作流进化 | [It Takes Workflows to Evolve Better Workflows](2610.01026-flowright/README.md) | William & Mary，2026-10-01 | 未发现官方代码 | `flowright` |
 | Agent 记忆 | [Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents](2610.02002-mem-plus-plus/README.md) | The University of Texas at Austin，2026-10-01 | [已开源](https://github.com/AIDAChip-Inc/mem-plus-plus) | `mem-plus-plus` |
+| Agent 安全 | [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](2610.01349-pace-capability/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `pace-capability` |
 | RSI 安全 | [Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover](2610.01073-safe-self-improvement/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `safe-self-improvement` |
 | Agent 验证 | [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](2610.00972-veriharness/README.md) | Google Cloud AI Research，2026-10-01 | 未发现官方代码 | `veriharness` |
+| Jev | [JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces](2610.00437-jev-spawn/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `jev-spawn` |
+| Agent 记忆 | [MemFit: Efficient Long-Term Agentic Memory](2610.00872-memfit/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `memfit` |
+| RSI | [Self-Evolving Coding Rules for AI Coding Agents](2610.00650-rule-evolve/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `rule-evolve` |
 | 上下文管理 | [Context Language Models](2609.37725-context-lm/README.md) | University of Washington / Meta Superintelligence Labs，2026-09-29 | [已开源](https://github.com/facebookresearch/context-language-models) | `context-lm` |
 | Harness 设计 | [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](2609.38143-meta-skills/README.md) | Apodex / University of Illinois Urbana-Champaign，2026-09-29 | [已开源](https://github.com/qiancheng-apodex/MetaSkill-AI4AI) | `meta-skills` |
 | Harness 优化 | [Mixture of Self-Improving Branches for Agent Harness Optimization](2609.37834-branch-mixture/README.md) | 原文首页未列机构，2026-09-29 | 未发现官方代码 | `branch-mixture` |

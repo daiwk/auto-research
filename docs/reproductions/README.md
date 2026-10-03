@@ -50,6 +50,8 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `rptune` · [RPTune](2610.00964-rptune/README.md)：Google 的查询—商品联合打分、裁剪与 suffix 编排；没有量化线上 A/B，按学术/Evolve 机制诊断收录，不进入工业线上证据结论。
+- `agent-web-rec` · [AgentWebRec](2610.01705-agent-web-rec/README.md)：平台语义、目标用户私有时序记忆与低置信邻居模式协作；不暴露私有记录，且无线上 A/B，按学术/Evolve 机制诊断收录。
 - `gear` · [GEAR](2609.39327-gear/README.md)：正交基参数化的 BasisVQ/BasisRQ 与碰撞 item 上下文重排；论文披露抖音广告 7 天、每组 5% 流量 A/B，本地只执行 L1 核心机制。
 - `effective-training-time` · [Effective Training Time](2610.02057-effective-training-time/README.md)：拆分真正消费新数据的训练时间与初始化、编译、checkpoint、发布和恢复损耗；这是用户批准的生产基础设施例外，不作为推荐效果 A/B。
 - `gris` · [GrIS](2610.01533-gris/README.md)：把协同图与内容语义共同写入层级 Semantic ID；用户批准为学术/Evolve 机制例外，无线上 A/B。

@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:lego-opd",
+  "method": "lego-opd",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "probability_sum": 1.0
+    },
+    {
+      "seed": 43,
+      "probability_sum": 1.0
+    },
+    {
+      "seed": 44,
+      "probability_sum": 1.0
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "probability_sum_mean": 1.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.00333-lego-opd/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct03-public-mechanism-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}
