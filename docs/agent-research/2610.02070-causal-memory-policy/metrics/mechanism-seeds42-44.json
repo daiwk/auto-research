@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "method": "causal-memory-policy",
+  "manifest_ref": "agent-research:causal-memory-policy",
+  "dataset": "synthetic mechanism diagnostics v1; not paper benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "positive_utility": 1.11117313065121,
+      "negative_utility": -1.1366691208208652,
+      "positive_se": 0.03256945434110265,
+      "negative_se": 0.03379021813922463,
+      "exposure_min": 100,
+      "exposure_max": 100,
+      "negative_forgotten": true
+    },
+    {
+      "seed": 43,
+      "positive_utility": 1.1146949342279318,
+      "negative_utility": -1.1165676511909526,
+      "positive_se": 0.03487289346445152,
+      "negative_se": 0.03419172595241075,
+      "exposure_min": 100,
+      "exposure_max": 100,
+      "negative_forgotten": true
+    },
+    {
+      "seed": 44,
+      "positive_utility": 1.0769081793375843,
+      "negative_utility": -1.0864046844682775,
+      "positive_se": 0.037249907611746264,
+      "negative_se": 0.032693521569303476,
+      "exposure_min": 100,
+      "exposure_max": 100,
+      "negative_forgotten": true
+    }
+  ],
+  "aggregate_metrics": {
+    "positive_utility_mean": 1.1009254147389087,
+    "negative_utility_mean": -1.1132138188266985,
+    "positive_se_mean": 0.034897418472433474,
+    "negative_se_mean": 0.033558488553646286,
+    "exposure_min_mean": 100.0,
+    "exposure_max_mean": 100.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "core equations and executable controls only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.02070-causal-memory-policy/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct04-seven-synthetic-mechanisms-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct04_seven_papers.py"
+  }
+}

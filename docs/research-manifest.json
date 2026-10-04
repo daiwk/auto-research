@@ -380,6 +380,23 @@
       "adapter": "cast"
     },
     {
+      "key": "causal-memory-policy",
+      "title": "Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval",
+      "paper_url": "https://arxiv.org/abs/2610.02070",
+      "domain": "agent-research",
+      "detail_path": "agent-research/2610.02070-causal-memory-policy/README.md",
+      "topic": [
+        "因果检索干预",
+        "记忆管理"
+      ],
+      "first_author": "Arman Behnam",
+      "first_author_affiliation": "Illinois Institute of Technology",
+      "published": "2026-10-01",
+      "priority": "P1",
+      "code": "https://anonymous.4open.science/r/cmp-release-D0C3/",
+      "adapter": "causal-memory-policy"
+    },
+    {
       "domain": "agent-research",
       "key": "ccm",
       "title": "Continuous Context Management",
@@ -1057,6 +1074,23 @@
       "priority": "P1"
     },
     {
+      "key": "jev-lookahead",
+      "title": "Code Owns the Simulation, Jev Owns the Evaluation",
+      "paper_url": "https://arxiv.org/abs/2610.01834",
+      "domain": "agent-research",
+      "detail_path": "agent-research/2610.01834-jev-lookahead/README.md",
+      "topic": [
+        "模拟前瞻与动作选择",
+        "System One"
+      ],
+      "first_author": "Yaodong Yang",
+      "first_author_affiliation": "The Chinese University of Hong Kong",
+      "published": "2026-10-01",
+      "priority": "P0",
+      "code": null,
+      "adapter": "jev-lookahead"
+    },
+    {
       "domain": "agent-research",
       "key": "jev-spawn",
       "title": "JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces",
@@ -1357,6 +1391,23 @@
       "published": "2023-08-01",
       "code": "https://github.com/FoundationAgents/MetaGPT",
       "adapter": "metagpt"
+    },
+    {
+      "key": "mingbird",
+      "title": "Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks",
+      "paper_url": "https://arxiv.org/abs/2610.02001",
+      "domain": "agent-research",
+      "detail_path": "agent-research/2610.02001-mingbird/README.md",
+      "topic": [
+        "本地 Agent 运行框架",
+        "工具使用"
+      ],
+      "first_author": "Hao Wang",
+      "first_author_affiliation": "University of Science and Technology Beijing",
+      "published": "2026-10-01",
+      "priority": "P1",
+      "code": "https://github.com/Mingbird/Mingbird-agent",
+      "adapter": "mingbird"
     },
     {
       "domain": "agent-research",
@@ -6950,6 +7001,23 @@
       "priority": "P1"
     },
     {
+      "key": "tess",
+      "title": "TESS: Scalable, Transferable Meta-network for Data Selection Requires a Different Loss (and Why the Obvious Choice is Problematic)",
+      "paper_url": "https://arxiv.org/abs/2610.02092",
+      "domain": "foundation-models",
+      "detail_path": "foundation-models/2610.02092-tess/README.md",
+      "topic": [
+        "预训练与数据",
+        "元网络数据选择"
+      ],
+      "first_author": "Zilin Du",
+      "first_author_affiliation": "Nanyang Technological University",
+      "published": "2026-10-01",
+      "priority": "P1",
+      "code": null,
+      "adapter": "tess"
+    },
+    {
       "domain": "foundation-models",
       "key": "transmem",
       "title": "TransMem: Transforming Hidden States into Memory for Large Language Models",
@@ -9242,6 +9310,23 @@
       "adapter": "rlaif"
     },
     {
+      "key": "rlcpr",
+      "title": "RLCPR: Rethinking Probability-Based Reinforcement Learning From Posterior Concentration",
+      "paper_url": "https://arxiv.org/abs/2610.01458",
+      "domain": "post-training",
+      "detail_path": "post-training/2610.01458-rlcpr/README.md",
+      "topic": [
+        "后验集中与长度约束",
+        "强化学习"
+      ],
+      "first_author": "Shiu-Hong Kao",
+      "first_author_affiliation": "National University of Singapore",
+      "published": "2026-10-01",
+      "priority": "P1",
+      "code": null,
+      "adapter": "rlcpr"
+    },
+    {
       "domain": "post-training",
       "key": "rlcr",
       "title": "Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty",
@@ -9794,6 +9879,23 @@
       "priority": "P0"
     },
     {
+      "key": "t2spo",
+      "title": "T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.00388",
+      "domain": "post-training",
+      "detail_path": "post-training/2610.00388-t2spo/README.md",
+      "topic": [
+        "轨迹到步骤信用分配",
+        "强化学习"
+      ],
+      "first_author": "Bo-Wen Zhang",
+      "first_author_affiliation": "Nanjing University",
+      "published": "2026-09-30",
+      "priority": "P0",
+      "code": null,
+      "adapter": "t2spo"
+    },
+    {
       "domain": "post-training",
       "key": "taco",
       "title": "TACO",
@@ -10060,6 +10162,23 @@
       "published": "2026-08-27",
       "code": null,
       "adapter": "weak-guide-rlvr"
+    },
+    {
+      "key": "weakest-link",
+      "title": "The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.00332",
+      "domain": "post-training",
+      "detail_path": "post-training/2610.00332-weakest-link/README.md",
+      "topic": [
+        "教师前缀约束蒸馏",
+        "约束强化学习"
+      ],
+      "first_author": "Matthieu Zimmer",
+      "first_author_affiliation": "Huawei Noah’s Ark Lab",
+      "published": "2026-09-29",
+      "priority": "P0",
+      "code": null,
+      "adapter": "weakest-link"
     },
     {
       "domain": "post-training",

@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "method": "tess",
+  "manifest_ref": "foundation-models:tess",
+  "dataset": "synthetic mechanism diagnostics v1; not paper benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "pvm_initial": 0.059505365788936615,
+      "pvm_final": 0.008934068493545055,
+      "pool_score_std": 0.203585684299469,
+      "scored_pool_examples": 48
+    },
+    {
+      "seed": 43,
+      "pvm_initial": 0.07148482650518417,
+      "pvm_final": 0.009576290845870972,
+      "pool_score_std": 0.07019339501857758,
+      "scored_pool_examples": 48
+    },
+    {
+      "seed": 44,
+      "pvm_initial": 0.10980471968650818,
+      "pvm_final": 0.020188121125102043,
+      "pool_score_std": 0.16638614237308502,
+      "scored_pool_examples": 48
+    }
+  ],
+  "aggregate_metrics": {
+    "pvm_initial_mean": 0.08026497066020966,
+    "pvm_final_mean": 0.01289949348817269,
+    "pool_score_std_mean": 0.14672174056371054,
+    "scored_pool_examples_mean": 48.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "core equations and executable controls only"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.02092-tess/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct04-seven-synthetic-mechanisms-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct04_seven_papers.py"
+  }
+}

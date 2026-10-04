@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "method": "jev-lookahead",
+  "manifest_ref": "agent-research:jev-lookahead",
+  "dataset": "synthetic mechanism diagnostics v1; not paper benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "simulated_branches": 2,
+      "real_state_unchanged": true,
+      "selected_command": "enter kitchen",
+      "provider": "lexical-diagnostic"
+    },
+    {
+      "seed": 43,
+      "simulated_branches": 2,
+      "real_state_unchanged": true,
+      "selected_command": "enter kitchen",
+      "provider": "lexical-diagnostic"
+    },
+    {
+      "seed": 44,
+      "simulated_branches": 2,
+      "real_state_unchanged": true,
+      "selected_command": "enter kitchen",
+      "provider": "lexical-diagnostic"
+    }
+  ],
+  "aggregate_metrics": {
+    "simulated_branches_mean": 2.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "core equations and executable controls only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.01834-jev-lookahead/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct04-seven-synthetic-mechanisms-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct04_seven_papers.py"
+  }
+}

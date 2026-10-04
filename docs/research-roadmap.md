@@ -1,5 +1,21 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-04 七篇全文补漏批次
+
+这是 10-02 已公告论文的补漏，不是 10-04 单日新增。七篇同一 PR 交付，全部保留 L1 机制/控制协议边界，**不意味着完整论文 benchmark、GPU 训练或 Evolve 能力集成已经完成**。
+
+| 优先级 | 论文 | 本轮实现与验收 | 未覆盖的完整实验 |
+|---|---|---|---|
+| P0 | [Jev lookahead](agent-research/2610.01834-jev-lookahead/README.md) | 环境隔离前瞻、后继合法动作、既有 provider 契约；CPU 诊断 | 真实 Jev + ALFWorld/机器人 |
+| P0 | [T2SPO](post-training/2610.00388-t2spo/README.md) | 历史成功轨迹、冻结真实 TabPFN CPU 三 seed、步骤信用/梯度 | 冻结文本编码器 + LLM 多轮任务 RL |
+| P0 | [Weakest-Link](post-training/2610.00332-weakest-link/README.md) | 吸收式前缀约束、精确词表即时梯度、真实小策略优化 | 教师/学生 LLM 推理蒸馏与基准 |
+| P1 | [CMP](agent-research/2610.02070-causal-memory-policy/README.md) | 均衡随机曝光、效应/SE、风险决策 | 真实 query 实验；跨 query 聚合本身不是论文已解决的问题 |
+| P1 | [TESS](foundation-models/2610.02092-tess/README.md) | 两模型顺序训练、detached 价值标签、selector 优化 | LLM 数据选择后重新训练对照 |
+| P1 | [RLCPR](post-training/2610.01458-rlcpr/README.md) | 严格 CDF 分桶、后验/长度 gate、奖励 | 真模型后验采集与完整 RL |
+| P1 | [Mingbird](agent-research/2610.02001-mingbird/README.md) | schema 压缩、JSON rescue、循环纠偏、真实产物验收 | 真实本地模型 LRAB/τ²、Windows GUI/语音 |
+
+可复跑入口、来源状态与统一边界见[批次报告](recent-paper-scan-20261004-followup.md)。新 CUDA 路径必须另行完成 A100/A30 门禁，不能使用这里的 CPU 回执替代。
+
 ## 2026-08-26 平台 P0
 
 | ID | 状态 | 交付 |

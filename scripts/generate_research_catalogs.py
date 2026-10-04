@@ -61,6 +61,9 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "轨迹到步骤信用分配": ("在线强化学习与稳定性", "步骤奖励与信用分配"),
+        "教师前缀约束蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "后验集中与长度约束": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
         "极稀疏 On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "几何约束 RL": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "AI 反馈安全对齐": ("偏好建模与监督", "安全对齐与可控监督"),
@@ -146,6 +149,9 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "模拟前瞻与动作选择": ("规划、搜索与反思", "环境模拟与前瞻决策"),
+        "因果检索干预": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "本地 Agent 运行框架": ("工具调用与环境执行", "本地工具与完成验收"),
         "Agentic recommendation memory": ("记忆、技能与持续学习", "主动 / 长期记忆"),
         "Hierarchical skill coevolution": ("记忆、技能与持续学习", "技能图与跨任务积累"),
         "Structure-preserving verifier and reward": ("工具调用与环境执行", "安全准入与可验证执行"),
@@ -718,6 +724,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "tess": ("预训练与数据", "数据选择与质量估计"),
         "echo": ("推理与系统效率", "推测解码与 KV cache"),
         "open-1b-audit": ("预训练与数据", "训练框架与可组合实验"),
         "persistent-recurrent-memory": ("网络架构", "条件记忆与知识注入"),

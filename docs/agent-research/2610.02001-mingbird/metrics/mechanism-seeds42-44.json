@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "method": "mingbird",
+  "manifest_ref": "agent-research:mingbird",
+  "dataset": "synthetic mechanism diagnostics v1; not paper benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "false_finish_rejected": true,
+      "artifact_written": true,
+      "turns": 3,
+      "prefill_bytes": 21,
+      "policy": "scripted-diagnostic"
+    },
+    {
+      "seed": 43,
+      "false_finish_rejected": true,
+      "artifact_written": true,
+      "turns": 3,
+      "prefill_bytes": 21,
+      "policy": "scripted-diagnostic"
+    },
+    {
+      "seed": 44,
+      "false_finish_rejected": true,
+      "artifact_written": true,
+      "turns": 3,
+      "prefill_bytes": 21,
+      "policy": "scripted-diagnostic"
+    }
+  ],
+  "aggregate_metrics": {
+    "turns_mean": 3.0,
+    "prefill_bytes_mean": 21.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "core equations and executable controls only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.02001-mingbird/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct04-seven-synthetic-mechanisms-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct04_seven_papers.py"
+  }
+}

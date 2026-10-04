@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 模拟前瞻 | [Code Owns the Simulation](../agent-research/2610.01834-jev-lookahead/README.md) | CUHK | 2026-10-01 | 代码逐动作克隆并模拟下一观察，把新可用动作交给 Jev 评分 | `choose_with_lookahead`；L1 协议诊断，未测真实 Jev |
 | 动态候选分类 | [GLiClass](../foundation-models/2508.07662-gliclass/README.md) | Knowledgator | 2025-08-11 | 联合编码输入与运行时候选标签，通过一次候选交互得到完整分类分布 | `system-one:bilinear-ce`、`system-one:rival-ce` |
 | 置信度训练 | [RLCR](../post-training/2507.16806-rlcr/README.md) | MIT | 2025-07-22 | 把 proper scoring rule 加入奖励，使正确性与诚实置信度共同进入优化目标 | `system-one:rival-brier`、`system-one:rival-hybrid` |
 | 决策概率校准 | [Calibration-Aware RL](../post-training/2601.13284-calibration-aware-rl/README.md) | USC / AWS AI Labs | 2026-01-19 | 直接约束 decision-token 概率，并以 validation 温度校准降低过度自信 | validation calibration 与 ECE/Brier 报告 |

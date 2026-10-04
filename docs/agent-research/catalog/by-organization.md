@@ -164,6 +164,10 @@
 
 - 2026-09-16 · 一作：Jiaxuan Jiang · [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](../2609.18779-cera-moa/README.md)（`cera-moa`）：用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。
 
+## Illinois Institute of Technology
+
+- 2026-10-01 · 一作：Arman Behnam · [Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval](../2610.02070-causal-memory-policy/README.md)（`causal-memory-policy`）：被检索到的记忆与任务难度天然相关，直接按任务成败删除记忆存在选择偏差。CMP 在固定候选池中预留均衡随机曝光槽位，使每条记忆都有可估计的处理/对照样本，再用带标准误的效用判断保护不确定的记忆。
+
 ## Independent Researcher
 
 - 2026-09-28 · 一作：Chengguang Gan · [Certified Selective Automation of LLM Agent Evaluation](../2609.34320-certified-selective-eval/README.md)（`certified-selective-eval`）：按任务簇而非轨迹独立假设做 bootstrap，给自动判断区域的错误率建立上置信界，只有证书低于预算才自动接管。
@@ -359,6 +363,10 @@
 - 2026-08-27 · 一作：Dewu Zheng · [SWE-Prime: Fewer Trajectories, Better Performance](../2608.27449-swe-prime/README.md)（`swe-prime`）：成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。
 - 2026-08-04 · 一作：Xiaolong Sun · [VerMem](../2608.03137-vermem/README.md)（`vermem`）：长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。
 
+## The Chinese University of Hong Kong
+
+- 2026-10-01 · 一作：Yaodong Yang · [Code Owns the Simulation, Jev Owns the Evaluation](../2610.01834-jev-lookahead/README.md)（`jev-lookahead`）：让可执行代码负责模拟每个动作的后继状态，让 Jev 只负责比较动作带来的进展。除了当前动作和下一观察，还显式提供“执行后新出现的可用动作”，降低纯语义动作评分难以预判长期可达性的缺陷。
+
 ## The Chinese University of Hong Kong, Shenzhen
 
 - 2026-09-10 · 一作：Pingchen Lu · [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
@@ -432,6 +440,10 @@
 ## University of North Carolina at Chapel Hill
 
 - 2025-11-20 · 一作：Peng Xia · [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
+
+## University of Science and Technology Beijing
+
+- 2026-10-01 · 一作：Hao Wang · [Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks](../2610.02001-mingbird/README.md)（`mingbird`）：通过 domain 路由和扁平 schema 降低小模型工具调用负担；当模型宣称完成时重新注入原任务与计划并检查产物，发现重复调用或无输出循环时提醒修正，同时为常见 JSON 格式错误提供有限救援。改进的是推理运行框架，不需要把它解释为新的基础模型结构。
 
 ## University of Science and Technology of China
 

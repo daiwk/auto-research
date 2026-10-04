@@ -12668,6 +12668,31 @@
           "evidence_scope": "bounded archive control only; no generated-code execution"
         }
       ]
+    },
+    {
+      "batch": "20261004-seven-fulltext-omissions",
+      "scope_kind": "approved-candidate-followup",
+      "checked_at": "2026-10-04T22:05:05+08:00",
+      "window": "2026-09-29 through 2026-10-01 v1 submissions; October 2 announcement omissions",
+      "sources": ["arXiv official full HTML", "author-linked official repositories"],
+      "required_tracks": ["foundation-model", "post-training", "agent"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261004-followup.md",
+        "note": "Seven approved omissions have L1 mechanism implementations; no fresh exhaustive sweep or capability benchmark claim. No DeepXiv."
+      },
+      "candidates": [
+        {"id": "2610.01834", "priority": "P0", "track": "agent", "status": "implemented", "key": "jev-lookahead", "doc": "agent-research/2610.01834-jev-lookahead/README.md", "evidence_scope": "L1 isolated simulator plus provider contract; no real Jev benchmark"},
+        {"id": "2610.00388", "priority": "P0", "track": "post-training", "status": "implemented", "key": "t2spo", "doc": "post-training/2610.00388-t2spo/README.md", "evidence_scope": "L1 real frozen TabPFN CPU on synthetic states plus objective; no LLM task training"},
+        {"id": "2610.00332", "priority": "P0", "track": "post-training", "status": "implemented", "key": "weakest-link", "doc": "post-training/2610.00332-weakest-link/README.md", "evidence_scope": "L1 exact vocabulary gradient and prefix-constrained small-policy optimization"},
+        {"id": "2610.02070", "priority": "P1", "track": "agent", "status": "implemented", "key": "causal-memory-policy", "doc": "agent-research/2610.02070-causal-memory-policy/README.md", "evidence_scope": "L1 balanced intervention measurement; not a cross-query eviction benchmark"},
+        {"id": "2610.02092", "priority": "P1", "track": "foundation-model", "status": "implemented", "key": "tess", "doc": "foundation-models/2610.02092-tess/README.md", "evidence_scope": "L1 sequential source-model and selector optimization on disjoint synthetic splits"},
+        {"id": "2610.01458", "priority": "P1", "track": "post-training", "status": "implemented", "key": "rlcpr", "doc": "post-training/2610.01458-rlcpr/README.md", "evidence_scope": "L1 entropy curriculum and reward-gate equations"},
+        {"id": "2610.02001", "priority": "P1", "track": "agent", "status": "implemented", "key": "mingbird", "doc": "agent-research/2610.02001-mingbird/README.md", "evidence_scope": "L1 portable harness with executable tools and scripted policy; no LRAB claim"}
+      ]
     }
   ]
 }

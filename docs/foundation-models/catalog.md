@@ -16,6 +16,7 @@
 | 多模态嵌入 | [Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation](2610.02148-omni-embed-mini/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `omni-embed-mini` |
 | 长上下文 | [Role-aware Heuristic Episodic Attention for Conversational LLMs](2610.00958-rea/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `rea` |
 | 优化器 | [TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning](2610.02199-taco-optimizer/README.md) | University of Central Florida，2026-10-01 | [已开源](https://github.com/Jichao2357/TACO_optimizer) | `taco-optimizer` |
+| 预训练与数据 | [TESS: Scalable, Transferable Meta-network for Data Selection Requires a Different Loss (and Why the Obvious Choice is Problematic)](2610.02092-tess/README.md) | Nanyang Technological University，2026-10-01 | 未发现官方代码 | `tess` |
 | 视频 VLM | [VETO: Video Efficient Token Optimization for Vision Language Models](2610.01785-veto/README.md) | National Taiwan University，2026-10-01 | 未发现官方代码 | `veto` |
 | 多模态推理 | [HAWK: Rethinking Multimodal Drafting for Speculative Decoding](2610.00623-hawk/README.md) | 原文首页未列第一作者机构，2026-09-30 | 未发现官方代码 | `hawk` |
 | System One / JEV | [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](2609.36965-chinese-jev/README.md) | Fudan University，2026-09-29 | [已开源](https://gulucaptain.github.io/Chinese-Jev/) | `chinese-jev` |

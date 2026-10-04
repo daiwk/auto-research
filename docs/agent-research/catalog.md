@@ -12,9 +12,12 @@
 | Harness 优化 | [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](2610.00906-active-saddler/README.md) | POSTECH，2026-10-01 | [已开源](https://github.com/microsoft/AutoSaddler/tree/feat/activesaddler) | `active-saddler` |
 | Coding Agent | [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](2610.02163-autocompact/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `autocompact` |
 | 长程 Agent | [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](2610.01415-belief-state-pos/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `belief-state-pos` |
+| 因果检索干预 | [Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval](2610.02070-causal-memory-policy/README.md) | Illinois Institute of Technology，2026-10-01 | [已开源](https://anonymous.4open.science/r/cmp-release-D0C3/) | `causal-memory-policy` |
+| 模拟前瞻与动作选择 | [Code Owns the Simulation, Jev Owns the Evaluation](2610.01834-jev-lookahead/README.md) | The Chinese University of Hong Kong，2026-10-01 | 未发现官方代码 | `jev-lookahead` |
 | 失败归因 | [DeFA: Dependency-Guided Failure Attribution for LLM Agents](2610.01256-defa/README.md) | Qwen DianJin Team, Alibaba Cloud Computing，2026-10-01 | 未发现官方代码 | `defa` |
 | 工作流进化 | [It Takes Workflows to Evolve Better Workflows](2610.01026-flowright/README.md) | William & Mary，2026-10-01 | 未发现官方代码 | `flowright` |
 | Agent 记忆 | [Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents](2610.02002-mem-plus-plus/README.md) | The University of Texas at Austin，2026-10-01 | [已开源](https://github.com/AIDAChip-Inc/mem-plus-plus) | `mem-plus-plus` |
+| 本地 Agent 运行框架 | [Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks](2610.02001-mingbird/README.md) | University of Science and Technology Beijing，2026-10-01 | [已开源](https://github.com/Mingbird/Mingbird-agent) | `mingbird` |
 | Agent 安全 | [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](2610.01349-pace-capability/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `pace-capability` |
 | RSI 安全 | [Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover](2610.01073-safe-self-improvement/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `safe-self-improvement` |
 | Agent 验证 | [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](2610.00972-veriharness/README.md) | Google Cloud AI Research，2026-10-01 | 未发现官方代码 | `veriharness` |

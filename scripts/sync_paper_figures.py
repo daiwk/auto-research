@@ -76,6 +76,8 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.01834-jev-lookahead": "1",
+    "2610.02001-mingbird": "1",
     "2609.31045-kuafu": "2",
     "2609.00986-tgr": "1",
     "2609.00444-gapo": "2",

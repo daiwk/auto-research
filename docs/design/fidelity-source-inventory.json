@@ -9147,6 +9147,24 @@
         "fingerprint": "61c2b47bcc2dd79d3bb912f07fa7f39d1eb4ed6b800be04fc4cbf8768448350a"
       }
     ],
+    "src/auto_research/agent_research/mingbird.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "run_task",
+        "line": 139,
+        "qualified_name": "run_task",
+        "expression": "monitor.no_output += 1",
+        "fingerprint": "b267b9ec66be8d23cb37d14555f017f0e4c439a7dc4f5244fcde7a5f37fd95f2"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "run_task",
+        "line": 142,
+        "qualified_name": "run_task",
+        "expression": "monitor.no_output += 1",
+        "fingerprint": "b267b9ec66be8d23cb37d14555f017f0e4c439a7dc4f5244fcde7a5f37fd95f2"
+      }
+    ],
     "src/auto_research/agent_research/p0_20260808.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10231,6 +10249,16 @@
         "qualified_name": "AgentResearchRunner.run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      }
+    ],
+    "src/auto_research/agent_research/t2spo.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "add_completed",
+        "line": 32,
+        "qualified_name": "TrajectoryMemory.add_completed",
+        "expression": "self.version += 1",
+        "fingerprint": "b5afa4aed88228d06259fc36116c0815717075a6af15fb61454d31896a11bd7c"
       }
     ],
     "src/auto_research/datasets.py": [
