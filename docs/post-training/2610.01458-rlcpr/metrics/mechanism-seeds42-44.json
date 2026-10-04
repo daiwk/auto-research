@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "method": "rlcpr",
+  "manifest_ref": "post-training:rlcpr",
+  "dataset": "synthetic mechanism diagnostics v1; not paper benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "active_groups": 1,
+      "long_rollout_penalty": -1.0,
+      "low_entropy_probability": 0.3333333432674408,
+      "high_entropy_probability": 0.10000000149011612
+    },
+    {
+      "seed": 43,
+      "active_groups": 1,
+      "long_rollout_penalty": -1.0,
+      "low_entropy_probability": 0.3333333432674408,
+      "high_entropy_probability": 0.10000000149011612
+    },
+    {
+      "seed": 44,
+      "active_groups": 1,
+      "long_rollout_penalty": -1.0,
+      "low_entropy_probability": 0.3333333432674408,
+      "high_entropy_probability": 0.10000000149011612
+    }
+  ],
+  "aggregate_metrics": {
+    "active_groups_mean": 1.0,
+    "long_rollout_penalty_mean": -1.0,
+    "low_entropy_probability_mean": 0.3333333432674408,
+    "high_entropy_probability_mean": 0.10000000149011612
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "core equations and executable controls only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.01458-rlcpr/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct04-seven-synthetic-mechanisms-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct04_seven_papers.py"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "method": "weakest-link",
+  "manifest_ref": "post-training:weakest-link",
+  "dataset": "synthetic mechanism diagnostics v1; not paper benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "unsafe_probability_before": 0.33335939049720764,
+      "unsafe_probability_after": 0.009794171899557114
+    },
+    {
+      "seed": 43,
+      "unsafe_probability_before": 0.3632889688014984,
+      "unsafe_probability_after": 0.010595839470624924
+    },
+    {
+      "seed": 44,
+      "unsafe_probability_before": 0.36713409423828125,
+      "unsafe_probability_after": 0.010697698220610619
+    }
+  ],
+  "aggregate_metrics": {
+    "unsafe_probability_before_mean": 0.3545941511789958,
+    "unsafe_probability_after_mean": 0.010362569863597551
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "core equations and executable controls only"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.00332-weakest-link/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "oct04-seven-synthetic-mechanisms-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct04_seven_papers.py"
+  }
+}

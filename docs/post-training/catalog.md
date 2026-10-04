@@ -15,10 +15,12 @@
 | 偏好优化 | [GAW-PO: Preference Optimization with Gradient-Aligned Token Weights](2610.01511-gaw-po/README.md) | National University of Science and Technology POLITEHNICA Bucharest，2026-10-01 | 未发现官方代码 | `gaw-po` |
 | Agentic RL | [My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning](2610.01161-my-fault/README.md) | Alibaba Group，2026-10-01 | 未发现官方代码 | `my-fault` |
 | GRPO | [Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals](2610.01548-range-grpo/README.md) | Yonsei University，2026-10-01 | 未发现官方代码 | `range-grpo` |
+| 后验集中与长度约束 | [RLCPR: Rethinking Probability-Based Reinforcement Learning From Posterior Concentration](2610.01458-rlcpr/README.md) | National University of Singapore，2026-10-01 | 未发现官方代码 | `rlcpr` |
 | RL 后训练 | [Sharpening Tax in Post-Training](2610.01509-sharpening-tax/README.md) | Meta Superintelligence Labs / University of Wisconsin–Madison，2026-10-01 | [已开源](https://github.com/changdaeoh/sharpening-tax) | `sharpening-tax` |
 | 视频生成 | [Token-Level Video Reinforcement Learning](2610.01973-tvrl/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `tvrl` |
 | 多模态后训练 | [Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes](2610.02117-where-opd/README.md) | Valeo.ai，2026-10-01 | [已开源](https://github.com/sirkosophia/Where-OPD) | `where-opd` |
 | Agentic RL | [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](2610.00838-sharpo/README.md) | Georgia Institute of Technology，2026-09-30 | 未发现官方代码 | `sharpo` |
+| 轨迹到步骤信用分配 | [T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning](2610.00388-t2spo/README.md) | Nanjing University，2026-09-30 | 未发现官方代码 | `t2spo` |
 | Advisor | [AdviSD: Learning to Advise Frontier LLMs via Targeted Multi-Turn Self-Distillation](2609.38142-advisd/README.md) | University of Southern California，2026-09-29 | 未发现官方代码 | `advisd` |
 | On-policy distillation | [Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models](2609.38025-dr-opd/README.md) | Rutgers University，2026-09-29 | [已开源](https://github.com/zywang0701/Dr-OPD) | `dr-opd` |
 | OPD | [DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies](2610.00317-drift-opd/README.md) | KAIST，2026-09-29 | 未发现官方代码 | `drift-opd` |
@@ -32,6 +34,7 @@
 | Agentic RL | [PR-OPD: Privileged Representation On-policy Self-Distillation for Agentic Reinforcement Learning](2609.36642-pr-opd/README.md) | University of Florida，2026-09-29 | [已开源](https://github.com/balibata/PR-OPD) | `pr-opd` |
 | RLVR | [SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation](2609.36742-sipo/README.md) | University of Illinois Urbana-Champaign，2026-09-29 | [已开源](https://github.com/Yueeeeeeee/SIPO) | `sipo` |
 | On-policy distillation | [The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation](2609.36484-ride/README.md) | 原文未列机构，2026-09-29 | [已开源](https://github.com/xixixixixxxx/RIDE) | `ride-opd` |
+| 教师前缀约束蒸馏 | [The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning](2610.00332-weakest-link/README.md) | Huawei Noah’s Ark Lab，2026-09-29 | 未发现官方代码 | `weakest-link` |
 | RL | [Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training](2609.37119-rfpo/README.md) | University of Luxembourg，2026-09-29 | 未发现官方代码 | `rfpo` |
 | On-policy distillation | [An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning](2609.35505-lspd/README.md) | University of North Carolina at Chapel Hill，2026-09-28 | [已开源](https://github.com/UNCSciML/LSPD) | `lspd` |
 | 在线蒸馏 | [Learning from Teacher Continuations at Student States](2609.36246-olive/README.md) | University of Illinois Urbana-Champaign，2026-09-28 | [已开源](https://dylanzsz.github.io/olive/) | `olive` |

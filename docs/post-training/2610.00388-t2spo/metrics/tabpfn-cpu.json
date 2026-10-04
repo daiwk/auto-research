@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "method": "t2spo",
+  "manifest_ref": "post-training:t2spo",
+  "dataset": "synthetic pre-action numeric states; not ALFWorld",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "seed_results": [
+    {
+      "seed": 42,
+      "mae": 0.002903491258621216,
+      "prediction_min": 0.9986395239830017,
+      "prediction_max": 5.999123573303223,
+      "frozen_snapshot_unchanged": true
+    },
+    {
+      "seed": 43,
+      "mae": 0.001376261313756307,
+      "prediction_min": 0.9993907809257507,
+      "prediction_max": 5.999350070953369,
+      "frozen_snapshot_unchanged": true
+    },
+    {
+      "seed": 44,
+      "mae": 0.0023370484511057534,
+      "prediction_min": 0.9974936842918396,
+      "prediction_max": 5.998628616333008,
+      "frozen_snapshot_unchanged": true
+    }
+  ],
+  "diagnostic_only": true,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "frozen TabPFN on synthetic states; not task capability"
+  },
+  "provenance": {
+    "checkpoint": "Prior-Labs/TabPFN-v2-reg",
+    "checkpoint_revision": "4972a65a1b30806315c6f92499959ffbfc69a673",
+    "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+    "tabpfn_version": "2.2.1",
+    "dataset_fingerprint": "t2spo-synthetic-step-round-distance-v1",
+    "script_sha256": "928ce307c93a2c801fc5b00ea58cce35b6d29758917f4503c4c0817e3b0e6d84",
+    "device": "cpu",
+    "artifact_path": "docs/post-training/2610.00388-t2spo/metrics/tabpfn-cpu.json",
+    "command": "TABPFN_DISABLE_TELEMETRY=1 PYTHONPATH=src python scripts/run_oct04_seven_papers.py --tabpfn-checkpoint <official-checkpoint>"
+  }
+}

@@ -52,6 +52,10 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+最新[七篇补漏批次](recent-paper-scan-20261004-followup.md)包含 Jev lookahead、T2SPO、
+Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机制 API；T2SPO
+另有真实官方 TabPFN checkpoint 的 CPU 三种子验证，不计作完整 LLM/Agent benchmark 复现。
+
 仓库目前注册 **371 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](research-manifest.json)。站点提供按研究域、机构、
 主题和年份浏览的[论文实现索引](reproductions/README.md)，每篇详情页包含论文链接、
