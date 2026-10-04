@@ -9658,5 +9658,61 @@
     "height": 1014,
     "score": 125,
     "error": ""
+  },
+  {
+    "page": "docs/agent-research/2605.06647-sira/README.md",
+    "paper_url": "https://arxiv.org/abs/2605.06647",
+    "arxiv_id": "2605.06647",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3 SIRA retrieval answer coverage (top-5 and top-10) vs. six RL-trained agentic QA systems on NQ and HotpotQA. Baseline numbers are the best reported results taken directly from each original paper. All baselines are end-to-end QA pipelines reporting generated-answer accuracy; SIRA is a pure retriever with no reader. Answer coverage requires the gold string to be retrieved.",
+    "source_url": "https://arxiv.org/pdf/2605.06647#page=10",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/agent-research/2605.06647-sira/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 652,
+    "score": 72,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2603.26499-aira2/README.md",
+    "paper_url": "https://arxiv.org/abs/2603.26499",
+    "arxiv_id": "2603.26499",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2 : AIRA2 architecture. The Evolutionary Agent orchestrates the search by maintaining a population of candidate solutions and dispatching mutation tasks to the N workers as they become available, without any synchronization barriers. Each worker asynchronously executes a ReAct agent which iteratively reasons, executes code, and observes outputs until a candidate solution is ready. Candidate solutions are evaluated in a separate container, and agents observe only the resulting score. Evaluation is partitioned: Dsearch guides optimization while Dval determines final selection. In our main experiments, we use N = 8 workers.",
+    "source_url": "https://arxiv.org/pdf/2603.26499#page=4",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/agent-research/2603.26499-aira2/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 738,
+    "score": 62,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2602.16173-pahf/README.md",
+    "paper_url": "https://arxiv.org/abs/2602.16173",
+    "arxiv_id": "2602.16173",
+    "figure": "",
+    "original_caption": "",
+    "source_url": "",
+    "extraction": "failed",
+    "asset": "",
+    "width": 0,
+    "height": 0,
+    "score": 0,
+    "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "page": "docs/agent-research/2603.19461-hyperagents/README.md",
+    "paper_url": "https://arxiv.org/abs/2603.19461",
+    "arxiv_id": "2603.19461",
+    "figure": "",
+    "original_caption": "",
+    "source_url": "",
+    "extraction": "failed",
+    "asset": "",
+    "width": 0,
+    "height": 0,
+    "score": 0,
+    "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
   }
 ]

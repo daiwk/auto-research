@@ -12609,6 +12609,65 @@
         {"id": "2610.00437", "priority": "P1", "track": "agent", "status": "implemented", "key": "jev-spawn", "doc": "agent-research/2610.00437-jev-spawn/README.md"},
         {"id": "2610.00872", "priority": "P1", "track": "agent", "status": "implemented", "key": "memfit", "doc": "agent-research/2610.00872-memfit/README.md"}
       ]
+    },
+    {
+      "batch": "official-reconciliation-20261004-meta",
+      "scope_kind": "institution-priority-reconciliation",
+      "checked_at": "2026-10-04T15:00:00+08:00",
+      "window": "Meta official historical reconciliation; not a same-day publication batch",
+      "sources": [
+        "Meta AI official publication pages",
+        "arXiv official abstracts and complete HTML",
+        "facebookresearch official repositories and author pages"
+      ],
+      "priority_institutions": ["Meta"],
+      "required_tracks": ["agent"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261004.md",
+        "note": "Four historical Meta P0 omissions were implemented. Incremental arXiv requests returned HTTP 429, so this batch does not claim current four-track completeness and does not advance the watermark. DeepXiv was not used."
+      },
+      "institution_sweeps": [
+        {
+          "organization": "Meta",
+          "candidate_discovery_gate": "affiliation-and-topic",
+          "abstract_online_evidence_required": false,
+          "full_text_review_required": true
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2605.06647", "priority": "P0", "track": "agent",
+          "status": "implemented", "key": "sira",
+          "doc": "agent-research/2605.06647-sira/README.md",
+          "priority_reason": "Meta priority official-source reconciliation",
+          "evidence_scope": "public offline retrieval only; no production online A/B"
+        },
+        {
+          "id": "2603.26499", "priority": "P0", "track": "agent",
+          "status": "implemented", "key": "aira2",
+          "doc": "agent-research/2603.26499-aira2/README.md",
+          "priority_reason": "Meta priority official-source reconciliation",
+          "evidence_scope": "CPU scheduler/HCE mechanism diagnostic; no 8xH200 reproduction"
+        },
+        {
+          "id": "2602.16173", "priority": "P0", "track": "agent",
+          "status": "implemented", "key": "pahf",
+          "doc": "agent-research/2602.16173-pahf/README.md",
+          "priority_reason": "Meta priority official-source reconciliation",
+          "evidence_scope": "explicit-memory state transitions without hidden persona leakage"
+        },
+        {
+          "id": "2603.19461", "priority": "P0", "track": "agent",
+          "status": "implemented", "key": "hyperagents",
+          "doc": "agent-research/2603.19461-hyperagents/README.md",
+          "priority_reason": "Meta priority official-source reconciliation",
+          "evidence_scope": "bounded archive control only; no generated-code execution"
+        }
+      ]
     }
   ]
 }

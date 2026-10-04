@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:hyperagents",
+  "method": "hyperagents",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "probability_sum": 1.0,
+      "archive_size": 2,
+      "structured_only": true
+    },
+    {
+      "seed": 43,
+      "probability_sum": 1.0,
+      "archive_size": 2,
+      "structured_only": true
+    },
+    {
+      "seed": 44,
+      "probability_sum": 1.0,
+      "archive_size": 2,
+      "structured_only": true
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "probability_sum_mean": 1.0,
+    "archive_size_mean": 2.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2603.19461-hyperagents/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "meta-official-backfill-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

@@ -119,10 +119,14 @@
 | Agentic OPD / rollout budgeting | [TurnOPD](2607.05804-turn-opd/README.md) | Academic author team，2026-07-07 | 未发现官方代码 | `turn-opd` |
 | 研究自动化 | [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](2606.26859-agentx/README.md) | Kuaishou，2026-06-26 | 未发现官方代码 | `agentx` |
 | 训练服务优化 | [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](mlsys2026-prompts/README.md) | University of Maryland / Google，2026-05-18 | 未发现官方代码 | `prompts` |
+| Agent 检索 | [Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval](2605.06647-sira/README.md) | Meta Superintelligence Labs / Rice University（工作完成于 Meta），2026-05-07 | [已开源](https://github.com/facebookresearch/sira) | `sira` |
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | University of Science and Technology of China，2026-04-20 | 未发现官方代码 | `steppo` |
 | 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Shanghai AI Laboratory，2026-04-09 | 未发现官方代码 | `searl` |
+| AI 研究 Agent | [AIRA2: Overcoming Bottlenecks in AI Research Agents](2603.26499-aira2/README.md) | FAIR at Meta / University College London，2026-03-27 | 未发现官方代码 | `aira2` |
+| RSI | [HyperAgents](2603.19461-hyperagents/README.md) | University of British Columbia，2026-03-19 | [已开源](https://github.com/facebookresearch/hyperagents) | `hyperagents` |
 | 技能设计 | [Memento-Skills](2603.18743-memento-skills/README.md) | Memento Team，2026-03-19 | [已开源](https://github.com/Memento-Teams/Memento-Skills) | `memento-skills` |
 | 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | National University of Singapore，2026-02-25 | [已开源](https://anonymous.4open.science/r/code-release-456D/) | `u-mem` |
+| 个性化 Agent | [Learning Personalized Agents from Human Feedback](2602.16173-pahf/README.md) | Meta Superintelligence Labs / Princeton University（工作完成于 Meta），2026-02-18 | [已开源](https://github.com/facebookresearch/PAHF) | `pahf` |
 | 记忆技能 | [MemSkill](2602.02474-memskill/README.md) | Nanyang Technological University，2026-02-02 | [已开源](https://github.com/ViktorAxelsen/MemSkill) | `memskill` |
 | 规划强化学习 | [PEARL](2601.20439-pearl/README.md) | 中国科学院信息工程研究所，2026-01-28 | 未发现官方代码 | `pearl` |
 | 技能库强化学习 | [SAGE](2512.17102-sage/README.md) | University of Wisconsin–Madison，2025-12-18 | 未发现官方代码 | `sage` |

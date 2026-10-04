@@ -184,6 +184,18 @@ ByteDance、Alibaba、Kuaishou、Pinterest 等仍进入高召回扫描和正常�
 
 完整扫描、拒绝边界和下一轮重叠起点见 [2026-10-03 扫描收口](recent-paper-scan-20261003.md)。
 
+## 2026-10-04 Meta 官方来源回溯补漏
+
+| 优先级 | 领域 | 已完成论文 / 方法 | 验收状态 |
+|---|---|---|---|
+| P0 · Meta | Agent 检索 | SIRA | DF gate 与单次加权 BM25 组合可执行；不复刻论文 LLM 和大索引 |
+| P0 · Meta | AI 研究 Agent | AIRA2 | 异步 steady-state 调度与 HCE 信号隔离可执行；不声明 8×H200 吞吐复现 |
+| P0 · Meta | 个性化 Agent | PAHF | 行动前澄清、显式记忆和行动后漂移纠正均有不变量测试 |
+| P0 · Meta | RSI / 开放式进化 | HyperAgents | 父代选择与有界 archive step 可执行；禁止生成代码执行 |
+| 发现闭环 | 官方来源对账 | PARTIAL | 本轮是历史补漏；arXiv 批量请求 429，watermark 保持 2026-10-02 |
+
+完整来源、日期、代码状态和复现边界见 [2026-10-04 Meta 官方补漏](recent-paper-scan-20261004.md)。
+
 ## P1 执行队列
 
 建议按表内顺序推进；同一编号应尽量作为一个可独立合并的 MR。
