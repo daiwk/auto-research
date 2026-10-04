@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:aira2",
+  "method": "aira2",
+  "dataset": "deterministic public mechanism mini-suite",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "makespan": 7.0,
+      "selected_robust": true,
+      "test_labels_visible": false
+    },
+    {
+      "seed": 43,
+      "makespan": 7.0,
+      "selected_robust": true,
+      "test_labels_visible": false
+    },
+    {
+      "seed": 44,
+      "makespan": 7.0,
+      "selected_robust": true,
+      "test_labels_visible": false
+    }
+  ],
+  "aggregate_metrics": {
+    "seed_mean": 43.0,
+    "makespan_mean": 7.0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "mechanism execution and invariants only"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2603.26499-aira2/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "meta-official-backfill-public-fixtures-v1",
+    "original_code_commit": "working tree"
+  }
+}

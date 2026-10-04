@@ -110,6 +110,10 @@
 
 - 2026-09-09 · 一作：Jiacheng Sang · [SearchAtlas: Analyzing Agentic Search Strategies via Evidential Query Graphs](../2609.10901-searchatlas/README.md)（`searchatlas`）：把搜索轨迹转为 query—evidence—answer 有向图，审计证据是否真正覆盖问题约束和最终回答。
 
+## FAIR at Meta / University College London
+
+- 2026-03-27 · 一作：Karen Hambardzumyan · [AIRA2: Overcoming Bottlenecks in AI Research Agents](../2603.26499-aira2/README.md)（`aira2`）：以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。
+
 ## Fudan University
 
 - 2026-09-08 · 一作：Hongbang Yuan · [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
@@ -221,6 +225,14 @@
 ## Meta Superintelligence Labs
 
 - 2026-09-29 · 一作：Paras Dahal · [Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning](../2609.38147-meta-reasoning/README.md)（`meta-reasoning`）：把对象级工作交给 worker，把控制本身拆成 Assess、Propose、Evaluate 和 Dispatch；控制器只携带紧凑状态，通过持久 artifact memory 复用既有工作，并在统一调用预算内决定继续、分叉或停止。
+
+## Meta Superintelligence Labs / Princeton University（工作完成于 Meta）
+
+- 2026-02-18 · 一作：Kaiqu Liang · [Learning Personalized Agents from Human Feedback](../2602.16173-pahf/README.md)（`pahf`）：Agent 在行动前从显式用户记忆检索偏好，未知或低置信时主动澄清；行动后无论当前记忆是否自信，都接收纠正并覆盖过期偏好，从而处理新用户、上下文差异和偏好漂移。
+
+## Meta Superintelligence Labs / Rice University（工作完成于 Meta）
+
+- 2026-05-07 · 一作：Zeyu Yang · [Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval](../2605.06647-sira/README.md)（`sira`）：冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。
 
 ## Microsoft
 
@@ -378,6 +390,10 @@
 ## Tsinghua University AIR / Alibaba Group
 
 - 2026-08-05 · 一作：Xuanyu Lei · [State2State: Environment-Derived Mid-Training for LLM Agents](../2608.04934-state2state/README.md)（`state2state`）：**主题：环境派生中训练。** 从环境探索自动采样起点与目标状态，用规则化状态匹配做 verifier，形成无需人工任务与专家轨迹的可扩展 mid-training。
+
+## University of British Columbia
+
+- 2026-03-19 · 一作：Jenny Zhang · [HyperAgents](../2603.19461-hyperagents/README.md)（`hyperagents`）：把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。
 
 ## University of California, Berkeley
 
