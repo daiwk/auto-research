@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-05 定向复核与下一轮水位
+
+[本轮记录](recent-paper-scan-20261005.md)从 10-01 重叠窗口定向核查，新增 [LESSER 输出层梯度数据选择](post-training/2610.03702-lesser/README.md)的 L1 CPU 机制与三 seed 恒等式证据。批量 arXiv API 请求长时间无响应，四领域及 Google/Meta 官方来源未完整收口，**发现水位仍为 2026-10-02**。下轮从 10-01 继续高召回与全文复核。RC-OPD、DepGPO、Recursive Harness Self-Improvement、AIMS 保持待审，不将名字或简单 proxy 登记为实现。
+
 ## 2026-10-04 七篇全文补漏批次
 
 这是 10-02 已公告论文的补漏，不是 10-04 单日新增。七篇同一 PR 交付，全部保留 L1 机制/控制协议边界，**不意味着完整论文 benchmark、GPU 训练或 Evolve 能力集成已经完成**。

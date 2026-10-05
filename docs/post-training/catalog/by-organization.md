@@ -401,6 +401,10 @@
 
 - 2026-08-05 · 一作：Zheyuan Zhang · [Optimizing What Policies Learn From: Recoverability-Aware Rollout Intervention Learning](../2608.05080-rail/README.md)（`rail`）：**主题：rollout 预算分配。** 均匀 rollout 浪费预算，静态启发式又跟不上策略变化。
 
+## University of Pennsylvania
+
+- 2026-10-02 · 一作：Lyuxin David Zhang · [LESSER: Post-Training Data Selection with Output-Layer Gradients](../2610.03702-lesser/README.md)（`lesser`）：现有面向目标任务的数据选择常计算每个候选样本和少量目标任务 query 的全参数梯度，再按相似性选取训练子集；对大模型逐样本反传代价很高。LESSER 只替换**特征**：从一次前向得到的最后隐藏状态和词表概率解析地计算输出层梯度。
+
 ## University of Pittsburgh
 
 - 2026-08-27 · 一作：Zhuochun Li · [SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning](../2608.26550-spear/README.md)（`spear`）：结果奖励过稀，神经 PRM 又昂贵。SPEAR 把教师推理投影为领域符号 milestone，用 LCS-F1 给学生轨迹提供顺序敏感的稠密奖励。

@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-10 · [LESSER: Post-Training Data Selection with Output-Layer Gradients](../2610.03702-lesser/README.md)（`lesser`）：现有面向目标任务的数据选择常计算每个候选样本和少量目标任务 query 的全参数梯度，再按相似性选取训练子集；对大模型逐样本反传代价很高。LESSER 只替换**特征**：从一次前向得到的最后隐藏状态和词表概率解析地计算输出层梯度。
 - 2026-10 · [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](../2610.01896-gmc-grpo/README.md)（`gmc-grpo`）：异步 rollout 的重要性比在 group 级统一缩放，使总质量受帽约束；在共同二阶矩保证下减少 trajectory-wise clipping 的持续偏差。
 - 2026-10 · [CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning](../2610.02039-carm/README.md)（`carm`）：对每个 token 的 current/rollout log-ratio 先取绝对值再平均，避免正负漂移在序列级几何均值中抵消。
 - 2026-10 · [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](../2610.01207-dars/README.md)（`dars`）：把任务进度表示为带先决条件的 predicate 图；验证、失效和修复事件更新图状态，最近破损依赖按图距离衰减已完成工作的 credit，独立分支不受牵连。

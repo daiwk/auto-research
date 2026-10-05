@@ -136,6 +136,10 @@
 
 - [GrowMTP: Can RL Grow Its Own Draft Head?](../2609.16648-growmtp/README.md)（`growmtp`）：在 RL rollout 内按被接受的草稿深度训练 MTP head，并与主干梯度解耦。
 
+### 后训练数据选择
+
+- [LESSER: Post-Training Data Selection with Output-Layer Gradients](../2610.03702-lesser/README.md)（`lesser`）：现有面向目标任务的数据选择常计算每个候选样本和少量目标任务 query 的全参数梯度，再按相似性选取训练子集；对大模型逐样本反传代价很高。LESSER 只替换**特征**：从一次前向得到的最后隐藏状态和词表概率解析地计算输出层梯度。
+
 ### 低秩后训练
 
 - [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](../2609.11739-locus/README.md)（`locus`）：学习任务相关低秩后训练子空间，只在紧凑方向上更新以缩短回答，同时保留任务能力。

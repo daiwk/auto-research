@@ -12,6 +12,8 @@
 
 ## 快速入口
 
+- [LESSER：输出层梯度筛选后训练数据](2610.03702-lesser/README.md)：前向计算梯度特征与共享双侧投影；当前仅 L1 公式/选择器诊断，不报大模型训练收益。
+
 - [Recursive OPSD：DCE + SRCL](../reproductions/2609.30652-recursive-opsd/README.md)：Meta 的动态特权教师和经答案验收的精简自改写；A100 Qwen3-4B 小样本机制诊断，无性能提升结论。
 - [MaD-RL 分布匹配机制实验](../experiments/mad-rl-mechanism.md)：Meta 新论文的四种奖励已在小模型自由采样上运行；原图和论文规模评测未完成，暂不列为正式复现。
 
