@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "paper": "2610.03223",
+  "tier": "L1",
+  "diagnostic_only": true,
+  "device": "cpu",
+  "dataset": "synthetic action-conditioned return groups",
+  "manifest_ref": "agent-research:adastep",
+  "protocol": "Eq. 17-18 variance decomposition with N/n_a population denominators and paper sparse-group fallback; no policy training",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "coefficient arithmetic diagnostic only; no ALFWorld/WebShop/ScienceWorld comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.03223-adastep/metrics/variance-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-action-returns-rng-seeds42-44"
+  },
+  "metrics": {
+    "signal_coefficient_mean": 0.9735287193291926,
+    "noise_coefficient_mean": 0.02606184411306071
+  },
+  "results": [
+    {
+      "seed": 42,
+      "signal_coefficient": 0.9749640742045861,
+      "noise_coefficient": 0.013237340228618555,
+      "all_finite": true
+    },
+    {
+      "seed": 43,
+      "signal_coefficient": 0.967505924100922,
+      "noise_coefficient": 0.0029854231551662558,
+      "all_finite": true
+    },
+    {
+      "seed": 44,
+      "signal_coefficient": 0.9781161596820698,
+      "noise_coefficient": 0.06196276895539732,
+      "all_finite": true
+    }
+  ]
+}

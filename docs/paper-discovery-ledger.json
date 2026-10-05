@@ -12719,6 +12719,42 @@
         {"id": "2610.03634", "track": "agent", "reason": "Requires terminal read/write traces and policy-update comparison"},
         {"id": "2610.02600", "track": "recommendation", "reason": "Full-text online A/B evidence gate not yet checked"}
       ]
+    },
+    {
+      "batch": "20261005-overlap-followup-ftw-adastep",
+      "scope_kind": "partial-overlap-review",
+      "checked_at": "2026-10-05T18:00:00+08:00",
+      "window": "2026-10-01 through 2026-10-05 announcement overlap",
+      "sources": [
+        "arXiv official API and complete HTML",
+        "Google Research, Google DeepMind and Meta official pages (partial)",
+        "official author repositories"
+      ],
+      "priority_institutions": ["Google", "Meta"],
+      "required_tracks": ["post-training", "agent"],
+      "pending_tracks": ["recommendation", "foundation-model"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261005-followup.md",
+        "note": "Post-training and foundation arXiv pagination completed; Agent and recommendation hit HTTP 429. Google Research and Meta official pages timed out. No DeepXiv, no four-track or institution-priority completeness claim."
+      },
+      "candidates": [
+        {"id": "2610.03361", "priority": "P1", "track": "post-training", "status": "implemented", "key": "follow-the-winners", "doc": "post-training/2610.03361-follow-the-winners/README.md", "evidence_scope": "L1 FIFO/top-K/KL CPU mechanism diagnostic; no Search-R1 or Sokoban benchmark"},
+        {"id": "2610.03223", "priority": "P1", "track": "agent", "status": "implemented", "key": "adastep", "doc": "agent-research/2610.03223-adastep/README.md", "evidence_scope": "L1 step-credit variance operator on synthetic returns; no agent policy training"}
+      ],
+      "excluded_candidates": [
+        {"id": "2610.02600", "track": "recommendation", "reason": "Meta AIMS full text has offline industrial-log Recall/NDCG; no verified production online A/B or full-traffic effect"}
+      ],
+      "unresolved_candidates": [
+        {"id": "2610.03665", "track": "post-training", "reason": "Pivot-SD requires real diffusion denoising trajectories and training"},
+        {"id": "2610.03515", "track": "post-training", "reason": "RC-OPD requires real student/teacher repair trajectories; author code not yet released"},
+        {"id": "2610.03634", "track": "agent", "reason": "DepGPO requires terminal dependency graph, verifier read set and policy update"},
+        {"id": "2610.03548", "track": "agent", "reason": "Recursive Harness Self-Improvement requires real generator, fixed verifier and matched-cohort cost gate"},
+        {"id": "2610.03198", "track": "foundation-model", "reason": "KV squared CUDA implementation and public checkpoint need A100/A30 validation before completion"}
+      ]
     }
   ]
 }
