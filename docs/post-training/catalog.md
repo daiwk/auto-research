@@ -9,6 +9,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 后训练数据选择 | [LESSER: Post-Training Data Selection with Output-Layer Gradients](2610.03702-lesser/README.md) | University of Pennsylvania，2026-10-02 | 未发现官方代码 | `lesser` |
 | 异步 RL | [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](2610.01896-gmc-grpo/README.md) | The Ohio State University，2026-10-01 | 未发现官方代码 | `gmc-grpo` |
 | RLVR | [CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning](2610.02039-carm/README.md) | Moore Threads AI，2026-10-01 | 未发现官方代码 | `carm` |
 | Agentic RL | [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](2610.01207-dars/README.md) | University of Illinois Urbana-Champaign，2026-10-01 | 未发现官方代码 | `dars` |

@@ -12693,6 +12693,32 @@
         {"id": "2610.01458", "priority": "P1", "track": "post-training", "status": "implemented", "key": "rlcpr", "doc": "post-training/2610.01458-rlcpr/README.md", "evidence_scope": "L1 entropy curriculum and reward-gate equations"},
         {"id": "2610.02001", "priority": "P1", "track": "agent", "status": "implemented", "key": "mingbird", "doc": "agent-research/2610.02001-mingbird/README.md", "evidence_scope": "L1 portable harness with executable tools and scripted policy; no LRAB claim"}
       ]
+    },
+    {
+      "batch": "20261005-targeted-announcement-review",
+      "scope_kind": "partial-overlap-review",
+      "checked_at": "2026-10-05T11:57:00+08:00",
+      "window": "2026-10-01 through 2026-10-05 announcement overlap",
+      "sources": ["arXiv official cs.LG/cs.CL/cs.AI/cs.IR recent lists and complete HTML for selected papers"],
+      "priority_institutions": ["Google", "Meta"],
+      "required_tracks": ["post-training"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261005.md",
+        "note": "Targeted official-page review only. Batched arXiv API stalled; four-track pagination and Google/Meta official-source reconciliation remain incomplete. DeepXiv was not used."
+      },
+      "candidates": [
+        {"id": "2610.03702", "priority": "P1", "track": "post-training", "status": "implemented", "key": "lesser", "doc": "post-training/2610.03702-lesser/README.md", "evidence_scope": "L1 CPU exact-gradient/projection and selector diagnostic; no downstream LLM benchmark"}
+      ],
+      "unresolved_candidates": [
+        {"id": "2610.03548", "track": "agent", "reason": "Real generator, fixed verifier and matched-cohort cost gate need fidelity review"},
+        {"id": "2610.03515", "track": "post-training", "reason": "Requires real student/teacher repair trajectories and continuation"},
+        {"id": "2610.03634", "track": "agent", "reason": "Requires terminal read/write traces and policy-update comparison"},
+        {"id": "2610.02600", "track": "recommendation", "reason": "Full-text online A/B evidence gate not yet checked"}
+      ]
     }
   ]
 }

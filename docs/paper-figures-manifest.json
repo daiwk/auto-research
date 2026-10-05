@@ -9812,5 +9812,19 @@
     "height": 1015,
     "score": 81,
     "error": ""
+  },
+  {
+    "page": "docs/post-training/2610.03702-lesser/README.md",
+    "paper_url": "https://arxiv.org/abs/2610.03702",
+    "arxiv_id": "2610.03702",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2: Data selection with output-layer gradient features in SFT and RL. Pool and query representations determine similarity scores, while the selection rule produces the training subset. LESSER replaces the gradient representation within this pipeline.",
+    "source_url": "https://arxiv.org/pdf/2610.03702#page=4",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/post-training/2610.03702-lesser/assets/paper-figure-01.png",
+    "width": 1347,
+    "height": 625,
+    "score": 51,
+    "error": ""
   }
 ]

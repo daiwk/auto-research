@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "paper": "2610.03702",
+  "tier": "L1",
+  "diagnostic_only": true,
+  "device": "cpu",
+  "dataset": "synthetic fixed readout tensors (formula diagnostic)",
+  "manifest_ref": "post-training:lesser",
+  "protocol": "Random fixed hidden states/readout; exact autograd parity and tokenwise projection parity; no model training",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed formula/selector diagnostic only; no capability or speedup claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.03702-lesser/metrics/mechanism-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-fixed-rng-torch-seeds42-44; no public dataset"
+  },
+  "metrics": {
+    "gradient_identity_max_abs_error": 4.440892098500626e-16,
+    "projection_identity_max_abs_error": 8.881784197001252e-16
+  },
+  "results": [
+    {
+      "seed": 42,
+      "readout_gradient_max_abs_error": 2.220446049250313e-16,
+      "projection_max_abs_error": 8.881784197001252e-16,
+      "selected_unique": true,
+      "selected_count": 4
+    },
+    {
+      "seed": 43,
+      "readout_gradient_max_abs_error": 2.220446049250313e-16,
+      "projection_max_abs_error": 4.440892098500626e-16,
+      "selected_unique": true,
+      "selected_count": 4
+    },
+    {
+      "seed": 44,
+      "readout_gradient_max_abs_error": 4.440892098500626e-16,
+      "projection_max_abs_error": 5.551115123125783e-16,
+      "selected_unique": true,
+      "selected_count": 4
+    }
+  ]
+}
