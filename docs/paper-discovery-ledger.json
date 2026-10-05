@@ -12755,6 +12755,36 @@
         {"id": "2610.03548", "track": "agent", "reason": "Recursive Harness Self-Improvement requires real generator, fixed verifier and matched-cohort cost gate"},
         {"id": "2610.03198", "track": "foundation-model", "reason": "KV squared CUDA implementation and public checkpoint need A100/A30 validation before completion"}
       ]
+    },
+    {
+      "batch": "20261006-overlap-depgpo",
+      "scope_kind": "partial-overlap-review",
+      "checked_at": "2026-10-06T03:54:00+08:00",
+      "window": "2026-10-01 through 2026-10-06 overlap",
+      "sources": ["arXiv official recommendation and Agent API pagination", "arXiv official full HTML", "Google/Meta official pages (partial)"],
+      "priority_institutions": ["Google", "Meta"],
+      "required_tracks": ["agent"],
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261006.md",
+        "note": "Recommendation and Agent arXiv API pagination completed. Google Research and Meta publication pages timed out; 48 current-window Agent title matches are not full-text-audited. No DeepXiv or four-track completeness claim."
+      },
+      "candidates": [
+        {"id": "2610.03634", "priority": "P1", "track": "agent", "status": "implemented", "key": "depgpo", "doc": "agent-research/2610.03634-depgpo/README.md", "evidence_scope": "L1 recorded-trace dependency-credit and token-weight arithmetic; no terminal tracer or policy training"}
+      ],
+      "unresolved_candidates": [
+        {"id": "2610.03675", "track": "agent", "reason": "FrugalEvo needs actual strong/cheap LLM program search and fixed-budget public-task cost comparison"},
+        {"id": "2610.02994", "track": "agent", "reason": "Sentry needs real failure-triggered lesson retrieval and held-out recovery evaluation"},
+        {"id": "2610.02951", "track": "agent", "reason": "Dynamic Expert Pruning needs real MoE predictor and memory/quality comparison with GPU evidence"},
+        {"id": "2610.03634", "track": "agent", "reason": "DepGPO full training still needs real terminal tracer, verifier and policy-update comparison"},
+        {"id": "2610.03515", "track": "post-training", "reason": "RC-OPD needs student/teacher repair continuations and budget-matched comparison"},
+        {"id": "2610.03548", "track": "agent", "reason": "Recursive Harness Self-Improvement needs generator, fixed verifier and cost gate"},
+        {"id": "2610.03665", "track": "post-training", "reason": "Pivot-SD needs diffusion trajectories and model training"},
+        {"id": "2610.03198", "track": "foundation-model", "reason": "KV squared CUDA path needs A100/A30 validation"}
+      ]
     }
   ]
 }

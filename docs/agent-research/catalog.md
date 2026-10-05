@@ -10,6 +10,7 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | Agentic RL | [AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning](2610.03223-adastep/README.md) | Tsinghua University，2026-10-02 | 未发现官方代码 | `adastep` |
+| Agentic RL | [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](2610.03634-depgpo/README.md) | Southeast University，2026-10-02 | 未发现官方代码 | `depgpo` |
 | Harness 优化 | [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](2610.00906-active-saddler/README.md) | POSTECH，2026-10-01 | [已开源](https://github.com/microsoft/AutoSaddler/tree/feat/activesaddler) | `active-saddler` |
 | Coding Agent | [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](2610.02163-autocompact/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `autocompact` |
 | 长程 Agent | [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](2610.01415-belief-state-pos/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `belief-state-pos` |

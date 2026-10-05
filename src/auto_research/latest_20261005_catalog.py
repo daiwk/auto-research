@@ -4,6 +4,20 @@
 LATEST_METHOD_PAPERS = (
     {
         "domain": "agent-research",
+        "key": "depgpo",
+        "title": "Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents",
+        "paper_url": "https://arxiv.org/abs/2610.03634",
+        "detail_path": "agent-research/2610.03634-depgpo/README.md",
+        "topic": ["Agentic RL", "终端命令依赖", "步骤信用分配"],
+        "first_author": "Yu Li",
+        "first_author_affiliation": "Southeast University",
+        "published": "2026-10-02",
+        "priority": "P1",
+        "code": None,
+        "adapter": "depgpo",
+    },
+    {
+        "domain": "agent-research",
         "key": "adastep",
         "title": "AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning",
         "paper_url": "https://arxiv.org/abs/2610.03223",

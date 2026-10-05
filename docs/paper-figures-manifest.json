@@ -9826,5 +9826,19 @@
     "height": 625,
     "score": 51,
     "error": ""
+  },
+  {
+    "page": "docs/agent-research/2610.03634-depgpo/README.md",
+    "paper_url": "https://arxiv.org/abs/2610.03634",
+    "arxiv_id": "2610.03634",
+    "figure": "Figure 2",
+    "original_caption": "Figure 2 : Overview of DepGPO. Unlike GRPO’s uniform trajectory-level assignment and GiGPO’s generic step-level grouping, DepGPO traces read–write dependencies to the verifier-inspected resources E E and redistributes the group-relative advantage according to dependency-derived step factors. The example illustrates the transformation from raw credit to the final per-step advantage.",
+    "source_url": "https://arxiv.org/html/2610.03634v1/fig1.png",
+    "extraction": "arxiv-html",
+    "asset": "docs/agent-research/2610.03634-depgpo/assets/paper-figure-01.png",
+    "width": 1165,
+    "height": 531,
+    "score": 44,
+    "error": ""
   }
 ]
