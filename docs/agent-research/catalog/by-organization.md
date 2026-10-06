@@ -354,6 +354,10 @@
 
 - 2026-08-27 · 一作：Hanchong Chen · [When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems](../2608.26895-covemem/README.md)（`covemem`）：文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。
 
+## Southeast University
+
+- 2026-10-02 · 一作：Yu Li · [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](../2610.03634-depgpo/README.md)（`depgpo`）：终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。
+
 ## Stanford University
 
 - 2023-04-07 · 一作：Joon Sung Park · [Generative Agents](../2304.03442-generative-agents/README.md)（`generative-agents`）：只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。

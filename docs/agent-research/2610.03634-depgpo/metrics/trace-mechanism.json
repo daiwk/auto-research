@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "paper": "2610.03634",
+  "tier": "L1",
+  "diagnostic_only": true,
+  "device": "cpu",
+  "dataset": "hand-authored recorded terminal trace",
+  "seed": 42,
+  "seed_note": "deterministic trace; RNG not used",
+  "manifest_ref": "agent-research:depgpo",
+  "protocol": "paper Eqs. 10-21 on structured read/write and stdout dependency records; no terminal tracing or policy training",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "trace arithmetic only; not Terminal-Bench or model performance"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.03634-depgpo/metrics/trace-mechanism.json",
+    "dataset_fingerprint": "four-command-structured-trace-v1"
+  },
+  "metrics": {
+    "supporting_read_credit": 0.75,
+    "indirect_write_credit": 1.0,
+    "irrelevant_write_credit": 0.0,
+    "token_weighted_mean_advantage": -0.8
+  },
+  "step_factors": [
+    1.0909090909090908,
+    1.4545454545454546,
+    1.4545454545454546,
+    0.0
+  ],
+  "token_weights": [
+    0.9090909090909091,
+    1.2121212121212122,
+    1.2121212121212122,
+    0.0
+  ],
+  "fallback": false
+}

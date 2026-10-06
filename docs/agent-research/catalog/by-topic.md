@@ -11,6 +11,7 @@
 ### Agentic RL
 
 - [AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning](../2610.03223-adastep/README.md)（`adastep`）：Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中**不同动作解释了多少回报方差**。
+- [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](../2610.03634-depgpo/README.md)（`depgpo`）：终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。
 - [GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents](../2609.35084-graphhca/README.md)（`graphhca`）：稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。
 - [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](../2608.19842-sapo/README.md)（`sapo`）：同一自回归骨干在不同因果边界输出 policy/value，结合 PPO、on-policy SARSA 和 trajectory GAE。
 - [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../2608.18682-rtpo/README.md)（`rtpo`）：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。

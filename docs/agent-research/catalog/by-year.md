@@ -5,6 +5,7 @@
 ## 2026
 
 - 2026-10 · [AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning](../2610.03223-adastep/README.md)（`adastep`）：Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中**不同动作解释了多少回报方差**。
+- 2026-10 · [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](../2610.03634-depgpo/README.md)（`depgpo`）：终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。
 - 2026-10 · [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](../2610.00906-active-saddler/README.md)（`active-saddler`）：把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。
 - 2026-10 · [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](../2610.02163-autocompact/README.md)（`autocompact`）：judge 同时审查何时压缩、工作摘要写什么、压缩后下一步怎么做；纠错后的输出直接进入环境，随后以 SFT+结果 RL 联合学习。
 - 2026-10 · [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](../2610.01415-belief-state-pos/README.md)（`belief-state-pos`）：把当前世界事实与尚未解决的任务要求显式维护为 belief；若连续动作没有减少 unresolved requirements，则识别 Belief Trapping 并触发针对性恢复。

@@ -1,5 +1,19 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-06 重叠补扫批次
+
+[本轮扫描记录](recent-paper-scan-20261006.md)补齐搜广推与 Agent 的 arXiv 分页，但 Google Research/Meta 官方目录仍超时，Agent 宽查询的窗口内 48 个标题也尚未逐篇全文核验。因此跨源水位仍为 **2026-10-02**，不能从 PR 日期直接开始下轮增量扫描。
+
+| ID | 优先级 | 状态 | 交付/下一步验收 |
+|---|---|---|---|
+| OCT06-DEP | P1 | DONE · L1 机制 | [DepGPO](agent-research/2610.03634-depgpo/README.md)：读写/输出依赖、相关写入、支持性读取、token 权重守恒；完整 Agent 训练仍待 tracer、verifier 和真实策略更新 |
+| OCT06-FRU | P1 | TODO · 正文与作者代码已核对 | FrugalEvo：强/弱模型实测程序搜索、共享前缀、固定成本公开任务的 BA-AUC；不能只复用面积公式 |
+| OCT06-SEN | P1 | TODO · 候选 | Sentry：条件触发恢复与成功后记忆写入，隔离的 held-out 任务评测 |
+| OCT06-DEP-MOE | P1 | TODO · 候选 | Dynamic Expert Pruning：真实 MoE 权重与预测器的质量/显存/延迟比较；CUDA 声明需 A100/A30 回执 |
+| OCT06-SRC | P0 | TODO · 来源闭环 | Google/Meta 官方目录重试及 Agent 宽查询全文筛选；只有完成后推进扫描水位 |
+
+后续对 RC-OPD、Recursive Harness Self-Improvement、Pivot-SD、KV² 的完整机制门槛仍见本轮扫描记录。此前 10 月 5 日条目是当时状态，不能覆盖这张更新后的待办表。
+
 ## 2026-10-05 定向复核与下一轮水位
 
 [本轮记录](recent-paper-scan-20261005.md)从 10-01 重叠窗口定向核查，新增 [LESSER 输出层梯度数据选择](post-training/2610.03702-lesser/README.md)的 L1 CPU 机制与三 seed 恒等式证据。批量 arXiv API 请求长时间无响应，四领域及 Google/Meta 官方来源未完整收口，**发现水位仍为 2026-10-02**。下轮从 10-01 继续高召回与全文复核。RC-OPD、DepGPO、Recursive Harness Self-Improvement、AIMS 保持待审，不将名字或简单 proxy 登记为实现。
