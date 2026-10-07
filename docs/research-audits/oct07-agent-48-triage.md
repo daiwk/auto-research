@@ -54,4 +54,3 @@
 | [2610.02638 · Batched Speech Decisions Without Decoding: Single-Token Supervision Lets a Frozen LLM Hear Beyond the Transcript](https://arxiv.org/abs/2610.02638) | 摘要 | 待全文 | DuplexJev ASR 隐状态连接器与单 token 决策；归 System-1/多模态候选 |
 | [2610.02617 · WebUIProof: Benchmarking WebUI Code Generators with UI-Agent Execution Harness](https://arxiv.org/abs/2610.02617) | 摘要 | 评测候选 | WebUIProof 真实浏览器执行测试与 RL；未启用真实 UI 训练环境 |
 | [2610.02616 · VERSE: Verified Self-Evolving Optimizer for Agent Harnesses](https://arxiv.org/abs/2610.02616) | 摘要+作者链接 | 待全文 | VERSE 验证驱动的双层 harness 自进化；需隔离代码执行和 SWE 任务 |
-
