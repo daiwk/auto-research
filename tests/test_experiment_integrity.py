@@ -66,6 +66,21 @@ def test_fingerprints_detect_content_change_even_same_size_and_path(tmp_path):
         replace(spec, implementation="other").require_match(spec.to_dict())
 
 
+def test_enrichment_preserves_actual_run_tier_over_adapter_default(tmp_path):
+    from auto_research.reproductions.registry import get_adapter
+    from auto_research.reproductions.schema import enrich_result
+    from auto_research.reproductions.reporting import _with_fidelity_payload
+    adapter = get_adapter("din")
+    result = {"evaluation_protocol": {"tier": "l1_mechanism", "diagnostic_only": True}}
+    enriched = enrich_result(adapter, result, seeds=(42, 43, 44), dataset_dir=tmp_path,
+                             budget="smoke", seed_results=[{"score": .5}] * 3)
+    assert enriched["evaluation_protocol"]["diagnostic_only"]
+    assert not enriched["evaluation_protocol"]["formal_comparison"]
+    legacy = {"schema_version": 2, "training": {"diagnostic_only": True},
+              "evaluation_protocol": {"tier": "l2_public_dataset", "formal_comparison": True}}
+    assert not _with_fidelity_payload(adapter, legacy)["evaluation_protocol"]["formal_comparison"]
+
+
 @pytest.mark.parametrize("change", [{"dataset": "movielens-1m"}, {"steps": 9},
                                   {"seeds": (99,)}, {"population": 9}, {"device": "cuda"}])
 def test_resume_rejects_protocol_drift(change):
@@ -195,3 +210,20 @@ def test_promotion_resume_rejects_budget_change_and_diagnostics(monkeypatch, tmp
     EvidencePromotionRunner(config).run()
     with pytest.raises(ValueError, match="fingerprint"):
         EvidencePromotionRunner(replace(config, post_steps=90)).run()
+
+
+def test_promotion_accepts_aligned_capability_contracts(monkeypatch, tmp_path):
+    config = EvidencePromotionConfig(adapters=("toy",), post_training=(), agent_methods=(),
+                                     dataset_dir=tmp_path / "data", output_dir=tmp_path / "runs")
+    monkeypatch.setattr(EvidencePromotionRunner, "_execute", lambda self, family, name, seed: capability(seed))
+    payload, _ = EvidencePromotionRunner(config).run()
+    assert payload["targets"]["reproduction:toy"]["formal_comparison"]
+    with pytest.raises(ValueError, match="unique"):
+        replace(config, seeds=(42, 42, 43)).validate()
+
+
+def test_nonfinite_results_cannot_win_or_become_formal():
+    payload = capability()
+    payload["metrics"]["accuracy"] = float("nan")
+    assert not selection_eligible(payload, (42,), 1)
+    assert not assess_evidence(payload, seeds=(42, 43, 44))["formal_comparison"]

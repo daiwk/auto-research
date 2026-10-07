@@ -112,8 +112,9 @@ def enrich_result(
         "packages": _package_versions(),
     }
     enriched["evaluation_protocol"] = {
-        "tier": adapter.evaluation_tier.value,
-        "tier_label": adapter.evaluation_tier.label,
+        **dict(result.get("evaluation_protocol") or {}),
+        "tier": (result.get("evaluation_protocol") or {}).get("tier", adapter.evaluation_tier.value),
+        "tier_label": (result.get("evaluation_protocol") or {}).get("tier_label", adapter.evaluation_tier.label),
         "seeds": list(seeds),
         "budget": budget,
     }
@@ -129,4 +130,6 @@ def enrich_result(
         assessment["eligibility_reasons"].append("seed_results_missing")
         assessment["claim_policy"] = "single/few-seed smoke result; do not claim a stable improvement"
     enriched["evaluation_protocol"].update(assessment)
+    if assessment["diagnostic_only"]:
+        enriched["evaluation_protocol"]["tier_label"] = "L1 机制诊断（非正式能力比较）"
     return enriched

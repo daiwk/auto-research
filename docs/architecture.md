@@ -108,6 +108,9 @@ Topic research 额外写出 `events.jsonl`，逐条记录 discovery、implementa
 
 ## 评估规范
 
+实验恢复、正式比较资格、负结果记忆及 GPU 资源调度统一遵循
+[实验可信度与运行契约](design/experiment-integrity.md)。多 seed 统计不能自动升级诊断等级。
+
 - 时间序列推荐默认使用按用户的 train/validation/test 时间切分。
 - 参数和候选晋级只能读取 validation；test 只用于最终报告。
 - 随机训练优先报告多个 seed 的均值与标准差。

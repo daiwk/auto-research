@@ -7,6 +7,7 @@ from typing import Any
 
 from .base import ReproductionAdapter
 from .schema import enrich_result
+from ..evidence_policy import assess_evidence
 
 
 def write_reproduction_result(
@@ -93,4 +94,9 @@ def _with_fidelity_payload(
         "description": adapter.fidelity.description,
         "omitted_core_components": list(adapter.omitted_core_components),
     }
+    protocol = dict(enriched.get("evaluation_protocol") or {})
+    protocol.update(assess_evidence(enriched))
+    if protocol["diagnostic_only"]:
+        protocol["tier_label"] = "L1 机制诊断（非正式能力比较）"
+    enriched["evaluation_protocol"] = protocol
     return enriched

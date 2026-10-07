@@ -134,7 +134,7 @@ class ModelEvolutionEngine:
                 checkpoint_records
             )
         negative_store = NegativeResultStore(
-            (config.negative_memory_path or (self.project_dir / ".auto-research/negative-results.json")).resolve()
+            (self.project_dir / (config.negative_memory_path or Path(".auto-research/negative-results.json"))).resolve()
         )
         protocol_id = config.evaluation_protocol_id or _default_protocol(config)
         if config.model == "post-training" and config.dataset.endswith("-generate"):

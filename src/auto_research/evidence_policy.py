@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from typing import Any
+import math
 
 
 def sections(value):
@@ -21,7 +22,7 @@ def diagnostic_reasons(payload: dict) -> list[str]:
             reasons.add("diagnostic_or_ineligible")
         if section.get("gold_derived_candidate_set") is True or section.get("gold_fields_available") is True:
             reasons.add("gold_derived_evaluation")
-        if section.get("fidelity") == "concept_demo":
+        if section.get("fidelity") == "concept_demo" or section.get("level") == "concept_demo":
             reasons.add("concept_demo")
         tier = str(section.get("tier", section.get("evaluation_tier", ""))).lower()
         if tier.startswith(("l0", "l1")):
@@ -40,6 +41,9 @@ def assess_evidence(payload: dict, *, seeds=None, minimum_seeds=3) -> dict[str, 
     tier = str(protocol.get("tier", payload.get("evaluation_tier", "unclassified")))
     reasons = diagnostic_reasons(payload)
     diagnostic = bool(reasons)
+    if any(isinstance(value, float) and not math.isfinite(value)
+           for section in sections(payload) for value in section.values()):
+        reasons.append("non_finite_result")
     actual_seeds = list(seeds if seeds is not None else protocol.get("seeds", payload.get("seeds", ())))
     if len(set(actual_seeds)) != len(actual_seeds):
         reasons.append("duplicate_seeds")
@@ -77,5 +81,7 @@ def assess_evidence(payload: dict, *, seeds=None, minimum_seeds=3) -> dict[str, 
 
 def selection_eligible(payload: dict, seeds, minimum_seeds: int) -> bool:
     """Validation search is not itself a formal improvement claim."""
-    return (not diagnostic_reasons(payload) and len(set(seeds)) == len(seeds)
+    finite = all(not isinstance(value, float) or math.isfinite(value)
+                 for section in sections(payload) for value in section.values())
+    return (finite and not diagnostic_reasons(payload) and len(set(seeds)) == len(seeds)
             and len(set(seeds)) >= minimum_seeds)

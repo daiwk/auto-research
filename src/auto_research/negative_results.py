@@ -47,6 +47,11 @@ class NegativeResultStore:
         return list(json.loads(self.path.read_text(encoding="utf-8")).get("results", []))
 
     def record(self, result: NegativeResult) -> None:
+        from .runtime import exclusive_file_lock
+        with exclusive_file_lock(self.path):
+            self._record(result)
+
+    def _record(self, result: NegativeResult) -> None:
         rows = [item for item in self.rows() if item.get("context_key") != result.context_key]
         rows.append(result.to_dict())
         self.path.parent.mkdir(parents=True, exist_ok=True)
