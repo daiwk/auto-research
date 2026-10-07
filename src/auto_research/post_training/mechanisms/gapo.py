@@ -24,3 +24,6 @@ def update_latest(algorithm, state, group, probabilities, reference,
         "scarce_correct_headroom": float(positive_clip - epsilon_lo),
         "clipped_fraction": float(np.mean(ratio != clipped)),
     }
+
+
+ALGORITHMS = {"gapo"}

@@ -111,3 +111,6 @@ def update_latest(
         loss = float(-np.mean(weights * np.log(sampled_policy + eps)))
         diagnostics["update_weight_abs_mean"] = float(np.abs(weights).mean())
     return gradient, loss, diagnostics
+
+
+ALGORITHMS = {"oprd", "route-opd", "compass-opd", "probe-erpo"}

@@ -30,3 +30,6 @@ def update_latest(algorithm, state, group, probabilities, reference,
         "supervision_fraction": float(len(chosen) / max(1, len(sampled))),
         "selected_discrepancy": float(discrepancy[keep].mean()),
     }
+
+
+ALGORITHMS = {"sparse-opd"}

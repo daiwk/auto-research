@@ -68,3 +68,6 @@ def update_latest(
     ]).mean(0)
     loss = float(-np.mean(advantages * np.log(sampled_probabilities + 1e-12)))
     return gradient, loss, diagnostics
+
+
+ALGORITHMS = {"opd-search-plus", "opdvr"}

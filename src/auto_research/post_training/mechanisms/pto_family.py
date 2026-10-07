@@ -49,3 +49,6 @@ def update_latest(algorithm, state, group, probabilities, reference,
     gradient -= 0.02 * (features.T @ (probabilities - reference))
     loss = float(-np.mean(advantages * np.log(probabilities[sampled] + 1e-12)))
     return gradient, loss, diagnostics
+
+
+ALGORITHMS = {"pto", "c2-dpo"}

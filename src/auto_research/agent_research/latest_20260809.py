@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from auto_research.agent_research.mechanisms.evo_harness_r_l_agent import EvoHarnessRLAgent
 from auto_research.agent_research.mechanisms.va_g_agent import VaGAgent
-from auto_research.agent_research.mechanisms.g_s_e_agent import GSEAgent
-from auto_research.agent_research.mechanisms.c_i_p_o_agent import CIPOAgent
+from auto_research.agent_research.mechanisms.gseagent import GSEAgent
+from auto_research.agent_research.mechanisms.cipoagent import CIPOAgent
 from auto_research.agent_research.mechanisms.state2_state_agent import State2StateAgent
 from auto_research.agent_research.mechanisms.harness_opt_bench_agent import HarnessOptBenchAgent
 from auto_research.agent_research.mechanisms.code_grep_agent import CodeGrepAgent

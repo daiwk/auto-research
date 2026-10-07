@@ -96,3 +96,6 @@ def update_latest(
         raise ValueError(f"unsupported 20260831 algorithm: {algorithm}")
 
     return gradient, loss, diagnostics
+
+
+ALGORITHMS = {"rlvr-fusion", "video-opsd", "normalized-dpo"}

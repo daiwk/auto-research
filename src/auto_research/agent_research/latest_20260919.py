@@ -9,7 +9,7 @@ from auto_research.agent_research.mechanisms.dependency_refinement_agent import 
 from auto_research.agent_research.mechanisms.harness_design_study_agent import (
     HarnessDesignStudyAgent,
 )
-from auto_research.agent_research.mechanisms.c_e_r_a_mo_a_agent import CERAMoAAgent
+from auto_research.agent_research.mechanisms.ceramo_a_agent import CERAMoAAgent
 
 LATEST_AGENTS = {
     "evoskill-gui": EvoSkillGUIAgent,

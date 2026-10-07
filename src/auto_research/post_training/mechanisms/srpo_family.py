@@ -57,3 +57,6 @@ def update_latest(
         gradient -= 0.02 * (features.T @ (probabilities - reference))
     loss = float(-np.mean(advantages * np.log(probabilities[sampled] + 1e-12)))
     return gradient, loss, diagnostics
+
+
+ALGORITHMS = {"srpo", "erpo"}

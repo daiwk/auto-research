@@ -29,9 +29,9 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         elif algorithm in {'rlvr-fusion', 'video-opsd', 'normalized-dpo'}:
             from auto_research.post_training.mechanisms.rlvr_fusion_family import update_latest
         elif algorithm == 'gapo':
-            from auto_research.post_training.mechanisms.update_latest_8 import update_latest
+            from auto_research.post_training.mechanisms.gapo import update_latest
         elif algorithm == 'sparse-opd':
-            from auto_research.post_training.mechanisms.update_latest_9 import update_latest
+            from auto_research.post_training.mechanisms.sparse_opd import update_latest
         elif algorithm in {'oprd', 'route-opd', 'compass-opd', 'probe-erpo'}:
             from auto_research.post_training.mechanisms.oprd_family import update_latest
         elif algorithm in {'nsd', 'adaptive-opd-gate', 'locus', 'tasco'}:

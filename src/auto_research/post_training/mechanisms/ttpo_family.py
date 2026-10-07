@@ -78,3 +78,6 @@ def update_latest(algorithm, state, group, probabilities, reference,
     ]).mean(0)
     loss = float(-np.mean(advantages * np.log(sampled_probabilities + 1e-12)))
     return gradient, loss, diagnostics
+
+
+ALGORITHMS = {"ttpo", "weak-guide-rlvr", "uc-mopd", "spear"}

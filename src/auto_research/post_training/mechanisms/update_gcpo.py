@@ -33,3 +33,6 @@ def update_gcpo(state, group, probabilities, reference, sampled):
             np.linalg.norm(basis.T @ raw) / max(np.linalg.norm(raw), 1e-12)
         ) if rank else 0.0,
     }
+
+
+ALGORITHMS = {"gcpo"}
