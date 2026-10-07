@@ -98,7 +98,7 @@ def test_evidence_promotion_is_three_seed_resume_safe_and_retains_failures(monke
     assert calls == [42, 43, 44]  # completed and failed terminal states both resume
 
 
-def test_evidence_promotion_marks_three_successful_seeds_formal(monkeypatch, tmp_path):
+def test_evidence_promotion_does_not_mark_unqualified_three_seeds_formal(monkeypatch, tmp_path):
     config = EvidencePromotionConfig(
         dataset_dir=tmp_path / "data", output_dir=tmp_path / "promotion",
         adapters=("toy",), post_training=(), agent_methods=(),
@@ -111,6 +111,7 @@ def test_evidence_promotion_marks_three_successful_seeds_formal(monkeypatch, tmp
     )
     payload, _ = EvidencePromotionRunner(config).run()
     target = payload["targets"]["reproduction:toy"]
-    assert target["formal_comparison"] is True
+    assert target["formal_comparison"] is False
+    assert "comparison_contract_missing" in target["eligibility_reasons"]
     assert target["aggregate_metrics"]["metrics.primary"]["n"] == 3
     assert target["aggregate_metrics"]["metrics.primary"]["ci95"] is not None

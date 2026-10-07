@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from auto_research.experiment_store.store import ExperimentStore, sync_experiments  # noqa: E402
+from auto_research.evidence_policy import assess_evidence  # noqa: E402
 
 
 OUTPUT = ROOT / "docs" / "assets" / "data" / "experiment-dashboard.json"
@@ -75,13 +76,14 @@ def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[
     diagnostics = diagnostics if isinstance(diagnostics, dict) else {}
     fidelity = str(diagnostics.get("fidelity", payload.get("fidelity", "")))
     tier = str(protocol.get("tier", payload.get("evaluation_tier", "")))
-    formal = protocol.get("formal_comparison")
+    assessment = assess_evidence(payload)
+    formal = assessment["formal_comparison"]
     training = payload.get("training", {})
     training = training if isinstance(training, dict) else {}
     dataset = payload.get("dataset", "")
     if isinstance(dataset, dict):
         dataset = dataset.get("id", dataset.get("name", ""))
-    diagnostic_only = (
+    diagnostic_only = assessment["diagnostic_only"] or (
         any(section.get("diagnostic_only") is True or section.get("promotion_eligible") is False
             for section in (payload, diagnostics, training, protocol))
         or str(dataset) in {"arithmetic-smoke", "gsm8k-candidate"}
@@ -108,7 +110,8 @@ def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[
     return {
         "tier": tier or "unclassified",
         "formal_comparison": formal,
-        "claim_policy": str(protocol.get("claim_policy", "")),
+        "claim_policy": assessment["claim_policy"],
+        "eligibility_reasons": assessment["eligibility_reasons"],
         "diagnostic_only": diagnostic_only,
         "capability_metrics_saturated": saturated,
         "episodes": diagnostics.get("episodes", diagnostics.get("episodes_per_seed")),

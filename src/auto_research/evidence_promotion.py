@@ -11,6 +11,10 @@ from .post_training import PostTrainingConfig, PostTrainingRunner
 from .reproductions import get_adapter
 from .reproductions.execution import run_with_budget
 from .reproductions.schema import aggregate_seed_metrics, dataset_fingerprint
+from .reproductions.schema import enrich_result
+from .experiment_contract import ExperimentSpec, canonical, source_revision
+from .evidence_policy import assess_evidence
+from .runtime import exclusive_file_lock
 
 
 @dataclass(frozen=True)
@@ -30,6 +34,8 @@ class EvidencePromotionConfig:
     def validate(self) -> None:
         if len(self.seeds) < 3:
             raise ValueError("formal evidence promotion requires at least three seeds")
+        if len(set(self.seeds)) != len(self.seeds):
+            raise ValueError("seeds must be unique")
         if not (self.adapters or self.post_training or self.agent_methods):
             raise ValueError("at least one promotion target is required")
         if min(self.post_steps, self.agent_episodes) < 1:
@@ -44,11 +50,23 @@ class EvidencePromotionRunner:
         self.config = config
 
     def run(self) -> tuple[dict[str, Any], Path]:
+        with exclusive_file_lock(self.config.output_dir / "state.json"):
+            return self._run()
+
+    def _run(self) -> tuple[dict[str, Any], Path]:
         config = self.config
         run_dir = config.output_dir
         run_dir.mkdir(parents=True, exist_ok=True)
         state_path = run_dir / "state.json"
         state = _read_state(state_path)
+        spec = ExperimentSpec(
+            {key: value for key, value in canonical(config).items()
+             if key not in {"output_dir", "retry_failed"}},
+            {"dataset": dataset_fingerprint(config.dataset_dir)}, source_revision(),
+        )
+        if state["runs"]:
+            spec.require_match(state.get("experiment_spec", {}))
+        state["experiment_spec"] = spec.to_dict()
         targets = [
             *(("reproduction", key) for key in config.adapters),
             *(("post-training", key) for key in config.post_training),
@@ -98,7 +116,9 @@ class EvidencePromotionRunner:
                 adapter, config.dataset_dir, seed, config.budget,
                 timeout_override=config.budget_seconds,
             )
-            return {"seed": seed, "metrics": result}
+            return {"seed": seed, **enrich_result(
+                adapter, result, seeds=(seed,), dataset_dir=config.dataset_dir, budget=config.budget,
+            )}
         if family == "post-training":
             result, _ = PostTrainingRunner(PostTrainingConfig(
                 algorithm=name, dataset="arithmetic-smoke",
@@ -157,6 +177,17 @@ def _summarize(config, state, targets):
             for seed, record in zip(config.seeds, records)
             if record.get("status") != "completed"
         ]
+        first = successes[0] if successes else {}
+        seed_payload = {
+            "seed_results": successes,
+            "evaluation_protocol": first.get("evaluation_protocol", {}),
+            "comparison_contract": first.get("comparison_contract", {}),
+        }
+        assessment = assess_evidence(seed_payload, seeds=[row["seed"] for row in successes])
+        if failures:
+            assessment["formal_comparison"] = False
+            assessment["eligibility_reasons"].append("requested_seed_failed")
+            assessment["claim_policy"] = "incomplete comparison; requested seed failed"
         summaries[f"{family}:{name}"] = {
             "family": family,
             "name": name,
@@ -179,23 +210,19 @@ def _summarize(config, state, targets):
             ],
             "seed_results": successes,
             "aggregate_metrics": aggregate_seed_metrics(successes) if successes else {},
-            "formal_comparison": len(successes) >= 3,
-            "claim_policy": (
-                "formal three-seed comparison with 95% confidence interval"
-                if len(successes) >= 3 else
-                "incomplete promotion; do not claim a stable improvement"
-            ),
+            **assessment,
         }
     return {
         "schema_version": 2,
         "manifest_ref": "docs/research-roadmap.md#auto-research--evolve",
         "config": {**asdict(config), "dataset_dir": str(config.dataset_dir), "output_dir": str(config.output_dir)},
+        "experiment_spec": state.get("experiment_spec", {}),
         "provenance": {
             "created_at": datetime.now(timezone.utc).isoformat(),
             "dataset_fingerprint": dataset_fingerprint(config.dataset_dir),
         },
         "evaluation_protocol": {
-            "tier": "l2_public_dataset_and_deterministic_agent_suite",
+            "tier": "mixed_per_target; see targets for actual evidence tier",
             "seeds": list(config.seeds),
             "failure_policy": "retain every failed seed and continue resumably",
             "confidence_interval": "normal 95%; shown only when >=3 seeds complete",
@@ -208,7 +235,8 @@ def _render_report(payload):
     lines = [
         "# 重点方法三 seed 晋级报告", "",
         "本报告统一保留每个 seed 的成功、失败、均值、标准差与 95% 置信区间。",
-        "少于三个成功 seed 的目标不得用于稳定提升声明。", "",
+        "少于三个成功 seed 的目标不得用于稳定提升声明；诊断结果无论 seed 数量多少均不得晋级。",
+        "正式比较还要求可核验的数据/切分版本、基线、代码版本与 test 隔离协议。", "",
         "| 目标 | 成功 seeds | 当前失败 seeds | 历史失败尝试 | 正式比较 |",
         "|---|---|---|---:|---|",
     ]
@@ -220,6 +248,8 @@ def _render_report(payload):
             f"{sum(len(row['attempts']) for row in result['previous_failed_attempts'])} | "
             f"{'是' if result['formal_comparison'] else '否'} |"
         )
+        if result["eligibility_reasons"]:
+            lines.append(f"\n`{key}` 未满足条件：" + ", ".join(result["eligibility_reasons"]) + "\n")
     lines += [
         "", "## 复现", "",
         "```bash",
