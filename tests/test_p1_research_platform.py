@@ -119,11 +119,11 @@ def test_evolve_records_a_paired_seed_decision_when_evaluator_exposes_seed_score
     genome = Genome()
     parent = EvolutionTrial(
         "g0", 0, None, genome, {"fitness": .1},
-        {"fitness_by_seed": [.1] * 8}, (), "baseline", 0.0,
+        {"fitness_by_seed": [.1] * 8, "seeds": list(range(8))}, (), "baseline", 0.0,
     )
     child = EvolutionTrial(
         "g1", 1, "g0", genome, {"fitness": .2},
-        {"fitness_by_seed": [.2] * 8}, (), "candidate", 0.0,
+        {"fitness_by_seed": [.2] * 8, "seeds": list(range(8))}, (), "candidate", 0.0,
     )
     decision = _paired_decision(
         parent, child,

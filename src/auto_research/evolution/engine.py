@@ -292,6 +292,12 @@ def _budget_key(config):
 def _paired_decision(parent, child, config):
     baseline = parent.training.get("fitness_by_seed", ())
     candidate = child.training.get("fitness_by_seed", ())
+    parent_seeds = parent.training.get("seeds", config.seeds)
+    child_seeds = child.training.get("seeds", config.seeds)
+    if (tuple(parent_seeds) != tuple(child_seeds) or len(parent_seeds) != len(baseline)
+            or not selection_eligible(parent.to_dict(), parent_seeds, 1)
+            or not selection_eligible(child.to_dict(), child_seeds, 1)):
+        return None
     if child.status != "completed" or not baseline or len(baseline) != len(candidate):
         return None
     return decide_experiment(

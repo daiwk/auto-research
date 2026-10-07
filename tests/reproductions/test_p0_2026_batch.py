@@ -29,7 +29,7 @@ def test_nova_verification_and_evorec_memory_change_next_generation():
     assert memory["forbidden_directions"][0]["architecture"] == "rankmixer_longer"
     assert methodology_order(
         ["rankmixer_dense", "rankmixer_longer", "rankmixer_unimixer"], memory
-    ) == ["rankmixer_unimixer", "rankmixer_dense"]
+    ) == ["rankmixer_unimixer", "rankmixer_dense", "rankmixer_longer"]
 
 
 def test_p0_recommendation_adapters_keep_online_evidence():

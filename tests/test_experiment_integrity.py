@@ -227,3 +227,23 @@ def test_nonfinite_results_cannot_win_or_become_formal():
     payload["metrics"]["accuracy"] = float("nan")
     assert not selection_eligible(payload, (42,), 1)
     assert not assess_evidence(payload, seeds=(42, 43, 44))["formal_comparison"]
+
+
+def test_legacy_research_memory_does_not_blacklist_architecture():
+    from auto_research.evolution.research_memory import methodology_order, verify_trial
+    memory = {"forbidden_directions": [{"architecture": "gqa", "error": "network"}],
+              "successful_skills": [{"architecture": "not-in-current-whitelist"}]}
+    assert set(methodology_order(["gqa", "dense"], memory)) == {"gqa", "dense"}
+    trial = EvolutionTrial("x", 1, "b", Genome(), {"fitness": 1.0},
+                           {"diagnostic_only": True}, (), "", 0)
+    assert not verify_trial(trial)["passed"]
+
+
+def test_failed_checkpoint_baseline_writes_a_readable_failure(tmp_path):
+    from auto_research.evolution.engine import _failed_trial
+    from auto_research.evolution.report import write_evolution_artifacts
+    config = EvolutionConfig("reasoning-checkpoint", "gsm8k")
+    trial = _failed_trial(("g0", 0, None, Genome(), (), "baseline"), "TimeoutError")
+    result = EvolutionResult("failure", config, trials=[trial], champion_id="g0")
+    write_evolution_artifacts(result, tmp_path)
+    assert "TimeoutError" in (tmp_path / "report.md").read_text()

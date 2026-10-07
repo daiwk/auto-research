@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+from ..evidence_policy import diagnostic_reasons
 
 
 def verify_trial(trial, parent=None):
@@ -15,6 +16,7 @@ def verify_trial(trial, parent=None):
         "L2_execution": trial.status == "completed",
         "L3_numerical": bool(numeric) and all(math.isfinite(float(value)) for value in numeric),
         "L4_offline": trial.fitness > -1e8,
+        "capability_eligible": not diagnostic_reasons(trial.to_dict()),
     }
     if parent is not None:
         gates["improves_parent"] = trial.fitness > parent.fitness
@@ -71,6 +73,8 @@ def methodology_order(architectures, memory):
     }
     ordered = []
     for name in [*preferred, *architectures]:
-        if name not in ordered and name not in forbidden:
+        if name in architectures and name not in ordered and name not in forbidden:
             ordered.append(name)
-    return ordered or list(architectures)
+    # Historical architecture failures are advisory, never a method-wide veto.
+    ordered.extend(name for name in architectures if name not in ordered)
+    return ordered
