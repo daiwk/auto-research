@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import math
-import hashlib
 import importlib.metadata
-from functools import lru_cache
 import platform
 import statistics
 import subprocess
@@ -13,6 +11,8 @@ from typing import Any
 
 from .base import ReproductionAdapter
 from .manifest import PaperManifest
+from ..evidence_policy import assess_evidence
+from ..experiment_contract import file_manifest
 
 
 RESULT_SCHEMA_VERSION = 2
@@ -48,19 +48,8 @@ def _commit_sha() -> str | None:
         return "unknown-working-tree"
 
 
-@lru_cache(maxsize=16)
 def dataset_fingerprint(path: Path) -> str:
-    """Cheap content-manifest fingerprint without reading multi-GB datasets."""
-    digest = hashlib.sha256()
-    if not path.exists():
-        return "missing"
-    files = sorted(item for item in path.rglob("*") if item.is_file())
-    for item in files[:10_000]:
-        stat = item.stat()
-        digest.update(str(item.relative_to(path)).encode())
-        digest.update(f":{stat.st_size}:{stat.st_mtime_ns}".encode())
-    digest.update(f":files={len(files)}".encode())
-    return digest.hexdigest()
+    return file_manifest(path)
 
 
 def _package_versions() -> dict[str, str]:
@@ -123,17 +112,24 @@ def enrich_result(
         "packages": _package_versions(),
     }
     enriched["evaluation_protocol"] = {
-        "tier": adapter.evaluation_tier.value,
-        "tier_label": adapter.evaluation_tier.label,
+        **dict(result.get("evaluation_protocol") or {}),
+        "tier": (result.get("evaluation_protocol") or {}).get("tier", adapter.evaluation_tier.value),
+        "tier_label": (result.get("evaluation_protocol") or {}).get("tier_label", adapter.evaluation_tier.label),
         "seeds": list(seeds),
         "budget": budget,
-        "formal_comparison": seed_results is not None and len(seed_results) >= 3,
-        "claim_policy": (
-            "formal multi-seed comparison" if seed_results is not None and len(seed_results) >= 3
-            else "single/few-seed smoke result; do not claim a stable improvement"
-        ),
     }
     if seed_results is not None:
-        enriched["seed_results"] = seed_results
+        enriched["seed_results"] = [dict(row, seed=row.get("seed", seed))
+                                    for row, seed in zip(seed_results, seeds)]
+        if len(seed_results) != len(seeds):
+            raise ValueError("seed_results must match requested seeds")
         enriched["aggregate_metrics"] = aggregate_seed_metrics(seed_results)
+    assessment = assess_evidence(enriched, seeds=seeds)
+    if seed_results is None:
+        assessment["formal_comparison"] = False
+        assessment["eligibility_reasons"].append("seed_results_missing")
+        assessment["claim_policy"] = "single/few-seed smoke result; do not claim a stable improvement"
+    enriched["evaluation_protocol"].update(assessment)
+    if assessment["diagnostic_only"]:
+        enriched["evaluation_protocol"]["tier_label"] = "L1 机制诊断（非正式能力比较）"
     return enriched

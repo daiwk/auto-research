@@ -122,6 +122,11 @@ class ResearchRunner:
             "dataset_dir": str((self.project_dir / config.dataset_dir).resolve()),
             "experiment_revision": config.experiment_revision,
         }
+        from .experiment_contract import file_manifest, source_revision
+        cache_context.update({
+            "dataset_content_revision": file_manifest((self.project_dir / config.dataset_dir).resolve()),
+            "implementation_revision": source_revision(),
+        })
         cache = None
         if not config.experiment_command or config.experiment_revision:
             cache = TrialCache((self.project_dir / config.cache_dir).resolve())

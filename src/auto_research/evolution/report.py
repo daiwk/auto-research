@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import html
 from pathlib import Path
 
 from .models import EvolutionResult
@@ -27,6 +28,12 @@ def write_evolution_artifacts(result: EvolutionResult, run_dir: Path) -> None:
     temporary = run_dir / "result.json.tmp"
     temporary.write_text(json.dumps(result.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     temporary.replace(result_path)
+    if not result.trials or result.trials[0].status != "completed":
+        error = result.trials[0].error if result.trials else "baseline not completed"
+        report = f"# 实验未完成\n\n基线执行失败，不能选择冠军。原始轨迹已保存。\n\n{error}\n"
+        (run_dir / "report.md").write_text(report, encoding="utf-8")
+        (run_dir / "index.html").write_text(f"<html lang='zh'><meta charset='utf-8'><pre>{html.escape(report)}</pre></html>", encoding="utf-8")
+        return
     (run_dir / "report.md").write_text(render_evolution_report(result), encoding="utf-8")
     (run_dir / "index.html").write_text(render_dashboard(result), encoding="utf-8")
 

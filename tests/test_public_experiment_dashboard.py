@@ -62,7 +62,10 @@ def test_agent_mechanism_results_are_not_presented_as_capability_scores():
     ]
     assert len(capabilities) >= 7
     assert all(not item["evidence"]["diagnostic_only"] for item in capabilities)
-    assert all(item["evidence"]["formal_comparison"] is True for item in capabilities)
+    # Historical capability measurements remain available, but an old boolean
+    # is not a substitute for the now-required versioned comparison contract.
+    assert all(item["evidence"]["formal_comparison"] is False for item in capabilities)
+    assert all("comparison_contract_missing" in item["evidence"]["eligibility_reasons"] for item in capabilities)
     assert all(item["dataset"] == "toolroute-l2.1-v1" for item in capabilities)
     assert any(item["method"] == "agent-evolve" for item in capabilities)
 

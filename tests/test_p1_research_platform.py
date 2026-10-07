@@ -119,11 +119,11 @@ def test_evolve_records_a_paired_seed_decision_when_evaluator_exposes_seed_score
     genome = Genome()
     parent = EvolutionTrial(
         "g0", 0, None, genome, {"fitness": .1},
-        {"fitness_by_seed": [.1] * 8}, (), "baseline", 0.0,
+        {"fitness_by_seed": [.1] * 8, "seeds": list(range(8))}, (), "baseline", 0.0,
     )
     child = EvolutionTrial(
         "g1", 1, "g0", genome, {"fitness": .2},
-        {"fitness_by_seed": [.2] * 8}, (), "candidate", 0.0,
+        {"fitness_by_seed": [.2] * 8, "seeds": list(range(8))}, (), "candidate", 0.0,
     )
     decision = _paired_decision(
         parent, child,
@@ -138,16 +138,19 @@ def test_negative_memory_is_exact_context_and_budget_sensitive(tmp_path):
         "recommendation", "rankmixer", "movielens-1m",
         "recommendation.movielens1m.v2", "rankmixer_longer", "steps=100",
         (42, 43, 44), "no_improvement", "delta <= 0", -.01,
+        "code-data", "genome", "reference",
     ))
     skip, row = store.should_skip(
         domain="recommendation", model="rankmixer", dataset="movielens-1m",
         protocol_id="recommendation.movielens1m.v2", method="rankmixer_longer",
         budget="steps=100", seeds=(42, 43, 44),
+        experiment_fingerprint="code-data", genome_fingerprint="genome", reference_fingerprint="reference",
     )
     assert skip and row["category"] == "no_improvement"
     retry, _ = store.should_skip(
         domain="recommendation", model="rankmixer", dataset="movielens-1m",
         protocol_id="recommendation.movielens1m.v2", method="rankmixer_longer",
         budget="steps=300", seeds=(42, 43, 44),
+        experiment_fingerprint="code-data", genome_fingerprint="genome", reference_fingerprint="reference",
     )
     assert not retry

@@ -39,7 +39,8 @@ def test_result_schema_records_claim_policy_and_provenance(tmp_path):
         seed_results=[{"score": 1.0}, {"score": 2.0}, {"score": 3.0}],
     )
     assert payload["schema_version"] == 2
-    assert payload["evaluation_protocol"]["formal_comparison"] is True
+    assert payload["evaluation_protocol"]["formal_comparison"] is False
+    assert "comparison_contract_missing" in payload["evaluation_protocol"]["eligibility_reasons"]
     assert payload["provenance"]["code_commit"]
     stats = aggregate_seed_metrics([
         {"score": 1.0}, {"score": 2.0}, {"score": 3.0},

@@ -72,6 +72,8 @@ class EvolutionConfig:
             raise ValueError("generations, population and steps must be positive")
         if not self.seeds:
             raise ValueError("at least one seed is required")
+        if len(set(self.seeds)) != len(self.seeds):
+            raise ValueError("seeds must be unique")
         if self.cpu_threads is not None and self.cpu_threads < 1:
             raise ValueError("cpu threads must be positive")
         if min(
@@ -235,6 +237,8 @@ class EvolutionResult:
     dataset_summary: dict[str, Any] = field(default_factory=dict)
     verification_records: list[dict[str, Any]] = field(default_factory=list)
     research_memory: dict[str, Any] = field(default_factory=dict)
+    experiment_spec: dict[str, Any] = field(default_factory=dict)
+    pending_generation: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -269,6 +273,8 @@ class EvolutionResult:
             "dataset_summary": self.dataset_summary,
             "verification_records": self.verification_records,
             "research_memory": self.research_memory,
+            "experiment_spec": self.experiment_spec,
+            "pending_generation": self.pending_generation,
         }
 
     @classmethod
@@ -293,7 +299,11 @@ class EvolutionResult:
         raw_config["checkpoint_evidence"] = tuple(
             Path(value) for value in raw_config.get("checkpoint_evidence", ())
         )
-        loaded_config = config or EvolutionConfig(**raw_config)
+        saved_config = EvolutionConfig(**raw_config)
+        if config is not None:
+            from ..experiment_contract import validate_resume_config
+            validate_resume_config(saved_config, config)
+        loaded_config = config or saved_config
         result = cls(
             payload["run_id"], loaded_config,
             papers=[PaperInspiration(**item) for item in payload.get("papers", [])],
@@ -310,5 +320,7 @@ class EvolutionResult:
             dataset_summary=payload.get("dataset_summary", {}),
             verification_records=payload.get("verification_records", []),
             research_memory=payload.get("research_memory", {}),
+            experiment_spec=payload.get("experiment_spec", {}),
+            pending_generation=payload.get("pending_generation", {}),
         )
         return result

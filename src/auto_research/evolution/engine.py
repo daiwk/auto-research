@@ -2,11 +2,9 @@ from __future__ import annotations
 
 import datetime as dt
 import json
-from concurrent.futures import (
-    FIRST_COMPLETED, ThreadPoolExecutor, wait,
-)
 import multiprocessing as mp
-import queue
+import os
+import signal
 import random
 import time
 from pathlib import Path
@@ -24,8 +22,10 @@ from .statistics import decide_experiment
 from .checkpoint_evidence import (
     evidence_summary, load_checkpoint_evidence, promoted_operators,
 )
-from ..runtime import configure_runtime
+from ..runtime import configure_runtime, device_for, exclusive_file_lock
 from ..negative_results import NegativeResult, NegativeResultStore, classify_negative
+from ..experiment_contract import evolution_spec, fingerprint
+from ..evidence_policy import selection_eligible
 
 
 class ModelEvolutionEngine:
@@ -36,6 +36,12 @@ class ModelEvolutionEngine:
         self.evaluator = evaluator
 
     def run(self) -> tuple[EvolutionResult, Path]:
+        if self.config.resume_dir:
+            with exclusive_file_lock(self.config.resume_dir / "result.json"):
+                return self._run()
+        return self._run()
+
+    def _run(self) -> tuple[EvolutionResult, Path]:
         config = self.config
         configure_runtime(None if config.device == "auto" else config.device, config.cpu_threads)
         provider = get_provider(config.model)
@@ -44,6 +50,7 @@ class ModelEvolutionEngine:
             config.resume_dir.resolve() if config.resume_dir
             else (self.project_dir / config.output_dir / f"{config.model}-{run_id}").resolve()
         )
+        self.run_dir = run_dir
         domain = provider.search_domain
         query = config.query or f"{config.model} {config.direction} {domain} efficient architecture"
         track = provider.track
@@ -74,6 +81,13 @@ class ModelEvolutionEngine:
         if hasattr(evaluator, "bind_run_directory"):
             evaluator.bind_run_directory(run_dir)
         result.dataset_summary = evaluator.summary() if hasattr(evaluator, "summary") else {}
+        resolved_device = _resolved_device(config)
+        self.resolved_device = resolved_device
+        result.dataset_summary["execution_device"] = resolved_device
+        spec = evolution_spec(config, self.project_dir, result.dataset_summary)
+        if config.resume_dir:
+            spec.require_match(result.experiment_spec)
+        result.experiment_spec = spec.to_dict()
         if (
             result.dataset_summary.get("diagnostic_only", False)
             or result.dataset_summary.get("promotion_eligible") is False
@@ -90,14 +104,19 @@ class ModelEvolutionEngine:
                 trial for trial in result.trials if trial.trial_id == result.champion_id
             )
         else:
-            baseline = evaluator.evaluate("g0-t0", 0, None, baseline_genome, (), f"冻结的 {config.model} 初始基线")
+            baseline = next(self._run_generation(evaluator, [
+                ("g0-t0", 0, None, baseline_genome, (), f"冻结的 {config.model} 初始基线")
+            ]))
             result.trials.append(baseline)
             result.verification_records.append(verify_trial(baseline))
             result.champion_id = baseline.trial_id
             champion = baseline
             write_evolution_artifacts(result, run_dir)
+        if baseline.status != "completed" or not selection_eligible(
+            baseline.to_dict(), baseline.training.get("seeds", config.seeds), config.promotion_min_seeds,
+        ):
+            raise RuntimeError(f"Baseline is not eligible; results retained: {baseline.error or 'diagnostic/insufficient seeds'}")
 
-        rng = random.Random(config.seeds[0])
         seen = {_fingerprint(trial.genome) for trial in result.trials}
         architectures = allowed_architectures(config.model, config.direction, papers)
         proposal_fn = getattr(evaluator, "propose", propose)
@@ -115,13 +134,9 @@ class ModelEvolutionEngine:
                 checkpoint_records
             )
         negative_store = NegativeResultStore(
-            (config.negative_memory_path or (self.project_dir / ".auto-research/negative-results.json")).resolve()
+            (self.project_dir / (config.negative_memory_path or Path(".auto-research/negative-results.json"))).resolve()
         )
         protocol_id = config.evaluation_protocol_id or _default_protocol(config)
-        architectures = [name for name in architectures if not negative_store.should_skip(
-            domain=domain, model=config.model, dataset=config.dataset,
-            protocol_id=protocol_id, method=name, budget=_budget_key(config), seeds=config.seeds,
-        )[0]] or architectures
         if config.model == "post-training" and config.dataset.endswith("-generate"):
             generation_algorithms = {"ipo", "simpo", "luspo", "coba-rl"}
             architectures = [
@@ -133,13 +148,21 @@ class ModelEvolutionEngine:
         start_generation = 1 + max((round_["generation"] for round_ in result.rounds), default=0)
         for generation in range(start_generation, config.generations + 1):
             parent = champion
+            rng = random.Random(f"{config.seeds[0]}:{generation}")
             architectures = methodology_order(architectures, result.research_memory)
             specs = []
             children = [
                 trial for trial in result.trials if trial.generation == generation
             ]
             existing_ids = {trial.trial_id for trial in children}
-            for index in range(config.population):
+            pending = result.pending_generation
+            if pending:
+                if pending["generation"] != generation or pending["parent_id"] != parent.trial_id:
+                    raise ValueError("Pending generation does not match saved parent")
+                specs = [(row[0], row[1], row[2], Genome(**row[3]), tuple(row[4]), row[5])
+                         for row in pending["specs"] if row[0] not in existing_ids]
+                seen.update(_fingerprint(row[3]) for row in specs)
+            for index in range(0 if pending else config.population):
                 trial_id = f"g{generation}-t{index + 1}"
                 if trial_id in existing_ids:
                     continue
@@ -151,13 +174,30 @@ class ModelEvolutionEngine:
                 if _fingerprint(genome) in seen:
                     continue
                 seen.add(_fingerprint(genome))
+                skip, _ = negative_store.should_skip(
+                    domain=domain, model=config.model, dataset=config.dataset,
+                    protocol_id=protocol_id, method=genome.architecture,
+                    budget=_budget_key(config), seeds=config.seeds,
+                    experiment_fingerprint=spec.fingerprint,
+                    genome_fingerprint=fingerprint(genome),
+                    reference_fingerprint=fingerprint(parent.genome),
+                )
+                if skip:
+                    continue
                 paper_ids = _paper_ids(genome, papers)
                 specs.append((trial_id, generation, parent.trial_id, genome, paper_ids, rationale))
+            if not pending:
+                result.pending_generation = {
+                    "generation": generation, "parent_id": parent.trial_id,
+                    "specs": [(row[0], row[1], row[2], row[3].to_dict(), row[4], row[5]) for row in specs],
+                }
+                write_evolution_artifacts(result, run_dir)
             for trial in self._run_generation(evaluator, specs):
                 children.append(trial)
                 result.trials.append(trial)
                 result.verification_records.append(verify_trial(trial, parent))
                 write_evolution_artifacts(result, run_dir)
+            children.sort(key=lambda trial: trial.trial_id)
             completed = [trial for trial in children if trial.status == "completed"]
             champion = max(
                 [parent, *completed], key=lambda trial: _selection_score(trial, config)
@@ -187,40 +227,37 @@ class ModelEvolutionEngine:
                         domain, config.model, config.dataset, protocol_id,
                         child.genome.architecture, _budget_key(config), config.seeds,
                         category, child.error or f"fitness delta {delta:.8g}", delta,
+                        spec.fingerprint, fingerprint(child.genome), fingerprint(parent.genome),
                     )
                     negative_store.record(negative)
                     result.research_memory.setdefault("negative_results", []).append(
                         negative.to_dict()
                     )
             result.rounds.append(round_record(generation, parent, children, champion))
+            result.pending_generation = {}
             write_evolution_artifacts(result, run_dir)
 
-        result.baseline_test = evaluator.test(baseline_genome)
-        result.champion_test = evaluator.test(champion.genome)
+        for field, genome in (("baseline_test", baseline_genome), ("champion_test", champion.genome)):
+            metrics = next(_run_isolated_trials(
+                config, self.project_dir, [(field, 0, None, genome, (), "final test")],
+                1, config.trial_timeout_seconds, evaluator=self.evaluator, mode="test",
+                run_dir=run_dir, resolved_device=resolved_device,
+            ))
+            if not isinstance(metrics, dict):
+                write_evolution_artifacts(result, run_dir)
+                raise RuntimeError(f"Final test failed: {metrics.error}")
+            setattr(result, field, metrics)
         write_evolution_artifacts(result, run_dir)
         return result, run_dir
 
     def _run_generation(self, evaluator, specs):
-        workers = _effective_workers(self.config)
-        if workers == 1:
-            for spec in specs:
-                yield _safe_evaluate(evaluator, spec, self.config.retries)
-            return
-        if self.evaluator is not None:
-            pool = ThreadPoolExecutor(max_workers=workers)
-            yield from _collect_with_deadlines(
-                [
-                    (spec, pool.submit(
-                        _safe_evaluate, evaluator, spec, self.config.retries
-                    ))
-                    for spec in specs
-                ], self.config.trial_timeout_seconds,
-            )
-            pool.shutdown(wait=False, cancel_futures=True)
-            return
+        resolved = getattr(self, "resolved_device", None) or _resolved_device(self.config)
+        workers = _effective_workers(self.config, resolved)
         yield from _run_isolated_trials(
             self.config, self.project_dir, specs, workers,
             self.config.trial_timeout_seconds,
+            evaluator=self.evaluator, resolved_device=resolved,
+            run_dir=getattr(self, "run_dir", None),
         )
 
 
@@ -255,6 +292,12 @@ def _budget_key(config):
 def _paired_decision(parent, child, config):
     baseline = parent.training.get("fitness_by_seed", ())
     candidate = child.training.get("fitness_by_seed", ())
+    parent_seeds = parent.training.get("seeds", config.seeds)
+    child_seeds = child.training.get("seeds", config.seeds)
+    if (tuple(parent_seeds) != tuple(child_seeds) or len(parent_seeds) != len(baseline)
+            or not selection_eligible(parent.to_dict(), parent_seeds, 1)
+            or not selection_eligible(child.to_dict(), child_seeds, 1)):
+        return None
     if child.status != "completed" or not baseline or len(baseline) != len(candidate):
         return None
     return decide_experiment(
@@ -263,70 +306,97 @@ def _paired_decision(parent, child, config):
     )
 
 
-def _evaluate_worker(config, project_dir, spec):
-    return _safe_evaluate(_make_evaluator(config, project_dir), spec, config.retries)
-
-
-def _isolated_evaluate_entry(config, project_dir, spec, output):
+def _isolated_evaluate_entry(config, project_dir, spec, output, evaluator, mode, run_dir, resolved_device):
     try:
-        output.put(("ok", _evaluate_worker(config, project_dir, spec)))
+        if os.name == "posix":
+            os.setsid()
+        configure_runtime(resolved_device, config.cpu_threads)
+        evaluator = evaluator or _make_evaluator(config, project_dir)
+        if run_dir is not None and hasattr(evaluator, "bind_run_directory"):
+            evaluator.bind_run_directory(run_dir)
+        if mode == "test":
+            result = evaluator.test(spec[3])
+        else:
+            result = _safe_evaluate(evaluator, spec, config.retries)
+        output.send(("ok", result))
     except BaseException as exc:  # serialize failures across the process boundary
-        output.put(("error", f"{type(exc).__name__}: {exc}"))
+        output.send(("error", f"{type(exc).__name__}: {exc}"))
+    finally:
+        output.close()
 
 
-def _run_isolated_trials(config, project_dir, specs, workers, timeout_seconds):
+def _stop_process(process):
+    # Reap spawned descendants as well as the trial process on supported hosts.
+    if os.name == "posix" and process.pid:
+        try:
+            os.killpg(process.pid, signal.SIGTERM)
+        except (ProcessLookupError, PermissionError):
+            pass
+    if process.is_alive():
+        process.terminate()
+    process.join(1)
+    if os.name == "posix" and process.pid:
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass
+    if process.is_alive():
+        process.kill()
+    process.join()
+
+
+def _run_isolated_trials(config, project_dir, specs, workers, timeout_seconds, *,
+                         evaluator=None, mode="evaluate", run_dir=None, resolved_device=None):
     """Bounded process scheduler whose timeouts terminate actual trial workers."""
 
     context = mp.get_context("spawn")
     queued = list(specs)
     active = {}
-    while queued or active:
-        while queued and len(active) < workers:
-            spec = queued.pop(0)
-            output = context.Queue(maxsize=1)
-            process = context.Process(
-                target=_isolated_evaluate_entry,
-                args=(config, project_dir, spec, output),
-                name=f"evolve-{spec[0]}",
-            )
-            process.start()
-            active[process.pid] = (process, output, spec, time.monotonic())
-
-        completed = []
-        now = time.monotonic()
-        for pid, (process, output, spec, started) in tuple(active.items()):
-            if process.is_alive() and now - started < timeout_seconds:
-                continue
-            if process.is_alive():
-                process.terminate()
-                process.join(5)
-                if process.is_alive():
-                    process.kill()
-                    process.join()
-                yield _failed_trial(
-                    spec,
-                    f"TimeoutError: trial exceeded hard limit of {timeout_seconds}s",
-                    now - started,
+    try:
+        while queued or active:
+            while queued and len(active) < workers:
+                spec = queued.pop(0)
+                output, sender = context.Pipe(duplex=False)
+                process = context.Process(
+                    target=_isolated_evaluate_entry,
+                    args=(config, project_dir, spec, sender, evaluator, mode, run_dir, resolved_device),
+                    name=f"evolve-{spec[0]}",
                 )
-            else:
-                process.join()
                 try:
-                    kind, payload = output.get(timeout=1)
-                except queue.Empty:
-                    yield _failed_trial(
-                        spec, f"WorkerExitError: process exited with {process.exitcode}",
-                        now - started,
-                    )
+                    process.start()
+                except Exception:
+                    output.close()
+                    sender.close()
+                    raise
+                sender.close()
+                active[process.pid] = (process, output, spec, time.monotonic())
+
+            now = time.monotonic()
+            progressed = False
+            for pid, (process, output, spec, started) in tuple(active.items()):
+                if output.poll():
+                    try:
+                        kind, payload = output.recv()
+                    except EOFError:
+                        kind, payload = "error", f"WorkerExitError: process exited with {process.exitcode}"
+                    result = payload if kind == "ok" else _failed_trial(spec, payload, now - started)
+                elif now - started >= timeout_seconds:
+                    result = _failed_trial(spec, f"TimeoutError: trial exceeded hard limit of {timeout_seconds}s", now - started)
+                elif not process.is_alive():
+                    result = _failed_trial(spec, f"WorkerExitError: process exited with {process.exitcode}", now - started)
                 else:
-                    yield payload if kind == "ok" else _failed_trial(
-                        spec, payload, now - started,
-                    )
+                    continue
+                _stop_process(process)
+                output.close()
+                active.pop(pid)
+                progressed = True
+                yield result
+            if active and not progressed:
+                time.sleep(0.02)
+    finally:
+        for process, output, _, _ in active.values():
+            _stop_process(process)
             output.close()
-            completed.append(pid)
-        for pid in completed:
-            active.pop(pid)
-        if active and not completed:
-            time.sleep(0.05)
 
 
 def _safe_evaluate(evaluator, spec, retries=0):
@@ -353,56 +423,41 @@ def _failed_trial(spec, error, duration_seconds=0.0):
     )
 
 
-def _effective_workers(config: EvolutionConfig) -> int:
-    if config.device.startswith("cuda"):
+def _resolved_device(config):
+    if config.device == "cpu":
+        return "cpu"
+    try:
+        import torch
+    except ImportError:
+        if config.device not in {"auto", "cpu"}:
+            raise RuntimeError("Accelerator execution requires PyTorch") from None
+        return "cpu"
+    return str(device_for(torch, None if config.device == "auto" else config.device))
+
+
+def _effective_workers(config: EvolutionConfig, resolved_device=None) -> int:
+    resolved_device = resolved_device or _resolved_device(config)
+    if resolved_device.startswith("cuda"):
         slots = config.gpu_slots
         if config.gpu_memory_per_trial_mb:
             try:
                 import torch
-                free_bytes, _ = torch.cuda.mem_get_info()
+                free_bytes, _ = torch.cuda.mem_get_info(resolved_device)
                 memory_slots = free_bytes // (config.gpu_memory_per_trial_mb * 1024**2)
-                slots = min(slots, max(1, int(memory_slots)))
+                if memory_slots < 1:
+                    raise ValueError("Insufficient free GPU memory for one trial's declared budget")
+                slots = min(slots, int(memory_slots))
             except (ImportError, RuntimeError):
                 slots = 1
         return max(1, min(config.workers, slots))
     return config.workers
 
 
-def _collect_with_deadlines(submitted, timeout_seconds):
-    """Collect futures with per-trial deadlines and explicit timeout records."""
-
-    pending = {future: (spec, time.monotonic()) for spec, future in submitted}
-    while pending:
-        done, _ = wait(pending, timeout=0.1, return_when=FIRST_COMPLETED)
-        for future in done:
-            pending.pop(future)
-            yield future.result()
-        now = time.monotonic()
-        expired = [
-            future for future, (_, started) in pending.items()
-            if now - started >= timeout_seconds
-        ]
-        for future in expired:
-            spec, started = pending.pop(future)
-            future.cancel()
-            yield _failed_trial(
-                spec,
-                f"TimeoutError: trial exceeded {timeout_seconds}s scheduling deadline",
-                now - started,
-            )
-
-
 def _selection_score(trial, config: EvolutionConfig) -> float:
-    if (
-        trial.status != "completed"
-        or trial.training.get("diagnostic_only", False)
-        or trial.training.get("promotion_eligible") is False
-        or trial.validation.get("diagnostic_only", False)
-    ):
+    seeds = trial.training.get("seeds", config.seeds)
+    if trial.status != "completed" or not selection_eligible(trial.to_dict(), seeds, config.promotion_min_seeds):
         return float("-inf")
-    seed_count = len(trial.training.get("seeds", config.seeds))
-    if seed_count < config.promotion_min_seeds:
-        return -1e30
+    seed_count = len(set(seeds))
     std = float(
         trial.validation.get("fitness_std", trial.validation.get("std", 0.0))
     )

@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from auto_research.reproductions.registry import list_adapters
+from auto_research.evidence_policy import assess_evidence
 
 
 MIGRATION_ID = "historical-metrics-v2-2026-08-09"
@@ -93,7 +94,9 @@ def migrate_payload(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     # Keep an explicit per-artifact comparison declaration authoritative.
     # Multiple seeds improve stability, but do not turn an L1 mechanism
     # diagnostic into a formal capability comparison.
-    protocol.setdefault("formal_comparison", len(seeds) >= 3)
+    protocol.setdefault("formal_comparison", assess_evidence(
+        {**payload, "evaluation_protocol": protocol}, seeds=seeds,
+    )["formal_comparison"])
     protocol.setdefault(
         "claim_policy",
         "formal multi-seed comparison" if protocol["formal_comparison"] else

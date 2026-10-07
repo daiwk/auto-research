@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "adapter_key": "experiment-integrity-runtime",
+  "validated_at": "2026-10-07T04:58:05.125857+00:00",
+  "accelerator": {"vendor": "NVIDIA", "model": "NVIDIA A100-SXM4-80GB"},
+  "command": ["python", "scripts/validate_mra_gpu.py", "--data", "data", "--output", "runs/mra-gpu", "--commit", "5e79612de7444882c84ffcc2e138eb606e603c93"],
+  "dataset": {
+    "name": "MovieLens-100k",
+    "revision": "86b5f7726104a107b7d585c791de9522aed3ab4ccb7098f962c9bdc808db15fd",
+    "source": "https://files.grouplens.org/datasets/movielens/ml-100k.zip",
+    "maximum_users": 128,
+    "maximum_items": 512,
+    "evaluation_users": 64
+  },
+  "checkpoint": {"model_id": "rankmixer-random-initialization", "revision": "seed42"},
+  "result": "passed",
+  "metrics": {
+    "seed": 42,
+    "public_training_trials_completed": 3,
+    "baseline_validation_ndcg": 0.04783759861945079,
+    "baseline_final_loss": 0.6979030768076578,
+    "baseline_test_ndcg": 0.0,
+    "champion_test_ndcg": 0.0,
+    "auto_effective_workers": 1,
+    "slots_1_maximum_cuda_overlap": 1,
+    "slots_1_minimum_parameter_delta": 0.007544690743088722,
+    "slots_1_timeout_reaped": 1,
+    "slots_1_timeout_elapsed_seconds": 12.086819330230355,
+    "slots_2_maximum_cuda_overlap": 2,
+    "slots_2_minimum_parameter_delta": 0.007544690743088722,
+    "slots_2_timeout_reaped": 2,
+    "slots_2_timeout_elapsed_seconds": 12.239002818241715,
+    "verified_cuda_device_resolutions": 19
+  },
+  "provenance": {
+    "commit": "5e79612de7444882c84ffcc2e138eb606e603c93",
+    "source_fingerprint": "434471fe41836af48a0b70139b21eaf16f67b3622f27e16bdc6d755b5e71537d",
+    "artifact_path": "docs/gpu-validations/experiment-integrity-a100-20261007.json"
+  },
+  "boundary": "CUDA runtime and scheduling smoke verification; three training steps and one seed, not a quality comparison"
+}

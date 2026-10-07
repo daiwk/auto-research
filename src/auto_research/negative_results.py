@@ -20,6 +20,9 @@ class NegativeResult:
     category: str
     reason: str
     fitness_delta: float | None = None
+    experiment_fingerprint: str = ""
+    genome_fingerprint: str = ""
+    reference_fingerprint: str = ""
 
     @property
     def context_key(self) -> str:
@@ -44,6 +47,11 @@ class NegativeResultStore:
         return list(json.loads(self.path.read_text(encoding="utf-8")).get("results", []))
 
     def record(self, result: NegativeResult) -> None:
+        from .runtime import exclusive_file_lock
+        with exclusive_file_lock(self.path):
+            self._record(result)
+
+    def _record(self, result: NegativeResult) -> None:
         rows = [item for item in self.rows() if item.get("context_key") != result.context_key]
         rows.append(result.to_dict())
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -52,14 +60,19 @@ class NegativeResultStore:
                                         ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         temporary.replace(self.path)
 
-    def should_skip(self, *, domain, model, dataset, protocol_id, method, budget, seeds):
+    def should_skip(self, *, domain, model, dataset, protocol_id, method, budget, seeds,
+                    experiment_fingerprint="", genome_fingerprint="", reference_fingerprint=""):
+        # Legacy entries remain readable but cannot blacklist an entire method.
+        if not (experiment_fingerprint and genome_fingerprint and reference_fingerprint):
+            return False, None
         probe = NegativeResult(domain, model, dataset, protocol_id, method, budget,
-                               tuple(seeds), "probe", "probe")
+                               tuple(seeds), "probe", "probe", None,
+                               experiment_fingerprint, genome_fingerprint, reference_fingerprint)
         match = next((item for item in self.rows()
                       if item.get("context_key") == probe.context_key), None)
         if not match:
             return False, None
-        permanent = match.get("category") in {"runtime_failure", "numerical_failure",
+        permanent = match.get("category") in {"numerical_failure",
                                                "no_improvement", "objective_conflict"}
         return permanent, match
 
