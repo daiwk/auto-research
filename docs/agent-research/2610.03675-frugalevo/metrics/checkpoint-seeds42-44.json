@@ -1,0 +1,825 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:frugalevo",
+  "method": "frugalevo",
+  "dataset": "Circle Packing n=26",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism_diagnostic",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Real frozen checkpoints, small local task budget; not original paper benchmarks or stable capability improvement."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.03675-frugalevo/metrics/checkpoint-seeds42-44.json",
+    "dataset_fingerprint": "82f7b739110944bf3e8737db303a302a568e7327",
+    "commit": "76d86e286e8b041bbdee0883c636c9695337c566"
+  },
+  "checkpoints": [
+    {
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "token_weight": 2,
+      "cost_unit": "weighted input+output tokens; not USD",
+      "cached_input_tokens": 0,
+      "prefix_kv_cache_implemented": false
+    },
+    {
+      "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "token_weight": 1.0,
+      "cost_unit": "weighted input+output tokens; not USD",
+      "cached_input_tokens": 0,
+      "prefix_kv_cache_implemented": false
+    }
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "method": "weak-iterative",
+      "config": {
+        "budget": 40000.0,
+        "strategies": 3,
+        "retries": 2,
+        "max_calls": 30,
+        "max_tokens": 768,
+        "seed": 42
+      },
+      "spent": 29296.0,
+      "best_score": 2.400000000000001,
+      "ba_auc": 92668.23333333334,
+      "mean_budget_score": 2.3167058333333332,
+      "model_calls": 30,
+      "tokens": 29296,
+      "stage_counts": {
+        "initial": 1,
+        "baseline": 30
+      },
+      "valid_candidates": 17,
+      "evaluated_candidates": 31,
+      "curve": [
+        [
+          0.0,
+          2.166666666666666
+        ],
+        [
+          1033.0,
+          0.0
+        ],
+        [
+          2066.0,
+          0.0
+        ],
+        [
+          3031.0,
+          0.0
+        ],
+        [
+          3738.0,
+          0.0
+        ],
+        [
+          4771.0,
+          0.0
+        ],
+        [
+          5804.0,
+          0.0
+        ],
+        [
+          6837.0,
+          0.0
+        ],
+        [
+          7870.0,
+          0.0
+        ],
+        [
+          8903.0,
+          0.0
+        ],
+        [
+          9936.0,
+          0.0
+        ],
+        [
+          10969.0,
+          0.0
+        ],
+        [
+          12002.0,
+          0.0
+        ],
+        [
+          12917.0,
+          0.0
+        ],
+        [
+          13534.0,
+          0.0
+        ],
+        [
+          14279.0,
+          2.400000000000001
+        ],
+        [
+          15270.0,
+          2.400000000000001
+        ],
+        [
+          16257.0,
+          2.400000000000001
+        ],
+        [
+          17299.0,
+          2.12
+        ],
+        [
+          18290.0,
+          2.400000000000001
+        ],
+        [
+          19280.0,
+          2.400000000000001
+        ],
+        [
+          20275.0,
+          2.400000000000001
+        ],
+        [
+          21266.0,
+          2.400000000000001
+        ],
+        [
+          22255.0,
+          2.400000000000001
+        ],
+        [
+          23249.0,
+          2.400000000000001
+        ],
+        [
+          24241.0,
+          2.400000000000001
+        ],
+        [
+          25289.0,
+          2.3719999999999994
+        ],
+        [
+          26285.0,
+          2.400000000000001
+        ],
+        [
+          27312.0,
+          2.3719999999999994
+        ],
+        [
+          28298.0,
+          2.400000000000001
+        ],
+        [
+          29296.0,
+          2.400000000000001
+        ]
+      ],
+      "archive_cells": [
+        6,
+        5,
+        2,
+        4,
+        5
+      ],
+      "raw_run_sha256": "1cc06fcf0ce03ce2d7e3ad549cb4f5d798ac593623ca38728b88904c3326786d",
+      "best_program_sha256": "1cb835cf446babf05967622ab8c0c1453d0cd4544515952ee82abceed0a2a689"
+    },
+    {
+      "seed": 42,
+      "method": "frugalevo",
+      "config": {
+        "budget": 40000.0,
+        "strategies": 3,
+        "retries": 2,
+        "max_calls": 30,
+        "max_tokens": 768,
+        "seed": 42
+      },
+      "spent": 38771.0,
+      "best_score": 2.400000000000001,
+      "ba_auc": 87652.5,
+      "mean_budget_score": 2.1913125,
+      "model_calls": 17,
+      "tokens": 34478,
+      "stage_counts": {
+        "initial": 1,
+        "cold_start": 1,
+        "pilot": 4,
+        "refinement": 9
+      },
+      "valid_candidates": 3,
+      "evaluated_candidates": 15,
+      "curve": [
+        [
+          0.0,
+          2.166666666666666
+        ],
+        [
+          1033.0,
+          0.0
+        ],
+        [
+          6000.0,
+          0.0
+        ],
+        [
+          7546.0,
+          0.0
+        ],
+        [
+          9020.0,
+          0.0
+        ],
+        [
+          10859.0,
+          0.0
+        ],
+        [
+          12397.0,
+          0.0
+        ],
+        [
+          14332.0,
+          0.0
+        ],
+        [
+          21999.0,
+          0.0
+        ],
+        [
+          24590.0,
+          0.0
+        ],
+        [
+          27185.0,
+          0.0
+        ],
+        [
+          30114.0,
+          0.0
+        ],
+        [
+          32732.0,
+          0.0
+        ],
+        [
+          35775.0,
+          2.400000000000001
+        ],
+        [
+          38771.0,
+          2.400000000000001
+        ]
+      ],
+      "archive_cells": [
+        2,
+        3,
+        3,
+        2,
+        1
+      ],
+      "raw_run_sha256": "b4c1b2f608bee19d1e9a8c1ce0507e9c012954cfd470a1a6642841f611211d76",
+      "best_program_sha256": "80681b77c6c742d2c03013109dfd0b5bc06f94bb9e5e83a26fc5de8724d6f012"
+    },
+    {
+      "seed": 43,
+      "method": "weak-iterative",
+      "config": {
+        "budget": 40000.0,
+        "strategies": 3,
+        "retries": 2,
+        "max_calls": 30,
+        "max_tokens": 768,
+        "seed": 43
+      },
+      "spent": 29252.0,
+      "best_score": 2.400000000000001,
+      "ba_auc": 92909.26666666669,
+      "mean_budget_score": 2.3227316666666673,
+      "model_calls": 30,
+      "tokens": 29252,
+      "stage_counts": {
+        "initial": 1,
+        "baseline": 30
+      },
+      "valid_candidates": 18,
+      "evaluated_candidates": 31,
+      "curve": [
+        [
+          0.0,
+          2.166666666666666
+        ],
+        [
+          1033.0,
+          0.0
+        ],
+        [
+          1998.0,
+          0.0
+        ],
+        [
+          2705.0,
+          0.0
+        ],
+        [
+          3738.0,
+          0.0
+        ],
+        [
+          4771.0,
+          0.0
+        ],
+        [
+          5804.0,
+          0.0
+        ],
+        [
+          6837.0,
+          0.0
+        ],
+        [
+          7870.0,
+          0.0
+        ],
+        [
+          8903.0,
+          0.0
+        ],
+        [
+          9936.0,
+          0.0
+        ],
+        [
+          10969.0,
+          0.0
+        ],
+        [
+          11884.0,
+          0.0
+        ],
+        [
+          12501.0,
+          0.0
+        ],
+        [
+          13246.0,
+          2.400000000000001
+        ],
+        [
+          14237.0,
+          2.400000000000001
+        ],
+        [
+          15224.0,
+          2.400000000000001
+        ],
+        [
+          16266.0,
+          2.12
+        ],
+        [
+          17257.0,
+          2.400000000000001
+        ],
+        [
+          18247.0,
+          2.400000000000001
+        ],
+        [
+          19242.0,
+          2.400000000000001
+        ],
+        [
+          20233.0,
+          2.400000000000001
+        ],
+        [
+          21222.0,
+          2.400000000000001
+        ],
+        [
+          22216.0,
+          2.400000000000001
+        ],
+        [
+          23208.0,
+          2.400000000000001
+        ],
+        [
+          24256.0,
+          2.3719999999999994
+        ],
+        [
+          25252.0,
+          2.400000000000001
+        ],
+        [
+          26279.0,
+          2.3719999999999994
+        ],
+        [
+          27265.0,
+          2.400000000000001
+        ],
+        [
+          28263.0,
+          2.400000000000001
+        ],
+        [
+          29252.0,
+          2.400000000000001
+        ]
+      ],
+      "archive_cells": [
+        5,
+        3,
+        4,
+        5,
+        5
+      ],
+      "raw_run_sha256": "36cae25c267174053aaac6749feb19a9db07704910eedb647b467504b25dba85",
+      "best_program_sha256": "1cb835cf446babf05967622ab8c0c1453d0cd4544515952ee82abceed0a2a689"
+    },
+    {
+      "seed": 43,
+      "method": "frugalevo",
+      "config": {
+        "budget": 40000.0,
+        "strategies": 3,
+        "retries": 2,
+        "max_calls": 30,
+        "max_tokens": 768,
+        "seed": 43
+      },
+      "spent": 38656.0,
+      "best_score": 2.400000000000001,
+      "ba_auc": 93689.0666666667,
+      "mean_budget_score": 2.3422266666666673,
+      "model_calls": 16,
+      "tokens": 33860,
+      "stage_counts": {
+        "initial": 1,
+        "cold_start": 1,
+        "pilot": 5,
+        "refinement": 7
+      },
+      "valid_candidates": 10,
+      "evaluated_candidates": 14,
+      "curve": [
+        [
+          0.0,
+          2.166666666666666
+        ],
+        [
+          1033.0,
+          0.0
+        ],
+        [
+          6422.0,
+          0.0
+        ],
+        [
+          8315.0,
+          0.0
+        ],
+        [
+          9904.0,
+          2.400000000000001
+        ],
+        [
+          11837.0,
+          2.3719999999999994
+        ],
+        [
+          14213.0,
+          2.3719999999999994
+        ],
+        [
+          16356.0,
+          2.041666666666666
+        ],
+        [
+          19149.0,
+          2.041666666666666
+        ],
+        [
+          20987.0,
+          0.0
+        ],
+        [
+          23170.0,
+          2.400000000000001
+        ],
+        [
+          32372.0,
+          2.3719999999999994
+        ],
+        [
+          35522.0,
+          2.400000000000001
+        ],
+        [
+          38656.0,
+          2.400000000000001
+        ]
+      ],
+      "archive_cells": [
+        3,
+        2,
+        2,
+        3,
+        2
+      ],
+      "raw_run_sha256": "1a77a502405a9847b2ee68802eb176b9099c635ad3cf06c15cde8b2e9bf2396c",
+      "best_program_sha256": "aa3a87dd87916d5809c88f4be8d67da635e644913e22e2c49ba5f28d99960aad"
+    },
+    {
+      "seed": 44,
+      "method": "weak-iterative",
+      "config": {
+        "budget": 40000.0,
+        "strategies": 3,
+        "retries": 2,
+        "max_calls": 30,
+        "max_tokens": 768,
+        "seed": 44
+      },
+      "spent": 29213.0,
+      "best_score": 2.400000000000001,
+      "ba_auc": 93150.30000000002,
+      "mean_budget_score": 2.3287575000000005,
+      "model_calls": 30,
+      "tokens": 29213,
+      "stage_counts": {
+        "initial": 1,
+        "baseline": 30
+      },
+      "valid_candidates": 19,
+      "evaluated_candidates": 31,
+      "curve": [
+        [
+          0.0,
+          2.166666666666666
+        ],
+        [
+          965.0,
+          0.0
+        ],
+        [
+          1672.0,
+          0.0
+        ],
+        [
+          2705.0,
+          0.0
+        ],
+        [
+          3738.0,
+          0.0
+        ],
+        [
+          4771.0,
+          0.0
+        ],
+        [
+          5804.0,
+          0.0
+        ],
+        [
+          6837.0,
+          0.0
+        ],
+        [
+          7870.0,
+          0.0
+        ],
+        [
+          8903.0,
+          0.0
+        ],
+        [
+          9936.0,
+          0.0
+        ],
+        [
+          10851.0,
+          0.0
+        ],
+        [
+          11468.0,
+          0.0
+        ],
+        [
+          12213.0,
+          2.400000000000001
+        ],
+        [
+          13204.0,
+          2.400000000000001
+        ],
+        [
+          14191.0,
+          2.400000000000001
+        ],
+        [
+          15233.0,
+          2.12
+        ],
+        [
+          16224.0,
+          2.400000000000001
+        ],
+        [
+          17214.0,
+          2.400000000000001
+        ],
+        [
+          18209.0,
+          2.400000000000001
+        ],
+        [
+          19200.0,
+          2.400000000000001
+        ],
+        [
+          20189.0,
+          2.400000000000001
+        ],
+        [
+          21183.0,
+          2.400000000000001
+        ],
+        [
+          22175.0,
+          2.400000000000001
+        ],
+        [
+          23223.0,
+          2.3719999999999994
+        ],
+        [
+          24219.0,
+          2.400000000000001
+        ],
+        [
+          25246.0,
+          2.3719999999999994
+        ],
+        [
+          26232.0,
+          2.400000000000001
+        ],
+        [
+          27230.0,
+          2.400000000000001
+        ],
+        [
+          28219.0,
+          2.400000000000001
+        ],
+        [
+          29213.0,
+          2.400000000000001
+        ]
+      ],
+      "archive_cells": [
+        3,
+        4,
+        6,
+        5,
+        4
+      ],
+      "raw_run_sha256": "cc9164da7e4198c46311bd12a6cc16ec332db23a0f70bcfb8d9dd4858c075197",
+      "best_program_sha256": "1cb835cf446babf05967622ab8c0c1453d0cd4544515952ee82abceed0a2a689"
+    },
+    {
+      "seed": 44,
+      "method": "frugalevo",
+      "config": {
+        "budget": 40000.0,
+        "strategies": 3,
+        "retries": 2,
+        "max_calls": 30,
+        "max_tokens": 768,
+        "seed": 44
+      },
+      "spent": 39033.0,
+      "best_score": 2.166666666666666,
+      "ba_auc": 86666.66666666666,
+      "mean_budget_score": 2.1666666666666665,
+      "model_calls": 16,
+      "tokens": 34133,
+      "stage_counts": {
+        "initial": 1,
+        "cold_start": 1,
+        "pilot": 5,
+        "refinement": 7
+      },
+      "valid_candidates": 3,
+      "evaluated_candidates": 14,
+      "curve": [
+        [
+          0.0,
+          2.166666666666666
+        ],
+        [
+          965.0,
+          0.0
+        ],
+        [
+          6102.0,
+          0.0
+        ],
+        [
+          8011.0,
+          0.0
+        ],
+        [
+          9526.0,
+          0.0
+        ],
+        [
+          11433.0,
+          0.0
+        ],
+        [
+          13820.0,
+          0.0
+        ],
+        [
+          15729.0,
+          0.0
+        ],
+        [
+          18444.0,
+          0.0
+        ],
+        [
+          19971.0,
+          1.6000000000000005
+        ],
+        [
+          21856.0,
+          1.6000000000000005
+        ],
+        [
+          31954.0,
+          0.0
+        ],
+        [
+          35503.0,
+          0.0
+        ],
+        [
+          39033.0,
+          0.0
+        ]
+      ],
+      "archive_cells": [
+        4,
+        3,
+        3,
+        3,
+        2
+      ],
+      "raw_run_sha256": "466eafb47886d92b65ae697b22de82d843a943f8ddff872f03fb4bca505bb61b",
+      "best_program_sha256": "439e6ae083589df1090877d5be5c30b50d9f46bdff34ad9da6c7be544e56cb46"
+    }
+  ],
+  "dataset_details": {
+    "name": "Circle Packing n=26, FrugalEvo public mathematical objective",
+    "source": "https://github.com/chchenhui/frugalevo/tree/82f7b739110944bf3e8737db303a302a568e7327/benchmarks/math/circle_packing",
+    "revision": "82f7b739110944bf3e8737db303a302a568e7327",
+    "local_interface": "standard-library Python -> JSON coordinates; independent geometry validator"
+  },
+  "metrics": {
+    "weak_iterative_best_score_mean": 2.400000000000001,
+    "weak_iterative_mean_budget_score_mean": 2.322731666666667,
+    "weak_iterative_spent_mean": 29253.666666666668,
+    "weak_iterative_model_calls_mean": 30,
+    "frugalevo_best_score_mean": 2.3222222222222224,
+    "frugalevo_mean_budget_score_mean": 2.2334019444444446,
+    "frugalevo_spent_mean": 38820.0,
+    "frugalevo_model_calls_mean": 16.333333333333332
+  },
+  "boundary": "public-task local checkpoint comparison; not paper API models or USD cost reproduction; larger model is not assumed better"
+}

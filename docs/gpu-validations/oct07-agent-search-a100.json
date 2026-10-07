@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "adapter_key": "oct07-agent-search",
+  "validated_at": "2026-10-07 08:33:58 UTC",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_frugalevo_checkpoint.py",
+    "--output",
+    "runs/frugalevo/results.json",
+    "--seeds",
+    "42,43,44",
+    "--budget",
+    "40000"
+  ],
+  "additional_commands": [
+    [
+      "python",
+      "scripts/run_sentry_checkpoint.py",
+      "--dataset",
+      "data/hotpotqa-validation.parquet",
+      "--output",
+      "runs/sentry/results.json",
+      "--memory-cases",
+      "4",
+      "--held-out-offset",
+      "16",
+      "--held-out-cases",
+      "8",
+      "--seeds",
+      "42,43,44"
+    ],
+    [
+      "python",
+      "scripts/validate_program_sandbox.py",
+      "--output",
+      "runs/program-sandbox.json"
+    ]
+  ],
+  "dataset": {
+    "circle_packing": {
+      "name": "Circle Packing n=26, FrugalEvo public mathematical objective",
+      "source": "https://github.com/chchenhui/frugalevo/tree/82f7b739110944bf3e8737db303a302a568e7327/benchmarks/math/circle_packing",
+      "revision": "82f7b739110944bf3e8737db303a302a568e7327",
+      "local_interface": "standard-library Python -> JSON coordinates; independent geometry validator"
+    },
+    "hotpotqa": {
+      "name": "hotpotqa/hotpot_qa",
+      "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+      "sha256": "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6",
+      "split": "4 memory + 16 reserved development + 8 held-out; official dev only"
+    }
+  },
+  "checkpoint": {
+    "models": [
+      {
+        "model_id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "token_weight": 2,
+        "cost_unit": "weighted input+output tokens; not USD",
+        "cached_input_tokens": 0,
+        "prefix_kv_cache_implemented": false
+      },
+      {
+        "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+        "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "token_weight": 1,
+        "cost_unit": "weighted input+output tokens; not USD",
+        "cached_input_tokens": 0,
+        "prefix_kv_cache_implemented": false
+      }
+    ],
+    "file_sha256_verified_against_official_revision": {
+      "qwen2_5_7b": [
+        {
+          "name": "model-00001-of-00004.safetensors",
+          "sha256": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7"
+        },
+        {
+          "name": "model-00002-of-00004.safetensors",
+          "sha256": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185"
+        },
+        {
+          "name": "model-00003-of-00004.safetensors",
+          "sha256": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5"
+        },
+        {
+          "name": "model-00004-of-00004.safetensors",
+          "sha256": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+        }
+      ],
+      "qwen3_4b": [
+        {
+          "name": "model-00001-of-00003.safetensors",
+          "sha256": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6"
+        },
+        {
+          "name": "model-00002-of-00003.safetensors",
+          "sha256": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1"
+        },
+        {
+          "name": "model-00003-of-00003.safetensors",
+          "sha256": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d"
+        }
+      ]
+    }
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "completed_program_search_runs": 6,
+    "completed_sentry_seeds": 3,
+    "held_out_cases_per_seed": 8,
+    "sentry_em": 0.2916666666666667,
+    "base_em": 0.4166666666666667,
+    "frugalevo_best_score_mean": 2.3222222222222224,
+    "weak_iterative_best_score_mean": 2.400000000000001,
+    "sandbox_checks_passed": 8
+  },
+  "sandbox_checks": {
+    "valid_geometry": true,
+    "host_paths_absent": true,
+    "environment_cleared": true,
+    "network_isolated": true,
+    "wall_timeout": true,
+    "output_bounded": true,
+    "memory_bounded": true,
+    "self_reported_score_rejected": true
+  },
+  "provenance": {
+    "commit": "97541baf",
+    "artifact_path": "docs/gpu-validations/oct07-agent-search-a100.json",
+    "executed_source_commits": {
+      "frugalevo": "76d86e286e8b041bbdee0883c636c9695337c566",
+      "sentry": "85e3ab8a4d6af376aa2f5328432bd7a09a8b29d7"
+    },
+    "source_sha256": {
+      "src/auto_research/agent_research/frugalevo.py": "271e3e7361a9e4524925fbc66578568a9495e669d6c0565f9ad37c46b6f0bf49",
+      "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+      "src/auto_research/agent_research/search_checkpoint.py": "41a3b4b111e81e81e06971c2cccab2dc65fe72c2ba30643265b729e6f90b9257",
+      "scripts/run_frugalevo_checkpoint.py": "83baae4b3fd0c0dec312cf74c97e8e319cea7a4b51f722076c304774fba22f0d",
+      "src/auto_research/agent_research/sentry.py": "204234b53b0b0f91c79bbe15ae010c7eee62ce0298f1165d584f29267b4597cb",
+      "src/auto_research/agent_research/sentry_public.py": "bc83a2843c167be05d4b10f71821c9c6a7f7d256b65a2b1950a840e086ea1fd0",
+      "scripts/run_sentry_checkpoint.py": "9df299655848a76384c1f48ae912fb6ffbf780cb43c9b6d5db1ee0563ade046a",
+      "scripts/validate_program_sandbox.py": "b8d42fb28cce45f6c210d8ace3c10895cf92001994843a72dfbc182049661cc6"
+    },
+    "metrics_artifacts": [
+      "docs/agent-research/2610.03675-frugalevo/metrics/checkpoint-seeds42-44.json",
+      "docs/agent-research/2610.02994-sentry/metrics/checkpoint-seeds42-44.json"
+    ]
+  },
+  "boundary": "Passed means real frozen-checkpoint CUDA execution and sandbox checks, NOT model training, original-paper reproduction, formal capability improvement or unified Evolve integration. Both local comparisons have negative mean results."
+}

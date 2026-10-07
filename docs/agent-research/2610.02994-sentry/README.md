@@ -65,6 +65,8 @@ PYTHONPATH=src python scripts/run_sentry_checkpoint.py \
 
 [逐题脱敏指标与轨迹哈希](metrics/checkpoint-seeds42-44.json)保留 ID、动作数、EM、调用成本、事件计数和源提交。原始正文、完整模型回复不发布到站点。模型恢复判断出现误判可能是负结果的原因之一，但本轮不根据隔离集重调 detector、prompt 或记忆再重报成绩。
 
+[A100 回执](../../gpu-validations/oct07-agent-search-a100.json)包含实际运行源码哈希和与官方修订核对的权重分片哈希；它证明冻结 checkpoint 推理路径执行，不是模型权重训练。
+
 ## 复现边界与失败记录
 
 - 本地环境是 HotpotQA 文档上的只读检索工具，不是原论文浏览器、软件工程环境；样本很小，只作集成验证。
