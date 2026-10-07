@@ -55,13 +55,17 @@ def load_cases(path: Path, count: int) -> list[dict]:
 class RetrievalEnvironment:
     def __init__(self, documents: dict[str, str]):
         self.documents = dict(documents)
+        self.read_titles: set[str] = set()
 
     def execute(self, action: str, argument: str) -> tuple[str, bool, bool]:
         if action == "finish":
+            if not self.read_titles:
+                return "Read at least one available page before submitting an evidence-based answer.", False, False
             return "Answer submitted; no correctness feedback is exposed.", True, True
         if action == "read":
             if argument not in self.documents:
                 return "Unknown title. Use a title from a search result.", False, False
+            self.read_titles.add(argument)
             return self.documents[argument][:6000], True, False
         if action == "search":
             tokens = set(re.findall(r"\w+", argument.lower()))
@@ -90,6 +94,10 @@ def run_episode(case: dict, generate, *, sentry: Sentry | None, seed: int,
                   'Example call: {"reasoning":"Find relevant evidence","action":"search",'
                   '"argument":"entity from question"}. Schema: ' + ACTION_SCHEMA
                   + "\nQUESTION: " + case["question"]
+                  + "\nAVAILABLE PAGE TITLES (the read tool can open any of these): "
+                  + json.dumps(list(case["documents"]))
+                  + "\nRead at least one page before finish. Tools are available; a missing trajectory "
+                  "does not mean missing evidence. Use a read action to obtain that evidence."
                   + "\nPUBLIC TRAJECTORY: " + json.dumps([asdict(step) for step in steps])
                   + ("\nCONDITIONAL RECOVERY: " + guidance if guidance else ""))
         completion = generate(prompt, 256, seed + index)

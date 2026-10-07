@@ -148,6 +148,8 @@ def test_sentry_public_case_strips_labels_and_scorer_stays_outside():
     prompts = []
     def generate(prompt, maximum, seed):
         prompts.append(prompt)
+        if len(prompts) == 1:
+            return Completion('{"reasoning":"inspect","action":"read","argument":"Doc"}', 1, 1, 1)
         return Completion('{"reasoning":"observed","action":"finish","argument":"guess"}', 1, 1, 1)
     result = run_episode(case, generate, sentry=None, seed=42)
     assert result["prediction"] == "guess"
@@ -172,3 +174,11 @@ def test_sentry_malformed_detector_types_fail_closed(field, value):
     assert monitor.observe(PublicStep("r", "a", "o")) is None
     assert monitor.events[-1]["event"] == "invalid_detection"
     assert not monitor.playbook
+
+
+def test_public_tool_requires_observed_evidence_but_never_checks_answer():
+    from auto_research.agent_research.sentry_public import RetrievalEnvironment
+    env = RetrievalEnvironment({"Doc": "Some public text."})
+    assert env.execute("finish", "anything")[1:] == (False, False)
+    assert env.execute("read", "Doc")[1:] == (True, False)
+    assert env.execute("finish", "not a correct answer")[1:] == (True, True)
