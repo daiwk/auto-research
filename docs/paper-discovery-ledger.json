@@ -12793,7 +12793,10 @@
       "window": "2026-10-01 through 2026-10-07; older official-source discoveries explicitly separated",
       "sources": ["arXiv official API, full HTML and PDF", "Google Research official blog", "Google/Meta/DeepMind publication directories (partial)", "author repositories"],
       "priority_institutions": ["Google", "Meta"],
-      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "required_tracks": ["agent"],
+      "scanned_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "pending_tracks": ["recommendation", "foundation-model", "post-training"],
+      "closure_scope": "required_tracks describes this implementation handoff only; scanned_tracks is retrieval coverage, not closed review or accepted implementations. Unresolved candidates remain open.",
       "coverage": {
         "coverage_complete": false,
         "watermark_advanced": false,

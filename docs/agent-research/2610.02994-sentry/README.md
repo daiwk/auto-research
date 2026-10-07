@@ -34,7 +34,11 @@ Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当
 ## 本地复现
 
 ```bash
-python -m pip install -e '.[llm-evolution]' pyarrow
+python -m pip install -e '.[post-training-gpu]' pyarrow
+hf download Qwen/Qwen3-4B-Instruct-2507 --revision cdbee75f17c01a7cc42f958dc650907174af0554
+mkdir -p data
+curl -Lf 'https://huggingface.co/datasets/hotpotqa/hotpot_qa/resolve/1908d6afbbead072334abe2965f91bd2709910ab/distractor/validation-00000-of-00001.parquet' \
+  -o data/hotpotqa-validation.parquet
 PYTHONPATH=src python scripts/run_sentry_checkpoint.py \
   --dataset data/hotpotqa-validation.parquet \
   --output runs/sentry/results.json \

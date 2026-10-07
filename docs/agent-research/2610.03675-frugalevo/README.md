@@ -38,13 +38,17 @@ FrugalEvo 把程序优化拆成高成本模型提出策略、低成本模型执�
 提示词要求不使用文件和子进程，但实际安全边界是 namespace、只读系统运行时和资源限制，并非 seccomp 禁止所有子进程；隔离命名空间内仍有临时目录。这些限制经过 `scripts/validate_program_sandbox.py` 的真实 Linux 检查，不等于形式化安全证明。
 
 ```bash
-python -m pip install -e '.[llm-evolution]'
+python -m pip install -e '.[post-training-gpu]'
+hf download Qwen/Qwen2.5-7B-Instruct --revision bb46c15ee4bb56c5b63245ef50fd7637234d6f75
+hf download Qwen/Qwen3-4B-Instruct-2507 --revision cdbee75f17c01a7cc42f958dc650907174af0554
 PYTHONPATH=src python scripts/run_frugalevo_checkpoint.py \
   --output runs/frugalevo/results.json --budget 40000 \
   --max-calls 30 --max-tokens 768 --seeds 42,43,44
 ```
 
 模型为固定修订的 Qwen2.5-7B-Instruct 与 Qwen3-4B-Instruct-2507；脚本允许传本地缓存目录，不上传模型。较大模型不保证比较小模型强。模型修订、每次实际 token 数、完整生成代码、反馈、策略与成本曲线写入 JSON；无效程序和格式错误也保留成本。
+
+两个完整权重合计约 22 GB，需预留下载空间和 GPU 显存；没有量化或 CPU 回退。Linux 还须安装系统 `bubblewrap` 和 `util-linux`（提供 `prlimit`），并允许非特权 user namespace。权重下载完后运行脚本仅从本地缓存加载。若用 `--large-checkpoint` / `--small-checkpoint` 覆盖目录，调用者必须确认目录对应上述 revision。
 
 本地公开目标是把 26 个圆放入单位正方形并最大化半径和。代码只输出圆心/半径，可信检查器独立验证有限数值、边界和不重叠；模型自报的分数不被采用。对照是相同初始程序、相同预算上限的弱模型迭代搜索。每个方法还受 30 次调用上限约束，因此不声称两者实际花费完全相同。
 
