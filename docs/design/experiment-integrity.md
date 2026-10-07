@@ -75,6 +75,11 @@ python scripts/validate_mra_gpu.py --data data --output runs/mra-gpu --commit <t
 参数更新、1/2 槽位并发和超时回收。该运行是调度与设备烟测，不是论文效果比较。
 回执只保留指标、公开数据 hash、随机初始化说明、加速器型号、源码版本与命令，排除机器路径和身份信息。
 
+2026-10-07 已在 NVIDIA A100 实测通过，
+[脱敏回执](../gpu-validations/experiment-integrity-a100-20261007.json)
+记录了 3 个真实训练 trial、1/2 槽位分别实测并发 1/2 个 CUDA 任务，以及约 12 秒的超时回收。
+本次单 seed、三步训练的 test NDCG 为 0，不能用于任何效果提升声明。
+
 ## 范围与剩余 MR
 
 MR-A 的回归集中在 `tests/test_experiment_integrity.py`，并运行受影响合同及全套质量门禁。
