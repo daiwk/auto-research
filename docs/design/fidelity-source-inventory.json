@@ -181,6 +181,24 @@
         "fingerprint": "2f4fb8888cced39ab4e9cf7884dfac62ad990f85f4fcf8adc6e646588ba07710"
       }
     ],
+    "src/auto_research/agent_research/frugalevo.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "add",
+        "line": 83,
+        "qualified_name": "IslandArchive.add",
+        "expression": "self.count += 1",
+        "fingerprint": "0e4a345a434a9e4430ddb8b7b663084dc97f330c2e4180b14a17e37507e4e40f"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_call",
+        "line": 143,
+        "qualified_name": "FrugalEvo._call",
+        "expression": "self.spent += result.cost",
+        "fingerprint": "2381906de3d1aa158014899595bea75828fdb2af8cfc9bcc0b260a1fe6c1206d"
+      }
+    ],
     "src/auto_research/agent_research/graft_public.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10333,6 +10351,16 @@
         "qualified_name": "AgentResearchRunner.run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      }
+    ],
+    "src/auto_research/agent_research/sentry.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 127,
+        "qualified_name": "Sentry.observe",
+        "expression": "self.clock += 1",
+        "fingerprint": "8d987e0eb2340b18942ecc484482fdc4b0d23d1c6aeb395750ad2483af0d39d6"
       }
     ],
     "src/auto_research/agent_research/t2spo.py": [

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-07",
+  "coverage_complete": false,
+  "watermark": "2026-10-02",
+  "note": "Bounded 400-results-per-query official arXiv scan; queries capped; new means not in repository ledger, not new today. Tracks overlap; counts must not be summed as unique papers.",
+  "tracks": [
+    {
+      "track": "recommendation",
+      "window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "requested_window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "candidate_count": 39,
+      "triage_counts": {
+        "new": 35,
+        "implemented": 4,
+        "reviewed": 0,
+        "google_meta_priority_review": 0
+      },
+      "arxiv_transport": {
+        "coverage_complete": false,
+        "transport_complete": true,
+        "query_count": 22,
+        "capped_queries": 5,
+        "failed_queries": 0
+      },
+      "current_window_new": 31
+    },
+    {
+      "track": "foundation-model",
+      "window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "requested_window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "candidate_count": 453,
+      "triage_counts": {
+        "new": 436,
+        "implemented": 17,
+        "reviewed": 0,
+        "google_meta_priority_review": 0
+      },
+      "arxiv_transport": {
+        "coverage_complete": false,
+        "transport_complete": true,
+        "query_count": 8,
+        "capped_queries": 8,
+        "failed_queries": 0
+      },
+      "current_window_new": 398
+    },
+    {
+      "track": "post-training",
+      "window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "requested_window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "candidate_count": 200,
+      "triage_counts": {
+        "new": 182,
+        "implemented": 18,
+        "reviewed": 0,
+        "google_meta_priority_review": 0
+      },
+      "arxiv_transport": {
+        "coverage_complete": false,
+        "transport_complete": true,
+        "query_count": 8,
+        "capped_queries": 7,
+        "failed_queries": 0
+      },
+      "current_window_new": 164
+    },
+    {
+      "track": "agent",
+      "window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "requested_window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "candidate_count": 434,
+      "triage_counts": {
+        "new": 415,
+        "implemented": 19,
+        "reviewed": 0,
+        "google_meta_priority_review": 0
+      },
+      "arxiv_transport": {
+        "coverage_complete": false,
+        "transport_complete": true,
+        "query_count": 8,
+        "capped_queries": 8,
+        "failed_queries": 0
+      },
+      "current_window_new": 381
+    }
+  ]
+}

@@ -192,3 +192,32 @@ def test_public_tool_requires_observed_evidence_but_never_checks_answer():
     assert env.execute("finish", "anything")[1:] == (False, False)
     assert env.execute("read", "Doc")[1:] == (True, False)
     assert env.execute("finish", "not a correct answer")[1:] == (True, True)
+
+
+def test_checkpoint_summaries_reject_partial_runs():
+    from scripts.summarize_agent_search_validation import summarize_frugalevo, summarize_sentry
+    with pytest.raises(ValueError, match="incomplete"):
+        summarize_frugalevo({"runs": []}, "commit", "artifact.json")
+    with pytest.raises(ValueError, match="incomplete"):
+        summarize_sentry({"runs": [{"seed": 42, "held_out": []}],
+                          "split_sizes": {"memory": 4, "held_out": 8}}, "commit", "artifact.json")
+
+
+def test_sentry_summary_never_exports_corpus_or_model_text():
+    from scripts.summarize_agent_search_validation import summarize_sentry
+    case = {"id": "held", "exact_match": 0, "completed": True, "tool_steps": 1,
+            "invalid_actions": 0, "agent_generations": [{"input_tokens": 2, "output_tokens": 3,
+                                                          "text": "DO_NOT_PUBLISH"}],
+            "steps": [{"observation": "PRIVATE_CORPUS_TEXT"}], "prediction": "SECRET_PREDICTION"}
+    raw = {"runs": [{"seed": 42, "memory_cases": [dict(case, id="memory")],
+                     "held_out": [dict(case, method=m) for m in ("base", "sentry")],
+                     "monitor_events": [], "manager_calls": [], "frozen_playbook": []}],
+           "split_sizes": {"memory": 1, "held_out": 1}, "dataset": "test-public-dataset",
+           "sha256": "datahash", "revision": "rev", "checkpoint": {}, "boundary": "small",
+           "protocol": "frozen"}
+    result = summarize_sentry(raw, "commit", "artifact.json")
+    serialized = json.dumps(result)
+    assert all(secret not in serialized for secret in (
+        "DO_NOT_PUBLISH", "PRIVATE_CORPUS_TEXT", "SECRET_PREDICTION"))
+    assert result["metrics"]["base_agent_tokens_mean"] == 5
+    assert result["promotion_eligible"] is False
