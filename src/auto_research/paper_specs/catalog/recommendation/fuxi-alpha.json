@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "fuxi-alpha",
+  "detail_path": "reproductions/2502.03036-fuxi-alpha/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huawei / USTC",
+  "adapter": {
+    "spec_key": "fuxi-alpha"
+  }
+}

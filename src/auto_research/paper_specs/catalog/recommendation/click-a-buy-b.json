@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "click-a-buy-b",
+  "detail_path": "reproductions/2507.15113-click-a-buy-b/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "click-a-buy-b"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mima",
+  "detail_path": "reproductions/2609.12842-mima/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "adapter": {
+    "spec_key": "mima"
+  }
+}

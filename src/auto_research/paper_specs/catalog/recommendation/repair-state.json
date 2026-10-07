@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "repair-state",
+  "detail_path": "reproductions/2610.01270-repair-state/README.md",
+  "first_author": "Parthiv Chatterjee",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "adapter": {
+    "spec_key": "repair-state"
+  }
+}

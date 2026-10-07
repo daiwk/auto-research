@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "esmm",
   "arxiv_id": "1804.07931",
   "title": "Entire Space Multi-Task Model: An Effective Approach for Estimating Post-Click Conversion Rate",
@@ -49,5 +49,34 @@
   "mechanisms": [
     "Taobao private exposure/click/conversion logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.esmm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba",
+      "published": "2018-04-21",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确批准 ESMM 为经典例外；原文工业部署不满足当前新论文的量化线上证据格式。"
+    },
+    "omitted_core_components": [
+      "Taobao private exposure/click/conversion logs"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=200",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

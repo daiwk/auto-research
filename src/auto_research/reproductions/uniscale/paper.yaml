@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "uniscale",
   "arxiv_id": "2603.24226",
   "title": "UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.uniscale.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group / Alibaba",
+      "published": "2026-03-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Search",
+          "metric": "GMV",
+          "lift_percent": 2.04,
+          "traffic": "5% traffic, ten days",
+          "source_url": "https://arxiv.org/html/2603.24226v1",
+          "source_location": "Section 4.5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

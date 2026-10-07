@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gzip-sparse-attention",
   "arxiv_id": "2607.21752",
   "title": "Parameter-free Adaptive Sparse Attention via Compression-Based Content Selection",
@@ -30,5 +30,34 @@
     "PG-19 full 8K-byte training corpus",
     "true block-sparse attention kernel"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gzip_sparse_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Pennsylvania State University",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "92M-parameter 12-layer ByteLM and 20K-step multi-H100 training",
+      "PG-19 full 8K-byte training corpus",
+      "true block-sparse attention kernel"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

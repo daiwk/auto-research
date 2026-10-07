@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sequenceo1",
   "arxiv_id": "2609.08443",
   "title": "SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching",
@@ -33,5 +33,46 @@
     "MRLB/FlashSA production kernels",
     "online cache service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sequenceo1.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance / Douyin",
+      "published": "2026-09-08",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Douyin and Douyin Lite recommender",
+          "metric": "30-day activeness",
+          "lift_percent": 0.1968,
+          "traffic": "one-month A/B followed by full-traffic deployment",
+          "source_url": "https://arxiv.org/html/2609.08443",
+          "source_location": "Section 4.3, Table 4",
+          "experiment_duration": "one month",
+          "significance": "all reported effects statistically significant",
+          "retrieved_at": "2026-09-12"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private 100K-event histories",
+      "MRLB/FlashSA production kernels",
+      "online cache service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

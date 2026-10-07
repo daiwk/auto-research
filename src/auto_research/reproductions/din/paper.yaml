@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "din",
   "arxiv_id": "1706.06978",
   "title": "Deep Interest Network for Click-Through Rate Prediction",
@@ -32,5 +32,35 @@
     "mini-batch-aware regularization",
     "Alibaba production sparse features"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.din.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/zhougr1993/DeepInterestNetwork",
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "mini-batch-aware regularization",
+      "Alibaba production sparse features"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=320",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

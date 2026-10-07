@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "genrank",
+  "detail_path": "reproductions/2505.04180-genrank/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Xiaohongshu",
+  "adapter": {
+    "spec_key": "genrank"
+  }
+}

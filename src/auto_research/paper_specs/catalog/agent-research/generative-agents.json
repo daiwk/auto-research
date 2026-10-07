@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "generative-agents",
+  "title": "Generative Agents",
+  "paper_url": "https://arxiv.org/abs/2304.03442",
+  "detail_path": "agent-research/2304.03442-generative-agents/README.md",
+  "topic": [
+    "记忆与反思"
+  ],
+  "first_author": "Joon Sung Park",
+  "first_author_affiliation": "Stanford University",
+  "published": "2023-04-07",
+  "code": "https://github.com/joonspk-research/generative_agents",
+  "adapter": "generative-agents"
+}

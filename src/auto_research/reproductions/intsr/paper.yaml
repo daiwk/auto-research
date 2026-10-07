@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "intsr",
   "arxiv_id": "2509.21179",
   "title": "IntSR: An Integrated Generative Framework for Search and Recommendation",
@@ -45,5 +45,45 @@
     "Amap private POI/query logs",
     "production autoregressive decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.intsr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / Amap",
+      "published": "2025-09-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Amap",
+          "metric": "GMV",
+          "lift_percent": 9.34,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Amap private POI/query logs",
+      "production autoregressive decoder"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

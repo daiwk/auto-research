@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "qgs",
+  "detail_path": "reproductions/2605.25514-qgs/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Science and Technology of China / Alibaba",
+  "adapter": {
+    "spec_key": "qgs"
+  }
+}

@@ -1,3 +1,3 @@
-from ..latest_20260729_common import reproduce_reco_reward
+from auto_research.reproductions.mechanisms.reproduce_reco_reward import reproduce_reco_reward
 
 __all__ = ["reproduce_reco_reward"]

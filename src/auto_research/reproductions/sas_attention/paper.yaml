@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sas-attention",
   "arxiv_id": "2609.13141",
   "title": "SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking",
@@ -33,5 +33,34 @@
     "OpenR1-Math-220k, LongBench, BFCL and VitaBench paper-scale runs",
     "Triton/FlashAttention kernel and SGLang decode benchmark"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sas_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification",
+      "organization": "Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST",
+      "published": "2026-09-11",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-4B/8B/14B and OLMo3-7B checkpoints",
+      "OpenR1-Math-220k, LongBench, BFCL and VitaBench paper-scale runs",
+      "Triton/FlashAttention kernel and SGLang decode benchmark"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

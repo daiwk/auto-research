@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "recgpt-v3",
+  "detail_path": "reproductions/2607.15591-recgpt-v3/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Taobao",
+  "adapter": {
+    "spec_key": "recgpt-v3"
+  }
+}

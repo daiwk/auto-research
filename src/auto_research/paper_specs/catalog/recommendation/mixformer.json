@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mixformer",
+  "detail_path": "reproductions/2602.14110-mixformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "mixformer"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onerec-v2",
+  "detail_path": "reproductions/2508.20900-onerec-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {
+    "spec_key": "onerec-v2"
+  }
+}

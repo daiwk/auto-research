@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "memskill",
+  "title": "MemSkill",
+  "paper_url": "https://arxiv.org/abs/2602.02474",
+  "detail_path": "agent-research/2602.02474-memskill/README.md",
+  "topic": [
+    "记忆技能"
+  ],
+  "first_author": "Haozhen Zhang",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2026-02-02",
+  "code": "https://github.com/ViktorAxelsen/MemSkill",
+  "adapter": "memskill"
+}

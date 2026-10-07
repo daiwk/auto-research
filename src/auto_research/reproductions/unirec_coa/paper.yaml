@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "unirec-coa",
   "arxiv_id": "2604.12234",
   "title": "UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.unirec_coa.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Authors did not disclose affiliation / large-scale e-commerce platform",
+      "published": "2026-04-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "e-commerce feed and landing page",
+          "metric": "GMV",
+          "lift_percent": 5.6,
+          "traffic": "20% user traffic per bucket",
+          "source_url": "https://arxiv.org/html/2604.12234v1",
+          "source_location": "Section 4.2 / Table 5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

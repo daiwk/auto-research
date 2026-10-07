@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pit",
+  "detail_path": "reproductions/2602.08530-pit/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Beijing University of Posts and Telecommunications",
+  "adapter": {
+    "spec_key": "pit"
+  }
+}

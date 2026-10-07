@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "blip2",
+  "detail_path": "reproductions/2301.12597-blip2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Salesforce Research",
+  "adapter": {
+    "spec_key": "blip2"
+  }
+}

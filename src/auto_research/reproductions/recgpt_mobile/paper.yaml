@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "recgpt-mobile",
   "arxiv_id": "2605.04726",
   "title": "RecGPT-Mobile: On-Device Large Language Models for User Intent Understanding in Taobao Feed Recommendation",
@@ -46,5 +46,68 @@
     "GPT rewriting and production item retrieval",
     "real mobile runtime, device fleet and operating-system integration"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.recgpt_mobile.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / Taobao",
+      "published": "2026-05-06",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Mobile Taobao feed",
+          "metric": "CLICK",
+          "lift_percent": 1.8,
+          "traffic": "one-month test across four scenarios",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Mobile Taobao feed",
+          "metric": "PAY",
+          "lift_percent": 2.7,
+          "traffic": "one-month test across four scenarios",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Mobile Taobao feed",
+          "metric": "GMV",
+          "lift_percent": 2.5,
+          "traffic": "one-month test across four scenarios",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-0.6B proprietary intent data and human annotations",
+      "GPT rewriting and production item retrieval",
+      "real mobile runtime, device fleet and operating-system integration"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=80",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cq-sid",
+  "detail_path": "reproductions/2605.14434-cq-sid/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba Taobao & Tmall Group",
+  "adapter": {
+    "spec_key": "cq-sid"
+  }
+}

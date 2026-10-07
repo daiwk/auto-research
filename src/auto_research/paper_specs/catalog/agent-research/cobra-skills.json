@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "cobra-skills",
+  "title": "COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization",
+  "paper_url": "https://arxiv.org/abs/2609.11682",
+  "detail_path": "agent-research/2609.11682-cobra-skills/README.md",
+  "topic": [
+    "技能进化",
+    "Contextual bandit"
+  ],
+  "first_author": "Pingchen Lu",
+  "first_author_affiliation": "The Chinese University of Hong Kong, Shenzhen",
+  "published": "2026-09-10",
+  "code": "https://github.com/Jerry-LuP/COBRA-Skills",
+  "adapter": "cobra-skills",
+  "priority": "P0"
+}

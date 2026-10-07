@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ltv-video-ranking",
+  "detail_path": "reproductions/2602.17058-ltv-video-ranking/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba Group / Tsinghua University",
+  "adapter": {
+    "spec_key": "ltv-video-ranking"
+  }
+}

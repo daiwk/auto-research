@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pinterest-ads-llm",
+  "detail_path": "reproductions/2605.27856-pinterest-ads-llm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "pinterest-ads-llm"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "xrec",
   "arxiv_id": "2609.29180",
   "title": "X-Rec Technical Report",
@@ -32,5 +32,46 @@
     "production-scale contrastive item embeddings, ANN index and cached serving",
     "online A/B deployment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.xrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "TikTok (ByteDance)",
+      "published": "2026-09-24",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "TikTok vertical-content recommendation",
+          "metric": "vertical engagement",
+          "lift_percent": 4.1484,
+          "traffic": "two consecutive production launches (V1 then V2); paper does not disclose bucket share",
+          "source_url": "https://arxiv.org/html/2609.29180v1",
+          "source_location": "Section 5, Table 3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "TikTok private multi-attribute sequence features and streaming benchmark",
+      "production-scale contrastive item embeddings, ANN index and cached serving",
+      "online A/B deployment"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "160 shared item-vector + 200 model updates (X-Rec 160+40, SID-AR 200, U2I 200); updates matched, not FLOPs",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

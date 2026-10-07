@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "ragen",
+  "title": "RAGEN",
+  "paper_url": "https://arxiv.org/abs/2504.20073",
+  "detail_path": "agent-research/2504.20073-ragen/README.md",
+  "topic": [
+    "多轮 Agent RL"
+  ],
+  "first_author": "Zihan Wang",
+  "first_author_affiliation": "Northwestern",
+  "published": "2025-04-24",
+  "code": "https://github.com/RAGEN-AI/RAGEN",
+  "adapter": "ragen"
+}

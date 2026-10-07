@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "grounded-memory",
+  "title": "Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents",
+  "paper_url": "https://arxiv.org/abs/2609.11060",
+  "detail_path": "agent-research/2609.11060-grounded-memory/README.md",
+  "topic": [
+    "Agent 记忆",
+    "环境探测"
+  ],
+  "first_author": "Susheel Suresh",
+  "first_author_affiliation": "Microsoft",
+  "published": "2026-09-09",
+  "code": null,
+  "adapter": "grounded-memory",
+  "priority": "P0"
+}

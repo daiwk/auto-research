@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "steerlm",
+  "title": "SteerLM",
+  "paper_url": "https://arxiv.org/abs/2310.05344",
+  "detail_path": "post-training/2310.05344-steerlm/README.md",
+  "topic": [
+    "多属性可控 SFT"
+  ],
+  "first_author": "Yi Dong",
+  "first_author_affiliation": "NVIDIA",
+  "published": "2023-10-09",
+  "code": "https://github.com/NVIDIA/NeMo-Aligner",
+  "adapter": "steerlm"
+}

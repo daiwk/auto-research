@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mesh",
+  "detail_path": "reproductions/2607.12392-mesh/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "mesh"
+  }
+}

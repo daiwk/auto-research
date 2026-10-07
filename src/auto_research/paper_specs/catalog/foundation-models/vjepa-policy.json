@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "vjepa-policy",
+  "title": "V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents",
+  "paper_url": "https://arxiv.org/abs/2609.37250",
+  "detail_path": "foundation-models/2609.37250-vjepa-policy/README.md",
+  "topic": [
+    "世界动作模型",
+    "预测视觉潜变量",
+    "机器人"
+  ],
+  "first_author": "Yang Zhang",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2026-09-29",
+  "code": "https://github.com/breez3young/VJEPA-Policy",
+  "adapter": "vjepa-policy",
+  "priority": "P1"
+}

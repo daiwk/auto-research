@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "uame",
   "arxiv_id": "2607.17092",
   "title": "Uncertainty as Remedy: Mitigating Satisfaction Label Bias in Short Video Multi-Objective Ensemble Ranking",
@@ -35,5 +35,57 @@
     "EMER/EASQ production backbones",
     "questionnaire satisfaction labels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.uame.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2026-07-19",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou short-video feed vs EMER",
+          "metric": "LongView",
+          "lift_percent": 1.614,
+          "traffic": "7 days; 5% traffic; p<0.005",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou short-video feed vs EASQ",
+          "metric": "Forward",
+          "lift_percent": 1.598,
+          "traffic": "7 days; 5% traffic; p<0.005",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private eight-pxtr logs",
+      "EMER/EASQ production backbones",
+      "questionnaire satisfaction labels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

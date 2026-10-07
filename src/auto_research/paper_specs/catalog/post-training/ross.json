@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "ross",
+  "title": "ROSS: Relearning from Self-Generated Rollouts through Selective Supervision",
+  "paper_url": "https://arxiv.org/abs/2609.35954",
+  "detail_path": "post-training/2609.35954-ross/README.md",
+  "topic": [
+    "离线 SFT",
+    "选择性监督"
+  ],
+  "first_author": "AllSpark Team",
+  "first_author_affiliation": "AllSpark Team（原文以团队署名，未列机构）",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "ross",
+  "priority": "P1"
+}

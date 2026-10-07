@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "reflexion",
+  "title": "Reflexion",
+  "paper_url": "https://arxiv.org/abs/2303.11366",
+  "detail_path": "agent-research/2303.11366-reflexion/README.md",
+  "topic": [
+    "自我反思"
+  ],
+  "first_author": "Noah Shinn",
+  "first_author_affiliation": "Northeastern University",
+  "published": "2023-03-20",
+  "code": "https://github.com/noahshinn/reflexion",
+  "adapter": "reflexion"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "flux-opd",
+  "title": "Flux-OPD",
+  "paper_url": "https://arxiv.org/abs/2607.28022",
+  "detail_path": "post-training/2607.28022-flux-opd/README.md",
+  "topic": [
+    "Context distillation"
+  ],
+  "first_author": "Yuran Wang",
+  "first_author_affiliation": "Peking University",
+  "published": "2026-07-30",
+  "code": "未发现官方代码",
+  "adapter": "flux-opd"
+}

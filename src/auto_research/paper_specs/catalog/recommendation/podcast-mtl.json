@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "podcast-mtl",
+  "detail_path": "reproductions/2601.02306-podcast-mtl/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Spotify",
+  "adapter": {
+    "spec_key": "podcast-mtl"
+  }
+}

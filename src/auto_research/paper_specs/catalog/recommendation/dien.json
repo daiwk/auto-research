@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dien",
+  "detail_path": "reproductions/1809.03672-dien/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "dien"
+  }
+}

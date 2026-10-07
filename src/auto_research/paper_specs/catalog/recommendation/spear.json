@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "spear",
+  "detail_path": "reproductions/2608.01738-spear/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Dewu",
+  "adapter": {
+    "spec_key": "spear"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "kvmem",
+  "detail_path": "reproductions/2609.04852-kvmem/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Shanghai University of Finance and Economics",
+  "adapter": {
+    "spec_key": "kvmem"
+  }
+}

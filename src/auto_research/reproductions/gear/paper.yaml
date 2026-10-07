@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gear",
   "arxiv_id": "2609.39327",
   "title": "Generative End-to-end Ad Retrieval at Douyin",
@@ -31,5 +31,57 @@
     "streaming parameter server and minute-level index",
     "production traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gear.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance",
+      "published": "2026-09-30",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Douyin Ads",
+          "metric": "ADSS",
+          "lift_percent": 0.563,
+          "traffic": "seven-day online A/B; 5% traffic in each group",
+          "source_url": "https://arxiv.org/html/2609.39327v1",
+          "source_location": "Section 6.4, Table 6",
+          "experiment_duration": "7 days",
+          "significance": null,
+          "retrieved_at": "2026-10-02"
+        },
+        {
+          "product": "Douyin Ads",
+          "metric": "ADVV",
+          "lift_percent": 0.658,
+          "traffic": "seven-day online A/B; 5% traffic in each group",
+          "source_url": "https://arxiv.org/html/2609.39327v1",
+          "source_location": "Section 6.4, Table 6",
+          "experiment_duration": "7 days",
+          "significance": null,
+          "retrieved_at": "2026-10-02"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Douyin Ads private logs",
+      "streaming parameter server and minute-level index",
+      "production traffic"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "deterministic L1 mechanism fixture",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

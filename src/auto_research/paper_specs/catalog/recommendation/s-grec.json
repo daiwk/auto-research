@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "s-grec",
+  "detail_path": "reproductions/2602.10606-s-grec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent / WeChat Channels",
+  "adapter": {
+    "spec_key": "s-grec"
+  }
+}

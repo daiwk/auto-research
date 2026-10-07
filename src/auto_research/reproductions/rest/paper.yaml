@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rest",
   "arxiv_id": "2609.01240",
   "title": "From Language to Behavior: Scaling Sequence Transformers for Industrial Recommendation Ranking with Rec-Native Designs",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:rest-dual-gate"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.rest.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance",
+      "published": "2026-09-01",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "production advertising platform",
+          "metric": "core revenue metric",
+          "lift_percent": 11.93,
+          "traffic": "one-week online A/B; fully deployed",
+          "source_url": "https://arxiv.org/html/2609.01240v1",
+          "source_location": "Abstract; Section 3.5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private behavior logs",
+      "production sequence checkpoint",
+      "shared-prefix serving kernel"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

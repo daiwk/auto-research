@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onemodel",
+  "detail_path": "reproductions/2608.18606-onemodel/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Xiaohongshu",
+  "adapter": {
+    "spec_key": "onemodel"
+  }
+}

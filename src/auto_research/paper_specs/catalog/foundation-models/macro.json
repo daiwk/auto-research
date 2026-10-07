@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "macro",
+  "detail_path": "reproductions/2608.05872-macro/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Heinrich Heine University Düsseldorf",
+  "adapter": {
+    "spec_key": "macro"
+  }
+}

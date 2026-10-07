@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "muchator",
+  "detail_path": "reproductions/2605.27103-muchator/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "muchator"
+  }
+}

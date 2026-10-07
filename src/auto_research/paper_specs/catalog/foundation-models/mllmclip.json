@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "mllmclip",
+  "detail_path": "reproductions/2608.25575-mllmclip/README.md",
+  "first_author": null,
+  "first_author_affiliation": "KAIST / Sony AI",
+  "adapter": {
+    "spec_key": "mllmclip"
+  }
+}

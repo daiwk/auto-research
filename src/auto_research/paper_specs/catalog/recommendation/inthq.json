@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "inthq",
+  "detail_path": "reproductions/2608.09634-inthq/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Amap / Alibaba",
+  "adapter": {
+    "spec_key": "inthq"
+  }
+}

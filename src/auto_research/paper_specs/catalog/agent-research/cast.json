@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "cast",
+  "title": "CAST",
+  "paper_url": "https://arxiv.org/abs/2607.25308",
+  "detail_path": "agent-research/2607.25308-cast/README.md",
+  "topic": [
+    "Agentic RL / turn-level credit"
+  ],
+  "first_author": "Yu Wang",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-07-28",
+  "code": "https://github.com/Wloner0809/CAST",
+  "adapter": "cast"
+}

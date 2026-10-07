@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "prl-puts",
+  "detail_path": "reproductions/2605.16344-prl-puts/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "prl-puts"
+  }
+}

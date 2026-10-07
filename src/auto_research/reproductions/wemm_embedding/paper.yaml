@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "wemm-embedding",
   "arxiv_id": "2608.24053",
   "title": "WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report",
@@ -32,5 +32,32 @@
     "hundreds of millions of private pairs",
     "WeChat production indexes"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.wemm_embedding.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Tencent/WeMM-Embedding",
+      "organization": "WeChat Vision, Tencent",
+      "published": "2026-08-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "2B/4B/9B released checkpoints",
+      "hundreds of millions of private pairs",
+      "WeChat production indexes"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

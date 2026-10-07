@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "fuxi-alpha",
   "arxiv_id": "2502.03036",
   "title": "FuXi-α: Scaling Recommendation Model with Feature Interaction Enhanced Transformer",
@@ -40,5 +40,56 @@
     "Huawei private features",
     "billion-parameter distributed training"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.fuxi_alpha.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/USTC-StarTeam/FuXi-alpha",
+      "organization": "Huawei / USTC",
+      "published": "2025-02-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Huawei Music",
+          "metric": "songs played",
+          "lift_percent": 4.67,
+          "traffic": "30% traffic, 7 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Huawei Music",
+          "metric": "listening duration",
+          "lift_percent": 5.1,
+          "traffic": "30% traffic, 7 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Huawei private features",
+      "billion-parameter distributed training"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

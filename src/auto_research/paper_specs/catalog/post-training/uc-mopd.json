@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "uc-mopd",
+  "title": "Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD",
+  "paper_url": "https://arxiv.org/abs/2608.26735",
+  "detail_path": "post-training/2608.26735-uc-mopd/README.md",
+  "topic": [
+    "多教师能力整合"
+  ],
+  "first_author": "Ziyuan Liu",
+  "first_author_affiliation": "Peking University",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "uc-mopd"
+}

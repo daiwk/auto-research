@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from functools import lru_cache
-import importlib
 import json
 from pathlib import Path
 import re
@@ -35,6 +34,8 @@ class PaperSpec:
     metrics: tuple[str, ...]
     mechanisms: tuple[str, ...]
     evolve_operators: tuple[str, ...] = ()
+    adapter_module: str = ""
+    execution: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -73,10 +74,10 @@ def adapter_directory(adapter: ReproductionAdapter, root: Path) -> Path:
     matches = []
     key_pattern = re.compile(rf"\bkey\s*=\s*['\"]{re.escape(adapter.key)}['\"]")
     for path in base.glob("*/adapter.py"):
-        module = importlib.import_module(f"auto_research.reproductions.{path.parent.name}.adapter")
-        if getattr(
-            getattr(module, "ADAPTER", None), "key", None
-        ) == adapter.key or key_pattern.search(path.read_text(encoding="utf-8")):
+        spec_path = path.with_name("paper.yaml")
+        if (spec_path.exists() and load_spec(spec_path).key == adapter.key) or key_pattern.search(
+            path.read_text(encoding="utf-8")
+        ):
             matches.append(path.parent)
     if len(matches) != 1:
         raise ValueError(
@@ -105,6 +106,14 @@ def _field_from_document(root: Path, documentation: str, labels: tuple[str, ...]
 
 
 def spec_from_adapter(adapter: ReproductionAdapter, root: Path) -> PaperSpec:
+    path = adapter_directory(adapter, root) / "paper.yaml"
+    if path.exists():
+        spec = load_spec(path)
+        if spec.schema_version == 2:
+            errors = validate_spec(spec, adapter=adapter)
+            if errors:
+                raise ValueError(f"{adapter.key}: " + "; ".join(errors))
+            return spec
     module_path = adapter_directory(adapter, root).relative_to(root.resolve()).as_posix()
     paper = adapter.paper
     documentation = _documentation_path(root, adapter)
@@ -180,8 +189,28 @@ def validate_spec(
         "baseline": spec.baseline,
     }
     errors.extend(f"{key} is required" for key, value in required.items() if not value)
-    if spec.schema_version != 1:
-        errors.append("schema_version must be 1")
+    if spec.schema_version not in {1, 2}:
+        errors.append("schema_version must be 1 or 2")
+    if spec.schema_version == 2:
+        if not spec.adapter_module.startswith("auto_research.reproductions."):
+            errors.append("adapter_module must name a reproduction module")
+        if not isinstance(spec.execution, dict):
+            errors.append("execution contract is required")
+        else:
+            paper = spec.execution.get("paper", {})
+            for key in ("arxiv_id", "title", "url", "track", "topics"):
+                if key in paper:
+                    errors.append(f"execution paper {key} duplicates canonical spec")
+            for key in (
+                "fidelity",
+                "evaluation_tier",
+                "datasets",
+                "baseline",
+                "metrics",
+                "evolve_operators",
+            ):
+                if key in spec.execution:
+                    errors.append(f"execution {key} duplicates canonical spec")
     if spec.published and not DATE_PATTERN.match(spec.published):
         errors.append("published must be an exact YYYY-MM-DD date")
     if not spec.mechanisms:

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "evorec",
   "arxiv_id": "2606.28368",
   "title": "EvoRec: Self-Evolving Agentic Recommender Systems",
@@ -35,5 +35,56 @@
     "production multi-agent toolchain",
     "private industrial dataset"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.evorec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International Digital Commerce Group",
+      "published": "2026-06-15",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba international recommendation",
+          "metric": "Revenue",
+          "lift_percent": 1.85,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Alibaba international recommendation",
+          "metric": "CTR",
+          "lift_percent": 1.02,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production multi-agent toolchain",
+      "private industrial dataset"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

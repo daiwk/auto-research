@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "seed",
+  "title": "SEED",
+  "paper_url": "https://arxiv.org/abs/2607.14777",
+  "detail_path": "agent-research/2607.14777-seed/README.md",
+  "topic": [
+    "Agentic RL / hindsight skill"
+  ],
+  "first_author": "Jinyang Wu",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2026-07-16",
+  "code": "https://github.com/jinyangwu/SEED",
+  "adapter": "seed"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "evoharness-rl",
+  "title": "EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2608.05446",
+  "detail_path": "agent-research/2608.05446-evoharness-rl/README.md",
+  "topic": [
+    "Harness policy RL"
+  ],
+  "first_author": "Xuying Ning",
+  "first_author_affiliation": "University of Illinois Urbana–Champaign / Meta AI",
+  "published": "2026-08-05",
+  "code": null,
+  "adapter": "evoharness-rl"
+}

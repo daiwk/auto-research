@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "leadre",
+  "detail_path": "reproductions/2411.13789-leadre/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent / WeChat",
+  "adapter": {
+    "spec_key": "leadre"
+  }
+}

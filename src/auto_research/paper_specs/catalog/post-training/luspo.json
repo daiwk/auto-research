@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "luspo",
+  "title": "LUSPO",
+  "paper_url": "https://arxiv.org/abs/2602.05261",
+  "detail_path": "post-training/2602.05261-luspo/README.md",
+  "topic": [
+    "长度无偏 RL"
+  ],
+  "first_author": "Fanfan Liu",
+  "first_author_affiliation": "Meituan",
+  "published": "2026-02-05",
+  "code": "未发现官方代码",
+  "adapter": "luspo"
+}

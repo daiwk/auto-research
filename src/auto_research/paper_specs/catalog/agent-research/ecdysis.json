@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "ecdysis",
+  "title": "Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2609.11677",
+  "detail_path": "agent-research/2609.11677-ecdysis/README.md",
+  "topic": [
+    "Harness 自进化",
+    "失败诊断"
+  ],
+  "first_author": "Ruiqing Yue",
+  "first_author_affiliation": "Chengdu Institute of Computer Applications, Chinese Academy of Sciences",
+  "published": "2026-09-10",
+  "code": "https://github.com/cuiyu-ai/Ecdysis",
+  "adapter": "ecdysis",
+  "priority": "P0"
+}

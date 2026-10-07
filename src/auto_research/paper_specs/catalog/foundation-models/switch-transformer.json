@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "switch-transformer",
+  "detail_path": "reproductions/2101.03961-switch-transformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google Brain",
+  "adapter": {
+    "spec_key": "switch-transformer"
+  }
+}

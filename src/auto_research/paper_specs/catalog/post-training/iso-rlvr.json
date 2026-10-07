@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "iso-rlvr",
+  "title": "ISO: An RLVR-Native Optimization Stack",
+  "paper_url": "https://arxiv.org/abs/2607.19331",
+  "detail_path": "post-training/2607.19331-iso-rlvr/README.md",
+  "topic": [
+    "RLVR",
+    "优化器"
+  ],
+  "first_author": "Hanqing Zhu",
+  "first_author_affiliation": "The University of Texas at Austin",
+  "published": "2026-07-21",
+  "code": "https://github.com/zhuhanqing/ISO",
+  "adapter": "iso-rlvr"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "lum",
   "arxiv_id": "2502.08309",
   "title": "Unlocking Scaling Law in Industrial Recommendation Systems with a Three-step Paradigm based Large User Model",
@@ -39,5 +39,59 @@
     "Taobao scenario/search conditions",
     "production pre-trigger service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.lum.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba",
+      "published": "2025-02",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao sponsored search",
+          "metric": "CTR",
+          "lift_percent": 2.9,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao sponsored search",
+          "metric": "RPM",
+          "lift_percent": 1.2,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "7B scaling study",
+      "Taobao scenario/search conditions",
+      "production pre-trigger service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=200",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

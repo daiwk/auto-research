@@ -1,0 +1,17 @@
+{
+  "key": "mingbird",
+  "title": "Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks",
+  "paper_url": "https://arxiv.org/abs/2610.02001",
+  "domain": "agent-research",
+  "detail_path": "agent-research/2610.02001-mingbird/README.md",
+  "topic": [
+    "本地 Agent 运行框架",
+    "工具使用"
+  ],
+  "first_author": "Hao Wang",
+  "first_author_affiliation": "University of Science and Technology Beijing",
+  "published": "2026-10-01",
+  "priority": "P1",
+  "code": "https://github.com/Mingbird/Mingbird-agent",
+  "adapter": "mingbird"
+}

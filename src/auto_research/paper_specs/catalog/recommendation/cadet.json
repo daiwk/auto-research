@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cadet",
+  "detail_path": "reproductions/2602.11410-cadet/README.md",
+  "first_author": null,
+  "first_author_affiliation": "LinkedIn",
+  "adapter": {
+    "spec_key": "cadet"
+  }
+}

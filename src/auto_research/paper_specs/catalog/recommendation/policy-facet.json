@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "policy-facet",
+  "detail_path": "reproductions/2605.16479-policy-facet/README.md",
+  "first_author": null,
+  "first_author_affiliation": "LinkedIn",
+  "adapter": {
+    "spec_key": "policy-facet"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "whale",
+  "detail_path": "reproductions/2607.17017-whale/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta Platforms, Inc.",
+  "adapter": {
+    "spec_key": "whale"
+  }
+}

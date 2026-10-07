@@ -1,1 +1,1 @@
-from ..latest_20260915 import chronicle_scores, chronicle_tokens, recency_merge
+from auto_research.reproductions.mechanisms.pixel_penalty import chronicle_scores, chronicle_tokens, recency_merge

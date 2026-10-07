@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "ppo-rlhf",
+  "title": "InstructGPT / PPO-RLHF",
+  "paper_url": "https://arxiv.org/abs/2203.02155",
+  "detail_path": "post-training/2203.02155-ppo-rlhf/README.md",
+  "topic": [
+    "经典 RLHF"
+  ],
+  "first_author": "Long Ouyang",
+  "first_author_affiliation": "OpenAI",
+  "published": "2022-03-04",
+  "code": "https://github.com/openai/following-instructions-human-feedback",
+  "adapter": "ppo-rlhf"
+}

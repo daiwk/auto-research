@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "cs3",
   "arxiv_id": "2604.19269",
   "title": "CS3: Efficient Online Capability Synergy for Two-Tower Recommendation",
@@ -29,5 +29,47 @@
     "400M-DAU online feature cache",
     "production EMA cross vectors and QPS stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.cs3.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/lixiangwang/CS3Rec",
+      "organization": "Kuaishou Technology",
+      "published": "2026-04-21",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou advertising",
+          "metric": "Revenue",
+          "lift_percent": 8.356,
+          "traffic": "Scenario A; three production scenarios",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "400M-DAU online feature cache",
+      "production EMA cross vectors and QPS stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

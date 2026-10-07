@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "crsd",
   "arxiv_id": "2510.11056",
   "title": "From Reasoning LLMs to BERT: A Two-Stage Distillation Framework for Search Relevance",
@@ -44,5 +44,56 @@
     "domain CPT/SFT teacher LLM",
     "private search-ad logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.crsd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan",
+      "published": "2025-10-13",
+      "publication_label": "TheWebConf 2026 Industry",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan search advertising",
+          "metric": "AdCTR",
+          "lift_percent": 0.91,
+          "traffic": "30% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meituan search advertising",
+          "metric": "AdCVR",
+          "lift_percent": 1.06,
+          "traffic": "30% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "domain CPT/SFT teacher LLM",
+      "private search-ad logs"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

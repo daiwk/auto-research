@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "tlm-dre",
+  "title": "Turn-level Multiscale Density Ratio Estimation for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2609.16760",
+  "detail_path": "post-training/2609.16760-tlm-dre/README.md",
+  "topic": [
+    "多轮 Agent 对齐",
+    "密度比估计"
+  ],
+  "first_author": "Zishuo Zhao",
+  "first_author_affiliation": "Alibaba Group",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "tlm-dre",
+  "priority": "P0"
+}

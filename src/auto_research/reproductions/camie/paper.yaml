@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "camie",
   "arxiv_id": "2608.30255",
   "title": "CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:coengagement-embedding"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.camie.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Snap Inc.",
+      "published": "2026-08-31",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Snap Dynamic Product Ads",
+          "metric": "overall CVR",
+          "lift_percent": 1.911,
+          "traffic": "production deployment on overall DPA traffic",
+          "source_url": "https://arxiv.org/html/2608.30255v1",
+          "source_location": "Abstract",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private co-engagement journeys",
+      "production MLLM checkpoint",
+      "DPA ANN service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "gas",
+  "detail_path": "reproductions/2608.12209-gas/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "gas"
+  }
+}

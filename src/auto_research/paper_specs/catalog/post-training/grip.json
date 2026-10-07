@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "grip",
+  "title": "GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning",
+  "paper_url": "https://arxiv.org/abs/2608.25583",
+  "detail_path": "post-training/2608.25583-grip/README.md",
+  "topic": [
+    "奖励引导参数插值"
+  ],
+  "first_author": "Lam So",
+  "first_author_affiliation": "Peking University",
+  "published": "2026-08-26",
+  "code": null,
+  "adapter": "grip"
+}

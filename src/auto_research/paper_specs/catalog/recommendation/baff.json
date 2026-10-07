@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "baff",
+  "detail_path": "reproductions/2609.08725-baff/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Dable",
+  "adapter": {
+    "spec_key": "baff"
+  }
+}

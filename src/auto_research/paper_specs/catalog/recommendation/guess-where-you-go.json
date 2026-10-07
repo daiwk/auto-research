@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "guess-where-you-go",
+  "detail_path": "reproductions/2607.26073-guess-where-you-go/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Amap / Alibaba",
+  "adapter": {
+    "spec_key": "guess-where-you-go"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "learn",
+  "detail_path": "reproductions/2405.03988-learn/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {
+    "spec_key": "learn"
+  }
+}

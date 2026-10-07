@@ -1,0 +1,19 @@
+{
+  "domain": "foundation-models",
+  "key": "oda",
+  "title": "On-Demand Attention: Efficient Long-Context Decoding with Learned Recall",
+  "paper_url": "https://arxiv.org/abs/2609.20734",
+  "detail_path": "foundation-models/2609.20734-oda/README.md",
+  "topic": [
+    "注意力与长上下文",
+    "推理效率"
+  ],
+  "first_author": "Paper author team",
+  "first_author_affiliation": "Southern University of Science and Technology",
+  "published": "2026-09-17",
+  "code": null,
+  "adapter": "oda",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oda-a100-20260919.json"
+}

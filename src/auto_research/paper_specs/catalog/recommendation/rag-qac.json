@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rag-qac",
+  "detail_path": "reproductions/2602.01023-rag-qac/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Apple",
+  "adapter": {
+    "spec_key": "rag-qac"
+  }
+}

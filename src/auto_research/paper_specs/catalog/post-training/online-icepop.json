@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "online-icepop",
+  "title": "Online IcePop",
+  "paper_url": "web-2025-online-icepop/README.md",
+  "detail_path": "post-training/web-2025-online-icepop/README.md",
+  "topic": [
+    "纯在线训推校正"
+  ],
+  "first_author": "Jian Hu",
+  "first_author_affiliation": "Ant Group",
+  "published": "2025-12-16",
+  "code": "未发现官方代码",
+  "adapter": "online-icepop"
+}

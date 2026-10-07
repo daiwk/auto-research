@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "oasis-opsd",
+  "title": "Overcoming Scaling Limits in On-Policy Self-Distillation for LLM Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.37915",
+  "detail_path": "post-training/2609.37915-oasis/README.md",
+  "topic": [
+    "On-policy self-distillation",
+    "可验证推理"
+  ],
+  "first_author": "Md. Ismail Hossain",
+  "first_author_affiliation": "North South University",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "oasis-opsd",
+  "priority": "P1"
+}

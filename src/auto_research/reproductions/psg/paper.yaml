@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "psg",
   "arxiv_id": "2607.26427",
   "title": "PSG: Pair-Space Generation for Efficient Generative Reranking",
@@ -35,5 +35,48 @@
   ],
   "evolve_operators": [
     "head:pair-space"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.psg.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2026-07-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou single-column feed",
+          "metric": "Stay Time per user",
+          "lift_percent": 0.178,
+          "traffic": "7-day test; two disjoint 10% traffic buckets",
+          "source_url": "https://arxiv.org/html/2607.26427v1",
+          "source_location": "Section 5 online A/B test, Table 8",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "pretrained pair-token module on exposure logs",
+      "GoalRank evaluator",
+      "production beam service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; six-item slate",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "agent-web-rec",
   "arxiv_id": "2610.01705",
   "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
@@ -33,5 +33,34 @@
     "InstructRec full benchmark",
     "deployed agent web"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.agent_web_rec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Beihang University",
+      "published": "2026-10-01",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "近期学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业搜广推证据结论。"
+    },
+    "omitted_core_components": [
+      "LLM query generation",
+      "InstructRec full benchmark",
+      "deployed agent web"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "deterministic L1 mechanism fixture",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

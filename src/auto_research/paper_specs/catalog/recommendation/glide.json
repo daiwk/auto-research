@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "glide",
+  "detail_path": "reproductions/2603.17540-glide/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Spotify",
+  "adapter": {
+    "spec_key": "glide"
+  }
+}

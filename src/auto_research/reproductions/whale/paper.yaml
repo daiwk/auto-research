@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "whale",
   "arxiv_id": "2607.17017",
   "title": "WHALE: A Scalable Unified Model for Recommendation with Wukong-HSTU Architecture",
@@ -34,5 +34,56 @@
     "private Meta ranking features and labels",
     "production Triton and AOTInductor kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.whale.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta Platforms, Inc.",
+      "published": "2026-07-19",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta social recommendation surface",
+          "metric": "Primary metric",
+          "lift_percent": 0.113,
+          "traffic": "14 days; production baseline",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meta social recommendation surface",
+          "metric": "Metric 1",
+          "lift_percent": 0.824,
+          "traffic": "14 days; production baseline",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Meta ranking features and labels",
+      "production Triton and AOTInductor kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=60",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

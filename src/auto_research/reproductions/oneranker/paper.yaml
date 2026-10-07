@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "oneranker",
   "arxiv_id": "2603.02999",
   "title": "OneRanker: Unified Generation and Ranking with One Model in Industrial Advertising Recommendation",
@@ -45,5 +45,45 @@
     "Weixin private ad logs",
     "production generative backbone"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.oneranker.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2026-03-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Weixin Channels Ads",
+          "metric": "GMV",
+          "lift_percent": 1.34,
+          "traffic": "full deployment",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Weixin private ad logs",
+      "production generative backbone"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

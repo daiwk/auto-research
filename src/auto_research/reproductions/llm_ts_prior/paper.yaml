@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "llm-ts-prior",
   "arxiv_id": "2608.03382",
   "title": "LLM-Derived Priors for Thompson Sampling in Cold-Start Comment Recommendation",
@@ -37,5 +37,67 @@
     "production prompts and service calibration",
     "WEBTOON private comment inventory"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.llm_ts_prior.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "NAVER WEBTOON",
+      "published": "2026-08-04",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "WEBTOON comment recommendation",
+          "metric": "Gender-prior overall CTR",
+          "lift_percent": 1.48,
+          "traffic": "four-week A/B/C; about 595K users per arm",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": "p=0.144, not significant",
+          "retrieved_at": null
+        },
+        {
+          "product": "WEBTOON 10-49 exposure bucket",
+          "metric": "Gender-prior CTR",
+          "lift_percent": 9.51,
+          "traffic": "A/B/C cold-start subgroup",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": "p<0.001",
+          "retrieved_at": null
+        },
+        {
+          "product": "WEBTOON overall",
+          "metric": "Content-prior CTR",
+          "lift_percent": -5.68,
+          "traffic": "four-week A/B/C",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": "p<0.001",
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production prompts and service calibration",
+      "WEBTOON private comment inventory"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

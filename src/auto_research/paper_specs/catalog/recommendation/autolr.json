@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "autolr",
+  "detail_path": "reproductions/2609.04871-autolr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NetEase, Inc.",
+  "adapter": {
+    "spec_key": "autolr"
+  }
+}

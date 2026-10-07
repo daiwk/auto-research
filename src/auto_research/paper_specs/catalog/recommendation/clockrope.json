@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "clockrope",
+  "detail_path": "reproductions/2607.26369-clockrope/README.md",
+  "first_author": null,
+  "first_author_affiliation": "YouTube / Google DeepMind",
+  "adapter": {
+    "spec_key": "clockrope"
+  }
+}

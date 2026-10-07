@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "lspd",
+  "title": "An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.35505",
+  "detail_path": "post-training/2609.35505-lspd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "离策略回放",
+    "推理"
+  ],
+  "first_author": "Shangzhe Li",
+  "first_author_affiliation": "University of North Carolina at Chapel Hill",
+  "published": "2026-09-28",
+  "code": "https://github.com/UNCSciML/LSPD",
+  "adapter": "lspd",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/lspd-a100-20260930.json"
+}

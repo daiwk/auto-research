@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rec-distill",
   "arxiv_id": "2605.29755",
   "title": "Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models",
@@ -32,5 +32,30 @@
   "mechanisms": [
     "Rec-Distill: An Industrial Distillation Pipeline for Large-Scale Recommendation Models"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rec_distill.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=160",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

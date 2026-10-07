@@ -1,0 +1,19 @@
+{
+  "domain": "multimodal-models",
+  "key": "videomm",
+  "title": "VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs",
+  "paper_url": "https://arxiv.org/abs/2609.16722",
+  "detail_path": "multimodal-models/2609.16722-videomm/README.md",
+  "topic": [
+    "视频理解",
+    "Token 压缩"
+  ],
+  "first_author": "Haoyu Guo",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-09-15",
+  "code": "https://github.com/adfh917k/VideoMM",
+  "adapter": "videomm",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/videomm-a100-20260916.json"
+}

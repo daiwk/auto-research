@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "harness-bandit",
+  "title": "HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2609.13739",
+  "detail_path": "agent-research/2609.13739-harness-bandit/README.md",
+  "topic": [
+    "Agent RL",
+    "Harness 调度"
+  ],
+  "first_author": "Hongliang Wei",
+  "first_author_affiliation": "Harbin Institute of Technology / Alibaba Cloud",
+  "published": "2026-09-12",
+  "code": null,
+  "adapter": "harness-bandit",
+  "priority": "P1"
+}

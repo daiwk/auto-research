@@ -1,14 +1,13 @@
-"""Reproducible environments for memory, planning and tool-use agents."""
+"""Lazy public exports; importing a package does not load optional runtimes."""
+import importlib
 
-from .models import AgentResearchConfig, AgentResearchResult
-from .runner import AgentResearchRunner
-from .executor_matrix import run_executor_matrix
-from .lightning_policy import LightningPolicyConfig, run_lightning_policy_training
-from .capability_runner import CapabilitySuiteConfig, run_capability_suite
+_EXPORTS = {'AgentResearchConfig': ('auto_research.agent_research.models', 'AgentResearchConfig'), 'AgentResearchResult': ('auto_research.agent_research.models', 'AgentResearchResult'), 'AgentResearchRunner': ('auto_research.agent_research.runner', 'AgentResearchRunner'), 'run_executor_matrix': ('auto_research.agent_research.executor_matrix', 'run_executor_matrix'), 'LightningPolicyConfig': ('auto_research.agent_research.lightning_policy', 'LightningPolicyConfig'), 'run_lightning_policy_training': ('auto_research.agent_research.lightning_policy', 'run_lightning_policy_training'), 'CapabilitySuiteConfig': ('auto_research.agent_research.capability_runner', 'CapabilitySuiteConfig'), 'run_capability_suite': ('auto_research.agent_research.capability_runner', 'run_capability_suite')}
+__all__ = list(_EXPORTS)
 
-__all__ = [
-    "AgentResearchConfig", "AgentResearchResult", "AgentResearchRunner",
-    "run_executor_matrix",
-    "LightningPolicyConfig", "run_lightning_policy_training",
-    "CapabilitySuiteConfig", "run_capability_suite",
-]
+def __getattr__(name):
+    if name not in _EXPORTS:
+        raise AttributeError(name)
+    module, attribute = _EXPORTS[name]
+    value = getattr(importlib.import_module(module), attribute)
+    globals()[name] = value
+    return value

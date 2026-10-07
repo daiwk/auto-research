@@ -1,0 +1,15 @@
+{
+  "domain": "foundation-models",
+  "key": "criticl",
+  "title": "CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes",
+  "paper_url": "https://arxiv.org/abs/2608.27455",
+  "detail_path": "foundation-models/2608.27455-criticl/README.md",
+  "topic": [
+    "弱模型失败模式 ICL"
+  ],
+  "first_author": "Yufan Wu",
+  "first_author_affiliation": "The Ohio State University",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "criticl"
+}

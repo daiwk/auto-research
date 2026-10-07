@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sid-coord",
+  "detail_path": "reproductions/2604.10471-sid-coord/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "sid-coord"
+  }
+}

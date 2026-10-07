@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ple",
+  "detail_path": "reproductions/recsys2020-ple-ple/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "ple"
+  }
+}

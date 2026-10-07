@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rd-attnres",
   "arxiv_id": "2608.01075",
   "title": "Role-Decoupled Attention Residuals",
@@ -36,5 +36,33 @@
     "120M/343M pretraining scale",
     "paper training corpus"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rd_attnres.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kehan Wang（论文未列机构）",
+      "published": "2026-08-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "120M/343M pretraining scale",
+      "paper training corpus"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

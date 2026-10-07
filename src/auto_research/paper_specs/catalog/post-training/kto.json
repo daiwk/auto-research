@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "kto",
+  "title": "KTO",
+  "paper_url": "https://arxiv.org/abs/2402.01306",
+  "detail_path": "post-training/2402.01306-kto/README.md",
+  "topic": [
+    "二元反馈对齐"
+  ],
+  "first_author": "Kawin Ethayarajh",
+  "first_author_affiliation": "Contextual AI",
+  "published": "2024-02-02",
+  "code": "https://github.com/ContextualAI/HALOs",
+  "adapter": "kto"
+}

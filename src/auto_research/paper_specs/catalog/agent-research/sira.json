@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "sira",
+  "title": "Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval",
+  "paper_url": "https://arxiv.org/abs/2605.06647",
+  "detail_path": "agent-research/2605.06647-sira/README.md",
+  "topic": [
+    "Agent 检索",
+    "语料感知查询扩展",
+    "BM25"
+  ],
+  "first_author": "Zeyu Yang",
+  "first_author_affiliation": "Meta Superintelligence Labs / Rice University（工作完成于 Meta）",
+  "published": "2026-05-07",
+  "code": "https://github.com/facebookresearch/sira",
+  "adapter": "sira",
+  "priority": "P0"
+}

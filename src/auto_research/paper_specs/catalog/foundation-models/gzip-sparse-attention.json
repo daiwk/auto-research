@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "gzip-sparse-attention",
+  "detail_path": "reproductions/2607.21752-gzip-sparse-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pennsylvania State University",
+  "adapter": {
+    "spec_key": "gzip-sparse-attention"
+  }
+}

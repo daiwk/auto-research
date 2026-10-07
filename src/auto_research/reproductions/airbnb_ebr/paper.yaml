@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "airbnb-ebr",
   "arxiv_id": "2601.06873",
   "title": "Applying Embedding-Based Retrieval to Airbnb Search",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:journey-retrieval"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.airbnb_ebr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Airbnb",
+      "published": "2026-01-11",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Airbnb search",
+          "metric": "Booking conversion",
+          "lift_percent": 0.31,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2601.06873v1",
+          "source_location": "Section 6.3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "dynamic property inventory",
+      "production HNSW/IVF service",
+      "private booking journeys"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

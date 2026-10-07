@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "agent-opsd",
+  "title": "AgentOPSD",
+  "paper_url": "https://arxiv.org/abs/2608.05987",
+  "detail_path": "agent-research/2608.05987-agent-opsd/README.md",
+  "topic": [
+    "递归 turn 信用"
+  ],
+  "first_author": "Zi-Han Wang",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2026-08-06",
+  "code": "https://github.com/ZethWang/AgentOPSD",
+  "adapter": "agent-opsd"
+}

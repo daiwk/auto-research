@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "sharpening-tax",
+  "title": "Sharpening Tax in Post-Training",
+  "paper_url": "https://arxiv.org/abs/2610.01509",
+  "detail_path": "post-training/2610.01509-sharpening-tax/README.md",
+  "topic": [
+    "RL 后训练",
+    "覆盖率",
+    "Agentic RL"
+  ],
+  "first_author": "Changdae Oh",
+  "first_author_affiliation": "Meta Superintelligence Labs / University of Wisconsin–Madison",
+  "published": "2026-10-01",
+  "code": "https://github.com/changdaeoh/sharpening-tax",
+  "adapter": "sharpening-tax",
+  "priority": "P0"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "harmonrank",
+  "detail_path": "reproductions/2601.02955-harmonrank/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "harmonrank"
+  }
+}

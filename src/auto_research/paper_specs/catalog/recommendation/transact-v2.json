@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "transact-v2",
+  "detail_path": "reproductions/2506.02267-transact-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "transact-v2"
+  }
+}

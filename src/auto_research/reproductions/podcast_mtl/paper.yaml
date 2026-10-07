@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "podcast-mtl",
   "arxiv_id": "2601.02306",
   "title": "Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify",
@@ -33,5 +33,56 @@
     "private Spotify ad/promotion logs",
     "production imbalance and gradient-balancing stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.podcast_mtl.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Spotify",
+      "published": "2026-01-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Spotify podcast ads",
+          "metric": "effective cost per stream",
+          "lift_percent": -22.0,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Spotify podcast promotions",
+          "metric": "stream rate",
+          "lift_percent": 24.0,
+          "traffic": "online A/B, upper reported lift",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Spotify ad/promotion logs",
+      "production imbalance and gradient-balancing stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

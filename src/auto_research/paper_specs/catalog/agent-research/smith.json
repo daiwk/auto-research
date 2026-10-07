@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "smith",
+  "title": "SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification",
+  "paper_url": "https://arxiv.org/abs/2608.24571",
+  "detail_path": "agent-research/2608.24571-smith/README.md",
+  "topic": [
+    "多维验证工具自进化"
+  ],
+  "first_author": "Zhi Rui Tam",
+  "first_author_affiliation": "Appier AI Research / National Taiwan University",
+  "published": "2026-08-25",
+  "code": "https://github.com/appier-research/smith",
+  "adapter": "smith"
+}

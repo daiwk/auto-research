@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "memfit",
+  "title": "MemFit: Efficient Long-Term Agentic Memory",
+  "paper_url": "https://arxiv.org/abs/2610.00872",
+  "detail_path": "agent-research/2610.00872-memfit/README.md",
+  "topic": [
+    "Agent 记忆",
+    "无损写入",
+    "混合检索"
+  ],
+  "first_author": "Mitchell Piehl",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "published": "2026-09-30",
+  "code": null,
+  "adapter": "memfit",
+  "priority": "P1"
+}

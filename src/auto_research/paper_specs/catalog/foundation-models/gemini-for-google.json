@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "gemini-for-google",
+  "title": "Customizing an LLM for Enterprise Software Engineering",
+  "paper_url": "https://arxiv.org/abs/2605.16517",
+  "detail_path": "foundation-models/2605.16517-gemini-for-google/README.md",
+  "topic": [
+    "企业 LLM",
+    "数据治理",
+    "中训练与后训练"
+  ],
+  "first_author": "Aditya Kini",
+  "first_author_affiliation": "Google",
+  "published": "2026-05-15",
+  "code": null,
+  "adapter": "gemini-for-google",
+  "priority": "P0"
+}

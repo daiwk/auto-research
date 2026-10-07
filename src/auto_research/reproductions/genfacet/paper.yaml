@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "genfacet",
   "arxiv_id": "2603.19665",
   "title": "GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "reward:facet-preference"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.genfacet.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "JD.com",
+      "published": "2026-03-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "JD.com e-commerce search",
+          "metric": "Facet CTR",
+          "lift_percent": 42.0,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2603.19665v1",
+          "source_location": "Abstract",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production LLM",
+      "private query/facet logs",
+      "GRPO training and retrieval service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

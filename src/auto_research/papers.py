@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import datetime as dt
 import hashlib
+import json
+from dataclasses import asdict
 import re
 import time
 from collections.abc import Iterable
@@ -28,6 +30,8 @@ class ArxivClient:
         maximum_retries: int = 3,
         retry_backoff_seconds: float = 3.0,
         cache_dir: Path | None = None,
+        checkpoint_dir: Path | None = None,
+        resume: bool = False,
     ):
         self.timeout = timeout
         self.user_agent = user_agent
@@ -35,6 +39,9 @@ class ArxivClient:
         self.maximum_retries = maximum_retries
         self.retry_backoff_seconds = retry_backoff_seconds
         self.cache_dir = cache_dir
+        self.checkpoint_dir = checkpoint_dir
+        self.resume = resume
+        self.query_reports: list[dict] = []
         self.cache_fallbacks: list[str] = []
         self._last_request_at: float | None = None
 
@@ -46,6 +53,8 @@ class ArxivClient:
         *,
         start: int = 0,
         match: str = "all",
+        date_from: dt.date | None = None,
+        date_to: dt.date | None = None,
     ) -> list[Paper]:
         if limit <= 0:
             return []
@@ -59,6 +68,13 @@ class ArxivClient:
             search_query = f"({search_query}) AND ({category_query})"
         if not search_query:
             raise ValueError("paper query contains no searchable terms")
+        if date_from is not None and date_to is not None:
+            if date_from > date_to:
+                raise ValueError("search start must not exceed end")
+            search_query = (
+                f"({search_query}) AND submittedDate:"
+                f"[{date_from:%Y%m%d}0000 TO {date_to:%Y%m%d}2359]"
+            )
         params = urllib.parse.urlencode(
             {
                 "search_query": search_query,
@@ -86,6 +102,9 @@ class ArxivClient:
         page_size: int = 50,
         maximum_results: int = 200,
         match: str = "all",
+        date_from: dt.date | None = None,
+        date_to: dt.date | None = None,
+        tolerate_failures: bool = False,
     ) -> list[Paper]:
         """Retrieve more than one arXiv page and de-duplicate versioned IDs.
 
@@ -95,25 +114,105 @@ class ArxivClient:
         pool than :meth:`search`'s UI-oriented default.
         """
         if page_size <= 0 or maximum_results <= 0:
-            return []
+            raise ValueError("page_size and maximum_results must be positive")
+        identity = dict(
+            query=query,
+            categories=list(categories),
+            match=match,
+            page_size=page_size,
+            maximum_results=maximum_results,
+            date_from=str(date_from),
+            date_to=str(date_to),
+            scan_id=getattr(self, "scan_id", None),
+        )
+        digest = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+        path = self.checkpoint_dir / f"{digest}.json" if self.checkpoint_dir else None
+        report = {
+            **identity,
+            "fingerprint": digest,
+            "next_offset": 0,
+            "state": "pending",
+            "coverage_complete": False,
+            "transport_complete": True,
+            "cache_fallback_pages": 0,
+            "pages": 0,
+            "resumed": False,
+        }
         papers: list[Paper] = []
         seen: set[str] = set()
-        for start in range(0, maximum_results, page_size):
+        if self.resume and path is not None and path.is_file():
+            saved = json.loads(path.read_text(encoding="utf-8"))
+            if saved.get("identity") != identity:
+                raise ValueError("discovery checkpoint identity mismatch")
+            report.update(saved["report"])
+            report["resumed"] = True
+            papers = [Paper(**row) for row in saved["papers"]]
+            seen = {canonical_arxiv_id(paper.arxiv_id) for paper in papers}
+            if report["state"] == "exhausted":
+                self.query_reports.append(report)
+                return papers
+
+        def checkpoint():
+            if path is not None:
+                from .discovery_checkpoint import atomic_json
+
+                atomic_json(
+                    path,
+                    {
+                        "identity": identity,
+                        "report": report,
+                        "papers": [asdict(paper) for paper in papers],
+                    },
+                )
+
+        start_offset = report["next_offset"]
+        if report["state"] == "capped":
+            self.query_reports.append(report)
+            return papers
+        report.update(state="running", transport_complete=True, error=None)
+        for start in range(start_offset, maximum_results, page_size):
             requested = min(page_size, maximum_results - start)
-            page = self.search(
-                query,
-                requested,
-                categories,
-                start=start,
-                match=match,
-            )
+            fallbacks = len(self.cache_fallbacks)
+            try:
+                kwargs = dict(start=start, match=match)
+                if date_from is not None:
+                    kwargs["date_from"] = date_from
+                if date_to is not None:
+                    kwargs["date_to"] = date_to
+                page = self.search(query, requested, categories, **kwargs)
+            except (OSError, ValueError, ET.ParseError) as exc:
+                report.update(
+                    state="failed", transport_complete=False, error=f"{type(exc).__name__}: {exc}"
+                )
+                checkpoint()
+                self.query_reports.append(report)
+                if not tolerate_failures:
+                    raise
+                return papers
+            cached = len(self.cache_fallbacks) > fallbacks
+            if cached:
+                report.update(
+                    state="cached",
+                    transport_complete=False,
+                    cache_fallback_pages=report["cache_fallback_pages"] + 1,
+                )
+                checkpoint()
             for paper in page:
-                identity = canonical_arxiv_id(paper.arxiv_id)
-                if identity not in seen:
-                    seen.add(identity)
+                paper_identity = canonical_arxiv_id(paper.arxiv_id)
+                if paper_identity not in seen:
+                    seen.add(paper_identity)
                     papers.append(paper)
-            if len(page) < requested:
+            if cached:
                 break
+            report["pages"] += 1
+            report["next_offset"] = start + len(page)
+            if len(page) < requested:
+                report.update(state="exhausted", coverage_complete=True)
+                checkpoint()
+                break
+            report["state"] = "capped" if start + requested >= maximum_results else "running"
+            checkpoint()
+        self.query_reports.append(report)
         return papers
 
     def lookup(self, arxiv_ids: Iterable[str]) -> list[Paper]:
@@ -121,7 +220,9 @@ class ArxivClient:
         identities = list(dict.fromkeys(canonical_arxiv_id(value) for value in arxiv_ids))
         if not identities:
             return []
-        params = urllib.parse.urlencode({"id_list": ",".join(identities), "max_results": len(identities)})
+        params = urllib.parse.urlencode(
+            {"id_list": ",".join(identities), "max_results": len(identities)}
+        )
         request = urllib.request.Request(
             f"{ARXIV_API}?{params}", headers={"User-Agent": self.user_agent}
         )
@@ -185,9 +286,7 @@ class ArxivClient:
         temporary.write_bytes(payload)
         temporary.replace(path)
 
-    def _cached_or_raise(
-        self, url: str, error: BaseException | None
-    ) -> bytes:
+    def _cached_or_raise(self, url: str, error: BaseException | None) -> bytes:
         path = self._cache_path(url)
         if path is not None and path.is_file():
             self.cache_fallbacks.append(url)
@@ -221,14 +320,13 @@ def parse_arxiv_feed(payload: bytes) -> list[Paper]:
     papers: list[Paper] = []
     for entry in root.findall("atom:entry", NS):
         url = _text(entry, "atom:id")
+        if "api/errors" in url or _text(entry, "atom:title").lower() == "error":
+            raise ValueError("arXiv API error: " + _text(entry, "atom:summary"))
         papers.append(
             Paper(
                 title=" ".join(_text(entry, "atom:title").split()),
                 abstract=" ".join(_text(entry, "atom:summary").split()),
-                authors=[
-                    _text(author, "atom:name")
-                    for author in entry.findall("atom:author", NS)
-                ],
+                authors=[_text(author, "atom:name") for author in entry.findall("atom:author", NS)],
                 published=_text(entry, "atom:published"),
                 url=url,
                 arxiv_id=url.rstrip("/").split("/")[-1],

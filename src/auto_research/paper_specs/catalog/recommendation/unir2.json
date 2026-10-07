@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "unir2",
+  "detail_path": "reproductions/2607.24439-unir2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou / IIE, CAS / UCAS",
+  "adapter": {
+    "spec_key": "unir2"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "glide",
   "arxiv_id": "2603.17540",
   "title": "Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify",
@@ -36,5 +36,56 @@
     "Spotify catalog and private user embeddings",
     "production constrained decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.glide.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Spotify",
+      "published": "2026-03-18",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Spotify",
+          "metric": "Non-habitual streaming",
+          "lift_percent": 5.4,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Spotify",
+          "metric": "New-show discovery",
+          "lift_percent": 14.3,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Spotify catalog and private user embeddings",
+      "production constrained decoder"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

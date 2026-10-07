@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "compass-opd",
+  "title": "CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts",
+  "paper_url": "https://arxiv.org/abs/2609.10154",
+  "detail_path": "post-training/2609.10154-compass-opd/README.md",
+  "topic": [
+    "跨模型族 OPD"
+  ],
+  "first_author": "Naibin Gu",
+  "first_author_affiliation": "Institute of Information Engineering, Chinese Academy of Sciences",
+  "published": "2026-09-09",
+  "code": null,
+  "adapter": "compass-opd"
+}

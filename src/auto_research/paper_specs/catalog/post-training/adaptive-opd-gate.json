@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "adaptive-opd-gate",
+  "title": "A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients",
+  "paper_url": "https://arxiv.org/abs/2609.11768",
+  "detail_path": "post-training/2609.11768-adaptive-opd-gate/README.md",
+  "topic": [
+    "On-policy distillation",
+    "逐 token 自适应门控"
+  ],
+  "first_author": "Suwan Wu",
+  "first_author_affiliation": "Xiaohongshu",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "adaptive-opd-gate",
+  "priority": "P1"
+}

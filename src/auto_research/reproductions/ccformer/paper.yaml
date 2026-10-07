@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ccformer",
   "arxiv_id": "2607.28070",
   "title": "CCFormer: Efficient Cross-Field Interaction and Hierarchical Sequence Compression for Industrial Recommendation at Tencent",
@@ -35,5 +35,56 @@
     "Tencent four-billion-sample private dataset",
     "parallel multi-target serving kernel"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.ccformer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent Platform and Content Group",
+      "published": "2026-07-30",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tencent video recommendation",
+          "metric": "CTR",
+          "lift_percent": 3.57,
+          "traffic": "over one million exposed users/day, two weeks; fully deployed",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Tencent advertising ranking",
+          "metric": "advertising revenue",
+          "lift_percent": 1.71,
+          "traffic": "over one million exposed users/day, two weeks; fully deployed",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Tencent four-billion-sample private dataset",
+      "parallel multi-target serving kernel"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sim",
   "arxiv_id": "2006.05639",
   "title": "Search-based User Interest Modeling with Lifelong Sequential Behavior Data for CTR Prediction",
@@ -43,5 +43,56 @@
     "54k production behavior service",
     "Alibaba private logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sim.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba",
+      "published": "2020-06-10",
+      "publication_label": "CIKM 2020",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba display advertising",
+          "metric": "CTR",
+          "lift_percent": 7.1,
+          "traffic": "main traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Alibaba display advertising",
+          "metric": "RPM",
+          "lift_percent": 4.4,
+          "traffic": "main traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "54k production behavior service",
+      "Alibaba private logs"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

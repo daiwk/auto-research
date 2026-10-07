@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "genrec",
   "arxiv_id": "2604.14878",
   "title": "GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation",
@@ -35,5 +35,56 @@
     "JD private page logs",
     "production LLM and online RL stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.genrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "JD.com",
+      "published": "2026-04-16",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "JD recommendation",
+          "metric": "Clicks",
+          "lift_percent": 9.5,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "JD recommendation",
+          "metric": "Transactions",
+          "lift_percent": 8.7,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "JD private page logs",
+      "production LLM and online RL stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

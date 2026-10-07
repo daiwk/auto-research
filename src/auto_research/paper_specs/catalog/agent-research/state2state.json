@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "state2state",
+  "title": "State2State: Environment-Derived Mid-Training for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2608.04934",
+  "detail_path": "agent-research/2608.04934-state2state/README.md",
+  "topic": [
+    "环境派生中训练"
+  ],
+  "first_author": "Xuanyu Lei",
+  "first_author_affiliation": "Tsinghua University AIR / Alibaba Group",
+  "published": "2026-08-05",
+  "code": "https://github.com/THUNLP-MT/State2State",
+  "adapter": "state2state"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dien",
   "arxiv_id": "1809.03672",
   "title": "Deep Interest Evolution Network for Click-Through Rate Prediction",
@@ -29,5 +29,47 @@
     "Taobao private ads features",
     "fused production AUGRU kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dien.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/mouna99/dien",
+      "organization": "Alibaba",
+      "published": "2018-09-11",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao display advertising",
+          "metric": "CTR",
+          "lift_percent": 20.7,
+          "traffic": "2018-06-07 to 2018-07-12",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Taobao private ads features",
+      "fused production AUGRU kernels"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

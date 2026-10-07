@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "recap",
+  "detail_path": "reproductions/2607.15730-recap/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology / USTC",
+  "adapter": {
+    "spec_key": "recap"
+  }
+}

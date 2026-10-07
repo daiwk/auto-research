@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "memtool",
+  "title": "MemTool",
+  "paper_url": "https://arxiv.org/abs/2507.21428",
+  "detail_path": "agent-research/2507.21428-memtool/README.md",
+  "topic": [
+    "工具记忆"
+  ],
+  "first_author": "Elias Lumer",
+  "first_author_affiliation": "PricewaterhouseCoopers Commercial Technology and Innovation Office",
+  "published": "2025-07-29",
+  "code": "未发现官方代码",
+  "adapter": "memtool"
+}

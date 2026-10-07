@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "agentkv",
+  "title": "AgentKV: Phase-Aware KV Eviction for Agentic LLMs",
+  "paper_url": "https://arxiv.org/abs/2609.14872",
+  "detail_path": "foundation-models/2609.14872-agentkv/README.md",
+  "topic": [
+    "Agent 推理",
+    "KV Cache"
+  ],
+  "first_author": "Taowen Tony Liu",
+  "first_author_affiliation": "University of Cambridge",
+  "published": "2026-09-14",
+  "code": "https://github.com/LiuTaowen-Tony/agentkv",
+  "adapter": "agentkv",
+  "priority": "P1"
+}

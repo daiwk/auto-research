@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "agent-web-rec",
+  "detail_path": "reproductions/2610.01705-agent-web-rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Beihang University",
+  "adapter": {
+    "spec_key": "agent-web-rec"
+  }
+}

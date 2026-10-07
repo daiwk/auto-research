@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "aigq",
+  "detail_path": "reproductions/2603.19710-aigq/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Taobao & Tmall Group / Alibaba",
+  "adapter": {
+    "spec_key": "aigq"
+  }
+}

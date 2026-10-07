@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "raft",
+  "title": "RAFT",
+  "paper_url": "https://arxiv.org/abs/2304.06767",
+  "detail_path": "post-training/2304.06767-raft/README.md",
+  "topic": [
+    "Reward 选优微调"
+  ],
+  "first_author": "Hanze Dong",
+  "first_author_affiliation": "HKUST",
+  "published": "2023-04-13",
+  "code": "https://github.com/OptimalScale/LMFlow",
+  "adapter": "raft"
+}

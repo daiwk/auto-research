@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dual-sid",
+  "detail_path": "reproductions/2607.24865-dual-sid/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google DeepMind / YouTube",
+  "adapter": {
+    "spec_key": "dual-sid"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "unirec-coa",
+  "detail_path": "reproductions/2604.12234-unirec-coa/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Authors did not disclose affiliation / large-scale e-commerce platform",
+  "adapter": {
+    "spec_key": "unirec-coa"
+  }
+}

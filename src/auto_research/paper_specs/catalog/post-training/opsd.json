@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "opsd",
+  "title": "OPSD",
+  "paper_url": "https://arxiv.org/abs/2601.18734",
+  "detail_path": "post-training/2601.18734-opsd/README.md",
+  "topic": [
+    "On-policy self-distillation"
+  ],
+  "first_author": "Siyan Zhao",
+  "first_author_affiliation": "University of California, Los Angeles",
+  "published": "2026-01-26",
+  "code": "https://github.com/siyan-zhao/OPSD",
+  "adapter": "opsd"
+}

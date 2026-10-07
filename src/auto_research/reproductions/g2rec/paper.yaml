@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "g2rec",
   "arxiv_id": "2606.20554",
   "title": "Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation",
@@ -30,5 +30,30 @@
   "mechanisms": [
     "Structuring and Tokenizing Distributed User Interest Context for Generative Recommendation"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.g2rec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=240",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

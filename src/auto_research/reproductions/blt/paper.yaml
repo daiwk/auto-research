@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "blt",
   "arxiv_id": "2412.09871",
   "title": "Byte Latent Transformer: Patches Scale Better Than Tokens",
@@ -58,5 +58,33 @@
     "raw-byte 8B pretraining",
     "full local byte encoder/decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.blt.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/facebookresearch/blt",
+      "organization": "Meta FAIR",
+      "published": "2024-12-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "raw-byte 8B pretraining",
+      "full local byte encoder/decoder"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=12",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

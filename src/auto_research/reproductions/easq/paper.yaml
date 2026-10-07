@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "easq",
   "arxiv_id": "2601.20215",
   "title": "Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:questionnaire-alignment"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.easq.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2026-01-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou video recommendation",
+          "metric": "User satisfaction metric",
+          "lift_percent": 5.1,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2601.20215v1",
+          "source_location": "Section 5.3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private questionnaire responses",
+      "production ranking backbone",
+      "online DPO update service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

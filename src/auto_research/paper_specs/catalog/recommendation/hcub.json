@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "hcub",
+  "detail_path": "reproductions/2601.14333-hcub/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Dream11",
+  "adapter": {
+    "spec_key": "hcub"
+  }
+}

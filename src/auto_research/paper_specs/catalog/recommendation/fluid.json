@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "fluid",
+  "detail_path": "reproductions/2605.21832-fluid/README.md",
+  "first_author": null,
+  "first_author_affiliation": "TikTok / ByteDance",
+  "adapter": {
+    "spec_key": "fluid"
+  }
+}

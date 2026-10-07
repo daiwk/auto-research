@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "irekogpt",
+  "title": "IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs",
+  "paper_url": "https://arxiv.org/abs/2610.00426",
+  "detail_path": "foundation-models/2610.00426-irekogpt/README.md",
+  "topic": [
+    "结构剪枝",
+    "可伸缩模型",
+    "推理效率"
+  ],
+  "first_author": "Pietro Moriello",
+  "first_author_affiliation": "University of Modena and Reggio Emilia",
+  "published": "2026-10-01",
+  "code": "https://github.com/aimagelab/IrekoGPT",
+  "adapter": "irekogpt",
+  "priority": "P1"
+}

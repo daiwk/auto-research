@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "art",
+  "title": "ART",
+  "paper_url": "https://arxiv.org/abs/2303.09014",
+  "detail_path": "agent-research/2303.09014-art/README.md",
+  "topic": [
+    "自动工具推理"
+  ],
+  "first_author": "Bhargavi Paranjape",
+  "first_author_affiliation": "University of Washington",
+  "published": "2023-03-16",
+  "code": "https://github.com/bhargaviparanjape/language-programmes",
+  "adapter": "art"
+}

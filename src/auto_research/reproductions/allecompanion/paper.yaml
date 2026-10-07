@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "allecompanion",
   "arxiv_id": "2609.05063",
   "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
@@ -36,5 +36,47 @@
   ],
   "evolve_operators": [
     "context:complementary-category-adapter"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.allecompanion.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Allegro.com",
+      "published": "2026-09-04",
+      "publication_label": "RecSys 2026",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Allegro product and cart placements",
+          "metric": "attributed GMV",
+          "lift_percent": 21.25,
+          "traffic": "two-week tests routed over 100% platform traffic",
+          "source_url": "https://arxiv.org/html/2609.05063",
+          "source_location": "Section 4.4, Table 5",
+          "experiment_duration": "two weeks",
+          "significance": null,
+          "retrieved_at": "2026-09-07"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private 90-day Allegro transaction log",
+      "production Faiss index",
+      "ComCat expert/LLM mapping",
+      "product complementarity benchmark; MovieLens is a structural diagnostic"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 80 CPU updates; validation-only candidate selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

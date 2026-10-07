@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "grc",
   "arxiv_id": "2602.23639",
   "title": "Learning to Reflect and Correct: Towards Better Decoding Trajectories for Large-Scale Generative Recommendation",
@@ -32,5 +32,55 @@
   "mechanisms": [
     "industrial LLM backbone and private seller/brand attributes"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.grc.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International / Wuhan University",
+      "published": "2026-02-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba International",
+          "metric": "Revenue",
+          "lift_percent": 1.79,
+          "traffic": "2026-01-02 to 2026-01-12, 15%/15%",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Alibaba International",
+          "metric": "CTR",
+          "lift_percent": 2.11,
+          "traffic": "2026-01-02 to 2026-01-12, 15%/15%",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "industrial LLM backbone and private seller/brand attributes"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

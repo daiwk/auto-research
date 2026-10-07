@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cmsl",
+  "detail_path": "reproductions/2606.28533-cmsl/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "cmsl"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "gkd",
+  "title": "GKD",
+  "paper_url": "https://arxiv.org/abs/2306.13649",
+  "detail_path": "post-training/2306.13649-gkd/README.md",
+  "topic": [
+    "经典 On-policy distillation"
+  ],
+  "first_author": "Rishabh Agarwal",
+  "first_author_affiliation": "Google DeepMind",
+  "published": "2023-06-23",
+  "code": "https://github.com/huggingface/trl/blob/main/docs/source/distillation_trainer.md",
+  "adapter": "gkd"
+}

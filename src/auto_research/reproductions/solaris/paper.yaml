@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "solaris",
   "arxiv_id": "2604.12110",
   "title": "SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling",
@@ -35,5 +35,45 @@
     "Meta foundation-model weights",
     "production cache infrastructure"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.solaris.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta",
+      "published": "2026-04-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta recommendation",
+          "metric": "Top-line revenue",
+          "lift_percent": 0.67,
+          "traffic": "fully deployed",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta foundation-model weights",
+      "production cache infrastructure"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

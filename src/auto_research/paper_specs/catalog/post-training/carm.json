@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "carm",
+  "title": "CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2610.02039",
+  "detail_path": "post-training/2610.02039-carm/README.md",
+  "topic": [
+    "RLVR",
+    "off-policy",
+    "响应掩码"
+  ],
+  "first_author": "Yafei Zhang",
+  "first_author_affiliation": "Moore Threads AI",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "carm",
+  "priority": "P1"
+}

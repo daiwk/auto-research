@@ -1,0 +1,10 @@
+{
+  "domain": "post-training",
+  "key": "dynamic-rubric",
+  "detail_path": "reproductions/2607.20083-dynamic-rubric/README.md",
+  "first_author": "Beining Wang",
+  "first_author_affiliation": "WeChat / Tencent",
+  "adapter": {
+    "spec_key": "dynamic-rubric"
+  }
+}

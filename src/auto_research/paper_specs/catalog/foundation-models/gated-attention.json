@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "gated-attention",
+  "detail_path": "reproductions/2505.06708-gated-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Qwen / Alibaba",
+  "adapter": {
+    "spec_key": "gated-attention"
+  }
+}

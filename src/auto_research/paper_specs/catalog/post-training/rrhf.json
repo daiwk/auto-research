@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "rrhf",
+  "title": "RRHF",
+  "paper_url": "https://arxiv.org/abs/2304.05302",
+  "detail_path": "post-training/2304.05302-rrhf/README.md",
+  "topic": [
+    "全排序偏好"
+  ],
+  "first_author": "Zheng Yuan",
+  "first_author_affiliation": "Alibaba DAMO Academy",
+  "published": "2023-04-11",
+  "code": "https://github.com/GanjinZero/RRHF",
+  "adapter": "rrhf"
+}

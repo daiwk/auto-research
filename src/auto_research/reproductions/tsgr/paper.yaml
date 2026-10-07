@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "tsgr",
   "arxiv_id": "2607.18796",
   "title": "TSGR: Taobao Search Generative Retrieval",
@@ -37,5 +37,67 @@
     "private Taobao queries and 200M interactions",
     "H20 constrained beam-search serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.tsgr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group of Alibaba / Zhejiang University",
+      "published": "2026-07-21",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Search",
+          "metric": "IPV",
+          "lift_percent": 0.43,
+          "traffic": "1% traffic; 38 days; statistically significant",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Search",
+          "metric": "Transaction Count",
+          "lift_percent": 1.12,
+          "traffic": "1% traffic; 38 days; statistically significant",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Search",
+          "metric": "GMV",
+          "lift_percent": 1.64,
+          "traffic": "1% traffic; 38 days; statistically significant",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Taobao queries and 200M interactions",
+      "H20 constrained beam-search serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

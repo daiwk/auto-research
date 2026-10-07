@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "toolgrad",
+  "title": "ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients",
+  "paper_url": "https://arxiv.org/abs/2508.04086",
+  "detail_path": "agent-research/2508.04086-toolgrad/README.md",
+  "topic": [
+    "工具学习",
+    "数据生成"
+  ],
+  "first_author": "Zhongyi Zhou",
+  "first_author_affiliation": "Google",
+  "published": "2025-08-06",
+  "code": "https://github.com/zhongyi-zhou/toolgrad",
+  "adapter": "toolgrad",
+  "priority": "P0"
+}

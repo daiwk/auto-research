@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "incrementality",
   "arxiv_id": "2608.10182",
   "title": "From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation",
@@ -34,5 +34,48 @@
   ],
   "evolve_operators": [
     "reward:incrementality"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.incrementality.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "LinkedIn",
+      "published": "2026-08-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "LinkedIn Feed marketing traffic",
+          "metric": "primary long-term-value KPI",
+          "lift_percent": 7.2,
+          "traffic": "online A/B test",
+          "source_url": "https://arxiv.org/html/2608.10182v1",
+          "source_location": "Section 4 online evaluation",
+          "experiment_duration": null,
+          "significance": "p = 0.041",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production Transformer DragonNet",
+      "neural bandit service",
+      "large-scale LP solver"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users; 30% treatment budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

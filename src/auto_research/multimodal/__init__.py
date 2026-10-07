@@ -1,46 +1,13 @@
-"""Local-first multimodal training and evaluation primitives."""
+"""Lazy public exports; importing a package does not load optional runtimes."""
+import importlib
 
-from .evaluator import MicroVLMEvaluator
-from .benchmarks import (
-    BENCHMARKS, run_cifar10_benchmark, run_public_benchmark,
-    score_benchmark, write_benchmark_report,
-)
-from .data import (
-    load_cifar10_qa, load_fashion_mnist_qa, load_multimodal_data,
-    load_visual_shapes,
-)
-from .checkpoint import (
-    CheckpointPredictionConfig, GENERATIVE_BENCHMARKS,
-    generate_checkpoint_predictions,
-)
-from .retrieval import (
-    RETRIEVAL_BENCHMARKS, RetrievalPredictionConfig,
-    generate_retrieval_predictions,
-)
-from .matrix import MatrixCell, load_matrix, run_checkpoint_matrix
-from .lmms_eval import (
-    LMMSEvalConfig,
-    build_lmms_eval_command,
-    normalize_lmms_eval_results,
-    run_lmms_eval,
-)
-from .video import VideoBenchmarkConfig, run_video_benchmark
-from .audio import AudioBenchmarkConfig, run_audio_benchmark
-from .embodied import EmbodiedPostTrainingConfig, run_embodied_post_training
+_EXPORTS = {'MicroVLMEvaluator': ('auto_research.multimodal.evaluator', 'MicroVLMEvaluator'), 'BENCHMARKS': ('auto_research.multimodal.benchmarks', 'BENCHMARKS'), 'run_cifar10_benchmark': ('auto_research.multimodal.benchmarks', 'run_cifar10_benchmark'), 'run_public_benchmark': ('auto_research.multimodal.benchmarks', 'run_public_benchmark'), 'score_benchmark': ('auto_research.multimodal.benchmarks', 'score_benchmark'), 'write_benchmark_report': ('auto_research.multimodal.benchmarks', 'write_benchmark_report'), 'load_cifar10_qa': ('auto_research.multimodal.data', 'load_cifar10_qa'), 'load_fashion_mnist_qa': ('auto_research.multimodal.data', 'load_fashion_mnist_qa'), 'load_multimodal_data': ('auto_research.multimodal.data', 'load_multimodal_data'), 'load_visual_shapes': ('auto_research.multimodal.data', 'load_visual_shapes'), 'CheckpointPredictionConfig': ('auto_research.multimodal.checkpoint', 'CheckpointPredictionConfig'), 'GENERATIVE_BENCHMARKS': ('auto_research.multimodal.checkpoint', 'GENERATIVE_BENCHMARKS'), 'generate_checkpoint_predictions': ('auto_research.multimodal.checkpoint', 'generate_checkpoint_predictions'), 'RETRIEVAL_BENCHMARKS': ('auto_research.multimodal.retrieval', 'RETRIEVAL_BENCHMARKS'), 'RetrievalPredictionConfig': ('auto_research.multimodal.retrieval', 'RetrievalPredictionConfig'), 'generate_retrieval_predictions': ('auto_research.multimodal.retrieval', 'generate_retrieval_predictions'), 'MatrixCell': ('auto_research.multimodal.matrix', 'MatrixCell'), 'load_matrix': ('auto_research.multimodal.matrix', 'load_matrix'), 'run_checkpoint_matrix': ('auto_research.multimodal.matrix', 'run_checkpoint_matrix'), 'LMMSEvalConfig': ('auto_research.multimodal.lmms_eval', 'LMMSEvalConfig'), 'build_lmms_eval_command': ('auto_research.multimodal.lmms_eval', 'build_lmms_eval_command'), 'normalize_lmms_eval_results': ('auto_research.multimodal.lmms_eval', 'normalize_lmms_eval_results'), 'run_lmms_eval': ('auto_research.multimodal.lmms_eval', 'run_lmms_eval'), 'VideoBenchmarkConfig': ('auto_research.multimodal.video', 'VideoBenchmarkConfig'), 'run_video_benchmark': ('auto_research.multimodal.video', 'run_video_benchmark'), 'AudioBenchmarkConfig': ('auto_research.multimodal.audio', 'AudioBenchmarkConfig'), 'run_audio_benchmark': ('auto_research.multimodal.audio', 'run_audio_benchmark'), 'EmbodiedPostTrainingConfig': ('auto_research.multimodal.embodied', 'EmbodiedPostTrainingConfig'), 'run_embodied_post_training': ('auto_research.multimodal.embodied', 'run_embodied_post_training')}
+__all__ = list(_EXPORTS)
 
-__all__ = [
-    "MicroVLMEvaluator", "load_cifar10_qa", "load_fashion_mnist_qa",
-    "load_multimodal_data", "load_visual_shapes", "BENCHMARKS",
-    "run_cifar10_benchmark", "run_public_benchmark", "score_benchmark",
-    "write_benchmark_report",
-    "CheckpointPredictionConfig", "GENERATIVE_BENCHMARKS",
-    "generate_checkpoint_predictions",
-    "RETRIEVAL_BENCHMARKS", "RetrievalPredictionConfig",
-    "generate_retrieval_predictions",
-    "MatrixCell", "load_matrix", "run_checkpoint_matrix",
-    "LMMSEvalConfig", "build_lmms_eval_command", "normalize_lmms_eval_results",
-    "run_lmms_eval",
-    "VideoBenchmarkConfig", "run_video_benchmark",
-    "AudioBenchmarkConfig", "run_audio_benchmark",
-    "EmbodiedPostTrainingConfig", "run_embodied_post_training",
-]
+def __getattr__(name):
+    if name not in _EXPORTS:
+        raise AttributeError(name)
+    module, attribute = _EXPORTS[name]
+    value = getattr(importlib.import_module(module), attribute)
+    globals()[name] = value
+    return value

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "reinforce-plus",
+  "title": "REINFORCE++",
+  "paper_url": "https://arxiv.org/abs/2501.03262",
+  "detail_path": "post-training/2501.03262-reinforce-plus/README.md",
+  "topic": [
+    "全局优势估计"
+  ],
+  "first_author": "Jian Hu",
+  "first_author_affiliation": "Independent researchers",
+  "published": "2025-01-04",
+  "code": "未发现官方代码",
+  "adapter": "reinforce-plus"
+}

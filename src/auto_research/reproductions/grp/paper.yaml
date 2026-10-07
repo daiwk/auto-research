@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "grp",
   "arxiv_id": "2609.36688",
   "title": "GRP v0.1 Technical Report",
@@ -30,5 +30,56 @@
     "private Snap user/item data, Qwen3-VL semantic-ID tokenizer and production objectives",
     "full encoder-decoder training, CUDA-graph serving, reverse catalog and online traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.grp.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Snap Inc.",
+      "published": "2026-09-29",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Snap short-video recommendation",
+          "metric": "view time",
+          "lift_percent": 0.46,
+          "traffic": "retrieval-only online A/B",
+          "source_url": "https://arxiv.org/html/2609.36688",
+          "source_location": "Section 6.2",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-30"
+        },
+        {
+          "product": "Snap short-video recommendation",
+          "metric": "shares",
+          "lift_percent": 2.56,
+          "traffic": "bypass plus source-replacement online A/B",
+          "source_url": "https://arxiv.org/html/2609.36688",
+          "source_location": "Section 6.4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-30"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Snap user/item data, Qwen3-VL semantic-ID tokenizer and production objectives",
+      "full encoder-decoder training, CUDA-graph serving, reverse catalog and online traffic"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "two item blocks, three candidate scores and one mGRPO group per seed",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

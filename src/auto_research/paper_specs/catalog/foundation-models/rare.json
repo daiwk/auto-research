@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "rare",
+  "detail_path": "reproductions/2608.21236-rare/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huazhong University of Science and Technology",
+  "adapter": {
+    "spec_key": "rare"
+  }
+}

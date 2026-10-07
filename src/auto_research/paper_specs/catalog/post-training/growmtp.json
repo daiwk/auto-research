@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "growmtp",
+  "title": "GrowMTP: Can RL Grow Its Own Draft Head?",
+  "paper_url": "https://arxiv.org/abs/2609.16648",
+  "detail_path": "post-training/2609.16648-growmtp/README.md",
+  "topic": [
+    "RL 训练加速",
+    "推测解码"
+  ],
+  "first_author": "Minghua He",
+  "first_author_affiliation": "WeChat AI, Tencent / Peking University",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "growmtp",
+  "priority": "P1"
+}

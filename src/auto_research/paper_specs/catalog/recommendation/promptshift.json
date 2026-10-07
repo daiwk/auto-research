@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "promptshift",
+  "detail_path": "reproductions/2609.34229-promptshift/README.md",
+  "first_author": "Zhuoxiong Gan",
+  "first_author_affiliation": "University of Electronic Science and Technology of China",
+  "adapter": {
+    "spec_key": "promptshift"
+  }
+}

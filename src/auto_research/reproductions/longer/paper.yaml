@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "longer",
   "arxiv_id": "2505.04421",
   "title": "LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders",
@@ -32,5 +32,35 @@
     "private Douyin features",
     "distributed training and production serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.longer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Douyin features",
+      "distributed training and production serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=90",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

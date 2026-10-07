@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "conv-llm",
+  "detail_path": "reproductions/2607.18413-conv-llm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huawei / Peking University / Tsinghua University",
+  "adapter": {
+    "spec_key": "conv-llm"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "webgpt",
+  "title": "WebGPT",
+  "paper_url": "https://arxiv.org/abs/2112.09332",
+  "detail_path": "agent-research/2112.09332-webgpt/README.md",
+  "topic": [
+    "浏览问答"
+  ],
+  "first_author": "Reiichiro Nakano",
+  "first_author_affiliation": "OpenAI",
+  "published": "2021-12-17",
+  "code": "https://huggingface.co/datasets/openai/webgpt_comparisons",
+  "adapter": "webgpt"
+}

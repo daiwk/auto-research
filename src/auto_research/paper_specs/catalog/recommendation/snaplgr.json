@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "snaplgr",
+  "detail_path": "reproductions/2607.28895-snaplgr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Snap Inc.",
+  "adapter": {
+    "spec_key": "snaplgr"
+  }
+}

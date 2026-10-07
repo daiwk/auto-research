@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "tiao",
+  "title": "TIAO: Token Importance-Aware Policy Optimization for Text Summarization",
+  "paper_url": "https://arxiv.org/abs/2609.16748",
+  "detail_path": "post-training/2609.16748-tiao/README.md",
+  "topic": [
+    "强化学习",
+    "Token 信用分配"
+  ],
+  "first_author": "Qixiu Li",
+  "first_author_affiliation": "National University of Defense Technology",
+  "published": "2026-09-15",
+  "code": "https://github.com/TechCloud-x/TIAO",
+  "adapter": "tiao",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/tiao-a100-20260916.json"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "awq",
   "arxiv_id": "2306.00978",
   "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
@@ -29,5 +29,33 @@
     "70B model",
     "TinyChat kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.awq.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/mit-han-lab/llm-awq",
+      "organization": "MIT / NVIDIA / Harvard / SJTU",
+      "published": "2023-06-01",
+      "publication_label": "MLSys 2024 Best Paper",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "70B model",
+      "TinyChat kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

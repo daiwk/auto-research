@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "feedback-policy",
+  "detail_path": "reproductions/2607.27789-feedback-policy/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huazhong Agricultural University (Kuaishou internship)",
+  "adapter": {
+    "spec_key": "feedback-policy"
+  }
+}

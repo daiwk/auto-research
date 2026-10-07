@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "causal-representation",
   "arxiv_id": "2605.27043",
   "title": "Causal Representation Learning for Generalisable Recommendation",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "head:causal-bottleneck"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.causal_representation.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "University of Warwick",
+      "published": "2026-05-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Spotify playlist generation",
+          "metric": "Track streams",
+          "lift_percent": 0.75,
+          "traffic": "2 weeks; millions of users; 95% CI [+0.54%, +0.96%]",
+          "source_url": "https://arxiv.org/html/2605.27043v1",
+          "source_location": "Section 4.3, Table 2",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-02"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production session ranker",
+      "private random-exposure logs",
+      "live policy distribution"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

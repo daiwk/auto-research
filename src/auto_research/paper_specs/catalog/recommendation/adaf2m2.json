@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "adaf2m2",
+  "detail_path": "reproductions/2501.15816-adaf2m2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance / Douyin",
+  "adapter": {
+    "spec_key": "adaf2m2"
+  }
+}

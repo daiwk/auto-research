@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "self-rewarding",
+  "title": "Self-Rewarding LM",
+  "paper_url": "https://arxiv.org/abs/2401.10020",
+  "detail_path": "post-training/2401.10020-self-rewarding/README.md",
+  "topic": [
+    "自奖励"
+  ],
+  "first_author": "Weizhe Yuan",
+  "first_author_affiliation": "Meta AI",
+  "published": "2024-01-18",
+  "code": "未发现官方代码",
+  "adapter": "self-rewarding"
+}

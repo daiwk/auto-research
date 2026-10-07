@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "legomem",
+  "title": "LEGOMem",
+  "paper_url": "https://arxiv.org/abs/2510.04851",
+  "detail_path": "agent-research/2510.04851-legomem/README.md",
+  "topic": [
+    "过程记忆"
+  ],
+  "first_author": "Dongge Han",
+  "first_author_affiliation": "Microsoft Research",
+  "published": "2025-10-06",
+  "code": "未发现官方代码",
+  "adapter": "legomem"
+}

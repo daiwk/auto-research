@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "connectionmind",
   "arxiv_id": "2608.10187",
   "title": "ConnectionMind: A General Social-Personalized Recommendation System with LLM Reasoning",
@@ -32,5 +32,65 @@
     "Meta private short-video graph and production serving",
     "Llama-3.1 3B/8B policies and production-scale GNN student"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.connectionmind.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Michigan State University / Meta Platforms, Inc.",
+      "published": "2026-08-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta short-video recommendation",
+          "metric": "exposure",
+          "lift_percent": 0.33,
+          "traffic": "multi-week test over tens of millions of users",
+          "source_url": "https://arxiv.org/pdf/2608.10187",
+          "source_location": "Section 5.4 Table 2",
+          "experiment_duration": "multiple weeks",
+          "significance": "±0.08%",
+          "retrieved_at": "2026-08-20"
+        },
+        {
+          "product": "Meta short-video recommendation",
+          "metric": "watch time",
+          "lift_percent": 0.43,
+          "traffic": "multi-week test over tens of millions of users",
+          "source_url": "https://arxiv.org/pdf/2608.10187",
+          "source_location": "Section 5.4 Table 2",
+          "experiment_duration": "multiple weeks",
+          "significance": "±0.14%",
+          "retrieved_at": "2026-08-20"
+        },
+        {
+          "product": "Meta short-video recommendation",
+          "metric": "video sessions",
+          "lift_percent": 0.22,
+          "traffic": "multi-week test over tens of millions of users",
+          "source_url": "https://arxiv.org/pdf/2608.10187",
+          "source_location": "Section 5.4 Table 2",
+          "experiment_duration": "multiple weeks",
+          "significance": "±0.13%",
+          "retrieved_at": "2026-08-20"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta private short-video graph and production serving",
+      "Llama-3.1 3B/8B policies and production-scale GNN student"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "3 SFT epochs + 180 GRPO groups",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

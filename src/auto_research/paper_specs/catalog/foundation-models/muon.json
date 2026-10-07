@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "muon",
+  "detail_path": "reproductions/2502.16982-muon/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Moonshot AI / UCLA",
+  "adapter": {
+    "spec_key": "muon"
+  }
+}

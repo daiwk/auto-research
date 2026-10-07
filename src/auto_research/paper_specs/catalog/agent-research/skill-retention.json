@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "skill-retention",
+  "title": "When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2609.10750",
+  "detail_path": "agent-research/2609.10750-skill-retention/README.md",
+  "topic": [
+    "技能检索",
+    "灾难性遗忘"
+  ],
+  "first_author": "Syed Shariyar Murtaza",
+  "first_author_affiliation": "Manulife",
+  "published": "2026-09-09",
+  "code": "https://github.com/manulife-ai/emnlp2026/",
+  "adapter": "skill-retention",
+  "priority": "P1"
+}

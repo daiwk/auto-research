@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "swag-bid",
+  "detail_path": "reproductions/2607.25233-swag-bid/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International Digital Commerce / Dalian University of Technology",
+  "adapter": {
+    "spec_key": "swag-bid"
+  }
+}

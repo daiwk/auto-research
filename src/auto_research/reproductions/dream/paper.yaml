@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dream",
   "arxiv_id": "2608.09408",
   "title": "DREAM: A Dual-Loop Recommendation Evolution Framework Powered by Large Language Models",
@@ -34,5 +34,65 @@
     "Taobao private multi-source signals and production traffic",
     "Qwen3 Meta Engine and online conclusion feedback"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dream.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group / Alibaba",
+      "published": "2026-08-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao homepage recommendation",
+          "metric": "IPV",
+          "lift_percent": 2.71,
+          "traffic": "platform-scale online deployment of fine-rank + rerank",
+          "source_url": "https://arxiv.org/pdf/2608.09408",
+          "source_location": "Section 5.3.1 Table 7",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-20"
+        },
+        {
+          "product": "Taobao homepage recommendation",
+          "metric": "Core IPV",
+          "lift_percent": 3.06,
+          "traffic": "platform-scale online deployment of fine-rank + rerank",
+          "source_url": "https://arxiv.org/pdf/2608.09408",
+          "source_location": "Section 5.3.1 Table 7",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-20"
+        },
+        {
+          "product": "Taobao homepage recommendation",
+          "metric": "GMV",
+          "lift_percent": 1.31,
+          "traffic": "platform-scale online deployment of fine-rank + rerank",
+          "source_url": "https://arxiv.org/pdf/2608.09408",
+          "source_location": "Section 5.3.1 Table 7",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-20"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Taobao private multi-source signals and production traffic",
+      "Qwen3 Meta Engine and online conclusion feedback"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "3 offline replay generations",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "adapter_key": "architecture-mrb-runtime",
+  "validated_at": "2026-10-07T06:03:59.517788+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/validate_mrb_gpu.py",
+    "--data",
+    "data",
+    "--output",
+    "runs/mrb-gpu",
+    "--commit",
+    "0833f622f023f1e2ff28a6c42e17ce0cf6b59957"
+  ],
+  "dataset": {
+    "name": "MovieLens-100k",
+    "revision": "86b5f7726104a107b7d585c791de9522aed3ab4ccb7098f962c9bdc808db15fd",
+    "source": "https://files.grouplens.org/datasets/movielens/ml-100k.zip"
+  },
+  "checkpoint": {
+    "model_id": "din-random-initialization",
+    "revision": "seeds42-43-44"
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "adapter_spawn_completed": 1,
+    "cli_reproduction_completed": 1,
+    "din_steps_per_seed": 3,
+    "din_ndcg_at_10": 0.005345040795559757,
+    "mean_pool_ndcg_at_10": 0.005345040795559757,
+    "rptune_retained_items": 6,
+    "rptune_gradient_norm": 1.9563392400741577,
+    "carm_mask_checks": 2,
+    "carm_gradient_norm": 1.0,
+    "verified_cuda_device_resolutions": 13
+  },
+  "provenance": {
+    "commit": "0833f622f023f1e2ff28a6c42e17ce0cf6b59957",
+    "source_fingerprint": "6d18d9a2b92bc197cf7404d5cd8103e989b6fa8441ead63b99b0f44584b3435d",
+    "artifact_path": "docs/gpu-validations/architecture-mrb-a100-20261007.json"
+  },
+  "boundary": "real CUDA training/CLI/spawn and moved-kernel regression, not a paper-scale capability comparison"
+}

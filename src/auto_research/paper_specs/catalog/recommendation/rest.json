@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rest",
+  "detail_path": "reproductions/2609.01240-rest/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "rest"
+  }
+}

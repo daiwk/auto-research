@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "swrouter",
+  "title": "SWRouter: Similarity-Contractive Window Routing for Multi-Turn Large Language Model Conversations",
+  "paper_url": "https://arxiv.org/abs/2609.11414",
+  "detail_path": "foundation-models/2609.11414-swrouter/README.md",
+  "topic": [
+    "模型路由",
+    "多轮上下文"
+  ],
+  "first_author": "Yu Wang",
+  "first_author_affiliation": "Shanghai Jiao Tong University",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "swrouter",
+  "priority": "P1"
+}

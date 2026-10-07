@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "coral",
+  "detail_path": "reproductions/2609.02730-coral/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta AI",
+  "adapter": {
+    "spec_key": "coral"
+  }
+}

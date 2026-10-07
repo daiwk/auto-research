@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "cohortmix-ts",
   "arxiv_id": "2609.37800",
   "title": "Challenges and Solutions for Bandits in the Wild: Warm-Started Mixture Bandits for Cross-Cohort Slate Recommendation",
@@ -30,5 +30,45 @@
     "historical matrix factorization",
     "25-day Campus Games deployment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.cohortmix_ts.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/etowho/university-games",
+      "organization": "DFKI / RPTU Kaiserslautern-Landau",
+      "published": "2026-09-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Campus Games quiz",
+          "metric": "early-to-late correctness change difference (percentage points)",
+          "lift_percent": 6.23,
+          "traffic": "25-day randomized deployment; 356 treatment and 357 control registrants; reported restricted complete-window subgroup",
+          "source_url": "https://arxiv.org/html/2609.37800v1#S6.SS4",
+          "source_location": "Section 6.4",
+          "experiment_duration": "25 days",
+          "significance": "bootstrap 95% CI [0.5, 11.9] pp; p=0.043; post-assignment subgroup caveat",
+          "retrieved_at": "2026-10-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "historical matrix factorization",
+      "25-day Campus Games deployment"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "one warm-started slate and posterior update per seed",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

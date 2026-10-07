@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "search-r1",
+  "title": "Search-R1",
+  "paper_url": "https://arxiv.org/abs/2503.09516",
+  "detail_path": "agent-research/2503.09516-search-r1/README.md",
+  "topic": [
+    "搜索 Agent RL"
+  ],
+  "first_author": "Bowen Jin",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2025-03-12",
+  "code": "https://github.com/PeterGriffinJin/Search-R1",
+  "adapter": "search-r1"
+}

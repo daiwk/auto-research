@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "memory-layer",
   "arxiv_id": "2607.25110",
   "title": "Memory Layer: Train the In-Model Cache for Recommendation Models",
@@ -37,5 +37,59 @@
   ],
   "evolve_operators": [
     "rankmixer_memory_layer"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.memory_layer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta / Instagram Reels",
+      "published": "2026-07-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Instagram Reels early-stage ranking",
+          "metric": "cold-start reshare rate",
+          "lift_percent": 5.0,
+          "traffic": "post-launch A/B backtest; paper reports a statistically significant +5% to +6% range",
+          "source_url": "https://arxiv.org/html/2607.25110v1#S6.SS3",
+          "source_location": "Section 6.3, Table 1",
+          "experiment_duration": null,
+          "significance": "all Table 1 A/B improvements statistically significant",
+          "retrieved_at": "2026-09-01"
+        },
+        {
+          "product": "Instagram Reels early-stage ranking",
+          "metric": "video views for media younger than one hour",
+          "lift_percent": 6.0,
+          "traffic": "post-launch A/B backtest; paper reports a +6% to +7% range",
+          "source_url": "https://arxiv.org/html/2607.25110v1#S6.SS3",
+          "source_location": "Section 6.3, Table 1",
+          "experiment_duration": null,
+          "significance": "statistically significant",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta MPZCH distributed storage",
+      "raw embedding streaming",
+      "Instagram private logs"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; one chronological writeback pass",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

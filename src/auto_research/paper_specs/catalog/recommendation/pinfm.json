@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pinfm",
+  "detail_path": "reproductions/2507.12704-pinfm/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "pinfm"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "recgpt-v3",
   "arxiv_id": "2607.15591",
   "title": "RecGPT-V3 Technical Report",
@@ -50,5 +50,69 @@
     "DeepSeek-V3.2 teacher and production CTR ranker",
     "online GRPO and production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.recgpt_v3.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / Taobao",
+      "published": "2026-07-17",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Guess What You Like (feed)",
+          "metric": "IPV",
+          "lift_percent": 1.28,
+          "traffic": "1% treatment vs 1% RecGPT-V2 control",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Guess What You Like (feed)",
+          "metric": "CTR",
+          "lift_percent": 1.0,
+          "traffic": "1% treatment vs 1% RecGPT-V2 control",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Guess What You Like (feed)",
+          "metric": "GMV",
+          "lift_percent": 3.97,
+          "traffic": "1% treatment vs 1% RecGPT-V2 control",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-14B continual pre-training and general-domain mixture",
+      "CN-CLIP/Q-Former image tower and private Taobao behavior",
+      "DeepSeek-V3.2 teacher and production CTR ranker",
+      "online GRPO and production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=180",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

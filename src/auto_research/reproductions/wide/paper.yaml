@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "wide",
   "arxiv_id": "2607.28418",
   "title": "WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning",
@@ -36,5 +36,33 @@
     "custom CUDA kernels",
     "billion-parameter two-stage calibration"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.wide.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/EIT-NLP/LLM-Pruning/tree/main/WIDE",
+      "organization": "EIT-NLP / LMU Munich",
+      "published": "2026-07-30",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "custom CUDA kernels",
+      "billion-parameter two-stage calibration"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

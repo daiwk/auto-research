@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ramp",
+  "detail_path": "reproductions/2607.17473-ramp/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huawei Ireland Research Center / University College Dublin",
+  "adapter": {
+    "spec_key": "ramp"
+  }
+}

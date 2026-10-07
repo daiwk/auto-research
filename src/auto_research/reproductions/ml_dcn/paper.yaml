@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ml-dcn",
   "arxiv_id": "2602.09194",
   "title": "ML-DCN: Masked Low-Rank Deep Crossing Network Towards Scalable Ads Click-through Rate Prediction at Pinterest",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.ml_dcn.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Pinterest",
+      "published": "2026-02-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Pinterest Ads",
+          "metric": "platform-wide CTR",
+          "lift_percent": 1.89,
+          "traffic": "production A/B at neutral cost",
+          "source_url": "https://arxiv.org/html/2602.09194v1",
+          "source_location": "Section 4.2 / Table 6",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

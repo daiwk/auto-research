@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "camie",
+  "detail_path": "reproductions/2608.30255-camie/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Snap Inc.",
+  "adapter": {
+    "spec_key": "camie"
+  }
+}

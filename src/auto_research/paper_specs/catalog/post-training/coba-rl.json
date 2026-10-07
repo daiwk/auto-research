@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "coba-rl",
+  "title": "CoBA-RL",
+  "paper_url": "https://arxiv.org/abs/2606.22317",
+  "detail_path": "post-training/2606.22317-coba-rl/README.md",
+  "topic": [
+    "能力边界课程"
+  ],
+  "first_author": "Pengxiang Cai",
+  "first_author_affiliation": "Zhejiang University",
+  "published": "2026-06-21",
+  "code": "未发现官方代码",
+  "adapter": "coba-rl"
+}

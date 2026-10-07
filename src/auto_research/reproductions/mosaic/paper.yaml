@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mosaic",
   "arxiv_id": "2607.24015",
   "title": "Mosaic: A Fleet of User Embedding Specialists for Recommendation at Meta",
@@ -43,5 +43,68 @@
     "HSTU-2048 specialists and production-scale CoTrain",
     "CoEval, zero-out evaluation, AOTI and hybrid serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mosaic.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta",
+      "published": "2026-07-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta Surface 1",
+          "metric": "topline engagement",
+          "lift_percent": 0.1,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meta Surface 2",
+          "metric": "topline engagement",
+          "lift_percent": 0.15,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meta Surface 3",
+          "metric": "topline engagement",
+          "lift_percent": 0.28,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta private multi-surface features and labels",
+      "HSTU-2048 specialists and production-scale CoTrain",
+      "CoEval, zero-out evaluation, AOTI and hybrid serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

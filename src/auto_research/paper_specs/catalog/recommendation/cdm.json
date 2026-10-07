@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cdm",
+  "detail_path": "reproductions/2406.09021-cdm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "cdm"
+  }
+}

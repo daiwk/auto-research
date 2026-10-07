@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "interactive-memory",
+  "title": "Interactive Memory Learning for Long-Term Conversations",
+  "paper_url": "https://arxiv.org/abs/2609.17088",
+  "detail_path": "agent-research/2609.17088-interactive-memory/README.md",
+  "topic": [
+    "长期记忆",
+    "多 Agent 强化学习"
+  ],
+  "first_author": "Cai Ke",
+  "first_author_affiliation": "Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "interactive-memory",
+  "priority": "P1"
+}

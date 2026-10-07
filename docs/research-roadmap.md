@@ -1,5 +1,15 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-07 架构重构 MR-A / MR-B
+
+| 批次 | 状态 | 范围与证据 |
+|---|---|---|
+| MR-A | 已合并 · [PR #192](https://github.com/daiwk/auto-research/pull/192) | [实验可信度与运行契约](design/experiment-integrity.md)：实验身份、恢复校验、GPU 执行闭环 |
+| MR-B | 已实现，待合并 · [PR #193](https://github.com/daiwk/auto-research/pull/193) | [完整验收记录](design/architecture-mrb.md)：惰性注册/最小安装、逐命令 CLI、扫描页级断点、权威规格与稳定算法模块；1251 项全套测试、A100 回归及脱敏回执 |
+
+MR-B 不新增论文，也不提升已有实现的证据等级。扫描状态修复不等于完成下方的官方来源重试
+或全文筛选；跨源水位仍为 **2026-10-02**，后续按既有重叠窗口处理待审候选。
+
 ## 2026-10-06 重叠补扫批次
 
 [本轮扫描记录](recent-paper-scan-20261006.md)补齐搜广推与 Agent 的 arXiv 分页，但 Google Research/Meta 官方目录仍超时，Agent 宽查询的窗口内 48 个标题也尚未逐篇全文核验。因此跨源水位仍为 **2026-10-02**，不能从 PR 日期直接开始下轮增量扫描。

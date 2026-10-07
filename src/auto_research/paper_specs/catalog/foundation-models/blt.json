@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "blt",
+  "detail_path": "reproductions/2412.09871-blt/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta FAIR",
+  "adapter": {
+    "spec_key": "blt"
+  }
+}

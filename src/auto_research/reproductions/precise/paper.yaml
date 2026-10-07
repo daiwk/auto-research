@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "precise",
   "arxiv_id": "2412.06308",
   "title": "PRECISE: Pre-training Sequential Recommenders with Collaborative and Semantic Information",
@@ -44,5 +44,70 @@
     "WeChat private cross-scene logs and production embedding/ANN servers",
     "daily periodic warm-start deployment schedule"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.precise.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent / WeChat",
+      "published": "2024-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "WeChat article ranking",
+          "metric": "Clicks",
+          "lift_percent": 1.961,
+          "traffic": "180M participants",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "WeChat article ranking",
+          "metric": "Shares",
+          "lift_percent": 1.433,
+          "traffic": "180M participants",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "WeChat share U2I recall",
+          "metric": "Shares",
+          "lift_percent": 2.56,
+          "traffic": "26M participants",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen2-1.5B is scaled to SmolLM2-135M for local initialization",
+      "WeChat private cross-scene logs and production embedding/ANN servers",
+      "daily periodic warm-start deployment schedule"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=240",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

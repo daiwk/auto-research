@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "hap",
+  "detail_path": "reproductions/2603.03770-hap/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance / Toutiao",
+  "adapter": {
+    "spec_key": "hap"
+  }
+}

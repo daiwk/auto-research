@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rgalign-rec",
+  "detail_path": "reproductions/2602.12968-rgalign-rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Forth AI / Shopee / Singapore University of Technology and Design",
+  "adapter": {
+    "spec_key": "rgalign-rec"
+  }
+}

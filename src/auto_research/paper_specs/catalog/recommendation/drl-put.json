@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "drl-put",
+  "detail_path": "reproductions/2509.05292-drl-put/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "drl-put"
+  }
+}

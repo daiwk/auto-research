@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "data-mixing-laws",
+  "detail_path": "reproductions/2403.16952-data-mixing-laws/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Cambridge / Shanghai AI Laboratory",
+  "adapter": {
+    "spec_key": "data-mixing-laws"
+  }
+}

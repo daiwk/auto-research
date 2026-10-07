@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ccformer",
+  "detail_path": "reproductions/2607.28070-ccformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent Platform and Content Group",
+  "adapter": {
+    "spec_key": "ccformer"
+  }
+}

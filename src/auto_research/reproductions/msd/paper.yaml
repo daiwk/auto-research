@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "msd",
   "arxiv_id": "2412.06860",
   "title": "Balancing Efficiency and Effectiveness: An LLM-Infused Approach for Optimized CTR Prediction",
@@ -43,5 +43,58 @@
     "proprietary ad features",
     "production cache service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.msd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan",
+      "published": "2024-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan sponsored search",
+          "metric": "CTR",
+          "lift_percent": 2.12,
+          "traffic": "2024-10-20 to 2024-10-30",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meituan sponsored search",
+          "metric": "CPM",
+          "lift_percent": 2.59,
+          "traffic": "2024-10-20 to 2024-10-30",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "proprietary ad features",
+      "production cache service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

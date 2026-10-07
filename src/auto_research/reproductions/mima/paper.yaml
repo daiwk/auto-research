@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mima",
   "arxiv_id": "2609.12842",
   "title": "MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment",
@@ -33,5 +33,57 @@
     "production causal Transformer checkpoint",
     "online retrieval serving graph"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mima.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International Digital Commerce Group",
+      "published": "2026-09-11",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "large-scale e-commerce homepage retrieval",
+          "metric": "transaction count",
+          "lift_percent": 5.6,
+          "traffic": "seven-day production A/B",
+          "source_url": "https://arxiv.org/html/2609.12842v1",
+          "source_location": "Section 5.5.2, Table 6",
+          "experiment_duration": "seven days",
+          "significance": null,
+          "retrieved_at": "2026-09-15"
+        },
+        {
+          "product": "large-scale e-commerce homepage retrieval",
+          "metric": "transaction amount",
+          "lift_percent": 5.44,
+          "traffic": "seven-day production A/B",
+          "source_url": "https://arxiv.org/html/2609.12842v1",
+          "source_location": "Section 5.5.2, Table 6",
+          "experiment_duration": "seven days",
+          "significance": null,
+          "retrieved_at": "2026-09-15"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Alibaba private request groups and catalog",
+      "production causal Transformer checkpoint",
+      "online retrieval serving graph"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

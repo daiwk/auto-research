@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "meta-skills",
+  "title": "Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI",
+  "paper_url": "https://arxiv.org/abs/2609.38143",
+  "detail_path": "agent-research/2609.38143-meta-skills/README.md",
+  "topic": [
+    "Harness 设计",
+    "Meta-skill",
+    "RSI"
+  ],
+  "first_author": "Cheng Qian",
+  "first_author_affiliation": "Apodex / University of Illinois Urbana-Champaign",
+  "published": "2026-09-29",
+  "code": "https://github.com/qiancheng-apodex/MetaSkill-AI4AI",
+  "adapter": "meta-skills",
+  "priority": "P0"
+}

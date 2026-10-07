@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "frac-ssm",
+  "title": "Fractional State Space Transition for Long Sequence Modeling",
+  "paper_url": "https://arxiv.org/abs/2609.36314",
+  "detail_path": "foundation-models/2609.36314-frac-ssm/README.md",
+  "topic": [
+    "状态空间模型",
+    "长上下文"
+  ],
+  "first_author": "Ivan Kobyzev",
+  "first_author_affiliation": "Huawei Noah's Ark Lab, Montreal Research Center",
+  "published": "2026-09-28",
+  "code": "https://github.com/anasiri/frac-ssm",
+  "adapter": "frac-ssm",
+  "priority": "P1"
+}

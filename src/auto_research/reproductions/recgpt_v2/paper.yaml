@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "recgpt-v2",
   "arxiv_id": "2512.14503",
   "title": "RecGPT-V2 Technical Report",
@@ -41,5 +41,67 @@
     "Taobao proprietary LLM",
     "production Agent-as-a-Judge labels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.recgpt_v2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / Taobao",
+      "published": "2025-12-16",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao",
+          "metric": "CTR",
+          "lift_percent": 2.98,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao",
+          "metric": "IPV",
+          "lift_percent": 3.71,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao",
+          "metric": "NER",
+          "lift_percent": 11.46,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Taobao proprietary LLM",
+      "production Agent-as-a-Judge labels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

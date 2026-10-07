@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "adadsf",
   "arxiv_id": "2607.21291",
   "title": "Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs",
@@ -31,5 +31,34 @@
     "WikiText-103 and six full commonsense benchmarks",
     "hardware-level FLOP profiling"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.adadsf.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Huawei ACS Lab / Southern University of Science and Technology",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "GPT-NeoX-130M and Qwen2.5-0.5B/1.5B checkpoints",
+      "WikiText-103 and six full commonsense benchmarks",
+      "hardware-level FLOP profiling"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=70",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

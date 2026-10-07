@@ -5,10 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
-from auto_research.recommendation_latest_20260930_closure import (
-    promptshift_metrics,
-    promptshift_rerank,
-)
+from auto_research.mechanisms.promptshift_metrics import promptshift_metrics
+from auto_research.mechanisms.promptshift_rerank import promptshift_rerank
 
 
 def reproduce(_dataset_dir: Path, seed: int = 42) -> dict:

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mmoe",
   "arxiv_id": "kdd2018-mmoe",
   "title": "Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts",
@@ -49,5 +49,34 @@
   "mechanisms": [
     "Google private recommendation tasks and production features"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mmoe.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2018-08-19",
+      "publication_label": "KDD 2018 paper",
+      "publication_source": "ACM KDD 2018",
+      "online_ab": [],
+      "selection_exception": "用户明确批准 MMoE 为经典例外；原文生产任务未披露当前门槛要求的量化线上 A/B lift。"
+    },
+    "omitted_core_components": [
+      "Google private recommendation tasks and production features"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=200",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

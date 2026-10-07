@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "flvm",
   "arxiv_id": "2609.32839",
   "title": "Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation",
@@ -29,5 +29,45 @@
     "private YouTube satisfaction surveys, serving features and production ranker",
     "production prescoring integration, traffic and online A/B"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.flvm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google / YouTube",
+      "published": "2026-09-26",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "YouTube Shorts",
+          "metric": "primary viewer enjoyment",
+          "lift_percent": 2.67,
+          "traffic": "14-day online A/B",
+          "source_url": "https://arxiv.org/html/2609.32839",
+          "source_location": "Section 4, online A/B paragraph",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-29"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private YouTube satisfaction surveys, serving features and production ranker",
+      "production prescoring integration, traffic and online A/B"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "300 updates/model/seed; all KuaiRand-Pure impressions; chronological 70/15/15",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

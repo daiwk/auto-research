@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "ace-data",
+  "title": "What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2608.27260",
+  "detail_path": "agent-research/2608.27260-ace-data/README.md",
+  "topic": [
+    "Agent 数据质量"
+  ],
+  "first_author": "Xingshan Zeng",
+  "first_author_affiliation": "Huawei Technologies Co., Ltd",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "ace-data"
+}

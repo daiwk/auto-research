@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "linkedin-feed-sr",
   "arxiv_id": "2602.12354",
   "title": "An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.linkedin_feed_sr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "LinkedIn",
+      "published": "2026-02-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "LinkedIn Feed",
+          "metric": "time spent",
+          "lift_percent": 2.1,
+          "traffic": "production A/B",
+          "source_url": "https://arxiv.org/html/2602.12354v1",
+          "source_location": "Section 7 / Table 5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

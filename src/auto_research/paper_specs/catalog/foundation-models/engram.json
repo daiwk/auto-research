@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "engram",
+  "detail_path": "reproductions/2601.07372-engram/README.md",
+  "first_author": null,
+  "first_author_affiliation": "DeepSeek",
+  "adapter": {
+    "spec_key": "engram"
+  }
+}

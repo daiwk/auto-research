@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "smolvlm",
   "arxiv_id": "2504.05299",
   "title": "SmolVLM: Redefining small and efficient multimodal models",
@@ -31,5 +31,34 @@
     "large multimodal data recipe",
     "video training"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.smolvlm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/huggingface/smollm",
+      "organization": "Hugging Face",
+      "published": "2025-04-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "256M-2.2B language decoder",
+      "large multimodal data recipe",
+      "video training"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

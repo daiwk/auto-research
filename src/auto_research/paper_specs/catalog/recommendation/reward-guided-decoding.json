@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "reward-guided-decoding",
+  "detail_path": "reproductions/2607.25344-reward-guided-decoding/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Institute of Information Engineering, Chinese Academy of Sciences",
+  "adapter": {
+    "spec_key": "reward-guided-decoding"
+  }
+}

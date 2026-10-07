@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "piano",
+  "detail_path": "reproductions/2606.16641-piano/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NetEase Cloud Music",
+  "adapter": {
+    "spec_key": "piano"
+  }
+}

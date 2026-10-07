@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "twinkv",
   "arxiv_id": "2608.27128",
   "title": "TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy",
@@ -32,5 +32,31 @@
     "full LongBench/LooGLE/RULER matrix",
     "production KV-cache kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.twinkv.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "The Hong Kong University of Science and Technology (Guangzhou)",
+      "published": "2026-08-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "full LongBench/LooGLE/RULER matrix",
+      "production KV-cache kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/twinkv-a30-20260829.json"
+  }
 }

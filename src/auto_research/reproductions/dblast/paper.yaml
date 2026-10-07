@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dblast",
   "arxiv_id": "2608.05448",
   "title": "DBLast: Dependent Block Drafting for Stochastic Speculative Decoding",
@@ -28,5 +28,33 @@
     "Qwen3 checkpoints",
     "GPU block-drafter kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dblast.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Huawei Technologies Canada",
+      "published": "2026-08-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3 checkpoints",
+      "GPU block-drafter kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

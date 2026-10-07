@@ -1,0 +1,17 @@
+{
+  "domain": "multimodal-models",
+  "key": "stacktok",
+  "title": "StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection",
+  "paper_url": "https://arxiv.org/abs/2609.16841",
+  "detail_path": "multimodal-models/2609.16841-stacktok/README.md",
+  "topic": [
+    "视觉 Token 选择",
+    "推理效率"
+  ],
+  "first_author": "Zhenbin Wang",
+  "first_author_affiliation": "Sichuan University",
+  "published": "2026-09-15",
+  "code": "https://github.com/wongzbb/StackToK",
+  "adapter": "stacktok",
+  "priority": "P1"
+}

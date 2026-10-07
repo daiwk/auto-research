@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "dr-grpo",
+  "title": "Dr. GRPO",
+  "paper_url": "https://arxiv.org/abs/2503.20783",
+  "detail_path": "post-training/2503.20783-dr-grpo/README.md",
+  "topic": [
+    "GRPO 聚合偏置"
+  ],
+  "first_author": "Zichen Liu",
+  "first_author_affiliation": "SAIL 研究团队",
+  "published": "2025-03-26",
+  "code": "https://github.com/sail-sg/understand-r1-zero",
+  "adapter": "dr-grpo"
+}

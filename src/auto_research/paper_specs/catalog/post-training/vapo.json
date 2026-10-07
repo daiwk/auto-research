@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "vapo",
+  "title": "VAPO",
+  "paper_url": "https://arxiv.org/abs/2504.05118",
+  "detail_path": "post-training/2504.05118-vapo/README.md",
+  "topic": [
+    "Critic PPO"
+  ],
+  "first_author": "Yu Yue",
+  "first_author_affiliation": "ByteDance Seed",
+  "published": "2025-04-07",
+  "code": "未发现官方代码",
+  "adapter": "vapo"
+}

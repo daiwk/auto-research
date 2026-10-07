@@ -1,1 +1,1 @@
-from ..latest_20260915 import component_fusion_scores, pixel_penalty
+from auto_research.reproductions.mechanisms.pixel_penalty import component_fusion_scores, pixel_penalty

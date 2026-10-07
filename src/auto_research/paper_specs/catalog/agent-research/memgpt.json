@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "memgpt",
+  "title": "MemGPT",
+  "paper_url": "https://arxiv.org/abs/2310.08560",
+  "detail_path": "agent-research/2310.08560-memgpt/README.md",
+  "topic": [
+    "虚拟上下文"
+  ],
+  "first_author": "Charles Packer",
+  "first_author_affiliation": "University of California, Berkeley",
+  "published": "2023-10-12",
+  "code": "https://github.com/letta-ai/letta",
+  "adapter": "memgpt"
+}

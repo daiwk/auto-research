@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onemall",
+  "detail_path": "reproductions/2601.21770-onemall/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {
+    "spec_key": "onemall"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "tokenmixer-large",
+  "detail_path": "reproductions/2602.06563-tokenmixer-large/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "tokenmixer-large"
+  }
+}

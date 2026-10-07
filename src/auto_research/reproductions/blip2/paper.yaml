@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "blip2",
   "arxiv_id": "2301.12597",
   "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
@@ -30,5 +30,33 @@
     "frozen ViT-g and OPT/FlanT5",
     "two-stage web-scale pretraining"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.blip2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/salesforce/LAVIS",
+      "organization": "Salesforce Research",
+      "published": "2023-01-30",
+      "publication_label": "ICML 2023",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "frozen ViT-g and OPT/FlanT5",
+      "two-stage web-scale pretraining"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

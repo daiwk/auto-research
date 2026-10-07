@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mpformer",
   "arxiv_id": "2508.20400",
   "title": "MPFormer: Adaptive Framework for Industrial Multi-Task Personalized Sequential Retriever",
@@ -43,5 +43,45 @@
     "400M-DAU traffic",
     "1.2M-QPS serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mpformer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2025-08-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou",
+          "metric": "Watch Time",
+          "lift_percent": 0.426,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "400M-DAU traffic",
+      "1.2M-QPS serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

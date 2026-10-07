@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "twice",
+  "detail_path": "reproductions/2607.25404-twice/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {
+    "spec_key": "twice"
+  }
+}

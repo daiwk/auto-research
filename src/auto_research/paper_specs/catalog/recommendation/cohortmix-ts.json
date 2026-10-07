@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cohortmix-ts",
+  "detail_path": "reproductions/2609.37800-cohortmix-ts/README.md",
+  "first_author": null,
+  "first_author_affiliation": "DFKI / RPTU Kaiserslautern-Landau",
+  "adapter": {
+    "spec_key": "cohortmix-ts"
+  }
+}

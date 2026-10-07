@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "semantic-native-longseq",
   "arxiv_id": "2606.07546",
   "title": "Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling",
@@ -36,5 +36,59 @@
   ],
   "evolve_operators": [
     "rankmixer_semantic_native_longseq"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.semantic_native_longseq.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2026-05-04",
+      "publication_label": "SIGIR 2026 / arXiv 2606.07546",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Google global short-video platform",
+          "metric": "actively engaged users",
+          "lift_percent": 0.52,
+          "traffic": "large-scale online A/B; full SID + compressed-transformer system versus L=800 Video-ID baseline",
+          "source_url": "https://arxiv.org/html/2606.07546v1#S3.SS5",
+          "source_location": "Section 3.5, Table 4",
+          "experiment_duration": null,
+          "significance": "p < 0.05",
+          "retrieved_at": "2026-09-01"
+        },
+        {
+          "product": "Google global short-video platform",
+          "metric": "satisfied watch time",
+          "lift_percent": 1.42,
+          "traffic": "large-scale online A/B; full SID + compressed-transformer system",
+          "source_url": "https://arxiv.org/html/2606.07546v1#S3.SS5",
+          "source_location": "Section 3.5, Table 4",
+          "experiment_duration": null,
+          "significance": "p < 0.05",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Google production RQ-VAE",
+      "2,000-event private video histories",
+      "hybrid asynchronous serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "48 events folded by 4 into 12 local tokens plus two global queries",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

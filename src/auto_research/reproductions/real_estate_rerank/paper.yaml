@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "real-estate-rerank",
   "arxiv_id": "2607.14835",
   "title": "LLM-Based Re-Ranking for Real Estate Search",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.real_estate_rerank.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "QuintoAndar",
+      "published": "2026-07-16",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "QuintoAndar conversational search",
+          "metric": "CTR",
+          "lift_percent": 5.3,
+          "traffic": "production A/B",
+          "source_url": "https://arxiv.org/html/2607.14835v1",
+          "source_location": "paper online evaluation section",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

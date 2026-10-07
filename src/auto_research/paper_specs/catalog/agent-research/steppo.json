@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "steppo",
+  "title": "StepPO",
+  "paper_url": "https://arxiv.org/abs/2604.18401",
+  "detail_path": "agent-research/2604.18401-steppo/README.md",
+  "topic": [
+    "Step-aligned Agent RL"
+  ],
+  "first_author": "Daoyu Wang",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-04-20",
+  "code": "未发现官方代码",
+  "adapter": "steppo"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "m6rec",
+  "detail_path": "reproductions/2205.08084-m6rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "m6rec"
+  }
+}

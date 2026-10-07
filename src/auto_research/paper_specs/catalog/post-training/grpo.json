@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "grpo",
+  "title": "DeepSeekMath / GRPO",
+  "paper_url": "https://arxiv.org/abs/2402.03300",
+  "detail_path": "post-training/2402.03300-grpo/README.md",
+  "topic": [
+    "在线推理 RL"
+  ],
+  "first_author": "Zhihong Shao",
+  "first_author_affiliation": "DeepSeek-AI",
+  "published": "2024-02-05",
+  "code": "https://github.com/deepseek-ai/DeepSeek-Math",
+  "adapter": "grpo"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "steps",
+  "detail_path": "reproductions/2608.01949-steps/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance / Douyin",
+  "adapter": {
+    "spec_key": "steps"
+  }
+}

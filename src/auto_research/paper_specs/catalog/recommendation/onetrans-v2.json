@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onetrans-v2",
+  "detail_path": "reproductions/2609.28589-onetrans-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "onetrans-v2"
+  }
+}

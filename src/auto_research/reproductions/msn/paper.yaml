@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "msn",
   "arxiv_id": "2602.07526",
   "title": "MSN: A Memory-based Sparse Activation Scaling Framework for Large-scale Industrial Recommendation",
@@ -38,5 +38,56 @@
     "private search logs",
     "production sparse-memory kernel"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.msn.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance / Douyin Search",
+      "published": "2026-02-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Douyin Search",
+          "metric": "Watch time",
+          "lift_percent": 0.2958,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Douyin Search",
+          "metric": "Finish rate",
+          "lift_percent": 0.2071,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private search logs",
+      "production sparse-memory kernel"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "planpo",
+  "title": "PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs",
+  "paper_url": "https://arxiv.org/abs/2608.17289",
+  "detail_path": "agent-research/2608.17289-planpo/README.md",
+  "topic": [
+    "Agentic RL",
+    "规划"
+  ],
+  "first_author": "Dayang Liang",
+  "first_author_affiliation": "Xiamen University",
+  "published": "2026-08-18",
+  "code": null,
+  "adapter": "planpo"
+}

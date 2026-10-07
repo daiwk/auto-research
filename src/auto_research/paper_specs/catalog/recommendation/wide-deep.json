@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "wide-deep",
+  "detail_path": "reproductions/1606.07792-wide-deep/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "wide-deep"
+  }
+}

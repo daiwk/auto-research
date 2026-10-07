@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sarm",
+  "detail_path": "reproductions/2602.09401-sarm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Institute of Information Engineering, CAS / Kuaishou",
+  "adapter": {
+    "spec_key": "sarm"
+  }
+}

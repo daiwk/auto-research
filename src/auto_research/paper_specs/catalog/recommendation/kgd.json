@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "kgd",
+  "detail_path": "reproductions/2608.02738-kgd/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Xiamen University / Shopee",
+  "adapter": {
+    "spec_key": "kgd"
+  }
+}

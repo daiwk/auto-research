@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "dars",
+  "title": "Dependency-Aware Reward Shaping for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2610.01207",
+  "detail_path": "post-training/2610.01207-dars/README.md",
+  "topic": [
+    "Agentic RL",
+    "依赖图",
+    "步级奖励"
+  ],
+  "first_author": "Ziyi Chen",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "dars",
+  "priority": "P0",
+  "upstream_note": "否：官方仓库 https://github.com/JianhuiWei7/DARS 已建立，但截至 2026-10-02 明确标注实现仍在准备中"
+}

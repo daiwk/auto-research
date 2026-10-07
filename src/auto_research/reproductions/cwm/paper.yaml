@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "cwm",
   "arxiv_id": "2406.07932",
   "title": "Counteracting Duration Bias in Video Recommendation via Counterfactual Watch Time",
@@ -45,5 +45,45 @@
     "true video duration/watch-time censoring logs",
     "production survival model"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.cwm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/hyz20/CWM",
+      "organization": "Kuaishou Technology / Renmin University of China",
+      "published": "2024-06-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou",
+          "metric": "Mean Watch Time",
+          "lift_percent": 2.9,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "true video duration/watch-time censoring logs",
+      "production survival model"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

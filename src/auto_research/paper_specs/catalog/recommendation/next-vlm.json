@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "next-vlm",
+  "detail_path": "reproductions/2607.24789-next-vlm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "next-vlm"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "splash",
+  "title": "SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving",
+  "paper_url": "https://arxiv.org/abs/2609.37626",
+  "detail_path": "foundation-models/2609.37626-splash/README.md",
+  "topic": [
+    "推理系统",
+    "并行布局",
+    "KV cache"
+  ],
+  "first_author": "Chuan Liu",
+  "first_author_affiliation": "Institute of Computing Technology, Chinese Academy of Sciences",
+  "published": "2026-09-29",
+  "code": "https://github.com/ict-agent/SPLASH-sglang",
+  "adapter": "splash",
+  "priority": "P1"
+}

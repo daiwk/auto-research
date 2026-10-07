@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "sr-opsd",
+  "title": "SR-OPSD: Self-Referenced On-Policy Self-Distillation",
+  "paper_url": "https://arxiv.org/abs/2608.09745",
+  "detail_path": "post-training/2608.09745-sr-opsd/README.md",
+  "topic": [
+    "OPD",
+    "自蒸馏"
+  ],
+  "first_author": "Zhuo Sun",
+  "first_author_affiliation": "Independent Researcher",
+  "published": "2026-08-10",
+  "code": null,
+  "adapter": "sr-opsd"
+}

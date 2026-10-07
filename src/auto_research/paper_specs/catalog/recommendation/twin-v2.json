@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "twin-v2",
+  "detail_path": "reproductions/2407.16357-twin-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {
+    "spec_key": "twin-v2"
+  }
+}

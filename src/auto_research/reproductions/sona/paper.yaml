@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sona",
   "arxiv_id": "2608.11015",
   "title": "Sona Technical Report",
@@ -37,5 +37,57 @@
     "production candidate cascade and smart-speaker serving",
     "full-capacity distillation teacher"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sona.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Yandex",
+      "published": "2026-08-11",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Yandex Music My Vibe smart speakers",
+          "metric": "active users",
+          "lift_percent": 4.53,
+          "traffic": "live-traffic online A/B; cascade replaced by one model",
+          "source_url": "https://arxiv.org/pdf/2608.11015",
+          "source_location": "Online evaluation section",
+          "experiment_duration": null,
+          "significance": "reported statistically significant",
+          "retrieved_at": "2026-08-13"
+        },
+        {
+          "product": "Yandex Music My Vibe smart speakers",
+          "metric": "total listening time",
+          "lift_percent": 6.3,
+          "traffic": "live-traffic online A/B; cascade replaced by one model",
+          "source_url": "https://arxiv.org/pdf/2608.11015",
+          "source_location": "Online evaluation section",
+          "experiment_duration": null,
+          "significance": "reported statistically significant",
+          "retrieved_at": "2026-08-13"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Yandex private music logs and semantic tokenizer",
+      "production candidate cascade and smart-speaker serving",
+      "full-capacity distillation teacher"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

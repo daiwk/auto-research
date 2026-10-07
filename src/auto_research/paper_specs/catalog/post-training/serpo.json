@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "serpo",
+  "title": "SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2607.26873",
+  "detail_path": "post-training/2607.26873-serpo/README.md",
+  "topic": [
+    "Rubric RL",
+    "测试时自进化"
+  ],
+  "first_author": "Jianze Wang",
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "published": "2026-07-29",
+  "code": null,
+  "adapter": "serpo"
+}

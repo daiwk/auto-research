@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "recgpt-mobile",
+  "detail_path": "reproductions/2605.04726-recgpt-mobile/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Taobao",
+  "adapter": {
+    "spec_key": "recgpt-mobile"
+  }
+}

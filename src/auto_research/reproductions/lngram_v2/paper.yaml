@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "lngram-v2",
   "arxiv_id": "2609.03426",
   "title": "Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations",
@@ -34,5 +34,33 @@
   ],
   "evolve_operators": [
     "memory:latent-ngram-gqa"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.lngram_v2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Beijing University of Posts and Telecommunications / Kuaishou Technology",
+      "published": "2026-09-03",
+      "publication_label": "ICLR 2027",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Keye 2B/30B pretraining",
+      "paper-scale multimodal corpus"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/lngram-v2-a100-20260906.json"
+  }
 }

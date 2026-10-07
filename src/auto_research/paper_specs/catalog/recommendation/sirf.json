@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sirf",
+  "detail_path": "reproductions/2609.11752-sirf/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Xiaohongshu",
+  "adapter": {
+    "spec_key": "sirf"
+  }
+}

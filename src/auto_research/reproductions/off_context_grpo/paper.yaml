@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "off-context-grpo",
   "arxiv_id": "2607.19313",
   "title": "Off-Context GRPO: Learning to Reason on Hard Problems using Privileged Information",
@@ -33,5 +33,33 @@
     "Qwen2.5 1.5B/3B/7B token-level rollouts",
     "multi-GPU veRL training stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.off_context_grpo.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/AgPriyank/OC-GRPO",
+      "organization": "Meta AI / Columbia University",
+      "published": "2026-07-21",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen2.5 1.5B/3B/7B token-level rollouts",
+      "multi-GPU veRL training stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=2400",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

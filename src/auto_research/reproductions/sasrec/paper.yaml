@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sasrec",
   "arxiv_id": "1808.09781",
   "title": "Self-Attentive Sequential Recommendation",
@@ -29,5 +29,32 @@
   "mechanisms": [
     "Self-Attentive Sequential Recommendation"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sasrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/kang205/SASRec",
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=320",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

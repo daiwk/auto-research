@@ -1,0 +1,10 @@
+{
+  "domain": "post-training",
+  "key": "recursive-opsd",
+  "detail_path": "reproductions/2609.30652-recursive-opsd/README.md",
+  "first_author": "Shangjian Yin",
+  "first_author_affiliation": "Meta AI / University of California, Riverside",
+  "adapter": {
+    "spec_key": "recursive-opsd"
+  }
+}

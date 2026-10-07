@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "siglip2",
+  "detail_path": "reproductions/2502.14786-siglip2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google DeepMind",
+  "adapter": {
+    "spec_key": "siglip2"
+  }
+}

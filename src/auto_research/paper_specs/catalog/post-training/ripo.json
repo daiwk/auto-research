@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "ripo",
+  "title": "RIPO",
+  "paper_url": "https://arxiv.org/abs/2607.10169",
+  "detail_path": "post-training/2607.10169-ripo/README.md",
+  "topic": [
+    "几何信任域"
+  ],
+  "first_author": "Zhicheng Cai",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2026-07-11",
+  "code": "未发现官方代码",
+  "adapter": "ripo"
+}

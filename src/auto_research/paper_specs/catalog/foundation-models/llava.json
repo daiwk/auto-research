@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "llava",
+  "detail_path": "reproductions/2304.08485-llava/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Wisconsin-Madison / Microsoft Research / Columbia University",
+  "adapter": {
+    "spec_key": "llava"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "speculative-decoding",
+  "detail_path": "reproductions/2211.17192-speculative-decoding/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google Research",
+  "adapter": {
+    "spec_key": "speculative-decoding"
+  }
+}

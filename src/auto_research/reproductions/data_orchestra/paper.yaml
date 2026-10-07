@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "data-orchestra",
   "arxiv_id": "2607.24717",
   "title": "DataOrchestra: Learning to Orchestrate Per-Example Curation of Pretraining Data",
@@ -47,5 +47,34 @@
     "20B/30B-token multi-corpus pretraining",
     "0.5B/1.5B/7B model scaling"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.data_orchestra.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/GAIR-NLP/DataOrchestra",
+      "organization": "Fudan University / Shanghai Jiao Tong University / SII-GAIR",
+      "published": "2026-07-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "LLM-generated orchestration supervision",
+      "20B/30B-token multi-corpus pretraining",
+      "0.5B/1.5B/7B model scaling"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=55",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

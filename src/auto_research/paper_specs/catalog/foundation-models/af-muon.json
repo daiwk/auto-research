@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "af-muon",
+  "title": "AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models",
+  "paper_url": "https://arxiv.org/abs/2610.01395",
+  "detail_path": "foundation-models/2610.01395-af-muon/README.md",
+  "topic": [
+    "优化器",
+    "Muon",
+    "显存效率"
+  ],
+  "first_author": "Arash Lagzian",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "af-muon",
+  "priority": "P1"
+}

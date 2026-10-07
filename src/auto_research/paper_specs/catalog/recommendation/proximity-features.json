@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "proximity-features",
+  "detail_path": "reproductions/2607.12246-proximity-features/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Airbnb",
+  "adapter": {
+    "spec_key": "proximity-features"
+  }
+}

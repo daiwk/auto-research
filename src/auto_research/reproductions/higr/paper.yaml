@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "higr",
   "arxiv_id": "2512.24787",
   "title": "HiGR: Industrial-Scale Hierarchical Generative Slate Recommendation Framework in Tencent",
@@ -40,5 +40,56 @@
     "Tencent private video data",
     "production PCRQ-VAE and beam serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.higr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2025-12-31",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tencent video",
+          "metric": "stay time",
+          "lift_percent": 1.03,
+          "traffic": "5% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Tencent video",
+          "metric": "video views",
+          "lift_percent": 1.73,
+          "traffic": "5% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Tencent private video data",
+      "production PCRQ-VAE and beam serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

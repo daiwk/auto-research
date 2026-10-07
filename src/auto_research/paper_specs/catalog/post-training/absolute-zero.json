@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "absolute-zero",
+  "title": "Absolute Zero",
+  "paper_url": "https://arxiv.org/abs/2505.03335",
+  "detail_path": "post-training/2505.03335-absolute-zero/README.md",
+  "topic": [
+    "零数据自博弈"
+  ],
+  "first_author": "Andrew Zhao",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2025-05-06",
+  "code": "https://github.com/LeapLabTHU/Absolute-Zero-Reasoner",
+  "adapter": "absolute-zero"
+}

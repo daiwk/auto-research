@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "clue-opsd",
+  "title": "Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding",
+  "paper_url": "https://arxiv.org/abs/2608.25356",
+  "detail_path": "post-training/2608.25356-clue-opsd/README.md",
+  "topic": [
+    "长视频特权视图 OPD"
+  ],
+  "first_author": "Kaishen Wang",
+  "first_author_affiliation": "University of Maryland, College Park",
+  "published": "2026-08-26",
+  "code": null,
+  "adapter": "clue-opsd"
+}

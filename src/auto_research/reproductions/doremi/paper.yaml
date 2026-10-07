@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "doremi",
   "arxiv_id": "2305.10429",
   "title": "DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining",
@@ -32,5 +32,33 @@
     "The Pile",
     "280M proxy and 8B target models"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.doremi.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/sangmichaelxie/doremi",
+      "organization": "Stanford University / Google Research",
+      "published": "2023-05-17",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "The Pile",
+      "280M proxy and 8B target models"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=80",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

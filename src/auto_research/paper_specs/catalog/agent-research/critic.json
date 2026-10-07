@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "critic",
+  "title": "CRITIC",
+  "paper_url": "https://arxiv.org/abs/2305.11738",
+  "detail_path": "agent-research/2305.11738-critic/README.md",
+  "topic": [
+    "工具反馈"
+  ],
+  "first_author": "Zhibin Gou",
+  "first_author_affiliation": "Microsoft",
+  "published": "2023-05-19",
+  "code": "https://github.com/microsoft/ProphetNet/tree/master/CRITIC",
+  "adapter": "critic"
+}

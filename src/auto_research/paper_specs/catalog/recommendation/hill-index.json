@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "hill-index",
+  "detail_path": "reproductions/2604.12965-hill-index/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta / Facebook and Instagram Ads",
+  "adapter": {
+    "spec_key": "hill-index"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "data-orchestra",
+  "detail_path": "reproductions/2607.24717-data-orchestra/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Fudan University / Shanghai Jiao Tong University / SII-GAIR",
+  "adapter": {
+    "spec_key": "data-orchestra"
+  }
+}

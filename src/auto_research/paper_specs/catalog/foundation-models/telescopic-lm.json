@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "telescopic-lm",
+  "title": "Telescopic Language Models",
+  "paper_url": "https://arxiv.org/abs/2609.35769",
+  "detail_path": "foundation-models/2609.35769-telescopic-lm/README.md",
+  "topic": [
+    "网络架构",
+    "弹性深度"
+  ],
+  "first_author": "Zhilin Guo",
+  "first_author_affiliation": "University of Cambridge",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "telescopic-lm",
+  "priority": "P1"
+}

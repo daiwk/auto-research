@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "kuafu",
+  "detail_path": "reproductions/2609.31045-kuafu/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "kuafu"
+  }
+}

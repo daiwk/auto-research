@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "sinkflex-rl",
+  "title": "Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks",
+  "paper_url": "https://arxiv.org/abs/2608.10357",
+  "detail_path": "agent-research/2608.10357-sinkflex-rl/README.md",
+  "topic": [
+    "Agentic RL / efficient long context"
+  ],
+  "first_author": "Zelei Cheng",
+  "first_author_affiliation": "Capital One AI Foundations",
+  "published": "2026-08-11",
+  "code": null,
+  "adapter": "sinkflex-rl"
+}

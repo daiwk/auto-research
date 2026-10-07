@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "math-shepherd",
+  "title": "Math-Shepherd",
+  "paper_url": "https://arxiv.org/abs/2312.08935",
+  "detail_path": "post-training/2312.08935-math-shepherd/README.md",
+  "topic": [
+    "自动过程奖励"
+  ],
+  "first_author": "Peiyi Wang",
+  "first_author_affiliation": "Peking University",
+  "published": "2023-12-14",
+  "code": "未发现官方代码",
+  "adapter": "math-shepherd"
+}

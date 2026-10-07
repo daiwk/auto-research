@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "llatte",
+  "detail_path": "reproductions/2601.20083-llatte/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "llatte"
+  }
+}

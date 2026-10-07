@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "naju",
+  "detail_path": "reproductions/2607.21000-naju/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Independent researchers",
+  "adapter": {
+    "spec_key": "naju"
+  }
+}

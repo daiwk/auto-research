@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "light-heads",
   "arxiv_id": "2609.25433",
   "title": "Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems",
@@ -31,5 +31,45 @@
     "YouTube online continuous-training fleet and shared configuration service",
     "private multi-task labels, downstream reward model and serving dependencies"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.light_heads.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2026-09-21",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "YouTube",
+          "metric": "top-line engagement",
+          "lift_percent": 0.03,
+          "traffic": "production A/B experiment",
+          "source_url": "https://arxiv.org/html/2609.25433v1",
+          "source_location": "Section 5.2",
+          "experiment_duration": null,
+          "significance": "p<0.05",
+          "retrieved_at": "2026-09-26"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "YouTube online continuous-training fleet and shared configuration service",
+      "private multi-task labels, downstream reward model and serving dependencies"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "120 shared steps + 80 new-head steps per variant; chronological 70/15/15",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

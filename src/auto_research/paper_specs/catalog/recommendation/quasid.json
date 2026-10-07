@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "quasid",
+  "detail_path": "reproductions/2603.00632-quasid/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Electronic Science and Technology of China / Kuaishou",
+  "adapter": {
+    "spec_key": "quasid"
+  }
+}

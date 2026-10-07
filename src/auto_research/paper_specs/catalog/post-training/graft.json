@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "graft",
+  "title": "Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR",
+  "paper_url": "https://arxiv.org/abs/2609.37868",
+  "detail_path": "post-training/2609.37868-graft/README.md",
+  "topic": [
+    "RLVR",
+    "跨模型轨迹交换",
+    "离策略校正"
+  ],
+  "first_author": "Doohyuk Jang",
+  "first_author_affiliation": "KAIST",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "graft",
+  "priority": "P1"
+}

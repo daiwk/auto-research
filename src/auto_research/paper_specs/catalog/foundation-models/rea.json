@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "rea",
+  "title": "Role-aware Heuristic Episodic Attention for Conversational LLMs",
+  "paper_url": "https://arxiv.org/abs/2610.00958",
+  "detail_path": "foundation-models/2610.00958-rea/README.md",
+  "topic": [
+    "长上下文",
+    "会话记忆",
+    "注意力"
+  ],
+  "first_author": "Wanyang Hong",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "rea",
+  "priority": "P1"
+}

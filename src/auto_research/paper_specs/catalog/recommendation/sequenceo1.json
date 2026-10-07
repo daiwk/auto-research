@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sequenceo1",
+  "detail_path": "reproductions/2609.08443-sequenceo1/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance / Douyin",
+  "adapter": {
+    "spec_key": "sequenceo1"
+  }
+}

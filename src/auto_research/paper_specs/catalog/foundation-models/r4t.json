@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "r4t",
+  "title": "Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion",
+  "paper_url": "https://arxiv.org/abs/2603.06397",
+  "detail_path": "foundation-models/2603.06397-r4t/README.md",
+  "topic": [
+    "生成式检索",
+    "RL 编译"
+  ],
+  "first_author": "Pengcheng Jiang",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign / Google Research",
+  "published": "2026-03-06",
+  "code": null,
+  "adapter": "r4t",
+  "priority": "P0"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "lngram-v2",
+  "detail_path": "reproductions/2609.03426-lngram-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Beijing University of Posts and Telecommunications / Kuaishou Technology",
+  "adapter": {
+    "spec_key": "lngram-v2"
+  }
+}

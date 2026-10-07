@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sim",
+  "detail_path": "reproductions/2006.05639-sim/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "sim"
+  }
+}

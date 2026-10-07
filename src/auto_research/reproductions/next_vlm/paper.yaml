@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "next-vlm",
   "arxiv_id": "2607.24789",
   "title": "NEXT: Reasoning-Driven Video Recommendation via a Vision-Language Model",
@@ -31,5 +31,54 @@
     "NEXT-8B VLM post-training",
     "Meta private short-video corpus and production injection service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.next_vlm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta",
+      "published": "2026-06-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "commercial short-form video platform",
+          "metric": "watch time",
+          "lift_percent": 0.53,
+          "traffic": "multi-week A/B at approximately 100M users",
+          "source_url": "https://arxiv.org/html/2607.24789v1#S5.SS2",
+          "source_location": "Section 5.2 Table 5",
+          "experiment_duration": "multiple weeks",
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        },
+        {
+          "product": "commercial short-form video platform",
+          "metric": "distinct video exposure",
+          "lift_percent": 0.51,
+          "traffic": "multi-week A/B at approximately 100M users",
+          "source_url": "https://arxiv.org/html/2607.24789v1#S5.SS2",
+          "source_location": "Section 5.2 Table 5",
+          "experiment_duration": "multiple weeks",
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "NEXT-8B VLM post-training",
+      "Meta private short-video corpus and production injection service"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

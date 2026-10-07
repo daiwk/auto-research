@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "solaris",
+  "detail_path": "reproductions/2604.12110-solaris/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "solaris"
+  }
+}

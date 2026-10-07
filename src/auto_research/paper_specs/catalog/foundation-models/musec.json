@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "musec",
+  "title": "Musec: MomentUm SpEctral Clipping for Stable Muon-type Training",
+  "paper_url": "https://arxiv.org/abs/2609.11655",
+  "detail_path": "foundation-models/2609.11655-musec/README.md",
+  "topic": [
+    "优化器",
+    "谱裁剪"
+  ],
+  "first_author": "Zhuanghua Liu",
+  "first_author_affiliation": "National University of Singapore",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "musec",
+  "priority": "P1"
+}

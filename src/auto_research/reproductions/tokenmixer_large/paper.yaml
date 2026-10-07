@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "tokenmixer-large",
   "arxiv_id": "2602.06563",
   "title": "TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders",
@@ -35,5 +35,67 @@
     "private trillion-scale training data",
     "production fused kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.tokenmixer_large.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance",
+      "published": "2026-02-06",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "ByteDance e-commerce",
+          "metric": "Orders",
+          "lift_percent": 1.66,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "ByteDance e-commerce",
+          "metric": "Per-capita payment GMV",
+          "lift_percent": 2.98,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "ByteDance ads",
+          "metric": "ADSS",
+          "lift_percent": 2.0,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private trillion-scale training data",
+      "production fused kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=80",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

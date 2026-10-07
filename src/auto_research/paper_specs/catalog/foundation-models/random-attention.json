@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "random-attention",
+  "detail_path": "reproductions/2609.03430-random-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+  "adapter": {
+    "spec_key": "random-attention"
+  }
+}

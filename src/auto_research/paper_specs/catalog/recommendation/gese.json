@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gese",
+  "detail_path": "reproductions/2609.15094-gese/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Baidu",
+  "adapter": {
+    "spec_key": "gese"
+  }
+}

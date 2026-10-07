@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "youtube-freshness",
+  "detail_path": "reproductions/2607.23749-youtube-freshness/README.md",
+  "first_author": null,
+  "first_author_affiliation": "YouTube Music / Google",
+  "adapter": {
+    "spec_key": "youtube-freshness"
+  }
+}

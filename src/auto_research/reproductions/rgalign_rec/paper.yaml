@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rgalign-rec",
   "arxiv_id": "2602.12968",
   "title": "RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rgalign_rec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Forth AI / Shopee / Singapore University of Technology and Design",
+      "published": "2026-02-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "production zero-query chatbot",
+          "metric": "CTR@3 incremental over QE-Rec",
+          "lift_percent": 0.13,
+          "traffic": "large-scale online A/B",
+          "source_url": "https://arxiv.org/html/2602.12968v1",
+          "source_location": "Section 5.4 / Table 5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

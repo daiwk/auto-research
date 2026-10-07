@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "rail",
+  "title": "Optimizing What Policies Learn From: Recoverability-Aware Rollout Intervention Learning",
+  "paper_url": "https://arxiv.org/abs/2608.05080",
+  "detail_path": "post-training/2608.05080-rail/README.md",
+  "topic": [
+    "rollout 预算分配"
+  ],
+  "first_author": "Zheyuan Zhang",
+  "first_author_affiliation": "University of Notre Dame / Amazon",
+  "published": "2026-08-05",
+  "code": null,
+  "adapter": "rail"
+}

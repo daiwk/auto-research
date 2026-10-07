@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "longer",
+  "detail_path": "reproductions/2505.04421-longer/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "longer"
+  }
+}

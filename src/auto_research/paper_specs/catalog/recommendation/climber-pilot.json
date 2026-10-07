@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "climber-pilot",
+  "detail_path": "reproductions/2602.13581-climber-pilot/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NetEase Cloud Music",
+  "adapter": {
+    "spec_key": "climber-pilot"
+  }
+}

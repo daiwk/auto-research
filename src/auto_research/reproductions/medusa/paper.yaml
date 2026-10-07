@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "medusa",
   "arxiv_id": "2401.10774",
   "title": "Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads",
@@ -29,5 +29,33 @@
     "multi-billion-parameter backbone",
     "GPU tree-attention kernel"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.medusa.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/FasterDecoding/Medusa",
+      "organization": "Together AI / Princeton University / University of Illinois Urbana-Champaign",
+      "published": "2024-01-19",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "multi-billion-parameter backbone",
+      "GPU tree-attention kernel"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

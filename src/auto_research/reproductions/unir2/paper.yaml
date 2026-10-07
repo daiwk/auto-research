@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "unir2",
   "arxiv_id": "2607.24439",
   "title": "Unifying Generative Recall and Multi-Objective Ranking in a Single Decoder-Only Sequence",
@@ -42,5 +42,68 @@
     "three-level 8129-way SID and production beam search",
     "3-layer 640-d online service and pipeline parallelism"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.unir2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou / IIE, CAS / UCAS",
+      "published": "2026-07-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou App",
+          "metric": "play volume",
+          "lift_percent": 1.177,
+          "traffic": "5% traffic, two weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou App",
+          "metric": "like rate",
+          "lift_percent": 2.56,
+          "traffic": "5% traffic, two weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou Lite",
+          "metric": "total gifting amount",
+          "lift_percent": 2.569,
+          "traffic": "5% traffic, two weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Kuaishou private full-stream multi-objective samples",
+      "three-level 8129-way SID and production beam search",
+      "3-layer 640-d online service and pipeline parallelism"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=130",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

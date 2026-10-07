@@ -1,0 +1,19 @@
+{
+  "domain": "foundation-models",
+  "key": "aspire",
+  "title": "ASPIRE: Asynchronous Batch Self-Speculative Decoding",
+  "paper_url": "https://arxiv.org/abs/2609.17943",
+  "detail_path": "foundation-models/2609.17943-aspire/README.md",
+  "topic": [
+    "推测解码",
+    "推理效率"
+  ],
+  "first_author": "Amir Ziashahabi",
+  "first_author_affiliation": "University of Southern California",
+  "published": "2026-09-16",
+  "code": null,
+  "adapter": "aspire",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/aspire-a100-20260919.json"
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "olive",
+  "title": "Learning from Teacher Continuations at Student States",
+  "paper_url": "https://arxiv.org/abs/2609.36246",
+  "detail_path": "post-training/2609.36246-olive/README.md",
+  "topic": [
+    "在线蒸馏",
+    "Teacher continuation"
+  ],
+  "first_author": "Haojin Wang",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-09-28",
+  "code": "https://dylanzsz.github.io/olive/",
+  "adapter": "olive",
+  "priority": "P1"
+}

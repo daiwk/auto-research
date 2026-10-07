@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mosaic",
+  "detail_path": "reproductions/2607.24015-mosaic/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "mosaic"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "minirl",
+  "title": "Stabilizing RL with LLMs",
+  "paper_url": "https://arxiv.org/abs/2512.01374",
+  "detail_path": "post-training/2512.01374-minirl/README.md",
+  "topic": [
+    "稳定 MoE RL"
+  ],
+  "first_author": "Chujie Zheng",
+  "first_author_affiliation": "Alibaba Qwen Team",
+  "published": "2025-12-01",
+  "code": "未发现官方代码",
+  "adapter": "minirl"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gese",
   "arxiv_id": "2609.15094",
   "title": "Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation",
@@ -33,5 +33,57 @@
     "Qwen3-14B SFT/GSPO checkpoint",
     "production feedback selector"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gese.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Baidu",
+      "published": "2026-09-14",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "commercial information feed with 100M+ DAU",
+          "metric": "CTR",
+          "lift_percent": 2.57,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.15094v1",
+          "source_location": "Section 4.2; Table 2",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-16"
+        },
+        {
+          "product": "commercial information feed with 100M+ DAU",
+          "metric": "dwell time",
+          "lift_percent": 0.87,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.15094v1",
+          "source_location": "Section 4.2; Table 2",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-16"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Baidu private headline logs",
+      "Qwen3-14B SFT/GSPO checkpoint",
+      "production feedback selector"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

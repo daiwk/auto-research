@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "light-heads",
+  "detail_path": "reproductions/2609.25433-light-heads/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "light-heads"
+  }
+}

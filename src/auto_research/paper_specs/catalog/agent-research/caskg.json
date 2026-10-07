@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "caskg",
+  "title": "CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval",
+  "paper_url": "https://arxiv.org/abs/2608.25500",
+  "detail_path": "agent-research/2608.25500-caskg/README.md",
+  "topic": [
+    "反事实因果技能图"
+  ],
+  "first_author": "Zhiyuan Li",
+  "first_author_affiliation": "Jilin University / Ant Group",
+  "published": "2026-08-26",
+  "code": "https://github.com/ZhiyuanLi218/Caskg",
+  "adapter": "caskg"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "degr",
+  "detail_path": "reproductions/2608.04809-degr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "JD.com",
+  "adapter": {
+    "spec_key": "degr"
+  }
+}

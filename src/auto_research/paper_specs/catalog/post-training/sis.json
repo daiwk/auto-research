@@ -1,0 +1,10 @@
+{
+  "domain": "post-training",
+  "key": "sis",
+  "detail_path": "reproductions/2607.04728-sis/README.md",
+  "first_author": "Yu Li",
+  "first_author_affiliation": "Renmin University of China",
+  "adapter": {
+    "spec_key": "sis"
+  }
+}

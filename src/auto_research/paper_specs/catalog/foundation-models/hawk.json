@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "hawk",
+  "title": "HAWK: Rethinking Multimodal Drafting for Speculative Decoding",
+  "paper_url": "https://arxiv.org/abs/2610.00623",
+  "detail_path": "foundation-models/2610.00623-hawk/README.md",
+  "topic": [
+    "多模态推理",
+    "投机解码",
+    "蒸馏"
+  ],
+  "first_author": "Wenhan Yang",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "published": "2026-09-30",
+  "code": null,
+  "adapter": "hawk",
+  "priority": "P1"
+}

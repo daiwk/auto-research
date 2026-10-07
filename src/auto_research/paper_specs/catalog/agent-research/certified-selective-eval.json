@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "certified-selective-eval",
+  "title": "Certified Selective Automation of LLM Agent Evaluation",
+  "paper_url": "https://arxiv.org/abs/2609.34320",
+  "detail_path": "agent-research/2609.34320-certified-selective-eval/README.md",
+  "topic": [
+    "Agent 评测",
+    "选择性自动化",
+    "统计证书"
+  ],
+  "first_author": "Chengguang Gan",
+  "first_author_affiliation": "Independent Researcher",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "certified-selective-eval",
+  "priority": "P1"
+}

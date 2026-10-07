@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gris",
   "arxiv_id": "2610.01533",
   "title": "Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)",
@@ -30,5 +30,34 @@
     "production interaction graph",
     "generative decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gris.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/hirc-airecs/graph-informed-sids",
+      "organization": "Huawei Ireland Research Centre",
+      "published": "2026-10-01",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户于 2026-10-02 明确批准的学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业证据结论。"
+    },
+    "omitted_core_components": [
+      "full benchmark training",
+      "production interaction graph",
+      "generative decoder"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "deterministic L1 mechanism fixture",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

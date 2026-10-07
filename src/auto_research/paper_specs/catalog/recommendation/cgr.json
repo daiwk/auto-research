@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cgr",
+  "detail_path": "reproductions/2603.04227-cgr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Bilibili",
+  "adapter": {
+    "spec_key": "cgr"
+  }
+}

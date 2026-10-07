@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "alibi",
+  "detail_path": "reproductions/2108.12409-alibi/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Washington / Meta AI",
+  "adapter": {
+    "spec_key": "alibi"
+  }
+}

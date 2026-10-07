@@ -1,3 +1,3 @@
-from ..latest_20260809_common import reproduce_dme
+from auto_research.reproductions.mechanisms.reproduce_dme import reproduce_dme
 
 __all__ = ["reproduce_dme"]

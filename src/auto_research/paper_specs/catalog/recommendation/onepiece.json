@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onepiece",
+  "detail_path": "reproductions/2509.18091-onepiece/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Shopee",
+  "adapter": {
+    "spec_key": "onepiece"
+  }
+}

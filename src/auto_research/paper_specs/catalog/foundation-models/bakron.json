@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "bakron",
+  "detail_path": "reproductions/2608.06291-bakron/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of California, San Diego",
+  "adapter": {
+    "spec_key": "bakron"
+  }
+}

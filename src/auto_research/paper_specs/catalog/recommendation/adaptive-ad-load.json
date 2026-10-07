@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "adaptive-ad-load",
+  "detail_path": "reproductions/2607.14418-adaptive-ad-load/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Washington",
+  "adapter": {
+    "spec_key": "adaptive-ad-load"
+  }
+}

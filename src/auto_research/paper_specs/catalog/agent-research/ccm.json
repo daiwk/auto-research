@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "ccm",
+  "title": "Continuous Context Management",
+  "paper_url": "https://arxiv.org/abs/2609.35540",
+  "detail_path": "agent-research/2609.35540-ccm/README.md",
+  "topic": [
+    "上下文管理",
+    "Agent RL"
+  ],
+  "first_author": "William Hoy",
+  "first_author_affiliation": "University of Miami",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "ccm",
+  "priority": "P1"
+}

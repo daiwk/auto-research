@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dcn-v2",
+  "detail_path": "reproductions/2008.13535-dcn-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "dcn-v2"
+  }
+}

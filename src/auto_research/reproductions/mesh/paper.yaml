@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mesh",
   "arxiv_id": "2607.12392",
   "title": "MESH: Scaling Up Retrieval with Heterogeneous Content Unification",
@@ -32,5 +32,55 @@
   "mechanisms": [
     "production DHEN operators, TorchScript GPU parallel serving and Pinterest logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mesh.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Pinterest",
+      "published": "2026-07-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Pinterest",
+          "metric": "fresh-item repins",
+          "lift_percent": 5.5,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Pinterest",
+          "metric": "retention",
+          "lift_percent": 0.46,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production DHEN operators, TorchScript GPU parallel serving and Pinterest logs"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

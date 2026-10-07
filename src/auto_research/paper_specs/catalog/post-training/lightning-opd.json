@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "lightning-opd",
+  "title": "Lightning OPD",
+  "paper_url": "https://arxiv.org/abs/2604.13010",
+  "detail_path": "post-training/2604.13010-lightning-opd/README.md",
+  "topic": [
+    "On-policy distillation"
+  ],
+  "first_author": "Yecheng Wu",
+  "first_author_affiliation": "MIT HAN Lab",
+  "published": "2026-04-14",
+  "code": "https://github.com/jet-ai-projects/Lightning-OPD",
+  "adapter": "lightning-opd"
+}

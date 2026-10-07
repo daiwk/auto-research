@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "connectionmind",
+  "detail_path": "reproductions/2608.10187-connectionmind/README.md",
+  "first_author": "Haoyu Han",
+  "first_author_affiliation": "Michigan State University",
+  "adapter": {
+    "spec_key": "connectionmind"
+  }
+}

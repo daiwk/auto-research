@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "naju",
   "arxiv_id": "2607.21000",
   "title": "Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory",
@@ -33,5 +33,34 @@
     "1.2B-token WikiText-103 training",
     "Mamba/Mamba-2/xLSTM/LRA full benchmark matrix"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.naju.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Independent researchers",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "official fused parallel scan kernel",
+      "1.2B-token WikiText-103 training",
+      "Mamba/Mamba-2/xLSTM/LRA full benchmark matrix"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=70",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

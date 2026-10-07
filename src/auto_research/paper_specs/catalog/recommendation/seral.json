@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "seral",
+  "detail_path": "reproductions/2502.13539-seral/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Taobao",
+  "adapter": {
+    "spec_key": "seral"
+  }
+}

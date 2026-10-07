@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "oxygenrec-v2",
   "arxiv_id": "2607.24255",
   "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
@@ -45,5 +45,57 @@
     "three-level production semantic IDs",
     "3B-A1B MoE serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.oxygenrec_v2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "JD.COM",
+      "published": "2026-07-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "JD.COM six production surfaces",
+          "metric": "UCTCVR",
+          "lift_percent": 4.44,
+          "traffic": "5–20% traffic, 5–8 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "JD.COM homepage floor",
+          "metric": "GMV",
+          "lift_percent": 21.21,
+          "traffic": "bucketed A/B, p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "JD private multi-behavior logs",
+      "three-level production semantic IDs",
+      "3B-A1B MoE serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=60",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

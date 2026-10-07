@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "mnemon",
+  "title": "Mnemon: Raw Records, Fast Judgments, Slow Thoughts",
+  "paper_url": "https://arxiv.org/abs/2609.36059",
+  "detail_path": "agent-research/2609.36059-mnemon/README.md",
+  "topic": [
+    "长期记忆",
+    "Jev",
+    "System 1/2"
+  ],
+  "first_author": "Guangren Wang",
+  "first_author_affiliation": "原文未列机构",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "mnemon",
+  "priority": "P1"
+}

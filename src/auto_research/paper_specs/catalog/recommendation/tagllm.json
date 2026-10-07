@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "tagllm",
+  "detail_path": "reproductions/2603.21481-tagllm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tongji University",
+  "adapter": {
+    "spec_key": "tagllm"
+  }
+}

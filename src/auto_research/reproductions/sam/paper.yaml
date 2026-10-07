@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sam",
   "arxiv_id": "2607.12714",
   "title": "Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy",
@@ -32,5 +32,55 @@
   "mechanisms": [
     "private click/purchase logs and production long-sequence transducer"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sam.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba Group",
+      "published": "2026-07-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba recommendation",
+          "metric": "CTR",
+          "lift_percent": 1.1,
+          "traffic": "1% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Alibaba recommendation",
+          "metric": "GMV",
+          "lift_percent": 0.9,
+          "traffic": "1% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private click/purchase logs and production long-sequence transducer"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

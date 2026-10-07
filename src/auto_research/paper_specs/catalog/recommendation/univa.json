@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "univa",
+  "detail_path": "reproductions/2605.05803-univa/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent / WeChat Channels",
+  "adapter": {
+    "spec_key": "univa"
+  }
+}

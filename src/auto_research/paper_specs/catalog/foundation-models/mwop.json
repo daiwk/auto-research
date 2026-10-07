@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "mwop",
+  "title": "MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs",
+  "paper_url": "https://arxiv.org/abs/2610.01434",
+  "detail_path": "foundation-models/2610.01434-mwop/README.md",
+  "topic": [
+    "多模态大模型",
+    "结构剪枝",
+    "推理效率"
+  ],
+  "first_author": "Xudong Wang",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "mwop",
+  "priority": "P1"
+}

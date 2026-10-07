@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "oneranker",
+  "detail_path": "reproductions/2603.02999-oneranker/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "oneranker"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "post-training",
+  "key": "off-context-grpo",
+  "detail_path": "reproductions/2607.19313-off-context-grpo/README.md",
+  "first_author": "Priyank Agrawal",
+  "first_author_affiliation": "Meta AI",
+  "adapter": {
+    "spec_key": "off-context-grpo"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "lsvcr",
   "arxiv_id": "2403.13574",
   "title": "A Large Language Model Enhanced Sequential Recommender for Joint Video and Comment Recommendation",
@@ -43,5 +43,58 @@
     "ChatGLM3 scale",
     "Kuaishou private video/comment logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.lsvcr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/RUCAIBox/LSVCR",
+      "organization": "Kuaishou",
+      "published": "2024-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou video",
+          "metric": "Watch Time",
+          "lift_percent": 0.3649,
+          "traffic": "20K users, 2 weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou comments",
+          "metric": "Watch Time",
+          "lift_percent": 4.1264,
+          "traffic": "20K users, 2 weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "ChatGLM3 scale",
+      "Kuaishou private video/comment logs"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

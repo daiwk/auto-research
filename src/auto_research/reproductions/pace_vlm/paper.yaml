@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "pace-vlm",
   "arxiv_id": "2608.27206",
   "title": "PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference",
@@ -31,5 +31,31 @@
     "paper-scale benchmark suite",
     "custom fused serving kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.pace_vlm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/jjL357/PACE",
+      "organization": "Sun Yat-sen University",
+      "published": "2026-08-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "paper-scale benchmark suite",
+      "custom fused serving kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/pace-vlm-a30-20260829.json"
+  }
 }

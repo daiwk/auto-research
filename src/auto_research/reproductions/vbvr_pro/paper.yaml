@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "vbvr-pro",
   "arxiv_id": "2608.26105",
   "title": "VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning",
@@ -32,5 +32,32 @@
     "seven external transfer benchmarks",
     "large-scale multi-task RL"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.vbvr_pro.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://www.video-reason.com/?v=pro",
+      "organization": "Nanyang Technological University / VBVR Community",
+      "published": "2026-08-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "released large video/image generators",
+      "seven external transfer benchmarks",
+      "large-scale multi-task RL"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

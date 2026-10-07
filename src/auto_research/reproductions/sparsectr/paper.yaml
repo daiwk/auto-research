@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sparsectr",
   "arxiv_id": "2601.17836",
   "title": "Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:evolutionary-sparse-attention"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.sparsectr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Institute of Software, Chinese Academy of Sciences",
+      "published": "2026-01-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan list advertising",
+          "metric": "CTR",
+          "lift_percent": 1.72,
+          "traffic": "1% traffic production online A/B for 7 days",
+          "source_url": "https://arxiv.org/html/2601.17836v1",
+          "source_location": "Section 4.7",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private advertising histories",
+      "production HSTU stack",
+      "40 ms serving implementation"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

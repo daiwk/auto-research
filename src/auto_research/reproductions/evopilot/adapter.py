@@ -1,4 +1,4 @@
-from ..latest_20260921 import make_evopilot_adapter
+from auto_research.reproductions.mechanisms.comparison_protocol import make_evopilot_adapter
 from ..registry import register
 
 

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "gaugequant",
+  "detail_path": "reproductions/2607.20757-gaugequant/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Cambridge",
+  "adapter": {
+    "spec_key": "gaugequant"
+  }
+}

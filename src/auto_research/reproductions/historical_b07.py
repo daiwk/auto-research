@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from auto_research.paper_specs.runtime import adapter_from_spec
+
 from pathlib import Path
 
 import numpy as np
@@ -211,26 +213,4 @@ def render(result: dict) -> str:
 
 def build_adapter(key: str, run) -> ReproductionAdapter:
     paper = BY_KEY[key]
-    return ReproductionAdapter(
-        key=key,
-        paper=PaperMetadata(
-            arxiv_id=paper.arxiv_id,
-            title=paper.title,
-            url=f"https://arxiv.org/abs/{paper.arxiv_id}",
-            track="llm",
-            code_url=paper.code_url,
-            organization=paper.organization,
-            published=paper.published,
-            topics=paper.topic,
-        ),
-        run=run,
-        render=render,
-        fidelity=ReproductionFidelity.CORE_MECHANISM,
-        omitted_core_components=("paper-scale checkpoints and training", "custom CUDA kernels"),
-        evaluation_tier=EvaluationTier.PUBLIC_DATASET,
-        datasets=("deterministic long-context public mini-suite",),
-        baseline="recent-window attention",
-        metrics=("accuracy", "relative cost"),
-        device_capabilities=("cpu",),
-        infer_device_capabilities=False,
-    )
+    return adapter_from_spec(key=key, run=run, render=render)

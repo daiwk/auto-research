@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "chinese-jev",
+  "title": "Chinese-Jev: Bringing System One Model to Chinese-Language Tasks",
+  "paper_url": "https://arxiv.org/abs/2609.36965",
+  "detail_path": "foundation-models/2609.36965-chinese-jev/README.md",
+  "topic": [
+    "System One / JEV",
+    "中文理解",
+    "高效决策模型"
+  ],
+  "first_author": "Zexiao Wang",
+  "first_author_affiliation": "Fudan University",
+  "published": "2026-09-29",
+  "code": "https://gulucaptain.github.io/Chinese-Jev/",
+  "adapter": "chinese-jev",
+  "priority": "P1"
+}

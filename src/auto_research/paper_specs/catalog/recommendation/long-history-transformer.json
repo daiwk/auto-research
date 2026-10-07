@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "long-history-transformer",
+  "detail_path": "reproductions/2607.14331-long-history-transformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Yandex",
+  "adapter": {
+    "spec_key": "long-history-transformer"
+  }
+}

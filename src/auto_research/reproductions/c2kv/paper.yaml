@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "c2kv",
   "arxiv_id": "2607.17715",
   "title": "C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference",
@@ -28,5 +28,31 @@
     "paper-scale checkpoints and training",
     "custom CUDA kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.c2kv.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/s7a9/C2KV",
+      "organization": "Shanghai Jiao Tong University",
+      "published": "2026-07-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoints and training",
+      "custom CUDA kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

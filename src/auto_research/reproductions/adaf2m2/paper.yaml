@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "adaf2m2",
   "arxiv_id": "2501.15816",
   "title": "AdaF²M²: Comprehensive Learning and Responsive Leveraging Features in Recommendation System",
@@ -40,5 +40,56 @@
     "Douyin private features",
     "production retrieval/ranking/cold-start stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.adaf2m2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance / Douyin",
+      "published": "2025-01-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Douyin",
+          "metric": "cumulative active days",
+          "lift_percent": 1.37,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Douyin",
+          "metric": "app duration",
+          "lift_percent": 1.89,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Douyin private features",
+      "production retrieval/ranking/cold-start stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

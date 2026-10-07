@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onerec",
+  "detail_path": "reproductions/2502.18965-onerec/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "onerec"
+  }
+}

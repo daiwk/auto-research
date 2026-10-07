@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "mamba",
+  "detail_path": "reproductions/2312.00752-mamba/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Carnegie Mellon University / Princeton University",
+  "adapter": {
+    "spec_key": "mamba"
+  }
+}

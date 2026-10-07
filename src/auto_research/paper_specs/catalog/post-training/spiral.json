@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "spiral",
+  "title": "SPIRAL",
+  "paper_url": "https://arxiv.org/abs/2506.24119",
+  "detail_path": "post-training/2506.24119-spiral/README.md",
+  "topic": [
+    "自博弈课程"
+  ],
+  "first_author": "Bo Liu",
+  "first_author_affiliation": "Apple",
+  "published": "2025-06-30",
+  "code": "https://github.com/spiral-rl/spiral",
+  "adapter": "spiral"
+}

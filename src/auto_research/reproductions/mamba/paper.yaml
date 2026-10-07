@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mamba",
   "arxiv_id": "2312.00752",
   "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
@@ -29,5 +29,33 @@
     "fused parallel selective-scan CUDA kernel",
     "2.8B-scale pretraining"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mamba.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/state-spaces/mamba",
+      "organization": "Carnegie Mellon University / Princeton University",
+      "published": "2023-12-01",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "fused parallel selective-scan CUDA kernel",
+      "2.8B-scale pretraining"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

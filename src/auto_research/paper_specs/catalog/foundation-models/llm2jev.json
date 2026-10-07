@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "llm2jev",
+  "title": "LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them",
+  "paper_url": "https://arxiv.org/abs/2610.02076",
+  "detail_path": "foundation-models/2610.02076-llm2jev/README.md",
+  "topic": [
+    "Jev",
+    "决策模型",
+    "校准"
+  ],
+  "first_author": "Yinheng Li",
+  "first_author_affiliation": "Microsoft（按作者邮箱）",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "llm2jev",
+  "priority": "P0"
+}

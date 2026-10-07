@@ -10,7 +10,6 @@ from typing import Callable
 
 import numpy as np
 
-from .evolution.llm import MicroLLMEvaluator
 from .evolution.models import Genome
 from .runtime import exclusive_file_lock, runtime_summary
 
@@ -103,6 +102,7 @@ class ScalingLawRunner:
         self.evaluator_factory = evaluator_factory or self._evaluator
 
     def _evaluator(self, config: ScalingLawConfig, point: ScalingBudgetPoint):
+        from .evolution.llm import MicroLLMEvaluator
         return MicroLLMEvaluator(
             config.dataset_dir, "wikitext-2", point.steps, config.seeds,
             config.allow_network, point.train_tokens, config.maximum_eval_tokens,

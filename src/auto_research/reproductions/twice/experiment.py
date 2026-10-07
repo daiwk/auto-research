@@ -1,3 +1,3 @@
-from ..latest_20260729_common import reproduce_twice
+from auto_research.reproductions.mechanisms.reproduce_reco_reward import reproduce_twice
 
 __all__ = ["reproduce_twice"]

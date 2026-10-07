@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "u-opsd",
+  "title": "U-OPSD",
+  "paper_url": "https://arxiv.org/abs/2608.06296",
+  "detail_path": "post-training/2608.06296-u-opsd/README.md",
+  "topic": [
+    "无监督自蒸馏"
+  ],
+  "first_author": "Yijiang Li",
+  "first_author_affiliation": "University of California, San Diego",
+  "published": "2026-08-06",
+  "code": "未发现官方代码",
+  "adapter": "u-opsd"
+}

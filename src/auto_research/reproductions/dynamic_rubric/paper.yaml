@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dynamic-rubric",
   "arxiv_id": "2607.20083",
   "title": "Co-Evolving LLM Evaluators and Policies via DynamicRubric",
@@ -32,5 +32,33 @@
     "Qwen3-8B policy and evaluator",
     "70B/235B production judges and private WeChat traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dynamic_rubric.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "WeChat / Tencent and Tsinghua University",
+      "published": "2026-07-22",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "The paper reports statistically significant online A/B gains and a full-traffic WeChat Search deployment, but withholds exact lifts."
+    },
+    "omitted_core_components": [
+      "Qwen3-8B policy and evaluator",
+      "70B/235B production judges and private WeChat traffic"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=1600",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

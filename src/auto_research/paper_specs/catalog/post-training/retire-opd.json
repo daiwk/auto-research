@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "retire-opd",
+  "title": "RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2609.20784",
+  "detail_path": "post-training/2609.20784-retire-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "Agent RL"
+  ],
+  "first_author": "ZJU-REAL team",
+  "first_author_affiliation": "Zhejiang University",
+  "published": "2026-09-17",
+  "code": "https://github.com/ZJU-REAL/SDAR",
+  "adapter": "retire-opd",
+  "priority": "P0"
+}

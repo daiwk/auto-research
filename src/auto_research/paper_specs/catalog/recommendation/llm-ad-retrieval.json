@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "llm-ad-retrieval",
+  "detail_path": "reproductions/2605.21969-llm-ad-retrieval/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "llm-ad-retrieval"
+  }
+}

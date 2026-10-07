@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "harnessopt-bench",
+  "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization",
+  "paper_url": "https://arxiv.org/abs/2608.06301",
+  "detail_path": "agent-research/2608.06301-harnessopt-bench/README.md",
+  "topic": [
+    "Harness 优化评测"
+  ],
+  "first_author": "Varun Ursekar",
+  "first_author_affiliation": "Scale AI",
+  "published": "2026-08-06",
+  "code": null,
+  "adapter": "harnessopt-bench"
+}

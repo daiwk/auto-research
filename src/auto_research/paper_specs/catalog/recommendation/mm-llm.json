@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mm-llm",
+  "detail_path": "reproductions/2605.09338-mm-llm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "mm-llm"
+  }
+}

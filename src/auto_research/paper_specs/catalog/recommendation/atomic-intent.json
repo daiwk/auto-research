@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "atomic-intent",
+  "detail_path": "reproductions/2606.10357-atomic-intent/README.md",
+  "first_author": null,
+  "first_author_affiliation": "The Hong Kong Polytechnic University",
+  "adapter": {
+    "spec_key": "atomic-intent"
+  }
+}

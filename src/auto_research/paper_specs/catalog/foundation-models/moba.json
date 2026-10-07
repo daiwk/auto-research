@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "moba",
+  "detail_path": "reproductions/2502.13189-moba/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Moonshot AI",
+  "adapter": {
+    "spec_key": "moba"
+  }
+}

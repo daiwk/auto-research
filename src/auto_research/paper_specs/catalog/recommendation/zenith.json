@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "zenith",
+  "detail_path": "reproductions/2601.21285-zenith/README.md",
+  "first_author": null,
+  "first_author_affiliation": "North Carolina State University",
+  "adapter": {
+    "spec_key": "zenith"
+  }
+}

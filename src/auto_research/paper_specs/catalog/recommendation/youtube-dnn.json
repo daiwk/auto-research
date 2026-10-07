@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "youtube-dnn",
+  "detail_path": "reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google / YouTube",
+  "adapter": {
+    "spec_key": "youtube-dnn"
+  }
+}

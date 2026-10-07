@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "fuse-evaluator",
+  "title": "Verifiable Social Reasoning for LLM Assistants",
+  "paper_url": "https://arxiv.org/abs/2609.17496",
+  "detail_path": "agent-research/2609.17496-fuse-evaluator/README.md",
+  "topic": [
+    "Agent 评测",
+    "社会推理"
+  ],
+  "first_author": "Amir Taubenfeld",
+  "first_author_affiliation": "Google Research / Hebrew University of Jerusalem / University of Cambridge",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "fuse-evaluator",
+  "priority": "P0"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "engram",
   "arxiv_id": "2601.07372",
   "title": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
@@ -35,5 +35,33 @@
     "27B-scale pretraining",
     "distributed memory prefetch infrastructure"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.engram.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/deepseek-ai/Engram",
+      "organization": "DeepSeek",
+      "published": "2026-01-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "27B-scale pretraining",
+      "distributed memory prefetch infrastructure"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

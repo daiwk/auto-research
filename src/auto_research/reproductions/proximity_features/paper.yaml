@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "proximity-features",
   "arxiv_id": "2607.12246",
   "title": "Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb",
@@ -32,5 +32,55 @@
   "mechanisms": [
     "commercial geo-IP database, consent platform and distributed KV serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.proximity_features.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Airbnb",
+      "published": "2026-07-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Airbnb marketing landing",
+          "metric": "first-time bookers",
+          "lift_percent": 2.0,
+          "traffic": "experiments 2024-12 to 2026-03",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Airbnb AutoSuggest",
+          "metric": "global bookings",
+          "lift_percent": 0.16,
+          "traffic": "experiments 2024-12 to 2026-03",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "commercial geo-IP database, consent platform and distributed KV serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

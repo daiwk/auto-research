@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mgoe",
+  "detail_path": "reproductions/2506.10520-mgoe/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "mgoe"
+  }
+}

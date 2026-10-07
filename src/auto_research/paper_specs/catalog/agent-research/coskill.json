@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "coskill",
+  "title": "CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution",
+  "paper_url": "https://arxiv.org/abs/2609.04865",
+  "detail_path": "agent-research/2609.04865-coskill/README.md",
+  "topic": [
+    "Hierarchical skill coevolution"
+  ],
+  "first_author": "Jinyuan Feng",
+  "first_author_affiliation": "Institute of Automation, Chinese Academy of Sciences",
+  "published": "2026-09-04",
+  "code": "https://github.com/jinyuan-cookie/CoSkill",
+  "adapter": "coskill"
+}

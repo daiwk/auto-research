@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "adrs",
+  "title": "ADRS",
+  "paper_url": "https://arxiv.org/abs/2608.03223",
+  "detail_path": "post-training/2608.03223-adrs/README.md",
+  "topic": [
+    "回报相关奖励塑形"
+  ],
+  "first_author": "Ranxu Zhang",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-08-04",
+  "code": "https://github.com/gitrxh/ADRS-arxiv",
+  "adapter": "adrs"
+}

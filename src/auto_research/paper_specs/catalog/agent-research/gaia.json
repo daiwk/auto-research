@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "gaia",
+  "title": "GAIA",
+  "paper_url": "https://arxiv.org/abs/2311.12983",
+  "detail_path": "agent-research/2311.12983-gaia/README.md",
+  "topic": [
+    "通用 Agent 评测"
+  ],
+  "first_author": "Grégoire Mialon",
+  "first_author_affiliation": "Meta AI",
+  "published": "2023-11-21",
+  "code": "https://huggingface.co/gaia-benchmark",
+  "adapter": "gaia"
+}

@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "ce-guided-moe",
+  "title": "Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2609.37751",
+  "detail_path": "foundation-models/2609.37751-ce-guided-moe/README.md",
+  "topic": [
+    "MoE",
+    "路由",
+    "Token error"
+  ],
+  "first_author": "Yury Nahshan",
+  "first_author_affiliation": "Bar-Ilan University",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "ce-guided-moe",
+  "priority": "P1"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "dash",
+  "title": "DASH",
+  "paper_url": "https://arxiv.org/abs/2608.06243",
+  "detail_path": "post-training/2608.06243-dash/README.md",
+  "topic": [
+    "自适应自蒸馏"
+  ],
+  "first_author": "Zhiyan Hou",
+  "first_author_affiliation": "Nanjing University",
+  "published": "2026-08-06",
+  "code": "https://github.com/DBtxy/DASH-OPSD",
+  "adapter": "dash"
+}

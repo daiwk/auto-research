@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "retoken",
+  "detail_path": "reproductions/2607.28627-retoken/README.md",
+  "first_author": null,
+  "first_author_affiliation": "UIUC / Microsoft Research / Google DeepMind",
+  "adapter": {
+    "spec_key": "retoken"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "scalr",
   "arxiv_id": "2606.00282",
   "title": "Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems",
@@ -36,5 +36,48 @@
   ],
   "evolve_operators": [
     "data:scalr"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.scalr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta",
+      "published": "2026-05-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta industrial recommendation platform",
+          "metric": "conversion rate",
+          "lift_percent": 0.14,
+          "traffic": "live traffic over multiple weeks; paper reports a consistent +0.14% to +0.24% range",
+          "source_url": "https://arxiv.org/html/2606.00282v1#S5.SS2",
+          "source_location": "Section 5.2",
+          "experiment_duration": "multiple weeks",
+          "significance": "statistically significant",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta cross-product logs",
+      "production conversion model",
+      "multi-source generation service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "two synthetic targets per source event",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

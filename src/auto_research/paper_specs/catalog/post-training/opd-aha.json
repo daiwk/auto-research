@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "opd-aha",
+  "title": "OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.16459",
+  "detail_path": "post-training/2609.16459-opd-aha/README.md",
+  "topic": [
+    "多模态后训练",
+    "On-policy distillation"
+  ],
+  "first_author": "Chenhao Qiu",
+  "first_author_affiliation": "Arizona State University / University of Virginia / Stevens Institute of Technology",
+  "published": "2026-09-15",
+  "code": "https://github.com/Echochef/OPD-Aha",
+  "adapter": "opd-aha",
+  "priority": "P0"
+}

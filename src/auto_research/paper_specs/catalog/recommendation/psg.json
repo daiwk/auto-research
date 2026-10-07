@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "psg",
+  "detail_path": "reproductions/2607.26427-psg/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "psg"
+  }
+}

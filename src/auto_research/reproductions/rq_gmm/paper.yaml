@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rq-gmm",
   "arxiv_id": "2602.12593",
   "title": "RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "head:residual-gmm"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.rq_gmm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2026-02-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tencent short-video advertising",
+          "metric": "Advertiser value",
+          "lift_percent": 1.502,
+          "traffic": "large-scale production online A/B",
+          "source_url": "https://arxiv.org/html/2602.12593v1",
+          "source_location": "Abstract and online experiments",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production multimodal encoder",
+      "private advertising features",
+      "online CTR serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

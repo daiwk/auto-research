@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "harness-lm",
+  "detail_path": "reproductions/2605.23572-harness-lm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Microsoft AI / Bing Ads",
+  "adapter": {
+    "spec_key": "harness-lm"
+  }
+}

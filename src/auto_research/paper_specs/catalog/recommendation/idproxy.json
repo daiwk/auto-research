@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "idproxy",
+  "detail_path": "reproductions/2603.01590-idproxy/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Xiaohongshu / Shanghai Jiao Tong University / Fudan University",
+  "adapter": {
+    "spec_key": "idproxy"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "minimax-sparse-attention",
   "arxiv_id": "2606.13392",
   "title": "MiniMax Sparse Attention",
@@ -39,5 +39,33 @@
     "109B pretraining",
     "official fused H800 kernel"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.minimax_sparse_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/MiniMax-AI/MSA",
+      "organization": "MiniMax",
+      "published": "2026-06-11",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "109B pretraining",
+      "official fused H800 kernel"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=36",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

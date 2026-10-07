@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "recap-ctr",
+  "detail_path": "reproductions/2609.37905-recap-ctr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Georgia Institute of Technology / Google Research",
+  "adapter": {
+    "spec_key": "recap-ctr"
+  }
+}

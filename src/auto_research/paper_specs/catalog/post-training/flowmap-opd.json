@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "flowmap-opd",
+  "title": "FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators",
+  "paper_url": "https://arxiv.org/abs/2609.37851",
+  "detail_path": "post-training/2609.37851-flowmap-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "Flow map",
+    "生成模型"
+  ],
+  "first_author": "Zhiqi Li",
+  "first_author_affiliation": "Georgia Institute of Technology",
+  "published": "2026-09-29",
+  "code": "https://github.com/ZhiqiLi-CG/Flowmap_OPD_source",
+  "adapter": "flowmap-opd",
+  "priority": "P1"
+}

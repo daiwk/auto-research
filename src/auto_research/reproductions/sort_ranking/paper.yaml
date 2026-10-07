@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sort-ranking",
   "arxiv_id": "2603.03988",
   "title": "SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sort_ranking.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International Digital Commerce",
+      "published": "2026-03-04",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "AliExpress recommendation",
+          "metric": "orders",
+          "lift_percent": 6.35,
+          "traffic": "three production scenarios",
+          "source_url": "https://arxiv.org/html/2603.03988v1",
+          "source_location": "Section 4.7 / Table 5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "sas-attention",
+  "detail_path": "reproductions/2609.13141-sas-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST",
+  "adapter": {
+    "spec_key": "sas-attention"
+  }
+}

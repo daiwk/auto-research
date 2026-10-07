@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "covemem",
+  "title": "When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems",
+  "paper_url": "https://arxiv.org/abs/2608.26895",
+  "detail_path": "agent-research/2608.26895-covemem/README.md",
+  "topic": [
+    "可训练协同记忆"
+  ],
+  "first_author": "Hanchong Chen",
+  "first_author_affiliation": "Shenzhen Technology University",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "covemem"
+}

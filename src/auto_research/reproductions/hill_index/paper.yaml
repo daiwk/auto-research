@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "hill-index",
   "arxiv_id": "2604.12965",
   "title": "Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation",
@@ -36,5 +36,48 @@
   ],
   "evolve_operators": [
     "rankmixer_hill_index"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.hill_index.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta / Facebook and Instagram Ads",
+      "published": "2026-04-14",
+      "publication_label": "EDBT 2026 / arXiv 2604.12965",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta Ads Retrieval",
+          "metric": "online ads metric",
+          "lift_percent": 2.57,
+          "traffic": "production online A/B: 2-layer MoNN Large/Small versus MoNN Small",
+          "source_url": "https://arxiv.org/html/2604.12965v1#S4.SS5",
+          "source_location": "Section 4.5, Table 8",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta MoNN production model",
+      "distributed FAISS EM",
+      "Facebook and Instagram Ads logs"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "6 coarse nodes; up to 6 residual child nodes per parent",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

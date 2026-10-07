@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "recharness",
   "arxiv_id": "2607.29241",
   "title": "RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.recharness.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/6lyc/RecHarness",
+      "organization": "Huazhong Agricultural University (Kuaishou internship)",
+      "published": "2026-07-31",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "short-video advertising",
+          "metric": "ADVV",
+          "lift_percent": 2.084,
+          "traffic": "10% traffic, 7 days",
+          "source_url": "https://arxiv.org/html/2607.29241v1",
+          "source_location": "paper online evaluation section",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

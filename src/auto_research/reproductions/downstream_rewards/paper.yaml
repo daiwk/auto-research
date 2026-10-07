@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "downstream-rewards",
   "arxiv_id": "2607.14192",
   "title": "Long-term User Engagement Optimization through Model-agnostic Downstream Rewards Learning",
@@ -37,5 +37,67 @@
     "billions of private Pinterest cross-surface events",
     "production Pinnability and TransAct rankers"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.downstream_rewards.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Pinterest",
+      "published": "2026-07-15",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Pinterest Homefeed",
+          "metric": "Successful Sessions",
+          "lift_percent": 0.36,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Pinterest Search",
+          "metric": "Search Fulfillment Rate",
+          "lift_percent": 0.25,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Pinterest Related Pins",
+          "metric": "Successful Sessions",
+          "lift_percent": 0.15,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "billions of private Pinterest cross-surface events",
+      "production Pinnability and TransAct rankers"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

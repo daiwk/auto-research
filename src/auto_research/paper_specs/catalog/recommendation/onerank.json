@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "onerank",
+  "detail_path": "reproductions/2606.16838-onerank/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Renmin University of China",
+  "adapter": {
+    "spec_key": "onerank"
+  }
+}

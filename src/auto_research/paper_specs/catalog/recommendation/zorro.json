@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "zorro",
+  "detail_path": "reproductions/2607.10910-zorro/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Technical University of Denmark",
+  "adapter": {
+    "spec_key": "zorro"
+  }
+}

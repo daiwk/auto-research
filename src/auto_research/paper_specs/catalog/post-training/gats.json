@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "gats",
+  "title": "Guide, Then Let Go: Gap-Adaptive Teacher Scheduling for Sparse-Reward Agentic RL",
+  "paper_url": "https://arxiv.org/abs/2609.37898",
+  "detail_path": "post-training/2609.37898-gats/README.md",
+  "topic": [
+    "Agentic RL",
+    "On-policy distillation",
+    "课程调度"
+  ],
+  "first_author": "Youling Huang",
+  "first_author_affiliation": "Dalian University of Technology / Kuaishou",
+  "published": "2026-09-29",
+  "code": "https://github.com/Ricardo-H/guide-then-let-go",
+  "adapter": "gats",
+  "priority": "P0"
+}

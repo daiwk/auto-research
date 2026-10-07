@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "onemall",
   "arxiv_id": "2601.21770",
   "title": "OneMall: One Model, More Scenarios -- End-to-End Generative Recommender Family at Kuaishou E-Commerce",
@@ -33,5 +33,67 @@
     "production Sparse MoE and Query-Former",
     "private e-commerce data and RL alignment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.onemall.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou",
+      "published": "2026-01-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou product-card",
+          "metric": "GMV",
+          "lift_percent": 13.01,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou short-video",
+          "metric": "orders",
+          "lift_percent": 15.32,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou live",
+          "metric": "orders",
+          "lift_percent": 2.78,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production Sparse MoE and Query-Former",
+      "private e-commerce data and RL alignment"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dos",
   "arxiv_id": "2602.04460",
   "title": "DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan",
@@ -33,5 +33,45 @@
     "private Meituan features and LLM embeddings",
     "production generator"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dos.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan",
+      "published": "2026-02-04",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan app",
+          "metric": "revenue",
+          "lift_percent": 1.15,
+          "traffic": "30% traffic, one week",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Meituan features and LLM embeddings",
+      "production generator"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

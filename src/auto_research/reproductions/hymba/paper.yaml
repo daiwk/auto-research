@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "hymba",
   "arxiv_id": "2411.13676",
   "title": "Hymba: A Hybrid-head Architecture for Small Language Models",
@@ -58,5 +58,33 @@
     "1.5B pretraining",
     "learnable meta tokens and fused kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.hymba.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/NVlabs/hymba",
+      "organization": "NVIDIA",
+      "published": "2024-11-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "1.5B pretraining",
+      "learnable meta tokens and fused kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=12",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

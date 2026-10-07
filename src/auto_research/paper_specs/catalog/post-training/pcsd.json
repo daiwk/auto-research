@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "pcsd",
+  "title": "PCSD",
+  "paper_url": "https://arxiv.org/abs/2608.01837",
+  "detail_path": "post-training/2608.01837-pcsd/README.md",
+  "topic": [
+    "持续一致性蒸馏"
+  ],
+  "first_author": "Chunji Lv",
+  "first_author_affiliation": "论文未列机构",
+  "published": "2026-08-03",
+  "code": "未发现官方代码",
+  "adapter": "pcsd"
+}

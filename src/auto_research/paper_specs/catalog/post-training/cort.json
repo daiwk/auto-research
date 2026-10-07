@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "cort",
+  "title": "CoRT",
+  "paper_url": "https://arxiv.org/abs/2607.25659",
+  "detail_path": "post-training/2607.25659-cort/README.md",
+  "topic": [
+    "Token-level credit assignment"
+  ],
+  "first_author": "Bo-Wen Zhang",
+  "first_author_affiliation": "ByteDance internship",
+  "published": "2026-07-28",
+  "code": "未发现官方代码",
+  "adapter": "cort"
+}

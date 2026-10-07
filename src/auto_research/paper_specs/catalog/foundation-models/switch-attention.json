@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "switch-attention",
+  "detail_path": "reproductions/2603.26380-switch-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Peking University / Huawei Technologies",
+  "adapter": {
+    "spec_key": "switch-attention"
+  }
+}

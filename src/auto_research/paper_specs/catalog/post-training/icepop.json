@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "icepop",
+  "title": "IcePop",
+  "paper_url": "https://arxiv.org/abs/2510.18855",
+  "detail_path": "post-training/2510.18855-icepop/README.md",
+  "topic": [
+    "MoE 训推失配"
+  ],
+  "first_author": "Ling Team",
+  "first_author_affiliation": "Ant Group",
+  "published": "2025-10-21",
+  "code": "未发现官方代码",
+  "adapter": "icepop"
+}

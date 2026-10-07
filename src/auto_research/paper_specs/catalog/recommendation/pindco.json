@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pindco",
+  "detail_path": "reproductions/2609.11943-pindco/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "pindco"
+  }
+}

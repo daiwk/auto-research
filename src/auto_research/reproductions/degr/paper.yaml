@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "degr",
   "arxiv_id": "2608.04809",
   "title": "DEGR: Dual Exploration-Driven Generative Re-Ranking for Adaptive Cross-Request Context Bridging",
@@ -38,5 +38,57 @@
     "industrial exploratory reward model",
     "cross-request exposure trajectories"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.degr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "JD.com",
+      "published": "2026-08-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "JD homepage recommendation",
+          "metric": "UCTR",
+          "lift_percent": 1.22,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "JD homepage recommendation",
+          "metric": "PV",
+          "lift_percent": 0.2,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "JD one-billion-request private dataset",
+      "industrial exploratory reward model",
+      "cross-request exposure trajectories"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "aigq",
   "arxiv_id": "2603.19710",
   "title": "AIGQ: An End-to-End Hybrid Generative Architecture for E-commerce Query Recommendation",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.aigq.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group / Alibaba",
+      "published": "2026-03-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao HintQ",
+          "metric": "GMV",
+          "lift_percent": 10.68,
+          "traffic": "thirty-day A/B",
+          "source_url": "https://arxiv.org/html/2603.19710v1",
+          "source_location": "Section 5.4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

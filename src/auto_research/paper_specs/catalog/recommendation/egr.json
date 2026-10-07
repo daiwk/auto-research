@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "egr",
+  "detail_path": "reproductions/2607.23038-egr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Snap Inc.",
+  "adapter": {
+    "spec_key": "egr"
+  }
+}

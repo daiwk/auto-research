@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ml-dcn",
+  "detail_path": "reproductions/2602.09194-ml-dcn/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "ml-dcn"
+  }
+}

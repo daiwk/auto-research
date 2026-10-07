@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "sipo",
+  "title": "SIPO: Unifying Reinforcement Learning with On-Policy Self-Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.36742",
+  "detail_path": "post-training/2609.36742-sipo/README.md",
+  "topic": [
+    "RLVR",
+    "On-policy self-distillation",
+    "Token 信用分配"
+  ],
+  "first_author": "Zhenrui Yue",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-09-29",
+  "code": "https://github.com/Yueeeeeeee/SIPO",
+  "adapter": "sipo",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/sipo-a100-20260930.json"
+}

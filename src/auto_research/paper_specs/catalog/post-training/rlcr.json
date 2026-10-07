@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "rlcr",
+  "title": "Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty",
+  "paper_url": "https://arxiv.org/abs/2507.16806",
+  "detail_path": "post-training/2507.16806-rlcr/README.md",
+  "topic": [
+    "校准奖励",
+    "Proper scoring rule"
+  ],
+  "first_author": "Mehul Damani",
+  "first_author_affiliation": "Massachusetts Institute of Technology",
+  "published": "2025-07-22",
+  "code": "https://github.com/damanimehul/RLCR",
+  "adapter": "system-one:rival-brier",
+  "priority": "P1"
+}

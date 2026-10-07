@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cluster-goobs",
+  "detail_path": "reproductions/2607.00448-cluster-goobs/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "cluster-goobs"
+  }
+}

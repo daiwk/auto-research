@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "slimper",
   "arxiv_id": "2607.12281",
   "title": "SlimPer: Make Personalization Model Slim and Smart",
@@ -40,5 +40,34 @@
     "1k–10k+ history and production kernels",
     "multi-task Shampoo training"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.slimper.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta Platforms, Inc.",
+      "published": "2026-07-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "User explicitly accepts the paper's statistically significant full-traffic Instagram launch as online evidence although exact lift percentages are undisclosed."
+    },
+    "omitted_core_components": [
+      "Instagram private multimodal data",
+      "1k–10k+ history and production kernels",
+      "multi-task Shampoo training"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

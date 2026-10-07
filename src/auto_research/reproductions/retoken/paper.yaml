@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "retoken",
   "arxiv_id": "2607.28627",
   "title": "ReToken: One Token to Improve Vision–Language Models for Visual Retrieval",
@@ -39,5 +39,34 @@
     "MIRAGE multi-image QA supervision",
     "long-video visual KV cache"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.retoken.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/avaxiao/ReToken",
+      "organization": "UIUC / Microsoft Research / Google DeepMind",
+      "published": "2026-07-30",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "frozen billion-parameter VLM",
+      "MIRAGE multi-image QA supervision",
+      "long-video visual KV cache"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

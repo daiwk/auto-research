@@ -1,0 +1,20 @@
+{
+  "domain": "foundation-models",
+  "key": "taco-optimizer",
+  "title": "TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning",
+  "paper_url": "https://arxiv.org/abs/2610.02199",
+  "detail_path": "foundation-models/2610.02199-taco-optimizer/README.md",
+  "topic": [
+    "优化器",
+    "显存效率",
+    "全参微调"
+  ],
+  "first_author": "Jichao Jiang",
+  "first_author_affiliation": "University of Central Florida",
+  "published": "2026-10-01",
+  "code": "https://github.com/Jichao2357/TACO_optimizer",
+  "adapter": "taco-optimizer",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/taco-optimizer-a100-20261002.json"
+}

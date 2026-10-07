@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sort-ranking",
+  "detail_path": "reproductions/2603.03988-sort-ranking/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International Digital Commerce",
+  "adapter": {
+    "spec_key": "sort-ranking"
+  }
+}

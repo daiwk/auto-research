@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "hymem",
+  "title": "HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation",
+  "paper_url": "https://arxiv.org/abs/2608.15703",
+  "detail_path": "agent-research/2608.15703-hymem/README.md",
+  "topic": [
+    "记忆",
+    "长时序 Agent"
+  ],
+  "first_author": "XinQi Wang",
+  "first_author_affiliation": "Institute of Automation, Chinese Academy of Sciences",
+  "published": "2026-08-16",
+  "code": null,
+  "adapter": "hymem"
+}

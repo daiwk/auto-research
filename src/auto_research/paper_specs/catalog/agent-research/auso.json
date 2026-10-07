@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "auso",
+  "title": "AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization",
+  "paper_url": "https://arxiv.org/abs/2608.21292",
+  "detail_path": "agent-research/2608.21292-auso/README.md",
+  "topic": [
+    "动作级技能优化"
+  ],
+  "first_author": "Huizu Lin",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-08-21",
+  "code": "https://github.com/JordanSancholhz/Action-Skill",
+  "adapter": "auso"
+}

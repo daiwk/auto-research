@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mmoe",
+  "detail_path": "reproductions/kdd2018-mmoe-mmoe/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "mmoe"
+  }
+}

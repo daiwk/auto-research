@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "wide-deep",
   "arxiv_id": "1606.07792",
   "title": "Wide & Deep Learning for Recommender Systems",
@@ -29,5 +29,47 @@
     "Google Play sparse IDs and production crosses",
     "distributed serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.wide_deep.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/tensorflow/models/tree/master/official/r1/wide_deep",
+      "organization": "Google",
+      "published": "2016-06-24",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Google Play",
+          "metric": "app acquisition",
+          "lift_percent": 3.9,
+          "traffic": "1% treatment vs 1% control, three weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Google Play sparse IDs and production crosses",
+      "distributed serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

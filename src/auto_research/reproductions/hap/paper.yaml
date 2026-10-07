@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "hap",
   "arxiv_id": "2603.03770",
   "title": "Not All Candidates are Created Equal: Heterogeneity-Aware Pre-ranking",
@@ -42,5 +42,45 @@
     "Toutiao private candidates",
     "heterogeneous production model fleet"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.hap.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Toutiao-Rec/HAP",
+      "organization": "ByteDance / Toutiao",
+      "published": "2026-03-04",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Toutiao",
+          "metric": "App Usage Duration",
+          "lift_percent": 0.4,
+          "traffic": "nine-month deployment",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Toutiao private candidates",
+      "heterogeneous production model fleet"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

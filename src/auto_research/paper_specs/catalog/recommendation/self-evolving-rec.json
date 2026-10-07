@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "self-evolving-rec",
+  "detail_path": "reproductions/2602.10226-self-evolving-rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "self-evolving-rec"
+  }
+}

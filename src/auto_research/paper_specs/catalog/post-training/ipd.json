@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "ipd",
+  "title": "Interpolated Policy Distillation: A Controllable Continuum Between Off-Policy and On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.37170",
+  "detail_path": "post-training/2609.37170-ipd/README.md",
+  "topic": [
+    "策略蒸馏",
+    "分布插值",
+    "Speculative sampling"
+  ],
+  "first_author": "Youxu Shi",
+  "first_author_affiliation": "WeChat Vision, Tencent",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "ipd",
+  "priority": "P1"
+}

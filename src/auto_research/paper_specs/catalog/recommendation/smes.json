@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "smes",
+  "detail_path": "reproductions/2602.09386-smes/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "smes"
+  }
+}

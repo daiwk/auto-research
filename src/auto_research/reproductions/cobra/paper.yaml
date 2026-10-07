@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "cobra",
   "arxiv_id": "2503.02453",
   "title": "Sparse Meets Dense: Unified Generative Recommendations with Cascaded Sparse-Dense Representations",
@@ -34,5 +34,57 @@
   "mechanisms": [
     "private ad data and production ANN/BeamFusion serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.cobra.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Baidu",
+      "published": "2025-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Baidu advertising",
+          "metric": "conversion",
+          "lift_percent": 3.6,
+          "traffic": "production online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Baidu advertising",
+          "metric": "ARPU",
+          "lift_percent": 4.15,
+          "traffic": "production online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private ad data and production ANN/BeamFusion serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

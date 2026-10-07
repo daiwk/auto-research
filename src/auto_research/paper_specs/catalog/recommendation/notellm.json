@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "notellm",
+  "detail_path": "reproductions/2403.01744-notellm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Xiaohongshu",
+  "adapter": {
+    "spec_key": "notellm"
+  }
+}

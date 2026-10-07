@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "memory-layer",
+  "detail_path": "reproductions/2607.25110-memory-layer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta / Instagram Reels",
+  "adapter": {
+    "spec_key": "memory-layer"
+  }
+}

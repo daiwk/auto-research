@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "metagpt",
+  "title": "MetaGPT",
+  "paper_url": "https://arxiv.org/abs/2308.00352",
+  "detail_path": "agent-research/2308.00352-metagpt/README.md",
+  "topic": [
+    "多 Agent 软件工程"
+  ],
+  "first_author": "Sirui Hong",
+  "first_author_affiliation": "DeepWisdom",
+  "published": "2023-08-01",
+  "code": "https://github.com/FoundationAgents/MetaGPT",
+  "adapter": "metagpt"
+}

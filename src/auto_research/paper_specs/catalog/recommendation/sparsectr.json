@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sparsectr",
+  "detail_path": "reproductions/2601.17836-sparsectr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Institute of Software, Chinese Academy of Sciences",
+  "adapter": {
+    "spec_key": "sparsectr"
+  }
+}

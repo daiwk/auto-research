@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "dr-opd",
+  "title": "Dr. OPD: Learning What to Follow for Optimal On-Policy Distillation of Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2609.38025",
+  "detail_path": "post-training/2609.38025-dr-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "双层优化",
+    "Token 权重"
+  ],
+  "first_author": "Zhenyu Wang",
+  "first_author_affiliation": "Rutgers University",
+  "published": "2026-09-29",
+  "code": "https://github.com/zywang0701/Dr-OPD",
+  "adapter": "dr-opd",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/dr-opd-a100-20260930.json"
+}

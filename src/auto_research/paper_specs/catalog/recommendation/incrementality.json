@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "incrementality",
+  "detail_path": "reproductions/2608.10182-incrementality/README.md",
+  "first_author": null,
+  "first_author_affiliation": "LinkedIn",
+  "adapter": {
+    "spec_key": "incrementality"
+  }
+}

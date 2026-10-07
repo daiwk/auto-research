@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "r2-opd",
+  "title": "Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress",
+  "paper_url": "https://arxiv.org/abs/2608.19408",
+  "detail_path": "post-training/2608.19408-r2-opd/README.md",
+  "topic": [
+    "OPD",
+    "过程蒸馏"
+  ],
+  "first_author": "Chen Yang",
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "published": "2026-08-19",
+  "code": null,
+  "adapter": "r2-opd"
+}
