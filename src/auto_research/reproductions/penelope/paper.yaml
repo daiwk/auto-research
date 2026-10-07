@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "penelope",
   "arxiv_id": "2607.25915",
   "title": "Penelope: Localized Latent Recurrence for Efficient Structured Reasoning",
@@ -58,5 +58,33 @@
     "pretrained decoder checkpoint",
     "progressive CoT-to-latent curriculum at paper scale"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.penelope.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Academic author team",
+      "published": "2026-07-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "pretrained decoder checkpoint",
+      "progressive CoT-to-latent curriculum at paper scale"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=12",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

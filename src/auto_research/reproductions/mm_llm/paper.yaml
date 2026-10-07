@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mm-llm",
   "arxiv_id": "2605.09338",
   "title": "A General Framework for Multimodal LLM-Based Multimedia Understanding in Large-Scale Recommendation Systems",
@@ -35,5 +35,46 @@
   "mechanisms": [
     "raw private multimedia and BLIP-2/LLaMA2-1.5B scale"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mm_llm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta",
+      "published": "2026-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta recommendation",
+          "metric": "engagement",
+          "lift_percent": 0.02,
+          "traffic": "large-scale online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "raw private multimedia and BLIP-2/LLaMA2-1.5B scale"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

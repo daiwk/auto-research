@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sessionrec",
   "arxiv_id": "2502.10157",
   "title": "SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation",
@@ -41,5 +41,58 @@
     "Meituan production features",
     "ANN serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sessionrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan",
+      "published": "2025-02",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan homepage",
+          "metric": "Pay PV",
+          "lift_percent": 0.603,
+          "traffic": "7 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meituan homepage",
+          "metric": "PVCTCVR",
+          "lift_percent": 0.564,
+          "traffic": "7 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meituan production features",
+      "ANN serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=180",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

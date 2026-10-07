@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "hymba",
+  "detail_path": "reproductions/2411.13676-hymba/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NVIDIA",
+  "adapter": {
+    "spec_key": "hymba"
+  }
+}

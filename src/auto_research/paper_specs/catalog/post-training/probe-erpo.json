@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "probe-erpo",
+  "title": "Entropy-Regularized Rank-Masked Policy Optimization for Test-Time Reinforcement Learning in Code Generation",
+  "paper_url": "https://arxiv.org/abs/2609.09135",
+  "detail_path": "post-training/2609.09135-probe-erpo/README.md",
+  "topic": [
+    "代码测试时 RL"
+  ],
+  "first_author": "Jiacheng Xu",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2026-09-08",
+  "code": null,
+  "adapter": "probe-erpo"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "mopd",
+  "title": "MOPD",
+  "paper_url": "https://arxiv.org/abs/2606.30406",
+  "detail_path": "post-training/2606.30406-mopd/README.md",
+  "topic": [
+    "多教师能力整合"
+  ],
+  "first_author": "Wenhan Ma",
+  "first_author_affiliation": "Xiaomi",
+  "published": "2026-06-29",
+  "code": "未发现官方代码",
+  "adapter": "mopd"
+}

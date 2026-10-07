@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "netflix-mediafm",
+  "detail_path": "reproductions/2608.18322-netflix-mediafm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Netflix",
+  "adapter": {
+    "spec_key": "netflix-mediafm"
+  }
+}

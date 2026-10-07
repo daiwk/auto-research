@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "angle",
+  "detail_path": "reproductions/2609.18296-angle/README.md",
+  "first_author": "Jinrui Zhang",
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "angle"
+  }
+}

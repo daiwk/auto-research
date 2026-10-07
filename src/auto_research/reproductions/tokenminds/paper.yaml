@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "tokenminds",
   "arxiv_id": "2606.25147",
   "title": "TokenMinds: Pretrained User Tokens and Embeddings for User Understanding in Large Recommender Systems",
@@ -45,5 +45,57 @@
     "YouTube LFV/SFV/search private training corpus",
     "multi-context beam decoding and asynchronous billion-user serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.tokenminds.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google DeepMind / YouTube",
+      "published": "2026-06-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "YouTube SFV",
+          "metric": "Engaged Users",
+          "lift_percent": 0.11,
+          "traffic": "seven-day production A/B; subsequently full user traffic",
+          "source_url": "https://arxiv.org/pdf/2606.25147",
+          "source_location": "Table 4 and Section 4.3",
+          "experiment_duration": "7 days",
+          "significance": "95% confidence",
+          "retrieved_at": "2026-08-09"
+        },
+        {
+          "product": "YouTube SFV",
+          "metric": "Satisfied Engagement",
+          "lift_percent": 0.62,
+          "traffic": "seven-day production A/B; subsequently full user traffic",
+          "source_url": "https://arxiv.org/pdf/2606.25147",
+          "source_location": "Table 4 and Section 4.3",
+          "experiment_duration": "7 days",
+          "significance": "95% confidence",
+          "retrieved_at": "2026-08-09"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Gemini 370M MoE encoder and 370M decoder with PLUM CPT",
+      "YouTube LFV/SFV/search private training corpus",
+      "multi-context beam decoding and asynchronous billion-user serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

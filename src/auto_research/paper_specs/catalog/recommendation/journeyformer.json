@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "journeyformer",
+  "detail_path": "reproductions/2606.19108-journeyformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Airbnb",
+  "adapter": {
+    "spec_key": "journeyformer"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "stride-opd",
+  "title": "Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.14636",
+  "detail_path": "post-training/2609.14636-stride-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "多轮加速"
+  ],
+  "first_author": "Zhiyu Gui",
+  "first_author_affiliation": "University of Science and Technology of China / Ant Group",
+  "published": "2026-09-13",
+  "code": null,
+  "adapter": "stride-opd",
+  "priority": "P0"
+}

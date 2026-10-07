@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "wemm-embedding",
+  "detail_path": "reproductions/2608.24053-wemm-embedding/README.md",
+  "first_author": "Junjie Zhou",
+  "first_author_affiliation": "WeChat Vision, Tencent",
+  "adapter": {
+    "spec_key": "wemm-embedding"
+  }
+}

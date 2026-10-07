@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "ipo",
+  "title": "IPO",
+  "paper_url": "https://arxiv.org/abs/2310.12036",
+  "detail_path": "post-training/2310.12036-ipo/README.md",
+  "topic": [
+    "偏好正则"
+  ],
+  "first_author": "Mohammad Gheshlaghi Azar",
+  "first_author_affiliation": "Google DeepMind",
+  "published": "2023-10-18",
+  "code": "未发现官方代码",
+  "adapter": "ipo"
+}

@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "flowright",
+  "title": "It Takes Workflows to Evolve Better Workflows",
+  "paper_url": "https://arxiv.org/abs/2610.01026",
+  "detail_path": "agent-research/2610.01026-flowright/README.md",
+  "topic": [
+    "工作流进化",
+    "多 Agent",
+    "层级奖励"
+  ],
+  "first_author": "Xuehang Guo",
+  "first_author_affiliation": "William & Mary",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "flowright",
+  "priority": "P1"
+}

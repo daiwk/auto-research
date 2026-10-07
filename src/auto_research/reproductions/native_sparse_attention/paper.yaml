@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "native-sparse-attention",
   "arxiv_id": "2502.11089",
   "title": "Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention",
@@ -40,5 +40,34 @@
     "27B-parameter continued pretraining",
     "64K-context benchmark matrix"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.native_sparse_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "DeepSeek",
+      "published": "2025-02-16",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "custom Triton kernels and hardware speed claims",
+      "27B-parameter continued pretraining",
+      "64K-context benchmark matrix"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

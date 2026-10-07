@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gatesid",
+  "detail_path": "reproductions/2603.22916-gatesid/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International Digital Commerce",
+  "adapter": {
+    "spec_key": "gatesid"
+  }
+}

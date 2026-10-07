@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "muon",
   "arxiv_id": "2502.16982",
   "title": "Muon is Scalable for LLM Training",
@@ -37,5 +37,34 @@
     "3B/16B MoE models and 5.7T-token training",
     "large-scale compute-optimal frontier"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.muon.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/MoonshotAI/Moonlight",
+      "organization": "Moonshot AI / UCLA",
+      "published": "2025-02-24",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "distributed optimizer state and communication implementation",
+      "3B/16B MoE models and 5.7T-token training",
+      "large-scale compute-optimal frontier"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

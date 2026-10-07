@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "sage-planner",
+  "title": "SAGE: Symbolic Action-Gating and Editing for LLM Task Planners",
+  "paper_url": "https://arxiv.org/abs/2609.34268",
+  "detail_path": "agent-research/2609.34268-sage/README.md",
+  "topic": [
+    "规划",
+    "安全门",
+    "局部恢复"
+  ],
+  "first_author": "Trung Minh Bui",
+  "first_author_affiliation": "原文首页未列机构",
+  "published": "2026-09-28",
+  "code": "https://github.com/mtbui2010/sage",
+  "adapter": "sage-planner",
+  "priority": "P1"
+}

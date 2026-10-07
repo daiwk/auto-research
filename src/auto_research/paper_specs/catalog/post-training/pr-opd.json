@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "pr-opd",
+  "title": "PR-OPD: Privileged Representation On-policy Self-Distillation for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2609.36642",
+  "detail_path": "post-training/2609.36642-pr-opd/README.md",
+  "topic": [
+    "Agentic RL",
+    "On-policy distillation",
+    "表征对齐"
+  ],
+  "first_author": "Muyang Li",
+  "first_author_affiliation": "University of Florida",
+  "published": "2026-09-29",
+  "code": "https://github.com/balibata/PR-OPD",
+  "adapter": "pr-opd",
+  "priority": "P1"
+}

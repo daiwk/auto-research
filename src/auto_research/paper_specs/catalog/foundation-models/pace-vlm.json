@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "pace-vlm",
+  "detail_path": "reproductions/2608.27206-pace-vlm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Sun Yat-sen University",
+  "adapter": {
+    "spec_key": "pace-vlm"
+  }
+}

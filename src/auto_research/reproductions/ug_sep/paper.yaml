@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ug-sep",
   "arxiv_id": "2602.10455",
   "title": "Compute Only Once: UG-Separation for Efficient Large Recommendation Models",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "head:ug-separation"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.ug_sep.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance AML",
+      "published": "2026-02-11",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "ByteDance recommendation",
+          "metric": "Inference latency reduction",
+          "lift_percent": 20.0,
+          "traffic": "production online A/B and deployment",
+          "source_url": "https://arxiv.org/html/2602.10455v1",
+          "source_location": "Abstract and online experiments",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production RankMixer checkpoints",
+      "W8A16 serving kernels",
+      "private feature pipeline"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

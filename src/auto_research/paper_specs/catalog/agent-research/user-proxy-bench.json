@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "user-proxy-bench",
+  "title": "UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training",
+  "paper_url": "https://arxiv.org/abs/2609.38043",
+  "detail_path": "agent-research/2609.38043-userproxybench/README.md",
+  "topic": [
+    "Agent 评测",
+    "用户模拟器",
+    "信息泄漏审计"
+  ],
+  "first_author": "Ashish Jain",
+  "first_author_affiliation": "原文未列机构",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "user-proxy-bench",
+  "priority": "P1"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "oprd",
+  "title": "Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.08798",
+  "detail_path": "post-training/2609.08798-oprd/README.md",
+  "topic": [
+    "弱到强反向蒸馏"
+  ],
+  "first_author": "Youngrok Park",
+  "first_author_affiliation": "KAIST AI",
+  "published": "2026-09-08",
+  "code": null,
+  "adapter": "oprd"
+}

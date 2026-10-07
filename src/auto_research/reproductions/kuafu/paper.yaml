@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "kuafu",
   "arxiv_id": "2609.31045",
   "title": "KuaFu: Compressing Long User Behavior into Understanding at Billion Scale",
@@ -32,5 +32,44 @@
     "industrial-scale curriculum/data volume and RecBench comparison",
     "effective hallucination RL update and Tencent online A/B"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.kuafu.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2026-09-25",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tencent advertising and recommendation",
+          "metric": "overall GMV",
+          "lift_percent": 1.37,
+          "traffic": "visitor-randomized; retained 5% holdout after full rollout",
+          "source_url": "https://arxiv.org/html/2609.31045v1",
+          "source_location": "Section 4.8",
+          "experiment_duration": "four-week ramp plus ten-month holdout",
+          "significance": "95% CI [0.71%, 2.03%]",
+          "retrieved_at": "2026-09-29"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private two-year behavior log and four production profiling tasks",
+      "industrial-scale curriculum/data volume and RecBench comparison",
+      "effective hallucination RL update and Tencent online A/B"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "default 32 train contexts, 32 dev contexts; 4 items x 24 tokens; 2 cache tokens/item",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/kuafu-a100-independent-control-20260929.json"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gpl-prerank",
   "arxiv_id": "2602.20995",
   "title": "Generative Pseudo-Labeling for Pre-Ranking with LLMs",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gpl_prerank.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba Group / Renmin University",
+      "published": "2026-02-24",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Guess What You Like",
+          "metric": "CTR",
+          "lift_percent": 3.07,
+          "traffic": "hundreds of millions DAU, two weeks",
+          "source_url": "https://arxiv.org/html/2602.20995v1",
+          "source_location": "Section 4.5 / Table 4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

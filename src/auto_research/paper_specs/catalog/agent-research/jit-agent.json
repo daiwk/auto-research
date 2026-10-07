@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "jit-agent",
+  "title": "JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution",
+  "paper_url": "https://arxiv.org/abs/2608.25593",
+  "detail_path": "agent-research/2608.25593-jit-agent/README.md",
+  "topic": [
+    "Harness 即时生成与进化"
+  ],
+  "first_author": "Guibin Zhang",
+  "first_author_affiliation": "LV-NUS Lab",
+  "published": "2026-08-26",
+  "code": "https://github.com/bingreeky/JIT",
+  "adapter": "jit-agent"
+}

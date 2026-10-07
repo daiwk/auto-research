@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "hilp",
   "arxiv_id": "2608.05806",
   "title": "Hierarchical Latent Prediction for Language Models",
@@ -29,5 +29,33 @@
     "large-scale language model pretraining",
     "paper speculative decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.hilp.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "University of Texas at Austin",
+      "published": "2026-08-06",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "large-scale language model pretraining",
+      "paper speculative decoder"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "awq",
+  "detail_path": "reproductions/2306.00978-awq/README.md",
+  "first_author": null,
+  "first_author_affiliation": "MIT / NVIDIA / Harvard / SJTU",
+  "adapter": {
+    "spec_key": "awq"
+  }
+}

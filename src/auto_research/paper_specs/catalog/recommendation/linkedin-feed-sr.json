@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "linkedin-feed-sr",
+  "detail_path": "reproductions/2602.12354-linkedin-feed-sr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "LinkedIn",
+  "adapter": {
+    "spec_key": "linkedin-feed-sr"
+  }
+}

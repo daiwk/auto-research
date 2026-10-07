@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gated-attention",
   "arxiv_id": "2505.06708",
   "title": "Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free",
@@ -38,5 +38,34 @@
     "large-scale learning-rate stability sweep",
     "full long-context benchmark matrix"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gated_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/qiuzh20/gated_attention",
+      "organization": "Qwen / Alibaba",
+      "published": "2025-05-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "15B-parameter scaling experiments",
+      "large-scale learning-rate stability sweep",
+      "full long-context benchmark matrix"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

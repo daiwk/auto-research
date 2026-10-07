@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "marc",
+  "detail_path": "reproductions/2604.18146-marc/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Shanghai Jiao Tong University",
+  "adapter": {
+    "spec_key": "marc"
+  }
+}

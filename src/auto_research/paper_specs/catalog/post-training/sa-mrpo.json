@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "sa-mrpo",
+  "title": "Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization",
+  "paper_url": "https://arxiv.org/abs/2608.16072",
+  "detail_path": "post-training/2608.16072-sa-mrpo/README.md",
+  "topic": [
+    "多奖励 RL",
+    "稳定性"
+  ],
+  "first_author": "Yixuan Wang",
+  "first_author_affiliation": "University of Florida",
+  "published": "2026-08-17",
+  "code": null,
+  "adapter": "sa-mrpo"
+}

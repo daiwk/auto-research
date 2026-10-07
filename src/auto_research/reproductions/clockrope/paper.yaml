@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "clockrope",
   "arxiv_id": "2607.26369",
   "title": "ClockRoPE: Random Fourier Rotations for Temporal Routine Modeling",
@@ -30,5 +30,54 @@
     "YouTube private timestamped logs",
     "production generative retrieval stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.clockrope.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "YouTube / Google DeepMind",
+      "published": "2026-07-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "major video platform",
+          "metric": "engagement",
+          "lift_percent": 0.08,
+          "traffic": "14-day A/B; 1% traffic per variant",
+          "source_url": "https://arxiv.org/html/2607.26369v2#S4.SS2",
+          "source_location": "Section 4.2 Table 6",
+          "experiment_duration": "14 days",
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        },
+        {
+          "product": "major video platform",
+          "metric": "valued engagement",
+          "lift_percent": 0.08,
+          "traffic": "14-day A/B; 1% traffic per variant",
+          "source_url": "https://arxiv.org/html/2607.26369v2#S4.SS2",
+          "source_location": "Section 4.2 Table 6",
+          "experiment_duration": "14 days",
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "YouTube private timestamped logs",
+      "production generative retrieval stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "hyformer",
+  "detail_path": "reproductions/2601.12681-hyformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "hyformer"
+  }
+}

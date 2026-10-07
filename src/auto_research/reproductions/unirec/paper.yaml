@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "unirec",
   "arxiv_id": "2609.11052",
   "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
@@ -33,5 +33,46 @@
     "production pre-ranking/ranking serving graph",
     "full-scale cascaded model"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.unirec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou",
+      "published": "2026-09-10",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou live recommender",
+          "metric": "app usage",
+          "lift_percent": 0.616,
+          "traffic": "20% live traffic followed by full deployment",
+          "source_url": "https://arxiv.org/html/2609.11052",
+          "source_location": "Section 5.4, Table 5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-12"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Kuaishou logs and features",
+      "production pre-ranking/ranking serving graph",
+      "full-scale cascaded model"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

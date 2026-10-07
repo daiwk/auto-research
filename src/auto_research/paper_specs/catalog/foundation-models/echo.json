@@ -1,0 +1,19 @@
+{
+  "domain": "foundation-models",
+  "key": "echo",
+  "title": "ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding",
+  "paper_url": "https://arxiv.org/abs/2609.17241",
+  "detail_path": "foundation-models/2609.17241-echo/README.md",
+  "topic": [
+    "推测解码",
+    "推理效率"
+  ],
+  "first_author": "Ziyang Ma",
+  "first_author_affiliation": "Wuhan University",
+  "published": "2026-09-15",
+  "code": "https://github.com/whucs21Mzy/ECHO",
+  "adapter": "echo",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/echo-a100-20260916.json"
+}

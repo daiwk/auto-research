@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cross-domain-kd",
+  "detail_path": "reproductions/2603.28994-cross-domain-kd/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google / YouTube",
+  "adapter": {
+    "spec_key": "cross-domain-kd"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "compo",
+  "title": "A Zeroth-Order Paradigm for LLM Preference Alignment",
+  "paper_url": "https://arxiv.org/abs/2609.19144",
+  "detail_path": "post-training/2609.19144-compo/README.md",
+  "topic": [
+    "偏好优化",
+    "零阶优化"
+  ],
+  "first_author": "Peter Chen",
+  "first_author_affiliation": "University of California, Berkeley",
+  "published": "2026-09-16",
+  "code": null,
+  "adapter": "compo",
+  "priority": "P1"
+}

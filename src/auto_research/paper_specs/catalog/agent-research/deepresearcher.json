@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "deepresearcher",
+  "title": "DeepResearcher",
+  "paper_url": "https://arxiv.org/abs/2504.03160",
+  "detail_path": "agent-research/2504.03160-deepresearcher/README.md",
+  "topic": [
+    "深度研究 RL"
+  ],
+  "first_author": "Yuxiang Zheng",
+  "first_author_affiliation": "HKU",
+  "published": "2025-04-04",
+  "code": "https://github.com/GAIR-NLP/DeepResearcher",
+  "adapter": "deepresearcher"
+}

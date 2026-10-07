@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mdcns",
+  "detail_path": "reproductions/2605.19651-mdcns/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "mdcns"
+  }
+}

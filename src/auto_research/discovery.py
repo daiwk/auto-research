@@ -223,7 +223,9 @@ def render_discovery_summary(payload: dict) -> str:
     if transport:
         lines.extend([
             "arXiv API：" + (
-                "本次请求均成功" if transport["coverage_complete"] else
+                "配置内查询已取尽（不等于全文审查完成）" if transport["coverage_complete"] else
+                f"覆盖未完成：{transport.get('capped_queries', 0)} 个查询达到分页上限、"
+                f"{transport.get('failed_queries', 0)} 个查询失败、"
                 f"{transport['cache_fallback_pages']} 页使用缓存；不可据此推进扫描水位"
             ),
             "",
@@ -371,6 +373,19 @@ def discover_candidates(
     maximum_results_per_query: int = 200,
 ) -> list[DiscoveredPaper]:
     """Run every query, retain provenance, date-filter and de-duplicate."""
+    from contextlib import nullcontext
+    from .discovery_checkpoint import prepare_scan
+    from .runtime import exclusive_file_lock
+    queries = tuple(queries)
+    checkpoint_dir = getattr(client, "checkpoint_dir", None)
+    with (exclusive_file_lock(checkpoint_dir / "scan.json") if checkpoint_dir else nullcontext()):
+        prepare_scan(client, queries, start_date=start_date, end_date=end_date,
+                     page_size=page_size, maximum_results=maximum_results_per_query)
+        return _discover_queries(client, queries, start_date=start_date, end_date=end_date,
+                                 page_size=page_size, maximum_results_per_query=maximum_results_per_query)
+
+
+def _discover_queries(client, queries, *, start_date, end_date, page_size, maximum_results_per_query):
     found: dict[str, Paper] = {}
     origins: dict[str, set[str]] = {}
     for query in queries:
@@ -380,6 +395,7 @@ def discover_candidates(
             page_size=page_size,
             maximum_results=maximum_results_per_query,
             match=query.match,
+            tolerate_failures=True,
         )
         for paper in papers:
             if not paper_is_in_window(paper, start_date=start_date, end_date=end_date):

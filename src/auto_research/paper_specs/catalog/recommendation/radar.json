@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "radar",
+  "detail_path": "reproductions/2506.07261-radar/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "radar"
+  }
+}

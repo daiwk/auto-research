@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "mobius-rope",
+  "detail_path": "reproductions/2607.21405-mobius-rope/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Independent researcher",
+  "adapter": {
+    "spec_key": "mobius-rope"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "long-history-transformer",
   "arxiv_id": "2607.14331",
   "title": "Long-History User Transformers for Real-Time Ad Ranking",
@@ -34,5 +34,67 @@
     "private Yandex cross-surface logs",
     "production CatBoost ranker and feature-store refresh stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.long_history_transformer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Yandex",
+      "published": "2026-07-15",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Yandex Search Ads",
+          "metric": "Primary ranking metric",
+          "lift_percent": 2.77,
+          "traffic": "production A/B; p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Yandex Search Ads",
+          "metric": "Revenue",
+          "lift_percent": 2.26,
+          "traffic": "production A/B; p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Yandex Advertising Network",
+          "metric": "Primary ranking metric",
+          "lift_percent": 2.1,
+          "traffic": "production A/B; p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Yandex cross-surface logs",
+      "production CatBoost ranker and feature-store refresh stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

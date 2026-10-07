@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "crsd",
+  "detail_path": "reproductions/2510.11056-crsd/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meituan",
+  "adapter": {
+    "spec_key": "crsd"
+  }
+}

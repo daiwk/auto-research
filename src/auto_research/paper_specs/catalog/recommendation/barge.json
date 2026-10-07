@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "barge",
+  "detail_path": "reproductions/2607.21028-barge/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "barge"
+  }
+}

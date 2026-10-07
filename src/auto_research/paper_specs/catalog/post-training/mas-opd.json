@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "mas-opd",
+  "title": "MAS-OPD: On-Policy Distillation for Multi-Agent Systems",
+  "paper_url": "https://arxiv.org/abs/2609.34234",
+  "detail_path": "post-training/2609.34234-mas-opd/README.md",
+  "topic": [
+    "多 Agent",
+    "On-policy distillation"
+  ],
+  "first_author": "Qiyong Zhong",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "mas-opd",
+  "priority": "P1"
+}

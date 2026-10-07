@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gryphon-v2",
+  "detail_path": "reproductions/2608.06213-gryphon-v2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Yandex",
+  "adapter": {
+    "spec_key": "gryphon-v2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "nontp",
+  "detail_path": "reproductions/2607.12277-nontp/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meituan",
+  "adapter": {
+    "spec_key": "nontp"
+  }
+}

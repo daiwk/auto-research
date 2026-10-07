@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rocs",
   "arxiv_id": "2607.27744",
   "title": "ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation",
@@ -34,5 +34,57 @@
     "IKBO GPU kernel benchmark",
     "Meta private logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rocs.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/pytorch/FBGEMM/tree/main/fbgemm_gpu/experimental/ikbo",
+      "organization": "Meta AI",
+      "published": "2026-07-30",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta retrieval systems",
+          "metric": "QPS",
+          "lift_percent": 200.0,
+          "traffic": "deployed across ads and organic surfaces",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meta short-form video ranking",
+          "metric": "QPS",
+          "lift_percent": 50.0,
+          "traffic": "production deployment; LogLoss -0.5%",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production GLM masking stack",
+      "IKBO GPU kernel benchmark",
+      "Meta private logs"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

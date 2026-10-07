@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "genrec",
+  "detail_path": "reproductions/2604.14878-genrec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "JD.com",
+  "adapter": {
+    "spec_key": "genrec"
+  }
+}

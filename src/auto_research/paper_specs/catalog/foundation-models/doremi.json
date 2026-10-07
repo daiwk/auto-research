@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "doremi",
+  "detail_path": "reproductions/2305.10429-doremi/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Stanford University / Google Research",
+  "adapter": {
+    "spec_key": "doremi"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "manta",
+  "title": "MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems",
+  "paper_url": "https://arxiv.org/abs/2607.28527",
+  "detail_path": "agent-research/2607.28527-manta/README.md",
+  "topic": [
+    "多 Agent",
+    "自进化"
+  ],
+  "first_author": "MaoXun Huang",
+  "first_author_affiliation": "Cornell University",
+  "published": "2026-07-30",
+  "code": null,
+  "adapter": "manta"
+}

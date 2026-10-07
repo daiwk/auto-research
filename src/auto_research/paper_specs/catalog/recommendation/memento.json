@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "memento",
+  "detail_path": "reproductions/2605.24051-memento/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "memento"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mdl",
   "arxiv_id": "2602.07520",
   "title": "MDL: A Unified Multi-Distribution Learner in Large-scale Industrial Recommendation through Tokenization",
@@ -37,5 +37,56 @@
     "hundreds-of-millions-user production model",
     "private scenario/task labels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mdl.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance / Douyin",
+      "published": "2026-02-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Douyin search",
+          "metric": "LT30",
+          "lift_percent": 0.0626,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Douyin search",
+          "metric": "query rewrite rate",
+          "lift_percent": -0.3267,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "hundreds-of-millions-user production model",
+      "private scenario/task labels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

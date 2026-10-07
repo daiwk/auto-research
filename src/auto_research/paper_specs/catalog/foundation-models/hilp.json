@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "hilp",
+  "detail_path": "reproductions/2608.05806-hilp/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Texas at Austin",
+  "adapter": {
+    "spec_key": "hilp"
+  }
+}

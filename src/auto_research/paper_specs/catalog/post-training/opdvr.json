@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "opdvr",
+  "title": "OPDVR: On-Policy Distillation with Verifiable Rewards",
+  "paper_url": "https://arxiv.org/abs/2608.24696",
+  "detail_path": "post-training/2608.24696-opdvr/README.md",
+  "topic": [
+    "可验证奖励 OPD"
+  ],
+  "first_author": "Wenze Lin",
+  "first_author_affiliation": "LeapLab, Tsinghua University",
+  "published": "2026-08-25",
+  "code": "https://github.com/LeapLabTHU/OPDVR",
+  "adapter": "opdvr"
+}

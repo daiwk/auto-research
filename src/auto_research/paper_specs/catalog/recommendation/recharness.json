@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "recharness",
+  "detail_path": "reproductions/2607.29241-recharness/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huazhong Agricultural University (Kuaishou internship)",
+  "adapter": {
+    "spec_key": "recharness"
+  }
+}

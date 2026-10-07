@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "akt-rec",
   "arxiv_id": "2605.23310",
   "title": "From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs",
@@ -50,5 +50,58 @@
     "GME-Qwen2-VL-7B images/statistics and Qwen3-30B-A3B scale",
     "36M-user/300M-item Tmall data and production cluster-feature store"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.akt_rec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba Group / Peking University",
+      "published": "2026-05-22",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tmall",
+          "metric": "CTR",
+          "lift_percent": 2.76,
+          "traffic": "10% control / 10% treatment, two weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Tmall",
+          "metric": "GMV",
+          "lift_percent": 3.47,
+          "traffic": "10% control / 10% treatment, two weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "GME-Qwen2-VL-7B images/statistics and Qwen3-30B-A3B scale",
+      "36M-user/300M-item Tmall data and production cluster-feature store"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=400",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "genpage",
+  "detail_path": "reproductions/2606.31031-genpage/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Netflix",
+  "adapter": {
+    "spec_key": "genpage"
+  }
+}

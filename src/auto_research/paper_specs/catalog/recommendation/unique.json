@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "unique",
+  "detail_path": "reproductions/2609.23718-unique/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Beihang University",
+  "adapter": {
+    "spec_key": "unique"
+  }
+}

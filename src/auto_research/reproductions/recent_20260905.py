@@ -7,6 +7,8 @@ serving systems are deliberately outside the reproduction boundary.
 
 from __future__ import annotations
 
+from auto_research.paper_specs.runtime import adapter_from_spec
+
 from pathlib import Path
 
 import numpy as np
@@ -167,17 +169,4 @@ def reproduce(key: str, dataset_dir: Path, seed: int = 42) -> dict:
 def make_adapter(key: str) -> ReproductionAdapter:
     row = PAPERS[key]
     product, metric, lift, traffic, location = row["evidence"]
-    return ReproductionAdapter(
-        key=row["key"],
-        paper=PaperMetadata(
-            arxiv_id=row["arxiv_id"], title=row["title"], url=f"https://arxiv.org/abs/{row['arxiv_id']}",
-            track="recommendation", organization=row["organization"], published=row["published"], topics=row["topics"],
-            online_ab=(OnlineABEvidence(product, metric, lift, traffic, source_url=f"https://arxiv.org/html/{row['arxiv_id']}v1", source_location=location, retrieved_at="2026-09-05"),),
-        ),
-        run=lambda dataset_dir, seed=42: reproduce(key, dataset_dir, seed), render=render,
-        fidelity=ReproductionFidelity.CORE_MECHANISM, omitted_core_components=row["omitted"],
-        evaluation_tier=EvaluationTier.PUBLIC_DATASET, datasets=("MovieLens 100K",),
-        baseline="transition + content + popularity", metrics=("hit_at_10", "ndcg_at_10", "fresh_hit_at_10", "head_share_at_10"),
-        evolve_operators=(row["operator"],), default_seeds=(42, 43, 44),
-        budget="220 users / 360 items; validation-only blend selection", device_capabilities=("cpu",), infer_device_capabilities=False,
-    )
+    return adapter_from_spec(key=row["key"], run=lambda dataset_dir, seed=42: reproduce(key, dataset_dir, seed), render=render)

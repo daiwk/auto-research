@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "active-saddler",
+  "title": "ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization",
+  "paper_url": "https://arxiv.org/abs/2610.00906",
+  "detail_path": "agent-research/2610.00906-active-saddler/README.md",
+  "topic": [
+    "Harness 优化",
+    "主动课程",
+    "RSI"
+  ],
+  "first_author": "Sungho Park",
+  "first_author_affiliation": "POSTECH",
+  "published": "2026-10-01",
+  "code": "https://github.com/microsoft/AutoSaddler/tree/feat/activesaddler",
+  "adapter": "active-saddler",
+  "priority": "P0"
+}

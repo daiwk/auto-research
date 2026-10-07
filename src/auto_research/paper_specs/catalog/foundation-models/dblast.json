@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "dblast",
+  "detail_path": "reproductions/2608.05448-dblast/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huawei Technologies Canada",
+  "adapter": {
+    "spec_key": "dblast"
+  }
+}

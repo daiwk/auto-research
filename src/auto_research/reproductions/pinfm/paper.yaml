@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "pinfm",
   "arxiv_id": "2507.12704",
   "title": "PinFM: Foundation Model for User Activity Sequences at a Billion-scale Visual Discovery Platform",
@@ -38,5 +38,36 @@
     "fresh-item age-dependent dropout",
     "int4 embedding and Triton DCAT serving kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.pinfm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Pinterest multi-action and multi-surface pretraining corpus",
+      "fresh-item age-dependent dropout",
+      "int4 embedding and Triton DCAT serving kernels"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=160",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

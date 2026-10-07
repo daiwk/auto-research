@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gqa",
   "arxiv_id": "2305.13245",
   "title": "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints",
@@ -59,5 +59,33 @@
     "T5-XXL checkpoint uptraining",
     "production decode benchmark"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gqa.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google Research",
+      "published": "2023-05-22",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "T5-XXL checkpoint uptraining",
+      "production decode benchmark"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=12",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

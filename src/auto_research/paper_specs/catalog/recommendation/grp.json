@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "grp",
+  "detail_path": "reproductions/2609.36688-grp/README.md",
+  "first_author": "Wenfeng Zhuo",
+  "first_author_affiliation": "Snap Inc.",
+  "adapter": {
+    "spec_key": "grp"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "vermem",
+  "title": "VerMem",
+  "paper_url": "https://arxiv.org/abs/2608.03137",
+  "detail_path": "agent-research/2608.03137-vermem/README.md",
+  "topic": [
+    "可验证统一记忆"
+  ],
+  "first_author": "Xiaolong Sun",
+  "first_author_affiliation": "Sun Yat-sen University",
+  "published": "2026-08-04",
+  "code": "https://github.com/Sun-SYSU-24/VerMem",
+  "adapter": "vermem"
+}

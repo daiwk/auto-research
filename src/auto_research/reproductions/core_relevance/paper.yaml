@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "core-relevance",
   "arxiv_id": "2607.24417",
   "title": "CORE: A Unified Cascaded Ordinal Relevance Estimation Framework for E-commerce Search",
@@ -54,5 +54,57 @@
     "Qwen3-14B reasoning traces",
     "production BERT encoder and online thresholds"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.core_relevance.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan / Beijing Institute of Technology",
+      "published": "2026-07-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan e-commerce search",
+          "metric": "NDCG@5",
+          "lift_percent": 0.2,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meituan e-commerce search",
+          "metric": "Badcase@5 reduction",
+          "lift_percent": 15.9,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meituan private 90K query-item relevance labels",
+      "Qwen3-14B reasoning traces",
+      "production BERT encoder and online thresholds"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

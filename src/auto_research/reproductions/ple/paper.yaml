@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ple",
   "arxiv_id": "recsys2020-ple",
   "title": "Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations",
@@ -50,5 +50,35 @@
     "Tencent Video private watch/interaction tasks",
     "production progressive tower depth"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.ple.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2020-09-22",
+      "publication_label": "RecSys 2020 paper",
+      "publication_source": "ACM RecSys 2020",
+      "online_ab": [],
+      "selection_exception": "用户明确批准 PLE 为经典例外；原文腾讯视频部署证据不按当前新论文的量化线上门槛计入。"
+    },
+    "omitted_core_components": [
+      "Tencent Video private watch/interaction tasks",
+      "production progressive tower depth"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=200",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

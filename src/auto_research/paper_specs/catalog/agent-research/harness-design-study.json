@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "harness-design-study",
+  "title": "An Empirical Study of Harness Design for Coding Agents",
+  "paper_url": "https://arxiv.org/abs/2609.20804",
+  "detail_path": "agent-research/2609.20804-harness-design-study/README.md",
+  "topic": [
+    "编程 Agent",
+    "Harness 设计"
+  ],
+  "first_author": "Run-Ze Fan",
+  "first_author_affiliation": "University of Massachusetts Amherst",
+  "published": "2026-09-17",
+  "code": null,
+  "adapter": "harness-design-study",
+  "priority": "P1"
+}

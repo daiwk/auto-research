@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "looped-latent-attention",
   "arxiv_id": "2607.15456",
   "title": "Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers",
@@ -35,5 +35,33 @@
     "large looped checkpoint post-training",
     "fused inference codec"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.looped_latent_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "University of Maryland / Meta AI",
+      "published": "2026-07-16",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "large looped checkpoint post-training",
+      "fused inference codec"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

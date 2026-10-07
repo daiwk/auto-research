@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "where-opd",
+  "title": "Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes",
+  "paper_url": "https://arxiv.org/abs/2610.02117",
+  "detail_path": "post-training/2610.02117-where-opd/README.md",
+  "topic": [
+    "多模态后训练",
+    "OPD",
+    "空间引导"
+  ],
+  "first_author": "Sophia Sirko-Galouchenko",
+  "first_author_affiliation": "Valeo.ai",
+  "published": "2026-10-01",
+  "code": "https://github.com/sirkosophia/Where-OPD",
+  "adapter": "where-opd",
+  "priority": "P1"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "transx",
+  "detail_path": "reproductions/2607.28940-transx/README.md",
+  "first_author": null,
+  "first_author_affiliation": "LinkedIn",
+  "adapter": {
+    "spec_key": "transx"
+  }
+}

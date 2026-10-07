@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rare",
   "arxiv_id": "2608.21236",
   "title": "RARE: Decoupling Representation Steering from Expert Routing in Mixture-of-Experts Language Models",
@@ -31,5 +31,31 @@
     "large pretrained MoE checkpoints",
     "TruthfulQA and CounterFact full evaluation"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rare.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Huazhong University of Science and Technology",
+      "published": "2026-08-21",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "large pretrained MoE checkpoints",
+      "TruthfulQA and CounterFact full evaluation"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

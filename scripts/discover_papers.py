@@ -24,6 +24,7 @@ from auto_research.discovery_sources import (
 )
 from auto_research.papers import ArxivClient, canonical_arxiv_id
 from auto_research.models import Paper
+from auto_research.discovery_checkpoint import atomic_json, coverage_summary
 
 
 def effective_start_date(
@@ -80,6 +81,8 @@ def main() -> int:
     parser.add_argument("--output")
     parser.add_argument("--summary-output")
     parser.add_argument("--official-review-output")
+    parser.add_argument("--checkpoint-dir", type=Path, help="persist each successful query page; use a separate directory per track/window")
+    parser.add_argument("--resume", action="store_true", help="resume the exact saved window/query matrix")
     parser.add_argument("--github-actions", action="store_true")
     parser.add_argument("--manifest", default="docs/research-manifest.json")
     parser.add_argument("--ledger", default="docs/paper-discovery-ledger.json")
@@ -107,6 +110,8 @@ def main() -> int:
         help="author or project GitHub/API URL; repeat for multiple sources",
     )
     args = parser.parse_args()
+    if args.resume and not args.checkpoint_dir:
+        parser.error("--resume requires --checkpoint-dir")
     requested_start_date = args.start_date or args.end_date - dt.timedelta(days=args.lookback_days)
     start_date = effective_start_date(
         requested_start_date,
@@ -118,6 +123,8 @@ def main() -> int:
         maximum_retries=5,
         retry_backoff_seconds=3.0,
         cache_dir=args.arxiv_cache_dir,
+        checkpoint_dir=args.checkpoint_dir,
+        resume=args.resume,
     )
     papers = discover_candidates(
         client,
@@ -206,18 +213,12 @@ def main() -> int:
         }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         payload["cross_source"]["official_review_output"] = args.official_review_output
     payload["arxiv_transport"] = {
+        **coverage_summary(client.query_reports),
         "cache_dir": str(args.arxiv_cache_dir),
-        "cache_fallback_pages": len(client.cache_fallbacks),
-        "coverage_complete": not client.cache_fallbacks,
-        "note": (
-            "cached checkpoints were used after arXiv throttling; rerun before "
-            "advancing the review watermark" if client.cache_fallbacks else
-            "all arXiv pages were fetched successfully in this run"
-        ),
     }
     rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     if args.output:
-        Path(args.output).write_text(rendered, encoding="utf-8")
+        atomic_json(Path(args.output), payload)
     else:
         print(rendered, end="")
     if args.summary_output:

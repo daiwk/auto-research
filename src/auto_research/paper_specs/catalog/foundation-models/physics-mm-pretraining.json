@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "physics-mm-pretraining",
+  "detail_path": "reproductions/2608.05000-physics-mm-pretraining/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "physics-mm-pretraining"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "intsr",
+  "detail_path": "reproductions/2509.21179-intsr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Amap",
+  "adapter": {
+    "spec_key": "intsr"
+  }
+}

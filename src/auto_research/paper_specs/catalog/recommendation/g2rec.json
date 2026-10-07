@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "g2rec",
+  "detail_path": "reproductions/2606.20554-g2rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "g2rec"
+  }
+}

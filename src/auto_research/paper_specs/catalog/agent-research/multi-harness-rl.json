@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "multi-harness-rl",
+  "title": "What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents",
+  "paper_url": "https://arxiv.org/abs/2609.04518",
+  "detail_path": "agent-research/2609.04518-multi-harness-rl/README.md",
+  "topic": [
+    "Multi-harness RL audit"
+  ],
+  "first_author": "Chenqian Le",
+  "first_author_affiliation": "New York University",
+  "published": "2026-09-03",
+  "code": null,
+  "adapter": "multi-harness-rl"
+}

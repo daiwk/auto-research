@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "transact-v2",
   "arxiv_id": "2506.02267",
   "title": "TransAct V2: Lifelong User Action Sequence Modeling on Pinterest Recommendation",
@@ -33,5 +33,36 @@
     "impression-log negative samples",
     "SKUT and production serving kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.transact_v2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": null,
+      "published": null,
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Pinterest action and surface features",
+      "impression-log negative samples",
+      "SKUT and production serving kernels"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=160",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

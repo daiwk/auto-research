@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "music-rationales",
+  "detail_path": "reproductions/2609.23877-music-rationales/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "music-rationales"
+  }
+}

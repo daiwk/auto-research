@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "rfpo",
+  "title": "Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training",
+  "paper_url": "https://arxiv.org/abs/2609.37119",
+  "detail_path": "post-training/2609.37119-rfpo/README.md",
+  "topic": [
+    "RL",
+    "冻结 Critic",
+    "无标签奖励"
+  ],
+  "first_author": "Hongyang Li",
+  "first_author_affiliation": "University of Luxembourg",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "rfpo",
+  "priority": "P1"
+}

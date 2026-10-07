@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "tasco",
+  "title": "Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.11393",
+  "detail_path": "post-training/2609.11393-tasco/README.md",
+  "topic": [
+    "测试时适配",
+    "稳定性优化"
+  ],
+  "first_author": "Bincheng Gu",
+  "first_author_affiliation": "Chongqing University",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "tasco",
+  "priority": "P1"
+}

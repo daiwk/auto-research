@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "rtpo",
+  "title": "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+  "paper_url": "https://arxiv.org/abs/2608.18682",
+  "detail_path": "agent-research/2608.18682-rtpo/README.md",
+  "topic": [
+    "Agentic RL",
+    "credit assignment"
+  ],
+  "first_author": "Yugu Li",
+  "first_author_affiliation": "Adelaide University",
+  "published": "2026-08-19",
+  "code": null,
+  "adapter": "rtpo"
+}

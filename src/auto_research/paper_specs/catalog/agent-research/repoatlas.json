@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "repoatlas",
+  "title": "RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views",
+  "paper_url": "https://arxiv.org/abs/2609.16936",
+  "detail_path": "agent-research/2609.16936-repoatlas/README.md",
+  "topic": [
+    "编程 Agent",
+    "多模态仓库视图"
+  ],
+  "first_author": "Yunxiang Zhang",
+  "first_author_affiliation": "Beihang University",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "repoatlas",
+  "priority": "P0"
+}

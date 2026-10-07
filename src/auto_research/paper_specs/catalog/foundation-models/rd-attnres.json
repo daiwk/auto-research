@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "rd-attnres",
+  "detail_path": "reproductions/2608.01075-rd-attnres/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kehan Wang（论文未列机构）",
+  "adapter": {
+    "spec_key": "rd-attnres"
+  }
+}

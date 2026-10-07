@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "recevolve",
+  "detail_path": "reproductions/2609.01622-recevolve/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "recevolve"
+  }
+}

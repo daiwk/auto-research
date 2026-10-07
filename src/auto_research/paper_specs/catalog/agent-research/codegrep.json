@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "codegrep",
+  "title": "CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents",
+  "paper_url": "https://arxiv.org/abs/2608.05886",
+  "detail_path": "agent-research/2608.05886-codegrep/README.md",
+  "topic": [
+    "代码检索 Agent"
+  ],
+  "first_author": "Wuya Chen",
+  "first_author_affiliation": "NetEase Guangzhou AI Lab",
+  "published": "2026-08-06",
+  "code": null,
+  "adapter": "codegrep"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pinequalizer",
+  "detail_path": "reproductions/2607.22518-pinequalizer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "pinequalizer"
+  }
+}

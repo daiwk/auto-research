@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ogr",
+  "detail_path": "reproductions/2608.17613-ogr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "ogr"
+  }
+}

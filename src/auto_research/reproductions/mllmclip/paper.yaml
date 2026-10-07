@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mllmclip",
   "arxiv_id": "2608.25575",
   "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
@@ -33,5 +33,33 @@
     "paper-scale vision compositionality suite",
     "full CLIP pretraining"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mllmclip.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "KAIST / Sony AI",
+      "published": "2026-08-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "paper-scale vision compositionality suite",
+      "full CLIP pretraining"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=40",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/mllmclip-a100-20260828.json"
+  }
 }

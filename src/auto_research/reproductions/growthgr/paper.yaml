@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "growthgr",
   "arxiv_id": "2605.17994",
   "title": "Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search",
@@ -33,5 +33,55 @@
   "mechanisms": [
     "private order funnel and foundation-model multimodal embeddings"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.growthgr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba Group / Taobao & Tmall",
+      "published": "2026-05-18",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao/Tmall Search",
+          "metric": "new-item GMV",
+          "lift_percent": 5.3,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao/Tmall Search",
+          "metric": "overall search GMV",
+          "lift_percent": 0.3,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private order funnel and foundation-model multimodal embeddings"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

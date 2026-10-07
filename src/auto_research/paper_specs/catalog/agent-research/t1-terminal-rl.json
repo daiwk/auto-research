@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "t1-terminal-rl",
+  "title": "T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks",
+  "paper_url": "https://arxiv.org/abs/2609.11042",
+  "detail_path": "agent-research/2609.11042-t1-terminal-rl/README.md",
+  "topic": [
+    "Agent RL",
+    "长程终端任务"
+  ],
+  "first_author": "Junyao Yang",
+  "first_author_affiliation": "National University of Singapore / Tencent",
+  "published": "2026-09-09",
+  "code": null,
+  "adapter": "t1-terminal-rl",
+  "priority": "P1"
+}

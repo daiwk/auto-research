@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "unique",
   "arxiv_id": "2609.23718",
   "title": "UNIQUE: A Unified Retrieval and Ranking System for Large-Scale Feed Recommendation",
@@ -29,5 +29,45 @@
     "production heterogeneous features and task-specific multi-head feedback objectives",
     "full Mobile Baidu traffic, infrastructure and online A/B"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.unique.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Beihang University",
+      "published": "2026-09-20",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Mobile Baidu",
+          "metric": "total watch duration",
+          "lift_percent": 0.96,
+          "traffic": "full-traffic online A/B",
+          "source_url": "https://arxiv.org/html/2609.23718v1",
+          "source_location": "Abstract and Section 4.4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-26"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production heterogeneous features and task-specific multi-head feedback objectives",
+      "full Mobile Baidu traffic, infrastructure and online A/B"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "300 steps per variant; 500k raw exposures; chronological holdout",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

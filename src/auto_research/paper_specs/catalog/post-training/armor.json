@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "armor",
+  "title": "ARMOR",
+  "paper_url": "https://arxiv.org/abs/2607.10481",
+  "detail_path": "post-training/2607.10481-armor/README.md",
+  "topic": [
+    "Reference anchor"
+  ],
+  "first_author": "Kexin Huang",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2026-07-11",
+  "code": "未发现官方代码",
+  "adapter": "armor"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mbgr",
   "arxiv_id": "2604.02684",
   "title": "MBGR: Multi-Business Generative Recommendation",
@@ -32,5 +32,44 @@
   "mechanisms": [
     "private multi-business logs and production Transformer scale"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mbgr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan",
+      "published": "2026-04-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan multi-business recommendation",
+          "metric": "CTCVR",
+          "lift_percent": 3.98,
+          "traffic": "online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private multi-business logs and production Transformer scale"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

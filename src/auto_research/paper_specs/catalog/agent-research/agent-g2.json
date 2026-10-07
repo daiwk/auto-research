@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "agent-g2",
+  "title": "Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2608.23318",
+  "detail_path": "agent-research/2608.23318-agent-g2/README.md",
+  "topic": [
+    "高斯 guidance Agent RL"
+  ],
+  "first_author": "Zixuan Wang",
+  "first_author_affiliation": "Baidu",
+  "published": "2026-08-24",
+  "code": "https://github.com/ZJU-REAL/Agent-G2",
+  "adapter": "agent-g2"
+}

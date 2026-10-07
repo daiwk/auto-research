@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "distilled-rl",
+  "title": "Distilled RL",
+  "paper_url": "https://arxiv.org/abs/2607.17247",
+  "detail_path": "post-training/2607.17247-distilled-rl/README.md",
+  "topic": [
+    "教师奖励重权重"
+  ],
+  "first_author": "Chen Wang",
+  "first_author_affiliation": "Nankai University",
+  "published": "2026-07-19",
+  "code": "https://github.com/597358816/Distilled-RL",
+  "adapter": "distilled-rl"
+}

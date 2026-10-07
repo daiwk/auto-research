@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "evorec",
+  "detail_path": "reproductions/2606.28368-evorec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "adapter": {
+    "spec_key": "evorec"
+  }
+}

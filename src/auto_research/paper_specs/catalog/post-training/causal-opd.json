@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "causal-opd",
+  "title": "CausalOPD: First-Wrong-Step Supervision for Distilling Causal Chain Reasoning",
+  "paper_url": "https://arxiv.org/abs/2608.03673",
+  "detail_path": "post-training/2608.03673-causal-opd/README.md",
+  "topic": [
+    "OPD",
+    "过程监督"
+  ],
+  "first_author": "Jian Zhang",
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "published": "2026-08-04",
+  "code": null,
+  "adapter": "causal-opd"
+}

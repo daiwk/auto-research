@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "persistent-recurrent-memory",
+  "title": "Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization",
+  "paper_url": "https://arxiv.org/abs/2609.17251",
+  "detail_path": "foundation-models/2609.17251-persistent-recurrent-memory/README.md",
+  "topic": [
+    "网络架构",
+    "持久记忆"
+  ],
+  "first_author": "Eduardo Novaes Hering",
+  "first_author_affiliation": "FITec Labs / Ericsson São Paulo",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "persistent-recurrent-memory",
+  "priority": "P1"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "setmir",
+  "detail_path": "reproductions/2608.30251-setmir/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Snap Inc.",
+  "adapter": {
+    "spec_key": "setmir"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "toolrl",
+  "title": "ToolRL",
+  "paper_url": "https://arxiv.org/abs/2504.13958",
+  "detail_path": "agent-research/2504.13958-toolrl/README.md",
+  "topic": [
+    "工具强化学习"
+  ],
+  "first_author": "Cheng Qian",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2025-04-16",
+  "code": "未发现官方代码",
+  "adapter": "toolrl"
+}

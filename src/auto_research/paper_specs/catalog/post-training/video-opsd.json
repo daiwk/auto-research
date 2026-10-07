@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "video-opsd",
+  "title": "Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models",
+  "paper_url": "https://arxiv.org/abs/2608.27065",
+  "detail_path": "post-training/2608.27065-video-opsd/README.md",
+  "topic": [
+    "证据帧特权自蒸馏"
+  ],
+  "first_author": "Ziyue Wang",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "video-opsd"
+}

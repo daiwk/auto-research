@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "transmem",
   "arxiv_id": "2607.29032",
   "title": "TransMem: Transforming Hidden States into Memory for Large Language Models",
@@ -28,5 +28,31 @@
     "paper-scale checkpoints and training",
     "custom CUDA kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.transmem.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Authors did not disclose affiliation",
+      "published": "2026-07-31",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoints and training",
+      "custom CUDA kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

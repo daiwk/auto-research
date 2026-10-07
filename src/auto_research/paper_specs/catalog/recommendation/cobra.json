@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cobra",
+  "detail_path": "reproductions/2503.02453-cobra/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Baidu",
+  "adapter": {
+    "spec_key": "cobra"
+  }
+}

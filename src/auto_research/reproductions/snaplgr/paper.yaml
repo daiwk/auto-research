@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "snaplgr",
   "arxiv_id": "2607.28895",
   "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
@@ -36,5 +36,48 @@
   ],
   "evolve_operators": [
     "head:snaplgr-sid"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.snaplgr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Snap Inc.",
+      "published": "2026-07-30",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Snapchat content recommendation",
+          "metric": "View Time",
+          "lift_percent": 0.37,
+          "traffic": "7-day production A/B test",
+          "source_url": "https://arxiv.org/html/2607.28895v1",
+          "source_location": "Section 4.5, Table 8",
+          "experiment_duration": null,
+          "significance": "p = 0.007",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "pretrained LLM and Qwen3-VL",
+      "TensorRT-LLM CUDA beam search",
+      "64-A100 worker loop"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 3-level width-8 SID",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

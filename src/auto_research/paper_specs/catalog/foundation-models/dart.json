@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "dart",
+  "detail_path": "reproductions/2608.02032-dart/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Zhejiang University",
+  "adapter": {
+    "spec_key": "dart"
+  }
+}

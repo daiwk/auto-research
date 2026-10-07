@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "defa",
+  "title": "DeFA: Dependency-Guided Failure Attribution for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2610.01256",
+  "detail_path": "agent-research/2610.01256-defa/README.md",
+  "topic": [
+    "失败归因",
+    "依赖图",
+    "技能进化"
+  ],
+  "first_author": "Bo Deng",
+  "first_author_affiliation": "Qwen DianJin Team, Alibaba Cloud Computing",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "defa",
+  "priority": "P1"
+}

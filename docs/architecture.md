@@ -11,7 +11,7 @@ cli.py
  │    ├── loop.py                    # proposal-independent iterative controller
  │    ├── cache.py                   # content-addressed metric cache
  │    └── journal.py                 # append-only stage/trial event log
- └── reproductions.registry          # 自动发现 */adapter.py
+ └── reproductions.registry          # 读取 packaged paper.yaml，按需加载选中实现
       ├── base.py                    # PaperMetadata / Adapter / L0-L3
       ├── manifest.py                # 规范化论文事实
       ├── schema.py                  # result schema v2 与 seed 聚合
@@ -30,7 +30,7 @@ Model evolution 是第三条独立入口。`EvolutionConfig` 定义目标模型�
 
 通用层只负责 adapter 发现、共享数据协议、运行目录和 JSON/Markdown 持久化。论文特有逻辑不能写回 `cli.py` 或公共 `reporting.py`。只有两个以上推荐 adapter 确实共享且语义一致的逻辑，才放入 `rec_utils.py`。
 
-`ReproductionAdapter.run` 保持兼容签名 `run(dataset_dir: Path, seed: int) -> dict`；`render` 将该 dict 转成 Markdown。adapter 还可声明 `evaluation_tier`、数据集、基线、指标、默认 seeds、预算和设备能力。`PaperManifest` 是供 CLI、目录生成器和 Evolve 消费的规范化视图；其他模块不再维护重复论文表。
+`ReproductionAdapter.run` 保持兼容签名 `run(dataset_dir: Path, seed: int) -> dict`；`render` 将该 dict 转成 Markdown。paper.yaml v2 声明 `evaluation_tier`、数据集、基线、指标、默认 seeds、预算和设备能力，adapter 模块只绑定实现。`PaperManifest` 是供 CLI、目录生成器和 Evolve 消费的规范化视图；其他模块不再维护重复论文表。惰性导入、最小安装、目录源数据和扫描恢复详见 [MR-B 架构契约](design/architecture-mrb.md)。
 
 ## 评测层级与结果协议
 
@@ -67,10 +67,10 @@ auto-research reproduce --paper all --track recommendation --topic ranking \
 1. 创建 `src/auto_research/reproductions/<key>/`。
 2. 将论文公式或网络放在 `algorithm.py`/`model.py`，数据切分和对照实验放在 `experiment.py`。
 3. 在 `report.py` 中渲染该论文真正需要的指标。
-4. 在 `adapter.py` 构造并 `register(ReproductionAdapter(...))`，声明 `fidelity`、公司、年月、主题和量化 `OnlineABEvidence`；registry 会自动发现它，并拒绝没有 A/B 证据的新增目录项。
+4. 在 `paper.yaml` v2 声明论文事实、`fidelity` 和运行合同，在 `adapter.py` 用 `register(adapter_from_spec(key=..., run=..., render=...))` 绑定实现；registry 只读规格即可发现论文，真正运行时才加载代码。工业条目仍须量化 `OnlineABEvidence` 或具名经典例外。
 5. 在 `tests/reproductions/` 增加算法单测、registry 发现测试和必要的最小端到端测试。
 6. 在 `docs/reproductions/<arxiv-id>-<key>/README.md` 记录经复核的长期结论，并写入 `metrics/*.json`；概念验证指标必须包含 `diagnostic_only: true`。
-7. 同步更新根 README、论文总索引以及 `docs/reproductions/catalog/` 的公司、主题、年月三个入口；无 A/B 的用户点名经典例外必须写明 `selection_exception`。
+7. 增加 `paper_specs/catalog/<domain>/<key>.json`，再运行 manifest 和目录生成器更新三个浏览入口，并同步根 README；无 A/B 的用户点名经典例外必须写明 `selection_exception`。不要直接编辑生成后的 manifest 来新增论文。
 8. 运行 `pytest tests/reproductions/test_documentation_catalog.py`；registry 与任一文档入口不一致、单篇缺章节/metrics 或内部链接断开都会失败。
 
 新论文不需要修改 CLI 分支、公共报告渲染器或其他论文目录。

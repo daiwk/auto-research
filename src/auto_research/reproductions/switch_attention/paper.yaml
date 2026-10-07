@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "switch-attention",
   "arxiv_id": "2603.26380",
   "title": "Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers",
@@ -29,5 +29,33 @@
     "32K continual pretraining",
     "branch-selective fused decode kernel"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.switch_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Peking University / Huawei Technologies",
+      "published": "2026-03-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "32K continual pretraining",
+      "branch-selective fused decode kernel"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ultra-hstu",
   "arxiv_id": "2602.16986",
   "title": "Bending the Scaling Law Curve in Large-Scale Recommendation Systems",
@@ -41,5 +41,56 @@
     "16k histories and 18-layer production scale",
     "dynamic topology, mixed-precision kernels and Meta private logs"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.ultra_hstu.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta",
+      "published": "2026-02-19",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meta recommendation",
+          "metric": "consumption",
+          "lift_percent": 4.11,
+          "traffic": "multiple rigorous 30-day A/B tests; fully deployed",
+          "source_url": "https://arxiv.org/html/2602.16986v2#S5.SS4",
+          "source_location": "Section 5.4",
+          "experiment_duration": "30 days",
+          "significance": null,
+          "retrieved_at": "2026-08-09"
+        },
+        {
+          "product": "Meta recommendation",
+          "metric": "engagement",
+          "lift_percent": 8.0,
+          "traffic": "reported range +2% to +8%; fully deployed",
+          "source_url": "https://arxiv.org/html/2602.16986v2#S5.SS4",
+          "source_location": "Section 5.4",
+          "experiment_duration": "30 days",
+          "significance": null,
+          "retrieved_at": "2026-08-09"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "16k histories and 18-layer production scale",
+      "dynamic topology, mixed-precision kernels and Meta private logs"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

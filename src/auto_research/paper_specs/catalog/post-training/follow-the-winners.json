@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "follow-the-winners",
+  "title": "Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT",
+  "paper_url": "https://arxiv.org/abs/2610.03361",
+  "detail_path": "post-training/2610.03361-follow-the-winners/README.md",
+  "topic": [
+    "Agentic RL",
+    "无 critic 策略改进",
+    "精英轨迹筛选"
+  ],
+  "first_author": "Joery A. de Vries",
+  "first_author_affiliation": "Trent AI Limited",
+  "published": "2026-10-02",
+  "priority": "P1",
+  "code": null,
+  "adapter": "follow-the-winners"
+}

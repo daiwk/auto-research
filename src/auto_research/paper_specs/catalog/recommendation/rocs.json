@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rocs",
+  "detail_path": "reproductions/2607.27744-rocs/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta AI",
+  "adapter": {
+    "spec_key": "rocs"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "oneshot-index",
   "arxiv_id": "2607.27475",
   "title": "OneShot: Index-in-Ranking with Neural Scoring for Large-Scale Retrieval",
@@ -30,5 +30,54 @@
     "Instagram billion-item corpus",
     "stochastic compositional balancing and distributed serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.oneshot_index.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta / Instagram",
+      "published": "2026-07-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Instagram short video",
+          "metric": "daily sessions",
+          "lift_percent": 0.035,
+          "traffic": "fully deployed to global traffic",
+          "source_url": "https://arxiv.org/html/2607.27475v2#S5.SS1.SSS2",
+          "source_location": "Section 5.1.2 Table 3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        },
+        {
+          "product": "Instagram short video",
+          "metric": "watch time",
+          "lift_percent": 0.136,
+          "traffic": "fully deployed to global traffic",
+          "source_url": "https://arxiv.org/html/2607.27475v2#S5.SS1.SSS2",
+          "source_location": "Section 5.1.2 Table 3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Instagram billion-item corpus",
+      "stochastic compositional balancing and distributed serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

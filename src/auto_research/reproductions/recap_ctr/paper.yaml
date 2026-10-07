@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "recap-ctr",
   "arxiv_id": "2609.37905",
   "title": "Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction",
@@ -32,5 +32,33 @@
   ],
   "evolve_operators": [
     "rankmixer_recap"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.recap_ctr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Georgia Institute of Technology / Google Research",
+      "published": "2026-09-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确批准本轮 P1 学术推荐/Evolve 条目；全文没有量化线上 A/B，因此只作为 L1 核心机制诊断，不进入工业线上证据样本。"
+    },
+    "omitted_core_components": [
+      "paper benchmark training",
+      "independent-model distillation"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "three weight-shared recursive routes per seed",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

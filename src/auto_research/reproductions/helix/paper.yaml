@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "helix",
   "arxiv_id": "2609.37183",
   "title": "HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
@@ -29,5 +29,46 @@
     "private TikTok feature schema, multitask labels and production training data",
     "pyramidal encoder, GQA kernels, M-FALCON serving and full-traffic validation"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.helix.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "TikTok / ByteDance",
+      "published": "2026-09-29",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "TikTok e-commerce video recommendation",
+          "metric": "e-commerce video GMV per user",
+          "lift_percent": 5.4624,
+          "traffic": "randomized full-traffic online A/B",
+          "source_url": "https://arxiv.org/html/2609.37183",
+          "source_location": "Section 3.5, Tables 4-5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-30"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private TikTok feature schema, multitask labels and production training data",
+      "pyramidal encoder, GQA kernels, M-FALCON serving and full-traffic validation"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "two candidates, one reusable user cache, one HELIX core block per seed",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "alibi",
   "arxiv_id": "2108.12409",
   "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
@@ -56,5 +56,32 @@
   "mechanisms": [
     "WikiText-103 scale"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.alibi.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/ofirpress/attention_with_linear_biases",
+      "organization": "University of Washington / Meta AI",
+      "published": "2021-08-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "WikiText-103 scale"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=12",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

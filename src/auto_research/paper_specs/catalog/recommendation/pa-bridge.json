@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pa-bridge",
+  "detail_path": "reproductions/2605.05855-pa-bridge/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "pa-bridge"
+  }
+}

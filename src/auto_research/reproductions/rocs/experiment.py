@@ -1,3 +1,3 @@
-from ..latest_20260801_common import reproduce_rocs
+from auto_research.reproductions.mechanisms.ccformer_family import reproduce_rocs
 
 __all__ = ["reproduce_rocs"]

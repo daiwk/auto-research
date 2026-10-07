@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "webagent-r1",
+  "title": "WebAgent-R1",
+  "paper_url": "https://arxiv.org/abs/2505.16421",
+  "detail_path": "agent-research/2505.16421-webagent-r1/README.md",
+  "topic": [
+    "网页 Agent RL"
+  ],
+  "first_author": "Zhepei Wei",
+  "first_author_affiliation": "University of Virginia",
+  "published": "2025-05-22",
+  "code": "https://github.com/weizhepei/WebAgent-R1",
+  "adapter": "webagent-r1"
+}

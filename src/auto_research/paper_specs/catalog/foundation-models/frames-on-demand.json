@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "frames-on-demand",
+  "title": "Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding",
+  "paper_url": "https://arxiv.org/abs/2609.11899",
+  "detail_path": "foundation-models/2609.11899-frames-on-demand/README.md",
+  "topic": [
+    "长视频理解",
+    "视觉预算路由"
+  ],
+  "first_author": "Weitong Cai",
+  "first_author_affiliation": "Queen Mary University of London",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "frames-on-demand",
+  "priority": "P1"
+}

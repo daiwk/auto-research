@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "l2rec",
+  "detail_path": "reproductions/2605.26717-l2rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NetEase Cloud Music",
+  "adapter": {
+    "spec_key": "l2rec"
+  }
+}

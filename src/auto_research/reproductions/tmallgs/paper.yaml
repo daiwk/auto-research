@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "tmallgs",
   "arxiv_id": "2607.13398",
   "title": "TMallGS: Scaling Unified Feature and Sequence Modeling for Generative E-commerce Search",
@@ -34,5 +34,56 @@
     "private Tmall search features and labels",
     "0.05B online model and production GPU serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.tmallgs.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group of Alibaba",
+      "published": "2026-07-15",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tmall Search",
+          "metric": "UCTCVR",
+          "lift_percent": 1.38,
+          "traffic": "30 days; p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Tmall Search",
+          "metric": "GMV",
+          "lift_percent": 1.52,
+          "traffic": "30 days; p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Tmall search features and labels",
+      "0.05B online model and production GPU serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=60",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

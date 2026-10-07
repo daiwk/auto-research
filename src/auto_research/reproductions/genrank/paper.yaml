@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "genrank",
   "arxiv_id": "2505.04180",
   "title": "Towards Large-scale Generative Ranking",
@@ -36,5 +36,44 @@
   "mechanisms": [
     "Towards Large-scale Generative Ranking"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.genrank.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Xiaohongshu",
+      "published": "2025-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Explore Feed",
+          "metric": "engagements",
+          "lift_percent": 1.2474,
+          "traffic": "10% treatment/control, 15 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

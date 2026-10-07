@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "range-grpo",
+  "title": "Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals",
+  "paper_url": "https://arxiv.org/abs/2610.01548",
+  "detail_path": "post-training/2610.01548-range-grpo/README.md",
+  "topic": [
+    "GRPO",
+    "奖励区间",
+    "半监督后训练"
+  ],
+  "first_author": "Ryunyi Lee",
+  "first_author_affiliation": "Yonsei University",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "range-grpo",
+  "priority": "P0"
+}

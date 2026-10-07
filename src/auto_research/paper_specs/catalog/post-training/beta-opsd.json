@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "beta-opsd",
+  "title": "β-OPSD",
+  "paper_url": "https://arxiv.org/abs/2607.28582",
+  "detail_path": "post-training/2607.28582-beta-opsd/README.md",
+  "topic": [
+    "On-policy self-distillation"
+  ],
+  "first_author": "Jiawei Xu",
+  "first_author_affiliation": "University of Maryland, College Park",
+  "published": "2026-07-30",
+  "code": "未发现官方代码",
+  "adapter": "beta-opsd"
+}

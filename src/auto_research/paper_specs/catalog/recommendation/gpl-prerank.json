@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gpl-prerank",
+  "detail_path": "reproductions/2602.20995-gpl-prerank/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba Group / Renmin University",
+  "adapter": {
+    "spec_key": "gpl-prerank"
+  }
+}

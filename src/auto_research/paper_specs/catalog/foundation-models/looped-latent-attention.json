@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "looped-latent-attention",
+  "detail_path": "reproductions/2607.15456-looped-latent-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Maryland / Meta AI",
+  "adapter": {
+    "spec_key": "looped-latent-attention"
+  }
+}

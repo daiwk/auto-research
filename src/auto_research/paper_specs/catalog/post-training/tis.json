@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "tis",
+  "title": "TIS",
+  "paper_url": "web-2025-tis/README.md",
+  "detail_path": "post-training/web-2025-tis/README.md",
+  "topic": [
+    "训推失配校正"
+  ],
+  "first_author": "Feng Yao",
+  "first_author_affiliation": "University of California, San Diego",
+  "published": "2025-08-05",
+  "code": "未发现官方代码",
+  "adapter": "tis"
+}

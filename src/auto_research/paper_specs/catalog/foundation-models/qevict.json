@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "qevict",
+  "detail_path": "reproductions/2608.05326-qevict/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Indian Institute of Technology Roorkee",
+  "adapter": {
+    "spec_key": "qevict"
+  }
+}

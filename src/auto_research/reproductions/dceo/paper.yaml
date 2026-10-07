@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dceo",
   "arxiv_id": "2608.25635",
   "title": "DCEO: Direct Causal Effect Optimization for Long-Term User Value Modeling in E-commerce Search",
@@ -33,5 +33,44 @@
     "production long-term GMV critic",
     "online serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dceo.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group, Alibaba",
+      "published": "2026-08-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba e-commerce search",
+          "metric": "GMV",
+          "lift_percent": 0.36,
+          "traffic": "41-day production A/B test",
+          "source_url": "https://arxiv.org/html/2608.25635v1#S5.SS7",
+          "source_location": "Section 5.7",
+          "experiment_duration": "41 days",
+          "significance": null,
+          "retrieved_at": "2026-08-28"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Alibaba private search logs",
+      "production long-term GMV critic",
+      "online serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

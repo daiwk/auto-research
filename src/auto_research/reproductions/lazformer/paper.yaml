@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "lazformer",
   "arxiv_id": "2609.14978",
   "title": "LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training",
@@ -33,5 +33,79 @@
     "production five-layer Transformer checkpoint",
     "A10 serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.lazformer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International Digital Commerce Group",
+      "published": "2026-09-14",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "large-scale e-commerce homepage ranking",
+          "metric": "IPV",
+          "lift_percent": 5.21,
+          "traffic": "two-week production A/B",
+          "source_url": "https://arxiv.org/html/2609.14978v1",
+          "source_location": "Section 4.7; Table 7",
+          "experiment_duration": "two weeks",
+          "significance": null,
+          "retrieved_at": "2026-09-16"
+        },
+        {
+          "product": "large-scale e-commerce homepage ranking",
+          "metric": "orders",
+          "lift_percent": 3.38,
+          "traffic": "two-week production A/B",
+          "source_url": "https://arxiv.org/html/2609.14978v1",
+          "source_location": "Section 4.7; Table 7",
+          "experiment_duration": "two weeks",
+          "significance": null,
+          "retrieved_at": "2026-09-16"
+        },
+        {
+          "product": "large-scale e-commerce homepage ranking",
+          "metric": "buyers",
+          "lift_percent": 3.7,
+          "traffic": "two-week production A/B",
+          "source_url": "https://arxiv.org/html/2609.14978v1",
+          "source_location": "Section 4.7; Table 7",
+          "experiment_duration": "two weeks",
+          "significance": null,
+          "retrieved_at": "2026-09-16"
+        },
+        {
+          "product": "large-scale e-commerce homepage ranking",
+          "metric": "GMV",
+          "lift_percent": 9.85,
+          "traffic": "two-week production A/B",
+          "source_url": "https://arxiv.org/html/2609.14978v1",
+          "source_location": "Section 4.7; Table 7",
+          "experiment_duration": "two weeks",
+          "significance": null,
+          "retrieved_at": "2026-09-16"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Alibaba private homepage logs",
+      "production five-layer Transformer checkpoint",
+      "A10 serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

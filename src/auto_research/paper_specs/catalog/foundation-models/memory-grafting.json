@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "memory-grafting",
+  "detail_path": "reproductions/2605.20948-memory-grafting/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tsinghua University / Microsoft Research Asia",
+  "adapter": {
+    "spec_key": "memory-grafting"
+  }
+}

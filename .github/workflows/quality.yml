@@ -28,6 +28,17 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  minimal-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install base wheel without ML extras
+        run: pip install .
+      - name: Verify installed metadata and all CLI parsers
+        run: python scripts/check_minimal_install.py
   contracts:
     runs-on: ubuntu-latest
     steps:

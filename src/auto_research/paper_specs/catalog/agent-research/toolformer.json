@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "toolformer",
+  "title": "Toolformer",
+  "paper_url": "https://arxiv.org/abs/2302.04761",
+  "detail_path": "agent-research/2302.04761-toolformer/README.md",
+  "topic": [
+    "工具学习"
+  ],
+  "first_author": "Timo Schick",
+  "first_author_affiliation": "Meta AI Research",
+  "published": "2023-02-09",
+  "code": "未发现官方代码",
+  "adapter": "toolformer"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "hrpo",
   "arxiv_id": "2608.00750",
   "title": "Hierarchical Residual Policy Optimization for Generative Recommendations",
@@ -38,5 +38,56 @@
     "Kuaishou private advertising logs",
     "production SID policy and periodic deployment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.hrpo.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO",
+      "organization": "City University of Hong Kong / Kuaishou",
+      "published": "2026-08-01",
+      "publication_label": "KDD 2026",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou Fiction IAA",
+          "metric": "Target Cost",
+          "lift_percent": 3.49,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou Mini-Game IAA",
+          "metric": "Target Cost",
+          "lift_percent": 0.186,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Kuaishou private advertising logs",
+      "production SID policy and periodic deployment"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

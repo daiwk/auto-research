@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "tm20k",
   "arxiv_id": "2608.07055",
   "title": "Teacher Retains Full Tokens, Student Merges Efficiently: TM20K for E-Commerce Sequence Modeling in Ad Recommendation",
@@ -35,5 +35,48 @@
   ],
   "evolve_operators": [
     "context:tm20k-merge"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.tm20k.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance",
+      "published": "2026-08-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "ByteDance e-commerce advertising",
+          "metric": "ADSS",
+          "lift_percent": 1.036,
+          "traffic": "5-day experiment serving hundreds of millions of users",
+          "source_url": "https://arxiv.org/html/2608.07055v1",
+          "source_location": "Section 5.4, Table 7",
+          "experiment_duration": null,
+          "significance": "reported p-value 0% after rounding",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "20K private behavior streams",
+      "M-Falcon serving",
+      "advertising feature tower"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; at most 8 merged tokens",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

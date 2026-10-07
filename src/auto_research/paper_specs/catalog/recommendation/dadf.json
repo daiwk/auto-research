@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dadf",
+  "detail_path": "reproductions/2605.17863-dadf/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "dadf"
+  }
+}

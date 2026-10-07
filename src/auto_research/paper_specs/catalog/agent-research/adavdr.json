@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "adavdr",
+  "title": "AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research",
+  "paper_url": "https://arxiv.org/abs/2608.25559",
+  "detail_path": "agent-research/2608.25559-adavdr/README.md",
+  "topic": [
+    "视频研究自适应工具与反思"
+  ],
+  "first_author": "Xintong Zhang",
+  "first_author_affiliation": "Accio Team, Alibaba Group",
+  "published": "2026-08-26",
+  "code": "https://github.com/Accio-Lab/AdaVDR",
+  "adapter": "adavdr"
+}

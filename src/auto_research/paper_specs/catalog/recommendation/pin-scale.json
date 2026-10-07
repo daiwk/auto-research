@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pin-scale",
+  "detail_path": "reproductions/sigir2026-pin-scale-pin-scale/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "pin-scale"
+  }
+}

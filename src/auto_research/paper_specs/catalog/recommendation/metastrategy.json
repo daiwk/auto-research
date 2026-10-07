@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "metastrategy",
+  "detail_path": "reproductions/2608.09440-metastrategy/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Taobao",
+  "adapter": {
+    "spec_key": "metastrategy"
+  }
+}

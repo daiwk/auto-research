@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "bahe",
+  "detail_path": "reproductions/2403.19347-bahe/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Ant Group",
+  "adapter": {
+    "spec_key": "bahe"
+  }
+}

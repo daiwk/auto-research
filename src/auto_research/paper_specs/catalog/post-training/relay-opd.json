@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "relay-opd",
+  "title": "Relay-OPD",
+  "paper_url": "https://arxiv.org/abs/2607.26057",
+  "detail_path": "post-training/2607.26057-relay-opd/README.md",
+  "topic": [
+    "On-policy distillation"
+  ],
+  "first_author": "Haolei Xu",
+  "first_author_affiliation": "Zhejiang University",
+  "published": "2026-07-28",
+  "code": "https://github.com/ZJU-REAL/Relay-OPD",
+  "adapter": "relay-opd"
+}

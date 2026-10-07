@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "twitch-mor",
   "arxiv_id": "2608.04455",
   "title": "Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting",
@@ -36,5 +36,67 @@
     "Twitch private engagement and revenue labels",
     "production p99 serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.twitch_mor.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Twitch",
+      "published": "2026-08-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Twitch live recommendation",
+          "metric": "daily active viewers",
+          "lift_percent": 0.09,
+          "traffic": "14-day A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": "p<0.01",
+          "retrieved_at": null
+        },
+        {
+          "product": "Twitch engaged viewers",
+          "metric": "capped ARPU",
+          "lift_percent": 0.56,
+          "traffic": "14-day A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": "p<0.05",
+          "retrieved_at": null
+        },
+        {
+          "product": "Twitch mobile livefeed",
+          "metric": "positive interactions",
+          "lift_percent": 1.12,
+          "traffic": "14-day A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": "p<0.001",
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Twitch private engagement and revenue labels",
+      "production p99 serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

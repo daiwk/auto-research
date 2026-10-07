@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sigma",
   "arxiv_id": "2602.22913",
   "title": "SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress",
@@ -37,5 +37,57 @@
     "AliExpress query, image, festival, trend, demographic and online ranking features",
     "minute-level KV-cache inference and production U2I index serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sigma.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / AliExpress",
+      "published": "2026-02",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "AliExpress",
+          "metric": "Order Volume",
+          "lift_percent": 2.8,
+          "traffic": "5% traffic, 2 weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "AliExpress",
+          "metric": "GMV",
+          "lift_percent": 7.84,
+          "traffic": "5% traffic, 2 weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-0.6B/4B scale and 280M private grounding/SFT pairs",
+      "AliExpress query, image, festival, trend, demographic and online ranking features",
+      "minute-level KV-cache inference and production U2I index serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=480",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

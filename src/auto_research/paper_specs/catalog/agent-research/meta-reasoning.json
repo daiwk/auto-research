@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "meta-reasoning",
+  "title": "Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning",
+  "paper_url": "https://arxiv.org/abs/2609.38147",
+  "detail_path": "agent-research/2609.38147-meta-reasoning/README.md",
+  "topic": [
+    "Agent 推理",
+    "元推理控制",
+    "预算调度"
+  ],
+  "first_author": "Paras Dahal",
+  "first_author_affiliation": "Meta Superintelligence Labs",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "meta-reasoning",
+  "priority": "P0"
+}

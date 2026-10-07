@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "mem-plus-plus",
+  "title": "Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2610.02002",
+  "detail_path": "agent-research/2610.02002-mem-plus-plus/README.md",
+  "topic": [
+    "Agent 记忆",
+    "时间检索",
+    "组织知识"
+  ],
+  "first_author": "Ahmad Yehia",
+  "first_author_affiliation": "The University of Texas at Austin",
+  "published": "2026-10-01",
+  "code": "https://github.com/AIDAChip-Inc/mem-plus-plus",
+  "adapter": "mem-plus-plus",
+  "priority": "P1"
+}

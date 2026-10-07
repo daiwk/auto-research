@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dadf",
   "arxiv_id": "2605.17863",
   "title": "DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dadf.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/liuzhao09/DADF",
+      "organization": "Kuaishou Technology",
+      "published": "2026-05-18",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou full ranking",
+          "metric": "average time spent per device",
+          "lift_percent": 0.649,
+          "traffic": "7-day A/B, then 100% traffic",
+          "source_url": "https://arxiv.org/html/2605.17863v1",
+          "source_location": "paper online evaluation section",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

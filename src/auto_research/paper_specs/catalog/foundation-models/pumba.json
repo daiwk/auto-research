@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "pumba",
+  "title": "On Trajectory-Aware Training for Masked Diffusion Language Models",
+  "paper_url": "https://arxiv.org/abs/2609.37974",
+  "detail_path": "foundation-models/2609.37974-pumba/README.md",
+  "topic": [
+    "扩散语言模型",
+    "Trajectory-aware training",
+    "BPTT"
+  ],
+  "first_author": "Manuel Madeira",
+  "first_author_affiliation": "Apple",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "pumba",
+  "priority": "P1"
+}

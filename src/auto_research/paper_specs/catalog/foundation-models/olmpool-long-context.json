@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "olmpool-long-context",
+  "detail_path": "reproductions/2608.10296-olmpool-long-context/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Ai2",
+  "adapter": {
+    "spec_key": "olmpool-long-context"
+  }
+}

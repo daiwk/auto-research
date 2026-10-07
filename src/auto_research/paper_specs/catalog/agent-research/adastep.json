@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "adastep",
+  "title": "AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2610.03223",
+  "detail_path": "agent-research/2610.03223-adastep/README.md",
+  "topic": [
+    "Agentic RL",
+    "步骤信用分配",
+    "方差可靠性"
+  ],
+  "first_author": "Xin Wang",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2026-10-02",
+  "priority": "P1",
+  "code": null,
+  "adapter": "adastep"
+}

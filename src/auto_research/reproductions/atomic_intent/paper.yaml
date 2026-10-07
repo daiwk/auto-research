@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "atomic-intent",
   "arxiv_id": "2606.10357",
   "title": "Atomic Intent Reasoning: Bringing LLM Semantics to Industrial Cross-Domain Recommendations",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:atomic-intent-tree"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.atomic_intent.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "The Hong Kong Polytechnic University",
+      "published": "2026-06-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou E-commerce",
+          "metric": "GMV",
+          "lift_percent": 3.446,
+          "traffic": "5.08% production traffic",
+          "source_url": "https://arxiv.org/html/2606.10357v1",
+          "source_location": "Section 5.6",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-02"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "offline production LLM",
+      "Kuaishou intent store",
+      "online serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

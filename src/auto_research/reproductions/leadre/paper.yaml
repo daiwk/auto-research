@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "leadre",
   "arxiv_id": "2411.13789",
   "title": "LEADRE: Multi-Faceted Knowledge Enhanced LLM Empowered Display Advertisement Recommender System",
@@ -37,5 +37,57 @@
   "mechanisms": [
     "private WeChat ad corpus and tens-of-billions-request serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.leadre.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent / WeChat",
+      "published": "2024-11",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "WeChat Channels",
+          "metric": "GMV",
+          "lift_percent": 1.57,
+          "traffic": "production online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "WeChat Moments",
+          "metric": "GMV",
+          "lift_percent": 1.17,
+          "traffic": "production online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private WeChat ad corpus and tens-of-billions-request serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

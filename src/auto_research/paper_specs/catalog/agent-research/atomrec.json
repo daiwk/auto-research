@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "atomrec",
+  "title": "AtomRec: Evolving Atomic Memory for Agentic Recommendation",
+  "paper_url": "https://arxiv.org/abs/2609.04882",
+  "detail_path": "agent-research/2609.04882-atomrec/README.md",
+  "topic": [
+    "Agentic recommendation memory"
+  ],
+  "first_author": "Peiyu Hu",
+  "first_author_affiliation": "Xi'an Jiaotong-Liverpool University",
+  "published": "2026-09-04",
+  "code": null,
+  "adapter": "atomrec"
+}

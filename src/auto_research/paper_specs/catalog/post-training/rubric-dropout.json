@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "rubric-dropout",
+  "title": "Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL",
+  "paper_url": "https://arxiv.org/abs/2608.11669",
+  "detail_path": "post-training/2608.11669-rubric-dropout/README.md",
+  "topic": [
+    "Rubric RL",
+    "reward hacking"
+  ],
+  "first_author": "Minglai Yang",
+  "first_author_affiliation": "Scale AI",
+  "published": "2026-08-12",
+  "code": null,
+  "adapter": "rubric-dropout"
+}

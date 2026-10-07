@@ -1,0 +1,17 @@
+{
+  "key": "tess",
+  "title": "TESS: Scalable, Transferable Meta-network for Data Selection Requires a Different Loss (and Why the Obvious Choice is Problematic)",
+  "paper_url": "https://arxiv.org/abs/2610.02092",
+  "domain": "foundation-models",
+  "detail_path": "foundation-models/2610.02092-tess/README.md",
+  "topic": [
+    "预训练与数据",
+    "元网络数据选择"
+  ],
+  "first_author": "Zilin Du",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2026-10-01",
+  "priority": "P1",
+  "code": null,
+  "adapter": "tess"
+}

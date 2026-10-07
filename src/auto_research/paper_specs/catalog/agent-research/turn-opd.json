@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "turn-opd",
+  "title": "TurnOPD",
+  "paper_url": "https://arxiv.org/abs/2607.05804",
+  "detail_path": "agent-research/2607.05804-turn-opd/README.md",
+  "topic": [
+    "Agentic OPD / rollout budgeting"
+  ],
+  "first_author": "Yuhang Zhou",
+  "first_author_affiliation": "Academic author team",
+  "published": "2026-07-07",
+  "code": "未发现官方代码",
+  "adapter": "turn-opd"
+}

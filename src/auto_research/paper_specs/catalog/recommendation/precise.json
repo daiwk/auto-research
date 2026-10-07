@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "precise",
+  "detail_path": "reproductions/2412.06308-precise/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent / WeChat",
+  "adapter": {
+    "spec_key": "precise"
+  }
+}

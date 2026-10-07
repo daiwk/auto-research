@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gaugequant",
   "arxiv_id": "2607.20757",
   "title": "GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries",
@@ -35,5 +35,33 @@
     "LLaMA-2 7B training",
     "integer inference kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gaugequant.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/MPedraBento/gauge-quant",
+      "organization": "University of Cambridge",
+      "published": "2026-07-22",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "LLaMA-2 7B training",
+      "integer inference kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

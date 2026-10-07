@@ -1,0 +1,17 @@
+{
+  "key": "jev-lookahead",
+  "title": "Code Owns the Simulation, Jev Owns the Evaluation",
+  "paper_url": "https://arxiv.org/abs/2610.01834",
+  "domain": "agent-research",
+  "detail_path": "agent-research/2610.01834-jev-lookahead/README.md",
+  "topic": [
+    "模拟前瞻与动作选择",
+    "System One"
+  ],
+  "first_author": "Yaodong Yang",
+  "first_author_affiliation": "The Chinese University of Hong Kong",
+  "published": "2026-10-01",
+  "priority": "P0",
+  "code": null,
+  "adapter": "jev-lookahead"
+}

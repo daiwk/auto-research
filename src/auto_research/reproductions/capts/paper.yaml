@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "capts",
   "arxiv_id": "2602.12564",
   "title": "CAPTS: Channel-Aware, Preference-Aligned Trigger Selection for Multi-Channel Item-to-Item Retrieval",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:channel-trigger-routing"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.capts.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2026-02-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kwai multi-channel retrieval",
+          "metric": "Total app time spent",
+          "lift_percent": 0.713,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2602.12564v1",
+          "source_location": "Section 4.4.1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "four production I2I retrievers",
+      "private downstream attribution logs",
+      "online quota service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

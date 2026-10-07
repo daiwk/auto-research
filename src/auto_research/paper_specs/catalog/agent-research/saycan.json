@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "saycan",
+  "title": "SayCan",
+  "paper_url": "https://arxiv.org/abs/2204.01691",
+  "detail_path": "agent-research/2204.01691-saycan/README.md",
+  "topic": [
+    "具身规划"
+  ],
+  "first_author": "Michael Ahn",
+  "first_author_affiliation": "Robotics at Google",
+  "published": "2022-04-04",
+  "code": "https://github.com/google-research/google-research/tree/master/saycan",
+  "adapter": "saycan"
+}

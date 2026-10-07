@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "harnesslens",
+  "title": "Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification",
+  "paper_url": "https://arxiv.org/abs/2608.27311",
+  "detail_path": "agent-research/2608.27311-harnesslens/README.md",
+  "topic": [
+    "行为相关 Harness 验证"
+  ],
+  "first_author": "Jinghan Xu",
+  "first_author_affiliation": "Fudan University",
+  "published": "2026-08-27",
+  "code": "https://github.com/jhxu5214/HarnessLens",
+  "adapter": "harnesslens"
+}

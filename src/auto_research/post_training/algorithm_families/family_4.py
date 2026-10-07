@@ -23,27 +23,27 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
         'retire-opd', 'compo', 'trajectory-learnability', 'roft', 'lspd',
     }:
         if algorithm in {'v-rubrics', 'clue-opsd', 'grin', 'grip'}:
-            from ..latest_20260827 import update_latest
+            from auto_research.post_training.mechanisms.v_rubrics_family import update_latest
         elif algorithm in {'ttpo', 'weak-guide-rlvr', 'uc-mopd', 'spear'}:
-            from ..latest_20260829 import update_latest
+            from auto_research.post_training.mechanisms.ttpo_family import update_latest
         elif algorithm in {'rlvr-fusion', 'video-opsd', 'normalized-dpo'}:
-            from ..latest_20260831 import update_latest
+            from auto_research.post_training.mechanisms.rlvr_fusion_family import update_latest
         elif algorithm == 'gapo':
-            from ..latest_20260905 import update_latest
+            from auto_research.post_training.mechanisms.update_latest_8 import update_latest
         elif algorithm == 'sparse-opd':
-            from ..latest_20260907 import update_latest
+            from auto_research.post_training.mechanisms.update_latest_9 import update_latest
         elif algorithm in {'oprd', 'route-opd', 'compass-opd', 'probe-erpo'}:
-            from ..latest_20260912 import update_latest
+            from auto_research.post_training.mechanisms.oprd_family import update_latest
         elif algorithm in {'nsd', 'adaptive-opd-gate', 'locus', 'tasco'}:
-            from ..latest_20260914 import update_latest
+            from auto_research.post_training.mechanisms.nsd_family import update_latest
         elif algorithm in {'gamma-opd', 'tlm-dre', 'stride-opd', 'df-opd', 'opd-aha', 'growmtp'}:
-            from ..latest_20260916 import update_latest
+            from auto_research.post_training.mechanisms.discounted_credit import update_latest
         elif algorithm in {'tiao', 'sd-dpo'}:
-            from ..latest_20260916_followup import update_latest
+            from auto_research.post_training.mechanisms.tiao_credit import update_latest
         elif algorithm in {'retire-opd', 'compo', 'trajectory-learnability'}:
-            from ..latest_20260919 import update_latest
+            from auto_research.post_training.mechanisms.adaptive_retirement import update_latest
         elif algorithm in {'roft', 'lspd'}:
-            from ..latest_20260930 import update_latest
+            from auto_research.post_training.mechanisms.roft_family import update_latest
         else:
             update_latest = None
         if update_latest is not None:
@@ -59,7 +59,7 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             diagnostics.update(latest)
             return gradient, loss, diagnostics
         if algorithm in {'opd-search-plus', 'opdvr'}:
-            from ..latest_20260826 import update_latest
+            from auto_research.post_training.mechanisms.opd_search_plus_family import update_latest
 
             gradient, loss, latest = update_latest(
                 algorithm, state, group, probabilities, reference,
@@ -68,7 +68,7 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             diagnostics.update(latest)
             return gradient, loss, diagnostics
         if algorithm in {'srpo', 'erpo'}:
-            from ..latest_20260825 import update_latest
+            from auto_research.post_training.mechanisms.srpo_family import update_latest
 
             gradient, loss, latest = update_latest(
                 algorithm, state, group, probabilities, reference,
@@ -89,7 +89,7 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             diagnostics.update(latest)
             return gradient, loss, diagnostics
         if algorithm == 'gcpo':
-            from ..latest_20260824 import update_gcpo
+            from auto_research.post_training.mechanisms.update_gcpo import update_gcpo
 
             gradient, loss, latest = update_gcpo(
                 state, group, probabilities, reference, sampled
@@ -97,9 +97,9 @@ def apply(algorithm, state, group, learning_rate, rng, group_size, cache_index, 
             diagnostics.update(latest)
             return gradient, loss, diagnostics
         if algorithm in {'pto', 'c2-dpo'}:
-            from ..latest_20260813 import update_latest
+            from auto_research.post_training.mechanisms.pto_family import update_latest
         else:
-            from ..latest_20260809 import update_latest
+            from auto_research.post_training.mechanisms.rrc_family import update_latest
 
         gradient, loss, latest = update_latest(
             algorithm, state, group, probabilities, reference,

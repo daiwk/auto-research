@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "open-language-model",
+  "detail_path": "reproductions/2607.16669-open-language-model/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Indian Institute of Technology Madras",
+  "adapter": {
+    "spec_key": "open-language-model"
+  }
+}

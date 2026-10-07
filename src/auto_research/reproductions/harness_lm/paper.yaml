@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "harness-lm",
   "arxiv_id": "2605.23572",
   "title": "HARNESS-LM: A Three-Phase Training Recipe for Harnessing SLMs in Sponsored Search Retrieval",
@@ -33,5 +33,56 @@
     "Qwen3-Embedding 4B/0.6B scale and proprietary GPT expansions",
     "structured layer/FFN pruning hardware study"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.harness_lm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Microsoft AI / Bing Ads",
+      "published": "2026-05-22",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Bing Ads",
+          "metric": "Revenue",
+          "lift_percent": 1.0,
+          "traffic": "production deployment",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Bing Ads",
+          "metric": "Clicks",
+          "lift_percent": 0.4,
+          "traffic": "production deployment",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-Embedding 4B/0.6B scale and proprietary GPT expansions",
+      "structured layer/FFN pruning hardware study"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

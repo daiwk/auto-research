@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "director",
+  "detail_path": "reproductions/2607.26418-director/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Science and Technology of China",
+  "adapter": {
+    "spec_key": "director"
+  }
+}

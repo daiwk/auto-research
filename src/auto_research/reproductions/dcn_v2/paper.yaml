@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dcn-v2",
   "arxiv_id": "2008.13535",
   "title": "DCN V2: Improved Deep & Cross Network and Practical Lessons for Web-scale Learning to Rank Systems",
@@ -29,5 +29,35 @@
     "Google private ranking datasets",
     "production-scale low-rank expert tuning"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dcn_v2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2020-08-19",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确要求补齐经典搜广推论文；原文确认 Google 线上业务指标显著提升但未披露具体 lift。"
+    },
+    "omitted_core_components": [
+      "Google private ranking datasets",
+      "production-scale low-rank expert tuning"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

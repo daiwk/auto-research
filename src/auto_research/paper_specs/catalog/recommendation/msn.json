@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "msn",
+  "detail_path": "reproductions/2602.07526-msn/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance / Douyin Search",
+  "adapter": {
+    "spec_key": "msn"
+  }
+}

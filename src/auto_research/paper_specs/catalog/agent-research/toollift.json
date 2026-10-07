@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "toollift",
+  "title": "ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning",
+  "paper_url": "https://arxiv.org/abs/2608.03468",
+  "detail_path": "agent-research/2608.03468-toollift/README.md",
+  "topic": [
+    "工具规划",
+    "图结构"
+  ],
+  "first_author": "Xiuhui You",
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "published": "2026-08-04",
+  "code": null,
+  "adapter": "toollift"
+}

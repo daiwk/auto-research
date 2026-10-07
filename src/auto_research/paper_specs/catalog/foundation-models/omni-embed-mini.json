@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "omni-embed-mini",
+  "title": "Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.02148",
+  "detail_path": "foundation-models/2610.02148-omni-embed-mini/README.md",
+  "topic": [
+    "多模态嵌入",
+    "蒸馏",
+    "LoRA"
+  ],
+  "first_author": "Mohammed Irfan Kurpath",
+  "first_author_affiliation": "原文首页未列第一作者机构",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "omni-embed-mini",
+  "priority": "P1"
+}

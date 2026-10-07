@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sessionrec",
+  "detail_path": "reproductions/2502.10157-sessionrec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meituan",
+  "adapter": {
+    "spec_key": "sessionrec"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "random-attention",
   "arxiv_id": "2609.03430",
   "title": "Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning",
@@ -34,5 +34,33 @@
   ],
   "evolve_operators": [
     "attention:prompt-protected-random-eviction"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.random_attention.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/SalesforceAIResearch/Random-Attention",
+      "organization": "Salesforce AI Research / University of Illinois Urbana-Champaign",
+      "published": "2026-09-03",
+      "publication_label": "Salesforce AI Research preprint",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "full six-task reasoning matrix",
+      "official vLLM serving integration"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/random-attention-a100-20260906.json"
+  }
 }

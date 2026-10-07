@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "toolrec",
+  "detail_path": "reproductions/2606.08466-toolrec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huazhong University of Science and Technology",
+  "adapter": {
+    "spec_key": "toolrec"
+  }
+}

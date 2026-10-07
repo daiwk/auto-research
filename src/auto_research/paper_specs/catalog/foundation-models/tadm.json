@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "tadm",
+  "title": "Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation",
+  "paper_url": "https://arxiv.org/abs/2609.37924",
+  "detail_path": "foundation-models/2609.37924-tadm/README.md",
+  "topic": [
+    "扩散语言模型",
+    "Latent cache",
+    "推理效率"
+  ],
+  "first_author": "Joel Anto Paul",
+  "first_author_affiliation": "The University of Texas at Austin",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "tadm",
+  "priority": "P1"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "real-estate-rerank",
+  "detail_path": "reproductions/2607.14835-real-estate-rerank/README.md",
+  "first_author": null,
+  "first_author_affiliation": "QuintoAndar",
+  "adapter": {
+    "spec_key": "real-estate-rerank"
+  }
+}

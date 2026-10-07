@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gala",
+  "detail_path": "reproductions/2607.29213-gala/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Rajax Network Technology / Taobao Shangou / Alibaba",
+  "adapter": {
+    "spec_key": "gala"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "angle",
   "arxiv_id": "2609.18296",
   "title": "One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical Text Representations",
@@ -32,5 +32,90 @@
     "production hierarchical index",
     "online serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.angle.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2026-09-16",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Weixin Top Stories sponsored search",
+          "metric": "consumption",
+          "lift_percent": 1.81,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.18296v1",
+          "source_location": "online experiment table",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-19"
+        },
+        {
+          "product": "Weixin Top Stories sponsored search",
+          "metric": "GMV",
+          "lift_percent": 2.16,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.18296v1",
+          "source_location": "online experiment table",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-19"
+        },
+        {
+          "product": "Weixin Top Stories sponsored search",
+          "metric": "clicks",
+          "lift_percent": 1.5,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.18296v1",
+          "source_location": "online experiment table",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-19"
+        },
+        {
+          "product": "Weixin Top Stories sponsored search",
+          "metric": "conversions",
+          "lift_percent": 1.44,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.18296v1",
+          "source_location": "online experiment table",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-19"
+        },
+        {
+          "product": "Weixin Top Stories sponsored search",
+          "metric": "exposure",
+          "lift_percent": 2.49,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2609.18296v1",
+          "source_location": "online experiment table",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-19"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Tencent private sponsored-search logs",
+      "production hierarchical index",
+      "online serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

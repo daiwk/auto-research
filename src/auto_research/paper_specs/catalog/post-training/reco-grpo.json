@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "reco-grpo",
+  "title": "ReCo",
+  "paper_url": "https://arxiv.org/abs/2607.26862",
+  "detail_path": "post-training/2607.26862-reco/README.md",
+  "topic": [
+    "分布保持 RL"
+  ],
+  "first_author": "Junoh Park",
+  "first_author_affiliation": "Seoul National University",
+  "published": "2026-07-29",
+  "code": "未发现官方代码",
+  "adapter": "reco-grpo"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "zorro",
   "arxiv_id": "2607.10910",
   "title": "ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:zero-weight"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.zorro.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Technical University of Denmark",
+      "published": "2026-07-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Ekstra Bladet",
+          "metric": "CTR",
+          "lift_percent": 4.19,
+          "traffic": "six-day live test; 45% treatment traffic",
+          "source_url": "https://arxiv.org/html/2607.10910v1",
+          "source_location": "Section 4.3, Table 7",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-02"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Ekstra Bladet live candidate service",
+      "publisher embeddings",
+      "AWS Fargate stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "prompts",
+  "title": "PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving",
+  "paper_url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+  "detail_path": "agent-research/mlsys2026-prompts/README.md",
+  "topic": [
+    "训练服务优化",
+    "多 Agent 性能诊断"
+  ],
+  "first_author": "Yuran Ding",
+  "first_author_affiliation": "University of Maryland / Google",
+  "published": "2026-05-18",
+  "code": null,
+  "adapter": "prompts",
+  "priority": "P0"
+}

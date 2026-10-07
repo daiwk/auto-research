@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "smolvlm",
+  "detail_path": "reproductions/2504.05299-smolvlm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Hugging Face",
+  "adapter": {
+    "spec_key": "smolvlm"
+  }
+}

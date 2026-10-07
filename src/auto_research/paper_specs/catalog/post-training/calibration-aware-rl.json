@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "calibration-aware-rl",
+  "title": "Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2601.13284",
+  "detail_path": "post-training/2601.13284-calibration-aware-rl/README.md",
+  "topic": [
+    "校准强化学习",
+    "决策 token"
+  ],
+  "first_author": "Duygu Nur Yaldiz",
+  "first_author_affiliation": "University of Southern California",
+  "published": "2026-01-19",
+  "code": null,
+  "adapter": "system-one:rival-hybrid",
+  "priority": "P1"
+}

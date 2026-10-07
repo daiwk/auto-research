@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "kgd",
   "arxiv_id": "2608.02738",
   "title": "Knowledge–Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation",
@@ -37,5 +37,56 @@
     "Shopee private 90-day stream",
     "production continual refresh service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.kgd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/FuCongResearchSquad/KGD4REC",
+      "organization": "Xiamen University / Shopee",
+      "published": "2026-08-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Shopee Homepage Search",
+          "metric": "GMV per user",
+          "lift_percent": 1.75,
+          "traffic": "live A/B; fully deployed",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Shopee Homepage Search",
+          "metric": "advertising revenue",
+          "lift_percent": 1.53,
+          "traffic": "live A/B; fully deployed",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Shopee private 90-day stream",
+      "production continual refresh service"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cwm",
+  "detail_path": "reproductions/2406.07932-cwm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology / Renmin University of China",
+  "adapter": {
+    "spec_key": "cwm"
+  }
+}

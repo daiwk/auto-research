@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "esmm",
+  "detail_path": "reproductions/1804.07931-esmm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "esmm"
+  }
+}

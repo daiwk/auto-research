@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sarm",
   "arxiv_id": "2602.09401",
   "title": "SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sarm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Institute of Information Engineering, CAS / Kuaishou",
+      "published": "2026-02-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou Lite live-streaming",
+          "metric": "watch count",
+          "lift_percent": 1.19,
+          "traffic": "two-week A/B; subsequently fully deployed",
+          "source_url": "https://arxiv.org/html/2602.09401v1",
+          "source_location": "Section 4.4 / Table 3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

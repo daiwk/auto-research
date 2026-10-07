@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "ocsd",
+  "title": "OCSD",
+  "paper_url": "https://arxiv.org/abs/2608.04788",
+  "detail_path": "agent-research/2608.04788-ocsd/README.md",
+  "topic": [
+    "观测校准蒸馏"
+  ],
+  "first_author": "Yi Yang",
+  "first_author_affiliation": "Nanjing University",
+  "published": "2026-08-05",
+  "code": "https://github.com/yiy1x/OCSD",
+  "adapter": "ocsd"
+}

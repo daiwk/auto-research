@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "quasid",
   "arxiv_id": "2603.00632",
   "title": "Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.quasid.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "University of Electronic Science and Technology of China / Kuaishou",
+      "published": "2026-02-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou e-commerce",
+          "metric": "GMV-S2",
+          "lift_percent": 2.38,
+          "traffic": "5% traffic, five days",
+          "source_url": "https://arxiv.org/html/2603.00632v1",
+          "source_location": "Section 5.4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

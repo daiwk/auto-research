@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "evopilot",
+  "detail_path": "reproductions/2609.21257-evopilot/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta Platforms",
+  "adapter": {
+    "spec_key": "evopilot"
+  }
+}

@@ -1,4 +1,4 @@
-from auto_research.reproductions.latest_20260916 import reproduce
+from auto_research.reproductions.mechanisms.gese_candidate_scores import reproduce
 
 
 def run(dataset_dir, seed=42):

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "envace",
+  "title": "EnvACE",
+  "paper_url": "https://arxiv.org/abs/2608.06197",
+  "detail_path": "agent-research/2608.06197-envace/README.md",
+  "topic": [
+    "环境 rehearsal / Agent RL"
+  ],
+  "first_author": "Zishan Xu",
+  "first_author_affiliation": "Shanghai Jiao Tong",
+  "published": "2026-08-06",
+  "code": "https://github.com/Within-yao/EnvACE",
+  "adapter": "envace"
+}

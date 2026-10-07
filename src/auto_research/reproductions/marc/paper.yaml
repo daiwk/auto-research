@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "marc",
   "arxiv_id": "2604.18146",
   "title": "Modular Representation Compression: Adapting LLMs for Efficient and Effective Recommendations",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "head:modular-compression"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.marc.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Shanghai Jiao Tong University",
+      "published": "2026-04-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Commercial search advertising",
+          "metric": "eCPM",
+          "lift_percent": 2.82,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2604.18146v1",
+          "source_location": "Abstract and experiments",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production LLM hidden states",
+      "private advertising logs",
+      "online serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

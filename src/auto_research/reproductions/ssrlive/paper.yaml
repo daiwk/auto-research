@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ssrlive",
   "arxiv_id": "2606.06970",
   "title": "SSRLive: Live Streaming Recommendation with Dynamic Semantic ID",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "head:dynamic-sid"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.ssrlive.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group, Alibaba",
+      "published": "2026-06-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba live streaming",
+          "metric": "Watch time",
+          "lift_percent": 3.38,
+          "traffic": "production A/B; statistically significant",
+          "source_url": "https://arxiv.org/html/2606.06970v1",
+          "source_location": "Section 6, Table 4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-02"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production multimodal encoder",
+      "0.04B industrial model",
+      "partial-run serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

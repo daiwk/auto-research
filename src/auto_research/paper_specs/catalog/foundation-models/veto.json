@@ -1,0 +1,20 @@
+{
+  "domain": "foundation-models",
+  "key": "veto",
+  "title": "VETO: Video Efficient Token Optimization for Vision Language Models",
+  "paper_url": "https://arxiv.org/abs/2610.01785",
+  "detail_path": "foundation-models/2610.01785-veto/README.md",
+  "topic": [
+    "视频 VLM",
+    "Token 压缩",
+    "推理效率"
+  ],
+  "first_author": "Gueter Josmy Faure",
+  "first_author_affiliation": "National Taiwan University",
+  "published": "2026-10-01",
+  "code": null,
+  "adapter": "veto",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/veto-a100-20261002.json"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ektm",
   "arxiv_id": "2605.05730",
   "title": "Effective Knowledge Transfer for Multi-Task Recommendation Models",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.ektm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Huawei Technologies",
+      "published": "2026-05-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "commercial recommendation platform",
+          "metric": "eCPM",
+          "lift_percent": 3.93,
+          "traffic": "5%→20%→50%→100% traffic",
+          "source_url": "https://arxiv.org/html/2605.05730v1",
+          "source_location": "Section 4.4.2 / Figure 3",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

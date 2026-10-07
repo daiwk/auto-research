@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "opcd",
+  "title": "OPCD",
+  "paper_url": "https://arxiv.org/abs/2602.12275",
+  "detail_path": "post-training/2602.12275-opcd/README.md",
+  "topic": [
+    "Context distillation"
+  ],
+  "first_author": "Tianzhu Ye",
+  "first_author_affiliation": "Microsoft Research",
+  "published": "2026-02-12",
+  "code": "https://github.com/microsoft/LMOps/tree/main/opcd",
+  "adapter": "opcd"
+}

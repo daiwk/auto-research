@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "tagr",
+  "detail_path": "reproductions/2608.24034-tagr/README.md",
+  "first_author": "Wencai Ye",
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "tagr"
+  }
+}

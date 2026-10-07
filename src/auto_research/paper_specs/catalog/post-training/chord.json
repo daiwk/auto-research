@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "chord",
+  "title": "CHORD",
+  "paper_url": "https://arxiv.org/abs/2508.11408",
+  "detail_path": "post-training/2508.11408-chord/README.md",
+  "topic": [
+    "SFT-RL 动态混合"
+  ],
+  "first_author": "Wenhao Zhang",
+  "first_author_affiliation": "Alibaba Group",
+  "published": "2025-08-15",
+  "code": "https://github.com/modelscope/Trinity-RFT/tree/main/examples/mix_chord",
+  "adapter": "chord"
+}

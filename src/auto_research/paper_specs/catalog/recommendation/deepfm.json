@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "deepfm",
+  "detail_path": "reproductions/1703.04247-deepfm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huawei Noah's Ark Lab",
+  "adapter": {
+    "spec_key": "deepfm"
+  }
+}

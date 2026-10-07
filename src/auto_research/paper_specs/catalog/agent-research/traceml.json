@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "traceml",
+  "title": "TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development",
+  "paper_url": "https://arxiv.org/abs/2608.26086",
+  "detail_path": "agent-research/2608.26086-traceml/README.md",
+  "topic": [
+    "ML 开发轨迹规划"
+  ],
+  "first_author": "Jiarui Yan",
+  "first_author_affiliation": "Carnegie Mellon University",
+  "published": "2026-08-26",
+  "code": "https://huggingface.co/datasets/jerryyan/TraceML",
+  "adapter": "traceml"
+}

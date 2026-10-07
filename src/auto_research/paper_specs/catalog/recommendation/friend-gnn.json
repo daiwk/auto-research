@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "friend-gnn",
+  "detail_path": "reproductions/2608.27413-friend-gnn/README.md",
+  "first_author": null,
+  "first_author_affiliation": "AI VK",
+  "adapter": {
+    "spec_key": "friend-gnn"
+  }
+}

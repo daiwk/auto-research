@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "slimper",
+  "detail_path": "reproductions/2607.12281-slimper/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta Platforms, Inc.",
+  "adapter": {
+    "spec_key": "slimper"
+  }
+}

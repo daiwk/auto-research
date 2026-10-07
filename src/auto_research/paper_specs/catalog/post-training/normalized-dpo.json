@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "normalized-dpo",
+  "title": "Disentangling Optimization Scale from Preference Scale in DPO",
+  "paper_url": "https://arxiv.org/abs/2608.27032",
+  "detail_path": "post-training/2608.27032-normalized-dpo/README.md",
+  "topic": [
+    "DPO 偏好/优化尺度解耦"
+  ],
+  "first_author": "Ivan Kruzhilov",
+  "first_author_affiliation": "Affiliation not listed in the paper",
+  "published": "2026-08-27",
+  "code": "https://github.com/ivankru/bayesian_dpo",
+  "adapter": "normalized-dpo"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "u-mem",
+  "title": "U-Mem",
+  "paper_url": "https://arxiv.org/abs/2602.22406",
+  "detail_path": "agent-research/2602.22406-u-mem/README.md",
+  "topic": [
+    "主动记忆"
+  ],
+  "first_author": "Xinle Wu",
+  "first_author_affiliation": "National University of Singapore",
+  "published": "2026-02-25",
+  "code": "https://anonymous.4open.science/r/code-release-456D/",
+  "adapter": "u-mem"
+}

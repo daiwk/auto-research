@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rankgraph2",
+  "detail_path": "reproductions/2606.18379-rankgraph2/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meta",
+  "adapter": {
+    "spec_key": "rankgraph2"
+  }
+}

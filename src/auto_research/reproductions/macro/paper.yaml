@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "macro",
   "arxiv_id": "2608.05872",
   "title": "MACRO: Markov Chain Routing of Transformer Layers",
@@ -30,5 +30,33 @@
     "open-weight LLM checkpoints",
     "full benchmark route search"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.macro.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Batorskq/MACRO",
+      "organization": "Heinrich Heine University Düsseldorf",
+      "published": "2026-08-06",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "open-weight LLM checkpoints",
+      "full benchmark route search"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

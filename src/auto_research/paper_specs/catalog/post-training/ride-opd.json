@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "ride-opd",
+  "title": "The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.36484",
+  "detail_path": "post-training/2609.36484-ride/README.md",
+  "topic": [
+    "On-policy distillation",
+    "表征蒸馏"
+  ],
+  "first_author": "Hao Li",
+  "first_author_affiliation": "原文未列机构",
+  "published": "2026-09-29",
+  "code": "https://github.com/xixixixixxxx/RIDE",
+  "adapter": "ride-opd",
+  "priority": "P1"
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "searchatlas",
+  "title": "SearchAtlas: Analyzing Agentic Search Strategies via Evidential Query Graphs",
+  "paper_url": "https://arxiv.org/abs/2609.10901",
+  "detail_path": "agent-research/2609.10901-searchatlas/README.md",
+  "topic": [
+    "搜索 Agent",
+    "过程审计"
+  ],
+  "first_author": "Jiacheng Sang",
+  "first_author_affiliation": "Duke University",
+  "published": "2026-09-09",
+  "code": "https://github.com/DukeNLP/SearchAtlas",
+  "adapter": "searchatlas",
+  "priority": "P1"
+}

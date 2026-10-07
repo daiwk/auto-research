@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "core-relevance",
+  "detail_path": "reproductions/2607.24417-core-relevance/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meituan / Beijing Institute of Technology",
+  "adapter": {
+    "spec_key": "core-relevance"
+  }
+}

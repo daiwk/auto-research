@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "ttcd",
+  "detail_path": "reproductions/2608.01672-ttcd/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Princeton University",
+  "adapter": {
+    "spec_key": "ttcd"
+  }
+}

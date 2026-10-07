@@ -43,18 +43,23 @@ jobs:
           --lookback-days "$LOOKBACK_DAYS"
           --page-size 50
           --maximum-results-per-query 200
+          --checkpoint-dir ".cache/paper-discovery/progress/${{ matrix.track }}"
           --output "paper-candidates-${{ matrix.track }}.json"
           --summary-output "paper-candidates-${{ matrix.track }}.md"
           --official-review-output "paper-official-review-${{ matrix.track }}.json"
           --cross-source-config configs/paper-discovery-sources.json
           --github-actions
       - name: Publish candidate diff
+        if: always()
         run: cat "paper-candidates-${{ matrix.track }}.md" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
+          include-hidden-files: true
           name: ${{ matrix.track }}-paper-candidates
           path: |
             paper-candidates-${{ matrix.track }}.json
             paper-candidates-${{ matrix.track }}.md
             paper-official-review-${{ matrix.track }}.json
+            .cache/paper-discovery/progress/${{ matrix.track }}/
           retention-days: 30

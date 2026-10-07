@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "rope",
+  "detail_path": "reproductions/2104.09864-rope/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Zhuiyi Technology",
+  "adapter": {
+    "spec_key": "rope"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "self-refine",
+  "title": "Self-Refine",
+  "paper_url": "https://arxiv.org/abs/2303.17651",
+  "detail_path": "agent-research/2303.17651-self-refine/README.md",
+  "topic": [
+    "自我迭代"
+  ],
+  "first_author": "Aman Madaan",
+  "first_author_affiliation": "Carnegie Mellon University",
+  "published": "2023-03-30",
+  "code": "https://github.com/madaan/self-refine",
+  "adapter": "self-refine"
+}

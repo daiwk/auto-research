@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gas",
   "arxiv_id": "2608.12209",
   "title": "Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction",
@@ -31,5 +31,34 @@
     "10M generation corpus",
     "two-stage 32-GPU training"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gas.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "ByteDance",
+      "published": "2026-08-12",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-VL 2B/4B backbones",
+      "10M generation corpus",
+      "two-stage 32-GPU training"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

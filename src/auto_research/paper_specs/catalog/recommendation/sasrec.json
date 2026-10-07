@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sasrec",
+  "detail_path": "reproductions/1808.09781-sasrec/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "sasrec"
+  }
+}

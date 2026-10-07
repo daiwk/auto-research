@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "reco-reward",
   "arxiv_id": "2607.25901",
   "title": "RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation",
@@ -43,5 +43,56 @@
     "Qwen3.5-9B multimodal policy",
     "private Kuaishou live-stream behavior"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.reco_reward.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou / Nankai University / Chinese Academy of Sciences",
+      "published": "2026-07-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou live recommendation",
+          "metric": "key-page effective-user penetration",
+          "lift_percent": 0.265,
+          "traffic": "one-week online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Kuaishou live recommendation",
+          "metric": "outflow exposure",
+          "lift_percent": 0.791,
+          "traffic": "one-week online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3.5-9B multimodal policy",
+      "private Kuaishou live-stream behavior"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

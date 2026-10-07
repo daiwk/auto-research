@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "openhands",
+  "title": "OpenHands",
+  "paper_url": "https://arxiv.org/abs/2407.16741",
+  "detail_path": "agent-research/2407.16741-openhands/README.md",
+  "topic": [
+    "通用软件 Agent"
+  ],
+  "first_author": "Xingyao Wang",
+  "first_author_affiliation": "All-Hands-AI",
+  "published": "2024-07-23",
+  "code": "https://github.com/All-Hands-AI/OpenHands",
+  "adapter": "openhands"
+}

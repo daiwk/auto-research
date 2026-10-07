@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "muser",
   "arxiv_id": "2609.23677",
   "title": "MuSeR: Scalable Long-sequence Recommendation with Multi-interest Modeling",
@@ -29,5 +29,45 @@
     "ERNIE-generated summaries, ERNIE-Speed distillation, and BGE multimodal embeddings",
     "asynchronous representation refresh, HNSW retrieval, and Baidu online traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.muser.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Baidu",
+      "published": "2026-09-20",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Baidu APP",
+          "metric": "daily active users",
+          "lift_percent": 0.26,
+          "traffic": "online A/B",
+          "source_url": "https://arxiv.org/html/2609.23677v1",
+          "source_location": "Abstract and Introduction",
+          "experiment_duration": null,
+          "significance": "p<0.05",
+          "retrieved_at": "2026-09-26"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "ERNIE-generated summaries, ERNIE-Speed distillation, and BGE multimodal embeddings",
+      "asynchronous representation refresh, HNSW retrieval, and Baidu online traffic"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "800 steps each; full catalog; per-user last-two holdout",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

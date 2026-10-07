@@ -1,0 +1,17 @@
+{
+  "key": "causal-memory-policy",
+  "title": "Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval",
+  "paper_url": "https://arxiv.org/abs/2610.02070",
+  "domain": "agent-research",
+  "detail_path": "agent-research/2610.02070-causal-memory-policy/README.md",
+  "topic": [
+    "因果检索干预",
+    "记忆管理"
+  ],
+  "first_author": "Arman Behnam",
+  "first_author_affiliation": "Illinois Institute of Technology",
+  "published": "2026-10-01",
+  "priority": "P1",
+  "code": "https://anonymous.4open.science/r/cmp-release-D0C3/",
+  "adapter": "causal-memory-policy"
+}

@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "erils",
+  "title": "Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models",
+  "paper_url": "https://arxiv.org/abs/2608.01717",
+  "detail_path": "post-training/2608.01717-erils/README.md",
+  "topic": [
+    "外部 rollout",
+    "Diffusion LM RL"
+  ],
+  "first_author": "Wonseok Lee",
+  "first_author_affiliation": "Seoul National University",
+  "published": "2026-08-03",
+  "code": null,
+  "adapter": "erils"
+}

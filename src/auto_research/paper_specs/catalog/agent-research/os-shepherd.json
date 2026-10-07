@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "os-shepherd",
+  "title": "OSReward / OS-Shepherd",
+  "paper_url": "https://arxiv.org/abs/2607.28609",
+  "detail_path": "agent-research/2607.28609-osreward/README.md",
+  "topic": [
+    "CUA Reward 评测"
+  ],
+  "first_author": "Qiushi Sun",
+  "first_author_affiliation": "The University of Hong Kong",
+  "published": "2026-07-30",
+  "code": "https://os-copilot.github.io/OSReward-Home/",
+  "adapter": "os-shepherd"
+}

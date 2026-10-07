@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "voyager",
+  "title": "Voyager",
+  "paper_url": "https://arxiv.org/abs/2305.16291",
+  "detail_path": "agent-research/2305.16291-voyager/README.md",
+  "topic": [
+    "终身学习"
+  ],
+  "first_author": "Guanzhi Wang",
+  "first_author_affiliation": "NVIDIA",
+  "published": "2023-05-25",
+  "code": "https://github.com/MineDojo/Voyager",
+  "adapter": "voyager"
+}

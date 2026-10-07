@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "friend-gnn",
   "arxiv_id": "2608.27413",
   "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
@@ -33,5 +33,55 @@
     "distributed GATv2 training",
     "production ranker"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.friend_gnn.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/makut/VK-GNN",
+      "organization": "AI VK",
+      "published": "2026-08-27",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "VK friend recommendation",
+          "metric": "friend additions",
+          "lift_percent": 16.0,
+          "traffic": "production A/B test",
+          "source_url": "https://arxiv.org/html/2608.27413v1#S6.SS6",
+          "source_location": "Section 6.6",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-29"
+        },
+        {
+          "product": "VK friend recommendation",
+          "metric": "unique friend adders",
+          "lift_percent": 11.5,
+          "traffic": "production A/B test",
+          "source_url": "https://arxiv.org/html/2608.27413v1#S6.SS6",
+          "source_location": "Section 6.6",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-29"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "VK private 194M-user graph",
+      "distributed GATv2 training",
+      "production ranker"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

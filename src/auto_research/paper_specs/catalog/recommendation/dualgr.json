@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dualgr",
+  "detail_path": "reproductions/2511.12518-dualgr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "USTC / Kuaishou Technology",
+  "adapter": {
+    "spec_key": "dualgr"
+  }
+}

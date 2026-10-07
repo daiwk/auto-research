@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "slic-hf",
+  "title": "SLiC-HF",
+  "paper_url": "https://arxiv.org/abs/2305.10425",
+  "detail_path": "post-training/2305.10425-slic-hf/README.md",
+  "topic": [
+    "序列概率校准"
+  ],
+  "first_author": "Yao Zhao",
+  "first_author_affiliation": "Google DeepMind",
+  "published": "2023-05-17",
+  "code": "未发现官方代码",
+  "adapter": "slic-hf"
+}

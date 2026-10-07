@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rptune",
+  "detail_path": "reproductions/2610.00964-rptune/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "rptune"
+  }
+}

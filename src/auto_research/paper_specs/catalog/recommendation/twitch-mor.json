@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "twitch-mor",
+  "detail_path": "reproductions/2608.04455-twitch-mor/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Twitch",
+  "adapter": {
+    "spec_key": "twitch-mor"
+  }
+}

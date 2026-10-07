@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "gamma-opd",
+  "title": "Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.16937",
+  "detail_path": "post-training/2609.16937-gamma-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "时间信用分配"
+  ],
+  "first_author": "Shiqi Liu",
+  "first_author_affiliation": "Tsinghua University / DiDi Voyager Labs",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "gamma-opd",
+  "priority": "P0"
+}

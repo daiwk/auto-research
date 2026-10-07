@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "spo-plus-plus",
+  "title": "SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction",
+  "paper_url": "https://arxiv.org/abs/2608.24870",
+  "detail_path": "agent-research/2608.24870-spo-plus-plus/README.md",
+  "topic": [
+    "异步单流 Agent RL"
+  ],
+  "first_author": "Kai Ruan",
+  "first_author_affiliation": "Renmin University of China",
+  "published": "2026-08-25",
+  "code": null,
+  "adapter": "spo-plus-plus"
+}

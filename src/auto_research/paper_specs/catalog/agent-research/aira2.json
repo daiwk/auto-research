@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "aira2",
+  "title": "AIRA2: Overcoming Bottlenecks in AI Research Agents",
+  "paper_url": "https://arxiv.org/abs/2603.26499",
+  "detail_path": "agent-research/2603.26499-aira2/README.md",
+  "topic": [
+    "AI 研究 Agent",
+    "异步进化",
+    "隐藏一致评测"
+  ],
+  "first_author": "Karen Hambardzumyan",
+  "first_author_affiliation": "FAIR at Meta / University College London",
+  "published": "2026-03-27",
+  "code": null,
+  "adapter": "aira2",
+  "priority": "P0"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "memforest",
+  "title": "MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging",
+  "paper_url": "https://arxiv.org/abs/2609.08273",
+  "detail_path": "agent-research/2609.08273-memforest/README.md",
+  "topic": [
+    "事件树记忆压缩"
+  ],
+  "first_author": "Junxi Wang",
+  "first_author_affiliation": "Shanghai Jiao Tong University",
+  "published": "2026-09-08",
+  "code": "https://github.com/Celina-love-sweet/MemForest",
+  "adapter": "memforest"
+}

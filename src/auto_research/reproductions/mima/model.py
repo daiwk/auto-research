@@ -1,1 +1,1 @@
-from ..latest_20260915 import exclusive_assignment, mima_interests, mima_scores
+from auto_research.reproductions.mechanisms.pixel_penalty import exclusive_assignment, mima_interests, mima_scores

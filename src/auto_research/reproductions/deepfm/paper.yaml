@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "deepfm",
   "arxiv_id": "1703.04247",
   "title": "DeepFM: A Factorization-Machine based Neural Network for CTR Prediction",
@@ -41,5 +41,34 @@
   "mechanisms": [
     "Huawei private App Market CTR features and production traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.deepfm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Huawei Noah's Ark Lab",
+      "published": "2017-03-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确批准 DeepFM 为经典例外；不以该例外放宽新工业论文的量化线上证据门槛。"
+    },
+    "omitted_core_components": [
+      "Huawei private App Market CTR features and production traffic"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=80",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

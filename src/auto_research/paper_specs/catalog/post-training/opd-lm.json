@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "opd-lm",
+  "title": "OPDLM",
+  "paper_url": "https://arxiv.org/abs/2606.06712",
+  "detail_path": "post-training/2606.06712-opd-lm/README.md",
+  "topic": [
+    "AR-to-Diffusion 蒸馏"
+  ],
+  "first_author": "Xingyu Su",
+  "first_author_affiliation": "Texas A&M University",
+  "published": "2026-06-04",
+  "code": "未发现官方代码",
+  "adapter": "opd-lm"
+}

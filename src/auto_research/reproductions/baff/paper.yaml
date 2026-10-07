@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "baff",
   "arxiv_id": "2609.08725",
   "title": "BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests",
@@ -31,5 +31,46 @@
     "production CTR model",
     "market-side reference experiment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.baff.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Dable",
+      "published": "2026-09-08",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "production DSP real-time bidding",
+          "metric": "absolute CPC treatment-effect gap reduction versus naive shared log",
+          "lift_percent": 95.53,
+          "traffic": "single advertiser/SSP; two- and three-day measurement phases",
+          "source_url": "https://arxiv.org/html/2609.08725",
+          "source_location": "Section 5.4, Tables 6-7",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-12"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private DSP auction logs",
+      "production CTR model",
+      "market-side reference experiment"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "2,400 simulated auctions",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

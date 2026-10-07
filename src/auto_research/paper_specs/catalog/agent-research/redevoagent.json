@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "redevoagent",
+  "title": "RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution",
+  "paper_url": "https://arxiv.org/abs/2608.27439",
+  "detail_path": "agent-research/2608.27439-redevoagent/README.md",
+  "topic": [
+    "红队技能进化"
+  ],
+  "first_author": "Junjie Zhang",
+  "first_author_affiliation": "City University of Hong Kong",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "redevoagent"
+}

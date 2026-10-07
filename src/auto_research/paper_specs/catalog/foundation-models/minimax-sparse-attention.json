@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "minimax-sparse-attention",
+  "detail_path": "reproductions/2606.13392-minimax-sparse-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "MiniMax",
+  "adapter": {
+    "spec_key": "minimax-sparse-attention"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "feedback-scaffold",
+  "title": "Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks",
+  "paper_url": "https://arxiv.org/abs/2609.08404",
+  "detail_path": "agent-research/2609.08404-feedback-scaffold/README.md",
+  "topic": [
+    "环境反馈脚手架"
+  ],
+  "first_author": "Hongbang Yuan",
+  "first_author_affiliation": "Fudan University",
+  "published": "2026-09-08",
+  "code": "https://github.com/HongbangYuan/EnvAsScaffold",
+  "adapter": "feedback-scaffold"
+}

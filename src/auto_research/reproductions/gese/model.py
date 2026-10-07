@@ -1,3 +1,3 @@
-from auto_research.reproductions.latest_20260916 import gese_candidate_scores
+from auto_research.reproductions.mechanisms.gese_candidate_scores import gese_candidate_scores
 
 __all__ = ["gese_candidate_scores"]

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "deeprepro",
+  "title": "DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories",
+  "paper_url": "https://arxiv.org/abs/2608.26557",
+  "detail_path": "agent-research/2608.26557-deeprepro/README.md",
+  "topic": [
+    "论文到代码状态子规划"
+  ],
+  "first_author": "Hongru Song",
+  "first_author_affiliation": "Institute of Computing Technology, Chinese Academy of Sciences",
+  "published": "2026-08-27",
+  "code": "https://github.com/ruyisy/DeepRepro",
+  "adapter": "deeprepro"
+}

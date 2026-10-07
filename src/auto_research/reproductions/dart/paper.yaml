@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dart",
   "arxiv_id": "2608.02032",
   "title": "DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling",
@@ -28,5 +28,31 @@
     "paper-scale checkpoints and training",
     "custom CUDA kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dart.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Zhejiang University",
+      "published": "2026-08-03",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoints and training",
+      "custom CUDA kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

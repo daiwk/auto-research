@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "open-1b-audit",
+  "title": "OPEN-1B: A Fully Auditable Training Run",
+  "paper_url": "https://arxiv.org/abs/2609.17380",
+  "detail_path": "foundation-models/2609.17380-open-1b-audit/README.md",
+  "topic": [
+    "可复现训练",
+    "训练审计"
+  ],
+  "first_author": "John Donaghy",
+  "first_author_affiliation": "Gensyn",
+  "published": "2026-09-15",
+  "code": "https://github.com/gensyn-ai/open-transformers",
+  "code_extra": "https://github.com/gensyn-ai/pretraining-audit-cli",
+  "adapter": "open-1b-audit",
+  "priority": "P1"
+}

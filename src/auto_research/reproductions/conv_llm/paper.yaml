@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "conv-llm",
   "arxiv_id": "2607.18413",
   "title": "Convolution for Large Language Models",
@@ -34,5 +34,33 @@
     "Qwen3 0.6B–4B full pre-training",
     "seven downstream benchmark suite"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.conv_llm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Huawei / Peking University / Tsinghua University",
+      "published": "2026-07-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3 0.6B–4B full pre-training",
+      "seven downstream benchmark suite"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=60",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

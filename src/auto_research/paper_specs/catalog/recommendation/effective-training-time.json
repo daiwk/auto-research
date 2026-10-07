@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "effective-training-time",
+  "detail_path": "reproductions/2610.02057-effective-training-time/README.md",
+  "first_author": "Mingming Ding",
+  "first_author_affiliation": "Meta Platforms, Inc.",
+  "adapter": {
+    "spec_key": "effective-training-time"
+  }
+}

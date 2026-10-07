@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "hiskill",
+  "title": "HiSkill",
+  "paper_url": "https://arxiv.org/abs/2607.25853",
+  "detail_path": "agent-research/2607.25853-hiskill/README.md",
+  "topic": [
+    "Hierarchical skill memory"
+  ],
+  "first_author": "Yu Hao",
+  "first_author_affiliation": "Beijing University of Posts and Telecommunications",
+  "published": "2026-07-28",
+  "code": "https://github.com/BUPT-GAMMA/HiSkill",
+  "adapter": "hiskill"
+}

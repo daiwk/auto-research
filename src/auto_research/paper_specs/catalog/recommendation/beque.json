@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "beque",
+  "detail_path": "reproductions/2311.03758-beque/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "beque"
+  }
+}

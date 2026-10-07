@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "unimvt",
   "arxiv_id": "2602.12972",
   "title": "Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "reward:causal-uplift"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.unimvt.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2026-02-13",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou coupon marketing",
+          "metric": "Coupon revenue",
+          "lift_percent": 18.14,
+          "traffic": "10% production traffic online A/B",
+          "source_url": "https://arxiv.org/html/2602.12972v1",
+          "source_location": "Section 5.4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private coupon assignments",
+      "production CTR backbone",
+      "online allocation service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

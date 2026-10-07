@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "siglip2",
   "arxiv_id": "2502.14786",
   "title": "SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features",
@@ -30,5 +30,34 @@
     "caption decoder",
     "dense localization heads"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.siglip2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/google-research/big_vision",
+      "organization": "Google DeepMind",
+      "published": "2025-02-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "multilingual web-scale mixture",
+      "caption decoder",
+      "dense localization heads"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=150",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

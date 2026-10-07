@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "music-rationales",
   "arxiv_id": "2609.23877",
   "title": "Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery",
@@ -34,5 +34,45 @@
     "YouTube Music retrieval fleet, event-driven refresh and multi-arm online A/B",
     "public Last.fm has neither music exposure nor rationale engagement labels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.music_rationales.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2026-09-20",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "YouTube Music",
+          "metric": "YDD shelf-level engagement",
+          "lift_percent": 22.43,
+          "traffic": "large-scale online multi-arm holdback A/B",
+          "source_url": "https://arxiv.org/html/2609.23877v1",
+          "source_location": "Section 4.3, Table 1",
+          "experiment_duration": null,
+          "significance": "95% CI [16.93%, 27.93%]",
+          "retrieved_at": "2026-09-27"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Gemini model, music knowledge graph and LLM-as-a-Judge",
+      "YouTube Music retrieval fleet, event-driven refresh and multi-arm online A/B",
+      "public Last.fm has neither music exposure nor rationale engagement labels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "default 20 validation users; published GPU audit 100 validation and 100 test users; at most 5 nominations",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/music-rationales-a100-20260927.json"
+  }
 }

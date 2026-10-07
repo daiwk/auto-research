@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "spt",
+  "title": "SPT: Skills as Pre-Training Data for Agentic Language Models",
+  "paper_url": "https://arxiv.org/abs/2608.26563",
+  "detail_path": "agent-research/2608.26563-spt/README.md",
+  "topic": [
+    "Agent 技能预训练"
+  ],
+  "first_author": "Yufei Sun",
+  "first_author_affiliation": "Beijing University of Posts and Telecommunications",
+  "published": "2026-08-27",
+  "code": null,
+  "adapter": "spt"
+}

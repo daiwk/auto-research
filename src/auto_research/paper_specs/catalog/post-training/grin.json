@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "grin",
+  "title": "From Memorization to Absorption: Mixed-Policy RL for Continual Knowledge Injection",
+  "paper_url": "https://arxiv.org/abs/2608.25243",
+  "detail_path": "post-training/2608.25243-grin/README.md",
+  "topic": [
+    "混合策略知识注入 RL"
+  ],
+  "first_author": "Zhibo Hou",
+  "first_author_affiliation": "University of California, Merced",
+  "published": "2026-08-26",
+  "code": null,
+  "adapter": "grin"
+}

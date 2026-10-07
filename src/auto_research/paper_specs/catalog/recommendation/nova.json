@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "nova",
+  "detail_path": "reproductions/2606.27243-nova/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "nova"
+  }
+}

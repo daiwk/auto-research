@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sam",
+  "detail_path": "reproductions/2607.12714-sam/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba Group",
+  "adapter": {
+    "spec_key": "sam"
+  }
+}

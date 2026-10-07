@@ -5,11 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from auto_research.recommendation_latest_20260930_closure import (
-    Skill,
-    SkillGenome,
-    SkillGenomeController,
-)
+from auto_research.mechanisms.skill import Skill, SkillGenome, SkillGenomeController
 
 
 def reproduce(_dataset_dir: Path, seed: int = 42) -> dict:

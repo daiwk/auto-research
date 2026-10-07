@@ -5,7 +5,9 @@ from pathlib import Path
 
 import numpy as np
 
-from auto_research.recommendation_latest_20261001 import cohortmix_prior, cohortmix_slate, cohortmix_update
+from auto_research.mechanisms.cohortmix_prior import cohortmix_prior
+from auto_research.mechanisms.cohortmix_slate import cohortmix_slate
+from auto_research.mechanisms.cohortmix_update import cohortmix_update
 
 
 def reproduce(_dataset_dir: Path, seed: int = 42) -> dict:

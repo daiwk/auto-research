@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "mobius-rope",
   "arxiv_id": "2607.21405",
   "title": "Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable",
@@ -37,5 +37,34 @@
     "2B FineWeb-Edu tokens per run",
     "six-seed variance significance study"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.mobius_rope.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Independent researcher",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "48 runs at 160M/410M parameters",
+      "2B FineWeb-Edu tokens per run",
+      "six-seed variance significance study"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=90",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

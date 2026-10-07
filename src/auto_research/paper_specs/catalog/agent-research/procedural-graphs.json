@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "procedural-graphs",
+  "title": "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2609.09153",
+  "detail_path": "agent-research/2609.09153-procedural-graphs/README.md",
+  "topic": [
+    "自进化程序图"
+  ],
+  "first_author": "Yuxing Lu",
+  "first_author_affiliation": "Google",
+  "published": "2026-09-08",
+  "code": null,
+  "adapter": "procedural-graphs"
+}

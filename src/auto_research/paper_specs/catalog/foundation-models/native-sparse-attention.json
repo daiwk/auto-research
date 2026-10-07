@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "native-sparse-attention",
+  "detail_path": "reproductions/2502.11089-native-sparse-attention/README.md",
+  "first_author": null,
+  "first_author_affiliation": "DeepSeek",
+  "adapter": {
+    "spec_key": "native-sparse-attention"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "ppl-factory",
   "arxiv_id": "2607.18199",
   "title": "PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning",
@@ -34,5 +34,33 @@
     "Qwen2.5-7B reasoning SFT",
     "GSM8K and MATH answer accuracy"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.ppl_factory.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "McGill University",
+      "published": "2026-07-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen2.5-7B reasoning SFT",
+      "GSM8K and MATH answer accuracy"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

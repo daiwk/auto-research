@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "argus",
   "arxiv_id": "2507.15994",
   "title": "Scaling Recommender Transformers to One Billion Parameters",
@@ -34,5 +34,57 @@
   "mechanisms": [
     "private music feedback schema and billion-parameter scaling"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.argus.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Yandex",
+      "published": "2025-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Yandex Music",
+          "metric": "total listening time",
+          "lift_percent": 2.26,
+          "traffic": "large-scale online experiment",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Yandex Music",
+          "metric": "likes",
+          "lift_percent": 6.37,
+          "traffic": "large-scale online experiment",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private music feedback schema and billion-parameter scaling"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

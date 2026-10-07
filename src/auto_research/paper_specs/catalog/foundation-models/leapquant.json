@@ -1,0 +1,20 @@
+{
+  "domain": "foundation-models",
+  "key": "leapquant",
+  "title": "LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization",
+  "paper_url": "https://arxiv.org/abs/2609.38166",
+  "detail_path": "foundation-models/2609.38166-leapquant/README.md",
+  "topic": [
+    "推理与系统效率",
+    "线性注意力",
+    "状态量化"
+  ],
+  "first_author": "Yi Pan",
+  "first_author_affiliation": "UC Berkeley",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "leapquant",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/leapquant-a100-20260930.json"
+}

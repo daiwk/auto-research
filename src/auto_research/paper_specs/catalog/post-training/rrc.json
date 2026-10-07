@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "rrc",
+  "title": "RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction",
+  "paper_url": "https://arxiv.org/abs/2608.06310",
+  "detail_path": "post-training/2608.06310-rrc/README.md",
+  "topic": [
+    "生成式奖励模型"
+  ],
+  "first_author": "Chenglong Wang",
+  "first_author_affiliation": "Northeastern University",
+  "published": "2026-08-06",
+  "code": "https://github.com/wangclnlp/RRC",
+  "adapter": "rrc"
+}

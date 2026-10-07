@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "lum",
+  "detail_path": "reproductions/2502.08309-lum/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba",
+  "adapter": {
+    "spec_key": "lum"
+  }
+}

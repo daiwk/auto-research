@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "downstream-rewards",
+  "detail_path": "reproductions/2607.14192-downstream-rewards/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "downstream-rewards"
+  }
+}

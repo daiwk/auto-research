@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "branch-mixture",
+  "title": "Mixture of Self-Improving Branches for Agent Harness Optimization",
+  "paper_url": "https://arxiv.org/abs/2609.37834",
+  "detail_path": "agent-research/2609.37834-branch-mixture/README.md",
+  "topic": [
+    "Harness 优化",
+    "分支搜索",
+    "RSI"
+  ],
+  "first_author": "Haoyu Dong",
+  "first_author_affiliation": "原文首页未列机构",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "branch-mixture",
+  "priority": "P0"
+}

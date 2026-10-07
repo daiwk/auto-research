@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "asarl",
   "arxiv_id": "2607.26593",
   "title": "ASARL: Autonomous Social-Aware Relevance Learning for QQ Search",
@@ -47,5 +47,57 @@
     "production LLM annotation agents",
     "online RoBERTa deployment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.asarl.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent PCG",
+      "published": "2026-07-29",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "QQ channel search",
+          "metric": "CTR",
+          "lift_percent": 2.69,
+          "traffic": "20% treatment / 20% control, >=7 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "QQ group search",
+          "metric": "GSB",
+          "lift_percent": 16.66,
+          "traffic": "20% treatment / 20% control, >=7 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "QQ private social-search logs",
+      "production LLM annotation agents",
+      "online RoBERTa deployment"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=60",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

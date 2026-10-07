@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gryphon-v2",
   "arxiv_id": "2608.06213",
   "title": "Gryphon-v2: One Model in Place of a Cascade — Generate-and-Rank Recommender with Rollout Distillation",
@@ -37,5 +37,46 @@
     "8,000-event teacher history and ten-minute online refresh",
     "production Triton serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gryphon_v2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Yandex",
+      "published": "2026-08-06",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Yandex Music large-scale recommendation surface",
+          "metric": "active users",
+          "lift_percent": 1.41,
+          "traffic": "single model replaces 15+ candidate generators, pre-ranking and final ranking at comparable latency",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Yandex private music interaction logs and multimodal semantic IDs",
+      "8,000-event teacher history and ten-minute online refresh",
+      "production Triton serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

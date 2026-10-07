@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "intuitor",
+  "title": "INTUITOR",
+  "paper_url": "https://arxiv.org/abs/2505.19590",
+  "detail_path": "post-training/2505.19590-intuitor/README.md",
+  "topic": [
+    "自置信奖励"
+  ],
+  "first_author": "Xuandong Zhao",
+  "first_author_affiliation": "University of California, Berkeley",
+  "published": "2025-05-26",
+  "code": "https://github.com/sunblaze-ucb/Intuitor",
+  "adapter": "intuitor"
+}

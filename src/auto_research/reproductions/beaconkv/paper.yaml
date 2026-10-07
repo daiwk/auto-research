@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "beaconkv",
   "arxiv_id": "2609.04971",
   "title": "BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference",
@@ -33,5 +33,33 @@
   ],
   "evolve_operators": [
     "attention:beacon-query-kv"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.beaconkv.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Hanyang University",
+      "published": "2026-09-04",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "four-model reasoning benchmark matrix",
+      "vLLM throughput integration"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/beaconkv-a100-20260907.json"
+  }
 }

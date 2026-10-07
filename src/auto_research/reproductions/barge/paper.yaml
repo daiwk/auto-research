@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "barge",
   "arxiv_id": "2607.21028",
   "title": "Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation",
@@ -39,5 +39,68 @@
     "production beam-search kernels and impressed-but-unclicked negatives",
     "full-scale learned OSQ-VAE and serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.barge.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Tencent commercial media platform",
+          "metric": "CTR",
+          "lift_percent": 0.6,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Tencent commercial media platform",
+          "metric": "click UV",
+          "lift_percent": 1.34,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Tencent commercial media platform",
+          "metric": "total reading time",
+          "lift_percent": 1.7,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private Tencent item embeddings and behavior logs",
+      "production beam-search kernels and impressed-but-unclicked negatives",
+      "full-scale learned OSQ-VAE and serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "maestro-opd",
+  "title": "From Dissonance to Orchestration: Teacher Intervention in On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.37510",
+  "detail_path": "post-training/2609.37510-maestro/README.md",
+  "topic": [
+    "On-policy distillation",
+    "教师介入",
+    "策略分歧"
+  ],
+  "first_author": "Yuhao Wang",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2026-09-29",
+  "code": "https://github.com/yhao-wang/MAESTRO",
+  "adapter": "maestro-opd",
+  "priority": "P1"
+}

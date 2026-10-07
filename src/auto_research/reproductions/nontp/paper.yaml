@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "nontp",
   "arxiv_id": "2607.12277",
   "title": "Not Only NTP: Extending Training Signal Coverage for Generative Recommendation",
@@ -45,5 +45,58 @@
     "HSTU backbone and 3.2M-item Amazon Movie-Book-CDs preprocessing",
     "38.3M-user Meituan multi-business logs and full-ranking serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.nontp.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meituan",
+      "published": "2026-07-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Meituan DSP recall",
+          "metric": "CTR",
+          "lift_percent": 1.8,
+          "traffic": "5% traffic each, 14 days, p<0.01",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Meituan DSP recall",
+          "metric": "GMV",
+          "lift_percent": 2.1,
+          "traffic": "5% traffic each, 14 days, p<0.01",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "HSTU backbone and 3.2M-item Amazon Movie-Book-CDs preprocessing",
+      "38.3M-user Meituan multi-business logs and full-ranking serving stack"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=80",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

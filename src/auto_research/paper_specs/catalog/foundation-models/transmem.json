@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "transmem",
+  "detail_path": "reproductions/2607.29032-transmem/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "adapter": {
+    "spec_key": "transmem"
+  }
+}

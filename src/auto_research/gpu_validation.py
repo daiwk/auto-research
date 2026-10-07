@@ -16,6 +16,7 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "architecture-mrb-runtime": "docs/gpu-validations/architecture-mrb-a100-20261007.json",
     "experiment-integrity-runtime": "docs/gpu-validations/experiment-integrity-a100-20261007.json",
     "taco-optimizer": "docs/gpu-validations/taco-optimizer-a100-20261002.json",
     "veto": "docs/gpu-validations/veto-a100-20261002.json",

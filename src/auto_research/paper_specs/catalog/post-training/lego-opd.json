@@ -1,0 +1,18 @@
+{
+  "domain": "post-training",
+  "key": "lego-opd",
+  "title": "LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.00333",
+  "detail_path": "post-training/2610.00333-lego-opd/README.md",
+  "topic": [
+    "OPD",
+    "多模态后训练",
+    "teacher composition"
+  ],
+  "first_author": "Jaeyun Shin",
+  "first_author_affiliation": "KAIST",
+  "published": "2026-09-29",
+  "code": null,
+  "adapter": "lego-opd",
+  "priority": "P1"
+}

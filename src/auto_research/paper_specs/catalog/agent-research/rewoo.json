@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "rewoo",
+  "title": "ReWOO",
+  "paper_url": "https://arxiv.org/abs/2305.18323",
+  "detail_path": "agent-research/2305.18323-rewoo/README.md",
+  "topic": [
+    "解耦规划"
+  ],
+  "first_author": "Binfeng Xu",
+  "first_author_affiliation": "Microsoft Research",
+  "published": "2023-05-29",
+  "code": "https://github.com/billxbf/ReWOO",
+  "adapter": "rewoo"
+}

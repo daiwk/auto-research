@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "lift-feedback",
+  "title": "Pretraining Latent Information Feedback Transformers with Teacher Supervision",
+  "paper_url": "https://arxiv.org/abs/2609.38149",
+  "detail_path": "foundation-models/2609.38149-lift-feedback/README.md",
+  "topic": [
+    "网络架构",
+    "潜状态反馈",
+    "预训练"
+  ],
+  "first_author": "Dor Tirosh",
+  "first_author_affiliation": "Tel Aviv University",
+  "published": "2026-09-29",
+  "code": "https://github.com/dortirosh1/LIFT",
+  "adapter": "lift-feedback",
+  "priority": "P1"
+}

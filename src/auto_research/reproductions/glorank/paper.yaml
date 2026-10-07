@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "glorank",
   "arxiv_id": "2604.25291",
   "title": "From Local Indices to Global Identifiers: Generative Reranking via Global Action Space",
@@ -44,5 +44,45 @@
     "Kuaishou private traffic",
     "production LLM and constrained decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.glorank.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "City University of Hong Kong / Kuaishou / UC San Diego",
+      "published": "2026-04-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou",
+          "metric": "Watch Time",
+          "lift_percent": 0.095,
+          "traffic": "7.8% traffic, 14 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Kuaishou private traffic",
+      "production LLM and constrained decoder"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

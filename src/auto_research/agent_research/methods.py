@@ -1,96 +1,282 @@
 from __future__ import annotations
-
+import importlib
 import numpy as np
-
 from .method_families.base import BaseAgent
-from .method_families.planning import LongContextAgent, ReActAgent, ReflexionAgent, VoyagerAgent, TreeOfThoughtsAgent, LATSAgent, ToolformerAgent, SelfRefineAgent, ReWOOAgent, AutoGenAgent, PEARLAgent
-from .method_families.memory import UMemAgent, LegoMemAgent, MemToolAgent, MRKLAgent, HuggingGPTAgent, GenerativeAgentsAgent, MemGPTAgent, WebGPTAgent, SayCanAgent, PALAgent, ARTAgent
-from .method_families.rl import SEEDAgent, CASTAgent, TurnOPDAgent, SearchR1Agent, RAGENAgent, LOOPAgent, WebAgentR1Agent, MUARLAgent, HiSkillAgent, UniMemAgent, CAMDFAgent, SkillRiseAgent, GiGPOAgent, StepPOAgent, TAPOAgent, GRSDAgent, EnvACEAgent, AgentOPSDAgent, OCSDAgent, VerMemAgent, CoEvoMemAgent
+
+AGENT_BINDINGS = {
+    "ace-data": ("auto_research.agent_research.mechanisms.a_c_e_data_agent", "ACEDataAgent"),
+    "adavdr": ("auto_research.agent_research.mechanisms.ada_v_d_r_agent", "AdaVDRAgent"),
+    "agent-g2": ("auto_research.agent_research.mechanisms.agent_g2_agent", "AgentG2Agent"),
+    "agent-opsd": ("auto_research.agent_research.method_families.rl", "AgentOPSDAgent"),
+    "agent-r1": ("auto_research.agent_research.p1_20260808", "AgentR1Agent"),
+    "agent0": ("auto_research.agent_research.p0_20260808", "Agent0Agent"),
+    "agentx": ("auto_research.agent_research.mechanisms.agent_x_agent", "AgentXAgent"),
+    "ahead": ("auto_research.agent_research.mechanisms.a_h_e_a_d_agent", "AHEADAgent"),
+    "arenaflow": ("auto_research.agent_research.mechanisms.arena_flow_agent", "ArenaFlowAgent"),
+    "art": ("auto_research.agent_research.method_families.memory", "ARTAgent"),
+    "atomrec": ("auto_research.agent_research.mechanisms.public_observation", "AtomRecAgent"),
+    "auso": ("auto_research.agent_research.mechanisms.action_information", "AUSOAgent"),
+    "autogen": ("auto_research.agent_research.method_families.planning", "AutoGenAgent"),
+    "autosaddler": (
+        "auto_research.agent_research.mechanisms.auto_saddler_agent",
+        "AutoSaddlerAgent",
+    ),
+    "autoviewmem": (
+        "auto_research.agent_research.mechanisms.auto_view_mem_agent",
+        "AutoViewMemAgent",
+    ),
+    "cam-df": ("auto_research.agent_research.method_families.rl", "CAMDFAgent"),
+    "camel": ("auto_research.agent_research.p1_20260808", "CAMELAgent"),
+    "caskg": ("auto_research.agent_research.mechanisms.ca_s_k_g_agent", "CaSKGAgent"),
+    "cast": ("auto_research.agent_research.method_families.rl", "CASTAgent"),
+    "cera-moa": ("auto_research.agent_research.mechanisms.c_e_r_a_mo_a_agent", "CERAMoAAgent"),
+    "cipo": ("auto_research.agent_research.mechanisms.c_i_p_o_agent", "CIPOAgent"),
+    "cobra-skills": (
+        "auto_research.agent_research.mechanisms.c_o_b_r_a_skills_agent",
+        "COBRASkillsAgent",
+    ),
+    "codegrep": ("auto_research.agent_research.mechanisms.code_grep_agent", "CodeGrepAgent"),
+    "coevo-mem": ("auto_research.agent_research.method_families.rl", "CoEvoMemAgent"),
+    "coskill": ("auto_research.agent_research.mechanisms.public_observation", "CoSkillAgent"),
+    "covemem": ("auto_research.agent_research.mechanisms.co_ve_mem_agent", "CoVeMemAgent"),
+    "deeprepro": ("auto_research.agent_research.mechanisms.deep_repro_agent", "DeepReproAgent"),
+    "deepresearcher": ("auto_research.agent_research.p0_20260808", "DeepResearcherAgent"),
+    "dependency-refinement": (
+        "auto_research.agent_research.mechanisms.dependency_refinement_agent",
+        "DependencyRefinementAgent",
+    ),
+    "draco": ("auto_research.agent_research.mechanisms.d_r_a_c_o_agent", "DRACOAgent"),
+    "ecdysis": ("auto_research.agent_research.mechanisms.ecdysis_agent", "EcdysisAgent"),
+    "envace": ("auto_research.agent_research.method_families.rl", "EnvACEAgent"),
+    "evoharness-rl": (
+        "auto_research.agent_research.mechanisms.evo_harness_r_l_agent",
+        "EvoHarnessRLAgent",
+    ),
+    "evoskill-gui": (
+        "auto_research.agent_research.mechanisms.evo_skill_g_u_i_agent",
+        "EvoSkillGUIAgent",
+    ),
+    "feedback-scaffold": (
+        "auto_research.agent_research.mechanisms.feedback_scaffold_agent",
+        "FeedbackScaffoldAgent",
+    ),
+    "fuse-evaluator": (
+        "auto_research.agent_research.mechanisms.fuse_evaluator_agent",
+        "FuseEvaluatorAgent",
+    ),
+    "gaia": ("auto_research.agent_research.p1_20260808", "GAIAAgent"),
+    "generative-agents": (
+        "auto_research.agent_research.method_families.memory",
+        "GenerativeAgentsAgent",
+    ),
+    "gigpo": ("auto_research.agent_research.method_families.rl", "GiGPOAgent"),
+    "graphskillevo": (
+        "auto_research.agent_research.mechanisms.graph_skill_evo_agent",
+        "GraphSkillEvoAgent",
+    ),
+    "grounded-memory": (
+        "auto_research.agent_research.mechanisms.grounded_memory_agent",
+        "GroundedMemoryAgent",
+    ),
+    "grsd": ("auto_research.agent_research.method_families.rl", "GRSDAgent"),
+    "gse": ("auto_research.agent_research.mechanisms.g_s_e_agent", "GSEAgent"),
+    "harness-bandit": (
+        "auto_research.agent_research.mechanisms.harness_bandit_agent",
+        "HarnessBanditAgent",
+    ),
+    "harness-design-study": (
+        "auto_research.agent_research.mechanisms.harness_design_study_agent",
+        "HarnessDesignStudyAgent",
+    ),
+    "harnesslens": (
+        "auto_research.agent_research.mechanisms.harness_lens_agent",
+        "HarnessLensAgent",
+    ),
+    "harnessopt-bench": (
+        "auto_research.agent_research.mechanisms.harness_opt_bench_agent",
+        "HarnessOptBenchAgent",
+    ),
+    "hindsearch": ("auto_research.agent_research.mechanisms.hind_search_agent", "HindSearchAgent"),
+    "hiskill": ("auto_research.agent_research.method_families.rl", "HiSkillAgent"),
+    "hugginggpt": ("auto_research.agent_research.method_families.memory", "HuggingGPTAgent"),
+    "hymem": ("auto_research.agent_research.historical_b10_b11", "HyMemAgent"),
+    "hyperagent": ("auto_research.agent_research.historical_b10_b11", "HyperAgentAgent"),
+    "interactive-memory": (
+        "auto_research.agent_research.mechanisms.interactive_memory_agent",
+        "InteractiveMemoryAgent",
+    ),
+    "jit-agent": ("auto_research.agent_research.mechanisms.j_i_t_agent", "JITAgent"),
+    "lats": ("auto_research.agent_research.method_families.planning", "LATSAgent"),
+    "legomem": ("auto_research.agent_research.method_families.memory", "LegoMemAgent"),
+    "long-context": ("auto_research.agent_research.method_families.planning", "LongContextAgent"),
+    "loongreflect": ("auto_research.agent_research.historical_b10_b11", "LoongReflectAgent"),
+    "loop": ("auto_research.agent_research.method_families.rl", "LOOPAgent"),
+    "mace": ("auto_research.agent_research.mechanisms.m_a_c_e_agent", "MACEAgent"),
+    "manta": ("auto_research.agent_research.historical_b10_b11", "MANTAAgent"),
+    "maple": ("auto_research.agent_research.mechanisms.m_a_p_l_e_agent", "MAPLEAgent"),
+    "memento-skills": ("auto_research.agent_research.p0_20260808", "MementoSkillsAgent"),
+    "memforest": ("auto_research.agent_research.mechanisms.event_tree", "MemForestAgent"),
+    "memgpt": ("auto_research.agent_research.method_families.memory", "MemGPTAgent"),
+    "memorycpt": ("auto_research.agent_research.mechanisms.memory_c_p_t_agent", "MemoryCPTAgent"),
+    "memskill": ("auto_research.agent_research.p0_20260808", "MemSkillAgent"),
+    "memtool": ("auto_research.agent_research.method_families.memory", "MemToolAgent"),
+    "mrkl": ("auto_research.agent_research.method_families.memory", "MRKLAgent"),
+    "mua-rl": ("auto_research.agent_research.method_families.rl", "MUARLAgent"),
+    "multi-harness-rl": (
+        "auto_research.agent_research.mechanisms.public_observation",
+        "MultiHarnessRLAgent",
+    ),
+    "ocsd": ("auto_research.agent_research.method_families.rl", "OCSDAgent"),
+    "openloopevolve": ("auto_research.agent_research.historical_b10_b11", "OpenLoopEvolveAgent"),
+    "pal": ("auto_research.agent_research.method_families.memory", "PALAgent"),
+    "pearl": ("auto_research.agent_research.method_families.planning", "PEARLAgent"),
+    "planpo": ("auto_research.agent_research.historical_b10_b11", "PlanPOAgent"),
+    "pmcoder": ("auto_research.agent_research.historical_b10_b11", "PMCoderAgent"),
+    "procedural-graphs": (
+        "auto_research.agent_research.mechanisms.procedural_graph_agent",
+        "ProceduralGraphAgent",
+    ),
+    "progrouter": ("auto_research.agent_research.mechanisms.prog_router_agent", "ProgRouterAgent"),
+    "prompts": ("auto_research.agent_research.mechanisms.p_r_o_m_p_t_s_agent", "PROMPTSAgent"),
+    "ragen": ("auto_research.agent_research.method_families.rl", "RAGENAgent"),
+    "react": ("auto_research.agent_research.method_families.planning", "ReActAgent"),
+    "redevoagent": ("auto_research.agent_research.mechanisms.red_evo_agent", "RedEvoAgent"),
+    "reflexion": ("auto_research.agent_research.method_families.planning", "ReflexionAgent"),
+    "repoatlas": ("auto_research.agent_research.mechanisms.repo_atlas_agent", "RepoAtlasAgent"),
+    "retool": ("auto_research.agent_research.p0_20260808", "ReToolAgent"),
+    "rewoo": ("auto_research.agent_research.method_families.planning", "ReWOOAgent"),
+    "rtpo": ("auto_research.agent_research.historical_b10_b11", "RTPOAgent"),
+    "sage": ("auto_research.agent_research.p0_20260808", "SAGEAgent"),
+    "sapo": ("auto_research.agent_research.historical_b10_b11", "SAPOAgent"),
+    "saycan": ("auto_research.agent_research.method_families.memory", "SayCanAgent"),
+    "sciencebuddy": (
+        "auto_research.agent_research.mechanisms.science_buddy_agent",
+        "ScienceBuddyAgent",
+    ),
+    "search-r1": ("auto_research.agent_research.method_families.rl", "SearchR1Agent"),
+    "searchatlas": (
+        "auto_research.agent_research.mechanisms.search_atlas_agent",
+        "SearchAtlasAgent",
+    ),
+    "searl": ("auto_research.agent_research.p0_20260808", "SEARLAgent"),
+    "seed": ("auto_research.agent_research.method_families.rl", "SEEDAgent"),
+    "self-refine": ("auto_research.agent_research.method_families.planning", "SelfRefineAgent"),
+    "silr": ("auto_research.agent_research.mechanisms.public_observation", "SiLRAgent"),
+    "sinkflex-rl": (
+        "auto_research.agent_research.mechanisms.sink_window_indices",
+        "SinkFlexRLAgent",
+    ),
+    "skill-retention": (
+        "auto_research.agent_research.mechanisms.skill_retention_agent",
+        "SkillRetentionAgent",
+    ),
+    "skillforge": ("auto_research.agent_research.mechanisms.skill_forge_agent", "SkillForgeAgent"),
+    "skillrise": ("auto_research.agent_research.method_families.rl", "SkillRiseAgent"),
+    "smith": ("auto_research.agent_research.mechanisms.s_m_i_t_h_agent", "SMITHAgent"),
+    "spade": ("auto_research.agent_research.historical_b10_b11", "SPADEAgent"),
+    "spo-plus-plus": (
+        "auto_research.agent_research.mechanisms.s_p_o_plus_plus_agent",
+        "SPOPlusPlusAgent",
+    ),
+    "spt": ("auto_research.agent_research.mechanisms.s_p_t_agent", "SPTAgent"),
+    "state2state": (
+        "auto_research.agent_research.mechanisms.state2_state_agent",
+        "State2StateAgent",
+    ),
+    "steppo": ("auto_research.agent_research.method_families.rl", "StepPOAgent"),
+    "swe-prime": ("auto_research.agent_research.mechanisms.s_w_e_prime_agent", "SWEPrimeAgent"),
+    "t1-terminal-rl": (
+        "auto_research.agent_research.mechanisms.t1_terminal_agent",
+        "T1TerminalAgent",
+    ),
+    "tapo": ("auto_research.agent_research.method_families.rl", "TAPOAgent"),
+    "toolbench": ("auto_research.agent_research.p1_20260808", "ToolBenchAgent"),
+    "toolformer": ("auto_research.agent_research.method_families.planning", "ToolformerAgent"),
+    "toolgrad": ("auto_research.agent_research.mechanisms.tool_grad_agent", "ToolGradAgent"),
+    "toollift": ("auto_research.agent_research.historical_b10_b11", "ToolLIFTAgent"),
+    "toolrl": ("auto_research.agent_research.p0_20260808", "ToolRLAgent"),
+    "topas": ("auto_research.agent_research.mechanisms.t_o_p_a_s_agent", "TOPASAgent"),
+    "traceml": ("auto_research.agent_research.mechanisms.trace_m_l_agent", "TraceMLAgent"),
+    "trca": ("auto_research.agent_research.historical_b10_b11", "TRCAAgent"),
+    "tree-of-thoughts": (
+        "auto_research.agent_research.method_families.planning",
+        "TreeOfThoughtsAgent",
+    ),
+    "turn-opd": ("auto_research.agent_research.method_families.rl", "TurnOPDAgent"),
+    "u-mem": ("auto_research.agent_research.method_families.memory", "UMemAgent"),
+    "unimem": ("auto_research.agent_research.method_families.rl", "UniMemAgent"),
+    "vag": ("auto_research.agent_research.mechanisms.va_g_agent", "VaGAgent"),
+    "vermem": ("auto_research.agent_research.method_families.rl", "VerMemAgent"),
+    "voyager": ("auto_research.agent_research.method_families.planning", "VoyagerAgent"),
+    "webagent-r1": ("auto_research.agent_research.method_families.rl", "WebAgentR1Agent"),
+    "webgpt": ("auto_research.agent_research.method_families.memory", "WebGPTAgent"),
+}
+_EXPORTS = {
+    "BaseAgent": ("auto_research.agent_research.method_families.base", "BaseAgent"),
+    "LongContextAgent": (
+        "auto_research.agent_research.method_families.planning",
+        "LongContextAgent",
+    ),
+    "ReActAgent": ("auto_research.agent_research.method_families.planning", "ReActAgent"),
+    "ReflexionAgent": ("auto_research.agent_research.method_families.planning", "ReflexionAgent"),
+    "VoyagerAgent": ("auto_research.agent_research.method_families.planning", "VoyagerAgent"),
+    "TreeOfThoughtsAgent": (
+        "auto_research.agent_research.method_families.planning",
+        "TreeOfThoughtsAgent",
+    ),
+    "LATSAgent": ("auto_research.agent_research.method_families.planning", "LATSAgent"),
+    "ToolformerAgent": ("auto_research.agent_research.method_families.planning", "ToolformerAgent"),
+    "SelfRefineAgent": ("auto_research.agent_research.method_families.planning", "SelfRefineAgent"),
+    "ReWOOAgent": ("auto_research.agent_research.method_families.planning", "ReWOOAgent"),
+    "AutoGenAgent": ("auto_research.agent_research.method_families.planning", "AutoGenAgent"),
+    "PEARLAgent": ("auto_research.agent_research.method_families.planning", "PEARLAgent"),
+    "UMemAgent": ("auto_research.agent_research.method_families.memory", "UMemAgent"),
+    "LegoMemAgent": ("auto_research.agent_research.method_families.memory", "LegoMemAgent"),
+    "MemToolAgent": ("auto_research.agent_research.method_families.memory", "MemToolAgent"),
+    "MRKLAgent": ("auto_research.agent_research.method_families.memory", "MRKLAgent"),
+    "HuggingGPTAgent": ("auto_research.agent_research.method_families.memory", "HuggingGPTAgent"),
+    "GenerativeAgentsAgent": (
+        "auto_research.agent_research.method_families.memory",
+        "GenerativeAgentsAgent",
+    ),
+    "MemGPTAgent": ("auto_research.agent_research.method_families.memory", "MemGPTAgent"),
+    "WebGPTAgent": ("auto_research.agent_research.method_families.memory", "WebGPTAgent"),
+    "SayCanAgent": ("auto_research.agent_research.method_families.memory", "SayCanAgent"),
+    "PALAgent": ("auto_research.agent_research.method_families.memory", "PALAgent"),
+    "ARTAgent": ("auto_research.agent_research.method_families.memory", "ARTAgent"),
+    "SEEDAgent": ("auto_research.agent_research.method_families.rl", "SEEDAgent"),
+    "CASTAgent": ("auto_research.agent_research.method_families.rl", "CASTAgent"),
+    "TurnOPDAgent": ("auto_research.agent_research.method_families.rl", "TurnOPDAgent"),
+    "SearchR1Agent": ("auto_research.agent_research.method_families.rl", "SearchR1Agent"),
+    "RAGENAgent": ("auto_research.agent_research.method_families.rl", "RAGENAgent"),
+    "LOOPAgent": ("auto_research.agent_research.method_families.rl", "LOOPAgent"),
+    "WebAgentR1Agent": ("auto_research.agent_research.method_families.rl", "WebAgentR1Agent"),
+    "MUARLAgent": ("auto_research.agent_research.method_families.rl", "MUARLAgent"),
+    "HiSkillAgent": ("auto_research.agent_research.method_families.rl", "HiSkillAgent"),
+    "UniMemAgent": ("auto_research.agent_research.method_families.rl", "UniMemAgent"),
+    "CAMDFAgent": ("auto_research.agent_research.method_families.rl", "CAMDFAgent"),
+    "SkillRiseAgent": ("auto_research.agent_research.method_families.rl", "SkillRiseAgent"),
+    "GiGPOAgent": ("auto_research.agent_research.method_families.rl", "GiGPOAgent"),
+    "StepPOAgent": ("auto_research.agent_research.method_families.rl", "StepPOAgent"),
+    "TAPOAgent": ("auto_research.agent_research.method_families.rl", "TAPOAgent"),
+    "GRSDAgent": ("auto_research.agent_research.method_families.rl", "GRSDAgent"),
+    "EnvACEAgent": ("auto_research.agent_research.method_families.rl", "EnvACEAgent"),
+    "AgentOPSDAgent": ("auto_research.agent_research.method_families.rl", "AgentOPSDAgent"),
+    "OCSDAgent": ("auto_research.agent_research.method_families.rl", "OCSDAgent"),
+    "VerMemAgent": ("auto_research.agent_research.method_families.rl", "VerMemAgent"),
+    "CoEvoMemAgent": ("auto_research.agent_research.method_families.rl", "CoEvoMemAgent"),
+}
+
+
+def __getattr__(name):
+    if name not in _EXPORTS:
+        raise AttributeError(name)
+    module, symbol = _EXPORTS[name]
+    return getattr(importlib.import_module(module), symbol)
 
 
 def build_agent(method: str, capacity: int, rng: np.random.Generator) -> BaseAgent:
-    from .p0_20260808 import P0_AGENTS
-    from .p1_20260808 import P1_AGENTS
-    from .latest_20260809 import LATEST_AGENTS
-    from .latest_20260813 import LATEST_AGENTS as LATEST_20260813_AGENTS
-    from .latest_20260824 import LATEST_AGENTS as LATEST_20260824_AGENTS
-    from .latest_20260825 import LATEST_AGENTS as LATEST_20260825_AGENTS
-    from .latest_20260826 import LATEST_AGENTS as LATEST_20260826_AGENTS
-    from .latest_20260827 import LATEST_AGENTS as LATEST_20260827_AGENTS
-    from .latest_20260829 import LATEST_AGENTS as LATEST_20260829_AGENTS
-    from .latest_20260831 import LATEST_AGENTS as LATEST_20260831_AGENTS
-    from .latest_20260905 import LATEST_AGENTS as LATEST_20260905_AGENTS
-    from .latest_20260907 import LATEST_AGENTS as LATEST_20260907_AGENTS
-    from .latest_20260912 import LATEST_AGENTS as LATEST_20260912_AGENTS
-    from .latest_20260914 import LATEST_AGENTS as LATEST_20260914_AGENTS
-    from .latest_20260916 import LATEST_AGENTS as LATEST_20260916_AGENTS
-    from .latest_20260916_followup import LATEST_AGENTS as LATEST_20260916_FOLLOWUP_AGENTS
-    from .latest_20260919 import LATEST_AGENTS as LATEST_20260919_AGENTS
-    from .latest_20260921 import LATEST_AGENTS as LATEST_20260921_AGENTS
-    from .historical_b10_b11 import HISTORICAL_AGENTS
-
-    classes = {
-        "long-context": LongContextAgent,
-        "react": ReActAgent,
-        "reflexion": ReflexionAgent,
-        "voyager": VoyagerAgent,
-        "tree-of-thoughts": TreeOfThoughtsAgent,
-        "lats": LATSAgent,
-        "toolformer": ToolformerAgent,
-        "self-refine": SelfRefineAgent,
-        "rewoo": ReWOOAgent,
-        "autogen": AutoGenAgent,
-        "pearl": PEARLAgent,
-        "u-mem": UMemAgent,
-        "legomem": LegoMemAgent,
-        "memtool": MemToolAgent,
-        "mrkl": MRKLAgent,
-        "hugginggpt": HuggingGPTAgent,
-        "generative-agents": GenerativeAgentsAgent,
-        "memgpt": MemGPTAgent,
-        "webgpt": WebGPTAgent,
-        "saycan": SayCanAgent,
-        "pal": PALAgent,
-        "art": ARTAgent,
-        "seed": SEEDAgent,
-        "cast": CASTAgent,
-        "turn-opd": TurnOPDAgent,
-        "search-r1": SearchR1Agent,
-        "ragen": RAGENAgent,
-        "loop": LOOPAgent,
-        "webagent-r1": WebAgentR1Agent,
-        "mua-rl": MUARLAgent,
-        "hiskill": HiSkillAgent,
-        "unimem": UniMemAgent,
-        "cam-df": CAMDFAgent,
-        "skillrise": SkillRiseAgent,
-        "gigpo": GiGPOAgent,
-        "steppo": StepPOAgent,
-        "tapo": TAPOAgent,
-        "grsd": GRSDAgent,
-        "envace": EnvACEAgent,
-        "agent-opsd": AgentOPSDAgent,
-        "ocsd": OCSDAgent,
-        "vermem": VerMemAgent,
-        "coevo-mem": CoEvoMemAgent,
-        **P0_AGENTS,
-        **P1_AGENTS,
-        **LATEST_AGENTS,
-        **LATEST_20260813_AGENTS,
-        **LATEST_20260824_AGENTS,
-        **LATEST_20260825_AGENTS,
-        **LATEST_20260826_AGENTS,
-        **LATEST_20260827_AGENTS,
-        **LATEST_20260829_AGENTS,
-        **LATEST_20260831_AGENTS,
-        **LATEST_20260905_AGENTS,
-        **LATEST_20260907_AGENTS,
-        **LATEST_20260912_AGENTS,
-        **LATEST_20260914_AGENTS,
-        **LATEST_20260916_AGENTS,
-        **LATEST_20260916_FOLLOWUP_AGENTS,
-        **LATEST_20260919_AGENTS,
-        **LATEST_20260921_AGENTS,
-        **HISTORICAL_AGENTS,
-    }
-    return classes[method](capacity, rng)
+    if method not in AGENT_BINDINGS:
+        raise ValueError(f"unknown agent method: {method}")
+    module, symbol = AGENT_BINDINGS[method]
+    return getattr(importlib.import_module(module), symbol)(capacity, rng)

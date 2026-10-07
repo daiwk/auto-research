@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rq-gmm",
+  "detail_path": "reproductions/2602.12593-rq-gmm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "rq-gmm"
+  }
+}

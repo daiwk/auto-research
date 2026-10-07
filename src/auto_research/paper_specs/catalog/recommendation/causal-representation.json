@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "causal-representation",
+  "detail_path": "reproductions/2605.27043-causal-representation/README.md",
+  "first_author": null,
+  "first_author_affiliation": "University of Warwick",
+  "adapter": {
+    "spec_key": "causal-representation"
+  }
+}

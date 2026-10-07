@@ -1,0 +1,17 @@
+{
+  "key": "t2spo",
+  "title": "T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2610.00388",
+  "domain": "post-training",
+  "detail_path": "post-training/2610.00388-t2spo/README.md",
+  "topic": [
+    "轨迹到步骤信用分配",
+    "强化学习"
+  ],
+  "first_author": "Bo-Wen Zhang",
+  "first_author_affiliation": "Nanjing University",
+  "published": "2026-09-30",
+  "priority": "P0",
+  "code": null,
+  "adapter": "t2spo"
+}

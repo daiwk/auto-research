@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "pinrec",
+  "detail_path": "reproductions/2504.10507-pinrec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Pinterest",
+  "adapter": {
+    "spec_key": "pinrec"
+  }
+}

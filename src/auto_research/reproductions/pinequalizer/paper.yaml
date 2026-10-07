@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "pinequalizer",
   "arxiv_id": "2607.22518",
   "title": "PinEqualizer: Full Funnel Content Exploration and Debiasing System at Pinterest",
@@ -37,5 +37,59 @@
     "Homefeed/Search/Related Pins production retrieval and ranking stacks",
     "multi-year content holdout, live traffic and near-real-time Flink features"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.pinequalizer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Pinterest",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Related Pins",
+          "metric": "fresh-content engagement volume, ranking architecture",
+          "lift_percent": 8.63,
+          "traffic": "component-level user A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Related Pins",
+          "metric": "underexplored-content engagement volume, ranking architecture",
+          "lift_percent": 6.57,
+          "traffic": "component-level user A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Pinterest private Pin, provider, PinCLIP, Semantic-ID and off-platform data",
+      "Homefeed/Search/Related Pins production retrieval and ranking stacks",
+      "multi-year content holdout, live traffic and near-real-time Flink features"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

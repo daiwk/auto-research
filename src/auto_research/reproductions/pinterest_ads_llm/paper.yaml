@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "pinterest-ads-llm",
   "arxiv_id": "2605.27856",
   "title": "Fine-Tuned LLM as a Complementary Predictor Improving Ads System",
@@ -40,5 +40,57 @@
     "4B full-scale training and distributed vLLM/Ray daily serving",
     "live ctcvr/vtcvr and production candidate-blending traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.pinterest_ads_llm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Pinterest",
+      "published": "2026-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "US Shopping Ads",
+          "metric": "RoAS",
+          "lift_percent": 4.94,
+          "traffic": "p=0.021",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Opt-in US Shopping Ads",
+          "metric": "RoAS",
+          "lift_percent": 6.69,
+          "traffic": "p=0.029",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Pinterest private conversion, URL, advertiser-spend and PinCLIP SID data",
+      "4B full-scale training and distributed vLLM/Ray daily serving",
+      "live ctcvr/vtcvr and production candidate-blending traffic"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=160",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

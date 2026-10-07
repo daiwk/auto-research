@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "memory-grafting",
   "arxiv_id": "2605.20948",
   "title": "Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory",
@@ -39,5 +39,33 @@
     "0.92B/2.8B MoE recipients",
     "Qwen3.5/DeepSeek teacher and 3M-entry memory bank"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.memory_grafting.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tsinghua University / Microsoft Research Asia",
+      "published": "2026-05-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "0.92B/2.8B MoE recipients",
+      "Qwen3.5/DeepSeek teacher and 3M-entry memory bank"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=45",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

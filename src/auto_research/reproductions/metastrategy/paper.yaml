@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "metastrategy",
   "arxiv_id": "2608.09440",
   "title": "MetaStrategy: Generative Ranking with Executable LLM Strategies",
@@ -37,5 +37,57 @@
     "4B teacher to 0.8B student OPD",
     "diff-triggered nearline serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.metastrategy.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / Taobao",
+      "published": "2026-08-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Homepage Guess You Like",
+          "metric": "click PV",
+          "lift_percent": 2.11,
+          "traffic": "seven-day user-randomized online A/B",
+          "source_url": "https://arxiv.org/pdf/2608.09440",
+          "source_location": "Section 5.4 / online A/B table",
+          "experiment_duration": "7 days",
+          "significance": null,
+          "retrieved_at": "2026-08-13"
+        },
+        {
+          "product": "Taobao Homepage Guess You Like",
+          "metric": "transaction amount",
+          "lift_percent": 2.83,
+          "traffic": "seven-day user-randomized online A/B",
+          "source_url": "https://arxiv.org/pdf/2608.09440",
+          "source_location": "Section 5.4 / online A/B table",
+          "experiment_duration": "7 days",
+          "significance": null,
+          "retrieved_at": "2026-08-13"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Taobao private logs and production replay environment",
+      "4B teacher to 0.8B student OPD",
+      "diff-triggered nearline serving"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

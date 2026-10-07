@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "agentic-rec-tune",
+  "detail_path": "reproductions/2604.26969-agentic-rec-tune/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google / Discover",
+  "adapter": {
+    "spec_key": "agentic-rec-tune"
+  }
+}

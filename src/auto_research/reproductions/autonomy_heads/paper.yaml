@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "autonomy-heads",
   "arxiv_id": "2608.06849",
   "title": "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
@@ -28,5 +28,31 @@
     "paper-scale checkpoints and training",
     "custom CUDA kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.autonomy_heads.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Institute of Computing Technology, Chinese Academy of Sciences",
+      "published": "2026-08-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoints and training",
+      "custom CUDA kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

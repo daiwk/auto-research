@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "agentic-rec-tune",
   "arxiv_id": "2604.26969",
   "title": "AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization",
@@ -41,5 +41,56 @@
     "Google experiment scheduling APIs",
     "production Actor/Critic/Insight/Online agents"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.agentic_rec_tune.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google / Discover",
+      "published": "2026-04-21",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Google Discover value retrieval",
+          "metric": "Engagement 2",
+          "lift_percent": 0.9,
+          "traffic": "live-traffic A/B",
+          "source_url": "https://arxiv.org/html/2604.26969v2#S5",
+          "source_location": "Section 5 Table 1",
+          "experiment_duration": null,
+          "significance": "p<0.05",
+          "retrieved_at": "2026-08-09"
+        },
+        {
+          "product": "Google Discover diversity reranking",
+          "metric": "Diversity",
+          "lift_percent": 3.43,
+          "traffic": "live-traffic A/B",
+          "source_url": "https://arxiv.org/html/2604.26969v2#S5",
+          "source_location": "Section 5 Table 1",
+          "experiment_duration": null,
+          "significance": "p<0.05",
+          "retrieved_at": "2026-08-09"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Google experiment scheduling APIs",
+      "production Actor/Critic/Insight/Online agents"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

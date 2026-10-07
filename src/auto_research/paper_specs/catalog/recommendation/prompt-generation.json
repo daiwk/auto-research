@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "prompt-generation",
+  "detail_path": "reproductions/2607.11326-prompt-generation/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Taobao Search",
+  "adapter": {
+    "spec_key": "prompt-generation"
+  }
+}

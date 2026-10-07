@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "minillm",
+  "title": "MiniLLM",
+  "paper_url": "https://arxiv.org/abs/2306.08543",
+  "detail_path": "post-training/2306.08543-minillm/README.md",
+  "topic": [
+    "Reverse-KL distillation"
+  ],
+  "first_author": "Yuxian Gu",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2023-06-14",
+  "code": "https://github.com/microsoft/LMOps/tree/main/minillm",
+  "adapter": "minillm"
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "gliclass",
+  "title": "GLiClass: Generalist Lightweight Model for Sequence Classification Tasks",
+  "paper_url": "https://arxiv.org/abs/2508.07662",
+  "detail_path": "foundation-models/2508.07662-gliclass/README.md",
+  "topic": [
+    "动态候选分类",
+    "System One 相邻方法"
+  ],
+  "first_author": "Ihor Stepanov",
+  "first_author_affiliation": "Knowledgator",
+  "published": "2025-08-11",
+  "code": "https://github.com/Knowledgator/GLiClass",
+  "adapter": "system-one:bilinear-ce",
+  "priority": "P1"
+}

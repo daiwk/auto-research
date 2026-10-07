@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "qevict",
   "arxiv_id": "2608.05326",
   "title": "QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding",
@@ -31,5 +31,33 @@
     "transformer KV kernels",
     "full long-context benchmark"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.qevict.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Indian Institute of Technology Roorkee",
+      "published": "2026-08-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "transformer KV kernels",
+      "full long-context benchmark"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

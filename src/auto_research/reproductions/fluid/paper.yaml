@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "fluid",
   "arxiv_id": "2605.21832",
   "title": "FLUID: From Ephemeral IDs to Multimodal Semantic Codes for Industrial-Scale Livestreaming Recommendation",
@@ -42,5 +42,57 @@
     "SigLIP2 + Qwen3-Embedding-0.6B encoder",
     "production incremental training"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.fluid.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "TikTok / ByteDance",
+      "published": "2026-05-20",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "TikTok / ByteDance livestreaming",
+          "metric": "Quality Watch Duration",
+          "lift_percent": 0.55,
+          "traffic": "production online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "TikTok / ByteDance livestreaming",
+          "metric": "Cold-Start Room Views",
+          "lift_percent": 2.05,
+          "traffic": "production online A/B test",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private livestream slices and user traffic",
+      "SigLIP2 + Qwen3-Embedding-0.6B encoder",
+      "production incremental training"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

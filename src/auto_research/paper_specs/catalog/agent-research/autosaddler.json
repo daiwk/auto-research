@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "autosaddler",
+  "title": "AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces",
+  "paper_url": "https://arxiv.org/abs/2608.23041",
+  "detail_path": "agent-research/2608.23041-autosaddler/README.md",
+  "topic": [
+    "Harness 自动优化"
+  ],
+  "first_author": "Sungho Park",
+  "first_author_affiliation": "Microsoft / POSTECH",
+  "published": "2026-08-24",
+  "code": null,
+  "adapter": "autosaddler"
+}

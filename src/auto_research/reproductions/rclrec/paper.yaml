@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rclrec",
   "arxiv_id": "2603.28124",
   "title": "RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "context:reverse-curriculum"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.rclrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International Digital Commerce Group",
+      "published": "2026-03-30",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba advertising recommendation",
+          "metric": "Advertising revenue",
+          "lift_percent": 2.09,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2603.28124v1",
+          "source_location": "Abstract",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-05"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production semantic tokenizer",
+      "private conversion histories",
+      "autoregressive serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

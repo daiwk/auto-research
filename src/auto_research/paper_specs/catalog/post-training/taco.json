@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "taco",
+  "title": "TACO",
+  "paper_url": "https://arxiv.org/abs/2607.07976",
+  "detail_path": "post-training/2607.07976-taco/README.md",
+  "topic": [
+    "Token 信用校准"
+  ],
+  "first_author": "Xiuyi Lou",
+  "first_author_affiliation": "Johns Hopkins University",
+  "published": "2026-07-08",
+  "code": "https://github.com/xiuyilou/TACO",
+  "adapter": "taco"
+}

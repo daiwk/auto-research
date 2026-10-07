@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "diffureason",
+  "detail_path": "reproductions/2602.09744-diffureason/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "diffureason"
+  }
+}

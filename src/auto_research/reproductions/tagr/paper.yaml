@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "tagr",
   "arxiv_id": "2608.24034",
   "title": "TAGR: Temporally Adaptive Generative Recommendation for Industrial Live-Streaming Advertising",
@@ -32,5 +32,66 @@
     "online reward model and GRPO training",
     "real-time LSID and serving engine"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.tagr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou Technology",
+      "published": "2026-08-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou live-stream advertising",
+          "metric": "live-room entry rate",
+          "lift_percent": 8.5,
+          "traffic": "production A/B under the same downstream stack",
+          "source_url": "https://arxiv.org/html/2608.24034v1#S4.SS3",
+          "source_location": "Section 4.3 / Table 1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-26"
+        },
+        {
+          "product": "Kuaishou live-stream advertising",
+          "metric": "shopping-cart click rate",
+          "lift_percent": 7.4,
+          "traffic": "production A/B under the same downstream stack",
+          "source_url": "https://arxiv.org/html/2608.24034v1#S4.SS3",
+          "source_location": "Section 4.3 / Table 1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-26"
+        },
+        {
+          "product": "Kuaishou live-stream advertising",
+          "metric": "revenue",
+          "lift_percent": 16.1,
+          "traffic": "multi-week production experiment",
+          "source_url": "https://arxiv.org/html/2608.24034v1#S4.SS3",
+          "source_location": "Section 4.3 / Table 1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-26"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Kuaishou private live-ad logs",
+      "online reward model and GRPO training",
+      "real-time LSID and serving engine"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "smopd",
+  "title": "SMOPD: Multi-Reward Reinforcement Learning via Specialize-and-Merge Online Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2608.03092",
+  "detail_path": "post-training/2608.03092-smopd/README.md",
+  "topic": [
+    "OPD",
+    "多奖励 RL"
+  ],
+  "first_author": "Wen Wang",
+  "first_author_affiliation": "Alibaba / Qwen",
+  "published": "2026-08-04",
+  "code": null,
+  "adapter": "smopd"
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sirf",
   "arxiv_id": "2609.11752",
   "title": "SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control",
@@ -33,5 +33,47 @@
     "EntiGraph/MAGA language generation",
     "production adjudication serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sirf.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Xiaohongshu",
+      "published": "2026-09-10",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Xiaohongshu freezing-risk adjudication",
+          "metric": "relative mis-penalization reduction",
+          "lift_percent": 70.0,
+          "traffic": "random treatment/control split over the same released-user population; cumulative million-user scale",
+          "source_url": "https://arxiv.org/html/2609.11752",
+          "source_location": "Section 5.2",
+          "experiment_duration": null,
+          "significance": "weekly active penetration significantly better; paper reports high-single-digit to low-double-digit relative lift without an exact scalar",
+          "retrieved_at": "2026-09-14"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "8B Qwen continued pretraining",
+      "private account-level data",
+      "EntiGraph/MAGA language generation",
+      "production adjudication serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "4,000 train / 2,000 held-out policy cases",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

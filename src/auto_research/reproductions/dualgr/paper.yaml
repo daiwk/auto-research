@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dualgr",
   "arxiv_id": "2511.12518",
   "title": "DualGR: Generative Retrieval with Long and Short-Term Interests Modeling",
@@ -44,5 +44,45 @@
     "Kuaishou private exposure logs",
     "production constrained decoder"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dualgr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "USTC / Kuaishou Technology",
+      "published": "2025-11-16",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou",
+          "metric": "Video Views",
+          "lift_percent": 0.527,
+          "traffic": "online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Kuaishou private exposure logs",
+      "production constrained decoder"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

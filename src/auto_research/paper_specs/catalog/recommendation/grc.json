@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "grc",
+  "detail_path": "reproductions/2602.23639-grc/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International / Wuhan University",
+  "adapter": {
+    "spec_key": "grc"
+  }
+}

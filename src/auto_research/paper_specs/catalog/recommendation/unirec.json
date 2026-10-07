@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "unirec",
+  "detail_path": "reproductions/2609.11052-unirec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {
+    "spec_key": "unirec"
+  }
+}

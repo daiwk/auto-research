@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "dr-credit",
+  "title": "Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents",
+  "paper_url": "https://arxiv.org/abs/2609.34296",
+  "detail_path": "agent-research/2609.34296-dr-credit/README.md",
+  "topic": [
+    "Agent RL",
+    "过程信用分配"
+  ],
+  "first_author": "Yingjian Zhu",
+  "first_author_affiliation": "University of Chinese Academy of Sciences",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "dr-credit",
+  "priority": "P1"
+}

@@ -1,0 +1,17 @@
+{
+  "key": "weakest-link",
+  "title": "The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2610.00332",
+  "domain": "post-training",
+  "detail_path": "post-training/2610.00332-weakest-link/README.md",
+  "topic": [
+    "教师前缀约束蒸馏",
+    "约束强化学习"
+  ],
+  "first_author": "Matthieu Zimmer",
+  "first_author_affiliation": "Huawei Noah’s Ark Lab",
+  "published": "2026-09-29",
+  "priority": "P0",
+  "code": null,
+  "adapter": "weakest-link"
+}

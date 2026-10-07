@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "loopspec",
+  "title": "LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers",
+  "paper_url": "https://arxiv.org/abs/2609.17184",
+  "detail_path": "foundation-models/2609.17184-loopspec/README.md",
+  "topic": [
+    "推测解码",
+    "循环 Transformer"
+  ],
+  "first_author": "SangLyul Cho",
+  "first_author_affiliation": "Seoul National University / KAIST",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "loopspec",
+  "priority": "P1"
+}

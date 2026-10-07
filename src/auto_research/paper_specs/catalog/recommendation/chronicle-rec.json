@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "chronicle-rec",
+  "detail_path": "reproductions/2609.12375-chronicle-rec/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "chronicle-rec"
+  }
+}

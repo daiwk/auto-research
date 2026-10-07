@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "speculative-decoding",
   "arxiv_id": "2211.17192",
   "title": "Fast Inference from Transformers via Speculative Decoding",
@@ -29,5 +29,33 @@
     "T5-XXL",
     "accelerator kernels"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.speculative_decoding.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/google-research/google-research/tree/master/speculative_decoding",
+      "organization": "Google Research",
+      "published": "2022-11-30",
+      "publication_label": "ICML 2023 Oral",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "T5-XXL",
+      "accelerator kernels"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

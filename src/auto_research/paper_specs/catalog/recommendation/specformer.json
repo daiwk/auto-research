@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "specformer",
+  "detail_path": "reproductions/2607.24025-specformer/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Zhejiang University",
+  "adapter": {
+    "spec_key": "specformer"
+  }
+}

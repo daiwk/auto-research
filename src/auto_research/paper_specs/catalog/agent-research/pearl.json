@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "pearl",
+  "title": "PEARL",
+  "paper_url": "https://arxiv.org/abs/2601.20439",
+  "detail_path": "agent-research/2601.20439-pearl/README.md",
+  "topic": [
+    "规划强化学习"
+  ],
+  "first_author": "Qihao Wang",
+  "first_author_affiliation": "中国科学院信息工程研究所",
+  "published": "2026-01-28",
+  "code": "未发现官方代码",
+  "adapter": "pearl"
+}

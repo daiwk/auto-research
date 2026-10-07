@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ektm",
+  "detail_path": "reproductions/2605.05730-ektm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Huawei Technologies",
+  "adapter": {
+    "spec_key": "ektm"
+  }
+}

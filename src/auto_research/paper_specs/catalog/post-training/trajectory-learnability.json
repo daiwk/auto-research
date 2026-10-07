@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "trajectory-learnability",
+  "title": "Trajectory Learnability for Offline On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2609.18321",
+  "detail_path": "post-training/2609.18321-trajectory-learnability/README.md",
+  "topic": [
+    "On-policy distillation",
+    "轨迹加权"
+  ],
+  "first_author": "Yihao Ai",
+  "first_author_affiliation": "National University of Singapore",
+  "published": "2026-09-16",
+  "code": null,
+  "adapter": "trajectory-learnability",
+  "priority": "P1"
+}

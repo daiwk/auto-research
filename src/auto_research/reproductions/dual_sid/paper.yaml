@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "dual-sid",
   "arxiv_id": "2607.24865",
   "title": "Tokens are All You Need: Dual-purpose Semantic IDs for Achieving LLM-Level I/O Efficiency in Recommendation Systems",
@@ -41,5 +41,56 @@
     "YouTube-scale codebooks and private logs",
     "production embedding reconstruction service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dual_sid.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google DeepMind / YouTube",
+      "published": "2026-07-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "YouTube Watchpage ranking",
+          "metric": "sitewide objective",
+          "lift_percent": 0.09,
+          "traffic": "production online experiment",
+          "source_url": "https://arxiv.org/html/2607.24865v1#S4.SS2",
+          "source_location": "Section 4.2 Table 1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-09"
+        },
+        {
+          "product": "YouTube retrieval",
+          "metric": "homepage objective",
+          "lift_percent": 0.13,
+          "traffic": "production online experiment",
+          "source_url": "https://arxiv.org/html/2607.24865v1#S4.SS2",
+          "source_location": "Section 4.2 Table 1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-09"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "YouTube-scale codebooks and private logs",
+      "production embedding reconstruction service"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "sd-dpo",
+  "title": "Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data",
+  "paper_url": "https://arxiv.org/abs/2609.16532",
+  "detail_path": "post-training/2609.16532-sd-dpo/README.md",
+  "topic": [
+    "偏好优化",
+    "知识更新"
+  ],
+  "first_author": "Takayuki Yamamoto",
+  "first_author_affiliation": "Waseda University",
+  "published": "2026-09-15",
+  "code": null,
+  "adapter": "sd-dpo",
+  "priority": "P1"
+}

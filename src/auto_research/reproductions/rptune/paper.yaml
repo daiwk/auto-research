@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "rptune",
   "arxiv_id": "2610.00964",
   "title": "RPTune: Learned Context Curation for LLM Catalog Search",
@@ -31,5 +31,34 @@
     "Gemma-4 post-training",
     "frontier LLM feedback"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rptune.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2026-10-01",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "Google 高优先全文复核后的学术/Evolve 机制收录；论文报告真实商家实验，但没有量化线上 A/B，不进入工业搜广推线上证据结论。"
+    },
+    "omitted_core_components": [
+      "seven merchant catalogs",
+      "Gemma-4 post-training",
+      "frontier LLM feedback"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "deterministic L1 mechanism fixture",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

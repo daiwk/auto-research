@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "gr4ad",
   "arxiv_id": "2602.22732",
   "title": "Generative Recommendation for Large-Scale Advertising",
@@ -36,5 +36,46 @@
   "mechanisms": [
     "multimodal ad corpus, eCPM rewards, continual online learning, and dynamic beam service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gr4ad.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou",
+      "published": "2026-02",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou Ads",
+          "metric": "ad revenue",
+          "lift_percent": 4.2,
+          "traffic": "large-scale online A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "multimodal ad corpus, eCPM rewards, continual online learning, and dynamic beam service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=100",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

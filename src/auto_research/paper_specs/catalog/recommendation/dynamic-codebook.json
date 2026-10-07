@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dynamic-codebook",
+  "detail_path": "reproductions/2608.21012-dynamic-codebook/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "dynamic-codebook"
+  }
+}

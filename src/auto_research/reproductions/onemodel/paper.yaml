@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "onemodel",
   "arxiv_id": "2608.18606",
   "title": "OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking",
@@ -31,5 +31,65 @@
     "Xiaohongshu private multi-stream logs",
     "production unified decoder and serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.onemodel.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Xiaohongshu",
+      "published": "2026-08-19",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Xiaohongshu Explore Feed",
+          "metric": "time spent",
+          "lift_percent": 0.33,
+          "traffic": "production A/B",
+          "source_url": "https://arxiv.org/html/2608.18606v1#S5.SS3",
+          "source_location": "Section 5.3 Table 4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        },
+        {
+          "product": "Xiaohongshu Feed Ads",
+          "metric": "advertising value",
+          "lift_percent": 3.43,
+          "traffic": "production A/B",
+          "source_url": "https://arxiv.org/html/2608.18606v1#S5.SS3",
+          "source_location": "Section 5.3 Table 4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        },
+        {
+          "product": "Xiaohongshu Merchant Recommendation",
+          "metric": "DGMV",
+          "lift_percent": 1.1867,
+          "traffic": "production A/B",
+          "source_url": "https://arxiv.org/html/2608.18606v1#S5.SS3",
+          "source_location": "Section 5.3 Table 4",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Xiaohongshu private multi-stream logs",
+      "production unified decoder and serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

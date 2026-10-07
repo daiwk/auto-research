@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "easq",
+  "detail_path": "reproductions/2601.20215-easq/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "easq"
+  }
+}

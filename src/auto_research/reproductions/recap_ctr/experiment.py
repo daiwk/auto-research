@@ -5,7 +5,7 @@ from pathlib import Path
 
 import torch
 
-from auto_research.recommendation_latest_20261001 import recap_recursive_routes
+from auto_research.mechanisms.recap_recursive_routes import recap_recursive_routes
 
 
 def reproduce(_dataset_dir: Path, seed: int = 42) -> dict:

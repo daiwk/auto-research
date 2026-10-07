@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "cs3",
+  "detail_path": "reproductions/2604.19269-cs3/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou Technology",
+  "adapter": {
+    "spec_key": "cs3"
+  }
+}

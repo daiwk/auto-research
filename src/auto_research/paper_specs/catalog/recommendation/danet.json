@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "danet",
+  "detail_path": "reproductions/2607.12578-danet/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba Group / Tmall",
+  "adapter": {
+    "spec_key": "danet"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "opd-search-plus",
+  "title": "OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2608.24310",
+  "detail_path": "post-training/2608.24310-opd-search-plus/README.md",
+  "topic": [
+    "搜索增强 OPD + RL"
+  ],
+  "first_author": "Qinglin Ye",
+  "first_author_affiliation": "University of Chinese Academy of Sciences",
+  "published": "2026-08-25",
+  "code": null,
+  "adapter": "opd-search-plus"
+}

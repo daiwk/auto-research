@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "gigpo",
+  "title": "GiGPO",
+  "paper_url": "https://arxiv.org/abs/2505.10978",
+  "detail_path": "agent-research/2505.10978-gigpo/README.md",
+  "topic": [
+    "Agent group credit"
+  ],
+  "first_author": "Lang Feng",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2025-05-16",
+  "code": "未发现官方代码",
+  "adapter": "gigpo"
+}

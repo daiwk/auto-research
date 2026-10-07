@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "hstu",
+  "detail_path": "reproductions/2402.17152-hstu/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "hstu"
+  }
+}

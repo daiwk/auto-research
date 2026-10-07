@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "ha-moe",
+  "detail_path": "reproductions/2607.27577-ha-moe/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google / Discover",
+  "adapter": {
+    "spec_key": "ha-moe"
+  }
+}

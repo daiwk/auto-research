@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "llm-ts-prior",
+  "detail_path": "reproductions/2608.03382-llm-ts-prior/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NAVER WEBTOON",
+  "adapter": {
+    "spec_key": "llm-ts-prior"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "ttrl",
+  "title": "TTRL",
+  "paper_url": "https://arxiv.org/abs/2504.16084",
+  "detail_path": "post-training/2504.16084-ttrl/README.md",
+  "topic": [
+    "测试时强化学习"
+  ],
+  "first_author": "Yuxin Zuo",
+  "first_author_affiliation": "PRIME-RL author team",
+  "published": "2025-04-22",
+  "code": "https://github.com/PRIME-RL/TTRL",
+  "adapter": "ttrl"
+}

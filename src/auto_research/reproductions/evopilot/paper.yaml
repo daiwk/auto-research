@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "evopilot",
   "arxiv_id": "2609.21257",
   "title": "Verify, Don't Trust: Agentic Model Development for Video Discovery Retrieval at Scale",
@@ -34,5 +34,46 @@
     "production ANN index and serving funnel",
     "remote workflow orchestration and human approval service"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.evopilot.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Meta Platforms",
+      "published": "2026-09-18",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Video Deep Dive",
+          "metric": "Good Search Result Rate for Retention",
+          "lift_percent": 0.66,
+          "traffic": "seven-day randomized online evaluation",
+          "source_url": "https://arxiv.org/html/2609.21257v1",
+          "source_location": "Abstract; Section 5.5",
+          "experiment_duration": "7 days",
+          "significance": null,
+          "retrieved_at": "2026-09-21"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Meta VDD private video and interaction logs",
+      "production ANN index and serving funnel",
+      "remote workflow orchestration and human approval service"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

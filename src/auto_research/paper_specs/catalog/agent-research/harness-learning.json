@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "harness-learning",
+  "title": "Harness Learning Enables Generalizable Test-Time Adaptation",
+  "paper_url": "https://arxiv.org/abs/2609.35738",
+  "detail_path": "agent-research/2609.35738-harness-learning/README.md",
+  "topic": [
+    "Harness 学习",
+    "测试时适配",
+    "元学习"
+  ],
+  "first_author": "Alvin Zhang",
+  "first_author_affiliation": "Johns Hopkins University",
+  "published": "2026-09-28",
+  "code": null,
+  "adapter": "harness-learning",
+  "priority": "P1"
+}

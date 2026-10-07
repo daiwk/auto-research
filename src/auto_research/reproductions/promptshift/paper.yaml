@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "promptshift",
   "arxiv_id": "2609.34229",
   "title": "Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems",
@@ -30,5 +30,33 @@
     "proprietary LLM recommendations",
     "real identity slices"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.promptshift.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "University of Electronic Science and Technology of China",
+      "published": "2026-09-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确批准本轮 P1 学术推荐研究条目；该条目不作为工业线上 A/B 证据样本。"
+    },
+    "omitted_core_components": [
+      "proprietary LLM recommendations",
+      "real identity slices"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "one ten-item diagnostic ranking per seed",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

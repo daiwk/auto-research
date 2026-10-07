@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dme",
+  "detail_path": "reproductions/2608.02148-dme/README.md",
+  "first_author": null,
+  "first_author_affiliation": "ByteDance / Douyin",
+  "adapter": {
+    "spec_key": "dme"
+  }
+}

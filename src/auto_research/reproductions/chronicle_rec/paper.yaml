@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "chronicle-rec",
   "arxiv_id": "2609.12375",
   "title": "ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling",
@@ -33,5 +33,46 @@
     "production MixFormer checkpoint",
     "asynchronous KV-cache serving"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.chronicle_rec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent",
+      "published": "2026-09-11",
+      "publication_label": "arXiv v1",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Weixin Moments Ads pCVR",
+          "metric": "GMV",
+          "lift_percent": 1.61,
+          "traffic": "seven-day production A/B",
+          "source_url": "https://arxiv.org/html/2609.12375v1",
+          "source_location": "Section 4.9",
+          "experiment_duration": "seven days",
+          "significance": "95% CI excludes zero",
+          "retrieved_at": "2026-09-15"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Tencent private AdLive logs",
+      "production MixFormer checkpoint",
+      "asynchronous KV-cache serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "spade",
+  "title": "SPADE: Self-Play in Adaptive Synthetic Executable Environments",
+  "paper_url": "https://arxiv.org/abs/2608.19197",
+  "detail_path": "agent-research/2608.19197-spade/README.md",
+  "topic": [
+    "Agentic RL",
+    "环境生成"
+  ],
+  "first_author": "Bo Liu",
+  "first_author_affiliation": "University of Washington",
+  "published": "2026-08-19",
+  "code": "https://github.com/spade-rl/spade",
+  "adapter": "spade"
+}

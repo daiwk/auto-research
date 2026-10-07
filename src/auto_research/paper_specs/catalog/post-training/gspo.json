@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "gspo",
+  "title": "GSPO",
+  "paper_url": "https://arxiv.org/abs/2507.18071",
+  "detail_path": "post-training/2507.18071-gspo/README.md",
+  "topic": [
+    "稳定序列 RL"
+  ],
+  "first_author": "Chujie Zheng",
+  "first_author_affiliation": "Alibaba Qwen Team",
+  "published": "2025-07-24",
+  "code": "https://alibaba.github.io/ROLL/docs/User%20Guides/Algorithms/GSPO/",
+  "adapter": "gspo"
+}

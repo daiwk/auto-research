@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "omnikvquant",
+  "title": "OmniKVQuant: KV Cache Quantization for Omni-LLMs",
+  "paper_url": "https://arxiv.org/abs/2609.11582",
+  "detail_path": "foundation-models/2609.11582-omnikvquant/README.md",
+  "topic": [
+    "多模态推理",
+    "KV Cache 量化"
+  ],
+  "first_author": "Suho Yoo",
+  "first_author_affiliation": "KAIST",
+  "published": "2026-09-10",
+  "code": "https://github.com/kaistmm/OmniKVQuant",
+  "adapter": "omnikvquant",
+  "priority": "P0"
+}

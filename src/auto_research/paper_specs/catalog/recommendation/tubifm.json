@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "tubifm",
+  "detail_path": "reproductions/2605.23702-tubifm/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tubi",
+  "adapter": {
+    "spec_key": "tubifm"
+  }
+}

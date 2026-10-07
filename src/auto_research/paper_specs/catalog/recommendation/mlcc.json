@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mlcc",
+  "detail_path": "reproductions/2602.12041-mlcc/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Bilibili",
+  "adapter": {
+    "spec_key": "mlcc"
+  }
+}

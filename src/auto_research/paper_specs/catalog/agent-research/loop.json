@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "loop",
+  "title": "LOOP",
+  "paper_url": "https://arxiv.org/abs/2502.01600",
+  "detail_path": "agent-research/2502.01600-loop/README.md",
+  "topic": [
+    "长时程 Agent RL"
+  ],
+  "first_author": "Kevin Chen",
+  "first_author_affiliation": "Apple",
+  "published": "2025-02-03",
+  "code": "https://github.com/apple/ml-loop",
+  "adapter": "loop"
+}

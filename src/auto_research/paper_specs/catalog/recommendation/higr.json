@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "higr",
+  "detail_path": "reproductions/2512.24787-higr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Tencent",
+  "adapter": {
+    "spec_key": "higr"
+  }
+}

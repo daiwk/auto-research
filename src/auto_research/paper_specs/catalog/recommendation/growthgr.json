@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "growthgr",
+  "detail_path": "reproductions/2605.17994-growthgr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba Group / Taobao & Tmall",
+  "adapter": {
+    "spec_key": "growthgr"
+  }
+}

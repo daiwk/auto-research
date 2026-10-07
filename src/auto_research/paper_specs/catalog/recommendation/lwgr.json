@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "lwgr",
+  "detail_path": "reproductions/2605.18771-lwgr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba International / CAS",
+  "adapter": {
+    "spec_key": "lwgr"
+  }
+}

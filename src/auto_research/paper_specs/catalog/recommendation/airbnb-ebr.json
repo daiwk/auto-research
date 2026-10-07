@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "airbnb-ebr",
+  "detail_path": "reproductions/2601.06873-airbnb-ebr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Airbnb",
+  "adapter": {
+    "spec_key": "airbnb-ebr"
+  }
+}

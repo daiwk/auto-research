@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "medusa",
+  "detail_path": "reproductions/2401.10774-medusa/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Together AI / Princeton University / University of Illinois Urbana-Champaign",
+  "adapter": {
+    "spec_key": "medusa"
+  }
+}

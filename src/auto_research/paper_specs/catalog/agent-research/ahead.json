@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "ahead",
+  "title": "AHEAD: Agentic Hints for Effective Agent Development",
+  "paper_url": "https://arxiv.org/abs/2608.24114",
+  "detail_path": "agent-research/2608.24114-ahead/README.md",
+  "topic": [
+    "环境反馈提示训练"
+  ],
+  "first_author": "Xiaolong Jin",
+  "first_author_affiliation": "AWS AI Labs / Purdue University",
+  "published": "2026-08-25",
+  "code": null,
+  "adapter": "ahead"
+}

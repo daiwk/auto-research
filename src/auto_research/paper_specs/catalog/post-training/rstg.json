@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "rstg",
+  "title": "Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance",
+  "paper_url": "https://arxiv.org/abs/2608.00782",
+  "detail_path": "post-training/2608.00782-rstg/README.md",
+  "topic": [
+    "OPD",
+    "RLVR"
+  ],
+  "first_author": "Zhuowen Han",
+  "first_author_affiliation": "Tianjin University",
+  "published": "2026-08-01",
+  "code": null,
+  "adapter": "rstg"
+}

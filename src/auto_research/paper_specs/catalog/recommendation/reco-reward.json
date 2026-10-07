@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "reco-reward",
+  "detail_path": "reproductions/2607.25901-reco-reward/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Kuaishou / Nankai University / Chinese Academy of Sciences",
+  "adapter": {
+    "spec_key": "reco-reward"
+  }
+}

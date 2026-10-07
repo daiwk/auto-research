@@ -1,3 +1,3 @@
-from ..latest_20260729_common import reproduce_swag_bid
+from auto_research.reproductions.mechanisms.reproduce_reco_reward import reproduce_swag_bid
 
 __all__ = ["reproduce_swag_bid"]

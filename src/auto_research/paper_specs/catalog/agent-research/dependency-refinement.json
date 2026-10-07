@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "dependency-refinement",
+  "title": "Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning",
+  "paper_url": "https://arxiv.org/abs/2609.18417",
+  "detail_path": "agent-research/2609.18417-dependency-refinement/README.md",
+  "topic": [
+    "轨迹精炼",
+    "Agent 微调"
+  ],
+  "first_author": "Zhuo Chen",
+  "first_author_affiliation": "ShanghaiTech University",
+  "published": "2026-09-16",
+  "code": "https://github.com/Alibaba-NLP/VLLM-KB",
+  "adapter": "dependency-refinement",
+  "priority": "P1"
+}

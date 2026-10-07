@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "primal-dual-decoding",
+  "detail_path": "reproductions/2607.19357-primal-dual-decoding/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Spotify",
+  "adapter": {
+    "spec_key": "primal-dual-decoding"
+  }
+}

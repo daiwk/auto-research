@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "degre",
   "arxiv_id": "2605.25749",
   "title": "DeGRe: Listwise Generative Reranking with Offline Lookahead Distillation",
@@ -32,5 +32,55 @@
   "mechanisms": [
     "private transaction labels and production Transformer scale"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.degre.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba Group / Zhejiang University",
+      "published": "2026-05-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Flash Shopping",
+          "metric": "CTR",
+          "lift_percent": 2.85,
+          "traffic": "8 days, 2% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Flash Shopping",
+          "metric": "GMV",
+          "lift_percent": 3.75,
+          "traffic": "8 days, 2% traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private transaction labels and production Transformer scale"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

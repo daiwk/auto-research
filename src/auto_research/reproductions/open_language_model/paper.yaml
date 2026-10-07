@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "open-language-model",
   "arxiv_id": "2607.16669",
   "title": "OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research",
@@ -57,5 +57,33 @@
     "complete upstream 27-preset package",
     "348M four-GPU weak-scaling experiment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.open_language_model.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/openlanguagemodel/openlanguagemodel",
+      "organization": "Indian Institute of Technology Madras",
+      "published": "2026-07-18",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "complete upstream 27-preset package",
+      "348M four-GPU weak-scaling experiment"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=30",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

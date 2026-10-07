@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "filterllm",
   "arxiv_id": "2502.16924",
   "title": "FilterLLM: Text-To-Distribution LLM for Billion-Scale Cold-Start Recommendation",
@@ -43,5 +43,56 @@
     "billion-user vocabulary",
     "proprietary LLM and cold-start traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.filterllm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba",
+      "published": "2025-02-24",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Alibaba cold-start",
+          "metric": "Cold-PV",
+          "lift_percent": 5.13,
+          "traffic": "two-month A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Alibaba cold-start",
+          "metric": "GMV",
+          "lift_percent": 10.86,
+          "traffic": "two-month A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "billion-user vocabulary",
+      "proprietary LLM and cold-start traffic"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

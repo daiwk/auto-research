@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "locus",
+  "title": "LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation",
+  "paper_url": "https://arxiv.org/abs/2609.11739",
+  "detail_path": "post-training/2609.11739-locus/README.md",
+  "topic": [
+    "低秩后训练",
+    "Token 效率"
+  ],
+  "first_author": "Dongfang Zhao",
+  "first_author_affiliation": "University of Washington",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "locus",
+  "priority": "P1"
+}

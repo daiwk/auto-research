@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "windowed-mtp",
+  "detail_path": "reproductions/2607.21535-windowed-mtp/README.md",
+  "first_author": null,
+  "first_author_affiliation": "NVIDIA",
+  "adapter": {
+    "spec_key": "windowed-mtp"
+  }
+}

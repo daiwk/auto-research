@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "twinkv",
+  "detail_path": "reproductions/2608.27128-twinkv/README.md",
+  "first_author": null,
+  "first_author_affiliation": "The Hong Kong University of Science and Technology (Guangzhou)",
+  "adapter": {
+    "spec_key": "twinkv"
+  }
+}

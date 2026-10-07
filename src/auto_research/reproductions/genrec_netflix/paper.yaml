@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "genrec-netflix",
   "arxiv_id": "2608.10257",
   "title": "GenRec: An LLM-Backed Recommendation Ranker at Netflix",
@@ -35,5 +35,57 @@
     "private long-term satisfaction reward models",
     "production vLLM serving and batch-compute traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.genrec_netflix.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Netflix",
+      "published": "2026-08-10",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Netflix batch-compute recommendation surfaces",
+          "metric": "short-term homepage engagement",
+          "lift_percent": 0.115,
+          "traffic": "approximately 10% traffic",
+          "source_url": "https://arxiv.org/html/2608.10257v1#S5.SS1",
+          "source_location": "Section 5.1 / Figure 3",
+          "experiment_duration": "4 weeks",
+          "significance": "P = 3.1e-10",
+          "retrieved_at": "2026-08-13"
+        },
+        {
+          "product": "Netflix batch-compute recommendation surfaces",
+          "metric": "long-term core metric",
+          "lift_percent": 0.006,
+          "traffic": "approximately 10% traffic",
+          "source_url": "https://arxiv.org/html/2608.10257v1#S5.SS1",
+          "source_location": "Section 5.1 / Figure 3",
+          "experiment_duration": "4 weeks",
+          "significance": "P = 0.025",
+          "retrieved_at": "2026-08-13"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Netflix proprietary Phase-1 foundation model and hundreds of billions of events",
+      "private long-term satisfaction reward models",
+      "production vLLM serving and batch-compute traffic"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=120",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

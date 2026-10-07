@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "sis",
   "arxiv_id": "2607.04728",
   "title": "Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment",
@@ -27,5 +27,32 @@
   "mechanisms": [
     "Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.sis.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Paper author team",
+      "published": "2026-07-06",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      41,
+      42,
+      43
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

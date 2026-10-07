@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "lwgr",
   "arxiv_id": "2605.18771",
   "title": "LWGR: Lagrangian-Constrained Personalized World Knowledge for Generative Recommendation",
@@ -43,5 +43,59 @@
     "2.95B-interaction industrial data and 20.1M-item inventory",
     "nearline vector repository and production online request forwarding"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.lwgr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International / CAS",
+      "published": "2026-05",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Southeast Asia Ads",
+          "metric": "Revenue",
+          "lift_percent": 1.35,
+          "traffic": "15% users, 2025-12-19 to 2025-12-30",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Southeast Asia Ads",
+          "metric": "CTR",
+          "lift_percent": 1.17,
+          "traffic": "p<0.05",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-4B/8B scale and full Amazon Beauty/Toys preprocessing",
+      "2.95B-interaction industrial data and 20.1M-item inventory",
+      "nearline vector repository and production online request forwarding"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=180",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

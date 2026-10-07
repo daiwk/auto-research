@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "hyperagents",
+  "title": "HyperAgents",
+  "paper_url": "https://arxiv.org/abs/2603.19461",
+  "detail_path": "agent-research/2603.19461-hyperagents/README.md",
+  "topic": [
+    "RSI",
+    "开放式进化",
+    "元认知自修改"
+  ],
+  "first_author": "Jenny Zhang",
+  "first_author_affiliation": "University of British Columbia",
+  "published": "2026-03-19",
+  "code": "https://github.com/facebookresearch/hyperagents",
+  "adapter": "hyperagents",
+  "priority": "P0"
+}

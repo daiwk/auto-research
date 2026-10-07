@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "simpo",
+  "title": "SimPO",
+  "paper_url": "https://arxiv.org/abs/2405.14734",
+  "detail_path": "post-training/2405.14734-simpo/README.md",
+  "topic": [
+    "Reference-free 偏好"
+  ],
+  "first_author": "Yu Meng",
+  "first_author_affiliation": "Princeton University",
+  "published": "2024-05-23",
+  "code": "https://github.com/princeton-nlp/SimPO",
+  "adapter": "simpo"
+}

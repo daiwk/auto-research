@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "mbgr",
+  "detail_path": "reproductions/2604.02684-mbgr/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Meituan",
+  "adapter": {
+    "spec_key": "mbgr"
+  }
+}

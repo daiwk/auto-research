@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gris",
+  "detail_path": "reproductions/2610.01533-gris/README.md",
+  "first_author": "Aleksei Medvedev",
+  "first_author_affiliation": "Huawei Ireland Research Centre",
+  "adapter": {
+    "spec_key": "gris"
+  }
+}

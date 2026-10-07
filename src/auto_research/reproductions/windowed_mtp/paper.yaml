@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "windowed-mtp",
   "arxiv_id": "2607.21535",
   "title": "Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context",
@@ -31,5 +31,34 @@
     "one-million-token contexts on B200/H100",
     "SGLang paged-KV ring-buffer kernel and continuous batching"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.windowed_mtp.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/avalliappan-nvidia/windowed-mtp-b200",
+      "organization": "NVIDIA",
+      "published": "2026-07-23",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3.6-35B/122B and Nemotron-3-120B checkpoints",
+      "one-million-token contexts on B200/H100",
+      "SGLang paged-KV ring-buffer kernel and continuous batching"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=240",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

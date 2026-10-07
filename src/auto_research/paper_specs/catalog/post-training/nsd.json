@@ -1,0 +1,17 @@
+{
+  "domain": "post-training",
+  "key": "nsd",
+  "title": "Negative Self-Distillation: Learning to Reason by Avoiding Flaws",
+  "paper_url": "https://arxiv.org/abs/2609.11699",
+  "detail_path": "post-training/2609.11699-nsd/README.md",
+  "topic": [
+    "负向自蒸馏",
+    "推理后训练"
+  ],
+  "first_author": "Rongcan Pei",
+  "first_author_affiliation": "University of Virginia",
+  "published": "2026-09-10",
+  "code": "https://github.com/Prongcan/NSD",
+  "adapter": "nsd",
+  "priority": "P0"
+}

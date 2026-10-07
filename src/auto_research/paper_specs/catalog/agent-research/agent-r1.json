@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "agent-r1",
+  "title": "Agent-R1",
+  "paper_url": "https://arxiv.org/abs/2511.14460",
+  "detail_path": "agent-research/2511.14460-agent-r1/README.md",
+  "topic": [
+    "Agentic RL 基础设施"
+  ],
+  "first_author": "Mingyue Cheng",
+  "first_author_affiliation": "University of Science and Technology of China",
+  "published": "2025-11-18",
+  "code": "https://github.com/AgentR1/Agent-R1",
+  "adapter": "agent-r1"
+}

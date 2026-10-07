@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "missing-old-logits",
+  "title": "Missing Old Logits",
+  "paper_url": "https://arxiv.org/abs/2605.12070",
+  "detail_path": "post-training/2605.12070-missing-old-logits/README.md",
+  "topic": [
+    "异步 off-policy"
+  ],
+  "first_author": "Zhong Guan",
+  "first_author_affiliation": "Tianjin University",
+  "published": "2026-05-12",
+  "code": "未发现官方代码",
+  "adapter": "missing-old-logits"
+}

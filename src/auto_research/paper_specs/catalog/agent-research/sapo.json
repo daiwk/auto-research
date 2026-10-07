@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "sapo",
+  "title": "SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2608.19842",
+  "detail_path": "agent-research/2608.19842-sapo/README.md",
+  "topic": [
+    "Agentic RL",
+    "credit assignment"
+  ],
+  "first_author": "Dayang Liang",
+  "first_author_affiliation": "Xiamen University",
+  "published": "2026-08-20",
+  "code": null,
+  "adapter": "sapo"
+}

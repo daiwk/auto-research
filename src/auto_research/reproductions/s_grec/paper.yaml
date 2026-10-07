@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "s-grec",
   "arxiv_id": "2602.10606",
   "title": "S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage",
@@ -39,5 +39,57 @@
     "20k human-verified point-wise and 40k pairwise proprietary ad annotations",
     "WeChat eCPM reward model, ad inventory and online sample server"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.s_grec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tencent / WeChat Channels",
+      "published": "2026-02",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "WeChat Channels",
+          "metric": "GMV",
+          "lift_percent": 1.19,
+          "traffic": "20% advertising traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "WeChat Channels",
+          "metric": "CTR",
+          "lift_percent": 1.16,
+          "traffic": "20% advertising traffic",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3-4B judge, Qwen2.5-1.5B MiniOneRec backbone and production-scale training",
+      "20k human-verified point-wise and 40k pairwise proprietary ad annotations",
+      "WeChat eCPM reward model, ad inventory and online sample server"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

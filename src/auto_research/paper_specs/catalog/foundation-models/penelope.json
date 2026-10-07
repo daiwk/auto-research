@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "penelope",
+  "detail_path": "reproductions/2607.25915-penelope/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Academic author team",
+  "adapter": {
+    "spec_key": "penelope"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "remax",
+  "title": "ReMax",
+  "paper_url": "https://arxiv.org/abs/2310.10505",
+  "detail_path": "post-training/2310.10505-remax/README.md",
+  "topic": [
+    "经典 RLHF"
+  ],
+  "first_author": "Ziniu Li",
+  "first_author_affiliation": "香港中文大学（深圳）/ 深圳市大数据研究院",
+  "published": "2023-10-16",
+  "code": "https://github.com/liziniu/ReMax",
+  "adapter": "remax"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "tokenminds",
+  "detail_path": "reproductions/2606.25147-tokenminds/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google DeepMind / YouTube",
+  "adapter": {
+    "spec_key": "tokenminds"
+  }
+}

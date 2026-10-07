@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from auto_research.paper_specs.runtime import adapter_from_spec
+
 from dataclasses import dataclass
 
 from .base import EvaluationTier, OnlineABEvidence, PaperMetadata, ReproductionAdapter, ReproductionFidelity
@@ -49,20 +51,4 @@ ENTRIES = {row.key: row for row in (
 def build_adapter(key: str, run, render) -> ReproductionAdapter:
     row = ENTRIES[key]
     source = f"https://arxiv.org/html/{row.arxiv_id}v1"
-    return ReproductionAdapter(
-        key=key,
-        paper=PaperMetadata(
-            arxiv_id=row.arxiv_id, title=row.title, url=f"https://arxiv.org/abs/{row.arxiv_id}",
-            track="recommendation", code_url=row.code_url, organization=row.organization,
-            published=row.published, topics=row.topics,
-            online_ab=(OnlineABEvidence(row.product, row.metric, row.lift, row.traffic,
-                source_url=source, source_location=row.source_location,
-                retrieved_at="2026-08-24"),),
-        ),
-        run=run, render=render, fidelity=ReproductionFidelity.CORE_MECHANISM,
-        omitted_core_components=("private production data and features", "production serving stack"),
-        evaluation_tier=EvaluationTier.PUBLIC_DATASET,
-        datasets=("MovieLens-100K",), baseline="shared transition + content scorer",
-        metrics=("Hit@10", "NDCG@10", "Fresh Hit@10", "Head share@10"),
-        device_capabilities=("cpu",), infer_device_capabilities=False,
-    )
+    return adapter_from_spec(key=key, run=run, render=render)

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "skillrise",
+  "title": "SkillRise",
+  "paper_url": "https://arxiv.org/abs/2607.26784",
+  "detail_path": "agent-research/2607.26784-skillrise/README.md",
+  "topic": [
+    "跨任务技能进化"
+  ],
+  "first_author": "Zhiyuan Yao",
+  "first_author_affiliation": "Zhejiang University",
+  "published": "2026-07-29",
+  "code": "https://github.com/Within-yao/SkillRise",
+  "adapter": "skillrise"
+}

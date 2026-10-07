@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "recevolve",
   "arxiv_id": "2609.01622",
   "title": "RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems",
@@ -35,5 +35,46 @@
   ],
   "evolve_operators": [
     "controller:recevolve-knowledge-vcs-loop"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.recevolve.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google",
+      "published": "2026-07-20",
+      "publication_label": "RecSys 2026",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Google production Two-Tower retrieval",
+          "metric": "user satisfaction",
+          "lift_percent": 3.77,
+          "traffic": "live production A/B champion versus production baseline",
+          "source_url": "https://arxiv.org/pdf/2609.01622v1",
+          "source_location": "Section 5.7, Table 2",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-06"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Google private Two-Tower and logs",
+      "distributed TPU execution",
+      "production coding-agent toolchain"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

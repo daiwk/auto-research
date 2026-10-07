@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "gear",
+  "detail_path": "reproductions/2609.39327-gear/README.md",
+  "first_author": "Shaowen Zeng",
+  "first_author_affiliation": "ByteDance",
+  "adapter": {
+    "spec_key": "gear"
+  }
+}

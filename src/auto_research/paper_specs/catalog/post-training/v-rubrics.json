@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "v-rubrics",
+  "title": "V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2608.25580",
+  "detail_path": "post-training/2608.25580-v-rubrics/README.md",
+  "topic": [
+    "多模态 rubric RL"
+  ],
+  "first_author": "Shulin Tian",
+  "first_author_affiliation": "S-Lab, Nanyang Technological University",
+  "published": "2026-08-26",
+  "code": "https://shulin16.github.io/v-rubrics/",
+  "adapter": "v-rubrics"
+}

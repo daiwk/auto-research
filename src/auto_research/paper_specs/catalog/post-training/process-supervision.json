@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "process-supervision",
+  "title": "Let's Verify Step by Step",
+  "paper_url": "https://arxiv.org/abs/2305.20050",
+  "detail_path": "post-training/2305.20050-process-supervision/README.md",
+  "topic": [
+    "过程监督"
+  ],
+  "first_author": "Hunter Lightman",
+  "first_author_affiliation": "OpenAI",
+  "published": "2023-05-31",
+  "code": "https://github.com/openai/prm800k",
+  "adapter": "process-supervision"
+}

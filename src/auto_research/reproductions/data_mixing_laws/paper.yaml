@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "data-mixing-laws",
   "arxiv_id": "2403.16952",
   "title": "Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance",
@@ -30,5 +30,33 @@
     "RedPajama multi-scale training",
     "large-model extrapolation"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.data_mixing_laws.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/yegcjs/mixinglaws",
+      "organization": "University of Cambridge / Shanghai AI Laboratory",
+      "published": "2024-03-25",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "RedPajama multi-scale training",
+      "large-model extrapolation"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

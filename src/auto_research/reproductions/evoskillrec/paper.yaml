@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "evoskillrec",
   "arxiv_id": "2609.34552",
   "title": "EvoSkillRec: Skill-Genome Evolution for Recommender Architecture Discovery",
@@ -32,5 +32,33 @@
   ],
   "evolve_operators": [
     "rankmixer_evoskill"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.evoskillrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Xiaopengli1/EvoSkill-Rec",
+      "organization": "City University of Hong Kong",
+      "published": "2026-09-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确批准本轮 P1 学术推荐研究条目；该条目不作为工业线上 A/B 证据样本。"
+    },
+    "omitted_core_components": [
+      "LLM-driven skill invention",
+      "paper-scale recommender architecture search"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "one typed-genome promotion cycle per seed",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

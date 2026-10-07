@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "cam-df",
+  "title": "CAM-DF",
+  "paper_url": "https://arxiv.org/abs/2607.27083",
+  "detail_path": "agent-research/2607.27083-cam-df/README.md",
+  "topic": [
+    "成本感知工具停止"
+  ],
+  "first_author": "Yicheng Feng",
+  "first_author_affiliation": "Peking University",
+  "published": "2026-07-29",
+  "code": "未发现官方代码",
+  "adapter": "cam-df"
+}

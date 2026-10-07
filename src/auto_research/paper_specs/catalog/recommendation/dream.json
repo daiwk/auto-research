@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "dream",
+  "detail_path": "reproductions/2608.09408-dream/README.md",
+  "first_author": "DREAM author team (alphabetical order)",
+  "first_author_affiliation": "Taobao & Tmall Group / Alibaba",
+  "adapter": {
+    "spec_key": "dream"
+  }
+}

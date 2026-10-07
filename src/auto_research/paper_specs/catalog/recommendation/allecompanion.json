@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "allecompanion",
+  "detail_path": "reproductions/2609.05063-allecompanion/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Allegro.com",
+  "adapter": {
+    "spec_key": "allecompanion"
+  }
+}

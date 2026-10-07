@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "repeat-aware-moe",
+  "title": "Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data",
+  "paper_url": "https://arxiv.org/abs/2609.11917",
+  "detail_path": "foundation-models/2609.11917-repeat-aware-moe/README.md",
+  "topic": [
+    "MoE",
+    "数据重复与正则化"
+  ],
+  "first_author": "Atindra Jha",
+  "first_author_affiliation": "Stanford University",
+  "published": "2026-09-10",
+  "code": null,
+  "adapter": "repeat-aware-moe",
+  "priority": "P1"
+}

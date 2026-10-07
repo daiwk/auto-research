@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models",
+  "key": "register-tokens-dllm",
+  "title": "Register Tokens for Bounded-State Reasoning in Diffusion Language Models",
+  "paper_url": "https://arxiv.org/abs/2609.16372",
+  "detail_path": "foundation-models/2609.16372-register-tokens-dllm/README.md",
+  "topic": [
+    "扩散语言模型",
+    "长程推理"
+  ],
+  "first_author": "Albert Ge",
+  "first_author_affiliation": "University of Wisconsin–Madison",
+  "published": "2026-09-14",
+  "code": null,
+  "adapter": "register-tokens-dllm",
+  "priority": "P1"
+}

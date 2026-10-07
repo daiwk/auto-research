@@ -1,0 +1,10 @@
+{
+  "domain": "foundation-models",
+  "key": "wide",
+  "detail_path": "reproductions/2607.28418-wide/README.md",
+  "first_author": null,
+  "first_author_affiliation": "EIT-NLP / LMU Munich",
+  "adapter": {
+    "spec_key": "wide"
+  }
+}

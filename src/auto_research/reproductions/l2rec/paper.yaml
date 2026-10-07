@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "l2rec",
   "arxiv_id": "2605.26717",
   "title": "L2Rec: Towards Dual-View Understanding of LLMs for Personalized Recommendation",
@@ -31,5 +31,43 @@
     "private production data and features",
     "production serving stack"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.l2rec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "NetEase Cloud Music",
+      "published": "2026-05-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "homepage feed",
+          "metric": "CTR",
+          "lift_percent": 9.24,
+          "traffic": "6% user traffic, one month; p<0.01",
+          "source_url": "https://arxiv.org/html/2605.26717v1",
+          "source_location": "paper online evaluation section",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-08-24"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private production data and features",
+      "production serving stack"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

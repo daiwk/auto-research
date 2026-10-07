@@ -1,19 +1,10 @@
+
+from auto_research.paper_specs.runtime import adapter_from_spec
 from ..base import PaperMetadata, ReproductionAdapter, ReproductionFidelity
 from ..registry import register
 from .experiment import reproduce_mixformer
 from .report import render
 
 ADAPTER = register(
-    ReproductionAdapter(
-        key="mixformer",
-        paper=PaperMetadata(
-            arxiv_id="2602.14110",
-            title="MixFormer: Co-Scaling Up Dense and Sequence in Industrial Recommenders",
-            url="https://arxiv.org/abs/2602.14110",
-            track="recommendation",
-        ),
-        run=reproduce_mixformer,
-        render=render,
-        fidelity=ReproductionFidelity.FULL_PIPELINE,
-    )
+    adapter_from_spec(key="mixformer", run=reproduce_mixformer, render=render)
 )

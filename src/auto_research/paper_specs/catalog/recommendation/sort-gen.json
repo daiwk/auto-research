@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sort-gen",
+  "detail_path": "reproductions/2505.07197-sort-gen/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Alibaba / Taobao & Tmall",
+  "adapter": {
+    "spec_key": "sort-gen"
+  }
+}

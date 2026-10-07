@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "pal",
+  "title": "PAL",
+  "paper_url": "https://arxiv.org/abs/2211.10435",
+  "detail_path": "agent-research/2211.10435-pal/README.md",
+  "topic": [
+    "程序推理"
+  ],
+  "first_author": "Luyu Gao",
+  "first_author_affiliation": "Carnegie Mellon University",
+  "published": "2022-11-18",
+  "code": "https://github.com/reasoning-machines/pal",
+  "adapter": "pal"
+}

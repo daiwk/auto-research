@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "prompt-generation",
   "arxiv_id": "2607.11326",
   "title": "Prompt Generation Technical Report",
@@ -35,5 +35,79 @@
     "C++ batched assembly and Alibaba serving infrastructure",
     "online event tracking/replay and live A/B traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.prompt_generation.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba / Taobao Search",
+      "published": "2026-07",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Search",
+          "metric": "transaction count",
+          "lift_percent": 0.47,
+          "traffic": "1% traffic for 14 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Search",
+          "metric": "GMV",
+          "lift_percent": 0.51,
+          "traffic": "1% traffic for 14 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Recommendation Newdetail",
+          "metric": "IPV",
+          "lift_percent": 0.66,
+          "traffic": "2% traffic for 12 days",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Shop Search",
+          "metric": "transaction count",
+          "lift_percent": 4.01,
+          "traffic": "10% traffic for over two weeks",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "full 36,586-row SFT schedule and production-scale evaluation",
+      "C++ batched assembly and Alibaba serving infrastructure",
+      "online event tracking/replay and live A/B traffic"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "steps=20",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

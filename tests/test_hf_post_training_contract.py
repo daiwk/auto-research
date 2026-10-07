@@ -20,14 +20,22 @@ def test_real_checkpoint_config_pins_model_dataset_and_three_seeds():
     assert config.save_every > 0
 
 
-def test_normalized_dpo_beta_is_exposed_and_forwarded_by_cli():
+def test_normalized_dpo_beta_is_exposed_and_forwarded_by_cli(monkeypatch, tmp_path):
     args = build_parser().parse_args([
         "checkpoint-post-train", "--objective", "normalized-dpo",
         "--dataset", "ultrafeedback", "--beta", "0.25",
     ])
     assert args.beta == 0.25
-    source = Path("src/auto_research/cli.py").read_text(encoding="utf-8")
-    assert "beta=args.beta" in source
+    received = []
+    class Runner:
+        def __init__(self, config): received.append(config)
+        def run(self): return {"metrics": {}}, tmp_path
+    monkeypatch.setattr("auto_research.post_training.hf_runner.HFPostTrainingRunner", Runner)
+    from auto_research.cli import main
+    assert main(["checkpoint-post-train", "--objective", "normalized-dpo",
+                 "--dataset", "ultrafeedback", "--beta", "0.25"]) == 0
+    assert received[0].beta == 0.25
+    assert received[0].objective == "normalized-dpo"
 
 
 def test_gsm8k_checkpoint_protocol_pins_source_and_file_hashes():

@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research",
+  "key": "remem",
+  "title": "ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents",
+  "paper_url": "https://arxiv.org/abs/2609.37311",
+  "detail_path": "agent-research/2609.37311-remem/README.md",
+  "topic": [
+    "长期记忆",
+    "推荐 Agent",
+    "多模态感知"
+  ],
+  "first_author": "Haohao Qu",
+  "first_author_affiliation": "The Hong Kong Polytechnic University",
+  "published": "2026-09-29",
+  "code": "https://github.com/Quhaoh233/ReMem",
+  "adapter": "remem",
+  "priority": "P1"
+}

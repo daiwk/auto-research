@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "skillforge",
+  "title": "SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents",
+  "paper_url": "https://arxiv.org/abs/2608.24747",
+  "detail_path": "agent-research/2608.24747-skillforge/README.md",
+  "topic": [
+    "可验证技能锻造"
+  ],
+  "first_author": "Shidong Yang",
+  "first_author_affiliation": "AMAP, Alibaba Group",
+  "published": "2026-08-25",
+  "code": null,
+  "adapter": "skillforge"
+}

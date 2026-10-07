@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "autolr",
   "arxiv_id": "2609.04871",
   "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
@@ -36,5 +36,47 @@
   ],
   "evolve_operators": [
     "controller:autolr-evidence-council"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.autolr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "NetEase, Inc.",
+      "published": "2026-09-04",
+      "publication_label": "NetEase technical report",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "NetEase DASHEN feed and immersive-video feed",
+          "metric": "content-consumption time",
+          "lift_percent": 10.83,
+          "traffic": "nine Launch Review records with online A/B and production decisions",
+          "source_url": "https://arxiv.org/html/2609.04871",
+          "source_location": "Section 5.2, Table 1",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-07"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "live LLM research and repository code generation",
+      "multi-expert LLM debate",
+      "private DASHEN repository",
+      "online admission and Launch Review authority"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; 80 CPU updates; validation-only candidate selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

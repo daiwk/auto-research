@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "hyperagent",
+  "title": "HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2608.02650",
+  "detail_path": "agent-research/2608.02650-hyperagent/README.md",
+  "topic": [
+    "工具规划",
+    "超图"
+  ],
+  "first_author": "Zian Zhai",
+  "first_author_affiliation": "University of New South Wales",
+  "published": "2026-07-31",
+  "code": null,
+  "adapter": "hyperagent"
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "progrouter",
+  "title": "ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs",
+  "paper_url": "https://arxiv.org/abs/2608.25992",
+  "detail_path": "agent-research/2608.25992-progrouter/README.md",
+  "topic": [
+    "在线进展成本路由"
+  ],
+  "first_author": "Songyuan Li",
+  "first_author_affiliation": "Aston University",
+  "published": "2026-08-26",
+  "code": null,
+  "adapter": "progrouter"
+}

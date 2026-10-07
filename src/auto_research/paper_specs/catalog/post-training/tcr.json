@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "tcr",
+  "title": "TCR",
+  "paper_url": "https://arxiv.org/abs/2607.19824",
+  "detail_path": "post-training/2607.19824-tcr/README.md",
+  "topic": [
+    "过程奖励"
+  ],
+  "first_author": "Xubo Liu",
+  "first_author_affiliation": "论文未列机构",
+  "published": "2026-07-22",
+  "code": "未发现官方代码",
+  "adapter": "tcr"
+}

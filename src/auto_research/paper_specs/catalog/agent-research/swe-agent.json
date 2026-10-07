@@ -1,0 +1,15 @@
+{
+  "domain": "agent-research",
+  "key": "swe-agent",
+  "title": "SWE-agent",
+  "paper_url": "https://arxiv.org/abs/2405.15793",
+  "detail_path": "agent-research/2405.15793-swe-agent/README.md",
+  "topic": [
+    "软件工程 ACI"
+  ],
+  "first_author": "John Yang",
+  "first_author_affiliation": "Princeton University",
+  "published": "2024-05-06",
+  "code": "https://github.com/SWE-agent/SWE-agent",
+  "adapter": "swe-agent"
+}

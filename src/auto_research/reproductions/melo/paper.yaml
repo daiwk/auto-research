@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "melo",
   "arxiv_id": "2607.23718",
   "title": "Melo: A Production LLM-Powered Music Recommendation Agent",
@@ -43,5 +43,45 @@
     "production music search index",
     "Muse Mix product surface and private traffic"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.melo.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "NetEase Cloud Music / Zhejiang University of Technology",
+      "published": "2026-07-26",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "NetEase Cloud Music playlist surfaces",
+          "metric": "playlist retention lower bound (pp)",
+          "lift_percent": 2.0,
+          "traffic": "one-month randomized system-level A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "production music search index",
+      "Muse Mix product surface and private traffic"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "adapter-defined fixed budget",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

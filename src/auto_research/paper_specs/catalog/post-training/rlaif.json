@@ -1,0 +1,15 @@
+{
+  "domain": "post-training",
+  "key": "rlaif",
+  "title": "RLAIF",
+  "paper_url": "https://arxiv.org/abs/2309.00267",
+  "detail_path": "post-training/2309.00267-rlaif/README.md",
+  "topic": [
+    "AI 反馈"
+  ],
+  "first_author": "Harrison Lee",
+  "first_author_affiliation": "Google Research",
+  "published": "2023-09-01",
+  "code": "未发现官方代码",
+  "adapter": "rlaif"
+}

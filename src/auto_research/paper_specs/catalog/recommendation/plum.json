@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "plum",
+  "detail_path": "reproductions/2510.07784-plum/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "plum"
+  }
+}

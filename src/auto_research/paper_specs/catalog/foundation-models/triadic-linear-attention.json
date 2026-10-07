@@ -1,0 +1,18 @@
+{
+  "domain": "foundation-models",
+  "key": "triadic-linear-attention",
+  "title": "Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling",
+  "paper_url": "https://arxiv.org/abs/2609.36529",
+  "detail_path": "foundation-models/2609.36529-triadic-linear-attention/README.md",
+  "topic": [
+    "网络架构",
+    "线性注意力",
+    "长上下文"
+  ],
+  "first_author": "Oliver Sieberling",
+  "first_author_affiliation": "MIT / MIT-IBM Watson AI Lab",
+  "published": "2026-09-29",
+  "code": "https://github.com/OliverSieberling/TriadicLinearAttention",
+  "adapter": "triadic-linear-attention",
+  "priority": "P1"
+}

@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "glorank",
+  "detail_path": "reproductions/2604.25291-glorank/README.md",
+  "first_author": null,
+  "first_author_affiliation": "City University of Hong Kong / Kuaishou / UC San Diego",
+  "adapter": {
+    "spec_key": "glorank"
+  }
+}

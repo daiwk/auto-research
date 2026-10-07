@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "sona",
+  "detail_path": "reproductions/2608.11015-sona/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Yandex",
+  "adapter": {
+    "spec_key": "sona"
+  }
+}

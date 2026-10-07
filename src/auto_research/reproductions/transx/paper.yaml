@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "transx",
   "arxiv_id": "2607.28940",
   "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
@@ -34,5 +34,48 @@
   ],
   "evolve_operators": [
     "context:transx-cross-stream"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.transx.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "LinkedIn",
+      "published": "2026-07-31",
+      "publication_label": "TheWebConf 2027 / arXiv 2607.28940",
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "LinkedIn recommender systems",
+          "metric": "CTR",
+          "lift_percent": 6.0,
+          "traffic": "large-scale online A/B test",
+          "source_url": "https://arxiv.org/html/2607.28940v1",
+          "source_location": "Abstract and Section 6",
+          "experiment_duration": null,
+          "significance": "statistically significant for users with eligible history",
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "LinkedIn nearline Kafka pipeline",
+      "distributed KV cache",
+      "production candidate tower"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; global token plus 8 cached local tokens",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

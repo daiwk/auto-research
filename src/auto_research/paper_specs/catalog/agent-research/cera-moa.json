@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research",
+  "key": "cera-moa",
+  "title": "CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents",
+  "paper_url": "https://arxiv.org/abs/2609.18779",
+  "detail_path": "agent-research/2609.18779-cera-moa/README.md",
+  "topic": [
+    "多 Agent",
+    "路由与协同进化"
+  ],
+  "first_author": "Jiaxuan Jiang",
+  "first_author_affiliation": "IIIS, Tsinghua University",
+  "published": "2026-09-16",
+  "code": null,
+  "adapter": "cera-moa",
+  "priority": "P1"
+}

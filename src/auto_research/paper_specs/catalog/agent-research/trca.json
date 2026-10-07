@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "trca",
+  "title": "TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2608.16156",
+  "detail_path": "agent-research/2608.16156-trca/README.md",
+  "topic": [
+    "Agentic RL",
+    "过程奖励"
+  ],
+  "first_author": "Huan Zhang",
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "published": "2026-08-17",
+  "code": null,
+  "adapter": "trca"
+}

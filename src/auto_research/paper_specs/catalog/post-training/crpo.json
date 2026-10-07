@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "crpo",
+  "title": "Contrastive Reinforced Policy Optimization via Privileged Self-Distillation",
+  "paper_url": "https://arxiv.org/abs/2607.28026",
+  "detail_path": "post-training/2607.28026-crpo/README.md",
+  "topic": [
+    "OPD",
+    "Agentic RL"
+  ],
+  "first_author": "Xingjian Wu",
+  "first_author_affiliation": "Authors did not disclose affiliation",
+  "published": "2026-07-30",
+  "code": null,
+  "adapter": "crpo"
+}

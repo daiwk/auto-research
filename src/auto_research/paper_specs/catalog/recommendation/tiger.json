@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "tiger",
+  "detail_path": "reproductions/2305.05065-tiger/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "tiger"
+  }
+}

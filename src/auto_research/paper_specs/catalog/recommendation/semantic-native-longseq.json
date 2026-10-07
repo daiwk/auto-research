@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "semantic-native-longseq",
+  "detail_path": "reproductions/2606.07546-semantic-native-longseq/README.md",
+  "first_author": null,
+  "first_author_affiliation": "Google",
+  "adapter": {
+    "spec_key": "semantic-native-longseq"
+  }
+}

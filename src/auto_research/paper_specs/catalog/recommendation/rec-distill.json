@@ -1,0 +1,10 @@
+{
+  "domain": "recommendation",
+  "key": "rec-distill",
+  "detail_path": "reproductions/2605.29755-rec-distill/README.md",
+  "first_author": null,
+  "first_author_affiliation": null,
+  "adapter": {
+    "spec_key": "rec-distill"
+  }
+}

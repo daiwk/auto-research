@@ -1,0 +1,17 @@
+{
+  "key": "rlcpr",
+  "title": "RLCPR: Rethinking Probability-Based Reinforcement Learning From Posterior Concentration",
+  "paper_url": "https://arxiv.org/abs/2610.01458",
+  "domain": "post-training",
+  "detail_path": "post-training/2610.01458-rlcpr/README.md",
+  "topic": [
+    "后验集中与长度约束",
+    "强化学习"
+  ],
+  "first_author": "Shiu-Hong Kao",
+  "first_author_affiliation": "National University of Singapore",
+  "published": "2026-10-01",
+  "priority": "P1",
+  "code": null,
+  "adapter": "rlcpr"
+}

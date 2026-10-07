@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "policy-facet",
   "arxiv_id": "2605.16479",
   "title": "Policy-Grounded Dynamic Facet Suggestions for Job Search",
@@ -34,5 +34,46 @@
   ],
   "evolve_operators": [
     "head:policy-facet"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.policy_facet.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "LinkedIn",
+      "published": "2026-05-15",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "LinkedIn Job Search",
+          "metric": "Facet CTR",
+          "lift_percent": 34.8,
+          "traffic": "production A/B; p<0.0001",
+          "source_url": "https://arxiv.org/html/2605.16479v1",
+          "source_location": "Section 4.2, Table 5",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-02"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "LLM-curated production taxonomy",
+      "fine-tuned SLMs",
+      "LinkedIn serving cache"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; validation-only blend selection",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

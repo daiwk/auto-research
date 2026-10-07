@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "reward-guided-decoding",
   "arxiv_id": "2607.25344",
   "title": "Reward Guided Decoding for Generative Recommendation",
@@ -35,5 +35,48 @@
   ],
   "evolve_operators": [
     "reward:reward-guided"
-  ]
+  ],
+  "adapter_module": "auto_research.reproductions.reward_guided_decoding.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Institute of Information Engineering, Chinese Academy of Sciences",
+      "published": "2026-07-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou live-streaming recommendation",
+          "metric": "watch time",
+          "lift_percent": 0.689,
+          "traffic": "two-week online A/B test",
+          "source_url": "https://arxiv.org/html/2607.25344v1",
+          "source_location": "Section 5.4 online A/B test",
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": "2026-09-01"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Kuaishou SID generator",
+      "shared-decoder reward model",
+      "production beam search"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "220 users / 360 items; beta=0.55",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "key": "saviorrec",
   "arxiv_id": "2508.01375",
   "title": "SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation",
@@ -51,5 +51,69 @@
     "proprietary image/text encoders",
     "Taobao production features"
   ],
-  "evolve_operators": []
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.saviorrec.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba",
+      "published": "2025-08",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Taobao Guess You Like cold-start",
+          "metric": "Clicks",
+          "lift_percent": 13.31,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Guess You Like cold-start",
+          "metric": "Orders",
+          "lift_percent": 13.44,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        },
+        {
+          "product": "Taobao Guess You Like cold-start",
+          "metric": "CTR",
+          "lift_percent": 12.8,
+          "traffic": "production A/B",
+          "source_url": null,
+          "source_location": null,
+          "experiment_duration": null,
+          "significance": null,
+          "retrieved_at": null
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "proprietary image/text encoders",
+      "Taobao production features"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "steps=180",
+    "device_capabilities": [
+      "cpu",
+      "mps",
+      "cuda"
+    ],
+    "infer_device_capabilities": true,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
 }
