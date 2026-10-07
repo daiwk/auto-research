@@ -1,0 +1,210 @@
+{
+  "coverage_complete": false,
+  "source_failures": [
+    {
+      "source": "Google Research publications",
+      "url": "https://research.google/pubs/?sort=-publication__year",
+      "page": 1,
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "source": "Google Research publications",
+      "url": "https://research.google/pubs/?sort=-publication__year&page=2",
+      "page": 2,
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "source": "Google Research publications",
+      "url": "https://research.google/pubs/?sort=-publication__year&page=3",
+      "page": 3,
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "source": "Meta AI publications",
+      "url": "https://ai.meta.com/global_search/?content_types%5B0%5D=publication&page=1",
+      "page": 1,
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "source": "Meta AI publications",
+      "url": "https://ai.meta.com/global_search/?content_types%5B0%5D=publication&page=2",
+      "page": 2,
+      "error": "<urlopen error timed out>"
+    }
+  ],
+  "official_review_queue_count": 0,
+  "source_stats": [
+    {
+      "source": "Google Research publications",
+      "status": "partial",
+      "transport_status": "partial",
+      "pages_scanned": null,
+      "pages_available": null,
+      "official_publications": null,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "Google DeepMind publications",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 9,
+      "pages_available": 9,
+      "official_publications": 265,
+      "pagination_capped": false,
+      "unresolved_title_count": 256
+    },
+    {
+      "source": "Meta AI publications",
+      "status": "partial",
+      "transport_status": "partial",
+      "pages_scanned": null,
+      "pages_available": null,
+      "official_publications": null,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "Google Research GitHub",
+      "status": "ok",
+      "transport_status": "ok",
+      "pages_scanned": null,
+      "pages_available": null,
+      "official_publications": null,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "Meta Research GitHub",
+      "status": "ok",
+      "transport_status": "ok",
+      "pages_scanned": null,
+      "pages_available": null,
+      "official_publications": null,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 posters 1",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 46,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 posters 2",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 44,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 posters 3",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 42,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 1",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 14,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 2",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 13,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 3",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 14,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 4",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 14,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 5",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 14,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 6",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 11,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 7",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 13,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "RecSys 2026 session 8",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 14,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    },
+    {
+      "source": "SIGIR 2026 accepted papers",
+      "status": "partial",
+      "transport_status": "ok",
+      "pages_scanned": 1,
+      "pages_available": null,
+      "official_publications": 667,
+      "pagination_capped": null,
+      "unresolved_title_count": 0
+    }
+  ],
+  "reviewed_at": "2026-10-07",
+  "note": "Automated official-source reconciliation; targeted manual full-text discoveries are recorded separately in recent-paper-scan-20261007.md. Zero automated queue entries does not mean zero qualifying papers."
+}

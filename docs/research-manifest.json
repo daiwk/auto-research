@@ -790,6 +790,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "frugalevo",
+      "title": "FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution",
+      "paper_url": "https://arxiv.org/abs/2610.03675",
+      "detail_path": "agent-research/2610.03675-frugalevo/README.md",
+      "topic": [
+        "程序进化",
+        "成本约束",
+        "强弱模型协作"
+      ],
+      "first_author": "Hui Chen",
+      "first_author_affiliation": "National University of Singapore",
+      "published": "2026-10-02",
+      "priority": "P1",
+      "code": "https://github.com/chchenhui/frugalevo",
+      "adapter": "frugalevo"
+    },
+    {
+      "domain": "agent-research",
       "key": "fuse-evaluator",
       "title": "Verifiable Social Reasoning for LLM Assistants",
       "paper_url": "https://arxiv.org/abs/2609.17496",
@@ -2048,6 +2066,24 @@
       "published": "2023-03-30",
       "code": "https://github.com/madaan/self-refine",
       "adapter": "self-refine"
+    },
+    {
+      "domain": "agent-research",
+      "key": "sentry",
+      "title": "Sentry: Learning to Recover from LLM Agent Failures at Test Time",
+      "paper_url": "https://arxiv.org/abs/2610.02994",
+      "detail_path": "agent-research/2610.02994-sentry/README.md",
+      "topic": [
+        "失败恢复",
+        "条件记忆",
+        "测试时学习"
+      ],
+      "first_author": "Changxiu Ji",
+      "first_author_affiliation": "Stanford University",
+      "published": "2026-10-02",
+      "priority": "P1",
+      "code": null,
+      "adapter": "sentry"
     },
     {
       "domain": "agent-research",

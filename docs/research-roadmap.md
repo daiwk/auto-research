@@ -1,11 +1,27 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-07 论文实现与来源复核
+
+[本轮扫描/实现记录](recent-paper-scan-20261007.md)保留四轨查询、完整去重标题池与前轮 48 个 Agent 标题初筛。宽查询命中不是新增合格论文；Google/Meta 来源仍有失败且查询触顶，水位不推进。
+
+| 项目 | 当前状态 | 剩余验收 |
+|---|---|---|
+| FrugalEvo | 独立控制器与 A100 三 seed 验证完成 | 最佳半径和均值 2.32222，弱模型 2.40000；成本曲线亦未显示均值收益；完整论文与统一 Evolve 未完成 |
+| Sentry | 独立控制器与 A100 三 seed 验证完成 | 本地 EM 29.17%，基线 41.67%，保留负结果；原文四环境与统一 Evolve 未完成 |
+| Google TEE-FL · P0 | 09-25 旧文补发现；正文线上证据通过 | 核验开源 TEE 栈与公开训练可复现范围；不以普通 GPU 代替远程证明 |
+| Airbnb SIFT · P0 | 10-06 新文；PDF A/B 表已核验 | 旅程、过滤器及有序容量标签的公开数据方案和真实训练 |
+| RC-OPD / KV² · P1 | 方法已审，未实现 | 真实修复蒸馏训练 / 实际 KV 重建与压缩 |
+| Dynamic Expert Pruning / Pivot-SD / Recursive Harness · P1 | 方法与可行性已审，未实现 | 真实 MoE、扩散模型及固定 verifier 环境；分别完成端到端验证 |
+| 来源闭环 | 部分完成 | 五个机构页超时重试、触顶查询补扫、其余标题全文核验；不将 1,010 条宽查询匹配称作已审论文 |
+
+此表覆盖下方 OCT06-FRU/SEN/DEP-MOE/SRC 的旧状态；不是宣称旧表全部清零。
+
 ## 2026-10-07 架构重构 MR-A / MR-B
 
 | 批次 | 状态 | 范围与证据 |
 |---|---|---|
 | MR-A | 已合并 · [PR #192](https://github.com/daiwk/auto-research/pull/192) | [实验可信度与运行契约](design/experiment-integrity.md)：实验身份、恢复校验、GPU 执行闭环 |
-| MR-B | 已实现，待合并 · [PR #193](https://github.com/daiwk/auto-research/pull/193) | [完整验收记录](design/architecture-mrb.md)：惰性注册/最小安装、逐命令 CLI、扫描页级断点、权威规格与稳定算法模块；1251 项全套测试、A100 回归及脱敏回执 |
+| MR-B | 已合并 · [PR #193](https://github.com/daiwk/auto-research/pull/193) | [完整验收记录](design/architecture-mrb.md)：惰性注册/最小安装、逐命令 CLI、扫描页级断点、权威规格与稳定算法模块；1251 项全套测试、A100 回归及脱敏回执 |
 
 MR-B 不新增论文，也不提升已有实现的证据等级。扫描状态修复不等于完成下方的官方来源重试
 或全文筛选；跨源水位仍为 **2026-10-02**，后续按既有重叠窗口处理待审候选。

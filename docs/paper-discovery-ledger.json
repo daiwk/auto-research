@@ -12785,6 +12785,42 @@
         {"id": "2610.03665", "track": "post-training", "reason": "Pivot-SD needs diffusion trajectories and model training"},
         {"id": "2610.03198", "track": "foundation-model", "reason": "KV squared CUDA path needs A100/A30 validation"}
       ]
+    },
+    {
+      "batch": "20261007-overlap-agent-checkpoints",
+      "scope_kind": "partial-overlap-review-and-checkpoint-implementation",
+      "checked_at": "2026-10-07T16:00:00+08:00",
+      "window": "2026-10-01 through 2026-10-07; older official-source discoveries explicitly separated",
+      "sources": ["arXiv official API, full HTML and PDF", "Google Research official blog", "Google/Meta/DeepMind publication directories (partial)", "author repositories"],
+      "priority_institutions": ["Google", "Meta"],
+      "required_tracks": ["agent"],
+      "scanned_tracks": ["recommendation", "foundation-model", "post-training", "agent"],
+      "pending_tracks": ["recommendation", "foundation-model", "post-training"],
+      "closure_scope": "required_tracks describes this implementation handoff only; scanned_tracks is retrieval coverage, not closed review or accepted implementations. Unresolved candidates remain open.",
+      "coverage": {
+        "coverage_complete": false,
+        "watermark_advanced": false,
+        "watermark": "2026-10-02",
+        "overlap_start": "2026-10-01",
+        "source_artifact": "recent-paper-scan-20261007.md",
+        "title_pool": "research-audits/oct07-title-pool.json",
+        "query_receipt": "research-audits/oct07-query-coverage.json",
+        "official_receipt": "research-audits/oct07-official-source-coverage.json",
+        "note": "Four tracks returned but queries capped at 400 results; five Google/Meta pages timed out. 1010 deduplicated title matches are not accepted papers. Previous 48 Agent titles received title/abstract triage, not exhaustive full-text review. No DeepXiv."
+      },
+      "candidates": [
+        {"id": "2610.03675", "priority": "P1", "track": "agent", "status": "implemented", "key": "frugalevo", "doc": "agent-research/2610.03675-frugalevo/README.md", "evidence_scope": "Independent two-checkpoint program search with external sandbox evaluator; no paper API/price reproduction, prefix KV reuse or unified Evolve integration"},
+        {"id": "2610.02994", "priority": "P1", "track": "agent", "status": "implemented", "key": "sentry", "doc": "agent-research/2610.02994-sentry/README.md", "evidence_scope": "Real frozen Qwen checkpoint and answer-isolated HotpotQA-backed tools; small dev split, not original four environments or formal improvement"}
+      ],
+      "unresolved_candidates": [
+        {"id": "2609.31494", "priority": "P0", "track": "recommendation", "institution": "Google", "first_published": "2026-09-25", "discovery_kind": "older-paper-official-blog-followup", "evidence": "Full-text section 5.3: 3.5M devices per A/B arm, smaller privacy budget, neutral usability; production deployed", "reason": "TEE/KMS/DP and remote-attestation public reproduction not implemented; ordinary CUDA simulation is insufficient"},
+        {"id": "2610.07810", "priority": "P0", "track": "recommendation", "institution": "Airbnb", "first_published": "2026-10-06", "discovery_kind": "recent-publication", "evidence": "PDF section 8.2/Table 4 and hotel extension Table 6; randomized online trials and full deployment", "reason": "Public journey/filter/ordinal-capacity data mapping and real training not implemented"},
+        {"id": "2610.02951", "priority": "P1", "track": "foundation-model", "reason": "Method reviewed; requires actual MoE predictor training, REAP targets, soft-mask KD and expert delta-loading runtime"},
+        {"id": "2610.03515", "priority": "P1", "track": "post-training", "reason": "Method/author eval repository reviewed; real repair-continuation chains and local capped-distillation training not implemented"},
+        {"id": "2610.03548", "priority": "P1", "track": "agent", "reason": "Method including zero-accuracy gate reviewed; actual generator/fixed verifier and cohort-budget gate not implemented"},
+        {"id": "2610.03665", "priority": "P1", "track": "post-training", "reason": "Method reviewed; real masked diffusion trajectories, pivot-state extraction and training not implemented"},
+        {"id": "2610.03198", "priority": "P1", "track": "foundation-model", "reason": "Method reviewed; KeyDiff integration, actual reconstructed cache scoring and CUDA validation not implemented"}
+      ]
     }
   ]
 }

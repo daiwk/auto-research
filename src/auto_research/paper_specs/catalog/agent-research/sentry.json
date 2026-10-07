@@ -1,0 +1,14 @@
+{
+  "domain": "agent-research",
+  "key": "sentry",
+  "title": "Sentry: Learning to Recover from LLM Agent Failures at Test Time",
+  "paper_url": "https://arxiv.org/abs/2610.02994",
+  "detail_path": "agent-research/2610.02994-sentry/README.md",
+  "topic": ["失败恢复", "条件记忆", "测试时学习"],
+  "first_author": "Changxiu Ji",
+  "first_author_affiliation": "Stanford University",
+  "published": "2026-10-02",
+  "priority": "P1",
+  "code": null,
+  "adapter": "sentry"
+}
