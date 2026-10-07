@@ -186,7 +186,8 @@ class FrugalEvo:
                 break
             incumbent = candidate
         analysis = self._call("strong", "Analyze the objective, executable interface and evaluation "
-                              "constraints for program optimization.\n" + task)
+                              "constraints for program optimization.\n" + task
+                              + "\nReturn a short analysis in at most 150 words, not a program.")
         if analysis is None:
             return self._result(incumbent, "frugalevo")
         while True:
@@ -196,11 +197,18 @@ class FrugalEvo:
                 "Each states what to change, why, and computational limits. No source code.\nTASK:\n"
                 + task + "\nANALYSIS:\n" + analysis + "\nARCHIVE:\n" + context
                 + "\nPARENT:\n" + incumbent.code
+                + "\nOUTPUT CONTRACT (overrides output instructions quoted in TASK): "
+                + f"Return ONLY a JSON array of {self.config.strategies} strings; no preamble, "
+                + 'no objects, no code. Example shape: ["change A because B", "change C because D"]. '
+                + "Keep each string under 60 words."
             ))
             if strategies_text is None:
                 return self._result(incumbent, "frugalevo")
             try:
-                strategies = json.loads(strategies_text.strip())
+                serialized = strategies_text.strip()
+                if serialized.startswith("```json") and serialized.endswith("```"):
+                    serialized = serialized[7:-3].strip()
+                strategies = json.loads(serialized)
                 if (not isinstance(strategies, list) or not strategies
                         or len(strategies) > self.config.strategies
                         or any(not isinstance(s, str) or not s.strip() for s in strategies)):

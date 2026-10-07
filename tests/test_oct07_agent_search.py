@@ -117,6 +117,16 @@ def test_frugalevo_rejects_overbudget_call_and_counts_bad_strategy():
     assert budget_auc([(0, 1), (2, 3), (9, 50)], 5) == 11
 
 
+def test_frugalevo_accepts_fenced_portfolio_without_inventing_strategy():
+    weak = ScriptedGenerator(["cold", "pilot"])
+    strong = ScriptedGenerator(["analysis", '```json\n["specific change"]\n```'])
+    result = FrugalEvo(strong, weak, lambda c: Candidate(c, 1, "ok"),
+                      SearchConfig(budget=4)).run("Return Python source", "initial")
+    assert result["candidates"][-1]["stage"] == "pilot"
+    assert result["candidates"][-1]["strategy"] == "specific change"
+    assert "OUTPUT CONTRACT" in strong.prompts[-1]
+
+
 def test_archive_keeps_cell_elite_and_distinct_islands():
     archive = IslandArchive(islands=2, bins=1)
     for code, score in [("a", 1), ("b", 2), ("c", 0), ("d", 3)]:
