@@ -20,8 +20,15 @@ from .sentry import PublicStep, Sentry, json_object
 DATASET_ID = "hotpotqa/hotpot_qa"
 DATASET_REVISION = "1908d6afbbead072334abe2965f91bd2709910ab"
 DATASET_SHA256 = "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6"
-ACTION_SCHEMA = ('{"reasoning":"brief observed reason","action":"search|read|finish",'
-                 '"argument":"query, exact title, or short final answer"}')
+ACTION_SCHEMA = json.dumps({
+    "type": "object", "additionalProperties": False,
+    "required": ["reasoning", "action", "argument"],
+    "properties": {
+        "reasoning": {"type": "string"},
+        "action": {"type": "string", "enum": ["search", "read", "finish"]},
+        "argument": {"type": "string", "minLength": 1},
+    },
+})
 
 
 def public_case(row: dict) -> dict:
@@ -78,7 +85,10 @@ def run_episode(case: dict, generate, *, sentry: Sentry | None, seed: int,
     for index in range(max_steps):
         prompt = ("Answer the question by searching document TITLES, then reading matching pages. "
                   "Use evidence from observations; do not invent tool results. Return ONLY JSON "
-                  "matching this action schema, no Markdown: " + ACTION_SCHEMA
+                  "matching this JSON Schema, no Markdown. Choose ONE action: search searches titles; "
+                  "read reads an exact returned title; finish submits only a short answer. "
+                  'Example call: {"reasoning":"Find relevant evidence","action":"search",'
+                  '"argument":"entity from question"}. Schema: ' + ACTION_SCHEMA
                   + "\nQUESTION: " + case["question"]
                   + "\nPUBLIC TRAJECTORY: " + json.dumps([asdict(step) for step in steps])
                   + ("\nCONDITIONAL RECOVERY: " + guidance if guidance else ""))

@@ -37,8 +37,11 @@ class Diagnosis:
     evidence: str
 
     def __post_init__(self):
-        if (self.category not in LABELS or not self.labels
-                or not set(self.labels) <= LABELS[self.category] or not self.evidence.strip()):
+        if (not isinstance(self.category, str) or self.category not in LABELS
+                or not isinstance(self.labels, tuple) or not self.labels
+                or any(not isinstance(label, str) for label in self.labels)
+                or not set(self.labels) <= LABELS[self.category]
+                or not isinstance(self.evidence, str) or not self.evidence.strip()):
             raise ValueError("invalid failure diagnosis")
 
 
@@ -52,7 +55,8 @@ class Lesson:
 
     def __post_init__(self):
         Diagnosis(self.category, self.labels, self.trigger)
-        if not self.principle.strip() or self.insertion_step < 0:
+        if (not isinstance(self.principle, str) or not self.principle.strip()
+                or type(self.insertion_step) is not int or self.insertion_step < 0):
             raise ValueError("invalid lesson")
 
 
@@ -187,7 +191,8 @@ class Sentry:
         )
         try:
             verdict = json_object(self.model("verify", prompt))
-            if not isinstance(verdict.get("resolved"), bool) or not str(verdict.get("evidence", "")).strip():
+            if (not isinstance(verdict.get("resolved"), bool)
+                    or not isinstance(verdict.get("evidence"), str) or not verdict["evidence"].strip()):
                 raise ValueError("invalid verifier decision")
             self.events.append({"event": "verified", "resolved": verdict["resolved"],
                                 "evidence": verdict["evidence"],

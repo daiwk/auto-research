@@ -155,3 +155,20 @@ def test_sentry_public_case_strips_labels_and_scorer_stays_outside():
     assert all("SECRET GOLD" not in prompt and "PRIVATE PLAN" not in prompt for prompt in prompts)
     with pytest.raises(ValueError, match="public-case"):
         run_episode({**case, "answer": "gold"}, generate, sentry=None, seed=42)
+
+
+def test_sentry_action_schema_is_real_enum_not_literal_union():
+    from auto_research.agent_research.sentry_public import ACTION_SCHEMA
+    schema = json.loads(ACTION_SCHEMA)
+    assert schema["properties"]["action"]["enum"] == ["search", "read", "finish"]
+    assert "search|read|finish" not in ACTION_SCHEMA
+
+
+@pytest.mark.parametrize("field,value", [("evidence", None), ("category", []), ("labels", [{}])])
+def test_sentry_malformed_detector_types_fail_closed(field, value):
+    result = {"intervene": True, "category": "progress", "labels": ["repetition"], "evidence": "loop"}
+    result[field] = value
+    monitor = Sentry(lambda *_: json.dumps(result))
+    assert monitor.observe(PublicStep("r", "a", "o")) is None
+    assert monitor.events[-1]["event"] == "invalid_detection"
+    assert not monitor.playbook
