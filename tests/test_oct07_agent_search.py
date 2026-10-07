@@ -136,3 +136,22 @@ def test_packing_score_does_not_trust_claimed_score():
         packing_score(payload)
     with pytest.raises(ValueError):
         packing_score(json.loads('{"centers":[],"radii":[]}'))
+
+
+def test_sentry_public_case_strips_labels_and_scorer_stays_outside():
+    from auto_research.agent_research.sentry_public import public_case, run_episode
+    row = {"id": "task", "question": "Where?", "answer": "SECRET GOLD",
+           "supporting_facts": {"title": ["PRIVATE PLAN"]},
+           "context": {"title": ["Doc"], "sentences": [["Public evidence."]]}}
+    case = public_case(row)
+    assert set(case) == {"id", "question", "documents"}
+    prompts = []
+    def generate(prompt, maximum, seed):
+        prompts.append(prompt)
+        return Completion('{"reasoning":"observed","action":"finish","argument":"guess"}', 1, 1, 1)
+    result = run_episode(case, generate, sentry=None, seed=42)
+    assert result["prediction"] == "guess"
+    assert "exact_match" not in result
+    assert all("SECRET GOLD" not in prompt and "PRIVATE PLAN" not in prompt for prompt in prompts)
+    with pytest.raises(ValueError, match="public-case"):
+        run_episode({**case, "answer": "gold"}, generate, sentry=None, seed=42)
