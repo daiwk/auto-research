@@ -1,0 +1,178 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:grpo-dropout",
+  "method": "grpo-dropout",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    43
+  ],
+  "metrics": {
+    "adapter_parameter_delta_l2": 1.9026863524479133e-05,
+    "teacher_adapter_parameter_delta_l2": 0,
+    "steps_with_nonzero_student_gradient": 0,
+    "validation_examples": 2,
+    "validation_exact_match": 1,
+    "max_training_reward_variance": 0.1875,
+    "min_retained_rollouts": 1,
+    "steps_with_filtering": 1
+  },
+  "seed_results": [
+    {
+      "seed": 43,
+      "adapter_parameter_delta_l2": 1.9026863524479133e-05,
+      "teacher_adapter_parameter_delta_l2": 0,
+      "steps_with_nonzero_student_gradient": 0,
+      "validation_examples": 2,
+      "validation_exact_match": 1,
+      "max_training_reward_variance": 0.1875,
+      "min_retained_rollouts": 1,
+      "steps_with_filtering": 1
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l2_checkpoint_smoke",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "validation_used_for_selection": false,
+    "steps": 12,
+    "max_tokens": 512,
+    "group": 4,
+    "seeds": [
+      43
+    ],
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "checkpoint": {
+    "student": "Qwen/Qwen3-4B-Instruct-2507",
+    "student_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "teacher": "Siye01/Qwen3-4B-Inst-MOPD",
+    "teacher_revision": "b61a9f00b77302b6e947af1215b7cb994b884c4a"
+  },
+  "history": [
+    {
+      "step": 0,
+      "response_tokens": 394,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9772366285324097,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 1,
+      "response_tokens": 487,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9794982075691223,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 2,
+      "response_tokens": 904,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9764242172241211,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 3,
+      "response_tokens": 712,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9753555059432983,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 4,
+      "response_tokens": 649,
+      "retained_rollouts": 1,
+      "loss": 0,
+      "overlap_at_64": 0.9722650647163391,
+      "training_reward_mean": 0.75,
+      "training_reward_variance": 0.1875,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 5,
+      "response_tokens": 1155,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9730925559997559,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 6,
+      "response_tokens": 557,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.975594699382782,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 7,
+      "response_tokens": 820,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9698932766914368,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 8,
+      "response_tokens": 1082,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9751328825950623,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 9,
+      "response_tokens": 1121,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9708128571510315,
+      "training_reward_mean": 0,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 10,
+      "response_tokens": 1172,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9687899947166443,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    },
+    {
+      "step": 11,
+      "response_tokens": 1327,
+      "retained_rollouts": 4,
+      "loss": 0,
+      "overlap_at_64": 0.9726120829582214,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0
+    }
+  ],
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.11854-grpo-dropout/metrics/checkpoint-a100-seed43-12.json",
+    "dataset_fingerprint": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "original_code_commit": "e1585f77"
+  }
+}

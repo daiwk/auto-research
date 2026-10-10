@@ -1,0 +1,180 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:residual-advantage",
+  "method": "co-ra",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "adapter_parameter_delta_l2": 0.069606228114807,
+    "teacher_adapter_parameter_delta_l2": 0.028806331964893708,
+    "steps_with_nonzero_student_gradient": 10,
+    "validation_examples": 2,
+    "validation_exact_match": 1,
+    "steps_with_nonzero_teacher_gradient": 1,
+    "max_teacher_gradient_l2": 0.12452854211372816,
+    "max_training_reward_variance": 0.1875,
+    "max_guidance_mean_error": 5.960464477539063e-08
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "adapter_parameter_delta_l2": 0.069606228114807,
+      "teacher_adapter_parameter_delta_l2": 0.028806331964893708,
+      "steps_with_nonzero_student_gradient": 10,
+      "validation_examples": 2,
+      "validation_exact_match": 1,
+      "steps_with_nonzero_teacher_gradient": 1,
+      "max_teacher_gradient_l2": 0.12452854211372816,
+      "max_training_reward_variance": 0.1875,
+      "max_guidance_mean_error": 5.960464477539063e-08
+    }
+  ],
+  "checkpoint": {
+    "student": "Qwen/Qwen3-4B-Instruct-2507",
+    "student_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "teacher": "Siye01/Qwen3-4B-Inst-MOPD",
+    "teacher_revision": "b61a9f00b77302b6e947af1215b7cb994b884c4a"
+  },
+  "history": [
+    {
+      "step": 0,
+      "response_tokens": 380,
+      "student_loss": -1.882252131935047e-09,
+      "teacher_loss": 0,
+      "guidance_mean_error": 3.6868852415494757e-09,
+      "overlap_at_64": 0.9777549505233765,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.35222535462261406,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 1,
+      "response_tokens": 529,
+      "student_loss": 1.8027870307690819e-09,
+      "teacher_loss": 0,
+      "guidance_mean_error": 5.631934918426396e-09,
+      "overlap_at_64": 0.9795309901237488,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.2317874142794239,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 2,
+      "response_tokens": 865,
+      "student_loss": -5.512568179710797e-10,
+      "teacher_loss": 0,
+      "guidance_mean_error": 1.0691416640895568e-09,
+      "overlap_at_64": 0.9737535715103149,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.29164884571574506,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 3,
+      "response_tokens": 782,
+      "student_loss": -4.5732462261582896e-10,
+      "teacher_loss": 0,
+      "guidance_mean_error": 6.811959440966575e-09,
+      "overlap_at_64": 0.9728860259056091,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.26433557818741205,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 4,
+      "response_tokens": 822,
+      "student_loss": -0.15936705470085144,
+      "teacher_loss": -0.15936705470085144,
+      "guidance_mean_error": 5.960464477539063e-08,
+      "overlap_at_64": 0.9666780829429626,
+      "training_reward_mean": 0.75,
+      "training_reward_variance": 0.1875,
+      "student_gradient_l2": 0.3312620175616622,
+      "teacher_gradient_l2": 0.12452854211372816
+    },
+    {
+      "step": 5,
+      "response_tokens": 1140,
+      "student_loss": 4.182782176176403e-10,
+      "teacher_loss": 0,
+      "guidance_mean_error": 4.197510339309929e-09,
+      "overlap_at_64": 0.9721217155456543,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.21007908762367955,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 6,
+      "response_tokens": 537,
+      "student_loss": -8.879649238124898e-10,
+      "teacher_loss": 0,
+      "guidance_mean_error": 2.9590958572356385e-09,
+      "overlap_at_64": 0.9738419651985168,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.3239156680345001,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 7,
+      "response_tokens": 780,
+      "student_loss": 3.056648545385343e-10,
+      "teacher_loss": 0,
+      "guidance_mean_error": 2.348951477770811e-09,
+      "overlap_at_64": 0.9711138010025024,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.5589927668923815,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 8,
+      "response_tokens": 1123,
+      "student_loss": 1.6984404993536373e-09,
+      "teacher_loss": 0,
+      "guidance_mean_error": 1.0961773710960188e-08,
+      "overlap_at_64": 0.9734389185905457,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.3885341197806538,
+      "teacher_gradient_l2": 0
+    },
+    {
+      "step": 9,
+      "response_tokens": 1178,
+      "student_loss": 4.04785371888039e-10,
+      "teacher_loss": 0,
+      "guidance_mean_error": 3.5061555880844253e-09,
+      "overlap_at_64": 0.9708589911460876,
+      "training_reward_mean": 0,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.10686203958813002,
+      "teacher_gradient_l2": 0
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l2_checkpoint_smoke",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "validation_used_for_selection": false,
+    "steps": 10,
+    "max_tokens": 512,
+    "group": 4,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.11519-residual-advantage/metrics/co-ra-checkpoint-a100-seed42.json",
+    "dataset_fingerprint": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "original_code_commit": "ea3652c0"
+  }
+}

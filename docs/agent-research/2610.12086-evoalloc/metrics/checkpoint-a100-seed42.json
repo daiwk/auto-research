@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "dataset": "Circle26 public geometry contract",
+  "manifest_ref": "agent-research:evoalloc",
+  "evaluation_protocol": {
+    "seeds": [
+      42
+    ],
+    "claim_policy": "L1 real-checkpoint mechanism execution only; not capability improvement",
+    "tier": "L1",
+    "formal_comparison": false
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.12086-evoalloc/metrics/checkpoint-a100-seed42.json",
+    "commit": "db2f8151b83c159aa956bdf38851ba273be6d182",
+    "dataset_fingerprint": "Circle26-public-geometry-contract@db2f8151b83c159aa956bdf38851ba273be6d182"
+  },
+  "method": "evoalloc",
+  "seed": 42,
+  "diagnostic_only": true,
+  "evaluation_tier": "L1",
+  "accelerator": "NVIDIA A100",
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct"
+  },
+  "metrics": {
+    "full_evaluations": 4,
+    "best_score": 2.166666666666666,
+    "promoted_strategies": 0
+  }
+}

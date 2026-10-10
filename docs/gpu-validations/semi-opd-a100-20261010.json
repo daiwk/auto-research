@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "adapter_key": "semi-opd",
+  "validated_at": "2026-10-10",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct10_post_training.py",
+    "--objective",
+    "semi-opd",
+    "--student-path",
+    "checkpoints/student",
+    "--student-id",
+    "Qwen/Qwen3-4B-Instruct-2507",
+    "--student-revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--teacher-path",
+    "checkpoints/teacher",
+    "--teacher-id",
+    "Siye01/Qwen3-4B-Inst-MOPD",
+    "--teacher-revision",
+    "b61a9f00b77302b6e947af1215b7cb994b884c4a",
+    "--train-path",
+    "data/gsm8k/train.jsonl",
+    "--validation-path",
+    "data/gsm8k/test.jsonl",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--output-dir",
+    "runs/oct10/current/semi-opd-42",
+    "--seed",
+    "42",
+    "--steps",
+    "2",
+    "--max-tokens",
+    "128",
+    "--group",
+    "2",
+    "--validation-examples",
+    "2"
+  ],
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c"
+  },
+  "checkpoint": {
+    "student": "Qwen/Qwen3-4B-Instruct-2507",
+    "student_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "teacher": "Siye01/Qwen3-4B-Inst-MOPD",
+    "teacher_revision": "b61a9f00b77302b6e947af1215b7cb994b884c4a"
+  },
+  "result": "passed",
+  "metrics": {
+    "adapter_parameter_delta_l2": 0.020373964319147005,
+    "teacher_adapter_parameter_delta_l2": 0,
+    "steps_with_nonzero_student_gradient": 2,
+    "validation_examples": 2,
+    "validation_exact_match": 0.5
+  },
+  "evaluation_scope": "short real-checkpoint runtime validation; not paper benchmark reproduction",
+  "diagnostic_only": true,
+  "provenance": {
+    "commit": "ea3652c0",
+    "artifact_path": "docs/gpu-validations/semi-opd-a100-20261010.json",
+    "metrics_artifact": "docs/post-training/2610.11291-semi-opd/metrics/checkpoint-a100-seed42.json"
+  },
+  "command_path_policy": "Original checkpoint locations sanitized to checkpoints/student and checkpoints/teacher; bind the public immutable revisions before replay."
+}

@@ -209,6 +209,16 @@
         "fingerprint": "eee3aee3492d41c256a522cdedbc3f861c0db2e3f6e09b001a08e9ec12a4dc05"
       }
     ],
+    "src/auto_research/agent_research/hippocam.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_id",
+        "line": 53,
+        "qualified_name": "Hippocam._id",
+        "expression": "self.serial += 1",
+        "fingerprint": "fbcb59d1e06c6274067139935b1d171022c334dd11bbc30f2bfde0c5aae4612e"
+      }
+    ],
     "src/auto_research/agent_research/historical_b10_b11.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -9267,6 +9277,16 @@
         "fingerprint": "b267b9ec66be8d23cb37d14555f017f0e4c439a7dc4f5244fcde7a5f37fd95f2"
       }
     ],
+    "src/auto_research/agent_research/oct10_backend.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "propose",
+        "line": 232,
+        "qualified_name": "EvoAllocBackend.propose",
+        "expression": "self.proposals += 1",
+        "fingerprint": "340a2cde9ac50251d62a4a8607fe2b6085e35173b71adbeb3299057833f9115a"
+      }
+    ],
     "src/auto_research/agent_research/p0_20260808.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10907,6 +10927,24 @@
         "fingerprint": "1a857901a0a60415123d438453cf905981f4964fb425b87b98e1a3a3d1595ffc"
       }
     ],
+    "src/auto_research/multimodal/vimod_checkpoint.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "distill_response",
+        "line": 134,
+        "qualified_name": "SmolVLMJointKV.distill_response",
+        "expression": "bank.next_position += 1",
+        "fingerprint": "ce51d44758ef1af133f74fe18f7d8b4f7ab6c0463ecfff5946f974abd6acb719"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "distill_response",
+        "line": 135,
+        "qualified_name": "SmolVLMJointKV.distill_response",
+        "expression": "teacher_bank.next_position += 1",
+        "fingerprint": "6976236183b4da4c8e2fbc0dc351dc7b9bae719e19e7ad9fae1b27f1b7190557"
+      }
+    ],
     "src/auto_research/post_training/algorithm_core.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11429,6 +11467,40 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/post_training/oct10_checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "load_public_rows",
+        "line": 64,
+        "qualified_name": "load_public_rows",
+        "expression": "r.get('answer')",
+        "fingerprint": "19e3acf58f820ac972d708ae47524d9802a7a0c56dd651621593711aea536b87"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_checkpoint",
+        "line": 194,
+        "qualified_name": "run_checkpoint",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_checkpoint",
+        "line": 202,
+        "qualified_name": "run_checkpoint",
+        "expression": "reference['answer']",
+        "fingerprint": "3ac2a71a161197cd196fd0513fe9cd0f00212052f227f90e6f66adb394aff92f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_checkpoint",
+        "line": 265,
+        "qualified_name": "run_checkpoint",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
     "src/auto_research/post_training/p0_20260808.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11627,6 +11699,58 @@
         "qualified_name": "ResearchPortfolio.claim",
         "expression": "idea.attempts += 1",
         "fingerprint": "a104e12872f2237f1240b279028b875922ab2e7a8ae01ed8121d18cff1310f96"
+      }
+    ],
+    "src/auto_research/system_one/capability_bench.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "evaluate_capability",
+        "line": 62,
+        "qualified_name": "evaluate_capability",
+        "expression": "response.answers.get('answer')",
+        "fingerprint": "9453192b89fd046273fb7e0a312e7de42b071256a4be3ad4ea96e99ebc544dcb"
+      }
+    ],
+    "src/auto_research/system_one/capability_data.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "normalize_item",
+        "line": 55,
+        "qualified_name": "normalize_item",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "normalize_item",
+        "line": 69,
+        "qualified_name": "normalize_item",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "normalize_item",
+        "line": 72,
+        "qualified_name": "normalize_item",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "normalize_item",
+        "line": 88,
+        "qualified_name": "normalize_item",
+        "expression": "row.get('answer', '')",
+        "fingerprint": "00316d692dd8359d1ffdc18b0f47e140cfb932da70a12b4b4614db7874cbf99e"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "normalize_item",
+        "line": 98,
+        "qualified_name": "normalize_item",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
     "src/auto_research/system_one/local.py": [

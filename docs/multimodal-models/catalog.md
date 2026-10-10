@@ -9,6 +9,7 @@
 
 | 方法族 | 论文 | 机构与日期 | Adapter |
 |---|---|---|---|
+| 视觉 token 压缩与动态证据恢复 | [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](2610.12060-vimod/README.md) | City University of Hong Kong，2026-10-08 | `vimod` |
 | 视觉 token 与跨模态检索 | [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](2609.16841-stacktok/README.md) | Sichuan University，2026-09-15 | `stacktok` |
 | 视频理解与 token 压缩 | [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](2609.16722-videomm/README.md) | University of Science and Technology of China，2026-09-15 | `videomm` |
 | 生成辅助监督与理解增强 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | `gas` |

@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 稀疏专家与路由 | [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](2610.11575-elastic-expert-routing/README.md) | Shanghai AI Laboratory / Shanghai Jiao Tong University，2026-10-08 | 未找到作者公开代码 | `elastic-expert-routing` |
+| System One / JEV | [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../system-one/2610.11978-jev-capability/README.md) | Dalian Maritime University，2026-10-08 | 未找到原作者公开代码（2026-10-10 核验） | `jev-capability` |
 | 优化器 | [AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models](2610.01395-af-muon/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `af-muon` |
 | 结构剪枝 | [IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs](2610.00426-irekogpt/README.md) | University of Modena and Reggio Emilia，2026-10-01 | [已开源](https://github.com/aimagelab/IrekoGPT) | `irekogpt` |
 | Jev | [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](2610.02076-llm2jev/README.md) | Microsoft（按作者邮箱），2026-10-01 | 未发现官方代码 | `llm2jev` |

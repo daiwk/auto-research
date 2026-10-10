@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "adapter_key": "race",
+  "validated_at": "2026-10-10",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct10_agents.py",
+    "--method",
+    "race",
+    "--checkpoint",
+    "<public-checkpoint-directory>",
+    "--dataset",
+    "<public-training-jsonl>",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--max-tokens",
+    "64",
+    "--output",
+    "runs/race-bounded-42.json",
+    "--race-bounded",
+    "--race-episodes",
+    "64"
+  ],
+  "dataset": {
+    "name": "auto-research bounded-calculator-v1",
+    "revision": "a3865213a173fdf72974a81dbe55bacd76473214",
+    "scope": "public executable diagnostic; not official ScienceWorld"
+  },
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "weights_sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+  },
+  "result": "passed",
+  "diagnostic_only": true,
+  "evaluation_tier": "L1",
+  "metrics": {
+    "on_policy_episodes": 64,
+    "on_policy_successes": 11,
+    "actor_loss": 0.02440592646598816,
+    "closure_terms": 6,
+    "original_policy_tokens": 554,
+    "skipped_reasoning_tokens": 24
+  },
+  "provenance": {
+    "commit": "a3865213a173fdf72974a81dbe55bacd76473214",
+    "artifact_path": "docs/gpu-validations/oct10-race-a100.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false,
+    "command_paths_redacted": true
+  },
+  "limitations": "Bounded executable calculator only; no official four-environment capability evaluation."
+}

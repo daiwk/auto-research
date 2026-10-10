@@ -181,6 +181,10 @@
 
 - 2026-08-27 · 一作：Hongru Song · [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
 
+## Institute of Information Engineering, Chinese Academy of Sciences
+
+- 2026-10-08 · 一作：Xiangyi Zeng · [Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents](../2610.12124-hippocam/README.md)（`hippocam`）：Janus 在推理前维护嵌套目的，Precip 在主响应后、工具结果前归纳闭合意图。Palim 递归整理早期前缀为叙事和知识，原消息保留为树形子节点；recall 每次返回一层，Agent 自行决定深入。
+
 ## Institute of Science Tokyo
 
 - 2026-09-03 · 一作：Chenyu Zhou · [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](../2609.04629-silr/README.md)（`silr`）：系统已经违规时，安全门不能简单拒绝所有仍不安全的动作，而要允许逐步恢复。SiLR 先 shadow-execute 提案，再比较每个受约束分支的严重度；只有在乘积序上不恶化的动作可进入真实环境，同一结构信号还能作为 GRPO 过程奖励。
@@ -195,6 +199,7 @@
 
 ## King Abdullah University of Science and Technology
 
+- 2026-10-08 · 一作：Yanning Dai · [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](../2610.12086-evoalloc/README.md)（`evoalloc`）：模型选择 Full、Partial 或 Discard，得到 Partial 证据后再选择继续/停止。已观察案例更新固定语句经验并反思策略；影子策略共享同一证据，以漏掉新最佳的次数优先、再比较评测成本。
 - 2023-03-31 · 一作：Guohao Li · [CAMEL](../2303.17760-camel/README.md)（`camel`）：用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。
 
 ## Kuaishou
@@ -321,6 +326,7 @@
 
 ## Renmin University of China
 
+- 2026-10-08 · 一作：Yiruo Cheng · [When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation](../2610.12061-race/README.md)（`race`）：LoGiC 从第二轮逐步删除推理，检查本轮及所有后续原动作的平均 token 对数似然变化，已接受删除继续影响后续上下文。成功轨迹压缩后用于 SFT；RL 屏蔽可删推理并监督提前闭合。
 - 2026-08-25 · 一作：Kai Ruan · [SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction](../2608.24870-spo-plus-plus/README.md)（`spo-plus-plus`）：SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。
 
 ## Robotics at Google
@@ -405,6 +411,10 @@
 ## Tsinghua University AIR / Alibaba Group
 
 - 2026-08-05 · 一作：Xuanyu Lei · [State2State: Environment-Derived Mid-Training for LLM Agents](../2608.04934-state2state/README.md)（`state2state`）：**主题：环境派生中训练。** 从环境探索自动采样起点与目标状态，用规则化状态匹配做 verifier，形成无需人工任务与专家轨迹的可扩展 mid-training。
+
+## UC Berkeley
+
+- 2026-10-08 · 一作：Hyunin Lee · [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
 
 ## University of British Columbia
 

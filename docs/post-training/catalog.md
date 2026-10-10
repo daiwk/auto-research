@@ -10,6 +10,11 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](2610.11659-dial-opd/README.md) | Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University，2026-10-08 | [已开源](https://github.com/EIT-NLP/DIAL-OPD) | `dial-opd` |
+| RLVR | [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](2610.11854-grpo-dropout/README.md) | Harbin Institute of Technology (Shenzhen)，2026-10-08 | [已开源](https://github.com/hexuandeng/GRPODropout) | `grpo-dropout` |
+| On-policy distillation | [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](2610.11989-meta-opd/README.md) | East China Normal University，2026-10-08 | 未发现官方代码 | `meta-opd` |
+| RLVR | [Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards](2610.11519-residual-advantage/README.md) | Harbin Engineering University / Tencent / Harbin Institute of Technology，2026-10-08 | 未发现官方代码 | `residual-advantage` |
+| On-policy distillation | [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](2610.11291-semi-opd/README.md) | UCLA / NVIDIA（论文注明实习），2026-10-08 | 未发现官方代码 | `semi-opd` |
 | Agentic RL | [Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT](2610.03361-follow-the-winners/README.md) | Trent AI Limited，2026-10-02 | 未发现官方代码 | `follow-the-winners` |
 | 后训练数据选择 | [LESSER: Post-Training Data Selection with Output-Layer Gradients](2610.03702-lesser/README.md) | University of Pennsylvania，2026-10-02 | 未发现官方代码 | `lesser` |
 | 异步 RL | [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](2610.01896-gmc-grpo/README.md) | The Ohio State University，2026-10-01 | 未发现官方代码 | `gmc-grpo` |

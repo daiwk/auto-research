@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "method": "elastic-expert-routing",
+  "dataset": "Tiny Shakespeare, chronological 90/5/5, causal character MoE scratch LM",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "fixed_validation_character_ppl": 24.492306732173788,
+      "elastic_validation_character_ppl": 24.557798938713567,
+      "elastic_training_experts_mean": 2.997548828125
+    },
+    {
+      "seed": 43,
+      "fixed_validation_character_ppl": 24.082665642244226,
+      "elastic_validation_character_ppl": 24.1720450450658,
+      "elastic_training_experts_mean": 3.000888671875
+    },
+    {
+      "seed": 44,
+      "fixed_validation_character_ppl": 25.108818684987057,
+      "elastic_validation_character_ppl": 25.133235267237268,
+      "elastic_training_experts_mean": 3.00318359375
+    }
+  ],
+  "aggregate_metrics": {
+    "fixed_validation_character_ppl_mean": 24.561263686468358,
+    "elastic_validation_character_ppl_mean": 24.621026417005545,
+    "elastic_training_experts_mean": 3.0005403645833333
+  },
+  "manifest_ref": "foundation-models:elastic-expert-routing",
+  "evaluation_protocol": {
+    "tier": "l2_public_data",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "100-step small causal MoE negative result; not paper-scale effectiveness",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "provenance": {
+    "commit": "74fbef849213e4c6b61a2a12eb634a516d6e8e3a",
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=1 python scripts/run_elastic_expert_lm.py --text-file data/shakespeare.txt --dataset-id karpathy/char-rnn/tinyshakespeare --dataset-revision sha256:86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed --output runs/elastic-42.json --steps 100 --device cuda --seed 42",
+    "additional_commands": "Repeat the exact command with --seed 43/44 and --output runs/elastic-43.json/runs/elastic-44.json respectively",
+    "artifact_path": "docs/foundation-models/2610.11575-elastic-expert-routing/metrics/scratch-lm-seeds42-44.json",
+    "dataset_fingerprint": "sha256:86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed"
+  }
+}

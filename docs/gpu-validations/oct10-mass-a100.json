@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "adapter_key": "mass",
+  "validated_at": "2026-10-10",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct10_agents.py",
+    "--method",
+    "mass",
+    "--checkpoint",
+    "<public-checkpoint-directory>",
+    "--dataset",
+    "<public-training-jsonl>",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--max-tokens",
+    "64",
+    "--output",
+    "runs/mass-42.json"
+  ],
+  "dataset": {
+    "name": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "split": "train",
+    "sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "scope": "one public task with independent generated train/validation conversations"
+  },
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "weights_sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+  },
+  "result": "passed",
+  "diagnostic_only": true,
+  "evaluation_tier": "L1",
+  "metrics": {
+    "cycles": 2,
+    "sft_steps": 6,
+    "validation_loss_cycle_0": 0.739605317513148,
+    "validation_loss_cycle_1": 0.33263614773750305
+  },
+  "provenance": {
+    "commit": "db2f8151b83c159aa956bdf38851ba273be6d182",
+    "artifact_path": "docs/gpu-validations/oct10-mass-a100.json",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false,
+    "command_paths_redacted": true
+  },
+  "limitations": "Two-worker bounded text workflow; rank8 and three SFT steps/cycle. Not full coding-agent benchmark."
+}

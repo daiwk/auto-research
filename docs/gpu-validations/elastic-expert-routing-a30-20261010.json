@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "adapter_key": "elastic-expert-routing",
+  "validated_at": "2026-10-10",
+  "accelerator": {"vendor": "NVIDIA", "model": "A30"},
+  "command": ["python", "scripts/run_elastic_expert_lm.py", "--text-file", "data/shakespeare.txt", "--dataset-id", "karpathy/char-rnn/tinyshakespeare", "--dataset-revision", "sha256:86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed", "--output", "runs/elastic-42.json", "--steps", "100", "--device", "cuda", "--seed", "42"],
+  "additional_seeds": [43, 44],
+  "dataset": {"name": "karpathy/char-rnn/tinyshakespeare", "revision": "sha256:86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed", "split": "chronological 90/5/5 train/validation/test", "test_used_for_selection": false},
+  "checkpoint": {"model_id": "elastic-moe-random-initialization", "revision": "seeds:42,43,44", "source_commit": "74fbef849213e4c6b61a2a12eb634a516d6e8e3a"},
+  "result": "passed",
+  "diagnostic_only": true,
+  "executed_source_sha256": {
+    "src/auto_research/foundation_models/elastic_expert_routing.py": "9f035b40b2c4b9c29faccde6ea91c65c8d9d404eaa9b5f66051ed4bc04c8d60f",
+    "scripts/run_elastic_expert_lm.py": "d5b0090806ff40d8f2c4724ffa3e0c8a8777e8761e2a5c8c02fd34065b730fff"
+  },
+  "metrics": {"seeds": [42,43,44], "steps_per_seed": 100, "fixed_validation_perplexity_mean": 24.561263686468357, "elastic_validation_perplexity_mean": 24.621026417005545, "realized_experts_mean": 3.0005403645833333, "inference_experts_per_token": 3, "elastic_parameter_delta_by_seed": [0.778810441493988,0.8058505654335022,0.7843250036239624]},
+  "limitations": ["Small scratch language model mechanism diagnostic; not a reproduction of the paper's scale or quality gains", "Elastic validation perplexity did not improve over fixed-k in this run"],
+  "provenance": {"commit": "74fbef849213e4c6b61a2a12eb634a516d6e8e3a", "artifact_path": "docs/gpu-validations/elastic-expert-routing-a30-20261010.json", "metrics_artifact": "docs/foundation-models/2610.11575-elastic-expert-routing/metrics/scratch-lm-seeds42-44.json", "raw_predictions_committed": false, "checkpoint_committed": false}
+}

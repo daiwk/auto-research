@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "residual-advantage",
+  "title": "Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards",
+  "paper_url": "https://arxiv.org/abs/2610.11519",
+  "detail_path": "post-training/2610.11519-residual-advantage/README.md",
+  "topic": [
+    "RLVR",
+    "Teacher guidance"
+  ],
+  "first_author": "Xiaobing Chen",
+  "first_author_affiliation": "Harbin Engineering University / Tencent / Harbin Institute of Technology",
+  "published": "2026-10-08",
+  "code": null,
+  "adapter": "residual-advantage",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/residual-advantage-a100-20261010.json"
+}

@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-10 · [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](../2610.12086-evoalloc/README.md)（`evoalloc`）：模型选择 Full、Partial 或 Discard，得到 Partial 证据后再选择继续/停止。已观察案例更新固定语句经验并反思策略；影子策略共享同一证据，以漏掉新最佳的次数优先、再比较评测成本。
+- 2026-10 · [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
+- 2026-10 · [Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents](../2610.12124-hippocam/README.md)（`hippocam`）：Janus 在推理前维护嵌套目的，Precip 在主响应后、工具结果前归纳闭合意图。Palim 递归整理早期前缀为叙事和知识，原消息保留为树形子节点；recall 每次返回一层，Agent 自行决定深入。
+- 2026-10 · [When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation](../2610.12061-race/README.md)（`race`）：LoGiC 从第二轮逐步删除推理，检查本轮及所有后续原动作的平均 token 对数似然变化，已接受删除继续影响后续上下文。成功轨迹压缩后用于 SFT；RL 屏蔽可删推理并监督提前闭合。
 - 2026-10 · [AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning](../2610.03223-adastep/README.md)（`adastep`）：Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中**不同动作解释了多少回报方差**。
 - 2026-10 · [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](../2610.03634-depgpo/README.md)（`depgpo`）：终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。
 - 2026-10 · [FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution](../2610.03675-frugalevo/README.md)（`frugalevo`）：FrugalEvo 把程序优化拆成高成本模型提出策略、低成本模型执行和改进代码，按预算内整条最佳成绩曲线评价搜索效率。先试跑多种策略再排序，失败时保留父程序追加反馈，取得改进后重新锚定，并用岛屿档案保存不同程序。

@@ -76,6 +76,7 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.12060-vimod": "4",
     "2610.01834-jev-lookahead": "1",
     "2610.02001-mingbird": "1",
     "2609.31045-kuafu": "2",
@@ -108,6 +109,13 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.11575-elastic-expert-routing": {
+        "pdf_url": "https://arxiv.org/pdf/2610.11575",
+        "page": 0,
+        "rect": (303, 217, 530, 473),
+        "label": "Figure 1",
+        "caption": "固定 top-k 的硬截断与 Elastic Expert Routing 的离散高斯预算及平滑监督对比。",
+    },
     "2609.26355-pact": {
         "pdf_url": "https://arxiv.org/pdf/2609.26355",
         "page": 6,

@@ -16,6 +16,18 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "dial-opd": "docs/gpu-validations/dial-opd-a100-20261010.json",
+    "meta-opd": "docs/gpu-validations/meta-opd-a100-20261010.json",
+    "semi-opd": "docs/gpu-validations/semi-opd-a100-20261010.json",
+    "grpo-dropout": "docs/gpu-validations/grpo-dropout-a100-20261010.json",
+    "residual-advantage": "docs/gpu-validations/residual-advantage-a100-20261010.json",
+    "mass": "docs/gpu-validations/oct10-mass-a100.json",
+    "race": "docs/gpu-validations/oct10-race-a100.json",
+    "hippocam": "docs/gpu-validations/oct10-hippocam-a100.json",
+    "evoalloc": "docs/gpu-validations/oct10-evoalloc-a100.json",
+    "elastic-expert-routing": "docs/gpu-validations/elastic-expert-routing-a30-20261010.json",
+    "vimod": "docs/gpu-validations/vimod-a100-20261010.json",
+    "jev-capability": "docs/gpu-validations/jev-capability-a100-20261010.json",
     "oct07-agent-search": "docs/gpu-validations/oct07-agent-search-a100.json",
     "architecture-mrb-runtime": "docs/gpu-validations/architecture-mrb-a100-20261007.json",
     "experiment-integrity-runtime": "docs/gpu-validations/experiment-integrity-a100-20261007.json",

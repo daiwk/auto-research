@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "semi-opd",
+  "title": "When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better",
+  "paper_url": "https://arxiv.org/abs/2610.11291",
+  "detail_path": "post-training/2610.11291-semi-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "Offline student rollouts"
+  ],
+  "first_author": "Siyan Zhao",
+  "first_author_affiliation": "UCLA / NVIDIA（论文注明实习）",
+  "published": "2026-10-08",
+  "code": null,
+  "adapter": "semi-opd",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/semi-opd-a100-20261010.json"
+}
