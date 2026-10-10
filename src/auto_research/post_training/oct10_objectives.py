@@ -105,7 +105,11 @@ def virtual_adamw(model, optimizer, loss, *, max_grad_norm=1.0):
         raise ValueError("MetaOPD requires AdamW state")
     named = {name: p for name, p in model.named_parameters() if p.requires_grad}
     gradients = torch.autograd.grad(loss, tuple(named.values()), create_graph=True)
-    norm = torch.stack([g.square().sum() for g in gradients]).sum().sqrt()
+    squared_norm = torch.stack([g.square().sum() for g in gradients]).sum()
+    # A zero-gradient minibatch must produce a finite zero hypergradient.
+    # sqrt(0) has an undefined derivative even when clipping is inactive.
+    norm = torch.where(squared_norm > 0, squared_norm.clamp_min(1e-30).sqrt(),
+                       torch.zeros_like(squared_norm))
     scale = (max_grad_norm / (norm + 1e-6)).clamp(max=1.0) if max_grad_norm else 1.0
     settings = {id(p): group for group in optimizer.param_groups for p in group["params"]}
     result = dict(model.named_parameters())

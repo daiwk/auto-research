@@ -144,13 +144,40 @@ def test_co_ra_updates_adapter_only_and_uses_same_scored_batch():
     x = torch.randn(2, 4, 3)
     base = teacher.base.weight.detach().clone()
     student_before = student.weight.detach().clone()
+    teacher_snapshots = []
+    student_optimizer = torch.optim.AdamW(student.parameters(), lr=.01)
+    teacher_optimizer = torch.optim.AdamW(teacher.adapter.parameters(), lr=.01)
+    def score_teacher():
+        logits = teacher(x)
+        teacher_snapshots.append(logits.detach().clone())
+        return logits
+
     result = co_ra_step(student, teacher,
-                        torch.optim.AdamW(student.parameters(), lr=.01),
-                        torch.optim.AdamW(teacher.adapter.parameters(), lr=.01),
-                        student_logits_fn=lambda: student(x), teacher_logits_fn=lambda: teacher(x),
+                        student_optimizer, teacher_optimizer,
+                        student_logits_fn=lambda: student(x), teacher_logits_fn=score_teacher,
                         actions=torch.randint(40, (2, 4)), mask=torch.ones(2, 4),
                         verifier_advantage=torch.tensor([1., -1.]))
     assert torch.equal(teacher.base.weight, base)
     assert not torch.equal(student.weight, student_before)
     assert teacher.adapter.weight.abs().sum() > 0
     assert result["guidance_mean_error"] < 1e-5
+    assert torch.equal(teacher_snapshots[0], teacher_snapshots[1])
+    co_ra_step(student, teacher, student_optimizer, teacher_optimizer,
+               student_logits_fn=lambda: student(x), teacher_logits_fn=score_teacher,
+               actions=torch.randint(40, (2, 4)), mask=torch.ones(2, 4),
+               verifier_advantage=torch.tensor([1., -1.]))
+    assert not torch.equal(teacher_snapshots[0], teacher_snapshots[2])
+    assert torch.equal(teacher_snapshots[2], teacher_snapshots[3])
+
+
+def test_virtual_adamw_zero_gradient_has_finite_zero_hypergradient():
+    from auto_research.post_training.oct10_objectives import virtual_adamw
+
+    model = torch.nn.Linear(2, 2)
+    weight = torch.nn.Parameter(torch.tensor(1.))
+    optimizer = torch.optim.AdamW(model.parameters())
+    loss = model(torch.ones(1, 2)).sum() * weight * 0
+    virtual = virtual_adamw(model, optimizer, loss)
+    outer = sum(parameter.square().sum() for parameter in virtual.values())
+    hypergradient, = torch.autograd.grad(outer, weight)
+    assert torch.isfinite(hypergradient) and hypergradient == 0
