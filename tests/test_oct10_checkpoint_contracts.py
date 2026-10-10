@@ -4,7 +4,8 @@ import pytest
 import torch
 
 from auto_research.post_training.oct10_checkpoint import (
-    LowRankLinear, install_lora, load_public_rows, numeric_answer,
+    LowRankLinear, install_lora, load_public_rows, numeric_answer, verified_reward,
+    PAPER_OBJECTIVES, OBJECTIVES,
 )
 
 
@@ -40,6 +41,26 @@ def test_dataset_contract_and_external_verifier(tmp_path):
     assert len(load_public_rows(path)) == 1
     assert numeric_answer("Steps 12 then \\boxed{1,200}") == "1200"
     assert numeric_answer("no numeric answer") is None
+    assert verified_reward("no numeric answer", "#### 1200") == 0
+    assert verified_reward("\\boxed{1,200}", "#### 1200") == 1
+    with pytest.raises(ValueError):
+        verified_reward("no numeric answer", "no numeric answer")
     path.write_text('{}\n')
     with pytest.raises(ValueError):
         load_public_rows(path)
+
+
+def test_paper_catalog_has_executable_objective_and_complete_metadata():
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    for key, objectives in PAPER_OBJECTIVES.items():
+        assert set(objectives) <= set(OBJECTIVES)
+        spec = json.loads((root / "src/auto_research/paper_specs/catalog/post-training" /
+                           f"{key}.json").read_text())
+        assert spec["adapter"] == key and spec["requires_gpu_validation"] is True
+        assert spec["first_author_affiliation"] and spec["published"] == "2026-10-08"
+        text = (root / "docs" / spec["detail_path"]).read_text()
+        for label in ("论文链接", "公司 / 机构", "首次公开日期", "原作者代码",
+                      "本地 adapter", "本地复现代码", "核心公式", "复现边界"):
+            assert label in text

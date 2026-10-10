@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "meta-opd",
+  "title": "MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.11989",
+  "detail_path": "post-training/2610.11989-meta-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "Meta-learning"
+  ],
+  "first_author": "Zipeng Wang",
+  "first_author_affiliation": "East China Normal University",
+  "published": "2026-10-08",
+  "code": null,
+  "adapter": "meta-opd",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/meta-opd-a100-20261010.json"
+}

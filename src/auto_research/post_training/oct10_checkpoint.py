@@ -22,6 +22,11 @@ from .oct10_objectives import (
 )
 
 OBJECTIVES = ("opd", "dial-opd", "meta-opd", "semi-opd", "grpo-dropout", "residual-advantage", "co-ra")
+PAPER_OBJECTIVES = {
+    "dial-opd": ("dial-opd",), "meta-opd": ("meta-opd",),
+    "semi-opd": ("semi-opd",), "grpo-dropout": ("grpo-dropout",),
+    "residual-advantage": ("residual-advantage", "co-ra"),
+}
 
 
 class LowRankLinear(nn.Module):
@@ -72,6 +77,15 @@ def numeric_answer(text):
     return values[-1].replace(",", "") if values else None
 
 
+def verified_reward(response, reference):
+    """Invalid references are a data error, never a None == None success."""
+    target = numeric_answer(reference)
+    if target is None:
+        raise ValueError("GSM8K reference has no numeric answer")
+    prediction = numeric_answer(response)
+    return float(prediction is not None and prediction == target)
+
+
 def _prompt(tokenizer, question, device):
     messages = [{"role": "user", "content": question}]
     if tokenizer.chat_template:
@@ -85,7 +99,8 @@ def _prompt(tokenizer, question, device):
 def _sample(student, tokenizer, question, device, group, max_tokens):
     prompt = _prompt(tokenizer, question, device)
     with torch.no_grad():
-        ids = student.generate(prompt, max_new_tokens=max_tokens, do_sample=True,
+        ids = student.generate(prompt, attention_mask=torch.ones_like(prompt),
+                               max_new_tokens=max_tokens, do_sample=True,
                                temperature=1., top_p=1., num_return_sequences=group,
                                pad_token_id=tokenizer.pad_token_id, use_cache=True)
     mask = torch.zeros_like(ids[:, 1:], dtype=torch.bool)
@@ -143,8 +158,10 @@ def run_checkpoint(*, objective, student_path, teacher_path, student_id, student
     nn.init.zeros_(network[-1].bias)
     meta_optimizer = torch.optim.AdamW(network.parameters(), lr=1e-3)
     teacher_optimizer = None
+    teacher_before = {}
     if objective == "co-ra":
         install_lora(teacher)
+        teacher_before = {n: p.detach().clone() for n, p in teacher.named_parameters() if p.requires_grad}
         teacher_optimizer = torch.optim.AdamW([p for p in teacher.parameters() if p.requires_grad],
                                               lr=learning_rate, weight_decay=.01)
     # Fixed pi_0 responses and one teacher pass per response, before any update.
@@ -174,9 +191,11 @@ def run_checkpoint(*, objective, student_path, teacher_path, student_id, student
             rollout_logits = _logits(student, ids)
             old_lp = rollout_logits.log_softmax(-1).gather(-1, actions[..., None]).squeeze(-1)
         metrics = {"step": step, "response_tokens": int(mask.sum())}
-        rewards = torch.tensor([float(numeric_answer(text) == numeric_answer(row["answer"]))
+        rewards = torch.tensor([verified_reward(text, row["answer"])
                                 for text in texts], device=device)
-        advantage = (rewards - rewards.mean()) / (rewards.std(unbiased=False) + 1e-6)
+        # GRPO's group estimator uses sample standard deviation (RA Table 12).
+        deviation = rewards.std(unbiased=True) if len(rewards) > 1 else rewards.new_zeros(())
+        advantage = (rewards - rewards.mean()) / (deviation + 1e-6)
         if objective == "meta-opd":
             reference = train[(step + len(train) // 2) % len(train)]
             prefix = _prompt(tokenizer, reference["question"], device)
@@ -220,6 +239,16 @@ def run_checkpoint(*, objective, student_path, teacher_path, student_id, student
         if teacher_logits is not None:
             metrics["overlap_at_64"] = float(topk_overlap(rollout_logits, teacher_logits, mask))
         metrics["training_reward_mean"] = float(rewards.mean())
+        metrics["training_reward_variance"] = float(rewards.var(unbiased=False))
+        metrics["student_gradient_l2"] = sum(
+            float(p.grad.detach().square().sum()) for p in student.parameters()
+            if p.requires_grad and p.grad is not None
+        )**.5
+        if teacher_optimizer is not None:
+            metrics["teacher_gradient_l2"] = sum(
+                float(p.grad.detach().square().sum()) for p in teacher.parameters()
+                if p.requires_grad and p.grad is not None
+            )**.5
         history.append(metrics)
         print(json.dumps({"objective": objective, "seed": seed, **metrics}), flush=True)
     delta = sum(float((p.detach() - before[n]).square().sum())
@@ -229,20 +258,26 @@ def run_checkpoint(*, objective, student_path, teacher_path, student_id, student
     for row in validation[:validation_examples]:
         prompt = _prompt(tokenizer, row["question"], device)
         with torch.no_grad():
-            result = student.generate(prompt, max_new_tokens=max_tokens, do_sample=False,
+            result = student.generate(prompt, attention_mask=torch.ones_like(prompt),
+                                       max_new_tokens=max_tokens, do_sample=False,
                                        pad_token_id=tokenizer.pad_token_id, use_cache=True)
         text = tokenizer.decode(result[0, prompt.shape[1]:], skip_special_tokens=True)
-        correct += numeric_answer(text) == numeric_answer(row["answer"])
+        correct += verified_reward(text, row["answer"])
     examples = min(validation_examples, len(validation))
+    teacher_delta = sum(float((p.detach() - teacher_before[n]).square().sum())
+                        for n, p in teacher.named_parameters() if n in teacher_before)**.5
     report = {"objective": objective, "seed": seed, "steps": steps,
               "fidelity": "core-mechanism", "diagnostic_only": True,
               "evaluation_scope": "short real-checkpoint runtime validation; not paper benchmark reproduction",
               "checkpoint": {"student": student_id, "student_revision": student_revision,
                              "teacher": teacher_id, "teacher_revision": teacher_revision},
-              "dataset": {"id": "openai/gsm8k", "revision": dataset_revision,
+              "dataset": {"id": "openai/grade-school-math", "revision": dataset_revision,
                           "train_sha256": hashlib.sha256(train_path.read_bytes()).hexdigest(),
                           "validation_sha256": hashlib.sha256(validation_path.read_bytes()).hexdigest()},
               "metrics": {"adapter_parameter_delta_l2": delta,
+                          "teacher_adapter_parameter_delta_l2": teacher_delta,
+                          "steps_with_nonzero_student_gradient": sum(
+                              item["student_gradient_l2"] > 0 for item in history),
                           "validation_examples": examples, "validation_exact_match": correct / examples},
               "history": history, "validation_used_for_selection": False}
     output_dir.mkdir(parents=True, exist_ok=True)

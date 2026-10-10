@@ -1,0 +1,14 @@
+{
+  "domain": "foundation-models",
+  "key": "jev-capability",
+  "title": "Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks",
+  "paper_url": "https://arxiv.org/abs/2610.11978",
+  "detail_path": "system-one/2610.11978-jev-capability/README.md",
+  "topic": ["System One / JEV", "公共评测与能力边界"],
+  "first_author": "Xing Li / Qingcheng Chang",
+  "first_author_affiliation": "Dalian Maritime University",
+  "published": "2026-10-08",
+  "code": "未找到原作者公开代码（2026-10-10 核验）",
+  "adapter": "jev-capability",
+  "priority": "P1"
+}

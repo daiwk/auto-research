@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "dial-opd",
+  "title": "DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.11659",
+  "detail_path": "post-training/2610.11659-dial-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "Token supervision"
+  ],
+  "first_author": "Anhao Zhao",
+  "first_author_affiliation": "Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University",
+  "published": "2026-10-08",
+  "code": "https://github.com/EIT-NLP/DIAL-OPD",
+  "adapter": "dial-opd",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/dial-opd-a100-20261010.json"
+}

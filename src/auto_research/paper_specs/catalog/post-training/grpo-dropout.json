@@ -1,0 +1,19 @@
+{
+  "domain": "post-training",
+  "key": "grpo-dropout",
+  "title": "GRPODropout: Less is More for Online Reinforcement Learning Rollouts",
+  "paper_url": "https://arxiv.org/abs/2610.11854",
+  "detail_path": "post-training/2610.11854-grpo-dropout/README.md",
+  "topic": [
+    "RLVR",
+    "Rollout selection"
+  ],
+  "first_author": "Hexuan Deng",
+  "first_author_affiliation": "Harbin Institute of Technology (Shenzhen)",
+  "published": "2026-10-08",
+  "code": "https://github.com/hexuandeng/GRPODropout",
+  "adapter": "grpo-dropout",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/grpo-dropout-a100-20261010.json"
+}
