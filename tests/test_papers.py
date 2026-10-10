@@ -1,5 +1,8 @@
 import urllib.error
+import urllib.parse
 from pathlib import Path
+
+import pytest
 
 from auto_research.papers import ArxivClient, canonical_arxiv_id, parse_arxiv_feed
 
@@ -43,6 +46,28 @@ def test_search_builds_quoted_category_query(monkeypatch):
 def test_canonical_arxiv_id_removes_only_version_suffix():
     assert canonical_arxiv_id("2608.10257v1") == "2608.10257"
     assert canonical_arxiv_id("2608.10257") == "2608.10257"
+
+
+def test_search_bounds_late_index_by_identifier_month_not_submission_date(monkeypatch):
+    client = ArxivClient(minimum_interval_seconds=0)
+    urls = []
+    def read(request):
+        urls.append(request.full_url)
+        return b'<feed xmlns="http://www.w3.org/2005/Atom" />'
+    monkeypatch.setattr(client, "_read", read)
+    client.search_pages("agent", categories=("cs.AI",), identifier_months=("2609", "2610"))
+    query = urllib.parse.parse_qs(urllib.parse.urlparse(urls[0]).query)["search_query"][0]
+    assert '(id:2609.* OR id:2610.*)' in query
+    assert 'all:"agent"' in query
+    assert 'cat:cs.AI' in query
+    assert 'submittedDate' not in query
+    assert client.query_reports[0]["identifier_months"] == ["2609", "2610"]
+
+
+@pytest.mark.parametrize("month", ["2613", "2600", "202610", "2610 OR all:agent"])
+def test_identifier_month_rejects_invalid_values_before_network(month):
+    with pytest.raises(ValueError, match="identifier months"):
+        ArxivClient().search("agent", identifier_months=(month,))
 
 
 def test_discovery_respects_arxiv_shared_api_limit():

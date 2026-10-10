@@ -1,0 +1,3931 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-10",
+  "requested_review_window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "directory_year": 2026,
+  "expected_records": 398,
+  "unique_records": 398,
+  "listing_transport_complete": true,
+  "detail_transport_complete": true,
+  "full_review_complete": false,
+  "reason": "官网仅标年份，398个详情页均未暴露精确发表日期；84条提供的arXiv身份均早于2610月份，属于窗口前首次公开论文，其余314条仍须日期/身份核对。全部分页读取并不证明10月1～7日候选已穷尽。",
+  "pages": [
+    {
+      "page": 1,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=1",
+      "status": "ok",
+      "sha256": "0037ad0fdd35e82c9efe486a94100784706a5f46d0a7bd7fe1f21e5aab1eda59"
+    },
+    {
+      "page": 2,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=2",
+      "status": "ok",
+      "sha256": "146daa2335d9a6ce1c2449296543ac23302aa0de1825f338731a19ac30d41333"
+    },
+    {
+      "page": 3,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=3",
+      "status": "ok",
+      "sha256": "30601c60a14fd1319345cc267634c89170dad1af1a848574b43dff42562b7991"
+    },
+    {
+      "page": 4,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=4",
+      "status": "ok",
+      "sha256": "7ed23e416ed8d04665139f8e428752c07edafc669fd041965f6cbdda0cba6776"
+    },
+    {
+      "page": 5,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=5",
+      "status": "ok",
+      "sha256": "e9e3f563fddfd2723a946304c6fc6f5479b25b85c88336a3c2e761ca4453226d"
+    },
+    {
+      "page": 6,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=6",
+      "status": "ok",
+      "sha256": "1d40f673d2ba7cf106e2d2947cc9b19270db1d02d87bfea214cb27f961aa5db7"
+    },
+    {
+      "page": 7,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=7",
+      "status": "ok",
+      "sha256": "78766fbbb28b0be9215b56035a42dee70365867f990160969e3813488f7ee94c"
+    },
+    {
+      "page": 8,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=8",
+      "status": "ok",
+      "sha256": "6f744d9cdb692ce369af30dadb1c6b279a841b55f287a584c7226a08350482c2"
+    },
+    {
+      "page": 9,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=9",
+      "status": "ok",
+      "sha256": "9a1d29aa0710ff7fbfd7d33a5a2b1e823f14941b2a5183e559f7246a2c465101"
+    },
+    {
+      "page": 10,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=10",
+      "status": "ok",
+      "sha256": "ae850ee026b3d1521f325b96aa02210330927dc29f8f81ce844a02d79be86426"
+    },
+    {
+      "page": 11,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=11",
+      "status": "ok",
+      "sha256": "c2ebac93067394a4a44447d86112d59edb4ac4ea62aa8c44a239eac0e79015fc"
+    },
+    {
+      "page": 12,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=12",
+      "status": "ok",
+      "sha256": "f63c69e155c4b8b36340d831e4b4b8e9bcd2733ddd03d04a1bddd2d0fefc7310"
+    },
+    {
+      "page": 13,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=13",
+      "status": "ok",
+      "sha256": "4217427463ca42cb926995339c7300653fdfdcd6827510709dcc9269ea5f2887"
+    },
+    {
+      "page": 14,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=14",
+      "status": "ok",
+      "sha256": "6095a41729b3ec2037a65280691760453a4063fc1f2f10384fcd46abb295dacc"
+    },
+    {
+      "page": 15,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=15",
+      "status": "ok",
+      "sha256": "1c743ae22d8d7178033edeffbeaeba052d7e2d6d8bca720dd342c6f51cc98d07"
+    },
+    {
+      "page": 16,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=16",
+      "status": "ok",
+      "sha256": "2fdd38c1c1b5e5c73962ef9833536ff5253396c89c8dbe367719ac75b73992cb"
+    },
+    {
+      "page": 17,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=17",
+      "status": "ok",
+      "sha256": "c38b70b7d6558ca77c1c63100b56b7225abd1c7960140b83915a73bda578f9bb"
+    },
+    {
+      "page": 18,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=18",
+      "status": "ok",
+      "sha256": "58be31e8a93524a13db38e33631351e5d88d027284dc910565ad3cef6a326c67"
+    },
+    {
+      "page": 19,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=19",
+      "status": "ok",
+      "sha256": "24bf38de59c94e4aa07c8493f5607cd276ce73bb925c4e2333f532fe62b68831"
+    },
+    {
+      "page": 20,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=20",
+      "status": "ok",
+      "sha256": "21732ea85581dccdbe060293d3ee456562e7a5719fa0bfe22d5f7b9255923d78"
+    },
+    {
+      "page": 21,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=21",
+      "status": "ok",
+      "sha256": "363c3575d8ba61ce8a84a10f336a66172bfd6d902144e362746842b18b065e47"
+    },
+    {
+      "page": 22,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=22",
+      "status": "ok",
+      "sha256": "29f38c611a94aa873cc6e9213cc2e3fd19fa7fe8d49dcb4f5e1db5c8041bc79c"
+    },
+    {
+      "page": 23,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=23",
+      "status": "ok",
+      "sha256": "b39093ebc46e4f23bbd4f2f1c74cf99b4bdc22b91a115fd30d3ea9bd2d655e27"
+    },
+    {
+      "page": 24,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=24",
+      "status": "ok",
+      "sha256": "c7fe07c5fa59c6fcfe0a2c43a74d4e0b15d4b9c192d1cf84429402e419dac970"
+    },
+    {
+      "page": 25,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=25",
+      "status": "ok",
+      "sha256": "3f08f814fe5c00bbd664d1209edb69004c869ba395077c761ee742a3b10f27dc"
+    },
+    {
+      "page": 26,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=26",
+      "status": "ok",
+      "sha256": "fdec28809526a5e8c526154291b64f11bc45eec410b898d4fa9a5e9de9a21d07"
+    },
+    {
+      "page": 27,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=27",
+      "status": "ok",
+      "sha256": "f5fcad5973114304eb9b05e2495d500c847be3d2fcb2021f76371d209d39cdb5"
+    }
+  ],
+  "records": [
+    {
+      "title": "Towards conversational artificial intelligence for disease management",
+      "url": "https://research.google/pubs/towards-conversational-ai-for-disease-management/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "268d7b8e167dcc8034fce667f6db105c4e5113b5605e4f656c1fb4c961c44acc",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "FreshBrew: A Benchmark for Evaluating AI Agents on Java Code Migration",
+      "url": "https://research.google/pubs/freshbrew-a-benchmark-for-evaluating-ai-agents-on-java-code-migration-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2510.04852"
+      ],
+      "dates": [],
+      "sha256": "c7ec4c7f788f0bb8982ba730c975a24154604f530cf9bccf2a795bb187c9ca09",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Multi-Agent Design: Optimizing Agents with Better Prompts and Topologies",
+      "url": "https://research.google/pubs/multi-agent-design-optimizing-agents-with-better-prompts-and-topologies/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2502.02533"
+      ],
+      "dates": [],
+      "sha256": "1d3fc4b86e243304072bd3644d43a3524b1c34efebad6f62b49052a379d6936f",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Productionizing Quantum Mass Production",
+      "url": "https://research.google/pubs/productionizing-quantum-mass-production/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2506.00132"
+      ],
+      "dates": [],
+      "sha256": "4ecd805ead9fc70743fb7fca428c2c8115cfccff0ecd871b4aca3d49e63d8c91",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "On-the-Fly OVD Adaptation with FLAME: Few-shot Localization via Active Marginal-Samples Exploration",
+      "url": "https://research.google/pubs/on-the-fly-ovd-adaptation-with-flame-few-shot-localization-via-active-marginal-samples-exploration/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3620d9f3c1bc275047393e41ffc414b2daee6eef730da36d70d1b408373cb14a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "CrossCheck: Input Validation for WAN Control Systems",
+      "url": "https://research.google/pubs/crosscheck-input-validation-for-wan-control-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ac5bfa2e2d75a0a6ac5efa90a6644b26c993143ae99963bddc58c1f1d70fa065",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Quantum state preparation with optimal T-count",
+      "url": "https://research.google/pubs/quantum-state-preparation-with-optimal-t-count/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2411.04790"
+      ],
+      "dates": [],
+      "sha256": "6031e9bc65c3f58a461849000b430e6a205f8efca40099318381982499021d99",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Semantic Data Modeling, Graph Query, and SQL, Together at Last?",
+      "url": "https://research.google/pubs/semantic-data-modeling-graph-query-and-sql-together-at-last/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8a027195f0f4db86f82df4ad30193a2a00e74d993605893faf6a89072f92d457",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ALF: Advertiser Large Foundation Model for Multi-Modal Advertiser Understanding",
+      "url": "https://research.google/pubs/alf-advertiser-large-foundation-model-for-multi-modal-advertiser-understanding/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2504.18785"
+      ],
+      "dates": [],
+      "sha256": "f9fa5166a2e8641cca1cc08b316a8473026ce45fe956027e9e6b0d215b13f509",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "How Tech Workers Contend with Hazards of Humanlikeness in Generative AI",
+      "url": "https://research.google/pubs/how-tech-workers-contend-with-hazards-of-humanlikeness-in-generative-ai/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "56b496547344966ae6b710a46229609eecb1ebe40e6d6c7522de3582c9c13de9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Who Controls the Curriculum for AI? The Limits of Participatory Design for  Educational AI",
+      "url": "https://research.google/pubs/who-controls-the-curriculum-for-ai-the-limits-of-participatory-design-for-educational-ai/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "941bd2933a050f33f9443e57e456fc7b80a96bb36dba3700792a5f981b86f013",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Computer Vision Problem in Flatland",
+      "url": "https://research.google/pubs/a-computer-vision-problem-in-flatland/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c4a58a6ecf82aff2386d179a9545a0c2d8df9faba68005b82b1b8bebc141054c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "`It’s still abuse’: Community attitudes and perceptions on AI-generated image-based sexual abuse",
+      "url": "https://research.google/pubs/its-still-abuse-community-attitudes-and-perceptions-on-ai-generated-image-based-sexual-abuse/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "db96724c31d41284b9b04391b0e7ec435dcb67ad43259c491517477e108d3021",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Robust Wireless Resource Allocation Against Adversarial Jamming",
+      "url": "https://research.google/pubs/robust-wireless-resource-allocation-against-adversarial-jamming/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e24e674d66bbf60faf84811b2ec0be15413b5d1195e894150ce9996a3d8a8954",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Phoenix: Rowhammer Attacks on DDR5 with Self-Correcting Synchronization",
+      "url": "https://research.google/pubs/phoenix-rowhammer-attacks-on-ddr5-with-self-correcting-synchronization/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d3dec12cc2a08b9269959ea290e0225a2b5cffdc7488e8945f8f05513ef56851",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A probabilistic framework for learning non‐intrusive corrections to long‐time climate simulations from short‐time training data",
+      "url": "https://research.google/pubs/a-probabilistic-framework-for-learning-nonintrusive-corrections-to-longtime-climate-simulations-from-shorttime-training-data/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "eb015d99daeccc5cb2f44eb80f062116d7427b7d562db6c4a635bfc60c7aab7d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ARM MTE Performance in Practice",
+      "url": "https://research.google/pubs/arm-mte-performance-in-practice/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "dde7ab4ec08a056f95ded7fed3fd1c0c35514ebf529707c806bc4388f2e70924",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "How Google SREs Use Gemini CLI to Solve Real-World Outages",
+      "url": "https://research.google/pubs/how-google-sres-use-gemini-cli-to-solve-real-world-outages/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a3119f290f2bfc881edca9efee330060fba175799bfc14df94a6939681e8d5a3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GS-Offload: Scalable 3D Gaussian Splatting Training System via Host Memory Offloading",
+      "url": "https://research.google/pubs/gs-offload-scalable-3d-gaussian-splatting-training-system-via-host-memory-offloading/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f4eba8df10d2eef0331fc9162f4462897c020559b5033565b54583ae2ce603f2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Conditional Execution of Compiler Passes Based on Per-Script Feature Detection",
+      "url": "https://research.google/pubs/conditional-execution-of-compiler-passes-based-on-per-script-feature-detection/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8e3550a1f066e5612b42bf85a7512ff9b64ebf255ae4da10961c0c2904a4087d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "SNPeek: Side-Channel Analysis for Privacy Applications on Confidential VMs",
+      "url": "https://research.google/pubs/snpeek-side-channel-analysis-for-privacy-applications-on-confidential-vms/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9d34fd754353d73cba2aefe3ccc27df7d2063835400a978c63fc1ff85530912e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ADCanvas: Accessible and Conversational Audio Description  Authoring for Blind and Low Vision Creators",
+      "url": "https://research.google/pubs/adcanvas-accessible-and-conversational-audio-description-authoring-for-blind-and-low-vision-creators/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6ffb92ac3838bdb7a50959dbda1a0e6332047a992245599a59783c050d581089",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Who am I Talking to? A Large-Scale Measurement of Surface Attribution Across Real-World Security and Privacy Interfaces",
+      "url": "https://research.google/pubs/who-am-i-talking-to-a-large-scale-measurement-of-surface-attribution-across-real-world-security-and-privacy-interfaces/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "94a587e210dbddce3be68c05e3c6bd21bd67c2ffba6aa28720452064ec9bb788",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Developer Productivity in the Age of Generative AI: A Psychological Perspective",
+      "url": "https://research.google/pubs/developer-productivity-in-the-age-of-generative-ai-a-psychological-perspective/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4f8da40862e89a14ce95c7de89a491e58eceb4cd259ebec58fdfe4a88a5cab60",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GenAI on Google Cloud: Enterprise Generative AI Systems and AI Agents",
+      "url": "https://research.google/pubs/genai-on-google-cloud-enterprise-generative-ai-systems-and-ai-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "00ce84d67777798a3dbf35188b9e8d662926f59f9e7cf046ab58a6377139523e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Responsive User Interfaces Based on Task Criticality and User Context",
+      "url": "https://research.google/pubs/responsive-user-interfaces-based-on-task-criticality-and-user-context/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7f30edcb017351dc05b971b22b5be0e68fb93fab13caf1ac191ca924efb38cba",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Ontic-Epistemic Distinction: Implications for General Intelligence",
+      "url": "https://research.google/pubs/the-ontic-epistemic-distinction-implications-for-robust-machine-intelligence/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "fe791dc148a26dfaa7cbef72538faeb916a7b71d5bfd76698e5e83282a200f7f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Unveiling the Global Landscape of Android Security Updates",
+      "url": "https://research.google/pubs/unveiling-the-global-landscape-of-android-security-updates/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1313ff95a4625e21b396e3bb6467414c7af9e331702197714a8b8283b6cf10fe",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Framework for Interactive Machine Learning and Enhanced Conversational Systems",
+      "url": "https://research.google/pubs/a-framework-for-interactive-machine-learning-and-enhanced-conversational-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "82bb7a84e13fe61ea8baee5723259e5eef256ba30c3db3ae95410d6b66957829",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "VISTA: A Test-Time Self-Improving Video Generation Agent",
+      "url": "https://research.google/pubs/vista-towards-test-time-self-improving-video-generation-agent/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2510.15831"
+      ],
+      "dates": [],
+      "sha256": "64d1bc2b1a49354636c7c0de4b6b482404dd166b3f8c518d7cc951a49e8ebedc",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Silicon-Level Sovereignty: Root of Trust in AI Accelerators (Digital Trust & Policy)",
+      "url": "https://research.google/pubs/silicon-level-sovereignty-root-of-trust-in-ai-accelerators-digital-trust-policy/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7605ba2074c98d07056faa67a0c6daf76f509384972070b65c75ac6a2152a29b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Agentic AI Infrastructure in Practice: Learn These Key Hurdles to Deploy Production AI Agents Efficiently",
+      "url": "https://research.google/pubs/agentic-ai-infrastructure-in-practice-learn-these-key-hurdles-to-deploy-production-ai-agents-efficiently/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f8af0d759ff47309ac040d759b5f7bd7392181a9400f7174276dad1c2a7acd53",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Managing and Securing Google's Fleet of Multi-Node Servers",
+      "url": "https://research.google/pubs/managing-and-securing-googles-fleet-of-multi-node-servers/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f1453fcb1ec76a2d20a314ec07dda9194074d7818d2fa3d9a446aee0cbdf746d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Usability Hasn’t Peaked: Exploring How Expressive Design Overcomes the Usability Plateau",
+      "url": "https://research.google/pubs/usability-hasnt-peaked-exploring-how-expressive-design-overcomes-the-usability-plateau/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ae0dba947a557fe118949a010cba2a32ff9697a7f4b77a60049ec2e27a068f19",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Type-Aware Ranking of Urban Similarity from Aerial Imagery",
+      "url": "https://research.google/pubs/type-aware-ranking-of-urban-similarity-from-aerial-imagery/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b6cbc41c5ceddf82b13723a837a173f066d4d780c2e433836e6039ec9a613f76",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Promise or Peril? Exploring Black Adults' Perspectives on the Use of Artificial Intelligence in Health Contexts",
+      "url": "https://research.google/pubs/promise-or-peril-exploring-black-adults-perspectives-on-the-use-of-artificial-intelligence-in-health-contexts/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "446a212fec9b3b20f33df2c85b53969235060095be7bf4c18c4a1dfcb28da1a2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Raman Spectroscopy Pre-Trained Encoder: A Self-Supervised Learning Approach For Data-Efficient Domain-Independent Spectroscopy Analysis",
+      "url": "https://research.google/pubs/raman-spectroscopy-pre-trained-encoder-a-self-supervised-learning-approach-for-data-efficient-domain-independent-spectroscopy-analysis/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c34aa04ffb3f483fb37b6478351b3a087749b7433503ab8e45b0e89a16e55dff",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Dual-Mode Privacy Guard: A Framework for Augmented Compliance in Managing Sensitive People Operations Data",
+      "url": "https://research.google/pubs/the-dual-mode-privacy-guard-a-framework-for-augmented-compliance-in-managing-sensitive-people-operations-data/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "af2b0ecc90a15a7bda8e1538cd99d08d641d54500782fd9ce8b9c573961d42ed",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Agentic Trend-to-Knowledge: A Methodology for Automating Case Deflection through Proactive Content Surfacing in Enterprise Employee Support",
+      "url": "https://research.google/pubs/agentic-trend-to-knowledge-a-methodology-for-automating-case-deflection-through-proactive-content-surfacing-in-enterprise-employee-support/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d80e2ed4093c7b4479a66085d122ae27ef1fd3247d898ed100d9de1c1064447d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Multi-Agent System for Cognitive Work Automation Using an Adversarial Review Panel",
+      "url": "https://research.google/pubs/multi-agent-system-for-cognitive-work-automation-using-an-adversarial-review-panel/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "379bbbeb678a5361dbb713294c92d9fb912fac300778a663b4a7cc2fef30d68e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Dynamic Case Precedent: An Architecture for Accelerating Agent Proficiency and Resolution Consistency in Large-Scale People Operations",
+      "url": "https://research.google/pubs/dynamic-case-precedent-an-architecture-for-accelerating-agent-proficiency-and-resolution-consistency-in-large-scale-people-operations/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4f8675fc43a8184255b3051f7e99782e48fe2dd96a72b8527e3e61e39b17078f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Glossary-Grounded Universal Queue: An Architecture for Enabling Follow-the-Sun Support in Global People Operations",
+      "url": "https://research.google/pubs/the-glossary-grounded-universal-queue-an-architecture-for-enabling-follow-the-sun-support-in-global-people-operations/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1dc51fc301f74f7209c474049a4e511bb030f3cfb365f314b95e08b8af695125",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning",
+      "url": "https://research.google/pubs/prompt-level-distillation-a-non-parametric-alternative-to-model-fine-tuning-for-efficient-reasoning/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "db1ec73e16660af6e7734ccccfe73aea220ab9f90a687cec75e4937773e4d65b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Neural general circulation models for modeling precipitation",
+      "url": "https://research.google/pubs/neural-general-circulation-models-for-modeling-precipitation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f244febf692d1b648c272e634f9ea372b5e12f02a49637aa015649e7d20450c2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "An experimental evaluation of an AI-powered interactive learning platform",
+      "url": "https://research.google/pubs/an-experimental-evaluation-of-an-ai-powered-interactive-learning-platform/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a53906e09ce53609992a196cf32f9d5f4219b7f93a18f4b9c6d2101832b50462",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Self-Evolving Systems: Moving Beyond Deterministic Interfaces to Adaptive Generative Interfaces",
+      "url": "https://research.google/pubs/self-evolving-systems-moving-beyond-deterministic-interfaces-to-adaptive-generative-interfaces/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8f2f9b163de91b8b440be4948e94a39cbc10f6564991316569648a6f5cf27d62",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Performance analysis of updated Sleep Tracking algorithms across Google and Fitbit wearable devices",
+      "url": "https://research.google/pubs/performance-analysis-of-updated-sleep-tracking-algorithms-across-google-and-fitbit-wearable-devices/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "58c5a02ebd2708707d871b3ee60b65ce47160449ad8440f7c651bd4f8fd45eda",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ALPS: Activation-Based Length Prediction for Intelligent LLM Inference Scheduling",
+      "url": "https://research.google/pubs/alps-activation-based-length-prediction-for-intelligent-llm-inference-scheduling-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2137773dc5973d4a9c2f4653a2cce3248a87441c9619973302e86b3daaedd0af",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "KVCIS: Activation-Based Token Importance Prediction for Intelligent KV-Cache Compression",
+      "url": "https://research.google/pubs/kvcis-activation-based-token-importance-prediction-for-intelligent-kv-cache-compression-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "055d4110a7c07e60cbcea5d55fdcff15e052050f356ca3cdf4d55f2dd41f2676",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Neural general circulation models for modeling precipitation",
+      "url": "https://research.google/pubs/neural-general-circulation-models-for-modeling-precipitation-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "963ad090f6f86ed0160aed3737210c88c65261cfa62bf2141408cb7c0bcec975",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Reasoning-Driven Synthetic Data Generation and Evaluation",
+      "url": "https://research.google/pubs/reasoning-driven-synthetic-data-generation-and-evaluation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "be4d6665c08c32acc2c119459b981212c9ca3988d0e5fbab025a3f1cdcc10bed",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Vibe Coding XR: Accelerating AI + XR Prototyping with XR Blocks and Gemini",
+      "url": "https://research.google/pubs/vibe-coding-xr-accelerating-ai-xr-prototyping-with-xr-blocks-and-gemini/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a0f28818a137f2a245263930e56a2a86bf20ab0720d928c708eab75454af2f62",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "An Empirical Study of Tablet Ergonomics: The Interplay of Temperature, Orientation, and Use Behaviors",
+      "url": "https://research.google/pubs/an-empirical-study-of-tablet-ergonomics-the-interplay-of-temperature-orientation-and-use-behaviors/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2c1e3a6d01980824661a586b839ee35211eac747588582ad64ea7a6ebd8aabeb",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "AgentHands: Generating Interactive Hands Gestures for Spatially Grounded Agent Conversations in XR",
+      "url": "https://research.google/pubs/agenthands-generating-interactive-hands-gestures-for-spatially-grounded-agent-conversations-in-xr/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8d86ed61901b19764262f3eeb3537b83c1baf47097046f5a5cb3ec6038f37168",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "AASE: Activation-Based AI Safety Enforcement via Lightweight Probes",
+      "url": "https://research.google/pubs/aase-activation-based-ai-safety-enforcement-via-lightweight-probes/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "73334171548b9dc10edce90ecca08dbcecdc4247040a8547ff6748d01c4d3cd9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Scaling Telemetry To Terabytes: Applying Google's Principles To OpenTelemetry With OpAMP",
+      "url": "https://research.google/pubs/scaling-telemetry-to-terabytes-applying-googles-principles-to-opentelemetry-with-opamp/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8a42d1f148b083fd4dd3ed5a688852ff3b1e61ce96e8c61fb808b3d23b4d66e0",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Conditional Execution of Transpiler Passes Based on Per-Script Feature Detection",
+      "url": "https://research.google/pubs/conditional-execution-of-transpiler-passes-based-on-per-script-feature-detection/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.18049"
+      ],
+      "dates": [],
+      "sha256": "3be433aefa5de9ca9dba4452031e79e514123467a2a643e0924e29b031c7205b",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Automated Multi-Stage Build Error Remediation by Propagating Dormant Suppression Tags",
+      "url": "https://research.google/pubs/automated-multi-stage-build-error-remediation-by-propagating-dormant-suppression-tags/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3364cebc3e878d899c6ea63cec9fee6ed0799bebf55f67d61ee7acab5015b2d9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Expert evaluation of LLM world models: A high-Tc superconductivity case study",
+      "url": "https://research.google/pubs/expert-evaluation-of-llm-world-models-a-high-tc-superconductivity-case-study/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b74ac745f3bf15e7a86852931f9d6ff5c9b3db41e5e653eb932000dde2fb5763",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Automated Remediation of Compiler Errors",
+      "url": "https://research.google/pubs/automated-remediation-of-compiler-errors/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b88db85725798405a63ac91426ad9f37aea12c65778aa5f99a4ca005497777f3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Perfection Paradox: From Architect to Curator in AI-Assisted API Design",
+      "url": "https://research.google/pubs/the-perfection-paradox-from-architect-to-curator-in-ai-assisted-api-design/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4206172e5511d08ad49473c4ab208b4b5dbe7f97cd45fd59087c1a9d12eaaf0b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Conditional Execution of Compiler Passes Based on Per-Script Feature Detection",
+      "url": "https://research.google/pubs/conditional-execution-of-compiler-passes-based-on-per-script-feature-detection-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "eabcea15e841ed8258ce9db11aea749f8c5b9f8d488442f17bd50cf240b213e8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Adversarial Attacks on Multimodal Large Language Models: A Comprehensive Survey",
+      "url": "https://research.google/pubs/adversarial-attacks-on-multimodal-large-language-models-a-comprehensive-survey/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "77e63c1321ce6158045e9b4228a0dce5bc0fc06403c95703a7e72b5b4afb880d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Approximate vs Precise: An experiment in what impacts user choice when apps request location access",
+      "url": "https://research.google/pubs/approximate-vs-precise-an-experiment-in-what-impacts-user-choice-when-apps-request-location-access/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ec0daeacfda530606129d6d17d6498b35849ec7e112c2a622ed88ac7549c3d90",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Differential Observability: Detecting Silent State Divergence in eBPF-based Cloud Networks",
+      "url": "https://research.google/pubs/differential-observability-detecting-silent-state-divergence-in-ebpf-based-cloud-networks/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4841ddf197471fb44d23a31469051c2a8c986893e100c5b8f2a84505c396e015",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Uncovering Relationships between Android Developers, User Privacy, and Developer Willingness to Reduce Fingerprinting Risks",
+      "url": "https://research.google/pubs/uncovering-relationships-between-android-developers-user-privacy-and-developer-willingness-to-reduce-fingerprinting-risks/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5341b4eadf3f91ea430ba34bbd9f2ae4c5376982ae9bc807ed49e80492682911",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "System for Validating Medical Software Algorithms With Closed-Loop Adversarial Persona Generation",
+      "url": "https://research.google/pubs/system-for-validating-medical-software-algorithms-with-closed-loop-adversarial-persona-generation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "fb00b1ec7eebddf3367bfb6b70ec2da12ad6cc44b21e4762f4115af9d6201f9d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "\"It didn’t feel right but I needed a job so desperately\": Understanding People's Emotions & Help Needs During Financial Scams",
+      "url": "https://research.google/pubs/it-didnt-feel-right-but-i-needed-a-job-so-desperately-understanding-peoples-emotions-help-needs-during-financial-scams-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8d9d37b8ccf1c3077f6bfee665e8fecb36c9fef3e546f09c719b1907e9be0a4d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Who is At-Risk? Surveying the Prevalence of Risk Factors and Tech-Facilitated Attacks in the United States",
+      "url": "https://research.google/pubs/who-is-at-risk-surveying-the-prevalence-of-risk-factors-and-tech-facilitated-attacks-in-the-united-states/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d468078b1daf5b3f72eb0746a819b3b9534fd43278b36809cc8b90bf36c38ac4",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "From Correctness to Collaboration: A Human-Centered Taxonomy of AI Agent Behavior in Software Engineering",
+      "url": "https://research.google/pubs/from-correctness-to-collaboration-a-human-centered-taxonomy-of-ai-agent-behavior-in-software-engineering/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1afee6a92068ee9bd93fa7ea0138de92ff9ca0cb39521116f74e9248486df43c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Designing Privacy Choice in Generative AI Chatbot Ecosystems",
+      "url": "https://research.google/pubs/designing-privacy-choice-in-generative-ai-chatbot-ecosystems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3190f0fabd763a0a594cfd55f2f2ab63e343cf3c4b2430157e753c42731aa1eb",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "MoXaRt: Audio-Visual Object-Guided Sound Interaction for XR",
+      "url": "https://research.google/pubs/moxart-audio-visual-object-guided-sound-interaction-for-xr/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.10465"
+      ],
+      "dates": [],
+      "sha256": "a14f5d8772dd669b867a75495b3d42ddf9b748966cb99861473d1ea404b320bb",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Improving Low-Vision Chart Accessibility via On-Cursor Visual Context",
+      "url": "https://research.google/pubs/improving-low-vision-chart-accessibility-via-on-cursor-visual-context/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.02498"
+      ],
+      "dates": [],
+      "sha256": "3292f5f8755b6691824513c4d68ed7efac3632fb831406d24c6fd3619bf91a84",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Peeking Ahead of the Field Study: Exploring VLM Personas as Support Tools for Embodied Studies in HCI",
+      "url": "https://research.google/pubs/peeking-ahead-of-the-field-study-exploring-vlm-personas-as-support-tools-for-embodied-studies-in-hci/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.16157"
+      ],
+      "dates": [],
+      "sha256": "6600a91a9aa4e3ea155fa07c9cd67e0c0bd8b5725fad46b86d8088f43cf0794b",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Gaze Target Estimation Anywhere with Concepts",
+      "url": "https://research.google/pubs/gaze-target-estimation-anywhere-with-concepts/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c0052074eb3094dbf151f25350dd10740429f0722951a74c5143ec531d7cfcc8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "MARS: Modular Agent with Reflective Search for Automated AI Research",
+      "url": "https://research.google/pubs/mars-modular-agent-with-reflective-search-for-automated-ai-research/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.02660"
+      ],
+      "dates": [],
+      "sha256": "7deda0060bee6229fcbe00f29520af5cf768b7619f9842cc80d4db9a9bcf2d11",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Bridging the Dimensionality Gap: A Taxonomy and Survey of 2D Vision Model Adaptation for 3D Analysis",
+      "url": "https://research.google/pubs/bridging-the-dimensionality-gap-a-taxonomy-and-survey-of-2d-vision-model-adaptation-for-3d-analysis-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "822245652985988096df72486e7d5daf0e2c5a460e625f064922018694eba06a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Multi-Layered Framework for Behavioral Governance of Non-Deterministic AI Agents",
+      "url": "https://research.google/pubs/a-multi-layered-framework-for-behavioral-governance-of-non-deterministic-ai-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "44f58e47f583b828018c6a6abd5aea3cf9d3f610bbf31b02f6dfa1e105ece0a9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "System for a Secure, Outcome-Based Synthetic Labor Market Using Trusted Execution Environments",
+      "url": "https://research.google/pubs/system-for-a-secure-outcome-based-synthetic-labor-market-using-trusted-execution-environments/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7da117c14b38358502d7dc3126c7e82197182437373534d362c14ca86b1e3808",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Probabilistic Governance and Telemetry Framework for Autonomous Agents",
+      "url": "https://research.google/pubs/probabilistic-governance-and-telemetry-framework-for-autonomous-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "49eca68191ae65036e1bdb2794d84164a80fd2b6c787d6771c1df70aac9b4697",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Exponential quantum advantage in processing massive classical data",
+      "url": "https://research.google/pubs/exponential-quantum-advantage-in-processing-massive-classical-data/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.07639"
+      ],
+      "dates": [],
+      "sha256": "9a0aef621cc65733f3a9bdcf56b95fa44077c12193ca0744cdf0908bbfeca0c6",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Securing Elliptic Curve Cryptocurrencies against Quantum Vulnerabilities: Resource Estimates and Mitigations",
+      "url": "https://research.google/pubs/securing-elliptic-curve-cryptocurrencies-against-quantum-vulnerabilities-resource-estimates-and-mitigations/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.28846"
+      ],
+      "dates": [],
+      "sha256": "88eb2469859c953b60ebe9dc8079086d130055d5e9221761a28690008db02e83",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Detecting Safety Training Modification in Language Models via Activation Analysis",
+      "url": "https://research.google/pubs/ams-detecting-unsafe-and-tampered-language-models-via-activation-analysis/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "caf6f3be569cecaeef4253d96f7784b6e055f9f0c00e66e44e0193b6d9fe0f19",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Long-Tail Knowledge in Large Language Models: Taxonomy, Mechanisms, Interventions and Implications",
+      "url": "https://research.google/pubs/long-tail-knowledge-in-large-language-models-taxonomy-mechanisms-interventions-and-implications/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.16201"
+      ],
+      "dates": [],
+      "sha256": "a797fc8c209ccaf91a814adf87e16e86bdcde86dca9d5b82799670132c63bd44",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "AI, Identity, and Ethical Governance: Building Trust in High-Stakes Systems",
+      "url": "https://research.google/pubs/ai-identity-and-ethical-governance-building-trust-in-high-stakes-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4270e4b7d0b293b9416830fd1cd08d7f29bc7a7858937a211f7e34e033bd2ce3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Hardware-Anchored Privacy Middleware for PII Sharing Across Heterogeneous Embedded Consumer Devices",
+      "url": "https://research.google/pubs/a-hardware-anchored-privacy-middleware-for-pii-sharing-across-heterogeneous-embedded-consumer-devices/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.07839"
+      ],
+      "dates": [],
+      "sha256": "f559a213a0d12c1f848efdcf068ac632ec800312387d9f7bc112dab20733d247",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Industrial Agentic Engineering",
+      "url": "https://research.google/pubs/industrial-agentic-engineering/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c5957c801523c1ff0264a521174ef008c2e8e5490e67a06354ed92c8cdc0d3a1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "RS-OVC: Open-Vocabulary Counting for Remote-Sensing Data",
+      "url": "https://research.google/pubs/rs-ovc-open-vocabulary-counting-for-remote-sensing-data/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.08704"
+      ],
+      "dates": [],
+      "sha256": "82aed7c0eddd5e409b03000088518360ca80d1bef741d8f33710d2f90066ac70",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "On the PTAS Complexity of Multidimensional Knapsack",
+      "url": "https://research.google/pubs/on-the-ptas-complexity-of-multidimensional-knapsack/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3dd204da6c67e13ac06041d47d02376d28ccf250f6ceee8b49601960084d1dd8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Improved Differentially Private Algorithms for Rank Aggregation",
+      "url": "https://research.google/pubs/improved-differentially-private-algorithms-for-rank-aggregation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "775309c77ce1e7e4f9a9ad18817f022c8ba5101bf7e8ab939c37adeb1bec5fef",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Tight Lower Bound for Multicolor Discrepancy",
+      "url": "https://research.google/pubs/tight-lower-bound-for-multicolor-discrepancy/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1e26c7b1d1752bc805d99cd9612802cebb27f22744a9bfe634e7c579c380b4e5",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Fair Allocation of Indivisible Goods with Variable Groups",
+      "url": "https://research.google/pubs/fair-allocation-of-indivisible-goods-with-variable-groups/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "490ded5ae4e4906b83945f898bf9d996f6329f45773957094debac4523dac492",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Visual Planning: Let’s Think Only with Images",
+      "url": "https://research.google/pubs/visual-planning-lets-think-only-with-images/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2505.11409"
+      ],
+      "dates": [],
+      "sha256": "a50a33f1e2064ee0fb40fbfc1d4d5cfb9aac5e9e0e3ad7acef3709e3f38e3421",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Discrepancy Beyond Additive Functions with Applications to Fair Division",
+      "url": "https://research.google/pubs/discrepancy-beyond-additive-functions-with-applications-to-fair-division/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e9d10779a839fc261da976042998089861eef81548faa99712dcfc293fcafb94",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "An Improved Entropy Measure for Web Browser Fingerprinting Risk",
+      "url": "https://research.google/pubs/an-improved-entropy-measure-for-web-browser-fingerprinting-risk/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2ecbab99944015372d2bb2c320aa33ca5b37c7fef4071cd572c357934c29b335",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "VeriGuard: Enhancing LLM Agent Safety via Verified Code Generation",
+      "url": "https://research.google/pubs/veriguard-enhancing-llm-agent-safety-via-verified-code-generation-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2510.05156"
+      ],
+      "dates": [],
+      "sha256": "8fab7d29f4c8aa98b46fa4fae508589e0f7b2c96adcaa66c85d7c109727f8bd8",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization",
+      "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.14214"
+      ],
+      "dates": [],
+      "sha256": "08ba40494181333e6eace0997afb11eae563c528e2d00d1c6c509715f571ff7b",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "CoDaS: AI Co-Data-Scientist for Biomarker Discovery via Wearable Sensors",
+      "url": "https://research.google/pubs/codas-ai-co-data-scientist-for-biomarker-discovery-via-wearable-sensors/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.14615"
+      ],
+      "dates": [],
+      "sha256": "6348672a2f7c74bde0b6c608996b556e3de8becd0870bba05ec25ace4a5aaae6",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Framework for Multi-AI Orchestration via Task Arbitrage and Byzantine Consensus",
+      "url": "https://research.google/pubs/framework-for-multi-ai-orchestration-via-task-arbitrage-and-byzantine-consensus/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f54d197195f9bff21865a921c014e9cbfa83840ad5f46bb618e1bd2732be4b9c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ConvApparel: A Benchmark Dataset and Validation Framework for  User Simulators in Conversational Recommenders",
+      "url": "https://research.google/pubs/convapparel-a-benchmark-dataset-and-validation-framework-for-user-simulators-in-conversational-recommenders-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "23a928399547a257c04ffa1334c2b2741164dda2dcac69987d703c22f4efaef1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Unified Management System for a Hybrid Workforce of Human and Computational Agents",
+      "url": "https://research.google/pubs/unified-management-system-for-a-hybrid-workforce-of-human-and-computational-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "84f1d4a082a7287806e97878c13be4c63ae85ae6cb79c50d018a86b41f5123d0",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Identifying Hearing Difficulty Moments in Conversational Audio",
+      "url": "https://research.google/pubs/identifying-hearing-difficulty-moments-in-conversational-audio/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "89be99853dfadcbdb264d895f64effe1cdfa583cc07fbb47640c2d54d475880e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Window Size Versus Accuracy Experiments in Voice Activity Detectors",
+      "url": "https://research.google/pubs/window-size-versus-accuracy-experiments-in-voice-activity-detectors/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2601.17270"
+      ],
+      "dates": [],
+      "sha256": "f71e486c559ffb7bff0901a9783a38a518f8f34e6def5d0baf45516b4b745ce8",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "TDXRay: Microarchitectural Side-Channel Analysis of Intel TDX  for Real-World Workloads",
+      "url": "https://research.google/pubs/tdxray-microarchitectural-side-channel-analysis-of-intel-tdx-for-real-world-workloads/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7328557a2742b09346ef1fcfbfcd03a399f76600ba8d3be74896d6a0a3b41ada",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Solving an open problem in theoretical physics using AI-assisted discovery",
+      "url": "https://research.google/pubs/solving-an-open-problem-in-theoretical-physics-using-ai-assisted-discovery/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.04735"
+      ],
+      "dates": [],
+      "sha256": "4a53595dbd68751ae6049fc1ed8967b309206adda9858fd4e298216605a2129f",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "An AI system to help scientists write expert-level empirical software",
+      "url": "https://research.google/pubs/an-ai-system-to-help-scientists-write-expert-level-empirical-software/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "23d38069851bdf6d70f52d158f3dbfacd2f4001314be35321916b4454c1edb88",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "XProf: An Open, Scalable and Extensible Profiling System for the Modern ML Stack",
+      "url": "https://research.google/pubs/xprof-an-open-scalable-and-extensible-profiling-system-for-the-modern-ml-stack/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "fa971c32a4417285a8d59c995c00e70604767b56236f770592e6c839a5b9557c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Bi-level Hierarchical Neural Contextual Bandits for Online Recommendation",
+      "url": "https://research.google/pubs/bi-level-hierarchical-neural-contextual-bandits-for-online-recommendation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "bd22687bdff349bfe57cb7735ac343ecc571164658000872fe6af54da3ce494e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Architecting Conversational Data Systems for Stateless LLM APIs",
+      "url": "https://research.google/pubs/architecting-conversational-data-systems-for-stateless-llm-apis/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8952a87ebb3f59d06cc6aebcd817e382269c3f5c1cb9fbbb47f572746035ffbb",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "MoXaRt: Audio-Visual Object-Guided Sound Interaction for XR",
+      "url": "https://research.google/pubs/moxart-audio-visual-object-guided-sound-interaction-for-xr-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5b4a8e386c5c2abcc62591fdfdd3de19c3f7ac9de86e4b4192ca3770bdd39db7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Compact Conformal Subgraphs",
+      "url": "https://research.google/pubs/compact-conformal-subgraphs/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5b50175d93d914059fd1fe3ab4b90b534f431968ad6a2d9bdfca9b25afad850f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Elephants, Goldfish and the New Golden Age of Software Engineering",
+      "url": "https://research.google/pubs/elephants-goldfish-and-the-new-golden-age-of-software-engineering/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "edebd7e80ed3ef9c4a22385a61ba7c8f03018359bedf4c5c07d8cbdccd6c5b53",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GUIDE: A Benchmark for User Context Understanding and Assistance in GUI Workflow Videos",
+      "url": "https://research.google/pubs/guide-a-benchmark-for-user-context-understanding-and-assistance-in-gui-workflow-videos/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.25864"
+      ],
+      "dates": [],
+      "sha256": "d841511df6719f29e3073c0381485f24003f59ed4ce89fa8910531a247c312ce",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "SAC133 - SSAC Comments on Proposed Root KSK Algorithm Rollover",
+      "url": "https://research.google/pubs/sac133-ssac-comments-on-proposed-root-ksk-algorithm-rollover/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d912021b373f8559be6ab44aad219fc479138f099227555243f3f726bcc644f3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Securing Multi-Agent Systems: An Empirical Analysis of Security  Prompt Hardening and Residual Risks",
+      "url": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "bccb6b05725a620643c50be85e6bbb64fb6511626479462c4b484dd76c05edcd",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "DeduBB: Binary Code Size Reduction via Post-Link Basic Block De-duplication",
+      "url": "https://research.google/pubs/dedubb-binary-code-size-reduction-via-post-link-basic-block-de-duplication/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "51c47f247f3bd671b48085e9b06b87580474f9d720786874b373d060c6dfc353",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code  Migration",
+      "url": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "37fef2c89d812bfdb034976de6164ee8296f209365e85fb5aba954c764ada07a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "See2Refine: Vision-Language Feedback Improves LLM-Based eHMI Action Designers",
+      "url": "https://research.google/pubs/see2refine-vision-language-feedback-improves-llm-based-ehmi-action-designers/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.02063"
+      ],
+      "dates": [],
+      "sha256": "a48d3ad4b44b6428b6831937935a9d3994cddb74211899bbfb2762bd5724d557",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Towards AI as a Collaborative Partner: A Taxonomy of AI Agent Behavior in Software Engineering",
+      "url": "https://research.google/pubs/towards-ai-as-a-collaborative-partner-a-taxonomy-of-ai-agent-behavior-in-software-engineering/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "262aa5342b8bdc1bde470fddbe69777da0cc87b4e4f70521440e767f1011f283",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving",
+      "url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e0a73da390c6dcad60ee4a655770ecfbf9bd8dd19de38fdbb24054635fbe5119",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ToolGrad: Efficient Tool-use Dataset Generation with Textual \"Gradients\"",
+      "url": "https://research.google/pubs/toolgrad-efficient-tool-use-dataset-generation-with-textual-gradients-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2508.04086"
+      ],
+      "dates": [],
+      "sha256": "1ecf889b7cbfa838512582e721fc440f0345ec822c5d636eff492c9cfc2e228c",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Progressive Photorealistic Simplification",
+      "url": "https://research.google/pubs/progressive-photorealistic-simplification/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.10409"
+      ],
+      "dates": [],
+      "sha256": "868aa5493ba54f249b9b639cc8019368a7d12b9e69240ed8de7fac29ea9e3767",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Digital Shadow AI Risk Theoretical Framework (DART): A Framework for Managing Data Disclosure and Privacy Risks of AI tools at Work",
+      "url": "https://research.google/pubs/digital-shadow-ai-risk-theoretical-framework-dart-a-framework-for-managing-data-disclosure-and-privacy-risks-of-ai-tools-at-work-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "22f38a4e9d9b99e4bfb3ef632d52c9b6a2702fd17b704e49672c6437c6ba9b4d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "SpatialStack: Layered Geometry-Language Fusion for 3D VLM Spatial Reasoning",
+      "url": "https://research.google/pubs/spatialstack-layered-geometry-language-fusion-for-3d-vlm-spatial-reasoning/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.27437"
+      ],
+      "dates": [],
+      "sha256": "808d8b89ce7bc2554304b4cd821d26d6b0a75626727f4cb73be54cf500e04ab2",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "What does your wearable know about the festive season?",
+      "url": "https://research.google/pubs/what-does-your-wearable-know-about-the-festive-season/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b50b430cf5515a6b2d86589c9e0776a6dbb0b2dbfb25b40c01efde5fc4180216",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Cardio Load in exercise and everyday life: A modified TRIMP metric for continuously-sensing consumer wearables",
+      "url": "https://research.google/pubs/cardio-load-in-exercise-and-everyday-life-a-modified-trimp-metric-for-continuously-sensing-consumer-wearables/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9aafb5a877551bd7582f0476261d56575aac4dddead158030ad1c0e9a7eed1b5",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Pixel Watch: Robust Heart Rate Sensing from Multipath PPG and On-Device Deep Learning Trained on 10,000 hours of Free-Living and Fitness Data",
+      "url": "https://research.google/pubs/pixel-watch-robust-heart-rate-sensing-from-multipath-ppg-and-on-device-deep-learning-trained-on-10000-hours-of-free-living-and-fitness-data/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5bdc1aef741bfcde64f5811e4b1bfaedc7f6721203b5757ecbf447860f941a41",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Mining Attribute Subspaces for Efficient Fine-tuning of 3D Foundation Models",
+      "url": "https://research.google/pubs/mining-attribute-subspaces-for-efficient-fine-tuning-of-3d-foundation-models/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.10095"
+      ],
+      "dates": [],
+      "sha256": "3fe72b742518a53f83f47627c4b89e340902d0fcfe7c837fb3050577f2a9e951",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Marginalized Bundle Adjustment: Multi-View Camera Pose from Monocular Depth Estimates",
+      "url": "https://research.google/pubs/marginalized-bundle-adjustment-multi-view-camera-pose-from-monocular-depth-estimates/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ae87a74f22119661e6d65ca953ac7e4151ee9c74b981bd717b48cf3b36805c83",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Mull-Tokens: Modality-Agnostic Latent Thinking",
+      "url": "https://research.google/pubs/mull-tokens-modality-agnostic-latent-thinking/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2512.10941"
+      ],
+      "dates": [],
+      "sha256": "4ecf960cebc61bc0b163f36573c7d62324415e65adb62409473d541b05709d82",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Smarter tools, weaker minds? Introducing the CTRL theory of Youth–AI dependency",
+      "url": "https://research.google/pubs/smarter-tools-weaker-minds-introducing-the-ctrl-theory-of-youthai-dependency/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "87ace251aa5f4bd8f792fdfa58ab76cf1c23aabe38a41e752369213e09a66027",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Observing long-lived longwave contrail forcing",
+      "url": "https://research.google/pubs/observing-long-lived-longwave-contrail-forcing/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4bb2bca2df71c6bf4e54fa30acb0f52690f71c12850e32f181bbdc414e1d0901",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Taming the Variants Multi-Architecture Continuous Testing at Google",
+      "url": "https://research.google/pubs/taming-the-variants-multi-architecture-continuous-testing-at-google/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "71665e8d5948f920d487fb1bc23701578a08bfc164ca9cbdcbb0ea53c8fdb189",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "What Makes A Good Productivity Metric?",
+      "url": "https://research.google/pubs/what-makes-a-good-productivity-metric/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6d74bc5680bb685da5359c0f9b34a8328a7c47a9e1a1069d1d4e8b6f36df3a44",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "AI-PROPELLER: Warehouse-Scale Inter-Procedural Code Layout Optimization with AlphaEvolve",
+      "url": "https://research.google/pubs/ai-propeller-warehouse-scale-inter-procedural-code-layout-optimization-with-alphaevolve/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "158f93b73465e0ab04d0a80443927038161e0656275b49027e846baf76732eae",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "What Happens When Technical Debt Vanishes?",
+      "url": "https://research.google/pubs/what-happens-when-technical-debt-vanishes/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d695d2596d4c502f3342055a2889a2c90033fbebc64373a6084d4062a814c948",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "LiveSVG: Zero-Shot SVG Animation via Video Generation",
+      "url": "https://research.google/pubs/livesvg-zero-shot-svg-animation-via-video-generation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f5d9381a37ddfec3c8c1616e42391e2da5501bd8d2198f4f103c6ab88008d4c3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Synthetic Gap: Automating Forensic Investigation of \"AI Slop\" with the Scaled Abuse Forensics Examiner (SAFE)",
+      "url": "https://research.google/pubs/the-synthetic-gap-automating-forensic-investigation-of-ai-slop-with-the-scaled-abuse-forensics-examiner-safe/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "21f3784a2c378262faf54c6e936319af761af1d985ac0bbf5356b2283dee2336",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Beyond PII: How Users Perceive and Attempt to Mitigate Implicit LLM Inference",
+      "url": "https://research.google/pubs/beyond-pii-how-users-perceive-and-attempt-to-mitigate-implicit-llm-inference/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "10cb19a1d07dc4030430d9c1a07fe25ff07e914745719ff3d72c41bd6b70a456",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "LLM-Powered Analysis of IoT User Reviews: Tracking and Ranking Security and Privacy Concerns",
+      "url": "https://research.google/pubs/llm-powered-analysis-of-iot-user-reviews-tracking-and-ranking-security-and-privacy-concerns/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "85b47b8489fa3462c4b436a51b4774758dddea558b2567caca2d664f5b99faf7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Agentic Coding Needs Proactivity, Not Just Autonomy",
+      "url": "https://research.google/pubs/agentic-coding-needs-proactivity-not-just-autonomy/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.06717"
+      ],
+      "dates": [],
+      "sha256": "f3e4116edd34bce6c1ed74a159a45e92e0258ad30f68b92aebc61d66c6e0623e",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Rethinking Context-Enriched Time-Series Forecasting Evaluation",
+      "url": "https://research.google/pubs/rethinking-context-enriched-time-series-forecasting-evaluation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "87395b7a6ecfeb32cca728946d98461dd210986b2abeac6295a278f7265cc46d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "SurfaceXR: Fusing Smartwatch IMUs and Ego-centric Hand Pose for Seamless Surface Interactions",
+      "url": "https://research.google/pubs/surfacexr-fusing-smartwatch-imus-and-ego-centric-hand-pose-for-seamless-surface-interactions/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3e7325df44bb1c354054bf0f0fc75d9d08b837bafe58b354580abf25817e06bf",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "MoGen: Detailed Neuronal Morphology Generation via Point Cloud Flow Matching",
+      "url": "https://research.google/pubs/mogen-detailed-neuronal-morphology-generation-via-point-cloud-flow-matching/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "13d0fddde1abb1416c4069196c1d6b92607266150a43f7e42bfaa3c7bbd73ced",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Dynamic Numerical Model for Real-Time Estimation of Latent Cognitive States Using Oculomotor Metrics",
+      "url": "https://research.google/pubs/a-dynamic-numerical-model-for-real-time-estimation-of-latent-cognitive-states-using-oculomotor-metrics/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "995d70f5c8c1944898d6cd05f5c069b0f0ba232ea8b065e39604201ea092b73a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Impact of LED Aging on Optical Health Sensing Signal Integrity",
+      "url": "https://research.google/pubs/impact-of-led-aging-on-optical-health-sensing-signal-integrity/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "03d7505724fc7874c8a207e90217991ff0b2bcaca73394fb53c2f76616486ecd",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Twenty years of Bigtable",
+      "url": "https://research.google/pubs/twenty-years-of-bigtable/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f96d11d6f45a5c8a9025e3577188b33d84f9c9a869a84c032b57fda1ec6fbff8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Differential Sensitivity of Impedance Plethysmography and Photoplethysmography Sensors to Temperature-Induced Peripheral Vasoconstriction",
+      "url": "https://research.google/pubs/differential-sensitivity-of-impedance-plethysmography-and-photoplethysmography-sensors-to-temperature-induced-peripheral-vasoconstriction/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3a206a9e3f32b574362af05eab190babc030a03866429d6c5f0d4f43b9829bab",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Sexual dimorphism in the complete connectome of the Drosophila male central nervous system",
+      "url": "https://research.google/pubs/sexual-dimorphism-in-the-complete-connectome-of-the-drosophila-male-central-nervous-system/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "fdd919f6c0b9568efd05eb6c04a8a8f2978285c8f35939e4b1661ef8cf0afa2b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Multi-Modal Multi-Agent Robotic Cognitive Alignment enabled by Non-invasive Consumer Brain Computer Interfaces: A Proof of Concept Exploration",
+      "url": "https://research.google/pubs/multi-modal-multi-agent-robotic-cognitive-alignment-enabled-by-non-invasive-consumer-brain-computer-interfaces-a-proof-of-concept-exploration/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2606.13190"
+      ],
+      "dates": [],
+      "sha256": "ff76b6b7b151ddd12cf831480e45612b149dbc7cdc180e4c515bf703956ae0af",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Analyzing Bytes: Pre-Disassembly Static Binary Analysis",
+      "url": "https://research.google/pubs/analyzing-bytes-pre-disassembly-static-binary-analysis/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "cfd48b54792b7728e533904f80c30a5fb5fe0eed684a4628425dc938256f657f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "In Search of \"Weird Corners\": Diagnosing the Limits of Convergent AI in Professional Creative Practice",
+      "url": "https://research.google/pubs/in-search-of-weird-corners-diagnosing-the-limits-of-convergent-ai-in-professional-creative-practice/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "348103bc65b7e72b009c51a87d9b3a5ad684b3df8f30e601d0acaf1e506bb681",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Are you speaking my languages? On spoken language adherence in multimodal LLMs",
+      "url": "https://research.google/pubs/are-you-speaking-my-languages-on-spoken-language-adherence-in-multimodal-llms/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2606.17281"
+      ],
+      "dates": [],
+      "sha256": "7b8fe10bd313b94ba2d25088bc30902656bc14dc1ddee59b6b96a85d960572d8",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Operationalized Temporal Entity Resolution at Scale: A 2B-Entity Architecture for Cloud-Native",
+      "url": "https://research.google/pubs/operationalized-temporal-entity-resolution-at-scale-a-2b-entity-architecture-for-cloud-native/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f9543a5dcdfca6f0aac8d4b5f1f97bcdedc04ad310b9381dfdcc93b792769e4b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Diffusion Controller: Framework, Algorithms and Parameterization",
+      "url": "https://research.google/pubs/diffusion-controller-framework-algorithms-and-parameterization/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "97907dc52c780049e7cd2c105af3a1d6a0f2f3526aaba134b0b8424f4943450a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion",
+      "url": "https://research.google/pubs/efficient-property-aligned-fan-out-retrieval-via-rl-compiled-diffusion/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2da9a1b782bca836f0d3401d598c71e58fc377312ca1da757720514208f35d9c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Geo-Contextual AI Concierge: Minimizing Internal Support Friction Through Proactive Knowledge Synthesis",
+      "url": "https://research.google/pubs/geo-contextual-ai-concierge-minimizing-internal-support-friction-through-proactive-knowledge-synthesis/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5f2c81e2c8b165d89316a764ab58561165ae15442d94e27dedd6b1dd6011e645",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Reinforcement Learning with Discrete Diffusion Policies for Combinatorial Action-Spaces",
+      "url": "https://research.google/pubs/reinforcement-learning-with-discrete-diffusion-policies-for-combinatorial-action-spaces/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "669a6cc6b4143182d0f39d6cb43f7f0e0088dcf466d52c967b783a4c5e9dddb6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Ten Insights from Other Domains That Inform Responsible AI Frameworks",
+      "url": "https://research.google/pubs/ten-insights-from-other-domains-that-inform-responsible-ai-frameworks/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3d46ba2b104b5f670292ee5ee5ea4b4f520afe2beca2d44c7550bcda2296530f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Calibrating Trustworthiness in GenAI",
+      "url": "https://research.google/pubs/calibrating-trustworthiness-in-genai/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "313d5b375b275ce5a621e71701828061bccb1433c9e312bfaafc6f6527338e2c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GENSTRAT: Toward a Science of Strategic Reasoning in Large Language Models",
+      "url": "https://research.google/pubs/genstrat-toward-a-science-of-strategic-reasoning-in-large-language-models/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.23238"
+      ],
+      "dates": [],
+      "sha256": "eccb238f205859ccd64f1efba274a476083aff9bb1bdb692104a791fc4633eb0",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "What’s on My Network? Using Large Language Models to Identify Real-World IoT Devices at Scale",
+      "url": "https://research.google/pubs/whats-on-my-network-using-large-language-models-to-identify-real-world-iot-devices-at-scale/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "269bf82cca9786cb13290e516e61cebf2f0921aa6b8084c7a34e07a56cd016a4",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Nudging Developers Toward Privacy: Evaluating the Impact of Personalized App Review Reports",
+      "url": "https://research.google/pubs/nudging-developers-toward-privacy-evaluating-the-impact-of-personalized-app-review-reports/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f4e035d503f1f353514c8e87cc3e4c7ba16ce2aa133a5b64e82ab537cd5c06f6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Understanding U.S. Users' Security and Privacy Transparency Needs for Consumer-Facing Generative AI",
+      "url": "https://research.google/pubs/understanding-us-users-security-and-privacy-transparency-needs-for-consumer-facing-generative-ai/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a0da20002ae2259edf55b445ddd1d2ff6e3ad52ab5372e80da489b1a9b79a166",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "\"You Have Been Selected as the Winner\": Characterizing User-Reported Scams on TikTok",
+      "url": "https://research.google/pubs/you-have-been-selected-as-the-winner-characterizing-user-reported-scams-on-tiktok/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "349055fc359f9cb61c13611e8e68544c8f653542e7bd6a4e5e29a297e38ba351",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Reasoning Models Generate Societies of Thought",
+      "url": "https://research.google/pubs/reasoning-models-generate-societies-of-thought/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2601.10825"
+      ],
+      "dates": [],
+      "sha256": "630d75e6381c359ad976e017474fe1d3bfed7c6f3a636f7d6fde232f1d24dd98",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Method for Secure AI Grounding using Semantic Token Substitution and Client-Side Re-Hydration",
+      "url": "https://research.google/pubs/method-for-secure-ai-grounding-using-semantic-token-substitution-and-client-side-re-hydration/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "dfc8d40fe920dadd0d80da2464670fde98e9797e3a6f8b073257f8f8804c6048",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Generative AI Synthesis of Automated Interactions into a Structured Agent Briefing",
+      "url": "https://research.google/pubs/generative-ai-synthesis-of-automated-interactions-into-a-structured-agent-briefing/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "116b0f3acede880d53338e4e3248c14fa28fa56606160d0a40d49f340477784c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "When Backdoors Go Beyond Triggers: Semantic Drift in Diffusion Models Under Encoder Attacks",
+      "url": "https://research.google/pubs/when-backdoors-go-beyond-triggers-semantic-drift-in-diffusion-models-under-encoder-attacks/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e73d8fc1be225e9463f5ecba9b6bb4fbf21ecd2757e46e672dc9c240ccc9db7a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Causal Armor:  Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
+      "url": "https://research.google/pubs/causal-armor-efficient-indirect-prompt-injection-guardrails-via-causal-attribution/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1b477d8ace1562253d78e6baa809bcf2838d3c1586f9736bcd8e627e297899f9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Co-RedTeam:  Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "44179d3eba9112c8cdccdfac69e4d16be82413e7319a7ab63af14ab564a90fdc",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Evolution of Config Driven UI Frameworks: A Hybrid MLR and Structural Artifact Analysis of Industry Practices",
+      "url": "https://research.google/pubs/the-evolution-of-config-driven-ui-frameworks-a-hybrid-mlr-and-structural-artifact-analysis-of-industry-practices/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2055809a745e18525325a8da52eb2c996b36a712c456fd45e74a253508c11f7d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion",
+      "url": "https://research.google/pubs/efficient-property-aligned-fan-out-retrieval-via-rl-compiled-diffusion-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "360f8a03d643ecf938b125254811d175a03e68c61aefb5485b6274c8a9db1a77",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "From Silicon to Boardroom: A Multivocal Survey of the Techno-Economic Layers Governing Generative AI Monetization",
+      "url": "https://research.google/pubs/from-silicon-to-boardroom-a-multivocal-survey-of-the-techno-economic-layers-governing-generative-ai-monetization/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2a83834470143699a9c8f22ca473de72f1598e9863fea5f4eb7a129109043ced",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Towards A Human-in-the-Loop Framework for Reliable Patch Evaluation using an LLM-as-a-Judge",
+      "url": "https://research.google/pubs/towards-a-human-in-the-loop-framework-for-reliable-patch-evaluation-using-an-llm-as-a-judge/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "404c661a9daead715fbba3539828f8de730e746eeddc787ff29a95e57f7f3241",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Abstain and Validate: A Dual-LLM Policy for Reducing Noise in Agentic Program Repair",
+      "url": "https://research.google/pubs/abstain-and-validate-a-dual-llm-policy-for-reducing-noise-in-agentic-program-repair/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6d52a402e190cb59c5e100284fb86f8e869c8dc11a4ab79ee3d735a2b49fa5e6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair",
+      "url": "https://research.google/pubs/dynamic-cogeneration-of-bug-reproduction-test-in-agentic-program-repair/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1b1879a18b1f1ccb9771861facd49b313a56f45e4c411bdedbfaa0bf05ce42a6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Spectral amplification for ground-state energy estimation of electronic structure in first quantization",
+      "url": "https://research.google/pubs/spectral-amplification-for-ground-state-energy-estimation-of-electronic-structure-in-first-quantization/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2607.15358"
+      ],
+      "dates": [],
+      "sha256": "09674df387fd1137fd7941eadb6a155223d4b48ff397b73b50496e76973dc9ab",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "PoTRE: Test-Time Reasoning inspired by Cognitive Heterogeneity",
+      "url": "https://research.google/pubs/potre-test-time-reasoning-inspired-by-cognitive-heterogeneity/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1f3219172e6ddf5f79ead1a174dd5b1625eac8bbfae4a3fd4284b1d350afb165",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "AIRS: Scaling Live Inference in Resource Constrained Environments",
+      "url": "https://research.google/pubs/airs-scaling-live-inference-in-resource-constrained-environments/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1f917aa80684801bf07cfc58c25c9a620758b338763017fadd82c7e8f8073c13",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
+      "url": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "eedcdb37435b0ee69f9316e20ac77addc6dccca3129fc1aed10faed8e8bcdf39",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Impact of User Tonalities on Coding AI Model Performance and Behavior",
+      "url": "https://research.google/pubs/impact-of-user-tonalities-on-coding-ai-model-performance-and-behavior/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "868c62ead21b68435f91565df411b425e57db565416319b1fbb3a417a0c924d3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "JAXBench: Benchmarking Autonomous TPU Kernel Optimization",
+      "url": "https://research.google/pubs/jaxbench-benchmarking-autonomous-tpu-kernel-optimization/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2607.20466"
+      ],
+      "dates": [],
+      "sha256": "7713987772e74038eb521e609407ef6dbcaeb234a794cc1405d38ac7d5a778f8",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "``AI is (not) the new...\": A Diagnostic Analogy Framework for Generative AI's Cultural Impacts",
+      "url": "https://research.google/pubs/ai-is-not-the-new-a-diagnostic-analogy-framework-for-generative-ais-cultural-impacts/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "756ab0ba9054cfe102a3b61a0224711057a2cd11837c69f90fc621d8cd2bdb1c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "“ Catching lightning in a bottle”: How Blind or Low Vision  Creators Navigate Ideation Across Creative Domains",
+      "url": "https://research.google/pubs/catching-lightning-in-a-bottle-how-blind-or-low-vision-creators-navigate-ideation-across-creative-domains/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5e2f47e788512bf35baee22214204fe18f57268cb0e3f1640b2737ded8f3d48a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Performance and user response of Android's smartphone-based alerts in the 2025 Marmara Ereğlisi Earthquake",
+      "url": "https://research.google/pubs/performance-and-user-response-of-androids-smartphone-based-alerts-in-the-2025-marmara-ere%C4%9Flisi-earthquake/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "54fb15633c9592b1daf1d254702da067a537b4f120aec414ec51d8c1fd54e1c9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Leveraging LLMs to understand public perception of earthquake early warnings: A case study of the 2025 M6.2 Türkiye Earthquake",
+      "url": "https://research.google/pubs/leveraging-llms-to-understand-public-perception-of-earthquake-early-warnings-a-case-study-of-the-2025-m62-t%C3%BCrkiye-earthquake/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "21c7937bc46c3a028f7eb2e70904dae809f04066d61a31c26446afde90c71794",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Towards expert-level medical AI for real-time video consultations",
+      "url": "https://research.google/pubs/towards-expert-level-medical-ai-for-real-time-video-consultations/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2608.09861"
+      ],
+      "dates": [],
+      "sha256": "0192fb73ec820da636ccbf6c697e8bb0f38b224fc605b3f5699361834a06fe70",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+      "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "18c2e57954598dd936aff6d0ed5d9e13805da9e8a310e7f28f83bd60eb89d040",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "DocLens: A Tool-Augmented Multi-Agent Framework for Long Visual Document Understanding",
+      "url": "https://research.google/pubs/doclens-a-tool-augmented-multi-agent-framework-for-long-visual-document-understanding/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "71a5a9af636bd8b29e34777cef29378c6d10822859e7f1bd0a6dfbec489afe4c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Budget-Aware Tool Use Enables Effective Agent Scaling",
+      "url": "https://research.google/pubs/cost-effective-agent-test-time-scaling/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2511.17006"
+      ],
+      "dates": [],
+      "sha256": "3494aa711e0e79efcac7650f757d4cccb04477cb17704e49a787c5d587f342d8",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Mind the Gap: Structure-Aware Consistency in Preference Learning",
+      "url": "https://research.google/pubs/mind-the-gap-structure-aware-consistency-in-preference-learning/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c1716161bac880f6e9a3a53090d922e6b90477ac0f398f258e98367718d3a40d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Optimized Deferral for Imbalanced Settings",
+      "url": "https://research.google/pubs/optimized-deferral-for-imbalanced-settings/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "102b7823561389aff8e9fcc4a1d75281c3379a59af1594d32b1a2ae06bebf647",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Confusable characters as endangered language markers: The case of North Caucasus writing systems",
+      "url": "https://research.google/pubs/confusable-characters-as-endangered-language-markers-the-case-of-north-caucasus-writing-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "06a7a033c1c37075680348d6838c057361871f7d3938ac9c0bfaf89fae6f2f63",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Stochastic Linear Bandits with Parameter Noise",
+      "url": "https://research.google/pubs/stochastic-linear-bandits-with-parameter-noise/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6ef29a39a870c54ca42e54a770d282fdadbacc2da9787da9dcd6933f88be692e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Linear-Core Surrogates: Smooth Loss Functions with Linear Rates for Classification and Structured Prediction",
+      "url": "https://research.google/pubs/linear-core-surrogates-smooth-loss-functions-with-linear-rates-for-classification-and-structured-prediction/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ecd8b8853d8dae9f3aca173ad5e61e46d938137bf812e2499606440e8f102474",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ECO: Accurate Quantization-Aware Training Without Master Weights",
+      "url": "https://research.google/pubs/eco-accurate-quantization-aware-training-without-master-weights/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5fd2b86d2d57a1522a81e5304ac2ddb86cd19b4797e81d3f5e94b07febf70a4b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Learning Conditional Averages",
+      "url": "https://research.google/pubs/learning-conditional-averages/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8506567db32c2923d16c6c2b6af515f9140a88b32672b427b267d94a2ac9d4b4",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Learning from Equivalence Queries, Revisited",
+      "url": "https://research.google/pubs/learning-from-equivalence-queries-revisited/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "48a1216b6a6b300b4b0bf01d3228ba41eadc9fe88b9f36ad9c8cfe163c8f383e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Theoretical Framework for Modular Learning of Robust Generative Models",
+      "url": "https://research.google/pubs/a-theoretical-framework-for-modular-learning-of-robust-generative-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "728040e91bb7b96d91e174748221f1f0c0b820d689e6b9d20c62898c08c745e8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Sample Complexity of Agnostic Multiclass Classification: Natarajan Dimension Strikes Back",
+      "url": "https://research.google/pubs/sample-complexity-of-agnostic-multiclass-classification-natarajan-dimension-strikes-back/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b1936d0890ce4b4200d7ba3069294002121dfe12df81bbd8f258d91031102b1f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Theoretical Framework for Statistical Evaluability of Generative Models",
+      "url": "https://research.google/pubs/a-theoretical-framework-for-statistical-evaluability-of-generative-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "fece023efb3a58a0d8287b30d9a8b8c0b8fdd0c66d2c910a69d7097e77453b00",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Beyond Tsybakov: Model Margin Noise and H-Consistency Bounds",
+      "url": "https://research.google/pubs/beyond-tsybakov-model-margin-noise-and-h-consistency-bounds/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "0ee5283bb28b1c547a08a4415d46e688e60b799e5e2c072780351e9ac94cf808",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Near-Optimal Regret for Policy Optimization in Contextual MDPs with General Offline Function Approximation",
+      "url": "https://research.google/pubs/near-optimal-regret-for-policy-optimization-in-contextual-mdps-with-general-offline-function-approximation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6dbaf3979efe6774e021bb1eb8d3a4505a32513a6a5f63e3a111d5f3fec324bc",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Optimal partition selection with Renyi differential privacy",
+      "url": "https://research.google/pubs/optimal-partition-selection-with-renyi-differential-privacy/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "88b8edb7e0d9d9b67c5a085bb8d818557b5bacae1b2fc27f839072a1e63d37be",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Sample Complexity of Multiclass and Sparse Contextual Bandits",
+      "url": "https://research.google/pubs/the-sample-complexity-of-multiclass-and-sparse-contextual-bandits/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "20b62a1466057aeb5c10e46d2bf11207ac9935f01f2a8a5b2bfa0bcd40dbf946",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Mining Naturally Romanized Seed Corpora without Romanizations",
+      "url": "https://research.google/pubs/mining-informally-romanized-seed-corpora-without-romanizations/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "90ce464d8dbb5abd5ad6ba9b1d3f8e832aac8341390ac77072d222a789b4c551",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Private-Use Area Characters in the Wild: Signal or Noise?",
+      "url": "https://research.google/pubs/private-use-area-characters-in-the-wild-signal-or-noise/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "88b441b8be3fec6d3888f0916112c9ced2c68f35e1bdf88b072330d13ef1f80b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Learning from Attribution Sets",
+      "url": "https://research.google/pubs/learning-from-attribution-sets/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3fe1d879dae6afd4fe2d224345dab9bcd0013546425e012bfbee3dba83fa75b6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Bayesian Perspective on Memorization and Reconstruction",
+      "url": "https://research.google/pubs/bayesian-perspective-on-memorization-and-reconstruction/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1a2501d87c4ac71ec4dcdcbcbb9a48de055cb4d6b31948ddaa468ac5da7b7f0b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ddf72cfc02b0d861a6fdd50af0cc842deaab322675f73771d497922fb381c5a4",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-3/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "776505128e93c09d6dad64ce212e39d7864f4a7e1b5c302b6e76c349f0a28f48",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Exact zCDP Characterizations for Fundamental Differentially Private Mechanisms",
+      "url": "https://research.google/pubs/exact-zcdp-characterizations-for-fundamental-differentially-private-mechanisms/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "62ff35f204f08dc4fc738b9947cb868212a797c9bcd51e6e8339dcb049357c98",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Nearly-Optimal Private Selection via Gaussian Mechanism",
+      "url": "https://research.google/pubs/nearly-optimal-private-selection-via-gaussian-mechanism/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "285fb0c1770942868f0905c1bcfbec132f08241a39c2ea180bd15d230e3fc9f7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Fixed-Parameter Tractability of Private Synthetic Data Generation",
+      "url": "https://research.google/pubs/fixed-parameter-tractability-of-private-synthetic-data-generation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8e76536a29dc2b7355ecf118ab9e524e1de1f4722c512b46b7d131cfc9a169c6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Keeping a Secret Requires a Good Memory: Space Lower-Bounds for Private Algorithms",
+      "url": "https://research.google/pubs/keeping-a-secret-requires-a-good-memory-space-lower-bounds-for-private-algorithms/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a0f47aaea08392bd46565e834cbb40624625cb0ded7d48cbed7b856aa1813111",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Computational Hardness of Private Coreset",
+      "url": "https://research.google/pubs/computational-hardness-of-private-coreset/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "94f4b2a17e6171e95d3dc2e75d6741411f616af9dd2d1a7290c14e75cad45e69",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Platform Competition in the Autobidding World",
+      "url": "https://research.google/pubs/platform-competition-in-the-autobidding-world/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3812c636cc9fe56333c5d3142f6f2f248a97976b5a6f770a22ddc8e1da0deee2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Online Advertising with Spatial Interactions",
+      "url": "https://research.google/pubs/online-advertising-with-spatial-interactions/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "db6a00e0a6f6ad59061e2101fa905588478541208073c81f9437efd196578cdd",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Toward a Theory of Value in AI Alignment",
+      "url": "https://research.google/pubs/toward-a-theory-of-value-in-ai-alignment/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2608.10327"
+      ],
+      "dates": [],
+      "sha256": "7bba416cb53a82402496dea97fc8798ac3430be34f37b448f3247bb3faa8748d",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Temper-Then-Tilt: Principled Unlearning for Generative Models through Tempering and Classifier Guidance",
+      "url": "https://research.google/pubs/temper-then-tilt-principled-unlearning-for-generative-models-through-tempering-and-classifier-guidance/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.10217"
+      ],
+      "dates": [],
+      "sha256": "ae05493f5aced16e606d29ab575834e8841251c0c8a9296b80bc480b13954f23",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Looking to the brain to improve energy efficiency of AI",
+      "url": "https://research.google/pubs/looking-to-the-brain-to-improve-energy-efficiency-of-ai/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2d7593d4fa00cef437060f12b80f16e208725589026a98c44ed0133c6e9bab58",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "On Optimal Materialization in Data Lakes",
+      "url": "https://research.google/pubs/on-optimal-materialization-in-data-lakes/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1d8a873c560950f52115c61e69345c0b55a34ea4c92a9169450d1329ccf12b8a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-4/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ccba7137499b816e76ac5549857ee9b15e5494ca5444658f977b8ac21763f1f8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Position: Hallucinations Undermine Trust; Metacognition is a Way Forward",
+      "url": "https://research.google/pubs/position-hallucinations-undermine-trust-metacognition-is-a-way-forward/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5b030d405f5cd35c7cffd5e37dd530869ff93dccec6465285744fb281a15151a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Securing Elliptic Curve Cryptocurrencies against Quantum Vulnerabilities: Resource Estimates and Mitigations",
+      "url": "https://research.google/pubs/securing-elliptic-curve-cryptocurrencies-against-quantum-vulnerabilities-resource-estimates-and-mitigations-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9a6313f64651fc2169ed905b8a5b82ebdd7359bbf2063f4ffe23f58a109a735b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GGN: Experiences in Designing and Deploying Next-Generation Google Global Network",
+      "url": "https://research.google/pubs/ggn-experiences-in-designing-and-deploying-next-generation-google-global-network/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "994669aa2bebe157043ce4b2b9b9cf21b6ad933fbe2ef804aaad4db5c9cedf55",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A simple and efficient implementation of strong call by need by an abstract machine",
+      "url": "https://research.google/pubs/a-simple-and-efficient-implementation-of-strong-call-by-need-by-an-abstract-machine/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "90a910c9e917f6a853bd19becace8b597d2497decd7a731463c5011be0c2ce8e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Generational differences in anthropomorphism and trust calibration for large language models",
+      "url": "https://research.google/pubs/generational-differences-in-anthropomorphism-and-trust-calibration-for-large-language-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f0eebf79cc511245c5a631a48db0540a105dc5029fd5fd368d62f4f05a10450c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Meridian GeoX: An Open-Source Framework for Precision and Efficiency in Geo Experiments",
+      "url": "https://research.google/pubs/meridian-geox-an-open-source-framework-for-precision-and-efficiency-in-geo-experiments/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a8ee0fb87d23ad540acc8de370ed83b32aac96c7dd14e3222d4d60231d1ee047",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Identifying Model Quality Effects on User Engagement: A Within-Version Causal Estimator with Synthetic Data Validation",
+      "url": "https://research.google/pubs/identifying-model-quality-effects-on-user-engagement-a-within-version-causal-estimator-with-synthetic-data-validation/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2608.17187"
+      ],
+      "dates": [],
+      "sha256": "2ce0bb7b8687b044b6aa1dece03ab7e91847e5991405e1d5be72bcb1675d4eda",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Can we talk about probabilistic forecasting for a minute or two?",
+      "url": "https://research.google/pubs/can-we-talk-about-probabilistic-forecasting-for-a-minute-or-two/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8ea8846260fe0f7e1a7c445164b9ac7242b5f449eb6632d4d7635eeb3e794500",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Lessons learned from building an agent to convert the R Forecast Package into a JAX api",
+      "url": "https://research.google/pubs/lessons-learned-from-building-an-agent-to-convert-the-r-forecast-package-into-a-jax-api/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5ad45081d6b2f3f58af835d05d83251f146d4fee1555d335ca2a90a265de4e83",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Model Checking for Flexible Networking Protocols",
+      "url": "https://research.google/pubs/model-checking-for-flexible-networking-protocols/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "de303af098d8fa91fb4a6ca7225a9238dfd2391c7ff7826b5b51194219b52b59",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "CSIG: Congestion Signaling for Datacenter Transports",
+      "url": "https://research.google/pubs/csig-congestion-signaling-for-datacenter-transports/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "64b5c410c1918ca21837df372b77f23c666d26f37ceb5e6c92d9fb309582a868",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Global monitoring of methane point sources using deep learning on hyperspectral radiance measurements from EMIT",
+      "url": "https://research.google/pubs/global-monitoring-of-methane-point-sources-using-deep-learning-on-hyperspectral-radiance-measurements-from-emit/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "59f38fdad22640d438c9d2d4f30aa24eea577234fd439060c618d97ef9f05605",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Grounding AI Agents in Contracts:  An Empirical Evaluation of Spec-Driven Test Generation",
+      "url": "https://research.google/pubs/grounding-ai-agents-in-contracts-an-empirical-evaluation-of-spec-driven-test-generation/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2608.17177"
+      ],
+      "dates": [],
+      "sha256": "ae7fcdf7def1ca761390225b8eb0f2ccce8886948f1d4c6672a8d2fa8feaea6f",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code  Migration",
+      "url": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "628b9193160300b42f3be07e488299d839a56199ae7148124fc7181512dfe228",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Inference Perf: A Benchmarking Tool for GenAI Inference",
+      "url": "https://research.google/pubs/inference-perf-a-benchmarking-tool-for-genai-inference/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a0c754b81d67016ad5f02cbf0455e7f17943238831fa85b77172469b0a167679",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Conversational diagnostic artificial intelligence in ambulatory primary care: a prospective feasibility study",
+      "url": "https://research.google/pubs/a-prospective-clinical-feasibility-study-of-a-conversational-diagnostic-ai-in-an-ambulatory-primary-care-clinic/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5147e781492b2d03594ec44bd2543fd660d92564925841e3a298a5149c2f1668",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Mobility-Embedded POIs: Learning What a Place Is and How It’s Used from Human Movement",
+      "url": "https://research.google/pubs/mobility-embedded-pois-learning-what-a-place-is-and-how-its-used-from-human-movement/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7716f15d7bba0f62700d6c3ac3227f8cef3514623724936598694becfa68aa7b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A large language model for complex cardiology care",
+      "url": "https://research.google/pubs/a-large-language-model-for-complex-cardiology-care/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6421a853c557a77df4316ed18d042d0d0b3e6009d11dd61c2d2d849bd6fb4503",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Fisheye3R: Adapting Unified 3D Feed-Forward Foundation Models to Fisheye Lenses",
+      "url": "https://research.google/pubs/fisheye3r-adapting-unified-3d-feed-forward-foundation-models-to-fisheye-lenses/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "637b77649ca15dbbc4811d59fc22f5c9d95140496222c03bf52bf337fc83a0ae",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Prospective evidence for conversational medical AI is hard, but non-negotiable",
+      "url": "https://research.google/pubs/prospective-evidence-for-conversational-medical-ai-is-hard-but-non-negotiable/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ef3ffbeae75afd198912c632dad94e51961e63d933f618993701e521fecae871",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Toward a test of medical AI superintelligence",
+      "url": "https://research.google/pubs/toward-a-test-of-medical-ai-superintelligence/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7c9d48c181af4fde1ad4d527235321c8c8de8498ef040cf96c43010a88849cc7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "SymptomAI: Toward a Conversational AI Agent for Everyday Symptom Assessment",
+      "url": "https://research.google/pubs/symptomai-toward-a-conversational-ai-agent-for-everyday-symptom-assessment/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.04012"
+      ],
+      "dates": [],
+      "sha256": "61ecae6332f0b79100af765d2d9c5195e44eb5a5a11ad152aed928bf4fa68529",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Hybrid Reputation Routing for Decentralized Networks: A Blockchain-Enabled Secure and Scalable Protocol with On-Chain/Off-Chain Partitioning",
+      "url": "https://research.google/pubs/hybrid-reputation-routing-for-decentralized-networks-a-blockchain-enabled-secure-and-scalable-protocol-with-on-chainoff-chain-partitioning/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "50c91e3edd413deb243f43b4e180453e0cf2837a6553319730e7906210f692d4",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems",
+      "url": "https://research.google/pubs/tfrbench-a-reasoning-benchmark-for-evaluating-forecasting-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8e1dcc38686c9d6fb6ee07d605177e4779abeee361f664eb7eb5079b0e44a934",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "OpenClaw in the Wild: Security Analysis of Autonomous Agents",
+      "url": "https://research.google/pubs/openclaw-in-the-wild-security-analysis-of-autonomous-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2b539eb319964ad7cd51721a2070e7842af092f1bd63bc1bff57c6e710f97ef8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ScholarPeer: A Multi-Agent Framework for Automated Peer Review",
+      "url": "https://research.google/pubs/scholarpeer-a-multi-agent-framework-for-automated-peer-review/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2601.22638"
+      ],
+      "dates": [],
+      "sha256": "1a32bbedcf3b3c602affb89872cec599a2b9b81095e98c01c884b6ee6166eb2f",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Efficacy of Scalable Airline-led Contrail Avoidance",
+      "url": "https://research.google/pubs/efficacy-of-scalable-airline-led-contrail-avoidance/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "969b9d8303ae2608d51364281caab6e24fa87ecb4fa3b6ace13fffefccd0e772",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Hybrid Consensus with Quantum Sybil Resistance",
+      "url": "https://research.google/pubs/hybrid-consensus-with-quantum-sybil-resistance/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9f8fd92f4eb6a0b6275f84a8748d5af3ee88f13c65ed567f4b1de491dbd73d7e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Latent Reasoning with Supervised Thinking States",
+      "url": "https://research.google/pubs/latent-reasoning-with-supervised-thinking-states/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.08332"
+      ],
+      "dates": [],
+      "sha256": "5809d7c4fb31f8f2ef1c7c9a3dc152b4090308e7e3a5feb32b929683ba765e52",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Reinforcement Learning Control of Quantum Error Correction",
+      "url": "https://research.google/pubs/reinforcement-learning-control-of-quantum-error-correction/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "011edcd4cd81bf72b6265e07c16ecb62f0ee10ba374d2cbdeeb44af960d48c78",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Theoretical Perspectives on Data Quality and Synergistic Effects in Pre- and Post-Training Reasoning Models",
+      "url": "https://research.google/pubs/theoretical-perspectives-on-data-quality-and-synergistic-effects-in-pre-and-post-training-reasoning-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e717befc71ee4e63f093c82672cb8e635654a1f4eefbdb215fa6646d51fb1160",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Asemantic Code Revolution: Breeding Software for Silicon Physics",
+      "url": "https://research.google/pubs/the-asemantic-code-revolution-breeding-software-for-silicon-physics/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "773a74d0b09fe83b81a6d399867f04a07dbe5bfaead78743ecc1ef7ed3b953b3",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Outrunning LLM Cutoffs: A Live Kernel Crash Resolution Benchmark for All,",
+      "url": "https://research.google/pubs/outrunning-llm-cutoffs-a-live-kernel-crash-resolution-benchmark-for-all/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "831ab086a261d348932af43279fe33f1a253815bb20e6902de4085edf0cd6898",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Fine-Grained Table Retrieval for Open-Domain Tabular Question Answering",
+      "url": "https://research.google/pubs/fine-grained-table-retrieval-for-open-domain-tabular-question-answering/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.07146"
+      ],
+      "dates": [],
+      "sha256": "fb77f2b11225da8a32d40cd5d0d09cb695ea16b81b3a901890ba2c15db283a01",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Shuffles of Context-Free Languages along Regular Trajectories",
+      "url": "https://research.google/pubs/shuffles-of-context-free-languages-along-regular-trajectories/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "61baff042a669114245bdfa97702652a645213abbd90ed82f32ef60d283b1f0e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Mobile Telemetry-Centered Threat Modeling for Managed Enterprise Architectures",
+      "url": "https://research.google/pubs/mobile-telemetry-centered-threat-modeling-for-managed-enterprise-architectures/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "65c9f8f6245f552233e15268da5bba9cae466ecb897a65dc82e1835c370635fb",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Learned Task Relationships in Multi-task Models",
+      "url": "https://research.google/pubs/learned-task-relationships-in-multi-task-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "912a8cc923909e72094369b51623a37d185406ea39cca206f25ac1ad1b8ec610",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Beyond CLEAN and MVP: Architecting an Offline-first Reactive Data Layer in Android (RDLA)",
+      "url": "https://research.google/pubs/beyond-clean-and-mvp-architecting-an-offline-first-reactive-data-layer-in-android-rdla/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "710aee4ce3cae78465a4f3e5f17f52145286c85d07e0f0200789f1c8dc4a6ffd",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Inhibitory normalization of error signals improves learning in neural circuits",
+      "url": "https://research.google/pubs/inhibitory-normalization-of-error-signals-improves-learning-in-neural-circuits/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "baddc3d725b11bb29045d736c763b3cb45da94db506c33363d5fc08e36b2953e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Climate change shifts the North Pacific storm track polewards",
+      "url": "https://research.google/pubs/climate-change-shifts-the-north-pacific-storm-track-polewards/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "202ce5b7d2915853f8f092b6027e314770cb4f6fdf3f309f463ff1cf4287ccee",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Declarative Multi-Agent Framework for Reducing On-Call Operational Burden",
+      "url": "https://research.google/pubs/a-declarative-multi-agent-framework-for-reducing-on-call-operational-burden/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c94f3c0430e0381e42501c0c1ba13dc0fdc553bd2370cfe0dd784b82a528da80",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Unwarping the Lens: A Physics-Grounded Approach to Video Glasses Removal",
+      "url": "https://research.google/pubs/unwarping-the-lens-a-physics-grounded-approach-to-video-glasses-removal/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2608.20212"
+      ],
+      "dates": [],
+      "sha256": "0517c60d0ddab35ccf516e143ef3c72a18b9db223ff42de8f7754af0bf2cb5c1",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "MAGE: Modality-Agnostic Music Generation and Editing",
+      "url": "https://research.google/pubs/mage-modality-agnostic-music-generation-and-editing/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "39d7f893abccb916f8e302d0fd8db0adaf5d54644b1344f87e9b2fe3c56b32d2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Surviving the perfect storm: how hardware PMs can beat the AI tax and trade tariffs",
+      "url": "https://research.google/pubs/surviving-the-perfect-storm-how-hardware-pms-can-beat-the-ai-tax-and-trade-tariffs/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "37ed8effc97acb2490472c0f30aca31f9ca5ab45e9d3b0f56c5a5016df3cb088",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "QBAT: Model-based Query Budget Autotuner for Clustering-based Approximate Nearest Neighbor Search",
+      "url": "https://research.google/pubs/qbat-model-based-query-budget-autotuner-for-clustering-based-approximate-nearest-neighbor-search/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "bc8f2c28e4876ca37797d23e63975b1e9cfa9c73b1ccc51d1f5e36fedde9c54d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "One Attack to Rule Them All: Tight Quadratic Bounds for Adaptive Queries on Cardinality Sketches",
+      "url": "https://research.google/pubs/one-attack-to-rule-them-all-tight-quadratic-bounds-for-adaptive-queries-on-cardinality-sketches/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2411.06370"
+      ],
+      "dates": [],
+      "sha256": "a44e2f8fe69d77af833c48aae34bdde9d8e18c4f783af76c5252c7050911a42a",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "From Growing to Looping: A Unified View of Iterative Computation in LLMs",
+      "url": "https://research.google/pubs/from-growing-to-looping-a-unified-view-of-iterative-computation-in-llms/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.16490"
+      ],
+      "dates": [],
+      "sha256": "6804c2c094e764ec8eac63b2c8ad77ad428bb7f30bad5135614e7efe273e077e",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Adaptive Matrix Online Learning through Smoothing with Guarantees for Nonsmooth Nonconvex Optimization",
+      "url": "https://research.google/pubs/adaptive-matrix-online-learning-through-smoothing-with-guarantees-for-nonsmooth-nonconvex-optimization/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.08232"
+      ],
+      "dates": [],
+      "sha256": "ab15eadddf5d57e2966aca4c1c22d0a3ad95bd04756fbfaa7c6f843822fc05db",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Holistic Latent Diffusion Acceleration: Unifying Spatial, Temporal, and Architectural Efficiency",
+      "url": "https://research.google/pubs/holistic-latent-diffusion-acceleration-unifying-spatial-temporal-and-architectural-efficiency/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c01fe6f8b140745ce6db8b2d9c287f70df018e35a2d6bbcafbedd37b16acfe38",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "StreamLens: An Open-Source ABR Simulation Environment for  Multi-Region Buffering, Seeking, and Prefetching",
+      "url": "https://research.google/pubs/streamlens-an-open-source-abr-simulation-environment-for-multi-region-buffering-seeking-and-prefetching/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4ef619c6dd1f55dab469544790aa7338d58779797f35172d85c244447e54f1ce",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Physical Design Aware Verification Methodology for Closing Coverage Gaps in SharedBus MBIST",
+      "url": "https://research.google/pubs/physical-design-aware-verification-methodology-for-closing-coverage-gaps-in-sharedbus-mbist/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d630e3ce11f5580c4dc43bd740498b467885f5cd853f594c2060fd8826fda1d1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Meta-Initialized Warm Pool Manager: Predictive Cold Start Mitigation for Serverless Functions via  Adaptive Meta-Learning",
+      "url": "https://research.google/pubs/meta-initialized-warm-pool-manager-predictive-cold-start-mitigation-for-serverless-functions-via-adaptive-meta-learning/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "0c66dafd42f3860dae1c650a2d80df48e9e98e5ac2be54c9c605657a21cfe5c7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Does AI Assistance Enhance or Erode Expertise? Evidence from a Three-Month Field Experiment in Patent Drafting",
+      "url": "https://research.google/pubs/does-ai-assistance-enhance-or-erode-expertise-evidence-from-a-three-month-field-experiment-in-patent-drafting/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9b9865b75bb3336386908c563d0c090df1e8f19645054a7a667241ba5fede6d6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Data-usage descriptors as search metadata: the case of food security data and  the National Data Platform (2015-2025)",
+      "url": "https://research.google/pubs/data-usage-descriptors-as-search-metadata-the-case-of-food-security-data-and-the-national-data-platform-2015-2025/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "57773d1d289f4decd271d7f397c6a04dd85e43ed3a895076f244a0816ac4765e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Beyond the Double Diamond: Establishing Design Observability in Professional Practice",
+      "url": "https://research.google/pubs/beyond-the-double-diamond-establishing-design-observability-in-professional-practice/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "862804775c2104adf16b2975169868336d8ae430e1e3d9dd9461bbb5def78b8c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Evaluating Contextual Illegality: AI Compliance in Corporate Law Scenarios",
+      "url": "https://research.google/pubs/evaluating-contextual-illegality-ai-compliance-in-corporate-law-scenarios/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "699fd46c90cf462ac913ffbaddb4d53f42a0544332b67835d37b35198639ab93",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "QProf: Fleetwide Transitive Cost Profiling for Warehouse-Scale Computers",
+      "url": "https://research.google/pubs/qprof-fleetwide-transitive-cost-profiling-for-warehouse-scale-computers/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f5f3109871cbf8dd4cc50fc4d72b33d097d1f0a66c973de1f893b634fb026804",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Rational Area Profiles of Regular Polygons Cut by Two Congruent Diagonals",
+      "url": "https://research.google/pubs/rational-area-profiles-of-regular-polygons-cut-by-two-congruent-diagonals/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b94c1b85f8682d3972a2f77f11722fd4bfb07f8df0ce35a0b29d59bdd6eb7568",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Architecting Simulation-Acceleration-Ready SoC Testbenches to Left-Shift Critical Verification cycles",
+      "url": "https://research.google/pubs/architecting-simulation-acceleration-ready-soc-testbenches-to-left-shift-critical-verification-cycles/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a6eda3711c27aeb0b56a4c881e8a51edce232cc1864fb735c30e6543b582d073",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Location Not Found: Exposing Implicit Local and Global Biases in Multilingual LLMs",
+      "url": "https://research.google/pubs/location-not-found-exposing-implicit-local-and-global-biases-in-multilingual-llms/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.19292"
+      ],
+      "dates": [],
+      "sha256": "81b23f26355d29be77bb8a2732ce56d7fd3e87a18df65f0ee2884d728dcade22",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "PointDiT: Pixel-Space Diffusion for Monocular Geometry Estimation",
+      "url": "https://research.google/pubs/pointdit-pixel-space-diffusion-for-monocular-geometry-estimation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "59f5823002c228d4ed13991eacfb747fb4cd5cb3c7c53d4d458f055d3ba5a9ba",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GroundSet: A Cadastral-Grounded Dataset for Spatial Understanding with Vector Data",
+      "url": "https://research.google/pubs/groundset-a-cadastral-grounded-dataset-for-spatial-understanding-with-vector-data/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ae29a16d2873a00d649150ab85fa8eee0a4b118c5e0114e22a2d24ab4fb48aa0",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "“That Experience Still Haunts Me to This Day”: A Multi-Region Survey on AI-Generated Image-Based Sexual Abuse Victimization",
+      "url": "https://research.google/pubs/that-experience-still-haunts-me-to-this-day-a-multi-region-survey-on-ai-generated-image-based-sexual-abuse-victimization/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9f6c29141a4427995722d193aea92314265a67f8a1e6e5d67947b19fa9d9c8ad",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Hot PATE: Private Aggregation of Distributions for Diverse Tasks",
+      "url": "https://research.google/pubs/hot-pate-private-aggregation-of-distributions-for-diverse-tasks/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2312.02132"
+      ],
+      "dates": [],
+      "sha256": "4419d9a6d5f421b1952a52ad3f5730247311389991cec733354713b70c48ec32",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Load Balancing under Adaptive Bin Deletions",
+      "url": "https://research.google/pubs/load-balancing-under-adaptive-bin-deletions/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2607.06211"
+      ],
+      "dates": [],
+      "sha256": "2a91ba16ddedc854f3070e294d69e34b837afd459cc578213094646b4720abb0",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Optical Transport Optimized for AI Infrastructure - Fiber Is The New Wavelength (𝝺)",
+      "url": "https://research.google/pubs/optical-transport-optimized-for-ai-infrastructure-fiber-is-the-new-wavelength-%CE%BB/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2a07a6402bd82a0c2ccf2afc096541154fc4b2b1324384daf2e29702ccdd1a87",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Simple and Robust Protocol for Distributed Counting",
+      "url": "https://research.google/pubs/a-simple-and-robust-protocol-for-distributed-counting/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2509.05870"
+      ],
+      "dates": [],
+      "sha256": "56dcd7e2fa15b3c0c9b8288657695f88b600f5f16a478d585a5250dfac0ab2bf",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Human-AI Interaction for Time-Critical Sensemaking in Missing Persons Investigations",
+      "url": "https://research.google/pubs/human-ai-interaction-for-time-critical-sensemaking-in-missing-persons-investigations/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8ee06524a262c975dde2fba922f04deed3ac3f556d9a43444eb7b41a4154c6c1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Accurate ground state energy estimation with noise and imperfect state preparation",
+      "url": "https://research.google/pubs/accurate-ground-state-energy-estimation-with-noise-and-imperfect-state-preparation/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.21873"
+      ],
+      "dates": [],
+      "sha256": "b738a334dcc991400b3e438b0bb188b4c666ba1e53ff79c326cc79ba9d301a2f",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Editing Everything Everywhere All at Once",
+      "url": "https://research.google/pubs/editing-everything-everywhere-all-at-once/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2606.31278"
+      ],
+      "dates": [],
+      "sha256": "02092adc8e52b99e1e5cc07deb8e8f54c393418a59fd5538d630bb099cc98008",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "MOSAIC-GS: MOnocular Scene Reconstruction via Advanced Initialization for  Complex Dynamic Environments",
+      "url": "https://research.google/pubs/mosaic-gs-monocular-scene-reconstruction-via-advanced-initialization-for-complex-dynamic-environments-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2601.05368"
+      ],
+      "dates": [],
+      "sha256": "117e038603f872097cf9f3114935bf887bb648a3e515d940305fd94023859fc5",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Large-scale, interpretable gene regulatory network inference through biologically informed matrix factorization",
+      "url": "https://research.google/pubs/large-scale-interpretable-gene-regulatory-network-inference-through-biologically-informed-matrix-factorization/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a8c55c14cacfe71c3e83cc490613dda93ca6274d587294528b0d7a7bf6398969",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Adaptively Robust Resettable Streaming",
+      "url": "https://research.google/pubs/adaptively-robust-resettable-streaming/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2601.21989"
+      ],
+      "dates": [],
+      "sha256": "821e5a1b38c3eda06c39d9eeab50d2b56049d8f03ce457de0b80e51edb285dab",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "CAST: Modeling Visual State Transitions for Consistent Video Retrieval",
+      "url": "https://research.google/pubs/cast-modeling-visual-state-transitions-for-consistent-video-retrieval/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.08648"
+      ],
+      "dates": [],
+      "sha256": "f65071ea0570d57b2d6cd152fb1ef7bd2957c0d8b55b6902b75cedd26963f1a9",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Generative Manifold Distillation: Aligning Restoration Trajectories with Natural Image Prior",
+      "url": "https://research.google/pubs/generative-manifold-distillation-aligning-restoration-trajectories-with-natural-image-prior/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "fe0b857e349b7811f1dd4a9b963ad35812b3036a176710bf132531c5984a9cff",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "VidMap: Exploiting Temporal Structure for Video-Based Structure-from-Motion",
+      "url": "https://research.google/pubs/vidmap-exploiting-temporal-structure-for-video-based-structure-from-motion/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2607.27194"
+      ],
+      "dates": [],
+      "sha256": "b6086994e18e3678cccaf3a6d16a47639522014b06f5e4a4d6e508cc39406f5a",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "RATE-DISTORTION OPTIMIZED LORA FOR EFFICIENT POST-FILTERING IN AV2",
+      "url": "https://research.google/pubs/rate-distortion-optimized-lora-for-efficient-post-filtering-in-av2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9042adcb99b7977e761d65641d74e41047c05e286f55257c194dbe262bf757df",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "UniGeoCLIP: Unified Geospatial Contrastive Learning",
+      "url": "https://research.google/pubs/unigeoclip-unified-geospatial-contrastive-learning/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.11668"
+      ],
+      "dates": [],
+      "sha256": "cae63bf542af93be891e8caf21fcfbca7cccafa3c8ddb3494390cfd8d1340e16",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Automated Static Signal Validation and Quality Control for Subsystem based SoC Designs",
+      "url": "https://research.google/pubs/automated-static-signal-validation-and-quality-control-for-subsystem-based-soc-designs/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b0b6c9e6f2618932143be871cbbd17e66abfacd8ec51777459c6b84017d1f1dd",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "OVERVIEW OF THE BLOCK-PARTITIONING FRAMEWORK IN AV2",
+      "url": "https://research.google/pubs/overview-of-the-block-partitioning-framework-in-av2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "566bed13d1c06b5401bcd1db72d18d1993816db407898f943a23aaba82786228",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A DV Approach to Post-Silicon: Validating SoC Low Power through Synthetic Software Scenarios",
+      "url": "https://research.google/pubs/a-dv-approach-to-post-silicon-validating-soc-low-power-through-synthetic-software-scenarios/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "afd4515b592e60cf46f071ae68c5d5fe4ddbef1a29704f42b5ef1a5120077136",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The AI architecture decisions that cannot wait",
+      "url": "https://research.google/pubs/the-ai-architecture-decisions-that-cannot-wait/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ed957dfc9df0de9604b51be8372091f16bbf08b26f2e73efa1bee26f90f32de6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Theoretical Framework for Statistical Evaluability of Generative Models",
+      "url": "https://research.google/pubs/a-theoretical-framework-for-statistical-evaluability-of-generative-models-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "02a1cd6dbe80c3e33bf735cdc3fa3d76c3289301067210674bacc8064be60e44",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "DDRop: Generic Memory Interposer Attacks on Confidential VMs by Dropping DDR5 Writes",
+      "url": "https://research.google/pubs/ddrop-generic-memory-interposer-attacks-on-confidential-vms-by-dropping-ddr5-writes/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4667ef8ac08ec5585d5807948e5c5a48ade44666e4b04f599933fad5cb2da9d9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Modeling multi-chiplet architectures for TPU co-design",
+      "url": "https://research.google/pubs/modeling-multi-chiplet-architectures-for-tpu-co-design/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "023cd72302027a5524522607125dc8a57484f2aeb5707667b55bbfcae17928de",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "HAPS-to-Host: Seamless FPGA Prototyping for Full-Stack System-on-Chip Validation",
+      "url": "https://research.google/pubs/haps-to-host-seamless-fpga-prototyping-for-full-stack-system-on-chip-validation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a3bed55ffb0e0a76d3cc2b91604583e3f347e85005b0eed3323688c57741e3d0",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "XMob: Accelerated Differentiable Mesoscopic Traffic Simulation in JAX",
+      "url": "https://research.google/pubs/xmob-accelerated-differentiable-mesoscopic-traffic-simulation-in-jax/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f24fc369e001b8740a373dd7b437edc52f6567195bcabff1dc7d04ea0654b6b1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Working Together on Technologies: A Case Study of Collaboration in Aotearoa",
+      "url": "https://research.google/pubs/working-together-on-technologies-a-case-study-of-collaboration-in-aotearoa-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f165934aaa007b02e5e31ff611e13206b2bd39270a2fbb0fe5ba1585f6c8789c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Nine changes needed to deliver a radical transformation in biodiversity measurement",
+      "url": "https://research.google/pubs/nine-changes-needed-to-deliver-a-radical-transformation-in-biodiversity-measurement/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "db5bac53236d13a6d5b37c7142b9290c9fc68d484149621764fc89f149c0696e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Rolling Shutter Relative Pose Estimation Made Practical",
+      "url": "https://research.google/pubs/rolling-shutter-relative-pose-estimation-made-practical/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "7ff9b9f956a12085a6ac243b36ba6d8139b231a61f4d89e4978de8e7df3f49bc",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Wearable Foundation Models Should Go Beyond Static Encoders",
+      "url": "https://research.google/pubs/wearable-foundation-models-should-go-beyond-static-encoders/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.19564"
+      ],
+      "dates": [],
+      "sha256": "6ea9b5429c67b6a492b604a6b6010445478762fee466bb35a5fd968819b35711",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "When “Correct” Is Not Safe: Can We Trust Functionally Correct Patches Generated by Code Agents?",
+      "url": "https://research.google/pubs/when-correct-is-not-safe-can-we-trust-functionally-correct-patches-generated-by-code-agents-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a8aa825e6c83677e07507d9882768b4e5d8d6b35214db3f7c456be954822e045",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates",
+      "url": "https://research.google/pubs/classification-testing-a-new-framework-for-drawing-qualitative-conclusions-from-quantitative-estimates/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "81cb9a60f5f2838b2ac7d2180507c593b6597b898472a0d61d55a13debe9795f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Challenges, Constraints, and Approaches for Readout of State-of-the-Art Superconducting Quantum Processors",
+      "url": "https://research.google/pubs/challenges-constraints-and-approaches-for-readout-of-state-of-the-art-superconducting-quantum-processors/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "94ab5cabb2ed9031dd64dbf40898104ff3b840d13a81b75f027409c45f2755fa",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "WAXAL: A large-scale multilingual African language speech corpus",
+      "url": "https://research.google/pubs/waxal-a-large-scale-multilingual-african-language-speech-corpus/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.02734"
+      ],
+      "dates": [],
+      "sha256": "a74a352ae7f53c78c74a2eca9bd6fde3a15dbbf08cd927a4936f17d1904287f8",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Securing the Agentic Enterprise",
+      "url": "https://research.google/pubs/securing-the-agentic-enterprise/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e18068fd3f6ab59c51fd5b1690d19117a04c271e59a130d4bc0a3bd6a3d4511a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Bottom-Up AI Agent Security: The Complete 14-Layer Framework for Cloud Architects",
+      "url": "https://research.google/pubs/bottom-up-ai-agent-security-the-complete-14-layer-framework-for-cloud-architects/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "443673e09d66e22e626150cb25c1b3ae524501f8070c9e90f387ee371bd7c2f7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Quantitative Framework for Foundational Technology Choices in Backend-for-Frontend Architectures",
+      "url": "https://research.google/pubs/a-quantitative-framework-for-foundational-technology-choices-in-backend-for-frontend-architectures/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4a9826882aae29de48a79cf350f886802cdedd56d25ede7a8d6652428d09e1d2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Agentic AI Is Forcing Procurement to Rethink What It Means to Trust a Vendor",
+      "url": "https://research.google/pubs/agentic-ai-is-forcing-procurement-to-rethink-what-it-means-to-trust-a-vendor/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e9e8b4a5af2504497f28756ff1f652291a4bdf36a997c9e679de76a178482dd1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Manager's Job Has Already Changed, Most Companies Haven't Noticed",
+      "url": "https://research.google/pubs/the-managers-job-has-already-changed-most-companies-havent-noticed/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "5445c25f3c1f8a0d7bd24a2addebf4aa7a2e541d36b2ef4d0a0047ce49235a43",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Cold Start Latency of Quantized Small Language Models on Serverless CPU Infrastructure",
+      "url": "https://research.google/pubs/cold-start-latency-of-quantized-small-language-models-on-serverless-cpu-infrastructure/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a661fa47f790572ee99038f1f76f9bf8d14267a26d0685382ab4cbbe7cab9b5b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "OpenClaw in Practice: Building Laptop-Less Engineering Workflows with an Agent Harness",
+      "url": "https://research.google/pubs/openclaw-in-practice-building-laptop-less-engineering-workflows-with-an-agent-harness/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2fba966e18c900222cf677910e1e2e9a14eaa8cbbc292bf6d4f184dad46ef06d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The End of SaaS Dashboards: Why 2026 Belongs to Agents-as-a-Service",
+      "url": "https://research.google/pubs/the-end-of-saas-dashboards-why-2026-belongs-to-agents-as-a-service/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "a0087bb445a7c5bcd134507e4f775ff92b80cb99ee652bc251fb3914e5ae93e7",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Agent-to-Agent (A2A) Protocol: The Future of Autonomous Multi-Agent Systems",
+      "url": "https://research.google/pubs/agent-to-agent-a2a-protocol-the-future-of-autonomous-multi-agent-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d67c9eeece74a17d0f26405c055b76da4470f466648d90497c291c54eeb165f2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "What Happens When Your Entire Operations Stack Is Just Markdown?",
+      "url": "https://research.google/pubs/what-happens-when-your-entire-operations-stack-is-just-markdown/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f5a66ca3d736c549274c0bb5ea9cfcb18d85bf4fe12041fcb566b279cb23f37a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Scalability With AI: Lessons From Real Production Systems",
+      "url": "https://research.google/pubs/scalability-with-ai-lessons-from-real-production-systems/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e268318c02d6d4a9029b541aa8eac7b606e6799923c33ab4d44167fffe964225",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Unified Protocol Architecture for Agentic Interoperability: Quantitative Evaluation of Standardized Context Exchange in the N + M Economy",
+      "url": "https://research.google/pubs/a-unified-protocol-architecture-for-agentic-interoperability-quantitative-evaluation-of-standardized-context-exchange-in-the-n-m-economy/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b612af3dbee80650cd204e30e57768dc23ac3ba6eae26a61931abde2b72ea09a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Verification-Driven Interface Convergence: Methodology for Validating Functional Interoperability And Accelerating Subsystem Design for Concurrently Developed Compute and Component IPs in Coherent Subsystem",
+      "url": "https://research.google/pubs/verification-driven-interface-convergence-methodology-for-validating-functional-interoperability-and-accelerating-subsystem-design-for-concurrently-developed-compute-and-component-ips-in-coherent-subsystem/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1022d94e1fc6b3abc00e24e17b02c51c5ad96934e349fed80d32312c542cc502",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Integrating Level-Design for Editable, Shared Worlds in Diffusion Game Engines",
+      "url": "https://research.google/pubs/integrating-level-design-for-editable-shared-worlds-in-diffusion-game-engines/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2603.06679"
+      ],
+      "dates": [],
+      "sha256": "bc67bd7bf96c19ea70179d58e3d37db860eac0862682edbc09c87897ece70a5a",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "ARM-Orchestrated Dynamic Workload Partitioning for Vision Model Training on FPGA Accelerators",
+      "url": "https://research.google/pubs/arm-orchestrated-dynamic-workload-partitioning-for-vision-model-training-on-fpga-accelerators/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "cebfb3dd30e2125925a761dd5124ee205cc59f77a223166582bd61ab91224dff",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "VIP-MINGLE: A Corpus for Videoconference and In-Person Multimodal Interaction in Group Language Engagement",
+      "url": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "67e25738a3f51feae85b2fa5c85f77504dbb2bc0473e300d5f123a03258944ee",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization",
+      "url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.15602"
+      ],
+      "dates": [],
+      "sha256": "f258043b286b9fe6b162b8961d314c658797d2a438149c2fca02bbba328811cb",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "FUSE: Scaling Verification with Zero Labeled Data",
+      "url": "https://research.google/pubs/fuse-scaling-verification-with-zero-labeled-data/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "92786dfe4bba4ccd61b47f3b24cbf5eeacf3aa1be105f60247172f6259cf594e",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Verification-Driven Interface Convergence:  Methodology for Validating Functional Interoperability And Accelerating Subsystem Design for Concurrently Developed Compute and Component IPs in Coherent Subsystem",
+      "url": "https://research.google/pubs/verification-driven-interface-convergence-methodology-for-validating-functional-interoperability-and-accelerating-subsystem-design-for-concurrently-developed-compute-and-component-ips-in-coherent-subsystem-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8f689122cc59b9d33ecc4ed036b8660f5a23699efa817b446df320801fe588ef",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Elastic Threshold Attention: Learned Contextual Sparsity for Long-Context Decoding",
+      "url": "https://research.google/pubs/elastic-threshold-attention-learned-contextual-sparsity-for-long-context-decoding-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2609.20888"
+      ],
+      "dates": [],
+      "sha256": "198d826619407646115184bfc17ed646e3b292c559469ad6e92ae4c3a072c7f6",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Extracting electromagnetic bare mode couplings in large superconducting quantum processors",
+      "url": "https://research.google/pubs/extracting-electromagnetic-bare-mode-couplings-in-large-superconducting-quantum-processors/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2609.22442"
+      ],
+      "dates": [],
+      "sha256": "96234f60f2d130e7d28d560fac965ae4ee75ed2336d2c6547bb6be51fd6ff7c4",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "POLCA: Stochastic Generative Optimization with LLM",
+      "url": "https://research.google/pubs/polca-stochastic-generative-optimization-with-llm-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ee4092fefec857b6a678b6cb7a300e67ac18b24c9bb5a5d574aacf059548d5c9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Live Database: Firestore’s Scalable and Consistent Realtime Queries",
+      "url": "https://research.google/pubs/the-live-database-firestores-scalable-and-consistent-realtime-queries/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b2772faf94137119d0584fd3d9d649befb0748673510ed41b416b1fad6cf034b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Structural and Programmatic Prompting in Financial Artificial Intelligence",
+      "url": "https://research.google/pubs/structural-and-programmatic-prompting-in-financial-artificial-intelligence/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1e48172827d3593aebf87def18feaf4b57e5574f7aee80caa0065dd4ff773c5c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "AI-Simulated Expert Panels for Socio-Technical Scenarios and Decision Guidance",
+      "url": "https://research.google/pubs/ai-simulated-expert-panels-for-socio-technical-scenarios-and-decision-guidance/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b77310de33f25941f9fa1330177247fc27355136c28010a85f5a5152b5c10080",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Differential Validator: Ensuring SoC ROM to Hierarchical Blocks Node Voltage Integrity",
+      "url": "https://research.google/pubs/differential-validator-ensuring-soc-rom-to-hierarchical-blocks-node-voltage-integrity/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ae063f738784b09e6f910b964234add70dbde38a0d5b36b7b2d343170642f718",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "PIPE: Personalized Image-generation via Preference Encoding",
+      "url": "https://research.google/pubs/pipe-personalized-image-generation-via-preference-encoding/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "b4274b35145565102fc7e6006b9a79d7c91f620574d1740ebfc1e8ccda6c955a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "PaperBanana: Automating Academic Illustration for AI Scientists",
+      "url": "https://research.google/pubs/paperbanana-automating-academic-illustration-for-ai-scientists-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2601.23265"
+      ],
+      "dates": [],
+      "sha256": "457c9c63f3b6866c59eee0cae992ea8a068e92f51078ce01750f9de3dc9b94f7",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "AI Driven Verification Architectures - Scaling Formal Sign-off of High Bandwidth Data Crossbars via Generative AI and Required-Proof-Depth (RPD) Synthesis",
+      "url": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "0fa8292b08f91a1c2fd54ea041e547820a8ea03d9dbf9210f780838834c3860b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Optimal Mechanism Design with Post-Allocation Signal",
+      "url": "https://research.google/pubs/optimal-mechanism-design-with-post-allocation-signal-5/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "829035a17c126a358aa0cc2a185164d43cd70768319818ede924b5bbbee76e81",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Correct-by-Construction Framework for Robustness Against Divergent Voltage Drops and High Clock Divergence",
+      "url": "https://research.google/pubs/correct-by-construction-framework-for-robustness-against-divergent-voltage-drops-and-high-clock-divergence/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "416ea232fcbb0ce18632125907552147c433393f4fac11527cf62cbb5963d397",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Beyond Real or Fake: A Dual-Channel Authenticity and Reasoning Protocol for Photographic Assessment",
+      "url": "https://research.google/pubs/beyond-real-or-fake-a-dual-channel-authenticity-and-reasoning-protocol-for-photographic-assessment/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "78b10bd957961522e389dad0150ac0e7c3d704caf306dbc47c719f7e1d073b17",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "CinematicVQA: Benchmarking Film-Grammar Reasoning in Large Vision-Language Models",
+      "url": "https://research.google/pubs/cinematicvqa-benchmarking-film-grammar-reasoning-in-large-vision-language-models/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2609.28813"
+      ],
+      "dates": [],
+      "sha256": "7236c5d2ccba55af7d9f8d2057f4e9dbdd794981f287dcdb6c1b372662626c8c",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Regression Test Selection at Scale",
+      "url": "https://research.google/pubs/regression-test-selection-at-scale-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1fb1556d5ed77f8c206f3570ce2a4324903b211ca9cca19dcb54f4273aa94416",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "TCO-driven Storage Provisioning for Exascale Data Centers",
+      "url": "https://research.google/pubs/tco-driven-storage-provisioning-for-exascale-data-centers/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "3860561352b73a50ab7d2db1a6e885fddb21572a00a0d7e306e7e6f6884f69af",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Cost-Aware Learning",
+      "url": "https://research.google/pubs/cost-aware-learning/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2604.28020"
+      ],
+      "dates": [],
+      "sha256": "644db4d26e6191a192dcb056bff08b41bf20e6ebfa64f1aa7f2cd073060d98cd",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Position: Explainability Research Must Prioritize Foundations over Ad-hoc Methods",
+      "url": "https://research.google/pubs/position-explainability-research-must-prioritize-foundations-over-ad-hoc-methods-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "6e3613d9a82e95c0f9dd6072cc1425b2aae08fc763fed2d7af22a82d8fba39d9",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Assessing Global Flood Risk from Atmospheric Rivers through Physically Guided Machine Learning",
+      "url": "https://research.google/pubs/assessing-global-flood-risk-from-atmospheric-rivers-through-physically-guided-machine-learning/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e7f5c26d32f2b4bc79df8eb00376a94fe862e80d05b15103e1532002d29f992b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Dynamic Learning and Optimal Advertising Mechanism for LLM Platforms",
+      "url": "https://research.google/pubs/dynamic-learning-and-optimal-advertising-mechanism-for-llm-platforms/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "34270d488de7c64007048a2bf172e3e9d99669265ceff0dd96734565875e15ba",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Incentivizing Data Collaboration: A Mechanism Design Approach",
+      "url": "https://research.google/pubs/incentivizing-data-collaboration-a-mechanism-design-approach/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "630a5353ffe9001174bd56dcdde51284b7512b3be9428430f4473a0af205e41a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Controlling the Conversation",
+      "url": "https://research.google/pubs/controlling-the-conversation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "1d7831d4002a3cb311c5604fdd75fc3a682898e203b148ccdb5f853d9b4aaa12",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "The Horizon Threshold in Cooperative Multi-Agent Reward-Free Exploration",
+      "url": "https://research.google/pubs/the-horizon-threshold-in-cooperative-multi-agent-reward-free-exploration/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.01453"
+      ],
+      "dates": [],
+      "sha256": "14a3e8e62950fc9b029a08025c110d55a29c5a0bc7719663c0a87f209023345a",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Multi-agent cooperation through in-context co-player inference",
+      "url": "https://research.google/pubs/multi-agent-cooperation-through-in-context-co-player-inference/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2602.16301"
+      ],
+      "dates": [],
+      "sha256": "6d867d9c270702e0e1e743f0a757530c474f9374f462246e9228ccb310ae8a44",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Stochastic Matching via Local Sparsification",
+      "url": "https://research.google/pubs/stochastic-matching-via-local-sparsification/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.14195"
+      ],
+      "dates": [],
+      "sha256": "d4dc30f74efb52dcf808169d7cc88c943a6a13f8d60e6d68abf5064fcefe5247",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "PI-Hunter: Automated Red-Teaming for Exposing and Localizing Prompt Injections",
+      "url": "https://research.google/pubs/pi-hunter-automated-red-teaming-for-exposing-and-localizing-prompt-injections/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2606.12737"
+      ],
+      "dates": [],
+      "sha256": "298e2a29fc61b0e71cc86e02ff147bacb716d5c021d6d9ac51a8a6a526b91fbc",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "LiSA: Lifelong Safety Adaptation via Conservative Policy Induction",
+      "url": "https://research.google/pubs/lisa-lifelong-safety-adaptation-via-conservative-policy-induction-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.14454"
+      ],
+      "dates": [],
+      "sha256": "79b96e0aeaf4f952cd3dad6c8f98631ca5d43bdb1e61020291f817789a5bc203",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Online Differentially Private Clustering: Private to Non-Private Reduction",
+      "url": "https://research.google/pubs/online-differentially-private-clustering-private-to-non-private-reduction/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9aa70bf570282e9ea570819c61c53073ee511ca014076f77ef2b329a07842c28",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Google's Training Supercomputers from TPU v2 to Ironwood: Architectural Stability, Scale, Resilience, Power Efficiency, and Sustainability Across Five Generation",
+      "url": "https://research.google/pubs/googles-training-supercomputers-from-tpu-v2-to-ironwood-architectural-stability-scale-resilience-power-efficiency-and-sustainability-across-five-generation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "bb8cfc6722fe297bdce39336893a1e05c39a60434e71a4a839b4c6aa831b3f3f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Quantification of atmospheric carbon dioxide from the Geostationary Operational Environmental Satellite (GOES East)",
+      "url": "https://research.google/pubs/quantification-of-atmospheric-carbon-dioxide-from-the-geostationary-operational-environmental-satellite-goes-east/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.23991"
+      ],
+      "dates": [],
+      "sha256": "dc88a38f6769f2c6b1e527f5a0d3a20143a6e35fc869ff1ae6decd9b9d3ef0f7",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "A2RD: Agentic Autoregressive Diffusion for Long Video Consistency",
+      "url": "https://research.google/pubs/a2rd-agentic-autoregressive-diffusion-for-long-video-consistency-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.06924"
+      ],
+      "dates": [],
+      "sha256": "df8562656b846a299f5f984d744e5aa641e37e776880e0591b6bea98fa003ade",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Regional climate risk assessment from climate models using probabilistic machine learning",
+      "url": "https://research.google/pubs/regional-climate-risk-assessment-from-climate-models-using-probabilistic-machine-learning/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "637f6fade68b1690f5c2fc7fe7a02ff3322bb4dc642272f086c8dfd294ddecc6",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "From Black Box to Toolbox: Human-Centered Explainability in Developer-Authored Agent Rules",
+      "url": "https://research.google/pubs/from-black-box-to-toolbox-human-centered-explainability-in-developer-authored-agent-rules/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "e31e4ae4a62e4527ba77c82b496b0b5df607734081a8b81c742c87427be427e1",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Quantum Advantage in Topological Data Analysis via Mayer Homology",
+      "url": "https://research.google/pubs/quantum-advantage-in-topological-data-analysis-via-mayer-homology/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2609.28058"
+      ],
+      "dates": [],
+      "sha256": "6ff5982f439b69a6ad71c48f27100fd53195ae0be937da5cdc7ae308c9e98c22",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Enhancements in Memory Test for Improved Diagnosability and Comprehensive Multi-Bank Test",
+      "url": "https://research.google/pubs/enhancements-in-memory-test-for-improved-diagnosability-and-comprehensive-multi-bank-test/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d97007d76a2bd88ee1df220f6ccce4935b70f3890ddd7f102b0891640a835229",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Elephants, Goldfish and the New Golden Age of Software Engineering",
+      "url": "https://research.google/pubs/elephants-goldfish-and-the-new-golden-age-of-software-engineering-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "d998065b3effaf65902a0547b37c6c3147ec233a8bf3cc0881b773f701376143",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Accelerating System Coherency Verification: An Approach for Early Integration and Test Automation",
+      "url": "https://research.google/pubs/accelerating-system-coherency-verification-an-approach-for-early-integration-and-test-automation/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "28db5ae9c7ddcaae4b505efd83cd6c688d4cb119252ee6d8ff04553bbb154a49",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Open and Emergent Problems in Agentic Privacy and Security: A Contextual Angle",
+      "url": "https://research.google/pubs/open-and-emergent-problems-in-agentic-privacy-and-security-a-contextual-angle/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "62fa60e4826900ad8062a14f2ed99f323c30813a5f932be059e9bfff061f20c0",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "An Overview of Quantization in AV2",
+      "url": "https://research.google/pubs/an-overview-of-quantization-in-av2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ac425cf8b0ad06b8b08c2c99b4d13a9560ee649679a0fb93a1e4c59f8da9580b",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Identification of camera trap images by artificial intelligence and human experts produces similar multi-species occupancy models",
+      "url": "https://research.google/pubs/identification-of-camera-trap-images-by-artificial-intelligence-and-human-experts-produces-similar-multi-species-occupancy-modelsf-camera-trap-images-by-experts-and-artificial-intelligence-yield-similar-multi-species-occupancy-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "4bad7416ce173ce5bbf43b40ace6f085c2c4598191c44a4aba445e35a686deb8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Prospective multi-pathogen disease forecasting using autonomous LLM-guided tree search",
+      "url": "https://research.google/pubs/prospective-multi-pathogen-disease-forecasting-using-autonomous-llm-guided-tree-search/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.16238"
+      ],
+      "dates": [],
+      "sha256": "350da8983a6758ca1a0ad7e018eccd05a0a286ce6d56f8ff44c316dc8a79d627",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Global monitoring of methane point sources using deep learning on hyperspectral radiance measurements from EMIT",
+      "url": "https://research.google/pubs/global-monitoring-of-methane-point-sources-using-deep-learning-on-hyperspectral-radiance-measurements-from-emit-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "bcdb10bb0750edf3c5c2db35809ce6c80f8b82f44d74b7db96c53e6b166b092d",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A comparison of machine learning and human graders for glaucoma diagnosis from fundus images for population screening",
+      "url": "https://research.google/pubs/a-comparison-of-machine-learning-and-human-graders-for-glaucoma-diagnosis-from-fundus-images-for-population-screening-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "957b3bf909cacdf4a9eca193fc4a459b7b512ba734a85491867e9152541cc56f",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ITHICA: Intra-Thread Instruction Checking Approach for Defect-Induced Silent Data Corruptions",
+      "url": "https://research.google/pubs/ithica-intra-thread-instruction-checking-approach-for-defect-induced-silent-data-corruptions/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2605.15638"
+      ],
+      "dates": [],
+      "sha256": "f6eef5e7edfd77e5e5b2c04c8465a47998d0b5670293ac216fd4a72f9a145746",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Observational constraints on net radiative forcing confirm aviation contrail warming",
+      "url": "https://research.google/pubs/observational-constraints-on-net-radiative-forcing-confirm-aviation-contrail-warming/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2609.16451"
+      ],
+      "dates": [],
+      "sha256": "39400ad495d1fc85bcf6ef3add0e168e46018ded6d8930901eba72eb15c689b3",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "SemBench: A Benchmark for Semantic Query Processing Engines",
+      "url": "https://research.google/pubs/sembench-a-benchmark-for-semantic-query-processing-engines-2/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2511.01716"
+      ],
+      "dates": [],
+      "sha256": "589c8fe218f0b52ce4c84cbc05ae2871cc6c8721fe0fc71883a6bb667059dfb3",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Improving reanalysis weather for contrail validation by incorporating satellite observations",
+      "url": "https://research.google/pubs/improving-reanalysis-weather-for-contrail-validation-by-incorporating-satellite-observations-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "806862e836397da77672e7536f07f36fd3ee801d8d859938e64e274f85c138ec",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Exact oracle complexity for function-value suboptimality under weighted initial conditions",
+      "url": "https://research.google/pubs/exact-oracle-complexity-for-function-value-suboptimality-under-weighted-initial-conditions/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2609.33360"
+      ],
+      "dates": [],
+      "sha256": "d11016bc3e1dbf296cfc7a0f6228f59aa88c3256b445a9502becb79bf7cc4b27",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Parametric Robustness Assessment of Ultra-Low Voltage Standard Cells via High-Sigma Verification (HSV)",
+      "url": "https://research.google/pubs/parametric-robustness-assessment-of-ultra-low-voltage-standard-cells-via-high-sigma-verification-hsv/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9245c959469e342104fcb0ffccb8bc06ab03dd58c5f8ac0d956a6caadbbfdb13",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Noise as a Natural Regularizer in Markov Decision Processes: Connecting Environmental Stochasticity and Policy Simplicity",
+      "url": "https://research.google/pubs/noise-as-a-natural-regularizer-in-markov-decision-processes-connecting-environmental-stochasticity-and-policy-simplicity-3/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "8d7da6776ba3c46f34d20169b5f546ddcdb4393523c328f453150ea9e9a4fa24",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "LibEvoBench: Probing Temporal Knowledge Startification in Code Generation Models",
+      "url": "https://research.google/pubs/libevobench-probing-temporal-knowledge-startification-in-code-generation-models/",
+      "status": "ok",
+      "arxiv_ids": [
+        "2606.25402"
+      ],
+      "dates": [],
+      "sha256": "55218732971f3c50efeece7ff5960535490725237644d72376d44272dccc3f71",
+      "window_membership": "first_public_arxiv_month_before_window"
+    },
+    {
+      "title": "Private Clipping Heavy-Tailed Data",
+      "url": "https://research.google/pubs/private-clipping-heavy-tailed-data/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "f96a412e9761e5d7009988d25cac9bbd01068e678f846a0cba71a9ee961c8ad5",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Estimating high-resolution albedo for urban applications",
+      "url": "https://research.google/pubs/estimating-high-resolution-albedo-for-urban-applications/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c8dfc8c42fd05c057e9cff7949e7f6cd3f00364f18cf2405cee704e927649ed8",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "From Unfinished to Done: Bridging the MDE Implementation Gap with Constrained LLMs",
+      "url": "https://research.google/pubs/from-unfinished-to-done-bridging-the-mde-implementation-gap-with-constrained-llms/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "001ef06df6cb6d765a762d420df10c2662f50a2ba79feae8a25c003f82be6208",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Hadal: Centralized Label DP Training without a Trusted Party",
+      "url": "https://research.google/pubs/hadal-centralized-label-dp-training-without-a-trusted-party/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "baeb629ab785aefdfe6f7673c87644f5e992162ce2a6326a7e4554a38a2b299c",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Accelerating Post-Silicon Validation : ATE Bring-up and Test Leveraging Tessent Streaming Scan Network (SSN) for High Bandwidth IJTAG",
+      "url": "https://research.google/pubs/accelerating-post-silicon-validation-ate-bring-up-and-test-leveraging-tessent-streaming-scan-network-ssn-for-high-bandwidth-ijtag-2/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "c4a595b1c83fdd0c5b959569808a6e564e07bf2e14ec5e01de18bb583c6180fb",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Profit Maximization in Bilateral Trade against a Smooth Adversary",
+      "url": "https://research.google/pubs/profit-maximization-in-bilateral-trade-against-a-smooth-adversary/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "2661fc6bd9e6c9312e107c9e4a015b9b7e0083d02cae15ccf9100fc5875c3ee2",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "Proactive AI for Superintelligent Agents",
+      "url": "https://research.google/pubs/proactive-ai-for-superintelligent-agents/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "35bba5111d0b2bd10322db31b4170c69319bf05f9f8c34353bfe4a6183522c08",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "A Validated Scale Measuring Student Self-Efficacy for Programming with Generative AI",
+      "url": "https://research.google/pubs/a-validated-scale-measuring-student-self-efficacy-for-programming-with-generative-ai/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "9efa5c4002864cd8ceadd6bb39963f1f19c6c264ad8e68350e945849c48e229a",
+      "window_membership": "unresolved"
+    },
+    {
+      "title": "ContextFidelity-Bench: A Three-Paradigm Framework for Evaluating Multi-Turn Hallucination Behavior in Language Models",
+      "url": "https://research.google/pubs/contextfidelity-bench-a-three-paradigm-framework-for-evaluating-multi-turn-hallucination-behavior-in-language-models/",
+      "status": "ok",
+      "arxiv_ids": [],
+      "dates": [],
+      "sha256": "ee18d403c895dbff05bf6753464e5ae2f23539918cf0cb74a0b3f8f6920f7017",
+      "window_membership": "unresolved"
+    }
+  ]
+}
