@@ -80,9 +80,25 @@ def evaluate_capability(provider, items: Sequence[CapabilityItem]) -> dict:
                         "language": language, "examples": n, "accuracy": p,
                         "accuracy_ci95": [center - radius, center + radius]})
     covered = {row["benchmark"] for row in results}
+    summaries = []
+    for benchmark in sorted(covered):
+        rows = [row for row in results if row["benchmark"] == benchmark]
+        total = sum(row["examples"] for row in rows)
+        weighted = sum(row["accuracy"] * row["examples"] for row in rows) / total
+        multilingual = benchmark in {"mmlu-prox", "mmmlu"}
+        # Paper Appendix A uses language-level macro averaging for translations;
+        # unequal language sample counts must not silently weight one language.
+        accuracy = sum(row["accuracy"] for row in rows) / len(rows) if multilingual else weighted
+        expected = {"mmlu-prox": 29, "mmmlu": 14}.get(benchmark, 1)
+        summaries.append({"benchmark": benchmark, "accuracy": accuracy,
+                          "aggregation": "language macro" if multilingual else "item weighted",
+                          "item_weighted_accuracy": weighted, "examples": total,
+                          "evaluated_languages": sorted(row["language"] for row in rows),
+                          "expected_language_count": expected,
+                          "complete_language_count": len(rows) == expected})
     return {
         "schema_version": 2, "paper": "2610.11978", "protocol": "single-run Choice",
-        "results": results, "predictions": predictions,
+        "results": results, "benchmark_summary": summaries, "predictions": predictions,
         "coverage": {"covered": sorted(covered), "missing": sorted(set(BENCHMARKS) - covered)},
         "claim_policy": "measured selected-backend scores; no substitution for closed Jev results",
         "test_used_for_selection": False,

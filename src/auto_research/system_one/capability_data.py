@@ -175,6 +175,8 @@ def load_capability_data(paths):
         if source["dataset_id"] != DATASETS.get(source["benchmark"]) or not re.fullmatch(
                 r"[0-9a-f]{40}", source["revision"]):
             raise ValueError("invalid dataset provenance")
+        if source.get("source_split") not in {"test", "validation"}:
+            raise ValueError("source receipt must identify an official evaluation split")
         loaded = [CapabilityItem(**json.loads(line)) for line in raw.decode().splitlines() if line]
         if len(loaded) != source["examples"] or any(
             item.benchmark != source["benchmark"] or item.language != source["language"]

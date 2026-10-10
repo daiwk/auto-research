@@ -16,6 +16,7 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "jev-capability": "docs/gpu-validations/jev-capability-a100-20261010.json",
     "oct07-agent-search": "docs/gpu-validations/oct07-agent-search-a100.json",
     "architecture-mrb-runtime": "docs/gpu-validations/architecture-mrb-a100-20261007.json",
     "experiment-integrity-runtime": "docs/gpu-validations/experiment-integrity-a100-20261007.json",

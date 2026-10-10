@@ -41,3 +41,15 @@ def test_published_scores_do_not_change_measured_median():
     assert result["mathqa"]["published_scores"] == [0.99]
     with pytest.raises(ValueError, match="proportions"):
         frontier_comparison([{"benchmark": "mathqa", "accuracy": 90}])
+
+
+def test_multilingual_macro_is_not_item_weighted_or_full_coverage():
+    items = [CapabilityItem("en", "mmmlu", "q", {"A": "x", "B": "y"}, "A", "en")]
+    items += [CapabilityItem(f"zh{i}", "mmmlu", "q", {"A": "x", "B": "y"}, "B", "zh")
+              for i in range(3)]
+    result = evaluate_capability(Recorder(), items)
+    summary = result["benchmark_summary"][0]
+    assert summary["accuracy"] == .5
+    assert summary["item_weighted_accuracy"] == .25
+    assert not summary["complete_language_count"]
+    assert summary["expected_language_count"] == 14

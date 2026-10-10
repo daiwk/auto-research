@@ -57,7 +57,7 @@ def test_source_hash_and_labels_are_checked(tmp_path):
                       "options": {"A": "x", "B": "y"}, "target": "B", "language": "en"}) + "\n"
     path.write_text(raw)
     source = {"dataset_id": DATASETS["arc-challenge"], "revision": "a" * 40,
-              "benchmark": "arc-challenge", "language": "en", "examples": 1,
+              "benchmark": "arc-challenge", "language": "en", "examples": 1, "source_split": "test",
               "sha256": hashlib.sha256(raw.encode()).hexdigest()}
     path.with_suffix(".jsonl.source.json").write_text(json.dumps(source))
     items, sources = load_capability_data([path])

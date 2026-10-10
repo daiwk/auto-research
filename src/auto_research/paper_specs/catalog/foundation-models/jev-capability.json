@@ -10,5 +10,7 @@
   "published": "2026-10-08",
   "code": "未找到原作者公开代码（2026-10-10 核验）",
   "adapter": "jev-capability",
-  "priority": "P1"
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/jev-capability-a100-20261010.json"
 }

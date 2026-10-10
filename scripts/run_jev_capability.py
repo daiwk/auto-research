@@ -27,6 +27,7 @@ def main():
     run.add_argument("--backend", choices=("nanojev", "typesafe"), required=True)
     run.add_argument("--checkpoint-dir", type=Path)
     run.add_argument("--device", default="cuda:0")
+    run.add_argument("--seed", type=int, default=42)
     run.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "prepare":
@@ -35,6 +36,8 @@ def main():
     else:
         items, sources = load_capability_data(args.data)
         if args.backend == "nanojev":
+            import torch
+            torch.manual_seed(args.seed)
             if args.checkpoint_dir is None:
                 parser.error("NanoJev requires --checkpoint-dir; no implicit checkpoint download")
             provider = NanoJevProvider.from_checkpoint(args.checkpoint_dir, allow_download=False,
@@ -43,6 +46,7 @@ def main():
             provider = TypeSafeHTTPProvider()
         report = evaluate_capability(provider, items)
         report.update(domain="system-one", method="jev-capability", dataset_sources=sources,
+                      seed=args.seed,
                       backend=args.backend, checkpoint_revision=NANOJEV_REVISION
                       if args.backend == "nanojev" else "provider-managed",
                       closed_jev_reproduction=args.backend == "typesafe",
