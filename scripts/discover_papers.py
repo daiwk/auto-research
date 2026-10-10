@@ -25,6 +25,7 @@ from auto_research.discovery_sources import (
 from auto_research.papers import ArxivClient, canonical_arxiv_id
 from auto_research.models import Paper
 from auto_research.discovery_checkpoint import atomic_json, coverage_summary
+from auto_research.discovery_watermark import partition_archived_official_reviews
 
 
 def effective_start_date(
@@ -58,6 +59,8 @@ def external_paper_in_window(
 
 def main() -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--exception-archive", type=Path,
+                        help="Override the archive referenced by the repository review watermark")
     parser.add_argument(
         "--track",
         choices=("recommendation", "foundation-model", "post-training", "agent"),
@@ -188,6 +191,18 @@ def main() -> int:
     review_queue = official_review_queue(
         source_stats, start_date=start_date, end_date=args.end_date,
     )
+    archive_path = args.exception_archive
+    if archive_path is None:
+        docs = Path(__file__).resolve().parents[1] / "docs"
+        state_path = docs / "paper-discovery-watermark.json"
+        if state_path.exists():
+            state = json.loads(state_path.read_text())
+            if state.get("exception_archive"):
+                archive_path = (docs / state["exception_archive"]).resolve()
+                if not archive_path.is_relative_to(docs.resolve()):
+                    raise ValueError("exception archive must remain inside docs")
+    archive = json.loads(archive_path.read_text()) if archive_path is not None else {}
+    review_queue, archived_review_queue = partition_archived_official_reviews(review_queue, archive)
     payload["cross_source"] = {
         "enabled": bool(
             args.cross_source_config or args.author_page
@@ -200,6 +215,7 @@ def main() -> int:
             bool(source_stats)
             and not source_failures
             and not review_queue
+            and not archived_review_queue
             and all(
                 source.get("transport_status", source["status"]) == "ok"
                 for source in source_stats
@@ -208,6 +224,7 @@ def main() -> int:
         ),
     }
     payload["cross_source"]["official_review_queue_count"] = len(review_queue)
+    payload["cross_source"]["archived_official_review_count"] = len(archived_review_queue)
     if args.official_review_output:
         Path(args.official_review_output).write_text(json.dumps({
             "schema_version": 1,
@@ -217,6 +234,8 @@ def main() -> int:
             "coverage_complete": payload["cross_source"]["coverage_complete"],
             "source_failures": source_failures,
             "items": review_queue,
+            "archived_items": archived_review_queue,
+            "archive_retry_policy": "on-new-evidence-only",
         }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         payload["cross_source"]["official_review_output"] = args.official_review_output
     payload["arxiv_transport"] = {
