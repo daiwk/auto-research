@@ -7,6 +7,24 @@ from auto_research.agent_research.oct10_backend import LocalLanguageModel, race_
 from auto_research.agent_research.race import TrainingTrajectory, Turn
 
 
+def test_mass_samples_each_worker_with_independent_role_index(monkeypatch):
+    from auto_research.agent_research.mass import Conversation
+    import auto_research.post_training.oct10_checkpoint as checkpoint
+    monkeypatch.setattr(checkpoint, "install_lora", lambda model: None)
+    backend = LocalLanguageModel.__new__(LocalLanguageModel)
+    backend.model, backend.device = NeuralFixture(), "cpu"
+    observed = []
+    def continuation(context, target):
+        observed.append(target)
+        return backend.model.bias[:1] - 1
+    backend.continuation = continuation
+    conversations = [Conversation(role, ({"role": "user", "content": "task"},
+        {"role": "assistant", "content": text}))
+        for role, text in (("orchestrator", "o"), ("worker", "w1"), ("worker", "w2"))]
+    backend.train_conversations(conversations, conversations[:1], steps=3)
+    assert observed[:3] == ["o", "w1", "w2"]
+
+
 class Tokenizer:
     def encode(self, text, **kwargs):
         return [ord(c) for c in text]

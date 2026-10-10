@@ -115,11 +115,13 @@ class LocalLanguageModel:
             return sum(losses) / sum(counts), sum(counts)
 
         history = []
+        role_indices = {role: 0 for role in buckets}
         self.model.train()
         for step in range(steps):
             # Exact 1/3 orchestrator, 2/3 worker frequency over complete triplets.
             role = "orchestrator" if step % 3 == 0 else "worker"
-            conversation = buckets[role][(step // 3) % len(buckets[role])]
+            conversation = buckets[role][role_indices[role] % len(buckets[role])]
+            role_indices[role] += 1
             self.optimizer.zero_grad()
             loss, count = objective(conversation)
             loss.backward()

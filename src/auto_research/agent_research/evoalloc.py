@@ -64,9 +64,12 @@ def apply_experience_operations(previous, operations, observed_cases):
             if status not in {"active", "tentative", "stale"}:
                 raise ValueError("invalid experience status")
             old = entries[key]
+            merged_support = tuple(dict.fromkeys(old.support_cases + support))
+            merged_counter = tuple(dict.fromkeys(old.counter_cases + counter))
+            if set(merged_support) & set(merged_counter):
+                raise ValueError("merged experience evidence must remain noncontradictory")
             entries[key] = replace(old, status=status,
-                support_cases=tuple(dict.fromkeys(old.support_cases + support)),
-                counter_cases=tuple(dict.fromkeys(old.counter_cases + counter)))
+                support_cases=merged_support, counter_cases=merged_counter)
         else:
             raise ValueError("unknown experience operation")
     values = tuple(entries.values())

@@ -47,6 +47,9 @@ def test_fixed_experience_statement_and_unknown_outcome_guard():
     updated = apply_experience_operations(memory, ({"operation": "UPDATE", "identifier": "e1",
         "status": "active", "support_cases": (1,)},), {0, 1})
     assert updated[0].content == memory[0].content and updated[0].support_cases == (0, 1)
+    with pytest.raises(ValueError, match="noncontradictory"):
+        apply_experience_operations(updated, ({"operation": "UPDATE", "identifier": "e1",
+            "counter_cases": (0,)},), {0, 1})
     with pytest.raises(ValueError, match="rewrite"):
         apply_experience_operations(updated, ({"operation": "UPDATE", "identifier": "e1",
             "content": "new statement"},), {0, 1})
