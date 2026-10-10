@@ -40260,6 +40260,31 @@
           }
         }
       ]
+    },
+    {
+      "batch": "oct07-bounded-official-source-closure",
+      "date": "2026-10-10",
+      "scope_kind": "bounded-source-review",
+      "required_tracks": [],
+      "window": {
+        "start": "2026-10-01",
+        "end": "2026-10-07"
+      },
+      "source_artifact": "research-audits/oct07-source-closure/README.md",
+      "review_scope": "Google/Meta官方入口逐条定界和日期身份核验；复用已完成四轨两通道冻结候选审查，不新增算法实现承诺。",
+      "policy": "bounded-review-with-explicit-exceptions-v1",
+      "watermark_artifact": "paper-discovery-watermark.json",
+      "watermark_advanced": true,
+      "watermark": "2026-10-07",
+      "source_exhaustiveness_watermark": "2026-10-02",
+      "full_source_coverage_complete": false,
+      "implementation_complete": false,
+      "candidate_review_complete": true,
+      "unreviewed_candidate_ids": [],
+      "source_record_count": 542,
+      "source_record_exception_count": 31,
+      "directory_exception_count": 1,
+      "candidates": []
     }
   ]
 }

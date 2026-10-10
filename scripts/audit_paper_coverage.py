@@ -29,6 +29,9 @@ REQUIRED_RECOMMENDATION_QUERY_FAMILIES = {
 def audit(strict: bool = False, pending_artifacts: tuple[Path, ...] = ()) -> list[str]:
     data = json.loads(LEDGER.read_text(encoding="utf-8"))
     errors: list[str] = []
+    if strict:
+        from auto_research.discovery_watermark import audit_review_watermark
+        errors.extend(audit_review_watermark(ROOT))
     seen: set[tuple[str, str]] = set()
     reviewed_ids = {
         str(entry.get("id"))

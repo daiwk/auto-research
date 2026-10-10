@@ -1,0 +1,2107 @@
+{
+  "schema_version": 1,
+  "organization": "Meta",
+  "checked_on": "2026-10-10",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "expected_records": 144,
+  "pages": [
+    {
+      "page": 1,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "sha256": "ef76b12a26e2e5f926b47727f9f1745a711b34dea2c18d0a832d7a1ec5dac8da",
+      "status": "ok",
+      "next_links": [
+        "https://ai.meta.com/results/?page=2&content_types%5B0%5D=publication"
+      ]
+    },
+    {
+      "page": 2,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+      "sha256": "ad524b7dd31046b82a796ed15f6f178668fcaac3c55827f7b775d11a2d80ed19",
+      "status": "ok",
+      "next_links": [
+        "https://ai.meta.com/results/?page=3&content_types%5B0%5D=publication"
+      ]
+    },
+    {
+      "page": 3,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+      "sha256": "fc228a67066211687f5db192b021d2ca3f6bfc701bfcd4e8c62382308713a3d9",
+      "status": "ok",
+      "next_links": [
+        "https://ai.meta.com/results/?page=4&content_types%5B0%5D=publication"
+      ]
+    },
+    {
+      "page": 4,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+      "sha256": "39ea551fd720d8f80cffd4b8bb1f0790a4eccf6514322e07873f2a86d721799f",
+      "status": "ok",
+      "next_links": [
+        "https://ai.meta.com/results/?page=5&content_types%5B0%5D=publication"
+      ]
+    },
+    {
+      "page": 5,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+      "sha256": "938e557517969056dc97223752c7f0d5b5158552363b97e8b3803e0d78cac3fd",
+      "status": "ok",
+      "next_links": [
+        "https://ai.meta.com/results/?page=6&content_types%5B0%5D=publication"
+      ]
+    },
+    {
+      "page": 6,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "sha256": "5227c918a25d3fa2b09e9adb287c84d162b2ebbd8bb5e2cf6c292110e4dacafb",
+      "status": "ok",
+      "next_links": [
+        "https://ai.meta.com/results/?page=7&content_types%5B0%5D=publication"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "title": "Tightness of the Cycle-Based Relaxation for Completed Length-Three Alpha-Cycles",
+      "url": "https://ai.meta.com/research/publications/tightness-of-the-cycle-based-relaxation-for-completed-length-three-alpha-cycles/",
+      "published": "2026-10-02",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-10-02"
+      ],
+      "review_status": "out_of_scope",
+      "reason": "cycle polytope数学松弛的紧性定理，AI辅助证明，不是新Agent算法。",
+      "review_evidence": "原审查回执已逐篇读取官方详情摘要并确认数学研究范围；本次重新获取日期与标题。"
+    },
+    {
+      "title": "On Solvable Evolution Algebras and a Conjecture by García-Martínez and Pérez-Rodríguez",
+      "url": "https://ai.meta.com/research/publications/on-solvable-evolution-algebras-and-a-conjecture-by-garcia-martinez-and-perez-rodriguez/",
+      "published": "2026-10-02",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-10-02"
+      ],
+      "review_status": "out_of_scope",
+      "reason": "可解演化代数猜想，不是机器学习模型方法。",
+      "review_evidence": "原审查回执已逐篇读取官方详情摘要并确认数学研究范围；本次重新获取日期与标题。"
+    },
+    {
+      "title": "String Two-Point Function = Height Function on a Curve",
+      "url": "https://ai.meta.com/research/publications/string-two-point-function-height-function-on-a-curve/",
+      "published": "2026-10-02",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-10-02"
+      ],
+      "review_status": "out_of_scope",
+      "reason": "弦论二点函数与曲线height关系，不是LLM训练/评测。",
+      "review_evidence": "原审查回执已逐篇读取官方详情摘要并确认数学研究范围；本次重新获取日期与标题。"
+    },
+    {
+      "title": "Semiabelian Groups Need Not Be Monomial",
+      "url": "https://ai.meta.com/research/publications/semiabelian-groups-need-not-be-monomial/",
+      "published": "2026-10-02",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-10-02"
+      ],
+      "review_status": "out_of_scope",
+      "reason": "群论反例，不是新Agent能力方法。",
+      "review_evidence": "原审查回执已逐篇读取官方详情摘要并确认数学研究范围；本次重新获取日期与标题。"
+    },
+    {
+      "title": "Finite-Time Blow-Up of Radial Negative-Energy Solutions for the Mass-Critical Biharmonic Nonlinear Schrödinger Equation",
+      "url": "https://ai.meta.com/research/publications/finite-time-blow-up-of-radial-negative-energy-solutions-for-the-mass-critical-biharmonic-nonlinear-schrodinger-equation/",
+      "published": "2026-10-02",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-10-02"
+      ],
+      "review_status": "out_of_scope",
+      "reason": "非线性薛定谔方程PDE证明，不是当前研究领域。",
+      "review_evidence": "原审查回执已逐篇读取官方详情摘要并确认数学研究范围；本次重新获取日期与标题。"
+    },
+    {
+      "title": "The Strict Threshold for Gaussian Ellipsoid Fitting",
+      "url": "https://ai.meta.com/research/publications/the-strict-threshold-for-gaussian-ellipsoid-fitting/",
+      "published": "2026-10-02",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-10-02"
+      ],
+      "review_status": "out_of_scope",
+      "reason": "Gaussian ellipsoid随机矩阵理论阈值，不是可接入本项目的基础模型方法。",
+      "review_evidence": "原审查回执已逐篇读取官方详情摘要并确认数学研究范围；本次重新获取日期与标题。"
+    },
+    {
+      "title": "MaD-RL: Matching Distributions for Calibrating LLMs with Reinforcement Learning",
+      "url": "https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/",
+      "published": "2026-09-24",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-09-24"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Repeat-After-Me: Black-Box Adaptive Visual Prompt Injection",
+      "url": "https://ai.meta.com/research/publications/repeat-after-me-black-box-adaptive-visual-prompt-injection/",
+      "published": "2026-09-07",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-09-07"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Alignment-Free Text-Audiobox for Voice Dubbing and Full-Duplex Dialogue Synthesis",
+      "url": "https://ai.meta.com/research/publications/alignment-free-text-audiobox-for-voice-dubbing-and-full-duplex-dialogue-synthesis/",
+      "published": "2026-09-06",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-09-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "WaiT for the Signal: Simple Frequency-Aware Flow-Matching",
+      "url": "https://ai.meta.com/research/publications/wait-for-the-signal-simple-frequency-aware-flow-matching/",
+      "published": "2026-08-04",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-08-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Reinforcement Learning for Code Optimization",
+      "url": "https://ai.meta.com/research/publications/reinforcement-learning-for-code-optimization/",
+      "published": "2026-07-29",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-07-29"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning to Reason by Analogy via Retrieval-Augmented Reinforcement Fine-Tuning",
+      "url": "https://ai.meta.com/research/publications/learning-to-reason-by-analogy-via-retrieval-augmented-reinforcement-fine-tuning/",
+      "published": "2026-07-17",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-07-17"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Facebook AI's WAT19 Myanmar-English Translation Task Submission",
+      "url": "https://ai.meta.com/research/publications/facebook-ai-wat19-myanmar-english-translation-task-submission/",
+      "published": "2019-10-31",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-10-31"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Order-Aware Generative Modeling Using the 3D-Craft Dataset | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/order-aware-generative-modeling-using-the-3d-craft-dataset/",
+      "published": "2019-10-27",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-10-27"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Energy-Based Models for Atomic-Resolution Protein Conformations | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/energy-based-models-for-atomic-resolution-protein-conformations/",
+      "published": "2020-04-25",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-04-25"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "ELF OpenGo: An Analysis and Open Reimplementation of AlphaZero | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/elf-opengo-an-analysis-and-open-reimplementation-of-alpha-zero/",
+      "published": "2019-06-11",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-06-11"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "On the Pitfalls of Measuring Emergent Communication | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/on-the-pitfalls-of-measuring-emergent-communication/",
+      "published": "2019-03-14",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-03-14"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Scaling up online speech recognition using ConvNets | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/scaling-up-online-speech-recognition-using-convnets/",
+      "published": "2020-01-13",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-01-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Mastering the Dungeon: Grounded Language Learning by Mechanical Turker Descent | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/mastering-the-dungeon-grounded-language-learning-by-mechanical-turker-descent/",
+      "published": "2018-04-30",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-04-30"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Polysemous Codes | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/polysemous-codes/",
+      "published": "2016-10-10",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2016-10-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Low-shot learning with large-scale diffusion | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/low-shot-learning-with-large-scale-diffusion/",
+      "published": "2018-06-18",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-06-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/loss-in-translation-learning-bilingual-word-mapping-with-a-retrieval-criterion/",
+      "published": "2018-10-30",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-10-30"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "LAMV: Learning to align and match videos with kernelized temporal layers | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/lamv-learning-to-align-and-match-videos-with-kernelized-temporal-layers/",
+      "published": "2018-06-19",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-06-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Equi-normalization of Neural Networks | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/equi-normalization-of-neural-networks/",
+      "published": "2019-05-05",
+      "pages": [
+        1
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-05-05"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "S-EMBER: A Large-Scale Benchmark for Streaming Egocentric Memory Retrieval",
+      "url": "https://ai.meta.com/research/publications/s-ember-a-large-scale-benchmark-for-streaming-egocentric-memory-retrieval/",
+      "published": "2026-07-13",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-07-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Interpreting Physics in Video World Models",
+      "url": "https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/",
+      "published": "2026-07-03",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-07-03"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Accurate Decoding of Natural Sentences from Non-Invasive Brain Recordings",
+      "url": "https://ai.meta.com/research/publications/accurate-decoding-of-natural-sentences-from-non-invasive-brain-recordings/",
+      "published": "2026-06-29",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-06-29"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval",
+      "url": "https://ai.meta.com/research/publications/superintelligent-retrieval-agent-the-next-frontier-of-agentic-retrieval/",
+      "published": "2026-06-05",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-06-05"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "AutoformBot: Formalizing Mathematics at Scale",
+      "url": "https://ai.meta.com/research/publications/autoformbot-formalizing-mathematics-at-scale/",
+      "published": "2026-05-27",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-27"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Misalignment Between Backpropagation and the Hierarchy of Brain Responses to Images",
+      "url": "https://ai.meta.com/research/publications/misalignment-between-backpropagation-and-the-hierarchy-of-brain-responses-to-images/",
+      "published": "2026-05-26",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-26"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "EgoBabyVLM: Benchmarking Cross-Modal Learning from Naturalistic Egocentric Video Data",
+      "url": "https://ai.meta.com/research/publications/egobabyvlm-benchmarking-cross-modal-learning-from-naturalistic-egocentric-video-data/",
+      "published": "2026-05-19",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "GIM: Evaluating models via tasks that integrate multiple cognitive domains",
+      "url": "https://ai.meta.com/research/publications/gim-evaluating-models-via-tasks-that-integrate-multiple-cognitive-domains/",
+      "published": "2026-05-17",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-17"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "NeuralSet: A High-Performing Python Package for Neuro-AI",
+      "url": "https://ai.meta.com/research/publications/neuralset-a-high-performing-python-package-for-neuro-ai/",
+      "published": "2026-05-12",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-12"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "NeuralBench: A Unifying Framework to Benchmark NeuroAI Models",
+      "url": "https://ai.meta.com/research/publications/neuralbench-a-unifying-framework-to-benchmark-neuroai-models/",
+      "published": "2026-05-06",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Compute Optimal Tokenization",
+      "url": "https://ai.meta.com/research/publications/compute-optimal-tokenization/",
+      "published": "2026-05-04",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-05-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "AIRA₂: Overcoming Bottlenecks in AI Research Agents",
+      "url": "https://ai.meta.com/research/publications/aira-overcoming-bottlenecks-in-ai-research-agents/",
+      "published": "2026-04-16",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-04-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Video Classification with Channel-Separated Convolutional Networks | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/video-classification-with-channel-separated-convolutional-networks/",
+      "published": "2019-10-27",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-10-27"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Leveraging the Present to Anticipate the Future in Videos | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/leveraging-the-present-to-anticipate-the-future-in-videos/",
+      "published": "2019-06-16",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-06-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "A Closer Look at Spatiotemporal Convolutions for Action Recognition | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/a-closer-look-at-spatiotemporal-convolutions-for-action-recognition/",
+      "published": "2018-06-18",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-06-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Multiview Pseudo-Labeling for Semi-supervised Learning from Video",
+      "url": "https://ai.meta.com/research/publications/multiview-pseudo-labeling-for-semi-supervised-learning-from-video/",
+      "published": "2021-04-02",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2021-04-02"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning advanced mathematical computations from examples",
+      "url": "https://ai.meta.com/research/publications/learning-advanced-mathematical-computations-from-examples/",
+      "published": "2021-05-03",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2021-05-03"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Towards Empathetic Open-domain Conversation Models: a New Benchmark and Dataset | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/towards-empathetic-open-domain-conversation-models-a-new-benchmark-and-dataset/",
+      "published": "2019-07-29",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-07-29"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "From Senones to Chenones: Tied Context-Dependent Graphemes for Hybrid Speech Recognition | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/from-senones-to-chenones-tied-context-dependent-graphemes-for-hybrid-speech-recognition/",
+      "published": "2019-12-14",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-12-14"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "What Makes Training Multi-modal Classification Networks Hard? | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/what-makes-training-multi-modal-classification-networks-hard/",
+      "published": "2020-06-16",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-06-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Hierarchical Text Generation and Planning for Strategic Dialogue | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/hierarchical-text-generation-and-planning-for-strategic-dialogue/",
+      "published": "2018-07-10",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-07-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Hierarchical Decision Making by Generating and Following Natural Language Instructions | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/hierarchical-decision-making-by-generating-and-following-natural-language-instructions/",
+      "published": "2019-12-02",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-12-02"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Deal or No Deal? End-to-End Learning for Negotiation Dialogues | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/deal-or-no-deal-end-to-end-learning-for-negotiation-dialogues/",
+      "published": "2017-09-08",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2017-09-08"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Convolutional Sequence to Sequence Learning | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/convolutional-sequence-to-sequence-learning/",
+      "published": "2017-08-06",
+      "pages": [
+        2
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2017-08-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "TransText: Transparency Aware Image-to-Video Typography Animation",
+      "url": "https://ai.meta.com/research/publications/transtext-transparency-aware-image-to-video-typography-animation/",
+      "published": "2026-04-14",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-04-14"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Think in Strokes, Not Pixels: Process-Driven Image Generation via Interleaved Reasoning",
+      "url": "https://ai.meta.com/research/publications/think-in-strokes-not-pixels-process-driven-image-generation-via-interleaved-reasoning/",
+      "published": "2026-04-09",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-04-09"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "A foundation model of vision, audition, and language for in-silico neuroscience",
+      "url": "https://ai.meta.com/research/publications/a-foundation-model-of-vision-audition-and-language-for-in-silico-neuroscience/",
+      "published": "2026-03-26",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-03-26"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "HyperAgents",
+      "url": "https://ai.meta.com/research/publications/hyperagents/",
+      "published": "2026-03-24",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-03-24"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Omnilingual MT: Machine Translation for 1,600 Languages",
+      "url": "https://ai.meta.com/research/publications/omnilingual-mt-machine-translation-for-1600-languages/",
+      "published": "2026-03-17",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-03-17"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech",
+      "url": "https://ai.meta.com/research/publications/omnilingual-sonar-cross-lingual-and-cross-modal-sentence-embeddings-bridging-massively-multilingual-text-and-speech/",
+      "published": "2026-03-17",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-03-17"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Unified Vision–Language Modeling via Concept Space Alignment",
+      "url": "https://ai.meta.com/research/publications/unified-vision-language-modeling-via-concept-space-alignment/",
+      "published": "2026-02-27",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-02-27"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning Personalized Agents from Human Feedback",
+      "url": "https://ai.meta.com/research/publications/learning-personalized-agents-from-human-feedback/",
+      "published": "2026-02-26",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-02-26"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "FERRET: Framework for Expansion Reliant Red Teaming",
+      "url": "https://ai.meta.com/research/publications/ferret-framework-for-expansion-reliant-red-teaming/",
+      "published": "2026-02-13",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-02-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "UniT: Unified Multimodal Chain-of-Thought Test-time Scaling",
+      "url": "https://ai.meta.com/research/publications/unit-unified-multimodal-chain-of-thought-test-time-scaling/",
+      "published": "2026-02-11",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-02-11"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents",
+      "url": "https://ai.meta.com/research/publications/airs-bench-a-suite-of-tasks-for-frontier-ai-research-science-agents/",
+      "published": "2026-02-10",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-02-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "PhyGDPO: Physics-Aware Groupwise Direct Preference Optimization for Physically Consistent Text-to-Video Generation",
+      "url": "https://ai.meta.com/research/publications/phygdpo-physics-aware-groupwise-direct-preference-optimization-for-physically-consistent-text-to-video-generation/",
+      "published": "2026-01-02",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2026-01-02"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Don’t Judge an Object by Its Context: Learning to Overcome Contextual Bias | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/dont-judge-an-object-by-its-context-learning-to-overcome-contextual-bias/",
+      "published": "2020-06-14",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-06-14"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "From Patches to Pictures (PaQ-2-PiQ): Mapping the Perceptual Space of Picture Quality | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/From-Patches-to-Pictures-PaQ-2-PiQ-Mapping-the-Perceptual-Space-of-Picture-Quality/",
+      "published": "2020-06-16",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-06-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Large-scale weakly-supervised pre-training for video action recognition | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/large-scale-weakly-supervised-pre-training-for-video-action-recognition/",
+      "published": "2019-05-01",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-05-01"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Control Strategies for Physically Simulated Characters Performing Two-player Competitive Sports",
+      "url": "https://ai.meta.com/research/publications/control-strategies-for-physically-simulated-characters-performing-two-player-competitive-sports/",
+      "published": "2021-08-09",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2021-08-09"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Cultural Diffusion and Trends in Facebook Photographs | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/cultural-diffusion-and-trends-in-facebook-photographs/",
+      "published": "2017-05-16",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2017-05-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Robust Multi-agent Counterfactual Prediction | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/robust-multi-agent-counterfactual-prediction/",
+      "published": "2019-12-10",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-12-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Cross-lingual Retrieval for Iterative Self-Supervised Training",
+      "url": "https://ai.meta.com/research/publications/cross-lingual-retrieval-for-Iterative-self-supervised-training/",
+      "published": "2020-12-06",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-12-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Compositional generalization through meta sequence-to-sequence learning | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/compositional-generalization-through-meta-sequence-to-sequence-learning/",
+      "published": "2019-12-12",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-12-12"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning to Optimize Halide with Tree Search and Random Programs | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/learning-to-optimize-halide-with-tree-search-and-random-programs/",
+      "published": "2019-07-28",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-07-28"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Lead2Gold: Towards exploiting the full potential of noisy transcriptions for speech recognition | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/lead2gold-towards-exploiting-the-full-potential-of-noisy-transcriptions-for-speech-recognition/",
+      "published": "2019-12-13",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-12-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "ResiliNet: Failure-Resilient Inference in Distributed Neural Networks",
+      "url": "https://ai.meta.com/research/publications/resilinet-failure-resilient-inference-in-distributed-neural-networks/",
+      "published": "2020-09-01",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-09-01"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Libri-light: A benchmark for ASR with limited or no supervision",
+      "url": "https://ai.meta.com/research/publications/libri-light-a-benchmark-for-asr-with-limited-or-no-supervision/",
+      "published": "2020-05-04",
+      "pages": [
+        3
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-05-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Safety Alignment of LMs via Non-cooperative Games",
+      "url": "https://ai.meta.com/research/publications/safety-alignment-of-lms-via-non-cooperative-games/",
+      "published": "2025-12-26",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-26"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "We Can Hide More Bits: The Unused Watermarking Capacity in Theory and Practice",
+      "url": "https://ai.meta.com/research/publications/we-can-hide-more-bits-the-unused-watermarking-capacity-in-theory-and-practice/",
+      "published": "2025-12-18",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "How Good is Post-Hoc Watermarking With Language Model Rephrasing?",
+      "url": "https://ai.meta.com/research/publications/how-good-is-post-hoc-watermarking-with-language-model-rephrasing/",
+      "published": "2025-12-18",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning to Watermark in the Latent Space of Generative Models",
+      "url": "https://ai.meta.com/research/publications/learning-to-watermark-in-the-latent-space-of-generative-models/",
+      "published": "2025-12-18",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Pixel Seal: Adversarial-only training for invisible image and video watermarking",
+      "url": "https://ai.meta.com/research/publications/pixel-seal-adversarial-only-training-for-invisible-image-and-video-watermarking/",
+      "published": "2025-12-18",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "SAM Audio: Segment Anything in Audio",
+      "url": "https://ai.meta.com/research/publications/sam-audio-segment-anything-in-audio/",
+      "published": "2025-12-16",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Pushing the Frontier of Audiovisual Perception with Large-Scale Multimodal Correspondence Learning",
+      "url": "https://ai.meta.com/research/publications/pushing-the-frontier-of-audiovisual-perception-with-large-scale-multimodal-correspondence-learning/",
+      "published": "2025-12-16",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-16"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Text-Guided Semantic Image Encoder",
+      "url": "https://ai.meta.com/research/publications/text-guided-semantic-image-encoder/",
+      "published": "2025-12-12",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-12"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Rubric-Based Benchmarking and Reinforcement Learning for Advancing LLM Instruction Following",
+      "url": "https://ai.meta.com/research/publications/rubric-based-benchmarking-and-reinforcement-learning-for-advancing-llm-instruction-following/",
+      "published": "2025-12-01",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-12-01"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "SAM 3D: 3Dfy Anything in Images",
+      "url": "https://ai.meta.com/research/publications/sam-3d-3dfy-anything-in-images/",
+      "published": "2025-11-19",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-11-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+      "url": "https://ai.meta.com/research/publications/sam-3d-body-robust-full-body-human-mesh-recovery/",
+      "published": "2025-11-19",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-11-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "SAM 3: Segment Anything with Concepts",
+      "url": "https://ai.meta.com/research/publications/sam-3-segment-anything-with-concepts/",
+      "published": "2025-11-19",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-11-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Training BatchNorm and Only BatchNorm: On the Expressive Power of Random Features in CNNs",
+      "url": "https://ai.meta.com/research/publications/training-batchnorm-and-only-batchnorm-on-the-expressive-power-of-random-features-in-cnns/",
+      "published": "2021-03-19",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2021-03-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "DD-PPO: Learning Near-Perfect PointGoal Navigators from 2.5 Billion Frames | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/dd-ppo-learning-near-perfect-pointgoal-navigators-from-2-5-billion-frames/",
+      "published": "2020-04-26",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-04-26"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/superglue-a-stickier-benchmark-for-general-purpose-language-understanding-systems/",
+      "published": "2019-12-01",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-12-01"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning Dynamics Model in Reinforcement Learning by Incorporating the Long Term Future | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/learning-dynamics-model-in-reinforcement-learning-by-incorporating-the-long-term-future/",
+      "published": "2019-05-06",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-05-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Large-Scale Weakly-Supervised Attribute-Object Composition Learning",
+      "url": "https://ai.meta.com/research/publications/large-scale-weakly-supervised-attribute-object-composition-learning/",
+      "published": "2021-06-22",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2021-06-22"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Attention-Based Query Expansion Learning | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/attention-based-query-expansion-learning/",
+      "published": "2020-08-21",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-08-21"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Situated and Interactive Multimodal Conversations",
+      "url": "https://ai.meta.com/research/publications/situated-and-interactive-multimodal-conversations/",
+      "published": "2020-12-08",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-12-08"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Resource Constrained Dialog Policy Learning via Differentiable Inductive Logic Programming",
+      "url": "https://ai.meta.com/research/publications/resource-constrained-dialog-policy-learning-via-differentiable-inductive-logic-programming/",
+      "published": "2020-12-08",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-12-08"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Ditto: Fair and Robust Federated Learning Through Personalization",
+      "url": "https://ai.meta.com/research/publications/ditto-fair-and-robust-federated-learning-through-personalization/",
+      "published": "2021-07-24",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2021-07-24"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "See, Hear, Explore: Curiosity via Audio-Visual Association",
+      "url": "https://ai.meta.com/research/publications/see-hear-explore-curiosity-via-audio-visual-association/",
+      "published": "2020-12-06",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-12-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Demystifying Contrastive Self-Supervised Learning: Invariances, Augmentations and Dataset Biases",
+      "url": "https://ai.meta.com/research/publications/demystifying-contrastive-self-supervised-learning-invariances-augmentations-and-dataset-biases/",
+      "published": "2020-12-04",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-12-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Articulation-aware Canonical Surface Mapping | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/articulation-aware-canonical-surface-mapping/",
+      "published": "2020-06-14",
+      "pages": [
+        4
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-06-14"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Souper-Model: How Simple Arithmetic Unlocks State-of-the-Art LLM Performance",
+      "url": "https://ai.meta.com/research/publications/souper-model-how-simple-arithmetic-unlocks-state-of-the-art-llm-performance/",
+      "published": "2025-11-18",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-11-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "CATransformers: Carbon Aware Transformers Through Joint Model-Hardware Optimization",
+      "url": "https://ai.meta.com/research/publications/catransformers-carbon-aware-transformers-through-joint-model-hardware-optimization/",
+      "published": "2025-11-11",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-11-11"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Omnilingual ASR: Open-Source Multilingual Speech Recognition for 1600+ Languages",
+      "url": "https://ai.meta.com/research/publications/omnilingual-asr-open-source-multilingual-speech-recognition-for-1600-languages/",
+      "published": "2025-11-10",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-11-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Enrich and Detect: Video Temporal Grounding with Multimodal LLMs",
+      "url": "https://ai.meta.com/research/publications/enrich-and-detect-video-temporal-grounding-with-multimodal-llms/",
+      "published": "2025-10-19",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-10-19"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Controlling Multimodal LLMs via Reward-guided Decoding",
+      "url": "https://ai.meta.com/research/publications/controlling-multimodal-llms-via-reward-guided-decoding/",
+      "published": "2025-10-18",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-10-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "SPG: Sandwiched Policy Gradient for Masked Diffusion Language Models",
+      "url": "https://ai.meta.com/research/publications/spg-sandwiched-policy-gradient-for-masked-diffusion-language-models/",
+      "published": "2025-10-13",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-10-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "CWM: An Open-Weights LLM for Research on Code Generation with World Models",
+      "url": "https://ai.meta.com/research/publications/cwm-an-open-weights-llm-for-research-on-code-generation-with-world-models/",
+      "published": "2025-09-24",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-24"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Compute as Teacher: Turning Inference Compute Into Reference-Free Supervision",
+      "url": "https://ai.meta.com/research/publications/compute-as-teacher-turning-inference-compute-into-reference-free-supervision/",
+      "published": "2025-09-24",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-24"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Code World Model Preparedness Report",
+      "url": "https://ai.meta.com/research/publications/code-world-model-preparedness-report/",
+      "published": "2025-09-23",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-23"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "MetaEmbed: Scaling Multimodal Retrieval at Test-Time with Flexible Late Interactions",
+      "url": "https://ai.meta.com/research/publications/metaembed-scaling-multimodal-retrieval-at-test-time-with-flexible-late-interactions/",
+      "published": "2025-09-23",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-23"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "ARE: scaling up agent environments and evaluations",
+      "url": "https://ai.meta.com/research/publications/are-scaling-up-agent-environments-and-evaluations/",
+      "published": "2025-09-22",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-22"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "CyberSOCEval: Benchmarking LLMs Capabilities for Malware Analysis and Threat Intelligence Reasoning",
+      "url": "https://ai.meta.com/research/publications/cybersoceval-benchmarking-llms-capabilities-for-malware-analysis-and-threat-intelligence-reasoning/",
+      "published": "2025-09-15",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-15"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Transitive Invariance for Self-supervised Visual Representation Learning | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/transitive-invariance-for-self-supervised-visual-representation-learning/",
+      "published": "2017-10-22",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2017-10-22"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Task-Driven Modular Networks for Zero-Shot Compositional Learning | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/task-driven-modular-networks-for-zero-shot-compositional-learning/",
+      "published": "2019-10-28",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-10-28"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Non-Local Neural Networks | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/non-local-neural-networks/",
+      "published": "2018-06-18",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-06-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning by Asking Questions | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/learning-by-asking-questions/",
+      "published": "2018-06-18",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-06-18"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Intrinsic Motivation for Encouraging Synergistic Behavior | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/intrinsic-motivation-for-encouraging-synergistic-behavior/",
+      "published": "2020-04-25",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-04-25"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Dynamics-aware Embeddings | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/dynamics-aware-embeddings/",
+      "published": "2020-04-25",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-04-25"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Discovering Motor Programs by Recomposing Demonstrations | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/discovering-motor-programs-by-recomposing-demonstrations/",
+      "published": "2020-04-26",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-04-26"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Hierarchical RL Using an Ensemble of Proprioceptive Periodic Policies | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/hierarchical-rl-using-an-ensemble-of-proprioceptive-periodic-policies/",
+      "published": "2019-05-06",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-05-06"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Word Translation Without Parallel Data | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/word-translation-without-parallel-data/",
+      "published": "2018-04-30",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-04-30"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Unsupervised Machine Translation Using Monolingual Corpora Only | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/unsupervised-machine-translation-using-monolingual-corpora-only/",
+      "published": "2018-04-30",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2018-04-30"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Fader Networks: Manipulating Images by Sliding Attributes | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/fader-networks-manipulating-images-by-sliding-attributes/",
+      "published": "2017-12-04",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2017-12-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "CamemBERT: a Tasty French Language Model | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/camembert-a-tasty-french-language-model/",
+      "published": "2020-06-21",
+      "pages": [
+        5
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-06-21"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Understanding Reinforcement Learning for Model Training, and future directions with GRAPE",
+      "url": "https://ai.meta.com/research/publications/understanding-reinforcement-learning-for-model-training-and-future-directions-with-grape/",
+      "published": "2025-09-08",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-08"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Jointly Reinforcing Diversity and Quality in Language Model Generations",
+      "url": "https://ai.meta.com/research/publications/jointly-reinforcing-diversity-and-quality-in-language-model-generations/",
+      "published": "2025-09-02",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-09-02"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Deep Think with Confidence",
+      "url": "https://ai.meta.com/research/publications/deep-think-with-confidence/",
+      "published": "2025-08-22",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-22"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "DINOv3",
+      "url": "https://ai.meta.com/research/publications/dinov3/",
+      "published": "2025-08-14",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-14"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Disentangling the Factors of Convergence between Brains and Computer Vision Models",
+      "url": "https://ai.meta.com/research/publications/disentangling-the-factors-of-convergence-between-brains-and-computer-vision-models/",
+      "published": "2025-08-13",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Efficient Speculative Decoding for Llama at Scale: Challenges and Solutions",
+      "url": "https://ai.meta.com/research/publications/efficient-speculative-decoding-for-llama-at-scale-challenges-and-solutions/",
+      "published": "2025-08-12",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-12"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Open Molecular Crystals 2025 (OMC25) Dataset and Models",
+      "url": "https://ai.meta.com/research/publications/open-molecular-crystals-2025-omc25-dataset-and-models/",
+      "published": "2025-08-05",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-05"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "FastCSP: Accelerated Molecular Crystal Structure Prediction with Universal Model for Atoms",
+      "url": "https://ai.meta.com/research/publications/fastcsp-accelerated-molecular-crystal-structure-prediction-with-universal-model-for-atoms/",
+      "published": "2025-08-05",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-05"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "The Open DAC 2025 Dataset for Sorbent Discovery in Direct Air Capture",
+      "url": "https://ai.meta.com/research/publications/the-open-dac-2025-dataset-for-sorbent-discovery-in-direct-air-capture/",
+      "published": "2025-08-04",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-08-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "ASTRO: Teaching Language Models to Reason by Reflecting and Backtracking In-Context",
+      "url": "https://ai.meta.com/research/publications/astro-teaching-language-models-to-reason-by-reflecting-and-backtracking-in-context/",
+      "published": "2025-07-01",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-07-01"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Seamless Interaction: Dyadic Audiovisual Motion Modeling and Large-Scale Dataset",
+      "url": "https://ai.meta.com/research/publications/seamless-interaction-dyadic-audiovisual-motion-modeling-and-large-scale-dataset/",
+      "published": "2025-06-27",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-06-27"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Measuring multi-calibration",
+      "url": "https://ai.meta.com/research/publications/measuring-multi-calibration/",
+      "published": "2025-06-13",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2025-06-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "ASSET: A Dataset for Tuning and Evaluation of Sentence Simplification Models with Multiple Rewriting Transformations | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/asset-a-dataset-for-tuning-and-evaluation-of-sentence-simplification-models-with-multiple-rewriting-transformations/",
+      "published": "2020-06-11",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-06-11"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "EASSE: Easier Automatic Sentence Simplification Evaluation | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/easse-easier-automatic-sentence-simplification-evaluation/",
+      "published": "2019-11-10",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-11-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Unsupervised Cross-Domain Singing Voice Conversion",
+      "url": "https://ai.meta.com/research/publications/unsupervised-cross-domain-singing-voice-conversion/",
+      "published": "2020-08-08",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-08-08"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "One-Sided Unsupervised Domain Mapping | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/one-sided-unsupervised-domain-mapping/",
+      "published": "2017-12-04",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2017-12-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Attention-Based WaveNet Autoencoder for Universal Voice Conversion | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/attention-based-wavenet-autoencoder-for-universal-voice-conversion/",
+      "published": "2019-04-30",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-04-30"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Engaging Image Captioning via Personality | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/engaging-image-captioning-via-personality/",
+      "published": "2019-06-04",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-06-04"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Neural Manifold Ordinary Differential Equations",
+      "url": "https://ai.meta.com/research/publications/neural-manifold-ordinary-differential-equations/",
+      "published": "2020-12-10",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-12-10"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Differentiating through the Fréchet Mean | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/differentiating-through-the-frechet-mean/",
+      "published": "2020-07-12",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-07-12"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Enhancing Adversarial Example Transferability with an Intermediate Level Attack | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/enhancing-adversarial-example-transferability-with-an-intermediate-level-attack/",
+      "published": "2019-10-28",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-10-28"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Generate, Segment and Refine: Towards Generic Manipulation Segmentation | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/generate-segment-and-refine-towards-generic-manipulation-segmentation/",
+      "published": "2020-02-07",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-02-07"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Learning Reasoning Strategies in End-to-End Differentiable Proving",
+      "url": "https://ai.meta.com/research/publications/learning-reasoning-strategies-in-end-to-end-differentiable-proving/",
+      "published": "2020-08-13",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2020-08-13"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    },
+    {
+      "title": "Unsupervised Question Answering by Cloze Translation | Facebook AI Research",
+      "url": "https://ai.meta.com/research/publications/unsupervised-question-answering-by-cloze-translation/",
+      "published": "2019-07-27",
+      "pages": [
+        6
+      ],
+      "scope_triage_completed": true,
+      "date_evidence": [
+        "2019-07-27"
+      ],
+      "review_status": "historical",
+      "reason": "官方目录所列公开日期早于固定窗口；本批不重复全年历史算法审查，不据此判定是否值得实现。"
+    }
+  ],
+  "all_sources_exhaustive": false,
+  "directory_exceptions": [
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "exception_type": "pagination_unproven",
+      "reason": "前六页逐条日期已核对，第四至第六页最新日期均在2025年；目录仍夹杂更旧记录且未声明总数，不能从分页或旧日期推导全站穷尽。用户允许此有限来源例外不阻碍有界审查水位。",
+      "attempts": [
+        "原入口 global_search 已失效，改用官方 results 入口",
+        "重新读取六个不同页码并保存各页SHA256/24条记录",
+        "确认144条唯一URL均有官方日期，窗口内6条已作研究范围审查",
+        "对照独立四轨arXiv日期/月份召回与官方既有审查"
+      ],
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reopen_when": "目录出现新的窗口内记录、可验证的日期排序/总数/日期过滤、或独立来源发现缺失候选时重开。"
+    }
+  ]
+}
