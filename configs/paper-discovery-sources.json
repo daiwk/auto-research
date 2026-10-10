@@ -3,7 +3,7 @@
   "sources": [
     {"name": "Google Research publications", "kind": "official-research", "url": "https://research.google/pubs/?category=2026&sort=-publication__year", "organization": "Google", "max_pages": 40, "max_title_lookups": 5, "max_detail_lookups": 12},
     {"name": "Google DeepMind publications", "kind": "official-research", "url": "https://deepmind.google/research/publications/", "organization": "Google DeepMind", "max_pages": 20, "max_title_lookups": 5, "max_detail_lookups": 12},
-    {"name": "Meta AI publications", "kind": "official-research", "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1", "organization": "Meta", "max_pages": 2, "max_title_lookups": 5, "max_detail_lookups": 12},
+    {"name": "Meta AI publications", "kind": "official-research", "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1", "organization": "Meta", "max_pages": 6, "max_title_lookups": 5, "max_detail_lookups": 12},
     {"name": "Google Research GitHub", "kind": "github-organization", "url": "https://api.github.com/orgs/google-research/repos?sort=updated&per_page=100", "organization": "Google"},
     {"name": "Meta Research GitHub", "kind": "github-organization", "url": "https://api.github.com/orgs/facebookresearch/repos?sort=updated&per_page=100", "organization": "Meta"},
     {"name": "RecSys 2026 posters 1", "kind": "official-conference", "url": "https://recsys.acm.org/recsys26/posters-1/", "track": "recommendation", "organization": "ACM RecSys", "max_title_lookups": 5, "review_policy": "snapshot"},

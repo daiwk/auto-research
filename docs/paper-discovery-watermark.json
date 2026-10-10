@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "policy": "bounded-review-with-explicit-exceptions-v1",
+  "checked_on": "2026-10-10",
+  "user_authorized_exceptions": true,
+  "authorization_record": "2026-10-10 用户要求先补齐缺失并推进到10月7日；实在不可核对的可忽略或修改标准。此处仅允许公开、有尝试记录且可重开的元数据/原文/分页例外，不降低论文算法与工业线上证据要求。",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "review_watermark": "2026-10-07",
+  "source_exhaustiveness_watermark": "2026-10-02",
+  "all_sources_exhaustive": false,
+  "implementation_complete": false,
+  "candidate_register": "research-audits/oct07-review-closure/paper-register.json",
+  "retrieval_receipts": [
+    {
+      "track": "recommendation",
+      "mode": "submission-window",
+      "artifact": "research-audits/oct07-review-closure/recommendation-retrieval.json"
+    },
+    {
+      "track": "recommendation",
+      "mode": "late-index",
+      "artifact": "research-audits/oct07-review-closure/recommendation-month-retrieval.json"
+    },
+    {
+      "track": "foundation-model",
+      "mode": "submission-window",
+      "artifact": "research-audits/oct07-review-closure/foundation-model-retrieval.json"
+    },
+    {
+      "track": "foundation-model",
+      "mode": "late-index",
+      "artifact": "research-audits/oct07-review-closure/foundation-model-month-retrieval.json"
+    },
+    {
+      "track": "post-training",
+      "mode": "submission-window",
+      "artifact": "research-audits/oct07-review-closure/post-training-retrieval.json"
+    },
+    {
+      "track": "post-training",
+      "mode": "late-index",
+      "artifact": "research-audits/oct07-review-closure/post-training-month-retrieval.json"
+    },
+    {
+      "track": "agent",
+      "mode": "submission-window",
+      "artifact": "research-audits/oct07-review-closure/agent-retrieval.json"
+    },
+    {
+      "track": "agent",
+      "mode": "late-index",
+      "artifact": "research-audits/oct07-review-closure/agent-month-retrieval.json"
+    }
+  ],
+  "source_reviews": [
+    {
+      "organization": "Google",
+      "artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "organization": "Meta",
+      "artifact": "research-audits/oct07-source-closure/meta-source-review.json"
+    }
+  ],
+  "next_scan_start_with_overlap": "2026-10-06",
+  "exception_reopening_policy": "资料变更或独立补发现时重开；不无限重复相同失败请求，不永久删掉论文。"
+}
