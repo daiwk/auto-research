@@ -3,7 +3,7 @@
   "adapter_key": "jev-capability",
   "validated_at": "2026-10-10",
   "accelerator": {"vendor": "NVIDIA", "model": "A100"},
-  "command": ["python", "scripts/run_jev_capability.py", "evaluate", "--backend", "nanojev", "--checkpoint-dir", "checkpoints/nanojev", "--device", "cuda:0", "--data", "data/arc-challenge.jsonl", "--output", "runs/arc-challenge.json"],
+  "command": ["python", "scripts/run_jev_capability.py", "evaluate", "--backend", "nanojev", "--checkpoint-dir", "checkpoints/nanojev", "--device", "cuda:0", "--seed", "42", "--data", "data/arc-challenge.jsonl", "--output", "runs/arc-challenge-final.json"],
   "dataset": {
     "name": "allenai/ai2_arc",
     "revision": "210d026faf9955653af8916fad021475a3f00453",
@@ -16,5 +16,5 @@
   "checkpoint": {"model_id": "C-Tianyu/NanoJev", "revision": "047b927b30882a1138fc504821b82ac145a4b81a", "base_model": "Qwen/Qwen3-0.6B", "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca"},
   "result": "passed",
   "metrics": {"seed": 42, "examples": 1172, "correct": 327, "accuracy": 0.2790102389078498, "accuracy_ci95": [0.25408615971073306, 0.3053782594810121], "covered_tasks": 1, "missing_tasks": 12, "closed_jev_reproduction": false},
-  "provenance": {"commit": "ea3652c0", "artifact_path": "docs/gpu-validations/jev-capability-a100-20261010.json", "raw_predictions_committed": false, "checkpoint_committed": false}
+  "provenance": {"commit": "2ab8fc2c", "artifact_path": "docs/gpu-validations/jev-capability-a100-20261010.json", "raw_predictions_committed": false, "checkpoint_committed": false}
 }

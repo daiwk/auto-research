@@ -6,6 +6,7 @@
 
 ### MoE 与动态路由
 
+- [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](../../foundation-models/2610.11575-elastic-expert-routing/README.md)（`elastic-expert-routing`）：固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。
 - [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
 
 ### 条件记忆与知识注入
@@ -133,6 +134,10 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 能力评测与推理协议
+
+- [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../../system-one/2610.11978-jev-capability/README.md)（`jev-capability`）：论文用有限候选选择评估 Jev 的知识、推理和多语言能力。每题只提交问题与候选，运行一次；数学任务表现弱于知识任务。原文中的供应商分数与作者实测并非统一提示协议，本地实现因此分别记录，不混成可比排名。本文是评测研究，不提供新架构或训练目标。
 
 ### 并行服务与 KV cache
 

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:semi-opd",
+  "method": "semi-opd",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "adapter_parameter_delta_l2": 0.020373964319147005,
+    "teacher_adapter_parameter_delta_l2": 0,
+    "steps_with_nonzero_student_gradient": 2,
+    "validation_examples": 2,
+    "validation_exact_match": 0.5
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "adapter_parameter_delta_l2": 0.020373964319147005,
+      "teacher_adapter_parameter_delta_l2": 0,
+      "steps_with_nonzero_student_gradient": 2,
+      "validation_examples": 2,
+      "validation_exact_match": 0.5
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l2_checkpoint_smoke",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "validation_used_for_selection": false,
+    "steps": 2,
+    "max_tokens": 128,
+    "group": 1,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "checkpoint": {
+    "student": "Qwen/Qwen3-4B-Instruct-2507",
+    "student_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "teacher": "Siye01/Qwen3-4B-Inst-MOPD",
+    "teacher_revision": "b61a9f00b77302b6e947af1215b7cb994b884c4a"
+  },
+  "history": [
+    {
+      "step": 0,
+      "response_tokens": 100,
+      "loss": -0.01630033180117607,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.6349961530248609
+    },
+    {
+      "step": 1,
+      "response_tokens": 128,
+      "loss": -0.00072681182064116,
+      "training_reward_mean": 1,
+      "training_reward_variance": 0,
+      "student_gradient_l2": 0.012240787799307496
+    }
+  ],
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.11291-semi-opd/metrics/checkpoint-a100-seed42.json",
+    "dataset_fingerprint": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "original_code_commit": "ea3652c0"
+  }
+}

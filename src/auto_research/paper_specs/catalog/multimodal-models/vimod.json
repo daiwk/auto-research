@@ -1,0 +1,16 @@
+{
+  "domain": "multimodal-models",
+  "key": "vimod",
+  "title": "Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning",
+  "paper_url": "https://arxiv.org/abs/2610.12060",
+  "detail_path": "multimodal-models/2610.12060-vimod/README.md",
+  "topic": ["视觉 Token 压缩", "动态证据恢复"],
+  "first_author": "Yicheng Xue",
+  "first_author_affiliation": "City University of Hong Kong / Zhejiang University",
+  "published": "2026-10-08",
+  "code": "未找到作者公开代码",
+  "adapter": "vimod",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/vimod-a100-20261010.json"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:race",
+  "evaluation_protocol": {
+    "seeds": [
+      42
+    ],
+    "claim_policy": "L1 real-checkpoint mechanism execution only; not capability improvement",
+    "tier": "L1",
+    "formal_comparison": false
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.12061-race/metrics/checkpoint-a100-seed42.json",
+    "commit": "a3865213a173fdf72974a81dbe55bacd76473214",
+    "dataset_fingerprint": "bounded-calculator-v1@a3865213a173fdf72974a81dbe55bacd76473214"
+  },
+  "method": "race",
+  "seed": 42,
+  "diagnostic_only": true,
+  "evaluation_tier": "L1",
+  "accelerator": "NVIDIA A100",
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct"
+  },
+  "metrics": {
+    "on_policy_episodes": 64,
+    "on_policy_successes": 11,
+    "actor_loss": 0.02440592646598816,
+    "closure_terms": 6,
+    "original_policy_tokens": 554,
+    "skipped_reasoning_tokens": 24
+  }
+}

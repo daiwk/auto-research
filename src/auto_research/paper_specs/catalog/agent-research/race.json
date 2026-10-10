@@ -1,0 +1,20 @@
+{
+  "domain": "agent-research",
+  "key": "race",
+  "title": "When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation",
+  "paper_url": "https://arxiv.org/abs/2610.12061",
+  "detail_path": "agent-research/2610.12061-race/README.md",
+  "topic": [
+    "Agentic RL",
+    "推理效率",
+    "跨轮信用分配"
+  ],
+  "first_author": "Yiruo Cheng",
+  "first_author_affiliation": "Renmin University of China",
+  "published": "2026-10-08",
+  "priority": "P0",
+  "code": "https://github.com/HututuAI/RACE",
+  "adapter": "race",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct10-race-a100.json"
+}

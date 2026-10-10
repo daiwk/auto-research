@@ -1,0 +1,20 @@
+{
+  "domain": "agent-research",
+  "key": "hippocam",
+  "title": "Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2610.12124",
+  "detail_path": "agent-research/2610.12124-hippocam/README.md",
+  "topic": [
+    "长期记忆",
+    "意图组织",
+    "经验学习"
+  ],
+  "first_author": "Xiangyi Zeng",
+  "first_author_affiliation": "Institute of Information Engineering, Chinese Academy of Sciences",
+  "published": "2026-10-08",
+  "priority": "P1",
+  "code": null,
+  "adapter": "hippocam",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct10-hippocam-a100.json"
+}

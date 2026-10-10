@@ -1,0 +1,16 @@
+{
+  "domain": "foundation-models",
+  "key": "elastic-expert-routing",
+  "title": "Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts",
+  "paper_url": "https://arxiv.org/abs/2610.11575",
+  "detail_path": "foundation-models/2610.11575-elastic-expert-routing/README.md",
+  "topic": ["稀疏专家与路由", "网络架构"],
+  "first_author": "Yunkai Chai",
+  "first_author_affiliation": "Shanghai AI Laboratory / Shanghai Jiao Tong University",
+  "published": "2026-10-08",
+  "code": "未找到作者公开代码",
+  "adapter": "elastic-expert-routing",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/elastic-expert-routing-a30-20261010.json"
+}

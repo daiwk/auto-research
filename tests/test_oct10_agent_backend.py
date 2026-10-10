@@ -13,6 +13,7 @@ def test_mass_samples_each_worker_with_independent_role_index(monkeypatch):
     monkeypatch.setattr(checkpoint, "install_lora", lambda model: None)
     backend = LocalLanguageModel.__new__(LocalLanguageModel)
     backend.model, backend.device = NeuralFixture(), "cpu"
+    backend.training_audits = []
     observed = []
     def continuation(context, target):
         observed.append(target)

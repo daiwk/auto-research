@@ -725,6 +725,8 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "elastic-expert-routing": ("网络架构", "MoE 与动态路由"),
+        "jev-capability": ("推理与系统效率", "能力评测与推理协议"),
         "tess": ("预训练与数据", "数据选择与质量估计"),
         "echo": ("推理与系统效率", "推测解码与 KV cache"),
         "open-1b-audit": ("预训练与数据", "训练框架与可组合实验"),
@@ -816,6 +818,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "vimod": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
         "videomm": ("多模态基础模型", "视频理解与 token 压缩"),
         "stacktok": ("多模态基础模型", "视觉 token 与跨模态检索"),
     }))

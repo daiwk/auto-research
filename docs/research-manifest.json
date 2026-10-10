@@ -725,6 +725,26 @@
     },
     {
       "domain": "agent-research",
+      "key": "evoalloc",
+      "title": "EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution",
+      "paper_url": "https://arxiv.org/abs/2610.12086",
+      "detail_path": "agent-research/2610.12086-evoalloc/README.md",
+      "topic": [
+        "程序进化",
+        "评测预算",
+        "策略自进化"
+      ],
+      "first_author": "Yanning Dai",
+      "first_author_affiliation": "King Abdullah University of Science and Technology",
+      "published": "2026-10-08",
+      "priority": "P1",
+      "code": null,
+      "adapter": "evoalloc",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct10-evoalloc-a100.json"
+    },
+    {
+      "domain": "agent-research",
       "key": "evoharness-rl",
       "title": "EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents",
       "paper_url": "https://arxiv.org/abs/2608.05446",
@@ -1032,6 +1052,26 @@
     },
     {
       "domain": "agent-research",
+      "key": "hippocam",
+      "title": "Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2610.12124",
+      "detail_path": "agent-research/2610.12124-hippocam/README.md",
+      "topic": [
+        "长期记忆",
+        "意图组织",
+        "经验学习"
+      ],
+      "first_author": "Xiangyi Zeng",
+      "first_author_affiliation": "Institute of Information Engineering, Chinese Academy of Sciences",
+      "published": "2026-10-08",
+      "priority": "P1",
+      "code": null,
+      "adapter": "hippocam",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct10-hippocam-a100.json"
+    },
+    {
+      "domain": "agent-research",
       "key": "hiskill",
       "title": "HiSkill",
       "paper_url": "https://arxiv.org/abs/2607.25853",
@@ -1268,6 +1308,26 @@
       "published": "2026-09-10",
       "code": "https://github.com/xin8coder/MAPLE",
       "adapter": "maple"
+    },
+    {
+      "domain": "agent-research",
+      "key": "mass",
+      "title": "Recursive Self-Improvement through Multi-Agent Self-Supervision",
+      "paper_url": "https://arxiv.org/abs/2610.12176",
+      "detail_path": "agent-research/2610.12176-mass/README.md",
+      "topic": [
+        "递归自改进",
+        "工作流搜索",
+        "多智能体自监督"
+      ],
+      "first_author": "Hyunin Lee",
+      "first_author_affiliation": "UC Berkeley",
+      "published": "2026-10-08",
+      "priority": "P0",
+      "code": "https://github.com/SakanaAI/mass",
+      "adapter": "mass",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct10-mass-a100.json"
     },
     {
       "domain": "agent-research",
@@ -1731,6 +1791,26 @@
       "code": null,
       "adapter": "prompts",
       "priority": "P0"
+    },
+    {
+      "domain": "agent-research",
+      "key": "race",
+      "title": "When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation",
+      "paper_url": "https://arxiv.org/abs/2610.12061",
+      "detail_path": "agent-research/2610.12061-race/README.md",
+      "topic": [
+        "Agentic RL",
+        "推理效率",
+        "跨轮信用分配"
+      ],
+      "first_author": "Yiruo Cheng",
+      "first_author_affiliation": "Renmin University of China",
+      "published": "2026-10-08",
+      "priority": "P0",
+      "code": "https://github.com/HututuAI/RACE",
+      "adapter": "race",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct10-race-a100.json"
     },
     {
       "domain": "agent-research",
@@ -3833,6 +3913,25 @@
     },
     {
       "domain": "foundation-models",
+      "key": "elastic-expert-routing",
+      "title": "Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts",
+      "paper_url": "https://arxiv.org/abs/2610.11575",
+      "detail_path": "foundation-models/2610.11575-elastic-expert-routing/README.md",
+      "topic": [
+        "稀疏专家与路由",
+        "网络架构"
+      ],
+      "first_author": "Yunkai Chai",
+      "first_author_affiliation": "Shanghai AI Laboratory / Shanghai Jiao Tong University",
+      "published": "2026-10-08",
+      "code": "未找到作者公开代码",
+      "adapter": "elastic-expert-routing",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/elastic-expert-routing-a30-20261010.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "engram",
       "title": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
       "paper_url": "https://arxiv.org/abs/2601.07372",
@@ -4466,6 +4565,25 @@
       "code": "https://github.com/aimagelab/IrekoGPT",
       "adapter": "irekogpt",
       "priority": "P1"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "jev-capability",
+      "title": "Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks",
+      "paper_url": "https://arxiv.org/abs/2610.11978",
+      "detail_path": "system-one/2610.11978-jev-capability/README.md",
+      "topic": [
+        "System One / JEV",
+        "公共评测与能力边界"
+      ],
+      "first_author": "Xing Li / Qingcheng Chang",
+      "first_author_affiliation": "Dalian Maritime University",
+      "published": "2026-10-08",
+      "code": "未找到原作者公开代码（2026-10-10 核验）",
+      "adapter": "jev-capability",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/jev-capability-a100-20261010.json"
     },
     {
       "domain": "foundation-models",
@@ -7579,6 +7697,25 @@
       "gpu_validation_artifact": "docs/gpu-validations/videomm-a100-20260916.json"
     },
     {
+      "domain": "multimodal-models",
+      "key": "vimod",
+      "title": "Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning",
+      "paper_url": "https://arxiv.org/abs/2610.12060",
+      "detail_path": "multimodal-models/2610.12060-vimod/README.md",
+      "topic": [
+        "视觉 Token 压缩",
+        "动态证据恢复"
+      ],
+      "first_author": "Yicheng Xue",
+      "first_author_affiliation": "City University of Hong Kong / Zhejiang University",
+      "published": "2026-10-08",
+      "code": "未找到作者公开代码",
+      "adapter": "vimod",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/vimod-a100-20261010.json"
+    },
+    {
       "domain": "post-training",
       "key": "absolute-zero",
       "title": "Absolute Zero",
@@ -7957,6 +8094,25 @@
       "code": null,
       "adapter": "df-opd",
       "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "dial-opd",
+      "title": "DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.11659",
+      "detail_path": "post-training/2610.11659-dial-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "Token supervision"
+      ],
+      "first_author": "Anhao Zhao",
+      "first_author_affiliation": "Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University",
+      "published": "2026-10-08",
+      "code": "https://github.com/EIT-NLP/DIAL-OPD",
+      "adapter": "dial-opd",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/dial-opd-a100-20261010.json"
     },
     {
       "domain": "post-training",
@@ -8396,6 +8552,25 @@
     },
     {
       "domain": "post-training",
+      "key": "grpo-dropout",
+      "title": "GRPODropout: Less is More for Online Reinforcement Learning Rollouts",
+      "paper_url": "https://arxiv.org/abs/2610.11854",
+      "detail_path": "post-training/2610.11854-grpo-dropout/README.md",
+      "topic": [
+        "RLVR",
+        "Rollout selection"
+      ],
+      "first_author": "Hexuan Deng",
+      "first_author_affiliation": "Harbin Institute of Technology (Shenzhen)",
+      "published": "2026-10-08",
+      "code": "https://github.com/hexuandeng/GRPODropout",
+      "adapter": "grpo-dropout",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/grpo-dropout-a100-20261010.json"
+    },
+    {
+      "domain": "post-training",
       "key": "gspo",
       "title": "GSPO",
       "paper_url": "https://arxiv.org/abs/2507.18071",
@@ -8685,6 +8860,25 @@
       "published": "2023-12-14",
       "code": "未发现官方代码",
       "adapter": "math-shepherd"
+    },
+    {
+      "domain": "post-training",
+      "key": "meta-opd",
+      "title": "MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.11989",
+      "detail_path": "post-training/2610.11989-meta-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "Meta-learning"
+      ],
+      "first_author": "Zipeng Wang",
+      "first_author_affiliation": "East China Normal University",
+      "published": "2026-10-08",
+      "code": null,
+      "adapter": "meta-opd",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/meta-opd-a100-20261010.json"
     },
     {
       "domain": "post-training",
@@ -9337,6 +9531,25 @@
     },
     {
       "domain": "post-training",
+      "key": "residual-advantage",
+      "title": "Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards",
+      "paper_url": "https://arxiv.org/abs/2610.11519",
+      "detail_path": "post-training/2610.11519-residual-advantage/README.md",
+      "topic": [
+        "RLVR",
+        "Teacher guidance"
+      ],
+      "first_author": "Xiaobing Chen",
+      "first_author_affiliation": "Harbin Engineering University / Tencent / Harbin Institute of Technology",
+      "published": "2026-10-08",
+      "code": null,
+      "adapter": "residual-advantage",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/residual-advantage-a100-20261010.json"
+    },
+    {
+      "domain": "post-training",
       "key": "retire-opd",
       "title": "RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning",
       "paper_url": "https://arxiv.org/abs/2609.20784",
@@ -9657,6 +9870,25 @@
       "published": "2024-01-18",
       "code": "未发现官方代码",
       "adapter": "self-rewarding"
+    },
+    {
+      "domain": "post-training",
+      "key": "semi-opd",
+      "title": "When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better",
+      "paper_url": "https://arxiv.org/abs/2610.11291",
+      "detail_path": "post-training/2610.11291-semi-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "Offline student rollouts"
+      ],
+      "first_author": "Siyan Zhao",
+      "first_author_affiliation": "UCLA / NVIDIA（论文注明实习）",
+      "published": "2026-10-08",
+      "code": null,
+      "adapter": "semi-opd",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/semi-opd-a100-20261010.json"
     },
     {
       "domain": "post-training",

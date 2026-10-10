@@ -1,0 +1,20 @@
+{
+  "domain": "agent-research",
+  "key": "evoalloc",
+  "title": "EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution",
+  "paper_url": "https://arxiv.org/abs/2610.12086",
+  "detail_path": "agent-research/2610.12086-evoalloc/README.md",
+  "topic": [
+    "程序进化",
+    "评测预算",
+    "策略自进化"
+  ],
+  "first_author": "Yanning Dai",
+  "first_author_affiliation": "King Abdullah University of Science and Technology",
+  "published": "2026-10-08",
+  "priority": "P1",
+  "code": null,
+  "adapter": "evoalloc",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct10-evoalloc-a100.json"
+}

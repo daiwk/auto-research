@@ -58,6 +58,8 @@ gold answer，也没有自回归输出 token。
 
 ## 可执行契约
 
+知识、推理与多语言能力比较新增[13 任务能力评测入口](2610.11978-jev-capability/README.md)：支持官方数据 schema、固定 revision、语言宏平均和明确缺失覆盖。开放 NanoJev 已在 ARC-Challenge 全测试集实测；它与闭源 Jev 的结果分开记录，不混称官方复现。
+
 - `Choice`：2–255 个动态候选，返回选择、完整概率分布和 confidence；
 - `Score`：按有序 rubric 给分，同时保留各档概率；
 - `Noul`：返回命题为真的概率；

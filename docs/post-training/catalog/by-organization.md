@@ -99,6 +99,14 @@
 
 - 2024-02-05 · 一作：Zhihong Shao · [DeepSeekMath / GRPO](../2402.03300-grpo/README.md)（`grpo`）：PPO 的 value model 与 policy 同规模，数学推理 RL 训练显存昂贵。GRPO 对同一问题采样一组 response，以组内 reward 均值和标准差构造 advantage，删除 critic；策略部分仍使用 old policy ratio、clipping 与 reference KL。
 
+## East China Normal University
+
+- 2026-10-08 · 一作：Zipeng Wang · [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](../2610.11989-meta-opd/README.md)（`meta-opd`）：轻量权重网络根据师生预测学习 token 监督权重。它通过一次可微虚拟学生更新后的参考解损失获得元梯度，再使用新权重执行真实学生更新。
+
+## Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University
+
+- 2026-10-08 · 一作：Anhao Zhao · [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](../2610.11659-dial-opd/README.md)（`dial-opd`）：用概率的对数均值调节教师—学生对数差异，降低两者都不认可的低概率 token 的监督优先级。按每条响应选取高分位置，未选位置仍保留为上下文。
+
 ## Fudan University
 
 - 2026-08-27 · 一作：Siye Wu · [Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms](../2608.27409-rlvr-fusion/README.md)（`rlvr-fusion`）：论文统一比较三种复用产物不同的跨域能力融合：Merge 合并专家 task vector，Mix RL 合并训练数据，MOPD 同时复用专家和数据。平均差距不超过 1.4 points，但单项可达 8.6 points，因此选择取决于专家、数据和成本条件。
@@ -121,6 +129,14 @@
 ## HKUST
 
 - 2023-04-13 · 一作：Hanze Dong · [RAFT](../2304.06767-raft/README.md)（`raft`）：PPO 的在线更新不稳定，而在固定 SFT 数据上训练又无法持续利用变好的策略。RAFT 每轮从当前模型生成多个响应，用 reward model 排序并丢弃低质量样本，只对选中的高质量响应执行普通 maximum-likelihood fine-tuning，然后用新策略进入下一轮。
+
+## Harbin Engineering University / Tencent / Harbin Institute of Technology
+
+- 2026-10-08 · 一作：Xiaobing Chen · [Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards](../2610.11519-residual-advantage/README.md)（`residual-advantage`）：把全词表师生概率残差变成相对学生的有界局部优势，再逐响应中心化，与验证器优势相加。Co-RA 在同一已评分学生批次上更新教师 LoRA，下一轮才使用新教师。
+
+## Harbin Institute of Technology (Shenzhen)
+
+- 2026-10-08 · 一作：Hexuan Deng · [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](../2610.11854-grpo-dropout/README.md)（`grpo-dropout`）：从同一 prompt 的 GRPO 响应组中筛除部分高概率、正优势响应，并用旧策略概率重新中心化保留响应的优势。不是随机 dropout，也不改变生成预算。
 
 ## Huawei Noah’s Ark Lab
 
@@ -353,6 +369,10 @@
 ## Tsinghua University / DiDi Voyager Labs
 
 - 2026-09-15 · 一作：Shiqi Liu · [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../2609.16937-gamma-opd/README.md)（`gamma-opd`）：以折扣时间信用逼近序列级 reverse-KL，再用有界奖励优势补入可验证结果。
+
+## UCLA / NVIDIA（论文注明实习）
+
+- 2026-10-08 · 一作：Siyan Zhao · [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../2610.11291-semi-opd/README.md)（`semi-opd`）：初始学生先一次性生成响应，教师评分缓存后固定复用。每次优化仍重新计算当前学生概率和 token 优势，不能把旧优势也一起缓存。
 
 ## University of California, Berkeley
 

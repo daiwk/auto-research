@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:hippocam",
+  "evaluation_protocol": {
+    "seeds": [
+      42
+    ],
+    "claim_policy": "L1 real-checkpoint mechanism execution only; not capability improvement",
+    "tier": "L1",
+    "formal_comparison": false
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.12124-hippocam/metrics/checkpoint-a100-seed42.json",
+    "commit": "a3865213a173fdf72974a81dbe55bacd76473214",
+    "dataset_fingerprint": "sha256:17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465"
+  },
+  "method": "hippocam",
+  "seed": 42,
+  "diagnostic_only": true,
+  "evaluation_tier": "L1",
+  "accelerator": "NVIDIA A100",
+  "checkpoint": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct"
+  },
+  "metrics": {
+    "autonomous_archive_nodes": 0,
+    "controlled_archive_nodes": 3,
+    "controlled_tokens_before": 3248,
+    "controlled_tokens_after": 24
+  }
+}

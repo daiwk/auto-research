@@ -4,6 +4,11 @@
 
 ## 2026
 
+- 2026-10 · [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](../2610.11659-dial-opd/README.md)（`dial-opd`）：用概率的对数均值调节教师—学生对数差异，降低两者都不认可的低概率 token 的监督优先级。按每条响应选取高分位置，未选位置仍保留为上下文。
+- 2026-10 · [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](../2610.11854-grpo-dropout/README.md)（`grpo-dropout`）：从同一 prompt 的 GRPO 响应组中筛除部分高概率、正优势响应，并用旧策略概率重新中心化保留响应的优势。不是随机 dropout，也不改变生成预算。
+- 2026-10 · [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](../2610.11989-meta-opd/README.md)（`meta-opd`）：轻量权重网络根据师生预测学习 token 监督权重。它通过一次可微虚拟学生更新后的参考解损失获得元梯度，再使用新权重执行真实学生更新。
+- 2026-10 · [Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards](../2610.11519-residual-advantage/README.md)（`residual-advantage`）：把全词表师生概率残差变成相对学生的有界局部优势，再逐响应中心化，与验证器优势相加。Co-RA 在同一已评分学生批次上更新教师 LoRA，下一轮才使用新教师。
+- 2026-10 · [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../2610.11291-semi-opd/README.md)（`semi-opd`）：初始学生先一次性生成响应，教师评分缓存后固定复用。每次优化仍重新计算当前学生概率和 token 优势，不能把旧优势也一起缓存。
 - 2026-10 · [Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT](../2610.03361-follow-the-winners/README.md)（`follow-the-winners`）：在有状态工具环境里，为同一提示重复生成一组等价 rollout 往往很贵；而 PPO 的 critic 又占用额外模型资源。FTW 不计算 value，也不要求 GRPO 式同题多轨迹。
 - 2026-10 · [LESSER: Post-Training Data Selection with Output-Layer Gradients](../2610.03702-lesser/README.md)（`lesser`）：现有面向目标任务的数据选择常计算每个候选样本和少量目标任务 query 的全参数梯度，再按相似性选取训练子集；对大模型逐样本反传代价很高。LESSER 只替换**特征**：从一次前向得到的最后隐藏状态和词表概率解析地计算输出层梯度。
 - 2026-10 · [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](../2610.01896-gmc-grpo/README.md)（`gmc-grpo`）：异步 rollout 的重要性比在 group 级统一缩放，使总质量受帽约束；在共同二阶矩保证下减少 trajectory-wise clipping 的持续偏差。

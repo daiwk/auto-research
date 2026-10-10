@@ -11,7 +11,9 @@
 | 本地 Adapter | `jev-capability`（评测入口，不是新的模型训练算法） |
 | 本地复现代码 | `src/auto_research/system_one/capability_bench.py`、`capability_data.py`；入口 `scripts/run_jev_capability.py` |
 
-## 主要方法与原文结论
+## 原始论文总结
+
+### 背景与主要改动
 
 论文用有限候选选择评估 Jev 的知识、推理和多语言能力。每题只提交问题与候选，运行一次；数学任务表现弱于知识任务。原文中的供应商分数与作者实测并非统一提示协议，本地实现因此分别记录，不混成可比排名。本文是评测研究，不提供新架构或训练目标。
 

@@ -1,0 +1,20 @@
+{
+  "domain": "agent-research",
+  "key": "mass",
+  "title": "Recursive Self-Improvement through Multi-Agent Self-Supervision",
+  "paper_url": "https://arxiv.org/abs/2610.12176",
+  "detail_path": "agent-research/2610.12176-mass/README.md",
+  "topic": [
+    "递归自改进",
+    "工作流搜索",
+    "多智能体自监督"
+  ],
+  "first_author": "Hyunin Lee",
+  "first_author_affiliation": "UC Berkeley",
+  "published": "2026-10-08",
+  "priority": "P0",
+  "code": "https://github.com/SakanaAI/mass",
+  "adapter": "mass",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct10-mass-a100.json"
+}
