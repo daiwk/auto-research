@@ -1,0 +1,1358 @@
+{
+  "schema_version": 1,
+  "archived_on": "2026-10-10",
+  "blocking": false,
+  "retry_policy": "on-new-evidence-only",
+  "record_count": 32,
+  "entries": [
+    {
+      "url": "https://research.google/pubs/agentic-trend-to-knowledge-a-methodology-for-automating-case-deflection-through-proactive-content-surfacing-in-enterprise-employee-support/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "趋势发现与 RAG 查询联动具有 Agent 研究相关性，但官方 Download 指向另一标题的防御性公开；尚不能确认为同一原始论文。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/agentic-trend-to-knowledge-a-methodology-for-automating-case-deflection-through-proactive-content-surfacing-in-enterprise-employee-support/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://www.tdcommons.org/dpubs_series/9145/",
+          "result": "readable_html"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "official Download TDCommons 9145",
+          "result": "返回相近方法但不同标题；记录日期 2026-01-08，身份仍不确定"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Agentic Trend-to-Knowledge: A Methodology for Automating Case Deflection through Proactive Content Surfacing in Enterprise Employee Support",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/the-glossary-grounded-universal-queue-an-architecture-for-enabling-follow-the-sun-support-in-global-people-operations/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "术语表增强的企业翻译流程相关于 LLM 应用；Download 的标题与官方条目不同，未将相近主题自动当作同一论文。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/the-glossary-grounded-universal-queue-an-architecture-for-enabling-follow-the-sun-support-in-global-people-operations/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://www.tdcommons.org/dpubs_series/9141/",
+          "result": "readable_html"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "official Download TDCommons 9141",
+          "result": "返回 Glossary-Augmented Generative AI for Enterprise Translation，日期 2026-01-07，原标题对应关系未核实"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "The Glossary-Grounded Universal Queue: An Architecture for Enabling Follow-the-Sun Support in Global People Operations",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/self-evolving-systems-moving-beyond-deterministic-interfaces-to-adaptive-generative-interfaces/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "自适应生成界面的运行时特性扩展涉及自演化；需分清UI可用性与算法能力证据。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/self-evolving-systems-moving-beyond-deterministic-interfaces-to-adaptive-generative-interfaces/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1034946.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "Self-Evolving Systems: Moving Beyond Deterministic Interfaces to Adaptive Generative Interfaces publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Self-Evolving Systems: Moving Beyond Deterministic Interfaces to Adaptive Generative Interfaces",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/xprof-an-open-scalable-and-extensible-profiling-system-for-the-modern-ml-stack/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "XProf全栈ML性能分析适合训练/evolve基础设施候选，不等同新模型算法。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/xprof-an-open-scalable-and-extensible-profiling-system-for-the-modern-ml-stack/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1039087.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "XProf: An Open, Scalable and Extensible Profiling System for the Modern ML Stack publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "XProf: An Open, Scalable and Extensible Profiling System for the Modern ML Stack",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "多 Agent prompt hardening 与残余风险相关；官方详情无 Download，标题检索仅确认该详情，首发日期/公共正文仍未解。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+          "result": "no_download_link_in_cached_detail"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "Securing Multi-Agent Systems: An Empirical Analysis of Security  Prompt Hardening and Residual Risks",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得出版方首发日期或可核对的 arXiv 身份/官方公开版本；随后判断窗口归属并补全文，不视为已审通过",
+      "organization": "Google",
+      "title": "Securing Multi-Agent Systems: An Empirical Analysis of Security  Prompt Hardening and Residual Risks",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/the-synthetic-gap-automating-forensic-investigation-of-ai-slop-with-the-scaled-abuse-forensics-examiner-safe/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "SAFE多Agent合成媒体取证涉及内容审核；必须另审生产证据，调查时间下降不自动满足线上A/B门槛。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/the-synthetic-gap-automating-forensic-investigation-of-ai-slop-with-the-scaled-abuse-forensics-examiner-safe/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1039292.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "The Synthetic Gap: Automating Forensic Investigation of \"AI Slop\" with the Scaled Abuse Forensics Examiner (SAFE) publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "The Synthetic Gap: Automating Forensic Investigation of \"AI Slop\" with the Scaled Abuse Forensics Examiner (SAFE)",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/geo-contextual-ai-concierge-minimizing-internal-support-friction-through-proactive-knowledge-synthesis/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "地理上下文 SENTINEL/RAG Concierge 与 Agent 范围相关；官方 PDF 不可获取，未找到独立身份或首发日期。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/geo-contextual-ai-concierge-minimizing-internal-support-friction-through-proactive-knowledge-synthesis/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1041210.pdf",
+          "result": "failed",
+          "detail": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "Geo-Contextual AI Concierge: Minimizing Internal Support Friction Through Proactive Knowledge Synthesis",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得出版方首发日期或可核对的 arXiv 身份/官方公开版本；随后判断窗口归属并补全文，不视为已审通过",
+      "organization": "Google",
+      "title": "Geo-Contextual AI Concierge: Minimizing Internal Support Friction Through Proactive Knowledge Synthesis",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/whats-on-my-network-using-large-language-models-to-identify-real-world-iot-devices-at-scale/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "对 LLaMA 做课程式设备识别微调，相关于 LLM 应用；未找到可确认首次日期和公开实现身份的主来源。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/whats-on-my-network-using-large-language-models-to-identify-real-world-iot-devices-at-scale/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://research.google/pubs/whats-on-my-network-using-large-language-models-to-identify-real-world-iot-devices-at-scale/",
+          "result": "no_download_link"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "Google title + IoT device identification + arxiv",
+          "result": "只找到 Google 及二级材料，未确认原稿日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "What’s on My Network? Using Large Language Models to Identify Real-World IoT Devices at Scale",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/airs-scaling-live-inference-in-resource-constrained-environments/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Google搜索autorater TPU资源调度/服务基础设施相关；不能把内部服务规模视作搜广推线上效果证据。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/airs-scaling-live-inference-in-resource-constrained-environments/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://openreview.net/forum?id=g1RWik4Gy1",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "AIRS: Scaling Live Inference in Resource Constrained Environments publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "AIRS: Scaling Live Inference in Resource Constrained Environments",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/impact-of-user-tonalities-on-coding-ai-model-performance-and-behavior/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "研究用户语气对编码 LLM 正确性的影响，相关于 Agent 诊断评测；出版方下载被挑战页阻挡，准确日期仍未确认。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/impact-of-user-tonalities-on-coding-ai-model-performance-and-behavior/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://link.springer.com/content/pdf/10.1007/s44163-026-01863-3_reference.pdf",
+          "result": "challenge page, not paper full text",
+          "fulltext_verified": false
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "Google title + Springer s44163-026-01863-3",
+          "result": "出版链接存在，但下载内容为验证页"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Impact of User Tonalities on Coding AI Model Performance and Behavior",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "FabScore 通过结果抽取、静态分析、执行和判决审计科研 Agent；OpenReview 论坛/PDF 验证挑战及 ICML 页面错误导致日期未核实。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+          "result": "no_download_link_in_cached_detail"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        },
+        {
+          "kind": "openreview_forum",
+          "url": "https://openreview.net/forum?id=6gYWcYQcWM",
+          "result": "browser_verification_challenge"
+        },
+        {
+          "kind": "openreview_pdf",
+          "url": "https://openreview.net/attachment?id=6gYWcYQcWM&name=pdf",
+          "result": "browser_verification_challenge"
+        },
+        {
+          "kind": "icml_poster",
+          "url": "https://icml.cc/virtual/2026/73595",
+          "result": "internal_error"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得出版方首发日期或可核对的 arXiv 身份/官方公开版本；随后判断窗口归属并补全文，不视为已审通过",
+      "organization": "Google",
+      "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/mining-informally-romanized-seed-corpora-without-romanizations/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "跨语言自然罗马化语料挖掘，适合基础模型数据管线历史候选。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/mining-informally-romanized-seed-corpora-without-romanizations/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "http://www.lrec-conf.org/proceedings/lrec2026/pdf/2026.lrec2026-1.234.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "Mining Naturally Romanized Seed Corpora without Romanizations publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Mining Naturally Romanized Seed Corpora without Romanizations",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-2/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "S-CTS 以账户关系聚类和 LoRA/APO 多模态语义判别防协调内容滥用；已读官方四页正文，§V 为 live-stream/六个月基线运营评估而非随机 A/B，首发日期未知且线上门槛未判通过。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-2/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-2/",
+          "result": "no_download_link_in_cached_detail"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        },
+        {
+          "kind": "official_pdf_fallback",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1039291.pdf",
+          "result": "4 页全文已读，无出版日期；§III–IV 架构、§V运营结果、Table I分类指标"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得出版方首发日期或可核对的 arXiv 身份/官方公开版本；随后判断窗口归属并补全文，不视为已审通过",
+      "organization": "Google",
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-3/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "以合成簇、LoRA 与自动提示优化检测文本垃圾内容，相关于审核风控；找到官方原稿但首发日期未能确认，线上门槛不以摘要替代。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-3/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-3/",
+          "result": "no_download_link"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "Google S-CTS spam synthetic clusters title",
+          "result": "找到官方 PDF 1039291；没有可信首发日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-4/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "LoRA/APO+账户关联的合成媒体审核系统；正文与首次日期待核，不凭摘要运营统计通过工业门槛。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-4/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "download_link_check",
+          "url": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-4/",
+          "result": "no Download anchor on cached official detail"
+        },
+        {
+          "type": "web_search",
+          "query": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System publication arxiv",
+          "result": "no exact first-publication date established"
+        },
+        {
+          "type": "official_pdf_search",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1039291.pdf",
+          "result": "Official PDF identified and method excerpt inspected; exact public-release date not established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/meridian-geox-an-open-source-framework-for-precision-and-efficiency-in-geo-experiments/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "GeoX因果广告实验开源基础设施，可作历史评测候选，不是已满足线上门槛的排序模型。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/meridian-geox-an-open-source-framework-for-precision-and-efficiency-in-geo-experiments/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1043733.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "Meridian GeoX: An Open-Source Framework for Precision and Efficiency in Geo Experiments publication arxiv",
+          "result": "primary-source identity/date found"
+        },
+        {
+          "type": "primary_identity_date",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1043733.pdf",
+          "result": "Manuscript first-page date, not proven earliest public release"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Meridian GeoX: An Open-Source Framework for Precision and Efficiency in Geo Experiments",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/lessons-learned-from-building-an-agent-to-convert-the-r-forecast-package-into-a-jax-api/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "将预测代码从 R 迁移至 JAX 的多模型技能流程相关于编码 Agent/RSI；未找到首发日期或可验证开放库，摘要开源表述不算核实。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/lessons-learned-from-building-an-agent-to-convert-the-r-forecast-package-into-a-jax-api/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://research.google/pubs/lessons-learned-from-building-an-agent-to-convert-the-r-forecast-package-into-a-jax-api/",
+          "result": "no_download_link"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "Forecast R JAX Google agent skills migration",
+          "result": "官方条目之外未定位带首发日期的原稿"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Lessons learned from building an agent to convert the R Forecast Package into a JAX api",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/a-prospective-clinical-feasibility-study-of-a-conversational-diagnostic-ai-in-an-ambulatory-primary-care-clinic/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "AMIE 的前瞻临床可行性验证相关于 Agent 应用；未核实主来源日期，次级索引提示 10 月 8 日，不能纳入截至 10 月 7 日或伪作历史。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/a-prospective-clinical-feasibility-study-of-a-conversational-diagnostic-ai-in-an-ambulatory-primary-care-clinic/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)01535-7/fulltext",
+          "result": "unavailable",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "AMIE prospective study DOI 10.1016/S0140-6736(26)01535-7",
+          "result": "次级索引提示 2026-10-08；Lancet/PubMed 主入口不可读，Europe PMC 精确 ID 查询无记录"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Conversational diagnostic artificial intelligence in ambulatory primary care: a prospective feasibility study",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/a-declarative-multi-agent-framework-for-reducing-on-call-operational-burden/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "声明式多 Agent 约束生产值班诊断并调用可观测工具；官方 PDF 可读但缺首发日，生产耗时改善不等于公开可复现能力验证。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/a-declarative-multi-agent-framework-for-reducing-on-call-operational-burden/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1046157.pdf",
+          "result": "readable_pdf"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "declarative multi agent on call Google arxiv",
+          "result": "官方 PDF 无日期，检索未定位 arXiv 原稿"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "A Declarative Multi-Agent Framework for Reducing On-Call Operational Burden",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/qbat-model-based-query-budget-autotuner-for-clustering-based-approximate-nearest-neighbor-search/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "QBAT 用查询特征预测 ANN 搜索预算，并比较 GBDT 与 AlphaEvolve 公式，相关于召回和 RSI；身份和 DOI 已确认，准确首发日尚未定位。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/qbat-model-based-query-budget-autotuner-for-clustering-based-approximate-nearest-neighbor-search/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://www.vldb.org/pvldb/vol19/p3091-chockchowwat.pdf",
+          "result": "readable_pdf"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "QBAT Chockchowwat vldb arxiv",
+          "result": "确认 DOI 10.14778/3836663.3836675 与 VLDB 官方会议程序，未确认首发日"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "QBAT: Model-based Query Budget Autotuner for Clustering-based Approximate Nearest Neighbor Search",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/holistic-latent-diffusion-acceleration-unifying-spatial-temporal-and-architectural-efficiency/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "空间tokenizer、学生骨干及时间轨迹协同蒸馏，适合多模态生成效率候选。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/holistic-latent-diffusion-acceleration-unifying-spatial-temporal-and-architectural-efficiency/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://openreview.net/pdf?id=0tfUyAW8Vi",
+          "result": "failed",
+          "notes": "HTTP Error 403: Forbidden"
+        },
+        {
+          "type": "web_search",
+          "query": "Holistic Latent Diffusion Acceleration: Unifying Spatial, Temporal, and Architectural Efficiency publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Holistic Latent Diffusion Acceleration: Unifying Spatial, Temporal, and Architectural Efficiency",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/generative-manifold-distillation-aligning-restoration-trajectories-with-natural-image-prior/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "GMD 借冻结生成先验蒸馏无配对图像恢复，属于多模态；官方出版入口存在但未能读取准确首发日。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/generative-manifold-distillation-aligning-restoration-trajectories-with-natural-image-prior/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://www.springerprofessional.de/en/generative-manifold-distillation-aligning-restoration-trajectori/53700332",
+          "result": "challenge page, not paper full text",
+          "fulltext_verified": false
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "Generating and Distilling with diffusion prior image restoration GMD",
+          "result": "找到 ECCV/Springer 入口；挑战页且未定位原始日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Generative Manifold Distillation: Aligning Restoration Trajectories with Natural Image Prior",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/cold-start-latency-of-quantized-small-language-models-on-serverless-cpu-infrastructure/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "量化小语言模型CPU冷启动/质量权衡基准，适合基础模型推理评测候选。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/cold-start-latency-of-quantized-small-language-models-on-serverless-cpu-infrastructure/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1046363.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "Cold Start Latency of Quantized Small Language Models on Serverless CPU Infrastructure publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Cold Start Latency of Quantized Small Language Models on Serverless CPU Infrastructure",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/a-unified-protocol-architecture-for-agentic-interoperability-quantitative-evaluation-of-standardized-context-exchange-in-the-n-m-economy/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "MCP式协议互操作的模拟量化比较，属于Agent系统候选但需核验评估定义与资源。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/a-unified-protocol-architecture-for-agentic-interoperability-quantitative-evaluation-of-standardized-context-exchange-in-the-n-m-economy/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1046056.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "A Unified Protocol Architecture for Agentic Interoperability: Quantitative Evaluation of Standardized Context Exchange in the N + M Economy publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "A Unified Protocol Architecture for Agentic Interoperability: Quantitative Evaluation of Standardized Context Exchange in the N + M Economy",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/structural-and-programmatic-prompting-in-financial-artificial-intelligence/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "结构化提示与程序化金融推理相关于 Agent 推理；只有官方摘要，未定位原稿身份、日期及公开评测载体。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/structural-and-programmatic-prompting-in-financial-artificial-intelligence/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://research.google/pubs/structural-and-programmatic-prompting-in-financial-artificial-intelligence/",
+          "result": "no_download_link"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "structural programmatic financial prompting Google",
+          "result": "未定位匹配的原稿或日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Structural and Programmatic Prompting in Financial Artificial Intelligence",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/pipe-personalized-image-generation-via-preference-encoding/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "PIPE 学习用户偏好嵌入并通过 IP-Adapter 与 Diffusion-DPO 个性化生成，属于多模态后训练；OpenReview 被验证页阻挡，不能把会议年份补成首发日。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/pipe-personalized-image-generation-via-preference-encoding/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://openreview.net/pdf?id=G5GipElVVe",
+          "result": "unavailable",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "PIPE Personalized Image generation Preference Encoding OpenReview",
+          "result": "确认 OpenReview G5GipElVVe；PDF/forum 均受验证页阻挡"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "PIPE: Personalized Image-generation via Preference Encoding",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+      "exception_type": "document_unavailable",
+      "reason": "官网仅题名和研究区，缺摘要/下载；可能涉及生成式形式验证，不能直接以硬件题材排除。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "download_link_check",
+          "url": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+          "result": "no Download anchor on cached official detail"
+        },
+        {
+          "type": "web_search",
+          "query": "AI Driven Verification Architectures - Scaling Formal Sign-off of High Bandwidth Data Crossbars via Generative AI and Required-Proof-Depth (RPD) Synthesis publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "AI Driven Verification Architectures - Scaling Formal Sign-off of High Bandwidth Data Crossbars via Generative AI and Required-Proof-Depth (RPD) Synthesis",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/beyond-real-or-fake-a-dual-channel-authenticity-and-reasoning-protocol-for-photographic-assessment/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "双通道相机/语义证据加冻结VLM迭代，适合多模态内容理解候选；不凭离线F1通过工业上线门槛。已核官方入口和本地标题匹配，但首次日期/可识别原文仍未充分确认；透明排除本次通过计数，保留复查。",
+      "attempts": [
+        {
+          "type": "official_detail",
+          "url": "https://research.google/pubs/beyond-real-or-fake-a-dual-channel-authenticity-and-reasoning-protocol-for-photographic-assessment/",
+          "result": "cached detail title and available abstract read; scope triaged"
+        },
+        {
+          "type": "repository_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": "no exact normalized-title match",
+          "matches": []
+        },
+        {
+          "type": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1046763.pdf",
+          "result": "retrieved",
+          "notes": "Official target retrieved; body/metadata checked for identity and publication date. PDF creation timestamps and cited-reference IDs are not publication evidence."
+        },
+        {
+          "type": "web_search",
+          "query": "Beyond Real or Fake: A Dual-Channel Authenticity and Reasoning Protocol for Photographic Assessment publication arxiv",
+          "result": "no exact first-publication date established"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "官方补齐精确公开日期/可访问全文或arXiv身份后重新核验并正文审查。",
+      "organization": "Google",
+      "title": "Beyond Real or Fake: A Dual-Channel Authenticity and Reasoning Protocol for Photographic Assessment",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/dynamic-learning-and-optimal-advertising-mechanism-for-llm-platforms/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "以随机控制描述动态 LLM 广告机制，相关于广告优化；尚未定位原稿与首发日，不能据摘要认定有线上量化实验。",
+      "attempts": [
+        {
+          "action": "official_detail_scope_read",
+          "url": "https://research.google/pubs/dynamic-learning-and-optimal-advertising-mechanism-for-llm-platforms/",
+          "result": "cached official abstract read; no abstract retained in output"
+        },
+        {
+          "action": "official_download",
+          "url": "https://research.google/pubs/dynamic-learning-and-optimal-advertising-mechanism-for-llm-platforms/",
+          "result": "no_download_link"
+        },
+        {
+          "action": "manifest_and_frozen_title_match",
+          "result": 0
+        },
+        {
+          "action": "frozen_register_exact_normalized_title_match",
+          "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+          "result": false
+        },
+        {
+          "action": "official_or_arxiv_identity_search",
+          "query": "optimal dynamic LLM advertising stochastic control Google arxiv",
+          "result": "未定位可核验身份与日期的公开原稿"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得主来源的原稿身份和准确首发日；若在 2026-10-01 至 10-07 则补全文、开源与评测审查，不能直接计为通过。",
+      "organization": "Google",
+      "title": "Dynamic Learning and Optimal Advertising Mechanism for LLM Platforms",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/from-unfinished-to-done-bridging-the-mde-implementation-gap-with-constrained-llms/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Agentic Gap Filling 用受保护 TODO、评审 jury 与独立测试 Agent 完成 MDE；ACM DOI 403、无 arXiv 身份命中，首发日期未知。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/from-unfinished-to-done-bridging-the-mde-implementation-gap-with-constrained-llms/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://dl.acm.org/doi/10.1145/3822455.3830316",
+          "result": "failed",
+          "detail": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "From Unfinished to Done: Bridging the MDE Implementation Gap with Constrained LLMs",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得出版方首发日期或可核对的 arXiv 身份/官方公开版本；随后判断窗口归属并补全文，不视为已审通过",
+      "organization": "Google",
+      "title": "From Unfinished to Done: Bridging the MDE Implementation Gap with Constrained LLMs",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://research.google/pubs/contextfidelity-bench-a-three-paradigm-framework-for-evaluating-multi-turn-hallucination-behavior-in-language-models/",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "多轮上下文忠实度/幻觉 benchmark 相关；官方 PDF 不可获取，标题检索未核定唯一预印本和首发日期。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/contextfidelity-bench-a-three-paradigm-framework-for-evaluating-multi-turn-hallucination-behavior-in-language-models/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/1048581.pdf",
+          "result": "failed",
+          "detail": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "ContextFidelity-Bench: A Three-Paradigm Framework for Evaluating Multi-Turn Hallucination Behavior in Language Models",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "获得出版方首发日期或可核对的 arXiv 身份/官方公开版本；随后判断窗口归属并补全文，不视为已审通过",
+      "organization": "Google",
+      "title": "ContextFidelity-Bench: A Three-Paradigm Framework for Evaluating Multi-Turn Hallucination Behavior in Language Models",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/google-source-review.json"
+    },
+    {
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "exception_type": "pagination_unproven",
+      "reason": "前六页逐条日期已核对，第四至第六页最新日期均在2025年；目录仍夹杂更旧记录且未声明总数，不能从分页或旧日期推导全站穷尽。用户允许此有限来源例外不阻碍有界审查水位。",
+      "attempts": [
+        "原入口 global_search 已失效，改用官方 results 入口",
+        "重新读取六个不同页码并保存各页SHA256/24条记录",
+        "确认144条唯一URL均有官方日期，窗口内6条已作研究范围审查",
+        "对照独立四轨arXiv日期/月份召回与官方既有审查"
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "目录出现新的窗口内记录、可验证的日期排序/总数/日期过滤、或独立来源发现缺失候选时重开。",
+      "organization": "Meta",
+      "title": "官方目录分页覆盖",
+      "status": "archived",
+      "blocking": false,
+      "archived_on": "2026-10-10",
+      "source_artifact": "research-audits/oct07-source-closure/meta-source-review.json"
+    }
+  ]
+}
