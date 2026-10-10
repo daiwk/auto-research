@@ -9,7 +9,19 @@
   "checkpoint": {"model_id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct", "revision": "067788b187b95ebe7b2e040b3e4299e342e5b8fd"},
   "result": "passed",
   "diagnostic_only": true,
+  "executed_source_sha256": {
+    "src/auto_research/multimodal/vimod.py": "dccb2b6b78ca29664be451f511915dcf46efa7b301e3513d402e209f044974e7",
+    "src/auto_research/multimodal/vimod_checkpoint.py": "cccfac0e9f74e022f4e1269cfe8580ebfec4e4ac97dc0868097a06b2d9029bd5",
+    "scripts/validate_vimod_cuda_runtime.py": "ecf1b715100e55d416b5b6cc0ae3532fbc4999d827f439c82a78a91709b4b0fb",
+    "scripts/run_vimod_checkpoint.py": "1179b1ff6bb3cefc501ecebc5f562558d7549fa4f5de9f61665e0665d94a8048"
+  },
+  "report_only_source_correction": {
+    "file": "scripts/run_vimod_checkpoint.py",
+    "committed_sha256": "e4b703712c731c379ff41e9cd2210f686ce52ff0d30018dc8a3bb21e2188faaf",
+    "change": "Only trace_trained and phase-specific limitations report fields were corrected after GPU execution; training, inference, loss and measured results are unchanged",
+    "verification": "Read-only remote SHA256 comparison and full script diff on 2026-10-10"
+  },
   "metrics": {"seed":42, "dart_loss": [13.731453895568848,13.702507972717285], "dart_parameter_delta":0.0043318369425833225, "set_loss":1.55464768409729, "set_gradient_norm":21.84091719653437, "set_parameter_delta":0.025861702859401703, "joint_loss":2.947087287902832, "joint_gradient_norm":56.39075869238261, "joint_parameter_delta":0.021422673016786575, "rl_loss":0.18062883615493774, "rl_gradient_norm":7.812768222410322, "rl_parameter_delta":0.02586148865520954, "rl_correctness_mean":0, "rl_fine_occupancy_mean":0.03990384563803673, "rl_autonomous_updates":1},
   "limitations": ["SmolVLM/Idefics3 backbone, not the paper's Qwen3-VL", "TRACE set/joint/RL exercise real VLM, policy and optimizer with explicitly synthetic auxiliary annotations", "All-failed verifier fixture checks online-teacher auxiliary gradient, not capability", "Official teacher annotations, full training and held-out benchmarks not validated"],
-  "provenance": {"commit":"74fbef849213e4c6b61a2a12eb634a516d6e8e3a", "artifact_path":"docs/gpu-validations/vimod-a100-20261010.json", "metrics_artifact":"docs/multimodal-models/2610.12060-vimod/metrics/cuda-runtime-seed42.json", "raw_predictions_committed":false, "checkpoint_committed":false}
+  "provenance": {"commit":"74fbef849213e4c6b61a2a12eb634a516d6e8e3a", "artifact_path":"docs/gpu-validations/vimod-a100-20261010.json", "metrics_artifact":"docs/multimodal-models/2610.12060-vimod/metrics/cuda-runtime-seed42.json", "raw_predictions_committed":false, "checkpoint_committed":false, "source_verification":"Remote CUDA model kernels and TRACE validation script match this commit by SHA256. run_vimod_checkpoint.py differs only in report.trace_trained and phase-specific limitations formatting; no training, inference or measured metric changes."}
 }

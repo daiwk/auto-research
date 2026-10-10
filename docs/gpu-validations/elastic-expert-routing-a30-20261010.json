@@ -9,6 +9,10 @@
   "checkpoint": {"model_id": "elastic-moe-random-initialization", "revision": "seeds:42,43,44", "source_commit": "74fbef849213e4c6b61a2a12eb634a516d6e8e3a"},
   "result": "passed",
   "diagnostic_only": true,
+  "executed_source_sha256": {
+    "src/auto_research/foundation_models/elastic_expert_routing.py": "9f035b40b2c4b9c29faccde6ea91c65c8d9d404eaa9b5f66051ed4bc04c8d60f",
+    "scripts/run_elastic_expert_lm.py": "d5b0090806ff40d8f2c4724ffa3e0c8a8777e8761e2a5c8c02fd34065b730fff"
+  },
   "metrics": {"seeds": [42,43,44], "steps_per_seed": 100, "fixed_validation_perplexity_mean": 24.561263686468357, "elastic_validation_perplexity_mean": 24.621026417005545, "realized_experts_mean": 3.0005403645833333, "inference_experts_per_token": 3, "elastic_parameter_delta_by_seed": [0.778810441493988,0.8058505654335022,0.7843250036239624]},
   "limitations": ["Small scratch language model mechanism diagnostic; not a reproduction of the paper's scale or quality gains", "Elastic validation perplexity did not improve over fixed-k in this run"],
   "provenance": {"commit": "74fbef849213e4c6b61a2a12eb634a516d6e8e3a", "artifact_path": "docs/gpu-validations/elastic-expert-routing-a30-20261010.json", "metrics_artifact": "docs/foundation-models/2610.11575-elastic-expert-routing/metrics/scratch-lm-seeds42-44.json", "raw_predictions_committed": false, "checkpoint_committed": false}
