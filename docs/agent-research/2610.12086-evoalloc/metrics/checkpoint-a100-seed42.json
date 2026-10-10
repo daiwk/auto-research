@@ -1,5 +1,6 @@
 {
   "schema_version": 2,
+  "dataset": "Circle26 public geometry contract",
   "manifest_ref": "agent-research:evoalloc",
   "evaluation_protocol": {
     "seeds": [

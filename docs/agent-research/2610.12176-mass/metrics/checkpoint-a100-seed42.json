@@ -1,5 +1,6 @@
 {
   "schema_version": 2,
+  "dataset": "openai/grade-school-math (one public training task)",
   "manifest_ref": "agent-research:mass",
   "evaluation_protocol": {
     "seeds": [

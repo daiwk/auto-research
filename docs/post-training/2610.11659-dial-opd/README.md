@@ -10,7 +10,7 @@
 | 公司 / 机构 | Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University（第一作者署名） |
 | 首次公开日期 | 2026-10-08（arXiv v1） |
 | 原作者代码 | [已开源](https://github.com/EIT-NLP/DIAL-OPD) |
-| 本地 Adapter / 方法 | `dial-opd` |
+| 本地 adapter / 方法（Adapter） | `dial-opd` |
 | 本地复现代码 | [oct10_objectives.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/post_training/oct10_objectives.py)、[oct10_checkpoint.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/post_training/oct10_checkpoint.py) |
 
 ## 原始论文总结

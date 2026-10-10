@@ -1,5 +1,6 @@
 {
   "schema_version": 2,
+  "dataset": "auto-research bounded-calculator-v1",
   "manifest_ref": "agent-research:race",
   "evaluation_protocol": {
     "seeds": [

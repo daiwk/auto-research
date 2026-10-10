@@ -10,7 +10,7 @@
 | 公司 / 机构 | UCLA / NVIDIA（论文注明实习）（第一作者署名） |
 | 首次公开日期 | 2026-10-08（arXiv v1） |
 | 原作者代码 | 截至 2026-10-10 未发现 / 未发布原作者代码 |
-| 本地 Adapter / 方法 | `semi-opd` |
+| 本地 adapter / 方法（Adapter） | `semi-opd` |
 | 本地复现代码 | [oct10_objectives.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/post_training/oct10_objectives.py)、[oct10_checkpoint.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/post_training/oct10_checkpoint.py) |
 
 ## 原始论文总结

@@ -10,7 +10,7 @@
 | 公司 / 机构 | Harbin Engineering University / Tencent / Harbin Institute of Technology（第一作者署名） |
 | 首次公开日期 | 2026-10-08（arXiv v1） |
 | 原作者代码 | 截至 2026-10-10 未发现 / 未发布原作者代码 |
-| 本地 Adapter / 方法 | `residual-advantage` |
+| 本地 adapter / 方法（Adapter） | `residual-advantage` |
 | 本地复现代码 | [oct10_objectives.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/post_training/oct10_objectives.py)、[oct10_checkpoint.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/post_training/oct10_checkpoint.py) |
 
 ## 原始论文总结

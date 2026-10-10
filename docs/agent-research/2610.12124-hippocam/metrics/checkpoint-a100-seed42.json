@@ -1,5 +1,6 @@
 {
   "schema_version": 2,
+  "dataset": "openai/grade-school-math (controlled dialogue archive diagnostic)",
   "manifest_ref": "agent-research:hippocam",
   "evaluation_protocol": {
     "seeds": [

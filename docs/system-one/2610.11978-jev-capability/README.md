@@ -28,6 +28,14 @@ flowchart LR
     E --> C[任务 / 语言分组与缺失覆盖]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Jev 与三档 LLM 在 13 个 benchmark 上的原论文结果对比](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.11978v1#page=2)
+
+> **原论文 Figure 1（关键图）**：黑线代表论文中的闭源 Jev；各点代表不同 LLM 的成绩。实心点是作者实测，空心点是公开报告分数，二者提示与协议可能不同，不能直接当统一排名。该图不是本地开放 NanoJev 的结果。图片来自[原论文](https://arxiv.org/abs/2610.11978)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ## 数据与评测契约
 
 支持 MMLU-Pro、MMLU-Redux、MMLU、GPQA Diamond、C-Eval、HellaSwag、WinoGrande、TruthfulQA MC1、ARC-Challenge、MathQA、AQuA-RAT、MMLU-ProX 和 MMMLU。
