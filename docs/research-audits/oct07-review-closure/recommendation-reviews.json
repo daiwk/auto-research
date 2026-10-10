@@ -1,0 +1,805 @@
+{
+  "track": "recommendation",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "candidate_count": 39,
+  "candidates": [
+    {
+      "id": "2610.08407",
+      "title": "Seeing the Context: Enhancing Recommender Systems with Image-Derived Contextual Signals",
+      "published": "2026-10-06T14:15:48Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "ICE-Fuse 在 TripAdvisor 图文上下文上做 RMSE/消融；未提供线上分流或部署实验，不满足工业搜广推准入。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08407",
+          "location": "§4.1–4.3 Tables 2–3; §5"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.08407",
+        "url": "https://arxiv.org/html/2610.08407v1",
+        "sha256": "2223d22274d906bfa43f36d184feed98ec023a0af2ebe0b83ce2c0f97262ed78",
+        "status": "downloaded",
+        "characters": 28755,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.08245",
+      "title": "Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation",
+      "published": "2026-10-06T12:26:50Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "CPFR 使用 MovieLens 100K/1M、Amazon Office 的贡献公平性离线实验；公平损失有效性与工业线上证据是两回事。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08245",
+          "location": "§5.1.1; §5.2 Tables 2–4; Conclusion"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.08245",
+        "url": "https://arxiv.org/html/2610.08245v1",
+        "sha256": "7e335212b89a2d1f76a3f12acb7ff18ce83938de9ca5b47ee247241e87eb78db",
+        "status": "downloaded",
+        "characters": 62436,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.08232",
+      "title": "Behavior-Mining, Generative Conversations, and Collaborative Advisory: the Future of Travel and Tourism Recommender Systems",
+      "published": "2026-10-06T12:18:15Z",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "旅游推荐的研究展望/立场综述，提出未来 advisory 方向而非可复现的新算法与实验。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08232",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.08159",
+      "title": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+      "published": "2026-10-06T11:11:43Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "COMET-QN 是印度语言机器翻译评价与文字系统偏差，不是工业推荐；转基础模型审查，非丢弃。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08159",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.08136",
+      "title": "Adapting Generative Recommenders for Multi-Turn Interaction",
+      "published": "2026-10-06T10:51:53Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "INTEGER 用 Amazon Beauty/Toys 与 Tencent Hy3 生成多轮对话，报告离线命中/NDCG/对话质量；未提供生产线上对照。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08136",
+          "location": "§4.1; §4 experimental results"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.08136",
+        "url": "https://arxiv.org/html/2610.08136v1",
+        "sha256": "b957e4e1120ef239f7d21382b0334dc6556a7e6617268a010f1bc279107c5e32",
+        "status": "downloaded",
+        "characters": 48142,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.08129",
+      "title": "Do LLMs Act on What They Know? From Partner Representations to Cooperative Actions",
+      "published": "2026-10-06T10:44:55Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "Hanabi 合作约定是 Agent 协同研究，转 Agent 审查，不作为工业搜广推收录。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08129",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.07810",
+      "title": "SIFT: Search Intent-to-Filter Transformer for Multi-Task Personalized Filter Ranking at Airbnb",
+      "published": "2026-10-06T06:05:45Z",
+      "repository_status": "new",
+      "decision": "accepted",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "SIFT 的随机身份分流与酒店扩展线上证据满足门槛。过滤器点击人数 +20%，普通 booking +0.03% 不显著；酒店扩展 marketplace uncancelled booking +0.76%。原始旅程/过滤器/容量标签未公开，接受待实现不等于已实现。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07810",
+          "location": "PDF p7 §8.2 Table 4; p8 Table 6"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.07810",
+        "url": "https://arxiv.org/html/2610.07810v1",
+        "sha256": "c0abba1e606ad4ecab6b86acc1087721b03c72653f4cf096f611e2ff7bd43249",
+        "status": "downloaded",
+        "characters": 50530,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.07761",
+      "title": "Contrastive Learning for Aspect Representation towards Explainable Recommendation",
+      "published": "2026-10-06T04:55:55Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "CLARER 在 TripAdvisor HK、Yelp 2019、Amazon Movies/TV 做 RMSE/MAE/BLEU/ROUGE 离线对照；未给线上 A/B 或部署结果。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07761",
+          "location": "§IV-A; Tables III–V"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.07761",
+        "url": "https://arxiv.org/html/2610.07761v1",
+        "sha256": "28f792df015c620cfecdb34834c80cb9690224c8df4694f8e1940562b1b9f120",
+        "status": "downloaded",
+        "characters": 51187,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.07402",
+      "title": "Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment",
+      "published": "2026-10-05T21:15:13Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "FLASH 在四类 Amazon 数据上做 Recall/NDCG 与 early stopping；作者开源不替代工业线上证据。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07402",
+          "location": "§3.1–3.2; Conclusion"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.07402",
+        "url": "https://arxiv.org/html/2610.07402v1",
+        "sha256": "de4ba5e99fdfb2971c9144fcd255a61c6ad06f014b200b6e908c98ed2504033d",
+        "status": "downloaded",
+        "characters": 69341,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.06751",
+      "title": "MatrixFormer: A Foundation Model for Matrix Completion",
+      "published": "2026-10-05T17:28:38Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "MatrixFormer 属于通用 Transformer 架构，已转基础模型全文审查。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06751",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.06703",
+      "title": "Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs",
+      "published": "2026-10-05T17:01:18Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "SAGA-CDR 使用 Amazon 2023 图书到音乐、Douban 交叉验证与多 seed 离线冷启动评价；没有线上流量实验。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06703",
+          "location": "§IV-A; experimental tables"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.06703",
+        "url": "https://arxiv.org/html/2610.06703v1",
+        "sha256": "73e9f4e02ddca1cf3270abf26ea4221c3d9b20ea748e6ff438f4d6dcca70d355",
+        "status": "downloaded",
+        "characters": 61525,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.06590",
+      "title": "SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation",
+      "published": "2026-10-05T16:04:55Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "SPRIG 将知识图谱与 SID 结合，在 ML1M/LFM2B 上比较；属于公开离线推荐研究，未满足线上准入。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06590",
+          "location": "§4 datasets; Table 2; Conclusion"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.06590",
+        "url": "https://arxiv.org/html/2610.06590v1",
+        "sha256": "9c4f3cbf8bd86355aa6f2abe5e22c06b0244c9bdb5dca3deb5755efda362d142",
+        "status": "downloaded",
+        "characters": 45536,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.07105",
+      "title": "Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation",
+      "published": "2026-10-05T15:03:27Z",
+      "repository_status": "new",
+      "decision": "deferred",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "RecRSI 用 Amazon/Yelp、GRU4Rec/SASRec/FMLP 做离线保留率轨迹，34/36 成功轨迹不是线上实验。可保留为 RSI 研究线索，但不能借 RSI 标签绕开工业推荐门槛；需单独学术例外批准。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07105",
+          "location": "§3 paired-retention and multi-update experiments"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.07105",
+        "url": "https://arxiv.org/html/2610.07105v1",
+        "sha256": "a4f5da01a35fb9731b9c5c11f5a7c1390083903cd7e773f157d7fe03942781bc",
+        "status": "downloaded",
+        "characters": 28692,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.06050",
+      "title": "MATE: Adaptive Long- and Short-Term User Memory for LLM-Based Recommendation",
+      "published": "2026-10-05T09:44:24Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "MATE 在 ML10M、Amazon Luxury Beauty、KuaiRec2.0 做完整目录离线 streaming replay，预测先于记忆更新；不是线上曝光试验。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06050",
+          "location": "Experiments: datasets and streaming protocol"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.06050",
+        "url": "https://arxiv.org/html/2610.06050v1",
+        "sha256": "9ea0782369b7ba706113c457fb407e1129c78d3c59232b1e9e8791ba7040c58b",
+        "status": "downloaded",
+        "characters": 84206,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.05994",
+      "title": "How (and How Not) to Use Data Augmentation in VLA Post-Training",
+      "published": "2026-10-05T08:48:13Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "VLA 数据增强为具身基础模型方向，已转基础模型审查。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05994",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.05949",
+      "title": "Technical Report on the Turba Fertilizer Machine Learning Stack in Morocco",
+      "published": "2026-10-05T08:04:09Z",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "Turba 是摩洛哥施肥建议函数的代理回归和数据工程，不是互联网搜广推或通用 LLM 算法。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05949",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.05787",
+      "title": "Constraint-Aware Conversational Job Recommendation in Code-Mixed Low-Resource Settings",
+      "published": "2026-10-05T04:36:18Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "JobCCC/W-SCAR 用 988 标注对话与 22,410 个职位比较离线检索/多目标排序，没有线上部署或 A/B 证据。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05787",
+          "location": "§5.1 dataset and evaluation"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.05787",
+        "url": "https://arxiv.org/html/2610.05787v1",
+        "sha256": "9c89e861c88e11d906842813f8aee4870562dba585525bb91dd4450a15da7f1d",
+        "status": "downloaded",
+        "characters": 69532,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.05670",
+      "title": "Generate What You Can Trust: Content Credibility in Generative Recommenders",
+      "published": "2026-10-05T01:33:29Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "CreGR 的证据为 PolitiFact/GossipCop/MHMisinfo 公共标签数据离线实验；正文承认更大规模评估仍待进行，未达到工业内容审核准入。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05670",
+          "location": "Experiments; Limitations; Ethics"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.05670",
+        "url": "https://arxiv.org/html/2610.05670v1",
+        "sha256": "36ec66cb61fc1749b0cddd4820602e4f8cc58539f5aef341987e1d9f50d01ec4",
+        "status": "downloaded",
+        "characters": 102350,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.05559",
+      "title": "Cut Binary Cross Entropy: Efficient Large-Vocabulary Loss and Gradient Kernels for Sequential Recommendation",
+      "published": "2026-10-04T21:47:02Z",
+      "repository_status": "new",
+      "decision": "deferred",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "Google CutBCE 公开 JAX/Pallas TPU kernel，在 Yambda50M/SASRec 上测显存与速度；不是线上 A/B。TPU v5e/v6e 定义算子尚无本项目可验证环境，不能将普通 CUDA BCE 冒充复现，也不转基础模型以规避门槛。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05559",
+          "location": "§IV hardware and §IV-B; §V"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.05559",
+        "url": "https://arxiv.org/html/2610.05559v1",
+        "sha256": "a9f1d3bf0c9d6c740d80760983128e731dd731a061e6bd0c0b5a49881ebe5463",
+        "status": "downloaded",
+        "characters": 28867,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.05532",
+      "title": "DelegationBench: Measuring When AI Agents Should Ask Before Acting",
+      "published": "2026-10-04T20:54:35Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "DelegationBench 是 Agent 委派评测，已转 Agent 评测基础设施审查。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05532",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.05501",
+      "title": "Logic-Logit: A Logic-Based Approach to Choice Modeling",
+      "published": "2026-10-04T20:14:20Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "Logic-Logit 用列生成和 Frank-Wolfe 拟合规则，实验是合成数据、2013 Expedia Kaggle 与 MIMIC-IV 离线选择预测；不含线上随机对照。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05501",
+          "location": "§6.1–6.4; §7; Appendix D"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.05501",
+        "url": "https://arxiv.org/html/2610.05501v1",
+        "sha256": "20a7aed8516dc153d6ac3ad50adfccf499bc8db462330d83bd22119958e03f78",
+        "status": "downloaded",
+        "characters": 83783,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.05220",
+      "title": "Ranking Bandits for Carousel Interfaces with Observable Browsing Depth",
+      "published": "2026-10-04T13:39:38Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "OD-ranking bandit 用 RecGaze 日志标定的模拟评价；正文明确真实在线评估为后续工作，不能把算法中的 online learning 当线上 A/B。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05220",
+          "location": "§5 simulation; §6 conclusion"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.05220",
+        "url": "https://arxiv.org/html/2610.05220v1",
+        "sha256": "3a56cd156b9b82a03d77b6caaa7b0fed518b9df28c26e758f31b8f23e35c821c",
+        "status": "downloaded",
+        "characters": 83378,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.04302",
+      "title": "From Valid to Useful: Post-Verification Acquisition for Recursive Self-Improving Recommendation",
+      "published": "2026-10-03T05:31:09Z",
+      "repository_status": "new",
+      "decision": "deferred",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "DA-RSIR 对验证后策略用 MC dropout 与分歧分桶获取数据，四数据集三模型离线对比；§7 明确在线评估未做。保留 RSI 线索，工业推荐实现需例外批准。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04302",
+          "location": "§6 evaluations; §7 limitations"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.04302",
+        "url": "https://arxiv.org/html/2610.04302v1",
+        "sha256": "0fa61161318ea2d51f33ead70ea97d8fdf760c201c49abd6d2b660263910acaa",
+        "status": "downloaded",
+        "characters": 58928,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.03923",
+      "title": "Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation",
+      "published": "2026-10-02T18:34:26Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "LRPRec 在 MovieLens/Steam/LastFM 时间切分上报告离线排名；文中 A/B 是提示更改的假设应用场景，并非已经执行的生产实验。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03923",
+          "location": "§4.1; Tables 1–2"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.03923",
+        "url": "https://arxiv.org/html/2610.03923v1",
+        "sha256": "3834711f7d47dcee122b81cfb9f4f6740b326ba8e753d66617ba8a01bf500d24",
+        "status": "downloaded",
+        "characters": 114961,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.03025",
+      "title": "Verifiable, Articulable, and Tacit Components of Preference",
+      "published": "2026-10-02T09:01:07Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "VAT/Creative Preferences 关注后训练偏好算法，已转后训练审查，不在工业推荐轨作无线上拒绝。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03025",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.02610",
+      "title": "Seer: Maximum Likelihood Regression for Learning-Speed Curves",
+      "published": "2026-10-02T00:09:10Z",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "Seer 是 1995 年 UIUC 博士论文的晚上传，研究经典分类器学习曲线；不能按 2026 arXiv 编号称为新 LLM 方法。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02610",
+          "location": "PDF pp1–3 title, copyright and abstract"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.02610",
+        "url": "https://arxiv.org/pdf/2610.02610v1",
+        "sha256": "e5a592b8ecb7ab2d9c774aff708e2cd3ef4c844d7bcaa20e34a3f2b6921ff591",
+        "status": "downloaded",
+        "characters": 166262,
+        "errors": [
+          {
+            "url": "https://arxiv.org/html/2610.02610v1",
+            "error": "HTTP Error 404: Not Found"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2610.02600",
+      "title": "When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation",
+      "published": "2026-10-01T23:53:42Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "Meta AIMS 保留完整历史，以删除反事实形成仅更新竞争项的非对称 margin 监督。六 backbone、私有日志与 Qilin/KuaiSearch-Lite 的 Recall/NDCG 全为离线；生产 SID/生产日志不是线上部署实验。已读方法、结果、结论和附录，未找到 A/B 或全量发布效果，故不满足工业准入。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02600",
+          "location": "§4.1–4.4; §6; Appendix B.1–B.2 and E"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.02600",
+        "url": "https://arxiv.org/html/2610.02600v1",
+        "sha256": "3a915a5b81fa1332a716982b2326a85aa212531a68c1d9268137a00a5178007f",
+        "status": "downloaded",
+        "characters": 109264,
+        "errors": []
+      }
+    },
+    {
+      "id": "2610.02057",
+      "title": "Optimizing Effective Training Time for Large-Scale Recommendation Systems",
+      "published": "2026-10-01T17:02:16Z",
+      "repository_status": "implemented",
+      "decision": "implemented",
+      "review_level": "registry",
+      "fulltext_review_completed": false,
+      "reason": "ETT 已在统一 manifest 实现，不重复登记为新增。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02057",
+          "location": "research-manifest.json"
+        }
+      ]
+    },
+    {
+      "id": "2610.01894",
+      "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+      "published": "2026-10-01T15:43:32Z",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "dMRI tractography 的 RNN/Transformer 训练与医学成像验证，不属于当前互联网推荐或通用 LLM 研究范围。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01894",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.01746",
+      "title": "End-to-End Learning vs. Modular Architectures: Comparative Insights into Autonomous Driving Systems",
+      "published": "2026-10-01T14:15:06Z",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "自动驾驶端到端/模块化架构比较综述与二值决策框架，非当前 LLM/Agent 新训练算法。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01746",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.01705",
+      "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
+      "published": "2026-10-01T13:51:13Z",
+      "repository_status": "implemented",
+      "decision": "implemented",
+      "review_level": "registry",
+      "fulltext_review_completed": false,
+      "reason": "AgentWebRec 已实现；只复核注册，不重复列作本轮新增。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01705",
+          "location": "research-manifest.json"
+        }
+      ]
+    },
+    {
+      "id": "2610.01533",
+      "title": "Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)",
+      "published": "2026-10-01T12:08:56Z",
+      "repository_status": "implemented",
+      "decision": "implemented",
+      "review_level": "registry",
+      "fulltext_review_completed": false,
+      "reason": "GrIS 已实现；只复核注册，不重复列作本轮新增。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01533",
+          "location": "research-manifest.json"
+        }
+      ]
+    },
+    {
+      "id": "2610.01316",
+      "title": "What Wins a Vote? Formatting, Length, and Lexical Diversity in the French Compar:IA LLM Arena",
+      "published": "2026-10-01T08:47:35Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "ComparIA 的偏好风格效应转后训练方向审查。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01316",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.01270",
+      "title": "Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders",
+      "published": "2026-10-01T08:09:37Z",
+      "repository_status": "implemented",
+      "decision": "implemented",
+      "review_level": "registry",
+      "fulltext_review_completed": false,
+      "reason": "REPAIR 已实现；只复核注册，不重复列作本轮新增。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01270",
+          "location": "research-manifest.json"
+        }
+      ]
+    },
+    {
+      "id": "2610.00984",
+      "title": "HADRec: A Hierarchy-Aware Drug Recommendation Framework by Fusing Molecular Knowledge and Electronic Health Record",
+      "published": "2026-10-01T03:20:54Z",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "HADRec 是临床药物推荐，在 MIMIC 医疗数据融合分子/EHR 与 ATC 层级，不是当前互联网搜广推；不把医疗离线指标转述为部署。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00984",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.00654",
+      "title": "When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization",
+      "published": "2026-09-30T19:54:26Z",
+      "repository_status": "new",
+      "decision": "rejected",
+      "review_level": "full-text",
+      "fulltext_review_completed": true,
+      "reason": "家居零售商语境充足性研究明确是两个构造用户、单请求、主模型的 32×10 离线因子实验；有零售商品目录不代表线上 A/B。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00654",
+          "location": "PDF pp3–4 Introduction; experiment design"
+        }
+      ],
+      "fulltext_receipt": {
+        "id": "2610.00654",
+        "url": "https://arxiv.org/pdf/2610.00654v1",
+        "sha256": "d77d27610dad154abc0ac5518a1a34b35b5697bdb7b448b0f604342e82955059",
+        "status": "downloaded",
+        "characters": 88151,
+        "errors": [
+          {
+            "url": "https://arxiv.org/html/2610.00654v1",
+            "error": "HTTP Error 404: Not Found"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2610.00253",
+      "title": "System Attribution in LLM Brand Recommendations: Single Responses Identify the System, Aggregated Brand Profiles Do Not Transfer",
+      "published": "2026-09-23T21:57:07Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "研究模型输出归属与品牌偏差审计，不是线上推荐算法；转通用评价审查。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00253",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.00251",
+      "title": "The Null Is the Hard Part: Exact Tests for Memorization in Generative Models",
+      "published": "2026-09-23T17:59:25Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "生成模型记忆审计的精确统计零假设与多重校正，转基础模型/多模态评估审查。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00251",
+          "location": "Abstract"
+        }
+      ]
+    },
+    {
+      "id": "2610.00054",
+      "title": "The First Token Is Not the Verdict: Hidden Costs of Reading LLM Judges Without Generating",
+      "published": "2026-09-04T00:45:28Z",
+      "repository_status": "new",
+      "decision": "transfer",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "reason": "LLM judge 首 token 读取的位置偏差审计，转后训练评测；不能当推荐线上研究。",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00054",
+          "location": "Abstract"
+        }
+      ]
+    }
+  ],
+  "note": "Individual scope/industrial eligibility decisions; cross-track transfers must be reconciled before global review closes."
+}

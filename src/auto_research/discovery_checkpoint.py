@@ -24,12 +24,14 @@ def atomic_json(path: Path, value: dict) -> None:
             os.unlink(temporary)
 
 
-def prepare_scan(client, queries, *, start_date, end_date, page_size, maximum_results):
+def prepare_scan(client, queries, *, start_date, end_date, page_size, maximum_results,
+                 recall_mode="submission-window"):
     """Reject stale query matrices/windows rather than silently skipping work."""
     if not getattr(client, "checkpoint_dir", None):
         return
     identity = dict(
-        schema_version=1,
+        schema_version=2,
+        recall_mode=recall_mode,
         queries=[asdict(query) for query in queries],
         start_date=str(start_date),
         end_date=str(end_date),

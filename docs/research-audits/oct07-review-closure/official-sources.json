@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-07T11:00:48Z",
+  "requested_window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "coverage_complete": false,
+  "watermark_eligible": false,
+  "sources": [
+    {
+      "name": "Google Research publications",
+      "url": "https://research.google/pubs/",
+      "status": "directory_transport_complete_identity_pending",
+      "readable_pages": [
+        "https://research.google/pubs/"
+      ],
+      "observed_total": 11597,
+      "observed_2026_total": 394,
+      "observed_page_size": 15,
+      "evidence": "官方第一页按年份展示，2027两条后为2026条目；不按具体发表日单调排序。已读15个条目的完整摘要并核查相关详情。",
+      "attempts": [
+        "https://research.google/pubs/?sort=-publication__year",
+        "https://research.google/pubs/?page=2",
+        "https://research.google/pubs/?page=3",
+        "https://research.google/pubs/?year=2026",
+        "https://research.google/pubs/?page=2&sort=-publication__year",
+        "https://www.research.google/pubs/?page=2",
+        "https://research.google/sitemap.xml"
+      ],
+      "reviewed_entries": [
+        {
+          "title": "When Android Apps Request Location with a Reason",
+          "decision": "out_of_scope",
+          "reason": "Android定位权限的开发者/用户行为研究，不是新搜广推或LLM训练算法；标为2027会议不等于首次发表日期。"
+        },
+        {
+          "title": "A 3D Scene Graphs Survey",
+          "decision": "out_of_scope",
+          "reason": "三维场景图综述，不是新实现或公共执行评测协议。"
+        },
+        {
+          "title": "Working Together on Technologies: A Case Study of Collaboration in Aotearoa",
+          "decision": "out_of_scope",
+          "reason": "毛利语TTS合作治理案例，摘要明确不讨论技术实现。"
+        },
+        {
+          "title": "GS-Offload",
+          "decision": "out_of_scope",
+          "reason": "3D Gaussian Splatting训练的host offload，非现有LLM/多模态语义模型运行时。"
+        },
+        {
+          "title": "Prospective evidence for conversational medical AI is hard, but non-negotiable",
+          "decision": "out_of_scope",
+          "reason": "临床前瞻性验证观点文章，不是新模型/公共评测实现。"
+        },
+        {
+          "title": "Twenty years of Bigtable",
+          "decision": "out_of_scope",
+          "reason": "数据库系统经验与功能回顾，非项目论文领域。"
+        },
+        {
+          "title": "That Experience Still Haunts Me to This Day",
+          "decision": "out_of_scope",
+          "reason": "AI图像滥用受害者多地区调查，不是可执行模型算法。"
+        },
+        {
+          "title": "From Growing to Looping",
+          "id": "2602.16490",
+          "decision": "transferred",
+          "track": "foundation-model",
+          "reason": "旧文补发现，2026-02-18，TUM/Helmholtz/Google；深度增长与循环推理组合，交基础模型正文审查。"
+        },
+        {
+          "title": "Dynamic Case Precedent",
+          "decision": "reference_only",
+          "reason": "官方标注Patent(to appear)，摘要为概念框架；没有量化结果，不能登记为已验证Agent算法。",
+          "url": "https://research.google/pubs/dynamic-case-precedent-an-architecture-for-accelerating-agent-proficiency-and-resolution-consistency-in-large-scale-people-operations/"
+        },
+        {
+          "title": "VISTA: A Test-Time Self-Improving Video Generation Agent",
+          "id": "2510.15831",
+          "decision": "transferred",
+          "track": "agent",
+          "reason": "2025旧文，2026会议目录发现；交Agent核查真实视频生成、tournament与多critic闭环。"
+        },
+        {
+          "title": "What Happens When Your Entire Operations Stack Is Just Markdown?",
+          "decision": "reference_only",
+          "reason": "Hackernoon工程文章，非独立论文算法或有对照的benchmark。"
+        },
+        {
+          "title": "Unwarping the Lens",
+          "decision": "out_of_scope",
+          "reason": "视频眼镜移除的专用修复网络，不是通用多模态理解/语言模型方法。"
+        },
+        {
+          "title": "Leveraging LLMs to understand public perception of earthquake early warnings",
+          "decision": "out_of_scope",
+          "reason": "560社媒帖子的人类行为研究，LLM作为分析工具而非算法贡献。"
+        },
+        {
+          "title": "MOSAIC-GS",
+          "decision": "out_of_scope",
+          "reason": "显式动态三维重建与Gaussian优化，不是现有模型领域。"
+        },
+        {
+          "title": "Compact Conformal Subgraphs",
+          "decision": "out_of_scope",
+          "reason": "图路径预测集压缩与组合近似理论，实验为trip planning/navigation；不是LLM规划控制器或互联网线上推荐。"
+        }
+      ],
+      "pages": 27,
+      "records": 398,
+      "detail_pages": 398,
+      "followup_checked_on": "2026-10-10",
+      "source_receipt": "google-directory.json",
+      "reason": "官网仅标年份，398个详情页均未暴露精确发表日期；84条提供的arXiv身份均早于2610月份，属于窗口前首次公开论文，其余314条仍须日期/身份核对。全部分页读取并不证明10月1～7日候选已穷尽。",
+      "prior_transport_blocker_resolved": "带page/year参数的目录在网页读取工具不可访问；命令行及浏览器对research.google连接超时；官方sitemap亦25秒超时。不能由第一页或博客替代整个出版物目录。"
+    },
+    {
+      "name": "Google Research blog",
+      "url": "https://research.google/blog/2026/",
+      "status": "window_reviewed",
+      "scope": "该官方年份索引在本次读取中列出的10-01至10-07文章；不替代完整出版物目录",
+      "entries": [
+        {
+          "date": "2026-10-06",
+          "id": "2610.05699",
+          "title": "Planetary Geospatial Foundation Models",
+          "decision": "transferred",
+          "track": "foundation-model",
+          "reason": "PDFM的五个公共卫生应用案例；论文已交基础模型核查，商业preview或研究申请获得embeddings，不冒充公开训练。",
+          "url": "https://research.google/blog/earth-ais-planetary-geospatial-foundation-models-for-global-public-health/"
+        },
+        {
+          "date": "2026-10-05",
+          "title": "Open and Emergent Problems in Agentic Privacy and Security: A Contextual Angle",
+          "decision": "reference_only",
+          "reason": "多作者workshop开放问题与contextual integrity报告；博客正文未提出已对照验证的新策略，不登记为能力实现。",
+          "url": "https://research.google/blog/open-and-emergent-problems-in-agentic-privacy-and-security-a-contextual-angle/"
+        },
+        {
+          "date": "2026-10-02",
+          "id": "2609.31494",
+          "title": "Toward provably private learning from federated data",
+          "decision": "accepted_existing_queue",
+          "reason": "既有PDF §5.3生产证据已核查；TEE/KMS/DP公开复现仍未实现。",
+          "url": "https://research.google/blog/toward-provably-private-learning-from-federated-data/"
+        }
+      ]
+    },
+    {
+      "name": "Meta AI publications",
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "status": "partial",
+      "readable_pages": [
+        "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+        "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2"
+      ],
+      "reason": "旧global_search入口失效，新results入口可读，配置已修正。第一页六条10-02数学结果后为9月/7月及更旧记录；第二页可读但排序/缓存不构成全站日期穷尽证明。六条逐篇读取官方详情摘要。",
+      "entries": [
+        {
+          "slug": "tightness-of-the-cycle-based-relaxation-for-completed-length-three-alpha-cycles",
+          "decision": "out_of_scope",
+          "reason": "cycle polytope数学松弛的紧性定理，AI辅助证明，不是新Agent算法。"
+        },
+        {
+          "slug": "on-solvable-evolution-algebras-and-a-conjecture-by-garcia-martinez-and-perez-rodriguez",
+          "decision": "out_of_scope",
+          "reason": "可解演化代数猜想，不是机器学习模型方法。"
+        },
+        {
+          "slug": "string-two-point-function-height-function-on-a-curve",
+          "decision": "out_of_scope",
+          "reason": "弦论二点函数与曲线height关系，不是LLM训练/评测。"
+        },
+        {
+          "slug": "semiabelian-groups-need-not-be-monomial",
+          "decision": "out_of_scope",
+          "reason": "群论反例，不是新Agent能力方法。"
+        },
+        {
+          "slug": "finite-time-blow-up-of-radial-negative-energy-solutions-for-the-mass-critical-biharmonic-nonlinear-schrodinger-equation",
+          "decision": "out_of_scope",
+          "reason": "非线性薛定谔方程PDE证明，不是当前研究领域。"
+        },
+        {
+          "slug": "the-strict-threshold-for-gaussian-ellipsoid-fitting",
+          "decision": "out_of_scope",
+          "reason": "Gaussian ellipsoid随机矩阵理论阈值，不是可接入本项目的基础模型方法。"
+        }
+      ]
+    },
+    {
+      "name": "Google DeepMind selected publications",
+      "url": "https://deepmind.google/research/publications/",
+      "status": "window_reviewed",
+      "pages": 9,
+      "records": 265,
+      "scope": "已抓取官方精选目录九页；最近日期9月16日，256个identity未匹配项的source_published均早于10月1日，不构成本次窗口新增。精选目录不等于全部Google论文。",
+      "prior_receipt": "../oct07-official-source-coverage.json"
+    },
+    {
+      "name": "Google/Meta GitHub and RecSys/SIGIR snapshots",
+      "status": "baseline_checked",
+      "scope": "既有本轮传输回执：两GitHub机构API返回；RecSys3个poster/8个session与SIGIR已登记snapshot比较无新增标题；不由零delta推导所有历史论文已实现。",
+      "prior_receipt": "../oct07-official-source-coverage.json"
+    }
+  ]
+}

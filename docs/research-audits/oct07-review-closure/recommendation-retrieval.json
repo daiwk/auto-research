@@ -1,0 +1,927 @@
+{
+  "schema_version": 2,
+  "track": "recommendation",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "requested_window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "recall_mode": "submission-window",
+  "announcement_overlap_days": 0,
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 22,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "recommender system",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "6a188c6d36fab92579072a8df0d7d0e334f76d4c52bfc5311195ce505d0b31d4",
+        "next_offset": 18,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "recommendation ranker",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "81c1e34e8c1622e462ff1327259bebe1e11c49e4601ad7e29105c1bb8d952d25",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "generative recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "b1559fcdbafe1cc409d476a047c8204203095514b886d22f6022141963427035",
+        "next_offset": 25,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "LLM recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "93361f5ca669662c809e26eb8bc273f67f6a5030cb6ceae94d96cfcbc8491e65",
+        "next_offset": 8,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "industrial ranking recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "a3bc57cfc5207d2c3de93e4923412c05081f1b55c7d3c4d3c12b4efeadc2f66e",
+        "next_offset": 1,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "recommendation online A/B",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "09724183f5fd9ecb5ca5338e9bf1809592c60d45b493feb45e9047f9b33e8fa1",
+        "next_offset": 1,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "recommendation deployed production",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "897f6e9e077c85ca2f190cf924e86694da9980ab04de1680c7f2cfa269e1e532",
+        "next_offset": 1,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "search ranking online A/B",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "c0cd774997fef851e44e0f24c0e18cb0180598533ca068d3adf2269b00d8042d",
+        "next_offset": 1,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "advertising ranking online A/B",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "6dd4adf1a80d77d9f29d13badebf33ea368a951e6a757533b03d0329c1f247d4",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Google recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "01fb7ac189d2006ff75df5cc57e795de2946094491096e946cf012f3e833452a",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Google DeepMind recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "b3388157e2554226e78a7335bfeaa8f9cc513dd8a171f3f4482fe1b0d3da872c",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Meta recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "22d79b2b96bb8916a71794cbab738cd7ad21f32777962bf23cdd5d0b8da682d7",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Netflix recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "d53e9bcf90aaab30ef00bb566c5ae40bd33503f61d7ca80d5a3536e2561356fa",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "ByteDance recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "4fbac943940a0eec81727cfd32d80ee1bd8ee2e09b8411289537a2f5585af7f3",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "TikTok recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "996c880f9e080732f0ff93ad125d3d4f4927ca1b72cd065b7b7c329a7090c11c",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Alibaba recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "dd3aefb7a0c451ebd8cd4da7dd7c9247e0b26c7dc692c9054365672f6555c8ce",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Taobao recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "ece5dbf58af664e2b97f66aad2a042ccbdf715e75861b4eb2d481d9eb88a7dee",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Kuaishou recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "55822f391fb05184b505bd5661ed200852f05333378be72a27981ce0b8d6dbc1",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Pinterest recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "f9e22262c53b01f8b481048cbbc45c21fff8dc49f74350ae7915d8b4b93af6ad",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Amazon recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "1fc3fb909c2a0e66cff2ba41b75a927fa6907cb6109300af605b85e9c45a1a21",
+        "next_offset": 4,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Microsoft recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "87d2c21fadf739eefdcf7f5b1d2035e778d370aa74cb80f5d219ee37804c59ce",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Tencent recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "2026-10-01",
+        "date_to": "2026-10-07",
+        "scan_id": "f2099115a15d4ca2bbf21c1fd818de8f",
+        "fingerprint": "0f07e8e67c3302df2cab6814103216d0332af7495e2ab9a65fb96d88c3ca8277",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "query_matrix": [
+    "recsys-general",
+    "recommendation-ranking",
+    "generative-recommendation",
+    "llm-recommendation",
+    "industrial-ranking",
+    "production-evidence",
+    "deployment-evidence",
+    "search-ranking",
+    "advertising-ranking",
+    "priority-org-google",
+    "priority-org-google-deepmind",
+    "priority-org-meta",
+    "priority-org-netflix",
+    "priority-org-bytedance",
+    "priority-org-tiktok",
+    "priority-org-alibaba",
+    "priority-org-taobao",
+    "priority-org-kuaishou",
+    "priority-org-pinterest",
+    "priority-org-amazon",
+    "priority-org-microsoft",
+    "priority-org-tencent"
+  ],
+  "candidate_count": 35,
+  "candidates": [
+    {
+      "arxiv_id": "2610.08407",
+      "title": "Seeing the Context: Enhancing Recommender Systems with Image-Derived Contextual Signals",
+      "published": "2026-10-06T14:15:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08245",
+      "title": "Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation",
+      "published": "2026-10-06T12:26:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08232",
+      "title": "Behavior-Mining, Generative Conversations, and Collaborative Advisory: the Future of Travel and Tourism Recommender Systems",
+      "published": "2026-10-06T12:18:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08159",
+      "title": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+      "published": "2026-10-06T11:11:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08136",
+      "title": "Adapting Generative Recommenders for Multi-Turn Interaction",
+      "published": "2026-10-06T10:51:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "priority-org-amazon"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08129",
+      "title": "Do LLMs Act on What They Know? From Partner Representations to Cooperative Actions",
+      "published": "2026-10-06T10:44:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07810",
+      "title": "SIFT: Search Intent-to-Filter Transformer for Multi-Task Personalized Filter Ranking at Airbnb",
+      "published": "2026-10-06T06:05:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "deployment-evidence",
+        "generative-recommendation",
+        "production-evidence",
+        "recsys-general",
+        "search-ranking"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07761",
+      "title": "Contrastive Learning for Aspect Representation towards Explainable Recommendation",
+      "published": "2026-10-06T04:55:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07402",
+      "title": "Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment",
+      "published": "2026-10-05T21:15:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06751",
+      "title": "MatrixFormer: A Foundation Model for Matrix Completion",
+      "published": "2026-10-05T17:28:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06703",
+      "title": "Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs",
+      "published": "2026-10-05T17:01:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "llm-recommendation",
+        "priority-org-amazon",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06590",
+      "title": "SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation",
+      "published": "2026-10-05T16:04:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07105",
+      "title": "Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation",
+      "published": "2026-10-05T15:03:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06050",
+      "title": "MATE: Adaptive Long- and Short-Term User Memory for LLM-Based Recommendation",
+      "published": "2026-10-05T09:44:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-recommendation",
+        "priority-org-amazon",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05994",
+      "title": "How (and How Not) to Use Data Augmentation in VLA Post-Training",
+      "published": "2026-10-05T08:48:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05949",
+      "title": "Technical Report on the Turba Fertilizer Machine Learning Stack in Morocco",
+      "published": "2026-10-05T08:04:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05787",
+      "title": "Constraint-Aware Conversational Job Recommendation in Code-Mixed Low-Resource Settings",
+      "published": "2026-10-05T04:36:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05670",
+      "title": "Generate What You Can Trust: Content Credibility in Generative Recommenders",
+      "published": "2026-10-05T01:33:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05559",
+      "title": "Cut Binary Cross Entropy: Efficient Large-Vocabulary Loss and Gradient Kernels for Sequential Recommendation",
+      "published": "2026-10-04T21:47:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05532",
+      "title": "DelegationBench: Measuring When AI Agents Should Ask Before Acting",
+      "published": "2026-10-04T20:54:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05501",
+      "title": "Logic-Logit: A Logic-Based Approach to Choice Modeling",
+      "published": "2026-10-04T20:14:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05220",
+      "title": "Ranking Bandits for Carousel Interfaces with Observable Browsing Depth",
+      "published": "2026-10-04T13:39:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04302",
+      "title": "From Valid to Useful: Post-Verification Acquisition for Recursive Self-Improving Recommendation",
+      "published": "2026-10-03T05:31:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03923",
+      "title": "Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation",
+      "published": "2026-10-02T18:34:26Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "llm-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03025",
+      "title": "Verifiable, Articulable, and Tacit Components of Preference",
+      "published": "2026-10-02T09:01:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02610",
+      "title": "Seer: Maximum Likelihood Regression for Learning-Speed Curves",
+      "published": "2026-10-02T00:09:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02600",
+      "title": "When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation",
+      "published": "2026-10-01T23:53:42Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "industrial-ranking",
+        "llm-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02057",
+      "title": "Optimizing Effective Training Time for Large-Scale Recommendation Systems",
+      "published": "2026-10-01T17:02:16Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01894",
+      "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+      "published": "2026-10-01T15:43:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01746",
+      "title": "End-to-End Learning vs. Modular Architectures: Comparative Insights into Autonomous Driving Systems",
+      "published": "2026-10-01T14:15:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01705",
+      "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
+      "published": "2026-10-01T13:51:13Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01533",
+      "title": "Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)",
+      "published": "2026-10-01T12:08:56Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01316",
+      "title": "What Wins a Vote? Formatting, Length, and Lexical Diversity in the French Compar:IA LLM Arena",
+      "published": "2026-10-01T08:47:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01270",
+      "title": "Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders",
+      "published": "2026-10-01T08:09:37Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "generative-recommendation",
+        "priority-org-amazon"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00984",
+      "title": "HADRec: A Hierarchy-Aware Drug Recommendation Framework by Fusing Molecular Knowledge and Electronic Health Record",
+      "published": "2026-10-01T03:20:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": []
+    }
+  ]
+}

@@ -137,6 +137,12 @@ def test_successful_page_without_arxiv_ids_is_not_counted_as_covered():
         '<a href="/research/publications/a-new-method/">Read the Paper</a>',
         "A New Method",
     ),
+    (
+        "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+        '<h4>Reinforcement Learning</h4><h4>A New Method</h4>'
+        '<a href="/research/publications/a-new-method/">Read the Paper</a>',
+        "A New Method",
+    ),
 ])
 def test_official_listing_title_is_reconciled_without_arxiv_link(url, html, title):
     class Client:
@@ -253,6 +259,52 @@ def test_deepmind_pagination_follows_official_paths_and_reports_cap():
     assert stats[0]["pages_available"] == 3
     assert stats[0]["pagination_capped"] is True
     assert stats[0]["official_publications"] == 2
+
+
+def test_google_directory_uses_declared_page_count_and_preserves_year_filter():
+    source = DiscoverySource(
+        "Google", "official-research",
+        "https://research.google/pubs/?category=2026&sort=-publication__year",
+        max_pages=40,
+    )
+    requested = []
+
+    def fetcher(url):
+        requested.append(url)
+        return ('<form data-max-pages="2"></form>'
+                f'<a href="/pubs/paper-{len(requested)}/">Paper {len(requested)}</a>')
+
+    class Client:
+        def lookup(self, ids):
+            assert not ids
+            return []
+
+    _, _, failures, stats = discover_external([source], client=Client(), fetcher=fetcher)
+    assert not failures
+    assert len(requested) == 2
+    assert "category=2026" in requested[1] and "page=2" in requested[1]
+    assert stats[0]["pages_available"] == 2
+    assert stats[0]["pagination_capped"] is False
+    # Fetching both pages still leaves their paper identities unresolved.
+    assert len(stats[0]["unresolved_publications"]) == 2
+
+
+def test_google_directory_reports_truncation_even_when_fetched_pages_succeed():
+    source = DiscoverySource("Google", "official-research",
+                             "https://research.google/pubs/", max_pages=2)
+
+    class Client:
+        def lookup(self, ids):
+            return []
+
+    _, _, failures, stats = discover_external(
+        [source], client=Client(),
+        fetcher=lambda url: '<form data-max-pages="27"></form>'
+                            '<a href="/pubs/example/">Example</a>',
+    )
+    assert not failures
+    assert stats[0]["pages_available"] == 27
+    assert stats[0]["pagination_capped"] is True
 
 
 def test_one_failed_listing_page_preserves_other_pages_and_reports_gap():

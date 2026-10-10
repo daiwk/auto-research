@@ -1,5 +1,8 @@
 # 2026-10-07：重叠扫描、两篇真实模型实现与未完成队列
 
+后续的扫描修复和逐篇结论见[本批审查收口](research-audits/oct07-review-closure/README.md)。
+本页数字保留原始扫描快照；后续日期查询与月份编号补查已经独立保存完整回执。
+
 ## 先看结论
 
 本轮实现 [FrugalEvo](agent-research/2610.03675-frugalevo/README.md) 和 [Sentry](agent-research/2610.02994-sentry/README.md) 的独立控制器与公开 checkpoint 执行路径。它们均首次发表于 **10 月 2 日**，属于前轮候选的实现，不是今天新发表。真实 A100 运行与单篇指标分开记录；没有注册成已经完成统一 Evolve 集成的算子。

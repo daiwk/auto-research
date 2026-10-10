@@ -371,24 +371,41 @@ def discover_candidates(
     end_date: dt.date,
     page_size: int = 50,
     maximum_results_per_query: int = 200,
+    recall_mode: str = "submission-window",
 ) -> list[DiscoveredPaper]:
     """Run every query, retain provenance, date-filter and de-duplicate."""
     from contextlib import nullcontext
     from .discovery_checkpoint import prepare_scan
     from .runtime import exclusive_file_lock
     queries = tuple(queries)
+    if recall_mode not in {"submission-window", "late-index"}:
+        raise ValueError(f"unknown recall mode: {recall_mode}")
+    if start_date > end_date:
+        raise ValueError("discovery start must not exceed end")
     checkpoint_dir = getattr(client, "checkpoint_dir", None)
     with (exclusive_file_lock(checkpoint_dir / "scan.json") if checkpoint_dir else nullcontext()):
         prepare_scan(client, queries, start_date=start_date, end_date=end_date,
-                     page_size=page_size, maximum_results=maximum_results_per_query)
+                     page_size=page_size, maximum_results=maximum_results_per_query,
+                     recall_mode=recall_mode)
         return _discover_queries(client, queries, start_date=start_date, end_date=end_date,
-                                 page_size=page_size, maximum_results_per_query=maximum_results_per_query)
+                                 page_size=page_size, maximum_results_per_query=maximum_results_per_query,
+                                 recall_mode=recall_mode)
 
 
-def _discover_queries(client, queries, *, start_date, end_date, page_size, maximum_results_per_query):
+def _discover_queries(client, queries, *, start_date, end_date, page_size, maximum_results_per_query,
+                      recall_mode):
     found: dict[str, Paper] = {}
     origins: dict[str, set[str]] = {}
+    months = []
+    month = start_date.replace(day=1)
+    while month <= end_date:
+        months.append(month.strftime("%y%m"))
+        month = (month.replace(day=28) + dt.timedelta(days=4)).replace(day=1)
     for query in queries:
+        date_bounds = (
+            {"date_from": start_date, "date_to": end_date}
+            if recall_mode == "submission-window" else {"identifier_months": tuple(months)}
+        )
         papers = client.search_pages(
             query.text,
             categories=query.categories,
@@ -396,6 +413,7 @@ def _discover_queries(client, queries, *, start_date, end_date, page_size, maxim
             maximum_results=maximum_results_per_query,
             match=query.match,
             tolerate_failures=True,
+            **date_bounds,
         )
         for paper in papers:
             if not paper_is_in_window(paper, start_date=start_date, end_date=end_date):

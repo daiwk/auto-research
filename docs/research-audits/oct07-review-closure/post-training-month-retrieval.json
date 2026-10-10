@@ -1,0 +1,2382 @@
+{
+  "schema_version": 2,
+  "track": "post-training",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "requested_window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "recall_mode": "late-index",
+  "announcement_overlap_days": 0,
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 8,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "language model post training",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "fcae38dcd0473d87145e9683f3fdf712ab98c8637d1e63d62684c53a1f80fa12",
+        "next_offset": 84,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model preference optimization",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "aeca04c783ff7f7ff6dc7843f7922de6a5b9ddcfdc5e1ffc8a7cf7a60e4dbd42",
+        "next_offset": 11,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "reinforcement learning language model",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "f7bdec5a5526b2df13b3a282abbab7fb3d0621722216f49ff174deb12aadf6ae",
+        "next_offset": 96,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "on policy distillation language model",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "b91efae1ca44b48b70f48ba2ef54e68e55c0ba5d5987c38931f2837be65d1394",
+        "next_offset": 29,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model reward model",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "7296516545d92694c859985bf4f32049a8e44094023f3c9ec529f4ce86db4bff",
+        "next_offset": 83,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model process reward",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "24b9e60582b955e3c40dfa2e9d066b7bc06a55466de009ad17de9615198dd582",
+        "next_offset": 4,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "test time reinforcement learning",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "1d861c71b14ee471d72ad78bcc2bbefd2737aaf974ce8f8da6eabf215bce6d80",
+        "next_offset": 20,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "online policy distillation",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "9c0838b1e33f49c4867899ea0f0c50eb",
+        "fingerprint": "afd3bb0cf2057e408c6ccd3cadf1b0eca35833c846d9832ceac2bb0e446efbd9",
+        "next_offset": 4,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "query_matrix": [
+    "post-training",
+    "preference-optimization",
+    "llm-rl",
+    "on-policy-distillation",
+    "reward-model",
+    "process-reward",
+    "test-time-rl",
+    "opd"
+  ],
+  "candidate_count": 201,
+  "candidates": [
+    {
+      "arxiv_id": "2610.08781",
+      "title": "IdeaAnchor: Teaching LLMs to Turn Literature into Research Ideas",
+      "published": "2026-10-06T17:59:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08778",
+      "title": "Sherpa: Teaching LLMs to Teach Adaptively",
+      "published": "2026-10-06T17:58:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08773",
+      "title": "AdvSim2Real : Training Web Agents Against Adaptive Prompt Injection in a Web World Model",
+      "published": "2026-10-06T17:56:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08670",
+      "title": "Principled Under Pressure: Post-Training Decides Whether LLMs Act on Their Own Moral Judgment",
+      "published": "2026-10-06T16:52:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08561",
+      "title": "Reinforcement Learning for Hierarchical Reasoning Rewards: Minimax-Optimal Rates with Transformers",
+      "published": "2026-10-06T15:43:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08108",
+      "title": "Enhancing Diffusion Language Models with Autoregressive Post-Training Weights",
+      "published": "2026-10-06T10:31:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08082",
+      "title": "POLAR: Ontology-Guided Risk Prevention for Tool-Calling LLM Agents",
+      "published": "2026-10-06T10:14:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08077",
+      "title": "Self-Retrospection Distillation: Turning Post-hoc Experiences into Prior Foresight",
+      "published": "2026-10-06T10:06:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07898",
+      "title": "FC-SWE: Failure-Conditioned RL for Long-Horizon Software Engineering Agents",
+      "published": "2026-10-06T07:44:12Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07842",
+      "title": "Privileged Context as Drift in On-Policy Self-Distillation",
+      "published": "2026-10-06T06:45:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07781",
+      "title": "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+      "published": "2026-10-06T05:17:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07767",
+      "title": "TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models",
+      "published": "2026-10-06T05:03:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07739",
+      "title": "Cite What You Explore: Budget-Aware LLM Reasoning over Medical KGs with Verifiable Evidence",
+      "published": "2026-10-06T04:36:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07731",
+      "title": "Learning to Retrieve via Reinforcement Learning in Embedding Space",
+      "published": "2026-10-06T04:29:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07730",
+      "title": "SanSi: A Looped Typed Decision Model for System 1.5 Thinking",
+      "published": "2026-10-06T04:28:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07668",
+      "title": "CACHEFORGE: LLM-Guided End-to-End Generative Cache Replacement Policy for Performance and Hardware Efficiency",
+      "published": "2026-10-06T03:03:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07654",
+      "title": "Does On-Policy Distillation for Safety Pose Backdoor Risks?",
+      "published": "2026-10-06T02:50:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07587",
+      "title": "Large Language Model Orchestration under Heterogeneous Preferences via Explicit Persona Inference",
+      "published": "2026-10-06T01:24:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07545",
+      "title": "Quality-Aware Self-Correcting Speech Translation on an Edge Device",
+      "published": "2026-10-06T00:21:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07522",
+      "title": "Activation Denoising: A Robustness View on Parallel vs Sequential LLM Quantization",
+      "published": "2026-10-05T23:41:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07518",
+      "title": "Harmful SFT Leaves a Continuous Trace in LLM Checkpoint Updates",
+      "published": "2026-10-05T23:28:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07457",
+      "title": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+      "published": "2026-10-05T22:06:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07349",
+      "title": "RELACE: retrospective likelihood-based action credit estimation for long-horizon language agents",
+      "published": "2026-10-05T20:19:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07332",
+      "title": "Structuring MoE Expert Selection for Agentic Reinforcement Learning",
+      "published": "2026-10-05T20:06:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07247",
+      "title": "Learning What to Distill: Bilevel Top-K Token Selection for Self-Distillation in Large Language Models",
+      "published": "2026-10-05T18:48:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07226",
+      "title": "Minimal Witness Reinforcement Learning",
+      "published": "2026-10-05T18:34:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07212",
+      "title": "Reward-Driven Learning under Prompt-Level Differential Privacy",
+      "published": "2026-10-05T18:26:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07177",
+      "title": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks",
+      "published": "2026-10-05T18:01:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06851",
+      "title": "Base Models Can Reason By Taking a Cue From Training Data",
+      "published": "2026-10-05T17:59:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06844",
+      "title": "Learning to Read the Contextual Tokens in Diffusion Transformers",
+      "published": "2026-10-05T17:59:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06833",
+      "title": "Towards Looped Models Done Right, Part II: Rethinking at Fixed Points",
+      "published": "2026-10-05T17:58:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06830",
+      "title": "MemPilot: Orchestrating On-Demand Multimodal Memory Curation for LLM Agents",
+      "published": "2026-10-05T17:58:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06829",
+      "title": "CLIFT: Conformal Self-Verification for Web Agent Training and Test-Time Scaling",
+      "published": "2026-10-05T17:57:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06804",
+      "title": "Sharpen Without Search: On-Policy Distillation of Sequence-Level Power Distribution",
+      "published": "2026-10-05T17:53:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06782",
+      "title": "T-Search: An Open Agentic Retriever and Playground for Hard Multi-Step Search",
+      "published": "2026-10-05T17:44:26Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07121",
+      "title": "SoloQ: Calibration-Free Quantization for Diffusion Language Models",
+      "published": "2026-10-05T17:30:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06744",
+      "title": "ufakzeka-karar: An Open Turkish Typed-Decision Model with Order-Invariant Option Scoring",
+      "published": "2026-10-05T17:22:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06729",
+      "title": "Improving Diversity in LLM Short Story Generation",
+      "published": "2026-10-05T17:16:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07118",
+      "title": "AMBER: Training Long-Horizon Web Agents through Append-Only Memory",
+      "published": "2026-10-05T17:11:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06695",
+      "title": "MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks",
+      "published": "2026-10-05T16:55:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06671",
+      "title": "Learning What to Imitate: Entropy-Aware Distribution Mixing",
+      "published": "2026-10-05T16:44:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06670",
+      "title": "Reward Stealing Attack on Large Language Models",
+      "published": "2026-10-05T16:44:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06648",
+      "title": "Representation-Space MMD for Diffusion Language Models",
+      "published": "2026-10-05T16:28:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06647",
+      "title": "LoGRA: Scaling LLM Reinforcement Learning with Low-Rank Gradient Sketches",
+      "published": "2026-10-05T16:28:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06637",
+      "title": "Long-Horizon Textual World Modeling through Structured Reasoning",
+      "published": "2026-10-05T16:25:44Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06446",
+      "title": "The Assistance Dilemma: Learning to Teach via Multi-Turn Reinforcement Learning",
+      "published": "2026-10-05T14:50:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06439",
+      "title": "Better Call Reward: Reward Hacking as Strategic Abstention in Legal Reasoning Models",
+      "published": "2026-10-05T14:46:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06360",
+      "title": "Ontology Concept Overlap as a Training Signal: Knowledge-Grounded Reinforcement Learning for Clinical Question Answering",
+      "published": "2026-10-05T13:59:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06204",
+      "title": "Do Small Language Models Learn to Negotiate? A Controlled Scaling Study of RL-Trained Sellers",
+      "published": "2026-10-05T12:17:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05994",
+      "title": "How (and How Not) to Use Data Augmentation in VLA Post-Training",
+      "published": "2026-10-05T08:48:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05935",
+      "title": "ThunderSyncRL: Lossless Acceleration of Agentic Reinforcement Learning",
+      "published": "2026-10-05T07:51:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05872",
+      "title": "Off-Policy Merging Beats On-Policy Self-Distillation for Continual Learning",
+      "published": "2026-10-05T06:40:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07043",
+      "title": "TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning",
+      "published": "2026-10-05T00:53:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05600",
+      "title": "An LLM-in-the-loop RL Framework for Bioinformatics Feature Selection",
+      "published": "2026-10-04T23:05:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05481",
+      "title": "CodeForge-MA: Execution-Verified Multi-Agent Learning with Language-Conditioned LoRA for Multilingual Code Generation",
+      "published": "2026-10-04T19:40:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05446",
+      "title": "Hierarchical Time-aware Bootstrapping for Off-Policy Subgoal Value Learning",
+      "published": "2026-10-04T18:33:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05425",
+      "title": "Unmentioned Checklist Findings Change How Reinforcement Learning Appears to Improve Chest Radiograph Report Checking",
+      "published": "2026-10-04T18:06:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05402",
+      "title": "Task Vector Descent: Learning from Non-IID Batches",
+      "published": "2026-10-04T17:37:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05373",
+      "title": "Towards Unbiased On-Policy Distillation for Block Diffusion Language Models",
+      "published": "2026-10-04T17:00:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05367",
+      "title": "AIProver: Agentic Auto-Formalization of Mathematical Research via Certificate-Driven Evolving Harness",
+      "published": "2026-10-04T16:48:12Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05329",
+      "title": "Understanding the Weight Averaging Mechanism in LLM Training for Post-Training Quantization",
+      "published": "2026-10-04T15:53:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07023",
+      "title": "Beyond Refusal Patterns: Safe-Role Internalization for Robust and Generalizable LLM Safety Alignment",
+      "published": "2026-10-04T15:50:42Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05308",
+      "title": "RubricArmor: Adversarial Evolution Improves LLM-Based Rubric Generation",
+      "published": "2026-10-04T15:30:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05303",
+      "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+      "published": "2026-10-04T15:27:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "opd",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05292",
+      "title": "Erased, Rerouted, or Rescaled? Post-Training and the Causal Quotient of a Language Model's Belief State",
+      "published": "2026-10-04T15:11:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05282",
+      "title": "Red-TTT: Test-Time Training for Automated Jailbreaking Large Language Models",
+      "published": "2026-10-04T15:03:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05265",
+      "title": "Loopy: Low-Bit Quantization Framework for Looped Language Models",
+      "published": "2026-10-04T14:35:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05200",
+      "title": "Learning without Overwriting: A Theory of Self-Distillation and Supervised Fine-Tuning in Continual Reasoning",
+      "published": "2026-10-04T13:13:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05139",
+      "title": "Hidden in the Comments: A Context-Injection Attack Surface in Code LLMs",
+      "published": "2026-10-04T11:39:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05125",
+      "title": "Bayesian Entropy-based Reordering for Calibrated Diffusion Language Models",
+      "published": "2026-10-04T11:13:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05099",
+      "title": "Small Agents with Semantic Search: Efficient Multilingual Code Localization",
+      "published": "2026-10-04T10:13:41Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05097",
+      "title": "ReMAP: Restoring the Perceptual Cycle with Reasoning-Time Latent Visual Memory",
+      "published": "2026-10-04T10:00:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06993",
+      "title": "DART-ES: Difficulty-Aware Reweighting and Targeted Replay for Fine-Tuning LLMs with Evolution Strategies",
+      "published": "2026-10-04T07:42:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04950",
+      "title": "How Should Teachers Be Prepared? RL on Student-Induced States for On-Policy Distillation",
+      "published": "2026-10-04T04:49:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04918",
+      "title": "Residual Visual Credit Optimization: Conserved Evidence Routing for Multimodal Reinforcement Learning",
+      "published": "2026-10-04T03:56:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04914",
+      "title": "Monitorability Disposition in Large Reasoning Models",
+      "published": "2026-10-04T03:49:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04899",
+      "title": "Rewrite What Matters: Adaptive Multilingual Query Rewriting for Reasoning via Agentic Reinforcement Learning",
+      "published": "2026-10-04T03:19:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04888",
+      "title": "No Hindsight for LLM Fact-Checkers: Measuring Leakage Channels in Misinformation Detection",
+      "published": "2026-10-04T02:53:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04882",
+      "title": "ResOPD: Tail Residualization for Sparse On-Policy Distillation",
+      "published": "2026-10-04T02:43:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "opd"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04851",
+      "title": "CURIO: Curiosity-Driven Test-Time Learning for Open-Ended Discovery",
+      "published": "2026-10-04T01:30:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04845",
+      "title": "Which Preferences to Train On? End-to-End Multi-Objective Alignment with an Adversarial Preference Distribution",
+      "published": "2026-10-04T01:09:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training",
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06962",
+      "title": "Verdicts Without Annotated Evidence: Rejection Sampling or Label-Only Post-Training for Evidence Recovery?",
+      "published": "2026-10-03T17:01:42Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04651",
+      "title": "GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding",
+      "published": "2026-10-03T16:49:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04604",
+      "title": "Anticipating the Consequences of Curriculum Decisions with Large Language Models",
+      "published": "2026-10-03T15:45:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04596",
+      "title": "DiffGate: Difficulty-Gated Teacher Guidance for On-Policy Distillation",
+      "published": "2026-10-03T15:33:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04507",
+      "title": "LoRA's Second Descent Extends Beyond Parameter Parity",
+      "published": "2026-10-03T13:10:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06950",
+      "title": "Learning to Decide, Not to Reason: Parameter-Efficient Decision Operators via Low-Rank Activation Steering",
+      "published": "2026-10-03T12:57:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04441",
+      "title": "LocusRL: Diagnosing LLM Reward and Policy Interventions in Competitive Games",
+      "published": "2026-10-03T11:03:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06947",
+      "title": "FactorBench: A Portfolio-Aware Benchmark for Automated Factor Mining",
+      "published": "2026-10-03T10:57:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04412",
+      "title": "Large Language Models and Augmented Democracy",
+      "published": "2026-10-03T10:02:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04403",
+      "title": "Saying, Not Knowing: Aggressively GGUF-Quantized Small Language Models Still Write Rare Words They Can No Longer Define",
+      "published": "2026-10-03T09:50:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04344",
+      "title": "Hierarchical Credit Assignment for RLVR on Fused Gromov-Wasserstein Geometry",
+      "published": "2026-10-03T07:11:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04328",
+      "title": "Bidirectional Preference Synthesis: Learning Prompt-Conditioned Preferences from Boundary Failures",
+      "published": "2026-10-03T06:48:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "preference-optimization",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04299",
+      "title": "Questioning the Questions: Sustaining Self-Evolution in Reasoning Models",
+      "published": "2026-10-03T05:24:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04272",
+      "title": "Rethinking Self-Distillation for Multi-Teacher Capability Merging",
+      "published": "2026-10-03T03:57:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04269",
+      "title": "Self-Reflection Fine-Tuning: Enhancing Agent Security against Prompt Injection Attacks from Failure Experience",
+      "published": "2026-10-03T03:45:44Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04261",
+      "title": "Playing social deduction games with reinforcement fine-tuned large language models",
+      "published": "2026-10-03T03:37:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04158",
+      "title": "How RL Reshapes LLM Reasoning: Transferability, Coverage, and Scaling Laws",
+      "published": "2026-10-03T00:01:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04132",
+      "title": "PB-GRPO: Learning Socially Adaptive LLM Agents from Persona-Driven Simulation with Preference-Batched GRPO",
+      "published": "2026-10-02T23:07:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03984",
+      "title": "Teaching Agents to Code Reliably",
+      "published": "2026-10-02T19:47:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03972",
+      "title": "Probabilistic Algorithms for Ising Machines from Optimization to Generative AI",
+      "published": "2026-10-02T19:30:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03702",
+      "title": "LESSER: Post-Training Data Selection with Output-Layer Gradients",
+      "published": "2026-10-02T17:55:42Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03665",
+      "title": "Pivot-SD: Efficient Self-Distillation for Masked Diffusion Language Models",
+      "published": "2026-10-02T17:37:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03567",
+      "title": "Writerslogic at the CLEF 2026 SimpleText Track: Multi-Candidate LLM Simplification and Stacked Complexity Spotting",
+      "published": "2026-10-02T16:44:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03529",
+      "title": "Divergence controls entropy in distillation",
+      "published": "2026-10-02T16:15:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03515",
+      "title": "Learning from Repaired Reasoning: Root-Cause-Guided On-Policy Distillation",
+      "published": "2026-10-02T16:07:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03480",
+      "title": "Metropolis-Hastings Dominates Importance Resampling for Policy Composition",
+      "published": "2026-10-02T15:49:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03454",
+      "title": "Measure Less, Know More: Self-Supervised Test-Time Feature Acquisition",
+      "published": "2026-10-02T15:33:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03369",
+      "title": "Mixture-of-Experts for Cryptocurrency Order Execution: Training Stability, Tail Risk, and Failure Modes",
+      "published": "2026-10-02T14:27:26Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03361",
+      "title": "Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT",
+      "published": "2026-10-02T14:24:06Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03223",
+      "title": "AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning",
+      "published": "2026-10-02T12:38:53Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03195",
+      "title": "Source Preference in the Wild: How LLM Agents Favor Items by Source, and How to Reduce It",
+      "published": "2026-10-02T12:10:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03190",
+      "title": "Not Until the Evidence Says So: Teaching LLM Investigators When to Close a Case",
+      "published": "2026-10-02T12:06:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03185",
+      "title": "Gains and Collapse in On-Policy Distillation:A Reinforcement Learning Perspective",
+      "published": "2026-10-02T11:57:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03109",
+      "title": "Emergent Structure in the Marginal Attention Space of Language Models",
+      "published": "2026-10-02T10:27:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03063",
+      "title": "HARPO: Hallucination-Aware Reinforcement Learning for Faithful and Creative Language Generation",
+      "published": "2026-10-02T09:46:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02986",
+      "title": "OLMo-Detect: A Multi-Stage, Confounder-Controlled Benchmark for Membership Inference on Large Language Models",
+      "published": "2026-10-02T08:22:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02886",
+      "title": "Misinformation Without Triggers: From Factual Answers to Downstream Decisions",
+      "published": "2026-10-02T06:24:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02856",
+      "title": "Adaptive Mutual Distillation for Balanced Multi-Task Post-Training of Large Language Models",
+      "published": "2026-10-02T05:42:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02835",
+      "title": "All Work And No Play Makes Jack a Dull Boy: Understanding and Preventing Catastrophic Strategy Collapse in RLVR",
+      "published": "2026-10-02T05:27:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02832",
+      "title": "FastOPD: On-Policy Distillation for Lightweight VLA Deployment",
+      "published": "2026-10-02T05:24:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02828",
+      "title": "FSPO: Policy-Consistent Risk and Pareto-Feasible Control for Budgeted LLM RL Post-Training",
+      "published": "2026-10-02T05:19:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02819",
+      "title": "Text-Centric Post-Training for Omni-Modal Reasoning",
+      "published": "2026-10-02T05:08:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02781",
+      "title": "OPD Before RL: Warm-Starting Rubric-Based RL with On-Policy Distillation",
+      "published": "2026-10-02T04:14:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02766",
+      "title": "Exact Memory-Time Optimization for Prefix-Cached Language Model Serving",
+      "published": "2026-10-02T03:47:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02744",
+      "title": "EpiWorld: Grounding LLM Policy Agents in Epidemiological World Models",
+      "published": "2026-10-02T03:16:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02700",
+      "title": "Learning from Evolving Errors: Adaptive Iterative Repair for On-Policy Distillation",
+      "published": "2026-10-02T02:34:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02695",
+      "title": "Test-time Calibration Learning for Large Language Model Reasoning",
+      "published": "2026-10-02T02:17:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02614",
+      "title": "What Is Lost in Post-Training? Default Collapse and the Loss of In-Context Steerability Across Diverse Perspectives",
+      "published": "2026-10-02T00:14:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02593",
+      "title": "Fisher-Guided Submodular Data Selection for Continual Pre-Training of Large Language Models",
+      "published": "2026-10-01T23:44:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02554",
+      "title": "Test-time Multi-agent Coordination by Decomposed Value Gradient Flow",
+      "published": "2026-10-01T22:38:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02486",
+      "title": "From Retrieval to Typed Decisions: Calibrated System One Models from Biomedical Sentence Encoders",
+      "published": "2026-10-01T21:03:42Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02466",
+      "title": "SD-DPC: Sparse Dictionary Differentiable Predictive Control",
+      "published": "2026-10-01T20:40:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "opd"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02444",
+      "title": "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs",
+      "published": "2026-10-01T20:13:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02359",
+      "title": "Lexicographic Multi-Objective On-Policy Distillation",
+      "published": "2026-10-01T18:35:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02324",
+      "title": "Slow-Fast Multi-Teacher On-Policy Distillation for Capability Preservation",
+      "published": "2026-10-01T18:00:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02206",
+      "title": "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards",
+      "published": "2026-10-01T17:59:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02191",
+      "title": "The Missing Primitive: Diagnosing and Repairing Mathematical Reasoning in Large Language Models",
+      "published": "2026-10-01T17:59:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02190",
+      "title": "Trust the Direction, Search the Step: Zero-and-First-Order Methods for LLM Fine-Tuning",
+      "published": "2026-10-01T17:59:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02189",
+      "title": "Generative modeling of intrinsically disordered protein regions by reinforcing sparse autoencoder features",
+      "published": "2026-10-01T17:59:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02173",
+      "title": "Every Ablation Is a Dose: Counterweights and the Semblance of Self-Repair",
+      "published": "2026-10-01T17:57:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02163",
+      "title": "AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents",
+      "published": "2026-10-01T17:54:34Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02140",
+      "title": "Finetuning with Sampling: SFT Learns Better Than You Think",
+      "published": "2026-10-01T17:45:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02117",
+      "title": "Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes",
+      "published": "2026-10-01T17:34:10Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02039",
+      "title": "CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning",
+      "published": "2026-10-01T16:51:56Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02019",
+      "title": "Controllable Multi-label Video Safety Detection via Adaptive Tversky Policy Optimization",
+      "published": "2026-10-01T16:42:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02015",
+      "title": "On Language Drift during RLVR Post-Training",
+      "published": "2026-10-01T16:39:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01955",
+      "title": "Do Your Own Research: Learning to Forecast by Learning to Search",
+      "published": "2026-10-01T16:12:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01908",
+      "title": "Same Reward, Different Skills: When Multimodal RL Learns to Look",
+      "published": "2026-10-01T15:53:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01896",
+      "title": "Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis",
+      "published": "2026-10-01T15:45:08Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01892",
+      "title": "Selection-Based Structured Reasoning: Toward Efficient Multimodal Search Agents",
+      "published": "2026-10-01T15:42:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01828",
+      "title": "The Asymptotics of Language Model Alignment with Memory",
+      "published": "2026-10-01T15:04:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01815",
+      "title": "Debias Anything: Fairness with Diversity without Supervision in Diffusion Models",
+      "published": "2026-10-01T14:51:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01670",
+      "title": "Do MLLM Judges Judge the Edit? Auditing Bias in Image Editing Evaluation with Verified Quality Preservation",
+      "published": "2026-10-01T13:30:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01560",
+      "title": "AURAL: Adaptive Latent Reasoning with Joint Chunk for Speech Language Models",
+      "published": "2026-10-01T12:28:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01548",
+      "title": "Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals",
+      "published": "2026-10-01T12:16:34Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01513",
+      "title": "Decision Titan: Test-Time Training for Long-Term Memory in Offline Reinforcement Learning",
+      "published": "2026-10-01T11:48:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01511",
+      "title": "GAW-PO: Preference Optimization with Gradient-Aligned Token Weights",
+      "published": "2026-10-01T11:46:28Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01509",
+      "title": "Sharpening Tax in Post-Training",
+      "published": "2026-10-01T11:46:00Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01278",
+      "title": "SCOPE-AD: Sequential cost-aware ordinal-belief planning with energy-based models for diagnostic agents",
+      "published": "2026-10-01T08:16:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01275",
+      "title": "Know When to Hold 'em: Correct-Token Retention in Uniform-State Diffusion Language Models",
+      "published": "2026-10-01T08:13:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01238",
+      "title": "Mixture-Trained Merging for Unified Multi-Objective Models",
+      "published": "2026-10-01T07:37:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training",
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01234",
+      "title": "ASCRIBE: Atomic and Significance-Based Reasoning for Thai Clinical SOAP Note Generation",
+      "published": "2026-10-01T07:35:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01161",
+      "title": "My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning",
+      "published": "2026-10-01T06:41:10Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01128",
+      "title": "Grounding Large Language Models in DSGE Simulators for Policy Generation and Forecasting",
+      "published": "2026-10-01T06:11:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01076",
+      "title": "GLoC-EHR: Evidence-Cited Clinical Reasoning over Global Context and Local EHR Events",
+      "published": "2026-10-01T05:16:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01066",
+      "title": "Probe with Participation Trophies: Random-Reward RL as a Probe of LLM Capability",
+      "published": "2026-10-01T05:05:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01026",
+      "title": "It Takes Workflows to Evolve Better Workflows",
+      "published": "2026-10-01T04:15:49Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00991",
+      "title": "Adapter Thickets: Splitting an RLVR Budget Beats Concentrating It",
+      "published": "2026-10-01T03:25:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00988",
+      "title": "Auditable Algebraic Counting Field for Cryptic-Pocket Detection from Apo Structures",
+      "published": "2026-10-01T03:22:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00983",
+      "title": "The Devil Is in the Reconstruction Loss Scale: Rethinking Optimization in LLM Quantization",
+      "published": "2026-10-01T03:19:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00964",
+      "title": "RPTune: Learned Context Curation for LLM Catalog Search",
+      "published": "2026-10-01T02:52:24Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00954",
+      "title": "Beyond Leaderboards: Tokenomics of Agentic Small Language Model Ensembles",
+      "published": "2026-10-01T02:37:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00903",
+      "title": "Sharpen Before You Adapt: Data-Free Entry-State Sharpening for Test-Time Reinforcement Learning",
+      "published": "2026-10-01T01:33:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00898",
+      "title": "When Do Biological Reasoning Models Use Their Biological Inputs?",
+      "published": "2026-10-01T01:27:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00888",
+      "title": "Match the Distribution, Not the Compute: Post-Training Multi-Token Prediction Heads",
+      "published": "2026-10-01T01:09:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00852",
+      "title": "Child-Adapted Structured Phonological Representations for Interpretable Speech Sound Analysis",
+      "published": "2026-10-01T00:12:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00838",
+      "title": "SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning",
+      "published": "2026-09-30T23:51:11Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00779",
+      "title": "Effective Synthetic Data Curation Requires Group-Level Signals",
+      "published": "2026-09-30T22:16:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00767",
+      "title": "Pre-training interventions, ex post facto: Grafting model beliefs across checkpoints",
+      "published": "2026-09-30T22:02:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00717",
+      "title": "Sequential Functional Structured Tucker Compression for Large Language Model Attentions",
+      "published": "2026-09-30T21:06:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00663",
+      "title": "Backdoor Containment via Expert Quarantine and Shutdown in LLMs",
+      "published": "2026-09-30T20:02:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00661",
+      "title": "Exploring More, Reasoning Better: Stepwise Risk-Sensitive GRPO for Diffusion Language Models",
+      "published": "2026-09-30T19:59:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00610",
+      "title": "Explainable Suicide Risk Assessment on Social Media with Multi-Task QLoRA",
+      "published": "2026-09-30T19:13:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00574",
+      "title": "Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL",
+      "published": "2026-09-30T18:45:26Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00568",
+      "title": "Emergent Unfaithfulness: How Alignment Training Causes Language Models to Silently Override Task Faithfulness",
+      "published": "2026-09-30T18:41:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00540",
+      "title": "Assessing the Impact of Language Disparity on Multilingual Linguistic Ability in Large Language Models",
+      "published": "2026-09-30T18:22:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00431",
+      "title": "ChainLoRA: Geometry-Preserving Task Vector Merging for Continual Learning in LLMs",
+      "published": "2026-09-30T16:43:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00388",
+      "title": "T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning",
+      "published": "2026-09-30T10:34:27Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00385",
+      "title": "FAER: Auditable Utility-Aligned Trajectory Replay for Language Model Post-Training",
+      "published": "2026-09-30T09:41:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00367",
+      "title": "MoRA: MoE Pruning via Router Bias Learning and Expert Approximation",
+      "published": "2026-09-30T06:38:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00333",
+      "title": "LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation",
+      "published": "2026-09-29T13:57:51Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00332",
+      "title": "The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning",
+      "published": "2026-09-29T13:51:52Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00317",
+      "title": "DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies",
+      "published": "2026-09-29T02:55:12Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "opd"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06892",
+      "title": "Axiom Satisfiability of Linear Rewards in Alignment",
+      "published": "2026-09-26T15:24:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "preference-optimization",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00256",
+      "title": "Verification Pulses and the Cost of Escaping Wrong Consensus",
+      "published": "2026-09-24T03:29:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00197",
+      "title": "Comedic Fool's Gold: Reward Exploits and Countermeasures in Conversational Humor",
+      "published": "2026-09-18T20:14:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00096",
+      "title": "FACET at WMT 2026 Automated Translation Quality Evaluation Task",
+      "published": "2026-09-08T14:49:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00047",
+      "title": "Characterizing a Configuration Where Inference-Time PRM-Pruned Fragment Grafting Is Inert: Evidence from Three Reasoning LMs",
+      "published": "2026-09-03T11:06:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00035",
+      "title": "Integrating Fairness and Explainability in a Multiple Instance Reinforcement Learning System",
+      "published": "2026-09-02T17:30:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06861",
+      "title": "When Does External Guidance Help LLM Reasoning? A Bias-Variance Theory of Guidance-Augmented GRPO",
+      "published": "2026-07-08T14:38:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": []
+    }
+  ]
+}

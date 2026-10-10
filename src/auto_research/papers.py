@@ -55,6 +55,7 @@ class ArxivClient:
         match: str = "all",
         date_from: dt.date | None = None,
         date_to: dt.date | None = None,
+        identifier_months: tuple[str, ...] = (),
     ) -> list[Paper]:
         if limit <= 0:
             return []
@@ -68,6 +69,12 @@ class ArxivClient:
             search_query = f"({search_query}) AND ({category_query})"
         if not search_query:
             raise ValueError("paper query contains no searchable terms")
+        if identifier_months:
+            if any(not re.fullmatch(r"\d{2}(?:0[1-9]|1[0-2])", month)
+                   for month in identifier_months):
+                raise ValueError("identifier months must use YYMM with a valid month")
+            month_query = " OR ".join(f"id:{month}.*" for month in identifier_months)
+            search_query = f"({search_query}) AND ({month_query})"
         if date_from is not None and date_to is not None:
             if date_from > date_to:
                 raise ValueError("search start must not exceed end")
@@ -104,6 +111,7 @@ class ArxivClient:
         match: str = "all",
         date_from: dt.date | None = None,
         date_to: dt.date | None = None,
+        identifier_months: tuple[str, ...] = (),
         tolerate_failures: bool = False,
     ) -> list[Paper]:
         """Retrieve more than one arXiv page and de-duplicate versioned IDs.
@@ -123,6 +131,7 @@ class ArxivClient:
             maximum_results=maximum_results,
             date_from=str(date_from),
             date_to=str(date_to),
+            identifier_months=list(identifier_months),
             scan_id=getattr(self, "scan_id", None),
         )
         digest = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
@@ -179,6 +188,8 @@ class ArxivClient:
                     kwargs["date_from"] = date_from
                 if date_to is not None:
                     kwargs["date_to"] = date_to
+                if identifier_months:
+                    kwargs["identifier_months"] = identifier_months
                 page = self.search(query, requested, categories, **kwargs)
             except (OSError, ValueError, ET.ParseError) as exc:
                 report.update(

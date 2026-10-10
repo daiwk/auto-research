@@ -1,4 +1,5 @@
 import datetime as dt
+import pytest
 
 from auto_research.discovery import (
     PRIORITY_ORGANIZATION_TERMS,
@@ -57,11 +58,70 @@ def test_discovery_uses_all_queries_keeps_provenance_and_deduplicates_versions()
         maximum_results_per_query=100,
     )
     assert len(client.calls) == 2
+    assert all(call[1]["date_from"] == dt.date(2026, 8, 10) for call in client.calls)
+    assert all(call[1]["date_to"] == dt.date(2026, 8, 13) for call in client.calls)
     assert len(papers) == 1
     assert papers[0].paper.title == "GenRec revised"
     assert papers[0].query_names == ("llm", "online")
     assert papers[0].to_dict()["abstract"] == "recommendation ranking production experiment"
     assert papers[0].to_dict()["evidence_status"] == "full-text-review-required"
+
+
+def test_explicit_late_index_scan_retains_undated_recall():
+    client = FakeClient()
+    papers = discover_candidates(
+        client, (DiscoveryQuery("llm", "LLM recommendation", ("cs.IR",)),),
+        start_date=dt.date(2026, 8, 12), end_date=dt.date(2026, 8, 13),
+        recall_mode="late-index",
+    )
+    assert "date_from" not in client.calls[0][1]
+    assert client.calls[0][1]["identifier_months"] == ("2608",)
+    assert len(papers) == 1
+    assert papers[0].paper.published.startswith("2026-08-10")
+
+
+def test_late_index_month_bounds_cross_year_without_searching_all_history():
+    client = FakeClient()
+    discover_candidates(
+        client, (DiscoveryQuery("llm", "LLM recommendation", ("cs.IR",)),),
+        start_date=dt.date(2025, 12, 29), end_date=dt.date(2026, 2, 1),
+        recall_mode="late-index",
+    )
+    assert client.calls[0][1]["identifier_months"] == ("2512", "2601", "2602")
+
+
+def test_discovery_rejects_unknown_recall_mode_before_network():
+    client = FakeClient()
+    with pytest.raises(ValueError, match="recall"):
+        discover_candidates(
+            client, (), start_date=dt.date(2026, 10, 1),
+            end_date=dt.date(2026, 10, 7), recall_mode="all-done",
+        )
+    assert client.calls == []
+
+
+def test_resume_rejects_switching_recall_channel(tmp_path):
+    from types import SimpleNamespace
+    from auto_research.discovery_checkpoint import prepare_scan
+
+    client = SimpleNamespace(checkpoint_dir=tmp_path, resume=False)
+    settings = dict(start_date=dt.date(2026, 10, 1), end_date=dt.date(2026, 10, 7),
+                    page_size=50, maximum_results=200)
+    prepare_scan(client, (), recall_mode="submission-window", **settings)
+    client.resume = True
+    with pytest.raises(ValueError, match="changed"):
+        prepare_scan(client, (), recall_mode="late-index", **settings)
+
+
+def test_daily_workflow_preserves_both_recall_channels():
+    from pathlib import Path
+
+    workflow = Path(".github/workflows/paper-discovery.yml").read_text()
+    assert "--recall-mode submission-window" in workflow
+    assert "--recall-mode late-index" in workflow
+    assert workflow.count("--maximum-results-per-query 2000") == 2
+    assert "paper-late-index-${{ matrix.track }}.json" in workflow
+    assert ".cache/paper-discovery/late-index/${{ matrix.track }}" in workflow
 
 
 def test_recommendation_matrix_includes_priority_organization_sweep():

@@ -1,0 +1,4146 @@
+{
+  "track": "post-training",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "candidate_count": 201,
+  "main_pool_count": 177,
+  "late_pool_count": 24,
+  "coverage_complete": false,
+  "watermark_advanced": false,
+  "review_scope": "201条逐项题目/摘要审查完成；117条方法/实验/公共评测定向全文核查。10条全文已审但作者资源或核心定义未闭合，按父任务新口径标reviewed_deferred；主池无awaiting_fulltext_review。跨轨2610.03025已补v2主文/关键数据页及版本差异，因公共资源未确认列reviewed_deferred；不擅自推进全局水位。",
+  "candidates": [
+    {
+      "id": "2610.08781",
+      "title": "IdeaAnchor: Teaching LLMs to Turn Literature into Research Ideas",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "正文为anchor数据/特权监督范式，优化器仍标准SFT、self-training和GRPO；可作为Agent科研数据方法，不纳入核心优化器实现。 该决定仅限后训练核心track，Agent方法/数据公共入口由Agent track独立判断，不能据此全局拒绝。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.08781v1",
+          "location": "§3.1式1–3；§4.1–4.2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08778",
+      "title": "Sherpa: Teaching LLMs to Teach Adaptively",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "逐回合gate掩码return并按到达同回合的轨迹leave-one-out归一，训练teacher适应学生偏好；有MATH分离训练/评测及教学benchmark。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.08778v1",
+          "location": "§2.3式3；§3.1、§3.4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08773",
+      "title": "AdvSim2Real : Training Web Agents Against Adaptive Prompt Injection in a Web World Model",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "冻结world model与judge，分阶段课程—执行者、对手—执行者训练；三seed rollout与150任务对照，不等于真实生产A/B。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.08773v1",
+          "location": "§4 Algorithm 1；§5 Table 1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08670",
+      "title": "Principled Under Pressure: Post-Training Decides Whether LLMs Act on Their Own Moral Judgment",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公共评测：判断—行动差距的筛选、四级测量校准与压力对照独立于训练算法；Apache-2.0 DeepSteer仓库可访问。仅74/208主情境通过screen，报告条件分布不能外推总体。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.08670v1",
+          "location": "§3.1–3.5；Appendix F"
+        },
+        {
+          "url": "https://github.com/deepsteer/deepsteer/",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "预注册价值判断—行动差距评测，比较现有后训练配方；摘要未提出新的训练算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08561",
+      "title": "Reinforcement Learning for Hierarchical Reasoning Rewards: Minimax-Optimal Rates with Transformers",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "定义depth curriculum/prefix自适应查询actor-critic并证明最小极大速率，但本文是形式化理论设置，未核实实际LLM训练benchmark；不列能力复现。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.08561v1",
+          "location": "§3.2 Algorithm 1；Theorem 3及后续证明"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08108",
+      "title": "Enhancing Diffusion Language Models with Autoregressive Post-Training Weights",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "A2D task-vector transfer与AR/diffusion增量插值有真实checkpoint benchmark；系数用anchor benchmark选取，本地复现必须改为validation隔离。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.08108v1",
+          "location": "§2.4式1–2；§3 Table 1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08082",
+      "title": "POLAR: Ontology-Guided Risk Prevention for Tool-Calling LLM Agents",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "通过可逆性本体和动作剪枝实现推理时护栏，不更新模型或RL/蒸馏目标；转Agent方向。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08082",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.08077",
+      "title": "Self-Retrospection Distillation: Turning Post-hoc Experiences into Prior Foresight",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Salesforce SRD把成功/失败轨迹转成knowledge/pitfall前瞻输出，以带轨迹+gold答案的当前模型停梯度teacher监督不见该特权信息的foresight学生，JSD辅助loss；4/9B十基准。gold仅训练teacher可见，不能混入推理输入。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.08077",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2610.08077v1",
+          "location": "§3.1–3.2 Eq.4–9；§4.1–4.2（PDF pp.3–6）"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07898",
+      "title": "FC-SWE: Failure-Conditioned RL for Long-Horizon Software Engineering Agents",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "真实R2E-Gym训练，失败时reset并提供patch/verifier上下文；每次attempt奖励独立、未执行padding不计优势。SWE-bench结果为verifier-assisted不是独立pass@K。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07898v1",
+          "location": "§3.2–3.4式3–5；§4.1–4.2 Table 1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07842",
+      "title": "Privileged Context as Drift in On-Policy Self-Distillation",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "27个adapter的特权上下文content×source控制研究；目标任务与既有lm-evaluation-harness留存benchmark，加逐token/逐序列KL和LoRA几何诊断。未定义独立新任务或评分器，作为OPSD风险/消融参考，不新增核心算法/公共评测入口。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07842v1",
+          "location": "§2.1、§2.4；§3.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "固定OPSD配方比较特权上下文内容和来源的漂移，是控制实验而非新后训练算法。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07781",
+      "title": "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "4/8bit代理故障恢复的提示/评分协议评测，无训练算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07781",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07767",
+      "title": "TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "将训练activation相邻FP4 codeword选为更接近rollout codeword并缓存mantissa/scale；四MoE训练验证。原native NVFP4路径需相应硬件，不得A100模拟冒称原速度。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07767v1",
+          "location": "§3.1式2–3；§4.1/4.4/4.5 Table 6–7"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07739",
+      "title": "Cite What You Explore: Budget-Aware LLM Reasoning over Medical KGs with Verifiable Evidence",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "证据有/无的同snapshot预测loss差构成paired gain，叠加预算与citation integrity，REINFORCE训练检索reasoner；需真实MIMIC/PrimeKG映射，非手写分数替代。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07739v1",
+          "location": "§2.4式7–10；§3.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07731",
+      "title": "Learning to Retrieve via Reinforcement Learning in Embedding Space",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "vMF嵌入策略+G×G product rollout+RLOO，CMP投影降噪；ReasonRank训练、BRIGHT评测、三paired seeds。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07731v1",
+          "location": "§3.1–3.3；§4.1.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07730",
+      "title": "SanSi: A Looped Typed Decision Model for System 1.5 Thinking",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "主要贡献为循环typed-decision模型架构和逐循环proper scoring，转基础模型审查。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07730",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07668",
+      "title": "CACHEFORGE: LLM-Guided End-to-End Generative Cache Replacement Policy for Performance and Hardware Efficiency",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "LLM生成C++缓存策略并在模拟器演化，不是LLM参数后训练；转Agent研究。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07668",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07654",
+      "title": "Does On-Policy Distillation for Safety Pose Backdoor Risks?",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Lazy Defense对teacher-student sampled token log-ratio双侧clipping再stop-gradient，四teacher/student组合测试仅延迟backdoor，不是保证消除。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07654v1",
+          "location": "§6.1式6–7；§6.2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07587",
+      "title": "Large Language Model Orchestration under Heterogeneous Preferences via Explicit Persona Inference",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "HARP外置贝叶斯persona后验及规划探索奖励，主要是推理时多代理编排而非参数后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07587",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07545",
+      "title": "Quality-Aware Self-Correcting Speech Translation on an Edge Device",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "明确无需重训的边缘语音翻译QE/MBR推理纠正。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07545",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07522",
+      "title": "Activation Denoising: A Robustness View on Parallel vs Sequential LLM Quantization",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "并行PTQ激活去噪与量化误差正则，属于量化而非RL/OPD后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07522",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07518",
+      "title": "Harmful SFT Leaves a Continuous Trace in LLM Checkpoint Updates",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "TRACE以有效SFT权重增量核与纯目标参考bank做非负拟合，sH是几何关联而非有害样本比例；4个7/8B骨干有checkpoint审计实验。匿名作者代码入口暂不可读，公共审计执行资源待确认；不是NVFP4的同名TRACE。 补充直接HTTP检查为401。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07518v1",
+          "location": "§2.3式3–5；§3.1、§4.1"
+        },
+        {
+          "url": "https://anonymous.4open.science/r/Code4TRACE-54D3",
+          "location": "作者资源入口；当前可用性限制见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "TRACE为只读checkpoint的安全审计方法，识别已有SFT目标，不提出训练算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "TRACE以有效SFT权重增量核与纯目标参考bank做非负拟合，sH是几何关联而非有害样本比例；4个7/8B骨干有checkpoint审计实验。匿名作者代码入口暂不可读，公共审计执行资源待确认；不是NVFP4的同名TRACE。 补充直接HTTP检查为401。"
+    },
+    {
+      "id": "2610.07457",
+      "title": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "GPU tile对齐混合精度PTQ和kernel，不是策略后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07457",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07349",
+      "title": "RELACE: retrospective likelihood-based action credit estimation for long-horizon language agents",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "执行动作原始/结果条件似然比修正局部return，终局信息仅用于训练credit；ALFWorld/WebShop真实训练，但主表混用文献baseline，应本地同预算复核。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07349v1",
+          "location": "§3.1–3.4式1–14；§4.1–4.2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07332",
+      "title": "Structuring MoE Expert Selection for Agentic Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "operation标签和router互信息、相邻token专家集合一致性及entropy gate联合agentic RL；AppWorld/AutomationBench真实训练，需模型路由不可用proxy。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07332v1",
+          "location": "§3.1–3.3；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07247",
+      "title": "Learning What to Distill: Bilevel Top-K Token Selection for Self-Distillation in Large Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Soft-OR效用、softplus阈值内层与soft mask形成近似bilevel选择；阈值detach、全词表forward KL。200步最终checkpoint；TIP比较同时改变divergence，不可单独归因选择器。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07247v1",
+          "location": "§3.1–3.3式1–8；§4.1–4.2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07226",
+      "title": "Minimal Witness Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "MWRL核心是集合格上的minimal-witness策略梯度；LLM实验冻结Qwen并搜索head/MLP子集，不是训练LLM语言策略，转电路发现/通用RL。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07226v1",
+          "location": "§3.1–3.4；§4.1、§4.3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07212",
+      "title": "Reward-Driven Learning under Prompt-Level Differential Privacy",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "DP-GRPO以prompt group为DP-SGD裁剪记录、单更新GRPO为record loss；隐私会计与实际Qwen1.5B LoRA实验，保留DP机制而非仅加噪声示意。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07212v1",
+          "location": "§V Algorithm 1；§VIII-A"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07177",
+      "title": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公共judge评测与校准级联协议：calibration/eval隔离、双顺序、常数baseline及成本—风险读数。arXiv官方abstract页已枚举ancillary的pins、split、per-item预测、judges/run_pass/metrics/analysis源码。托管strong judge不可固定revision；本次未运行代码，单个附件浏览器读取报错。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07177v1",
+          "location": "§3；§5–6；§10 Reproducibility"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.07177",
+          "location": "Ancillary-file links：README、code/judges.py、run_pass.py、metrics.py、analysis/gating.py及manifests"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "公开judge benchmark上的CLM评测和温度校准，未提出新策略后训练方法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06851",
+      "title": "Base Models Can Reason By Taking a Cue From Training Data",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "通过起始token及预训练数据因果干预研究reasoning cue，非新的后训练算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06851",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06844",
+      "title": "Learning to Read the Contextual Tokens in Diffusion Transformers",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "视觉扩散Transformer contextual tokens读取与对齐，属于图像生成模型训练而非LLM RL/OPD。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06844",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06833",
+      "title": "Towards Looped Models Done Right, Part II: Rethinking at Fixed Points",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "循环模型固定点、depth prior和正交注入主要为架构/训练基础，交由基础模型track。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06833",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06830",
+      "title": "MemPilot: Orchestrating On-Demand Multimodal Memory Curation for LLM Agents",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "质量/成本/延迟分别组归一后合并，prefix probe边际答案质量修正阶段credit；训练latency用proxy estimator，不能冒称直接壁钟reward。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06830v1",
+          "location": "§3.3式7–13；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06829",
+      "title": "CLIFT: Conformal Self-Verification for Web Agent Training and Test-Time Scaling",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "conformal自验证非负bonus和URL-stratified return优势改变credit；WAI训练、VWA bank transfer、OM2W无policy训练须分别报告。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06829v1",
+          "location": "§2.2式6–7；§3 Experimental Design"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06804",
+      "title": "Sharpen Without Search: On-Policy Distillation of Sequence-Level Power Distribution",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Rényi梯度对应teacher幂分布×student分布的加权MLE，SMC沿student proposal重采样；GSM8K训练不读reference答案，保留整条SMC训练链。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06804v1",
+          "location": "§3.1–3.5；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06782",
+      "title": "T-Search: An Open Agentic Retriever and Playground for Hard Multi-Step Search",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公共检索Agent入口：冻结语料search/save_and_advance/finalize工具及多轮证据状态，TRuST/SynthComp公开基准；官方Apache-2.0 harness已可读。final-set Recall@10与生成Agent trajectory recall不可直接横比，融合3次须计预算。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06782v1",
+          "location": "§3–4；§6；Appendix C–D"
+        },
+        {
+          "url": "https://github.com/turbo-llm/t-search-harness",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "T-Search为检索模型、数据和playground，摘要训练是现成SFT+GSPO，没有独立优化器机制主张。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07121",
+      "title": "SoloQ: Calibration-Free Quantization for Diffusion Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "SoloQ为免校准扩散模型量化与KV压缩，非策略后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07121",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06744",
+      "title": "ufakzeka-karar: An Open Turkish Typed-Decision Model with Order-Invariant Option Scoring",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "土耳其typed-decision模型头与数据发布；主要比较交叉熵和REINFORCE，非新LLM策略算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06744",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06729",
+      "title": "Improving Diversity in LLM Short Story Generation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "DivLM的CPT指令残差恢复与群体genre/tone/style/entity多样性奖励为可执行两阶段训练配方，需真实judge与语料。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06729v1",
+          "location": "§4.1–4.2；§5.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07118",
+      "title": "AMBER: Training Long-Horizon Web Agents through Append-Only Memory",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "append-only两回合memory/action共享GRPO终局优势，插入模板token mask；实验先SFT初始化，不得声称完全无SFT；需web环境。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07118v1",
+          "location": "§4.2式10；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06695",
+      "title": "MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "MedPrune优化多代理通信图节点/边，主要结构搜索，不是LLM参数后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06695",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06671",
+      "title": "Learning What to Imitate: Entropy-Aware Distribution Mixing",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ConMix/GeoMix由student top-K归一entropy控制teacher比重，用于采样SFT与forward KL；两种混合本身已有AMiD，新增是entropy调度。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06671v1",
+          "location": "§3式1–2及§3.2–3.3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06670",
+      "title": "Reward Stealing Attack on Large Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "ReSA逆RL抽取代理安全reward后在推理时反转解码，主要攻击/推理方法而非训练改进。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06670",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06648",
+      "title": "Representation-Space MMD for Diffusion Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "冻结DLM token表示RBF-MMD，离散单denoiser pass采样后group REINFORCE，连续bootstrap后求导；OWT/GSM8K及16B DMax实验。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06648v1",
+          "location": "§3.1式3、§3.2–3.3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06647",
+      "title": "LoGRA: Scaling LLM Reinforcement Learning with Low-Rank Gradient Sketches",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "直接累积随机投影gradient sketch、低秩update与predicted-KL步长；PPO实际多scale训练，H100结果不能外推A100。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06647v1",
+          "location": "§2.1式2–3及§2.3；§3.1–3.3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06637",
+      "title": "Long-Horizon Textual World Modeling through Structured Reasoning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "真实encode-transition-decode rollout tree按兄弟组credit，predictive gain与中间状态reward共同训练；无需gold textual state。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06637v1",
+          "location": "§4.2式7–8；§5.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06446",
+      "title": "The Assistance Dilemma: Learning to Teach via Multi-Turn Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "tutor无gold solution；masked近迁移post-test只保留学生tokens，配合correctness/no-handover gate；冻结学生与跨benchmark评估。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06446v1",
+          "location": "§3.1–3.6；§4.1–4.3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06439",
+      "title": "Better Call Reward: Reward Hacking as Strategic Abstention in Legal Reasoning Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公开reward hacking诊断入口：LegalBench16任务分离surface proxy、真实可解析正确性、CTS与滚动GDM；Apache-2.0仓库有notebook与结果。刻意错误proxy训练用于检测format/abstention坍塌，不得宣传为能力改进。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06439v1",
+          "location": "§3.1–3.3；§4–5"
+        },
+        {
+          "url": "https://github.com/SubramanyamSahoo/Better-Call-Reward",
+          "location": "作者资源入口只读核查；边界见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "LegalBench表面reward导致不作答的负面诊断及诊断指标，不是新训练改进算法。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06360",
+      "title": "Ontology Concept Overlap as a Training Signal: Knowledge-Grounded Reinforcement Learning for Clinical Question Answering",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "UMLS concept overlap+judge+consistency属于任务reward组合，GRPO目标标准；贡献限临床3–3.8B且7B全collapse，不当作通用新优化器。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06360v1",
+          "location": "§2.2；§3 Table 1及§3.5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06204",
+      "title": "Do Small Language Models Learn to Negotiate? A Controlled Scaling Study of RL-Trained Sellers",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "独立双边谈判ledger环境：私有Dirichlet效用、JSON counter/accept、12轮封顶与held-out买家/领域，具公共评测潜力。正文给协议但未找到作者环境/场景生成器发布链接；跨size有架构/计算混淆，不能据此结论能力scale。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06204v1",
+          "location": "§3；§4；§6"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "四尺度卖方GRPO与学习率对照，结论是调参与评测协议，未提出新算法。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "独立双边谈判ledger环境：私有Dirichlet效用、JSON counter/accept、12轮封顶与held-out买家/领域，具公共评测潜力。正文给协议但未找到作者环境/场景生成器发布链接；跨size有架构/计算混淆，不能据此结论能力scale。"
+    },
+    {
+      "id": "2610.05994",
+      "title": "How (and How Not) to Use Data Augmentation in VLA Post-Training",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "使用既有PPO/Flow-SDE比较augmentation placement，贡献是critic-only增强经验规则，而非新的RL/OPD核心算法。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.05994v1",
+          "location": "§3 Experimental Framework；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "针对方法、实验协议与主要结果的正文定向核查；非逐字通读全部附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05935",
+      "title": "ThunderSyncRL: Lossless Acceleration of Agentic Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ThunderSyncRL用固定策略版本、GRPO双梯度累积和OPD按token延迟归一化在单次optimizer barrier前流式计算，数学更新等价；B200/H200数值核查和真实agent训练，不应把异步陈旧梯度代理当复现。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05935",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05935v1",
+          "location": "§3.3–3.4 Eq.1–9；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05872",
+      "title": "Off-Policy Merging Beats On-Policy Self-Distillation for Continual Learning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "以离策略donor微调增量、retention Fisher/KFAC敏感方向投影与缩放合并到当前模型，Qwen/OLMo持续学习验证；不同于2610.00767信念移植及旧GRAFT2609.37868轨迹交换。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05872",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05872v1",
+          "location": "§4 Algorithm 1；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07043",
+      "title": "TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "TRIAGE在负优势负gap token按segment门控并保持响应更新质量归一化，正优势加有界pseudo-Huber修复；真实NVFP4 learner/sampler实验，A100仿真不能宣称原生吞吐。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07043",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.07043v1",
+          "location": "§4.1–4.2 Eq.12–20；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05600",
+      "title": "An LLM-in-the-loop RL Framework for Bioinformatics Feature Selection",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "RL用于生物特征选择，LLM提供建议和奖励但不更新LLM策略本身。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05600",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05481",
+      "title": "CodeForge-MA: Execution-Verified Multi-Agent Learning with Language-Conditioned LoRA for Multilingual Code Generation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "PPO+SFT本身是标准配方，但语言条件稀疏Mixture-of-LoRA门控是可执行新增参数机制；Qwen1.8B与72B API实验。应复现路由和辅助约束，非仅重命名PPO。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05481",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05481v1",
+          "location": "§IV-C–D Eq.12–20；实验配置"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05446",
+      "title": "Hierarchical Time-aware Bootstrapping for Off-Policy Subgoal Value Learning",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "HIRO类AntFall层次控制的off-policy subgoal value learning，无语言模型后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05446",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05425",
+      "title": "Unmentioned Checklist Findings Change How Reinforcement Learning Appears to Improve Chest Radiograph Report Checking",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公开checklist/reader格式稳健性诊断：图像writer不读待查句，checker不读图；matched-label pair和三个checker区分omission/order影响。官方代码/格式/analysis可访问，CheXpert数据须注册协议；医学专门诊断不作临床效益或通用视觉提升证据。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.05425v1",
+          "location": "Results study design；Methods；Code/Data availability"
+        },
+        {
+          "url": "https://github.com/ali-vosoughi/VerifyGRPO-Rad",
+          "location": "作者资源入口只读核查；边界见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "胸片checklist未提及项如何改变RL评测的控制研究，非新的优化算法。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05402",
+      "title": "Task Vector Descent: Learning from Non-IID Batches",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "TVD将连续同分布小批更新的task vector部分整合，同时插值Adam一阶矩/步数、平方根空间二阶矩；固定样本预算与训练/评价分离，覆盖SFT及GRPO。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05402",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05402v1",
+          "location": "§3.1 Eq.3–4；§3.2–3.3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05373",
+      "title": "Towards Unbiased On-Policy Distillation for Block Diffusion Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Un-OPD筛选可见上下文对齐的block决策，对高teacher-support位置混合teacher与detach student logits校准，并复用rollout；真实BDLM实验。标题unbiased不可扩展为任意复用无偏保证。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05373",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05373v1",
+          "location": "§3.2–3.4 Eq.3–7；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05367",
+      "title": "AIProver: Agentic Auto-Formalization of Mathematical Research via Certificate-Driven Evolving Harness",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "AIProver交替训练模型与进化harness，SAM双视图对比及CE、证书RLSF和独立fitness集accept/rollback；需真实形式验证链，不得用gold证明fixture替代。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05367",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05367v1",
+          "location": "§4（SAM与HarnessEvolve）；Table 3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05329",
+      "title": "Understanding the Weight Averaging Mechanism in LLM Training for Post-Training Quantization",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "预训练权重平均与PTQ的理论和kernel，属于基础模型量化。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05329",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.07023",
+      "title": "Beyond Refusal Patterns: Safe-Role Internalization for Robust and Generalizable LLM Safety Alignment",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "SSRFT核心是安全角色QA生成扩展与常规SFT的安全对齐数据流程，未形成新增优化器/蒸馏算法；保留安全数据研究价值但不收入本轮核心算法。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.07023",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.07023v1",
+          "location": "§3；§3.6；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05308",
+      "title": "RubricArmor: Adversarial Evolution Improves LLM-Based Rubric Generation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "RubricArmor独立质量判断确认满分但有缺陷的攻击，再经降分与独立review双验收迭代修补rubric；有2K WildChat、三policy真实GRPO验证。核心是可执行reward构造循环，须保留验证者非简单字符串rubric。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05308",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05308v1",
+          "location": "§3.2–3.3 Algorithm1；§4.6/Table4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05303",
+      "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ASCENT单次在线episode仅对已验证成功轨迹更新LoRA，以固定初始模型读过滤的自身hindsight作为teacher、forward-KL训练不见hindsight的student；无外部gold答案，须严格prequential协议。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05303",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05303v1",
+          "location": "§3.3 Eq.6–12；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05292",
+      "title": "Erased, Rerouted, or Rescaled? Post-Training and the Causal Quotient of a Language Model's Belief State",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "分析post-training对belief state的抹除/重路由/缩放及KL保护，非新训练算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05292",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05282",
+      "title": "Red-TTT: Test-Time Training for Automated Jailbreaking Large Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Red-TTT按单目标test-time LoRA适应，softmax(beta reward)-uniform风险偏好优势、随轮增强beta与elite replay；固定120查询预算研究。仅列算法研究，不实施攻击。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05282",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05282v1",
+          "location": "§3.2 Eq.8–11；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05265",
+      "title": "Loopy: Low-Bit Quantization Framework for Looped Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "循环模型低bit PTQ及校准预算分配，无RL/OPD。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05265",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05200",
+      "title": "Learning without Overwriting: A Theory of Self-Distillation and Supervised Fine-Tuning in Continual Reasoning",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "OPSD/SFT持续推理的DAG理论解释，摘要未给出新的训练方法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05200",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05139",
+      "title": "Hidden in the Comments: A Context-Injection Attack Surface in Code LLMs",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公开安全评测：双条件Flask prompt、generation harness、5组件detector及comment position对照。Zenodo API已证实open/published、Manuscript_Codes.zip及校验和。非同scaffold配对且task类型混淆；detector以实验条件作参考非漏洞gold，不能当纯因果或真实漏洞准确率。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.05139v1",
+          "location": "§4.1–4.2；§5；Data and Artifact Availability"
+        },
+        {
+          "url": "https://doi.org/10.5281/zenodo.22662814",
+          "location": "作者资源入口；当前可用性限制见reason"
+        },
+        {
+          "url": "https://zenodo.org/api/records/22662814",
+          "location": "published/open metadata；Manuscript_Codes.zip md5 7c8a1a03f5ed8e4a1f224b15f4aa88eb"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "代码注释上下文注入攻击评测，非训练算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05125",
+      "title": "Bayesian Entropy-based Reordering for Calibrated Diffusion Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "BayesER为后验不确定性引导扩散推理token提交，无adapter训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05125",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05099",
+      "title": "Small Agents with Semantic Search: Efficient Multilingual Code Localization",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "代码定位使用既有质量加权SFT、Dr.GRPO/DAPO和领域F1/轮数奖励，主要新贡献semantic-search harness及数据，不是新核心训练算法；gold只用于训练权重。 该决定仅限后训练核心track，Agent方法/数据公共入口由Agent track独立判断，不能据此全局拒绝。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05099",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05099v1",
+          "location": "§4.1–4.2 Eq.1–2；Table 2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.05097",
+      "title": "ReMAP: Restoring the Perceptual Cycle with Reasoning-Time Latent Visual Memory",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ReMAP使用全局/局部latent视觉memory、region定位器和分阶段形成/访问训练，再用RL学习何时取证；十基准，必须保留真实视觉memory而非文本oracle。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.05097",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.05097v1",
+          "location": "§3.1–3.2；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06993",
+      "title": "DART-ES: Difficulty-Aware Reweighting and Targeted Replay for Fine-Tuning LLMs with Evolution Strategies",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "DART-ES用扰动种群正确率EMA构造连续难度权重，并以掌握阈值和零成功耐心控制稀有可解样本重放；实际LLM数学ES对比，不能把历史正确率oracle放入评价agent。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06993",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.06993v1",
+          "location": "§3.2 Eq.3–6/Algorithm1；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04950",
+      "title": "How Should Teachers Be Prepared? RL on Student-Induced States for On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Prep-OPD先让teacher在固定初始student产生的prefix状态上RL，再冻结teacher做OPD，实测DeepMath及8数学基准；无gold解法灌入teacher，需保留两阶段状态分布。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04950",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04950v1",
+          "location": "§3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04918",
+      "title": "Residual Visual Credit Optimization: Conserved Evidence Routing for Multimodal Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "RVCO用图像patch干预似然构建证据分数、IQR/entropy路由及residual校正精确保留响应credit质量；ViRL39K四VLM家族训练，需真视觉干预而非固定token启发式。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04918",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04918v1",
+          "location": "§3.1–3.3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04914",
+      "title": "Monitorability Disposition in Large Reasoning Models",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "monitorability disposition是独立自报告/关闭监控工具协议：两channel topology×四directive、三类150条既有任务与外部judge。附录有prompt，但未找到作者可执行runner/结果数据公开入口；需要公共执行资源核实，不因无新loss拒绝。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.04914v1",
+          "location": "§2.1–2.5；§3；Appendix A–B"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "监控自报告意愿评测与工具选择测量，没有后训练方法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "monitorability disposition是独立自报告/关闭监控工具协议：两channel topology×四directive、三类150条既有任务与外部judge。附录有prompt，但未找到作者可执行runner/结果数据公开入口；需要公共执行资源核实，不因无新loss拒绝。"
+    },
+    {
+      "id": "2610.04899",
+      "title": "Rewrite What Matters: Adaptive Multilingual Query Rewriting for Reasoning via Agentic Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "mRewriter-R1以冻结下游准确率奖励训练query重写，正文明确使用标准GRPO；aspect/operator规划属于应用框架而非核心优化器创新。 该决定仅限后训练核心track，Agent方法/数据公共入口由Agent track独立判断，不能据此全局拒绝。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04899",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04899v1",
+          "location": "§2.3；§3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04888",
+      "title": "No Hindsight for LLM Fact-Checkers: Measuring Leakage Channels in Misinformation Detection",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "point-in-time fact-checking分离检索未来证据和参数结果泄漏，有日期trust-tier、时间split、冻结LLM瓶颈/MI head；正文明确date cache、split、K文本与code将在camera-ready发布。当前不能确认公共重现入口；K含label信息与未知日期丢弃是已知限制。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.04888v1",
+          "location": "§3.3–3.5；§4；Table 8；Limitations"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "fact-checking未来证据/参数泄漏测量与表示瓶颈控制，非RL/OPD新算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "point-in-time fact-checking分离检索未来证据和参数结果泄漏，有日期trust-tier、时间split、冻结LLM瓶颈/MI head；正文明确date cache、split、K文本与code将在camera-ready发布。当前不能确认公共重现入口；K含label信息与未知日期丢弃是已知限制。"
+    },
+    {
+      "id": "2610.04882",
+      "title": "ResOPD: Tail Residualization for Sparse On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ResOPD完整top-k质量加tail bucket基线，每步coarse梯度与稀有tail残差组成无偏估计（仅全支持祖先采样）；主数学实验top-p=.95/top-k20不满足该无偏条件，必须分别报告机制与成绩。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04882",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04882v1",
+          "location": "§3.2–3.3 Eq.8–15；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04851",
+      "title": "CURIO: Curiosity-Driven Test-Time Learning for Open-Ended Discovery",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "CURIO训练hidden-state transition预测器并缓存更新前残差，epoch归一后只在非top-k采样token加bonus；它不是语义新颖性保证，encoder/predictor仍可能collapse；有科学发现任务实测。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04851",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04851v1",
+          "location": "§3.2–3.3 Eq.5–14；实验"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04845",
+      "title": "Which Preferences to Train On? End-to-End Multi-Objective Alignment with an Adversarial Preference Distribution",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "MAESTRO用Dirichlet对抗偏好分布DirUEG更新，独立adversary/policy批次、向量reward GAE后偏好标量化；多目标HH/Beaver与摘要faithfulness实验。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04845",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04845v1",
+          "location": "§3 Algorithm 1；§3.2；实验"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06962",
+      "title": "Verdicts Without Annotated Evidence: Rejection Sampling or Label-Only Post-Training for Evidence Recovery?",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "ContractNLI既有任务上的label-only SFT与RSFT比较，document split无重叠但单seed；新内容是两种监督的证据质量解耦分析，未形成独立公开任务/评分器。作为evidence recovery消融参考，非新增入口。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06962v1",
+          "location": "§2.1；§3.1–3.2；§5；§8"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "ContractNLI上label-only训练与拒绝采样对比，单seed诊断，无独立新优化器主张。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04651",
+      "title": "GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "GS-Codec神经音频编码瓶颈与高斯splatting，关键词post-training是bitrate控制。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04651",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04604",
+      "title": "Anticipating the Consequences of Curriculum Decisions with Large Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "LLM指导Craftax学习课程，但训练对象为环境RL learner而非LLM后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04604",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04596",
+      "title": "DiffGate: Difficulty-Gated Teacher Guidance for On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "DiffGate将teacher-student logratio以2tanh(delta/2)有界映射，并按组成功率只对失败轨迹调节teacher指导；固定8B teacher、0.6/1.7B学生数学代码训练。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04596",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04596v1",
+          "location": "§4 Eq.方法；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04507",
+      "title": "LoRA's Second Descent Extends Beyond Parameter Parity",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "LoRA rank和label noise下double descent现象研究，不是新后训练算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04507",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06950",
+      "title": "Learning to Decide, Not to Reason: Parameter-Efficient Decision Operators via Low-Rank Activation Steering",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "DecSteer训练共享低秩activation residual与token门控，初始identity但输出支路有梯度，集中学习决策而非全模型；真实SearchQA/LiveMath BC及多基准，需保留RMS+SiLU+gate结构。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06950",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.06950v1",
+          "location": "§3；§4–5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04441",
+      "title": "LocusRL: Diagnosing LLM Reward and Policy Interventions in Competitive Games",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "LocusRL的学习者/奖励/执行/证据5层审计与terminal replay certificate可作诊断入口，单次修复仅证明该state充分修正，20证书不是20独立局面。作者LocusRL-Pub链接两次不可读，待公开代码核实。 补充直接HTTP检查返回404。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.04441v1",
+          "location": "§3.1–3.2；Appendix H"
+        },
+        {
+          "url": "https://github.com/luancy0423/LocusRL-Pub",
+          "location": "作者资源入口；当前可用性限制见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "LocusRL为奖励/策略干预的可审计诊断框架，不以新优化算法为贡献。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "LocusRL的学习者/奖励/执行/证据5层审计与terminal replay certificate可作诊断入口，单次修复仅证明该state充分修正，20证书不是20独立局面。作者LocusRL-Pub链接两次不可读，待公开代码核实。 补充直接HTTP检查返回404。"
+    },
+    {
+      "id": "2610.06947",
+      "title": "FactorBench: A Portfolio-Aware Benchmark for Automated Factor Mining",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公共评测：统一symbolic/Python factor→date×asset signal契约，5市场、训练2017–21/验证2022–23/测试2024–25，组合和成本回测。官网仓库含data/evaluator/mining入口，可作为专门的自动研究任务，不宣称普适LLM能力或实盘A/B。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06947v1",
+          "location": "§3.1–3.3；§4；Appendix B"
+        },
+        {
+          "url": "https://github.com/ZhuoHan1998/FactorBench-Release",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "out_of_scope",
+      "core_algorithm_reason": "金融因子挖掘benchmark，非LLM后训练新算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04412",
+      "title": "Large Language Models and Augmented Democracy",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "数字孪生增强民主的学位综合研究，非明确独立RL/OPD核心算法候选。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04412",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04403",
+      "title": "Saying, Not Knowing: Aggressively GGUF-Quantized Small Language Models Still Write Rare Words They Can No Longer Define",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "GGUF低bit模型词义能力测量，属于量化评测。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04403",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04344",
+      "title": "Hierarchical Credit Assignment for RLVR on Fused Gromov-Wasserstein Geometry",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "HarA用正确/错误轨迹各自hidden-state位置图FGW重心，按span到重心贡献赋予正/负不同幂credit再乘GRPO优势；真实多模型多基准，不能以欧氏token分数替换FGW。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04344",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04344v1",
+          "location": "§3.1–3.2 Eq.7–8；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04328",
+      "title": "Bidirectional Preference Synthesis: Learning Prompt-Conditioned Preferences from Boundary Failures",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "BPS是独立离线偏好构造算法而非新loss：从部分失败生成student修正与安全/非泄漏achieved prompt，cycle-consistency验证后同一response pair在两prompt反向成crossed anchor，再标准DPO。IFBench及function-call有机制/下游实验；不把teacher同源的ranking诊断误当独立泛化。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04328",
+          "location": "Method：boundary selection、forward/reverse anchors、validation；Experimental setup；Function-calling instantiation；Diagnostic analysis"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04328v1",
+          "location": "Method/DPO Training on Mixed BPS Dataset；实验Table1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "candidate_kind": "preference_data_algorithm",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04299",
+      "title": "Questioning the Questions: Sustaining Self-Evolution in Reasoning Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "R-Quest有效性初始化与采样成对新颖性门控改变questioner–solver自演化反馈；真实两家族实验。但正文按每域最高测试benchmark均值选checkpoint，复现必须另设validation，不能继承该选择为无偏正式成绩。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04299",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04299v1",
+          "location": "§3.1–3.3；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04272",
+      "title": "Rethinking Self-Distillation for Multi-Teacher Capability Merging",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "控制数据和超参比较MOPD/SFT/soft-label及已有merge方法，贡献为公平基线诊断。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04272",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04269",
+      "title": "Self-Reflection Fine-Tuning: Enhancing Agent Security against Prompt Injection Attacks from Failure Experience",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "SRFT将失败动作分析成安全思考+动作样本，正文标准负loglikelihood LoRA SFT；数据/安全框架有价值但无新增核心后训练算法。 该决定仅限后训练核心track，Agent方法/数据公共入口由Agent track独立判断，不能据此全局拒绝。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04269",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04269v1",
+          "location": "§4.5；§5.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04261",
+      "title": "Playing social deduction games with reinforcement fine-tuned large language models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "社交推理/影响reward与同侧共享策略的GRPO应用；正文标准group normalization/PPOclip/KL，无新增优化器，归Agent环境研究。 该决定仅限后训练核心track，Agent方法/数据公共入口由Agent track独立判断，不能据此全局拒绝。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04261",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04261v1",
+          "location": "§5.2.1–5.2.5 Eq.6–12；§2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04158",
+      "title": "How RL Reshapes LLM Reasoning: Transferability, Coverage, and Scaling Laws",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "RL策略选择、transfer/coverage/scaling理论与测量，未提出新的训练机制。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04158",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.04132",
+      "title": "PB-GRPO: Learning Socially Adaptive LLM Agents from Persona-Driven Simulation with Preference-Batched GRPO",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "PB-GRPO保持prompt-local均值，但在同潜在偏好bucket内合并方差作为分母；128训练persona/100未见persona真实Qwen7B，初步单设置证据需保守。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.04132",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.04132v1",
+          "location": "§3公式；§4/Table1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03984",
+      "title": "Teaching Agents to Code Reliably",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "在mutation/sibling补丁上给测试断言按加权coverage Shapley credit，门控正轨迹优势再注入assertion token，属新credit机制；gold tests仅scorer可见。全500例先诊断后230训练270holdout，不应宣称完全未接触测试。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03984",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.03984v1",
+          "location": "§2.3 Eq.2–5；§3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03972",
+      "title": "Probabilistic Algorithms for Ising Machines from Optimization to Generative AI",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "Ising机器概率算法综述，不是新LLM后训练论文。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03972",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03702",
+      "title": "LESSER: Post-Training Data Selection with Output-Layer Gradients",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现LESSER；记录为L1输出层梯度/选择诊断，不等于LLM训练benchmark。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03702",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12714：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.03665",
+      "title": "Pivot-SD: Efficient Self-Distillation for Masked Diffusion Language Models",
+      "repository_status": "new",
+      "decision": "known",
+      "reason": "ledger已全文审查Pivot-SD但尚未实现真实扩散轨迹训练，保留既有unresolved状态。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03665",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12821：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.03567",
+      "title": "Writerslogic at the CLEF 2026 SimpleText Track: Multi-Candidate LLM Simplification and Stacked Complexity Spotting",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "SimpleText共享任务系统：候选重排与DeBERTa NLI微调，无新LLM策略算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03567",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03529",
+      "title": "Divergence controls entropy in distillation",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "蒸馏divergence对entropy影响的理论与控制实验，未提出独立新训练方法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03529",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03515",
+      "title": "Learning from Repaired Reasoning: Root-Cause-Guided On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "known",
+      "reason": "ledger已审查RC-OPD方法及作者评测仓库；真实repair-continuation与训练仍未实现。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03515",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12819：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.03480",
+      "title": "Metropolis-Hastings Dominates Importance Resampling for Policy Composition",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "MH对比importance resampling的policy composition推理采样理论，不更新LM。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03480",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03454",
+      "title": "Measure Less, Know More: Self-Supervised Test-Time Feature Acquisition",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "RL用于测试时模态获取策略，目标为任意foundation表示，非LLM后训练机制。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03454",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03369",
+      "title": "Mixture-of-Experts for Cryptocurrency Order Execution: Training Stability, Tail Risk, and Failure Modes",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "加密货币订单DDQL/MoE多seed控制研究，无语言模型训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03369",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03361",
+      "title": "Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现FTW；L1 FIFO/top-K/KL CPU机制诊断，尚无Search-R1/Sokoban训练证据。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03361",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12745：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.03223",
+      "title": "AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现AdaStep；L1合成returns方差算子，没有agent policy训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03223",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12746：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.03195",
+      "title": "Source Preference in the Wild: How LLM Agents Favor Items by Source, and How to Reduce It",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "请求满足度匹配+循环Latin-square位置控制+BT-Davidson source preference形成独立Agent诊断协议；URL显隐/置换实验。正文Reproducibility明确code/dataset待publication发布，当前不视为公共执行入口，转Agent待跟进。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.03195v1",
+          "location": "§2–3；§5.1–5.2；Reproducibility statement"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "搜索代理来源偏好及提示消偏的测量研究，没有新的训练优化器。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "请求满足度匹配+循环Latin-square位置控制+BT-Davidson source preference形成独立Agent诊断协议；URL显隐/置换实验。正文Reproducibility明确code/dataset待publication发布，当前不视为公共执行入口，转Agent待跟进。"
+    },
+    {
+      "id": "2610.03190",
+      "title": "Not Until the Evidence Says So: Teaching LLM Investigators When to Close a Case",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Nautil提供证据索引/request工具、close/open任务、来源内balanced accuracy及删关键证据对照；官方MIT代码/数据/模型公开。RLVR checkpoint选择用过64测试中22条，必须改验证集隔离，不能照搬其headline为无泄漏泛化。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.03190v1",
+          "location": "§3–6；§7；官方README Main results"
+        },
+        {
+          "url": "https://github.com/etigerstudio/Nautil",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "Nautil数据与closure行为评测，训练采用SFT与现成closure reward RL，主要贡献不是新算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03185",
+      "title": "Gains and Collapse in On-Policy Distillation:A Reinforcement Learning Perspective",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "OPD收益/崩溃机制分析，缓解为截断响应loss mask和既有SFT warmup，保持原优化配方；不是独立新核心算法，但是ResOPD等复现的重要风险证据。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03185",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.03185v1",
+          "location": "§2.3；§5.2/Table3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03109",
+      "title": "Emergent Structure in the Marginal Attention Space of Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "marginal attention结构与KV eviction预算，属于推理/基础模型。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03109",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.03063",
+      "title": "HARPO: Hallucination-Aware Reinforcement Learning for Faithful and Creative Language Generation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "HARPO训练hallucination-span reward model，只有预测零幻觉才激活写作reward，并配创作到忠实cosine课程；属层级多目标reward机制，不是新的GRPO；gate不保证真实无幻觉。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.03063",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.03063v1",
+          "location": "§2.2 Eq.6–7；§3–4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02986",
+      "title": "OLMo-Detect: A Multi-Stage, Confounder-Controlled Benchmark for Membership Inference on Large Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "OLMo-Detect是跨pre/mid/post训练membership审计任务，member/nonmember按质量、时间、词汇匹配，15无监督/3监督MIA与dev/test分离；官方仓库有数据和评分pipeline。评估成员识别/污染风险，不等同提升LLM推理。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.02986v1",
+          "location": "§3；§4.3–4.7；§5.1"
+        },
+        {
+          "url": "https://github.com/LuckyDaydreamer/OLMo-Detect",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "OLMo-Detect membership inference benchmark，非训练改进。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02886",
+      "title": "Misinformation Without Triggers: From Factual Answers to Downstream Decisions",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "无trigger数据投毒对事实与下游决策影响的控制评测，不是后训练方法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02886",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02856",
+      "title": "Adaptive Mutual Distillation for Balanced Multi-Task Post-Training of Large Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "AMD对MFT/平滑SFT两分支互蒸馏，三类全局短probe从相同状态试增减/保持权重，丢弃probe参数后按各任务方向validation选择；6基准多骨干实测，probe成本必须计入。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02856",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02856v1",
+          "location": "§3.1–3.2 Algorithm1；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02835",
+      "title": "All Work And No Play Makes Jack a Dull Boy: Understanding and Preventing Catastrophic Strategy Collapse in RLVR",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "MeshLearning固定离线coach策略前缀（无中间计算和答案）探索，对正确轨迹相对pre-RLVR reference的策略logprob增长做uniform-KL均衡；推理时无coach，真实数学科学代码训练。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02835",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02835v1",
+          "location": "§4.1–4.2 Eq.6；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02832",
+      "title": "FastOPD: On-Policy Distillation for Lightweight VLA Deployment",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "FastOPD单次学生flow-map跳跃采样on-policy状态匹配teacher对角velocity，并用中点自一致传播到有限步map；LIBERO/RoboTwin及真机器人，单步action-expert训练必须真checkpoint。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02832",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02832v1",
+          "location": "§3 Eq.3；§4.1–4.2"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02828",
+      "title": "FSPO: Policy-Consistent Risk and Pareto-Feasible Control for Budgeted LLM RL Post-Training",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "FSPO policy-consistent risk-to-go ensemble、decision-conditioned calibration与Pareto continuation证书控制训练动作；正文区分24case ledger机制与Qwen3B真实GRPO trainer研究。接纳机制，不能把固定ledger效率当LLM能力提升。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02828",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02828v1",
+          "location": "§3.4–3.6；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02819",
+      "title": "Text-Centric Post-Training for Omni-Modal Reasoning",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "Text-centric Omni是文本/多模态数据与SFT/RL配方系统研究，梯度正交仅诊断，未提出新核心optimizer；保留训练范式结论而不新增适配器。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02819",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02819v1",
+          "location": "§3.2；§4.1–4.2；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02781",
+      "title": "OPD Before RL: Warm-Starting Rubric-Based RL with On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "RP-OPD先用rubric特权teacher top256 forward-KL暖启动，再切换rubric reward GRPO；三rubric领域多学生。HealthBench正文另列重叠/不重叠评价，正式复现须使用完全隔离数据。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02781",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02781v1",
+          "location": "§3 Eq.4；§4–5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02766",
+      "title": "Exact Memory-Time Optimization for Prefix-Cached Language Model Serving",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "prefix缓存timeout最小割/closure优化，纯serving系统算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02766",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02744",
+      "title": "EpiWorld: Grounding LLM Policy Agents in Epidemiological World Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "EpiWorld模拟器counterfactual与技能经验记忆，不是明确LLM参数后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02744",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02700",
+      "title": "Learning from Evolving Errors: Adaptive Iterative Repair for On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "AIR-OPD按首个错误anchor开始，保留1-epsilon纠正概率质量的块边界repair区域；多轮指导teacher特权蒸馏和gamma深度/rho即时成功归一权重；参考答案只训练分支，实际DAPO训练。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02700",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02700v1",
+          "location": "§4.1–4.3 Eq.6–10；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02695",
+      "title": "Test-time Calibration Learning for Large Language Model Reasoning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "TTCL按答案一致性构造pseudo正确性/置信目标，reasoning-answer和confidence token分离优势，逐epoch冻结EMA目标cache；同benchmark无标签适应再评测，属于transductive TTT非独立未见测试。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02695",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02695v1",
+          "location": "§3.2–3.3 Eq.4–12；§5.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02614",
+      "title": "What Is Lost in Post-Training? Default Collapse and the Loss of In-Context Steerability Across Diverse Perspectives",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "SDM以相关性judge筛prompt、stance judge分桶，在维度群体分布上惩罚目标偏离并PPO；Llama8B两设置初步训练，不能把群体分布约束说成逐prompt保证。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02614",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02614v1",
+          "location": "§4.2；Appendix E；§3.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02593",
+      "title": "Fisher-Guided Submodular Data Selection for Continual Pre-Training of Large Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "Fisher/submodular数据选择用于continual pretraining，转基础模型track。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02593",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02554",
+      "title": "Test-time Multi-agent Coordination by Decomposed Value Gradient Flow",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "SCOUT为offline MARL生成先验和SVGD action refinement，不是语言模型后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02554",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02486",
+      "title": "From Retrieval to Typed Decisions: Calibrated System One Models from Biomedical Sentence Encoders",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "生物sentence encoder转typed-decision模型和RLCD诊断，主要架构/校准研究。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02486",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02466",
+      "title": "SD-DPC: Sparse Dictionary Differentiable Predictive Control",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "SINDy字典稀疏非线性控制policy，不涉及LM。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02466",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02444",
+      "title": "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "SymCE公开反例任务/逐定理Python verifier/结构schema和dense/sparse reward，可作RLVR/evolve评测；作者仓库含corpus/splits、oracle/sandbox、runner及逐条结果。schema由canonical witness构造，需审查是否泄漏答案形状，隔离任意Python执行。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.02444v1",
+          "location": "§3.1–3.5；§5.2；§6"
+        },
+        {
+          "url": "https://github.com/ce-rlvr/SymCE",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "SymCE counterexample语料/verifier与SFT、GRPO对照，主要数据及现象研究，未提出新训练算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02359",
+      "title": "Lexicographic Multi-Objective On-Policy Distillation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "LMOPD按最高优先未满足reward路由expert，再对centered log-policy correction一次顺序投影成virtual teacher；真实多expert实验，但专有训练语料、单次非正交投影不保证全部约束或reward级无退化。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02359",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02359v1",
+          "location": "§3.3–3.4 Eq.5/8–10；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02324",
+      "title": "Slow-Fast Multi-Teacher On-Policy Distillation for Capability Preservation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "SF-MOPD维持EMA慢学生，以slow-fast logprob方向去除teacher冲突部分并JSD蒸馏+原MOPD正则；QwenVL2/4/8B多domain实测，需真实EMA参数而非固定reference替代。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02324",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02324v1",
+          "location": "§2.2–2.4 Eq.4–10；§3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02206",
+      "title": "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "KaliBench公开8504 query-command/1642工具数据与runtime-free shlex评分，三个信息条件、alias-aware参数匹配可作工具使用评测。仅离线命令字符串评分，不等同实际环境执行成功；不得自动对真实目标执行命令。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.02206v1",
+          "location": "§3 Evaluation Protocol；§4；Appendix L"
+        },
+        {
+          "url": "https://github.com/RISys-Lab/KaliBench",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "KaliBench数据与CLI评测/runtime-free reward，用现有SFT和RLVR，非独立新策略算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02191",
+      "title": "The Missing Primitive: Diagnosing and Repairing Mathematical Reasoning in Large Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Absorb以数学primitive为训练teacher特权，用reverse-KL单侧clamp限制压低学生偏好的强度，保留正向teacher指导；Prim/HLE/HMMT/Omni实测。gold primitive不得进入被评价student。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02191",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02191v1",
+          "location": "§4.1–4.4；Appendix E"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02190",
+      "title": "Trust the Direction, Search the Step: Zero-and-First-Order Methods for LLM Fine-Tuning",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ZFO沿基础一阶optimizer方向，用同batch正负两次前向估二三阶导，Taylor/Padé区间择步并奇点fallback；真实LLM微调与开销实验，须匹配额外前向预算。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02190",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02190v1",
+          "location": "§2 Algorithm1；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02189",
+      "title": "Generative modeling of intrinsically disordered protein regions by reinforcing sparse autoencoder features",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "蛋白IDR专用LM及SAE功能控制，非本track的通用LLM RL/OPD能力方向。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02189",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02173",
+      "title": "Every Ablation Is a Dose: Counterweights and the Semblance of Self-Repair",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "组件ablation的self-repair因果解释，非后训练算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02173",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02163",
+      "title": "AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已在Agent目录收录AutoCompact，避免跨track重复实现。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02163",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12605：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.02140",
+      "title": "Finetuning with Sampling: SFT Learns Better Than You Think",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "Projection Sampling用expert条件proposal与Metropolis-Hastings分块采样使信息保留轨迹靠近base，再SFT；化学/数学/开放域真实训练。不得将有限MCMC近似等同理想投影精确采样。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02140",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02140v1",
+          "location": "§4.1–4.3 Algorithm1；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02117",
+      "title": "Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现Where-OPD，保留synthetic scene privileged spatial指导的既有结论。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02117",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12563：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.02039",
+      "title": "CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现CARM逐token绝对log-ratio response masking。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02039",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12598：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.02019",
+      "title": "Controllable Multi-label Video Safety Detection via Adaptive Tversky Policy Optimization",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "ATPO以FN/FP EMA log-ratio误差反馈调Tversky alpha/beta，固定和为2，可全局/类别控制多标签reward；真实VideoVLM训练，新增自适应reward控制器而非重命名标准GRPO。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02019",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.02019v1",
+          "location": "§3.3 Eq.7–13；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.02015",
+      "title": "On Language Drift during RLVR Post-Training",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "语言漂移的RLVR理论条件及经验分析，不提出新训练机制。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.02015",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01955",
+      "title": "Do Your Own Research: Learning to Forecast by Learning to Search",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "prime-forecast公开工具环境/历史问题/rollout记录，point-in-time过滤、封锁市场价格、Brier和弃答插补可独立评估研究预测；训练/测试按解决日期隔离。实时检索和API过滤非静态可复现，过滤的完美小样本结果不是无泄漏证明。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01955v1",
+          "location": "§2–4；Appendix C"
+        },
+        {
+          "url": "https://github.com/afifi-yusuf/prime-forecast",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "预测市场数据与时序防泄漏harness、单epoch Brier-GRPO应用，非新优化算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01908",
+      "title": "Same Reward, Different Skills: When Multimodal RL Learns to Look",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "counterfactual scene生成/target stable-switch-invariance对照与独立confirmatory set可构成视觉grounding评测；普通GRPO只训练discovery。匿名代码入口不可读，需验证scene生成器与固定dev/test公开，不能以benchmark增益替代视觉依赖证据。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01908v1",
+          "location": "§2–3；§5.1–5.4；§6；Code availability"
+        },
+        {
+          "url": "https://anonymous.4open.science/r/learning-without-looking-2432",
+          "location": "作者资源入口只读核查；边界见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "visual resolvability数据设计与blind-vs-real训练控制实验，优化器仍标准GRPO。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "counterfactual scene生成/target stable-switch-invariance对照与独立confirmatory set可构成视觉grounding评测；普通GRPO只训练discovery。匿名代码入口不可读，需验证scene生成器与固定dev/test公开，不能以benchmark增益替代视觉依赖证据。"
+    },
+    {
+      "id": "2610.01896",
+      "title": "Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现GMC-GRPO，对异步组importance weight作mass capping。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01896",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12599：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.01892",
+      "title": "Selection-Based Structured Reasoning: Toward Efficient Multimodal Search Agents",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "SSR全文不是普通工具应用：六共享推理模板以batched teacher-forced mean-logprob softmax选择，再插入全文生成action；SFT selector NLL+action NLL，GRPO一个categorical selector ratio+action token ratios，插入模板不逐token训练。AppendixB实际detach rollout竞争分数仅首步概率精确、后续近似。Qwen3VL2B/4B七multimodal搜索任务，效率须计候选prefill；保留原post摘要漏判并由正文纠正。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01892v1",
+          "location": "§3.2–3.3 Eq1–6；§4；AppendixB Eq7–11"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "pool": "main",
+      "review_status": "reviewed",
+      "post_training_cross_track": true,
+      "cross_tracks": [
+        "post_training",
+        "agent"
+      ],
+      "supersedes_abstract_decision": "out_of_scope"
+    },
+    {
+      "id": "2610.01828",
+      "title": "The Asymptotics of Language Model Alignment with Memory",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "Markov生成下best-of-n与KL-RL渐近关系理论，未提出新训练算法。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01828",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01815",
+      "title": "Debias Anything: Fairness with Diversity without Supervision in Diffusion Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "图像diffusion公平与多样性guidance，不是语言模型RL/OPD。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01815",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01670",
+      "title": "Do MLLM Judges Judge the Edit? Auditing Bias in Image Editing Evaluation with Verified Quality Preservation",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "EditJudgeBias独立judge偏差审计：quality-preserving cues、sham/retest噪声基线、顺序互换、paired统计。官方仓库有cue/judge/metric CLI，可评新judge，但不含全部图像/人工注释/作者I2EBench输出，不能宣称精确复现原数值。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01670v1",
+          "location": "§3–4；§5；Reproducibility Statement"
+        },
+        {
+          "url": "https://github.com/yuan4629/EditJudgeBias",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "EditJudgeBias counterfactual评测MLLM judge，非后训练算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01560",
+      "title": "AURAL: Adaptive Latent Reasoning with Joint Chunk for Speech Language Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "AURAL用对角+低秩协方差GMM联合latent chunks、CSA、可微两遍scheduled sampling，再按latent坐标归一ratio做GRPO；真实语音/文本基准和延迟，应保持整个latent模型。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01560",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.01560v1",
+          "location": "§3.1–3.2 Eq.2–6；§5"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01548",
+      "title": "Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现Range-GRPO，以conformal reward interval pairwise relation计算优势。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01548",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12554：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.01513",
+      "title": "Decision Titan: Test-Time Training for Long-Term Memory in Offline Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "Decision Titan在X-Maze用TTT增强Decision Transformer记忆，非语言模型后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01513",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01511",
+      "title": "GAW-PO: Preference Optimization with Gradient-Aligned Token Weights",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现GAW-PO，按梯度对齐给DPO rejected token重新加权。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01511",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12600：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.01509",
+      "title": "Sharpening Tax in Post-Training",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现Sharpening Tax/PTGS，避免将已收录diagnostic误作新候选。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01509",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12597：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.01278",
+      "title": "SCOPE-AD: Sequential cost-aware ordinal-belief planning with energy-based models for diagnostic agents",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "SCOPE-AD以观测ordinal belief、离线soft Bellman EBM规划teacher，再masked KL蒸馏到Qwen；ADNI患者级1552/333/333，真实未取得值隐藏。限医学离线规划非通用OPD或临床部署。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01278",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.01278v1",
+          "location": "§2.2–2.4 Eq.3–4；§3"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01275",
+      "title": "Know When to Hold 'em: Correct-Token Retention in Uniform-State Diffusion Language Models",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "USDM correct-token retention辅助loss属于扩散模型预训练/架构训练，转基础模型。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01275",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01238",
+      "title": "Mixture-Trained Merging for Unified Multi-Objective Models",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "MTM训练mixture-biased soft experts，以merge-simplex多目标BO选分支混合并迭代复用merged起点；真实Qwen4B/OLMo7B多域与think模式，必须validation选择并计入搜索训练。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01238",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.01238v1",
+          "location": "§4.1–4.3；§5.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01234",
+      "title": "ASCRIBE: Atomic and Significance-Based Reasoning for Thai Clinical SOAP Note Generation",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "ASCRIBE原子事实/临床重要性结构化推理、五类领域reward，正文LoRA SFT+标准GRPO；无新增核心优化器或蒸馏机制，归临床应用。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01234",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2610.01234v1",
+          "location": "§3.2.1–3.2.2；§6–7（PDF）"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01161",
+      "title": "My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已实现My FAULT自诊断terminal credit redistribution，保持既有保真度声明。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01161",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12561：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.01128",
+      "title": "Grounding Large Language Models in DSGE Simulators for Policy Generation and Forecasting",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "公开DSGE语言Agent环境：Snowdrop结构模拟器的状态深克隆、action校验、rolling forecast只提交首步、不可重写历史；matched PPO/GRPO共享起点/冲击。作者repo已可读，可作领域仿真任务；不是现实政策建议/实盘因果证据。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01128v1",
+          "location": "§3.1–3.3；§7.1–7.3；§8"
+        },
+        {
+          "url": "https://github.com/vasudeywos/Grounding_LLM_in_DSGE_Simulators_for_Policy_Generation_and_Forecasting",
+          "location": "作者资源入口只读核查；边界见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "DSGE模拟器接入PPO/GRPO比较，摘要未提出新优化算法。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01076",
+      "title": "GLoC-EHR: Evidence-Cited Clinical Reasoning over Global Context and Local EHR Events",
+      "repository_status": "new",
+      "decision": "accepted",
+      "reason": "GLoC-EHR新增global/local EHR memory接口与分阶段alignment、evidence-only sufficiency辅助loss；128350患者7:1:2隔离及外院验证。RL本身标准GRPO，接纳架构/grounded训练机制，gold只teacher/scorer可见。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01076",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.01076v1",
+          "location": "§3.1–3.4 Eq.4–5；§4.1"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.01066",
+      "title": "Probe with Participation Trophies: Random-Reward RL as a Probe of LLM Capability",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "随机奖励checkpoint响应诊断有固定rollout交叉、16配对replicate及任务/奖励/输入控制，不是新的可靠能力训练。官方rl-random-prob仓库当前明确empty，缺公共脚本/数据，待补发后评估诊断入口。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01066v1",
+          "location": "§3；Appendix 10；官方仓库empty状态"
+        },
+        {
+          "url": "https://github.com/mynotwo/rl-random-prob",
+          "location": "作者资源入口；当前可用性限制见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_decision": "rejected",
+      "core_algorithm_reason": "随机奖励RL作为capability reachability probe，是诊断方法非改进训练算法。",
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "pool": "main",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "随机奖励checkpoint响应诊断有固定rollout交叉、16配对replicate及任务/奖励/输入控制，不是新的可靠能力训练。官方rl-random-prob仓库当前明确empty，缺公共脚本/数据，待补发后评估诊断入口。"
+    },
+    {
+      "id": "2610.01026",
+      "title": "It Takes Workflows to Evolve Better Workflows",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "ledger已在Agent目录实现FloWright，非新候选。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.01026",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12562：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.00991",
+      "title": "Adapter Thickets: Splitting an RLVR Budget Beats Concentrating It",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "Adapter thickets固定训练/160推理rollout预算，随机分片独立LoRA+标准GRPO再投票，是预算分配/集成实证而非新核心训练loss。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00991",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00991v1",
+          "location": "§3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00988",
+      "title": "Auditable Algebraic Counting Field for Cryptic-Pocket Detection from Apo Structures",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "apo蛋白结构cryptic-pocket监督algebraic field，无LM后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00988",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00983",
+      "title": "The Devil Is in the Reconstruction Loss Scale: Rethinking Optimization in LLM Quantization",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "PTQ重建loss用RMSE进行梯度归一化，属于量化优化。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00983",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00964",
+      "title": "RPTune: Learned Context Curation for LLM Catalog Search",
+      "repository_status": "implemented",
+      "decision": "known",
+      "reason": "Google RPTune已收录；ledger注明七商家实验及本地L1 curation，不能重复纳新。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00964",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "location": "line 12588：引用已有审查/实现边界，不重复声称新全文审查"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.00954",
+      "title": "Beyond Leaderboards: Tokenomics of Agentic Small Language Model Ensembles",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "SLM ensemble推理反馈及token/cost评测，无参数后训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00954",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00903",
+      "title": "Sharpen Before You Adapt: Data-Free Entry-State Sharpening for Test-Time Reinforcement Learning",
+      "repository_status": "new",
+      "decision": "rejected",
+      "reason": "Entry-state sharpening统一分析SPIRAL、R-Zero和多数一致性伪样本SFT的TTRL准备效果，正文不绑定新算法，仍为现有GRPO与自蒸馏配方。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00903",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00903v1",
+          "location": "§3；§4"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验协议与主要结果的定向正文核查，非逐字通读附录",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00898",
+      "title": "When Do Biological Reasoning Models Use Their Biological Inputs?",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "公开bio-mirage干预/冲突评测核实存在，但输入依赖Evo2/蛋白/单细胞等专门生物编码器与KEGG/ChatNT/C2S任务；不是本轮通用LLM后训练或通用Agent评测入口，生物模态方向另列参考。",
+      "review_level": "fulltext",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.00898v1",
+          "location": "§3.1–3.2；§4；Code availability"
+        },
+        {
+          "url": "https://github.com/mims-harvard/bio-mirage",
+          "location": "作者资源入口只读核查；边界见reason"
+        }
+      ],
+      "fulltext_review_completed": true,
+      "core_algorithm_reason": "生物模型输入依赖的因果评测，非新训练算法。",
+      "core_algorithm_decision": "rejected",
+      "fulltext_scope": "方法、实验与独立评测价值定向全文核查；未执行代码",
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00888",
+      "title": "Match the Distribution, Not the Compute: Post-Training Multi-Token Prediction Heads",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "MTP head训练及speculative verification serving控制，转基础模型，不是RL/OPD核心。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00888",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00852",
+      "title": "Child-Adapted Structured Phonological Representations for Interpretable Speech Sound Analysis",
+      "repository_status": "new",
+      "decision": "out_of_scope",
+      "reason": "儿童语音phonological表示适配，非语言模型策略训练。",
+      "review_level": "abstract",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00852",
+          "location": "Abstract（输入检索工件中的完整摘要已逐条审阅）"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "pool": "main",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00838",
+      "title": "SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning",
+      "repository_status": "implemented",
+      "published": "2026-09-30T23:51:11Z",
+      "decision": "known",
+      "reason": "已有SHARPO条目；ledger L12601，沿用既有实现/证据边界，不重复收录。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00838",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "location": "L12601"
+        }
+      ],
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.00779",
+      "title": "Effective Synthetic Data Curation Requires Group-Level Signals",
+      "repository_status": "new",
+      "published": "2026-09-30T22:16:23Z",
+      "decision": "accepted",
+      "reason": "group-level influence评估下游训练效用，以组内梯度diversity优先分配昂贵group oracle调用，未审组用individual proxy；真实pretrain/RLVR训练，需隔离reference与test。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00779",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00779v1",
+          "location": "§3.1–3.2；§5 Eq.3–4"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00767",
+      "title": "Pre-training interventions, ex post facto: Grafting model beliefs across checkpoints",
+      "repository_status": "new",
+      "published": "2026-09-30T22:02:46Z",
+      "decision": "accepted",
+      "reason": "在base checkpoint学synthetic-document增量再加到post-trained模型，减少reality drift；多个模型及284B规模实测，区别于旧GRAFT的轨迹交换。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00767",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00767v1",
+          "location": "§2.1–2.2；§3–5"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00717",
+      "title": "Sequential Functional Structured Tucker Compression for Large Language Model Attentions",
+      "repository_status": "new",
+      "published": "2026-09-30T21:06:29Z",
+      "decision": "out_of_scope",
+      "reason": "FTC顺序Tucker attention压缩，无RL/OPD；已转基础模型轨道，不能作为全局淘汰理由。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00717",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00663",
+      "title": "Backdoor Containment via Expert Quarantine and Shutdown in LLMs",
+      "repository_status": "new",
+      "published": "2026-09-30T20:02:14Z",
+      "decision": "accepted",
+      "reason": "QES用attention-derived软trigger定位、sample peakiness调制、四routing约束训练expert LoRA并关闭隔离expert；不依赖gold trigger，实际两任务三攻击多模型。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00663",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00663v1",
+          "location": "§4.1–4.2 Eq.1–8；§5"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00661",
+      "title": "Exploring More, Reasoning Better: Stepwise Risk-Sensitive GRPO for Diffusion Language Models",
+      "repository_status": "new",
+      "published": "2026-09-30T19:59:48Z",
+      "decision": "accepted",
+      "reason": "StepRS-GRPO按denoising maskedness调风险系数并变换组优势，保留原diffusion trainer；binary reward下仅状态/题目重加权，真实SDAR1.7/4B训练和mass/RMS controls。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00661",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00661v1",
+          "location": "§3.2 Eq.3.2–3.4；§4.1"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00610",
+      "title": "Explainable Suicide Risk Assessment on Social Media with Multi-Task QLoRA",
+      "repository_status": "new",
+      "published": "2026-09-30T19:13:19Z",
+      "decision": "rejected",
+      "reason": "自杀风险共享任务系统为标准multi-task QLoRA、概率平均/交叉折聚合，领域应用而非通用算法/新增公共评测协议。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00610",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00574",
+      "title": "Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL",
+      "repository_status": "new",
+      "published": "2026-09-30T18:45:26Z",
+      "decision": "accepted",
+      "reason": "DARA按各reward活跃group密度sqrt(max-density/density)有上限加权，Asym仅放大正优势再batch normalize；ToolRL/BFCL-v4与数学真实训练。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00574",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00574v1",
+          "location": "§3.3 Eq.6–8；§4"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00568",
+      "title": "Emergent Unfaithfulness: How Alignment Training Causes Language Models to Silently Override Task Faithfulness",
+      "repository_status": "new",
+      "published": "2026-09-30T18:41:05Z",
+      "decision": "accepted",
+      "reason": "FaithConflict公开940对确认/冲突文档、FaithGap与8行为/7推理类型judge，22 checkpoint×prompt条件；官方代码数据已可读。任务忠实性和事实正确性必须分开，不能以复述有害虚构文档作为安全改善指标。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.00568v1",
+          "location": "§3.1–3.4；§4–5；Reproducibility Statement"
+        },
+        {
+          "url": "https://github.com/uiuc-conversational-ai-lab/Emergent-unfaithfulness",
+          "location": "作者仓库README/文件列表已只读核查"
+        }
+      ],
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00540",
+      "title": "Assessing the Impact of Language Disparity on Multilingual Linguistic Ability in Large Language Models",
+      "repository_status": "new",
+      "published": "2026-09-30T18:22:47Z",
+      "decision": "rejected",
+      "reason": "既有MultiBLiMP四读出与101语言对比，贡献为语言知情评测解释，摘要无独立新增benchmark/训练算法。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00540",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00431",
+      "title": "ChainLoRA: Geometry-Preserving Task Vector Merging for Continual Learning in LLMs",
+      "repository_status": "new",
+      "published": "2026-09-30T16:43:34Z",
+      "decision": "accepted",
+      "reason": "ChainLoRA按QR carrier链式初始化、一侧几何正则，归档后SVD共同carrier与Procrustes对齐再共享/残差merge；真实持续学习三套数据。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00431",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00431v1",
+          "location": "§3.2 Eq.1–3；§4 Algorithm1；§6"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00388",
+      "title": "T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning",
+      "repository_status": "implemented",
+      "published": "2026-09-30T10:34:27Z",
+      "decision": "known",
+      "reason": "已有T2SPO；ledger L12689明确仅真实TabPFN CPU合成状态+objective，无LLM任务训练。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00388",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "location": "L12689"
+        }
+      ],
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.00385",
+      "title": "FAER: Auditable Utility-Aligned Trajectory Replay for Language Model Post-Training",
+      "repository_status": "new",
+      "published": "2026-09-30T09:41:08Z",
+      "decision": "accepted",
+      "reason": "FAER-UTILITY在非target calibration块拟合梯度对齐/metadata replay权重并无放回抽样，trace冻结后才join正确性；正文完成learner行用normalized alignment，optimizer-aware虚步仅扩展/诊断，不能混称已验证。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00385",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.00385v1",
+          "location": "§3.1/3.3 Eq.4–9；§4.1"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00367",
+      "title": "MoRA: MoE Pruning via Router Bias Learning and Expert Approximation",
+      "repository_status": "new",
+      "published": "2026-09-30T06:38:43Z",
+      "decision": "out_of_scope",
+      "reason": "MoRA学习router bias及expert输出仿射近似做MoE剪枝，转基础模型轨道，非全局拒绝。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00367",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00333",
+      "title": "LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation",
+      "repository_status": "implemented",
+      "published": "2026-09-29T13:57:51Z",
+      "decision": "known",
+      "reason": "已有LEGO-OPD条目，ledger L12603；沿用既有factorized teacher证据。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00333",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "location": "L12603"
+        }
+      ],
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.00332",
+      "title": "The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning",
+      "repository_status": "implemented",
+      "published": "2026-09-29T13:51:52Z",
+      "decision": "known",
+      "reason": "已有Weakest Link，ledger L12690明确L1 exact-vocab梯度及小策略prefix约束，无LLMbenchmark声明。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00332",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "location": "L12690"
+        }
+      ],
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.00317",
+      "title": "DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies",
+      "repository_status": "implemented",
+      "published": "2026-09-29T02:55:12Z",
+      "decision": "known",
+      "reason": "已有DriftOPD条目，ledger L12604；沿用既有一跳drifting/critic证据边界。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00317",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "location": "L12604"
+        }
+      ],
+      "review_status": "prior_review_reused"
+    },
+    {
+      "id": "2610.06892",
+      "title": "Axiom Satisfiability of Linear Rewards in Alignment",
+      "repository_status": "new",
+      "published": "2026-09-26T15:24:29Z",
+      "decision": "accepted",
+      "reason": "LP3在有限偏好图上共同最小化candidate slack和线性reward margin违反，以LP松弛替代ILP；Habermas真实偏好验证，不含LLM策略训练，也不保证未见response公理。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.06892",
+          "location": "Abstract（完整摘要逐条审查）"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.06892v1",
+          "location": "§3 LP1；§4.1 ILP/LP3；§5"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00256",
+      "title": "Verification Pulses and the Cost of Escaping Wrong Consensus",
+      "repository_status": "new",
+      "published": "2026-09-24T03:29:27Z",
+      "decision": "rejected",
+      "reason": "binary consensus register的verification-pulse控制理论及LM响应实验，schedule对比区间均含零，未形成独立通用LLM能力训练/评测组件。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00256",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00197",
+      "title": "Comedic Fool's Gold: Reward Exploits and Countermeasures in Conversational Humor",
+      "repository_status": "new",
+      "published": "2026-09-18T20:14:09Z",
+      "decision": "reviewed_deferred",
+      "reason": "对话幽默reward审计有笑声通道、全speaker归一与并发scorer噪声诊断；仪器修正后微小taste gain消失，遗留token漏洞未封全。未找到公开数据/runner入口，不能仅凭内部archived声明认定公共评测可执行。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.00197v1",
+          "location": "§2–3；§5–7；Table 4 provenance"
+        }
+      ],
+      "fulltext_scope": "针对方法、实验协议、资源声明的正文定向核查；未执行作者代码",
+      "candidate_kind": "evaluation_infrastructure",
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "对话幽默reward审计有笑声通道、全speaker归一与并发scorer噪声诊断；仪器修正后微小taste gain消失，遗留token漏洞未封全。未找到公开数据/runner入口，不能仅凭内部archived声明认定公共评测可执行。"
+    },
+    {
+      "id": "2610.00096",
+      "title": "FACET at WMT 2026 Automated Translation Quality Evaluation Task",
+      "repository_status": "new",
+      "published": "2026-09-08T14:49:27Z",
+      "decision": "rejected",
+      "reason": "FACET为WMT共享任务三次固定model prompt分解翻译质量，无训练组件，专门提交报告且无新增通用执行框架。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00096",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00047",
+      "title": "Characterizing a Configuration Where Inference-Time PRM-Pruned Fragment Grafting Is Inert: Evidence from Three Reasoning LMs",
+      "repository_status": "new",
+      "published": "2026-09-03T11:06:07Z",
+      "decision": "rejected",
+      "reason": "PPFG推理fragment grafting特定配置的零效应/等价检验，可作为负结果参考；不新增训练算法或独立通用benchmark。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00047",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00035",
+      "title": "Integrating Fairness and Explainability in a Multiple Instance Reinforcement Learning System",
+      "repository_status": "new",
+      "published": "2026-09-02T17:30:18Z",
+      "decision": "out_of_scope",
+      "reason": "教育风险RL-MIL与fairness hypernetwork，非语言模型训练/通用LLM评测。",
+      "review_level": "abstract",
+      "fulltext_review_completed": false,
+      "pool": "late",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.00035",
+          "location": "Abstract（完整摘要逐条审查）"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.06861",
+      "title": "When Does External Guidance Help LLM Reasoning? A Bias-Variance Theory of Guidance-Augmented GRPO",
+      "pool": "late_extra",
+      "repository_status": "new",
+      "decision": "reviewed_deferred",
+      "reason": "GA-GRPO独立混合无指导/指导rollout梯度，以σ0²/(σ0²+Rmax²δ²T)调权，正文有Qwen2.5-Math-7B九benchmark及8×A100训练。关键adaptive TV divergence估计、方差估计和IS clipping实现未在已查方法/实现段具体定义，且T兼作rollout horizon/训练步的解释有歧义；不能凭曲线把核心算法忠实实现条件记为已闭合。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法§3、定理假设§4、实验实现§5.1、§6组件分析定向核查；未独立验证证明",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06861v1",
+          "location": "§3.2–3.3式2–6；§4.2–4.3；§5.1；§6.8"
+        }
+      ],
+      "review_status": "reviewed_deferred",
+      "eligibility_decision": "pending",
+      "deferral_reason": "GA-GRPO独立混合无指导/指导rollout梯度，以σ0²/(σ0²+Rmax²δ²T)调权，正文有Qwen2.5-Math-7B九benchmark及8×A100训练。关键adaptive TV divergence估计、方差估计和IS clipping实现未在已查方法/实现段具体定义，且T兼作rollout horizon/训练步的解释有歧义；不能凭曲线把核心算法忠实实现条件记为已闭合。"
+    }
+  ],
+  "cross_track_extras": [
+    {
+      "id": "2610.03025",
+      "title": "Verifiable, Articulable, and Tacit Components of Preference",
+      "pool": "cross_track_extra",
+      "decision": "reviewed_deferred",
+      "reason": "已读v2主文pp1–16及数据inventory p32并对照v1方法。v2将verifiability gap由v1摘要/引言的VAT−V明确改为VA−V，articulability仍VAT−VA；训练/评估流程仍是四路metric发现、fidelity优化、capture-recapture上界及nuisance审计。42任务/2.8M文本/317M preference acts，其中仅16M逐条决策/评论/投票，其余聚合engagement；不是317M独立标注者。LoRA单seed/任务、grouped 80/10/10、generated-text部分只是cross-model ranking无RL运行。公共数据/runner仍未找到可核验作者下载入口；正文有release声明但不足确认当前公共执行，故全文已审后deferred。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "fulltext_scope": "v1方法/关键附录；v2主文pp1–16、数据库存p32与方法页视觉核验，定向版本差异审查；未逐字通读全部附录",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.03025v1",
+          "location": "v1 §2–3.1；§4–5；Appendix D/H分组split与nuisance audit；abs Version history"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.03025",
+          "location": "官方资源/版本状态"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2610.03025v2",
+          "location": "pp1–4 gap definitions；pp4–6 methods/split；p11 generated-ranking而非RL；pp15–16 limitations；p32 A.1 acts composition"
+        }
+      ],
+      "review_status": "reviewed_deferred",
+      "version_change": "v1：verifiability=VAT−V；v2 pp1–4：verifiability=VA−V；articulability=VAT−VA不变。主要流程与单seed等限制保持；非声称逐字比对136页全部附录。"
+    },
+    {
+      "id": "2610.01316",
+      "title": "What Wins a Vote? Formatting, Length, and Lexical Diversity in the French Compar:IA LLM Arena",
+      "pool": "cross_track_extra",
+      "decision": "accepted",
+      "reason": "公开偏好评估分析入口：投票时截断对话、风格/长度/词汇联合Bradley–Terry与model内对照；官方代码及derived data可读，原French ComparIA数据有gate。137293 decisive votes/116 models，complete-case127092；调整rank不是已证实更接近能力，不能因观察关联推断风格因果效应。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验、限制与公开资源定向审查",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.01316v1",
+          "location": "§2.2；§3.1–3.2；§4 rank comparison；Data/code statement"
+        },
+        {
+          "url": "https://github.com/simonaszilinskas/style-control-analysis",
+          "location": "官方资源/版本状态"
+        }
+      ],
+      "review_status": "reviewed"
+    },
+    {
+      "id": "2610.00054",
+      "title": "The First Token Is Not the Verdict: Hidden Costs of Reading LLM Judges Without Generating",
+      "pool": "cross_track_extra",
+      "decision": "reviewed_deferred",
+      "reason": "提出first-token compliance检查与不合规才生成的judge读数协议，具有通用评测价值；1678/11596需要生成，85.5%节省但合规子集仍0–5.5%读数错误，不能把首token当最终裁决。未找到作者代码/预测数据公共入口；等待可执行资源确认，不记已接入。",
+      "review_level": "fulltext",
+      "fulltext_review_completed": true,
+      "fulltext_scope": "方法、实验、限制与公开资源定向审查",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.00054v1",
+          "location": "§3–5；§6 Limitations；§7 Recommendations"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.00054",
+          "location": "官方资源/版本状态"
+        }
+      ],
+      "eligibility_decision": "pending",
+      "review_status": "reviewed_deferred"
+    }
+  ],
+  "fulltext_review_count": 118,
+  "abstract_coverage_complete": true,
+  "counts": {
+    "out_of_scope": 54,
+    "accepted": 90,
+    "rejected": 27,
+    "reviewed_deferred": 10,
+    "known": 20
+  },
+  "pending_ids": [],
+  "note": "accepted表示候选已通过本track论文资格审查，不表示已实现、复现成功、生产A/B或evolve集成。known引用ledger且保留L1/未实现边界。out_of_scope可能转其他track，不等于全局排除。",
+  "reviewed_deferred_ids": [
+    "2610.07518",
+    "2610.06204",
+    "2610.04914",
+    "2610.04888",
+    "2610.04441",
+    "2610.03195",
+    "2610.01908",
+    "2610.01066",
+    "2610.00197",
+    "2610.06861"
+  ],
+  "candidate_review_complete": true
+}

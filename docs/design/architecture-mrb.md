@@ -36,8 +36,11 @@ adapter key 和所有论文页面地址；原工作区未提交内容不参与�
 2. **查询覆盖**：每个配置内查询是否真正取尽；达到 maximum-results 上限是 capped，即使每页 HTTP 都成功。
 3. **全文审查**：是否核验身份、正文实验与线上证据。下载成功不自动推进人工审查水位。
 
-默认仍保留宽查询和本地日期/identifier-month 双通道过滤，不为缩短时间擅自用发表日期
-过滤掉晚索引记录。宽查询达到上限会明确留下缺口；需要提高预算或补充官方来源，不能宣布全网无遗漏。
+2026-10-07 修正为两个独立召回通道：默认 `submission-window` 在 API 端限定提交日期，
+用于取尽固定窗口；另跑 `--recall-mode late-index` 用 API 的 `id:YYMM.*` 限定编号月份，保留不限定提交日期的补查和本地
+identifier-month 过滤，用于旧发表日期、晚索引记录的补漏。每日任务同时保存两份产物，
+使用不同 checkpoint；不能以主通道取尽代替晚索引或官方来源审查。
+宽查询达到上限仍明确留下缺口；需要提高预算或补充官方来源，不能宣布全网无遗漏。
 查询覆盖只针对本次查询矩阵，不等于所有来源，更不等于所有合格论文已实现。
 
 ```bash
@@ -46,6 +49,7 @@ python scripts/discover_papers.py --track agent \
   --checkpoint-dir .cache/discovery/agent-oct07 \
   --output runs/agent-candidates.json
 # 中断后：完全相同窗口、查询矩阵与预算，追加 --resume
+# 晚索引补查：另用 --recall-mode late-index，并指定独立 checkpoint/output
 ```
 
 每一页成功后原子保存游标和候选；某个查询失败不丢掉此前页面，也不阻塞其他查询。

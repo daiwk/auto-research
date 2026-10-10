@@ -453,6 +453,10 @@ def discover_external(
                 urlparse(source.url).netloc == "deepmind.google"
                 and urlparse(source.url).path.rstrip("/") == "/research/publications"
             )
+            google_listing = (
+                urlparse(source.url).netloc == "research.google"
+                and urlparse(source.url).path.rstrip("/") == "/pubs"
+            )
             pages_available: int | None = None
             pages_to_scan = source.max_pages
             pages_scanned = 0
@@ -477,6 +481,11 @@ def discover_external(
                 if deepmind_listing and page == 1:
                     pages_available = _deepmind_page_count(content)
                     pages_to_scan = min(source.max_pages, pages_available or 1)
+                elif google_listing and page == 1:
+                    counts = re.findall(r'data-max-pages=["\'](\d+)["\']', content)
+                    pages_available = max(map(int, counts)) if counts else None
+                    if pages_available is not None:
+                        pages_to_scan = min(source.max_pages, pages_available)
                 if source.kind != "official-conference":
                     extracted.extend(extract_source_hits(source, content))
                 for title, detail_url, published in publication_records(source, content):
@@ -586,7 +595,7 @@ def discover_external(
                         ),
                         "snapshot_new_publications": len(review_records),
                     })
-                if deepmind_listing:
+                if deepmind_listing or google_listing:
                     stat["pages_available"] = pages_available
                     stat["pagination_capped"] = (
                         pages_available is None or pages_available > source.max_pages

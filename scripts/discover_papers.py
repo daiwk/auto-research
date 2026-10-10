@@ -78,6 +78,11 @@ def main() -> int:
     )
     parser.add_argument("--page-size", type=int, default=50)
     parser.add_argument("--maximum-results-per-query", type=int, default=200)
+    parser.add_argument(
+        "--recall-mode", choices=("submission-window", "late-index"),
+        default="submission-window",
+        help="date-bounded primary scan; run late-index separately to retain ID-month backfill",
+    )
     parser.add_argument("--output")
     parser.add_argument("--summary-output")
     parser.add_argument("--official-review-output")
@@ -133,6 +138,7 @@ def main() -> int:
         end_date=args.end_date,
         page_size=args.page_size,
         maximum_results_per_query=args.maximum_results_per_query,
+        recall_mode=args.recall_mode,
     )
     source_failures = []
     source_stats = []
@@ -178,6 +184,7 @@ def main() -> int:
         "end": str(args.end_date),
     }
     payload["announcement_overlap_days"] = args.announcement_overlap_days
+    payload["recall_mode"] = args.recall_mode
     review_queue = official_review_queue(
         source_stats, start_date=start_date, end_date=args.end_date,
     )

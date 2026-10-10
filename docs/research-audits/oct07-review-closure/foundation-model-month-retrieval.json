@@ -1,0 +1,4960 @@
+{
+  "schema_version": 2,
+  "track": "foundation-model",
+  "window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "requested_window": {
+    "start": "2026-10-01",
+    "end": "2026-10-07"
+  },
+  "recall_mode": "late-index",
+  "announcement_overlap_days": 0,
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 8,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "language model architecture",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "87d55f5aee9ec473bb7391537cfda62caf98bbf5bbbb22971d018719835081ee",
+        "next_offset": 79,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "transformer architecture",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "9914353c120a10921c884ba1b440f5db7bee123875e1bd4c4e1281ef065f83dc",
+        "next_offset": 62,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "efficient LLM inference",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "65e118e262e13a01c9c81a83407adfb776cef6dbd30ee1d0b9e67cf27f1e9cab",
+        "next_offset": 27,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model long context",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "79d664a3ac7e666056d2aecc38a0dc74f5643f8f2d0860ca7a06a6491494955c",
+        "next_offset": 41,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model pretraining data",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "3ee9c43b152998b1f91e44aa4d2930eaf35f566a9d628f7f8403361acc5164c3",
+        "next_offset": 32,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "multimodal language model",
+        "categories": [
+          "cs.CV",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "bf7be4c59fa6cfc1e206f385af788c97837546f97f23db4df7b94bae851e3aae",
+        "next_offset": 77,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "vision language model",
+        "categories": [
+          "cs.CV",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "4732160e858b3e2f7a14b5ec261aed56681f8d29be0b55966769bdfb392e72c4",
+        "next_offset": 219,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 3,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model compression",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 2000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "b9bb5356604b4ee59b69bab3aea69427",
+        "fingerprint": "519e5c15144ed2dfdbb2cb46ddbd9f637512b43e3be11b023c6b78aa7c547283",
+        "next_offset": 50,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "query_matrix": [
+    "llm-architecture",
+    "transformer-architecture",
+    "efficient-inference",
+    "long-context",
+    "pretraining-data",
+    "multimodal-llm",
+    "vision-language",
+    "model-compression"
+  ],
+  "candidate_count": 459,
+  "candidates": [
+    {
+      "arxiv_id": "2610.08791",
+      "title": "World Models' Last Exam in Physics",
+      "published": "2026-10-06T17:59:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08779",
+      "title": "ALIVE: Interaction-Aligned Object Insertion for First-Frame-Guided Video Editing",
+      "published": "2026-10-06T17:58:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08718",
+      "title": "When Forgetting is not Catastrophic: On the Mechanics of Spurious Forgetting",
+      "published": "2026-10-06T17:25:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08713",
+      "title": "SpaTime: Streaming Vision-Language Models for Spatio-temporal Reasoning",
+      "published": "2026-10-06T17:22:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08678",
+      "title": "Secure Speculative Decoding for Large Language Models",
+      "published": "2026-10-06T16:59:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08674",
+      "title": "EC-RAG: Event Chain Retrieval-Augmented Generation for Long Video Understanding",
+      "published": "2026-10-06T16:57:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08659",
+      "title": "Selective Transfer of RL Updates for Visual Reasoning",
+      "published": "2026-10-06T16:43:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08649",
+      "title": "Stable Scores, Unstable Answers: Frame Phase and Option Order in Video Multiple-Choice Evaluation",
+      "published": "2026-10-06T16:36:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08639",
+      "title": "Forensic Reserve: Eliciting Latent Knowledge for Image Forgery Detection",
+      "published": "2026-10-06T16:33:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08560",
+      "title": "Have I Seen Enough? Frozen Video-Language Models Encode Evidence Readiness",
+      "published": "2026-10-06T15:43:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08539",
+      "title": "RSJEV: Discriminative Remote Sensing Scene Classification with Multimodal Large Language Models",
+      "published": "2026-10-06T15:28:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08528",
+      "title": "MedCORE: Criteria-Grounded Clinical Reasoning for Interpretable Medical Image Diagnosis",
+      "published": "2026-10-06T15:23:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08526",
+      "title": "WareFly-VLA: A Vision-Language-Action Framework for UAV Navigation and Human Tracking in Smart Warehouses",
+      "published": "2026-10-06T15:21:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08482",
+      "title": "Knee3DVLM: Dual-Sequence Full-Volume Vision-Language Modeling for Comprehensive Knee MRI Assessment",
+      "published": "2026-10-06T14:58:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08463",
+      "title": "UNREAL: Unifying Retrieval and Long-Context with a Single Model",
+      "published": "2026-10-06T14:48:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08414",
+      "title": "Image Bitstream Fine-grained Understanding for Privacy-Friendly AIoT",
+      "published": "2026-10-06T14:18:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08403",
+      "title": "SSR: Sparse Segment Reduction for Ternary GEMM Acceleration",
+      "published": "2026-10-06T14:15:12Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08401",
+      "title": "GeoPID: Decomposing and Steering Visual Information in Vision-Language Models",
+      "published": "2026-10-06T14:14:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08400",
+      "title": "Atom-JEPA: Joint-Embedding Predictive Architecture for 3D Atomistic Systems",
+      "published": "2026-10-06T14:13:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08341",
+      "title": "DIPrune: Task-Aware Token Pruning with Dual Importance for Efficient Multimodal Language Models",
+      "published": "2026-10-06T13:38:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08337",
+      "title": "Machine Learning for German Redispatch Forecasting under Data Delays and Temporal Distribution Shift",
+      "published": "2026-10-06T13:35:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08331",
+      "title": "Transferable Spatial Temporal Coherence Adversarial Attack on Black-Box Vision Language Models for Autonomous Driving",
+      "published": "2026-10-06T13:30:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08300",
+      "title": "Memory Depth and Reconstructed Context Width: A Controlled Evaluation of Hierarchical Retrieval",
+      "published": "2026-10-06T13:04:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08208",
+      "title": "STRUCTURALCOST: A controlled reading time dataset for modeling human sentence processing difficulty",
+      "published": "2026-10-06T12:00:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08200",
+      "title": "Finding the Heads and the Neurons Responsible for Network Information Retrieval in Language Models",
+      "published": "2026-10-06T11:51:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08183",
+      "title": "Compact Robot Policies Need Fine-Grained Visual Representations",
+      "published": "2026-10-06T11:36:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08164",
+      "title": "Align, Then Correct: Training-Free Two-Stage Low-Rank Compensation for Extremely Quantized Large Language Models",
+      "published": "2026-10-06T11:16:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08162",
+      "title": "The Failure Is in the Readout: Fine-Grained Emotion Recognition Benchmarks Measure Elicitation, Not Perception",
+      "published": "2026-10-06T11:14:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08133",
+      "title": "VLA-ACL: Action-Consistent Visual Token Pruning for Efficient Vision-Language-Action Models",
+      "published": "2026-10-06T10:47:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08090",
+      "title": "Explainable Rule Mining of IPv6 Extension-Header Presence Patterns from Paired-Vantage Captures",
+      "published": "2026-10-06T10:21:12Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08068",
+      "title": "PhysTacGen: Physics-Aware Visual-Tactile Sensor Image Generation",
+      "published": "2026-10-06T10:00:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.08048",
+      "title": "DAEDALUS: Bootstrapping Agent Memory from Self-Generated Tasks",
+      "published": "2026-10-06T09:46:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07990",
+      "title": "A Broader Look at Model Merging: Rethinking Implicit Regularization Induced by Task Arithmetic",
+      "published": "2026-10-06T08:49:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "pretraining-data",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07987",
+      "title": "VisionWeave: Weaving Elastic Visual Representations as a Native Capability of MLLMs",
+      "published": "2026-10-06T08:48:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07982",
+      "title": "M3SunAgent: Monocular 3D Spatial Understanding Agent for Metric Depth Estimation and 3D Visual Grounding",
+      "published": "2026-10-06T08:45:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07969",
+      "title": "EmbodiedSmith: Scaling Embodied Data through Recursive Self-Improvement Flywheel in Simulation",
+      "published": "2026-10-06T08:34:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07966",
+      "title": "Feature Encoding in VAE-based Audio Decoders: Effects of Input, Depth and Distribution",
+      "published": "2026-10-06T08:32:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07954",
+      "title": "Revisiting Numerical Forecasting Models for Language-Based Trajectory Prediction",
+      "published": "2026-10-06T08:28:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07948",
+      "title": "Confidence Reasoning Graphs: Structured Confidence Estimation for LLM Agents",
+      "published": "2026-10-06T08:22:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07940",
+      "title": "Hybrid Latent Attention for Looped Language Models",
+      "published": "2026-10-06T08:14:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07925",
+      "title": "TF-PRVR: Training-Free Partially Relevant Video Retrieval",
+      "published": "2026-10-06T08:03:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07913",
+      "title": "Multimodal Knowledge Distillation for Gastric Adenocarcinoma Classification from Whole-Slide Images",
+      "published": "2026-10-06T07:56:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07903",
+      "title": "Unsupervised Long-Tailed Adaptation of Vision-Language Models",
+      "published": "2026-10-06T07:49:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07887",
+      "title": "Visual Abstention in Unified Multimodal Models",
+      "published": "2026-10-06T07:33:42Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07868",
+      "title": "CueRator: Agentic Search for Symbolic Rules to Adapt Frozen Multimodal Encoders",
+      "published": "2026-10-06T07:18:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07863",
+      "title": "ReFold: Training-Free Reversible Inter-Turn Context Folding for Long-Horizon Agents",
+      "published": "2026-10-06T07:09:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07848",
+      "title": "Dynamic Positional Attention Modulation for Parameter-Efficient Fine-Tuning of Large Language Models",
+      "published": "2026-10-06T06:55:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07832",
+      "title": "Harness Engineering for Software Engineering via Modular Executable Dev-Primitives",
+      "published": "2026-10-06T06:32:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07825",
+      "title": "Forecast Accuracy Is Not Trading Profit: Evolving Small Recurrent Networks for Stock Return Prediction",
+      "published": "2026-10-06T06:20:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07819",
+      "title": "$α$Transfer: Coefficient Transfer for Efficient Model Merging",
+      "published": "2026-10-06T06:13:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07809",
+      "title": "MASKerade: Token-Routed Mask Experts for Dense-to-MoE Upcycling",
+      "published": "2026-10-06T06:04:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07774",
+      "title": "Reading, Not Manipulating: Leveraging Router Logits for Multimodal Safety in MoE Vision-Language Models",
+      "published": "2026-10-06T05:09:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07758",
+      "title": "Later Is Better: Token Reduction for ViTs Under Distribution Shift",
+      "published": "2026-10-06T04:54:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07755",
+      "title": "Trustworthy Method Comparison with AI Judges: Estimation and Design under Order, Batch, and Aggregation Effects",
+      "published": "2026-10-06T04:53:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07729",
+      "title": "Foveated Compression: Selective High-Resolution Preservation for Token-Efficient VLMs",
+      "published": "2026-10-06T04:28:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07706",
+      "title": "WASD: Wasserstein-based Knowledge Distillation for Large Language Models",
+      "published": "2026-10-06T03:58:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07689",
+      "title": "Unlocking Fine-Grained Perception in CLIP via Structurally-Aware Latent Masked Modeling",
+      "published": "2026-10-06T03:25:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07668",
+      "title": "CACHEFORGE: LLM-Guided End-to-End Generative Cache Replacement Policy for Performance and Hardware Efficiency",
+      "published": "2026-10-06T03:03:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07643",
+      "title": "Monte Carlo Estimation for KV Cache Eviction",
+      "published": "2026-10-06T02:36:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07585",
+      "title": "REViT-v2: Hierarchical Windowed Roto-reflection Equivariant ViT for Equivariant Feature Extraction",
+      "published": "2026-10-06T01:23:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07576",
+      "title": "CETUS: How Far Do Representations Trained on Earth Transfer to Cassini SAR of Titan?",
+      "published": "2026-10-06T01:11:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07572",
+      "title": "Two Vectors Replace In-Context Demos: Structured Task Adaptation via Embeddings",
+      "published": "2026-10-06T01:05:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07569",
+      "title": "OpenSplatGraph: From Dense Semantic Maps to Structured Scene Graphs for Open-Vocabulary Robot Perception",
+      "published": "2026-10-06T00:58:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07553",
+      "title": "Which and When to Admit: Gradient Admission for Data-Centric Small Language Model Finetuning",
+      "published": "2026-10-06T00:34:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07533",
+      "title": "SkillFormer: Skill-Decomposed Adaptation for Audio Language Models",
+      "published": "2026-10-06T00:00:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07532",
+      "title": "Safeguarding LLMs via Model-Agnostic Latent Safety Signals from Dark Knowledge",
+      "published": "2026-10-05T23:59:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07522",
+      "title": "Activation Denoising: A Robustness View on Parallel vs Sequential LLM Quantization",
+      "published": "2026-10-05T23:41:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07489",
+      "title": "Deep Defence on Wheels: A Dual Intrusion Detection System Architecture for Comprehensive In-Vehicle Network Security",
+      "published": "2026-10-05T22:52:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07460",
+      "title": "ElasticFit: Fit-Aware 3D Object Insertion via VLM Reasoning and Generative Adaptation",
+      "published": "2026-10-05T22:12:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07457",
+      "title": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+      "published": "2026-10-05T22:06:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07426",
+      "title": "AccentCL: Robust Accent Classification with Incremental Expansion",
+      "published": "2026-10-05T21:34:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07389",
+      "title": "Inference and learning in sparse autoencoders as natural gradient flow",
+      "published": "2026-10-05T21:03:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07385",
+      "title": "Semantic Capability Acquisition and Specialization During Vision-Language Model Fine-Tuning",
+      "published": "2026-10-05T20:56:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07355",
+      "title": "Tracking Is Not Permanence: What Video World Models Keep of a Hidden Object",
+      "published": "2026-10-05T20:22:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07349",
+      "title": "RELACE: retrospective likelihood-based action credit estimation for long-horizon language agents",
+      "published": "2026-10-05T20:19:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07348",
+      "title": "Stepped MoE: Segment-Level Routing with Configurable Inference Complexity",
+      "published": "2026-10-05T20:18:26Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07339",
+      "title": "A doctrine-grounded visual question answering dataset for Tactical Combat Casualty Care",
+      "published": "2026-10-05T20:14:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07338",
+      "title": "Logbook: Extremely Long-form Audio Event Understanding",
+      "published": "2026-10-05T20:13:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07335",
+      "title": "Selective Critique for Cost-Aware LLM Agents in Long-Horizon Decision Making",
+      "published": "2026-10-05T20:09:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07332",
+      "title": "Structuring MoE Expert Selection for Agentic Reinforcement Learning",
+      "published": "2026-10-05T20:06:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07324",
+      "title": "Scale-Invariant Training for Time Series Foundation Models",
+      "published": "2026-10-05T19:56:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07269",
+      "title": "What Words Keep of a Place: Zero-Shot Language Reasoning for Cross-View Geo-Localization",
+      "published": "2026-10-05T19:11:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07243",
+      "title": "Hybrid Cross-Modal Attention Network for Early Breast Cancer Detection in Low-Resource Clinical Settings",
+      "published": "2026-10-05T18:44:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07168",
+      "title": "A theory of platonic representations in language models",
+      "published": "2026-10-05T18:00:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07132",
+      "title": "CroissantMiner: Automated Extraction and Validation of Croissant Metadata for ML Datasets",
+      "published": "2026-10-05T17:59:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06844",
+      "title": "Learning to Read the Contextual Tokens in Diffusion Transformers",
+      "published": "2026-10-05T17:59:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06830",
+      "title": "MemPilot: Orchestrating On-Demand Multimodal Memory Curation for LLM Agents",
+      "published": "2026-10-05T17:58:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06825",
+      "title": "PlotGround: Grounding Plot Digitization in Real Scientific Figures and Their Source Data",
+      "published": "2026-10-05T17:57:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06817",
+      "title": "Paradee: Distilling Kokoro-82M into an 8M-Parameter Single-Voice Text-to-Speech Model",
+      "published": "2026-10-05T17:56:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07127",
+      "title": "PlaySuite: A Large-Scale Benchmark for Interactive Visual Intelligence",
+      "published": "2026-10-05T17:52:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06784",
+      "title": "How to scale your HEP ML models: A recipe for robust architecture comparisons at scale",
+      "published": "2026-10-05T17:44:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07121",
+      "title": "SoloQ: Calibration-Free Quantization for Diffusion Language Models",
+      "published": "2026-10-05T17:30:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06750",
+      "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+      "published": "2026-10-05T17:27:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06726",
+      "title": "Decoupling Time and Space: A Temporally Conditioned Refinement for EEG Source Imaging",
+      "published": "2026-10-05T17:15:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07118",
+      "title": "AMBER: Training Long-Horizon Web Agents through Append-Only Memory",
+      "published": "2026-10-05T17:11:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06715",
+      "title": "Domain adaptation of Russian ModernBERT for long legal documents",
+      "published": "2026-10-05T17:07:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06695",
+      "title": "MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks",
+      "published": "2026-10-05T16:55:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06686",
+      "title": "OVAL: Output-Aware Local Page Bases for KV Cache Retrieval",
+      "published": "2026-10-05T16:51:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06685",
+      "title": "Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs",
+      "published": "2026-10-05T16:51:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06670",
+      "title": "Reward Stealing Attack on Large Language Models",
+      "published": "2026-10-05T16:44:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06666",
+      "title": "What Matters for Latent Reasoning with Flow Matching",
+      "published": "2026-10-05T16:42:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06650",
+      "title": "Wikidata Search Traces: A Dataset for Training Knowledge Graph Search Agents",
+      "published": "2026-10-05T16:29:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06647",
+      "title": "LoGRA: Scaling LLM Reinforcement Learning with Low-Rank Gradient Sketches",
+      "published": "2026-10-05T16:28:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06636",
+      "title": "Differentially Private Mixing of Public Datasets Improves Private Learning",
+      "published": "2026-10-05T16:25:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06617",
+      "title": "RealtimeWAM: One-Step Asynchronous World Action Models",
+      "published": "2026-10-05T16:18:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06616",
+      "title": "Video Encoders Built on Image Representations",
+      "published": "2026-10-05T16:18:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06611",
+      "title": "Lens3D: Target-Conditioned Visual Foveation for Fine-Grained 3D Understanding",
+      "published": "2026-10-05T16:16:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06598",
+      "title": "SimForcing: Distilling Simulation Motion Priors into Real-Domain Robot World Models",
+      "published": "2026-10-05T16:08:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06582",
+      "title": "Mind the Execution Gap: Action-Semantic Mismatch in World-Model Control",
+      "published": "2026-10-05T15:59:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06571",
+      "title": "BrainTRACE: Tracing Longitudinal, Multimodal, and Volumetric Evidence in Brain MRI Clinical Reasoning",
+      "published": "2026-10-05T15:52:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06479",
+      "title": "Behavior-Preserving KV Cache Compression",
+      "published": "2026-10-05T15:06:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06446",
+      "title": "The Assistance Dilemma: Learning to Teach via Multi-Turn Reinforcement Learning",
+      "published": "2026-10-05T14:50:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06413",
+      "title": "SpatialChain: A Benchmark for Auditing Spatial Reasoning Faithfulness in VLMs",
+      "published": "2026-10-05T14:29:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06409",
+      "title": "FlashCart: Fast Cartesian Tensor Products for Equivariant Interatomic Potentials",
+      "published": "2026-10-05T14:26:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06406",
+      "title": "What Did the Agent Actually Do? Evidence-Grounded Oversight for Long-Horizon Agents",
+      "published": "2026-10-05T14:25:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06404",
+      "title": "Quantifying the Stability of Multi-Step Reasoning via Error Amplification",
+      "published": "2026-10-05T14:22:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06394",
+      "title": "Harnessing Multimodal Large Language Models for Training-Free Human-Object Interaction Detection",
+      "published": "2026-10-05T14:16:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06387",
+      "title": "Scaling Down the Scaling Laws: Parameter Efficiency and Compute-Optimal Training in Resource-Constrained Large Language Models",
+      "published": "2026-10-05T14:12:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06324",
+      "title": "Readout Blindness: VLM Scores Miss the Spatial Direction Their Frozen Encoders Retain",
+      "published": "2026-10-05T13:36:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07091",
+      "title": "Smart Content Ingestion for Generative AI Workloads",
+      "published": "2026-10-05T13:22:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06293",
+      "title": "VepAgent: Bridging Causal-Transition via Tool-Augmented Reinforcement Learning for Video Event Prediction",
+      "published": "2026-10-05T13:19:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06286",
+      "title": "DeferKV: Rethinking Eviction Timing for One-Shot KV Cache Compression",
+      "published": "2026-10-05T13:13:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06251",
+      "title": "Shared Stopping Decisions Change Answers in HQQ Cache Quantization",
+      "published": "2026-10-05T12:47:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06226",
+      "title": "LeAVJEPA: A Minimalist Architecture for Audio-Visual Self-Supervised Learning",
+      "published": "2026-10-05T12:33:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06204",
+      "title": "Do Small Language Models Learn to Negotiate? A Controlled Scaling Study of RL-Trained Sellers",
+      "published": "2026-10-05T12:17:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06196",
+      "title": "EORestore-Agent: Fidelity-Guided Agentic Restoration of Remote Sensing Images with Composite Degradations",
+      "published": "2026-10-05T12:11:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06161",
+      "title": "Introducing Code-Switched Contexts to Cognitively-Inspired Bilingual Model Training",
+      "published": "2026-10-05T11:30:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06147",
+      "title": "Efficient Test-time Adaptation through Candidate Verification and Divergence Shifts",
+      "published": "2026-10-05T11:18:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06069",
+      "title": "Attention Tax, Handoff Tax: A Stylised Model of When Multi-Agent LLM Systems Help",
+      "published": "2026-10-05T10:04:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06063",
+      "title": "Vision Transformer Ensembles for Panoramic Street Segmentation",
+      "published": "2026-10-05T09:56:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06056",
+      "title": "ROT: Rotating Hidden States towards Contextual Vectors for Hallucination Mitigation in LVLMs",
+      "published": "2026-10-05T09:49:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06039",
+      "title": "MercerFlow: Flow Matching in a Kernel-Induced Latent Space for Probabilistic Forecasting",
+      "published": "2026-10-05T09:38:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06026",
+      "title": "Differentiable Bit-Widths: Co-optimizing Pruning and Quantization via SVD for Ultra-Efficient LLM Compression",
+      "published": "2026-10-05T09:25:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06021",
+      "title": "Scalable Minimal-Change Learning for Controllable Image Editing",
+      "published": "2026-10-05T09:18:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06018",
+      "title": "Investigating Query-Insensitive Behavior in Spatio-Temporal Video Grounding",
+      "published": "2026-10-05T09:17:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05993",
+      "title": "From Transformation to Target State: Rethinking Query Representation for Zero-Shot Composed Image Retrieval",
+      "published": "2026-10-05T08:47:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05982",
+      "title": "Breaking the Tie: A Cluster-Aware Routing Framework for Large Language Models",
+      "published": "2026-10-05T08:35:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05978",
+      "title": "Byte Language Models: Scaling, Emergent Abstractions, and Information Allocation",
+      "published": "2026-10-05T08:29:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05940",
+      "title": "ReMem: Streaming Video Understanding With Long Context Retention",
+      "published": "2026-10-05T07:56:41Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05897",
+      "title": "Fitting Vision Adapters at Frontier Scales",
+      "published": "2026-10-05T07:13:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05896",
+      "title": "TasteRoute: Personalized Routing for Video Generation",
+      "published": "2026-10-05T07:12:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05885",
+      "title": "The Optimization Landscape of Learning Compacted Context Models",
+      "published": "2026-10-05T07:00:44Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07062",
+      "title": "Learning to Simulate Individuals from Macro Social Signals",
+      "published": "2026-10-05T06:56:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05879",
+      "title": "Learning to Learn a Language",
+      "published": "2026-10-05T06:52:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05874",
+      "title": "Global Communication or Graph-Specific Memory?",
+      "published": "2026-10-05T06:43:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05872",
+      "title": "Off-Policy Merging Beats On-Policy Self-Distillation for Continual Learning",
+      "published": "2026-10-05T06:40:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07060",
+      "title": "Skillful Data-Driven Subseasonal Soil Moisture Forecasting: Prospects and Limits for Flash Drought Prediction",
+      "published": "2026-10-05T06:34:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05863",
+      "title": "CCQ: A Multi-State Child Care Quality Dataset to Support AI for Children's Health Research",
+      "published": "2026-10-05T06:30:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05861",
+      "title": "Imagine to Act: High-Fidelity Data Synthesis via Image Editing World Model for Scalable GUI Agent Training",
+      "published": "2026-10-05T06:28:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05842",
+      "title": "HLA: Expressive Hybrid Linear Attention via Chunk-Wise Dynamic Mixing",
+      "published": "2026-10-05T05:49:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05774",
+      "title": "AdaSpark: Adaptive DSpark with Online Learning for Tree Verification and N-gram Fill",
+      "published": "2026-10-05T04:18:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05744",
+      "title": "CIPHER-MoE: Balancing Efficiency and Routing Fidelity in Trillion-Scale MoE Training",
+      "published": "2026-10-05T03:51:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05715",
+      "title": "Rotated, but How Far? Diagnosing and Improving Object-Rotation Reasoning in VLMs",
+      "published": "2026-10-05T02:55:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05690",
+      "title": "Errors of LLM-Assisted Literature Retrieval in Environmental Science: A Comparison Study of Abstract versus Full-text Based Prompts",
+      "published": "2026-10-05T02:04:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05685",
+      "title": "Spend Bytes on Breadth: Precision-Count Trade-offs for Decode-Time KV Compression in Long Chain-of-Thought Reasoning",
+      "published": "2026-10-05T01:56:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05681",
+      "title": "Automatic Speech Recognition for Low-Resource Sinhala: A Critical Review of Methods, Challenges, and Future Directions",
+      "published": "2026-10-05T01:49:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05664",
+      "title": "StageVLN: Spatial and Trajectory Auxiliary Guidance for Efficient Vision-Language Navigation",
+      "published": "2026-10-05T01:20:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05637",
+      "title": "Visual Grounding Safety in Vision-Language Models",
+      "published": "2026-10-05T00:14:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05630",
+      "title": "Atomic Visual Entailment: Enhancing Zero-Shot Vision-Language Reasoning through Atomic Fact Decomposition and Learned Selection",
+      "published": "2026-10-04T23:46:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05615",
+      "title": "DREAM: Dynamic Resolution Assignment For Multimodal Multi-agent Debate",
+      "published": "2026-10-04T23:23:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05591",
+      "title": "What Is a Repeated Token Worth? The Scaling Geometry of Multi-Epoch Pretraining",
+      "published": "2026-10-04T22:55:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05538",
+      "title": "LiFT: Loop Flow Transformers",
+      "published": "2026-10-04T21:11:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05484",
+      "title": "Universal Test-Time Training",
+      "published": "2026-10-04T19:43:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05463",
+      "title": "Human-Like Attention? A Psychophysical Comparison of Visual Search in Humans and MLLMs",
+      "published": "2026-10-04T19:11:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07032",
+      "title": "Investigating Model Compression for Neural Machine Translation in the Biomedical Domain",
+      "published": "2026-10-04T19:01:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression",
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05425",
+      "title": "Unmentioned Checklist Findings Change How Reinforcement Learning Appears to Improve Chest Radiograph Report Checking",
+      "published": "2026-10-04T18:06:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05418",
+      "title": "EvoMem-VLA: State-Evolution Memory for Long-Horizon Robot Manipulation",
+      "published": "2026-10-04T17:59:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05417",
+      "title": "Render to Reason: Novel-View Semantic Prediction Improves Spatial Understanding in VLMs",
+      "published": "2026-10-04T17:58:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05413",
+      "title": "A Strong Baseline for Evaluating Vision Encoders in Multimodal Large Language Models",
+      "published": "2026-10-04T17:54:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05402",
+      "title": "Task Vector Descent: Learning from Non-IID Batches",
+      "published": "2026-10-04T17:37:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05400",
+      "title": "CASE: Cost-Aware Stopping for Efficient Long-Video Agents",
+      "published": "2026-10-04T17:35:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05380",
+      "title": "VHDL-REPOBENCH: A Repository-Level Benchmark for Evaluating Large Language Models on VHDL Design Generation",
+      "published": "2026-10-04T17:12:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05342",
+      "title": "IRSTD-Agent: Agentic Infrared Small Target Detection via Zoom-Guided Interaction Learning",
+      "published": "2026-10-04T16:10:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05334",
+      "title": "AgentDiscover: Autonomous Discovery with Minimal Search Scaffolding",
+      "published": "2026-10-04T15:55:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05318",
+      "title": "Robust Parameter-Efficient LLM Adaptation on Analog Hardware",
+      "published": "2026-10-04T15:39:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05306",
+      "title": "Kinematics-Centric Continuous Sign Language Retrieval with Gloss-Guided Boundary-Aware Alignment",
+      "published": "2026-10-04T15:28:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05305",
+      "title": "Characterizing Parallelism Strategies in LLM Inference: Fundamental Compute-Communication Trade-offs",
+      "published": "2026-10-04T15:28:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05303",
+      "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+      "published": "2026-10-04T15:27:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05292",
+      "title": "Erased, Rerouted, or Rescaled? Post-Training and the Causal Quotient of a Language Model's Belief State",
+      "published": "2026-10-04T15:11:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05274",
+      "title": "Answer with Evidence: Consistency-Aware Grounded Visual Question Answering for Roadside Traffic Scenes",
+      "published": "2026-10-04T14:48:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05273",
+      "title": "When and What to Prune? Stage-Aware Visual Token Pruning for Efficient VLA",
+      "published": "2026-10-04T14:47:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05249",
+      "title": "ArticuTable: Generating Instance-Level Interactive Rigid-Articulated 3D Tabletop Scenes from a Single Image",
+      "published": "2026-10-04T14:26:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.07014",
+      "title": "DTFormer: Text-Guided Semantic Alignment for RGB-D Segmentation",
+      "published": "2026-10-04T14:06:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05223",
+      "title": "Look Before You Leap: Thermodynamic Arbitration of Parametric and Non-Parametric Knowledge in LLM Agents via Self-Regulating Memory Architectures",
+      "published": "2026-10-04T13:43:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05190",
+      "title": "FORGE: Verification-Gated Behavioral Repair for Generative Language Models",
+      "published": "2026-10-04T12:55:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05185",
+      "title": "Recurrent Latent Visual Search for GUI Grounding",
+      "published": "2026-10-04T12:49:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05131",
+      "title": "RoMod: Temporal Routing Modulation via Mixture-of-Experts for Video Anomaly Detection",
+      "published": "2026-10-04T11:23:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05129",
+      "title": "Representation--Behavior Alignment for Explainable Weakly-Supervised Video Anomaly Detection",
+      "published": "2026-10-04T11:21:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05126",
+      "title": "Selecting Repetition Counts Across Model Scales in Data-Constrained Pretraining",
+      "published": "2026-10-04T11:16:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05114",
+      "title": "Belief-Trajectory Energy: Measuring the Path to a Prediction",
+      "published": "2026-10-04T10:44:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05111",
+      "title": "InstMoE: Adaptive Multimodal Routing with Specialized Experts",
+      "published": "2026-10-04T10:40:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05100",
+      "title": "METRO: Metric-Enhanced Token Routing Operator",
+      "published": "2026-10-04T10:14:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05097",
+      "title": "ReMAP: Restoring the Perceptual Cycle with Reasoning-Time Latent Visual Memory",
+      "published": "2026-10-04T10:00:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05066",
+      "title": "Salvation Lies Within: Eliciting Inherent Style Transfer in Step-Distilled Diffusion Models",
+      "published": "2026-10-04T09:06:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05029",
+      "title": "SPACE-CLIPv2: Decoding Local Geometry from Frozen CLIP for Monocular Depth Estimation",
+      "published": "2026-10-04T07:50:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05026",
+      "title": "GeoBridge-VLA: Geometry-Aware Residual Adaptation for Vision-Language-Action Models",
+      "published": "2026-10-04T07:42:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06993",
+      "title": "DART-ES: Difficulty-Aware Reweighting and Targeted Replay for Fine-Tuning LLMs with Evolution Strategies",
+      "published": "2026-10-04T07:42:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05025",
+      "title": "Triggering Generalist Reasoning via Predictive Uncertainty for Dual-System VLA",
+      "published": "2026-10-04T07:39:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05024",
+      "title": "LightVLN: Efficient Aerial Vision-and-Language Navigation with Compact Memory and History-Guided Local Aggregation",
+      "published": "2026-10-04T07:37:44Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.05023",
+      "title": "Look Where You Say You're Looking: Self-Grounded Attention for Visual Reasoning",
+      "published": "2026-10-04T07:37:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04976",
+      "title": "Priced Guidance: Can Language Models Generate Future Research Ideas?",
+      "published": "2026-10-04T05:45:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04961",
+      "title": "Building LLM Agent Systems the Deep Learning Way: From Modular Design to Architecture Search",
+      "published": "2026-10-04T05:11:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04957",
+      "title": "Trinity: One Differentiable Physics for Training, Refining and Scoring Generative Floorplanners",
+      "published": "2026-10-04T05:07:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04918",
+      "title": "Residual Visual Credit Optimization: Conserved Evidence Routing for Multimodal Reinforcement Learning",
+      "published": "2026-10-04T03:56:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04893",
+      "title": "SFlexRCA: Lightweight, Scalable, and Flexible Root Cause Analysis for IIoT Edge Systems",
+      "published": "2026-10-04T03:01:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04867",
+      "title": "Greedy Local Learning for Language Model Pretraining: Gaps and Objective Design",
+      "published": "2026-10-04T02:10:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04862",
+      "title": "GitSwarm: Decentralized Compounding Inference",
+      "published": "2026-10-04T02:03:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06977",
+      "title": "Visual-Invariance-Augmented Feature Optimal Alignment for Transferable Adversarial Attacks against Closed-Source MLLMs",
+      "published": "2026-10-04T00:16:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04824",
+      "title": "Agent Behavior as Code: Efficient and Robust LLM Agents with Programmatic Specifications",
+      "published": "2026-10-04T00:14:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04805",
+      "title": "ExStereo: Lifting 2D Vision-Language-Action Models to 3D with Explicit Stereo Representations",
+      "published": "2026-10-03T23:21:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04792",
+      "title": "Do More Modalities Always Help? A Geometric Perspective on Missing-Modality Robustness",
+      "published": "2026-10-03T22:34:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04777",
+      "title": "ARISE: Adaptive Agentic Reasoning with Image-grounded Self-Evaluation for Interpretable IBD Assessment",
+      "published": "2026-10-03T21:35:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04753",
+      "title": "More Value per Key: Asymmetric Sparse Attention for Faster LLM Decoding",
+      "published": "2026-10-03T20:38:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06972",
+      "title": "BoT-Feedback: Grounding Multimodal Reasoning in Biomechanical Evidence for Explainable Human Action Feedback",
+      "published": "2026-10-03T20:22:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04721",
+      "title": "Knossos and Ariadne: Benchmarking and Learning Complete Diagram Topology Extraction with Vision-Language Models",
+      "published": "2026-10-03T19:20:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06963",
+      "title": "WavePrune: One period is often enough for RoPE",
+      "published": "2026-10-03T17:01:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04651",
+      "title": "GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding",
+      "published": "2026-10-03T16:49:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04636",
+      "title": "Does Neural Complexity Improve Health Misinformation Detection? A Leakage-Controlled Cross-Corpus Benchmark",
+      "published": "2026-10-03T16:26:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04616",
+      "title": "PerturBot: Breaking Shortcut Priors in Vision-Language-Action Models with Perturbative Training",
+      "published": "2026-10-03T15:57:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04607",
+      "title": "ForeAct3D: Policy-Grounded Future World Modeling for VLA Policies",
+      "published": "2026-10-03T15:49:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04580",
+      "title": "Strong Helps Weak: Directional Cross-Modal Alignment Transfer in Multi-modal LLMs",
+      "published": "2026-10-03T15:15:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04569",
+      "title": "From Transformers to Weighted Automata: Towards the Verification of Large Language Models",
+      "published": "2026-10-03T15:04:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04541",
+      "title": "Autonomous Structuring of Radiology Reports Across Modalities at Archive Scale Using an Open-Weight Large Language Model",
+      "published": "2026-10-03T14:15:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04518",
+      "title": "Length Generalization Needs Proper Regularization",
+      "published": "2026-10-03T13:31:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04512",
+      "title": "Correctness Is a Direction: Geometric Answer Selection in Language Models",
+      "published": "2026-10-03T13:21:04Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04507",
+      "title": "LoRA's Second Descent Extends Beyond Parameter Parity",
+      "published": "2026-10-03T13:10:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04506",
+      "title": "EgoExo-Next:Benchmarking Vision-Language Models on Visual-Option Next-State and Cross-View Reasoning",
+      "published": "2026-10-03T13:09:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04502",
+      "title": "Localization Lens for Improving Medical Vision-Language Models",
+      "published": "2026-10-03T13:04:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06950",
+      "title": "Learning to Decide, Not to Reason: Parameter-Efficient Decision Operators via Low-Rank Activation Steering",
+      "published": "2026-10-03T12:57:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04499",
+      "title": "Homogeneous Semantic Alignment and Hierarchical Expert Routing for Radiology Report Generation",
+      "published": "2026-10-03T12:57:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06949",
+      "title": "AdaLoop: Adaptive-Depth Latent Reasoning for Audio Language Models",
+      "published": "2026-10-03T11:27:41Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04425",
+      "title": "AgroGround: Multi-Granularity Grounded Recognition in Agriculture",
+      "published": "2026-10-03T10:27:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04424",
+      "title": "On the Trade-off Between Information Loss and Generalization in Sparse Attention",
+      "published": "2026-10-03T10:27:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04413",
+      "title": "Specific Algorithmic Interpretability of Neural Networks: A Case Study on Textures",
+      "published": "2026-10-03T10:03:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04403",
+      "title": "Saying, Not Knowing: Aggressively GGUF-Quantized Small Language Models Still Write Rare Words They Can No Longer Define",
+      "published": "2026-10-03T09:50:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04381",
+      "title": "Beyond Plausibility: Verifiable Fine-Grained Image Editing on Structured Assets",
+      "published": "2026-10-03T08:48:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04318",
+      "title": "Rethinking Long-Video Efficiency: A Joint Allocation Perspective on Frames, Pixels, and Front-End Latency",
+      "published": "2026-10-03T06:13:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04303",
+      "title": "What to Preserve in Recursive Computation: A Local Predictive Sufficiency Principle",
+      "published": "2026-10-03T05:33:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04278",
+      "title": "Do RUL explanations hold up? Faithfulness and stability of attributions on C-MAPSS",
+      "published": "2026-10-03T04:10:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04263",
+      "title": "Multimodal Dual-Encoder Retrieval for Automated ICD Coding",
+      "published": "2026-10-03T03:39:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04255",
+      "title": "Grounded in Time: A Multi-Source Dataset and Benchmark for Temporal Grounding in Robotic Manipulation",
+      "published": "2026-10-03T03:25:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04225",
+      "title": "FlashGaze: Training-Free Multi-Scale Patch Pruning For Efficient Video Understanding",
+      "published": "2026-10-03T02:33:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06932",
+      "title": "RADC: Risk-Aware Dual Caching for Vision-Language Test-Time Adaptation",
+      "published": "2026-10-03T02:28:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04204",
+      "title": "Clean: Second-order LLM Training at Linear Memory Cost via Nyström Sketching",
+      "published": "2026-10-03T01:37:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04152",
+      "title": "Kepler4D: Controllable Future Video Generation via 4D Scene State Evolution",
+      "published": "2026-10-02T23:53:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04140",
+      "title": "ExpertMuon-Compass: Alignment-Guided Step Sizes for Mixture-of-Experts Training",
+      "published": "2026-10-02T23:27:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04139",
+      "title": "From Sight to Foresight: Predictive Spatial Reasoning in Vision-Language Models",
+      "published": "2026-10-02T23:27:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04138",
+      "title": "Dual-Scale Relational Graph Transformers for Ecosystem-Aware Fraud Detection",
+      "published": "2026-10-02T23:21:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04118",
+      "title": "LongSocialBench: Do Long-Context LLMs Understand Online Discussion Threads?",
+      "published": "2026-10-02T22:47:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04104",
+      "title": "Where Does the Semantic Gain Come From? A Reproduction and Extension of Semantic Knowledge-driven Contrastive Learning for Long-Tailed Recognition",
+      "published": "2026-10-02T22:17:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04047",
+      "title": "Periscope: Extending Frozen Language Models Beyond Their Context Window",
+      "published": "2026-10-02T20:52:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04009",
+      "title": "SUAVE: Unified Video-Action Models via Masked Diffusion",
+      "published": "2026-10-02T20:11:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.04002",
+      "title": "Do Language Models Need a Trainable Input Embedding Table? Fixed Minimal Token Codes at 1.7B-Class Scale",
+      "published": "2026-10-02T20:06:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03972",
+      "title": "Probabilistic Algorithms for Ising Machines from Optimization to Generative AI",
+      "published": "2026-10-02T19:30:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03935",
+      "title": "General Decision Models: Benchmarking and Insights Beyond Jev",
+      "published": "2026-10-02T18:47:00Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03713",
+      "title": "What Should World Models Forget? Stratified Retention for Continual Adaptation",
+      "published": "2026-10-02T17:58:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03695",
+      "title": "Language Models that Play Chess and Explain Their Moves",
+      "published": "2026-10-02T17:54:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03632",
+      "title": "World Embedding Benchmark",
+      "published": "2026-10-02T17:24:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03617",
+      "title": "DEPICT: Scoring Text-to-Image Alignment by Answer Agreement",
+      "published": "2026-10-02T17:13:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03567",
+      "title": "Writerslogic at the CLEF 2026 SimpleText Track: Multi-Candidate LLM Simplification and Stacked Complexity Spotting",
+      "published": "2026-10-02T16:44:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03529",
+      "title": "Divergence controls entropy in distillation",
+      "published": "2026-10-02T16:15:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03516",
+      "title": "XGenAct: Geometry-Enhanced World Action Models through Cross-Task Generation",
+      "published": "2026-10-02T16:10:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03502",
+      "title": "Certified Mechanistic Edits: Behavioral Guarantees for Skill Removal and Preservation",
+      "published": "2026-10-02T16:01:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03468",
+      "title": "A Vision-Language Model (VLM)-based Pipeline for End-to-End Procedural Modeling of Field-Grown Maize from Point Clouds",
+      "published": "2026-10-02T15:41:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03463",
+      "title": "Generalization of Transformer-Based Neural Quantum States via In-Context Learning",
+      "published": "2026-10-02T15:38:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03445",
+      "title": "Corrupted but Correct: Why Vision-Language Models Lie to Themselves Internally",
+      "published": "2026-10-02T15:27:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03421",
+      "title": "CLIMB: Confidence-Guided Complementary Evidence for Multimodal Retrieval-Augmented Generation",
+      "published": "2026-10-02T15:09:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03389",
+      "title": "From Patching to Pruning Visual Computation in Vision Language Models",
+      "published": "2026-10-02T14:37:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03324",
+      "title": "To Jev or Not? Evaluating the Accuracy and Efficiency of Structured Decision Models for Hate-Speech Moderation",
+      "published": "2026-10-02T13:59:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03289",
+      "title": "Architecture-Dependent Fusion Pathways in MLLMs",
+      "published": "2026-10-02T13:32:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03252",
+      "title": "COSMI: COmpositional Synthesis of Multi-object Interactions",
+      "published": "2026-10-02T12:59:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03220",
+      "title": "Evolving Hybrid Quantum-Classical Architectures for Image Classification",
+      "published": "2026-10-02T12:37:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03215",
+      "title": "StanceEval 2026: The Second Stance Detection Shared Task",
+      "published": "2026-10-02T12:32:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03199",
+      "title": "Predicting and Repairing Merge Collapse in Large Language Models",
+      "published": "2026-10-02T12:11:43Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03198",
+      "title": "KV$^2$: A Self-Refining KV Cache",
+      "published": "2026-10-02T12:11:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03193",
+      "title": "Bridging Research and Practice: A Systematic Evaluation of Generalist and Dermatology-Specific Models in Clinical Skin Lesion Classification",
+      "published": "2026-10-02T12:09:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03187",
+      "title": "Lightweight and Resource-Efficient Perception for Robotic Guide Dogs",
+      "published": "2026-10-02T12:01:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03141",
+      "title": "Behavior Pack Optimization for Video MLLM Post-Training",
+      "published": "2026-10-02T11:06:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03135",
+      "title": "Page-EntroKV: Hardware-Aligned, Entropy-Weighted KV-Cache Eviction under Grouped-Query Attention",
+      "published": "2026-10-02T11:01:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03123",
+      "title": "Foresight: planning future perception in streaming VLMs without retraining",
+      "published": "2026-10-02T10:44:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03112",
+      "title": "Building Interpretable Feature Representations for Resume-Vacancy Matching by Distilling Production LLM Signals",
+      "published": "2026-10-02T10:30:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03098",
+      "title": "Predictor-Guided Latent Space Codon Optimization for Maximizing Protein Expression",
+      "published": "2026-10-02T10:18:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03084",
+      "title": "NegT2IBench: When Negation Changes the Picture. A Polarity Benchmark for Text-to-Image Models",
+      "published": "2026-10-02T10:03:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03057",
+      "title": "When Does Synthetic Relational Data Teach Models to Use Relations? Tracing Predictive Structure from Pretraining Data to Model Behavior",
+      "published": "2026-10-02T09:37:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03039",
+      "title": "HyperThink: Text-to-Parameter Hypernetworks for Efficient Reasoning",
+      "published": "2026-10-02T09:19:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03036",
+      "title": "WebFovea: When the Model Is Right but the Click Is Wrong -- Reliable Round Trips for Vision-Based Web Agents on Live Websites",
+      "published": "2026-10-02T09:18:28Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03034",
+      "title": "Adaptive Second-Order Solvers for Fast Stochastic Diffusion Sampling",
+      "published": "2026-10-02T09:17:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03016",
+      "title": "From Expression to Reaction: Role-aware Visual Transfer and Stimulus-guided Reasoning for Interlocutor Emotion Recognition",
+      "published": "2026-10-02T08:50:26Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03002",
+      "title": "Recursive Self-Improvement in Unified Multimodal Models",
+      "published": "2026-10-02T08:34:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02974",
+      "title": "From Language Priors to Field Adaptation: Preference Learning for Traversability Estimation",
+      "published": "2026-10-02T08:07:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02957",
+      "title": "Understanding Trajectory Heterogeneity in Federated World Model Learning",
+      "published": "2026-10-02T07:55:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02951",
+      "title": "Dynamic Expert Pruning for Multi-Agent Systems",
+      "published": "2026-10-02T07:45:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02910",
+      "title": "Frequency Is Not Sensitivity Identifying Safety-Sensitive Experts in Sparse MoE LLM",
+      "published": "2026-10-02T07:00:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02887",
+      "title": "Revealing Epistemic Uncertainty in MLLMs via Causal-Invariant Masking",
+      "published": "2026-10-02T06:29:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02880",
+      "title": "Found but Not Read: When Extracted Text Closes the Retrieval-Reading Gap in Document Vision-Language Models",
+      "published": "2026-10-02T06:16:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02878",
+      "title": "Evaluating VQA in Vision Language Models using Cooperative Principles",
+      "published": "2026-10-02T06:13:15Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02876",
+      "title": "Seeing, Saying, but Not Using: From Reportable Spatial Facts to Usable States in Multimodal Large Language Models",
+      "published": "2026-10-02T06:12:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02841",
+      "title": "How Robust Is Multimodal Claim Verification to LLM Rewriting?",
+      "published": "2026-10-02T05:31:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02840",
+      "title": "PointWAM: 3D World Action Modeling for Dexterous Robotic Manipulation",
+      "published": "2026-10-02T05:31:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02839",
+      "title": "To Explore The Strange New World Beyond Data Distribution: System Behavior, Causality Tax, and Non-causal Base Model",
+      "published": "2026-10-02T05:29:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02832",
+      "title": "FastOPD: On-Policy Distillation for Lightweight VLA Deployment",
+      "published": "2026-10-02T05:24:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02755",
+      "title": "FiberGeoText: A Vision-Language Model for Population- Level Organization of Superficial White Matter",
+      "published": "2026-10-02T03:31:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02718",
+      "title": "Revisiting Visual Representation Enhancement of VLMs via Kernel Canonical Correlation Analysis",
+      "published": "2026-10-02T02:54:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02713",
+      "title": "WakeKV: Reactive, Reversible KV Residency for Heads That Change Their Minds",
+      "published": "2026-10-02T02:48:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02697",
+      "title": "GeoScaffold: Learning Compact Geometric Latents via Reconstruction for Efficient Vision-Language Navigation",
+      "published": "2026-10-02T02:24:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02687",
+      "title": "Decoupling Memory from Context: Structured Memory for Token-Efficient Test-Time Continual Learning",
+      "published": "2026-10-02T02:07:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02683",
+      "title": "RAOA: Alternating-Operator Neural Computation with Programmable Radio Propagation",
+      "published": "2026-10-02T02:04:34Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02670",
+      "title": "LEAP: Learning Efficient Action Proposals For LLM Agents",
+      "published": "2026-10-02T01:44:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02666",
+      "title": "CHASE-VLA: Post-Training Quantization Framework for Vision-Language-Action Models with Chunk-Aware Scale Estimation",
+      "published": "2026-10-02T01:34:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02659",
+      "title": "Distributed Learning with Selective State Space Models: Architecture-Aware Convergence Analysis",
+      "published": "2026-10-02T01:28:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02657",
+      "title": "Context-Tower Conversion Preserves Generation While Freezing Retains Knowledge: Low-Budget AR-to-Diffusion Conversion of MoE LLMs",
+      "published": "2026-10-02T01:26:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02626",
+      "title": "Imagine the Future, Internalize the Gist: Efficient VLA Reasoning via Internalized Spatiotemporal Imagination",
+      "published": "2026-10-02T00:31:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02611",
+      "title": "Scale-Recursive Rectified Flows for Few-Step Precipitation Ensembles",
+      "published": "2026-10-02T00:11:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02597",
+      "title": "GRAFT: Growing Agglomerative Foundation Models via Continual Teacher Distillation",
+      "published": "2026-10-01T23:49:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02593",
+      "title": "Fisher-Guided Submodular Data Selection for Continual Pre-Training of Large Language Models",
+      "published": "2026-10-01T23:44:09Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02549",
+      "title": "Evaluating Multi-Dimensional Generalization of Large Language Models in Temporal Extraction Tasks",
+      "published": "2026-10-01T22:35:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02521",
+      "title": "Spatial Memory Intelligence: Endowing World Models with Understanding-Driven Long-Term Memory",
+      "published": "2026-10-01T21:50:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02513",
+      "title": "From Fragments to Global Maps: Learning Vectorized Map Aggregation with Large Language Models",
+      "published": "2026-10-01T21:35:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02507",
+      "title": "MeshQuery: Agentic Seam Planning for UV Parametrization",
+      "published": "2026-10-01T21:30:36Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02497",
+      "title": "LiteEMG-FM: An Efficient and Deployable Foundation Model for Robust EMG Sensing",
+      "published": "2026-10-01T21:19:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02462",
+      "title": "Capability Scaling-Down Laws for LLM Compression",
+      "published": "2026-10-01T20:35:12Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02451",
+      "title": "A Simulation-Grounded Agentic VLM Framework for Wildfire Monitoring and Reporting",
+      "published": "2026-10-01T20:22:10Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02442",
+      "title": "AI-driven Thermal-aware Data Center Capacity Planning",
+      "published": "2026-10-01T20:09:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02404",
+      "title": "Trained Agentic Context Management",
+      "published": "2026-10-01T19:32:12Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02388",
+      "title": "Octrees as an Explicit 3D Language",
+      "published": "2026-10-01T19:10:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02386",
+      "title": "Social bot detection in the age of ChatGPT: Challenges and opportunities",
+      "published": "2026-10-01T19:08:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02375",
+      "title": "EviDent-CBCT: Evidence-Bottlenecked Report Generation from Dental CBCT under Non-Exhaustive Report Supervision",
+      "published": "2026-10-01T18:54:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02344",
+      "title": "Drive vs. Decay: On the Training Dynamics of Joint-Embedding Predictive Architectures",
+      "published": "2026-10-01T18:16:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02323",
+      "title": "World-Calibrated Proposal-to-Action Flow for Vision-Language-Action Models",
+      "published": "2026-10-01T18:00:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02320",
+      "title": "DeskForge: Dense Supervision from Desktop Environments for Computer-Use Agents",
+      "published": "2026-10-01T18:00:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02199",
+      "title": "TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning",
+      "published": "2026-10-01T17:59:42Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02196",
+      "title": "InterEvolve: Test-Time Evolution of Reward Programs for Humanoid Loco-Manipulation",
+      "published": "2026-10-01T17:59:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02181",
+      "title": "OmniSeek: Native Tool Integration for Multi-turn Audio-Visual Reasoning",
+      "published": "2026-10-01T17:58:16Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02163",
+      "title": "AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents",
+      "published": "2026-10-01T17:54:34Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02298",
+      "title": "EditHero: A Benchmark for Long-Horizon Part-Level 3D Editing and Vibe Modeling",
+      "published": "2026-10-01T17:50:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02148",
+      "title": "Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation",
+      "published": "2026-10-01T17:49:40Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02144",
+      "title": "Faynt: Scaling and Optimizing Policies for Competitive Melee",
+      "published": "2026-10-01T17:48:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02142",
+      "title": "Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models",
+      "published": "2026-10-01T17:46:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02117",
+      "title": "Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes",
+      "published": "2026-10-01T17:34:10Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02091",
+      "title": "GeoLatent: Geometry-Guided Latent Structuring with Routed Optimization for 3D Reasoning",
+      "published": "2026-10-01T17:22:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02076",
+      "title": "LLM-as-Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them",
+      "published": "2026-10-01T17:15:24Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-architecture",
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02045",
+      "title": "Form and Void: Entangled Composition through an Autonomous AI Agent",
+      "published": "2026-10-01T16:55:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02021",
+      "title": "Task-Adaptive Grounded 3D-Programmers Using 2D VLMs",
+      "published": "2026-10-01T16:43:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02019",
+      "title": "Controllable Multi-label Video Safety Detection via Adaptive Tversky Policy Optimization",
+      "published": "2026-10-01T16:42:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02002",
+      "title": "Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents",
+      "published": "2026-10-01T16:32:38Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01999",
+      "title": "From Reasoning Failures to Composable Video Spatial Intelligence",
+      "published": "2026-10-01T16:31:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01981",
+      "title": "Universal interpolation for deep residual self-attention networks",
+      "published": "2026-10-01T16:25:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01973",
+      "title": "Token-Level Video Reinforcement Learning",
+      "published": "2026-10-01T16:22:41Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01962",
+      "title": "SIEVE: Selective attention-value Suppression for Vision-Language Models Unlearning",
+      "published": "2026-10-01T16:16:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01944",
+      "title": "Anti-Persona: Disrupting Unauthorized Identity Binding and Recognition in Personalized Vision--Language Models",
+      "published": "2026-10-01T16:10:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01939",
+      "title": "Fewer Tokens, Better Action: GPT-6 Astra Robot Agents with 14% Higher Success Rate but 65% Fewer Tokens",
+      "published": "2026-10-01T16:07:49Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01921",
+      "title": "Cross-Lingual Alignment for Decoder-Only Models using MoE Routers",
+      "published": "2026-10-01T15:56:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01917",
+      "title": "MoLE: Mixture of Latent Experts for Complementary Visual Reasoning",
+      "published": "2026-10-01T15:54:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01846",
+      "title": "Beyond Decodability: Do Acoustic Factors Drive Predictions in Speech-Based Alzheimer's Assessment?",
+      "published": "2026-10-01T15:13:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01835",
+      "title": "Varda-single-1.0: deterministic data-driven weather forecasting at 1 km resolution over Switzerland's complex topography",
+      "published": "2026-10-01T15:07:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01821",
+      "title": "Beyond Linear Concepts: Discovering and Aligning Non-Linear Concept Manifolds in Large Language Models",
+      "published": "2026-10-01T14:55:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01815",
+      "title": "Debias Anything: Fairness with Diversity without Supervision in Diffusion Models",
+      "published": "2026-10-01T14:51:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01794",
+      "title": "Continuous Conditioning of VLAs with Augmenting EMG and Visual Task Descriptors",
+      "published": "2026-10-01T14:37:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01785",
+      "title": "VETO: Video Efficient Token Optimization for Vision Language Models",
+      "published": "2026-10-01T14:32:43Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "model-compression",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01766",
+      "title": "VideoEvolve: Evolving Agent Harnesses for Video Temporal Grounding",
+      "published": "2026-10-01T14:24:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01754",
+      "title": "Cog-VADU: A Training-Free Cognitive Reasoning Framework for Video Anomaly Detection and Understanding",
+      "published": "2026-10-01T14:18:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01741",
+      "title": "ATI-VLA: Action-Centric Predictive Vision-Language-Action Models via Actionable Alignment Then Adaptive Injection",
+      "published": "2026-10-01T14:12:23Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02284",
+      "title": "Effects of interpulse-interval variation on deep-learning classification of bat vocalizations",
+      "published": "2026-10-01T14:01:53Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01710",
+      "title": "CoEvolve: Construct-to-Edit Visual Grounding with Bidirectional State Refinement",
+      "published": "2026-10-01T13:54:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01687",
+      "title": "Architectural Sampling: Test-Time Scaling via Computational Diversity in Frozen Vision-Language Models",
+      "published": "2026-10-01T13:44:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01670",
+      "title": "Do MLLM Judges Judge the Edit? Auditing Bias in Image Editing Evaluation with Verified Quality Preservation",
+      "published": "2026-10-01T13:30:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01649",
+      "title": "CrossGMN: Graph Metanetworks for Cross-Architecture Weight-Space Transformations",
+      "published": "2026-10-01T13:13:55Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01640",
+      "title": "Not All Error Yields to Scale: Where Scaling Stops in Vision-Language Inference",
+      "published": "2026-10-01T13:05:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01637",
+      "title": "Fusing Visual and Textual Representations via Multi-layer Fusing Transformers for Vietnamese Visual Question Answering",
+      "published": "2026-10-01T13:04:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01625",
+      "title": "Beyond Domain-Level Adaptation: Margin-Oriented Semantic-Appearance Interaction Correction for Personalized Federated Vision-Language Models",
+      "published": "2026-10-01T12:57:30Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01605",
+      "title": "Hob-VL: A Benchmark for Visually Grounded Boolean Reasoning",
+      "published": "2026-10-01T12:48:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01595",
+      "title": "Before It Fades: Reinforcing Temporal Representations at Inference Time in VideoLLMs",
+      "published": "2026-10-01T12:45:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01578",
+      "title": "The hidden advantage of mask resampling: a theory of masked autoencoders",
+      "published": "2026-10-01T12:35:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01569",
+      "title": "Managing Context and Communication in Distributed Agentic UAV Swarms",
+      "published": "2026-10-01T12:30:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01537",
+      "title": "FedFit: Federated Fine-Tuning of LLMs via Vector-Bank Parameterization and Quantization",
+      "published": "2026-10-01T12:09:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01531",
+      "title": "Towards Reliable Vision-Language Models for Autonomous Driving",
+      "published": "2026-10-01T12:06:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01530",
+      "title": "Calibrating Prediction Timeliness Through Multi-Objective Hyperparameter Optimization for Remaining Useful Life Prediction",
+      "published": "2026-10-01T12:06:11Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01513",
+      "title": "Decision Titan: Test-Time Training for Long-Term Memory in Offline Reinforcement Learning",
+      "published": "2026-10-01T11:48:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01509",
+      "title": "Sharpening Tax in Post-Training",
+      "published": "2026-10-01T11:46:00Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01499",
+      "title": "VTR-Bench: A Systematic Benchmark for Evaluating Visual Text Rendering in Video Generation",
+      "published": "2026-10-01T11:40:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01496",
+      "title": "SALD: Self-Referenced Advantage Learning for Diffusion Models",
+      "published": "2026-10-01T11:37:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01492",
+      "title": "Q-SPT: Learnable Query-Based Compression for Low-Frame-Rate Speech Tokenization",
+      "published": "2026-10-01T11:35:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01434",
+      "title": "MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs",
+      "published": "2026-10-01T10:31:21Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression",
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01395",
+      "title": "AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models",
+      "published": "2026-10-01T09:59:36Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01389",
+      "title": "AiSearch: Interactive Multi-Modal Search with VLMs",
+      "published": "2026-10-01T09:56:32Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01286",
+      "title": "Dyna3: VLM-Guided Training-Free 4D Reconstruction via Depth Foundation Models",
+      "published": "2026-10-01T08:24:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01243",
+      "title": "When the Judge Acts: Auditing VLM-Guided Image Selection on Culturally Situated Prompts",
+      "published": "2026-10-01T07:40:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01192",
+      "title": "FlashBack: Knowing When to Remember in Streaming Vision-Language Models",
+      "published": "2026-10-01T07:05:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01184",
+      "title": "ReCast: Contract-Preserving Protection for Fixed-Interface Multimodal Reasoning",
+      "published": "2026-10-01T07:00:48Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01180",
+      "title": "Skeleton-and-Strategy Prompting: Training-Free Negation Understanding for Vision-Language Models",
+      "published": "2026-10-01T06:53:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01172",
+      "title": "Learning Rate Transfer for Hybrid Transformer-SSM Architectures",
+      "published": "2026-10-01T06:46:03Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01166",
+      "title": "CineMR: Tool-Integrated Vision-Language Reasoning for Quantitative Cardiac MRI Assessment",
+      "published": "2026-10-01T06:43:42Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02270",
+      "title": "Reliability Stress Tests and Decision-Time Routing for Chest X-ray Vision-Language Models",
+      "published": "2026-10-01T06:23:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01127",
+      "title": "Counting and Min-Cost Encoding for Tokenization in Large Language Models",
+      "published": "2026-10-01T06:11:38Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01054",
+      "title": "Capturing In-Context Learning Dynamics with Task Operators",
+      "published": "2026-10-01T04:50:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.01037",
+      "title": "SLIM: Simplex-Lattice Interpolation Merging",
+      "published": "2026-10-01T04:23:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00983",
+      "title": "The Devil Is in the Reconstruction Loss Scale: Rethinking Optimization in LLM Quantization",
+      "published": "2026-10-01T03:19:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00981",
+      "title": "NarrativeFlow: Flow-Based Vision-Language-Action Model Using Robot Velocity Fields",
+      "published": "2026-10-01T03:18:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00973",
+      "title": "Concept Driven Domain Adaptation: Finding an Abstract Needle in a Haystack",
+      "published": "2026-10-01T03:03:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00969",
+      "title": "A Citation-Grounded Benchmark for Trustworthy Earnings Call Transcript Analysis with Large Language Models",
+      "published": "2026-10-01T02:59:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00964",
+      "title": "RPTune: Learned Context Curation for LLM Catalog Search",
+      "published": "2026-10-01T02:52:24Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00958",
+      "title": "Role-aware Heuristic Episodic Attention for Conversational LLMs",
+      "published": "2026-10-01T02:39:52Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00952",
+      "title": "A Matched-Budget Audit Framework for Recaptioned Image-Text Supervision Distributions",
+      "published": "2026-10-01T02:35:20Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00922",
+      "title": "EyeTAG: Eye Trajectory-Aware Gaze Estimation",
+      "published": "2026-10-01T01:57:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00899",
+      "title": "TOAST: Stochastic Robot Action Tokenization for Autoregressive Vision-Language-Action Models",
+      "published": "2026-10-01T01:28:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00883",
+      "title": "DeBERTa-ConPara: Attack-Aware and Deployment-Realistic Detection of AI-Generated Text",
+      "published": "2026-10-01T00:57:33Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00881",
+      "title": "Machine Translation for Sign Languages",
+      "published": "2026-10-01T00:56:46Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00878",
+      "title": "UniTrackPLA: Unified Panorama-Language-Action Model for Instruction-Guided Navigation and Dynamic Person Tracking",
+      "published": "2026-10-01T00:53:07Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00864",
+      "title": "Kinematic MeanFlow: One-Step Action Generation Policy for Robotic Foundation Models",
+      "published": "2026-10-01T00:31:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00855",
+      "title": "Lang3DSeg: Annotation-Free Open-Vocabulary 3D Segmentation with Point Transformers",
+      "published": "2026-10-01T00:15:47Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00848",
+      "title": "Geometric Similarity in VLM Low-Level Vision Representations",
+      "published": "2026-10-01T00:06:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00825",
+      "title": "Align Then Reason: A Multimodal Lip-Sync Judge for Dubbing",
+      "published": "2026-09-30T23:35:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00809",
+      "title": "Paying for Too Many Tokens? Valid and Cost-Efficient Multimodal LLM Annotation with Simple Heuristics",
+      "published": "2026-09-30T22:59:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "model-compression",
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00795",
+      "title": "Can large language models unlock discrete data in ophthalmic diagnostic reports?",
+      "published": "2026-09-30T22:35:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03792",
+      "title": "What Do Verifiable Rewards Teach Video-Language Models About Time? A Controlled Multi-Model Study",
+      "published": "2026-09-30T21:42:57Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00717",
+      "title": "Sequential Functional Structured Tucker Compression for Large Language Model Attentions",
+      "published": "2026-09-30T21:06:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00694",
+      "title": "How Divergence Becomes Decision Flips in Compressed Language Models",
+      "published": "2026-09-30T20:37:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00680",
+      "title": "Curvature Under Attack in hZACH-ViT: Gauge Symmetry, Boundary Saturation, and Adversarial Failure",
+      "published": "2026-09-30T20:20:13Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00677",
+      "title": "Harnessing Vision-Language Models for Perceptual Quality Assessment and Autonomous Content Adjustment in Augmented Reality",
+      "published": "2026-09-30T20:13:50Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00673",
+      "title": "Closing the Loop: Practical Training Recipes for Looped Language Models",
+      "published": "2026-09-30T20:09:58Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00666",
+      "title": "VisionQ: VLM-as-a-Judge Taxonomy, Dataset and Benchmark for Qualitative Analysis in Computer Vision",
+      "published": "2026-09-30T20:03:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00665",
+      "title": "Analysis of Quantized and Efficiently Adapted Protein Language Models",
+      "published": "2026-09-30T20:02:41Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00663",
+      "title": "Backdoor Containment via Expert Quarantine and Shutdown in LLMs",
+      "published": "2026-09-30T20:02:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00623",
+      "title": "HAWK: Rethinking Multimodal Drafting for Speculative Decoding",
+      "published": "2026-09-30T19:26:06Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00604",
+      "title": "MIKASA-Robo-VLA: Benchmarking Memory in VLA Models for Long-Horizon Manipulation",
+      "published": "2026-09-30T19:10:31Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00592",
+      "title": "ALER: Adaptive Learnable Experience Rewriting for Reinforcement Learning",
+      "published": "2026-09-30T18:55:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00573",
+      "title": "FORTE: Adaptive Scoring and Exact Keyframe Selection for Long-Video Question Answering",
+      "published": "2026-09-30T18:45:18Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00562",
+      "title": "Can LLMs Reason Over Long Horizons? An Empirical Evaluation of Context Strategies for Longitudinal Clinical Reasoning",
+      "published": "2026-09-30T18:36:19Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00559",
+      "title": "PhysVista: Benchmarking Physical Intelligence in VLMs via a Perception-Reasoning-Assessment Loop",
+      "published": "2026-09-30T18:34:22Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00541",
+      "title": "Random Recursive Models",
+      "published": "2026-09-30T18:23:14Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00499",
+      "title": "Denoising Surface: Modeling and Predicting Inference Cost for Diffusion LLM Serving",
+      "published": "2026-09-30T18:01:37Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00497",
+      "title": "Gumbel Straight Flow: Distilling Autoregressive Models into One-step Flow Maps",
+      "published": "2026-09-30T18:01:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00487",
+      "title": "ScaffoldM3C: A Multimodal Sequential Monte Carlo Framework for Generative Stable Construction Planning",
+      "published": "2026-09-30T18:00:17Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00465",
+      "title": "AIR-LLM: Broadcasting AI Weights over Radio for Memory-Free Edge LLM Inference via RF Computing",
+      "published": "2026-09-30T18:00:02Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00432",
+      "title": "XOR-Trellis: Ultra-Low-Complexity Dequantization and Curvature-Aware Hadamard-Free LLM Quantization",
+      "published": "2026-09-30T17:05:40Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "efficient-inference",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02247",
+      "title": "Toward Controlling Biology with Language:Offline Learning of Prompt-Conditioned Interventions for Cells, Organoids, and Biobots",
+      "published": "2026-09-30T16:49:01Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00426",
+      "title": "IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs",
+      "published": "2026-09-30T16:08:59Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00406",
+      "title": "LLM-as-a-Judge for Low-Resource Languages: Adapting Ragas and Comparative Ranking for Romanian",
+      "published": "2026-09-30T13:19:21Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00399",
+      "title": "Metacognitive Reasoning in Energy Based Models using Instance Based Learning Theory",
+      "published": "2026-09-30T12:08:51Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00398",
+      "title": "WIPSNet: Deep Learning for Paediatric Wheeze Detection from Overnight Impedance Pneumography",
+      "published": "2026-09-30T11:58:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06902",
+      "title": "Tree Navigation Without LLM Summaries: A Matched-Cost Study of Hierarchical Retrieval for Long-Document QA",
+      "published": "2026-09-30T08:42:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00374",
+      "title": "Faithful Chart Generation for Multimodal Deep Research: Frame-Evidence Co-Adaptation",
+      "published": "2026-09-30T07:33:25Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00363",
+      "title": "Deep Learning for Anomaly Detection in Railway Systems: A Structured Survey",
+      "published": "2026-09-30T06:29:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00333",
+      "title": "LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation",
+      "published": "2026-09-29T13:57:51Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.02241",
+      "title": "Hardware-Native Joint Sparse-Quantization for Trillion-Scale Mixture-of-Experts",
+      "published": "2026-09-29T07:58:06Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00317",
+      "title": "DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies",
+      "published": "2026-09-29T02:55:12Z",
+      "repository_status": "implemented",
+      "matched_queries": [
+        "llm-architecture",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.06896",
+      "title": "Medical Image Alignment Assessment as a Test of Generalist Visual Reasoning in Frontier Multimodal Models",
+      "published": "2026-09-28T17:17:27Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00302",
+      "title": "Decoding the Disaster: Multi-Task Geospatial Reasoning with Vision-Language Models and Crowdsourced Imagery for Disaster Mapping",
+      "published": "2026-09-28T07:10:08Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03759",
+      "title": "BridgeCast: Bridging Ocean Wave Forecasts to Reanalysis via Flow Matching with Exogenous Variables",
+      "published": "2026-09-27T00:43:54Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.03741",
+      "title": "Logit-Aware MIMO AirComp for Distributed Mixture-of-Experts LLM Inference over Wireless Edge Networks",
+      "published": "2026-09-22T15:55:56Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00223",
+      "title": "A Holistic Assessment of the Carbon Footprint of Noor, a Very Large Arabic Language Model",
+      "published": "2026-09-22T11:25:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00204",
+      "title": "Query Independent Variable Rate Visual Token Coding",
+      "published": "2026-09-20T15:54:59Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00196",
+      "title": "GPEC: Efficient Pre-LLM Gaussian Process Embedding Correction for Cardiac Video Caption Generation",
+      "published": "2026-09-18T19:52:05Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00106",
+      "title": "SyntheticHLS: Building Diverse Synthetic High-Level Synthesis Datasets using LLMs",
+      "published": "2026-09-09T02:40:29Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00097",
+      "title": "DramaAgent: Agentic Storytelling Video Generation",
+      "published": "2026-09-08T16:11:35Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00069",
+      "title": "A Framework for Egocentric and Exocentric Procedural Understanding via Temporal Segmentation and Semantic Abstraction",
+      "published": "2026-09-04T17:34:52Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00040",
+      "title": "DSSR-3D: Decoupled Reasoning for View-Dependent Referring in 3D Gaussians",
+      "published": "2026-09-03T01:27:45Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00031",
+      "title": "Seeing the City or Recognizing the Place? What Street-View Imagery Adds Beyond Existing Urban Data in VLM-Based Urban Sensing",
+      "published": "2026-09-02T12:21:39Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": []
+    },
+    {
+      "arxiv_id": "2610.00024",
+      "title": "Encoded but Disconnected: Decomposing Vision-Language Model Failures under a Patching Null",
+      "published": "2026-09-01T20:15:24Z",
+      "repository_status": "new",
+      "matched_queries": [
+        "llm-architecture",
+        "vision-language"
+      ],
+      "source_provenance": []
+    }
+  ]
+}
