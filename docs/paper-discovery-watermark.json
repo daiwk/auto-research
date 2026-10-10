@@ -1,15 +1,14 @@
 {
-  "schema_version": 1,
-  "policy": "bounded-review-with-explicit-exceptions-v1",
+  "schema_version": 2,
+  "policy": "review-with-coverage-and-archived-exceptions-v2",
   "checked_on": "2026-10-10",
   "user_authorized_exceptions": true,
-  "authorization_record": "2026-10-10 用户要求先补齐缺失并推进到10月7日；实在不可核对的可忽略或修改标准。此处仅允许公开、有尝试记录且可重开的元数据/原文/分页例外，不降低论文算法与工业线上证据要求。",
+  "authorization_record": "2026-10-10 用户明确要求退休严格来源穷尽水位，统一为审查水位、覆盖范围和例外清单；实际尝试后不能确认的记录归档、不再阻塞，只在新证据出现时重开。论文收录、正文线上证据、算法保真与GPU验证标准不变。",
   "window": {
     "start": "2026-10-01",
     "end": "2026-10-07"
   },
   "review_watermark": "2026-10-07",
-  "source_exhaustiveness_watermark": "2026-10-02",
   "all_sources_exhaustive": false,
   "implementation_complete": false,
   "candidate_register": "research-audits/oct07-review-closure/paper-register.json",
@@ -66,5 +65,31 @@
     }
   ],
   "next_scan_start_with_overlap": "2026-10-06",
-  "exception_reopening_policy": "资料变更或独立补发现时重开；不无限重复相同失败请求，不永久删掉论文。"
+  "exception_reopening_policy": "不能确认项已归档、不阻塞水位、不按周期重试；仅官方资料变化或独立补发现提供新证据时重开。确认属于窗口内的未审候选不能归档逃避审查。",
+  "coverage_scope": {
+    "tracks": [
+      "recommendation",
+      "foundation-model",
+      "post-training",
+      "agent"
+    ],
+    "recall_modes": [
+      "submission-window",
+      "late-index"
+    ],
+    "official_sources": [
+      {
+        "organization": "Google",
+        "records": 398,
+        "pages": 27
+      },
+      {
+        "organization": "Meta",
+        "records": 144,
+        "pages": 6
+      }
+    ],
+    "limitations": "只承诺所列窗口、配置查询和官方页面范围的审查闭环，不承诺全网或整个官方站点绝无遗漏；未确认记录归档，不计接受或实现。"
+  },
+  "exception_archive": "research-audits/oct07-source-closure/exception-archive.json"
 }
