@@ -1,7 +1,8 @@
 import pytest
 import torch
 
-from auto_research.foundation_models.elastic_expert_routing import ElasticExpertRouting
+from auto_research.foundation_models.elastic_expert_routing import (ElasticExpertRouting,
+                                                                  ElasticMoELanguageModel)
 
 
 def test_discrete_gaussian_expectation_dispatch_and_inference_budget():
@@ -25,3 +26,17 @@ def test_discrete_gaussian_expectation_dispatch_and_inference_budget():
 def test_rejects_asymmetric_clipped_neighborhood():
     with pytest.raises(ValueError):
         ElasticExpertRouting(8, 16, 4, target_k=1, radius=1)
+
+
+def test_language_model_is_causal_and_trains_experts():
+    torch.manual_seed(7)
+    model = ElasticMoELanguageModel(10, dimensions=8, layers=1, heads=2,
+                                    num_experts=4, target_k=2, context=8)
+    model.eval()
+    left = torch.tensor([[1, 2, 3, 4]])
+    right = torch.tensor([[1, 2, 8, 9]])
+    torch.testing.assert_close(model(left)[0][:, :2], model(right)[0][:, :2])
+    model.train()
+    logits, balance, _ = model(left)
+    (torch.nn.functional.cross_entropy(logits.flatten(0, 1), right.flatten()) + .01 * balance).backward()
+    assert model.moe[0].router.weight.grad.norm() > 0

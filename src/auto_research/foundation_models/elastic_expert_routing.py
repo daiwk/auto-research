@@ -63,3 +63,42 @@ class ElasticExpertRouting(nn.Module):
         return output, {"budgets": realized, "dispatch_counts": dispatch_counts,
                         "balance_loss": balance_loss,
                         "expected_budget": (self.budgets * self.budget_probability).sum()}
+
+
+class ElasticMoELanguageModel(nn.Module):
+    """Trainable causal scratch LM; fixed-K and EER share parameter shapes."""
+
+    def __init__(self, vocabulary, dimensions=64, layers=2, heads=4,
+                 num_experts=6, target_k=3, radius=1, context=128):
+        super().__init__()
+        self.embedding = nn.Embedding(vocabulary, dimensions)
+        self.position = nn.Embedding(context, dimensions)
+        self.attention = nn.ModuleList([
+            nn.MultiheadAttention(dimensions, heads, dropout=0., batch_first=True)
+            for _ in range(layers)])
+        self.moe = nn.ModuleList([
+            ElasticExpertRouting(dimensions, dimensions * 2, num_experts, target_k, radius)
+            for _ in range(layers)])
+        self.norm1 = nn.ModuleList([nn.LayerNorm(dimensions) for _ in range(layers)])
+        self.norm2 = nn.ModuleList([nn.LayerNorm(dimensions) for _ in range(layers)])
+        self.final_norm = nn.LayerNorm(dimensions)
+        self.head = nn.Linear(dimensions, vocabulary, bias=False)
+
+    def forward(self, tokens):
+        length = tokens.shape[1]
+        if length > self.position.num_embeddings:
+            raise ValueError("sequence exceeds positional context")
+        hidden = self.embedding(tokens) + self.position(torch.arange(length, device=tokens.device))
+        mask = torch.ones(length, length, dtype=torch.bool, device=tokens.device).triu(1)
+        balance, dispatched = [], []
+        for attention, moe, norm1, norm2 in zip(
+                self.attention, self.moe, self.norm1, self.norm2, strict=True):
+            normalized = norm1(hidden)
+            attended, _ = attention(normalized, normalized, normalized,
+                                     attn_mask=mask, need_weights=False)
+            hidden = hidden + attended
+            transformed, stats = moe(norm2(hidden), return_statistics=True)
+            hidden = hidden + transformed
+            balance.append(stats["balance_loss"])
+            dispatched.append(stats["budgets"].float().mean())
+        return self.head(self.final_norm(hidden)), torch.stack(balance).mean(), torch.stack(dispatched).mean()
