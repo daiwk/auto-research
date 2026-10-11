@@ -9,21 +9,11 @@ from pathlib import Path
 import torch
 
 from auto_research.post_training.learning_signals import (
-    cross_fitted_occupancy, learning_signal_proxy, linear_cka, mean_pool_prompt,
+    cross_fitted_occupancy, learning_signal_proxy, linear_cka, prompt_layer_features,
     occupancy_surrogate, parameter_displacement, topk_residual,
 )
 from auto_research.post_training.oct10_checkpoint import _logits, _prompt, _sample, install_lora, load_public_rows
 from auto_research.public_holdout import validate_holdout
-
-
-def features(model, inputs):
-    rows = []
-    for ids in inputs:
-        with torch.no_grad():
-            hidden = model(ids, use_cache=False, output_hidden_states=True).hidden_states
-        pooled = [mean_pool_prompt(h, torch.ones_like(ids, dtype=torch.bool))[0].cpu() for h in hidden]
-        rows.append(torch.stack(pooled))
-    return torch.stack(rows).transpose(0, 1)
 
 
 def response_statistics(current, target, old, ids, mask):
@@ -78,7 +68,7 @@ def main():
     before = {n: x.detach().clone() for n, x in student.named_parameters() if x.requires_grad}
     train, valid = load_public_rows(a.train_path), load_public_rows(a.validation_path)
     prompts = [_prompt(tokenizer, r["question"], a.device) for r in valid[:a.representation_prompts]]
-    initial_features = features(student, prompts)
+    initial_features = prompt_layer_features(student, prompts)
     optimizer = torch.optim.AdamW(params, lr=1e-6, weight_decay=.01)
     rows = []
     for step in range(a.steps):
@@ -108,7 +98,7 @@ def main():
         print(json.dumps(record), flush=True)
         del current, target, old, residuals, losses, logp, h0, h1, g0, g1, hg0, hg1, loss
     final = {n: x.detach() for n, x in student.named_parameters() if x.requires_grad}
-    final_features = features(student, prompts)
+    final_features = prompt_layer_features(student, prompts)
     report = {"adapter_key": "opd-learning-signals", "seed": a.seed, "diagnostic_only": True,
               "evaluation_tier": "l1_mechanism", "student": {"id": a.student_id, "revision": a.student_revision},
               "teacher": {"id": a.teacher_id, "revision": a.teacher_revision},
@@ -116,6 +106,8 @@ def main():
               "parameter_statistics": parameter_displacement(before, final),
               "parameter_scope": "LoRA adapter parameters only; not original full-model displacement",
               "representation_prompts": len(prompts),
+              "representation_positions": ["embedding", *[f"decoder_{i}" for i in range(1, len(student.model.layers))],
+                                           "final_norm"],
               "layerwise_prompt_cka": [linear_cka(x, y) for x, y in zip(initial_features, final_features)],
               "limitations": ["three-step small GSM8K diagnostic is not evidence of a learning plateau",
                               "one public teacher; not original larger-teacher versus self-RL comparison",
