@@ -57,6 +57,7 @@ def class_prompt():
 
 
 def run(args):
+    import transformers
     from transformers import AutoProcessor, Qwen3_5ForConditionalGeneration
     if not torch.cuda.is_available():
         raise RuntimeError('the actual Qwen3.5 checkpoint diagnostic requires CUDA')
@@ -113,7 +114,8 @@ def run(args):
         'checkpoint': {'id': CHECKPOINT_ID, 'revision': CHECKPOINT_REVISION,
             'configuration_sha256': {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
                                      for name in files if (root / name).exists()}},
-        'protocol': {'first_layer_real_delta_state_capture': True, 'state_scores_not_feature_proxy': True,
+        'protocol': {'transformers_version': transformers.__version__,
+            'first_layer_real_delta_state_capture': True, 'state_scores_not_feature_proxy': True,
             'query_probe_window': [0, 4], 'uniqueness_weight': .1, 'merge_temperature': 1.,
             'exit_layer': 24, 'text_original_mrope_preserved': True,
             'position_choice': 'original_max_score_chunk_member',

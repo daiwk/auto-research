@@ -1,5 +1,9 @@
 import pytest
 import torch
+from concurrent.futures import ThreadPoolExecutor
+import inspect
+from threading import Barrier
+from types import FunctionType, MethodType
 
 from auto_research.multimodal.vcola import (
     delta_state_scores, early_exit_visual, importance_chunks, merge_visual_tokens,
@@ -111,6 +115,9 @@ def test_real_hybrid_layers_baseline_parity_compression_and_early_exit():
             attention_mask=torch.ones(1, 12, dtype=torch.long), use_cache=False).last_hidden_state
         expected = model.lm_head(original[:, -1]).float()
     logits, details = backend.forward(prefix, collect_scores=True)
+    expected_api = ('instance_kernel' if callable(getattr(
+        backend.text.layers[0].linear_attn, 'chunk_gated_delta_rule', None)) else 'private_forward_globals')
+    assert details['delta_capture_api'] == expected_api
     assert torch.allclose(logits, expected, atol=1e-5)
     assert details['recurrence_relative_error'] < 1e-5
     compressed, info = backend.forward(prefix, remain_rate=.5, exit_layer=3)
@@ -147,9 +154,168 @@ def test_hook_restored_after_failure():
     from auto_research.multimodal.vcola_checkpoint import Qwen35VCoLA, VisualPrefix
     model = tiny_model()
     backend = Qwen35VCoLA(model)
-    kernel = backend.text.layers[0].linear_attn.chunk_gated_delta_rule
+    first = backend.text.layers[0].linear_attn
+    original_forward = first.forward
+    original_kernel = getattr(first, 'chunk_gated_delta_rule', None)
+    original_instance_fields = dict(vars(first))
+    raw = inspect.unwrap(original_forward.__func__)
+    global_kernel = raw.__globals__.get('torch_chunk_gated_delta_rule')
     prefix = VisualPrefix(torch.ones(1, 5, 32), torch.arange(5)[None, None].expand(3, 1, -1),
                           torch.tensor([True, False, True, False, False]), 5)
     with pytest.raises(ValueError, match='contiguous'):
         backend.forward(prefix, remain_rate=.5)
-    assert backend.text.layers[0].linear_attn.chunk_gated_delta_rule == kernel
+    assert first.forward == original_forward
+    assert getattr(first, 'chunk_gated_delta_rule', None) is original_kernel
+    assert vars(first).keys() == original_instance_fields.keys()
+    assert raw.__globals__.get('torch_chunk_gated_delta_rule') is global_kernel
+
+
+def test_capture_observes_only_target_instance_and_preserves_global_kernel():
+    from auto_research.multimodal.vcola_checkpoint import observe_delta_prefill
+    model = tiny_model()
+    first = model.model.language_model.layers[0].linear_attn
+    other = model.model.language_model.layers[1].linear_attn
+    hidden = torch.randn(1, 7, 32)
+    original_first, original_other = first.forward, other.forward
+    raw = inspect.unwrap(original_first.__func__)
+    global_kernel = raw.__globals__.get('torch_chunk_gated_delta_rule')
+    observed = []
+    with torch.no_grad():
+        expected_first, expected_other = first(hidden), other(hidden)
+        with observe_delta_prefill(first, lambda q, k, v, kwargs, result: observed.append(result[0])):
+            assert raw.__globals__.get('torch_chunk_gated_delta_rule') is global_kernel
+            assert torch.equal(other(hidden), expected_other)
+            assert not observed
+            assert torch.equal(first(hidden), expected_first)
+            assert len(observed) == 1
+        assert torch.equal(first(hidden), expected_first)
+    assert first.forward == original_first and other.forward == original_other
+    assert raw.__globals__.get('torch_chunk_gated_delta_rule') is global_kernel
+
+
+def test_capture_callback_failure_restores_exact_instance_and_module_state():
+    from auto_research.multimodal.vcola_checkpoint import observe_delta_prefill
+    first = tiny_model().model.language_model.layers[0].linear_attn
+    before = dict(vars(first))
+    original_forward = first.forward
+    raw = inspect.unwrap(original_forward.__func__)
+    global_kernel = raw.__globals__.get('torch_chunk_gated_delta_rule')
+
+    def failing_observer(*args):
+        raise RuntimeError('deliberate actual-kernel observation failure')
+
+    with torch.no_grad(), pytest.raises(RuntimeError, match='deliberate'):
+        with observe_delta_prefill(first, failing_observer):
+            first(torch.randn(1, 7, 32))
+    assert vars(first).keys() == before.keys()
+    assert all(vars(first)[name] is value for name, value in before.items())
+    assert first.forward == original_forward
+    assert raw.__globals__.get('torch_chunk_gated_delta_rule') is global_kernel
+
+
+def test_capture_unrelated_thread_on_same_instance_is_not_observed():
+    from auto_research.multimodal.vcola_checkpoint import observe_delta_prefill
+    first = tiny_model().model.language_model.layers[0].linear_attn
+    hidden = torch.randn(1, 7, 32)
+    observed = []
+
+    def inference():
+        with torch.no_grad():
+            return first(hidden)
+
+    expected = inference()
+    with observe_delta_prefill(first, lambda *args: observed.append(True)):
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            assert torch.equal(pool.submit(inference).result(timeout=30), expected)
+        assert not observed
+        assert torch.equal(inference(), expected)
+        assert observed == [True]
+
+
+def test_private_forward_keeps_actual_accelerate_decorator_hooks():
+    from auto_research.multimodal.vcola_checkpoint import observe_delta_prefill
+    first = tiny_model().model.language_model.layers[0].linear_attn
+    called = []
+
+    class Hook:
+        def pre_forward(self, module):
+            called.append(('pre', module))
+
+        def post_forward(self, module, output):
+            called.append(('post', module))
+
+    first.conv1d._hf_hook = Hook()
+    # Both official releases already decorate forward (5.14 has no __wrapped__
+    # metadata). Compare actual hook execution, not wrapper naming conventions.
+    original_forward = first.forward
+    hidden = torch.randn(1, 7, 32)
+    observed = []
+    with torch.no_grad():
+        expected = first(hidden)
+        assert called == [('pre', first.conv1d), ('post', first.conv1d)]
+        called.clear()
+        with observe_delta_prefill(first, lambda *args: observed.append(True)):
+            assert torch.equal(first(hidden), expected)
+    assert called == [('pre', first.conv1d), ('post', first.conv1d)]
+    assert observed == [True]
+    assert first.forward == original_forward
+
+
+def test_two_instances_capture_concurrently_without_cross_observation():
+    from auto_research.multimodal.vcola_checkpoint import observe_delta_prefill
+    model = tiny_model()
+    instances = [model.model.language_model.layers[i].linear_attn for i in (0, 1)]
+    originals = [instance.forward for instance in instances]
+    before = [dict(vars(instance)) for instance in instances]
+    hidden = [torch.randn(1, 7 + i, 32) for i in range(2)]
+    with torch.no_grad():
+        expected = [instance(value) for instance, value in zip(instances, hidden)]
+    barrier = Barrier(2)
+    observed = [[], []]
+
+    def inference(index):
+        with torch.no_grad(), observe_delta_prefill(instances[index],
+                lambda q, k, v, kwargs, result: observed[index].append(q.shape[1])):
+            barrier.wait(timeout=30)
+            output = instances[index](hidden[index])
+            barrier.wait(timeout=30)
+            return output
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        pending = [pool.submit(inference, index) for index in range(2)]
+        actual = [task.result(timeout=30) for task in pending]
+    assert observed == [[7], [8]]
+    for index, instance in enumerate(instances):
+        assert torch.equal(actual[index], expected[index])
+        assert instance.forward == originals[index]
+        assert vars(instance).keys() == before[index].keys()
+        assert all(vars(instance)[key] is value for key, value in before[index].items())
+
+
+def _module_kernel_prefill(q, k, v, **kwargs):
+    return torch_chunk_gated_delta_rule(q, k, v, **kwargs)  # noqa: F821
+
+
+def test_unknown_decorator_fails_closed_before_mutating_instance():
+    from auto_research.multimodal.vcola_checkpoint import observe_delta_prefill
+    module = pytest.importorskip('transformers.models.qwen3_5.modeling_qwen3_5')
+    # A synthetic unsupported wrapper tests safety only, not model capability.
+    # Private globals keep even this test from changing an official module.
+    raw = FunctionType(_module_kernel_prefill.__code__,
+        {'torch_chunk_gated_delta_rule': module.torch_chunk_gated_delta_rule})
+    reference = {'forward': raw}
+
+    def unsupported(self, *args, **kwargs):
+        return reference['forward'](*args, **kwargs)
+
+    unsupported.__wrapped__ = raw
+    instance = torch.nn.Module()
+    instance.forward = MethodType(unsupported, instance)
+    before = dict(vars(instance))
+    original_kernel = raw.__globals__['torch_chunk_gated_delta_rule']
+    with pytest.raises(RuntimeError, match='unsupported Qwen decorator closure'):
+        with observe_delta_prefill(instance, lambda *args: pytest.fail('must not observe')):
+            pytest.fail('unsafe wrapper must fail before entering capture')
+    assert vars(instance).keys() == before.keys()
+    assert all(vars(instance)[key] is value for key, value in before.items())
+    assert raw.__globals__['torch_chunk_gated_delta_rule'] is original_kernel
