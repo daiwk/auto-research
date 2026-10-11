@@ -25,8 +25,8 @@ def main():
         return provider.decide(request).answers["gate"].probabilities
 
     report = evaluate_option_channel(gate, count=a.count)
-    report.update(adapter_key="option-channel-attack", diagnostic_only=False,
-                  evaluation_tier="public_checkpoint_synthetic_security_evaluation",
+    report.update(adapter_key="option-channel-attack", diagnostic_only=True,
+                  evaluation_tier="l1_mechanism",
                   checkpoint={"id": LAYA_REPO_ID, "revision": LAYA_REVISION})
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(report, indent=2) + "\n")
