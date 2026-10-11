@@ -71,6 +71,23 @@ def test_sguid_verifier_sign_gate_and_persistence():
     assert select_sguid_skills(activities, late_minimum=2, tau=2) == ("good",)
 
 
+def test_pivot_reference_penalty_applies_only_to_grpo_and_reference_is_frozen():
+    s = torch.zeros(2, 2, 3, 4, requires_grad=True)
+    t = torch.zeros_like(s, requires_grad=True)
+    ref = torch.tensor([2., 0., 0., 0.]).expand_as(s).clone().requires_grad_()
+    actions = torch.zeros(2, 2, 3, dtype=torch.long)
+    mask = torch.ones_like(actions).bool()
+    args = (s, t, actions, torch.full_like(actions, -1.386294, dtype=torch.float), torch.zeros(2, 2), mask)
+    opd, _ = pivot_loss(*args, step=0, total_steps=2, reference_logits=ref, kl_beta=.001)
+    assert float(opd.detach()) == 0
+    grpo, _ = pivot_loss(*args, step=2, total_steps=2, reference_logits=ref, kl_beta=.001)
+    assert float(grpo.detach()) > 0
+    grpo.backward()
+    assert s.grad.abs().sum() > 0 and t.grad is None and ref.grad is None
+    with pytest.raises(ValueError, match="reference"):
+        pivot_loss(*args, step=2, total_steps=2, kl_beta=.001)
+
+
 def test_sguid_compact_run_restarts_from_base_not_probe_weights():
     model = torch.nn.Linear(1, 1)
     initial = deepcopy(model.state_dict())

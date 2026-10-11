@@ -86,7 +86,7 @@ def pivot_routing(teacher_sample_logp, mask, *, step, total_steps):
 
 
 def pivot_loss(student_logits, teacher_logits, actions, old_logp, rewards, mask,
-               *, step, total_steps, clip=0.2):
+               *, step, total_steps, clip=0.2, reference_logits=None, kl_beta=0.0):
     """Forward-KL OPD and per-response-token-sum GRPO, averaged over G and B."""
     import torch
 
@@ -108,6 +108,15 @@ def pivot_loss(student_logits, teacher_logits, actions, old_logp, rewards, mask,
     advantage = advantages.detach()[..., None]
     actor = torch.maximum(-ratio * advantage, -ratio.clamp(1 - clip, 1 + clip) * advantage)
     grpo = actor.masked_fill(~mask.bool(), 0).sum(-1).mean(-1)
+    if kl_beta < 0 or not math.isfinite(kl_beta):
+        raise ValueError("finite nonnegative reference KL weight required")
+    if kl_beta:
+        if reference_logits is None or reference_logits.shape != student_logits.shape:
+            raise ValueError("aligned frozen reference logits required for GRPO KL")
+        ref = reference_logits.detach().float().log_softmax(-1)
+        # Appendix A.7's reference penalty applies to GRPO, not OPD prompts.
+        reverse_kl = (s.exp() * (s - ref)).sum(-1).masked_fill(~mask.bool(), 0)
+        grpo = grpo + kl_beta * reverse_kl.sum(-1).mean(-1)
     return torch.where(routed, grpo, opd).mean(), {
         "routed_grpo": routed.detach(), "acquisition_scores": scores,
         "cosine_ratio": fraction, "opd_by_prompt": opd.detach(),
