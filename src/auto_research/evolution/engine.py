@@ -506,8 +506,9 @@ def _paper_ids(genome, papers):
         ):
             matched.append(paper.arxiv_id)
         elif (
-            paper.architecture == "optimizer:muon"
-            and genome.optimizer == "muon"
+            paper.architecture is not None
+            and paper.architecture.startswith("optimizer:")
+            and genome.optimizer == paper.architecture.split(":", 1)[1]
         ):
             matched.append(paper.arxiv_id)
         elif paper.architecture and ":" in paper.architecture:

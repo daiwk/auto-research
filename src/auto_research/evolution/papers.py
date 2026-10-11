@@ -181,6 +181,7 @@ INSTALLED_MUTATIONS = {
 }
 
 LLM_MUTATIONS = {
+    "2610.12444": ("optimizer:zip-sr", "ZIP-SR 在 AdamW 预条件器空间随机舍入并打包 4-bit 持久矩"),
     "2609.04971": (
         "attention:beacon-query-kv",
         "BeaconKV 用全局 query 簇代表预测远程重访，并与近期窗口共享固定 KV 预算",

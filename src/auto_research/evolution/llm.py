@@ -173,6 +173,9 @@ class MicroLLMEvaluator:
                 loss = loss + model.auxiliary_loss()
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            if genome.optimizer in {"zip-sr", "ze-eden"}:
+                optimizer.schedule_lm_head(model.output.parameters(), completed_steps=step,
+                                           total_steps=self.steps)
             optimizer.step()
             losses.append(float(loss.detach().cpu()))
         if genome.architecture == "adadsf":
@@ -218,6 +221,10 @@ class MicroLLMEvaluator:
             "parameters": sum(parameter.numel() for parameter in model.parameters()),
             "device": device.type,
             "optimizer": genome.optimizer,
+            "optimizer_head_scope": (
+                "shared LM head/embedding (tied micro-LM); not paper head-only recipe"
+                if genome.optimizer in {"zip-sr", "ze-eden"} else "not-applicable"
+            ),
             "architecture_stats": model.architecture_stats(),
             "muon_orthogonality_error": float(
                 getattr(optimizer, "last_orthogonality_error", 0.0)
@@ -393,6 +400,9 @@ def _sample_lm_batch(tokens, batch_size, length, rng, device, torch):
 
 
 def _build_optimizer(model, genome, torch):
+    if genome.optimizer in {"zip-sr", "ze-eden"}:
+        from ..foundation.adamw4bit import AdamW4Bit
+        return AdamW4Bit(model.parameters(), recipe=genome.optimizer, lr=genome.learning_rate)
     if genome.optimizer == "muon":
         return Muon(
             model.named_parameters(),

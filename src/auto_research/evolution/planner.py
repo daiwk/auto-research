@@ -257,6 +257,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
             "retoken",
             "twinkv",
             "optimizer:muon",
+            "optimizer:zip-sr",
+            "optimizer:ze-eden",
             "block_attnres",
             "rd_attnres",
             "olm_composable",
@@ -301,6 +303,8 @@ def allowed_architectures(model: str, direction: str, papers: list[PaperInspirat
                 "门控注意力",
             ),
             "optimizer:muon": ("muon", "正交优化器"),
+            "optimizer:zip-sr": ("zip sr", "zipsr", "预条件器空间"),
+            "optimizer:ze-eden": ("ze eden", "zeeden", "eden 校准"),
             "wide_dynamic_width": (
                 "wide",
                 "dynamic width",
