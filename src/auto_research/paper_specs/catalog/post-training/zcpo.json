@@ -1,0 +1,8 @@
+{
+  "domain": "post-training", "key": "zcpo", "title": "When KL Regularization Misfires in Group Policy Optimization",
+  "paper_url": "https://arxiv.org/abs/2610.12161", "detail_path": "post-training/2610.12161-zcpo/README.md",
+  "topic": ["组相对策略优化", "KL 校准"], "first_author": "Fei Ding",
+  "first_author_affiliation": "Alibaba Group", "published": "2026-10-08", "code": null,
+  "adapter": "zcpo", "priority": "P0", "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/zcpo-a100-20261011.json"
+}

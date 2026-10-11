@@ -1,0 +1,8 @@
+{
+  "domain": "foundation-models", "key": "sparse-decoding", "title": "SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference",
+  "paper_url": "https://arxiv.org/abs/2610.12327", "detail_path": "foundation-models/2610.12327-sparse-decoding/README.md",
+  "topic": ["推理与系统效率", "动态计算与模型压缩"], "first_author": "Qitong Wang / Xinwei Niu",
+  "first_author_affiliation": "Westlake University", "published": "2026-10-08",
+  "code": "尚未发布；项目页 Code (soon): https://wang-qitong.github.io/SparseDecoding/", "adapter": "sparse-decoding", "priority": "P1",
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/sparse-decoding-a100-20261011.json"
+}

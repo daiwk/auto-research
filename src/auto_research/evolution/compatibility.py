@@ -105,6 +105,18 @@ def operator_registry() -> dict[str, OperatorSpec]:
         "system-one:nimble": ("2508.07662",),
         "system-one:laya": ("2508.07662",),
     }
+    # Complementary configuration from the same paper; both have an actual
+    # optimizer factory and train/validation executor in MicroLLMEvaluator.
+    registry["optimizer:ze-eden"] = OperatorSpec(
+        key="optimizer:ze-eden", domain="foundation-model", slot="optimizer",
+        paper_ids=("2610.12444",), compatible_models=("micro-llm",),
+    )
+    if "optimizer:zip-sr" in registry:
+        spec = registry["optimizer:zip-sr"]
+        registry[spec.key] = OperatorSpec(
+            key=spec.key, domain=spec.domain, slot=spec.slot,
+            paper_ids=spec.paper_ids, compatible_models=("micro-llm",),
+        )
     for operator, paper_ids in system_one_papers.items():
         registry[operator] = OperatorSpec(
             key=operator, domain="system-one", slot="architecture",

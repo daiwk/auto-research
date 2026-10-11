@@ -1,0 +1,2374 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:ontrack",
+  "method": "ontrack",
+  "dataset": "sailplane/swe-agent-trajs",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "evaluation_instances": 64,
+    "resolved": 11,
+    "ontrack_auc": 0.6020583190394511,
+    "cosine_auc": 0.5437392795883362,
+    "paired_auc_difference_ci95": [
+      -0.087157268170426,
+      0.19387227395246265
+    ],
+    "false_stop_count": 0,
+    "true_stop_count": 0,
+    "maximum_score": 0.8052711373334884,
+    "minimum_score": 0.7470837820376395
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "diagnostic_only": false,
+    "formal_comparison": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "bounded public-log replay, not live Agent capability or production safety"
+  },
+  "checkpoint": {
+    "id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "device": "cpu"
+  },
+  "dataset_provenance": {
+    "id": "sailplane/swe-agent-trajs",
+    "revision": "04eb93df490e7fbb7b6e8358da8145aba6f5a25c",
+    "sha256": "ed6c7d9a0f39fcfbb890eedd72bdf0ccfe295ac7a1f17b468f787515bdbe201e",
+    "parsed": 2238,
+    "malformed": 0
+  },
+  "configuration": {
+    "seed": 42,
+    "steps": 8,
+    "reference_steps": 24,
+    "selected_relaxation": 0.5,
+    "abort_policy": {
+      "threshold": 1.0,
+      "false_stop": 0.0,
+      "true_stop": 0.0
+    },
+    "thresholds": {
+      "relaxation": 0.5,
+      "entropy": 0.05,
+      "theta": 0.35,
+      "leak": 0.6,
+      "match": 0.3,
+      "grace": 3,
+      "orphan_budget": 0.25,
+      "retry_attempts": 2,
+      "duplicate_similarity": 0.98,
+      "stall_window": 6,
+      "minimum_info": 0.01,
+      "coverage_velocity": 0.01,
+      "frontier_gap": 0.05
+    }
+  },
+  "calibration": [
+    {
+      "relaxation": 0.01,
+      "auc": 0.5106382978723404
+    },
+    {
+      "relaxation": 0.05,
+      "auc": 0.4355444305381727
+    },
+    {
+      "relaxation": 0.1,
+      "auc": 0.5037546933667084
+    },
+    {
+      "relaxation": 0.2,
+      "auc": 0.5456821026282853
+    },
+    {
+      "relaxation": 0.3,
+      "auc": 0.5481852315394243
+    },
+    {
+      "relaxation": 0.5,
+      "auc": 0.5607008760951189
+    },
+    {
+      "relaxation": 1.0,
+      "auc": 0.5569461827284106
+    }
+  ],
+  "policy_calibration": [
+    {
+      "threshold": 0.2,
+      "false_stop": 0.47058823529411764,
+      "true_stop": 0.2553191489361702
+    },
+    {
+      "threshold": 0.4,
+      "false_stop": 0.47058823529411764,
+      "true_stop": 0.19148936170212766
+    },
+    {
+      "threshold": 0.6,
+      "false_stop": 0.23529411764705882,
+      "true_stop": 0.06382978723404255
+    },
+    {
+      "threshold": 0.7,
+      "false_stop": 0.0,
+      "true_stop": 0.0
+    },
+    {
+      "threshold": 0.9,
+      "false_stop": 0.0,
+      "true_stop": 0.0
+    },
+    {
+      "threshold": 1.0,
+      "false_stop": 0.0,
+      "true_stop": 0.0
+    }
+  ],
+  "partition_ids": {
+    "calibration": [
+      "sphinx-doc__sphinx-8273",
+      "pydata__xarray-6882",
+      "scikit-learn__scikit-learn-13641",
+      "django__django-15851",
+      "matplotlib__matplotlib-22835",
+      "sympy__sympy-13974",
+      "astropy__astropy-13469",
+      "django__django-12733",
+      "sphinx-doc__sphinx-8265",
+      "sympy__sympy-16792",
+      "scikit-learn__scikit-learn-10986",
+      "django__django-16046",
+      "sphinx-doc__sphinx-9320",
+      "django__django-15018",
+      "django__django-11550",
+      "sympy__sympy-21476",
+      "scikit-learn__scikit-learn-25308",
+      "scikit-learn__scikit-learn-10558",
+      "django__django-16757",
+      "astropy__astropy-14163",
+      "sphinx-doc__sphinx-10097",
+      "sympy__sympy-11897",
+      "sympy__sympy-17188",
+      "django__django-13607",
+      "mwaskom__seaborn-3190",
+      "pytest-dev__pytest-7490",
+      "pydata__xarray-7229",
+      "pytest-dev__pytest-8033",
+      "pydata__xarray-6823",
+      "pallets__flask-4544",
+      "django__django-12237",
+      "sympy__sympy-12270",
+      "pytest-dev__pytest-7220",
+      "django__django-14387",
+      "django__django-12589",
+      "pytest-dev__pytest-8250",
+      "pylint-dev__pylint-5743",
+      "sympy__sympy-20154",
+      "astropy__astropy-14213",
+      "django__django-15492",
+      "django__django-10426",
+      "sympy__sympy-16493",
+      "pytest-dev__pytest-7373",
+      "sphinx-doc__sphinx-7975",
+      "sympy__sympy-20169",
+      "django__django-14672",
+      "django__django-15062",
+      "django__django-16612",
+      "sympy__sympy-15523",
+      "sympy__sympy-11862",
+      "django__django-13109",
+      "django__django-16027",
+      "sympy__sympy-17720",
+      "django__django-16116",
+      "pytest-dev__pytest-9780",
+      "sympy__sympy-16901",
+      "sympy__sympy-14166",
+      "sympy__sympy-14317",
+      "pydata__xarray-5180",
+      "pytest-dev__pytest-5980",
+      "sphinx-doc__sphinx-10481",
+      "django__django-16888",
+      "django__django-15103",
+      "pydata__xarray-4819"
+    ],
+    "reference_pool": [
+      "sphinx-doc__sphinx-10021",
+      "django__django-11564",
+      "pylint-dev__pylint-7228",
+      "pylint-dev__pylint-6903",
+      "sphinx-doc__sphinx-8058",
+      "sympy__sympy-12307",
+      "sphinx-doc__sphinx-7686",
+      "django__django-11543",
+      "matplotlib__matplotlib-26113",
+      "sympy__sympy-21627",
+      "django__django-15268",
+      "sympy__sympy-13259",
+      "django__django-12049",
+      "scikit-learn__scikit-learn-13983",
+      "django__django-14089",
+      "sphinx-doc__sphinx-8620",
+      "mwaskom__seaborn-3202",
+      "sphinx-doc__sphinx-7578",
+      "django__django-12957",
+      "django__django-13300",
+      "sphinx-doc__sphinx-11544",
+      "pydata__xarray-3812",
+      "django__django-12286",
+      "django__django-11991",
+      "django__django-13512",
+      "django__django-15297",
+      "django__django-10997",
+      "sphinx-doc__sphinx-10457",
+      "django__django-15669",
+      "scikit-learn__scikit-learn-25733",
+      "sympy__sympy-15011",
+      "sphinx-doc__sphinx-8435"
+    ],
+    "evaluation": [
+      "sympy__sympy-17318",
+      "scikit-learn__scikit-learn-10508",
+      "django__django-13236",
+      "django__django-12663",
+      "django__django-15423",
+      "matplotlib__matplotlib-25425",
+      "django__django-11149",
+      "django__django-11810",
+      "django__django-11265",
+      "django__django-13279",
+      "astropy__astropy-7737",
+      "pylint-dev__pylint-7080",
+      "django__django-14376",
+      "pydata__xarray-6744",
+      "django__django-10957",
+      "django__django-14717",
+      "sphinx-doc__sphinx-9902",
+      "django__django-15324",
+      "scikit-learn__scikit-learn-9304",
+      "django__django-13569",
+      "sympy__sympy-15349",
+      "scikit-learn__scikit-learn-10495",
+      "pydata__xarray-6548",
+      "django__django-11749",
+      "pytest-dev__pytest-10442",
+      "django__django-11911",
+      "scikit-learn__scikit-learn-12682",
+      "django__django-12855",
+      "sphinx-doc__sphinx-10323",
+      "django__django-14785",
+      "django__django-11433",
+      "scikit-learn__scikit-learn-11310",
+      "matplotlib__matplotlib-14471",
+      "django__django-12273",
+      "sphinx-doc__sphinx-8026",
+      "astropy__astropy-13465",
+      "sphinx-doc__sphinx-10191",
+      "pydata__xarray-4750",
+      "sympy__sympy-21436",
+      "django__django-14031",
+      "django__django-11057",
+      "django__django-12185",
+      "pylint-dev__pylint-6937",
+      "django__django-11278",
+      "pytest-dev__pytest-8641",
+      "django__django-15467",
+      "django__django-12803",
+      "django__django-14385",
+      "sphinx-doc__sphinx-9828",
+      "sphinx-doc__sphinx-8278",
+      "django__django-15292",
+      "sympy__sympy-24661",
+      "django__django-16686",
+      "psf__requests-2617",
+      "django__django-13757",
+      "scikit-learn__scikit-learn-13496",
+      "sympy__sympy-19007",
+      "django__django-12532",
+      "sphinx-doc__sphinx-8684",
+      "sympy__sympy-12214",
+      "sympy__sympy-20115",
+      "sphinx-doc__sphinx-8951",
+      "sphinx-doc__sphinx-8056",
+      "django__django-15352"
+    ]
+  },
+  "reference_ids": [
+    "pylint-dev__pylint-6903",
+    "matplotlib__matplotlib-26113",
+    "scikit-learn__scikit-learn-13983"
+  ],
+  "rows": [
+    {
+      "instance_id": "sympy__sympy-17318",
+      "score": 0.7838385929124188,
+      "cosine": 0.608752965927124,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8716527265527831,
+        "losses": [
+          0.19772622832689582,
+          0.11692270041758962,
+          0.1284182497538498
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02949275029823184,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "score": 0.7784640046356331,
+      "cosine": 0.5308605432510376,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8526927360102834,
+        "losses": [
+          0.21731900005093474,
+          0.1418748018556016,
+          0.1474939344523113
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029061708133667707,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-13236",
+      "score": 0.7527133593779125,
+      "cosine": 0.45233556628227234,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7862050584368001,
+        "losses": [
+          0.19733259039213172,
+          0.32372771950277457,
+          0.281847453004816
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.028765457682311535,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-12663",
+      "score": 0.778151118491057,
+      "cosine": 0.5994303226470947,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "OK",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8540755310062483,
+        "losses": [
+          0.2216416856526093,
+          0.12027042214839706,
+          0.18278670044496545
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029571833088994026,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-15423",
+      "score": 0.7543943403346532,
+      "cosine": 0.3822953701019287,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.793875220628766,
+        "losses": [
+          0.2135693449105855,
+          0.3217520504606805,
+          0.21310416211326152
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02896879194304347,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-25425",
+      "score": 0.7633761449231957,
+      "cosine": 0.3407023549079895,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8154319557083524,
+        "losses": [
+          0.25733062774505494,
+          0.1681862783187327,
+          0.22897805267680935
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029443375300616026,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11149",
+      "score": 0.7470837820376395,
+      "cosine": 0.37676480412483215,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7559608699527495,
+        "losses": [
+          0.25554196757098946,
+          0.30364654943104763,
+          0.2937235917704175
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.028335667215287685,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11810",
+      "score": 0.7945908012893546,
+      "cosine": 0.6235275864601135,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 1.0,
+        "losses": [
+          0.304562792050334,
+          -0.06080115030044972,
+          0.21116195314217956
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02835741639137268,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11265",
+      "score": 0.7637894057101094,
+      "cosine": 0.5061100721359253,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8116494656127795,
+        "losses": [
+          0.17870764413118806,
+          0.2610569298956463,
+          0.21813614721675917
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.045214083045721054,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-13279",
+      "score": 0.766074784854254,
+      "cosine": 0.3466399610042572,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8294464932514656,
+        "losses": [
+          0.21254457555858283,
+          0.1512005326593434,
+          0.2389188407730123
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.03048049984499812,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "astropy__astropy-7737",
+      "score": 0.798104047031422,
+      "cosine": 0.6120316386222839,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.9675901385529551,
+        "losses": [
+          0.23452550187168486,
+          -0.020512341279691426,
+          0.16643973697531206
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029088833834975958,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pylint-dev__pylint-7080",
+      "score": 0.7639745832204524,
+      "cosine": 0.5616557002067566,
+      "maximum_severe_density": 0.3333333333333333,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "CAUSAL_INVERSION",
+        "OK",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8304878407066151,
+        "losses": [
+          0.13708333106531548,
+          0.2717986662561768,
+          0.27294527625031995
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04258437501266599,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-14376",
+      "score": 0.7675412215084162,
+      "cosine": 0.46136605739593506,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8117839667880717,
+        "losses": [
+          0.19616856248486608,
+          0.21313494636553534,
+          0.21918646555028393
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.047092707827687263,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pydata__xarray-6744",
+      "score": 0.7748348613064306,
+      "cosine": 0.5396204590797424,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8382825825897173,
+        "losses": [
+          0.1900713224922348,
+          0.1592780647682071,
+          0.18566516728415008
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.030955332797020674,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-10957",
+      "score": 0.7734396360282298,
+      "cosine": 0.5200719833374023,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.844261641895572,
+        "losses": [
+          0.19514997983726726,
+          0.1474014867499216,
+          0.17715817294312586
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.03129204176366329,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-14717",
+      "score": 0.7725170009161659,
+      "cosine": 0.33132079243659973,
+      "maximum_severe_density": 1.0,
+      "verdicts": [
+        "CAUSAL_INVERSION",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 2,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8757978399722545,
+        "losses": [
+          0.2447455003026366,
+          0.08228928747977149,
+          0.22504026974821548
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.05108008300885558,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-9902",
+      "score": 0.7480545744955147,
+      "cosine": 0.45836424827575684,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7605496438885441,
+        "losses": [
+          0.2493579341108346,
+          0.29932130884823616,
+          0.2865765408203096
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02935958420857787,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-15324",
+      "score": 0.7635022634306042,
+      "cosine": 0.4460379183292389,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8048399696775268,
+        "losses": [
+          0.20297970399754617,
+          0.2518087077598129,
+          0.20910100376414886
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.030435083899646997,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-9304",
+      "score": 0.7733747063962871,
+      "cosine": 0.4933188855648041,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.837607300742052,
+        "losses": [
+          0.20763992685202706,
+          0.1483901307389996,
+          0.19674986070891926
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04642416723072529,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-13569",
+      "score": 0.777755578980531,
+      "cosine": 0.5901677012443542,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8523138955470984,
+        "losses": [
+          0.22197872875819047,
+          0.12281562351573894,
+          0.18399751917216994
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.03103491710498929,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sympy__sympy-15349",
+      "score": 0.7844998208151999,
+      "cosine": 0.6119903922080994,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8781807920637954,
+        "losses": [
+          0.23185025779333818,
+          0.08988416839370936,
+          0.15194721291362537
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.03687016712501645,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-10495",
+      "score": 0.7906016403753304,
+      "cosine": 0.6270343065261841,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.9133037064068243,
+        "losses": [
+          0.2126154423765999,
+          0.0447513673781984,
+          0.13567542921390766
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.030767125077545643,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pydata__xarray-6548",
+      "score": 0.7790030923785626,
+      "cosine": 0.5941866040229797,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.853936164082699,
+        "losses": [
+          0.22533660034273012,
+          0.13354410348131607,
+          0.15255234609258758
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.030362207908183336,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11749",
+      "score": 0.7762680978628529,
+      "cosine": 0.48420947790145874,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8668454375838166,
+        "losses": [
+          0.23575474156838433,
+          0.12251002300332181,
+          0.12824065697497442
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.030208915937691927,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pytest-dev__pytest-10442",
+      "score": 0.7531672332307783,
+      "cosine": 0.4381106197834015,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.779727715993872,
+        "losses": [
+          0.2193270229824924,
+          0.30220988299688367,
+          0.25676567776436954
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04403529176488519,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11911",
+      "score": 0.7793894535355411,
+      "cosine": 0.547521710395813,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8772892652179274,
+        "losses": [
+          0.20911301743661,
+          0.08883133157139733,
+          0.16864083983728367
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04584558308124542,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-12682",
+      "score": 0.7499503545050564,
+      "cosine": 0.28490522503852844,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7694829348955422,
+        "losses": [
+          0.23375478828355895,
+          0.30754252266404947,
+          0.2709354469703745
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.027772374916821718,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-12855",
+      "score": 0.759977672250656,
+      "cosine": 0.3902621567249298,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8032906146472746,
+        "losses": [
+          0.1998859460387017,
+          0.2811990028487833,
+          0.2080906752391979
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029780874960124493,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-10323",
+      "score": 0.754563566485325,
+      "cosine": 0.37978968024253845,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7836928726461121,
+        "losses": [
+          0.24823664230959677,
+          0.2661790453553624,
+          0.22524061803009388
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029676083009690046,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-14785",
+      "score": 0.7961168601099552,
+      "cosine": 0.5356420874595642,
+      "maximum_severe_density": 0.16666666666666666,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "LOOP",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 1.0,
+        "losses": [
+          0.31688679274982057,
+          -0.06513838208969633,
+          0.21696796405757407
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04548787511885166,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11433",
+      "score": 0.7552785014620554,
+      "cosine": 0.41367584466934204,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8171524714147631,
+        "losses": [
+          0.33467666303203014,
+          0.14979563078851355,
+          0.3207462343981381
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.044297708198428154,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-11310",
+      "score": 0.7599912110501543,
+      "cosine": 0.3574972450733185,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7963207514181715,
+        "losses": [
+          0.2253188094642942,
+          0.24801425185695036,
+          0.21528235773241983
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.027539291884750128,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-14471",
+      "score": 0.7554296392721028,
+      "cosine": 0.34410610795021057,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8317195383177316,
+        "losses": [
+          0.3304080631156849,
+          0.1317060901396242,
+          0.30722627536941116
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04514004196971655,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-12273",
+      "score": 0.7645733903545124,
+      "cosine": 0.6131688952445984,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8071347679180889,
+        "losses": [
+          0.25242859412035856,
+          0.1957407931964591,
+          0.2101653607873334
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.028723916970193386,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8026",
+      "score": 0.7636661219257712,
+      "cosine": 0.40672725439071655,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8168405643108306,
+        "losses": [
+          0.2141417056732423,
+          0.1852732083090693,
+          0.2131769498497603
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029376082587987185,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "astropy__astropy-13465",
+      "score": 0.7667917461013303,
+      "cosine": 0.4425618052482605,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8232207464065175,
+        "losses": [
+          0.15618220625520093,
+          0.2235589944036864,
+          0.2569138696600126
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02886408381164074,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-10191",
+      "score": 0.7502294580638418,
+      "cosine": 0.6082513928413391,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.769931125096048,
+        "losses": [
+          0.23309829626118192,
+          0.2843576221202258,
+          0.286637062444166
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029015958309173584,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pydata__xarray-4750",
+      "score": 0.7825470327224345,
+      "cosine": 0.4943850636482239,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "OK",
+        "CAUSAL_INVERSION",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8729314147134244,
+        "losses": [
+          0.2110315377920802,
+          0.10446614638802787,
+          0.1410331825742737
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.0447055003605783,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sympy__sympy-21436",
+      "score": 0.7596526026184977,
+      "cosine": 0.37021687626838684,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.81594527557684,
+        "losses": [
+          0.26325097435067624,
+          0.1597643846833896,
+          0.26293084157845786
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02988345781341195,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-14031",
+      "score": 0.766161130398571,
+      "cosine": 0.33116647601127625,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8221031367593071,
+        "losses": [
+          0.17277026420524985,
+          0.22936899844637926,
+          0.20114473706396208
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04311695788055658,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11057",
+      "score": 0.7634959449149727,
+      "cosine": 0.441611647605896,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8089400546673187,
+        "losses": [
+          0.1864508223164582,
+          0.24006706573144632,
+          0.22566927240255621
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029397542122751474,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-12185",
+      "score": 0.749329106718794,
+      "cosine": 0.5274051427841187,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7614289296102854,
+        "losses": [
+          0.27160021098164433,
+          0.2553198900276158,
+          0.3007535915893484
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029510540887713432,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pylint-dev__pylint-6937",
+      "score": 0.7570026711198489,
+      "cosine": 0.643166184425354,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.792591876006631,
+        "losses": [
+          0.19565459721340367,
+          0.28536577717020745,
+          0.260928148634817
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.027671707794070244,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-11278",
+      "score": 0.7728463256133669,
+      "cosine": 0.4557720720767975,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.837935346288303,
+        "losses": [
+          0.1977110584711861,
+          0.1424918527268857,
+          0.22860395544463857
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.030311333015561104,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "pytest-dev__pytest-8641",
+      "score": 0.7860606150190381,
+      "cosine": 0.5336393713951111,
+      "maximum_severe_density": 0.6666666666666666,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "CAUSAL_INVERSION",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 2,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8947855359343725,
+        "losses": [
+          0.21301870119170943,
+          0.06722516044821936,
+          0.14985935160794217
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.06140574999153614,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-15467",
+      "score": 0.7662314568492706,
+      "cosine": 0.545099139213562,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8246811005384093,
+        "losses": [
+          0.15353082061249246,
+          0.2630449311848909,
+          0.22144832549501356
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04658275004476309,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-12803",
+      "score": 0.7705606919957796,
+      "cosine": 0.5511888861656189,
+      "maximum_severe_density": 0.6666666666666666,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "CAUSAL_INVERSION",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 2,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8278633454835553,
+        "losses": [
+          0.1774899692111448,
+          0.21126052594790326,
+          0.18396103726095106
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.06715558283030987,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-14385",
+      "score": 0.7663419935813737,
+      "cosine": 0.3216311037540436,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8160643737995967,
+        "losses": [
+          0.1990023775443902,
+          0.1921202212326824,
+          0.22392758755514217
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029696417041122913,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-9828",
+      "score": 0.7664698340564255,
+      "cosine": 0.5706439018249512,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8151222827550824,
+        "losses": [
+          0.17705958123170026,
+          0.25037631946927674,
+          0.21121767163461397
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04501924989745021,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8278",
+      "score": 0.7717060675798119,
+      "cosine": 0.5679373145103455,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.828103061062154,
+        "losses": [
+          0.19011796784309457,
+          0.1712404689655458,
+          0.21300779872185494
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02899712510406971,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-15292",
+      "score": 0.7676490112921756,
+      "cosine": 0.34987950325012207,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8273686485338786,
+        "losses": [
+          0.21403033596243057,
+          0.15698386754494917,
+          0.22711395687160937
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.03595895832404494,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sympy__sympy-24661",
+      "score": 0.7772989501861328,
+      "cosine": 0.5421358346939087,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8482544497507051,
+        "losses": [
+          0.2071988662438952,
+          0.15464374990605323,
+          0.1494240442140877
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02913199970498681,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-16686",
+      "score": 0.7572700503523302,
+      "cosine": 0.4113931953907013,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7861541921677228,
+        "losses": [
+          0.24933079913608328,
+          0.23340564071942954,
+          0.24033436819375203
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02934954222291708,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "psf__requests-2617",
+      "score": 0.7795148355944395,
+      "cosine": 0.6212717294692993,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8739874661739799,
+        "losses": [
+          0.2436475840349466,
+          0.08877850694472414,
+          0.1827994885175544
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02939566597342491,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-13757",
+      "score": 0.7573830313352474,
+      "cosine": 0.3126296401023865,
+      "maximum_severe_density": 0.6666666666666666,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 2,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.7826076893044777,
+        "losses": [
+          0.2535788297636654,
+          0.23486358996320253,
+          0.2488705571728201
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.06093066604807973,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-13496",
+      "score": 0.7583743200087483,
+      "cosine": 0.4201717972755432,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8069151190272298,
+        "losses": [
+          0.1776210555547576,
+          0.28885499472816195,
+          0.23371709294529458
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.02746187476441264,
+      "resolved": true,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sympy__sympy-19007",
+      "score": 0.7736414850580625,
+      "cosine": 0.44238826632499695,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8351454377563308,
+        "losses": [
+          0.21234667447169764,
+          0.1649232359613576,
+          0.17453630063068837
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029253416694700718,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-12532",
+      "score": 0.7686229257927423,
+      "cosine": 0.35711273550987244,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8322298168487061,
+        "losses": [
+          0.20835630709920097,
+          0.14851103993952455,
+          0.2332627371739817
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029452582821249962,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8684",
+      "score": 0.7643450527737027,
+      "cosine": 0.4702027142047882,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8126163696220595,
+        "losses": [
+          0.17933878431468167,
+          0.21863839807800134,
+          0.24814113904456847
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029319082852452993,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sympy__sympy-12214",
+      "score": 0.7817286076927168,
+      "cosine": 0.5993943810462952,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN",
+        "OK"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8827135818045939,
+        "losses": [
+          0.2239121465495292,
+          0.07717528433490997,
+          0.1897500783916351
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.029026792384684086,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sympy__sympy-20115",
+      "score": 0.8052711373334884,
+      "cosine": 0.6218737363815308,
+      "maximum_severe_density": 0.16666666666666666,
+      "verdicts": [
+        "WARN",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "OK",
+        "LOOP",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 1.0,
+        "losses": [
+          0.3038717096342244,
+          -0.06654510612338194,
+          0.1942653213528392
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.044866833835840225,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8951",
+      "score": 0.7710673749545972,
+      "cosine": 0.28371962904930115,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8878270682004208,
+        "losses": [
+          0.32254139520441943,
+          0.06481548424922284,
+          0.2965904452096304
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.04369404213503003,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8056",
+      "score": 0.7476438047274976,
+      "cosine": 0.3928075134754181,
+      "maximum_severe_density": 0.0,
+      "verdicts": [
+        "WARN",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "WARN",
+        "WARN",
+        "WARN"
+      ],
+      "escalations": 0,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.759723027305883,
+        "losses": [
+          0.2454900039948049,
+          0.30259737916730495,
+          0.2979617814704575
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.027565374970436096,
+      "resolved": false,
+      "counterfactual_stop": false
+    },
+    {
+      "instance_id": "django__django-15352",
+      "score": 0.7669250866037928,
+      "cosine": 0.40357300639152527,
+      "maximum_severe_density": 0.5,
+      "verdicts": [
+        "WARN",
+        "CAUSAL_INVERSION",
+        "WARN",
+        "WARN",
+        "WARN",
+        "OK",
+        "OK",
+        "OK"
+      ],
+      "escalations": 1,
+      "finalization": {
+        "transport_enabled": true,
+        "score": 0.8187923642137891,
+        "losses": [
+          0.17847970174680633,
+          0.190835112311039,
+          0.26631368553628965
+        ],
+        "canonical_initialization": true,
+        "age_weights_disabled": true,
+        "frontier_mask_disabled": true
+      },
+      "elapsed_seconds": 0.043680999893695116,
+      "resolved": false,
+      "counterfactual_stop": false
+    }
+  ],
+  "provenance": {
+    "original_code_commit": "0b283a0775d5f8e47ddd8deac7be47b110ab79b6",
+    "artifact_path": "docs/agent-research/2610.12375-ontrack/metrics/public-replay-cpu-seed42.json",
+    "dataset_fingerprint": "ed6c7d9a0f39fcfbb890eedd72bdf0ccfe295ac7a1f17b468f787515bdbe201e",
+    "executed_source_sha256": {
+      "scripts/run_ontrack_public_replay.py": "8dd9a6afbe415b7bfd203b19d7a57b863ea666d5410e752e1504dafa51f8a9ed",
+      "src/auto_research/agent_research/ontrack.py": "2f9c36561f9fd0edf0cbe83b6723630733b30c4f04169ab9c716fd56f861c470",
+      "src/auto_research/agent_research/ontrack_transport.py": "a74a591e2f763bc4f685d69e4eaf92346878cc1dfeb021b4f9f61fc8ebcfa09b",
+      "src/auto_research/agent_research/ontrack_replay.py": "b9291e870d348bf398ca81176d9714e48cf18195127fe351c460cbdd7488632b"
+    }
+  },
+  "limitations": [
+    "CPU-only; no trajectory commands executed; no live SWE-bench claimed",
+    "path-string extractor is not complete dependency tracing; no bitset runtime claim",
+    "first k events and truncated references; not original 2294-trace protocol",
+    "one instance-disjoint seed, no multi-seed stable capability improvement claim",
+    "abort is counterfactual flag density, not measured dollar savings",
+    "reference labels stay external to monitored event/embedding input"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "adapter_key": "sguid",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_sguid_checkpoint.py",
+    "--checkpoint-path",
+    "checkpoints/public-sguid-model",
+    "--checkpoint-id",
+    "Qwen/Qwen3.5-9B",
+    "--checkpoint-revision",
+    "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "--train-path",
+    "data/gsm8k-holdout/train.jsonl",
+    "--validation-path",
+    "data/gsm8k-holdout/validation.jsonl",
+    "--split-manifest",
+    "data/gsm8k-holdout/split.json",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--training-examples",
+    "200",
+    "--probe-steps",
+    "200",
+    "--internalization-steps",
+    "32",
+    "--max-tokens",
+    "1024",
+    "--skill-tokens",
+    "256",
+    "--candidate-count",
+    "32",
+    "--retrieve-count",
+    "6",
+    "--late-minimum",
+    "2",
+    "--rounds",
+    "2",
+    "--evaluation-max-tokens",
+    "3072",
+    "--validation-examples",
+    "4",
+    "--seed",
+    "42",
+    "--device",
+    "cuda",
+    "--output",
+    "runs/sguid-seed42.json"
+  ],
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c"
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+  },
+  "result": "passed",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "capability_passed": false,
+  "claim_policy": "execution gate only; no capability or validation gain claim",
+  "metrics": {
+    "completed_rounds": 2,
+    "adapter_parameter_delta_l2": 0.17389918884542147,
+    "evaluation_max_tokens": 3072,
+    "baseline_validation_exact_match": 0.75,
+    "final_validation_exact_match": 0.25,
+    "validation_exact_match_delta": -0.5,
+    "validation_examples": 4,
+    "baseline_validation_eos_completed": 2,
+    "baseline_validation_truncated": 2,
+    "final_validation_eos_completed": 2,
+    "validation_truncated": 2,
+    "rounds": [
+      {
+        "round": 0,
+        "candidate_skills": 32,
+        "selected_skills": 6,
+        "probe_updates": 200,
+        "internalization_updates": 32,
+        "probe_nonzero_gates": 1200,
+        "internalization_nonzero_gates": 192,
+        "internalization_parameter_delta_l2": 0.08388192717773137
+      },
+      {
+        "round": 1,
+        "candidate_skills": 32,
+        "selected_skills": 3,
+        "probe_updates": 200,
+        "internalization_updates": 32,
+        "probe_nonzero_gates": 1200,
+        "internalization_nonzero_gates": 96,
+        "internalization_parameter_delta_l2": 0.09196466716817275
+      }
+    ]
+  },
+  "limitations": [
+    "single-seed bounded L1 mechanism diagnostic; not AIME/HMMT improvement",
+    "GSM8K training-only holdout instead of DAPO-Math-17K",
+    "current LM hidden cosine retrieval, not original embedding checkpoint",
+    "q/v rank-8 LoRA and non-original early/late window/h; not original all-linear rank-64 run",
+    "signed generalized full-vocabulary KL, not original SGSD bounded discrepancy",
+    "EOS/truncations and any negative validation outcome retained",
+    "Qwen3.5 hybrid text decoder, not original Qwen3 backbone; vision unused; q/v LoRA applies only to full-attention layers"
+  ],
+  "executed_source_sha256": {
+    "src/auto_research/post_training/sguid_checkpoint.py": "3568a056a7f28314f03d5b26f52831ce3ff465c481fca564516f4f19f76cb294",
+    "scripts/run_sguid_checkpoint.py": "d1780751d8ba416e48c4466ff2b94c80f3aa359ffd5d6060aa238588539ae803",
+    "src/auto_research/post_training/oct11_objectives.py": "5db5f4eed68843fb2b8ce1f68bf2ff31ee36c0525268db1e295522a8f2cac6bc",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46"
+  },
+  "provenance": {
+    "commit": "319008f69ac6224ad0a2dfe3146d551c1999f5e3",
+    "artifact_path": "docs/gpu-validations/sguid-a100-20261012.json",
+    "metrics_artifact": "docs/post-training/2610.12367-sguid/metrics/checkpoint-a100-seed42.json",
+    "checkpoint_committed": false
+  }
+}

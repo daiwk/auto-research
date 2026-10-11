@@ -1,0 +1,10 @@
+{
+  "domain": "post-training", "key": "pivot",
+  "title": "PIVOT: Perplexity-Informed KD-to-RL Transition Scheduling for Vertical-Domain Few-Shot Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.11167",
+  "detail_path": "post-training/2610.11167-pivot/README.md",
+  "topic": ["On-policy 蒸馏", "组相对策略优化"], "first_author": "Heng Li",
+  "first_author_affiliation": "Ping An Technology / University of Science and Technology of China",
+  "published": "2026-10-08", "code": null, "adapter": "pivot", "priority": "P1",
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/pivot-a100-20261011.json"
+}

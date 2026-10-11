@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research",
+  "key": "memento3",
+  "title": "Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks",
+  "paper_url": "https://arxiv.org/abs/2610.11794",
+  "detail_path": "agent-research/2610.11794-memento3/README.md",
+  "topic": ["世界模型", "反思与记忆"],
+  "first_author": "Haoyu Zhao",
+  "first_author_affiliation": "University College London",
+  "published": "2026-10-08",
+  "code": null,
+  "adapter": "memento3",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/memento3-a100-20261011.json"
+}

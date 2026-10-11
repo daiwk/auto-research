@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "adapter_key": "recal",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_recal_checkpoint.py",
+    "--checkpoint-path",
+    "checkpoints/qwen3-4b",
+    "--checkpoint-id",
+    "Qwen/Qwen3-4B-Instruct-2507",
+    "--checkpoint-revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--calibration-examples",
+    "4",
+    "--opd-steps",
+    "4",
+    "--max-tokens",
+    "512",
+    "--validation-examples",
+    "4",
+    "--keep-ratio",
+    "0.75",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--train-path",
+    "data/gsm8k-holdout/train.jsonl",
+    "--validation-path",
+    "data/gsm8k-holdout/validation.jsonl",
+    "--seed",
+    "42",
+    "--device",
+    "cuda",
+    "--output",
+    "runs/recal-42.json",
+    "--split-manifest",
+    "data/gsm8k-holdout/split.json"
+  ],
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+    "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "base-wanda": {
+      "retained_width": 7296,
+      "parameters_after_pruning": 3350068736,
+      "adapter_delta_l2": 0.06889357228861662,
+      "pruned": {
+        "examples": 4,
+        "exact_match": 0.75
+      },
+      "sft": {
+        "examples": 4,
+        "exact_match": 1.0
+      },
+      "opd": {
+        "examples": 4,
+        "exact_match": 1.0
+      }
+    },
+    "recal-wanda": {
+      "retained_width": 7296,
+      "parameters_after_pruning": 3350068736,
+      "adapter_delta_l2": 0.06075290404984256,
+      "pruned": {
+        "examples": 4,
+        "exact_match": 1.0
+      },
+      "sft": {
+        "examples": 4,
+        "exact_match": 1.0
+      },
+      "opd": {
+        "examples": 4,
+        "exact_match": 0.75
+      }
+    }
+  },
+  "executed_source_sha256": {
+    "src/auto_research/post_training/recal.py": "7348b7e255c84c29be1af609e884452a9960eb7e0e3c2da4ac8e4c87301319b6",
+    "scripts/run_recal_checkpoint.py": "807875af040da772cb5d061789252fad009bf8b96873e7db5d0514ae5cf90988"
+  },
+  "limitations": [
+    "LoRA recovery instead of original full-parameter FSDP",
+    "math-only small public pool; not four-domain benchmark reproduction",
+    "Same retained width and SFT targets; wall-clock budgets not claimed equal"
+  ],
+  "provenance": {
+    "commit": "e9565359ed1cb1c2de26412adf011becb46354f3",
+    "artifact_path": "docs/gpu-validations/recal-a100-20261011.json",
+    "metrics_artifact": "docs/post-training/2610.11332-recal/metrics/checkpoint-a100-seed42.json",
+    "checkpoint_committed": false
+  }
+}

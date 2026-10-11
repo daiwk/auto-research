@@ -122,13 +122,19 @@
 
 - [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
 
-### 自进化
+### 世界模型
 
-- [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
+- [Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks](../2610.11794-memento3/README.md)（`memento3`）：冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。
 
 ### Agent 安全
 
+- [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
+- [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
 - [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](../2610.01349-pace-capability/README.md)（`pace-capability`）：在每次工具副作用发生前，根据认证请求编译出的 authority 与输入 provenance 同时检查 effect；入库时安全不代表执行时可信。
+
+### 自进化
+
+- [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
 
 ### 代码 Agent
 

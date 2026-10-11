@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "adapter_key": "data-space-iteration",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_data_space_iteration.py",
+    "--data",
+    "data/cifar10",
+    "--offline",
+    "--output",
+    "runs/data-space-cifar.json",
+    "--seeds",
+    "42,43,44",
+    "--train-examples",
+    "1024",
+    "--validation-examples",
+    "256",
+    "--teacher-steps",
+    "200",
+    "--distill-steps",
+    "128",
+    "--teacher-nfe",
+    "32",
+    "--batch-size",
+    "32",
+    "--split-seed",
+    "42",
+    "--width",
+    "32",
+    "--depth",
+    "2"
+  ],
+  "dataset": {
+    "id": "CIFAR-10",
+    "revision": {
+      "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154"
+    },
+    "split_provenance": {
+      "id": "CIFAR-10",
+      "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+      "archive_md5": "c58f30108f718f92721af3b95e74349a",
+      "revision": {
+        "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+        "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+        "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+        "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+        "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154"
+      },
+      "train_indices_sha256": "d879225fd8386a1096078ac1a24d2d18849255ed7c455f023912cd2a4da08c7f",
+      "validation_indices_sha256": "166f9245edafed2f0b4f2b3ead9d084f39a7892627c148a8f38ff0822c2e5069",
+      "train_examples": 1024,
+      "validation_examples": 256,
+      "split_seed": 42,
+      "split_source": "official_train_only",
+      "test_read": false
+    }
+  },
+  "checkpoint": {
+    "id": "auto-research/cifar10-small-flow-unet",
+    "initialization": "from-scratch",
+    "width": 32,
+    "depth": 2,
+    "public_pretrained_checkpoint": false,
+    "revision": {
+      "42": "e61cb2e6e63cc1faf1acc3938b474b46ca12d5061bf3e6a913b0e637a9ef9087",
+      "43": "06dd5495d4a442734b5feed7d7d2657303112bd3d8478727acfe84dc6791177d",
+      "44": "0e526df5377abd0ca12504020fd3349bb95f1e31dcb4b0b0fb098659af7329c7"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "flow-renoise_seed42": {
+      "teacher_validation_velocity_mse_before": 1.2853853702545166,
+      "teacher_validation_velocity_mse_after": 0.3138241767883301,
+      "teacher_pixel_feature_frechet_distance": 32.21929263718641,
+      "generator_steps": 128,
+      "fake_steps": 512,
+      "pixel_feature_frechet_nfe1": 22.98071951871731,
+      "pixel_feature_frechet_nfe2": 29.153968222922302,
+      "pixel_feature_frechet_nfe3": 33.356819944989,
+      "pixel_feature_frechet_nfe4": 35.18852720771664
+    },
+    "data-space_seed42": {
+      "teacher_validation_velocity_mse_before": 1.2853853702545166,
+      "teacher_validation_velocity_mse_after": 0.3138241767883301,
+      "teacher_pixel_feature_frechet_distance": 32.21929263718641,
+      "generator_steps": 128,
+      "fake_steps": 512,
+      "pixel_feature_frechet_nfe1": 22.58825429917374,
+      "pixel_feature_frechet_nfe2": 21.354731891086004,
+      "pixel_feature_frechet_nfe3": 23.8444937862661,
+      "pixel_feature_frechet_nfe4": 22.126586895297113
+    },
+    "flow-renoise_seed43": {
+      "teacher_validation_velocity_mse_before": 1.2821825742721558,
+      "teacher_validation_velocity_mse_after": 0.31254491209983826,
+      "teacher_pixel_feature_frechet_distance": 11.92804313090684,
+      "generator_steps": 128,
+      "fake_steps": 512,
+      "pixel_feature_frechet_nfe1": 16.020483793783306,
+      "pixel_feature_frechet_nfe2": 16.893299264862225,
+      "pixel_feature_frechet_nfe3": 16.80787903572486,
+      "pixel_feature_frechet_nfe4": 17.075529035521914
+    },
+    "data-space_seed43": {
+      "teacher_validation_velocity_mse_before": 1.2821825742721558,
+      "teacher_validation_velocity_mse_after": 0.31254491209983826,
+      "teacher_pixel_feature_frechet_distance": 11.92804313090684,
+      "generator_steps": 128,
+      "fake_steps": 512,
+      "pixel_feature_frechet_nfe1": 16.494910691040317,
+      "pixel_feature_frechet_nfe2": 18.181671055694714,
+      "pixel_feature_frechet_nfe3": 18.5402304861624,
+      "pixel_feature_frechet_nfe4": 18.714661111079156
+    },
+    "flow-renoise_seed44": {
+      "teacher_validation_velocity_mse_before": 1.3045825958251953,
+      "teacher_validation_velocity_mse_after": 0.30025428533554077,
+      "teacher_pixel_feature_frechet_distance": 10.382785836309951,
+      "generator_steps": 128,
+      "fake_steps": 512,
+      "pixel_feature_frechet_nfe1": 16.155830625135962,
+      "pixel_feature_frechet_nfe2": 16.518205990837316,
+      "pixel_feature_frechet_nfe3": 16.248632199365776,
+      "pixel_feature_frechet_nfe4": 16.565169558442367
+    },
+    "data-space_seed44": {
+      "teacher_validation_velocity_mse_before": 1.3045825958251953,
+      "teacher_validation_velocity_mse_after": 0.30025428533554077,
+      "teacher_pixel_feature_frechet_distance": 10.382785836309951,
+      "generator_steps": 128,
+      "fake_steps": 512,
+      "pixel_feature_frechet_nfe1": 16.41257481332475,
+      "pixel_feature_frechet_nfe2": 20.68731907033353,
+      "pixel_feature_frechet_nfe3": 19.178483072267685,
+      "pixel_feature_frechet_nfe4": 19.827173997539102
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "limitations": [
+    "small from-scratch two-scale U-Net, not SongUNet-55M or ImageNet SiT-XL/2",
+    "pixel average-pool feature Frechet distance is not Inception FID; no paper-number comparison",
+    "bounded teacher and distillation budgets; retain every negative recipe/seed",
+    "EMA decay retained at 0.9999; short training EMA can stay close to initialization",
+    "core-mechanism GPU diagnostic, not formal image-generation quality improvement"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "executed_source_sha256": {
+    "scripts/run_data_space_iteration.py": "a86ccd6e1911488c9699ca16f005d32ef91b205182a82925cf351f89cf28d93f",
+    "src/auto_research/foundation/data_space_iteration.py": "b0f32cf1d497bae97bfbee3268095cfa99e3bac3e53d7413f7cc9b9b31c74a25",
+    "src/auto_research/multimodal/data.py": "c6cd674e86659d004d2c46d6d2d238ad6d7a04b19531b3e1e09f87fc222459bd"
+  },
+  "provenance": {
+    "commit": "b20f197e482c4870c66112473ff9a4bb85c6374a",
+    "artifact_path": "docs/gpu-validations/data-space-iteration-a100-20261011.json",
+    "metrics_artifact": "docs/foundation-models/2610.12102-data-space-iteration/metrics/cifar10-a100.json",
+    "checkpoint_committed": false
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "domain": "foundation-models", "key": "vfold", "title": "VFold: Symmetry-Aware Cross-Layer Value Cache Compression",
+  "paper_url": "https://arxiv.org/abs/2610.12338", "detail_path": "foundation-models/2610.12338-vfold/README.md",
+  "topic": ["推理与系统效率", "KV 缓存压缩"], "first_author": "Neha Verma",
+  "first_author_affiliation": "Johns Hopkins University", "published": "2026-10-08",
+  "code": "https://github.com/nverma1/vfold", "adapter": "vfold", "priority": "P0",
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/vfold-a100-20261011.json"
+}

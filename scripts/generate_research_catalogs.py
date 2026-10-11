@@ -61,6 +61,10 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "组相对策略优化": ("在线强化学习与稳定性", "PPO、REINFORCE 与 group RL"),
+        "KL 校准": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "学习信号诊断": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "剪枝恢复": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "轨迹到步骤信用分配": ("在线强化学习与稳定性", "步骤奖励与信用分配"),
         "教师前缀约束蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "后验集中与长度约束": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
@@ -725,6 +729,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "data-space-iteration": ("网络架构", "扩散与生成式模型"),
+        "vfold": ("推理与系统效率", "推测解码与 KV cache"),
+        "sparse-decoding": ("推理与系统效率", "动态计算与模型压缩"),
         "elastic-expert-routing": ("网络架构", "MoE 与动态路由"),
         "jev-capability": ("推理与系统效率", "能力评测与推理协议"),
         "tess": ("预训练与数据", "数据选择与质量估计"),
@@ -818,6 +825,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "vcola": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
         "vimod": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
         "videomm": ("多模态基础模型", "视频理解与 token 压缩"),
         "stacktok": ("多模态基础模型", "视觉 token 与跨模态检索"),

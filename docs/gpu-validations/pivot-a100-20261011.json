@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "adapter_key": "pivot",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_pivot_checkpoint.py",
+    "--student-path",
+    "checkpoints/qwen2.5-0.5b",
+    "--teacher-path",
+    "checkpoints/qwen2.5-7b",
+    "--student-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--student-revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--teacher-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--teacher-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--dataset-revision",
+    "9d081458ff52e53cf7e848f414e6e9344e4e6696",
+    "--train-path",
+    "data/pivot-banking77/train.jsonl",
+    "--validation-path",
+    "data/pivot-banking77/validation.jsonl",
+    "--split-manifest",
+    "data/pivot-banking77/split.json",
+    "--seed",
+    "42",
+    "--device",
+    "cuda",
+    "--output",
+    "runs/pivot-42.json",
+    "--training-examples",
+    "8",
+    "--validation-examples",
+    "8",
+    "--steps",
+    "8",
+    "--warmup-steps",
+    "2",
+    "--sft-epochs",
+    "2",
+    "--group",
+    "2",
+    "--batch-size",
+    "2",
+    "--max-tokens",
+    "512"
+  ],
+  "dataset": {
+    "id": "PolyAI-LDN/task-specific-datasets/banking77",
+    "revision": "9d081458ff52e53cf7e848f414e6e9344e4e6696",
+    "train_sha256": "4a28cf8419f64ecf6a72e18c425569b224734b67e31544af354f9bb75406af99",
+    "validation_sha256": "cba69e11083329bdbdaec16bc18b3c501c6eeb0d6f1e4e7ef88b2bee46f85961"
+  },
+  "checkpoint": {
+    "student": {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+    },
+    "teacher": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75"
+    }
+  },
+  "result": "passed",
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "opd": {
+      "validation_accuracy": 0.0,
+      "validation_parse_rate": 0.375,
+      "validation_eos_completion_fraction": 1.0,
+      "validation_examples": 8,
+      "adapter_parameter_delta_l2": 0.004158356646761029,
+      "active_steps": 8,
+      "routed_grpo_prompts": 0,
+      "grpo_reward_heterogeneous_groups": 0,
+      "truncated_training_rollouts": 0
+    },
+    "global": {
+      "validation_accuracy": 0.0,
+      "validation_parse_rate": 0.375,
+      "validation_eos_completion_fraction": 1.0,
+      "validation_examples": 8,
+      "adapter_parameter_delta_l2": 0.0034939867554487193,
+      "active_steps": 8,
+      "routed_grpo_prompts": 8,
+      "grpo_reward_heterogeneous_groups": 3,
+      "truncated_training_rollouts": 0
+    },
+    "pivot": {
+      "validation_accuracy": 0.0,
+      "validation_parse_rate": 0.375,
+      "validation_eos_completion_fraction": 1.0,
+      "validation_examples": 8,
+      "adapter_parameter_delta_l2": 0.003952021963179937,
+      "active_steps": 8,
+      "routed_grpo_prompts": 6,
+      "grpo_reward_heterogeneous_groups": 4,
+      "truncated_training_rollouts": 0
+    }
+  },
+  "limitations": [
+    "single-seed few-example intent mechanism diagnostic, not benchmark gains",
+    "q/v LoRA rather than original full-parameter finetuning",
+    "77 label names without unavailable author intent definitions",
+    "fixed half-budget global transition and equal post-warmup learning rates; no test selection",
+    "reward-homogeneous GRPO groups and response truncations retained"
+  ],
+  "executed_source_sha256": {
+    "scripts/run_pivot_checkpoint.py": "2075c478b0277710c5d3864818a7036e3ae69b43b8e149e66882acb19bc203a2",
+    "src/auto_research/post_training/pivot_checkpoint.py": "5dc667ed4bde8684c2c71ffdf07913a559e829797bedaa38fbf15293a2f7faf7",
+    "src/auto_research/post_training/pivot_intent.py": "67de7fb01a0f58202ddc985e13c4bfddc5ca9d630235d05dbd23e921823349e5",
+    "src/auto_research/post_training/oct11_objectives.py": "5db5f4eed68843fb2b8ce1f68bf2ff31ee36c0525268db1e295522a8f2cac6bc",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46"
+  },
+  "provenance": {
+    "commit": "e856b3ac8bc8afe6b59fdc7dba21f4fb5a850d76",
+    "artifact_path": "docs/gpu-validations/pivot-a100-20261011.json",
+    "metrics_artifact": "docs/post-training/2610.11167-pivot/metrics/checkpoint-a100-seed42.json",
+    "checkpoint_committed": false
+  }
+}

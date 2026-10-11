@@ -1,0 +1,16 @@
+{
+  "domain": "post-training",
+  "key": "sguid",
+  "title": "Which Skill to Distill? SGUID: Selecting a Compact Skill Bank for Model–Skill Co-Evolution",
+  "paper_url": "https://arxiv.org/abs/2610.12367",
+  "detail_path": "post-training/2610.12367-sguid/README.md",
+  "topic": ["On-policy self-distillation"],
+  "first_author": "Yuhan Liu",
+  "first_author_affiliation": "New York University",
+  "published": "2026-10-08",
+  "code": null,
+  "adapter": "sguid",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/sguid-a100-20261012.json"
+}

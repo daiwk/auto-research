@@ -102,6 +102,10 @@
 
 - 2026-07-30 · 一作：MaoXun Huang · [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
 
+## Cribl AI
+
+- 2026-10-08 · 一作：Babak Barazandeh · [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
+
 ## DeepWisdom
 
 - 2023-08-01 · 一作：Sirui Hong · [MetaGPT](../2308.00352-metagpt/README.md)（`metagpt`）：简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。
@@ -416,6 +420,10 @@
 
 - 2026-10-08 · 一作：Hyunin Lee · [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
 
+## University College London
+
+- 2026-10-08 · 一作：Haoyu Zhao · [Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks](../2610.11794-memento3/README.md)（`memento3`）：冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。
+
 ## University of British Columbia
 
 - 2026-03-19 · 一作：Jenny Zhang · [HyperAgents](../2603.19461-hyperagents/README.md)（`hyperagents`）：把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。
@@ -469,6 +477,10 @@
 - 2026-07-28 · 一作：Yu Wang · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
 - 2026-04-20 · 一作：Daoyu Wang · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
 - 2025-11-18 · 一作：Mingyue Cheng · [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
+
+## University of Southern California
+
+- 2026-10-08 · 一作：Seyedarmin Azizi · [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
 
 ## University of Virginia
 

@@ -1,0 +1,8 @@
+{
+  "domain": "post-training", "key": "opd-learning-signals", "title": "Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals",
+  "paper_url": "https://arxiv.org/abs/2610.11247", "detail_path": "post-training/2610.11247-opd-learning-signals/README.md",
+  "topic": ["On-policy distillation", "学习信号诊断"], "first_author": "Lei Zhao",
+  "first_author_affiliation": "University of Pennsylvania", "published": "2026-10-08",
+  "code": "https://github.com/leizhao7/opd-learning-signals", "adapter": "opd-learning-signals", "priority": "P1",
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/opd-learning-signals-a100-20261011.json"
+}

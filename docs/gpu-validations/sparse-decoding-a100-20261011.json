@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "adapter_key": "sparse-decoding",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_sparse_decoding_public.py",
+    "--checkpoint-path",
+    "checkpoints/qwen3-4b",
+    "--checkpoint-id",
+    "Qwen/Qwen3-4B-Instruct-2507",
+    "--checkpoint-revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--train-path",
+    "data/gsm8k-holdout/train.jsonl",
+    "--validation-path",
+    "data/gsm8k-holdout/validation.jsonl",
+    "--split-manifest",
+    "data/gsm8k-holdout/split.json",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--output",
+    "runs/sparse-decoding-42-512.json",
+    "--calibration-examples",
+    "4",
+    "--validation-examples",
+    "4",
+    "--max-tokens",
+    "512",
+    "--seed",
+    "42"
+  ],
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+    "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "dense": {
+      "validation_examples": 4,
+      "bounded_exact_match": 1.0,
+      "eos_completion_fraction": 1.0,
+      "truncated_examples": 0,
+      "generated_tokens_per_second": 25.624695520085492
+    },
+    "fixed-text-wanda-bitmask": {
+      "validation_examples": 4,
+      "bounded_exact_match": 0.5,
+      "eos_completion_fraction": 0.25,
+      "truncated_examples": 3,
+      "generated_tokens_per_second": 20.070653524600313
+    },
+    "decode-wanda-bitmask": {
+      "validation_examples": 4,
+      "bounded_exact_match": 0.25,
+      "eos_completion_fraction": 0.25,
+      "truncated_examples": 3,
+      "generated_tokens_per_second": 20.09242803963374
+    }
+  },
+  "limitations": [
+    "Wanda alternative backend, not original SparseGPT experiments",
+    "independent Triton bitmask SpMV, no original kernel speedup claim",
+    "four held-out GSM8K questions; retain every truncation and negative outcome",
+    "dense pruned prefill copy retained; packed bytes are not model memory savings",
+    "single seed mechanism diagnostic, not formal benchmark improvement",
+    "different generated lengths; throughput is descriptive, not matched-output acceleration"
+  ],
+  "executed_source_sha256": {
+    "scripts/run_sparse_decoding_public.py": "388fce4283395ca862420dc6aef12d5baa2cf5dc631d34e72eb049eb58542f96",
+    "src/auto_research/foundation/sparse_decoding.py": "82c8bdcc615add9c77c0b239bc53374db2b008f0e2020c6304b98db99f0816be",
+    "src/auto_research/foundation/sparse_decoding_cuda.py": "0cf28f11640ddfa22216ebb910950c37e5a27060165d224eac9be557ab55c842",
+    "src/auto_research/foundation/sparse_decoding_triton.py": "8ac973fa2e83d50f34f966848e3c4fc0de10a04dc603978e36719292ffa4f08c",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74"
+  },
+  "provenance": {
+    "commit": "6cec35efdff399c3fb1a21d904946f6bf0dff76e",
+    "artifact_path": "docs/gpu-validations/sparse-decoding-a100-20261011.json",
+    "metrics_artifact": "docs/foundation-models/2610.12327-sparse-decoding/metrics/checkpoint-a100-seed42.json",
+    "checkpoint_committed": false
+  }
+}

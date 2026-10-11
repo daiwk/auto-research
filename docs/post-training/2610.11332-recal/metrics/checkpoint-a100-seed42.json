@@ -1,0 +1,225 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:recal",
+  "method": "recal",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "base-wanda": {
+      "retained_width": 7296,
+      "parameters_after_pruning": 3350068736,
+      "adapter_delta_l2": 0.06889357228861662,
+      "pruned": {
+        "examples": 4,
+        "exact_match": 0.75
+      },
+      "sft": {
+        "examples": 4,
+        "exact_match": 1.0
+      },
+      "opd": {
+        "examples": 4,
+        "exact_match": 1.0
+      }
+    },
+    "recal-wanda": {
+      "retained_width": 7296,
+      "parameters_after_pruning": 3350068736,
+      "adapter_delta_l2": 0.06075290404984256,
+      "pruned": {
+        "examples": 4,
+        "exact_match": 1.0
+      },
+      "sft": {
+        "examples": 4,
+        "exact_match": 1.0
+      },
+      "opd": {
+        "examples": 4,
+        "exact_match": 0.75
+      }
+    }
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "base-wanda": {
+        "retained_width": 7296,
+        "parameters_after_pruning": 3350068736,
+        "adapter_delta_l2": 0.06889357228861662,
+        "pruned": {
+          "examples": 4,
+          "exact_match": 0.75
+        },
+        "sft": {
+          "examples": 4,
+          "exact_match": 1.0
+        },
+        "opd": {
+          "examples": 4,
+          "exact_match": 1.0
+        }
+      },
+      "recal-wanda": {
+        "retained_width": 7296,
+        "parameters_after_pruning": 3350068736,
+        "adapter_delta_l2": 0.06075290404984256,
+        "pruned": {
+          "examples": 4,
+          "exact_match": 1.0
+        },
+        "sft": {
+          "examples": 4,
+          "exact_match": 1.0
+        },
+        "opd": {
+          "examples": 4,
+          "exact_match": 0.75
+        }
+      }
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "bounded real-checkpoint diagnostic, not benchmark gain"
+  },
+  "runtime_details": {
+    "adapter_key": "recal",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "rows": [
+      {
+        "recipe": "base-wanda",
+        "parameters_after_pruning": 3350068736,
+        "retained_width": 7296,
+        "stages": {
+          "pruned": {
+            "examples": 4,
+            "exact_match": 0.75
+          },
+          "sft": {
+            "examples": 4,
+            "exact_match": 1.0
+          },
+          "opd": {
+            "examples": 4,
+            "exact_match": 1.0
+          }
+        },
+        "adapter_delta_l2": 0.06889357228861662,
+        "opd_history": [
+          {
+            "step": 0,
+            "loss": 0.5596096515655518,
+            "gradient_l2": 0.5924475193023682
+          },
+          {
+            "step": 1,
+            "loss": 0.5189477205276489,
+            "gradient_l2": 0.6892285943031311
+          },
+          {
+            "step": 2,
+            "loss": 0.4668933153152466,
+            "gradient_l2": 0.5369588136672974
+          },
+          {
+            "step": 3,
+            "loss": 0.6524103283882141,
+            "gradient_l2": 0.42307522892951965
+          }
+        ],
+        "sft_updates": 8
+      },
+      {
+        "recipe": "recal-wanda",
+        "parameters_after_pruning": 3350068736,
+        "retained_width": 7296,
+        "stages": {
+          "pruned": {
+            "examples": 4,
+            "exact_match": 1.0
+          },
+          "sft": {
+            "examples": 4,
+            "exact_match": 1.0
+          },
+          "opd": {
+            "examples": 4,
+            "exact_match": 0.75
+          }
+        },
+        "adapter_delta_l2": 0.06075290404984256,
+        "opd_history": [
+          {
+            "step": 0,
+            "loss": 0.28630656003952026,
+            "gradient_l2": 0.28125035762786865
+          },
+          {
+            "step": 1,
+            "loss": 0.19609713554382324,
+            "gradient_l2": 0.6980963349342346
+          },
+          {
+            "step": 2,
+            "loss": 0.2481497824192047,
+            "gradient_l2": 0.315229594707489
+          },
+          {
+            "step": 3,
+            "loss": 0.2668750584125519,
+            "gradient_l2": 0.5055463314056396
+          }
+        ],
+        "sft_updates": 8
+      }
+    ],
+    "checkpoint": {
+      "id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    "dataset": {
+      "id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "original_width": 9728,
+    "calibration_examples": 4,
+    "fidelity": "core_mechanism",
+    "test_read": false,
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+        "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "limitations": [
+      "LoRA recovery instead of original full-parameter FSDP",
+      "math-only small public pool; not four-domain benchmark reproduction",
+      "Same retained width and SFT targets; wall-clock budgets not claimed equal"
+    ]
+  },
+  "matched_length_cache_comparisons": [],
+  "provenance": {
+    "original_code_commit": "e9565359ed1cb1c2de26412adf011becb46354f3",
+    "artifact_path": "docs/post-training/2610.11332-recal/metrics/checkpoint-a100-seed42.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  }
+}

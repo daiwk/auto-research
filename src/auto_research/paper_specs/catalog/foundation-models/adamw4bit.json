@@ -1,0 +1,16 @@
+{
+  "domain": "foundation-models",
+  "key": "adamw4bit",
+  "title": "Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization",
+  "paper_url": "https://arxiv.org/abs/2610.12444",
+  "detail_path": "foundation-models/2610.12444-adamw4bit/README.md",
+  "topic": ["训练优化与稳定性", "低精度训练"],
+  "first_author": "Hanyang Li",
+  "first_author_affiliation": "University of California, Berkeley / Nubank",
+  "published": "2026-10-08",
+  "code": "https://github.com/nubank/adamw4bit",
+  "adapter": "adamw4bit",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/adamw4bit-a100-20261011.json"
+}

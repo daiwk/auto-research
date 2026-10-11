@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "adapter_key": "vcola",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_vcola_checkpoint.py",
+    "--checkpoint",
+    "checkpoints/qwen3.5-9b",
+    "--checkpoint-revision",
+    "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "--data",
+    "data/cifar10",
+    "--output",
+    "runs/vcola-cifar.json",
+    "--seeds",
+    "42",
+    "--examples",
+    "4"
+  ],
+  "dataset": {
+    "id": "CIFAR-10",
+    "revision": {
+      "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154"
+    },
+    "split_provenance": [
+      {
+        "id": "CIFAR-10",
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "revision": {
+          "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+          "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+          "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+          "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+          "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154"
+        },
+        "split": "fixed_official_train_only_class_tail_holdout",
+        "test_read": false,
+        "selected_indices_sha256": "a3aae591dc2016b8e28a95aaf04747136ba6e83740949539f738e88d70a9ed4d",
+        "sampling_seed": 42,
+        "examples": 4
+      }
+    ]
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "configuration_sha256": {
+      "config.json": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+      "model.safetensors.index.json": "26d3539b516be613f39563617cb9d33b3f83d401298125be392c80cefb8f7fe5",
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+      "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+      "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+      "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "dense_sampling_seed42": {
+      "evaluated_images": 4,
+      "restricted_first_token_accuracy": 1.0,
+      "restricted_choice_probability_mass_mean": 0.9990093111991882,
+      "restricted_choice_kl_to_dense_mean": 0.0,
+      "dense_backend_relative_error_max": 0.0,
+      "state_replay_relative_error_max": 0.0016478096367791295,
+      "original_visual_tokens_mean": 49.0,
+      "layer2_visual_tokens_mean": 49.0,
+      "layer25_visual_tokens_mean": 49.0
+    },
+    "vcola-50-exit24_sampling_seed42": {
+      "evaluated_images": 4,
+      "restricted_first_token_accuracy": 1.0,
+      "restricted_choice_probability_mass_mean": 0.9991193413734436,
+      "restricted_choice_kl_to_dense_mean": 0.0014391870536201168,
+      "dense_backend_relative_error_max": 0.0,
+      "state_replay_relative_error_max": 0.0016478096367791295,
+      "original_visual_tokens_mean": 49.0,
+      "layer2_visual_tokens_mean": 24.0,
+      "layer25_visual_tokens_mean": 0.0
+    },
+    "vcola-25-exit24_sampling_seed42": {
+      "evaluated_images": 4,
+      "restricted_first_token_accuracy": 1.0,
+      "restricted_choice_probability_mass_mean": 0.9990151971578598,
+      "restricted_choice_kl_to_dense_mean": 0.03091110512468731,
+      "dense_backend_relative_error_max": 0.0,
+      "state_replay_relative_error_max": 0.0016478096367791295,
+      "original_visual_tokens_mean": 49.0,
+      "layer2_visual_tokens_mean": 12.0,
+      "layer25_visual_tokens_mean": 0.0
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "limitations": [
+    "frozen original 9B checkpoint; train-only CIFAR object diagnostic, not MME/MMBench",
+    "restricted first-token answer letter, not full generated-answer accuracy",
+    "sampling seeds are not independent training replicates; no statistical capability claim",
+    "exact state replay, real visual merge and early exit; no feature-similarity proxy",
+    "no-cache sequential reference backend; no optimized latency/speedup claim",
+    "main Equation 7 query probes; Appendix A says keys, discrepancy explicitly documented",
+    "merged visual mRoPE uses original maximum-score member; text mRoPE stays unchanged"
+  ],
+  "seeds": [
+    42
+  ],
+  "executed_source_sha256": {
+    "scripts/run_vcola_checkpoint.py": "d920af25102838c28f1ba42a5c01ca62c38d354c70bdad6acde8e0622c95ace5",
+    "src/auto_research/multimodal/vcola.py": "d8da4ae85fd95238e8f37059c06e57aa438a0a2b9e6855c6dbd4511cf1f71441",
+    "src/auto_research/multimodal/vcola_checkpoint.py": "ec763ed7369fad5bca7e618dc4660b3dca05c1fcf363b6a618d1859488f5f33c",
+    "src/auto_research/multimodal/data.py": "c6cd674e86659d004d2c46d6d2d238ad6d7a04b19531b3e1e09f87fc222459bd"
+  },
+  "provenance": {
+    "commit": "037d5138da7e977f9398f1e7469d2016add2f98c",
+    "artifact_path": "docs/gpu-validations/vcola-a100-20261011.json",
+    "metrics_artifact": "docs/multimodal-models/2610.11251-vcola/metrics/cifar10-a100.json",
+    "checkpoint_committed": false,
+    "dataset_fingerprint": "8f70c8a8f946b7855333e450a0f21cb724f30be250489fe5957ecd599c68411b"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "adapter_key": "adamw4bit",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_adamw4bit_public.py",
+    "--data",
+    "data/wikitext-2",
+    "--output",
+    "runs/adamw4bit-public.json",
+    "--steps",
+    "200",
+    "--seeds",
+    "42,43,44",
+    "--device",
+    "cuda"
+  ],
+  "dataset": {
+    "id": "WikiText-2",
+    "revision": {
+      "train": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+      "validation": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+      "test": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0"
+    }
+  },
+  "checkpoint": {
+    "id": "auto-research/micro-lm-gpt-baseline",
+    "initialization": "from-scratch",
+    "config": {
+      "vocab_size": 256,
+      "dimensions": 64,
+      "layers": 2,
+      "heads": 4,
+      "kv_heads": 4,
+      "sequence_length": 64,
+      "expansion": 4,
+      "residual_streams": 2,
+      "sinkhorn_iterations": 10
+    },
+    "revision": "random initialization seeds 42,43,44"
+  },
+  "result": "passed",
+  "evaluation_tier": "l2_public_dataset",
+  "metrics": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "validation_loss_mean": {
+      "adamw": 2.9330681761105857,
+      "zip-sr": 3.120555271704992,
+      "ze-eden": 2.9708301474650702
+    },
+    "persistent_moment_bytes": {
+      "adamw": 1095680,
+      "zip-sr": 157952,
+      "ze-eden": 157952
+    }
+  },
+  "executed_source_sha256": {
+    "src/auto_research/foundation/adamw4bit.py": "511d2dc61ec366935472a4ffd482706ad84018c9f1852a9d86aa7438e6be5be1",
+    "scripts/run_adamw4bit_public.py": "2944292619b49d00ae4486386af39fbc39f3edb23be7c9373ec67380d36d03aa"
+  },
+  "limitations": [
+    "bounded byte-level WikiText training; not original paper benchmark",
+    "Both quantized recipes lost to FP32 validation loss",
+    "Persistent moment storage is not end-to-end peak memory or latency"
+  ],
+  "provenance": {
+    "commit": "98b810e8417e077b21e104c6c9d38a77ed2e7098",
+    "artifact_path": "docs/gpu-validations/adamw4bit-a100-20261011.json",
+    "metrics_artifact": "docs/foundation-models/2610.12444-adamw4bit/metrics/public-wikitext.json",
+    "checkpoint_committed": false
+  }
+}

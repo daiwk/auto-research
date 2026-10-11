@@ -1,0 +1,2651 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "multimodal-models:vcola",
+  "method": "vcola",
+  "dataset": "CIFAR-10",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "dense_sampling_seed42": {
+      "evaluated_images": 4,
+      "restricted_first_token_accuracy": 1.0,
+      "restricted_choice_probability_mass_mean": 0.9990093111991882,
+      "restricted_choice_kl_to_dense_mean": 0.0,
+      "dense_backend_relative_error_max": 0.0,
+      "state_replay_relative_error_max": 0.0016478096367791295,
+      "original_visual_tokens_mean": 49.0,
+      "layer2_visual_tokens_mean": 49.0,
+      "layer25_visual_tokens_mean": 49.0
+    },
+    "vcola-50-exit24_sampling_seed42": {
+      "evaluated_images": 4,
+      "restricted_first_token_accuracy": 1.0,
+      "restricted_choice_probability_mass_mean": 0.9991193413734436,
+      "restricted_choice_kl_to_dense_mean": 0.0014391870536201168,
+      "dense_backend_relative_error_max": 0.0,
+      "state_replay_relative_error_max": 0.0016478096367791295,
+      "original_visual_tokens_mean": 49.0,
+      "layer2_visual_tokens_mean": 24.0,
+      "layer25_visual_tokens_mean": 0.0
+    },
+    "vcola-25-exit24_sampling_seed42": {
+      "evaluated_images": 4,
+      "restricted_first_token_accuracy": 1.0,
+      "restricted_choice_probability_mass_mean": 0.9990151971578598,
+      "restricted_choice_kl_to_dense_mean": 0.03091110512468731,
+      "dense_backend_relative_error_max": 0.0,
+      "state_replay_relative_error_max": 0.0016478096367791295,
+      "original_visual_tokens_mean": 49.0,
+      "layer2_visual_tokens_mean": 12.0,
+      "layer25_visual_tokens_mean": 0.0
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "diagnostic_only": true,
+    "formal_comparison": false,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "actual frozen-checkpoint state/compression mechanism, no quality/speedup claim"
+  },
+  "runtime_details": {
+    "schema_version": 1,
+    "adapter_key": "vcola",
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_core_mechanism",
+    "rows": [
+      {
+        "sampling_seed": 42,
+        "example_id": 48968,
+        "recipe": "dense",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9994030594825745,
+        "restricted_choice_kl_to_dense": 0.0,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            }
+          ],
+          "recurrence_relative_error": 0.0016478096367791295,
+          "delta_capture_api": "private_forward_globals",
+          "merge": null,
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9444524049758911,
+          "uniqueness_mean": 0.033701442182064056,
+          "score_std": 0.02184646762907505
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 48968,
+        "recipe": "vcola-50-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.999278724193573,
+        "restricted_choice_kl_to_dense": 0.0015026349574327469,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016478096367791295,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 24,
+            "chunk_sizes": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "anchor_indices": [
+              4,
+              7,
+              8,
+              10,
+              12,
+              15,
+              17,
+              19,
+              20,
+              22,
+              25,
+              27,
+              30,
+              32,
+              33,
+              36,
+              37,
+              39,
+              42,
+              43,
+              46,
+              47,
+              50,
+              52
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9444524049758911,
+          "uniqueness_mean": 0.033701442182064056,
+          "score_std": 0.02184646762907505
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 48968,
+        "recipe": "vcola-25-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9990243315696716,
+        "restricted_choice_kl_to_dense": 0.009713832288980484,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016478096367791295,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 12,
+            "chunk_sizes": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "anchor_indices": [
+              7,
+              8,
+              12,
+              17,
+              22,
+              25,
+              30,
+              36,
+              37,
+              43,
+              46,
+              52
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9444524049758911,
+          "uniqueness_mean": 0.033701442182064056,
+          "score_std": 0.02184646762907505
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49777,
+        "recipe": "dense",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9996116161346436,
+        "restricted_choice_kl_to_dense": 0.0,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            }
+          ],
+          "recurrence_relative_error": 0.0016423760680481791,
+          "delta_capture_api": "private_forward_globals",
+          "merge": null,
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9304761290550232,
+          "uniqueness_mean": 0.02616298384964466,
+          "score_std": 0.02252035215497017
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49777,
+        "recipe": "vcola-50-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9996901154518127,
+        "restricted_choice_kl_to_dense": 6.084948836360127e-05,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016423760680481791,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 24,
+            "chunk_sizes": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "anchor_indices": [
+              4,
+              6,
+              9,
+              11,
+              12,
+              14,
+              16,
+              19,
+              20,
+              23,
+              24,
+              26,
+              29,
+              32,
+              33,
+              35,
+              38,
+              40,
+              42,
+              43,
+              46,
+              48,
+              49,
+              52
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9304761290550232,
+          "uniqueness_mean": 0.02616298384964466,
+          "score_std": 0.02252035215497017
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49777,
+        "recipe": "vcola-25-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9996443390846252,
+        "restricted_choice_kl_to_dense": 0.00038182115531526506,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016423760680481791,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 12,
+            "chunk_sizes": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "anchor_indices": [
+              6,
+              11,
+              14,
+              19,
+              23,
+              24,
+              29,
+              33,
+              38,
+              42,
+              46,
+              52
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9304761290550232,
+          "uniqueness_mean": 0.02616298384964466,
+          "score_std": 0.02252035215497017
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49560,
+        "recipe": "dense",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9998704195022583,
+        "restricted_choice_kl_to_dense": 0.0,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            }
+          ],
+          "recurrence_relative_error": 0.0016456745797768235,
+          "delta_capture_api": "private_forward_globals",
+          "merge": null,
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9506945013999939,
+          "uniqueness_mean": 0.033744826912879944,
+          "score_std": 0.022102124989032745
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49560,
+        "recipe": "vcola-50-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9997622966766357,
+        "restricted_choice_kl_to_dense": 0.0002651798422448337,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016456745797768235,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 24,
+            "chunk_sizes": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "anchor_indices": [
+              4,
+              6,
+              9,
+              11,
+              13,
+              14,
+              17,
+              19,
+              20,
+              23,
+              25,
+              27,
+              29,
+              31,
+              33,
+              35,
+              37,
+              39,
+              41,
+              44,
+              45,
+              48,
+              50,
+              52
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9506945013999939,
+          "uniqueness_mean": 0.033744826912879944,
+          "score_std": 0.022102124989032745
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49560,
+        "recipe": "vcola-25-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9998552203178406,
+        "restricted_choice_kl_to_dense": 0.0005266482476145029,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016456745797768235,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 12,
+            "chunk_sizes": [
+              4,
+              4,
+              4,
+              4,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "anchor_indices": [
+              6,
+              11,
+              13,
+              19,
+              23,
+              25,
+              31,
+              33,
+              39,
+              41,
+              48,
+              52
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9506945013999939,
+          "uniqueness_mean": 0.033744826912879944,
+          "score_std": 0.022102124989032745
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49544,
+        "recipe": "dense",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9971521496772766,
+        "restricted_choice_kl_to_dense": 0.0,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            }
+          ],
+          "recurrence_relative_error": 0.0016216288786381483,
+          "delta_capture_api": "private_forward_globals",
+          "merge": null,
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9530788660049438,
+          "uniqueness_mean": 0.036335427314043045,
+          "score_std": 0.021806206554174423
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49544,
+        "recipe": "vcola-50-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9977462291717529,
+        "restricted_choice_kl_to_dense": 0.003928083926439285,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 97,
+              "visual_tokens": 24
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016216288786381483,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 24,
+            "chunk_sizes": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              3,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "anchor_indices": [
+              4,
+              6,
+              9,
+              10,
+              12,
+              14,
+              17,
+              18,
+              21,
+              23,
+              24,
+              27,
+              29,
+              31,
+              33,
+              35,
+              38,
+              40,
+              41,
+              43,
+              46,
+              47,
+              50,
+              51
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9530788660049438,
+          "uniqueness_mean": 0.036335427314043045,
+          "score_std": 0.021806206554174423
+        }
+      },
+      {
+        "sampling_seed": 42,
+        "example_id": 49544,
+        "recipe": "vcola-25-exit24",
+        "restricted_first_token_correct": true,
+        "restricted_choice_probability_mass": 0.9975368976593018,
+        "restricted_choice_kl_to_dense": 0.11302211880683899,
+        "dense_backend_relative_error": 0.0,
+        "forward": {
+          "layers": [
+            {
+              "layer": 1,
+              "sequence_tokens": 122,
+              "visual_tokens": 49
+            },
+            {
+              "layer": 2,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 3,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 4,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 5,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 6,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 7,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 8,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 9,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 10,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 11,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 12,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 13,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 14,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 15,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 16,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 17,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 18,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 19,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 20,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 21,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 22,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 23,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 24,
+              "sequence_tokens": 85,
+              "visual_tokens": 12
+            },
+            {
+              "layer": 25,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 26,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 27,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 28,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 29,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 30,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 31,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            },
+            {
+              "layer": 32,
+              "sequence_tokens": 73,
+              "visual_tokens": 0
+            }
+          ],
+          "recurrence_relative_error": 0.0016216288786381483,
+          "delta_capture_api": "private_forward_globals",
+          "merge": {
+            "original_visual_tokens": 49,
+            "merged_visual_tokens": 12,
+            "chunk_sizes": [
+              4,
+              4,
+              4,
+              4,
+              4,
+              5,
+              4,
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "anchor_indices": [
+              6,
+              10,
+              14,
+              17,
+              23,
+              24,
+              29,
+              33,
+              38,
+              41,
+              46,
+              51
+            ]
+          },
+          "cache_used": false,
+          "original_text_positions_preserved": true,
+          "importance_mean": 0.9530788660049438,
+          "uniqueness_mean": 0.036335427314043045,
+          "score_std": 0.021806206554174423
+        }
+      }
+    ],
+    "datasets": [
+      {
+        "id": "CIFAR-10",
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "revision": {
+          "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+          "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+          "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+          "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+          "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154"
+        },
+        "split": "fixed_official_train_only_class_tail_holdout",
+        "test_read": false,
+        "selected_indices_sha256": "a3aae591dc2016b8e28a95aaf04747136ba6e83740949539f738e88d70a9ed4d",
+        "sampling_seed": 42,
+        "examples": 4
+      }
+    ],
+    "checkpoint": {
+      "id": "Qwen/Qwen3.5-9B",
+      "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "configuration_sha256": {
+        "config.json": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+        "model.safetensors.index.json": "26d3539b516be613f39563617cb9d33b3f83d401298125be392c80cefb8f7fe5",
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+        "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+        "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      }
+    },
+    "protocol": {
+      "transformers_version": "5.19.0",
+      "first_layer_real_delta_state_capture": true,
+      "state_scores_not_feature_proxy": true,
+      "query_probe_window": [
+        0,
+        4
+      ],
+      "uniqueness_weight": 0.1,
+      "merge_temperature": 1.0,
+      "exit_layer": 24,
+      "text_original_mrope_preserved": true,
+      "position_choice": "original_max_score_chunk_member",
+      "no_cache_reference_backend": true,
+      "prefill_speedup_claim": false,
+      "full_generated_answer_accuracy": false,
+      "inference_gold_read": false,
+      "restricted_first_token_only": true,
+      "test_read": false,
+      "sampling_seeds_not_training_replicates": true
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "limitations": [
+    "frozen original 9B checkpoint; train-only CIFAR object diagnostic, not MME/MMBench",
+    "restricted first-token answer letter, not full generated-answer accuracy",
+    "sampling seeds are not independent training replicates; no statistical capability claim",
+    "exact state replay, real visual merge and early exit; no feature-similarity proxy",
+    "no-cache sequential reference backend; no optimized latency/speedup claim",
+    "main Equation 7 query probes; Appendix A says keys, discrepancy explicitly documented",
+    "merged visual mRoPE uses original maximum-score member; text mRoPE stays unchanged"
+  ],
+  "provenance": {
+    "original_code_commit": "037d5138da7e977f9398f1e7469d2016add2f98c",
+    "artifact_path": "docs/multimodal-models/2610.11251-vcola/metrics/cifar10-a100.json",
+    "executed_source_sha256": {
+      "scripts/run_vcola_checkpoint.py": "d920af25102838c28f1ba42a5c01ca62c38d354c70bdad6acde8e0622c95ace5",
+      "src/auto_research/multimodal/vcola.py": "d8da4ae85fd95238e8f37059c06e57aa438a0a2b9e6855c6dbd4511cf1f71441",
+      "src/auto_research/multimodal/vcola_checkpoint.py": "ec763ed7369fad5bca7e618dc4660b3dca05c1fcf363b6a618d1859488f5f33c",
+      "src/auto_research/multimodal/data.py": "c6cd674e86659d004d2c46d6d2d238ad6d7a04b19531b3e1e09f87fc222459bd"
+    },
+    "dataset_fingerprint": "8f70c8a8f946b7855333e450a0f21cb724f30be250489fe5957ecd599c68411b"
+  }
+}

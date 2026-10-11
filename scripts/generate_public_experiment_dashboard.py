@@ -70,6 +70,18 @@ def _seed(row_seed: str, payload: dict[str, Any], path: str) -> str:
     return match.group(1).replace("_", ", ").replace("-", "–") if match else ""
 
 
+def _dataset_name(row_dataset: str, payload: dict[str, Any]) -> str:
+    """Keep revision manifests in the artifact, not in a card's dataset label."""
+    dataset = payload.get("dataset")
+    if isinstance(dataset, dict):
+        name = dataset.get("id", dataset.get("name"))
+        if name:
+            return str(name)
+    elif isinstance(dataset, str) and dataset:
+        return dataset
+    return row_dataset or str(payload.get("benchmark", ""))
+
+
 def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[str, Any]:
     protocol = _protocol(payload)
     diagnostics = payload.get("diagnostics")
@@ -133,13 +145,12 @@ def build_payload() -> dict:
         paper = _metadata_for(row.path, papers)
         payload = _artifact_payload(row.path)
         public_domain = _public_domain(paper["domain"]) if paper else row.domain
-        benchmark = str(payload.get("benchmark", ""))
         item = {
             "path": row.path,
             "domain": public_domain,
             "method": paper["key"] if paper else row.method,
             "title": paper["title"] if paper else "",
-            "dataset": row.dataset or benchmark,
+            "dataset": _dataset_name(row.dataset, payload),
             "seed": _seed(row.seed, payload, row.path),
             "metrics": row.metrics,
         }

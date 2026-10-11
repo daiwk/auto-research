@@ -7,6 +7,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_dashboard_dataset_label_does_not_dump_revision_manifest():
+    from scripts.generate_public_experiment_dashboard import _dataset_name
+
+    source = {"dataset": {"id": "WikiText-2", "revision": {"train": "a" * 64}}}
+    assert _dataset_name(str(source['dataset']), source) == 'WikiText-2'
+    assert _dataset_name('', {'dataset': {'name': 'CIFAR-10'}}) == 'CIFAR-10'
+    assert _dataset_name('legacy-dataset', {}) == 'legacy-dataset'
+    assert _dataset_name('', {'benchmark': 'public-benchmark'}) == 'public-benchmark'
+
+
 def test_explicit_diagnostic_flags_override_formal_labels():
     from scripts.generate_public_experiment_dashboard import _agent_evidence
 
@@ -32,6 +42,28 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
     assert any(item["domain"] == "foundation-model" for item in experiments)
     assert any(item["domain"] == "system-one" for item in experiments)
     assert any(item["title"] for item in experiments)
+
+
+def test_sguid_dashboard_keeps_negative_validation_and_mechanism_tier():
+    payload = json.loads((ROOT / "docs/assets/data/experiment-dashboard.json").read_text())
+    items = [item for item in payload["experiments"] if item["method"] == "sguid"]
+    assert len(items) == 1
+    item = items[0]
+    assert item["domain"] == "post-training"
+    assert item["dataset"] == "openai/grade-school-math"
+    assert item["seed"] == "42"
+    assert item["metrics"]["completed_rounds"] == 2
+    assert item["metrics"]["baseline_validation_exact_match"] == .75
+    assert item["metrics"]["final_validation_exact_match"] == .25
+    assert item["metrics"]["validation_exact_match_delta"] == -.5
+    assert item["evidence"]["diagnostic_only"] is True
+    assert item["evidence"]["formal_comparison"] is False
+    assert item["evidence"]["tier"] == "l1_mechanism"
+    script = (ROOT / "docs/assets/javascripts/experiment-dashboard.js").read_text()
+    # Suppress saturated Agent fixture scores, not measured non-Agent smoke
+    # comparisons such as SGUID's negative validation delta.
+    assert 'const agentDiagnostic = diagnostic && item.domain === "agent";' in script
+    assert "const primary = agentDiagnostic" in script
 
 
 def test_agent_mechanism_results_are_not_presented_as_capability_scores():

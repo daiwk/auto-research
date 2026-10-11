@@ -40,10 +40,11 @@
     const metrics = metricEntries(item);
     const evidence = item.evidence || {};
     const diagnostic = evidence.diagnostic_only;
+    const agentDiagnostic = diagnostic && item.domain === "agent";
     const capability = item.domain === "agent" && evidence.tier === "l2_capability";
     const mechanism = Object.entries(evidence.mechanism_metrics || {})
       .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));
-    const primary = diagnostic
+    const primary = agentDiagnostic
       ? [...metrics.filter(([key]) => key === "average_cost"), ...mechanism].slice(0, 6)
       : metrics.slice(0, 6);
     const method = item.method.replace(/^\d{4}\.\d+-/, "").replaceAll("_", " ");

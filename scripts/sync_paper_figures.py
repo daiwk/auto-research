@@ -76,6 +76,12 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.11794-memento3": "2",
+    "2610.11251-vcola": "5",
+    "2610.12102-data-space-iteration": "1",
+    "2610.12367-sguid": "1",
+    "2610.12327-sparse-decoding": "2",
+    "2610.11332-recal": "3",
     "2610.12060-vimod": "4",
     "2610.01834-jev-lookahead": "1",
     "2610.02001-mingbird": "1",
@@ -109,6 +115,27 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.12102-data-space-iteration": {
+        "pdf_url": "https://arxiv.org/pdf/2610.12102",
+        "page": 0,
+        "rect": (106, 439, 508, 601),
+        "label": "Figure 1",
+        "caption": "概率流空间的离散时间迭代与共享生成器的数据空间循环对比；为原论文方法图，非本地生成结果。",
+    },
+    "2610.12375-ontrack": {
+        "pdf_url": "https://arxiv.org/pdf/2610.12375",
+        "page": 4,
+        "rect": (50, 54, 302, 289),
+        "label": "Figure 3",
+        "caption": "玩具轨迹的代价矩阵与最优传输对齐：无关的天气工具调用无法匹配参考步骤，产生接近 1 的泄漏质量。",
+    },
+    "2610.12444-adamw4bit": {
+        "pdf_url": "https://arxiv.org/pdf/2610.12444",
+        "page": 20,
+        "rect": (105, 78, 508, 236),
+        "label": "Figure 7",
+        "caption": "2.7B 预训练的验证损失对照与 LM-head 随机舍入切换；为原论文结果，非本地 WikiText 短跑。",
+    },
     "2610.11575-elastic-expert-routing": {
         "pdf_url": "https://arxiv.org/pdf/2610.11575",
         "page": 0,
@@ -526,6 +553,12 @@ def chinese_description(caption: str) -> str:
 def update_page(paper: Paper, result: FigureResult) -> None:
     text = paper.page.read_text(encoding="utf-8")
     description = chinese_description(result.original_caption)
+    if paper.page.parent.name == "2610.12375-ontrack":
+        description = str(SPECIAL_CROPS[paper.page.parent.name]["caption"])
+    if paper.page.parent.name == "2610.12327-sparse-decoding":
+        description = "对比固定文本校准与排除 prefill 的自回归校准，以及传统稀疏 SpMM 和逐 token bitmask SpMV。图中加速与 OBS 后端属于原论文；本地为 Wanda 替代后端和独立 kernel。"
+    if paper.page.parent.name == "2610.11794-memento3":
+        description = "观察失配、反思、规则修正、编译与双重验证构成冻结 LLM 的世界模型学习闭环；图中由镜像假设修正为徽章顺时针旋转规则。为原论文示例，不是本地成功轨迹。"
     block = (
         f"{START}\n"
         f"### 原论文关键图\n\n"

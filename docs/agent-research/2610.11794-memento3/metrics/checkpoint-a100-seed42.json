@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:memento3",
+  "method": "memento3",
+  "dataset": "Gymnasium/FrozenLake-v1",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "real_actions": 1,
+    "goal_completed": 0,
+    "accepted_versions": 1,
+    "valid_final_members": 0,
+    "generated_compile_calls": 2,
+    "frozen_llm_calls": 9,
+    "rejected_proposals": 3,
+    "prediction_mismatch_events": 1,
+    "maximum_plan_equivalence_classes": 1
+  },
+  "evaluation_protocol": {
+    "tier": "l1_core_mechanism",
+    "diagnostic_only": true,
+    "formal_comparison": false,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "bounded generated-model mechanism; not ARC/Pong or capability improvement"
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "token_weight": 1.0,
+    "cost_unit": "weighted input+output tokens; not USD",
+    "cached_input_tokens": 0,
+    "prefix_kv_cache_implemented": false
+  },
+  "environment": {
+    "id": "Gymnasium/FrozenLake-v1",
+    "version": "1.1.1",
+    "map_seed": 42,
+    "slippery": false,
+    "size": 4
+  },
+  "code_commit": "c10a88e8ba06d764628642405eb6e99baa285cd5",
+  "source_sha256": {
+    "scripts/run_memento3_checkpoint.py": "a0f97729ca91e08cac6399684c387172cdb74e0e13676fca724cb09bcb878a8b",
+    "src/auto_research/agent_research/memento3.py": "21cd5186393c4212de08309ec542e654408cc42ed2218e1d2b10519e249e0329",
+    "src/auto_research/agent_research/memento3_python.py": "ccee61104f60f7500c7177dee6dc957a6ccd1663fbff84430ccf153745d656b2",
+    "src/auto_research/agent_research/search_checkpoint.py": "41a3b4b111e81e81e06971c2cccab2dc65fe72c2ba30643265b729e6f90b9257",
+    "src/auto_research/agent_research/frugalevo.py": "271e3e7361a9e4524925fbc66578568a9495e669d6c0565f9ad37c46b6f0bf49"
+  },
+  "learning_status": "falsified_generated_model",
+  "runtime_details": {
+    "population": 2,
+    "real_action_budget": 8,
+    "initial_observation_sha256": "4e2c4630cf01be7705bdf60bc03325d1796926f36696d142f21a6118b8a9a39d",
+    "accepted_history_prefix_lengths": [
+      0
+    ],
+    "generated_output_tokens": 1465,
+    "truncated_generation_calls": 0
+  },
+  "limitations": [
+    "single-seed bounded FrozenLake substitute, not ARC-AGI-3/Pong benchmark",
+    "generated models were initially accepted only on observed evidence; no guarantee of unobserved dynamics",
+    "same frozen checkpoint acts as uncalibrated semantic judge",
+    "restricted Python AST grammar and bounded planner/revision budget",
+    "no capability improvement, Evolve promotion or environment-source access"
+  ],
+  "provenance": {
+    "original_code_commit": "c10a88e8ba06d764628642405eb6e99baa285cd5",
+    "artifact_path": "docs/agent-research/2610.11794-memento3/metrics/checkpoint-a100-seed42.json",
+    "executed_source_sha256": {
+      "scripts/run_memento3_checkpoint.py": "a0f97729ca91e08cac6399684c387172cdb74e0e13676fca724cb09bcb878a8b",
+      "src/auto_research/agent_research/memento3.py": "21cd5186393c4212de08309ec542e654408cc42ed2218e1d2b10519e249e0329",
+      "src/auto_research/agent_research/memento3_python.py": "ccee61104f60f7500c7177dee6dc957a6ccd1663fbff84430ccf153745d656b2",
+      "src/auto_research/agent_research/search_checkpoint.py": "41a3b4b111e81e81e06971c2cccab2dc65fe72c2ba30643265b729e6f90b9257",
+      "src/auto_research/agent_research/frugalevo.py": "271e3e7361a9e4524925fbc66578568a9495e669d6c0565f9ad37c46b6f0bf49"
+    },
+    "dataset_fingerprint": "1b7fa8526a12719ad18e8ff523de9a42fa303df096446a5485098c3496676219"
+  }
+}

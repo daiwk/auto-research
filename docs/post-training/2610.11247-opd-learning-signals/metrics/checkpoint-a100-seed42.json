@@ -1,0 +1,209 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:opd-learning-signals",
+  "method": "opd-learning-signals",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "steps": 3,
+    "first_residual": 0.005854051560163498,
+    "last_residual": 0.0019686794839799404,
+    "lora_parameter_delta_l2": 0.0024718317778584724,
+    "representation_positions": 37,
+    "prompt_cka_min": 0.9996622877113809
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "steps": 3,
+      "first_residual": 0.005854051560163498,
+      "last_residual": 0.0019686794839799404,
+      "lora_parameter_delta_l2": 0.0024718317778584724,
+      "representation_positions": 37,
+      "prompt_cka_min": 0.9996622877113809
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "bounded real-checkpoint diagnostic, not benchmark gain"
+  },
+  "runtime_details": {
+    "adapter_key": "opd-learning-signals",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "student": {
+      "id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    "teacher": {
+      "id": "Siye01/Qwen3-4B-Inst-MOPD",
+      "revision": "b61a9f00b77302b6e947af1215b7cb994b884c4a"
+    },
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+        "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "test_read": false,
+    "rows": [
+      {
+        "step": 0,
+        "top16_residual_global_token_mean": 0.005854051560163498,
+        "actor_surrogate_global_token_mean": 0.005854051560163498,
+        "pre_clip_gradient_l2": 0.03234422951936722,
+        "learning_signal_proxy": 0.08935257679659793,
+        "cross_fitted_occupancy": {
+          "cross_gradient_squared": 0.0006110254859317094,
+          "occupancy_cross_product": 0.00046608620575100987,
+          "alpha": 0.7627933964821583,
+          "occupancy_factor": 1.7627933964821583,
+          "valid_positive_denominator": true
+        },
+        "response_tokens": 804
+      },
+      {
+        "step": 1,
+        "top16_residual_global_token_mean": 0.0033091388177126646,
+        "actor_surrogate_global_token_mean": 0.0033091390505433083,
+        "pre_clip_gradient_l2": 0.02085772529244423,
+        "learning_signal_proxy": 0.06573382507352446,
+        "cross_fitted_occupancy": {
+          "cross_gradient_squared": 0.00023113745091672466,
+          "occupancy_cross_product": -7.800045779111408e-06,
+          "alpha": -0.0337463520004019,
+          "occupancy_factor": 0.9662536479995981,
+          "valid_positive_denominator": true
+        },
+        "response_tokens": 1016
+      },
+      {
+        "step": 2,
+        "top16_residual_global_token_mean": 0.0019686794839799404,
+        "actor_surrogate_global_token_mean": 0.0019686794839799404,
+        "pre_clip_gradient_l2": 0.01715523935854435,
+        "learning_signal_proxy": 0.07474610261442331,
+        "cross_fitted_occupancy": {
+          "cross_gradient_squared": 8.524004764393359e-05,
+          "occupancy_cross_product": 2.5918927404372117e-05,
+          "alpha": 0.3040698371338455,
+          "occupancy_factor": 1.3040698371338455,
+          "valid_positive_denominator": true
+        },
+        "response_tokens": 1024
+      }
+    ],
+    "parameter_statistics": {
+      "delta_l2": 0.0024718317778584724,
+      "relative_displacement": 0.00017856859596345598,
+      "changed_fraction": 0.9968163384331598,
+      "unique_parameter_entries": 2949120
+    },
+    "parameter_scope": "LoRA adapter parameters only; not original full-model displacement",
+    "representation_prompts": 8,
+    "representation_positions": [
+      "embedding",
+      "decoder_1",
+      "decoder_2",
+      "decoder_3",
+      "decoder_4",
+      "decoder_5",
+      "decoder_6",
+      "decoder_7",
+      "decoder_8",
+      "decoder_9",
+      "decoder_10",
+      "decoder_11",
+      "decoder_12",
+      "decoder_13",
+      "decoder_14",
+      "decoder_15",
+      "decoder_16",
+      "decoder_17",
+      "decoder_18",
+      "decoder_19",
+      "decoder_20",
+      "decoder_21",
+      "decoder_22",
+      "decoder_23",
+      "decoder_24",
+      "decoder_25",
+      "decoder_26",
+      "decoder_27",
+      "decoder_28",
+      "decoder_29",
+      "decoder_30",
+      "decoder_31",
+      "decoder_32",
+      "decoder_33",
+      "decoder_34",
+      "decoder_35",
+      "final_norm"
+    ],
+    "layerwise_prompt_cka": [
+      1.0,
+      0.9999999993899137,
+      0.9999988663838202,
+      0.99999766112536,
+      0.999998484492507,
+      0.9999985187838535,
+      0.9999983887455995,
+      0.9999999869299314,
+      0.9999999697534445,
+      0.9999999472447002,
+      0.9999999111132821,
+      0.9999999094823153,
+      0.999999828236574,
+      0.9999997370599507,
+      0.9999997698037568,
+      0.9999995402429435,
+      0.999999233803878,
+      0.999999465146066,
+      0.9999988634877648,
+      0.9999983089278731,
+      0.9999981663552754,
+      0.9999969820847928,
+      0.9999964243174966,
+      0.9999942953629718,
+      0.9999831651002808,
+      0.9999549374111496,
+      0.9999497869166805,
+      0.9999460151853058,
+      0.9999586008311558,
+      0.9999613799282099,
+      0.9999681196992543,
+      0.9999581683179736,
+      0.9999578670404764,
+      0.9999509497672986,
+      0.9999212557347104,
+      0.9996622877113809,
+      0.9997504946444042
+    ],
+    "limitations": [
+      "three-step small GSM8K diagnostic is not evidence of a learning plateau",
+      "one public teacher; not original larger-teacher versus self-RL comparison",
+      "minibatch proxy/cross-fit estimates are not population quantities or causal explanations"
+    ]
+  },
+  "matched_length_cache_comparisons": [],
+  "provenance": {
+    "original_code_commit": "e9565359ed1cb1c2de26412adf011becb46354f3",
+    "artifact_path": "docs/post-training/2610.11247-opd-learning-signals/metrics/checkpoint-a100-seed42.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  }
+}
