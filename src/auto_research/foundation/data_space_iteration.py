@@ -64,7 +64,9 @@ class SmallFlowNetwork(nn.Module):
 class DataSpaceGenerator(nn.Module):
     def __init__(self, teacher: SmallFlowNetwork):
         super().__init__()
-        self.backbone = deepcopy(teacher)
+        # A real pretrained teacher is frozen before distillation. Deepcopy
+        # preserves requires_grad flags, so explicitly unfreeze the student.
+        self.backbone = deepcopy(teacher).requires_grad_(True)
         self.estimate = nn.Conv2d(3, teacher.width, 3, padding=1, bias=False)
         self.step = nn.Embedding(teacher.refinements, teacher.width)
         nn.init.xavier_uniform_(self.estimate.weight)
@@ -82,7 +84,7 @@ class DataSpaceGenerator(nn.Module):
 class FakeFlowNetwork(nn.Module):
     def __init__(self, teacher: SmallFlowNetwork):
         super().__init__()
-        self.backbone = deepcopy(teacher)
+        self.backbone = deepcopy(teacher).requires_grad_(True)
         self.step = nn.Embedding(teacher.refinements, teacher.width)
         nn.init.normal_(self.step.weight, std=.02)
 
@@ -96,7 +98,7 @@ class FlowRenoiseGenerator(nn.Module):
     """Matched baseline: same teacher backbone, uniform trailing schedule."""
     def __init__(self, teacher: SmallFlowNetwork):
         super().__init__()
-        self.backbone = deepcopy(teacher)
+        self.backbone = deepcopy(teacher).requires_grad_(True)
 
     def forward(self, noisy, time):
         t = time[:, None, None, None]

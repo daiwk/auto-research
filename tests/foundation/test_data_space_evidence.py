@@ -12,10 +12,12 @@ spec.loader.exec_module(module)
 
 def report():
     teacher = {'steps': 20, 'checkpoint_sha256': 'a' * 64,
+        'initial_checkpoint_sha256': 'd' * 64,
         'validation_velocity_mse_before': 2., 'validation_velocity_mse_after': 1.,
         'pixel_feature_frechet_distance': 10.}
     row = {'seed': 42, 'teacher': teacher, 'generator_steps': 4, 'fake_steps': 16,
         'generator_parameter_changed': True, 'fake_parameter_changed': True,
+        'generator_backbone_parameter_changed': True, 'fake_backbone_parameter_changed': True,
         'trace': [{'refinement': i, 'fake_losses': [1.] * 4, 'fake_gradient_norms': [.1] * 4,
                    'generator_loss': -.1, 'generator_gradient_norm': .1} for i in range(4)],
         'evaluation': [{'nfe': i, 'pixel_feature_frechet_distance': 20. + i} for i in range(1, 5)]}
@@ -36,7 +38,8 @@ def test_negative_outcome_kept_and_valid_actual_pair():
     assert metrics['data-space_seed42']['pixel_feature_frechet_nfe4'] == 24.
 
 
-@pytest.mark.parametrize('tamper', ['gold', 'test', 'teacher', 'fake_count', 'prefix', 'nonfinite', 'missing_seed', 'mismatch'])
+@pytest.mark.parametrize('tamper', ['gold', 'test', 'teacher', 'frozen_copy', 'unchanged_teacher',
+                                   'fake_count', 'prefix', 'nonfinite', 'missing_seed', 'mismatch'])
 def test_rejects_proxy_or_corrupt_evidence(tamper):
     value = report()
     if tamper == 'gold':
@@ -45,6 +48,10 @@ def test_rejects_proxy_or_corrupt_evidence(tamper):
         value['dataset']['test_read'] = True
     elif tamper == 'teacher':
         value['rows'][0]['teacher']['validation_velocity_mse_after'] = 2.
+    elif tamper == 'frozen_copy':
+        value['rows'][0]['generator_backbone_parameter_changed'] = False
+    elif tamper == 'unchanged_teacher':
+        value['rows'][0]['teacher']['initial_checkpoint_sha256'] = 'a' * 64
     elif tamper == 'fake_count':
         value['rows'][0]['fake_steps'] = 4
     elif tamper == 'prefix':

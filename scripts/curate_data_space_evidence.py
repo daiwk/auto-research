@@ -41,6 +41,8 @@ def summarize(report):
             raise ValueError('duplicate or unknown paired recipe')
         teacher = row['teacher']
         if (teacher['steps'] < 10 or not teacher.get('checkpoint_sha256')
+                or not teacher.get('initial_checkpoint_sha256')
+                or teacher['initial_checkpoint_sha256'] == teacher['checkpoint_sha256']
                 or not finite(teacher['validation_velocity_mse_before'])
                 or not finite(teacher['validation_velocity_mse_after'])
                 or teacher['validation_velocity_mse_before'] == teacher['validation_velocity_mse_after']):
@@ -48,7 +50,9 @@ def summarize(report):
         steps, trace = row['generator_steps'], row['trace']
         if (steps < 4 or row['fake_steps'] != 4 * steps or len(trace) != steps
                 or row.get('generator_parameter_changed') is not True
-                or row.get('fake_parameter_changed') is not True):
+                or row.get('fake_parameter_changed') is not True
+                or row.get('generator_backbone_parameter_changed') is not True
+                or row.get('fake_backbone_parameter_changed') is not True):
             raise ValueError('actual generator and fourfold fake updates required')
         for index, event in enumerate(trace):
             if (event['refinement'] != index % 4 or len(event['fake_losses']) != 4
@@ -116,6 +120,9 @@ def main():
         '--train-examples', str(report['dataset']['train_examples']),
         '--validation-examples', str(report['dataset']['validation_examples']),
         '--teacher-steps', str(one['teacher']['steps']), '--distill-steps', str(one['generator_steps']),
+        '--teacher-nfe', str(one['teacher']['nfe']),
+        '--batch-size', str(report['protocol']['batch_size']),
+        '--split-seed', str(report['protocol']['split_seed']),
         '--width', str(report['checkpoint']['width']), '--depth', str(report['checkpoint']['depth'])]
     receipt = {'schema_version': 1, 'adapter_key': 'data-space-iteration', 'validated_at': '2026-10-11',
         'accelerator': {'vendor': 'NVIDIA', 'model': report['accelerator']}, 'command': command,

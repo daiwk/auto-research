@@ -112,3 +112,43 @@ def test_flow_renoise_is_separate_baseline_and_dmd_time_guard():
     with pytest.raises(ValueError, match='strictly'):
         distribution_matching_loss(generator, teacher, fake, value, 0,
             generator_update=True, time=torch.tensor([0., 1.]))
+
+
+@pytest.mark.parametrize('recipe', ['flow-renoise', 'data-space'])
+def test_real_trained_frozen_teacher_transfer_full_backbone_backward(recipe):
+    """The actual runner freezes teacher BEFORE constructing students.
+
+    This executes real U-Net flow training and alternating-DMD backward, not a
+    mocked loss/parameter fixture. Random image tensors are only a CPU gradient
+    contract; public CIFAR training remains the separate real GPU gate.
+    """
+    torch.manual_seed(43)
+    teacher = SmallFlowNetwork(width=4, depth=1)
+    images = torch.rand(2, 3, 8, 8) * 2 - 1
+    initial_teacher = deepcopy(teacher.state_dict())
+    optimizer = torch.optim.Adam(teacher.parameters(), lr=1e-3)
+    for _ in range(3):
+        optimizer.zero_grad(set_to_none=True)
+        flow_matching_loss(teacher, images).backward()
+        optimizer.step()
+    assert any(not torch.equal(v, teacher.state_dict()[k]) for k, v in initial_teacher.items())
+    teacher.requires_grad_(False).eval()
+    teacher.zero_grad(set_to_none=True)
+    frozen_teacher = deepcopy(teacher.state_dict())
+    generator = FlowRenoiseGenerator(teacher) if recipe == 'flow-renoise' else DataSpaceGenerator(teacher)
+    fake = FakeFlowNetwork(teacher)
+    assert all(p.requires_grad for p in generator.backbone.parameters())
+    assert all(p.requires_grad for p in fake.backbone.parameters())
+    initial_gen = deepcopy(generator.backbone.state_dict())
+    initial_fake = deepcopy(fake.backbone.state_dict())
+    rollout = rollout_flow_renoise if recipe == 'flow-renoise' else rollout_data_space
+    trainer = DMDTrainer(generator, teacher, fake,
+        torch.optim.Adam(generator.parameters(), lr=1e-4, betas=(0., .95)),
+        torch.optim.Adam(fake.parameters(), lr=1e-4, betas=(0., .95)), rollout=rollout)
+    trace = [trainer.step(images) for _ in range(4)]
+    assert [row['refinement'] for row in trace] == [0, 1, 2, 3]
+    assert all(row['generator_gradient_norm'] > 0 for row in trace)
+    assert any(not torch.equal(v, generator.backbone.state_dict()[k]) for k, v in initial_gen.items())
+    assert any(not torch.equal(v, fake.backbone.state_dict()[k]) for k, v in initial_fake.items())
+    assert all(torch.equal(v, teacher.state_dict()[k]) for k, v in frozen_teacher.items())
+    assert all(p.grad is None and not p.requires_grad for p in teacher.parameters())

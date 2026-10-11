@@ -122,6 +122,27 @@ def test_real_hybrid_layers_baseline_parity_compression_and_early_exit():
     assert info['original_text_positions_preserved']
 
 
+def test_actual_vision_encoder_prepare_and_original_multimodal_forward_parity():
+    from auto_research.multimodal.vcola_checkpoint import Qwen35VCoLA
+    model = tiny_model()
+    # Processor geometry for one 224x224 image: 14x14 patches and 2x2 merge.
+    # Random pixels are exclusively a numerical mechanism fixture, no task score.
+    ids = torch.tensor([[7, 58, *([60] * 49), 59, 8, 9]])
+    batch = {'input_ids': ids, 'attention_mask': torch.ones_like(ids),
+        'mm_token_type_ids': (ids == 60).long(),
+        'pixel_values': torch.randn(196, 1536), 'image_grid_thw': torch.tensor([[1, 14, 14]])}
+    backend = Qwen35VCoLA(model)
+    with torch.no_grad():
+        expected = model(**batch, use_cache=False, logits_to_keep=1).logits[:, -1].float()
+        prefix = backend.prepare(batch)
+        logits, _ = backend.forward(prefix, collect_scores=True)
+    assert int(prefix.visual_mask.sum()) == 49
+    assert prefix.positions.shape == (3, 1, ids.shape[1])
+    assert torch.allclose(logits, expected, atol=1e-5)
+    _, details = backend.forward(prefix, remain_rate=.5, exit_layer=3)
+    assert [x['visual_tokens'] for x in details['layers']] == [49, 24, 24, 0]
+
+
 def test_hook_restored_after_failure():
     from auto_research.multimodal.vcola_checkpoint import Qwen35VCoLA, VisualPrefix
     model = tiny_model()

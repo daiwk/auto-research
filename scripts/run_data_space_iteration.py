@@ -157,6 +157,7 @@ def run(args):
             raise AssertionError("teacher was not trained")
         teacher_metrics = {"validation_velocity_mse_before": before,
             "validation_velocity_mse_after": after, "steps": args.teacher_steps,
+            "initial_checkpoint_sha256": teacher_initial,
             "checkpoint_sha256": teacher_sha,
             "pixel_feature_frechet_distance": pixel_feature_distance(
                 teacher_sample(teacher, fixed_noise, args.teacher_nfe), valid),
@@ -171,6 +172,8 @@ def run(args):
             rollout = (partial(rollout_flow_renoise, refinements=4)
                        if recipe == "flow-renoise" else rollout_data_space)
             initial_generator, initial_fake = state_digest(generator), state_digest(fake)
+            initial_generator_backbone = state_digest(generator.backbone)
+            initial_fake_backbone = state_digest(fake.backbone)
             trainer = DMDTrainer(generator, teacher, fake,
                 torch.optim.Adam(generator.parameters(), lr=1e-4, betas=(0., .95)),
                 torch.optim.Adam(fake.parameters(), lr=1e-4, betas=(0., .95)), rollout=rollout)
@@ -182,9 +185,15 @@ def run(args):
                 trace.append(trainer.step(train[:args.batch_size]))  # only shape is consumed by DMD
             if state_digest(teacher) != teacher_sha:
                 raise AssertionError("frozen teacher changed during DMD")
+            gen_backbone_changed = state_digest(generator.backbone) != initial_generator_backbone
+            fake_backbone_changed = state_digest(fake.backbone) != initial_fake_backbone
+            if not gen_backbone_changed or not fake_backbone_changed:
+                raise AssertionError("actual student/fake flow backbones were not trained")
             row = {"seed": seed, "recipe": recipe, "teacher": deepcopy(teacher_metrics),
                 "generator_parameter_changed": state_digest(generator) != initial_generator,
                 "fake_parameter_changed": state_digest(fake) != initial_fake,
+                "generator_backbone_parameter_changed": gen_backbone_changed,
+                "fake_backbone_parameter_changed": fake_backbone_changed,
                 "generator_steps": args.distill_steps, "fake_steps": 4 * args.distill_steps,
                 "trace": trace, "evaluation": evaluate_samples(trainer.ema, fixed_noise, valid, rollout),
                 "checkpoint_sha256": state_digest(trainer.ema)}
@@ -198,6 +207,7 @@ def run(args):
             "generator_refinements": 4, "fake_updates_per_generator": 4, "dmd_beta": [2.5, 1.],
             "dmd_weight": 1., "adam_betas": [0., .95], "ema_decay": .9999,
             "evaluation_uses_ema": True, "test_read": False, "inception_fid_evaluated": False,
+            "batch_size": args.batch_size, "split_seed": args.split_seed,
             "teacher_architecture_difference": "two-scale small residual U-Net, not SongUNet-55M",
             "no_improvement_claim": True},
         "accelerator": torch.cuda.get_device_name() if args.device.startswith("cuda") else "CPU"}
