@@ -96,7 +96,8 @@ def test_no_compression_when_entire_context_protected():
     torch.testing.assert_close(banks.materialize(1), y)
 
 
-def test_real_qwen_cache_bridge_decodes_protected_prefix_exactly():
+@pytest.mark.parametrize("key_only_initialization", [False, True])
+def test_real_qwen_cache_bridge_decodes_protected_prefix_exactly(key_only_initialization):
     pytest.importorskip("transformers")
     from transformers import Qwen3Config, Qwen3ForCausalLM
     from auto_research.foundation.vfold import attach_finish_hooks
@@ -118,6 +119,13 @@ def test_real_qwen_cache_bridge_decodes_protected_prefix_exactly():
         with torch.no_grad():
             full = original(ids, use_cache=True)
             cache = VFoldCache(2, sink=4, recent=128)
+            if key_only_initialization:
+                for layer in cache.layers:
+                    original_init = layer.lazy_initialization
+                    def key_only(key, original_init=original_init):
+                        original_init(key, key)
+                    # Bound the closure without a visible second parameter.
+                    layer.lazy_initialization = (lambda fn: lambda key: fn(key))(key_only)
             folded = model(ids, past_key_values=cache, use_cache=True)
             torch.testing.assert_close(folded.logits, full.logits, atol=1e-6, rtol=1e-5)
             token = torch.tensor([[17]])

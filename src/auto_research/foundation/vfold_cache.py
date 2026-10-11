@@ -1,4 +1,6 @@
 """Transformers 5 dynamic-cache bridge; batch-one paired full-attention only."""
+import inspect
+
 from transformers.cache_utils import DynamicCache, DynamicLayer
 
 from .vfold import ValueBanks
@@ -14,7 +16,15 @@ class VFoldCache(DynamicCache):
         keys, values = self.banks.update(layer_idx, key_states, value_states)
         layer = self.layers[layer_idx]
         if not layer.is_initialized:
-            layer.lazy_initialization(key_states, value_states)
+            # Audited runtime variants accept key only or key/value. Resolve
+            # before mutation; an exception retry could corrupt pending state.
+            arity = len(inspect.signature(layer.lazy_initialization).parameters)
+            if arity == 1:
+                layer.lazy_initialization(key_states)
+            elif arity == 2:
+                layer.lazy_initialization(key_states, value_states)
+            else:
+                raise TypeError("unsupported DynamicLayer initialization contract")
         layer.keys = keys
         # Never persist one materialized full value tensor per layer.
         return keys, values

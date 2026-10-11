@@ -1,0 +1,107 @@
+"""OPD residual/gradient/parameter/representation diagnostics (2610.11247).
+
+Finite-minibatch proxies are not causal explanations or predicted AdamW gains.
+Negative truncated residuals and nonpositive cross-fit norms stay undefined.
+"""
+from __future__ import annotations
+
+import math
+
+import torch
+
+
+def topk_residual(student_logits, teacher_logits, response_mask, *, topk=16):
+    if student_logits.shape != teacher_logits.shape or response_mask.shape != student_logits.shape[:-1]:
+        raise ValueError("aligned vocabulary and response positions required")
+    if not 0 < topk <= student_logits.shape[-1] or not bool(response_mask.any()):
+        raise ValueError("valid support and nonempty response required")
+    s = student_logits.float().log_softmax(-1)
+    t = teacher_logits.detach().float().log_softmax(-1)
+    selected, indices = s.topk(topk, -1)
+    residual = (selected.softmax(-1) * (selected - t.gather(-1, indices))).sum(-1)
+    return residual.masked_select(response_mask.bool()).mean()
+
+
+def learning_signal_proxy(loss, pre_clip_gradient_norm):
+    loss, norm = float(loss), float(pre_clip_gradient_norm)
+    if not math.isfinite(loss) or not math.isfinite(norm) or norm < 0:
+        raise ValueError("finite loss and nonnegative pre-clipping gradient required")
+    return norm**2 / (2 * loss) if loss > 0 else None
+
+
+def _dot(a, b):
+    if len(a) != len(b) or any(x.shape != y.shape for x, y in zip(a, b)):
+        raise ValueError("aligned parameter-gradient tensors required")
+    return sum(float((x.detach().double() * y.detach().double()).sum()) for x, y in zip(a, b))
+
+
+def cross_fitted_occupancy(g0, g1, h0, h1):
+    norm = _dot(g0, g1)
+    cross = .5 * (_dot(h0, g1) + _dot(h1, g0))
+    if not math.isfinite(norm) or not math.isfinite(cross):
+        raise ValueError("finite cross-fitted gradients required")
+    return {"cross_gradient_squared": norm, "occupancy_cross_product": cross,
+            "alpha": cross / norm if norm > 0 else None,
+            "occupancy_factor": 1 + cross / norm if norm > 0 else None,
+            "valid_positive_denominator": norm > 0}
+
+
+def occupancy_surrogate(response_losses, response_log_likelihoods):
+    """Opposite-fold per-prompt baseline; 8 rollouts = even 2x4 folds.
+
+    Loss values are detached. Score log-likelihoods sum response tokens, not
+    token means. Returned terms must differentiate on the matching fold only.
+    """
+    if response_losses.shape != response_log_likelihoods.shape or response_losses.ndim != 2:
+        raise ValueError("aligned prompt-by-rollout losses and sequence log likelihoods required")
+    rolls = response_losses.shape[1]
+    if rolls < 2 or rolls % 2:
+        raise ValueError("two equal independent rollout folds required")
+    losses = response_losses.detach()
+    split = rolls // 2
+    first, second = losses[:, :split], losses[:, split:]
+    h0 = ((first - second.mean(-1, keepdim=True)) * response_log_likelihoods[:, :split]).mean()
+    h1 = ((second - first.mean(-1, keepdim=True)) * response_log_likelihoods[:, split:]).mean()
+    return h0, h1
+
+
+def parameter_displacement(before, after):
+    if set(before) != set(after):
+        raise ValueError("same named parameter space required, not different architectures")
+    norm2, delta2, total, changed = 0., 0., 0, 0
+    seen = set()
+    for name, a in before.items():
+        b = after[name]
+        if a.shape != b.shape:
+            raise ValueError("matching parameter shapes required")
+        identity = (a.data_ptr(), b.data_ptr(), tuple(a.shape), a.stride(), b.stride())
+        if identity in seen:
+            continue
+        seen.add(identity)
+        x, y = a.detach().float(), b.detach().float()
+        norm2 += float(x.double().square().sum())
+        delta2 += float((y - x).double().square().sum())
+        changed += int((x != y).sum())
+        total += x.numel()
+    return {"delta_l2": delta2**.5, "relative_displacement": (delta2 / norm2)**.5 if norm2 else None,
+            "changed_fraction": changed / total if total else None,
+            "unique_parameter_entries": total}
+
+
+def mean_pool_prompt(hidden, mask):
+    if hidden.shape[:-1] != mask.shape or not bool(mask.bool().any(-1).all()):
+        raise ValueError("nonempty aligned prompt token masks required")
+    return hidden.float().masked_fill(~mask.bool()[..., None], 0).sum(-2) / mask.sum(-1, keepdim=True)
+
+
+def linear_cka(first, second):
+    if first.ndim != 2 or second.ndim != 2 or first.shape[0] != second.shape[0] or len(first) < 2:
+        raise ValueError("same bank of at least two mean-pooled prompts required")
+    if not torch.isfinite(first).all() or not torch.isfinite(second).all():
+        raise ValueError("finite representations required")
+    x, y = first.double(), second.double()
+    x, y = x - x.mean(0, keepdim=True), y - y.mean(0, keepdim=True)
+    # Equivalent centered linear CKA using prompt Gram matrices: no dim^2 storage.
+    gx, gy = x @ x.T, y @ y.T
+    denominator = torch.linalg.vector_norm(gx) * torch.linalg.vector_norm(gy)
+    return float((gx * gy).sum() / denominator) if float(denominator) > 0 else None

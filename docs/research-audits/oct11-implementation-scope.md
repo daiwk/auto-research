@@ -5,9 +5,9 @@
 | 优先级 | 项目 | arXiv | 当前状态 |
 |---|---|---|---|
 | P0 | ZIP-SR / ZE-EDEN | 2610.12444 | 核心、真实 Evolve 行为测试、WikiText-2 三种子 A100 对照已完成；静态 eager 实现，保留负结果 |
-| P0 | VFold | 2610.12338 | 待实现 head permutation / CCA 吸收与真实跨层值缓存 |
-| P0 | Option-Channel Attack | 2610.12292 | 六策略、校准选标签/独立评测、条件 ASR 与成对区间已实现并通过测试；真实 Laya 验证待完成 |
-| P0 | ReCal | 2610.11332 | 真实 FFN 删除、损伤加权、SFT→OPD 运行器和测试已实现；A100 对照正在验证 |
+| P0 | VFold | 2610.12338 | CCA、Hungarian 头匹配、功能保持权重折叠、真实共享缓存已实现；A100 发现 BF16 校准不足及缓存版本兼容问题，已修复兼容性并重跑；原始 LongBench/RULER 未完成 |
+| P0 | Option-Channel Attack | 2610.12292 | 六策略、校准选标签/独立评测、条件 ASR 与成对区间测试及 A100 真实 Laya 运行已完成；部分策略干净输入即失效，保留 undefined ASR；论文全部模型/屏蔽数据集未完成 |
+| P0 | ReCal | 2610.11332 | 真实 FFN 删除、损伤加权、SFT→OPD 运行器、测试与 A100 对照已完成；4 题诊断且 OPD 后有负结果，非原始四域 benchmark |
 | P0 | ZCPO | 2610.12161 | 核心公式与边界测试、A100 24 步真实更新已完成；指标脱敏、切分溯源与文档登记待完成；保留首次全跳过结果 |
 | P1 | SparseDecoding | 2610.12327 | 待实现 decoding-only 校准及真实稀疏 kernel；不能用 dense zeros 代替 |
 | P1 | V-CoLA | 2610.11251 | 待实现混合线性注意力状态贡献与短期证据选择 |
@@ -16,7 +16,7 @@
 | P1 | Memento3 | 2610.11794 | 待实现模型生成世界模型、规则核验与历史回放；付费模型预算未授权 |
 | P1 | PIVOT | 2610.11167 | 核心损失与路由测试通过；真实 warm-up、领域训练和评测尚未完成 |
 | P1 | SGUID | 2610.12367 | 核心筛选/恢复合同测试通过；真实模型产技能及两轮蒸馏尚未完成 |
-| P1 设施 | OPD Learning Signals | 2610.11247 | 待实现学习信号和参数更新 CKA 诊断 |
+| P1 设施 | OPD Learning Signals | 2610.11247 | 残余损失、pre-clip 梯度代理、两折 occupancy、参数位移、FP64 CKA 及真实 checkpoint 运行器已实现；CUDA 验证待完成；非 200 步平台期复现 |
 
 ## 四项收口
 
