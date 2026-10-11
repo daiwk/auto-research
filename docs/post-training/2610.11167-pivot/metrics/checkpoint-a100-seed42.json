@@ -1,0 +1,1359 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:pivot",
+  "method": "pivot",
+  "dataset": "PolyAI-LDN/task-specific-datasets/banking77",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "opd": {
+      "validation_accuracy": 0.0,
+      "validation_parse_rate": 0.375,
+      "validation_eos_completion_fraction": 1.0,
+      "validation_examples": 8,
+      "adapter_parameter_delta_l2": 0.004158356646761029,
+      "active_steps": 8,
+      "routed_grpo_prompts": 0,
+      "grpo_reward_heterogeneous_groups": 0,
+      "truncated_training_rollouts": 0
+    },
+    "global": {
+      "validation_accuracy": 0.0,
+      "validation_parse_rate": 0.375,
+      "validation_eos_completion_fraction": 1.0,
+      "validation_examples": 8,
+      "adapter_parameter_delta_l2": 0.0034939867554487193,
+      "active_steps": 8,
+      "routed_grpo_prompts": 8,
+      "grpo_reward_heterogeneous_groups": 3,
+      "truncated_training_rollouts": 0
+    },
+    "pivot": {
+      "validation_accuracy": 0.0,
+      "validation_parse_rate": 0.375,
+      "validation_eos_completion_fraction": 1.0,
+      "validation_examples": 8,
+      "adapter_parameter_delta_l2": 0.003952021963179937,
+      "active_steps": 8,
+      "routed_grpo_prompts": 6,
+      "grpo_reward_heterogeneous_groups": 4,
+      "truncated_training_rollouts": 0
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "diagnostic_only": true,
+    "formal_comparison": false,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "actual bounded routing/training, not benchmark improvement"
+  },
+  "runtime_details": {
+    "schema_version": 1,
+    "adapter_key": "pivot",
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "seed": 42,
+    "student": {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+    },
+    "teacher": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75"
+    },
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "PolyAI-LDN/task-specific-datasets/banking77",
+      "source_revision": "9d081458ff52e53cf7e848f414e6e9344e4e6696",
+      "source_sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b",
+      "partition_sha256": {
+        "train": "4a28cf8419f64ecf6a72e18c425569b224734b67e31544af354f9bb75406af99",
+        "validation": "cba69e11083329bdbdaec16bc18b3c501c6eeb0d6f1e4e7ef88b2bee46f85961"
+      },
+      "partition": {
+        "algorithm": "class-balanced train-only shuffle, normalized-query deduplication",
+        "seed": 42,
+        "shots": 5,
+        "validation_per_class": 1,
+        "labels": [
+          "card_arrival",
+          "card_linking",
+          "exchange_rate",
+          "card_payment_wrong_exchange_rate",
+          "extra_charge_on_statement",
+          "pending_cash_withdrawal",
+          "fiat_currency_support",
+          "card_delivery_estimate",
+          "automatic_top_up",
+          "card_not_working",
+          "exchange_via_app",
+          "lost_or_stolen_card",
+          "age_limit",
+          "pin_blocked",
+          "contactless_not_working",
+          "top_up_by_bank_transfer_charge",
+          "pending_top_up",
+          "cancel_transfer",
+          "top_up_limits",
+          "wrong_amount_of_cash_received",
+          "card_payment_fee_charged",
+          "transfer_not_received_by_recipient",
+          "supported_cards_and_currencies",
+          "getting_virtual_card",
+          "card_acceptance",
+          "top_up_reverted",
+          "balance_not_updated_after_cheque_or_cash_deposit",
+          "card_payment_not_recognised",
+          "edit_personal_details",
+          "why_verify_identity",
+          "unable_to_verify_identity",
+          "get_physical_card",
+          "visa_or_mastercard",
+          "topping_up_by_card",
+          "disposable_card_limits",
+          "compromised_card",
+          "atm_support",
+          "direct_debit_payment_not_recognised",
+          "passcode_forgotten",
+          "declined_cash_withdrawal",
+          "pending_card_payment",
+          "lost_or_stolen_phone",
+          "request_refund",
+          "declined_transfer",
+          "Refund_not_showing_up",
+          "declined_card_payment",
+          "pending_transfer",
+          "terminate_account",
+          "card_swallowed",
+          "transaction_charged_twice",
+          "verify_source_of_funds",
+          "transfer_timing",
+          "reverted_card_payment?",
+          "change_pin",
+          "beneficiary_not_allowed",
+          "transfer_fee_charged",
+          "receiving_money",
+          "failed_transfer",
+          "transfer_into_account",
+          "verify_top_up",
+          "getting_spare_card",
+          "top_up_by_cash_or_cheque",
+          "order_physical_card",
+          "virtual_card_not_working",
+          "wrong_exchange_rate_for_cash_withdrawal",
+          "get_disposable_virtual_card",
+          "top_up_failed",
+          "balance_not_updated_after_bank_transfer",
+          "cash_withdrawal_not_recognised",
+          "exchange_charge",
+          "top_up_by_card_charge",
+          "activate_my_card",
+          "cash_withdrawal_charge",
+          "card_about_to_expire",
+          "apple_pay_or_google_pay",
+          "verify_my_identity",
+          "country_support"
+        ],
+        "source_sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b"
+      }
+    },
+    "test_read": false,
+    "dataset": {
+      "id": "PolyAI-LDN/task-specific-datasets/banking77",
+      "revision": "9d081458ff52e53cf7e848f414e6e9344e4e6696",
+      "train_sha256": "4a28cf8419f64ecf6a72e18c425569b224734b67e31544af354f9bb75406af99",
+      "validation_sha256": "cba69e11083329bdbdaec16bc18b3c501c6eeb0d6f1e4e7ef88b2bee46f85961"
+    },
+    "budgets": {
+      "training_examples": 8,
+      "validation_examples": 8,
+      "steps": 8,
+      "warmup_steps": 2,
+      "sft_epochs": 2,
+      "group": 2,
+      "batch_size": 2,
+      "max_tokens": 512
+    },
+    "baseline": {
+      "accuracy": 0.0,
+      "parse_rate": 0.375,
+      "examples": 8,
+      "eos_completion_fraction": 1.0,
+      "rows": [
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 109
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 73
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 98
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 126
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 110
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 74
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 136
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 104
+        }
+      ]
+    },
+    "shared_warmup_validation": {
+      "accuracy": 0.0,
+      "parse_rate": 0.5,
+      "examples": 8,
+      "eos_completion_fraction": 1.0,
+      "rows": [
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 122
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 84
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 89
+        },
+        {
+          "correct": false,
+          "valid_prediction": false,
+          "ended_with_eos": true,
+          "tokens": 107
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 120
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 45
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 136
+        },
+        {
+          "correct": false,
+          "valid_prediction": true,
+          "ended_with_eos": true,
+          "tokens": 127
+        }
+      ]
+    },
+    "sft_history": [
+      {
+        "epoch": 0,
+        "example": 0,
+        "loss": 1.1251482963562012,
+        "gradient_l2": 0.6961068511009216,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 1,
+        "loss": 1.3748606443405151,
+        "gradient_l2": 0.9285602569580078,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 2,
+        "loss": 1.2725896835327148,
+        "gradient_l2": 1.079498052597046,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 3,
+        "loss": 1.7253133058547974,
+        "gradient_l2": 1.1167956590652466,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 4,
+        "loss": 1.0296039581298828,
+        "gradient_l2": 0.7732770442962646,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 5,
+        "loss": 1.2606251239776611,
+        "gradient_l2": 0.8810955882072449,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 6,
+        "loss": 1.237979769706726,
+        "gradient_l2": 0.8419771790504456,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 0,
+        "example": 7,
+        "loss": 1.1151319742202759,
+        "gradient_l2": 0.8133771419525146,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 0,
+        "loss": 1.1230833530426025,
+        "gradient_l2": 0.7031746506690979,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 1,
+        "loss": 1.360390543937683,
+        "gradient_l2": 0.9354204535484314,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 2,
+        "loss": 1.2703382968902588,
+        "gradient_l2": 1.0845006704330444,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 3,
+        "loss": 1.7213667631149292,
+        "gradient_l2": 1.1261329650878906,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 4,
+        "loss": 1.0258822441101074,
+        "gradient_l2": 0.7937237024307251,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 5,
+        "loss": 1.259651780128479,
+        "gradient_l2": 0.86601322889328,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 6,
+        "loss": 1.241460919380188,
+        "gradient_l2": 0.8534372448921204,
+        "teacher_ended_with_eos": true
+      },
+      {
+        "epoch": 1,
+        "example": 7,
+        "loss": 1.1140401363372803,
+        "gradient_l2": 0.8272591233253479,
+        "teacher_ended_with_eos": true
+      }
+    ],
+    "opd_warmup_history": [
+      {
+        "step": 0,
+        "recipe": "opd",
+        "loss": 147.83755493164062,
+        "gradient_l2": 114.25933074951172,
+        "active": true,
+        "rewards": [
+          [
+            -1.399999976158142,
+            -1.5
+          ],
+          [
+            -1.399999976158142,
+            -1.5
+          ]
+        ],
+        "response_tokens": 431,
+        "routed_grpo": [
+          false,
+          false
+        ],
+        "cosine_ratio": 0.0,
+        "acquisition_scores": [
+          -0.9999998807907104,
+          1.0000001192092896
+        ],
+        "truncated_rollouts": 0
+      },
+      {
+        "step": 1,
+        "recipe": "opd",
+        "loss": 170.2408447265625,
+        "gradient_l2": 111.00806427001953,
+        "active": true,
+        "rewards": [
+          [
+            -1.399999976158142,
+            -1.5
+          ],
+          [
+            -1.399999976158142,
+            -1.399999976158142
+          ]
+        ],
+        "response_tokens": 528,
+        "routed_grpo": [
+          false,
+          false
+        ],
+        "cosine_ratio": 0.0,
+        "acquisition_scores": [
+          1.0,
+          -1.0
+        ],
+        "truncated_rollouts": 0
+      }
+    ],
+    "arms": [
+      {
+        "recipe": "opd",
+        "history": [
+          {
+            "step": 1,
+            "recipe": "opd",
+            "loss": 144.60093688964844,
+            "gradient_l2": 140.90228271484375,
+            "active": true,
+            "rewards": [
+              [
+                -1.5,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 396,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 2,
+            "recipe": "opd",
+            "loss": 177.4300079345703,
+            "gradient_l2": 106.52449798583984,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 553,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 3,
+            "recipe": "opd",
+            "loss": 175.59634399414062,
+            "gradient_l2": 102.64336395263672,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 673,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              -1.0,
+              1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 4,
+            "recipe": "opd",
+            "loss": 233.57974243164062,
+            "gradient_l2": 126.5113525390625,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.5
+              ],
+              [
+                -1.5,
+                -1.5
+              ]
+            ],
+            "response_tokens": 794,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.000001072883606,
+              -0.999998927116394
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 5,
+            "recipe": "opd",
+            "loss": 178.99349975585938,
+            "gradient_l2": 117.06952667236328,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 612,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 6,
+            "recipe": "opd",
+            "loss": 130.54843139648438,
+            "gradient_l2": 99.10316467285156,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 461,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 7,
+            "recipe": "opd",
+            "loss": 148.74374389648438,
+            "gradient_l2": 94.65897369384766,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 524,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              -1.0,
+              1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 8,
+            "recipe": "opd",
+            "loss": 180.79833984375,
+            "gradient_l2": 97.60810089111328,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.5
+              ]
+            ],
+            "response_tokens": 576,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              -1.0,
+              1.0
+            ],
+            "truncated_rollouts": 0
+          }
+        ],
+        "adapter_delta_l2": 0.004158356646761029,
+        "validation": {
+          "accuracy": 0.0,
+          "parse_rate": 0.375,
+          "examples": 8,
+          "eos_completion_fraction": 1.0,
+          "rows": [
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 92
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 73
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 104
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 103
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 122
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 123
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 128
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 76
+            }
+          ]
+        }
+      },
+      {
+        "recipe": "global",
+        "history": [
+          {
+            "step": 1,
+            "recipe": "global",
+            "loss": 144.60093688964844,
+            "gradient_l2": 140.90228271484375,
+            "active": true,
+            "rewards": [
+              [
+                -1.5,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 396,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 2,
+            "recipe": "global",
+            "loss": 177.4300079345703,
+            "gradient_l2": 106.52449798583984,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 553,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 3,
+            "recipe": "global",
+            "loss": 175.59634399414062,
+            "gradient_l2": 102.64336395263672,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 673,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              -1.0,
+              1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 4,
+            "recipe": "global",
+            "loss": 233.57974243164062,
+            "gradient_l2": 126.5113525390625,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.5
+              ],
+              [
+                -1.5,
+                -1.5
+              ]
+            ],
+            "response_tokens": 794,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.0,
+            "acquisition_scores": [
+              1.000001072883606,
+              -0.999998927116394
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 5,
+            "recipe": "global",
+            "loss": 0.00025673327036201954,
+            "gradient_l2": 0.004336169455200434,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 612,
+            "routed_grpo": [
+              true,
+              true
+            ],
+            "cosine_ratio": 1.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 6,
+            "recipe": "global",
+            "loss": 0.00033585430355742574,
+            "gradient_l2": 0.007047298830002546,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 520,
+            "routed_grpo": [
+              true,
+              true
+            ],
+            "cosine_ratio": 1.0,
+            "acquisition_scores": [
+              1.0000014305114746,
+              -0.9999986290931702
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 7,
+            "recipe": "global",
+            "loss": 5.250384330749512,
+            "gradient_l2": 62.4852409362793,
+            "active": true,
+            "rewards": [
+              [
+                0.6000000238418579,
+                -1.399999976158142
+              ],
+              [
+                1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 551,
+            "routed_grpo": [
+              true,
+              true
+            ],
+            "cosine_ratio": 1.0,
+            "acquisition_scores": [
+              0.9999973177909851,
+              -1.0000025033950806
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 8,
+            "recipe": "global",
+            "loss": 16.000154495239258,
+            "gradient_l2": 50.33695602416992,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 740,
+            "routed_grpo": [
+              true,
+              true
+            ],
+            "cosine_ratio": 1.0,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          }
+        ],
+        "adapter_delta_l2": 0.0034939867554487193,
+        "validation": {
+          "accuracy": 0.0,
+          "parse_rate": 0.375,
+          "examples": 8,
+          "eos_completion_fraction": 1.0,
+          "rows": [
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 124
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 73
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 89
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 109
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 124
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 108
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 127
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 84
+            }
+          ]
+        }
+      },
+      {
+        "recipe": "pivot",
+        "history": [
+          {
+            "step": 1,
+            "recipe": "pivot",
+            "loss": 144.60093688964844,
+            "gradient_l2": 140.90228271484375,
+            "active": true,
+            "rewards": [
+              [
+                -1.5,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 396,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.03806023374435663,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 2,
+            "recipe": "pivot",
+            "loss": 177.4300079345703,
+            "gradient_l2": 106.52449798583984,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.5,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 553,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.1464466094067262,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 3,
+            "recipe": "pivot",
+            "loss": 175.59634399414062,
+            "gradient_l2": 102.64336395263672,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 673,
+            "routed_grpo": [
+              false,
+              false
+            ],
+            "cosine_ratio": 0.3086582838174551,
+            "acquisition_scores": [
+              -1.0,
+              1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 4,
+            "recipe": "pivot",
+            "loss": 110.48509979248047,
+            "gradient_l2": 68.75308227539062,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.5
+              ],
+              [
+                -1.5,
+                -1.5
+              ]
+            ],
+            "response_tokens": 794,
+            "routed_grpo": [
+              false,
+              true
+            ],
+            "cosine_ratio": 0.49999999999999994,
+            "acquisition_scores": [
+              1.000001072883606,
+              -0.999998927116394
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 5,
+            "recipe": "pivot",
+            "loss": 76.61290740966797,
+            "gradient_l2": 70.4065170288086,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ]
+            ],
+            "response_tokens": 502,
+            "routed_grpo": [
+              false,
+              true
+            ],
+            "cosine_ratio": 0.6913417161825448,
+            "acquisition_scores": [
+              0.9999998807907104,
+              -1.0000001192092896
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 6,
+            "recipe": "pivot",
+            "loss": 111.19786071777344,
+            "gradient_l2": 74.8906021118164,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.399999976158142
+              ],
+              [
+                -1.399999976158142,
+                -1.5
+              ]
+            ],
+            "response_tokens": 669,
+            "routed_grpo": [
+              false,
+              true
+            ],
+            "cosine_ratio": 0.8535533905932737,
+            "acquisition_scores": [
+              1.0,
+              -1.0
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 7,
+            "recipe": "pivot",
+            "loss": 120.3906021118164,
+            "gradient_l2": 102.11321258544922,
+            "active": true,
+            "rewards": [
+              [
+                -1.5,
+                -0.5
+              ],
+              [
+                -1.399999976158142,
+                0.5
+              ]
+            ],
+            "response_tokens": 478,
+            "routed_grpo": [
+              false,
+              true
+            ],
+            "cosine_ratio": 0.9619397662556434,
+            "acquisition_scores": [
+              1.0000001192092896,
+              -0.9999998211860657
+            ],
+            "truncated_rollouts": 0
+          },
+          {
+            "step": 8,
+            "recipe": "pivot",
+            "loss": -18.49989128112793,
+            "gradient_l2": 62.63969421386719,
+            "active": true,
+            "rewards": [
+              [
+                -1.399999976158142,
+                -1.5
+              ],
+              [
+                -1.399999976158142,
+                -1.5
+              ]
+            ],
+            "response_tokens": 530,
+            "routed_grpo": [
+              true,
+              true
+            ],
+            "cosine_ratio": 1.0,
+            "acquisition_scores": [
+              -0.9999998807907104,
+              1.0000001192092896
+            ],
+            "truncated_rollouts": 0
+          }
+        ],
+        "adapter_delta_l2": 0.003952021963179937,
+        "validation": {
+          "accuracy": 0.0,
+          "parse_rate": 0.375,
+          "examples": 8,
+          "eos_completion_fraction": 1.0,
+          "rows": [
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 124
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 73
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 98
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 97
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 117
+            },
+            {
+              "correct": false,
+              "valid_prediction": false,
+              "ended_with_eos": true,
+              "tokens": 123
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 141
+            },
+            {
+              "correct": false,
+              "valid_prediction": true,
+              "ended_with_eos": true,
+              "tokens": 158
+            }
+          ]
+        }
+      }
+    ],
+    "protocol": {
+      "shared_warmup_and_reset": true,
+      "full_vocabulary_kl": true,
+      "kl_beta": 0.001,
+      "vocabulary": "entire identical tokenizer vocabulary; unnamed projection padding suppressed",
+      "reference": "frozen shared warmup adapters",
+      "finetuning": "q/v LoRA, not full",
+      "prompt": "77-label-only, no unavailable author intent definitions",
+      "global_switch": "fixed half-budget, never selected on test",
+      "learning_rate": "all post-warmup arms 1e-6",
+      "validation_selection": false
+    }
+  },
+  "limitations": [
+    "single-seed few-example intent mechanism diagnostic, not benchmark gains",
+    "q/v LoRA rather than original full-parameter finetuning",
+    "77 label names without unavailable author intent definitions",
+    "fixed half-budget global transition and equal post-warmup learning rates; no test selection",
+    "reward-homogeneous GRPO groups and response truncations retained"
+  ],
+  "provenance": {
+    "original_code_commit": "e856b3ac8bc8afe6b59fdc7dba21f4fb5a850d76",
+    "artifact_path": "docs/post-training/2610.11167-pivot/metrics/checkpoint-a100-seed42.json",
+    "executed_source_sha256": {
+      "scripts/run_pivot_checkpoint.py": "2075c478b0277710c5d3864818a7036e3ae69b43b8e149e66882acb19bc203a2",
+      "src/auto_research/post_training/pivot_checkpoint.py": "5dc667ed4bde8684c2c71ffdf07913a559e829797bedaa38fbf15293a2f7faf7",
+      "src/auto_research/post_training/pivot_intent.py": "67de7fb01a0f58202ddc985e13c4bfddc5ca9d630235d05dbd23e921823349e5",
+      "src/auto_research/post_training/oct11_objectives.py": "5db5f4eed68843fb2b8ce1f68bf2ff31ee36c0525268db1e295522a8f2cac6bc",
+      "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+      "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46"
+    },
+    "dataset_fingerprint": "2ba2eefdc7bfaed5cffeb14db690b198eeeac48b51f5e2864568e08c10f2203a"
+  }
+}

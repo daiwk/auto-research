@@ -129,22 +129,76 @@ def curate(raw, *, git_show=None):
                "frozen_llm_calls": len(calls), "rejected_proposals": sum(e["stage"] == "rejected" for e in run["events"]),
                "prediction_mismatch_events": sum(e["stage"] == "prediction_mismatch" for e in run["events"]),
                "maximum_plan_equivalence_classes": max((e["class_count"] for e in run["events"] if e["stage"] == "plan"), default=0)}
-    return {"method": "memento3", "dataset": "Gymnasium/FrozenLake-v1", "seeds": [run["seed"]],
+    learning_status = ("surviving_generated_model" if final_valid else
+                       "falsified_generated_model" if run["versions"] else "no_accepted_model")
+    dataset_fingerprint = hashlib.sha256(json.dumps(
+        {"environment": raw["environment"], "initial_observation": initial}, sort_keys=True).encode()).hexdigest()
+    limitations = ["single-seed bounded FrozenLake substitute, not ARC-AGI-3/Pong benchmark",
+                   "generated models were initially accepted only on observed evidence; no guarantee of unobserved dynamics",
+                   "same frozen checkpoint acts as uncalibrated semantic judge",
+                   "restricted Python AST grammar and bounded planner/revision budget",
+                   "no capability improvement, Evolve promotion or environment-source access"]
+    return {"schema_version": 2, "manifest_ref": "agent-research:memento3",
+            "method": "memento3", "dataset": "Gymnasium/FrozenLake-v1", "seeds": [run["seed"]],
             "metrics": metrics, "evaluation_protocol": {"tier": "l1_core_mechanism", "diagnostic_only": True,
-                "formal_comparison": False, "claim_policy": "bounded generated-model mechanism; not ARC/Pong or capability improvement"},
+                "formal_comparison": False, "test_read": False, "seeds": [run["seed"]],
+                "claim_policy": "bounded generated-model mechanism; not ARC/Pong or capability improvement"},
             "checkpoint": raw["checkpoint"], "environment": raw["environment"],
             "code_commit": commit, "source_sha256": hashes,
-            "learning_status": "accepted_generated_model" if run["versions"] else "no_accepted_model"}
+            "learning_status": learning_status,
+            "runtime_details": {"population": run.get("population"),
+                                "real_action_budget": run["real_action_budget"],
+                                "initial_observation_sha256": hashlib.sha256(json.dumps(initial, sort_keys=True).encode()).hexdigest(),
+                                "accepted_history_prefix_lengths": [v["real_transitions"] for v in run["versions"]],
+                                "generated_output_tokens": sum(c["output_tokens"] for c in calls),
+                                "truncated_generation_calls": sum(c["budget_reached"] for c in calls)},
+            "limitations": limitations,
+            "provenance": {"original_code_commit": commit,
+                           "artifact_path": "docs/agent-research/2610.11794-memento3/metrics/checkpoint-a100-seed42.json",
+                           "executed_source_sha256": hashes, "dataset_fingerprint": dataset_fingerprint}}
+
+
+def gpu_receipt(raw, curated):
+    if raw.get("accelerator") != "NVIDIA A100-SXM4-80GB":
+        raise ValueError("this receipt must match the observed A100 model")
+    if (curated["metrics"]["generated_compile_calls"] < 1
+            or curated["metrics"]["accepted_versions"] < 1
+            or curated["metrics"]["real_actions"] < 1):
+        raise ValueError("mechanism receipt needs actual generated-code acceptance and real interaction")
+    commit = curated["code_commit"]
+    return {"schema_version": 1, "adapter_key": "memento3", "validated_at": "2026-10-11",
+            "accelerator": {"vendor": "NVIDIA", "model": "A100-SXM4-80GB"},
+            "command": ["python", "scripts/run_memento3_checkpoint.py", "--checkpoint", "checkpoints/qwen2.5-7b",
+                        "--output", "runs/memento3-seed42.json", "--source-commit", commit,
+                        "--seed", str(raw["run"]["seed"]), "--population", str(raw["run"]["population"]),
+                        "--action-budget", str(raw["run"]["real_action_budget"]), "--revisions", "2"],
+            "dataset": {"id": "Gymnasium/FrozenLake-v1", "revision": "gymnasium-1.1.1",
+                        "map_seed": raw["run"]["seed"], "size": 4, "slippery": False,
+                        "fingerprint": curated["provenance"]["dataset_fingerprint"]},
+            "checkpoint": raw["checkpoint"], "result": "passed", "validation_scope": "mechanism_executed_only",
+            "capability_passed": False, "learning_status": curated["learning_status"],
+            "evaluation_tier": "l1_core_mechanism", "metrics": curated["metrics"],
+            "limitations": curated["limitations"] + [
+                "passed means CUDA inference/interpreter/replay safety chain executed; NOT learned world-model success",
+                "initial accepted model falsified after first real action; no surviving model or successful task"],
+            "executed_source_sha256": curated["source_sha256"],
+            "provenance": {"commit": commit, "artifact_path": "docs/gpu-validations/memento3-a100-20261011.json",
+                           "metrics_artifact": curated["provenance"]["artifact_path"], "checkpoint_committed": False}}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--receipt-output", type=Path)
     args = parser.parse_args()
-    result = curate(json.loads(args.input.read_text(encoding="utf-8")))
+    raw = json.loads(args.input.read_text(encoding="utf-8"))
+    result = curate(raw)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.receipt_output:
+        args.receipt_output.parent.mkdir(parents=True, exist_ok=True)
+        args.receipt_output.write_text(json.dumps(gpu_receipt(raw, result), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result["metrics"]))
 
 

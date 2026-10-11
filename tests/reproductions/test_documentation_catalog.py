@@ -85,6 +85,27 @@ def test_reproduction_hub_has_lineage_benchmark_without_paper_navigation_index()
     assert "          - 论文实现:" not in navigation
 
 
+def test_oct11_standalone_papers_are_present_in_all_domain_browse_dimensions():
+    manifest = json.loads((ROOT / "docs/research-manifest.json").read_text())
+    indexed = {(row["domain"], row["key"]): row for row in manifest["papers"]}
+    required = {
+        "foundation-models": {"vfold", "sparse-decoding", "data-space-iteration"},
+        "multimodal-models": {"vcola"},
+        "agent-research": {"memento3", "ontrack", "option-channel-attack"},
+        "post-training": {"pivot", "recal", "zcpo", "opd-learning-signals"},
+    }
+    for domain, keys in required.items():
+        for key in keys:
+            row = indexed[domain, key]
+            for dimension in ("organization", "topic", "year"):
+                catalog = ROOT / "docs" / domain / "catalog" / f"by-{dimension}.md"
+                target = (ROOT / "docs" / row["detail_path"]).resolve()
+                links = re.findall(r"\]\(([^)]+)\)", catalog.read_text())
+                assert any((catalog.parent / href).resolve() == target for href in links), (
+                    domain, key, dimension
+                )
+
+
 def test_catalog_entries_are_one_paper_per_line_with_chinese_summaries():
     catalog_dir = DOCS / "catalog"
     for name in ("by-company.md", "by-topic.md", "by-month.md"):

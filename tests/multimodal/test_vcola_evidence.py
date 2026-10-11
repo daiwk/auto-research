@@ -1,6 +1,7 @@
 from copy import deepcopy
 import importlib.util
 from pathlib import Path
+import json
 
 import pytest
 
@@ -47,6 +48,45 @@ def test_actual_negative_quality_and_physical_lengths_preserved():
     assert metrics['vcola-25-exit24_sampling_seed42']['restricted_first_token_accuracy'] == 0.
     assert metrics['vcola-25-exit24_sampling_seed42']['layer2_visual_tokens_mean'] == 2.
     assert metrics['vcola-25-exit24_sampling_seed42']['layer25_visual_tokens_mean'] == 0.
+
+
+def test_dataset_fingerprint_stable_mapping_order_and_binds_sampling():
+    datasets = report()['datasets']
+    reordered = [{key: item[key] for key in reversed(item)} for item in datasets]
+    assert module.dataset_fingerprint(datasets) == module.dataset_fingerprint(reordered)
+    changed = deepcopy(datasets)
+    changed[0]['selected_indices_sha256'] = 'd' * 64
+    assert module.dataset_fingerprint(datasets) != module.dataset_fingerprint(changed)
+
+
+def test_new_curated_metric_is_schema_v2_migration_idempotent(tmp_path, monkeypatch):
+    """Fixture validates serializer/provenance only; never a GPU receipt claim."""
+    payload = report()
+    payload['accelerator'] = 'NVIDIA A100'
+    input_path = tmp_path / 'mechanism-validation-fixture.json'
+    input_path.write_text(json.dumps(payload))
+    monkeypatch.setattr(module, 'ROOT', tmp_path)
+    monkeypatch.setattr('sys.argv', ['curate_vcola_evidence', '--input', str(input_path),
+                                   '--source-commit', 'test-only'])
+
+    def mocked_source_lookup(command, **kwargs):
+        return 'a' * 40 if kwargs.get('text') else b'validator-test source, not GPU execution'
+
+    monkeypatch.setattr(module.subprocess, 'check_output', mocked_source_lookup)
+    module.main()
+    migration_path = SOURCE.parent / 'migrate_metric_schema_v2.py'
+    migration_spec = importlib.util.spec_from_file_location('vcola_schema_migration_test', migration_path)
+    migration = importlib.util.module_from_spec(migration_spec)
+    migration_spec.loader.exec_module(migration)
+    monkeypatch.setattr(migration, 'ROOT', tmp_path)
+    metric_path = tmp_path / 'docs/multimodal-models/2610.11251-vcola/metrics/cifar10-a100.json'
+    original = metric_path.read_text()
+    metric = json.loads(original)
+    assert metric['provenance']['dataset_fingerprint'] == module.dataset_fingerprint(payload['datasets'])
+    migrated = migration.migrate_payload(metric_path, metric)
+    assert migrated == metric
+    assert json.dumps(migrated, ensure_ascii=False, indent=2) + '\n' == original
+    assert migration.migrate_payload(metric_path, migrated) == migrated
 
 
 @pytest.mark.parametrize('tamper', ['proxy', 'gold', 'full_accuracy', 'test', 'revision', 'baseline',

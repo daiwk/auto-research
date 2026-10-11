@@ -5389,6 +5389,26 @@
         "fingerprint": "61c2b47bcc2dd79d3bb912f07fa7f39d1eb4ed6b800be04fc4cbf8768448350a"
       }
     ],
+    "src/auto_research/agent_research/memento3.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "update",
+        "line": 192,
+        "qualified_name": "Memento3.update",
+        "expression": "self.revision_rounds += 1",
+        "fingerprint": "85d1c2d922fc4528a69292b66fdd340db4da8a6fcf829a05bb982c6dc768bcbe"
+      }
+    ],
+    "src/auto_research/agent_research/memento3_python.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_tick",
+        "line": 138,
+        "qualified_name": "RestrictedProgram._tick",
+        "expression": "self.fuel -= 1",
+        "fingerprint": "ee4e810718f0dc9c1bd8c8f8d895915e7e05f3dd76312565b3925939f0bed34e"
+      }
+    ],
     "src/auto_research/agent_research/method_families/memory.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10857,6 +10877,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/foundation/data_space_iteration.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 212,
+        "qualified_name": "DMDTrainer.step",
+        "expression": "self.iteration += 1",
+        "fingerprint": "1a58fb22f61c70d463e8c573c33cf338e473eb70c7a2e6cccab52073521daa0a"
+      }
+    ],
     "src/auto_research/foundation/sparse_decoding.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11625,6 +11655,40 @@
         "qualified_name": "_ground_truth",
         "expression": "(row.get('extra_info') or {}).get('answer')",
         "fingerprint": "67bb4be4703a0e587099f58534c4cf2af49acfca7c9af921eafcf91ebb65c272"
+      }
+    ],
+    "src/auto_research/post_training/sguid_checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "evaluate",
+        "line": 292,
+        "qualified_name": "evaluate",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "curate",
+        "line": 305,
+        "qualified_name": "curate",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "curate",
+        "line": 306,
+        "qualified_name": "curate",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "distill",
+        "line": 345,
+        "qualified_name": "distill",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
     "src/auto_research/reasoning_budget.py": [

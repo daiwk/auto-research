@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成模型 | [Few-Step Generation via Data-Space Iteration](2610.12102-data-space-iteration/README.md) | ByteDance Seed，2026-10-08 | [已开源](https://arxiv.org/html/2610.12102v1#A5) | `data-space-iteration` |
 | 训练优化与稳定性 | [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](2610.12444-adamw4bit/README.md) | University of California, Berkeley / Nubank，2026-10-08 | [已开源](https://github.com/nubank/adamw4bit) | `adamw4bit` |
 | 稀疏专家与路由 | [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](2610.11575-elastic-expert-routing/README.md) | Shanghai AI Laboratory / Shanghai Jiao Tong University，2026-10-08 | 未找到作者公开代码 | `elastic-expert-routing` |
 | 推理与系统效率 | [SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference](2610.12327-sparse-decoding/README.md) | Westlake University，2026-10-08 | 尚未发布；项目页 Code (soon): https://wang-qitong.github.io/SparseDecoding/ | `sparse-decoding` |

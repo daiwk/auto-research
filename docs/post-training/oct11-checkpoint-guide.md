@@ -9,6 +9,12 @@ python scripts/run_vfold_checkpoint.py --help
 python scripts/run_recal_checkpoint.py --help
 python scripts/run_zcpo_checkpoint.py --help
 python scripts/run_opd_learning_signals.py --help
+python scripts/prepare_pivot_banking77.py --help
+python scripts/run_pivot_checkpoint.py --help
+python scripts/run_sguid_checkpoint.py --help
+python scripts/run_memento3_checkpoint.py --help
+python scripts/run_vcola_checkpoint.py --help
+python scripts/run_data_space_iteration.py --help
 ```
 
 ## 公共模型和数据
@@ -35,5 +41,16 @@ python scripts/run_zcpo_checkpoint.py \
 其他论文的可执行完整 argv 在各自 GPU 回执的 `command` 中；`checkpoints/*` 是需要替换的本地公开 checkpoint 目录。回执不包含权重，只保存可审查命令、revision、执行提交和源码哈希。
 
 ## 能说明什么
+
+PIVOT 使用单独的 Banking77 官方 train-only 385/77 分区与 Qwen2.5-0.5B / 7B，不能把 GSM8K 路径直接代入领域实验。其 GPU 回执包含可改路径的完整三配方命令和固定模型版本；8 题短跑三配方准确率均为 0%，保留为真实机制诊断。
+
+## 其他领域的入口
+
+- [SGUID](2610.12367-sguid/README.md)：真实支持 thinking 切换的 Qwen3.5-9B 文本分支；GSM8K 训练集派生 holdout。实际渲染前缀必须通过检查，不能以模型接受参数代替协议核验。两轮 GPU 运行尚未验收。
+- [Memento3](../agent-research/2610.11794-memento3/README.md)：公开 7B 生成世界模型，通过有界 AST 解释器与真实 FrozenLake 交互。该运行模型被证伪且任务失败，不代表 ARC/Pong 复现成功。
+- [V-CoLA](../multimodal-models/2610.11251-vcola/README.md)：真实 9B 多模态 checkpoint 与 CIFAR-10 train-only 图像；实际状态贡献、视觉合并和退出，受限首字母诊断不等于完整生成准确率。
+- [Data-Space Iteration](../foundation-models/2610.12102-data-space-iteration/README.md)：公开 CIFAR-10 训练图像上从零训练小 UNet teacher，再分别运行两种 DMD 配方；三种子结果混合，像素池化距离不是论文 FID。
+
+图像入口只需要官方五份 CIFAR-10 `data_batch_*` 训练文件，逐份核验 MD5；不要传入官方 test 来代替 validation。各方法使用自己的预算和评价合同，不能把不同领域的短诊断指标直接横向排名。
 
 这些结果验证真实 forward/backward、参数或缓存改变及数据隔离。单 seed、几道验证题不能支撑稳定提升；LoRA 位移不是全参数位移，持久缓存占用不是端到端峰值或延迟。Evolve 只有在控制器能调用并评估算子后才登记为已集成；本批除 ZIP/ZE 优化器外，没有据论文名称自动晋级。

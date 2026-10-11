@@ -51,7 +51,7 @@ def fixture():
            "implementation_commit": "a" * 40,
            "source_sha256": {p: hashlib.sha256(b"fixture").hexdigest() for p in curator.SOURCES},
            "checkpoint_calls": [{"input_tokens": 10, "output_tokens": 10} for _ in calls],
-           "run": {"seed": 42, "initial_observation": INITIAL, "real_actions": 0,
+           "run": {"seed": 42, "population": 1, "initial_observation": INITIAL, "real_actions": 0,
                    "real_action_budget": 8, "goal_completed": False, "terminated": False,
                    "interactions": [], "calls": calls, "accepted_versions": 1,
                    "versions": controller.versions, "valid_final_members": 1, "events": controller.events}}
@@ -119,6 +119,35 @@ def test_no_accepted_model_preserved_explicitly():
     raw["run"]["events"] = []
     result = check(raw)
     assert result["learning_status"] == "no_accepted_model"
+
+
+def test_initially_accepted_but_falsified_model_never_labelled_as_success():
+    raw = fixture()
+    raw["run"].update(real_actions=1, valid_final_members=0)
+    raw["run"]["interactions"] = [{"action": 0, "observation": {**INITIAL, "grid": [[3, 4]]}}]
+    result = check(raw)
+    assert result["learning_status"] == "falsified_generated_model"
+    assert result["metrics"]["accepted_versions"] == 1
+    assert result["metrics"]["valid_final_members"] == 0
+
+
+def test_gpu_receipt_passed_is_execution_only_not_capability_success():
+    raw = fixture()
+    raw["accelerator"] = "NVIDIA A100-SXM4-80GB"
+    raw["run"].update(real_actions=1, valid_final_members=0)
+    raw["run"]["interactions"] = [{"action": 0, "observation": {**INITIAL, "grid": [[3, 4]]}}]
+    result = curator.gpu_receipt(raw, check(raw))
+    assert result["result"] == "passed"
+    assert result["validation_scope"] == "mechanism_executed_only"
+    assert result["capability_passed"] is False
+    assert result["learning_status"] == "falsified_generated_model"
+
+
+def test_gpu_receipt_cannot_pass_without_real_generated_model_interaction():
+    raw = fixture()
+    raw["accelerator"] = "NVIDIA A100-SXM4-80GB"
+    with pytest.raises(ValueError, match="real interaction"):
+        curator.gpu_receipt(raw, check(raw))
 
 
 def test_executed_checkpoint_call_token_counter_mismatch_rejected():

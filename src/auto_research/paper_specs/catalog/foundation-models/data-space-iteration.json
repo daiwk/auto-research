@@ -1,0 +1,16 @@
+{
+  "domain": "foundation-models",
+  "key": "data-space-iteration",
+  "title": "Few-Step Generation via Data-Space Iteration",
+  "paper_url": "https://arxiv.org/abs/2610.12102",
+  "detail_path": "foundation-models/2610.12102-data-space-iteration/README.md",
+  "topic": ["生成模型", "少步生成与蒸馏"],
+  "first_author": "Shanchuan Lin",
+  "first_author_affiliation": "ByteDance Seed",
+  "published": "2026-10-08",
+  "code": "https://arxiv.org/html/2610.12102v1#A5",
+  "adapter": "data-space-iteration",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/data-space-iteration-a100-20261011.json"
+}

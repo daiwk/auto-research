@@ -1,0 +1,16 @@
+{
+  "domain": "multimodal-models",
+  "key": "vcola",
+  "title": "V-CoLA: Vision Token Compression with Linear Attention",
+  "paper_url": "https://arxiv.org/abs/2610.11251",
+  "detail_path": "multimodal-models/2610.11251-vcola/README.md",
+  "topic": ["多模态推理效率", "视觉 Token 压缩"],
+  "first_author": "Hao Jiang",
+  "first_author_affiliation": "Alibaba Cloud Computing / Alibaba Group",
+  "published": "2026-10-08",
+  "code": null,
+  "adapter": "vcola",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/vcola-a100-20261011.json"
+}

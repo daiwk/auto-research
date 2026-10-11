@@ -16,6 +16,10 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "data-space-iteration": "docs/gpu-validations/data-space-iteration-a100-20261011.json",
+    "vcola": "docs/gpu-validations/vcola-a100-20261011.json",
+    "memento3": "docs/gpu-validations/memento3-a100-20261011.json",
+    "pivot": "docs/gpu-validations/pivot-a100-20261011.json",
     "sparse-decoding": "docs/gpu-validations/sparse-decoding-a100-20261011.json",
     "option-channel-attack": "docs/gpu-validations/option-channel-attack-a100-20261011.json",
     "vfold": "docs/gpu-validations/vfold-a100-20261011.json",

@@ -23,7 +23,7 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ### 论文实现与评测
 
-每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度。当前包含四个研究域：
+每篇论文拥有独立模型、实验和报告代码，并强制声明复现保真度。当前包含六个研究域：
 
 - **搜广推与 LLM 应用**：召回、粗排/精排、混排、内容理解、审核风控、广告、生成式推荐及 LLM 工业应用，要求真实
   线上 A/B 或用户明确认可的全流量证据；
@@ -32,6 +32,8 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 - **LLM 后训练**：偏好优化、RL、OPD、reward 与训练稳定性；
 - **Agent**：记忆、规划、工具使用和自我进化方法；既有可重复 mini-suite，也有真实
   临时仓库、文件编辑与回归测试的代码 Agent sandbox。
+- **多模态大模型**：视觉/音频/视频表示、连接器、真实 checkpoint 评测与推理效率；
+- **结构化决策 / System One（JEV）**：离散决策模型、公开实现对照及可审计的决策接口。
 
 ### 自动研究与进化
 
@@ -52,9 +54,14 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
-最新[七篇补漏批次](recent-paper-scan-20261004-followup.md)包含 Jev lookahead、T2SPO、
+[10 月 4 日七篇补漏批次](recent-paper-scan-20261004-followup.md)包含 Jev lookahead、T2SPO、
 Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机制 API；T2SPO
 另有真实官方 TabPFN checkpoint 的 CPU 三种子验证，不计作完整 LLM/Agent benchmark 复现。
+
+[10 月 11 日实现与收口批次](research-audits/oct11-implementation-scope.md)逐项记录
+12 篇论文、OPD 诊断设施与四项收口的实际状态。真实 GPU 命令、固定模型/数据版本、
+负结果和未完成原始 benchmark 都保留在各篇详情与[运行审计](research-audits/oct11-runtime-audit.md)中；
+“机制执行通过”不等同于“模型效果提高”，也不自动表示已接入 Evolve。
 
 仓库目前注册 **371 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](research-manifest.json)。站点提供按研究域、机构、

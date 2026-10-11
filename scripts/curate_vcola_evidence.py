@@ -20,6 +20,13 @@ def finite(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
+def dataset_fingerprint(datasets):
+    """Bind fixed train-file revisions and actual sampled holdout provenance."""
+    canonical = json.dumps(datasets, sort_keys=True, ensure_ascii=False,
+                           separators=(',', ':'), allow_nan=False)
+    return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
+
+
 def summarize(report):
     protocol = report.get('protocol', {})
     required = {'first_layer_real_delta_state_capture': True, 'state_scores_not_feature_proxy': True,
@@ -122,6 +129,7 @@ def main():
     args = parser.parse_args()
     report = json.loads(args.input.read_text())
     metrics, seeds = summarize(report)
+    fingerprint = dataset_fingerprint(report['datasets'])
     commit = subprocess.check_output(['git', 'rev-parse', args.source_commit], cwd=ROOT, text=True).strip()
     hashes = {s: hashlib.sha256(subprocess.check_output(['git', 'show', f'{commit}:{s}'], cwd=ROOT)).hexdigest()
               for s in SOURCES}
@@ -141,7 +149,7 @@ def main():
             'claim_policy': 'actual frozen-checkpoint state/compression mechanism, no quality/speedup claim'},
         'runtime_details': report, 'limitations': limitations,
         'provenance': {'original_code_commit': commit, 'artifact_path': metric_path,
-                       'executed_source_sha256': hashes}}
+                       'executed_source_sha256': hashes, 'dataset_fingerprint': fingerprint}}
     receipt = {'schema_version': 1, 'adapter_key': 'vcola', 'validated_at': '2026-10-11',
         'accelerator': {'vendor': 'NVIDIA', 'model': report['accelerator']},
         'command': ['python', 'scripts/run_vcola_checkpoint.py', '--checkpoint', 'checkpoints/qwen3.5-9b',
@@ -153,7 +161,7 @@ def main():
         'evaluation_tier': 'l1_mechanism', 'limitations': limitations, 'seeds': seeds,
         'executed_source_sha256': hashes,
         'provenance': {'commit': commit, 'artifact_path': receipt_path, 'metrics_artifact': metric_path,
-                       'checkpoint_committed': False}}
+                       'checkpoint_committed': False, 'dataset_fingerprint': fingerprint}}
     for relative, payload in ((metric_path, metric), (receipt_path, receipt)):
         path = ROOT / relative
         path.parent.mkdir(parents=True, exist_ok=True)

@@ -11,6 +11,7 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | 程序进化 | [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](2610.12086-evoalloc/README.md) | King Abdullah University of Science and Technology，2026-10-08 | 未发现官方代码 | `evoalloc` |
+| 世界模型 | [Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks](2610.11794-memento3/README.md) | University College London，2026-10-08 | 未发现官方代码 | `memento3` |
 | Agent 安全 | [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](2610.12292-option-channel-attack/README.md) | University of Southern California，2026-10-08 | [已开源](https://github.com/ArminAzizi98/option-channel-attack) | `option-channel-attack` |
 | Agent 安全 | [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](2610.12375-ontrack/README.md) | Cribl AI，2026-10-08 | 未发现官方代码 | `ontrack` |
 | 递归自改进 | [Recursive Self-Improvement through Multi-Agent Self-Supervision](2610.12176-mass/README.md) | UC Berkeley，2026-10-08 | [已开源](https://github.com/SakanaAI/mass) | `mass` |
