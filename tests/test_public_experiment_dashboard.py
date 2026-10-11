@@ -7,6 +7,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_dashboard_dataset_label_does_not_dump_revision_manifest():
+    from scripts.generate_public_experiment_dashboard import _dataset_name
+
+    source = {"dataset": {"id": "WikiText-2", "revision": {"train": "a" * 64}}}
+    assert _dataset_name(str(source['dataset']), source) == 'WikiText-2'
+    assert _dataset_name('', {'dataset': {'name': 'CIFAR-10'}}) == 'CIFAR-10'
+    assert _dataset_name('legacy-dataset', {}) == 'legacy-dataset'
+    assert _dataset_name('', {'benchmark': 'public-benchmark'}) == 'public-benchmark'
+
+
 def test_explicit_diagnostic_flags_override_formal_labels():
     from scripts.generate_public_experiment_dashboard import _agent_evidence
 
