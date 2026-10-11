@@ -46,7 +46,7 @@ PIVOT 使用单独的 Banking77 官方 train-only 385/77 分区与 Qwen2.5-0.5B 
 
 ## 其他领域的入口
 
-- [SGUID](2610.12367-sguid/README.md)：真实支持 thinking 切换的 Qwen3.5-9B 文本分支；GSM8K 训练集派生 holdout。实际渲染前缀必须通过检查，不能以模型接受参数代替协议核验。两轮 GPU 运行尚未验收。
+- [SGUID](2610.12367-sguid/README.md)：真实支持 thinking 切换的 Qwen3.5-9B 文本分支；GSM8K 训练集派生 holdout。A100 第一轮完成、第二轮持久性筛选失败并精确恢复；没有通过回执，整体两轮尚未验收。实际渲染前缀必须通过检查，不能以模型接受参数代替协议核验。
 - [Memento3](../agent-research/2610.11794-memento3/README.md)：公开 7B 生成世界模型，通过有界 AST 解释器与真实 FrozenLake 交互。该运行模型被证伪且任务失败，不代表 ARC/Pong 复现成功。
 - [V-CoLA](../multimodal-models/2610.11251-vcola/README.md)：真实 9B 多模态 checkpoint 与 CIFAR-10 train-only 图像；实际状态贡献、视觉合并和退出，受限首字母诊断不等于完整生成准确率。
 - [Data-Space Iteration](../foundation-models/2610.12102-data-space-iteration/README.md)：公开 CIFAR-10 训练图像上从零训练小 UNet teacher，再分别运行两种 DMD 配方；三种子结果混合，像素池化距离不是论文 FID。

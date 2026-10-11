@@ -18,6 +18,8 @@ def main():
                           ("retrieve-count", 6), ("late-minimum", 2)):
         parser.add_argument("--" + name, type=int, default=default)
     parser.add_argument("--device", default="cuda")
+    parser.add_argument("--evaluation-max-tokens", type=int, default=None,
+                        help="Fixed validation-only token budget; defaults to --max-tokens")
     result = run(**vars(parser.parse_args()))
     if result["status"] != "completed":
         raise SystemExit("SGUID failed persistence selection; retained artifact, no fallback")

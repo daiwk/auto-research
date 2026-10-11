@@ -171,6 +171,11 @@ def summarize(report):
                   "training_examples", "candidate_count", "retrieve_count", "full_vocabulary_size"):
         if not isinstance(protocol.get(field), int) or protocol[field] < 1:
             raise ValueError("actual nonzero execution budgets required")
+    from auto_research.post_training.sguid_checkpoint import evaluation_token_budget
+    # Missing/None means the original shared generation cap. Never infer a
+    # larger budget from a validation outcome or rewrite historical evidence.
+    evaluation_budget = evaluation_token_budget(protocol["max_tokens"],
+                                                 protocol.get("evaluation_max_tokens"))
     if protocol["full_vocabulary_size"] < 1000:
         raise ValueError("real public model full vocabulary required")
     previous_policy = None
@@ -247,6 +252,7 @@ def summarize(report):
     if report["baseline"]["examples"] != report["final_validation"]["examples"]:
         raise ValueError("same bounded validation case count required")
     return {"completed_rounds": 2, "adapter_parameter_delta_l2": report["adapter_parameter_delta_l2"],
+            "evaluation_max_tokens": evaluation_budget,
             "baseline_validation_exact_match": report["baseline"]["exact_match"],
             "final_validation_exact_match": report["final_validation"]["exact_match"],
             "validation_examples": report["final_validation"]["examples"],
@@ -290,6 +296,8 @@ def curate(report, *, commit, validated_at, committed_hashes):
     for name in ("training_examples", "probe_steps", "internalization_steps", "max_tokens", "skill_tokens",
                  "candidate_count", "retrieve_count", "late_minimum", "rounds"):
         command += ["--" + name.replace("_", "-"), str(protocol[name])]
+    if protocol.get("evaluation_max_tokens") is not None:
+        command += ["--evaluation-max-tokens", str(metrics["evaluation_max_tokens"])]
     command += ["--validation-examples", str(metrics["validation_examples"]), "--seed", str(seed),
                 "--device", "cuda", "--output", f"runs/sguid-seed{seed}.json"]
     payload = {"schema_version": 2, "manifest_ref": "post-training:sguid", "method": "sguid",
@@ -311,12 +319,24 @@ def curate(report, *, commit, validated_at, committed_hashes):
     return {metric_path: payload, receipt_path: receipt}
 
 
-def failure_diagnostic(report):
+def failure_diagnostic(report, *, commit, validated_at, committed_hashes):
     _validate_base(report)
     if report.get("status") != "failed" and not any(r.get("status") == "failed" for r in report.get("rounds", [])):
         raise ValueError("actual failed selection/round required for failure-only archive")
+    if committed_hashes != report["executed_source_sha256"]:
+        raise ValueError("executed source differs from historical committed source")
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("full historical source commit required")
+    date.fromisoformat(validated_at)
+    stable = deepcopy(report)
+    for record in stable.get("rounds", []):
+        for trace in record.get("curation", []):
+            trace.pop("student_rollout", None)
+            trace.pop("generated_skill_response", None)
     return {"schema_version": 1, "adapter_key": "sguid", "result": "failed",
-            "diagnostic_only": True, "gpu_pass_receipt": False, "runtime_details": report}
+            "diagnostic_only": True, "gpu_pass_receipt": False, "runtime_details": stable,
+            "provenance": {"original_code_commit": commit, "validated_at": validated_at,
+                           "executed_source_sha256": committed_hashes}}
 
 
 def main():
@@ -327,11 +347,13 @@ def main():
     parser.add_argument("--failure-output", type=Path)
     args = parser.parse_args()
     report = json.loads(args.input.read_text())
+    commit = subprocess.check_output(["git", "rev-parse", args.source_commit], cwd=ROOT, text=True).strip()
     if args.failure_output:
         args.failure_output.parent.mkdir(parents=True, exist_ok=True)
-        args.failure_output.write_text(json.dumps(failure_diagnostic(report), indent=2, allow_nan=False) + "\n")
+        args.failure_output.write_text(json.dumps(failure_diagnostic(
+            report, commit=commit, validated_at=args.validated_at,
+            committed_hashes=source_hashes(commit)), indent=2, allow_nan=False) + "\n")
         return
-    commit = subprocess.check_output(["git", "rev-parse", args.source_commit], cwd=ROOT, text=True).strip()
     for relative, payload in curate(report, commit=commit, validated_at=args.validated_at,
                                     committed_hashes=source_hashes(commit)).items():
         target = ROOT / relative

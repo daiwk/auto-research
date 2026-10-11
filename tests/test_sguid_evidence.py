@@ -105,6 +105,36 @@ def test_accounting_fixture_retains_negative_validation_and_truncation():
     assert all(r["probe_updates"] == 4 for r in summary["rounds"])
 
 
+@pytest.mark.parametrize("invalid", [True, False, 0, -1, 1.5, "3072"])
+def test_curator_rejects_invalid_independent_evaluation_budget(invalid):
+    report = accounting_fixture()
+    report["protocol"]["evaluation_max_tokens"] = invalid
+    with pytest.raises(ValueError, match="positive integer"):
+        module().summarize(report)
+
+
+@pytest.mark.parametrize("case", ["missing", "none", "explicit"])
+def test_curator_preserves_legacy_or_explicit_evaluation_budget_and_argv(case):
+    report = accounting_fixture()
+    if case != "missing":
+        report["protocol"]["evaluation_max_tokens"] = 3072 if case == "explicit" else None
+    outputs = module().curate(report, commit="c" * 40, validated_at="2026-10-11",
+                              committed_hashes=report["executed_source_sha256"])
+    receipt = next(v for k, v in outputs.items() if "/gpu-validations/" in k)
+    expected = 3072 if case == "explicit" else report["protocol"]["max_tokens"]
+    assert receipt["metrics"]["evaluation_max_tokens"] == expected
+    if case == "explicit":
+        assert receipt["command"][receipt["command"].index("--evaluation-max-tokens") + 1] == str(expected)
+    else:
+        # Historical source had no such CLI flag; do not invent a new argv.
+        assert "--evaluation-max-tokens" not in receipt["command"]
+    assert receipt["command"][receipt["command"].index("--max-tokens") + 1] == "512"
+    if case == "missing":
+        assert "evaluation_max_tokens" not in report["protocol"]
+    else:
+        assert report["protocol"]["evaluation_max_tokens"] == (3072 if case == "explicit" else None)
+
+
 @pytest.mark.parametrize("corruption", ["unsupported", "ignored", "digest", "effective", "class", "modules"])
 def test_curator_rejects_unverified_actual_thinking_or_backbone(corruption):
     report = accounting_fixture()
@@ -205,8 +235,17 @@ def test_failed_selection_can_be_archived_but_never_promoted_to_gpu_pass():
     report = accounting_fixture()
     report["status"] = report["rounds"][0]["status"] = "failed"
     report["rounds"][0]["failure"] = "no skills passed the persistence criterion"
-    diagnostic = module().failure_diagnostic(report)
+    diagnostic = module().failure_diagnostic(report, commit="c" * 40,
+        validated_at="2026-10-11", committed_hashes=report["executed_source_sha256"])
     assert diagnostic["result"] == "failed" and diagnostic["gpu_pass_receipt"] is False
+    trace = diagnostic["runtime_details"]["rounds"][0]["curation"][0]
+    assert "student_rollout" not in trace and "generated_skill_response" not in trace
+    assert trace["student_rollout_sha256"] and trace["generated_skill_sha256"]
+    hashes = report["executed_source_sha256"].copy()
+    hashes[next(iter(hashes))] = sha("wrong source")
+    with pytest.raises(ValueError, match="executed source"):
+        module().failure_diagnostic(report, commit="c" * 40,
+            validated_at="2026-10-11", committed_hashes=hashes)
     with pytest.raises(ValueError, match="failed/partial"):
         module().curate(report, commit="c" * 40, validated_at="2026-10-11",
                        committed_hashes=report["executed_source_sha256"])

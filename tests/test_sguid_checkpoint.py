@@ -7,9 +7,80 @@ torch = pytest.importorskip("torch")
 from auto_research.post_training.oct11_objectives import SkillActivity
 from auto_research.post_training.sguid_checkpoint import (
     _embedding, _language_backbone, _response_logits, adapter_digest, co_evolve, curation_prompt, parse_skill,
-    signed_forward_kl, skill_teacher_prompt, snapshot_adapters,
+    evaluation_token_budget, signed_forward_kl, skill_teacher_prompt, snapshot_adapters,
     step_if_finite_nonzero_gradient, thinking_template_audit,
 )
+
+
+@pytest.mark.parametrize("invalid", [True, False, 0, -1, 1.5, "3072"])
+def test_evaluation_budget_rejects_bool_and_nonpositive_noninteger(invalid):
+    with pytest.raises(ValueError, match="positive integer"):
+        evaluation_token_budget(1024, invalid)
+
+
+def test_evaluation_budget_preserves_none_legacy_and_fixed_explicit_cap():
+    assert evaluation_token_budget(1024) == 1024
+    assert evaluation_token_budget(1024, None) == 1024
+    assert evaluation_token_budget(1024, 3072) == 3072
+    with pytest.raises(ValueError, match="positive integer"):
+        evaluation_token_budget(True)
+
+
+def test_evaluation_cap_never_changes_training_or_skill_generation_budget(monkeypatch, tmp_path):
+    """CPU wiring fixture only; not a training run or a GPU receipt."""
+    import sys
+    import auto_research.post_training.sguid_checkpoint as runner
+
+    def template(messages, *, enable_thinking, **kwargs):
+        return messages[0]["content"] + ("<think>" if enable_thinking else "<think></think>")
+
+    tokenizer = SimpleNamespace(chat_template="switchable", apply_chat_template=template,
+                                pad_token=None, eos_token="eos")
+    monkeypatch.setitem(sys.modules, "transformers", SimpleNamespace(
+        AutoTokenizer=SimpleNamespace(from_pretrained=lambda *a, **kw: tokenizer)))
+    split = {"verified": True, "source_id": "public/train-only"}
+    monkeypatch.setattr(runner, "validate_holdout", lambda *a, **kw: split)
+    train_path, valid_path = tmp_path / "train.jsonl", tmp_path / "validation.jsonl"
+    monkeypatch.setattr(runner, "load_public_rows", lambda path: [
+        {"question": "TRAIN" if path == train_path else "VALIDATION", "answer": "#### 1"}])
+    model = torch.nn.Linear(1, 3)
+    model.model = torch.nn.Identity()
+    model.get_output_embeddings = lambda: model
+    monkeypatch.setattr(runner, "_load_checkpoint", lambda *a: (model, {"fixture": True}))
+
+    def install(current, rank):
+        model.weight.requires_grad_(True)
+        return 1
+
+    monkeypatch.setattr(runner, "install_lora", install)
+    calls = []
+
+    def generate(current, tok, text, device, budget, *, sample=True, thinking=False):
+        calls.append((text, budget, thinking))
+        response = ('{"title":"Units","principle":"Normalize units before doing arithmetic."}'
+                    if text.startswith("Extract one reusable") else "#### 1")
+        return None, None, response, True
+
+    monkeypatch.setattr(runner, "_generate", generate)
+
+    def wiring(current, rows, *, curate, **kwargs):
+        assert [r["question"] for r in rows] == ["TRAIN"]
+        for r in range(2):
+            bank, _ = curate(current, rows, r)
+            assert len(bank) == 1
+        return [{"status": "completed"}, {"status": "completed"}]
+
+    monkeypatch.setattr(runner, "co_evolve", wiring)
+    report = runner.run(checkpoint_path=tmp_path, checkpoint_id="public/model", checkpoint_revision="a" * 40,
+        train_path=train_path, validation_path=valid_path, dataset_revision="b" * 40,
+        split_manifest=tmp_path, output=tmp_path / "fixture.json", device="cpu",
+        max_tokens=1024, skill_tokens=256, evaluation_max_tokens=3072)
+    assert [c[1:] for c in calls if c[0] == "VALIDATION"] == [(3072, True)] * 2
+    assert [c[1:] for c in calls if c[0] == "TRAIN"] == [(1024, False)] * 2
+    assert [c[1:] for c in calls if c[0].startswith("Extract one reusable")] == [(256, False)] * 2
+    assert report["protocol"]["evaluation_max_tokens"] == 3072
+    assert report["protocol"]["max_tokens"] == 1024
+    assert report["validation_used_for_selection"] is False
 
 
 def test_thinking_audit_checks_actual_prefixes_not_accepted_kwarg():

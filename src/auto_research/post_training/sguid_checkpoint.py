@@ -251,13 +251,23 @@ def _embedding(model, tokenizer, text, device):
     return torch.nn.functional.normalize(vector, dim=0)
 
 
+def evaluation_token_budget(max_tokens, evaluation_max_tokens=None):
+    """Fixed measurement budget; None keeps the historical shared-token behavior."""
+    budget = max_tokens if evaluation_max_tokens is None else evaluation_max_tokens
+    if isinstance(budget, bool) or not isinstance(budget, int) or budget < 1:
+        raise ValueError("evaluation_max_tokens must be a positive integer or None")
+    return budget
+
+
 def run(*, checkpoint_path, checkpoint_id, checkpoint_revision, train_path,
         validation_path, dataset_revision, split_manifest, output, seed=42,
         training_examples=8, validation_examples=8, rounds=2, probe_steps=8,
         internalization_steps=8, max_tokens=512, skill_tokens=256,
-        candidate_count=8, retrieve_count=6, late_minimum=2, device="cuda"):
+        candidate_count=8, retrieve_count=6, late_minimum=2, device="cuda",
+        evaluation_max_tokens=None):
     from transformers import AutoTokenizer
 
+    evaluation_budget = evaluation_token_budget(max_tokens, evaluation_max_tokens)
     if (rounds != 2 or min(training_examples, validation_examples, probe_steps,
             internalization_steps, max_tokens, skill_tokens, candidate_count,
             retrieve_count, late_minimum) < 1 or probe_steps < 4):
@@ -288,7 +298,7 @@ def run(*, checkpoint_path, checkpoint_id, checkpoint_revision, train_path,
         correct, eos = 0, 0
         for row in valid:
             _, _, text, finished = _generate(model, tokenizer, row["question"], device,
-                                             max_tokens, sample=False, thinking=True)
+                                             evaluation_budget, sample=False, thinking=True)
             correct += verified_reward(text, row["answer"])
             eos += finished
         return {"examples": len(valid), "exact_match": correct / len(valid),
@@ -398,6 +408,7 @@ def run(*, checkpoint_path, checkpoint_id, checkpoint_revision, train_path,
                "protocol": {"rounds": rounds, "training_examples": len(train),
                    "probe_steps": probe_steps, "internalization_steps": internalization_steps,
                    "max_tokens": max_tokens, "skill_tokens": skill_tokens,
+                   "evaluation_max_tokens": evaluation_budget,
                    "candidate_count": candidate_count, "retrieve_count": retrieve_count,
                    "kappa": .05, "gap_clip": 3., "tau": 5., "late_minimum": late_minimum,
                    "compact_counts": [6, 3], "teacher": "live synchronized same-model no_grad",
