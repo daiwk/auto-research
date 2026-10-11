@@ -20,7 +20,7 @@
 | Memento3，真实冻结 7B | 初始观察接受 1 个生成模型；第一次真实动作即失配，修复失败，最终有效模型 0、任务未完成 | 记录 `falsified_generated_model`。GPU 通过只指安全解释/验证/失配链真实执行，明确 `capability_passed=false`；不添加手写导航 fallback |
 | SGUID，首轮 4B probe | 8 步有真实梯度与参数更新，但技能支持信号全部非正，持久性筛选无可选技能；同时发现 Instruct-2507 的模板并不支持 thinking 切换 | 保留失败结果，不降低 h/阈值。旧运行不能充当 thinking 协议或两轮自蒸馏通过；需核验模板实际行为而非只记录请求参数 |
 | SGUID，9B 两轮实跑 | 实际 thinking 切换通过；第一轮 32 步探测筛出 6 技能并完成 16 步蒸馏。第二轮 32 步探测晚期各技能正教学次数最多 1，均不足固定 h=2 | [失败产物](oct11-sguid-failed-selection.json)绑定执行源码。第二轮精确恢复第一轮更新后的权重，未执行第二轮紧凑蒸馏；baseline/final 四题全截断、EM=0。不生成 passed 回执或宣称两轮完成 |
-| V-CoLA，PR 远端 CI | Transformers 5.19 将实例 kernel 改为模块函数，旧捕获路径报 AttributeError；3 项真实小模型测试失败 | 修复接口兼容并保留状态/视觉长度/异常恢复断言；当前红灯未当作通过，本地旧版通过不替代新版验证 |
+| V-CoLA，PR 远端 CI | Transformers 5.19 将实例 kernel 改为模块函数，旧捕获路径报 AttributeError；3 项真实小模型测试失败 | 已补目标实例私有 globals 捕获、保留官方 decorator/dispatch，新旧版本各 29 项通过。最新 A100 5.19 实跑 12 条配对前向通过，baseline 误差 0、state 最大误差 0.001648；回执绑定新源码。远端 CI 仍需新提交重验，不将旧红灯当作通过 |
 | Data-Space，公开依赖与缓存 | 首次缺少 SciPy；曾误把存在但为空的 CIFAR 目录当作缓存；官方远端下载很慢 | 补依赖到本轮临时目录；在用户授权后仅同步 5 份公开训练文件并逐份核对官方 MD5，未同步或读取 test |
 | Data-Space，首次实际 backward | 从冻结 teacher deepcopy 的 student/fake 继承了 `requires_grad=False`，真实 backward 失败 | 拒绝生成通过证据。修正参数训练状态并新增实际训练→冻结→DMD backward 回归，再按冻结源码重新实跑；不能用单测代替 GPU 验证 |
 

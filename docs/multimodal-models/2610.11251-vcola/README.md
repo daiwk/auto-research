@@ -70,7 +70,7 @@ $$
 问题始终列出十个对象类别选项 A–J，不包含该图片的正确类别。外部 scorer 仅检查第一个答案字母的受限分布；`restricted_first_token_accuracy` **不是自由生成答案正确率，也不是完整 VLM 能力评测**。报告同时保留十字母总概率质量与相对 dense 的 KL，避免把极低概率的字母 argmax 当作强能力证据。`sampling_seed` 只用于选择图片，不是独立训练随机种子。
 
 ```bash
-# CUDA、Transformers 5.14.1，以及已下载的固定官方权重和 processor 文件
+# CUDA；已实际验证 Transformers 5.14.1 / 5.19.0，固定官方权重及 processor 文件
 PYTHONPATH=src python scripts/run_vcola_checkpoint.py \
   --checkpoint checkpoints/qwen3.5-9b \
   --data data/cifar10 \
@@ -80,6 +80,8 @@ PYTHONPATH=src python scripts/run_vcola_checkpoint.py \
 
 每个图片/recipe 都保存每层实际 `sequence_tokens`、`visual_tokens`：第一层后应物理缩短，第 25 层开始应没有视觉 Token，文本数量与原始文本 mRoPE 坐标不变。合并视觉位置选择块内最高分的**原始成员位置**，这是本地明确公开的 backend 约定，而非作者未说明的位置策略。异常时恢复原 kernel，不污染后续 dense 基线。
 
+新版 Transformers 将 delta kernel 从实例属性移到模块函数。兼容实现只临时给目标实例绑定保留原 decorator/dispatch 的私有 forward globals，不修改模块或类全局；异常精确恢复，其他实例和线程不共享捕获。5.14 / 5.19 各 29 项回归验证数值、真实视觉长度、并发隔离与失败恢复。A100 最新产物记录 `transformers_version=5.19.0`、实际 `delta_capture_api=private_forward_globals`，不是仅修复属性名的 CPU smoke。
+
 ### 真实 GPU 小样本结果
 
 固定 sampling seed 42 的 4 张训练留出图片，三条配对前向都实际执行：
@@ -87,10 +89,10 @@ PYTHONPATH=src python scripts/run_vcola_checkpoint.py \
 | 配方 | 首字母受限正确数 | 第 2 层视觉 Token | 第 25 层视觉 Token | 相对 dense 字母 KL 均值 |
 | --- | --- | --- | --- | --- |
 | 原始 dense | 4 / 4 | 49 | 49 | 0 |
-| V-CoLA 50% + exit24 | 4 / 4 | 24 | 0 | 0.001490 |
-| V-CoLA 25% + exit24 | 4 / 4 | 12 | 0 | 0.029877 |
+| V-CoLA 50% + exit24 | 4 / 4 | 24 | 0 | 0.001439 |
+| V-CoLA 25% + exit24 | 4 / 4 | 12 | 0 | 0.030911 |
 
-未压缩 backend 与官方完整前向 logits 相对误差为 0；实际 delta state 重放最大相对误差约 0.002743。十字母总概率质量均值约 0.99894 / 0.99895 / 0.99904，说明这几张样本中原模型确实遵从了字母格式。
+最新 5.19 实跑的未压缩 backend 与同版本官方完整前向 logits 相对误差为 0；实际 delta state 重放最大相对误差约 0.001648。十字母总概率质量均值约 0.99901 / 0.99912 / 0.99902。此前 5.14 运行同样通过，state 误差 0.002743、两条压缩 KL 0.001490 / 0.029877；依赖版本改变带来数值差异，不能把两版绝对数值混成同一运行或拿误差变化当作质量提升。
 
 **4 / 4 不是“模型能力达到 100%”，也不能证明压缩无损。** 此实验确认原始 9B、真实图像、实际状态/Token 合并/早退路径和评分隔离能运行，暂不支持 benchmark 泛化、显著性、完整生成质量或速度提升。
 

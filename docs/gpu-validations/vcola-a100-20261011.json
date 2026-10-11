@@ -68,10 +68,10 @@
     "dense_sampling_seed42": {
       "evaluated_images": 4,
       "restricted_first_token_accuracy": 1.0,
-      "restricted_choice_probability_mass_mean": 0.9989432990550995,
+      "restricted_choice_probability_mass_mean": 0.9990093111991882,
       "restricted_choice_kl_to_dense_mean": 0.0,
       "dense_backend_relative_error_max": 0.0,
-      "state_replay_relative_error_max": 0.0027432553470134735,
+      "state_replay_relative_error_max": 0.0016478096367791295,
       "original_visual_tokens_mean": 49.0,
       "layer2_visual_tokens_mean": 49.0,
       "layer25_visual_tokens_mean": 49.0
@@ -79,10 +79,10 @@
     "vcola-50-exit24_sampling_seed42": {
       "evaluated_images": 4,
       "restricted_first_token_accuracy": 1.0,
-      "restricted_choice_probability_mass_mean": 0.9989490061998367,
-      "restricted_choice_kl_to_dense_mean": 0.001490273127274122,
+      "restricted_choice_probability_mass_mean": 0.9991193413734436,
+      "restricted_choice_kl_to_dense_mean": 0.0014391870536201168,
       "dense_backend_relative_error_max": 0.0,
-      "state_replay_relative_error_max": 0.0027432553470134735,
+      "state_replay_relative_error_max": 0.0016478096367791295,
       "original_visual_tokens_mean": 49.0,
       "layer2_visual_tokens_mean": 24.0,
       "layer25_visual_tokens_mean": 0.0
@@ -90,10 +90,10 @@
     "vcola-25-exit24_sampling_seed42": {
       "evaluated_images": 4,
       "restricted_first_token_accuracy": 1.0,
-      "restricted_choice_probability_mass_mean": 0.9990425705909729,
-      "restricted_choice_kl_to_dense_mean": 0.029876668682845775,
+      "restricted_choice_probability_mass_mean": 0.9990151971578598,
+      "restricted_choice_kl_to_dense_mean": 0.03091110512468731,
       "dense_backend_relative_error_max": 0.0,
-      "state_replay_relative_error_max": 0.0027432553470134735,
+      "state_replay_relative_error_max": 0.0016478096367791295,
       "original_visual_tokens_mean": 49.0,
       "layer2_visual_tokens_mean": 12.0,
       "layer25_visual_tokens_mean": 0.0
@@ -113,13 +113,13 @@
     42
   ],
   "executed_source_sha256": {
-    "scripts/run_vcola_checkpoint.py": "8d7bad188070219371a83f27bbbfd755650dc1fb7cd1b082257ae2b81f75be09",
+    "scripts/run_vcola_checkpoint.py": "d920af25102838c28f1ba42a5c01ca62c38d354c70bdad6acde8e0622c95ace5",
     "src/auto_research/multimodal/vcola.py": "d8da4ae85fd95238e8f37059c06e57aa438a0a2b9e6855c6dbd4511cf1f71441",
-    "src/auto_research/multimodal/vcola_checkpoint.py": "4ea26a803230285a50f943cf5b3bee6e974ed2baff34b2a61629188a7d673b4d",
+    "src/auto_research/multimodal/vcola_checkpoint.py": "ec763ed7369fad5bca7e618dc4660b3dca05c1fcf363b6a618d1859488f5f33c",
     "src/auto_research/multimodal/data.py": "c6cd674e86659d004d2c46d6d2d238ad6d7a04b19531b3e1e09f87fc222459bd"
   },
   "provenance": {
-    "commit": "9cd2f10eb3d781cb166fbb8c7d388010e11aab72",
+    "commit": "037d5138da7e977f9398f1e7469d2016add2f98c",
     "artifact_path": "docs/gpu-validations/vcola-a100-20261011.json",
     "metrics_artifact": "docs/multimodal-models/2610.11251-vcola/metrics/cifar10-a100.json",
     "checkpoint_committed": false,

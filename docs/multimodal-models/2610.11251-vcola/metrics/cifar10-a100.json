@@ -10,10 +10,10 @@
     "dense_sampling_seed42": {
       "evaluated_images": 4,
       "restricted_first_token_accuracy": 1.0,
-      "restricted_choice_probability_mass_mean": 0.9989432990550995,
+      "restricted_choice_probability_mass_mean": 0.9990093111991882,
       "restricted_choice_kl_to_dense_mean": 0.0,
       "dense_backend_relative_error_max": 0.0,
-      "state_replay_relative_error_max": 0.0027432553470134735,
+      "state_replay_relative_error_max": 0.0016478096367791295,
       "original_visual_tokens_mean": 49.0,
       "layer2_visual_tokens_mean": 49.0,
       "layer25_visual_tokens_mean": 49.0
@@ -21,10 +21,10 @@
     "vcola-50-exit24_sampling_seed42": {
       "evaluated_images": 4,
       "restricted_first_token_accuracy": 1.0,
-      "restricted_choice_probability_mass_mean": 0.9989490061998367,
-      "restricted_choice_kl_to_dense_mean": 0.001490273127274122,
+      "restricted_choice_probability_mass_mean": 0.9991193413734436,
+      "restricted_choice_kl_to_dense_mean": 0.0014391870536201168,
       "dense_backend_relative_error_max": 0.0,
-      "state_replay_relative_error_max": 0.0027432553470134735,
+      "state_replay_relative_error_max": 0.0016478096367791295,
       "original_visual_tokens_mean": 49.0,
       "layer2_visual_tokens_mean": 24.0,
       "layer25_visual_tokens_mean": 0.0
@@ -32,10 +32,10 @@
     "vcola-25-exit24_sampling_seed42": {
       "evaluated_images": 4,
       "restricted_first_token_accuracy": 1.0,
-      "restricted_choice_probability_mass_mean": 0.9990425705909729,
-      "restricted_choice_kl_to_dense_mean": 0.029876668682845775,
+      "restricted_choice_probability_mass_mean": 0.9990151971578598,
+      "restricted_choice_kl_to_dense_mean": 0.03091110512468731,
       "dense_backend_relative_error_max": 0.0,
-      "state_replay_relative_error_max": 0.0027432553470134735,
+      "state_replay_relative_error_max": 0.0016478096367791295,
       "original_visual_tokens_mean": 49.0,
       "layer2_visual_tokens_mean": 12.0,
       "layer25_visual_tokens_mean": 0.0
@@ -62,7 +62,7 @@
         "example_id": 48968,
         "recipe": "dense",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9993877410888672,
+        "restricted_choice_probability_mass": 0.9994030594825745,
         "restricted_choice_kl_to_dense": 0.0,
         "dense_backend_relative_error": 0.0,
         "forward": {
@@ -228,13 +228,14 @@
               "visual_tokens": 49
             }
           ],
-          "recurrence_relative_error": 0.0027025341987609863,
+          "recurrence_relative_error": 0.0016478096367791295,
+          "delta_capture_api": "private_forward_globals",
           "merge": null,
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9431092143058777,
-          "uniqueness_mean": 0.03365376591682434,
-          "score_std": 0.020647313445806503
+          "importance_mean": 0.9444524049758911,
+          "uniqueness_mean": 0.033701442182064056,
+          "score_std": 0.02184646762907505
         }
       },
       {
@@ -242,8 +243,8 @@
         "example_id": 48968,
         "recipe": "vcola-50-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9992993474006653,
-        "restricted_choice_kl_to_dense": 0.0011286785593256354,
+        "restricted_choice_probability_mass": 0.999278724193573,
+        "restricted_choice_kl_to_dense": 0.0015026349574327469,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -408,7 +409,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.0027025341987609863,
+          "recurrence_relative_error": 0.0016478096367791295,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 24,
@@ -424,8 +426,8 @@
               2,
               2,
               2,
-              3,
               2,
+              3,
               2,
               2,
               2,
@@ -467,9 +469,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9431092143058777,
-          "uniqueness_mean": 0.03365376591682434,
-          "score_std": 0.020647313445806503
+          "importance_mean": 0.9444524049758911,
+          "uniqueness_mean": 0.033701442182064056,
+          "score_std": 0.02184646762907505
         }
       },
       {
@@ -477,8 +479,8 @@
         "example_id": 48968,
         "recipe": "vcola-25-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.99908846616745,
-        "restricted_choice_kl_to_dense": 0.009890745393931866,
+        "restricted_choice_probability_mass": 0.9990243315696716,
+        "restricted_choice_kl_to_dense": 0.009713832288980484,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -643,11 +645,13 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.0027025341987609863,
+          "recurrence_relative_error": 0.0016478096367791295,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 12,
             "chunk_sizes": [
+              4,
               4,
               4,
               4,
@@ -658,18 +662,17 @@
               4,
               4,
               4,
-              4,
               4
             ],
             "anchor_indices": [
               7,
               8,
               12,
-              19,
+              17,
               22,
               25,
               30,
-              33,
+              36,
               37,
               43,
               46,
@@ -678,9 +681,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9431092143058777,
-          "uniqueness_mean": 0.03365376591682434,
-          "score_std": 0.020647313445806503
+          "importance_mean": 0.9444524049758911,
+          "uniqueness_mean": 0.033701442182064056,
+          "score_std": 0.02184646762907505
         }
       },
       {
@@ -688,7 +691,7 @@
         "example_id": 49777,
         "recipe": "dense",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9996220469474792,
+        "restricted_choice_probability_mass": 0.9996116161346436,
         "restricted_choice_kl_to_dense": 0.0,
         "dense_backend_relative_error": 0.0,
         "forward": {
@@ -854,13 +857,14 @@
               "visual_tokens": 49
             }
           ],
-          "recurrence_relative_error": 0.002721993951126933,
+          "recurrence_relative_error": 0.0016423760680481791,
+          "delta_capture_api": "private_forward_globals",
           "merge": null,
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9296099543571472,
-          "uniqueness_mean": 0.02504769153892994,
-          "score_std": 0.022419769316911697
+          "importance_mean": 0.9304761290550232,
+          "uniqueness_mean": 0.02616298384964466,
+          "score_std": 0.02252035215497017
         }
       },
       {
@@ -868,8 +872,8 @@
         "example_id": 49777,
         "recipe": "vcola-50-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9996805787086487,
-        "restricted_choice_kl_to_dense": 0.00015780681860633194,
+        "restricted_choice_probability_mass": 0.9996901154518127,
+        "restricted_choice_kl_to_dense": 6.084948836360127e-05,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -1034,7 +1038,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.002721993951126933,
+          "recurrence_relative_error": 0.0016423760680481791,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 24,
@@ -1093,9 +1098,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9296099543571472,
-          "uniqueness_mean": 0.02504769153892994,
-          "score_std": 0.022419769316911697
+          "importance_mean": 0.9304761290550232,
+          "uniqueness_mean": 0.02616298384964466,
+          "score_std": 0.02252035215497017
         }
       },
       {
@@ -1103,8 +1108,8 @@
         "example_id": 49777,
         "recipe": "vcola-25-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9996501803398132,
-        "restricted_choice_kl_to_dense": 0.0003156786260660738,
+        "restricted_choice_probability_mass": 0.9996443390846252,
+        "restricted_choice_kl_to_dense": 0.00038182115531526506,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -1269,7 +1274,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.002721993951126933,
+          "recurrence_relative_error": 0.0016423760680481791,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 12,
@@ -1291,22 +1297,22 @@
               6,
               11,
               14,
-              16,
+              19,
               23,
               24,
               29,
               33,
               38,
-              43,
+              42,
               46,
               52
             ]
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9296099543571472,
-          "uniqueness_mean": 0.02504769153892994,
-          "score_std": 0.022419769316911697
+          "importance_mean": 0.9304761290550232,
+          "uniqueness_mean": 0.02616298384964466,
+          "score_std": 0.02252035215497017
         }
       },
       {
@@ -1314,7 +1320,7 @@
         "example_id": 49560,
         "recipe": "dense",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9998533129692078,
+        "restricted_choice_probability_mass": 0.9998704195022583,
         "restricted_choice_kl_to_dense": 0.0,
         "dense_backend_relative_error": 0.0,
         "forward": {
@@ -1480,13 +1486,14 @@
               "visual_tokens": 49
             }
           ],
-          "recurrence_relative_error": 0.0026541720144450665,
+          "recurrence_relative_error": 0.0016456745797768235,
+          "delta_capture_api": "private_forward_globals",
           "merge": null,
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9508008360862732,
-          "uniqueness_mean": 0.03507757931947708,
-          "score_std": 0.022166499868035316
+          "importance_mean": 0.9506945013999939,
+          "uniqueness_mean": 0.033744826912879944,
+          "score_std": 0.022102124989032745
         }
       },
       {
@@ -1494,8 +1501,8 @@
         "example_id": 49560,
         "recipe": "vcola-50-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9997808337211609,
-        "restricted_choice_kl_to_dense": 0.00048095843521878123,
+        "restricted_choice_probability_mass": 0.9997622966766357,
+        "restricted_choice_kl_to_dense": 0.0002651798422448337,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -1660,7 +1667,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.0026541720144450665,
+          "recurrence_relative_error": 0.0016456745797768235,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 24,
@@ -1674,8 +1682,8 @@
               2,
               2,
               2,
-              2,
               3,
+              2,
               2,
               2,
               2,
@@ -1719,9 +1727,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9508008360862732,
-          "uniqueness_mean": 0.03507757931947708,
-          "score_std": 0.022166499868035316
+          "importance_mean": 0.9506945013999939,
+          "uniqueness_mean": 0.033744826912879944,
+          "score_std": 0.022102124989032745
         }
       },
       {
@@ -1729,8 +1737,8 @@
         "example_id": 49560,
         "recipe": "vcola-25-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9998306632041931,
-        "restricted_choice_kl_to_dense": 0.0002945908927358687,
+        "restricted_choice_probability_mass": 0.9998552203178406,
+        "restricted_choice_kl_to_dense": 0.0005266482476145029,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -1895,7 +1903,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.0026541720144450665,
+          "recurrence_relative_error": 0.0016456745797768235,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 12,
@@ -1904,8 +1913,8 @@
               4,
               4,
               4,
-              4,
               5,
+              4,
               4,
               4,
               4,
@@ -1930,9 +1939,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9508008360862732,
-          "uniqueness_mean": 0.03507757931947708,
-          "score_std": 0.022166499868035316
+          "importance_mean": 0.9506945013999939,
+          "uniqueness_mean": 0.033744826912879944,
+          "score_std": 0.022102124989032745
         }
       },
       {
@@ -1940,7 +1949,7 @@
         "example_id": 49544,
         "recipe": "dense",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9969100952148438,
+        "restricted_choice_probability_mass": 0.9971521496772766,
         "restricted_choice_kl_to_dense": 0.0,
         "dense_backend_relative_error": 0.0,
         "forward": {
@@ -2106,13 +2115,14 @@
               "visual_tokens": 49
             }
           ],
-          "recurrence_relative_error": 0.0027432553470134735,
+          "recurrence_relative_error": 0.0016216288786381483,
+          "delta_capture_api": "private_forward_globals",
           "merge": null,
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9522215723991394,
-          "uniqueness_mean": 0.036046601831912994,
-          "score_std": 0.02186666429042816
+          "importance_mean": 0.9530788660049438,
+          "uniqueness_mean": 0.036335427314043045,
+          "score_std": 0.021806206554174423
         }
       },
       {
@@ -2120,8 +2130,8 @@
         "example_id": 49544,
         "recipe": "vcola-50-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9970352649688721,
-        "restricted_choice_kl_to_dense": 0.00419364869594574,
+        "restricted_choice_probability_mass": 0.9977462291717529,
+        "restricted_choice_kl_to_dense": 0.003928083926439285,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -2286,7 +2296,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.0027432553470134735,
+          "recurrence_relative_error": 0.0016216288786381483,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 24,
@@ -2345,9 +2356,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9522215723991394,
-          "uniqueness_mean": 0.036046601831912994,
-          "score_std": 0.02186666429042816
+          "importance_mean": 0.9530788660049438,
+          "uniqueness_mean": 0.036335427314043045,
+          "score_std": 0.021806206554174423
         }
       },
       {
@@ -2355,8 +2366,8 @@
         "example_id": 49544,
         "recipe": "vcola-25-exit24",
         "restricted_first_token_correct": true,
-        "restricted_choice_probability_mass": 0.9976009726524353,
-        "restricted_choice_kl_to_dense": 0.10900565981864929,
+        "restricted_choice_probability_mass": 0.9975368976593018,
+        "restricted_choice_kl_to_dense": 0.11302211880683899,
         "dense_backend_relative_error": 0.0,
         "forward": {
           "layers": [
@@ -2521,7 +2532,8 @@
               "visual_tokens": 0
             }
           ],
-          "recurrence_relative_error": 0.0027432553470134735,
+          "recurrence_relative_error": 0.0016216288786381483,
+          "delta_capture_api": "private_forward_globals",
           "merge": {
             "original_visual_tokens": 49,
             "merged_visual_tokens": 12,
@@ -2546,7 +2558,7 @@
               17,
               23,
               24,
-              31,
+              29,
               33,
               38,
               41,
@@ -2556,9 +2568,9 @@
           },
           "cache_used": false,
           "original_text_positions_preserved": true,
-          "importance_mean": 0.9522215723991394,
-          "uniqueness_mean": 0.036046601831912994,
-          "score_std": 0.02186666429042816
+          "importance_mean": 0.9530788660049438,
+          "uniqueness_mean": 0.036335427314043045,
+          "score_std": 0.021806206554174423
         }
       }
     ],
@@ -2594,6 +2606,7 @@
       }
     },
     "protocol": {
+      "transformers_version": "5.19.0",
       "first_layer_real_delta_state_capture": true,
       "state_scores_not_feature_proxy": true,
       "query_probe_window": [
@@ -2625,12 +2638,12 @@
     "merged visual mRoPE uses original maximum-score member; text mRoPE stays unchanged"
   ],
   "provenance": {
-    "original_code_commit": "9cd2f10eb3d781cb166fbb8c7d388010e11aab72",
+    "original_code_commit": "037d5138da7e977f9398f1e7469d2016add2f98c",
     "artifact_path": "docs/multimodal-models/2610.11251-vcola/metrics/cifar10-a100.json",
     "executed_source_sha256": {
-      "scripts/run_vcola_checkpoint.py": "8d7bad188070219371a83f27bbbfd755650dc1fb7cd1b082257ae2b81f75be09",
+      "scripts/run_vcola_checkpoint.py": "d920af25102838c28f1ba42a5c01ca62c38d354c70bdad6acde8e0622c95ace5",
       "src/auto_research/multimodal/vcola.py": "d8da4ae85fd95238e8f37059c06e57aa438a0a2b9e6855c6dbd4511cf1f71441",
-      "src/auto_research/multimodal/vcola_checkpoint.py": "4ea26a803230285a50f943cf5b3bee6e974ed2baff34b2a61629188a7d673b4d",
+      "src/auto_research/multimodal/vcola_checkpoint.py": "ec763ed7369fad5bca7e618dc4660b3dca05c1fcf363b6a618d1859488f5f33c",
       "src/auto_research/multimodal/data.py": "c6cd674e86659d004d2c46d6d2d238ad6d7a04b19531b3e1e09f87fc222459bd"
     },
     "dataset_fingerprint": "8f70c8a8f946b7855333e450a0f21cb724f30be250489fe5957ecd599c68411b"
