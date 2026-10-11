@@ -167,6 +167,55 @@ def signed_forward_kl(student_logits, teacher_logits, actions, relevant_mask, co
     return (c.detach() * per_response).mean(), c, support
 
 
+def thinking_template_audit(tokenizer):
+    """Inspect the rendered protocol, not whether a tokenizer accepts a kwarg.
+
+    Non-thinking-only Instruct templates may silently ignore enable_thinking.
+    Fail closed unless the actual prefixes switch from an explicitly closed
+    thinking block to an open block. This is a prompt-protocol check, not proof
+    that generated reasoning is correct or that a response avoids truncation.
+    """
+    prefixes = {}
+    for enabled in (False, True):
+        text = tokenizer.apply_chat_template(
+            [{"role": "user", "content": "Solve 2 plus 3."}], tokenize=False,
+            add_generation_prompt=True, enable_thinking=enabled)
+        prefixes["enabled" if enabled else "disabled"] = text
+    supported = (prefixes["enabled"] != prefixes["disabled"]
+                 and prefixes["enabled"].rstrip().endswith("<think>")
+                 and prefixes["disabled"].rstrip().endswith("</think>"))
+    return {"probe_question": "Solve 2 plus 3.", "supported": supported,
+            "rendered_prefixes": prefixes,
+            "rendered_prefix_sha256": {key: hashlib.sha256(text.encode()).hexdigest()
+                                       for key, text in prefixes.items()},
+            "requested": {"student": False, "teacher": True, "evaluation": True},
+            "effective": {"student": False, "teacher": True, "evaluation": True}
+                         if supported else None}
+
+
+def _load_checkpoint(checkpoint_path, dtype, device):
+    from transformers import AutoConfig, AutoModelForCausalLM
+
+    config = AutoConfig.from_pretrained(checkpoint_path, local_files_only=True)
+    if config.model_type == "qwen3_5":
+        from transformers import Qwen3_5ForConditionalGeneration
+        cls = Qwen3_5ForConditionalGeneration
+    elif config.model_type == "qwen3":
+        cls = AutoModelForCausalLM
+    else:
+        raise ValueError("SGUID supports audited Qwen3 or Qwen3.5 text-only checkpoints")
+    model = cls.from_pretrained(checkpoint_path, local_files_only=True,
+                               dtype=dtype, attn_implementation="eager").to(device).eval()
+    return model, {"model_type": config.model_type, "loaded_class": type(model).__name__,
+                   "input_modality": "text only; vision weights frozen and unused"}
+
+
+def _language_backbone(model):
+    # Qwen3.5 is a multimodal wrapper with a hybrid text decoder. Do not run
+    # the vision branch or replace hybrid layers with a Qwen3 approximation.
+    return getattr(model.model, "language_model", model.model)
+
+
 def _prefix(tokenizer, text, device, *, thinking=False):
     rendered = tokenizer.apply_chat_template(
         [{"role": "user", "content": text}], tokenize=False,
@@ -197,7 +246,7 @@ def _response_logits(model, prefix, response):
 def _embedding(model, tokenizer, text, device):
     tokens = tokenizer(text, return_tensors="pt").input_ids.to(device)
     with torch.no_grad():
-        hidden = model.model(input_ids=tokens, use_cache=False).last_hidden_state
+        hidden = _language_backbone(model)(input_ids=tokens, use_cache=False).last_hidden_state
         vector = hidden.float().mean(1)[0]
     return torch.nn.functional.normalize(vector, dim=0)
 
@@ -207,7 +256,7 @@ def run(*, checkpoint_path, checkpoint_id, checkpoint_revision, train_path,
         training_examples=8, validation_examples=8, rounds=2, probe_steps=8,
         internalization_steps=8, max_tokens=512, skill_tokens=256,
         candidate_count=8, retrieve_count=6, late_minimum=2, device="cuda"):
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoTokenizer
 
     if (rounds != 2 or min(training_examples, validation_examples, probe_steps,
             internalization_steps, max_tokens, skill_tokens, candidate_count,
@@ -224,10 +273,14 @@ def run(*, checkpoint_path, checkpoint_id, checkpoint_revision, train_path,
     tokenizer = AutoTokenizer.from_pretrained(checkpoint_path, local_files_only=True)
     if not tokenizer.chat_template:
         raise ValueError("SGUID runner requires a thinking-aware public chat tokenizer")
+    thinking_audit = thinking_template_audit(tokenizer)
+    if not thinking_audit["supported"]:
+        raise ValueError("actual chat template does not switch thinking mode; "
+                         "enable_thinking kwargs alone are not evidence")
     tokenizer.pad_token = tokenizer.pad_token or tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(checkpoint_path, local_files_only=True,
-            dtype=dtype, attn_implementation="eager").to(device).eval()
-    install_lora(model, rank=8)
+    model, backbone = _load_checkpoint(checkpoint_path, dtype, device)
+    model.requires_grad_(False)
+    lora_modules = install_lora(_language_backbone(model), rank=8)
     initial = snapshot_adapters(model)
     parameters = [p for p in model.parameters() if p.requires_grad]
 
@@ -353,8 +406,12 @@ def run(*, checkpoint_path, checkpoint_id, checkpoint_revision, train_path,
                    "retriever": "current LM mean last hidden-state cosine; not Qwen3-Embedding-0.6B",
                    "loss": "signed generalized full-vocabulary forward KL",
                    "adapter": "q/v rank-8 FP32 LoRA; not original all-linear rank-64 LoRA",
+                   "adapter_module_count": lora_modules, "backbone": backbone,
+                   "thinking_template_audit": thinking_audit,
                    "gold_role": "training verifier/curation only; absent from student and retrieval",
-                   "student_thinking": False, "teacher_thinking": True, "evaluation_thinking": True}}
+                   "student_thinking": thinking_audit["effective"]["student"],
+                   "teacher_thinking": thinking_audit["effective"]["teacher"],
+                   "evaluation_thinking": thinking_audit["effective"]["evaluation"]}}
 
     def write(records):
         payload["rounds"] = records

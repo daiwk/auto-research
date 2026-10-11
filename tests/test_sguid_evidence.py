@@ -31,10 +31,20 @@ def accounting_fixture():
         "loss": "signed generalized full-vocabulary forward KL",
         "gold_role": "training verifier/curation only; absent from student and retrieval",
         "student_thinking": False, "teacher_thinking": True, "evaluation_thinking": True}
+    prefixes = {"disabled": "Solve 2 plus 3.\nassistant\n<think>\n\n</think>\n\n",
+                "enabled": "Solve 2 plus 3.\nassistant\n<think>\n"}
+    protocol.update(adapter_module_count=8, backbone={"model_type": "qwen3_5",
+        "loaded_class": "Qwen3_5ForConditionalGeneration",
+        "input_modality": "text only; vision weights frozen and unused"},
+        thinking_template_audit={"supported": True, "probe_question": "Solve 2 plus 3.",
+            "requested": {"student": False, "teacher": True, "evaluation": True},
+            "effective": {"student": False, "teacher": True, "evaluation": True},
+            "rendered_prefixes": prefixes,
+            "rendered_prefix_sha256": {k: sha(v) for k, v in prefixes.items()}})
     report = {"schema_version": 1, "adapter_key": "sguid", "seed": 42, "status": "completed",
         "diagnostic_only": True, "evaluation_tier": "l1_mechanism", "test_read": False,
         "validation_used_for_selection": False, "protocol": protocol,
-        "checkpoint": {"id": "Qwen/Qwen3-4B-Instruct-2507", "revision": "a" * 40},
+        "checkpoint": {"id": "Qwen/Qwen3.5-9B", "revision": "a" * 40},
         "dataset": {"id": "openai/grade-school-math", "revision": "b" * 40},
         "split_provenance": {"verified": True, "test_read": False,
             "source_id": "openai/grade-school-math", "source_revision": "b" * 40,
@@ -93,6 +103,30 @@ def test_accounting_fixture_retains_negative_validation_and_truncation():
     assert summary["final_validation_exact_match"] < summary["baseline_validation_exact_match"]
     assert summary["validation_truncated"] == 2
     assert all(r["probe_updates"] == 4 for r in summary["rounds"])
+
+
+@pytest.mark.parametrize("corruption", ["unsupported", "ignored", "digest", "effective", "class", "modules"])
+def test_curator_rejects_unverified_actual_thinking_or_backbone(corruption):
+    report = accounting_fixture()
+    protocol = report["protocol"]
+    audit = protocol["thinking_template_audit"]
+    if corruption == "unsupported":
+        audit["supported"] = False
+    elif corruption == "ignored":
+        text = audit["rendered_prefixes"]["disabled"]
+        audit["rendered_prefixes"]["enabled"] = text
+        audit["rendered_prefix_sha256"]["enabled"] = sha(text)
+    elif corruption == "digest":
+        audit["rendered_prefix_sha256"]["enabled"] = sha("invented")
+    elif corruption == "effective":
+        audit["effective"]["teacher"] = False
+    elif corruption == "class":
+        protocol["backbone"]["model_type"] = "unknown"
+        protocol["backbone"]["loaded_class"] = None
+    elif corruption == "modules":
+        protocol["adapter_module_count"] = 0
+    with pytest.raises(ValueError):
+        module().summarize(report)
 
 
 @pytest.mark.parametrize("corruption", ["status", "empty", "restore", "fresh", "activity",

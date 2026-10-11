@@ -6,10 +6,60 @@ torch = pytest.importorskip("torch")
 
 from auto_research.post_training.oct11_objectives import SkillActivity
 from auto_research.post_training.sguid_checkpoint import (
-    _response_logits, adapter_digest, co_evolve, curation_prompt, parse_skill,
+    _embedding, _language_backbone, _response_logits, adapter_digest, co_evolve, curation_prompt, parse_skill,
     signed_forward_kl, skill_teacher_prompt, snapshot_adapters,
-    step_if_finite_nonzero_gradient,
+    step_if_finite_nonzero_gradient, thinking_template_audit,
 )
+
+
+def test_thinking_audit_checks_actual_prefixes_not_accepted_kwarg():
+    class Tokenizer:
+        def apply_chat_template(self, messages, *, enable_thinking, **kwargs):
+            suffix = "<think>" if enable_thinking else "<think>\n\n</think>\n\n"
+            return messages[0]["content"] + "\nassistant\n" + suffix
+
+    audit = thinking_template_audit(Tokenizer())
+    assert audit["supported"] and audit["requested"] == audit["effective"]
+    assert audit["rendered_prefix_sha256"]["enabled"] != audit["rendered_prefix_sha256"]["disabled"]
+
+    class Ignored(Tokenizer):
+        def apply_chat_template(self, messages, **kwargs):
+            return messages[0]["content"] + "\nassistant\n"
+
+    ignored = thinking_template_audit(Ignored())
+    assert not ignored["supported"] and ignored["effective"] is None
+    assert ignored["rendered_prefix_sha256"]["enabled"] == ignored["rendered_prefix_sha256"]["disabled"]
+
+
+def test_qwen35_embeddings_use_actual_text_decoder_not_vision_wrapper():
+    class TextDecoder:
+        def __call__(self, *, input_ids, use_cache):
+            assert not use_cache
+            return SimpleNamespace(last_hidden_state=torch.ones(1, 2, 3))
+
+    decoder = TextDecoder()
+    model = SimpleNamespace(model=SimpleNamespace(language_model=decoder))
+    tokenizer = lambda *args, **kwargs: SimpleNamespace(input_ids=torch.ones(1, 2, dtype=torch.long))
+    assert _language_backbone(model) is decoder
+    assert torch.allclose(_embedding(model, tokenizer, "question only", "cpu"),
+                          torch.ones(3) / 3**.5)
+    assert _language_backbone(SimpleNamespace(model=decoder)) is decoder
+
+
+def test_unsupported_thinking_fails_before_model_load(monkeypatch, tmp_path):
+    import sys
+    import auto_research.post_training.sguid_checkpoint as runner
+
+    tokenizer = SimpleNamespace(chat_template="ignored kwarg", apply_chat_template=lambda *a, **kw: "same prefix")
+    monkeypatch.setitem(sys.modules, "transformers", SimpleNamespace(
+        AutoTokenizer=SimpleNamespace(from_pretrained=lambda *a, **kw: tokenizer)))
+    monkeypatch.setattr(runner, "validate_holdout", lambda *a, **kw: {"verified": True})
+    monkeypatch.setattr(runner, "load_public_rows", lambda *a: [{"question": "train", "answer": "#### 1"}])
+    monkeypatch.setattr(runner, "_load_checkpoint", lambda *a: pytest.fail("must not load weights"))
+    with pytest.raises(ValueError, match="actual chat template does not switch"):
+        runner.run(checkpoint_path=tmp_path, checkpoint_id="public/model", checkpoint_revision="a" * 40,
+                   train_path=tmp_path, validation_path=tmp_path, dataset_revision="b" * 40,
+                   split_manifest=tmp_path, output=tmp_path / "out.json", device="cpu")
 
 
 def test_generated_skill_json_rejects_missing_fields_and_no_fallback():

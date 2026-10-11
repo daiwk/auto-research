@@ -132,6 +132,30 @@ def summarize(report):
             r"(?:NVIDIA )?A(?:100|30)(?:[- ](?:SXM4|SXM|PCIE|PCIe))?(?:[- ]\d+GB)?", accelerator.get("model", "")):
         raise ValueError("actual supported NVIDIA A100/A30 required")
     protocol = report["protocol"]
+    audit = protocol.get("thinking_template_audit", {})
+    modes = {"student": False, "teacher": True, "evaluation": True}
+    prefixes = audit.get("rendered_prefixes", {})
+    if (audit.get("supported") is not True or audit.get("requested") != modes
+            or audit.get("effective") != modes or audit.get("probe_question") != "Solve 2 plus 3."):
+        raise ValueError("actual requested/effective thinking template audit required")
+    for key in ("enabled", "disabled"):
+        text = prefixes.get(key)
+        if (not isinstance(text, str) or "Solve 2 plus 3." not in text
+                or hashlib.sha256(text.encode()).hexdigest()
+                != _sha(audit.get("rendered_prefix_sha256", {}).get(key))):
+            raise ValueError("actual rendered thinking prefixes/digests required")
+    if (prefixes["enabled"] == prefixes["disabled"]
+            or not prefixes["enabled"].rstrip().endswith("<think>")
+            or not prefixes["disabled"].rstrip().endswith("</think>")):
+        raise ValueError("thinking kwarg ignored or actual mode switch absent")
+    backbone = protocol.get("backbone", {})
+    supported_classes = {"qwen3": "Qwen3ForCausalLM", "qwen3_5": "Qwen3_5ForConditionalGeneration"}
+    if (backbone.get("model_type") not in supported_classes
+            or backbone.get("loaded_class") != supported_classes.get(backbone.get("model_type"))
+            or backbone.get("input_modality") != "text only; vision weights frozen and unused"
+            or not isinstance(protocol.get("adapter_module_count"), int)
+            or protocol["adapter_module_count"] < 1):
+        raise ValueError("audited actual text backbone and LoRA module count required")
     if (protocol.get("teacher") != "live synchronized same-model no_grad"
             or protocol.get("loss") != "signed generalized full-vocabulary forward KL"
             or protocol.get("logits_projection") != "full model output vocabulary; no top-k approximation"
@@ -255,8 +279,11 @@ def curate(report, *, commit, validated_at, committed_hashes):
                    "q/v rank-8 LoRA and reduced early/late window/h; not original all-linear rank-64 run",
                    "signed generalized full-vocabulary KL, not original SGSD bounded discrepancy",
                    "EOS/truncations and any negative validation outcome retained"]
+    if report["protocol"]["backbone"]["model_type"] == "qwen3_5":
+        limitations.append("Qwen3.5 hybrid text decoder, not original Qwen3 backbone; "
+                           "vision unused; q/v LoRA applies only to full-attention layers")
     protocol = report["protocol"]
-    command = ["python", "scripts/run_sguid_checkpoint.py", "--checkpoint-path", "checkpoints/qwen3-4b",
+    command = ["python", "scripts/run_sguid_checkpoint.py", "--checkpoint-path", "checkpoints/public-sguid-model",
                "--checkpoint-id", report["checkpoint"]["id"], "--checkpoint-revision", report["checkpoint"]["revision"],
                "--train-path", "data/gsm8k-holdout/train.jsonl", "--validation-path", "data/gsm8k-holdout/validation.jsonl",
                "--split-manifest", "data/gsm8k-holdout/split.json", "--dataset-revision", report["dataset"]["revision"]]
