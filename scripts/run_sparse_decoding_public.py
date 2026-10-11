@@ -56,21 +56,31 @@ def generated(model, tokenizer, question, *, max_tokens, collector=None):
     with torch.no_grad():
         result = model(ids, use_cache=True)
         tokens = []
+        decode_calls = 0
+        ended_with_eos = False
         torch.cuda.synchronize()
         start = time.perf_counter()
-        for _ in range(max_tokens):
+        for index in range(max_tokens):
             token = result.logits[:, -1].argmax(-1).reshape(1, 1)
             tokens.append(int(token))
             if int(token) == tokenizer.eos_token_id:
+                ended_with_eos = True
+                break
+            # Do not execute a discarded forward pass after the final token.
+            if index + 1 == max_tokens:
                 break
             if collector is None:
                 result = model(token, past_key_values=result.past_key_values, use_cache=True)
             else:
                 with collector.decoding():
                     result = model(token, past_key_values=result.past_key_values, use_cache=True)
+            decode_calls += 1
         torch.cuda.synchronize()
         elapsed = time.perf_counter() - start
-    return tokenizer.decode(tokens, skip_special_tokens=True), len(tokens), elapsed
+    return tokenizer.decode(tokens, skip_special_tokens=True), {
+        "tokens": len(tokens), "decode_calls": decode_calls, "decode_seconds": elapsed,
+        "ended_with_eos": ended_with_eos, "truncated": not ended_with_eos,
+    }
 
 
 def main():
@@ -86,14 +96,15 @@ def main():
     p.add_argument("--m", type=int, default=4)
     p.add_argument("--calibration-examples", type=int, default=4)
     p.add_argument("--validation-examples", type=int, default=4)
-    p.add_argument("--max-tokens", type=int, default=128)
+    p.add_argument("--max-tokens", type=int, default=512)
     a = p.parse_args()
     if not torch.cuda.is_available():
         raise ValueError("real NVIDIA CUDA required")
     kernels = kernel_checks(a.seed)
     report = {"schema_version": 1, "adapter_key": "sparse-decoding", "seed": a.seed,
               "kernel_checks": kernels, "diagnostic_only": True, "evaluation_tier": "l1_mechanism",
-              "claim_scope": "bounded Wanda backend and independent bitmask SpMV; not WritingBench/ClassEval or original kernel speedup"}
+              "claim_scope": "bounded Wanda backend and independent bitmask SpMV; not WritingBench/ClassEval or original kernel speedup",
+              "max_tokens": a.max_tokens, "warmup": "two training-question tokens per recipe before timed validation"}
     if not a.kernel_only:
         required = (a.checkpoint_path, a.train_path, a.validation_path, a.split_manifest,
                     a.checkpoint_id, a.checkpoint_revision, a.dataset_revision)
@@ -108,9 +119,11 @@ def main():
         layers = {name: layer for name, layer in model.named_modules()
                   if isinstance(layer, torch.nn.Linear) and name != "lm_head" and layer.in_features % 32 == 0}
         collector = DecodeCalibration(layers)
+        calibration_generations = []
         try:
             for row in train[:a.calibration_examples]:
-                generated(model, tokenizer, row["question"], max_tokens=a.max_tokens, collector=collector)
+                _, stats = generated(model, tokenizer, row["question"], max_tokens=a.max_tokens, collector=collector)
+                calibration_generations.append(stats)
         finally:
             collector.close()
         if not layers or not all(collector.counts.values()):
@@ -135,9 +148,11 @@ def main():
                     parent, attr = name.rsplit(".", 1)
                     setattr(model.get_submodule(parent), attr, packed)
                 torch.cuda.empty_cache()
+            # Compile every checkpoint-specific shape on training input only.
+            generated(model, tokenizer, train[0]["question"], max_tokens=2)
             for index, row in enumerate(valid[:a.validation_examples]):
-                text, tokens, elapsed = generated(model, tokenizer, row["question"], max_tokens=a.max_tokens)
-                item = {"recipe": recipe, "example": index, "tokens": tokens, "decode_seconds": elapsed,
+                text, stats = generated(model, tokenizer, row["question"], max_tokens=a.max_tokens)
+                item = {"recipe": recipe, "example": index, **stats,
                         "correct": verified_reward(text, row["answer"])}
                 rows.append(item)
                 print(json.dumps(item), flush=True)
@@ -149,7 +164,8 @@ def main():
                                "train_sha256": hashlib.sha256(a.train_path.read_bytes()).hexdigest(),
                                "validation_sha256": hashlib.sha256(a.validation_path.read_bytes()).hexdigest()},
                       split_provenance=split, n=a.n, m=a.m, rows=rows,
-                      calibration={"phase": "decode_only", "prefill_excluded": True, "counts": collector.counts},
+                      calibration={"phase": "decode_only", "prefill_excluded": True, "counts": collector.counts,
+                                   "generations": calibration_generations},
                       fixed_text_calibration={"phase": "teacher_forced_train_only", "counts": fixed.counts},
                       sparse_calls=sum(layer.sparse_calls for layer in sparse_layers),
                       retained_dense_prefill_copy=True,
