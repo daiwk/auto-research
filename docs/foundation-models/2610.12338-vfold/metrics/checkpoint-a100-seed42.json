@@ -1,0 +1,495 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:vfold",
+  "method": "vfold",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "bf16_fold_relative_logit_error": 0.017293449491262436,
+    "matched_length_cache_examples": 3,
+    "matched_length_cache_reduction_mean": 0.15057666273174397
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "bf16_fold_relative_logit_error": 0.017293449491262436,
+      "matched_length_cache_examples": 3,
+      "matched_length_cache_reduction_mean": 0.15057666273174397
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "bounded real-checkpoint diagnostic, not benchmark gain"
+  },
+  "runtime_details": {
+    "adapter_key": "vfold",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "checkpoint": {
+      "id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    "dataset": {
+      "id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c"
+    },
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+        "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "test_read": false,
+    "pairs": [
+      {
+        "layers": [
+          0,
+          1
+        ],
+        "permutation": [
+          1,
+          5,
+          0,
+          2,
+          7,
+          3,
+          6,
+          4
+        ],
+        "cost": 151.44494790434953,
+        "map_max_condition": 31.25790286246146
+      },
+      {
+        "layers": [
+          2,
+          3
+        ],
+        "permutation": [
+          5,
+          7,
+          2,
+          4,
+          1,
+          6,
+          0,
+          3
+        ],
+        "cost": 294.75105637338686,
+        "map_max_condition": 20.867668255499627
+      },
+      {
+        "layers": [
+          4,
+          5
+        ],
+        "permutation": [
+          7,
+          1,
+          6,
+          4,
+          5,
+          2,
+          3,
+          0
+        ],
+        "cost": 422.1414086188915,
+        "map_max_condition": 52.6042524851242
+      },
+      {
+        "layers": [
+          6,
+          7
+        ],
+        "permutation": [
+          3,
+          2,
+          0,
+          7,
+          1,
+          6,
+          5,
+          4
+        ],
+        "cost": 889.1399407012574,
+        "map_max_condition": 29.038570973653062
+      },
+      {
+        "layers": [
+          8,
+          9
+        ],
+        "permutation": [
+          3,
+          4,
+          0,
+          1,
+          2,
+          7,
+          6,
+          5
+        ],
+        "cost": 1183.677835820673,
+        "map_max_condition": 8.897144092782204
+      },
+      {
+        "layers": [
+          10,
+          11
+        ],
+        "permutation": [
+          4,
+          5,
+          7,
+          2,
+          6,
+          0,
+          1,
+          3
+        ],
+        "cost": 1061.118821769093,
+        "map_max_condition": 12.659849976237648
+      },
+      {
+        "layers": [
+          12,
+          13
+        ],
+        "permutation": [
+          4,
+          1,
+          3,
+          5,
+          0,
+          7,
+          2,
+          6
+        ],
+        "cost": 1145.8872100042404,
+        "map_max_condition": 36.32613034540479
+      },
+      {
+        "layers": [
+          14,
+          15
+        ],
+        "permutation": [
+          5,
+          3,
+          4,
+          7,
+          2,
+          6,
+          1,
+          0
+        ],
+        "cost": 1312.9211125192228,
+        "map_max_condition": 32.23429495474193
+      },
+      {
+        "layers": [
+          16,
+          17
+        ],
+        "permutation": [
+          4,
+          6,
+          7,
+          2,
+          1,
+          5,
+          0,
+          3
+        ],
+        "cost": 1380.100279534188,
+        "map_max_condition": 12.260946948298521
+      },
+      {
+        "layers": [
+          18,
+          19
+        ],
+        "permutation": [
+          5,
+          4,
+          7,
+          6,
+          1,
+          2,
+          0,
+          3
+        ],
+        "cost": 1949.3686558552424,
+        "map_max_condition": 70.0716981123604
+      },
+      {
+        "layers": [
+          20,
+          21
+        ],
+        "permutation": [
+          4,
+          1,
+          3,
+          2,
+          6,
+          5,
+          0,
+          7
+        ],
+        "cost": 1998.692769734692,
+        "map_max_condition": 8.882679245861178
+      },
+      {
+        "layers": [
+          22,
+          23
+        ],
+        "permutation": [
+          7,
+          3,
+          0,
+          2,
+          6,
+          1,
+          5,
+          4
+        ],
+        "cost": 2877.613297462239,
+        "map_max_condition": 16.902596890000137
+      },
+      {
+        "layers": [
+          24,
+          25
+        ],
+        "permutation": [
+          0,
+          4,
+          1,
+          2,
+          6,
+          7,
+          3,
+          5
+        ],
+        "cost": 3286.1241539969124,
+        "map_max_condition": 12.948880578739761
+      },
+      {
+        "layers": [
+          26,
+          27
+        ],
+        "permutation": [
+          5,
+          4,
+          2,
+          6,
+          1,
+          7,
+          0,
+          3
+        ],
+        "cost": 4249.434314778675,
+        "map_max_condition": 10.906564966428107
+      },
+      {
+        "layers": [
+          28,
+          29
+        ],
+        "permutation": [
+          1,
+          6,
+          7,
+          0,
+          4,
+          2,
+          3,
+          5
+        ],
+        "cost": 7519.641229231577,
+        "map_max_condition": 16.176984635551594
+      },
+      {
+        "layers": [
+          30,
+          31
+        ],
+        "permutation": [
+          4,
+          2,
+          3,
+          5,
+          0,
+          7,
+          1,
+          6
+        ],
+        "cost": 8838.804726551189,
+        "map_max_condition": 12.100162720720826
+      },
+      {
+        "layers": [
+          32,
+          33
+        ],
+        "permutation": [
+          2,
+          4,
+          3,
+          1,
+          0,
+          7,
+          5,
+          6
+        ],
+        "cost": 14093.464454501614,
+        "map_max_condition": 15.988435863574896
+      },
+      {
+        "layers": [
+          34,
+          35
+        ],
+        "permutation": [
+          4,
+          2,
+          7,
+          0,
+          1,
+          5,
+          3,
+          6
+        ],
+        "cost": 10393.202093018805,
+        "map_max_condition": 32.466231583318
+      }
+    ],
+    "rows": [
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 328,
+        "persistent_cache_bytes": 48365568,
+        "example": 0,
+        "recipe": "full",
+        "exact_match": 0.0,
+        "prompt_tokens": 73
+      },
+      {
+        "generated_tokens": 252,
+        "cache_tokens": 324,
+        "persistent_cache_bytes": 40697856,
+        "example": 0,
+        "recipe": "vfold",
+        "exact_match": 1.0,
+        "prompt_tokens": 73
+      },
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 339,
+        "persistent_cache_bytes": 49987584,
+        "example": 1,
+        "recipe": "full",
+        "exact_match": 1.0,
+        "prompt_tokens": 84
+      },
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 339,
+        "persistent_cache_bytes": 42356736,
+        "example": 1,
+        "recipe": "vfold",
+        "exact_match": 1.0,
+        "prompt_tokens": 84
+      },
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 326,
+        "persistent_cache_bytes": 48070656,
+        "example": 2,
+        "recipe": "full",
+        "exact_match": 0.0,
+        "prompt_tokens": 71
+      },
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 326,
+        "persistent_cache_bytes": 40919040,
+        "example": 2,
+        "recipe": "vfold",
+        "exact_match": 0.0,
+        "prompt_tokens": 71
+      },
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 331,
+        "persistent_cache_bytes": 48807936,
+        "example": 3,
+        "recipe": "full",
+        "exact_match": 1.0,
+        "prompt_tokens": 76
+      },
+      {
+        "generated_tokens": 256,
+        "cache_tokens": 331,
+        "persistent_cache_bytes": 41472000,
+        "example": 3,
+        "recipe": "vfold",
+        "exact_match": 1.0,
+        "prompt_tokens": 76
+      }
+    ],
+    "exact_fold_relative_logit_error": 0.017293449491262436,
+    "calibration_seconds": 19.917516177520156,
+    "limitations": [
+      "small GSM8K training-only holdout; not official LongBench/RULER",
+      "eager materialization incurs transient full values; no kernel latency gain claimed",
+      "first 4 and last 128 values protected; keys never merged",
+      "batch-one Qwen3 full-attention backend; no beam or speculative rollback"
+    ]
+  },
+  "matched_length_cache_comparisons": [
+    {
+      "example": 1,
+      "cache_tokens": 339,
+      "full_bytes": 49987584,
+      "vfold_bytes": 42356736,
+      "reduction_fraction": 0.15265486725663713
+    },
+    {
+      "example": 2,
+      "cache_tokens": 326,
+      "full_bytes": 48070656,
+      "vfold_bytes": 40919040,
+      "reduction_fraction": 0.14877300613496935
+    },
+    {
+      "example": 3,
+      "cache_tokens": 331,
+      "full_bytes": 48807936,
+      "vfold_bytes": 41472000,
+      "reduction_fraction": 0.15030211480362543
+    }
+  ],
+  "provenance": {
+    "original_code_commit": "c6e73e70d34a94c0b53471c84743822db0722edb",
+    "artifact_path": "docs/foundation-models/2610.12338-vfold/metrics/checkpoint-a100-seed42.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  }
+}

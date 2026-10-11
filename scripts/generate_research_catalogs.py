@@ -61,6 +61,10 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "组相对策略优化": ("在线强化学习与稳定性", "PPO、REINFORCE 与 group RL"),
+        "KL 校准": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "学习信号诊断": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "剪枝恢复": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "轨迹到步骤信用分配": ("在线强化学习与稳定性", "步骤奖励与信用分配"),
         "教师前缀约束蒸馏": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "后验集中与长度约束": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),

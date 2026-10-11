@@ -1,0 +1,178 @@
+{
+  "schema_version": 2,
+  "diagnostic_only": false,
+  "evaluation_tier": "l2_public_dataset",
+  "rows": [
+    {
+      "seed": 42,
+      "recipe": "adamw",
+      "steps": 200,
+      "initial_validation_loss": 5.573905140161514,
+      "validation_loss": 2.9434859454631805,
+      "persistent_moment_bytes": 1095680,
+      "packed_parameter_values": 0,
+      "head_first_moment_sr_steps": 0,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 31285248,
+      "selected_test_loss": 2.8078103959560394
+    },
+    {
+      "seed": 42,
+      "recipe": "zip-sr",
+      "steps": 200,
+      "initial_validation_loss": 5.573905140161514,
+      "validation_loss": 3.1405810564756393,
+      "persistent_moment_bytes": 157952,
+      "packed_parameter_values": 135168,
+      "head_first_moment_sr_steps": 20,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 30354432
+    },
+    {
+      "seed": 42,
+      "recipe": "ze-eden",
+      "steps": 200,
+      "initial_validation_loss": 5.573905140161514,
+      "validation_loss": 2.984418511390686,
+      "persistent_moment_bytes": 157952,
+      "packed_parameter_values": 135168,
+      "head_first_moment_sr_steps": 20,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 30354432
+    },
+    {
+      "seed": 43,
+      "recipe": "adamw",
+      "steps": 200,
+      "initial_validation_loss": 5.594565212726593,
+      "validation_loss": 2.917758956551552,
+      "persistent_moment_bytes": 1095680,
+      "packed_parameter_values": 0,
+      "head_first_moment_sr_steps": 0,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 31285248,
+      "selected_test_loss": 2.7929079681634903
+    },
+    {
+      "seed": 43,
+      "recipe": "zip-sr",
+      "steps": 200,
+      "initial_validation_loss": 5.594565212726593,
+      "validation_loss": 3.0657468289136887,
+      "persistent_moment_bytes": 157952,
+      "packed_parameter_values": 135168,
+      "head_first_moment_sr_steps": 20,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 30354432
+    },
+    {
+      "seed": 43,
+      "recipe": "ze-eden",
+      "steps": 200,
+      "initial_validation_loss": 5.594565212726593,
+      "validation_loss": 2.952365890145302,
+      "persistent_moment_bytes": 157952,
+      "packed_parameter_values": 135168,
+      "head_first_moment_sr_steps": 20,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 30354432
+    },
+    {
+      "seed": 44,
+      "recipe": "adamw",
+      "steps": 200,
+      "initial_validation_loss": 5.562537640333176,
+      "validation_loss": 2.9379596263170242,
+      "persistent_moment_bytes": 1095680,
+      "packed_parameter_values": 0,
+      "head_first_moment_sr_steps": 0,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 31285248,
+      "selected_test_loss": 2.8142114877700806
+    },
+    {
+      "seed": 44,
+      "recipe": "zip-sr",
+      "steps": 200,
+      "initial_validation_loss": 5.562537640333176,
+      "validation_loss": 3.155337929725647,
+      "persistent_moment_bytes": 157952,
+      "packed_parameter_values": 135168,
+      "head_first_moment_sr_steps": 20,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 30354432
+    },
+    {
+      "seed": 44,
+      "recipe": "ze-eden",
+      "steps": 200,
+      "initial_validation_loss": 5.562537640333176,
+      "validation_loss": 2.9757060408592224,
+      "persistent_moment_bytes": 157952,
+      "packed_parameter_values": 135168,
+      "head_first_moment_sr_steps": 20,
+      "untied_head": true,
+      "cuda_peak_allocated_bytes": 30354432
+    }
+  ],
+  "selected_recipe": "adamw",
+  "validation_means": {
+    "adamw": 2.9330681761105857,
+    "zip-sr": 3.120555271704992,
+    "ze-eden": 2.9708301474650702
+  },
+  "claim_scope": "bounded byte-level WikiText training; not original paper benchmark",
+  "training_budget": {
+    "steps": 200,
+    "batch_size": 4,
+    "sequence_length": 64
+  },
+  "dataset": {
+    "id": "WikiText-2",
+    "revision": {
+      "train": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+      "validation": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+      "test": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0"
+    }
+  },
+  "checkpoint": {
+    "id": "auto-research/micro-lm-gpt-baseline",
+    "initialization": "from-scratch",
+    "config": {
+      "vocab_size": 256,
+      "dimensions": 64,
+      "layers": 2,
+      "heads": 4,
+      "kv_heads": 4,
+      "sequence_length": 64,
+      "expansion": 4,
+      "residual_streams": 2,
+      "sinkhorn_iterations": 10
+    }
+  },
+  "test_read_after_selection": true,
+  "adapter_key": "adamw4bit",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "98b810e8417e077b21e104c6c9d38a77ed2e7098",
+  "manifest_ref": "foundation-models:adamw4bit",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "diagnostic_only": true,
+    "formal_comparison": false,
+    "claim_policy": "bounded byte-level WikiText training; not original paper benchmark"
+  },
+  "provenance": {
+    "original_code_commit": "98b810e8417e077b21e104c6c9d38a77ed2e7098",
+    "artifact_path": "docs/foundation-models/2610.12444-adamw4bit/metrics/public-wikitext.json",
+    "dataset_fingerprint": "fe87663e991dcb0ff7a1b7d650929ea8bb7b0ab0d28c724b26c38013caa7ab6a"
+  }
+}

@@ -104,6 +104,7 @@ class MicroLLMEvaluator:
             "parameters": int(np.mean([row["parameters"] for row in trainings])),
             "device": trainings[0]["device"],
             "optimizer": trainings[0]["optimizer"],
+            "optimizer_head_scope": trainings[0]["optimizer_head_scope"],
             "architecture_stats": _mean_dicts(
                 [row["architecture_stats"] for row in trainings]
             ),

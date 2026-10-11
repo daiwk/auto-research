@@ -1,0 +1,8 @@
+{
+  "domain": "agent-research", "key": "ontrack",
+  "title": "OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport",
+  "paper_url": "https://arxiv.org/abs/2610.12375", "detail_path": "agent-research/2610.12375-ontrack/README.md",
+  "topic": ["Agent 安全", "实时轨迹监控与非平衡最优传输"], "first_author": "Babak Barazandeh",
+  "first_author_affiliation": "Cribl AI", "published": "2026-10-08", "code": null,
+  "adapter": "ontrack", "priority": "P1", "requires_gpu_validation": false
+}

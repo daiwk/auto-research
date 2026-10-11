@@ -20,6 +20,7 @@
 
 ## Alibaba Group
 
+- 2026-10-08 · 一作：Fei Ding · [When KL Regularization Misfires in Group Policy Optimization](../2610.12161-zcpo/README.md)（`zcpo`）：独立 KL 惩罚可能在奖励相同或奖励梯度取消时继续更新策略。ZCPO 用响应平均的条件 KL 相对漂移，校准组内奖励系数；再将该系数放进原策略 surrogate，不另加独立 KL loss。
 - 2026-10-01 · 一作：Yihua Zhu · [My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning](../2610.01161-my-fault/README.md)（`my-fault`）：自诊断器提出错误类别与位置，只有经证据验证的 claim 才进入在线 error pricing；学得的相对成本把终局 credit 守恒地重分配到步骤。
 - 2026-09-15 · 一作：Zishuo Zhao · [Turn-level Multiscale Density Ratio Estimation for LLM Agents](../2609.16760-tlm-dre/README.md)（`tlm-dre`）：按 turn 分配多尺度权重，并对正负 token 密度比采用非对称更新。
 - 2025-08-15 · 一作：Wenhao Zhang · [CHORD](../2508.11408-chord/README.md)（`chord`）：将 SFT 与 RL 串成两个独立阶段会造成 expert data 的过拟合或过早遗忘。CHORD 把专家 SFT 作为 on-policy RL 中动态退火的辅助目标，并以 token 级不确定性权重平滑从模仿过渡到探索。
@@ -427,6 +428,7 @@
 
 ## University of Pennsylvania
 
+- 2026-10-08 · 一作：Lei Zhao · [Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals](../2610.11247-opd-learning-signals/README.md)（`opd-learning-signals`）：OPD 的残余差异可能仍大，但梯度提供的学习信号已变弱。论文同时记录损失、截断前梯度、两折 occupancy 估计、参数位移和逐层表征 CKA；这些是相关性诊断，不是因果证明。
 - 2026-10-02 · 一作：Lyuxin David Zhang · [LESSER: Post-Training Data Selection with Output-Layer Gradients](../2610.03702-lesser/README.md)（`lesser`）：现有面向目标任务的数据选择常计算每个候选样本和少量目标任务 query 的全参数梯度，再按相似性选取训练子集；对大模型逐样本反传代价很高。LESSER 只替换**特征**：从一次前向得到的最后隐藏状态和词表概率解析地计算输出层梯度。
 
 ## University of Pittsburgh
@@ -503,6 +505,10 @@
 - 2026-08-27 · 一作：Aozhe Wang · [TTPO: Test-Time Policy Optimization](../2608.27448-ttpo/README.md)（`ttpo`）：多数票伪标签可能错误，但与多数票分歧的 rollout 通常仍是错的。TTPO 因而对同意分支做 OPSD，对分歧分支做 grouped RL，并分别过滤已收敛 token 与高置信错误。
 - 2026-07-28 · 一作：Haolei Xu · [Relay-OPD](../2607.26057-relay-opd/README.md)（`relay-opd`）：检测学生前缀失效后让教师短暂接管，再把轨迹交还学生；有限接力预算把监督集中到关键早期位置。
 - 2026-06-21 · 一作：Pengxiang Cai · [CoBA-RL](../2606.22317-coba-rl/README.md)（`coba-rl`）：普通 RLVR 可能只重新分配 base model 已有轨迹的概率，提升 pass@1 却不扩展高采样 pass@k 所反映的能力边界。该方法先用多次采样估计边界，在边界附近/之外注入教师推理，再用 RL 巩固。
+
+## Zhongguancun Academy / Tencent / University of Science and Technology of China
+
+- 2026-10-08 · 一作：Houcheng Jiang · [ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery](../2610.11332-recal/README.md)（`recal`）：先剪枝再蒸馏并不保证可恢复：损坏的学生轨迹会限制 OPD 教师信号。ReCal 先用剪枝 probe 测量教师轨迹上损伤，再用损伤重加权原始未剪枝模型的校准统计，重新选择通道；目标宽度和恢复流程保持一致。
 
 ## 原文未列机构
 

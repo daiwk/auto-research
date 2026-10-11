@@ -1,0 +1,8 @@
+{
+  "domain": "post-training", "key": "recal", "title": "ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery",
+  "paper_url": "https://arxiv.org/abs/2610.11332", "detail_path": "post-training/2610.11332-recal/README.md",
+  "topic": ["On-policy distillation", "剪枝恢复"], "first_author": "Houcheng Jiang",
+  "first_author_affiliation": "Zhongguancun Academy / Tencent / University of Science and Technology of China",
+  "published": "2026-10-08", "code": "https://github.com/jianghoucheng/ReCal", "adapter": "recal", "priority": "P0",
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/recal-a100-20261011.json"
+}

@@ -8,15 +8,15 @@
 | P0 | VFold | 2610.12338 | CCA、Hungarian 头匹配、功能保持权重折叠、真实共享缓存已实现；A100 发现 BF16 校准不足及缓存版本兼容问题，已修复兼容性并重跑；原始 LongBench/RULER 未完成 |
 | P0 | Option-Channel Attack | 2610.12292 | 六策略、校准选标签/独立评测、条件 ASR 与成对区间测试及 A100 真实 Laya 运行已完成；部分策略干净输入即失效，保留 undefined ASR；论文全部模型/屏蔽数据集未完成 |
 | P0 | ReCal | 2610.11332 | 真实 FFN 删除、损伤加权、SFT→OPD 运行器、测试与 A100 对照已完成；4 题诊断且 OPD 后有负结果，非原始四域 benchmark |
-| P0 | ZCPO | 2610.12161 | 核心公式与边界测试、A100 24 步真实更新已完成；指标脱敏、切分溯源与文档登记待完成；保留首次全跳过结果 |
-| P1 | SparseDecoding | 2610.12327 | 待实现 decoding-only 校准及真实稀疏 kernel；不能用 dense zeros 代替 |
+| P0 | ZCPO | 2610.12161 | 核心公式、边界测试及 A100 24 步真实更新已完成；当前源码与 train-only manifest 重跑通过，指标/回执/文档已登记；保留首次全跳过及旧 test 误标审计，非原论文大规模能力复现 |
+| P1 | SparseDecoding | 2610.12327 | decoding-only Wanda、32-bit mask 与真实 Triton SpMV 已实现；A100 四模式数值回归和 4B 三配方对照完成；质量及吞吐负结果保留，非原始 SparseGPT/长文本 benchmark 或作者优化 kernel |
 | P1 | V-CoLA | 2610.11251 | 待实现混合线性注意力状态贡献与短期证据选择 |
 | P1 | Data-Space Iteration | 2610.12102 | 待实现共享生成器及真实 teacher/fake DMD 交替更新 |
-| P1 | OnTrack | 2610.12375 | 待实现流式 unbalanced fused GW 与轨迹校准评测 |
+| P1 | OnTrack | 2610.12375 | 流式 UFGW、生命周期、gate、16 项数值/行为/隔离回归及固定版本 CPU 公开轨迹重跑完成；64 个评测实例 AUROC 0.6021、差值区间跨零，校准停止策略惰性；非 live SWE-bench 或生产安全认证 |
 | P1 | Memento3 | 2610.11794 | 待实现模型生成世界模型、规则核验与历史回放；付费模型预算未授权 |
-| P1 | PIVOT | 2610.11167 | 核心损失与路由测试通过；真实 warm-up、领域训练和评测尚未完成 |
+| P1 | PIVOT | 2610.11167 | 损失、reference-KL、领域奖励、385/77 train-only 分区及共享教师 SFT→OPD→三配方重置的真实运行器已实现并测试；GPU 领域训练和评测尚未完成，不能标成验证通过。A100 无法直接下载原配置 0.5B 学生，公开权重同步授权待答复 |
 | P1 | SGUID | 2610.12367 | 核心筛选/恢复合同测试通过；真实模型产技能及两轮蒸馏尚未完成 |
-| P1 设施 | OPD Learning Signals | 2610.11247 | 残余损失、pre-clip 梯度代理、两折 occupancy、参数位移、FP64 CKA 及真实 checkpoint 运行器已实现；CUDA 验证待完成；非 200 步平台期复现 |
+| P1 设施 | OPD Learning Signals | 2610.11247 | 残余损失、pre-clip 梯度代理、两折 occupancy、参数位移、FP64 CKA 已实现；A100 三步、37 个表征位置全部采集通过，已登记回执；非 200 步平台期复现 |
 
 ## 四项收口
 
@@ -24,5 +24,13 @@
 2. 真实训练证据：ZIP/ZE 完成 A100 实测，低精度方案损失劣于 FP32；其他新条目仍须各自真实验证。多 seed 不升级诊断。
 3. Evolve：ZIP/ZE 已有可执行优化器和 validation 行为测试，绑定来源；其余只在实际运行器完成后注册可执行算子。
 4. 回归/兼容性/CI：新增对账一致性检查和算法测试；整批全套质量、文档、GPU 门禁及 PR 检查尚未全部完成。
+
+## 恢复执行检查点
+
+普通沙箱终端启动仍报 ENOENT；经过批准的显式 `/bin/bash` 调用能读取仓库、运行测试和 SSH，不能宣称默认启动器已修复。
+
+SparseDecoding 当前源码的 A100 路径完成并已逐文件核对远端/本地哈希。PIVOT 已有完整有界三配方运行器；使用缓存 4B checkpoint 的启动尝试在下载公开训练数据阶段失败，尚未执行训练。不能将其写成正在训练或 GPU 通过。等待本轮公开数据同步授权，不同步其他本地数据。
+
+仍未完成：V-CoLA、Data-Space Iteration、Memento3、SGUID 的真实实施与验证，PIVOT 的 GPU 运行；以及整批最终回归、集成验收和合并 PR。
 
 完成全部验收后按原约定提交一个合并 PR。当前文件是连续工作的交接记录，不是完成报告。

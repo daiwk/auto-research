@@ -1,0 +1,434 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "post-training:zcpo",
+  "method": "zcpo",
+  "dataset": "openai/grade-school-math",
+  "seeds": [
+    42
+  ],
+  "metrics": {
+    "active_groups": 9,
+    "adapter_parameter_delta_l2": 0.051158314099453456,
+    "validation_examples": 8,
+    "validation_exact_match": 0.625
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "active_groups": 9,
+      "adapter_parameter_delta_l2": 0.051158314099453456,
+      "validation_examples": 8,
+      "validation_exact_match": 0.625
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "test_read": false,
+    "seeds": [
+      42
+    ],
+    "claim_policy": "bounded real-checkpoint diagnostic, not benchmark gain"
+  },
+  "runtime_details": {
+    "schema_version": 1,
+    "adapter_key": "zcpo",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "claim_scope": "bounded real checkpoint runtime validation, not benchmark gains",
+    "checkpoint": {
+      "id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    "dataset": {
+      "id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "metrics": {
+      "active_groups": 9,
+      "adapter_parameter_delta_l2": 0.051158314099453456,
+      "validation_examples": 8,
+      "validation_exact_match": 0.625
+    },
+    "history": [
+      {
+        "step": 0,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 391,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 1,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 508,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 2,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 843,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 3,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 729,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 4,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 664,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 5,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 556,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 6,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 812,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 7,
+        "rewards": [
+          1.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "loss": 0.0,
+        "gradient_l2": 0.08512410521507263,
+        "response_tokens": 1024,
+        "active": true,
+        "coefficient_sum": 0.0,
+        "coefficient_min": -1.0,
+        "coefficient_max": 1.0
+      },
+      {
+        "step": 8,
+        "rewards": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 1024,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 9,
+        "rewards": [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "loss": 0.0,
+        "gradient_l2": 0.06245064362883568,
+        "response_tokens": 1024,
+        "active": true,
+        "coefficient_sum": 0.0,
+        "coefficient_min": -0.33333879709243774,
+        "coefficient_max": 1.0000019073486328
+      },
+      {
+        "step": 10,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 651,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 11,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "loss": 0.03889530897140503,
+        "gradient_l2": 0.09100521355867386,
+        "response_tokens": 917,
+        "active": true,
+        "coefficient_sum": 0.0,
+        "coefficient_min": -1.0000054836273193,
+        "coefficient_max": 0.33334100246429443
+      },
+      {
+        "step": 12,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 871,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 13,
+        "rewards": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 1024,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 14,
+        "rewards": [
+          0.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "loss": 0.0,
+        "gradient_l2": 0.10254461318254471,
+        "response_tokens": 1024,
+        "active": true,
+        "coefficient_sum": 5.960464477539063e-08,
+        "coefficient_min": -1.0000011920928955,
+        "coefficient_max": 1.0000019073486328
+      },
+      {
+        "step": 15,
+        "rewards": [
+          1.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "loss": 0.0019569506403058767,
+        "gradient_l2": 0.1149158775806427,
+        "response_tokens": 1022,
+        "active": true,
+        "coefficient_sum": 0.0,
+        "coefficient_min": -1.0000089406967163,
+        "coefficient_max": 1.0000075101852417
+      },
+      {
+        "step": 16,
+        "rewards": [
+          1.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "loss": 0.004906758200377226,
+        "gradient_l2": 0.11718268692493439,
+        "response_tokens": 1019,
+        "active": true,
+        "coefficient_sum": 5.960464477539063e-08,
+        "coefficient_min": -1.0000030994415283,
+        "coefficient_max": 1.0000028610229492
+      },
+      {
+        "step": 17,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "loss": 0.027483325451612473,
+        "gradient_l2": 0.06874100118875504,
+        "response_tokens": 946,
+        "active": true,
+        "coefficient_sum": 0.0,
+        "coefficient_min": -0.9999947547912598,
+        "coefficient_max": 0.33333802223205566
+      },
+      {
+        "step": 18,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 810,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 19,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 1024,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 20,
+        "rewards": [
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "loss": 0.0,
+        "gradient_l2": 0.11733446270227432,
+        "response_tokens": 1024,
+        "active": true,
+        "coefficient_sum": 0.0,
+        "coefficient_min": -1.000004768371582,
+        "coefficient_max": 1.0000014305114746
+      },
+      {
+        "step": 21,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 993,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 22,
+        "rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "loss": -0.0,
+        "gradient_l2": 0.0,
+        "response_tokens": 464,
+        "active": false,
+        "coefficient_sum": 0.0
+      },
+      {
+        "step": 23,
+        "rewards": [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "loss": 1.4901161193847656e-08,
+        "gradient_l2": 0.05238630622625351,
+        "response_tokens": 1024,
+        "active": true,
+        "coefficient_sum": -5.960464477539063e-08,
+        "coefficient_min": -0.3333390951156616,
+        "coefficient_max": 0.9999997019767761
+      }
+    ],
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+        "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "test_read": false,
+    "validation_used_for_selection": false
+  },
+  "matched_length_cache_comparisons": [],
+  "provenance": {
+    "original_code_commit": "e9565359ed1cb1c2de26412adf011becb46354f3",
+    "artifact_path": "docs/post-training/2610.12161-zcpo/metrics/checkpoint-a100-seed42.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  }
+}

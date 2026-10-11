@@ -5,6 +5,8 @@
 ## 2026
 
 - 2026-10 · [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](../2610.12086-evoalloc/README.md)（`evoalloc`）：模型选择 Full、Partial 或 Discard，得到 Partial 证据后再选择继续/停止。已观察案例更新固定语句经验并反思策略；影子策略共享同一证据，以漏掉新最佳的次数优先、再比较评测成本。
+- 2026-10 · [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
+- 2026-10 · [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
 - 2026-10 · [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
 - 2026-10 · [Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents](../2610.12124-hippocam/README.md)（`hippocam`）：Janus 在推理前维护嵌套目的，Precip 在主响应后、工具结果前归纳闭合意图。Palim 递归整理早期前缀为叙事和知识，原消息保留为树形子节点；recall 每次返回一层，Agent 自行决定深入。
 - 2026-10 · [When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation](../2610.12061-race/README.md)（`race`）：LoGiC 从第二轮逐步删除推理，检查本轮及所有后续原动作的平均 token 对数似然变化，已接受删除继续影响后续上下文。成功轨迹压缩后用于 SFT；RL 屏蔽可删推理并监督提前闭合。

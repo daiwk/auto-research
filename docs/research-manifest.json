@@ -1603,6 +1603,24 @@
     },
     {
       "domain": "agent-research",
+      "key": "ontrack",
+      "title": "OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport",
+      "paper_url": "https://arxiv.org/abs/2610.12375",
+      "detail_path": "agent-research/2610.12375-ontrack/README.md",
+      "topic": [
+        "Agent 安全",
+        "实时轨迹监控与非平衡最优传输"
+      ],
+      "first_author": "Babak Barazandeh",
+      "first_author_affiliation": "Cribl AI",
+      "published": "2026-10-08",
+      "code": null,
+      "adapter": "ontrack",
+      "priority": "P1",
+      "requires_gpu_validation": false
+    },
+    {
+      "domain": "agent-research",
       "key": "openhands",
       "title": "OpenHands",
       "paper_url": "https://arxiv.org/abs/2407.16741",
@@ -1631,6 +1649,25 @@
       "published": "2026-08-10",
       "code": "https://github.com/yoyoshikc/OpenLoopEvolve",
       "adapter": "openloopevolve"
+    },
+    {
+      "domain": "agent-research",
+      "key": "option-channel-attack",
+      "title": "One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails",
+      "paper_url": "https://arxiv.org/abs/2610.12292",
+      "detail_path": "agent-research/2610.12292-option-channel-attack/README.md",
+      "topic": [
+        "Agent 安全",
+        "类型化守门模型"
+      ],
+      "first_author": "Seyedarmin Azizi",
+      "first_author_affiliation": "University of Southern California",
+      "published": "2026-10-08",
+      "code": "https://github.com/ArminAzizi98/option-channel-attack",
+      "adapter": "option-channel-attack",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/option-channel-attack-a100-20261011.json"
     },
     {
       "domain": "agent-research",
@@ -2800,6 +2837,25 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "adamw4bit",
+      "title": "Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization",
+      "paper_url": "https://arxiv.org/abs/2610.12444",
+      "detail_path": "foundation-models/2610.12444-adamw4bit/README.md",
+      "topic": [
+        "训练优化与稳定性",
+        "低精度训练"
+      ],
+      "first_author": "Hanyang Li",
+      "first_author_affiliation": "University of California, Berkeley / Nubank",
+      "published": "2026-10-08",
+      "code": "https://github.com/nubank/adamw4bit",
+      "adapter": "adamw4bit",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/adamw4bit-a100-20261011.json"
     },
     {
       "domain": "foundation-models",
@@ -6863,6 +6919,25 @@
     },
     {
       "domain": "foundation-models",
+      "key": "sparse-decoding",
+      "title": "SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference",
+      "paper_url": "https://arxiv.org/abs/2610.12327",
+      "detail_path": "foundation-models/2610.12327-sparse-decoding/README.md",
+      "topic": [
+        "推理与系统效率",
+        "动态计算与模型压缩"
+      ],
+      "first_author": "Qitong Wang / Xinwei Niu",
+      "first_author_affiliation": "Westlake University",
+      "published": "2026-10-08",
+      "code": "尚未发布；项目页 Code (soon): https://wang-qitong.github.io/SparseDecoding/",
+      "adapter": "sparse-decoding",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/sparse-decoding-a100-20261011.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "speculative-decoding",
       "title": "Fast Inference from Transformers via Speculative Decoding",
       "paper_url": "https://arxiv.org/abs/2211.17192",
@@ -7463,6 +7538,25 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/veto-a100-20261002.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "vfold",
+      "title": "VFold: Symmetry-Aware Cross-Layer Value Cache Compression",
+      "paper_url": "https://arxiv.org/abs/2610.12338",
+      "detail_path": "foundation-models/2610.12338-vfold/README.md",
+      "topic": [
+        "推理与系统效率",
+        "KV 缓存压缩"
+      ],
+      "first_author": "Neha Verma",
+      "first_author_affiliation": "Johns Hopkins University",
+      "published": "2026-10-08",
+      "code": "https://github.com/nverma1/vfold",
+      "adapter": "vfold",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/vfold-a100-20261011.json"
     },
     {
       "domain": "foundation-models",
@@ -9134,6 +9228,25 @@
     },
     {
       "domain": "post-training",
+      "key": "opd-learning-signals",
+      "title": "Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals",
+      "paper_url": "https://arxiv.org/abs/2610.11247",
+      "detail_path": "post-training/2610.11247-opd-learning-signals/README.md",
+      "topic": [
+        "On-policy distillation",
+        "学习信号诊断"
+      ],
+      "first_author": "Lei Zhao",
+      "first_author_affiliation": "University of Pennsylvania",
+      "published": "2026-10-08",
+      "code": "https://github.com/leizhao7/opd-learning-signals",
+      "adapter": "opd-learning-signals",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/opd-learning-signals-a100-20261011.json"
+    },
+    {
+      "domain": "post-training",
       "key": "opd-lm",
       "title": "OPDLM",
       "paper_url": "https://arxiv.org/abs/2606.06712",
@@ -9410,6 +9523,25 @@
       "code": null,
       "adapter": "range-grpo",
       "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "recal",
+      "title": "ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery",
+      "paper_url": "https://arxiv.org/abs/2610.11332",
+      "detail_path": "post-training/2610.11332-recal/README.md",
+      "topic": [
+        "On-policy distillation",
+        "剪枝恢复"
+      ],
+      "first_author": "Houcheng Jiang",
+      "first_author_affiliation": "Zhongguancun Academy / Tencent / University of Science and Technology of China",
+      "published": "2026-10-08",
+      "code": "https://github.com/jianghoucheng/ReCal",
+      "adapter": "recal",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/recal-a100-20261011.json"
     },
     {
       "domain": "post-training",
@@ -10537,6 +10669,25 @@
       "code": "https://github.com/sirkosophia/Where-OPD",
       "adapter": "where-opd",
       "priority": "P1"
+    },
+    {
+      "domain": "post-training",
+      "key": "zcpo",
+      "title": "When KL Regularization Misfires in Group Policy Optimization",
+      "paper_url": "https://arxiv.org/abs/2610.12161",
+      "detail_path": "post-training/2610.12161-zcpo/README.md",
+      "topic": [
+        "组相对策略优化",
+        "KL 校准"
+      ],
+      "first_author": "Fei Ding",
+      "first_author_affiliation": "Alibaba Group",
+      "published": "2026-10-08",
+      "code": null,
+      "adapter": "zcpo",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/zcpo-a100-20261011.json"
     },
     {
       "domain": "recommendation",

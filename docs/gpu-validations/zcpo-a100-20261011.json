@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "adapter_key": "zcpo",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_zcpo_checkpoint.py",
+    "--checkpoint-path",
+    "checkpoints/qwen3-4b",
+    "--checkpoint-id",
+    "Qwen/Qwen3-4B-Instruct-2507",
+    "--checkpoint-revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--steps",
+    "24",
+    "--max-tokens",
+    "256",
+    "--group",
+    "4",
+    "--validation-examples",
+    "8",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--train-path",
+    "data/gsm8k-holdout/train.jsonl",
+    "--validation-path",
+    "data/gsm8k-holdout/validation.jsonl",
+    "--seed",
+    "42",
+    "--device",
+    "cuda",
+    "--output",
+    "runs/zcpo-42.json",
+    "--split-manifest",
+    "data/gsm8k-holdout/split.json"
+  ],
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+    "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "active_groups": 9,
+    "adapter_parameter_delta_l2": 0.051158314099453456,
+    "validation_examples": 8,
+    "validation_exact_match": 0.625
+  },
+  "executed_source_sha256": {
+    "src/auto_research/post_training/oct11_objectives.py": "f20066dc337d6f355ceea740852c88ed328f52217239ed55f66240f05e16ab67",
+    "src/auto_research/post_training/oct11_checkpoint.py": "1e60e7a8c12d0552ebdb8a8088dd2bf019c99a785dfa7a8e84794e308ea66550",
+    "scripts/run_zcpo_checkpoint.py": "892c332f766187c7c6cbf25d57a3b6e18fdddbf226b8681e5068548686e20c25"
+  },
+  "limitations": [
+    "bounded real checkpoint runtime validation, not benchmark gains"
+  ],
+  "provenance": {
+    "commit": "e9565359ed1cb1c2de26412adf011becb46354f3",
+    "artifact_path": "docs/gpu-validations/zcpo-a100-20261011.json",
+    "metrics_artifact": "docs/post-training/2610.12161-zcpo/metrics/checkpoint-a100-seed42.json",
+    "checkpoint_committed": false
+  }
+}

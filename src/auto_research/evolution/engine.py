@@ -468,7 +468,9 @@ def _paper_ids(genome, papers):
     terms = set(genome.architecture.split("_"))
     matched = []
     for paper in papers:
-        if paper.architecture == genome.architecture or paper.architecture in terms:
+        if paper.arxiv_id == "2610.12444" and genome.optimizer in {"zip-sr", "ze-eden"}:
+            matched.append(paper.arxiv_id)
+        elif paper.architecture == genome.architecture or paper.architecture in terms:
             matched.append(paper.arxiv_id)
         elif paper.architecture == "data_mixture" and genome.data_recipe != "wikitext":
             matched.append(paper.arxiv_id)

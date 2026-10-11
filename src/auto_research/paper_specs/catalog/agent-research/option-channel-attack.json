@@ -1,0 +1,9 @@
+{
+  "domain": "agent-research", "key": "option-channel-attack",
+  "title": "One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails",
+  "paper_url": "https://arxiv.org/abs/2610.12292", "detail_path": "agent-research/2610.12292-option-channel-attack/README.md",
+  "topic": ["Agent 安全", "类型化守门模型"], "first_author": "Seyedarmin Azizi",
+  "first_author_affiliation": "University of Southern California", "published": "2026-10-08",
+  "code": "https://github.com/ArminAzizi98/option-channel-attack", "adapter": "option-channel-attack", "priority": "P0",
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/option-channel-attack-a100-20261011.json"
+}

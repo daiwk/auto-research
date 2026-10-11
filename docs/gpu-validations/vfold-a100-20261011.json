@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "adapter_key": "vfold",
+  "validated_at": "2026-10-11",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_vfold_checkpoint.py",
+    "--checkpoint-path",
+    "checkpoints/qwen3-4b",
+    "--checkpoint-id",
+    "Qwen/Qwen3-4B-Instruct-2507",
+    "--checkpoint-revision",
+    "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "--calibration-examples",
+    "32",
+    "--validation-examples",
+    "4",
+    "--max-tokens",
+    "256",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--train-path",
+    "data/gsm8k-holdout/train.jsonl",
+    "--validation-path",
+    "data/gsm8k-holdout/validation.jsonl",
+    "--seed",
+    "42",
+    "--device",
+    "cuda",
+    "--output",
+    "runs/vfold-42.json",
+    "--split-manifest",
+    "data/gsm8k-holdout/split.json"
+  ],
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c"
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "result": "passed",
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "bf16_fold_relative_logit_error": 0.017293449491262436,
+    "matched_length_cache_examples": 3,
+    "matched_length_cache_reduction_mean": 0.15057666273174397
+  },
+  "executed_source_sha256": {
+    "src/auto_research/foundation/vfold.py": "be50cc9699ad36137f640f8cedf4d3a1a46a9d09bbd7c95663e3d2900c26d14b",
+    "src/auto_research/foundation/vfold_cache.py": "e0b2df6a3821816fc5ee75f0cc5f8118bf83d579f0d23750392abd0959bdaab0",
+    "scripts/run_vfold_checkpoint.py": "7c2621845c0f80f394d1422f4c84b85fd18f222c2ca47a1cbaea468f67752c9e"
+  },
+  "limitations": [
+    "small GSM8K training-only holdout; not official LongBench/RULER",
+    "eager materialization incurs transient full values; no kernel latency gain claimed",
+    "first 4 and last 128 values protected; keys never merged",
+    "batch-one Qwen3 full-attention backend; no beam or speculative rollback"
+  ],
+  "provenance": {
+    "commit": "c6e73e70d34a94c0b53471c84743822db0722edb",
+    "artifact_path": "docs/gpu-validations/vfold-a100-20261011.json",
+    "metrics_artifact": "docs/foundation-models/2610.12338-vfold/metrics/checkpoint-a100-seed42.json",
+    "checkpoint_committed": false
+  }
+}
