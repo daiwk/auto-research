@@ -154,7 +154,7 @@ def main():
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     report = {"schema_version": 2, "manifest_ref": "agent-research:ontrack", "method": "ontrack",
               "dataset": DATASET, "seeds": [a.seed], "metrics": metrics,
-              "evaluation_protocol": {"tier": "l2_public", "diagnostic_only": False, "formal_comparison": False,
+              "evaluation_protocol": {"tier": "l2_public_dataset", "diagnostic_only": False, "formal_comparison": False,
                                       "seeds": [a.seed], "claim_policy": "bounded public-log replay, not live Agent capability or production safety"},
               "checkpoint": {"id": EMBEDDING, "revision": EMBEDDING_REVISION, "device": "cpu"},
               "dataset_provenance": {"id": DATASET, "revision": DATA_REVISION, "sha256": data_hash,
@@ -168,7 +168,12 @@ def main():
               "reference_ids": [r["instance_id"] for r in reference_rows],
               "rows": [{**r, "resolved": label, "counterfactual_stop": stop} for r, label, stop in zip(result, labels, stopped)],
               "provenance": {"original_code_commit": commit, "artifact_path": str(a.output),
-                             "dataset_fingerprint": data_hash},
+                             "dataset_fingerprint": data_hash,
+                             "executed_source_sha256": {source: hashlib.sha256(subprocess.check_output(
+                                 ["git", "show", f"{commit}:{source}"])).hexdigest() for source in (
+                                     "scripts/run_ontrack_public_replay.py", "src/auto_research/agent_research/ontrack.py",
+                                     "src/auto_research/agent_research/ontrack_transport.py",
+                                     "src/auto_research/agent_research/ontrack_replay.py")}},
               "limitations": ["CPU-only; no trajectory commands executed; no live SWE-bench claimed",
                               "path-string extractor is not complete dependency tracing; no bitset runtime claim",
                               "first k events and truncated references; not original 2294-trace protocol",
