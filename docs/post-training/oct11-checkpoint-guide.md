@@ -3,7 +3,7 @@
 这些入口执行真实模型，不自动把短运行升级为论文复现收益。建议在 Linux NVIDIA GPU 上运行；已验证设备为 A100。路径由用户提供，不包含开发机器身份或 SSH 配置。
 
 ```bash
-python -m pip install -e '.[llm-evolution]'
+python -m pip install -e '.[post-training-gpu]'
 python scripts/split_public_training_jsonl.py --help
 python scripts/run_vfold_checkpoint.py --help
 python scripts/run_recal_checkpoint.py --help
@@ -52,5 +52,20 @@ PIVOT 使用单独的 Banking77 官方 train-only 385/77 分区与 Qwen2.5-0.5B 
 - [Data-Space Iteration](../foundation-models/2610.12102-data-space-iteration/README.md)：公开 CIFAR-10 训练图像上从零训练小 UNet teacher，再分别运行两种 DMD 配方；三种子结果混合，像素池化距离不是论文 FID。
 
 图像入口只需要官方五份 CIFAR-10 `data_batch_*` 训练文件，逐份核验 MD5；不要传入官方 test 来代替 validation。各方法使用自己的预算和评价合同，不能把不同领域的短诊断指标直接横向排名。
+
+各入口的附加依赖分开安装，不把 micro-LLM 的 `llm-evolution` 扩展误认为 checkpoint 环境：
+
+```bash
+# 真实稀疏 CUDA kernel（Linux NVIDIA）
+python -m pip install -e '.[sparse-decoding-gpu]'
+# V-CoLA 的图像 processor / Qwen3.5 多模态运行环境
+python -m pip install -e '.[multimodal]'
+# 从零训练图像 teacher / DMD，并计算 SciPy Fréchet 诊断
+python -m pip install -e '.[data-space-gpu]'
+# Memento3 固定环境版本；模型依赖由 post-training-gpu 提供
+python -m pip install -e '.[post-training-gpu]' 'gymnasium==1.1.1'
+# Option-Channel 使用 Laya 公开 checkpoint
+python -m pip install -e '.[system-one-gpu]'
+```
 
 这些结果验证真实 forward/backward、参数或缓存改变及数据隔离。单 seed、几道验证题不能支撑稳定提升；LoRA 位移不是全参数位移，持久缓存占用不是端到端峰值或延迟。Evolve 只有在控制器能调用并评估算子后才登记为已集成；本批除 ZIP/ZE 优化器外，没有据论文名称自动晋级。

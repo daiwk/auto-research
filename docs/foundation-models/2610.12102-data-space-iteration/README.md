@@ -70,6 +70,8 @@ $$
 
 ## 本地复现
 
+安装实际运行依赖（包含距离计算所需的 SciPy）：`python -m pip install -e '.[data-space-gpu]'`。
+
 > **本地对照口径：** 同一实际训练 teacher、同一数据划分和同预算的 `flow-renoise` / `data-space`。每个 seed 都保留两条 recipe 的 1/2/3/4 NFE EMA 输出指标，负结果和失败 seed 不能筛掉。
 
 本地模型是无类别条件的缩小二尺度残差 U-Net；它保留真实 flow matching → teacher/fake/generator → 交替 DMD 链路，但不是原文 class-conditional ImageNet 模型或 SongUNet-55M。公开 CIFAR-10 五个训练 batch 必须先逐文件校验官方 MD5，才反序列化；类均衡训练 1,024 张 / 留出 256 张固定划分不重叠，官方 test 不读取。

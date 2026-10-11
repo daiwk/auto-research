@@ -32,3 +32,5 @@
 - Memento3 的运行模型只看公开 grid 与实际交互历史；生成 Python 由有界 AST 解释器处理，未调用 `exec/eval`，不输入隐藏环境转移或 gold plan。单测手写模型不进入运行时 fallback。
 
 `fidelity-source-inventory.json` 是上述角色核验后的 AST 辅助清单，不是语义正确性或能力通过证书。实际 9B 四份权重的 SHA-256 已独立匹配 Hugging Face 固定官方 revision；执行源码摘要也与相应不可变提交和远端文件核对。
+
+本批已登记回执的 38 个执行源码摘要均与其不可变历史提交匹配。ZCPO 的共享 `oct11_objectives.py` 此后增加了 PIVOT 的 frozen-reference KL 参数和分支；逐段差异审查确认 ZCPO 算子未变，不把旧回执的文件摘要重写成新版本。

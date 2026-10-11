@@ -72,6 +72,8 @@ PYTHONPATH=src python scripts/run_sguid_checkpoint.py \
 
 仅接受已核验的公开训练集派生 train/validation 切分；官方 test 不读取。训练答案仅供外部数值验证器和离线技能生成使用；学生训练与验证输入只有问题，检索也不看答案。教师与学生共用实时更新的参数，教师 forward 在 `no_grad` 下执行，不使用更强外部 checkpoint。
 
+教师和学生都对**同一段学生 rollout**做 teacher-forced 评分：各自提示前缀之后接相同 response token，逐 token 对齐概率。教师开启 thinking 指的是其提示上下文模式，并不是另外生成、验证一条教师思维链后再评分。
+
 论文要求学生关闭 thinking，教师与验证开启 thinking。入口会分别渲染 `enable_thinking=False/True` 的实际 chat prefix，核验闭合/开启 `<think>` 块，保存原始 prefix、SHA256 以及 requested/effective 模式；不支持真实切换时，在加载模型和训练前失败。接受关键字参数不等于支持该协议，输出 reasoning 是否正确和是否截断仍需另行计量。
 
 **首次失败不是筛选符号错误。** 公开 `Qwen3-4B-Instruct-2507` 的模板忽略 thinking 参数，旧记录里的 teacher/evaluation thinking 字段仅表示请求，不能作为实际协议证据。旧原始产物不重写，也不生成 passed 回执。8 步探测的 48 个技能事件中，39 个负系数、9 个弱信号、0 个正系数；8 次真实梯度更新使 adapter 探测位移为 0.03139，但所有技能的早/晚积极教学次数均为 0，因而无技能入选，精确恢复本轮初始权重，未执行紧凑库训练和第二轮。验证 4 题均正确只说明这组短问题容易，不证明技能有效。保留该失败，不能将负教学或非零梯度计作积极活动；新的 Qwen3.5 运行仍使用预设 h=2、gap clip=3、tau=5，不因失败降低门槛。
@@ -84,4 +86,4 @@ PYTHONPATH=src python scripts/run_sguid_checkpoint.py \
 
 `sguid_checkpoint.py` 负责真实生成、外部验证、live 教师评分、反向传播、两轮生命周期及原始运行记录；`oct11_objectives.py` 负责系数和持久性筛选。运行产物保存 baseline/final validation、EOS/截断、逐技能正负/弱信号及真实参数位移。
 
-这是 L1 有界机制验证。区别于原论文：使用 Qwen3.5-9B 混合文本网络而非原 Qwen3、GSM8K holdout、q/v rank-8 LoRA、当前 LM 的平均末层 hidden-state cosine 检索而非 Qwen3-Embedding-0.6B；预定 32 步探测按前/后半段划分、晚期门槛缩为 2（原论文为 10），而非原始 200 步统计；不复现原 all-linear rank-64、dropout=0.05、原技能生成提示或数学大赛收益。门槛只由预设训练预算决定，不根据验证准确率调整。截断响应的数值匹配与 EOS 完成分开报告。GPU 回执、稳定指标与目录登记必须在实跑核验后补入，不能用 CPU 测试代替。
+这是 L1 有界机制验证。区别于原论文：使用 Qwen3.5-9B 混合文本网络而非原 Qwen3、GSM8K holdout、q/v rank-8 LoRA、当前 LM 的平均末层 hidden-state cosine 检索而非 Qwen3-Embedding-0.6B；预定 32 步探测按前/后半段划分、晚期门槛缩为 2（原论文为 10），而非原始 200 步统计；第二轮探测仍最多检索 6 个技能，紧凑库训练最多 3 个，不是作者第二轮检索也缩为 3 的配方；不复现原 all-linear rank-64、dropout=0.05、原技能生成提示或数学大赛收益。完整词表 signed KL 是论文允许的广义距离，但不是作者最终的 bounded SGSD；负系数项没有损失下界，有限梯度与裁剪检查只支持本地短跑，不构成长期稳定保证。门槛只由预设训练预算决定，不根据验证准确率调整。截断响应的数值匹配与 EOS 完成分开报告。GPU 回执、稳定指标与目录登记必须在实跑核验后补入，不能用 CPU 测试代替。
