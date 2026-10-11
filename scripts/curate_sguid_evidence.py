@@ -255,7 +255,12 @@ def summarize(report):
             "evaluation_max_tokens": evaluation_budget,
             "baseline_validation_exact_match": report["baseline"]["exact_match"],
             "final_validation_exact_match": report["final_validation"]["exact_match"],
+            "validation_exact_match_delta": (report["final_validation"]["exact_match"]
+                                              - report["baseline"]["exact_match"]),
             "validation_examples": report["final_validation"]["examples"],
+            "baseline_validation_eos_completed": report["baseline"]["eos_completed"],
+            "baseline_validation_truncated": report["baseline"]["truncated"],
+            "final_validation_eos_completed": report["final_validation"]["eos_completed"],
             "validation_truncated": report["final_validation"]["truncated"], "rounds": summaries}
 
 
@@ -282,7 +287,7 @@ def curate(report, *, commit, validated_at, committed_hashes):
     limitations = ["single-seed bounded L1 mechanism diagnostic; not AIME/HMMT improvement",
                    "GSM8K training-only holdout instead of DAPO-Math-17K",
                    "current LM hidden cosine retrieval, not original embedding checkpoint",
-                   "q/v rank-8 LoRA and reduced early/late window/h; not original all-linear rank-64 run",
+                   "q/v rank-8 LoRA and non-original early/late window/h; not original all-linear rank-64 run",
                    "signed generalized full-vocabulary KL, not original SGSD bounded discrepancy",
                    "EOS/truncations and any negative validation outcome retained"]
     if report["protocol"]["backbone"]["model_type"] == "qwen3_5":
@@ -301,7 +306,8 @@ def curate(report, *, commit, validated_at, committed_hashes):
     command += ["--validation-examples", str(metrics["validation_examples"]), "--seed", str(seed),
                 "--device", "cuda", "--output", f"runs/sguid-seed{seed}.json"]
     payload = {"schema_version": 2, "manifest_ref": "post-training:sguid", "method": "sguid",
-               "dataset": report["dataset"]["id"], "seeds": [seed], "metrics": metrics,
+               "diagnostic_only": True, "capability_passed": False,
+               "dataset": report["dataset"]["id"], "seed": seed, "seeds": [seed], "metrics": metrics,
                "seed_results": [{"seed": seed, **metrics}],
                "evaluation_protocol": {"tier": "l1_mechanism", "diagnostic_only": True,
                    "formal_comparison": False, "test_read": False, "seeds": [seed],
@@ -313,6 +319,8 @@ def curate(report, *, commit, validated_at, committed_hashes):
     receipt = {"schema_version": 1, "adapter_key": "sguid", "validated_at": validated_at,
                "accelerator": report["accelerator"], "command": command, "dataset": report["dataset"],
                "checkpoint": report["checkpoint"], "result": "passed", "evaluation_tier": "l1_mechanism",
+               "diagnostic_only": True, "capability_passed": False,
+               "claim_policy": "execution gate only; no capability or validation gain claim",
                "metrics": metrics, "limitations": limitations, "executed_source_sha256": committed_hashes,
                "provenance": {"commit": commit, "artifact_path": receipt_path,
                    "metrics_artifact": metric_path, "checkpoint_committed": False}}

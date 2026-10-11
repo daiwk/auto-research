@@ -1,6 +1,6 @@
 # SGUID：按持续教学信号选择技能，驱动模型—技能共同进化
 
-> 已实现真实 checkpoint 两轮链路和 CPU 合同测试。支持真实 thinking 切换的 Qwen3.5-9B 已在 A100 实跑：第一轮完成，第二轮持久性筛选失败并精确恢复权重。整体两轮未完成，不生成通过回执，不宣称论文级能力提升。
+> Qwen3.5-9B 的固定扩展协议已在 A100 完成两轮、464 次真实梯度更新，技能筛选、权重恢复与重新蒸馏均通过机制核验。**4 题 validation 的 EM 从 75% 降到 25%**，前后均有 2 题截断；保留负结果。GPU 回执只证明 L1 有界机制执行，不证明能力提升。此前失败运行也保持原样归档。
 
 ## 论文信息
 
@@ -59,11 +59,11 @@ PYTHONPATH=src python scripts/run_sguid_checkpoint.py \
   --validation-path data/gsm8k-holdout/validation.jsonl \
   --split-manifest data/gsm8k-holdout/split.json \
   --dataset-revision 3101c7d5072418e28b9008a6636bde82a006892c \
-  --training-examples 32 --validation-examples 4 \
-  --probe-steps 32 --internalization-steps 16 \
-  --candidate-count 16 --retrieve-count 6 --late-minimum 2 \
-  --max-tokens 768 --skill-tokens 256 --seed 42 --device cuda \
-  --output runs/sguid-seed42.json
+  --training-examples 200 --validation-examples 4 --rounds 2 \
+  --probe-steps 200 --internalization-steps 32 \
+  --candidate-count 32 --retrieve-count 6 --late-minimum 2 \
+  --max-tokens 1024 --skill-tokens 256 --evaluation-max-tokens 3072 \
+  --seed 42 --device cuda --output runs/sguid-expanded-seed42.json
 ```
 
 此命令使用真实 `Qwen3_5ForConditionalGeneration` 文本分支（需要支持该类的 Transformers），不是把多模态网络替换为 Qwen3。视觉分支冻结且不输入图像，q/v LoRA 仅安装到文本解码器中具有这两个投影的 full-attention 层；混合 linear-attention 层仍执行原算子。运行记录报告实际模型类、模型类型和替换模块数。
@@ -78,7 +78,9 @@ PYTHONPATH=src python scripts/run_sguid_checkpoint.py \
 
 **首次失败不是筛选符号错误。** 公开 `Qwen3-4B-Instruct-2507` 的模板忽略 thinking 参数，旧记录里的 teacher/evaluation thinking 字段仅表示请求，不能作为实际协议证据。旧原始产物不重写，也不生成 passed 回执。8 步探测的 48 个技能事件中，39 个负系数、9 个弱信号、0 个正系数；8 次真实梯度更新使 adapter 探测位移为 0.03139，但所有技能的早/晚积极教学次数均为 0，因而无技能入选，精确恢复本轮初始权重，未执行紧凑库训练和第二轮。验证 4 题均正确只说明这组短问题容易，不证明技能有效。保留该失败，不能将负教学或非零梯度计作积极活动；新的 Qwen3.5 运行仍使用预设 h=2、gap clip=3、tau=5，不因失败降低门槛。
 
-**9B 实跑预算：** 固定 32 个训练问题，由前 16 个训练轨迹生成候选库；每轮预定 32 步探测（早/晚各 16 步）、16 步紧凑库训练，响应上限 768 token，技能上限 256 token，检索上限 6，两轮保留上限为 6/3。validation 固定 4 题，只外部评分，不挑技能、参数或运行预算。
+### 9B 首次短跑：保留失败
+
+固定 32 个训练问题，由前 16 个训练轨迹生成候选库；每轮预定 32 步探测（早/晚各 16 步）、16 步紧凑库训练，响应上限 768 token，技能上限 256 token，检索上限 6，两轮保留上限为 6/3。validation 固定 4 题，只外部评分，不挑技能、参数或运行预算。
 
 | 实际阶段 | 真实更新 / 非零技能事件 | 正教学事件（早 / 晚） | 结果 |
 |---|---|---|---|
@@ -89,9 +91,24 @@ PYTHONPATH=src python scripts/run_sguid_checkpoint.py \
 
 两轮探测的技能条件教师支持值均为负；正系数事件来自错误响应上的抑制，而非正确响应上的增强。第二轮晚期只有 1 个错误响应，因此 6 次正教学事件分散到 6 个技能，各自晚期次数不够。活动计数、来源 SHA、实时策略链和恢复权重均经独立复核；这不是代码会计错误，也不能用非零梯度代替持续性条件。baseline/final 的 4 个 thinking 验证响应全部截断、EM 均为 0，不能据此认定模型真实能力为 0 或宣称第一轮提升。
 
-[失败审计产物](../../research-audits/oct11-sguid-failed-selection.json)绑定实际执行提交与逐文件摘要，保留活动、梯度、技能和恢复证据，但明确 `result=failed`、`gpu_pass_receipt=false`。整体两轮验收仍未完成；不降低门槛、塞回退技能或反复换 seed 直到通过。
+[失败审计产物](../../research-audits/oct11-sguid-failed-selection.json)绑定该次实际执行提交与逐文件摘要，保留活动、梯度、技能和恢复证据，明确 `result=failed`、`gpu_pass_receipt=false`。该次运行未完成两轮；后续扩展通过不能改写这次失败。
 
-本轮继续扩展训练，预算、完整命令与不可更改的验收条件已提前写入[扩展预注册](../../research-audits/oct11-sguid-expanded-protocol.md)。新增 `--evaluation-max-tokens` 仅改变 baseline/final 外部评分输出上限，不改变技能生成、训练与筛选；旧记录不回填新预算。
+### 固定扩展：两轮执行完成，验证效果下降
+
+预算与验收条件在执行前写入[扩展预注册](../../research-audits/oct11-sguid-expanded-protocol.md)，源码冻结在 `319008f69ac6224ad0a2dfe3146d551c1999f5e3`。从原 checkpoint 与零输出 LoRA 重新训练，seed 固定 42，不续训旧成功轮次、不筛错误题、不换 seed。前 200 个训练问题，每轮前 32 个当前学生轨迹生成 32 个候选；probe 早/晚各 100 步，随后恢复本轮初始权重并重新建立优化器做 32 步 compact。
+
+| 实际阶段 | 真实更新 / 非零技能事件 | 正教学事件（早 / 晚） | 测得结果 |
+|---|---|---|---|
+| 第一轮 probe | 200 / 1200 | 72 / 90 | 筛选 6 个技能；探测位移 0.656916 |
+| 第一轮 compact | 32 / 192 | — | 从恢复后的初始权重训练；位移 0.083882 |
+| 第二轮 probe | 200 / 1200 | 78 / 84 | 从第一轮更新策略重新产库；筛选 3 个技能；探测位移 0.618361 |
+| 第二轮 compact | 32 / 96 | — | 从第二轮恢复权重重新训练；位移 0.091965 |
+
+共 464 次有限非零梯度更新，最终 adapter 位移 0.173899。逐步权重 SHA 链、恢复点、重新生成技能的来源、活动统计、固定 $h=2$ 持续性门槛和排序均由严格核验器检查；远端执行文件及 train/validation 摘要也独立匹配冻结源码与公开数据切分。
+
+训练响应上限 1024 token，独立 baseline/final evaluation 上限 3072 token。固定 4 题的 EM **75% → 25%（下降 50 个百分点）**；EOS 完成均为 2/4，截断均为 2/4。仅 4 题、单 seed 且一半截断，不支持统计能力比较。两轮 probe 的技能支持值仍全部为负；正系数来自错误响应上的抑制而非正确响应上的增强。signed KL 负项无下界，执行通过不代表优化稳定或能力收益。
+
+[稳定指标](metrics/checkpoint-a100-seed42.json)与[GPU 回执](../../gpu-validations/sguid-a100-20261012.json)保留负结果、截断及源码来源。回执 `result=passed` 仅表示机制执行门禁通过，`capability_passed=false`、`diagnostic_only=true`；不作为 Evolve 能力晋级依据。新增 `--evaluation-max-tokens` 只控制外部评分输出上限，旧失败产物不回填新预算。
 
 本次 CPU 测试已核验：第二轮由更新后的策略产生新库；探测后精确恢复本轮权重；重新建立优化器，不继承探测 momentum；无有效技能时显式失败并保存候选技能、真实活动计数和失败原因，不塞回退技能或降低阈值。非零门控信号与实际更新分别统计，只有测得有限且非零的梯度才推进优化器；零梯度不推进 momentum，非有限梯度直接失败并恢复本轮初始权重。
 
@@ -99,4 +116,4 @@ PYTHONPATH=src python scripts/run_sguid_checkpoint.py \
 
 `sguid_checkpoint.py` 负责真实生成、外部验证、live 教师评分、反向传播、两轮生命周期及原始运行记录；`oct11_objectives.py` 负责系数和持久性筛选。运行产物保存 baseline/final validation、EOS/截断、逐技能正负/弱信号及真实参数位移。
 
-这是 L1 有界机制验证。区别于原论文：使用 Qwen3.5-9B 混合文本网络而非原 Qwen3、GSM8K holdout、q/v rank-8 LoRA、当前 LM 的平均末层 hidden-state cosine 检索而非 Qwen3-Embedding-0.6B；预定 32 步探测按前/后半段划分、晚期门槛缩为 2（原论文为 10），而非原始 200 步统计；第二轮探测仍最多检索 6 个技能，紧凑库训练最多 3 个，不是作者第二轮检索也缩为 3 的配方；不复现原 all-linear rank-64、dropout=0.05、原技能生成提示或数学大赛收益。完整词表 signed KL 是论文允许的广义距离，但不是作者最终的 bounded SGSD；负系数项没有损失下界，有限梯度与裁剪检查只支持本地短跑，不构成长期稳定保证。门槛只由预设训练预算决定，不根据验证准确率调整。截断响应的数值匹配与 EOS 完成分开报告。GPU 回执、稳定指标与目录登记必须在实跑核验后补入，不能用 CPU 测试代替。
+这是 L1 有界机制验证。区别于原论文：使用 Qwen3.5-9B 混合文本网络而非原 Qwen3、GSM8K holdout、q/v rank-8 LoRA、当前 LM 的平均末层 hidden-state cosine 检索而非 Qwen3-Embedding-0.6B；扩展 probe 的 early/late 各 100 步，不是原表 75/100，晚期门槛为 2（原论文为 10）；第二轮 probe 仍最多检索 6 个技能，compact 最多 3 个，不是作者第二轮检索也缩为 3 的配方；不复现原 all-linear rank-64、dropout=0.05、原技能生成提示或数学大赛收益。完整词表 signed KL 是论文允许的广义距离，但不是作者最终的 bounded SGSD；负系数项没有损失下界，有限梯度与裁剪检查不构成长期稳定保证。门槛由预注册预算固定，不根据验证准确率调整。截断响应的数值匹配与 EOS 完成分开报告；真实 GPU 记录不能被解释为原论文 benchmark 或 Evolve 能力收益。

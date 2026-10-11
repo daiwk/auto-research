@@ -44,6 +44,28 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
     assert any(item["title"] for item in experiments)
 
 
+def test_sguid_dashboard_keeps_negative_validation_and_mechanism_tier():
+    payload = json.loads((ROOT / "docs/assets/data/experiment-dashboard.json").read_text())
+    items = [item for item in payload["experiments"] if item["method"] == "sguid"]
+    assert len(items) == 1
+    item = items[0]
+    assert item["domain"] == "post-training"
+    assert item["dataset"] == "openai/grade-school-math"
+    assert item["seed"] == "42"
+    assert item["metrics"]["completed_rounds"] == 2
+    assert item["metrics"]["baseline_validation_exact_match"] == .75
+    assert item["metrics"]["final_validation_exact_match"] == .25
+    assert item["metrics"]["validation_exact_match_delta"] == -.5
+    assert item["evidence"]["diagnostic_only"] is True
+    assert item["evidence"]["formal_comparison"] is False
+    assert item["evidence"]["tier"] == "l1_mechanism"
+    script = (ROOT / "docs/assets/javascripts/experiment-dashboard.js").read_text()
+    # Suppress saturated Agent fixture scores, not measured non-Agent smoke
+    # comparisons such as SGUID's negative validation delta.
+    assert 'const agentDiagnostic = diagnostic && item.domain === "agent";' in script
+    assert "const primary = agentDiagnostic" in script
+
+
 def test_agent_mechanism_results_are_not_presented_as_capability_scores():
     payload = json.loads(
         (ROOT / "docs/assets/data/experiment-dashboard.json").read_text(encoding="utf-8")

@@ -18,6 +18,7 @@
 | RLVR | [Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards](2610.11519-residual-advantage/README.md) | Harbin Engineering University / Tencent / Harbin Institute of Technology，2026-10-08 | 未发现官方代码 | `residual-advantage` |
 | On-policy distillation | [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](2610.11291-semi-opd/README.md) | UCLA / NVIDIA（论文注明实习），2026-10-08 | 未发现官方代码 | `semi-opd` |
 | 组相对策略优化 | [When KL Regularization Misfires in Group Policy Optimization](2610.12161-zcpo/README.md) | Alibaba Group，2026-10-08 | 未发现官方代码 | `zcpo` |
+| On-policy self-distillation | [Which Skill to Distill? SGUID: Selecting a Compact Skill Bank for Model–Skill Co-Evolution](2610.12367-sguid/README.md) | New York University，2026-10-08 | 未发现官方代码 | `sguid` |
 | On-policy distillation | [Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals](2610.11247-opd-learning-signals/README.md) | University of Pennsylvania，2026-10-08 | [已开源](https://github.com/leizhao7/opd-learning-signals) | `opd-learning-signals` |
 | Agentic RL | [Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT](2610.03361-follow-the-winners/README.md) | Trent AI Limited，2026-10-02 | 未发现官方代码 | `follow-the-winners` |
 | 后训练数据选择 | [LESSER: Post-Training Data Selection with Output-Layer Gradients](2610.03702-lesser/README.md) | University of Pennsylvania，2026-10-02 | 未发现官方代码 | `lesser` |

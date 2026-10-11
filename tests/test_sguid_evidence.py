@@ -102,7 +102,58 @@ def test_accounting_fixture_retains_negative_validation_and_truncation():
     assert summary["completed_rounds"] == 2
     assert summary["final_validation_exact_match"] < summary["baseline_validation_exact_match"]
     assert summary["validation_truncated"] == 2
+    assert summary["baseline_validation_truncated"] == 1
+    assert summary["baseline_validation_eos_completed"] == 1
+    assert summary["final_validation_eos_completed"] == 0
+    assert summary["validation_exact_match_delta"] == -.5
     assert all(r["probe_updates"] == 4 for r in summary["rounds"])
+
+
+def test_execution_receipt_does_not_claim_capability_passed():
+    report = accounting_fixture()
+    outputs = module().curate(report, commit="c" * 40, validated_at="2026-10-12",
+                              committed_hashes=report["executed_source_sha256"])
+    for output in outputs.values():
+        assert output["diagnostic_only"] is True
+        assert output["capability_passed"] is False
+        assert output["metrics"]["validation_exact_match_delta"] == -.5
+    receipt = next(v for k, v in outputs.items() if "/gpu-validations/" in k)
+    assert receipt["result"] == "passed"  # Execution, explicitly not capability.
+
+
+def test_committed_sguid_expanded_evidence_retains_measured_negative_result():
+    from pathlib import Path
+
+    from auto_research.gpu_validation import STANDALONE_GPU_RECEIPTS, load_gpu_receipt
+    from auto_research.paper_specs.catalog import catalog_records
+
+    receipt_path = STANDALONE_GPU_RECEIPTS["sguid"]
+    receipt = load_gpu_receipt(Path(receipt_path))
+    payload = json.loads(Path(receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["metrics"] == payload["metrics"]
+    assert payload["seed"] == 42 and payload["seeds"] == [42]
+    assert receipt["executed_source_sha256"] == payload["provenance"]["executed_source_sha256"]
+    assert receipt["provenance"]["commit"] == "319008f69ac6224ad0a2dfe3146d551c1999f5e3"
+    assert receipt["capability_passed"] is payload["capability_passed"] is False
+    metrics = payload["metrics"]
+    assert metrics["completed_rounds"] == 2
+    assert sum(r["probe_updates"] + r["internalization_updates"] for r in metrics["rounds"]) == 464
+    assert [r["selected_skills"] for r in metrics["rounds"]] == [6, 3]
+    assert metrics["baseline_validation_exact_match"] == .75
+    assert metrics["final_validation_exact_match"] == .25
+    assert metrics["validation_exact_match_delta"] == -.5
+    assert metrics["validation_examples"] == 4
+    assert metrics["baseline_validation_truncated"] == metrics["validation_truncated"] == 2
+    assert metrics["evaluation_max_tokens"] == 3072
+    protocol = payload["evaluation_protocol"]
+    assert protocol["test_read"] is protocol["formal_comparison"] is False
+    assert protocol["diagnostic_only"] is True
+    paper = next(r for r in catalog_records() if r["domain"] == "post-training" and r["key"] == "sguid")
+    assert paper["requires_gpu_validation"] is True
+    assert paper["gpu_validation_artifact"] == receipt_path
+    for record in payload["runtime_details"]["rounds"]:
+        assert record["status"] == "completed"
+        assert all("student_rollout" not in t and "generated_skill_response" not in t for t in record["curation"])
 
 
 @pytest.mark.parametrize("invalid", [True, False, 0, -1, 1.5, "3072"])

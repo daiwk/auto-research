@@ -260,6 +260,10 @@
 - 2026-10-01 · 一作：Shiu-Hong Kao · [RLCPR: Rethinking Probability-Based Reinforcement Learning From Posterior Concentration](../2610.01458-rlcpr/README.md)（`rlcpr`）：概率奖励在同组推理后验接近时难以区分冗长推理；RLCPR 只对“全组都长、答案后验又集中”的组施加相对长度惩罚。另用直接作答时的 token 平均熵把数据分层，让保留分布偏向低不确定样本。
 - 2026-09-16 · 一作：Yihao Ai · [Trajectory Learnability for Offline On-Policy Distillation](../2609.18321-trajectory-learnability/README.md)（`trajectory-learnability`）：用成功轨迹训练参考模型，以参考与当前策略逐 token 对数似然变化衡量可学性，并据此重加权离线 OPD 轨迹。
 
+## New York University
+
+- 2026-10-08 · 一作：Yuhan Liu · [Which Skill to Distill? SGUID: Selecting a Compact Skill Bank for Model–Skill Co-Evolution](../2610.12367-sguid/README.md)（`sguid`）：语义相关不代表技能真正能够教会模型。SGUID 先从当前模型的已验证训练轨迹生成候选技能，再观察技能在蒸馏早期、晚期是否持续提供与验证器一致的信号。
+
 ## North South University
 
 - 2026-09-29 · 一作：Md. Ismail Hossain · [Overcoming Scaling Limits in On-Policy Self-Distillation for LLM Reasoning](../2609.37915-oasis/README.md)（`oasis-opsd`）：OASIS 把“在哪里监督”和“teacher 看什么 context”解耦：从同一题的 on-policy rollouts 中选最短的已验证轨迹作为 scaffold；teacher context 优先使用另一条未验证尝试；没有 verified rollout 的题不产生训练信号。这样只需要最终答案 verifier，而不需要 gold solution。
