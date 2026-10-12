@@ -10,6 +10,7 @@ packing is supplied to generation.
 from __future__ import annotations
 
 import argparse
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass
 import hashlib
 import json
@@ -102,11 +103,25 @@ class TorchGenerationBackend:
             torch.cuda.manual_seed_all(seed)
         messages = [{"role": "user", "content": task_prompt}]
         if self.tokenizer.chat_template:
-            ids = self.tokenizer.apply_chat_template(
+            encoded = self.tokenizer.apply_chat_template(
                 messages, tokenize=True, add_generation_prompt=True, return_tensors="pt")
         else:
-            ids = self.tokenizer(task_prompt, return_tensors="pt")["input_ids"]
+            encoded = self.tokenizer(task_prompt, return_tensors="pt")
+        # Transformers versions may return either a Tensor or BatchEncoding.
+        # Never replace a returned mask: its padding/special-token semantics matter.
+        if isinstance(encoded, Mapping):
+            ids = encoded.get("input_ids")
+            attention_mask = encoded.get("attention_mask")
+        else:
+            ids, attention_mask = encoded, None
+        if not torch.is_tensor(ids) or ids.ndim != 2 or ids.shape[0] != 1 or ids.shape[1] < 1:
+            raise ValueError("tokenizer must return one nonempty input_ids tensor")
+        if attention_mask is None:
+            attention_mask = torch.ones_like(ids)
+        elif not torch.is_tensor(attention_mask) or attention_mask.shape != ids.shape:
+            raise ValueError("tokenizer attention_mask must match input_ids tensor")
         ids = ids.to(self.device)
+        attention_mask = attention_mask.to(self.device)
         eos = self.model.generation_config.eos_token_id
         if eos is None:
             eos = self.tokenizer.eos_token_id
@@ -116,7 +131,7 @@ class TorchGenerationBackend:
             pad = next((token for token in eos_ids if token is not None), None)
         with torch.inference_mode():
             output = self.model.generate(
-                ids, attention_mask=torch.ones_like(ids), max_new_tokens=max_new_tokens,
+                ids, attention_mask=attention_mask, max_new_tokens=max_new_tokens,
                 **SAMPLING, pad_token_id=pad, use_cache=True, return_dict_in_generate=False)
         emitted = tuple(int(token) for token in output[0, ids.shape[1]:].tolist())
         self.assert_frozen()

@@ -4,7 +4,7 @@ from ..registry import register
 
 def reproduce(dataset_dir, seed=42):
     from auto_research.post_training.oct12_checkpoint import run_adapter
-    return run_adapter("cast", dataset_dir, seed)
+    return run_adapter("cast-opd", dataset_dir, seed)
 
 
 def render(result):
@@ -12,4 +12,4 @@ def render(result):
     return render_checkpoint(result)
 
 
-ADAPTER = register(adapter_from_spec(key="cast", run=reproduce, render=render))
+ADAPTER = register(adapter_from_spec(key="cast-opd", run=reproduce, render=render))

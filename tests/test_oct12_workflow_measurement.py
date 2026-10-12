@@ -285,6 +285,8 @@ def test_torch_backend_rng_reset_exact_suffix_including_eos_and_frozen_weights()
     assert all(call["inference_mode"] for call in backend.model.calls)
     assert all(call["kwargs"]["pad_token_id"] == 0 for call in backend.model.calls)
     assert all(call["kwargs"]["do_sample"] for call in backend.model.calls)
+    assert all(torch.equal(call["kwargs"]["attention_mask"], torch.ones((1, 3), dtype=torch.long))
+               for call in backend.model.calls)
     assert torch.equal(backend.model.weight, before) and backend.model.weight.grad is None
     assert backend.tokenizer.messages[0][0] == [{"role": "user", "content": runner.CIRCLE_TASK}]
     with torch.no_grad():
@@ -313,6 +315,88 @@ def test_torch_backend_refuses_unfrozen_train_mode_or_unverified_source(tmp_path
     with pytest.raises(ValueError, match="bad upstream source hash"):
         runner.TorchGenerationBackend(tmp_path, "official/model", "f" * 40, "cpu")
     assert calls == [(tmp_path, "official/model", "f" * 40)]
+
+
+class FixtureMappingTokenizer(FixtureTokenizer):
+    """Exercises both actual HF BatchEncoding and plain dict return contracts."""
+
+    def __init__(self, container, *, chat=True):
+        super().__init__()
+        self.container = container
+        self.chat_template = "fixture template" if chat else None
+        self.input_ids = torch.tensor([[31, 0, 33]])
+        self.attention_mask = torch.tensor([[1, 0, 1]])
+        self.raw_prompts = []
+
+    def encoded(self):
+        values = {"input_ids": self.input_ids, "attention_mask": self.attention_mask}
+        if self.container == "batch_encoding":
+            from transformers import BatchEncoding
+            return BatchEncoding(values)
+        return values
+
+    def apply_chat_template(self, messages, **kwargs):
+        self.messages.append((messages, kwargs))
+        return self.encoded()
+
+    def __call__(self, prompt, **kwargs):
+        self.raw_prompts.append(prompt)
+        return self.encoded()
+
+
+@pytest.mark.parametrize("container", ["mapping", "batch_encoding"])
+@pytest.mark.parametrize("chat", [True, False])
+def test_tensor_mapping_and_hf_batchencoding_keep_real_attention_mask(container, chat):
+    backend = tensor_fixture_backend()
+    tokenizer = FixtureMappingTokenizer(container, chat=chat)
+    backend.tokenizer = tokenizer
+    generation = backend.generate(runner.CIRCLE_TASK, seed=42, max_new_tokens=64)
+    assert generation.prompt_tokens == 3 and len(generation.token_ids) == 5
+    passed_mask = backend.model.calls[0]["kwargs"]["attention_mask"]
+    assert torch.equal(passed_mask, tokenizer.attention_mask)
+    assert passed_mask.tolist() == [[1, 0, 1]]  # Must not silently become all ones.
+    assert passed_mask.device.type == "cpu"
+    if chat:
+        assert tokenizer.messages[0][0] == [{"role": "user", "content": runner.CIRCLE_TASK}]
+    else:
+        assert tokenizer.raw_prompts == [runner.CIRCLE_TASK]
+
+
+def test_mapping_without_attention_mask_falls_back_to_ones_only_when_missing():
+    backend = tensor_fixture_backend()
+    backend.tokenizer.apply_chat_template = lambda *args, **kwargs: {
+        "input_ids": torch.tensor([[31, 32, 33]])}
+    backend.generate(runner.CIRCLE_TASK, seed=42, max_new_tokens=64)
+    assert torch.equal(backend.model.calls[0]["kwargs"]["attention_mask"],
+                       torch.ones((1, 3), dtype=torch.long))
+
+
+@pytest.mark.parametrize("encoded", [
+    {}, {"input_ids": torch.tensor([31, 32])},
+    {"input_ids": torch.tensor([[31]]), "attention_mask": torch.tensor([[1, 1]])},
+    {"input_ids": torch.tensor([[31]]), "attention_mask": [[1]]},
+])
+def test_malformed_tokenizer_encoding_fails_before_generation(encoded):
+    backend = tensor_fixture_backend()
+    backend.tokenizer.apply_chat_template = lambda *args, **kwargs: encoded
+    with pytest.raises(ValueError, match="tokenizer"):
+        backend.generate(runner.CIRCLE_TASK, seed=42, max_new_tokens=64)
+    assert backend.model.calls == []
+
+
+def test_cli_tokenizer_failure_leaves_fresh_output_absent(tmp_path, monkeypatch):
+    backend = tensor_fixture_backend()
+    backend.tokenizer.apply_chat_template = lambda *args, **kwargs: {
+        "input_ids": torch.tensor([[31]]), "attention_mask": torch.tensor([[1, 1]])}
+    sandbox = FixtureSandbox()
+    monkeypatch.setattr(runner, "TorchGenerationBackend", lambda *args: backend)
+    monkeypatch.setattr(runner, "ProgramSandbox", lambda: sandbox)
+    output = tmp_path / "fresh-failed-run"
+    with pytest.raises(ValueError, match="attention_mask"):
+        runner.main(["--checkpoint", "fixture", "--checkpoint-id", "fixture/model",
+                     "--revision", "f" * 40, "--seeds", "42", "--output", str(output)])
+    assert backend.model.calls == [] and sandbox.programs == []
+    assert not output.exists()
 
 
 def test_cli_rejects_existing_directory_before_sandbox_or_model_load(tmp_path, monkeypatch):

@@ -25,7 +25,16 @@ from .oct12_objectives import (
     project_teacher_scores, protocol_boundary_loss, road_credit, selective_anchor,
 )
 
-OBJECTIVES = ("branch-opd", "cast", "road-mopd", "boundary-evo")
+OBJECTIVES = ("branch-opd", "cast-opd", "road-mopd", "boundary-evo")
+OBJECTIVE_ALIASES = {"cast": "cast-opd"}
+
+
+def normalize_objective(objective):
+    """The old CLI spelling is not a second registry/packaged-adapter key."""
+    canonical = OBJECTIVE_ALIASES.get(objective, objective)
+    if canonical not in OBJECTIVES:
+        raise ValueError("invalid October post-training objective")
+    return canonical
 
 
 @dataclass
@@ -381,7 +390,8 @@ def run_checkpoint(*, objective, student_path, student_id, student_revision, tea
     pbr_weight=1., min_fork_gap=1, credit_size=6, kl_weight=.01, retention=.6,
     priming_examples=2, rounds=2, pool_examples=4, acquisition=2, replay_quota=1,
     teacher_rollouts=2, analyzer_tokens=256):
-    if objective not in OBJECTIVES or min(steps,max_tokens,group,validation_examples) < 1:
+    objective = normalize_objective(objective)
+    if min(steps,max_tokens,group,validation_examples) < 1:
         raise ValueError("invalid objective or runtime budget")
     if objective=="boundary-evo" and (min(priming_examples,pool_examples,acquisition)<1 or rounds<2 or teacher_rollouts<2):
         raise ValueError("priming, acquisition and at least two fresh teacher rollouts required")
@@ -397,7 +407,7 @@ def run_checkpoint(*, objective, student_path, student_id, student_revision, tea
     same_tokenizer = student.tokenizer.get_vocab()==teacher.tokenizer.get_vocab()
     if objective in {"branch-opd","road-mopd"} and not same_tokenizer:
         raise ValueError("BranchOPD/Road require identical token identities")
-    if objective=="cast" and same_tokenizer:
+    if objective=="cast-opd" and same_tokenizer:
         raise ValueError("CAST runtime validates the actual cross-tokenizer path; choose heterogeneous tokenizers")
     install_lora(student.model)
     params = [p for p in student.model.parameters() if p.requires_grad]
@@ -429,7 +439,7 @@ def run_checkpoint(*, objective, student_path, student_id, student_revision, tea
             if objective=="branch-opd":
                 item = branch_step(student,teacher,question,optimizer,max_tokens=max_tokens,forks=forks,
                     continuations=continuations,pbr_weight=pbr_weight,min_fork_gap=min_fork_gap)
-            elif objective=="cast":
+            elif objective=="cast-opd":
                 item = cast_step(student,teacher,question,optimizer,max_tokens=max_tokens,group=group,
                                  credit_size=credit_size,kl_weight=kl_weight)
             else:
@@ -448,7 +458,7 @@ def run_checkpoint(*, objective, student_path, student_id, student_revision, tea
     if objective=="branch-opd":
         activity = {"sampled_branches":sum(item["branches"] for item in history),
                     "pbr_constraints":sum(item["pbr_constraints"] for item in history)}
-    elif objective=="cast":
+    elif objective=="cast-opd":
         activity = {"aligned_tokens":sum(item["aligned_tokens"] for item in history),
                     "unaligned_tokens":sum(item["unaligned_tokens"] for item in history)}
     elif objective=="road-mopd":
@@ -479,12 +489,16 @@ def run_checkpoint(*, objective, student_path, student_id, student_revision, tea
 
 def run_adapter(key, dataset_dir, seed):
     """Packaged adapter entry; require explicit real-checkpoint configuration."""
+    if key not in OBJECTIVES:
+        raise ValueError("packaged adapter requires a canonical objective key; use cast-opd, not cast")
     dataset_dir = Path(dataset_dir)
     path = dataset_dir/f"oct12-{key}.json"
     if not path.is_file():
         raise ValueError(f"real checkpoint configuration required: {path}; see scripts/run_oct12_post_training.py --help")
     config = json.loads(path.read_text())
-    if config.get("objective",key)!=key or any("test" in name for name in config):
+    if not isinstance(config, dict):
+        raise ValueError("adapter configuration must be an object")
+    if normalize_objective(config.get("objective",key))!=key or any("test" in name for name in config):
         raise ValueError("adapter objective mismatch or forbidden test input")
     for name in ("student_path","teacher_path","auxiliary_path","expert_path","analyzer_path",
                  "train_path","validation_path","split_manifest","output"):
@@ -493,6 +507,8 @@ def run_adapter(key, dataset_dir, seed):
             config[name] = value if value.is_absolute() else dataset_dir/value
     config.update(objective=key,seed=seed)
     result = run_checkpoint(**config)
+    if result.get("adapter_key") != key:
+        raise ValueError("checkpoint result adapter key differs from canonical binding")
     # The generic artifact writer then enriches this with its result schema v2.
     result.pop("schema_version",None)
     return result

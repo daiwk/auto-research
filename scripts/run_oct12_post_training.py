@@ -1,12 +1,13 @@
 """Execute bounded real-checkpoint October 9 post-training mechanisms."""
 import argparse
 from pathlib import Path
-from auto_research.post_training.oct12_checkpoint import OBJECTIVES, run_checkpoint
+from auto_research.post_training.oct12_checkpoint import OBJECTIVES, normalize_objective, run_checkpoint
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--objective",choices=OBJECTIVES,required=True)
+    parser.add_argument("--objective",type=normalize_objective,choices=OBJECTIVES,required=True,
+                        help="canonical paper key; cast is a compatibility alias for cast-opd")
     for role in ("student","teacher","auxiliary","expert","analyzer"):
         parser.add_argument(f"--{role}-path",type=Path,required=role in {"student","teacher"})
         parser.add_argument(f"--{role}-id",required=role in {"student","teacher"})
@@ -22,7 +23,7 @@ def main():
         parser.add_argument(f"--{name}",type=int,default=default)
     for name,default in {"learning-rate":1e-5,"pbr-weight":1.,"kl-weight":.01,"retention":.6}.items():
         parser.add_argument(f"--{name}",type=float,default=default)
-    run_checkpoint(**vars(parser.parse_args()))
+    run_checkpoint(**vars(parser.parse_args(argv)))
 
 
 if __name__=="__main__":

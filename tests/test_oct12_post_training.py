@@ -12,8 +12,9 @@ from auto_research.post_training.oct12_objectives import (
     protocol_boundary_loss, rank_normalize, road_credit, selective_anchor,
 )
 from auto_research.post_training.oct12_checkpoint import (
-    ModelRole, boundary_train, branch_step, cast_step, initial_policy, judge_boundary,
-    load_role, math_protocol_constraints, reference_logp, road_step, run_adapter, sample_path,
+    OBJECTIVES, ModelRole, boundary_train, branch_step, cast_step, initial_policy, judge_boundary,
+    load_role, math_protocol_constraints, normalize_objective, reference_logp, road_step,
+    run_adapter, run_checkpoint, sample_path,
 )
 from auto_research.post_training.oct10_checkpoint import install_lora
 
@@ -271,10 +272,134 @@ def test_pbr_detects_boxed_completion_without_gold():
 
 def test_adapter_requires_real_checkpoint_config_and_rejects_test_input(tmp_path):
     with pytest.raises(ValueError,match="real checkpoint"):
-        run_adapter("cast",tmp_path,42)
-    (tmp_path/"oct12-cast.json").write_text(json.dumps({"test_path":"secret.jsonl"}))
+        run_adapter("cast-opd",tmp_path,42)
+    (tmp_path/"oct12-cast-opd.json").write_text(json.dumps({"test_path":"secret.jsonl"}))
     with pytest.raises(ValueError,match="forbidden test"):
+        run_adapter("cast-opd",tmp_path,42)
+
+
+def test_cast_namespace_is_canonical_and_legacy_agent_cast_catalog_is_unchanged():
+    root=Path(__file__).resolve().parents[1]
+    assert OBJECTIVES == ("branch-opd","cast-opd","road-mopd","boundary-evo")
+    assert normalize_objective("cast") == normalize_objective("cast-opd") == "cast-opd"
+    with pytest.raises(ValueError,match="invalid October"):
+        normalize_objective("unrelated-cast")
+    legacy=json.loads((root/"src/auto_research/paper_specs/catalog/agent-research/cast.json").read_text())
+    current=json.loads((root/"src/auto_research/paper_specs/catalog/post-training/cast-opd.json").read_text())
+    assert legacy["key"] == "cast" and legacy["paper_url"].endswith("2607.25308")
+    assert current["key"] == "cast-opd" and current["paper_url"].endswith("2610.13257")
+    assert current["title"].startswith("CAST:")
+    assert not (root/"src/auto_research/paper_specs/catalog/post-training/cast.json").exists()
+    assert not (root/"src/auto_research/reproductions/cast/paper.yaml").exists()
+    spec=json.loads((root/"src/auto_research/reproductions/cast_opd/paper.yaml").read_text())
+    assert spec["key"] == "cast-opd"
+    assert spec["adapter_module"] == "auto_research.reproductions.cast_opd.adapter"
+    assert spec["local_code"] == "src/auto_research/reproductions/cast_opd"
+    assert spec["documentation"] == "docs/reproductions/2610.13257-cast-opd/README.md"
+
+
+@pytest.mark.parametrize("objective",["cast","cast-opd"])
+def test_cast_runtime_alias_enters_actual_loss_and_outputs_canonical_key(tmp_path,monkeypatch,objective):
+    """Tiny optimizer fixture validates branch binding, not public-model capability."""
+    import auto_research.post_training.oct12_checkpoint as runtime
+    train=tmp_path/"train.jsonl"
+    valid=tmp_path/"validation.jsonl"
+    train.write_text(json.dumps({"question":"train Q","answer":"#### 7"})+"\n")
+    valid.write_text(json.dumps({"question":"valid Q","answer":"#### 9"})+"\n")
+    monkeypatch.setattr(runtime,"validate_holdout",lambda *args,**kwargs:{
+        "verified":True,"source_id":"unit-fixture-only","test_read":False})
+    monkeypatch.setattr(runtime,"load_role",lambda path,*args:role(
+        51 if path=="student" else 52,shift=0 if path=="student" else 1))
+    real_cast=runtime.cast_step
+    calls=[]
+    def record_loss(*args,**kwargs):
+        calls.append(args[2])
+        return real_cast(*args,**kwargs)
+    def forbidden_road(*args,**kwargs):
+        pytest.fail("a CAST spelling must never fall through to the Road loss")
+    monkeypatch.setattr(runtime,"cast_step",record_loss)
+    monkeypatch.setattr(runtime,"road_step",forbidden_road)
+    output=tmp_path/"result.json"
+    result=run_checkpoint(objective=objective,student_path="student",student_id="fixture/student",
+        student_revision="a"*40,teacher_path="teacher",teacher_id="fixture/teacher",teacher_revision="b"*40,
+        train_path=train,validation_path=valid,dataset_revision="c"*40,split_manifest=tmp_path/"fixture-split.json",
+        output=output,steps=1,group=2,max_tokens=4,validation_examples=1,device="cpu")
+    assert calls == ["train Q"]
+    assert result["adapter_key"] == json.loads(output.read_text())["adapter_key"] == "cast-opd"
+    assert result["metrics"]["aligned_tokens"] > 0
+    assert result["metrics"]["adapter_parameter_delta_l2"] > 0
+    assert "projected_tensors" not in result["metrics"]
+    assert not result["gold_in_rollout"] and not result["test_read"]
+
+
+@pytest.mark.parametrize("objective",["cast","cast-opd"])
+def test_cast_alias_keeps_heterogeneous_tokenizer_requirement(tmp_path,monkeypatch,objective):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    monkeypatch.setattr(runtime,"validate_holdout",lambda *args,**kwargs:{"verified":True})
+    monkeypatch.setattr(runtime,"load_public_rows",lambda *args:[{"question":"Q","answer":"#### 7"}])
+    monkeypatch.setattr(runtime,"load_role",lambda *args:role(1))
+    with pytest.raises(ValueError,match="actual cross-tokenizer"):
+        run_checkpoint(objective=objective,student_path="student",student_id="fixture/student",
+            student_revision="a"*40,teacher_path="teacher",teacher_id="fixture/teacher",teacher_revision="b"*40,
+            train_path=tmp_path/"train",validation_path=tmp_path/"valid",dataset_revision="c"*40,
+            split_manifest=tmp_path/"split",output=tmp_path/"out",device="cpu")
+    assert not (tmp_path/"out").exists()
+
+
+@pytest.mark.parametrize("configured_objective",[None,"cast","cast-opd"])
+def test_canonical_cast_adapter_config_binds_paths_seed_and_output_key(tmp_path,monkeypatch,configured_objective):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    config={"student_path":"checkpoints/student","train_path":"train.jsonl","output":"run.json","seed":999}
+    if configured_objective is not None:
+        config["objective"]=configured_objective
+    (tmp_path/"oct12-cast-opd.json").write_text(json.dumps(config))
+    captured=[]
+    def diagnostic_run(**kwargs):
+        captured.append(kwargs)
+        return {"schema_version":1,"adapter_key":kwargs["objective"],"diagnostic_only":True}
+    monkeypatch.setattr(runtime,"run_checkpoint",diagnostic_run)
+    result=run_adapter("cast-opd",tmp_path,42)
+    assert result["adapter_key"] == "cast-opd" and "schema_version" not in result
+    assert captured[0]["objective"] == "cast-opd" and captured[0]["seed"] == 42
+    assert captured[0]["student_path"] == tmp_path/"checkpoints/student"
+    assert captured[0]["train_path"] == tmp_path/"train.jsonl"
+    assert captured[0]["output"] == tmp_path/"run.json"
+
+
+def test_adapter_rejects_old_key_file_foreign_objective_and_wrong_result_binding(tmp_path,monkeypatch):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    (tmp_path/"oct12-cast.json").write_text(json.dumps({"objective":"cast"}))
+    with pytest.raises(ValueError,match="canonical objective key"):
         run_adapter("cast",tmp_path,42)
+    with pytest.raises(ValueError,match="real checkpoint"):
+        run_adapter("cast-opd",tmp_path,42)
+    canonical=tmp_path/"oct12-cast-opd.json"
+    canonical.write_text(json.dumps({"objective":"branch-opd"}))
+    with pytest.raises(ValueError,match="adapter objective mismatch"):
+        run_adapter("cast-opd",tmp_path,42)
+    canonical.write_text(json.dumps({"objective":"cast-opd"}))
+    monkeypatch.setattr(runtime,"run_checkpoint",lambda **kwargs:{"adapter_key":"cast"})
+    with pytest.raises(ValueError,match="result adapter key differs"):
+        run_adapter("cast-opd",tmp_path,42)
+
+
+@pytest.mark.parametrize("spelling",["cast","cast-opd"])
+def test_cli_alias_normalizes_before_dispatch_without_loading_model(monkeypatch,spelling):
+    import importlib.util
+    script=Path(__file__).resolve().parents[1]/"scripts/run_oct12_post_training.py"
+    spec=importlib.util.spec_from_file_location("oct12_post_training_cli_fixture",script)
+    cli=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    captured=[]
+    monkeypatch.setattr(cli,"run_checkpoint",lambda **kwargs:captured.append(kwargs))
+    args=["--objective",spelling]
+    for flag in ("student-path","student-id","teacher-path","teacher-id","train-path",
+                 "validation-path","split-manifest","output"):
+        args.extend(["--"+flag,"fixture"])
+    for flag in ("student-revision","teacher-revision","dataset-revision"):
+        args.extend(["--"+flag,"a"*40])
+    cli.main(args)
+    assert captured[0]["objective"] == "cast-opd"
 
 
 def test_solver_interface_and_gold_isolation():
@@ -285,7 +410,7 @@ def test_solver_interface_and_gold_isolation():
     assert "gold" not in inspect.getsource(sample_path)
 
 
-@pytest.mark.parametrize("key,id",[("branch-opd","2610.13481"),("cast","2610.13257"),
+@pytest.mark.parametrize("key,id",[("branch-opd","2610.13481"),("cast-opd","2610.13257"),
                                   ("road-mopd","2610.13521"),("boundary-evo","2610.13285")])
 def test_paper_metadata_and_original_evidence_complete(key,id):
     root=Path(__file__).resolve().parents[1]
@@ -295,9 +420,9 @@ def test_paper_metadata_and_original_evidence_complete(key,id):
     assert spec["published"]==catalog["published"]=="2026-10-09"
     assert spec["upstream_code"] and spec["organization"] and spec["execution"]["requires_gpu_validation"]
     text=(root/spec["documentation"]).read_text()
-    for label in ("论文链接","公司 / 机构","首次公开日期","原作者代码","本地 adapter",
+    for label in ("论文链接","公司/机构","首次公开日期","原文开源代码","Adapter",
                   "本地复现代码","原始论文总结","核心公式","论文离线与线上效果","复现边界"):
         assert label in text
-    evidence=json.loads((root/f"docs/post-training/{id}-{key}/paper-results.json").read_text())
+    evidence=json.loads((root/f"docs/reproductions/{id}-{key}/paper-results.json").read_text())
     assert evidence["paper_reported"] is True and evidence["measured_locally"] is False
-    assert (root/f"docs/post-training/{id}-{key}/assets/paper-figure-01.png").is_file()
+    assert (root/f"docs/reproductions/{id}-{key}/assets/paper-figure-01.png").is_file()

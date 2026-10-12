@@ -1,9 +1,9 @@
 {
   "domain": "post-training",
-  "key": "cast",
+  "key": "cast-opd",
   "title": "CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation",
   "paper_url": "https://arxiv.org/abs/2610.13257",
-  "detail_path": "post-training/2610.13257-cast/README.md",
+  "detail_path": "reproductions/2610.13257-cast-opd/README.md",
   "topic": [
     "Cross-tokenizer distillation",
     "Token credit assignment",
@@ -14,8 +14,8 @@
   "published": "2026-10-09",
   "code": null,
   "code_status": "not released / not found",
-  "adapter": {"spec_key": "cast"},
+  "adapter": {"spec_key": "cast-opd"},
   "priority": "P0",
   "requires_gpu_validation": true,
-  "gpu_validation_artifact": "docs/gpu-validations/cast-a100-20261012.json"
+  "gpu_validation_artifact": "docs/gpu-validations/cast-opd-a100-20261012.json"
 }
