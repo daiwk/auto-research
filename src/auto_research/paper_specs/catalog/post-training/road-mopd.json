@@ -1,0 +1,21 @@
+{
+  "domain": "post-training",
+  "key": "road-mopd",
+  "title": "Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13521",
+  "detail_path": "post-training/2610.13521-road-mopd/README.md",
+  "topic": [
+    "Multi-teacher distillation",
+    "Gradient projection",
+    "Cross-domain guarding"
+  ],
+  "first_author": "Shi-Yu Tian",
+  "first_author_affiliation": "Nanjing University / JD.com",
+  "published": "2026-10-09",
+  "code": null,
+  "code_status": "not released / not found",
+  "adapter": "road-mopd",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/road-mopd-a100-20261012.json"
+}

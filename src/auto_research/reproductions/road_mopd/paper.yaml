@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "key": "road-mopd",
+  "arxiv_id": "2610.13521",
+  "title": "Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13521",
+  "organization": "Nanjing University / JD.com",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found",
+  "track": "post-training",
+  "topics": [
+    "Multi-teacher distillation",
+    "Gradient projection",
+    "Cross-domain guarding"
+  ],
+  "local_code": "src/auto_research/reproductions/road_mopd",
+  "documentation": "docs/post-training/2610.13521-road-mopd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Public numerical-reasoning train-only holdout"
+  ],
+  "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+  "metrics": [
+    "metrics.adapter_parameter_delta_l2",
+    "metrics.validation_exact_match"
+  ],
+  "mechanisms": [
+    "same-trajectory non-routed-teacher credit",
+    "per-parameter preventive gradient projection",
+    "target-gradient norm retention and domain averaging"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.road_mopd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Nanjing University / JD.com",
+      "published": "2026-10-09",
+      "publication_label": "arXiv v1",
+      "publication_source": "https://arxiv.org/abs/2610.13521",
+      "online_ab": [],
+      "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale models, long rollouts and benchmark evaluation"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/road-mopd-a100-20261012.json"
+  }
+}

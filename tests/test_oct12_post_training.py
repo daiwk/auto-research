@@ -1,0 +1,284 @@
+from dataclasses import replace
+import json
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+import torch
+
+from auto_research.post_training.oct12_objectives import (
+    BoundaryAssessment, actor_loss, boundary_selection, branch_forks, cast_credit,
+    credit_chunks, decoded_alignment, preventive_projection, project_teacher_scores,
+    protocol_boundary_loss, rank_normalize, road_credit, selective_anchor,
+)
+from auto_research.post_training.oct12_checkpoint import (
+    ModelRole, boundary_train, branch_step, cast_step, initial_policy, judge_boundary,
+    math_protocol_constraints, reference_logp, road_step, run_adapter, sample_path,
+)
+from auto_research.post_training.oct10_checkpoint import install_lora
+
+
+def test_branch_selector_uses_both_signals_and_respects_eligibility():
+    logits = torch.tensor([[10.,0.,0.],[0.,0.,0.],[10.,0.,0.]])
+    student = torch.tensor([-1.,-1.,-1.])
+    teacher = torch.tensor([-8.,-1.,-2.])
+    eligible = torch.ones(3,dtype=torch.bool)
+    assert branch_forks(logits,student,teacher,eligible,budget=1,alpha=1,window=1)[0]==[1]
+    assert branch_forks(logits,student,teacher,eligible,budget=1,alpha=0,window=1)[0]==[0]
+    eligible[0] = False
+    assert branch_forks(logits,student,teacher,eligible,budget=1,alpha=0,window=1)[0]==[2]
+    assert branch_forks(logits,student,teacher,eligible,budget=0)[0]==[]
+    assert torch.equal(rank_normalize(torch.ones(3)),torch.full((3,),.5))
+
+
+def test_shared_prefix_mask_removes_its_gradient_and_keeps_fork_token():
+    current = torch.zeros(1,5,requires_grad=True)
+    mask = torch.tensor([[False,False,True,True,True]])
+    actor_loss(current,torch.zeros_like(current),torch.ones_like(current),mask).backward()
+    assert torch.equal(current.grad[0,:2],torch.zeros(2))
+    assert (current.grad[0,2:]<0).all()
+
+
+def test_pbr_encourages_good_events_and_suppresses_bad_events():
+    logits = torch.zeros(2,4,requires_grad=True)
+    protocol_boundary_loss(logits,[(0,(3,),True),(1,(2,),False)]).backward()
+    assert logits.grad[0,3]<0 and logits.grad[1,2]>0
+    assert protocol_boundary_loss(logits,[])==0
+
+
+def test_actual_decoded_chunks_many_to_many_and_unreliable_regions():
+    student = {1:"a",2:"b",3:"c",4:"\ufffd"}
+    teacher = {9:"ab",8:"c",7:"bad"}
+    chunks = decoded_alignment([1,2,3],[9,8],lambda ids:"".join(student[i] for i in ids),
+                               lambda ids:"".join(teacher[i] for i in ids))
+    assert chunks==[((0,1),(0,)),((2,),(1,))]
+    projected,aligned = project_teacher_scores(4,torch.tensor([-2.,-3.]),chunks)
+    assert projected.tolist()==[-1.,-1.,-3.,0.]
+    assert aligned.tolist()==[True,True,True,False]
+    assert credit_chunks(aligned,2)==[[0,1],[2]]
+    assert decoded_alignment([4],[7],lambda ids:"\ufffd",lambda ids:"bad")==[]
+    assert decoded_alignment([1],[9],lambda ids:"  a\n",lambda ids:"a")==[((0,),(0,))]
+
+
+def test_cast_credit_preserves_gap_and_uses_uncertainty_and_smoothness():
+    student = torch.tensor([-3.,-3.,-3.,-3.],requires_grad=True)
+    teacher = torch.tensor([-2.,-2.,-2.,-6.],requires_grad=True)
+    entropy = torch.tensor([1.,2.,1.,1.],requires_grad=True)
+    credit,weights = cast_credit(student,teacher,entropy,[[0,1,2,3]])
+    assert credit.sum()==pytest.approx(float((teacher-student).detach().sum()))
+    assert weights.sum()==pytest.approx(1.) and weights[1]>weights[0]>weights[3]
+    assert not credit.requires_grad and not weights.requires_grad
+    constant,_ = cast_credit(torch.full((3,),-2.),torch.full((3,),-1.),torch.ones(3),[[0,1,2]])
+    assert torch.allclose(constant,torch.ones(3))
+
+
+def test_selective_anchor_only_constrains_unaligned_and_initial_reference_detached():
+    current = torch.tensor([-1.,-2.],requires_grad=True)
+    initial = torch.tensor([-2.,-3.],requires_grad=True)
+    loss = selective_anchor(current,initial,torch.tensor([False,True]))
+    loss.backward()
+    assert current.grad[0]==0 and current.grad[1]!=0 and initial.grad is None
+    assert selective_anchor(current,initial,torch.zeros(2,dtype=torch.bool))==0
+
+
+def test_road_auxiliary_teacher_controls_token_credit_and_preserves_norm():
+    current = torch.zeros(1,2)
+    routed = torch.tensor([[2.,2.]])
+    auxiliary = torch.tensor([[2.,-2.]])
+    advantage,coefficient = road_credit(current,routed,auxiliary,current)
+    assert coefficient[0,0]>1>coefficient[0,1]
+    assert advantage[0,0]>advantage[0,1]
+    target,peer = torch.tensor([1.,1.]),torch.tensor([-1.,0.])
+    projected,alpha = preventive_projection(target,peer,retention=.5)
+    assert alpha==1 and torch.allclose(projected,torch.tensor([0.,1.]))
+    opposing,alpha = preventive_projection(torch.tensor([2.,0.]),torch.tensor([-1.,0.]),retention=.4)
+    assert torch.allclose(opposing,torch.tensor([.8,0.])) and alpha==pytest.approx(.6)
+    assert (projected*peer).sum()>=0
+    assert preventive_projection(target,target)[1]==0
+
+
+def test_boundary_rechecks_mastered_replay_and_acquires_new_frontier():
+    assessment = BoundaryAssessment("old",.1,.9,.9,True,True,.9,.8,True)
+    first = boundary_selection([assessment,replace(assessment,question="new")],set(),budget=2,replay_quota=1)
+    assert {a.question for a in first}=={"old","new"}
+    changed = [replace(assessment,student_score=.9),replace(assessment,question="new"),
+               replace(assessment,question="next",quality=1.)]
+    second = boundary_selection(changed,{"old","new"},budget=2,replay_quota=1)
+    assert [a.question for a in second]==["new","next"]
+    assert not replace(assessment,expert_score=.4).accepted()
+    assert not replace(assessment,clear=False).accepted()
+
+
+class TinyTokenizer:
+    chat_template = None
+    eos_token_id = 0
+    pad_token_id = 0
+    all_special_ids = [0]
+
+    def __init__(self,shift=0):
+        self.shift=shift
+
+    def __call__(self,text,return_tensors="pt",add_special_tokens=True):
+        values = [((ord(char)-32+self.shift)%63)+1 for char in text] or [1]
+        return SimpleNamespace(input_ids=torch.tensor([values]))
+
+    def decode(self,ids,**kwargs):
+        return "".join(chr(((int(i)-1-self.shift)%63)+32) for i in ids if int(i)!=0)
+
+    def get_vocab(self):
+        return {str(i):(i+self.shift)%64 for i in range(64)}
+
+
+class TinyLM(torch.nn.Module):
+    """Real causal token model for optimizer-path tests, not capability evidence."""
+    def __init__(self):
+        super().__init__()
+        self.embedding=torch.nn.Embedding(64,8)
+        self.attention=torch.nn.Module()
+        self.attention.q_proj=torch.nn.Linear(8,8)
+        self.attention.v_proj=torch.nn.Linear(8,8)
+        self.head=torch.nn.Linear(8,64)
+        with torch.no_grad():
+            self.head.bias[0]=-20.  # Fixed-length runtime fixture, not a reward.
+
+    def forward(self,input_ids,use_cache=False):
+        h=self.embedding(input_ids).cumsum(1)
+        h=torch.tanh(self.attention.q_proj(h)+self.attention.v_proj(h))
+        return SimpleNamespace(logits=self.head(h))
+
+    def generate(self,prompt,max_new_tokens,do_sample,**kwargs):
+        ids=prompt.clone()
+        for _ in range(max_new_tokens):
+            logits=self(ids).logits[:,-1]
+            token=torch.multinomial(logits.softmax(-1),1) if do_sample else logits.argmax(-1,keepdim=True)
+            ids=torch.cat((ids,token),-1)
+            if int(token[0])==0:
+                break
+        return ids
+
+
+def role(seed,shift=0,trainable=False):
+    torch.manual_seed(seed)
+    model=TinyLM().eval()
+    model.requires_grad_(False)
+    if trainable:
+        install_lora(model,rank=2)
+    return ModelRole(model,TinyTokenizer(shift),{"id":f"test-model-{seed}","revision":"fixture"},"cpu")
+
+
+def test_real_branch_optimizer_runs_student_branches_and_excludes_shared_prefix():
+    student,teacher=role(1,trainable=True),role(2)
+    params=[p for p in student.model.parameters() if p.requires_grad]
+    before=[p.detach().clone() for p in params]
+    result=branch_step(student,teacher,"Q",torch.optim.SGD(params,lr=.1),max_tokens=5,
+                       forks=2,continuations=2,pbr_weight=1.,min_fork_gap=1)
+    assert result["branches"]==4 and result["response_tokens"]>0
+    assert result["shared_prefix_tokens_excluded"]>0
+    assert any(not torch.equal(p,old) for p,old in zip(params,before))
+    assert all(p.grad is None for p in teacher.model.parameters())
+
+
+def test_real_cast_cross_tokenizer_and_reference_restore():
+    student,teacher=role(3,trainable=True),role(4,shift=1)
+    params=[p for p in student.model.parameters() if p.requires_grad]
+    result=cast_step(student,teacher,"Q",torch.optim.SGD(params,lr=.1),max_tokens=5,
+                     group=2,credit_size=3,kl_weight=.1)
+    assert result["aligned_tokens"]>0 and result["alignment_chunks"]>0
+    saved=[p.detach().clone() for p in params]
+    with pytest.raises(RuntimeError),initial_policy(student.model):
+        raise RuntimeError("check restoration on failure")
+    assert all(torch.equal(p,old) for p,old in zip(params,saved))
+    ids,_=sample_path(student,"Q",3)
+    assert not reference_logp(student,ids).requires_grad
+
+
+def test_real_road_applies_two_domain_optimizer_update():
+    student,teacher,auxiliary=role(5,trainable=True),role(6),role(7)
+    params=[p for p in student.model.parameters() if p.requires_grad]
+    before=[p.detach().clone() for p in params]
+    result=road_step(student,[teacher,auxiliary],[{"question":"A"},{"question":"B"}],
+                     torch.optim.SGD(params,lr=.1),max_tokens=4,retention=.5)
+    assert result["target_domains"]==2 and result["gradient_l2"]>0
+    assert any(not torch.equal(p,old) for p,old in zip(params,before))
+
+
+def test_boundary_lifecycle_has_priming_refresh_replay_fresh_teacher_and_real_sft(monkeypatch):
+    """Diagnostic solver/judge fixtures exercise orchestration, not capabilities."""
+    import auto_research.post_training.oct12_checkpoint as runtime
+    student,teacher,expert,analyzer=role(11,trainable=True),role(12),role(13),role(14)
+    calls=[]
+    rows=[{"question":q,"answer":"#### 7"} for q in ("prime","A","B","C")]
+    def sample(model,question,max_tokens,**kwargs):
+        assert question in {"prime","A","B","C"}  # Never a gold-augmented prompt.
+        calls.append((model.identity["id"],question))
+        text="#### 8" if question=="prime" else "#### 7"
+        ids=model.tokenizer(text).input_ids
+        return torch.cat((torch.tensor([[1]]),ids),-1),1
+    assessment_calls=[]
+    def judge(model,question,reference,student_text,expert_text,max_tokens):
+        assessment_calls.append(question)
+        round_index=(len(assessment_calls)-1)//3
+        mastered=round_index==1 and question=="A"
+        expert_score=.1 if round_index==0 and question=="C" else .9
+        return BoundaryAssessment(question,.9 if mastered else .1,expert_score,.9,True,True,.9,.9,True)
+    monkeypatch.setattr(runtime,"sample_path",sample)
+    monkeypatch.setattr(runtime,"judge_boundary",judge)
+    params=[p for p in student.model.parameters() if p.requires_grad]
+    before=[p.detach().clone() for p in params]
+    history=boundary_train(student,teacher,expert,analyzer,rows,torch.optim.SGD(params,lr=.1),
+        max_tokens=16,priming_examples=1,rounds=2,pool_examples=3,acquisition=2,replay_quota=1,
+        teacher_rollouts=2,analyzer_tokens=128)
+    assert history[0]["stage"]=="priming"  # Incorrect trajectory was not filtered.
+    evolution=history[1:]
+    assert [item["optimizer_steps"] for item in evolution]==[2,2]
+    assert evolution[0]["selected_question_sha256"]!=evolution[1]["selected_question_sha256"]
+    assert assessment_calls==["A","B","C","A","B","C"]
+    assert sum(identifier==teacher.identity["id"] for identifier,_ in calls)==9
+    assert any(not torch.equal(p,old) for p,old in zip(params,before))
+
+
+def test_analyzer_parse_failures_are_not_replaced_by_constant_rewards(monkeypatch):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    monkeypatch.setattr(runtime,"sample_path",lambda *args,**kwargs:(None,0))
+    monkeypatch.setattr(runtime,"decoded_response",lambda *args:"invalid judge response")
+    assert judge_boundary(None,"Q","#### 7","student","expert",64) is None
+
+
+def test_pbr_detects_boxed_completion_without_gold():
+    tokenizer=SimpleNamespace(eos_token_id=0,decode=lambda ids,**kwargs:"")
+    tokenizer.decode=lambda ids,**kwargs:"\\boxed{7}" if len(ids)>=3 else "reasoning"
+    assert math_protocol_constraints(tokenizer,[1,2,3,4],prompt_length=5)==[(7,(0,),True)]
+    assert math_protocol_constraints(tokenizer,[1,2,3,4],prompt_length=5,fork=8)==[]
+
+
+def test_adapter_requires_real_checkpoint_config_and_rejects_test_input(tmp_path):
+    with pytest.raises(ValueError,match="real checkpoint"):
+        run_adapter("cast",tmp_path,42)
+    (tmp_path/"oct12-cast.json").write_text(json.dumps({"test_path":"secret.jsonl"}))
+    with pytest.raises(ValueError,match="forbidden test"):
+        run_adapter("cast",tmp_path,42)
+
+
+def test_solver_interface_and_gold_isolation():
+    import inspect
+    assert "reference" not in inspect.signature(sample_path).parameters
+    source=inspect.getsource(branch_step)+inspect.getsource(cast_step)+inspect.getsource(road_step)
+    assert "answer" not in source and "verified_reward" not in source
+    assert "gold" not in inspect.getsource(sample_path)
+
+
+@pytest.mark.parametrize("key,id",[("branch-opd","2610.13481"),("cast","2610.13257"),
+                                  ("road-mopd","2610.13521"),("boundary-evo","2610.13285")])
+def test_paper_metadata_and_original_evidence_complete(key,id):
+    root=Path(__file__).resolve().parents[1]
+    spec=json.loads((root/f"src/auto_research/reproductions/{key.replace('-','_')}/paper.yaml").read_text())
+    catalog=json.loads((root/f"src/auto_research/paper_specs/catalog/post-training/{key}.json").read_text())
+    assert spec["published"]==catalog["published"]=="2026-10-09"
+    assert spec["upstream_code"] and spec["organization"] and spec["execution"]["requires_gpu_validation"]
+    text=(root/spec["documentation"]).read_text()
+    for label in ("论文链接","公司 / 机构","首次公开日期","原作者代码","本地 adapter",
+                  "本地复现代码","原始论文总结","核心公式","论文离线与线上效果","复现边界"):
+        assert label in text
+    evidence=json.loads((root/f"docs/post-training/{id}-{key}/metrics/paper-results.json").read_text())
+    assert evidence["paper_reported"] is True and evidence["measured_locally"] is False
+    assert (root/f"docs/post-training/{id}-{key}/assets/paper-figure-01.png").is_file()

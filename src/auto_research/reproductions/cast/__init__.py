@@ -1,0 +1,1 @@
+"""Packaged cast paper contract."""

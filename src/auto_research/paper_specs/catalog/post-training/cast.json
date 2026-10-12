@@ -1,0 +1,21 @@
+{
+  "domain": "post-training",
+  "key": "cast",
+  "title": "CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13257",
+  "detail_path": "post-training/2610.13257-cast/README.md",
+  "topic": [
+    "Cross-tokenizer distillation",
+    "Token credit assignment",
+    "Selective KL anchoring"
+  ],
+  "first_author": "Jingru Yang",
+  "first_author_affiliation": "Taobao & Tmall Group of Alibaba",
+  "published": "2026-10-09",
+  "code": null,
+  "code_status": "not released / not found",
+  "adapter": "cast",
+  "priority": "P0",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/cast-a100-20261012.json"
+}

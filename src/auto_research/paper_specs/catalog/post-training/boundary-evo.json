@@ -1,0 +1,21 @@
+{
+  "domain": "post-training",
+  "key": "boundary-evo",
+  "title": "BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13285",
+  "detail_path": "post-training/2610.13285-boundary-evo/README.md",
+  "topic": [
+    "Capability boundary",
+    "Data-model co-evolution",
+    "Reasoning distillation"
+  ],
+  "first_author": "Jiaming Su",
+  "first_author_affiliation": "Shanghai Artificial Intelligence Laboratory",
+  "published": "2026-10-09",
+  "code": null,
+  "code_status": "not released / not found; paper promises future code and data",
+  "adapter": "boundary-evo",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/boundary-evo-a100-20261012.json"
+}
