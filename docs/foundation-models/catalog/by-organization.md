@@ -207,6 +207,7 @@
 
 ## Shanghai Jiao Tong University
 
+- 2026-10-09 · [Multi-Stream Attention Residuals](../../reproductions/2610.13630-msar/README.md)（`msar`）：标准残差把历史更新压成一个累加向量；AttnRes 能逐层检索，但只有一个深度注意力流。MSAR 保留每个完整 hidden 向量，用序列上下文产生不同尺度的完整视图，再对每个流独立做深度 softmax。
 - 2026-07-20 · [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](../../reproductions/2607.17715-c2kv/README.md)（`c2kv`）：以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。
 
 ## Shanghai University of Finance and Economics
@@ -224,6 +225,10 @@
 ## Tencent HY LLM Frontier
 
 - 2026-09-11 · [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../../reproductions/2609.13141-sas-attention/README.md)（`sas-attention`）：硬 Top-K 只能改变被选中的索引，语言模型损失无法沿离散索引直接训练 selector。SAS 不再蒸馏 dense attention：selector 先给历史块连续打分，训练时保留 Top-K 块的连续 gate，并把 `log(gate)` 加到注意力 logits 内。
+
+## The Hong Kong Polytechnic University
+
+- 2026-10-09 · [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../../reproductions/2610.13735-orthros/README.md)（`orthros`）：长 prompt、短回答的推理中，prefill 与 decode 的计算角色不同。Orthros 保留两个 token 流：base tokens 对所有位置执行固定窗口 SWA，并构建完整的逐层 KV；output-specific tokens 只在需预测输出的位置出现，用共享 KV 做全历史 causal cross-attention。
 
 ## The Hong Kong University of Science and Technology (Guangzhou)
 
@@ -294,6 +299,10 @@
 ## Zhuiyi Technology
 
 - 2021-04-20 · [RoFormer: Enhanced Transformer with Rotary Position Embedding](../../reproductions/2104.09864-rope/README.md)（`rope`）：对每个 attention head 的 Q/K 二维子空间施加随位置旋转，使点积天然只依赖相对位移。
+
+## d-Matrix
+
+- 2026-10-09 · [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../../reproductions/2610.13767-dualquant/README.md)（`dualquant`）：W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。
 
 ## 论文未列机构
 

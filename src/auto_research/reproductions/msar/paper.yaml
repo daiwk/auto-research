@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "key": "msar",
+  "arxiv_id": "2610.13630",
+  "title": "Multi-Stream Attention Residuals",
+  "paper_url": "https://arxiv.org/abs/2610.13630",
+  "organization": "Shanghai Jiao Tong University / Shanghai Innovation Institute / Xiaohongshu / Peking University",
+  "published": "2026-10-09",
+  "upstream_code": "否：作者提供 https://github.com/jianke0604/MSAR，但2026-10-12核查404，未找到可用作者源码",
+  "track": "llm",
+  "topics": [
+    "llm-architecture",
+    "depth-attention",
+    "residual-mixing"
+  ],
+  "local_code": "src/auto_research/reproductions/msar",
+  "documentation": "docs/reproductions/2610.13630-msar/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "WikiText-2 raw, official splits, UTF-8 bytes"
+  ],
+  "baseline": "matched real dense causal Transformer trained for the same steps",
+  "metrics": [
+    "baseline.test_byte_nll",
+    "method.test_byte_nll"
+  ],
+  "mechanisms": [
+    "multi-scale causal depthwise source expansion",
+    "full-dimensional per-stream depth softmax",
+    "sigmoid adaptive stream fusion",
+    "single-stream block summaries expanded on demand"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.msar.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Shanghai Jiao Tong University / Shanghai Innovation Institute / Xiaohongshu / Peking University",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
+    "budget": "L1 diagnostic: width64 layers2, 40 fixed steps/variant, 32768 train bytes, 4096 eval bytes/split",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-msar-a100.json"
+  }
+}

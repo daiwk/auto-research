@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2605.27043](https://arxiv.org/abs/2605.27043) |
-| 公司/机构 | University of Warwick（按第一作者所属机构聚合） |
+| 公司/机构 | University of Warwick |
 | 首次公开日期 | 2026-05-26（arXiv v1） |
 | 原文开源代码 | 否：未找到原作者公开代码（核查日期：2026-09-02） |
 | Adapter | `causal-representation` |

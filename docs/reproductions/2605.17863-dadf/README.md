@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2605.17863](https://arxiv.org/abs/2605.17863) |
 | 公司/机构 | Kuaishou Technology |
 | 首次公开日期 | 2026-05-18（arXiv v1） |
-| 原文开源代码 | 是：[DADF](https://github.com/liuzhao09/DADF) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/liuzhao09/DADF) |
 | Adapter | `dadf` |
 | 本地复现代码 | [`src/auto_research/reproductions/dadf/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/dadf/) |
 

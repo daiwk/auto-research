@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "adapter_key": "janus",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_agents.py",
+    "--method",
+    "janus",
+    "--checkpoint",
+    "<policy-checkpoint-cache>",
+    "--checkpoint-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--checkpoint-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--rounds",
+    "2",
+    "--group-size",
+    "3",
+    "--max-tokens",
+    "1536",
+    "--attention-backend",
+    "sdpa",
+    "--output",
+    "<output-json>"
+  ],
+  "command_sanitization": "Local checkpoint/output locations only are placeholders; numeric budget and public identity/revision preserve the actual launch. Default train_steps2 was not overridden and is unused in the JANUS path.",
+  "dataset": {
+    "id": "public-circle-packing-26",
+    "revision": "f30bf47278995c72b9b96c19a0806974d73f64bc",
+    "revision_kind": "executed environment source snapshot; no external dataset download",
+    "fingerprint_kind": "SHA256 of compact sorted JSON task specification, initial program and environment-source hashes",
+    "task_spec_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3",
+    "initial_program_sha256": "fc8f76ffed862958681350e8fe4e72e32e490d18f7d378fe3a0e824dd027e7c3",
+    "environment_source_sha256": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "partition": "single circle task; no independent capability validation/test"
+  },
+  "checkpoint": {
+    "policy": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "budget": {
+    "rounds": 2,
+    "group_size": 3,
+    "max_tokens": 1536,
+    "train_steps_cli_default": 2,
+    "train_steps_used_by_janus": false,
+    "attention_backend": "sdpa"
+  },
+  "result": "passed",
+  "metrics": {
+    "graph_nodes": 7,
+    "generated_proposals": 6,
+    "actual_trials": 2,
+    "pruned_proposals": 4,
+    "recorded_preference_probabilities": 18,
+    "debate_refined_trials": 2,
+    "final_nonempty_skill_sets": 5,
+    "initial_raw_circle_score": 2.166666666666666,
+    "trial0_raw_circle_score": 0.0,
+    "trial1_raw_circle_score": 0.0,
+    "best_realized_raw_circle_score": 2.166666666666666
+  },
+  "additional_seeds": [],
+  "execution_checks": {
+    "completed_trials": 2,
+    "three_proposals_per_trial": true,
+    "vi_ig_ev_pairwise_preferences_recorded": true,
+    "refinement_and_retournament_executed": true,
+    "forecast_before_actual_evidence": true,
+    "pruned_nodes_have_no_realized_scores": true,
+    "five_final_skill_sets_nonempty": true,
+    "zero_trial_scores_retained": true,
+    "language_model_training_in_this_path": false,
+    "equal_budget_backend_comparison": false,
+    "capability_comparison": false,
+    "evolve_promotion_eligible": false
+  },
+  "limitations": [
+    "Both generated trials score0; initial legal baseline score2.166666666666666 remains best. Runtime completion is not circle capability improvement.",
+    "Two trials on one task, one seed; not MLS-Bench-Lite or independent research-capability evaluation.",
+    "Old eager failure had group2, this SDPA run group3; no equal-budget speed/memory comparison can be claimed.",
+    "Only final five skill-text hashes are released; intermediate skill snapshots and pre-debate preference probabilities were not retained. Textual skill updates are not LM weight training.",
+    "SDPA is the loaded attention backend, not a claim of a particular kernel or native speedup.",
+    "Passed covers executed f30 snapshot only, not current HEAD or subsequent Boundary modifications."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_oct12_agents.py": "7c8cd110b0af888a17a0d222189561e342b9b26b0a921e0c2201d8c1889f1005",
+    "src/auto_research/agent_research/oct12_entrypoint.py": "46b8b34056ed6e7603e65debf865c3db95dcd8859239a4557524cb513350aa24",
+    "src/auto_research/agent_research/oct12_checkpoint.py": "28c831ac807b737ef5d22b17e555f10a6b5887e380104a39186200feb245708d",
+    "src/auto_research/agent_research/oct12_evolution.py": "79101f021ddbe128f93a9dcc07c5a60cba9434f778a52b5582c33e6a31d43f32",
+    "src/auto_research/agent_research/oct10_backend.py": "108acb77f3497cddb2cdf5b96831ce25fb733d1b35c503db69076918684b7219",
+    "src/auto_research/agent_research/oct12_memory_tools.py": "f2d12f7824a1dbaba0b67f4b046e57173b2e902e4b8a138087522c418ff2982a",
+    "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+  },
+  "provenance": {
+    "commit": "f30bf47278995c72b9b96c19a0806974d73f64bc",
+    "artifact_path": "docs/gpu-validations/oct12-janus-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13194-janus/metrics/public-circle-sdpa-a100-42.json",
+    "dataset_fingerprint": "26bf2d5e9a146d148eedec77dc25bcdc572dfda71f3df200ac8b43eb16a7876b",
+    "raw_result_sha256": "26b469aa9eaa12dce486a9f3110f851f08e38409b79b3f05fa2ea544bbe9a577",
+    "checkpoint_committed": false,
+    "source_hash_origin": "git show executed commit"
+  }
+}

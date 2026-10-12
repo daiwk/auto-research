@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2602.12564](https://arxiv.org/abs/2602.12564) |
-| 公司/机构 | Kuaishou Technology（按第一作者所属机构聚合） |
+| 公司/机构 | Kuaishou Technology |
 | 首次公开日期 | 2026-02-13（arXiv v1） |
 | 原文开源代码 | 否：未找到原作者公开代码（核查日期：2026-09-05） |
 | Adapter | `capts` |

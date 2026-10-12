@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
+from auto_research.paper_specs.schema import spec_from_adapter
 from auto_research.reproductions.registry import list_adapters
 
 
@@ -330,25 +332,19 @@ ORGANIZATION_OVERRIDES = {
 
 def _information_block(adapter) -> str:
     paper = adapter.paper
-    try:
-        published = PUBLISHED_DATES[paper.arxiv_id]
-    except KeyError as exc:
-        raise ValueError(
-            f"Add the arXiv v1 date for {paper.arxiv_id} before publishing its docs"
-        ) from exc
-
-    organization = paper.organization or ORGANIZATION_OVERRIDES.get(adapter.key)
-    if not organization:
-        organization = "论文作者团队（原文未标注公司）"
+    spec = spec_from_adapter(adapter, ROOT)
+    published = spec.published
+    organization = spec.organization
 
     source_directory = f"src/auto_research/reproductions/{adapter.key.replace('-', '_')}/"
     if not (ROOT / source_directory).is_dir():
         raise ValueError(f"Missing reproduction source directory: {source_directory}")
 
-    if paper.code_url:
-        upstream_code = f"是：[官方/作者代码]({paper.code_url})"
-    else:
-        upstream_code = f"否：论文未提供官方/作者代码（核查日期：{CHECKED_ON}）"
+    upstream_code = spec.upstream_code
+    if upstream_code.startswith(("http://", "https://")):
+        upstream_code = f"是：[官方/作者代码]({upstream_code})"
+    elif not upstream_code.startswith(("是：", "否：")):
+        upstream_code = f"否：{upstream_code}"
 
     return "\n".join(
         (
@@ -366,30 +362,39 @@ def _information_block(adapter) -> str:
     )
 
 
+def merge_information_block(existing: str, canonical: str) -> str:
+    """Sync the required fields without deleting author/entrypoint additions."""
+    canonical_rows = [line for line in canonical.splitlines() if line.startswith("|")]
+    fields = {line.split("|",2)[1].strip() for line in canonical_rows[2:]}
+    old_rows = [line for line in existing.splitlines() if line.startswith("|")]
+    extras = [line for line in old_rows[2:] if line.split("|",2)[1].strip() not in fields]
+    return canonical.rstrip()+ ("\n"+"\n".join(extras) if extras else "")
+
+
 def main() -> None:
     marker = "## 原始论文总结"
+    updates = []
     for adapter in list_adapters():
-        path = DOCS / f"{adapter.paper.arxiv_id}-{adapter.key}" / "README.md"
+        path = ROOT / spec_from_adapter(adapter, ROOT).documentation
         text = path.read_text(encoding="utf-8")
         if marker not in text:
             raise ValueError(f"Missing {marker!r} in {path}")
 
-        prefix, body = text.split(marker, maxsplit=1)
-        prefix_lines = prefix.rstrip().splitlines()
-        title = prefix_lines[0]
-        fidelity = [line for line in prefix_lines[1:] if line.startswith(">")]
-        if not fidelity:
-            raise ValueError(f"Missing fidelity statement in {path}")
-
-        new_text = "\n\n".join(
-            (
-                title,
-                "\n".join(fidelity),
-                _information_block(adapter),
-                marker + body,
-            )
-        )
-        path.write_text(new_text.rstrip() + "\n", encoding="utf-8")
+        block = _information_block(adapter)
+        if "## 论文信息" in text:
+            new_text, count = re.subn(r"## 论文信息\n\n(?:\|[^\n]*\|\n)+",
+                                     lambda match: merge_information_block(match.group(0),block)+"\n",
+                                     text,count=1)
+            if count != 1:
+                raise ValueError(f"Malformed paper-information table in {path}")
+        else:
+            new_text = text.replace(marker, block + "\n\n" + marker, 1)
+        updates.append((path, new_text))
+    # Validate every source before writing: a missing new date must not partially
+    # rewrite unrelated historical pages or invent a newer code-audit date.
+    for path, new_text in updates:
+        if path.read_text(encoding="utf-8") != new_text:
+            path.write_text(new_text, encoding="utf-8")
 
 
 if __name__ == "__main__":

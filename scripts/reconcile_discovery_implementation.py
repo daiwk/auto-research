@@ -17,8 +17,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    directory = ROOT / "docs/research-audits/oct07-review-closure"
-    register = json.loads((directory / "paper-register.json").read_text())
+    state = json.loads((ROOT / "docs/paper-discovery-watermark.json").read_text())
+    register_path = (ROOT / "docs" / state["candidate_register"]).resolve()
+    if not register_path.is_relative_to((ROOT / "docs").resolve()):
+        raise ValueError("review register must remain inside docs")
+    directory = register_path.parent
+    register = json.loads(register_path.read_text())
     manifest = json.loads((ROOT / "docs/research-manifest.json").read_text())
     payload = reconcile_review(register, manifest, ROOT)
     generated = {

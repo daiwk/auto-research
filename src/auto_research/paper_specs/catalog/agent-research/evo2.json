@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "evo2",
+  "title": "Evo2: Evolving the Evolver through Weight-Harness Co-Evolution",
+  "paper_url": "https://arxiv.org/abs/2610.13025",
+  "detail_path": "reproductions/2610.13025-evo2/README.md",
+  "topic": [
+    "agent-evolution",
+    "weight-harness-co-evolution",
+    "dual-role-grpo"
+  ],
+  "first_author": "Chejian Xu",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign / Google DeepMind",
+  "published": "2026-10-09",
+  "priority": "P0",
+  "code": null,
+  "adapter": {
+    "spec_key": "evo2"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct12-evo2-a100.json"
+}

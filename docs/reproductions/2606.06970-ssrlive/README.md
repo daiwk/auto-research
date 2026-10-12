@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2606.06970](https://arxiv.org/abs/2606.06970) |
-| 公司/机构 | Taobao & Tmall Group, Alibaba（按第一作者所属机构聚合） |
+| 公司/机构 | Taobao & Tmall Group, Alibaba |
 | 首次公开日期 | 2026-06-05（arXiv v1） |
 | 原文开源代码 | 否：未找到原作者公开代码（核查日期：2026-09-02） |
 | Adapter | `ssrlive` |

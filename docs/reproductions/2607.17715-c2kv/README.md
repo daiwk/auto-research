@@ -4,15 +4,15 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.17715](https://arxiv.org/abs/2607.17715) |
 | 公司/机构 | Shanghai Jiao Tong University |
-| 第一作者 | Chuheng Du |
 | 首次公开日期 | 2026-07-20（arXiv v1） |
-| 原文开源代码 | 是：[C2KV](https://github.com/s7a9/C2KV) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/s7a9/C2KV) |
 | Adapter | `c2kv` |
 | 本地复现代码 | [`src/auto_research/reproductions/c2kv/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/c2kv/) |
+| 第一作者 | Chuheng Du |
 
 ## 原始论文总结
 

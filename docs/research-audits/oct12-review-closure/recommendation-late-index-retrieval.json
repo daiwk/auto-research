@@ -1,0 +1,1746 @@
+{
+  "schema_version": 2,
+  "track": "recommendation",
+  "window": {
+    "start": "2026-10-07",
+    "end": "2026-10-12"
+  },
+  "query_matrix": [
+    "recsys-general",
+    "recommendation-ranking",
+    "generative-recommendation",
+    "llm-recommendation",
+    "industrial-ranking",
+    "production-evidence",
+    "deployment-evidence",
+    "search-ranking",
+    "advertising-ranking",
+    "priority-org-google",
+    "priority-org-google-deepmind",
+    "priority-org-meta",
+    "priority-org-netflix",
+    "priority-org-bytedance",
+    "priority-org-tiktok",
+    "priority-org-alibaba",
+    "priority-org-taobao",
+    "priority-org-kuaishou",
+    "priority-org-pinterest",
+    "priority-org-amazon",
+    "priority-org-microsoft",
+    "priority-org-tencent"
+  ],
+  "candidate_count": 51,
+  "triage_counts": {
+    "new": 12,
+    "implemented": 4,
+    "reviewed": 35,
+    "google_meta_priority_review": 0
+  },
+  "candidates": [
+    {
+      "arxiv_id": "2610.13806",
+      "title": "FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems",
+      "published": "2026-10-09T16:18:39Z",
+      "url": "http://arxiv.org/abs/2610.13806v1",
+      "authors": [
+        "Vishnu Arun",
+        "Adam Obeng",
+        "Tianyou Wang",
+        "Zilin Ren",
+        "Mukuntha Narayanan Sundararaman",
+        "Han Wang",
+        "Shivin Thukral",
+        "Zhixiang Wang",
+        "Saurabh Vishwas Joshi",
+        "Darren Reger"
+      ],
+      "matched_queries": [
+        "industrial-ranking",
+        "production-evidence",
+        "recsys-general",
+        "search-ranking"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13504",
+      "title": "Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning",
+      "published": "2026-10-09T12:30:14Z",
+      "url": "http://arxiv.org/abs/2610.13504v1",
+      "authors": [
+        "Oriol Corcoll",
+        "Qiyao Wei",
+        "Ciarán Mark Gilligan-Lee"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13398",
+      "title": "Towards the Roof of the World: NLP Progress in Tibetan Languages",
+      "published": "2026-10-09T11:11:10Z",
+      "url": "http://arxiv.org/abs/2610.13398v1",
+      "authors": [
+        "Xi Cao",
+        "Yijie Li",
+        "Yuan Sun",
+        "Shiwei Dong",
+        "Zeguang Huang",
+        "Nuo Qun"
+      ],
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13057",
+      "title": "CoBe: A Benchmark For Conversational Counterfactual Text Editing",
+      "published": "2026-10-09T06:11:12Z",
+      "url": "http://arxiv.org/abs/2610.13057v1",
+      "authors": [
+        "Arvind Raghavan",
+        "Inwoo Hwang",
+        "Shreyas Havaldar",
+        "Kai-Zhan Lee",
+        "Aurghya Maiti",
+        "Yushu Pan",
+        "Jeffrey Wu",
+        "Mingxuan Li",
+        "Elias Bareinboim"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11501",
+      "title": "Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation",
+      "published": "2026-10-08T08:40:35Z",
+      "url": "http://arxiv.org/abs/2610.11501v1",
+      "authors": [
+        "Leikun Liang",
+        "Guoshuai Wang",
+        "Xingsheng He",
+        "Yushan Han",
+        "Yunyi Xuan",
+        "Xiaoxiao Xu",
+        "Lin Qu"
+      ],
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10920",
+      "title": "Language Models for Page-Level Layout Decisions in E-commerce Search",
+      "published": "2026-10-07T21:19:47Z",
+      "url": "http://arxiv.org/abs/2610.10920v1",
+      "authors": [
+        "Varun Joshi",
+        "Eva C. Song",
+        "ChengXiang Zhai"
+      ],
+      "matched_queries": [
+        "production-evidence",
+        "recsys-general",
+        "search-ranking"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10639",
+      "title": "Visible Reasoning Is Not a Universal Optimizer: Persona- and Thinking-Dependent Effects in Analytics Code Generation",
+      "published": "2026-10-07T14:27:58Z",
+      "url": "http://arxiv.org/abs/2610.10639v1",
+      "authors": [
+        "Bhawani Shankar Leelar",
+        "Pawan Chorasiya",
+        "Davin Hill",
+        "Robert E. Tillman",
+        "Tamer Soliman"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10124",
+      "title": "Training with Missed Targets in Generative Recommendation: Separating Supervision from Probability Competition",
+      "published": "2026-10-07T14:07:06Z",
+      "url": "http://arxiv.org/abs/2610.10124v1",
+      "authors": [
+        "Xuesi Wang",
+        "Yangbin Shi",
+        "Xiaolin Zheng"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "priority-org-amazon"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09906",
+      "title": "Constrained-Action AI Remediation for SIEM/XDR via a NeMo-Guardrails Proxy",
+      "published": "2026-10-07T12:00:51Z",
+      "url": "http://arxiv.org/abs/2610.09906v1",
+      "authors": [
+        "Georgios Koutidis",
+        "Nikolaos Kekatos",
+        "Tom Nianios",
+        "Alexios Lekidis"
+      ],
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09070",
+      "title": "Covariate-dependent Joint Modeling of Multivariate Ordinal Preferences and Its Connections with Comparison Models",
+      "published": "2026-10-06T20:15:43Z",
+      "url": "http://arxiv.org/abs/2610.09070v1",
+      "authors": [
+        "Yujie Chen",
+        "Antik Chakraborty",
+        "Anindya Bhadra"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.08407",
+      "title": "Seeing the Context: Enhancing Recommender Systems with Image-Derived Contextual Signals",
+      "published": "2026-10-06T14:15:48Z",
+      "url": "http://arxiv.org/abs/2610.08407v1",
+      "authors": [
+        "Tal Cordova",
+        "Tomer Geva",
+        "Moshe Unger"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.08245",
+      "title": "Aligning Performance with Contribution: Towards Contribution-Aware Fair Recommendation",
+      "published": "2026-10-06T12:26:50Z",
+      "url": "http://arxiv.org/abs/2610.08245v1",
+      "authors": [
+        "Shuai Zhang",
+        "Hui Fang",
+        "Zun Sun"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.08232",
+      "title": "Behavior-Mining, Generative Conversations, and Collaborative Advisory: the Future of Travel and Tourism Recommender Systems",
+      "published": "2026-10-06T12:18:15Z",
+      "url": "http://arxiv.org/abs/2610.08232v1",
+      "authors": [
+        "Alejandro Bellogín",
+        "Linus W. Dietz",
+        "Francesco Ricci",
+        "Pablo Sánchez"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.08159",
+      "title": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+      "published": "2026-10-06T11:11:43Z",
+      "url": "http://arxiv.org/abs/2610.08159v1",
+      "authors": [
+        "G. L. John Salvin",
+        "Swapnil Hingmire"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.08136",
+      "title": "Adapting Generative Recommenders for Multi-Turn Interaction",
+      "published": "2026-10-06T10:51:53Z",
+      "url": "http://arxiv.org/abs/2610.08136v1",
+      "authors": [
+        "Yu-Chen Den",
+        "Zhi Rui Tam",
+        "Yung-Yu Shih",
+        "Shih-Hsin Wang",
+        "Yun-Nung Chen",
+        "Pu-Jen Cheng",
+        "Eugene Yang"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "priority-org-amazon"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.08129",
+      "title": "Do LLMs Act on What They Know? From Partner Representations to Cooperative Actions",
+      "published": "2026-10-06T10:44:55Z",
+      "url": "http://arxiv.org/abs/2610.08129v1",
+      "authors": [
+        "Yuhwan Jeong",
+        "Jinnyeong Yang",
+        "Kuk-Jin Yoon"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.07810",
+      "title": "SIFT: Search Intent-to-Filter Transformer for Multi-Task Personalized Filter Ranking at Airbnb",
+      "published": "2026-10-06T06:05:45Z",
+      "url": "http://arxiv.org/abs/2610.07810v1",
+      "authors": [
+        "Shashank Dabriwal",
+        "Tanya Piplani",
+        "Hao Li",
+        "Yiwei Wang",
+        "Ashish Jain",
+        "Kedar Bellare",
+        "Stephanie Moyerman"
+      ],
+      "matched_queries": [
+        "deployment-evidence",
+        "generative-recommendation",
+        "production-evidence",
+        "recsys-general",
+        "search-ranking"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.07761",
+      "title": "Contrastive Learning for Aspect Representation towards Explainable Recommendation",
+      "published": "2026-10-06T04:55:55Z",
+      "url": "http://arxiv.org/abs/2610.07761v1",
+      "authors": [
+        "Emrul Hasan",
+        "Chen Ding"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.07402",
+      "title": "Rethinking Semantic ID Construction for Generative Recommendation: SimHash with Parallel Decoding and Semantic Alignment",
+      "published": "2026-10-05T21:15:13Z",
+      "url": "http://arxiv.org/abs/2610.07402v1",
+      "authors": [
+        "Yuqing Liu",
+        "Huiyuan Chen",
+        "Yibo Wang",
+        "Wooseong Yang",
+        "Philip S. Yu"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.06751",
+      "title": "MatrixFormer: A Foundation Model for Matrix Completion",
+      "published": "2026-10-05T17:28:38Z",
+      "url": "http://arxiv.org/abs/2610.06751v1",
+      "authors": [
+        "Dwaipayan Saha",
+        "Jacob Feitelberg",
+        "Kyuseong Choi",
+        "Raaz Dwivedi",
+        "Anish Agarwal"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.06703",
+      "title": "Reading the Mood: Emotion-Guided Book-to-Music Recommendation via CGANs and LLMs",
+      "published": "2026-10-05T17:01:18Z",
+      "url": "http://arxiv.org/abs/2610.06703v1",
+      "authors": [
+        "Manousos Linardakis",
+        "Georgios Alexandridis"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "llm-recommendation",
+        "priority-org-amazon",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.06590",
+      "title": "SPRIG: Semantic-ID-enhanced Paths for Knowledge Graph-based Generative Recommendation",
+      "published": "2026-10-05T16:04:55Z",
+      "url": "http://arxiv.org/abs/2610.06590v1",
+      "authors": [
+        "Justin Hangoebl",
+        "Marta Moscati",
+        "Alessandro B. Melchiorre",
+        "Shah Nawaz",
+        "Markus Schedl"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.07105",
+      "title": "Beyond Successor Accuracy: State Retention for Recursive Self-Improvement in Recommendation",
+      "published": "2026-10-05T15:03:27Z",
+      "url": "http://arxiv.org/abs/2610.07105v1",
+      "authors": [
+        "Jinfeng Xu",
+        "Zheyu Chen",
+        "Ziyue Peng",
+        "Zheng Lin",
+        "Wenhao Yuan",
+        "Jian Chen",
+        "Shujie Li",
+        "Edith Ngai"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.06050",
+      "title": "MATE: Adaptive Long- and Short-Term User Memory for LLM-Based Recommendation",
+      "published": "2026-10-05T09:44:24Z",
+      "url": "http://arxiv.org/abs/2610.06050v1",
+      "authors": [
+        "Yu Hou"
+      ],
+      "matched_queries": [
+        "llm-recommendation",
+        "priority-org-amazon",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05994",
+      "title": "How (and How Not) to Use Data Augmentation in VLA Post-Training",
+      "published": "2026-10-05T08:48:13Z",
+      "url": "http://arxiv.org/abs/2610.05994v1",
+      "authors": [
+        "Bram Grooten",
+        "Joaquin Vanschoren"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05949",
+      "title": "Technical Report on the Turba Fertilizer Machine Learning Stack in Morocco",
+      "published": "2026-10-05T08:04:09Z",
+      "url": "http://arxiv.org/abs/2610.05949v1",
+      "authors": [
+        "Abdelghani Belgaid",
+        "Zakaria Mahmoud",
+        "Fahd Chibani",
+        "Oumnia Ennaji",
+        "Younes Boudoul",
+        "Dounia Rachid"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05787",
+      "title": "Constraint-Aware Conversational Job Recommendation in Code-Mixed Low-Resource Settings",
+      "published": "2026-10-05T04:36:18Z",
+      "url": "http://arxiv.org/abs/2610.05787v1",
+      "authors": [
+        "Md Arman Hossain",
+        "Mubashir Jawad",
+        "Fariha Khandaker Moon",
+        "Sonia Binte Siraj",
+        "Masfiqur Rahaman",
+        "Raihan ul Islam",
+        "Ahmed Wasif Reza",
+        "Nafis Sadeq"
+      ],
+      "matched_queries": [
+        "llm-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05670",
+      "title": "Generate What You Can Trust: Content Credibility in Generative Recommenders",
+      "published": "2026-10-05T01:33:29Z",
+      "url": "http://arxiv.org/abs/2610.05670v1",
+      "authors": [
+        "Zhuo Cai",
+        "Guanghao Wu",
+        "Shoujin Wang",
+        "Peilin Zhou",
+        "Victor W. Chu"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05559",
+      "title": "Cut Binary Cross Entropy: Efficient Large-Vocabulary Loss and Gradient Kernels for Sequential Recommendation",
+      "published": "2026-10-04T21:47:02Z",
+      "url": "http://arxiv.org/abs/2610.05559v1",
+      "authors": [
+        "Yaoyiran Li",
+        "Haowen Ning",
+        "Mohamed Hammad"
+      ],
+      "matched_queries": [
+        "llm-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05532",
+      "title": "DelegationBench: Measuring When AI Agents Should Ask Before Acting",
+      "published": "2026-10-04T20:54:35Z",
+      "url": "http://arxiv.org/abs/2610.05532v1",
+      "authors": [
+        "Shiva Pochampally"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05501",
+      "title": "Logic-Logit: A Logic-Based Approach to Choice Modeling",
+      "published": "2026-10-04T20:14:20Z",
+      "url": "http://arxiv.org/abs/2610.05501v1",
+      "authors": [
+        "Shuhan Zhang",
+        "Wendi Ren",
+        "Shuang Li"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.05220",
+      "title": "Ranking Bandits for Carousel Interfaces with Observable Browsing Depth",
+      "published": "2026-10-04T13:39:38Z",
+      "url": "http://arxiv.org/abs/2610.05220v1",
+      "authors": [
+        "Takuma Yasuda",
+        "Atsuyoshi Nakamura"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.04302",
+      "title": "From Valid to Useful: Post-Verification Acquisition for Recursive Self-Improving Recommendation",
+      "published": "2026-10-03T05:31:09Z",
+      "url": "http://arxiv.org/abs/2610.04302v1",
+      "authors": [
+        "Tonmoy Hasan",
+        "Taylor Foust",
+        "Shao Tang",
+        "Leonardo Neves",
+        "Aman Gupta",
+        "Hiroto Udagawa",
+        "Helder Dias",
+        "Daniel Silva",
+        "Rohan Ramanath"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.03923",
+      "title": "Learning Robust Personalized Prompts for LLM-Driven Sequential Recommendation",
+      "published": "2026-10-02T18:34:26Z",
+      "url": "http://arxiv.org/abs/2610.03923v1",
+      "authors": [
+        "Xiaolin Zheng",
+        "Qiyong Zhong",
+        "Jiajie Su",
+        "Xiang Chen"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.03025",
+      "title": "Verifiable, Articulable, and Tacit Components of Preference",
+      "published": "2026-10-02T09:01:07Z",
+      "url": "http://arxiv.org/abs/2610.03025v2",
+      "authors": [
+        "Alexander Spangher",
+        "Sheldon S. Huang",
+        "Andreas Haupt",
+        "Noah D. Goodman",
+        "Diyi Yang",
+        "Daniel E. Ho",
+        "Sanmi Koyejo"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.02610",
+      "title": "Seer: Maximum Likelihood Regression for Learning-Speed Curves",
+      "published": "2026-10-02T00:09:10Z",
+      "url": "http://arxiv.org/abs/2610.02610v1",
+      "authors": [
+        "Carl Myers Kadie"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.02600",
+      "title": "When History Misleads: Asymmetric Margin Supervision for Instruction-Guided LLM Generative Recommendation",
+      "published": "2026-10-01T23:53:42Z",
+      "url": "http://arxiv.org/abs/2610.02600v1",
+      "authors": [
+        "Ming Yin",
+        "Yuhan Yang",
+        "Chen Chen",
+        "Xinyu Lin",
+        "Wentao Shi",
+        "Fangcong Yin",
+        "Chaofei Yang",
+        "Chao Yang",
+        "Jiyan Yang",
+        "Hui Zhang",
+        "Ning Jiang",
+        "Yiran Chen",
+        "Qifan Wang"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "industrial-ranking",
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.02057",
+      "title": "Optimizing Effective Training Time for Large-Scale Recommendation Systems",
+      "published": "2026-10-01T17:02:16Z",
+      "url": "http://arxiv.org/abs/2610.02057v1",
+      "authors": [
+        "Mingming Ding",
+        "Ruilin Chen",
+        "Yuzhen Huang",
+        "Hang Qi",
+        "Menglu Yu",
+        "San Tan",
+        "Damian Reeves",
+        "Boris Sarana",
+        "Kevin Tang",
+        "Satendra Gera",
+        "Gagan Jain",
+        "Sahil Shah",
+        "Vishwa Karia",
+        "Fuzail Khan",
+        "Yashasvi Makin",
+        "Edward Z. Yang",
+        "Oguz Ulgen",
+        "Jia Chen Ren",
+        "Laith Sakka",
+        "Mayank Garg",
+        "Meet Vadakkanchery",
+        "Aici Lin",
+        "Wei Sun",
+        "Mengjiao Zhou",
+        "Shuai Yang",
+        "Junqing Zhou",
+        "Max Leung",
+        "Apoorv Purwar",
+        "Musharaf Sultan",
+        "John Bocharov",
+        "Zhenyu Tang",
+        "Vivek Trehan"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.01894",
+      "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+      "published": "2026-10-01T15:43:32Z",
+      "url": "http://arxiv.org/abs/2610.01894v1",
+      "authors": [
+        "Emmanuelle Renauld",
+        "Philippe Poulin",
+        "Hugo Larochelle",
+        "Antoine Théberge",
+        "Maxime Descoteaux"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.01746",
+      "title": "End-to-End Learning vs. Modular Architectures: Comparative Insights into Autonomous Driving Systems",
+      "published": "2026-10-01T14:15:06Z",
+      "url": "http://arxiv.org/abs/2610.01746v1",
+      "authors": [
+        "Kartik B. Kapse"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.01705",
+      "title": "AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation",
+      "published": "2026-10-01T13:51:13Z",
+      "url": "http://arxiv.org/abs/2610.01705v1",
+      "authors": [
+        "Haoran Qiang",
+        "Guannan Liu",
+        "Liang Zhang",
+        "Junjie Wu"
+      ],
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.01533",
+      "title": "Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)",
+      "published": "2026-10-01T12:08:56Z",
+      "url": "http://arxiv.org/abs/2610.01533v1",
+      "authors": [
+        "Aleksei Medvedev",
+        "Alejandro Ariza-Casabona",
+        "Steven Derby",
+        "Gonzalo Fiz Pontiveros",
+        "Xinyang Shao",
+        "Florian Spiess"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.01316",
+      "title": "What Wins a Vote? Formatting, Length, and Lexical Diversity in the French Compar:IA LLM Arena",
+      "published": "2026-10-01T08:47:35Z",
+      "url": "http://arxiv.org/abs/2610.01316v1",
+      "authors": [
+        "Simonas Zilinskas",
+        "Maayeesha Farzana",
+        "Christophe Benavent"
+      ],
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.01270",
+      "title": "Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders",
+      "published": "2026-10-01T08:09:37Z",
+      "url": "http://arxiv.org/abs/2610.01270v1",
+      "authors": [
+        "Parthiv Chatterjee",
+        "Dhiraj Golhar",
+        "Ummesalma Diwan",
+        "Sourish Dasgupta",
+        "Manjunath Joshi",
+        "Tanmoy Chakraborty"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "priority-org-amazon"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.00984",
+      "title": "HADRec: A Hierarchy-Aware Drug Recommendation Framework by Fusing Molecular Knowledge and Electronic Health Record",
+      "published": "2026-10-01T03:20:54Z",
+      "url": "http://arxiv.org/abs/2610.00984v1",
+      "authors": [
+        "Junke Wang",
+        "Hongshun Ling",
+        "Li Zhang",
+        "Jinjing Wu",
+        "Tong Shao",
+        "Fang Wang",
+        "Yuan Gao"
+      ],
+      "matched_queries": [
+        "generative-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10560",
+      "title": "Strategic Governance of AI Models in Earth Science",
+      "published": "2026-10-01T00:15:04Z",
+      "url": "http://arxiv.org/abs/2610.10560v1",
+      "authors": [
+        "Makoto Kelp",
+        "Amirhossein Arzani",
+        "Patricia Castellanos",
+        "Paul Griffiths",
+        "Ivan Higuera-Mendieta",
+        "Manuel Perez-Carrasco",
+        "Viral Shah",
+        "Patrick Obin Sturm",
+        "James Weber"
+      ],
+      "matched_queries": [
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.00654",
+      "title": "When More Data Is Not Enough: The Context-Sufficiency Frontier in Generative AI Personalization",
+      "published": "2026-09-30T19:54:26Z",
+      "url": "http://arxiv.org/abs/2610.00654v1",
+      "authors": [
+        "Merieme Askour",
+        "Ayoub Merimi"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10556",
+      "title": "LIFT: A Lifecycle-aware Interaction Factorization Transformer for Unified Retrieval and Ranking",
+      "published": "2026-09-29T05:50:33Z",
+      "url": "http://arxiv.org/abs/2610.10556v1",
+      "authors": [
+        "Keji Miao",
+        "Enhao Cheng",
+        "Yan Li",
+        "Qun Li",
+        "Qi Zhang",
+        "Jie Yuan",
+        "Xiaoyong Li"
+      ],
+      "matched_queries": [
+        "priority-org-taobao",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.00253",
+      "title": "System Attribution in LLM Brand Recommendations: Single Responses Identify the System, Aggregated Brand Profiles Do Not Transfer",
+      "published": "2026-09-23T21:57:07Z",
+      "url": "http://arxiv.org/abs/2610.00253v1",
+      "authors": [
+        "Dmitrij Żatuchin"
+      ],
+      "matched_queries": [
+        "llm-recommendation",
+        "recsys-general"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.00251",
+      "title": "The Null Is the Hard Part: Exact Tests for Memorization in Generative Models",
+      "published": "2026-09-23T17:59:25Z",
+      "url": "http://arxiv.org/abs/2610.00251v1",
+      "authors": [
+        "Sushovan Majhi",
+        "Pramita Bagchi"
+      ],
+      "matched_queries": [
+        "generative-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.00054",
+      "title": "The First Token Is Not the Verdict: Hidden Costs of Reading LLM Judges Without Generating",
+      "published": "2026-09-04T00:45:28Z",
+      "url": "http://arxiv.org/abs/2610.00054v1",
+      "authors": [
+        "Gnaneswar Villuri",
+        "Hashmath Shaik",
+        "Alex Doboli"
+      ],
+      "matched_queries": [
+        "llm-recommendation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "reviewed",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    }
+  ],
+  "requested_window": {
+    "start": "2026-10-08",
+    "end": "2026-10-12"
+  },
+  "announcement_overlap_days": 1,
+  "recall_mode": "late-index",
+  "cross_source": {
+    "enabled": false,
+    "config": null,
+    "source_failures": [],
+    "source_stats": [],
+    "coverage_complete": false,
+    "official_review_queue_count": 0,
+    "archived_official_review_count": 0
+  },
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 22,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "recommender system",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "c68922db85055f78475831d01804f8a8fd697be722f9cec9bd9e76dcefc1b188",
+        "next_offset": 25,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "recommendation ranker",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "776174a14a9ba7fa5ddf54fad7e8307327e40948513b6befcba8f60aebb1a844",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "generative recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "2a74121cd79b7c9550997d1cd42ee4192cd9c80d89b397e057ac9fffc71ddf4d",
+        "next_offset": 31,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "LLM recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "4e4ad00b6a0708d53ad29c09afbd7e90362e722c21a90fe969c1133126e69e69",
+        "next_offset": 13,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "industrial ranking recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "9e7470c5a64494ed70c14805d014a48d2ae473142de99f9b0eb7e094cf22c11a",
+        "next_offset": 2,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "recommendation online A/B",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "9503d5ff2142b9b40392bf28a9a71d8923821e3d3ff2a45c3f6e05538e0f5ca9",
+        "next_offset": 3,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "recommendation deployed production",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "8c2de86efda8efcd285a48c338c6a85216fa0f5cef265067379163adf04bb7e1",
+        "next_offset": 1,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "search ranking online A/B",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "8aa775b46c070705491c5ec5377defe9fb98fe7e84b2afe03cd35cde36bbe8c6",
+        "next_offset": 3,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "advertising ranking online A/B",
+        "categories": [
+          "cs.IR",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "e3d888d7c7fdf81b728eae058b30c2ca3f34a8dd6ce30cb563375be606052cd1",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Google recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "ea249553026afb239a70753d982da6313e4fabc23edb9b615c18c493c9aa3acb",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Google DeepMind recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "b9e6a87914af014160079bf93b5f452dd2cccaa20382df6d6f2d53eeab4f702d",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Meta recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "f236cce2fe104767270f9692f68763a1a71b0d8583eacf21e0f9a86430b93de3",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Netflix recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "42f25fae96256b47201caab0e190052c2db37c014a95fe0b6584382b22f57768",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "ByteDance recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "3fbd5a79f4c278dc31098df893d788d6f8f2c6369285547b591e6b23db7dbd3e",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "TikTok recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "fdf0107c6dc88b498f10e9c526a154b8e03f328dd840207927280c44a52f5b44",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Alibaba recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "6fd0d303ee3496ff35ac7398ad883f39b0592a5ee89b12ab0dbb7a4378b77beb",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Taobao recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "1d242fb982302c9fed42a659c1c7a1c0defd678360e7210c7f83b9bbc07de1e4",
+        "next_offset": 1,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Kuaishou recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "3aa734e592a689a78852b923155f8770c21f171fa416110d61f70402fa4431b0",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Pinterest recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "1c2f407c12864e9c31b74399b9f92b5fafcaaedbf231ee66ebb6c6555610a97f",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Amazon recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "187ad721b61783b2249552fd6d8703b8a3897b17aa43a0977f0dd23c3b6c56d9",
+        "next_offset": 5,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Microsoft recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "8ac32b9e2e3212245ee8f4fc099105ca3e87515fb4e30613eb1146f7c2bf2284",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "Tencent recommendation",
+        "categories": [
+          "cs.IR",
+          "cs.LG",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "None",
+        "date_to": "None",
+        "identifier_months": [
+          "2610"
+        ],
+        "scan_id": "fcc2fe28a71044a089da3cb5b7d0cae6",
+        "fingerprint": "a8dda890598f06ef92638a61d386fad1a55a12903163bd1a4a16b21da8e2baaa",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "review_evidence_notice": "Transport completed; per-ID review proof is in the consolidated register, not inferred from retrieval."
+}

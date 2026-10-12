@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.37183) |
-| 公司/机构 | TikTok / ByteDance Global E-Commerce Recommendation Video Team |
+| 公司/机构 | TikTok / ByteDance |
 | 首次公开日期 | 2026-09-29（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-09-30，未找到原作者发布仓库 |
 | Adapter | `helix` |

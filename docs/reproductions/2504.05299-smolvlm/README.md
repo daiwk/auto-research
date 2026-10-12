@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2504.05299](https://arxiv.org/abs/2504.05299) |
 | 公司/机构 | Hugging Face |
 | 首次公开日期 | 2025-04-07（arXiv v1） |
-| 原文开源代码 | 是：[Hugging Face SmolLM/SmolVLM](https://github.com/huggingface/smollm) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/huggingface/smollm) |
 | Adapter | `smolvlm` |
 | 本地复现代码 | [`src/auto_research/reproductions/smolvlm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/smolvlm/) |
 

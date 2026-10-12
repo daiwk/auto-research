@@ -1,70 +1,74 @@
 {
   "schema_version": 2,
   "policy": "review-with-coverage-and-archived-exceptions-v2",
-  "checked_on": "2026-10-10",
+  "checked_on": "2026-10-12",
   "user_authorized_exceptions": true,
   "authorization_record": "2026-10-10 用户明确要求退休严格来源穷尽水位，统一为审查水位、覆盖范围和例外清单；实际尝试后不能确认的记录归档、不再阻塞，只在新证据出现时重开。论文收录、正文线上证据、算法保真与GPU验证标准不变。",
   "window": {
-    "start": "2026-10-01",
-    "end": "2026-10-07"
+    "start": "2026-10-08",
+    "end": "2026-10-12"
   },
-  "review_watermark": "2026-10-07",
+  "review_watermark": "2026-10-12",
   "all_sources_exhaustive": false,
   "implementation_complete": false,
-  "candidate_register": "research-audits/oct07-review-closure/paper-register.json",
+  "candidate_register": "research-audits/oct12-review-closure/paper-register.json",
   "retrieval_receipts": [
     {
       "track": "recommendation",
       "mode": "submission-window",
-      "artifact": "research-audits/oct07-review-closure/recommendation-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/recommendation-retrieval.json"
     },
     {
       "track": "recommendation",
       "mode": "late-index",
-      "artifact": "research-audits/oct07-review-closure/recommendation-month-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/recommendation-late-index-retrieval.json"
     },
     {
       "track": "foundation-model",
       "mode": "submission-window",
-      "artifact": "research-audits/oct07-review-closure/foundation-model-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/foundation-model-submission-window-retrieval.json"
     },
     {
       "track": "foundation-model",
       "mode": "late-index",
-      "artifact": "research-audits/oct07-review-closure/foundation-model-month-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/foundation-model-late-index-retrieval.json"
     },
     {
       "track": "post-training",
       "mode": "submission-window",
-      "artifact": "research-audits/oct07-review-closure/post-training-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/post-training-submission-window-retrieval.json"
     },
     {
       "track": "post-training",
       "mode": "late-index",
-      "artifact": "research-audits/oct07-review-closure/post-training-month-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/post-training-late-index-retrieval.json"
     },
     {
       "track": "agent",
       "mode": "submission-window",
-      "artifact": "research-audits/oct07-review-closure/agent-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/agent-submission-window-retrieval.json"
     },
     {
       "track": "agent",
       "mode": "late-index",
-      "artifact": "research-audits/oct07-review-closure/agent-month-retrieval.json"
+      "artifact": "research-audits/oct12-review-closure/agent-late-index-retrieval.json"
     }
   ],
   "source_reviews": [
     {
       "organization": "Google",
-      "artifact": "research-audits/oct07-source-closure/google-source-review.json"
+      "artifact": "research-audits/oct12-review-closure/google-source-review.json"
     },
     {
       "organization": "Meta",
-      "artifact": "research-audits/oct07-source-closure/meta-source-review.json"
+      "artifact": "research-audits/oct12-review-closure/meta-source-review.json"
+    },
+    {
+      "organization": "Google DeepMind",
+      "artifact": "research-audits/oct12-review-closure/google-deepmind-source-review.json"
     }
   ],
-  "next_scan_start_with_overlap": "2026-10-06",
+  "next_scan_start_with_overlap": "2026-10-11",
   "exception_reopening_policy": "不能确认项已归档、不阻塞水位、不按周期重试；仅官方资料变化或独立补发现提供新证据时重开。确认属于窗口内的未审候选不能归档逃避审查。",
   "coverage_scope": {
     "tracks": [
@@ -80,16 +84,30 @@
     "official_sources": [
       {
         "organization": "Google",
-        "records": 398,
-        "pages": 27
+        "records": 406,
+        "pages": 28
       },
       {
         "organization": "Meta",
         "records": 144,
         "pages": 6
+      },
+      {
+        "organization": "Google DeepMind",
+        "records": 265,
+        "pages": 9
       }
     ],
-    "limitations": "只承诺所列窗口、配置查询和官方页面范围的审查闭环，不承诺全网或整个官方站点绝无遗漏；未确认记录归档，不计接受或实现。"
+    "limitations": [
+      "Only configured four-track two-mode retrieval and named official source scope; not all-web exhaustiveness.",
+      "Bounded original defining methods and evaluation excerpts, not every appendix or full article.",
+      "Supplementary discoveries are separately counted, never inflated into queried recall.",
+      "Review closure does not mean all accepted historical candidates were implemented.",
+      "Google398/Meta144 inherited exact-URL reviews; true Google eight-entry delta reviewed independently.",
+      "DeepMind265 records received primary official date triage, not 265 fresh algorithm full-text reviews.",
+      "Archived exceptions reopen only when independent new evidence appears; confirmed unread in-window IDs cannot be archived to evade review."
+    ]
   },
-  "exception_archive": "research-audits/oct07-source-closure/exception-archive.json"
+  "exception_archive": "research-audits/oct12-review-closure/exception-archive.json",
+  "review_as_of": "2026-10-12T12:55:18+08:00"
 }

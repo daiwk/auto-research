@@ -2,10 +2,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.30652) |
-| 公司/机构 | 第一作者 Shangjian Yin：Meta AI / University of California, Riverside |
+| 公司/机构 | Meta AI / University of California, Riverside |
 | 首次公开日期 | 2026-09-25（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-09-29，未找到原作者发布的训练仓库 |
 | Adapter | `recursive-opsd` |

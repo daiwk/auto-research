@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [TheWebConf 2027 / arXiv 2607.28940](https://arxiv.org/abs/2607.28940) |
-| 公司/机构 | LinkedIn（第一作者 Da Xu） |
+| 公司/机构 | LinkedIn |
 | 首次公开日期 | 2026-07-31（arXiv v1） |
 | 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-01） |
 | Adapter | `transx` |

@@ -1,0 +1,6103 @@
+{
+  "schema_version": 2,
+  "track": "foundation-model",
+  "window": {
+    "start": "2026-10-07",
+    "end": "2026-10-12"
+  },
+  "query_matrix": [
+    "llm-architecture",
+    "transformer-architecture",
+    "efficient-inference",
+    "long-context",
+    "pretraining-data",
+    "multimodal-llm",
+    "vision-language",
+    "model-compression"
+  ],
+  "candidate_count": 259,
+  "triage_counts": {
+    "new": 254,
+    "implemented": 5,
+    "reviewed": 0,
+    "google_meta_priority_review": 0
+  },
+  "candidates": [
+    {
+      "arxiv_id": "2610.13935",
+      "title": "Hide and Seek: HIDE Concepts to SEEK explanations for black box models",
+      "published": "2026-10-09T17:56:59Z",
+      "url": "http://arxiv.org/abs/2610.13935v1",
+      "authors": [
+        "Bhanu Tokas",
+        "Rahul Nair",
+        "Rockwell Jackson",
+        "Hannah Kerner"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13925",
+      "title": "Can machines reason non-verbally?",
+      "published": "2026-10-09T17:54:36Z",
+      "url": "http://arxiv.org/abs/2610.13925v1",
+      "authors": [
+        "Shaheer U. Saeed",
+        "Zion Tse",
+        "Gregory Slabaugh",
+        "Daniel C. Alexander",
+        "Yipeng Hu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13917",
+      "title": "Designing Protein Structures from Natural Language",
+      "published": "2026-10-09T17:51:55Z",
+      "url": "http://arxiv.org/abs/2610.13917v1",
+      "authors": [
+        "Joseph Lee",
+        "Yanjing Li",
+        "Bo Qiang",
+        "Gregory Lau",
+        "Allyson Ettinger",
+        "Noah A. Smith",
+        "Rory Donovan-Maiye",
+        "David Baker",
+        "Hanna Hajishirzi",
+        "Pang Wei Koh"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13910",
+      "title": "When VLMs Destroy What They Know: Spatial Representations Fall Below Lexical Priors",
+      "published": "2026-10-09T17:50:03Z",
+      "url": "http://arxiv.org/abs/2610.13910v1",
+      "authors": [
+        "Shubh Garg",
+        "Chen Shani"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13858",
+      "title": "LapMerge: Differentiable Exact-Budget Token Merging in Linear Time",
+      "published": "2026-10-09T17:07:17Z",
+      "url": "http://arxiv.org/abs/2610.13858v1",
+      "authors": [
+        "Magdalena Trędowicz",
+        "Aleksandra Nowak",
+        "Tomasz Steifer",
+        "Łukasz Struski",
+        "Szymon Płotka",
+        "Jacek Tabor"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13840",
+      "title": "Studying Comics at Scale with Artificial Intelligence: The PAGE Framework and Three Studies of American Comics and Japanese Manga",
+      "published": "2026-10-09T16:49:29Z",
+      "url": "http://arxiv.org/abs/2610.13840v1",
+      "authors": [
+        "Emilio Ferrara"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13832",
+      "title": "SpatialASM: Internalizing Active Mentalization for Spatial Reasoning",
+      "published": "2026-10-09T16:39:50Z",
+      "url": "http://arxiv.org/abs/2610.13832v1",
+      "authors": [
+        "Yuhong Liu",
+        "Shenxi Wu",
+        "Junyi Chi",
+        "Beichen Zhang",
+        "Xuanlang Dai",
+        "Jiaqi Wang",
+        "Yuhang Zang",
+        "Dahua Lin"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13797",
+      "title": "REFLECT: Role-Aware Detection of Sentiment, Emotion, Politeness, and Formality",
+      "published": "2026-10-09T16:10:25Z",
+      "url": "http://arxiv.org/abs/2610.13797v1",
+      "authors": [
+        "Sangpil Youm",
+        "Annabel Stocks Natalias",
+        "Hayden Heninger",
+        "Leah Jones",
+        "Xiaoyang Jin",
+        "Xiaoya Zhang",
+        "Bonnie Dorr"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13790",
+      "title": "OccludeBench: Can VLMs Find What's Missing?",
+      "published": "2026-10-09T16:04:54Z",
+      "url": "http://arxiv.org/abs/2610.13790v1",
+      "authors": [
+        "Jasin Cekinmez",
+        "Addison J. Wu",
+        "Ryo Mitsuhashi",
+        "Linrong Cai",
+        "Xingyu Fu",
+        "Zhuang Liu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13783",
+      "title": "UkrMeme: Multimodal Explainable Persuasion Detection in Ukrainian Memes",
+      "published": "2026-10-09T16:03:27Z",
+      "url": "http://arxiv.org/abs/2610.13783v1",
+      "authors": [
+        "Nazar Andrushko",
+        "Vera Schmitt",
+        "Veronika Solopova"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13767",
+      "title": "DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs",
+      "published": "2026-10-09T15:51:38Z",
+      "url": "http://arxiv.org/abs/2610.13767v1",
+      "authors": [
+        "Mahsa Salmani",
+        "Sayeh Sharify",
+        "Hesham Mostafa"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13763",
+      "title": "Neurons++: A Unified Visual-Stream Framework for Image and Video Reconstruction from fMRI with Neural-to-Visual Interpretability",
+      "published": "2026-10-09T15:49:07Z",
+      "url": "http://arxiv.org/abs/2610.13763v1",
+      "authors": [
+        "Haonan Wang",
+        "Yuchen Wang",
+        "Jingyu Lu",
+        "Qixiang Zhang",
+        "Lehan Wang",
+        "Xuanqi Huang",
+        "Xiaomeng Li"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13755",
+      "title": "Matched-Context Group Policy Optimization for LLM Agent Training",
+      "published": "2026-10-09T15:41:37Z",
+      "url": "http://arxiv.org/abs/2610.13755v1",
+      "authors": [
+        "Chenxu Zhang",
+        "Yaorui Shi",
+        "Wenlong Zhang",
+        "Jianchao Tan",
+        "Zihan Wang",
+        "Yiming Cheng"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13735",
+      "title": "Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers",
+      "published": "2026-10-09T15:30:08Z",
+      "url": "http://arxiv.org/abs/2610.13735v1",
+      "authors": [
+        "Yuhong Chou",
+        "Zehao Liu",
+        "Yuqi Pan",
+        "Qian Liu",
+        "Xianwei Chen",
+        "Zhongzhu Zhou",
+        "Jibin Wu"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13708",
+      "title": "Adaptive DHiSparse: Speculative Decoding over a Load-Adaptive KV Hierarchy",
+      "published": "2026-10-09T15:02:35Z",
+      "url": "http://arxiv.org/abs/2610.13708v1",
+      "authors": [
+        "Naji Alazhar",
+        "Wassel Alazhar"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13697",
+      "title": "Improving Semantic Coverage in AI Test & Evaluation through Generative Augmentation",
+      "published": "2026-10-09T14:57:12Z",
+      "url": "http://arxiv.org/abs/2610.13697v1",
+      "authors": [
+        "Connor Hashemi",
+        "Bharadwaj Ravichandran",
+        "Connor Anderson",
+        "Shitij Govil",
+        "Brandon RichardWebster",
+        "Brian Hu",
+        "Keith Fieldhouse"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13690",
+      "title": "Transformer-based In-Context Score Operator Learning for Diffusion Models",
+      "published": "2026-10-09T14:53:49Z",
+      "url": "http://arxiv.org/abs/2610.13690v1",
+      "authors": [
+        "Wuzhe Xu",
+        "Zhaiming Shen",
+        "Yulong Lu",
+        "Wenjing Liao",
+        "Rongjie Lai"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13663",
+      "title": "A Multi-Agent LLM System for Automated Tuning of Specialized Neural Network Models",
+      "published": "2026-10-09T14:34:22Z",
+      "url": "http://arxiv.org/abs/2610.13663v1",
+      "authors": [
+        "Ivan Moloshnikov",
+        "Dmitry Kunitsyn",
+        "Alexander Sboev",
+        "Maksim Skorokhodov",
+        "Roman Rybka",
+        "Yuanchao Liu"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13660",
+      "title": "Pretraining and Test-Time Training Budgets Matter for ARC: A Controlled Study of VARC and TRM",
+      "published": "2026-10-09T14:33:30Z",
+      "url": "http://arxiv.org/abs/2610.13660v1",
+      "authors": [
+        "Adrien Deliege",
+        "Marc Van Droogenbroeck"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13636",
+      "title": "Benchmarking Answer-Grounding Consistency in Remote Sensing Visual Question Answering",
+      "published": "2026-10-09T14:15:50Z",
+      "url": "http://arxiv.org/abs/2610.13636v1",
+      "authors": [
+        "Ping Guo",
+        "Zhiqi Huang",
+        "Xinran Li",
+        "Linkun Yu",
+        "Jingyin Pei",
+        "Kamata Seiichiro"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13635",
+      "title": "PANDA: Prior-guided Attentional Dual-path Architecture",
+      "published": "2026-10-09T14:15:14Z",
+      "url": "http://arxiv.org/abs/2610.13635v1",
+      "authors": [
+        "Rishabh Jain",
+        "Federico Belotti",
+        "Stefano Coniglio",
+        "Pietro Lio",
+        "Stefano Fiorini"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13605",
+      "title": "zip2zip++: Towards Inference-Time Token Compression with Minimal Quality Loss",
+      "published": "2026-10-09T13:52:54Z",
+      "url": "http://arxiv.org/abs/2610.13605v1",
+      "authors": [
+        "Saibo Geng",
+        "Andrea Gentilini",
+        "Xinxian Ma",
+        "Nathan Ranchin",
+        "Yunzhen Yao",
+        "Robert West"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13578",
+      "title": "RARA: Robust Policy Fine-Tuning through Retrieval-Anchored Representation Alignment for Robotic Manipulation",
+      "published": "2026-10-09T13:31:20Z",
+      "url": "http://arxiv.org/abs/2610.13578v1",
+      "authors": [
+        "Xuhui Kang",
+        "Sung-Wook Lee",
+        "Yan Zhuang",
+        "Tianle Zhong",
+        "Yen-Ling Kuo"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13563",
+      "title": "Not All Correct Fixes Run Alike: An Empirical Study of Patch Performance in Repository-Level Issue Resolution",
+      "published": "2026-10-09T13:17:53Z",
+      "url": "http://arxiv.org/abs/2610.13563v1",
+      "authors": [
+        "Han Peng",
+        "Xing Hu",
+        "Feifei Niu",
+        "Huan Li",
+        "Xin Xia"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13557",
+      "title": "Probabilistic Ship Trajectory Forecasting using Transformer Models on AIS Data",
+      "published": "2026-10-09T13:13:07Z",
+      "url": "http://arxiv.org/abs/2610.13557v1",
+      "authors": [
+        "Frederik E. T. Schöller"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13548",
+      "title": "Auditing VLM Benchmarks from Existing Evaluation Runs",
+      "published": "2026-10-09T13:05:22Z",
+      "url": "http://arxiv.org/abs/2610.13548v1",
+      "authors": [
+        "Denis Degtiarev",
+        "Anna Gromova",
+        "Sergey Katkov",
+        "Artem Mikhailin",
+        "Safina Mukhamedshina",
+        "Albert Nasybullin",
+        "Karina Shaikhutdinova",
+        "Artem Tuzov"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13527",
+      "title": "S-Space: Exploring Spatial Workspace in Multimodal Language Models",
+      "published": "2026-10-09T12:48:41Z",
+      "url": "http://arxiv.org/abs/2610.13527v1",
+      "authors": [
+        "Zhiyuan Shi",
+        "Xiang Li",
+        "Xingzhuo Guo",
+        "Shangchen Miao",
+        "Weiliang Chen",
+        "Qiyu Dai",
+        "Jinshan Ren",
+        "Jiangran Lyu",
+        "Fangfu Liu",
+        "Mingsheng Long",
+        "Jialong Wu"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13510",
+      "title": "Retrieval-Augmented Multimodal Language Model with Heterogeneous Evidence Integration for Clinical Prognosis",
+      "published": "2026-10-09T12:35:22Z",
+      "url": "http://arxiv.org/abs/2610.13510v1",
+      "authors": [
+        "Hamza Shafiq",
+        "Jialu Tang",
+        "Ting Dang",
+        "Jun Hu",
+        "Aaqib Saeed"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13485",
+      "title": "Proactive Agentic Orchestration",
+      "published": "2026-10-09T12:18:49Z",
+      "url": "http://arxiv.org/abs/2610.13485v1",
+      "authors": [
+        "Xueyang Feng",
+        "Chaozhuo Li",
+        "Xiaohe Bo",
+        "Jiakai Tang",
+        "Chenxi Li",
+        "Qiwei Ye",
+        "Xu Chen"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13411",
+      "title": "In-Context Learning for System Identification: Probabilistic Formulation, Long-Sequence Handling, and Benchmark Validation",
+      "published": "2026-10-09T11:21:14Z",
+      "url": "http://arxiv.org/abs/2610.13411v1",
+      "authors": [
+        "Matteo Rufolo",
+        "Dario Piga",
+        "Filippo Pura",
+        "Marco Forgione"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13370",
+      "title": "Overcoming Data Imbalances with Expert Selection Biases",
+      "published": "2026-10-09T10:45:19Z",
+      "url": "http://arxiv.org/abs/2610.13370v1",
+      "authors": [
+        "Ayush K. Tarun",
+        "Clara Meister",
+        "Antoine Bosselut"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "pretraining-data",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13341",
+      "title": "Understanding Mamba-3 Through Oscillatory Dynamics",
+      "published": "2026-10-09T10:16:58Z",
+      "url": "http://arxiv.org/abs/2610.13341v1",
+      "authors": [
+        "Shutian Liang",
+        "Yue Song"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13337",
+      "title": "Exploring Attention Sinks in Text-to-Image Transformers from Diffusion and Autoregressive Models",
+      "published": "2026-10-09T10:10:51Z",
+      "url": "http://arxiv.org/abs/2610.13337v1",
+      "authors": [
+        "Binglei Li",
+        "Mengping Yang",
+        "Zhiyu Tan",
+        "Wenxu Qian",
+        "Junping Zhang",
+        "Hao Li"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13334",
+      "title": "PDE-PFN: Prior-Data Fitted Neural PDE Solver",
+      "published": "2026-10-09T10:08:51Z",
+      "url": "http://arxiv.org/abs/2610.13334v1",
+      "authors": [
+        "Jaehyeon Park",
+        "Mingu Kang",
+        "Dongseok Lee",
+        "Woojin Cho",
+        "Kookjin Lee",
+        "Anthony Gruber",
+        "Youngjoon Hong",
+        "Noseong Park"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13321",
+      "title": "Host-Aware Web Crawling for LLM Pretraining Data",
+      "published": "2026-10-09T10:03:04Z",
+      "url": "http://arxiv.org/abs/2610.13321v1",
+      "authors": [
+        "Malte Ostendorff"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13276",
+      "title": "CopRoute: Dependence-Aware Conformal Routing for Language Models",
+      "published": "2026-10-09T09:27:47Z",
+      "url": "http://arxiv.org/abs/2610.13276v1",
+      "authors": [
+        "Siva Rajesh Kasa",
+        "Santhosh Kumar Kasa",
+        "Karan Gupta"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13272",
+      "title": "OWLET: On-Policy Weighted Learning via Evidence Transfer for Video Large Language Model Post-Training",
+      "published": "2026-10-09T09:23:21Z",
+      "url": "http://arxiv.org/abs/2610.13272v1",
+      "authors": [
+        "Qitan Lv",
+        "Ke Fan",
+        "Hong Wang",
+        "Wen Wu",
+        "Yilin Wang",
+        "Bowen Zhou",
+        "Feng Wu",
+        "Chao Zhang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13263",
+      "title": "SheafPrune: Sheaf-Guided Graph Propagation for Visual Token Pruning",
+      "published": "2026-10-09T09:15:08Z",
+      "url": "http://arxiv.org/abs/2610.13263v1",
+      "authors": [
+        "Xiaoyang Ma",
+        "Chi Wang",
+        "Hong Sun"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13262",
+      "title": "Dual-Stream Memory for Vision-Language-Action Policies",
+      "published": "2026-10-09T09:14:59Z",
+      "url": "http://arxiv.org/abs/2610.13262v1",
+      "authors": [
+        "Yang Wang",
+        "Ping Liu",
+        "Ruiyu Wang",
+        "Xuhua Chen",
+        "Lingfeng Zhang",
+        "Tao Zhang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13261",
+      "title": "Data-Adaptive Mahalanobis Metric Learning for Cross-Head Attention in Transformers",
+      "published": "2026-10-09T09:11:08Z",
+      "url": "http://arxiv.org/abs/2610.13261v1",
+      "authors": [
+        "Zhenke Duan",
+        "Xin Li",
+        "Jiqun Pan",
+        "Dong Xiaofei",
+        "Hanwen Ning",
+        "Xinyuan Song"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13259",
+      "title": "Beyond a Single Crop: Contextualized Embeddings for Player Re-Identification",
+      "published": "2026-10-09T09:07:45Z",
+      "url": "http://arxiv.org/abs/2610.13259v1",
+      "authors": [
+        "Ge Luo",
+        "Changhuo Yang",
+        "Weisi Fan",
+        "Rui Yang",
+        "Shaokai Wang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13253",
+      "title": "Tabular Foundation Models Are Effectively Shallow",
+      "published": "2026-10-09T09:01:42Z",
+      "url": "http://arxiv.org/abs/2610.13253v1",
+      "authors": [
+        "Irene Cannistraci",
+        "Julia E. Vogt"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13252",
+      "title": "Vision Transformers Learn Word Meaning from Images Alone",
+      "published": "2026-10-09T09:00:08Z",
+      "url": "http://arxiv.org/abs/2610.13252v1",
+      "authors": [
+        "Anders Gjølbye",
+        "Sebastian Ray Mason",
+        "Stella Frank",
+        "Lars Kai Hansen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13239",
+      "title": "Jag: Direct Box Prediction for Efficient Visual Grounding",
+      "published": "2026-10-09T08:54:42Z",
+      "url": "http://arxiv.org/abs/2610.13239v1",
+      "authors": [
+        "Xiuyuan Zhu",
+        "Ke Lu",
+        "Hao Wu",
+        "Zijin Du",
+        "Dongming Zhang",
+        "Jian Xue"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13208",
+      "title": "How Much Computation Does Every Forecast Need? Structured Block Skipping in Two Time-Series Foundation Models",
+      "published": "2026-10-09T08:26:14Z",
+      "url": "http://arxiv.org/abs/2610.13208v1",
+      "authors": [
+        "Max Bourgeat"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13202",
+      "title": "S$^3$R: Fast and Faithful RL Rollouts via Self-Sparse Speculative Decoding",
+      "published": "2026-10-09T08:22:40Z",
+      "url": "http://arxiv.org/abs/2610.13202v1",
+      "authors": [
+        "Yuhang He",
+        "Hongyu Ge",
+        "Zihan Lin",
+        "Siyi Liu",
+        "Yongqi Zhang"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13154",
+      "title": "From Glance to Focus: Mitigating Recognition Laziness in MLLMs for Fine-Grained Recognition",
+      "published": "2026-10-09T07:42:32Z",
+      "url": "http://arxiv.org/abs/2610.13154v1",
+      "authors": [
+        "Yutong Yang",
+        "Zhuqi Liu",
+        "Mouxing Yang",
+        "Xi Peng"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13143",
+      "title": "Measurable Semantic 3D Gaussian Splatting with Joint Region and Depth Supervision for Interactive Building Inspection",
+      "published": "2026-10-09T07:33:37Z",
+      "url": "http://arxiv.org/abs/2610.13143v1",
+      "authors": [
+        "Yi Zhang",
+        "Tian Tan",
+        "Ray Kai Leung Su"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13128",
+      "title": "Locate, Judge, Read: Role-Specialized Tool Agents over a Knowledge-Point Index for Open-Domain Multimodal Document QA",
+      "published": "2026-10-09T07:21:36Z",
+      "url": "http://arxiv.org/abs/2610.13128v1",
+      "authors": [
+        "Wenlin Lin",
+        "Fanzhe Wei"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13111",
+      "title": "What Do Visual-Head Discovery Scores Actually Find? Attention Source, Necessity, and Random-Control Pitfalls in Vision-Language Models",
+      "published": "2026-10-09T07:06:17Z",
+      "url": "http://arxiv.org/abs/2610.13111v1",
+      "authors": [
+        "Md Abdul Kadir",
+        "Daniel Sonntag"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13106",
+      "title": "Scaling RNA Foundation Models through Iterative Refinement",
+      "published": "2026-10-09T06:59:15Z",
+      "url": "http://arxiv.org/abs/2610.13106v1",
+      "authors": [
+        "Pengan Chen",
+        "Liang Hong",
+        "Xinyuan Liu",
+        "Han Huang",
+        "Ziqian Lin",
+        "Jiayang Chen",
+        "Yimin Fan",
+        "Jiyue Jiang",
+        "Yu Li"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13102",
+      "title": "From 2.1M Hours of Raw Broadcast Audio to Finnish Speech SSL: Confidence Filtering and Architectural Analysis at Scale",
+      "published": "2026-10-09T06:57:05Z",
+      "url": "http://arxiv.org/abs/2610.13102v1",
+      "authors": [
+        "Yaroslav Getman",
+        "Tamás Grósz",
+        "Tommi Lehtonen",
+        "Mikko Kurimo"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "pretraining-data",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13064",
+      "title": "CB-Orchestrator: Adaptive Workflow Optimization for LLM Agents via Contextual Bandits",
+      "published": "2026-10-09T06:25:19Z",
+      "url": "http://arxiv.org/abs/2610.13064v1",
+      "authors": [
+        "Jiahang Sun",
+        "Zhiwei Shang",
+        "Zhipiao Liu",
+        "Hongwei Yang",
+        "Guoqing Xie",
+        "Shuang Qiu",
+        "Zhongxiang Dai"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13060",
+      "title": "KV-Repurpose: A Testbed for Evaluating Non-Prefix KV-Cache Reuse",
+      "published": "2026-10-09T06:17:10Z",
+      "url": "http://arxiv.org/abs/2610.13060v1",
+      "authors": [
+        "Taiga Ikeda",
+        "Daisuke Miyashita",
+        "Jun Deguchi"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13056",
+      "title": "A4-MR: Abnormality-aware Anatomical Alignment for MR",
+      "published": "2026-10-09T06:10:10Z",
+      "url": "http://arxiv.org/abs/2610.13056v1",
+      "authors": [
+        "Noel D'souza",
+        "Zhijian Yang",
+        "Nishank Singla",
+        "Pranay Doshi",
+        "Krisztian Koos",
+        "Fei Tan",
+        "Bruno Nunes",
+        "Laszlo Rusko",
+        "Bernadett Kolozsvari",
+        "Eszter Sabo",
+        "Emanuele Valeriano",
+        "Vikash Gupta",
+        "Seyed Iman Zare Estakhraji",
+        "Marc Lebel",
+        "Farzin Haddadpour",
+        "Taha Kass-Hout",
+        "Erhan Bas"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13045",
+      "title": "Redirecting Teacher Supervision: Temporal-Response-Guided Latent Distillation for Video-Language Models",
+      "published": "2026-10-09T06:01:48Z",
+      "url": "http://arxiv.org/abs/2610.13045v1",
+      "authors": [
+        "Xinkai Lu",
+        "Junli Zha",
+        "Haolan Wei",
+        "Jiahui Wang",
+        "Chao Zhou",
+        "Xiang Song"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13041",
+      "title": "RAMP: Recurrent Adaptive Mixed Precision for Efficient Prefill in Recurrent-Depth Language Models",
+      "published": "2026-10-09T05:57:33Z",
+      "url": "http://arxiv.org/abs/2610.13041v1",
+      "authors": [
+        "Ke Wan",
+        "Chen Chen"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13040",
+      "title": "Lightweight Time-Frequency Vibration Sensing for Consumer Device Condition Monitoring",
+      "published": "2026-10-09T05:57:15Z",
+      "url": "http://arxiv.org/abs/2610.13040v1",
+      "authors": [
+        "Po-Heng Chou",
+        "Jen-Yu Chiu",
+        "Chun-Yu Yeh",
+        "Wei-Lung Mao",
+        "Walid Saad"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13035",
+      "title": "GeoGR: Spatial-Semantic Token Compression and Group Routing for Efficient 3D VLMs",
+      "published": "2026-10-09T05:46:54Z",
+      "url": "http://arxiv.org/abs/2610.13035v1",
+      "authors": [
+        "Yongxin Zheng",
+        "Hao Wu",
+        "Fang Li",
+        "Hu Fu",
+        "Peiran Yin",
+        "Xudong Wang",
+        "Haozhe Hu",
+        "Xinghao Chen",
+        "Yunpu Ma",
+        "Wei Zhang",
+        "Xiaoyu Shen"
+      ],
+      "matched_queries": [
+        "efficient-inference",
+        "model-compression",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13021",
+      "title": "EmbodiedCLBench: Evaluating Continual Learning for Self-Evolving Embodied Agents",
+      "published": "2026-10-09T05:23:00Z",
+      "url": "http://arxiv.org/abs/2610.13021v1",
+      "authors": [
+        "Jie Huang",
+        "Yanan Chen",
+        "Ruixun Liu",
+        "Kaichen He",
+        "Xinyi He",
+        "Rui Huang",
+        "Zilong Zheng",
+        "Zhenliang Zhang",
+        "Yiwu Zhong"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12998",
+      "title": "Evaluating LLM Creativity through Long-Tail Performance",
+      "published": "2026-10-09T05:03:18Z",
+      "url": "http://arxiv.org/abs/2610.12998v1",
+      "authors": [
+        "Yichen Wang",
+        "Tenghao Huang",
+        "Vishakh Padmakumar",
+        "Mina Lee"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12995",
+      "title": "What Should SFT Learn? Conditional Information Gain for Generalizable Post-Training",
+      "published": "2026-10-09T04:57:55Z",
+      "url": "http://arxiv.org/abs/2610.12995v1",
+      "authors": [
+        "Yuxuan Gu",
+        "Kequan Niu",
+        "Xiaocheng Feng",
+        "Yun Li",
+        "Yiqiao Yang",
+        "Bing Qin"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12981",
+      "title": "The Evidence Anchoring Boundary: Where Visual Interventions Matter and When They Help in Multimodal LLMs",
+      "published": "2026-10-09T04:26:50Z",
+      "url": "http://arxiv.org/abs/2610.12981v1",
+      "authors": [
+        "Qiji Zhou",
+        "Junyi Hu",
+        "Peiyu Wang",
+        "Yue Zhang"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12961",
+      "title": "MVGraph: Benchmarking LVLMs on Evidence Composition across Multi-View Visual Graph",
+      "published": "2026-10-09T03:59:34Z",
+      "url": "http://arxiv.org/abs/2610.12961v1",
+      "authors": [
+        "Yingjie Zhu",
+        "Han Cheng",
+        "Xuefeng Bai",
+        "Youcheng Pan",
+        "Yang Xiang",
+        "Kehai Chen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12959",
+      "title": "Video Codec-Guided Training-Free Token Compression for Video Large Language Models",
+      "published": "2026-10-09T03:56:58Z",
+      "url": "http://arxiv.org/abs/2610.12959v1",
+      "authors": [
+        "Xihua Sheng",
+        "Ruijie Liu",
+        "Chang Wen Chen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12942",
+      "title": "In-Context Learning Can Help Vision-Language Models Overcome Training Priors",
+      "published": "2026-10-09T03:40:07Z",
+      "url": "http://arxiv.org/abs/2610.12942v1",
+      "authors": [
+        "Kun Wang",
+        "Xindi Wu",
+        "Sanghyuk Chun",
+        "Olga Russakovsky",
+        "Esin Tureci"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12907",
+      "title": "BLEND: Balancing Personalization vs. Generalization in Federated Vision-Language Models",
+      "published": "2026-10-09T02:57:18Z",
+      "url": "http://arxiv.org/abs/2610.12907v1",
+      "authors": [
+        "Payam Abdisarabshali",
+        "Fardis Nadimi",
+        "Kasra Borazjani",
+        "Naji Khosravan",
+        "Richeng Jin",
+        "Seyyedali Hosseinalipour"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12874",
+      "title": "Temporal Evidence Forests for Long-Horizon Multi-Party Conversational Memory",
+      "published": "2026-10-09T02:05:38Z",
+      "url": "http://arxiv.org/abs/2610.12874v1",
+      "authors": [
+        "Junyou Guo",
+        "Chongyang Tao",
+        "Yan He",
+        "Yong Wang",
+        "Shuai Ma"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12866",
+      "title": "CaptchaAgent: Verifiable Visual Reasoning for CAPTCHA Solving",
+      "published": "2026-10-09T01:50:26Z",
+      "url": "http://arxiv.org/abs/2610.12866v1",
+      "authors": [
+        "Shangquan Sun",
+        "Ruoyu Chen",
+        "Zhirui Liu",
+        "Xiang Liu",
+        "Chenghao Qian",
+        "Wenqi Ren",
+        "Xiaochun Cao"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12864",
+      "title": "Time Delay System for Sequence Modeling",
+      "published": "2026-10-09T01:43:37Z",
+      "url": "http://arxiv.org/abs/2610.12864v1",
+      "authors": [
+        "Youshan Zhang",
+        "Jialu Li"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12783",
+      "title": "Shift-Aware Identity-Guided Latent Refinement for Referring Audio--Visual Segmentation",
+      "published": "2026-10-08T22:39:41Z",
+      "url": "http://arxiv.org/abs/2610.12783v1",
+      "authors": [
+        "Kun Li",
+        "Sami Sebastian Brandt",
+        "Michael Ying Yang"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12734",
+      "title": "StereoEngine: Scaling Stereo Bimanual Robot Data without Stereo Cameras",
+      "published": "2026-10-08T21:28:58Z",
+      "url": "http://arxiv.org/abs/2610.12734v1",
+      "authors": [
+        "Jason Chen",
+        "I-Chun Arthur Liu",
+        "Gaurav Sukhatme",
+        "Daniel Seita"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12711",
+      "title": "Byzantine-Resilient Federated Large Language Model via Hypergraph Message Passing",
+      "published": "2026-10-08T20:47:08Z",
+      "url": "http://arxiv.org/abs/2610.12711v1",
+      "authors": [
+        "Kai Li",
+        "Hanlin Cai",
+        "Zihao Liu",
+        "Yichen Li",
+        "Jose Alcaraz Calero",
+        "Wei Ni",
+        "Falko Dressler",
+        "Özgür B. Akan"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12707",
+      "title": "Unsupervised Multimodal Reward Modeling",
+      "published": "2026-10-08T20:38:25Z",
+      "url": "http://arxiv.org/abs/2610.12707v1",
+      "authors": [
+        "Yueying Li",
+        "Jingxuan Fan",
+        "Kianté Brantley",
+        "Sham M. Kakade",
+        "Hanlin Zhang"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12703",
+      "title": "Bridging Human and Model Attention: Explainability Analysis of CNN, Mamba, and ViT Architectures with Gaze-Based Validation",
+      "published": "2026-10-08T20:33:38Z",
+      "url": "http://arxiv.org/abs/2610.12703v1",
+      "authors": [
+        "Marco Stefani",
+        "Edoardo Parpaiola",
+        "Matteo Bino",
+        "Gianluca Caregnato",
+        "Francesco Roncolato",
+        "Daniel Fusaro",
+        "Loris Nanni",
+        "Alberto Pretto"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12668",
+      "title": "Recurrent Harness for Agentic Continual Learning",
+      "published": "2026-10-08T19:44:43Z",
+      "url": "http://arxiv.org/abs/2610.12668v1",
+      "authors": [
+        "Yuxin Xiao",
+        "Zhiyun Lu",
+        "Jianyu Wang",
+        "Yangtian Zhang",
+        "Yang Song",
+        "Qifan Wang",
+        "Bailin Wang"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12650",
+      "title": "Feature Competition and Its Representational Origins in Vision Language Models: Evidence from the Stroop Paradigm",
+      "published": "2026-10-08T19:13:43Z",
+      "url": "http://arxiv.org/abs/2610.12650v1",
+      "authors": [
+        "Nurbüke Teker",
+        "Rui Xiao",
+        "Zeynep Akata",
+        "Shuchen Wu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12602",
+      "title": "Self-Preservation in Language Models",
+      "published": "2026-10-08T18:24:02Z",
+      "url": "http://arxiv.org/abs/2610.12602v1",
+      "authors": [
+        "Dongkyu Cho",
+        "Rumi Chunara",
+        "Ali Behrouz"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12582",
+      "title": "One Model to Loop Them All: Elastic Latent Recurrence for Language Models",
+      "published": "2026-10-08T18:05:42Z",
+      "url": "http://arxiv.org/abs/2610.12582v1",
+      "authors": [
+        "Faisal Ladhak",
+        "Shantanu Acharya",
+        "Santiago Akle Serano",
+        "Simeng Sun",
+        "Boris Ginsburg",
+        "Krishna C Puvvada"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12575",
+      "title": "Mind the Temporal Gap: Evaluating Video Models for Temporal Understanding in Driving",
+      "published": "2026-10-08T18:02:22Z",
+      "url": "http://arxiv.org/abs/2610.12575v1",
+      "authors": [
+        "Shiva Sreeram",
+        "Erfan Aasi",
+        "Tsun-Hsuan Wang",
+        "Alaa Maalouf",
+        "Daniela Rus"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12461",
+      "title": "OuroWorld: Bringing Any 3D World Alive as Diverse, Endlessly Looping 3D Cinemagraphs",
+      "published": "2026-10-08T17:59:46Z",
+      "url": "http://arxiv.org/abs/2610.12461v1",
+      "authors": [
+        "You-Zhe Xie",
+        "Ting-Wei Chou",
+        "Yu-Hsuan Li",
+        "Kaipeng Zhang",
+        "Zhixiang Wang",
+        "Yu-Lun Liu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12458",
+      "title": "OmniCapBench: A Deep-Structured Evaluation Framework for Fine-Grained Audio-Visual Captioning",
+      "published": "2026-10-08T17:59:21Z",
+      "url": "http://arxiv.org/abs/2610.12458v1",
+      "authors": [
+        "Zhongyu Yang",
+        "Jiale Tao",
+        "Ruitao Chen",
+        "Zuhao Yang",
+        "Yingfang Yuan",
+        "Xueliang Zhao",
+        "Auden",
+        "Kai Wang",
+        "Shuai Shao",
+        "Biao Wang",
+        "Steve Yves",
+        "Qinglin Lu"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12451",
+      "title": "VersaCamVLA: Camera-Configurable VLA Policies for Robotic Manipulation",
+      "published": "2026-10-08T17:58:47Z",
+      "url": "http://arxiv.org/abs/2610.12451v1",
+      "authors": [
+        "Boyao Han",
+        "Chen Shi",
+        "Jingjing Qian",
+        "ZhuoTan Tian",
+        "Li Jiang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12427",
+      "title": "FastBench: Can Streaming VLMs Perceive High-Dynamic Real-World Streams?",
+      "published": "2026-10-08T17:55:20Z",
+      "url": "http://arxiv.org/abs/2610.12427v1",
+      "authors": [
+        "Yuxuan Hu",
+        "Weikang Shi",
+        "Yang Bo",
+        "Xudong Lu",
+        "Xintong Guo",
+        "Shuhan Li",
+        "Yuyang He",
+        "Huankang Guan",
+        "Peiwen Sun",
+        "Yunqiao Yang",
+        "Wenbo Li",
+        "Rui Liu",
+        "Hongsheng Li"
+      ],
+      "matched_queries": [
+        "model-compression",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12417",
+      "title": "WOVEN: Weaving Visual World Modeling into Multimodal LLMs",
+      "published": "2026-10-08T17:52:03Z",
+      "url": "http://arxiv.org/abs/2610.12417v1",
+      "authors": [
+        "Zheyu Fan",
+        "Yue Zhang",
+        "Mingkai Deng",
+        "Kangrui Wang",
+        "Qineng Wang",
+        "Canyu Chen",
+        "Jie Hao",
+        "Xing Fan",
+        "Chenlei Guo",
+        "Eric P. Xing",
+        "Mohit Bansal",
+        "Manling Li"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "pretraining-data",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12402",
+      "title": "SpaceCast-Bench: Evaluating Predictive Spatial Reasoning in Vision-Language Models",
+      "published": "2026-10-08T17:44:17Z",
+      "url": "http://arxiv.org/abs/2610.12402v1",
+      "authors": [
+        "Hongxing Li",
+        "Jinyue Su",
+        "Dingming Li",
+        "Wenqi Zhang",
+        "Weiming Lu",
+        "Jun Xiao",
+        "Yueting Zhuang",
+        "Yongliang Shen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12390",
+      "title": "Long Text to Predictive Features: LLM-Guided Blockwise Feature Engineering via Executable Program Search",
+      "published": "2026-10-08T17:39:11Z",
+      "url": "http://arxiv.org/abs/2610.12390v1",
+      "authors": [
+        "Ziming Dai",
+        "Dabiao Ma",
+        "Ziheng Guo",
+        "Jack Dong",
+        "Zimu Zhou"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12382",
+      "title": "WorldAlign: Decoupled 4D Reward for World-Consistent Video Generation",
+      "published": "2026-10-08T17:35:19Z",
+      "url": "http://arxiv.org/abs/2610.12382v1",
+      "authors": [
+        "Jing He",
+        "Kaixin Ding",
+        "Xingye Tian",
+        "Guibao Shen",
+        "Wenhang Ge",
+        "Xin Tao",
+        "Pengfei Wan",
+        "Ying-Cong Chen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12355",
+      "title": "Distilling Routed 3D Privilege for Spatial Reasoning in Vision-Language Models",
+      "published": "2026-10-08T17:22:24Z",
+      "url": "http://arxiv.org/abs/2610.12355v1",
+      "authors": [
+        "Hongxing Li",
+        "Yixin Li",
+        "Dingming Li",
+        "Zixuan Wang",
+        "Yuchen Yan",
+        "Wenqi Zhang",
+        "Weiming Lu",
+        "Yongliang Shen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12338",
+      "title": "VFold: Symmetry-Aware Cross-Layer Value Cache Compression",
+      "published": "2026-10-08T17:14:28Z",
+      "url": "http://arxiv.org/abs/2610.12338v1",
+      "authors": [
+        "Neha Verma",
+        "Sungwon Kim",
+        "Kenton Murray",
+        "Kevin Duh"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12327",
+      "title": "SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference",
+      "published": "2026-10-08T17:06:32Z",
+      "url": "http://arxiv.org/abs/2610.12327v1",
+      "authors": [
+        "Qitong Wang",
+        "Xinwei Niu",
+        "Mingluo Su",
+        "Shanwei Zhao",
+        "Shiai Zhu",
+        "Huan Wang"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12310",
+      "title": "Is In-Domain Training Enough for Fine-Grained Industrial Anomaly Understanding?",
+      "published": "2026-10-08T16:59:29Z",
+      "url": "http://arxiv.org/abs/2610.12310v1",
+      "authors": [
+        "Xingwu Zhang",
+        "Duanyang Du",
+        "Huiling Zhu",
+        "Jiayue Dai",
+        "Yixiao Liu",
+        "Guozhi Liu",
+        "Zhihan Zhang",
+        "Zijun Long"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12305",
+      "title": "From What to Which: Decoding Modifier Grounding in Frozen MLLMs",
+      "published": "2026-10-08T16:53:59Z",
+      "url": "http://arxiv.org/abs/2610.12305v1",
+      "authors": [
+        "Barbara Toniella Corradini",
+        "Caterina Gallegati",
+        "Ludovica Genovese",
+        "Vittorio Murino"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12266",
+      "title": "DVD: Dynamic Vector Decoding for Efficient MLLM-based Perception",
+      "published": "2026-10-08T16:32:28Z",
+      "url": "http://arxiv.org/abs/2610.12266v1",
+      "authors": [
+        "Jinghua Hou",
+        "Zhe Liu",
+        "Hengshuang Zhao"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12248",
+      "title": "EgoVoice: Proactive Spoken Assistance from Egocentric Multimodal Streams",
+      "published": "2026-10-08T16:24:12Z",
+      "url": "http://arxiv.org/abs/2610.12248v1",
+      "authors": [
+        "Heeseung Kim"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12242",
+      "title": "TokenRouter: Efficient Serving System for Token-Level LLM Routing",
+      "published": "2026-10-08T16:21:50Z",
+      "url": "http://arxiv.org/abs/2610.12242v1",
+      "authors": [
+        "Tianyu Fu",
+        "Tengxuan Liu",
+        "Ruoxi Wang",
+        "Yixin Dong",
+        "Yi Ge",
+        "Yichen You",
+        "Yu Wang"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12235",
+      "title": "Language Models as AI Research World Models",
+      "published": "2026-10-08T16:18:54Z",
+      "url": "http://arxiv.org/abs/2610.12235v1",
+      "authors": [
+        "Zijun Wang",
+        "Zewen Liu",
+        "Minhua Lin",
+        "Zhaotian Weng",
+        "Zhan Shi",
+        "Bing He",
+        "Yisi Sang",
+        "Dakuo Wang",
+        "Benoit Dumoulin",
+        "Wei Jin",
+        "Yuyin Zhou",
+        "Cihang Xie",
+        "Hanqing Lu"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12147",
+      "title": "Healthy Counterfactual Generation via Diffusion Inpainting for Mammography Classification",
+      "published": "2026-10-08T15:31:56Z",
+      "url": "http://arxiv.org/abs/2610.12147v1",
+      "authors": [
+        "Inês Cruchinho Garcia",
+        "Mariana Mourão",
+        "Francisco Maria Calisto",
+        "Carlos Santiago",
+        "Jacinto Nascimento"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12144",
+      "title": "Language-Specific Effects of Tokenizer Choice in Multilingual Language Models",
+      "published": "2026-10-08T15:29:37Z",
+      "url": "http://arxiv.org/abs/2610.12144v1",
+      "authors": [
+        "Clara Meister",
+        "Gül Sena Altıntaş",
+        "Antoine Bosselut"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12133",
+      "title": "Rehearse Everything, Remember Nothing: Attic-KV Rehearses What Will Be Read",
+      "published": "2026-10-08T15:22:50Z",
+      "url": "http://arxiv.org/abs/2610.12133v2",
+      "authors": [
+        "Zhiyun Shi"
+      ],
+      "matched_queries": [
+        "long-context",
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12126",
+      "title": "SuperNav: An Agentic Navigation System for Any Task in Any Scene",
+      "published": "2026-10-08T15:19:40Z",
+      "url": "http://arxiv.org/abs/2610.12126v1",
+      "authors": [
+        "Jinkai Zhang",
+        "Jingyi Xu",
+        "Yuanhong Yu",
+        "Jiarui Guo",
+        "Ruizhen Hu",
+        "Hujun Bao",
+        "Xiaowei Zhou",
+        "Sida Peng"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12060",
+      "title": "Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning",
+      "published": "2026-10-08T14:42:57Z",
+      "url": "http://arxiv.org/abs/2610.12060v1",
+      "authors": [
+        "Yicheng Xue",
+        "Han Wu",
+        "Jufeng Yang",
+        "Minjing Dong",
+        "Xinghao Chen",
+        "Hanting Chen",
+        "Jianyuan Guo"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12048",
+      "title": "Do Not Train Away Uncertainty: Early Uncertainty Anchored Calibration",
+      "published": "2026-10-08T14:34:26Z",
+      "url": "http://arxiv.org/abs/2610.12048v1",
+      "authors": [
+        "Yutong Xie",
+        "Jiawei Tang",
+        "Zhenglin Hua",
+        "Yuxiang Ma",
+        "Si Qin",
+        "Yaxin Hou",
+        "Hui Liu",
+        "Junhui Hou",
+        "Yuheng Jia"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11993",
+      "title": "DataVista: Diagnosing Multimodal LLMs on Data Video Understanding",
+      "published": "2026-10-08T14:02:35Z",
+      "url": "http://arxiv.org/abs/2610.11993v1",
+      "authors": [
+        "Yupeng Xie",
+        "Zhenyang Wang",
+        "Jiayi Zhu",
+        "Yinghao Tang",
+        "Zhouan Shen",
+        "Yiyu Chen",
+        "Yuyu Luo"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11986",
+      "title": "FearCaut-Qwen: Affective Steering in a Vision-Language Model Shifts the Decision Criterion for Hazard Assessment",
+      "published": "2026-10-08T13:57:46Z",
+      "url": "http://arxiv.org/abs/2610.11986v1",
+      "authors": [
+        "Xiaoshan Zhou"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11959",
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "published": "2026-10-08T13:41:53Z",
+      "url": "http://arxiv.org/abs/2610.11959v1",
+      "authors": [
+        "Xiaomi LLM-Core Team",
+        ":",
+        "Zongming Qiao",
+        "Ziyue Hua",
+        "Zirui Ou",
+        "Zihao Yue",
+        "Zihan Jiang",
+        "Zhuo Huang",
+        "Zhiyang Chen",
+        "Zhixian Zheng",
+        "Zhipeng Xu",
+        "Zhengrui Ma",
+        "Yuyang Hu",
+        "Yuhang Dong",
+        "Yuechen Zhang",
+        "Yudong Wang",
+        "Yuanxin Liu",
+        "Yixin Yang",
+        "Yishuo Cai",
+        "Yikai Zhao",
+        "Yihan Yan",
+        "Yifan Zhang",
+        "Yifan Song",
+        "Xiyu Wei",
+        "Xing Zhang",
+        "Xin Zhang",
+        "Xiaoqian Liu",
+        "Xiaodong Ji",
+        "Xiangwei Deng",
+        "Xueyu Guo",
+        "Wenhan Ma",
+        "Weimin Xiong",
+        "Weikun Wang",
+        "Weiji Zhuang",
+        "Shuo Liu",
+        "Shuhuai Ren",
+        "Shuhao Gu",
+        "Shimao Chen",
+        "Shijie Cao",
+        "Shihua Yu",
+        "Shicheng Li",
+        "Shengjie Zhou",
+        "Shaolei Zhang",
+        "Rang Li",
+        "Qiying Wang",
+        "Qingkai Fang",
+        "Qianli Chen",
+        "Minzheng Wang",
+        "Liwen Wang",
+        "Linli Yao",
+        "Linghao Zhang",
+        "Liangyu Cheng",
+        "Liang Zhao",
+        "Lei Li",
+        "Jinhao Dong",
+        "Jinyu Xiang",
+        "Jianyu Wei",
+        "Jiangshan Duo",
+        "Huaqiu Liu",
+        "Huanjie Fan",
+        "Hongyi Guan",
+        "Hongshen Xu",
+        "Hao Tian",
+        "Hanyu Li",
+        "Hailin Zhang",
+        "Gang Wang",
+        "Fuli Luo",
+        "Feng Wei",
+        "Dong Zhang",
+        "Dawei Zhu",
+        "Chiheng Lou",
+        "Chenhong He",
+        "Chenhao He",
+        "Chenghua Liu",
+        "Bowen Ye",
+        "Bowen Shen",
+        "Boshen Xu",
+        "Bo Yang",
+        "Bingquan Xia",
+        "Bangjun Xiao",
+        "Baixuan Xu",
+        "Zhouxiang Mao",
+        "Zhiyang Zhang",
+        "Zhixiang Xu",
+        "Zhenru Lin",
+        "Zhengju Tang",
+        "Zhaojun Huang",
+        "Yuzhe Weng",
+        "Yuxing Xiang",
+        "Yuxiao Li",
+        "Yuheng Yang",
+        "Yuhang Wang",
+        "Yuchen Liu",
+        "Yuanyuan Tian",
+        "Yuanliang Dong",
+        "Yu Cheng",
+        "Yongzhe He",
+        "Yongshun Liang",
+        "Yong Wang",
+        "Yiyan Wang",
+        "Yitian Gong",
+        "Yijie Zhang",
+        "Yanshu Xin",
+        "Xun Zhang",
+        "Xingjian Zhao",
+        "Wenyu Yang",
+        "Wenshan Huang",
+        "Wenhao Li",
+        "Tingwei Huang",
+        "Tianyu Yu",
+        "Tianyang Lu",
+        "Taoyu Yang",
+        "Sinan Du",
+        "Shutong Tian",
+        "Shulin Du",
+        "Shengfan Wang",
+        "Shanchuan Fang",
+        "Qihao Zhang",
+        "Qibin Yang",
+        "Qian Yu",
+        "Qian Tu",
+        "Pengrong Xie",
+        "Peipei Wang",
+        "Peidian Li",
+        "Minkun Guo",
+        "Mingchen Shao",
+        "Luohan Gao",
+        "Lijie Wang",
+        "Liang Shi",
+        "Kaiqi Chen",
+        "Kaiming Liu",
+        "Kaifei Wang",
+        "Kai Yang",
+        "Jinlong Xue",
+        "Jiechen Zhang",
+        "Jiaxuan Liu",
+        "Hongxu An",
+        "Hao Peng",
+        "Hanglong Lü",
+        "Guonan Wang",
+        "Feiyu Yang",
+        "Fanyu Cao",
+        "Fangyue Liu",
+        "Fan Cui",
+        "Cong Wang",
+        "Chun Chen",
+        "Chenxu Bai",
+        "Chengxuan Zhu",
+        "Chenghua Wang",
+        "Boyi Zeng"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context",
+        "multimodal-llm",
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11954",
+      "title": "Look Where You Can: Active View Selection for CAD Reconstruction under Occlusion",
+      "published": "2026-10-08T13:40:38Z",
+      "url": "http://arxiv.org/abs/2610.11954v1",
+      "authors": [
+        "Kartik Bali",
+        "Mahish Guru",
+        "Yiderigun Borjigin",
+        "Alexandra Starostina",
+        "Christian J. Cyron",
+        "Roland Aydin"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11948",
+      "title": "When History Helps and Hurts: Selective History Use across Multimodal Turns",
+      "published": "2026-10-08T13:36:12Z",
+      "url": "http://arxiv.org/abs/2610.11948v2",
+      "authors": [
+        "Shuoyang Sun",
+        "Kerui Gu",
+        "Hao Fang",
+        "Shaoli Huang",
+        "Bin Chen"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11938",
+      "title": "Does Target Alignment Mean Target Recovery? An Evidence-Ladder Study of Adversarial Claims on Contrastive Encoders",
+      "published": "2026-10-08T13:30:52Z",
+      "url": "http://arxiv.org/abs/2610.11938v1",
+      "authors": [
+        "Tao Yang",
+        "Jianying Zhou"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11924",
+      "title": "Revisiting Identity and Spectra Dispersion in Media-Bridged Time Series Forecasting: Linking Multivariate Signals and Narrative Flows",
+      "published": "2026-10-08T13:20:49Z",
+      "url": "http://arxiv.org/abs/2610.11924v1",
+      "authors": [
+        "Jierui Lei",
+        "Wenjian Zhang",
+        "Qingyi Yang",
+        "Yuyang Hong",
+        "Fangzheng Chen",
+        "Zhengbo Zhang",
+        "Haina Tang",
+        "Shiming Xiang"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context",
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11920",
+      "title": "Event-Centric Memory with Query-Aware Graph Augmentation for Long-Term Conversational Agents",
+      "published": "2026-10-08T13:17:59Z",
+      "url": "http://arxiv.org/abs/2610.11920v1",
+      "authors": [
+        "Yichen Liu",
+        "Chunfeng Yuan",
+        "Haowei Liu",
+        "Wenjuan Li",
+        "Zefeng Lin",
+        "Bing Li",
+        "Xu Chen",
+        "Weiming Hu"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11907",
+      "title": "Beyond Visual Enhancement: Adaptive Multi-Context Steering to Mitigate LVLM Hallucinations",
+      "published": "2026-10-08T13:08:44Z",
+      "url": "http://arxiv.org/abs/2610.11907v1",
+      "authors": [
+        "Shuran Ma",
+        "JiaLe Li",
+        "Yuxin Dong",
+        "Shan Zheng",
+        "Qingyun Jiang",
+        "Xiang Chen",
+        "Qi Zhu",
+        "Deyi Ji",
+        "Yifan Yang",
+        "Jianfeng Pan",
+        "Yu Tian",
+        "Xue Yang"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11899",
+      "title": "Forms of LLM-Integrated Applications from LLM-Chats to Autonomous AI Agent System",
+      "published": "2026-10-08T13:05:33Z",
+      "url": "http://arxiv.org/abs/2610.11899v1",
+      "authors": [
+        "Irene Weber"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11896",
+      "title": "Automated Assembly Instruction Generation from CAD Models Using Grounded Large Language Models: A Human-in-the-Loop Framework",
+      "published": "2026-10-08T13:04:03Z",
+      "url": "http://arxiv.org/abs/2610.11896v1",
+      "authors": [
+        "Aaron Dsouza",
+        "Mohammed Azeez Khan",
+        "Ashutosh Mishra",
+        "Arshaan Khan",
+        "Neha K. Nair",
+        "Amar Kumar Behera"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11826",
+      "title": "From Suppression to Repair: Mitigating Object Hallucination in Large Vision-Language Models via Localized Distribution Alignment",
+      "published": "2026-10-08T12:25:50Z",
+      "url": "http://arxiv.org/abs/2610.11826v1",
+      "authors": [
+        "Chen Zhao",
+        "Xingping Dong",
+        "Jiachun Shi",
+        "Liang Peng",
+        "Chong Wang",
+        "Zhen Lei",
+        "Ran He",
+        "Bo Du"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11818",
+      "title": "From Pixels to Structure: Lightweight Vision-Language Models for Document OCR and Structured JSON Extraction",
+      "published": "2026-10-08T12:21:52Z",
+      "url": "http://arxiv.org/abs/2610.11818v1",
+      "authors": [
+        "Uddipan Basu Bir",
+        "Vincent Christlein",
+        "Andreas Maier",
+        "Mathias Zinnen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11810",
+      "title": "Seek-and-View Reasoning for Multi-View Spatial Understanding",
+      "published": "2026-10-08T12:18:01Z",
+      "url": "http://arxiv.org/abs/2610.11810v1",
+      "authors": [
+        "Qixiang Chen",
+        "Cheng Zhang",
+        "Fucai Ke",
+        "Chi-Wing Fu",
+        "Jianfei Cai",
+        "Jingwen Ye"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11794",
+      "title": "Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks",
+      "published": "2026-10-08T12:06:54Z",
+      "url": "http://arxiv.org/abs/2610.11794v1",
+      "authors": [
+        "Haoyu Zhao",
+        "Zhengxu Yu",
+        "Zhiyuan He",
+        "Meng Fang",
+        "Rasul Tutunov",
+        "Haitham Bou-Ammar",
+        "Weilin Luo",
+        "Jun Wang"
+      ],
+      "matched_queries": [
+        "efficient-inference",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11776",
+      "title": "DPPM: Dual-Path Parametric Memory for Personalized Language Models",
+      "published": "2026-10-08T11:56:07Z",
+      "url": "http://arxiv.org/abs/2610.11776v1",
+      "authors": [
+        "Yuhao Chen",
+        "Shuochen Liu",
+        "Jiayao Shi",
+        "Jian Hong",
+        "Chen Cheng",
+        "Xinyun Ding",
+        "Tao Wang",
+        "Ya Li",
+        "Quan Liu",
+        "Tong Xu"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11766",
+      "title": "Same Outcome, Different Evidence: Intent Recovery in LLM Safety Evaluation",
+      "published": "2026-10-08T11:50:32Z",
+      "url": "http://arxiv.org/abs/2610.11766v1",
+      "authors": [
+        "Haitong Jiang",
+        "Chunlin Liu",
+        "Sihan Tang",
+        "Chan Wu",
+        "Xiaoqing Su",
+        "Yuhong Feng"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11761",
+      "title": "RAGenome: Scaling Retrieval-Based Genomic Language Models to Long Contexts",
+      "published": "2026-10-08T11:44:58Z",
+      "url": "http://arxiv.org/abs/2610.11761v1",
+      "authors": [
+        "Frederikke Isa Marin",
+        "Panagiotis Antoniadis",
+        "Dionysia Danai Brilli",
+        "Andreas Bjerregaard",
+        "Rachael DeVries",
+        "Yan Li",
+        "Ole Winther",
+        "Wouter Boomsma"
+      ],
+      "matched_queries": [
+        "long-context",
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11674",
+      "title": "VESSI - VLM-Enhanced Support for Surveillance and Investigations",
+      "published": "2026-10-08T10:50:17Z",
+      "url": "http://arxiv.org/abs/2610.11674v1",
+      "authors": [
+        "Saverio Cavasin",
+        "Pietro Tedeschi",
+        "Mattia Tamiazzo",
+        "Alessandro Brighente",
+        "Simone Milani",
+        "Mauro Conti"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11610",
+      "title": "Beyond Report Imitation: Clinically Aware Multi-Image Ultrasound Report Generation from Visible Evidence",
+      "published": "2026-10-08T09:53:46Z",
+      "url": "http://arxiv.org/abs/2610.11610v1",
+      "authors": [
+        "Yuchen Yang",
+        "Xin Wang",
+        "Lufan Wang",
+        "Yinghong Pan",
+        "Yujuan Feng",
+        "Yuqing Yang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11605",
+      "title": "NanoProof: Open and Efficient Automated Theorem Proving in Lean 4",
+      "published": "2026-10-08T09:49:39Z",
+      "url": "http://arxiv.org/abs/2610.11605v1",
+      "authors": [
+        "Matěj Kripner",
+        "Milan Straka"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11592",
+      "title": "Probing for Long-Horizon Deductive Reasoning Capabilities in Language Models with Prolog",
+      "published": "2026-10-08T09:42:07Z",
+      "url": "http://arxiv.org/abs/2610.11592v1",
+      "authors": [
+        "Hadeel Al-Negheimish",
+        "Jasna Ilieva",
+        "Yoon Kim"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11585",
+      "title": "Adapting English Quality Classifiers for Multilingual LLM Pretraining Data Selection",
+      "published": "2026-10-08T09:33:32Z",
+      "url": "http://arxiv.org/abs/2610.11585v1",
+      "authors": [
+        "Vinko Sabolčec",
+        "Bettina Messmer",
+        "Yassine Turki",
+        "Martin Jaggi"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11548",
+      "title": "Conditional Transfer from Controlled Pretraining Mixtures to Code",
+      "published": "2026-10-08T09:12:45Z",
+      "url": "http://arxiv.org/abs/2610.11548v1",
+      "authors": [
+        "Ohad Rubin"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11543",
+      "title": "Learning the Loop, Not Just the Page: Execution-Grounded Loop Learning for Web Generation",
+      "published": "2026-10-08T09:11:17Z",
+      "url": "http://arxiv.org/abs/2610.11543v1",
+      "authors": [
+        "Yuxin Meng",
+        "Ruixu Zhang",
+        "Junjie Wang",
+        "Yuhan Suo",
+        "Yuhan Sun",
+        "Ruining Hu",
+        "Yiyao Yu",
+        "Yubin Wang",
+        "Shouwei Ruan",
+        "Bin Wang",
+        "Yue Liao",
+        "Yuxiang Zhang",
+        "Yujiu Yang"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11510",
+      "title": "Does Modern Standard Arabic (MSA) Dominate Arabic Dialects in LLMs? A Representation-Level Analysis",
+      "published": "2026-10-08T08:46:47Z",
+      "url": "http://arxiv.org/abs/2610.11510v1",
+      "authors": [
+        "Abdu Sallouh",
+        "Nicholas Popovič",
+        "Michael Färber"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11508",
+      "title": "WARP-VLA: Wrist-Camera Adaptation for View-Robust Policy Execution in Vision-Language-Action Models",
+      "published": "2026-10-08T08:44:26Z",
+      "url": "http://arxiv.org/abs/2610.11508v1",
+      "authors": [
+        "Junmyeong Lee",
+        "Dongmin Shin",
+        "Min-Gyu Park",
+        "Wooseok Jeon",
+        "Inho Chang",
+        "Hae-Gon Jeon"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11482",
+      "title": "Evaluating Local Language Model Agents for Reproducible Data Engineering: An Empirical Software Engineering Study of Mobility Workflows",
+      "published": "2026-10-08T08:26:46Z",
+      "url": "http://arxiv.org/abs/2610.11482v1",
+      "authors": [
+        "Jorge García-Carrasco",
+        "Javier Sanchis",
+        "Alejandro Reina-Reina",
+        "Alejandro Maté",
+        "Juan Trujillo"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11469",
+      "title": "SAGE: Sink-Aware Guided Emphasis for Visual Grounding in Vision-Language Decoders",
+      "published": "2026-10-08T08:18:58Z",
+      "url": "http://arxiv.org/abs/2610.11469v1",
+      "authors": [
+        "Jeonghyo Song",
+        "YoungJoon Yoo"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11461",
+      "title": "Beyond Speech Captions: Speech-Rewarded Style Planning for Conversational Text-to-Speech",
+      "published": "2026-10-08T08:12:28Z",
+      "url": "http://arxiv.org/abs/2610.11461v1",
+      "authors": [
+        "Shiao Zhu",
+        "Lianbo Liu",
+        "Sizhen Lyu",
+        "Yuzhe Wang",
+        "Sheng Li",
+        "Takahiro Shinozaki"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11454",
+      "title": "Zatom-2: Multitask Pretraining on Atomistic Data for Generative Modeling across Domains",
+      "published": "2026-10-08T08:09:17Z",
+      "url": "http://arxiv.org/abs/2610.11454v1",
+      "authors": [
+        "Miruna Cretu",
+        "Alex Abrudan",
+        "Antonia Panescu",
+        "Tynan Perez",
+        "Rishabh Anand",
+        "N. Benjamin Erichson",
+        "Michael W. Mahoney",
+        "Samuel Blau",
+        "Joseph Jacobson",
+        "Rafael Gómez-Bombarelli",
+        "Rex Ying",
+        "Tuomas Knowles",
+        "Pietro Liò",
+        "Alex Morehead"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11447",
+      "title": "Closed-loop evaluation of LLM agents for embedded software development",
+      "published": "2026-10-08T08:02:10Z",
+      "url": "http://arxiv.org/abs/2610.11447v1",
+      "authors": [
+        "Jorge García-Carrasco",
+        "Sergio García-Carrasco",
+        "Alejandro Maté",
+        "Juan Trujillo"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11430",
+      "title": "BioBigBird: A Sparse Attention Model for Long-Range Dependency Processing in Biomedical Text",
+      "published": "2026-10-08T07:54:12Z",
+      "url": "http://arxiv.org/abs/2610.11430v1",
+      "authors": [
+        "Roshan Balaji",
+        "Pavan Kumar S",
+        "Vasudev Gupta",
+        "Sreejith N",
+        "Keerthana Sridhar",
+        "Nirav Bhatt"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11422",
+      "title": "Causal-fate dynamics of unrealized influence",
+      "published": "2026-10-08T07:48:53Z",
+      "url": "http://arxiv.org/abs/2610.11422v1",
+      "authors": [
+        "Yiwei Liu",
+        "Luwei Yang",
+        "Shunbo Lei"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11389",
+      "title": "Fact over Fiction: Detection of Pathological Hallucinations in Sinhala-to-English Neural Machine Translation",
+      "published": "2026-10-08T07:19:51Z",
+      "url": "http://arxiv.org/abs/2610.11389v1",
+      "authors": [
+        "Navam Obeysekara",
+        "Nevidu Jayatilleke"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11374",
+      "title": "Rethinking Contrastive Loss in CLIP Post-training: A Complementary Framework with Frozen Text Encoder",
+      "published": "2026-10-08T07:06:58Z",
+      "url": "http://arxiv.org/abs/2610.11374v2",
+      "authors": [
+        "Zidan Wang",
+        "Yaqian Li",
+        "Xiaokai Zhang",
+        "Kaiwen Long",
+        "Kun He",
+        "Hanpeng Liu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11371",
+      "title": "SignRAG: Unified Retrieval-Augmented Gloss-Free Sign Language Translation",
+      "published": "2026-10-08T07:03:24Z",
+      "url": "http://arxiv.org/abs/2610.11371v1",
+      "authors": [
+        "Zhi Rao",
+        "Yucheng Zhou",
+        "Qianran Sun",
+        "Yiqing Huang",
+        "Longcan Yuan",
+        "Jiayi Hou",
+        "Chengwen Yao",
+        "Lin Cheng",
+        "Donghui Sun",
+        "Xiaoxin Chen",
+        "Jun Wan"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11363",
+      "title": "UniData: Universal Multimodal Instruction Generation Pipeline",
+      "published": "2026-10-08T06:52:24Z",
+      "url": "http://arxiv.org/abs/2610.11363v1",
+      "authors": [
+        "Jiaqi Tang",
+        "Yi-Feng Wu",
+        "Yuting Zhang",
+        "Hao Lu",
+        "Bowen Fu",
+        "Qing-Guo Chen",
+        "Xiaogang Xu",
+        "Yuwei Hu",
+        "Shiyin Lu",
+        "Wei Wei",
+        "Lei Zhang",
+        "Zhao Xu",
+        "Weihua Luo",
+        "Qifeng Chen",
+        "Ying-Cong Chen"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11361",
+      "title": "SepGen: Multi-Stem Audio-Video Separation and Generation in a Single Model",
+      "published": "2026-10-08T06:51:59Z",
+      "url": "http://arxiv.org/abs/2610.11361v1",
+      "authors": [
+        "Aviad Dahan",
+        "Rajaei Khatib",
+        "Yonatan Bitton",
+        "Idan Szpektor",
+        "Lior Wolf",
+        "Raja Giryes"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11354",
+      "title": "AdaptEvo: Adaptive Agent Learning with Evolving Supervision",
+      "published": "2026-10-08T06:47:41Z",
+      "url": "http://arxiv.org/abs/2610.11354v1",
+      "authors": [
+        "Shijun Wan",
+        "Jiancong Xie",
+        "Hang Xu",
+        "Jin Duan",
+        "Qixiong Wang",
+        "Xi Xiang",
+        "Maofei Que",
+        "Yahui Liu",
+        "Zhongyu Wei",
+        "Mu Chuan"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11329",
+      "title": "PathLang: A Language-Centered Benchmark for Vision-Language Models in Computational Pathology",
+      "published": "2026-10-08T06:27:42Z",
+      "url": "http://arxiv.org/abs/2610.11329v1",
+      "authors": [
+        "Fanqi Cheng",
+        "Kuo Gong",
+        "Shangke Liu",
+        "Beidi Zhao",
+        "Junchao Zhu",
+        "Zheyu Zhu",
+        "Leiyue Zhao",
+        "Fengbei Liu",
+        "John Cannon",
+        "Gang Wang",
+        "Zu-hua Gao",
+        "Kenji Ikemura",
+        "Yihe Yang",
+        "Yaohong Wang",
+        "Yuankai Huo",
+        "Xiaoxiao Li",
+        "Mert R. Sabuncu",
+        "Ruining Deng"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11317",
+      "title": "DivMoE: Fine-Grained MoE Upcycling via Cross-Domain Expert Composition",
+      "published": "2026-10-08T06:23:01Z",
+      "url": "http://arxiv.org/abs/2610.11317v1",
+      "authors": [
+        "Yuxuan Lou",
+        "Kai Yang",
+        "Geng Zhang",
+        "Yong Liu",
+        "Yang You"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11316",
+      "title": "MetaEncoder: Exploring the Limit of Bi-Encoders for Multimodal System One Decision Making with Natural Language Interface",
+      "published": "2026-10-08T06:22:48Z",
+      "url": "http://arxiv.org/abs/2610.11316v1",
+      "authors": [
+        "Jianpeng Cheng",
+        "Guangyu Sun",
+        "Aashu Singh",
+        "Benyu Zhang",
+        "Haixing Dai",
+        "Hossein Mansour",
+        "Jiangfan Zhang",
+        "Shlok Kumar Mishra",
+        "Wei Sun",
+        "Xuanming Cui",
+        "Yanli Liu",
+        "Qi Guo",
+        "Max Xiangjun Fan",
+        "Jun Xiao"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11314",
+      "title": "From Retrieval to Reconstruction: Constructing Evolvable Cognitive Memory for Long-Term Dialogue",
+      "published": "2026-10-08T06:21:45Z",
+      "url": "http://arxiv.org/abs/2610.11314v1",
+      "authors": [
+        "Zirui Liao",
+        "Zhengxian Wu",
+        "Zhuohong Chen",
+        "Yunyao Yu",
+        "Xiaoyu Liu",
+        "Yifan Xu",
+        "Haoqian Wang"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11310",
+      "title": "FloorSAV: Elucidating Spatial Audio-Visual Context with 2D Floormap for AV-LLMs",
+      "published": "2026-10-08T06:15:36Z",
+      "url": "http://arxiv.org/abs/2610.11310v1",
+      "authors": [
+        "Kyeong-Rae Kim",
+        "Sungnyun Kim",
+        "Tae-Hyun Oh"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11303",
+      "title": "Efficient Multi-Granularity Knowledge Transfer for Radiology Report Generation",
+      "published": "2026-10-08T06:09:28Z",
+      "url": "http://arxiv.org/abs/2610.11303v1",
+      "authors": [
+        "Xubin Zhong",
+        "Zheyu Zhang",
+        "Wenjian Qin",
+        "Ning Wen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11287",
+      "title": "REMORY: Learning Residual Memory for Context Compaction",
+      "published": "2026-10-08T05:50:50Z",
+      "url": "http://arxiv.org/abs/2610.11287v1",
+      "authors": [
+        "Hanchen Xia",
+        "Baoyou Chen",
+        "Yutang Ge",
+        "Naihao Deng",
+        "Senqiao Yang",
+        "Zilong Dong",
+        "Weihao Yuan",
+        "Siyu Zhu"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11251",
+      "title": "V-CoLA: Vision Token Compression with Linear Attention",
+      "published": "2026-10-08T04:55:50Z",
+      "url": "http://arxiv.org/abs/2610.11251v1",
+      "authors": [
+        "Hao Jiang",
+        "Yiru Mao",
+        "Tianpeng Bu",
+        "Hao Zhou",
+        "Hongtao Duan",
+        "Wang Jing",
+        "Bowen Xu",
+        "Xin Chen",
+        "Lulu Hu",
+        "Bin Yang",
+        "Yongliang Tao",
+        "Minying Zhang"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11245",
+      "title": "Read What Matters: Query-Adaptive Quantization for KV Caches",
+      "published": "2026-10-08T04:47:41Z",
+      "url": "http://arxiv.org/abs/2610.11245v1",
+      "authors": [
+        "Siddharth Bhandari",
+        "Lucas Gretta",
+        "Krishna Balasubramanian",
+        "Shiva Kasiviswanathan"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11231",
+      "title": "Harness Compilation: Which Decisions Should a Small Vision-Language Model Keep?",
+      "published": "2026-10-08T04:31:36Z",
+      "url": "http://arxiv.org/abs/2610.11231v1",
+      "authors": [
+        "Minhao Fan",
+        "Yinyi Liu",
+        "Jiayu Zhao",
+        "Zihan Teng",
+        "Song Chen",
+        "Weichen Liu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11216",
+      "title": "The Lattice of Transition Laws",
+      "published": "2026-10-08T04:13:05Z",
+      "url": "http://arxiv.org/abs/2610.11216v1",
+      "authors": [
+        "T. Y. Tsui",
+        "Jiatao Gu",
+        "Lingjie Liu"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11214",
+      "title": "Bridging KV-Cache Quantization and Linear Attention: From Theory to Pretrained Weight Migration",
+      "published": "2026-10-08T04:12:49Z",
+      "url": "http://arxiv.org/abs/2610.11214v1",
+      "authors": [
+        "Kaicheng Xiao",
+        "Liran Dong",
+        "Haotian Li",
+        "Guoliang Xing"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11205",
+      "title": "Dissecting Representation Structure in Vision Transformers: A Rigorous Architectural Study",
+      "published": "2026-10-08T04:06:50Z",
+      "url": "http://arxiv.org/abs/2610.11205v2",
+      "authors": [
+        "Kim-Cuc Nguyen",
+        "Ngai-Man Cheung"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11196",
+      "title": "Selective Listening: Mechanism-Guided Control of Audio Influence in Large Audio-Language Models",
+      "published": "2026-10-08T04:00:47Z",
+      "url": "http://arxiv.org/abs/2610.11196v1",
+      "authors": [
+        "Yulin Sun",
+        "Kele Xu",
+        "Yong Dou"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11161",
+      "title": "VGGTWorld-VLA: Intent-Conditioned 3D World Evolution for Autonomous Driving",
+      "published": "2026-10-08T03:20:48Z",
+      "url": "http://arxiv.org/abs/2610.11161v1",
+      "authors": [
+        "Zhaoyang Liu",
+        "Kun Jiang",
+        "Ziying Song",
+        "Diange Yang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11148",
+      "title": "SP-DocReader: Difference-Aware Self-Play for Precise Document OCR",
+      "published": "2026-10-08T03:12:12Z",
+      "url": "http://arxiv.org/abs/2610.11148v1",
+      "authors": [
+        "Wenjie Liao",
+        "Xiaohui Song",
+        "Liangjie Zhao",
+        "Haonan Lu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11144",
+      "title": "Improving Image-Based Nutrition Estimation Through Multimodal Food-Item Verification and Recovery",
+      "published": "2026-10-08T03:09:29Z",
+      "url": "http://arxiv.org/abs/2610.11144v1",
+      "authors": [
+        "Jingbo Yue",
+        "Bruce Coburn",
+        "Jinge Ma",
+        "Jui-Feng Chi",
+        "Fengqing Zhu"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11140",
+      "title": "ActiveMedAgent: Cost-Aware Trajectory Learning for Multimodal Medical Diagnosis",
+      "published": "2026-10-08T03:06:11Z",
+      "url": "http://arxiv.org/abs/2610.11140v1",
+      "authors": [
+        "Weiwei Ma",
+        "Xiaobing Yu",
+        "Peijie Qiu",
+        "Jin Yang",
+        "Zhaoqi An",
+        "Xuanzhao Dong",
+        "Xiaoqi Zhao",
+        "Xiaofeng Liu"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11113",
+      "title": "DiscoVL: Unveiling Disentangled C ross-Modal Representation Learning via Orthogonal Adversarial Regularization for V ision-Language Models",
+      "published": "2026-10-08T02:35:56Z",
+      "url": "http://arxiv.org/abs/2610.11113v1",
+      "authors": [
+        "Mengping Dong",
+        "Jinbao Li",
+        "Fei Li"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11067",
+      "title": "Diffusion Meta-Prompting and Steering for Generalizable Foundation Model Adaptation",
+      "published": "2026-10-08T01:26:50Z",
+      "url": "http://arxiv.org/abs/2610.11067v1",
+      "authors": [
+        "Deepak Sridhar",
+        "Yi Li",
+        "Kartikeya Bhardwaj",
+        "Shuangjun Liu",
+        "Taotao Jing",
+        "Yuan Li",
+        "Shuai Zhang",
+        "Jiancheng Lyu",
+        "Dashan Gao",
+        "Nuno Vasconcelos"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11039",
+      "title": "Rendering-Free Lookahead for Question-Guided Active Vision",
+      "published": "2026-10-08T00:45:46Z",
+      "url": "http://arxiv.org/abs/2610.11039v1",
+      "authors": [
+        "Koya Sakamoto",
+        "Daichi Azuma",
+        "Shuhei Kurita",
+        "Naoya Chiba",
+        "Yusuke Iwasawa",
+        "Yutaka Matsuo",
+        "Taiki Miyanishi"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11033",
+      "title": "FedAlphaEdit: Null-Space-Aligned Merging for Collaborative Knowledge Editing",
+      "published": "2026-10-08T00:25:25Z",
+      "url": "http://arxiv.org/abs/2610.11033v1",
+      "authors": [
+        "Sota Sugawara",
+        "Yukihiko Okada"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11019",
+      "title": "Mid-Training Language Models on Raw Video",
+      "published": "2026-10-08T00:03:39Z",
+      "url": "http://arxiv.org/abs/2610.11019v1",
+      "authors": [
+        "Jaedong Hwang",
+        "Xiaoqian Shen",
+        "Ernie Chang",
+        "Changsheng Zhao",
+        "Chong Zhou",
+        "Saksham Suri",
+        "Qi Qian",
+        "Zechun Liu",
+        "Lemeng Wu",
+        "Qinsi Wang",
+        "Raghuraman Krishnamoorthi",
+        "Wei Wen"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "pretraining-data",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10990",
+      "title": "Omni-Diffusion-Distill: Few-Step Distillation of Unified Multimodal Diffusion Large Language Models",
+      "published": "2026-10-07T23:24:16Z",
+      "url": "http://arxiv.org/abs/2610.10990v1",
+      "authors": [
+        "Hong Huang",
+        "Chenhongyi Yang",
+        "Junzhe Sun",
+        "Animesh Sinha",
+        "Wuyang Chen",
+        "Yifan Jiang"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression",
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10984",
+      "title": "Fluid-Gen-Zero: Grounding Pretrained Video Generators in Physics without Training",
+      "published": "2026-10-07T23:16:32Z",
+      "url": "http://arxiv.org/abs/2610.10984v1",
+      "authors": [
+        "Hong Huang",
+        "Yuqiu Liu",
+        "Chenyu You",
+        "Daniel Martin",
+        "Chuhang Zou",
+        "Wuyang Chen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10952",
+      "title": "SPD-MetaFormer is what you need for small-data brain decoding",
+      "published": "2026-10-07T22:09:32Z",
+      "url": "http://arxiv.org/abs/2610.10952v1",
+      "authors": [
+        "Zhida Wang",
+        "Wei Lyu",
+        "Guo Yu",
+        "Sui Tang"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10918",
+      "title": "Large Language Models for Machine Translation Quality Annotation: Humans and Models Are Both Challenged",
+      "published": "2026-10-07T21:17:26Z",
+      "url": "http://arxiv.org/abs/2610.10918v1",
+      "authors": [
+        "Hala Almaghout",
+        "Christian Federmann",
+        "Qin Gao"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10912",
+      "title": "When Listening Becomes Easier: Scrubbing Visual Cues for Shortcut-Free VLAs",
+      "published": "2026-10-07T21:11:23Z",
+      "url": "http://arxiv.org/abs/2610.10912v1",
+      "authors": [
+        "Jasper Gerigk",
+        "Kenzo Aspuru-Takata",
+        "Chin-Hsuan Wu",
+        "Mohammad Mohammadi",
+        "Shuhong Zheng",
+        "Igor Gilitschenski"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10893",
+      "title": "Less from More: Reinforcing Sparse Video Reasoning from Dense References",
+      "published": "2026-10-07T20:51:59Z",
+      "url": "http://arxiv.org/abs/2610.10893v1",
+      "authors": [
+        "Wenfang Sun",
+        "Yingjun Du",
+        "Cees G. M. Snoek"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10889",
+      "title": "SPLIT-RL: Staged Perception-Language Reasoning Training with Claim-Level Advantages",
+      "published": "2026-10-07T20:42:54Z",
+      "url": "http://arxiv.org/abs/2610.10889v1",
+      "authors": [
+        "Raja Kumar",
+        "Rajat Koner",
+        "Ritwick Chaudhry",
+        "Zhuowei Li",
+        "Nishant Sankaran",
+        "Yifan Xing"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10858",
+      "title": "RFChipAgent: Multi-Agentic AI Flow for Analog/RF Chip Design",
+      "published": "2026-10-07T20:02:33Z",
+      "url": "http://arxiv.org/abs/2610.10858v1",
+      "authors": [
+        "Awani Khodkumbhe",
+        "Yunfei Feng",
+        "Raj Rangarajan",
+        "Kevin Wang",
+        "Kamal Sahota"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10845",
+      "title": "Real Long-Term Memory for AI: A 50-Million-Token Window That Is Faster and Cheaper Than Recompute",
+      "published": "2026-10-07T19:50:53Z",
+      "url": "http://arxiv.org/abs/2610.10845v1",
+      "authors": [
+        "Sietse Schelpe"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12517",
+      "title": "TerraAgent: Demonstration-Grounded Multi-Agent Reasoning for Long-Context Remote Sensing Visual Question Answering",
+      "published": "2026-10-07T19:50:09Z",
+      "url": "http://arxiv.org/abs/2610.12517v1",
+      "authors": [
+        "Jingwen Huang",
+        "Yiming Fang",
+        "Hanxiao Wu",
+        "Boyuan He",
+        "Keyi Luo"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12516",
+      "title": "TraceICL: Thread-Resolved Demonstration Curation with Consistency Calibration for Robust Multimodal In-Context Learning",
+      "published": "2026-10-07T19:31:54Z",
+      "url": "http://arxiv.org/abs/2610.12516v1",
+      "authors": [
+        "Yigit Yilmaz",
+        "Elena Petrova",
+        "Mehmet Kaya",
+        "Lucia Rossi",
+        "Amir Rahman"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10787",
+      "title": "NavGPT-3: Harnessing Context in a Hierarchical Navigation Runtime",
+      "published": "2026-10-07T18:45:56Z",
+      "url": "http://arxiv.org/abs/2610.10787v1",
+      "authors": [
+        "Gengze Zhou",
+        "Yicong Hong",
+        "Jiazhao Zhang",
+        "Xunyi Zhao",
+        "Jian Zhou",
+        "Zixing Lei",
+        "Zun Wang",
+        "Chongyang Zhao",
+        "Xionghui Chen",
+        "Stephen Gould",
+        "Anton van den Hengel",
+        "Qi Wu"
+      ],
+      "matched_queries": [
+        "long-context",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10782",
+      "title": "VICO: Visual Environments Co-Evolving for Vision-Language Model Reasoning",
+      "published": "2026-10-07T18:39:32Z",
+      "url": "http://arxiv.org/abs/2610.10782v1",
+      "authors": [
+        "Meng Lu",
+        "Ligeng Zhu",
+        "Olivia Xiao",
+        "Yuchen Zhuang",
+        "Zihan Wang",
+        "Kuncheng Wu",
+        "Bangya Liu",
+        "Yu Wang",
+        "Charles Fleming",
+        "Wenqi Shi",
+        "Xuan Wang"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10760",
+      "title": "DOGS: Design-Space Sampling for Prompt-Driven Logo Generation",
+      "published": "2026-10-07T18:24:11Z",
+      "url": "http://arxiv.org/abs/2610.10760v1",
+      "authors": [
+        "Ganyu Zou",
+        "Chen Dai",
+        "Nathan Self",
+        "Kevin Piper",
+        "Ramachandra Rao Seethiraju",
+        "Karthik Shyamsunder",
+        "Chang-Tien Lu",
+        "Naren Ramakrishnan"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10738",
+      "title": "Lossy Compressive Text Autoencoders",
+      "published": "2026-10-07T18:08:40Z",
+      "url": "http://arxiv.org/abs/2610.10738v1",
+      "authors": [
+        "Vinko Sabolčec",
+        "Angelos Katharopoulos",
+        "David Grangier"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10697",
+      "title": "On linearity or non-linearity in machine learning for quantum chaotic dynamics",
+      "published": "2026-10-07T18:00:06Z",
+      "url": "http://arxiv.org/abs/2610.10697v1",
+      "authors": [
+        "Francesco Perciavalle",
+        "Agostino Gallo",
+        "Francesco Plastina",
+        "Gianluigi Greco",
+        "Nicola Lo Gullo",
+        "Carlo Adornetto"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10533",
+      "title": "EngramEdit: Decoupled Knowledge Updates in LLMs through Conditional Memory",
+      "published": "2026-10-07T17:58:52Z",
+      "url": "http://arxiv.org/abs/2610.10533v1",
+      "authors": [
+        "Hongru Cai",
+        "Ran Wei",
+        "Wenjie Wang",
+        "Chengfa Wu",
+        "Ning Song",
+        "Yongqi Li",
+        "Wenjie Li"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10526",
+      "title": "Rephrase Before You Act: Characterizing and Mitigating Language Sensitivity in Vision-Language-Action Models",
+      "published": "2026-10-07T17:57:38Z",
+      "url": "http://arxiv.org/abs/2610.10526v1",
+      "authors": [
+        "Mikey Watts",
+        "Yuchen Cui"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10520",
+      "title": "Distilling Graph Geometry: Knowledge Gap from GNNs to MLPs",
+      "published": "2026-10-07T17:56:01Z",
+      "url": "http://arxiv.org/abs/2610.10520v1",
+      "authors": [
+        "Zhewei Chen",
+        "Hao Zhu",
+        "Jiaojiao Jiang",
+        "Ahad N. Zehmakan"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10491",
+      "title": "Insights from Autoresearch for Solar Panel Segmentation",
+      "published": "2026-10-07T17:45:31Z",
+      "url": "http://arxiv.org/abs/2610.10491v1",
+      "authors": [
+        "Justinas Lekavicius",
+        "Kursat Komurcu",
+        "Valentas Gruzauskas",
+        "Linas Petkevicius"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10448",
+      "title": "MemoCare: An Interactive Multimodal Mobile System for Automated Cognitive Screening",
+      "published": "2026-10-07T17:19:46Z",
+      "url": "http://arxiv.org/abs/2610.10448v1",
+      "authors": [
+        "Duy-Cat Can",
+        "Mau Minh Phuc Le",
+        "Tuan-Khoa Hoang",
+        "Hai-Dang Nguyen",
+        "Trung-Hieu Do",
+        "Dang Minh Ly",
+        "Minh-Duc Nguyen",
+        "Nghia TT Hoang",
+        "Linh-Trung Nguyen",
+        "Huy-Hieu Pham",
+        "Huong Ha",
+        "Binh T. Nguyen",
+        "Oliver Y. Chén"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10436",
+      "title": "Detecting Adversarial Images through Response Profiles of Vision-Language Models",
+      "published": "2026-10-07T17:13:12Z",
+      "url": "http://arxiv.org/abs/2610.10436v1",
+      "authors": [
+        "Arash Vashagh",
+        "Roozbeh Razavi-Far"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10400",
+      "title": "Self-correction Optimization for Interleaved Multimodal Generation",
+      "published": "2026-10-07T16:51:02Z",
+      "url": "http://arxiv.org/abs/2610.10400v1",
+      "authors": [
+        "Xin You",
+        "Zhiwei Ning",
+        "Zukai Chen",
+        "Minghui Zhang",
+        "Xuanke Shi",
+        "Hanxiao Zhang",
+        "Jingsong Liu",
+        "Jie Yang",
+        "Quan Wang",
+        "Yun Gu"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10395",
+      "title": "Executing Causal Structure Learning with Linear-Attention Transformers",
+      "published": "2026-10-07T16:48:51Z",
+      "url": "http://arxiv.org/abs/2610.10395v1",
+      "authors": [
+        "Amartya Roy",
+        "Sayar Karmakar"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10390",
+      "title": "Explicit Geometric Chain-of-Thought for Vision-Language-Action in Autonomous Driving",
+      "published": "2026-10-07T16:47:17Z",
+      "url": "http://arxiv.org/abs/2610.10390v1",
+      "authors": [
+        "Xingtai Gui",
+        "Yucheng Zhou",
+        "Dongqian Guo",
+        "Jiahao Gong",
+        "Feiyang Tan",
+        "Jianbing Shen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10385",
+      "title": "OrBIT: Structure-Guided Embedding Compression",
+      "published": "2026-10-07T16:44:47Z",
+      "url": "http://arxiv.org/abs/2610.10385v1",
+      "authors": [
+        "Yunied Puig",
+        "Amit Kumar Jaiswal"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10655",
+      "title": "Nullify: Null-Space Activation Steering for Training-Free LLM Unlearning",
+      "published": "2026-10-07T16:24:07Z",
+      "url": "http://arxiv.org/abs/2610.10655v1",
+      "authors": [
+        "Wei Zhai",
+        "Xiang Liu",
+        "Qiang Huang",
+        "Rui Qian",
+        "Lemao Liu",
+        "Ziwei Li",
+        "Ziqi Wang",
+        "Zhitao Huang",
+        "Dejing Dou"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10323",
+      "title": "HAN-Mamba: Hierarchical Selective State Space Networks for Multi-Scale Financial Volatility Forecasting",
+      "published": "2026-10-07T16:12:52Z",
+      "url": "http://arxiv.org/abs/2610.10323v1",
+      "authors": [
+        "Mihai Bogdan Deaconu",
+        "Ioan Daniel Pop"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10311",
+      "title": "Fault-tolerant foundation models",
+      "published": "2026-10-07T16:05:48Z",
+      "url": "http://arxiv.org/abs/2610.10311v1",
+      "authors": [
+        "Trevor McCourt",
+        "Ila R. Fiete",
+        "Isaac L. Chuang"
+      ],
+      "matched_queries": [
+        "efficient-inference",
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10305",
+      "title": "How Do Transformers Learn to Represent Symmetries?",
+      "published": "2026-10-07T16:01:51Z",
+      "url": "http://arxiv.org/abs/2610.10305v1",
+      "authors": [
+        "Eduardo Santos-Escriche",
+        "Valerie Engelmayer",
+        "Ya-Wei Eileen Lin",
+        "Stefanie Jegelka"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10304",
+      "title": "SemanticFold: Latent Sequence Compression SeparatesLanguage Modeling, Decodability, and Reasoning",
+      "published": "2026-10-07T16:00:59Z",
+      "url": "http://arxiv.org/abs/2610.10304v1",
+      "authors": [
+        "Mingyan Liu",
+        "Min Huang"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10286",
+      "title": "$Δ$Representation: Geometry Supervised Representation Learning of Phenotypes via Counterfactual Reasoning for Medical VLMs",
+      "published": "2026-10-07T15:49:36Z",
+      "url": "http://arxiv.org/abs/2610.10286v1",
+      "authors": [
+        "Hao Wang",
+        "Qiwei Zeng",
+        "Jinghao Lin",
+        "Shuchang Ye",
+        "Yuezhe Yang",
+        "Yige Peng",
+        "Haoyuan Che",
+        "Jinman Kim",
+        "Lei Bi"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10238",
+      "title": "Geometry-Supervised Visual Representation Learning for Multi-Phenotype Lesion Interpretation in Medical VLMs",
+      "published": "2026-10-07T15:22:11Z",
+      "url": "http://arxiv.org/abs/2610.10238v1",
+      "authors": [
+        "Hao Wang",
+        "Qiwei Zeng",
+        "Shuchang Ye",
+        "Jinghao Lin",
+        "Yuezhe Yang",
+        "Yige Peng",
+        "Jinman Kim",
+        "Lei Bi"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10201",
+      "title": "GAGR-Lab: Evaluating Joint Spatial-Geometric and Analytic Function Reasoning",
+      "published": "2026-10-07T15:01:54Z",
+      "url": "http://arxiv.org/abs/2610.10201v1",
+      "authors": [
+        "Jingyao Zhang",
+        "Yun Li",
+        "Lu Han"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10163",
+      "title": "Beyond Anonymous Captions: Grounding Character Identity in Video Captioning and Question Answering",
+      "published": "2026-10-07T14:41:29Z",
+      "url": "http://arxiv.org/abs/2610.10163v1",
+      "authors": [
+        "Anas Filali Razzouki",
+        "Killian Steunou",
+        "Khalil Guetari",
+        "Thomas Kling",
+        "Mounîm El-Yacoubi",
+        "Yannis Tevissen"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10641",
+      "title": "Coverage-Aware Reasoning with Medical Tokens for Diagnosis Prediction",
+      "published": "2026-10-07T14:39:18Z",
+      "url": "http://arxiv.org/abs/2610.10641v1",
+      "authors": [
+        "Kaisong Zhang",
+        "Haotian Fang",
+        "Junmeng Zhou",
+        "Hang Lv",
+        "Yulan Pan",
+        "Yanchao Tan"
+      ],
+      "matched_queries": [
+        "efficient-inference"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10156",
+      "title": "HeiCo-FOCUS: A Clinically Grounded Dataset for Long-Context Video Understanding",
+      "published": "2026-10-07T14:33:47Z",
+      "url": "http://arxiv.org/abs/2610.10156v1",
+      "authors": [
+        "Leon Mayer",
+        "Lucas Luttner",
+        "Patrick Godau",
+        "Kai Fritzsche",
+        "Annika Reinke",
+        "Leonie Boland",
+        "Jule Brandt",
+        "Janne Heinecke",
+        "Chloe K. Nobuhara",
+        "Niklas Holzwarth",
+        "Evangelia Christodoulou",
+        "Marcel Knopp",
+        "Dominik Michael",
+        "Pascale Piermarco",
+        "Saliq Neyaz",
+        "Korhan Derin Özarslan",
+        "Jakob Hennighausen",
+        "Carlos Aumente-Maestro",
+        "Tim Rädsch",
+        "Dheeraj Baji",
+        "Peter Maximilian Full",
+        "Finn Aichholz",
+        "Justus Veit Erpenbeck",
+        "Linus Finn Schott",
+        "Bastian Winkelhausen",
+        "Claas de Boer",
+        "Bianca Güttner",
+        "Anneli Hummel",
+        "Gregor Just",
+        "Max Kirchner",
+        "Chenyang Li",
+        "Rozenn Raffaut",
+        "Ariel Rodriguez",
+        "Danush Kumar Venkatesh",
+        "Kevin Wang",
+        "Jinjing Xu",
+        "Mona Sheikh Zeinoddin",
+        "Salman Khan",
+        "Thomas M. Pausch",
+        "Stefanie Speidel",
+        "Danail Stoyanov",
+        "Daniel A. Hashimoto",
+        "Fiona R. Kolbinger",
+        "Thomas G. Weiser",
+        "Lena Maier-Hein"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10145",
+      "title": "InterView-C: A Synchronized Multimodal Corpus of VR Avatar-Mediated Survey Interviews",
+      "published": "2026-10-07T14:23:32Z",
+      "url": "http://arxiv.org/abs/2610.10145v1",
+      "authors": [
+        "Patrick Schrottenbacher",
+        "Leon Hammerla",
+        "Lydia Kleine",
+        "Doris Stingl",
+        "Alexander Mehler"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10118",
+      "title": "YANchor-4B: Effective Long-Horizon Reasoning in O(N) Time with O(1) Memory",
+      "published": "2026-10-07T14:03:50Z",
+      "url": "http://arxiv.org/abs/2610.10118v1",
+      "authors": [
+        "Huishan Ji",
+        "Hua Xu",
+        "Weiming Zhang",
+        "Qirui Ye"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10114",
+      "title": "Mechanics of Long-Context Hybrid Models Part 1.1: From Hybrid Attention to Hybrid Position",
+      "published": "2026-10-07T14:02:35Z",
+      "url": "http://arxiv.org/abs/2610.10114v1",
+      "authors": [
+        "Xiaoran Liu",
+        "Ziwei He",
+        "Xipeng Qiu"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10068",
+      "title": "Efficient Provably Private Classification with a Tabular Foundation Model",
+      "published": "2026-10-07T13:34:38Z",
+      "url": "http://arxiv.org/abs/2610.10068v1",
+      "authors": [
+        "Talal Alrawajfeh",
+        "Cristiana Diaconu",
+        "Ossi Räisä",
+        "Sebastian Rodriguez Beltran",
+        "Yuan He",
+        "John Bronskill",
+        "Richard E. Turner",
+        "Antti Honkela"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10066",
+      "title": "From Pixel to Coding: Evaluating the Figure Reproduction Capabilities of MLLMs",
+      "published": "2026-10-07T13:33:04Z",
+      "url": "http://arxiv.org/abs/2610.10066v1",
+      "authors": [
+        "Zijian Chen",
+        "Zhengyu Chen",
+        "Bohan Liang",
+        "Lirong Deng",
+        "Yushuo Zheng",
+        "Yanwei Jiang",
+        "Qi Jia",
+        "Kaiwei Zhang",
+        "Wenjun Zhang",
+        "Guangtao Zhai"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10058",
+      "title": "Cache the Encoder Within:Compact, Reusable Memory across LLM Queries",
+      "published": "2026-10-07T13:28:25Z",
+      "url": "http://arxiv.org/abs/2610.10058v1",
+      "authors": [
+        "Hanzuo Liu",
+        "Chunyu Liu",
+        "Chaofan Lin",
+        "Alex Lamb",
+        "Mingyu Gao"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09985",
+      "title": "Marrying Pricing and Advertising with LLMs",
+      "published": "2026-10-07T12:50:08Z",
+      "url": "http://arxiv.org/abs/2610.09985v1",
+      "authors": [
+        "Alessandro Barro",
+        "Francesco Bacchiocchi",
+        "Francesco Emanuele Stradi",
+        "Alberto Marchesi"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09969",
+      "title": "TR-PTQ: High-Accuracy Integer-Only Transformer Post Training Quantization via Taylor Region Reformulation",
+      "published": "2026-10-07T12:39:10Z",
+      "url": "http://arxiv.org/abs/2610.09969v1",
+      "authors": [
+        "Eliyahu Levy",
+        "Adam Teman",
+        "Yoni Pugachov"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09952",
+      "title": "MSU Team at the Explainable Deepfake Detection Challenge 2026: Grounded Artifact Evidence for Deepfake Detection",
+      "published": "2026-10-07T12:30:04Z",
+      "url": "http://arxiv.org/abs/2610.09952v1",
+      "authors": [
+        "Artem Filippov",
+        "Aleksandr Gushchin",
+        "Kirill Koltsov",
+        "Dmitriy Vatolin",
+        "Anastasia Antsiferova"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09941",
+      "title": "Purifying Backdoored Large Vision-Language Models by Removing Hijacked Directions",
+      "published": "2026-10-07T12:25:47Z",
+      "url": "http://arxiv.org/abs/2610.09941v1",
+      "authors": [
+        "Bojun Yang",
+        "Haochen Zhou",
+        "Zhifang Zhang",
+        "Haobo Wang",
+        "Songze Li",
+        "Lei Feng"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09940",
+      "title": "Juno: Taming Predictive Latents for Vision-Language-Action Models",
+      "published": "2026-10-07T12:24:17Z",
+      "url": "http://arxiv.org/abs/2610.09940v1",
+      "authors": [
+        "Yuchen Zhu",
+        "Chenyi Xu",
+        "Yulin Zhang",
+        "Gang Xu",
+        "Wentao Zhu"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09920",
+      "title": "Inverting Multi-Vector Visual Document Indices",
+      "published": "2026-10-07T12:10:11Z",
+      "url": "http://arxiv.org/abs/2610.09920v1",
+      "authors": [
+        "Zhuchenyang Liu",
+        "Yao Zhang",
+        "Yu Xiao"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09919",
+      "title": "Eigenvalues of the Hessian in Deep Learning: The Origin of Symmetry and Its Breaking",
+      "published": "2026-10-07T12:08:48Z",
+      "url": "http://arxiv.org/abs/2610.09919v1",
+      "authors": [
+        "Yossi Arjevani"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09914",
+      "title": "RollVerify: Bridging Efficiency and Accuracy in Long-Tail Rollout Reinforcement Learning",
+      "published": "2026-10-07T12:05:33Z",
+      "url": "http://arxiv.org/abs/2610.09914v1",
+      "authors": [
+        "Yongqiang Yao",
+        "Jinru Tan",
+        "Kaihuan Liang",
+        "Zixin Yin",
+        "Yazhe Niu",
+        "Ruihao Gong",
+        "Dahua Lin",
+        "Ningyi Xu"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09907",
+      "title": "FedSSMCoOp: SSM Encoders for light-weight Federated Prompt Learning for Few-shot Classification",
+      "published": "2026-10-07T12:00:59Z",
+      "url": "http://arxiv.org/abs/2610.09907v1",
+      "authors": [
+        "Ankita Das",
+        "Ambarish Parthasarathy",
+        "Sumohana S. Channappayya",
+        "C. Krishna Mohan"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09906",
+      "title": "Constrained-Action AI Remediation for SIEM/XDR via a NeMo-Guardrails Proxy",
+      "published": "2026-10-07T12:00:51Z",
+      "url": "http://arxiv.org/abs/2610.09906v1",
+      "authors": [
+        "Georgios Koutidis",
+        "Nikolaos Kekatos",
+        "Tom Nianios",
+        "Alexios Lekidis"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09858",
+      "title": "Training Advisors for LLM Agents from Task Outcomes",
+      "published": "2026-10-07T11:14:26Z",
+      "url": "http://arxiv.org/abs/2610.09858v1",
+      "authors": [
+        "Sergei Polezhaev",
+        "Barys Liskavets",
+        "Ori Press",
+        "Alexander Golubev"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09841",
+      "title": "ORCA: Hunting Compositional Failures in Text-to-Image Diffusion",
+      "published": "2026-10-07T11:03:58Z",
+      "url": "http://arxiv.org/abs/2610.09841v1",
+      "authors": [
+        "Arshia Hemmat",
+        "Amirhossein Vahidi",
+        "Amitis Shidani",
+        "Mohammad Vali Sanian",
+        "Hesam Asadollahzadeh",
+        "Aryan Yazdan Parast",
+        "Mohammad Lotfollahi"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "transformer-architecture",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09823",
+      "title": "UltraText Bench: A Comprehensive Bilingual Benchmark for Evaluating Visual Text Rendering in Image Generation",
+      "published": "2026-10-07T10:47:52Z",
+      "url": "http://arxiv.org/abs/2610.09823v1",
+      "authors": [
+        "Deyuan Liu",
+        "Yihao Hu",
+        "Jingxuan Zhang",
+        "Xingying Li",
+        "Jun Xie",
+        "Jiacheng Liu",
+        "Jungang Li",
+        "Yu Huang",
+        "Xuanyi Liu",
+        "Yue Ding",
+        "Zecheng Wang",
+        "Lei Zhao",
+        "Mingda Wang",
+        "Zhenglin Cheng",
+        "Peng Sun",
+        "Tao Lin"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09802",
+      "title": "DisParQ: Self-Supervised Part Concepts for Interpretable Vision Foundation Models",
+      "published": "2026-10-07T10:19:04Z",
+      "url": "http://arxiv.org/abs/2610.09802v1",
+      "authors": [
+        "Adam Pardyl",
+        "Siddhartha Gairola",
+        "Sukrut Rao",
+        "Adam Wróbel",
+        "Bartosz Zieliński",
+        "Bernt Schiele",
+        "Dawid Rymarczyk"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09788",
+      "title": "Judging in Latent Space: Efficient Generative Reward Modeling via Semantics-Preserving Compression",
+      "published": "2026-10-07T10:05:06Z",
+      "url": "http://arxiv.org/abs/2610.09788v2",
+      "authors": [
+        "Mingqing Yuan",
+        "Xiaobo Liang",
+        "Junwei Yang",
+        "Ziwei Chen",
+        "Zeren Zhang",
+        "Hejin Wang",
+        "Yubin Wang",
+        "Juntao Li"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09772",
+      "title": "Decoupling Logic from Persona: Structural Immunity of Edge LLM Agents to Context Pollution",
+      "published": "2026-10-07T09:53:28Z",
+      "url": "http://arxiv.org/abs/2610.09772v2",
+      "authors": [
+        "Masaaki Nakatsu",
+        "Reno Wang"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09761",
+      "title": "PARC-Loc: Text-to-Point-Cloud Localization with Partial Assignment and Relational Consistency",
+      "published": "2026-10-07T09:46:34Z",
+      "url": "http://arxiv.org/abs/2610.09761v1",
+      "authors": [
+        "Shengkai Ma",
+        "Zhenyu Hou",
+        "Weihua Cao"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09746",
+      "title": "Flow-of-Thought: A Framework for Visual Reasoning",
+      "published": "2026-10-07T09:37:57Z",
+      "url": "http://arxiv.org/abs/2610.09746v1",
+      "authors": [
+        "Mariia Baidachna",
+        "Nicolas Pugeault"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09742",
+      "title": "SoccerNet-FoulRet: Retrieving Semantically Similar Soccer Foul Videos",
+      "published": "2026-10-07T09:31:53Z",
+      "url": "http://arxiv.org/abs/2610.09742v1",
+      "authors": [
+        "Jacobus Arthur",
+        "Ahmad Sait",
+        "Batool Hani",
+        "Merey Ramazanova",
+        "Jan Held",
+        "Marc Van Droogenbroeck",
+        "Bernard Ghanem",
+        "Anthony Cioppa",
+        "Silvio Giancola"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09718",
+      "title": "YUBI-STAG: Contact and Semantic-Rich Alignment for VLAs via Automated Video-Language Grounding",
+      "published": "2026-10-07T09:14:26Z",
+      "url": "http://arxiv.org/abs/2610.09718v1",
+      "authors": [
+        "Masatoshi Tateno",
+        "Takehiko Ohkawa",
+        "Yueh-Hua Wu",
+        "Hanlong Li",
+        "Tatsuya Matsushima",
+        "Yoichi Sato",
+        "Kei Ota"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09710",
+      "title": "SpikingVLA: Asynchronous Spiking Vision-Language-Action Models",
+      "published": "2026-10-07T09:05:07Z",
+      "url": "http://arxiv.org/abs/2610.09710v1",
+      "authors": [
+        "Jingya Wang",
+        "Dehao Zhang",
+        "Shuai Wang",
+        "Malu Zhang",
+        "Yang Yang",
+        "Haizhou Li"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09703",
+      "title": "Understanding and Mitigating Token-Pruning-Induced Vulnerabilities in VLMs",
+      "published": "2026-10-07T09:01:09Z",
+      "url": "http://arxiv.org/abs/2610.09703v1",
+      "authors": [
+        "Shuailong Wang",
+        "Xinyu Lyu",
+        "Shengming Yuan",
+        "Jingkuan Song",
+        "Heng Tao Shen",
+        "Lianli Gao"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09700",
+      "title": "What Makes Synthetic Hard Negatives Work in Vision-Language Pretraining?",
+      "published": "2026-10-07T08:58:57Z",
+      "url": "http://arxiv.org/abs/2610.09700v1",
+      "authors": [
+        "Nikos Giakoumoglou",
+        "Paschalis Giakoumoglou",
+        "Andreas Floros",
+        "Kleanthis Marios Papadopoulos",
+        "Tania Stathaki"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10622",
+      "title": "WorldBench: Evaluating LLMs on Three.js Voxel World Generation",
+      "published": "2026-10-07T08:52:08Z",
+      "url": "http://arxiv.org/abs/2610.10622v1",
+      "authors": [
+        "Krish Bakshi"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09647",
+      "title": "When Rank Rises as LLMs Degrade",
+      "published": "2026-10-07T08:22:30Z",
+      "url": "http://arxiv.org/abs/2610.09647v1",
+      "authors": [
+        "Zhaohui Geoffrey Wang"
+      ],
+      "matched_queries": [
+        "pretraining-data"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10616",
+      "title": "When Routing Reveals Membership: Privacy Leakage from MoE Router Telemetry",
+      "published": "2026-10-07T07:26:51Z",
+      "url": "http://arxiv.org/abs/2610.10616v1",
+      "authors": [
+        "Yixin Tan",
+        "Jiayang Liu",
+        "Lu Sun",
+        "Yuke Hu",
+        "Zheng Li",
+        "Rui Wen"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09550",
+      "title": "Visual Evidence Under Cross-Examination: Evaluating and Controlling Decision-Level Evidence Use in Vision-Language Models",
+      "published": "2026-10-07T06:48:44Z",
+      "url": "http://arxiv.org/abs/2610.09550v1",
+      "authors": [
+        "Huiyao Zhang",
+        "Jin Bai",
+        "Zilong Su",
+        "Rui Guo",
+        "Chaofan Qin",
+        "Jinze Lv",
+        "Wenhui Yu",
+        "Hongfei Wang",
+        "Ye Li"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09517",
+      "title": "It Is Not Seeing the Hazard: A Frozen Vision-Language Safety Score Measures Its Caption Bank",
+      "published": "2026-10-07T06:15:23Z",
+      "url": "http://arxiv.org/abs/2610.09517v1",
+      "authors": [
+        "Samuel Tetteh",
+        "Cody Fleming"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09514",
+      "title": "STRIKE: Learning Visual State Transitions for Physical World Modeling",
+      "published": "2026-10-07T06:11:17Z",
+      "url": "http://arxiv.org/abs/2610.09514v1",
+      "authors": [
+        "Wenbin Teng",
+        "Tianshuo Xu",
+        "Depu Meng",
+        "Yuelei Li",
+        "Quentin Herau",
+        "Yihan Hu",
+        "Yajie Zhao",
+        "Wei Zhan"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09513",
+      "title": "OmniCam: Omni-Camera Trajectory Generation via Geometry-Grounded Pose Token Learning",
+      "published": "2026-10-07T06:08:28Z",
+      "url": "http://arxiv.org/abs/2610.09513v1",
+      "authors": [
+        "Zhenyang Liu",
+        "Chenjie Cao",
+        "Yisu Zhang",
+        "Xuhui Zuo",
+        "Xiangyang Xue",
+        "Yanwei Fu",
+        "Tengfei Wang",
+        "Chunchao Guo"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09496",
+      "title": "Sparse Feature Policy Unlearning Mitigates State Hallucination in Vision-Language-Action Models",
+      "published": "2026-10-07T05:52:02Z",
+      "url": "http://arxiv.org/abs/2610.09496v1",
+      "authors": [
+        "Jiho Lee",
+        "Jeongeun Park",
+        "Heayoun Choi",
+        "Taekyung Kim",
+        "Eunwoo Kim"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09478",
+      "title": "InstanceBench: Diagnosing Referential Reasoning and Target Identity in Referring Expression Segmentation",
+      "published": "2026-10-07T05:34:00Z",
+      "url": "http://arxiv.org/abs/2610.09478v1",
+      "authors": [
+        "Yuchen Li",
+        "Shaoyang Zhou",
+        "Yiran Wang",
+        "Ruiyi Deng",
+        "Haoyu Wang",
+        "Ziru Wei",
+        "Zhen Zhao",
+        "Luping Zhou"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09476",
+      "title": "CHASE: Channel-Aligned Structure Exploitation for Geometry-Aware Model Engineering",
+      "published": "2026-10-07T05:33:00Z",
+      "url": "http://arxiv.org/abs/2610.09476v1",
+      "authors": [
+        "Wei Wang",
+        "Wei Jiang",
+        "Ziran Liu"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09471",
+      "title": "When Should an In-Context Learner Expand Its Hypothesis Space?",
+      "published": "2026-10-07T05:26:15Z",
+      "url": "http://arxiv.org/abs/2610.09471v2",
+      "authors": [
+        "Weihan Li",
+        "Xinlei Chen",
+        "Junhao Wu",
+        "Tianshi Zheng"
+      ],
+      "matched_queries": [
+        "long-context"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09467",
+      "title": "Boundary-Free Contextual Biasing: Depth-Adaptive Gating and Reading-Space Matching for Unsegmented Languages",
+      "published": "2026-10-07T05:23:18Z",
+      "url": "http://arxiv.org/abs/2610.09467v1",
+      "authors": [
+        "Muhammad Huzaifah",
+        "Yu Pan",
+        "Zachary Yeo",
+        "Ningjie Bai",
+        "Guangzhao Yang"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09457",
+      "title": "DSReg: Provably Recovering Individual World Latents without Reconstruction",
+      "published": "2026-10-07T05:12:39Z",
+      "url": "http://arxiv.org/abs/2610.09457v1",
+      "authors": [
+        "Yujia Zheng",
+        "David Klindt",
+        "Randall Balestriero",
+        "Bernhard Schölkopf"
+      ],
+      "matched_queries": [
+        "transformer-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09440",
+      "title": "Mixture of Layers: Dynamic Layer Routing for Visual Reasoning",
+      "published": "2026-10-07T04:50:48Z",
+      "url": "http://arxiv.org/abs/2610.09440v1",
+      "authors": [
+        "Jeonghwan Kim",
+        "Sofia Stoica",
+        "Jiwan Chung",
+        "Ansel Blume",
+        "Hyeonjeong Ha",
+        "Zhenhailong Wang",
+        "Xin Luna Dong",
+        "Heng Ji"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09430",
+      "title": "SkillCycle: Co-Evolving Agent Policies and Skill Banks",
+      "published": "2026-10-07T04:33:48Z",
+      "url": "http://arxiv.org/abs/2610.09430v1",
+      "authors": [
+        "Ling Li",
+        "Qiuyu Shen",
+        "Zheng Jiang",
+        "Qinwei Ma",
+        "Yuxuan Liu",
+        "Zhidong Deng"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09408",
+      "title": "TiTok: Audio-Visual LLM for Multi-Segment Temporal Grounding",
+      "published": "2026-10-07T04:08:44Z",
+      "url": "http://arxiv.org/abs/2610.09408v1",
+      "authors": [
+        "Eunji Shin",
+        "Dahyun Choi",
+        "Seungyeon Jo",
+        "Yejin Hong",
+        "Jiyoung Lee"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09392",
+      "title": "Quantifying Volumetric Risk: Class-Aware Asymmetric Weighted Conformal Prediction for 3D Medical Image Segmentation",
+      "published": "2026-10-07T03:51:16Z",
+      "url": "http://arxiv.org/abs/2610.09392v1",
+      "authors": [
+        "Shadi Alijani",
+        "Fereshteh Aghaee Meibodi",
+        "Homayoun Najjaran"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09375",
+      "title": "From Retrieval to Customer Context: Evaluating Frontier-Model Systems for Voice-of-Customer Analysis",
+      "published": "2026-10-07T03:30:22Z",
+      "url": "http://arxiv.org/abs/2610.09375v1",
+      "authors": [
+        "Raviraja G",
+        "Viraj Bagal",
+        "Prabhath Chellingi"
+      ],
+      "matched_queries": [
+        "llm-architecture"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09360",
+      "title": "TopoGraphRAG-Bench: Evaluating Multimodal GraphRAG on Layout-Grounded Evidence Reasoning",
+      "published": "2026-10-07T03:15:31Z",
+      "url": "http://arxiv.org/abs/2610.09360v1",
+      "authors": [
+        "Ruochi Li",
+        "Jianzhe Lin",
+        "Haoxuan Zhang",
+        "Haihua Chen",
+        "Junhua Ding",
+        "Edward Gehringer",
+        "Yang Zhang"
+      ],
+      "matched_queries": [
+        "multimodal-llm"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09355",
+      "title": "Multimodal LLMs Can Learn to Read Brain Signals: A Vision--Language Model for Unified Multi-Task EEG Decoding",
+      "published": "2026-10-07T03:13:03Z",
+      "url": "http://arxiv.org/abs/2610.09355v1",
+      "authors": [
+        "Parastoo Azizeddin",
+        "Omid Sharafi",
+        "Maryam M. Shanechi"
+      ],
+      "matched_queries": [
+        "multimodal-llm",
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09346",
+      "title": "OnlineQAT: On-Policy Distillation for Ultra-Low-Bit Large Language Models",
+      "published": "2026-10-07T03:05:42Z",
+      "url": "http://arxiv.org/abs/2610.09346v1",
+      "authors": [
+        "Wenjun Wang",
+        "Heng Li",
+        "Yanggan Gu",
+        "Hongxia Yang"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09342",
+      "title": "Shared Low-rank Basis Factorization for Data-free Mixture-of-Experts Compression",
+      "published": "2026-10-07T03:01:19Z",
+      "url": "http://arxiv.org/abs/2610.09342v1",
+      "authors": [
+        "Tianxiao Cao",
+        "Jiahe Shao",
+        "Yuning Qiu",
+        "Kyohei Atarashi",
+        "Hisashi Kashima",
+        "Qibin Zhao"
+      ],
+      "matched_queries": [
+        "llm-architecture",
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09328",
+      "title": "Visual Jev Rewards: Reference-Bound Verification for Multi-Subject Image Generation",
+      "published": "2026-10-07T02:34:09Z",
+      "url": "http://arxiv.org/abs/2610.09328v1",
+      "authors": [
+        "Baoteng Li",
+        "Wenzhuo Wu",
+        "Kongming Liang",
+        "Zhanyu Ma"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09313",
+      "title": "Why VLMs Miss Small Objects, and When Zooming In Is Safe",
+      "published": "2026-10-07T02:10:52Z",
+      "url": "http://arxiv.org/abs/2610.09313v1",
+      "authors": [
+        "Junzhe Shi",
+        "Yuan Gan",
+        "Shida Jiang"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09311",
+      "title": "Denoising Blocks, Not Tokens: Efficient Compressed Continuous Diffusion with Branching Token Realization",
+      "published": "2026-10-07T02:08:22Z",
+      "url": "http://arxiv.org/abs/2610.09311v1",
+      "authors": [
+        "Xinsong Feng",
+        "Peng Du",
+        "Zhizhuo Yang",
+        "Daniel M. Bikel",
+        "Jiayun Wang",
+        "Haipeng Chen"
+      ],
+      "matched_queries": [
+        "model-compression"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09252",
+      "title": "Adaptive Visual Token Reduction for Accelerated Image Understanding",
+      "published": "2026-10-07T00:37:50Z",
+      "url": "http://arxiv.org/abs/2610.09252v1",
+      "authors": [
+        "Seyoung Jeong",
+        "Jong Pil Yun",
+        "Sang Jun Lee"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09240",
+      "title": "Adversarial Images Hijack Web Agents from Visual Grounding to Browser Execution",
+      "published": "2026-10-07T00:05:53Z",
+      "url": "http://arxiv.org/abs/2610.09240v1",
+      "authors": [
+        "Wanjing Han",
+        "Levi Taiji Li",
+        "Mu Zhang",
+        "Yue Jiang",
+        "Guanhong Tao"
+      ],
+      "matched_queries": [
+        "vision-language"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    }
+  ],
+  "requested_window": {
+    "start": "2026-10-08",
+    "end": "2026-10-12"
+  },
+  "announcement_overlap_days": 1,
+  "recall_mode": "submission-window",
+  "cross_source": {
+    "enabled": false,
+    "config": null,
+    "source_failures": [],
+    "source_stats": [],
+    "coverage_complete": false,
+    "official_review_queue_count": 0,
+    "archived_official_review_count": 0
+  },
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 8,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "language model architecture",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "d142c5d51a374aa50142a7da33f0de5f88b84a61973e05b5d111a6e89dad3d05",
+        "next_offset": 43,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "transformer architecture",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "7c0df3c26a11258a115d53da6b4797c57bccc14577c9ab432568a0dc4dbc2d5e",
+        "next_offset": 32,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "efficient LLM inference",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "079d0ed0d9ed47c452cefae206a302fd52f3fad41c16c7832db33433f2dc81a2",
+        "next_offset": 10,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model long context",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "0e059fbdf79918c277f0946eee54126840d0b934d01f93774205550eb32558c1",
+        "next_offset": 28,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model pretraining data",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "c88f0cbc726f5745af2e5e18e0ab2254f4d5f903e35b510f61e49a5b636a37bf",
+        "next_offset": 20,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "multimodal language model",
+        "categories": [
+          "cs.CV",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "18bc151c7a8d042ed932bb272656e4e05fc52ea5b39e05457f0dc8721f9d15cb",
+        "next_offset": 47,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "vision language model",
+        "categories": [
+          "cs.CV",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "ed93a1f61632b10c3b2a8c3688fecfb41cb724c58a985f982809869dc9f9d9a4",
+        "next_offset": 137,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 2,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model compression",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "a757e826f4334347a20fa74867778d4d",
+        "fingerprint": "3fab70d20d0b1b9b0293b15b4b4ee955a1ff92d9a4169cdab8b1e83393fea33d",
+        "next_offset": 22,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "review_evidence_notice": "Transport completed; per-ID review proof is in the consolidated register, not inferred from retrieval."
+}

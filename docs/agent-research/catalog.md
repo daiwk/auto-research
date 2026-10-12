@@ -10,6 +10,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| agent-evolution | [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../reproductions/2610.13025-evo2/README.md) | University of Illinois Urbana-Champaign / Google DeepMind，2026-10-09 | 未发现官方代码 | `evo2` |
+| autonomous-research | [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../reproductions/2610.13194-janus/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-10-09 | 未发现官方代码 | `janus` |
+| tool-retrieval | [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../reproductions/2610.13889-rated/README.md) | Texas Tech University，2026-10-09 | [已开源](https://github.com/Elliotes/EcoAgent) | `rated` |
+| recursive-self-improvement | [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../reproductions/2610.13912-rsi-anything/README.md) | PhAI Labs / The Chinese University of Hong Kong，2026-10-09 | [已开源](https://github.com/Gen-Verse/RSI-Anything) | `rsi-anything` |
+| long-term-memory | [Test-Time Memory Construction](../reproductions/2610.13348-t2mem/README.md) | Northeastern University，2026-10-09 | [已开源](https://github.com/OpenBMB/T2Mem) | `t2mem` |
+| agent-evaluation | [When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows](../reproductions/2610.13092-jev-workflow/README.md) | Nanjing University，2026-10-09 | 未发现官方代码 | `jev-workflow` |
 | 程序进化 | [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](2610.12086-evoalloc/README.md) | King Abdullah University of Science and Technology，2026-10-08 | 未发现官方代码 | `evoalloc` |
 | 世界模型 | [Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks](2610.11794-memento3/README.md) | University College London，2026-10-08 | 未发现官方代码 | `memento3` |
 | Agent 安全 | [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](2610.12292-option-channel-attack/README.md) | University of Southern California，2026-10-08 | [已开源](https://github.com/ArminAzizi98/option-channel-attack) | `option-channel-attack` |

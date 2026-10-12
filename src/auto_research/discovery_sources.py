@@ -189,6 +189,9 @@ class _PublicationLinks(HTMLParser):
             self.last_heading = " ".join("".join(self.heading).split())
             self.heading = None
         if tag == "a" and self.anchor is not None:
+            if "javascript" in self.href.lower():
+                self.anchor = None
+                return
             url = urljoin(self.source_url, self.href)
             parsed = urlparse(url)
             google = parsed.netloc == "research.google" and parsed.path.startswith("/pubs/")
@@ -200,7 +203,7 @@ class _PublicationLinks(HTMLParser):
             }:
                 label = " ".join("".join(self.anchor).split())
                 title = self.last_heading if meta or label.lower() == "view details" else label
-                if title and title.lower() not in {"read the paper", "view details"}:
+                if title and title.lower() not in {"read the paper", "view details", "preview", "preview abstract"}:
                     self.records.append((title, url, self.last_date if meta else None))
             self.anchor = None
 

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "adapter_key": "t2mem",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_agents.py",
+    "--method",
+    "t2mem",
+    "--checkpoint",
+    "checkpoints/qwen2.5-0.5b",
+    "--checkpoint-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--checkpoint-revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--dataset",
+    "data/longmemeval/t2mem-first2.jsonl",
+    "--output",
+    "runs/t2mem-42.json",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--rounds",
+    "2",
+    "--max-tokens",
+    "128",
+    "--train-steps",
+    "2"
+  ],
+  "dataset": {
+    "source": {
+      "kind": "dataset",
+      "public_id": "xiaowu0162/longmemeval-cleaned",
+      "revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+      "upstream_file": "longmemeval_s_cleaned.json",
+      "upstream_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+      "transformation": "first two official ordered queries, every haystack session preserved; gold used only by external scorer",
+      "rows": 2,
+      "files": {
+        "t2mem-first2.jsonl": "5eca5610cb2a87fa0ede69a7c6c73234f539331ff9d9e1decbf6d926df3ff38a"
+      }
+    },
+    "input_sha256": "5eca5610cb2a87fa0ede69a7c6c73234f539331ff9d9e1decbf6d926df3ff38a",
+    "input_preparation_commit": "916a56ca630027b4ce99ebfb39a3fea441c4eaca"
+  },
+  "checkpoint": {
+    "policy": {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "external_token_f1_mean": 0.0,
+    "evaluated_queries": 2
+  },
+  "limitations": [
+    "Two official LongMemEval queries with all 98 sessions retained; no model/gold conversation text committed.",
+    "External token F1 is zero and is not original LLM-judge accuracy or a capability improvement."
+  ],
+  "execution_checks": {
+    "completed": true,
+    "gold_in_model_input": false,
+    "test_used_for_training": false,
+    "original_tool_backend_unavailable": false
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct12_agents.py": "85c6452b2a41e3a287227a4ddce4e59a53e3f2fab76f960fdaafe8d07cc1a8ae",
+    "src/auto_research/agent_research/oct12_entrypoint.py": "a8c10b0d24ac2c7f8ae21b654d9752832a99f53a1e21fe405a5278071c01aba3",
+    "src/auto_research/agent_research/oct12_checkpoint.py": "c49cb33db3d14b050e1938dbdee08e392ad435d2bc276029cfb1c9b51d7c6ca8",
+    "src/auto_research/agent_research/oct12_memory_tools.py": "f2d12f7824a1dbaba0b67f4b046e57173b2e902e4b8a138087522c418ff2982a",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e",
+    "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c"
+  },
+  "provenance": {
+    "commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "artifact_path": "docs/gpu-validations/oct12-t2mem-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13348-t2mem/metrics/public-agent-a100-42.json",
+    "checkpoint_committed": false,
+    "input_preparation_commit": "916a56ca630027b4ce99ebfb39a3fea441c4eaca"
+  }
+}

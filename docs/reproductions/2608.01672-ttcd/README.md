@@ -4,15 +4,15 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2608.01672](https://arxiv.org/abs/2608.01672) |
 | 公司/机构 | Princeton University |
-| 第一作者 | Zixuan Wang |
 | 首次公开日期 | 2026-08-03（arXiv v1） |
-| 原文开源代码 | 是：[ttcd](https://github.com/dangxingyu/ttcd) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/dangxingyu/ttcd) |
 | Adapter | `ttcd` |
 | 本地复现代码 | [`src/auto_research/reproductions/ttcd/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/ttcd/) |
+| 第一作者 | Zixuan Wang |
 
 ## 原始论文总结
 

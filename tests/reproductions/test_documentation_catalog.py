@@ -33,6 +33,7 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
         paper["key"] for paper in research_manifest["papers"]
         if isinstance(paper.get("adapter"), dict)
     }
+    manifest_domains = {paper["key"]: paper["domain"] for paper in research_manifest["papers"]}
     main_index = (DOCS / "README.md").read_text(encoding="utf-8")
     company = (DOCS / "catalog" / "by-company.md").read_text(encoding="utf-8")
     month = (DOCS / "catalog" / "by-month.md").read_text(encoding="utf-8")
@@ -62,11 +63,45 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
             assert catalog_link not in month
             assert catalog_link not in topic
             foundation_link = f"(../../reproductions/{slug}/README.md)"
-            if adapter.key in post_training_reproductions:
+            if manifest_domains[adapter.key] == "post-training":
+                if adapter.key in post_training_reproductions:
+                    assert f"../reproductions/{slug}/README.md" in post_training_cross_links
+                for dimension in ("organization", "topic", "year"):
+                    text = (ROOT/"docs/post-training/catalog"/f"by-{dimension}.md").read_text()
+                    assert foundation_link in text
+                assert all(foundation_link not in text for text in foundation_catalogs)
+            elif manifest_domains[adapter.key] in {"agent-research", "multimodal-models"}:
+                for dimension in ("organization", "topic", "year"):
+                    text = (ROOT/"docs"/manifest_domains[adapter.key]/"catalog"/f"by-{dimension}.md").read_text()
+                    assert foundation_link in text
+                assert all(foundation_link not in text for text in foundation_catalogs)
+            elif adapter.key in post_training_reproductions:
                 assert f"../reproductions/{slug}/README.md" in post_training_cross_links
                 assert all(foundation_link not in text for text in foundation_catalogs)
             else:
                 assert all(foundation_link in text for text in foundation_catalogs)
+
+
+def test_oct12_llm_runtime_does_not_duplicate_agent_or_training_domain():
+    manifest = json.loads((ROOT/"docs/research-manifest.json").read_text())
+    domains={row["key"]:row["domain"] for row in manifest["papers"]}
+    expected={
+        "agent-research":{"evo2","rsi-anything","janus","t2mem","rated","jev-workflow"},
+        "post-training":{"branch-opd","cast-opd","road-mopd","boundary-evo"},
+        "foundation-models":{"msar","orthros","dualquant"},
+        "multimodal-models":{"woven","umrm"},
+        "recommendation":{"forte"},
+    }
+    for domain,keys in expected.items():
+        assert all(domains[key]==domain for key in keys)
+        assert all(sum(row["key"]==key for row in manifest["papers"])==1 for key in keys)
+
+
+def test_paper_figure_manifest_has_no_retired_page_paths_or_duplicates():
+    figures = json.loads((ROOT/"docs/paper-figures-manifest.json").read_text())
+    paths = [row["page"] for row in figures]
+    assert len(paths)==len(set(paths))
+    assert all((ROOT/path).is_file() for path in paths)
 
 
 def test_reproduction_hub_has_lineage_benchmark_without_paper_navigation_index():

@@ -184,6 +184,7 @@
 
 ### Harness 与自我改进
 
+- [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../../reproductions/2610.13912-rsi-anything/README.md)（`rsi-anything`）：候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。
 - [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](../2610.00906-active-saddler/README.md)（`active-saddler`）：把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。
 - [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](../2609.38143-meta-skills/README.md)（`meta-skills`）：从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。
 - [Mixture of Self-Improving Branches for Agent Harness Optimization](../2609.37834-branch-mixture/README.md)（`branch-mixture`）：将 harness 搜索拆成多条分支，每条分支维护不同的开发子集和 proposal policy；全分支都解决的样本被移除，具有分支区分度的样本被保留，部署时由只看输入特征的 router 选择开发集冠军。
@@ -194,6 +195,7 @@
 
 ### 环境模拟与前瞻决策
 
+- [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../../reproductions/2610.13194-janus/README.md)（`janus`）：在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。
 - [Code Owns the Simulation, Jev Owns the Evaluation](../2610.01834-jev-lookahead/README.md)（`jev-lookahead`）：让可执行代码负责模拟每个动作的后继状态，让 Jev 只负责比较动作带来的进展。除了当前动作和下一观察，还显式提供“执行后新出现的可用动作”，降低纯语义动作评分难以预判长期可达性的缺陷。
 
 ### 树搜索与自我改进
@@ -217,6 +219,7 @@
 
 ### 工具选择、反馈与程序执行
 
+- [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../../reproductions/2610.13889-rated/README.md)（`rated`）：独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。
 - [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
 - [AdaVDR: Adaptive Tool Use and Reflection for Video Deep Research](../2608.25559-adavdr/README.md)（`adavdr`）：先以目标模型能力过滤不必要工具调用，只在中间证据不可靠时回退反思；SFT 后用 redundancy-aware reward 做 RL，兼顾视频理解、外部检索和调用成本。
 - [SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification](../2608.24571-smith/README.md)（`smith`）：现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。
@@ -231,6 +234,7 @@
 
 ### 电脑操作与 reward 评测
 
+- [When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows](../../reproductions/2610.13092-jev-workflow/README.md)（`jev-workflow`）：这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。
 - [HarnessOpt-Bench: Evaluating LLMs at Harness Optimization](../2608.06301-harnessopt-bench/README.md)（`harnessopt-bench`）：**主题：Harness 优化评测。** 在固定 target-evaluation 预算下，让优化器修改 prompt、工具、控制流和记忆；隐藏测试集与可信执行环境隔离搜索反馈，保留候选版本以供审计。
 - [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
 - [GAIA](../2311.12983-gaia/README.md)（`gaia`）：以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。
@@ -285,6 +289,7 @@
 
 ### Harness 与运行时策略
 
+- [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../../reproductions/2610.13025-evo2/README.md)（`evo2`）：固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。
 - [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](../2608.23041-autosaddler/README.md)（`autosaddler`）：长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。
 - [EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents](../2608.05446-evoharness-rl/README.md)（`evoharness-rl`）：**主题：Harness policy RL。** 把 Belief、Progress、Experience 暴露为策略可操作的外部状态；先 SFT 学会 harness action，再以成本感知 GRPO 学习何时读写和合并。
 
@@ -330,6 +335,7 @@
 
 ### 主动 / 长期记忆
 
+- [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
 - [Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval](../2610.02070-causal-memory-policy/README.md)（`causal-memory-policy`）：被检索到的记忆与任务难度天然相关，直接按任务成败删除记忆存在选择偏差。CMP 在固定候选池中预留均衡随机曝光槽位，使每条记忆都有可估计的处理/对照样本，再用带标准误的效用判断保护不确定的记忆。
 - [MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging](../2609.08273-memforest/README.md)（`memforest`）：MemForest 不把全部历史压进一条摘要，而是先按事件切分成多棵树，再在容量压力下渐进合并节点。查询从语义 anchor 出发向邻域传播，保留时间结构和跨事件关联。
 - [AtomRec: Evolving Atomic Memory for Agentic Recommendation](../2609.04882-atomrec/README.md)（`atomrec`）：粗粒度用户摘要会在重写时覆盖旧偏好，单一协同边又难以解释推荐。AtomRec 将用户和物品历史拆成可独立演化的原子字段，建立语义协同链接，并以多跳路径取回“为什么推荐”的证据。

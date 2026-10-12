@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [ICLR 2027](https://arxiv.org/abs/2609.03426) |
-| 公司/机构 | 北京邮电大学（第一作者第一署名单位；合作者含快手） |
+| 公司/机构 | Beijing University of Posts and Telecommunications / Kuaishou Technology |
 | 首次公开日期 | 2026-09-03（arXiv v1） |
 | 原文开源代码 | 否：未发现原作者公开代码（核查日期：2026-09-06） |
 | Adapter | `lngram-v2` |

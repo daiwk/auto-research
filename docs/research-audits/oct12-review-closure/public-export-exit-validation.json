@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "validated_at": "2026-10-12",
+  "scope": "CPU public-resource preparation and normal interpreter exit only; not model evaluation or GPU evidence",
+  "source_tree_state": "fixed source snapshot 36ef7286e973a0f40c017f40d9a1d3a26f81d265; this export check is not GPU capability evidence",
+  "libraries": {"datasets": "4.8.5", "pyarrow": "25.0.1"},
+  "checkpoint_regression": "Nested .cache ancestor retains actual config/weight/tokenizer files; only mirror-relative .cache/huggingface bookkeeping is excluded. Exporter and offline verifier use the same selector.",
+  "negative_results": [
+    "pre_buffer=False plus explicit dataset iterator close was insufficient: repeated local parquet prefix subprocess printed normal-exit-ready but exceeded 45s during interpreter shutdown",
+    "same initial remedy loaded five official COCO rows, printed completion, then exceeded a 90s subprocess timeout",
+    "same initial remedy loaded five official WOVEN rows, printed completion, then exceeded a 90s subprocess timeout"
+  ],
+  "repair": "DatasetBuilder resolves fixed-revision ordered shards without starting its scanner. Each seekable fsspec file is read by ParquetFile(pre_buffer=False).iter_batches(batch_size=8, use_threads=False), and iterator/reader/file are closed with normal context/finally teardown. No os._exit or thread-pool monkeypatch.",
+  "successful_public_exports": [
+    {
+      "public_id": "MLL-Lab/WOVEN",
+      "revision": "9ebd698c8500f4d4729ffe39bd78f4fd694904aa",
+      "source_split": "train",
+      "command": "PYTHONPATH=src python scripts/prepare_oct12_public_sources.py --source woven --maximum 96 --output .cache/oct12-exit-check/woven-sync-export",
+      "exit_code": 0,
+      "rows": 96,
+      "files": 267,
+      "image_files": 266,
+      "jsonl_sha256": "8c269d69dc3abd2965ac88e0c36a328767651b27b1a84586149614d1d84ab8dd",
+      "comparison": "All 96 ordered rows and 266 image hashes equal the earlier sealed export; all JSONL/row/image hashes independently verified. This is not an official test split."
+    },
+    {
+      "public_id": "lmms-lab-encoder/COCO-Caption2017",
+      "revision": "3bdd5827e243cc3084ac69a1111e69c3ab9193ff",
+      "source_split": "val",
+      "command": "PYTHONPATH=src python scripts/prepare_oct12_public_sources.py --source coco --maximum 5 --output .cache/oct12-exit-check/coco-sync-export",
+      "exit_code": 0,
+      "rows": 5,
+      "files": 6,
+      "image_files": 5,
+      "jsonl_sha256": "26df0359388fde97a19c4582d140183493e95844aa8147d7a3ab75d91760d2a5",
+      "comparison": "All five ordered rows and five image hashes equal the earlier 40-row sealed export prefix; all JSONL/row/image hashes independently verified."
+    }
+  ],
+  "official_references": [
+    "https://arrow.apache.org/docs/python/generated/pyarrow.parquet.ParquetFile.html",
+    "https://arrow.apache.org/docs/python/generated/pyarrow.dataset.ParquetFragmentScanOptions.html",
+    "https://github.com/apache/arrow/issues/50482",
+    "https://huggingface.co/docs/huggingface_hub/guides/hf_file_system"
+  ],
+  "unfinished": "GPU execution and sanitized receipts remain root-owned and are not supplied by this source-export check."
+}

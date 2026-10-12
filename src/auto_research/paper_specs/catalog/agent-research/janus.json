@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "janus",
+  "title": "Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models",
+  "paper_url": "https://arxiv.org/abs/2610.13194",
+  "detail_path": "reproductions/2610.13194-janus/README.md",
+  "topic": [
+    "autonomous-research",
+    "world-model",
+    "evolving-skills"
+  ],
+  "first_author": "Mengdi Liu",
+  "first_author_affiliation": "Institute of Computing Technology, Chinese Academy of Sciences",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "janus"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct12-janus-a100.json"
+}

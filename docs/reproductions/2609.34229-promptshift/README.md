@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2609.34229](https://arxiv.org/abs/2609.34229) |
-| 公司/机构 | University of Electronic Science and Technology of China（按第一作者署名单位） |
+| 公司/机构 | University of Electronic Science and Technology of China |
 | 首次公开日期 | 2026-09-28（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-09-30 未找到原作者公开仓库 |
 | Adapter | `promptshift` |

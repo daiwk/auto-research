@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与系统效率 | [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../reproductions/2610.13767-dualquant/README.md) | d-Matrix，2026-10-09 | [已开源](https://github.com/MahsaMoonlike/dualquant) | `dualquant` |
+| 网络架构 | [Multi-Stream Attention Residuals](../reproductions/2610.13630-msar/README.md) | Shanghai Jiao Tong University，2026-10-09 | 未发现官方代码 | `msar` |
+| 注意力与长上下文 | [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../reproductions/2610.13735-orthros/README.md) | The Hong Kong Polytechnic University，2026-10-09 | 未发现官方代码 | `orthros` |
 | 生成模型 | [Few-Step Generation via Data-Space Iteration](2610.12102-data-space-iteration/README.md) | ByteDance Seed，2026-10-08 | [已开源](https://arxiv.org/html/2610.12102v1#A5) | `data-space-iteration` |
 | 训练优化与稳定性 | [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](2610.12444-adamw4bit/README.md) | University of California, Berkeley / Nubank，2026-10-08 | [已开源](https://github.com/nubank/adamw4bit) | `adamw4bit` |
 | 稀疏专家与路由 | [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](2610.11575-elastic-expert-routing/README.md) | Shanghai AI Laboratory / Shanghai Jiao Tong University，2026-10-08 | 未找到作者公开代码 | `elastic-expert-routing` |

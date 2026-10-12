@@ -5,11 +5,11 @@
 ## 论文信息
 
 | 项目 | 内容 |
-|---|---|
+| --- | --- |
 | 论文链接 | [arXiv 2608.24053](https://arxiv.org/abs/2608.24053) |
-| 公司/机构 | WeChat Vision，Tencent（第一作者单位） |
+| 公司/机构 | WeChat Vision, Tencent |
 | 首次公开日期 | 2026-08-25（arXiv v1） |
-| 原文开源代码 | 是：[Tencent/WeMM-Embedding](https://github.com/Tencent/WeMM-Embedding) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/Tencent/WeMM-Embedding) |
 | Adapter | `wemm-embedding` |
 | 本地复现代码 | [`src/auto_research/reproductions/wemm_embedding/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/wemm_embedding/) |
 

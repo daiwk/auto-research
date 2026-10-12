@@ -6,12 +6,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2610.01533) |
-| 公司/机构 | Huawei Ireland Research Centre（按第一作者署名单位） |
+| 公司/机构 | Huawei Ireland Research Centre |
 | 首次公开日期 | 2026-10-01（arXiv v1） |
-| 原文开源代码 | 是：[https://github.com/hirc-airecs/graph-informed-sids](https://github.com/hirc-airecs/graph-informed-sids) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/hirc-airecs/graph-informed-sids) |
 | Adapter | `gris` |
 | 本地复现代码 | [`src/auto_research/reproductions/gris/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/gris/) |
 

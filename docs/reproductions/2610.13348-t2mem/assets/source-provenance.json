@@ -1,0 +1,15 @@
+{
+  "arxiv_v1": "https://arxiv.org/html/2610.13348v1",
+  "published": "2026-10-09",
+  "reviewed_at": "2026-10-12",
+  "institution_source": "original HTML author affiliations",
+  "upstream_code": "https://github.com/OpenBMB/T2Mem",
+  "upstream_status": "是：[T2Mem](https://github.com/OpenBMB/T2Mem)",
+  "figure": {
+    "number": "1",
+    "url": "https://arxiv.org/html/2610.13348v1/model.png"
+  },
+  "local_diagram": "architecture.mmd",
+  "full_text_reviewed": true,
+  "online_ab": "not reported"
+}

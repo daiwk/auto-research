@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "key": "rated",
+  "arxiv_id": "2610.13889",
+  "title": "RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics",
+  "paper_url": "https://arxiv.org/abs/2610.13889",
+  "organization": "Texas Tech University",
+  "published": "2026-10-09",
+  "upstream_code": "是：[EcoAgent / RATED](https://github.com/Elliotes/EcoAgent)",
+  "track": "llm",
+  "topics": [
+    "tool-retrieval",
+    "execution-reliability",
+    "contextual-bandit"
+  ],
+  "local_code": "src/auto_research/reproductions/rated",
+  "documentation": "docs/reproductions/2610.13889-rated/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "EcoAgent-compatible positive pairs and authorized local tool bindings"
+  ],
+  "baseline": "冻结语义dual encoder；线上反馈重排实验组",
+  "metrics": [
+    "steps",
+    "execution_success_rate",
+    "external_semantic_recall_at_1"
+  ],
+  "mechanisms": [
+    "独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rated.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Elliotes/EcoAgent",
+      "organization": "Texas Tech University",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据"
+    },
+    "omitted_core_components": [
+      "原文DRAGON checkpoint与完整EcoAgent outage协议",
+      "生产API/tool认证；本地仅明确授权sandbox绑定"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-rated-a100.json"
+  }
+}

@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2608.27206](https://arxiv.org/abs/2608.27206) |
 | 公司/机构 | Sun Yat-sen University |
 | 首次公开日期 | 2026-08-27（arXiv v1） |
-| 原文开源代码 | 是：[PACE](https://github.com/jjL357/PACE) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/jjL357/PACE) |
 | Adapter | `pace-vlm` |
 | 本地复现代码 | [`src/auto_research/reproductions/pace_vlm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/pace_vlm/) |
 

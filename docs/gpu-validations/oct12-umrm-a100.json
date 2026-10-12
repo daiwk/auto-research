@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "adapter_key": "umrm",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_multimodal.py",
+    "--paper",
+    "umrm",
+    "--dataset-dir",
+    "data/coco40",
+    "--checkpoint-path",
+    "checkpoints/smolvlm256",
+    "--output",
+    "runs/umrm-42",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--maximum",
+    "40",
+    "--steps",
+    "200",
+    "--bootstrap-prompts",
+    "8",
+    "--bootstrap-candidates",
+    "4"
+  ],
+  "dataset": {
+    "name": "lmms-lab-encoder/COCO-Caption2017",
+    "revision": "3bdd5827e243cc3084ac69a1111e69c3ab9193ff",
+    "source_split": "val; local grouped diagnostic split",
+    "group_key": "id",
+    "source_groups_disjoint": true,
+    "official_test": false,
+    "seed": 42,
+    "split_counts": {
+      "train": {
+        "examples": 24,
+        "groups": 24
+      },
+      "validation": {
+        "examples": 8,
+        "groups": 8
+      },
+      "test": {
+        "examples": 8,
+        "groups": 8
+      }
+    },
+    "group_sha256": {
+      "train": "88ed03d1e23a4acc079f9e7c64f8159cefd3eb4cc73dd2c64e1aa31bf70666d5",
+      "validation": "2e71b588f632afc608da670acde024950212227d40924b6bb27877b440553baf",
+      "test": "b23462a6d0ec06e6230fbe478e913422d6422f693650e631eae1829ba009f1c0"
+    },
+    "item_sha256": {
+      "train": "88ed03d1e23a4acc079f9e7c64f8159cefd3eb4cc73dd2c64e1aa31bf70666d5",
+      "validation": "2e71b588f632afc608da670acde024950212227d40924b6bb27877b440553baf",
+      "test": "b23462a6d0ec06e6230fbe478e913422d6422f693650e631eae1829ba009f1c0"
+    },
+    "offline_source_verification": {
+      "public_id": "lmms-lab-encoder/COCO-Caption2017",
+      "revision": "3bdd5827e243cc3084ac69a1111e69c3ab9193ff",
+      "file_sha256": {
+        "images/11cbeceef5e255571416db098ec997085575b4450e017c512a439d8e997226b0.png": "11cbeceef5e255571416db098ec997085575b4450e017c512a439d8e997226b0",
+        "images/47c334e9b339e200667592bde5b460bebd150db9d724ed4a05f41da0846cb1ee.png": "47c334e9b339e200667592bde5b460bebd150db9d724ed4a05f41da0846cb1ee",
+        "images/180ecf37f948df07b84cdfcb523c8d349083549a808662acf313f96fd91d4248.png": "180ecf37f948df07b84cdfcb523c8d349083549a808662acf313f96fd91d4248",
+        "images/3d9b21b3e0d635d7b0f72b9f757e97d417de8bd03682a4f4ea20e9b39281090a.png": "3d9b21b3e0d635d7b0f72b9f757e97d417de8bd03682a4f4ea20e9b39281090a",
+        "images/c460d36cd3cf1607eedc5d799be3a6255bd809dcf78cca0b85abf9415a8c7f28.png": "c460d36cd3cf1607eedc5d799be3a6255bd809dcf78cca0b85abf9415a8c7f28",
+        "images/89bee2416fe20171c49dbacddf4b7103168b424a6e69329a604f8ceba98f3f40.png": "89bee2416fe20171c49dbacddf4b7103168b424a6e69329a604f8ceba98f3f40",
+        "images/ceb93e4d1a1cd8798f52078aed2fa81129b7c59a6c94739251884afffa4ec220.png": "ceb93e4d1a1cd8798f52078aed2fa81129b7c59a6c94739251884afffa4ec220",
+        "images/87d45fc33df1ab961831a69896c2deb7916f4bca6fa3ec989dff8e10e01859eb.png": "87d45fc33df1ab961831a69896c2deb7916f4bca6fa3ec989dff8e10e01859eb",
+        "images/dd9d96dea8868f0670ea837ea94d3310ac19a2639f39bd05e2494b1ded840427.png": "dd9d96dea8868f0670ea837ea94d3310ac19a2639f39bd05e2494b1ded840427",
+        "images/75c481f2d6fdb30c7c3168eee3f4a84e224ac25ca6008de56b1033032a83a19b.png": "75c481f2d6fdb30c7c3168eee3f4a84e224ac25ca6008de56b1033032a83a19b",
+        "images/4411fb38d849610d8ecfa9f45497b82ef1f223ca3fef9d7209eea94af870be84.png": "4411fb38d849610d8ecfa9f45497b82ef1f223ca3fef9d7209eea94af870be84",
+        "images/756ddb1ff833977dae4862780c2f87fff4d447ab9f24fa24eb40b75bb2260391.png": "756ddb1ff833977dae4862780c2f87fff4d447ab9f24fa24eb40b75bb2260391",
+        "images/82cc9f61f355ec5e6cb67c9ce1ea84d444b17b4ae8c836968c3de2a20c2a4ce7.png": "82cc9f61f355ec5e6cb67c9ce1ea84d444b17b4ae8c836968c3de2a20c2a4ce7",
+        "images/370263ced03331c4620b15cbce317c322eeba016ec073843072186b9988dfe7d.png": "370263ced03331c4620b15cbce317c322eeba016ec073843072186b9988dfe7d",
+        "images/62f739831e3871786075b8ef5a6ac8fcd92b4c92f1e14cc75325df99946c8f3b.png": "62f739831e3871786075b8ef5a6ac8fcd92b4c92f1e14cc75325df99946c8f3b",
+        "images/81c3163e44fd761aff3fcade4db63e4e11c7ae657feb922741f2f7df1aba738e.png": "81c3163e44fd761aff3fcade4db63e4e11c7ae657feb922741f2f7df1aba738e",
+        "images/96297da32644f3b0bffadf8643fb9fbfae30042feedaff2c89e813896df23ebc.png": "96297da32644f3b0bffadf8643fb9fbfae30042feedaff2c89e813896df23ebc",
+        "images/5b451e3f9be3bae9e91f1d7c9a8e0198e66274086267a9b7ec5ae2abce882f8b.png": "5b451e3f9be3bae9e91f1d7c9a8e0198e66274086267a9b7ec5ae2abce882f8b",
+        "images/dc74c6d0a4a20e7073218d943a66c3a6630c873ddb55eebb76787fd8be10af64.png": "dc74c6d0a4a20e7073218d943a66c3a6630c873ddb55eebb76787fd8be10af64",
+        "images/908ec19fef075041037cac36a0c1a1df8e62c2940c7bd1445940eb3f080cb4aa.png": "908ec19fef075041037cac36a0c1a1df8e62c2940c7bd1445940eb3f080cb4aa",
+        "images/82b4300dfceaebc98375fd59a51d986b940ee62419126bf5b84e1309c8df29c5.png": "82b4300dfceaebc98375fd59a51d986b940ee62419126bf5b84e1309c8df29c5",
+        "images/77ae44eead451423c7ad98edf64fcf16fbe640930bb31df6cd2e9c629acd03aa.png": "77ae44eead451423c7ad98edf64fcf16fbe640930bb31df6cd2e9c629acd03aa",
+        "images/643695d4c40fc3ac1cb7fad8350636a20738954c33585342465bf9aa7366fc8c.png": "643695d4c40fc3ac1cb7fad8350636a20738954c33585342465bf9aa7366fc8c",
+        "images/e43352e19461d414727eeb71f459e3fa44b1280707645313271caabbc133d861.png": "e43352e19461d414727eeb71f459e3fa44b1280707645313271caabbc133d861",
+        "images/d4ed508ceab21c7dbe36e1691ec8398a5f6b93d9b674e655d43b338fd31534ee.png": "d4ed508ceab21c7dbe36e1691ec8398a5f6b93d9b674e655d43b338fd31534ee",
+        "images/0105fd2983aaa0bfe18e23602ceb20daa64923345a0f306dc2ada9f94dbe50cb.png": "0105fd2983aaa0bfe18e23602ceb20daa64923345a0f306dc2ada9f94dbe50cb",
+        "images/8bbfbdd07295539a5526d3e2e0bb9ca0f269ea61397d785b9dd01c38edf16a0a.png": "8bbfbdd07295539a5526d3e2e0bb9ca0f269ea61397d785b9dd01c38edf16a0a",
+        "images/11fb4860d5bc335ce4090ce2df82b094e5bba4e487d33b0db0240f47307b5859.png": "11fb4860d5bc335ce4090ce2df82b094e5bba4e487d33b0db0240f47307b5859",
+        "images/0b8d2999457a6c88ce1f3b2b649e4b8182ffb9d061eba4fcddc26cbe24013aba.png": "0b8d2999457a6c88ce1f3b2b649e4b8182ffb9d061eba4fcddc26cbe24013aba",
+        "images/73958785c6d8a3e7da1f7b12c57bbd1d98d853c827136826b3d3f8cd028c9902.png": "73958785c6d8a3e7da1f7b12c57bbd1d98d853c827136826b3d3f8cd028c9902",
+        "images/17cef2d351e1e279507c7fcca07cefe313af02ccb0d664fb7b2ffd3c119ee169.png": "17cef2d351e1e279507c7fcca07cefe313af02ccb0d664fb7b2ffd3c119ee169",
+        "images/bf0547327d7678c10ef2d460486349f68a90c1273d9b75b3bf9b507f1347a890.png": "bf0547327d7678c10ef2d460486349f68a90c1273d9b75b3bf9b507f1347a890",
+        "images/232e02338583aa44405139767fced6f229f2b11e20e65f7f7718cf630c384548.png": "232e02338583aa44405139767fced6f229f2b11e20e65f7f7718cf630c384548",
+        "images/375835b0a6224e159a8540db26d1c382da6df7fddd4830018b1e8f09bc380bd2.png": "375835b0a6224e159a8540db26d1c382da6df7fddd4830018b1e8f09bc380bd2",
+        "images/ed2db4f7c3d0d570c4c7580ce7707ded4a61d9fcb8d5e6e077c659b80c6f3ac1.png": "ed2db4f7c3d0d570c4c7580ce7707ded4a61d9fcb8d5e6e077c659b80c6f3ac1",
+        "images/7dd2ff16102afd47f245d3cfe481f0766c82f296e8e230231a9066ac3d7de35e.png": "7dd2ff16102afd47f245d3cfe481f0766c82f296e8e230231a9066ac3d7de35e",
+        "images/5b08319bb9cb1e1b0ef32f9b7035917c84d10db2e2a8aad84836c1a4fb26ea66.png": "5b08319bb9cb1e1b0ef32f9b7035917c84d10db2e2a8aad84836c1a4fb26ea66",
+        "images/2e3292d4a5767f4638f78fb77924b0af374b077ea884ea8f87e3720363d5746a.png": "2e3292d4a5767f4638f78fb77924b0af374b077ea884ea8f87e3720363d5746a",
+        "images/7b1a0b7829bf67ab7f4177be23f84f22ab86ce4612a46e3b5fe45874669b9969.png": "7b1a0b7829bf67ab7f4177be23f84f22ab86ce4612a46e3b5fe45874669b9969",
+        "images/3bc6aa6d9121bc5b7d2e17457bb1766bac6919963427424cc4878ec1aa5868ea.png": "3bc6aa6d9121bc5b7d2e17457bb1766bac6919963427424cc4878ec1aa5868ea",
+        "coco.jsonl": "0ee1dfd7d9afc126b34f7262cae73b067e219868d48b8fd753b2bfa1ed6fbc28"
+      },
+      "rows": 40
+    }
+  },
+  "checkpoint": {
+    "name": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "offline_source_verification": {
+      "public_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+      "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+      "file_sha256": {
+        "model.safetensors": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e",
+        "added_tokens.json": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+        "tokenizer_config.json": "36c6fd44d07d10fd8180ee6b46dcccf69fb7c06753968ff0d7e17b8bfe17b777",
+        "special_tokens_map.json": "aa0ff906077086dfa9734a7f97f68c825877a48f9468807be65504495cdeef09",
+        "chat_template.json": "a68ad1a42681ae44eacd109ff8dd56a840f761c03d72f4ff4c515d092f882168",
+        "config.json": "b70fb4bfde88df9eeebc9d8ff523733b8bf70d6c9b06c610325960e06ae9db52",
+        "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+        "processor_config.json": "e7bff42da73ae9eec9042ef20e066e11f1ee20f025358ff79131e3c0fb549b46",
+        "generation_config.json": "067a2a54e5f87162ecac6e0e911cc4665fc8f7f3324794ecbac0f76badb56636",
+        "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+        "preprocessor_config.json": "6cb6e36d6fcb88ca1502c4a26750715dc3e7dedddc9a8f17b27d8d167d1457e7"
+      },
+      "rows": null
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "baseline_pair_accuracy": 0.5,
+    "method_pair_accuracy": 1.0,
+    "verified_bootstrap_pairs": 6
+  },
+  "limitations": [
+    "Single seed and bounded train-derived local grouping, not official benchmark replication.",
+    "WOVEN degradation retained; UMRM pair accuracy is limited synthetic-negative probing, not universal reward-model capability."
+  ],
+  "execution_checks": {
+    "completed": true,
+    "test_used_for_selection": false,
+    "generated_bootstrap_pairs": true
+  },
+  "executed_source_sha256": {
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/reproductions/oct12_foundation_multimodal.py": "37ebc1120f157f0f69fefd7d35ce2f37acd8175a3e4143c2793dd954d2f761e3",
+    "scripts/run_oct12_multimodal.py": "4500fee5b8fef9ceb5509a2489890dabc25e3e13b2cd83a4d4fbf41ad9a49eb8"
+  },
+  "provenance": {
+    "commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "artifact_path": "docs/gpu-validations/oct12-umrm-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.12707-umrm/metrics/public-vlm-a100-42.json",
+    "checkpoint_committed": false,
+    "input_preparation_commit": "916a56ca630027b4ce99ebfb39a3fea441c4eaca"
+  }
+}

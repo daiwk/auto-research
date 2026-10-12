@@ -1,13 +1,17 @@
 # 统一后续路线图与 TODO
 
-## 审查截至 2026-10-07：覆盖范围与归档例外
+## 审查截至 2026-10-12：覆盖范围与归档例外
 
 当前审查水位与例外以[统一状态](paper-discovery-watermark.json)为准；
-[逐条来源验收](research-audits/oct07-source-closure/README.md)补齐 Google 官方记录和 Meta 分页核对。
+[本轮审查闭环](research-audits/oct12-review-closure/README.md)记录四轨八查询、定向补发现、Google/Meta/DeepMind来源与例外。
 严格来源穷尽水位已退休。现在只显示审查水位、覆盖范围和归档例外，不承诺全网无遗漏；实现进度独立记录。
-本批覆盖四轨两通道、Google 27 页/398 条和 Meta 6 页/144 条；[32 项例外](research-audits/oct07-source-closure/exception-archive.json)已归档，不再阻塞。
-后续增量扫描从 10 月 6 日重叠到新的截止日，不再次把全年未知日期记录全部当成最近新增。
+本批八查询去重1,597条：继承1,019、本轮新审578，另10条独立补发现；登记集合含旧范围3条，共1,610。
+官方范围为Google28页/406条、Meta6页/144条、DeepMind9页/265条；[33项例外](research-audits/oct12-review-closure/exception-archive.json)非阻塞归档。
+后续增量扫描从10月11日重叠到新的截止日；旧月份补查、新v1、更新revision与独立补发现分开，不重复算作“当天新论文”。
 历史相关论文保留为候选线索；归档例外仅在出现新证据时重开，不每轮反复重试。
+
+当前16项实现与实际验收见[固定范围](design/oct12-papers-and-review.md)，不能用审查水位替代GPU、算法或能力验收。
+16项的真实CUDA机制/运行设施验证已完成，负结果和不可用原环境均保留；不声明原论文规模、线上收益或正式能力比较已复现。
 
 ## PR #195 候选审查快照（来源补齐已由上节续办）
 

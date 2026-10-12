@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2607.10910](https://arxiv.org/abs/2607.10910) |
-| 公司/机构 | Technical University of Denmark（按第一作者所属机构聚合） |
+| 公司/机构 | Technical University of Denmark |
 | 首次公开日期 | 2026-07-12（arXiv v1） |
 | 原文开源代码 | 是：[johanneskruse/zorro](https://github.com/johanneskruse/zorro) |
 | Adapter | `zorro` |

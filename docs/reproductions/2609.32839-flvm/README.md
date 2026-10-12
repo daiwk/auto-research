@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.32839) |
-| 公司/机构 | Google / YouTube（第一作者 Shuo Chang 所属机构） |
+| 公司/机构 | Google / YouTube |
 | 首次公开日期 | 2026-09-26（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-09-29，原文未列作者发布的 FLVM 实现仓库 |
 | Adapter | `flvm` |

@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "rsi-anything",
+  "title": "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+  "paper_url": "https://arxiv.org/abs/2610.13912",
+  "detail_path": "reproductions/2610.13912-rsi-anything/README.md",
+  "topic": [
+    "recursive-self-improvement",
+    "world-model",
+    "compatibility-retention"
+  ],
+  "first_author": "Taoyong Cui",
+  "first_author_affiliation": "PhAI Labs / The Chinese University of Hong Kong",
+  "published": "2026-10-09",
+  "priority": "P0",
+  "code": "https://github.com/Gen-Verse/RSI-Anything",
+  "adapter": {
+    "spec_key": "rsi-anything"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct12-rsi-anything-a100.json"
+}

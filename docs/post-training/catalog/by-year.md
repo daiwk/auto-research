@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-10 · [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../../reproductions/2610.13521-road-mopd/README.md)（`road-mopd`）：多域只路由各自教师，不能防止共享参数更新损害其他能力。Road 用未路由教师在当前目标域的同一学生轨迹上给出兼容性证据，调节 token credit，再求真实辅助梯度，投影目标梯度但保留其范数下限。
+- 2026-10 · [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../../reproductions/2610.13285-boundary-evo/README.md)（`boundary-evo`）：长推理监督的价值随学生能力变化。BoundaryEvo 先不按 correctness 过滤地蒸馏少量教师行为做 capability priming，然后每轮用当前学生、固定 expert 和 analyzer 重估边界，保留仍未掌握的 replay 并补充新问题；选好问题后再生成并验证 fresh teacher trajectories。
+- 2026-10 · [Branching On-Policy Distillation](../../reproductions/2610.13481-branch-opd/README.md)（`branch-opd`）：普通 OPD 每个前缀只看到一次后续。BranchOPD 用学生不确定性和师生分歧定位 fork，从同一冻结学生策略独立采样 suffix，前缀只计入一次；并用协议事件监督结束行为。
+- 2026-10 · [CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation](../../reproductions/2610.13257-cast-opd/README.md)（`cast-opd`）：异构 tokenizer 的同一文本有不同分段，直接比较 token ID 无意义。CAST 先匹配实际解码文本，将教师 span 的总 log probability 均匀投影到学生 span，再按不确定性×局部平滑度分配 credit；未对齐位置通过初始学生 KL 限制漂移。
 - 2026-10 · [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](../2610.11659-dial-opd/README.md)（`dial-opd`）：用概率的对数均值调节教师—学生对数差异，降低两者都不认可的低概率 token 的监督优先级。按每条响应选取高分位置，未选位置仍保留为上下文。
 - 2026-10 · [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](../2610.11854-grpo-dropout/README.md)（`grpo-dropout`）：从同一 prompt 的 GRPO 响应组中筛除部分高概率、正优势响应，并用旧策略概率重新中心化保留响应的优势。不是随机 dropout，也不改变生成预算。
 - 2026-10 · [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](../2610.11989-meta-opd/README.md)（`meta-opd`）：轻量权重网络根据师生预测学习 token 监督权重。它通过一次可微虚拟学生更新后的参考解损失获得元梯度，再使用新权重执行真实学生更新。

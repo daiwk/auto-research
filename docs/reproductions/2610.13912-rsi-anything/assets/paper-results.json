@@ -1,0 +1,23 @@
+{
+  "source": "original paper only",
+  "source_url": "https://arxiv.org/html/2610.13912v1",
+  "local_run": false,
+  "reviewed_at": "2026-10-12",
+  "rows": [
+    {
+      "metric": "code repair: static / predictive / adapted",
+      "reported_value": "26.3% / 29.2% / 31.2%",
+      "comparator_or_protocol": "coder 固定，近似等测试使用量"
+    },
+    {
+      "metric": "laboratory planning: first / fifth policy",
+      "reported_value": "21.80% / 46.01%",
+      "comparator_or_protocol": "五次连续 policy 版本"
+    },
+    {
+      "metric": "reaction best yield",
+      "reported_value": "96.15%",
+      "comparator_or_protocol": "Bayesian optimization 82.16%，均40次实验"
+    }
+  ]
+}

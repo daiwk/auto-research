@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "adapter_key": "jev-workflow-measurement",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_workflow_measurement.py",
+    "--checkpoint",
+    "checkpoints/smollm2-135m-instruct",
+    "--checkpoint-id",
+    "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "--revision",
+    "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--budgets",
+    "64,256",
+    "--output",
+    "runs/jev-workflow-measured-v2"
+  ],
+  "dataset": {
+    "name": "public-circle-packing-26 task specification",
+    "revision": "6765289590741a1b656dde7f3d0495349c70f485",
+    "task_specification_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3"
+  },
+  "checkpoint": {
+    "id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "immutable_revision_verified": true,
+    "file_sha256": {
+      "model.safetensors": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c",
+      "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+      "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+      "config.json": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a",
+      "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+      "train_results.json": "713996ce10b9d99a440fec73c0f3bdb2f3c4db6adba3d027bdaa40796f059b2d",
+      "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+      "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+      "eval_results.json": "6c7ecd0c2c0e8f6af8cbb34065fb2d5eb4c504febf2e266a7c7f948f13c70b7c",
+      "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+      "all_results.json": "1f68a2e167194d764c414643b54f0960945dc3f46bc47ec53b02475df527f376",
+      "trainer_state.json": "9664b2f12a8a29cad27a12da7b0d3a1081c8ba1392bcec71fa3bfd4fafc11284"
+    },
+    "local_files_only": true,
+    "trust_remote_code": false,
+    "verification": "pinned official-source offline byte-hash manifest"
+  },
+  "result": "passed",
+  "metrics": {
+    "paired_executions": 3,
+    "budget64_success_rate": 0.0,
+    "budget256_success_rate": 0.0,
+    "budget64_mean_task_seconds": 2.7145877853035927,
+    "budget256_mean_task_seconds": 10.010931720336279
+  },
+  "provenance": {
+    "commit": "6765289590741a1b656dde7f3d0495349c70f485",
+    "artifact_path": "docs/gpu-validations/oct12-jev-workflow-measurement-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13092-jev-workflow/metrics/measured-workflows-a100-seeds42-44.json",
+    "checkpoint_committed": false
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct12_workflow_measurement.py": "598ec48810d37796cbe994d610f8c98d23fd95a54416c9ff34da7b169c2fe1a1",
+    "src/auto_research/agent_research/oct12_checkpoint.py": "c49cb33db3d14b050e1938dbdee08e392ad435d2bc276029cfb1c9b51d7c6ca8",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e",
+    "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c"
+  },
+  "limitations": [
+    "SmolLM2 workflow measurement facility, not Jev model reproduction.",
+    "Six actual generations; all geometric deliveries failed; cost/time per success remain null.",
+    "Generated-token units are not billed currency; recovery/completion failure annotations not applicable."
+  ]
+}

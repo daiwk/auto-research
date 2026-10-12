@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "key": "cast-opd",
+  "arxiv_id": "2610.13257",
+  "title": "CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13257",
+  "organization": "Taobao & Tmall Group of Alibaba / Singapore Management University",
+  "published": "2026-10-09",
+  "upstream_code": "否：未找到原作者公开实现（2026-10-12 核查）",
+  "track": "post-training",
+  "topics": [
+    "Cross-tokenizer distillation",
+    "Token credit assignment",
+    "Selective KL anchoring"
+  ],
+  "local_code": "src/auto_research/reproductions/cast_opd",
+  "documentation": "docs/reproductions/2610.13257-cast-opd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Public numerical-reasoning train-only holdout"
+  ],
+  "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+  "metrics": [
+    "metrics.adapter_parameter_delta_l2",
+    "metrics.validation_exact_match"
+  ],
+  "mechanisms": [
+    "actual decoded-text chunk alignment",
+    "uncertainty-smoothness credit preserving chunk advantage",
+    "unaligned-token initial-policy KL"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.cast_opd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Taobao & Tmall Group of Alibaba / Singapore Management University",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale models, long rollouts and benchmark evaluation"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/cast-opd-a100-20261012.json"
+  }
+}

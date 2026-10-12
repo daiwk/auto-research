@@ -63,7 +63,7 @@ Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机
 负结果和未完成原始 benchmark 都保留在各篇详情与[运行审计](research-audits/oct11-runtime-audit.md)中；
 “机制执行通过”不等同于“模型效果提高”，也不自动表示已接入 Evolve。
 
-仓库目前注册 **371 个**论文 adapter，统一事实源是
+仓库目前注册 **387 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](research-manifest.json)。站点提供按研究域、机构、
 主题和年份浏览的[论文实现索引](reproductions/README.md)，每篇详情页包含论文链接、
 一作机构、发布日期、原作者代码状态、本地 adapter/代码路径、架构与公式、原文线上/离线

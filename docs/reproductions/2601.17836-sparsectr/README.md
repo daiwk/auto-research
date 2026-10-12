@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2601.17836](https://arxiv.org/abs/2601.17836) |
-| 公司/机构 | Institute of Software, Chinese Academy of Sciences（按第一作者所属机构聚合） |
+| 公司/机构 | Institute of Software, Chinese Academy of Sciences |
 | 首次公开日期 | 2026-01-25（arXiv v1） |
 | 原文开源代码 | 是：[https://github.com/laiweijiang/SparseCTR](https://github.com/laiweijiang/SparseCTR) |
 | Adapter | `sparsectr` |

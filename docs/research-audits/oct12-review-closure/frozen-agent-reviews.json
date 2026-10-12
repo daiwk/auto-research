@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-12",
+  "scope": "六篇冻结Agent/Jev独立来源记录；不得混入八查询召回或578新审计计数。",
+  "summary": {
+    "records": 6,
+    "accepted_frozen_scope": 6,
+    "already_in_agent_assignment": 2,
+    "outside_eight_query_union_supplements": 4,
+    "additions_to_578_recall_count": 0,
+    "new_implementation_claims": 0,
+    "full_articles_read": 0
+  },
+  "records": [
+    {
+      "arxiv_id": "2610.13025",
+      "adapter_key": "evo2",
+      "organization": "Google DeepMind / UIUC",
+      "institution_evidence": "原HTML \\thepa 宏未展开；root核验官方PDF第一页机构，本review不冒称自己重读PDF。",
+      "method_locations": [
+        "3.1 Overview",
+        "3.2 Harness evolution through dual-role self-modification",
+        "3.3.1 Data collection",
+        "3.3.2 Reward design",
+        "3.3.3 Training process"
+      ],
+      "experiment_locations": [
+        "4.1 Experimental Settings",
+        "4.2 Self-Evolution on Coding Benchmarks",
+        "4.3 Harness Transfer across Benchmarks",
+        "4.4 Self-Evolution with Proprietary Models",
+        "4.5 Self-Evolution on Memory Tasks",
+        "4.6 In-Depth Analysis"
+      ],
+      "core_method": "共享Proposer/Reflector通过真实源编辑、交叉与轨迹前缀恢复进化harness；warmup SFT后交替角色GRPO，每轮fresh冻结counterpart，executor固定；候选由实际evaluator反馈树选择。",
+      "upstream": {
+        "url": null,
+        "availability": "原作者专属代码库未找到；不能把其它Evo类项目冒认原实现。"
+      },
+      "local_boundary": "prompt-only可执行harness与缩小LoRA训练为concept_demo/L1；active GRPO判据、真实GPU正负结果由root另记，不能把动量漂移当学习信号。",
+      "published": "2026-10-09T05:28:02Z",
+      "status": "accepted",
+      "accepted_basis": "用户点名冻结16范围；selected defining-method/experiment原文证据核验，具体实现/运行等级独立记录。",
+      "source": {
+        "url": "https://arxiv.org/html/2610.13025v1",
+        "sha256": "0bdabf2558023e54f2a2da398c1d385b48834096451d775312b2f0432cb20d2c",
+        "byte_hash_verified_on": "2026-10-12"
+      },
+      "dateproof": {
+        "url": "https://arxiv.org/abs/2610.13025",
+        "sha256": "7a1d0eb105e3fcd0c4f9030aaf1af50e91a4388b2ea7cda66ec70b0bc59c4fe8",
+        "location": "Submission history / [v1]",
+        "first_publication_utc": "2026-10-09T05:28:02Z"
+      },
+      "actual_read_scope": "实施期间读取摘要、中心方法/训练/评测及部分相关附录；本次复用这些已读来源并重新校验官方HTML字节SHA和v1日期，不声明全文每段已读。",
+      "full_article_read": false,
+      "within_eight_query_recall_union": true,
+      "in_agent_203_assignment": true,
+      "independent_shortlist_or_supplement": false,
+      "new_implementation_claimed_by_this_review": false,
+      "online_ab": "未报告生产线上A/B；科学case/benchmark部署描述不是AB。"
+    },
+    {
+      "arxiv_id": "2610.13912",
+      "adapter_key": "rsi-anything",
+      "organization": "PhAI Labs / CUHK 等",
+      "method_locations": [
+        "2.1 Problem formulation",
+        "2.2 Predictive foundation",
+        "2.3 Prediction-guided selection",
+        "2.4 Feedback-driven improvement",
+        "2.5 Recursive retention"
+      ],
+      "experiment_locations": [
+        "3.1 Code repair",
+        "3.2 GUI environments",
+        "3.3 Laboratory planning",
+        "3.4 Reaction optimization",
+        "3.5 Immune-science application",
+        "6.1 Domain-specific evaluation settings",
+        "6.2 Statistical reporting"
+      ],
+      "core_method": "world model预测候选行动后外部执行验证；真实policy/workflow更新与按失配触发predictor适配，多轮component gate后整对compatibility retention。",
+      "upstream": {
+        "url": "https://github.com/Gen-Verse/RSI-Anything",
+        "availability": "已核验作者仓code/resources及domain bindings；不是只有标题页。"
+      },
+      "local_boundary": "原JEPA/backbone与domain训练未复现，使用真正可训练latent factor predictor保留L1 concept_demo，不声称原科学能力；circle context分区非独立泛化test。",
+      "published": "2026-10-09T17:50:30Z",
+      "status": "accepted",
+      "accepted_basis": "用户点名冻结16范围；selected defining-method/experiment原文证据核验，具体实现/运行等级独立记录。",
+      "source": {
+        "url": "https://arxiv.org/html/2610.13912v1",
+        "sha256": "af2f040a4871749019a14acad424bcb5d0c14865f95ed0e283b495261856c1ec",
+        "byte_hash_verified_on": "2026-10-12"
+      },
+      "dateproof": {
+        "url": "https://arxiv.org/abs/2610.13912",
+        "sha256": "96f3e90d064e3616a965e56cec01c28263d933e2306dcc11ab57bf4b1baf7e5c",
+        "location": "Submission history / [v1]",
+        "first_publication_utc": "2026-10-09T17:50:30Z"
+      },
+      "actual_read_scope": "实施期间读取摘要、中心方法/训练/评测及部分相关附录；本次复用这些已读来源并重新校验官方HTML字节SHA和v1日期，不声明全文每段已读。",
+      "full_article_read": false,
+      "within_eight_query_recall_union": false,
+      "in_agent_203_assignment": false,
+      "independent_shortlist_or_supplement": true,
+      "new_implementation_claimed_by_this_review": false,
+      "online_ab": "未报告生产线上A/B；科学case/benchmark部署描述不是AB。"
+    },
+    {
+      "arxiv_id": "2610.13194",
+      "adapter_key": "janus",
+      "organization": "CAS ICT / UCAS",
+      "method_locations": [
+        "3.1 Problem Formulation",
+        "3.2 The Predict-Verify-Evolve Loop",
+        "3.3 World Model Guided Exploration Strategy",
+        "3.4 Experience-Driven Co-Evolution",
+        "Appendix A Formal Definitions of Research Priority Criteria"
+      ],
+      "experiment_locations": [
+        "4.1 Experimental Setup",
+        "4.2 Performance Analysis",
+        "4.3 Ablation Study",
+        "4.4 Framework Analysis",
+        "Appendix D Metrics",
+        "Appendix E Implementation Details"
+      ],
+      "core_method": "研究图中稀疏soft Bradley–Terry tournament预测VI/IG/EV再refine、真实trial，反馈驱动intra/cross/prediction/exploration/coordination技能演化。",
+      "upstream": {
+        "url": "https://github.com/bilemond/JANUS",
+        "availability": "作者页仅README/assets，未有可执行实现，不登记author code released。"
+      },
+      "local_boundary": "保留预测前执行后时序的bounded checkpoint controller为core_mechanism/L1；不是完整MLS-Bench autonomous research能力复现。",
+      "published": "2026-10-09T08:13:28Z",
+      "status": "accepted",
+      "accepted_basis": "用户点名冻结16范围；selected defining-method/experiment原文证据核验，具体实现/运行等级独立记录。",
+      "source": {
+        "url": "https://arxiv.org/html/2610.13194v1",
+        "sha256": "a6e2f23883bb8f68a01d002000b2f628e90829719f0c229f591d0c7dfd9d57d9",
+        "byte_hash_verified_on": "2026-10-12"
+      },
+      "dateproof": {
+        "url": "https://arxiv.org/abs/2610.13194",
+        "sha256": "e08fb761ff05a7b820c7abc08b6f2fa17ffa55b2d66ee25507892bfc26d91902",
+        "location": "Submission history / [v1]",
+        "first_publication_utc": "2026-10-09T08:13:28Z"
+      },
+      "actual_read_scope": "实施期间读取摘要、中心方法/训练/评测及部分相关附录；本次复用这些已读来源并重新校验官方HTML字节SHA和v1日期，不声明全文每段已读。",
+      "full_article_read": false,
+      "within_eight_query_recall_union": false,
+      "in_agent_203_assignment": false,
+      "independent_shortlist_or_supplement": true,
+      "new_implementation_claimed_by_this_review": false,
+      "online_ab": "未报告生产线上A/B；科学case/benchmark部署描述不是AB。"
+    },
+    {
+      "arxiv_id": "2610.13348",
+      "adapter_key": "t2mem",
+      "organization": "Northeastern / Tsinghua / Alibaba",
+      "method_locations": [
+        "3.1 Disentangling Memory Orchestration from Offline to Test Time",
+        "3.2 Dynamic Memory Construction During LLM Reasoning"
+      ],
+      "experiment_locations": [
+        "4 Experimental Methodology",
+        "5.1 Overall Performance",
+        "5.2 Ablation Studies",
+        "5.3 Effectiveness of Test-Time Computation",
+        "A.3 Additional Experimental Details",
+        "A.8 Prompt Templates"
+      ],
+      "core_method": "离线query-agnostic metadata保raw links；当前query驱动test-time progressive memory cache，自主SearchMeta/ReadRaw/Answer，去重且只读已观察sourceID。",
+      "upstream": {
+        "url": "https://github.com/OpenBMB/T2Mem",
+        "availability": "已核验作者真实代码。"
+      },
+      "local_boundary": "checkpoint驱动memory construction为core_mechanism/L1；公开LongMemEval subset与external tokenF1不同于原LLMjudge，多seed与正式对照另缺。",
+      "published": "2026-10-09T10:24:51Z",
+      "status": "accepted",
+      "accepted_basis": "用户点名冻结16范围；selected defining-method/experiment原文证据核验，具体实现/运行等级独立记录。",
+      "source": {
+        "url": "https://arxiv.org/html/2610.13348v1",
+        "sha256": "41ff56ee7707b7c75d6925023e706775d9bde4e3424f932af1f9b6427085b484",
+        "byte_hash_verified_on": "2026-10-12"
+      },
+      "dateproof": {
+        "url": "https://arxiv.org/abs/2610.13348",
+        "sha256": "3f46e16b1a17a8bc92c18bac3e65deb137589ef17c78f1e1d96967c90111b9a3",
+        "location": "Submission history / [v1]",
+        "first_publication_utc": "2026-10-09T10:24:51Z"
+      },
+      "actual_read_scope": "实施期间读取摘要、中心方法/训练/评测及部分相关附录；本次复用这些已读来源并重新校验官方HTML字节SHA和v1日期，不声明全文每段已读。",
+      "full_article_read": false,
+      "within_eight_query_recall_union": false,
+      "in_agent_203_assignment": false,
+      "independent_shortlist_or_supplement": true,
+      "new_implementation_claimed_by_this_review": false,
+      "online_ab": "未报告生产线上A/B；科学case/benchmark部署描述不是AB。"
+    },
+    {
+      "arxiv_id": "2610.13889",
+      "adapter_key": "rated",
+      "organization": "Texas Tech University",
+      "method_locations": [
+        "3.2.1 DRAGON Dual-Encoder Architecture",
+        "3.2.2 Contrastive Fine-tuning on EcoAgent-Syn",
+        "3.3 Reliability-Aware Re-ranking",
+        "3.4 Hybrid Fusion for Tool Ranking"
+      ],
+      "experiment_locations": [
+        "2 The EcoAgent Benchmark",
+        "4.1 Experimental Setup",
+        "4.2 Evaluation Metrics",
+        "4.4 Main Results",
+        "4.5 Hyperparameter Sensitivity",
+        "4.6 Efficiency Analysis"
+      ],
+      "core_method": "独立语义双encoder真实InfoNCE训练后冻结，semantic shortlist融合prior与discounted contextual LinUCB，只按实际被选tool的执行/失败更新arm。",
+      "upstream": {
+        "url": "https://github.com/Elliotes/EcoAgent",
+        "availability": "已核验data/scripts与EcoAgent公开字段及固定git revision来源。"
+      },
+      "local_boundary": "真实encoder/bandit与批准local sandbox tool binding为core_mechanism/L1；本地工具不是作者prod API，test reference只外部分数、候选池不能按gold选。",
+      "published": "2026-10-09T17:38:11Z",
+      "status": "accepted",
+      "accepted_basis": "用户点名冻结16范围；selected defining-method/experiment原文证据核验，具体实现/运行等级独立记录。",
+      "source": {
+        "url": "https://arxiv.org/html/2610.13889v1",
+        "sha256": "33f3eea26c06ae5f417ea95098d0533bf82b7bfdf176c9af94b3c0d270684afb",
+        "byte_hash_verified_on": "2026-10-12"
+      },
+      "dateproof": {
+        "url": "https://arxiv.org/abs/2610.13889",
+        "sha256": "63a0da2b6117f86761fc9ddefd21081e5a3ad667434773a405915d655c895bd4",
+        "location": "Submission history / [v1]",
+        "first_publication_utc": "2026-10-09T17:38:11Z"
+      },
+      "actual_read_scope": "实施期间读取摘要、中心方法/训练/评测及部分相关附录；本次复用这些已读来源并重新校验官方HTML字节SHA和v1日期，不声明全文每段已读。",
+      "full_article_read": false,
+      "within_eight_query_recall_union": false,
+      "in_agent_203_assignment": false,
+      "independent_shortlist_or_supplement": true,
+      "new_implementation_claimed_by_this_review": false,
+      "online_ab": "未报告生产线上A/B；科学case/benchmark部署描述不是AB。"
+    },
+    {
+      "arxiv_id": "2610.13092",
+      "adapter_key": "jev-workflow",
+      "organization": "Nanjing University / TUM",
+      "method_locations": [
+        "4.1 Research Questions",
+        "4.2 Experimental Setup",
+        "4.3 Evaluation and Metrics",
+        "Appendix A Evaluation and Statistical Methods"
+      ],
+      "experiment_locations": [
+        "5.1 Effectiveness",
+        "5.2 Efficiency Transfer",
+        "5.3 Failure and Recovery",
+        "Limitations",
+        "Appendix C Trace Analysis and Case Evidence"
+      ],
+      "core_method": "比较agent交付任务结果及decision/task latency、成本/成功交付、失败和恢复；不是新model或agent算法。",
+      "upstream": {
+        "url": "https://anonymous.4open.science/r/jev-emp-5BF4/",
+        "availability": "原文§1作者报告anonymous repo，主页可达但仅JS shell，未独立验证可运行源码；droidrun是依赖不是作者模型代码。"
+      },
+      "local_boundary": "CPU supplied-paired-trace审计为evaluation infrastructure；不加载Jev权重，不把原aggregate数值作为本地跑出的指标。",
+      "published": "2026-10-09T06:45:23Z",
+      "status": "accepted",
+      "accepted_basis": "用户点名冻结16范围；selected defining-method/experiment原文证据核验，具体实现/运行等级独立记录。",
+      "source": {
+        "url": "https://arxiv.org/html/2610.13092v1",
+        "sha256": "3db7474953cbe5a3052fb22793038f2383bdd0e7c775af06494a5e8501646d18",
+        "byte_hash_verified_on": "2026-10-12"
+      },
+      "dateproof": {
+        "url": "https://arxiv.org/abs/2610.13092",
+        "sha256": "174dcb8eb2d37831d8a22ea3f6746997c340e74bb373100f3926c0d0b706daa1",
+        "location": "Submission history / [v1]",
+        "first_publication_utc": "2026-10-09T06:45:23Z"
+      },
+      "actual_read_scope": "实施期间读取摘要、中心方法/训练/评测及部分相关附录；本次复用这些已读来源并重新校验官方HTML字节SHA和v1日期，不声明全文每段已读。",
+      "full_article_read": false,
+      "within_eight_query_recall_union": true,
+      "in_agent_203_assignment": true,
+      "independent_shortlist_or_supplement": false,
+      "new_implementation_claimed_by_this_review": false,
+      "online_ab": "未报告生产线上A/B；科学case/benchmark部署描述不是AB。"
+    }
+  ]
+}

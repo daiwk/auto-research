@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "key": "branch-opd",
+  "arxiv_id": "2610.13481",
+  "title": "Branching On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13481",
+  "organization": "Tsinghua University / Peking University / SenseTime Research",
+  "published": "2026-10-09",
+  "upstream_code": "否：[作者仓库](https://github.com/chendy25/BranchOPD) 当前仅 LICENSE/README，尚未提供算法实现（2026-10-12 核查）",
+  "track": "post-training",
+  "topics": [
+    "On-policy distillation",
+    "Student-policy branching",
+    "Protocol-boundary repair"
+  ],
+  "local_code": "src/auto_research/reproductions/branch_opd",
+  "documentation": "docs/reproductions/2610.13481-branch-opd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Public numerical-reasoning train-only holdout"
+  ],
+  "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+  "metrics": [
+    "metrics.adapter_parameter_delta_l2",
+    "metrics.validation_exact_match"
+  ],
+  "mechanisms": [
+    "uncertainty/disagreement fork selection",
+    "student-policy shared-prefix conditional resampling",
+    "token-mean OPD and protocol-boundary repair"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.branch_opd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tsinghua University / Peking University / SenseTime Research",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale models, long rollouts and benchmark evaluation"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/branch-opd-a100-20261012.json"
+  }
+}

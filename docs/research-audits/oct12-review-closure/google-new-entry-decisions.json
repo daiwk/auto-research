@@ -1,0 +1,1597 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-12",
+  "organization": "Google Research",
+  "requested_window": {
+    "from": "2026-10-08",
+    "to": "2026-10-12",
+    "basis": "v1/first-publication dates separated from revised-version dates"
+  },
+  "input": ".cache/oct12-scan/official/google-research-publications.json#new_details",
+  "corrected_delta": ".cache/oct12-scan/official/google-corrected-delta.json",
+  "baseline": "docs/research-audits/oct07-source-closure/google-source-review.json",
+  "scope": "仅8个真实新增URL独立身份/日期核查；21旧URL继承已审，h1修正Preview噪声；1javascript剔除。不是30篇新的全文阅读或整站穷尽检索。",
+  "summary": {
+    "corrected_directory_records": 406,
+    "baseline_urls": 398,
+    "input_noisy_new_details": 30,
+    "inherited_old_url_reviews": 21,
+    "rejected_pagination_nonpaper": 1,
+    "true_new_urls_reviewed": 8,
+    "exact_primary_dates_for_exact_title_work_matches": 7,
+    "related_title_variant_with_known_prior_preprint": 1,
+    "preprint_revisions_in_window": 3,
+    "historical_before_window_new_candidate_records": 5,
+    "out_of_scope_new_records": 3,
+    "nonblocking_archived_exact_title_mapping_uncertainties": 1,
+    "new_implementations": 0,
+    "new_fulltext_review_claims": 0,
+    "blocking_unfinished": 0
+  },
+  "records": [
+    {
+      "input_index": 0,
+      "listing_title": "Who Controls the Curriculum for AI? The Limits of Participatory Design for Educational AI",
+      "corrected_title": "Who Controls the Curriculum for AI? The Limits of Participatory Design for Educational AI",
+      "url": "https://research.google/pubs/who-controls-the-curriculum-for-ai-the-limits-of-participatory-design-for-educational-ai/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "941bd2933a050f33f9443e57e456fc7b80a96bb36dba3700792a5f981b86f013",
+        "local_path": ".cache/oct12-scan/official/a1bf45c5fef6c00c2a4d7714b9582717dabaa5d202929b1402a0bb8c9225bbd4.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/who-controls-the-curriculum-for-ai-the-limits-of-participatory-design-for-educational-ai/",
+          "result": "retrieved",
+          "sha256": "941bd2933a050f33f9443e57e456fc7b80a96bb36dba3700792a5f981b86f013"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Who Controls the Curriculum for AI? The Limits of Participatory Design for  Educational AI",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 1,
+      "listing_title": "Preview",
+      "corrected_title": "Phoenix: Rowhammer Attacks on DDR5 with Self-Correcting Synchronization",
+      "url": "https://research.google/pubs/phoenix-rowhammer-attacks-on-ddr5-with-self-correcting-synchronization/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "d3dec12cc2a08b9269959ea290e0225a2b5cffdc7488e8945f8f05513ef56851",
+        "local_path": ".cache/oct12-scan/official/d828c40aba76d26d3572328c17e6662dd132e3049e85acca5c6be43a99822ba5.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/phoenix-rowhammer-attacks-on-ddr5-with-self-correcting-synchronization/",
+          "result": "retrieved",
+          "sha256": "d3dec12cc2a08b9269959ea290e0225a2b5cffdc7488e8945f8f05513ef56851"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Phoenix: Rowhammer Attacks on DDR5 with Self-Correcting Synchronization",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 2,
+      "listing_title": "28",
+      "corrected_title": null,
+      "url": "https://research.google/pubs/javascript(0):void",
+      "is_new_url": true,
+      "official_detail": null,
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/javascript(0):void",
+          "result": "failed",
+          "error": "404 Client Error: Not Found for url: https://research.google/pubs/javascript(0):void"
+        },
+        {
+          "url": "https://research.google/pubs/javascript(0):void",
+          "result": "failed",
+          "error": "404 Client Error: Not Found for url: https://research.google/pubs/javascript(0):void"
+        },
+        {
+          "url": "https://research.google/pubs/javascript(0):void",
+          "result": "failed",
+          "error": "404 Client Error: Not Found for url: https://research.google/pubs/javascript(0):void"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "rejected_non_paper",
+      "decision": "javascript分页链接/显示28不是论文；保留三次404尝试，不计入406真实论文或8新增。",
+      "reopen_when": null
+    },
+    {
+      "input_index": 3,
+      "listing_title": "Preview",
+      "corrected_title": "ARM MTE Performance in Practice",
+      "url": "https://research.google/pubs/arm-mte-performance-in-practice/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "dde7ab4ec08a056f95ded7fed3fd1c0c35514ebf529707c806bc4388f2e70924",
+        "local_path": ".cache/oct12-scan/official/00e993b75352a131839bdac61fdaaba9714cbc2e76dd292e8b85228f6b231ea3.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/arm-mte-performance-in-practice/",
+          "result": "retrieved",
+          "sha256": "dde7ab4ec08a056f95ded7fed3fd1c0c35514ebf529707c806bc4388f2e70924"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "ARM MTE Performance in Practice",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 4,
+      "listing_title": "ADCanvas: Accessible and Conversational Audio Description Authoring for Blind and Low Vision Creators",
+      "corrected_title": "ADCanvas: Accessible and Conversational Audio Description Authoring for Blind and Low Vision Creators",
+      "url": "https://research.google/pubs/adcanvas-accessible-and-conversational-audio-description-authoring-for-blind-and-low-vision-creators/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "6ffb92ac3838bdb7a50959dbda1a0e6332047a992245599a59783c050d581089",
+        "local_path": ".cache/oct12-scan/official/c8b5d9c3b71ec8626ea7f5ceabdfbaee582ad8c16176c3c567b9b7a77bf83b53.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/adcanvas-accessible-and-conversational-audio-description-authoring-for-blind-and-low-vision-creators/",
+          "result": "retrieved",
+          "sha256": "6ffb92ac3838bdb7a50959dbda1a0e6332047a992245599a59783c050d581089"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "ADCanvas: Accessible and Conversational Audio Description  Authoring for Blind and Low Vision Creators",
+        "status": "historical",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 5,
+      "listing_title": "Preview",
+      "corrected_title": "CoDaS: AI Co-Data-Scientist for Biomarker Discovery via Wearable Sensors",
+      "url": "https://research.google/pubs/codas-ai-co-data-scientist-for-biomarker-discovery-via-wearable-sensors/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "6348672a2f7c74bde0b6c608996b556e3de8becd0870bba05ec25ace4a5aaae6",
+        "local_path": ".cache/oct12-scan/official/010c059b84845d39e9944bda5bf0ed171ce351cf96de2684ee12de25f8142534.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/codas-ai-co-data-scientist-for-biomarker-discovery-via-wearable-sensors/",
+          "result": "retrieved",
+          "sha256": "6348672a2f7c74bde0b6c608996b556e3de8becd0870bba05ec25ace4a5aaae6"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "CoDaS: AI Co-Data-Scientist for Biomarker Discovery via Wearable Sensors",
+        "status": "ok",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 6,
+      "listing_title": "ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders",
+      "corrected_title": "ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders",
+      "url": "https://research.google/pubs/convapparel-a-benchmark-dataset-and-validation-framework-for-user-simulators-in-conversational-recommenders-2/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "c17c86b862c3bd80626b81c4adfdf3d6642e5d8b3ec69184109a79af85091f81",
+        "local_path": ".cache/oct12-scan/official/e7d562e4403bcd6939a34d93018457200bf4e1acafa59dd9a9899cb832cad9a3.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/convapparel-a-benchmark-dataset-and-validation-framework-for-user-simulators-in-conversational-recommenders-2/",
+          "result": "retrieved",
+          "sha256": "c17c86b862c3bd80626b81c4adfdf3d6642e5d8b3ec69184109a79af85091f81"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "ConvApparel: A Benchmark Dataset and Validation Framework for  User Simulators in Conversational Recommenders",
+        "status": "historical",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 7,
+      "listing_title": "TDXRay: Microarchitectural Side-Channel Analysis of Intel TDX for Real-World Workloads",
+      "corrected_title": "TDXRay: Microarchitectural Side-Channel Analysis of Intel TDX for Real-World Workloads",
+      "url": "https://research.google/pubs/tdxray-microarchitectural-side-channel-analysis-of-intel-tdx-for-real-world-workloads/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "7328557a2742b09346ef1fcfbfcd03a399f76600ba8d3be74896d6a0a3b41ada",
+        "local_path": ".cache/oct12-scan/official/8bbcea1036a5e84f77bcd914bdc239a0088b51ea292c55cc3a1dd76bcdfc33d6.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/tdxray-microarchitectural-side-channel-analysis-of-intel-tdx-for-real-world-workloads/",
+          "result": "retrieved",
+          "sha256": "7328557a2742b09346ef1fcfbfcd03a399f76600ba8d3be74896d6a0a3b41ada"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "TDXRay: Microarchitectural Side-Channel Analysis of Intel TDX  for Real-World Workloads",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 8,
+      "listing_title": "Securing Multi-Agent Systems: An Empirical Analysis of Security Prompt Hardening and Residual Risks",
+      "corrected_title": "Securing Multi-Agent Systems: An Empirical Analysis of Security Prompt Hardening and Residual Risks",
+      "url": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "bccb6b05725a620643c50be85e6bbb64fb6511626479462c4b484dd76c05edcd",
+        "local_path": ".cache/oct12-scan/official/9d6c90cfd8635b98ae913ee1a2157a6beb6aea8d756631cc05d81d1998144347.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+          "result": "retrieved",
+          "sha256": "bccb6b05725a620643c50be85e6bbb64fb6511626479462c4b484dd76c05edcd"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Securing Multi-Agent Systems: An Empirical Analysis of Security  Prompt Hardening and Residual Risks",
+        "status": "explicit_exception(date_or_identity_unresolved)",
+        "review_status": "explicit_exception",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 9,
+      "listing_title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "corrected_title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "url": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "c9c4c2a39e10d8e03501a20a4e2b151b22c7e532e26d9cbd4ceb5bce7c7a9e4b",
+        "local_path": ".cache/oct12-scan/official/349260d97cfe9a863d5910805e8944f0e563b18bb547a3326436e66f2ff21f95.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration/",
+          "result": "retrieved",
+          "sha256": "c9c4c2a39e10d8e03501a20a4e2b151b22c7e532e26d9cbd4ceb5bce7c7a9e4b"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code  Migration",
+        "status": "historical",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 10,
+      "listing_title": "Preview",
+      "corrected_title": "Are you speaking my languages? On spoken language adherence in multimodal LLMs",
+      "url": "https://research.google/pubs/are-you-speaking-my-languages-on-spoken-language-adherence-in-multimodal-llms/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "41254dc63c266d1f8621bf54459fc46ec75d16b94be2d3719a7eb58b0db19316",
+        "local_path": ".cache/oct12-scan/official/68b166dd0bbb0ad8c140abc97d0ca4f7fe06d43051c0c645d67a540f8527d745.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/are-you-speaking-my-languages-on-spoken-language-adherence-in-multimodal-llms/",
+          "result": "retrieved",
+          "sha256": "41254dc63c266d1f8621bf54459fc46ec75d16b94be2d3719a7eb58b0db19316"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Are you speaking my languages? On spoken language adherence in multimodal LLMs",
+        "status": "ok",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 11,
+      "listing_title": "Causal Armor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
+      "corrected_title": "Causal Armor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
+      "url": "https://research.google/pubs/causal-armor-efficient-indirect-prompt-injection-guardrails-via-causal-attribution/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "1b477d8ace1562253d78e6baa809bcf2838d3c1586f9736bcd8e627e297899f9",
+        "local_path": ".cache/oct12-scan/official/6224392daedebdfc850a19eb0977aa1557c60b605cc94204e703f808d8ae80a1.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/causal-armor-efficient-indirect-prompt-injection-guardrails-via-causal-attribution/",
+          "result": "retrieved",
+          "sha256": "1b477d8ace1562253d78e6baa809bcf2838d3c1586f9736bcd8e627e297899f9"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Causal Armor:  Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
+        "status": "historical",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 12,
+      "listing_title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "corrected_title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "44179d3eba9112c8cdccdfac69e4d16be82413e7319a7ab63af14ab564a90fdc",
+        "local_path": ".cache/oct12-scan/official/95f2ef230db06dc9a720c56657aa9e0c26d379520e6e21e16c3d29d35defd708.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+          "result": "retrieved",
+          "sha256": "44179d3eba9112c8cdccdfac69e4d16be82413e7319a7ab63af14ab564a90fdc"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Co-RedTeam:  Orchestrated Security Discovery and Exploitation with LLM Agents",
+        "status": "historical",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 13,
+      "listing_title": "“ Catching lightning in a bottle”: How Blind or Low Vision Creators Navigate Ideation Across Creative Domains",
+      "corrected_title": "“ Catching lightning in a bottle”: How Blind or Low Vision Creators Navigate Ideation Across Creative Domains",
+      "url": "https://research.google/pubs/catching-lightning-in-a-bottle-how-blind-or-low-vision-creators-navigate-ideation-across-creative-domains/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "5e2f47e788512bf35baee22214204fe18f57268cb0e3f1640b2737ded8f3d48a",
+        "local_path": ".cache/oct12-scan/official/9fd694cb90c2e31a65b703c0c2dd8b9ecf0b49d49f12de6e35663a911f3ce083.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/catching-lightning-in-a-bottle-how-blind-or-low-vision-creators-navigate-ideation-across-creative-domains/",
+          "result": "retrieved",
+          "sha256": "5e2f47e788512bf35baee22214204fe18f57268cb0e3f1640b2737ded8f3d48a"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "“ Catching lightning in a bottle”: How Blind or Low Vision  Creators Navigate Ideation Across Creative Domains",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 14,
+      "listing_title": "Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation",
+      "corrected_title": "Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation",
+      "url": "https://research.google/pubs/grounding-ai-agents-in-contracts-an-empirical-evaluation-of-spec-driven-test-generation/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "0fe94c083629e298216c5eeeeea61578fd986377698bab7ae7370c12d18d2b5c",
+        "local_path": ".cache/oct12-scan/official/26c1d1dff65211c24900f80eb1151b16707ab34c2e9ba608b4548297b221e384.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/grounding-ai-agents-in-contracts-an-empirical-evaluation-of-spec-driven-test-generation/",
+          "result": "retrieved",
+          "sha256": "0fe94c083629e298216c5eeeeea61578fd986377698bab7ae7370c12d18d2b5c"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Grounding AI Agents in Contracts:  An Empirical Evaluation of Spec-Driven Test Generation",
+        "status": "ok",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 15,
+      "listing_title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "corrected_title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "url": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration-2/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "0ec17cefaef6d5a4760106bb8e59ec64b482ab9e44baeff64f3e53f0726ab4ff",
+        "local_path": ".cache/oct12-scan/official/3b759d4fe73cc3c4065205b1f69d123c931afe82bc734222951271e664a95cb7.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration-2/",
+          "result": "retrieved",
+          "sha256": "0ec17cefaef6d5a4760106bb8e59ec64b482ab9e44baeff64f3e53f0726ab4ff"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code  Migration",
+        "status": "historical",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 16,
+      "listing_title": "StreamLens: An Open-Source ABR Simulation Environment for Multi-Region Buffering, Seeking, and Prefetching",
+      "corrected_title": "StreamLens: An Open-Source ABR Simulation Environment for Multi-Region Buffering, Seeking, and Prefetching",
+      "url": "https://research.google/pubs/streamlens-an-open-source-abr-simulation-environment-for-multi-region-buffering-seeking-and-prefetching/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "4865c1bc4b59cfdc5fc24de81248a587a05aa45a852206864f41bf2641d6fb8a",
+        "local_path": ".cache/oct12-scan/official/7440240d8fab43a6bdadd24afbc21141024bcfa43e2a8170e7271ade5245bbf0.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/streamlens-an-open-source-abr-simulation-environment-for-multi-region-buffering-seeking-and-prefetching/",
+          "result": "retrieved",
+          "sha256": "4865c1bc4b59cfdc5fc24de81248a587a05aa45a852206864f41bf2641d6fb8a"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "StreamLens: An Open-Source ABR Simulation Environment for  Multi-Region Buffering, Seeking, and Prefetching",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 17,
+      "listing_title": "Meta-Initialized Warm Pool Manager: Predictive Cold Start Mitigation for Serverless Functions via Adaptive Meta-Learning",
+      "corrected_title": "Meta-Initialized Warm Pool Manager: Predictive Cold Start Mitigation for Serverless Functions via Adaptive Meta-Learning",
+      "url": "https://research.google/pubs/meta-initialized-warm-pool-manager-predictive-cold-start-mitigation-for-serverless-functions-via-adaptive-meta-learning/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "a5979dfae28193f20fbcb693a5a310aa78f608b60b85e9916523033d0931cdf0",
+        "local_path": ".cache/oct12-scan/official/36acb3b375083ef244a94439cc44fb254155eb65ab572a9431ec88e0a8d403a9.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/meta-initialized-warm-pool-manager-predictive-cold-start-mitigation-for-serverless-functions-via-adaptive-meta-learning/",
+          "result": "retrieved",
+          "sha256": "a5979dfae28193f20fbcb693a5a310aa78f608b60b85e9916523033d0931cdf0"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Meta-Initialized Warm Pool Manager: Predictive Cold Start Mitigation for Serverless Functions via  Adaptive Meta-Learning",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 18,
+      "listing_title": "Data-usage descriptors as search metadata: the case of food security data and the National Data Platform (2015-2025)",
+      "corrected_title": "Data-usage descriptors as search metadata: the case of food security data and the National Data Platform (2015-2025)",
+      "url": "https://research.google/pubs/data-usage-descriptors-as-search-metadata-the-case-of-food-security-data-and-the-national-data-platform-2015-2025/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "ed79e167398f33b2e5df1e60d4e05d3277e8f611f7e2362107e6cf8c9f732055",
+        "local_path": ".cache/oct12-scan/official/60829b2653398ff87bea5e9b364872487341e1ec165febca6dae79807ffe3a81.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/data-usage-descriptors-as-search-metadata-the-case-of-food-security-data-and-the-national-data-platform-2015-2025/",
+          "result": "retrieved",
+          "sha256": "ed79e167398f33b2e5df1e60d4e05d3277e8f611f7e2362107e6cf8c9f732055"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Data-usage descriptors as search metadata: the case of food security data and  the National Data Platform (2015-2025)",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 19,
+      "listing_title": "MOSAIC-GS: MOnocular Scene Reconstruction via Advanced Initialization for Complex Dynamic Environments",
+      "corrected_title": "MOSAIC-GS: MOnocular Scene Reconstruction via Advanced Initialization for Complex Dynamic Environments",
+      "url": "https://research.google/pubs/mosaic-gs-monocular-scene-reconstruction-via-advanced-initialization-for-complex-dynamic-environments-2/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "cf8f844b766855546195b603f6d51a1d0fa72c279d315a3db98f058ac4074edd",
+        "local_path": ".cache/oct12-scan/official/e2a1594dd54d4c9b5f47e4114bc94573b437ee1c7270e56822320ad1553abb23.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/mosaic-gs-monocular-scene-reconstruction-via-advanced-initialization-for-complex-dynamic-environments-2/",
+          "result": "retrieved",
+          "sha256": "cf8f844b766855546195b603f6d51a1d0fa72c279d315a3db98f058ac4074edd"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "MOSAIC-GS: MOnocular Scene Reconstruction via Advanced Initialization for  Complex Dynamic Environments",
+        "status": "ok",
+        "review_status": "historical",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 20,
+      "listing_title": "Verification-Driven Interface Convergence: Methodology for Validating Functional Interoperability And Accelerating Subsystem Design for Concurrently Developed Compute and Component IPs in Coherent Subsystem",
+      "corrected_title": "Verification-Driven Interface Convergence: Methodology for Validating Functional Interoperability And Accelerating Subsystem Design for Concurrently Developed Compute and Component IPs in Coherent Subsystem",
+      "url": "https://research.google/pubs/verification-driven-interface-convergence-methodology-for-validating-functional-interoperability-and-accelerating-subsystem-design-for-concurrently-developed-compute-and-component-ips-in-coherent-subsystem-2/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "aa56c0c0e5d127de1ed8d979df8a94e78e07abdc5568ae4cad98962672a9e647",
+        "local_path": ".cache/oct12-scan/official/6a3cf42cbe51e6b92ba9081e71724bf1a26e79ca40264e9c81b0e0819df74383.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/verification-driven-interface-convergence-methodology-for-validating-functional-interoperability-and-accelerating-subsystem-design-for-concurrently-developed-compute-and-component-ips-in-coherent-subsystem-2/",
+          "result": "retrieved",
+          "sha256": "aa56c0c0e5d127de1ed8d979df8a94e78e07abdc5568ae4cad98962672a9e647"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "Verification-Driven Interface Convergence:  Methodology for Validating Functional Interoperability And Accelerating Subsystem Design for Concurrently Developed Compute and Component IPs in Coherent Subsystem",
+        "status": "out_of_scope",
+        "review_status": "out_of_scope",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 21,
+      "listing_title": "Preview",
+      "corrected_title": "AI Driven Verification Architectures - Scaling Formal Sign-off of High Bandwidth Data Crossbars via Generative AI and Required-Proof-Depth (RPD) Synthesis",
+      "url": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+      "is_new_url": false,
+      "official_detail": {
+        "sha256": "64e61442ffdd77e4eff50a74af60b5bfba4dd533b4d8742699e534c5b02e59e5",
+        "local_path": ".cache/oct12-scan/official/a913e0e1350eed20fd1b1c43afcaa6f92106b8c17ef84cfb774f027d7ebb07ea.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+          "result": "retrieved",
+          "sha256": "64e61442ffdd77e4eff50a74af60b5bfba4dd533b4d8742699e534c5b02e59e5"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "inherited_previous_url_review",
+      "prior_review": {
+        "path": "docs/research-audits/oct07-source-closure/google-source-review.json",
+        "title": "AI Driven Verification Architectures - Scaling Formal Sign-off of High Bandwidth Data Crossbars via Generative AI and Required-Proof-Depth (RPD) Synthesis",
+        "status": "explicit_exception",
+        "review_status": "explicit_exception",
+        "first_publication_date": null
+      },
+      "decision": "同一旧URL被Preview或列表排版噪声误识为新增；详情h1只纠正身份，继承既有有效审查，不重复全文扫读或无新证据重开归档。"
+    },
+    {
+      "input_index": 22,
+      "listing_title": "Approaching the Privacy-Enhancing Technologies Adoption from a Requirements Engineering Perspective",
+      "corrected_title": "Approaching the Privacy-Enhancing Technologies Adoption from a Requirements Engineering Perspective",
+      "url": "https://research.google/pubs/approaching-the-privacy-enhancing-technologies-adoption-from-a-requirements-engineering-perspective/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "22b276b53f5afd4c9bfa528c6b5d834c16496684917961d4dd646460c53531b1",
+        "local_path": ".cache/oct12-scan/official/8bdd9bbfed7fb4b736d59ab89af0ee3d8953c5e8ef308c094f1509b0b61042d4.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/approaching-the-privacy-enhancing-technologies-adoption-from-a-requirements-engineering-perspective/",
+          "result": "retrieved",
+          "sha256": "22b276b53f5afd4c9bfa528c6b5d834c16496684917961d4dd646460c53531b1"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Approaching the Privacy-Enhancing Technologies Adoption\" date",
+          "domains": [
+            "arxiv.org",
+            "research.google",
+            "dl.acm.org",
+            "ieeexplore.ieee.org"
+          ],
+          "result": "Google detail only, year2026; exact day not found"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Approaching the Privacy-Enhancing Technologies Adoption\" \"Kosenkov\"",
+          "result": "only Google year2026; no exact-title independent date used"
+        },
+        {
+          "tool": "curl Crossref title query",
+          "url": "https://api.crossref.org/works",
+          "query": "query.title=Approaching the Privacy-Enhancing Technologies Adoption from a Requirements Engineering Perspective&rows=3",
+          "result": "top result Supporting... same authors, DOI 10.1109/re68928.2026.00032; not exact title"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2606.17387",
+          "result": "related title/authors/abstract/submission history inspected"
+        },
+        {
+          "tool": "curl",
+          "url": "https://api.crossref.org/works/10.1109/re68928.2026.00032",
+          "result": "same authors and August2026 month publication inspected"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "rejected_or_out_of_scope",
+      "read_scope": "official detail title/authors/abstract plus related-title primary arxiv and publisher DOI metadata",
+      "identity": {
+        "official_authors": [
+          "Oleksandr Kosenkov",
+          "Danica Vranjanin",
+          "Abhinava Singh",
+          "Vadym Honcharenko",
+          "Volodymyr Spirin"
+        ],
+        "related_title": "Supporting the Adoption of Privacy-Enhancing Technologies through Requirements Engineering",
+        "arxiv_id": "2606.17387",
+        "doi": "10.1109/re68928.2026.00032",
+        "match": "all five authors identical (order differs); industrial-challenge PET adoption/requirements abstract substantively matches; title variant association is inferred, not an official alias link",
+        "confidence": "strong_related_title_variant_not_exact_title_identity"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2606.17387",
+        "sha256": "2c948f3cabc325e33f4de8963515107a9c6872b8f970b496fbd4d47b1e01b82d",
+        "local_path": ".cache/oct12-scan/official/arxiv-2606.17387.html",
+        "location": "Submission history [v1]",
+        "date": "2026-06-16",
+        "timestamp": "2026-06-16T00:49:10Z",
+        "kind": "verified_related_title_variant_arxiv_v1",
+        "exact_google_title_first_publication_date": null
+      },
+      "additional_primary_evidence": {
+        "url": "https://api.crossref.org/works/10.1109/re68928.2026.00032",
+        "sha256": "4d09befb40019bdce103745cd684cf5a029f6e2aff9b92d455fd29b695d8a7f9",
+        "local_path": ".cache/oct12-scan/official/crossref-re68928-00032.json",
+        "publication_precision": "month",
+        "publication_month": "2026-08",
+        "identity_evidence": "same five authors; Vadym Honcharenko affiliation Google; publisher resource IEEE document11676699"
+      },
+      "decision": "PET工业挑战/需求工程观点，未提出本批LLM/agent核心实现算法，范围外。强相关改题预印本已在6月公开；官网精确题名的首次公开日仍不强行填写，非阻塞归档该题名映射未决点。",
+      "nonblocking_archive": {
+        "reason": "官网只给2026，精确题名搜索无独立日期；找到的是同作者/摘要相关改题版本，不能据此伪造精确题名首次发表日。",
+        "reopen_when": "Google官方链接/作者或出版社确认改题关系，或精确题名原版给出日期；若只补日期且无新增核心技术，不改变范围外决定。"
+      },
+      "reopen_when": "官方改题关系/精确日期或新技术范围证据出现。"
+    },
+    {
+      "input_index": 23,
+      "listing_title": "Trust, but Validate the Instrument: Auditing AI-Generated RTL Verification Plans on Authored Security-Regression Proxies",
+      "corrected_title": "Trust, but Validate the Instrument: Auditing AI-Generated RTL Verification Plans on Authored Security-Regression Proxies",
+      "url": "https://research.google/pubs/trust-but-validate-the-instrument-auditing-ai-generated-rtl-verification-plans-on-authored-security-regression-proxies/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "853632e98bb89dc0c4b38d7819e9e794f1556c12073814749f4864357a30ce46",
+        "local_path": ".cache/oct12-scan/official/855107a5cd4a38d89ceaf0f8481c90fda149b7c5d0301207b7fc074c400443be.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/trust-but-validate-the-instrument-auditing-ai-generated-rtl-verification-plans-on-authored-security-regression-proxies/",
+          "result": "retrieved",
+          "sha256": "853632e98bb89dc0c4b38d7819e9e794f1556c12073814749f4864357a30ce46"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Trust, but Validate the Instrument: Auditing AI-Generated RTL Verification Plans on Authored Security-Regression Proxies\"",
+          "result": "located official arxiv 2609.19844"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2609.19844",
+          "result": "title/abstract/authors/submission history inspected",
+          "sha256": "80a5e495ba792f64b13aaeff82fa4a20271ddd063281c765a55ec69fa845e34b",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "historical_before_window",
+      "read_scope": "official_detail_title_authors_abstract_plus_primary_arxiv_submission_history",
+      "identity": {
+        "work_match": "exact normalized title and matching substantive abstract; author display-name differences retained",
+        "official_display_authors": [
+          "Hang Xiao",
+          "Chuhong Xu",
+          "Mark Zhou",
+          "Iris Qian",
+          "Annabel Yi"
+        ],
+        "arxiv_authors": [
+          "Hang Xiao",
+          "Chuhong Xu",
+          "Kainan Zhou",
+          "Gangzhen Qian",
+          "Lu Yi"
+        ],
+        "author_aliases_verified": false,
+        "note": "同一题名/摘要构成作品关联证据；Mark/Kainan、Iris/Gangzhen、Annabel/Lu未独立核为同一人的别名，不作个人身份断言。"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2609.19844",
+        "sha256": "80a5e495ba792f64b13aaeff82fa4a20271ddd063281c765a55ec69fa845e34b",
+        "local_path": ".cache/oct12-scan/official/arxiv-2609.19844.html",
+        "location": "Submission history [v1]",
+        "date": "2026-09-17",
+        "timestamp": "2026-09-17T07:54:54Z",
+        "kind": "verified_arxiv_v1_not_claimed_earliest_public_release",
+        "source_transport": "curl official arxiv original HTML; latest revision history supersedes stale web cache"
+      },
+      "revision_in_requested_window": {
+        "version": "v2",
+        "timestamp": "2026-10-09T04:59:05Z"
+      },
+      "decision": "v1预印本在2026-10-08前；本次Google列表新增并非窗口内首次论文公开。保留为仪器/contract故障审计，不宣称prompt-effect；官方摘要报告provider接受与semantic执行脱节。",
+      "reopen_when": "如更新论文政策需要覆盖窗口内revision，读对应版本变更/方法评测后另行决定；本记录不称revision全文已审。"
+    },
+    {
+      "input_index": 24,
+      "listing_title": "Claim-Gated Source-Risk Auditing for Generative Search",
+      "corrected_title": "Claim-Gated Source-Risk Auditing for Generative Search",
+      "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "6e7ea93d587372c97a188546321bb75e95067a876fb6a5aa5e9cb4f9c668e2f3",
+        "local_path": ".cache/oct12-scan/official/99dc1e63a9deec474900bc6de430a1fc04e2cdbe3e4cf738056c6b2c950502f3.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search/",
+          "result": "retrieved",
+          "sha256": "6e7ea93d587372c97a188546321bb75e95067a876fb6a5aa5e9cb4f9c668e2f3"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Claim-Gated Source-Risk Auditing for Generative Search\"",
+          "result": "located official arxiv 2609.29145"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2609.29145",
+          "result": "title/abstract/authors/submission history inspected",
+          "sha256": "a5ee3e2cc28a3b57fdf0452adcd238b581bdcebd14db345187faa869d60c7c36",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "historical_before_window",
+      "read_scope": "official_detail_title_authors_abstract_plus_primary_arxiv_submission_history",
+      "identity": {
+        "work_match": "exact normalized title and matching substantive abstract; author display-name differences retained",
+        "official_display_authors": [
+          "Mark Zhou",
+          "Chuhong Xu",
+          "Iris Qian",
+          "Zhaoyi Li"
+        ],
+        "arxiv_authors": [
+          "Kainan Zhou",
+          "Chuhong Xu",
+          "Gangzhen Qian",
+          "Zhaoyi Li"
+        ],
+        "author_aliases_verified": false,
+        "note": "同一题名/摘要构成作品关联证据；Mark/Kainan、Iris/Gangzhen、Annabel/Lu未独立核为同一人的别名，不作个人身份断言。"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2609.29145",
+        "sha256": "a5ee3e2cc28a3b57fdf0452adcd238b581bdcebd14db345187faa869d60c7c36",
+        "local_path": ".cache/oct12-scan/official/arxiv-2609.29145.html",
+        "location": "Submission history [v1]",
+        "date": "2026-09-24",
+        "timestamp": "2026-09-24T07:22:14Z",
+        "kind": "verified_arxiv_v1_not_claimed_earliest_public_release",
+        "source_transport": "curl official arxiv original HTML; latest revision history supersedes stale web cache"
+      },
+      "revision_in_requested_window": {
+        "version": "v2",
+        "timestamp": "2026-10-09T05:01:42Z"
+      },
+      "decision": "v1预印本在2026-10-08前；本次Google列表新增并非窗口内首次论文公开。有限synthetic contract conformance，不是语义detector accuracy或用户收益。",
+      "reopen_when": "如更新论文政策需要覆盖窗口内revision，读对应版本变更/方法评测后另行决定；本记录不称revision全文已审。"
+    },
+    {
+      "input_index": 25,
+      "listing_title": "IBBench-Light: A Paired Evaluation of Task-Conditioned Responses to External Directives",
+      "corrected_title": "IBBench-Light: A Paired Evaluation of Task-Conditioned Responses to External Directives",
+      "url": "https://research.google/pubs/ibbench-light-a-paired-evaluation-of-task-conditioned-responses-to-external-directives/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "8d56f48322b9886544681001f1cf33deaad03f36300704215e7db65d9f7f2c4f",
+        "local_path": ".cache/oct12-scan/official/56b835b8535f8786df21888e885744bedacf2d8735f6e4573164369a610d4c6d.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/ibbench-light-a-paired-evaluation-of-task-conditioned-responses-to-external-directives/",
+          "result": "retrieved",
+          "sha256": "8d56f48322b9886544681001f1cf33deaad03f36300704215e7db65d9f7f2c4f"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"IBBench-Light: A Paired Evaluation of Task-Conditioned Responses to External Directives\"",
+          "result": "located official arxiv 2609.13725"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2609.13725",
+          "result": "title/abstract/authors/submission history inspected",
+          "sha256": "bcdf8dbadb2ea8a4b365eac35887bbe0c692e642f09218deaab1dd6ec495c674",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "historical_before_window",
+      "read_scope": "official_detail_title_authors_abstract_plus_primary_arxiv_submission_history",
+      "identity": {
+        "work_match": "exact normalized title and matching substantive abstract; author display-name differences retained",
+        "official_display_authors": [
+          "Mark Zhou",
+          "Zhaoyi Li",
+          "Janet Sung",
+          "Iris Qian",
+          "Hang Xiao"
+        ],
+        "arxiv_authors": [
+          "Kainan Zhou",
+          "Zhaoyi Li",
+          "Janet Sung",
+          "Gangzhen Qian",
+          "Hang Xiao"
+        ],
+        "author_aliases_verified": false,
+        "note": "同一题名/摘要构成作品关联证据；Mark/Kainan、Iris/Gangzhen、Annabel/Lu未独立核为同一人的别名，不作个人身份断言。"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2609.13725",
+        "sha256": "bcdf8dbadb2ea8a4b365eac35887bbe0c692e642f09218deaab1dd6ec495c674",
+        "local_path": ".cache/oct12-scan/official/arxiv-2609.13725.html",
+        "location": "Submission history [v1]",
+        "date": "2026-09-12",
+        "timestamp": "2026-09-12T05:27:20Z",
+        "kind": "verified_arxiv_v1_not_claimed_earliest_public_release",
+        "source_transport": "curl official arxiv original HTML; latest revision history supersedes stale web cache"
+      },
+      "revision_in_requested_window": {
+        "version": "v3",
+        "timestamp": "2026-10-09T04:54:13Z"
+      },
+      "decision": "v1预印本在2026-10-08前；本次Google列表新增并非窗口内首次论文公开。配对task/output-contract benchmark；single-run synthetic结果不推广成adaptive/role/tool安全。",
+      "reopen_when": "如更新论文政策需要覆盖窗口内revision，读对应版本变更/方法评测后另行决定；本记录不称revision全文已审。"
+    },
+    {
+      "input_index": 26,
+      "listing_title": "Query-Aware Source-Risk Triage for Retrieval-Augmented Generation",
+      "corrected_title": "Query-Aware Source-Risk Triage for Retrieval-Augmented Generation",
+      "url": "https://research.google/pubs/query-aware-source-risk-triage-for-retrieval-augmented-generation/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "5926d4703ab55fc912c39e719577c4c1f15617f25b52df6ea08dfdb136dab272",
+        "local_path": ".cache/oct12-scan/official/65ac318bb8be9fc74b7a6fc696fb578ee07fa08405b6e5c6d5c17f1800cebd08.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/query-aware-source-risk-triage-for-retrieval-augmented-generation/",
+          "result": "retrieved",
+          "sha256": "5926d4703ab55fc912c39e719577c4c1f15617f25b52df6ea08dfdb136dab272"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Query-Aware Source-Risk Triage for Retrieval-Augmented Generation\"",
+          "result": "located official arxiv 2609.16564"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2609.16564",
+          "result": "title/abstract/authors/submission history inspected",
+          "sha256": "86c8ea958e01c88df710026435b1ac58eed4c3a279050828790deb0cc4d6f573",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "historical_before_window",
+      "read_scope": "official_detail_title_authors_abstract_plus_primary_arxiv_submission_history",
+      "identity": {
+        "work_match": "exact normalized title and matching substantive abstract; author display-name differences retained",
+        "official_display_authors": [
+          "Mark Zhou",
+          "Iris Qian",
+          "Chuhong Xu",
+          "Annabel Yi"
+        ],
+        "arxiv_authors": [
+          "Kainan Zhou",
+          "Gangzhen Qian",
+          "Chuhong Xu",
+          "Lu Yi"
+        ],
+        "author_aliases_verified": false,
+        "note": "同一题名/摘要构成作品关联证据；Mark/Kainan、Iris/Gangzhen、Annabel/Lu未独立核为同一人的别名，不作个人身份断言。"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2609.16564",
+        "sha256": "86c8ea958e01c88df710026435b1ac58eed4c3a279050828790deb0cc4d6f573",
+        "local_path": ".cache/oct12-scan/official/arxiv-2609.16564.html",
+        "location": "Submission history [v1]",
+        "date": "2026-09-15",
+        "timestamp": "2026-09-15T03:01:27Z",
+        "kind": "verified_arxiv_v1_not_claimed_earliest_public_release",
+        "source_transport": "curl official arxiv original HTML; latest revision history supersedes stale web cache"
+      },
+      "revision_in_requested_window": null,
+      "decision": "v1预印本在2026-10-08前；本次Google列表新增并非窗口内首次论文公开。single-coded200URL pilot、synthetic20k workload、oracle page gate，不是已部署review workload或下游answer-quality收益。",
+      "reopen_when": "新增方法/评测证据或纳入下一批范围时重开；当前无新增实现。"
+    },
+    {
+      "input_index": 27,
+      "listing_title": "Protocol-Sensitive Evaluation of Log Anomaly Detection: Component Costs and Target-Access Sensitivity on HDFS and BGL",
+      "corrected_title": "Protocol-Sensitive Evaluation of Log Anomaly Detection: Component Costs and Target-Access Sensitivity on HDFS and BGL",
+      "url": "https://research.google/pubs/protocol-sensitive-evaluation-of-log-anomaly-detection-component-costs-and-target-access-sensitivity-on-hdfs-and-bgl/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "880f710baebbc4916f1107c260c242cd837609e1a99c9638be47e7baedf88c7d",
+        "local_path": ".cache/oct12-scan/official/39f994b97578387427125e3128bfc2649d7feca3fc7bc707eff49a257b139f0c.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/protocol-sensitive-evaluation-of-log-anomaly-detection-component-costs-and-target-access-sensitivity-on-hdfs-and-bgl/",
+          "result": "retrieved",
+          "sha256": "880f710baebbc4916f1107c260c242cd837609e1a99c9638be47e7baedf88c7d"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Protocol-Sensitive Evaluation of Log Anomaly Detection: Component Costs and Target-Access Sensitivity on HDFS and BGL\"",
+          "result": "located official arxiv 2610.05807"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2610.05807",
+          "result": "title/abstract/authors/submission history inspected",
+          "sha256": "0e36e9b9621d6680b7628ee3183b3409438b33eeb63c62b7bf2c3af2281d0e36",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "rejected_or_out_of_scope",
+      "read_scope": "official_detail_title_authors_abstract_plus_primary_arxiv_submission_history",
+      "identity": {
+        "work_match": "exact normalized title and matching substantive abstract; author display-name differences retained",
+        "official_display_authors": [
+          "Hang Xiao",
+          "Janet Sung",
+          "Zhaoyi Li",
+          "Iris Qian",
+          "Chuhong Xu"
+        ],
+        "arxiv_authors": [
+          "Hang Xiao",
+          "Janet Sung",
+          "Zhaoyi Li",
+          "Gangzhen Qian",
+          "Chuhong Xu"
+        ],
+        "author_aliases_verified": false,
+        "note": "同一题名/摘要构成作品关联证据；Mark/Kainan、Iris/Gangzhen、Annabel/Lu未独立核为同一人的别名，不作个人身份断言。"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2610.05807",
+        "sha256": "0e36e9b9621d6680b7628ee3183b3409438b33eeb63c62b7bf2c3af2281d0e36",
+        "local_path": ".cache/oct12-scan/official/arxiv-2610.05807.html",
+        "location": "Submission history [v1]",
+        "date": "2026-10-05",
+        "timestamp": "2026-10-05T04:59:06Z",
+        "kind": "verified_arxiv_v1_not_claimed_earliest_public_release",
+        "source_transport": "curl official arxiv original HTML; latest revision history supersedes stale web cache"
+      },
+      "revision_in_requested_window": null,
+      "decision": "HDFS/BGL count/sequence/semantic固定配置与XGBoost协议比较；未提出本批LLM/agent/post-training核心算法，范围外。",
+      "reopen_when": "新增方法/评测证据或纳入下一批范围时重开；当前无新增实现。"
+    },
+    {
+      "input_index": 28,
+      "listing_title": "Preview",
+      "corrected_title": "People, Roles, and Growth: How HCI Careers Are Evolving",
+      "url": "https://research.google/pubs/people-roles-and-growth-how-hci-careers-are-evolving/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "d9992207ccca6095b187079bc53e4f27723dc6cf547a1a46e7f589cf086a5501",
+        "local_path": ".cache/oct12-scan/official/85a75f94701acdad81b8b29d13c3e6f82730f298c0e08b74551f8a95e11594d6.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/people-roles-and-growth-how-hci-careers-are-evolving/",
+          "result": "retrieved",
+          "sha256": "d9992207ccca6095b187079bc53e4f27723dc6cf547a1a46e7f589cf086a5501"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"People, Roles, and Growth: How HCI Careers Are Evolving\"",
+          "result": "Google detail located; exact day absent"
+        },
+        {
+          "tool": "web.open",
+          "url": "https://dl.acm.org/doi/10.1145/3796540",
+          "result": "Internal Error"
+        },
+        {
+          "tool": "curl",
+          "url": "https://dl.acm.org/doi/10.1145/3796540",
+          "result": "HTTP 403 Cloudflare challenge; not bypassed"
+        },
+        {
+          "tool": "curl",
+          "url": "https://api.crossref.org/works/10.1145/3796540",
+          "result": "publisher-deposited record retrieved; title/authors/published-online inspected",
+          "sha256": "5faa713e511d2d3ae562f82d64c238233488d501f2a510bfc0c402a2e5eb6ccd"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "rejected_or_out_of_scope",
+      "read_scope": "official detail h1/authors/venue; publisher-deposited DOI metadata abstract/date",
+      "identity": {
+        "official_authors": [
+          "Josh Andres",
+          "Preethi Srinivas"
+        ],
+        "doi": "10.1145/3796540",
+        "match": "exact title and both authors; Crossref publisher ACM with Google affiliation for Preethi Srinivas"
+      },
+      "date_evidence": {
+        "url": "https://api.crossref.org/works/10.1145/3796540",
+        "sha256": "5faa713e511d2d3ae562f82d64c238233488d501f2a510bfc0c402a2e5eb6ccd",
+        "local_path": ".cache/oct12-scan/official/crossref-3796540.json",
+        "location": "message.published-online / message.assertion[name=published]",
+        "date": "2026-02-26",
+        "kind": "publisher_deposited_online_publication_date",
+        "print_issue_date": "2026-03-01"
+      },
+      "decision": "真实ACM Interactions文章，不是Preview标题；HCI/UX职业角色系列，无本批LLM/agent/post-training实现算法，范围外且online日期窗口前。",
+      "reopen_when": "仅新证据表明具有本批核心技术贡献时重开；无需等待ACM网页解除403。"
+    },
+    {
+      "input_index": 29,
+      "listing_title": "Bounded Provisional Visibility: Controlling Poisoning Exposure in Continuously Ingested RAG Vector Stores",
+      "corrected_title": "Bounded Provisional Visibility: Controlling Poisoning Exposure in Continuously Ingested RAG Vector Stores",
+      "url": "https://research.google/pubs/bounded-provisional-visibility-controlling-poisoning-exposure-in-continuously-ingested-rag-vector-stores/",
+      "is_new_url": true,
+      "official_detail": {
+        "sha256": "3654f3226bcc0114bcc50bc5e68363c49b73f74547c6b62109e338d0b531e811",
+        "local_path": ".cache/oct12-scan/official/86b17af7bdb8f19ebde75704b88af157c4372eb7067f071ba4dbc350013e1172.html",
+        "local_sha256_verified": true,
+        "locations": [
+          "h1.headline-3",
+          "citation_title",
+          "citation_author",
+          "citation_publication_date",
+          "Abstract"
+        ],
+        "publication_date_precision": "year_only",
+        "publication_year": 2026
+      },
+      "source_attempts": [
+        {
+          "url": "https://research.google/pubs/bounded-provisional-visibility-controlling-poisoning-exposure-in-continuously-ingested-rag-vector-stores/",
+          "result": "retrieved",
+          "sha256": "3654f3226bcc0114bcc50bc5e68363c49b73f74547c6b62109e338d0b531e811"
+        },
+        {
+          "tool": "web.search_query",
+          "query": "\"Bounded Provisional Visibility: Controlling Poisoning Exposure in Continuously Ingested RAG Vector Stores\"",
+          "result": "located official arxiv 2610.05826"
+        },
+        {
+          "tool": "web.open and curl",
+          "url": "https://arxiv.org/abs/2610.05826",
+          "result": "title/abstract/authors/submission history inspected",
+          "sha256": "87c8f3fd002faa117a1f4807c800327722733fbd81e978a68d5f4b95344b540f",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "new_implementation_claimed": false,
+      "counts_as_new_window_accepted": false,
+      "status": "historical_before_window",
+      "read_scope": "official_detail_title_authors_abstract_plus_primary_arxiv_submission_history",
+      "identity": {
+        "work_match": "exact normalized title and matching substantive abstract; author display-name differences retained",
+        "official_display_authors": [
+          "Chuhong Xu",
+          "Annabel Yi",
+          "Iris Qian",
+          "Mark Zhou",
+          "Zhaoyi Li",
+          "Hang Xiao"
+        ],
+        "arxiv_authors": [
+          "Chuhong Xu",
+          "Lu Yi",
+          "Gangzhen Qian",
+          "Kainan Zhou",
+          "Zhaoyi Li",
+          "Hang Xiao"
+        ],
+        "author_aliases_verified": false,
+        "note": "同一题名/摘要构成作品关联证据；Mark/Kainan、Iris/Gangzhen、Annabel/Lu未独立核为同一人的别名，不作个人身份断言。"
+      },
+      "date_evidence": {
+        "url": "https://arxiv.org/abs/2610.05826",
+        "sha256": "87c8f3fd002faa117a1f4807c800327722733fbd81e978a68d5f4b95344b540f",
+        "local_path": ".cache/oct12-scan/official/arxiv-2610.05826.html",
+        "location": "Submission history [v1]",
+        "date": "2026-10-05",
+        "timestamp": "2026-10-05T05:28:57Z",
+        "kind": "verified_arxiv_v1_not_claimed_earliest_public_release",
+        "source_transport": "curl official arxiv original HTML; latest revision history supersedes stale web cache"
+      },
+      "revision_in_requested_window": null,
+      "decision": "v1预印本在2026-10-08前；本次Google列表新增并非窗口内首次论文公开。真实exact/Milvus系统协议与可用性/新鲜度权衡；poison可见性仍受verifier false promotion限制。",
+      "reopen_when": "新增方法/评测证据或纳入下一批范围时重开；当前无新增实现。"
+    }
+  ],
+  "historical_primary_date_confirmations": [
+    {
+      "id": "2602.16938",
+      "date": "2026-02-18",
+      "timestamp": "2026-02-18T23:00:21Z",
+      "sha": "08227d31f387b2fd19889c54d6fedf41f532224475ed4de16c66c5270dcab86f",
+      "title": "ConvApparel",
+      "kind": "reverified historical primary date",
+      "url": "https://arxiv.org/abs/2602.16938",
+      "local_path": ".cache/oct12-scan/official/arxiv-2602.16938.html",
+      "location": "Title / Authors / Submission history [v1]",
+      "date_kind": "arxiv_v1_not_claimed_earliest_public_release",
+      "counts_as_new_url": false
+    },
+    {
+      "id": "2602.02164",
+      "date": "2026-02-02",
+      "timestamp": "2026-02-02T14:38:45Z",
+      "sha": "4084f76988384e09f9726d9da5faef83ea29f79ca8a47f3202f0006af684a1a7",
+      "title": "Co-RedTeam",
+      "kind": "reverified historical primary date",
+      "url": "https://arxiv.org/abs/2602.02164",
+      "local_path": ".cache/oct12-scan/official/arxiv-2602.02164.html",
+      "location": "Title / Authors / Submission history [v1]",
+      "date_kind": "arxiv_v1_not_claimed_earliest_public_release",
+      "counts_as_new_url": false
+    },
+    {
+      "id": "2602.07918",
+      "date": "2026-02-08",
+      "timestamp": "2026-02-08T11:34:08Z",
+      "sha": "424b168e016464b7699677f665e1b053535a5cc9ad20b4eada9df539ba6ffe3b",
+      "title": "Causal Armor",
+      "kind": "new direct original submission-history evidence; no inferred exact date",
+      "url": "https://arxiv.org/abs/2602.07918",
+      "local_path": ".cache/oct12-scan/official/arxiv-2602.07918.html",
+      "location": "Title / Authors / Submission history [v1]",
+      "date_kind": "arxiv_v1_not_claimed_earliest_public_release",
+      "counts_as_new_url": false
+    }
+  ],
+  "notes": [
+    "Google展示作者名与arxiv姓名差异被保留，作品关联不等于个人别名身份断言。",
+    "精确日期取原始submission history或publisher-deposited published-online；不取搜索抓取/发布日期、DOI created/indexed/deposited时间。",
+    "Trust RTL/Claim-Gated/IBBench窗口内revision经curl原始页面查实；没有把旧v1重记为窗口首次发表，也未声称新版全文已读。",
+    "PET改题关联仍明确是推断和非阻塞未决点；不伪造官网精确题名首次日期。",
+    "本文件不修改root最终official-review或discovery状态。"
+  ]
+}

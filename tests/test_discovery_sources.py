@@ -745,3 +745,14 @@ def test_terminal_review_batch_requires_every_new_candidate_decision():
     }]}, batch_name="test")
     assert batch["candidates"][0]["status"] == "rejected"
     assert batch["candidates"][0]["matched_queries"] == ["recsys-general"]
+
+
+def test_google_preview_and_broken_javascript_are_not_publications():
+    source = DiscoverySource("Google", "official-research", "https://research.google/pubs/")
+    html = ('<a href="/pubs/real-paper/">Real Paper</a>'
+            '<a href="/pubs/real-paper/">Preview</a>'
+            '<a href="javascript(0):void">28</a>'
+            '<a href="javascript:void(0)">29</a>')
+    assert publication_records(source, html) == (
+        ("Real Paper", "https://research.google/pubs/real-paper/", None),
+    )

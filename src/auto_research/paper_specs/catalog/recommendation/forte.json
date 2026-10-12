@@ -1,0 +1,8 @@
+{
+  "domain": "recommendation",
+  "key": "forte",
+  "detail_path": "reproductions/2610.13806-forte/README.md",
+  "first_author": "Vishnu Arun",
+  "first_author_affiliation": "Pinterest",
+  "adapter": {"spec_key": "forte"}
+}

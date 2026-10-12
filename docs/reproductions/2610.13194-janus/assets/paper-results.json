@@ -1,0 +1,23 @@
+{
+  "source": "original paper only",
+  "source_url": "https://arxiv.org/html/2610.13194v1",
+  "local_run": false,
+  "reviewed_at": "2026-10-12",
+  "rows": [
+    {
+      "metric": "MLS-Bench-Lite test score, DeepSeek-V4 Flash",
+      "reported_value": "41.07",
+      "comparator_or_protocol": "Codex 38.91"
+    },
+    {
+      "metric": "MLS-Bench-Lite test score, GPT-5.6 Sol",
+      "reported_value": "46.88",
+      "comparator_or_protocol": "Codex 44.81"
+    },
+    {
+      "metric": "MLS-Bench-Lite test score, Codex(GPT-5.6 Sol)",
+      "reported_value": "49.78",
+      "comparator_or_protocol": "30任务、12领域"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+graph LR
+ A[原始会话] --> B[模型metadata与source link]
+ Q[当前query] --> C[初始metadata检索]
+ B --> C
+ C --> D[query条件memory cache]
+ D --> E[自主SearchMeta或ReadRaw]
+ E --> D
+ D --> F[Answer]
+ F --> G[隔离gold外部评分]

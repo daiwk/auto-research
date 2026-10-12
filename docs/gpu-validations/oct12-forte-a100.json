@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "adapter_key": "forte",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_forte.py",
+    "--dataset-dir",
+    "data",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--epochs",
+    "6",
+    "--batch-size",
+    "512",
+    "--output",
+    "runs/forte-42.json"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "dataset": {
+    "dataset": "MovieLens-100K",
+    "revision": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+    "source": "https://raw.githubusercontent.com/rudrasingh21/Data-ML-100k-/f74a79d7debb00d39a8b757876b6b2038d52825c/ml-100k.zip",
+    "ratings_sha256": "06416e597f82b7342361e41163890c81036900f418ad91315590814211dca490",
+    "split": "chronological 80/10/10; normalization fitted on train timestamps only",
+    "counts": {
+      "train": 80000,
+      "validation": 10000,
+      "test": 10000
+    },
+    "limit": null
+  },
+  "checkpoint": {
+    "initialization": "from-scratch matched multi-head public-feature ranker",
+    "architecture_source_commit": "19dd518e9df304f0a3a908c15c3c83709d1e36d8"
+  },
+  "result": "passed",
+  "metrics": {
+    "head0.roc_auc": {
+      "mean": 0.7128178655931116,
+      "std": 0.002172098564757264
+    },
+    "head0.pr_auc": {
+      "mean": 0.7523133398178442,
+      "std": 0.001976027560883068
+    },
+    "head1.roc_auc": {
+      "mean": 0.7372196910103618,
+      "std": 0.0019207970637459446
+    },
+    "head1.pr_auc": {
+      "mean": 0.9277227577559336,
+      "std": 0.0004376327530813698
+    }
+  },
+  "execution_checks": {
+    "completed_seeds": 3,
+    "retrained_arms_per_seed": 3,
+    "selected_removal_counts": [
+      0,
+      0,
+      0
+    ],
+    "failed_retirement_gates_retained": true,
+    "test_selection": false,
+    "online_ab_run": false
+  },
+  "executed_source_sha256": {
+    "scripts/run_forte.py": "a534a1f700c732fdea99fcbf4cd96effb351902b26c9aeaea0f0e7246bf59464",
+    "src/auto_research/reproductions/forte/experiment.py": "f3d9541f29abf08e15af1aec36fd30f3a8b77794afb883c76f5ce7bb93d8f891",
+    "src/auto_research/datasets.py": "d763805cbee52957e72fa804f25a065905a22718b1324a576b7cf2fb11c06bce"
+  },
+  "limitations": [
+    "All three seeds selected the incumbent: no feature set passed every gate.",
+    "Execution validation, not measured production efficiency or improvement.",
+    "Portable command uses a relative public dataset cache; no machine identity or weights committed."
+  ],
+  "provenance": {
+    "commit": "19dd518e9df304f0a3a908c15c3c83709d1e36d8",
+    "artifact_path": "docs/gpu-validations/oct12-forte-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13806-forte/metrics/movielens-100k-a100-seeds42-44.json",
+    "checkpoint_committed": false
+  }
+}

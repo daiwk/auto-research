@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.13141) |
-| 公司/机构 | Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST（第一作者署名单位） |
+| 公司/机构 | Tencent HY LLM Frontier / HKUST (Guangzhou) / HKUST |
 | 首次公开日期 | 2026-09-11（arXiv v1） |
-| 原文开源代码 | 是：[Tencent-Hunyuan/Simple-Attention-Sparsification](https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/Tencent-Hunyuan/Simple-Attention-Sparsification) |
 | Adapter | `sas-attention` |
 | 本地复现代码 | [`src/auto_research/reproductions/sas_attention/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/sas_attention/) |
 

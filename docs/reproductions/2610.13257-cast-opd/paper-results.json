@@ -1,0 +1,18 @@
+{
+  "paper_reported": true,
+  "measured_locally": false,
+  "paper_url": "https://arxiv.org/html/2610.13257v1",
+  "source_revision": "v1",
+  "reviewed_at": "2026-10-12",
+  "metric_unit": "percent unless explicitly count",
+  "metrics": {
+    "mistral_cast_avg6_three_seed_mean": 47.01,
+    "mistral_cast_avg6_three_seed_std": 0.28,
+    "llama_cast_avg6_three_seed_mean": 43.72,
+    "llama_cast_avg6_three_seed_std": 0.16,
+    "matched_uniform_avg6": 45.07,
+    "cast_avg6": 47.22
+  },
+  "local_results": null,
+  "claim_scope": "Original paper values only; not local reproduction evidence"
+}

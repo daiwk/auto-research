@@ -1,0 +1,15 @@
+{
+  "arxiv_v1": "https://arxiv.org/html/2610.13025v1",
+  "published": "2026-10-09",
+  "reviewed_at": "2026-10-12",
+  "institution_source": "original PDF first page; HTML institution macro unresolved",
+  "upstream_code": null,
+  "upstream_status": "否：未找到原作者公开实现（2026-10-12 核查原文与作者项目链接；机构以原 PDF 首页为准）",
+  "figure": {
+    "number": "2",
+    "url": "https://arxiv.org/html/2610.13025v1/fig2.png"
+  },
+  "local_diagram": "architecture.mmd",
+  "full_text_reviewed": true,
+  "online_ab": "not reported"
+}

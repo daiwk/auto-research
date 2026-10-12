@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "adapter_key": "branch-opd",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_post_training.py",
+    "--objective",
+    "branch-opd",
+    "--student-path",
+    "<student-checkpoint-cache>",
+    "--student-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--student-revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--teacher-path",
+    "<teacher-checkpoint-cache>",
+    "--teacher-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--teacher-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--train-path",
+    "<public-train-jsonl>",
+    "--validation-path",
+    "<public-validation-jsonl>",
+    "--split-manifest",
+    "<public-split-manifest>",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--output",
+    "<output-json>",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--steps",
+    "2",
+    "--validation-examples",
+    "4",
+    "--max-tokens",
+    "512",
+    "--forks",
+    "3",
+    "--continuations",
+    "2"
+  ],
+  "command_sanitization": "Only local checkpoint/data/output locations are replaced by descriptive placeholders. Explicit method, public IDs/revisions, seed and numeric arguments retain the executed configuration; learning_rate=1e-5, pbr_weight=1 and min_fork_gap=1 were snapshot defaults, not launch overrides.",
+  "environment": {
+    "PYTHONPATH": "src"
+  },
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+    "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+  },
+  "checkpoint": {
+    "student": {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "immutable_revision_verified": true,
+      "verification": "pinned public-source manifest with exact file SHA256",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "teacher": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "verification": "pinned public-source manifest with exact file SHA256",
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "adapter_parameter_delta_l2": 0.008337237479241007,
+    "validation_examples": 4,
+    "validation_exact_match": 0.5,
+    "sampled_branches": 12,
+    "pbr_constraints": 8
+  },
+  "additional_seeds": [],
+  "execution_checks": {
+    "student_policy_branches": 12,
+    "pbr_constraints_per_step": [
+      5,
+      3
+    ],
+    "pbr_constraints_exercised": true,
+    "finite_positive_gradient_norm_per_step": true,
+    "active_parameter_update": true,
+    "response_tokens_excluding_reused_prefixes": 2229,
+    "shared_prefix_tokens_excluded": 458,
+    "same_tokenizer_required_by_executed_runtime": true,
+    "test_read": false,
+    "gold_in_rollout": false,
+    "validation_used_for_selection": false
+  },
+  "limitations": [
+    "Two optimizer steps, one seed and four validation questions: 0.5 exact match is a runtime diagnostic, not a stable capability or relative-gain estimate.",
+    "No same-budget Vanilla OPD capability comparison was executed; the historical 128-token run is not an equal-budget baseline.",
+    "Only single-turn mathematical branching and boxed-answer EOS repair were exercised, not ALFWorld/WebShop environment snapshots or multi-turn agent branching.",
+    "Passed applies to the specified eager-attention executed commit and source hashes, not subsequent SDPA/current HEAD/working-tree changes."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_oct12_post_training.py": "96be02c4fd798c922190195723393543fb2da644ecc5eb3aae1f0a4418ca7aa2",
+    "src/auto_research/post_training/oct12_checkpoint.py": "763ea5c7a193fbe8685a780d2d4e88966fb791a82d4b8febcd66bde49240d5ec",
+    "src/auto_research/post_training/oct12_objectives.py": "f03b54c0900c21f84ce09c8d7119a3c020b0dfef04dec001610d0556d037a227",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e"
+  },
+  "provenance": {
+    "commit": "456a2ffacc47658c4ccb74f386465d47e5f4e357",
+    "artifact_path": "docs/gpu-validations/branch-opd-a100-20261012.json",
+    "metrics_artifact": "docs/reproductions/2610.13481-branch-opd/metrics/gsm8k-a100-42.json",
+    "raw_result_sha256": "5d907840d525a9668a43ac0a826d3d02994049a7e35f90a2f700815a3761fcf0",
+    "checkpoint_committed": false,
+    "source_hash_origin": "git show executed commit"
+  },
+  "historical_evidence": {
+    "artifact_path": "docs/reproductions/2610.13481-branch-opd/assets/historical-pbr-unexercised.json",
+    "raw_result_sha256": "30e7f76884c6d12f781d46996304f9a3c2c56aca38941aea2582bb5618a65b24",
+    "mechanism_validation_status": "not_passed_pbr_unexercised",
+    "excluded_from_current_metrics": true
+  }
+}

@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2602.08530](https://arxiv.org/abs/2602.08530) |
-| 公司/机构 | Beijing University of Posts and Telecommunications（按第一作者所属机构聚合） |
+| 公司/机构 | Beijing University of Posts and Telecommunications |
 | 首次公开日期 | 2026-02-09（arXiv v1） |
 | 原文开源代码 | 否：未找到原作者公开代码（核查日期：2026-09-05） |
 | Adapter | `pit` |

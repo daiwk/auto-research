@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "key": "jev-workflow",
+  "arxiv_id": "2610.13092",
+  "title": "When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows",
+  "paper_url": "https://arxiv.org/abs/2610.13092",
+  "organization": "Nanjing University / Technical University of Munich",
+  "published": "2026-10-09",
+  "upstream_code": "否：作者提供[匿名实验代码链接](https://anonymous.4open.science/r/jev-emp-5BF4/)，本轮仅取得前端页面，API连接超时，未核实可用源码（2026-10-12）",
+  "track": "llm",
+  "topics": [
+    "agent-evaluation",
+    "delivered-outcome",
+    "latency-cost-recovery"
+  ],
+  "local_code": "src/auto_research/reproductions/jev_workflow",
+  "documentation": "docs/reproductions/2610.13092-jev-workflow/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "actual paired workflow execution JSONL"
+  ],
+  "baseline": "同task/run的原配置与替换decision配置",
+  "metrics": [
+    "paired_executions",
+    "matched_success_pairs",
+    "configurations"
+  ],
+  "mechanisms": [
+    "这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.jev_workflow.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Nanjing University / Technical University of Munich",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据"
+    },
+    "omitted_core_components": [
+      "原文Jev API与五种完整agent/environment跑测",
+      "原文4500次执行与人工trace标注"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
+}

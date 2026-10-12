@@ -1,0 +1,16 @@
+{
+  "arxiv_v1": "https://arxiv.org/html/2610.13092v1",
+  "published": "2026-10-09",
+  "reviewed_at": "2026-10-12",
+  "institution_source": "original HTML author affiliations",
+  "upstream_code": "https://anonymous.4open.science/r/jev-emp-5BF4/",
+  "upstream_status": "否：论文提供匿名实验链接，但当前只取得网页壳，API获取失败；未核实可用作者源码，不宣称已开源实现",
+  "upstream_verification_limitation": "HTML shell retrieved; API SSL attempt failed; link retained as an observed research source, not an audited code release",
+  "figure": {
+    "number": "2",
+    "url": "https://arxiv.org/html/2610.13092v1/conditions.png"
+  },
+  "local_diagram": "architecture.mmd",
+  "full_text_reviewed": true,
+  "online_ab": "not reported"
+}

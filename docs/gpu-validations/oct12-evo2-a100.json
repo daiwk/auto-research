@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "adapter_key": "evo2",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_agents.py",
+    "--method",
+    "evo2",
+    "--checkpoint",
+    "<policy-checkpoint-cache>",
+    "--checkpoint-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--checkpoint-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--executor-checkpoint",
+    "<separate-frozen-executor-cache>",
+    "--executor-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--executor-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--environment",
+    "gsm8k-harness",
+    "--dataset",
+    "<official-holdout-validation-jsonl>",
+    "--evaluation-examples",
+    "8",
+    "--max-tokens",
+    "768",
+    "--executor-max-tokens",
+    "256",
+    "--rounds",
+    "2",
+    "--group-size",
+    "2",
+    "--train-steps",
+    "2",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--output",
+    "<output-json>"
+  ],
+  "command_sanitization": "Only local checkpoint/data/output locations are placeholders. Numeric budget, method, public checkpoint identities/revisions and environment match the recorded launch.",
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+        "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "evaluation_partition": "first8 verified train-only validation rows reused for search/selection; not isolated capability test",
+    "evaluated_question_sha256": [
+      "16f83fb4320c9faf79cc5ef0cf235beb70b19a06e9e4dc4f03dd9d0ca78d5e75",
+      "09296cd5e0fc1cb5a7c241379aa53704fca1c2d3cf3e106fdf539f2f88d050c1",
+      "0d821abd5ff6387beebe8e03e8b65d7d60b768da13413eead9e6040c9f308df5",
+      "0483f22415df4974ea7a835bd7aa7d80ae6cd41c0d70ec27518875a1579d8b3a",
+      "01a0545c22dc10a57b33d14b5d726669a9252fda8d8a5b78a21fb40e8db6996a",
+      "0d0539ae81f0364cacac73ccfb599ce9288a6eb7024ac9e45cfc4492224e2201",
+      "0437cce94121afd840a2155d9518f0e96f8bd04adc1cde68653707dbb8c52379",
+      "111d72db39e60e494d6bff18c61dd350e00b8adf1bfd9a2c8386b9802c10597a"
+    ],
+    "fingerprint_kind": "SHA256 of compact JSON ordered evaluated question SHA256 list"
+  },
+  "checkpoint": {
+    "policy": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    },
+    "executor": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "budget": {
+    "rounds": 2,
+    "group_size": 2,
+    "train_steps": 2,
+    "policy_max_tokens": 768,
+    "executor_max_tokens": 256,
+    "evaluation_examples": 8
+  },
+  "attention_backend": "eager",
+  "result": "passed",
+  "metrics": {
+    "evaluation_examples": 8,
+    "searched_nodes": 21,
+    "executor_calls": 168,
+    "root_search_validation_score": 0.125,
+    "best_search_validation_score": 0.25,
+    "sft_steps": 2,
+    "sft_gradient_norm_first": 0.50494384765625,
+    "sft_gradient_norm_last": 0.674738347530365,
+    "active_grpo_updates": 4,
+    "grpo_gradient_norm_step_0": 0.005053921602666378,
+    "grpo_gradient_norm_step_1": 0.0019071860006079078,
+    "grpo_gradient_norm_step_2": 0.0009743663831613958,
+    "grpo_gradient_norm_step_3": 0.0018388759344816208
+  },
+  "additional_seeds": [],
+  "execution_checks": {
+    "sft_positive_gradients": true,
+    "grpo_active_update_count": 4,
+    "grpo_parameter_changes_and_positive_gradients": true,
+    "executor_weights_unchanged": true,
+    "test_read": false,
+    "gold_only_in_external_scorer": true,
+    "isolated_capability_test": false,
+    "evolve_promotion_eligible": false
+  },
+  "limitations": [
+    "Eight validation questions reused across21 searched nodes; root.125 and selectedbest.25 are search diagnostics, not independent capability improvement.",
+    "This GSM environment supplements but does not replace the historical all-zero circle-packing result.",
+    "concept_demo/L1; executable harness edits are restricted to generated PROMPT, not arbitrary coding harnesses or paper benchmark fidelity.",
+    "One seed/two rounds; no test data read and no Evolve promotion.",
+    "Passed covers the recorded executed source snapshot only, not every current HEAD/working-tree change."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_oct12_agents.py": "93ca7e743828780b57ad642abf61d7cd1bf3a01dcb4c1d9618f21d214c4af325",
+    "src/auto_research/agent_research/oct12_entrypoint.py": "4fb18a120c9908bd890898072045e8098ebf1ea97e19703b410eb0d54da28ebb",
+    "src/auto_research/agent_research/oct12_checkpoint.py": "d2e99a9c1ab024cdef3c30851b70c33675ee28e51982f8f3e8f84d85f623ce82",
+    "src/auto_research/agent_research/oct12_evolution.py": "79101f021ddbe128f93a9dcc07c5a60cba9434f778a52b5582c33e6a31d43f32",
+    "src/auto_research/agent_research/oct10_backend.py": "108acb77f3497cddb2cdf5b96831ce25fb733d1b35c503db69076918684b7219",
+    "src/auto_research/agent_research/oct12_memory_tools.py": "f2d12f7824a1dbaba0b67f4b046e57173b2e902e4b8a138087522c418ff2982a",
+    "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+  },
+  "provenance": {
+    "commit": "ae68d75ef3c5dd5a3daa16236cb8bf914a559fd5",
+    "artifact_path": "docs/gpu-validations/oct12-evo2-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13025-evo2/metrics/gsm8k-harness-a100-42.json",
+    "raw_result_sha256": "3b8668741674939a2f11ddc3c63f4964d6daf1f5d72fd793c23f91b6554112f2",
+    "checkpoint_committed": false,
+    "source_hash_origin": "git show executed commit",
+    "dataset_fingerprint": "fc399ae70131dcfa0f15c82153a3000dd843181904216ca6228ab7d65d462c3a"
+  }
+}

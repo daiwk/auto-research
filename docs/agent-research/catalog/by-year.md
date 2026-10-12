@@ -4,6 +4,12 @@
 
 ## 2026
 
+- 2026-10 · [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../../reproductions/2610.13025-evo2/README.md)（`evo2`）：固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。
+- 2026-10 · [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../../reproductions/2610.13194-janus/README.md)（`janus`）：在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。
+- 2026-10 · [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../../reproductions/2610.13889-rated/README.md)（`rated`）：独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。
+- 2026-10 · [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../../reproductions/2610.13912-rsi-anything/README.md)（`rsi-anything`）：候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。
+- 2026-10 · [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
+- 2026-10 · [When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows](../../reproductions/2610.13092-jev-workflow/README.md)（`jev-workflow`）：这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。
 - 2026-10 · [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](../2610.12086-evoalloc/README.md)（`evoalloc`）：模型选择 Full、Partial 或 Discard，得到 Partial 证据后再选择继续/停止。已观察案例更新固定语句经验并反思策略；影子策略共享同一证据，以漏掉新最佳的次数优先、再比较评测成本。
 - 2026-10 · [Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks](../2610.11794-memento3/README.md)（`memento3`）：冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。
 - 2026-10 · [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。

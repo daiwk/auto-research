@@ -9307,6 +9307,74 @@
         "fingerprint": "340a2cde9ac50251d62a4a8607fe2b6085e35173b71adbeb3299057833f9115a"
       }
     ],
+    "src/auto_research/agent_research/oct12_checkpoint.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "__call__",
+        "line": 150,
+        "qualified_name": "HarnessEvaluator.__call__",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__init__",
+        "line": 188,
+        "qualified_name": "GSMHarnessEvaluator.__init__",
+        "expression": "row.get('answer')",
+        "fingerprint": "bb7f43bcaea754107320f654a4b51ab61d6c483f572b7450fde3943f64a7abf1"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__init__",
+        "line": 188,
+        "qualified_name": "GSMHarnessEvaluator.__init__",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__call__",
+        "line": 203,
+        "qualified_name": "GSMHarnessEvaluator.__call__",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "__call__",
+        "line": 204,
+        "qualified_name": "GSMHarnessEvaluator.__call__",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      }
+    ],
+    "src/auto_research/agent_research/oct12_entrypoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_method",
+        "line": 153,
+        "qualified_name": "run_method",
+        "expression": "memory.answer",
+        "fingerprint": "66f71ac03689e42d14931adc617564a8c04d0e83aa20b1b0413b96af4bb8ddb5"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_method",
+        "line": 156,
+        "qualified_name": "run_method",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_method",
+        "line": 157,
+        "qualified_name": "run_method",
+        "expression": "output['answer']",
+        "fingerprint": "073d3615671102c9a418d5d43a513e1eec18ed7232eb790d7361582ae9c5af4e"
+      }
+    ],
     "src/auto_research/agent_research/p0_20260808.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10949,6 +11017,32 @@
         "fingerprint": "bb7f43bcaea754107320f654a4b51ab61d6c483f572b7450fde3943f64a7abf1"
       }
     ],
+    "src/auto_research/multimodal/oct12_reward_transition.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "woven_prompt",
+        "line": 57,
+        "qualified_name": "woven_prompt",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "woven_prompt",
+        "line": 66,
+        "qualified_name": "woven_prompt",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "load_coco",
+        "line": 132,
+        "qualified_name": "load_coco",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
     "src/auto_research/multimodal/video.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11599,6 +11693,32 @@
         "qualified_name": "SkillActivity.record",
         "expression": "self.late_positive += int(coefficient > 0)",
         "fingerprint": "624a7ea03d1fd10014adb9c06132ef701f07fc1146edc8ee9fb5d084bbc0a963"
+      }
+    ],
+    "src/auto_research/post_training/oct12_checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "boundary_train",
+        "line": 422,
+        "qualified_name": "boundary_train",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "boundary_train",
+        "line": 439,
+        "qualified_name": "boundary_train",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_checkpoint",
+        "line": 531,
+        "qualified_name": "run_checkpoint",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
     "src/auto_research/post_training/p0_20260808.py": [

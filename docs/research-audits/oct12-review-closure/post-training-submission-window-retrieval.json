@@ -1,0 +1,2589 @@
+{
+  "schema_version": 2,
+  "track": "post-training",
+  "window": {
+    "start": "2026-10-07",
+    "end": "2026-10-12"
+  },
+  "query_matrix": [
+    "post-training",
+    "preference-optimization",
+    "llm-rl",
+    "on-policy-distillation",
+    "reward-model",
+    "process-reward",
+    "test-time-rl",
+    "opd"
+  ],
+  "candidate_count": 97,
+  "triage_counts": {
+    "new": 88,
+    "implemented": 9,
+    "reviewed": 0,
+    "google_meta_priority_review": 0
+  },
+  "candidates": [
+    {
+      "arxiv_id": "2610.13896",
+      "title": "Structural Automata for Neural Semantic Parsing",
+      "published": "2026-10-09T17:42:14Z",
+      "url": "http://arxiv.org/abs/2610.13896v1",
+      "authors": [
+        "Xiao Zhang"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13821",
+      "title": "Can Language Models Learn When to Abstain? Policy Learning and Calibrated Answer Selection",
+      "published": "2026-10-09T16:33:27Z",
+      "url": "http://arxiv.org/abs/2610.13821v1",
+      "authors": [
+        "Juan Terven",
+        "Diana-Margarita Córdova-Esparza",
+        "Ruben Gomez",
+        "Carlos Miranda Rocha",
+        "Julio-Alejandro Romero-González",
+        "Edgar Chavez-Urbiola"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13755",
+      "title": "Matched-Context Group Policy Optimization for LLM Agent Training",
+      "published": "2026-10-09T15:41:37Z",
+      "url": "http://arxiv.org/abs/2610.13755v1",
+      "authors": [
+        "Chenxu Zhang",
+        "Yaorui Shi",
+        "Wenlong Zhang",
+        "Jianchao Tan",
+        "Zihan Wang",
+        "Yiming Cheng"
+      ],
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13744",
+      "title": "A Privileged Teacher That Only Scores Cannot Search: Critique-Conditioned On-Policy Self-Distillation for Reasoning",
+      "published": "2026-10-09T15:36:47Z",
+      "url": "http://arxiv.org/abs/2610.13744v1",
+      "authors": [
+        "Mayug Maniparambil",
+        "Ayush Rai",
+        "Ekansh Verma",
+        "Noel E. O'Connor",
+        "Fergal Reid"
+      ],
+      "matched_queries": [
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13653",
+      "title": "A Critical Look at Power Sampling when Test Time Sharpening LLMs",
+      "published": "2026-10-09T14:29:28Z",
+      "url": "http://arxiv.org/abs/2610.13653v1",
+      "authors": [
+        "Abiel Malkani Talwar",
+        "Christopher Nemeth",
+        "Henry Moss"
+      ],
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13617",
+      "title": "Training User Simulators with Latent Intrinsic Feedback",
+      "published": "2026-10-09T14:00:36Z",
+      "url": "http://arxiv.org/abs/2610.13617v1",
+      "authors": [
+        "Tarek Naous",
+        "Craig Boutilier",
+        "Wei Xu",
+        "Ofer Meshi"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13504",
+      "title": "Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning",
+      "published": "2026-10-09T12:30:14Z",
+      "url": "http://arxiv.org/abs/2610.13504v1",
+      "authors": [
+        "Oriol Corcoll",
+        "Qiyao Wei",
+        "Ciarán Mark Gilligan-Lee"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13485",
+      "title": "Proactive Agentic Orchestration",
+      "published": "2026-10-09T12:18:49Z",
+      "url": "http://arxiv.org/abs/2610.13485v1",
+      "authors": [
+        "Xueyang Feng",
+        "Chaozhuo Li",
+        "Xiaohe Bo",
+        "Jiakai Tang",
+        "Chenxi Li",
+        "Qiwei Ye",
+        "Xu Chen"
+      ],
+      "matched_queries": [
+        "on-policy-distillation",
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13330",
+      "title": "Masked Diffusion Language Agents for Tool-Integrated Chemical Reasoning",
+      "published": "2026-10-09T10:07:37Z",
+      "url": "http://arxiv.org/abs/2610.13330v1",
+      "authors": [
+        "Mengdi Liu",
+        "Chenghao Jia",
+        "Hong Chang",
+        "Shiguang Shan"
+      ],
+      "matched_queries": [
+        "post-training",
+        "preference-optimization"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13202",
+      "title": "S$^3$R: Fast and Faithful RL Rollouts via Self-Sparse Speculative Decoding",
+      "published": "2026-10-09T08:22:40Z",
+      "url": "http://arxiv.org/abs/2610.13202v1",
+      "authors": [
+        "Yuhang He",
+        "Hongyu Ge",
+        "Zihan Lin",
+        "Siyi Liu",
+        "Yongqi Zhang"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13058",
+      "title": "Travel Back To Move Forward: Retrospective Exploration and Evolving for Long Horizon Agents",
+      "published": "2026-10-09T06:11:39Z",
+      "url": "http://arxiv.org/abs/2610.13058v1",
+      "authors": [
+        "Ziang Ye",
+        "Wentao Shi",
+        "Lei Chen",
+        "Zhengzhou Cai",
+        "Yu Wang",
+        "Zhiyuan Yao",
+        "Zihan Wang",
+        "Xierui Song",
+        "Fuli Feng",
+        "Yixin Cao"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13035",
+      "title": "GeoGR: Spatial-Semantic Token Compression and Group Routing for Efficient 3D VLMs",
+      "published": "2026-10-09T05:46:54Z",
+      "url": "http://arxiv.org/abs/2610.13035v1",
+      "authors": [
+        "Yongxin Zheng",
+        "Hao Wu",
+        "Fang Li",
+        "Hu Fu",
+        "Peiran Yin",
+        "Xudong Wang",
+        "Haozhe Hu",
+        "Xinghao Chen",
+        "Yunpu Ma",
+        "Wei Zhang",
+        "Xiaoyu Shen"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12995",
+      "title": "What Should SFT Learn? Conditional Information Gain for Generalizable Post-Training",
+      "published": "2026-10-09T04:57:55Z",
+      "url": "http://arxiv.org/abs/2610.12995v1",
+      "authors": [
+        "Yuxuan Gu",
+        "Kequan Niu",
+        "Xiaocheng Feng",
+        "Yun Li",
+        "Yiqiao Yang",
+        "Bing Qin"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12885",
+      "title": "Personalized Federated Direct Preference Optimization via LoRA Adapters",
+      "published": "2026-10-09T02:20:29Z",
+      "url": "http://arxiv.org/abs/2610.12885v1",
+      "authors": [
+        "Zhanhong Jiang",
+        "Soumik Sarkar"
+      ],
+      "matched_queries": [
+        "preference-optimization",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12757",
+      "title": "MADS: Multi-Agent Dialog Simulation for Robust Conversational Agents",
+      "published": "2026-10-08T22:08:10Z",
+      "url": "http://arxiv.org/abs/2610.12757v1",
+      "authors": [
+        "Arkajyoti Chakraborty",
+        "Adam Zernik",
+        "Ishika Kulkarni",
+        "Mudit Arora",
+        "Hugo Lin",
+        "Justin Chiu",
+        "Alessandro Di Bari",
+        "Neha Gupta",
+        "Andreas Stolcke"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12707",
+      "title": "Unsupervised Multimodal Reward Modeling",
+      "published": "2026-10-08T20:38:25Z",
+      "url": "http://arxiv.org/abs/2610.12707v1",
+      "authors": [
+        "Yueying Li",
+        "Jingxuan Fan",
+        "Kianté Brantley",
+        "Sham M. Kakade",
+        "Hanlin Zhang"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12601",
+      "title": "Reflective Prompt Optimization of a Deep-Research Agent: A Topic-Disjoint, Multi-Seed Protocol for Measuring Transferable Gains and Prompt-Level Overfitting",
+      "published": "2026-10-08T18:23:23Z",
+      "url": "http://arxiv.org/abs/2610.12601v1",
+      "authors": [
+        "Elias Lumer",
+        "Sahil Sen",
+        "Vamse Kumar Subbiah",
+        "Kevin Paul"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12582",
+      "title": "One Model to Loop Them All: Elastic Latent Recurrence for Language Models",
+      "published": "2026-10-08T18:05:42Z",
+      "url": "http://arxiv.org/abs/2610.12582v1",
+      "authors": [
+        "Faisal Ladhak",
+        "Shantanu Acharya",
+        "Santiago Akle Serano",
+        "Simeng Sun",
+        "Boris Ginsburg",
+        "Krishna C Puvvada"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12566",
+      "title": "Sample-Adaptive Zeroth-Order Post-Training",
+      "published": "2026-10-08T18:00:37Z",
+      "url": "http://arxiv.org/abs/2610.12566v1",
+      "authors": [
+        "Haiyuan Wan",
+        "Yanyi Li",
+        "Weicheng Lin",
+        "Cong Fang"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12545",
+      "title": "AutoIndexer: Flexible-Order Decoding by Training Causal Models on Chains of Edits",
+      "published": "2026-10-08T17:59:52Z",
+      "url": "http://arxiv.org/abs/2610.12545v1",
+      "authors": [
+        "Shu Ishida",
+        "Aliasghar Khani",
+        "Tianyu Zhang",
+        "The Cong Luong",
+        "James Seale Smith",
+        "Adam Gaier"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12420",
+      "title": "A Unified Bellman Operator for Safety-Critical Reinforcement Learning",
+      "published": "2026-10-08T17:53:02Z",
+      "url": "http://arxiv.org/abs/2610.12420v1",
+      "authors": [
+        "Nishanth Arun Rao",
+        "Royina Karegoudra Jayanth",
+        "Benjamin Eysenbach",
+        "Jaime Fernández Fisac"
+      ],
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12410",
+      "title": "Predicting Alignment Generalization with Value Representations",
+      "published": "2026-10-08T17:47:26Z",
+      "url": "http://arxiv.org/abs/2610.12410v1",
+      "authors": [
+        "Andy Liu",
+        "Mehar Bhatia",
+        "Karolina Stanczak",
+        "Mona Diab",
+        "Vered Shwartz",
+        "Daniel Fried"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12367",
+      "title": "Which Skill to Distill? SGUID: Selecting a Compact Skill Bank for Model-Skill Co-Evolution",
+      "published": "2026-10-08T17:27:53Z",
+      "url": "http://arxiv.org/abs/2610.12367v1",
+      "authors": [
+        "Yuhan Liu",
+        "Xiyao Ma",
+        "Zhongkai Sun",
+        "Xu Han",
+        "Chengyuan Ma",
+        "Benjamin Z. Yao",
+        "Chenlei Guo"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12341",
+      "title": "Can AI Agents Learn Their Way to the Top? Evaluating Heuristic Learning in a Long-Running Game Agent Competition",
+      "published": "2026-10-08T17:15:48Z",
+      "url": "http://arxiv.org/abs/2610.12341v1",
+      "authors": [
+        "Kaisen Yang",
+        "Qingle Liu",
+        "Kejin Wang",
+        "Yicheng Zhao",
+        "Jieming Li",
+        "Shenghan Zheng",
+        "Ruize Yang",
+        "Bojun Yang",
+        "Heng Gong",
+        "Xiang Gao",
+        "Lanyue Zhang",
+        "Kaiyu Zhong",
+        "Zhuo Liu",
+        "Shaoxuan Li",
+        "Chengxi Li",
+        "Yong Yan",
+        "Weixuan Zhang",
+        "Tianwei Luo",
+        "Situ Wang",
+        "Youjie Zheng",
+        "Sihan Zhao",
+        "Shengyuan Wang",
+        "Huan-ang Gao",
+        "Jiazheng Xu",
+        "Xiaohui Xie",
+        "Wentao Han",
+        "Hongning Wang"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12274",
+      "title": "HarnessSQL: Harness-Native Training for SQL Agents in Realistic Database Environments",
+      "published": "2026-10-08T16:36:39Z",
+      "url": "http://arxiv.org/abs/2610.12274v1",
+      "authors": [
+        "Haolin Yang",
+        "Jipeng Zhang",
+        "Jian Xie",
+        "Shuaishuai Gong",
+        "Sirui Han",
+        "Yike Guo"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12248",
+      "title": "EgoVoice: Proactive Spoken Assistance from Egocentric Multimodal Streams",
+      "published": "2026-10-08T16:24:12Z",
+      "url": "http://arxiv.org/abs/2610.12248v1",
+      "authors": [
+        "Heeseung Kim"
+      ],
+      "matched_queries": [
+        "preference-optimization"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12235",
+      "title": "Language Models as AI Research World Models",
+      "published": "2026-10-08T16:18:54Z",
+      "url": "http://arxiv.org/abs/2610.12235v1",
+      "authors": [
+        "Zijun Wang",
+        "Zewen Liu",
+        "Minhua Lin",
+        "Zhaotian Weng",
+        "Zhan Shi",
+        "Bing He",
+        "Yisi Sang",
+        "Dakuo Wang",
+        "Benoit Dumoulin",
+        "Wei Jin",
+        "Yuyin Zhou",
+        "Cihang Xie",
+        "Hanqing Lu"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12207",
+      "title": "SciTBERT: A family of chronologically consistent language models for scientific and technological language processing",
+      "published": "2026-10-08T15:57:45Z",
+      "url": "http://arxiv.org/abs/2610.12207v1",
+      "authors": [
+        "Thomas Gebhart",
+        "Russell J. Funk"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12201",
+      "title": "SteerablePlex: Can We Steer Full-Duplex Models?",
+      "published": "2026-10-08T15:56:28Z",
+      "url": "http://arxiv.org/abs/2610.12201v1",
+      "authors": [
+        "Haolong Zheng",
+        "Maike Züfle",
+        "Dominik Macháček",
+        "Peter Polák",
+        "Xulin Fan",
+        "Xavier Sumba",
+        "Siyin Wang",
+        "Ondřej Klejch",
+        "Mark Hasegawa-Johnson"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12061",
+      "title": "When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation",
+      "published": "2026-10-08T14:43:09Z",
+      "url": "http://arxiv.org/abs/2610.12061v1",
+      "authors": [
+        "Yiruo Cheng",
+        "Shen Huang",
+        "Xiaoshuai Song",
+        "Jiejun Tan",
+        "Guanting Dong",
+        "Pengjun Xie",
+        "Ji-Rong Wen",
+        "Zhicheng Dou"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11959",
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "published": "2026-10-08T13:41:53Z",
+      "url": "http://arxiv.org/abs/2610.11959v1",
+      "authors": [
+        "Xiaomi LLM-Core Team",
+        ":",
+        "Zongming Qiao",
+        "Ziyue Hua",
+        "Zirui Ou",
+        "Zihao Yue",
+        "Zihan Jiang",
+        "Zhuo Huang",
+        "Zhiyang Chen",
+        "Zhixian Zheng",
+        "Zhipeng Xu",
+        "Zhengrui Ma",
+        "Yuyang Hu",
+        "Yuhang Dong",
+        "Yuechen Zhang",
+        "Yudong Wang",
+        "Yuanxin Liu",
+        "Yixin Yang",
+        "Yishuo Cai",
+        "Yikai Zhao",
+        "Yihan Yan",
+        "Yifan Zhang",
+        "Yifan Song",
+        "Xiyu Wei",
+        "Xing Zhang",
+        "Xin Zhang",
+        "Xiaoqian Liu",
+        "Xiaodong Ji",
+        "Xiangwei Deng",
+        "Xueyu Guo",
+        "Wenhan Ma",
+        "Weimin Xiong",
+        "Weikun Wang",
+        "Weiji Zhuang",
+        "Shuo Liu",
+        "Shuhuai Ren",
+        "Shuhao Gu",
+        "Shimao Chen",
+        "Shijie Cao",
+        "Shihua Yu",
+        "Shicheng Li",
+        "Shengjie Zhou",
+        "Shaolei Zhang",
+        "Rang Li",
+        "Qiying Wang",
+        "Qingkai Fang",
+        "Qianli Chen",
+        "Minzheng Wang",
+        "Liwen Wang",
+        "Linli Yao",
+        "Linghao Zhang",
+        "Liangyu Cheng",
+        "Liang Zhao",
+        "Lei Li",
+        "Jinhao Dong",
+        "Jinyu Xiang",
+        "Jianyu Wei",
+        "Jiangshan Duo",
+        "Huaqiu Liu",
+        "Huanjie Fan",
+        "Hongyi Guan",
+        "Hongshen Xu",
+        "Hao Tian",
+        "Hanyu Li",
+        "Hailin Zhang",
+        "Gang Wang",
+        "Fuli Luo",
+        "Feng Wei",
+        "Dong Zhang",
+        "Dawei Zhu",
+        "Chiheng Lou",
+        "Chenhong He",
+        "Chenhao He",
+        "Chenghua Liu",
+        "Bowen Ye",
+        "Bowen Shen",
+        "Boshen Xu",
+        "Bo Yang",
+        "Bingquan Xia",
+        "Bangjun Xiao",
+        "Baixuan Xu",
+        "Zhouxiang Mao",
+        "Zhiyang Zhang",
+        "Zhixiang Xu",
+        "Zhenru Lin",
+        "Zhengju Tang",
+        "Zhaojun Huang",
+        "Yuzhe Weng",
+        "Yuxing Xiang",
+        "Yuxiao Li",
+        "Yuheng Yang",
+        "Yuhang Wang",
+        "Yuchen Liu",
+        "Yuanyuan Tian",
+        "Yuanliang Dong",
+        "Yu Cheng",
+        "Yongzhe He",
+        "Yongshun Liang",
+        "Yong Wang",
+        "Yiyan Wang",
+        "Yitian Gong",
+        "Yijie Zhang",
+        "Yanshu Xin",
+        "Xun Zhang",
+        "Xingjian Zhao",
+        "Wenyu Yang",
+        "Wenshan Huang",
+        "Wenhao Li",
+        "Tingwei Huang",
+        "Tianyu Yu",
+        "Tianyang Lu",
+        "Taoyu Yang",
+        "Sinan Du",
+        "Shutong Tian",
+        "Shulin Du",
+        "Shengfan Wang",
+        "Shanchuan Fang",
+        "Qihao Zhang",
+        "Qibin Yang",
+        "Qian Yu",
+        "Qian Tu",
+        "Pengrong Xie",
+        "Peipei Wang",
+        "Peidian Li",
+        "Minkun Guo",
+        "Mingchen Shao",
+        "Luohan Gao",
+        "Lijie Wang",
+        "Liang Shi",
+        "Kaiqi Chen",
+        "Kaiming Liu",
+        "Kaifei Wang",
+        "Kai Yang",
+        "Jinlong Xue",
+        "Jiechen Zhang",
+        "Jiaxuan Liu",
+        "Hongxu An",
+        "Hao Peng",
+        "Hanglong Lü",
+        "Guonan Wang",
+        "Feiyu Yang",
+        "Fanyu Cao",
+        "Fangyue Liu",
+        "Fan Cui",
+        "Cong Wang",
+        "Chun Chen",
+        "Chenxu Bai",
+        "Chengxuan Zhu",
+        "Chenghua Wang",
+        "Boyi Zeng"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11854",
+      "title": "GRPODropout: Less is More for Online Reinforcement Learning Rollouts",
+      "published": "2026-10-08T12:38:17Z",
+      "url": "http://arxiv.org/abs/2610.11854v1",
+      "authors": [
+        "Hexuan Deng",
+        "Zihao Yan",
+        "Xuebo Liu",
+        "Shuo Nie",
+        "Yue Wang",
+        "Chen Wang",
+        "Zhaohua Zhang",
+        "Tianwen Jiang",
+        "Qiuyong Xiao",
+        "Jihong Zhang",
+        "Min Zhang"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11678",
+      "title": "TRACE: Diagnosing Verifier Brittleness in Agentic Evaluation",
+      "published": "2026-10-08T10:52:26Z",
+      "url": "http://arxiv.org/abs/2610.11678v1",
+      "authors": [
+        "Radhika Gaonkar"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11659",
+      "title": "DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation",
+      "published": "2026-10-08T10:36:00Z",
+      "url": "http://arxiv.org/abs/2610.11659v1",
+      "authors": [
+        "Anhao Zhao",
+        "Haoran Xin",
+        "Junlong Tong",
+        "Yingqi Fan",
+        "Xuan Lu",
+        "Ping Nie",
+        "Wenjie Li",
+        "Xiaoyu Shen"
+      ],
+      "matched_queries": [
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11638",
+      "title": "UXBench Pro: Benchmarking Personalized User Experience in Multi-Turn Dialogue Interactions",
+      "published": "2026-10-08T10:15:55Z",
+      "url": "http://arxiv.org/abs/2610.11638v1",
+      "authors": [
+        "Mengze Hong",
+        "Zeyang Lei",
+        "Wenbo Shang",
+        "Xia Zeng",
+        "Xiying Zhao",
+        "Qi Zhu",
+        "Chen Jason Zhang",
+        "Di Jiang",
+        "Taiming Fu",
+        "Qiongyi Zhou",
+        "Qinghe Chang",
+        "Fubao Zhang",
+        "Chenxuan Ma",
+        "Minlong Peng",
+        "Jinfeng Huang",
+        "Zineng Zhou",
+        "Jindou Wu",
+        "Muge Qi",
+        "Sijun He",
+        "Xin Cui",
+        "Di Liang",
+        "Yuan Hua",
+        "Davey Chen"
+      ],
+      "matched_queries": [
+        "preference-optimization",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11543",
+      "title": "Learning the Loop, Not Just the Page: Execution-Grounded Loop Learning for Web Generation",
+      "published": "2026-10-08T09:11:17Z",
+      "url": "http://arxiv.org/abs/2610.11543v1",
+      "authors": [
+        "Yuxin Meng",
+        "Ruixu Zhang",
+        "Junjie Wang",
+        "Yuhan Suo",
+        "Yuhan Sun",
+        "Ruining Hu",
+        "Yiyao Yu",
+        "Yubin Wang",
+        "Shouwei Ruan",
+        "Bin Wang",
+        "Yue Liao",
+        "Yuxiang Zhang",
+        "Yujiu Yang"
+      ],
+      "matched_queries": [
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11519",
+      "title": "Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards",
+      "published": "2026-10-08T08:52:55Z",
+      "url": "http://arxiv.org/abs/2610.11519v1",
+      "authors": [
+        "Xiaobing Chen",
+        "Zhiqi Pang"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11464",
+      "title": "Who Verifies the Verifier? Co-Evolving Inspectable Graders with Self-Improving Agents",
+      "published": "2026-10-08T08:13:53Z",
+      "url": "http://arxiv.org/abs/2610.11464v1",
+      "authors": [
+        "Xing Zhang",
+        "Guanghui Wang",
+        "Yanwei Cui",
+        "Ziyuan Li",
+        "Wei Qiu",
+        "Bing Zhu",
+        "Peiyang He"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11461",
+      "title": "Beyond Speech Captions: Speech-Rewarded Style Planning for Conversational Text-to-Speech",
+      "published": "2026-10-08T08:12:28Z",
+      "url": "http://arxiv.org/abs/2610.11461v1",
+      "authors": [
+        "Shiao Zhu",
+        "Lianbo Liu",
+        "Sizhen Lyu",
+        "Yuzhe Wang",
+        "Sheng Li",
+        "Takahiro Shinozaki"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11451",
+      "title": "SAIL: Scientific Agentic Intelligence via a Science-Aware Loop",
+      "published": "2026-10-08T08:04:22Z",
+      "url": "http://arxiv.org/abs/2610.11451v1",
+      "authors": [
+        "SAIL Model Team",
+        "Boyuan Sun",
+        "Bryan Dai",
+        "Che Liu",
+        "Chi Liu",
+        "Derek Li",
+        "Hongming Piao",
+        "Mengzhuo Chen",
+        "Xidong Wang",
+        "Yan Shu",
+        "Yinda Chen",
+        "Ziyang Zeng"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11373",
+      "title": "From a Prompt to Repertoires: Evolving Functional REpertoires Enable LLM Continual Learning",
+      "published": "2026-10-08T07:06:52Z",
+      "url": "http://arxiv.org/abs/2610.11373v1",
+      "authors": [
+        "Fengyuan Liu",
+        "Yue Wang",
+        "Hangxi Guo",
+        "Fengyuan Liu",
+        "Chenxu Wu",
+        "Yanguang Liu",
+        "Mengnan Du"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11371",
+      "title": "SignRAG: Unified Retrieval-Augmented Gloss-Free Sign Language Translation",
+      "published": "2026-10-08T07:03:24Z",
+      "url": "http://arxiv.org/abs/2610.11371v1",
+      "authors": [
+        "Zhi Rao",
+        "Yucheng Zhou",
+        "Qianran Sun",
+        "Yiqing Huang",
+        "Longcan Yuan",
+        "Jiayi Hou",
+        "Chengwen Yao",
+        "Lin Cheng",
+        "Donghui Sun",
+        "Xiaoxin Chen",
+        "Jun Wan"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11366",
+      "title": "SpatialOPSD: Self-Distilling Spatial Intelligence from Verified Coding Agent Traces",
+      "published": "2026-10-08T06:58:30Z",
+      "url": "http://arxiv.org/abs/2610.11366v1",
+      "authors": [
+        "Rongxue Li",
+        "Meng Yang",
+        "Yiru Mao",
+        "Yongliang Tao",
+        "Lulu Hu",
+        "Bin Yang",
+        "Zhao Xu",
+        "Weihua Luo",
+        "Bowen Xu"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11354",
+      "title": "AdaptEvo: Adaptive Agent Learning with Evolving Supervision",
+      "published": "2026-10-08T06:47:41Z",
+      "url": "http://arxiv.org/abs/2610.11354v1",
+      "authors": [
+        "Shijun Wan",
+        "Jiancong Xie",
+        "Hang Xu",
+        "Jin Duan",
+        "Qixiong Wang",
+        "Xi Xiang",
+        "Maofei Que",
+        "Yahui Liu",
+        "Zhongyu Wei",
+        "Mu Chuan"
+      ],
+      "matched_queries": [
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11352",
+      "title": "RL-ARC: Calibrating Large Reasoning Models via Reasoning-guided Uncertainty",
+      "published": "2026-10-08T06:45:24Z",
+      "url": "http://arxiv.org/abs/2610.11352v1",
+      "authors": [
+        "Gukhyeon Lee",
+        "SangKeun Lee"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11332",
+      "title": "ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery",
+      "published": "2026-10-08T06:28:38Z",
+      "url": "http://arxiv.org/abs/2610.11332v1",
+      "authors": [
+        "Houcheng Jiang",
+        "Mao Zheng",
+        "Mingyang Song",
+        "Qiyong Zhong",
+        "Jie Sun",
+        "Tianyu Zhang",
+        "Junfeng Fang"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11291",
+      "title": "When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better",
+      "published": "2026-10-08T05:54:03Z",
+      "url": "http://arxiv.org/abs/2610.11291v1",
+      "authors": [
+        "Siyan Zhao",
+        "Yonggan Fu",
+        "Jindong Jiang",
+        "Shih-Yang Liu",
+        "Song Bian",
+        "Byung-Kwan Lee",
+        "Sharath Turuvekere Sreenivas",
+        "Wenliang Dai",
+        "Hanrong Ye",
+        "Aditya Grover",
+        "Pavlo Molchanov"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11281",
+      "title": "How to post-train on a surrogate: Envelope sampling mitigates reward hacking",
+      "published": "2026-10-08T05:48:31Z",
+      "url": "http://arxiv.org/abs/2610.11281v1",
+      "authors": [
+        "Sanjit Dandapanthula",
+        "Shuvom Sadhuka",
+        "Samir Khan",
+        "Michael Oberst",
+        "Aaditya Ramdas",
+        "Alexandra Chouldechova"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "preference-optimization",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11247",
+      "title": "Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals",
+      "published": "2026-10-08T04:52:05Z",
+      "url": "http://arxiv.org/abs/2610.11247v1",
+      "authors": [
+        "Lei Zhao",
+        "Qichao Zhao",
+        "Bowen Zuo",
+        "Qishi Zhan"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11226",
+      "title": "When Lower Reconstruction Loss Hurts: Distributionally Robust Refinement for Low-Bit LLM Quantization",
+      "published": "2026-10-08T04:22:29Z",
+      "url": "http://arxiv.org/abs/2610.11226v1",
+      "authors": [
+        "Yanlong Zhao",
+        "Xiaoyuan Cheng",
+        "Huihang Liu",
+        "Baihua He",
+        "Xinyu Zhang",
+        "Harrison Bo Hua Zhu",
+        "Wenlong Chen",
+        "Li Zeng",
+        "Zhuo Sun"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11183",
+      "title": "RAG-Stress: Probing the Limits of Evidence Reliance in Retrieval-Augmented Generation",
+      "published": "2026-10-08T03:40:48Z",
+      "url": "http://arxiv.org/abs/2610.11183v1",
+      "authors": [
+        "Shunyuan Zhou",
+        "Hao Chen",
+        "Tianyu Wang",
+        "Goose Lin",
+        "Zaiyuan Wang",
+        "Haiying Zhao"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11167",
+      "title": "PIVOT: Perplexity-Informed KD-to-RL Transition Scheduling for Vertical-Domain Few-Shot Distillation",
+      "published": "2026-10-08T03:24:55Z",
+      "url": "http://arxiv.org/abs/2610.11167v1",
+      "authors": [
+        "Heng Li",
+        "Yong Zhang",
+        "Ning Cheng",
+        "Zhigen Li",
+        "Yun Zhu",
+        "Yanmeng Wang",
+        "Shaojun Wang",
+        "Jing Xiao"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11152",
+      "title": "Do LLMs Learn from Rewards in Context? : Rethinking the role of reward in In-Context Reinforcement Learning",
+      "published": "2026-10-08T03:15:00Z",
+      "url": "http://arxiv.org/abs/2610.11152v1",
+      "authors": [
+        "Minchan Kwon",
+        "Seunghee Koh",
+        "Sunghyun Baek",
+        "Minsung Bae",
+        "Junmo Kim"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "process-reward",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11111",
+      "title": "Lapras: Latent Reasoning for Time Series Language Models",
+      "published": "2026-10-08T02:33:37Z",
+      "url": "http://arxiv.org/abs/2610.11111v1",
+      "authors": [
+        "Yuliang Chen",
+        "Yu Yvonne Wu",
+        "Patrick Langer",
+        "Arvind Pillai",
+        "Sudarshan Regmi",
+        "Martin Maritsch",
+        "Juncheng Liu",
+        "Robert Jakob",
+        "Thomas Kaar",
+        "Tess Z. Griffin",
+        "Lisa Marsch",
+        "Michael V. Heinz",
+        "Nicholas C. Jacobson",
+        "Andrew Campbell"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11064",
+      "title": "Measuring and Mitigating Solution Mode Collapse in RLVR",
+      "published": "2026-10-08T01:25:16Z",
+      "url": "http://arxiv.org/abs/2610.11064v2",
+      "authors": [
+        "Liv G. d'Aliberti",
+        "Marwa Abdulhai",
+        "Sofiia Druchyna",
+        "Peter Henderson",
+        "Manoel Horta Ribeiro"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10974",
+      "title": "Budgeted Multi-Source Counterfactual Annotation for Off-Policy Evaluation",
+      "published": "2026-10-07T22:55:15Z",
+      "url": "http://arxiv.org/abs/2610.10974v1",
+      "authors": [
+        "Biao Xiang",
+        "Ali Eshragh",
+        "Yuexing Li",
+        "Kai Wang"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10947",
+      "title": "RH-Detect: A Unified Benchmark for Reward Hacking Detection",
+      "published": "2026-10-07T21:52:33Z",
+      "url": "http://arxiv.org/abs/2610.10947v1",
+      "authors": [
+        "Junwei Quan",
+        "Evgenii Opryshko",
+        "Rohan Subramani",
+        "Igor Gilitschenski"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10942",
+      "title": "StoreBench: A Live-Commerce Environment for Evaluating and Training Autonomous Operator Agents",
+      "published": "2026-10-07T21:46:10Z",
+      "url": "http://arxiv.org/abs/2610.10942v1",
+      "authors": [
+        "Daksh Raghuvanshi",
+        "Ved Vedere",
+        "Yifan Wang"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model",
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10932",
+      "title": "World-Model Policy Arbiter for Goal-Conditioned Reinforcement Learning",
+      "published": "2026-10-07T21:41:33Z",
+      "url": "http://arxiv.org/abs/2610.10932v1",
+      "authors": [
+        "Junwei Quan",
+        "Evgenii Opryshko",
+        "Nicholas Rhinehart",
+        "Igor Gilitschenski"
+      ],
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10878",
+      "title": "Stochastic Teacher Intervention for Agentic On-Policy Distillation",
+      "published": "2026-10-07T20:29:29Z",
+      "url": "http://arxiv.org/abs/2610.10878v1",
+      "authors": [
+        "Junnan Liu",
+        "Linhao Luo",
+        "Zhijun Chen",
+        "Qianren Mao",
+        "Thuy-Trang Vu",
+        "Gholamreza Haffari"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10868",
+      "title": "Conversational Voice Aesthetic Model with Reinforcement Learning from Human Listeners",
+      "published": "2026-10-07T20:13:03Z",
+      "url": "http://arxiv.org/abs/2610.10868v1",
+      "authors": [
+        "Xilin Jiang",
+        "Shun Zhang",
+        "Tejas Jayashankar",
+        "Yinghao Aaron Li",
+        "Osama Hanna"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10854",
+      "title": "KDFP: A first-principles approach to knowledge distillation in large language models",
+      "published": "2026-10-07T19:59:07Z",
+      "url": "http://arxiv.org/abs/2610.10854v1",
+      "authors": [
+        "Ryan Swift",
+        "Konstantinos Psounis"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10787",
+      "title": "NavGPT-3: Harnessing Context in a Hierarchical Navigation Runtime",
+      "published": "2026-10-07T18:45:56Z",
+      "url": "http://arxiv.org/abs/2610.10787v1",
+      "authors": [
+        "Gengze Zhou",
+        "Yicong Hong",
+        "Jiazhao Zhang",
+        "Xunyi Zhao",
+        "Jian Zhou",
+        "Zixing Lei",
+        "Zun Wang",
+        "Chongyang Zhao",
+        "Xionghui Chen",
+        "Stephen Gould",
+        "Anton van den Hengel",
+        "Qi Wu"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10536",
+      "title": "Decoupling Exploration from Optimization in RLVR",
+      "published": "2026-10-07T17:59:26Z",
+      "url": "http://arxiv.org/abs/2610.10536v1",
+      "authors": [
+        "Saif Punjwani",
+        "Micah Goldblum"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10526",
+      "title": "Rephrase Before You Act: Characterizing and Mitigating Language Sensitivity in Vision-Language-Action Models",
+      "published": "2026-10-07T17:57:38Z",
+      "url": "http://arxiv.org/abs/2610.10526v1",
+      "authors": [
+        "Mikey Watts",
+        "Yuchen Cui"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10426",
+      "title": "CoTrace: Data Recipes for Training Terminal Agents with Harness-Model Co-Evolution",
+      "published": "2026-10-07T17:06:59Z",
+      "url": "http://arxiv.org/abs/2610.10426v1",
+      "authors": [
+        "Jixuan Chen",
+        "Jiaxin Zhang",
+        "Qinyuan Ye",
+        "Yada Pruksachatkun",
+        "Haoxiang Zhang",
+        "Jingming Zhuo",
+        "Yifan Zhang",
+        "Yutong Dai",
+        "Juntao Tan",
+        "Xiangyu Peng",
+        "Silvio Savarese",
+        "Zeyuan Chen",
+        "Lianhui Qin",
+        "Chien-Sheng Wu"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10422",
+      "title": "Which Rollout Taught It That? BehaviorTrace and the Limits of Training-Data Attribution in Online RL",
+      "published": "2026-10-07T17:01:37Z",
+      "url": "http://arxiv.org/abs/2610.10422v1",
+      "authors": [
+        "Amit Nautiyal"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10411",
+      "title": "Training Parallel Speculative Draft Models by Directly Minimizing Expected Decoding Rounds",
+      "published": "2026-10-07T16:56:29Z",
+      "url": "http://arxiv.org/abs/2610.10411v1",
+      "authors": [
+        "Yunxiao Zhao",
+        "Changxiao Cai"
+      ],
+      "matched_queries": [
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10407",
+      "title": "SOTA: Stock Options Trading Agents Guided by Option-Implied Return Distributions",
+      "published": "2026-10-07T16:55:05Z",
+      "url": "http://arxiv.org/abs/2610.10407v1",
+      "authors": [
+        "Yizhen Xie",
+        "Mengyang Liu"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10179",
+      "title": "Beyond Outcome Rewards: Constructing and Assigning Retrieval Credit for Search Agents",
+      "published": "2026-10-07T14:48:47Z",
+      "url": "http://arxiv.org/abs/2610.10179v1",
+      "authors": [
+        "Wenyu Huang",
+        "Xinyu Hou",
+        "Pavlos Vougiouklis",
+        "Ruofei Lai",
+        "Jeff Z. Pan"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10641",
+      "title": "Coverage-Aware Reasoning with Medical Tokens for Diagnosis Prediction",
+      "published": "2026-10-07T14:39:18Z",
+      "url": "http://arxiv.org/abs/2610.10641v1",
+      "authors": [
+        "Kaisong Zhang",
+        "Haotian Fang",
+        "Junmeng Zhou",
+        "Hang Lv",
+        "Yulan Pan",
+        "Yanchao Tan"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10145",
+      "title": "InterView-C: A Synchronized Multimodal Corpus of VR Avatar-Mediated Survey Interviews",
+      "published": "2026-10-07T14:23:32Z",
+      "url": "http://arxiv.org/abs/2610.10145v1",
+      "authors": [
+        "Patrick Schrottenbacher",
+        "Leon Hammerla",
+        "Lydia Kleine",
+        "Doris Stingl",
+        "Alexander Mehler"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10092",
+      "title": "I would rather quit NLP than read another paper like this: The rise of antithesis in NLP papers",
+      "published": "2026-10-07T13:50:50Z",
+      "url": "http://arxiv.org/abs/2610.10092v1",
+      "authors": [
+        "Olga Zamaraeva",
+        "Adrián Gude",
+        "Roi Santos-Ríos",
+        "Carlos Gómez-Rodríguez"
+      ],
+      "matched_queries": [
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09934",
+      "title": "Itgan at NADI 2026 shared task: Parameter-Efficient Whisper Adaptation for Robust, Mixed-Dialect and Code-Switched Arabic ASR",
+      "published": "2026-10-07T12:18:40Z",
+      "url": "http://arxiv.org/abs/2610.09934v1",
+      "authors": [
+        "Ibrahim Almajai"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09914",
+      "title": "RollVerify: Bridging Efficiency and Accuracy in Long-Tail Rollout Reinforcement Learning",
+      "published": "2026-10-07T12:05:33Z",
+      "url": "http://arxiv.org/abs/2610.09914v1",
+      "authors": [
+        "Yongqiang Yao",
+        "Jinru Tan",
+        "Kaihuan Liang",
+        "Zixin Yin",
+        "Yazhe Niu",
+        "Ruihao Gong",
+        "Dahua Lin",
+        "Ningyi Xu"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09858",
+      "title": "Training Advisors for LLM Agents from Task Outcomes",
+      "published": "2026-10-07T11:14:26Z",
+      "url": "http://arxiv.org/abs/2610.09858v1",
+      "authors": [
+        "Sergei Polezhaev",
+        "Barys Liskavets",
+        "Ori Press",
+        "Alexander Golubev"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09841",
+      "title": "ORCA: Hunting Compositional Failures in Text-to-Image Diffusion",
+      "published": "2026-10-07T11:03:58Z",
+      "url": "http://arxiv.org/abs/2610.09841v1",
+      "authors": [
+        "Arshia Hemmat",
+        "Amirhossein Vahidi",
+        "Amitis Shidani",
+        "Mohammad Vali Sanian",
+        "Hesam Asadollahzadeh",
+        "Aryan Yazdan Parast",
+        "Mohammad Lotfollahi"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09835",
+      "title": "A Deafening Silence: Catastrophic Forgetting Lives in the Output Embeddings of Tokens the Data Never Speaks",
+      "published": "2026-10-07T11:01:01Z",
+      "url": "http://arxiv.org/abs/2610.09835v1",
+      "authors": [
+        "Jonghyun Han",
+        "Younghoon Song",
+        "Jongyoul Park"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09804",
+      "title": "BoT-GRPO: Efficient Process-Reward RL for Reasoning via Bag-of-Token Aggregation",
+      "published": "2026-10-07T10:23:17Z",
+      "url": "http://arxiv.org/abs/2610.09804v1",
+      "authors": [
+        "Yingxiang Yang",
+        "Weihang Xiao",
+        "Zhunxuan Wang",
+        "Joshua Flashner",
+        "Niresh Agarwal"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09795",
+      "title": "MIRROR: From Imitation to Internalization in LLM Personalization",
+      "published": "2026-10-07T10:10:01Z",
+      "url": "http://arxiv.org/abs/2610.09795v1",
+      "authors": [
+        "Huayi Lai",
+        "Jicheng Yang",
+        "Min Yi",
+        "Chong Meng"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09788",
+      "title": "Judging in Latent Space: Efficient Generative Reward Modeling via Semantics-Preserving Compression",
+      "published": "2026-10-07T10:05:06Z",
+      "url": "http://arxiv.org/abs/2610.09788v2",
+      "authors": [
+        "Mingqing Yuan",
+        "Xiaobo Liang",
+        "Junwei Yang",
+        "Ziwei Chen",
+        "Zeren Zhang",
+        "Hejin Wang",
+        "Yubin Wang",
+        "Juntao Li"
+      ],
+      "matched_queries": [
+        "process-reward",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10623",
+      "title": "Recurrent Self-Improvement: Dynamic Cross-Loop On-Policy Distillation for Looped Language Models",
+      "published": "2026-10-07T08:54:30Z",
+      "url": "http://arxiv.org/abs/2610.10623v1",
+      "authors": [
+        "Yi Wang",
+        "Rui Qian",
+        "Yu Li",
+        "Haoyang Yao",
+        "Wenjie Wang"
+      ],
+      "matched_queries": [
+        "on-policy-distillation",
+        "post-training",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09684",
+      "title": "From Pareto to Preference: Personalized Test-Time Scaling via Amortized Agentic Policy Discovery",
+      "published": "2026-10-07T08:46:56Z",
+      "url": "http://arxiv.org/abs/2610.09684v1",
+      "authors": [
+        "Xinglin Wang",
+        "Zishen Liu",
+        "Tong Zheng",
+        "Shaoxiong Feng",
+        "Peiwen Yuan",
+        "Yiwei Li",
+        "Jiayi Shi",
+        "Yueqi Zhang",
+        "Chuyi Tan",
+        "Ji Zhang",
+        "Boyuan Pan",
+        "Kan Li"
+      ],
+      "matched_queries": [
+        "on-policy-distillation",
+        "preference-optimization"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09665",
+      "title": "SAPD: Step-Aligned Privileged Distillation",
+      "published": "2026-10-07T08:31:37Z",
+      "url": "http://arxiv.org/abs/2610.09665v1",
+      "authors": [
+        "Tianle Wang",
+        "Jiayu Liu",
+        "Ruizhi Zhao",
+        "Ning Miao"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "on-policy-distillation",
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09647",
+      "title": "When Rank Rises as LLMs Degrade",
+      "published": "2026-10-07T08:22:30Z",
+      "url": "http://arxiv.org/abs/2610.09647v1",
+      "authors": [
+        "Zhaohui Geoffrey Wang"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09639",
+      "title": "On-Policy Distillation Teaches New Skills but Not New Knowledge",
+      "published": "2026-10-07T08:15:10Z",
+      "url": "http://arxiv.org/abs/2610.09639v1",
+      "authors": [
+        "Yixuan Tang",
+        "Yi Yang"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09597",
+      "title": "COPC: Coupled Off-Policy Correction for Asynchronous LLM Reinforcement Learning",
+      "published": "2026-10-07T07:43:49Z",
+      "url": "http://arxiv.org/abs/2610.09597v1",
+      "authors": [
+        "Zicheng Hu",
+        "Zhijian Zhou",
+        "Xuan Zhang",
+        "Yuchen Liu",
+        "Cheng Chen",
+        "Yuan Li",
+        "Qi Gu",
+        "Yan Feng",
+        "Hongyan Hao",
+        "Chao Qu"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09587",
+      "title": "Collaborative Reasoning Distillation via Cross-Feedback and Coherent Curation",
+      "published": "2026-10-07T07:31:33Z",
+      "url": "http://arxiv.org/abs/2610.09587v1",
+      "authors": [
+        "Taehoon Kim",
+        "Seunggeun Cho",
+        "Dongsu Han"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09563",
+      "title": "EvoSignal: LLM-Guided Evolutionary Design of Modular Traffic Signal Control Programs",
+      "published": "2026-10-07T07:04:22Z",
+      "url": "http://arxiv.org/abs/2610.09563v1",
+      "authors": [
+        "Leizhen Wang",
+        "Peibo Duan",
+        "Zhenlin Qin",
+        "Yancheng Ling",
+        "Jian Xu",
+        "Yue Wang",
+        "Hao Wang",
+        "Zhenliang Ma"
+      ],
+      "matched_queries": [
+        "llm-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09517",
+      "title": "It Is Not Seeing the Hazard: A Frozen Vision-Language Safety Score Measures Its Caption Bank",
+      "published": "2026-10-07T06:15:23Z",
+      "url": "http://arxiv.org/abs/2610.09517v1",
+      "authors": [
+        "Samuel Tetteh",
+        "Cody Fleming"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09471",
+      "title": "When Should an In-Context Learner Expand Its Hypothesis Space?",
+      "published": "2026-10-07T05:26:15Z",
+      "url": "http://arxiv.org/abs/2610.09471v2",
+      "authors": [
+        "Weihan Li",
+        "Xinlei Chen",
+        "Junhao Wu",
+        "Tianshi Zheng"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09384",
+      "title": "The Persona Hierarchy Model: Understanding Contextual Generalization in Fine-Tuning LLMs",
+      "published": "2026-10-07T03:40:44Z",
+      "url": "http://arxiv.org/abs/2610.09384v1",
+      "authors": [
+        "Jiachen Zhao",
+        "Zhengxuan Wu",
+        "David Bau",
+        "Weiyan Shi"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09355",
+      "title": "Multimodal LLMs Can Learn to Read Brain Signals: A Vision--Language Model for Unified Multi-Task EEG Decoding",
+      "published": "2026-10-07T03:13:03Z",
+      "url": "http://arxiv.org/abs/2610.09355v1",
+      "authors": [
+        "Parastoo Azizeddin",
+        "Omid Sharafi",
+        "Maryam M. Shanechi"
+      ],
+      "matched_queries": [
+        "post-training"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09346",
+      "title": "OnlineQAT: On-Policy Distillation for Ultra-Low-Bit Large Language Models",
+      "published": "2026-10-07T03:05:42Z",
+      "url": "http://arxiv.org/abs/2610.09346v1",
+      "authors": [
+        "Wenjun Wang",
+        "Heng Li",
+        "Yanggan Gu",
+        "Hongxia Yang"
+      ],
+      "matched_queries": [
+        "on-policy-distillation"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09337",
+      "title": "Ask the Expert: LLM-Guided Reinforcement Learning for Autonomous Cyber Defense",
+      "published": "2026-10-07T02:53:26Z",
+      "url": "http://arxiv.org/abs/2610.09337v1",
+      "authors": [
+        "Fernando Martinez",
+        "Abhishek Satyam",
+        "Tao Li",
+        "Junaid Farooq",
+        "Ying Wang",
+        "Juntao Chen"
+      ],
+      "matched_queries": [
+        "llm-rl",
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09328",
+      "title": "Visual Jev Rewards: Reference-Bound Verification for Multi-Subject Image Generation",
+      "published": "2026-10-07T02:34:09Z",
+      "url": "http://arxiv.org/abs/2610.09328v1",
+      "authors": [
+        "Baoteng Li",
+        "Wenzhuo Wu",
+        "Kongming Liang",
+        "Zhanyu Ma"
+      ],
+      "matched_queries": [
+        "reward-model"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09247",
+      "title": "An Informational Curse of Horizon in Goal-Conditioned Policy Learning",
+      "published": "2026-10-07T00:20:45Z",
+      "url": "http://arxiv.org/abs/2610.09247v1",
+      "authors": [
+        "John L. Zhou",
+        "Yuxuan Dong",
+        "Jonathan C. Kao"
+      ],
+      "matched_queries": [
+        "test-time-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    }
+  ],
+  "requested_window": {
+    "start": "2026-10-08",
+    "end": "2026-10-12"
+  },
+  "announcement_overlap_days": 1,
+  "recall_mode": "submission-window",
+  "cross_source": {
+    "enabled": false,
+    "config": null,
+    "source_failures": [],
+    "source_stats": [],
+    "coverage_complete": false,
+    "official_review_queue_count": 0,
+    "archived_official_review_count": 0
+  },
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 8,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "language model post training",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "4bddab868c53e317497a0556e2ad66bc71dc8eec7b420f0f2271f82baa701442",
+        "next_offset": 31,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model preference optimization",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "93b7eed28f150bbab0c731649c943610fb0df577609e9d2baba35cc1534a545c",
+        "next_offset": 7,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "reinforcement learning language model",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "6127b5bdaab365cfaf20f9d650b227668d7a7d30be7355d30406d554d3ac49ac",
+        "next_offset": 38,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "on policy distillation language model",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "20e517aa2362d3c1f45bd1f1b457daba2b7052aca181757132ba80c99591b676",
+        "next_offset": 20,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model reward model",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "e3b1d1df1cd9bc2ab31112077b2ab9fce59577d876bb7b617ebe4d3a4a775f8b",
+        "next_offset": 46,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model process reward",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "f926d7ae85eb52d8f1eb94e27c04be50f270a02842747b42b9210a4b8c3601dd",
+        "next_offset": 7,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "test time reinforcement learning",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "d517be382405aacf2ea8208525314c8efcfde33f6bafe191fbdf06e53d2556f8",
+        "next_offset": 8,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "online policy distillation",
+        "categories": [
+          "cs.CL",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "4cb32eebb035462a879e00265015d037",
+        "fingerprint": "f8da7dfe7addc74583b6c8ddcdc808dbad4819bf9b91e56ce684c31dc21e3989",
+        "next_offset": 0,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "review_evidence_notice": "Transport completed; per-ID review proof is in the consolidated register, not inferred from retrieval."
+}

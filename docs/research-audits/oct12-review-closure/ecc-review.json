@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-12",
+  "scope": "独立点名条件候选，八查询union与agent203均未召回，另列不回填召回计数。",
+  "arxiv_id": "2610.13066",
+  "title": "Evolving Creatives with Clicks: CTR-Driven Advertising image Editing via Attribute Disentanglement and Preference Alignment",
+  "organization": "JD.COM / Nankai University",
+  "published": "2026-10-09T06:26:24Z",
+  "status": "reviewed_deferred",
+  "qualifies_next_batch_candidate": true,
+  "in_frozen_16": false,
+  "within_eight_query_recall_union": false,
+  "in_agent_203_assignment": false,
+  "source": {
+    "url": "https://arxiv.org/html/2610.13066v1",
+    "sha256": "355fa2a4dbb4aca5a058339af9f4f18188616128d47975b166031e23e6fe8be5",
+    "byte_hash_verified": true
+  },
+  "dateproof": {
+    "url": "https://arxiv.org/abs/2610.13066",
+    "sha256": "acabf6fa82cdac7a603228a0d9f9bd768ef79d0cb6fa1f17818fc264944ec9a9",
+    "location": "Submission history / [v1]"
+  },
+  "actual_read_scope": "官方摘要、Methods三小节、Datasets、实验设置、线上协议及Tables1/2/4/5/6与消融；未宣称逐段读附录或全部全文。",
+  "full_article_read": false,
+  "evidence_locations": [
+    "Methods: CTR-Aware Visual Attribute Mining, equations (1)",
+    "Methods: Instruction-Guided Editing Learning, equation (2)",
+    "Methods: Preference Optimization, equations (3)-(5)",
+    "Datasets: SFT/preference construction and privileged-reference exclusion",
+    "Experiments: Online Evaluation Protocol and Evaluation Metrics, equation (6)",
+    "Online Results: Tables 1-2",
+    "Order Robustness Analysis: Table 4",
+    "Validation of CTR-Sensitive Visual Attributes: Table 5",
+    "Ablation Study: Table 6"
+  ],
+  "defining_method": "属性解耦编辑而非从零生成；product内归一化CTR，ANOVA与RF选28属性，1–3操作采样SFT，真实click chosen/rejected DPO加独立操作乱序一致性。",
+  "core_formulas": {
+    "normalized_sequence_score": "ell_theta(Y|X)=log pi_theta(Y|X)/|Y|",
+    "regularizer": "L_Reg=(ell_theta(Y+|X)-ell_theta(shuffle_independent(Y+)|X))^2",
+    "objective": "L_CPO=L_DPO+lambda*L_Reg, lambda=1",
+    "ctr_gain": "100*(CTR_edit-CTR_orig)/CTR_orig; impression-weighted"
+  },
+  "production_evidence": {
+    "type": "原文真实生产曝光/点击比较",
+    "protocol": "1周、44商品类、约2000万曝光；各方法共用image-editing backend，人工审核后上线。",
+    "reported_ctr_gain_percent": {
+      "ECC": 6.86,
+      "DPO": 0.68,
+      "GPT": 3.25,
+      "Gemini": 5.52,
+      "CAIG": 0.2
+    },
+    "location": "Online Evaluation Protocol / Main Online Results / Table 1",
+    "randomization_and_confidence_interval": "已读段未披露流量随机化、CI或显著性；不凭措辞补造AB设计。",
+    "local_run": false
+  },
+  "resource_boundary": {
+    "author_code": "原文只承诺upon acceptance发布数据pipeline/dataset/code，无提供作者repo；未验证已发布。",
+    "private_dependencies": "原始曝光点击、属性/指令样本与真实线上偏好数据；商用编辑backend及生产流量不可本地替代证明CTR。",
+    "public_base_named_not_download_verified": "Qwen3-VL-8B-Instruct；4 A800及SWIFT/LoRA配置是原文声明。",
+    "minimum_future_fidelity": "真实多模态SFT+CPO梯度、验证过语义等价的独立操作shuffle、外部编辑执行与隔离偏好验证；无真实click数据只能mechanism diagnostic，不得用aesthetic/伪CTR代替能力。"
+  },
+  "decision_rationale": "不是因无AB词拒绝：原文已有真实线上CTR对照。冻结16之外，且私有click训练数据/作者代码尚不可核验，明确留待下一批资源条件满足再实施。",
+  "new_implementation_claimed": false
+}

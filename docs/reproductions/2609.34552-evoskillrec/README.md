@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2609.34552](https://arxiv.org/abs/2609.34552) |
-| 公司/机构 | City University of Hong Kong（按第一作者署名单位） |
+| 公司/机构 | City University of Hong Kong |
 | 首次公开日期 | 2026-09-28（arXiv v1） |
-| 原文开源代码 | 是：[https://github.com/Xiaopengli1/EvoSkill-Rec](https://github.com/Xiaopengli1/EvoSkill-Rec) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/Xiaopengli1/EvoSkill-Rec) |
 | Adapter | `evoskillrec` |
 | 本地复现代码 | [`src/auto_research/reproductions/evoskillrec/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/evoskillrec/) |
 

@@ -4,15 +4,15 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2608.06849](https://arxiv.org/abs/2608.06849) |
 | 公司/机构 | Institute of Computing Technology, Chinese Academy of Sciences |
-| 第一作者 | Yehan Yang |
 | 首次公开日期 | 2026-08-07（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-08-24 未发现原作者公开代码 |
 | Adapter | `autonomy-heads` |
 | 本地复现代码 | [`src/auto_research/reproductions/autonomy_heads/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/autonomy_heads/) |
+| 第一作者 | Yehan Yang |
 
 ## 原始论文总结
 

@@ -1,4 +1,3 @@
-/Users/bytedance/.bash_profile: line 24: /Users/bytedance/.openclaw/completions/openclaw.bash: No such file or directory
 # 按主题
 
 采用“研究方向 → 方法簇 → 论文”的两级结构。同一篇论文可以出现在多个方法簇下；
@@ -383,6 +382,9 @@
 - [Proximity Features](../2607.12246-proximity-features/README.md)：以隐私合规的群体地理特征服务匿名用户，避免依赖持久用户 ID。
 
 ## Serving 与研究基础设施
+
+### 特征评估与退役
+- [FORTE](../2610.13806-forte/README.md)：用类型约束的配对扰动、跨时间窗多目标门槛和真实重训选择可退役特征，再审计依赖消费者的移除顺序。
 
 ### 自主研究与反馈闭环
 - [EvoSkillRec](../2609.34552-evoskillrec/README.md)：把推荐结构拆成带类型的可执行 skill genome，只将 validation 改善的组合晋级到可复用技能库。

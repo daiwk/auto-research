@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "adapter_key": "janus",
+  "historical_diagnostic_only": true,
+  "measured_locally": true,
+  "is_gpu_receipt": false,
+  "gpu_gate_passed": false,
+  "result": "failed",
+  "failure_category": "cuda_out_of_memory",
+  "requested_allocation_gib": 18.64,
+  "raw_artifact": {
+    "artifact_basename": "janus-active-42.json",
+    "sha256": "47cb004d99c9c488b3cc98f80018c8d78f79d98de827b30f75c8d916fbc81115",
+    "bytes": 661
+  },
+  "actual_launch_budget": {
+    "seed": 42,
+    "rounds": 2,
+    "group_size": 2,
+    "max_tokens": 1536,
+    "train_steps_cli_argument": 2,
+    "train_steps_used_by_janus": false
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "identity_source": "verified launch script; raw OOM summary itself does not contain checkpoint metadata"
+  },
+  "attention_backend": "eager",
+  "attention_backend_evidence": "Hard-coded attn_implementation=eager in the reported execution snapshot; no SDPA CLI option in that snapshot.",
+  "completed_trial_count": null,
+  "capability_comparison": false,
+  "evolve_promotion_eligible": false,
+  "launch_proof": {
+    "artifact_basename": "run_oct12_agents_gpu.sh",
+    "sha256": "ba31f2e33ef757d1fa5bf22831a79a7b5c15e34242efcea27d32259d7346830a",
+    "bytes": 916,
+    "read_lines": [
+      6,
+      7,
+      8,
+      13
+    ],
+    "scope": "Public checkpoint ID/revision, numeric CLI budget, method loop and output-name mapping verified from actual cached launch script; machine paths are not copied."
+  },
+  "source_provenance": {
+    "operator_reported_execution_commit": "3eae2c8863678692a8cf2de988d4562314c2731f",
+    "source_snapshot_sha256": {
+      "scripts/run_oct12_agents.py": "85c6452b2a41e3a287227a4ddce4e59a53e3f2fab76f960fdaafe8d07cc1a8ae",
+      "src/auto_research/agent_research/oct12_entrypoint.py": "acc89866c06c34d67027e275c51831f71be86f226d105ef0d8da0c7f0585dd94",
+      "src/auto_research/agent_research/oct12_checkpoint.py": "930e178e49d803827c910e973ba3f67666477b475996a558fa91a507989d77da",
+      "src/auto_research/agent_research/oct12_evolution.py": "79101f021ddbe128f93a9dcc07c5a60cba9434f778a52b5582c33e6a31d43f32",
+      "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c"
+    },
+    "snapshot_hashes_verified_from_git": true,
+    "execution_commit_independently_embedded_in_raw": false,
+    "limitation": "The launch script independently verifies parameters, and the integration operator associates it with this commit; raw OOM JSON has no embedded command/commit/hash, so raw alone cannot independently establish the execution-to-commit association."
+  },
+  "interpretation": "Eager CUDA OOM is an actual failed run, not successful JANUS core-mechanism or capability evidence. Number of completed trials and final scores are unavailable; no success metrics or passed GPU receipt are created from this failure.",
+  "sanitization": "Only failure category and requested allocation are retained from the exception. Full exception text, PID, machine identity, device index, build strings, real local paths, model outputs and tracebacks are omitted. Later SDPA runs must be recorded separately."
+}

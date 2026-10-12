@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [EDBT 2026 / arXiv 2604.12965](https://arxiv.org/abs/2604.12965) |
-| 公司/机构 | Meta |
+| 公司/机构 | Meta / Facebook and Instagram Ads |
 | 首次公开日期 | 2026-04-14（arXiv v1） |
 | 原文开源代码 | 否：论文未发布 HILL/MoNN 官方实现；只链接 Gowalla、Yelp 2018、Amazon-Book 的第三方数据仓库（核查日期：2026-09-01） |
 | Adapter | `hill-index` |

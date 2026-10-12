@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2607.26418](https://arxiv.org/abs/2607.26418) |
-| 公司/机构 | 中国科学技术大学（第一作者 Yuanhao Pu） |
+| 公司/机构 | University of Science and Technology of China |
 | 首次公开日期 | 2026-07-29（arXiv v1） |
 | 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-01） |
 | Adapter | `director` |

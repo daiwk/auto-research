@@ -1,0 +1,23 @@
+{
+  "source": "original paper only",
+  "source_url": "https://arxiv.org/html/2610.13889v1",
+  "local_run": false,
+  "reviewed_at": "2026-10-12",
+  "rows": [
+    {
+      "metric": "EcoAgent-Real MRR",
+      "reported_value": "0.618",
+      "comparator_or_protocol": "ToolLLM 0.406"
+    },
+    {
+      "metric": "30% persistent failure: fault selection",
+      "reported_value": "2.9%",
+      "comparator_or_protocol": "ToolLLM 86.2%"
+    },
+    {
+      "metric": "additional ranking latency",
+      "reported_value": "0.172 ms/step",
+      "comparator_or_protocol": "原文RTX5070硬件协议"
+    }
+  ]
+}

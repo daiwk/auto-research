@@ -183,6 +183,7 @@
 
 ## Institute of Computing Technology, Chinese Academy of Sciences
 
+- 2026-10-09 · 一作：Mengdi Liu · [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../../reproductions/2610.13194-janus/README.md)（`janus`）：在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。
 - 2026-08-27 · 一作：Hongru Song · [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
 
 ## Institute of Information Engineering, Chinese Academy of Sciences
@@ -269,6 +270,7 @@
 
 ## Nanjing University
 
+- 2026-10-09 · 一作：Yuchen Ling · [When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows](../../reproductions/2610.13092-jev-workflow/README.md)（`jev-workflow`）：这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。
 - 2026-08-05 · 一作：Yi Yang · [OCSD](../2608.04788-ocsd/README.md)（`ocsd`）：直接重放未来 observation 时，token 分数变化同时来自观测信息和重放脚手架。OCSD 构造结构完全匹配的 Full 与 Observation-Ablated 两个 replay，仅以二者残差调制高不确定 step 的 GRPO 更新。
 
 ## Nanyang Technological University
@@ -295,6 +297,7 @@
 
 ## Northeastern University
 
+- 2026-10-09 · 一作：Zijun Wang · [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
 - 2023-03-20 · 一作：Noah Shinn · [Reflexion](../2303.11366-reflexion/README.md)（`reflexion`）：传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。
 
 ## Northwestern
@@ -313,6 +316,10 @@
 
 - 2026-07-30 · 一作：Cong Li · [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
 - 2026-07-29 · 一作：Yicheng Feng · [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
+
+## PhAI Labs / The Chinese University of Hong Kong
+
+- 2026-10-09 · 一作：Taoyong Cui · [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../../reproductions/2610.13912-rsi-anything/README.md)（`rsi-anything`）：候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。
 
 ## PricewaterhouseCoopers Commercial Technology and Innovation Office
 
@@ -379,6 +386,10 @@
 - 2026-08-27 · 一作：Dewu Zheng · [SWE-Prime: Fewer Trajectories, Better Performance](../2608.27449-swe-prime/README.md)（`swe-prime`）：成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。
 - 2026-08-04 · 一作：Xiaolong Sun · [VerMem](../2608.03137-vermem/README.md)（`vermem`）：长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。
 
+## Texas Tech University
+
+- 2026-10-09 · 一作：Weiliang Chen · [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../../reproductions/2610.13889-rated/README.md)（`rated`）：独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。
+
 ## The Chinese University of Hong Kong
 
 - 2026-10-01 · 一作：Yaodong Yang · [Code Owns the Simulation, Jev Owns the Evaluation](../2610.01834-jev-lookahead/README.md)（`jev-lookahead`）：让可执行代码负责模拟每个动作的后继状态，让 Jev 只负责比较动作带来的进展。除了当前动作和下一观察，还显式提供“执行后新出现的可用动作”，降低纯语义动作评分难以预判长期可达性的缺陷。
@@ -441,6 +452,10 @@
 - 2025-04-16 · 一作：Cheng Qian · [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
 - 2025-03-12 · 一作：Bowen Jin · [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
 - 2023-10-06 · 一作：Andy Zhou · [LATS](../2310.04406-lats/README.md)（`lats`）：ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。
+
+## University of Illinois Urbana-Champaign / Google DeepMind
+
+- 2026-10-09 · 一作：Chejian Xu · [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../../reproductions/2610.13025-evo2/README.md)（`evo2`）：固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。
 
 ## University of Illinois Urbana–Champaign / Meta AI
 

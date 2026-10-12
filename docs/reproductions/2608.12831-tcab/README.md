@@ -4,15 +4,15 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2608.12831](https://arxiv.org/abs/2608.12831) |
 | 公司/机构 | New York University |
-| 第一作者 | Yuxiao Wen |
 | 首次公开日期 | 2026-08-13（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-08-24 未发现原作者公开代码 |
 | Adapter | `tcab` |
 | 本地复现代码 | [`src/auto_research/reproductions/tcab/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/tcab/) |
+| 第一作者 | Yuxiao Wen |
 
 ## 原始论文总结
 

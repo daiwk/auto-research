@@ -4,15 +4,15 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2607.29032](https://arxiv.org/abs/2607.29032) |
 | 公司/机构 | Authors did not disclose affiliation |
-| 第一作者 | Haodong Lei |
 | 首次公开日期 | 2026-07-31（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-08-24 未发现原作者公开代码 |
 | Adapter | `transmem` |
 | 本地复现代码 | [`src/auto_research/reproductions/transmem/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/transmem/) |
+| 第一作者 | Haodong Lei |
 
 ## 原始论文总结
 

@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "rated",
+  "title": "RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics",
+  "paper_url": "https://arxiv.org/abs/2610.13889",
+  "detail_path": "reproductions/2610.13889-rated/README.md",
+  "topic": [
+    "tool-retrieval",
+    "execution-reliability",
+    "contextual-bandit"
+  ],
+  "first_author": "Weiliang Chen",
+  "first_author_affiliation": "Texas Tech University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": "https://github.com/Elliotes/EcoAgent",
+  "adapter": {
+    "spec_key": "rated"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct12-rated-a100.json"
+}

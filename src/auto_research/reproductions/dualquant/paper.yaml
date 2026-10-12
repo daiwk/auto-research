@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "key": "dualquant",
+  "arxiv_id": "2610.13767",
+  "title": "DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs",
+  "paper_url": "https://arxiv.org/abs/2610.13767",
+  "organization": "d-Matrix",
+  "published": "2026-10-09",
+  "upstream_code": "https://github.com/MahsaMoonlike/dualquant",
+  "track": "llm",
+  "topics": [
+    "quantization",
+    "calibration-free",
+    "weight-activation-quantization"
+  ],
+  "local_code": "src/auto_research/reproductions/dualquant",
+  "documentation": "docs/reproductions/2610.13767-dualquant/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "WikiText-2 raw, official validation/test"
+  ],
+  "baseline": "same public checkpoint with single-scale INT4 W+A reference arithmetic",
+  "metrics": [
+    "baseline.test_nll",
+    "method.test_nll"
+  ],
+  "mechanisms": [
+    "black-box fixed-grid quantizer",
+    "inner/outer variable splitting",
+    "closed-form projected row/column coordinate updates",
+    "weight-derived column activation rescaling and actual activation quantization"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.dualquant.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/MahsaMoonlike/dualquant",
+      "organization": "d-Matrix",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
+    "budget": "L1 partial checkpoint diagnostic: SmolLM2-135M, four decoder nn.Linear modules, INT4/MXINT4 software simulation, BCD15",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-dualquant-a100.json"
+  }
+}

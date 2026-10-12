@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2609.04852](https://arxiv.org/abs/2609.04852) |
-| 公司/机构 | Shanghai University of Finance and Economics（第一作者第一署名单位） |
+| 公司/机构 | Shanghai University of Finance and Economics |
 | 首次公开日期 | 2026-09-04（arXiv v1） |
-| 原文开源代码 | 是：[kvmem/kvmem-qw3](https://github.com/kvmem/kvmem-qw3) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/kvmem/kvmem-qw3) |
 | Adapter | `kvmem` |
 | 本地复现代码 | [`src/auto_research/reproductions/kvmem/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/kvmem/) |
 

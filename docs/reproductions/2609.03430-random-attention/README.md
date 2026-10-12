@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [Salesforce AI Research preprint](https://arxiv.org/abs/2609.03430) |
-| 公司/机构 | Salesforce AI Research（第一作者第一署名单位） |
+| 公司/机构 | Salesforce AI Research / University of Illinois Urbana-Champaign |
 | 首次公开日期 | 2026-09-03（arXiv v1） |
-| 原文开源代码 | 是：[SalesforceAIResearch/Random-Attention](https://github.com/SalesforceAIResearch/Random-Attention) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/SalesforceAIResearch/Random-Attention) |
 | Adapter | `random-attention` |
 | 本地复现代码 | [`src/auto_research/reproductions/random_attention/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/random_attention/) |
 

@@ -7,6 +7,9 @@ from auto_research.reproductions.reporting import write_reproduction_result
 
 def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
+        "forte", "evo2", "rsi-anything", "branch-opd", "cast-opd", "road-mopd",
+        "msar", "orthros", "dualquant", "boundary-evo", "janus", "t2mem",
+        "rated", "jev-workflow", "woven", "umrm",
         "rptune",
         "agent-web-rec",
         "effective-training-time",
