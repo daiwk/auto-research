@@ -14,7 +14,7 @@
   "published": "2026-10-09",
   "code": null,
   "code_status": "not released / not found; paper promises future code and data",
-  "adapter": "boundary-evo",
+  "adapter": {"spec_key": "boundary-evo"},
   "priority": "P1",
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/boundary-evo-a100-20261012.json"

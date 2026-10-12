@@ -13,7 +13,7 @@ from auto_research.post_training.oct12_objectives import (
 )
 from auto_research.post_training.oct12_checkpoint import (
     ModelRole, boundary_train, branch_step, cast_step, initial_policy, judge_boundary,
-    math_protocol_constraints, reference_logp, road_step, run_adapter, sample_path,
+    load_role, math_protocol_constraints, reference_logp, road_step, run_adapter, sample_path,
 )
 from auto_research.post_training.oct10_checkpoint import install_lora
 
@@ -244,6 +244,24 @@ def test_analyzer_parse_failures_are_not_replaced_by_constant_rewards(monkeypatc
     assert judge_boundary(None,"Q","#### 7","student","expert",64) is None
 
 
+def test_load_role_rejects_arbitrary_directory_before_model_loading(tmp_path):
+    with pytest.raises(ValueError,match="safe checkpoint"):
+        load_role(tmp_path,"public/model","a"*40,"cpu")
+
+
+def test_load_role_requires_local_manifest_hashes_before_model_loading(tmp_path):
+    import hashlib
+    config=tmp_path/"config.json"
+    config.write_text("{}")
+    manifest={"kind":"checkpoint","public_id":"public/model","revision":"a"*40,
+              "files":{"config.json":hashlib.sha256(config.read_bytes()).hexdigest(),
+                       "model.safetensors":"0"*64}}
+    (tmp_path/"model.safetensors").write_bytes(b"arbitrary local weights")
+    (tmp_path/"provenance.json").write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match="SHA256 mismatch"):
+        load_role(tmp_path,"public/model","a"*40,"cpu")
+
+
 def test_pbr_detects_boxed_completion_without_gold():
     tokenizer=SimpleNamespace(eos_token_id=0,decode=lambda ids,**kwargs:"")
     tokenizer.decode=lambda ids,**kwargs:"\\boxed{7}" if len(ids)>=3 else "reasoning"
@@ -273,12 +291,13 @@ def test_paper_metadata_and_original_evidence_complete(key,id):
     root=Path(__file__).resolve().parents[1]
     spec=json.loads((root/f"src/auto_research/reproductions/{key.replace('-','_')}/paper.yaml").read_text())
     catalog=json.loads((root/f"src/auto_research/paper_specs/catalog/post-training/{key}.json").read_text())
+    assert catalog["adapter"] == {"spec_key": key}
     assert spec["published"]==catalog["published"]=="2026-10-09"
     assert spec["upstream_code"] and spec["organization"] and spec["execution"]["requires_gpu_validation"]
     text=(root/spec["documentation"]).read_text()
     for label in ("论文链接","公司 / 机构","首次公开日期","原作者代码","本地 adapter",
                   "本地复现代码","原始论文总结","核心公式","论文离线与线上效果","复现边界"):
         assert label in text
-    evidence=json.loads((root/f"docs/post-training/{id}-{key}/metrics/paper-results.json").read_text())
+    evidence=json.loads((root/f"docs/post-training/{id}-{key}/paper-results.json").read_text())
     assert evidence["paper_reported"] is True and evidence["measured_locally"] is False
     assert (root/f"docs/post-training/{id}-{key}/assets/paper-figure-01.png").is_file()

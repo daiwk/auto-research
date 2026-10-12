@@ -63,11 +63,23 @@ class CheckpointPolicy(LocalLanguageModel):
             output = self.model.generate(ids, attention_mask=torch.ones_like(ids),
                 max_new_tokens=self.max_tokens, do_sample=sample,
                 **({"temperature": .8, "top_p": .95} if sample else {}),
-                pad_token_id=self.tokenizer.eos_token_id)
+                pad_token_id=self.tokenizer.eos_token_id, use_cache=True)
         tokens = output[0, ids.shape[1]:]
         self.last_truncated = len(tokens) >= self.max_tokens and (
             not len(tokens) or int(tokens[-1]) != self.tokenizer.eos_token_id)
         return self.tokenizer.decode(tokens, skip_special_tokens=True)
+
+    def continuation_ids(self, messages, tokens):
+        """Untruncated full-prompt likelihood, with no training KV cache."""
+        import torch
+        prompt = self.prompt_ids(messages)[0]
+        response = torch.tensor(tokens, device=self.device)
+        if not response.numel():
+            raise ValueError("nonempty continuation required")
+        ids = torch.cat((prompt, response))[None]
+        logits = self.model(ids, attention_mask=torch.ones_like(ids), use_cache=False).logits.float()
+        selected = logits[:, prompt.numel() - 1:-1].log_softmax(-1)
+        return selected.gather(-1, response[None, :, None]).squeeze(-1)[0]
 
     def probabilities(self, messages, choices):
         import torch
@@ -134,6 +146,24 @@ class HarnessEvaluator:
 
 
 class Evo2Policy(CheckpointPolicy):
+    def prepare_memory_efficient_training(self):
+        """Checkpoint activations, never shorten prompts or change the loss.
+
+        The supported public Qwen checkpoints have zero training dropout, so
+        train-mode checkpointing preserves the original eval-mode likelihood.
+        Positive-dropout checkpoints fail closed rather than change that loss.
+        """
+        config = getattr(self.model, "config", None)
+        if config is not None:
+            for name in ("attention_dropout", "hidden_dropout", "hidden_dropout_prob", "dropout"):
+                if float(getattr(config, name, 0.) or 0.) != 0.:
+                    raise ValueError("strict equivalent memory mode requires zero dropout")
+            config.use_cache = False
+        if hasattr(self.model, "gradient_checkpointing_enable"):
+            self.model.gradient_checkpointing_enable()
+            self.model.enable_input_require_grads()
+        self.model.train()
+
     def propose(self, parent, directive=None, donor=None):
         messages = [{"role": "user", "content": json.dumps({
             "role": "Type B directed Proposer" if directive else "Type A autonomous Proposer",
@@ -231,20 +261,23 @@ class Evo2Policy(CheckpointPolicy):
         install_lora(self.model)
         parameters = [p for p in self.model.parameters() if p.requires_grad]
         self.optimizer = torch.optim.AdamW(parameters, lr=3e-5)
+        self.prepare_memory_efficient_training()
         history = []
         before = parameter_digest(self.model,trainable_only=True)
         for step in range(steps):
-            terms = []
+            self.optimizer.zero_grad()
+            loss_value = 0.
             for role in ("proposer", "reflector"):
                 rows = [t for t in trajectories if t.role == role]
                 row = rows[step % len(rows)]
-                terms.append(-self.trajectory_logps(row).mean())
-            self.optimizer.zero_grad()
-            loss = torch.stack(terms).mean()
-            loss.backward()
+                # Same mean over two roles, but only one live trajectory graph.
+                term = -self.trajectory_logps(row).mean() / 2
+                loss_value += float(term.detach())
+                term.backward()
+                del term
             norm = torch.nn.utils.clip_grad_norm_(parameters, 1.)
             self.optimizer.step()
-            history.append({"loss": float(loss.detach()), "gradient_norm": float(norm)})
+            history.append({"loss": loss_value, "gradient_norm": float(norm)})
         return {"steps": history, "parameters_changed": parameter_digest(self.model,trainable_only=True) != before,
                 "native_trajectories": len(trajectories),
                 "neutral_trajectories": sum(t.reward == 0 for t in trajectories)}
@@ -260,31 +293,33 @@ class Evo2Policy(CheckpointPolicy):
                 old.append([self.trajectory_logps(t).detach() if not t.truncated else None
                             for t in group])
         self.optimizer.zero_grad()
-        role_losses, audit = [], []
+        self.prepare_memory_efficient_training()
+        role_count = sum(any(value is not None for value in previous) for previous in old)
+        loss_value, audit = 0., []
         before = parameter_digest(self.model,trainable_only=True)
         for group, previous in zip(groups, old):
             rewards = torch.tensor([t.reward for t in group], device=self.device)
             advantages = rewards - rewards.mean()
-            terms = []
+            eligible = sum(value is not None for value in previous)
             for index, trajectory in enumerate(group):
                 if previous[index] is None:
                     continue  # paper masks truncated responses, no fabricated suffix
                 current = self.trajectory_logps(trajectory)
                 ratio = (current - previous[index]).exp()
                 clipped = ratio.clamp(.8, 1.2)
-                terms.append(-torch.minimum(ratio * advantages[index], clipped * advantages[index]).sum()
-                             / self.max_tokens)
-            if terms:
-                role_losses.append(torch.stack(terms).mean())
+                # Exactly the original eligible-sample mean, then role mean.
+                term = -torch.minimum(ratio * advantages[index], clipped * advantages[index]).sum()
+                term = term / self.max_tokens / eligible / role_count
+                loss_value += float(term.detach())
+                term.backward()
+                del current, ratio, clipped, term
             audit.append({"role": group[0].role, "rewards": rewards.tolist(),
                 "advantages": advantages.tolist(), "masked_truncated": sum(t.truncated for t in group)})
-        if not role_losses:
+        if not role_count:
             return {"round": round_id, "updated": False, "reason": "all samples truncated", "groups": audit}
-        loss = torch.stack(role_losses).mean()
-        loss.backward()
         norm = torch.nn.utils.clip_grad_norm_(parameters, 1.)
         self.optimizer.step()
-        return {"round": round_id, "updated": True, "loss": float(loss.detach()),
+        return {"round": round_id, "updated": True, "loss": loss_value,
                 "parameters_changed":parameter_digest(self.model,trainable_only=True) != before,
                 "gradient_norm": float(norm), "groups": audit}
 

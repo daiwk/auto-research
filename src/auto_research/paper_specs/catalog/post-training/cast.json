@@ -14,7 +14,7 @@
   "published": "2026-10-09",
   "code": null,
   "code_status": "not released / not found",
-  "adapter": "cast",
+  "adapter": {"spec_key": "cast"},
   "priority": "P0",
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/cast-a100-20261012.json"

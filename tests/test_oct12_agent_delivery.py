@@ -34,7 +34,7 @@ def test_oct12_six_paper_bindings_metadata_and_documentation(key,identifier):
     assert evidence["local_run"] is False
     assert "diagnostic_only" not in evidence  # paper reports are not local diagnostics
     catalog = json.loads((ROOT / "src/auto_research/paper_specs/catalog/agent-research" / (key+".json")).read_text())
-    assert catalog["adapter"] == key and catalog["published"] == spec.published
+    assert catalog["adapter"] == {"spec_key":key} and catalog["published"] == spec.published
 
 
 def test_janus_is_not_mislabelled_as_author_released_implementation():
@@ -48,3 +48,20 @@ def test_jev_is_evaluation_infrastructure_not_a_gpu_model_claim():
     assert adapter.requires_gpu_validation is False
     assert adapter.gpu_validation_artifact is None
     assert adapter.paper.code_url == "https://anonymous.4open.science/r/jev-emp-5BF4/"
+
+
+def test_six_catalog_records_resolve_to_packaged_specs_and_runnable_bindings():
+    from auto_research.paper_specs.catalog import catalog_records
+    records = {row["key"]:row for row in catalog_records() if row["key"] in PAPERS}
+    assert set(records) == set(PAPERS)
+    for key,row in records.items():
+        assert row["adapter"]["adapter_key"] == key
+        assert row["adapter"]["arxiv_id"] == PAPERS[key]
+        assert row["adapter"]["local_code_dir"] == "src/auto_research/reproductions/" + key.replace("-","_")
+        assert row["adapter"]["requires_gpu_validation"] is (key != "jev-workflow")
+
+
+def test_documented_bash_commands_have_single_line_continuations():
+    for key,identifier in PAPERS.items():
+        text = (ROOT/"docs/reproductions"/(identifier+"-"+key)/"README.md").read_text()
+        assert not any(line.endswith("\\\\") for line in text.splitlines())

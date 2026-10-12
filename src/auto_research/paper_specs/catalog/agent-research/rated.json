@@ -14,7 +14,9 @@
   "published": "2026-10-09",
   "priority": "P1",
   "code": "https://github.com/Elliotes/EcoAgent",
-  "adapter": "rated",
+  "adapter": {
+    "spec_key": "rated"
+  },
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/oct12-rated-a100.json"
 }

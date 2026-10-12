@@ -156,6 +156,123 @@ def test_evo2_warmup_and_interleaved_role_losses_have_real_gradients():
     assert policy.interleaved_grpo(truncated,truncated,round_id=1)["updated"] is False
 
 
+def test_evo2_sequential_sft_matches_original_batched_gradient_and_one_step(monkeypatch):
+    from auto_research.post_training.oct10_checkpoint import install_lora
+    torch.manual_seed(101)
+    policy = Evo2Policy.__new__(Evo2Policy)
+    policy.model, policy.device, policy.max_tokens = NeuralFixture(),"cpu",32
+    policy.continuation = lambda messages,target: policy.model()[torch.tensor([ord(c)%128 for c in target])]
+    reference = copy.deepcopy(policy.model)
+    prompt = ({"role":"user","content":"L0 loss equivalence, no gold"},)
+    rows = [Trajectory("proposer","A",prompt,"abc",0.,True),
+            Trajectory("reflector","local",prompt,"keep",0.,True)]
+    torch.manual_seed(202)
+    install_lora(reference)
+    parameters = [p for p in reference.parameters() if p.requires_grad]
+    optimizer = torch.optim.AdamW(parameters,lr=3e-5)
+    terms = [-reference()[torch.tensor([ord(c)%128 for c in row.response])].mean() for row in rows]
+    expected_loss = torch.stack(terms).mean()
+    expected_loss.backward()
+    expected_gradients = [p.grad.clone() for p in parameters]
+    clip = torch.nn.utils.clip_grad_norm_
+    clip(parameters,1.)
+    optimizer.step()
+    observed = []
+    def capture(parameters,max_norm):
+        parameters = list(parameters)
+        observed.append([p.grad.clone() for p in parameters])
+        return clip(parameters,max_norm)
+    monkeypatch.setattr(torch.nn.utils,"clip_grad_norm_",capture)
+    torch.manual_seed(202)
+    result = policy.sft(rows,steps=1)
+    assert len(observed) == 1  # one clip/optimizer update, not one per trajectory
+    assert result["steps"][0]["loss"] == pytest.approx(float(expected_loss.detach()),rel=1e-6)
+    for actual,expected in zip(observed[0],expected_gradients):
+        torch.testing.assert_close(actual,expected,rtol=1e-5,atol=1e-7)
+    for actual,expected in zip(policy.model.parameters(),reference.parameters()):
+        torch.testing.assert_close(actual,expected,rtol=1e-5,atol=1e-7)
+
+
+@pytest.mark.parametrize("mask_reflector",[False,True])
+def test_evo2_sequential_grpo_matches_uneven_masked_role_gradient(monkeypatch,mask_reflector):
+    from auto_research.post_training.oct10_checkpoint import install_lora
+    torch.manual_seed(303)
+    policy = Evo2Policy.__new__(Evo2Policy)
+    policy.model,policy.device,policy.max_tokens = NeuralFixture(),"cpu",32
+    install_lora(policy.model)
+    policy.continuation = lambda messages,target: policy.model()[torch.tensor([ord(c)%128 for c in target])]
+    parameters = [p for p in policy.model.parameters() if p.requires_grad]
+    policy.optimizer = torch.optim.AdamW(parameters,lr=3e-5)
+    reference = copy.deepcopy(policy.model)
+    reference_parameters = [p for p in reference.parameters() if p.requires_grad]
+    reference_optimizer = torch.optim.AdamW(reference_parameters,lr=3e-5)
+    prompt = ({"role":"user","content":"L0 masked role denominator"},)
+    groups = [[Trajectory("proposer","A",prompt,"a",1.,True),
+               Trajectory("proposer","A",prompt,"bb",0.,True),
+               Trajectory("proposer","A",prompt,"c",.3,True,True)],
+              [Trajectory("reflector","local",prompt,"keep",.2,True,mask_reflector),
+               Trajectory("reflector","local",prompt,"revise",.8,True,mask_reflector)]]
+    def logps(row):
+        return reference()[torch.tensor([ord(c)%128 for c in row.response])]
+    reference.eval()
+    with torch.no_grad():
+        old = [[logps(row).detach() if not row.truncated else None for row in group] for group in groups]
+    reference.train()
+    role_losses = []
+    for group,previous in zip(groups,old):
+        rewards = torch.tensor([row.reward for row in group])
+        advantages = rewards-rewards.mean()
+        terms = []
+        for index,row in enumerate(group):
+            if previous[index] is None:
+                continue
+            ratio = (logps(row)-previous[index]).exp()
+            terms.append(-torch.minimum(ratio*advantages[index],ratio.clamp(.8,1.2)*advantages[index]).sum()/32)
+        if terms:
+            role_losses.append(torch.stack(terms).mean())
+    expected_loss = torch.stack(role_losses).mean()
+    expected_loss.backward()
+    expected_gradients = [p.grad.clone() for p in reference_parameters]
+    clip = torch.nn.utils.clip_grad_norm_
+    clip(reference_parameters,1.)
+    reference_optimizer.step()
+    observed = []
+    def capture(parameters,max_norm):
+        parameters = list(parameters)
+        observed.append([p.grad.clone() for p in parameters])
+        return clip(parameters,max_norm)
+    monkeypatch.setattr(torch.nn.utils,"clip_grad_norm_",capture)
+    result = policy.interleaved_grpo(*groups,round_id=0)
+    assert len(observed) == 1 and result["updated"]
+    assert result["loss"] == pytest.approx(float(expected_loss.detach()),rel=1e-6,abs=1e-8)
+    for actual,expected in zip(observed[0],expected_gradients):
+        torch.testing.assert_close(actual,expected,rtol=1e-5,atol=1e-7)
+    for actual,expected in zip(policy.model.parameters(),reference.parameters()):
+        torch.testing.assert_close(actual,expected,rtol=1e-5,atol=1e-7)
+
+
+def test_real_tiny_qwen_checkpointing_retains_full_prompt_likelihood():
+    from transformers import Qwen2Config,Qwen2ForCausalLM
+    from auto_research.post_training.oct10_checkpoint import install_lora
+    torch.manual_seed(404)
+    config = Qwen2Config(vocab_size=128,hidden_size=32,intermediate_size=64,
+                        num_hidden_layers=2,num_attention_heads=4,num_key_value_heads=2,
+                        attention_dropout=0.)
+    policy = Evo2Policy.__new__(Evo2Policy)
+    policy.model,policy.device = Qwen2ForCausalLM(config),"cpu"
+    policy.prompt_ids = lambda messages: torch.tensor([[1,2,3,4,5,6,7]])
+    install_lora(policy.model)
+    policy.model.eval()
+    expected = policy.continuation_ids([], [8,9,10]).detach()
+    policy.prepare_memory_efficient_training()
+    assert policy.model.is_gradient_checkpointing and policy.model.config.use_cache is False
+    actual = policy.continuation_ids([], [8,9,10])
+    torch.testing.assert_close(actual.detach(),expected,rtol=1e-5,atol=1e-6)
+    assert len(actual) == 3  # no prompt/response truncation in memory mode
+    (-actual.mean()).backward()
+    assert any(p.grad is not None and p.grad.abs().sum()>0 for p in policy.model.parameters() if p.requires_grad)
+
+
 def test_discounted_bandit_updates_selected_arm_only_and_reacts_to_failure():
     bandit = DiscountedLinUCB({"a":.9,"b":.8},2,weights=(0,1,0))
     context = np.array([1.,0.])

@@ -16,6 +16,8 @@ import re
 import torch
 
 from auto_research.public_holdout import validate_holdout
+from auto_research.agent_research.oct12_provenance import verify_local_checkpoint
+from auto_research.oct12_public_sources import checkpoint_source
 from .oct10_checkpoint import _logits, _prompt, install_lora, load_public_rows, verified_reward
 from .oct12_objectives import (
     BoundaryAssessment, actor_loss, boundary_selection, branch_forks, branch_loss,
@@ -40,13 +42,22 @@ def load_role(path, identifier, revision, device):
         raise ValueError("each model role needs a local path, public ID and pinned revision")
     if not re.fullmatch(r"[0-9a-fA-F]{40}",revision):
         raise ValueError("public model revision must be an immutable 40-character commit, not main/latest")
-    tokenizer = AutoTokenizer.from_pretrained(path, local_files_only=True)
+    path = Path(path)
+    if (path/"provenance.json").is_file():
+        source,kwargs,provenance = checkpoint_source(identifier,revision,path)
+        identity = {"id":identifier,"revision":revision,"immutable_revision_verified":True,
+                    "verification":"pinned public-source manifest with exact file SHA256",
+                    "file_sha256":provenance["file_sha256"]}
+    else:
+        identity = verify_local_checkpoint(path,identifier,revision)
+        source,kwargs = str(path),{"local_files_only":True}
+    tokenizer = AutoTokenizer.from_pretrained(source,trust_remote_code=False,**kwargs)
     tokenizer.pad_token = tokenizer.pad_token or tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        path, local_files_only=True, dtype=torch.bfloat16 if device.startswith("cuda") else torch.float32,
+        source, trust_remote_code=False, **kwargs, dtype=torch.bfloat16 if device.startswith("cuda") else torch.float32,
         attn_implementation="eager").to(device).eval()
     model.requires_grad_(False)
-    return ModelRole(model, tokenizer, {"id": identifier, "revision": revision}, device)
+    return ModelRole(model, tokenizer, identity, device)
 
 
 def sample_path(role, question, max_tokens, *, prefix=None, greedy=False):
@@ -118,6 +129,9 @@ def math_protocol_constraints(tokenizer, response, *, prompt_length, fork=0):
 
 def branch_step(student, teacher, question, optimizer, *, max_tokens, forks, continuations,
                 pbr_weight, min_fork_gap):
+    # Declare the mathematical response protocol rather than waiting for a
+    # small checkpoint to spontaneously choose LaTeX. No labels enter this path.
+    question = question + "\nPut your final numeric result in \\boxed{...}, then end the response."
     main, prompt_length = sample_path(student, question, max_tokens)
     with torch.no_grad():
         rollout_logits, old = sampled_logp(student.model, main)
@@ -392,7 +406,7 @@ def run_checkpoint(*, objective, student_path, student_id, student_revision, tea
     identities = {"student":student.identity,"teacher":teacher.identity}
     if objective=="road-mopd":
         auxiliary = load_role(auxiliary_path,auxiliary_id,auxiliary_revision,device)
-        if auxiliary.identity==teacher.identity:
+        if (auxiliary.identity["id"],auxiliary.identity["revision"]) == (teacher.identity["id"],teacher.identity["revision"]):
             raise ValueError("Road requires distinct frozen teachers, not renamed copies")
         if auxiliary.tokenizer.get_vocab()!=student.tokenizer.get_vocab():
             raise ValueError("auxiliary teacher token identities must match student")

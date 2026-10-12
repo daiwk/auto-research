@@ -14,7 +14,9 @@
   "published": "2026-10-09",
   "priority": "P1",
   "code": "https://anonymous.4open.science/r/jev-emp-5BF4/",
-  "adapter": "jev-workflow",
+  "adapter": {
+    "spec_key": "jev-workflow"
+  },
   "requires_gpu_validation": false,
   "gpu_validation_artifact": null
 }

@@ -14,7 +14,7 @@
   "published": "2026-10-09",
   "code": "https://github.com/chendy25/BranchOPD",
   "code_status": "not released implementation; upstream currently LICENSE/README only",
-  "adapter": "branch-opd",
+  "adapter": {"spec_key": "branch-opd"},
   "priority": "P0",
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/branch-opd-a100-20261012.json"

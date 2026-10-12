@@ -14,7 +14,9 @@
   "published": "2026-10-09",
   "priority": "P0",
   "code": null,
-  "adapter": "evo2",
+  "adapter": {
+    "spec_key": "evo2"
+  },
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/oct12-evo2-a100.json"
 }

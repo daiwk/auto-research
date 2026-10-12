@@ -14,7 +14,9 @@
   "published": "2026-10-09",
   "priority": "P1",
   "code": null,
-  "adapter": "janus",
+  "adapter": {
+    "spec_key": "janus"
+  },
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/oct12-janus-a100.json"
 }
