@@ -7,7 +7,8 @@ import math
 from pathlib import Path
 import re
 
-from .oct12_checkpoint import (CheckpointPolicy, Evo2Policy, HarnessEvaluator, INITIAL_PROMPT,
+from .oct12_checkpoint import (CheckpointPolicy, Evo2Policy, HarnessEvaluator, GSMHarnessEvaluator,
+    INITIAL_PROMPT, GSM_INITIAL_PROMPT,
     JanusBackend, RSIBackend, harness_source, make_factorized_predictor)
 from .oct12_evolution import Evaluation, Evo2, Janus, RSIAnything
 from .oct12_memory_tools import DualEncoder, RATED, T2Mem, WorkflowOutcome, audit_workflows
@@ -16,12 +17,19 @@ from .oct12_provenance import verify_local_checkpoint
 
 
 METHODS = ("evo2", "rsi-anything", "janus", "t2mem", "rated", "jev-workflow")
+ENVIRONMENTS = ("circle-packing", "gsm8k-harness")
 
 
 def active_grpo_update(row):
     """Parameter drift from historical optimizer state is not new learning."""
     return bool(row.get("updated") and row.get("parameters_changed") and
                 math.isfinite(row.get("gradient_norm",0.)) and row.get("gradient_norm",0.) > 0.)
+
+
+def active_sft_update(row):
+    return bool(row.get("parameters_changed") and any(
+        math.isfinite(step.get("gradient_norm",0.)) and step.get("gradient_norm",0.) > 0.
+        for step in row.get("steps",[])))
 
 
 def load_jsonl(path):
@@ -38,9 +46,14 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
                query_checkpoint=None, tool_checkpoint=None,checkpoint_id=None,checkpoint_revision=None,
                executor_checkpoint=None,executor_id=None,executor_revision=None,
                query_checkpoint_id=None,query_checkpoint_revision=None,
-               tool_checkpoint_id=None,tool_checkpoint_revision=None):
+               tool_checkpoint_id=None,tool_checkpoint_revision=None,
+               environment="circle-packing",evaluation_examples=8,executor_max_tokens=None):
     if method not in METHODS:
         raise ValueError("unknown October agent method")
+    if environment not in ENVIRONMENTS or (environment != "circle-packing" and method != "evo2"):
+        raise ValueError("non-default environment is supported only for Evo2")
+    if executor_max_tokens is not None and (method != "evo2" or executor_max_tokens < 1):
+        raise ValueError("positive executor_max_tokens is supported only for Evo2")
     if method not in {"rated", "jev-workflow"} and not checkpoint:
         raise ValueError("local checkpoint required")
     settings = {"device": device, "seed": seed, "max_tokens": max_tokens}
@@ -58,17 +71,28 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
             tool_checkpoint_id,tool_checkpoint_revision)
     if method == "evo2":
         policy = Evo2Policy(checkpoint, **settings)
-        executor = CheckpointPolicy(executor_checkpoint, **settings)
-        evaluator = HarnessEvaluator(executor)
-        controller = Evo2(policy, evaluator, {"agent.py": harness_source(INITIAL_PROMPT)}, seed=seed)
+        executor = CheckpointPolicy(executor_checkpoint, **{**settings,
+            "max_tokens":executor_max_tokens if executor_max_tokens is not None else max_tokens})
+        if environment == "gsm8k-harness":
+            evaluator = GSMHarnessEvaluator(executor,dataset,examples=evaluation_examples)
+            initial_prompt = GSM_INITIAL_PROMPT
+        else:
+            evaluator,initial_prompt = HarnessEvaluator(executor),INITIAL_PROMPT
+        controller = Evo2(policy, evaluator, {"agent.py": harness_source(initial_prompt)}, seed=seed)
         result = controller.train(warmup_iterations=2, rounds=rounds, group_size=group_size,
                                   steps=train_steps)
         result.update(evaluator.frozen_audit())
-        if not result["warmup"]["parameters_changed"] or not any(
+        if not active_sft_update(result["warmup"]) or not any(
                 active_grpo_update(row) for row in result["training"]):
             result["status"] = "failed"
             result["failure_reason"] = "Evo2 did not complete active SFT and GRPO parameter updates"
-        result["environment"] = "public-circle-packing-26"
+        result["environment"] = "gsm8k-harness" if environment == "gsm8k-harness" else "public-circle-packing-26"
+        result["policy_max_tokens"] = max_tokens
+        result["executor_max_tokens"] = executor.max_tokens
+        if environment == "gsm8k-harness":
+            result["dataset"] = evaluator.dataset_provenance
+            result["evaluation_examples"] = evaluator.evaluation_examples
+            result["validation_selection"] = "first N rows of verified train-only validation partition; no test read"
         result["harness_restriction"] = "executable source edits limited to arbitrary generated PROMPT"
         result["scores"] = [{"id": node.identifier, "normalized_score": node.evaluation.score,
             "raw_geometry_score": next((t["raw_geometry_score"] for t in node.evaluation.trace
@@ -76,6 +100,9 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
             "external_feedback":[t.get("feedback",t.get("error")) for t in node.evaluation.trace],
             "generated_program_sha256":next((hashlib.sha256(t["generated_program"].encode()).hexdigest()
                 for t in node.evaluation.trace if "generated_program" in t),None)} for node in controller.nodes]
+        if environment == "gsm8k-harness":
+            for item,node in zip(result["scores"],controller.nodes):
+                item["external_scoring_trace"] = list(node.evaluation.trace)
     elif method == "rsi-anything":
         backend = RSIBackend(checkpoint, **settings)
         sandbox = ProgramSandbox()

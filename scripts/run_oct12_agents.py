@@ -2,7 +2,7 @@
 import argparse
 import json
 from pathlib import Path
-from auto_research.agent_research.oct12_entrypoint import METHODS, run_method
+from auto_research.agent_research.oct12_entrypoint import ENVIRONMENTS, METHODS, run_method
 
 
 def main():
@@ -26,6 +26,9 @@ def main():
     parser.add_argument("--rounds", type=int, default=2)
     parser.add_argument("--group-size", type=int, default=2)
     parser.add_argument("--max-tokens", type=int, default=256)
+    parser.add_argument("--executor-max-tokens", type=int)
+    parser.add_argument("--environment",choices=ENVIRONMENTS,default="circle-packing")
+    parser.add_argument("--evaluation-examples",type=int,default=8)
     parser.add_argument("--train-steps", type=int, default=2)
     arguments = vars(parser.parse_args())
     output = arguments.pop("output")

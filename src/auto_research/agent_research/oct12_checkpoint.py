@@ -19,6 +19,7 @@ from .program_sandbox import CIRCLE_TASK, ProgramSandbox
 
 
 INITIAL_PROMPT = "Write a valid complete Python circle-packing solver. Return source code only."
+GSM_INITIAL_PROMPT = "Solve the arithmetic word problem carefully. Explain your reasoning and end with the numerical answer in \\boxed{...}."
 
 
 def harness_source(prompt):
@@ -118,7 +119,8 @@ class HarnessEvaluator:
         self.initial_digest = parameter_digest(executor.model)
         self.calls = 0
 
-    def __call__(self, files):
+    def evaluate_harness(self, files):
+        """Obtain a typed prompt only through the unchanged fail-closed sandbox."""
         output, error, status = self.sandbox.execute(files["agent.py"])
         if status:
             if error.startswith("bwrap:") or "Operation not permitted" in error:
@@ -131,6 +133,12 @@ class HarnessEvaluator:
                 raise ValueError("invalid candidate prompt")
         except (ValueError, KeyError, TypeError):
             return Evaluation(0., ({"stage": "harness", "error": "invalid typed output"},), False, False)
+        return prompt
+
+    def __call__(self, files):
+        prompt = self.evaluate_harness(files)
+        if isinstance(prompt, Evaluation):
+            return prompt
         response = self.executor.generate([{"role": "user", "content": CIRCLE_TASK + "\n" + prompt}],
                                           sample=False)
         result = self.sandbox.evaluate_packing(extract_source(response))
@@ -145,7 +153,64 @@ class HarnessEvaluator:
                 parameter_digest(self.executor.model) == self.initial_digest}
 
 
+class GSMHarnessEvaluator(HarnessEvaluator):
+    """Verified official train-only holdout; answers exist only in this scorer.
+
+    Executor sees question + candidate PROMPT. Evolution receives only question
+    hashes, correctness and output hashes, never answers or executor text.
+    """
+    def __init__(self, executor, validation_path, *, examples=8, sandbox=None):
+        from pathlib import Path
+        from auto_research.datasets import GSM8K_FILES, GSM8K_REVISION
+        from auto_research.public_holdout import validate_holdout
+        from auto_research.post_training.oct10_checkpoint import numeric_answer
+        if validation_path is None or Path(validation_path).name != "validation.jsonl":
+            raise ValueError("GSM harness requires the verified validation.jsonl partition")
+        if not isinstance(examples,int) or isinstance(examples,bool) or examples < 1:
+            raise ValueError("positive evaluation_examples required")
+        path = Path(validation_path)
+        self.dataset_provenance = validate_holdout(path.parent / "split.json",
+            path.parent / "train.jsonl", path, dataset_revision=GSM8K_REVISION)
+        if (not self.dataset_provenance["verified"] or
+                self.dataset_provenance["source_id"] != "openai/grade-school-math" or
+                self.dataset_provenance["source_sha256"] != GSM8K_FILES["train.jsonl"]):
+            raise ValueError("verified official GSM8K train-only source required")
+        rows = [json.loads(line) for line in path.read_text().split("\n") if line.strip()]
+        if len(rows) < examples:
+            raise ValueError("evaluation_examples exceeds verified validation partition")
+        self._scoring_rows = rows[:examples]
+        if any(not isinstance(row.get("question"),str) or not row["question"].strip() or
+               not isinstance(row.get("answer"),str) or numeric_answer(row["answer"]) is None
+               for row in self._scoring_rows):
+            raise ValueError("GSM scoring rows require questions and valid external numeric references")
+        self.evaluation_examples = examples
+        super().__init__(executor, sandbox=sandbox)
+
+    def __call__(self, files):
+        from auto_research.post_training.oct10_checkpoint import verified_reward
+        prompt = self.evaluate_harness(files)
+        if isinstance(prompt, Evaluation):
+            return prompt
+        trace = []
+        for row in self._scoring_rows:
+            response = self.executor.generate([{"role":"user",
+                "content":row["question"] + "\n\n" + prompt}],sample=False)
+            correct = verified_reward(response,row["answer"])
+            self.calls += 1
+            trace.append({"question_sha256":hashlib.sha256(row["question"].encode()).hexdigest(),
+                "correct":correct,"output_sha256":hashlib.sha256(response.encode()).hexdigest()})
+        return Evaluation(sum(row["correct"] for row in trace)/len(trace),tuple(trace),True,True)
+
+
 class Evo2Policy(CheckpointPolicy):
+    @staticmethod
+    def group_advantages(rewards):
+        import torch
+        # A float32 mean of seven identical 0.1 values can differ from 0.1.
+        # Equal rewards contain exactly no relative signal, regardless of that
+        # reduction rounding. Do not introduce arbitrary gradient thresholds.
+        return torch.zeros_like(rewards) if bool(rewards.max()==rewards.min()) else rewards-rewards.mean()
+
     def prepare_memory_efficient_training(self):
         """Checkpoint activations, never shorten prompts or change the loss.
 
@@ -170,7 +235,7 @@ class Evo2Policy(CheckpointPolicy):
             "candidate_source": parent.files, "observed_score": parent.evaluation.score,
             "execution_feedback": parent.evaluation.trace, "directive": directive, "donor": donor,
             "instruction": "Write the replacement PROMPT string for agent.py. Return only its text. "
-            "No solutions or claimed scores; this prompt is consumed by a fixed coding executor."})}]
+            "No solutions or claimed scores; this prompt is consumed by a fixed task executor."})}]
         response = self.generate(messages)
         edits = self.extract_edits(parent.files, response)
         return response, edits, messages, self.last_truncated
@@ -299,7 +364,7 @@ class Evo2Policy(CheckpointPolicy):
         learning_signal = False
         for group, previous in zip(groups, old):
             rewards = torch.tensor([t.reward for t in group], device=self.device)
-            advantages = rewards - rewards.mean()
+            advantages = self.group_advantages(rewards)
             learning_signal |= any(value is not None and float(advantages[i]) != 0.
                                    for i, value in enumerate(previous))
             audit.append({"role": group[0].role, "rewards": rewards.tolist(),
@@ -313,7 +378,7 @@ class Evo2Policy(CheckpointPolicy):
         self.prepare_memory_efficient_training()
         for group, previous in zip(groups, old):
             rewards = torch.tensor([t.reward for t in group], device=self.device)
-            advantages = rewards - rewards.mean()
+            advantages = self.group_advantages(rewards)
             eligible = sum(value is not None for value in previous)
             for index, trajectory in enumerate(group):
                 if previous[index] is None:
