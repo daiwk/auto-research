@@ -37,7 +37,7 @@ $g_i^{(t)}=s_i^e-s_i^{s,(t)}$；接受需 expert 可靠、学生未掌握、gap 
 
 ### 论文离线与线上效果
 
-原文使用 Qwen3.5-4B、100 条 priming+3×300 evolution，共 1000 条；IMO-AnswerBench 62.9%→75.3%，AMO-Bench 26.8%→46.0%。Teacher、expert、analyzer 角色分别由 DeepSeek-V3.2-Speciale、GPT-5.1、Gemini 3.5 Flash 提供。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](metrics/paper-results.json)，`paper_reported=true`、`measured_locally=false`；不能作为本地复现指标。
+原文使用 Qwen3.5-4B、100 条 priming+3×300 evolution，共 1000 条；IMO-AnswerBench 62.9%→75.3%，AMO-Bench 26.8%→46.0%。Teacher、expert、analyzer 角色分别由 DeepSeek-V3.2-Speciale、GPT-5.1、Gemini 3.5 Flash 提供。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](paper-results.json)，`paper_reported=true`、`measured_locally=false`；独立存放于非 metrics 目录，不能作为本地复现指标。
 
 ## 本地复现
 

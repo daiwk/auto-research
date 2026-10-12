@@ -37,7 +37,7 @@ flowchart LR
 
 ### 论文离线与线上效果
 
-原文跨 tokenizer Qwen3-8B→Mistral/Llama 相对最强对照 Avg-6 改善 2.45/1.32 个百分点；三 seed CAST 平均为 47.01±0.28 与 43.72±0.16。Table 4 matched uniform control 为 45.07%，CAST 为 47.22%。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](metrics/paper-results.json)，`paper_reported=true`、`measured_locally=false`；不能作为本地复现指标。
+原文跨 tokenizer Qwen3-8B→Mistral/Llama 相对最强对照 Avg-6 改善 2.45/1.32 个百分点；三 seed CAST 平均为 47.01±0.28 与 43.72±0.16。Table 4 matched uniform control 为 45.07%，CAST 为 47.22%。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](paper-results.json)，`paper_reported=true`、`measured_locally=false`；独立存放于非 metrics 目录，不能作为本地复现指标。
 
 ## 本地复现
 

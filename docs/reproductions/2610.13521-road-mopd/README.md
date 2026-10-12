@@ -38,7 +38,7 @@ $s_t=\tanh((\ell_t^r-\ell_t^{ref})/\tau)\tanh((\ell_t^a-\ell_t^{ref})/\tau)$，$
 
 ### 论文离线与线上效果
 
-原文 Table 1 Math×Medical / Qwen3-4B：Vanilla MOPD 综合 42.71%，Road 47.92%；Medical 域平均从 39.45% 到 48.23%。论文也报告低冲突与三域设置；本地不据公式证明这些能力结论。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](metrics/paper-results.json)，`paper_reported=true`、`measured_locally=false`；不能作为本地复现指标。
+原文 Table 1 Math×Medical / Qwen3-4B：Vanilla MOPD 综合 42.71%，Road 47.92%；Medical 域平均从 39.45% 到 48.23%。论文也报告低冲突与三域设置；本地不据公式证明这些能力结论。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](paper-results.json)，`paper_reported=true`、`measured_locally=false`；独立存放于非 metrics 目录，不能作为本地复现指标。
 
 ## 本地复现
 

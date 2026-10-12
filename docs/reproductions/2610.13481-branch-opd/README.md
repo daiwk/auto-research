@@ -36,7 +36,7 @@ $v_t=\alpha R(U_t)+(1-\alpha)R(D_t)$。$A_t=\mathrm{clip}(\mathrm{sg}[\log\pi_T(
 
 ### 论文离线与线上效果
 
-论文 Table 1：数学 avg@16 宏平均 BranchOPD 44.37%，Vanilla OPD+PBR 38.94%，7-rollout OPD+PBR 39.09%。Table 2：ALFWorld ID/OOD 为 57.86%/55.22%。Table 11 测得 ALFWorld/WebShop 生成 token 节约 19.1%/31.2%。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](metrics/paper-results.json)，`paper_reported=true`、`measured_locally=false`；不能作为本地复现指标。
+论文 Table 1：数学 avg@16 宏平均 BranchOPD 44.37%，Vanilla OPD+PBR 38.94%，7-rollout OPD+PBR 39.09%。Table 2：ALFWorld ID/OOD 为 57.86%/55.22%。Table 11 测得 ALFWorld/WebShop 生成 token 节约 19.1%/31.2%。未报告线上 A/B。 原论文标量摘录见 [paper-results.json](paper-results.json)，`paper_reported=true`、`measured_locally=false`；独立存放于非 metrics 目录，不能作为本地复现指标。
 
 ## 本地复现
 
