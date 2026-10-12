@@ -335,6 +335,52 @@ def test_boundary_all_parse_failures_keep_real_priming_but_no_fake_evolution(mon
     assert invalid not in serialized and "#### 9876" not in serialized
 
 
+def test_boundary_real_judge_prompt_requires_all_eight_typed_fields_without_score_examples(monkeypatch):
+    """L0 captures the actual production judge prompt; it is not a model/GPU run."""
+    import auto_research.post_training.oct12_checkpoint as runtime
+    received=[]
+    def capture(model,prompt,max_tokens,**kwargs):
+        received.append((prompt,max_tokens,kwargs))
+        return None,0
+    monkeypatch.setattr(runtime,"sample_path",capture)
+    monkeypatch.setattr(runtime,"decoded_response",lambda *args:boundary_json(recommended=False))
+    assessment,diagnostic=judge_boundary(None,"fixture-question","reference-secret","student-secret",
+        "expert-secret",768,return_diagnostic=True)
+    prompt,budget,kwargs=received[0]
+    schema_text,evidence_text=prompt.split("JSON Schema:\n",1)[1].split("\nInput evidence:\n",1)
+    schema=json.loads(schema_text)
+    scores={"student_score","expert_score","quality","context_score","completeness"}
+    flags={"clear","answerable","recommended"}
+    assert schema["$schema"]=="https://json-schema.org/draft/2020-12/schema"
+    assert schema["type"]=="object" and schema["additionalProperties"] is False
+    assert set(schema["required"])==set(schema["properties"])==scores|flags
+    assert all(schema["properties"][name]=={"type":"number","minimum":0,"maximum":1}
+               for name in scores)
+    assert all(schema["properties"][name]["type"]=="boolean" for name in flags)
+    assert "genuine recommendation" in schema["properties"]["recommended"]["description"]
+    assert all(forbidden not in schema_text for forbidden in ('"default"','"const"','"enum"','"examples"'))
+    assert '"recommended": true' not in prompt and '"recommended": false' not in prompt
+    assert json.loads(evidence_text)=={"question":"fixture-question","reference":"reference-secret",
+        "student_response":"student-secret","expert_response":"expert-secret"}
+    assert budget==768 and kwargs=={"greedy":True}
+    assert assessment.recommended is False and diagnostic["parse_failure_class"] is None
+
+
+def test_boundary_completed_old_response_missing_recommended_still_fails_with_no_alias_or_repair(monkeypatch):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    record=json.loads(boundary_json())
+    record.pop("recommended")
+    for substitute in (None,"recommendation","is_recommended","accepted_recommendation"):
+        raw=json.dumps({**record,**({substitute:True} if substitute else {})})
+        monkeypatch.setattr(runtime,"sample_path",lambda *args,**kwargs:(torch.tensor([[1,2,0]]),1))
+        monkeypatch.setattr(runtime,"decoded_response",lambda *args:raw)
+        assessment,diagnostic=judge_boundary(SimpleNamespace(tokenizer=SimpleNamespace(eos_token_id=0)),
+            "Q","reference","student","expert",768,return_diagnostic=True)
+        assert assessment is None and diagnostic["parse_failure_class"]=="missing_required_fields"
+        assert diagnostic["missing_required_fields"]==["recommended"]
+        assert diagnostic["truncated"] is False
+
+
 def test_load_role_rejects_arbitrary_directory_before_model_loading(tmp_path):
     with pytest.raises(ValueError,match="safe checkpoint"):
         load_role(tmp_path,"public/model","a"*40,"cpu")

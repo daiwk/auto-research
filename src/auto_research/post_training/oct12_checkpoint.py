@@ -340,11 +340,25 @@ def parse_boundary_response(question, raw, *, response_tokens=None, token_budget
 def judge_boundary(analyzer, question, reference, student_text, expert_text, max_tokens, *,
                    return_diagnostic=False):
     """Reference-aware external analyzer; no reference is sent to either solver."""
-    prompt = ("You are an external training-data quality judge, not a solver. Return only a JSON object "
-        "with numeric fields student_score, expert_score, quality, context_score, completeness in [0,1], "
-        "and boolean clear, answerable, recommended. Score correctness and reasoning reliability; "
-        "quality measures training suitability.\n"+json.dumps({"question":question,"reference":reference,
-        "student_response":student_text,"expert_response":expert_text},ensure_ascii=False))
+    score_fields = ("student_score","expert_score","quality","context_score","completeness")
+    flag_fields = ("clear","answerable","recommended")
+    schema = {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object",
+        "additionalProperties":False,"required":list(score_fields+flag_fields),
+        "properties":{**{name:{"type":"number","minimum":0,"maximum":1} for name in score_fields},
+                      **{name:{"type":"boolean"} for name in flag_fields}}}
+    schema["properties"]["recommended"]["description"] = (
+        "Your genuine recommendation whether this question and the supplied independent trajectories "
+        "are suitable for capability-boundary training, considering correctness, reasoning reliability, "
+        "data quality and validity. Make the decision from the evidence; do not assume a fixed value.")
+    prompt = ("You are an external training-data quality judge, not a solver. Return only one assessment "
+        "JSON object conforming to the following JSON Schema. All eight fields are required, including "
+        "recommended even when you do not recommend the example. Score correctness and reasoning "
+        "reliability; quality measures training suitability. Decide each score and boolean from the "
+        "supplied evidence. Do not omit fields, use substitute field names, or invent default scores. "
+        "The schema is not an example answer: do not echo the schema or input, and do not use markdown.\n"
+        "JSON Schema:\n"+json.dumps(schema,ensure_ascii=False)+"\nInput evidence:\n"+
+        json.dumps({"question":question,"reference":reference,"student_response":student_text,
+                    "expert_response":expert_text},ensure_ascii=False))
     ids,length = sample_path(analyzer,prompt,max_tokens,greedy=True)
     raw = decoded_response(analyzer,ids,length)
     tokens,truncated = None,None
