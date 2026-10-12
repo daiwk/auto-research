@@ -6,6 +6,7 @@ write honest runtime diagnostics, even when boundary acquisition is empty.
 """
 from __future__ import annotations
 
+from collections import Counter
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 import hashlib
@@ -299,7 +300,45 @@ def sft_trajectory(student, question, teacher_text, optimizer, max_tokens):
     return {"loss":float(loss.detach()),"gradient_l2":gradient,"response_tokens":suffix.numel()}
 
 
-def judge_boundary(analyzer, question, reference, student_text, expert_text, max_tokens):
+def parse_boundary_response(question, raw, *, response_tokens=None, token_budget=None, truncated=None):
+    """Keep the existing flat-object acceptance contract; return text-free diagnostics."""
+    diagnostic = {"parse_failure_class":None,
+        "response_sha256":hashlib.sha256(raw.encode('utf-8')).hexdigest(),
+        "response_tokens":response_tokens,"token_budget":token_budget,"truncated":truncated,
+        "truncation_basis":"generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+        "object_extraction_rule":"last complete nonnested brace span; no invented fields or repair"}
+    matches = re.findall(r"\{[^{}]+\}",raw)
+    if not matches:
+        diagnostic["parse_failure_class"] = "no_complete_flat_json_candidate"
+        return None,diagnostic
+    try:
+        record = json.loads(matches[-1])
+    except json.JSONDecodeError:
+        diagnostic["parse_failure_class"] = "json_decode_error"
+        return None,diagnostic
+    numbers = ("student_score","expert_score","quality","context_score","completeness")
+    flags = ("clear","answerable","recommended")
+    missing = sorted(set(numbers+flags)-record.keys())
+    if missing:
+        diagnostic.update(parse_failure_class="missing_required_fields",missing_required_fields=missing)
+        return None,diagnostic
+    try:
+        scores = {name:float(record[name]) for name in numbers}
+    except (ValueError,TypeError):
+        diagnostic["parse_failure_class"] = "invalid_score_type_or_value"
+        return None,diagnostic
+    if any(not 0 <= value <= 1 for value in scores.values()):
+        diagnostic["parse_failure_class"] = "score_out_of_range_or_nonfinite"
+        return None,diagnostic
+    decisions = {name:record[name] for name in flags}
+    if any(type(value) is not bool for value in decisions.values()):
+        diagnostic["parse_failure_class"] = "non_boolean_flag"
+        return None,diagnostic
+    return BoundaryAssessment(question=question,**scores,**decisions),diagnostic
+
+
+def judge_boundary(analyzer, question, reference, student_text, expert_text, max_tokens, *,
+                   return_diagnostic=False):
     """Reference-aware external analyzer; no reference is sent to either solver."""
     prompt = ("You are an external training-data quality judge, not a solver. Return only a JSON object "
         "with numeric fields student_score, expert_score, quality, context_score, completeness in [0,1], "
@@ -308,21 +347,18 @@ def judge_boundary(analyzer, question, reference, student_text, expert_text, max
         "student_response":student_text,"expert_response":expert_text},ensure_ascii=False))
     ids,length = sample_path(analyzer,prompt,max_tokens,greedy=True)
     raw = decoded_response(analyzer,ids,length)
-    matches = re.findall(r"\{[^{}]+\}",raw)
-    if not matches:
-        return None
-    try:
-        record = json.loads(matches[-1])
-        numbers = {name:float(record[name]) for name in
-                   ("student_score","expert_score","quality","context_score","completeness")}
-        if any(not 0 <= value <= 1 for value in numbers.values()):
-            return None
-        flags = {name:record[name] for name in ("clear","answerable","recommended")}
-        if any(type(value) is not bool for value in flags.values()):
-            return None
-        return BoundaryAssessment(question=question,**numbers,**flags)
-    except (ValueError,TypeError,KeyError):
-        return None
+    tokens,truncated = None,None
+    if ids is not None:
+        emitted = ids[0,length:]
+        tokens = int(emitted.numel())
+        eos = getattr(getattr(getattr(analyzer,"model",None),"generation_config",None),"eos_token_id",None)
+        if eos is None:
+            eos = getattr(getattr(analyzer,"tokenizer",None),"eos_token_id",None)
+        eos_ids = set(eos if isinstance(eos,(list,tuple)) else [eos])
+        truncated = tokens == max_tokens and bool(tokens) and int(emitted[-1]) not in eos_ids
+    assessment,diagnostic = parse_boundary_response(question,raw,response_tokens=tokens,
+                                                   token_budget=max_tokens,truncated=truncated)
+    return (assessment,diagnostic) if return_diagnostic else assessment
 
 
 def boundary_train(student, teacher, expert, analyzer, train, optimizer, *, max_tokens,
@@ -341,14 +377,15 @@ def boundary_train(student, teacher, expert, analyzer, train, optimizer, *, max_
     if not pool:
         raise ValueError("BoundaryEvo requires a candidate pool disjoint from priming")
     for round_index in range(rounds):
-        assessments, parse_failures = [], 0
-        for row in pool:
+        assessments, parse_failures, diagnostics = [], 0, []
+        for candidate_index,row in enumerate(pool):
             ids,length = sample_path(student,row["question"],max_tokens)
             student_text = decoded_response(student,ids,length)
             ids,length = sample_path(expert,row["question"],max_tokens)
             expert_text = decoded_response(expert,ids,length)
-            assessment = judge_boundary(analyzer,row["question"],row["answer"],student_text,
-                                        expert_text,analyzer_tokens)
+            assessment,diagnostic = judge_boundary(analyzer,row["question"],row["answer"],student_text,
+                expert_text,analyzer_tokens,return_diagnostic=True)
+            diagnostics.append({"candidate_index":candidate_index,**diagnostic})
             if assessment is None:
                 parse_failures += 1
             else:
@@ -372,6 +409,10 @@ def boundary_train(student, teacher, expert, analyzer, train, optimizer, *, max_
         previous = {item.question for item in selected}
         event = {"stage":"evolution","round":round_index,"candidate_count":len(pool),
             "analyzer_parse_failures":parse_failures,"accepted_candidates":sum(a.accepted() for a in assessments),
+            "analyzer_parse_failure_classes":dict(Counter(d["parse_failure_class"] for d in diagnostics
+                                                          if d["parse_failure_class"] is not None)),
+            "analyzer_budget_exhaustions":sum(d["truncated"] is True for d in diagnostics),
+            "analyzer_parse_diagnostics":diagnostics,
             "selected_questions":len(selected),"verified_teacher_trajectories":verified,
             "optimizer_steps":len(updates),"selected_question_sha256":[hashlib.sha256(a.question.encode()).hexdigest() for a in selected],
             "assessments":[{k:v for k,v in asdict(a).items() if k!="question"} for a in assessments],

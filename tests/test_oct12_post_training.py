@@ -13,7 +13,7 @@ from auto_research.post_training.oct12_objectives import (
 )
 from auto_research.post_training.oct12_checkpoint import (
     OBJECTIVES, ModelRole, boundary_train, branch_step, cast_step, initial_policy, judge_boundary,
-    load_role, math_protocol_constraints, normalize_objective, reference_logp, road_step,
+    load_role, math_protocol_constraints, normalize_objective, parse_boundary_response, reference_logp, road_step,
     run_adapter, run_checkpoint, sample_path,
 )
 from auto_research.post_training.oct10_checkpoint import install_lora
@@ -216,12 +216,17 @@ def test_boundary_lifecycle_has_priming_refresh_replay_fresh_teacher_and_real_sf
         ids=model.tokenizer(text).input_ids
         return torch.cat((torch.tensor([[1]]),ids),-1),1
     assessment_calls=[]
-    def judge(model,question,reference,student_text,expert_text,max_tokens):
+    def judge(model,question,reference,student_text,expert_text,max_tokens,*,return_diagnostic=False):
         assessment_calls.append(question)
         round_index=(len(assessment_calls)-1)//3
         mastered=round_index==1 and question=="A"
         expert_score=.1 if round_index==0 and question=="C" else .9
-        return BoundaryAssessment(question,.9 if mastered else .1,expert_score,.9,True,True,.9,.9,True)
+        assessment=BoundaryAssessment(question,.9 if mastered else .1,expert_score,.9,True,True,.9,.9,True)
+        raw=json.dumps({name:getattr(assessment,name) for name in
+                       ("student_score","expert_score","quality","context_score","completeness",
+                        "clear","answerable","recommended")})
+        _,diagnostic=parse_boundary_response(question,raw,truncated=False)
+        return (assessment,diagnostic) if return_diagnostic else assessment
     monkeypatch.setattr(runtime,"sample_path",sample)
     monkeypatch.setattr(runtime,"judge_boundary",judge)
     params=[p for p in student.model.parameters() if p.requires_grad]
@@ -234,6 +239,8 @@ def test_boundary_lifecycle_has_priming_refresh_replay_fresh_teacher_and_real_sf
     assert [item["optimizer_steps"] for item in evolution]==[2,2]
     assert evolution[0]["selected_question_sha256"]!=evolution[1]["selected_question_sha256"]
     assert assessment_calls==["A","B","C","A","B","C"]
+    assert all(event["analyzer_parse_failure_classes"]=={} for event in evolution)
+    assert all(event["analyzer_budget_exhaustions"]==0 for event in evolution)
     assert sum(identifier==teacher.identity["id"] for identifier,_ in calls)==9
     assert any(not torch.equal(p,old) for p,old in zip(params,before))
 
@@ -243,6 +250,89 @@ def test_analyzer_parse_failures_are_not_replaced_by_constant_rewards(monkeypatc
     monkeypatch.setattr(runtime,"sample_path",lambda *args,**kwargs:(None,0))
     monkeypatch.setattr(runtime,"decoded_response",lambda *args:"invalid judge response")
     assert judge_boundary(None,"Q","#### 7","student","expert",64) is None
+
+
+def boundary_json(**changes):
+    record={"student_score":.1,"expert_score":.9,"quality":.9,"context_score":.9,
+            "completeness":.8,"clear":True,"answerable":True,"recommended":True}
+    record.update(changes)
+    return json.dumps(record)
+
+
+@pytest.mark.parametrize("raw,expected",[
+    ("analysis with no JSON", "no_complete_flat_json_candidate"),
+    ('{"student_score": broken}', "json_decode_error"),
+    ('{"student_score": 0.1}', "missing_required_fields"),
+    (boundary_json(quality="not a score"), "invalid_score_type_or_value"),
+    (boundary_json(expert_score=1.01), "score_out_of_range_or_nonfinite"),
+    (boundary_json(quality=float("nan")), "score_out_of_range_or_nonfinite"),
+    (boundary_json(recommended="true"), "non_boolean_flag"),
+])
+def test_boundary_parse_failures_are_precise_hashed_and_never_repaired(raw,expected):
+    import hashlib
+    assessment,diagnostic=parse_boundary_response("Q",raw,response_tokens=64,token_budget=64,truncated=True)
+    assert assessment is None and diagnostic["parse_failure_class"]==expected
+    assert diagnostic["response_sha256"]==hashlib.sha256(raw.encode()).hexdigest()
+    assert diagnostic["truncated"] is True and diagnostic["response_tokens"]==64
+    assert raw not in json.dumps(diagnostic)
+
+
+@pytest.mark.parametrize("changes",[
+    {"expert_score":.64},{"student_score":.5},{"expert_score":.65,"student_score":.46},
+    {"quality":.69},{"context_score":.69},{"clear":False},{"answerable":False},
+])
+def test_boundary_valid_json_does_not_relax_original_acceptance_thresholds(changes):
+    assessment,diagnostic=parse_boundary_response("Q",boundary_json(**changes))
+    assert assessment is not None and not assessment.accepted()
+    assert diagnostic["parse_failure_class"] is None  # Selection rejection is not a parse failure.
+
+
+@pytest.mark.parametrize("emitted,expected",[([2,3,4],True),([2,3,0],False),([2,3],False)])
+def test_boundary_judge_diagnostics_keep_gold_model_text_private_and_track_budget(monkeypatch,emitted,expected):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    analyzer=SimpleNamespace(tokenizer=SimpleNamespace(eos_token_id=0),
+                             model=SimpleNamespace(generation_config=SimpleNamespace(eos_token_id=[0,9])))
+    received=[]
+    def generate(model,prompt,max_tokens,**kwargs):
+        received.append(prompt)
+        return torch.tensor([[1]+emitted]),1
+    raw="sensitive-model-prelude\n"+boundary_json()
+    monkeypatch.setattr(runtime,"sample_path",generate)
+    monkeypatch.setattr(runtime,"decoded_response",lambda *args:raw)
+    assessment,diagnostic=judge_boundary(analyzer,"question","reference-secret", "student-secret",
+        "expert-secret",3,return_diagnostic=True)
+    assert assessment.accepted() and diagnostic["truncated"] is expected
+    assert diagnostic["response_tokens"]==len(emitted) and diagnostic["token_budget"]==3
+    assert "reference-secret" in received[0]  # External training judge only.
+    serialized=json.dumps(diagnostic)
+    assert all(secret not in serialized for secret in
+               ("reference-secret","student-secret","expert-secret","sensitive-model-prelude"))
+
+
+def test_boundary_all_parse_failures_keep_real_priming_but_no_fake_evolution(monkeypatch):
+    """Real tiny SFT + deliberately invalid analyzer fixture; no capability evidence."""
+    import auto_research.post_training.oct12_checkpoint as runtime
+    student,teacher,expert,analyzer=role(91,trainable=True),role(92),role(93),role(94)
+    original_decode=runtime.decoded_response
+    invalid='{"student_score": 0.1'  # Incomplete output is never repaired into a judgment.
+    monkeypatch.setattr(runtime,"decoded_response",lambda model,*args:invalid if model is analyzer
+                        else original_decode(model,*args))
+    rows=[{"question":question,"answer":"#### 9876"} for question in ("prime","A","B","C","D")]
+    params=[p for p in student.model.parameters() if p.requires_grad]
+    before=[p.detach().clone() for p in params]
+    history=boundary_train(student,teacher,expert,analyzer,rows,torch.optim.SGD(params,lr=.1),
+        max_tokens=2,priming_examples=1,rounds=2,pool_examples=4,acquisition=2,replay_quota=1,
+        teacher_rollouts=2,analyzer_tokens=2)
+    assert history[0]["stage"]=="priming"
+    assert any(not torch.equal(p,old) for p,old in zip(params,before))
+    evolution=history[1:]
+    assert len(evolution)==2 and sum(event["analyzer_parse_failures"] for event in evolution)==8
+    assert all(event["optimizer_steps"]==event["selected_questions"]==0 for event in evolution)
+    assert all(event["analyzer_parse_failure_classes"]=={"no_complete_flat_json_candidate":4}
+               for event in evolution)
+    assert all(len(event["analyzer_parse_diagnostics"])==4 for event in evolution)
+    serialized=json.dumps(evolution)
+    assert invalid not in serialized and "#### 9876" not in serialized
 
 
 def test_load_role_rejects_arbitrary_directory_before_model_loading(tmp_path):
